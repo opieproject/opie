@@ -37,11 +37,12 @@ public:
     QString dirUp( const QString& )const;
     QWidget* widget(QWidget*parent);
 
-private:
+protected:
     int m_catFilter;
     bool matchCat(const AppLnk* app)const;
     bool m_docreads;
     DocLnkSet m_ds;
+    QCopChannel *syschannel;
 
 protected slots:
     virtual void slotFullInfo(const QString&, const QString&);
@@ -49,7 +50,6 @@ protected slots:
     virtual void slotThumbNail(const QString&, const QPixmap&);
     virtual void showCategory(int);
     void systemMsg(const QCString &, const QByteArray &);
-    QCopChannel *syschannel;
 };
 
 #endif
