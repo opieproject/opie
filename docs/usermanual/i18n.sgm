@@ -6,14 +6,72 @@
 <section>
 	<title>Introduction</title>
 	<para>
-		test blah blah
+		To ensure that OPIE can be used by as many people as possible the OPIE-project 
+		aims to be translated in as many languages as possible. Of course, as there are so many
+		different languages, there is always a lot work to do. Furthermore, OPIE evolves and thus
+		most likely there are translations for applications which should be updated. In this tutorial
+		you will learn how to help OPIE to be availeble in as many languages as possible and see how
+		easy it is to give something very much respected to the open-source community.
 	</para>
 </section>
 <section>
 	<title>Preferences</title>
 	<para>
 		In order to translate for OPIE you need an editor to edit the translationfile
-		and preferably access to cvs.
+		and preferably access to cvs. The preferred editor is Linguist. That is an application which
+		comes with Qt. It has a intuitive GUI and is very easy to use. A tutorial can be found here: 
+		<link>http://doc.trolltech.com/3.1/linguist-manual-3.html</link>.
+	</para>
+	<para>
+		However, you can use every editor which works with UTF8, for example VIM or EMACS. The advantage
+		of Linguist is that its GUI is optimized for OPIEs translationfiles and can help you be
+		proposing a translation and notice you if there is an error within the translation.
+	</para>
+	<para>
+		CVS is a tool which the developers and most translators use to get the source of OPIE. If you
+		already have an anonymous account for the OPIE-cvs you should go to $OPIEDIR/i18n and do <code>cvs up</code>.
+		If there is already a translation for the language you would like to translate you will see
+		the language code in that directory. For example, for german this is <code>de</code> and for danish
+		it is <code>da</code>. If not you should contact the coordinator Carsten Niehaus so that 
+		everything will be set up for your language.
+	</para>
+</section>
+<section>
+	<title>Examplecode</title>
+	<para>
+		In the next paragraph you see an example of how the XML looks like. 
+	</para>
+	<!--
+	<message>
+	<source>New</source>
+	<translation>Neu</translation>
+	</message>
+	<message>
+	<source>Today</source>
+	<translation>Heute</translation>
+	</message>
+	<message>
+	<source>Day</source>
+	<translation type="unfinished"></translation>
+	</message>
+	-->
+	</para>
+	<para>
+		As you can see the markup is very simple. The part between two source-tags is the english 
+		text which appears if there is no translation yet. In the first case this is <quote>New</quote>.
+		In the next row	is where the translation would be. The first two messages are already translated,
+		the third is not. This is marked by the <code>type="unfinished"</code>.
+	</para>
+	<para>
+		If you choose to use an editor like vim instead of the prefered tool -Linguist- you have to remove
+		that mark and add the translated string between the two <code>translation</code>-tags. 
+	</para>
+</section>
+<section>
+	<title>Do's and don'ts</title>
+	<para>
+		There are certain things that should only be done be the translationcoordinator or one of the
+		core developers.
 	</para>
 </section>
 </chapter>
