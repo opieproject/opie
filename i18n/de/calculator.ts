@@ -128,5 +128,9 @@
         <source>Calculator</source>
         <translation>Taschenrechner</translation>
     </message>
+    <message>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

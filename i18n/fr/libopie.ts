@@ -146,6 +146,21 @@
     </message>
 </context>
 <context>
+    <name>OFontSelector</name>
+    <message>
+        <source>Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Taille</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OTimePickerDialogBase</name>
     <message>
         <source>TimePicker</source>

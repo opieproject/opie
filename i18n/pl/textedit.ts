@@ -1,29 +1,81 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>@default</name>
+    <message>
+        <source>Text Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unnamed</source>
+        <translation type="unfinished">Nienazwany</translation>
+    </message>
+    <message>
+        <source>Text Editor</source>
+        <translation type="unfinished">Edytor tekstu</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Permissions</source>
+        <translation type="unfinished">Uprawnienia</translation>
+    </message>
+    <message>
+        <source>Choose font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Tak</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Nie</translation>
+    </message>
+    <message>
+        <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FontDialog</name>
     <message>
         <source>FontDialog</source>
-        <translation>WyborCzcionki</translation>
+        <translation type="obsolete">WyborCzcionki</translation>
     </message>
     <message>
         <source>Font Dialog</source>
-        <translation>Wybor czcionki</translation>
+        <translation type="obsolete">Wybor czcionki</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Rozmiar</translation>
+        <translation type="obsolete">Rozmiar</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Font Style</source>
-        <translation>Styl</translation>
+        <translation type="obsolete">Styl</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
 </context>
 <context>
@@ -70,11 +122,11 @@
     </message>
     <message>
         <source>Bold</source>
-        <translation>Pogrobiona</translation>
+        <translation type="obsolete">Pogrobiona</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation>Pochyla</translation>
+        <translation type="obsolete">Pochyla</translation>
     </message>
     <message>
         <source>Wrap lines</source>
@@ -118,23 +170,23 @@
     </message>
     <message>
         <source>Unnamed</source>
-        <translation>Nienazwany</translation>
+        <translation type="obsolete">Nienazwany</translation>
     </message>
     <message>
         <source>Permissions</source>
-        <translation>Uprawnienia</translation>
+        <translation type="obsolete">Uprawnienia</translation>
     </message>
     <message>
         <source>FontDialog</source>
-        <translation>WyborCzcionki</translation>
+        <translation type="obsolete">WyborCzcionki</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Tak</translation>
+        <translation type="obsolete">Tak</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nie</translation>
+        <translation type="obsolete">Nie</translation>
     </message>
     <message>
         <source>About</source>
@@ -166,24 +218,24 @@
     </message>
     <message>
         <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt; file.&lt;BR&gt;Open &lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Write Failed</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
 </context>
 <context>

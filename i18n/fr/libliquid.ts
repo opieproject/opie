@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Draw liquid window title bars</source>
-        <translation>Dessiner les barres de titre des fenêtres en Liquid</translation>
+        <translation type="obsolete">Dessiner les barres de titre des fenêtres en Liquid</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
@@ -64,12 +64,23 @@
     <message>
         <source>Liquid</source>
         <comment>name</comment>
-        <translation>Liquid</translation>
+        <translation type="obsolete">Liquid</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
         <comment>description</comment>
-        <translation>Style &quot;High Performance Liquid&quot; par Mosfet</translation>
+        <translation type="obsolete">Style &quot;High Performance Liquid&quot; par Mosfet</translation>
+    </message>
+</context>
+<context>
+    <name>Styles</name>
+    <message>
+        <source>Liquid</source>
+        <translation type="unfinished">Liquid</translation>
+    </message>
+    <message>
+        <source>High Performance Liquid style by Mosfet</source>
+        <translation type="unfinished">Style &quot;High Performance Liquid&quot; par Mosfet</translation>
     </message>
 </context>
 </TS>

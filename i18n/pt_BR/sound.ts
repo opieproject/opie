@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>Key_Escape</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Key_Space</source>
@@ -123,6 +123,10 @@
     </message>
     <message>
         <source>Restart Opie if needed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key_Record</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

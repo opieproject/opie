@@ -129,5 +129,9 @@
         <source>Calculator</source>
         <translation>Calculadora</translation>
     </message>
+    <message>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

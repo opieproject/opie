@@ -3,15 +3,15 @@
     <name>CalcDlg</name>
     <message>
         <source>Calculations</source>
-        <translation>Cálculos</translation>
+        <translation type="obsolete">Cálculos</translation>
     </message>
     <message>
         <source>Molweight</source>
-        <translation>Peso molecular</translation>
+        <translation type="obsolete">Peso molecular</translation>
     </message>
     <message>
         <source>Formula:</source>
-        <translation>Fórmula:</translation>
+        <translation type="obsolete">Fórmula:</translation>
     </message>
     <message>
         <source>Calculate</source>
@@ -23,15 +23,35 @@
     </message>
     <message>
         <source>Result:</source>
-        <translation>Resultado:</translation>
+        <translation type="obsolete">Resultado:</translation>
     </message>
     <message>
         <source>Elemental composition (%):</source>
-        <translation>Composición elemental (%):</translation>
+        <translation type="obsolete">Composición elemental (%):</translation>
     </message>
     <message>
         <source>Nernst</source>
-        <translation>Nernst</translation>
+        <translation type="obsolete">Nernst</translation>
+    </message>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Molecular Weight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chemical Formula</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Molecular Weight (u):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Elemental Composition (%):</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -72,12 +92,40 @@
         <source>Meltingpoint</source>
         <translation>Punto fusión</translation>
     </message>
+    <message>
+        <source>%1 u</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 J</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 nm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 K</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Oxygen</name>
     <message>
         <source>Oxygen</source>
         <translation>Oxygen</translation>
+    </message>
+    <message>
+        <source>PSE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calculations</source>
+        <translation type="unfinished">Cálculos</translation>
     </message>
 </context>
 <context>

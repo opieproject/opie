@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Draw liquid window title bars</source>
-        <translation>Riši tekoče naslovne letve</translation>
+        <translation type="obsolete">Riši tekoče naslovne letve</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
@@ -63,12 +63,23 @@
     <message>
         <source>Liquid</source>
         <comment>name</comment>
-        <translation>Liquid</translation>
+        <translation type="obsolete">Liquid</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
         <comment>description</comment>
-        <translation>High Performance Liquid stil od Mosfeta</translation>
+        <translation type="obsolete">High Performance Liquid stil od Mosfeta</translation>
+    </message>
+</context>
+<context>
+    <name>Styles</name>
+    <message>
+        <source>Liquid</source>
+        <translation type="unfinished">Liquid</translation>
+    </message>
+    <message>
+        <source>High Performance Liquid style by Mosfet</source>
+        <translation type="unfinished">High Performance Liquid stil od Mosfeta</translation>
     </message>
 </context>
 </TS>

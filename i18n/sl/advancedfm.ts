@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation>Zamenjaj imenik</translation>
+        <translation type="obsolete">Zamenjaj imenik</translation>
     </message>
     <message>
         <source>Execute</source>

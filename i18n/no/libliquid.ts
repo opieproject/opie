@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Draw liquid window title bars</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
@@ -63,11 +63,22 @@
     <message>
         <source>Liquid</source>
         <comment>name</comment>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
         <comment>description</comment>
+        <translation type="obsolete"></translation>
+    </message>
+</context>
+<context>
+    <name>Styles</name>
+    <message>
+        <source>Liquid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High Performance Liquid style by Mosfet</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -4,12 +4,23 @@
     <message>
         <source>Themed style</source>
         <comment>name</comment>
-        <translation>Estilo del tema</translation>
+        <translation type="obsolete">Estilo del tema</translation>
     </message>
     <message>
         <source>KDE2 theme compatible style engine</source>
         <comment>description</comment>
-        <translation>Motor de estilos compatible con temas KDE2</translation>
+        <translation type="obsolete">Motor de estilos compatible con temas KDE2</translation>
+    </message>
+</context>
+<context>
+    <name>Styles</name>
+    <message>
+        <source>Themed style</source>
+        <translation type="unfinished">Estilo del tema</translation>
+    </message>
+    <message>
+        <source>KDE2 theme compatible style engine</source>
+        <translation type="unfinished">Motor de estilos compatible con temas KDE2</translation>
     </message>
 </context>
 <context>

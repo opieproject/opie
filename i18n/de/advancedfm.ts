@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished">Verzeichnis wechseln</translation>
+        <translation type="obsolete">Verzeichnis wechseln</translation>
     </message>
     <message>
         <source>Execute</source>

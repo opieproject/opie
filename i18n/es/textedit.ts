@@ -1,29 +1,82 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>@default</name>
+    <message>
+        <source>Text Edit</source>
+        <translation type="unfinished">Editar Textos</translation>
+    </message>
+    <message>
+        <source>Write Failed</source>
+        <translation type="unfinished">Fallo al escribir</translation>
+    </message>
+    <message>
+        <source>Unnamed</source>
+        <translation type="unfinished">Sin nombre</translation>
+    </message>
+    <message>
+        <source>Text Editor</source>
+        <translation type="unfinished">Editor Textos</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished">Todo</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">Texto</translation>
+    </message>
+    <message>
+        <source>Permissions</source>
+        <translation type="unfinished">Permisos</translation>
+    </message>
+    <message>
+        <source>Choose font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
+        <translation type="unfinished">¿Realmente quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
+del dico?&lt;BR&gt;¡Es &lt;B&gt;irreversible!&lt;/B&gt;</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Sí</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">No</translation>
+    </message>
+    <message>
+        <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
+        <translation type="unfinished">Text Edit tiene copyright&lt;BR&gt;2000 Trolltech AS, y&lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;, y está bajo licencia GPL</translation>
+    </message>
+</context>
+<context>
     <name>FontDialog</name>
     <message>
         <source>FontDialog</source>
-        <translation>DiálogoLetra</translation>
+        <translation type="obsolete">DiálogoLetra</translation>
     </message>
     <message>
         <source>Font Dialog</source>
-        <translation>Diálogo de Letra</translation>
+        <translation type="obsolete">Diálogo de Letra</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Tamaño</translation>
+        <translation type="obsolete">Tamaño</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation>Letra</translation>
+        <translation type="obsolete">Letra</translation>
     </message>
     <message>
         <source>Font Style</source>
-        <translation>Estilo de letra</translation>
+        <translation type="obsolete">Estilo de letra</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>El Rápido Zorro Marrón Saltó Por Encima Del Perro Perezoso</translation>
+        <translation type="obsolete">El Rápido Zorro Marrón Saltó Por Encima Del Perro Perezoso</translation>
     </message>
 </context>
 <context>
@@ -70,11 +123,11 @@
     </message>
     <message>
         <source>Bold</source>
-        <translation>Negrilla</translation>
+        <translation type="obsolete">Negrilla</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation>Cursiva</translation>
+        <translation type="obsolete">Cursiva</translation>
     </message>
     <message>
         <source>Wrap lines</source>
@@ -130,23 +183,23 @@
     </message>
     <message>
         <source>Unnamed</source>
-        <translation>Sin nombre</translation>
+        <translation type="obsolete">Sin nombre</translation>
     </message>
     <message>
         <source>Permissions</source>
-        <translation>Permisos</translation>
+        <translation type="obsolete">Permisos</translation>
     </message>
     <message>
         <source>FontDialog</source>
-        <translation>DiálogoLetras</translation>
+        <translation type="obsolete">DiálogoLetras</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sí</translation>
+        <translation type="obsolete">Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="obsolete">No</translation>
     </message>
     <message>
         <source>All</source>
@@ -166,25 +219,25 @@
     </message>
     <message>
         <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt; file.&lt;BR&gt;Open &lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
-        <translation>El Editor de Textos ha detectado que&lt;BR&gt;ha seleccionado un fichero &lt;B&gt;.desktop&lt;/B&gt;.&lt;BR&gt;¿Abro &lt;B&gt;.desktop&lt;/B&gt; o el fichero que &lt;B&gt;enlaza&lt;/B&gt;?</translation>
+        <translation type="obsolete">El Editor de Textos ha detectado que&lt;BR&gt;ha seleccionado un fichero &lt;B&gt;.desktop&lt;/B&gt;.&lt;BR&gt;¿Abro &lt;B&gt;.desktop&lt;/B&gt; o el fichero que &lt;B&gt;enlaza&lt;/B&gt;?</translation>
     </message>
     <message>
         <source>Text Edit</source>
-        <translation>Editar Textos</translation>
+        <translation type="obsolete">Editar Textos</translation>
     </message>
     <message>
         <source>Write Failed</source>
-        <translation>Fallo al escribir</translation>
+        <translation type="obsolete">Fallo al escribir</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation>¿Realmente quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
+        <translation type="obsolete">¿Realmente quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
 del dico?&lt;BR&gt;¡Es &lt;B&gt;irreversible!&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>Text Edit tiene copyright&lt;BR&gt;2000 Trolltech AS, y&lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;, y está bajo licencia GPL</translation>
+        <translation type="obsolete">Text Edit tiene copyright&lt;BR&gt;2000 Trolltech AS, y&lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;, y está bajo licencia GPL</translation>
     </message>
 </context>
 <context>

@@ -5,11 +5,22 @@
     <message>
         <source>Themed style</source>
         <comment>name</comment>
-        <translation>Schema</translation>
+        <translation type="obsolete">Schema</translation>
     </message>
     <message>
         <source>KDE2 theme compatible style engine</source>
         <comment>description</comment>
+        <translation type="obsolete"></translation>
+    </message>
+</context>
+<context>
+    <name>Styles</name>
+    <message>
+        <source>Themed style</source>
+        <translation type="unfinished">Schema</translation>
+    </message>
+    <message>
+        <source>KDE2 theme compatible style engine</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation>Cambiar directorio</translation>
+        <translation type="obsolete">Cambiar directorio</translation>
     </message>
     <message>
         <source>Execute</source>

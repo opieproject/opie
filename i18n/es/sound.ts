@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>Key_Escape</source>
-        <translation>Tecla_Escape</translation>
+        <translation type="obsolete">Tecla_Escape</translation>
     </message>
     <message>
         <source>Key_Space</source>
@@ -123,6 +123,10 @@
     <message>
         <source>Restart Opie if needed</source>
         <translation>Reiniciar Opie si es preciso</translation>
+    </message>
+    <message>
+        <source>Key_Record</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

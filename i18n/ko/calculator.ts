@@ -128,5 +128,9 @@
         <source>Calculator</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
