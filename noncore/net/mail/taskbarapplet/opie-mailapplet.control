@@ -1,0 +1,10 @@
+Package: opie-mailapplet
+Files: plugins/applets/libmailapplet.so*
+Priority: optional
+Section: opie/applications
+Maintainer: 
+Architecture: arm
+Version: $QPE_VERSION$EXTRAVERSION
+Depends: task-opie-minimal, libopie1, opie-mail
+Description: A Biff-Like mailchecker
+License: LGPL

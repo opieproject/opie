@@ -1,0 +1,4 @@
+ config MAILAPPLET
+    boolean "mailapplet ( taskbar mail applet )"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && MAIL3
