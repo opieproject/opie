@@ -106,8 +106,9 @@ $(OPIEDIR)/stamp-headers :
 	( cd include/opie2 && ln -sf ../../libopie2/opiemm/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiedb/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opienet/*.h .; )
-	#( cd include/opie2 && ln -sf ../../libopie2/opiepim/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiepim/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/*.h .; )
+	( cd include/opie &&  ln -sf ../../libqtaux/pim/*.h .; )
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
 	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h

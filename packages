@@ -78,6 +78,7 @@ CONFIG_LIBOPIETOOTH	noncore/net/opietooth/lib	lib.pro
 CONFIG_LIBOPIE_PIM	libopie/pim	pim.pro
 CONFIG_LIBQPE	library	library.pro
 CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
+CONFIG_LIBQTAUX	libqtaux	libqtaux.pro
 CONFIG_LIBSQL	libsql	libsql.pro
 CONFIG_LIBTREMOR core/multimedia/opieplayer/vorbis/tremor tremor.pro
 CONFIG_LIBTREMORPLUGIN core/multimedia/opieplayer/vorbis libtremor.pro

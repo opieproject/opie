@@ -229,9 +229,10 @@ comment ""
 menu "Experimental"
   depends on EXPERIMENTAL
   source libopie2/config.in
+  source libqtaux/config.in
 
   config SQL_PIM_BACKEND
-  bool "Add SQL-Backend support (experimental)"
+  bool "Add SQL-Backend support"
   default n
   help
 	This adds the SQL-Support, using SQLite. Which database is used
