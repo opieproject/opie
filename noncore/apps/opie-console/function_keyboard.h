@@ -7,7 +7,10 @@
 #include <qvbox.h>
 #include <qgroupbox.h>
 #include <qmap.h>
+#include <qspinbox.h>
+#include <qcombobox.h>
 #include "profiledialogwidget.h"
+
 
 class FKey {
 
@@ -35,6 +38,9 @@ public:
     FunctionKeyboard(QWidget *parent = 0);
     ~FunctionKeyboard();
 
+    void changeRows(int);
+    void changeCols(int);
+
     void paintEvent(QPaintEvent *);
     void paintKey(int, int);
     void mousePressEvent(QMouseEvent*);
@@ -44,7 +50,7 @@ public:
 
 signals:
 
-    void keyPressed(ushort, ushort, bool, bool, bool);
+    void keyPressed(ushort, ushort, bool, bool, bool, ushort, ushort);
 
 private:
 
@@ -76,7 +82,18 @@ public:
     void load(const Profile&);
     void save(Profile&);
 
+private slots:
+
+    void slotKeyPressed(ushort, ushort, bool, bool, bool, ushort, ushort);
+    void slotChangeRows(int);
+    void slotChangeCols(int);
+    void slotChangeIcon(int);
+
 private:
+
+    FunctionKeyboard *kb;
+    QSpinBox *m_rowBox, *m_colBox;
+    QComboBox *m_labels;
 
 };
 

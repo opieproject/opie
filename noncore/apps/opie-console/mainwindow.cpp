@@ -208,8 +208,8 @@ void MainWindow::initUI() {
     m_keyBar->hide();
 
     m_kb = new FunctionKeyboard(m_keyBar);
-    connect(m_kb, SIGNAL(keyPressed(ushort, ushort, bool, bool, bool)),
-            this, SLOT(slotKeyReceived(ushort, ushort, bool, bool, bool)));
+    connect(m_kb, SIGNAL(keyPressed(ushort, ushort, bool, bool, bool, ushort, ushort)),
+            this, SLOT(slotKeyReceived(ushort, ushort, bool, bool, bool, ushort, ushort)));
 
     m_buttonBar = new QToolBar( this );
     addToolBar( m_buttonBar, "Buttons",  QMainWindow::Top, TRUE );
@@ -523,7 +523,7 @@ void MainWindow::slotFullscreen() {
 }
 
 
-void MainWindow::slotKeyReceived(ushort u, ushort q, bool, bool pressed, bool) {
+void MainWindow::slotKeyReceived(ushort u, ushort q, bool, bool pressed, bool, ushort, ushort) {
 
     //qWarning("unicode: %x, qkey: %x, %s", u, q, pressed ? "pressed" : "released");
 

@@ -1,9 +1,18 @@
 #include "function_keyboard.h"
+
+#include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
 #include <qsizepolicy.h>
 #include <qevent.h>
 #include <qwindowsystem_qws.h>
 #include <qapplication.h>
 #include <qlayout.h>
+#include <qspinbox.h>
+#include <qlabel.h>
+#include <qcombobox.h>
+#include <qdir.h>
+
+/* FunctionKeyboard {{{1 */
 
 FunctionKeyboard::FunctionKeyboard(QWidget *parent) :
     QFrame(parent), numRows(2), numCols(11),
@@ -36,6 +45,18 @@ FunctionKeyboard::FunctionKeyboard(QWidget *parent) :
 
 FunctionKeyboard::~FunctionKeyboard() {
 
+}
+
+void FunctionKeyboard::changeRows(int r) {
+
+    numRows = r;
+    repaint(false);
+}
+void FunctionKeyboard::changeCols(int c) {
+
+    numCols = c;
+    keyWidth = (double)width()/numCols; // have to reset this thing too
+    repaint(false);
 }
 
 void FunctionKeyboard::paintEvent(QPaintEvent *e) {
@@ -91,6 +112,14 @@ void FunctionKeyboard::paintKey(int row, int col) {
                     keys["r" + QString::number(row) + "c" + QString::number(col)].getL()
     );
 
+    if (row == numRows) {
+
+        // sometimes it doesnt draw the last line
+        p.drawLine((col+1) * keyWidth -2, row * keyHeight, 
+                   (col+1) * keyWidth -2, (row + 1) * keyHeight
+        );
+    }
+
 }
 
 void FunctionKeyboard::mousePressEvent(QMouseEvent *e) {
@@ -102,7 +131,7 @@ void FunctionKeyboard::mousePressEvent(QMouseEvent *e) {
 
     // emit that sucker!
     FKey k = keys["r" + QString::number(pressedRow) + "c" + QString::number(pressedCol)];
-    emit keyPressed(k.getU(), k.getQ(), 0, 1, 0);
+    emit keyPressed(k.getU(), k.getQ(), 0, 1, 0, pressedRow, pressedCol);
 
 }
 
@@ -115,7 +144,7 @@ void FunctionKeyboard::mouseReleaseEvent(QMouseEvent *) {
         paintKey(row, col);
 
         FKey k = keys["r" + QString::number(row) + "c" + QString::number(col)];
-        emit keyPressed(k.getU(), k.getQ(), 0, 0, 0);
+        emit keyPressed(k.getU(), k.getQ(), 0, 0, 0, pressedRow, pressedCol);
     }
 
 }
@@ -157,14 +186,36 @@ void FunctionKeyboard::loadDefaults() {
 
 }
 
+/* FunctionKeyboardConfig {{{1 */
 
 FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* parent) :
     ProfileDialogKeyWidget(name, parent) {
 
 
-    FunctionKeyboard *kb = new FunctionKeyboard(this);
+    kb = new FunctionKeyboard(this);
+
     QGroupBox *dimentions = new QGroupBox(2, Qt::Horizontal, tr("Dimentions"), this);
-    QGroupBox *editKey = new QGroupBox(2, Qt::Horizontal, tr("Edit"), this);
+    QLabel *l = new QLabel("Rows", dimentions);
+    QSpinBox *m_rowBox = new QSpinBox(1, 15, 1, dimentions);
+    connect (m_rowBox, SIGNAL(valueChanged(int)), this, SLOT(slotChangeRows(int)));
+    l = new QLabel("Columns", dimentions);
+    m_colBox = new QSpinBox(1, 15, 1, dimentions);
+    connect (m_colBox, SIGNAL(valueChanged(int)), this, SLOT(slotChangeCols(int)));
+
+    QGroupBox *editKey = new QGroupBox(2, Qt::Horizontal, tr("Edit Key"), this);
+    l = new QLabel("Label", editKey);
+    /*
+    m_labels = new QComboBox(false, editKey);
+    labels->insertItem("text");
+
+    QStringList files = QDir(QPEApplication::qpeDir() + "pics/console/keys/", "*.png").entryList();
+
+    for (uint i = 0; i < files.count(); i++) {
+
+        m_labels->insertItem(Resource::loadPixmap("console/keys/" + files[i]));
+    }
+    connect (m_labels, SIGNAL(activated(int)), this, SLOT(slotChangeIcon(int)));
+    */
 
     QVBoxLayout *root = new QVBoxLayout(this, 2);
     root->addWidget(kb);
@@ -174,9 +225,38 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
 FunctionKeyboardConfig::~FunctionKeyboardConfig() {
 
 }
-void FunctionKeyboardConfig::load (const Profile& ) {
+void FunctionKeyboardConfig::load (const Profile& prof) {
+    int i = prof.readNumEntry("keb_rows", 1);
+    //m_rowBox->setValue(i);
+}
+void FunctionKeyboardConfig::save (Profile& prof) {
+
+    //prof.writeEntry("keb_rows", m_rowBox->value());
 
 }
-void FunctionKeyboardConfig::save (Profile& ) {
+void FunctionKeyboardConfig::slotChangeRows(int r) {
 
+    kb->changeRows(r);
+
+    // have to do this so the whole thing gets redrawn
+    kb->hide(); kb->show();
+}
+void FunctionKeyboardConfig::slotChangeCols(int c) {
+
+    kb->changeCols(c);
+}
+void FunctionKeyboardConfig::slotKeyPressed(ushort, ushort, bool, bool, bool, ushort row, ushort col) {
+
+}
+void FunctionKeyboardConfig::slotChangeIcon(int index) {
+
+    if (index == 0) {
+
+        // is text
+        //if(!labels->editable()) labels->setEditable(true);
+    } else {
+
+        // is a pixmap
+        //if (labels->editable()) labels->setEditable(false);
+    }
 }

@@ -67,7 +67,7 @@ private slots:
     void slotRunScript();
     void slotFullscreen();
     void slotSessionChanged( Session* );
-    void slotKeyReceived(ushort, ushort, bool, bool, bool);
+    void slotKeyReceived(ushort, ushort, bool, bool, bool, ushort,  ushort);
 
 private:
     void initUI();
