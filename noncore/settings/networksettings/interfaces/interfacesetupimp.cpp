@@ -13,6 +13,7 @@
 
 #ifdef QWS
 #include <opie2/owait.h>
+#include <opie2/odebug.h>
 #include <qpe/global.h>
 #include <qapplication.h>
 #endif

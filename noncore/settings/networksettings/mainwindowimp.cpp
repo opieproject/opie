@@ -7,6 +7,7 @@
 #include "module.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>

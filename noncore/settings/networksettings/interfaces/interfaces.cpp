@@ -1,5 +1,7 @@
 #include "interfaces.h"
 
+#include <opie2/odebug.h>
+
 #include <qcheckbox.h>
 #include <qfile.h>
 #include <qtextstream.h>

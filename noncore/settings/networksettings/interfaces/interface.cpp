@@ -1,9 +1,12 @@
 /**
- * $Author: mickeyl $
- * $Date: 2004-04-04 13:54:59 $
+ * $Author: zecke $
+ * $Date: 2004-04-06 08:00:49 $
  */
 
 #include "interface.h"
+
+#include <opie2/odebug.h>
+
 #include <qdatetime.h>
 #include <qfile.h>
 #include <qdir.h>
