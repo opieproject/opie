@@ -1,4 +1,4 @@
-Files: bin/networksetup apps/Settings/networksetup.desktop plugins/networksetup/* pics/networksetup/* $QTDIR/lib/libinterfaces.so.1.0.0 $QTDIR/lib/libinterfaces.so.1.0 $QTDIR/lib/libinterfaces.so.1 bin/changedns bin/getprofile
+Files: bin/networksetup apps/Settings/networksetup.desktop plugins/networksetup/* pics/networksetup/* pics/Network/PPPConnect.png $QTDIR/lib/libinterfaces.so.1.0.0 $QTDIR/lib/libinterfaces.so.1.0 $QTDIR/lib/libinterfaces.so.1 bin/changedns bin/getprofile
 Priority: optional
 Section: opie/settings
 Maintainer: Ben Meyer <meyerb@sharpsec.com> 
