@@ -585,6 +585,11 @@ QString OContact::toRichText() const
 	    text += "<b>" + QObject::tr("Anniversary: ") + "</b>"
 		    + Qtopia::escapeString(str) + "<br>";
     }
+    str = children();
+    if ( !str.isEmpty() )
+	text += "<b>" + QObject::tr("Children: ") + "</b>"
+		+ Qtopia::escapeString(str) + "<br>";
+
     str = nickname();
     if ( !str.isEmpty() )
 	text += "<b>" + QObject::tr("Nickname: ") + "</b>"
