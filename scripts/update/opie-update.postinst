@@ -1,4 +1,4 @@
-#!/bin/bash -v
+#!/bin/bash 
 #
 #  script to remove and reinstall opie
 #
@@ -21,22 +21,6 @@ cmd="$IPKG_REMOVE $p"
 echo "rem.  $p" >> /tmp/update.log
 $cmd
 done
-
-#to be sure...
-#... to have an endless loop ;-)
-# so comment it!
-#pack2=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
-#while [ $pack2 != "" ]
-#do
-#echo "debug: while loop: $pack2"
-#for p in  $pack2; do
-#echo "debug for loop: $p"
-#cmd="$IPKG_REMOVE $p"
-#echo "$cmd"
-#$cmd
-#done
-#pack2=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
-#done;
 
 #might help
 sync
