@@ -37,6 +37,7 @@
 #include "todosearch.h"
 #include "datebooksearch.h"
 #include "applnksearch.h"
+#include "doclnksearch.h"
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   QMainWindow( parent, name, f ), _currentItem(0)
@@ -78,6 +79,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   todoSearch = new TodoSearch( resultsList, tr("todo") );
   datebookSearch = new DatebookSearch( resultsList, tr("datebook") );
   applnkSearch = new AppLnkSearch( resultsList, tr("applications") );
+  doclnkSearch = new DocLnkSearch( resultsList, tr("documents") );
 
   makeMenu();
   setCentralWidget( mainFrame );
@@ -157,6 +159,7 @@ void MainWindow::setSearch( const QString &key )
   todoSearch->setSearch(key);
   datebookSearch->setSearch(key);
   applnkSearch->setSearch(key);
+  doclnkSearch->setSearch(key);
 }
 
 
