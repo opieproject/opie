@@ -4,6 +4,6 @@ Section: opie/games
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-fifteen, opie-go, opie-kbill, opie-kcheckers, opie-kpacman, opie-minesweep, opie-nethack, opie-parashoot, opie-qasteroids, opie-snake, opie-solitaire, opie-tetrix, opie-tictac, opie-wordgame
+Depends: opie-fifteen, opie-go, opie-kbill, opie-kcheckers, opie-kpacman, opie-minesweep, opie-parashoot, opie-qasteroids, opie-snake, opie-solitaire, opie-tetrix, opie-tictac, opie-wordgame
 Description: Opie game pack
  The full load of Opie games.
