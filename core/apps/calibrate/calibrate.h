@@ -51,7 +51,8 @@ private slots:
 private:
     void store();
     void reset();
-    QPixmap logo;
+    QPixmap splash;
+    QPixmap crosshair;
 #ifdef QWS
     QWSPointerCalibrationData goodcd,cd;
     QWSPointerCalibrationData::Location location;

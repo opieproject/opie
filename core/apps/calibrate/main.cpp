@@ -31,7 +31,7 @@ int main( int argc, char ** argv )
     QPEApplication a( argc, argv );
     int retval = 0;
 
-#ifdef QWS
+#if !defined(QT_DEBUG) && defined(QWS)
     if ( QWSServer::mouseHandler() &&
          QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
 #endif
@@ -40,7 +40,7 @@ int main( int argc, char ** argv )
         a.setMainWidget(&cal);
 	a.showMainWidget(&cal);
 	return a.exec();
-#ifdef QWS
+#if !defined(QT_DEBUG) && defined(QWS)
     }
 #endif
 }

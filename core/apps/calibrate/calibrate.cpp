@@ -26,8 +26,8 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qapplication.h>
 
-//#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-
+#include <qpixmap.h>
+#include <qimage.h>
 #include <qpainter.h>
 #include <qtimer.h>
 #include <qwindowsystem_qws.h>
@@ -42,13 +42,11 @@ Calibrate::Calibrate( QWidget* parent, const char * name, WFlags wf ) :
 	const int offset = 30;
 	QRect desk = qApp->desktop() ->geometry();
 	setGeometry( 0, 0, desk.width(), desk.height() );
-	if ( desk.height() < 250 ) {
-		int w = desk.height() / 3;
-		logo.convertFromImage( Resource::loadImage( "logo/opielogo" ).smoothScale( w, w ) );
-	}
-	else {
-		logo = Resource::loadPixmap( "logo/opielogo" );
-	}
+	crosshair.convertFromImage( Resource::loadImage("launcher/crosshair") );
+
+        splash.convertFromImage( Resource::loadImage("launcher/firstuse").smoothScale( width(), height() ) );
+        setBackgroundPixmap( splash );
+
 	cd.screenPoints[ QWSPointerCalibrationData::TopLeft ] = QPoint( offset, offset );
 	cd.screenPoints[ QWSPointerCalibrationData::BottomLeft ] = QPoint( offset, qt_screen->deviceHeight() - offset );
 	cd.screenPoints[ QWSPointerCalibrationData::BottomRight ] = QPoint( qt_screen->deviceWidth() - offset, qt_screen->deviceHeight() - offset );
@@ -86,7 +84,7 @@ void Calibrate::store()
 
 void Calibrate::hide()
 {
-	if ( isVisible ( )) {
+	if ( isVisible()) {
 		store();
 
 		// hack - calibrate is a launcher dialog, but treated like a standalone app
@@ -126,7 +124,7 @@ bool Calibrate::sanityCheck()
 	QPoint br = cd.devPoints[QWSPointerCalibrationData::BottomRight];
 
 	// not needed anywhere .. just calculate it, so it's there
-	cd. devPoints [QWSPointerCalibrationData::Center] = QRect ( tl, br ). normalize ( ). center ( );
+	cd.devPoints[QWSPointerCalibrationData::Center] = QRect( tl, br ).normalize().center();
 
 	int dlx = QABS( bl. x ( ) - tl. x ( ));
 	int dly = QABS( bl. y ( ) - tl. y ( ));
@@ -168,41 +166,39 @@ return true;
 void Calibrate::moveCrosshair( QPoint pt )
 {
 	showCross = FALSE;
-	repaint( crossPos.x() - 8, crossPos.y() - 8, 16, 16 );
+	repaint( crossPos.x() - 14, crossPos.y() - 14, 28, 28 );
 	showCross = TRUE;
 	crossPos = pt;
-	repaint( crossPos.x() - 8, crossPos.y() - 8, 16, 16 );
+	repaint( crossPos.x() - 14, crossPos.y() - 14, 28, 28 );
 }
 
 void Calibrate::paintEvent( QPaintEvent * )
 {
 	QPainter p( this );
-
-	int y;
-
-	if ( !logo.isNull() ) {
-		y = height() / 2 - logo.height() - 15;
-		p.drawPixmap( ( width() - logo.width() ) / 2, y, logo );
-	}
-
-	y = height() / 2 + 15;
+	int y = height() / 3;
 
 	p.drawText( 0, y + height() / 8, width(), height() - y, AlignHCenter,
 	            tr( "Touch the crosshairs firmly and\n"
 	                "accurately to calibrate your screen." ) );
 
-	QFont f = p.font();
-	f.setBold( TRUE );
-	p.setFont( f );
-	p.drawText( 0, y, width(), height() - y, AlignHCenter | WordBreak,
-	            tr( "Welcome to Opie" ) );
+	if ( !showCross ) return;
 
-	if ( showCross ) {
-		p.drawRect( crossPos.x() - 1, crossPos.y() - 8, 2, 7 );
-		p.drawRect( crossPos.x() - 1, crossPos.y() + 1, 2, 7 );
-		p.drawRect( crossPos.x() - 8, crossPos.y() - 1, 7, 2 );
-		p.drawRect( crossPos.x() + 1, crossPos.y() - 1, 7, 2 );
+#if 0
+	if ( crosshair.isNull() ) {
+#endif
+		p.setPen( QColor( 0, 0, 155 ) );
+		p.drawEllipse( crossPos.x()-8, crossPos.y()-8, 16, 16 );
+		p.setPen( QColor( 250, 220, 220 ) );
+		p.drawRoundRect( crossPos.x()-12, crossPos.y()-12, 24, 24, 75, 75 );
+		p.setPen( QColor( 0, 0, 120 ) );
+		p.drawRect( crossPos.x() - 1, crossPos.y() - 14, 2, 13 );
+		p.drawRect( crossPos.x() - 1, crossPos.y() + 1, 2, 13 );
+		p.drawRect( crossPos.x() - 14, crossPos.y() - 1, 13, 2 );
+		p.drawRect( crossPos.x() + 1, crossPos.y() - 1, 13, 2 );
+#if 0
 	}
+	else p.drawPixmap( crossPos.x(), crossPos.y(), crosshair );
+#endif
 }
 
 void Calibrate::mousePressEvent( QMouseEvent *e )
