@@ -64,6 +64,7 @@
 */
 
 
+#include <qfileinfo.h>
 #include <qapplication.h>
 #include <qsocketnotifier.h>
 #include <qstring.h>
@@ -169,8 +170,10 @@ int MyPty::run(const char* cmd, QStrList &, const char*, int)
       char msg[] = "WARNING: You are running this shell as root!\n";
       write(ttyfd, msg, sizeof(msg));
   }
-; //creates a login shell
-  execl(cmd, cmd, "--login", 0);
+
+  QString ccmd = "-"+QFileInfo(cmd).fileName(); //creates a login shell
+
+  execl(cmd, ccmd.latin1(), 0);
 
   donePty();
   exit(-1);
