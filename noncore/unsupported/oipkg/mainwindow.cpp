@@ -101,7 +101,7 @@ void MainWindow::makeMenu()
   srvMenu->insertSeparator ();
 
   updateAction = new QAction( tr( "Update" ),
-			      Resource::loadIconSet( "oipkg/repeat" ),
+			      Resource::loadIconSet( "oipkg/update" ),
 			      QString::null, 0, this, 0 );
   connect( updateAction, SIGNAL( activated() ),
 	   this , SLOT( updateList() ) );
@@ -145,12 +145,12 @@ void MainWindow::makeMenu()
   sectionBar->setHorizontalStretchable( true );
   QLabel *label = new QLabel( tr("Section: "), sectionBar );
   label->setBackgroundColor( sectionBar->backgroundColor() );
+ 	sectionBar->setStretchableWidget( label );
   section = new QComboBox( false, sectionBar );
 //  section->setBackgroundMode( PaletteBackground );
   label = new QLabel( " / ", sectionBar );
   label->setBackgroundColor( sectionBar->backgroundColor() );
   subsection = new QComboBox( false, sectionBar );
- 	sectionBar->setStretchableWidget( label );
 
   a = new QAction( tr( "Close Section" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( sectionClose() ) );
@@ -275,17 +275,17 @@ void MainWindow::setSubSections()
 void MainWindow::showSettings()
 {
   if ( settings->showDialog( 0 ) )
-    getList();
+    updateList();
 }
 void MainWindow::showSettingsSrv()
 {
   if ( settings->showDialog( 1 ) )
-    getList();
+    updateList();
 }
 void MainWindow::showSettingsDst()
 {
   if ( settings->showDialog( 2 ) )
-    getList();
+    updateList();
 }
 
 

@@ -10,28 +10,27 @@
 #include "packagelist.h"
 #include "debug.h"
 
-//#define DIA
-
-#include <qpe/qcopenvelope_qws.h>
 
 
-//class PmIpkg : public RunWindow
 class PmIpkg : public QObject
 {
   Q_OBJECT
 public:
   PmIpkg( PackageManagerSettings* , QWidget* p=0,  const char * name=0, WFlags f=0 );
-  //	PmIpkg( QObject*, PackageManagerSettings* );
   ~PmIpkg();
 
   void commit( PackageList );
   void update();
   PackageList* getPackageList();
+  void showButtons(bool b=true);
+  void show( bool buttons=true );
 
 private:
   PackageManagerSettings* settings;
   RunWindow *runwindow;
-  QCopChannel *linkDest;
+  QStringList to_remove;
+  QStringList to_install;
+  bool runwindowopen;
 
   void makeLinks(QString);
   void processLinkDir( QString, QString );
@@ -40,6 +39,9 @@ private:
   void out( QString );
 
 public slots:
+	void doIt();
+ 	void install();
+  void remove();
   void linkDestination( const QString, const QByteArray );
 };
 

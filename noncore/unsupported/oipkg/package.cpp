@@ -17,7 +17,7 @@ Package::Package()
   _shortDesc = "";
   _desc = "";
   _name = "";
-  _toProcess = true;
+  _toProcess = false;
   _status = "";
 }
 
@@ -253,3 +253,11 @@ QString Package::details()
   return description;
 }
 
+/** No descriptions */
+void Package::processed()
+{
+	_toProcess = false;
+ //hack, but we're mot writing status anyway...
+	if ( installed() ) _status = "install";
+ 	else _status = "installed";
+}

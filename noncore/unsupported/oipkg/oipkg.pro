@@ -16,10 +16,9 @@ SOURCES		= main.cpp \
 		packagelist.cpp \
 		package.cpp
 INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH	+= $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/ioclude
 LIBS            += -lqpe 
 INTERFACES	= pkdesc.ui \
-		pkfind.ui \
 		runwindow.ui \
 		pksettingsbase.ui
 TARGET		= oipkg

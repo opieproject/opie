@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>353</width>
+            <width>349</width>
             <height>454</height>
         </rect>
     </property>
@@ -176,7 +176,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Link Destination:</string>
+                                    <string>Link Destination: root</string>
                                 </property>
                             </widget>
                             <widget>
@@ -718,12 +718,6 @@
     </grid>
 </widget>
 <connections>
-    <connection>
-        <sender>CheckBoxLink</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>Form4</receiver>
-        <slot>linkEnabled(bool)</slot>
-    </connection>
     <slot access="public">destNameChanged(const QString&amp;)</slot>
     <slot access="public">destUrlChanged(const QString&amp;)</slot>
     <slot access="public">editDestination(int)</slot>

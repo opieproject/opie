@@ -1,6 +1,5 @@
 #include "pmipkg.h"
 #include "pkdesc.h"
-#include "pkfind.h"
 #include "pksettings.h"
 #include "package.h"
 #include "packagelistitem.h"
@@ -17,25 +16,22 @@
 #include <qtextstream.h>
 #include <qtextview.h>
 
+#include <qprogressbar.h>
+#include <qpushbutton.h>
+#include <qlayout.h>
+
 #include <stdlib.h>
 #include <unistd.h>
 
 #include "mainwindow.h"
-#include "runwindow.h"
 
-
-#define PARSE_FILELIST
-// #define IPKG_FILELIST
 
 PmIpkg::PmIpkg( PackageManagerSettings* s, QWidget* p,  const char * name, WFlags f )
-//  : RunWindow ( p, name, f )
   	: QObject ( p )
 {
   settings = s;
-  runwindow = new RunWindow ( p, name, f );
-  linkDest = new QCopChannel( "QPE/oipkg", this );
-  connect( linkDest, SIGNAL(received(const QCString &, const QByteArray &)),
-	   this, SLOT(linkDestination( const QString &, const  QByteArray&)) );
+  runwindowopen = false;
+ 	runwindow = new RunWindow( p, name, true, f );
 }
 
 PmIpkg::~PmIpkg()
@@ -73,14 +69,17 @@ int PmIpkg::runIpkg(const QString& args)
   pvDebug(2, "running >"+cmd+"<");
 	r = system(cmd.latin1());
   QFile f( redirect );
+  QString line;
+  QString oldLine;
   while ( ! f.open(IO_ReadOnly) ) {};
- // if ( f.open(IO_ReadOnly) ) {};
   {
     QTextStream t( &f );
-    QString fp;
+ //   QString fp;
     while ( !t.eof() )
     {
-				out( t.readLine() +"<br>" );
+      line = t.readLine();
+			if ( line != oldLine ) out( line +"<br>" );
+    	oldLine = line;
     }
   }
   f.close();
@@ -96,12 +95,6 @@ void PmIpkg::makeLinks(QString pack)
   out( "<br>creating links<br>" );
   QString dest = settings->getDestinationUrl();
   out("for package "+pack+" in "+dest+"<br>");
-#ifdef IPKG_FILELIST
-  system(("ipkg -d "+dest+" files "+pack+"> /tmp/oipkg.pipe 2>&1").latin1());
-  QFile f( "/tmp/oipkg.pipe" );
-  while ( ! f.open(IO_ReadOnly) ) {};
-#endif
-#ifdef PARSE_FILELIST
 	{
     Config cfg( "oipkg", Config::User );
     cfg.setGroup( "Common" );
@@ -113,7 +106,6 @@ void PmIpkg::makeLinks(QString pack)
   {
   	out( "<b>Panik!</b> Could not open:<br>"+fn );
   };
-#endif
   QTextStream t( &f );
   QString fp;
   while ( !t.eof() )
@@ -126,14 +118,8 @@ void PmIpkg::makeLinks(QString pack)
 
 void PmIpkg::processLinkDir( QString file, QString dest )
 {
-
-#ifdef PARSE_FILELIST
   QString destFile = file;
 	file = dest+"/"+file;
-#endif
-#ifdef IPKG_FILELIST
-  QString destFile = file.right( file.length() - dest.length() );
-#endif
   QFileInfo fileInfo( file );
   if ( fileInfo.isDir() )
   {
@@ -146,7 +132,7 @@ void PmIpkg::processLinkDir( QString file, QString dest )
     QFileInfo *fi;
     while ( (fi=it.current()) )
     {
-      out( "<b>"+fi->absFilePath()+"</b>" );
+   //   out( "<b>"+fi->absFilePath()+"</b>" );
   		processLinkDir( fi->absFilePath(), dest );      			
 			++it;
     }
@@ -155,7 +141,7 @@ void PmIpkg::processLinkDir( QString file, QString dest )
   {
     const char *instFile = strdup( (file).ascii() );
     const char *linkFile = strdup(  (destFile).ascii());
-    out( "linking: "+file+" -> "+destFile  );
+//    out( "linking: "+file+" -> "+destFile  );
     qDebug( "linking: %s -> %s", instFile, linkFile );
     symlink( instFile, linkFile );
   }
@@ -163,11 +149,9 @@ void PmIpkg::processLinkDir( QString file, QString dest )
 
 void PmIpkg::commit( PackageList pl )
 {   	
-  runwindow->showMaximized();
-//  exec();
+	show( false );
   runwindow->outPut->setText("");
-  out( "<h1>Starting...</h1><br>\n");
-  QStringList to_remove, to_install;   	
+  out( "<h1>"+tr("Todo")+"</h1>\n"); 	
 
   QString rem="<b>To remove:</b><br>\n";
   QString inst="<b>To install:</b><br>\n";;
@@ -188,17 +172,58 @@ void PmIpkg::commit( PackageList pl )
 	}
     }
 
-  out("<p>"+inst+"</p>"+"<p>"+rem+"</p>");
-  bool ok=TRUE;
+  out("<p>"+inst+"</p>"+"<p>"+rem+"</p><hl>");
 
   qDebug("to remove=%i; to install=%i",to_remove.count(),to_install.count());
 
-  int jobs = to_remove.count()+to_install.count();
-  if ( jobs < 1 ) return;
+  connect( runwindow->doItButton, SIGNAL( clicked() ),
+  					 SLOT( doIt() ) );
+  connect( runwindow->installButton, SIGNAL( clicked() ),
+  					this, SLOT( install() ) );
+  connect( runwindow->removeButton, SIGNAL( clicked() ),
+  					this, SLOT( remove() ) );
+  connect( runwindow->cancelButton, SIGNAL( clicked() ),
+  					runwindow, SLOT( close() ) );
 
-  if ( to_remove.count() )
+	runwindow->exec();
+  // ##### If we looked in the list of files, we could send out accurate
+  // ##### messages. But we don't bother yet, and just do an "all".
+  QCopEnvelope e("QPE/System", "linkChanged(QString)");
+  QString lf = QString::null;
+  e << lf;
+  return;
+}
+
+void PmIpkg::doIt()
+{
+ 	remove();
+  install();
+}
+
+
+void PmIpkg::remove()
+{
+ 	if ( to_remove.count() == 0 ) return;
+	show( true );
+
+	out("<hr><hr><b>"+tr("Removing")+"<br>"+tr("please wait")+"</b><br>");
     for (QStringList::ConstIterator it=to_remove.begin(); it!=to_remove.end(); ++it)
-      if ( runIpkg("remove " + *it) != 0 ) ok = false;
+    {
+      if ( runIpkg("remove " + *it) == 0)
+      {
+
+  		}else{
+      	out("<b>"+tr("Error while removing")+"</b>"+*it);
+      }
+    }
+}
+
+
+void PmIpkg::install()
+{
+ 	if ( to_install.count() == 0 ) return;
+	show( true );
+	out("<hr><hr><b>"+tr("Installing")+"<br>"+tr("please wait")+"<b><br>");
   if ( to_install.count() )
     for (QStringList::ConstIterator it=to_install.begin(); it!=to_install.end(); ++it)
     {
@@ -207,15 +232,10 @@ void PmIpkg::commit( PackageList pl )
 	    	if ( settings->createLinks() )
 					makeLinks( *it );
   		}else{
-      	ok = false;
+      	out("<b>"+tr("Error while installing")+"</b>"+*it);
       }
     }
 	
-  // ##### If we looked in the list of files, we could send out accurate
-  // ##### messages. But we don't bother yet, and just do an "all".
-  QCopEnvelope e("QPE/System", "linkChanged(QString)");
-  QString lf = QString::null;
-  e << lf;
 }
 
 void PmIpkg::linkDestination( const QString msg, const QByteArray dest )
@@ -236,12 +256,42 @@ void PmIpkg::linkDestination( const QString msg, const QByteArray dest )
 
 void PmIpkg::update()
 {
-  runwindow->showMaximized();
+	show( false );
 	runIpkg( "update" );
+ 	runwindow->close();
 }
 
 void PmIpkg::out( QString o )
 {
 	runwindow->outPut->setText( runwindow->outPut->text()+o );
-  runwindow->outPut->setContentsPos(0,runwindow->outPut->contentsHeight());
+  runwindow->outPut->setContentsPos(0, runwindow->outPut->contentsHeight());
+}
+
+
+void PmIpkg::showButtons(bool b)
+{
+	if ( b )
+ 	{
+		runwindow->cancelButton->hide();
+ 		runwindow->doItButton->hide();
+	  runwindow->removeButton->hide();
+  	runwindow->installButton->hide();
+  }else{
+		runwindow->cancelButton->show();
+ 		runwindow->doItButton->show();
+	  runwindow->removeButton->show();
+  	runwindow->installButton->show();
+
+  }
+}
+
+void PmIpkg::show(bool b)
+{
+	if (!runwindow->isVisible())
+	  runwindow->showMaximized();
+	showButtons(b);
+	if ( b )
+ 		runwindow->progress->show();
+  else
+ 		runwindow->progress->show();
 }

@@ -35,6 +35,8 @@ class Package //: public QObject
   bool    toProcess();
   bool    toInstall();
   bool    toRemove();
+  /** No descriptions */
+  void processed();
 public slots:
   void toggleProcess();
 
