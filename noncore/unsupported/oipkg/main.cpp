@@ -9,7 +9,7 @@ int debugLevel;
 int main( int argc, char ** argv )
 {
   printf("This is oipkg\n");
-  printf("$id$\n");
+  printf("$ID$\n");
   debugLevel = 2;
   if (argc > 1)
   {
