@@ -20,37 +20,23 @@ extern "C" {
 #include "inputDialog.h"
 
 #include <qpe/qpemenubar.h>
-#include <qpe/qpetoolbar.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
-#include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
-#include <qpe/qpemessagebox.h>
 
-#include <qstringlist.h>
 #include <qtextstream.h>
 #include <qpushbutton.h>
 #include <qtoolbutton.h>
-#include <qdatetime.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qstring.h>
 #include <qcombobox.h>
-#include <qpopupmenu.h>
 #include <qlistview.h>
-#include <qmainwindow.h>
 #include <qlabel.h>
 #include <qprogressbar.h>
 #include <qspinbox.h>
 #include <qtabwidget.h>
-#include <qwidget.h>
 #include <qlayout.h>
-#include <qimage.h>
-#include <qpixmap.h>
 #include <qmessagebox.h>
 #include <qlineedit.h>
-#include <qregexp.h>
 #include <qlistbox.h>
 
 #include <unistd.h>

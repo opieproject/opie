@@ -13,10 +13,6 @@
 #include "inputDialog.h"
 
 #include <qlineedit.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
 
 
 InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
