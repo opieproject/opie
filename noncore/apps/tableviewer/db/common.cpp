@@ -22,7 +22,7 @@
 #include <qheader.h>
 #include <qvector.h>
 #include <qdatetime.h>
-#include <timestring.h>
+#include <qpe/timestring.h>
 #include "common.h"
 #include "datacache.h"
 #include <assert.h>
@@ -310,9 +310,9 @@ void TVVariant::load(QDataStream &s )
                 s >> x;
                 d->value.i = x;
             }
-	    break;
+      break;
         default:
-	    qFatal("Unrecognized data type");
+      qFatal("Unrecognized data type");
     }
 }
 
@@ -390,7 +390,7 @@ int TVVariant::toInt() const
         return d->value.i;
 
     if(d->typ == String) {
-    	QString tmpq(*(QString *)d->value.ptr);
+      QString tmpq(*(QString *)d->value.ptr);
         return parseNextNumber(&tmpq);
     }
 
@@ -684,9 +684,9 @@ Key::Key(QString name, TVVariant example, int flags = 0) :
 
 Key::Key(const Key &other)
 {
-	kname = other.kname;
-	kexample = other.kexample;
-	kflags = other.kflags;
+  kname = other.kname;
+  kexample = other.kexample;
+  kflags = other.kflags;
 }
 
 Key& Key::operator=(const Key& key) 
@@ -778,10 +778,10 @@ KeyList::KeyList() : QIntDict<Key>(20)
 KeyList::KeyList(const KeyList &k) : QIntDict<Key>(k) 
 {
     KeyListIterator it(k);
-	while(it.current()) {
-		replace(it.currentKey(), new Key(*it.current()));
-		++it;
-	}
+  while(it.current()) {
+    replace(it.currentKey(), new Key(*it.current()));
+    ++it;
+  }
 
     setAutoDelete(TRUE);
 }
@@ -798,15 +798,15 @@ bool KeyList::operator!=(const KeyList &other)
     KeyListIterator it(*this);
 
     if (other.getNumFields() != getNumFields())
-	return TRUE;
+  return TRUE;
 
     while(it.current()) {
-	//it.currentKey(), it.current();
-	if (other.getKeyName(it.currentKey()) != getKeyName(it.currentKey()))
-	    return TRUE;
-	if (other.getKeyType(it.currentKey()) != getKeyType(it.currentKey()))
-	    return TRUE;
-	++it;
+  //it.currentKey(), it.current();
+  if (other.getKeyName(it.currentKey()) != getKeyName(it.currentKey()))
+      return TRUE;
+  if (other.getKeyType(it.currentKey()) != getKeyType(it.currentKey()))
+      return TRUE;
+  ++it;
     }
     return FALSE;
 }
@@ -1182,7 +1182,7 @@ void DataElem::setField(int i, QString q)
         case TVVariant::Int: {
             t.asInt();
             setField(i, t);
-			return;
+      return;
         }
         case TVVariant::String: {
             t.asString();
@@ -1270,7 +1270,7 @@ QString DataElem::toQString() const
     QIntDictIterator<TVVariant> it(values);
 
     while (it.current()) {
-    	i = it.currentKey();
+      i = it.currentKey();
         if(hasValidValue(i)) {
             scratch += "<B>" + contained->getKeyName(i) + ":</B> ";
             scratch += getField(i).toString();

@@ -20,17 +20,21 @@
 
 #ifndef TODAY_H
 #define TODAY_H
-#include "todaybase.h"
 
 #include <qpe/datebookdb.h>
+#include <qpe/event.h>
 
 #include <qdatetime.h>
 #include <qlist.h> 
+
 #include "TodoItem.h"
 #include "todayconfig.h"
+#include "todaybase.h"
+#include "clickablelabel.h"
 
-class Today : public TodayBase
-{
+class QVBoxLayout;
+
+class Today : public TodayBase {
   Q_OBJECT
     
     public:
@@ -43,15 +47,19 @@ class Today : public TodayBase
     void startDatebook();
     void startMail();
     void draw();
+    void editEvent(const Event &e);
  private:
     void init();
     void getDates();
     void getTodo();
     void getMail();
+    void autoStart();
+    bool checkIfModified();
     QList<TodoItem> loadTodo(const char *filename);
  private:
     DateBookDB *db;
     todayconfig *conf;
+    QWidget* AllDateBookEvents;
     //Config cfg;
     int MAX_LINES_TASK;
     int MAX_CHAR_CLIP;
@@ -59,5 +67,34 @@ class Today : public TodayBase
     int SHOW_LOCATION; 
     int SHOW_NOTES;
 };
+
+class DateBookEvent: public ClickableLabel {
+  Q_OBJECT
+public:
+    DateBookEvent(const EffectiveEvent &ev, 
+			 QWidget* parent = 0, const char* name = 0, 
+			 WFlags fl = 0);
+signals:
+    void editEvent(const Event &e);
+private slots:
+    void editMe();
+private:
+    const EffectiveEvent event;
+};
+
+class DateBookEventLater: public ClickableLabel {
+  Q_OBJECT
+public:
+    DateBookEventLater(const EffectiveEvent &ev, 
+			 QWidget* parent = 0, const char* name = 0, 
+			 WFlags fl = 0);
+signals:
+    void editEvent(const Event &e);
+private slots:
+    void editMe();
+private:
+    const EffectiveEvent event;
+};
+
 #endif // TODAY_H
 

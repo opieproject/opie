@@ -38,12 +38,12 @@
     Constructs a new TVBrowseView widget 
 */
 TVBrowseView::TVBrowseView(TableState *t, QWidget* parent = 0, const char *name = 0, 
-	WFlags fl =0)
+  WFlags fl =0)
 {
     if (!name) 
-	setName("BrowseView");
+  setName("BrowseView");
 
-    setSizePolicy(QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding, 0, 0, sizePolicy().hasHeightForWidth() ) );
+//      setSizePolicy(QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding, 0, 0, sizePolicy().hasHeightForWidth() ) );
     QVBoxLayout *vlayout = new QVBoxLayout(this);
     textViewDisplay = new QTextBrowser(this, "textViewDisplay");
     vlayout->addWidget( textViewDisplay );
@@ -74,10 +74,10 @@ void TVBrowseView::rebuildData()
     if(!ts)
         return;
     if(!ts->current_elem) {
-		/* also disable buttons */
-		textViewDisplay->setText("");
+    /* also disable buttons */
+    textViewDisplay->setText("");
         return;
-	}
+  }
 
     setDisplayText(ts->current_elem);
 }

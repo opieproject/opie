@@ -34,6 +34,7 @@
 #include <qlist.h>
 #include <qmap.h>
 
+class QAction;
 class QWidgetStack;
 class QToolButton;
 class QPopupMenu;
@@ -42,6 +43,7 @@ class QLineEdit;
 class QAction;
 class FileSelector;
 class QpeEditor;
+class QPopupMenu;
 
 class TextEdit : public QMainWindow
 {
@@ -50,9 +52,13 @@ class TextEdit : public QMainWindow
 public:
     TextEdit( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
     ~TextEdit();
-
+ QPopupMenu *font;
+    QAction *nStart;
+    bool edited, edited1;
     void openFile( const QString & );
-
+public slots:
+    void editorChanged();
+        
 protected:
     void closeEvent( QCloseEvent *e );
 
@@ -63,6 +69,7 @@ private slots:
     void fileRevert();
     void fileOpen();
     void newFileOpen();
+    void changeStartConfig(bool);
     bool save();
     bool saveAs();
 

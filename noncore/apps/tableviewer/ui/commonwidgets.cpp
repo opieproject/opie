@@ -22,7 +22,8 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qcombobox.h>
-#include <datebookmonth.h>
+
+#include <qpe/datebookmonth.h>
 #include <qpopupmenu.h>
 #include <qspinbox.h>
 #include "commonwidgets.h"

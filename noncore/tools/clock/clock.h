@@ -28,6 +28,7 @@ class QLabel;
 class QTimer;
 class QRadioButton;
 class QPushButton;
+class QDateTime;
 
 class AnalogClock : public QFrame
 {
@@ -35,7 +36,7 @@ class AnalogClock : public QFrame
 
 public:
     AnalogClock( QWidget * parent = 0, const char * name = 0 )
-	: QFrame( parent, name ), clear(false) {}
+  : QFrame( parent, name ), clear(false) {}
 
     QSizePolicy sizePolicy() const;
 
@@ -59,22 +60,32 @@ class Clock : public QVBox
 public:
     Clock( QWidget * parent = 0, const char * name = 0, WFlags f=0 );
     ~Clock();
-    
+    QDateTime when;
+    bool bSound;
+    int hour, minute, snoozeTime;
 private slots:
     void slotSet();
     void slotReset();
     void modeSelect(int);
     void updateClock();
     void changeClock( bool );
+    void slotSetAlarm();
+    void slotSnooze();
+    void slotToggleAlarm();
+    void alarmOn();
+    void alarmOff();
+    void appMessage(const QCString& msg, const QByteArray& data);
+    void timerEvent( QTimerEvent *e );
 
 private:
     void clearClock();
 
+    bool alarmBool;
     QTimer *t;
     QLCDNumber *lcd;
     QLabel *date;
     QLabel *ampmLabel;
-    QPushButton *set, *reset;
+    QPushButton *set, *reset, *alarmBtn, *snoozeBtn, *alarmOffBtn;
     QRadioButton *clockRB, *swatchRB;
     AnalogClock *aclock;
     QTime swatch_start;

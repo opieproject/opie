@@ -72,7 +72,7 @@ PlayListSelection::~PlayListSelection() {
 // #ifdef USE_PLAYLIST_BACKGROUND
 void PlayListSelection::drawBackground( QPainter *p, const QRect &r ) {
 //  qDebug("drawBackground");
-//   p->fillRect( r, QBrush( white ) );
+   p->fillRect( r, QBrush( white ) );
 //      QImage logo = Resource::loadImage( "mpegplayer/background" );
 //  //      QImage logo = Resource::loadImage( "opielogo" );
 //        if ( !logo.isNull() )

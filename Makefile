@@ -2,7 +2,7 @@ default:  dynamic
 
 all: default docs
 
-LIBS=library
+LIBS=library libopie
 
 COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	inputmethods/pickboard \
@@ -18,6 +18,7 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	taskbar/vmemo \
 	netsetup/dialup \
 	netsetup/lan \
+	opiemail/ifaces/pop3 opiemail/ifaces/smtp \
 	mpegplayer/libmpeg3 \
 	mpegplayer/libmad \
 	mpegplayer/wavplugin \
@@ -35,8 +36,9 @@ APPS=$(LOCALAPPS) addressbook calculator clock datebook \
     settings/systemtime \
     solitaire spreadsheet tetrix textedit \
     todo wordgame embeddedkonsole taskbar sysinfo \
-    parashoot snake citytime showimg netsetup \
-    qipkg mindbreaker go qasteroids qcop fifteen keypebble  today 
+    parashoot snake citytime showimg netsetup tableviewer \
+    qipkg mindbreaker go qasteroids qcop fifteen keypebble  today opiemail/converter opiemail \
+    noncore/tictac noncore/opieftp
 
 DOCS = docs/src/opie-policy
 single: mpegplayer/libmpeg3

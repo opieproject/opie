@@ -17,43 +17,44 @@
 **
 **********************************************************************/
 
+#include <qpe/qpeapplication.h>
+
 #include <qheader.h>
 #include <qlistview.h>
 #include <qlayout.h>
 #include <qtimer.h>
 #include <qfile.h>
 #include <qdir.h>
-#include <qmessagebox.h>
-
-#include <sys/types.h>
-#include <signal.h>
 
 #include "processinfo.h"
 
 ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
-    QVBoxLayout *vb = new QVBoxLayout( this, 5 );
+    QVBoxLayout *layout = new QVBoxLayout( this, 5 );
 
     ProcessView = new QListView( this, "ProcessView" );
     int colnum = ProcessView->addColumn( tr( "PID" ) );
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     colnum = ProcessView->addColumn( tr( "Command" ),96 );
-    ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     colnum = ProcessView->addColumn( tr( "Status" ) );
-    ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     colnum = ProcessView->addColumn( tr( "Time" ) );
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     ProcessView->setAllColumnsShowFocus( TRUE );
-    connect( ProcessView, SIGNAL( doubleClicked(QListViewItem *) ), this, SLOT( viewProcess(QListViewItem *) ) );
+    QPEApplication::setStylusOperation( ProcessView->viewport(), QPEApplication::RightOnHold );
+    connect( ProcessView, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
+            this, SLOT( viewProcess( QListViewItem * ) ) );
 
-    vb->addWidget( ProcessView );
+    layout->addWidget( ProcessView );
 
     QTimer *t = new QTimer( this );
     connect( t, SIGNAL( timeout() ), this, SLOT( updateData() ) );
     t->start( 5000 );
 
     updateData();
+
+    ProcessDtl = new ProcessDetail( 0, 0, 0 );
+    ProcessDtl->ProcessView->setTextFormat( RichText );
 }
 
 ProcessInfo::~ProcessInfo()
@@ -62,22 +63,16 @@ ProcessInfo::~ProcessInfo()
 
 void ProcessInfo::updateData()
 {
-    QString processnum("");
-    QString processcmd("");
-    QString processstatus("");
-    QString processtime("");
     int pid, ppid, pgrp, session, tty, tpgid, utime, stime, cutime, cstime, counter, priority, starttime,
        signal, blocked, sigignore, sigcatch;
     uint flags, minflt, cminflt, majflt, cmajflt, timeout, itrealvalue, vsize, rss, rlim, startcode,
          endcode, startstack, kstkesp, kstkeip, wchan;
     char state;
-    char comm[255];
+    char comm[64];
 
     ProcessView->clear();
 
-    QDir *procdir = new QDir("/proc");
-    procdir->setFilter(QDir::Dirs);
-    procdir->setSorting(QDir::Name);
+    QDir *procdir = new QDir("/proc", 0, QDir::Name, QDir::Dirs);
     QFileInfoList *proclist = new QFileInfoList(*(procdir->entryInfoList()));
     if ( proclist )
     {
@@ -86,8 +81,8 @@ void ProcessInfo::updateData()
         while ( ( f = it.current() ) != 0 )
         {
             ++it;
-            processnum = f->fileName();
-            if ( processnum >= "0" && processnum <= "99999" )
+            QString processnum = f->fileName();
+            if ( processnum >= "1" && processnum <= "99999" )
             {
                 FILE *procfile = fopen( ( QString ) ( "/proc/" + processnum + "/stat"), "r");
 
@@ -100,10 +95,9 @@ void ProcessInfo::updateData()
                            &itrealvalue, &starttime, &vsize, &rss, &rlim, &startcode, &endcode, &startstack,
                            &kstkesp, &kstkeip, &signal, &blocked, &sigignore, &sigcatch, &wchan );
                     processnum = processnum.rightJustify( 5, ' ' );
-                    processcmd = QString( comm ).replace( QRegExp( "(" ), "" );
-                    processcmd = processcmd.replace( QRegExp( ")" ), "" );
-                    processstatus = state;
-                    processtime.setNum( ( utime + stime ) / 100 );
+                    QString processcmd = QString( comm ).replace( QRegExp( "[()]" ), "" );
+                    QString processstatus = QChar(state);
+                    QString processtime = QString::number( ( utime + stime ) / 100 );
                     processtime = processtime.rightJustify( 9, ' ' );
                     fclose( procfile );
 
@@ -117,23 +111,23 @@ void ProcessInfo::updateData()
     delete procdir;
 }
 
-void ProcessInfo::viewProcess(QListViewItem *process)
+void ProcessInfo::viewProcess( QListViewItem *process )
 {
-    QString pid= process->text(0);
-    QString command = process->text(1);
-    switch( QMessageBox::information( this, (tr("Kill Process?")),
-                                      (tr("You really want to kill\n"+command+" PID: "+pid+"?")),
-                                      (tr("Yes")), (tr("No")), 0 )){
-        case 0: // Yes clicked,
+    QString pid= process->text( 0 ).stripWhiteSpace();
+    QString command = process->text( 1 );
+    ProcessDtl->setCaption( pid + " - " + command );
+    ProcessDtl->pid = pid.toUInt();
+    FILE *statfile = fopen( ( QString ) ( "/proc/" + pid + "/status"), "r");
+    if ( statfile )
+    {
+        char line[81];
+        fgets( line, 81, statfile );
+        ProcessDtl->ProcessView->setText( line );
+        while ( fgets( line, 81, statfile ) )
         {
-            bool ok;
-            pid_t child=pid.toInt(&ok,10);
-            if((kill(child,SIGKILL)) < 0)
-                perror("kill:SIGKILL");
-        }   
-            break;
-        case 1: // Cancel
-            break;
-    };
-//printf("Double click for PID: %s\n", process->text(0).stripWhiteSpace().latin1());
+            ProcessDtl->ProcessView->append( line );
+        }
+        fclose( statfile );
+    }
+    ProcessDtl->showMaximized();
 }

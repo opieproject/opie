@@ -28,6 +28,7 @@ class QAction;
 class QWidgetStack;
 class DateBookDay;
 class DateBookWeek;
+class DateBookWeekLst;
 class DateBookMonth;
 class Event;
 class QDate;
@@ -51,13 +52,17 @@ protected:
     void timerEvent( QTimerEvent *e );
     void closeEvent( QCloseEvent *e );
 
+    void view(int v, const QDate &d);
+
 public slots:
     void flush();
     void reload();
 
 private slots:
     void fileNew();
+    void slotNewEntry(const QDateTime &start, const QDateTime &end, const QString &str);
     void slotSettings();
+    void newDefaultView(QAction *a);
     void slotToday();	// view today
     void changeClock( bool newClock );
     void changeWeek( bool newDay );
@@ -67,8 +72,11 @@ private slots:
     void slotFind();
     void slotDoFind( const QString &, const QDate &, bool, bool, int );
 
+    void viewDefault(const QDate &d);
+
     void viewDay();
     void viewWeek();
+    void viewWeekLst();
     void viewMonth();
 
     void showDay( int y, int m, int d );
@@ -85,6 +93,7 @@ private:
     void addEvent( const Event &e );
     void initDay();
     void initWeek();
+    void initWeekLst();
     void initMonth();
     void loadSettings();
     void saveSettings();
@@ -95,7 +104,8 @@ private:
     DateBookDay *dayView;
     DateBookWeek *weekView;
     DateBookMonth *monthView;
-    QAction *dayAction, *weekAction, *monthAction;
+    DateBookWeekLst *weekLstView;
+    QAction *dayAction, *weekAction, *weekLstAction, *monthAction;
     bool aPreset;    // have everything set to alarm?
     int presetTime;  // the standard time for the alarm
     int startTime;

@@ -122,7 +122,19 @@ todayconfig::todayconfig( QWidget* parent,  const char* name, bool modal, WFlags
   SpinBox7->setGeometry( QRect( 115, 20, 58, 25 ) ); 
   SpinBox7->setMaxValue( 80 );
   SpinBox7->setValue( 30 );
-  TabWidget3->insertTab( tab_3, tr( "All" ) );
+
+  TextLabel2 = new QLabel( Frame14, "AutoStart" );
+  TextLabel2->setGeometry( QRect( 20, 60, 100, 45 ) ); 
+  TextLabel2->setText( tr( "Should today be\n"
+			   "autostarted on\n"
+			   "resume ?"
+			   " (Opie only)" ) );
+  
+  CheckBoxAuto = new QCheckBox (Frame14, "CheckBoxAuto" );
+  CheckBoxAuto->setGeometry( QRect( 158, 60, 27, 21 ) );
+  
+  TabWidget3->insertTab( tab_3, tr( "Misc" ) );
+
 }
 
 /*  

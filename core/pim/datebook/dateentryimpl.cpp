@@ -41,6 +41,8 @@
 
 #include <stdlib.h>
 
+#include <stdiostream.h>
+
 /*
  *  Constructs a DateEntry which is a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'
@@ -58,6 +60,7 @@ DateEntry::DateEntry( bool startOnMonday, const QDateTime &start,
 {
     init();
     setDates(start,end);
+		setFocusProxy(comboDescription);
 }
 
 static void addOrPick( QComboBox* combo, const QString& t )
@@ -176,6 +179,7 @@ void DateEntry::init()
 DateEntry::~DateEntry()
 {
     // no need to delete child widgets, Qt does it all for us
+	//cout << "Del: " << comboStart->currentText() << endl;
 }
 
 /*
@@ -270,6 +274,7 @@ void DateEntry::startTimeChanged( int index )
 {
     startTime = parseTime(comboStart->text(index),ampm);
     changeEndCombo( index );
+		//cout << "Start: " << comboStart->currentText() << endl;
 }
 /*
  * public slot
@@ -382,6 +387,9 @@ Event DateEntry::event()
     if ( rp.type != Event::NoRepeat )
 	ev.setRepeat( TRUE, rp );
     ev.setNotes( editNote->text() );
+
+		//cout << "Start: " << comboStart->currentText() << endl;
+
     return ev;
 }
 

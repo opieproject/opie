@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
     loopControl = &lc;
     MediaPlayer mp( 0, "mediaPlayer" );
 
-    pl.setCaption( MediaPlayer::tr("OpiePlayer") );
+//    pl.setCaption( MediaPlayer::tr("OpiePlayer") );
     a.showMainDocumentWidget(&pl);
 
     return a.exec();

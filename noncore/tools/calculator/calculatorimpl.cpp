@@ -22,6 +22,7 @@
  * 01/14/2002 Charles-Edouard Ruault <ce@ruault.com>
  * Added support for Temperature conversions.
  */
+// Sat 03-09-2002 L.J. Potter added the inlined pixmaps here
 
 #include "calculatorimpl.h"
 
@@ -39,14 +40,71 @@
 #include <qtextstream.h>
 #include <qmessagebox.h>
 #include <math.h>
+/* XPM */
+static char *oneoverx_xpm[] = {
+/* width height num_colors chars_per_pixel */
+"    13    11        2            1",
+/* colors */
+". c None",
+"# c #000000",
+/* pixels */
+"......#......",
+".....##......",
+"......#......"
+".....###.....",
+".............",
+"..#########..",
+".............",
+"....##.##....",
+"......#......",
+"......#......",
+"....##.##....",
+};
+/* XPM */
+static char *ythrootofx_xpm[] = {
+/* width height num_colors chars_per_pixel */
+"    13    11        2            1",
+/* colors */
+". c None",
+"# c #000000",
+/* pixels */
+"#.#..........",
+"#.#..........",
+"###...#######",
+"..#..#.......",
+"###..#.......",
+".....#.#...#.",
+".#..#...#.#..",
+"#.#.#....#...",
+"..#.#...#.#..",
+"...#...#...#.",
+"...#........."
+};
+/* XPM */
+static char *xtopowerofy_xpm[] = {
+/* width height num_colors chars_per_pixel */
+"     9     8        2            1",
+/* colors */
+". c None",
+"# c #000000",
+/* pixels */
+"......#.#",
+"......#.#",
+"......###",
+"#...#...#",
+".#.#..###",
+"..#......",
+".#.#.....",
+"#...#...."
+};
 
 CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
         WFlags f )
     : Calculator( parent, name, f )
 {
-    xtopowerofy = Resource::loadPixmap("xtopowerofy");
-    ythrootofx = Resource::loadPixmap("ythrootofx");
-    oneoverx = Resource::loadPixmap("oneoverx");
+//      xtopowerofy = Resource::loadPixmap("xtopowerofy");
+//      ythrootofx = Resource::loadPixmap("ythrootofx");
+//      oneoverx = Resource::loadPixmap("oneoverx");
 
     memMark = new QLabel( "m", LCD );
     memMark->setFont( QFont( "helvetica", 12, QFont::Bold, TRUE ) );
@@ -289,14 +347,17 @@ void CalculatorImpl::function_button(int mode){
 }
 
 void CalculatorImpl::display_pixmap_faces() {
+    QPixmap image0( ( const char** ) xtopowerofy_xpm);
     QPushButton* tmpbutton = func_buttons[5];
-    tmpbutton->setPixmap(xtopowerofy);
+    tmpbutton->setPixmap(image0);
 
+    QPixmap image1( ( const char** ) ythrootofx_xpm);
     tmpbutton = func_buttons[6];
-    tmpbutton->setPixmap(ythrootofx);
+    tmpbutton->setPixmap(image1);
 
+    QPixmap image2( ( const char** ) oneoverx_xpm);
     tmpbutton = func_buttons[3];
-    tmpbutton->setPixmap(oneoverx);
+    tmpbutton->setPixmap(image2);
 }
 
 void CalculatorImpl::clear() {

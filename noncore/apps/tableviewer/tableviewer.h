@@ -22,7 +22,7 @@
 
 #include <qmainwindow.h>
 #include "db/common.h"
-#include "fileselector.h"
+#include <qpe/fileselector.h>
 
 /* Forward class declarations */
 class QWidgetStack;
@@ -49,8 +49,11 @@ public slots:
 
     void newDocument();
     void saveDocument();
+    void setDocument(const QString &);
     void openDocument(const DocLnk &);
 
+    void firstItem();
+    void lastItem();
     void nextItem();
     void previousItem();
 
@@ -98,7 +101,7 @@ private:
         ListState,
         FilterState,
         EditState,
-	FileState,
+  FileState,
     };
 
     UserState current_view;

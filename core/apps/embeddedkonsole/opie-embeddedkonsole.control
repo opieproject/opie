@@ -4,6 +4,6 @@ Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION), ptydevs
+Depends: opie-base ($QPE_VERSION)
 Description: KDE's konsole (shell terminal)
  Ported to the Opie environment.

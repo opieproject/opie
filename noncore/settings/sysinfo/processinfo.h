@@ -23,6 +23,8 @@
 #include <qwidget.h>
 #include <qlistview.h>
 
+#include "processdetail.h"
+
 class ProcessInfo : public QWidget
 {
     Q_OBJECT
@@ -32,10 +34,11 @@ public:
 
 private slots:
     void updateData();
-    void viewProcess(QListViewItem *);
+    void viewProcess( QListViewItem * );
 
 private:
     QListView* ProcessView;
+    ProcessDetail *ProcessDtl;
 };
 
 #endif
