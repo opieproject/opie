@@ -44,9 +44,9 @@ MediaWidget::~MediaWidget()
 }
 
 void MediaWidget::setupButtons( const SkinButtonInfo *skinInfo, uint buttonCount,
-                                const Skin &skin, const QSize &buttonAreaSize )
+                                const Skin &skin )
 {
-    buttonMask = skin.buttonMask( skinInfo, buttonCount, buttonAreaSize );
+    buttonMask = skin.buttonMask( skinInfo, buttonCount );
 
     buttons.clear();
     buttons.reserve( buttonCount );
@@ -85,7 +85,7 @@ void MediaWidget::loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, co
     buttonUpImage = skin.buttonUpImage();
     buttonDownImage = skin.buttonDownImage();
 
-    setupButtons( skinInfo, buttonCount, skin, buttonUpImage.size() );
+    setupButtons( skinInfo, buttonCount, skin );
 }
 
 void MediaWidget::closeEvent( QCloseEvent * )

@@ -12,13 +12,13 @@ class Skin
 public:
     Skin( const QString &name, const QString &fileNameInfix );
 
-    void preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount, const QSize &buttonAreaSize );
+    void preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount );
 
     QImage backgroundImage() const;
     QImage buttonUpImage() const;
     QImage buttonDownImage() const;
 
-    QImage buttonMask( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount, const QSize &buttonAreaSize ) const;
+    QImage buttonMask( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount ) const;
 
     QImage buttonMaskImage( const QString &fileName ) const;
 

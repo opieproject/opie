@@ -9,12 +9,12 @@ Skin::Skin( const QString &name, const QString &fileNameInfix )
     m_skinPath = "opieplayer2/skins/" + name;
 }
 
-void Skin::preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount, const QSize &buttonAreaSize )
+void Skin::preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount )
 {
     backgroundImage();
     buttonUpImage();
     buttonDownImage();
-    ( void )buttonMask( skinButtonInfo, buttonCount, buttonAreaSize );
+    ( void )buttonMask( skinButtonInfo, buttonCount );
 }
 
 QImage Skin::backgroundImage() const
@@ -38,13 +38,12 @@ QImage Skin::buttonDownImage() const
     return m_buttonDownImage;
 }
 
-QImage Skin::buttonMask( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount, const QSize &buttonAreaSize ) const
+QImage Skin::buttonMask( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount ) const
 {
-    if ( buttonAreaSize != m_buttonMask.size() )
-        m_buttonMask = QImage();
-
     if ( !m_buttonMask.isNull() )
         return m_buttonMask;
+
+    QSize buttonAreaSize = buttonUpImage().size();
 
     m_buttonMask = QImage( buttonAreaSize, 8, 255 );
     m_buttonMask.fill( 0 );

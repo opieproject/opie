@@ -102,7 +102,7 @@ signals:
 
 protected:
     void setupButtons( const SkinButtonInfo *skinInfo, uint buttonCount,
-                       const Skin &skin, const QSize &buttonAreaSize );
+                       const Skin &skin );
     Button setupButton( const SkinButtonInfo &buttonInfo, const Skin &skin );
 
     void loadDefaultSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const QString &fileNameInfix = QString::null );
