@@ -2,9 +2,10 @@ The wordlists here are:
 
 words     = /usr/dict/words on a Linux machine
 words.de  = igerman98-20000206 (German ispell), excluding zusammen.txt
+words.es  = Spanish dictionary words
+words.fr  = xscrabble french dictionary
 words.no  = ispell-norsk-1.1a (Norwegian ispell)
 words.pt  = iportuguese (Portuguese ispell)
-words.es  = Spanish dictionary words
 
 The "dawg" form of each is automatically generated from the "words" form.
 Note that this takes a LOT of memory. Don't try it on an iPAQ, etc.
