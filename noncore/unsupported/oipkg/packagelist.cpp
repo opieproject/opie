@@ -205,11 +205,12 @@ void PackageList::update()
   pvDebug( 3, "finished parsing");
 }
 
-
-
-/** No descriptions */
 void PackageList::setSettings( PackageManagerSettings *s )
 {
   settings = s;
 }
 
+Package* PackageList::getByName( QString n )
+{
+	origPackageList[n];
+}

@@ -28,7 +28,7 @@ protected:
 
 protected slots:
   void runIpkg();
-  void newList();
+  void getList();
   void updateList();
   void filterList();
   void displayList();

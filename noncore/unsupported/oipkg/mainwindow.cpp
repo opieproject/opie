@@ -51,7 +51,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 
   ipkg = new PmIpkg( settings, this );
   packageList.setSettings( settings );
-  newList();	
+  getList();	
   setSections();
   setSubSections();
   displayList();
@@ -65,6 +65,13 @@ void MainWindow::makeMenu()
   QPopupMenu *srvMenu = new QPopupMenu( menuBar );
   QPopupMenu *cfgMenu = new QPopupMenu( menuBar );
   //    QPopupMenu *sectMenu = new QPopupMenu( menuBar );
+
+//#define TOOLBAR
+#ifdef TOOLBAR
+	QPEToolBar *secBar = new QPEToolBar( this );
+  QComboBox *sections = new QComboBox( false, this );
+ 	secBar->addTo( sections );
+#endif
 
   contextMenu = new QPopupMenu( this );
 
@@ -134,19 +141,20 @@ MainWindow::~MainWindow()
 void MainWindow::runIpkg()
 {
   ipkg->commit( packageList );
-  ipkg->runIpkg("update");
-  packageList.update();
+  updateList();
 }
 
 void MainWindow::updateList()
 {
-  ipkg->runIpkg("update");
-  packageList.update();
+ // todo: packageList.clear();
+  ipkg->update();
+  getList();
 }
 
-void MainWindow::newList()
+void MainWindow::getList()
 {
   packageList.update();
+  displayList();
 }
 
 void MainWindow::filterList()
@@ -217,17 +225,17 @@ void MainWindow::setSubSections()
 void MainWindow::showSettings()
 {
   if ( settings->showDialog( 0 ) )
-    newList();
+    getList();
 }
 void MainWindow::showSettingsSrv()
 {
   if ( settings->showDialog( 1 ) )
-    newList();
+    getList();
 }
 void MainWindow::showSettingsDst()
 {
   if ( settings->showDialog( 2 ) )
-    newList();
+    getList();
 }
 
 

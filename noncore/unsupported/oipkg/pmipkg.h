@@ -10,11 +10,13 @@
 #include "packagelist.h"
 #include "debug.h"
 
+//#define DIA
 
 #include <qpe/qcopenvelope_qws.h>
 
-class PmIpkg : public RunWindow
-//class PmIpkg : public QObject
+
+//class PmIpkg : public RunWindow
+class PmIpkg : public QObject
 {
   Q_OBJECT
 public:
@@ -22,21 +24,23 @@ public:
   //	PmIpkg( QObject*, PackageManagerSettings* );
   ~PmIpkg();
 
+  void commit( PackageList );
+  void update();
   PackageList* getPackageList();
 
 private:
   PackageManagerSettings* settings;
+  RunWindow *runwindow;
   QCopChannel *linkDest;
+
+  void makeLinks(QString);
   void processLinkDir( QString, QString );
 
-
-public:
-  void makeLinks(QString);
   int runIpkg(const QString& args);
-  void commit( PackageList );
+  void out( QString );
 
 public slots:
-  void linkDestination( QString, QString );
+  void linkDestination( const QString, const QByteArray );
 };
 
 #endif

@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>357</width>
+            <width>353</width>
             <height>454</height>
         </rect>
     </property>
@@ -298,7 +298,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>enabled</name>
-                                    <bool>true</bool>
+                                    <bool>false</bool>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -317,7 +317,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>enabled</name>
-                                    <bool>true</bool>
+                                    <bool>false</bool>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -332,7 +332,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>enabled</name>
-                                    <bool>true</bool>
+                                    <bool>false</bool>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>

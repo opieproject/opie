@@ -26,6 +26,8 @@ public:
   QStringList getSubSections();
   void setSettings( PackageManagerSettings* );
   void filterPackages();
+  /** No descriptions */
+  Package* getByName( QString );
 
 public slots:
   void setSection(QString);

@@ -1,8 +1,10 @@
 * search
-* parse "to install" and "to remove" from status
 * Settings Class
+* make oipkg determine dest of "to remove" apps
+* tr() ;)
 * Dialog to display ipkg output live
+* parse "to install" and "to remove" from status
 * install local file
-* make oipkg determine dest of to remove apps
+* install to dest with click on packet
 * error handling
 * manage links

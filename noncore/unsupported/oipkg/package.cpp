@@ -156,7 +156,7 @@ bool Package::toInstall()
 
 void Package::toggleProcess()
 {
-  _toProcess = !(_toProcess);
+  _toProcess = ! _toProcess;
 }
 
 

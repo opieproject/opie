@@ -7,8 +7,8 @@ int debugLevel;
 
 int main( int argc, char ** argv )
 {
-  debugLevel = 1;
-  if (argc > 2)
+  debugLevel = 2;
+  if (argc > 0)
     {
       debugLevel = QString ( argv[1] ).toInt();
     }
