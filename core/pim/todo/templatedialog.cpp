@@ -51,14 +51,10 @@ QLineEdit* TemplateDialog::edit() {
     return m_lne;
 }
 void TemplateDialog::slotAdd() {
-    Opie::Core::owarn << "Not Implemented here" << oendl;
 }
 void TemplateDialog::slotRemove() {
-    Opie::Core::owarn << "Not Implemented here" << oendl;
 }
 void TemplateDialog::slotEdit() {
-    Opie::Core::owarn << "Not Implemented here" << oendl;
 }
 void TemplateDialog::slotReturn() {
-    Opie::Core::owarn << "Not Implemented here" << oendl;
 }

@@ -31,8 +31,6 @@ OPimTodo Editor::newTodo( int cur,
         m_accepted = false;
 
     OPimTodo ev = e->todo();
-    Opie::Core::owarn << "Todo uid" << oendl;
-    Opie::Core::owarn << "Todo " << ev.summary() << " " << ev.progress() << " " << ev.isCompleted() << oendl;
     ev.setUid(1);
 
     return ev;

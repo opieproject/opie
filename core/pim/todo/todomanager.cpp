@@ -40,7 +40,7 @@ TodoManager::TodoManager( QObject *obj )
     QTime time;
     time.start();
     int el = time.elapsed();
-    Opie::Core::owarn << "QTimer for loading " << el/1000 << oendl;
+    owarn << "QTimer for loading " << el/1000 << oendl;
 }
 TodoManager::~TodoManager() {
     delete m_db;
@@ -49,7 +49,7 @@ OPimTodo TodoManager::event(int uid ) {
     return m_db->find( uid );
 }
 void TodoManager::updateList() {
-    Opie::Core::owarn << "update lists" << oendl;
+    owarn << "update lists" << oendl;
     m_list = m_db->allRecords();
 }
 OPimTodoAccess::List TodoManager::list() const{

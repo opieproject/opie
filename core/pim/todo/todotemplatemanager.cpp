@@ -36,7 +36,6 @@ void TemplateManager::load() {
     }
 }
 void TemplateManager::save() {
-    Opie::Core::owarn << "Saving!!!!" << oendl;
     Config conf("todolist_templates");
 
     OPimTodoAccessXML *res = new OPimTodoAccessXML( "template",
@@ -50,7 +49,6 @@ void TemplateManager::save() {
     for ( it = m_templates.begin(); it != m_templates.end(); ++it ) {
         OPimTodo ev = it.data();
         conf.setGroup( QString::number( ev.uid() ) );
-        Opie::Core::owarn << "Name " << it.key() << oendl;
         conf.writeEntry("Name", it.key() );
         db.add( ev );
     }
@@ -58,7 +56,6 @@ void TemplateManager::save() {
 }
 void TemplateManager::addEvent( const QString& str,
                                 const OPimTodo& ev) {
-    Opie::Core::owarn << "AddEvent " << str << oendl;
     OPimTodo todo = ev;
     if( ev.uid() == 0 )
 	todo.setUid(1); // generate a new uid

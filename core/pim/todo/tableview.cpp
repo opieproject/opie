@@ -195,7 +195,7 @@ void TableView::showOverDue( bool ) {
 }
 
 void TableView::updateView( ) {
-    Opie::Core::owarn << "update view" << oendl;
+    owarn << "update view" << oendl;
     m_row = false;
     static int id;
     id = startTimer(4000 );
@@ -209,7 +209,7 @@ void TableView::updateView( ) {
     it = sorted().begin();
     end = sorted().end();
 
-    Opie::Core::owarn << "setTodos" << oendl;
+    owarn << "setTodos" << oendl;
     QTime time;
     time.start();
     m_enablePaint = false;
@@ -255,11 +255,11 @@ void TableView::removeEvent( int ) {
     updateView();
 }
 void TableView::setShowCompleted( bool b) {
-    Opie::Core::owarn << "Show Completed " << b << oendl;
+    owarn << "Show Completed " << b << oendl;
     updateView();
 }
 void TableView::setShowDeadline( bool b ) {
-    Opie::Core::owarn << "Show Deadline " << b << oendl;
+    owarn << "Show Deadline " << b << oendl;
     if ( b )
         showColumn( 3 );
     else
@@ -282,7 +282,7 @@ void TableView::setShowDeadline( bool b ) {
     setColumnWidth( 2, col2width );
 }
 void TableView::setShowCategory( const QString& str) {
-    Opie::Core::owarn << "setShowCategory" << oendl;
+    owarn << "setShowCategory" << oendl;
     if ( str != m_oleCat || m_first )
         updateView();
 
@@ -347,7 +347,7 @@ void TableView::slotClicked(int row, int col, int,
 void TableView::slotPressed(int row, int col, int,
                             const QPoint& point) {
 
-    Opie::Core::owarn << "pressed row " << row << "  col " << col << "   x:" << point.x()
+    owarn << "pressed row " << row << "  col " << col << "   x:" << point.x()
                       << "+y:" << point.y() << oendl;
     m_prevP = point;
     /* TextColumn column */
@@ -355,7 +355,7 @@ void TableView::slotPressed(int row, int col, int,
         m_menuTimer->start( 750, TRUE );
 }
 void TableView::slotValueChanged( int, int ) {
-    Opie::Core::owarn << "Value Changed" << oendl;
+    owarn << "Value Changed" << oendl;
 }
 void TableView::slotCurrentChanged(int, int ) {
     m_menuTimer->stop();
@@ -371,7 +371,7 @@ QWidget* TableView::widget() {
  * to a sort() and update()
  */
 void TableView::sortColumn( int col, bool asc, bool ) {
-    Opie::Core::owarn << "bool " << asc << oendl;
+    owarn << "bool " << asc << oendl;
     setSortOrder( col );
     setAscending( asc );
     updateView();
@@ -494,7 +494,7 @@ QWidget* TableView::createEditor(int row, int col, bool )const {
     }
 }
 void TableView::setCellContentFromEditor(int row, int col ) {
-    Opie::Core::owarn << "set cell content from editor" << oendl;
+    owarn << "set cell content from editor" << oendl;
     if ( col == 1 ) {
         QWidget* wid = cellWidget(row, 1 );
         if ( wid->inherits("QComboBox") ) {
@@ -578,7 +578,7 @@ void TableView::contentsMouseReleaseEvent( QMouseEvent* e) {
     int row = rowAt(m_prevP.y());
     int colOld = columnAt(m_prevP.x() );
     int colNew = columnAt(e->x() );
-    Opie::Core::owarn << "colNew: "  << colNew << " colOld: " << colOld << oendl;
+    owarn << "colNew: "  << colNew << " colOld: " << colOld << oendl;
     if ( row == rowAt( e->y() ) && row != -1 &&
          colOld != colNew ) {
         TodoView::complete( sorted()[row] );

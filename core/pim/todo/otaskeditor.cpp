@@ -35,7 +35,6 @@ void OTaskEditor::init( const OPimTodo& to ) {
     load( to );
 }
 OPimTodo OTaskEditor::todo()const{
-    Opie::Core::owarn << "saving!" << oendl;
     OPimTodo to ( m_todo );
     m_overView->save( to );
     m_stat->save( to );

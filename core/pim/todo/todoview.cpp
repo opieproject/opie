@@ -33,7 +33,7 @@ OPimTodoAccess::List TodoView::sorted()const{
 }
 void TodoView::sort() {
     m_sort = todoWindow()->sorted(m_asc,m_sortOrder );
-    Opie::Core::owarn << "m_sort.count() = " << m_sort.count() << oendl;
+    owarn << "m_sort.count() = " << m_sort.count() << oendl;
 }
 void TodoView::sort(int sort) {
     m_sort = todoWindow()->sorted(m_asc, m_sortOrder, sort );
@@ -42,7 +42,7 @@ void TodoView::setSortOrder( int order ) {
     m_sortOrder = order;
 }
 void TodoView::setAscending( bool b ) {
-    Opie::Core::owarn << "setAscending " << b << oendl;
+    owarn << "setAscending " << b << oendl;
     m_asc = b;
 }
 void TodoView::update(int, const SmallTodo&  ) {

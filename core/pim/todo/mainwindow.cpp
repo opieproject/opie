@@ -59,10 +59,10 @@
 #include "todoeditor.h"
 #include "mainwindow.h"
 
-using namespace Opie::Core;
+using Opie::Core::OApplicationFactory;
 OPIE_EXPORT_APP( OApplicationFactory<Todo::MainWindow> )
 
-    using namespace Opie;
+using namespace Opie;
 using namespace Todo;
 
 MainWindow::MainWindow( QWidget* parent,
@@ -296,7 +296,7 @@ QPopupMenu* MainWindow::contextMenu( int , bool recur ) {
     return menu;
 }
 QPopupMenu* MainWindow::options() {
-    Opie::Core::owarn << "Options" << oendl;
+    owarn << "Options" << oendl;
     return m_options;
 }
 QPopupMenu* MainWindow::edit() {
@@ -315,7 +315,7 @@ OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
     if ( m_curCat == QWidget::tr("Unfiled") )
         cat = -1;
 
-    Opie::Core::owarn << " Category " << cat << " " << m_curCat << oendl;
+    owarn << " Category " << cat << " " << m_curCat << oendl;
 
     int filter = 1;
 
@@ -374,7 +374,7 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
     }
     bool quit = false;
     if ( m_todoMgr.saveAll() ){
-        Opie::Core::owarn << "saved" << oendl;
+        owarn << "saved" << oendl;
         quit = true;
     }else {
 	if ( QMessageBox::critical( this, QWidget::tr("Out of space"),
@@ -537,7 +537,7 @@ void MainWindow::setCategory( int c) {
     if ( c <= 0 ) return;
 
 
-    Opie::Core::owarn << "Iterating over cats " << c << oendl;
+    owarn << "Iterating over cats " << c << oendl;
     for ( unsigned int i = 1; i < m_catMenu->count(); i++ )
         m_catMenu->setItemChecked(i, c == (int)i );
 
@@ -600,17 +600,17 @@ void MainWindow::receiveFile( const QString& filename ) {
 
     if (list.count()){
 
-	    QString message = QWidget::tr("<P>%1 new tasks arrived.<p>Would you like to add them to your Todolist?").arg(list.count() );
+        QString message = QWidget::tr("<P>%1 new tasks arrived.<p>Would you like to add them to your Todolist?").arg(list.count() );
 
-	    if ( QMessageBox::information(this, QWidget::tr("New Tasks"),
-					  message, QMessageBox::Ok,
-					  QMessageBox::Cancel ) == QMessageBox::Ok ) {
-		    OPimTodoAccess::List::Iterator it;
-		    for ( it = list.begin(); it != list.end(); ++it )
-			    m_todoMgr.add( (*it) );
+        if ( QMessageBox::information(this, QWidget::tr("New Tasks"),
+                                      message, QMessageBox::Ok,
+                                      QMessageBox::Cancel ) == QMessageBox::Ok ) {
+            OPimTodoAccess::List::Iterator it;
+            for ( it = list.begin(); it != list.end(); ++it )
+                m_todoMgr.add( (*it) );
 
-		    currentView()->updateView();
-	    }
+            currentView()->updateView();
+        }
     }
 }
 
@@ -681,7 +681,9 @@ void MainWindow::slotShowDue(bool ov) {
 }
 void MainWindow::slotShow( int uid ) {
     if ( uid == 0 ) return;
-    Opie::Core::owarn << "slotShow" << oendl;
+
+
+    owarn << "slotShow" << oendl;
     currentShow()->slotShow( event( uid ) );
     m_stack->raiseWidget( currentShow()->widget() );
 }
@@ -740,7 +742,7 @@ void MainWindow::setReadAhead( uint count ) {
         m_todoMgr.todoDB()->setReadAhead( count );
 }
 void MainWindow::slotQuickEntered() {
-    Opie::Core::owarn << "entered" << oendl;
+    owarn << "entered" << oendl;
     OPimTodo todo = quickEditor()->todo();
     if (todo.isEmpty() )
         return;
@@ -787,7 +789,7 @@ void MainWindow::slotComplete( const OPimTodo& todo ) {
         QDate date;
         if ( to2.recurrence().nextOcurrence( to2.dueDate().addDays(1), date ) ) {
             int dayDiff = to.dueDate().daysTo( date );
-            Opie::Core::owarn << "day diff is " << dayDiff << oendl;
+            owarn << "day diff is " << dayDiff << oendl;
             QDate inval;
             /* generate a new uid for the old record */
             to.setUid( 1 );
@@ -950,7 +952,7 @@ namespace {
     void addAlarms( const OPimNotifyManager::Alarms& als, int uid ) {
         OPimNotifyManager::Alarms::ConstIterator it;
         for ( it = als.begin(); it != als.end(); ++it ) {
-            Opie::Core::owarn << "Adding alarm for " << (*it).dateTime().toString() << oendl;
+            owarn << "Adding alarm for " << (*it).dateTime().toString() << oendl;
             AlarmServer::addAlarm( (*it).dateTime(), "QPE/Application/todolist", "alarm(QDateTime,int)", uid );
         }
 
@@ -958,7 +960,7 @@ namespace {
     void removeAlarms( const OPimNotifyManager::Alarms& als, int uid ) {
         OPimNotifyManager::Alarms::ConstIterator it;
         for ( it = als.begin(); it != als.end(); ++it ) {
-            Opie::Core::owarn << "Removinf alarm for " << (*it).dateTime().toString() << oendl;
+            owarn << "Removinf alarm for " << (*it).dateTime().toString() << oendl;
             AlarmServer::deleteAlarm( (*it).dateTime(), "QPE/Application/todolist", "alarm(QDateTime,int)", uid );
         }
     }
