@@ -1,7 +1,7 @@
 /*
  * Communication protocol
  *
- * $Id: wl_proto.cc,v 1.9 2003-02-26 22:28:06 mjm Exp $
+ * $Id: wl_proto.cc,v 1.10 2003-02-27 19:32:08 mjm Exp $
  */
 
 #include "wl_types.hh"
@@ -114,7 +114,7 @@ int get_ok(const char *buffer)
 }
 
 /* put failmessage into buffer */
-int get_fail(char *out, const char *buffer, size_t len)
+int get_fail(char *out, const char *buffer, size_t bufflen)
 {
   char temp[5];
   int error=0;
@@ -129,8 +129,8 @@ int get_fail(char *out, const char *buffer, size_t len)
   error=atoi(temp);
 
   /* get errorstring and fill into buffer */
-  memset(out, 0, len);
-  len += get_field(buffer + len, out, len - 1);
+  memset(out, 0, bufflen);
+  len += get_field(buffer + len, out, bufflen - 1);
 
   return error;
 }
