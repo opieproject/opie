@@ -52,9 +52,8 @@ void ObexImpl::slotMessage( const QCString& msg, const QByteArray&data ) {
     connect( (QObject*)m_sendgui->PushButton2, SIGNAL(clicked()),
              this, SLOT(slotCancelSend()));
     m_obex->send(filename );
-    //  QCopEnvelope e ("QPE/Obex", "done(QString)" ); //but this into a slot
-    //e << filename;
-
+    connect( (QObject*)m_obex, SIGNAL( sent() ), this,
+             SLOT( slotSent() ) );
   }else if(msg == "receive(bool)" ) { // open a GUI
       m_recvgui->showMaximized();
       m_obex->receive();
@@ -72,6 +71,15 @@ void ObexImpl::slotCancelSend() {
     m_sendgui->hide();
 }
 
+void ObexImpl::slotDone(bool) {
+    QCopEnvelope e ("QPE/Obex", "done(QString)" ); //but this into a slot
+    e << "Done!";
+}
+
+void ObexImpl::slotSent() {
+    m_sendgui->lblPath->setText("Done!");
+    m_sendgui->hide();
+}
 
 Q_EXPORT_INTERFACE()
 {

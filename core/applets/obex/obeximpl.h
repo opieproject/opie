@@ -27,10 +27,10 @@ namespace OpieObex {
      void slotCancelSend();
      void slotMessage( const QCString&, const QByteArray& );
    /*   void slotError(int );
-   void slotCurrentTry( unsigned int );
-   void slotDone(bool);
-   void slotReceivedFile(const QString & );
-   void slotSent();*/
+        void slotCurrentTry( unsigned int ); */
+      void slotDone(bool);
+      //void slotReceivedFile(const QString & );
+      void slotSent();
   };
 };
 #endif
