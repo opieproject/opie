@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.37 2002-12-30 14:39:13 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.38 2003-01-26 19:58:41 kergoth Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -1066,6 +1066,11 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
 			setDefaultRotation( r );
 		}
 	}
+	else if ( msg == "setCurrentRotation(int)" ) {
+		int r;
+		stream >> r;
+		setCurrentRotation( r );
+ 	}
 	else if ( msg == "shutdown()" ) {
 		if ( type() == GuiServer )
 			shutdown();

@@ -21,8 +21,10 @@
 #define __QPE_APPLICATION_H__
 
 
+#include <qglobal.h>
 #include <qapplication.h>
 #include <qdialog.h>
+#include <qwsdisplay_qws.h>
 #if defined(_WS_QWS_) && !defined(Q_WS_QWS)
 #define Q_WS_QWS
 #endif
@@ -47,28 +49,29 @@ public:
     void applyStyle();
     static int defaultRotation();
     static void setDefaultRotation(int r);
+    static void setCurrentRotation(int r);
     static void grabKeyboard();
     static void ungrabKeyboard();
 
     enum StylusMode {
-	LeftOnly,
-	RightOnHold
-	// RightOnHoldLeftDelayed, etc.
+        LeftOnly,
+        RightOnHold
+        // RightOnHoldLeftDelayed, etc.
     };
     static void setStylusOperation( QWidget*, StylusMode );
     static StylusMode stylusOperation( QWidget* );
 
     enum InputMethodHint {
-	Normal,
-	AlwaysOff,
-	AlwaysOn
+        Normal,
+        AlwaysOff,
+        AlwaysOn
     };
 
     enum screenSaverHint {
-	Disable = 0,
-	DisableLightOff = 1,
-	DisableSuspend = 2,
-	Enable = 100
+        Disable = 0,
+        DisableLightOff = 1,
+        DisableSuspend = 2,
+        Enable = 100
     };
 
     static void setInputMethodHint( QWidget *, InputMethodHint );
@@ -115,7 +118,7 @@ protected:
     bool raiseAppropriateWindow();
     virtual void tryQuit();
 
-	virtual void polish ( QWidget * ); // this is actually implemented in qt_override.cpp (!)
+    virtual void polish ( QWidget * ); // this is actually implemented in qt_override.cpp (!)
 
 private:
     void mapToDefaultAction( QWSKeyEvent *ke, int defKey );
@@ -138,13 +141,13 @@ inline void QPEApplication::showDialog( QDialog* d, bool nomax )
     int w = QMAX(sh.width(),d->width());
     int h = QMAX(sh.height(),d->height());
     if ( !nomax
-	&& ( w > qApp->desktop()->width()*3/4
-	    || h > qApp->desktop()->height()*3/4 ) )
+            && ( w > qApp->desktop()->width()*3/4
+                 || h > qApp->desktop()->height()*3/4 ) )
     {
-	d->showMaximized();
+        d->showMaximized();
     } else {
-	d->resize(w,h);
-	d->show();
+        d->resize(w,h);
+        d->show();
     }
 }
 
@@ -154,6 +157,32 @@ inline int QPEApplication::execDialog( QDialog* d, bool nomax )
     return d->exec();
 }
 
+enum Transformation { None, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws.cpp */
+
+inline void QPEApplication::setCurrentRotation( int r )
+{
+    Transformation e;
+
+    switch (r) {
+        case 0:
+            e = None;
+            break;
+        case 90:
+            e = Rot90;
+            break;
+        case 180:
+            e = Rot180;
+            break;
+        case 270:
+            e = Rot270;
+            break;
+	default:
+	    return;
+    }
+
+    qDebug("calling qApp->desktop()->qwsDisplay()->setTransformation( %d )\n", e);
+    qApp->desktop()->qwsDisplay()->setTransformation( e );
+}
+
 
 #endif
-
