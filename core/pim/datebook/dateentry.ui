@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: dateentry.ui,v 1.6 2002-05-07 15:27:34 hakan Exp $
+** $Id: dateentry.ui,v 1.7 2003-04-13 23:14:23 umopapisdn Exp $
 **
 *********************************************************************</comment>
 <widget>
@@ -288,7 +288,7 @@
         </spacer>
 
 	<widget row="5"  column="1" colspan="3">
-	    <class>TimePicker</class>
+	    <class>OTimePicker</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>timePickerStart</cstring>
@@ -540,8 +540,8 @@
         <pixmap>image1</pixmap>
     </customwidget>
     <customwidget>
-        <class>TimePicker</class>
-        <header location="local">timepicker.h</header>
+        <class>OTimePicker</class>
+        <header location="local">opie/otimepicker.h</header>
         <sizehint>
             <width>-1</width>
             <height>-1</height>

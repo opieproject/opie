@@ -40,7 +40,7 @@
 #include <qspinbox.h>
 #include <qtoolbutton.h>
 
-#include "timepicker.h"
+#include <opie/otimepicker.h>
 #include "onoteedit.h"
 
 #include <stdlib.h>
@@ -82,16 +82,16 @@ bool DateEntry::eventFilter(QObject *obj, QEvent *ev )
       m_showStart = false;
     }
   } else if( ev->type() == QEvent::FocusOut ){
-    if( obj == comboEnd ){
-      QString s;
-      s.sprintf("%.2d:%.2d",endTime.hour(), endTime.minute());
-      comboEnd->setText(s);
-    }
-    else if( obj == comboStart ){
-      QString s;
-      s.sprintf("%.2d:%.2d",startTime.hour(), startTime.minute());
-      comboStart->setText(s);
-    }
+//    if( obj == comboEnd ){
+//      QString s;
+//      s.sprintf("%.2d:%.2d",endTime.hour(), endTime.minute());
+//      comboEnd->setText(s);
+//    }
+//    else if( obj == comboStart ){
+//      QString s;
+//      s.sprintf("%.2d:%.2d",startTime.hour(), startTime.minute());
+//      comboStart->setText(s);
+//    }
   }
 
   return false;

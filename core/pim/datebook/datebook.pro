@@ -10,7 +10,6 @@ HEADERS	= datebookday.h \
 	  datebookweeklst.h \
 	  datebookweekheaderimpl.h \
 	  repeatentry.h \
-	  timepicker.h \
 	  noteentryimpl.h \
 	  onoteedit.h
 SOURCES	= main.cpp \
@@ -23,7 +22,6 @@ SOURCES	= main.cpp \
 	  datebookweeklst.cpp \
 	  datebookweekheaderimpl.cpp \
 	  repeatentry.cpp \
-	  timepicker.cpp \
 	  noteentryimpl.cpp \
 	  onoteedit.cpp
 INTERFACES	= dateentry.ui \
