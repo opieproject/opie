@@ -221,7 +221,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
     connect( a, SIGNAL( activated() ), this, SLOT( editCopy() ) );
     a->addTo( file );
 
-    a = m_scrollButton = new QAction( tr( "Scroll" ), Resource::loadPixmap( "panel-arrow-down" ), QString::null, 0, this, 0, true );
+    a = m_scrollButton = new QAction( tr( "Scroll" ), Resource::loadPixmap( "opie-reader/panel-arrow-down" ), QString::null, 0, this, 0, true );
 //    connect( a, SIGNAL( activated() ), this, SLOT( autoScroll() ) );
     a->setOn(false);
     connect( a, SIGNAL( toggled(bool) ), this, SLOT( autoScroll(bool) ) );
