@@ -10,7 +10,7 @@
 #include "inputDialog.h"
 #include "output.h"
 
-#include <qmenubar.h>
+/* OPIE */
 #include <qpe/qpetoolbar.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
@@ -19,20 +19,19 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/storage.h>
 
+/* QT */
+#include <qmenubar.h>
 #include <qmultilineedit.h>
 #include <qstring.h>
 #include <qlist.h>
 #include <qstringlist.h>
 #include <qdir.h>
 #include <qfile.h>
-
 #include <qtstream.h>
-
 #include <qcombobox.h>
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
 #include <qregexp.h>
-
 #include <qlabel.h>
 #include <qlineedit.h>
 #include <qpushbutton.h>
@@ -41,6 +40,7 @@
 #include <qlayout.h>
 #include <qvariant.h>
 
+/* STD */
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -52,25 +52,25 @@
 #define BLANK ' '
 #define DELIMITER '#'
 
-/* 
+/*
    Blah blah blah blah */
 FormatterApp::FormatterApp( QWidget* parent,  const char* name, WFlags fl, bool modal )
         : QMainWindow( parent, name, fl )
-//    : QDialog( parent, name, modal, fl )
+        //    : QDialog( parent, name, modal, fl )
 {
     if ( !name )
         setName( "FormatterApp" );
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     setCaption( tr( "Formatter" ) );
-    FormatterAppLayout = new QGridLayout( this ); 
+    FormatterAppLayout = new QGridLayout( this );
     FormatterAppLayout->setSpacing( 2);
     FormatterAppLayout->setMargin( 2 );
 
     TabWidget = new QTabWidget( this, "TabWidget" );
 
     tab = new QWidget( TabWidget, "tab" );
-    tabLayout = new QGridLayout( tab ); 
+    tabLayout = new QGridLayout( tab );
     tabLayout->setSpacing( 3);
     tabLayout->setMargin( 2);
 
@@ -99,15 +99,15 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, WFlags fl, bool 
     formatPushButton = new QPushButton( tab, "formatPushButton" );
     formatPushButton->setText( tr( "Format" ) );
     formatPushButton->setMaximumWidth(170);
-    
+
     tabLayout->addMultiCellWidget( formatPushButton, 6, 6, 0, 1);
     QSpacerItem* spacer_2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum );
     tabLayout->addItem( spacer_2, 5, 0 );
-    
+
     TabWidget->insertTab( tab, tr( "Main" ) );
 
     tab_2 = new QWidget( TabWidget, "tab_2" );
-    tabLayout_2 = new QGridLayout( tab_2 ); 
+    tabLayout_2 = new QGridLayout( tab_2 );
     tabLayout_2->setSpacing(3);
     tabLayout_2->setMargin(2);
 
@@ -130,7 +130,7 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, WFlags fl, bool 
     editPushButton = new QPushButton( tab_2, "editPushButton" );
     editPushButton->setText( tr( "Edit fstab" ) );
     editPushButton->setMaximumWidth(100);
-    
+
     tabLayout_2->addMultiCellWidget( editPushButton, 7, 7, 0, 0 );
 
     fsckButton = new QPushButton( tab_2, "fsckPushButton" );
@@ -164,15 +164,15 @@ FormatterApp::FormatterApp( QWidget* parent,  const char* name, WFlags fl, bool 
     connect( storageComboBox,SIGNAL(activated(int)),this,SLOT( storageComboSelected(int ) ));
     connect( deviceComboBox,SIGNAL(activated(int)),this,SLOT( deviceComboSelected(int ) ));
 
-    
+
     fillCombos();
 }
 
-FormatterApp::~FormatterApp() {
+FormatterApp::~FormatterApp()
+{}
 
-}
-
-void FormatterApp::doFormat() {
+void FormatterApp::doFormat()
+{
     int err=0;
     Output *outDlg;
     QString umountS, remountS;
@@ -190,165 +190,188 @@ void FormatterApp::doFormat() {
     remountS = "mount -v /floppy 2>&1";
 #endif
 
-    if( currentText.find("CF",0,TRUE) != -1) {
+    if( currentText.find("CF",0,TRUE) != -1)
+    {
         umountS = "umount ";
         remountS = "mount ";
 
-//         umountS = "/sbin/cardctl eject";
-//         remountS = "/sbin/cardctl insert";
+        //         umountS = "/sbin/cardctl eject";
+        //         remountS = "/sbin/cardctl insert";
     }
-    if( currentText.find("SD",0,TRUE) != -1) {
+    if( currentText.find("SD",0,TRUE) != -1)
+    {
         umountS = "umount ";
         remountS = "mount ";
-//         umountS = "/etc/sdcontrol compeject";
-//         remountS = "/etc/sdcontrol insert";
+        //         umountS = "/etc/sdcontrol compeject";
+        //         remountS = "/etc/sdcontrol insert";
     }
 
-    switch ( QMessageBox::warning(this,tr("Format?") 
-                , tr("Really format\n") +diskName+" "+ currentText +
+    switch ( QMessageBox::warning(this,tr("Format?")
+                                  , tr("Really format\n") +diskName+" "+ currentText +
                                   tr("\nwith %1 filesystem?\nYou will loose all data!!").arg( fs )
-                  ,tr("Yes")
-                  ,tr("No")
-                  ,0
-                  ,1
-                  ,1) ) {
-      case 0: {
-          if(fs == "vfat")
-              cmd = "mkdosfs -v " + diskDevice+" 2>&1";
-          else if(fs == "ext2")
-              cmd = "mke2fs -v " + diskDevice+" 2>&1";
-          else {
-              QMessageBox::warning(this, tr("Formatter"),tr("Could not format.\nUnknown type"), tr("Ok"));
-              break;
-          }
-//          cmd = "ls -l";
-          outDlg = new Output(this, tr("Formatter Output"),FALSE);
-          outDlg->showMaximized();
-          outDlg->show();
-          qApp->processEvents();
-          FILE *fp;
-          char line[130];
+                                  ,tr("Yes")
+                                  ,tr("No")
+                                  ,0
+                                  ,1
+                                  ,1) )
+    {
+    case 0:
+        {
+            if(fs == "vfat")
+                cmd = "mkdosfs -v " + diskDevice+" 2>&1";
+            else if(fs == "ext2")
+                cmd = "mke2fs -v " + diskDevice+" 2>&1";
+            else
+            {
+                QMessageBox::warning(this, tr("Formatter"),tr("Could not format.\nUnknown type"), tr("Ok"));
+                break;
+            }
+            //          cmd = "ls -l";
+            outDlg = new Output(this, tr("Formatter Output"),FALSE);
+            QPEApplication::showDialog( outDlg);
+            qApp->processEvents();
+            FILE *fp;
+            char line[130];
 
 
-          outDlg->OutputEdit->append( tr("Trying to umount %1.").arg( currentText) );
-          outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+            outDlg->OutputEdit->append( tr("Trying to umount %1.").arg( currentText) );
+            outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
-          sleep(1);
-          qDebug("Command is "+umountS);
-          fp = popen(  (const char *) umountS, "r");
-          //          qDebug("%d", fp);
-          if ( !fp ) {
-              qDebug("Could not execute '" + umountS + "'! err=%d\n" +(QString)strerror(errno), err); 
-              QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
-              pclose(fp);             
-              return;
-          } else {
-//               outDlg->OutputEdit->append( currentText + tr("\nhas been successfully umounted."));
-//             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-              while ( fgets( line, sizeof line, fp)) {
-                  if( ((QString)line).find("busy",0,TRUE) != -1) {
-                      qDebug("Could not find '" + umountS); 
-                      QMessageBox::warning( this, tr("Formatter"), tr("Could not umount.\nDevice is busy!"), tr("&OK") );
-                      pclose(fp);             
-                      return;
-                  } else {
-                      QString lineStr = line;
-                      lineStr=lineStr.left(lineStr.length()-1);
-                      outDlg->OutputEdit->append(lineStr);
-                      outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-                  }
-              }
-          }
-          pclose(fp);             
+            sleep(1);
+            qDebug("Command is "+umountS);
+            fp = popen(  (const char *) umountS, "r");
+            //          qDebug("%d", fp);
+            if ( !fp )
+            {
+                qDebug("Could not execute '" + umountS + "'! err=%d\n" +(QString)strerror(errno), err);
+                QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
+                pclose(fp);
+                return;
+            }
+            else
+            {
+                //               outDlg->OutputEdit->append( currentText + tr("\nhas been successfully umounted."));
+                //             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+                while ( fgets( line, sizeof line, fp))
+                {
+                    if( ((QString)line).find("busy",0,TRUE) != -1)
+                    {
+                        qDebug("Could not find '" + umountS);
+                        QMessageBox::warning( this, tr("Formatter"), tr("Could not umount.\nDevice is busy!"), tr("&OK") );
+                        pclose(fp);
+                        return;
+                    }
+                    else
+                    {
+                        QString lineStr = line;
+                        lineStr=lineStr.left(lineStr.length()-1);
+                        outDlg->OutputEdit->append(lineStr);
+                        outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+                    }
+                }
+            }
+            pclose(fp);
 
-          qDebug("Command would be: "+cmd);
-          outDlg->OutputEdit->append( tr("Trying to format.") );
-          outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+            qDebug("Command would be: "+cmd);
+            outDlg->OutputEdit->append( tr("Trying to format.") );
+            outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
-          fp = popen(  (const char *) cmd, "r"); 
-          while ( fgets( line, sizeof line, fp)) {
-              if( ((QString)line).find("No such device",0,TRUE) != -1) {
-                  qDebug("No such device '" + umountS); 
-                  QMessageBox::warning( this, tr("Formatter"), tr("No such device!"), tr("&OK") );
-                  pclose(fp);             
-//               outDlg->OutputEdit->append("No such device");
-//             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-                  return;
-              } else {
-                  QString lineStr = line;
-                  lineStr=lineStr.left(lineStr.length()-1);
-                  outDlg->OutputEdit->append(lineStr);
-                  outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-              }
-          }
-          outDlg->OutputEdit->append( currentText + tr("\nhas been successfully formatted."));
-          outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-          pclose(fp);             
+            fp = popen(  (const char *) cmd, "r");
+            while ( fgets( line, sizeof line, fp))
+            {
+                if( ((QString)line).find("No such device",0,TRUE) != -1)
+                {
+                    qDebug("No such device '" + umountS);
+                    QMessageBox::warning( this, tr("Formatter"), tr("No such device!"), tr("&OK") );
+                    pclose(fp);
+                    //               outDlg->OutputEdit->append("No such device");
+                    //             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+                    return;
+                }
+                else
+                {
+                    QString lineStr = line;
+                    lineStr=lineStr.left(lineStr.length()-1);
+                    outDlg->OutputEdit->append(lineStr);
+                    outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+                }
+            }
+            outDlg->OutputEdit->append( currentText + tr("\nhas been successfully formatted."));
+            outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+            pclose(fp);
 
-          outDlg->OutputEdit->append( tr("Trying to mount %1.").arg( currentText) );
-          outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-          fp = popen(  (const char *) remountS, "r"); 
-          if ( !fp) {
-              qDebug("Could not execute '" + remountS + "'! err=%d\n" +(QString)strerror(errno), err); 
-              QMessageBox::warning( this, tr("Formatter"), tr("Card mount failed!"), tr("&OK") );
+            outDlg->OutputEdit->append( tr("Trying to mount %1.").arg( currentText) );
+            outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+            fp = popen(  (const char *) remountS, "r");
+            if ( !fp)
+            {
+                qDebug("Could not execute '" + remountS + "'! err=%d\n" +(QString)strerror(errno), err);
+                QMessageBox::warning( this, tr("Formatter"), tr("Card mount failed!"), tr("&OK") );
 
-          } else {
-              outDlg->OutputEdit->append(tr("%1\nhas been successfully mounted.").arg( currentText ));
-              while ( fgets( line, sizeof line, fp)) {
-                  QString lineStr = line;
-                  lineStr=lineStr.left(lineStr.length()-1);
-                  outDlg->OutputEdit->append(lineStr);
-                  outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-              }
-          }
-          pclose(fp);
-          sleep(1);
-          
-          outDlg->OutputEdit->append(tr("You can now close the output window."));
-          outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-//          outDlg->close();
-//            if(outDlg)
-//            delete outDlg;
-      }
-          break;
+            }
+            else
+            {
+                outDlg->OutputEdit->append(tr("%1\nhas been successfully mounted.").arg( currentText ));
+                while ( fgets( line, sizeof line, fp))
+                {
+                    QString lineStr = line;
+                    lineStr=lineStr.left(lineStr.length()-1);
+                    outDlg->OutputEdit->append(lineStr);
+                    outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+                }
+            }
+            pclose(fp);
+            sleep(1);
+
+            outDlg->OutputEdit->append(tr("You can now close the output window."));
+            outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+            //          outDlg->close();
+            //            if(outDlg)
+            //            delete outDlg;
+        }
+        break;
     };
 }
 
-bool FormatterApp::doFdisk() {
+bool FormatterApp::doFdisk()
+{
     return FALSE;
-    
+
 }
 
-void FormatterApp::fillCombos() {
+void FormatterApp::fillCombos()
+{
 
     StorageInfo storageInfo;
     const QList<FileSystem> &fs = storageInfo.fileSystems();
     QListIterator<FileSystem> it ( fs );
     QString storage;
-    for( ; it.current(); ++it ){
+    for( ; it.current(); ++it )
+    {
         const QString name = (*it)->name();
         const QString path = (*it)->path();
         const QString disk = (*it)->disk();
         const QString options = (*it)->options();
-        if( name.find( tr("Internal"),0,TRUE) == -1) {
+        if( name.find( tr("Internal"),0,TRUE) == -1)
+        {
             storageComboBox->insertItem(name +" -> "+disk);
         }
-//        deviceComboBox->insertItem(disk);
+        //        deviceComboBox->insertItem(disk);
     }
     parsetab("/etc/mtab");
-//    parsetab("/etc/fstab");
+    //    parsetab("/etc/fstab");
     fileSystemsCombo->insertStringList( fsList,-1);
     deviceComboBox->insertStringList( deviceList,-1);
     storageComboSelected(0);
-    deviceComboSelected(0); 
+    deviceComboSelected(0);
 }
 
 
-void FormatterApp::fsComboSelected(int ) {
+void FormatterApp::fsComboSelected(int )
+{}
 
-}
-    
-void FormatterApp::storageComboSelected(int index ) {
+void FormatterApp::storageComboSelected(int index )
+{
 
     QString currentText = storageComboBox->text(index);
     QString nameS = currentText.left( currentText.find("->",0,TRUE));
@@ -357,15 +380,17 @@ void FormatterApp::storageComboSelected(int index ) {
     currentText = currentText.right( currentText.length() - currentText.find(" -> ",0,TRUE) - 4);
 
     QString fsType = getFileSystemType((const QString &) currentText);
-//    qDebug(fsType);
-    for(int i = 0; i < fileSystemsCombo->count(); i++) {
+    //    qDebug(fsType);
+    for(int i = 0; i < fileSystemsCombo->count(); i++)
+    {
         if( fsType == fileSystemsCombo->text(i))
             fileSystemsCombo->setCurrentItem(i);
     }
-//    deviceComboSelected(index);     
+    //    deviceComboSelected(index);
 }
 
-void FormatterApp::deviceComboSelected(int index) {
+void FormatterApp::deviceComboSelected(int index)
+{
 
     StorageInfo storageInfo;
     QString totalS, usedS, avS, diskS, nameS, fsType, selectedText;
@@ -375,12 +400,14 @@ void FormatterApp::deviceComboSelected(int index) {
     const QList<FileSystem> &fs = storageInfo.fileSystems();
     QListIterator<FileSystem> it ( fs );
     QString storage;
-    for( ; it.current(); ++it ){
+    for( ; it.current(); ++it )
+    {
         const QString name = (*it)->name();
         const QString path = (*it)->path();
         const QString disk = (*it)->disk();
-//              const QString options = (*it)->options();
-        if( selectedText == disk) {
+        //              const QString options = (*it)->options();
+        if( selectedText == disk)
+        {
             diskS = disk; nameS= name;
             mountPointLineEdit->setText(path);
             long mult = (*it)->blockSize() / 1024;
@@ -400,37 +427,41 @@ void FormatterApp::deviceComboSelected(int index) {
     }
     fsType = getFileSystemType((const QString &)selectedText);
 
-    TextLabel5->setText(tr("Type: %1\nFormatted with %2\n%3, %4, %5").arg( nameS).arg( fsType).arg(totalS).arg( usedS).arg( avS )); 
+    TextLabel5->setText(tr("Type: %1\nFormatted with %2\n%3, %4, %5").arg( nameS).arg( fsType).arg(totalS).arg( usedS).arg( avS ));
     TextLabel5->setTextFormat( Qt::RichText );
-//     storageComboSelected(0);
+    //     storageComboSelected(0);
 }
 
-void FormatterApp::cleanUp() {
+void FormatterApp::cleanUp()
+{}
 
-}
 
-    
-void FormatterApp::editFstab() {
+void FormatterApp::editFstab()
+{
     QCopEnvelope e("QPE/Application/textedit","setDocument(QString)");
     e << (const QString &)"/etc/fstab";
 }
 
-void FormatterApp::parsetab(const QString &fileName) {
+void FormatterApp::parsetab(const QString &fileName)
+{
 
     fileSystemTypeList.clear();
     fsList.clear();
     struct mntent *me;
-//     if(fileName == "/etc/mtab") {
+    //     if(fileName == "/etc/mtab") {
     FILE *mntfp = setmntent( fileName.latin1(), "r" );
-    if ( mntfp ) {
-        while ( (me = getmntent( mntfp )) != 0 ) {
+    if ( mntfp )
+    {
+        while ( (me = getmntent( mntfp )) != 0 )
+        {
             QString deviceName = me->mnt_fsname;
             QString filesystemType = me->mnt_type;
-            if(deviceName != "none") {
+            if(deviceName != "none")
+            {
                 if( fsList.contains(filesystemType) == 0
-                    & filesystemType.find("proc",0,TRUE) == -1
-                    & filesystemType.find("cramfs",0,TRUE) == -1
-                    & filesystemType.find("auto",0,TRUE) == -1)
+                        & filesystemType.find("proc",0,TRUE) == -1
+                        & filesystemType.find("cramfs",0,TRUE) == -1
+                        & filesystemType.find("auto",0,TRUE) == -1)
                     fsList << filesystemType;
                 deviceList << deviceName;
                 qDebug(deviceName+"::"+filesystemType);
@@ -439,62 +470,66 @@ void FormatterApp::parsetab(const QString &fileName) {
         }
     }
     endmntent( mntfp );
-//  } else if(fileName == "/etc/fstab") {
-//    QFile f("/etc/fstab");
-//   if ( f.open(IO_ReadOnly) ) {
-//     QTextStream t (&f);
-//     QString s;
-//     while (! t.eof()) {
-//         s=t.readLine();
-//         s=s.simplifyWhiteSpace();
-//         if ( (!s.isEmpty() ) && (s.find(" ")!=0) ) {
-// // = me->mnt_fsname;
-//             QString filesystemType = me->mnt_type;
-//             QString deviceName = s.left(0,s.find(BLANK) ); 
-//             s=s.remove(0,s.find(BLANK)+1 ); // devicename
-          
-//             s=s.remove(0,s.find(BLANK)+1 ); // mountpoint
-//             QStringt mountPoint= s.left(0,s.find(BLANK) ); 
-//             s=s.remove(0,s.find(BLANK)+1 ); // fs
-//             QString filesystemType= s.left(0,s.find(BLANK) );           
-//         }
-//     }
-//  }
-//  f.close();
-// }
+    //  } else if(fileName == "/etc/fstab") {
+    //    QFile f("/etc/fstab");
+    //   if ( f.open(IO_ReadOnly) ) {
+    //     QTextStream t (&f);
+    //     QString s;
+    //     while (! t.eof()) {
+    //         s=t.readLine();
+    //         s=s.simplifyWhiteSpace();
+    //         if ( (!s.isEmpty() ) && (s.find(" ")!=0) ) {
+    // // = me->mnt_fsname;
+    //             QString filesystemType = me->mnt_type;
+    //             QString deviceName = s.left(0,s.find(BLANK) );
+    //             s=s.remove(0,s.find(BLANK)+1 ); // devicename
+
+    //             s=s.remove(0,s.find(BLANK)+1 ); // mountpoint
+    //             QStringt mountPoint= s.left(0,s.find(BLANK) );
+    //             s=s.remove(0,s.find(BLANK)+1 ); // fs
+    //             QString filesystemType= s.left(0,s.find(BLANK) );
+    //         }
+    //     }
+    //  }
+    //  f.close();
+    // }
 }
 
-QString FormatterApp::getFileSystemType(const QString &currentText) {
+QString FormatterApp::getFileSystemType(const QString &currentText)
+{
 
     parsetab("/etc/mtab"); //why did TT forget filesystem type?
 
-    for ( QStringList::Iterator it = fileSystemTypeList.begin(); it != fileSystemTypeList.end(); ++it ) {
+    for ( QStringList::Iterator it = fileSystemTypeList.begin(); it != fileSystemTypeList.end(); ++it )
+    {
         QString temp = (*it);
-        if( temp.find( currentText,0,TRUE) != -1) {
+        if( temp.find( currentText,0,TRUE) != -1)
+        {
             return temp.right( temp.length() - temp.find("::",0,TRUE) - 2);
-//                qDebug(fsType);
+            //                qDebug(fsType);
         }
     }
     return "";
 }
 
-bool FormatterApp::doFsck() {
+bool FormatterApp::doFsck()
+{
 
     Output *outDlg;
     QString selectedDevice;
-// #if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX) 
+    // #if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
     selectedDevice = deviceComboBox->currentText();
     QString mountPoint = mountPointLineEdit->text();
     QString umountS = "umount -v "+mountPoint+" 2>&1";
     QString remountS = "mount -v "+mountPoint+" 2>&1";
-// #else
-//       // for testing
-// //    currentText  = diskDevice  = "/dev/fd0";
-//     QString umountS = "umount -v /floppy 2>&1";
-//     QString remountS = "mount -v /floppy 2>&1";
-//     selectedDevice ="/dev/fd0";
-  
-// #endif
+    // #else
+    //       // for testing
+    // //    currentText  = diskDevice  = "/dev/fd0";
+    //     QString umountS = "umount -v /floppy 2>&1";
+    //     QString remountS = "mount -v /floppy 2>&1";
+    //     selectedDevice ="/dev/fd0";
+
+    // #endif
 
     QString fsType = getFileSystemType((const QString &)selectedDevice);
     QString cmd;
@@ -504,8 +539,7 @@ bool FormatterApp::doFsck() {
     cmd += selectedDevice + " 2>&1";
 
     outDlg = new Output(this, tr("Formatter Output"),FALSE);
-    outDlg->showMaximized();
-    outDlg->show();
+    QPEApplication::showDialog( outDlg );
     qApp->processEvents();
     FILE *fp;
     char line[130];
@@ -513,25 +547,32 @@ bool FormatterApp::doFsck() {
     outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
     sleep(1);
-//          qDebug("Command is "+umountS);
+    //          qDebug("Command is "+umountS);
     fp = popen(  (const char *) umountS, "r");
-//          qDebug("%d", fp);
-    if ( !fp ) {
-        qDebug("Could not execute '" + umountS + "'!\n" +(QString)strerror(errno)); 
+    //          qDebug("%d", fp);
+    if ( !fp )
+    {
+        qDebug("Could not execute '" + umountS + "'!\n" +(QString)strerror(errno));
         QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
-        pclose(fp);             
+        pclose(fp);
         return false;
-    } else {
-//             outDlg->OutputEdit->append( currentText + tr("\nhas been successfully umounted."));
-//             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-        while ( fgets( line, sizeof line, fp)) {
-            if( ((QString)line).find("busy",0,TRUE) != -1) {
-                qDebug("Could not find '" + umountS); 
+    }
+    else
+    {
+        //             outDlg->OutputEdit->append( currentText + tr("\nhas been successfully umounted."));
+        //             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+        while ( fgets( line, sizeof line, fp))
+        {
+            if( ((QString)line).find("busy",0,TRUE) != -1)
+            {
+                qDebug("Could not find '" + umountS);
                 QMessageBox::warning( this, tr("Formatter"),
                                       tr("Could not umount.\nDevice is busy!"), tr("&OK") );
-                pclose(fp);             
+                pclose(fp);
                 return false;
-            } else {
+            }
+            else
+            {
                 QString lineStr = line;
                 lineStr=lineStr.left(lineStr.length()-1);
                 outDlg->OutputEdit->append(lineStr);
@@ -539,18 +580,22 @@ bool FormatterApp::doFsck() {
             }
         }
     }
-    pclose(fp);             
-/////////////////////////////////////
-    fp = popen(  (const char *) cmd, "r"); 
-    while ( fgets( line, sizeof line, fp)) {
-        if( ((QString)line).find("No such device",0,TRUE) != -1) {
-            qDebug("No such device '" + umountS); 
+    pclose(fp);
+    /////////////////////////////////////
+    fp = popen(  (const char *) cmd, "r");
+    while ( fgets( line, sizeof line, fp))
+    {
+        if( ((QString)line).find("No such device",0,TRUE) != -1)
+        {
+            qDebug("No such device '" + umountS);
             QMessageBox::warning( this, tr("Formatter"), tr("No such device!"), tr("&OK") );
-            pclose(fp);             
-//               outDlg->OutputEdit->append("No such device");
-//             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+            pclose(fp);
+            //               outDlg->OutputEdit->append("No such device");
+            //             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
             return false;
-        } else {
+        }
+        else
+        {
             QString lineStr = line;
             lineStr=lineStr.left(lineStr.length()-1);
             outDlg->OutputEdit->append(lineStr);
@@ -559,26 +604,29 @@ bool FormatterApp::doFsck() {
     }
     outDlg->OutputEdit->append(tr("You can now close the output window."));
     outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-//           outDlg->OutputEdit->append( currentText + tr("\nhas been successfully formatted."));
-//           outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-    pclose(fp);             
+    //           outDlg->OutputEdit->append( currentText + tr("\nhas been successfully formatted."));
+    //           outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+    pclose(fp);
 
-/////////////////////////////////////////    
+    /////////////////////////////////////////
 
     return true;
 }
 
-bool FormatterApp::doFsckCheck() {
+bool FormatterApp::doFsckCheck()
+{
 
     return FALSE;
 }
 
-int FormatterApp::formatCheck(const QString &) {
+int FormatterApp::formatCheck(const QString &)
+{
 
     return -1;
 }
 
-int FormatterApp::runCommand(const QString &) {
+int FormatterApp::runCommand(const QString &)
+{
 
     return -1;
 }
