@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.3 2002-02-15 15:47:21 jeremy Exp $
+ * $Id: vmemo.h,v 1.4 2002-02-15 17:01:32 jeremy Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -36,6 +36,7 @@ public slots:
   void mousePressEvent( QMouseEvent * );
   void mouseReleaseEvent( QMouseEvent * );
   void receive( const QCString &msg, const QByteArray &data );
+  void sayHi();
 
 private:
  void paintEvent( QPaintEvent* );

@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.8 2002-02-15 15:46:12 jeremy Exp $
+ * $Id: vmemo.cpp,v 1.9 2002-02-15 17:01:32 jeremy Exp $
  */
 
 #include <sys/utsname.h>
@@ -142,6 +142,7 @@ VMemo::VMemo( QWidget *parent, const char *name )
   recording = FALSE;
   
   myChannel = new QCopChannel( "QPE/VMemo", this );
+  connect( myChannel, SIGNAL(sayHi()), this, SLOT(sayHi()) );
   connect( myChannel, SIGNAL(received(const QCString&, const QByteArray&)),
 		   this, SLOT(receive(const QCString&, const QByteArray&)) );
 
@@ -189,13 +190,13 @@ VMemo::VMemo( QWidget *parent, const char *name )
 					{
 					  qWarning("REC = stop");
 					  QCopEnvelope( "QPE/VMemo", "toggleRecord()");
-					  activate_signal("toggleRecordNow()");
+					  QCopEnvelope( "QPE/VMemo", "sayHi()");
 					}
 				  else if(*buffer == (char)1)
 					{
 					  qWarning("REC = start");
 					  QCopEnvelope( "QPE/VMemo", "toggleRecord()");
-					  activate_signal("toggleRecordNow()");
+					  QCopEnvelope( "QPE/VMemo", "sayHi()");
 					}
 				}
 			}
@@ -208,6 +209,11 @@ VMemo::VMemo( QWidget *parent, const char *name )
 
 VMemo::~VMemo()
 {
+}
+
+void VMemo::sayHi()
+{
+  qWarning("Hi");
 }
 
 void VMemo::receive( const QCString &msg, const QByteArray &data )
@@ -227,6 +233,8 @@ void VMemo::paintEvent( QPaintEvent* )
 
 void VMemo::mousePressEvent( QMouseEvent * )
 {
+  QCopEnvelope( "QPE/VMemo", "sayHi()");
+
   // just to be safe
   if (recording)
 	{
