@@ -366,14 +366,6 @@ Quit anyway?</source>
     </message>
 </context>
 <context>
-    <name>DateBookWeekLstDayHdr</name>
-    <message>
-        <source>MTWTFSSM</source>
-        <comment>Week days</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -531,7 +523,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Време на почеток</translation>
+        <translation type="obsolete">Време на почеток</translation>
     </message>
     <message>
         <source>All day</source>
@@ -568,6 +560,10 @@ Quit anyway?</source>
     <message>
         <source>Note...</source>
         <translation>Забелешка...</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished">Време на почеток</translation>
     </message>
 </context>
 <context>

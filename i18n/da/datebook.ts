@@ -370,7 +370,7 @@ Afslut alligevel?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation>MTOTFLSM</translation>
+        <translation type="obsolete">MTOTFLSM</translation>
     </message>
 </context>
 <context>
@@ -489,7 +489,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Start tid</translation>
+        <translation type="obsolete">Start tid</translation>
     </message>
     <message>
         <source>All day</source>
@@ -526,6 +526,10 @@ Afslut alligevel?</translation>
     <message>
         <source>Note...</source>
         <translation>Bemærkning...</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished">Start tid</translation>
     </message>
 </context>
 <context>

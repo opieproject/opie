@@ -369,7 +369,7 @@ Toch afsluiten?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation>MDWDVZZM
+        <translation type="obsolete">MDWDVZZM
 
 Weekdagen</translation>
     </message>
@@ -574,7 +574,7 @@ Zondag</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Aanvangstijd</translation>
+        <translation type="obsolete">Aanvangstijd</translation>
     </message>
     <message>
         <source>All day</source>
@@ -611,6 +611,10 @@ Zondag</translation>
     <message>
         <source>Note...</source>
         <translation>Opmerking...</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished">Aanvangstijd</translation>
     </message>
 </context>
 <context>

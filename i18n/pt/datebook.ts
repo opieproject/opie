@@ -369,7 +369,7 @@ Sair na mesma?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation>STQQSSDS</translation>
+        <translation type="obsolete">STQQSSDS</translation>
     </message>
 </context>
 <context>
@@ -523,7 +523,7 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Hora Início</translation>
+        <translation type="obsolete">Hora Início</translation>
     </message>
     <message>
         <source>All day</source>
@@ -560,6 +560,10 @@ Sair na mesma?</translation>
     <message>
         <source>Note...</source>
         <translation>Nota...</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished">Hora Início</translation>
     </message>
 </context>
 <context>

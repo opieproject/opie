@@ -365,14 +365,6 @@ Wyjsc ?</translation>
     </message>
 </context>
 <context>
-    <name>DateBookWeekLstDayHdr</name>
-    <message>
-        <source>MTWTFSSM</source>
-        <comment>Week days</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -515,7 +507,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Poczatek</translation>
+        <translation type="obsolete">Poczatek</translation>
     </message>
     <message>
         <source>All day</source>
@@ -560,6 +552,10 @@ Wyjsc ?</translation>
     <message>
         <source>Note...</source>
         <translation>Notatki...</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished">Poczatek</translation>
     </message>
 </context>
 <context>
