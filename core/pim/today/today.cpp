@@ -152,9 +152,12 @@ void Today::loadPlugins() {
         for ( tit = pluginList.begin(); tit != pluginList.end(); ++tit ) {
             if ( (*tit).excludeRefresh ) {
                 pluginListRefreshExclude.insert( (*tit).name , (*tit) );
-                qDebug( "Found an plugin that does not want refresh feature" );
+                qDebug( "Found a plugin that does not want refresh feature" );
             } else {
+                (*tit).guiBox->hide();
+                (*tit).guiBox->reparent( 0, QPoint( 0, 0 ) );
                 (*tit).library->unload();
+                delete (*tit).guiBox;
                 delete (*tit).library;
             }
         }
@@ -176,7 +179,7 @@ void Today::loadPlugins() {
 
 	qDebug( "querying: %s", QString( path + "/" + *it ).latin1() );
         if ( lib->queryInterface( IID_TodayPluginInterface, (QUnknownInterface**)&iface ) == QS_OK ) {
-	    qDebug( "loading: %s", QString( path + "/" + *it ).latin1() );
+	    qDebug( "accepted: %s", QString( path + "/" + *it ).latin1() );
             qDebug( QString(*it) );
 
             // If plugin is exludes from refresh, get it in the list again here.
