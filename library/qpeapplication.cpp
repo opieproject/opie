@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.26 2002-11-17 02:32:39 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.27 2002-11-24 18:21:41 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -898,18 +898,55 @@ void QPEApplication::setDefaultRotation( int r )
 	}
 }
 
+// exported to libpreload.so
+bool opie_block_style = false;
+
 /*!
   \internal
 */
 void QPEApplication::applyStyle()
 {
 	Config config( "qpe" );
-
 	config.setGroup( "Appearance" );
-
+	
+	// don't block ourselves ...
+	opie_block_style = false;
+	
+	
+	static QString appname;
+	
+	if ( appname. isNull ( )) {
+		char src [32];
+		char dst [PATH_MAX + 1];
+		::sprintf ( src, "/proc/%d/exe", ::getpid ( ));
+		int l = ::readlink ( src, dst, PATH_MAX );
+		if ( l > 0 ) {
+			dst [l] = 0;
+			const char *b = ::strrchr ( dst, '/' );
+			appname = ( b ? b + 1 : dst );
+		}
+		else
+			appname = "";
+	}
+	
+	
+	QStringList ex = config. readListEntry ( "NoStyle", ';' );
+	int nostyle = 0;
+	for ( QStringList::Iterator it = ex. begin ( ); it != ex. end ( ); ++it ) {
+		if ( QRegExp (( *it ). mid ( 1 ), false, true ). find ( appname, 0 ) >= 0 ) {
+			nostyle = ( *it ). left ( 1 ). toInt ( 0, 32 );
+			break;
+		}
+	}
+	                                                
 	// Widget style
 	QString style = config.readEntry( "Style", "Light" );
-	internalSetStyle( style );
+	
+	// don't set a custom style
+	if ( nostyle & 0x01 )
+		style = "Light";
+	
+	internalSetStyle ( style );
 
 	// Colors
 	QColor bgcolor( config.readEntry( "Background", "#E5E1D5" ) );
@@ -933,6 +970,11 @@ void QPEApplication::applyStyle()
 
 	// Window Decoration
 	QString dec = config.readEntry( "Decoration", "Qtopia" );
+	
+	// don't set a custom deco
+	if ( nostyle & 0x04 )
+		dec = "";
+	
 	if ( dec != d->decorationName ) {
 		qwsSetDecoration( new QPEDecoration( dec ) );
 		d->decorationName = dec;
@@ -941,7 +983,17 @@ void QPEApplication::applyStyle()
 	// Font
 	QString ff = config.readEntry( "FontFamily", font().family() );
 	int fs = config.readNumEntry( "FontSize", font().pointSize() );
+
+	// don't set a custom font	
+	if ( nostyle & 0x02 ) {
+		ff = "Helvetica";
+		fs = 10;
+	}
+	
 	setFont( QFont(ff, fs) );
+	
+	// revert to global blocking policy ...
+	opie_block_style = config. readBoolEntry ( "ForceStyle", false );
 }
 
 void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data )
@@ -1323,7 +1375,7 @@ void QPEApplication::internalSetStyle( const QString &style )
 				iface-> release ( );
 			delete lib;
 
-			setStyle ( new QPEStyle ( ));
+			setStyle ( new LightStyle ( ));
 		}
 	}
 #endif

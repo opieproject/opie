@@ -604,6 +604,18 @@ void Global::invoke(const QString &c)
     } else
 #endif
     {
+	char *oldpre = ::getenv ( "LD_PRELOAD" );
+    	
+	extern bool opie_block_style;
+    
+	QString newpre = QPEApplication::qpeDir ( ) + "/lib/libpreload.so";
+	if ( opie_block_style && QFile::exists ( newpre )) {
+	    if ( oldpre && oldpre [0] )
+		newpre = newpre + ":" + oldpre;
+	    ::setenv ( "LD_PRELOAD", newpre. latin1( ), 1 );
+	    qDebug ( "\nPRELOADING\n" );
+	}
+	    
 	if ( !::vfork() ) {
 	    for ( int fd = 3; fd < 100; fd++ )
 		::close( fd );
@@ -613,6 +625,10 @@ void Global::invoke(const QString &c)
 	    ::execvp( args[0], (char * const *)args );
 	    _exit( -1 );
 	}
+	if ( oldpre )
+	    ::setenv ( "LD_PRELOAD", oldpre, 1 );
+	else
+	    ::unsetenv ( "LD_PRELOAD" );
     }
     StartingAppList::add( list[0] );
 #endif //QT_NO_QWS_MULTIPROCESS
