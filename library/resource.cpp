@@ -51,6 +51,8 @@ QPixmap Resource::loadPixmap( const QString &pix )
     if ( !QPixmapCache::find(key,pm) ) {
 	pm.convertFromImage(loadImage(pix));
 	QPixmapCache::insert(key,pm);
+    } else {
+	qDebug("Cannot find pixmap: %s", pix.latin1());
     }
     return pm;
 }
@@ -83,7 +85,7 @@ QString Resource::findPixmap( const QString &pix )
     else if ( QFile( picsPath + pix ).exists() )
 	return picsPath + pix;
 
-    //qDebug("Cannot find pixmap: %s", pix.latin1());
+    qDebug("Cannot find pixmap: %s", pix.latin1());
     return QString();
 }
 
