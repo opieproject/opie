@@ -16,7 +16,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
-#include <opie/oconfig.h>
+#include <qpe/config.h>
 
 
 #include <qapplication.h>
