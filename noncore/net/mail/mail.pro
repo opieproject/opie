@@ -13,7 +13,8 @@ HEADERS         = defines.h \
                settingsdialog.h \
                statuswidget.h \
                newmaildir.h \
-               selectstore.h
+               selectstore.h \
+               selectsmtp.h
                
 SOURCES         = main.cpp \
                opiemail.cpp \
@@ -29,7 +30,8 @@ SOURCES         = main.cpp \
                settingsdialog.cpp \
                statuswidget.cpp \
                newmaildir.cpp \
-               selectstore.cpp
+               selectstore.cpp \
+               selectsmtp.cpp
                
 INTERFACES     = editaccountsui.ui \
                selectmailtypeui.ui \

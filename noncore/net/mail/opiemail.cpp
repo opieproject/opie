@@ -13,6 +13,7 @@
 #include "mailistviewitem.h"
 #include "viewmail.h"
 #include "selectstore.h"
+#include "selectsmtp.h"
 
 OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
     : MainWindow( parent, name, WStyle_ContextHelp )
@@ -68,15 +69,30 @@ void OpieMail::slotSendQueued()
     SMTPaccount *smtp = 0;
 
     QList<Account> list = settings->getAccounts();
+    QList<SMTPaccount> smtpList;
+    smtpList.setAutoDelete(false);
     Account *it;
-//    if (list.count()==1) {
-        for ( it = list.first(); it; it = list.next() ) {
-            if ( it->getType().compare( "SMTP" ) == 0 ) {
-                smtp = static_cast<SMTPaccount *>(it);
-                break;
-            }
+    for ( it = list.first(); it; it = list.next() ) {
+        if ( it->getType().compare( "SMTP" ) == 0 ) {
+            smtp = static_cast<SMTPaccount *>(it);
+            smtpList.append(smtp);
         }
-//    }
+    }
+    if (smtpList.count()==0) {
+        QMessageBox::information(0,tr("Info"),tr("Define a smtp account first"));
+        return;
+    }
+    if (smtpList.count()==1) {
+        smtp = smtpList.at(0);
+    } else {
+        smtp = 0;
+        selectsmtp selsmtp;
+        selsmtp.setSelectionlist(&smtpList);
+        selsmtp.showMaximized();
+        if (selsmtp.exec()==QDialog::Accepted) {
+            smtp = selsmtp.selected_smtp();
+        }
+    }
     if (smtp) {
         SMTPwrapper * wrap = new SMTPwrapper(settings);
         if ( wrap->flushOutbox(smtp) ) {
