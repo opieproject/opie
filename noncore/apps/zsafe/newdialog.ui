@@ -1,0 +1,159 @@
+<!DOCTYPE UI><UI>
+<class>NewDialog</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>NewDialog</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>223</width>
+            <height>285</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>New Entry</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>6</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>1</number>
+        </property>
+        <widget row="5"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Comment</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Comment</string>
+            </property>
+        </widget>
+        <widget row="4"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field6</cstring>
+            </property>
+        </widget>
+        <widget row="3"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field5</cstring>
+            </property>
+        </widget>
+        <widget row="2"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PasswordField</cstring>
+            </property>
+        </widget>
+        <widget row="1"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>UsernameField</cstring>
+            </property>
+        </widget>
+        <widget row="0"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>NameField</cstring>
+            </property>
+        </widget>
+        <widget row="4"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field6Label</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Field 6</string>
+            </property>
+        </widget>
+        <widget row="3"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field5Label</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Field 5</string>
+            </property>
+        </widget>
+        <widget row="2"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Password</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Password</string>
+            </property>
+        </widget>
+        <widget row="1"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Username</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Username</string>
+            </property>
+        </widget>
+        <widget row="0"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Name</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Name</string>
+            </property>
+        </widget>
+        <widget row="6"  column="0"  rowspan="1"  colspan="2" >
+            <class>QMultiLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>CommentField</cstring>
+            </property>
+            <property stdset="1">
+                <name>wordWrap</name>
+                <enum>WidgetWidth</enum>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<tabstops>
+    <tabstop>NameField</tabstop>
+    <tabstop>UsernameField</tabstop>
+    <tabstop>PasswordField</tabstop>
+    <tabstop>Field5</tabstop>
+    <tabstop>Field6</tabstop>
+    <tabstop>CommentField</tabstop>
+</tabstops>
+</UI>

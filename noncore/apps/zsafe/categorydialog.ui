@@ -1,0 +1,190 @@
+<!DOCTYPE UI><UI>
+<class>CategoryDialog</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>CategoryDialog</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>187</width>
+            <height>196</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Category</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>6</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>1</number>
+        </property>
+        <widget row="0"  column="1" >
+            <class>QComboBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>CategoryField</cstring>
+            </property>
+            <property stdset="1">
+                <name>editable</name>
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget row="1"  column="1" >
+            <class>QComboBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>IconField</cstring>
+            </property>
+        </widget>
+        <widget row="2"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field1</cstring>
+            </property>
+        </widget>
+        <widget row="3"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field2</cstring>
+            </property>
+        </widget>
+        <widget row="4"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field3</cstring>
+            </property>
+        </widget>
+        <widget row="5"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field5</cstring>
+            </property>
+        </widget>
+        <widget row="6"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field6</cstring>
+            </property>
+        </widget>
+        <widget row="7"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field4</cstring>
+            </property>
+        </widget>
+        <widget row="0"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Name</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Category</string>
+            </property>
+        </widget>
+        <widget row="1"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Name_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Icon</string>
+            </property>
+        </widget>
+        <widget row="2"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field1Label</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Field 1</string>
+            </property>
+        </widget>
+        <widget row="3"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field2Label</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Field 2</string>
+            </property>
+        </widget>
+        <widget row="4"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field3Label</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Field 3</string>
+            </property>
+        </widget>
+        <widget row="5"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field5Label</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Field 4</string>
+            </property>
+        </widget>
+        <widget row="6"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field6Label</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Field 5</string>
+            </property>
+        </widget>
+        <widget row="7"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Field4Label</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Field 6</string>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<tabstops>
+    <tabstop>IconField</tabstop>
+</tabstops>
+</UI>
