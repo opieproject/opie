@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: QTReader.cpp,v 1.1 2002-07-01 23:24:08 llornkcor Exp $
+** $Id: QTReader.cpp,v 1.2 2002-07-08 23:23:40 llornkcor Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -79,48 +79,48 @@ void QTReader::mouseReleaseEvent( QMouseEvent* _e )
 {
     if (textarray != NULL)
     {
-//	printf("(%u, %u)\n", _e->x(), _e->y());
-	QString wrd = QString::null;
-	int lineno = _e->y()/m_linespacing;
-	if (m_bMonoSpaced)
-	{
-	    int chno = _e->x()/m_charWidth;
-	    if (chno < ustrlen(textarray[lineno]->data()))
-	    {
-		wrd[0] = textarray[lineno]->data()[chno];
-	    }
-	}
-	else
-	{
-	    CBuffer* t = textarray[lineno];
-	    int first = 0;
-	    while (1)
-	    {
-		int i = first+1;
-//		while ((*t)[i] != ' ' && (*t)[i] != 0) i++;
-		while (QChar((*t)[i]).isLetter() && (*t)[i] != 0) i++;
-		if (m_fm->width(toQString(t->data()), i) > _e->x())
-		{
-		    wrd = toQString(t->data()+first, i - first);
-		    break;
-		}
-//		while ((*t)[i] == ' ' && (*t)[i] != 0) i++;
-		while (!QChar((*t)[i]).isLetter() && (*t)[i] != 0) i++;
-		if ((*t)[i] == 0) break;
-		first = i;
-	    }		
-	}
-	if (!wrd.isEmpty())
-	{
-	    QClipboard* cb = QApplication::clipboard();
-	    cb->setText(wrd);
-	    Global::statusMessage(wrd);
-	    if (!m_targetapp.isEmpty() && !m_targetmsg.isEmpty())
-	    {
-		QCopEnvelope e(("QPE/Application/"+m_targetapp).utf8(), (m_targetmsg+"(QString)").utf8());
-		e << wrd;
-	    }
-	}
+//  printf("(%u, %u)\n", _e->x(), _e->y());
+  QString wrd = QString::null;
+  int lineno = _e->y()/m_linespacing;
+  if (m_bMonoSpaced)
+  {
+      int chno = _e->x()/m_charWidth;
+      if (chno < ustrlen(textarray[lineno]->data()))
+      {
+    wrd[0] = textarray[lineno]->data()[chno];
+      }
+  }
+  else
+  {
+      CBuffer* t = textarray[lineno];
+      int first = 0;
+      while (1)
+      {
+    int i = first+1;
+//    while ((*t)[i] != ' ' && (*t)[i] != 0) i++;
+    while (QChar((*t)[i]).isLetter() && (*t)[i] != 0) i++;
+    if (m_fm->width(toQString(t->data()), i) > _e->x())
+    {
+        wrd = toQString(t->data()+first, i - first);
+        break;
+    }
+//    while ((*t)[i] == ' ' && (*t)[i] != 0) i++;
+    while (!QChar((*t)[i]).isLetter() && (*t)[i] != 0) i++;
+    if ((*t)[i] == 0) break;
+    first = i;
+      }   
+  }
+  if (!wrd.isEmpty())
+  {
+      QClipboard* cb = QApplication::clipboard();
+      cb->setText(wrd);
+      Global::statusMessage(wrd);
+      if (!m_targetapp.isEmpty() && !m_targetmsg.isEmpty())
+      {
+    QCopEnvelope e(("QPE/Application/"+m_targetapp).utf8(), (m_targetmsg+"(QString)").utf8());
+    e << wrd;
+      }
+  }
     }
 }
 
@@ -134,8 +134,8 @@ void QTReader::focusOutEvent(QFocusEvent* e)
 {
     if (m_autoScroll)
     {
-	timer->stop();
-	m_scrolldy = 0;
+  timer->stop();
+  m_scrolldy = 0;
     }
 }
 
@@ -147,11 +147,11 @@ void QTReader::goDown()
 {
     if (m_bpagemode)
     {
-	dopagedn();
+  dopagedn();
     }
     else
     {
-	lineDown();
+  lineDown();
     }
 }
 
@@ -159,11 +159,11 @@ void QTReader::goUp()
 {
     if (m_bpagemode)
     {
-	dopageup();
+  dopageup();
     }
     else
     {
-	lineUp();
+  lineUp();
     }
 }
 
@@ -172,120 +172,120 @@ void QTReader::keyPressEvent(QKeyEvent* e)
   switch (e->key())
     {
       case Key_Down:
-	{
-	  e->accept();
-	  if (m_autoScroll)
-	  {
-	      if (m_delay < 59049)
-	      {
-		  m_delay = (3*m_delay)/2;
-		  timer->changeInterval(real_delay());
-	      }
-	      else
-	      {
-		  m_delay = 59049;
-	      }
-	  }
-	  else
-	  {
-	      goDown();
-	  }
-	}
+  {
+    e->accept();
+    if (m_autoScroll)
+    {
+        if (m_delay < 59049)
+        {
+      m_delay = (3*m_delay)/2;
+      timer->changeInterval(real_delay());
+        }
+        else
+        {
+      m_delay = 59049;
+        }
+    }
+    else
+    {
+        goDown();
+    }
+  }
       break;
       case Key_Up:
-	{
-	  e->accept();
-	  if (m_autoScroll)
-	  {
-	      if (m_delay > 1024)
-	      {
-		  m_delay = (2*m_delay)/3;
-		  timer->changeInterval(real_delay());
-	      }
-	      else
-	      {
-		  m_delay = 1024;
-	      }
-	  }
-	  else
-	  {
-	      goUp();
-	  }
-	}
+  {
+    e->accept();
+    if (m_autoScroll)
+    {
+        if (m_delay > 1024)
+        {
+      m_delay = (2*m_delay)/3;
+      timer->changeInterval(real_delay());
+        }
+        else
+        {
+      m_delay = 1024;
+        }
+    }
+    else
+    {
+        goUp();
+    }
+  }
       break;
       /*
       case Key_Left:
-	{
-	  e->accept();
-	  if (m_textfont > 0)
-	    {
-	      m_textfont--;
-	      setfont(NULL);
-	      locate(pagelocate());
-	      update();
-	    }
-	}
+  {
+    e->accept();
+    if (m_textfont > 0)
+      {
+        m_textfont--;
+        setfont(NULL);
+        locate(pagelocate());
+        update();
+      }
+  }
       break;
       case Key_Right:
-	{
-	  e->accept();
-	  if (fonts[++m_textfont] == 0)
-	    {
-	      m_textfont--;
-	    }
-	  else
-	    {
-	      setfont(NULL);
-	      locate(pagelocate());
-	      update();
-	    }
-	}
+  {
+    e->accept();
+    if (fonts[++m_textfont] == 0)
+      {
+        m_textfont--;
+      }
+    else
+      {
+        setfont(NULL);
+        locate(pagelocate());
+        update();
+      }
+  }
       break;
       */
       case Key_Right:
-	{
-	  e->accept();
-	  if (fontsizes[++m_textsize] == 0)
-	    {
-	      m_textsize--;
-	    }
-	  else
-	    {
-		bool sc = m_autoScroll;
-		m_autoScroll = false;
-	      setfont(NULL);
-	      locate(pagelocate());
-	      update();
-	      m_autoScroll = sc;
-	      if (m_autoScroll) autoscroll();
-	    }
-	}
+  {
+    e->accept();
+    if (fontsizes[++m_textsize] == 0)
+      {
+        m_textsize--;
+      }
+    else
+      {
+    bool sc = m_autoScroll;
+    m_autoScroll = false;
+        setfont(NULL);
+        locate(pagelocate());
+        update();
+        m_autoScroll = sc;
+        if (m_autoScroll) autoscroll();
+      }
+  }
       break;
       case Key_Left:
-	{
-	  e->accept();
-	  if (m_textsize > 0)
-	    {
-		bool sc = m_autoScroll;
-		m_autoScroll = false;
-	      m_textsize--;
-	      setfont(NULL);
-	      locate(pagelocate());
-	      update();
-	      m_autoScroll = sc;
-	      if (m_autoScroll) autoscroll();
-	    }
-	}
+  {
+    e->accept();
+    if (m_textsize > 0)
+      {
+    bool sc = m_autoScroll;
+    m_autoScroll = false;
+        m_textsize--;
+        setfont(NULL);
+        locate(pagelocate());
+        update();
+        m_autoScroll = sc;
+        if (m_autoScroll) autoscroll();
+      }
+  }
       break;
-	case Key_Space:
-//	case Key_Enter:
-	case Key_Return:
-	{
-	  e->accept();
-	    setautoscroll(!m_autoScroll);
-	    ((QTReaderApp*)parent()->parent())->setScrollState(m_autoScroll);
-	}
-	break;
+  case Key_Space:
+//  case Key_Enter:
+  case Key_Return:
+  {
+    e->accept();
+      setautoscroll(!m_autoScroll);
+      ((QTReaderApp*)parent()->parent())->setScrollState(m_autoScroll);
+  }
+  break;
     default:
       e->ignore();
     }
@@ -296,12 +296,12 @@ void QTReader::setautoscroll(bool _sc)
     if (_sc == m_autoScroll) return;
     if (m_autoScroll)
     {
-	m_autoScroll = false;
+  m_autoScroll = false;
     }
     else
     {
-	m_autoScroll = true;
-	autoscroll();
+  m_autoScroll = true;
+  autoscroll();
     }
 }
 
@@ -309,11 +309,11 @@ bool QTReader::getline(CBuffer *buff)
 {
     if (m_bMonoSpaced)
     {
-	return buffdoc.getline(buff ,width(), m_charWidth);
+  return buffdoc.getline(buff ,width(), m_charWidth);
     }
     else
     {
-	return buffdoc.getline(buff, width());
+  return buffdoc.getline(buff, width());
     }
 }
 
@@ -321,8 +321,8 @@ void QTReader::doscroll()
 {
     if (!m_autoScroll)
     {
-	timer->stop();
-	return;
+  timer->stop();
+  return;
     }
 //    timer->changeInterval(real_delay());
     QPainter p( this );
@@ -332,30 +332,30 @@ void QTReader::doscroll()
 
     if (++m_scrolldy == m_linespacing)
     {
-	setfont(&p);
-	m_scrolldy = 0;
-//	      qDrawPlainRect(&p,0,height() -  m_linespacing,width(),m_linespacing,white,1,&b);
-	pagepos = locnarray[1];
-	CBuffer* buff = textarray[0];
-	for (int i = 1; i < numlines; i++)
-	{
-	    textarray[i-1] = textarray[i];
-	    locnarray[i-1] = locnarray[i];
-	}
-	locnarray[numlines-1] = locate();
-	if (getline(buff))
-	{
-	    textarray[numlines-1] = buff;
-	    drawText( p, 0, height() -  m_descent - 2, buff->data());
-	    mylastpos = locate();
-	}
-	else
-	{
-//	    (*buff)[0] = '\0';
-	    textarray[numlines-1] = buff;
-	    m_autoScroll = false;
-	    ((QTReaderApp*)parent()->parent())->setScrollState(m_autoScroll);
-	}
+  setfont(&p);
+  m_scrolldy = 0;
+//        qDrawPlainRect(&p,0,height() -  m_linespacing,width(),m_linespacing,white,1,&b);
+  pagepos = locnarray[1];
+  CBuffer* buff = textarray[0];
+  for (int i = 1; i < numlines; i++)
+  {
+      textarray[i-1] = textarray[i];
+      locnarray[i-1] = locnarray[i];
+  }
+  locnarray[numlines-1] = locate();
+  if (getline(buff))
+  {
+      textarray[numlines-1] = buff;
+      drawText( p, 0, height() -  m_descent - 2, buff->data());
+      mylastpos = locate();
+  }
+  else
+  {
+//      (*buff)[0] = '\0';
+      textarray[numlines-1] = buff;
+      m_autoScroll = false;
+      ((QTReaderApp*)parent()->parent())->setScrollState(m_autoScroll);
+  }
     }
 }
 
@@ -364,14 +364,14 @@ void QTReader::drawText(QPainter& p, int x, int y, tchar* _text)
     QString text = toQString(_text);
     if (m_bMonoSpaced)
     {
-	for (int i = 0; i < text.length(); i++)
-	{
-	    p.drawText( x+i*m_charWidth, y, QString(text[i]) );
-	}
+  for (int i = 0; i < text.length(); i++)
+  {
+      p.drawText( x+i*m_charWidth, y, QString(text[i]) );
+  }
     }
     else
     {
-	p.drawText( x, y, text );
+  p.drawText( x, y, text );
     }
 }
 
@@ -392,12 +392,12 @@ void QTReader::setfont(QPainter* p)
     if (p != NULL) p->setFont( font );
     if (m_fm == NULL)
       {
-	m_fm = new QFontMetrics(font);
-	buffdoc.setfm(m_fm);
+  m_fm = new QFontMetrics(font);
+  buffdoc.setfm(m_fm);
       }
     else
       {
-	*m_fm = QFontMetrics(font);
+  *m_fm = QFontMetrics(font);
       }
     m_ascent = m_fm->ascent();
     m_descent = m_fm->descent();
@@ -417,68 +417,68 @@ void QTReader::drawFonts( QPainter *p )
       int sl = screenlines();
       if (sl < numlines)
       {
-//	qDebug("df:<%u,%u>",sl,numlines);
-	  
-	  size_t newpos = locnarray[sl];
-	  CBuffer** nta = new CBuffer*[sl];
-	  size_t* nla = new size_t[sl];
-	  for (int i = 0; i < sl; i++)
-	  {
-	      nta[i] = textarray[i];
-	      nla[i] = locnarray[i];
-	  }
-	  for (int i = sl; i < numlines; i++) delete textarray[i];
-	  delete [] textarray;
-	  delete [] locnarray;
-	  textarray = nta;
-	  locnarray = nla;
-	  numlines = sl;
-	  jumpto(mylastpos = newpos);
-//	locate(pagepos);
+//  qDebug("df:<%u,%u>",sl,numlines);
+    
+    size_t newpos = locnarray[sl];
+    CBuffer** nta = new CBuffer*[sl];
+    size_t* nla = new size_t[sl];
+    for (int i = 0; i < sl; i++)
+    {
+        nta[i] = textarray[i];
+        nla[i] = locnarray[i];
+    }
+    for (int i = sl; i < numlines; i++) delete textarray[i];
+    delete [] textarray;
+    delete [] locnarray;
+    textarray = nta;
+    locnarray = nla;
+    numlines = sl;
+    jumpto(mylastpos = newpos);
+//  locate(pagepos);
       }
       if (sl > numlines)
       {
-//	qDebug("df:<%u,%u>",sl,numlines);
-	  CBuffer** nta = new CBuffer*[sl];
-	  size_t* nla = new size_t[sl];
-	  for (int i = 0; i < numlines; i++)
-	  {
-	      nta[i] = textarray[i];
-	      nla[i] = locnarray[i];
-	  }
-	  if (locate() != mylastpos) jumpto(mylastpos);
-	  for (int i = numlines; i < sl; i++)
-	  {
-	      nta[i] = new CBuffer;
-	      nla[i] = locate();
-	      getline(nta[i]);
-	  }
-	  mylastpos = locate();
-	  delete [] textarray;
-	  delete [] locnarray;
-	  textarray = nta;
-	  locnarray = nla;
-	  numlines = sl;
+//  qDebug("df:<%u,%u>",sl,numlines);
+    CBuffer** nta = new CBuffer*[sl];
+    size_t* nla = new size_t[sl];
+    for (int i = 0; i < numlines; i++)
+    {
+        nta[i] = textarray[i];
+        nla[i] = locnarray[i];
+    }
+    if (locate() != mylastpos) jumpto(mylastpos);
+    for (int i = numlines; i < sl; i++)
+    {
+        nta[i] = new CBuffer;
+        nla[i] = locate();
+        getline(nta[i]);
+    }
+    mylastpos = locate();
+    delete [] textarray;
+    delete [] locnarray;
+    textarray = nta;
+    locnarray = nla;
+    numlines = sl;
       }
       int ypos = (btight) ? 0 : m_ascent-m_linespacing;
       //  int linespacing = (tight) ? m_ascent : m_ascent+m_descent;
       for (int i = 0; i < numlines; i++)
       {
-	  drawText( *p, 0, ypos += m_linespacing, textarray[i]->data());
+    drawText( *p, 0, ypos += m_linespacing, textarray[i]->data());
       }
       /*
-	
-	
-	
-	int nlines = height()/(fontmetric.ascent()+fontmetric.descent());
-	tchar buffer[1024];
-	for (int i = 0; i < nlines; i++)
-	{
-	y += fontmetric.ascent();
-	sprintf(buffer, "%d:%d:%s[%d]:Lines %d:%s", i+1, m_textfont, fonts[m_textfont], m_fs, nlines, (const tchar*)m_string);
-	drawText( *p, 0, y, buffer );
-	y += fontmetric.descent();
-	}
+  
+  
+  
+  int nlines = height()/(fontmetric.ascent()+fontmetric.descent());
+  tchar buffer[1024];
+  for (int i = 0; i < nlines; i++)
+  {
+  y += fontmetric.ascent();
+  sprintf(buffer, "%d:%d:%s[%d]:Lines %d:%s", i+1, m_textfont, fonts[m_textfont], m_fs, nlines, (const tchar*)m_string);
+  drawText( *p, 0, y, buffer );
+  y += fontmetric.descent();
+  }
       */
   }
   m_scrolldy = 0;
@@ -488,27 +488,27 @@ QString QTReader::firstword()
 {
     if (m_bMonoSpaced)
     {
-	return toQString(textarray[0]->data());
+  return toQString(textarray[0]->data());
     }
     else
     {
-	int start, end, len, j;
-	for (j = 0; j < numlines; j++)
-	{
-	    len = textarray[j]->length();
-	    for (start = 0; start < len && !isalpha((*textarray[j])[start]); start++);
-	    if (start < len) break;
-	}
-	if (j < numlines)
-	{
-	    QString ret = "";
-	    for (end = start; end < len && isalpha((*textarray[j])[end]); end++)
-		ret += (*textarray[j])[end];
-	    if (ret.isEmpty()) ret = "Current position";
-	    return ret;
-	}
-	else
-	    return "Current position";
+  int start, end, len, j;
+  for (j = 0; j < numlines; j++)
+  {
+      len = textarray[j]->length();
+      for (start = 0; start < len && !isalpha((*textarray[j])[start]); start++);
+      if (start < len) break;
+  }
+  if (j < numlines)
+  {
+      QString ret = "";
+      for (end = start; end < len && isalpha((*textarray[j])[end]); end++)
+    ret += (*textarray[j])[end];
+      if (ret.isEmpty()) ret = "Current position";
+      return ret;
+  }
+  else
+      return "Current position";
     }
 }
 
@@ -527,7 +527,7 @@ void QTReader::ChangeFont(int tgt)
     QStringList styles = fdb.styles(m_fontname);
     for ( QStringList::Iterator it = styles.begin(); it != styles.end(); ++it )
     {
-	printf( "%s \n", (*it).latin1() );
+  printf( "%s \n", (*it).latin1() );
     }
 */
     QValueList<int> sizes = fdb.pointSizes(m_fontname, (m_bBold) ? QString("Bold") : QString::null);
@@ -538,12 +538,12 @@ void QTReader::ChangeFont(int tgt)
     uint best = 0;
     for (it = sizes.begin(); it != sizes.end(); it++)
     {
-	fontsizes[i] = (*it)/10;
-	if (abs(tgt-fontsizes[i]) < abs(tgt-fontsizes[best]))
-	{
-	    best = i;
-	}
-	i++;
+  fontsizes[i] = (*it)/10;
+  if (abs(tgt-fontsizes[i]) < abs(tgt-fontsizes[best]))
+  {
+      best = i;
+  }
+  i++;
     }
     m_textsize = best;
     fontsizes[i] = 0;
@@ -551,8 +551,8 @@ void QTReader::ChangeFont(int tgt)
     QFont font(m_fontname, fontsizes[m_textsize], (m_bBold) ? QFont::Bold : QFont::Normal );
     if (m_fm == NULL)
     {
-	m_fm = new QFontMetrics(font);
-	buffdoc.setfm(m_fm);
+  m_fm = new QFontMetrics(font);
+  buffdoc.setfm(m_fm);
     }
 }
 
@@ -574,8 +574,8 @@ void QTReader::init()
     m_lastwidth = width();
     if (!m_lastfile.isEmpty())
     {
-	m_string = DocLnk(m_lastfile).name();
-	load_file(m_lastfile);
+  m_string = DocLnk(m_lastfile).name();
+  load_file(m_lastfile);
     }
 }
 
@@ -682,11 +682,11 @@ bool QTReader::fillbuffer() {
   if (delta != numlines)
     {
       if (textarray != NULL)
-	{
-	  for (int i = 0; i < numlines; i++) delete textarray[i];
-	  delete [] textarray;
+  {
+    for (int i = 0; i < numlines; i++) delete textarray[i];
+    delete [] textarray;
           delete [] locnarray;
-	}
+  }
       numlines = delta;
       textarray = new CBuffer*[numlines];
       locnarray = new size_t[numlines];
@@ -704,23 +704,23 @@ bool QTReader::fillbuffer() {
       ch = getline(textarray[i]);
       //      if (ch == EOF) {
       if (!ch)
-	{
-	  if (i == 0)
-	    {
-	      pagepos = oldpagepos;
-	      return false;
-	    }
-	  else
-	    {
-	      ret = true;
-	      for (int j = i+1; j < delta; j++)
+  {
+    if (i == 0)
+      {
+          locate(oldpagepos);
+        return false;
+      }
+    else
+      {
+        ret = true;
+        for (int j = i+1; j < delta; j++)
                 {
                   locnarray[j] = locnarray[j-1];
                   (*(textarray[j]))[0] = '\0';
                 }
-	      break;
-	    }
-	}
+        break;
+      }
+  }
       if (ch == '\012') ret = true;
     }
   mylastpos = locate();
@@ -733,16 +733,16 @@ void QTReader::dopagedn()
 {
     if (m_overlap == 0)
     {
-	if (locate() != mylastpos) jumpto(mylastpos);
+  if (locate() != mylastpos) jumpto(mylastpos);
     }
     else
     {
-	if (m_overlap >= screenlines()) m_overlap = screenlines()/2;
-	jumpto(locnarray[screenlines()-m_overlap]);
+  if (m_overlap >= screenlines()) m_overlap = screenlines()/2;
+  jumpto(locnarray[screenlines()-m_overlap]);
     }
     if (fillbuffer())
     {
-	update();
+  update();
     }
 }
 
@@ -761,38 +761,38 @@ void QTReader::dopageup()
       if (delta % 2 != 0) delta++;
       if (target % 2 != 0) target++;
       do
-	{
-	  delta <<= 1;
-	  if (delta >= target)
-	    {
-	      delta = target;
-	      jumpto(0);
-	      for (int i = 0; i < numlines; i++)
-		{
-		  loc[i] = locate();
-		  getline(buff[i]);
-		}
-	      break;
-	    }
-	  jumpto(target-delta);
-	  do
-	    {
-	      getline(buff[0]);
+  {
+    delta <<= 1;
+    if (delta >= target)
+      {
+        delta = target;
+        jumpto(0);
+        for (int i = 0; i < numlines; i++)
+    {
+      loc[i] = locate();
+      getline(buff[i]);
+    }
+        break;
+      }
+    jumpto(target-delta);
+    do
+      {
+        getline(buff[0]);
 #ifdef WS
-	      //printf("Trying:%s\n",buff[0]);
+        //printf("Trying:%s\n",buff[0]);
 #endif
-	      if (locate() > target) continue;
-	    }
-	  while (!buffdoc.iseol());
-	  for (int i = 0; i < numlines; i++)
-	    {
-	      loc[i] = locate();
-	      getline(buff[i]);
+        if (locate() > target) continue;
+      }
+    while (!buffdoc.iseol());
+    for (int i = 0; i < numlines; i++)
+      {
+        loc[i] = locate();
+        getline(buff[i]);
 #ifdef WS
-	      //printf("Filling:%s\n",buff[i]);
+        //printf("Filling:%s\n",buff[i]);
 #endif
-	    }
-	}
+      }
+  }
       while (locate() >= target && delta < 4096);
 #ifdef WS
       //printf("Delta:%u\n",delta);
@@ -802,10 +802,10 @@ void QTReader::dopageup()
     {
       jumpto(0);
       for (int i = 0; i < numlines; i++)
-	{
-	  loc[i] = locate();
-	  getline(buff[i]);
-	}
+  {
+    loc[i] = locate();
+    getline(buff[i]);
+  }
     }
   cbptr = 0;
   while (locate() < target)
@@ -862,18 +862,18 @@ void QTReader::lineDown()
     CBuffer* buff = textarray[0];
     for (int i = 1; i < numlines; i++)
     {
-	textarray[i-1] = textarray[i];
-	locnarray[i-1] = locnarray[i];
+  textarray[i-1] = textarray[i];
+  locnarray[i-1] = locnarray[i];
     }
     locnarray[numlines-1] = locate();
     if (getline(buff))
     {
-	textarray[numlines-1] = buff;
-	mylastpos = locate();
+  textarray[numlines-1] = buff;
+  mylastpos = locate();
     }
     else
     {
-	textarray[numlines-1] = buff;
+  textarray[numlines-1] = buff;
     }
     update();
 }
@@ -890,38 +890,38 @@ void QTReader::lineUp()
       unsigned int delta = locate()-pagelocate();
       if (delta < 64) delta = 64;
       do
-	{
-	  delta <<= 1;
-	  if (delta >= target)
-	    {
-	      delta = target;
-	      jumpto(0);
-	      for (int i = 0; i < numlines; i++)
-		{
-		  loc[i] = locate();
-		  getline(buff[i]);
-		}
-	      break;
-	    }
-	  jumpto(target-delta);
-	  do
-	    {
-	      buffdoc.getline(buff[0],width());
+  {
+    delta <<= 1;
+    if (delta >= target)
+      {
+        delta = target;
+        jumpto(0);
+        for (int i = 0; i < numlines; i++)
+    {
+      loc[i] = locate();
+      getline(buff[i]);
+    }
+        break;
+      }
+    jumpto(target-delta);
+    do
+      {
+        buffdoc.getline(buff[0],width());
 #ifdef WS
-	      //printf("Trying:%s\n",buff[0]);
+        //printf("Trying:%s\n",buff[0]);
 #endif
-	      if (locate() > target) continue;
-	    }
-	  while (!buffdoc.iseol());
-	  for (int i = 0; i < numlines; i++)
-	    {
-	      loc[i] = locate();
-	      buffdoc.getline(buff[i],width());
+        if (locate() > target) continue;
+      }
+    while (!buffdoc.iseol());
+    for (int i = 0; i < numlines; i++)
+      {
+        loc[i] = locate();
+        buffdoc.getline(buff[i],width());
 #ifdef WS
-	      //printf("Filling:%s\n",buff[i]);
+        //printf("Filling:%s\n",buff[i]);
 #endif
-	    }
-	}
+      }
+  }
       while (locate() >= target && delta < 4096);
 #ifdef WS
       //printf("Delta:%u\n",delta);
@@ -931,10 +931,10 @@ void QTReader::lineUp()
     {
       jumpto(0);
       for (int i = 0; i < numlines; i++)
-	{
-	  loc[i] = locate();
-	  buffdoc.getline(buff[i],width());
-	}
+  {
+    loc[i] = locate();
+    buffdoc.getline(buff[i],width());
+  }
     }
   cbptr = 0;
   while (locate() < target)
@@ -973,32 +973,32 @@ void QTReader::lineUp()
       unsigned int delta = locate()-pagelocate();
       if (delta < 64) delta = 64;
       do
-	{
-	  delta <<= 1;
-	  if (delta >= target)
-	    {
-	      delta = target;
-	      jumpto(0);
-	      for (int i = 0; i < numlines; i++)
-		{
-		  loc = locate();
-		  getline(buff);
-		}
-	      break;
-	    }
-	  jumpto(target-delta);
-	  do
-	    {
-	      getline(buff);
+  {
+    delta <<= 1;
+    if (delta >= target)
+      {
+        delta = target;
+        jumpto(0);
+        for (int i = 0; i < numlines; i++)
+    {
+      loc = locate();
+      getline(buff);
+    }
+        break;
+      }
+    jumpto(target-delta);
+    do
+      {
+        getline(buff);
 #ifdef WS
-	      //printf("Trying:%s\n",buff[0]);
+        //printf("Trying:%s\n",buff[0]);
 #endif
-	      if (locate() > target) continue;
-	    }
-	  while (!buffdoc.iseol());
-	  loc = locate();
-	  getline(buff);
-	}
+        if (locate() > target) continue;
+      }
+    while (!buffdoc.iseol());
+    loc = locate();
+    getline(buff);
+  }
       while (locate() >= target && delta < 4096);
     }
   else

@@ -3,7 +3,7 @@ Priority: optional
 Section: applications
 Maintainer: Tim Wentford <timwentford@hotmail.com>
 Architecture: arm
-Version: 0_3r_beta_UTF8
-Depends:
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: zlib
 License: GPL
 Description: E-Book reader
