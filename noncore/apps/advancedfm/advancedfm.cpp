@@ -333,8 +333,13 @@ void AdvancedFm::docButtonPushed() {
 }
 
 void AdvancedFm::SDButtonPushed() {
-		Opie::Core::OStorageInfo info;
-		changeTo(info.sdPath());
+   Opie::Core::OStorageInfo info;
+   if(StorageInfo::hasSd() ) {
+      changeTo(info.sdPath());
+   }
+   else if(StorageInfo::hasMmc()) {
+      changeTo(info.mmcPath());
+   }
 }
 
 void AdvancedFm::CFButtonPushed() {
