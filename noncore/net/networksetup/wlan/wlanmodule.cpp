@@ -13,6 +13,7 @@ WLANModule::WLANModule() : Module() {
 }
 
 /**
+ * Delete any interfaces that we own.
  */ 
 WLANModule::~WLANModule(){
   Interface *i;
