@@ -1,0 +1,10 @@
+Files: bin/powerchord apps/Applications/powerchord.desktop pics/powerchord sounds/powerchord
+Priority: optional
+Section: qpe/applications
+Maintainer: Camilo Mesias <camilo@mesias.co.uk>
+Architecture: arm
+Version: 0.0.7
+Depends: qpe-base ($QPE_VERSION)
+Description: Guitar Chord generator application
+Allows naming of chords using base note and key. Fretboard diagrams are
+produced illustrating ways to play the chord.

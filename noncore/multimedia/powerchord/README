@@ -1,0 +1,117 @@
+This tarball is a collection of the sources of Powerchord as a work in progress. It is provided to fulfil the conditions of the GPL.
+
+-Cam 15 Apr 2002 camilo@mesias.co.uk
+
+
+These files are the ones I used to make the release 0.0.7 of Powerchord.
+
+Originally I had intended to release under the GPL, then under pressure of time I wanted to release as closed-source freeware, to be relicensed at a later date. For simplicity though, I have opted to provide this crude tarball and release from the start under the GPL.
+
+Some of the source files do not contain the proper copyright notice yet.
+
+// Copyright (c) 2001 Camilo Mesias
+// camilo@mesias.co.uk
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+
+The make system is not foolproof.
+
+Under pressure of time I abandoned using designer and carefully hacked code into auto-generated files. I plan to go back to designer and learn how to insert these bits of code in a way that is in harmony with the original Trolltech example make files.
+
+Credits.
+This is all my own work, with the exception that some of it is derived from the Trolltech example code. The chord algorithm was originally written in Javascript by Jim Cranwell and is used with his permission. Some of the code dates back to the original version of Powerchord that I wrote for the Agenda VR3. That was my first Agenda app and was in turn related to the code for the Agenda Power Meter application. Some of the original Agenda (fltk) include directives remain in the code, commented out... The name derives from the use of the Agenda Power application as a starting point. Power + Chord = Powerchord. Credit to a number of web resources on computing music, especially the first one I read that talked about the 12th root of 2! Credit finally to 4Front Technologies, their document 'Open Sound System - A Programmers' Guide' was most useful. This is my first use of OSS.
+
+Here is a breakdown of the essential parts of this archive:
+
+README
+TODO
+Makefile
+
+MANUAL.html         -- webpage stuff
+index.html
+display.png
+tuning.png
+
+powerchord.control  -- control file for .ipk
+powerchord.desktop  -- Qtopia desktop file
+powerchord.pro      -- input for tmake
+powerchord.ui       -- input for Designer
+powerchordbase.ui   -- input for Designer
+
+Powerchord.png      -- icon
+
+RCS                 -- some files under RCS
+
+acguitar.raw        -- assorted audio files
+long.acguitar.raw
+
+amp_but.png         -- assorted image files
+audio.png
+blank_but.png
+chordshow.png
+image0.xpm
+image1.png
+image2.png
+image3.png
+image4.png
+image5.png
+image6.png
+image_open.png
+mic-closed.png
+mic-open.png
+mic-open.xpm
+wood.png
+wood_s.png
+x.png
+z1.png
+z2.png
+stringfing_s.png
+transport-blank.png
+transport-fwd.png
+transport-play.png
+transport-rec.png
+transport-rev.png
+powerchord-pics
+
+chordengine.cpp     -- code to make chords
+chordengine.h
+
+fretboard.cpp       -- widget to display fret board
+fretboard.h
+
+gs.cpp              -- guitar synth (audio) code
+gs.h
+
+gt.cpp              -- guitar tuner (audio) code - not finished
+gt.h
+
+powerchord.cpp      -- framework code - like main
+powerchord.h
+
+powerchordbase.cpp  -- main GUI code hacked from the designer generated one
+powerchordbase.h
+
+vumeter.cpp           -- vu-meter lookalike widget for tuner
+vumeter.h
+
+install.sh          -- instructions to build the .ipk and install it
+
+main.cpp            -- token main()
+
+moc_fretboard.cpp       -- generated files, do not touch!
+moc_powerchord.cpp
+moc_powerchordbase.cpp
+moc_vumeter.cpp
+

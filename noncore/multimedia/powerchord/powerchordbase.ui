@@ -1,0 +1,1663 @@
+<!DOCTYPE UI><UI>
+<class>PowerchordBase</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>PowerchordBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>240</width>
+            <height>284</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>sizePolicy</name>
+        <sizepolicy>
+            <hsizetype>5</hsizetype>
+            <vsizetype>5</vsizetype>
+        </sizepolicy>
+    </property>
+    <property stdset="1">
+        <name>minimumSize</name>
+        <size>
+            <width>240</width>
+            <height>284</height>
+        </size>
+    </property>
+    <property stdset="1">
+        <name>maximumSize</name>
+        <size>
+            <width>240</width>
+            <height>284</height>
+        </size>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Powerchord</string>
+    </property>
+    <widget>
+        <class>QTabWidget</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>tabs</cstring>
+        </property>
+        <property stdset="1">
+            <name>enabled</name>
+            <bool>true</bool>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>240</width>
+                <height>286</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>tabPosition</name>
+            <enum>Bottom</enum>
+        </property>
+        <widget>
+            <class>QWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>tab</cstring>
+            </property>
+            <attribute>
+                <name>title</name>
+                <string>Guitar</string>
+            </attribute>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>maj</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>min</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>7th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>m7</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>maj7</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>6th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>m6th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>aug</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>dim</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>sus4</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>7sus4</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>9th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>add9</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>m9th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>maj9</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>sus2</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>7sus2</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>11th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>m11th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>13th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>m13th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>maj13</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>6/9</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>flat5</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>7#9</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>ø7</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>5</string>
+                    </property>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>chordkey</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>40</x>
+                        <y>0</y>
+                        <width>51</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>open</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>1st</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>2nd</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>3rd</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>4th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>5th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>6th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>7th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>8th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>9th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>10th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>11th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>12th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>13th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>14th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>15th</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>16th</string>
+                    </property>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>chordfret</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>90</x>
+                        <y>0</y>
+                        <width>60</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>C</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>C#</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>D</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>Eb</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>E</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>F</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>F#</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>G</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>G#</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>A</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>Bb</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>B</string>
+                    </property>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>chordnote</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>40</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>currentItem</name>
+                    <number>9</number>
+                </property>
+            </widget>
+            <widget>
+                <class>QLayoutWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>Layout1</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>5</x>
+                        <y>232</y>
+                        <width>160</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <hbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>6</number>
+                    </property>
+                    <widget>
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>s1_1</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>E</string>
+                        </property>
+                        <property stdset="1">
+                            <name>alignment</name>
+                            <set>AlignCenter</set>
+                        </property>
+                        <property>
+                            <name>hAlign</name>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>s1_2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>A</string>
+                        </property>
+                        <property stdset="1">
+                            <name>alignment</name>
+                            <set>AlignCenter</set>
+                        </property>
+                        <property>
+                            <name>hAlign</name>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>s1_3</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>E</string>
+                        </property>
+                        <property stdset="1">
+                            <name>alignment</name>
+                            <set>AlignCenter</set>
+                        </property>
+                        <property>
+                            <name>hAlign</name>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>s1_4</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>A</string>
+                        </property>
+                        <property stdset="1">
+                            <name>alignment</name>
+                            <set>AlignCenter</set>
+                        </property>
+                        <property>
+                            <name>hAlign</name>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>s1_5</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>C#</string>
+                        </property>
+                        <property stdset="1">
+                            <name>alignment</name>
+                            <set>AlignCenter</set>
+                        </property>
+                        <property>
+                            <name>hAlign</name>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>s1_6</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>E</string>
+                        </property>
+                        <property stdset="1">
+                            <name>alignment</name>
+                            <set>AlignCenter</set>
+                        </property>
+                        <property>
+                            <name>hAlign</name>
+                        </property>
+                    </widget>
+                </hbox>
+            </widget>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>sound_label</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>185</x>
+                        <y>160</y>
+                        <width>32</width>
+                        <height>17</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>sizePolicy</name>
+                    <sizepolicy>
+                        <hsizetype>0</hsizetype>
+                        <vsizetype>0</vsizetype>
+                    </sizepolicy>
+                </property>
+                <property stdset="1">
+                    <name>pixmap</name>
+                    <pixmap>image0</pixmap>
+                </property>
+                <property stdset="1">
+                    <name>scaledContents</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <widget>
+                <class>QFrame</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>Frame6</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>170</x>
+                        <y>145</y>
+                        <width>66</width>
+                        <height>10</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>frameShape</name>
+                    <enum>HLine</enum>
+                </property>
+                <property stdset="1">
+                    <name>frameShadow</name>
+                    <enum>Raised</enum>
+                </property>
+            </widget>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>chordshow_label</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>185</x>
+                        <y>60</y>
+                        <width>32</width>
+                        <height>17</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>sizePolicy</name>
+                    <sizepolicy>
+                        <hsizetype>0</hsizetype>
+                        <vsizetype>0</vsizetype>
+                    </sizepolicy>
+                </property>
+                <property stdset="1">
+                    <name>pixmap</name>
+                    <pixmap>image1</pixmap>
+                </property>
+                <property stdset="1">
+                    <name>scaledContents</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <widget>
+                <class>QPushButton</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>transport_rec</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>170</x>
+                        <y>80</y>
+                        <width>30</width>
+                        <height>30</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string></string>
+                </property>
+                <property stdset="1">
+                    <name>pixmap</name>
+                    <pixmap>image2</pixmap>
+                </property>
+            </widget>
+            <widget>
+                <class>QPushButton</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>play_sound</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>170</x>
+                        <y>180</y>
+                        <width>60</width>
+                        <height>55</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string></string>
+                </property>
+                <property stdset="1">
+                    <name>pixmap</name>
+                    <pixmap>image3</pixmap>
+                </property>
+            </widget>
+            <widget>
+                <class>QFrame</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>Frame6_2</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>170</x>
+                        <y>45</y>
+                        <width>66</width>
+                        <height>10</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>frameShape</name>
+                    <enum>HLine</enum>
+                </property>
+                <property stdset="1">
+                    <name>frameShadow</name>
+                    <enum>Raised</enum>
+                </property>
+            </widget>
+            <widget>
+                <class>QPushButton</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>transport_play</cstring>
+                </property>
+                <property stdset="1">
+                    <name>enabled</name>
+                    <bool>false</bool>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>200</x>
+                        <y>80</y>
+                        <width>30</width>
+                        <height>30</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string></string>
+                </property>
+                <property stdset="1">
+                    <name>pixmap</name>
+                    <pixmap>image3</pixmap>
+                </property>
+            </widget>
+            <widget>
+                <class>QPushButton</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>transport_rew</cstring>
+                </property>
+                <property stdset="1">
+                    <name>enabled</name>
+                    <bool>false</bool>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>170</x>
+                        <y>110</y>
+                        <width>30</width>
+                        <height>30</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string></string>
+                </property>
+                <property stdset="1">
+                    <name>pixmap</name>
+                    <pixmap>image4</pixmap>
+                </property>
+            </widget>
+            <widget>
+                <class>QPushButton</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>transport_fwd</cstring>
+                </property>
+                <property stdset="1">
+                    <name>enabled</name>
+                    <bool>false</bool>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>200</x>
+                        <y>110</y>
+                        <width>30</width>
+                        <height>30</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string></string>
+                </property>
+                <property stdset="1">
+                    <name>pixmap</name>
+                    <pixmap>image5</pixmap>
+                </property>
+            </widget>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>chordname</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>151</x>
+                        <y>0</y>
+                        <width>85</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>A</string>
+                </property>
+                <property stdset="1">
+                    <name>alignment</name>
+                    <set>AlignCenter</set>
+                </property>
+                <property>
+                    <name>hAlign</name>
+                </property>
+                <property>
+                    <name>toolTip</name>
+                    <string></string>
+                </property>
+            </widget>
+            <widget>
+                <class>FretBoard</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>frets</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>0</x>
+                        <y>20</y>
+                        <width>168</width>
+                        <height>210</height>
+                    </rect>
+                </property>
+            </widget>
+        </widget>
+        <widget>
+            <class>QWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>tab</cstring>
+            </property>
+            <attribute>
+                <name>title</name>
+                <string>Options</string>
+            </attribute>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>optlab2</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>9</x>
+                        <y>58</y>
+                        <width>120</width>
+                        <height>41</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Alternative tunings are possible</string>
+                </property>
+                <property stdset="1">
+                    <name>alignment</name>
+                    <set>WordBreak|AlignVCenter|AlignLeft</set>
+                </property>
+                <property>
+                    <name>wordwrap</name>
+                </property>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>2</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>3</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>4</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>5</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>6</string>
+                    </property>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>span</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>180</x>
+                        <y>20</y>
+                        <width>50</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>currentItem</name>
+                    <number>1</number>
+                </property>
+            </widget>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>TextLabel1</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>3</x>
+                        <y>109</y>
+                        <width>226</width>
+                        <height>140</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>©2002 Camilo Mesias
+camilo@mesias.co.uk
+Version 0.0 beta</string>
+                </property>
+                <property stdset="1">
+                    <name>alignment</name>
+                    <set>AlignBottom|AlignLeft</set>
+                </property>
+                <property>
+                    <name>vAlign</name>
+                </property>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>EADGBE</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>EBEG#BE</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>EAEAC#E</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>EADF#BE</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>EADGCF</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>DADGAD</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>DGCGCD</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>DADF#AD</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>DADGBE</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>DGDGBD</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>DADACD</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>CGCGAE</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>FADGBE</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>G minor</string>
+                    </property>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tuning</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>140</x>
+                        <y>70</y>
+                        <width>91</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+            </widget>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>optlab1</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>8</x>
+                        <y>8</y>
+                        <width>160</width>
+                        <height>40</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Span: the greatest number of frets over which you want chords to be generated</string>
+                </property>
+                <property stdset="1">
+                    <name>alignment</name>
+                    <set>WordBreak|AlignVCenter|AlignLeft</set>
+                </property>
+                <property>
+                    <name>wordwrap</name>
+                </property>
+            </widget>
+        </widget>
+        <widget>
+            <class>QWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Tuner</cstring>
+            </property>
+            <attribute>
+                <name>title</name>
+                <string>Tuner</string>
+            </attribute>
+            <widget>
+                <class>QFrame</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>Frame4</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>230</width>
+                        <height>126</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>frameShape</name>
+                    <enum>Box</enum>
+                </property>
+                <property stdset="1">
+                    <name>frameShadow</name>
+                    <enum>Raised</enum>
+                </property>
+                <widget>
+                    <class>VUMeter</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>vu</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>5</x>
+                            <y>5</y>
+                            <width>220</width>
+                            <height>115</height>
+                        </rect>
+                    </property>
+                </widget>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>auto</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>E</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>D</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>G</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>A</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>B</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>C</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>F</string>
+                    </property>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tuner_note</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>5</x>
+                        <y>160</y>
+                        <width>90</width>
+                        <height>20</height>
+                    </rect>
+                </property>
+            </widget>
+            <widget>
+                <class>QFrame</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>Frame8</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>-2</x>
+                        <y>188</y>
+                        <width>231</width>
+                        <height>10</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>frameShape</name>
+                    <enum>HLine</enum>
+                </property>
+                <property stdset="1">
+                    <name>frameShadow</name>
+                    <enum>Raised</enum>
+                </property>
+            </widget>
+            <widget>
+                <class>QPushButton</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tuner_start</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>100</x>
+                        <y>155</y>
+                        <width>91</width>
+                        <height>30</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Start</string>
+                </property>
+            </widget>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tuner_lab1</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>10</x>
+                        <y>130</y>
+                        <width>100</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Tuner operation</string>
+                </property>
+            </widget>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tuner_lab2</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>10</x>
+                        <y>200</y>
+                        <width>100</width>
+                        <height>16</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Pitch calibration</string>
+                </property>
+            </widget>
+            <widget>
+                <class>QComboBox</class>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>A</string>
+                    </property>
+                </item>
+                <item>
+                    <property>
+                        <name>text</name>
+                        <string>C</string>
+                    </property>
+                </item>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tuner_calib_note</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>5</x>
+                        <y>225</y>
+                        <width>90</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+            </widget>
+            <widget>
+                <class>QSpinBox</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tuner_calib_freq</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>105</x>
+                        <y>225</y>
+                        <width>71</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>suffix</name>
+                    <string>Hz</string>
+                </property>
+                <property stdset="1">
+                    <name>wrapping</name>
+                    <bool>true</bool>
+                </property>
+                <property stdset="1">
+                    <name>maxValue</name>
+                    <number>500</number>
+                </property>
+                <property stdset="1">
+                    <name>minValue</name>
+                    <number>300</number>
+                </property>
+                <property stdset="1">
+                    <name>value</name>
+                    <number>440</number>
+                </property>
+            </widget>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tuner_lab3</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>185</x>
+                        <y>225</y>
+                        <width>40</width>
+                        <height>21</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Pitch</string>
+                </property>
+            </widget>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tuner_pic1</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>195</x>
+                        <y>155</y>
+                        <width>31</width>
+                        <height>31</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>frameShape</name>
+                    <enum>NoFrame</enum>
+                </property>
+                <property stdset="1">
+                    <name>pixmap</name>
+                    <pixmap>image6</pixmap>
+                </property>
+                <property stdset="1">
+                    <name>scaledContents</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
+        </widget>
+        <widget>
+            <class>QWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>tab</cstring>
+            </property>
+            <attribute>
+                <name>title</name>
+                <string>Chords</string>
+            </attribute>
+            <widget>
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>chordlistlab1</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>5</x>
+                        <y>5</y>
+                        <width>216</width>
+                        <height>16</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Chord list</string>
+                </property>
+            </widget>
+            <widget>
+                <class>QListBox</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>chordlist</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>5</x>
+                        <y>25</y>
+                        <width>220</width>
+                        <height>200</height>
+                    </rect>
+                </property>
+            </widget>
+            <widget>
+                <class>QPushButton</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>list_remove_btn</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>150</x>
+                        <y>230</y>
+                        <width>71</width>
+                        <height>25</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>text</name>
+                    <string>Remove</string>
+                </property>
+            </widget>
+        </widget>
+    </widget>
+</widget>
+<customwidgets>
+    <customwidget>
+        <class>FretBoard</class>
+        <header location="global">/src/ZAURUS/powerchord/fretboard.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+        </sizepolicy>
+        <pixmap>image7</pixmap>
+        <signal>Finger(int finger)</signal>
+        <signal>s1nameChanged(const QString &amp;)</signal>
+        <signal>s2nameChanged(const QString &amp;)</signal>
+        <signal>s3nameChanged(const QString &amp;)</signal>
+        <signal>s4nameChanged(const QString &amp;)</signal>
+        <signal>s5nameChanged(const QString &amp;)</signal>
+        <signal>s6nameChanged(const QString &amp;)</signal>
+        <signal>nameChanged(const QString &amp;)</signal>
+        <slot access="public">Finger()</slot>
+        <slot access="public">Base(int)</slot>
+        <slot access="public">Chord(int)</slot>
+        <slot access="public">Fret(int)</slot>
+        <slot access="public">Span(int)</slot>
+        <slot access="public">Tune(int)</slot>
+        <slot access="public">Vary(int)</slot>
+    </customwidget>
+    <customwidget>
+        <class>VUMeter</class>
+        <header location="global">/src/ZAURUS/powerchord/vumeter.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+        </sizepolicy>
+        <pixmap>image7</pixmap>
+        <slot access="public">Value(int)</slot>
+        <slot access="public">AnnotL(QString)</slot>
+        <slot access="public">AnnotR(QString)</slot>
+    </customwidget>
+</customwidgets>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="1305">789c8dd25b6f9b301407f0f77c0a14dea28906b003d6b4875e935e92e6b1d2b407df0894109a4068d369df7d9c636725692acd48e8fcf0df06db9c0d9ca7f9d4199cf5aa9ad7997464ca37ce406d8b62f7f3d78fdfbd7e18387ee410e2f8fd6fbdbee7486756ae34d4aa53f34efdd0a965a776dbda1d62035e5b12436d1927097007f463b880153018c2053c47b2200e18b0b094864b60e88724c46fde20594bec5d594ac32b20f1c990603845724208072e2c63c3374b697803a40191340066867468b845724a2986134b66d800470155230caf0d47be6169490d9f91bc258ebdb46486ef96cab0064661e44721708614118d04505832c33b4b65f8088cc348c5387662d81e0232478a98c5187e0132122b46801786cc371c2325634c02a7404eb8cfb1f7152939e5d87b6fc90de740414420307c8b54622414fe84fbe61eb47f8f31c36d7345a7b9dc93b29351ea64a63b4f1bd1babd7d9a079eca7d0623fa30a33d8521ccd869f471469bb136630999649166cf39be6b1f3ac8682116cb62b9caca17a15d753aa3d79baa2eb74d53bf224f66de8addfba2384fea8baf33e9a6babcaaae9b3aff32239ad5727d5314a5181f7d8ff7b1ae3c4bd3346beac9edd1babcfd44edda274dd294f5ddfdf1feb4e705f503eee1349f3d8ee79ff619cefde4797918f1feebfff9f3bdf7170eba56b0</data>
+    </image>
+    <image>
+        <name>image1</name>
+        <data format="XPM.GZ" length="746">789c8d92cf0ac2300cc6ef7b8ab0dc864caba003f111148f8278485b871e54f0cf41c4777749a3769b8a8141bfe4c79774693783c57c0a5937399de9bc75e0367484cc5f76bbeb7235b925e9a00f660443306927497370303becd77cc6ea8c3d0996566551962c1d4b531019a97a96fd1ead4dc192589612621b07d6835311a3598aa3c5842c7ff5a833ead3f06a30ea23356bff6102f59351ea23639f4ce8f79dd1464f467e95dce8ddcb3619e73147efb0c5bce7a9ca1e2bd06134b322914f057986e27bd519290ba87ba01744910f8686f4da5963173c6e1e06d76c7ba77af7cf8f87dfc67d9c3c003050bd05</data>
+    </image>
+    <image>
+        <name>image2</name>
+        <data format="XPM.GZ" length="524">789c7d90cb0ac2301045f7fd8ad0ec8aa48da808e227282e057191c9a30fa882d68588ff6e264deab89166a6e7a6873c5a16ec78d8b1a2ccee831a5acd74a36eac308fbe7f9ecedb5796cb15c33167329f653930cdf6d78b45ae091bc21d6145981316843561eb999ba5ac6485d1c5b818633bc535c626449ba2e042d10afb03f8e03bf82e40070f306203ee59470fc058675d8d34798d6d2d167cbd60453379d1f2f5f55cf22cf1d27acd7faf4eeb75e47cc9a3e71bcd0e80de237c00bc75f2f08fe0947f474ffc3ef97b937d00c5a693bc</data>
+    </image>
+    <image>
+        <name>image3</name>
+        <data format="XPM.GZ" length="430">789cd3d7528808f055d0d2e72a2e492cc94c5648ce482c52d04a29cdcdad8c8eb5ade6523234530022530543251d2ea544856405bffcbc54105b1989ad87c44e46622701d9ca06600056a6ac97888cc1462625013970980c569704040895c950752080a90e04202a91d5c1d4a2aa83988bae0e0430d541c550d4619a87ee3e980b91d5c17c825087e95fe49081a8d343854ab5d65c00c02d7422</data>
+    </image>
+    <image>
+        <name>image4</name>
+        <data format="XPM.GZ" length="442">789c6d903d0a02311085fb9c6248ba4566b5b1118fa0580a6231792b68a182ae858877773291dd2c64924c5e3e5e263f6d43fbdd869ad63d7be92f209ce5414df7ba5edf87e3fae3fc6249da35f999f39140dbfbed94b4143a149a0bdd155a6b53985b982db094c34ac6a80b418c9a199df9a28640590c8ccc2431184bd3e04366c0e84366c0e8436618996012d9576152d9cb9533a47217aedcd9dec1c6f4d5832ffd88b2f42b7f1f4f9bffaedc0f5a767fcf</data>
+    </image>
+    <image>
+        <name>image5</name>
+        <data format="XPM.GZ" length="442">789c6d8fc10ac2300c86ef7d8ad2de8a647af1223e82e251100f692ae8610a3a0f22bebb49bab90cecb6fe7ffe7d5b9326f9fd6ee353e31e1d7617f274c6bb4fe5d9b6afc371fd7661b1f47cf316662ef07bbfbd5d4fe2d1f8683c185f8ccfece35c976211d03efacb4c5c2064921d8b723913979145c852390909440ca7a14a1c3909ab188eab5e0cf75b969b64f8e75b989c61ce1d7a31fd71a4adc3d81fc9c4b9cedd733a67546a9817a657f8acdc17f87f7bda</data>
+    </image>
+    <image>
+        <name>image6</name>
+        <data format="XPM.GZ" length="1760">789c9593dd739a4010c0dffd2b1879733a1710509c4e1fa2e683f8111f3bd3e903701048505130c464fabf97ddbd9343d34e7be8b83fdcfdb177c75df5b4efab85d6bbea14a55fa6a11626fe5eebf1c37a7dfcf1f3db47a76b995afdb16dcdec7ee974a75aa82db79b08e28512df2971a5c49e122f9578aec4a912174a3c5162a6c4511deb060ec031a06ddab68d1d1e107dc3355cc09dc090704d5827fb80994097f019d0f1a58a030eada139b4004b810ee11131300d13db7825b45c6b049813d6c901e00da06b0d46037cd03be0c8365d13bb7a2374460efe1b0206b619f6d11c23722b24f383446a7246681b84d780a1d337a8768fc825de0ab4fba8da0a7409ef01b9d30f095f245a680e1023a9d205da84ab1362ad0f180d243e113a86d3077c448c069c56720318c7d1201a0026843070ebff3efe3f45f7e5f587143df083e6fb494a63689b9a14511bf28847b170b553a8ee29e27831c52353c8c112cae070477a648aa849a445dcd19b1472b0c69236f3922975450243589e5f9a59510ae6273c5b2734365b70a4e4a6147c6a9233c62318bb3dd417e2beb040ef493d8f12320ed8c7ab986763a95bcdab0a2c3bece12d13abd5f4c2a4e5888eb45ce35aa8bd30d1cb3b38f605e3e7165d588a181cd769ed1b8bbd5767c4f26ca293635ac7156bcf08d796dfdc521fd369c9b33bb14f8ac567937bfc2da63ce7995789dd57f7a8c0357ee0252fc798c12ef608af191832e6cdabd3eeb7df97c05f8063e92d17e4b8785f74df9b531fd5e5fb226af447e8a4be32710edaaf3755ade2bcf6ccf493a37548d433d438ce8fda27a7e8fcc07a9767f1df8efdafaf9ddf36a4a563</data>
+    </image>
+    <image>
+        <name>image7</name>
+        <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1be245fc04c5a3201e4615f430059d0711ff5ddb2e6bb236ec90eed134cb5a19d8ef36602af5ecdbfeeac05dda0798d3abebde87e3faa374d3807fa0d633a52d38d8de6f679fe33fc776e196f53cd010188256a3600a292882096246517815ca99884606e18044a3a40d91824820924265a7923a2e8bcd05f33db1173e002913175f2a6be6d3294871a2d95fa00e8a94ee017b69d339d90df1e77c57ea072ede6758</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>chordnote</sender>
+        <signal>activated(int)</signal>
+        <receiver>frets</receiver>
+        <slot>Base(int)</slot>
+    </connection>
+    <connection>
+        <sender>chordkey</sender>
+        <signal>activated(int)</signal>
+        <receiver>frets</receiver>
+        <slot>Chord(int)</slot>
+    </connection>
+    <connection>
+        <sender>chordfret</sender>
+        <signal>activated(int)</signal>
+        <receiver>frets</receiver>
+        <slot>Fret(int)</slot>
+    </connection>
+    <connection>
+        <sender>list_remove_btn</sender>
+        <signal>clicked()</signal>
+        <receiver>chordlist</receiver>
+        <slot>clearSelection()</slot>
+    </connection>
+    <connection>
+        <sender>frets</sender>
+        <signal>s1nameChanged(const QString &amp;)</signal>
+        <receiver>s1_1</receiver>
+        <slot>setText(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>frets</sender>
+        <signal>s2nameChanged(const QString &amp;)</signal>
+        <receiver>s1_2</receiver>
+        <slot>setText(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>frets</sender>
+        <signal>s3nameChanged(const QString &amp;)</signal>
+        <receiver>s1_3</receiver>
+        <slot>setText(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>frets</sender>
+        <signal>s4nameChanged(const QString &amp;)</signal>
+        <receiver>s1_4</receiver>
+        <slot>setText(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>frets</sender>
+        <signal>s5nameChanged(const QString &amp;)</signal>
+        <receiver>s1_5</receiver>
+        <slot>setText(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>frets</sender>
+        <signal>s6nameChanged(const QString &amp;)</signal>
+        <receiver>s1_6</receiver>
+        <slot>setText(const QString&amp;)</slot>
+    </connection>
+    <connection>
+        <sender>frets</sender>
+        <signal>nameChanged(const QString &amp;)</signal>
+        <receiver>chordname</receiver>
+        <slot>setText(const QString&amp;)</slot>
+    </connection>
+    <slot access="public">change_handler()</slot>
+</connections>
+</UI>
