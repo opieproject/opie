@@ -59,7 +59,7 @@ private:
 //	QString currentTab;
 	QStringList m_ids;
 	QMap <QString, TabConfig> m_tabs;
-	QCheckBox *m_busyblink;
+	QCheckBox *m_busyblink, *m_bigbusy;
 };
 
 

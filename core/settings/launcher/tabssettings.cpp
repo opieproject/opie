@@ -15,7 +15,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -62,7 +62,7 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 	lay-> addMultiCellWidget ( m_list, 1, 4, 0, 0 );
 
 	QWhatsThis::add ( m_list, tr( "foobar" ));
-	
+
 	QPushButton *p1, *p2, *p3;
 	p1 = new QPushButton ( tr( "New" ), this );
 	lay-> addWidget ( p1, 1, 1 );
@@ -78,18 +78,22 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 
 	lay-> setRowStretch ( 4, 10 );
 
+                m_bigbusy = new QCheckBox( tr( "Enable big busy indicator" ),  this );
+                lay-> addMultiCellWidget ( m_bigbusy, 5, 5, 0, 1 );
+
 	m_busyblink = new QCheckBox ( tr( "Enable blinking busy indicator" ), this );
-	lay-> addMultiCellWidget ( m_busyblink, 5, 5, 0, 1 );       
+	lay-> addMultiCellWidget ( m_busyblink, 6, 6, 0, 1 );
 
 	p1-> setEnabled ( false );
 	p3-> setEnabled ( false );
 
 	init ( );
-	
+
 	QWhatsThis::add ( m_list, tr( "Select the Launcher Tab you want to edit or delete." ));
 	QWhatsThis::add ( p1, tr( "Adds a new Tab to the Launcher." ) + QString ( "<center><br><i>not yet implemented</i><br>Please use the tabmanager</center>." ));
 	QWhatsThis::add ( p2, tr( "Opens a new dialog to customize the select Tab." ));
 	QWhatsThis::add ( p3, tr( "Deletes a Tab from the Launcher." ) + QString ( "<center><br><i>not yet implemented</i><br>Please use the tabmanager</center>." ));
+        	QWhatsThis::add ( m_bigbusy, tr( "Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar." ));
 	QWhatsThis::add ( m_busyblink, tr( "Activate this, if you want a blinking busy indicator for starting applications in the Launcher." ));
 }
 
@@ -100,7 +104,7 @@ void TabsSettings::init ( )
 
 	m_list-> insertItem ( tr( "All Tabs" ));
 	m_ids << GLOBALID;
-	
+
 	for ( QStringList::Iterator it = types. begin ( ); it != types. end ( ); ++it ) {
 		m_list-> insertItem ( rootFolder. typePixmap ( *it ), rootFolder. typeName ( *it ));
 		m_ids << *it;
@@ -114,10 +118,12 @@ void TabsSettings::init ( )
 	Config cfg ( "Launcher" );
 
 	readTabSettings ( cfg );
-	
+
 	cfg. setGroup ( "GUI" );
 	m_busyblink-> setChecked ( cfg. readEntry ( "BusyType" ). lower ( ) == "blink" );
+                m_bigbusy->setChecked(  cfg. readBoolEntry ( "BigBusy" )  );
 }
+
 
 void TabsSettings::readTabSettings ( Config &cfg )
 {
@@ -136,7 +142,7 @@ void TabsSettings::readTabSettings ( Config &cfg )
 	global_def. m_font_weight = 50;
 	global_def. m_font_italic = false;
 	global_def. m_changed     = false;
-	 
+
 
 	for ( QStringList::Iterator it = m_ids. begin ( ); it != m_ids. end ( ); ++it ) {
 		TabConfig tc = ( it != m_ids. begin ( )) ? m_tabs [GLOBALID] : global_def;
@@ -167,19 +173,19 @@ void TabsSettings::readTabSettings ( Config &cfg )
 			tc. m_font_size = f [1]. toInt ( );
 			tc. m_font_weight = f [2]. toInt ( );
 			tc. m_font_italic = ( f [3]. toInt ( ));
-		} 		
+		}
 		m_tabs [*it] = tc;
 	}
 
 	// if all tabs have the same config, then initialize the GLOBALID tab to these values
-	
+
 	TabConfig *first = 0;
 	bool same = true;
-	
+
 	for ( QStringList::Iterator it = m_ids. begin ( ); it != m_ids. end ( ); ++it ) {
 		if ( *it == GLOBALID )
 			continue;
-		else if ( !first ) 
+		else if ( !first )
 			first = &m_tabs [*it];
 		else
 			same &= ( *first == m_tabs [*it] );
@@ -203,7 +209,7 @@ void TabsSettings::accept ( )
 
 		if ( !tc. m_changed )
 			continue;
-			
+
 		cfg. setGroup ( grp. arg ( *it ));
 		switch ( tc. m_view ) {
 			case TabConfig::Icon:
@@ -227,7 +233,7 @@ void TabsSettings::accept ( )
 		}
 		else
 			cfg. removeEntry ( "Font" );
-		
+
 		QCopEnvelope be ( "QPE/Launcher", "setTabBackground(QString,int,QString)" );
 
 		switch ( tc. m_bg_type ) {
@@ -257,10 +263,12 @@ void TabsSettings::accept ( )
 
 		tc. m_changed = false;
 	}
-	cfg. setGroup ( "GUI" );    
+	cfg. setGroup ( "GUI" );
 	QString busytype = QString ( m_busyblink-> isChecked ( ) ? "blink" : "" );
-
 	cfg. writeEntry ( "BusyType", busytype );
+
+        	cfg. writeEntry ( "BigBusy", m_bigbusy->isChecked( ) );
+
 	{
 		QCopEnvelope e ( "QPE/Launcher", "setBusyIndicatorType(QString)" );
 		e << busytype;
@@ -275,7 +283,7 @@ void TabsSettings::newClicked ( )
 void TabsSettings::deleteClicked ( )
 {
 	int ind = m_list-> currentItem ( );
-	
+
 	if ( ind < 0 )
 		return;
 
@@ -285,26 +293,26 @@ void TabsSettings::deleteClicked ( )
 void TabsSettings::editClicked ( )
 {
 	int ind = m_list-> currentItem ( );
-	
+
 	if ( ind < 0 )
 		return;
 
 	TabConfig tc = m_tabs [m_ids [ind]];
-		
+
 	TabDialog *d = new TabDialog ( m_list-> pixmap ( ind ), m_list-> text ( ind ), tc, this, "TabDialog", true );
 
-	d-> showMaximized ( );	
+	d-> showMaximized ( );
 	if ( d-> exec ( ) == QDialog::Accepted ) {
 		tc. m_changed = true;
 		m_tabs [m_ids [ind]] = tc;
-		
+
 		if ( m_ids [ind] == GLOBALID ) {
 			for ( QStringList::Iterator it = m_ids. begin ( ); it != m_ids. end ( ); ++it ) {
 				if ( *it != GLOBALID )
 					m_tabs [*it] = tc;
-			}	
+			}
 		}
 	}
-	
+
 	delete d;
 }
