@@ -1,0 +1,4 @@
+ config EXAMPLE_LIBOPIE2CORE
+    boolean "libopiecore2 examples"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
+

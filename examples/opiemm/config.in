@@ -1,0 +1,4 @@
+ config EXAMPLE_LIBOPIE2MM
+    boolean "libopiemm2 examples"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2MM
+
