@@ -1,8 +1,7 @@
-2004-02-24	The Opie Team <opie@handhelds.org>
-	* mediummount is functional (alwin)
-
 2004-??-??	The Opie Team <opie@handhelds.org>
 
+	* Imported fullscreen and font improvements from the Qkonsole fork to embeddedkonsole (waspe)
+	* Repaired mediummount which was broken since integrating the quicklauncher (alwin)
 	* Improved big-screen support (zecke,ar)
 	* Improved multikeyboard support, added keyboard layout switching applet (mouse)
 	* Added a new mail client based on libetpan (harlekin,alwin,jgf)
