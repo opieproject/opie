@@ -139,8 +139,8 @@ void Calibration::checkPoints ( )
 		m_p [1]. setY ( dy - 1 );
 	if ( m_p [0]. y ( ) < 0 )
 		m_p [0]. setY ( 0 );
-	if ( m_p [0]. y ( ) > m_p [1]. y ( ))
-		m_p [0]. setY ( m_p [1]. y ( ));
+	if ( m_p [0]. y ( ) >= dy )
+		m_p [0]. setY ( dy - 1 );
 }
 
 
@@ -205,8 +205,8 @@ void Calibration::mouseMoveEvent ( QMouseEvent *e )
 		n [m_dragged]. setY ( 0 );
 	if ( n [m_dragged]. y ( ) >= m_scale. height ( ))
 		n [m_dragged]. setY ( m_scale. height ( ) - 1 );
-	if ( n [0]. y ( ) > n [1]. y ( ))
-		n [m_dragged]. setY ( n [1 - m_dragged]. y ( ));
+//	if ( n [0]. y ( ) > n [1]. y ( ))
+//		n [m_dragged]. setY ( n [1 - m_dragged]. y ( ));
 		
 	QRect r;	
 	int ox [2], oy [2], nx [2], ny [2];	
@@ -237,8 +237,8 @@ void Calibration::mouseMoveEvent ( QMouseEvent *e )
 		}
 	}
 	if ( r. isValid ( )) {
-		r |= QRect ( nx [0], ny [0], nx [1] - nx [0] + 1, ny [1] - ny [0] + 1 );
-		r |= QRect ( ox [0], oy [0], ox [1] - ox [0] + 1, oy [1] - oy [0] + 1 );
+		r |= QRect ( nx [0], ny [0], nx [1] - nx [0] + 1, ny [1] - ny [0] + 1 ). normalize ( );
+		r |= QRect ( ox [0], oy [0], ox [1] - ox [0] + 1, oy [1] - oy [0] + 1 ). normalize ( );
 		
 		repaint ( r, false );
 	}
@@ -274,7 +274,7 @@ void Calibration::paintEvent ( QPaintEvent *pe )
 	int dy = y1 - y0;
 	
 	// restrict steps to real x and y resolution
-	int st = QMIN( QMIN( m_steps, ( dx + 1 )), ( dy + 1 ));
+	int st = QMIN( QMIN( m_steps, ( dx + 1 )), ( QABS( dy ) + 1 ));
 	
 	QString stepstr = tr( "%1 Steps" ). arg ( st );
 	QRect tr = p. boundingRect ( BRD, BRD, width ( ) - 2*BRD, height() - 2*BRD, AlignTop | AlignRight, stepstr );
