@@ -207,7 +207,7 @@ void ClipboardApplet::action(int id)
 		
 	if ( scan ) {
 		qwsServer-> sendKeyEvent ( unicode, scan, ControlButton, true, false );
-		qwsServer-> sendKeyEvent ( unicode, scan, ControlButton, true, false );
+		qwsServer-> sendKeyEvent ( unicode, scan, ControlButton, false, false );
 	}
 }
 
