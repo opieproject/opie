@@ -75,8 +75,8 @@ déjà occupée par le joueur</translation>
     <message>
         <source>Press and hold the ? buttton
 next to a field for help</source>
-        <translation type="unfinished">Maintenez appuyé le bouton &apos;?&apos;
-à côté d&apos;un champ pour obtenir de l&apos;aide.</translation>
+        <translation>Cliquez et maintenez le bouton &apos;?&apos; situé
+à côté d&apos;un des champs pour obtenir de l&apos;aide</translation>
     </message>
 </context>
 <context>
@@ -119,7 +119,7 @@ next to a field for help</source>
     </message>
     <message>
         <source>AI</source>
-        <translation type="unfinished">I.A.</translation>
+        <translation>I.A</translation>
     </message>
     <message>
         <source>Rules</source>
