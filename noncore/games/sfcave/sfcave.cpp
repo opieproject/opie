@@ -3,12 +3,10 @@
 #include <math.h>
 #include <time.h>
 
-#ifdef QWS
-#include <qpe/qpeapplication.h>
+#include <opie2/oapplicationfactory.h>
 #include <qpe/config.h>
-#else
+
 #include <qapplication.h>
-#endif
 #include <qdir.h>
 
 #include "helpwindow.h"
@@ -132,42 +130,18 @@ int SFCave::initialGateGaps[]           = { 75, 50, 25 };
 bool movel;
 
 
-int main( int argc, char *argv[] )
-{
-    movel = true;
-#ifdef QWS
-    QPEApplication a( argc, argv );
-#else
-    QApplication a( argc, argv );
-#endif
+OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<SFCave> )
 
-    int speed = 3;
-    for ( int i = 0 ; i < argc ; ++i )
-    {
-        if ( strcmp( argv[i], "-s" ) == 0 )
-        {
-            if ( i+1 < argc )
-                speed = atoi( argv[i+1] );
-        }
-    }
-
-    SFCave app( speed );
-    a.setMainWidget( &app );
-    app.show();
-    app.start();
-    a.exec();
-}
-
-SFCave :: SFCave( int spd, QWidget *w, char *name )
-    : QMainWindow( w, name )
+SFCave :: SFCave( QWidget *w, const char *name, WFlags fl )
+    : QMainWindow( w, name, fl )
 
 {
-    replayIt = 0;
-#ifdef QWS
     showMaximized();
-#else
-    resize( 240, 284 );
-#endif
+    movel = true;
+    int spd = 3;
+    
+    
+    replayIt = 0;
 
     replayFile = QDir::home().path();
     replayFile += "/sfcave.replay";
@@ -213,6 +187,8 @@ SFCave :: SFCave( int spd, QWidget *w, char *name )
     gameTimer = new QTimer( this, "game timer" );
     connect( gameTimer, SIGNAL( timeout() ),
              this, SLOT( run() ) );
+	     
+    QTimer::singleShot(0, this, SLOT(start()));
 }
 
 SFCave :: ~SFCave()

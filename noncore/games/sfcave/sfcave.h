@@ -95,9 +95,15 @@ public:
 	double thrust;
 	bool running;
 
-	SFCave( int speed = 3, QWidget *p = 0, char *name = 0 );
+	SFCave( QWidget *p = 0, const char *name = 0, WFlags fl = 0 );
 	~SFCave();
+
+	static QString appName() { return QString::fromLatin1( QUICKAPP_NAME ); }
+	
+public slots:
 	void start();
+public:
+	
     void setSeed( int seed );
 	int nextInt( int range );
 	void setUp();
