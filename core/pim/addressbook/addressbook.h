@@ -31,6 +31,7 @@ class QToolButton;
 class QDialog;
 class Ir;
 class QAction;
+class LetterPicker;
 
 class AddressbookWindow: public QMainWindow
 {
@@ -69,6 +70,7 @@ private slots:
     void beamDone( Ir * );
     void slotFind();
     void slotSetCategory( int );
+    void slotSetLetter( char );
     void slotUpdateToolbar();
     void slotSetFont(int);
 private:
@@ -85,6 +87,7 @@ private:
     enum Panes { paneList=0, paneView, paneEdit };
     ContactEditor *abEditor;
     AbLabel *mView;
+    LetterPicker *pLabel;
     AbTable *abList;
 
     QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, 

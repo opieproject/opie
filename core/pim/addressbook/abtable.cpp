@@ -150,6 +150,7 @@ AbTable::~AbTable()
 
 void AbTable::init()
 {
+    showChar = '\0';
     setNumRows( 0 );
     setNumCols( 2 );
 
@@ -452,12 +453,13 @@ void AbTable::addEntry( const Contact &newCnt )
 }
 
 void AbTable::resizeRows( int size ) {
-
+/*
 	if (numRows()) {
 		for (int i = 0; i < numRows(); i++) {
 			setRowHeight( i, size );
 		}
-	}
+	}*/
+	updateVisible();
 }
 
 void AbTable::updateJournal( const Contact &cnt,
@@ -1008,6 +1010,13 @@ void AbTable::setShowCategory( const QString &c )
     updateVisible();
 }
 
+void AbTable::setShowByLetter( char c )
+{
+    showChar = tolower(c);
+    qDebug( "AbTable::setShowByLetter %c", showChar);
+    updateVisible();
+}
+
 QString AbTable::showCategory() const
 {
     return showCat;
@@ -1032,6 +1041,8 @@ void AbTable::updateVisible()
     bool hide;
     AbTableItem *ati;
     Contact *cnt;
+    QString fileAsName;
+    QString tmpStr;
     visible = 0;
 
     setPaintingEnabled( FALSE );
@@ -1043,6 +1054,7 @@ void AbTable::updateVisible()
 	ati = static_cast<AbTableItem*>( item(row, 0) );
 	cnt = &contactList[ati];
 	cats = cnt->categories();
+	fileAsName = cnt->fileAs();
 	hide = false;
 	if ( !showCat.isEmpty() ) {
 	    if ( showCat == tr( "Unfiled" ) ) {
@@ -1060,6 +1072,16 @@ void AbTable::updateVisible()
 			}
 		    }
 		}
+	    }
+	}
+	if ( showChar != '\0' ) {
+	    tmpStr = fileAsName.left(1);
+	    tmpStr = tmpStr.lower();
+	    qDebug( "updateVisible ");
+	    qDebug( tmpStr );
+	    qDebug( "updateVisible2 %c", showChar );
+	    if ( tmpStr != QString(QChar(showChar)) ) {
+		    hide = true;
 	    }
 	}
 	if ( hide ) {

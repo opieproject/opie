@@ -84,6 +84,7 @@ public:
     void setChoiceSelection(int index, const QStringList& list);
     QStringList choiceSelection(int index) const;
     void setShowCategory( const QString &c );
+    void setShowByLetter( char c );
     QString showCategory() const;
     QStringList categories();
     void resizeRows( int size );
@@ -130,6 +131,7 @@ private:
     void updateVisible();
     int lastSortCol;
     bool asc;
+    char showChar;
     QMap<AbTableItem*, Contact> contactList;
     const QValueList<int> *intFields;
     int currFindRow;

@@ -5,13 +5,15 @@ HEADERS	= addressbook.h \
                   contacteditor.h \
 		  ablabel.h \
 		  abtable.h \
-		  addresssettings.h
+		  addresssettings.h \
+		  picker.h
 SOURCES	= main.cpp \
 		  addressbook.cpp \
 		  contacteditor.cpp \
 		  ablabel.cpp \
 		  abtable.cpp \
-		  addresssettings.cpp
+		  addresssettings.cpp \
+		  picker.cpp
 INTERFACES	= addresssettingsbase.ui
 
 TARGET		= addressbook

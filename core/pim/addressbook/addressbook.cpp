@@ -63,6 +63,7 @@
 
 #include <qdatetime.h>
 
+#include "picker.h"
 static QString addressbookOldXMLFilename()
 {
     QString filename = QPEApplication::documentDir() + "addressbook.xml";
@@ -98,6 +99,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
     setToolBarsMovable( FALSE );
 
+    QBoxLayout *vb = new QVBoxLayout( this, 0, 0 );
     // Create Toolbars
 
     QPEToolBar *bar = new QPEToolBar( this );
@@ -189,6 +191,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
     }
 
     abList = new AbTable( &orderedFields, this, "table" );
+    vb->insertWidget(0,abList);
     abList->setHScrollBarMode( QScrollView::AlwaysOff );
     connect( abList, SIGNAL( empty( bool ) ),
 	     this, SLOT( listIsEmpty( bool ) ) );
@@ -205,6 +208,9 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	QFile::remove(addressbookOldXMLFilename());
     }
 
+    pLabel = new LetterPicker( abList );
+    connect(pLabel, SIGNAL(letterClicked(char)), this, SLOT(slotSetLetter(char)));
+    vb->insertWidget(1,pLabel);
     catMenu = new QPopupMenu( this );
     catMenu->setCheckable( TRUE );
     connect( catMenu, SIGNAL(activated(int)), this, SLOT(slotSetCategory(int)) );
@@ -882,6 +888,12 @@ void AddressbookWindow::slotSetCategory( int c )
 	abList->setShowCategory( cat );
 	setCaption( tr("Contacts") + " - " + cat );
     }
+}
+
+void AddressbookWindow::slotSetLetter( char c ) {
+
+	abList->setShowByLetter( c );
+
 }
 
 void AddressbookWindow::populateCategories()
