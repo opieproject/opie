@@ -5,15 +5,19 @@
 
 */
 
-// $Id: ogfxeffect.cpp,v 1.5 2002-11-28 00:37:59 sandman Exp $
-
-#include <qimage.h>
-#include <qpainter.h>
-
-#include <qpe/qmath.h>
+// $Id: ogfxeffect.cpp,v 1.6 2004-05-21 20:54:44 ar Exp $
 
 #include "ogfxeffect.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/qmath.h>
+
+/* QT */
+#include <qimage.h>
+#include <qpainter.h>
+
+/* STD */
 #include <cstdlib>
 #include <cmath>
 
@@ -25,27 +29,27 @@
 
 
 QPixmap& OGfxEffect::gradient(QPixmap &pixmap, const QColor &ca,
-	const QColor &cb, GradientType eff, int ncols)
+    const QColor &cb, GradientType eff, int ncols)
 {
-	if ( !pixmap. isNull ( )) {
-		QImage image = gradient(pixmap.size(), ca, cb, eff, ncols);
-		pixmap.convertFromImage(image);
-	}
-	return pixmap;
+    if ( !pixmap. isNull ( )) {
+        QImage image = gradient(pixmap.size(), ca, cb, eff, ncols);
+        pixmap.convertFromImage(image);
+    }
+    return pixmap;
 }
 
 QImage OGfxEffect::gradient(const QSize &size, const QColor &ca,
                             const QColor &cb, GradientType eff, int /*ncols*/)
-{    
-	int rDiff, gDiff, bDiff;
-	int rca, gca, bca, rcb, gcb, bcb;
-	
-	QImage image(size, 32);
+{
+    int rDiff, gDiff, bDiff;
+    int rca, gca, bca, rcb, gcb, bcb;
 
-	if (size.width() == 0 || size.height() == 0) {
-		qDebug ( "WARNING: OGfxEffect::gradient: invalid image" );
-		return image;
-	}
+    QImage image(size, 32);
+
+    if (size.width() == 0 || size.height() == 0) {
+        odebug << "WARNING: OGfxEffect::gradient: invalid image" << oendl;
+        return image;
+    }
 
     register int x, y;
 
@@ -278,19 +282,19 @@ QImage OGfxEffect::gradient(const QSize &size, const QColor &ca,
 
 
 QPixmap& OGfxEffect::blend(QPixmap &pixmap, float initial_intensity,
-			  const QColor &bgnd, GradientType eff,
-			  bool anti_dir, int /*ncols*/)
+              const QColor &bgnd, GradientType eff,
+              bool anti_dir, int /*ncols*/)
 {
-	if ( !pixmap. isNull ( )) {
-	    QImage image = pixmap.convertToImage();
-   		OGfxEffect::blend(image, initial_intensity, bgnd, eff, anti_dir);
+    if ( !pixmap. isNull ( )) {
+        QImage image = pixmap.convertToImage();
+        OGfxEffect::blend(image, initial_intensity, bgnd, eff, anti_dir);
 
-		if ( pixmap. depth ( ) <= 8 )
-			image. convertDepth ( pixmap. depth ( ));
+        if ( pixmap. depth ( ) <= 8 )
+            image. convertDepth ( pixmap. depth ( ));
 
-	    pixmap.convertFromImage(image);
-	}	
-   	return pixmap;
+        pixmap.convertFromImage(image);
+    }
+    return pixmap;
 }
 
 
@@ -299,7 +303,7 @@ QImage& OGfxEffect::blend(QImage &image, float initial_intensity,
                             bool anti_dir)
 {
     if (image.width() == 0 || image.height() == 0) {
-      qDebug ( "Invalid image\n" );
+      odebug << "Invalid image" << oendl;
       return image;
     }
 
@@ -484,8 +488,8 @@ QImage& OGfxEffect::blend(QImage &image, float initial_intensity,
         }
     }
 
-    else 
-    	qDebug ( "not implemented\n" );
+    else
+        odebug << "not implemented" << oendl;
 
     return image;
 }
@@ -494,7 +498,7 @@ QImage& OGfxEffect::blend(QImage &image, float initial_intensity,
 // Not very efficient as we create a third big image...
 //
 QImage& KQGfxEffect::blend(QImage &image1, QImage &image2,
-			    GradientType gt, int xf, int yf)
+                GradientType gt, int xf, int yf)
 {
   if (image1.width() == 0 || image1.height() == 0 ||
       image2.width() == 0 || image2.height() == 0)
@@ -503,8 +507,8 @@ QImage& KQGfxEffect::blend(QImage &image1, QImage &image2,
   QImage image3;
 
   image3 = KQGfxEffect::unbalancedGradient(image1.size(),
-				    QColor(0,0,0), QColor(255,255,255),
-				    gt, xf, yf, 0);
+                    QColor(0,0,0), QColor(255,255,255),
+                    gt, xf, yf, 0);
 
   return blend(image1,image2,image3, Red); // Channel to use is arbitrary
 }
