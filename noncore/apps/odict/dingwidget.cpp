@@ -30,7 +30,7 @@
 #include <qtextbrowser.h>
 #include <stdlib.h> // for getenv
 
-DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top, QTextBrowser *browser_bottom, QString activated_name) : QWidget(parent)
+DingWidget::DingWidget(QString word, QTextBrowser *browser_top, QTextBrowser *browser_bottom, QString activated_name)
 {
 	methodname = activated_name;
 	queryword = word;
@@ -53,7 +53,7 @@ DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top,
 	lines = lines.grep( queryword );
 
 	QString top, bottom;
-	//parseInfo( lines, top , bottom );
+	parseInfo( lines, top , bottom );
 	browser_top->setText( top );
 	browser_bottom->setText( bottom );
 }
