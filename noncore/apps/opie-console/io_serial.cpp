@@ -27,6 +27,7 @@ void IOSerial::send(const QByteArray &data) {
 }
 
 void IOSerial::close() {
+    qWarning("closing!");
     if (m_fd) {
         delete m_read;
         delete m_error;
@@ -117,7 +118,7 @@ bool IOSerial::open() {
         connect(m_error, SIGNAL(activated(int)), this, SLOT(errorOccured()));
         return TRUE;
     } else {
-        qWarning("opened");
+        qWarning(" already opened");
         emit error(Refuse, tr("Device is already connected"));
         m_fd = 0;
         return FALSE;
@@ -176,7 +177,20 @@ QString IOSerial::name() const {
     return "RS232 Serial IO Layer";
 }
 int IOSerial::rawIO()const {
+    if (m_read )
+        disconnect(m_read, SIGNAL(activated(int)), this, SLOT(dataArrived()));
+    if (m_error )
+        disconnect(m_error, SIGNAL(activated(int)), this, SLOT(errorOccured()));
+
     int fd = ::open(m_device, O_RDWR  );
 
     return fd;
 };
+void IOSerial::closeRawIO(int fd) {
+    if (m_read )
+        connect(m_read, SIGNAL(activated(int)), this, SLOT(dataArrived()));
+    if (m_error )
+        connect(m_error, SIGNAL(activated(int)), this, SLOT(errorOccured()));
+
+    ::close( fd );
+}

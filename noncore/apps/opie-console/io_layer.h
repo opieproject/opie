@@ -54,8 +54,16 @@ public:
      * a file descriptor which opens
      * the device for io but does not
      * do any ioctling on it...
+     * and it'll stop listening to the before opened
+     * device
      */
     virtual int rawIO()const;
+
+    /**
+     * will close the rawIO stuff
+     * and will listen to it's data again...
+     */
+    virtual void closeRawIO(int);
 signals:
     /**
      * received input as QCString

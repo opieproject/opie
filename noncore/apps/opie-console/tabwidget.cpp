@@ -2,7 +2,7 @@
 #include "tabwidget.h"
 
 TabWidget::TabWidget( QWidget* parent, const char* name )
-    : QTabWidget( parent, name ) {
+    : OTabWidget( parent, name ) {
     connect(this, SIGNAL( currentChanged(QWidget*) ),
             this, SLOT( slotCurChanged(QWidget*) ) );
 }
@@ -14,8 +14,8 @@ void TabWidget::add( Session* ses ) {
     if ( !ses->widgetStack() ) return;
     qWarning("going to add it");
     //reparent( ses->widgetStack(), QPoint() );
-    //addTab( ses->widgetStack(), "console/konsole", ses->name() );
-    addTab( ses->widgetStack(), ses->name() );
+    addTab( ses->widgetStack(), "console/konsole", ses->name() );
+    //addTab( ses->widgetStack(), ses->name() );
     m_map.insert( ses->widgetStack(), ses );
 }
 
@@ -37,7 +37,8 @@ void TabWidget::setCurrent( Session* ses ) {
     if (!ses )
         return;
 
-    showPage( ses->widgetStack() );
+    //showPage( ses->widgetStack() );
+    setCurrentTab( ses->widgetStack() );
 }
 
 

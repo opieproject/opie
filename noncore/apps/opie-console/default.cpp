@@ -1,5 +1,5 @@
 #include "io_serial.h"
-#include "sz_transfer.h"
+#include "filetransfer.h"
 #include "serialconfigwidget.h"
 #include "irdaconfigwidget.h"
 #include "btconfigwidget.h"
@@ -11,13 +11,13 @@
 extern "C" {
     // FILE Transfer Stuff
     FileTransferLayer* newSZTransfer(IOLayer* lay) {
-        return new SzTransfer( SzTransfer::SZ, lay );
+        return new FileTransfer( FileTransfer::SZ, lay );
     }
     FileTransferLayer* newSYTransfer(IOLayer* lay) {
-        return new SzTransfer( SzTransfer::SY, lay );
+        return new FileTransfer( FileTransfer::SY, lay );
     }
     FileTransferLayer* newSXTransfer(IOLayer* lay) {
-        return new SzTransfer( SzTransfer::SX, lay );
+        return new FileTransfer(FileTransfer ::SX, lay );
     }
 
     // Layer stuff

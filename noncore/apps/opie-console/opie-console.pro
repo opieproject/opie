@@ -3,7 +3,7 @@ TEMPLATE     = app
 CONFIG 	     = qt debug
 DESTDIR      = $(OPIEDIR)/bin
 HEADERS      = io_layer.h io_serial.h io_irda.h \
-	       file_layer.h sz_transfer.h \
+	       file_layer.h filetransfer.h \
 	       metafactory.h \
 	       session.h \
 	       mainwindow.h \
@@ -31,7 +31,7 @@ HEADERS      = io_layer.h io_serial.h io_irda.h \
 
 
 SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp \
-	       file_layer.cpp sz_transfer.cpp \
+	       file_layer.cpp filetransfer.cpp \
                main.cpp \
 	       metafactory.cpp \
 	       session.cpp \
@@ -59,6 +59,6 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp \
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe -lopie
+LIBS        += -lqpe -lopie 
 TARGET       = opie-console
 

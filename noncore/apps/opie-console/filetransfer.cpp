@@ -11,12 +11,26 @@
 
 #include "filetransfer.h"
 
+/**
+ *
+ *
+class FileTransferControl {
+public:
+    FileTransferControl();
+    ~FileTransferControl();
+
+
+};
+*/
+
 bool FileTransfer::terminate = false;
 pid_t FileTransfer::m_pid;
 
 FileTransfer::FileTransfer( Type t, IOLayer* lay )
     : FileTransferLayer( lay ), m_type( t ) {
+    signal(SIGPIPE,  SIG_IGN );
     signal( SIGCHLD, signal_handler );
+    m_not = 0l;
 }
 FileTransfer::~FileTransfer() {
 }
@@ -30,21 +44,26 @@ FileTransfer::~FileTransfer() {
  * to do direct IO from and to the fd
  */
 void FileTransfer::sendFile( const QString& file ) {
+    m_prog =-1;
     m_fd = layer()->rawIO();
 //
 //    m_fd = ::open("/dev/ttyS0", O_RDWR);
 
-
+    m_file = file;
     if ( pipe( m_comm ) < 0 )
         m_comm[0] = m_comm[1] = 0;
     if ( pipe( m_info ) < 0 )
         m_info[0] = m_info[1] = 0;
 
-    qWarning("output:"+file );
+
     m_pid = fork();
     switch( m_pid ) {
+    case -1:
+        emit error( StartError, tr("Was not able to fork") );
+        break;
     case 0:{
         setupChild();
+        qWarning("output:"+file );
         /* exec */
         char* verbose = "-vv";
         char* binray = "-b";
@@ -67,8 +86,10 @@ void FileTransfer::sendFile( const QString& file ) {
             char resultByte; int len;
             len = read(m_info[0], &resultByte, 1 );
             /* len == 1 start up failed */
-            if ( len == 1 )
+            if ( len == 1 ) {
+                emit error( StartError, tr("Could not start") );
                 return;
+            }
             if ( len == -1 )
                 if ( (errno == ECHILD ) || (errno == EINTR ) )
                     continue;
@@ -85,35 +106,35 @@ void FileTransfer::sendFile( const QString& file ) {
         int sel;
 
         /* replace by QSocketNotifier!!! */
-        while (!terminate) {
-            FD_ZERO( &fds );
-            FD_SET( m_comm[0], &fds );
-            sel = select( m_comm[0]+1, &fds, NULL, NULL, &timeout );
-            if (sel ) {
-                if ( FD_ISSET(m_comm[0], &fds ) ) {
-                    printf("out:");
-                    QByteArray ar(4096);
-                    int len = read(m_comm[0], ar.data(), 4096 );
-                    for (int i = 0; i < len; i++ ) {
-                        // printf("%c", ar[i] );
-                    }
-                    printf("\n");
-                }
-            }
-        }
+        m_not = new QSocketNotifier(m_comm[0],  QSocketNotifier::Read );
+        connect(m_not, SIGNAL(activated(int) ),
+                this, SLOT(slotRead() ) );
+    }
         break;
     }
-    }
 }
+/*
+ * let's call the one with the filename
+ */
 void FileTransfer::sendFile( const QFile& file ) {
     sendFile( file.name() );
 }
+/*
+ * our signal handler to be replaced by
+ * a procctl thingie
+ */
 void FileTransfer::signal_handler(int ) {
+    qWarning("Terminated");
     int status;
     signal( SIGCHLD, signal_handler );
     waitpid( m_pid, &status, WNOHANG );
     terminate = true;
 }
+
+/*
+ * setting up communication
+ * between parent child and ioLayer
+ */
 void FileTransfer::setupChild() {
     /*
      * we do not want to read from our
@@ -139,4 +160,86 @@ void FileTransfer::setupChild() {
     dup2( m_fd, STDIN_FILENO );
     dup2( m_fd, STDOUT_FILENO );
     dup2( m_comm[1], STDERR_FILENO );
+}
+
+/*
+ * read from the stderr of the child
+ * process
+ */
+void FileTransfer::slotRead() {
+    QByteArray ar(4096);
+    int len = read(m_comm[0], ar.data(), 4096 );
+    qWarning("slot read %d", len);
+    for (int i = 0; i < len; i++ ) {
+        // printf("%c", ar[i] );
+    }
+    ar.resize( len );
+    QString str( ar );
+    QStringList lis = QStringList::split(' ', str );
+    /*
+     * Transfer finished.. either complete or incomplete
+     */
+    if ( lis[0].simplifyWhiteSpace() == "Transfer" ) {
+        qWarning("sent!!!!");
+        emit sent();
+        return;
+    }
+    /*
+     * do progress reading
+     */
+    slotProgress( lis );
+
+
+}
+/*
+ * find the progress
+ */
+void FileTransfer::slotProgress( const QStringList& list ) {
+    bool complete = true;
+    int min, sec;
+    int bps;
+    unsigned long sent, total;
+
+    min = sec = bps = -1;
+    sent = total = 0;
+
+    // Data looks like this
+    //  0      1         2          3      4     5
+    // Bytes Sent 65536/11534336 BPS:7784 ETA 24:33
+    QStringList progi = QStringList::split('/', list[2].simplifyWhiteSpace()  );
+    sent  = progi[0].toULong(&complete );
+    if (!complete ) return;
+
+    total = progi[1].toULong(&complete );
+    if (!complete || total == 0) {
+        qWarning("returning!!");
+        return;
+    }
+
+    qWarning("%s, %d, %d",  progi.join("/").latin1(), sent, total );
+
+    double pro = (double)sent/total;
+    int prog = pro * 100;
+
+    // speed
+    progi = QStringList::split(':', list[3].simplifyWhiteSpace() );
+    bps = progi[1].toInt();
+
+    // time
+    progi = QStringList::split(':', list[5].simplifyWhiteSpace() );
+    min = progi[0].toInt();
+    sec = progi[1].toInt();
+
+
+    qWarning("Prog!:%d", prog );
+    if ( prog > m_prog ) {
+        m_prog = prog;
+        emit progress(m_file, m_prog, bps, -1, min , sec );
+        qWarning("Progress: %s, %d\%, %d, %d:%d", m_file.latin1(), m_prog, bps,  min, sec );
+    }
+
+}
+void FileTransfer::cancel() {
+    ::kill(m_pid,9 );
+    delete m_not;
 }

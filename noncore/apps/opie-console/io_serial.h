@@ -36,6 +36,7 @@ public:
     QString identifier() const;
     QString name() const;
     int rawIO()const;
+    void closeRawIO(int fd );
 signals:
     void received(const QByteArray &);
     void error(int, const QString &);
