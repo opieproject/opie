@@ -27,6 +27,8 @@ QValueList<ToDoEvent>  FileToDoResource::load( const QString& name ) {
     dict.insert("Progress" , new int(ToDoEvent::Progress) );
     dict.insert("Completed",  new int(ToDoEvent::Completed) );
     dict.insert("CrossReference", new int(ToDoEvent::CrossReference) );
+    dict.insert("HasAlarmDateTime", new int(ToDoEvent::HasAlarmDateTime) );
+    dict.insert("AlarmDateTime", new int(ToDoEvent::AlarmDateTime) );
 
     qWarning("loading tododb" );
     QValueList<ToDoEvent> m_todos;
@@ -116,6 +118,71 @@ QValueList<ToDoEvent>  FileToDoResource::load( const QString& name ) {
                     }
                     break;
                 }
+		case ToDoEvent::HasAlarmDateTime:
+                    event.setHasAlarmDateTime( it.data().toInt() );
+                    break;
+		case ToDoEvent::AlarmDateTime:{
+			/*
+			 * The Time string looks like this:
+			 * HH:MM:SS;DD:MM:YYYY
+			 * We have to parse it...
+			 * Zecke: Do you know a smarter solution ? (se)
+			 */
+			QStringList timedate = QStringList::split( ';', it.data() );
+			QStringList::Iterator elements = timedate.begin();
+
+			/* Parse timestring */
+			QStringList refs = QStringList::split( ':', (*elements) );
+			QStringList::Iterator strIt = refs.begin();
+			int hours   = 0;
+			int minutes = 0;
+			int seconds = 0;
+			int day     = 0;
+			int month   = 0;
+			int year    = 0;
+
+			for (int count = 0; count < 3; count++){ 
+				switch (count){
+				case 0:
+					hours = (*strIt).toInt();
+					break;
+				case 1:
+					minutes = (*strIt).toInt();
+					break;
+				case 2:
+					seconds = (*strIt).toInt();
+					break;
+				}
+				++strIt;
+			}
+
+			/* Parse Datestring */
+			if ( elements++ != timedate.end() ){
+				refs = QStringList::split( ':', (*elements) );
+				strIt = refs.begin();
+
+				for (int count = 0; count < 3; count++){ 
+					switch (count){
+					case 0:
+						day = (*strIt).toInt();
+						break;
+					case 1:
+						month = (*strIt).toInt();
+						break;
+					case 2:
+						year = (*strIt).toInt();
+						break;
+					}
+					++strIt;
+				}
+			}
+
+			QTime alarmTime( hours, minutes, seconds );
+			QDate alarmDate( year, month, day );
+			QDateTime alarmDateTime ( alarmDate, alarmTime );
+			event.setAlarmDateTime( alarmDateTime );
+		}
+			break;
                 default:
                     break;
                 }
@@ -187,6 +254,18 @@ bool FileToDoResource::save( const QString& name,
                 refs+= (*listIt) + "," + QString::number( ints[i]) + ";";
         }
         map.insert("CrossReference", refs );
+
+	// append alarm settings
+	map.insert( "HasAlarmDateTime", QString::number((int)(*it).hasAlarmDateTime() ) );
+	if( (*it).hasAlarmDateTime() ){
+            map.insert("AlarmDateTime",  QString::number( (*it).alarmDateTime().time().hour() ) + 
+		       ":" + QString::number( (*it).alarmDateTime().time().minute() )+
+		       ":" + QString::number( (*it).alarmDateTime().time().second() ) + 
+		       ";" + QString::number( (*it).alarmDateTime().date().day() ) + 
+		       ":" + QString::number( (*it).alarmDateTime().date().month() ) +
+		       ":" + QString::number( (*it).alarmDateTime().date().year() ) );
+	}
+
 	task->setTagName("Task" );
 	task->setAttributes( map );
 	tasks->appendChild(task);

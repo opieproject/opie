@@ -25,8 +25,9 @@ public:
         DateMonth,
         DateYear,
         Progress,
-        CrossReference
-
+        CrossReference,
+	HasAlarmDateTime,
+	AlarmDateTime
     };
     friend class ToDoDB;
  public:
@@ -65,6 +66,11 @@ public:
     bool hasDate() const;
 
     /**
+     * Does this Event has an alarm time ?
+     */
+    bool hasAlarmDateTime() const;
+
+    /**
      * What is the priority?
      */
     int priority()const ;
@@ -88,6 +94,11 @@ public:
      * The end Date
      */
     QDate date()const;
+
+    /**
+     * Alarm Date and Time
+     */
+    QDateTime alarmDateTime()const;
 
     /**
      * The description of the todo
@@ -131,6 +142,12 @@ public:
      * set if this todo got an end data
      */
     void setHasDate( bool hasDate );
+
+    /**
+     * set if this todo has an alarm time and date
+     */
+    void setHasAlarmDateTime ( bool hasAlarm );
+
     // if the category doesn't exist we will create it
     // this sets the the Category after this call category will be the only category
     void setCategory( const QString &category );
@@ -176,6 +193,12 @@ public:
      * set the end date
      */
     void setDate( QDate date );
+
+    /**
+     * set the alarm time
+     */
+    void setAlarmDateTime ( const QDateTime& alarm );
+
     void setDescription(const QString& );
     void setSummary(const QString& );
     void setExtra( const QString&,  const QString& );
@@ -206,6 +229,10 @@ public:
     QMap<QString, QArray<int> > m_relations;
     int m_uid;
     ushort m_prog;
+
+    /** Alarm Time stuff */
+    bool m_hasAlarmDateTime;
+    QDateTime m_alarmDateTime;
 };
 
 

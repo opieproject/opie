@@ -34,6 +34,9 @@ class ToDoDB
     void setResource(ToDoResource* res); 
 
  private:
+    void addEventAlarm( const ToDoEvent& event );
+    void delEventAlarm( const ToDoEvent& event );
+
     class ToDoDBPrivate;
     ToDoDBPrivate *d;
     QString m_fileName;

@@ -38,6 +38,8 @@ ToDoEvent::ToDoEvent(bool completed, int priority,
 	delete uidgen;
     }// generate the ids
     m_uid = uid;
+    m_hasAlarmDateTime = false;
+    
 }
 QArray<int> ToDoEvent::categories()const
 {
@@ -63,6 +65,10 @@ bool ToDoEvent::isCompleted() const
 bool ToDoEvent::hasDate() const
 {
     return m_hasDate;
+}
+bool ToDoEvent::hasAlarmDateTime() const
+{
+    return m_hasAlarmDateTime;
 }
 int ToDoEvent::priority()const
 {
@@ -119,6 +125,11 @@ QDate ToDoEvent::date()const
     return m_date;
 }
 
+QDateTime ToDoEvent::alarmDateTime() const
+{
+	return m_alarmDateTime;
+}
+
 QString ToDoEvent::description()const
 {
     return m_desc;
@@ -130,6 +141,10 @@ void ToDoEvent::setCompleted( bool completed )
 void ToDoEvent::setHasDate( bool hasDate )
 {
     m_hasDate = hasDate;
+}
+void ToDoEvent::setHasAlarmDateTime( bool hasAlarmDateTime )
+{
+    m_hasAlarmDateTime = hasAlarmDateTime;
 }
 void ToDoEvent::setDescription(const QString &desc )
 {
@@ -156,6 +171,10 @@ void ToDoEvent::setPriority(int prio )
 void ToDoEvent::setDate( QDate date )
 {
     m_date = date;
+}
+void ToDoEvent::setAlarmDateTime( const QDateTime& alarm )
+{
+    m_alarmDateTime = alarm;
 }
 void ToDoEvent::addRelated( const QString &app,  int id )
 {
@@ -232,6 +251,11 @@ QString ToDoEvent::richText() const
   if (hasDate() ){
     text += "<b>" + QObject::tr( "Deadline:") + " </b>";
     text += date().toString();
+    text += "<br>";
+  }
+  if (hasAlarmDateTime() ){
+    text += "<b>" + QObject::tr( "Alarmed Notification:") + " </b>";
+    text += alarmDateTime().toString();
     text += "<br>";
   }
 
@@ -316,7 +340,9 @@ bool ToDoEvent::operator==(const ToDoEvent &toDoEvent )const
         m_date == toDoEvent.m_date &&
         m_category == toDoEvent.m_category &&
         m_sum == toDoEvent.m_sum &&
-        m_desc == toDoEvent.m_desc )
+        m_desc == toDoEvent.m_desc &&
+	m_hasAlarmDateTime == toDoEvent.m_hasAlarmDateTime &&
+	m_alarmDateTime == toDoEvent.m_alarmDateTime )
 	return true;
     return false;
 }
@@ -333,6 +359,9 @@ ToDoEvent &ToDoEvent::operator=(const ToDoEvent &item )
     m_prog = item.m_prog;
     m_extra = item.m_extra;
     m_relations = item.m_relations;
+    m_hasAlarmDateTime = item.m_hasAlarmDateTime;
+    m_alarmDateTime = item.m_alarmDateTime;
+    
     return *this;
 }
 

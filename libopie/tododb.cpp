@@ -3,7 +3,7 @@
 
 #include <qpe/palmtoprecord.h>
 #include <qpe/global.h>
-
+#include <qpe/alarmserver.h>
 
 #include <opie/tododb.h>
 #include <opie/xmltree.h>
@@ -71,16 +71,23 @@ QValueList<ToDoEvent> ToDoDB::rawToDos()
 }
 void ToDoDB::addEvent( const ToDoEvent &event )
 {
-    m_todos.append( event );
+	if ( event.hasAlarmDateTime() )
+		addEventAlarm( event );
+	m_todos.append( event );
 }
 void ToDoDB::editEvent( const ToDoEvent &event )
 {
-    m_todos.remove( event );
-    m_todos.append( event );
+	delEventAlarm( event ); 
+	m_todos.remove( event );
+
+	if ( event.hasAlarmDateTime() )
+		addEventAlarm( event );
+	m_todos.append( event );
 }
 void ToDoDB::removeEvent( const ToDoEvent &event )
 {
-    m_todos.remove( event );
+	delEventAlarm( event );
+	m_todos.remove( event );
 }
 void ToDoDB::replaceEvent(const ToDoEvent &event )
 {
@@ -89,8 +96,10 @@ void ToDoDB::replaceEvent(const ToDoEvent &event )
   // == is not overloaded as we would like :( so let's search for the uid
   for(it = m_todos.begin(); it != m_todos.end(); ++it ){
     if( (*it).uid() == uid ){
-      m_todos.remove( (*it) );
-      break; // should save us the iterate is now borked
+	    qWarning ("Looking for UID: %d", uid);
+	    delEventAlarm( event );
+	    m_todos.remove( (*it) );
+	    break; // should save us the iterate is now borked
     }
   }
   m_todos.append(event);
@@ -123,7 +132,31 @@ bool ToDoDB::save()
   return m_res->save( m_fileName, m_todos );
 }
 
+void ToDoDB::addEventAlarm( const ToDoEvent& event )
+{
+	QDateTime now      = QDateTime::currentDateTime();
+	QDateTime schedule = event.alarmDateTime();
+	if ( schedule > now ){
+		AlarmServer::addAlarm( schedule,
+				       "QPE/Application/todolist",
+				       "alarm(QDateTime,int)", event.uid() );
+		
+	}
+}
 
+void ToDoDB::delEventAlarm( const ToDoEvent& event )
+{
+	QDateTime schedule; // Create null DateTime
+
+	// I hope this will remove all scheduled alarms 
+	// with the given uid !? 
+	// If not: I have to rethink how to remove already 
+	// scheduled events... (se)
+	qWarning("Removing alarm for event with uid %d", event.uid());
+	AlarmServer::deleteAlarm( schedule ,
+				  "QPE/Application/todolist",
+				  "alarm(QDateTime,int)", event.uid() );
+}
 
 
 
