@@ -41,11 +41,11 @@ private:
     // how many lines should be showed in the datebook section
     int m_max_lines_meet;
     // If location is to be showed too, 1 to activate it.
-    int m_show_location;
+    bool m_show_location;
     // if notes should be shown
-    int m_show_notes;
+    bool m_show_notes;
     // should only later appointments be shown or all for the current day.
-    int m_onlyLater;
+    bool m_onlyLater;
 
 };
 

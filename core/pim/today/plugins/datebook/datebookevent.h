@@ -28,9 +28,8 @@ class DateBookEvent: public OClickableLabel {
 public:
   DateBookEvent(const EffectiveEvent &ev,
                 QWidget* parent = 0,
-                int show_location = 0,
-                int show_notes = 0,
-                //   int onlyLater = 0,
+                bool show_location = 0,
+                bool show_notes = 0,
                 int maxCharClip = 0,
                 const char* name = 0,
                 WFlags fl = 0);

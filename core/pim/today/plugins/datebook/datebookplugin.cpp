@@ -1,3 +1,4 @@
+
 /*
  * datebookplugin.cpp
  *
@@ -33,7 +34,7 @@ QString DatebookPlugin::pluginName() const {
 }
 
 double DatebookPlugin::versionNumber() const {
-    return 0.1;
+    return 1.0;
 }
 
 QString DatebookPlugin::pixmapNameWidget() const {

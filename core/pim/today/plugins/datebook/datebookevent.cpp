@@ -22,9 +22,8 @@
 
 DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 			     QWidget* parent,
-			     int show_location,
-			     int show_notes,
-                             //  int onlyLater,
+			     bool show_location,
+			     bool show_notes,
                              int maxCharClip,
                              const char* name,
 			     WFlags fl) :
@@ -45,12 +44,12 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
     }
 
     // include location or not
-    if ( show_location == 1) {
+    if ( show_location ) {
         msg += "<BR><i>" + (ev).location() + "</i>";
     }
 
     if ( ( TimeString::timeString( QTime( (ev).event().start().time() ) ) == "00:00" )
-         &&  ( TimeString::timeString( QTime( (ev).event().end().time() ) ) == "23:59") ) {
+         &&  ( TimeString::timeString( QTime( (ev).event().end().time() ) ) == "23:59" ) ) {
         msg += "<br>All day";
     }  else {
         // start time of event
@@ -60,16 +59,21 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
     }
 
     // include possible note or not
-    if ( show_notes == 1) {
+    if ( show_notes ) {
         msg += "<br> <i>note</i>:" +( (ev).notes() ).mid( 0, maxCharClip );
     }
 
     setText( msg );
     connect( this, SIGNAL( clicked() ), this, SLOT( editMe() ) );
-    setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
+    //  setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
 }
 
 
+/**
+ * AM/PM timestring conversion.
+ * @param tm the timestring
+ * @return formatted to am/pm is system is set to it
+ */
 QString DateBookEvent::ampmTime( QTime tm ) {
 
     QString s;
@@ -92,7 +96,7 @@ QString DateBookEvent::ampmTime( QTime tm ) {
 }
 
 
-/*
+/**
  * starts the edit dialog as known from datebook
  */
 void DateBookEvent::editEventSlot( const Event &e ) {
@@ -108,11 +112,11 @@ void DateBookEvent::editEventSlot( const Event &e ) {
  * launches datebook
  */
 void DateBookEvent::startDatebook() {
-    QCopEnvelope e("QPE/System", "execute(QString)");
-    e << QString("datebook");
+    QCopEnvelope e( "QPE/System", "execute(QString)" );
+    e << QString( "datebook" );
 }
 
 void DateBookEvent::editMe() {
-  emit editEvent(event.event());
+  emit editEvent( event.event() );
 }
 
