@@ -1,11 +1,13 @@
 TEMPLATE        = lib
 CONFIG          += qte warn_on release
-HEADERS 	= ofontmenu.h ofileselector.h ofiledialog.h ofileview.h tododb.h todoevent.h todoresource.h todovcalresource.h xmltree.h  colordialog.h colorpopupmenu.h oclickablelabel.h oprocctrl.h oprocess.h odevice.h
-SOURCES		= ofontmenu.cc ofileselector.cc ofiledialog.cc xmltree.cc tododb.cpp todoevent.cpp todovcalresource.cpp  colordialog.cpp colorpopupmenu.cpp oclickablelabel.cpp oprocctrl.cpp oprocess.cpp odevice.cpp
+HEADERS 	= ofontmenu.h ofileselector.h ofiledialog.h ofileview.h tododb.h todoevent.h todoresource.h todovcalresource.h xmltree.h  colordialog.h colorpopupmenu.h oclickablelabel.h oprocctrl.h oprocess.h odevice.h otimepicker.h
+SOURCES		= ofontmenu.cc ofileselector.cc ofiledialog.cc xmltree.cc tododb.cpp todoevent.cpp todovcalresource.cpp  colordialog.cpp colorpopupmenu.cpp oclickablelabel.cpp oprocctrl.cpp oprocess.cpp odevice.cpp otimepicker.cpp
 TARGET		= opie
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR         = $(QTDIR)/lib$(PROJMAK)
 #VERSION = 1.0.0
+
+INTERFACES      = otimepickerbase.ui
 
 TRANSLATIONS = ../i18n/de/libopie.ts \
 	 ../i18n/en/libopie.ts \
