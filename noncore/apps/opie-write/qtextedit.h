@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qtextedit.h,v 1.1 2002-07-14 21:21:35 leseb Exp $
+** $Id: qtextedit.h,v 1.2 2002-07-15 23:22:50 leseb Exp $
 **
 ** Definition of the QTextEdit class
 **
@@ -61,9 +61,11 @@ class QTextString;
 class QTextDocument;
 class QTextCursor;
 class QTextCommand;
-class QTextParag;
+class QTextParagraph;
 class QTextFormat;
+class QTextEdit;
 class QTextBrowser;
+class QTextString;
 class QTextEditPrivate;
 
 class Q_EXPORT QTextEdit : public QScrollView
@@ -196,12 +198,17 @@ public:
     QFont font() const;
     int alignment() const;
     int undoDepth() const;
+
+    // do not use, will go away
     virtual bool getFormat( int para, int index, QFont *font, QColor *color, VerticalAlignment *verticalAlignment );
+    // do not use, will go away
     virtual bool getParagraphFormat( int para, QFont *font, QColor *color,
 				     VerticalAlignment *verticalAlignment, int *alignment,
 				     QStyleSheetItem::DisplayMode *displayMode,
 				     QStyleSheetItem::ListStyle *listStyle,
 				     int *listDepth );
+
+
     bool isOverwriteMode() const { return overWrite; }
     QColor paragraphBackgroundColor( int para ) const;
 
@@ -257,7 +264,10 @@ public slots:
     virtual void setFont( const QFont &f );
     virtual void setVerticalAlignment( VerticalAlignment a );
     virtual void setAlignment( int a );
+
+    // do not use, will go away
     virtual void setParagType( QStyleSheetItem::DisplayMode dm, QStyleSheetItem::ListStyle listStyle );
+
     virtual void setCursorPosition( int parag, int index );
     virtual void setSelection( int parag_from, int index_from, int parag_to, int index_to, int selNum = 0 );
     virtual void setSelectionAttributes( int selNum, const QColor &back, bool invertText );
@@ -346,7 +356,7 @@ private slots:
 
 private:
     struct Q_EXPORT UndoRedoInfo {
-	enum Type { Invalid, Insert, Delete, Backspace, Return, RemoveSelected, Format, Alignment, ParagType };
+	enum Type { Invalid, Insert, Delete, Backspace, Return, RemoveSelected, Format, Style };
 
 	UndoRedoInfo( QTextDocument *dc );
 	~UndoRedoInfo();
@@ -362,12 +372,7 @@ private:
 	int flags;
 	Type type;
 	QTextDocument *doc;
-	QMemArray<int> oldAligns;
-	int newAlign;
-	bool list;
-	QStyleSheetItem::ListStyle listStyle;
-	QValueList< QPtrVector<QStyleSheetItem> > oldStyles;
-	QValueList<QStyleSheetItem::ListStyle> oldListStyles;
+	QByteArray styleInformation;
     };
 
 private:
@@ -379,7 +384,7 @@ private:
     void checkUndoRedoInfo( UndoRedoInfo::Type t );
     void updateCurrentFormat();
     bool handleReadOnlyKeyEvent( QKeyEvent *e );
-    void makeParagVisible( QTextParag *p );
+    void makeParagVisible( QTextParagraph *p );
 #ifndef QT_NO_MIME
     QCString pickSpecial(QMimeSource* ms, bool always_ask, const QPoint&);
 #endif
@@ -391,18 +396,19 @@ private:
     virtual void emitHighlighted( const QString & ) {}
     virtual void emitLinkClicked( const QString & ) {}
 
-    void readFormats( QTextCursor &c1, QTextCursor &c2, int oldLen, QTextString &text, bool fillStyles = FALSE );
+    void readFormats( QTextCursor &c1, QTextCursor &c2, QTextString &text, bool fillStyles = FALSE );
     void clearUndoRedo();
     void paintDocument( bool drawAll, QPainter *p, int cx = -1, int cy = -1, int cw = -1, int ch = -1 );
     void moveCursor( CursorAction action );
-    void ensureFormatted( QTextParag *p );
+    void ensureFormatted( QTextParagraph *p );
     void placeCursor( const QPoint &pos, QTextCursor *c, bool link );
+    void updateMicroFocusHint();
 
 private:
     QTextDocument *doc;
     QTextCursor *cursor;
     QTimer *formatTimer, *scrollTimer, *changeIntervalTimer, *blinkTimer, *dragStartTimer;
-    QTextParag *lastFormatted;
+    QTextParagraph *lastFormatted;
     int interval;
     UndoRedoInfo undoRedoInfo;
     QTextFormat *currentFormat;

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcleanuphandler.h,v 1.1 2002-07-14 21:21:35 leseb Exp $
+** $Id: qcleanuphandler.h,v 1.2 2002-07-15 23:22:50 leseb Exp $
 **
 ** ...
 **
@@ -41,11 +41,7 @@
 #endif // QT_H
 
 template<class Type>
-#ifdef Q_NO_TEMPLATE_EXPORT
 class QCleanupHandler
-#else
-class Q_EXPORT QCleanupHandler
-#endif
 {
 public:
     QCleanupHandler() : cleanupObjects( 0 ) {}
@@ -88,11 +84,7 @@ private:
 };
 
 template<class Type>
-#ifdef Q_NO_TEMPLATE_EXPORT
 class QSingleCleanupHandler
-#else
-class Q_EXPORT QSingleCleanupHandler
-#endif
 {
 public:
     QSingleCleanupHandler() : object( 0 ) {}
@@ -112,11 +104,7 @@ private:
 };
 
 template<class Type>
-#ifdef Q_NO_TEMPLATE_EXPORT
 class QSharedCleanupHandler
-#else
-class Q_EXPORT QSharedCleanupHandler
-#endif
 {
 public:
     QSharedCleanupHandler() : object( 0 ) {}

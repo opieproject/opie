@@ -2,6 +2,7 @@
 #define QT3NAMESPACE_H
 
 #include <qnamespace.h>
+#include <qstring.h>
 
 #define Q_ASSERT ASSERT
 #define Q_WS_QWS

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qstylesheet.h,v 1.1 2002-07-14 21:21:35 leseb Exp $
+** $Id: qstylesheet.h,v 1.2 2002-07-15 23:22:50 leseb Exp $
 **
 ** Definition of the QStyleSheet class
 **
@@ -81,13 +81,13 @@ public:
 
     int alignment() const;
     void setAlignment( int f);
-    
+
     enum VerticalAlignment {
 	VAlignBaseline,
 	VAlignSub,
 	VAlignSuper
     };
-    
+
     VerticalAlignment verticalAlignment() const;
     void setVerticalAlignment( VerticalAlignment valign );
 
@@ -119,6 +119,10 @@ public:
     bool fontUnderline() const;
     void setFontUnderline( bool );
     bool definesFontUnderline() const;
+
+    bool fontStrikeOut() const;
+    void setFontStrikeOut( bool );
+    bool definesFontStrikeOut() const;
 
     bool isAnchor() const;
     void setAnchor(bool anc);
@@ -171,10 +175,10 @@ private:
 
 #if defined(Q_TEMPLATEDLL)
 // MOC_SKIP_BEGIN
-template class Q_EXPORT QDict<QStyleSheetItem>;
-template class Q_EXPORT QValueList< QPtrVector<QStyleSheetItem> >;
-template class Q_EXPORT QPtrVector<QStyleSheetItem>;
-template class Q_EXPORT QValueList<QStyleSheetItem::ListStyle>;
+Q_TEMPLATE_EXTERN template class Q_EXPORT QDict<QStyleSheetItem>;
+Q_TEMPLATE_EXTERN template class Q_EXPORT QValueList< QPtrVector<QStyleSheetItem> >;
+Q_TEMPLATE_EXTERN template class Q_EXPORT QPtrVector<QStyleSheetItem>;
+Q_TEMPLATE_EXTERN template class Q_EXPORT QValueList<QStyleSheetItem::ListStyle>;
 // MOC_SKIP_END
 #endif
 

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcomplextext.cpp,v 1.1 2002-07-14 21:21:35 leseb Exp $
+** $Id: qcomplextext.cpp,v 1.2 2002-07-15 23:22:50 leseb Exp $
 **
 ** Implementation of some internal classes
 **
@@ -65,9 +65,6 @@ QBidiContext::~QBidiContext()
     if( parent && parent->deref() )
 	delete parent;
 }
-
-static QChar *shapeBuffer = 0;
-static int shapeBufSize = 0;
 
 /*
    Arabic shaping obeys a number of rules according to the joining classes (see Unicode book, section on

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qtextedit.cpp,v 1.1 2002-07-14 21:21:35 leseb Exp $
+** $Id: qtextedit.cpp,v 1.2 2002-07-15 23:22:50 leseb Exp $
 **
 ** Implementation of the QTextEdit class
 **
@@ -66,6 +66,8 @@
 
 using namespace Qt3;
 
+static bool qt_enable_richtext_copy = FALSE;
+
 struct QUndoRedoInfoPrivate
 {
     QTextString text;
@@ -77,11 +79,16 @@ class QTextEditPrivate
 {
 public:
     QTextEditPrivate()
-	:preeditStart(-1),preeditLength(-1),ensureCursorVisibleInShowEvent(FALSE) {}
+	:preeditStart(-1),preeditLength(-1),ensureCursorVisibleInShowEvent(FALSE)
+    {
+	for ( int i=0; i<7; i++ )
+	    id[i] = 0;
+    }
     int id[ 7 ];
     int preeditStart;
     int preeditLength;
     bool ensureCursorVisibleInShowEvent;
+    QString scrollToAnchor; // used to deferr scrollToAnchor() until the show event when we are resized
 };
 
 }
@@ -90,31 +97,88 @@ static bool block_set_alignment = FALSE;
 
 /*!
     \class QTextEdit qtextedit.h
-    \brief The QTextEdit widget provides a sophisticated single-page rich text editor.
+    \brief The QTextEdit widget provides a powerful single-page rich text editor.
 
     \ingroup basic
     \ingroup text
     \mainclass
 
-    QTextEdit is an advanced WYSIWYG editor supporting rich text
-    formatting. It is optimized to handle large documents and to
-    respond quickly to user input.
+    \tableofcontents
+
+    \section1 Introduction and Concepts
+
+    QTextEdit is an advanced WYSIWYG viewer/editor supporting rich
+    text formatting using HTML-style tags. It is optimized to handle
+    large documents and to respond quickly to user input.
+
+    QTextEdit has three modes of operation:
+    \table
+    \header \i Mode \i Command \i Notes
+    \row \i Plain Text Editor \i setTextFormat(PlainText)
+	 \i Set text with setText(); text() returns plain text. Text
+	 attributes (e.g. colors) can be set, but plain text is always
+	 returned.<sup>1.</sup>
+    \row \i Rich Text Editor \i setTextFormat(RichText)
+	 \i Set text with setText(); text() returns rich text. Rich
+	 text editing is fairly limited. You can't set margins or
+	 insert images for example (although you can read and
+	 correctly display files that have margins set and that
+	 include images). This mode is mostly useful for editing small
+	 amounts of rich text. <sup>2.</sup>
+    \row \i Text Viewer<sup>3.</sup> \i setReadOnly(TRUE)
+         \i Set text with setText() or append() (which has no undo
+	 history so is faster and uses less memory); text() returns
+	 plain or rich text depending on the textFormat(). This mode
+	 can correctly display a large subset of HTML tags.
+    \endtable
+
+    <sup>1.</sup><small>We do \e not recommend using QTextEdit to
+    create syntax highlighting editors because the current API is
+    insufficient for this purpose. We hope to release a more complete
+    API that will support syntax highlighting in a later
+    release.</small>
+
+    <sup>2.</sup><small>A more complete API that supports setting
+    margins, images, etc., is planned for a later Qt release.</small>
+
+    <sup>3.</sup><small>Qt 3.1 will provide a Log Viewer mode which is
+    optimised for the fast and memory efficient display of large
+    amounts of read only text.</small>
+
+    We recommend that you always call setTextFormat() to set the mode
+    you want to use. If you use \c AutoText then setText() and
+    append() will try to determine whether the text they are given is
+    plain text or rich text. If you use \c RichText then setText() and
+    append() will assume that the text they are given is rich text.
+    insert() simply inserts the text it is given.
 
     QTextEdit works on paragraphs and characters. A paragraph is a
     formatted string which is word-wrapped to fit into the width of
-    the widget. A document consists of zero or more paragraphs,
-    indexed from 0. Characters are indexed on a per-paragraph basis,
-    also indexed from 0. The words in the paragraph are aligned in
-    accordance with the paragraph's alignment(). Paragraphs are
-    separated by hard line breaks. Each character within a paragraph
-    has its own attributes, for example, font and color.
+    the widget. By default when reading plain text, two newlines
+    signify a paragraph. A document consists of zero or more
+    paragraphs, indexed from 0. Characters are indexed on a
+    per-paragraph basis, also indexed from 0. The words in the
+    paragraph are aligned in accordance with the paragraph's
+    alignment(). Paragraphs are separated by hard line breaks. Each
+    character within a paragraph has its own attributes, for example,
+    font and color.
+
+    The text edit documentation uses the following concepts:
+    \list
+    \i \e{current format} --
+    this is the format at the current cursor position, \e and it
+    is the format of the selected text if any.
+    \i \e{current paragraph} -- the paragraph which contains the
+    cursor.
+    \endlist
 
     QTextEdit can display images (using QMimeSourceFactory), lists and
     tables. If the text is too large to view within the text edit's
     viewport, scrollbars will appear. The text edit can load both
     plain text and HTML files (a subset of HTML 3.2 and 4).  The
     rendering style and the set of valid tags are defined by a
-    styleSheet(). Change the style sheet with \l{setStyleSheet()}; see
+    styleSheet(). Custom tags can be created and placed in a custom
+    style sheet. Change the style sheet with \l{setStyleSheet()}; see
     QStyleSheet for details. The images identified by image tags are
     displayed if they can be interpreted using the text edit's
     \l{QMimeSourceFactory}; see setMimeSourceFactory().
@@ -134,64 +198,29 @@ static bool block_set_alignment = FALSE;
     you should call setTextFormat(Qt::PlainText) to preserve such
     text.
 
-    The text edit documentation uses the following concepts:
-    \list
-    \i <i>current format</i> --
-    this is the format at the current cursor position, \e and it
-    is the format of the selected text if any.
-    \i <i>current paragraph</i> -- the paragraph which contains the
-    cursor.
-    \endlist
+    Note that we do not intend to add a full-featured web browser
+    widget to Qt (because that would easily double Qt's size and only
+    a few applications would benefit from it). The rich
+    text support in Qt is designed to provide a fast, portable and
+    efficient way to add reasonable online help facilities to
+    applications, and to provide a basis for rich text editors.
+    \section1 Using QTextEdit as a Display Widget
+
+    QTextEdit can display a large HTML subset, including tables and
+    images.
 
     The text is set or replaced using setText() which deletes any
     existing text and replaces it with the text passed in the
-    setText() call. Text can be inserted with insert(), paste() and
-    pasteSubType(). Text can also be cut(). The entire text is deleted
-    with clear() and the selected text is deleted with
-    removeSelectedText(). Selected (marked) text can also be deleted
-    with del() (which will delete the character to the right of the
-    cursor if no text is selected).
-
-    The current format's attributes are set with setItalic(),
-    setBold(), setUnderline(), setFamily() (font family),
-    setPointSize(), setColor() and setCurrentFont().  The current
-    paragraph's style is set with setParagType() and its alignment is
-    set with setAlignment().
-
-    Use setSelection() to select text. The setSelectionAttributes()
-    function is used to indicate how selected text should be
-    displayed. Use hasSelectedText() to find out if any text is
-    selected. The currently selected text's position is available
-    using getSelection() and the selected text itself is returned by
-    selectedText(). The selection can be copied to the clipboard with
-    copy(), or cut to the clipboard with cut(). It can be deleted with
-    removeSelectedText(). The entire text can be selected (or
-    unselected) using selectAll(). QTextEdit supports multiple
-    selections. Most of the selection functions operate on the default
-    selection, selection 0. If the user presses a non-selecting key,
-    e.g. a cursor key without also holding down Shift, all selections
-    are cleared.
-
-    Set and get the position of the cursor with setCursorPosition()
-    and getCursorPosition() respectively. When the cursor is moved,
-    the signals currentFontChanged(), currentColorChanged() and
-    currentAlignmentChanged() are emitted to reflect the font, color
-    and alignment at the new cursor position.
-
-    If the text changes, the textChanged() signal is emitted, and if
-    the user inserts a new line by pressing Return or Enter,
-    returnPressed() is emitted. The isModified() function will return
-    TRUE if the text has been modified.
-
-    QTextEdit provides command-based undo and redo. To set the depth
-    of the command history use setUndoDepth() which defaults to 100
-    steps. To undo or redo the last operation call undo() or redo().
-    The signals undoAvailable() and redoAvailable() indicate whether
-    the undo and redo operations can be executed.
-
-    The indent() function is used to reindent a paragraph. It is
-    useful for code editors, for example in <em>Qt Designer</em>'s
-    code editor \e{Ctrl+I} invokes the indent() function.
+    setText() call. If you call setText() with legacy HTML (with
+    setTextFormat(RichText) in force), and then call text(), the text
+    that is returned may have different markup, but will render the
+    same. Text can be inserted with insert(), paste(), pasteSubType()
+    and append(). Text that is appended does not go into the undo
+    history; this makes append() faster and consumes less memory. Text
+    can also be cut(). The entire text is deleted with clear() and the
+    selected text is deleted with removeSelectedText(). Selected
+    (marked) text can also be deleted with del() (which will delete
+    the character to the right of the cursor if no text is selected).
 
     Loading and saving text is achieved using setText() and text(),
     for example:
@@ -242,6 +271,85 @@ static bool block_set_alignment = FALSE;
     You can scroll to an anchor in the text, e.g. \c{<a
     name="anchor">} with scrollToAnchor(). The find() function can be
     used to find and select a given string within the text.
+
+    A read-only QTextEdit provides the same functionality as the
+    (obsolete) QTextView. (QTextView is still supplied for
+    compatibility with old code.)
+
+    \section2 Read-only key bindings
+
+    When QTextEdit is used read-only the key-bindings are limited to
+    navigation, and text may only be selected with the mouse:
+    \table
+    \header \i Keypresses \i Action
+    \row \i \e{UpArrow} \i Move one line up
+    \row \i \e{DownArrow} \i Move one line down
+    \row \i \e{LeftArrow} \i Move one character left
+    \row \i \e{RightArrow} \i Move one character right
+    \row \i \e{PageUp} \i Move one (viewport) page up
+    \row \i \e{PageDown} \i Move one (viewport) page down
+    \row \i \e{Home} \i Move to the beginning of the text
+    \row \i \e{End} \i Move to the end of the text
+    \row \i \e{Shift+Wheel} \i Scroll the page horizontally (the Wheel is the mouse wheel)
+    \row \i \e{Ctrl+Wheel} \i Zoom the text
+    \endtable
+
+    The text edit may be able to provide some meta-information. For
+    example, the documentTitle() function will return the text from
+    within HTML \c{<title>} tags.
+
+    The text displayed in a text edit has a \e context. The context is
+    a path which the text edit's QMimeSourceFactory uses to resolve
+    the locations of files and images. It is passed to the
+    mimeSourceFactory() when quering data. (See QTextEdit() and
+    \l{context()}.)
+
+    \section1 Using QTextEdit as an Editor
+
+    All the information about using QTextEdit as a display widget also
+    applies here.
+
+    The current format's attributes are set with setItalic(),
+    setBold(), setUnderline(), setFamily() (font family),
+    setPointSize(), setColor() and setCurrentFont().  The current
+    paragraph's alignment is set with setAlignment().
+
+    Use setSelection() to select text. The setSelectionAttributes()
+    function is used to indicate how selected text should be
+    displayed. Use hasSelectedText() to find out if any text is
+    selected. The currently selected text's position is available
+    using getSelection() and the selected text itself is returned by
+    selectedText(). The selection can be copied to the clipboard with
+    copy(), or cut to the clipboard with cut(). It can be deleted with
+    removeSelectedText(). The entire text can be selected (or
+    unselected) using selectAll(). QTextEdit supports multiple
+    selections. Most of the selection functions operate on the default
+    selection, selection 0. If the user presses a non-selecting key,
+    e.g. a cursor key without also holding down Shift, all selections
+    are cleared.
+
+    Set and get the position of the cursor with setCursorPosition()
+    and getCursorPosition() respectively. When the cursor is moved,
+    the signals currentFontChanged(), currentColorChanged() and
+    currentAlignmentChanged() are emitted to reflect the font, color
+    and alignment at the new cursor position.
+
+    If the text changes, the textChanged() signal is emitted, and if
+    the user inserts a new line by pressing Return or Enter,
+    returnPressed() is emitted. The isModified() function will return
+    TRUE if the text has been modified.
+
+    QTextEdit provides command-based undo and redo. To set the depth
+    of the command history use setUndoDepth() which defaults to 100
+    steps. To undo or redo the last operation call undo() or redo().
+    The signals undoAvailable() and redoAvailable() indicate whether
+    the undo and redo operations can be executed.
+
+    The indent() function is used to reindent a paragraph. It is
+    useful for code editors, for example in <em>Qt Designer</em>'s
+    code editor \e{Ctrl+I} invokes the indent() function.
+
+    \section2 Editing key bindings
 
     The list of key-bindings which are implemented for editing:
     \table
@@ -295,43 +403,6 @@ static bool block_set_alignment = FALSE;
     can be changed to overwrite, where new text overwrites any text to
     the right of the cursor, using setOverwriteMode().
 
-    QTextEdit can also be used as read-only text viewer. Call
-    setReadOnly( TRUE ) to disable editing. A read-only QTextEdit
-    provides the same functionality as the (obsolete) QTextView.
-    (QTextView is still supplied for compatibility with old code.)
-
-    When QTextEdit is used read-only the key-bindings are limited to
-    navigation, and text may only be selected with the mouse:
-    \table
-    \header \i Keypresses \i Action
-    \row \i \e{UpArrow} \i Move one line up
-    \row \i \e{DownArrow} \i Move one line down
-    \row \i \e{LeftArrow} \i Move one character left
-    \row \i \e{RightArrow} \i Move one character right
-    \row \i \e{PageUp} \i Move one (viewport) page up
-    \row \i \e{PageDown} \i Move one (viewport) page down
-    \row \i \e{Home} \i Move to the beginning of the text
-    \row \i \e{End} \i Move to the end of the text
-    \row \i \e{Shift+Wheel} \i Scroll the page horizontally (the Wheel is the mouse wheel)
-    \row \i \e{Ctrl+Wheel} \i Zoom the text
-    \endtable
-
-    The text edit may be able to provide some meta-information. For
-    example, the documentTitle() function will return the text from
-    within HTML \c{<title>} tags.
-
-    The text displayed in a text edit has a \e context. The context is
-    a path which the text edit's QMimeSourceFactory uses to resolve
-    the locations of files and images. It is passed to the
-    mimeSourceFactory() when quering data. (See QTextEdit() and
-    \l{context()}.)
-
-    Note that we do not intend to add a full-featured web browser
-    widget to Qt (because that would easily double Qt's size and only
-    a few applications would benefit from it). The rich
-    text support in Qt is designed to provide a fast, portable and
-    efficient way to add reasonable online help facilities to
-    applications, and to provide a basis for rich text editors.
 */
 
 /*! \enum QTextEdit::KeyboardAction
@@ -640,13 +711,15 @@ void QTextEdit::init()
     inDnD = FALSE;
 
     doc->setFormatter( new QTextFormatterBreakWords );
+    doc->formatCollection()->defaultFormat()->setFont( QScrollView::font() );
+    doc->formatCollection()->defaultFormat()->setColor( colorGroup().color( QColorGroup::Text ) );
     currentFormat = doc->formatCollection()->defaultFormat();
     currentAlignment = Qt3::AlignAuto;
 
     viewport()->setBackgroundMode( PaletteBase );
     viewport()->setAcceptDrops( TRUE );
-    resizeContents( 0, doc->lastParag() ?
-		    ( doc->lastParag()->paragId() + 1 ) * doc->formatCollection()->defaultFormat()->height() : 0 );
+    resizeContents( 0, doc->lastParagraph() ?
+		    ( doc->lastParagraph()->paragId() + 1 ) * doc->formatCollection()->defaultFormat()->height() : 0 );
 
     setKeyCompression( TRUE );
     viewport()->setMouseTracking( TRUE );
@@ -658,7 +731,7 @@ void QTextEdit::init()
     formatTimer = new QTimer( this );
     connect( formatTimer, SIGNAL( timeout() ),
 	     this, SLOT( formatMore() ) );
-    lastFormatted = doc->firstParag();
+    lastFormatted = doc->firstParagraph();
 
     scrollTimer = new QTimer( this );
     connect( scrollTimer, SIGNAL( timeout() ),
@@ -713,10 +786,10 @@ void QTextEdit::paintDocument( bool drawAll, QPainter *p, int cx, int cy, int cw
 
     lastFormatted = doc->draw( p, cx, cy, cw, ch, g, !drawAll, drawCur, cursor );
 
-    if ( lastFormatted == doc->lastParag() )
+    if ( lastFormatted == doc->lastParagraph() )
 	resizeContents( contentsWidth(), doc->height() );
 
-    if ( contentsHeight() < visibleHeight() && ( !doc->lastParag() || doc->lastParag()->isValid() ) && drawAll )
+    if ( contentsHeight() < visibleHeight() && ( !doc->lastParagraph() || doc->lastParagraph()->isValid() ) && drawAll )
 	p->fillRect( 0, contentsHeight(), visibleWidth(),
 		     visibleHeight() - contentsHeight(), g.brush( QColorGroup::Base ) );
 }
@@ -813,10 +886,16 @@ bool QTextEdit::event( QEvent *e )
 	}
     }
 
-    if ( e->type() == QEvent::Show && d->ensureCursorVisibleInShowEvent ) {
-	sync();
-	ensureCursorVisible();
-	d->ensureCursorVisibleInShowEvent = FALSE;
+    if ( e->type() == QEvent::Show ) {
+	if ( d->ensureCursorVisibleInShowEvent ) {
+	    sync();
+	    ensureCursorVisible();
+	    d->ensureCursorVisibleInShowEvent = FALSE;
+	}
+	if ( !d->scrollToAnchor.isEmpty()  ) {
+	    scrollToAnchor( d->scrollToAnchor );
+	    d->scrollToAnchor = QString::null;
+	}
     }
     return QWidget::event( e );
 }
@@ -845,7 +924,7 @@ void QTextEdit::keyPressEvent( QKeyEvent *e )
 	selChanged = doc->removeSelection( i ) || selChanged;
 
     if ( selChanged ) {
-	cursor->parag()->document()->nextDoubleBuffered = TRUE;
+	cursor->paragraph()->document()->nextDoubleBuffered = TRUE;
 	repaintChanged();
     }
 
@@ -858,7 +937,7 @@ void QTextEdit::keyPressEvent( QKeyEvent *e )
 	// a bit hacky, but can't change this without introducing new enum values for move and keeping the
 	// correct semantics and movement for BiDi and non BiDi text.
 	CursorAction a;
-	if ( cursor->parag()->string()->isRightToLeft() == (e->key() == Key_Right) )
+	if ( cursor->paragraph()->string()->isRightToLeft() == (e->key() == Key_Right) )
 	    a = e->state() & ControlButton ? MoveWordBackward : MoveBackward;
 	else
 	    a = e->state() & ControlButton ? MoveWordForward : MoveForward;
@@ -886,12 +965,17 @@ void QTextEdit::keyPressEvent( QKeyEvent *e )
     case Key_Return: case Key_Enter:
 	if ( doc->hasSelection( QTextDocument::Standard, FALSE ) )
 	    removeSelectedText();
+	if ( textFormat() == Qt::RichText && ( e->state() & ControlButton ) ) {
+	    // Ctrl-Enter inserts a line break in rich text mode
+	    insert( QString( QChar( 0x2028) ), TRUE, FALSE, TRUE );
+	} else {
 #ifndef QT_NO_CURSOR
-	viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
+	    viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
 #endif
-	clearUndoRedoInfo = FALSE;
-	doKeyboardAction( ActionReturn );
-	emit returnPressed();
+	    clearUndoRedoInfo = FALSE;
+	    doKeyboardAction( ActionReturn );
+	    emit returnPressed();
+	}
 	break;
     case Key_Delete:
 #if defined (Q_WS_WIN)
@@ -911,16 +995,16 @@ void QTextEdit::keyPressEvent( QKeyEvent *e )
     case Key_Insert:
 	if ( e->state() & ShiftButton )
 	    paste();
+#if defined (Q_WS_WIN)
+	else if ( e->state() & ControlButton )
+	    copy();
+#endif
 	break;
     case Key_Backspace:
 	if ( doc->hasSelection( QTextDocument::Standard, TRUE ) ) {
 	    removeSelectedText();
 	    break;
 	}
-
-	if ( !cursor->parag()->prev() &&
-	     cursor->atParagStart() )
-	    break;
 
 	doKeyboardAction( ActionBackspace );
 	clearUndoRedoInfo = FALSE;
@@ -943,41 +1027,50 @@ void QTextEdit::keyPressEvent( QKeyEvent *e )
 		 ( !e->ascii() || e->ascii() >= 32 || e->text() == "\t" ) ) {
 		clearUndoRedoInfo = FALSE;
 		if ( e->key() == Key_Tab ) {
-		    if ( textFormat() == Qt::RichText &&
-			 cursor->index() == 0 && cursor->parag()->style() &&
-			 cursor->parag()->style()->displayMode() ==
-			 QStyleSheetItem::DisplayListItem ) {
-			cursor->parag()->incDepth();
+		    if ( textFormat() == Qt::RichText && cursor->paragraph()->isListItem() ) {
+			clearUndoRedo();
+			undoRedoInfo.type = UndoRedoInfo::Style;
+			undoRedoInfo.id = cursor->paragraph()->paragId();
+			undoRedoInfo.eid = undoRedoInfo.id;
+			undoRedoInfo.styleInformation = QTextStyleCommand::readStyleInformation( doc, undoRedoInfo.id, undoRedoInfo.eid );
+			cursor->paragraph()->setListDepth( cursor->paragraph()->listDepth() +1 );
+			clearUndoRedo();
 			drawCursor( FALSE );
 			repaintChanged();
 			drawCursor( TRUE );
 			break;
 		    }
 		}
-		if ( textFormat() == Qt::RichText && ( !cursor->parag()->style() ||
-		     cursor->parag()->style()->displayMode() == QStyleSheetItem::DisplayBlock ) &&
-		     cursor->index() == 0 && ( e->text()[0] == '-' || e->text()[0] == '*' ) ) {
-		    setParagType( QStyleSheetItem::DisplayListItem, QStyleSheetItem::ListDisc );
-		    cursor->parag()->incDepth();
-		    drawCursor( FALSE );
-		    repaintChanged();
-		    drawCursor( TRUE );
-		} else {
-		    if ( overWrite && !cursor->atParagEnd() )
-			cursor->remove();
-		    QString t = e->text();
-		    QTextParag *p = cursor->parag();
-		    if ( p && p->string() && p->string()->isRightToLeft() ) {
-			QChar *c = (QChar *)t.unicode();
-			int l = t.length();
-			while( l-- ) {
-			    if ( c->mirrored() )
-				*c = c->mirroredChar();
-			    c++;
-			}
+
+		if ( textFormat() == Qt::RichText && !cursor->paragraph()->isListItem() ) {
+		    if ( cursor->index() == 0 && ( e->text()[0] == '-' || e->text()[0] == '*' ) ) {
+			clearUndoRedo();
+			undoRedoInfo.type = UndoRedoInfo::Style;
+			undoRedoInfo.id = cursor->paragraph()->paragId();
+			undoRedoInfo.eid = undoRedoInfo.id;
+			undoRedoInfo.styleInformation = QTextStyleCommand::readStyleInformation( doc, undoRedoInfo.id, undoRedoInfo.eid );
+			setParagType( QStyleSheetItem::DisplayListItem, QStyleSheetItem::ListDisc );
+			clearUndoRedo();
+			drawCursor( FALSE );
+			repaintChanged();
+			drawCursor( TRUE );
+			break;
 		    }
-		    insert( t, TRUE, FALSE, TRUE );
 		}
+		if ( overWrite && !cursor->atParagEnd() )
+		    cursor->remove();
+		QString t = e->text();
+		QTextParagraph *p = cursor->paragraph();
+		if ( p && p->string() && p->string()->isRightToLeft() ) {
+		    QChar *c = (QChar *)t.unicode();
+		    int l = t.length();
+		    while( l-- ) {
+			if ( c->mirrored() )
+			    *c = c->mirroredChar();
+			c++;
+		    }
+		}
+		insert( t, TRUE, FALSE, TRUE );
 		break;
 	    } else if ( e->state() & ControlButton ) {
 		switch ( e->key() ) {
@@ -1019,7 +1112,7 @@ void QTextEdit::keyPressEvent( QKeyEvent *e )
 			removeSelectedText();
 			break;
 		    }
-		    if ( !cursor->parag()->prev() &&
+		    if ( !cursor->paragraph()->prev() &&
 			 cursor->atParagStart() )
 			break;
 
@@ -1036,7 +1129,10 @@ void QTextEdit::keyPressEvent( QKeyEvent *e )
 		    moveCursor( MoveUp, e->state() & ShiftButton );
 		    break;
 		case Key_Z:
-		    undo();
+		    if(e->state() & ShiftButton)
+			redo();
+		    else
+			undo();
 		    break;
 		case Key_Y:
 		    redo();
@@ -1063,7 +1159,7 @@ void QTextEdit::keyPressEvent( QKeyEvent *e )
     }
 
     emit cursorPositionChanged( cursor );
-    emit cursorPositionChanged( cursor->parag()->paragId(), cursor->index() );
+    emit cursorPositionChanged( cursor->paragraph()->paragId(), cursor->index() );
     if ( clearUndoRedoInfo )
 	clearUndoRedo();
     changeIntervalTimer->start( 100, TRUE );
@@ -1084,187 +1180,137 @@ void QTextEdit::doKeyboardAction( KeyboardAction action )
     if ( cursor->nestedDepth() != 0 ) // #### for 3.0, disable editing of tables as this is not advanced enough
 	return;
 
-    lastFormatted = cursor->parag();
+    lastFormatted = cursor->paragraph();
     drawCursor( FALSE );
     bool doUpdateCurrentFormat = TRUE;
 
     switch ( action ) {
-    case ActionDelete: {
-	checkUndoRedoInfo( UndoRedoInfo::Delete );
-	if ( !undoRedoInfo.valid() ) {
-	    undoRedoInfo.id = cursor->parag()->paragId();
-	    undoRedoInfo.index = cursor->index();
-	    undoRedoInfo.d->text = QString::null;
+    case ActionDelete:
+	if ( !cursor->atParagEnd() ) {
+	    checkUndoRedoInfo( UndoRedoInfo::Delete );
+	    if ( !undoRedoInfo.valid() ) {
+		undoRedoInfo.id = cursor->paragraph()->paragId();
+		undoRedoInfo.index = cursor->index();
+		undoRedoInfo.d->text = QString::null;
+	    }
+	    undoRedoInfo.d->text.insert( undoRedoInfo.d->text.length(), cursor->paragraph()->at( cursor->index() ), TRUE );
+	    cursor->remove();
+	} else {
+	    clearUndoRedo();
+	    doc->setSelectionStart( QTextDocument::Temp, *cursor );
+	    cursor->gotoNextLetter();
+	    doc->setSelectionEnd( QTextDocument::Temp, *cursor );
+	    removeSelectedText( QTextDocument::Temp );
 	}
-	undoRedoInfo.d->text += cursor->parag()->at( cursor->index() )->c;
-	if ( cursor->parag()->at( cursor->index() )->format() ) {
-	    cursor->parag()->at( cursor->index() )->format()->addRef();
-	    undoRedoInfo.d->text.at( undoRedoInfo.d->text.length() - 1 ).setFormat( cursor->parag()->at( cursor->index() )->format() );
-	}
-	QTextParag *old = cursor->parag();
-	if ( cursor->remove() ) {
-	    if ( old != cursor->parag() && lastFormatted == old )
-		lastFormatted = cursor->parag() ? cursor->parag()->prev() : 0;
-	    undoRedoInfo.d->text += "\n";
-	}
-    } break;
+	break;
     case ActionBackspace:
-	if ( textFormat() == Qt::RichText &&
-	     cursor->parag()->style() &&
-	     cursor->parag()->style()->displayMode() == QStyleSheetItem::DisplayListItem &&
-	     cursor->index() == 0 ) {
-	    cursor->parag()->decDepth();
-	    lastFormatted = cursor->parag();
+	if ( textFormat() == Qt::RichText && cursor->paragraph()->isListItem() && cursor->index() == 0 ) {
+	    clearUndoRedo();
+	    undoRedoInfo.type = UndoRedoInfo::Style;
+	    undoRedoInfo.id = cursor->paragraph()->paragId();
+	    undoRedoInfo.eid = undoRedoInfo.id;
+	    undoRedoInfo.styleInformation = QTextStyleCommand::readStyleInformation( doc, undoRedoInfo.id, undoRedoInfo.eid );
+	    int ldepth = cursor->paragraph()->listDepth();
+	    ldepth = QMAX( ldepth-1, 0 );
+	    cursor->paragraph()->setListDepth( ldepth );
+	    if ( ldepth == 0 )
+		cursor->paragraph()->setListItem( FALSE );
+	    clearUndoRedo();
+	    lastFormatted = cursor->paragraph();
 	    repaintChanged();
 	    drawCursor( TRUE );
 	    return;
 	}
-	checkUndoRedoInfo( UndoRedoInfo::Delete );
-	if ( !undoRedoInfo.valid() ) {
-	    undoRedoInfo.id = cursor->parag()->paragId();
+	if ( !cursor->atParagStart() ) {
+	    checkUndoRedoInfo( UndoRedoInfo::Delete );
+	    if ( !undoRedoInfo.valid() ) {
+		undoRedoInfo.id = cursor->paragraph()->paragId();
+		undoRedoInfo.index = cursor->index();
+		undoRedoInfo.d->text = QString::null;
+	    }
+	    cursor->gotoPreviousLetter();
+	    undoRedoInfo.d->text.insert( 0, cursor->paragraph()->at( cursor->index() ), TRUE );
 	    undoRedoInfo.index = cursor->index();
-	    undoRedoInfo.d->text = QString::null;
+	    cursor->remove();
+	    lastFormatted = cursor->paragraph();
+	} else if ( cursor->paragraph()->prev() ){
+	    clearUndoRedo();
+	    doc->setSelectionStart( QTextDocument::Temp, *cursor );
+	    cursor->gotoPreviousLetter();
+	    doc->setSelectionEnd( QTextDocument::Temp, *cursor );
+	    removeSelectedText( QTextDocument::Temp );
 	}
-	cursor->gotoPreviousLetter();
-	undoRedoInfo.d->text.prepend( QString( cursor->parag()->at( cursor->index() )->c ) );
-	if ( cursor->parag()->at( cursor->index() )->format() ) {
-	    cursor->parag()->at( cursor->index() )->format()->addRef();
-	    undoRedoInfo.d->text.at( 0 ).setFormat( cursor->parag()->at( cursor->index() )->format() );
-	}
-	undoRedoInfo.index = cursor->index();
-	if ( cursor->remove() ) {
-	    undoRedoInfo.d->text.remove( 0, 1 );
-	    undoRedoInfo.d->text.prepend( "\n" );
-	    undoRedoInfo.index = cursor->index();
-	    undoRedoInfo.id = cursor->parag()->paragId();
-	}
-	lastFormatted = cursor->parag();
 	break;
-    case ActionReturn: {
+    case ActionReturn:
 	checkUndoRedoInfo( UndoRedoInfo::Return );
 	if ( !undoRedoInfo.valid() ) {
-	    undoRedoInfo.id = cursor->parag()->paragId();
+	    undoRedoInfo.id = cursor->paragraph()->paragId();
 	    undoRedoInfo.index = cursor->index();
 	    undoRedoInfo.d->text = QString::null;
 	}
 	undoRedoInfo.d->text += "\n";
-	cursor->splitAndInsertEmptyParag();
-	if ( cursor->parag()->prev() ) {
-	    lastFormatted = cursor->parag()->prev();
+	cursor->splitAndInsertEmptyParagraph();
+	if ( cursor->paragraph()->prev() ) {
+	    lastFormatted = cursor->paragraph()->prev();
 	    lastFormatted->invalidate( 0 );
 	}
 	doUpdateCurrentFormat = FALSE;
-    } break;
-    case ActionKill:
-	checkUndoRedoInfo( UndoRedoInfo::Delete );
-	if ( !undoRedoInfo.valid() ) {
-	    undoRedoInfo.id = cursor->parag()->paragId();
-	    undoRedoInfo.index = cursor->index();
-	    undoRedoInfo.d->text = QString::null;
-	}
-	if ( cursor->atParagEnd() ) {
-	    undoRedoInfo.d->text += cursor->parag()->at( cursor->index() )->c;
-	    if ( cursor->parag()->at( cursor->index() )->format() ) {
-		cursor->parag()->at( cursor->index() )->format()->addRef();
-		undoRedoInfo.d->text.at( undoRedoInfo.d->text.length() - 1 ).setFormat( cursor->parag()->at( cursor->index() )->format() );
-	    }
-	    QTextParag *old = cursor->parag();
-	    if ( cursor->remove() ) {
-		if ( old != cursor->parag() && lastFormatted == old )
-		    lastFormatted = cursor->parag() ? cursor->parag()->prev() : 0;
-		undoRedoInfo.d->text += "\n";
-	    }
-	} else {
-	    int oldLen = undoRedoInfo.d->text.length();
-	    undoRedoInfo.d->text += cursor->parag()->string()->toString().mid( cursor->index() );
-	    for ( int i = cursor->index(); i < cursor->parag()->length(); ++i ) {
-		if ( cursor->parag()->at( i )->format() ) {
-		    cursor->parag()->at( i )->format()->addRef();
-		    undoRedoInfo.d->text.at( oldLen + i - cursor->index() ).setFormat( cursor->parag()->at( i )->format() );
-		}
-	    }
-	    undoRedoInfo.d->text.remove( undoRedoInfo.d->text.length() - 1, 1 );
-	    cursor->killLine();
-	}
 	break;
+    case ActionKill:
+	    clearUndoRedo();
+	    doc->setSelectionStart( QTextDocument::Temp, *cursor );
+	    if ( cursor->atParagEnd() )
+		cursor->gotoNextLetter();
+	    else
+		cursor->setIndex( cursor->paragraph()->length() - 1 );
+	    doc->setSelectionEnd( QTextDocument::Temp, *cursor );
+	    removeSelectedText( QTextDocument::Temp );
+	    break;
     }
 
     formatMore();
     repaintChanged();
     ensureCursorVisible();
     drawCursor( TRUE );
-
-    if ( hasFocus() || viewport()->hasFocus() ) {
-	int h = cursor->parag()->lineHeightOfChar( cursor->index() );
-	if ( !readonly ) {
-	    QFont f = cursor->parag()->at( cursor->index() )->format()->font();
-	    setMicroFocusHint( cursor->x() - contentsX() + frameWidth(),
-			       cursor->y() + cursor->parag()->rect().y() - contentsY() + frameWidth(), 0, h, TRUE );
-	}
-    }
-
+    updateMicroFocusHint();
     if ( doUpdateCurrentFormat )
 	updateCurrentFormat();
     setModified();
     emit textChanged();
 }
 
-void QTextEdit::readFormats( QTextCursor &c1, QTextCursor &c2, int oldLen, QTextString &text, bool fillStyles )
+void QTextEdit::readFormats( QTextCursor &c1, QTextCursor &c2, QTextString &text, bool fillStyles )
 {
+    QDataStream styleStream( undoRedoInfo.styleInformation, IO_WriteOnly );
     c2.restoreState();
     c1.restoreState();
-    if ( c1.parag() == c2.parag() ) {
-	for ( int i = c1.index(); i < c2.index(); ++i ) {
-	    if ( c1.parag()->at( i )->format() ) {
-		c1.parag()->at( i )->format()->addRef();
-		text.at( oldLen + i - c1.index() ).setFormat( c1.parag()->at( i )->format() );
-	    }
-	}
+    int lastIndex = text.length();
+    if ( c1.paragraph() == c2.paragraph() ) {
+	for ( int i = c1.index(); i < c2.index(); ++i )
+	    text.insert( lastIndex + i - c1.index(), c1.paragraph()->at( i ), TRUE );
 	if ( fillStyles ) {
-	    undoRedoInfo.oldAligns[ 0 ] = c1.parag()->alignment();
-	    undoRedoInfo.oldStyles << c1.parag()->styleSheetItems();
-	    undoRedoInfo.oldListStyles << c1.parag()->listStyle();
+	    styleStream << (int) 1;
+	    c1.paragraph()->writeStyleInformation( styleStream );
 	}
     } else {
-	int lastIndex = oldLen;
 	int i;
-	for ( i = c1.index(); i < c1.parag()->length(); ++i ) {
-	    if ( c1.parag()->at( i )->format() ) {
-		c1.parag()->at( i )->format()->addRef();
-		text.at( lastIndex ).setFormat( c1.parag()->at( i )->format() );
-		lastIndex++;
-	    }
-	}
-	QTextParag *p = c1.parag()->next();
-	while ( p && p != c2.parag() ) {
-	    for ( int i = 0; i < p->length(); ++i ) {
-		if ( p->at( i )->format() ) {
-		    p->at( i )->format()->addRef();
-		    text.at( i + lastIndex ).setFormat( p->at( i )->format() );
-		}
-	    }
-	    lastIndex += p->length();
+	for ( i = c1.index(); i < c1.paragraph()->length()-1; ++i )
+	    text.insert( lastIndex++, c1.paragraph()->at( i ), TRUE );
+	int num = 2; // start and end, being different
+	text += "\n"; lastIndex++;
+	QTextParagraph *p = c1.paragraph()->next();
+	while ( p && p != c2.paragraph() ) {
+	    for ( i = 0; i < p->length()-1; ++i )
+		text.insert( lastIndex++ , p->at( i ), TRUE );
+	    text += "\n"; num++; lastIndex++;
 	    p = p->next();
 	}
-	for ( i = 0; i < c2.index(); ++i ) {
-	    if ( c2.parag()->at( i )->format() ) {
-		c2.parag()->at( i )->format()->addRef();
-		text.at( i + lastIndex ).setFormat( c2.parag()->at( i )->format() );
-	    }
-	}
+	for ( i = 0; i < c2.index(); ++i )
+	    text.insert( i + lastIndex, c2.paragraph()->at( i ), TRUE );
 	if ( fillStyles ) {
-	    QTextParag *p = c1.parag();
-	    i = 0;
-	    while ( p ) {
-		if ( i < (int)undoRedoInfo.oldAligns.size() )
-		    undoRedoInfo.oldAligns[ i ] = p->alignment();
-		undoRedoInfo.oldStyles << p->styleSheetItems();
-		undoRedoInfo.oldListStyles << p->listStyle();
-		if ( p == c2.parag() )
-		    break;
-		p = p->next();
-		++i;
-	    }
+	    styleStream << num;
+	    for ( QTextParagraph *p = c1.paragraph(); --num >= 0; p = p->next() )
+		p->writeStyleInformation( styleStream );
 	}
     }
 }
@@ -1294,9 +1340,11 @@ void QTextEdit::removeSelectedText( int selNum )
 	return;
 
     QTextCursor c1 = doc->selectionStartCursor( selNum );
+    c1.restoreState();
     QTextCursor c2 = doc->selectionEndCursor( selNum );
+    c2.restoreState();
 
-    // ### no support for editing tables yet
+    // ### no support for editing tables yet, plus security for broken selections
     if ( c1.nestedDepth() || c2.nestedDepth() )
 	return;
 
@@ -1312,14 +1360,13 @@ void QTextEdit::removeSelectedText( int selNum )
 	doc->selectionStart( selNum, undoRedoInfo.id, undoRedoInfo.index );
 	undoRedoInfo.d->text = QString::null;
     }
-    int oldLen = undoRedoInfo.d->text.length();
-    undoRedoInfo.d->text = doc->selectedText( selNum, FALSE );
-    undoRedoInfo.oldAligns.resize( undoRedoInfo.oldAligns.size() + QMAX( 0, c2.parag()->paragId() - c1.parag()->paragId() + 1 ) );
-    readFormats( c1, c2, oldLen, undoRedoInfo.d->text, TRUE );
+    readFormats( c1, c2, undoRedoInfo.d->text, TRUE );
+
+
     doc->removeSelectedText( selNum, cursor );
     if ( cursor->isValid() ) {
 	ensureCursorVisible();
-	lastFormatted = cursor->parag();
+	lastFormatted = cursor->paragraph();
 	formatMore();
 	repaintChanged();
 	ensureCursorVisible();
@@ -1334,18 +1381,10 @@ void QTextEdit::removeSelectedText( int selNum )
 #ifndef QT_NO_CURSOR
 	viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
 #endif
-	if ( hasFocus() || viewport()->hasFocus() ) {
-	    int h = cursor->parag()->lineHeightOfChar( cursor->index() );
-	    if ( !readonly ) {
-		QFont f = cursor->parag()->at( cursor->index() )->format()->font();
-		setMicroFocusHint( cursor->x() - contentsX() + frameWidth(),
-				   cursor->y() + cursor->parag()->rect().y() - contentsY() + frameWidth(), 0, h, TRUE );
-	    }
-	}
+	updateMicroFocusHint();
     } else {
-	cursor->setDocument( doc );
-	cursor->setParag( doc->firstParag() );
-	cursor->setIndex( 0 );
+	delete cursor;
+	cursor = new QTextCursor( doc );
 	drawCursor( TRUE );
 	viewport()->repaint( TRUE );
     }
@@ -1365,10 +1404,10 @@ void QTextEdit::moveCursor( CursorAction action, bool select )
     drawCursor( FALSE );
     if ( select ) {
 	if ( !doc->hasSelection( QTextDocument::Standard ) )
-	    doc->setSelectionStart( QTextDocument::Standard, cursor );
+	    doc->setSelectionStart( QTextDocument::Standard, *cursor );
 	moveCursor( action );
-	if ( doc->setSelectionEnd( QTextDocument::Standard, cursor ) ) {
-	    cursor->parag()->document()->nextDoubleBuffered = TRUE;
+	if ( doc->setSelectionEnd( QTextDocument::Standard, *cursor ) ) {
+	    cursor->paragraph()->document()->nextDoubleBuffered = TRUE;
 	    repaintChanged();
 	} else {
 	    drawCursor( TRUE );
@@ -1383,7 +1422,7 @@ void QTextEdit::moveCursor( CursorAction action, bool select )
 	    ensureCursorVisible();
 	    drawCursor( TRUE );
 	} else {
-	    cursor->parag()->document()->nextDoubleBuffered = TRUE;
+	    cursor->paragraph()->document()->nextDoubleBuffered = TRUE;
 	    repaintChanged();
 	    ensureCursorVisible();
 	    drawCursor( TRUE );
@@ -1399,14 +1438,7 @@ void QTextEdit::moveCursor( CursorAction action, bool select )
 
     drawCursor( TRUE );
     updateCurrentFormat();
-    if ( hasFocus() || viewport()->hasFocus() ) {
-	int h = cursor->parag()->lineHeightOfChar( cursor->index() );
-	if ( !readonly ) {
-	    QFont f = cursor->parag()->at( cursor->index() )->format()->font();
-	    setMicroFocusHint( cursor->x() - contentsX() + frameWidth(),
-			       cursor->y() + cursor->parag()->rect().y() - contentsY() + frameWidth(), 0, h, TRUE );
-	}
-    }
+    updateMicroFocusHint();
 }
 
 /*! \overload
@@ -1449,19 +1481,11 @@ void QTextEdit::moveCursor( CursorAction action )
 	cursor->gotoLineEnd();
 	break;
     case MoveEnd:
-	ensureFormatted( doc->lastParag() );
+	ensureFormatted( doc->lastParagraph() );
 	cursor->gotoEnd();
 	break;
     }
-
-    if ( hasFocus() || viewport()->hasFocus() ) {
-	int h = cursor->parag()->lineHeightOfChar( cursor->index() );
-	if ( !readonly ) {
-	    QFont f = cursor->parag()->at( cursor->index() )->format()->font();
-	    setMicroFocusHint( cursor->x() - contentsX() + frameWidth(),
-			       cursor->y() + cursor->parag()->rect().y() - contentsY() + frameWidth(), 0, h, TRUE );
-	}
-    }
+    updateMicroFocusHint();
     updateCurrentFormat();
 }
 
@@ -1470,6 +1494,8 @@ void QTextEdit::moveCursor( CursorAction action )
 void QTextEdit::resizeEvent( QResizeEvent *e )
 {
     QScrollView::resizeEvent( e );
+    if ( doc->visibleWidth() == 0 )
+	doResize();
 }
 
 /*! \reimp */
@@ -1477,11 +1503,14 @@ void QTextEdit::resizeEvent( QResizeEvent *e )
 void QTextEdit::viewportResizeEvent( QResizeEvent *e )
 {
     QScrollView::viewportResizeEvent( e );
-    if ( e->oldSize().width() != e->size().width() )
+    if ( e->oldSize().width() != e->size().width() ) {
+	bool stayAtBottom = e->oldSize().height() != e->size().height() &&
+	       contentsY() > 0 && contentsY() >= doc->height() - e->oldSize().height();
 	doResize();
+	if ( stayAtBottom )
+	    scrollToBottom();
+    }
 }
-
-static bool blockEnsureCursorVisible = FALSE;
 
 /*!
   Ensures that the cursor is visible by scrolling the text edit if
@@ -1492,20 +1521,18 @@ static bool blockEnsureCursorVisible = FALSE;
 
 void QTextEdit::ensureCursorVisible()
 {
-    if ( blockEnsureCursorVisible )
-	return;
     if ( !isVisible() ) {
 	d->ensureCursorVisibleInShowEvent = TRUE;
 	return;
     }
-    lastFormatted = cursor->parag();
+    lastFormatted = cursor->paragraph();
     formatMore();
-    QTextStringChar *chr = cursor->parag()->at( cursor->index() );
-    int h = cursor->parag()->lineHeightOfChar( cursor->index() );
-    int x = cursor->parag()->rect().x() + chr->x + cursor->offsetX();
+    QTextStringChar *chr = cursor->paragraph()->at( cursor->index() );
+    int h = cursor->paragraph()->lineHeightOfChar( cursor->index() );
+    int x = cursor->paragraph()->rect().x() + chr->x + cursor->offsetX();
     int y = 0; int dummy;
-    cursor->parag()->lineHeightOfChar( cursor->index(), &dummy, &y );
-    y += cursor->parag()->rect().y() + cursor->offsetY();
+    cursor->paragraph()->lineHeightOfChar( cursor->index(), &dummy, &y );
+    y += cursor->paragraph()->rect().y() + cursor->offsetY();
     int w = 1;
     ensureVisible( x, y + h / 2, w, h / 2 + 2 );
 }
@@ -1517,38 +1544,38 @@ void QTextEdit::drawCursor( bool visible )
 {
     if ( !isUpdatesEnabled() ||
 	 !viewport()->isUpdatesEnabled() ||
-	 !cursor->parag() ||
-	 !cursor->parag()->isValid() ||
+	 !cursor->paragraph() ||
+	 !cursor->paragraph()->isValid() ||
 	 !selectedText().isEmpty() ||
 	 ( visible && !hasFocus() && !viewport()->hasFocus() && !inDnD ) ||
 	 isReadOnly() )
 	return;
 
     QPainter p( viewport() );
-    QRect r( cursor->topParag()->rect() );
-    cursor->parag()->setChanged( TRUE );
+    QRect r( cursor->topParagraph()->rect() );
+    cursor->paragraph()->setChanged( TRUE );
     p.translate( -contentsX() + cursor->totalOffsetX(), -contentsY() + cursor->totalOffsetY() );
     QPixmap *pix = 0;
     QColorGroup cg( colorGroup() );
-    if ( cursor->parag()->background() )
-	cg.setBrush( QColorGroup::Base, *cursor->parag()->background() );
+    if ( cursor->paragraph()->background() )
+	cg.setBrush( QColorGroup::Base, *cursor->paragraph()->background() );
     else if ( doc->paper() )
 	cg.setBrush( QColorGroup::Base, *doc->paper() );
     p.setBrushOrigin( -contentsX(), -contentsY() );
-    cursor->parag()->document()->nextDoubleBuffered = TRUE;
+    cursor->paragraph()->document()->nextDoubleBuffered = TRUE;
     if ( !cursor->nestedDepth() ) {
-	int h = cursor->parag()->lineHeightOfChar( cursor->index() );
+	int h = cursor->paragraph()->lineHeightOfChar( cursor->index() );
 	int dist = 5;
-	if ( ( cursor->parag()->alignment() & Qt3::AlignJustify ) == Qt3::AlignJustify )
+	if ( ( cursor->paragraph()->alignment() & Qt3::AlignJustify ) == Qt3::AlignJustify )
 	    dist = 50;
 	int x = r.x() - cursor->totalOffsetX() + cursor->x() - dist;
 	x = QMAX( x, 0 );
 	p.setClipRect( QRect( x - contentsX(),
 			      r.y() - cursor->totalOffsetY() + cursor->y() - contentsY(), 2 * dist, h ) );
-	doc->drawParag( &p, cursor->parag(), x,
+	doc->drawParagraph( &p, cursor->paragraph(), x,
 			r.y() - cursor->totalOffsetY() + cursor->y(), 2 * dist, h, pix, cg, visible, cursor );
     } else {
-	doc->drawParag( &p, cursor->parag(), r.x() - cursor->totalOffsetX(),
+	doc->drawParagraph( &p, cursor->paragraph(), r.x() - cursor->totalOffsetX(),
 			r.y() - cursor->totalOffsetY(), r.width(), r.height(),
 			pix, cg, visible, cursor );
     }
@@ -1602,9 +1629,9 @@ void QTextEdit::contentsMousePressEvent( QMouseEvent *e )
 	if ( isReadOnly() && linksEnabled() ) {
 	    QTextCursor c = *cursor;
 	    placeCursor( e->pos(), &c, TRUE );
-	    if ( c.parag() && c.parag()->at( c.index() ) &&
-		 c.parag()->at( c.index() )->isAnchor() ) {
-		pressedLink = c.parag()->at( c.index() )->anchorHref();
+	    if ( c.paragraph() && c.paragraph()->at( c.index() ) &&
+		 c.paragraph()->at( c.index() )->isAnchor() ) {
+		pressedLink = c.paragraph()->at( c.index() )->anchorHref();
 	    }
 	}
 
@@ -1622,16 +1649,16 @@ void QTextEdit::contentsMousePressEvent( QMouseEvent *e )
 	if ( doc->hasSelection( QTextDocument::Standard ) ) {
 	    if ( !( e->state() & ShiftButton ) ) {
 		redraw = doc->removeSelection( QTextDocument::Standard );
-		doc->setSelectionStart( QTextDocument::Standard, cursor );
+		doc->setSelectionStart( QTextDocument::Standard, *cursor );
 	    } else {
-		redraw = doc->setSelectionEnd( QTextDocument::Standard, cursor ) || redraw;
+		redraw = doc->setSelectionEnd( QTextDocument::Standard, *cursor ) || redraw;
 	    }
 	} else {
 	    if ( isReadOnly() || !( e->state() & ShiftButton ) ) {
-		doc->setSelectionStart( QTextDocument::Standard, cursor );
+		doc->setSelectionStart( QTextDocument::Standard, *cursor );
 	    } else {
-		doc->setSelectionStart( QTextDocument::Standard, &c );
-		redraw = doc->setSelectionEnd( QTextDocument::Standard, cursor ) || redraw;
+		doc->setSelectionStart( QTextDocument::Standard, c );
+		redraw = doc->setSelectionEnd( QTextDocument::Standard, *cursor ) || redraw;
 	    }
 	}
 
@@ -1714,7 +1741,7 @@ void QTextEdit::contentsMouseReleaseEvent( QMouseEvent * e )
 	mousePressed = FALSE;
     }
     emit cursorPositionChanged( cursor );
-    emit cursorPositionChanged( cursor->parag()->paragId(), cursor->index() );
+    emit cursorPositionChanged( cursor->paragraph()->paragId(), cursor->index() );
     if ( oldCursor != *cursor )
 	updateCurrentFormat();
     inDoubleClick = FALSE;
@@ -1744,13 +1771,13 @@ void QTextEdit::contentsMouseDoubleClickEvent( QMouseEvent * )
 {
     QTextCursor c1 = *cursor;
     QTextCursor c2 = *cursor;
-    if ( cursor->index() > 0 && !cursor->parag()->at( cursor->index()-1 )->c.isSpace() )
+    if ( cursor->index() > 0 && !cursor->paragraph()->at( cursor->index()-1 )->c.isSpace() )
 	c1.gotoPreviousWord();
-    if ( !cursor->parag()->at( cursor->index() )->c.isSpace() && !cursor->atParagEnd() )
+    if ( !cursor->paragraph()->at( cursor->index() )->c.isSpace() && !cursor->atParagEnd() )
 	c2.gotoNextWord();
 
-    doc->setSelectionStart( QTextDocument::Standard, &c1 );
-    doc->setSelectionEnd( QTextDocument::Standard, &c2 );
+    doc->setSelectionStart( QTextDocument::Standard, c1 );
+    doc->setSelectionEnd( QTextDocument::Standard, c2 );
 
     *cursor = c2;
 
@@ -1806,9 +1833,42 @@ void QTextEdit::contentsDropEvent( QDropEvent *e )
     QString text;
     bool intern = FALSE;
     if ( QTextDrag::decode( e, text ) ) {
-	if ( ( e->source() == this ||
-	       e->source() == viewport() ) &&
-	     e->action() == QDropEvent::Move ) {
+	bool hasSel = doc->hasSelection( QTextDocument::Standard );
+	bool internalDrag = e->source() == this || e->source() == viewport();
+	int dropId, dropIndex;
+	QTextCursor insertCursor = *cursor;
+	dropId = cursor->paragraph()->paragId();
+	dropIndex = cursor->index();
+	if ( hasSel && internalDrag ) {
+	    QTextCursor c1, c2;
+	    int selStartId, selStartIndex;
+	    int selEndId, selEndIndex;
+	    c1 = doc->selectionStartCursor( QTextDocument::Standard );
+	    c1.restoreState();
+	    c2 = doc->selectionEndCursor( QTextDocument::Standard );
+	    c2.restoreState();
+	    selStartId = c1.paragraph()->paragId();
+	    selStartIndex = c1.index();
+	    selEndId = c2.paragraph()->paragId();
+	    selEndIndex = c2.index();
+	    if ( ( ( dropId > selStartId ) ||
+		   ( dropId == selStartId && dropIndex > selStartIndex ) ) &&
+		 ( ( dropId < selEndId ) ||
+		   ( dropId == selEndId && dropIndex <= selEndIndex ) ) )
+		insertCursor = c1;
+	    if ( dropId == selEndId && dropIndex > selEndIndex ) {
+		insertCursor = c1;
+		if ( selStartId == selEndId ) {
+		    insertCursor.setIndex( dropIndex -
+					   ( selEndIndex - selStartIndex ) );
+		} else {
+		    insertCursor.setIndex( dropIndex - selEndIndex +
+					   selStartIndex );
+		}
+	    }
+	 }
+
+	if ( internalDrag && e->action() == QDropEvent::Move ) {
 	    removeSelectedText();
 	    intern = TRUE;
 	} else {
@@ -1818,7 +1878,8 @@ void QTextEdit::contentsDropEvent( QDropEvent *e )
 #endif
 	}
 	drawCursor( FALSE );
-	placeCursor( e->pos(), cursor );
+	cursor->setParagraph( insertCursor.paragraph() );
+	cursor->setIndex( insertCursor.index() );
 	drawCursor( TRUE );
 	if ( !cursor->nestedDepth() ) {
 	    insert( text, FALSE, TRUE, FALSE );
@@ -1859,13 +1920,13 @@ void QTextEdit::handleMouseMove( const QPoint& pos )
 	QTextCursor cr = *cursor;
 	cr.gotoNextWord();
 
-	int diff = QABS( oldCursor.parag()->at( oldCursor.index() )->x - mousePos.x() );
-	int ldiff = QABS( cl.parag()->at( cl.index() )->x - mousePos.x() );
-	int rdiff = QABS( cr.parag()->at( cr.index() )->x - mousePos.x() );
+	int diff = QABS( oldCursor.paragraph()->at( oldCursor.index() )->x - mousePos.x() );
+	int ldiff = QABS( cl.paragraph()->at( cl.index() )->x - mousePos.x() );
+	int rdiff = QABS( cr.paragraph()->at( cr.index() )->x - mousePos.x() );
 
 
-	if ( cursor->parag()->lineStartOfChar( cursor->index() ) !=
-	     oldCursor.parag()->lineStartOfChar( oldCursor.index() ) )
+	if ( cursor->paragraph()->lineStartOfChar( cursor->index() ) !=
+	     oldCursor.paragraph()->lineStartOfChar( oldCursor.index() ) )
 	    diff = 0xFFFFFF;
 
 	if ( rdiff < diff && rdiff < ldiff )
@@ -1880,7 +1941,7 @@ void QTextEdit::handleMouseMove( const QPoint& pos )
 
     bool redraw = FALSE;
     if ( doc->hasSelection( QTextDocument::Standard ) ) {
-	redraw = doc->setSelectionEnd( QTextDocument::Standard, cursor ) || redraw;
+	redraw = doc->setSelectionEnd( QTextDocument::Standard, *cursor ) || redraw;
     }
 
     if ( !redraw ) {
@@ -1890,9 +1951,9 @@ void QTextEdit::handleMouseMove( const QPoint& pos )
 	drawCursor( TRUE );
     }
 
-    if ( currentFormat && currentFormat->key() != cursor->parag()->at( cursor->index() )->format()->key() ) {
+    if ( currentFormat && currentFormat->key() != cursor->paragraph()->at( cursor->index() )->format()->key() ) {
 	currentFormat->removeRef();
-	currentFormat = doc->formatCollection()->format( cursor->parag()->at( cursor->index() )->format() );
+	currentFormat = doc->formatCollection()->format( cursor->paragraph()->at( cursor->index() )->format() );
 	if ( currentFormat->isMisspelled() ) {
 	    currentFormat->removeRef();
 	    currentFormat = doc->formatCollection()->format( currentFormat->font(), currentFormat->color() );
@@ -1902,8 +1963,8 @@ void QTextEdit::handleMouseMove( const QPoint& pos )
 	emit currentVerticalAlignmentChanged( (VerticalAlignment)currentFormat->vAlign() );
     }
 
-    if ( currentAlignment != cursor->parag()->alignment() ) {
-	currentAlignment = cursor->parag()->alignment();
+    if ( currentAlignment != cursor->paragraph()->alignment() ) {
+	currentAlignment = cursor->paragraph()->alignment();
 	block_set_alignment = TRUE;
 	emit currentAlignmentChanged( currentAlignment );
 	block_set_alignment = FALSE;
@@ -1925,17 +1986,29 @@ void QTextEdit::placeCursor( const QPoint &pos, QTextCursor *c, bool link )
 	c = cursor;
 
     c->restoreState();
-    QTextParag *s = doc->firstParag();
+    QTextParagraph *s = doc->firstParagraph();
     c->place( pos, s, link );
+    updateMicroFocusHint();
+}
+
+
+void QTextEdit::updateMicroFocusHint()
+{
+    QTextCursor c( *cursor );
+    if ( d->preeditStart != -1 )
+	c.setIndex( d->preeditStart );
+
     if ( hasFocus() || viewport()->hasFocus() ) {
-	int h = cursor->parag()->lineHeightOfChar( cursor->index() );
+	int h = c.paragraph()->lineHeightOfChar( cursor->index() );
 	if ( !readonly ) {
-	    QFont f = cursor->parag()->at( cursor->index() )->format()->font();
-	    setMicroFocusHint( cursor->x() - contentsX() + frameWidth(),
-			       cursor->y() + cursor->parag()->rect().y() - contentsY() + frameWidth(), 0, h, TRUE );
+	    QFont f = c.paragraph()->at( c.index() )->format()->font();
+	    setMicroFocusHint( c.x() - contentsX() + frameWidth(),
+			       c.y() + cursor->paragraph()->rect().y() - contentsY() + frameWidth(), 0, h, TRUE );
 	}
     }
 }
+
+
 
 void QTextEdit::formatMore()
 {
@@ -1944,7 +2017,7 @@ void QTextEdit::formatMore()
 
     int bottom = contentsHeight();
     int lastBottom = -1;
-    int to = !sender() ? 2 : 20;
+    int to = 20;
     bool firstVisible = FALSE;
     QRect cr( contentsX(), contentsY(), visibleWidth(), visibleHeight() );
     for ( int i = 0; ( i < to || firstVisible ) && lastFormatted; ++i ) {
@@ -1961,10 +2034,14 @@ void QTextEdit::formatMore()
 	    lastBottom = -1;
     }
 
-    if ( bottom > contentsHeight() )
+    if ( bottom > contentsHeight() ) {
 	resizeContents( contentsWidth(), QMAX( doc->height(), bottom ) );
-    else if ( lastBottom != -1 && lastBottom < contentsHeight() )
-	resizeContents( contentsWidth(), QMAX( doc->height(), lastBottom ) );
+    } else if ( lastBottom != -1 && lastBottom < contentsHeight() ) {
+ 	resizeContents( contentsWidth(), QMAX( doc->height(), lastBottom ) );
+	if ( contentsHeight() < visibleHeight() )
+	    updateContents( 0, contentsHeight(), visibleWidth(),
+			    visibleHeight() - contentsHeight() );
+    }
 
     if ( lastFormatted )
 	formatTimer->start( interval, TRUE );
@@ -1980,7 +2057,7 @@ void QTextEdit::doResize()
     resizeContents( 0, 0 );
     doc->setWidth( visibleWidth() );
     doc->invalidate();
-    lastFormatted = doc->firstParag();
+    lastFormatted = doc->firstParagraph();
     interval = 0;
     formatMore();
     repaintContents( contentsX(), contentsY(), visibleWidth(), visibleHeight(), FALSE );
@@ -2001,16 +2078,7 @@ bool QTextEdit::eventFilter( QObject *o, QEvent *e )
 	if ( e->type() == QEvent::FocusIn ) {
 	    blinkTimer->start( QApplication::cursorFlashTime() / 2 );
 	    drawCursor( TRUE );
-
-	    if ( !readonly ) {
-		// make sure the micro focus hint is updated...
-		QFont f = cursor->parag()->at( cursor->index() )->format()->font();
-		setMicroFocusHint( cursor->x() - contentsX() + frameWidth(),
-				   cursor->y() + cursor->parag()->rect().y() -
-				   contentsY() + frameWidth(), 0,
-				   cursor->parag()->lineHeightOfChar( cursor->index() ),
-				   TRUE );
-	    }
+	    updateMicroFocusHint();
 	} else if ( e->type() == QEvent::FocusOut ) {
 	    blinkTimer->stop();
 	    drawCursor( FALSE );
@@ -2020,14 +2088,14 @@ bool QTextEdit::eventFilter( QObject *o, QEvent *e )
     return QScrollView::eventFilter( o, e );
 }
 
-/*!
-  Inserts \a text at the current cursor position. If \a indent is TRUE,
-  the paragraph is re-indented. If \a checkNewLine is TRUE, newline
-  characters in \a text result in hard line breaks (i.e. new
-  paragraphs). If \a checkNewLine is FALSE the behaviour of the editor
-  is undefined if the \a text contains newlines. If \a removeSelected is
-  TRUE, any selected text (in selection 0) is removed before the text is
-  inserted.
+/*!  Inserts \a text at the current cursor position. If \a indent is
+  TRUE, the paragraph is re-indented. If \a checkNewLine is TRUE,
+  newline characters in \a text result in hard line breaks (i.e. new
+  paragraphs). If \a checkNewLine is FALSE and there are newlines in
+  \a text, the behavior is undefined. If \a checkNewLine is FALSE the
+  behaviour of the editor is undefined if the \a text contains
+  newlines. If \a removeSelected is TRUE, any selected text (in
+  selection 0) is removed before the text is inserted.
 
   \sa paste() pasteSubType()
 */
@@ -2046,20 +2114,20 @@ void QTextEdit::insert( const QString &text, bool indent, bool checkNewLine, boo
     if ( undoEnabled && !isReadOnly() ) {
 	checkUndoRedoInfo( UndoRedoInfo::Insert );
 	if ( !undoRedoInfo.valid() ) {
-	    undoRedoInfo.id = cursor->parag()->paragId();
+	    undoRedoInfo.id = cursor->paragraph()->paragId();
 	    undoRedoInfo.index = cursor->index();
 	    undoRedoInfo.d->text = QString::null;
 	}
 	oldLen = undoRedoInfo.d->text.length();
     }
 
-    lastFormatted = checkNewLine && cursor->parag()->prev() ?
-		    cursor->parag()->prev() : cursor->parag();
+    lastFormatted = checkNewLine && cursor->paragraph()->prev() ?
+		    cursor->paragraph()->prev() : cursor->paragraph();
     QTextCursor oldCursor = *cursor;
     cursor->insert( txt, checkNewLine );
     if ( doc->useFormatCollection() ) {
-	doc->setSelectionStart( QTextDocument::Temp, &oldCursor );
-	doc->setSelectionEnd( QTextDocument::Temp, cursor );
+	doc->setSelectionStart( QTextDocument::Temp, oldCursor );
+	doc->setSelectionEnd( QTextDocument::Temp, *cursor );
 	doc->setFormat( QTextDocument::Temp, currentFormat, QTextFormat::Format );
 	doc->removeSelection( QTextDocument::Temp );
     }
@@ -2075,41 +2143,35 @@ void QTextEdit::insert( const QString &text, bool indent, bool checkNewLine, boo
 	undoRedoInfo.d->text += txt;
 	if ( !doc->preProcessor() ) {
 	    for ( int i = 0; i < (int)txt.length(); ++i ) {
-		if ( txt[ i ] != '\n' && c2.parag()->at( c2.index() )->format() ) {
-		    c2.parag()->at( c2.index() )->format()->addRef();
-		    undoRedoInfo.d->text.setFormat( oldLen + i, c2.parag()->at( c2.index() )->format(), TRUE );
+		if ( txt[ i ] != '\n' && c2.paragraph()->at( c2.index() )->format() ) {
+		    c2.paragraph()->at( c2.index() )->format()->addRef();
+		    undoRedoInfo.d->text.setFormat( oldLen + i, c2.paragraph()->at( c2.index() )->format(), TRUE );
 		}
 		c2.gotoNextLetter();
 	    }
 	}
     }
 
-    setModified();
-    emit textChanged();
     if ( !removeSelected ) {
-	doc->setSelectionStart( QTextDocument::Standard, &oldCursor );
-	doc->setSelectionEnd( QTextDocument::Standard, cursor );
+	doc->setSelectionStart( QTextDocument::Standard, oldCursor );
+	doc->setSelectionEnd( QTextDocument::Standard, *cursor );
 	repaintChanged();
     }
-    if ( hasFocus() || viewport()->hasFocus() ) {
-	int h = cursor->parag()->lineHeightOfChar( cursor->index() );
-	if ( !readonly ) {
-	    QFont f = cursor->parag()->at( cursor->index() )->format()->font();
-	    setMicroFocusHint( cursor->x() - contentsX() + frameWidth(),
-			       cursor->y() + cursor->parag()->rect().y() - contentsY() + frameWidth(), 0, h, TRUE );
-	}
-    }
+    updateMicroFocusHint();
+    setModified();
+    emit textChanged();
 }
 
 /*! Inserts \a text in the paragraph \a para and position \a index */
 
 void QTextEdit::insertAt( const QString &text, int para, int index )
 {
-    QTextParag *p = doc->paragAt( para );
+    removeSelection( QTextDocument::Standard );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return;
     QTextCursor tmp = *cursor;
-    cursor->setParag( p );
+    cursor->setParagraph( p );
     cursor->setIndex( index );
     insert( text, FALSE, TRUE, FALSE );
     *cursor = tmp;
@@ -2122,13 +2184,13 @@ void QTextEdit::insertAt( const QString &text, int para, int index )
 
 void QTextEdit::insertParagraph( const QString &text, int para )
 {
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( p ) {
 	QTextCursor tmp( doc );
-	tmp.setParag( p );
+	tmp.setParagraph( p );
 	tmp.setIndex( 0 );
 	tmp.insert( text, TRUE );
-	tmp.splitAndInsertEmptyParag();
+	tmp.splitAndInsertEmptyParagraph();
 	repaintChanged();
     } else {
 	append( text );
@@ -2139,28 +2201,28 @@ void QTextEdit::insertParagraph( const QString &text, int para )
 
 void QTextEdit::removeParagraph( int para )
 {
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return;
     for ( int i = 0; i < doc->numSelections(); ++i )
 	doc->removeSelection( i );
 
-    if ( p == doc->firstParag() && p == doc->lastParag() ) {
+    if ( p == doc->firstParagraph() && p == doc->lastParagraph() ) {
 	p->remove( 0, p->length() - 1 );
 	repaintChanged();
 	return;
     }
     drawCursor( FALSE );
-    bool resetCursor = cursor->parag() == p;
+    bool resetCursor = cursor->paragraph() == p;
     if ( p->prev() )
 	p->prev()->setNext( p->next() );
     else
-	doc->setFirstParag( p->next() );
+	doc->setFirstParagraph( p->next() );
     if ( p->next() )
 	p->next()->setPrev( p->prev() );
     else
-	doc->setLastParag( p->prev() );
-    QTextParag *start = p->next();
+	doc->setLastParagraph( p->prev() );
+    QTextParagraph *start = p->next();
     int h = p->rect().height();
     delete p;
     p = start;
@@ -2174,7 +2236,7 @@ void QTextEdit::removeParagraph( int para )
     }
 
     if ( resetCursor ) {
-	cursor->setParag( doc->firstParag() );
+	cursor->setParagraph( doc->firstParagraph() );
 	cursor->setIndex( 0 );
     }
     repaintChanged();
@@ -2217,16 +2279,9 @@ void QTextEdit::undo()
     ensureCursorVisible();
     repaintChanged();
     drawCursor( TRUE );
+    updateMicroFocusHint();
     setModified();
     emit textChanged();
-    if ( hasFocus() || viewport()->hasFocus() ) {
-	int h = cursor->parag()->lineHeightOfChar( cursor->index() );
-	if ( !readonly ) {
-	    QFont f = cursor->parag()->at( cursor->index() )->format()->font();
-	    setMicroFocusHint( cursor->x() - contentsX() + frameWidth(),
-			       cursor->y() + cursor->parag()->rect().y() - contentsY() + frameWidth(), 0, h, TRUE );
-	}
-    }
 }
 
 /*!
@@ -2262,16 +2317,9 @@ void QTextEdit::redo()
     repaintChanged();
     ensureCursorVisible();
     drawCursor( TRUE );
+    updateMicroFocusHint();
     setModified();
     emit textChanged();
-    if ( hasFocus() || viewport()->hasFocus() ) {
-	int h = cursor->parag()->lineHeightOfChar( cursor->index() );
-	if ( !readonly ) {
-	    QFont f = cursor->parag()->at( cursor->index() )->format()->font();
-	    setMicroFocusHint( cursor->x() - contentsX() + frameWidth(),
-			       cursor->y() + cursor->parag()->rect().y() - contentsY() + frameWidth(), 0, h, TRUE );
-	}
-    }
 }
 
 /*!
@@ -2289,14 +2337,7 @@ void QTextEdit::paste()
     if ( isReadOnly() )
 	return;
     pasteSubType( "plain" );
-    if ( hasFocus() || viewport()->hasFocus() ) {
-	int h = cursor->parag()->lineHeightOfChar( cursor->index() );
-	if ( !readonly ) {
-	    QFont f = cursor->parag()->at( cursor->index() )->format()->font();
-	    setMicroFocusHint( cursor->x() - contentsX() + frameWidth(),
-			       cursor->y() + cursor->parag()->rect().y() - contentsY() + frameWidth(), 0, h, TRUE );
-	}
-    }
+    updateMicroFocusHint();
 #endif
 }
 
@@ -2337,18 +2378,13 @@ void QTextEdit::cut()
     if ( isReadOnly() )
 	return;
 
-    if ( doc->hasSelection( QTextDocument::Standard ) ) {
-	doc->copySelectedText( QTextDocument::Standard );
+    QString t;
+    if ( doc->hasSelection( QTextDocument::Standard ) &&
+	 !( t = doc->selectedText( QTextDocument::Standard, qt_enable_richtext_copy ) ).isEmpty() ) {
+	QApplication::clipboard()->setText( t );
 	removeSelectedText();
     }
-    if ( hasFocus() || viewport()->hasFocus() ) {
-	int h = cursor->parag()->lineHeightOfChar( cursor->index() );
-	if ( !readonly ) {
-	    QFont f = cursor->parag()->at( cursor->index() )->format()->font();
-	    setMicroFocusHint( cursor->x() - contentsX() + frameWidth(),
-			       cursor->y() + cursor->parag()->rect().y() - contentsY() + frameWidth(), 0, h, TRUE );
-	}
-    }
+    updateMicroFocusHint();
 }
 
 /*! Copies any selected text (from selection 0) to the clipboard.
@@ -2358,8 +2394,10 @@ void QTextEdit::cut()
 
 void QTextEdit::copy()
 {
-    if ( !doc->selectedText( QTextDocument::Standard ).isEmpty() )
-	doc->copySelectedText( QTextDocument::Standard );
+    QString t = doc->selectedText( QTextDocument::Standard, qt_enable_richtext_copy );
+    if ( doc->hasSelection( QTextDocument::Standard ) &&
+	 !t.isEmpty() && t.simplifyWhiteSpace() != "<selstart/>" )
+	QApplication::clipboard()->setText( t );
 }
 
 /*!
@@ -2412,17 +2450,17 @@ void QTextEdit::setFormat( QTextFormat *f, int flags )
 {
     if ( doc->hasSelection( QTextDocument::Standard ) ) {
 	drawCursor( FALSE );
-	QString str = doc->selectedText( QTextDocument::Standard );
 	QTextCursor c1 = doc->selectionStartCursor( QTextDocument::Standard );
+	c1.restoreState();
 	QTextCursor c2 = doc->selectionEndCursor( QTextDocument::Standard );
+	c2.restoreState();
 	clearUndoRedo();
 	undoRedoInfo.type = UndoRedoInfo::Format;
-	undoRedoInfo.id = c1.parag()->paragId();
+	undoRedoInfo.id = c1.paragraph()->paragId();
 	undoRedoInfo.index = c1.index();
-	undoRedoInfo.eid = c2.parag()->paragId();
+	undoRedoInfo.eid = c2.paragraph()->paragId();
 	undoRedoInfo.eindex = c2.index();
-	undoRedoInfo.d->text = str;
-	readFormats( c1, c2, 0, undoRedoInfo.d->text );
+	readFormats( c1, c2, undoRedoInfo.d->text );
 	undoRedoInfo.format = f;
 	undoRedoInfo.flags = flags;
 	clearUndoRedo();
@@ -2443,12 +2481,12 @@ void QTextEdit::setFormat( QTextFormat *f, int flags )
 	emit currentFontChanged( currentFormat->font() );
 	emit currentColorChanged( currentFormat->color() );
 	emit currentVerticalAlignmentChanged( (VerticalAlignment)currentFormat->vAlign() );
-	if ( cursor->index() == cursor->parag()->length() - 1 ) {
+	if ( cursor->index() == cursor->paragraph()->length() - 1 ) {
 	    currentFormat->addRef();
-	    cursor->parag()->string()->setFormat( cursor->index(), currentFormat, TRUE );
-	    if ( cursor->parag()->length() == 1 ) {
-		cursor->parag()->invalidate( 0 );
-		cursor->parag()->format();
+	    cursor->paragraph()->string()->setFormat( cursor->index(), currentFormat, TRUE );
+	    if ( cursor->paragraph()->length() == 1 ) {
+		cursor->paragraph()->invalidate( 0 );
+		cursor->paragraph()->format();
 		repaintChanged();
 	    }
 	}
@@ -2467,7 +2505,12 @@ void QTextEdit::setPalette( const QPalette &p )
     }
 }
 
-/*!
+/*! \internal
+
+  \warning In Qt 3.1 we will provide a cleaer API for the
+  functionality which is provided by this function and in Qt 4.0 this
+  function will go away.
+
   Sets the paragraph style of the current paragraph
   to \a dm. If \a dm is QStyleSheetItem::DisplayListItem, the
   type of the list item is set to \a listStyle.
@@ -2481,49 +2524,37 @@ void QTextEdit::setParagType( QStyleSheetItem::DisplayMode dm, QStyleSheetItem::
 	return;
 
     drawCursor( FALSE );
-    if ( !doc->hasSelection( QTextDocument::Standard ) ) {
-	clearUndoRedo();
-	undoRedoInfo.type = UndoRedoInfo::ParagType;
-	QValueList< QPtrVector<QStyleSheetItem> > oldStyles;
-	undoRedoInfo.oldStyles.clear();
-	undoRedoInfo.oldStyles << cursor->parag()->styleSheetItems();
-	undoRedoInfo.oldListStyles.clear();
-	undoRedoInfo.oldListStyles << cursor->parag()->listStyle();
-	undoRedoInfo.list = dm == QStyleSheetItem::DisplayListItem;
-	undoRedoInfo.listStyle = listStyle;
-	undoRedoInfo.id = cursor->parag()->paragId();
-	undoRedoInfo.eid = cursor->parag()->paragId();
-	undoRedoInfo.d->text = " ";
-	undoRedoInfo.index = 1;
-	clearUndoRedo();
-	cursor->parag()->setList( dm == QStyleSheetItem::DisplayListItem, listStyle );
-	repaintChanged();
-    } else {
-	QTextParag *start = doc->selectionStart( QTextDocument::Standard );
-	QTextParag *end = doc->selectionEnd( QTextDocument::Standard );
-	lastFormatted = start;
-	clearUndoRedo();
-	undoRedoInfo.type = UndoRedoInfo::ParagType;
-	undoRedoInfo.id = start->paragId();
-	undoRedoInfo.eid = end->paragId();
-	undoRedoInfo.list = dm == QStyleSheetItem::DisplayListItem;
-	undoRedoInfo.listStyle = listStyle;
-	undoRedoInfo.oldStyles.clear();
-	undoRedoInfo.oldListStyles.clear();
-	while ( start ) {
-	    undoRedoInfo.oldStyles << start->styleSheetItems();
-	    undoRedoInfo.oldListStyles << start->listStyle();
-	    start->setList( dm == QStyleSheetItem::DisplayListItem, listStyle );
-	    if ( start == end )
-		break;
-	    start = start->next();
-	}
-	undoRedoInfo.d->text = " ";
-	undoRedoInfo.index = 1;
-	clearUndoRedo();
-	repaintChanged();
-	formatMore();
+    QTextParagraph *start = cursor->paragraph();
+    QTextParagraph *end = start;
+    if ( doc->hasSelection( QTextDocument::Standard ) ) {
+	start = doc->selectionStartCursor( QTextDocument::Standard ).topParagraph();
+	end = doc->selectionEndCursor( QTextDocument::Standard ).topParagraph();
+	if ( end->paragId() < start->paragId() )
+	    return; // do not trust our selections
     }
+
+    clearUndoRedo();
+    undoRedoInfo.type = UndoRedoInfo::Style;
+    undoRedoInfo.id = start->paragId();
+    undoRedoInfo.eid = end->paragId();
+    undoRedoInfo.styleInformation = QTextStyleCommand::readStyleInformation( doc, undoRedoInfo.id, undoRedoInfo.eid );
+
+    while ( start != end->next() ) {
+	start->setListStyle( listStyle );
+	if ( dm == QStyleSheetItem::DisplayListItem ) {
+	    start->setListItem( TRUE );
+	    if( start->listDepth() == 0 )
+		start->setListDepth( 1 );
+	} else if ( start->isListItem() ) {
+	    start->setListItem( FALSE );
+	    start->setListDepth( QMAX( start->listDepth()-1, 0 ) );
+	}
+	start = start->next();
+    }
+
+    clearUndoRedo();
+    repaintChanged();
+    formatMore();
     drawCursor( TRUE );
     setModified();
     emit textChanged();
@@ -2534,7 +2565,6 @@ void QTextEdit::setParagType( QStyleSheetItem::DisplayMode dm, QStyleSheetItem::
   are \c Qt::AlignLeft, \c Qt::AlignRight, Qt::AlignJustify and
   Qt::AlignCenter (which centers horizontally).
 
-  \sa setParagType()
 */
 
 void QTextEdit::setAlignment( int a )
@@ -2543,50 +2573,29 @@ void QTextEdit::setAlignment( int a )
 	return;
 
     drawCursor( FALSE );
-    if ( !doc->hasSelection( QTextDocument::Standard ) ) {
-	if ( cursor->parag()->alignment() != a ) {
-	    clearUndoRedo();
-	    undoRedoInfo.type = UndoRedoInfo::Alignment;
-	    QMemArray<int> oa( 1 );
-	    oa[ 0 ] = cursor->parag()->alignment();
-	    undoRedoInfo.oldAligns = oa;
-	    undoRedoInfo.newAlign = a;
-	    undoRedoInfo.id = cursor->parag()->paragId();
-	    undoRedoInfo.eid = cursor->parag()->paragId();
-	    undoRedoInfo.d->text = " ";
-	    undoRedoInfo.index = 1;
-	    clearUndoRedo();
-	    cursor->parag()->setAlignment( a );
-	    repaintChanged();
-	}
-    } else {
-	QTextParag *start = doc->selectionStart( QTextDocument::Standard );
-	QTextParag *end = doc->selectionEnd( QTextDocument::Standard );
-	lastFormatted = start;
-	int len = end->paragId() - start->paragId() + 1;
-	clearUndoRedo();
-	undoRedoInfo.type = UndoRedoInfo::Alignment;
-	undoRedoInfo.id = start->paragId();
-	undoRedoInfo.eid = end->paragId();
-	QMemArray<int> oa( QMAX( 0, len ) );
-	int i = 0;
-	while ( start ) {
-	    if ( i < (int)oa.size() )
-		oa[ i ] = start->alignment();
-	    start->setAlignment( a );
-	    if ( start == end )
-		break;
-	    start = start->next();
-	    ++i;
-	}
-	undoRedoInfo.oldAligns = oa;
-	undoRedoInfo.newAlign = a;
-	undoRedoInfo.d->text = " ";
-	undoRedoInfo.index = 1;
-	clearUndoRedo();
-	repaintChanged();
-	formatMore();
+    QTextParagraph *start = cursor->paragraph();
+    QTextParagraph *end = start;
+    if ( doc->hasSelection( QTextDocument::Standard ) ) {
+	start = doc->selectionStartCursor( QTextDocument::Standard ).topParagraph();
+	end = doc->selectionEndCursor( QTextDocument::Standard ).topParagraph();
+	if ( end->paragId() < start->paragId() )
+	    return; // do not trust our selections
     }
+
+    clearUndoRedo();
+    undoRedoInfo.type = UndoRedoInfo::Style;
+    undoRedoInfo.id = start->paragId();
+    undoRedoInfo.eid = end->paragId();
+    undoRedoInfo.styleInformation = QTextStyleCommand::readStyleInformation( doc, undoRedoInfo.id, undoRedoInfo.eid );
+
+    while ( start != end->next() ) {
+	start->setAlignment( a );
+	start = start->next();
+    }
+
+    clearUndoRedo();
+    repaintChanged();
+    formatMore();
     drawCursor( TRUE );
     if ( currentAlignment != a ) {
 	currentAlignment = a;
@@ -2602,10 +2611,10 @@ void QTextEdit::updateCurrentFormat()
     if ( i > 0 )
 	--i;
     if ( doc->useFormatCollection() &&
-	 ( !currentFormat || currentFormat->key() != cursor->parag()->at( i )->format()->key() ) ) {
+	 ( !currentFormat || currentFormat->key() != cursor->paragraph()->at( i )->format()->key() ) ) {
 	if ( currentFormat )
 	    currentFormat->removeRef();
-	currentFormat = doc->formatCollection()->format( cursor->parag()->at( i )->format() );
+	currentFormat = doc->formatCollection()->format( cursor->paragraph()->at( i )->format() );
 	if ( currentFormat->isMisspelled() ) {
 	    currentFormat->removeRef();
 	    currentFormat = doc->formatCollection()->format( currentFormat->font(), currentFormat->color() );
@@ -2615,8 +2624,8 @@ void QTextEdit::updateCurrentFormat()
 	emit currentVerticalAlignmentChanged( (VerticalAlignment)currentFormat->vAlign() );
     }
 
-    if ( currentAlignment != cursor->parag()->alignment() ) {
-	currentAlignment = cursor->parag()->alignment();
+    if ( currentAlignment != cursor->paragraph()->alignment() ) {
+	currentAlignment = cursor->paragraph()->alignment();
 	block_set_alignment = TRUE;
 	emit currentAlignmentChanged( currentAlignment );
 	block_set_alignment = FALSE;
@@ -2778,7 +2787,8 @@ QString QTextEdit::text( int para ) const
 
 void QTextEdit::setText( const QString &text, const QString &context )
 {
-    if ( !isModified() && this->context() == context && this->text() == text )
+    if ( !isModified() && isReadOnly() &&
+	 this->context() == context && this->text() == text )
 	return;
 
     emit undoAvailable( FALSE );
@@ -2799,10 +2809,9 @@ void QTextEdit::setText( const QString &text, const QString &context )
 	resizeContents( 0, 0 );
     }
 
-    cursor->setDocument( doc );
-    lastFormatted = doc->firstParag();
-    cursor->setParag( doc->firstParag() );
-    cursor->setIndex( 0 );
+    lastFormatted = doc->firstParagraph();
+    delete cursor;
+    cursor = new QTextCursor( doc );
     updateContents( contentsX(), contentsY(), visibleWidth(), visibleHeight() );
 
     if ( isModified() )
@@ -2810,6 +2819,7 @@ void QTextEdit::setText( const QString &text, const QString &context )
     emit textChanged();
     formatMore();
     updateCurrentFormat();
+    d->scrollToAnchor = QString::null;
 }
 
 /*!
@@ -2847,9 +2857,9 @@ void QTextEdit::setText( const QString &text, const QString &context )
     \a expr is found; otherwise returns FALSE.
 
     If \a para and \a index are both null the search begins from the
-    start of the text. If \a para and \a index are both not null, the
-    search begins from the \e *\a index character position in the \e
-    *\a para paragraph.
+    current cursor position. If \a para and \a index are both not
+    null, the search begins from the \e *\a index character position
+    in the \e *\a para paragraph.
 
     If \a cs is TRUE the search is case sensitive, otherwise it is
     case insensitive. If \a wo is TRUE the search looks for whole word
@@ -2873,14 +2883,34 @@ bool QTextEdit::find( const QString &expr, bool cs, bool wo, bool forward,
 		      int *para, int *index )
 {
     drawCursor( FALSE );
-    doc->removeSelection( QTextDocument::Standard );
 #ifndef QT_NO_CURSOR
     viewport()->setCursor( isReadOnly() ? arrowCursor : ibeamCursor );
 #endif
-    bool found = doc->find( expr, cs, wo, forward, para, index, cursor );
-    ensureCursorVisible();
+    QTextCursor findcur = *cursor;
+    if ( para && index ) {
+	if ( doc->paragAt( *para ) )
+	    findcur.gotoPosition( doc->paragAt(*para), *index );
+	else
+	    findcur.gotoEnd();
+    } else if ( doc->hasSelection( QTextDocument::Standard ) ){
+	// maks sure we do not find the same selection again
+	if ( forward )
+	    findcur.gotoNextLetter();
+	else
+	    findcur.gotoPreviousLetter();
+    }
+    removeSelection( QTextDocument::Standard );
+    bool found = doc->find( findcur, expr, cs, wo, forward );
+    if ( found ) {
+	if ( para )
+	    *para = findcur.paragraph()->paragId();
+	if ( index )
+	    *index = findcur.index();
+	*cursor = findcur;
+	repaintChanged();
+	ensureCursorVisible();
+    }
     drawCursor( TRUE );
-    repaintChanged();
     return found;
 }
 
@@ -2902,7 +2932,7 @@ void QTextEdit::blinkCursor()
 
 void QTextEdit::setCursorPosition( int para, int index )
 {
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return;
 
@@ -2910,12 +2940,13 @@ void QTextEdit::setCursorPosition( int para, int index )
 	index = p->length() - 1;
 
     drawCursor( FALSE );
-    cursor->setParag( p );
+    cursor->setParagraph( p );
     cursor->setIndex( index );
     ensureCursorVisible();
     drawCursor( TRUE );
+    updateCurrentFormat();
     emit cursorPositionChanged( cursor );
-    emit cursorPositionChanged( cursor->parag()->paragId(), cursor->index() );
+    emit cursorPositionChanged( cursor->paragraph()->paragId(), cursor->index() );
 }
 
 /*!
@@ -2930,7 +2961,7 @@ void QTextEdit::getCursorPosition( int *para, int *index ) const
 {
     if ( !para || !index )
 	return;
-    *para = cursor->parag()->paragId();
+    *para = cursor->paragraph()->paragId();
     *index = cursor->index();
 }
 
@@ -2958,10 +2989,10 @@ void QTextEdit::setSelection( int paraFrom, int indexFrom,
     }
     if ( selNum > doc->numSelections() - 1 )
 	doc->addSelection( selNum );
-    QTextParag *p1 = doc->paragAt( paraFrom );
+    QTextParagraph *p1 = doc->paragAt( paraFrom );
     if ( !p1 )
 	return;
-    QTextParag *p2 = doc->paragAt( paraTo );
+    QTextParagraph *p2 = doc->paragAt( paraTo );
     if ( !p2 )
 	return;
 
@@ -2973,12 +3004,12 @@ void QTextEdit::setSelection( int paraFrom, int indexFrom,
     drawCursor( FALSE );
     QTextCursor c = *cursor;
     QTextCursor oldCursor = *cursor;
-    c.setParag( p1 );
+    c.setParagraph( p1 );
     c.setIndex( indexFrom );
-    cursor->setParag( p2 );
+    cursor->setParagraph( p2 );
     cursor->setIndex( indexTo );
-    doc->setSelectionStart( selNum, &c );
-    doc->setSelectionEnd( selNum, cursor );
+    doc->setSelectionStart( selNum, c );
+    doc->setSelectionEnd( selNum, *cursor );
     repaintChanged();
     ensureCursorVisible();
     if ( selNum != QTextDocument::Standard )
@@ -3056,7 +3087,7 @@ Qt::TextFormat QTextEdit::textFormat() const
 
 int QTextEdit::paragraphs() const
 {
-    return doc->lastParag()->paragId() + 1;
+    return doc->lastParagraph()->paragId() + 1;
 }
 
 /*!
@@ -3066,7 +3097,7 @@ int QTextEdit::paragraphs() const
 
 int QTextEdit::linesOfParagraph( int para ) const
 {
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return -1;
     return p->lines();
@@ -3079,7 +3110,7 @@ int QTextEdit::linesOfParagraph( int para ) const
 
 int QTextEdit::paragraphLength( int para ) const
 {
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return -1;
     return p->length() - 1;
@@ -3095,7 +3126,7 @@ int QTextEdit::paragraphLength( int para ) const
 
 int QTextEdit::lines() const
 {
-    QTextParag *p = doc->firstParag();
+    QTextParagraph *p = doc->firstParagraph();
     int l = 0;
     while ( p ) {
 	l += p->lines();
@@ -3115,7 +3146,7 @@ int QTextEdit::lines() const
 
 int QTextEdit::lineOfChar( int para, int index )
 {
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return -1;
 
@@ -3248,7 +3279,7 @@ void QTextEdit::startDrag()
 #ifndef QT_NO_DRAGANDDROP
     mousePressed = FALSE;
     inDoubleClick = FALSE;
-    QDragObject *drag = new QTextDrag( doc->selectedText( QTextDocument::Standard ), viewport() );
+    QDragObject *drag = new QTextDrag( doc->selectedText( QTextDocument::Standard, qt_enable_richtext_copy ), viewport() );
     if ( isReadOnly() ) {
 	drag->dragCopy();
     } else {
@@ -3285,22 +3316,20 @@ void QTextEdit::UndoRedoInfo::clear()
 {
     if ( valid() ) {
 	if ( type == Insert || type == Return )
-	    doc->addCommand( new QTextInsertCommand( doc, id, index, d->text.rawData(), oldStyles, oldListStyles, oldAligns ) );
+	    doc->addCommand( new QTextInsertCommand( doc, id, index, d->text.rawData(), styleInformation ) );
 	else if ( type == Format )
 	    doc->addCommand( new QTextFormatCommand( doc, id, index, eid, eindex, d->text.rawData(), format, flags ) );
-	else if ( type == Alignment )
-	    doc->addCommand( new QTextAlignmentCommand( doc, id, eid, newAlign, oldAligns ) );
-	else if ( type == ParagType )
-	    doc->addCommand( new QTextParagTypeCommand( doc, id, eid, list, listStyle, oldStyles, oldListStyles ) );
-	else if ( type != Invalid )
-	    doc->addCommand( new QTextDeleteCommand( doc, id, index, d->text.rawData(), oldStyles, oldListStyles, oldAligns ) );
+	else if ( type == Style )
+	    doc->addCommand( new QTextStyleCommand( doc, id, eid, styleInformation ) );
+	else if ( type != Invalid ) {
+	    doc->addCommand( new QTextDeleteCommand( doc, id, index, d->text.rawData(), styleInformation ) );
+	}
     }
+    type = Invalid;
     d->text = QString::null;
     id = -1;
     index = -1;
-    oldStyles.clear();
-    oldListStyles.clear();
-    oldAligns.resize( 0 );
+    styleInformation = QByteArray();
 }
 
 
@@ -3340,7 +3369,7 @@ QTextEdit::UndoRedoInfo::~UndoRedoInfo()
 
 bool QTextEdit::UndoRedoInfo::valid() const
 {
-    return d->text.length() > 0	 && id >= 0 && index >= 0;
+    return id >= 0 &&  type != Invalid;
 }
 
 /*!
@@ -3409,10 +3438,7 @@ QBrush QTextEdit::paper() const
 
 void QTextEdit::setLinkUnderline( bool b )
 {
-    if ( b == doc->underlineLinks() )
-	return;
     doc->setUnderlineLinks( b );
-    updateStyles();
 }
 
 bool QTextEdit::linkUnderline() const
@@ -3465,10 +3491,9 @@ int QTextEdit::heightForWidth( int w ) const
 void QTextEdit::append( const QString &text )
 {
     // flush and clear the undo/redo stack if necessary
-    if ( isReadOnly() && undoRedoInfo.valid() ) {
-	undoRedoInfo.clear();
-	doc->commands()->clear();
-    }
+    undoRedoInfo.clear();
+    doc->commands()->clear();
+
     doc->removeSelection( QTextDocument::Standard );
     TextFormat f = doc->textFormat();
     if ( f == AutoText ) {
@@ -3477,35 +3502,37 @@ void QTextEdit::append( const QString &text )
 	else
 	    f = PlainText;
     }
-    if ( f == PlainText ) {
-	QTextCursor oldc( *cursor );
-	ensureFormatted( doc->lastParag() );
-	bool scrollToEnd = contentsY() >= contentsHeight() - visibleHeight() -
-			   ( horizontalScrollBar()->isVisible() ? horizontalScrollBar()->height() : 0 );
-	if ( !scrollToEnd )
-	    blockEnsureCursorVisible = TRUE;
-	cursor->gotoEnd();
-	if ( cursor->index() > 0 )
-	    cursor->splitAndInsertEmptyParag();
-	QTextCursor oldCursor2 = *cursor;
-  	cursor->insert( text, TRUE );
-	if ( doc->useFormatCollection() && currentFormat != cursor->parag()->at( cursor->index() )->format() ) {
-	    doc->setSelectionStart( QTextDocument::Temp, &oldCursor2 );
-	    doc->setSelectionEnd( QTextDocument::Temp, cursor );
+
+    drawCursor( FALSE );
+    QTextCursor oldc( *cursor );
+    ensureFormatted( doc->lastParagraph() );
+    bool atBottom = contentsY() >= contentsHeight() - visibleHeight();
+    cursor->gotoEnd();
+    if ( cursor->index() > 0 )
+	cursor->splitAndInsertEmptyParagraph();
+    QTextCursor oldCursor2 = *cursor;
+
+    if ( f == Qt::PlainText ) {
+	cursor->insert( text, TRUE );
+	if ( doc->useFormatCollection() &&
+	     currentFormat != cursor->paragraph()->at( cursor->index() )->format() ) {
+	    doc->setSelectionStart( QTextDocument::Temp, oldCursor2 );
+	    doc->setSelectionEnd( QTextDocument::Temp, *cursor );
 	    doc->setFormat( QTextDocument::Temp, currentFormat, QTextFormat::Format );
 	    doc->removeSelection( QTextDocument::Temp );
 	}
-	formatMore();
-	repaintChanged();
-	ensureCursorVisible();
-	drawCursor( TRUE );
- 	*cursor = oldc;
-	if ( !scrollToEnd )
-	    blockEnsureCursorVisible = FALSE;
-    } else if ( f == RichText ) {
+    } else {
+	if ( cursor->paragraph()->prev() )
+	    cursor->paragraph()->prev()->invalidate(0); // vertical margins might have to change
 	doc->setRichTextInternal( text );
-	repaintChanged();
     }
+    formatMore();
+    repaintChanged();
+    if ( atBottom )
+        scrollToBottom();
+    *cursor = oldc;
+    if ( !isReadOnly() )
+	cursorVisible = TRUE;
     setModified();
     emit textChanged();
 }
@@ -3617,7 +3644,7 @@ QString QTextEdit::documentTitle() const
     return doc->attributes()[ "title" ];
 }
 
-void QTextEdit::makeParagVisible( QTextParag *p )
+void QTextEdit::makeParagVisible( QTextParagraph *p )
 {
     setContentsPos( contentsX(), QMIN( p->rect().y(), contentsHeight() - visibleHeight() ) );
 }
@@ -3630,23 +3657,29 @@ void QTextEdit::makeParagVisible( QTextParag *p )
 
 void QTextEdit::scrollToAnchor( const QString& name )
 {
+    if ( !isVisible() ) {
+	d->scrollToAnchor = name;
+	return;
+    }
     if ( name.isEmpty() )
 	return;
     sync();
     QTextCursor cursor( doc );
-    QTextParag* last = doc->lastParag();
-    do {
-	QTextStringChar* c = cursor.parag()->at( cursor.index() );
+    QTextParagraph* last = doc->lastParagraph();
+    for (;;) {
+	QTextStringChar* c = cursor.paragraph()->at( cursor.index() );
 	if( c->isAnchor() ) {
 	    QString a = c->anchorName();
 	    if ( a == name ||
 		 (a.contains( '#' ) && QStringList::split( '#', a ).contains( name ) ) ) {
-		setContentsPos( contentsX(), QMIN( cursor.parag()->rect().top() + cursor.totalOffsetY(), contentsHeight() - visibleHeight() ) );
-		return;
+		setContentsPos( contentsX(), QMIN( cursor.paragraph()->rect().top() + cursor.totalOffsetY(), contentsHeight() - visibleHeight() ) );
+		break;
 	    }
 	}
+	if ( cursor.paragraph() == last && cursor.atParagEnd()  )
+	    break;
 	cursor.gotoNextLetter();
-    } while( cursor.parag() != last || !cursor.atParagEnd()  );
+    }
 }
 
 /*! If there is an anchor at position \a pos (in contents
@@ -3658,7 +3691,7 @@ QString QTextEdit::anchorAt( const QPoint& pos )
 {
     QTextCursor c( doc );
     placeCursor( pos, &c );
-    return c.parag()->at( c.index() )->anchorHref();
+    return c.paragraph()->at( c.index() )->anchorHref();
 }
 
 void QTextEdit::documentWidthChanged( int w )
@@ -3666,15 +3699,13 @@ void QTextEdit::documentWidthChanged( int w )
     resizeContents( QMAX( visibleWidth(), w), contentsHeight() );
 }
 
-/*!
-    Updates all the rendering styles used to display the text. You will
-    probably want to call this function after calling setStyleSheet().
+/*! \internal
+
+  This function does nothing
 */
 
 void QTextEdit::updateStyles()
 {
-    doc->updateStyles();
-    updateContents( contentsX(), contentsY(), visibleWidth(), visibleHeight() );
 }
 
 void QTextEdit::setDocument( QTextDocument *dc )
@@ -3682,8 +3713,10 @@ void QTextEdit::setDocument( QTextDocument *dc )
     if ( dc == doc )
 	return;
     doc = dc;
-    cursor->setDocument( doc );
+    delete cursor;
+    cursor = new QTextCursor( doc );
     clearUndoRedo();
+    undoRedoInfo.doc = doc;
     lastFormatted = 0;
 }
 
@@ -3703,7 +3736,52 @@ void QTextEdit::pasteSubType( const QCString& subtype )
 {
     QCString st = subtype;
     QString t = QApplication::clipboard()->text(st);
+    if ( doc->hasSelection( QTextDocument::Standard ) )
+	removeSelectedText();
     if ( !t.isEmpty() ) {
+	if ( t.startsWith( "<selstart/>" ) ) {
+	    t.remove( 0, 11 );
+	    QTextCursor oldC = *cursor;
+	    lastFormatted = cursor->paragraph();
+	    if ( lastFormatted->prev() )
+		lastFormatted = lastFormatted->prev();
+	    doc->setRichTextInternal( t, cursor );
+	
+	    if ( undoEnabled && !isReadOnly() ) {
+		doc->setSelectionStart( QTextDocument::Temp, oldC );
+		doc->setSelectionEnd( QTextDocument::Temp, *cursor );
+
+		checkUndoRedoInfo( UndoRedoInfo::Insert );
+		if ( !undoRedoInfo.valid() ) {
+		    undoRedoInfo.id = oldC.paragraph()->paragId();
+		    undoRedoInfo.index = oldC.index();
+		    undoRedoInfo.d->text = QString::null;
+		}
+		int oldLen = undoRedoInfo.d->text.length();
+		if ( !doc->preProcessor() ) {
+		    QString txt = doc->selectedText( QTextDocument::Temp );
+		    undoRedoInfo.d->text += txt;
+		    for ( int i = 0; i < (int)txt.length(); ++i ) {
+			if ( txt[ i ] != '\n' && oldC.paragraph()->at( oldC.index() )->format() ) {
+			    oldC.paragraph()->at( oldC.index() )->format()->addRef();
+			    undoRedoInfo.d->text.
+				setFormat( oldLen + i, oldC.paragraph()->at( oldC.index() )->format(), TRUE );
+			}
+			oldC.gotoNextLetter();
+		    }
+		}
+		undoRedoInfo.clear();
+		removeSelection( QTextDocument::Temp );
+	    }
+	
+	    formatMore();
+	    setModified();
+	    emit textChanged();
+	    repaintChanged();
+	    ensureCursorVisible();
+	    return;
+	}
+
 #if defined(Q_OS_WIN32)
 	// Need to convert CRLF to LF
 	int index = t.find( QString::fromLatin1("\r\n"), 0 );
@@ -3838,7 +3916,7 @@ void QTextEdit::setWordWrap( WordWrap mode )
 	doc->setMinimumWidth( -1 );
 	doc->invalidate();
 	updateContents( contentsX(), contentsY(), visibleWidth(), visibleHeight() );
-	lastFormatted = doc->firstParag();
+	lastFormatted = doc->firstParagraph();
 	interval = 0;
 	formatMore();
 	break;
@@ -3899,7 +3977,7 @@ void QTextEdit::setWrapColumnOrWidth( int value )
     }
     doc->invalidate();
     updateContents( contentsX(), contentsY(), visibleWidth(), visibleHeight() );
-    lastFormatted = doc->firstParag();
+    lastFormatted = doc->firstParagraph();
     interval = 0;
     formatMore();
 }
@@ -3952,7 +4030,7 @@ void QTextEdit::setWrapPolicy( WrapPolicy policy )
     document()->setFormatter( formatter );
     doc->invalidate();
     updateContents( contentsX(), contentsY(), visibleWidth(), visibleHeight() );
-    lastFormatted = doc->firstParag();
+    lastFormatted = doc->firstParagraph();
     interval = 0;
     formatMore();
 }
@@ -3979,14 +4057,13 @@ void QTextEdit::clear()
     if ( cursor->isValid() )
 	cursor->restoreState();
     doc->clear( TRUE );
-    cursor->setDocument( doc );
-    cursor->setParag( doc->firstParag() );
-    cursor->setIndex( 0 );
+    delete cursor;
+    cursor = new QTextCursor( doc );
     lastFormatted = 0;
     updateContents( contentsX(), contentsY(), visibleWidth(), visibleHeight() );
 
     emit cursorPositionChanged( cursor );
-    emit cursorPositionChanged( cursor->parag()->paragId(), cursor->index() );
+    emit cursorPositionChanged( cursor->paragraph()->paragId(), cursor->index() );
 }
 
 int QTextEdit::undoDepth() const
@@ -4025,7 +4102,7 @@ void QTextEdit::setTabStopWidth( int ts )
 {
     document()->setTabStops( ts );
     doc->invalidate();
-    lastFormatted = doc->firstParag();
+    lastFormatted = doc->firstParagraph();
     interval = 0;
     formatMore();
     updateContents( contentsX(), contentsY(), visibleWidth(), visibleHeight() );
@@ -4046,7 +4123,13 @@ void QTextEdit::clearUndoRedo()
     emit redoAvailable( doc->commands()->isRedoAvailable() );
 }
 
-/*!  This function gets the format of the character at position \a
+/*!  \internal
+
+  \warning In Qt 3.1 we will provide a cleaer API for the
+  functionality which is provided by this function and in Qt 4.0 this
+  function will go away.
+
+  This function gets the format of the character at position \a
   index in paragraph \a para. Sets \a font to the character's font, \a
   color to the character's color and \a verticalAlignment to the
   character's vertical alignment.
@@ -4059,7 +4142,7 @@ bool QTextEdit::getFormat( int para, int index, QFont *font, QColor *color, Vert
 {
     if ( !font || !color )
 	return FALSE;
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return FALSE;
     if ( index < 0 || index >= p->length() )
@@ -4070,7 +4153,13 @@ bool QTextEdit::getFormat( int para, int index, QFont *font, QColor *color, Vert
     return TRUE;
 }
 
-/*!  This function gets the format of the paragraph \a para. Sets \a
+/*!  \internal
+
+  \warning In Qt 3.1 we will provide a cleaer API for the
+  functionality which is provided by this function and in Qt 4.0 this
+  function will go away.
+
+  This function gets the format of the paragraph \a para. Sets \a
   font to the paragraphs's font, \a color to the paragraph's color, \a
   verticalAlignment to the paragraph's vertical alignment, \a
   alignment to the paragraph's alignment, \a displayMode to the
@@ -4090,14 +4179,14 @@ bool QTextEdit::getParagraphFormat( int para, QFont *font, QColor *color,
 {
     if ( !font || !color || !alignment || !displayMode || !listStyle )
 	return FALSE;
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return FALSE;
-    *font = p->paragFormat()->font();
-    *color = p->paragFormat()->color();
-    *verticalAlignment = (VerticalAlignment)p->paragFormat()->vAlign();
+    *font = p->at(0)->format()->font();
+    *color = p->at(0)->format()->color();
+    *verticalAlignment = (VerticalAlignment)p->at(0)->format()->vAlign();
     *alignment = p->alignment();
-    *displayMode = p->style() ? p->style()->displayMode() : QStyleSheetItem::DisplayBlock;
+    *displayMode = p->isListItem() ? QStyleSheetItem::DisplayListItem : QStyleSheetItem::DisplayBlock;
     *listStyle = p->listStyle();
     *listDepth = p->listDepth();
     return TRUE;
@@ -4155,10 +4244,14 @@ QPopupMenu *QTextEdit::createPopupMenu( const QPoint& pos )
 }
 
 /*! \overload
+    \obsolete
     This function is called to create a right mouse button popup menu.
     If you want to create a custom popup menu, reimplement this function
     and return the created popup menu. Ownership of the popup menu is
     transferred to the caller.
+
+    This function is only called if createPopupMenu( const QPoint & )
+    returns 0.
 */
 
 QPopupMenu *QTextEdit::createPopupMenu()
@@ -4173,21 +4266,8 @@ void QTextEdit::setFont( const QFont &f )
     QFont old( QScrollView::font() );
     QScrollView::setFont( f );
     doc->setMinimumWidth( -1 );
-
-    // ### that is a bit hacky
-    static short diff = 1;
-    diff *= -1;
-    doc->setWidth( visibleWidth() + diff );
-
-    int s = f.pointSize();
-    bool usePixels = FALSE;
-    if ( s == -1 ) {
-	s = f.pixelSize();
-	usePixels = TRUE;
-    }
-    doc->updateFontSizes( s, usePixels );
-    doc->updateFontAttributes( f, old );
-    lastFormatted = doc->firstParag();
+    doc->setDefaultFormat( f, doc->formatCollection()->defaultFormat()->color() );
+    lastFormatted = doc->firstParagraph();
     formatMore();
     repaintChanged();
 }
@@ -4273,10 +4353,9 @@ void QTextEdit::zoomTo( int size )
 
 void QTextEdit::sync()
 {
-    QTextParag *p = lastFormatted;
-    while ( p ) {
-	p->format();
-	p = p->next();
+    while ( lastFormatted ) {
+	lastFormatted->format();
+	lastFormatted = lastFormatted->next();
     }
     resizeContents( contentsWidth(), doc->height() );
 }
@@ -4360,7 +4439,7 @@ QRect QTextEdit::paragraphRect( int para ) const
 {
     QTextEdit *that = (QTextEdit *)this;
     that->sync();
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return QRect( -1, -1, -1, -1 );
     return p->rect();
@@ -4374,9 +4453,9 @@ QRect QTextEdit::paragraphRect( int para ) const
 int QTextEdit::paragraphAt( const QPoint &pos ) const
 {
     QTextCursor c( doc );
-    c.place( pos, doc->firstParag() );
-    if ( c.parag() )
-	return c.parag()->paragId();
+    c.place( pos, doc->firstParagraph() );
+    if ( c.paragraph() )
+	return c.paragraph()->paragId();
     return -1;
 }
 
@@ -4390,10 +4469,10 @@ int QTextEdit::paragraphAt( const QPoint &pos ) const
 int QTextEdit::charAt( const QPoint &pos, int *para ) const
 {
     QTextCursor c( doc );
-    c.place( pos, doc->firstParag() );
-    if ( c.parag() ) {
+    c.place( pos, doc->firstParagraph() );
+    if ( c.paragraph() ) {
 	if ( para )
-	    *para = c.parag()->paragId();
+	    *para = c.paragraph()->paragId();
 	return c.index();
     }
     return -1;
@@ -4403,7 +4482,7 @@ int QTextEdit::charAt( const QPoint &pos, int *para ) const
 
 void QTextEdit::setParagraphBackgroundColor( int para, const QColor &bg )
 {
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return;
     p->setBackgroundColor( bg );
@@ -4416,7 +4495,7 @@ void QTextEdit::setParagraphBackgroundColor( int para, const QColor &bg )
 
 void QTextEdit::clearParagraphBackground( int para )
 {
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return;
     p->clearBackgroundColor();
@@ -4430,7 +4509,7 @@ void QTextEdit::clearParagraphBackground( int para )
 
 QColor QTextEdit::paragraphBackgroundColor( int para ) const
 {
-    QTextParag *p = doc->paragAt( para );
+    QTextParagraph *p = doc->paragAt( para );
     if ( !p )
 	return QColor();
     QColor *c = p->backgroundColor();
@@ -4469,7 +4548,7 @@ bool QTextEdit::isRedoAvailable() const
     return doc->commands()->isRedoAvailable();
 }
 
-void QTextEdit::ensureFormatted( QTextParag *p )
+void QTextEdit::ensureFormatted( QTextParagraph *p )
 {
     while ( !p->isValid() ) {
 	if ( !lastFormatted )
@@ -4486,11 +4565,11 @@ void QTextEdit::updateCursor( const QPoint & pos )
 	placeCursor( pos, &c, TRUE );
 
 #ifndef QT_NO_NETWORKPROTOCOL
-	if ( c.parag() && c.parag()->at( c.index() ) &&
-	     c.parag()->at( c.index() )->isAnchor() &&
-	     !c.parag()->at( c.index() )->anchorHref().isEmpty() ) {
-	    if ( c.index() < c.parag()->length() - 1 )
-		onLink = c.parag()->at( c.index() )->anchorHref();
+	if ( c.paragraph() && c.paragraph()->at( c.index() ) &&
+	     c.paragraph()->at( c.index() )->isAnchor() &&
+	     !c.paragraph()->at( c.index() )->anchorHref().isEmpty() ) {
+	    if ( c.index() < c.paragraph()->length() - 1 )
+		onLink = c.paragraph()->at( c.index() )->anchorHref();
 	    else
 		onLink = QString::null;
 
