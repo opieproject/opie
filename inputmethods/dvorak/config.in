@@ -2,3 +2,5 @@
     boolean "opie-dvorak (keyboard in DVORAK layout)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && PICKBOARD
+  comment "opie-dvorak needs opie-pickboard"
+    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE && PICKBOARD)

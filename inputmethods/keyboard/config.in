@@ -1,4 +1,6 @@
   config KEYBOARD
     boolean "opie-keyboard (keyboard in QWERTY layout)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && PICKBOARD
+  comment "opie-keyboard needs opie-pickboard"
+    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE && PICKBOARD)
