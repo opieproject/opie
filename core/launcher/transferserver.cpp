@@ -36,12 +36,12 @@
 #include <qfileinfo.h>
 #include <qregexp.h>
 //#include <qpe/qcopchannel_qws.h>
-#include <qpe/qprocess.h>
 #include <qpe/process.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 
 #include "transferserver.h"
+#include "qprocess.h"
 
 const int block_size = 51200;
 
