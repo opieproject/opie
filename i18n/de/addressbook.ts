@@ -15,14 +15,14 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>unbestimmt</translation>
     </message>
 </context>
 <context>
     <name>AddressSettings</name>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Anrede</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -124,27 +124,27 @@ entering data!</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kann die Daten nicht editieren, synchronisiere gerade</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Persönliche Daten editieren</translation>
     </message>
     <message>
         <source>Edit Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse Editieren</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Adressbuch - Persönliche Einstellungen</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Speicherplatz</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -156,7 +156,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Anrede</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -168,7 +168,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Mb</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>First Name</source>
@@ -196,11 +196,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation></translation>
+        <translation>unbestimmt</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Schrift</translation>
     </message>
 </context>
 <context>
@@ -287,7 +287,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Street 2</source>
-        <translation>2. Strasse</translation>
+        <translation>2. Straße</translation>
     </message>
     <message>
         <source>P.O. Box</source>

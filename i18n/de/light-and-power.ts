@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Suspend after</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ausschalten nach:</translation>
     </message>
     <message>
         <source>Bright</source>

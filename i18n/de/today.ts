@@ -45,23 +45,27 @@
     <name>todayconfig</name>
     <message>
         <source>Today config</source>
-        <translation type="unfinished"></translation>
+        <translation>Heute - Einstellungen</translation>
     </message>
     <message>
         <source>Should the 
 location 
 be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Soll der Ort
+angezeigt
+werden?</translation>
     </message>
     <message>
         <source>Should the notes 
 be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sollen die Notizen
+angezeigt werden?</translation>
     </message>
     <message>
         <source>Show only later
 appointments</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur spätere Verabredungen
+anzeigen</translation>
     </message>
     <message>
         <source>How many 
@@ -72,22 +76,25 @@ be shown?</source>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalender</translation>
     </message>
     <message>
         <source>How many
 tasks should 
 be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wieviele Aufgaben
+sollen angezeigt
+werden?</translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgaben</translation>
     </message>
     <message>
         <source>Clip after how
 many letters</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeilenumbruch nach
+wievielen Buchstaben?</translation>
     </message>
     <message>
         <source>Should today be
@@ -97,7 +104,7 @@ resume ? (Opie only)</source>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiedenes</translation>
     </message>
 </context>
 </TS>
