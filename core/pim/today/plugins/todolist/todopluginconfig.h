@@ -17,14 +17,15 @@
 #ifndef TODOLIST_PLUGIN_CONFIG_H
 #define TODOLIST_PLUGIN_CONFIG_H
 
-//#include <qwidget.h>
 #include <qspinbox.h>
 
 #include <opie/todayconfigwidget.h>
 
+#include "todopluginconfigbase.h"
+
 class TodolistPluginConfig : public TodayConfigWidget {
 
-Q_OBJECT
+    Q_OBJECT
 
 public:
 
@@ -38,9 +39,9 @@ private:
     bool changed();
     void readConfig();
     void writeConfig();
+    
+    TodoPluginConfigBase *m_gui;
 
-    QSpinBox* SpinBox2;
-    QSpinBox* SpinBoxClip;
 
     // how many lines should be showed in the todolist section
     int m_max_lines_task;

@@ -98,21 +98,22 @@ void DateBookWeekHeader::setDate(const QDate &d) {
 	int year,week,dayofweek;
 	date=d;
 	dayofweek=d.dayOfWeek();
-	if(bStartOnMonday) 
+	if(bStartOnMonday)
 	    dayofweek--;
 	else if( dayofweek == 7 )
-	    /* we already have the right day -7 would lead to the current week..*/
+	    // we already have the right day -7 would lead to the current week..
 	    dayofweek = 0;
-	    	    
+
 	date=date.addDays(-dayofweek);
 	calcWeek(date,week,year,bStartOnMonday);
 	QDate start=date;
 	QDate stop=start.addDays(6);
 	labelDate->setText( QString::number(start.day()) + "." +
-			start.monthName(start.month()) + "-" +
+			Calendar::nameOfMonth( start.month()) + "-" +
 			QString::number(stop.day()) + "." +
-			start.monthName(stop.month()) +" ("+
+			Calendar::nameOfMonth( stop.month()) +" ("+
 			tr("w")+":"+QString::number( week ) +")");
+	date = d; // bugfix: 0001126 - date has to be the selected date, not monday!
 	emit dateChanged(date);
 }
 

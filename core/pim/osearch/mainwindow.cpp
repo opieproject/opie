@@ -82,11 +82,11 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   detailsFrame->hide();
   buttonBox->hide();
 
-  searches.append( new AppLnkSearch( resultsList, tr("applications") ) );
-  searches.append( new DocLnkSearch( resultsList, tr("documents") ) );
-  searches.append( new TodoSearch( resultsList, tr("todo") ) );
-  searches.append( new DatebookSearch( resultsList, tr("datebook") ) );
-  searches.append( new AdressSearch( resultsList, tr("adressbook") ) );
+  searches.append( new AppLnkSearch( resultsList, tr("Applications") ) );
+  searches.append( new DocLnkSearch( resultsList, tr("Documents") ) );
+  searches.append( new TodoSearch( resultsList, tr("Todo List") ) );
+  searches.append( new DatebookSearch( resultsList, tr("Calendar") ) );
+  searches.append( new AdressSearch( resultsList, tr("Contacts") ) );
 
   setCentralWidget( mainFrame );
 

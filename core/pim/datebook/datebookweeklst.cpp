@@ -1,30 +1,15 @@
 #include "datebookweeklst.h"
 
-#include "datebookweekheaderimpl.h"
 
 #include "datebook.h"
 
-#include <qpe/calendar.h>
-#include <qpe/datebookdb.h>
-#include <qpe/event.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/timestring.h>
 #include <qpe/datebookmonth.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
+#include <qpe/calendar.h>
 
-#include <qdatetime.h>
-#include <qheader.h>
-#include <qlabel.h>
 #include <qlayout.h>
-#include <qpainter.h>
-#include <qpopupmenu.h>
-#include <qtimer.h>
-#include <qstyle.h>
 #include <qtoolbutton.h>
-#include <qvbox.h>
-#include <qsizepolicy.h>
-#include <qabstractlayout.h>
 #include <qtl.h>
 
 bool calcWeek(const QDate &d, int &week, int &year,bool startOnMonday = false);
@@ -73,10 +58,11 @@ void DateBookWeekLstHeader::setDate(const QDate &d) {
 	QDate start=date;
 	QDate stop=start.addDays(6);
 	labelDate->setText( QString::number(start.day()) + "." +
-			start.monthName(start.month()) + "-" +
+			Calendar::nameOfMonth( start.month() ) + "-" +
 			QString::number(stop.day()) + "." +
-			start.monthName(stop.month()) +" ("+
+                                                Calendar::nameOfMonth( stop.month()) +" ("+
 			tr("w")+":"+QString::number( week ) +")");
+	date = d; // bugfix: 0001126 - date has to be the selected date, not monday!
 	emit dateChanged(date);
 }
 
@@ -125,8 +111,10 @@ DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool /* onM */,
 	static const QString wdays=tr("MTWTFSSM",  "Week days");
 	char day=wdays[d.dayOfWeek()-1];
 
+    //dont use dayOfWeek() to save space !
 	label->setText( QString(QObject::tr(QString(QChar(day)))) + " " +QString::number(d.day()) );
-	add->setText("+");
+
+     add->setText("+");
 
 	if (d == QDate::currentDate()) {
 		QPalette pal=label->palette();
@@ -341,8 +329,23 @@ QDate DateBookWeekLst::date() {
 	return bdate;
 }
 
+// return the date at the beginning of the week...
+// copied from DateBookWeek
+QDate DateBookWeekLst::weekDate() const
+{
+	QDate d=bdate;
+
+	// Calculate offset to first day of week.
+	int dayoffset=d.dayOfWeek();
+	if(bStartOnMonday) dayoffset--;
+	else if( dayoffset == 7 )
+	    dayoffset = 0;
+
+	return d.addDays(-dayoffset);
+}
+
 void DateBookWeekLst::getEvents() {
-	QDate start = date();
+	QDate start = weekDate(); //date();
 	QDate stop = start.addDays(6);
 	QValueList<EffectiveEvent> el = db->getEffectiveEvents(start, stop);
 

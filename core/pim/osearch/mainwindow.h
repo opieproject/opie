@@ -7,14 +7,19 @@
  *                                                                         *
  ***************************************************************************/
 
-// (c) 2002 Patrick S. Vogt <tille@handhelds.org>
+// (c) 2002-2003 Patrick S. Vogt <tille@handhelds.org>
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <qmainwindow.h>
+#include <qdialog.h>
+#include <qaction.h>
 #include <qlist.h>
+
 #include <qmap.h>
+#include <qtimer.h>
+#include <qpopupmenu.h>
 
 class QAction;
 class QPEToolBar;
@@ -26,8 +31,11 @@ class OListView;
 class OListViewItem;
 class QListViewItem;
 class QPopupMenu;
-class QSignalMapper;
 class QTimer;
+
+class QSignalMapper;
+class QButton;
+
 class SearchGroup;
 
 class MainWindow : public QMainWindow
@@ -38,7 +46,7 @@ class MainWindow : public QMainWindow
 public:
   MainWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
   ~MainWindow();
-
+  static QString appName() { return QString::fromLatin1("osearch"); }
 
 public slots:
   void setCurrent(QListViewItem*);

@@ -76,7 +76,7 @@ void DatebookSearch::insertItem( void *rec )
 	      ev->lastHitField() == Qtopia::StartDateTime ||
  	      ev->lastHitField() == Qtopia::EndDateTime )
 	    ) return;
-	(void)new EventItem( this, ev );
+	new EventItem( this, ev );
 	_resultCount++;
 }
 

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.26 2003-08-01 14:19:44 eilers Exp $
+** $Id: datebook.cpp,v 1.27 2003-11-03 18:28:50 waspe Exp $
 **
 **********************************************************************/
 
@@ -192,6 +192,8 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 
 	qDebug("done t=%d", t.elapsed() );
 
+        connect( qApp, SIGNAL( flush() ), this, SLOT( flush() ) );
+        connect( qApp, SIGNAL( reload()), this, SLOT( reload() ) );
     /*
      *  Here is a problem description:
      *  When Weekview is the default view
@@ -402,6 +404,8 @@ void DateBook::viewMonth() {
 void DateBook::insertEvent( const Event &e )
 {
 	Event dupEvent=e;
+	if(!dupEvent.isValidUid() ) // tkcRom seems to be different
+	    dupEvent.assignUid();
 	dupEvent.setLocation(defaultLocation);
 	dupEvent.setCategories(defaultCategories);
 	db->addEvent(dupEvent);
@@ -443,15 +447,17 @@ void DateBook::duplicateEvent( const Event &e )
 			if (QMessageBox::warning(this, tr("error box"), error, tr("Fix it"), tr("Continue"), 0, 0, 1) == 0)
 				continue;
 		}
-                /*
-                 * The problem:
-                 * DateBookDB does remove repeating events not by uid but by the time
-                 * the recurrence was created
-                 * so we need to update that time as well
-                 */
-                Event::RepeatPattern rp = newEv.repeatPattern();
-                rp.createTime = ::time( NULL );
-                newEv.setRepeat( TRUE, rp ); // has repeat and repeatPattern...
+        /*
+        * The problem:
+        * DateBookDB does remove repeating events not by uid but by the time
+        * the recurrence was created
+        * so we need to update that time as well
+        */
+        Event::RepeatPattern rp = newEv.repeatPattern();
+        rp.createTime = ::time( NULL );
+        newEv.setRepeat( TRUE, rp ); // has repeat and repeatPattern...
+		if( newEv.uid() == e.uid() || !newEv.isValidUid() )
+		    newEv.assignUid();
 
 		db->addEvent(newEv);
 		emit newEvent();

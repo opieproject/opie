@@ -102,20 +102,24 @@ void AddressBookPluginWidget::getAddress() {
 	QString output;
 
 	// Check whether the database provide the search option..
-	if ( !m_contactdb->hasQuerySettings( OContactAccess::DateDiff ) ){
+    if ( !m_contactdb->hasQuerySettings( OContactAccess::DateDiff ) ){
 		// Libopie seems to be old..
 		output = QObject::tr( "Database does not provide this search query ! Please upgrade libOpie !<br>" );
 		addressLabel->setText( output );
 		return;
 	}
-	
+
 	// Define the query for birthdays and start search..
 	QDate lookAheadDate = QDate::currentDate().addDays( m_daysLookAhead );
 	int ammount = 0;
 	if ( m_showBirthdays ){
-		qWarning("Searching from now (%s) until %s ! ", 
-			 QDate::currentDate().toString().latin1(), 
+		qWarning("Searching from now (%s) until %s ! ",
+			 QDate::currentDate().toString().latin1(),
 			 lookAheadDate.toString().latin1() );
+    }
+
+    if ( m_contactdb->hasQuerySettings( OContactAccess::DateDiff ) ){
+
 
 		OContact querybirthdays;
 		querybirthdays.setBirthday( lookAheadDate );

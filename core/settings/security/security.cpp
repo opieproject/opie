@@ -111,7 +111,7 @@ void Security::updateGUI()
 
 void Security::show()
 {
-    valid=FALSE;
+    //valid=FALSE;
     setEnabled(FALSE);
     SecurityBase::show();
     if ( passcode.isEmpty() ) {
@@ -120,13 +120,17 @@ void Security::show()
         //if ( passcode.isEmpty() )
         //reject();
     } else {
-        QString pc = enterPassCode(tr("Enter passcode"));
-        if ( pc != passcode ) {
-            QMessageBox::critical(this, tr("Passcode incorrect"),
-                    tr("The passcode entered is incorrect.\nAccess denied"));
-            reject();
-            return;
-        }
+
+		if (!valid) // security passcode was not asked yet, so ask now
+		{
+			QString pc = enterPassCode(tr("Enter passcode"));
+			if ( pc != passcode ) {
+				QMessageBox::critical(this, tr("Passcode incorrect"),
+						tr("The passcode entered is incorrect.\nAccess denied"));
+				reject();
+				return;
+			}
+		}
     }
     setEnabled(TRUE);
     valid=TRUE;
@@ -213,6 +217,7 @@ void Security::loadUsers ( void )
     }
 
 }
+
 void Security::toggleAutoLogin(bool val)
 {
     autoLogin=val;
@@ -220,6 +225,10 @@ void Security::toggleAutoLogin(bool val)
     if (!autoLogin)
         autoLoginName=userlist->currentText();
 }
+
+
+
+
 void Security::setSyncNet(const QString& sn)
 {
     int auth_peer,auth_peer_bits;
@@ -230,6 +239,7 @@ void Security::setSyncNet(const QString& sn)
 void Security::applySecurity()
 {
     if ( valid ) {
+<<<<<<< security.cpp
         Config cfg("Security");
         cfg.setGroup("Passcode");
         cfg.writeEntry("passcode",passcode);
@@ -262,6 +272,7 @@ void Security::applySecurity()
 
 	cfg.setGroup("SyncMode");
 	cfg.writeEntry("Mode", syncModeCombo->currentItem()+1 );
+
     }
 }
 
