@@ -3,284 +3,285 @@
     <name>AudioWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePlejeris</translation>
     </message>
 </context>
 <context>
     <name>Lib</name>
     <message>
         <source>Progress: %1 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Progress: %1 %2</translation>
     </message>
 </context>
 <context>
     <name>MediaPlayer</name>
     <message>
         <source>OpiePlayer: Initializating</source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePlejeris: Inicializēju</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePlejeris:</translation>
     </message>
     <message>
         <source> File: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fails:</translation>
     </message>
     <message>
         <source>, Length: </source>
-        <translation type="unfinished"></translation>
+        <translation>, Garums:</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaļums</translation>
     </message>
 </context>
 <context>
     <name>PlayListFileView</name>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Nosaukums</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Izmērs</translation>
     </message>
     <message>
         <source>Media</source>
-        <translation type="unfinished"></translation>
+        <translation>Mēdijs</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ceļš</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Playlist Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Saraksta Izvēle</translation>
     </message>
 </context>
 <context>
     <name>PlayListWidget</name>
     <message>
         <source>Loading of Skin started</source>
-        <translation type="unfinished"></translation>
+        <translation>Sākta izskata ielāde</translation>
     </message>
     <message>
         <source>Add to Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Sarakstam</translation>
     </message>
     <message>
         <source>Remove from Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt no saraksta</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Spēlēt</translation>
     </message>
     <message>
         <source>Randomize</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejauši</translation>
     </message>
     <message>
         <source>Loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Cikls</translation>
     </message>
     <message>
         <source>Clear List</source>
-        <translation type="unfinished"></translation>
+        <translation>Attīrīt Sarakstu</translation>
     </message>
     <message>
         <source>Add all audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot visus audio failus</translation>
     </message>
     <message>
         <source>Add all video files</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot visus video failus</translation>
     </message>
     <message>
         <source>Add all files</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot visus failus</translation>
     </message>
     <message>
         <source>Add File</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Failu</translation>
     </message>
     <message>
         <source>Add URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot URL</translation>
     </message>
     <message>
         <source>Add Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Direktoriju</translation>
     </message>
     <message>
         <source>Save Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt Sarakstu</translation>
     </message>
     <message>
         <source>Rescan for Audio Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Skanēt Audio Failus</translation>
     </message>
     <message>
         <source>Rescan for Video Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Skanēt Video Failus</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilna Skanēšana</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārvietot uz augšu</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārvietot Uz Leju</translation>
     </message>
     <message>
         <source>Play Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Spēlēt Izvēlēto</translation>
     </message>
     <message>
         <source>Invalid File</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūdains Fails</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bija problēma saņemot failu.</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt no Saraksta?</translation>
     </message>
     <message>
         <source>You really want to delete
 this playlist?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai tiešām vēlaties dzēst
+no saraksta?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Jā</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nē</translation>
     </message>
     <message>
         <source>Add  URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot   URL</translation>
     </message>
     <message>
         <source>Add File to Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Failu Sarakstam</translation>
     </message>
     <message>
         <source>Add Files from Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Failus no Direktorijas</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePlejeris:</translation>
     </message>
     <message>
         <source>Opieplayer Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Opieplejera Kļūda</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Opieplayer2 skin not found!&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Please install an opieplayer2 skin package.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Opieplejeris2 izskats nav atrasts!&lt;/b&gt;&lt;/b&gt;&lt;p&gt;Lūdzu instalējiet opieplejera2 izskata paku.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>PlayListWidgetGui</name>
     <message>
         <source>Play Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Spēlēt Operācijas</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fails</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Skats</translation>
     </message>
     <message>
         <source>Skins</source>
-        <translation type="unfinished"></translation>
+        <translation>Izskati</translation>
     </message>
     <message>
         <source>Gamma (Video)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gamma (Video)</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Saraksti</translation>
     </message>
 </context>
 <context>
     <name>SkinLoader</name>
     <message>
         <source>Loading of Skin finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Pabeigta Izskata ielāde</translation>
     </message>
 </context>
 <context>
     <name>VideoWidget</name>
     <message>
         <source>OpiePlayer - Video</source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePlejeris - Video</translation>
     </message>
 </context>
 <context>
     <name>XineControl</name>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās</translation>
     </message>
     <message>
         <source>Error on file &apos;%1&apos; with reason: </source>
         <comment>Error when playing a file</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda failam &quot;%1&quot; ar iemeslu:</translation>
     </message>
     <message>
         <source>&lt;qt&gt;No input plugin found for this media type&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Nav atrasts spraudnis šim mēdiju tipam&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;No demux plugin found for this media type&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Nav atrasts demux plugins šim mēdija tipam&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Demuxing failed for this media type&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Demuxings nav izdevies šim mēdiju tipam&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Malformed MRL&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Nepilns MRL&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Input failed&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Ievada kļūda&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Some other error&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Cita kļūda&lt;/qt&gt;</translation>
     </message>
 </context>
 </TS>

@@ -3,162 +3,166 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Atpakaļ</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Uz priekšu</translation>
     </message>
 </context>
 <context>
     <name>QtRec</name>
     <message>
         <source>OpieRecord </source>
-        <translation type="unfinished"></translation>
+        <translation>OpieIeraksts</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Spēlēt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nosaukums</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Laiks</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Faili</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Ieraksta Kvalitāte</translation>
     </message>
     <message>
         <source>Limit Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Izmēra Ierobežojums</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>Neierobežots</translation>
     </message>
     <message>
         <source>File Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Faila Direktorijs</translation>
     </message>
     <message>
         <source>Bit Depth</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitu Dziļums</translation>
     </message>
     <message>
         <source>Wave Compression (smaller files)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wave Kompresija (mazākiem failiem)</translation>
     </message>
     <message>
         <source>Auto Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto Mute</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>Ieeja</translation>
     </message>
     <message>
         <source>Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Izeja</translation>
     </message>
     <message>
         <source>mute</source>
-        <translation type="unfinished"></translation>
+        <translation>mute</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcijas</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaļums</translation>
     </message>
     <message>
         <source>Low Disk Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepietiek Diska Vietas</translation>
     </message>
     <message>
         <source>You are running low of
 recording space
 or a card isn&apos;t being recognized</source>
-        <translation type="unfinished"></translation>
+        <translation>Jums paliek maz
+ieraksta vietas
+vai arī karte nav atpazīta</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai tiešām vēlaties &lt;font size=+2&gt;&lt;B&gt;DZĒST&lt;/B&gt;&lt;/font&gt;
+izvēlēto failu?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Jā</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nē</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <source>Could not remove file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru izdzēst failu.</translation>
     </message>
     <message>
         <source>Opierec</source>
-        <translation type="unfinished"></translation>
+        <translation>Opieieraksts</translation>
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation type="unfinished"></translation>
+        <translation>Lūdzu izvēlaties failu  spēlēšanai</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Piezīmes</translation>
     </message>
     <message>
         <source>Could not open audio file.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru atvērt audio failu.
+</translation>
     </message>
     <message>
         <source>Send with Ir</source>
-        <translation type="unfinished"></translation>
+        <translation>Nosūtīta pa Ir</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārsaukt</translation>
     </message>
     <message>
         <source>Ir Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir Bīmot</translation>
     </message>
     <message>
         <source>Ir sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir nosūtīts.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
     <message>
         <source>Del</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo</translation>
     </message>
 </context>
 </TS>
