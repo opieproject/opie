@@ -3,140 +3,140 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;Alarm om %0&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
     <name>OTaskEditor</name>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informatie</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarms</translation>
     </message>
     <message>
         <source>Recurrence</source>
-        <translation type="unfinished"></translation>
+        <translation>Terugkeringen</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer taak in</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig taak</translation>
     </message>
     <message>
         <source>silent</source>
-        <translation type="unfinished"></translation>
+        <translation>stil</translation>
     </message>
     <message>
         <source>loud</source>
-        <translation type="unfinished"></translation>
+        <translation>luid</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw van voorbeeld</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe taak</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om een nieuwe taak te maken.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig taak</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de huidige taak te wijzigen.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekijk taak</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de huidige taak te verwijderen.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder alle...</translation>
     </message>
     <message>
         <source>Delete completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder gedaan</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliceer</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>IrDa Versturen</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de huidige taak naar een ander apparaat te sturen.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Vind</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat gedane taken zien</translation>
     </message>
     <message>
         <source>Show only over-due tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat alleen taken over tijd zien</translation>
     </message>
     <message>
         <source>Show task deadlines</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat taak-eindtijden zien</translation>
     </message>
     <message>
         <source>Show quick task bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Laat snelle taakbalk zien</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>QuickEdit</source>
-        <translation type="unfinished"></translation>
+        <translation>SnelWijziging</translation>
     </message>
     <message>
         <source>This is a listing of all current tasks.
@@ -150,15 +150,15 @@ The list displays the following information:
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle kategorieen</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbenoemd</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaatsgebrek</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -171,19 +171,19 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Todo</source>
-        <translation type="unfinished"></translation>
+        <translation>Te Doen</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan data niet wijzigen tijdens synchronisatie</translation>
     </message>
     <message>
         <source>all tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>alle taken?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>alle gedane taken?</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -191,51 +191,51 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>New Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe taken</translation>
     </message>
     <message>
         <source>C.</source>
-        <translation type="unfinished"></translation>
+        <translation>C.</translation>
     </message>
     <message>
         <source>Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioriteit</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Omschrijving</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished"></translation>
+        <translation>Einddatum</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel voorbeelden in</translation>
     </message>
     <message>
         <source>Template Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Voorbeeld editor</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg toe</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam</translation>
     </message>
     <message>
         <source>New Template %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw voorbeeld %1</translation>
     </message>
     <message>
         <source>Click here to set the priority of new task.
@@ -255,7 +255,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Meer</translation>
     </message>
     <message>
         <source>Click here to enter additional information for new task.
@@ -267,7 +267,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer in</translation>
     </message>
     <message>
         <source>Click here to add new task.
@@ -279,7 +279,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Click here to reset new task information.
@@ -291,279 +291,280 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioriteit:</translation>
     </message>
 </context>
 <context>
     <name>TableView</name>
     <message>
         <source>Table View</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabelaanzicht</translation>
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Dag(en)</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorAlarms</name>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tijd</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Soort</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorOverView</name>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Omschrijving:</translation>
     </message>
     <message>
         <source>Enter brief description of the task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer hier een korte omschrijving van de taak in.</translation>
     </message>
     <message>
         <source>Complete </source>
-        <translation type="unfinished"></translation>
+        <translation>Gedaan</translation>
     </message>
     <message>
         <source>Work on </source>
-        <translation type="unfinished"></translation>
+        <translation>Werk aan</translation>
     </message>
     <message>
         <source>Buy </source>
-        <translation type="unfinished"></translation>
+        <translation>Koop</translation>
     </message>
     <message>
         <source>Organize </source>
-        <translation type="unfinished"></translation>
+        <translation>Organiseer</translation>
     </message>
     <message>
         <source>Get </source>
-        <translation type="unfinished"></translation>
+        <translation>Haal</translation>
     </message>
     <message>
         <source>Update </source>
-        <translation type="unfinished"></translation>
+        <translation>Updaten</translation>
     </message>
     <message>
         <source>Create </source>
-        <translation type="unfinished"></translation>
+        <translation>Maak</translation>
     </message>
     <message>
         <source>Plan </source>
-        <translation type="unfinished"></translation>
+        <translation>Plannen</translation>
     </message>
     <message>
         <source>Call </source>
-        <translation type="unfinished"></translation>
+        <translation>Bellen</translation>
     </message>
     <message>
         <source>Mail </source>
-        <translation type="unfinished"></translation>
+        <translation>Schrijven</translation>
     </message>
     <message>
         <source>Select priority of task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel prioriteit hier in.</translation>
     </message>
     <message>
         <source>Very High</source>
-        <translation type="unfinished"></translation>
+        <translation>Heel hoog</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoog</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normaal</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Laag</translation>
     </message>
     <message>
         <source>Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Heel laag</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie:</translation>
     </message>
     <message>
         <source>Select category to organize this task with.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selekteer kategorie waar deze taak inhoort.</translation>
     </message>
     <message>
         <source>Recurring task</source>
-        <translation type="unfinished"></translation>
+        <translation>Terugkerende taak</translation>
     </message>
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier als deze taak vaker voorkomt. Indien geselecteerd, kan frequentie ingesteld worden op de terugkerings tab.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Notities:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer hier extra info over deze taak in.</translation>
     </message>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Te Doen Lijst</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorStatus</name>
     <message>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Status:</translation>
     </message>
     <message>
         <source>Click here to set the current status of this task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de huidige status van deze taak in te stellen.</translation>
     </message>
     <message>
         <source>Started</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestart</translation>
     </message>
     <message>
         <source>Postponed</source>
-        <translation type="unfinished"></translation>
+        <translation>Uitgesteld</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Gedaan</translation>
     </message>
     <message>
         <source>Not started</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet gestart</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Voortgang:</translation>
     </message>
     <message>
         <source>Select progress made on this task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer hier de gemaakte voortgang.</translation>
     </message>
     <message>
         <source>0 %</source>
-        <translation type="unfinished"></translation>
+        <translation>0%</translation>
     </message>
     <message>
         <source>20 %</source>
-        <translation type="unfinished"></translation>
+        <translation>20%</translation>
     </message>
     <message>
         <source>40 %</source>
-        <translation type="unfinished"></translation>
+        <translation>40%</translation>
     </message>
     <message>
         <source>60 %</source>
-        <translation type="unfinished"></translation>
+        <translation>6-%</translation>
     </message>
     <message>
         <source>80 %</source>
-        <translation type="unfinished"></translation>
+        <translation>80%</translation>
     </message>
     <message>
         <source>100 %</source>
-        <translation type="unfinished"></translation>
+        <translation>100%</translation>
     </message>
     <message>
         <source>Start Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanvangsdatum:</translation>
     </message>
     <message>
         <source>Click here to set the date this task was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de startdatum van de taak in te stellen.</translation>
     </message>
     <message>
         <source>Due Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Einddatum:</translation>
     </message>
     <message>
         <source>Click here to set the date this task needs to be completed by.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om een eindtijd voor deze taak in te stellen.
+</translation>
     </message>
     <message>
         <source>Completed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Afgemaakt:</translation>
     </message>
     <message>
         <source>Click here to mark this task as completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om  deze taak als gedaan te markeren.</translation>
     </message>
     <message>
         <source>Click here to set the date this task was completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de tijd van ahandeling in te stellen.</translation>
     </message>
     <message>
         <source>Maintainer Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Beheermodus:</translation>
     </message>
     <message>
         <source>Click here to set the maintainer&apos;s role.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de rol van de beheerder in te stellen.</translation>
     </message>
     <message>
         <source>Nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Niets</translation>
     </message>
     <message>
         <source>Responsible</source>
-        <translation type="unfinished"></translation>
+        <translation>Verantwoordelijk</translation>
     </message>
     <message>
         <source>Done By</source>
-        <translation type="unfinished"></translation>
+        <translation>Gedaan door</translation>
     </message>
     <message>
         <source>Coordinating</source>
-        <translation type="unfinished"></translation>
+        <translation>Coordinatie</translation>
     </message>
     <message>
         <source>Maintainer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Beheerder:</translation>
     </message>
     <message>
         <source>This is the name of the current task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is de naam van de huidige beheerder van deze taak.</translation>
     </message>
     <message>
         <source>test</source>
-        <translation type="unfinished"></translation>
+        <translation>test</translation>
     </message>
     <message>
         <source>Click here to select the task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om de taakbeheerder te selecteren.</translation>
     </message>
 </context>
 </TS>

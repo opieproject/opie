@@ -3,59 +3,59 @@
     <name>TinyKate</name>
     <message>
         <source>TinyKATE</source>
-        <translation type="unfinished"></translation>
+        <translation>TinyKate</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Open</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Opslaan als</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand</translation>
     </message>
     <message>
         <source>Font +</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype+</translation>
     </message>
     <message>
         <source>Font -</source>
-        <translation type="unfinished"></translation>
+        <translation>Lettertype-</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Aanzicht</translation>
     </message>
     <message>
         <source>Utils</source>
-        <translation type="unfinished"></translation>
+        <translation>Utils</translation>
     </message>
     <message>
         <source>Highlighting</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleurcodes</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Unnamed %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbenoemd %1</translation>
     </message>
 </context>
 </TS>

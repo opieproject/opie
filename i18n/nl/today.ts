@@ -3,119 +3,121 @@
     <name>Today</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Vandaag</translation>
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="unfinished"></translation>
+        <translation>Bezit van</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
-        <translation type="unfinished"></translation>
+        <translation>Visitekaartje invullen a.u.b.</translation>
     </message>
     <message>
         <source>Click here to launch the associated app</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om het bijbehorende programma te starten</translation>
     </message>
     <message>
         <source>No plugins found</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen plugins gevonden</translation>
     </message>
     <message>
         <source>No plugins activated</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen plugins geactiveerd</translation>
     </message>
 </context>
 <context>
     <name>TodayBase</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Vandaag</translation>
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation type="unfinished"></translation>
+        <translation>Vandaag door Maximilian Reiß</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier voor het instellingsvenster</translation>
     </message>
 </context>
 <context>
     <name>TodayConfig</name>
     <message>
         <source>Today Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Vandaag instelling</translation>
     </message>
     <message>
         <source>Load which plugins in what order:</source>
-        <translation type="unfinished"></translation>
+        <translation>Laad plugins in welke volgorde:</translation>
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation type="unfinished"></translation>
+        <translation>Vink een checkbox aan om een plugin te activeren/deactiveren of gebruik de pijltjes om de volgorde te veranderen</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Schuif omhoog</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Schuif omlaag</translation>
     </message>
     <message>
         <source>active/order</source>
-        <translation type="unfinished"></translation>
+        <translation>aktief/volgorde</translation>
     </message>
     <message>
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation type="unfinished"></translation>
+        <translation>autostart bij
+opstarten?
+(alleen Opie)</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished"></translation>
+        <translation>vink dit aan als Vandaag moet starten vanuit slaapstand.</translation>
     </message>
     <message>
         <source>Tiny Banner</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleine bovenbalk</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>minuten inactief</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoeveel minuten moet de PDA uitstaan voor Vandaag automatisch opkomt bij herstart</translation>
     </message>
     <message>
         <source>Icon size</source>
-        <translation type="unfinished"></translation>
+        <translation>Icoongrootte</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel icoongrootte in pixel in</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Ververs</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoevaak moet Vandaag zich verversen</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation>sec</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished"></translation>
+        <translation>nooit</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Div</translation>
     </message>
 </context>
 </TS>
