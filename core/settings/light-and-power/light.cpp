@@ -45,7 +45,8 @@
 #include <qstylefactory.h>
 #endif
 
-extern int qpe_sysBrightnessSteps();
+#include <opie/odevice.h>
+
 
 LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     : LightSettingsBase( parent, name, TRUE, fl )
@@ -69,7 +70,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     screensaver_dim->setChecked( config.readNumEntry("Dim",1) != 0 );
     screensaver_lightoff->setChecked( config.readNumEntry("LightOff",1) != 0 );
     LcdOffOnly->setChecked( config.readNumEntry("LcdOffOnly",0) != 0 );
-    int maxbright = qpe_sysBrightnessSteps();
+    int maxbright = ODevice::inst ( )-> displayBrightnessResolution ( );
     initbright = config.readNumEntry("Brightness",255);
     brightness->setMaxValue( maxbright );
     brightness->setTickInterval( QMAX(1,maxbright/16) );

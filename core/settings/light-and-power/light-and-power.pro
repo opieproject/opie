@@ -6,7 +6,7 @@ SOURCES		= light.cpp main.cpp
 INTERFACES	= lightsettingsbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= ../$(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 TARGET		= light-and-power
 
 TRANSLATIONS = ../../../i18n/de/light-and-power.ts \
