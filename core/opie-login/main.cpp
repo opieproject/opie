@@ -49,6 +49,7 @@
 #include <opie/odevice.h>
 
 #include <qwindowsystem_qws.h>
+#include <qwsmouse_qws.h>
 #include <qmessagebox.h>
 #include <qlabel.h>
 #include <qtimer.h>
