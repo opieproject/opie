@@ -13,7 +13,7 @@
 #include <qmainwindow.h>
 #include <qtabwidget.h>
 #include <qlistview.h>
-#include <qiconview.h>
+//#include <qiconview.h>
 
 #include <qpe/qpemenubar.h>
 #include <qpopupmenu.h>                       
@@ -40,7 +40,7 @@ private:
 	QToolButton *editgroupToolButton;
 	QToolButton *deletegroupToolButton;
 	QTabWidget *myTabWidget;
-	QIconView *usersIconView;
+	QListView *usersIconView;
 	QListView *usersListView;
 	QListView *groupsListView;
 	int availableUID;

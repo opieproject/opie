@@ -71,9 +71,10 @@ void UserConfig::setupTabAccounts() {
 	QVBoxLayout *layout = new QVBoxLayout(tabpage);
 	layout->setMargin(5);
 	
-	usersIconView=new QIconView(tabpage,"users");
-	usersIconView->setItemTextPos(QIconView::Right);
-	usersIconView->setArrangement(QIconView::LeftToRight);
+	usersIconView=new QListView(tabpage,"users");
+	usersIconView->addColumn("Icon");
+	usersIconView->addColumn("Username");
+	usersIconView->setAllColumnsShowFocus(true);
 	layout->addWidget(usersIconView);
 	
 	myTabWidget->addTab(tabpage,"Users");
@@ -112,7 +113,8 @@ void UserConfig::setupTabAllGroups() {
 void UserConfig::getUsers() {
 	QString mytext;
 	QPixmap mypixmap;
-		
+	QListViewItem *listviewitem;
+			
 	// Empty the iconview & the listview.
 	usersIconView->clear();
 	usersListView->clear();
@@ -124,12 +126,11 @@ void UserConfig::getUsers() {
 		new QListViewItem(usersListView,QString::number(accounts->pw_uid),accounts->pw_name,accounts->pw_gecos);
 		if((accounts->pw_uid>=500) && (accounts->pw_uid<65000)) {	// Is this user a "normal" user ?
 			mytext=QString(accounts->pw_name)+" - ("+QString(accounts->pw_gecos)+")"; // The string displayed next to the icon.
-//			mypixmap=Resource::loadPixmap(QString("users/"+accounts->pw_name));	// Is there an icon for this user? Resource::loadPixmap is caching, doesn't work.
-			if(!(mypixmap.load("/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png"))) {
-//			if(mypixmap.isNull()) {
+			if(!(mypixmap.load("/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png"))) { //  Is there an icon for this user? Resource::loadPixmap is caching, doesn't work.
 				mypixmap=Resource::loadPixmap(QString("usermanager/usericon"));	// If this user has no icon, load the default icon.
 			}
-			new QIconViewItem(usersIconView,mytext,mypixmap);	// Add the icon+text to the qiconview.
+			listviewitem=new QListViewItem(usersIconView,"",mytext);	// Add the icon+text to the qiconview.
+			listviewitem->setPixmap(0,mypixmap);
 		}
 		if((accounts->pw_uid>=availableUID) && (accounts->pw_uid<65000)) availableUID=accounts->pw_uid+1; // Increase 1 to the latest know UID to get a free uid. 
 	}
@@ -147,7 +148,7 @@ void UserConfig::editUser() {
 	QString username;
 	if(myTabWidget->currentPageIndex()==0) {	// Users
 		if(usersIconView->currentItem()) {	// Any icon selected?
-			username=usersIconView->currentItem()->text();	// Get the text associated with the icon.
+			username=usersIconView->currentItem()->text(1);	// Get the text associated with the icon.
 			username=username.left(username.find(" - (",0,true));	// Strip out the username.
 			if(UserDialog::editUser(username)) {	// Bring up the userinfo dialog.
 				// If there were any changed also update the views.
@@ -177,7 +178,7 @@ void UserConfig::delUser() {
 	
 	if(myTabWidget->currentPageIndex()==0) {	// Users, Iconview.
 		if(usersIconView->currentItem()) {	// Anything selected?
-			username=usersIconView->currentItem()->text();	// Get string associated with icon.
+			username=usersIconView->currentItem()->text(1);	// Get string associated with icon.
 			username=username.left(username.find(" - (",0,true));	// Strip out the username.
 			if(QMessageBox::warning(this,"Delete user","Are you sure you want to\ndelete this user? \""+QString(username)+"\" ?","&No","&Yes",0,0,1)) {
 				if(UserDialog::delUser(username)) {	// Delete the user if possible.

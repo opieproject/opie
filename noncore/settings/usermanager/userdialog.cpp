@@ -155,7 +155,7 @@ void UserDialog::setupTab2() {
 	groupsListView=new QListView(tabpage,"groups");
 	groupsListView->addColumn("Additional groups");
 	groupsListView->setColumnWidthMode(0,QListView::Maximum);
-	groupsListView->setMultiSelection(true);
+	groupsListView->setMultiSelection(false);
 	groupsListView->setAllColumnsShowFocus(false);
 	
 	layout->addSpacing(5);
@@ -198,9 +198,11 @@ bool UserDialog::addUser(int uid, int gid) {
 	}
     
 	// Add User to additional groups.
+	QCheckListItem *temp;
 	QListViewItemIterator it( adduserDialog->groupsListView );
 	for ( ; it.current(); ++it ) {
-	if ( it.current()->isSelected() )
+	temp=(QCheckListItem*)it.current();
+	if (temp->isOn() )
 		accounts->addGroupMember(it.current()->text(0),adduserDialog->loginLineEdit->text());
 	}
 	// Copy image to pics/users/
@@ -210,7 +212,7 @@ bool UserDialog::addUser(int uid, int gid) {
 			d.mkdir("/opt/QtPalmtop/pics/users");
 		}
 		QString filename="/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png";
-		adduserDialog->userImage=adduserDialog->userImage.smoothScale(48,48);
+//		adduserDialog->userImage=adduserDialog->userImage.smoothScale(48,48);
 		adduserDialog->userImage.save(filename,"PNG");
 	}
 	return true;
@@ -268,13 +270,15 @@ bool UserDialog::editUser(const char *username) {
 		}
 	}
 	// Select the groups in the listview, to which the user belongs.
+	QCheckListItem *temp;
 	QRegExp userRegExp(QString("[:\\s]%1\\s").arg(username));
 	QStringList tempList=accounts->groupStringList.grep(userRegExp);	// Find all entries in the group database, that the user is a member of.
 	for(QStringList::Iterator it=tempList.begin(); it!=tempList.end(); ++it) {	// Iterate over all of them.
 		QListViewItemIterator lvit( edituserDialog->groupsListView );	// Compare to all groups.
 		for ( ; lvit.current(); ++lvit ) {
 			if(lvit.current()->text(0)==(*it).left((*it).find(":"))) {
-				lvit.current()->setSelected(true);	// If we find a line with that groupname, select it.;
+				temp=(QCheckListItem*)lvit.current();
+				temp->setOn(true);	// If we find a line with that groupname, select it.;
 			}
 		}
 	}
@@ -303,7 +307,8 @@ bool UserDialog::editUser(const char *username) {
 	// Add User to additional groups that he/she is a member of.
 	QListViewItemIterator it( edituserDialog->groupsListView );
 	for ( ; it.current(); ++it ) {
-	if ( it.current()->isSelected() )
+	temp=(QCheckListItem*)it.current();
+	if ( temp->isOn() )
 		accounts->addGroupMember(it.current()->text(0),edituserDialog->loginLineEdit->text());
 	}
 	
@@ -314,7 +319,7 @@ bool UserDialog::editUser(const char *username) {
 			d.mkdir("/opt/QtPalmtop/pics/users");
 		}
 		QString filename="/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png";
-		edituserDialog->userImage=edituserDialog->userImage.smoothScale(48,48);
+//		edituserDialog->userImage=edituserDialog->userImage.smoothScale(48,48);
 		edituserDialog->userImage.save(filename,"PNG");
 	}
 	return true;
@@ -344,7 +349,7 @@ void UserDialog::clickedPicture() {
 		if(!(userImage.load(filename))) {
 			QMessageBox::information(0,"Sorry!","That icon could not be loaded.\nLoading failed on: "+filename);
 		} else {
-			userImage=userImage.smoothScale(48,48);
+//			userImage=userImage.smoothScale(48,48);
 			QPixmap *picture;
 			picture=(QPixmap *)picturePushButton->pixmap();
 			picture->convertFromImage(userImage,0);
