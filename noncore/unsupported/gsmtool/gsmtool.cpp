@@ -4,6 +4,7 @@
 #include <qlineedit.h>
 #include <qlabel.h>
 #include <qtabwidget.h>
+#include <qlistview.h>
 
 #include <termios.h>
 
@@ -131,6 +132,52 @@ void GSMTool::timerEvent( QTimerEvent * )
 void GSMTool::doScanButton()
 {
 	qDebug("ScanButton");
+
+	NetworkList->setEnabled(FALSE);
+	AvailNetsLabel->setEnabled(FALSE);
+	NetworkList->clear();
+	new QListViewItem(NetworkList, "Scanning...");
+
+	vector<OPInfo> opis;
+
+	try {
+		opis = me->getAvailableOPInfo();
+	} catch (GsmException) {
+		NetworkList->clear();
+		new QListViewItem(NetworkList, "Scan failed...");
+		return;
+	}
+	
+	NetworkList->clear();
+	for (vector<OPInfo>::iterator i = opis.begin(); i != opis.end(); ++i) {
+		char *statustext;
+		switch (i->_status) {
+
+		case UnknownOPStatus:
+			statustext = "unknown";
+			break;
+			
+		case CurrentOPStatus: 
+			statustext = "current";
+			break;
+
+		case AvailableOPStatus:
+			statustext = "available";
+			break;
+
+		case ForbiddenOPStatus:
+			statustext = "forbidden";
+			break;
+		       
+		default:
+			statustext = "(ERROR)";
+		}
+		char num[7];
+		snprintf(num, 6, "%d", i->_numericName);
+		new QListViewItem(NetworkList, i->_longName.c_str(), statustext, num, i->_shortName.c_str());
+      }
+	NetworkList->setEnabled(TRUE);
+	AvailNetsLabel->setEnabled(TRUE);
 }
 /*
  *  A simple slot... not very interesting.

@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>272</width>
-            <height>366</height>
+            <width>388</width>
+            <height>502</height>
         </rect>
     </property>
     <property stdset="1">
@@ -552,11 +552,11 @@
                                 <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>AltNetsLabel</cstring>
+                                    <cstring>AvailNetsLabel</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Alternative Networks:</string>
+                                    <string>Available Networks:</string>
                                 </property>
                             </widget>
                             <spacer>
@@ -656,6 +656,10 @@
                             <cstring>NetworkList</cstring>
                         </property>
                         <property stdset="1">
+                            <name>enabled</name>
+                            <bool>false</bool>
+                        </property>
+                        <property stdset="1">
                             <name>sizePolicy</name>
                             <sizepolicy>
                                 <hsizetype>7</hsizetype>
@@ -704,6 +708,10 @@
                                 <property stdset="1">
                                     <name>name</name>
                                     <cstring>RegisterButton</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>enabled</name>
+                                    <bool>false</bool>
                                 </property>
                                 <property stdset="1">
                                     <name>sizePolicy</name>
