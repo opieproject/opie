@@ -45,6 +45,10 @@ daemon which actually changes the configuration file.
 The configuration file is placed in /usr/local/etc/wellenreiter.conf.
 The whole content of this file cannot be specified yet.
 
+OPIE specific: Opie contains a bunch of high-level configuration classes,
+which are used by most Opie applications. It should be discussed whether
+to use this structure / API (preferred) or use a proprietary one.
+
 
 -[ Interaction GUI<->daemon
 
@@ -58,7 +62,24 @@ it will be directly send to the GUI to be able to sniff in realtime.
 
 -[ Communication GUI<->daemon
 
-Not yet specified.
+The GUI and the daemon run as threads within one process, where the GUI
+thread will be the main thread. Both the daemon and the GUI thread are
+(mostly) "free-running". Once the GUI thread is started and has finished
+its initializations, it jumps into the Qt event loop ( QApplication::exec() ).
+
+If the daemon thread is actively working and -
+for instance - has acquired interesting data for the GUI thread to display,
+it calls a special reentrant method of the GUI thread ( QApplication::postEvent )
+either transmitting the whole data structure or saying "Hey, there's interesting data
+for you", which the GUI thread then retrieves. 
+To enable a free running daemon thread to actually receive messages from the
+GUI thread, it's useful to to include a non-blocking check-for-messages-function
+within the daemon main loop <since it is waiting for messages from a GUI thread,
+this function has not be called very often>. If applicable, the daemon thread must
+not call this function but only monitor some guarded variables from time to time
+which the GUI thread can modify to alter the behaviour of the daemon thread.
+
+IMHO this is a much more leightweight design than to use a proprietary udp-socket protocol.
 
 
 -[ Setting card modes
