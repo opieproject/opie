@@ -60,7 +60,7 @@ namespace OpieTooth {
          * @return &device QString, Devicename
          * @return up bool, if the device is up or not.
          */
-        device(const QString& device, bool up );
+        void device(const QString& device, bool up );
     };
 };
 
