@@ -2,8 +2,9 @@
 <nationaldays>
 <description value="German holidays"/>
 <entries>
+<entry name="Neujahr" date="1-1"/>
+<entry name="Hlg. 3 Könige" date="1-6"/>
 <entry name="Maifeiertag" date="05-01"/>
-<entry name="Muttertag" date="05-08"/>
 <entry name="Tag der dt. Einheit" date="10-3"/>
 <entry name="Augsburger Friedensfest" date="8-8"/>
 <entry name="Reformationstag" date="10-31"/>
@@ -11,6 +12,125 @@
 <entry name="Heiligabend" date="12-24"/>
 <entry name="1. Weihnachtsfeiertag" date="12-25"/>
 <entry name="2. Weihnachtsfeiertag" date="12-26"/>
-<entry name="Neujahr" date="1-1"/>
+<entry name="Rosenmontag" type="floating">
+  <calculation>
+    <date value="easter"/>
+    <offset value="-48"/>
+  </calculation>
+</entry>
+<entry name="Fasching" type="floating">
+  <calculation>
+    <date value="easter"/>
+    <offset value="-47"/>
+  </calculation>
+</entry>
+<entry name="Aschermittwoch" type="floating">
+  <calculation>
+    <date value="easter"/>
+    <offset value="-46"/>
+  </calculation>
+</entry>
+<entry name="Karfreitag" type="floating">
+ <calculation>
+  <weekday value="friday"/>
+  <datedep value="before" />
+  <date value="easter"/>
+ </calculation>
+</entry>
+<entry name="Ostersonntag" type="floating">
+ <calculation>
+  <date value="easter"/>
+ </calculation>
+</entry>
+<entry name="Ostermontag" type="floating">
+ <calculation>
+  <date value="easter"/>
+  <offset value="1"/>
+ </calculation>
+</entry>
+<entry name="Muttertag" type="floating">
+ <calculation>
+  <weekday value="sunday"/>
+  <dayofmonth value="second"/>
+  <month value="may"/>
+ </calculation>
+</entry>
+<entry name="Himmelfahrt" type="floating">
+  <calculation>
+    <date value="easter"/>
+    <offset value="39"/>
+  </calculation>
+</entry>
+<entry name="Pfingstsonntag" type="floating">
+  <calculation>
+    <date value="easter"/>
+    <offset value="49"/>
+  </calculation>
+</entry>
+<entry name="Pfingstmontag" type="floating">
+  <calculation>
+    <date value="easter"/>
+    <offset value="50"/>
+  </calculation>
+</entry>
+<entry name="Fronleichnam" type="floating">
+  <calculation>
+    <date value="easter"/>
+    <offset value="60"/>
+  </calculation>
+</entry>
+<entry name="Buß- und Bettag" type="floating">
+ <calculation>
+   <weekday value="sunday"/>
+   <datedep value="before"/>
+   <date value="12-24"/>
+   <offset value="-32"/>
+ </calculation>
+</entry>
+<entry name="1. Advent" type="floating">
+ <calculation>
+   <weekday value="sunday"/>
+   <datedep value="before"/>
+   <date value="12-24"/>
+   <offset value="-21"/>
+ </calculation>
+</entry>
+<entry name="2. Advent" type="floating">
+ <calculation>
+   <weekday value="sunday"/>
+   <datedep value="before"/>
+   <date value="12-24"/>
+   <offset value="-14"/>
+ </calculation>
+</entry>
+<entry name="3. Advent" type="floating">
+ <calculation>
+   <weekday value="sunday"/>
+   <datedep value="before"/>
+   <date value="12-24"/>
+   <offset value="-7"/>
+ </calculation>
+</entry>
+<entry name="4. Advent" type="floating">
+ <calculation>
+   <weekday value="sunday"/>
+   <datedep value="before"/>
+   <date value="12-24"/>
+ </calculation>
+</entry>
+<entry name="Sommerzeit" type="floating">
+ <calculation>
+   <weekday value="sunday"/>
+   <dayofmonth value="last"/>
+   <month value="march"/>
+ </calculation>
+</entry>
+<entry name="Winterzeit" type="floating">
+ <calculation>
+   <weekday value="sunday"/>
+   <dayofmonth value="last"/>
+   <month value="october"/>
+ </calculation>
+</entry>
 </entries>
 </nationaldays>
