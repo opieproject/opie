@@ -63,6 +63,7 @@ NewTaskDialog::NewTaskDialog( const ToDoEvent& task, QWidget *parent,
 
     txtTodo->setText( task.description() );
     lneSum->setText( task.summary() );
+    cmbProg->setCurrentItem( task.progress()/20 );
 }
 
 /*
@@ -135,7 +136,8 @@ ToDoEvent NewTaskDialog::todoEntry()
 
   todo.setDescription( txtTodo->text() );
   todo.setSummary( lneSum->text() );
-
+  QString text = cmbProg->currentText();
+  todo.setProgress( text.remove( text.length()-1, 1 ).toUShort() );
   return todo;
 }
 
