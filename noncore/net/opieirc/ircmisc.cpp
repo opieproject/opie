@@ -34,7 +34,7 @@ QColor IRCFramedColorLabel::color() {
 IRCTabBar::IRCTabBar(QWidget *parent, const char *name) : QTabBar(parent, name) {
 }
 
-int IRCTabBar::insertTab(QTab *tab, int index = -1) {
+int IRCTabBar::insertTab(QTab *tab, int index) {
     /* FIXME: find some nicer way to do this */
     QExtTab *ext = new QExtTab();
     ext->color = black;

@@ -4,7 +4,7 @@
 #include <qwhatsthis.h>
 #include "ircservereditor.h"
 
-IRCServerEditor::IRCServerEditor(IRCServer server, QWidget* parent, const char* name, bool modal = FALSE, WFlags) : QDialog(parent, name, modal, WStyle_ContextHelp) {
+IRCServerEditor::IRCServerEditor(IRCServer server, QWidget* parent, const char* name, bool modal, WFlags) : QDialog(parent, name, modal, WStyle_ContextHelp) {
     QGridLayout *layout = new QGridLayout(this, 7, 2, 5, 5);
     QLabel *label = new QLabel(tr("Profile name :"), this);
     m_name = new QLineEdit(server.name(), this);
