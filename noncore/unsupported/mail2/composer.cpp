@@ -164,7 +164,7 @@ void Composer::slotSendMail()
 
 void Composer::slotSendQueued()
 {
-
+  int effSendCount = 0;
 	qDebug("Sending queued messages");
 	Config cfg( "mailqueue", Config::User );
 	cfg.setGroup( "Settings" );
@@ -245,12 +245,17 @@ void Composer::slotSendQueued()
 
      	qDebug("Sending to %s",toAdr.latin1());
 	    SmtpHandler *handler = new SmtpHandler(header, message, accnt ,toAdr);
-     	
+   	  effSendCount++;
     	connect(handler, SIGNAL(finished()), SLOT(slotSendQueuedFinished()));
   	  connect(handler, SIGNAL(error(const QString &)), SLOT(slotSendQueuedError(const QString &)));
 	    connect(handler, SIGNAL(status(const QString &)), status, SLOT(setText(const QString &)));
 
    	}
+ 	if (effSendCount < _toSend)
+  {
+   	_toSend = effSendCount;
+		QMessageBox::information(this, tr("Error"), tr("<p>There was a problem sending some of the queued mails.</p>"), tr("Ok"));
+  }
 }
 
 void Composer::slotQueueMail()
