@@ -1,29 +1,31 @@
-CONFIG	    += qt warn_on debug quick-app
+CONFIG        += qt warn_on debug quick-app
 
-HEADERS	     = defines.h \
+HEADERS         = defines.h \
                logindialog.h \
                settings.h \
                editaccounts.h \
                mailwrapper.h \
                composemail.h \
-	           accountview.h \
-	           mainwindow.h \
+               accountview.h \
+               mainwindow.h \
                viewmail.h \
                viewmailbase.h \
-	           opiemail.h \
+               opiemail.h \
                imapwrapper.h \
                mailtypes.h \
                mailistviewitem.h \
                pop3wrapper.h \
-	       abstractmail.h  \
-		settingsdialog.h \
-		statuswidget.h \
-        smtpwrapper.h
+           abstractmail.h  \
+        settingsdialog.h \
+        statuswidget.h \
+        smtpwrapper.h \
+        genericwrapper.h \
+         mboxwrapper.h
                
-SOURCES	     = main.cpp \
-	           opiemail.cpp \
-	           mainwindow.cpp \
-	           accountview.cpp \
+SOURCES         = main.cpp \
+               opiemail.cpp \
+               mainwindow.cpp \
+               accountview.cpp \
                composemail.cpp \
                mailwrapper.cpp \
                imapwrapper.cpp \
@@ -35,12 +37,14 @@ SOURCES	     = main.cpp \
                settings.cpp \
                mailtypes.cpp \
                pop3wrapper.cpp \
-	       abstractmail.cpp \
-		settingsdialog.cpp \
- 		statuswidget.cpp \
-        smtpwrapper.cpp
+           abstractmail.cpp \
+        settingsdialog.cpp \
+         statuswidget.cpp \
+        smtpwrapper.cpp \
+        genericwrapper.cpp \
+        mboxwrapper.cpp
                
-INTERFACES	 = editaccountsui.ui \
+INTERFACES     = editaccountsui.ui \
                selectmailtypeui.ui \
                imapconfigui.ui \
                pop3configui.ui \
@@ -49,16 +53,16 @@ INTERFACES	 = editaccountsui.ui \
                addresspickerui.ui \
                logindialogui.ui \
                composemailui.ui \
-		settingsdialogui.ui \
-		statuswidgetui.ui
+        settingsdialogui.ui \
+        statuswidgetui.ui
 
 INCLUDEPATH += $(OPIEDIR)/include
 
 CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
 contains( CONFTEST, y ){
-    LIBS	    += -lqpe -letpan -lssl -lcrypto -lopie -liconv
+    LIBS        += -lqpe -letpan -lssl -lcrypto -lopie -liconv
 }else{
-    LIBS	    += -lqpe -letpan -lssl -lcrypto -lopie
+    LIBS        += -lqpe -letpan -lssl -lcrypto -lopie
 }
 
 TARGET       = opiemail

@@ -27,9 +27,12 @@ public:
 
     virtual void deleteMail(const RecMail&mail)=0;
     virtual void answeredMail(const RecMail&mail)=0;
+    virtual void cleanMimeCache(){};
 
     static AbstractMail* getWrapper(IMAPaccount *a);
     static AbstractMail* getWrapper(POP3account *a);
+    /* mbox only! */
+    static AbstractMail* getWrapper(const QString&a);
 
 protected:
     static encodedString*decode_String(const encodedString*text,const QString&enc);

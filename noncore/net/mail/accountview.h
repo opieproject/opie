@@ -86,6 +86,36 @@ private:
     IMAPviewItem *imap;
 };
 
+class MBOXviewItem : public AccountViewItem
+{
+
+public:
+//    MBOXviewItem( MBOXaccount *a, QListView *parent );
+    MBOXviewItem( const QString&aMboxPath, QListView *parent );
+    ~MBOXviewItem();
+    virtual void refresh( QList<RecMail> &target );
+    virtual RecBody fetchBody( const RecMail &mail );
+    AbstractMail *getWrapper();
+private:
+//    MBOXaccount *account;
+    QString m_Path;
+    AbstractMail *wrapper;
+
+};
+
+class MBOXfolderItem : public AccountViewItem
+{
+
+public:
+    MBOXfolderItem( Folder *folder, MBOXviewItem *parent , QListViewItem*after  );
+    ~MBOXfolderItem();
+    virtual void refresh(QList<RecMail>&);
+    virtual RecBody fetchBody(const RecMail&);
+private:
+    Folder *folder;
+    MBOXviewItem *mbox;
+};
+
 class AccountView : public QListView
 {
     Q_OBJECT

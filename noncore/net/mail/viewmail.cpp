@@ -254,6 +254,7 @@ void ViewMail::setText()
 
 ViewMail::~ViewMail()
 {
+    m_recMail.Wrapper()->cleanMimeCache();
 	hide();
 }
 

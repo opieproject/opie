@@ -1,7 +1,7 @@
+#include <stdlib.h>
 #include "accountview.h"
 #include "mailtypes.h"
 #include "defines.h"
-
 
 /**
  * POP3 Account stuff
@@ -228,6 +228,7 @@ RecBody IMAPfolderItem::fetchBody(const RecMail&aMail)
     return imap->getWrapper()->fetchBody(aMail);
 }
 
+
 /**
  * Generic stuff
  */
@@ -243,6 +244,9 @@ AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
 void AccountView::populate( QList<Account> list )
 {
     clear();
+
+    QString localfolders = (QString) getenv( "HOME" ) + QString("/Applications/opiemail/localmail/");
+    (void) new MBOXviewItem(localfolders,this);
 
     Account *it;
     for ( it = list.first(); it; it = list.next() ) {
@@ -293,3 +297,83 @@ RecBody AccountView::fetchBody(const RecMail&aMail)
     AccountViewItem *view = static_cast<AccountViewItem *>(item);
     return view->fetchBody(aMail);
 }
+
+/**
+ * MBOX Account stuff
+ */
+
+MBOXviewItem::MBOXviewItem( const QString&aPath, QListView *parent )
+    : AccountViewItem( parent )
+{
+    m_Path = aPath;
+    wrapper = AbstractMail::getWrapper( m_Path );
+    setPixmap( 0, PIXMAP_POP3FOLDER );
+    setText( 0, " Local Folders" );
+    setOpen( true );
+}
+
+MBOXviewItem::~MBOXviewItem()
+{
+    delete wrapper;
+}
+
+AbstractMail *MBOXviewItem::getWrapper()
+{
+    return wrapper;
+}
+
+void MBOXviewItem::refresh( QList<RecMail> & )
+{
+    QList<Folder> *folders = wrapper->listFolders();
+    QListViewItem *child = firstChild();
+    while ( child ) {
+        QListViewItem *tmp = child;
+        child = child->nextSibling();
+        delete tmp;
+    }
+    Folder *it;
+    QListViewItem*item = 0;
+    for ( it = folders->first(); it; it = folders->next() ) {
+        item = new MBOXfolderItem( it, this , item );
+        item->setSelectable(it->may_select());
+    }
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    folders->setAutoDelete(false);
+    delete folders;
+}
+
+RecBody MBOXviewItem::fetchBody( const RecMail &mail )
+{
+    qDebug( "POP3 fetchBody" );
+    return wrapper->fetchBody( mail );
+}
+
+MBOXfolderItem::~MBOXfolderItem()
+{
+    delete folder;
+}
+
+MBOXfolderItem::MBOXfolderItem( Folder *folderInit, MBOXviewItem *parent , QListViewItem*after  )
+    : AccountViewItem( parent,after )
+{
+    folder = folderInit;
+    mbox = parent;
+    if (folder->getDisplayName().lower()!="inbox") {
+        setPixmap( 0, PIXMAP_POP3FOLDER );
+    } else {
+        setPixmap( 0, PIXMAP_INBOXFOLDER);
+    }
+    setText( 0, folder->getDisplayName() );
+}
+
+void MBOXfolderItem::refresh(QList<RecMail>&target)
+{
+    if (folder->may_select())
+        mbox->getWrapper()->listMessages( folder->getName(),target );
+}
+
+RecBody MBOXfolderItem::fetchBody(const RecMail&aMail)
+{
+    return mbox->getWrapper()->fetchBody(aMail);
+}
+
