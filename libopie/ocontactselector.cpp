@@ -12,11 +12,16 @@
  * =====================================================================
  * ToDo: There is a lot todo.. It is currently very simplistic..
  * =====================================================================
- * Version: $Id: ocontactselector.cpp,v 1.1.2.7 2002-07-24 07:01:58 eilers Exp $
+ * Version: $Id: ocontactselector.cpp,v 1.1.2.8 2002-07-24 14:14:09 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactselector.cpp,v $
- * Revision 1.1.2.7  2002-07-24 07:01:58  eilers
+ * Revision 1.1.2.8  2002-07-24 14:14:09  zecke
+ * First of all sorry for the wrong identing.
+ * I hope you'll fix it
+ * e->ignore() if Key_Escape
+ *
+ * Revision 1.1.2.7  2002/07/24 07:01:58  eilers
  * Some minor changes. Fixed search query bug
  *
  * Revision 1.1.2.6  2002/07/13 17:19:20  eilers
@@ -172,7 +177,10 @@ void OContactSelector::slotDBChanged ( const OContactDB * )
 
 void OContactSelector::keyPressEvent( QKeyEvent *e )
 {
-	if ( e->key() == Key_Space || e->key() == Key_Return ) {
+        if( e->key() == Key_Escape ) {
+	    qWarning("Escape pressed");
+	    e->ignore();
+	} else if ( e->key() == Key_Space || e->key() == Key_Return ) {
 		switch ( currentColumn() ) {
 		case 0: {
 			OCheckItem *i = static_cast<OCheckItem*>( item( currentRow(),
@@ -187,8 +195,11 @@ void OContactSelector::keyPressEvent( QKeyEvent *e )
 		default:
 			break;
 		}		
-	} else
-		QTable::keyPressEvent( e );
+	} else {	
+	    QTable::keyPressEvent( e );
+	}
+	
+		
 }
 
 
