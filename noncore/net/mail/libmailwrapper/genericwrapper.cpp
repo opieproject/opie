@@ -158,14 +158,14 @@ void Genericwrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mi
         part.setIdentifier(b);
         fillSingleBody(part,message,mime);
         if (part.Type()=="text" && target.Bodytext().isNull()) {
-            encodedString*r = new encodedString();
-            r->setContent(data,len);
-            encodedString*res = decode_String(r,part.Encoding());
+            encodedString*rs = new encodedString();
+            rs->setContent(data,len);
+            encodedString*res = decode_String(rs,part.Encoding());
             if (countlist.count()>2) {
-                bodyCache[b]=r;
+                bodyCache[b]=rs;
                 target.addPart(part);
             } else {
-                delete r;
+                delete rs;
             }
             b = QString(res->Content());
             delete res;
