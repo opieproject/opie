@@ -12,6 +12,9 @@
 
 #include "mailapplet.h"
 
+/* UNIX */
+#include <signal.h>
+
 using namespace Opie::Core;
 
 MailApplet::MailApplet( QWidget *parent )
@@ -27,6 +30,13 @@ MailApplet::MailApplet( QWidget *parent )
 
     m_newMails = 0;
     m_statusMail = 0l;
+
+    /* for networking we must block SIGPIPE and Co. */
+    struct sigaction blocking_action,temp_action;
+    blocking_action.sa_handler = SIG_IGN;
+    sigemptyset(&(blocking_action.sa_mask));
+    blocking_action.sa_flags = 0;
+    sigaction(SIGPIPE,&blocking_action,&temp_action);
 
     if ( !m_config->readBoolEntry( "Disabled", false ) ) {
         // delay 5 sec until the whole mail backend gets started .-)
@@ -69,20 +79,20 @@ void MailApplet::slotClicked() {
 
         device->setLedState( led, Led_Off );
     }
-
     if (m_statusMail)
         m_statusMail->reset_status();
-
     hide();
 }
 
-void MailApplet::startup() {
+void MailApplet::startup()
+{
     Settings *settings = new Settings();
     QList<Account> ma = settings->getAccounts();
     m_statusMail = new StatusMail( ma );
     delete settings;
 
-    m_intervalMs = m_config->readNumEntry( "CheckEvery", 5 ) * 60000;
+    //m_intervalMs = m_config->readNumEntry( "CheckEvery", 5 ) * 60000;
+    m_intervalMs = 100;
     m_intervalTimer = new QTimer();
     m_intervalTimer->start( m_intervalMs );
     connect( m_intervalTimer, SIGNAL( timeout() ), this, SLOT( slotCheck() ) );
@@ -90,6 +100,7 @@ void MailApplet::startup() {
 
 void MailApplet::slotCheck() {
     // Check wether the check interval has been changed.
+    odebug << "MailApplet::slotCheck()" << oendl;
     int newIntervalMs = m_config->readNumEntry( "CheckEvery", 5 ) * 60000;
     if ( newIntervalMs != m_intervalMs ) {
         m_intervalTimer->changeInterval( newIntervalMs );
@@ -104,27 +115,31 @@ void MailApplet::slotCheck() {
     m_statusMail->check_current_stat( stat );
     int newMailsOld = m_newMails;
     m_newMails = stat.message_unseen;
-    odebug << QString( "test %1" ).arg( m_newMails ) << oendl; 
-    if ( m_newMails > 0 &&  newMailsOld != m_newMails  ) {
-        ODevice *device = ODevice::inst();
-        if ( isHidden() )
+    odebug << QString( "test %1" ).arg( m_newMails ) << oendl;
+    if ( m_newMails > 0) {
+        if (isHidden())
             show();
-        if ( m_config->readBoolEntry( "BlinkLed", true ) ) {
-            if ( !device->ledList().isEmpty() ) {
-                OLed led = ( device->ledList().contains( Led_Mail ) ) ? Led_Mail : device->ledList()[0];
-                device->setLedState( led, device->ledStateList( led ).contains( Led_BlinkSlow ) ? Led_BlinkSlow : Led_On );
+        if (newMailsOld != m_newMails) {
+            ODevice *device = ODevice::inst();
+            if ( m_config->readBoolEntry( "BlinkLed", true ) ) {
+                if ( !device->ledList().isEmpty() ) {
+                    OLed led = ( device->ledList().contains( Led_Mail ) ) ? Led_Mail : device->ledList()[0];
+                    device->setLedState( led, device->ledStateList( led ).contains( Led_BlinkSlow ) ? Led_BlinkSlow : Led_On );
+                }
             }
+            if ( m_config->readBoolEntry( "PlaySound", false ) )
+                device->playAlarmSound();
         }
-        if ( m_config->readBoolEntry( "PlaySound", false ) )
-            device->playAlarmSound();
-
         Config cfg( "mail" );
         cfg.setGroup( "Status" );
         cfg.writeEntry( "newMails", m_newMails );
-        QCopEnvelope env( "QPE/Pim", "newMails(int)" );
-        env <<  m_newMails;
+        {
+            odebug << "QCop abschicken" << oendl;
+            QCopEnvelope env( "QPE/Pim", "newMails(int)" );
+            env <<  m_newMails;
+        }
+        odebug << "QCop abschicken done" << oendl;
         repaint( true );
-
     } else {
         ODevice *device = ODevice::inst();
         if ( !isHidden() )
