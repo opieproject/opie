@@ -162,6 +162,7 @@ void MainWindow::initActions() {
         a->addTo( m_tool );
     }
 
+#if 0
     // Options menu
     a = new QAction( QWidget::tr("Find"), Resource::loadIconSet( "mag" ),
                      QString::null, 0, this, 0 );
@@ -169,7 +170,9 @@ void MainWindow::initActions() {
     a->addTo( m_options );
     m_findAction = a;
 
+
     m_options->insertSeparator();
+#endif
 
     m_completedAction = new QAction( QString::null, QWidget::tr("Show completed tasks"),
                                      0, this, 0, TRUE );
