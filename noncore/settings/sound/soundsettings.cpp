@@ -39,7 +39,8 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
     mic->setValue(100-config.readNumEntry("Mic"));
     touchsound->setChecked(config.readBoolEntry("Touch"));
     keysound->setChecked(config.readBoolEntry("Key"));
-
+    AlertCheckBox->setChecked(config.readBoolEntry("Alert"));
+    
     config.setGroup("Record");
     int rate=config.readNumEntry("SampleRate", 22050);
     if(rate == 11025)
@@ -95,7 +96,7 @@ void SoundSettings::accept()
     config.writeEntry("Mic",100-mic->value());
     config.writeEntry("Touch",touchsound->isChecked());
     config.writeEntry("Key",keysound->isChecked());
-
+    config.writeEntry("Alert",AlertCheckBox->isChecked());
     setVolume(volume->value());
     setMic(mic->value());
 
