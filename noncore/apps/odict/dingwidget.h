@@ -9,16 +9,18 @@
 
 #include <qwidget.h>
 
-class QPopupMenu;
-class QMenuBar;
-class QHBox;
-class QPushButton;
-class QLineEdit;
+class QString;
+class QTextBrowser;
+class QString;
+class QStringList;
 
 class DingWidget : public QWidget
 {
 	Q_OBJECT
 	
     public:
-		DingWidget();
+		DingWidget(QWidget *parent = 0, QString word = 0, QTextBrowser* = 0);
+
+	private:
+		QString parseInfo( QStringList& );
 };

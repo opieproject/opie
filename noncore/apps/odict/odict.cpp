@@ -16,37 +16,41 @@
  **************************************************************************/
 #include "odict.h"
 #include "configdlg.h"
+#include "dingwidget.h"
 
-#include <opie/otabwidget.h>
-
+#include <qlayout.h>
 #include <qpopupmenu.h>
 #include <qmenubar.h>
 #include <qmessagebox.h>
 #include <qpe/config.h>
 #include <qhbox.h>
+#include <qvbox.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qlineedit.h>
 #include <qmainwindow.h>
 #include <qstring.h>
 #include <qaction.h>
+#include <qtextbrowser.h>
 
 #include <qpe/resource.h>
 
 
 ODict::ODict() : QMainWindow()
 {
+	vbox = new QVBox( this );
 	setCaption( tr( "OPIE-Dictionary" ) );
 	setupMenus();
 
-	QHBox *hbox = new QHBox( this );
+	QHBox *hbox = new QHBox( vbox );
 	QLabel* query_label = new QLabel( tr( "Query:" ) , hbox ); query_label->show();
 	query_le = new QLineEdit( hbox );
 	ok_button = new QPushButton( tr( "&Ok" ), hbox );
 	connect( ok_button, SIGNAL( released() ), this, SLOT( slotStartQuery() ) );
-	
-	setCentralWidget( hbox );
+	browser = new QTextBrowser( vbox );
+
 	loadConfig();
+	setCentralWidget( vbox );
 }
 
 void ODict::loadConfig()
@@ -72,12 +76,13 @@ void ODict::saveConfig()
 
 void ODict::slotDisplayAbout()
 {
-	QMessageBox::about(  this, tr( "About ODict" ), tr( "OPIE-Dictionary ODict \n (c) 2002, 2003 Carsten  Niehaus \n cniehaus@handhelds.org \n Version 20021230" ) );
+	QMessageBox::about(  this, tr( "About ODict" ), tr( "OPIE-Dictionary ODict \n (c) 2002, 2003 Carsten  Niehaus \n cniehaus@handhelds.org \n Version 20030103" ) );
 }
 
 void ODict::slotStartQuery()
 {
 	QString querystring = query_le->text();
+	DingWidget *ding = new DingWidget( vbox , querystring , browser);
 }
 
 

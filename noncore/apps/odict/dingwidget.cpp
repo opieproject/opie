@@ -16,6 +16,7 @@
  **************************************************************************/
 #include "dingwidget.h"
 
+#include <qfile.h>
 #include <qpe/config.h>
 #include <qhbox.h>
 #include <qlabel.h>
@@ -23,8 +24,39 @@
 #include <qlineedit.h>
 #include <qmainwindow.h>
 #include <qstring.h>
+#include <qtextstream.h>
+#include <qstringlist.h>
+#include <qregexp.h>
+#include <qtextbrowser.h>
 
-DingWidget::DingWidget() : QWidget()
+DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser) : QWidget(parent)
 {
+	QFile file( "/home/carsten/opie/opie/noncore/apps/odict/eng_ita.dic" );
+	QStringList lines;
+
+	if(  file.open(  IO_ReadOnly ) )
+	{
+		QTextStream stream(  &file );
+		while ( !stream.eof() )
+		{
+			lines.append(  stream.readLine() );
+		}
+		file.close();
+	}
+
+	lines = lines.grep( word );
+
+//X 	for( QStringList::Iterator it = lines.begin() ; it != lines.end() ; ++it )
+//X 	{
+//X 		qDebug( *it );
+//X 	}
+	browser->setText( parseInfo( lines ) );
 }
 
+QString DingWidget::parseInfo( QStringList &lines )
+{
+	QString parsed = 0;
+	QStringList temp = lines;
+	parsed = temp.first();
+	return parsed;
+}

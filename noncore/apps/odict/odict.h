@@ -9,13 +9,17 @@
 
 #include <qmainwindow.h>
 
+class QVBox;
 class QPopupMenu;
 class QMenuBar;
 class QHBox;
 class QPushButton;
 class QLineEdit;
 class QAction;
+class QVBoxLayout;
 class QActionGroup;
+class DingWidget;
+class QTextBrowser;
 
 class ODict : public QMainWindow
 {
@@ -23,6 +27,8 @@ class ODict : public QMainWindow
 	
     public:
 		ODict();
+		QVBox *vbox;
+		QTextBrowser *browser;
 
 	private:
 		QPopupMenu *help, *settings, *parameter, *error_tol_menu;
@@ -31,7 +37,11 @@ class ODict : public QMainWindow
 		QLineEdit *query_le;
 		QPushButton *ok_button;
 
+		QVBoxLayout *vbox_layout;
+
 		QAction *setting_a, *setting_b;
+
+		//DingWidget *ding;
 		
 		void setupMenus();
 
