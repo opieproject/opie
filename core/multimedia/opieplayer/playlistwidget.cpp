@@ -31,6 +31,7 @@
 #include <qaction.h>
 #include <qimage.h>
 #include <qfile.h>
+#include <qdir.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qlist.h>
@@ -540,11 +541,11 @@ void PlayListWidget::saveList() {
         Config cfg( filename +".playlist");
         writeConfig( cfg );
         DocLnk lnk;
-        lnk.setName( filename); //sets file name
 //        lnk.setComment( "");
-        lnk.setFile(QPEApplication::qpeDir()+"Settings/"+filename+".playlist.conf"); //sets File property
+        lnk.setFile(QDir::homeDirPath()+"/Settings/"+filename+".playlist.conf"); //sets File property
         lnk.setType("playlist/plain");// hey is this a REGISTERED mime type?!?!? ;D
         lnk.setIcon("mpegplayer/playlist2");
+        lnk.setName( filename); //sets file name
         if(!lnk.writeLink())
             qDebug("Writing doclink did not work");
     }
