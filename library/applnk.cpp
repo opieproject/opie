@@ -463,9 +463,9 @@ const QPixmap& AppLnk::pixmap( int pos, int size ) const {
 	    that->d->mPixmaps[0].convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
 	    that->d->mPixmaps[1].convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
 	}
-	return that->d->mPixmaps[0];
+	return that->d->mPixmaps[pos];
     }
-    return mPixmap;
+    return d->mPixmaps[pos];
 }
 
 /*!
