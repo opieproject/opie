@@ -49,7 +49,8 @@ void InputDialog::browse() {
     audio << "audio/*";
     audio << "playlist/plain";
     audio << "audio/x-mpegurl";
-
+    audio << "audio/x-ogg";
+    
     video << "video/*";
     video << "playlist/plain";
 
