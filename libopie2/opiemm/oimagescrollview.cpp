@@ -96,7 +96,7 @@ void OImageScrollView::loadJpeg(bool interncall)
             } else {
                 hei = wid;
             }
-            param = QString( "Fast Shrink( 7 ) Scale( %1, %2, ScaleFree)" ).arg( wid ).arg( hei );
+            param = QString( "Fast Shrink( 3 ) Scale( %1, %2, ScaleFree)" ).arg( wid ).arg( hei );
             odebug << "Load jpeg scaled \"" << param << "\"" << oendl;
             iio.setParameters(param.latin1());
             setImageScaledLoaded(true);
