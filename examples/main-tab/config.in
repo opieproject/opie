@@ -1,0 +1,4 @@
+CONFIG EXAMPLE_SIMPLE
+    boolean "Simple MainWindow with Central Widget Example"
+    default "n"
+    depends (LIBQPE || LIBQPE-X11 ) && EXAMPLES    

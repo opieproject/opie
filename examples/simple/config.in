@@ -1,0 +1,4 @@
+CONFIG EXAMPLE_SIMPLE
+    boolean "Simple Example"
+    default "n"
+    depends (LIBQPE || LIBQPE-X11 ) && EXAMPLES    
