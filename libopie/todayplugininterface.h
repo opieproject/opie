@@ -17,9 +17,7 @@ class QWidget;
  *
  *
  */
-class TodayPluginObject  {
-
-    Q_OBJECT
+class TodayPluginObject {
 
 public:
 
