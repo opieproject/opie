@@ -29,11 +29,11 @@ _;:,     .>    :=|.         This program is free software; you can
                             Boston, MA 02111-1307, USA.
 */
 
-#ifndef _osmart_pointer_h
-#define _osmart_pointer_h
+#ifndef _OSmartPointer_h
+#define _OSmartPointer_h
 
 /*!
- * \file osmart_pointer.h
+ * \file OSmartPointer.h
  * \brief smart pointer and reference counter
  * \author Rajko Albrecht
  *
@@ -42,15 +42,15 @@ _;:,     .>    :=|.         This program is free software; you can
 namespace Opie {
 
 //! simple reference counter class
-class oref_count {
+class ORefCount {
 protected:
     //! reference count member
     long m_RefCount;
 public:
     //! first reference must be added after "new" via Pointer()
-    oref_count() : m_RefCount(0)
+    ORefCount() : m_RefCount(0)
     {}
-    virtual ~oref_count() {}
+    virtual ~ORefCount() {}
     //! add a reference
     void Incr() {
         ++m_RefCount;
@@ -64,7 +64,7 @@ public:
 };
 
 //! reference counting wrapper class
-template<class T> class osmart_pointer {
+template<class T> class OSmartPointer {
     //! pointer to object
     /*!
      * this object must contain Incr(), Decr() and Shared() 
@@ -74,13 +74,13 @@ template<class T> class osmart_pointer {
     T *ptr;
 public:
     //! standart constructor
-    osmart_pointer() { ptr = NULL; }
+    OSmartPointer() { ptr = NULL; }
     //! standart destructor
     /*!
      * release the reference, if it were the last reference, destroys
      * ptr
      */
-    ~osmart_pointer()
+    ~OSmartPointer()
     {
         if (ptr){
             ptr->Decr();
@@ -89,12 +89,12 @@ public:
         }
     }
     //! construction
-    osmart_pointer(T* t) { if (ptr = t) ptr->Incr(); }
+    OSmartPointer(T* t) { if (ptr = t) ptr->Incr(); }
     //! Pointer copy
-    osmart_pointer(const osmart_pointer<T>& p) 
+    OSmartPointer(const OSmartPointer<T>& p) 
     { if (ptr = p.ptr) ptr->Incr(); }
     //! pointer copy by assignment
-    osmart_pointer<T>& operator= (const osmart_pointer<T>& p) 
+    OSmartPointer<T>& operator= (const OSmartPointer<T>& p) 
     {
         // already same: nothing to do
         if (ptr == p.ptr) return *this;
@@ -104,7 +104,7 @@ public:
         if (ptr = p.ptr) ptr->Incr();
         return *this;
     }
-    osmart_pointer<T>& operator= (T*p)
+    OSmartPointer<T>& operator= (T*p)
     {
         if (ptr==p)return *this;
         if (ptr) {
@@ -142,3 +142,4 @@ public:
 }
 
 #endif
+
