@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.45 2003-04-19 22:19:11 harlekin Exp $
+** $Id: qpeapplication.cpp,v 1.46 2003-04-23 19:08:19 kergoth Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -518,17 +518,17 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
        	int dw = desktop() ->width();
 
 	if ( dw < 200 ) {
-		setFont( QFont( "helvetica", 8 ) );
+		setFont( QFont( "vera", 8 ) );
 		AppLnk::setSmallIconSize( 10 );
 		AppLnk::setBigIconSize( 28 );
 	}
 	else if ( dw > 600 ) {
-                               setFont( QFont( "helvetica", 18 ) );
+                               setFont( QFont( "vera", 18 ) );
                                 AppLnk::setSmallIconSize( 24 );
 		AppLnk::setBigIconSize( 48 );
 	}
 	else if ( dw > 200 ) {
-		setFont( QFont( "helvetica", 10 ) );
+		setFont( QFont( "vera", 10 ) );
 		AppLnk::setSmallIconSize( 14 );
 		AppLnk::setBigIconSize( 32 );
 	}
@@ -1036,7 +1036,7 @@ void QPEApplication::applyStyle()
 
 	// don't set a custom font
 	if ( nostyle & Opie::Force_Font ) {
-		ff = "Helvetica";
+		ff = "Vera";
 		fs = 10;
 	}
 
