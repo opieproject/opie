@@ -22,8 +22,12 @@
 
 #include <qstring.h>
 
+/**
+ * DEPRECATED now use Opie's Multiauth Framework
+ * @see Opie::Security::MultiauthPassword
+ */
 class Password
-{ 
+{
 public:
 	static bool needToAuthenticate(bool atpoweron=FALSE); // Opie extension to speed up suspend/resume (sandman)
     static void authenticate(bool atpoweron=FALSE);
