@@ -47,6 +47,54 @@ remove, and then pressing apply.
 </para>
 </section>
 
+<section><title>Servers</title>
+<para>
+When you install software normally, ipkg downloadins  the packages automatically
+from ipkg servers (also called "Feeds") and installing them.  The list of
+servers and where they are is stored in a file called ipkg.conf in /etc/.  Oipkg
+is capable of maintaining this list, as well as adding or deleting feeds from 
+it.
+</para>
+<section><title>Selecting Servers</title>
+<para>
+To select which feeds you want to be able to see and install packages from, go 
+to Settings&arrow;Setups.  There will be a box with a list of servers in it 
+called "Used Servers".  Servers that are highlighted will be used to install 
+software from, while servers that are not highlighted will be ignored.  You can 
+click on a server to toggle its status.  When a server is disabled, the
+information about that server such as its name and location is kept, so that 
+you can resume using it without having to reenter this data.  "Ok" will save the 
+changes, and "x" will cancel them.
+</para>
+</section>
+<section><title>Adding Servers</title>
+<para>
+You can add a server to your list of available servers by going to 
+Settings&arrow;Servers.  Click on the button labeled "New" and enter the name 
+and URL into the appropriate fields at the bottom of the window.  The name is 
+only for your convinience, so name it whatever makes sense to you.  The URL is 
+the URL of the feed, so the URL for the opie feed would be 
+"http://131.152.105.154/feeds/ipaq/unstable".  When you are done, click "Ok" to 
+save the new server, or "x" to cancel adding it.
+</para>
+</section>
+<section><title>Editing Servers</title>
+<para>
+To change the URL or name of a server, go to Settings&arrow;Servers, and select
+the server that you want to edit.  The current Name and URL should appear in the
+appropriate fields, and you can change them to the new values.  Once you are
+done, click "Ok" to save, or "x" to cancel.
+</para>
+</section>
+<section><title>Deleting Servers</title>
+<para>
+If you no longer need to use a server, this can be done by going to
+Settings&arrow;Servers.  You can then select the server you wish to delete and 
+press the "Remove" button.  "Ok" will save the deletion, and "x" will cancel it.
+</para>
+</section>
+</section>
+
 <section><title>Destinations</title>
 <para>
 Software is distributed in a format called "ipkg" which contains all the 
