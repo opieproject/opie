@@ -9,7 +9,6 @@
 #include "kprocess.h"
 
 #include <qpushbutton.h>
-#include <qtabwidget.h>
 #include <qlistbox.h>
 #include <qlineedit.h>
 #include <qlistview.h>
@@ -95,6 +94,7 @@ MainWindowImp::~MainWindowImp(){
   for( it = libraries.begin(); it != libraries.end(); ++it ){
     delete it.key();
     // I wonder why I can't delete the libraries
+    // What fucking shit this is.
     //delete it.data();
   }
 }
@@ -221,8 +221,7 @@ void MainWindowImp::removeClicked(){
 /**
  * Pull up the configure about the currently selected interface.
  * Report an error if no interface is selected.
- * If the interface has a module owner then request its configure with a empty
- * tab.  If tab is !NULL then append the interfaces setup widget to it.
+ * If the interface has a module owner then request its configure.
  */ 
 void MainWindowImp::configureClicked(){
   QListViewItem *item = connectionList->currentItem();
@@ -239,22 +238,16 @@ void MainWindowImp::configureClicked(){
   Interface *i = interfaceItems[item];
   if(i->getModuleOwner()){
     i->getModuleOwner()->setProfile(currentProfile);
-    QTabWidget *tabWidget = NULL;
-    QWidget *moduleConfigure = i->getModuleOwner()->configure(i, &tabWidget);
+    QWidget *moduleConfigure = i->getModuleOwner()->configure(i);
     if(moduleConfigure != NULL){
-      if(tabWidget != NULL){
-	InterfaceSetupImp *configure = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i, false, Qt::WDestructiveClose);
-        configure->setProfile(currentProfile);
-	tabWidget->insertTab(configure, "TCP/IP");
-      }
       moduleConfigure->showMaximized();
       moduleConfigure->show();
       return;
     }
   }
   
-  InterfaceSetupImp *configure = new InterfaceSetupImp(0, "InterfaceSetupImp", i, false, Qt::WDestructiveClose);
-  configure->setProfile(currentProfile);
+  InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(0, "InterfaceSetupImp", i, true, Qt::WDestructiveClose);
+  //configure->setProfile(currentProfile);
   configure->showMaximized();
   configure->show();
 }
@@ -262,8 +255,7 @@ void MainWindowImp::configureClicked(){
 /**
  * Pull up the information about the currently selected interface.
  * Report an error if no interface is selected.
- * If the interface has a module owner then request its configure with a empty
- * tab.  If tab is !NULL then append the interfaces setup widget to it.
+ * If the interface has a module owner then request its configure.
  */ 
 void MainWindowImp::informationClicked(){
   QListViewItem *item = connectionList->currentItem();
@@ -284,19 +276,13 @@ void MainWindowImp::informationClicked(){
   }
 	  
   if(i->getModuleOwner()){
-    QTabWidget *tabWidget = NULL;
-    QWidget *moduleInformation = i->getModuleOwner()->information(i, &tabWidget);
+    QWidget *moduleInformation = i->getModuleOwner()->information(i);
     if(moduleInformation != NULL){
-      if(tabWidget != NULL){
-	InterfaceInformationImp *information = new InterfaceInformationImp(tabWidget, "InterfaceSetupImp", i, true);
-        tabWidget->insertTab(information, "TCP/IP");
-      }
       moduleInformation->showMaximized();
       moduleInformation->show();
       return;
     }
   }  
-  
   InterfaceInformationImp *information = new InterfaceInformationImp(0, "InterfaceSetupImp", i, true);
   information->showMaximized();
   information->show();

@@ -16,9 +16,11 @@
 /**
  * Constructor.  Sets hasWirelessExtensions
  */ 
-WExtensions::WExtensions(QString interfaceName){
+WExtensions::WExtensions(QString interfaceName): hasWirelessExtensions(false){
   interface = interfaceName;
   fd = socket( AF_INET, SOCK_DGRAM, 0 );
+  if(fd == -1) 
+    return;
 
   const char* buffer[200];
   memset( &iwr, 0, sizeof( iwr ) );
@@ -35,8 +37,6 @@ WExtensions::WExtensions(QString interfaceName){
   strcpy( iwr.ifr_ifrn.ifrn_name,  (const char *)iname );
   if ( 0 == ioctl( fd, SIOCGIWESSID, &iwr ) )
     hasWirelessExtensions = true;
-  else
-    hasWirelessExtensions = false;
 }
 
 /**

@@ -2,9 +2,11 @@
 #include "wlanimp.h"
 #include "infoimp.h"
 #include "wextensions.h"
+#include "interfaceinformationimp.h"
 
 #include <qlabel.h>
 #include <qprogressbar.h>
+#include <qtabwidget.h>
 
 /**
  * Constructor, find all of the possible interfaces
@@ -53,28 +55,26 @@ bool WLANModule::isOwner(Interface *i){
 }
 
 /**
- * Create, set tabWiget and return the WLANConfigure Module
- * @param tabWidget a pointer to the tab widget that this configure has.
- * @return QWidget* pointer to the tab widget in this modules configure.
+ * Create, and return the WLANConfigure Module
+ * @return QWidget* pointer to this modules configure.
  */ 
-QWidget *WLANModule::configure(Interface *, QTabWidget **tabWidget){
-  WLANImp *wlanconfig = new WLANImp(0, "WlanConfig", false,  Qt::WDestructiveClose);
-  (*tabWidget) = wlanconfig->tabWidget;
+QWidget *WLANModule::configure(Interface *i){
+  WLANImp *wlanconfig = new WLANImp(0, "WlanConfig", i, false,  Qt::WDestructiveClose);
   return wlanconfig;
 }
 
 /**
- * Create, set tabWiget and return the Information Module
- * @param tabWidget a pointer to the tab widget that this information has.
- * @return QWidget* pointer to the tab widget in this modules info.
+ * Create, and return the Information Module
+ * @return QWidget* pointer to this modules info.
  */ 
-QWidget *WLANModule::information(Interface *i, QTabWidget **tabWidget){
+QWidget *WLANModule::information(Interface *i){
   WExtensions we(i->getInterfaceName());
   if(!we.doesHaveWirelessExtensions())
     return NULL;
  
   WlanInfoImp *info = new WlanInfoImp(0, i->getInterfaceName(), Qt::WDestructiveClose);
-  (*tabWidget) = info->tabWidget;
+  InterfaceInformationImp *information = new InterfaceInformationImp(info->tabWidget, "InterfaceSetupImp", i);
+  info->tabWidget->insertTab(information, "TCP/IP");
   return info;
 }
 

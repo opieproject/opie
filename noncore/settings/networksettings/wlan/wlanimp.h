@@ -3,13 +3,15 @@
 
 #include "wlan.h"
 
-#include <qpe/config.h>
+class InterfaceSetupImp;
+class Interface;
+class Config;
 
 class WLANImp : public WLAN { 
   Q_OBJECT
 
 public:
-  WLANImp( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+  WLANImp( QWidget* parent = 0, const char* name = 0, Interface *i=0, bool modal = FALSE, WFlags fl = 0 );
   ~WLANImp( );
 
 protected:
@@ -21,6 +23,8 @@ private:
   bool writeWirelessOpts( QString scheme = "*" );
   bool writeWlanngOpts( QString scheme = "*" );
   Config* config;
+  InterfaceSetupImp *interfaceSetup;
+
 };
 
 #endif

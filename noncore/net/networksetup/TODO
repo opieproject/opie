@@ -1,3 +1,5 @@
+Make sure the C code in wextensions is clean.
+
 WLAN needs to be re-written to not use Config
 WHERE Is DHCP info stored???
 

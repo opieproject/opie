@@ -15,10 +15,18 @@
 #include <qradiobutton.h>
 #include <qcheckbox.h>
 #include <qregexp.h>
+#include <qpe/config.h>
+#include <qtabwidget.h>
+#include "interfacesetupimp.h"
 
-WLANImp::WLANImp( QWidget* parent, const char* name, bool modal, WFlags fl):WLAN(parent, name, modal, fl){
+WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, WFlags fl):WLAN(parent, name, modal, fl){
   config = new Config("wireless");
+  interfaceSetup = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i);//, Qt::WDestructiveClose);
+  //configure->setProfile(currentProfile);
+  tabWidget->insertTab(interfaceSetup, "TCP/IP");
+
   readConfig();
+
 }
 
 WLANImp::~WLANImp( ){
@@ -109,8 +117,10 @@ bool WLANImp::writeConfig()
  */
 void WLANImp::accept()
 {
-  if ( writeConfig() )
+  if ( writeConfig() ){
+    interfaceSetup->saveChanges();
     QDialog::accept();
+  }
 }
 
 bool WLANImp::writeWirelessOpts( QString scheme )

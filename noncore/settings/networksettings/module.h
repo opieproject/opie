@@ -39,20 +39,18 @@ public:
   virtual bool isOwner(Interface *){ return false; };
   
   /**
-   * Create, set tabWiget and return the WLANConfigure Module
+   * Create and return the WLANConfigure Module
    * @param Interface *i the interface to configure.
-   * @param tabWidget a pointer to the tab widget that this configure has.
-   * @return QWidget* pointer to the tab widget in this modules configure.
+   * @return QWidget* pointer to this modules configure.
    */
-  virtual QWidget *configure(Interface *, QTabWidget **){ return NULL; } ;
+  virtual QWidget *configure(Interface *){ return NULL; } ;
   
   /**
-   * Create, set tabWiget and return the Information Module
+   * Create, and return the Information Module
    * @param Interface *i the interface to get info on.
-   * @param tabWidget a pointer to the tab widget that this information has.
-   * @return QWidget* pointer to the tab widget in this modules info.
+   * @return QWidget* pointer to this modules info.
    */
-  virtual QWidget *information(Interface *, QTabWidget **){ return NULL; };
+  virtual QWidget *information(Interface *){ return NULL; };
   
   /**
    * Get all active (up or down) interfaces
