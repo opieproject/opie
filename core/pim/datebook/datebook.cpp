@@ -1,24 +1,32 @@
-/**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of Qtopia Environment.
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-** $Id: datebook.cpp,v 1.44 2005-03-20 10:51:54 alwin Exp $
-**
-**********************************************************************/
+/*
+                             This file is part of the Opie Project
+
+                             Copyright (C) Opie Team <opie-devel@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+:     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
 
 #define QTOPIA_INTERNAL_FD
 
@@ -34,6 +42,7 @@
 #include <opie2/oholidaypluginif.h>
 #include <opie2/oholidayplugin.h>
 #include <opie2/opluginloader.h>
+#include <opie2/oresource.h>
 #include <opie2/todayplugininterface.h>
 
 //#include <qpe/datebookmonth.h>
@@ -42,7 +51,6 @@
 #include <qpe/finddialog.h>
 #include <qpe/ir.h>
 #include <qpe/qpemessagebox.h>
-#include <qpe/resource.h>
 #include <qpe/sound.h>
 #include <qpe/tzselect.h>
 #include <qtopia/qlibrary.h>
@@ -86,7 +94,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 
     loadSettings();
     setCaption( tr("Calendar") );
-    setIcon( Resource::loadPixmap( "datebook_icon" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "datebook_icon" ) );
 
     setToolBarsMovable( FALSE );
 
@@ -113,20 +121,23 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     QActionGroup *g = new QActionGroup( this );
     g->setExclusive( TRUE );
 
-    QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "New" ), Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fileNew() ) );
     a->addTo( sub_bar );
 
     sub_bar->addSeparator();
 
-    a = new QAction( tr( "Today" ), Resource::loadPixmap( "datebook/to_day" ),  QString::null, 0, g, 0 );
+    a = new QAction( tr( "Today" ), Opie::Core::OResource::loadPixmap( "datebook/to_day", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( slotToday() ) );
     a->addTo( sub_bar );
 //  a->addTo( view );
 
     sub_bar->addSeparator();
 
-    a = new QAction( tr( "Day" ), Resource::loadPixmap( "day" ), QString::null, 0, g, 0 );
+    a = new QAction( tr( "Day" ), Opie::Core::OResource::loadPixmap( "day", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( viewDay() ) );
     a->addTo( sub_bar );
 //    a->addTo( view );
@@ -134,21 +145,24 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     a->setOn( TRUE );
     dayAction = a;
 
-    a = new QAction( tr( "Week" ), Resource::loadPixmap( "week" ), QString::null, 0, g, 0 );
+    a = new QAction( tr( "Week" ), Opie::Core::OResource::loadPixmap( "week", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( viewWeek() ) );
     a->addTo( sub_bar );
 //    a->addTo( view );
     a->setToggleAction( TRUE );
     weekAction = a;
 
-    a = new QAction( tr( "WeekLst" ), Resource::loadPixmap( "datebook/weeklst" ), QString::null, 0, g, 0 );
+    a = new QAction( tr( "WeekLst" ), Opie::Core::OResource::loadPixmap( "datebook/weeklst", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( viewWeekLst() ) );
     a->addTo( sub_bar );
 //    a->addTo( view );
     a->setToggleAction( TRUE );
     weekLstAction = a;
 
-    a = new QAction( tr( "Month" ), Resource::loadPixmap( "month" ), QString::null, 0, g, 0 );
+    a = new QAction( tr( "Month" ), Opie::Core::OResource::loadPixmap( "month", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( viewMonth() ) );
     a->addTo( sub_bar );
 //    a->addTo( view );
@@ -157,11 +171,13 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 
     sub_bar->addSeparator();
 
-    a = new QAction( tr( "Find" ), Resource::loadPixmap( "mag" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Find" ), Opie::Core::OResource::loadPixmap( "mag", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(slotFind()) );
     a->addTo( sub_bar );
 
-    a = new QAction( tr( "Edit..." ), Resource::loadPixmap("SettingsIcon"), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Edit..." ), Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
     a->addTo( sub_bar );
 

@@ -1,6 +1,7 @@
 #include "datebookweeklstheader.h"
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
+
 #include <qpe/datebookmonth.h>
 
 #include <qtoolbutton.h>
@@ -15,13 +16,13 @@ DateBookWeekLstHeader::DateBookWeekLstHeader(bool onM, QWidget* parent, const ch
     setBackgroundMode( PaletteButton );
     labelDate->setBackgroundMode( PaletteButton );
     forwardweek->setBackgroundMode( PaletteButton );
-    forwardweek->setPixmap( Resource::loadPixmap("forward") );
+    forwardweek->setPixmap( Opie::Core::OResource::loadPixmap( "forward", Opie::Core::OResource::SmallIcon ) );
     forwardmonth->setBackgroundMode( PaletteButton );
-    forwardmonth->setPixmap( Resource::loadPixmap("fastforward") );
+    forwardmonth->setPixmap( Opie::Core::OResource::loadPixmap( "fastforward", Opie::Core::OResource::SmallIcon ) );
     backweek->setBackgroundMode( PaletteButton );
-    backweek->setPixmap( Resource::loadPixmap("back") );
+    backweek->setPixmap( Opie::Core::OResource::loadPixmap( "back", Opie::Core::OResource::SmallIcon ) );
     backmonth->setBackgroundMode( PaletteButton );
-    backmonth->setPixmap( Resource::loadPixmap("fastback") );
+    backmonth->setPixmap( Opie::Core::OResource::loadPixmap( "fastback", Opie::Core::OResource::SmallIcon ) );
     DateBookWeekLstHeaderBaseLayout->setSpacing(0);
     DateBookWeekLstHeaderBaseLayout->setMargin(0);
     //setSizePolicy(QSizePolicy(QSizePolicy::Fixed,QSizePolicy::Expanding));

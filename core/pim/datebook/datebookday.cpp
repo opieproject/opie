@@ -1,22 +1,32 @@
-/**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of Qtopia Environment.
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-**********************************************************************/
+/*
+                             This file is part of the Opie Project
+
+                             Copyright (C) Opie Team <opie-devel@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+:     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
 
 #include "datebookday.h"
 #include "datebooktypes.h"
@@ -24,9 +34,11 @@
 #include "datebookdayallday.h"
 
 #include <opie2/oholidayplugin.h>
-#include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
+#include <opie2/oresource.h>
+
+#include <qpe/applnk.h>
 #include <qpe/ir.h>
+#include <qpe/qpeapplication.h>
 
 #include <qsimplerichtext.h>
 #include <qpopupmenu.h>
@@ -757,15 +769,17 @@ void DateBookDayWidget::paintEvent( QPaintEvent *e )
     int d = 0;
 
     if ( ev.event().hasAlarm() ) {
-        p.drawPixmap( width() - 16, 0, Resource::loadPixmap( "bell" ) );
-        y = 20;
+        p.drawPixmap( width() - AppLnk::smallIconSize(), 0,
+                      Opie::Core::OResource::loadPixmap( "bell", Opie::Core::OResource::SmallIcon ) );
+        y = AppLnk::smallIconSize() + 2;
         d = 20;
     }
 
     if ( ev.event().hasRepeat() ) {
-        p.drawPixmap( width() - 16, y, Resource::loadPixmap( "repeat" ) );
+        p.drawPixmap( width() - AppLnk::smallIconSize(), y,
+                      Opie::Core::OResource::loadPixmap( "repeat", Opie::Core::OResource::SmallIcon ) );
         d = 20;
-        y += 20;
+        y += AppLnk::smallIconSize() + 2;
     }
 
     QSimpleRichText rt( text, font() );

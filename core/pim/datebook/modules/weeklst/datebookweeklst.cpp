@@ -10,7 +10,6 @@
 
 #include <qpe/datebookmonth.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
 
 #include <qlayout.h>
 #include <qtoolbutton.h>
