@@ -55,8 +55,6 @@
 #include <sys/stat.h>
 #include <stdlib.h> //getenv
 
-#include "resource.h"
-
 #if QT_VERSION < 300
 
 class QpeEditor : public QMultiLineEdit
@@ -210,14 +208,14 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     a->addTo( bar );
     a->addTo( file );
 
-    a = new QAction( tr( "Save" ), QPixmap(( const char** ) filesave_xpm  ) ,
+    a = new QAction( tr( "Save" ), Resource::loadPixmap("save") ,
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( save() ) );
     file->insertSeparator();
     a->addTo( bar );
     a->addTo( file );
 
-    a = new QAction( tr( "Save As" ), QPixmap(( const char** ) filesave_xpm  ) ,
+    a = new QAction( tr( "Save As" ),  Resource::loadPixmap("save") ,
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( saveAs() ) );
     a->addTo( file );
@@ -694,58 +692,58 @@ void TextEdit::openDotFile( const QString &f ) {
 }
 
 void TextEdit::openFile( const QString &f ) {
-	qDebug("filename is "+ f);
-	QString filer;
-	QFileInfo fi( f);
+  qDebug("filename is "+ f);
+  QString filer;
+  QFileInfo fi( f);
 //    bFromDocView = true;
-	if(f.find(".desktop",0,true) != -1 && !openDesktop )
-		{
-			switch ( QMessageBox::warning(this,tr("Text Editor"),
-																		tr("Text Editor has detected<BR>you selected a <B>.desktop</B>
+  if(f.find(".desktop",0,true) != -1 && !openDesktop )
+    {
+      switch ( QMessageBox::warning(this,tr("Text Editor"),
+                                    tr("Text Editor has detected<BR>you selected a <B>.desktop</B>
 file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
-																		tr(".desktop File"),tr("Linked Document"),0,1,1) )
-				{
-				case 0: //desktop
-					filer = f;
-					break;
-				case 1: //linked
-					DocLnk sf(f);
-					filer = sf.file();
-					break;
+                                    tr(".desktop File"),tr("Linked Document"),0,1,1) )
+        {
+        case 0: //desktop
+          filer = f;
+          break;
+        case 1: //linked
+          DocLnk sf(f);
+          filer = sf.file();
+          break;
         };
     }
-	else if(fi.baseName().left(1) == "")
-		{
-			qDebug("opening dotfile");
-			currentFileName=f;
-			openDotFile(currentFileName);
-			return;
+  else if(fi.baseName().left(1) == "")
+    {
+      qDebug("opening dotfile");
+      currentFileName=f;
+      openDotFile(currentFileName);
+      return;
     }
-	else
-		{
-			DocLnk sf(f);
-			filer = sf.file();
-			if(filer.right(1) == "/")
-				filer = f;
+  else
+    {
+      DocLnk sf(f);
+      filer = sf.file();
+      if(filer.right(1) == "/")
+        filer = f;
     }
 
-			DocLnk nf;
-			nf.setType("text/plain");
-			nf.setFile(filer);
-			currentFileName=filer;
+      DocLnk nf;
+      nf.setType("text/plain");
+      nf.setFile(filer);
+      currentFileName=filer;
 
-			nf.setName(fi.baseName());
-			openFile(nf);
+      nf.setName(fi.baseName());
+      openFile(nf);
 
-			qDebug("openFile string "+currentFileName);
+      qDebug("openFile string "+currentFileName);
 
-	showEditTools();
-		// Show filename in caption
-	QString name = filer;
-	int sep = name.findRev( '/' );
-	if ( sep > 0 )
-		name = name.mid( sep+1 );
-	updateCaption( name );
+  showEditTools();
+    // Show filename in caption
+  QString name = filer;
+  int sep = name.findRev( '/' );
+  if ( sep > 0 )
+    name = name.mid( sep+1 );
+  updateCaption( name );
 }
 
 void TextEdit::openFile( const DocLnk &f ) {
