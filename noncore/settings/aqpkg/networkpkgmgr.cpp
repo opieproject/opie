@@ -430,6 +430,15 @@ void NetworkPackageManager :: applyChanges()
 		}
     }
 
+    if ( workingPackages.size() == 0 )
+    {
+        // Nothing to do
+        QMessageBox::information( this, "Nothing to do",
+                             "No packages selected", "OK" );
+        
+        return;
+    }
+    
     // do the stuff
     InstallDlgImpl dlg( workingPackages, dataMgr, this, "Install", true );
     dlg.showDlg();
