@@ -157,11 +157,21 @@ void AbView::load()
 	// Letter Search is stopped at this place
 	emit signalClearLetterPicker();
 
-	m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName,
-					      Opie::OPimContactAccess::FilterCategory, m_curr_category );
-
-// 	if ( m_curr_category != -1 )
-// 		clearForCategory();
+	odebug << "selected Category: " << m_curr_category << oendl;
+	
+	if ( m_curr_category == -1 ) {
+		// Show just unfiled contacts
+		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
+					      Opie::OPimContactAccess::DoNotShowWithCategory, 0 );
+	} else	if ( m_curr_category == 0 ){
+		// Just show all contacts
+		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
+					      Opie::OPimBase::FilterOff, 0 );
+	} else {
+		// Show contacts with given categories
+		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
+					      Opie::OPimBase::FilterCategory, m_curr_category );
+	}
 
 	odebug << "Number of contacts: " << m_list.count() << oendl;
 
