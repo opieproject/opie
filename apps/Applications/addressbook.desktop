@@ -4,6 +4,7 @@ Exec=addressbook
 Icon=AddressBook
 Type=Application
 Name=Contacts
+MimeType=text/x-vCard
 Name[pt_BR]=Endereços
 Name[no]=Adressebok
 Name[de]=Adressbuch
