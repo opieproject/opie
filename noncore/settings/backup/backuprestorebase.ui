@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>246</width>
+            <width>255</width>
             <height>338</height>
         </rect>
     </property>
@@ -304,7 +304,11 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>...</string>
+                            <string></string>
+                        </property>
+                        <property stdset="1">
+                            <name>pixmap</name>
+                            <pixmap>image0</pixmap>
                         </property>
                     </widget>
                     <widget row="0"  column="0"  rowspan="1"  colspan="2" >
@@ -362,4 +366,10 @@
         </widget>
     </grid>
 </widget>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="2474">789c5d95474f24491085effc8a167143ab98f255a9d51ef0b681c6c36a0f69f1beb1abfdef5bf52299498646884f2f4dc48b88ec1f73a393ddf168eec7ccf3544f2fedc85ee8a7d19c7bb9bdfdf8fb9fbffe9d99cdabd1f05ba85131fbc7ccec643ab2a3edfb3b3f007509f056aa6ca770924299c25d7ac069029ad365f3e9b287546953e5335554aae814ce53a0744f952a2e55d2d86827858574cf450a3685c7144c0a6972f42dd0710a83899465a5553578135c944a05f031b8ab8ccec07760d7048fc2d118eccb4281f97ee03cab6b23e77f446e4c87f50cae2b13ef53e0b66eb5868efb725f654a222770a86a5d61fdc6c045d514721ebf83ebb69378b803db36b325f6170397a67646e2bd126eb595f38ec0b6edacdc7f19d95805aec1a16dadc57a3f70153aeb647d33705df67203bd05379d7392df3a58a9c6e33eda02eb26483c7c0b362a78c92780bdaa1dfca797819b4c950ef9f01bb8d675403d087e37ca14c27c08d6baf0889f6fc046575efcc07d8d6d6dacc705d8ab20f7f1dac06ddb9f27f120bfd66827e7d13538281ffd391bb8cb4de1913fc1cfae5675d4a7e0ced4921f4dc0ca586fc09f60a34a237e2e0b1b1dfd7805db9ea59f0e846d16c4efd581556efb1261ff23b8349593fbcfc1b5fdf207e7abce56de41c7f94a99ce49bfad804dafa3deb40bf6d605a95f36b02e8c8ff93a61abe3f9a897ae6c19fd47ffe8da65e2272d462e63fc385fb73604a9ef1258591bf3dd076b5705390ffe6bd71744e27b00f7f1c5787270b09997fe433ea6e80756fc413f987e1aa59fe919dc3a1beb8d79e9dd5001fb09ef8131c6b91cfc24dcaf173fe07faf96122f61de4d30c1497f06615f04a92ff2b3b96f82cc13e6cd96b673e807ae847d2deb19f7d9c66aa927ef815bdf467d01dcfbe5901fef80b5cf63fc781facb1c6497ec33708b9dc15b13fde22575ef233e0d2d532df8cf7c2354ec77aa2df5ddb7f643fde23d7ff88ff3c110e5ff9e2bd70215431dfe17b8a7c16ea20f9623e7cdb0fa0d41ff5f35dbf5fe603ef8757fd47de03ccb737de0679cff6847fde67c1b6d7a51fd16fde853cd61ff3ed43bf5efc42fd7b358ffd88fe0e4301e5fe839f2cfd827e0cf8197832fdfdc3c45afe4b75366cfbbf8e3d073eff5de70bbee42bbee61bbee53bbee78754e7477ee2679ef20bbff21bbff3077ffed2799e177891977899577895d7789d377893b744e7316ff30eeff284f7789f0ff8908ff8984ff834ea679c71ce05975c71cd0db7dcb12226129d3419b2e4c853a073baa04bbaa26bbaa15bba93fbe99e1ee8919ee899a6f442aff446eff4419f341ff5055aa4255aa6155aa5355aa70ddaa42d1ad3f6577eb443bb34a13ddaa7033aa4233aa693effed0299d51d6eb3915547e799afa4b15d5d4504bddaf4a7caf0f29cddf2b35fbdf9f33ff0307374aef</data>
+    </image>
+</images>
 </UI>
