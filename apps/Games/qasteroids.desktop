@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=Shoot the rocks
 Exec=qasteroids
-Icon=Asteroids
+Icon=asteroids/Asteroids
 Type=Application
 Name=Asteroids
 Name[hu]=Asteroids
