@@ -62,8 +62,11 @@ namespace Todo {
         friend class TodoView; // avoid QObject here....
         friend class TodoShow; // avoid QObject
     public:
+        /* OApplicationFactory application Name */
+        static QString appName() { return QString::fromLatin1("todolist"); }
+
         MainWindow( QWidget *parent = 0,
-                    const char* name = 0 );
+                    const char* name = 0, WFlags fl = 0 );
         ~MainWindow();
 
         /** return a context menu for an OTodo */
