@@ -4,7 +4,7 @@
     <name>MainWindow</name>
     <message>
         <source>OSearch</source>
-        <translation>OPIE Suche</translation>
+        <translation>Opie Suche</translation>
     </message>
     <message>
         <source>adressbook</source>
@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation>Groß-/Kleinschreibung beachten</translation>
+        <translation type="obsolete">Groß-/Kleinschreibung beachten</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -86,6 +86,10 @@
         <source></source>
         <translation></translation>
     </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation>Groß-/Kleinschreibung beachten</translation>
+    </message>
 </context>
 <context>
     <name>OListView</name>
@@ -118,15 +122,15 @@
     </message>
     <message>
         <source>show completed tasks</source>
-        <translation>Zeige auch erledigte Aufgaben</translation>
+        <translation type="obsolete">Zeige auch erledigte Aufgaben</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation>Zeige auch vergangene Termine</translation>
+        <translation type="obsolete">Zeige auch vergangene Termine</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation>Suche in Zeitfeldern</translation>
+        <translation type="obsolete">Suche in Zeitfeldern</translation>
     </message>
     <message>
         <source>File: </source>
@@ -142,11 +146,27 @@
     </message>
     <message>
         <source>search content</source>
-        <translation>Suchinhalt</translation>
+        <translation type="obsolete">Suchinhalt</translation>
     </message>
     <message>
         <source>searching %1</source>
         <translation>suche %1</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show past events</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search in dates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search content</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
