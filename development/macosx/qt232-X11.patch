@@ -1,4 +1,102 @@
-diff -ru qt-2.3.2/include/qconfig.h qt-2.3.2_changed/include/qconfig.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/configs/darwin-g++-shared qt-2.3.2_changed/configs/darwin-g++-shared
+--- qt-2.3.2/configs/darwin-g++-shared	Thu Jan  1 01:00:00 1970
++++ qt-2.3.2_changed/configs/darwin-g++-shared	Sun Nov 16 12:33:53 2003
+@@ -0,0 +1,94 @@
++# Compiling
++INTERFACE_DECL_PATH 	= .
++SYSCONF_CXX		= g++
++SYSCONF_CC		= gcc
++DASHCROSS		= 
++
++# Compiling with support libraries
++SYSCONF_CXXFLAGS_X11	= -I/usr/X11R6/include -I/usr/X11R6/include/freetype2
++SYSCONF_CXXFLAGS_QT	= -I$(QTDIR)/include
++SYSCONF_CXXFLAGS_OPENGL	= -I/usr/X11R6/include
++
++# Compiling YACC output
++SYSCONF_CXXFLAGS_YACC     = -Wno-unused -Wno-parentheses
++
++# Linking with support libraries
++SYSCONF_RPATH_X11	= -L/usr/X11R6/lib
++SYSCONF_RPATH_QT	= -L$(QTDIR)/lib
++SYSCONF_RPATH_OPENGL	= -L/usr/X11R6/lib
++
++# Linking with support libraries
++# X11
++SYSCONF_LFLAGS_X11	= -L/usr/X11R6/lib 
++SYSCONF_LIBS_X11	= -lXext -lX11 -lm
++# Qt, Qt+OpenGL
++SYSCONF_LFLAGS_QT	= -L$(QTDIR)/lib
++SYSCONF_LIBS_QT		= -lqt$(QT_THREAD_SUFFIX)
++SYSCONF_LIBS_QT_OPENGL	= 
++# OpenGL
++SYSCONF_LFLAGS_OPENGL	= -L/usr/X11R6/lib
++SYSCONF_LIBS_OPENGL	= -lGLU -lGL -lXmu
++# Yacc
++SYSCONF_LIBS_YACC	= 
++
++# Linking applications
++SYSCONF_LINK		= g++
++SYSCONF_LFLAGS		= 
++SYSCONF_LIBS		= 
++
++# Link flags for shared objects
++SYSCONF_LFLAGS_SHOBJ	= -dynamiclib
++
++# Flags for threading
++SYSCONF_CFLAGS_THREAD	= -pthread -D_THREAD_SAFE
++SYSCONF_CXXFLAGS_THREAD	= -pthread -D_THREAD_SAFE
++SYSCONF_LFLAGS_THREAD	= -pthread
++SYSCONF_LIBS_THREAD	= 
++
++# Meta-object compiler
++SYSCONF_MOC		= $(QTDIR)/bin/moc
++
++# UI compiler
++SYSCONF_UIC		= $(QTDIR)/bin/uic
++
++# Linking shared libraries
++#   - Build the $(TARGET) library, eg. lib$(TARGET).so.2.2.2
++#   - Place target in $(DESTDIR) - which has a trailing /
++#   - Usually needs to incorporate $(VER_MAJ), $(VER_MIN) and $(VER_PATCH)
++#
++SYSCONF_LINK_SHLIB	= g++
++SYSCONF_LINK_TARGET_SHARED	= lib$(TARGET).dylib.$(VER_MAJ).$(VER_MIN).$(VER_PATCH)
++SYSCONF_LINK_LIB_SHARED	=  $(SYSCONF_LINK_SHLIB) -dynamiclib \
++				     $(LFLAGS) -o $(SYSCONF_LINK_TARGET_SHARED) \
++				     $(OBJECTS) $(OBJMOC) $(LIBS) && \
++				 mv $(SYSCONF_LINK_TARGET_SHARED) $(DESTDIR); \
++				 cd $(DESTDIR) && \
++				 rm -f lib$(TARGET).dylib lib$(TARGET).dylib.$(VER_MAJ) lib$(TARGET).dylib.$(VER_MAJ).$(VER_MIN); \
++				 ln -s $(SYSCONF_LINK_TARGET_SHARED) lib$(TARGET).dylib; \
++				 ln -s $(SYSCONF_LINK_TARGET_SHARED) lib$(TARGET).dylib.$(VER_MAJ); \
++				 ln -s $(SYSCONF_LINK_TARGET_SHARED) lib$(TARGET).dylib.$(VER_MAJ).$(VER_MIN)
++
++# Linking static libraries
++#   - Build the $(TARGET) library, eg. lib$(TARGET).a
++#   - Place target in $(DESTDIR) - which has a trailing /
++#
++SYSCONF_AR		= ar cqs
++SYSCONF_LINK_TARGET_STATIC = lib$(TARGET).a
++SYSCONF_LINK_LIB_STATIC	= rm -f $(DESTDIR)$(SYSCONF_LINK_TARGET_STATIC) ; \
++				 $(SYSCONF_AR) $(DESTDIR)$(SYSCONF_LINK_TARGET_STATIC) $(OBJECTS) $(OBJMOC) 
++# Compiling application source
++SYSCONF_CXXFLAGS	= -pipe -fno-exceptions -O2 -Wall -W
++SYSCONF_CFLAGS		= -pipe -fno-exceptions -O2 -Wall -W
++# Default link type (static linking is still be used where required)
++SYSCONF_LINK_LIB	= $(SYSCONF_LINK_LIB_SHARED)
++SYSCONF_LINK_TARGET	= $(SYSCONF_LINK_TARGET_SHARED)
++# Compiling library source
++SYSCONF_CXXFLAGS_LIB	= -fPIC
++SYSCONF_CFLAGS_LIB	= -fPIC
++# Compiling shared-object source
++SYSCONF_CXXFLAGS_SHOBJ	= -fPIC
++SYSCONF_CFLAGS_SHOBJ	= -fPIC
++# Linking Qt
++SYSCONF_LIBS_QTLIB	= $(SYSCONF_LFLAGS_X11) $(QT_LIBS_MT) $(QT_LIBS_OPT)
++# Linking Qt applications
++SYSCONF_LIBS_QTAPP	= 
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/include/qconfig.h qt-2.3.2_changed/include/qconfig.h
 --- qt-2.3.2/include/qconfig.h	Fri Jan 26 14:43:06 2001
 +++ qt-2.3.2_changed/include/qconfig.h	Sun Nov 16 12:57:23 2003
 @@ -1,10 +1 @@
@@ -13,7 +111,7 @@ diff -ru qt-2.3.2/include/qconfig.h qt-2.3.2_changed/include/qconfig.h
 -#define QT_DLL // Internal
 -#endif
 +// Everything
-diff -ru qt-2.3.2/include/qglobal.h qt-2.3.2_changed/include/qglobal.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/include/qglobal.h qt-2.3.2_changed/include/qglobal.h
 --- qt-2.3.2/include/qglobal.h	Mon Oct 29 15:21:15 2001
 +++ qt-2.3.2_changed/include/qglobal.h	Sat Oct 25 13:08:27 2003
 @@ -73,6 +73,8 @@
@@ -25,7 +123,7 @@ diff -ru qt-2.3.2/include/qglobal.h qt-2.3.2_changed/include/qglobal.h
  #elif defined(MSDOS) || defined(_MSDOS) || defined(__MSDOS__)
  #define _OS_MSDOS_
  #elif defined(OS2) || defined(_OS2) || defined(__OS2__)
-diff -ru qt-2.3.2/include/qmodules.h qt-2.3.2_changed/include/qmodules.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/include/qmodules.h qt-2.3.2_changed/include/qmodules.h
 --- qt-2.3.2/include/qmodules.h	Fri Aug 31 17:00:56 2001
 +++ qt-2.3.2_changed/include/qmodules.h	Sun Nov 16 12:57:23 2003
 @@ -1,14 +1,12 @@
@@ -47,7 +145,7 @@ diff -ru qt-2.3.2/include/qmodules.h qt-2.3.2_changed/include/qmodules.h
  #define QT_MODULE_XML
 -#define QT_MODULE_NETWORK
 +#define QT_MODULE_OPENGL
-diff -ru qt-2.3.2/src/network/qdns.cpp qt-2.3.2_changed/src/network/qdns.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/src/network/qdns.cpp qt-2.3.2_changed/src/network/qdns.cpp
 --- qt-2.3.2/src/network/qdns.cpp	Mon Oct 29 15:21:14 2001
 +++ qt-2.3.2_changed/src/network/qdns.cpp	Sun Nov 16 13:11:41 2003
 @@ -1981,7 +1981,7 @@
@@ -59,7 +157,7 @@ diff -ru qt-2.3.2/src/network/qdns.cpp qt-2.3.2_changed/src/network/qdns.cpp
      int i;
      // find the name servers to use
      for( i=0; i < MAXNS && i < _res.nscount; i++ ) {
-diff -ru qt-2.3.2/src/network/qsocketdevice_unix.cpp qt-2.3.2_changed/src/network/qsocketdevice_unix.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/src/network/qsocketdevice_unix.cpp qt-2.3.2_changed/src/network/qsocketdevice_unix.cpp
 --- qt-2.3.2/src/network/qsocketdevice_unix.cpp	Mon Oct 29 15:21:14 2001
 +++ qt-2.3.2_changed/src/network/qsocketdevice_unix.cpp	Sat Oct 25 13:08:27 2003
 @@ -112,7 +112,7 @@
@@ -71,7 +169,7 @@ diff -ru qt-2.3.2/src/network/qsocketdevice_unix.cpp qt-2.3.2_changed/src/networ
  // BSD 4.4
  #  if defined(_OS_FREEBSD_) && __FreeBSD_version < 400000
  // FreeBSD 4.0 and higher
-diff -ru qt-2.3.2/src/tools/qconfig.h qt-2.3.2_changed/src/tools/qconfig.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/src/tools/qconfig.h qt-2.3.2_changed/src/tools/qconfig.h
 --- qt-2.3.2/src/tools/qconfig.h	Fri Jan 26 14:43:06 2001
 +++ qt-2.3.2_changed/src/tools/qconfig.h	Sun Nov 16 12:57:23 2003
 @@ -1,10 +1 @@
@@ -86,7 +184,7 @@ diff -ru qt-2.3.2/src/tools/qconfig.h qt-2.3.2_changed/src/tools/qconfig.h
 -#define QT_DLL // Internal
 -#endif
 +// Everything
-diff -ru qt-2.3.2/src/tools/qglobal.h qt-2.3.2_changed/src/tools/qglobal.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/src/tools/qglobal.h qt-2.3.2_changed/src/tools/qglobal.h
 --- qt-2.3.2/src/tools/qglobal.h	Mon Oct 29 15:21:15 2001
 +++ qt-2.3.2_changed/src/tools/qglobal.h	Sat Oct 25 13:08:27 2003
 @@ -73,6 +73,8 @@
@@ -98,7 +196,7 @@ diff -ru qt-2.3.2/src/tools/qglobal.h qt-2.3.2_changed/src/tools/qglobal.h
  #elif defined(MSDOS) || defined(_MSDOS) || defined(__MSDOS__)
  #define _OS_MSDOS_
  #elif defined(OS2) || defined(_OS2) || defined(__OS2__)
-diff -ru qt-2.3.2/src/tools/qmodules.h qt-2.3.2_changed/src/tools/qmodules.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/src/tools/qmodules.h qt-2.3.2_changed/src/tools/qmodules.h
 --- qt-2.3.2/src/tools/qmodules.h	Fri Aug 31 17:00:56 2001
 +++ qt-2.3.2_changed/src/tools/qmodules.h	Sun Nov 16 12:57:23 2003
 @@ -1,14 +1,12 @@
@@ -120,3 +218,555 @@ diff -ru qt-2.3.2/src/tools/qmodules.h qt-2.3.2_changed/src/tools/qmodules.h
  #define QT_MODULE_XML
 -#define QT_MODULE_NETWORK
 +#define QT_MODULE_OPENGL
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/src-mt.mk qt-2.3.2_changed/src-mt.mk
+--- qt-2.3.2/src-mt.mk	Thu Jan  1 01:00:00 1970
++++ qt-2.3.2_changed/src-mt.mk	Sun Nov 16 12:57:23 2003
+@@ -0,0 +1,2 @@
++all:
++	@echo "(not building threaded Qt)"
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/tools/qvfb/config.cpp qt-2.3.2_changed/tools/qvfb/config.cpp
+--- qt-2.3.2/tools/qvfb/config.cpp	Thu Jan  1 01:00:00 1970
++++ qt-2.3.2_changed/tools/qvfb/config.cpp	Sun Nov 16 13:29:37 2003
+@@ -0,0 +1,459 @@
++/****************************************************************************
++** Form implementation generated from reading ui file 'config.ui'
++**
++** Created: Sun Nov 16 13:29:37 2003
++**      by:  The User Interface Compiler (uic)
++**
++** WARNING! All changes made in this file will be lost!
++****************************************************************************/
++#include "config.h"
++
++#include <qbuttongroup.h>
++#include <qcombobox.h>
++#include <qgroupbox.h>
++#include <qlabel.h>
++#include <qpushbutton.h>
++#include <qradiobutton.h>
++#include <qslider.h>
++#include <qspinbox.h>
++#include "gammaview.h"
++#include <qlayout.h>
++#include <qvariant.h>
++#include <qtooltip.h>
++#include <qwhatsthis.h>
++
++/* 
++ *  Constructs a Config which is a child of 'parent', with the 
++ *  name 'name' and widget flags set to 'f' 
++ *
++ *  The dialog will by default be modeless, unless you set 'modal' to
++ *  TRUE to construct a modal dialog.
++ */
++Config::Config( QWidget* parent,  const char* name, bool modal, WFlags fl )
++    : QDialog( parent, name, modal, fl )
++{
++    if ( !name )
++	setName( "Config" );
++    resize( 481, 645 ); 
++    setCaption( tr( "Configure" ) );
++    setSizeGripEnabled( TRUE );
++    ConfigLayout = new QGridLayout( this ); 
++    ConfigLayout->setSpacing( 6 );
++    ConfigLayout->setMargin( 11 );
++
++    ButtonGroup2 = new QButtonGroup( this, "ButtonGroup2" );
++    ButtonGroup2->setTitle( tr( "Depth" ) );
++
++    depth_1 = new QRadioButton( ButtonGroup2, "depth_1" );
++    depth_1->setGeometry( QRect( 11, 19, 229, 19 ) ); 
++    depth_1->setText( tr( "1 bit monochrome" ) );
++
++    depth_4gray = new QRadioButton( ButtonGroup2, "depth_4gray" );
++    depth_4gray->setGeometry( QRect( 11, 44, 229, 19 ) ); 
++    depth_4gray->setText( tr( "4 bit grayscale" ) );
++
++    depth_8 = new QRadioButton( ButtonGroup2, "depth_8" );
++    depth_8->setGeometry( QRect( 11, 69, 229, 19 ) ); 
++    depth_8->setText( tr( "8 bit" ) );
++
++    depth_12 = new QRadioButton( ButtonGroup2, "depth_12" );
++    depth_12->setGeometry( QRect( 11, 94, 229, 19 ) ); 
++    depth_12->setText( tr( "12 (16) bit" ) );
++
++    depth_16 = new QRadioButton( ButtonGroup2, "depth_16" );
++    depth_16->setGeometry( QRect( 11, 119, 229, 19 ) ); 
++    depth_16->setText( tr( "16 bit" ) );
++
++    depth_32 = new QRadioButton( ButtonGroup2, "depth_32" );
++    depth_32->setGeometry( QRect( 11, 144, 229, 19 ) ); 
++    depth_32->setText( tr( "32 bit" ) );
++
++    ConfigLayout->addWidget( ButtonGroup2, 0, 1 );
++
++    Layout1 = new QHBoxLayout; 
++    Layout1->setSpacing( 6 );
++    Layout1->setMargin( 0 );
++    QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
++    Layout1->addItem( spacer );
++
++    buttonOk = new QPushButton( this, "buttonOk" );
++    buttonOk->setText( tr( "&OK" ) );
++    buttonOk->setAutoDefault( TRUE );
++    buttonOk->setDefault( TRUE );
++    Layout1->addWidget( buttonOk );
++
++    buttonCancel = new QPushButton( this, "buttonCancel" );
++    buttonCancel->setText( tr( "&Cancel" ) );
++    buttonCancel->setAutoDefault( TRUE );
++    Layout1->addWidget( buttonCancel );
++
++    ConfigLayout->addMultiCellLayout( Layout1, 3, 3, 0, 1 );
++
++    GroupBox1 = new QGroupBox( this, "GroupBox1" );
++    GroupBox1->setTitle( tr( "Gamma" ) );
++    GroupBox1->setColumnLayout(0, Qt::Vertical );
++    GroupBox1->layout()->setSpacing( 0 );
++    GroupBox1->layout()->setMargin( 0 );
++    GroupBox1Layout = new QGridLayout( GroupBox1->layout() );
++    GroupBox1Layout->setAlignment( Qt::AlignTop );
++    GroupBox1Layout->setSpacing( 6 );
++    GroupBox1Layout->setMargin( 11 );
++
++    TextLabel3 = new QLabel( GroupBox1, "TextLabel3" );
++    TextLabel3->setText( tr( "Blue" ) );
++
++    GroupBox1Layout->addWidget( TextLabel3, 6, 0 );
++
++    bslider = new QSlider( GroupBox1, "bslider" );
++    QPalette pal;
++    QColorGroup cg;
++    cg.setColor( QColorGroup::Foreground, black );
++    cg.setColor( QColorGroup::Button, QColor( 0, 0, 255) );
++    cg.setColor( QColorGroup::Light, QColor( 127, 127, 255) );
++    cg.setColor( QColorGroup::Midlight, QColor( 63, 63, 255) );
++    cg.setColor( QColorGroup::Dark, QColor( 0, 0, 127) );
++    cg.setColor( QColorGroup::Mid, QColor( 0, 0, 170) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, black );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setActive( cg );
++    cg.setColor( QColorGroup::Foreground, black );
++    cg.setColor( QColorGroup::Button, QColor( 0, 0, 255) );
++    cg.setColor( QColorGroup::Light, QColor( 127, 127, 255) );
++    cg.setColor( QColorGroup::Midlight, QColor( 38, 38, 255) );
++    cg.setColor( QColorGroup::Dark, QColor( 0, 0, 127) );
++    cg.setColor( QColorGroup::Mid, QColor( 0, 0, 170) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, black );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setInactive( cg );
++    cg.setColor( QColorGroup::Foreground, QColor( 128, 128, 128) );
++    cg.setColor( QColorGroup::Button, QColor( 0, 0, 255) );
++    cg.setColor( QColorGroup::Light, QColor( 127, 127, 255) );
++    cg.setColor( QColorGroup::Midlight, QColor( 38, 38, 255) );
++    cg.setColor( QColorGroup::Dark, QColor( 0, 0, 127) );
++    cg.setColor( QColorGroup::Mid, QColor( 0, 0, 170) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, QColor( 128, 128, 128) );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setDisabled( cg );
++    bslider->setPalette( pal );
++    bslider->setMaxValue( 400 );
++    bslider->setValue( 100 );
++    bslider->setOrientation( QSlider::Horizontal );
++
++    GroupBox1Layout->addWidget( bslider, 6, 1 );
++
++    blabel = new QLabel( GroupBox1, "blabel" );
++    blabel->setText( tr( "1.0" ) );
++
++    GroupBox1Layout->addWidget( blabel, 6, 2 );
++    QSpacerItem* spacer_2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
++    GroupBox1Layout->addItem( spacer_2, 5, 1 );
++
++    TextLabel2 = new QLabel( GroupBox1, "TextLabel2" );
++    TextLabel2->setText( tr( "Green" ) );
++
++    GroupBox1Layout->addWidget( TextLabel2, 4, 0 );
++
++    gslider = new QSlider( GroupBox1, "gslider" );
++    cg.setColor( QColorGroup::Foreground, black );
++    cg.setColor( QColorGroup::Button, QColor( 0, 255, 0) );
++    cg.setColor( QColorGroup::Light, QColor( 127, 255, 127) );
++    cg.setColor( QColorGroup::Midlight, QColor( 63, 255, 63) );
++    cg.setColor( QColorGroup::Dark, QColor( 0, 127, 0) );
++    cg.setColor( QColorGroup::Mid, QColor( 0, 170, 0) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, black );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setActive( cg );
++    cg.setColor( QColorGroup::Foreground, black );
++    cg.setColor( QColorGroup::Button, QColor( 0, 255, 0) );
++    cg.setColor( QColorGroup::Light, QColor( 127, 255, 127) );
++    cg.setColor( QColorGroup::Midlight, QColor( 38, 255, 38) );
++    cg.setColor( QColorGroup::Dark, QColor( 0, 127, 0) );
++    cg.setColor( QColorGroup::Mid, QColor( 0, 170, 0) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, black );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setInactive( cg );
++    cg.setColor( QColorGroup::Foreground, QColor( 128, 128, 128) );
++    cg.setColor( QColorGroup::Button, QColor( 0, 255, 0) );
++    cg.setColor( QColorGroup::Light, QColor( 127, 255, 127) );
++    cg.setColor( QColorGroup::Midlight, QColor( 38, 255, 38) );
++    cg.setColor( QColorGroup::Dark, QColor( 0, 127, 0) );
++    cg.setColor( QColorGroup::Mid, QColor( 0, 170, 0) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, QColor( 128, 128, 128) );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setDisabled( cg );
++    gslider->setPalette( pal );
++    gslider->setMaxValue( 400 );
++    gslider->setValue( 100 );
++    gslider->setOrientation( QSlider::Horizontal );
++
++    GroupBox1Layout->addWidget( gslider, 4, 1 );
++
++    glabel = new QLabel( GroupBox1, "glabel" );
++    glabel->setText( tr( "1.0" ) );
++
++    GroupBox1Layout->addWidget( glabel, 4, 2 );
++
++    TextLabel7 = new QLabel( GroupBox1, "TextLabel7" );
++    TextLabel7->setText( tr( "All" ) );
++
++    GroupBox1Layout->addWidget( TextLabel7, 0, 0 );
++
++    TextLabel8 = new QLabel( GroupBox1, "TextLabel8" );
++    TextLabel8->setText( tr( "1.0" ) );
++
++    GroupBox1Layout->addWidget( TextLabel8, 0, 2 );
++
++    gammaslider = new QSlider( GroupBox1, "gammaslider" );
++    cg.setColor( QColorGroup::Foreground, black );
++    cg.setColor( QColorGroup::Button, white );
++    cg.setColor( QColorGroup::Light, white );
++    cg.setColor( QColorGroup::Midlight, white );
++    cg.setColor( QColorGroup::Dark, QColor( 127, 127, 127) );
++    cg.setColor( QColorGroup::Mid, QColor( 170, 170, 170) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, black );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setActive( cg );
++    cg.setColor( QColorGroup::Foreground, black );
++    cg.setColor( QColorGroup::Button, white );
++    cg.setColor( QColorGroup::Light, white );
++    cg.setColor( QColorGroup::Midlight, white );
++    cg.setColor( QColorGroup::Dark, QColor( 127, 127, 127) );
++    cg.setColor( QColorGroup::Mid, QColor( 170, 170, 170) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, black );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setInactive( cg );
++    cg.setColor( QColorGroup::Foreground, QColor( 128, 128, 128) );
++    cg.setColor( QColorGroup::Button, white );
++    cg.setColor( QColorGroup::Light, white );
++    cg.setColor( QColorGroup::Midlight, white );
++    cg.setColor( QColorGroup::Dark, QColor( 127, 127, 127) );
++    cg.setColor( QColorGroup::Mid, QColor( 170, 170, 170) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, QColor( 128, 128, 128) );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setDisabled( cg );
++    gammaslider->setPalette( pal );
++    gammaslider->setMaxValue( 400 );
++    gammaslider->setValue( 100 );
++    gammaslider->setOrientation( QSlider::Horizontal );
++
++    GroupBox1Layout->addWidget( gammaslider, 0, 1 );
++
++    TextLabel1_2 = new QLabel( GroupBox1, "TextLabel1_2" );
++    TextLabel1_2->setText( tr( "Red" ) );
++
++    GroupBox1Layout->addWidget( TextLabel1_2, 2, 0 );
++
++    rlabel = new QLabel( GroupBox1, "rlabel" );
++    rlabel->setText( tr( "1.0" ) );
++
++    GroupBox1Layout->addWidget( rlabel, 2, 2 );
++
++    rslider = new QSlider( GroupBox1, "rslider" );
++    cg.setColor( QColorGroup::Foreground, black );
++    cg.setColor( QColorGroup::Button, QColor( 255, 0, 0) );
++    cg.setColor( QColorGroup::Light, QColor( 255, 127, 127) );
++    cg.setColor( QColorGroup::Midlight, QColor( 255, 63, 63) );
++    cg.setColor( QColorGroup::Dark, QColor( 127, 0, 0) );
++    cg.setColor( QColorGroup::Mid, QColor( 170, 0, 0) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, black );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setActive( cg );
++    cg.setColor( QColorGroup::Foreground, black );
++    cg.setColor( QColorGroup::Button, QColor( 255, 0, 0) );
++    cg.setColor( QColorGroup::Light, QColor( 255, 127, 127) );
++    cg.setColor( QColorGroup::Midlight, QColor( 255, 38, 38) );
++    cg.setColor( QColorGroup::Dark, QColor( 127, 0, 0) );
++    cg.setColor( QColorGroup::Mid, QColor( 170, 0, 0) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, black );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setInactive( cg );
++    cg.setColor( QColorGroup::Foreground, QColor( 128, 128, 128) );
++    cg.setColor( QColorGroup::Button, QColor( 255, 0, 0) );
++    cg.setColor( QColorGroup::Light, QColor( 255, 127, 127) );
++    cg.setColor( QColorGroup::Midlight, QColor( 255, 38, 38) );
++    cg.setColor( QColorGroup::Dark, QColor( 127, 0, 0) );
++    cg.setColor( QColorGroup::Mid, QColor( 170, 0, 0) );
++    cg.setColor( QColorGroup::Text, black );
++    cg.setColor( QColorGroup::BrightText, white );
++    cg.setColor( QColorGroup::ButtonText, QColor( 128, 128, 128) );
++    cg.setColor( QColorGroup::Base, white );
++    cg.setColor( QColorGroup::Background, QColor( 220, 220, 220) );
++    cg.setColor( QColorGroup::Shadow, black );
++    cg.setColor( QColorGroup::Highlight, QColor( 10, 95, 137) );
++    cg.setColor( QColorGroup::HighlightedText, white );
++    pal.setDisabled( cg );
++    rslider->setPalette( pal );
++    rslider->setMaxValue( 400 );
++    rslider->setValue( 100 );
++    rslider->setOrientation( QSlider::Horizontal );
++
++    GroupBox1Layout->addWidget( rslider, 2, 1 );
++    QSpacerItem* spacer_3 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
++    GroupBox1Layout->addItem( spacer_3, 3, 1 );
++    QSpacerItem* spacer_4 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
++    GroupBox1Layout->addItem( spacer_4, 1, 1 );
++
++    PushButton3 = new QPushButton( GroupBox1, "PushButton3" );
++    PushButton3->setText( tr( "Set all to 1.0" ) );
++
++    GroupBox1Layout->addMultiCellWidget( PushButton3, 8, 8, 0, 2 );
++
++    MyCustomWidget1 = new GammaView( GroupBox1, "MyCustomWidget1" );
++
++    GroupBox1Layout->addMultiCellWidget( MyCustomWidget1, 0, 8, 3, 3 );
++    QSpacerItem* spacer_5 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
++    GroupBox1Layout->addItem( spacer_5, 7, 1 );
++
++    ConfigLayout->addMultiCellWidget( GroupBox1, 2, 2, 0, 1 );
++
++    ButtonGroup1 = new QButtonGroup( this, "ButtonGroup1" );
++    ButtonGroup1->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)5, ButtonGroup1->sizePolicy().hasHeightForWidth() ) );
++    ButtonGroup1->setTitle( tr( "Size" ) );
++    ButtonGroup1->setColumnLayout(0, Qt::Vertical );
++    ButtonGroup1->layout()->setSpacing( 0 );
++    ButtonGroup1->layout()->setMargin( 0 );
++    ButtonGroup1Layout = new QVBoxLayout( ButtonGroup1->layout() );
++    ButtonGroup1Layout->setAlignment( Qt::AlignTop );
++    ButtonGroup1Layout->setSpacing( 6 );
++    ButtonGroup1Layout->setMargin( 11 );
++
++    size_240_320 = new QRadioButton( ButtonGroup1, "size_240_320" );
++    size_240_320->setText( tr( "240x320 \"PDA\"" ) );
++    ButtonGroup1Layout->addWidget( size_240_320 );
++
++    size_320_240 = new QRadioButton( ButtonGroup1, "size_320_240" );
++    size_320_240->setText( tr( "320x240 \"TV\"" ) );
++    ButtonGroup1Layout->addWidget( size_320_240 );
++
++    size_640_480 = new QRadioButton( ButtonGroup1, "size_640_480" );
++    size_640_480->setText( tr( "640x480 \"VGA\"" ) );
++    ButtonGroup1Layout->addWidget( size_640_480 );
++
++    Layout1_2 = new QHBoxLayout; 
++    Layout1_2->setSpacing( 6 );
++    Layout1_2->setMargin( 0 );
++
++    size_custom = new QRadioButton( ButtonGroup1, "size_custom" );
++    size_custom->setText( tr( "Custom" ) );
++    Layout1_2->addWidget( size_custom );
++
++    size_width = new QSpinBox( ButtonGroup1, "size_width" );
++    size_width->setMaxValue( 1280 );
++    size_width->setMinValue( 1 );
++    size_width->setLineStep( 16 );
++    size_width->setValue( 400 );
++    Layout1_2->addWidget( size_width );
++
++    size_height = new QSpinBox( ButtonGroup1, "size_height" );
++    size_height->setMaxValue( 1024 );
++    size_height->setMinValue( 1 );
++    size_height->setLineStep( 16 );
++    size_height->setValue( 300 );
++    Layout1_2->addWidget( size_height );
++    ButtonGroup1Layout->addLayout( Layout1_2 );
++
++    Layout8 = new QHBoxLayout; 
++    Layout8->setSpacing( 6 );
++    Layout8->setMargin( 0 );
++
++    size_skin = new QRadioButton( ButtonGroup1, "size_skin" );
++    size_skin->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)0, (QSizePolicy::SizeType)0, size_skin->sizePolicy().hasHeightForWidth() ) );
++    size_skin->setText( tr( "Skin" ) );
++    Layout8->addWidget( size_skin );
++
++    skin = new QComboBox( FALSE, ButtonGroup1, "skin" );
++    skin->insertItem( tr( "pda.skin" ) );
++    skin->insertItem( tr( "ipaq.skin" ) );
++    skin->insertItem( tr( "qpe.skin" ) );
++    skin->insertItem( tr( "cassiopeia.skin" ) );
++    skin->insertItem( tr( "other.skin" ) );
++    skin->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)0, skin->sizePolicy().hasHeightForWidth() ) );
++    Layout8->addWidget( skin );
++    ButtonGroup1Layout->addLayout( Layout8 );
++
++    ConfigLayout->addWidget( ButtonGroup1, 0, 0 );
++
++    TextLabel1 = new QLabel( this, "TextLabel1" );
++    TextLabel1->setText( tr( "<p>Note that any applications using the virtual framebuffer will be terminated if you change the Size or Depth <i>above</i>. You may freely modify the Gamma <i>below</i>." ) );
++
++    ConfigLayout->addMultiCellWidget( TextLabel1, 1, 1, 0, 1 );
++
++    // signals and slots connections
++    connect( buttonOk, SIGNAL( clicked() ), this, SLOT( accept() ) );
++    connect( buttonCancel, SIGNAL( clicked() ), this, SLOT( reject() ) );
++}
++
++/*  
++ *  Destroys the object and frees any allocated resources
++ */
++Config::~Config()
++{
++    // no need to delete child widgets, Qt does it all for us
++}
++
+diff -uNr --exclude-from=./diff_ignore qt-2.3.2/tools/qvfb/config.h qt-2.3.2_changed/tools/qvfb/config.h
+--- qt-2.3.2/tools/qvfb/config.h	Thu Jan  1 01:00:00 1970
++++ qt-2.3.2_changed/tools/qvfb/config.h	Sun Nov 16 13:29:26 2003
+@@ -0,0 +1,79 @@
++/****************************************************************************
++** Form interface generated from reading ui file 'config.ui'
++**
++** Created: Sun Nov 16 13:29:26 2003
++**      by:  The User Interface Compiler (uic)
++**
++** WARNING! All changes made in this file will be lost!
++****************************************************************************/
++#ifndef CONFIG_H
++#define CONFIG_H
++
++#include <qvariant.h>
++#include <qdialog.h>
++class QVBoxLayout; 
++class QHBoxLayout; 
++class QGridLayout; 
++class GammaView;
++class QButtonGroup;
++class QComboBox;
++class QGroupBox;
++class QLabel;
++class QPushButton;
++class QRadioButton;
++class QSlider;
++class QSpinBox;
++
++class Config : public QDialog
++{ 
++    Q_OBJECT
++
++public:
++    Config( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
++    ~Config();
++
++    QButtonGroup* ButtonGroup2;
++    QRadioButton* depth_1;
++    QRadioButton* depth_4gray;
++    QRadioButton* depth_8;
++    QRadioButton* depth_12;
++    QRadioButton* depth_16;
++    QRadioButton* depth_32;
++    QPushButton* buttonOk;
++    QPushButton* buttonCancel;
++    QGroupBox* GroupBox1;
++    QLabel* TextLabel3;
++    QSlider* bslider;
++    QLabel* blabel;
++    QLabel* TextLabel2;
++    QSlider* gslider;
++    QLabel* glabel;
++    QLabel* TextLabel7;
++    QLabel* TextLabel8;
++    QSlider* gammaslider;
++    QLabel* TextLabel1_2;
++    QLabel* rlabel;
++    QSlider* rslider;
++    QPushButton* PushButton3;
++    GammaView* MyCustomWidget1;
++    QButtonGroup* ButtonGroup1;
++    QRadioButton* size_240_320;
++    QRadioButton* size_320_240;
++    QRadioButton* size_640_480;
++    QRadioButton* size_custom;
++    QSpinBox* size_width;
++    QSpinBox* size_height;
++    QRadioButton* size_skin;
++    QComboBox* skin;
++    QLabel* TextLabel1;
++
++protected:
++    QGridLayout* ConfigLayout;
++    QHBoxLayout* Layout1;
++    QGridLayout* GroupBox1Layout;
++    QVBoxLayout* ButtonGroup1Layout;
++    QHBoxLayout* Layout1_2;
++    QHBoxLayout* Layout8;
++};
++
++#endif // CONFIG_H

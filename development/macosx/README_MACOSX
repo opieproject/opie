@@ -38,15 +38,9 @@ Before compiling for MacOS-X, you need the following:
 5. Patches for QT/E-2.3.7 for MacOSX 	(take the one, provided in $OPIEDIR/qt)
 
 The Patch for QT-2.3.2 is provided in this directory and is called "qt232-X11.patch".
-Please copy the file "darwin-g++-shared" from the directory "./config-files/qt-2.3.2" into the directory "configs" 
-within the qt-2.3.2 directory !!
 
 The Patch for QT/E for Opie, including all other opie-patches is available in the
 qt-directory ($OPIEDIR/qt) and is called "qte237-all-macosx.patch".
-To be able to compile, you have to copy the file from the directory "./config-files/qte-2.3.7" 
-into the directory "configs" within the base directory of qt/e.
-Secondly, you have to copy the file "qconfig-qpe.h" from the Directory "$OPIEDIR/qt" into the "tools" directory 
-within the base directory of qt/e. Then, please add the line "#define QT_NO_SOUND" to this file.
 
 Please read further, how to compile the stuff.
 
