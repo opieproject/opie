@@ -5,11 +5,13 @@
 #include <qlabel.h>
 #include <qtabwidget.h>
 #include <qlistview.h>
-
+#include <qtextbrowser.h>
 #include <termios.h>
 
 #include <gsmlib/gsm_me_ta.h>
 #include <gsmlib/gsm_unix_serial.h>
+#include <gsmlib/gsm_sms.h>
+#include <gsmlib/gsm_sorted_sms_store.h>
 
 using namespace gsmlib;
 
@@ -23,11 +25,15 @@ GSMTool::GSMTool( QWidget* parent,  const char* name, WFlags fl )
 {
 	devicelocked = 0;
 	me = NULL;
+	sms_store = NULL;
 	setConnected(FALSE);
 	/* FIXME: Persistent settings for device/baudrate */
 	connect(ConnectButton, SIGNAL(clicked()), this, SLOT(doConnectButton()));
 	connect(ScanButton, SIGNAL(clicked()), this, SLOT(doScanButton()));
 	connect(TabWidget2, SIGNAL(currentChanged(QWidget *)), this, SLOT(doTabChanged()));
+	connect(SMSStoreList, SIGNAL(activated(int)), this, SLOT(doSMSStoreChanged()));
+	connect(SMSViewType, SIGNAL(activated(int)), this, SLOT(doSMSTypeChanged()));
+
 	timerid = -1; // Is this not possible normally? 
 }
 
@@ -127,6 +133,49 @@ void GSMTool::timerEvent( QTimerEvent * )
 			SigStrLabel->setEnabled(TRUE);
 		}
 	}	
+}
+
+void GSMTool::doSMSStoreChanged()
+{
+	const char *storename = SMSStoreList->currentText().ascii();
+	qDebug("Store Changed to '%s'", storename);
+	try {
+		sms_store = me->getSMSStore(storename);
+
+		qDebug("got store of size %d", sms_store->size());
+	} catch (GsmException) {
+		sms_store = NULL;
+		qDebug("get store failed");
+	}
+	doSMSTypeChanged();
+}
+
+void GSMTool::doSMSTypeChanged()
+{
+	int direction = SMSViewType->currentItem();
+	qDebug("direction %s\n", direction?"outgoing":"incoming");
+
+	SMSList->clear();
+	if (sms_store == NULL)
+		return;
+	for (int i = 0; i < sms_store->size(); i++) {
+		qDebug("Message %d", i);
+		qDebug("Is%sempty", sms_store()[i].empty()?" ":" not ");
+		if (sms_store()[i].empty())
+			continue;
+
+		qDebug("Status %d", sms_store()[i].status());
+		SMSMessageRef message = sms_store()[i].message();
+		qDebug("Got message.");
+		
+#if 0 // WTF does this die? Did I mention that gsmlib needs rewriting in a sane language?
+		qDebug(message->toString().c_str());
+		if (direction == message->messageType()) {
+			qDebug("yes\n");
+			new QListViewItem(SMSList, "xx", message->address()._number.c_str());
+		} else qDebug("no. dir %d, type %d\n", direction, message->messageType());
+#endif
+	}		
 }
 
 void GSMTool::doScanButton()
@@ -248,4 +297,16 @@ void GSMTool::doConnectButton()
 	RevisionText->setText(ifo._revision.c_str());
 	SerialText->setText(ifo._serialNumber.c_str());
 	setConnected(TRUE);
+
+	SMSStoreList->clear();
+	SMSStoreList->insertItem("None");
+
+	vector<string> storenames = me->getSMSStoreNames();
+
+	for (vector<string>::iterator i = storenames.begin(); i != storenames.end(); ++i) {
+		SMSStoreList->insertItem(i->c_str());
+	}
+	SMSList->clear();
+	SMSText->setText("");
+	sms_store = NULL;
 }

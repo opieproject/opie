@@ -21,12 +21,16 @@ private slots:
 	void doConnectButton();
 	void doScanButton();
         void doTabChanged();
+	void doSMSStoreChanged();
+	void doSMSTypeChanged();
+
 private:
  static const speed_t baudrates[];
  int devicelocked;
  int timerid;
 
  gsmlib::MeTa *me;
+ gsmlib::SMSStoreRef sms_store;
 
  char *devicename; 
  speed_t baudrate;

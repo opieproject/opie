@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>388</width>
-            <height>502</height>
+            <width>309</width>
+            <height>390</height>
         </rect>
     </property>
     <property stdset="1">
@@ -739,56 +739,91 @@
                     <name>title</name>
                     <string>SMS</string>
                 </attribute>
-                <grid>
+                <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>2</number>
+                        <number>11</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>1</number>
+                        <number>6</number>
                     </property>
-                    <widget row="0"  column="1" >
-                        <class>QComboBox</class>
-                        <item>
-                            <property>
-                                <name>text</name>
-                                <string>None</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property>
-                                <name>text</name>
-                                <string>Incoming</string>
-                            </property>
-                        </item>
-                        <item>
-                            <property>
-                                <name>text</name>
-                                <string>Outgoing</string>
-                            </property>
-                        </item>
+                    <widget>
+                        <class>QLayoutWidget</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>ComboBox11</cstring>
+                            <cstring>Layout6</cstring>
                         </property>
-                        <property stdset="1">
-                            <name>enabled</name>
-                            <bool>true</bool>
-                        </property>
+                        <hbox>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>0</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget>
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>SMSStoreLabel</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Store:</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QComboBox</class>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>None</string>
+                                    </property>
+                                </item>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>SMSStoreList</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>enabled</name>
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>SMSTypeLabel</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Type:</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QComboBox</class>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>Incoming</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>Outgoing</string>
+                                    </property>
+                                </item>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>SMSViewType</cstring>
+                                </property>
+                            </widget>
+                        </hbox>
                     </widget>
-                    <widget row="0"  column="0" >
-                        <class>QLabel</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>TextLabel4</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Message Collection:</string>
-                        </property>
-                    </widget>
-                    <widget row="1"  column="0"  rowspan="1"  colspan="2" >
+                    <widget>
                         <class>QListView</class>
                         <column>
                             <property>
@@ -820,21 +855,10 @@
                         </column>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>ListView3</cstring>
+                            <cstring>SMSList</cstring>
                         </property>
                     </widget>
-                    <widget row="3"  column="0"  rowspan="1"  colspan="2" >
-                        <class>QMultiLineEdit</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>MultiLineEdit3</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>readOnly</name>
-                            <bool>true</bool>
-                        </property>
-                    </widget>
-                    <widget row="2"  column="0"  rowspan="1"  colspan="2" >
+                    <widget>
                         <class>QLayoutWidget</class>
                         <property stdset="1">
                             <name>name</name>
@@ -856,7 +880,7 @@
                                 <class>QPushButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>PushButton11</cstring>
+                                    <cstring>SMSDeleteButton</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -867,7 +891,7 @@
                                 <class>QPushButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>PushButton12</cstring>
+                                    <cstring>SMSSendButton</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -878,7 +902,7 @@
                                 <class>QPushButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>PushButton13</cstring>
+                                    <cstring>SMSNewButton</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -887,7 +911,14 @@
                             </widget>
                         </hbox>
                     </widget>
-                </grid>
+                    <widget>
+                        <class>QTextBrowser</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>SMSText</cstring>
+                        </property>
+                    </widget>
+                </vbox>
             </widget>
         </widget>
     </vbox>
