@@ -52,7 +52,7 @@
 #define STYLE_BARS 0
 #define STYLE_ANTENNA 1
 
-//#define MDEBUG 0
+//#define MDEBUG
 #undef MDEBUG
 
 WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const char *name )
@@ -62,12 +62,12 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     readConfig();
     writeConfigEntry( "UpdateFrequency", updateFrequency );
     writeConfigEntry( "DisplayStyle", displayStyle );
-    
-    setFrameStyle( QFrame::PopupPanel | QFrame::Raised );    
-    QGridLayout *grid = new QGridLayout( this, 3, 2, 6, 2, "top layout" );  
-    
+
+    setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
+    QGridLayout *grid = new QGridLayout( this, 3, 2, 6, 2, "top layout" );
+
     /* status label */
-    
+
     statusLabel = new QLabel( this, "statuslabel" );
     QString text( "Wireless Status:<br>"
 	                "*** Unknown ***<br>"
@@ -84,7 +84,7 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     grid->addWidget( statusLabel, 0, 0 );
 
     /* visualization group box */
-    
+
     QButtonGroup* group = new QButtonGroup( 1, Qt::Horizontal, "Visualization", this );
     QRadioButton* r1 = new QRadioButton( "Color Bars", group );
     QRadioButton* r2 = new QRadioButton( "Antenna", group );
@@ -95,16 +95,16 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     grid->addWidget( group, 0, 1 );
 
     /* quality graph */
-    
+
     mgraph = new MGraph( this );
     mgraph->setFrameStyle( QFrame::Panel | QFrame::Sunken );
     mgraph->setMin( 0 );
     mgraph->setMax( 92 );
     grid->addWidget( mgraph, 1, 0 );
     mgraph->setFocusPolicy( QWidget::NoFocus );
-    
+
     /* advanced configuration Button */
-    
+
     QPushButton* advanced = new QPushButton( "Advanced...", this );
     advanced->setFocusPolicy( QWidget::NoFocus );
     grid->addWidget( advanced, 2, 0, Qt::AlignCenter );
@@ -112,14 +112,14 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
              this, SLOT( advancedConfigClicked() ) );
 
     /* update Frequency Label */
-    
+
     updateLabel = new QLabel( this );
     text.sprintf( "Update every %d s", updateFrequency );
     updateLabel->setText( text );
     grid->addWidget( updateLabel, 2, 1 );
 
     /* update Frequency Slider */
-    
+
     QSlider* updateSlider = new QSlider( QSlider::Horizontal, this );
     updateSlider->setRange( 0, 9 );
     updateSlider->setValue( updateFrequency );
@@ -233,8 +233,8 @@ void WirelessApplet::checkInterface()
         qDebug( "WIFIAPPLET: D'oh! No Wireless interface present... :(" );
 #endif
         hide();
-    }   
-}    
+    }
+}
 
 void WirelessApplet::renewDHCP()
 {
@@ -246,22 +246,48 @@ void WirelessApplet::renewDHCP()
     if ( !interface )
         return;
     QString ifacename( interface->getName() );
+
+    // At first we are trying dhcpcd
+
     pidfile.sprintf( "/var/run/dhcpcd-%s.pid", (const char* ) ifacename );
 #ifdef MDEBUG
-    qDebug( "WIFIAPPLET: pidfile is '%s'", (const char*) pidfile );
+    qDebug( "WIFIAPPLET: dhcpcd pidfile is '%s'", (const char*) pidfile );
 #endif
     int pid;
     QFile pfile( pidfile );
     bool hasFile = pfile.open( IO_ReadOnly );
     QTextStream s( &pfile );
     if ( hasFile )
+    {
         s >> pid;
 #ifdef MDEBUG
-        qDebug( "WIFIAPPLET: sent -14 to pid %d", pid );
+        qDebug( "WIFIAPPLET: sent SIGALARM to pid %d", pid );
 #endif
-        kill( pid, -14 );
+        kill( pid, SIGALRM );
+        return;
+    }
 
-}    
+    // No dhcpcd, so we are trying udhcpc
+#ifdef MDEBUG
+    qDebug( "WIFIAPPLET: dhcpcd not available." );
+#endif
+    pidfile.sprintf( "/var/run/udhcpc.%s.pid", (const char*) ifacename );
+#ifdef MDEBUG
+    qDebug( "WIFIAPPLET: udhcpc pidfile is '%s'", (const char*) pidfile );
+#endif
+    QFile pfile2( pidfile );
+    hasFile = pfile2.open( IO_ReadOnly );
+    QTextStream s2( &pfile2 );
+    if ( hasFile )
+    {
+        s2 >> pid;
+#ifdef MDEBUG
+        qDebug( "WIFIAPPLET: sent SIGUSR1 to pid %d", pid );
+#endif
+        kill( pid, SIGUSR1 );
+        return;
+    }
+}
 
 void WirelessApplet::updateDHCPConfig( bool ESSID, bool FREQ, bool AP, bool MODE )
 {
