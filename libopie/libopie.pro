@@ -42,7 +42,7 @@ HEADERS   = ofontmenu.h \
     pim/odatebookaccessbackend.h \
     pim/odatebookaccessbackend_xml.h \
     orecurrancewidget.h \
-    oticker.h 
+    oticker.h owait.h
 #    pim/otodoaccesssql.h \
 
 SOURCES   = ofontmenu.cc  \
@@ -83,7 +83,7 @@ SOURCES   = ofontmenu.cc  \
        pim/odatebookaccessbackend.cpp \
        pim/odatebookaccessbackend_xml.cpp \
        orecurrancewidget.cpp \
-       oticker.cpp
+       oticker.cpp owait.cpp \
 #             pim/otodoaccesssql.cpp \
 
 TARGET    = opie
