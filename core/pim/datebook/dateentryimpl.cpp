@@ -43,8 +43,6 @@
 
 #include <stdlib.h>
 
-#include <stdiostream.h>
-
 /*
  *  Constructs a DateEntry which is a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'
