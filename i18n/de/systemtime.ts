@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Set predicted time: </source>
-        <translation>Zeitvorschlag:</translation>
+        <translation>Vorschlag:</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
