@@ -27,51 +27,51 @@
     </message>
     <message>
         <source>Display Rotate</source>
-        <translation>Obrot ekranu</translation>
+        <translation>Obrót ekranu</translation>
     </message>
     <message>
         <source>Lower+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolny+Góra</translation>
     </message>
     <message>
         <source>Lower+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolny+Dół</translation>
     </message>
     <message>
         <source>Lower+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolny+Prawo</translation>
     </message>
     <message>
         <source>Lower+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolny+Lewo</translation>
     </message>
     <message>
         <source>Upper+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Górny+Góra</translation>
     </message>
     <message>
         <source>Upper+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Górny+Dół</translation>
     </message>
     <message>
         <source>Upper+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Górny+Prawo</translation>
     </message>
     <message>
         <source>Upper+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Górny+Lewo</translation>
     </message>
     <message>
         <source>Action Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Przycisk Akcji</translation>
     </message>
     <message>
         <source>OK Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Przycisk OK</translation>
     </message>
     <message>
         <source>End Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Przycisk Koniec</translation>
     </message>
 </context>
 <context>
@@ -90,19 +90,19 @@
     </message>
     <message>
         <source>Red:</source>
-        <translation>Czerwien:</translation>
+        <translation>Czerwień:</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation>Zielen:</translation>
+        <translation>Zieleń:</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation>Blekit:</translation>
+        <translation>Błękit:</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation>Kanal alfa:</translation>
+        <translation>Kanał alfa:</translation>
     </message>
     <message>
         <source>Select color</source>
@@ -113,7 +113,7 @@
     <name>OColorPopupMenu</name>
     <message>
         <source>More</source>
-        <translation>Wiecej</translation>
+        <translation>Więcej</translation>
     </message>
     <message>
         <source>More...</source>
@@ -124,11 +124,11 @@
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Plik</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Otworz</translation>
+        <translation>Otwórz</translation>
     </message>
     <message>
         <source>Save</source>
@@ -165,15 +165,15 @@
     <name>OFontMenu</name>
     <message>
         <source>Large</source>
-        <translation>Duze</translation>
+        <translation>Duże</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation>Srednie</translation>
+        <translation>Średnie</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation>Male</translation>
+        <translation>Małe</translation>
     </message>
 </context>
 <context>
@@ -203,15 +203,15 @@
     </message>
     <message>
         <source>Day</source>
-        <translation>Dzien</translation>
+        <translation>Dzień</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Tydzien</translation>
+        <translation>Tydzień</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Miesiac</translation>
+        <translation>Miesiąc</translation>
     </message>
     <message>
         <source>Year</source>
@@ -223,7 +223,7 @@
     </message>
     <message>
         <source>Frequency</source>
-        <translation>Czestotliwosc</translation>
+        <translation>Częstotliwość</translation>
     </message>
     <message>
         <source>End On:</source>
@@ -231,11 +231,11 @@
     </message>
     <message>
         <source>No End Date</source>
-        <translation>Bez daty koncowej</translation>
+        <translation>Bez daty końcowej</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation>Powtarzaj uzywajac</translation>
+        <translation>Powtarzaj używając</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -247,7 +247,7 @@
     </message>
     <message>
         <source>Wed</source>
-        <translation>Sro</translation>
+        <translation>Śro</translation>
     </message>
     <message>
         <source>Thu</source>
@@ -255,7 +255,7 @@
     </message>
     <message>
         <source>Fri</source>
-        <translation>Pia</translation>
+        <translation>Pią</translation>
     </message>
     <message>
         <source>Sat</source>
@@ -286,7 +286,7 @@
     <name>ORecurranceWidget</name>
     <message>
         <source>No End Date</source>
-        <translation>Bez daty koncowej</translation>
+        <translation>Bez daty końcowej</translation>
     </message>
     <message>
         <source>days</source>
@@ -294,7 +294,7 @@
     </message>
     <message>
         <source>day</source>
-        <translation>dzien</translation>
+        <translation>dzień</translation>
     </message>
     <message>
         <source>weeks</source>
@@ -302,15 +302,15 @@
     </message>
     <message>
         <source>week</source>
-        <translation>tydzien</translation>
+        <translation>tydzień</translation>
     </message>
     <message>
         <source>months</source>
-        <translation>miesiecy</translation>
+        <translation>miesięcy</translation>
     </message>
     <message>
         <source>month</source>
-        <translation>miesiac</translation>
+        <translation>miesiąc</translation>
     </message>
     <message>
         <source>years</source>
@@ -340,11 +340,11 @@ i</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation>dzien (dni)</translation>
+        <translation>dzień (dni)</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation>Powtarzaj uzywajac</translation>
+        <translation>Powtarzaj używając</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -356,7 +356,7 @@ i</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation>Sro</translation>
+        <translation>Śro</translation>
     </message>
     <message>
         <source>Thu</source>
@@ -364,7 +364,7 @@ i</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation>Pia</translation>
+        <translation>Pią</translation>
     </message>
     <message>
         <source>Sat</source>
@@ -376,7 +376,7 @@ i</translation>
     </message>
     <message>
         <source>week(s)</source>
-        <translation>tydzien(nie)</translation>
+        <translation>tydzień(dnie)</translation>
     </message>
     <message>
         <source>Repeat By</source>
@@ -384,7 +384,7 @@ i</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Dzien</translation>
+        <translation>Dzień</translation>
     </message>
     <message>
         <source>Date</source>
@@ -392,7 +392,7 @@ i</translation>
     </message>
     <message>
         <source>month(s)</source>
-        <translation>Mesiac(e)</translation>
+        <translation>mesiąc(e)</translation>
     </message>
     <message>
         <source>year(s)</source>
@@ -404,7 +404,7 @@ i</translation>
     </message>
     <message>
         <source>on </source>
-        <translation>uzywajac</translation>
+        <translation>używając</translation>
     </message>
 </context>
 <context>
@@ -434,7 +434,7 @@ i</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation>Postep:</translation>
+        <translation>Postęp:</translation>
     </message>
     <message>
         <source>Deadline:</source>
@@ -446,7 +446,7 @@ i</translation>
     </message>
     <message>
         <source>Default Email: </source>
-        <translation>Domyslny e-mail:</translation>
+        <translation>Domyślny e-mail:</translation>
     </message>
     <message>
         <source>Office: </source>
@@ -454,23 +454,23 @@ i</translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation>Firma - WWW:</translation>
+        <translation>WWW firma:</translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation>Firma - telefon:</translation>
+        <translation>Tel. firma:</translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation>Firma - fax:</translation>
+        <translation>Fax firma:</translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation>Firma - komorka:</translation>
+        <translation>Tel. kom. firma:</translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation>Firma - pager:</translation>
+        <translation>Pager firma:</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
@@ -478,23 +478,23 @@ i</translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation>Dom - telefon:</translation>
+        <translation>Tel. dom:</translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation>Dom - fax:</translation>
+        <translation>Fax dom:</translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation>Komorka:</translation>
+        <translation>Tel. kom. dom:</translation>
     </message>
     <message>
         <source>All Emails: </source>
-        <translation>Adery e-mail:</translation>
+        <translation>Adresy e-mail:</translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation>Zawod:</translation>
+        <translation>Zawód:</translation>
     </message>
     <message>
         <source>Assistant: </source>
@@ -502,11 +502,11 @@ i</translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation>Menedzer:</translation>
+        <translation>Menadżer:</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Mezczyzna</translation>
+        <translation>Mężczyzna</translation>
     </message>
     <message>
         <source>Female</source>
@@ -514,7 +514,7 @@ i</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation>Plec:</translation>
+        <translation>Płeć:</translation>
     </message>
     <message>
         <source>Spouse: </source>
@@ -542,7 +542,7 @@ i</translation>
     </message>
     <message>
         <source>Start:</source>
-        <translation>Poczatek:</translation>
+        <translation>Początek:</translation>
     </message>
     <message>
         <source>End:</source>
@@ -558,11 +558,11 @@ i</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
-        <translation>Kazdy %1 %2</translation>
+        <translation>%1 %2 każdego</translation>
     </message>
     <message>
         <source>The %1 every </source>
-        <translation>Kazdy %1</translation>
+        <translation>%1 każdego</translation>
     </message>
     <message>
         <source>Every </source>
@@ -570,7 +570,7 @@ i</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation>Poniedzialek</translation>
+        <translation>Poniedziałek</translation>
     </message>
     <message>
         <source>Tuesday</source>
@@ -578,7 +578,7 @@ i</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation>Sroda</translation>
+        <translation>Środa</translation>
     </message>
     <message>
         <source>Thursday</source>
@@ -586,7 +586,7 @@ i</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation>Piatek</translation>
+        <translation>Piątek</translation>
     </message>
     <message>
         <source>Saturday</source>
@@ -634,7 +634,7 @@ i</translation>
     </message>
     <message>
         <source>This is an all day event</source>
-        <translation>Zdarzenie calodniowe</translation>
+        <translation>Zdarzenie całodobowe</translation>
     </message>
     <message>
         <source>This is a multiple day event</source>
@@ -650,191 +650,191 @@ i</translation>
     </message>
     <message>
         <source>The %1 %2 of every</source>
-        <translation>%1 %2 kazdego</translation>
+        <translation>%1 %2 każdego</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Opis:</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;b&gt;Adres służbowy:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;b&gt;Adres domowy:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>User Id</source>
-        <translation type="unfinished"></translation>
+        <translation>ID użytkownika</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Tytuł</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Imię</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Drugie imię</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwisko</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Przyrostek</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz jako</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Tytuł służbowy</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation type="unfinished"></translation>
+        <translation>Dział</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation type="unfinished"></translation>
+        <translation>Firma</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Tel. firma</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax firma</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Tel. kom. firma</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Domyślny e-mail</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresy e-mail</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Tel. dom</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax dom</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Tel. kom. dom</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Ulica firma</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="unfinished"></translation>
+        <translation>Miasto firma</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="unfinished"></translation>
+        <translation>Region firma</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Kod poczt. firma</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Kraj firma</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="unfinished"></translation>
+        <translation>Pager firma</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
+        <translation>WWW firma</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Biuro</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>Zawód</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>Asystent</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Menadżer</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Ulica dom</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="unfinished"></translation>
+        <translation>Miasto dom</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="unfinished"></translation>
+        <translation>Region dom</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Kod poczt. dom</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Kraj dom</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Strona domowa</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Partner</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Płeć</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Urodziny</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Rocznica</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Przydomek</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzieci</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notatki</translation>
     </message>
 </context>
 <context>
