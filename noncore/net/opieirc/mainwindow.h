@@ -35,6 +35,7 @@ public:
 //    IRCTabWidget getTabWidget();
     void addTab(IRCTab *tab);
     void killTab(IRCTab *tab);
+    static QString appName() { return QString::fromLatin1("opieirc"); }
 signals:
     void updateScroll();
 protected slots:
