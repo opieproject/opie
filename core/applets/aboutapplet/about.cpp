@@ -1,19 +1,20 @@
 #include "about.h"
-#include "dialog.h"
+#include "widget.h"
 
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
-#include <qapplication.h>
 #include <qlabel.h>
 
 AboutApplet::AboutApplet ( )
-        : QObject ( 0, "AboutApplet" )
+        : QObject ( 0, "AboutApplet" ), m_ad( 0l )
 {}
 
 AboutApplet::~AboutApplet ( )
-{}
+{
+    delete m_ad;
+}
 
 int AboutApplet::position ( ) const
 {
@@ -57,13 +58,10 @@ QPopupMenu *AboutApplet::popup ( QWidget * ) const
 
 void AboutApplet::activated()
 {
-    AboutDialog* d = new AboutDialog( qApp->mainWidget(), "aboutDialog", true );
-    if ( qApp->desktop()->width() == 240 )
-    {
-        d->logo->hide();
-        d->showMaximized();
-    }
-    d->exec();
+    if ( !m_ad )
+        m_ad = new AboutWidget( 0, "aboutDialog" );
+
+    QPEApplication::showWidget( m_ad );
 }
 
 QRESULT AboutApplet::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )

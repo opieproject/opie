@@ -3,4 +3,6 @@ Makefile*
 .obj
 dialog.cpp
 dialog.h
+widget.h
+widget.cpp
 

@@ -1,0 +1,217 @@
+<!DOCTYPE UI><UI>
+<class>AboutWidget</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>AboutWidget</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>394</width>
+            <height>210</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>About</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>2</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>1</number>
+        </property>
+        <widget row="0"  column="0"  rowspan="1"  colspan="2" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.1.6&lt;/b&gt;&lt;/center&gt;</string>
+            </property>
+        </widget>
+        <widget row="1"  column="1" >
+            <class>QTabWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>tab</cstring>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>About</string>
+                </attribute>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>1</number>
+                    </property>
+                    <widget>
+                        <class>QTextBrowser</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextBrowser1</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&lt;p&gt;
+The &lt;b&gt;Open Palmtop Integrated Environment&lt;/b&gt; is written and maintained by the Opie Team, a world-wide network of software engineers committed to free software development.
+&lt;/p&gt;
+&lt;p&gt;
+No single group, company or organization controls the Opie source code. Everyone is welcome to contribute to Opie.
+&lt;/p&gt;
+&lt;p&gt;
+Visit &lt;i&gt;http://opie.handhelds.org&lt;/i&gt; for more information on the Opie Project.
+&lt;/p&gt;</string>
+                        </property>
+                        <property stdset="1">
+                            <name>textFormat</name>
+                            <enum>RichText</enum>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Authors</string>
+                </attribute>
+                <hbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>1</number>
+                    </property>
+                    <widget>
+                        <class>QTextBrowser</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextBrowser2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&lt;p&gt;
+&lt;b&gt;Rajko 'alwin' Albrecht&lt;/b&gt; (alwin@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Stefan 'eilers' Eilers&lt;/b&gt; (eilers@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Holger 'Zecke' Freyther&lt;/b&gt; (zecke@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Chris 'Kergoth' Larson&lt;/b&gt; (kergoth@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Michael 'Mickey' Lauer&lt;/b&gt; (mickeyl@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Lorn 'ljp' Potter&lt;/b&gt; (ljp@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Max 'Harlekin' Reiss&lt;/b&gt; (harlekin@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Andreas 'ar' Richter&lt;/b&gt; (ar@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Dan 'drw' Williams&lt;/b&gt; (drw@handhelds.org)&lt;/tt&gt;&lt;br/&gt;
+&lt;/p&gt;</string>
+                        </property>
+                    </widget>
+                </hbox>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Report</string>
+                </attribute>
+                <hbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>1</number>
+                    </property>
+                    <widget>
+                        <class>QTextBrowser</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextBrowser3</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&lt;p&gt;Software can always be improved, and the Opie Team is ready to do so. However, you - the user - must tell us when something does not work as expected or could be done better.&lt;/p&gt;
+&lt;p&gt;The Open Palmtop Integrated Environment has a bug tracking system. Visit &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; to report bugs.&lt;/p&gt;
+&lt;p&gt;If you have a suggestion for improvement then you are welcome to use the bug tracking system to register your wish. Make sure you use the severity called "Feature Wish".&lt;/p&gt;</string>
+                        </property>
+                    </widget>
+                </hbox>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Join</string>
+                </attribute>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>1</number>
+                    </property>
+                    <widget>
+                        <class>QTextBrowser</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextBrowser4</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&lt;p&gt;You don't have to be a software developer to be a member of the Opie Team. You can join the national teams that translate program interfaces. You can provide graphics, themes, sounds and improved documentation. You decide!&lt;/p&gt;
+&lt;p&gt;Visit &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; for information on some projects in which you can participate.&lt;/p&gt;
+&lt;p&gt;If you need more information or documentation, then a visit to &lt;i&gt;http://opie.handhelds.org/&lt;/i&gt; will provide you with what you need.&lt;/p&gt;</string>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
+        </widget>
+    </grid>
+</widget>
+</UI>

@@ -23,6 +23,7 @@
 #include <qpe/menuappletinterface.h>
 #include <qobject.h>
 
+class AboutWidget;
 class AboutApplet : public QObject, public MenuAppletInterface
 {
 public:
@@ -43,6 +44,8 @@ public:
 
     virtual void activated ( );
 
+private:
+    AboutWidget *m_ad;
 };
 
 #endif
