@@ -631,24 +631,19 @@ void DateBookDayWidget::setAllDayText( QString &text ) {
 }
 void DateBookDayWidget::setEventText( QString& text ) {
     bool whichClock = dateBook->dayView()->whichClock();
-    text += "<b>" + tr("Time") + "</b>: ";
-    if ( ev.startDate() != ev.date() ) {
-	// multi-day event.  Show start date
-	text += TimeString::longDateString( ev.startDate() );
+    if ( ev.startDate() != ev.endDate() ) {
+        text += "<b>" + tr("Start") + "</b>: ";
+	text += TimeString::timeString( ev.event().start().time(), whichClock, FALSE );
+	text += " - " + TimeString::longDateString( ev.startDate() ) + "<br>";
+        text += "<b>" + tr("End") + "</b>: ";
+	text += TimeString::timeString( ev.event().end().time(), whichClock, FALSE );
+	text += " - " + TimeString::longDateString( ev.endDate() ) + "<br>";
     } else {
-	// Show start time.
+        text += "<b>" + tr("Time") + "</b>: ";
 	text += TimeString::timeString( ev.start(), whichClock, FALSE );
-    }
-
-    text += "<b>" + tr(" - ") + "</b>";
-    if ( ev.endDate() != ev.date() ) {
-	// multi-day event.  Show end date
-	text += TimeString::longDateString( ev.endDate() );
-    } else {
-	// Show end time.
+        text += "<b>" + tr(" - ") + "</b>";
 	text += TimeString::timeString( ev.end(), whichClock, FALSE );
     }
-
 }
 
 DateBookDayWidget::~DateBookDayWidget()
