@@ -3,9 +3,10 @@
 #include "mailtypes.h"
 #include "logindialog.h"
 #include <libetpan/libetpan.h>
+
+#include <opie2/odebug.h>
 #include <qpe/global.h>
 #include <qfile.h>
-//#include <qstring.h>
 
 /* we don't fetch messages larger than 5 MB */
 #define HARD_MSG_SIZE_LIMIT 5242880

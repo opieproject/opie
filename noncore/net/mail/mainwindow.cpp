@@ -4,11 +4,13 @@
 #include <qtimer.h>
 #include <qlayout.h>
 
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 
 #include "defines.h"
 #include "mainwindow.h"
 
+using namespace Opie::Core;
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     : QMainWindow( parent, name, flags )

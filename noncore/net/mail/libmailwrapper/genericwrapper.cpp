@@ -2,6 +2,8 @@
 #include <libetpan/libetpan.h>
 #include "mailtypes.h"
 
+#include <opie2/odebug.h>
+
 using namespace Opie::Core;
 Genericwrapper::Genericwrapper()
     : AbstractMail()

@@ -1,5 +1,9 @@
 #include "statusmail.h"
 
+#include <opie2/odebug.h>
+
+using namespace Opie::Core;
+
 StatusMail::StatusMail(QList<Account>&list)
 {
     currentImapStat.message_count=0;

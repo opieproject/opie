@@ -2,6 +2,10 @@
 
 #include "logindialog.h"
 
+#include <opie2/odebug.h>
+
+using namespace Opie::Core;
+
 LoginDialog::LoginDialog(const QString&user,const QString&pass, QWidget *parent, const char *name, bool modal, WFlags flags )
     : LoginDialogUI( parent, name, modal, flags )
 {

@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <qpe/global.h>
 #include <opie2/oprocess.h>
+#include <opie2/odebug.h>
 
 using namespace Opie::Core;
 MHwrapper::MHwrapper(const QString & mbox_dir,const QString&mbox_name)

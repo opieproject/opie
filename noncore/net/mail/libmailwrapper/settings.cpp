@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <qdir.h>
 
+#include <opie2/odebug.h>
 #include <qpe/config.h>
 
 #include "settings.h"

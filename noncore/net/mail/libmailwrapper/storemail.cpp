@@ -4,7 +4,7 @@
 #include "abstractmail.h"
 
 #include <libetpan/libetpan.h>
-
+#include <opie2/odebug.h>
 #include <qstring.h>
 
 #include <stdlib.h>

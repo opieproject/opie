@@ -1,6 +1,7 @@
 #include <qt.h>
 
 #include <opie2/ofiledialog.h>
+#include <opie2/odebug.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/global.h>

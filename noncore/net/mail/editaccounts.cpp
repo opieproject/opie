@@ -3,6 +3,7 @@
 #include "editaccounts.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
@@ -10,6 +11,8 @@
 #include <qstringlist.h>
 
 #include <libmailwrapper/nntpwrapper.h>
+
+using namespace Opie::Core;
 
 AccountListItem::AccountListItem( QListView *parent, Account *a)
         : QListViewItem( parent )

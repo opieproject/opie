@@ -8,6 +8,7 @@
 
 #include <libetpan/libetpan.h>
 
+#include <opie2/odebug.h>
 
 #define HARD_MSG_SIZE_LIMIT 5242880
 

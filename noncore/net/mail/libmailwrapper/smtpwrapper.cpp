@@ -5,6 +5,7 @@
 #include "mailtypes.h"
 #include "sendmailprogress.h"
 
+#include <opie2/odebug.h>
 #include <qt.h>
 
 #include <qpe/config.h>

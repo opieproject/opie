@@ -4,6 +4,8 @@
 #include <libetpan/libetpan.h>
 #include <qdir.h>
 #include <stdlib.h>
+
+#include <opie2/odebug.h>
 #include <qpe/global.h>
 
 using namespace Opie::Core;

@@ -8,14 +8,17 @@
 #include "selectstore.h"
 #include "selectsmtp.h"
 
-/* OPIE */
 #include <libmailwrapper/smtpwrapper.h>
 #include <libmailwrapper/mailtypes.h>
 #include <libmailwrapper/abstractmail.h>
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
+
+using namespace Opie::Core;
 
 OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
         : MainWindow( parent, name, WStyle_ContextHelp )

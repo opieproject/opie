@@ -6,6 +6,7 @@
 #include <libmailwrapper/abstractmail.h>
 #include <libmailwrapper/mailtypes.h>
 
+#include <opie2/odebug.h>
 #include <opie2/ofiledialog.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
@@ -19,6 +20,8 @@
 #include <qfile.h>
 
 using namespace Opie::Ui;
+using namespace Opie::Core;
+
 AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&desc,const QString&file,
                        const QString&fsize,int num,const QValueList<int>&path)
         : QListViewItem(parent,after),_partNum(num)

@@ -5,7 +5,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/applnk.h>
-
+#include <opie2/odebug.h>
 #include <opie2/odevice.h>
 
 #include <libmailwrapper/settings.h>

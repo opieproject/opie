@@ -3,11 +3,13 @@
 #include "accountitem.h"
 #include "selectstore.h"
 
-/* OPIE */
 #include <libmailwrapper/settings.h>
 #include <libmailwrapper/mailwrapper.h>
 #include <libmailwrapper/mailtypes.h>
 #include <libmailwrapper/abstractmail.h>
+
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */

@@ -5,10 +5,11 @@
 #include "nntpgroupsdlg.h"
 #include "defines.h"
 
-/* OPIE */
 #include <libmailwrapper/mailtypes.h>
 #include <libmailwrapper/abstractmail.h>
 #include <libmailwrapper/mailwrapper.h>
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */

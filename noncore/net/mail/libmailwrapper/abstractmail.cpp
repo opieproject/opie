@@ -5,6 +5,8 @@
 #include "mhwrapper.h"
 #include "mailtypes.h"
 
+#include <opie2/odebug.h>
+
 #include <qfile.h>
 #include <qtextstream.h>
 #include <stdlib.h>

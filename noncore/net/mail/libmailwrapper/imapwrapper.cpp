@@ -2,6 +2,7 @@
 #include <libetpan/libetpan.h>
 #include <qpe/global.h>
 #include <opie2/oapplication.h>
+#include <opie2/odebug.h>
 
 #include "imapwrapper.h"
 #include "mailtypes.h"

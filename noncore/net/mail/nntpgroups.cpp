@@ -1,9 +1,11 @@
 #include "nntpgroups.h"
 
 #include <libmailwrapper/settings.h>
-
+#include <opie2/odebug.h>
 #include <qlistview.h>
 #include <qlineedit.h>
+
+using namespace Opie::Core;
 
 NNTPGroups::NNTPGroups(NNTPaccount *account, QWidget* parent, const char* name, WFlags fl)
     : NNTPGroupsUI(parent,name,fl),subscribedGroups()

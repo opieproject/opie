@@ -3,6 +3,8 @@
 
 #include <libetpan/libetpan.h>
 
+#include <opie2/odebug.h>
+
 #include <qt.h>
 
 using namespace Opie::Core;
