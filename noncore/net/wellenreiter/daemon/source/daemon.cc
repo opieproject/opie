@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.17 2003-02-07 11:35:02 mjm Exp $
+ * $Id: daemon.cc,v 1.18 2003-02-07 17:17:35 max Exp $
  */
 
 #include "config.hh"
@@ -9,22 +9,30 @@
 
 // temporary solution, will be removed soon
 #define MAXCHANNEL 13
+int card_type;
 char sniffer_device[6];
 int channel=0;
 int timedout=1;
 
-static int chanswitch()
+void chanswitch(int blah)
 {
   if(channel >= MAXCHANNEL)
-    channel=1
+  {
+  	channel=1;
+  }
+  else
+  {
+	channel++;
+  }
   card_set_channel(sniffer_device, channel, card_type);
   timedout=0;
+  alarm(1);
 }
 
 /* Main function of wellenreiterd */
 int main(int argc, char **argv)
 {
-  int sock, maxfd, retval, card_type;
+  int sock, maxfd, retval;
   char buffer[WL_SOCKBUF];
   struct pcap_pkthdr header;
   struct sockaddr_in saddr;
@@ -40,15 +48,15 @@ int main(int argc, char **argv)
     usage();
 
   // removed soon, see above
-  SIGNAL(SIGALRM, chanswitch);
-
+  signal(SIGALRM, chanswitch);
+  alarm(1);
   /* Set sniffer device */
   memset(sniffer_device, 0, sizeof(sniffer_device));
   strncpy(sniffer_device, (char *)argv[1], sizeof(sniffer_device) - 1);
 
   /* Set card type */
   card_type = atoi(argv[2]);
-  if(card_type < 1 || card_type > 3)
+  if(card_type < 1 || card_type > 4)
     usage();
 
   if(!card_into_monitormode(&handletopcap, sniffer_device, card_type))
@@ -91,7 +99,6 @@ int main(int argc, char **argv)
 
     // blah
     timedout=1;
-    alarm(1);
 
     /* socket or pcap handle bigger? Will be cleaned up, have to check pcap */
     maxfd = (sock > pcap_fileno(handletopcap) ? sock : pcap_fileno(handletopcap)) + 1;
@@ -150,8 +157,9 @@ void usage(void)
 {
   fprintf(stderr, "Usage: wellenreiter <device> <cardtype>\n"      \
 	  "\t<device>   = Wirelessdevice (e.g. wlan0)\n" \
-	  "\t<cardtype> = Cardtype:\t Cisco\t= 1\n"       \
+	  "\t<cardtype> = Cardtype:\tCisco\t= 1\n"       \
 	  "\t\t\t\tNG\t= 2\n"                             \
-          "\t\t\t\tHOSTAP\t= 3\n");
+          "\t\t\t\tHOSTAP\t= 3\n"			  \
+	  "\t\t\t\tLUCENT\t= 4\n");
   exit(-1);
 }

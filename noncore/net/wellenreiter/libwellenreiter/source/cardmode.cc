@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.12 2003-02-07 10:28:23 max Exp $
+ * $Id: cardmode.cc,v 1.13 2003-02-07 17:18:03 max Exp $
  */
 
 #include "cardmode.hh"
@@ -72,6 +72,10 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
       {
 	  wl_logerr("Could not set %s in raw mode, check cardtype", device);
 	  return 0;
+      }
+      else
+      {
+	  wl_loginfo("Successfully set %s into raw mode",device);
       }
   }
 
@@ -156,7 +160,6 @@ int card_set_promisc_up (const char *device)
 /* Set channel (Wireless frequency) of the device */
 int card_set_channel (const char *device, int channel, int cardtype)
 {
-    
     if (cardtype == CARD_TYPE_CISCO)
     {
     	/* Cisco cards don't need channelswitching */
@@ -167,7 +170,7 @@ int card_set_channel (const char *device, int channel, int cardtype)
     {
 	char lucentreset[63];
         char lucentcmd[62];
-	snprintf(lucentreset, sizeof(lucentreset) -1,"$(which iwpriv) %s card_reset", device);
+	snprintf(lucentreset, sizeof(lucentreset) -1,"$(which iwpriv) %s force_reset", device);
         if (system(lucentreset) != 0)
         {
 	  wl_logerr("Could not reset the card %s",device);
@@ -179,6 +182,8 @@ int card_set_channel (const char *device, int channel, int cardtype)
           wl_logerr("Could not set %s in raw mode, check cardtype", device);
           return 0;
       }
+      wl_loginfo("Channel %d set on interface %s",channel,device);
+      return 1;
     }
    
     /* For undefined situations */

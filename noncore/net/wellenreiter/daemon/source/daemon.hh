@@ -1,4 +1,4 @@
-/* $Id: daemon.hh,v 1.7 2002-12-31 12:38:28 mjm Exp $ */
+/* $Id: daemon.hh,v 1.8 2003-02-07 17:17:35 max Exp $ */
 
 #ifndef DAEMON_HH
 #define DAEMON_HH
@@ -12,6 +12,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <errno.h>
+#include <signal.h>
 
 #include <libwellenreiter/source/wl_sock.hh>
 #include <libwellenreiter/source/wl_log.hh>
