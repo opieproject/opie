@@ -49,11 +49,11 @@ public:
                OPackageManager::Status status = OPackageManager::All,
                const QString &category = 0x0 );
 
-    const QString &name()
+    QString name()
         { return m_nameCB->isChecked() ? m_name->text() : QString::null; };
-    const QString &server()
+    QString server()
         { return m_serverCB->isChecked() ? m_server->currentText() : QString::null; };
-    const QString &destination()
+    QString destination()
         { return m_destCB->isChecked() ? m_destination->currentText() : QString::null; };
     OPackageManager::Status status()
         {
@@ -68,10 +68,10 @@ public:
                 else if ( m_status->currentText() == tr( "Updated" ) )
                     return OPackageManager::Updated;
             }
-            else
-                return OPackageManager::NotDefined;
+
+            return OPackageManager::NotDefined;
         };
-    const QString &category()
+    QString category()
         { return m_categoryCB->isChecked() ? m_category->currentText() : QString::null; };
 
 private:
