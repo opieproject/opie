@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Update Filelist</source>
-        <translation type="unfinished"></translation>
+        <translation>Mettre à jour la liste des fichiers</translation>
     </message>
 </context>
 </TS>

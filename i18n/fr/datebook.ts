@@ -98,7 +98,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>error box</source>
-        <translation type="unfinished"></translation>
+        <translation>boîte d&apos;erreur</translation>
     </message>
 </context>
 <context>
@@ -199,7 +199,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation type="unfinished"></translation>
+        <translation>Transmettre cette occurence</translation>
     </message>
 </context>
 <context>
@@ -370,7 +370,7 @@ Quitter ?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="unfinished"></translation>
+        <translation>LMMJVSDL</translation>
     </message>
 </context>
 <context>
@@ -571,7 +571,7 @@ Minutes</translation>
     <name>DatebookAlldayDisp</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -737,7 +737,7 @@ et</translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>on</translation>
     </message>
 </context>
 <context>

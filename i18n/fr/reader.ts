@@ -4,7 +4,7 @@
     <name>CBarPrefs</name>
     <message>
         <source>Toolbar Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de la barre de tâche</translation>
     </message>
     <message>
         <source>File</source>
@@ -39,47 +39,47 @@
     </message>
     <message>
         <source>&lt;Nothing&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;rien&gt;</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir un fichier</translation>
     </message>
     <message>
         <source>Autoscroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Défilement auto</translation>
     </message>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoris</translation>
     </message>
     <message>
         <source>Annotate</source>
-        <translation type="unfinished">Annoter</translation>
+        <translation>Annoter</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished">Plein écran</translation>
+        <translation>Plein écran</translation>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom avant</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom arrière</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Revenir</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Avancer</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Accueil</translation>
     </message>
     <message>
         <source>Page up</source>

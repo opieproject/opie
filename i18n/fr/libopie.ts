@@ -643,15 +643,15 @@ et</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Adresse bureau:&lt;b&gt;</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Adresse domicile:&lt;b&gt;</translation>
     </message>
     <message>
         <source>The %1 %2 of every</source>
-        <translation type="unfinished">Le %1 %2 de tous les</translation>
+        <translation>Le %1 %2 de tous les</translation>
     </message>
 </context>
 <context>
