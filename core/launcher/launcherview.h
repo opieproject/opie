@@ -146,7 +146,7 @@ protected slots:
     virtual void sendRequest();
 
 signals:
-    void sig_Thumbnail(const QPixmap&,const QString&);
+    void sig_Thumbnail(const QPixmap&,const QString&,int);
 
 protected:
     PixmapInfos m_inThumbNail;
@@ -216,6 +216,7 @@ public:
 
     void setSortMethod( SortMethod m );
     int compare(const AppLnk* a, const AppLnk* b);
+    void requestEyePix(const LauncherItem*which);
 
 protected:
     void timerEvent( QTimerEvent *te );
@@ -228,7 +229,7 @@ protected:
     void checkCallback();
 
 protected slots:
-    void setEyePixmap(const QPixmap&,const QString&);
+    void setEyePixmap(const QPixmap&,const QString&,int width);
 
 private:
     QList<AppLnk> hidden;

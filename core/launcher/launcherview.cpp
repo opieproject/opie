@@ -73,6 +73,12 @@ static void cleanup_cache()
 class LauncherItem : public QIconViewItem
 {
 public:
+    enum iconstate_t {
+        BASE_ICON,
+        WAITING_ICON,
+        EYE_ICON
+    };
+
     LauncherItem( QIconView *parent, AppLnk* applnk, bool bigIcon=TRUE );
     ~LauncherItem();
 
@@ -88,6 +94,8 @@ public:
 
     void setBusyIndicatorType ( BusyIndicatorType t ) { busyType = t; }
     void setEyePixmap(const QPixmap&aIcon);
+    virtual QPixmap*pixmap()const;
+
 protected:
     bool isBigIcon;
     int iteration;
@@ -99,22 +107,8 @@ private:
     int psize;
     QPixmap m_iPixmap;
     bool m_EyeImage;
+    iconstate_t m_EyeImageSet;
 };
-
-
-bool LauncherView::bsy=FALSE;
-
-void LauncherView::setBusy(bool on)
-{
-    icons->setBusy(on);
-}
-
-void LauncherView::setBusyIndicatorType( const QString& type ) {
-    if ( type. lower ( ) == "animated" )
-    icons->setBusyIndicatorType(  BIT_Animated  ) ;
-    else
-    icons->setBusyIndicatorType(  BIT_Normal  ) ;
-}
 
 LauncherItem::LauncherItem( QIconView *parent, AppLnk *applnk, bool bigIcon )
     : QIconViewItem( parent, applnk->name(),
@@ -124,7 +118,8 @@ LauncherItem::LauncherItem( QIconView *parent, AppLnk *applnk, bool bigIcon )
     app(applnk), // Takes ownership
     psize( (bigIcon ? applnk->bigPixmap().width() :applnk->pixmap().width() ) ),
     m_iPixmap(),
-    m_EyeImage(false)
+    m_EyeImage(false),
+    m_EyeImageSet(BASE_ICON)
 {
     if (applnk->type().lower().startsWith("image/") && applnk->exec().contains("opie-eye",false)) {
         m_EyeImage = true;
@@ -140,6 +135,15 @@ LauncherItem::~LauncherItem()
     delete app;
 }
 
+QPixmap*LauncherItem::pixmap()const
+{
+    if (m_EyeImage && m_EyeImageSet == BASE_ICON) {
+        LauncherIconView* liv = (LauncherIconView*)iconView();
+        liv->requestEyePix(this);
+    }
+    return QIconViewItem::pixmap();
+}
+
 int LauncherItem::compare ( QIconViewItem * i ) const
 {
     LauncherIconView* view = (LauncherIconView*)iconView();
@@ -152,21 +156,19 @@ void LauncherItem::paintItem( QPainter *p, const QColorGroup &cg )
     QBrush oldBrush( liv->itemTextBackground() );
     QColorGroup mycg( cg );
     if ( liv->currentItem() == this ) {
-    liv->setItemTextBackground( cg.brush( QColorGroup::Highlight ) );
-    mycg.setColor( QColorGroup::Text, cg.color( QColorGroup::HighlightedText ) );
+        liv->setItemTextBackground( cg.brush( QColorGroup::Highlight ) );
+        mycg.setColor( QColorGroup::Text, cg.color( QColorGroup::HighlightedText ) );
     }
 
     QIconViewItem::paintItem(p,mycg);
 
     // Paint animation overlay
     if ( liv->busyItem() == this )
-    paintAnimatedIcon(p);
+        paintAnimatedIcon(p);
 
     if ( liv->currentItem() == this )
-    liv->setItemTextBackground( oldBrush );
+        liv->setItemTextBackground( oldBrush );
 }
-
-
 
 void LauncherItem::paintAnimatedIcon( QPainter *p )
 {
@@ -255,6 +257,7 @@ void LauncherItem::setEyePixmap(const QPixmap&aIcon)
     if (!isEyeImage()) return;
     m_iPixmap = aIcon;
     setPixmap(aIcon);
+    m_EyeImageSet = EYE_ICON;
 }
 
 //===========================================================================
@@ -421,11 +424,12 @@ LauncherItem*LauncherIconView::findDocItem(const QString&fname)
     return item;
 }
 
-void LauncherIconView::setEyePixmap(const QPixmap&aPixmap,const QString&aFile)
+void LauncherIconView::setEyePixmap(const QPixmap&aPixmap,const QString&aFile,int width)
 {
+    int s = ( bigIcns ) ? AppLnk::bigIconSize() : AppLnk::smallIconSize();
+    if (s!=width) return;
     LauncherItem*item = findDocItem(aFile);
     if (!item||!item->isEyeImage()) return;
-
     item->setEyePixmap(aPixmap);
 }
 
@@ -435,8 +439,8 @@ void LauncherIconView::checkCallback()
         return;
     }
     m_EyeCallBack = new LauncherThumbReceiver();
-    connect(m_EyeCallBack,SIGNAL(sig_Thumbnail(const QPixmap&,const QString&)),
-        this,SLOT(setEyePixmap(const QPixmap&,const QString&)));
+    connect(m_EyeCallBack,SIGNAL(sig_Thumbnail(const QPixmap&,const QString&,int)),
+        this,SLOT(setEyePixmap(const QPixmap&,const QString&,int)));
 }
 
 void LauncherIconView::addCheckItem(AppLnk* app)
@@ -444,8 +448,16 @@ void LauncherIconView::addCheckItem(AppLnk* app)
     LauncherItem*item = new LauncherItem( this, app, bigIcns );
     if (item->isEyeImage()) {
         checkCallback();
+    }
+}
+
+void LauncherIconView::requestEyePix(const LauncherItem*item)
+{
+    if (!item) return;
+    if (item->isEyeImage()) {
+        checkCallback();
         int s = ( bigIcns ) ? AppLnk::bigIconSize() : AppLnk::smallIconSize();
-        m_EyeCallBack->requestThumb(app->file(),s,s);
+        m_EyeCallBack->requestThumb(item->appLnk()->file(),s,s);
     }
 }
 
@@ -631,6 +643,21 @@ LauncherView::~LauncherView()
 {
     if ( bgCache && bgCache->contains( bgName ) )
     (*bgCache)[bgName]->ref--;
+}
+
+
+bool LauncherView::bsy=FALSE;
+
+void LauncherView::setBusy(bool on)
+{
+    icons->setBusy(on);
+}
+
+void LauncherView::setBusyIndicatorType( const QString& type ) {
+    if ( type. lower ( ) == "animated" )
+    icons->setBusyIndicatorType(  BIT_Animated  ) ;
+    else
+    icons->setBusyIndicatorType(  BIT_Normal  ) ;
 }
 
 void LauncherView::hideIcons()
@@ -1053,6 +1080,10 @@ void LauncherView::flushBgCache()
     }
 }
 
+/*
+ * Launcherthumbnail handling for image files
+ */
+
 /* special image handling - based on opie eye */
 QDataStream &operator>>( QDataStream& s, PixmapInfo& inf ) {
     s >> inf.file >> inf.pixmap >> inf.width >> inf.height;
@@ -1093,7 +1124,7 @@ void LauncherThumbReceiver::recieve( const QCString&str, const QByteArray&at )
 
     for ( PixmapInfos::Iterator it = pixinfos.begin(); it != pixinfos.end(); ++it ) {
         odebug << "Pixinfos: " << (*it).file << " - " << (*it).width << oendl;
-        emit sig_Thumbnail((*it).pixmap,(*it).file);
+        emit sig_Thumbnail((*it).pixmap,(*it).file,(*it).width);
     }
 }
 
@@ -1104,7 +1135,7 @@ void LauncherThumbReceiver::requestThumb(const QString&file,int width,int height
     rItem.width = width;
     rItem.height = height;
     m_inThumbNail.append(rItem);
-    QTimer::singleShot(2, this, SLOT(sendRequest()));
+    QTimer::singleShot(0, this, SLOT(sendRequest()));
 }
 
 void LauncherThumbReceiver::sendRequest()
@@ -1112,6 +1143,6 @@ void LauncherThumbReceiver::sendRequest()
     if (m_inThumbNail.count()>0) {
         QCopEnvelope env("QPE/opie-eye_slave", "pixmapInfos(PixmapInfos)" );
         env << m_inThumbNail;
+        m_inThumbNail.clear();
     }
-    m_inThumbNail.clear();
 }
