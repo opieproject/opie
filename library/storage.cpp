@@ -1,4 +1,5 @@
 /**********************************************************************
+** Copyright (C) Holger 'zecke' Freyther <freyther@kde.org>
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
 ** This file is part of Qtopia Environment.
@@ -23,6 +24,7 @@
 #include <qpe/custom.h>
 #endif
 
+#include <qfile.h>
 #include <qtimer.h>
 #include <qcopchannel_qws.h>
 
@@ -84,7 +86,8 @@ void StorageInfo::cardMessage( const QCString& msg, const QByteArray& )
     if ( msg == "mtabChanged()" )
 	update();
 }
-
+// cause of the lack of a d pointer we need
+// to store informations in a config file :(
 void StorageInfo::update()
 {
     //qDebug("StorageInfo::updating");

@@ -48,6 +48,28 @@
 #include <qwindowsystem_qws.h> // for qwsServer
 #include <qdatetime.h>
 
+#include <qfile.h>
+
+namespace {
+  // checks if the storage should be searched
+  bool checkStorage(const QString &path ){ // this is a small Config replacement cause config is too limited -zecke
+    QFile file(path );
+    if(!file.open(IO_ReadOnly ) )
+       return true;
+    
+    QByteArray array = file.readAll();
+    QStringList list = QStringList::split('\n', QString( array ) );
+    for(QStringList::Iterator it = list.begin(); it != list.end(); ++it ){
+      if( (*it).startsWith("autocheck = 0" ) ){
+	return true;
+      }else if( (*it).startsWith("autocheck = 1" ) ){
+	return false;
+      }
+    }
+    return true;
+  }
+}
+
 //#include "quickexec_p.h"
 
 class Emitter : public QObject {
@@ -638,11 +660,14 @@ void Global::findDocuments(DocLnkSet* folder, const QString &mimefilter)
     const QList<FileSystem> &fs = storage.fileSystems();
     QListIterator<FileSystem> it ( fs );
     for ( ; it.current(); ++it ) {
-	if ( (*it)->isRemovable() ) {
-	    QString path = (*it)->path();
-	    DocLnkSet ide( path, mimefilter );
-	    folder->appendFrom(ide);
-	}
+      if ( (*it)->isRemovable() ) { // let's find out  if we should search on it
+	// this is a candidate look at the cf and see if we should search on it 
+	QString path = (*it)->path();
+	if( !checkStorage((*it)->path() + "/.opiestorage.cf" ) )
+	  continue;
+	DocLnkSet ide( path, mimefilter );
+	folder->appendFrom(ide);
+      }
     }
 }
 
