@@ -375,8 +375,8 @@ void CanvasCardGame::readPile( Config& cfg, CardPile *pile, QString name, int& h
 
         card = cards[ val ];
 	card->setFace(facing);
-	pile->addCardToTop(card);
-	card->setCardPile(pile);
+	card->setCardPile(pile);		// cam: setCardPile muss vor addCardToTop passieren
+	pile->addCardToTop(card);		//      weil sonst absturz wg cardAddedToTop
 	QPoint p = pile->getCardPos( card );
 	card->setPos( p.x(), p.y(), highestZ );
 	card->showCard();

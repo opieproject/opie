@@ -27,7 +27,7 @@
 #include <qlist.h>
 
 
-CardPile::CardPile(int x, int y) : pileX(x), pileY(y), dealing(FALSE) {
+CardPile::CardPile(int x, int y) : pileX(x), pileY(y), dealing(FALSE), PileResize(FALSE) {
     pileWidth = 0;
     pileHeight = 0;
     pileNextX = pileX;
@@ -35,6 +35,7 @@ CardPile::CardPile(int x, int y) : pileX(x), pileY(y), dealing(FALSE) {
     pileCenterX = x + pileWidth / 2;
     pileCenterY = y + pileHeight / 2;
     pileRadius = (pileWidth > pileHeight) ? pileWidth : pileHeight;
+    pileOffsetDown = 13;
 }
 
 

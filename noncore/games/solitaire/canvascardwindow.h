@@ -47,6 +47,7 @@ private slots:
     void initPatience();
     void initChicane();
     void initHarp();
+    void initTeeclub();
 
 protected:
     virtual void resizeEvent(QResizeEvent *e);

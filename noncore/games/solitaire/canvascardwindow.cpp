@@ -23,6 +23,7 @@
 #include "freecellcardgame.h"
 #include "chicanecardgame.h"
 #include "harpcardgame.h"
+#include "teeclubcardgame.h"
 
 #include <qpe/resource.h>
 
@@ -63,6 +64,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     file->insertItem(tr("Freecell"), this, SLOT(initFreecell()), CTRL+Key_F);
     file->insertItem(tr("Chicane"), this, SLOT(initChicane()), CTRL+Key_F);
     file->insertItem(tr("Harp"), this, SLOT(initHarp()), CTRL+Key_F);
+    file->insertItem(tr("Teeclub"), this, SLOT(initTeeclub()), CTRL+Key_F);
     menu->insertItem(tr("&Game"), file);
     
     menu->insertSeparator();
@@ -87,6 +89,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     file->insertItem(tr("Freecell"), this, SLOT(initFreecell()));
     file->insertItem(tr("Chicane"), this, SLOT(initChicane()));
     file->insertItem(tr("Harp"), this, SLOT(initHarp()));
+    file->insertItem(tr("Teeclub"), this, SLOT(initTeeclub()));
     menu->insertItem(tr("Play"), file);
     
     menu->insertSeparator();
@@ -129,7 +132,6 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
 	cardGame->setNumberToDraw(1);
 	setCaption(tr("Chicane"));
 	setCentralWidget(cardGame);
-	//cardGame->newGame(); // Until we know how to handle reading freecell config
 	cardGame->readConfig( cfg );
 	setCardBacks();
     } else if ( gameType == 3 ) {
@@ -137,7 +139,13 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
 	cardGame->setNumberToDraw(1);
 	setCaption(tr("Harp"));
 	setCentralWidget(cardGame);
-	//cardGame->newGame(); // Until we know how to handle reading freecell config
+	cardGame->readConfig( cfg );
+	setCardBacks();
+    } else if ( gameType == 4 ) {
+	cardGame = new TeeclubCardGame( &canvas, snapOn, this );
+	cardGame->setNumberToDraw(1);
+	setCaption(tr("Teeclub"));
+	setCentralWidget(cardGame);
 	cardGame->readConfig( cfg );
 	setCardBacks();
     } else {
@@ -232,6 +240,22 @@ void CanvasCardWindow::initHarp()
     cardGame->newGame();
     setCardBacks();
 }
+
+
+void CanvasCardWindow::initTeeclub()
+{
+    // Create New Game
+    if ( cardGame ) {
+        delete cardGame;
+    }
+    cardGame = new TeeclubCardGame( &canvas, snapOn, this );
+    cardGame->setNumberToDraw(1); 
+    gameType = 4;
+    setCaption(tr("Teeclub"));
+    setCentralWidget(cardGame);
+    cardGame->newGame();
+    setCardBacks();
+}   
 
 
 void CanvasCardWindow::snapToggle()

@@ -51,6 +51,13 @@ public:
     int getNextY() { return pileNextY; }
     int getWidth() { return pileWidth; }
     int getHeight() { return pileHeight; }
+    int getOffsetDown() { return pileOffsetDown; }
+    int getAnzCardsInPile() { 
+	int anz=0;
+	Card *card = cardOnBottom();
+	while (card != NULL) { anz++; card = cardInfront(card); }
+	return anz;
+    }
 
     void setX(int x) { pileX = x; }
     void setY(int y) { pileY = y; }
@@ -58,10 +65,15 @@ public:
     void setNextY(int y) { pileNextY = y; }
     void setWidth(int width) { pileWidth = width; }
     void setHeight(int height) { pileHeight = height; }
+    void setOffsetDown(int down) { pileOffsetDown = down; }
     
     void beginDealing() { dealing = TRUE; }
     void endDealing() { dealing = FALSE; }
     bool isDealing() { return dealing; }
+
+    void beginPileResize() { PileResize = TRUE; }
+    void endPileResize() { PileResize = FALSE; }
+    bool isPileResize() { return PileResize; }
     
     int distanceFromPile(int x, int y);
     int distanceFromNextPos(int x, int y);
@@ -92,8 +104,10 @@ protected:
     int pileWidth, pileHeight;
     int pileCenterX, pileCenterY;
     int pileRadius;
+    int pileOffsetDown;
 private:
     bool dealing;
+    bool PileResize;
 };
 
 
