@@ -1,5 +1,7 @@
 #include "osqltable.h"
 
+using namespace Opie::DB;
+
 OSQLTableItem::OSQLTableItem() {}
 OSQLTableItem::OSQLTableItem( enum Type type,
                               const QString& field,

@@ -5,6 +5,8 @@
 #include <qvaluelist.h>
 #include <qvariant.h>
 
+namespace Opie {
+namespace DB {
 /**
  * OSQLTableItem saves one column of a complete
  * table
@@ -90,6 +92,11 @@ public:
 private:
     QString m_table;
     OSQLTableItem::ValueList m_list;
+    class Private;
+    Private *d;
 };
+
+}
+}
 
 #endif

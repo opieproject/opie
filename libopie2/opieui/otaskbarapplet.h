@@ -33,11 +33,20 @@
 #define OTASKBARAPPLET_H
 
 #include <qpe/taskbarappletinterface.h>
+#include <qpe/qcom.h>
 
+#include <qwidget.h>
+
+class QMouseEvent;
+
+namespace Opie {
+namespace Ui   {
+namespace Private {
 /*======================================================================================
  * OTaskbarAppletWrapper
  *======================================================================================*/
 
+class OTaskbarAppletWrapperPrivate;
 template<class T> class OTaskbarAppletWrapper : public TaskbarAppletInterface
 {
   public:
@@ -80,14 +89,10 @@ template<class T> class OTaskbarAppletWrapper : public TaskbarAppletInterface
 
   private:
     T* _applet;
+    OTaskbarAppletWrapperPrivate *d;
 };
 
-#include <qframe.h>
-#include <qwidget.h>
-#include <qpe/qpeapplication.h>
-
-class QMouseEvent;
-
+}
 /*======================================================================================
  * OTaskbarApplet
  *======================================================================================*/
@@ -103,28 +108,22 @@ class QMouseEvent;
 class OTaskbarApplet : public QWidget
 {
   public:
-    OTaskbarApplet( QWidget* parent, const char* name = 0 ):QWidget( parent, name )
-    {
-        setFixedHeight( 18 );
-        setFixedWidth( 14 );
-    }
-
-    virtual ~OTaskbarApplet()
-    {
-    }
+    OTaskbarApplet( QWidget* parent, const char* name = 0 );
+    virtual ~OTaskbarApplet();
 
   protected:
-    virtual void popup( QWidget* widget )
-    {
-        QPoint curPos = mapToGlobal( QPoint( 0, 0 ) );
-        int w = widget->sizeHint().width();
-        int x = curPos.x() - (w/2 );
-        if ( (x+w) > QPEApplication::desktop()->width() )
-            x = QPEApplication::desktop()->width()-w;
-        widget->move( x, curPos.y()-widget->sizeHint().height() );
-        widget->show();
-    }
+    virtual void popup( QWidget* widget );
+private:
+    class Private;
+    Private *d;
 };
+}
+}
+
+#define EXPORT_OPIE_APPLET_v1(  AppLet ) \
+    Q_EXPORT_INTERFACE() { \
+    Q_CREATE_INSTANCE(  Opie::Ui::Private::OTaskbarAppletWrapper<AppLet> ) \
+    }
 
 #endif
 

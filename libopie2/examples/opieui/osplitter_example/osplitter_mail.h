@@ -16,12 +16,10 @@
 
 #include <opie2/osplitter.h>
 
-using Opie::OSplitter;
 
 class Folder;
 class QLabel;
 
-class OSplitter;
 class ListViews : public QWidget {
     Q_OBJECT
 public:
@@ -39,8 +37,8 @@ private:
     QList<QListView> m_folders; // used in tab mode
     QList<Folder> m_lstFolders;
     bool m_mode : 1; // bitfield
-    OSplitter *m_splitter;
-    OSplitter *splitti;
+    Opie::Ui::OSplitter *m_splitter;
+    Opie::Ui::OSplitter *splitti;
     QListView *folder1;
 #if 0
 //private slots:

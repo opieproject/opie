@@ -61,6 +61,11 @@ _;:,     .>    :=|.         This program is free software; you can
 #include <grp.h>
 #endif
 
+using namespace Opie::Core::Private;
+
+namespace Opie {
+namespace Core {
+namespace Private {
 class OProcessPrivate
 {
 public:
@@ -72,7 +77,7 @@ public:
     QString wd;
     QCString shell;
 };
-
+}
 
 OProcess::OProcess( QObject *parent, const char *name )
         : QObject( parent, name )
@@ -940,4 +945,7 @@ int OProcess::processPID( const QString& process )
         //qDebug( "process '%s' not found", (const char*) process );
         return 0;
     }
+}
+
+}
 }

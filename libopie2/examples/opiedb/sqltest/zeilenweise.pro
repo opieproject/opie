@@ -4,7 +4,7 @@ HEADERS		=
 SOURCES		= zeilenweise.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe -lopiesql
+LIBS            += -lqpe -lopiedb2
 TARGET		= zeilenweise
 
 

@@ -52,6 +52,11 @@
 class QFile;
 class QString;
 class DateFormat;
+
+
+
+namespace Opie {
+namespace Core {
 /**
  *\brief OGlobal contains a list of generic functions
  *
@@ -146,6 +151,9 @@ public:
 private:
     static OConfig* _config;
     static OConfig* _qpe_config;
+    class Private;
+    Private *d;
 };
-
+}
+}
 #endif // OGLOBAL_H

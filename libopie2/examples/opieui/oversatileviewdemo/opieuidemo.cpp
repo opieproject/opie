@@ -25,17 +25,12 @@
 
 // Qtopia
 
-#ifdef QWS
 #include <qpe/qpeapplication.h>
 #include <qpe/global.h>
-#endif
 
 // Opie
 
-#ifdef QWS
 #include <opie2/odevice.h>
-using namespace Opie;
-#endif
 
 #include <opie2/ocompletionbox.h>
 #include <opie2/olineedit.h>
@@ -50,6 +45,9 @@ using namespace Opie;
 // Local
 
 #include "opieuidemo.h"
+
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
 enum Demos { ocompletionbox, olineedit, ocombobox, oeditlistbox, oselector };
 

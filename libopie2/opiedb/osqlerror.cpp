@@ -1,5 +1,7 @@
 #include "osqlerror.h"
 
+using namespace Opie::DB;
+
 OSQLError::OSQLError( const QString& driverText,
                       const QString& driverDatabaseText,
                       int type, int subType )

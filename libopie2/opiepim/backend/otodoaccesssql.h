@@ -33,9 +33,13 @@
 
 #include <opie2/otodoaccessbackend.h>
 
+namespace Opie {
+namespace DB   {
 class OSQLDriver;
 class OSQLResult;
 class OSQLResultItem;
+}
+}
 
 namespace Opie {
 
@@ -71,14 +75,14 @@ private:
     void update()const;
     void fillDict();
     inline bool date( QDate& date, const QString& )const;
-    inline OPimTodo todo( const OSQLResult& )const;
-    inline OPimTodo todo( OSQLResultItem& )const;
-    inline QArray<int> uids( const OSQLResult& )const;
+    inline OPimTodo todo( const Opie::DB::OSQLResult& )const;
+    inline OPimTodo todo( Opie::DB::OSQLResultItem& )const;
+    inline QArray<int> uids( const Opie::DB::OSQLResult& )const;
     OPimTodo todo( int uid )const;
     QBitArray sup() const;
 
     QAsciiDict<int> m_dict;
-    OSQLDriver* m_driver;
+    Opie::DB::OSQLDriver* m_driver;
     QArray<int> m_uids;
     bool m_dirty : 1;
 };

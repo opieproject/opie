@@ -35,10 +35,11 @@
 
 class QListBox;
 
-namespace Opie
-{
-
+namespace Opie {
+namespace Ui   {
+namespace Private {
 class OFontSelectorPrivate;
+}
 
 /**
  * This class lets you chose a Font out of a list of Fonts.
@@ -95,10 +96,11 @@ private:
     void changeFont ( );
 
 private:
-    OFontSelectorPrivate *d;
+    Private::OFontSelectorPrivate *d;
 };
 
-};
+}
+}
 
 #endif
 

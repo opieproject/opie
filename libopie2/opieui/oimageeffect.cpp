@@ -27,7 +27,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-// $Id: oimageeffect.cpp,v 1.4 2003-12-20 17:47:08 mickeyl Exp $
+// $Id: oimageeffect.cpp,v 1.5 2004-03-13 19:51:49 zecke Exp $
 
 #include <math.h>
 
@@ -41,6 +41,10 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define DegreesToRadians(x) ((x)*M_PI/180.0)
 
 using namespace std;
+using namespace Opie::Core;
+
+namespace Opie {
+namespace Ui   {
 
 inline unsigned int intensityValue(unsigned int color)
 {
@@ -3765,4 +3769,5 @@ void OImageEffect::contrastHSV(QImage &img, bool sharpen)
 
 
 
-
+}
+}

@@ -1,5 +1,7 @@
 #include <opie2/oprocess.h>
-#include <iostream.h>
+#include <iostream>
+
+using namespace Opie::Core;
 
 int main( int argc, char** argv )
 {

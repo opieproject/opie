@@ -42,6 +42,7 @@
 #ifndef DHCP_H
 #define DHCP_H
 
+
 #define DHCP_UDP_OVERHEAD	(14 + /* Ethernet header */		\
 				 20 + /* IP header */			\
 				 8)   /* UDP header */
@@ -196,6 +197,7 @@ struct dhcp_packet {
 #define FQDN_DOMAINNAME			7
 #define FQDN_FQDN			8
 #define FQDN_SUBOPTION_COUNT		8
+
 
 #endif
 

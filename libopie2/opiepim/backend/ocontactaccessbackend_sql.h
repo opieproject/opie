@@ -40,9 +40,13 @@
 #include <qdict.h>
 
 /* aren't in namespace Opie yet - alwin */
+namespace Opie {
+namespace DB   {
 class OSQLDriver;
 class OSQLResult;
 class OSQLResultItem;
+}
+}
 
 namespace Opie {
 
@@ -91,7 +95,7 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 	bool reload();
 
  private:
-	QArray<int> extractUids( OSQLResult& res ) const;
+	QArray<int> extractUids( Opie::DB::OSQLResult& res ) const;
 	QMap<int, QString>  requestNonCustom( int uid ) const;
 	QMap<QString, QString>  requestCustom( int uid ) const;
 	void update();
@@ -101,7 +105,7 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 	QString m_fileName;
 	QArray<int> m_uids;
 
-	OSQLDriver* m_driver;
+	Opie::DB::OSQLDriver* m_driver;
 };
 
 }

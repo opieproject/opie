@@ -32,11 +32,11 @@
 #include <qapplication.h>
 #include <qwidgetstack.h>
 
-namespace {
+namespace Opie {
+namespace Ui   {
     const int mode_size = 330;
-}
 
-using namespace Opie;
+
 
 /**
  * This is the standard widget. For simple usage see the example. Normally this widget
@@ -432,4 +432,7 @@ void OWidgetStack::switchTop() {
 
     delete m_stack;
     m_stack = 0;
+}
+
+}
 }

@@ -27,14 +27,18 @@
                              Boston, MA 02111-1307, USA.
 */
 
-/* QT */
-#include <qlayout.h>
-#include <qlineedit.h>
-
 /* OPIE */
 #include <opie2/otimepicker.h>
 
-using namespace Opie;
+/* QT */
+#include <qgroupbox.h>
+#include <qlayout.h>
+#include <qlineedit.h>
+
+
+
+namespace Opie {
+namespace Ui {
 
 /**
  * Constructs the widget
@@ -220,6 +224,8 @@ void OTimePicker::setHour(int h)
 OTimePickerDialog::OTimePickerDialog ( QWidget* parent, const char* name, WFlags fl )
         : OTimePickerDialogBase (parent , name, true , fl)
 {
+    m_timePicker = new OTimePicker(  GroupBox1, "m_timePicker" );
+    GroupBox1Layout->addWidget( m_timePicker, 0, 0 );
 
     connect ( m_timePicker, SIGNAL( timeChanged(const QTime&) ),
               this, SLOT( setTime(const QTime&) ) );
@@ -289,4 +295,7 @@ void OTimePickerDialog::setMinute ( const QString& minute )
         m_time.setHMS ( m_time.hour(), minute.toInt(), 00 );
         setTime ( m_time );
     }
+}
+
+}
 }

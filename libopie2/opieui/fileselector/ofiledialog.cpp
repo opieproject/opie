@@ -39,7 +39,7 @@
 #include <qapplication.h>
 #include <qlayout.h>
 
-using namespace Opie;
+using namespace Opie::Ui;
 
 namespace
 {

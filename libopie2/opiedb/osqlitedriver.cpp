@@ -40,6 +40,9 @@
 #define __BUGGY_LOCAL8BIT_
 
 
+using namespace Opie::DB;
+using namespace Opie::DB::Private;
+
 namespace {
     struct Query {
         OSQLError::ValueList errors;
@@ -86,7 +89,7 @@ void OSQLiteDriver::setOptions( const QStringList& ) {
  */
 bool OSQLiteDriver::open() {
     char *error;
-    odebug << "OSQLiteDriver::open: about to open" << oendl;
+    qDebug("OSQLiteDriver::open: about to open");
     m_sqlite = sqlite_open(m_url.local8Bit(),
                            0,
                            &error );
@@ -94,7 +97,7 @@ bool OSQLiteDriver::open() {
     /* failed to open */
     if (m_sqlite == 0l ) {
         // FIXME set the last error
-        owarn << "OSQLiteDriver::open: " << error << oendl;
+        qWarning("OSQLiteDriver::open: %s", error );
         free( error );
         return false;
     }
@@ -126,7 +129,7 @@ OSQLResult OSQLiteDriver::query( OSQLQuery* qu) {
     char *err;
     /* SQLITE_OK 0 if return code > 0 == failure */
     if ( sqlite_exec(m_sqlite, qu->query(),&call_back, &query, &err)  > 0 ) {
-        owarn << "OSQLiteDriver::query: Error while executing" << oendl;
+        qWarning("OSQLiteDriver::query: Error while executing");
         free(err );
         // FixMe Errors
     }

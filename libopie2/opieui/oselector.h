@@ -27,6 +27,9 @@
 #include <qrangecontrol.h>
 #include <qpixmap.h>
 
+
+namespace Opie {
+namespace Ui   {
 /**
  * OXYSelector is the base class for other widgets which
  * provides the ability to choose from a two-dimensional
@@ -384,7 +387,7 @@ private:
  *
  * @see OXYSelector, OValueSelector, OColorDialog
  * @author Martin Jones (mjones@kde.org)
- * @version $Id: oselector.h,v 1.1 2003-03-28 15:11:52 mickeyl Exp $
+ * @version $Id: oselector.h,v 1.2 2004-03-13 19:51:50 zecke Exp $
 */
 class OHSSelector : public OXYSelector
 {
@@ -429,7 +432,7 @@ class OValueSelectorPrivate;
  *
  * @see OHSSelector, OColorDialog
  * @author Martin Jones (mjones@kde.org)
- * @version $Id: oselector.h,v 1.1 2003-03-28 15:11:52 mickeyl Exp $
+ * @version $Id: oselector.h,v 1.2 2004-03-13 19:51:50 zecke Exp $
  */
 class OValueSelector : public OSelector
 {
@@ -512,6 +515,8 @@ private:
   OColorPrivate *d;
 };
 
+}
+}
 
 
 #endif		// __OSELECT_H__

@@ -56,6 +56,9 @@
 #include <qobject.h>
 #include <qhostaddress.h>
 
+namespace Opie {
+namespace Net  {
+
 class ONetworkInterface;
 class OWirelessNetworkInterface;
 class OChannelHopper;
@@ -123,6 +126,8 @@ class ONetwork : public QObject
   private:
     static ONetwork* _instance;
     InterfaceMap _interfaces;
+    class Private;
+    Private *d;
 };
 
 
@@ -234,6 +239,9 @@ class ONetworkInterface : public QObject
     virtual void init();
     bool ioctl( int call ) const;
     bool ioctl( int call, struct ifreq& ) const;
+  private:
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -296,6 +304,8 @@ class OChannelHopper : public QObject
     int _tid;
     QValueList<int> _channels;
     QValueList<int>::Iterator _channel;
+    class Private;
+    Private *d;
 };
 
 
@@ -455,6 +465,8 @@ class OWirelessNetworkInterface : public ONetworkInterface
 
   private:
     OChannelHopper* _hopper;
+    class Private;
+    Private *d;
 };
 
 
@@ -479,6 +491,9 @@ class OMonitoringInterface
   protected:
     OWirelessNetworkInterface* _if;
     bool _prismHeader;
+  private:
+    class Private;
+    Private *d;
 
 };
 
@@ -497,6 +512,9 @@ class OCiscoMonitoringInterface : public OMonitoringInterface
     virtual void setEnabled( bool );
     virtual QString name() const;
     virtual void setChannel( int );
+  private:
+    class Private;
+    Private *d;
 
 };
 
@@ -516,6 +534,9 @@ class OWlanNGMonitoringInterface : public OMonitoringInterface
     virtual void setEnabled( bool );
     virtual QString name() const;
     virtual void setChannel( int );
+  private:
+    class Private;
+    Private *d;
 
 };
 
@@ -534,6 +555,10 @@ class OHostAPMonitoringInterface : public OMonitoringInterface
   public:
     virtual void setEnabled( bool );
     virtual QString name() const;
+    
+  private:
+    class Private;
+    Private *d;
  };
 
 
@@ -553,7 +578,13 @@ class OOrinocoMonitoringInterface : public OMonitoringInterface
     virtual void setEnabled( bool );
     virtual QString name() const;
 
+   private:
+    class Private;
+    Private *d;
 };
+
+}
+}
 
 #endif // ONETWORK_H
 

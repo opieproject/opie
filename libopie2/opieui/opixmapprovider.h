@@ -23,7 +23,10 @@
 
 #include <qpixmap.h>
 
+namespace Opie {
+namespace Ui   {
 /**
+ * \todo make usefull
  * A tiny abstract class with just one method:
  * @ref pixmapFor()
  *
@@ -48,7 +51,12 @@ public:
     virtual QPixmap pixmapFor( const QString& text, int size = 0 ) = 0;
 protected:
     virtual void virtual_hook( int id, void* data );
+private:
+    class Private;
+    Private *d;    
 };
 
+}
+}
 
 #endif // OPIXMAPPROVIDER_H

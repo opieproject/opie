@@ -43,6 +43,10 @@
 #include <qfile.h>
 #include <qtextstream.h>
 
+using namespace Opie::Core;
+namespace Opie {
+namespace Net  {
+
 OManufacturerDB* OManufacturerDB::_instance = 0;
 
 OManufacturerDB* OManufacturerDB::instance()
@@ -131,5 +135,8 @@ const QString& OManufacturerDB::lookupExt( const QString& macaddr ) const
 {
     QMap<QString,QString>::ConstIterator it = manufacturersExt.find( macaddr.upper().left(8) );
     return it == manufacturersExt.end() ? lookup( macaddr ) : *it;
+}
+
+}
 }
 

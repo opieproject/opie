@@ -21,7 +21,7 @@ SOURCES     = osqlbackend.cpp   \
               osqlitedriver.cpp
 INTERFACES  =
 TARGET      = opiedb2
-VERSION     = 1.8.2
+VERSION     = 1.9.0
 INCLUDEPATH = $(OPIEDIR)/include
 DEPENDPATH  = $(OPIEDIR)/include
 LIBS       += -lopiecore2 -lqpe -lsqlite

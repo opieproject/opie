@@ -32,6 +32,8 @@
 
 #warning Make Margin and Spacing device dependend and configurable!
 
+using namespace Opie::Ui;
+
 int ODialog::mMarginSize = 5;
 int ODialog::mSpacingSize = 2;
 

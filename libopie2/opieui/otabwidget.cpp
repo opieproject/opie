@@ -41,7 +41,7 @@
 #include <qcombobox.h>
 #include <qwidgetstack.h>
 
-using namespace Opie;
+using namespace Opie::Ui;
 
 OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPosition p )
         : QWidget( parent, name )

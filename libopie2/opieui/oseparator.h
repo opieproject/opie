@@ -35,12 +35,15 @@
 
 #include <qframe.h>
 
+namespace Opie {
+namespace Ui   {
+
 /**
  * Standard horizontal or vertical separator.
  *
  * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
  * @author Michael Roth <mroth@wirlweb.de>
- * @version $Id: oseparator.h,v 1.1 2003-03-28 15:11:52 mickeyl Exp $
+ * @version $Id: oseparator.h,v 1.2 2004-03-13 19:51:50 zecke Exp $
 */
 class OSeparator : public QFrame
 {
@@ -86,5 +89,7 @@ private:
   class OSeparatorPrivate* d;
 };
 
+}
+}
 
 #endif // OSEPARATOR_H

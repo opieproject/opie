@@ -1,6 +1,8 @@
 
 #include "osqlquery.h"
 
+using namespace Opie::DB;
+
 OSQLQuery::OSQLQuery() {
 }
 OSQLQuery::~OSQLQuery() {

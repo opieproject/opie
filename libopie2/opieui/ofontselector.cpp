@@ -38,10 +38,10 @@
 #include <qlabel.h>
 #include <qmultilineedit.h>
 
-using namespace Opie;
 
-namespace Opie
-{
+namespace Opie {
+namespace Ui   {
+namespace Private {
 
 class OFontSelectorPrivate
 {
@@ -55,11 +55,6 @@ public:
 
     FontDatabase    m_fdb;
 };
-
-};
-
-namespace
-{
 
 class FontListItem : public QListBoxText
 {
@@ -95,7 +90,13 @@ private:
     QValueList<int> m_sizes;
     QString m_name;
 };
+}
+}
+}
 
+
+using namespace Opie::Ui;
+using namespace Opie::Ui::Private;
 
 static int findItemCB( QComboBox *box, const QString &str )
 {
@@ -107,7 +108,6 @@ static int findItemCB( QComboBox *box, const QString &str )
     return -1;
 }
 
-}
 /* static same as anon. namespace */
 static int qt_version()
 {
@@ -426,3 +426,4 @@ void OFontSelector::resizeEvent ( QResizeEvent *re )
         d->m_preview->setFixedHeight ( d->m_preview->height());
 
 }
+

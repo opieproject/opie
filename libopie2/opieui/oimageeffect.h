@@ -30,7 +30,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-// $Id: oimageeffect.h,v 1.2 2003-04-13 16:25:24 zecke Exp $
+// $Id: oimageeffect.h,v 1.3 2004-03-13 19:51:49 zecke Exp $
 
 #ifndef OIMAGEEFFECT_H
 #define OIMAGEEFFECT_H
@@ -39,6 +39,8 @@ class QImage;
 class QSize;
 class QColor;
 
+namespace Opie {
+namespace Ui   {
 /**
  * This class includes various @ref QImage based graphical effects.
  *
@@ -555,5 +557,8 @@ private:
     static unsigned int interpolateColor(QImage *image, double x, double y,
                                          unsigned int background);
 };
+
+}
+}
 
 #endif

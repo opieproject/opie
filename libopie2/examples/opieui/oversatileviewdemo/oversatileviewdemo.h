@@ -34,8 +34,12 @@
 
 #include <qvbox.h>
 
+namespace Opie {
+namespace Ui   {
 class OVersatileView;
 class OVersatileViewItem;
+}
+}
 
 class OVersatileViewDemo: public QVBox
 {
@@ -47,26 +51,26 @@ class OVersatileViewDemo: public QVBox
 
   public slots:
     void selectionChanged();
-    void selectionChanged( OVersatileViewItem * );
-    void currentChanged( OVersatileViewItem * );
-    void clicked( OVersatileViewItem * );
-    void pressed( OVersatileViewItem * );
+    void selectionChanged( Opie::Ui::OVersatileViewItem * );
+    void currentChanged( Opie::Ui::OVersatileViewItem * );
+    void clicked( Opie::Ui::OVersatileViewItem * );
+    void pressed( OPie::Ui::OVersatileViewItem * );
 
-    void doubleClicked( OVersatileViewItem *item );
-    void returnPressed( OVersatileViewItem *item );
+    void doubleClicked( Opie::Ui::OVersatileViewItem *item );
+    void returnPressed( Opie::Ui::OVersatileViewItem *item );
   
-    void onItem( OVersatileViewItem *item );
+    void onItem( Opie::Ui::OVersatileViewItem *item );
     void onViewport();
 
-    void expanded( OVersatileViewItem *item );
-    void collapsed( OVersatileViewItem *item );
+    void expanded( Opie::Ui::OVersatileViewItem *item );
+    void collapsed( Opie::Ui::OVersatileViewItem *item );
     
     void moved();
 
-    void contextMenuRequested( OVersatileViewItem *item, const QPoint&, int col );
+    void contextMenuRequested( Opie::Ui::OVersatileViewItem *item, const QPoint&, int col );
     
   private:
-    OVersatileView* vv;
+    Opie::Ui::OVersatileView* vv;
 
 };
 

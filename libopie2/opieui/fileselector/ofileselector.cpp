@@ -55,8 +55,11 @@
 #include <qregexp.h>
 #include <qobjectlist.h>
 
-using namespace Opie;
+using namespace Opie::Ui::Private;
 
+namespace Opie {
+namespace Ui   {
+namespace Private {
 OFileViewInterface::OFileViewInterface( OFileSelector* selector )
         : m_selector( selector )
 {}
@@ -810,6 +813,8 @@ void OFileViewFileSystem::activate( const QString& str)
     m_all = (str != QObject::tr("Files") );
 }
 
+
+}
 /* Selector */
 /**
  * @short new and complete c'tor
@@ -1164,3 +1169,5 @@ void OFileSelector::setNameVisible( bool b )
         m_nameBox->hide();
 }
 
+}
+}

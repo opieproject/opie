@@ -9,6 +9,8 @@
 #include <opie2/oapplicationfactory.h>
 #include "osplitter_mail.h"
 
+using namespace Opie::Ui;
+
 OPIE_EXPORT_APP( OApplicationFactory<ListViews> )
 
 class Folder {
@@ -25,13 +27,13 @@ ListViews::ListViews( QWidget* p, const char* name, WFlags fl )
 
     m_splitter = new OSplitter( Horizontal, this, "SPlitter 1" );
     lay->addWidget( m_splitter );
-    connect(m_splitter, SIGNAL(sizeChange(bool,const QSize&) ),
-            this, SLOT(slotSizeChange(bool,const QSize&) ) );
+    connect(m_splitter, SIGNAL(sizeChanged(bool,Orientation) ),
+            this, SLOT(slotSizeChange(bool,Orientation) ) );
 
     m_overview = new QListView( m_splitter );
     m_overview->header()->setClickEnabled( FALSE );
     m_overview->addColumn( tr("Folder") );
-    m_overview->setMaximumWidth( 200 );
+//    m_overview->setMaximumWidth( 200 );
     m_splitter->addWidget( m_overview, "zoom", tr("Folder Overview") );
     m_splitter->setSizeChange( 300 );
 

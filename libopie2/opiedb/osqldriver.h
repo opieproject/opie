@@ -7,6 +7,10 @@
 #include "osqltable.h"
 
 class QLibrary;
+
+namespace Opie {
+namespace DB {
+
 class OSQLResult;
 class OSQLQuery;
 class OSQLError;
@@ -83,5 +87,8 @@ private:
     OSQLDriverPrivate *d;
 
 };
+
+}
+}
 
 #endif

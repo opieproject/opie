@@ -5,6 +5,8 @@
 #include "osqlbackendmanager.h"
 #include "osqlitedriver.h"
 
+using namespace Opie::DB;
+
 OSQLManager::OSQLManager() {
 }
 OSQLBackEnd::ValueList OSQLManager::queryBackEnd() {
@@ -31,7 +33,7 @@ OSQLDriver* OSQLManager::load( const QString& name ) {
     OSQLDriver* driver = 0l;
 
     if ( name == "SQLite" ) {
-        driver = new OSQLiteDriver();
+        driver = new Opie::DB::Private::OSQLiteDriver;
     }
     return driver;
 }
@@ -42,7 +44,7 @@ OSQLDriver* OSQLManager::load( const OSQLBackEnd& end) {
     OSQLDriver *driver = 0l;
     if ( end.library() == "builtin" &&
          end.name() == "SQLite" )
-        driver = new OSQLiteDriver();
+        driver = new Opie::DB::Private::OSQLiteDriver;
 
     return driver;
 }

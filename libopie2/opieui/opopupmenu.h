@@ -31,6 +31,8 @@
 
 #include <opie2/opixmapeffect.h>
 
+namespace Opie {
+namespace Ui   {
 /**
  * Title widget for use in @ref OPopupMenu.
  *
@@ -255,5 +257,8 @@ private:
     class OPopupMenuPrivate;
     OPopupMenuPrivate *d;
 };
+
+}
+}
 
 #endif

@@ -32,7 +32,7 @@
 
 /* OPIE */
 #include <opie2/oclickablelabel.h>
-#include "otimepickerbase.h"
+#include <opie2/otimepickerbase.h>
 
 /* QT */
 #include <qwidget.h>
@@ -40,10 +40,9 @@
 #include <qdatetime.h>
 #include <qdialog.h>
 
-using namespace Opie;
 
-// namespace Opie
-// {
+namespace Opie {
+namespace Ui   {
 
 /**
  * A class to pick time. It uses clickable labels
@@ -56,7 +55,7 @@ using namespace Opie;
  * @see QTime
  * @author Hakan Ardo, Stefan Eilers
  */
-class OTimePicker: public QWidget
+class OTimePicker : public QWidget
 {
     Q_OBJECT
 
@@ -114,12 +113,20 @@ public slots:
     void setMinute( const QString& minute );
 
 private:
+    OTimePicker *m_timePicker;
     QTime m_time;
     class Private;
     Private* d;
 };
 
-// };
+}
+}
 
+/* for Qt2  */
+#if ( QT_VERSION-0 >= 0x030000 )
+#error "Fix the UI File to use namespaces"
+#else
+typedef Opie::Ui::OTimePicker OUIOTimePicker;
+#endif
 #endif
 

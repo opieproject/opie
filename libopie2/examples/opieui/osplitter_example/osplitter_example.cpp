@@ -3,6 +3,7 @@
 /* OPIE */
 
 #include <opie2/osplitter.h>
+#include <opie2/ofileselector.h>
 #include <qpe/qpeapplication.h>
 #include <opie2/oapplicationfactory.h>
 
@@ -10,7 +11,7 @@
 #include <qdir.h>
 #include <qlayout.h>
 
-using namespace Opie;
+using namespace Opie::Ui;
 
 OPIE_EXPORT_APP( OApplicationFactory<OSplitterExample> )
 

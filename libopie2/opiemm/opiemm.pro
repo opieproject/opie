@@ -5,7 +5,7 @@ HEADERS     = osoundsystem.h
 SOURCES     = osoundsystem.cpp
 INTERFACES  =
 TARGET      = opiemm2
-VERSION     = 1.8.2
+VERSION     = 1.9.0
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 

@@ -1,10 +1,12 @@
 #include <qdir.h>
 
 #include <qpe/qpeapplication.h>
-#include "../osqlmanager.h"
-#include "../osqlquery.h"
-#include "../osqldriver.h"
-#include "../osqlresult.h"
+#include <opie2/osqlmanager.h>
+#include <opie2/osqlquery.h>
+#include <opie2/osqldriver.h>
+#include <opie2/osqlresult.h>
+
+using namespace Opie::DB;
 
 int main( int argc,  char* argv[] ) {
 

@@ -38,15 +38,14 @@
 #include <qwidget.h>
 #include <qlist.h>
 
-using namespace Opie;
 
 class QComboBox;
 class QPixmap;
 class QTabBar;
 class QWidgetStack;
 
-namespace Opie
-{
+namespace Opie {
+namespace Ui   {
 
 class OTabBar;
 
@@ -287,6 +286,7 @@ private:
     void slotTabListSelected( int );
 };
 
-};
+}
+}
 
 #endif

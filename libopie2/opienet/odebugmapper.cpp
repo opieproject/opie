@@ -7,6 +7,12 @@
 
 #include "odebugmapper.h"
 
+using namespace Opie::Core;
+
+namespace Opie {
+namespace Net  {
+namespace Private {
+
 DebugMapper::DebugMapper()
 {
     odebug << "DebugMapper::DebugMapper()" << oendl;
@@ -212,4 +218,6 @@ const QString& DebugMapper::map( int value ) const
     }
 }
 
-
+}
+}
+}

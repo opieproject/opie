@@ -4,6 +4,9 @@
 #include <qstring.h>
 #include <qvaluelist.h>
 
+
+namespace Opie {
+namespace DB {
 /**
  * OSQLError is the base class of all errors
  */
@@ -56,4 +59,6 @@ private:
     OSQLErrorPrivate* d;
 };
 
+}
+}
 #endif

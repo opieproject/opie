@@ -37,6 +37,9 @@
 #include <qpixmap.h>
 #include <qtimer.h>
 
+
+namespace Opie {
+namespace Ui   {
 /**
  * This class displays a animated waiting icon in the middle of the screen.
  *
@@ -82,5 +85,6 @@ class OWait : public QDialog
     class Private;
     Private *d;
 };
-
+}
+}
 #endif

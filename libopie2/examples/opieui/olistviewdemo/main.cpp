@@ -16,6 +16,9 @@
 #include "olistviewdemo.h"
 #include <opie2/oapplication.h>
 
+using namespace Opie::Ui;
+using namespace Opie::Core;
+
 int main( int argc, char **argv )
 {
     OApplication a( argc, argv, "OListViewDemo" );

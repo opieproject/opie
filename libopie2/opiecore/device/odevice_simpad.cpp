@@ -53,7 +53,8 @@ _;:,   .>  :=|.         This program is free software; you can
 #include <linux/soundcard.h>
 #endif
 
-using namespace Opie;
+using namespace Opie::Core;
+using namespace Opie::Core::Private;
 
 struct s_button simpad_buttons [] = {
     { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,

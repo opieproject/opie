@@ -3,6 +3,7 @@
   - How to declare INTEGER PRIMARY KEY
   - Abstract from implementation of some dbs
   - provides( Type::What )
+  - emit signals directly on arriving of data
   
  * OSQLDriver DriverVersion - DatabaseVersion
  * Better OSQLQueries

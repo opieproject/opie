@@ -32,8 +32,9 @@ _;:,     .>    :=|.         This program is free software; you can
 
 #include <opie2/odevice.h>
 
-using namespace Opie;
-
+namespace Opie {
+namespace Core {
+namespace Private {
 class Yopy : public ODevice
 {
   protected:
@@ -58,5 +59,9 @@ struct yopy_button
     char *fheldservice;
     char *fheldaction;
 };
+
+}
+}
+}
 
 #endif

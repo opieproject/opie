@@ -41,6 +41,10 @@
 #include <sys/types.h>
 
 struct ifreq;
+
+namespace Opie {
+namespace Net  {
+
 class OWirelessNetworkInterface;
 
 /*======================================================================================
@@ -72,6 +76,8 @@ class OMacAddress
     unsigned char _bytes[6];
 
   friend bool operator==( const OMacAddress &m1, const OMacAddress &m2 );
+  class Private;
+  Private *d;
 
 };
 
@@ -88,6 +94,9 @@ class OHostAddress : public QHostAddress
     OHostAddress();
     ~OHostAddress();
   */
+  private:
+  class Private;
+  Private *d;
 };
 
 
@@ -115,15 +124,21 @@ class OPrivateIOCTL : public QObject
     u_int16_t _getargs;
     u_int16_t _setargs;
 
+    class Private;
+    Private *d;
 };
 
  /*======================================================================================
  * Miscellaneous
  *======================================================================================*/
 
+namespace Private {
 void dumpBytes( const unsigned char* data, int num );
 QString modeToString( int );
 int stringToMode( const QString& );
+}
+}
+}
 
 #define IW_PRIV_TYPE_MASK       0x7000
 #define IW_PRIV_TYPE_NONE       0x0000

@@ -45,7 +45,6 @@
 class QHeader;
 class QIconSet;
 class QIconViewItem;
-class OListView;
 class QListViewItem;
 class QPopupMenu;
 class QString;
@@ -54,10 +53,14 @@ class QString;
 class QIconDragItem;
 #endif
 
+namespace Opie {
+namespace Ui   {
+class OListView;
+
 class OVersatileView : public QWidgetStack
 {
   Q_OBJECT
-  
+
   friend class OVersatileViewItem;
 
   //==============================================================================================//
@@ -69,23 +72,23 @@ class OVersatileView : public QWidgetStack
     ~OVersatileView();
 
     QPopupMenu* contextMenu() const;
-  
+
     void setSynchronization( bool sync );
     bool synchronization();
-    
+
     enum ViewMode { Tree = 0, Icons };
     int viewMode();
-    
+
     QIconView* iconView() const;
     OListView* listView() const;
-    
+
     enum WarningPolicy { None = 0, Warn, WarnReturn };
-    
+
     void setWarningPolicy( int ) const;  // warn, if calling a method which doesn't apply to the current viewmode
     bool warningPolicy() const;
-    
+
     void setDefaultPixmaps( int mode, QPixmap& leaf, QPixmap& opened, QPixmap& closed );
-    
+
   public slots:
     void setViewMode( int mode );
     void setIconViewMode();
@@ -94,15 +97,15 @@ class OVersatileView : public QWidgetStack
   protected:
     virtual bool isValidViewMode( int mode ) const;
     virtual void popupContextMenu( OVersatileViewItem* item, const QPoint& pos, int col = 0 );
-  
+
   private:
     int _viewmode;
     bool _synchronization;
     mutable int _warningpolicy;
-    
+
     OListView* _listview;
     QIconView* _iconview;
-    
+
     QPixmap _treeleaf;
     QPixmap _treeopened;
     QPixmap _treeclosed;
@@ -110,19 +113,19 @@ class OVersatileView : public QWidgetStack
     QPixmap _iconleaf;
     QPixmap _iconopened;
     QPixmap _iconclosed;
-    
+
     QPopupMenu* _contextmenu;
-    
+
     int _iconstyle;
     int _treestyle;
-  
+
   private slots:
-      
+
     void contextMenuRequested( QListViewItem*, const QPoint&, int );
     void contextMenuRequested( QIconViewItem*, const QPoint& );
 
     // type converting signal forwarders
-    
+
     void selectionChanged( QListViewItem * );
     void currentChanged( QListViewItem * );
     void clicked( QListViewItem * );
@@ -130,7 +133,7 @@ class OVersatileView : public QWidgetStack
     void doubleClicked( QListViewItem * );
     void returnPressed( QListViewItem * );
     void onItem( QListViewItem * );
-    
+
     void selectionChanged( QIconViewItem * );
     void currentChanged( QIconViewItem * );
     void clicked( QIconViewItem * );
@@ -138,14 +141,14 @@ class OVersatileView : public QWidgetStack
     void doubleClicked( QIconViewItem * );
     void returnPressed( QIconViewItem * );
     void onItem( QIconViewItem * );
-    
+
     void expanded( QListViewItem * item ); // QListView
     void collapsed( QListViewItem * item ); // QListView
 
   signals:
-    
+
     void contextMenuRequested( OVersatileViewItem * item, const QPoint& pos, int col );
-    
+
     /*#ifndef QT_NO_DRAGANDDROP
     void dropped( QDropEvent *e, const QValueList<QIconDragItem> &lst );  // QIconView
     #endif
@@ -173,11 +176,11 @@ public:
     Right
     };
     */
-    
+
     //
     // only in QListView
     //
-    
+
     int treeStepSize() const;  // QListView
     virtual void setTreeStepSize( int );  // QListView
 
@@ -226,7 +229,7 @@ public:
 
     void setShowSortIndicator( bool show );  // QListView
     bool showSortIndicator() const;  // QListView
-    
+
     int index( const OVersatileViewItem *item ) const;  // QIconView
 
   public slots:
@@ -240,9 +243,9 @@ public:
     // only in QIconView
     //
 
-  public:    
+  public:
     uint count() const;  // QIconView
-    
+
     OVersatileViewItem *firstItem() const;  // QIconView
     OVersatileViewItem *lastItem() const;  // QIconView
 
@@ -287,7 +290,7 @@ public:
     virtual void arrangeItemsInGrid( const QSize &grid, bool update = TRUE );  // QIconView
     virtual void arrangeItemsInGrid( bool update = TRUE );  // QIconView
     virtual void updateContents();  // QIconView
-  
+
   signals:
     /*#ifndef QT_NO_DRAGANDDROP
     void dropped( QDropEvent *e, const QValueList<QIconDragItem> &lst );  // QIconView
@@ -322,7 +325,7 @@ public:
     virtual void selectAll( bool select );
     virtual void clearSelection();
     virtual void invertSelection();
-  
+
     void ensureItemVisible( const OVersatileViewItem * );
     virtual void repaintItem( const OVersatileViewItem * ) const;
 
@@ -344,16 +347,16 @@ public:
 
     void doubleClicked( OVersatileViewItem * );
     void returnPressed( OVersatileViewItem * );
-  
+
     void onItem( OVersatileViewItem * );
     void onViewport();
-  
+
   //==============================================================================================//
   // "Derived" API - Case 2: Methods existing in QListView and QIconView with differing signatures
   //==============================================================================================//
-  
+
   /*
-  
+
   public:
     virtual void insertItem( OVersatileViewItem * );  // QListView
     virtual void insertItem( OVersatileViewItem *item, OVersatileViewItem *after = 0L );  // QIconView
@@ -368,27 +371,29 @@ public:
     virtual void sort( bool ascending = TRUE );  // QIconView
 
   */
-  
+
   signals:
     void clicked( OVersatileViewItem *, const QPoint &, int );  // QListView
     void clicked( OVersatileViewItem *, const QPoint & );  // QIconView
-    
+
     void pressed( OVersatileViewItem *, const QPoint &, int );  // QListView
     void pressed( OVersatileViewItem *, const QPoint & );  // QIconView
-    
+
     void rightButtonClicked( OVersatileViewItem* item, const QPoint& pos );  // QIconView
     void rightButtonClicked( OVersatileViewItem *, const QPoint&, int );  // QListView
-    
-    void rightButtonPressed( OVersatileViewItem* item, const QPoint& pos );  // QIconView   
+
+    void rightButtonPressed( OVersatileViewItem* item, const QPoint& pos );  // QIconView
     void rightButtonPressed( OVersatileViewItem *, const QPoint&, int );  // QListView
-    
+
     void mouseButtonPressed( int, OVersatileViewItem *, const QPoint& , int );  // QListView
     void mouseButtonPressed( int button, OVersatileViewItem* item, const QPoint& pos );  // QIconView
-    
+
     void mouseButtonClicked( int, OVersatileViewItem *,  const QPoint&, int );  // QListView
     void mouseButtonClicked( int button, OVersatileViewItem* item, const QPoint& pos );  // QIconView
 
 };
 
+}
+}
 #endif
 

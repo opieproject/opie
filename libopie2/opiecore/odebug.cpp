@@ -65,7 +65,8 @@
 #include <execinfo.h>
 #endif
 
-
+namespace Opie {
+namespace Core {
 /*======================================================================================
  * debug levels
  *======================================================================================*/
@@ -614,7 +615,11 @@ void odClearDebugConfig()
     */
 }
 
+
 #ifdef OPIE_NO_DEBUG
 #define odDebug ondDebug
 #define odBacktrace ondBacktrace
 #endif
+
+}
+}

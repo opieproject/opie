@@ -34,8 +34,13 @@
 
 #include "oprocess.h"
 
-class OProcessControllerPrivate;
 class QSocketNotifier;
+
+
+namespace Opie {
+namespace Core {
+namespace Private {
+class OProcessControllerPrivate;
 
 /**
  * @short Used internally by @ref OProcess
@@ -115,6 +120,9 @@ private:
     OProcessControllerPrivate *d;
 };
 
+}
+}
+}
 
 
 #endif

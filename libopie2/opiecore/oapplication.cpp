@@ -34,18 +34,25 @@
 #include <signal.h>
 #include <stdio.h>
 
+using namespace Opie::Core;
+
+
 OApplication* OApplication::_instance = 0;
 
 /**************************************************************************************************
  * OApplicationPrivate
  **************************************************************************************************/
 
+namespace Opie {
+namespace Core {
+namespace Private {
 class OApplicationPrivate
 {
   public:
     OApplicationPrivate() {};
     ~OApplicationPrivate() {};
 };
+}
 
 /**************************************************************************************************
  * OApplication
@@ -84,7 +91,7 @@ OConfig* OApplication::config()
 
 void OApplication::init()
 {
-    d = new OApplicationPrivate();
+    d = new Private::OApplicationPrivate();
     if ( !OApplication::_instance )
     {
         OApplication::_instance = this;
@@ -125,3 +132,5 @@ void OApplication::setTitle( const QString& title ) const
     }
 }
 
+}
+}

@@ -28,5 +28,55 @@
                              Boston, MA 02111-1307, USA.
 
 */
+#include <opie2/otaskbarapplet.h>
 
-// Empty on purpose until we shipped Opie 1.0 (see otaskbarapplet.h for explanation)
+#include <qpe/qpeapplication.h>
+#include <qframe.h>
+
+using namespace Opie::Ui;
+
+
+/**
+ * \todo no example yet!!!
+ * If you want to implement an Applet for the Opie Taskbar
+ * use this interface.
+ * The only specail thing about applets is that you need to build
+ * it as plugin/library and do EXPORT_OPIE_APPLET_v1( YourApplet )
+ * at the bottom of your application. This takes care of
+ * the activation and implementing the TaskbarAppletInterface.
+ * You also need to add a static int position() functions to your
+ * application.
+ * \code
+ *    class MyApplet : public OTaskBarApplet {
+ *     public:
+ *      static int position() { return 3: }
+ *      void doStuff() {
+ *          popup( myWidget );
+ *      }
+ *    };
+ *    EXPORT_OPIE_APPLET_v1( MyApplet )
+ * \endcode
+ *
+ * @author Michael Lauer
+ * @version 0.5
+ * @see TaskbarAppletInterface
+ */
+OTaskbarApplet::OTaskbarApplet( QWidget* parent, const char* name  )
+    :QWidget( parent, name ){
+    setFixedHeight( 18 );
+    setFixedWidth( 14 );
+}
+
+OTaskbarApplet::~OTaskbarApplet(){
+}
+
+void OTaskbarApplet::popup( QWidget* widget ){
+    QPoint curPos = mapToGlobal( QPoint( 0, 0 ) );
+    int w = widget->sizeHint().width();
+    int x = curPos.x() - (w/2 );
+    if ( (x+w) > QPEApplication::desktop()->width() )
+        x = QPEApplication::desktop()->width()-w;
+    widget->move( x, curPos.y()-widget->sizeHint().height() );
+    widget->show();
+}
+

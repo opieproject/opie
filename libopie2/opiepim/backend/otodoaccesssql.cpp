@@ -41,6 +41,8 @@
 #include <opie2/opimnotifymanager.h>
 #include <opie2/opimrecurrence.h>
 
+using namespace Opie::DB;
+
 using namespace Opie;
 /*
  * first some query

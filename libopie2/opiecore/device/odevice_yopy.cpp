@@ -53,7 +53,8 @@ _;:,     .>    :=|.         This program is free software; you can
 #include <linux/soundcard.h>
 #endif
 
-using namespace Opie;
+using namespace Opie::Core;
+using namespace Opie::Core::Private;
 
 struct yopy_button yopy_buttons [] = {
     { Qt::Key_F10, QT_TRANSLATE_NOOP( "Button", "Action Button" ),

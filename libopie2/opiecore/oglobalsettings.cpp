@@ -44,6 +44,9 @@
 
 #include <stdlib.h>
 
+
+using namespace Opie::Core;
+
 QString* OGlobalSettings::s_desktopPath = 0;
 QString* OGlobalSettings::s_autostartPath = 0;
 QString* OGlobalSettings::s_trashPath = 0;

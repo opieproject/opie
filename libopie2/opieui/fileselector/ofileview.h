@@ -37,8 +37,9 @@ class QFileInfo;
 class QDir;
 class DocLnk;
 
-namespace Opie
-{
+namespace Opie {
+namespace Ui   {
+namespace Private {
 
 /**
  * A OFileView is a specialised View for the
@@ -90,6 +91,8 @@ public:
     QString name()const;
 };
 
-};
+}
+}
+}
 
 #endif

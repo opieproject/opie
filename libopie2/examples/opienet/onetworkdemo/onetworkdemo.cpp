@@ -4,6 +4,8 @@
 
 #include <unistd.h>
 
+using namespace Opie::Net;
+
 int main( int argc, char** argv )
 {
     qDebug( "OPIE Network Demo" );

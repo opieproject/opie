@@ -35,7 +35,9 @@
 /* QT */
 #include <qwindowsystem_qws.h>
 
-using namespace Opie;
+namespace Opie {
+namespace Core {
+namespace Private {
 
 class SIMpad : public ODevice, public QWSServer::KeyboardFilter
 {
@@ -77,5 +79,9 @@ struct s_button {
     char *fheldservice;
     char *fheldaction;
 };
+
+}
+}
+}
 
 #endif

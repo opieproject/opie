@@ -9,6 +9,10 @@
 #include <qstring.h>
 #include <qintdict.h>
 
+namespace Opie {
+namespace Net  {
+namespace Private {
+
 typedef QIntDict<QString> IntStringMap;
 
 class DebugMapper
@@ -20,7 +24,13 @@ class DebugMapper
     const QString& map( int value ) const;
   private:
     IntStringMap _map;
+    class Private;
+    Private *d;
 };
+
+}
+}
+}
 
 #endif
 

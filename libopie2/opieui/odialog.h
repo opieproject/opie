@@ -55,6 +55,9 @@ class QLayoutItem;
  // while that may be true, reducing maintainance effort for the future does also matter -
  // and I believe that maintaining a patch against QtE is more work than our classes -mml
 
+namespace Opie {
+namespace Ui   {
+
 class ODialog : public QDialog
 {
   Q_OBJECT
@@ -88,4 +91,6 @@ class ODialog : public QDialog
     ODialogPrivate *d;
 
 };
+}
+}
 #endif // ODIALOG_H

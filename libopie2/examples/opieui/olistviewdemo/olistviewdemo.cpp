@@ -37,6 +37,8 @@
 #include <qpixmap.h>
 #include <qlistview.h>
 
+using namespace Opie::Ui;
+
 OListViewDemo::OListViewDemo( QWidget* parent, const char* name, WFlags f )
                    :QVBox( parent, name, f )
 {

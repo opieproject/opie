@@ -35,8 +35,8 @@
 /* QT */
 #include <qdialog.h>
 
-namespace Opie
-{
+namespace Opie {
+namespace Ui   {
 
 /**
  * This class places a OFileSelector inside a QDialog.
@@ -104,6 +104,7 @@ private slots:
     void slotSelectorOk();
 };
 
-};
+}
+}
 
 #endif

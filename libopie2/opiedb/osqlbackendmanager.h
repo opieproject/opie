@@ -5,6 +5,9 @@
 
 #include "osqlbackend.h"
 
+namespace Opie {
+namespace DB {
+
 class OSQLBackEndManager {
 public:
     OSQLBackEndManager(const QStringList& path );
@@ -17,4 +20,7 @@ private:
     OSQLBackEndManagerPrivate* d;
     QStringList m_path;
 };
+}
+}
+
 #endif

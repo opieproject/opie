@@ -8,6 +8,8 @@
 #include "osqlbackend.h"
 
 
+namespace Opie {
+namespace DB {
 /**
  * OSQLManager is responsible for loading
  * and unloading, querying different OSQL
@@ -59,6 +61,10 @@ private:
     OSQLBackEnd::ValueList builtIn()const;
     OSQLBackEnd::ValueList m_list;
     QStringList m_path;
+    class Private;
+    Private *d;
 };
+}
+}
 
 #endif

@@ -23,7 +23,7 @@
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
- 
+
 */
 
 #ifndef OSPLITTER_H
@@ -48,8 +48,8 @@ class QHBox;
  * -allow inserting at a position
  */
 
-namespace Opie
-{
+namespace Opie{
+namespace Ui  {
 class OTabWidget;
 
 /**
@@ -73,7 +73,7 @@ class OSplitter : public QFrame
 {
     Q_OBJECT
 public:
-    typedef QValueList<Opie::OSplitterContainer> ContainerList;
+    typedef QValueList<Opie::Ui::Private::OSplitterContainer> ContainerList;
     OSplitter( Qt::Orientation = Horizontal,  QWidget *parent = 0,
                const char* name = 0, WFlags fl = 0 );
     ~OSplitter();
@@ -124,8 +124,8 @@ private:
     bool layoutMode()const;
     //    void reparentAll();
     void setTabWidget( OTabWidget*);
-    void addToTab( const Opie::OSplitterContainer& );
-    void addToBox( const Opie::OSplitterContainer& );
+    void addToTab( const Opie::Ui::Private::OSplitterContainer& );
+    void addToBox( const Opie::Ui::Private::OSplitterContainer& );
     void removeFromTab( QWidget* );
     void changeTab();
     void changeHBox();
@@ -145,6 +145,7 @@ private:
     struct Private;
     Private *d;
 };
-};
+}
+}
 
 #endif

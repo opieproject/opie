@@ -40,6 +40,9 @@
 class QColor;
 class QFont;
 
+namespace Opie {
+namespace Core {
+
 /**
   * A Configuration class based on the Qtopia @ref Config class
   * featuring additional handling of color and font entries
@@ -62,6 +65,7 @@ class OConfig : public Config
     /**
      * @returns the name of the current group.
      * The current group is used for searching keys and accessing entries.
+     * @todo make const
      */
     const QString& group() { return git.key(); };
     /**
@@ -72,6 +76,10 @@ class OConfig : public Config
      * @returns a @ref QFont value or a @a default value if the key is not found.
      */
     QFont readFontEntry( const QString& key, const QFont* pDefault ) const;
+    
+private:
+    class Private;
+    Private *d;
 };
 
 /**
@@ -101,7 +109,7 @@ class OConfig : public Config
  * in one block.
  *
  * @author Matthias Kalle Dalheimer <Kalle@kde.org>
- * @version $Id: oconfig.h,v 1.6 2004-02-19 02:08:16 zecke Exp $
+ * @version $Id: oconfig.h,v 1.7 2004-03-13 19:51:47 zecke Exp $
  * @see OConfig
  */
 
@@ -136,6 +144,11 @@ class OConfigGroupSaver
 
     OConfigGroupSaver( const OConfigGroupSaver& );
     OConfigGroupSaver& operator=( const OConfigGroupSaver& );
+    
+    class Private;
+    Private *d;
 };
+}
+}
 
 #endif // OCONFIG_H

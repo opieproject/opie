@@ -33,7 +33,10 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <opie2/odevicebutton.h>
 
-using namespace Opie;
+
+namespace Opie {
+namespace Core {
+namespace Private {
 
 class OQCopMessageData
 {
@@ -42,7 +45,10 @@ class OQCopMessageData
     QCString m_message;
     QByteArray m_data;
 };
+}
 
+using namespace Opie::Core;
+using namespace Opie::Core::Private;
 
 OQCopMessage::OQCopMessage()
         : d ( 0 )
@@ -124,8 +130,8 @@ void OQCopMessage::setData ( const QByteArray &data )
     d->m_data = data;
 }
 
-/*! \class Opie::ODeviceButton
-    \brief The Opie::ODeviceButton class represents a physical user mappable button on a Qtopia device.
+/*! \class Opie::Core::ODeviceButton
+    \brief The Opie::Core::ODeviceButton class represents a physical user mappable button on a Qtopia device.
  
     This class represents a physical button on a Qtopia device.    A
     device may have "user programmable" buttons.
@@ -243,4 +249,7 @@ void ODeviceButton::setFactoryPresetHeldAction(const OQCopMessage& action)
 void ODeviceButton::setHeldAction(const OQCopMessage& action)
 {
     m_HeldAction = action;
+}
+
+}
 }

@@ -60,7 +60,7 @@ _;:,   .>  :=|.         This program is free software; you can
 
 const char* PATH_PROC_CPUINFO = "/proc/cpuinfo";
 
-using namespace Opie;
+using namespace Opie::Core;
 
 ODevice *ODevice::inst()
 {
@@ -81,11 +81,11 @@ ODevice *ODevice::inst()
                 if ( line.startsWith( "Hardware" ) )
                 {
                     qDebug( "ODevice() - found '%s'", (const char*) line );
-                    if ( line.contains( "sharp", false ) ) dev = new Zaurus();
-                    else if ( line.contains( "ipaq", false ) ) dev = new iPAQ();
-                    else if ( line.contains( "simpad", false ) ) dev = new SIMpad();
-                    else if ( line.contains( "jornada", false ) ) dev = new Jornada();
-                    else if ( line.contains( "ramses", false ) ) dev = new Ramses();
+                    if ( line.contains( "sharp", false ) ) dev = new Private::Zaurus();
+                    else if ( line.contains( "ipaq", false ) ) dev = new Private::iPAQ();
+                    else if ( line.contains( "simpad", false ) ) dev = new Private::SIMpad();
+                    else if ( line.contains( "jornada", false ) ) dev = new Private::Jornada();
+                    else if ( line.contains( "ramses", false ) ) dev = new Private::Ramses();
                     else qWarning( "ODevice() - unknown hardware - using default." );
                     break;
                 }
@@ -187,7 +187,7 @@ bool ODevice::suspend()
 
     bool res = false;
     ODevice::sendSuspendmsg();
-    
+
     struct timeval tvs, tvn;
     ::gettimeofday ( &tvs, 0 );
 
@@ -624,5 +624,8 @@ void ODevice::virtual_hook(int, void* ){
 
 void ODevice::sendSuspendmsg()
 {
+    if ( isQWS() )
+        return;
+
     QCopEnvelope ( "QPE/System", "aboutToSuspend()" );
 }

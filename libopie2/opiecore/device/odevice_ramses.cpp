@@ -53,6 +53,9 @@
 #include <linux/soundcard.h>
 #endif
 
+using namespace Opie::Core;
+using namespace Opie::Core::Private;
+
 struct r_button ramses_buttons [] = {
     { Model_Ramses_MNCI,
     Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),

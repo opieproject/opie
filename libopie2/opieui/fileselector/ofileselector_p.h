@@ -56,10 +56,10 @@ typedef QMap<QString, QStringList> MimeTypes;
 class QFileInfo;
 class QToolButton;
 
-namespace Opie
-{
-
+namespace Opie{
+namespace Ui{
 class OFileSelector;
+namespace Private {
 
 class OFileViewInterface
 {
@@ -186,6 +186,8 @@ private:
     QListView* m_view;
 };
 
-};
+}
+}
+}
 
 #endif

@@ -31,7 +31,7 @@
 
 #include <opie2/otabbar.h>
 
-using namespace Opie;
+using namespace Opie::Ui;
 
 OTabBar::OTabBar( QWidget *parent , const char *name  )
         :QTabBar( parent, name )

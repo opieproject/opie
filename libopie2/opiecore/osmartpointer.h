@@ -40,6 +40,7 @@ _;:,     .>    :=|.         This program is free software; you can
  */
 
 namespace Opie {
+namespace Core {
 
 //! simple reference counter class
 class ORefCount {
@@ -139,6 +140,7 @@ public:
     bool operator! () { return (ptr == NULL); }
 };
 
+}
 }
 
 #endif

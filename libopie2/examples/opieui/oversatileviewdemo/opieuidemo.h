@@ -18,7 +18,11 @@
 
 #include <qmainwindow.h>
 
+namespace Opie {
+namespace Ui   {
 class OVersatileView;
+}
+}
 class QTabWidget;
 class QVBox;
 
@@ -47,7 +51,7 @@ protected:
 private:
     QTabWidget* main;
     
-    OVersatileView* vv;
+    Opie::Ui::OVersatileView* vv;
 
 };
 

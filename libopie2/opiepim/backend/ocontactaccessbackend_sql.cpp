@@ -46,7 +46,7 @@
 #include <opie2/osqlmanager.h>
 #include <opie2/osqlquery.h>
 
-
+using namespace Opie::DB;
 
 
 // If defined, we use a horizontal table ( uid, attr1, attr2, attr3, ..., attrn ) instead

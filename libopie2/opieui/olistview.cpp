@@ -36,6 +36,11 @@
 #include <opie2/odebug.h>
 #include <opie2/olistview.h>
 
+using namespace Opie::Core;
+
+
+namespace Opie {
+namespace Ui   {
 /*======================================================================================
  * OListView
  *======================================================================================*/
@@ -755,3 +760,5 @@ ONamedListViewItem* ONamedListViewItem::find( const QString& column, const QStri
         return 0;
 }
 
+}
+}

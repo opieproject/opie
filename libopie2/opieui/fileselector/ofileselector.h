@@ -52,11 +52,13 @@ class QHBox;
 
 typedef QMap<QString, QStringList> MimeTypes;
 
-namespace Opie
-{
+namespace Opie {
+namespace Ui   {
 
+namespace Private {
 class OFileViewInterface;
 class OFileViewFileListView;
+}
 
 
 /**
@@ -73,8 +75,8 @@ class OFileViewFileListView;
 class OFileSelector : public QWidget
 {
     Q_OBJECT
-    friend class Opie::OFileViewInterface;
-    friend class Opie::OFileViewFileListView;
+    friend class Private::OFileViewInterface;
+    friend class Private::OFileViewFileListView;
 
 public:
     /**
@@ -185,13 +187,13 @@ private:
     QLineEdit* m_lneEdit; // the LineEdit for the Name
     QComboBox *m_cmbView, *m_cmbMime; // two ComboBoxes to select the View and MimeType
     QWidgetStack* m_stack;  // our widget stack which will contain the views
-    OFileViewInterface* currentView() const; // returns the currentView
-    OFileViewInterface* m_current; // here is the view saved
+    Private::OFileViewInterface* currentView() const; // returns the currentView
+    Private::OFileViewInterface* m_current; // here is the view saved
     bool m_shNew   : 1; // should we show New?
     bool m_shClose : 1; // should we show Close?
     MimeTypes m_mimeType; // list of mimetypes
 
-    QMap<QString, OFileViewInterface*> m_views; // QString translated view name + ViewInterface Ptr
+    QMap<QString, Private::OFileViewInterface*> m_views; // QString translated view name + ViewInterface Ptr
     QHBox* m_nameBox; // the LineEdit + Label is hold here
     QHBox* m_cmbBox; // this holds the two combo boxes
 
@@ -214,6 +216,7 @@ private slots:
 
 };
 
-};
+}
+}
 
 #endif

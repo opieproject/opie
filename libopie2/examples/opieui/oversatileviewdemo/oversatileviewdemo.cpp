@@ -38,6 +38,8 @@
 #include <qpixmap.h>
 #include <qlistview.h>
 
+using namespace Opie::Ui;
+
 OVersatileViewDemo::OVersatileViewDemo( QWidget* parent, const char* name, WFlags f )
                    :QVBox( parent, name, f )
 {

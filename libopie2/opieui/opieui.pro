@@ -6,11 +6,9 @@ HEADERS     = oclickablelabel.h      \
               ofontselector.h        \
               oimageeffect.h         \
               olistview.h            \
-              omessagebox.h          \
               opixmapeffect.h        \
               opopupmenu.h           \
               opixmapprovider.h      \
-              oresource.h            \
               oselector.h            \
               oseparator.h           \
               otabinfo.h             \
@@ -31,7 +29,6 @@ SOURCES     = oclickablelabel.cpp    \
               opixmapeffect.cpp      \
               opopupmenu.cpp         \
               opixmapprovider.cpp    \
-              oresource.cpp          \
               oselector.cpp          \
               oseparator.cpp         \
               otabbar.cpp            \

@@ -38,8 +38,8 @@
 
 class QWidget;
 
-namespace Opie
-{
+namespace Opie{
+namespace Ui  {
 
 /**
  * @class OTabInfo
@@ -135,6 +135,7 @@ private:
  */
 typedef QList<OTabInfo> OTabInfoList;
 
-};
+}
+}
 
 #endif

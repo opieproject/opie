@@ -37,6 +37,9 @@
 #include <assert.h>
 #include <stdio.h>
 
+namespace Opie {
+namespace Net  {
+
 /*======================================================================================
  * OMacAddress
  *======================================================================================*/
@@ -185,6 +188,9 @@ void OPrivateIOCTL::setParameter( int num, u_int32_t value )
     arglist[num] = value;
 }
 
+
+
+namespace Private {
 /*======================================================================================
  * assorted functions
  *======================================================================================*/
@@ -229,4 +235,7 @@ QString modeToString( int mode )
         case IW_MODE_MONITOR:       return "monitor";
         default: assert( 0 );
     }
+}
+}
+}
 }

@@ -46,6 +46,8 @@
 #include <opie2/opimrecurrence.h>
 #include <opie2/odatebookaccessbackend_sql.h>
 
+using namespace Opie::DB;
+
 namespace Opie {
 
 

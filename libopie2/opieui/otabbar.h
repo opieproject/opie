@@ -35,8 +35,8 @@
 /* QT */
 #include <qtabbar.h>
 
-namespace Opie
-{
+namespace Opie {
+namespace Ui   {
 
 /**
  * @class OTabBar
@@ -80,6 +80,7 @@ private:
     Private *d;
 };
 
-};
+}
+}
 
 #endif

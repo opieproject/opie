@@ -29,6 +29,8 @@
 
 #include <opie2/ostorageinfo.h>
 
+using namespace Opie::Core;
+
 OStorageInfo::OStorageInfo( QObject *parent )
         : StorageInfo( parent )
 {

@@ -30,13 +30,17 @@
 #ifndef OAPPLICATION_H
 #define OAPPLICATION_H
 
-#define oApp OApplication::oApplication()
+#define oApp Opie::Core::OApplication::oApplication()
 
 
 #include <qpe/qpeapplication.h>
 
-
+namespace Opie {
+namespace Core {
+namespace Private {
 class OApplicationPrivate;
+} // private class
+
 class OConfig;
 
 
@@ -98,7 +102,10 @@ class OApplication : public QPEApplication
     const QCString _appname;
     static OApplication* _instance;
     OConfig* _config;
-    OApplicationPrivate* d;
+    Private::OApplicationPrivate* d;
 };
+
+} // Core
+} // Opie
 
 #endif // OAPPLICATION_H

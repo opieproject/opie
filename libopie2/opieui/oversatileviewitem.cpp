@@ -31,6 +31,8 @@
 #include <opie2/oversatileviewitem.h>
 #include <opie2/oversatileview.h>
 
+using namespace Opie::Ui;
+
 OVersatileViewItem::OVersatileViewItem( OVersatileView * parent )
               :OListViewItem( parent->_listview ), QIconViewItem( parent->_iconview ),
               _versatileview( parent )

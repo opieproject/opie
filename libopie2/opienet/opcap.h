@@ -64,8 +64,10 @@ typedef struct timeval timevalstruct;
 typedef struct pcap_pkthdr packetheaderstruct;
 
 /* FORWARDS */
-class OPacketCapturer;
 class QSocketNotifier;
+namespace Opie {
+namespace Net  {
+class OPacketCapturer;
 
 /*======================================================================================
  * OPacket - A frame on the wire
@@ -141,6 +143,9 @@ class OPacket : public QObject
     const packetheaderstruct _hdr;  // pcap packet header
     const unsigned char* _data;     // pcap packet data
     const unsigned char* _end;      // end of pcap packet data
+  private:
+    class Private;
+    Private *d;
 };
 
 QTextStream& operator<<( QTextStream& s, const OPacket& p );
@@ -163,6 +168,9 @@ class OEthernetPacket : public QObject
 
   private:
     const struct ether_header* _ether;
+  private:
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -181,6 +189,8 @@ class OPrismHeaderPacket : public QObject
 
   private:
     const struct prism_hdr* _header;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -210,6 +220,8 @@ class OWaveLanPacket : public QObject
 
   private:
     const struct ieee_802_11_header* _wlanhdr;
+    class Private;
+    Private *d;
 };
 
 
@@ -239,6 +251,8 @@ class OWaveLanManagementPacket : public QObject
   private:
     const struct ieee_802_11_mgmt_header* _header;
     const struct ieee_802_11_mgmt_body* _body;
+    class Private;
+    Private *d;
 };
 
 
@@ -258,6 +272,8 @@ class OWaveLanManagementSSID : public QObject
 
   private:
     const struct ssid_t* _data;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -274,6 +290,8 @@ class OWaveLanManagementRates : public QObject
 
   private:
     const struct rates_t* _data;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -290,6 +308,8 @@ class OWaveLanManagementCF : public QObject
 
   private:
     const struct cf_t* _data;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -306,6 +326,8 @@ class OWaveLanManagementFH : public QObject
 
   private:
     const struct fh_t* _data;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -324,6 +346,8 @@ class OWaveLanManagementDS : public QObject
 
   private:
     const struct ds_t* _data;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -340,6 +364,8 @@ class OWaveLanManagementTim : public QObject
 
   private:
     const struct tim_t* _data;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -356,6 +382,8 @@ class OWaveLanManagementIBSS : public QObject
 
   private:
     const struct ibss_t* _data;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -372,6 +400,8 @@ class OWaveLanManagementChallenge : public QObject
 
   private:
     const struct challenge_t* _data;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -388,6 +418,8 @@ class OWaveLanDataPacket : public QObject
 
   private:
     const struct ieee_802_11_data_header* _header;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -406,6 +438,8 @@ class OWaveLanControlPacket : public QObject
 
   private:
     const struct ieee_802_11_control_header* _header;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -422,6 +456,8 @@ class OLLCPacket : public QObject
 
   private:
     const struct ieee_802_11_802_2_header* _header;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -449,6 +485,8 @@ class OIPPacket : public QObject
 
   private:
     const struct iphdr* _iphdr;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -473,6 +511,8 @@ class OARPPacket : public QObject
 
   private:
     const struct myarphdr* _arphdr;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -494,6 +534,8 @@ class OUDPPacket : public QObject
 
   private:
     const struct udphdr* _udphdr;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -522,6 +564,8 @@ class ODHCPPacket : public QObject
   private:
     const struct dhcp_packet* _dhcphdr;
     unsigned char _type;
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -545,6 +589,8 @@ class OTCPPacket : public QObject
 
   private:
     const struct tcphdr* _tcphdr;
+    class Private;
+    Private *d;
 };
 
 
@@ -665,7 +711,11 @@ class OPacketCapturer : public QObject
     QSocketNotifier* _sn;                           // socket notifier for main loop
     mutable char _errbuf[PCAP_ERRBUF_SIZE];         // holds error strings from libpcap
     QMap<QString, int> _stats;                      // statistics;
+    class Private;			   	    // Private Forward declaration
+    Private *d;					    // if we need to add data
 };
+}
+}
 
 #endif // OPCAP_H
 

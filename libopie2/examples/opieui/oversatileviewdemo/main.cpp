@@ -17,6 +17,9 @@
 
 #include <opie2/oapplication.h>
 
+using namespace Opie::Core;
+using namespace Opie::Ui;
+
 int main( int argc, char **argv )
 {
     OApplication a( argc, argv, "Opie UI Demo" );

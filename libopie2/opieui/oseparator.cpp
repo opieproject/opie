@@ -36,6 +36,8 @@
 
 /* QT */
 
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
 OSeparator::OSeparator(QWidget* parent, const char* name, WFlags f)
    : QFrame(parent, name, f)

@@ -2,6 +2,8 @@
 #include <opie2/oconfig.h>
 #include <qpe/config.h>
 
+using namespace Opie::Core;
+
 int main( int argc, char** argv )
 {
     OApplication* app = new OApplication( argc, argv, "MyConfigDemoApplication" );

@@ -47,6 +47,9 @@ class QStringList;
 class QColor;
 class QBrush;
 
+namespace Opie {
+namespace Core {
+
 class odbgstream;
 class ondbgstream;
 
@@ -394,6 +397,10 @@ class ondbgstream {
     ondbgstream& operator<<( const QStringList & ) { return *this; }
     ondbgstream& operator<<( const QColor & ) { return *this; }
     ondbgstream& operator<<( const QBrush & ) { return *this; }
+    
+private:
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -472,3 +479,5 @@ void odClearDebugConfig();
 
 #endif
 
+}
+}

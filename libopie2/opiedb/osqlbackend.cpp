@@ -1,6 +1,8 @@
 
 #include "osqlbackend.h"
 
+using namespace Opie::DB;
+
 
 OSQLBackEnd::OSQLBackEnd( const QString& name,
                           const QString& vendor,

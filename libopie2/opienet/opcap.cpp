@@ -45,6 +45,11 @@
 /* LOCAL */
 #include "udp_ports.h"
 
+using namespace Opie::Core;
+
+namespace Opie {
+namespace Net  {
+
 /*======================================================================================
  * OPacket
  *======================================================================================*/
@@ -1344,4 +1349,5 @@ QString OPacketCapturer::version() const
     return QString().sprintf( "%d.%d", pcap_major_version( _pch ), pcap_minor_version( _pch ) );
 }
 
-
+}
+}

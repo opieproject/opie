@@ -7,6 +7,9 @@
 #include <qstring.h>
 
 
+namespace Opie {
+namespace DB {
+
 /** I'm not happy with them
 class OSQLQueryOrder {
 public:
@@ -47,6 +50,9 @@ public:
     virtual ~OSQLQuery();
 
     virtual QString query()const = 0;
+private:
+    class Private;
+    Private *d;    
 };
 
 class OSQLRawQuery : public OSQLQuery {
@@ -119,4 +125,6 @@ public:
     QString query() const;
 };
 */
+}
+}
 #endif

@@ -17,6 +17,8 @@
 #include <opie2/oglobal.h>
 #include <opie2/oglobalsettings.h>
 
+using namespace Opie::Core;
+
 class DemoApp : public OApplication
 {
 Q_OBJECT

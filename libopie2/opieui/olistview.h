@@ -36,6 +36,9 @@
 #include <qdatastream.h>
 #include <qstringlist.h>
 
+
+namespace Opie {
+namespace Ui   {
 class OListViewItem;
 
 
@@ -54,6 +57,7 @@ class OListViewItem;
  */
 class OListView: public QListView
 {
+    Q_OBJECT
   public:
    /**
     * Constructor.
@@ -139,8 +143,10 @@ class OListView: public QListView
 
   private:
     QColor m_alternateBackground;
-    bool m_fullWidth;
+    bool m_fullWidth : 1;
     QPen m_columnSeparator;
+    class Private;
+    Private *d;
 };
 
 #ifndef QT_NO_DATASTREAM
@@ -242,8 +248,10 @@ class OListViewItem: public QListViewItem
     virtual void expand(){};
 
   private:
-    bool m_known;
-    bool m_odd;
+    bool m_known : 1;
+    bool m_odd   : 1;
+    class Private;
+    Private *d;
 };
 
 #ifndef QT_NO_DATASTREAM
@@ -354,6 +362,9 @@ class ONamedListView: public OListView
 
     virtual ONamedListViewItem* find( ONamedListViewItem* start, const QString& column, const QString& text, int recurse = -1 ) const;
     virtual ONamedListViewItem* find( const QString& column, const QString& text, int recurse = -1 ) const;
+  private:
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -403,7 +414,13 @@ class ONamedListViewItem: public OListViewItem
      */
     virtual ONamedListViewItem* find( int column, const QString& text, int recurse = -1 ) const;
     virtual ONamedListViewItem* find( const QString& column, const QString& text, int recurse = -1 ) const;
-};
 
+  private:
+    class Private;
+    Private *d;
+
+};
+}
+}
 
 #endif // OLISTVIEW_H

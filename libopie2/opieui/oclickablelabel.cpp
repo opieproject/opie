@@ -29,7 +29,7 @@
 
 #include <opie2/oclickablelabel.h>
 
-using namespace Opie;
+using namespace Opie::Ui;
 
 /**
  * This constructs the clickable ButtonLabel

@@ -7,6 +7,10 @@
 
 
 #include "osqlerror.h"
+
+namespace Opie {
+namespace DB {
+
 /**
  * ResultItem  represents one row of the resulting answer
  */
@@ -107,6 +111,10 @@ private:
     OSQLResultItem::ValueList m_list;
     OSQLError::ValueList m_error;
     OSQLResultItem::ValueList::Iterator it;
+    class Private;
+    Private *d;
 };
 
+}
+}
 #endif

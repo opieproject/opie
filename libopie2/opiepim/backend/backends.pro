@@ -10,7 +10,8 @@ SOURCES += core/backends/ocontactaccessbackend_sql.cpp \
         core/backends/otodoaccessvcal.cpp \
         core/backends/otodoaccessxml.cpp \
         core/backends/odatebookaccess.cpp \
-        core/backends/odatebookaccessbackend_sql.cpp
+        core/backends/odatebookaccessbackend_sql.cpp \
+	core/backends/private/xmltree.cc
         
 HEADERS += core/backends/obackendfactory.h \
         core/backends/ocontactaccessbackend.h \
@@ -28,4 +29,5 @@ HEADERS += core/backends/obackendfactory.h \
         core/backends/otodoaccesssql.h \
         core/backends/otodoaccessvcal.h \
         core/backends/otodoaccessxml.h \
-        core/backends/odatebookaccess.h
+        core/backends/odatebookaccess.h \
+	core/backends/private/xmltree.h

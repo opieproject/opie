@@ -32,6 +32,9 @@
 
 #include <qpe/storage.h>
 
+namespace Opie {
+namespace Core {
+
 class OStorageInfo : public StorageInfo
 {
   Q_OBJECT
@@ -56,7 +59,12 @@ class OStorageInfo : public StorageInfo
     *
     **/
     QString mmcPath() const;
+private:
+    class Private;
+    Private *d;
 };
 
+}
+}
 #endif // OSTORAGE_H
 

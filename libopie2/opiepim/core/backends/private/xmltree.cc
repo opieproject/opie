@@ -17,7 +17,7 @@
    Boston, MA 02111-1307, USA.
 */
 
-#include <opie2/xmltree.h>
+#include "xmltree.h"
 
 #include <qpe/stringutil.h>
 
@@ -25,7 +25,7 @@
 
 #include <assert.h>
 
-using namespace Opie;
+using namespace Opie::Pim::Private;
 
 XMLElement::XMLElement()
     : m_parent( 0 ), m_next( 0 ), m_prev( 0 ), m_first( 0 ), m_last( 0 )

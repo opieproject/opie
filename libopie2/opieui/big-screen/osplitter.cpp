@@ -35,7 +35,8 @@
 #include <qvaluelist.h>
 #include <qvbox.h>
 
-using namespace Opie;
+using namespace Opie::Ui;
+using namespace Opie::Ui::Private;
 
 /**
  *
@@ -168,7 +169,7 @@ void OSplitter::addWidget( OSplitter* split )
         setTabWidget( m_parentTab );
     else
     {
-        Opie::OSplitterContainer con;
+        OSplitterContainer con;
         con.widget =split;
         addToBox( con );
     }
@@ -213,7 +214,7 @@ void OSplitter::addWidget( QWidget* wid, const QString& icon, const QString& lab
         return;
     }
 #endif
-    Opie::OSplitterContainer cont;
+    OSplitterContainer cont;
     cont.widget = wid;
     cont.icon =icon;
     cont.name = label;
@@ -396,7 +397,7 @@ void OSplitter::resizeEvent( QResizeEvent* res )
  * Adds a container to a tab either the parent tab
  * or our own
  */
-void OSplitter::addToTab( const Opie::OSplitterContainer& con )
+void OSplitter::addToTab( const Opie::Ui::Private::OSplitterContainer& con )
 {
     QWidget *wid = con.widget;
     // not needed widgetstack will reparent as well    wid.reparent(m_tabWidget, wid->getWFlags(), QPoint(0, 0) );
@@ -410,7 +411,7 @@ void OSplitter::addToTab( const Opie::OSplitterContainer& con )
 /*
  * adds a container to the box
  */
-void OSplitter::addToBox( const Opie::OSplitterContainer& con )
+void OSplitter::addToBox( const Opie::Ui::Private::OSplitterContainer& con )
 {
     QWidget* wid = con.widget;
     wid->reparent(m_hbox, 0,  QPoint(0, 0) );
@@ -545,7 +546,7 @@ void OSplitter::commonChangeBox()
     {
         /* tell them the world had changed */
         split->setTabWidget( 0 );
-        Opie::OSplitterContainer con;
+        OSplitterContainer con;
         con.widget = split;
         //        con.widget = split->m_tabWidget ? static_cast<QWidget*>(split->m_tabWidget)
         //                     : static_cast<QWidget*>(split->m_hbox);

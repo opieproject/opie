@@ -36,6 +36,9 @@
 #include <qcolor.h>
 #include <qfont.h>
 
+/**
+ * \todo make real const values
+ */
 #define OPIE_DEFAULT_SINGLECLICK true
 #define OPIE_DEFAULT_INSERTTEAROFFHANDLES true
 #define OPIE_DEFAULT_AUTOSELECTDELAY -1
@@ -48,6 +51,9 @@
 //FIXME: before public usage... lack of time to do it at once - so it will
 //FIXME: happen step-by-step. ML.
 // we should not habe too much configure options!!!!!! -zecke
+
+namespace Opie {
+namespace Core {
 
 /**
  * Access the OPIE global configuration settings.
@@ -368,6 +374,12 @@ private:
     static QColor * OpieHighlight;
     
     friend class OApplication;
+private:
+    class Private;
+    Private *d;
 };
+
+}
+}
 
 #endif

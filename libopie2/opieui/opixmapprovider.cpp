@@ -20,6 +20,8 @@
 
 #include <opie2/opixmapprovider.h>
 
+using namespace Opie::Ui;
+
 OPixmapProvider::~OPixmapProvider() {}
 
 void OPixmapProvider::virtual_hook( int , void* )

@@ -5,7 +5,7 @@
 
 */
 
-// $Id: opixmapeffect.cpp,v 1.1 2003-03-28 15:11:52 mickeyl Exp $
+// $Id: opixmapeffect.cpp,v 1.2 2004-03-13 19:51:49 zecke Exp $
 
 /* QT */
 
@@ -17,6 +17,8 @@
 #include <opie2/opixmapeffect.h>
 #include <opie2/oimageeffect.h>
 
+
+using namespace Opie::Ui;
 //======================================================================
 //
 // Gradient effects

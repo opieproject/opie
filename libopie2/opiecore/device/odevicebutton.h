@@ -23,10 +23,12 @@
 #include <qpixmap.h>
 #include <qstring.h>
 
-class OQCopMessageData;
 
-namespace Opie
-{
+namespace Opie{
+namespace Core{
+namespace Private {
+class OQCopMessageData;
+}
 
 class OQCopMessage
 {
@@ -52,7 +54,7 @@ public:
 private:
     void init ( const QCString &m_channel, const QCString &message, const QByteArray &args );
 
-    OQCopMessageData *d;
+    Private::OQCopMessageData *d;
     class Private;
     Private* m_data;
 };
@@ -103,6 +105,7 @@ class ODeviceButton
     Private *d;
 };
 
+}
 }
 
 #endif

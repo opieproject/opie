@@ -1,6 +1,8 @@
 
 #include "osqlresult.h"
 
+using namespace Opie::DB;
+
 OSQLResultItem::OSQLResultItem( const TableString& string,
                                 const TableInt& Int)
     : m_string( string ), m_int( Int )

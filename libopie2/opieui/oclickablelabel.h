@@ -33,8 +33,8 @@
 /* QT */
 #include <qlabel.h>
 
-namespace Opie
-{
+namespace Opie{
+namespace Ui  {
 
 /**
  * This class is a special QLabel which can behave
@@ -98,6 +98,7 @@ private:
     Private *d; // private d pointer
 };
 
-};
+}
+}
 
 #endif

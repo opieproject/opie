@@ -7,6 +7,10 @@
 #include "osqlerror.h"
 #include "osqlresult.h"
 
+namespace Opie {
+namespace DB {
+namespace Private {
+
 class OSQLiteDriver : public OSQLDriver {
     Q_OBJECT
 public:
@@ -31,4 +35,8 @@ private:
     QString m_url;
     sqlite *m_sqlite;
 };
+}
+}
+}
+
 #endif

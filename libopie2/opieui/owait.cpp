@@ -38,6 +38,8 @@
 #include <qlayout.h>
 #include <qpainter.h>
 
+using namespace Opie::Ui;
+
 static int frame = 0;
 
 /**

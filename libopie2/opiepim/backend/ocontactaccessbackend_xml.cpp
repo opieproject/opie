@@ -41,7 +41,7 @@
 
 #include <qpe/global.h>
 
-#include <opie2/xmltree.h>
+#include "private/xmltree.h"
 #include <opie2/ocontactaccessbackend.h>
 #include <opie2/ocontactaccess.h>
 
@@ -49,6 +49,7 @@
 #include <errno.h>
 
 using namespace Opie;
+using namespace Opie::Pim::Private;
 
 
 namespace Opie {

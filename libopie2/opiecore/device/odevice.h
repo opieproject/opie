@@ -40,8 +40,9 @@ _;:,   .>  :=|.         This program is free software; you can
 #include <qstring.h>
 #include <qstrlist.h>
 
-namespace Opie
-{
+namespace Opie{
+namespace Core{
+
     class ODeviceData;
 /**
  * The available devices
@@ -250,7 +251,7 @@ public:
      * of buttons will vary depending on the device.  Button numbers will be assigned
      * by the device manufacturer and will be from most preferred button to least preffered
      * button.  Note that this list only contains "user mappable" buttons.
-     * 
+     *
      * @todo Make method const and take care of calling initButtons or make that const too
      *
      */
@@ -314,6 +315,7 @@ class ODeviceData {
 };
 
 }
+}
 
 static inline bool isQWS()
 {
@@ -327,6 +329,7 @@ static QCString makeChannel ( const char *str )
     else
         return str;
 }
+
 
 #endif
 

@@ -40,6 +40,9 @@
 
 #include <opie2/olistview.h>
 
+namespace Opie {
+namespace Ui   {
+
 class OVersatileView;
 
 class OVersatileViewItem : public OListViewItem, public QIconViewItem
@@ -97,4 +100,6 @@ class OVersatileViewItem : public OListViewItem, public QIconViewItem
 
 };
 
+}
+}
 #endif

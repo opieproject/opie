@@ -6,7 +6,6 @@
 #define OSPlitter_EXAMPLE_H
 
 #include <qvbox.h>
-#include <opie2/ofileselector.h>
  
 class OSplitterExample : public QWidget {
     Q_OBJECT

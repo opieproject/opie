@@ -36,6 +36,9 @@
 #include <qdict.h>
 #include <qmap.h>
 
+namespace Opie {
+namespace MM {
+
 class OAudioInterface;
 class OMixerInterface;
 class OSoundCard;
@@ -90,6 +93,8 @@ class OSoundSystem : public QObject
   private:
     static OSoundSystem* _instance;
     CardMap _interfaces;
+    class Private;
+    Private *d;
 };
 
 
@@ -124,6 +129,9 @@ class OSoundCard : public QObject
 
   private:
     void init();
+  private:
+    class Private;
+    Private *d;
 };
 
 /*======================================================================================
@@ -150,6 +158,9 @@ class OAudioInterface : public QObject
 
   private:
     void init();
+  private:
+    class Private;
+    Private *d;
 };
 
 
@@ -210,7 +221,13 @@ class OMixerInterface : public QObject
 
   private:
     void init();
+  private:
+    class Private;
+    Private *d;
 };
+
+}
+}
 
 #endif // OSOUNDSYSTEM_H
 

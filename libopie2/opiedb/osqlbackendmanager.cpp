@@ -3,6 +3,10 @@
 
 #include "osqlbackendmanager.h"
 
+/**
+ * \todo FIXME CONFIG!!!
+ */
+
 namespace {
     class Config {
         typedef QMap<QString, QString> List;
@@ -44,6 +48,10 @@ namespace {
         return m_list[key];
     }
 };
+
+
+using namespace Opie::DB;
+
 OSQLBackEndManager::OSQLBackEndManager( const QStringList& path )
     :m_path( path )
 {

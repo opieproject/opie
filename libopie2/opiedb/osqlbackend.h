@@ -6,6 +6,9 @@
 #include <qstring.h>
 #include <qvaluelist.h>
 
+
+namespace Opie {
+namespace DB {
 /**
  * OSQLBackEnd represents an available backend
  * to the Opie Database Service
@@ -70,6 +73,11 @@ private:
     QCString m_lib;
     bool m_default :1;
     int m_pref;
+    class Private;
+    Private *d;
 };
+
+}
+}
 
 #endif

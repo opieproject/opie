@@ -8,7 +8,6 @@
 #include <qmainwindow.h>
 #include <opie2/owidgetstack.h>
 
-using namespace Opie;
 
 class StackExample : public QMainWindow {
     Q_OBJECT
@@ -20,7 +19,7 @@ public:
 protected:
     void closeEvent( QCloseEvent* e );
 private:
-    OWidgetStack* m_stack;
+    Opie::Ui::OWidgetStack* m_stack;
     QWidget* m_main;
 
 };

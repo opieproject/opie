@@ -1,5 +1,7 @@
 #include <opie2/osoundsystem.h>
 
+using namespace Opie::MM;
+
 int main( int argc, char** argv )
 {
     qDebug( "OPIE Sound System Demo" );

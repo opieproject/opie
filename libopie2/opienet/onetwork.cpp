@@ -57,6 +57,10 @@
 
 #ifndef NODEBUG
 #include <opie2/odebugmapper.h>
+
+
+using namespace Opie::Core;
+using namespace Opie::Net::Private;
 DebugMapper* debugmapper = new DebugMapper();
 #endif
 
@@ -64,6 +68,8 @@ DebugMapper* debugmapper = new DebugMapper();
  * ONetwork
  *======================================================================================*/
 
+namespace Opie {
+namespace Net  {
 ONetwork* ONetwork::_instance = 0;
 
 ONetwork::ONetwork()
@@ -1236,4 +1242,7 @@ void OOrinocoMonitoringInterface::setEnabled( bool b )
 QString OOrinocoMonitoringInterface::name() const
 {
     return "orinoco";
+}
+
+}
 }

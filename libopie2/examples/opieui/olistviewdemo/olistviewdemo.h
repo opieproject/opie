@@ -44,7 +44,7 @@ class OListViewDemo: public QVBox
     virtual ~OListViewDemo();
 
   private:
-    ONamedListView* lv;
+    Opie::Ui::ONamedListView* lv;
 
 };
 

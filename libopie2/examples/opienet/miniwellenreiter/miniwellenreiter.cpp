@@ -9,6 +9,8 @@
 #include <cstdlib>
 #include <cstring>
 
+
+using namespace Opie::Net;
 //======================== Station help class ===============================
 
 class Station

@@ -31,6 +31,11 @@
 #include <opie2/ostation.h>
 #include <opie2/odebug.h>
 
+
+using namespace Opie::Core;
+
+namespace Opie {
+namespace Net {
 /*======================================================================================
  * OStation
  *======================================================================================*/
@@ -61,4 +66,7 @@ void OStation::dump()
     qDebug( "mac:  %s", (const char*) macAddress.toString() );
     qDebug( "ap:   %s", (const char*) apAddress.toString() );
     qDebug( "ip:   %s", (const char*) ipAddress.toString() );
+}
+
+}
 }

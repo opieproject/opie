@@ -6,8 +6,9 @@
 
 class QWidget;
 
-namespace Opie
-{
+namespace Opie {
+namespace Ui  {
+namespace Private{
 
 struct OSplitterContainer
 {
@@ -23,6 +24,8 @@ struct OSplitterContainer
     QString name;
 };
 
-};
+}
+}
+}
 
 #endif

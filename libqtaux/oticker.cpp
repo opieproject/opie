@@ -33,6 +33,8 @@
 /* OPIE */
 #include <qpe/config.h>
 
+using namespace Opie::Ui;
+
 OTicker::OTicker( QWidget* parent )
         : QLabel( parent )
 {

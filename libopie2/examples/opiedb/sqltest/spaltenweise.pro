@@ -4,7 +4,7 @@ HEADERS		=
 SOURCES		= spaltenweise.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe -lopiesql
+LIBS            += -lqpe -lopiedb2
 TARGET		= spaltenweise
 
 

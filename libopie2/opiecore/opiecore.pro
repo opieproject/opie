@@ -9,8 +9,7 @@ HEADERS     = oapplication.h            \
               oprocess.h                \
               oprocctrl.h               \
               osmartpointer.h           \
-              ostorageinfo.h            \
-              xmltree.h
+              ostorageinfo.h            
 
 SOURCES     = oapplication.cpp          \
               oconfig.cpp               \
@@ -19,14 +18,13 @@ SOURCES     = oapplication.cpp          \
               oglobalsettings.cpp       \
               oprocess.cpp              \
               oprocctrl.cpp             \
-              ostorageinfo.cpp          \
-              xmltree.cc
+              ostorageinfo.cpp          
 
 include ( device/device.pro )
 
 INTERFACES  =
 TARGET      = opiecore2
-VERSION     = 1.8.5
+VERSION     = 1.9.0
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 

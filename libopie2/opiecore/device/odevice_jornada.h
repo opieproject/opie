@@ -32,8 +32,9 @@
 
 #include <opie2/odevice.h>
 
-using namespace Opie;
-
+namespace Opie {
+namespace Core {
+namespace Private {
 class Jornada : public ODevice
 {
 
@@ -45,6 +46,8 @@ class Jornada : public ODevice
     virtual bool setDisplayBrightness ( int b );
     virtual int displayBrightnessResolution() const;
 };
-
+}
+}
+}
 #endif
 

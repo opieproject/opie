@@ -33,6 +33,9 @@
 
 #include <qmap.h>
 
+namespace Opie {
+namespace Net {
+
 /**
  * @brief A Ethernet card vendor database.
  *
@@ -63,7 +66,12 @@ class OManufacturerDB
     QMap<QString, QString> manufacturers;
     QMap<QString, QString> manufacturersExt;
     static OManufacturerDB* _instance;
+    class Private;
+    Private *d;
 };
+
+}
+}
 
 #endif
 

@@ -5,7 +5,7 @@
 
 */
 
-// $Id: opixmapeffect.h,v 1.1 2003-03-28 15:11:52 mickeyl Exp $
+// $Id: opixmapeffect.h,v 1.2 2004-03-13 19:51:49 zecke Exp $
 
 #ifndef __OPIXMAP_EFFECT_H
 #define __OPIXMAP_EFFECT_H
@@ -15,6 +15,9 @@
 typedef QPixmap OPixmap;
 class QColor;
 
+
+namespace Opie {
+namespace Ui   {
 /**
  * This class includes various pixmap-based graphical effects.
  *
@@ -210,6 +213,7 @@ public:
      */
     static OPixmap selectedPixmap( const OPixmap &pixmap, const QColor &col );
 };
-
+}
+}
 
 #endif

@@ -45,8 +45,10 @@
 #define OD_IOR(type,number,size)        OD_IOC(2,type,number,sizeof(size))
 #define OD_IORW(type,number,size)       OD_IOC(3,type,number,sizeof(size))
 
-using namespace Opie;
 
+namespace Opie {
+namespace Core {
+namespace Private {
 class Zaurus : public ODevice
 {
 
@@ -92,5 +94,7 @@ struct z_button {
     char *fheldservice;
     char *fheldaction;
 };
-
+}
+}
+}
 #endif

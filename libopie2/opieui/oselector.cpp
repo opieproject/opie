@@ -36,6 +36,8 @@
  * The contents of the selector are drawn by derived class.
  */
 
+using namespace Opie::Ui;
+
 OXYSelector::OXYSelector( QWidget *parent, const char *name )
 	: QWidget( parent, name )
 {
@@ -73,7 +75,7 @@ void OXYSelector::setValues( int _xPos, int _yPos )
 		xPos = maxX;
 	else if ( xPos < minX )
 		xPos = minX;
-	
+
 	if ( yPos > maxY )
 		yPos = maxY;
 	else if ( yPos < minY )
@@ -258,7 +260,7 @@ void OSelector::paintEvent( QPaintEvent * )
 	}
 
 	QPoint pos = calcArrowPos( value() );
-	drawArrow( &painter, TRUE, pos );   
+	drawArrow( &painter, TRUE, pos );
 
 	painter.end();
 }
@@ -288,10 +290,10 @@ void OSelector::valueChange()
 	painter.begin( this );
 
 	pos = calcArrowPos( prevValue() );
-	drawArrow( &painter, FALSE, pos );   
+	drawArrow( &painter, FALSE, pos );
 
 	pos = calcArrowPos( value() );
-	drawArrow( &painter, TRUE, pos );   
+	drawArrow( &painter, TRUE, pos );
 
 	painter.end();
 }
@@ -361,8 +363,8 @@ void OSelector::drawArrow( QPainter *painter, bool show, const QPoint &pos )
     }
 
     painter->drawPolygon( array );
-  } 
-  else 
+  }
+  else
   {
     if ( orientation() == Vertical )
     {
@@ -400,7 +402,7 @@ void OGradientSelector::init()
 {
     color1.setRgb( 0, 0, 0 );
     color2.setRgb( 255, 255, 255 );
-    
+
     text1 = text2 = "";
 }
 
@@ -472,7 +474,7 @@ void OGradientSelector::drawContents( QPainter *painter )
 		painter->drawText( xPos, yPos, text2 );
 
 		yPos = contentsRect().bottom() - painter->fontMetrics().descent() - 2;
-		xPos = contentsRect().left() + (contentsRect().width() - 
+		xPos = contentsRect().left() + (contentsRect().width() -
 			painter->fontMetrics().width( text1 )) / 2;
 		pen.setColor( color1 );
 		painter->setPen( pen );

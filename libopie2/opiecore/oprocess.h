@@ -43,7 +43,13 @@ _;:,     .>    :=|.         This program is free software; you can
 #include <unistd.h>
 
 class QSocketNotifier;
+
+namespace Opie {
+namespace Core {
+namespace Private {
+class OProcessController;
 class OProcessPrivate;
+}
 
 /**
  * Child process invocation, monitoring and control.
@@ -397,6 +403,7 @@ public:
 
     /**
      * Lets you see what your arguments are for debugging.
+     * \todo make const
      */
 
     const QValueList<QCString> &args()
@@ -716,7 +723,7 @@ protected:
      * @ref OProcessController is a friend of OProcess because it has to have
      * access to various data members.
      */
-    friend class OProcessController;
+    friend class Private::OProcessController;
 
 private:
     /**
@@ -745,8 +752,10 @@ private:
 
 private:
     void init ( );
-    OProcessPrivate *d;
+    Private::OProcessPrivate *d;
 };
+}
+}
 
 #endif
 

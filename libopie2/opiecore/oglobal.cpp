@@ -38,6 +38,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 
+using namespace Opie::Core;
+
 static const char Base64EncMap[64] =
 {
   0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48,
@@ -312,7 +314,7 @@ QByteArray OGlobal::decodeBase64( const QByteArray& in) {
 
 bool OGlobal::isAppLnkFileName( const QString& str )
 {
-    if (str.length()==0||str.at(str.length()-1)==QDir::separator()) return false;
+    if (str.isEmpty()||str.at(str.length()-1)==QDir::separator()) return false;
     return str.startsWith(MimeType::appsFolderName()+QDir::separator());
 }
 
@@ -323,7 +325,7 @@ bool OGlobal::isAppLnkFileName( const QString& str )
  */
 bool OGlobal::isDocumentFileName( const QString& file )
 {
-    if (file.length()==0||file.at(file.length()-1)==QDir::separator()) return false;
+    if (file.isEmpty()||file.at(file.length()-1)==QDir::separator()) return false;
     if (file.startsWith(QPEApplication::documentDir()+QDir::separator())) return true;
     StorageInfo si;
     QList< FileSystem > fl =  si.fileSystems();

@@ -40,7 +40,11 @@
 
 #include <sys/types.h>
 
+namespace Opie {
+namespace Net  {
+
 class OStation;
+
 
 typedef QList<OStation> OStationList;
 
@@ -66,8 +70,13 @@ class OStation
     OMacAddress apAddress;
     int channel;
     bool encrypted;
+  private:
+    class Private;
+    Private *d;
 };
 
+}
+}
 
 #endif // OSTATION_H
 

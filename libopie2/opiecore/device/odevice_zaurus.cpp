@@ -53,7 +53,8 @@ _;:,   .>  :=|.         This program is free software; you can
 #include <linux/soundcard.h>
 #endif
 
-using namespace Opie;
+using namespace Opie::Core;
+using namespace Opie::Core::Private;
 
 struct z_button z_buttons [] = {
     { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),

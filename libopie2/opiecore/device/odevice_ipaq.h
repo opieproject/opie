@@ -35,7 +35,9 @@
 /* QT */
 #include <qwindowsystem_qws.h>
 
-using namespace Opie;
+namespace Opie {
+namespace Core {
+namespace Private {
 
 class iPAQ : public ODevice, public QWSServer::KeyboardFilter
 {
@@ -80,5 +82,9 @@ struct i_button {
     char *fheldservice;
     char *fheldaction;
 };
+
+}
+}
+}
 
 #endif

@@ -38,6 +38,8 @@
 
 #include <opie2/oconfig.h>
 
+using namespace Opie::Core;
+
 OConfig::OConfig( const QString &name, Domain domain )
         :Config( name, domain )
 {

@@ -27,6 +27,9 @@
 #include <opie2/opopupmenu.h>
 #include <opie2/oconfig.h>
 
+using namespace Opie::Core;
+using namespace Opie::Ui;
+
 OPopupTitle::OPopupTitle(QWidget *parent, const char *name)
     : QWidget(parent, name)
 {

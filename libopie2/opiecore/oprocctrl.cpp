@@ -41,6 +41,8 @@
 #include <qsocketnotifier.h>
 #include "oprocctrl.h"
 
+using namespace Opie::Core::Private;
+
 OProcessController *OProcessController::theOProcessController = 0;
 
 struct sigaction OProcessController::oldChildHandlerData;

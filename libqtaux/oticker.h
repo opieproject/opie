@@ -41,6 +41,9 @@
 #include <qframe.h>
 #include <qcolor.h>
 
+
+namespace Opie {
+namespace Ui   {
 /**
  * @class OTicker
  * @brief The OTicker class provides a QLabel widget that scroll its contents
@@ -143,4 +146,6 @@ private:
     int pos, updateTimerTime, scrollLength;
 };
 
+}
+}
 #endif

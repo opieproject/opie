@@ -35,8 +35,8 @@
 
 class QWidgetStack;
 
-namespace Opie
-{
+namespace Opie {
+namespace Ui {
 /**
  *
  * OWidgetStack is the answer to the problem of using Opie at different screen
@@ -127,6 +127,7 @@ private:
     Private *d;
 };
 
-};
+}
+}
 
 #endif
