@@ -1,23 +1,23 @@
 <!DOCTYPE UI><UI>
-<class>VncOptionsBase</class>
+<class>KVNCConnDlgBase</class>
 <widget>
     <class>QDialog</class>
     <property stdset="1">
         <name>name</name>
-        <cstring>VncOptionsBase</cstring>
+        <cstring>KVNCConnDlgBase</cstring>
     </property>
     <property stdset="1">
         <name>geometry</name>
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>234</width>
-            <height>221</height>
+            <width>984</width>
+            <height>676</height>
         </rect>
     </property>
     <property stdset="1">
         <name>caption</name>
-        <string>VNC Viewer Options</string>
+        <string>VNC Viewer Connection</string>
     </property>
     <property>
         <name>layoutMargin</name>
@@ -45,7 +45,154 @@
                 </property>
                 <attribute>
                     <name>title</name>
-                    <string>Data Encoding</string>
+                    <string>Server</string>
+                </attribute>
+                <grid>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>11</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>6</number>
+                    </property>
+                    <widget row="0"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>hostname</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Host Name:</string>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel2_2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Display Number:</string>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="1"  rowspan="1"  colspan="2" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>serverPassword</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>autoMask</name>
+                            <bool>true</bool>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="1"  rowspan="1"  colspan="2" >
+                        <class>QSpinBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>serverDisplay</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>maxValue</name>
+                            <number>500</number>
+                        </property>
+                        <property stdset="1">
+                            <name>minValue</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>value</name>
+                            <number>0</number>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="1"  rowspan="1"  colspan="2" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>serverHostname</cstring>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel3</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Password:</string>
+                        </property>
+                    </widget>
+                    <widget row="3"  column="1"  rowspan="1"  colspan="2" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>serverBookmark</cstring>
+                        </property>
+                    </widget>
+                    <widget row="3"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel1_2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Bookmark Name:</string>
+                        </property>
+                    </widget>
+                    <spacer row="5"  column="2" >
+                        <property>
+                            <name>name</name>
+                            <cstring>Spacer2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>orientation</name>
+                            <enum>Vertical</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>sizeType</name>
+                            <enum>Expanding</enum>
+                        </property>
+                        <property>
+                            <name>sizeHint</name>
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget row="4"  column="1" >
+                        <class>QLayoutWidget</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>Layout3</cstring>
+                        </property>
+                        <hbox>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>0</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                        </hbox>
+                    </widget>
+                </grid>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Options</string>
                 </attribute>
                 <vbox>
                     <property stdset="1">
@@ -174,7 +321,7 @@
                 </property>
                 <attribute>
                     <name>title</name>
-                    <string>Connection</string>
+                    <string>Encodings</string>
                 </attribute>
                 <vbox>
                     <property stdset="1">
@@ -267,4 +414,19 @@
         </widget>
     </vbox>
 </widget>
+<tabstops>
+    <tabstop>TabWidget3</tabstop>
+    <tabstop>serverHostname</tabstop>
+    <tabstop>serverDisplay</tabstop>
+    <tabstop>serverPassword</tabstop>
+    <tabstop>serverBookmark</tabstop>
+    <tabstop>timeBox</tabstop>
+    <tabstop>bit</tabstop>
+    <tabstop>deIconify</tabstop>
+    <tabstop>shared</tabstop>
+    <tabstop>hex</tabstop>
+    <tabstop>corre</tabstop>
+    <tabstop>rre</tabstop>
+    <tabstop>copyRect</tabstop>
+</tabstops>
 </UI>
