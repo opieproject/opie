@@ -252,7 +252,7 @@
                                         </property>
                                         <property stdset="1">
                                             <name>text</name>
-                                            <string>Play sound (Zaurus only)</string>
+                                            <string>Play sound</string>
                                         </property>
                                     </widget>
                                     <widget row="2"  column="0" >

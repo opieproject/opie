@@ -1,6 +1,7 @@
 #include <qlayout.h>
 #include <qpixmap.h>
 #include <qlabel.h>
+#include <qsound.h>
 #include <qtimer.h>
 #include <qdir.h>
 
@@ -19,6 +20,9 @@
 BenD::BenD(QWidget *parent, const char *name, WFlags fl)
 	: QButton(parent, name, fl)
 {
+	_zaurus = false;
+	if (QFile("/dev/sharp_buz").exists()) _zaurus = true;
+
 	_config = new Config("mail");
 	_config->setGroup("Settings");
 
@@ -66,6 +70,9 @@ void BenD::slotCheck()
 	if (newIntervalMs != _intervalMs) {
 		_intervalTimer->changeInterval(newIntervalMs);
 		_intervalMs = newIntervalMs;
+#ifndef QT_NO_DEBUG
+		qWarning("BenD: Detected interval change");
+#endif
 	}
 
 	QValueList<Account> acList = ConfigFile::getAccounts();
@@ -95,8 +102,12 @@ void BenD::slotIMAPStatus(IMAPResponse &response)
 			if (_config->readBoolEntry("BlinkLed", true)) 
 				ZaurusStuff::blinkLedOn();
 			if (_config->readBoolEntry("PlaySound", false)) {
-				ZaurusStuff::buzzerOn();
-				QTimer::singleShot(3000, this, SLOT(slotSoundOff()));
+				if (_zaurus) {
+					ZaurusStuff::buzzerOn();
+					QTimer::singleShot(3000, this, SLOT(slotSoundOff()));
+				} else {
+					QSound::play(Resource::findSound("mail/newmail"));
+				}
 			}
 		} else {
 			if (!isHidden()) hide();

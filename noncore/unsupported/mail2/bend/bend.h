@@ -30,7 +30,7 @@ private:
 	Config *_config;
 	QTimer *_intervalTimer;
 	int _intervalMs;
-	bool _ledOn;
+	bool _zaurus, _ledOn;
 
 };
 
