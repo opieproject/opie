@@ -15,6 +15,8 @@
 
 // qt includes
 #include <qapplication.h>
+#include <qframe.h>
+#include <qarray.h>
 #include <qtimer.h>
 #include <qkeycode.h>
 #include <qclipboard.h>
@@ -24,7 +26,16 @@
 #include "session.h"
 #include "common.h"
 
-class WidgetLayer : public QObject
+/*
+ * given a pseudo location ( column, line ),
+ * returns the actual index, in the QArray<Character>
+ */
+#define loc(X,Y) ((Y)*m_columns+(X))
+
+
+
+
+class WidgetLayer : public QFrame
 { Q_OBJECT
 
 public:
@@ -32,7 +43,7 @@ public:
 	/**
 	 * constructor
 	 */
-	WidgetLayer( QObject *parent=0, const char *name=0 );
+	WidgetLayer( QWidget *parent=0, const char *name=0 );
 
 	/**
 	 * destructor
@@ -43,7 +54,7 @@ public:
 	/**
 	 * sets the image
 	 */
-	virtual void setImage( const Character* const newimg, int lines, int colums ) = 0;
+	virtual void setImage( QArray<Character> const newimg, int lines, int colums );
 
 	/**
 	 * annoy the user
@@ -141,7 +152,7 @@ protected:
 	void propagateSize();
 
 	/**
-	 *
+	 *determines count of lines and columns
 	 */
 	virtual void calcGeometry() = 0;
 
@@ -173,6 +184,12 @@ protected:
 
 	/**
 	 * current character image
+	 * 
+	 * a Character at loc( column, line )
+	 * has the actual index:
+	 *  ix = line * m_columns + column;
+	 * 
+	 * use loc( x, y ) macro to access.
 	 */
 	QArray<Character> m_image;
 
@@ -192,7 +209,7 @@ protected:
 	QClipboard* m_clipboard;
 
 	/**
-	 * whether widget was resized 
+	 * whether widget is resizing 
 	 */
 	bool m_resizing;
 };

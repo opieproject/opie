@@ -20,10 +20,8 @@
 #include "common.h"
 
 
-#define loc(X,Y) ((Y)*m_columns+(X))
 
-
-WidgetLayer::WidgetLayer( QObject *parent, const char *name  ) : QObject( parent, name )
+WidgetLayer::WidgetLayer( QWidget *parent, const char *name  ) : QFrame( parent, name )
 {
 	// get the clipboard
 	m_clipboard = QApplication::clipboard();
@@ -37,12 +35,17 @@ WidgetLayer::WidgetLayer( QObject *parent, const char *name  ) : QObject( parent
 	m_columns = 1;
 	m_resizing = false;
 	
-	m_image = QArray<Character>();
+	// just for demonstrating
+	//m_image = QArray<Character>( m_lines * m_columns ); 
+	m_image = QArray<Character>( 1 );
+
 }
+
 
 WidgetLayer::~WidgetLayer()
 {
-	// clean up!
+	// clean up
+	delete m_image;
 }
 
 /* --------------------------------- audio ---------------------------------- */
@@ -58,17 +61,15 @@ void WidgetLayer::bell()
 
 void WidgetLayer::propagateSize()
 {
-	QArray<Character> oldimage = m_image;
+	QArray<Character> oldimage = m_image.copy();
 	int oldlines = m_lines;
 	int oldcolumns = m_columns;
 	
 	makeImage();
 	
 	// copy old image, to reduce flicker
-	if ( oldimage )
+	if ( ! oldimage.isEmpty() )
 	{
-		//FIXME: is it possible to do this with QArray.dublicate()?
-		
 		int lins = QMIN( oldlines, m_lines );
 		int cols = QMIN( oldcolumns, m_columns );
 		for ( int lin = 0; lin < lins; ++lin )
@@ -77,11 +78,12 @@ void WidgetLayer::propagateSize()
 				(void*) &oldimage[oldcolumns*lin],
 				cols*sizeof( Character ) );
 		}
-		//free( oldimage );
 	}
 	else
 		clearImage();
 	
+	delete oldimage;
+
 	m_resizing = true;
 	emit imageSizeChanged( m_lines, m_columns );
 	m_resizing = false;
@@ -90,8 +92,8 @@ void WidgetLayer::propagateSize()
 void WidgetLayer::makeImage()
 {
 	calcGeometry();
-	m_image = QArray<Character>();
-	clearImage(); 
+	m_image = QArray<Character>( m_columns * m_lines );
+	clearImage();
 }
 
 void WidgetLayer::clearImage()
