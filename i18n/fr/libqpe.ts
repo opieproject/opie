@@ -573,7 +573,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation>Epoux(se) : </translation>
+        <translation>Conjoint : </translation>
     </message>
     <message>
         <source>Birthday: </source>
@@ -725,7 +725,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Epoux(se)</translation>
+        <translation>Conjoint</translation>
     </message>
     <message>
         <source>Gender</source>

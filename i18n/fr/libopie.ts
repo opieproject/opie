@@ -276,7 +276,7 @@
     </message>
     <message>
         <source>Var 2</source>
-        <translation>Var2</translation>
+        <translation>Var 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
@@ -563,7 +563,7 @@ et </translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation>Epoux(se) : </translation>
+        <translation>Conjoint : </translation>
     </message>
     <message>
         <source>Birthday: </source>
@@ -813,7 +813,7 @@ plusieurs jours</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Epoux(se)</translation>
+        <translation>Conjoint</translation>
     </message>
     <message>
         <source>Gender</source>
