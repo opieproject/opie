@@ -5,7 +5,7 @@ a) Grab BitBake and OpenEmbedded (see GettingStarted on the openembedded.org Wik
 b) Have a properly working setup and edited local.conf w/ at least MACHINE and DISTRO set
 c) bitbake qte-for-opie (you may also want to bitbake libpcap, openssl, sqlite3, ipkg, libxine, etc.)
 
-d) make clean in the Opie tree
+d) Use a freshly checked out Opie tree (yes, I mean it! Don't try just to make clean or mrproper)
 e) Choose "OpenEmbedded w/ OE build dir set below (TARGET_OE) (Option 5)" as target machine
 f) Specify your OpenEmbedded build dir, e.g. /local/pkg/oe/tosa
 g) Answer all the rest - you may want to add more include paths pointing to inside the oe
