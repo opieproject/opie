@@ -1,15 +1,15 @@
 [Desktop Entry]
-Comment=A Game of Patience
 Exec=patience
 Icon=cards/Solitaire
 Type=Application
 Name=Patience
-Name[pt_BR]=Paciencia
-Name[no]=Kabal
+Comment=A Game of Patience
 Name[de]=Patience
+Name[es]=Paciencia
+Comment[es]=Juego de paciencia
 Name[hu]=Passziánsz
 Name[it]=Solitario
+Name[no]=Kabal
 Name[pt]=Solitário
-Name[es]=Paciencia
+Name[pt_BR]=Paciencia
 Name[zh_TW]=接龍
-Comment[es]=Juego de paciencia

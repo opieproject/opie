@@ -1,10 +1,9 @@
 [Desktop Entry]
-Type=Application
 Exec=launchersettings
 Icon=launchersettings/Launcher
+Type=Application
 Name=Launcher
 Comment=Refresh the launcher so that new installed applications appear
 Name[es]=Lanzador
 Comment[es]=Configuración del lanzador de aplicaciones
 Name[fr]=Lanceur d'applications
-Name[pt]=

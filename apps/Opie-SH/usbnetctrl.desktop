@@ -1,12 +1,12 @@
 [Desktop Entry]
-Type=Application
 Exec=usbnetctrl.sh
 Icon=opie-sh-scripts/usbnetctrl
+Type=Application
 Name=USBNET Control
-Name[es]=USBNet
-Name[pt]=Rede USB
-Name[pt_BR]=Rede USB
 Comment=Frontend to start/stop usbnet
+Name[es]=USBNet
 Comment[es]=Interfaz para iniciar/parar usbnet
+Name[pt]=Rede USB
 Comment[pt]=Interface para gerir a rede USB
+Name[pt_BR]=Rede USB
 Comment[pt_BR]=Interface para gerir a rede USB

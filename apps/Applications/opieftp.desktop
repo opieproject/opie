@@ -1,16 +1,16 @@
 [Desktop Entry]
-Comment=An Ftp Client
-Comment[es]=Cliente de File Transfer Protocol (FTP)
-Comment[pt]=Cliente de FTP
-Comment[pt_BR]=Cliente de FTP
 Exec=opieftp
 Icon=opieftp/opieftp
 Type=Application
 Name=OpieFtp
-Name[pt]=Cliente FTP
-Name[es]=Cliente FTP
-Name[it]=Client FTP
+Comment=An Ftp Client
 Name[de]=FTP-Werkzeug
-Name[zh_TW]=FTP 檔案傳送
+Name[es]=Cliente FTP
+Comment[es]=Cliente de File Transfer Protocol (FTP)
+Name[it]=Client FTP
 Name[ko]=Ftp 클라이언트
+Name[pt]=Cliente FTP
+Comment[pt]=Cliente de FTP
 Name[pt_BR]=Cliente FTP
+Comment[pt_BR]=Cliente de FTP
+Name[zh_TW]=FTP 檔案傳送

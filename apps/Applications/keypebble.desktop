@@ -1,14 +1,14 @@
 [Desktop Entry]
-Comment=Virtual Network Computing (VNC) Viewer
-Comment[es]=Visor de Virtual Network Computing (VNC)
 Exec=keypebble
 Icon=vnc/vnc
 Type=Application
 Name=VNC Viewer
-Name[pt_BR]=Cliente VNC
+Comment=Virtual Network Computing (VNC) Viewer
 Name[de]=VNC Client
-Name[pt]=Ecrâ Remoto
 Name[es]=Visor VNC
+Comment[es]=Visor de Virtual Network Computing (VNC)
 Name[it]=Client VNC
-Name[zh_TW]=VNC 客戶端
 Name[ko]=VNC 뷰어
+Name[pt]=Ecrâ Remoto
+Name[pt_BR]=Cliente VNC
+Name[zh_TW]=VNC 客戶端

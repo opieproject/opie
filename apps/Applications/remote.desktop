@@ -1,15 +1,15 @@
 [Desktop Entry]
-Comment=Remote App
-Comment[es]=Aplicación de control remoto
-Comment[pt]=Aplicação de controlo remoto
-Comment[pt_BR]=Aplicação de controlo remoto
 Exec=remote
 Icon=remote/remote
 Type=Application
 Name=Remote
-Name[pt]=Controlo Remoto
-Name[pt_BR]=Controlo Remoto
+Comment=Remote App
 Name[es]=Control Remoto
+Comment[es]=Aplicación de control remoto
 Name[it]=Telecomando
-Name[zh_TW]=遙控器
 Name[ko]=리모트
+Name[pt]=Controlo Remoto
+Comment[pt]=Aplicação de controlo remoto
+Name[pt_BR]=Controlo Remoto
+Comment[pt_BR]=Aplicação de controlo remoto
+Name[zh_TW]=遙控器

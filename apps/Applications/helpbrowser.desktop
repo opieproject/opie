@@ -1,16 +1,16 @@
 [Desktop Entry]
-Comment=A HTML Help Browser Program
-Comment[es]=Navegador de ayuda en HTML
 Exec=helpbrowser
 Icon=helpbrowser/HelpBrowser
 Type=Application
 Name=Help Browser
-Name[pt_BR] = Navegador de Ajuda
-Name[no]=Hjelp
+Comment=A HTML Help Browser Program
 Name[de]=Hilfe
+Name[es]=Ayuda
+Comment[es]=Navegador de ayuda en HTML
 Name[hu]=Segítség
 Name[it]=Aiuto
-Name[pt]=Ajuda
-Name[es]=Ayuda
-Name[zh_TW]=求助
 Name[ko]=도움말 브라우져
+Name[no]=Hjelp
+Name[pt]=Ajuda
+Name[pt_BR]=Navegador de Ajuda
+Name[zh_TW]=求助

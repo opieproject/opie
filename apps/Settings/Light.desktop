@@ -1,18 +1,18 @@
 [Desktop Entry]
-Type=Application
 Exec=light-and-power
 Icon=lightandpower/Light
+Type=Application
 Name=Light & Power
-Name[no]=Lys
+Name[da]=Lys & Strøm
 Name[de]=Helligkeit
+Name[es]=Luz y Energía
+Name[fr]=Luminosité et énergie
 Name[hu]=Fényerõ
 Name[it]=Risparmio Energetico
+Name[ko]=백라이트와 전기절약
+Name[no]=Lys
 Name[pt]=Iluminação e Energia
 Comment[pt]=Controla a iluminação e a energia
 Name[pt_BR]=Iluminacao e Energia
 Comment[pt_BR]=Controla a iluminação e a energia
-Name[es]=Luz y Energía
 Name[zh_TW]=光暗設定
-Name[ko]=백라이트와 전기절약
-Name[da]=Lys & Strøm
-Name[fr]=Luminosité et énergie

@@ -1,12 +1,12 @@
 [Desktop Entry]
-Type=Application
 Exec=sfcave_sdl
 Icon=sfcave-sdl
-Comment=Fly the dot though the cave avoiding the walls
-Comment[es]=Haga saltar la pulga en la cueva evitanto las paredes
-Comment[pt]=Faça saltar a pulga na cave, evitando as paredes
-Comment[pt_BR]=Faça saltar a pulga na cave, evitando as paredes
+Type=Application
 Name=SFCave-SDL
+Comment=Fly the dot though the cave avoiding the walls
 Name[es]=La Pulga
+Comment[es]=Haga saltar la pulga en la cueva evitanto las paredes
 Name[pt]=Pulga
+Comment[pt]=Faça saltar a pulga na cave, evitando as paredes
 Name[pt_BR]=Pulga
+Comment[pt_BR]=Faça saltar a pulga na cave, evitando as paredes

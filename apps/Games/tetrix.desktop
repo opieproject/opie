@@ -1,17 +1,17 @@
 [Desktop Entry]
-Comment=A Block Stacking Game
-Comment[es]=Un juego de apilar bloques
-Comment[pt]=Jogo Tetris
-Comment[pt_BR]=Jogo Tetris
 Exec=tetrix
 Icon=tetrix/Tetrix
 Type=Application
 Name=Tetrix
-Name[ja]=テトリックス
-Name[pt]=Tetris
-Name[pt_BR]=Tetris
-Name[es]=Tetrix
-Name[it]=Tetrix (Tetris)
+Comment=A Block Stacking Game
 Name[de]=Tetris
-Name[zh_TW]=俄羅斯方塊
+Name[es]=Tetrix
+Comment[es]=Un juego de apilar bloques
+Name[it]=Tetrix (Tetris)
+Name[ja]=テトリックス
 Name[ko]=테트릭스
+Name[pt]=Tetris
+Comment[pt]=Jogo Tetris
+Name[pt_BR]=Tetris
+Comment[pt_BR]=Jogo Tetris
+Name[zh_TW]=俄羅斯方塊

@@ -1,16 +1,16 @@
 [Desktop Entry]
-Comment=A Terminal Window
-Comment[es]=Una ventana de terminal
-Comment[da]=Et terminalvindue
 Exec=embeddedkonsole
 Icon=konsole/Terminal
 Type=Application
 Name=Konsole
+Comment=A Terminal Window
+Name[da]=Terminal
+Comment[da]=Et terminalvindue
 Name[de]=Kommando zeile
+Name[es]=Terminal
+Comment[es]=Una ventana de terminal
 Name[hu]=Terminál
 Name[it]=Terminale
-Name[pt]=Terminal
-Name[es]=Terminal
-Name[zh_TW]=終端機
 Name[ko]=콘솔
-Name[da]=Terminal
+Name[pt]=Terminal
+Name[zh_TW]=終端機

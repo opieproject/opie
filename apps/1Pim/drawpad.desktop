@@ -1,17 +1,17 @@
 [Desktop Entry]
-Comment=A Note Taking Program
-Comment[es]=Un programa para tomar notas
-Comment[da]=Et program til at tage noter med
-Comment[fr]=Un programme pour prendre des notes (post-it)
 Exec=drawpad
 Icon=drawpad/DrawPad
 Type=Application
 Name=DrawPad
-Name[de]=Schmierzettel
-Name[pt]=Bloco Rabiscos
-Name[es]=Pizarra
-Name[it]=DrawPad
-Name[zh_TW]=小畫家
-Name[ko]=그림판
+Comment=A Note Taking Program
 Name[da]=Tegneblok
+Comment[da]=Et program til at tage noter med
+Name[de]=Schmierzettel
+Name[es]=Pizarra
+Comment[es]=Un programa para tomar notas
 Name[fr]=Post-It
+Comment[fr]=Un programme pour prendre des notes (post-it)
+Name[it]=DrawPad
+Name[ko]=그림판
+Name[pt]=Bloco Rabiscos
+Name[zh_TW]=小畫家

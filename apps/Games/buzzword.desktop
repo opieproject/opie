@@ -1,8 +1,8 @@
 [Desktop Entry]
-Type=Application
 Exec=buzzword
 Icon=buzzword/buzzword
-Comment=A buzzword bingo
-Comment[es]=Un bingo de palabras tÃ©cnicas
+Type=Application
 Name=buZzword
+Comment=A buzzword bingo
 Name[de]=Buzzword
+Comment[es]=Un bingo de palabras tÃ©cnicas

@@ -1,15 +1,15 @@
 [Desktop Entry]
-Comment=Mobile Messaging
-Comment[es]=Mensajería móvil
-Comment[pt]=Mensagens móveis
-Comment[pt_BR]=Mensagens móveis
 Exec=mobilemsg
 Icon=mobilemsg/mobilemsg
 Type=Application
 Name=Mobile Messaging
-Name[pt_BR]=Mensagens Móveis
-Name[pt]=Mensagens Móveis
+Comment=Mobile Messaging
 Name[es]=Mensajería Móvil
+Comment[es]=Mensajería móvil
 Name[it]=SMS
-Name[zh_TW]=手電訊息
 Name[ko]=모바일 메신져
+Name[pt]=Mensagens Móveis
+Comment[pt]=Mensagens móveis
+Name[pt_BR]=Mensagens Móveis
+Comment[pt_BR]=Mensagens móveis
+Name[zh_TW]=手電訊息

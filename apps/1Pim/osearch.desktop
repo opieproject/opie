@@ -1,11 +1,11 @@
 [Desktop Entry]
-Comment=Seach your data
 Exec=osearch
 Icon=osearch/OSearch
 Type=Application
 Name=search
+Comment=Seach your data
 Name[de]=suchen
 Name[pt]=Procura
-Name[pt_BR]=Procura
 Comment[pt]=Procure os dados
+Name[pt_BR]=Procura
 Comment[pt_BR]=Procure os dados

@@ -1,12 +1,12 @@
 [Desktop Entry]
-Comment=Web Browser
 Exec=ubrowser
 Icon=ubrowser/ubrowser
-Type=Application
-Name=uBrowser
 MimeType=text/html
 MimeTypeIcons=ubrowser/ubrowser
+Type=Application
+Name=uBrowser
+Comment=Web Browser
 Name[pt]=Navegador WWW
-Name[pt_BR]=Navegador WWW
 Comment[pt]=Navegador WWW
+Name[pt_BR]=Navegador WWW
 Comment[pt_BR]=Navegador WWW

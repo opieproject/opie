@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=Mail-it
 Exec=mailit
-Type=Application
 Icon=mailit/desktopicon
+Type=Application
+Name=Mail-it
 Name[pt]=E-Mail
 Comment[pt]=Leitor de E-Mail
 Name[pt_BR]=E-Mail

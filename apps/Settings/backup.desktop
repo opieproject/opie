@@ -1,12 +1,12 @@
 [Desktop Entry]
-Comment=Backup and Restore Utility
-Comment[es]=Utilidad de copia de seguridad y recuperación
-Comment[da]=Sikkerhedskopiering og gendannelse fra sikkerhedskopi
 Exec=backup
 Icon=backup/backupandrestore
 Type=Settings
 Name=Backup And Restore
-Name[es]=Copia de Seguridad
+Comment=Backup and Restore Utility
 Name[da]=Sikkerheds kopiering
-Name[it]=Backup e Restore
+Comment[da]=Sikkerhedskopiering og gendannelse fra sikkerhedskopi
+Name[es]=Copia de Seguridad
+Comment[es]=Utilidad de copia de seguridad y recuperación
 Name[fr]=Sauvegarde et restauration
+Name[it]=Backup e Restore

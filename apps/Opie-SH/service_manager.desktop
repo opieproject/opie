@@ -1,12 +1,12 @@
 [Desktop Entry]
-Type=Application
 Exec=service_manager.sh
 Icon=opie-sh-scripts/service_manager
+Type=Application
 Name=Service Manager
-Name[es]=Gestor Servicios
-Name[pt]=Gestor Serviços
-Name[pt_BR]=Gerenciador Serviços
 Comment=Frontend to start/stop init scripts
+Name[es]=Gestor Servicios
 Comment[es]=Interfaz para iniciar/parar guiones de inicio
+Name[pt]=Gestor Serviços
 Comment[pt]=Interface para gerir os serviços
+Name[pt_BR]=Gerenciador Serviços
 Comment[pt_BR]=Interface para gerenciar os serviços

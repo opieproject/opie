@@ -1,12 +1,12 @@
 [Desktop Entry]
-Comment=WLAN Chooser
-Comment[es]=Elija red inalámbrica
-Comment[pt]=Escolha a rede sem fios
-Comment[pt_BR]=Escolha a rede sem fios
 Exec=wavelanchooser.sh
 Icon=opie-sh-scripts/qtwavelan
 Type=Application
 Name=WLAN Chooser
+Comment=WLAN Chooser
 Name[es]=Red Inalámbrica
+Comment[es]=Elija red inalámbrica
 Name[pt]=Rede sem Fios
+Comment[pt]=Escolha a rede sem fios
 Name[pt_BR]=Rede sem Fios
+Comment[pt_BR]=Escolha a rede sem fios

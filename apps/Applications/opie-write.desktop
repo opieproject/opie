@@ -1,12 +1,12 @@
 [Desktop Entry]
-Comment=A Rich Text Editing Program
-Comment[es]=Un completo editor de textos
 Exec=opie-write
 Icon=opie-write/opie-write
 Type=Application
 Name=opie-write
+Comment=A Rich Text Editing Program
 Name[es]=Opie-Write
+Comment[es]=Un completo editor de textos
 Name[pt]=Editor Texto
-Name[pt_BR]=Editor Textos
 Comment[pt]=Editor de texto
+Name[pt_BR]=Editor Textos
 Comment[pt_BR]=Editor de textos
