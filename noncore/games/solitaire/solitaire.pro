@@ -14,7 +14,7 @@ TARGET    = patience
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lopiecore2
+LIBS            += -lqpe 
 
 
 include ( $(OPIEDIR)/include.pro )
