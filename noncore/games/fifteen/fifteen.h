@@ -25,8 +25,11 @@
 #include <qtableview.h>
 #include <qarray.h>
 #include <qpointarray.h>
+#include <qpixmap.h>
+#include <qvector.h>
 
 class QPopupMenu;
+class FifteenConfigDialog;
 
 class PiecesTable : public QTableView
 {
@@ -37,6 +40,8 @@ class PiecesTable : public QTableView
   ~PiecesTable();
 
  protected slots:
+  void slotConfigure();
+  void slotCustomImage(const QString &str, bool upd = false);
   void slotRandomize();
   void slotReset();
 
@@ -46,6 +51,7 @@ class PiecesTable : public QTableView
 
   void paintCell(QPainter *, int row, int col);
 
+  void initImage();
   void initMap();
   void initColors();
   void randomizeMap();
@@ -53,13 +59,19 @@ class PiecesTable : public QTableView
   void readConfig();
   void writeConfig();
 
+  void initPolygon(int w, int h, int x_of, int y_of );
  private:
+  void clear();
+  QString        _image;
   QArray<int>    _map;
   QArray<QColor> _colors;
+  QArray<QPixmap*> _pixmap;
+
   QPopupMenu     *_menu;
-  bool            _randomized;
+  bool           _randomized;
   QPointArray	light_border;
   QPointArray	dark_border;
+  FifteenConfigDialog *_dialog;
 
   enum MenuOp { mRandomize = 1, mReset = 2 };
 };
@@ -74,6 +86,7 @@ public:
 private:
     PiecesTable *_table;
 };
+
 
 class FifteenMainWindow : public QMainWindow
 {

@@ -20,8 +20,13 @@
 
 #include "fifteen.h"
 
+#include "fifteenconfigdialog.h"
+
+#include <opie2/ofileselector.h>
+
 #include <qtopia/resource.h>
 #include <qtopia/config.h>
+#include <qtopia/qpeapplication.h>
 
 #include <qvbox.h>
 #include <qaction.h>
@@ -29,6 +34,7 @@
 #include <qmessagebox.h>
 #include <qtoolbar.h>
 #include <qmenubar.h>
+#include <qimage.h>
 
 #include <stdlib.h>
 #include <time.h>
@@ -36,6 +42,7 @@
 FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name, WFlags fl)
   : QMainWindow( parent, name, fl )
 {
+
   // random seed
   srand(time(0));
   setCaption( tr("Fifteen Pieces") );
@@ -64,6 +71,12 @@ FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name, WFlags f
   a->addTo( game );
   a->addTo( toolbar );
 
+
+  a  = new QAction( tr("Configure"), Resource::loadPixmap( "SettingsIcon" ),
+                    QString::null, 0, this, 0 );
+  connect( a, SIGNAL( activated()), table, SLOT( slotConfigure()) );
+  a->addTo( game );
+
     /* This is pointless and confusing.
   a = new QAction( tr( "Solve" ), Resource::loadIconSet( "repeat" ),
 		   QString::null, 0, this, 0 );
@@ -74,8 +87,15 @@ FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name, WFlags f
   menubar->insertItem( tr( "Game" ), game );
 }
 
+
+
+
+///////////////
+///////  Pieces table Implementation
+///////
 PiecesTable::PiecesTable(QWidget* parent, const char* name )
-  : QTableView(parent, name), _menu(0), _randomized(false)
+  : QTableView(parent, name), _menu(0), _randomized(false),
+    _dialog( 0l )
 {
   // setup table view
   setFrameStyle(StyledPanel | Sunken);
@@ -90,16 +110,13 @@ PiecesTable::PiecesTable(QWidget* parent, const char* name )
   readConfig();
   initColors();
 
-  // set font
-  QFont f = font();
-  f.setPixelSize(18);
-  f.setBold( TRUE );
-  setFont(f);
 }
+
 
 PiecesTable::~PiecesTable()
 {
   writeConfig();
+  clear();
 }
 
 void PiecesTable::writeConfig()
@@ -111,6 +128,7 @@ void PiecesTable::writeConfig()
     map.append( QString::number( _map[i] ) );
   cfg.writeEntry("Map", map, '-');
   cfg.writeEntry("Randomized", _randomized );
+  cfg.writeEntry("Image", _image );
 }
 
 void PiecesTable::readConfig()
@@ -119,45 +137,149 @@ void PiecesTable::readConfig()
   cfg.setGroup("Game");
   QStringList map = cfg.readListEntry("Map", '-');
   _randomized = cfg.readBoolEntry( "Randomized", FALSE );
+  _image = cfg.readEntry( "Image", QString::null );
   int i = 0;
   for ( QStringList::Iterator it = map.begin(); it != map.end(); ++it ) {
     _map[i] = (*it).toInt();
     i++;
     if ( i > 15 ) break;
   }
+
+}
+
+
+void PiecesTable::clear() {
+    /* clean up and resize */
+    for (uint i = 0; i < _pixmap.count(); ++i )
+        delete _pixmap[i];
+    _pixmap.resize( 16 );
+}
+
+/*
+ * Let us pre-render the tiles. Either we've a Custom Image as
+ * background or we use the drawRect  to fill the background and
+ * last we put the number on it
+ */
+void PiecesTable::slotCustomImage( const QString& _str , bool upd ) {
+    QString str = _str;
+
+
+    /* couldn't load image fall back to plain tiles*/
+    QImage img = QImage(str);
+    if(img.isNull())
+        str = QString::null;
+    else
+        img = img.smoothScale( width(),height() );
+
+    QPixmap pix;
+    pix.convertFromImage( img );
+
+    uint image=0;
+
+    clear();
+
+    /* used variables */
+    int cols = numCols();
+    int rows = numRows();
+    int cellW   = cellWidth();
+    int cellH   = cellHeight();
+    int x2      = cellW-1;
+    int y2      = cellH-1;
+    bool empty  = str.isEmpty();
+    double bw      = empty ? 0.9 : 0.98;
+    int	x_offset = cellW - int(cellW * bw);	// 10% should be enough
+    int	y_offset = cellH - int(cellH * bw);
+
+    /* border polygon */
+    initPolygon(cellW, cellH, x_offset, y_offset );
+
+    if ( cellW == 0 || cellH == 0 ) {
+        _pixmap.resize( 0 );
+        return;
+    }
+
+    QFont f = font();
+    f.setPixelSize(18);
+    f.setBold( TRUE );
+
+    /* for every tile */
+    for(int row = 0; row < rows; ++row ) {
+        for(int col= 0; col < cols; ++col) {
+            QPixmap *pip = new QPixmap(cellW, cellH );
+            QPainter *p = new QPainter(pip );
+            p->setFont( f );
+
+            /* draw the tradional tile  or a part of the pixmap*/
+            if(empty) {
+                p->setBrush(_colors[image]);
+                p->setPen(NoPen);
+                p->drawRect(0,0,cellW,cellH);
+            }else
+                p->drawPixmap(0, 0, pix,col*cellW, row*cellH, cellW, cellH );
+
+            // draw borders
+            if (height() > 40) {
+                p->setBrush(_colors[image].light(130));
+                p->drawPolygon(light_border);
+
+                p->setBrush(_colors[image].dark(130));
+                p->drawPolygon(dark_border);
+            }
+
+            // draw number
+            p->setPen(black);
+            p->drawText(0, 0, x2, y2, AlignHCenter | AlignVCenter, QString::number(image+1));
+
+            delete p;
+            _pixmap[image++] =  pip;
+        }
+    }
+    _image = str;
+
+    if ( upd )
+        update();
+}
+
+/*
+ * Calculate 3d-effect borders
+ */
+void PiecesTable::initPolygon(int cell_w, int cell_h, int x_offset, int y_offset ) {
+    light_border.setPoints(6,
+                           0, 0,
+                           cell_w, 0,
+                           cell_w - x_offset, y_offset,
+                           x_offset, y_offset,
+                           x_offset, cell_h - y_offset,
+                           0, cell_h);
+
+    dark_border.setPoints(6,
+                          cell_w, 0,
+                          cell_w, cell_h,
+                          0, cell_h,
+                          x_offset, cell_h - y_offset,
+                          cell_w - x_offset, cell_h - y_offset,
+                          cell_w - x_offset, y_offset);
 }
 
 void PiecesTable::paintCell(QPainter *p, int row, int col)
 {
   int w = cellWidth();
   int h = cellHeight();
-  int x2 = w - 1;
-  int y2 = h - 1;
 
   int number = _map[col + row * numCols()] + 1;
 
   // draw cell background
-  if(number == 16)
+  if(number == 16) {
     p->setBrush(colorGroup().background());
-  else
-    p->setBrush(_colors[number-1]);
-  p->setPen(NoPen);
-  p->drawRect(0, 0, w, h);
-
-  if (number == 16) return;
-
-  // draw borders
-  if (height() > 40) {
-    p->setBrush(_colors[number-1].light(130));
-    p->drawPolygon(light_border);
-
-    p->setBrush(_colors[number-1].dark(130));
-    p->drawPolygon(dark_border);
+    p->setPen(NoPen);
+    p->drawRect(0, 0, w, h);
+    return;
   }
 
-  // draw number
-  p->setPen(black);
-  p->drawText(0, 0, x2, y2, AlignHCenter | AlignVCenter, QString::number(number));
+  if( _pixmap.count() == 0 )
+      return;
+
+  p->drawPixmap(0, 0, *(_pixmap[(number-1 )]) );
 }
 
 void PiecesTable::resizeEvent(QResizeEvent *e)
@@ -167,29 +289,10 @@ void PiecesTable::resizeEvent(QResizeEvent *e)
   setCellWidth(contentsRect().width()/ numRows());
   setCellHeight(contentsRect().height() / numCols());
 
-  //
-  // Calculate 3d-effect borders
-  //
-  int	cell_w = cellWidth();
-  int	cell_h = cellHeight();
-  int	x_offset = cell_w - int(cell_w * 0.9);	// 10% should be enough
-  int	y_offset = cell_h - int(cell_h * 0.9);
 
-  light_border.setPoints(6,
-    0, 0,
-    cell_w, 0,
-    cell_w - x_offset, y_offset,
-    x_offset, y_offset,
-    x_offset, cell_h - y_offset,
-    0, cell_h);
+  /* update the image and calculate border*/
+  slotCustomImage( _image );
 
-  dark_border.setPoints(6,
-    cell_w, 0,
-    cell_w, cell_h,
-    0, cell_h,
-    x_offset, cell_h - y_offset,
-    cell_w - x_offset, cell_h - y_offset,
-    cell_w - x_offset, y_offset);
 }
 
 void PiecesTable::initColors()
@@ -383,4 +486,14 @@ void PiecesTable::mousePressEvent(QMouseEvent* e)
     // check if the player wins with this move
     checkwin();
   }
+}
+
+void PiecesTable::slotConfigure() {
+    if ( !_dialog )
+        _dialog = new FifteenConfigDialog(this, "Fifteen Configure Dialog", true );
+
+
+    _dialog->setImageSrc( _image );
+    if ( QPEApplication::execDialog(_dialog) == QDialog::Accepted )
+        slotCustomImage( _dialog->imageSrc(), true );
 }
