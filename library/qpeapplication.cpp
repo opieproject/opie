@@ -147,11 +147,12 @@ public:
                 return;
 
 		QCopRec * r;
-#ifndef QT_NO_COP
+
            while((r=qcopq.dequeue())) {
                // remove from queue before sending...
                // event loop can come around again before getting
                // back from sendLocally
+#ifndef QT_NO_COP
                QCopChannel::sendLocally( r->channel, r->message, r->data );
 #endif
 
