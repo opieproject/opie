@@ -20,6 +20,7 @@
 
 #include "clipboard.h"
 
+#include <opie2/otaskbarapplet.h>
 #include <qpe/resource.h>
 #include <qpe/applnk.h>
 
@@ -58,6 +59,11 @@ ClipboardApplet::ClipboardApplet( QWidget *parent, const char *name ) : QWidget(
 
 ClipboardApplet::~ClipboardApplet ( )
 {
+}
+
+int ClipboardApplet::position()
+{
+    return 6;
 }
 
 void ClipboardApplet::shutdown ( )
@@ -175,4 +181,9 @@ void ClipboardApplet::newData ( )
 	m_timer-> start ( 1500, true );
 
 	excllock = false;
+}
+
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<ClipboardApplet> );
 }

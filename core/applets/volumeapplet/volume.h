@@ -117,6 +117,7 @@ class VolumeApplet : public QWidget {
 public:
 	VolumeApplet ( QWidget *parent = 0, const char *name=0 );
 	~VolumeApplet ( );
+	static int position();
 
 	void redraw ( bool all = true );
 

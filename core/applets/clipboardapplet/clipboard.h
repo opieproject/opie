@@ -32,6 +32,7 @@ class ClipboardApplet : public QWidget
 public:
     ClipboardApplet ( QWidget *parent = 0, const char *name=0 );
     ~ClipboardApplet ( );
+    static int position();
 
 protected:
     void mousePressEvent ( QMouseEvent *);

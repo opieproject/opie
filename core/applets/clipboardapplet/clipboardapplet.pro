@@ -1,7 +1,7 @@
 TEMPLATE	= lib
 CONFIG		+= qt plugin warn_on release
-HEADERS	=   clipboard.h clipboardappletimpl.h
-SOURCES	=   clipboard.cpp clipboardappletimpl.cpp
+HEADERS		=   clipboard.h
+SOURCES		=   clipboard.cpp
 TARGET		= clipboardapplet
 DESTDIR		= $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include

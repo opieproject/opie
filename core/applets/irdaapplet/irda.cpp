@@ -14,23 +14,26 @@
 **
 **********************************************************************/
 
+#include "irda.h"
 
+/* OPIE */
+#include <opie2/otaskbarapplet.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
+/* QT */
 #include <qpainter.h>
 #include <qfile.h>
 #include <qtimer.h>
 #include <qtextstream.h>
 
+/* STD */
 #include <unistd.h>
 #include <net/if.h>
 #include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
-
-#include "irda.h"
 
 //===========================================================================
 
@@ -58,6 +61,11 @@ IrdaApplet::IrdaApplet ( QWidget *parent, const char *name )
         QCopChannel* chan = new QCopChannel("QPE/IrDaApplet", this );
         connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
                 this, SLOT(slotMessage(const QCString&, const QByteArray& ) ) );
+}
+
+int IrdaApplet::position()
+{
+	return 6;
 }
 
 void IrdaApplet::show()
@@ -349,4 +357,9 @@ void IrdaApplet::slotMessage( const QCString& str, const QByteArray& ar ) {
 
         e << list;
     }
+}
+
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<IrdaApplet> );
 }

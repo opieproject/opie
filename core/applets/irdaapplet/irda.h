@@ -28,6 +28,7 @@ class IrdaApplet : public QWidget
 public:
 	IrdaApplet( QWidget *parent = 0, const char *name = 0 );
 	~IrdaApplet();
+	static int position();
 
 	virtual void show ( );
 

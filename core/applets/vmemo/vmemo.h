@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.14 2003-08-10 23:00:44 llornkcor Exp $
+ * $Id: vmemo.h,v 1.15 2004-03-01 19:19:38 mickeyl Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -32,6 +32,7 @@ class VMemo : public QWidget
 public:
   VMemo( QWidget *parent, const char *name = NULL);
   ~VMemo();
+  static int position();
   QFile track;
   int length;
   QString fileName, errorMsg, date;

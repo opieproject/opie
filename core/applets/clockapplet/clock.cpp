@@ -20,6 +20,7 @@
 
 #include "clock.h"
 
+#include <opie2/otaskbarapplet.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
@@ -36,6 +37,11 @@ LauncherClock::LauncherClock( QWidget *parent ) : QLabel( parent )
     timerId = 0;
     timerEvent( 0 );
     show();
+}
+
+int LauncherClock::position()
+{
+    return 10;
 }
 
 void LauncherClock::readConfig() {
@@ -107,3 +113,9 @@ void LauncherClock::slotClockChanged( bool pm )
     readConfig();
     updateTime();
 }
+
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<LauncherClock> );
+}
+

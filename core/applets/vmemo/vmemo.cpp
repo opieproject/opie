@@ -61,6 +61,7 @@ struct adpcm_state encoder_state;
 
 #include "vmemo.h"
 
+#include <opie2/otaskbarapplet.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 
@@ -235,6 +236,11 @@ VMemo::VMemo( QWidget *parent, const char *_name )
 }
 
 VMemo::~VMemo() {
+}
+
+int VMemo::position()
+{
+    return 6;
 }
 
 void VMemo::receive( const QCString &msg, const QByteArray &data ) {
@@ -631,3 +637,9 @@ void VMemo::timerBreak() {
     stopRecording();
   QMessageBox::message("Vmemo","Vmemo recording has ended");
 }
+
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<VMemo> );
+}
+

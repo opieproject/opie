@@ -29,6 +29,7 @@ class LauncherClock : public QLabel
     Q_OBJECT
 public:
     LauncherClock( QWidget *parent );
+    static int position();
 
 protected slots:
     void updateTime( void );

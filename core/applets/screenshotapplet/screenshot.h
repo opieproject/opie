@@ -56,6 +56,7 @@ class ScreenshotApplet : public QWidget {
 public:
     ScreenshotApplet( QWidget *parent = 0, const char *name=0 );
     ~ScreenshotApplet();
+    static int position();
     
 protected:
     void mousePressEvent( QMouseEvent * );

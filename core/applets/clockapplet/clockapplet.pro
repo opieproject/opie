@@ -1,7 +1,7 @@
 TEMPLATE	= lib
 CONFIG		+= qt plugin warn_on release
-HEADERS	=   clock.h clockappletimpl.h
-SOURCES	=   clock.cpp clockappletimpl.cpp
+HEADERS		= clock.h
+SOURCES		= clock.cpp
 TARGET		= clockapplet
 DESTDIR		= $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include

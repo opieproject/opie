@@ -15,15 +15,12 @@
 #include "screenshot.h"
 #include "inputDialog.h"
 
-#include <stdlib.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <unistd.h>
-
+/* OPIE */
+#include <opie2/otaskbarapplet.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
 
+/* QT */
 #include <qlineedit.h>
 #include <qdir.h>
 #include <qlabel.h>
@@ -34,6 +31,12 @@
 #include <qcheckbox.h>
 #include <qmessagebox.h>
 
+/* STD */
+#include <stdlib.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <unistd.h>
 
 /* XPM */
 static char * snapshot_xpm[] = {
@@ -497,6 +500,11 @@ ScreenshotApplet::~ScreenshotApplet()
 {
 }
 
+int ScreenshotApplet::position()
+{
+    return 6;
+}
+
 void ScreenshotApplet::mousePressEvent( QMouseEvent *)
 {
   ScreenshotControl *sc = new ScreenshotControl ( );
@@ -526,5 +534,10 @@ void ScreenshotApplet::paintEvent( QPaintEvent* )
 {
   QPainter p ( this );
 	p.drawPixmap( 0,0, m_icon );
+}
+
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<ScreenshotApplet> );
 }
 

@@ -18,16 +18,15 @@
 **
 **********************************************************************/
 
-#include <stdio.h>
-
 #include "volume.h"
+#include "oledbox.h"
 
+#include <opie2/odevice.h>
+#include <opie2/otaskbarapplet.h>
 #include <qpe/resource.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
-#if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
-#endif
 
 #include <qpainter.h>
 #include <qcheckbox.h>
@@ -35,13 +34,10 @@
 #include <qlayout.h>
 #include <qvbox.h>
 #include <qlabel.h>
-
 #include <qpushbutton.h>
 #include <qtimer.h>
 
-#include <opie/odevice.h>
-
-#include "oledbox.h"
+#include <stdio.h>
 
 using namespace Opie;
 
@@ -737,6 +733,10 @@ VolumeApplet::~VolumeApplet()
   delete m_pixmap;
 }
 
+int VolumeApplet::position()
+{
+  return 6;
+}
 
 void VolumeApplet::mousePressEvent ( QMouseEvent * )
 {
@@ -777,3 +777,7 @@ void VolumeApplet::paintEvent ( QPaintEvent * )
 }
 
 
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<VolumeApplet> );
+}
