@@ -5,6 +5,7 @@
 #include <qvariant.h>
 #include <qdialog.h>
 #include <qmainwindow.h>
+#include <opie/oprocess.h>
 
 class QLineEdit;
 class QCheckBox;
@@ -14,15 +15,13 @@ class InputDialog : public  QMainWindow {
 
 public:
     InputDialog(  );
-//    InputDialog( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~InputDialog();
-    QString text()const;
     
 private:
     QLineEdit* LineEdit1;
-    QCheckBox *timeCheck, *dateCheck, *symbolCheck, *nameCheck, *currentPriceCheck, *lastPriceCheck, *openPriceCheck, *minPriceCheck, *maxPriceCheck, *variationCheck, *volumeCheck;
 private slots:
-    void cleanUp(); 
+    void doLookup();
+    void showBrowser(OProcess*); 
 protected slots:
     
 };
