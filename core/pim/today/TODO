@@ -2,8 +2,6 @@ TODO for today:
 
 * show alarm icons on alarm events (partly done)
 
-* add am/pm mode instead of 24 h, take system default
-
 * qcop integration for updating events?
 
 * make Opiezilla a clickable label wich is allway on the far right side of

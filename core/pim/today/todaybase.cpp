@@ -45,13 +45,13 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   QPixmap config = Resource::loadPixmap( "today/config" );  // config icon
   QPixmap mail = Resource::loadPixmap( "today/mail" ); // mail icon
 
-  QPalette pal = this->palette();
-  QColor col = pal.color(QPalette::Active, QColorGroup::Background);
-  pal.setColor(QPalette::Active, QColorGroup::Button, col);
-  pal.setColor(QPalette::Inactive, QColorGroup::Button, col);
-  pal.setColor(QPalette::Normal, QColorGroup::Button, col);
-  pal.setColor(QPalette::Disabled, QColorGroup::Button, col);
-  this->setPalette(pal);
+  //QPalette pal = this->palette();
+  // QColor col = pal.color(QPalette::Active, QColorGroup::Background);
+  //pal.setColor(QPalette::Active, QColorGroup::Button, col);
+  //pal.setColor(QPalette::Inactive, QColorGroup::Button, col);
+  //pal.setColor(QPalette::Normal, QColorGroup::Button, col);
+  //pal.setColor(QPalette::Disabled, QColorGroup::Button, col);
+  //this->setPalette(pal);
 
 
   QWidget *d = QApplication::desktop();
@@ -95,7 +95,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   // --- dates section ---
   Frame4 = new QFrame( this, "Frame4" );
-  Frame4->setPalette( pal );
+//  Frame4->setPalette( pal );
   Frame4->setFrameShape( QScrollView::StyledPanel );
   Frame4->setFrameShadow( QScrollView::Sunken );
   Frame4->setBackgroundOrigin( QScrollView::ParentOrigin );
@@ -112,7 +112,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   DatesButton = new QPushButton (Frame4, "DatesButton" );
   DatesButton->setGeometry( QRect( 2, 4, 36, 32 ) );
   DatesButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
-  DatesButton->setPalette( pal );
+//  DatesButton->setPalette( pal );
   DatesButton->setPixmap( datebook  );
   DatesButton->setFlat( TRUE );
 
@@ -128,7 +128,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   MailButton = new QPushButton (MailFrame, "MailButton" );
   MailButton->setGeometry( QRect( 2, 3, 36, 19 ) );
-  MailButton->setPalette( pal );
+//  MailButton->setPalette( pal );
   MailButton->setPixmap( mail  );
   MailButton->setFlat( TRUE );
 
@@ -150,7 +150,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   TodoButton = new QPushButton (Frame15, "TodoButton" );
   TodoButton->setGeometry( QRect( 2, 4, 36, 32 ) );
-  TodoButton->setPalette( pal );
+//  TodoButton->setPalette( pal );
   TodoButton->setPixmap( todo  );
   TodoButton->setFlat( TRUE );
 
@@ -169,7 +169,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   PushButton1 = new QPushButton (Frame15, "PushButton1" );
   PushButton1->setGeometry( QRect( 2, 68, 25, 21 ) );
   PushButton1->setPixmap( config  );
-  PushButton1->setPalette( pal );
+//  PushButton1->setPalette( pal );
   PushButton1->setAutoDefault( TRUE );
   PushButton1->setFlat( TRUE );
 

@@ -27,7 +27,7 @@
 #include <opie/tododb.h>
 
 #include <qdatetime.h>
-#include <qlist.h> 
+#include <qlist.h>
 
 #include "todayconfig.h"
 #include "todaybase.h"
@@ -36,12 +36,12 @@
 class QVBoxLayout;
 
 class Today : public TodayBase {
-  Q_OBJECT
-    
-    public:
-  Today( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-  ~Today();
-  
+    Q_OBJECT
+
+  public:
+    Today( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    ~Today();
+
   private slots:
     void startConfig();
     void startTodo();
@@ -58,9 +58,9 @@ class Today : public TodayBase {
     bool checkIfModified();
     void setOwnerField();
     void setOwnerField(QString &string);
-    private slots:
-      void channelReceived(const QCString &msg, const QByteArray & data);
-    
+  private slots:
+    void channelReceived(const QCString &msg, const QByteArray & data);
+
  private:
     DateBookDB *db;
     ToDoDB *todo;
@@ -70,42 +70,46 @@ class Today : public TodayBase {
     int MAX_LINES_TASK;
     int MAX_CHAR_CLIP;
     int MAX_LINES_MEET;
-    int SHOW_LOCATION; 
+    int SHOW_LOCATION;
     int SHOW_NOTES;
 };
 
 class DateBookEvent: public ClickableLabel {
   Q_OBJECT
 public:
-    DateBookEvent(const EffectiveEvent &ev, 
-		  QWidget* parent = 0,
-		  int SHOW_LOCATION = 0,
-		  int SHOW_NOTES = 0,
-		  const char* name = 0, 
-		  WFlags fl = 0);
+  DateBookEvent(const EffectiveEvent &ev,
+                QWidget* parent = 0,
+                int SHOW_LOCATION = 0,
+                int SHOW_NOTES = 0,
+                const char* name = 0,
+                WFlags fl = 0);
 signals:
     void editEvent(const Event &e);
 private slots:
     void editMe();
 private:
+    QString ampmTime(QTime);
     const EffectiveEvent event;
+    bool ampm;
 };
 
 class DateBookEventLater: public ClickableLabel {
   Q_OBJECT
 public:
-    DateBookEventLater(const EffectiveEvent &ev, 
+    DateBookEventLater(const EffectiveEvent &ev,
 		       QWidget* parent = 0,
 		       int SHOW_LOCATION = 0,
 		       int SHOW_NOTES = 0,
-		       const char* name = 0, 
+		       const char* name = 0,
 		       WFlags fl = 0);
 signals:
     void editEvent(const Event &e);
 private slots:
     void editMe();
 private:
+    QString ampmTime(QTime);
     const EffectiveEvent event;
+    bool ampm;
 };
 
 #endif // TODAY_H
