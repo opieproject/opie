@@ -103,14 +103,27 @@ void DatebookPluginWidget::getDates() {
                     m_eventsList.append( l );
                     l->show();
                     QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
-                } else if ( ( QDateTime::currentDateTime()  <=  (*it).event().end() )  || ( ( (*it).event().start().date() != date ) &&  (  QDateTime::currentDateTime()  <=  (*it).event().end() )  )  ) {
-                    count++;
-                    // show only later appointments
-                    DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine );
-                    m_eventsList.append( l );
-                    l->show();
-                    QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
-                }
+                } else { 
+			if ( ( QDateTime::currentDateTime()  <=  (*it).event().end() )  
+			     // Show events which span over many days and are not elapsed.
+			     || ( ( (*it).event().start().date() != date ) &&  (  QDateTime::currentDateTime()  <=  (*it).event().end() )  )
+			     // Show repeated event for today that is not elapsed.
+ 			     || ( ( (*it).event().repeatType() != Event::NoRepeat )
+				  && ( ( date.dayOfWeek() == (*it).date().dayOfWeek() ) 
+				       && ( QTime::currentTime() < (*it).event().start().time() ) ) ) 
+			     // Show repeated event for next days.
+			     || ( ( (*it).event().repeatType() != Event::NoRepeat )
+				  && ( date.dayOfWeek() != (*it).date().dayOfWeek() ) )  
+			     ) 
+			     {
+				count++;
+				// show only later appointments
+				DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine );
+				m_eventsList.append( l );
+				l->show();
+				QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
+			     }
+		}
             }
         }
         if ( m_onlyLater && count == 0 ) {
