@@ -430,11 +430,10 @@ const DocLnk *PlayListWidget::current() const { // this is fugly
 //      qDebug("playlist");
     if ( mediaPlayerState->isUsingPlaylist() ) {
         return d->selectedFiles->current();
-    } else if ( d->setDocumentUsed && d->current ) {
+    } else if ( d->setDocumentUsed && d->current )
         return d->current;
-    } else {
-          return &(d->files->selectedDocument());
-    }
+
+    assert( false );
 }
 
 

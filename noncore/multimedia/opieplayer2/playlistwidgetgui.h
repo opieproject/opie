@@ -62,7 +62,6 @@ class PlayListWidgetPrivate {
 public:
     QToolButton *tbPlay, *tbFull, *tbLoop,  *tbShuffle, *tbAddToList,  *tbRemoveFromList, *tbMoveUp, *tbMoveDown, *tbRemove;
     QFrame *playListFrame;
-    FileSelector *files;
     PlayListSelection *selectedFiles;
     bool setDocumentUsed;
     DocLnk *current;
