@@ -5,6 +5,7 @@
 const QStringList HList::entries(const QDate&aDate)const
 {
     QStringList ret;
+#if 0
     if (aDate.month()==12) {
         if (aDate.day()==24) {
             ret.append(QObject::tr("Christmas Eve","holidays"));
@@ -18,5 +19,6 @@ const QStringList HList::entries(const QDate&aDate)const
             ret.append(QObject::tr("New Year","holidays"));
         }
     }
+#endif
     return ret;
 }
