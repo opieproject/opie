@@ -8,7 +8,7 @@
 
 #include <sys/types.h>
 
-namespace Opie {namespace Core {class Opie::Core::OProcess;}}
+namespace Opie {namespace Core {class OProcess;}}
 namespace OpieTooth {
     /**
      *  Device takes care of attaching serial

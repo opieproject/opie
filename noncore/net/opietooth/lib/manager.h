@@ -11,7 +11,7 @@
 #include "remotedevice.h"
 #include "services.h"
 
-namespace Opie {namespace Core {class Opie::Core::OProcess;}}
+namespace Opie {namespace Core {class OProcess;}}
 namespace OpieTooth {
     class Device;
     /** Manager manages a blueZ device (hci0 for example)

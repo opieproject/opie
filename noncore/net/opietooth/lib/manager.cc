@@ -8,8 +8,7 @@
 
 using namespace OpieTooth;
 
-using namespace Opie::Core;
-using namespace Opie::Core;
+using Opie::Core::OProcess;
 Manager::Manager( const QString& dev )
   : QObject()
 {

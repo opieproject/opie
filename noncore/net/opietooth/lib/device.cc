@@ -7,7 +7,7 @@
 
 using namespace OpieTooth;
 
-using namespace Opie::Core;
+using Opie::Core::OProcess;
 namespace {
   int parsePid( const QCString& par ){
     int id=0;
