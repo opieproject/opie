@@ -27,12 +27,17 @@ ObexImpl::ObexImpl( )
 	   this, SLOT(slotMessage(const QCString&, const QByteArray&) ) );
   connect(m_obex, SIGNAL(receivedFile(const QString& ) ),
           this,  SLOT(slotReceivedFile(const QString& ) ) );
+  connect((QObject*) m_recvgui->InsertButton,  SIGNAL(clicked()),
+          m_recvgui, SLOT( accept() ));
+  connect((QObject*) m_recvgui->RejectButton,  SIGNAL(clicked()),
+          m_recvgui, SLOT( reject() ));
 }
 
 ObexImpl::~ObexImpl() {
   delete m_obex;
   delete m_chan;
   delete m_sendgui;
+  delete m_recvgui;
 }
 
 QRESULT ObexImpl::queryInterface( const QUuid &uuid, QUnknownInterface **iface ) {
@@ -129,14 +134,16 @@ void ObexImpl::slotReceivedFile( const QString &fileName ) {
     m_recvgui->AppLabel->setText(lnk.name());
     m_recvgui->FileLabel->setText(fileName);
     m_recvgui->showMaximized();
-
-    QCString str= "QPE/Application/";
-    str += exec.latin1();
-    qWarning("channel %s", str.data() );
-    QCopEnvelope e(str ,  "setDocument(QString)" );
-    e << fileName;
+    if( m_recvgui->exec() != -1 ) {
+         QCString str= "QPE/Application/";
+         str += exec.latin1();
+         qWarning("channel %s", str.data() );
+         QCopEnvelope e(str ,  "setDocument(QString)" );
+         e << fileName;
+    }
 
 }
+
 
 
 Q_EXPORT_INTERFACE()
