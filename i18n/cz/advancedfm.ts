@@ -1,371 +1,387 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>AdvancedFm</name>
     <message>
-        <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
+      <source>AdvancedFm :: </source>
+      <translation>AdvancedFm :: </translation>
     </message>
     <message>
-        <source> kB free</source>
-        <translation type="unfinished"></translation>
+      <source> kB free</source>
+      <translation> kB volno</translation>
     </message>
     <message>
-        <source>Note</source>
-        <translation type="unfinished"></translation>
+      <source>Note</source>
+      <translation>Poznámka</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="unfinished"></translation>
+      <source>That directory does not exist</source>
+      <translation>Takový adresář neexistuje</translation>
     </message>
     <message>
-        <source>Advanced FileManager
+      <source>Advanced FileManager
 is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
+L.J.Potter&lt;llornkcor@handhelds.org>
 and is licensed by the GPL</source>
-        <translation type="unfinished"></translation>
+      <translation>Na Advanced FileManager
+má práva 2002-2003
+L.J.Potter&lt;llornkcor@handhelds.org>
+and je licencován pod GPL</translation>
     </message>
     <message>
-        <source>Show Hidden Files</source>
-        <translation type="unfinished"></translation>
+      <source>Show Hidden Files</source>
+      <translation>Zobrazovat skryté soubory</translation>
     </message>
     <message>
-        <source>Change Directory</source>
-        <translation type="unfinished"></translation>
+      <source>Change Directory</source>
+      <translation>Změnit adresář</translation>
     </message>
     <message>
-        <source>Execute</source>
-        <translation type="unfinished"></translation>
+      <source>Execute</source>
+      <translation>Provést</translation>
     </message>
     <message>
-        <source>Open as text</source>
-        <translation type="unfinished"></translation>
+      <source>Open as text</source>
+      <translation>Otevřít jako text</translation>
     </message>
     <message>
-        <source>Actions</source>
-        <translation type="unfinished"></translation>
+      <source>Actions</source>
+      <translation>Akce</translation>
     </message>
     <message>
-        <source>Make Directory</source>
-        <translation type="unfinished"></translation>
+      <source>Make Directory</source>
+      <translation>Vytvořit adresář</translation>
     </message>
     <message>
-        <source>Make Symlink</source>
-        <translation type="unfinished"></translation>
+      <source>Make Symlink</source>
+      <translation>Vytvořit symbolický link</translation>
     </message>
     <message>
-        <source>Rename</source>
-        <translation type="unfinished"></translation>
+      <source>Rename</source>
+      <translation>Přejmenovat</translation>
     </message>
     <message>
-        <source>Copy</source>
-        <translation type="unfinished"></translation>
+      <source>Copy</source>
+      <translation>Kopírovat</translation>
     </message>
     <message>
-        <source>Copy As</source>
-        <translation type="unfinished"></translation>
+      <source>Copy As</source>
+      <translation>Kopírovat jako</translation>
     </message>
     <message>
-        <source>Copy Same Dir</source>
-        <translation type="unfinished"></translation>
+      <source>Copy Same Dir</source>
+      <translation>Kopírovat stejný adresář</translation>
     </message>
     <message>
-        <source>Move</source>
-        <translation type="unfinished"></translation>
+      <source>Move</source>
+      <translation>Přesunout</translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
+      <source>Delete</source>
+      <translation>Smazat</translation>
     </message>
     <message>
-        <source>Add To Documents</source>
-        <translation type="unfinished"></translation>
+      <source>Add To Documents</source>
+      <translation>Přidat do dokumentů</translation>
     </message>
     <message>
-        <source>Run Command</source>
-        <translation type="unfinished"></translation>
+      <source>Run Command</source>
+      <translation>Spustit příkaz</translation>
     </message>
     <message>
-        <source>File Info</source>
-        <translation type="unfinished"></translation>
+      <source>File Info</source>
+      <translation>Info o souboru</translation>
     </message>
     <message>
-        <source>Set Permissions</source>
-        <translation type="unfinished"></translation>
+      <source>Set Permissions</source>
+      <translation>Nastavení práv</translation>
     </message>
     <message>
-        <source>Properties</source>
-        <translation type="unfinished"></translation>
+      <source>Properties</source>
+      <translation>Vlastnosti</translation>
     </message>
     <message>
-        <source>Beam File</source>
-        <translation type="unfinished"></translation>
+      <source>Beam File</source>
+      <translation>Poslat soubor</translation>
     </message>
     <message>
-        <source>AdvancedFm</source>
-        <translation type="unfinished"></translation>
+      <source>AdvancedFm</source>
+      <translation>AdvancedFm</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
+      <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
+      <translation>Nelze odstranit aktuální adresář 
+ze záložek. 
+Není v záložkách!</translation>
     </message>
     <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
+      <source>File</source>
+      <translation>Soubor</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
+      <source>View</source>
+      <translation>Zobrazit</translation>
     </message>
     <message>
-        <source>File Search</source>
-        <translation type="unfinished"></translation>
+      <source>File Search</source>
+      <translation>Hledání souborů</translation>
     </message>
     <message>
-        <source>Run Command with Output</source>
-        <translation type="unfinished"></translation>
+      <source>Run Command with Output</source>
+      <translation>Spustit příkaz s výstupem</translation>
     </message>
     <message>
-        <source>Select All</source>
-        <translation type="unfinished"></translation>
+      <source>Select All</source>
+      <translation>Vybrat vše</translation>
     </message>
     <message>
-        <source>Switch to View 1</source>
-        <translation type="unfinished"></translation>
+      <source>Switch to View 1</source>
+      <translation>Přepnout do 1. okna</translation>
     </message>
     <message>
-        <source>Switch to View 2</source>
-        <translation type="unfinished"></translation>
+      <source>Switch to View 2</source>
+      <translation>Přepnout do 2. okna</translation>
     </message>
     <message>
-        <source>Bookmark Directory</source>
-        <translation type="unfinished"></translation>
+      <source>Bookmark Directory</source>
+      <translation>Adresář do záložek</translation>
     </message>
     <message>
-        <source>Remove Current Directory from Bookmarks</source>
-        <translation type="unfinished"></translation>
+      <source>Remove Current Directory from Bookmarks</source>
+      <translation>Odstranit aktuální adresář ze záložek</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
+      <source>Size</source>
+      <translation>Velikost</translation>
     </message>
     <message>
-        <source>Date</source>
-        <translation type="unfinished"></translation>
+      <source>Date</source>
+      <translation>Datum</translation>
     </message>
     <message>
-        <source>1</source>
-        <translation type="unfinished"></translation>
+      <source>1</source>
+      <translation>1</translation>
     </message>
     <message>
-        <source>2</source>
-        <translation type="unfinished"></translation>
+      <source>2</source>
+      <translation>2</translation>
     </message>
     <message>
-        <source>Really delete
+      <source>Really delete
 %1 files?</source>
-        <translation type="unfinished"></translation>
+      <translation>Opravdu smazat
+%1 soubory?</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
+      <source>Yes</source>
+      <translation>Ano</translation>
     </message>
     <message>
-        <source>No</source>
-        <translation type="unfinished"></translation>
+      <source>No</source>
+      <translation>Ne</translation>
     </message>
     <message>
-        <source>Delete Directory?</source>
-        <translation type="unfinished"></translation>
+      <source>Delete Directory?</source>
+      <translation>Smazat adresář?</translation>
     </message>
     <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="unfinished"></translation>
+      <source>Really delete %1
+and all it's contents ?</source>
+      <translation>Opravdu smazat %1
+a celý jeho obsah ?</translation>
     </message>
     <message>
-        <source>Really delete
+      <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
+      <translation>Opravdu smazat 
+%1?</translation>
     </message>
     <message>
-        <source>Really copy
+      <source>Really copy
 %1 files?</source>
-        <translation type="unfinished"></translation>
+      <translation>Opravdu zkopírovat
+%1 soubory?</translation>
     </message>
     <message>
-        <source>File Exists!</source>
-        <translation type="unfinished"></translation>
+      <source>File Exists!</source>
+      <translation>Soubor existuje!</translation>
     </message>
     <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+      <source>%1 exists. Ok to overwrite?</source>
+      <translation>%1 existuje. Ok pro přepsání?</translation>
     </message>
     <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="unfinished"></translation>
+      <source>Could not copy %1 to %2</source>
+      <translation>Nelze zkopírovat %1 do %2</translation>
     </message>
     <message>
-        <source>
+      <source>
 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+      <translation>
+existuje. Ok pro přepsání?</translation>
     </message>
     <message>
-        <source>Could not copy
+      <source>Could not copy
 </source>
-        <translation type="unfinished"></translation>
+      <translation>Nelze zkopírovat</translation>
     </message>
     <message>
-        <source>to
+      <source>to
 </source>
-        <translation type="unfinished"></translation>
+      <translation>do</translation>
     </message>
     <message>
-        <source>Copy </source>
-        <translation type="unfinished"></translation>
+      <source>Copy </source>
+      <translation>Kopírovat</translation>
     </message>
     <message>
-        <source> As</source>
-        <translation type="unfinished"></translation>
+      <source> As</source>
+      <translation> Jako</translation>
     </message>
     <message>
-        <source> already exists.
+      <source> already exists.
 Do you really want to delete it?</source>
-        <translation type="unfinished"></translation>
+      <translation> už existuje.
+Opravdu ho chcete smazat?</translation>
     </message>
     <message>
-        <source>Could not move
+      <source>Could not move
 </source>
-        <translation type="unfinished"></translation>
+      <translation>Nelze přesunout</translation>
     </message>
     <message>
-        <source>Could not copy 
+      <source>Could not copy 
 %1 
 to 
 %2</source>
-        <translation type="unfinished"></translation>
+      <translation>Nelze zkopírovat 
+%1 
+do 
+%2</translation>
     </message>
     <message>
-        <source>AdvancedFm Output</source>
-        <translation type="unfinished"></translation>
+      <source>AdvancedFm Output</source>
+      <translation>AdvancedFm Výstup</translation>
     </message>
     <message>
-        <source>Advancedfm Beam out</source>
-        <translation type="unfinished"></translation>
+      <source>Advancedfm Beam out</source>
+      <translation>Advancedfm Odesílání</translation>
     </message>
     <message>
-        <source>Ir sent.</source>
-        <translation type="unfinished"></translation>
+      <source>Ir sent.</source>
+      <translation>IR odesláno.</translation>
     </message>
     <message>
-        <source>Ok</source>
-        <translation type="unfinished"></translation>
+      <source>Ok</source>
+      <translation>Ok</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
+      <source>Error</source>
+      <translation>Chyba</translation>
     </message>
     <message>
-        <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+      <source>Could not rename</source>
+      <translation>Nelze přejmenovat</translation>
     </message>
     <message>
-        <source>Not Yet Implemented</source>
-        <translation type="unfinished"></translation>
+      <source>Not Yet Implemented</source>
+      <translation>Nebylo ještě implementováno</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>Output</name>
     <message>
-        <source>Output</source>
-        <translation type="unfinished"></translation>
+      <source>Output</source>
+      <translation>Výstup</translation>
     </message>
     <message>
-        <source>Process could not start</source>
-        <translation type="unfinished"></translation>
+      <source>Process could not start</source>
+      <translation>Proces se nemůže spustit</translation>
     </message>
     <message>
-        <source>Error
+      <source>Error
 </source>
-        <translation type="unfinished"></translation>
+      <translation>Chyba</translation>
     </message>
     <message>
-        <source>Save output to file (name only)</source>
-        <translation type="unfinished"></translation>
+      <source>Save output to file (name only)</source>
+      <translation>Uložit výstup do souboru (jen jméno)</translation>
     </message>
     <message>
-        <source>
+      <source>
 Finished
 </source>
-        <translation type="unfinished"></translation>
+      <translation>
+Dokončeno</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>filePermissions</name>
     <message>
-        <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+      <source>filePermissions</source>
+      <translation>Práva souborů</translation>
     </message>
     <message>
-        <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+      <source>Set File Permissions</source>
+      <translation>Nastavit práva souborů</translation>
     </message>
     <message>
-        <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+      <source>Set file permissions for:</source>
+      <translation>nastavit práva souboru pro:</translation>
     </message>
     <message>
-        <source>owner</source>
-        <translation type="unfinished"></translation>
+      <source>owner</source>
+      <translation>vlastník</translation>
     </message>
     <message>
-        <source>group</source>
-        <translation type="unfinished"></translation>
+      <source>group</source>
+      <translation>skupina</translation>
     </message>
     <message>
-        <source>others</source>
-        <translation type="unfinished"></translation>
+      <source>others</source>
+      <translation>ostatní</translation>
     </message>
     <message>
-        <source>Owner</source>
-        <translation type="unfinished"></translation>
+      <source>Owner</source>
+      <translation>Vlastník</translation>
     </message>
     <message>
-        <source>Group</source>
-        <translation type="unfinished"></translation>
+      <source>Group</source>
+      <translation>Skupina</translation>
     </message>
     <message>
-        <source>read</source>
-        <translation type="unfinished"></translation>
+      <source>read</source>
+      <translation>čtení</translation>
     </message>
     <message>
-        <source>write</source>
-        <translation type="unfinished"></translation>
+      <source>write</source>
+      <translation>zápis</translation>
     </message>
     <message>
-        <source>execute</source>
-        <translation type="unfinished"></translation>
+      <source>execute</source>
+      <translation>spouštění</translation>
     </message>
     <message>
-        <source>Warning</source>
-        <translation type="unfinished"></translation>
+      <source>Warning</source>
+      <translation>Varování</translation>
     </message>
     <message>
-        <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+      <source>Error- no user</source>
+      <translation>Chyba- není uživatel</translation>
     </message>
     <message>
-        <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+      <source>Error- no  group</source>
+      <translation>Chyba- není skupina</translation>
     </message>
     <message>
-        <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+      <source>Error setting ownership or group</source>
+      <translation>Chyba nastavení vlastíka, nebo skupiny</translation>
     </message>
     <message>
-        <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+      <source>Error setting mode</source>
+      <translation>Chyba nastavení režimu</translation>
     </message>
-</context>
+  </context>
 </TS>
