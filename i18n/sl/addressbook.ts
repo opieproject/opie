@@ -174,15 +174,15 @@ Ali jo res želite odpreti?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvozi vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
-        <translation type="unfinished"></translation>
+        <translation>Morate izbrati stik!</translation>
     </message>
     <message>
         <source>You have to set a filename !</source>
-        <translation type="unfinished"></translation>
+        <translation>Morate nastaviti ime datoteke !</translation>
     </message>
 </context>
 <context>
@@ -279,7 +279,7 @@ je zastonj!</translation>
     </message>
     <message>
         <source>Click on tab to select one</source>
-        <translation>Kliknite na zavihek, da izberte</translation>
+        <translation>Kliknite na zavihek, da izberete</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>
@@ -339,23 +339,23 @@ je zastonj!</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Orodna-/Menujska vrstica</translation>
     </message>
     <message>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Popravljeno</translation>
     </message>
     <message>
         <source>Switch to fixed menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Preklopi na stalno orodno-/menujsko vrstico, ko se program ponovno zažene !</translation>
     </message>
     <message>
         <source>Moveable</source>
-        <translation type="unfinished"></translation>
+        <translation>Mobilno</translation>
     </message>
     <message>
         <source>Switch to moveable menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Preklopi na mobilno orodno-/menujsko vrstico, ko se program ponovno zaženo !</translation>
     </message>
 </context>
 <context>

@@ -3,125 +3,125 @@
     <name>OTaskEditor</name>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmi</translation>
     </message>
     <message>
         <source>Reminders</source>
-        <translation type="unfinished"></translation>
+        <translation>Opozorilniki</translation>
     </message>
     <message>
         <source>X-Ref</source>
-        <translation type="unfinished"></translation>
+        <translation>X-Ref</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacija</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Recurrence</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponavljanje</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnesi opravilo</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished">Uredi opravilo</translation>
+        <translation>Uredi opravilo</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov iz predloge</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">Novo opravilo</translation>
+        <translation>Novo opravilo</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da ustvarite novo opravilo.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished">Uredi opravilo</translation>
+        <translation>Uredi opravilo</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da spremenite trenutno opravilo.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished">Poglej opravila</translation>
+        <translation>Poglej opravila</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished">Izbriši...</translation>
+        <translation>Izbriši...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da odstranite trenutno opravilo.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished">Izbriši vse...</translation>
+        <translation>Izbriši vse...</translation>
     </message>
     <message>
         <source>Delete completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbris končan</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Prežarči</translation>
+        <translation>Prežarči</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da pošljete trenutno opravilo drugi napravi.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Najdi</translation>
+        <translation>Najdi</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži končana opravila</translation>
     </message>
     <message>
         <source>Show only over-due tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži samo opravila, ki jim je rok pretekel</translation>
     </message>
     <message>
         <source>Show task deadlines</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži roke opravil</translation>
     </message>
     <message>
         <source>Show quick task bar</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished">Podatki</translation>
+        <translation>Podatki</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Kategorija</translation>
+        <translation>Kategorija</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Izbire</translation>
+        <translation>Izbire</translation>
     </message>
     <message>
         <source>QuickEdit</source>
-        <translation type="unfinished"></translation>
+        <translation>Hitri urejevalnik</translation>
     </message>
     <message>
         <source>This is a listing of all current tasks.
@@ -135,11 +135,11 @@ The list displays the following information:
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished">Vse kategorije</translation>
+        <translation>Vse kategorije</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished">Zmanjkalo prostora</translation>
+        <translation>Zmanjkalo prostora</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -148,7 +148,7 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation type="unfinished">Ne uspem
+        <translation>Ne uspem
 shraniti vaših sprememb.
 Sprostite nekaj prostora
 in poizkusite ponovno.
@@ -157,11 +157,11 @@ Izhod?</translation>
     </message>
     <message>
         <source>Todo</source>
-        <translation type="unfinished">Opravki</translation>
+        <translation>Opravki</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished">Ne morem urediti podatkov, trenutno sinhroniziram</translation>
+        <translation>Ne morem urediti podatkov, trenutno sinhroniziram</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -173,7 +173,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Neizpolnjeno</translation>
+        <translation>Neizpolnjeno</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -185,11 +185,11 @@ Izhod?</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Podvoji</translation>
+        <translation>Podvoji</translation>
     </message>
     <message>
         <source>C.</source>
-        <translation type="unfinished">K.</translation>
+        <translation>K.</translation>
     </message>
     <message>
         <source>Priority</source>
@@ -197,11 +197,11 @@ Izhod?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Opis</translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished">Rok</translation>
+        <translation>Rok</translation>
     </message>
     <message>
         <source>Configure Templates</source>

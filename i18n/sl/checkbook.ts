@@ -3,503 +3,518 @@
     <name>Checkbook</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Čekovna knjižica</translation>
     </message>
     <message>
         <source>New checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova čekovna knjižica</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Transakcije</translation>
     </message>
     <message>
         <source>Charts</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafi</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime:</translation>
     </message>
     <message>
         <source>Enter name of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpišite ime čekovne knjižice.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">Tip:</translation>
+        <translation>Tip:</translation>
     </message>
     <message>
         <source>Select type of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite tip čekovne knjižice.</translation>
     </message>
     <message>
         <source>Savings</source>
-        <translation type="unfinished"></translation>
+        <translation>Prihranki</translation>
     </message>
     <message>
         <source>Checking</source>
-        <translation type="unfinished"></translation>
+        <translation>Preverjam</translation>
     </message>
     <message>
         <source>CD</source>
-        <translation type="unfinished"></translation>
+        <translation>CD</translation>
     </message>
     <message>
         <source>Money market</source>
-        <translation type="unfinished"></translation>
+        <translation>Denarni trg</translation>
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupni fond</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Drugo</translation>
     </message>
     <message>
         <source>Bank:</source>
-        <translation type="unfinished"></translation>
+        <translation>Banka:</translation>
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpišite ime banke za to čekovno knjižico.</translation>
     </message>
     <message>
         <source>Account number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Številka računa:</translation>
     </message>
     <message>
         <source>Enter account number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpišite številko računa za to čekovno knjižico.</translation>
     </message>
     <message>
         <source>PIN number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Številka PIN:</translation>
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpišite številko PIN za to čekovno knjižico.</translation>
     </message>
     <message>
         <source>Starting balance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Začetno stanje:</translation>
     </message>
     <message>
         <source>Enter the initial balance for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpišite začetno stanje za to čekovno knjižico.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapiski:</translation>
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpišite dodatne informacije za to čekovno knjižico.</translation>
     </message>
     <message>
         <source>Current balance: %10.00</source>
-        <translation type="unfinished"></translation>
+        <translation>Trenutno stanje: %10.00</translation>
     </message>
     <message>
         <source>This area shows the current balance in this checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta prostor prikazuje trenutno stanje v čekovni knjižici.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
 
 To sort entries by a specific field, click on the column name.</source>
-        <translation type="unfinished"></translation>
+        <translation>To je seznam vseh vnesenih transakcij za to čekovno knjižico.
+
+Da uredite vnose po določenem polju, kliknite na ime stolpca.</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Vsota</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova</translation>
     </message>
     <message>
         <source>Click here to add a new transaction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da dodate novo transakcijo.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi</translation>
     </message>
     <message>
         <source>Select a transaction and then click here to edit it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite transakcijo, nato pa kliknite tu, da jo uredite.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to delete it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite čekovno knjižico in nato kliknite tu da jo izbrišete.</translation>
     </message>
     <message>
         <source>Select the desired chart below and then click on the Draw button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite željen graf spodaj in nato kliknite na gumb Riši.</translation>
     </message>
     <message>
         <source>Click here to select the desired chart type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete željeni tip grafa.</translation>
     </message>
     <message>
         <source>Account balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanje računa</translation>
     </message>
     <message>
         <source>Withdrawals by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvigi po kategoriji</translation>
     </message>
     <message>
         <source>Deposits by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Pologi po kategoriji</translation>
     </message>
     <message>
         <source>Draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Riši</translation>
     </message>
     <message>
         <source>Click here to draw the selected chart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da narišem izbran graf.</translation>
     </message>
     <message>
         <source>Current balance: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Trenutno stanje: %1%2</translation>
     </message>
     <message>
         <source>Delete transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši transakcijo</translation>
     </message>
     <message>
         <source>Password protect</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaščita z geslom</translation>
     </message>
     <message>
         <source>Click here to enable/disable password protection of this checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da vključite/izključite zaščito z geslom na čekovni knjižici.</translation>
     </message>
     <message>
         <source>Num</source>
-        <translation type="unfinished"></translation>
+        <translation>Številka</translation>
     </message>
     <message>
         <source>Enter password</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnesite geslo</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosim vnesite vaše geslo:</translation>
     </message>
     <message>
         <source>Confirm password</source>
-        <translation type="unfinished"></translation>
+        <translation>Potrdite geslo</translation>
     </message>
     <message>
         <source>Please confirm your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosim potrdite vaše geslo:</translation>
     </message>
     <message>
         <source>Please enter your password to confirm removal of password protection:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosim vnesite vaše geslo, da potrdite odstranitev zaščite z geslom:</translation>
     </message>
 </context>
 <context>
     <name>Configuration</name>
     <message>
         <source>Configure Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremeni nastavitve čekovne knjižice</translation>
     </message>
     <message>
         <source>Enter currency symbol:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpšite simbol za valuto:</translation>
     </message>
     <message>
         <source>Enter your local currency symbol here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpišite vaš lokalen simbol za valuto.</translation>
     </message>
     <message>
         <source>Show whether checkbook is password
 protected</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži, če je čekovna knjižica zaščitena
+z geslom</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display that the checkbook is protected with a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete, če želite, da glavno okno prikaže ali je čekovna knjižica zaščitena z geslom.</translation>
     </message>
     <message>
         <source>Show checkbook balances</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži stanja čekovne knjižice</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete, če želite, da glavno okno prikaže trenutno stanje za vsako čekovno knjižico.</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Čekovna knjižica</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova</translation>
     </message>
     <message>
         <source>Click here to create a new checkbook.
 
 You also can select New from the Checkbook menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da ustvarite novo čekovno knjižico.
+
+Lahko pa tudi izberete Nova iz menuja.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to edit it.
 
 You also can select Edit from the Checkbook menu, or click and hold on a checkbook name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite čekovno knjižico in nato kliknite tu da jo uredite.
+
+Lahko tudi izberete Uredi iz menija ali pa kliknete in zadržite na imenu čekovne knjižice.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here delete it.
 
 You also can select Delete from the Checkbook menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite čekovno knjižico in nato kliknite tu da jo izbrišete.
+
+Lahko tudi izberete Izbriši iz menuja.</translation>
     </message>
     <message>
         <source>This is a listing of all checkbooks currently available.</source>
-        <translation type="unfinished"></translation>
+        <translation>To je seznam vseh čekovnih knjižic, ki so trenutno na voljo.</translation>
     </message>
     <message>
         <source>Delete checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši čekovno knjižico</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremeni nastavitve</translation>
     </message>
     <message>
         <source>Click here to configure this app.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da spremenite nastavitve za ta program.</translation>
     </message>
     <message>
         <source>Checkbook Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime čekovne knjižice</translation>
     </message>
     <message>
         <source>Balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanje</translation>
     </message>
     <message>
         <source>Enter password</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnesite geslo</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosim vnesite geslo:</translation>
     </message>
 </context>
 <context>
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>
-        <translation type="unfinished"></translation>
+        <translation>Transakcija za</translation>
     </message>
     <message>
         <source>Withdrawal</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvig</translation>
     </message>
     <message>
         <source>Select whether the transaction is a withdrawal or deposit here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite ali je transakcija dvig ali polog.</translation>
     </message>
     <message>
         <source>Deposit</source>
-        <translation type="unfinished">Depozit</translation>
+        <translation>Polog</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished">Datum:</translation>
+        <translation>Datum:</translation>
     </message>
     <message>
         <source>Select date of transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite datum za transakcijo.</translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Številka:</translation>
     </message>
     <message>
         <source>Enter check number here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpišite številko čeka.</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Opis:</translation>
+        <translation>Opis:</translation>
     </message>
     <message>
         <source>Enter description of transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpišite opis transakcije.</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished">Kategorija:</translation>
+        <translation>Kategorija:</translation>
     </message>
     <message>
         <source>Select transaction category here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite kategorijo transakcije.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">Tip:</translation>
+        <translation>Tip:</translation>
     </message>
     <message>
         <source>Select transaction type here.
 
 The options available vary based on whether the transaction is a deposit or withdrawal.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite tip transakcije.
+
+Možnosti, ki so na voljo so odvisne od tega ali je transakcija polog ali pa dvig.</translation>
     </message>
     <message>
         <source>Amount:</source>
-        <translation type="unfinished">Količina:</translation>
+        <translation>Vsota:</translation>
     </message>
     <message>
         <source>Enter the amount of transaction here.
 
 The value entered should always be positive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnesite vsoto transakcije.
+
+Vnesena vrednost mora biti pozitivna.</translation>
     </message>
     <message>
         <source>Fee:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pristojbina:</translation>
     </message>
     <message>
         <source>Enter any fee amount assoiciated with this transaction.
 
 The value entered should always be positive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnesite vsoto pristojbine povezane s to transakcijo.
+
+Vnesena vrednost mora biti pozitivna.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapiski:</translation>
     </message>
     <message>
         <source>Enter any additional information for this transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnesite dodatne informacije za transakcijo.</translation>
     </message>
     <message>
         <source>Automobile</source>
-        <translation type="unfinished">Avto</translation>
+        <translation>Avto</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation type="unfinished"></translation>
+        <translation>Računi</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation type="unfinished">CDji</translation>
+        <translation>CDji</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation type="unfinished">Oblačila</translation>
+        <translation>Oblačila</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation type="unfinished">Računalnik</translation>
+        <translation>Računalnik</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation type="unfinished">DVDji</translation>
+        <translation>DVDji</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation type="unfinished">Elektronika</translation>
+        <translation>Elektronika</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation type="unfinished">Zabava</translation>
+        <translation>Zabava</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished">Hrana</translation>
+        <translation>Hrana</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation type="unfinished">Bencin</translation>
+        <translation>Bencin</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished">Različno</translation>
+        <translation>Različno</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation type="unfinished">Filmi</translation>
+        <translation>Filmi</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished">Najem</translation>
+        <translation>Najem</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished">Potovanje</translation>
+        <translation>Potovanje</translation>
     </message>
     <message>
         <source>Debit Charge</source>
-        <translation type="unfinished">Dolg</translation>
+        <translation>Dolg</translation>
     </message>
     <message>
         <source>Written Check</source>
-        <translation type="unfinished">Ček</translation>
+        <translation>Ček</translation>
     </message>
     <message>
         <source>Transfer</source>
-        <translation type="unfinished">Prenos</translation>
+        <translation>Prenos</translation>
     </message>
     <message>
         <source>Credit Card</source>
-        <translation type="unfinished">Kreditna kartica</translation>
+        <translation>Kreditna kartica</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation type="unfinished">Delo</translation>
+        <translation>Delo</translation>
     </message>
     <message>
         <source>Family Member</source>
-        <translation type="unfinished">Član družine</translation>
+        <translation>Član družine</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation type="unfinished">Različni krediti</translation>
+        <translation>Različni krediti</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
-        <translation type="unfinished">Avtomatsko plačilo</translation>
+        <translation>Avtomatsko plačilo</translation>
     </message>
     <message>
         <source>Cash</source>
-        <translation type="unfinished">Gotovina</translation>
+        <translation>Gotovina</translation>
     </message>
 </context>
 </TS>

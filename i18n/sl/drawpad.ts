@@ -157,79 +157,79 @@ vse strani?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da dodate nov list.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da zbrišete trenutni list.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da odstranite trenutni list.</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da prekinete zadnje dejanje.</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da ponovno izvedete zadnje dejanje.</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da vidite prvo stran.</translation>
     </message>
     <message>
         <source>Click here to view the previous page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da vidite prejšno stran.</translation>
     </message>
     <message>
         <source>Click here to view the next page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da vidite naslednjo stran.</translation>
     </message>
     <message>
         <source>Click here to view the last page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da vidite zadnjo stran.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete eno od orodij za risanje črt.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete eno od orodij za risanje pravokotnikov.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete eno od orodij za risanje elips.</translation>
     </message>
     <message>
         <source>Click here to select the text drawing tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete orodje za risanje besedila.</translation>
     </message>
     <message>
         <source>Click here to select the fill tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete orodje za zapolnjevanje.</translation>
     </message>
     <message>
         <source>Click here to select the eraser tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete orodje za brisanje.</translation>
     </message>
     <message>
         <source>Click here to select the width of the drawing pen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete debelino risalnega svinčnika.</translation>
     </message>
     <message>
         <source>Click here to select the color used when drawing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete barvo s katero se riše.</translation>
     </message>
     <message>
         <source>Click here to select the color used when filling in areas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da izberete barvo s katero se polni.</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Risalna plošča - Stran %1/%2</translation>
     </message>
 </context>
 <context>
@@ -364,15 +364,15 @@ vse strani?</translation>
     <name>QObject</name>
     <message>
         <source>Title: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Naslov: %1</translation>
     </message>
     <message>
         <source>Dimension: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimenzija: %1x%2</translation>
     </message>
     <message>
         <source>Date: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum: %1</translation>
     </message>
 </context>
 <context>
@@ -418,23 +418,23 @@ izbrano stran?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da dodate nov list.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da zbrišete trenutni list.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da odstranite trenutni list.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet up one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da premaknete trenuten list gor za eno vrstico v seznamu.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet down one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da premaknete trenuten list dol za eno vrstico v seznamu.</translation>
     </message>
 </context>
 </TS>

@@ -3,91 +3,92 @@
     <name>ORecurranceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished"></translation>
+        <translation>Ponavljajoč dogodek
+</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Brez</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Dan</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Teden</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Mesec</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Leto</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vasak:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogostost</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished"></translation>
+        <translation>Konča na:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Brez končnega datuma</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponovi na</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Pon</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Tor</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sre</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Čet</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Pet</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Sob</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Ned</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Vsak</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremenljivka1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremenljivka 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation>Tedenskaspremenljivka</translation>
     </message>
 </context>
 <context>

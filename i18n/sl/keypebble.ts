@@ -140,11 +140,11 @@ na ta račun, prosim poizkusite kasneje.</translation>
     </message>
     <message>
         <source>Next Click is Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Naslednji klik je dvojni klik</translation>
     </message>
     <message>
         <source>Next Click is Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Naslednji klik je desni klik</translation>
     </message>
 </context>
 <context>
@@ -155,7 +155,7 @@ na ta račun, prosim poizkusite kasneje.</translation>
     </message>
     <message>
         <source>Choose a bookmark that you would like to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite zaznamek, ki bi ga radi odprli</translation>
     </message>
 </context>
 <context>
@@ -250,43 +250,43 @@ na ta račun, prosim poizkusite kasneje.</translation>
     </message>
     <message>
         <source>The password of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Geslo za VNC strežnik</translation>
     </message>
     <message>
         <source>Toggle obscuring the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Vključi/Izključi geslo</translation>
     </message>
     <message>
         <source>The name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime VNC strežnika</translation>
     </message>
     <message>
         <source>The host name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Gostiteljsko ime VNC strežnika</translation>
     </message>
     <message>
         <source>The display number of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Številko prikazovalnika na VNC strežniku</translation>
     </message>
     <message>
         <source>Delay between requesting updates from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamik med zahtevanjem posodobitev od strežnika</translation>
     </message>
     <message>
         <source>Request that the VNC server transfer 8 bit color</source>
-        <translation type="unfinished"></translation>
+        <translation>Zahtevaj, da VNC strežnik prenaša 8 bitne barve</translation>
     </message>
     <message>
         <source>Allow other users to connect to the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Dovoli drugim uporabnikom, da se priklopijo na VNC strežnik</translation>
     </message>
     <message>
         <source>Scale the remote display to fit on the PDA (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Raztegni oddaljen prikazovalnik, da se prilagodi dlančniku (počasno)</translation>
     </message>
     <message>
         <source>Enable transmiting identical rectangles as references to existing data</source>
-        <translation type="unfinished"></translation>
+        <translation>Vklopi oddajanje identičnih pravokotnikov kot reference za obstoječe podatke</translation>
     </message>
 </context>
 </TS>

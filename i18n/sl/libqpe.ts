@@ -72,23 +72,23 @@
     </message>
     <message>
         <source>Check the categories this document belongs to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Obkljukajte kategorije katerim ta dokument pripada.</translation>
     </message>
     <message>
         <source>Enter a new category here.  Press &lt;b&gt;Add&lt;/b&gt; to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tu vnesite novo kategorijo. Pritisnite &lt;b&gt;Dodaj&lt;/b&gt;, da dodate v seznam.</translation>
     </message>
     <message>
         <source>Enter a new category to the left and press to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnesite novo kategorijo levo in pritisnite dodaj, da dodate v seznam.</translation>
     </message>
     <message>
         <source>Press to delete the highlighted category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pritisnite, da izbrišete osvetljeno kategorijo.</translation>
     </message>
     <message>
         <source>Check to make this property available to all applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Obkljukajte, da naredite to lastnost dostopno vsem programom.</translation>
     </message>
 </context>
 <context>
@@ -127,19 +127,19 @@ ureja kategorije.</translation>
     <name>DateBookMonthHeader</name>
     <message>
         <source>Show January in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži januar v izbranem letu</translation>
     </message>
     <message>
         <source>Show the previous month</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži prejšni mesec</translation>
     </message>
     <message>
         <source>Show the next month</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži naslednji mesec</translation>
     </message>
     <message>
         <source>Show December in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži december v izbranem letu</translation>
     </message>
 </context>
 <context>
@@ -150,27 +150,27 @@ ureja kategorije.</translation>
     </message>
     <message>
         <source>Show documents of this type</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži dokumente tega tipa</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished">Pogled dokumenta</translation>
+        <translation>Pogled dokumenta</translation>
     </message>
     <message>
         <source>Show documents in this category</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži dokumente v tej kategoriji</translation>
     </message>
     <message>
         <source>Click to select a document from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Obkljukajte, da izberete dokument iz seznama</translation>
     </message>
     <message>
         <source>, or select &lt;b&gt;New Document&lt;/b&gt; to create a new document.</source>
-        <translation type="unfinished"></translation>
+        <translation>ali pa izberite &lt;b&gt;Nov dokument&lt;/b&gt;, da ustvarite nov dokument.</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;Click and hold for document properties.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;Kliknite in zadržite za lastnosti dokumenta.</translation>
     </message>
 </context>
 <context>
@@ -184,7 +184,7 @@ ureja kategorije.</translation>
     <name>FindDialog</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Išči</translation>
+        <translation>Najdi</translation>
     </message>
 </context>
 <context>
@@ -202,11 +202,11 @@ ureja kategorije.</translation>
     <name>FindWidgetBase</name>
     <message>
         <source>Find</source>
-        <translation>Išči</translation>
+        <translation>Najdi</translation>
     </message>
     <message>
         <source>Find what:</source>
-        <translation>Išči kaj:</translation>
+        <translation>Najdi kaj:</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -265,11 +265,11 @@ ureja kategorije.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished">Trdi disk</translation>
+        <translation>Trdi disk</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Lastnosti</translation>
     </message>
 </context>
 <context>
@@ -312,31 +312,31 @@ ureja kategorije.</translation>
     </message>
     <message>
         <source>The media the document resides on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Medij na katerem je dokument.</translation>
     </message>
     <message>
         <source>The name of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime tega dokumenta.</translation>
     </message>
     <message>
         <source>Preload this application so that it is available instantly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prednaloži ta program tako, da je takoj na voljo.</translation>
     </message>
     <message>
         <source>Delete this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši ta dokument.</translation>
     </message>
     <message>
         <source>Make a copy of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Naredi kopijo tega dokumenta.</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prežarči ta dokument na drugo napravo.</translation>
     </message>
     <message>
         <source>Use custom rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi prilagojen zasuk</translation>
     </message>
 </context>
 <context>
@@ -739,76 +739,76 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     </message>
     <message>
         <source>New Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov dokument</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Pon</translation>
+        <translation>Pon</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Tor</translation>
+        <translation>Tor</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Sre</translation>
+        <translation>Sre</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Čet</translation>
+        <translation>Čet</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Pet</translation>
+        <translation>Pet</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Sob</translation>
+        <translation>Sob</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">Ned</translation>
+        <translation>Ned</translation>
     </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dokument</translation>
     </message>
 </context>
 <context>
     <name>QPEDecoration</name>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Qt&gt;Pomoč ni na voljo za ta program, ima pa majhno pomol.&lt;p&gt;Da bi to uporabili:&lt;p&gt;&lt;ol&gt;&lt;li&gt;kliknite in zadržite gumb za pomoč.&lt;li&gt;kose prikaže naslovna vrstica &lt;b&gt;Kaj je to...&lt;/b&gt;, kliknite na katerokoli od kontrol.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaj je to...</translation>
     </message>
 </context>
 <context>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da zaprete to okno in zanemarite spremembe.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da zaprete to okno.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da zaprete to okno in uveljavite spremembe.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da naredite to okno premično.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknite tu, da to okno uporablja ves prostor, ki je na voljo.</translation>
     </message>
 </context>
 <context>
@@ -835,30 +835,31 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Notranji spomin</translation>
     </message>
     <message>
         <source>MMC Card</source>
-        <translation type="unfinished"></translation>
+        <translation>MMC kartica</translation>
     </message>
 </context>
 <context>
     <name>TZCombo</name>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Brez</translation>
     </message>
 </context>
 <context>
     <name>TimeZoneSelector</name>
     <message>
         <source>citytime executable not found</source>
-        <translation type="unfinished"></translation>
+        <translation>program citytime ni najden</translation>
     </message>
     <message>
         <source>In order to choose the time zones,
 please install citytime.</source>
-        <translation type="unfinished"></translation>
+        <translation>Če želite izbrati časovni pas,
+prosim naložite citytime.</translation>
     </message>
 </context>
 <context>
@@ -878,20 +879,20 @@ Prosim sprostite malo prostora in poizkusite ponovno</translation>
     <name>TypeCombo</name>
     <message>
         <source>%1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 datotek</translation>
     </message>
     <message>
         <source>%1 %2</source>
         <comment>minor mimetype / major mimetype</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <source>All %1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Vseh %1 datotek</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Vse datoteke</translation>
     </message>
 </context>
 </TS>

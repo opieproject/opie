@@ -232,7 +232,7 @@ Ali jo res želite izbrisati?</translation>
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished">Advanced FileManager
+        <translation>Advanced FileManager
 pravice pridržane 2002-2003
 LJ.Potter&lt;llornkcor@handhelds.org&gt;
 in je licencirano pod GPL</translation>
@@ -241,19 +241,21 @@ in je licencirano pod GPL</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem odstraniti trenutnega imenika
+iz zaznamkov.
+Ni med zaznamki!!</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj imenik med zaznamke</translation>
     </message>
     <message>
         <source>Remove Current Directory from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrani trenutni imenik iz zaznamkov</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka</translation>
     </message>
 </context>
 <context>

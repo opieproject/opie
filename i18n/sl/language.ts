@@ -3,11 +3,11 @@
     <name>LanguageSettings</name>
     <message>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Angleško</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>privzeto</translation>
     </message>
 </context>
 <context>
@@ -18,7 +18,7 @@
     </message>
     <message>
         <source>Language Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitve jezika</translation>
     </message>
 </context>
 </TS>

@@ -166,19 +166,19 @@ ali pa je v neznani obliki.</translation>
     </message>
     <message>
         <source>-BASHFUL</source>
-        <translation type="unfinished"></translation>
+        <translation>-BOJEČ</translation>
     </message>
     <message>
         <source>&quot;INKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;MODER&quot;</translation>
     </message>
     <message>
         <source>-POKEY</source>
-        <translation type="unfinished"></translation>
+        <translation>-POKEY</translation>
     </message>
     <message>
         <source>&quot;CLYDE&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;CLYDE&quot;</translation>
     </message>
     <message>
         <source>QTOPIA PORT: CATALIN CLIMOV</source>
@@ -193,7 +193,7 @@ ali pa je v neznani obliki.</translation>
     <name>Score</name>
     <message>
         <source>  1UP </source>
-        <translation type="unfinished"></translation>
+        <translation>1IG</translation>
     </message>
     <message>
         <source> HIGH SCORE </source>
@@ -201,7 +201,7 @@ ali pa je v neznani obliki.</translation>
     </message>
     <message>
         <source>  2UP </source>
-        <translation type="unfinished"></translation>
+        <translation>2IG</translation>
     </message>
     <message>
         <source>     CONGRATULATIONS      </source>
@@ -217,7 +217,7 @@ ali pa je v neznani obliki.</translation>
     </message>
     <message>
         <source>RNK   SCORE  NAME   DATE</source>
-        <translation type="unfinished"></translation>
+        <translation>MES   TOČKE  IME       DATUM</translation>
     </message>
     <message>
         <source>PAUSED</source>
@@ -227,10 +227,6 @@ ali pa je v neznani obliki.</translation>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@DD@.@MM@.@YY@</translation>
     </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Status</name>
@@ -239,11 +235,14 @@ ali pa je v neznani obliki.</translation>
 
 The file &apos;@PIXMAPNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Slike ne morejo biti ustvarjene.
+
+Datoteka &apos;@PIXMAPNAME@&apos; ne obstaja
+ali pa je nezanega formata.</translation>
     </message>
     <message>
         <source>Initialization Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka pri zagonu</translation>
     </message>
 </context>
 </TS>

@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Namizje</translation>
     </message>
 </context>
 </TS>

@@ -185,15 +185,15 @@
     </message>
     <message>
         <source>Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Prelom vrstice</translation>
     </message>
     <message>
         <source>Use Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi piskanje</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavihki zgoraj</translation>
     </message>
 </context>
 <context>
