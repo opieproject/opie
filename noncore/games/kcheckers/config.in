@@ -1,4 +1,4 @@
   config KCHECKERS
-    boolean "kcheckers"
+    boolean "opie-kcheckers (the game of Checkers)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

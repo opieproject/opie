@@ -1,4 +1,4 @@
   config PARASHOOT
-    boolean "parashoot"
+    boolean "opie-parashoot (shoot the parachutists)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

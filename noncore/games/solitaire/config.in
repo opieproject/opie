@@ -1,4 +1,4 @@
   config SOLITAIRE
-    boolean "solitaire"
+    boolean "opie-solitaire (solitaire card game)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

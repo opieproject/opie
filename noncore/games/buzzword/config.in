@@ -1,4 +1,4 @@
   config BUZZWORD
-    boolean "buzzword"
+    boolean "opie-buzzword (a BuzzWord Bingo)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config SNAKE
-    boolean "snake"
+    boolean "opie-snake (control eating and growing snake)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

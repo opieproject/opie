@@ -1,4 +1,4 @@
   config GO
-    boolean "go"
+    boolean "opie-go (the asian game of Go)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

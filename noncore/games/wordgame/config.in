@@ -1,4 +1,4 @@
   config WORDGAME
-    boolean "wordgame"
+    boolean "opie-wordgame (crossword game)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

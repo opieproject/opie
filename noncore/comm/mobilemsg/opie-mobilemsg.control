@@ -1,5 +1,5 @@
 Package: opie-mobilemsg
-Files: bin/mobilemsg apps/Applications/mobilemsg.desktop pics/mobilemsg 
+Files: bin/mobilemsg apps/Applications/mobilemsg.desktop
 Priority: optional
 Section: opie/comm
 Maintainer: Bruno Rodrigues <bruno.rodrigues@litux.org>

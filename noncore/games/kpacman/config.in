@@ -1,4 +1,4 @@
   config KPACMAN
-    boolean "kpacman"
+    boolean "opie-kpacman (a PacMan clone)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

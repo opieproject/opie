@@ -1,4 +1,4 @@
   config BOUNCE
-    boolean "bounce"
+    boolean "opie-bounce (a JezzGame like game)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config KBILL
-    boolean "kbill"
+    boolean "opie-kbill (hit Bill before he can infect your network with a wannabe OS)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

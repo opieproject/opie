@@ -1,4 +1,4 @@
   config BACKGAMMON
-    boolean "backgammon"
+    boolean "backgammon (Backgammon game)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

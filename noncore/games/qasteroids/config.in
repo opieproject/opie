@@ -1,4 +1,4 @@
   config QASTEROIDS
-    boolean "qasteroids"
+    boolean "opie-qasteroids (shoot the asteroids)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
