@@ -78,6 +78,31 @@
         <source>NTP</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Main</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ntp error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error while getting time form network!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error while getting time form
+ server</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NtpBase</name>
@@ -138,10 +163,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Advanced features</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Wait for </source>
         <translation type="unfinished"></translation>
     </message>
@@ -183,6 +204,10 @@
     </message>
     <message>
         <source>NTP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Advanced settings</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

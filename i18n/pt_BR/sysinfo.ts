@@ -169,5 +169,17 @@
         <source>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </source>
         <translation>&lt;b&gt;Kernel do Linux&lt;/b&gt;&lt;p&gt; Versão: </translation>
     </message>
+    <message>
+        <source>&lt;p&gt;Version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Model: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Vendor: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

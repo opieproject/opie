@@ -277,6 +277,10 @@ del dico?&lt;BR&gt;¡Es &lt;B&gt;irreversible!&lt;/B&gt;</translation>
         <source>File Permissions</source>
         <translation type="unfinished">Permisos fichero</translation>
     </message>
+    <message>
+        <source>Search Bar Open</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

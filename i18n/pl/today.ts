@@ -114,7 +114,4 @@ resume?
         <translation type="unfinished"></translation>
     </message>
 </context>
-<context>
-    <name>todayconfig</name>
-</context>
 </TS>

@@ -191,18 +191,6 @@
         <source>Package</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Install to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reinstall</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>PackageManagerSettings</name>
@@ -346,6 +334,14 @@ All done.</source>
     </message>
     <message>
         <source>Status: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,23 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>ColorPopupMenu</name>
-</context>
-<context>
-    <name>OColorDialog</name>
-</context>
-<context>
-    <name>OFileDialog</name>
-</context>
-<context>
-    <name>OFileSelector</name>
-</context>
-<context>
-    <name>OFontMenu</name>
-</context>
-<context>
-    <name>OFontSelector</name>
-</context>
-<context>
     <name>ORecurranceBase</name>
     <message>
         <source>Repeating Event </source>
@@ -126,8 +108,5 @@
         <source>Pick Time:</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>QObject</name>
 </context>
 </TS>

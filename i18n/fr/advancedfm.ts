@@ -69,7 +69,7 @@
     <message>
         <source>Do you really want to delete
 </source>
-        <translation>Voulez-vous vraiment effacer</translation>
+        <translation type="obsolete">Voulez-vous vraiment effacer</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -205,6 +205,42 @@ and is licensed by the GPL</source>
     </message>
     <message>
         <source>Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1 files?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Directory?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really copy
+%1 files?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Exists!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+exists. Ok to overwrite?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

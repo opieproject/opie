@@ -269,6 +269,10 @@ borrar esta lista?</translation>
         <source>Skins</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Path</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>VideoWidget</name>

@@ -193,15 +193,15 @@
     </message>
     <message>
         <source>Install to</source>
-        <translation type="unfinished">Installiere auf</translation>
+        <translation type="obsolete">Installiere auf</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Entferne</translation>
+        <translation type="obsolete">Entferne</translation>
     </message>
     <message>
         <source>Reinstall</source>
-        <translation type="unfinished">Installiere neu</translation>
+        <translation type="obsolete">Installiere neu</translation>
     </message>
 </context>
 <context>
@@ -348,6 +348,14 @@ Alles fertig.</translation>
     <message>
         <source>Status: </source>
         <translation>Status:</translation>
+    </message>
+    <message>
+        <source>Install to</source>
+        <translation type="unfinished">Installiere auf</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -238,30 +238,6 @@ You also can select Delete from the Checkbook menu.</source>
     </message>
 </context>
 <context>
-    <name>QCheckDetailsBase</name>
-</context>
-<context>
-    <name>QCheckEntry</name>
-</context>
-<context>
-    <name>QCheckEntryBase</name>
-</context>
-<context>
-    <name>QCheckGraphBase</name>
-</context>
-<context>
-    <name>QCheckMMBase</name>
-</context>
-<context>
-    <name>QCheckNameBase</name>
-</context>
-<context>
-    <name>QCheckViewBase</name>
-</context>
-<context>
-    <name>QObject</name>
-</context>
-<context>
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>

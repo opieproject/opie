@@ -229,6 +229,10 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <source>File Permissions</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Search Bar Open</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>filePermissions</name>

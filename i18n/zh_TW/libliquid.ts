@@ -55,9 +55,6 @@
     </message>
 </context>
 <context>
-    <name>QObject</name>
-</context>
-<context>
     <name>Styles</name>
     <message>
         <source>Liquid</source>

@@ -116,12 +116,6 @@ Quit Anyway?</source>
     </message>
 </context>
 <context>
-    <name>NewTaskDialog</name>
-</context>
-<context>
-    <name>NewTaskDialogBase</name>
-</context>
-<context>
     <name>OTaskEditor</name>
     <message>
         <source>Overview</source>
@@ -450,11 +444,5 @@ Quit Anyway?</source>
         <source>Configure Templates</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>TodoTable</name>
-</context>
-<context>
-    <name>TodoWindow</name>
 </context>
 </TS>

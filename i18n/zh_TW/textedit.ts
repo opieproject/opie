@@ -52,9 +52,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
 </context>
 <context>
-    <name>FontDialog</name>
-</context>
-<context>
     <name>TextEdit</name>
     <message>
         <source>New</source>
@@ -174,6 +171,10 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
     <message>
         <source>File Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search Bar Open</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

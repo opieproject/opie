@@ -168,5 +168,17 @@
         <source>Built on: </source>
         <translation>Fecha compilación: </translation>
     </message>
+    <message>
+        <source>&lt;p&gt;Version: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Model: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Vendor: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
