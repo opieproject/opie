@@ -1,5 +1,5 @@
 Package: opie-ubrowser
-Files: bin/ubrowser apps/Applications/ubrowser.desktop pics/ubrowser/*.png
+Files: bin/ubrowser apps/Applications/ubrowser.desktop pics/ubrowser/*.png plugins/application/libubrowser.so*
 Priority: optional
 Section: opie/applications
 Maintainer: Thomas Stephens <spiralman@softhome.net>
