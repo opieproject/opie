@@ -4,10 +4,10 @@
 #include <time.h>
 
 #include <opie2/oapplicationfactory.h>
+#include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/global.h>
 
-#include <qapplication.h>
 #include <qdir.h>
 
 #include "helpwindow.h"
@@ -1139,9 +1139,8 @@ void SFCave :: dealWithMenuSelection()
                 case MENU_HELP:
                 {
                     // Display Help Menu
-                    HelpWindow *dlg = new HelpWindow( this );
-                    dlg->exec();
-                    delete dlg;
+                    HelpWindow *win = new HelpWindow(  );
+		    QPEApplication::showWidget( win );
                     break;
                 }
 

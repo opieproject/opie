@@ -24,10 +24,10 @@
   *@author Andy Qua
   */
 
-class HelpWindow : public QDialog
+class HelpWindow : public QWidget
 {
 public: 
-    HelpWindow( QWidget *parent = 0, const char *name = 0, bool modal = true, WFlags flags = 0 );
+    HelpWindow( QWidget *parent = 0, const char *name = 0);
 	~HelpWindow();
 };
 
