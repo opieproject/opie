@@ -1,5 +1,4 @@
 Files: bin/aqpkg pics/aqpkg apps/Settings/aqpkg.desktop 
-Package: aqpkg
 Priority: optional
 Section: Settings
 Version: $QPE_VERSION-$SUB_VERSION

@@ -1,5 +1,4 @@
 File: bin/backupandrestore pics/backupandrestore apps/Settings/backupandrestore.desktop
-Package: backupandrestore
 Priority: optional
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
