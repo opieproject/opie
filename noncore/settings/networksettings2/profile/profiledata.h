@@ -10,6 +10,7 @@ typedef struct ProfileData {
       bool Confirm;
       // Do not bring this connection up
       bool Disabled;
+      bool TriggerVPN;
 } ProfileData_t; 
 
 #endif

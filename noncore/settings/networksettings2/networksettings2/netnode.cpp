@@ -103,8 +103,6 @@ ANetNodeInstance * ANetNodeInstance::nextNode( void ) {
 //
 //
 
-long NodeCollection::MaxNr = -1;
-
 NodeCollection::NodeCollection( void ) : QList<ANetNodeInstance>() {
     IsModified = 0;
     Index = -1;
@@ -146,6 +144,7 @@ NodeCollection::NodeCollection( QTextStream & TS ) :
       if( A == "name" ) {
         Name = N;
       } else if( A == "number" ) {
+      Log(( "read number %s\n", N.latin1() ));
         setNumber( N.toLong() );
       } else if( A == "node" ) {
         ANetNodeInstance * NNI = NSResources->findNodeInstance( N );
@@ -295,6 +294,9 @@ void NodeCollection::reassign( void ) {
     }
 }
 
+bool NodeCollection::triggersVPN() {
+  return getToplevel()->runtime()->asFullSetup()->triggersVPN();
+}
 //
 //
 // RUNTIMEINFO

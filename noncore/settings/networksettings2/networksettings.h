@@ -28,6 +28,7 @@ public :
 
 public slots :
 
+      void SLOT_NoLongerBusy( void );
       void SLOT_AddNode( void );
       void SLOT_DeleteNode( void );
       void SLOT_ShowNode( QListBoxItem * );
@@ -42,6 +43,7 @@ public slots :
       void SLOT_QCopMessage( const QCString&,const QByteArray& );
       void SLOT_ToProfile( void );
       void SLOT_ToMessages( void );
+      void SLOT_CmdMessage( const QString & S );
 
 private :
 

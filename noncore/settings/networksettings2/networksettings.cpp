@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <unistd.h>
 
 #include <qpe/qpeapplication.h>
 #include <qlistbox.h>
@@ -61,6 +62,10 @@ NetworkSettings::NetworkSettings( QWidget *parent,
       QTimer::singleShot( 100, this, SLOT(SLOT_AddNode() ) );
     }
 
+    connect( &(NSResources->system()), 
+             SIGNAL( lineFromCommand(const QString &) ),
+             this, SLOT( SLOT_CmdMessage(const QString &) ) );
+
     UpdateTimer->start( 5000 );
     connect( UpdateTimer, SIGNAL( timeout() ),
              this, SLOT( SLOT_RefreshStates() ) );
@@ -89,6 +94,12 @@ NetworkSettings::~NetworkSettings() {
             0, 
             tr( "Saving setup" ), S );
     }
+}
+
+void NetworkSettings::SLOT_CmdMessage( const QString & S ) {
+    Messages_LB->insertItem( S );
+    Messages_LB->setCurrentItem( Messages_LB->count()-1 );
+    Messages_LB->ensureCurrentVisible();
 }
 
 void NetworkSettings::SLOT_RefreshStates( void ) {
@@ -134,6 +145,9 @@ void NetworkSettings::SLOT_RefreshStates( void ) {
     */
 }
 
+void NetworkSettings::SLOT_NoLongerBusy( void ) {
+      NSResources->busy( FALSE );
+}
 void NetworkSettings::SLOT_AddNode( void ) {
     SLOT_EditNode( 0 );
 }
@@ -172,6 +186,8 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
     EC.showMaximized();
     // disable refresh timer 
     UpdateTimer->stop();
+    NSResources->busy( TRUE );
+    QTimer::singleShot( 1000, this, SLOT( SLOT_NoLongerBusy() ));
     // we need to retry
     while( 1 ) {
       if( EC.exec() == QDialog::Accepted ) {
@@ -206,7 +222,7 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
             // new item
             int ci = Profiles_LB->count();
             NSResources->addConnection( NC );
-            NC->setNumber( NC->maxConnectionNumber()+1 );
+            NC->setNumber( NSResources->assignConnectionNumber() );
             Profiles_LB->insertItem( NC->devicePixmap(), NC->name() );
             Profiles_LB->setSelected( ci, TRUE );
           }
@@ -257,12 +273,18 @@ void NetworkSettings::SLOT_ShowNode( QListBoxItem * LBI ) {
         break;
       case Available :
         OnOn = 1;
+        Connect_TB->setPixmap( NSResources->getPixmap( "disconnected" ) );
         DisabledOn = 0;
         break;
       case IsUp :
         OnOn = ConnectOn = 1;
+        Connect_TB->setPixmap( NSResources->getPixmap( "connected" ) );
         DisabledOn = 0;
         break;
+    }
+
+    if( ! OnOn ) {
+      Connect_TB->setPixmap( NSResources->getPixmap( "disconnected" ) );
     }
 
     // set button state
@@ -275,13 +297,12 @@ void NetworkSettings::SLOT_ShowNode( QListBoxItem * LBI ) {
     Connect_TB->setOn( ConnectOn );
 
     if( NC->description().isEmpty() ) {
-      Description_LBL->setText( tr( "No description" ) );
+      Description_LBL->setText( tr( "<<No description>>" ) );
     } else {
       Description_LBL->setText( NC->description() );
     }
 
-    Profile_GB->setTitle( LBI->text() );
-    State_LBL->setText( NC->stateName() );
+    Profile_GB->setTitle( LBI->text() + " : " + NC->stateName() );
 }
 
 void NetworkSettings::SLOT_CheckState( void ) {
@@ -414,6 +435,7 @@ void NetworkSettings::SLOT_Connect( void ) {
 }
 
 void NetworkSettings::SLOT_Disconnect( void ) {
+    QString S;
     QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
 
     if ( ! LBI ) 
@@ -422,7 +444,11 @@ void NetworkSettings::SLOT_Disconnect( void ) {
     NodeCollection * NC = 
         NSResources->findConnection( LBI->text() );
 
+    Log(( "Force interface %s down\n", NC->name().latin1() ));
     NC->setState( Down, 1 );
+    // remove 'up' file to make sure
+    S.sprintf( "/tmp/Profile-%d.up", NC->number() );
+    unlink( S.latin1() );
 }
 
 void NetworkSettings::SLOT_ToMessages( void ) {

@@ -23,6 +23,10 @@ public :
 
       virtual AsFullSetup * asFullSetup( void ) 
         { return (AsFullSetup *)this; }
+
+      virtual bool triggersVPN( void ) 
+        { return Data->TriggerVPN; }
+
 private :
 
       ProfileData * Data;

@@ -8,6 +8,8 @@
 #include <qobject.h>
 #include <time.h>
 
+#include <Utils.h>
+
 // difference feature interfaces
 class AsDevice;
 class AsLine;
@@ -283,7 +285,7 @@ public :
       int number( void ) 
         { return Number; }
       void setNumber( int i ) 
-        { Number = i; if( MaxNr < i ) MaxNr = i; }
+        { Number = i; }
       bool isNew( void ) 
         { return IsNew; }
       void setNew( bool N ) 
@@ -305,8 +307,15 @@ public :
         return getToplevel()->runtime()->device();
       }
 
+      bool triggersVPN();
+
       State_t state( bool Update = 0 )
-        { if( CurrentState == Unchecked || Update ) {
+        { Log(( "%s state %d(=%d?)\n", Name.latin1(), CurrentState,
+            Unchecked ));
+          if( CurrentState == Unchecked || Update ) {
+            Log(( "TL %p TLR %p\n", 
+                    getToplevel(),
+                    getToplevel()->runtime() ));
             // need to get current state
             getToplevel()->runtime()->detectState( this );
           } 
@@ -352,18 +361,11 @@ public :
       void setCurrentState( State_t S )
         { CurrentState = S; }
 
-      long maxConnectionNumber( void )
-        { return MaxNr; }
-
-      static void resetMaxNr( void )
-        { MaxNr = -1; }
-
 private :
 
       int compareItems ( QCollection::Item item1, 
                          QCollection::Item item2 );
 
-      static long MaxNr;
       long Number;
 
       // state of this connection

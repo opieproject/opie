@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>160</width>
+            <width>144</width>
             <height>260</height>
         </rect>
     </property>
@@ -28,7 +28,7 @@
     <vbox>
         <property stdset="1">
             <name>margin</name>
-            <number>0</number>
+            <number>2</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
@@ -302,70 +302,6 @@
                     <number>2</number>
                 </property>
                 <widget>
-                    <class>QLayoutWidget</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>Layout3</cstring>
-                    </property>
-                    <hbox>
-                        <property stdset="1">
-                            <name>margin</name>
-                            <number>0</number>
-                        </property>
-                        <property stdset="1">
-                            <name>spacing</name>
-                            <number>6</number>
-                        </property>
-                        <widget>
-                            <class>QLabel</class>
-                            <property stdset="1">
-                                <name>name</name>
-                                <cstring>TextLabel2_2</cstring>
-                            </property>
-                            <property stdset="1">
-                                <name>text</name>
-                                <string>State</string>
-                            </property>
-                        </widget>
-                        <widget>
-                            <class>QLabel</class>
-                            <property stdset="1">
-                                <name>name</name>
-                                <cstring>State_LBL</cstring>
-                            </property>
-                            <property stdset="1">
-                                <name>text</name>
-                                <string>State</string>
-                            </property>
-                            <property stdset="1">
-                                <name>indent</name>
-                                <number>0</number>
-                            </property>
-                        </widget>
-                        <spacer>
-                            <property>
-                                <name>name</name>
-                                <cstring>Spacer6_2</cstring>
-                            </property>
-                            <property stdset="1">
-                                <name>orientation</name>
-                                <enum>Horizontal</enum>
-                            </property>
-                            <property stdset="1">
-                                <name>sizeType</name>
-                                <enum>Expanding</enum>
-                            </property>
-                            <property>
-                                <name>sizeHint</name>
-                                <size>
-                                    <width>20</width>
-                                    <height>20</height>
-                                </size>
-                            </property>
-                        </spacer>
-                    </hbox>
-                </widget>
-                <widget>
                     <class>QLabel</class>
                     <property stdset="1">
                         <name>name</name>
@@ -485,7 +421,7 @@
                     <class>QListBox</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Mesages_LB</cstring>
+                        <cstring>Messages_LB</cstring>
                     </property>
                 </widget>
                 <widget>
@@ -613,6 +549,12 @@
         <signal>clicked()</signal>
         <receiver>NetworkSettingsGUI</receiver>
         <slot>SLOT_ToMessages()</slot>
+    </connection>
+    <connection>
+        <sender>Disconnect_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_Disconnect()</slot>
     </connection>
     <slot access="public">SLOT_AddNode()</slot>
     <slot access="public">SLOT_CheckState()</slot>

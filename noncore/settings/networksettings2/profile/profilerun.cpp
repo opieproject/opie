@@ -4,15 +4,17 @@
 
 void ProfileRun::detectState( NodeCollection * NC ) { 
     if( Data->Disabled ) {
+      Log(( "%s disabled\n", NC->name().latin1() ));
       NC->setCurrentState( Disabled );
     } else {
+      Log(( "%s not disabled\n", NC->name().latin1() ));
       // find next item in connection
       // convert to runtime and ask to detect the state
       netNode()->nextNode()->runtime()->detectState( NC );
     }
 }
 
-bool ProfileRun::setState( NodeCollection * NC, Action_t A, bool ) { 
+bool ProfileRun::setState( NodeCollection * NC, Action_t A, bool F ) { 
     ANetNodeInstance * NNNI;
 
     NNNI = netNode()->nextNode();
@@ -41,7 +43,7 @@ bool ProfileRun::setState( NodeCollection * NC, Action_t A, bool ) {
       default :
         break;
     }
-    return NNNI->runtime()->setState(NC, A);
+    return NNNI->runtime()->setState(NC, A, F );
 }
 
 bool ProfileRun::canSetState( State_t Curr, Action_t A ) { 

@@ -114,9 +114,9 @@ void LanCardEdit::SLOT_ScanCards( void ) {
     for( QDictIterator<InterfaceInfo> It(S.interfaces());
          It.current();
          ++It ) {
-      fprintf( stderr, "TEST %s %s\n", 
+      Log(( "TEST %s %s\n", 
           It.current()->Name.latin1(),
-          It.current()->MACAddress.latin1() );
+          It.current()->MACAddress.latin1() ));
       if( R.match( It.current()->Name ) >= 0 &&
           ( It.current()->CardType == ARPHRD_ETHER
 #ifdef ARPHRD_IEEE1394

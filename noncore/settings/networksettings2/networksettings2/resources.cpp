@@ -23,6 +23,8 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
 
     _NSResources = this;
 
+    detectCurrentUser();
+
     // load available netnodes
     findAvailableNetNodes(QPEApplication::qpeDir() + PLUGINDIR );
 
@@ -80,11 +82,21 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
     // get access to the system
     TheSystem = new System();
 
-    detectCurrentUser();
 }
 
 TheNSResources::~TheNSResources( void ) {
     delete TheSystem;
+}
+
+void TheNSResources::busy( bool B ) {
+/*
+      if( B ) {
+        ShowWait->show();
+        qApp->process
+      } else {
+        ShowWait->hide();
+      }
+*/
 }
 
 /**
@@ -94,6 +106,7 @@ TheNSResources::~TheNSResources( void ) {
  */
 void TheNSResources::findAvailableNetNodes(const QString &path){
 
+    Log(("Locate plugins in %s\n", path.latin1() ));
     QDir d(path);
     if(!d.exists())
       return;
@@ -125,6 +138,27 @@ void TheNSResources::findAvailableNetNodes(const QString &path){
       }
       ++it;
     }
+}
+
+// used to find unique connection number
+int TheNSResources::assignConnectionNumber( void ) {
+      bool found = 1;
+      for( int trial = 0; ; trial ++ ) {
+        found = 1; 
+        for( QDictIterator<NodeCollection> it(ConnectionsMap);
+             it.current();
+             ++it ) {
+          if( it.current()->number() == trial ) {
+            found = 0;
+            break;
+          }
+        }
+
+        if( found ) {
+          Log(("Assign profile number %d\n", trial ));
+          return trial;
+        }
+      }
 }
 
 /**
@@ -167,7 +201,6 @@ bool TheNSResources::loadNetNode(
       NN->NodeCountInLib = PNN.count();
 
       // store mapping
-      printf( "Store %s\n", NN->NetNode->name() );
       AllNodeTypes.insert( NN->NetNode->name(), NN );
     }
 
@@ -175,10 +208,12 @@ bool TheNSResources::loadNetNode(
 }
 
 QPixmap TheNSResources::getPixmap( const QString & QS ) {
+    QPixmap P;
     QString S("networksettings2/");
     S += QS;
-    fprintf( stderr, "%s\n", S.latin1() );
-    return Resource::loadPixmap( S );
+    Log(("%s\n", S.latin1() ));
+    P = Resource::loadPixmap( S );
+    return ( P.isNull() ) ? QPixmap() : P;
 }
 
 QString TheNSResources::tr( const char * s ) {
@@ -225,6 +260,7 @@ NodeCollection * TheNSResources::findConnection( const QString & S ) {
       return ConnectionsMap[ S ];
 }
 
+/*
 void TheNSResources::renumberConnections( void ) {
       Name2Connection_t & M = NSResources->connections();
       NodeCollection * NC;
@@ -239,6 +275,7 @@ void TheNSResources::renumberConnections( void ) {
         NC->setModified( 1 );
       }
 }
+*/
 
 typedef struct EnvVars {
       char * Name;
@@ -263,108 +300,145 @@ void TheNSResources::detectCurrentUser( void ) {
     // find current running qpe
     QString QPEEnvFile = "";
 
-    // open proc dir and find all dirs in it
-    { QRegExp R("[0-9]+");
-      QDir ProcDir( "/proc" );
-      QString QPELoc = QPEApplication::qpeDir() + "bin/qpe";
-      QFileInfo FI;
-      QStringList EL = ProcDir.entryList( QDir::Dirs );
+    if( getenv( "OPIEDIR" ) == 0 ) {
+      // nothing known 
+      { // open proc dir and find all dirs in it
+        QRegExp R("[0-9]+");
+        QDir ProcDir( "/proc" );
+        QFileInfo FI;
+        QStringList EL = ProcDir.entryList( QDir::Dirs );
 
-      // print it out
-      for ( QStringList::Iterator it = EL.begin(); 
-            it != EL.end(); 
-            ++it ) {
-        if( R.match( (*it) ) >= 0 ) {
-          QString S = ProcDir.path()+"/"+ (*it);
-          S.append( "/exe" );
-          FI.setFile( S );
-          // get the linke
-          S = FI.readLink();
-          if( S == QPELoc ) {
-            // found running qpe
-            QPEEnvFile.sprintf( ProcDir.path()+ "/" + (*it) + "/environ" );
-            break;
+        // print it out
+        for ( QStringList::Iterator it = EL.begin(); 
+              it != EL.end(); 
+              ++it ) {
+          if( R.match( (*it) ) >= 0 ) {
+            QString S = ProcDir.path()+"/"+ (*it);
+            S.append( "/exe" );
+            FI.setFile( S );
+            // get the link
+            S = FI.readLink();
+            if( S.right( 8 ) == "/bin/qpe" ) {
+              // found running qpe
+              QPEEnvFile.sprintf( ProcDir.path()+ "/" + (*it) + "/environ" );
+              break;
+            }
           }
         }
       }
-    }
 
-    if( QPEEnvFile.isEmpty() ) {
-      // could not find qpe
-      fprintf( stderr, "Could not find qpe\n" );
-      return;
-    }
-
-    // FI now contains path ProcDir to the cmd dir
-    { char * Buf = 0;
-      char TB[1024];
-      long BufSize = 0;
-      int fd;
-      int rd;
-
-      fd = open( QPEEnvFile.latin1(), O_RDONLY );
-      if( fd < 0 ) {
-        fprintf( stderr, "Could not open %s : %d\n", 
-            QPEEnvFile.latin1(), errno );
+      if( QPEEnvFile.isEmpty() ) {
+        // could not find qpe
+        Log(("Could not find qpe\n" ));
         return;
       }
 
-      while( (rd = read( fd, TB, sizeof(TB) ) ) > 0 ) {
-        Buf = (char *)realloc( Buf, BufSize+rd );
-        memcpy( Buf+BufSize, TB, rd );
-        BufSize += rd;
-      }
+      // FI now contains path ProcDir to the cmd dir
+      { char * Buf = 0;
+        char TB[1024];
+        long BufSize = 0;
+        int fd;
+        int rd;
 
-      char * Data = Buf;
-      char * DataEnd = Data+BufSize-1;
-
-      // get env items out of list
-      while( Data < DataEnd ) {
-        if( strncmp( Data, "LOGNAME=", 8 ) == 0 ) {
-          CurrentUser.UserName = Data+8;
-          CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-          CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
-              strdup( Data );
-        } else if( strncmp( Data, "HOME=", 5 ) == 0 ) {
-          CurrentUser.HomeDir = Data+5;
-          CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-          CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
-              strdup( Data );
-        } else {
-          EnvVar_t * Run = EV;
-          while( Run->Name ) {
-            if( strncmp( Data, Run->Name, Run->Len ) == 0 ) {
-              CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-              CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
-                  strdup( Data );
-              break;
-            }
-            Run ++;
-          }
-        }
-
-        Data += strlen( Data )+1;
-      }
-
-      free( Buf );
-
-      if( ! CurrentUser.UserName.isEmpty() ) {
-        // find user info
-        struct passwd pwd;
-        struct passwd * pwdres;
-
-        if( getpwnam_r( CurrentUser.UserName.latin1(), 
-                        &pwd, TB, sizeof(TB), &pwdres ) ||
-            pwdres == 0 ) {
-          fprintf( stderr, "Could not determine user %s : %d\n", 
-              CurrentUser.UserName.latin1(), errno );
+        fd = open( QPEEnvFile.latin1(), O_RDONLY );
+        if( fd < 0 ) {
+          Log(("Could not open %s : %d\n", 
+              QPEEnvFile.latin1(), errno ));
           return;
         }
-        CurrentUser.Uid = pwd.pw_uid;
-        CurrentUser.Gid = pwd.pw_gid;
-      } else{
-        CurrentUser.Uid = 
-          CurrentUser.Gid = -1;
+
+        while( (rd = read( fd, TB, sizeof(TB) ) ) > 0 ) {
+          Buf = (char *)realloc( Buf, BufSize+rd );
+          memcpy( Buf+BufSize, TB, rd );
+          BufSize += rd;
+        }
+
+        char * Data = Buf;
+        char * DataEnd = Data+BufSize-1;
+
+        // get env items out of list
+        while( Data < DataEnd ) {
+          if( strncmp( Data, "LOGNAME=", 8 ) == 0 ) {
+            CurrentUser.UserName = Data+8;
+            CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+            CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+                strdup( Data );
+          } else if( strncmp( Data, "HOME=", 5 ) == 0 ) {
+            CurrentUser.HomeDir = Data+5;
+            CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+            CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+                strdup( Data );
+          } else {
+            EnvVar_t * Run = EV;
+            while( Run->Name ) {
+              if( strncmp( Data, Run->Name, Run->Len ) == 0 ) {
+                CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+                CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+                    strdup( Data );
+                // put OPIEDIR in env
+                if( strcmp( Run->Name, "OPIEDIR=" ) == 0 ) {
+                  putenv( CurrentUser.EnvList[CurrentUser.EnvList.size()-1] );
+
+                }
+                break;
+              }
+              Run ++;
+            }
+          }
+
+          Data += strlen( Data )+1;
+        }
+
+        free( Buf );
+
+        if( ! CurrentUser.UserName.isEmpty() ) {
+          // find user info
+          struct passwd pwd;
+          struct passwd * pwdres;
+
+          if( getpwnam_r( CurrentUser.UserName.latin1(), 
+                          &pwd, TB, sizeof(TB), &pwdres ) ||
+              pwdres == 0 ) {
+            Log(("Could not determine user %s : %d\n", 
+                CurrentUser.UserName.latin1(), errno ));
+            return;
+          }
+          CurrentUser.Uid = pwd.pw_uid;
+          CurrentUser.Gid = pwd.pw_gid;
+        } else{
+          CurrentUser.Uid = 
+            CurrentUser.Gid = -1;
+        }
       }
+
+    } else {
+      CurrentUser.UserName = getenv( "LOGNAME" );
+      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+          strdup( CurrentUser.UserName );
+
+      CurrentUser.HomeDir = getenv( "HOME" );
+      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+          strdup( CurrentUser.HomeDir );
+
+      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("USER");
+      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("LD_LIBRARY_PATH");
+
+      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("PATH");
+
+      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("QTDIR");
+
+      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("OPIEDIR");
+      CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+      CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = getenv("SHELL");
+
+      CurrentUser.Uid = getuid();
+      CurrentUser.Gid = getgid();
     }
 }

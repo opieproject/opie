@@ -10,6 +10,7 @@ SOURCES		= bluetooth_NN.cpp \
                   bluetoothBNEP_NNI.cpp \
                   bluetoothRFCOMM_NNI.cpp \
                   bluetoothBNEPedit.cpp \
+                  bluetoothBNEPrun.cpp \
                   bluetoothRFCOMMedit.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include ../ ../networksettings2
 DEPENDPATH	+= $(OPIEDIR)/include ../ ../networksettings2

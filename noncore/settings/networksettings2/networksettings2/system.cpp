@@ -8,6 +8,7 @@
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <unistd.h>
@@ -17,6 +18,7 @@
 #include <qstringlist.h>
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qapplication.h>
 
 #include "resources.h"
 #include "system.h"
@@ -35,7 +37,7 @@ static char Dig2Hex[] = {
 // get LOW nibble of byte
 #define LN(x)           Dig2Hex[((x)&0x0f)]
 
-System::System( void ) : ProbedInterfaces() {
+System::System( void ) : QObject(), ProbedInterfaces() {
     probeInterfaces();
 }
 
@@ -47,7 +49,7 @@ System::~System( void ) {
 int System::runAsRoot( const QString & S ) {
     QString MyS = S;
     char * usr = getenv("USER");
-    int rv;
+    char ch;
 
     if( S.isEmpty() ) {
       // loophole to start shell
@@ -58,22 +60,47 @@ int System::runAsRoot( const QString & S ) {
       MyS.prepend( "sudo " );
     }
 
-    fprintf( stderr, "Executing %s\n", MyS.latin1() );
+    Log(("Executing %s\n", MyS.latin1() ));
 
-    rv = system( MyS.latin1() ) ;
-    switch( rv ) {
-      case -1 :
-        // cannot fork
-        return 1;
-      case 127 :
-        // cannot start shell
-        return 2;
-      default :
-        if( WEXITSTATUS(rv) != 0 ) {
-          // error in command
-          return 3;
-        }
+    emit lineFromCommand( tr("Command : ") + MyS );
+    emit lineFromCommand( "---------------" );
+    Log(( "Command : %s\n", MyS.latin1() ) );
+    MyS += " 2>&1 ";
+    OutputOfCmd = popen( MyS.latin1(), "r" ) ;
+    if( ! OutputOfCmd ) {
+      // cannot fork
+      return 1;
     }
+
+    // read all data
+    QString Line =  "";
+    while( 1 ) {
+      if( fread( &ch, 1, 1, OutputOfCmd ) < 1 ) 
+        // eof
+        break;
+      if( ch == '\n' || ch == '\r' ) {
+        if( ! Line.isEmpty() ) {
+          Log(( "read cmd output : **%s**\n", Line.latin1() ) );
+          emit lineFromCommand( Line );
+          Line = "";
+          qApp->processEvents();
+        }
+      } else {
+        Line += ch;
+      }
+    }
+
+    if( ! Line.isEmpty() ) {
+      emit lineFromCommand( Line );
+      Log(( "read cmd output : **%s**\n", Line.latin1() ) );
+    }
+    Log(( "End of command\n", Line.latin1() ) );
+
+    if( pclose( OutputOfCmd ) < 0 ) {
+      // error in command
+      return 3;
+    }
+
     // all is fine
     return 0;
 }
@@ -198,7 +225,7 @@ void System::probeInterfaces( void ) {
 
       if ( ! ( IFI = ProbedInterfaces.find( NicName ) ) ) {
         // new nic
-        fprintf( stderr, "NEWNIC %s\n", NicName.latin1());
+        Log(("NEWNIC %s\n", NicName.latin1()));
         IFI = new InterfaceInfo;
         IFI->Name = line.left(loc);
         IFI->NetNode = 0;
@@ -225,8 +252,8 @@ void System::probeInterfaces( void ) {
         IFI->MACAddress = "";
 
         if( ioctl(sockfd, SIOCGIFHWADDR, &ifrs) >= 0 ) {
-          fprintf( stderr, "%s = %d\n", IFI->Name.latin1(), 
-              ifrs.ifr_hwaddr.sa_family );
+          Log(("%s = %d\n", IFI->Name.latin1(), 
+              ifrs.ifr_hwaddr.sa_family ));
 
           IFI->CardType = ifrs.ifr_hwaddr.sa_family;
           switch( ifrs.ifr_hwaddr.sa_family ) {
@@ -293,7 +320,7 @@ void System::probeInterfaces( void ) {
           }
         }
       } else // else already probed before -> just update
-        fprintf( stderr, "OLDNIC %s\n", NicName.latin1());
+        Log(("OLDNIC %s\n", NicName.latin1()));
 
       // get dynamic info
       if( ioctl(sockfd, SIOCGIFFLAGS, &ifrs) >= 0 ) {
@@ -323,7 +350,7 @@ void System::probeInterfaces( void ) {
       } else {
         IFI->Netmask = "";
       }
-      fprintf( stderr, "NIC %s UP %d\n", NicName.latin1(), IFI->IsUp );
+      Log(("NIC %s UP %d\n", NicName.latin1(), IFI->IsUp ));
     }
 }
 
@@ -332,7 +359,7 @@ void System::execAsUser( QString & Cmd, char * argv[] ) {
 
       if( CU.UserName.isEmpty() ) {
         // if we come here, the exec was not successfull
-        fprintf( stderr, "User not known \n" );
+        Log(("User not known \n" ));
         return;
       }
 
@@ -351,5 +378,40 @@ void System::execAsUser( QString & Cmd, char * argv[] ) {
       execve( Cmd.latin1(), argv, envp );
 
       // if we come here, the exec was not successfull
-      fprintf( stderr, "Could not exec : %d\n", errno );
+      Log(("Could not exec : %d\n", errno ));
+}
+
+#include <stdarg.h>
+static FILE * logf = 0;
+
+void VLog( char * Format, ... ) {
+      va_list l;
+
+      va_start(l, Format );
+
+      if( logf == (FILE *)0 ) {
+        // logf = fopen( "/tmp/ns2log", "a" );
+        logf = stderr;
+        if( ! logf ) {
+          fprintf( stderr, "Cannot open logfile /tmp/ns2log %d\n", 
+              errno );
+          logf = (FILE *)1;
+        } else {
+          fprintf( logf, "____ OPEN LOGFILE ____\n");
+        }
+      }
+
+      if( (long)logf > 1 ) {
+        vfprintf( logf, Format, l );
+      }
+      va_end( l );
+
+}
+
+void LogClose( void ) {
+      if( (long)logf > 1 ) {
+        fprintf( logf, "____ CLOSE LOGFILE ____\n");
+        fclose( logf );
+        logf = 0;
+      }
 }

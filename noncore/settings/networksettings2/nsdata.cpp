@@ -17,7 +17,7 @@ NetworkSettingsData::NetworkSettingsData( void ) {
 
     CfgFile.sprintf( "%s/Settings/NS2.conf", 
           NSResources->currentUser().HomeDir.latin1() );
-    fprintf( stderr, "Cfg from %s\n", CfgFile.latin1() );
+    Log(( "Cfg from %s\n", CfgFile.latin1() ));
 
     // load settings
     Force = 0;
@@ -79,11 +79,11 @@ void NetworkSettingsData::loadSettings( void ) {
             S = deQuote(S);
             // try to find netnode
             NN = NSResources->findNetNode( S );
-            fprintf( stderr, "Node %s : %p\n", S.latin1(), NN );
+            Log( ( "Node %s : %p\n", S.latin1(), NN ) );
           } else {
             // try to find instance
             NNI = NSResources->createNodeInstance( S );
-            fprintf( stderr, "NodeInstance %s : %p\n", S.latin1(), NNI );
+            Log( ( "NodeInstance %s : %p\n", S.latin1(), NNI  ));
           }
 
           if( NN == 0 && NNI == 0 ) {
@@ -151,7 +151,7 @@ QString NetworkSettingsData::saveSettings( void ) {
     QString S;
     QFile F( CfgFile + ".bup" );
 
-    printf( "Saving settings to %s\n", CfgFile.latin1() );
+    Log( ( "Saving settings to %s\n", CfgFile.latin1()  ));
     if( ! F.open( IO_WriteOnly | IO_Truncate ) ) {
       ErrS = qApp->translate( "NetworkSettings", 
               "<p>Could not save setup to \"%1\" !</p>" ).
@@ -229,7 +229,7 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
       return S;
 
     // regenerate system files
-    fprintf( stderr, "Generating settings from %s\n", CfgFile.latin1() );
+    Log( ( "Generating settings from %s\n", CfgFile.latin1()  ));
 
     { Name2SystemFile_t & SFM = NSResources->systemFiles();
       Name2Connection_t & M = NSResources->connections();
@@ -281,14 +281,6 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
         }
       }
 
-      // we cannot renumber with a FORCE request since
-      // we probably are NOT going to save the config
-      // e.g. when using --regen option
-      if( ! ForceReq && needToRegenerate ) {
-        NSResources->renumberConnections();
-        setModified(1);
-      }
-
       //
       // generate files proper to each netnodeinstance
       //
@@ -321,7 +313,7 @@ QString NetworkSettingsData::generateSettings( bool ForceReq ) {
            ++sfit ) {
         SF = sfit.current();
 
-        fprintf( stderr, "Generating %s\n", SF->name().latin1() );
+        Log( ( "Generating %s\n", SF->name().latin1() ));
         SF->open();
 
         do { // so we can break;
@@ -405,7 +397,7 @@ QList<NodeCollection> NetworkSettingsData::collectPossible( const char * Interfa
           NC->state() != Disabled && // if not enabled
           NC->state() != IsUp  // if already used
         ) {
-        fprintf( stderr, "Append %s for %s\n", NC->name().latin1(), Interface);
+        Log( ( "Append %s for %s\n", NC->name().latin1(), Interface));
         PossibleConnections.append( NC );
       }
     }
@@ -426,8 +418,7 @@ bool NetworkSettingsData::canStart( const char * Interface ) {
 
     PossibleConnections = collectPossible( Interface );
 
-    fprintf( stderr, "Possiblilies %d\n", 
-      PossibleConnections.count() );
+    Log( ( "Possiblilies %d\n", PossibleConnections.count() ));
     switch( PossibleConnections.count() ) {
       case 0 : // no connections
         break;

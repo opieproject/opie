@@ -6,7 +6,10 @@ class BluetoothBNEPRun  : public AsDevice {
 public :
 
       BluetoothBNEPRun( ANetNodeInstance * NNI, 
-                        BluetoothBNEPData & Data ) : AsDevice( NNI )
+                        BluetoothBNEPData & D ) : 
+                        AsDevice( NNI ),
+                        Data( D),
+                        Pat( "bnep[0-6]" )
         { }
 
       virtual AsDevice * asDevice( void ) 
@@ -17,15 +20,15 @@ public :
 
 protected :
 
-      void detectState( NodeCollection * )
-        { }
+      void detectState( NodeCollection * );
+      bool setState( NodeCollection * , Action_t, bool );
+      bool canSetState( State_t , Action_t );
+      bool handlesInterface( const QString & );
 
-      bool setState( NodeCollection * , Action_t, bool )
-        { return 0; }
+private :
 
-      bool canSetState( State_t , Action_t )
-        { return 0; }
-
-      bool handlesInterface( const QString & )
-        { return 0; }
+      InterfaceInfo * getInterface( void );
+      BluetoothBNEPData &         Data;
+      static QDict<QString> *     PANConnections;
+      QRegExp Pat;
 };

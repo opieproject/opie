@@ -58,6 +58,7 @@ QString ProfileEdit::acceptable( void ) {
 void ProfileEdit::showData( ProfileData_t & Data ) {
     Description_LE->setText( Data.Description );
     Automatic_CB->setChecked( Data.Automatic );
+    TriggersVPN_CB->setChecked( Data.TriggerVPN );
     Confirm_CB->setChecked( Data.Confirm );
     Disabled_CB->setChecked( Data.Disabled );
 }
@@ -68,6 +69,7 @@ bool ProfileEdit::commit( ProfileData_t & Data ) {
     TXTM( Data.Description, Description_LE, SM );
 
     CBM( Data.Automatic, Automatic_CB, SM );
+    CBM( Data.TriggerVPN, TriggersVPN_CB, SM );
     CBM( Data.Disabled, Disabled_CB, SM );
     CBM( Data.Confirm, Confirm_CB, SM );
 

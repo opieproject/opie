@@ -46,9 +46,13 @@ public :
     TheNSResources( void );
     ~TheNSResources( );
 
+    // give busy feedback
+    void busy( bool B );
+
     System & system()
       { return *TheSystem; }
 
+    int assignConnectionNumber(void);
     QPixmap getPixmap( const QString & Name );
 
     Name2NetNode_t & netNodes( void ) 
@@ -88,7 +92,6 @@ public :
     const QString & netNode2Name( const char * Type );
     const QString & netNode2Description( const char * Type );
 
-    void renumberConnections( void );
     void addConnection( NodeCollection * NC );
     void removeConnection( const QString & N );
     NodeCollection * findConnection( const QString & N );
@@ -119,7 +122,7 @@ private :
     // all nodes
     Name2Instance_t     AllNodes;
 
-    CurrentQPEUser    CurrentUser;
+    CurrentQPEUser      CurrentUser;
 };
 
 extern TheNSResources * _NSResources;

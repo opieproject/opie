@@ -14,6 +14,8 @@ public :
     }
 
     virtual const QString & description( void ) = 0;
+    virtual bool triggersVPN( void ) 
+      { return 0; }
 
 };
 

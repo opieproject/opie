@@ -13,6 +13,7 @@ void NetworkRun::detectState( NodeCollection * NC ) {
       return;
     }
 
+    Log(( "%s not ! UP or ava\n", NC->name().latin1() ));
     // has no interface -> delegate
     RI->detectState( NC );
 }
@@ -34,17 +35,28 @@ bool NetworkRun::setState( NodeCollection * NC, Action_t A, bool Force ) {
       }
       return 1;
     } else if( A == Down ) {
-      if( NC->currentState() == IsUp || Force ) {
-        QString S;
-        S.sprintf( "ifdown %s=%s-c%d-allowed", 
-            II->Name.latin1(), II->Name.latin1(),
-            connection()->number() );
-        NSResources->system().runAsRoot( S );
+      QString S;
+      if( Force ) {
+        Log(("Force mode %d\n", Force ));
+        for( int i = 0; 
+             i < RI->netNode()->nodeClass()->instanceCount(); 
+             i ++ ) {
+          S.sprintf( "ifdown %s", 
+                      RI->netNode()->nodeClass()->genNic( i ).latin1() );
+          NSResources->system().runAsRoot( S );
+        }
+      } else {
+        if( NC->currentState() == IsUp ) {
+          S.sprintf( "ifdown %s=%s-c%d-allowed", 
+              II->Name.latin1(), II->Name.latin1(),
+              connection()->number() );
+          NSResources->system().runAsRoot( S );
+        }
       }
       return 1;
     } 
     // delegate
-    return RI->setState( NC, A );
+    return RI->setState( NC, A, Force );
 }
 
 bool NetworkRun::canSetState( State_t Curr, Action_t A ) {

@@ -2,9 +2,11 @@
 #include <qfileinfo.h>
 #include <qtextstream.h>
 #include <resources.h>
-#include "usbrun.h"
+#include "bluetoothBNEPrun.h"
 
-void USBRun::detectState( NodeCollection * NC ) {
+QDict<QString> *     BluetoothBNEPRun::PANConnections = 0;
+
+void BluetoothBNEPRun::detectState( NodeCollection * NC ) { 
     // unavailable : no card found
     // available : card found and assigned to us or free
     // up : card found and assigned to us and up
@@ -12,25 +14,96 @@ void USBRun::detectState( NodeCollection * NC ) {
     System & Sys = NSResources->system();
     InterfaceInfo * Run;
     QFile F( S );
+
     Log(("Detecting for %s\n", NC->name().latin1() ));
 
     if( F.open( IO_ReadOnly ) ) {
       // could open file -> read interface and assign
       QString X;
+      bool accepted = 0;
       QTextStream TS(&F);
       X = TS.readLine();
-      Log(("%s exists\n", S.latin1() ));
+      Log(("%s exists : %s\n", S.latin1(), X.latin1() ));
       // find interface
       if( handlesInterface( X ) ) {
-        for( QDictIterator<InterfaceInfo> It(Sys.interfaces());
-             It.current();
-             ++It ) {
-          Run = It.current();
-          if( X == Run->Name ) {
-            Run->assignNode( netNode() );
-            assignInterface( Run );
-            NC->setCurrentState( IsUp );
-            return;
+
+        Log(("Handles interface %s, PANC %p\n", X.latin1(), PANConnections ));
+        if( PANConnections == 0 ) {
+          // load connections that are active
+          // format : bnep0 00:60:57:02:71:A2 PANU
+          FILE * OutputOfCmd = popen( "pand --show", "r" ) ;
+
+          PANConnections = new QDict<QString>;
+
+          if( OutputOfCmd ) {
+            char ch;
+            // could fork
+            // read all data
+            QString Line =  "";
+            while( 1 ) {
+              if( fread( &ch, 1, 1, OutputOfCmd ) < 1 ) {
+                // eof
+                break;
+              }
+              if( ch == '\n' || ch == '\r' ) {
+                if( ! Line.isEmpty() ) {
+                  if( Line.startsWith( "bnep" ) ) {
+                    QStringList SL = QStringList::split( " ", Line );
+                    Log(("Detected PAN %s %s\n", 
+                      SL[0].latin1(), SL[1].latin1() ));
+                    PANConnections->insert( SL[0], new QString(SL[1]));
+                  }
+                  Line="";
+                }
+              } else {
+                Line += ch;
+              }
+            }
+          }
+
+          pclose( OutputOfCmd );
+        }
+
+        // check if this runtime allows connection to node
+        if( ! Data.AllowAll ) {
+          // has addresses
+          for ( QStringList::Iterator it = Data.BDAddress.begin(); 
+                ! accepted && it != Data.BDAddress.end(); 
+                ++ it ) {
+            for( QDictIterator<QString> it2( *(PANConnections) );
+                 it2.current();
+                 ++ it2 ) {
+              if( X == it2.currentKey() &&
+                  (*it) == *(it2.current()) 
+                ) {
+                // found
+                Log(("%s accepts connections to %s\n",
+                    NC->name().latin1(),
+                    it2.current()->latin1() ));
+                accepted = 1;
+                break;
+              }
+            }
+          }
+        } else {
+          Log(("%s accepts any connection\n", NC->name().latin1() ));
+          // accept any
+          accepted = 1;
+        }
+
+        if( accepted ) {
+          // matches and is allowed for this node
+          for( QDictIterator<InterfaceInfo> It(Sys.interfaces());
+               It.current();
+               ++It ) {
+            Run = It.current();
+            if( X == Run->Name ) {
+              Log(("%s Assigned %p\n", NC->name().latin1(), Run ));
+              Run->assignNode( netNode() );
+              assignInterface( Run );
+              NC->setCurrentState( IsUp );
+              return;
+            }
           }
         }
       }
@@ -72,12 +145,12 @@ void USBRun::detectState( NodeCollection * NC ) {
       }
     }
     // no free found
-    Log(("UNA\n" ));
+    Log(("None available\n" ));
 
     NC->setCurrentState( Unavailable );
 }
 
-bool USBRun::setState( NodeCollection * NC, Action_t A, bool ) {
+bool BluetoothBNEPRun::setState( NodeCollection * NC, Action_t A, bool  ) {
 
     // we only handle activate and deactivate
     switch( A ) {
@@ -120,7 +193,7 @@ bool USBRun::setState( NodeCollection * NC, Action_t A, bool ) {
     return 0;
 }
 
-bool USBRun::canSetState( State_t Curr, Action_t A ) {
+bool BluetoothBNEPRun::canSetState( State_t Curr , Action_t A ) {
     // we only handle up down activate and deactivate
     switch( A ) {
       case Activate :
@@ -146,11 +219,10 @@ bool USBRun::canSetState( State_t Curr, Action_t A ) {
 }
 
 // get interface that is free or assigned to us
-InterfaceInfo * USBRun::getInterface( void ) {
+InterfaceInfo * BluetoothBNEPRun::getInterface( void ) {
 
     System & S = NSResources->system();
     InterfaceInfo * best = 0, * Run;
-    QRegExp R( "usb[0-9abcdef]" );
 
     for( QDictIterator<InterfaceInfo> It(S.interfaces());
          It.current();
@@ -159,7 +231,7 @@ InterfaceInfo * USBRun::getInterface( void ) {
       if( handlesInterface( Run->Name ) &&
           Run->CardType == ARPHRD_ETHER
         ) {
-        // this is a USB card
+        // this is a bluetooth card
         if( Run->assignedNode() == netNode() ) {
           // assigned to us
           return Run;
@@ -172,7 +244,6 @@ InterfaceInfo * USBRun::getInterface( void ) {
     return best; // can be 0
 }
 
-bool USBRun::handlesInterface( const QString & S ) {
+bool BluetoothBNEPRun::handlesInterface( const QString & S ) {
     return Pat.match( S ) >= 0;
 }
-

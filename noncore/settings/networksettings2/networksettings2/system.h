@@ -4,6 +4,8 @@
 // for hardware types
 #include <net/if_arp.h>
 #include <qdict.h>
+#include <qobject.h>
+#include <stdio.h>
 
 class ANetNodeInstance;
 class QFile;
@@ -47,7 +49,9 @@ public :
         QString Collisions;
 };
 
-class System {
+class System : public QObject {
+
+      Q_OBJECT
 
 public :
 
@@ -71,9 +75,14 @@ public :
       // reloads interfaces
       void probeInterfaces( void );
 
+signals :
+
+      void lineFromCommand( const QString & S );
+
 private  :
 
       QDict<InterfaceInfo>  ProbedInterfaces;
+      FILE *                OutputOfCmd;
       QFile *               ProcDevNet;
 
 };
