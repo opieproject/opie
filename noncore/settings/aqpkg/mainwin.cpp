@@ -61,10 +61,10 @@ MainWindow :: MainWindow( QWidget *p, char *name )
 
 	// Create the main menu
 	menu = menuBar();  //new QMenuBar( this );
-	menu->insertItem( "&Settings", settings );
-	menu->insertItem( "&Edit", edit );
-	menu->insertItem( "&Filter", filter );
-	menu->insertItem( "&Help", help );
+	menu->insertItem( tr( "&Settings" ), settings );
+	menu->insertItem( tr( "&Edit" ), edit );
+	menu->insertItem( tr( "&Filter" ), filter );
+	menu->insertItem( tr( "&Help" ), help );
 
     mgr = new DataManager();
     mgr->loadServers();
