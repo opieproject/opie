@@ -19,7 +19,6 @@ SOURCES         = qcolordialog.cpp     \
 TARGET          = qtaux2
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/lib
-INTERFACES      =
 
 
 include ( $(OPIEDIR)/include.pro )
