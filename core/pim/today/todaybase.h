@@ -30,20 +30,17 @@ public:
 
     QFrame* Frame4;
     QPushButton* DatesButton;
-    //QLabel* PixmapLabel7;
     QLabel* DatesField;
     QFrame* Frame;
     QLabel* TextLabel1;
     QFrame* Frame15;
-    //QLabel* PixmapLabel1;
     QLabel* TodoField;
     QPushButton* PushButton1;
     QPushButton* TodoButton;
-    QLabel* todoback;
     QPushButton* getridoffuckingstrippeldlinesbutton;
 
 protected:
-    bool event( QEvent* );
+
 };
 
 #endif // TODAYBASE_H

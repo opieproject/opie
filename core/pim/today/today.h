@@ -17,24 +17,7 @@
  *                                                                         *
  ***************************************************************************/
 
-/*
- * todaybase.h
- *
- * ---------------------
- *
- * begin       : Sun 10 17:20:00 CEST 2002
- * copyright   : (c) 2002 by Maximilian Reiﬂ
- * email       : max.reiss@gmx.de
- *
- */
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+
 #ifndef TODAY_H
 #define TODAY_H
 #include "todaybase.h"
@@ -56,7 +39,6 @@ class Today : public TodayBase
   
   private slots:
     void startConfig();
-    void goodBye();
     void startTodo();
     void startDatebook();
   
@@ -74,8 +56,6 @@ class Today : public TodayBase
     int MAX_LINES_MEET;
     int SHOW_LOCATION; 
     int SHOW_NOTES;
-
-    
 };
 #endif // TODAY_H
 
