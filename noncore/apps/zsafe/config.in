@@ -1,4 +1,4 @@
-config OPIE-CONSOLE
+config ZSAFE
     boolean "zsafe (Zaurus Password Manager)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 )
