@@ -57,7 +57,13 @@ class OApplicationPrivate
 /**************************************************************************************************
  * OApplication
  **************************************************************************************************/
-
+OApplication::OApplication( int& argc, char** argv, Type type )
+	     :QPEApplication( argc, argv, type ),
+	     _appname( QString::null ),
+	     _config( 0 )
+{
+    init();
+}	
 
 OApplication::OApplication( int& argc, char** argv, const QCString& rAppName )
              :QPEApplication( argc, argv ),
