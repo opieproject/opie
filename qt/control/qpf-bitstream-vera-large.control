@@ -1,0 +1,11 @@
+Package: qpf-bitstream-vera-large
+Files: $QTDIR/lib/fonts/vera_{140,160,180}_{50,50i,75,75i}*
+Version: 1.10-4
+Priority: optional
+Section: base
+Depends: qte-fonts-common
+Provides: qpf-bitstream-vera-large
+Replaces: qpf-bitstream-vera-full
+Maintainer: Chris Larson <kergoth@handhelds.org>
+Architecture: all
+Description: Bitstream Vera Fonts - small sizes - QPF format
