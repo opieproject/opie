@@ -14,6 +14,8 @@
 #include "alphablend.h"
 #include "yuv2rgb.h"
 
+#define printf(x,...)
+
 /* the caller for our event draw handler */
 typedef void (*display_xine_frame_t) (void *user_data, uint8_t* frame,
 				      int  width, int height,int bytes );

@@ -55,6 +55,10 @@ static inline void memcpy_step ( void *dst, void *src, size_t len, size_t step )
 {
 	len >>= 1;
 	while ( len-- ) {
+//		*((char *) dst ) = *((char *) src + 1);
+//		*((char *) dst + 1) = *((char *) src );
+//		((char *) dst ) += 2;
+
 		*((short int *) dst )++ = *((short int *) src );
 		((char *) src ) += step;
 	}
@@ -69,6 +73,10 @@ static inline void memcpy_step_rev ( void *dst, void *src, size_t len, size_t st
 	while ( len-- ) {
 		((char *) src ) -= step;
 		*((short int *) dst )++ = *((short int *) src );
+
+//		*((char *) dst ) = *((char *) src + 1);
+//		*((char *) dst + 1) = *((char *) src );
+//		((char *) dst ) += 2;
 	}
 }
 
@@ -101,7 +109,7 @@ void XineVideoWidget::clear ( )
 
 void XineVideoWidget::paintEvent ( QPaintEvent * )
 {
-	qWarning( "painting" );
+	qWarning( "painting <<<" );
 	if ( m_buff == 0 ) {
 		QPainter p ( this );
 		p. fillRect ( rect ( ), black );
@@ -109,12 +117,14 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 		qWarning ( "logo\n" );
 	}
 	else {
-		qWarning ( "paintevent\n" );
+//		qWarning ( "paintevent\n" );
 		
 		QArray <QRect> qt_bug_workaround_clip_rects;
 		
 		{
 			QDirectPainter dp ( this );
+
+			int rot = dp. transformOrientation ( );
 
 			uchar *fb = dp. frameBuffer ( );
 			uchar *frame = m_buff;  // rot == 0 ? m_buff : m_buff + ( m_thisframe. height ( ) - 1 ) * m_bytes_per_line_frame;
@@ -128,8 +138,6 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 								
 				qt_bug_workaround_clip_rects [i] = clip;
 				
-				int rot = dp. transformOrientation ( );
-
 				if ( rot == 0 || rot == 180 ) {			
 					uchar *dst = fb + ( clip. x ( ) * m_bytes_per_pixel ) + ( clip. y ( ) * m_bytes_per_line_fb ); 
 					uchar *src = frame + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame );
@@ -176,7 +184,7 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 					uchar *src = frame + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame );
 					
 					if ( rot == 270 )
-						src += (( framerect. height ( ) - 1 ) * m_bytes_per_line_frame );
+						src += (( framerect. height ( ) - 1 ) * m_bytes_per_pixel );
 										
 					uint leftfill = 0;
 					uint framefill = 0;
@@ -200,16 +208,16 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 								
 							if ( framefill ) {
 								if ( rot == 90 )
-									memcpy_step ( dst + leftfill, src, framefill, m_bytes_per_line_frame );
-								else
 									memcpy_step_rev ( dst + leftfill, src, framefill, m_bytes_per_line_frame );
+								else
+									memcpy_step ( dst + leftfill, src, framefill, m_bytes_per_line_frame );
 							}	
 							if ( rightfill )
 								memset ( dst + leftfill + framefill, 0, rightfill );
 						}
 						
 						dst += m_bytes_per_line_fb;
-						src += ( rot == 90 ? +1 : -1 ); // m_bytes_per_line_frame : -m_bytes_per_line_frame );
+						src += ( rot == 270 ? -m_bytes_per_pixel : m_bytes_per_pixel );
 					}					
 				}
 			}
@@ -223,6 +231,7 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 			}
 		}
 	}
+	qWarning( "painting >>>" );
 }
 
 int XineVideoWidget::height ( ) const

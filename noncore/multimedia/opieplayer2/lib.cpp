@@ -187,16 +187,16 @@ void Lib::xine_event_handler( void* user_data, xine_event_t* t ) {
 }
 void Lib::xine_display_frame( void* user_data, uint8_t *frame,
                               int width,  int height,  int bytes ) {
-    printf("display x frame");
+//    printf("display x frame");
     ((Lib*)user_data)->drawFrame( frame,  width, height,  bytes );
-    printf("displayed x frame\n");
+//    printf("displayed x frame\n");
 }
 void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
     if (!m_video ) {
         qWarning("not showing video now");
         return;
     }
-    qWarning("called draw frame %d %d",  width,  height);
+//    qWarning("called draw frame %d %d",  width,  height);
 
     QSize size = m_wid->size();
     int xoffset  = (size.width() - width) / 2;
