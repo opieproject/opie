@@ -37,18 +37,24 @@ public:
      */
     virtual bool load();
 
-    /**
-     * reload from the backend
+    /** Reload database.
+     * You should execute this function if the external database
+     * was changed.
+     * This function will load the external database and afterwards
+     * rejoin the local changes. Therefore the local database will be set consistent.
      */
     virtual bool reload();
 
-    /**
-     * save to the backend
+    /** Save contacts database.
+     * Save is more a "commit". After calling this function, all changes are public available.
+     * @return true if successful
      */
     virtual bool save();
 
     /**
      * if the resource was changed externally
+     * You should use the signal handling instead of polling possible changes !
+     * zecke: Do you implement a signal for otodoaccess ?
      */
     bool wasChangedExternally()const;
 
@@ -59,7 +65,7 @@ public:
     virtual List allRecords()const;
 
     /**
-     * queryByExample)
+     * queryByExample. 
      * @see otodoaccess, ocontactaccess
      */
     virtual List queryByExample( const T& t, int querySettings );
@@ -83,22 +89,30 @@ public:
 
     /**
      * add T to the backend
+     * @param t The item to add.
+     * @return <i>true</i> if added successfully.
      */
     virtual bool add( const T& t ) ;
 
     /* only the uid matters */
     /**
      * remove T from the backend
+     * @param t The item to remove
+     * @return <i>true</i> if successful.
      */
     virtual bool remove( const T& t );
 
     /**
      * remove the OPimRecord with uid
+     * @param uid The ID of the item to remove
+     * @return <i>true</i> if successful.
      */
     virtual bool remove( int uid );
 
     /**
      * replace T from backend
+     * @param t The item to replace
+     * @return <i>true</i> if successful.
      */
     virtual bool replace( const T& t) ;
 
@@ -142,7 +156,8 @@ bool OPimAccessTemplate<T>::load() {
 }
 template <class T>
 bool OPimAccessTemplate<T>::reload() {
-    return m_backEnd->reload();
+	invalidateCache();  // zecke: I think this should be added (se)
+	return m_backEnd->reload();
 }
 template <class T>
 bool OPimAccessTemplate<T>::save() {

@@ -17,11 +17,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccess.cpp,v 1.4 2002-10-14 16:21:54 eilers Exp $
+ * Version: $Id: ocontactaccess.cpp,v 1.5 2002-10-16 10:52:40 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.cpp,v $
- * Revision 1.4  2002-10-14 16:21:54  eilers
+ * Revision 1.5  2002-10-16 10:52:40  eilers
+ * Added some docu to the interface and now using the cache infrastucture by zecke.. :)
+ *
+ * Revision 1.4  2002/10/14 16:21:54  eilers
  * Some minor interface updates
  *
  * Revision 1.3  2002/10/07 17:34:24  eilers
@@ -62,8 +65,7 @@
 
 OContactAccess::OContactAccess ( const QString appname, const QString ,
 			 OContactAccessBackend* end, bool autosync ):
-	OPimAccessTemplate<OContact>( end ),
-	m_changed ( false )
+	OPimAccessTemplate<OContact>( end )
 {
         /* take care of the backend. If there is no one defined, we 
 	 * will use the XML-Backend as default (until we have a cute SQL-Backend..).
@@ -94,15 +96,10 @@ OContactAccess::~OContactAccess ()
 	/* The user may forget to save the changed database, therefore try to
 	 * do it for him..
 	 */
-	if ( m_changed ) 
-		save();
+	save();
 	// delete m_backEnd; is done by template..
 }
 
-bool OContactAccess::load()
-{
-	return ( m_backEnd->load() );
-}
 
 bool OContactAccess::save ()
 {
@@ -110,19 +107,15 @@ bool OContactAccess::save ()
 	 * Data. This will remove added items which is unacceptable !
 	 * Therefore: Reload database and merge the data...
 	 */
-	if ( m_backEnd->wasChangedExternally() )
+	if ( OPimAccessTemplate<OContact>::wasChangedExternally() )
 		reload();
 
-	if ( m_changed ){ 
-		bool status = m_backEnd->save();
-		if ( !status ) return false;
+	bool status = OPimAccessTemplate<OContact>::save();
+	if ( !status ) return false;
 
-		m_changed = false;
-		/* Now tell everyone that new data is available.
-		 */
-		QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
-
-	}
+	/* Now tell everyone that new data is available.
+	 */
+	QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
 
 	return true;
 }
@@ -137,40 +130,12 @@ bool OContactAccess::hasQuerySettings ( int querySettings ) const
 	return ( m_backEnd->hasQuerySettings ( querySettings ) );
 }
 
-bool OContactAccess::add ( const OContact& newcontact )
-{
-	m_changed = true;
-	return ( m_backEnd->add ( newcontact ) );
-}
-
-bool OContactAccess::replace ( const OContact& contact )
-{
-	m_changed = true;
-	return ( m_backEnd->replace ( contact ) );
-}
-
-bool OContactAccess::remove ( const OContact& t )
-{
-	m_changed = true;
-	return ( m_backEnd->remove ( t.uid() ) );
-}
-
-bool OContactAccess::remove ( int uid )
-{
-	m_changed = true;
-	return ( m_backEnd->remove ( uid ) );
-}
 
 bool OContactAccess::wasChangedExternally()const
 {
 	return ( m_backEnd->wasChangedExternally() );
 }
 
-
-bool OContactAccess::reload()
-{
-	return ( m_backEnd->reload() );
-}
 
 void OContactAccess::copMessage( const QCString &msg, const QByteArray & )
 {

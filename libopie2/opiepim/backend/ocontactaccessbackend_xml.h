@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.3 2002-10-14 16:21:54 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.4 2002-10-16 10:52:40 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.3  2002-10-14 16:21:54  eilers
+ * Revision 1.4  2002-10-16 10:52:40  eilers
+ * Added some docu to the interface and now using the cache infrastucture by zecke.. :)
+ *
+ * Revision 1.3  2002/10/14 16:21:54  eilers
  * Some minor interface updates
  *
  * Revision 1.2  2002/10/07 17:34:24  eilers
@@ -56,7 +59,8 @@ using namespace Opie;
 /* the default xml implementation */
 class OContactAccessBackend_XML : public OContactAccessBackend {
  public:
-	OContactAccessBackend_XML ( QString appname, QString filename = 0l )
+	OContactAccessBackend_XML ( QString appname, QString filename = 0l ):
+		m_changed( false )
 		{
 			m_appName = appname;
 			
@@ -75,6 +79,10 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 		}
 	
 	bool save() {
+
+		if ( !m_changed )
+			return true;
+
 		QString strNewFile = m_fileName + ".new";
 		QFile f( strNewFile );
 		if ( !f.open( IO_WriteOnly|IO_Raw ) )
@@ -123,6 +131,8 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 		
 		/* The journalfile should be removed now... */
 		removeJournal();
+
+		m_changed = false;
 		return true;
 	}
 	
@@ -145,6 +155,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 
 	void clear () {
 		m_contactList.clear();
+		m_changed = false;
 
 	}
 	
@@ -275,11 +286,16 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 			//qWarning("odefaultbackend: ACTION::ADD");
 			updateJournal (newcontact, OContact::ACTION_ADD);
 			addContact_p( newcontact );
+			
+			m_changed = true;
+
 			return true;
 		}
 	
 	bool replace ( const OContact &contact )
 		{
+			m_changed = true;
+
 			bool found = false;
 			
 			QValueListIterator<OContact> it;
@@ -300,6 +316,8 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 	
 	bool remove ( int uid )
 		{
+			m_changed = true;
+
 			bool found = false;
 			QValueListIterator<OContact> it;
 			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
@@ -553,6 +571,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 		}
 	
  protected:
+	bool m_changed;
 	QString m_journalName;
 	QString m_fileName;
 	QString m_appName;

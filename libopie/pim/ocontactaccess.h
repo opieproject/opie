@@ -13,11 +13,14 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccess.h,v 1.2 2002-10-14 16:21:54 eilers Exp $
+ * Version: $Id: ocontactaccess.h,v 1.3 2002-10-16 10:52:40 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.h,v $
- * Revision 1.2  2002-10-14 16:21:54  eilers
+ * Revision 1.3  2002-10-16 10:52:40  eilers
+ * Added some docu to the interface and now using the cache infrastucture by zecke.. :)
+ *
+ * Revision 1.2  2002/10/14 16:21:54  eilers
  * Some minor interface updates
  *
  * Revision 1.1  2002/09/27 17:11:44  eilers
@@ -91,51 +94,12 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 	 */
 	bool hasQuerySettings ( int querySettings ) const;
 
-	/** Add Contact to database.
-	 * @param newcontact The contact to add.
-	 * @return <i>true</i> if added successfully.
-	 */
-	bool add (const OContact& newcontact);
-
-	/** Replace contact.
-	 * Replaces given contact with contact with the user id <i>uid</i>.
-	 * @param uid The user ID
-	 * @param contact The new contact
-	 * @return <i>true</i> if successful.
-	 */
-	bool replace ( const OContact& contact );
-
-	/** Remove contact.
-	 * Removes contact with the user id <i>uid</i>.
-	 * @param The contact to remove
-	 * @return <i>true</i> if successful.
-	 */
-	bool remove ( const OContact& t );
-
-	/** Remove contact.
-	 * Removes contact with the user id <i>uid</i>.
-	 * @param The user id of the contact to remove
-	 * @return <i>true</i> if successful.
-	 */
-	bool remove ( int uid );
-
-	/** Load Database *
-	 */
-	bool load();
-	
 	/**
 	 * if the resource was changed externally.
 	 * You should use the signal instead of polling possible changes !
 	 */
 	bool wasChangedExternally()const;
 
-	/** Reload database.
-	 * You should execute this function if the external database
-	 * was changed.
-	 * This function will load the external database and afterwards
-	 * rejoin the local changes. Therefore the local database will be set consistent.
-	 */
-	bool reload();
 
 	/** Save contacts database.
 	 * Save is more a "commit". After calling this function, all changes are public available.
@@ -158,7 +122,6 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 	// OContactAccessPrivate* d;
         OContactAccessBackend *m_backEnd;
         bool m_loading:1;
-	bool m_changed;
 
  private slots:
 	void copMessage( const QCString &msg, const QByteArray &data );
