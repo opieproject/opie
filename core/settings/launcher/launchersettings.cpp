@@ -1,3 +1,4 @@
+
 /*
                =.            This file is part of the OPIE Project
              .=l.            Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
@@ -15,7 +16,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -49,10 +50,10 @@ LauncherSettings::LauncherSettings ( ) : QDialog ( 0, "LauncherSettings", false,
 	m_taskbar = new TaskbarSettings ( tw );
 	m_menu = new MenuSettings ( tw );
 
-	tw-> addTab ( m_taskbar, "launchersettings/taskbartab.png", tr( "Taskbar" ));
-	tw-> addTab ( m_menu, "launchersettings/menutab.png", tr( "O-Menu" ));
+	tw-> addTab ( m_taskbar, "wait", tr( "Taskbar" ));
+	tw-> addTab ( m_menu, "go", tr( "O-Menu" ));
 	tw-> addTab ( m_tabs, "launchersettings/tabstab.png", tr( "Tabs" ));
-	
+
 	tw-> setCurrentTab ( m_taskbar );
 }
 
