@@ -20,8 +20,11 @@
 #ifndef _LIBOPIE_ODEVICE_H_
 #define _LIBOPIE_ODEVICE_H_
 
+#include <qobject.h>
 #include <qstring.h>
 #include <qnamespace.h>
+
+#include <opie/odevicebutton.h>
 
 class ODeviceData;
 
@@ -87,8 +90,9 @@ enum OHardKey {
 };
 
 
-class ODevice
-{
+class ODevice : public QObject {
+	Q_OBJECT
+	
 private:
 	ODevice ( const ODevice & );
 
@@ -142,6 +146,46 @@ public:
 	virtual bool hasLightSensor ( ) const;
 	virtual int readLightSensor ( );
 	virtual int lightSensorResolution ( ) const;
+
+	/**
+	 * Returns the available buttons on this device.  The number and location
+	 * of buttons will vary depending on the device.  Button numbers will be assigned
+	 * by the device manufacturer and will be from most preferred button to least preffered
+	 * button.  Note that this list only contains "user mappable" buttons.
+	 */
+	const QValueList<ODeviceButton> &buttons ( ) const;
+	
+	/**
+	 * Returns the DeviceButton for the \a keyCode.  If \a keyCode is not found, it
+	 * returns 0L
+	 */
+	const ODeviceButton *buttonForKeycode ( ushort keyCode );
+
+	/**
+	 * Reassigns the pressed action for \a button.  To return to the factory
+	 * default pass an empty string as \a qcopMessage.
+	 */
+	void remapPressedAction ( int button, const OQCopMessage &qcopMessage );
+
+	/**
+	 * Reassigns the held action for \a button.  To return to the factory
+	 * default pass an empty string as \a qcopMessage.
+	 */	 
+	void remapHeldAction ( int button, const OQCopMessage &qcopMessage );
+
+	/**
+	 * How long (in ms) you have to press a button for a "hold" action
+	 */
+	uint buttonHoldTime ( ) const;
+
+signals:	
+	void buttonMappingChanged ( );
+	
+private slots:	
+	void systemMessage ( const QCString &, const QByteArray & );
+	
+protected:
+	void reloadButtonMapping ( );
 };
 
 }

@@ -7,7 +7,7 @@ HEADERS   = ofontmenu.h \
     todovcalresource.h xmltree.h \
     colordialog.h colorpopupmenu.h \
     oclickablelabel.h oprocctrl.h \
-    oprocess.h odevice.h \
+    oprocess.h odevice.h odevicebutton.h \
     otimepicker.h otabwidget.h \
     otabbar.h otabinfo.h \
     ofontselector.h \
@@ -49,7 +49,7 @@ SOURCES   = ofontmenu.cc  \
       todovcalresource.cpp  colordialog.cpp \
       colorpopupmenu.cpp oclickablelabel.cpp \
       oprocctrl.cpp oprocess.cpp \
-      odevice.cpp otimepicker.cpp \
+      odevice.cpp odevicebutton.cpp otimepicker.cpp \
        otabwidget.cpp otabbar.cpp \
              ofontselector.cpp \
              pim/otodo.cpp \

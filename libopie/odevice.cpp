@@ -33,6 +33,7 @@
 #include <qpe/sound.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include "odevice.h"
 
@@ -64,10 +65,13 @@ public:
 	OSystem m_system;
 	
 	QString m_sysverstr;
+	
+	QValueList <ODeviceButton> m_buttons;
+	uint                       m_holdtime;
 };
 
 
-class iPAQ : public QObject, public ODevice, public QWSServer::KeyboardFilter {
+class iPAQ : public ODevice, public QWSServer::KeyboardFilter {
 protected: 
 	virtual void init ( );
 	
@@ -87,8 +91,6 @@ public:
 	virtual bool hasLightSensor ( ) const;
 	virtual int readLightSensor ( );
 	virtual int lightSensorResolution ( ) const;
-	
-	//virtual QValueList <int> keyList ( ) const;
 	
 protected:
 	virtual bool filter ( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
@@ -118,8 +120,6 @@ public:
 	virtual OLedState ledState ( OLed led ) const;
 	virtual bool setLedState ( OLed led, OLedState st );
 	
-	//virtual QValueList <int> keyList ( ) const;
-	
 protected:
 	virtual void buzzer ( int snd );
 	
@@ -127,7 +127,86 @@ protected:
 };
 
 
+struct i_button {
+	uint model;
+    Qt::Key code;
+    char *utext;
+    char *pix;
+    char *fpressedservice;
+    char *fpressedaction;
+    char *fheldservice;
+    char *fheldaction;
+} ipaq_buttons [] = {
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx, 
+    Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"), 
+	"devicebuttons/ipaq_calendar", 
+	"datebook", "nextView()", 
+	"today", "raise()" },
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
+    Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"), 
+	"devicebuttons/ipaq_contact",  
+	"addressbook", "raise()",
+	"addressbook", "beamBusinessCard()" },
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx, 
+    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"), 
+	"devicebuttons/ipaq_menu",
+ 	"QPE/TaskBar", "toggleMenu()",
+	"QPE/TaskBar", "toggleStartMenu()" },
+    { Model_iPAQ_H38xx | Model_iPAQ_H39xx,
+    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Mail Button"), 
+	"devicebuttons/ipaq_mail",
+	"mail", "raise()",
+	"mail", "newMail()" },
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
+    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"), 
+	"devicebuttons/ipaq_home", 
+	"QPE/Launcher", "home()",
+	"buttonsettings", "raise()" },
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
+    Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"), 
+	"devicebuttons/ipaq_record", 
+	"QPE/VMemo", "toggleRecord()",
+	"sound", "raise()" },
+};
 
+struct z_button {
+    Qt::Key code;
+    char *utext;
+    char *pix;
+    char *fpressedservice;
+    char *fpressedaction;
+    char *fheldservice;
+    char *fheldaction;
+} z_buttons [] = {
+    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
+	"devicebuttons/z_calendar",
+	"datebook", "nextView()",
+	"today", "raise()" },
+    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
+	"devicebuttons/z_contact",
+	"addressbook", "raise()",
+	"addressbook", "beamBusinessCard()" },
+    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
+	"devicebuttons/z_home",
+	"QPE/Launcher", "home()",
+	"buttonsettings", "raise()" },
+    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
+	"devicebuttons/z_menu",
+ 	"QPE/TaskBar", "toggleMenu()",
+	"QPE/TaskBar", "toggleStartMenu()" },
+    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
+	"devicebuttons/z_mail",
+	"mail", "raise()",
+	"mail", "newMail()" },
+};
+
+static QCString makeChannel ( const char *str )
+{
+	if ( str && !::strchr ( str, '/' ))
+		return QCString ( "QPE/Application/" ) + str;
+	else
+		return str;
+}
 
 
 
@@ -170,10 +249,39 @@ ODevice::ODevice ( )
 	d-> m_systemstr = "Unkown";
 	d-> m_system = System_Unknown;
 	d-> m_sysverstr = "0.0";
+	
+	d-> m_holdtime = 1000; // 1000ms
+	
+	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
+	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));	                     	
+}
+
+void ODevice::systemMessage ( const QCString &msg, const QByteArray & )
+{
+	if ( msg == "deviceButtonMappingChanged()" ) {
+		reloadButtonMapping ( );
+	} 
 }
 
 void ODevice::init ( )
 {
+	// Simulation uses iPAQ 3660 device buttons
+
+	for ( uint i = 0; i < ( sizeof( ipaq_buttons ) / sizeof( i_button )); i++ ) {
+		i_button *ib = ipaq_buttons + i;	
+		ODeviceButton b;
+		
+		if (( ib-> model & Model_iPAQ_H36xx ) == Model_iPAQ_H36xx ) {		
+			b. setKeycode ( ib-> code );
+			b. setUserText ( qApp-> translate ( "Button", ib-> utext ));
+			b. setPixmap ( Resource::loadPixmap ( ib-> pix ));
+			b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib-> fpressedservice ), ib-> fpressedaction ));
+			b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib-> fheldservice ), ib-> fheldaction ));
+                                        
+			d-> m_buttons. append ( b );
+		}
+	}
+	reloadButtonMapping ( );
 }
 
 ODevice::~ODevice ( )
@@ -359,10 +467,89 @@ int ODevice::lightSensorResolution ( ) const
 	return 0;
 }
 
-//QValueList <int> ODevice::keyList ( ) const
-//{
-//	return QValueList <int> ( );
-//}
+const QValueList <ODeviceButton> &ODevice::buttons ( ) const
+{
+	return d-> m_buttons;
+}
+
+uint ODevice::buttonHoldTime ( ) const
+{
+	return d-> m_holdtime;
+}
+
+const ODeviceButton *ODevice::buttonForKeycode ( ushort code )
+{
+	for ( QValueListConstIterator<ODeviceButton> it = d-> m_buttons. begin ( ); it != d-> m_buttons. end ( ); ++it ) {
+		if ( (*it). keycode ( ) == code )
+			return &(*it);
+	}
+	return 0;
+}
+
+void ODevice::reloadButtonMapping ( )
+{
+	Config cfg ( "ButtonSettings" );
+	
+	for ( uint i = 0; i < d-> m_buttons. count ( ); i++ ) {
+		ODeviceButton &b = d-> m_buttons [i];
+		QString group = "Button" + QString::number ( i );
+
+		QCString pch, hch;
+		QCString pm, hm;
+		QByteArray pdata, hdata;
+		
+		if ( cfg. hasGroup ( group )) {
+			cfg. setGroup ( group );
+			pch = cfg. readEntry ( "PressedActionChannel" ). latin1 ( );
+			pm  = cfg. readEntry ( "PressedActionMessage" ). latin1 ( );
+			// pdata = decodeBase64 ( buttonFile. readEntry ( "PressedActionArgs" ));
+
+			hch = cfg. readEntry ( "HeldActionChannel" ). latin1 ( );
+			hm  = cfg. readEntry ( "HeldActionMessage" ). latin1 ( );
+			// hdata = decodeBase64 ( buttonFile. readEntry ( "HeldActionArgs" ));
+		}
+		
+		b. setPressedAction ( OQCopMessage ( pch, pm, pdata ));
+		b. setHeldAction ( OQCopMessage ( hch, hm, hdata ));
+	}
+}
+
+void ODevice::remapPressedAction ( int button, const OQCopMessage &action )
+{
+	if ( button >= (int) d-> m_buttons. count ( ))
+		return;
+		
+	ODeviceButton &b = d-> m_buttons [button];
+    b. setPressedAction ( action );
+
+	Config buttonFile ( "ButtonSettings" );
+	buttonFile. setGroup ( "Button" + QString::number ( button ));
+	buttonFile. writeEntry ( "PressedActionChannel", (const char*) b. pressedAction ( ). channel ( ));
+	buttonFile. writeEntry ( "PressedActionMessage", (const char*) b. pressedAction ( ). message ( ));
+
+//	buttonFile. writeEntry ( "PressedActionArgs", encodeBase64 ( b. pressedAction ( ). data ( )));
+
+	QCopEnvelope ( "QPE/System", "deviceButtonMappingChanged()" );
+}
+
+void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
+{
+	if ( button >= (int) d-> m_buttons. count ( ))
+		return;
+		
+	ODeviceButton &b = d-> m_buttons [button];
+    b. setHeldAction ( action );
+
+	Config buttonFile ( "ButtonSettings" );
+	buttonFile. setGroup ( "Button" + QString::number ( button ));
+	buttonFile. writeEntry ( "HeldActionChannel", (const char *) b. heldAction ( ). channel ( ));
+	buttonFile. writeEntry ( "HeldActionMessage", (const char *) b. heldAction ( ). message ( ));
+
+//	buttonFile. writeEntry ( "HeldActionArgs", decodeBase64 ( b. heldAction ( ). data ( )));
+
+	QCopEnvelope ( "QPE/System", "deviceButtonMappingChanged()" );
+}
+
 
 
 
@@ -414,6 +601,26 @@ void iPAQ::init ( )
 	m_leds [0] = m_leds [1] = Led_Off;
 	
 	m_power_timer = 0;
+	
+	for ( uint i = 0; i < ( sizeof( ipaq_buttons ) / sizeof( i_button )); i++ ) {
+		i_button *ib = ipaq_buttons + i;	
+		ODeviceButton b;
+		
+		qDebug ( "%d: %d", i, ib-> model );
+		
+		if (( ib-> model & d-> m_model ) == d-> m_model ) {		
+			b. setKeycode ( ib-> code );
+			b. setUserText ( qApp-> translate ( "Button", ib-> utext ));
+			b. setPixmap ( Resource::loadPixmap ( ib-> pix ));
+			b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib-> fpressedservice ), ib-> fpressedaction ));
+			b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib-> fheldservice ), ib-> fheldaction ));
+                                        
+			d-> m_buttons. append ( b );
+			
+			qDebug ( "code: %d", ib-> code );
+		}
+	}
+	reloadButtonMapping ( );
 	
 	if ( d-> m_qwsserver )
 		QWSServer::setKeyboardFilter ( this );	
@@ -502,13 +709,6 @@ bool iPAQ::setLedState ( OLed l, OLedState st )
 	return false;
 }
 
-
-//QValueList <int> iPAQ::keyList ( ) const
-//{
-//	QValueList <int> vl;
-//	vl << HardKey_Datebook << HardKey_Contacts << ( model ( ) == Model_iPAQ_H38xx ? HardKey_Mail : HardKey_Menu ) << HardKey_Home << HardKey_Record << HardKey_Suspend << HardKey_Backlight;
-//	return vl;
-//}
 
 bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat )
 {
@@ -753,6 +953,20 @@ void Zaurus::init ( )
 		d-> m_model = Model_Zaurus_SL5000;
 		d-> m_modelstr = "Zaurus SL-5000D (unverified)";
 	}
+
+	for ( uint i = 0; i < ( sizeof( z_buttons ) / sizeof( z_button )); i++ ) {
+		z_button *zb = z_buttons + i;	
+		ODeviceButton b;
+		
+		b. setKeycode ( zb-> code );
+		b. setUserText ( qApp-> translate ( "Button", zb-> utext ));
+		b. setPixmap ( Resource::loadPixmap ( zb-> pix ));
+		b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( zb-> fpressedservice ), zb-> fpressedaction ));
+		b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( zb-> fheldservice ), zb-> fheldaction ));
+                                        
+		d-> m_buttons. append ( b );
+	}
+	reloadButtonMapping ( );
 
 	m_leds [0] = Led_Off;
 }
