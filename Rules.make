@@ -53,6 +53,9 @@ endif
 ifeq ($(CONFIG_OPIE_NO_OVERRIDE_QT),y)
 	echo CONFIG += no-override >> $@
 endif
+ifeq ($(CONFIG_LIBQPE_WITHROHFEEDBACK),y)
+	echo DEFINES += OPIE_WITHROHFEEDBACK >> $@
+endif
 ifeq ($(CONFIG_OPIE_NO_ERASERECT_FIX),y)
 	echo DEFINES += OPIE_NO_ERASE_RECT_HACKFIX >> $@
 endif
