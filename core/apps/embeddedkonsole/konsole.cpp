@@ -278,7 +278,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
       configMenu->insertItem( tr( "Tabs on Bottom" ) );
   } else {
       tab->setTabPosition(QTabWidget::Bottom);
-      configMenu->insertItem("Tabs on Top");
+      configMenu->insertItem(tr("Tabs on Top"));
   }
   configMenu->insertSeparator(2);
 
@@ -812,11 +812,11 @@ void Konsole::configMenuSelected(int iD)
 
           if(tmp=="Top") {
               tab->setTabPosition(QTabWidget::Bottom);
-              configMenu->changeItem( iD,"Tabs on Top");
+              configMenu->changeItem( iD, tr("Tabs on Top"));
               cfg.writeEntry("Position","Bottom");
           } else {
               tab->setTabPosition(QTabWidget::Top);
-              configMenu->changeItem( iD,"Tabs on Bottom");
+              configMenu->changeItem( iD, tr("Tabs on Bottom"));
               cfg.writeEntry("Position","Top");
           }
       }
