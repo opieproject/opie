@@ -62,6 +62,7 @@ private slots:
     void slotRecordScript();
     void slotSaveScript();
     void slotRunScript();
+    void slotSessionChanged( Session* );
 private:
     void initUI();
     void populateProfiles();

@@ -75,11 +75,11 @@ void MainWindow::initUI() {
     connect(m_disconnect, SIGNAL(activated() ),
             this, SLOT(slotDisconnect() ) );
 
-	m_transfer = new QAction();
-	m_transfer->setText( tr("Transfer file...") );
-	m_transfer->addTo( m_console );
-	connect(m_transfer, SIGNAL(activated() ),
-			this, SLOT(slotTransfer() ) );
+    m_transfer = new QAction();
+    m_transfer->setText( tr("Transfer file...") );
+    m_transfer->addTo( m_console );
+    connect(m_transfer, SIGNAL(activated() ),
+            this, SLOT(slotTransfer() ) );
 
     /*
      * terminate action
@@ -164,6 +164,8 @@ void MainWindow::initUI() {
              this, SLOT(slotProfile( int ) ) );
 
     m_consoleWindow = new TabWidget( this, "blah");
+    connect(m_consoleWindow, SIGNAL(activated(Session*) ),
+            this, SLOT(slotSessionChanged(Session*) ) );
     setCentralWidget( m_consoleWindow );
 
 }
@@ -327,4 +329,10 @@ void MainWindow::slotOpenKeb(bool state) {
     if (state) m_keyBar->show();
     else m_keyBar->hide();
 
+}
+void MainWindow::slotSessionChanged( Session* ses ) {
+    if ( ses ) {
+        qWarning("changing %s", ses->name().latin1() );
+        m_curSession = ses;
+    }
 }
