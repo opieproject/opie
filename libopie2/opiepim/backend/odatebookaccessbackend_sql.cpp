@@ -226,6 +226,8 @@ OPimEvent ODateBookAccessBackend_SQL::find( int uid ) const{
 	QString qu = "select *";
 	qu += "from datebook where uid = " + QString::number(uid);
 
+	qDebug( "Query: %s", qu.latin1() );
+
 	OSQLRawQuery raw( qu );
 	OSQLResult res = m_driver->query( &raw );
 
@@ -245,7 +247,7 @@ OPimEvent ODateBookAccessBackend_SQL::find( int uid ) const{
 	OPimEvent retDate( dateEventMap );
 	retDate.setExtraMap( requestCustom( uid ) );
 
-	qDebug( "ODateBookAccessBackend_SQL::find() end", uid ); 
+	qDebug( "ODateBookAccessBackend_SQL::find( %d ) end", uid ); 
 	return retDate;
 }
 
