@@ -30,7 +30,7 @@
     </message>
     <message>
         <source>Task Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -53,7 +53,7 @@
     </message>
     <message>
         <source>Opie Todolist</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -436,7 +436,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="obsolete">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
@@ -448,7 +448,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Summary:</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

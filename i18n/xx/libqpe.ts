@@ -400,11 +400,11 @@ editing categories.</source>
     <name>QMessageBox</name>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -472,7 +472,7 @@ Free some memory and try again.</source>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation type="obsolete">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>All</source>
@@ -801,7 +801,7 @@ Free some memory and try again.</source>
     <message>
         <source>&lt;qt&gt;Are you sure you want to delete
  %1?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

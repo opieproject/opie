@@ -83,7 +83,7 @@ the last 10 years of her friendship.
     </message>
     <message>
         <source>KPacman</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -207,7 +207,7 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

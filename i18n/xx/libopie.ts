@@ -31,35 +31,35 @@
     </message>
     <message>
         <source>Lower+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Lower+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Lower+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Lower+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Upper+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Upper+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Upper+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Upper+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -391,7 +391,7 @@ and </source>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -437,7 +437,7 @@ and </source>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="obsolete">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Office: </source>
@@ -465,7 +465,7 @@ and </source>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="obsolete">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
@@ -561,7 +561,7 @@ and </source>
     </message>
     <message>
         <source>The %1 %1 of every</source>
-        <translation type="obsolete">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Every </source>
@@ -641,15 +641,15 @@ and </source>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>The %1 %2 of every</source>
-        <translation type="unfinished">FOO {1 %2?}</translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
