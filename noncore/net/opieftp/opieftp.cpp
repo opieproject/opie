@@ -1380,7 +1380,7 @@ void OpieFtp::deleteServer()
 
             qDebug("OK DELETE "+tempname);
             cfg.removeEntry(QString::number(i));
-            for ( i; i <= numberOfEntries; i++) {
+            for ( ; i <= numberOfEntries; i++) {
                 cfg.setGroup("Server");
                 cfg.writeEntry("Server", QString::number(numberOfEntries + 1 ));
 
