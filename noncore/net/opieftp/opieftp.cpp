@@ -22,6 +22,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
+#include <qpe/qpemessagebox.h>
 
 #include <qstringlist.h>
 #include <qtextstream.h>
@@ -84,7 +85,7 @@ OpieFtp::OpieFtp( )
     localMenu  = new QPopupMenu( this );
     remoteMenu  = new QPopupMenu( this );
     tabMenu = new QPopupMenu( this );
-
+    
     layout->addMultiCellWidget( menuBar, 0, 0, 0, 2 );
 
     menuBar->insertItem( tr( "Connection" ), connectionMenu);
@@ -114,7 +115,10 @@ OpieFtp::OpieFtp( )
     tabMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
     tabMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
     tabMenu->insertItem( tr( "Switch to Config" ), this, SLOT( switchToConfigTab() ));
+    tabMenu->insertSeparator();
+    tabMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
     tabMenu->setCheckable(TRUE);
+
 
 
     cdUpButton = new QPushButton(Resource::loadIconSet("up"),"",this,"cdUpButton");
@@ -150,9 +154,9 @@ OpieFtp::OpieFtp( )
     Local_View = new QListView( tab, "Local_View" );
 //    Local_View->setResizePolicy( QListView::AutoOneFit );
     Local_View->addColumn( tr("File"),150);
-    Local_View->addColumn( tr("Size"),-1);
-    Local_View->setColumnAlignment(1,QListView::AlignRight);
     Local_View->addColumn( tr("Date"),-1);
+    Local_View->setColumnAlignment(1,QListView::AlignRight);
+    Local_View->addColumn( tr("Size"),-1);
     Local_View->setColumnAlignment(2,QListView::AlignRight);
     Local_View->setAllColumnsShowFocus(TRUE);
 
@@ -180,9 +184,9 @@ OpieFtp::OpieFtp( )
 
     Remote_View = new QListView( tab_2, "Remote_View" );
     Remote_View->addColumn( tr("File"),150);
-    Remote_View->addColumn( tr("Size"),-1);
-    Remote_View->setColumnAlignment(1,QListView::AlignRight);
     Remote_View->addColumn( tr("Date"),-1);
+    Remote_View->setColumnAlignment(1,QListView::AlignRight);
+    Remote_View->addColumn( tr("Size"),-1);
     Remote_View->setColumnAlignment(2,QListView::AlignRight);
     Remote_View->addColumn( tr("Dir"),-1);
     Remote_View->setColumnAlignment(4,QListView::AlignRight);
@@ -611,7 +615,7 @@ void OpieFtp::populateLocalView()
             }
         }
         if(fileL !="./" && fi->exists()) {
-            item= new QListViewItem( Local_View,fileL,fileS , fileDate);
+            item= new QListViewItem( Local_View,fileL, fileDate, fileS );
             QPixmap pm;
          
             if(isDir || fileL.find("/",0,TRUE) != -1) {
@@ -677,13 +681,13 @@ bool OpieFtp::populateRemoteView( )
             fileDate = fileDate.stripWhiteSpace();
             if(fileL.find("total",0,TRUE) == -1) {
                 if(s.left(1) == "d" || fileL.find("/",0,TRUE) != -1) {
-                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileS, fileDate,"d");
+                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileDate, fileS,"d");
                     item->setPixmap( 0, Resource::loadPixmap( "folder" ));
 //                      if(itemDir)
                           item->moveItem(itemDir);
                       itemDir=item;
                 } else {
-                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileS, fileDate,"f");
+                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileDate, fileS,"f");
                     item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
 //                      if(itemFile)
                           item->moveItem(itemDir);
@@ -1312,4 +1316,12 @@ void OpieFtp::homeButtonPushed() {
     currentDir.cd(  current, TRUE);
      populateLocalView();
     update();
+}
+
+void OpieFtp::doAbout() {
+    QMessageBox::message("OpieFtp","Opie ftp client is copyright 2002 by\n"
+                         "L.J.Potter<llornkcor@handhelds.org>\n"
+                         "and uses ftplib copyright 1996-2000\n"
+                         "by Thomas Pfau, pfau@cnj.digex.net\n\n"
+                         "and is licensed by the GPL");
 }

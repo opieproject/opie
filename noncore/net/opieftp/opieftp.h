@@ -55,7 +55,7 @@ public:
     QLineEdit *PasswordEdit, *remotePath;
     QLabel *TextLabel2, *TextLabel1, *TextLabel3, *TextLabel4;;
     QSpinBox* PortSpinBox;
-    QPopupMenu *connectionMenu, *localMenu, *remoteMenu, *tabMenu;
+    QPopupMenu *connectionMenu, *localMenu, *remoteMenu, *tabMenu, *aboutMenu;
     QDir currentDir;
     QString currentRemoteDir;
     QString filterStr;
@@ -67,7 +67,7 @@ protected slots:
     void upDir();
     void homeButtonPushed();
     void docButtonPushed();
- 
+    void doAbout(); 
     void serverComboEdited(const QString & );
     void showLocalMenu( QListViewItem *);
     void showRemoteMenu( QListViewItem *);
