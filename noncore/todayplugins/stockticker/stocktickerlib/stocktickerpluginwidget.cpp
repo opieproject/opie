@@ -239,8 +239,7 @@ void StockTickerPluginWidget::init() {
 void StockTickerPluginWidget::doStocks() {
     Config cfg( "stockticker");
     cfg.setGroup( "Symbols" );
-    QString symbollist;
-    symbollist = cfg.readEntry("Symbols", "");
+    symbollist="";
     symbollist = cfg.readEntry("Symbols", "");
     symbollist.replace(QRegExp(" "),"+");//seperated by +
 
