@@ -106,7 +106,7 @@ CONFIG_MULTIKEY	inputmethods/multikey	multikey.pro
 CONFIG_NETSYSTEMTIME	noncore/settings/netsystemtime	netsystemtime.pro
 CONFIG_NETWORKSETUP	noncore/net/networksettings	networksettings.pro
 CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
-CONFIG_OBEX	core/applets/obex	obex.pro
+CONFIG_OBEX	core/applets/obex2	obex.pro
 CONFIG_OCOPSERVER	x11/ipc/server	ocopserver.pro
 CONFIG_OIPKG	core/apps/oipkg	oipkg.pro
 CONFIG_OPIE-CONSOLE	noncore/apps/opie-console	opie-console.pro
