@@ -2,3 +2,15 @@
     boolean "launcher"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+
+if LAUNCHER
+  config PRELOAD
+    boolean
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LAUNCHER
+
+  config LAUNCHER_CORE
+    boolean
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LAUNCHER && PRELOAD
+endif

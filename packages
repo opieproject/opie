@@ -86,7 +86,7 @@ CONFIG_KEYPEBBLE	noncore/comm/keypebble	keypebble.pro
 CONFIG_KJUMPX	inputmethods/kjumpx	kjumpx.pro
 CONFIG_KPACMAN	noncore/games/kpacman	kpacman.pro
 CONFIG_LANGUAGE	noncore/settings/language	language.pro
-CONFIG_LAUNCHER	core/launcher	launcher.pro
+CONFIG_LAUNCHER_CORE	core/launcher	launcher.pro
 CONFIG_LAUNCHER-SETTINGS	core/settings/launcher	launcher.pro
 CONFIG_LIBMAD	core/multimedia/opieplayer/libmad	libmad.pro
 CONFIG_LIBMAIL	noncore/mail/libmail	libmail.pro
@@ -159,4 +159,5 @@ CONFIG_WAVPLUGIN	core/multimedia/opieplayer/wavplugin	wavplugin.pro
 CONFIG_WIRELESSAPPLET	noncore/applets/wirelessapplet	wirelessapplet.pro
 CONFIG_WLAN	noncore/net/networksetup/wlan	wlan.pro
 CONFIG_WORDGAME	noncore/games/wordgame	wordgame.pro
-CONFIG_OPIEALARM	ipaq/opiealarm
+CONFIG_OPIEALARM	core/opiealarm
+CONFIG_PRELOAD		core/launcher/libpreload	libpreload.pro
