@@ -10,8 +10,6 @@ HEADERS     = olistview.h            \
               oversatileview.h       \
               oversatileviewitem.h   \
               odialog.h              \
-	      omenubar.h             \
-	      opiemenubar.h          \
 	      omessagebox.h          \
 	      oresource.h            \
               oseparator.h           
@@ -25,8 +23,6 @@ SOURCES     = olistview.cpp          \
               oversatileview.cpp     \
               oversatileviewitem.cpp \
               odialog.cpp            \
-	      omenubar.cpp           \
-	      opiemenubar.cpp        \
 	      oresource.cpp          \
               oseparator.cpp         
 
