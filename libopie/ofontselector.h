@@ -30,11 +30,10 @@
 #define __OPIE_FONTSELECTOR_H__
 
 #include <qwidget.h>
-#include <qpe/fontdatabase.h>
 
-class QComboBox;
 class QListBox;
-class QFont;
+class OFontSelectorPrivate;
+
 
 class OFontSelector : public QWidget
 {
@@ -71,11 +70,7 @@ private:
     void changeFont ( );
 	
 private:
-    QListBox *    m_font_family_list;
-    QComboBox *   m_font_style_list;
-    QComboBox *   m_font_size_list;
-    
-    FontDatabase  m_fdb;
+	OFontSelectorPrivate *d;
 };
 
 #endif
