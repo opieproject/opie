@@ -15,6 +15,12 @@ Feature requests:
 Known Bugs:
 -----------
 - OK-Key does not switch from Detailview (ablable) to Listview
+- Exporting an reimporting of Jobtitle fails.
+- After finising search: Clear Picker
+- Combo in Contacteditor: Field "Default-Email" is not correctly implemented and 
+  should be removed by a picker/combo.
+- Name order selected in "contacteditor" not used in list view.
+
 
 Bugs but not in addressbook:
 -----------------------------
@@ -27,10 +33,12 @@ Urgent:
 - Contact-Editor is temporarely reanabled. Wait for replacement.
 - Redesign of Contacteditor
 - Store last settings of combo-boxes
-- Name order selected in "contacteditor" not used in list view.
 - Category is on the wrong position after changing to personal and back to normal
 	( Temporarily workaround: Category is never deactivated.. :S )
-
+- Optimize Table Update...
+- Change MyDialog to Config
+- Implement Button Pics
+- Fix start of opie-mail
 
 Important:
 ----------
