@@ -1146,9 +1146,21 @@ void Zaurus::init ( )
 			d-> m_rotation = Rot0;
 			break;
 		case Model_Zaurus_SLC700:
-			/* note for C700, we must check the display rotation
-			 * sensor to set an appropriate value
-			 */
+			bool flipstate = false;
+			// Note: need to 1) set flipstate based on physical screen orientation
+			// and 2) check to see if the user overrode the rotation direction
+			// using appearance, and if so, remove that item from the Config to
+			// ensure the rotate applet flips us back to the previous state.
+			if ( flipstate ) {
+				// 480x640
+				d-> m_rotation = Rot0;
+				d-> m_direction = CW;
+			} else {
+				// 640x480
+				d-> m_rotation = Rot270;
+				d-> m_direction = CCW;
+			}
+			break;
 		case Model_Zaurus_SLB600:
 		case Model_Zaurus_SL5500:
 		case Model_Zaurus_SL5000:
