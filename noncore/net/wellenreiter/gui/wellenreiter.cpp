@@ -42,11 +42,11 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     // setup socket for daemon communication and start poller
     //
 
-    daemon_fd = commsock( DAEMONADDR, DAEMONPORT );
+    daemon_fd = commsock( GUIADDR, GUIPORT );
     if ( daemon_fd == -1 )
-        qDebug( "D'oh! Could not get file descriptor for daemon socket." );
-    else
-        startTimer( 700 );
+        qDebug( "D'oh! Could not get file descriptor for daemon-->gui communication socket." );
+    //else
+        //startTimer( 700 );
 
 }
 
@@ -77,11 +77,11 @@ typedef struct {
 } wl_network_t;
 */
 
-    if ( result == 1 )  /* new network found */
+    if ( result == NETFOUND )  /* new network found */
     {
         qDebug( "Sniffer said: new network found." );
         wl_network_t n;
-        get_network_found( &n, (const char*) &buffer );
+        get_network_found( &n, (char*) &buffer );
         n.bssid[n.ssid_len] = "\0";
 
         QString type;
@@ -121,7 +121,7 @@ bool Wellenreiter::hasMessage()
 
 void Wellenreiter::timerEvent( QTimerEvent* e )
 {
-     qDebug( "checking for message..." );
+    //qDebug( "checking for message..." );
 
     if ( hasMessage() )
     {
@@ -129,7 +129,7 @@ void Wellenreiter::timerEvent( QTimerEvent* e )
     }
     else
     {
-        qDebug( "no message :(" );
+        //qDebug( "no message :(" );
     }
 }
 
@@ -166,7 +166,11 @@ void Wellenreiter::buttonClicked()
 
     // add some icons, so that we can see if this works
 
-    addNewItem( "managed", "MyNet", "04:00:20:EF:A6:43", true, 6, 80 );
-    addNewItem( "adhoc", "YourNet", "40:03:A3:E7:56:22", false, 11, 30 );
+    addNewItem( "managed", "DummyNet", "04:00:20:EF:A6:43", true, 6, 80 );
+    addNewItem( "adhoc", "DummyNet", "40:03:A3:E7:56:22", false, 11, 30 );
+
+    QString command ("98");
+
+    sendcomm( DAEMONADDR, DAEMONPORT, (const char*) command );
 
 }
