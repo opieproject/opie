@@ -89,8 +89,9 @@ public:
 
 	QString key ( )
 	{
-		if ( m_style_if )
-			return QString ( m_style_if-> key ( ));
+		if ( m_lib )
+			return QFileInfo ( m_lib-> library ( )). fileName ( );
+			//return QString ( m_style_if-> key ( ));
 		else
 			return text ( );
 	}

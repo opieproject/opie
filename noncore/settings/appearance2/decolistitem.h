@@ -31,16 +31,16 @@
 #include <qpe/windowdecorationinterface.h>
 #include <qlistbox.h>
 
-class DecoListItem : public QListBoxText {
+class DecoListItem : public QListBoxPixmap {
 public:
-	DecoListItem ( const QString &t ) : QListBoxText ( t ) 
+	DecoListItem ( const QString &t ) : QListBoxPixmap ( QPixmap ( ), t ) 
 	{ 
 		m_lib = 0;
 		m_window_if = 0;
 //		m_settings_if = 0;
 	}
 
-	DecoListItem ( QLibrary *lib, WindowDecorationInterface *iface ) : QListBoxText ( iface-> name ( ))
+	DecoListItem ( QLibrary *lib, WindowDecorationInterface *iface ) : QListBoxPixmap ( iface-> icon ( ), iface-> name ( ))
 	{
 		m_lib = lib;
 		m_window_if = iface;
@@ -85,8 +85,8 @@ public:
 
 	QString key ( )
 	{
-		if ( m_window_if )
-			return QString ( m_window_if-> name ( ));
+		if ( m_lib )
+			return QFileInfo ( m_lib-> library ( )). fileName ( );
 		else
 			return text ( );
 	}

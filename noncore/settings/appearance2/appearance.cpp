@@ -149,7 +149,7 @@ void Appearance::loadStyles ( QListBox *list )
 
 void Appearance::loadDecos ( QListBox *list )
 {
-    list-> insertItem ( new DecoListItem ( tr( "Default" )));
+    list-> insertItem ( new DecoListItem ( "QPE" ));
 
 	{
 		QString path = QPEApplication::qpeDir() + "/plugins/decorations/";
@@ -208,7 +208,14 @@ QWidget *Appearance::createStyleTab ( QWidget *parent )
 	loadStyles ( m_style_list );
 
     QString s = config. readEntry ( "Style", "Light" );
-    m_style_list-> setCurrentItem ( m_style_list-> findItem ( s ));
+    
+    for ( uint i = 0; i < m_style_list-> count ( ); i++ ) {
+    	if (((StyleListItem *) m_style_list-> item ( i ))-> key ( ) == s ) {
+    		m_style_list-> setCurrentItem ( i );
+    		break;
+    	}
+    }
+    
     m_original_style = m_style_list-> currentItem ( );
     styleClicked ( m_original_style );
 
@@ -231,7 +238,14 @@ QWidget *Appearance::createDecoTab ( QWidget *parent )
 	loadDecos ( m_deco_list );
 
     QString s = config. readEntry ( "Decoration" );
-    m_deco_list-> setCurrentItem ( m_deco_list-> findItem ( s ));
+
+    for ( uint i = 0; i < m_deco_list-> count ( ); i++ ) {
+    	if (((DecoListItem *) m_deco_list-> item ( i ))-> key ( ) == s ) {
+    		m_deco_list-> setCurrentItem ( i );
+    		break;
+    	}
+    }
+    
     m_original_deco = m_deco_list-> currentItem ( );
     if ( m_deco_list-> currentItem  ( ) < 0 )
     	m_deco_list-> setCurrentItem ( 0 );
@@ -386,6 +400,12 @@ void Appearance::accept ( )
 	    if ( item )
             config.writeEntry( "Style", item-> key ( ));
 	}
+	
+    if ( m_deco_changed ) { 
+	    DecoListItem *item = (DecoListItem *) m_deco_list-> item ( m_deco_list-> currentItem ( ));
+	    if ( item )
+            config.writeEntry( "Decoration", item-> key ( ));
+	}	
 
 	if (( newtabstyle != m_original_tabstyle ) || ( newtabpos != m_original_tabpos )) {
 		config. writeEntry ( "TabStyle", newtabstyle + 1 );
@@ -469,6 +489,7 @@ void Appearance::decoClicked ( int index )
 			m_sample-> setDecoration ( dli-> interface ( ));		
 		else
 			m_sample-> setDecoration ( new DefaultWindowDecoration ( ));
+		m_sample-> repaint ( );
 	}
 	m_deco_changed |= ( index != m_original_deco );
 }
