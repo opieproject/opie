@@ -31,12 +31,14 @@
 
 #include <qmainwindow.h>
 #include <qpixmap.h>
+#include "cfg.h"
 
 class CBInfo;
 class CBInfoList;
 class QAction;
 class QListView;
 class QString;
+class QListViewItem;
 
 class MainWindow : public QMainWindow
 {
@@ -47,15 +49,19 @@ class MainWindow : public QMainWindow
 		~MainWindow();
 		static QString appName() { return QString::fromLatin1("checkbook"); };
 
+        // safe config
+        void writeConfig();
+
+        // open a check book
+        void openBook(QListViewItem *curr);
+
 	private:
 		QListView *cbList;
 		QString    cbDir;
 		QAction   *actionOpen;
 		QAction   *actionDelete;
 
-		QString  currencySymbol;
-		bool     showLocks;
-		bool     showBalances;
+        Cfg _cfg;
 		int      posName;
 
 		CBInfoList *checkbooks;

@@ -33,6 +33,7 @@
 
 #include <qfile.h>
 
+// --- CBInfo -----------------------------------------------------------------
 CBInfo::CBInfo()
 {
 	n = "";
@@ -44,10 +45,15 @@ CBInfo::CBInfo()
 	p = "";
 	nt = "";
 	sb = 0.0;
+    _sLastTab="";
+    _first=-1;
+    _last=-1;
 
 	tl = new TranInfoList();
 }
 
+
+// --- CBInfo -----------------------------------------------------------------
 CBInfo::CBInfo( const QString &name, const QString &filename )
 {
 	Config config( filename, Config::File );
@@ -62,6 +68,9 @@ CBInfo::CBInfo( const QString &name, const QString &filename )
 	a = config.readEntryCrypt( "Number", "" );
 	p = config.readEntryCrypt( "PINNumber", "" );
 	nt = config.readEntry( "Notes", "" );
+    _sLastTab = config.readEntry("LastTab", "");
+    _first=config.readNumEntry("First", -1);
+    _sSortOrder = config.readEntry( "SortOrder", QWidget::tr("Date") );
 
 	bool ok;
 	sb = config.readEntry( "Balance", "0.0" ).toFloat( &ok );
@@ -69,23 +78,40 @@ CBInfo::CBInfo( const QString &name, const QString &filename )
 	loadTransactions();
 }
 
+// --- balance ----------------------------------------------------------------
 float CBInfo::balance()
 {
 	calcBalance();
 	return b;
 }
 
+// --- write ------------------------------------------------------------------
 void CBInfo::write()
 {
 	QFile f( fn );
 	if ( f.exists() )
-	{
 		f.remove();
-	}
 
 	Config *config = new Config(fn, Config::File);
 
-	// Save info
+
+    // fix transaction numbers
+    _first=-1;
+    TranInfo *prev=NULL;
+    for ( TranInfo *tran = tl->first(); tran; tran = tl->next() ) {
+        if( _first<0 ) _first=tran->id();
+        if( prev ) prev->setNext( tran->id() );
+        tran->setNext(-1);
+        prev=tran;
+    }
+
+	// Save transactions
+    for ( TranInfo *tran = tl->first(); tran; tran = tl->next() ) {
+        tran->write(config);
+    }
+
+    // Save info
+    if( _first<0 && _last>=0 ) _first=_last;
 	config->setGroup( "Account" );
 	config->writeEntryCrypt( "Password", pw );
 	config->writeEntry( "Type", t );
@@ -93,49 +119,49 @@ void CBInfo::write()
 	config->writeEntryCrypt( "Number", a );
 	config->writeEntryCrypt( "PINNumber", p );
 	config->writeEntry( "Notes", nt );
+    config->writeEntry( "LastTab", _sLastTab );
 	QString balstr;
 	balstr.setNum( sb, 'f', 2 );
 	config->writeEntry( "Balance", balstr );
+    config->writeEntry( "First", _first );
+    config->writeEntry( "SortOrder", _sSortOrder );
 
-	// Save transactions
-	int i = 1;
-	for ( TranInfo *tran = tl->first(); tran; tran = tl->next() )
-	{
-		tran->write( config, i );
-		i++;
-	}
-	config->write();
-
+    config->write();
 	delete config;
 }
 
-TranInfo *CBInfo::findTransaction( const QString &checknum, const QString &date,
-									  const QString &desc )
+
+// --- findTransaction --------------------------------------------------------
+TranInfo *CBInfo::findTransaction( const QString &sId )
 {
-	TranInfo *traninfo = tl->first();
-	while ( traninfo )
-	{
-		if ( traninfo->number() == checknum && traninfo->datestr() == date &&
-			 traninfo->desc() == desc )
-			break;
-		traninfo = tl->next();
-	}
-	return( traninfo );
+    bool bOk;
+    int id=sId.toInt( &bOk );
+    if( !bOk )
+        return(false);
+    TranInfo *traninfo;
+	for(traninfo=tl->first(); traninfo; traninfo=tl->next()) {
+        if( traninfo->id() == id )
+            break;
+    }
+    return(traninfo);
 }
 
 void CBInfo::addTransaction( TranInfo *tran )
 {
-	tl->inSort( tran );
+    tl->append( tran );
 	calcBalance();
 }
 
 void CBInfo::removeTransaction( TranInfo *tran )
 {
-	tl->remove( tran );
-	delete tran;
+    tl->removeRef( tran );
+    delete tran;
 	calcBalance();
 }
 
+
+// --- loadTransactions -------------------------------------------------------
+// Reads the transactions. Either the old way 1-n or as linked list.
 void CBInfo::loadTransactions()
 {
 	TranInfo *tran;
@@ -144,24 +170,29 @@ void CBInfo::loadTransactions()
 	tl = new TranInfoList();
 
 	Config config( fn, Config::File );
+    int i=_first;
+    bool bOld=false;
+    if( i==-1 ) {
+        i=1;
+        bOld=true;
+    }
+    while( i>=0 ) {
+        _last=i;
+        tran=new TranInfo(config, i);
+        trandesc = tran->desc();
+        if( trandesc==QString::null ) {
+            delete tran;
+            break;
+        }
+        tl->append(tran);
+        i= bOld ? i+1 : tran->getNext();
+    }
 
-	for ( int i = 1; trandesc != QString::null; i++ )
-	{
-		tran = new TranInfo( config, i );
-		trandesc = tran->desc();
-		if ( trandesc != QString::null )
-		{
-			tl->inSort( tran );
-		}
-		else
-		{
-			delete tran;
-		}
-	}
-
-	calcBalance();
+    calcBalance();
 }
 
+
+// --- calcBalance ------------------------------------------------------------
 void CBInfo::calcBalance()
 {
 	float amount;
@@ -179,6 +210,7 @@ void CBInfo::calcBalance()
 		b += amount;
 	}
 }
+
 
 int CBInfoList::compareItems( QCollection::Item item1, QCollection::Item item2 )
 {

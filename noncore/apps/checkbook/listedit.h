@@ -26,42 +26,53 @@
 
 */
 
-#ifndef CONFIGURATION_H
-#define CONFIGURATION_H
+#ifndef LISTEDIT_H
+#define LISTEDIT_H
 
-#include <qdialog.h>
-#include "cfg.h"
-
-class QCheckBox;
+#include <qwidget.h>
+#include "tabledef.h"
+class QListView;
 class QLineEdit;
-class QString;
-class QTabWidget;
-class ListEdit;
+class QListViewItem;
+class QPoint;
+class QWidgetStack;
+class QComboBox;
 
-class Configuration : public QDialog
+class ListEdit : public QWidget, public TableDef
 {
 	Q_OBJECT
 
 	public:
-        // Constructor
-		Configuration( QWidget *, Cfg &cfg);
-		~Configuration();
+		ListEdit( QWidget *, const char *sName);
+		virtual ~ListEdit();
 
-		QLineEdit *symbolEdit;
-		QCheckBox *lockCB;
-		QCheckBox *balCB;
-        QCheckBox *openLastBookCB;
-        QCheckBox *lastTabCB;
-        QTabWidget *_mainWidget;
-        ListEdit *_listEditTypes;
-        ListEdit *_listEditCategories;
+		QListView *_typeTable;
+        QLineEdit *_typeEdit;
+        QWidgetStack *_stack;
+        QComboBox *_box;
+        QListViewItem *_currentItem;
+        int _currentColumn;
+        
+        // resolves dups and empty entries
+        void fixTypes();
+        void fixTypes(int iColumn);
 
-        // saves settings in config struct
-        void saveConfig(Cfg &cfg);
+        // stores content in string list
+        void storeInList(QStringList &lst);
 
-   protected:
-        // creates settings tap from configuration
-        QWidget *initSettings(Cfg &cfg);
+        // adds a column definition
+        virtual void addColumnDef(ColumnDef *pDef);
+
+        // adds data to table
+        void addData(QStringList &lst);
+
+
+    public slots:
+        void slotClick(QListViewItem *, const QPoint &pnt, int col);
+        void slotEditChanged(const QString &);
+        void slotAdd();
+        void slotDel();
+        void slotActivated(const QString &);
 };
 
 #endif

@@ -29,6 +29,7 @@
 #ifndef CHECKBOOK_H
 #define CHECKBOOK_H
 
+#include <qdatetime.h>
 #include <qdialog.h>
 #include <qlistview.h>
 
@@ -46,25 +47,29 @@ class QMultiLineEdit;
 class QString;
 class TranInfo;
 class TranInfoList;
+class Cfg;
 
+
+// --- Checkbook --------------------------------------------------------------
 class Checkbook : public QDialog
 {
 	Q_OBJECT
 
 	public:
-		Checkbook( QWidget * = 0x0, CBInfo * = 0x0, const QString & = "$" );
+		Checkbook( QWidget *, CBInfo *, Cfg *cfg );
 		~Checkbook();
 
+        // resort
+        void resort();
+
 	private:
-		CBInfo        *info;
+		CBInfo *info;
 		TranInfoList *tranList;
-		QString       currencySymbol;
-		int            highTranNum;
+        Cfg *_pCfg;
 
 		OTabWidget *mainWidget;
 		void        loadCheckbook();
 		void        adjustBalance();
-		TranInfo   *findTran( const QString &, const QString &, const QString & );
 
 		// Info tab
 		QWidget        *initInfo();
@@ -76,11 +81,13 @@ class Checkbook : public QDialog
 		QLineEdit      *pinNumEdit;
 		QLineEdit      *balanceEdit;
 		QMultiLineEdit *notesEdit;
+        int _sortCol;
 
 		// Transactions tab
-		QWidget   *initTransactions();
+		QWidget *initTransactions();
 		QListView *tranTable;
-		QLabel    *balanceLabel;
+		QComboBox *_cbSortType;
+        QDate _dLastNew;
 
 		// Charts tab
 		QWidget   *initCharts();
@@ -91,8 +98,10 @@ class Checkbook : public QDialog
 		void drawBalanceChart();
 		void drawCategoryChart( bool = TRUE );
 
+
 	protected slots:
 		void accept();
+        void slotTab(QWidget *tab);
 
 	private slots:
 		void slotPasswordClicked();
@@ -102,25 +111,32 @@ class Checkbook : public QDialog
 		void slotEditTran();
 		void slotDeleteTran();
 		void slotDrawGraph();
+        void slotSortChanged( const QString & );
 };
 
+// --- CBListItem -------------------------------------------------------------
 class CBListItem :  public QListViewItem
 {
 	//Q_OBJECT
 
 	public:
-		CBListItem( QListView *, QString = QString::null, QString = QString::null,
+		CBListItem( TranInfo *, QListView *, QString = QString::null, QString = QString::null,
 					 QString = QString::null, QString = QString::null, QString = QString::null,
 					 QString = QString::null, QString = QString::null, QString = QString::null );
 
 		void paintCell( QPainter *, const QColorGroup &, int, int, int );
 
+        // --- members
+        TranInfo *getTranInfo() { return(_pTran); }
+
 	private:
+        TranInfo *_pTran;
 		QListView *owner;
 		bool m_known;
 		bool m_odd;
 
 		bool isAltBackground();
 };
+
 
 #endif

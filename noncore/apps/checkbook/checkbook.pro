@@ -7,6 +7,9 @@ HEADERS   = mainwindow.h \
       password.h      \
       checkbook.h     \
       transaction.h   \
+      tabledef.h      \
+      listedit.h      \
+      cfg.h           \
       graph.h
 SOURCES   = main.cpp    \
       mainwindow.cpp    \
@@ -16,7 +19,10 @@ SOURCES   = main.cpp    \
       configuration.cpp \
       password.cpp      \
       checkbook.cpp     \
-      transaction.cpp   \ 
+      transaction.cpp   \
+      tabledef.cpp      \
+      listedit.cpp      \
+      cfg.cpp           \
       graph.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include

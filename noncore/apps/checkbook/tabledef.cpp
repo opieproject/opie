@@ -26,42 +26,51 @@
 
 */
 
-#ifndef CONFIGURATION_H
-#define CONFIGURATION_H
+#include "tabledef.h"
 
-#include <qdialog.h>
-#include "cfg.h"
+#include <qstring.h>
+#include <qpe/resource.h>
 
-class QCheckBox;
-class QLineEdit;
-class QString;
-class QTabWidget;
-class ListEdit;
-
-class Configuration : public QDialog
+// --- ColumnDef --------------------------------------------------------------
+ColumnDef::ColumnDef(const char *sName, ColumnType type, const char *sNewValue)
 {
-	Q_OBJECT
+    _sName=sName;
+    _type=type;
+    _sNewValue=sNewValue;
+}
 
-	public:
-        // Constructor
-		Configuration( QWidget *, Cfg &cfg);
-		~Configuration();
 
-		QLineEdit *symbolEdit;
-		QCheckBox *lockCB;
-		QCheckBox *balCB;
-        QCheckBox *openLastBookCB;
-        QCheckBox *lastTabCB;
-        QTabWidget *_mainWidget;
-        ListEdit *_listEditTypes;
-        ListEdit *_listEditCategories;
+// --- addColumnValue ---------------------------------------------------------
+void ColumnDef::addColumnValue(const QString &sValue)
+{
+    if( (_type & 0x00ffffff) !=typeList )
+        qDebug("Column %s is not a list", (const char *)_sName);
+    else
+        _valueList.append(sValue);
+}
+void ColumnDef::addColumnValue(const char *sValue)
+{
+    if( (_type & 0x00ffffff)!=typeList )
+        qDebug("Column %s is not a list", (const char *)_sName);
+    else
+        _valueList.append(sValue);
+}
 
-        // saves settings in config struct
-        void saveConfig(Cfg &cfg);
+// --- TableDef ---------------------------------------------------------------
+TableDef::TableDef(const char *sName)
+{
+    _sName=sName;
+    _vColumns.setAutoDelete(TRUE);
+}
 
-   protected:
-        // creates settings tap from configuration
-        QWidget *initSettings(Cfg &cfg);
-};
 
-#endif
+// --- ~TableDef --------------------------------------------------------------
+TableDef::~TableDef()
+{
+}
+
+// --- addColumnDef -----------------------------------------------------------
+void TableDef::addColumnDef(ColumnDef *pDef)
+{
+    _vColumns.append(pDef);
+}

@@ -26,10 +26,9 @@
 
 */
 
-#include "mainwindow.h"
-
 #include <qpe/qpeapplication.h>
 #include <opie/oapplicationfactory.h>
 
+#include "mainwindow.h"
 
 OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )

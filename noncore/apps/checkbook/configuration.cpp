@@ -27,48 +27,135 @@
 */
 
 #include "configuration.h"
+#include "mainwindow.h"
+#include "listedit.h"
+#include "tabledef.h"
 
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qwhatsthis.h>
+#include <qlistview.h>
+#include <qpushbutton.h>
+#include <qtabwidget.h>
+#include <qpe/resource.h>
 
-Configuration::Configuration( QWidget *parent, const QString &cs, bool sl, bool sb )
+Configuration::Configuration( QWidget *parent, Cfg &cfg )
 	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {
 	setCaption( tr( "Configure Checkbook" ) );
 
-	QFontMetrics fm = fontMetrics();
+    // Setup layout to make everything pretty
+	QVBoxLayout *layout = new QVBoxLayout( this );
+	layout->setMargin( 2 );
+	layout->setSpacing( 4 );
+
+	// Setup tabs for all info
+	_mainWidget = new QTabWidget( this );
+	layout->addWidget( _mainWidget );
+
+    // Settings tab
+    _mainWidget->addTab( initSettings(cfg), tr( "&Settings" ) );
+
+    // Account Types tab
+    ColumnDef *d;
+    _listEditTypes=new ListEdit(_mainWidget, "TYPES" );
+    d=new ColumnDef( tr("Type"), (ColumnDef::ColumnType)(ColumnDef::typeString | ColumnDef::typeUnique), tr("New Account Type"));
+    _listEditTypes->addColumnDef( d );
+    _listEditTypes->addData( cfg.getAccountTypes() );
+    _mainWidget->addTab( _listEditTypes, tr( "&Account Types" ) );
+
+    // Categories tab
+    _listEditCategories=new ListEdit(_mainWidget, "CATEGORIES" );
+    _listEditCategories->addColumnDef( new ColumnDef( tr("Category"), (ColumnDef::ColumnType)(ColumnDef::typeString | ColumnDef::typeUnique), tr("New Category")) );
+    d=new ColumnDef(  tr("Type"), ColumnDef::typeList, tr("Expense") );
+    d->addColumnValue( tr("Expense") );
+    d->addColumnValue( tr("Income") );
+    _listEditCategories->addColumnDef( d );
+    QStringList lst=cfg.getCategories();
+    _listEditCategories->addData( lst );
+    _mainWidget->addTab( _listEditCategories, tr( "&Categories" ) );
+}
+
+Configuration::~Configuration()
+{
+}
+
+// ---- initSettings ----------------------------------------------------------
+QWidget *Configuration::initSettings(Cfg &cfg)
+{
+    QWidget *control = new QWidget( _mainWidget );
+
+    QFontMetrics fm = fontMetrics();
 	int fh = fm.height();
 
-	QGridLayout *layout = new QGridLayout( this );
+    QVBoxLayout *vb = new QVBoxLayout( control );
+
+	QScrollView *sv = new QScrollView( control );
+	vb->addWidget( sv, 0, 0 );
+	sv->setResizePolicy( QScrollView::AutoOneFit );
+	sv->setFrameStyle( QFrame::NoFrame );
+
+	QWidget *container = new QWidget( sv->viewport() );
+	sv->addChild( container );
+
+	QGridLayout *layout = new QGridLayout( container );
 	layout->setSpacing( 4 );
 	layout->setMargin( 4 );
 
-	QLabel *label = new QLabel( tr( "Enter currency symbol:" ), this );
+	QLabel *label = new QLabel( tr( "Enter currency symbol:" ), container );
 	QWhatsThis::add( label, tr( "Enter your local currency symbol here." ) );
 	label->setMaximumHeight( fh + 3 );
 	layout->addWidget( label, 0, 0 );
 
-	symbolEdit = new QLineEdit( cs, this );
+	symbolEdit = new QLineEdit( cfg.getCurrencySymbol(), container );
 	QWhatsThis::add( symbolEdit, tr( "Enter your local currency symbol here." ) );
 	symbolEdit->setMaximumHeight( fh + 5 );
 	symbolEdit->setFocus();
     layout->addWidget( symbolEdit, 0, 1 );
 
-	lockCB = new QCheckBox( tr( "Show whether checkbook is password\nprotected" ), this );
+	lockCB = new QCheckBox( tr( "Show whether checkbook is password\nprotected" ), container );
 	QWhatsThis::add( lockCB, tr( "Click here to select whether or not the main window will display that the checkbook is protected with a password." ) );
-	lockCB->setChecked( sl );
+	lockCB->setChecked( cfg.getShowLocks() );
 	layout->addMultiCellWidget( lockCB, 1, 1, 0, 1 );
 
-	balCB = new QCheckBox( tr( "Show checkbook balances" ), this );
+	balCB = new QCheckBox( tr( "Show checkbook balances" ), container );
 	QWhatsThis::add( balCB, tr( "Click here to select whether or not the main window will display the current balance for each checkbook." ) );
 	balCB->setMaximumHeight( fh + 5 );
-	balCB->setChecked( sb );
+	balCB->setChecked( cfg.getShowBalances() );
 	layout->addMultiCellWidget( balCB, 2, 2, 0, 1 );
+
+    openLastBookCB = new QCheckBox( tr("Open last checkbook" ), container );
+    QWhatsThis::add( openLastBookCB, tr("Click here to select whether the last open checkbook will be opened at startup.") );
+    openLastBookCB->setMaximumHeight(fh+5);
+    openLastBookCB->setChecked( cfg.isOpenLastBook() );
+    layout->addMultiCellWidget( openLastBookCB, 3, 3, 0, 1 );
+
+    lastTabCB = new QCheckBox( tr("Show last checkbook tab" ), container );
+    QWhatsThis::add( lastTabCB, tr("Click here to select whether the last tab in a checkbook should be displayed.") );
+    lastTabCB->setMaximumHeight(fh+5);
+    lastTabCB->setChecked( cfg.isShowLastTab() );
+    layout->addMultiCellWidget( lastTabCB, 4, 4, 0, 1 );
+
+    return(control);
 }
 
-Configuration::~Configuration()
+// --- saveConfig -------------------------------------------------------------
+void Configuration::saveConfig(Cfg &cfg)
 {
+    // Settings
+    cfg.setCurrencySymbol( symbolEdit->text() );
+    cfg.setShowLocks( lockCB->isChecked() );
+    cfg.setShowBalances( balCB->isChecked() );
+    cfg.setOpenLastBook( openLastBookCB->isChecked() );
+    cfg.setShowLastTab( lastTabCB->isChecked() );
+
+    // Typelist
+    _listEditTypes->storeInList( cfg.getAccountTypes() );
+
+    // Category list
+    QStringList lst;
+    _listEditCategories->storeInList( lst );
+    cfg.setCategories( lst );
 }
