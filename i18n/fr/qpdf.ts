@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>File does not exist!</source>
-        <translation type="unfinished"></translation>
+        <translation>Le fichier n&apos;existe pas !</translation>
     </message>
 </context>
 </TS>

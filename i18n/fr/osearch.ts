@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation type="unfinished"></translation>
+        <translation>Sensible à la casse</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -78,7 +78,7 @@
     </message>
     <message>
         <source>search in dates</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche dates</translation>
     </message>
     <message>
         <source>show</source>
@@ -114,7 +114,7 @@
     </message>
     <message>
         <source>search content</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher contenu</translation>
     </message>
     <message>
         <source>searching %1</source>

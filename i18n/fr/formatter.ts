@@ -175,40 +175,48 @@ a réussi a être monté. </translation>
 Changing parameters on this
 page may cause your system
 to stop functioning properly!</source>
-        <translation type="unfinished"></translation>
+        <translation>AVERTISSEMENT:
+Changer les paramêtres de
+cette page peut causer un
+disfonctionnement de votre système !</translation>
     </message>
     <message>
         <source>Format?</source>
-        <translation type="unfinished"></translation>
+        <translation>Format ?</translation>
     </message>
     <message>
         <source>
 with %1 filesystem?
 You will loose all data!!</source>
-        <translation type="unfinished"></translation>
+        <translation>
+en %1 ?
+Toutes vos données vont être effacées !!</translation>
     </message>
     <message>
         <source>Trying to umount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Démontage de %1.</translation>
     </message>
     <message>
         <source>Trying to mount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Montage de %1.</translation>
     </message>
     <message>
         <source>%1
 has been successfully mounted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%
+a été monté avec succès.</translation>
     </message>
     <message>
         <source>Storage Type: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Type du média : %1</translation>
     </message>
     <message>
         <source>Type: %1
 Formatted with %2
 %3, %4, %5</source>
-        <translation type="unfinished"></translation>
+        <translation>Type : %1
+Formaté avec %2
+%3, %4, %5</translation>
     </message>
 </context>
 </TS>

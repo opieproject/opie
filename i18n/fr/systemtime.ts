@@ -122,11 +122,11 @@ ntpdate</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez demandé un delai de %1 minutes, mais seulement %2 minutes se sont écoulés.&lt;br&gt;Continuer ?</translation>
     </message>
     <message>
         <source>%1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 secondes</translation>
     </message>
 </context>
 <context>

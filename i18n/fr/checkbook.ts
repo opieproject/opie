@@ -520,7 +520,7 @@ La valeur entrée devrait toujours être positive.</translation>
     </message>
     <message>
         <source>Electronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Electroniques</translation>
     </message>
 </context>
 </TS>

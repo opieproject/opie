@@ -52,74 +52,74 @@ fichier.</translation>
     <name>OpieObex::OtherHandler</name>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;Received:&lt;/b&gt;&lt;/qt&gt;</source>
-        <translation type="unfinished">&lt;qt&gt;&lt;b&gt;Recevoir :&lt;/b&gt;&lt;/qt&gt;</translation>
+        <translation>&lt;qt&gt;&lt;b&gt;Recevoir :&lt;/b&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Accept</source>
-        <translation type="unfinished">Accepter</translation>
+        <translation>Accepter</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation type="unfinished">Refuser</translation>
+        <translation>Refuser</translation>
     </message>
     <message>
         <source>&lt;p&gt;You received a file of type %1 (&lt;img src=&quot;%2&quot;&gt; )What do you want to do?</source>
-        <translation type="unfinished">&lt;p&gt;Vous avez reçu un fichier du type %1 (&lt;img src=&quot;%2&quot;&gt; )Que voulez-vous faire ?</translation>
+        <translation>&lt;p&gt;Vous avez reçu un fichier du type %1 (&lt;img src=&quot;%2&quot;&gt; )Que voulez-vous faire ?</translation>
     </message>
 </context>
 <context>
     <name>OpieObex::SendWidget</name>
     <message>
         <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
-        <translation type="unfinished">&lt;qt&gt;&lt;h1&gt;Envoie :&lt;/h1&gt;&lt;/qt&gt;</translation>
+        <translation>&lt;qt&gt;&lt;h1&gt;Envoie :&lt;/h1&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished">Terminé</translation>
+        <translation>Terminé</translation>
     </message>
     <message>
         <source>IrDa is not enabled!</source>
-        <translation type="unfinished">IrDa non activé !</translation>
+        <translation>IrDa non activé !</translation>
     </message>
     <message>
         <source>Searching for IrDa Devices.</source>
-        <translation type="unfinished">Recherche des Dispositifs IrDa.</translation>
+        <translation>Recherche des Dispositifs IrDa.</translation>
     </message>
     <message>
         <source>Bluetooth is not available</source>
-        <translation type="unfinished">Bluetooth n&apos;est pas disponible</translation>
+        <translation>Bluetooth n&apos;est pas disponible</translation>
     </message>
     <message>
         <source>Searching for bluetooth Devices.</source>
-        <translation type="unfinished">Recherche des Dispositifs Bluetooth.</translation>
+        <translation>Recherche des Dispositifs Bluetooth.</translation>
     </message>
     <message>
         <source>Scheduling for beam.</source>
-        <translation type="unfinished">Préparation de l&apos;envoie.</translation>
+        <translation>Préparation de l&apos;envoi.</translation>
     </message>
     <message>
         <source>Click to beam</source>
-        <translation type="unfinished">Cliquez pour envoyer</translation>
+        <translation>Cliquez pour envoyer</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished">Envoyé</translation>
+        <translation>Envoyé</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished">Echéc</translation>
+        <translation>Echec</translation>
     </message>
     <message>
         <source>Try %1</source>
-        <translation type="unfinished">Essayer %1</translation>
+        <translation>Essayer %1</translation>
     </message>
     <message>
         <source>Search again for IrDa.</source>
-        <translation type="unfinished">Recherche IrDa à nouveau.</translation>
+        <translation>Recherche IrDa à nouveau.</translation>
     </message>
     <message>
         <source>Start sending</source>
-        <translation type="unfinished">Début de l&apos;envoie</translation>
+        <translation>Début de l&apos;envoi</translation>
     </message>
 </context>
 <context>

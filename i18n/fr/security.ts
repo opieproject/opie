@@ -105,15 +105,15 @@ Accès refusé</translation>
     </message>
     <message>
         <source>Passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de Passe</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de connexion</translation>
     </message>
     <message>
         <source>Login Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Connexion Automatique</translation>
     </message>
 </context>
 </TS>

@@ -262,21 +262,24 @@ Ce n&apos;en est pas un!!</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;effacer le répertoire courant
+des favoris.
+Ce n&apos;est pas un favoris !</translation>
     </message>
     <message>
         <source>File Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher Fichier</translation>
     </message>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous réellement supprimer %1
+et tout son contenu ?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmer l&apos;effacement de %1 ?</translation>
     </message>
 </context>
 <context>
@@ -291,18 +294,21 @@ and all it&apos;s contents ?</source>
     </message>
     <message>
         <source>Process could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>Le processus n&apos;a pas pu démarrer</translation>
     </message>
     <message>
         <source>Error
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur
+</translation>
     </message>
     <message>
         <source>
 Finished
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Terminé
+</translation>
     </message>
 </context>
 <context>
@@ -349,23 +355,23 @@ Finished
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Avertissement</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur - aucun utilisateur</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur - aucun group</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors du changement de group</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors du changement de mode</translation>
     </message>
 </context>
 </TS>

@@ -20,15 +20,15 @@
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer</translation>
     </message>
 </context>
 <context>
@@ -103,23 +103,23 @@
     </message>
     <message>
         <source>Opie-Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie-Dictionary</translation>
     </message>
     <message>
         <source>No dictionary defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucun dictionnaire défini</translation>
     </message>
     <message>
         <source>&amp;Define one</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;En Définir Un</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration</translation>
     </message>
 </context>
 <context>

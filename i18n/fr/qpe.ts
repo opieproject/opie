@@ -184,7 +184,7 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished">Status Batterie</translation>
+        <translation>Status Batterie</translation>
     </message>
 </context>
 <context>
