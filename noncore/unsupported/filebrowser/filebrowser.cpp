@@ -20,7 +20,7 @@
 
 #include "inlineedit.h"
 #include "filebrowser.h"
-
+#include "filePermissions.h"
 #include <qpe/resource.h>
 #include <qpe/global.h>
 #include <qpe/mimetype.h>
@@ -60,27 +60,27 @@ FileItem::FileItem( QListView * parent, const QFileInfo & fi )
     MimeType mt(fi.filePath());
 
     if( fi.isDir() )
-	setText( 3, "directory" );
+  setText( 3, "directory" );
     else if( isLib() )
-	setText( 3, "library" );
+  setText( 3, "library" );
     else
-	setText( 3, mt.description() );
+  setText( 3, mt.description() );
 
     QPixmap pm;
     if( fi.isDir() ){
-	if( !QDir( fi.filePath() ).isReadable() )
-	    pm = Resource::loadPixmap( "lockedfolder" );
-	else
-	    pm = Resource::loadPixmap( "folder" );
+  if( !QDir( fi.filePath() ).isReadable() )
+      pm = Resource::loadPixmap( "lockedfolder" );
+  else
+      pm = Resource::loadPixmap( "folder" );
     }
     else if( !fi.isReadable() )
-	pm = Resource::loadPixmap( "locked" );
+  pm = Resource::loadPixmap( "locked" );
     else if( isLib() )
-	pm = Resource::loadPixmap( "library" );
+  pm = Resource::loadPixmap( "library" );
     else
-	pm = mt.pixmap();
+  pm = mt.pixmap();
     if ( pm.isNull() )
-	pm = Resource::loadPixmap("UnknownDocument-14");
+  pm = Resource::loadPixmap("UnknownDocument-14");
     setPixmap(0,pm);
 }
 
@@ -89,13 +89,13 @@ QString FileItem::sizeString( unsigned int s )
     double size = s;
 
     if ( size > 1024 * 1024 * 1024 )
-		return QString().sprintf( "%.1f", size / ( 1024 * 1024 * 1024 ) ) + "G";
+    return QString().sprintf( "%.1f", size / ( 1024 * 1024 * 1024 ) ) + "G";
     else if ( size > 1024 * 1024 )
-		return QString().sprintf( "%.1f", size / ( 1024 * 1024 ) ) + "M";
+    return QString().sprintf( "%.1f", size / ( 1024 * 1024 ) ) + "M";
     else if ( size > 1024 )
-		return QString().sprintf( "%.1f", size / ( 1024 ) ) + "K";
+    return QString().sprintf( "%.1f", size / ( 1024 ) ) + "K";
     else
-		return QString::number( size ) + "B";
+    return QString::number( size ) + "B";
 }
 
 QString FileItem::key( int column, bool ascending ) const
@@ -105,17 +105,17 @@ QString FileItem::key( int column, bool ascending ) const
     ascending = ascending;
 
     if( (column == 0) && fileInfo.isDir() ){ // Sort by name
-		// We want the directories to appear at the top of the list
-		tmp = (char) 0;
-		return (tmp + text( column ).lower());
+    // We want the directories to appear at the top of the list
+    tmp = (char) 0;
+    return (tmp + text( column ).lower());
     }
     else if( column == 2 ) { // Sort by date
-		QDateTime epoch( QDate( 1980, 1, 1 ) );
+    QDateTime epoch( QDate( 1980, 1, 1 ) );
         tmp.sprintf( "%08d", epoch.secsTo( fileInfo.lastModified() ) );
-		return tmp;
+    return tmp;
     }
     else if( column == 1 ) { // Sort by size
-		return tmp.sprintf( "%08d", fileInfo.size() );
+    return tmp.sprintf( "%08d", fileInfo.size() );
     }
 
     return text( column ).lower();
@@ -125,11 +125,11 @@ bool FileItem::isLib()
 {
     // This is of course not foolproof
     if( !qstrncmp("lib", fileInfo.baseName(), 3) &&
-		( fileInfo.extension().contains( "so" ) ||
-		  fileInfo.extension().contains( "a" ) ) )
-		return TRUE;
+    ( fileInfo.extension().contains( "so" ) ||
+      fileInfo.extension().contains( "a" ) ) )
+    return TRUE;
     else
-		return FALSE;
+    return FALSE;
 }
 
 int FileItem::launch()
@@ -145,25 +145,25 @@ bool FileItem::rename( const QString & name )
     QString oldpath, newpath;
 
     if ( name.isEmpty() )
-		return FALSE;
+    return FALSE;
 
     if ( name.contains( QRegExp("[/\\$\"\'\\*\\?]") ) )
-		return FALSE;
+    return FALSE;
 
     oldpath = fileInfo.filePath();
     newpath = fileInfo.dirPath() + "/" + name;
 
     if ( ::rename( (const char *) oldpath, (const char *) newpath ) != 0 )
-		return FALSE;
+    return FALSE;
     else
-		return TRUE;
+    return TRUE;
 }
 
 //
 //  FileView
 //
 FileView::FileView( const QString & dir, QWidget * parent,
-					const char * name )
+          const char * name )
     : QListView( parent, name ),
       menuTimer( this ),
       le( NULL ),
@@ -186,9 +186,9 @@ FileView::FileView( const QString & dir, QWidget * parent,
     generateDir( dir );
 
     connect( this, SIGNAL( clicked( QListViewItem * )),
-			 SLOT( itemClicked( QListViewItem * )) );
+       SLOT( itemClicked( QListViewItem * )) );
     connect( this, SIGNAL( doubleClicked( QListViewItem * )),
-			 SLOT( itemDblClicked( QListViewItem * )) );
+       SLOT( itemDblClicked( QListViewItem * )) );
     connect( this, SIGNAL( selectionChanged() ), SLOT( cancelMenuTimer() ) );
     connect( &menuTimer, SIGNAL( timeout() ), SLOT( showFileMenu() ) );
 }
@@ -210,9 +210,9 @@ void FileView::updateDir()
 void FileView::setDir( const QString & dir )
 {
     if ( dir.startsWith( "/dev" ) ) {
-	QMessageBox::warning( this, tr( "File Manager" ),
-			      tr( "Can't show /dev/ directory." ), tr( "&Ok" ) );
-	return;
+  QMessageBox::warning( this, tr( "File Manager" ),
+            tr( "Can't show /dev/ directory." ), tr( "&Ok" ) );
+  return;
     }
     dirHistory += currentDir;
     generateDir( dir );
@@ -228,7 +228,7 @@ void FileView::generateDir( const QString & dir )
 
     d.setFilter( QDir::Dirs | QDir::Files );
     d.setSorting( QDir::Name | QDir::DirsFirst | QDir::IgnoreCase |
-				  QDir::Reversed );
+          QDir::Reversed );
 
     const QFileInfoList * list = d.entryInfoList();
     QFileInfoListIterator it( *list );
@@ -236,12 +236,12 @@ void FileView::generateDir( const QString & dir )
 
     clear();
     while( (fi = it.current()) ){
-		if( (fi->fileName() == ".") || (fi->fileName() == "..") ){
-			++it;
-			continue;
-		}
-		(void) new FileItem( (QListView *) this, *fi );
-		++it;
+    if( (fi->fileName() == ".") || (fi->fileName() == "..") ){
+      ++it;
+      continue;
+    }
+    (void) new FileItem( (QListView *) this, *fi );
+    ++it;
     }
 
     emit dirChanged();
@@ -256,9 +256,9 @@ void FileView::rename()
     if( itemToRename == NULL ) return;
 
     if( ( pm = itemToRename->pixmap( 0 ) ) == NULL )
-		pmw = 0;
+    pmw = 0;
     else
-		pmw = pm->width();
+    pmw = pm->width();
 
     ensureItemVisible( itemToRename );
     horizontalScrollBar()->setValue( 0 );
@@ -269,9 +269,9 @@ void FileView::rename()
     setSelected( itemToRename, FALSE );
 
     if( le == NULL ){
-		le = new InlineEdit( this );
-		le->setFrame( FALSE );
-		connect( le, SIGNAL( lostFocus() ), SLOT( endRenaming() ) );
+    le = new InlineEdit( this );
+    le->setFrame( FALSE );
+    connect( le, SIGNAL( lostFocus() ), SLOT( endRenaming() ) );
     }
 
     QRect r = itemRect( itemToRename );
@@ -290,18 +290,18 @@ void FileView::rename()
 void FileView::endRenaming()
 {
     if( le && itemToRename ){
-		le->hide();
-		setSelected( itemToRename, selected );
+    le->hide();
+    setSelected( itemToRename, selected );
 
-		if( !itemToRename->rename( le->text() ) ){
-			QMessageBox::warning( this, tr( "Rename file" ),
-								  tr( "Rename failed!" ), tr( "&Ok" ) );
-		} else {
-			updateDir();
-		}
-		itemToRename = NULL;
-		horizontalScrollBar()->setEnabled( TRUE );
-		verticalScrollBar()->setEnabled( TRUE );
+    if( !itemToRename->rename( le->text() ) ){
+      QMessageBox::warning( this, tr( "Rename file" ),
+                  tr( "Rename failed!" ), tr( "&Ok" ) );
+    } else {
+      updateDir();
+    }
+    itemToRename = NULL;
+    horizontalScrollBar()->setEnabled( TRUE );
+    verticalScrollBar()->setEnabled( TRUE );
     }
 }
 
@@ -318,10 +318,10 @@ void FileView::copy()
 
     flist.clear();
     while( i ){
-		if( i->isSelected() /*&& !i->isDir()*/ ){
-			flist += i->getFilePath();
-		}
-		i = (FileItem *) i->nextSibling();
+    if( i->isSelected() /*&& !i->isDir()*/ ){
+      flist += i->getFilePath();
+    }
+    i = (FileItem *) i->nextSibling();
     }
 }
 
@@ -333,49 +333,49 @@ void FileView::paste()
     if(cd == "/") cd = "";
 
     for ( QStringList::Iterator it = flist.begin(); it != flist.end(); ++it ) {
-		basename = (*it).mid((*it).findRev("/") + 1, (*it).length());
+    basename = (*it).mid((*it).findRev("/") + 1, (*it).length());
 
-		dest = cd + "/" + basename;
-		if( QFile( dest ).exists() ){
-			i = 1;
-			dest = cd + "/Copy of " + basename;
-			while( QFile( dest ).exists() ){
-				dest.sprintf( "%s/Copy (%d) of %s", (const char *) cd, i++,
-							  (const char *) basename );
-			}
-		}
+    dest = cd + "/" + basename;
+    if( QFile( dest ).exists() ){
+      i = 1;
+      dest = cd + "/Copy of " + basename;
+      while( QFile( dest ).exists() ){
+        dest.sprintf( "%s/Copy (%d) of %s", (const char *) cd, i++,
+                (const char *) basename );
+      }
+    }
 
-		//
-		// Copy a directory recursively using the "cp" command -
-		// may have to be changed
-		//
-		if( QFileInfo( (*it) ).isDir() ){
-			cmd = "/bin/cp -fpR \"" + (*it) +"\" " + "\"" + dest + "\"";
-			err = system( (const char *) cmd );
-		} else if( !copyFile( dest, (*it) ) ){
-			err = -1;
-		} else {
-			err = 0;
-		}
+    //
+    // Copy a directory recursively using the "cp" command -
+    // may have to be changed
+    //
+    if( QFileInfo( (*it) ).isDir() ){
+      cmd = "/bin/cp -fpR \"" + (*it) +"\" " + "\"" + dest + "\"";
+      err = system( (const char *) cmd );
+    } else if( !copyFile( dest, (*it) ) ){
+      err = -1;
+    } else {
+      err = 0;
+    }
 
-		if ( err != 0 ) {
-			QMessageBox::warning( this, tr("Paste file"), tr("Paste failed!"),
-								  tr("Ok") );
-			break;
-		} else {
-			updateDir();
-			QListViewItem * i = firstChild();
-			basename = dest.mid( dest.findRev("/") + 1, dest.length() );
+    if ( err != 0 ) {
+      QMessageBox::warning( this, tr("Paste file"), tr("Paste failed!"),
+                  tr("Ok") );
+      break;
+    } else {
+      updateDir();
+      QListViewItem * i = firstChild();
+      basename = dest.mid( dest.findRev("/") + 1, dest.length() );
 
-			while( i ){
-				if( i->text(0) == basename ){
-					setCurrentItem( i );
-					ensureItemVisible( i );
-					break;
-				}
-				i = i->nextSibling();
-			}
-		}
+      while( i ){
+        if( i->text(0) == basename ){
+          setCurrentItem( i );
+          ensureItemVisible( i );
+          break;
+        }
+        i = i->nextSibling();
+      }
+    }
     }
 }
 
@@ -390,26 +390,26 @@ bool FileView::copyFile( const QString & dest, const QString & src )
     QFile d( dest );
 
     if( s.open( IO_ReadOnly | IO_Raw ) &&
-		d.open( IO_WriteOnly | IO_Raw ) )
+    d.open( IO_WriteOnly | IO_Raw ) )
     {
-		while( (bytesRead = s.readBlock( bf, sizeof( bf ) )) ==
-			   sizeof( bf ) )
-		{
-			if( d.writeBlock( bf, sizeof( bf ) ) != sizeof( bf ) ){
-				success = FALSE;
-				break;
-			}
-		}
-		if( success && (bytesRead > 0) ){
-			d.writeBlock( bf, bytesRead );
-		}
+    while( (bytesRead = s.readBlock( bf, sizeof( bf ) )) ==
+         sizeof( bf ) )
+    {
+      if( d.writeBlock( bf, sizeof( bf ) ) != sizeof( bf ) ){
+        success = FALSE;
+        break;
+      }
+    }
+    if( success && (bytesRead > 0) ){
+      d.writeBlock( bf, bytesRead );
+    }
     } else {
-		success = FALSE;
+    success = FALSE;
     }
 
     // Set file permissions
     if( stat( (const char *) src, &status ) == 0 ){
-		chmod( (const char *) dest, status.st_mode );
+    chmod( (const char *) dest, status.st_mode );
     }
 
     return success;
@@ -421,13 +421,13 @@ void FileView::cut()
     // ##### a better inmplementation might be to rename the CUT file
     // ##### to ".QPE-FILEBROWSER-MOVING" rather than copying it.
     QString cmd, dest, basename, cd = "/tmp/qpemoving";
-	QStringList newflist;
-	newflist.clear();
-	
-	cmd = "rm -rf " + cd;
-	system ( (const char *) cmd );
-	cmd = "mkdir " + cd;
-	system( (const char *) cmd );
+  QStringList newflist;
+  newflist.clear();
+  
+  cmd = "rm -rf " + cd;
+  system ( (const char *) cmd );
+  cmd = "mkdir " + cd;
+  system( (const char *) cmd );
 
 // get the names of the files to cut
     FileItem * item;
@@ -448,7 +448,7 @@ void FileView::cut()
  
         dest = cd + "/" + basename;
 
-		newflist += dest;
+    newflist += dest;
  
         cmd = "/bin/mv -f \"" + (*it) +"\" " + "\"" + dest + "\"";
         err = system( (const char *) cmd );
@@ -473,8 +473,8 @@ void FileView::cut()
         }
     }
 
-	// update the filelist to point to tmp dir so paste works nicely
-	flist = newflist;
+  // update the filelist to point to tmp dir so paste works nicely
+  flist = newflist;
 }
 
 void FileView::del()
@@ -487,29 +487,29 @@ void FileView::del()
     if((i = (FileItem *) firstChild()) == 0) return;
 
     while( i ){
-		if( i->isSelected() ){
-			fl += i->getFilePath();
-		}
-		i = (FileItem *) i->nextSibling();
+    if( i->isSelected() ){
+      fl += i->getFilePath();
+    }
+    i = (FileItem *) i->nextSibling();
     }
     if( fl.count() < 1 ) return;
 
     if( QMessageBox::warning( this, tr("Delete"), tr("Are you sure?"),
-							  tr("Yes"), tr("No") ) == 0)
+                tr("Yes"), tr("No") ) == 0)
     {
-		//
-		// Dependant upon the "rm" command - will probably have to be replaced
-		//
-		for ( QStringList::Iterator it = fl.begin(); it != fl.end(); ++it ) {
-			cmd = "/bin/rm -rf \"" + (*it) + "\"";
-			err = system( (const char *) cmd );
-			if ( err != 0 ) {
-				QMessageBox::warning( this, tr("Delete"), tr("Delete failed!"),
-									  tr("Ok") );
-				break;
-			}
-		}
-		updateDir();
+    //
+    // Dependant upon the "rm" command - will probably have to be replaced
+    //
+    for ( QStringList::Iterator it = fl.begin(); it != fl.end(); ++it ) {
+      cmd = "/bin/rm -rf \"" + (*it) + "\"";
+      err = system( (const char *) cmd );
+      if ( err != 0 ) {
+        QMessageBox::warning( this, tr("Delete"), tr("Delete failed!"),
+                    tr("Ok") );
+        break;
+      }
+    }
+    updateDir();
     }
 }
 
@@ -520,26 +520,26 @@ void FileView::newFolder()
     QString nd = currentDir + "/NewFolder";
 
     while( QFile( nd ).exists() ){
-		nd.sprintf( "%s/NewFolder (%d)", (const char *) currentDir, t++ );
+    nd.sprintf( "%s/NewFolder (%d)", (const char *) currentDir, t++ );
     }
 
     if( mkdir( (const char *) nd, 0777 ) != 0){
-		QMessageBox::warning( this, tr( "New folder" ),
-							  tr( "Folder creation failed!" ),
-							  tr( "Ok" ) );
-		return;
+    QMessageBox::warning( this, tr( "New folder" ),
+                tr( "Folder creation failed!" ),
+                tr( "Ok" ) );
+    return;
     }
     updateDir();
 
     if((i = (FileItem *) firstChild()) == 0) return;
 
     while( i ){
-		if( i->isDir() && ( i->getFilePath() == nd ) ){
-			setCurrentItem( i );
-			rename();
-			break;
-		}
-		i = (FileItem *) i->nextSibling();
+    if( i->isDir() && ( i->getFilePath() == nd ) ){
+      setCurrentItem( i );
+      rename();
+      break;
+    }
+    i = (FileItem *) i->nextSibling();
     }
 }
 
@@ -555,7 +555,7 @@ void FileView::itemClicked( QListViewItem * i)
 
     if( t == NULL ) return;
     if( t->isDir() ){
-	setDir( t->getFilePath() );
+  setDir( t->getFilePath() );
     }
 }
 
@@ -565,8 +565,8 @@ void FileView::itemDblClicked( QListViewItem * i)
 
     if(t == NULL) return;
     if(t->launch() == -1){
-		QMessageBox::warning( this, tr( "Launch Application" ),
-							  tr( "Launch failed!" ), tr( "Ok" ) );
+    QMessageBox::warning( this, tr( "Launch Application" ),
+                tr( "Launch failed!" ), tr( "Ok" ) );
     }
 }
 
@@ -599,7 +599,7 @@ void FileView::contentsMouseReleaseEvent( QMouseEvent * e )
 void FileView::cancelMenuTimer()
 {
     if( menuTimer.isActive() )
-		menuTimer.stop();
+    menuTimer.stop();
 }
 
 void FileView::addToDocuments()
@@ -623,37 +623,38 @@ void FileView::showFileMenu()
 {
     FileItem * i = (FileItem *) currentItem();
     if ( !i )
-		return;
+    return;
 
     QPopupMenu * m = new QPopupMenu( this );
 
     if ( !i->isDir() ) {
-		m->insertItem( tr( "Add to Documents" ), this, SLOT( addToDocuments() ) );
-		m->insertSeparator();
+    m->insertItem( tr( "Add to Documents" ), this, SLOT( addToDocuments() ) );
+    m->insertSeparator();
     }
 
     MimeType mt(i->getFilePath());
     const AppLnk* app = mt.application();
 
     if ( !i->isDir() ) {
-		if ( app )
-			m->insertItem( app->pixmap(), tr( "Open in " + app->name() ), this, SLOT( run() ) );
-		else if( i->isExecutable() )
-			m->insertItem( Resource::loadPixmap( i->text( 0 ) ), tr( "Run" ), this, SLOT( run() ) );
+    if ( app )
+      m->insertItem( app->pixmap(), tr( "Open in " + app->name() ), this, SLOT( run() ) );
+    else if( i->isExecutable() )
+      m->insertItem( Resource::loadPixmap( i->text( 0 ) ), tr( "Run" ), this, SLOT( run() ) );
 
-		m->insertItem( Resource::loadPixmap( "txt" ), tr( "View as text" ),
-					   this, SLOT( viewAsText() ) );
+    m->insertItem( Resource::loadPixmap( "txt" ), tr( "View as text" ),
+             this, SLOT( viewAsText() ) );
 
-		m->insertSeparator();
+    m->insertSeparator();
     }
 
     m->insertItem( tr( "Rename" ), this, SLOT( rename() ) );
     m->insertItem( Resource::loadPixmap("cut"),
-				    tr( "Cut" ), this, SLOT( cut() ) );
+            tr( "Cut" ), this, SLOT( cut() ) );
     m->insertItem( Resource::loadPixmap("copy"),
-				   tr( "Copy" ), this, SLOT( copy() ) );
+           tr( "Copy" ), this, SLOT( copy() ) );
     m->insertItem( Resource::loadPixmap("paste"),
-				   tr( "Paste" ), this, SLOT( paste() ) );
+           tr( "Paste" ), this, SLOT( paste() ) );
+    m->insertItem( tr( "change permissions" ), this, SLOT( chPerm() ) );
     m->insertItem( tr( "Delete" ), this, SLOT( del() ) );
     m->insertSeparator();
     m->insertItem( tr( "Select all" ), this, SLOT( selectAll() ) );
@@ -666,14 +667,14 @@ void FileView::showFileMenu()
 //
 
 FileBrowser::FileBrowser( QWidget * parent,
-						  const char * name, WFlags f ) :
+              const char * name, WFlags f ) :
     QMainWindow( parent, name, f )
 {
     init( QDir::current().canonicalPath() );
 }
 
 FileBrowser::FileBrowser( const QString & dir, QWidget * parent,
-						  const char * name, WFlags f ) :
+              const char * name, WFlags f ) :
     QMainWindow( parent, name, f )
 {
     init( dir );
@@ -712,33 +713,33 @@ void FileBrowser::init(const QString & dir)
     toolBar = new QPEToolBar( this );
 
     lastAction = new QAction( tr("Previous dir"), Resource::loadIconSet( "back" ),
-							  QString::null, 0, this, 0 );
+                QString::null, 0, this, 0 );
     connect( lastAction, SIGNAL( activated() ), fileView, SLOT( lastDir() ) );
     lastAction->addTo( toolBar );
     lastAction->setEnabled( FALSE );
 
     upAction = new QAction( tr("Parent dir"), Resource::loadIconSet( "up" ),
-					 QString::null, 0, this, 0 );
+           QString::null, 0, this, 0 );
     connect( upAction, SIGNAL( activated() ), fileView, SLOT( parentDir() ) );
     upAction->addTo( toolBar );
 
     QAction *a = new QAction( tr("New folder"), Resource::loadPixmap( "newfolder" ),
-					 QString::null, 0, this, 0 );
+           QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), fileView, SLOT( newFolder() ) );
     a->addTo( toolBar );
 
     a = new QAction( tr("Cut"), Resource::loadPixmap( "cut" ),
-					 QString::null, 0, this, 0 );
+           QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), fileView, SLOT( cut() ) );
     a->addTo( toolBar );
 
     a = new QAction( tr("Copy"), Resource::loadPixmap( "copy" ),
-					 QString::null, 0, this, 0 );
+           QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), fileView, SLOT( copy() ) );
     a->addTo( toolBar );
 
     pasteAction = new QAction( tr("Paste"), Resource::loadPixmap( "paste" ),
-							   QString::null, 0, this, 0 );
+                 QString::null, 0, this, 0 );
     connect( pasteAction, SIGNAL( activated() ), fileView, SLOT( paste() ) );
     pasteAction->addTo( toolBar );
 
@@ -748,13 +749,13 @@ void FileBrowser::init(const QString & dir)
 
     QCopChannel* pcmciaChannel = new QCopChannel( "QPE/Card", this );
     connect( pcmciaChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-	 this, SLOT(pcmciaMessage( const QCString &, const QByteArray &)) );
+   this, SLOT(pcmciaMessage( const QCString &, const QByteArray &)) );
 }
 
 void FileBrowser::pcmciaMessage( const QCString &msg, const QByteArray &)
 {
     if ( msg == "mtabChanged()" ) {
-	// ## Only really needed if current dir is on a card
+  // ## Only really needed if current dir is on a card
         fileView->updateDir();
     }
 }
@@ -766,9 +767,9 @@ void FileBrowser::dirSelected( int id )
 
     // Bulid target dir from menu
     while( (j = dirMenu->idAt( i )) != id ){
-		dir += dirMenu->text( j ).stripWhiteSpace();
-		if( dirMenu->text( j ) != "/" ) dir += "/";
-		i++;
+    dir += dirMenu->text( j ).stripWhiteSpace();
+    if( dirMenu->text( j ) != "/" ) dir += "/";
+    i++;
     }
     dir += dirMenu->text( dirMenu->idAt( i ) ).stripWhiteSpace();
 
@@ -785,9 +786,9 @@ void FileBrowser::updateDirMenu()
     dirMenu->insertItem( tr( "/" ), this, SLOT( dirSelected(int) ) );
 
     for ( QStringList::Iterator it = l.begin(); it != l.end(); ++it ) {
-		spc.fill( ' ', i++);
-		dirMenu->insertItem( spc + (*it), this,
-							 SLOT( dirSelected(int) ) );
+    spc.fill( ' ', i++);
+    dirMenu->insertItem( spc + (*it), this,
+               SLOT( dirSelected(int) ) );
     }
     dirMenu->setItemChecked( dirMenu->idAt( l.count() ), TRUE );
 
@@ -840,11 +841,40 @@ void FileBrowser::updateSorting()
     sortMenu->setItemChecked( sortMenu->idAt( 5 ), !sortMenu->isItemChecked( sortMenu->idAt( 5 ) ) );
 
     if ( sortMenu->isItemChecked( sortMenu->idAt( 0 ) ) )
-		sortName();
+    sortName();
     else if ( sortMenu->isItemChecked( sortMenu->idAt( 1 ) ) )
-		sortSize();
+    sortSize();
     else if ( sortMenu->isItemChecked( sortMenu->idAt( 2 ) ) )
-		sortDate();
+    sortDate();
     else
-		sortType();
+    sortType();
+}
+
+void FileView::chPerm() {
+    FileItem * i;
+    QStringList fl;
+    QString cmd;
+    int err;
+
+    if((i = (FileItem *) firstChild()) == 0) return;
+
+    while( i ){
+    if( i->isSelected() ){
+      fl += i->getFilePath();
+    }
+    i = (FileItem *) i->nextSibling();
+    }
+    if( fl.count() < 1 ) return;
+    if( QMessageBox::warning( this, tr("Change permissions"), tr("Are you sure?"),
+                tr("Yes"), tr("No") ) == 0) {
+    for ( QStringList::Iterator it = fl.begin(); it != fl.end(); ++it ) {
+        filePermissions *filePerm;
+        filePerm = new filePermissions(this, "Permissions",true,0,(const QString &)(*it));
+        filePerm->exec();
+        if( filePerm)
+            delete  filePerm;
+        break;
+      }
+    updateDir();
+    }
 }

@@ -54,7 +54,7 @@ class FileView : public QListView
 
 public:
     FileView( const QString & dir, QWidget * parent = 0,
-			  const char * name = 0 );
+        const char * name = 0 );
     void    setDir( const QString & dir );
     QString cd(){ return currentDir; }
     QStringList history() const { return dirHistory; }
@@ -71,7 +71,7 @@ public slots:
     void cut();
     void newFolder();
     void viewAsText();
-
+    void chPerm();
 protected:
     void generateDir( const QString & dir );
     void resizeEvent( QResizeEvent* );
@@ -111,17 +111,17 @@ class FileBrowser : public QMainWindow
 
 public:
     FileBrowser( QWidget * parent = 0,
-				 const char * name = 0, WFlags f = 0 );
+         const char * name = 0, WFlags f = 0 );
     FileBrowser( const QString & dir, QWidget * parent = 0,
-				 const char * name = 0, WFlags f = 0 );
+         const char * name = 0, WFlags f = 0 );
 private:
     void init(const QString & dir);
     QString      fileToCopy;
     QPopupMenu * dirMenu, * sortMenu;
     FileView   * fileView;
     QAction    * pasteAction;
-    QAction	*lastAction;
-    QAction	*upAction;
+    QAction *lastAction;
+    QAction *upAction;
 
     bool         copyFile( const QString & dest, const QString & src );
 

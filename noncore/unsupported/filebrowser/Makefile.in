@@ -119,6 +119,8 @@ inlineedit.o: inlineedit.cpp \
 main.o: main.cpp \
 		filebrowser.h \
 		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h \
 		$(OPIEDIR)/include/qpe/mimetype.h
 
 moc_inlineedit.o: moc_inlineedit.cpp \
