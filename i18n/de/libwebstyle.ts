@@ -4,7 +4,7 @@
     <message>
         <source>Web</source>
         <comment>Name of the style Web</comment>
-        <translation type="unfinished"></translation>
+        <translation>Web</translation>
     </message>
 </context>
 </TS>

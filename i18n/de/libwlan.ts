@@ -4,7 +4,7 @@
     <name>AWLan</name>
     <message>
         <source>&lt;UseHostName&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;UseHostName&gt;</translation>
     </message>
 </context>
 <context>
@@ -114,150 +114,150 @@
     <name>WLanGUI</name>
     <message>
         <source>General</source>
-        <translation type="unfinished">Allgemein</translation>
+        <translation>Allgemein</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>Managed</source>
-        <translation type="unfinished">Managed</translation>
+        <translation>Verwaltet</translation>
     </message>
     <message>
         <source>Ad-Hoc</source>
-        <translation type="unfinished">Ad-Hoc</translation>
+        <translation>Ad-Hoc</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation type="unfinished">Modus</translation>
+        <translation>Modus</translation>
     </message>
     <message>
         <source>ESS-ID</source>
-        <translation type="unfinished">ESS-ID</translation>
+        <translation>ESS-ID</translation>
     </message>
     <message>
         <source>MAC</source>
-        <translation type="unfinished">MAC</translation>
+        <translation>MAC</translation>
     </message>
     <message>
         <source>Encryption</source>
-        <translation type="unfinished">Verschlüsselung</translation>
+        <translation>Verschlüsselung</translation>
     </message>
     <message>
         <source>&amp;Enable Encryption</source>
-        <translation type="unfinished">&amp;Verschlüsselung</translation>
+        <translation>&amp;Verschlüsselung</translation>
     </message>
     <message>
         <source>&amp;Key Setting</source>
-        <translation type="unfinished">&amp;Schlüssel</translation>
+        <translation>&amp;Schlüssel</translation>
     </message>
     <message>
         <source>Key &amp;1</source>
-        <translation type="unfinished">Schlüssel &amp;1</translation>
+        <translation>Schlüssel &amp;1</translation>
     </message>
     <message>
         <source>Key &amp;4</source>
-        <translation type="unfinished">Schlüssel &amp;4</translation>
+        <translation>Schlüssel &amp;4</translation>
     </message>
     <message>
         <source>Key &amp;2</source>
-        <translation type="unfinished">Schlüssel &amp;2</translation>
+        <translation>Schlüssel &amp;2</translation>
     </message>
     <message>
         <source>Key &amp;3</source>
-        <translation type="unfinished">Schlüssel &amp;3</translation>
+        <translation>Schlüssel &amp;3</translation>
     </message>
     <message>
         <source>AP</source>
-        <translation type="unfinished">AP</translation>
+        <translation>AP</translation>
     </message>
     <message>
         <source>Rate</source>
-        <translation type="unfinished">Rate</translation>
+        <translation>Rate</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished">802.11b</translation>
+        <translation>Kanal</translation>
     </message>
     <message>
         <source>Station</source>
-        <translation type="unfinished">Station</translation>
+        <translation>Station</translation>
     </message>
     <message>
         <source>ESSID</source>
-        <translation type="unfinished">ESSID</translation>
+        <translation>ESSID</translation>
     </message>
     <message>
         <source>Noise</source>
-        <translation type="unfinished">Störung</translation>
+        <translation>Störung</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished">Qualität</translation>
+        <translation>Qualität</translation>
     </message>
     <message>
         <source>Signal</source>
-        <translation type="unfinished">Signal</translation>
+        <translation>Signal</translation>
     </message>
     <message>
         <source>SSID</source>
-        <translation type="unfinished">SSID</translation>
+        <translation>SSID</translation>
     </message>
     <message>
         <source>Chn</source>
-        <translation type="unfinished">Chn</translation>
+        <translation>Chn</translation>
     </message>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>&lt;UseHostName&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;UseHostName&gt;</translation>
     </message>
     <message>
         <source>Specify Access Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Acces Point angeben</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Scan</translation>
     </message>
     <message>
         <source>Accept Non-Encrypted packets</source>
-        <translation type="unfinished"></translation>
+        <translation>Akzeptiere unverschlüsselte Pakete</translation>
     </message>
     <message>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Freq</source>
-        <translation type="unfinished"></translation>
+        <translation>Freq</translation>
     </message>
     <message>
         <source>Link Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungsqualität</translation>
     </message>
     <message>
         <source>Live feed </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>WLanNetNode</name>
     <message>
         <source>WLan Device</source>
-        <translation type="unfinished"></translation>
+        <translation>WLan Gerät</translation>
     </message>
     <message>
         <source>&lt;p&gt;Configure Wi/Fi or WLan network cards.&lt;/p&gt;&lt;p&gt;Defines Wireless options for those cards&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Konrigurieren Sie Wi/Fi oder WLan Netzwerkkarten.&lt;/p&gt;&lt;p&gt;Definieren Sie Wireless Optionen für diese Karten&lt;/p&gt;</translation>
     </message>
 </context>
 <context>

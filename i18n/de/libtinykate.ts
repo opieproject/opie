@@ -4,19 +4,19 @@
     <name>ColorConfig</name>
     <message>
         <source>Background:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrund:</translation>
     </message>
     <message>
         <source>Selected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgewählt:</translation>
     </message>
     <message>
         <source>Sets the background color of the editing area</source>
-        <translation type="unfinished"></translation>
+        <translation>Setzt die Hintergrundfarbe der Eingabefläche</translation>
     </message>
     <message>
         <source>Sets the background color of the selection. To set the text color for selected text, use the &amp;quot;&lt;b&gt;Configure Highlighting&lt;/b&gt;&amp;quot; dialog.</source>
-        <translation type="unfinished"></translation>
+        <translation>Setzt die Hintergrundfarbe der Auswahl. Um die Textfarbe für ausgewählten Text zu setzen, nutzen sie den &amp;quot;&lt;b&gt;Konfiguriere Hervorhebung&lt;/b&gt;&amp;quot; Dialog.</translation>
     </message>
 </context>
 <context>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>&amp;Auto brackets</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Automatische Klammern</translation>
     </message>
     <message>
         <source>Group &amp;undos</source>

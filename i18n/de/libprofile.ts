@@ -3,150 +3,150 @@
     <name>ProfileGUI</name>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil</translation>
     </message>
     <message>
         <source>Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Einrichten</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch</translation>
     </message>
     <message>
         <source>Ask</source>
-        <translation type="unfinished"></translation>
+        <translation>Abfrage</translation>
     </message>
     <message>
         <source>Trigger VPN</source>
-        <translation type="unfinished"></translation>
+        <translation>Erzeuge VPN</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>eth0</source>
-        <translation type="unfinished"></translation>
+        <translation>eth0</translation>
     </message>
     <message>
         <source>(Multicast, Up)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Multicast, Up)</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Subnetzmaske</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Broadcast</translation>
     </message>
     <message>
         <source>MAC</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC</translation>
     </message>
     <message>
         <source>P-t-P</source>
-        <translation type="unfinished"></translation>
+        <translation>P-t-P</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Addresse</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0.0.0.0</translation>
     </message>
     <message>
         <source>00:00:00:00:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation>00:00:00:00:00:00</translation>
     </message>
     <message>
         <source>DHCP</source>
-        <translation type="unfinished"></translation>
+        <translation>DHCP</translation>
     </message>
     <message>
         <source>Lease Expires</source>
-        <translation type="unfinished"></translation>
+        <translation>Lease beendet</translation>
     </message>
     <message>
         <source>Lease Obtained</source>
-        <translation type="unfinished"></translation>
+        <translation>Lease erhalten</translation>
     </message>
     <message>
         <source>DHCP Server</source>
-        <translation type="unfinished"></translation>
+        <translation>DHCP Server</translation>
     </message>
     <message>
         <source>Traffic</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>Empfangen</translation>
     </message>
     <message>
         <source>Errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Dropped</source>
-        <translation type="unfinished"></translation>
+        <translation>Dropped</translation>
     </message>
     <message>
         <source>Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Bytes</translation>
     </message>
     <message>
         <source>Collisions</source>
-        <translation type="unfinished"></translation>
+        <translation>Kollisionen</translation>
     </message>
     <message>
         <source>Live feed </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlaubt</translation>
     </message>
     <message>
         <source>Pkt</source>
-        <translation type="unfinished"></translation>
+        <translation>Pkt</translation>
     </message>
     <message>
         <source>ODO</source>
-        <translation type="unfinished"></translation>
+        <translation>ODO</translation>
     </message>
     <message>
         <source>Sending</source>
-        <translation type="unfinished"></translation>
+        <translation>Senden</translation>
     </message>
     <message>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Diverse</translation>
     </message>
     <message>
         <source>Reset ODO</source>
-        <translation type="unfinished"></translation>
+        <translation>Setze ODO zurück</translation>
     </message>
 </context>
 <context>
     <name>ProfileNetNode</name>
     <message>
         <source>Regular connection profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil der Hauptverbindung</translation>
     </message>
     <message>
         <source>&lt;p&gt;Define use of an IP connection.&lt;/p&gt;&lt;p&gt;Configure if and when this connection needs to be established&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Definieren Sie die Benutzung einer IP Verbindung.&lt;/p&gt;&lt;p&gt;Richten sie diese Verbindung ein, sofern sie verwendet werden soll&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>

@@ -4,7 +4,7 @@
     <name>VTApplet</name>
     <message>
         <source>VT shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>VT Tastenkürzel</translation>
     </message>
     <message>
         <source>Terminal</source>
