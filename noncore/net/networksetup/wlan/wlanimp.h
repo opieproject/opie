@@ -10,6 +10,7 @@ class WLANImp : public WLAN {
 
 public:
   WLANImp( QWidget* parent = 0, const char* name = 0);
+  ~WLANImp( );
 
 protected:
   void accept();

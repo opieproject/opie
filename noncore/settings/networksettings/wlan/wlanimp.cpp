@@ -21,6 +21,10 @@ WLANImp::WLANImp( QWidget* parent, const char* name):WLAN(parent, name){
   readConfig();
 }
 
+WLANImp::~WLANImp( ){
+  delete config;
+}
+
 void WLANImp::readConfig()
 {
     qWarning( "WLANImp::readConfig() called." );
