@@ -1,4 +1,4 @@
 #!/bin/sh
 
-[ -x ldconfig ] && ldconfig
+[ -x /sbin/ldconfig ] && /sbin/ldconfig
 exit 0
