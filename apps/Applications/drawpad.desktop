@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=A Drawing Program
 Exec=drawpad
-Icon=DrawPad
+Icon=drawpad/DrawPad
 Type=Application
 Name=DrawPad
