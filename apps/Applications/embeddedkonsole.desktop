@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=A Terminal Window
 Comment[es]=Una ventana de terminal
+Comment[da]=Et terminalvindue
 Exec=embeddedkonsole
 Icon=Terminal
 Type=Application
@@ -12,3 +13,4 @@ Name[pt]=Terminal
 Name[es]=Terminal
 Name[zh_TW]=終端機
 Name[ko]=콘솔
+Name[da]=Terminal

@@ -9,5 +9,7 @@ Name[it]=Monta/Smonta
 Name[de]=Ger� einbinden
 Name[zh_TW]=媒體掛卸
 Name[ko]=미디어 마운트
+Name[da]=Medie Montering
 Comment=Configure app for the medium mounter
 Comment[es]=Aplicación para montar medios
+Comment[da]=Indstillinger for montering af medier

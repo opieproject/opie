@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=A Calendar and Scheduling Program
 Comment[es]=Un calendario y planificador
+Comment[da]=Et kalender og planl�gnings program
 Exec=datebook
 Icon=DateBook
 Type=Application
@@ -14,3 +15,4 @@ Name[pt]=Calendário
 Name[es]=Calendario
 Name[zh_TW]=行事歷
 Name[ko]=일정관리
+Name[da]=Kalender

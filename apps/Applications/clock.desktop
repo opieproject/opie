@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=A Clock Program
 Comment[es]=Reloj, cronómetro y despertador
+Comment[da]=Et ur, stopur og alarm program
 Exec=clock
 Icon=Clock
 Type=Application
@@ -15,3 +16,4 @@ Name[pt]=Relógio
 Name[es]=Reloj
 Name[zh_TW]=時鐘
 Name[ko]=시계
+Name[da]=Ur

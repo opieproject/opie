@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Set date and time from network
 Comment[es]=Fije la hora por el Network Time Protocol (NTP)
+Comment[da]=Indstil dato og tid manuelt eller via NTP
 Exec=systemtime
 Icon=DateTime
 Type=Application
@@ -10,3 +11,4 @@ Name[ko]=네트워크로 시간 설정
 Name[it]=Data e Ora
 Name[de]=Datum
 Name[es]=Hora NTP
+Name[da]=Dato/Tid

@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Today App
 Comment[es]=Aplicación Hoy
+Comment[da]=Viser en oversigt over dagens begivenheder
 Exec=today
 Icon=today/today_icon
 Type=Application
@@ -12,3 +13,4 @@ Name[es]=Hoy
 Name[it]=Oggi
 Name[zh_TW]=Today
 Name[ko]=오늘
+Name[da]=Idag

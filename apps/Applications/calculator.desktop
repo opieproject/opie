@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=A Calculator Program
 Comment[es]=Calculadora científica y conversor de unidades
+Comment[da]=Et lommeregner program
 Exec=calculator
 Icon=calc/Calculator
 Type=Application
@@ -15,3 +16,4 @@ Name[pt]=Calculadora
 Name[es]=Calculadora
 Name[zh_TW]=計算機
 Name[ko]=계산기
+Name[da]=Lommeregner
