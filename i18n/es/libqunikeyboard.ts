@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>Unicode</source>
-        <translation type="obsolete"></translation>
+        <translation type="obsolete">Unicode</translation>
     </message>
 </context>
 </TS>

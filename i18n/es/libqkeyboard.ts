@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>Keyboard</source>
-        <translation type="obsolete"></translation>
+        <translation type="obsolete">Teclado</translation>
     </message>
 </context>
 </TS>

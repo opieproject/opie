@@ -3,34 +3,42 @@
     <name>IrdaApplet</name>
     <message>
         <source>Discovered Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Disposiitivo descubierto:</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="obsolete"></translation>
+        <translation type="obsolete">Ninguno</translation>
     </message>
     <message>
         <source>Disable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar IrDA</translation>
     </message>
     <message>
         <source>Enable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar IrDA</translation>
     </message>
     <message>
         <source>Disable Discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar búsqueda</translation>
     </message>
     <message>
         <source>Enable Discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar búsqueda</translation>
     </message>
     <message>
         <source>Disable Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar recepción</translation>
     </message>
     <message>
         <source>Enable Receive</source>
+        <translation>Activar recepción</translation>
+    </message>
+    <message>
+        <source>Found:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lost:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
