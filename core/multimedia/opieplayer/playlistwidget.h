@@ -37,6 +37,7 @@ class QListView;
 class QPoint;
 class QAction;
 class QLabel;
+class QPopupMenu;
 
 class PlayListWidget : public QMainWindow {
     Q_OBJECT
@@ -67,11 +68,13 @@ public slots:
 /*     void setFullScreen(); */
 /*     void setScaled(); */
 protected:
+        QPopupMenu *skinsMenu;
 /*     void contentsMousePressEvent( QMouseEvent * e ); */
 /*     void contentsMouseReleaseEvent( QMouseEvent * e ); */
 void keyReleaseEvent( QKeyEvent *e);
 void keyPressEvent( QKeyEvent *e);
 private:
+    int defaultSkinIndex;
     bool audioScan, videoScan; 
     void doBlank();
     void doUnblank();
@@ -87,6 +90,8 @@ private:
     void populateVideoView();
 private slots:
 
+    void populateSkinsMenu();
+    void skinsMenuActivated(int);
     void writem3u();
     void writeCurrentM3u();
     void scanForAudio();

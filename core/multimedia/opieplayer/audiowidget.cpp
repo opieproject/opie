@@ -48,7 +48,6 @@ struct MediaButton {
 MediaButton audioButtons[] = {
    { TRUE,  FALSE, FALSE }, // play
    { FALSE, FALSE, FALSE }, // stop
-   { TRUE,  FALSE, FALSE }, // pause
    { FALSE, FALSE, FALSE }, // next
    { FALSE, FALSE, FALSE }, // previous
    { FALSE, FALSE, FALSE }, // volume up
@@ -56,14 +55,13 @@ MediaButton audioButtons[] = {
    { TRUE,  FALSE, FALSE }, // repeat/loop
    { FALSE, FALSE, FALSE }, // playlist
    { FALSE, FALSE, FALSE }, // forward
-   { FALSE, FALSE, FALSE }  // back 
+   { FALSE, FALSE, FALSE }  // back
 };
 
-const char *skin_mask_file_names[11] = {
-   "play", "stop", "pause", "next", "prev", "up",
+const char *skin_mask_file_names[10] = {
+   "play", "stop", "next", "prev", "up",
    "down", "loop", "playlist", "forward", "back"
 };
-
 
 static void changeTextColor( QWidget *w ) {
    QPalette p = w->palette();
@@ -81,12 +79,14 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     qDebug("<<<<<audioWidget");
     
     Config cfg("OpiePlayer");
-    cfg.setGroup("AudioWidget");
+    cfg.setGroup("Options");
     skin = cfg.readEntry("Skin","default");
       //skin = "scaleTest";
 // color of background, frame, degree of transparency
 
     QString skinPath = "opieplayer2/skins/" + skin;
+    qDebug("skin path "+skinPath);
+    
     pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
     imgUp = new QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
     imgDn = new QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
@@ -94,7 +94,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
     imgButtonMask->fill( 0 );
 
-    for ( int i = 0; i < 11; i++ ) {
+    for ( int i = 0; i < 10; i++ ) {
         QString filename = QString(getenv("OPIEDIR")) + "/pics/" + skinPath + "/skin_mask_" + skin_mask_file_names[i] + ".png";
         masks[i] = new QBitmap( filename );
 
@@ -161,7 +161,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
 AudioWidget::~AudioWidget() {
     
-    for ( int i = 0; i < 11; i++ ) {
+    for ( int i = 0; i < 10; i++ ) {
         delete buttonPixUp[i];
         delete buttonPixDown[i];
     }
@@ -169,7 +169,7 @@ AudioWidget::~AudioWidget() {
     delete imgUp;
     delete imgDn;
     delete imgButtonMask;
-    for ( int i = 0; i < 11; i++ ) {
+    for ( int i = 0; i < 10; i++ ) {
         delete masks[i];
     }
 }
@@ -210,7 +210,7 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     QPixmap *pixUp = combineImageWithBackground( *imgUp, *pixBg, p );
     QPixmap *pixDn = combineImageWithBackground( *imgDn, *pixBg, p );
 
-    for ( int i = 0; i < 11; i++ ) {
+    for ( int i = 0; i < 10; i++ ) {
         if ( !masks[i]->isNull() ) {
             delete buttonPixUp[i];
             delete buttonPixDown[i];
