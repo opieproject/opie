@@ -105,7 +105,6 @@ void OImageScrollView::loadJpeg(bool interncall)
             }
             if ( (scanned && (wid<xf.getWidth()||hei<xf.getHeight()))||!scanned ) {
                 param = QString( "Fast Shrink( 3 ) Scale( %1, %2, ScaleMin)" ).arg( wid ).arg( hei );
-                odebug << "Load jpeg scaled \"" << param << "\"" << oendl;
                 iio.setParameters(param.latin1());
                 setImageScaledLoaded(true);
             }
@@ -114,7 +113,6 @@ void OImageScrollView::loadJpeg(bool interncall)
         }
     } else {
         if (ImageScaledLoaded()||!interncall) {
-            odebug << "Load jpeg unscaled" << oendl;
             real_load = true;
         }
         setImageScaledLoaded(false);
@@ -125,13 +123,11 @@ void OImageScrollView::loadJpeg(bool interncall)
 }
 
 void OImageScrollView::setImage( const QString& path ) {
-    odebug << "load new image " << oendl;
     if (m_lastName == path) return;
     m_lastName = path;
     _newImage = true;
     _original_data = QImage();
     QString itype = QImage::imageFormat(m_lastName);
-    odebug << "Image type = " << itype << oendl;
     if (itype == "JPEG") {
         setImageIsJpeg(true);
         loadJpeg();
@@ -151,8 +147,6 @@ void OImageScrollView::setImage( const QString& path ) {
 /* should be called every time the QImage changed it content */
 void OImageScrollView::init()
 {
-    odebug << "init " << oendl;
-
     /*
      * create the zoomer
      * and connect ther various signals
@@ -351,26 +345,34 @@ void OImageScrollView::rotate_into_data(Rotation r)
     _image_data = dest;
 }
 
+// yes - sorry - it is NOT gamma it is just BRIGHTNESS. Alwin
 void OImageScrollView::apply_gamma(int aValue)
 {
     if (!_image_data.size().isValid()) return;
-    float percent = ((float)aValue/100);
-    odebug << "Apply gamma " << percent << oendl;
-    int pixels = _image_data.depth()>8?_image_data.width()*_image_data.height() : _image_data.numColors();
+    float percent = ((float)aValue/100.0);
+
     int segColors = _image_data.depth() > 8 ? 256 : _image_data.numColors();
+    /* must be - otherwise it displays some ... strange colors */
+    if (segColors<256) segColors=256;
+
     unsigned char *segTbl = new unsigned char[segColors];
+    int pixels = _image_data.depth()>8?_image_data.width()*_image_data.height() : _image_data.numColors();
+
+
     bool brighten = (percent >= 0);
-    if ( percent < 0 )
+    if ( percent < 0 ) {
         percent = -percent;
+    }
 
     unsigned int *data = _image_data.depth() > 8 ? (unsigned int *)_image_data.bits() :
                          (unsigned int *)_image_data.colorTable();
 
+    int tmp = 0;
 
     if (brighten) {
         for ( int i=0; i < segColors; ++i )
         {
-            int tmp = (int)(i*percent);
+            tmp = (int)(i*percent);
             if ( tmp > 255 )
                 tmp = 255;
             segTbl[i] = tmp;
@@ -378,7 +380,7 @@ void OImageScrollView::apply_gamma(int aValue)
     } else {
         for ( int i=0; i < segColors; ++i )
         {
-            int tmp = (int)(i*percent);
+            tmp = (int)(i*percent);
             if ( tmp < 0 )
                 tmp = 0;
             segTbl[i] = tmp;
@@ -458,10 +460,8 @@ void OImageScrollView::generateImage()
     }
 
     int twidth,theight;
-    odebug << " r = " << r << oendl;
     if (AutoScale() && (_original_data.width()>width() || _original_data.height() > height()) ) {
         if (!_image_data.size().isValid()||width()>_image_data.width()||height()>_image_data.height()) {
-            odebug << "Rescaling data" << oendl;
             if (r==Rotate0) {
                 _image_data = _original_data;
             } else {
@@ -514,7 +514,6 @@ void OImageScrollView::generateImage()
 
 void OImageScrollView::resizeEvent(QResizeEvent * e)
 {
-    odebug << "OImageScrollView resizeEvent (" << e->size() << " - " << e->oldSize() << oendl;
     QScrollView::resizeEvent(e);
     if (e->oldSize()==e->size()||!isUpdatesEnabled ()) return;
     generateImage();
@@ -595,7 +594,6 @@ void OImageScrollView::viewportMouseMoveEvent(QMouseEvent* e)
 
 void OImageScrollView::contentsMousePressEvent ( QMouseEvent * e)
 {
-    odebug << " X and Y " << e->x() << " " << e->y() << oendl;
     /* this marks the beginning of a possible mouse move. Due internal reasons of QT
        the geometry values here may real differ from that set in MoveEvent (I don't know
        why). For getting them in real context, we use the first move-event to set the start
