@@ -4,3 +4,5 @@ Icon=dagger/dagger
 Type=Application
 Name=Dagger
 Comment=A Bible study program utilizing the Sword library.
+Name[ru]=Кинжал
+Comment[ru]=Программа для изучения Библии на библиотеке Sword.

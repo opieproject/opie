@@ -4,3 +4,5 @@ Exec=olinphone
 Icon=linphone/linphone
 Name=Sip Phone
 Name[lv]=Sip Telefons
+Name[ru]=Sip телефон
+Comment[ru]=Интернет-телефон

@@ -4,4 +4,6 @@ Exec=powerchord
 Icon=powerchord/Powerchord
 Type=Application
 Name=Powerchord
+Name[ru]=Аккорд
+Comment[ru]=Генератор аккордов для гитары
 

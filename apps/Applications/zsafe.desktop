@@ -11,3 +11,5 @@ CanFastLoad=0
 MimeType=application/zsafe
 Name[lv]=ZSeifs
 Comment[lv]=Paroļu uzglabāšanas programma
+Name[ru]=ZСейф
+Comment[ru]=Хранение паролей
