@@ -12,15 +12,16 @@ pack=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
 
 
 echo "Stopping Opie"
-`/etc/init.d/opie stop`
+/etc/init.d/opie stop
 
 echo "start" > /tmp/update.log
 
 for p in  $pack; do
-cmd="$IPKG_REMOVE $p"
 echo "rem.  $p" >> /tmp/update.log
-if [$p!="opie-update]; then
-$cmd;
+if [["$p"="opie-update"]]; then
+echo ""
+else
+$IPKG_REMOVE $p
 fi
 done
 
@@ -32,14 +33,15 @@ echo "Updating"
 `ipkg update`
 
 for p in  $pack; do
-cmd="$IPKG_INSTALL $p"
 echo "inst. $p" >> /tmp/update.log
-if [$p!="opie-update]; then
-$cmd;
+if [["$p"="opie-update"]]; then
+echo ""
+else
+$IPKG_INSTALL $p
 fi
 done
 
 ipkg remove opie-update
 
 echo "Starting Opie"
-`/etc/init.d/opie start`
+/etc/init.d/opie start
