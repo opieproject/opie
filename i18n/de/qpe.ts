@@ -48,7 +48,7 @@ accurately to calibrate your screen.</source>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
         <translation>Der Batteriestatus ist kritisch!
-Schliessen Sie das Gerät schnellst 
+Schließen Sie das Gerät schnellst 
 möglich an die Stromversorgung an!</translation>
     </message>
     <message>
@@ -221,7 +221,7 @@ These termination options are provided primarily for use while developing and te
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>Snychronisationsverbindung</translation>
+        <translation>Synchronisationsverbindung</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>

@@ -3,7 +3,7 @@
     <name>KRFBConnection</name>
     <message>
         <source>Connected</source>
-        <translation>Verbunde</translation>
+        <translation>Verbunden</translation>
     </message>
     <message>
         <source>Connection Refused</source>
@@ -119,7 +119,7 @@ Bitte versuchen Sie es es später noch einmal.</translation>
     </message>
     <message>
         <source>Connection closed</source>
-        <translation>Verbindung schliessen</translation>
+        <translation>Verbindung schließen</translation>
     </message>
     <message>
         <source>New Connection</source>

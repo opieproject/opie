@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CBarPrefs</name>
     <message>
@@ -64,7 +65,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Schliessen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Info</source>
@@ -439,7 +440,7 @@ Leading</source>
     </message>
     <message>
         <source>Close</source>
-        <translation>Schliessen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Info</source>
@@ -547,7 +548,7 @@ Leading</source>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Suche schliessen</translation>
+        <translation>Suche schließen</translation>
     </message>
     <message>
         <source>Do Reg</source>
@@ -555,7 +556,7 @@ Leading</source>
     </message>
     <message>
         <source>Close Edit</source>
-        <translation>Edit schliessen</translation>
+        <translation>Edit schließen</translation>
     </message>
     <message>
         <source>View</source>

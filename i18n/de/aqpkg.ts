@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CategoryFilterImpl</name>
     <message>
@@ -32,7 +33,7 @@
     <name>InstallDlgImpl</name>
     <message>
         <source>Close</source>
-        <translation>Schliessen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Remove
@@ -471,7 +472,7 @@ löschen oder aktualisieren ?</translation>
     </message>
     <message>
         <source>Package Information</source>
-        <translation>Paketinformation</translation>
+        <translation type="unfinished">Paketinformation</translation>
     </message>
     <message>
         <source>Package information is unavailable</source>
@@ -479,7 +480,7 @@ löschen oder aktualisieren ?</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Schliessen</translation>
+        <translation>Schließen</translation>
     </message>
 </context>
 <context>

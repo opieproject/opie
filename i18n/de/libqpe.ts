@@ -147,7 +147,7 @@ die Kategorien.</translation>
     <name>FileSelector</name>
     <message>
         <source>Close the File Selector</source>
-        <translation>Filedialog schliessen</translation>
+        <translation>Dateidialog schließen</translation>
     </message>
     <message>
         <source>Show documents of this type</source>
@@ -775,15 +775,15 @@ frei und versuchen Sie es noch einmal
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation>Klicken Sie hier, um das Fenster zu schliessen und alle Änderungen zu verwerfen.</translation>
+        <translation>Klicken Sie hier, um das Fenster zu schließen und alle Änderungen zu verwerfen.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation>Klicken Sie hier, um das Fenster zu schliessen.</translation>
+        <translation>Klicken Sie hier, um das Fenster zu schließen.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation>Klicken Sie hier, um das Fenster zu schliessen und alle Änderungen zu akzeptieren.</translation>
+        <translation>Klicken Sie hier, um das Fenster zu schließen und alle Änderungen zu akzeptieren.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>

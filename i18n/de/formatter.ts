@@ -141,7 +141,7 @@ wurde erfolgreich gemountet.</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
-        <translation>Sie können das Ausgabefenster nun schliessen.</translation>
+        <translation>Sie können das Ausgabefenster nun schließen.</translation>
     </message>
     <message>
         <source>Internal</source>

@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
-        <translation>Alarm um</translation>
+        <translation type="unfinished">Alarm um</translation>
     </message>
 </context>
 <context>
@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Alles Löschen...</translation>
+        <translation>Alles löschen...</translation>
     </message>
     <message>
         <source>Delete completed</source>
-        <translation>Löschen komplett</translation>
+        <translation>Erledigte Aufgaben löschen</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Show only over-due tasks</source>
-        <translation>Nur Anzeige überfäliger Aufgaben</translation>
+        <translation>Nur Anzeige überfälliger Aufgaben</translation>
     </message>
     <message>
         <source>Show task deadlines</source>
