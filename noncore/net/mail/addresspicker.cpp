@@ -3,7 +3,7 @@
 
 /* OPIE */
 #include <opie2/ocontactaccess.h>
-#include <opie2/ocontact.h>
+#include <opie2/opimcontact.h>
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 
@@ -25,15 +25,15 @@ AddressPicker::AddressPicker( QWidget *parent, const char *name, bool modal, WFl
 
     connect(okButton, SIGNAL(clicked()), SLOT(accept()));
     connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
-    Opie::OContactAccess::List::Iterator it;
+    Opie::OPimContactAccess::List::Iterator it;
 
     QString lineEmail, lineName, contactLine;
     /* what name has to set here???? */
-    Opie::OContactAccess m_contactdb("opiemail");
+    Opie::OPimContactAccess m_contactdb("opiemail");
 
     QStringList mails;
     QString pre,suf;
-    Opie::OContactAccess::List m_list = m_contactdb.sorted( true, 0, 0, 0 );
+    Opie::OPimContactAccess::List m_list = m_contactdb.sorted( true, 0, 0, 0 );
     for ( it = m_list.begin(); it != m_list.end(); ++it )
     {
         if ((*it).defaultEmail().length()!=0)
