@@ -68,7 +68,7 @@ static QString categoriesXMLFilename()
     return Global::applicationFileName("todolist","categories.xml");
 }
 
-TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
+TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f ) :
     QMainWindow( parent, name, f ), syncing(FALSE)
 {
 //     QTime t;

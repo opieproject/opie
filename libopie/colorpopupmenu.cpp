@@ -87,7 +87,7 @@ void ColorPanelButton::mouseReleaseEvent( QMouseEvent* e )
     emit selected( m_color );
 }
 
-ColorPopupMenu::ColorPopupMenu( const QColor& color, QWidget* parent = 0, const char* name = 0 )
+ColorPopupMenu::ColorPopupMenu( const QColor& color, QWidget* parent, const char* name )
     : QPopupMenu( parent, name )
 {
     m_color = color;
