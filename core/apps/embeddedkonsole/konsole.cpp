@@ -640,7 +640,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
         secondToolBar->hide();
         editCommandListMenu->setItemEnabled(ec_quick ,FALSE);
     }
-    ec_edit = editCommandListMenu->insertItem(tr(  "Edit" ) );
+    ec_edit = editCommandListMenu->insertItem(tr(  "Edit..." ) );
 
     cfg.setGroup("Commands");
     commonCombo->setInsertionPolicy(QComboBox::AtCurrent);
@@ -663,7 +663,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
     configMenu->insertItem(tr( "ScrollBar" ),scrollMenu);
 
-    configMenu->insertItem(tr( "History" ), this, SLOT(historyDialog()));
+    configMenu->insertItem(tr( "History..." ), this, SLOT(historyDialog()));
 
     cm_wrap = configMenu->insertItem(tr( "Wrap" ));
     cfg.setGroup("ScrollBar");
