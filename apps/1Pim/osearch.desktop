@@ -1,0 +1,7 @@
+[Desktop Entry]
+Comment=Seach you data
+Exec=osearch
+Icon=osearch/OSearch
+Type=Application
+Name=search
+Name[de]=suchen
