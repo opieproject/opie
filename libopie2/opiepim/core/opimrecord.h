@@ -9,7 +9,7 @@
 
 
 /**
- * This is the base class for 
+ * This is the base class for
  * all PIM Records
  *
  */
@@ -110,7 +110,7 @@ public:
      * set the relations for an app
      */
     void setRelations( const QString&, QArray<int> ids );
-    
+
     /**
      * set the uid
      */

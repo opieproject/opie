@@ -31,6 +31,7 @@ public:
     QDate endDate()const;
     time_t endDateUTC()const;
     time_t createTime()const;
+    int repetition()const;
 
     void setType( const RepeatType& );
     void setFrequency( int freq );
@@ -40,6 +41,7 @@ public:
     void setEndDateUTC( time_t );
     void setCreateTime( time_t );
     void setHasEndDate( bool b );
+    void setRepitition(int );
 private:
     void deref();
     inline void checkOrModify();

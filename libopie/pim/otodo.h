@@ -16,6 +16,8 @@
 #include <opie/opimrecord.h>
 
 
+class OPimState;
+class ORecur;
 class OTodo : public  OPimRecord  {
 public:
     typedef QValueList<OTodo> ValueList;
@@ -33,7 +35,12 @@ public:
         Progress,
         CrossReference,
         HasAlarmDateTime,
-        AlarmDateTime
+        AlarmDateTime,
+        State,
+        Recurrance,
+        Alarms,
+        Reminders,
+        Notifiers
     };
  public:
     // priorities from Very low to very high
@@ -111,6 +118,16 @@ public:
     QDateTime alarmDateTime()const;
 
     /**
+     * What is the state of this OTodo?
+     */
+    OPimState state()const;
+
+    /**
+     * the recurrance of this
+     */
+    ORecur recurrence()const;
+
+    /**
      * The description of the todo
      */
     QString description()const;
@@ -170,6 +187,8 @@ public:
      */
     void setDueDate( QDate date );
 
+
+    void setRecurrence( const ORecur& );
     /**
      * set the alarm time
      */
@@ -177,6 +196,12 @@ public:
 
     void setDescription(const QString& );
     void setSummary(const QString& );
+
+    /**
+     * set the state of a Todo
+     * @param state State what the todo should take
+     */
+    void setState( const OPimState& state);
     bool isOverdue();
 
 

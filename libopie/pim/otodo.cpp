@@ -12,7 +12,8 @@
 #include <qpe/categoryselect.h>
 
 
-
+#include "opimstate.h"
+#include "orecur.h"
 #include "otodo.h"
 
 
@@ -30,6 +31,8 @@ struct OTodo::OTodoData : public QShared {
     ushort prog;
     bool hasAlarmDateTime :1;
     QDateTime alarmDateTime;
+    OPimState state;
+    ORecur recur;
 };
 
 OTodo::OTodo(const OTodo &event )
@@ -144,6 +147,12 @@ QString OTodo::description()const
 {
     return data->desc;
 }
+OPimState OTodo::state()const {
+    return data->state;
+}
+ORecur OTodo::recurrence()const {
+    return data->recur;
+}
 void OTodo::setCompleted( bool completed )
 {
     changeOrModify();
@@ -184,6 +193,14 @@ void OTodo::setAlarmDateTime( const QDateTime& alarm )
 {
     changeOrModify();
     data->alarmDateTime = alarm;
+}
+void OTodo::setState( const OPimState& state ) {
+    changeOrModify();
+    data->state = state;
+}
+void OTodo::setRecurrence( const ORecur& rec) {
+    changeOrModify();
+    data->recur = rec;
 }
 bool OTodo::isOverdue( )
 {
@@ -358,7 +375,7 @@ QMap<QString, QString> OTodo::toExtraMap()const {
  */
 void OTodo::changeOrModify() {
     if ( data->count != 1 ) {
-//        qWarning("changeOrModify");
+        qWarning("changeOrModify");
         data->deref();
         OTodoData* d2 = new OTodoData();
         copy(data, d2 );
@@ -376,6 +393,8 @@ void OTodo::copy( OTodoData* src, OTodoData* dest ) {
     dest->prog = src->prog;
     dest->hasAlarmDateTime = src->hasAlarmDateTime;
     dest->alarmDateTime = src->alarmDateTime;
+    dest->state = src->state;
+    dest->recur = src->recur;
 }
 QString OTodo::type() const {
     return QString::fromLatin1("OTodo");

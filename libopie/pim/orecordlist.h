@@ -234,7 +234,7 @@ void ORecordListIterator<T>::setCurrent( uint cur ) {
 }
 template <class T>
 uint ORecordListIterator<T>::count()const {
- return m_uids.count();
+    return m_uids.count();
 }
 template <class T>
 ORecordList<T>::ORecordList( const QArray<int>& ids,

@@ -1127,14 +1127,14 @@ static VObject *createVObject( const OContact &c )
     // Exporting Birthday regarding RFC 2425 (5.8.4)
     if ( c.birthday().isValid() ){
 	    QString birthd_rfc2425 = QString("%1-%2-%3")
-		    .arg( c.birthday().year() ) 
+		    .arg( c.birthday().year() )
 		    .arg( c.birthday().month(), 2 )
 		    .arg( c.birthday().day(), 2 );
 	    // Now replace spaces with "0"...
 	    int pos = 0;
 	    while ( ( pos = birthd_rfc2425.find (' ')  ) > 0 )
 		    birthd_rfc2425.replace( pos, 1, "0" );
-		    
+
 	    qWarning("Exporting birthday as: %s", birthd_rfc2425.latin1());
 	    safeAddPropValue( vcard, VCBirthDateProp, birthd_rfc2425.latin1() );
     }
@@ -1388,11 +1388,11 @@ static OContact parseVObject( VObject *obj )
 	}
 	else if ( name == "X-Qtopia-Children" ) {
 	    c.setChildren( value );
-	}	
+	}
 	else if ( name == VCBirthDateProp ) {
 		// Reading Birthdate regarding RFC 2425 (5.8.4)
 		c.setBirthday( convVCardDateToDate( value ) );
-		
+
 	}
 
 #if 0
@@ -1464,7 +1464,16 @@ QValueList<OContact> OContact::readVCard( const QString &filename )
     QValueList<OContact> contacts;
 
     while ( obj ) {
-	contacts.append( parseVObject( obj ) );
+        OContact con = parseVObject( obj );
+        /*
+         * if uid is 0 assign a new one
+         * this at least happens on
+         * Nokia6210
+         */
+        if ( con.uid() == 0 )
+            con.setUid( 1 );
+
+	contacts.append(con  );
 
 	VObject *t = obj;
 	obj = nextVObjectInList(obj);
@@ -1527,17 +1536,17 @@ class QString OContact::recordField( int pos ) const
 }
 
 // In future releases, we should store birthday and anniversary
-// internally as QDate instead of QString ! 
+// internally as QDate instead of QString !
 // QString is always too complicate to interprete (DD.MM.YY, DD/MM/YY, MM/DD/YY, etc..)(se)
 
 /*! \fn void OContact::setBirthday( const QDate& date )
   Sets the birthday for the contact to \a date.
 */
 void OContact::setBirthday( const QDate &v )
-{ 
+{
 	if ( ( !v.isNull() ) && ( v.isValid() ) )
 		replace( Qtopia::Birthday, TimeConversion::toString( v ) );
-	
+
 }
 
 
@@ -1553,8 +1562,8 @@ void OContact::setAnniversary( const QDate &v )
 /*! \fn QDate OContact::birthday() const
   Returns the birthday of the contact.
 */
-QDate OContact::birthday() const 
-{ 
+QDate OContact::birthday() const
+{
 	QString str = find( Qtopia::Birthday );
 	qWarning ("Birthday %s", str.latin1() );
 	if ( !str.isEmpty() )
@@ -1567,13 +1576,13 @@ QDate OContact::birthday() const
 /*! \fn QDate OContact::anniversary() const
   Returns the anniversary of the contact.
 */
-QDate OContact::anniversary() const 
-{ 
+QDate OContact::anniversary() const
+{
 	QDate empty;
 	QString str = find( Qtopia::Anniversary );
 	qWarning ("Anniversary %s", str.latin1() );
 	if ( !str.isEmpty() )
-		return TimeConversion::fromString ( str ); 
+		return TimeConversion::fromString ( str );
 	else
 		return empty;
 }
@@ -1607,7 +1616,7 @@ void OContact::removeEmail( const QString &v )
     QString def = defaultEmail();
     QString emailsStr = find( Qtopia::Emails );
     QStringList emails = emailList();
-	
+
     // otherwise, must first contain it
     if ( !emailsStr.contains( e ) )
 	return;
@@ -1640,9 +1649,9 @@ void OContact::setDefaultEmail( const QString &v )
     //qDebug("OContact::setDefaultEmail %s", e.latin1());
     replace( Qtopia::DefaultEmail, e );
 
-    if ( !e.isEmpty() )	
+    if ( !e.isEmpty() )
 	insertEmail( e );
-	
+
 }
 
 void OContact::insertEmails( const QStringList &v )

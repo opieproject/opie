@@ -21,6 +21,7 @@ struct ORecur::Data : public QShared {
     bool hasEnd : 1;
     time_t end;
     time_t create;
+    int rep;
 };
 
 
@@ -78,6 +79,9 @@ time_t ORecur::endDateUTC()const {
 time_t ORecur::createTime()const {
     return data->create;
 }
+int ORecur::repetition()const {
+    return data->rep;
+}
 void ORecur::setType( const RepeatType& z) {
     checkOrModify();
     data->type = z;
@@ -110,6 +114,10 @@ void ORecur::setHasEndDate( bool b) {
     checkOrModify();
     data->hasEnd = b;
 }
+void ORecur::setRepitition( int rep ) {
+    checkOrModify();
+    data->rep = rep;
+}
 void ORecur::checkOrModify() {
     if ( data->count !=  1 ) {
         data->deref();
@@ -121,6 +129,7 @@ void ORecur::checkOrModify() {
         d2->hasEnd = data->hasEnd;
         d2->end  = data->end;
         d2->create = data->create;
+        d2->rep = data->rep;
         data = d2;
     }
 }
