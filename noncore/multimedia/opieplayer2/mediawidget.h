@@ -70,6 +70,8 @@ protected:
     void paintButton( int buttonId );
     virtual void paintButton( QPainter &p, int i ) = 0;
 
+    void toggleButton( int buttonId );
+
     MediaPlayerState &mediaPlayerState;
     PlayListWidget &playList;
 

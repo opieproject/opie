@@ -91,7 +91,6 @@ private slots:
     void skipBack();
     void stopSkip();
 private:
-    void toggleButton( int );
     void setToggleButton( int, bool );
     virtual void paintButton( QPainter &p, int i );
     int skipDirection;

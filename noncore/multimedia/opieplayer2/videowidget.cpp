@@ -263,12 +263,6 @@ void VideoWidget::setToggleButton( int i, bool down ) {
     }
 }
 
-void VideoWidget::toggleButton( int i ) {
-    buttons[i].isDown = !buttons[i].isDown;
-    QPainter p(this);
-    paintButton ( p, i );
-}
-
 void VideoWidget::paintButton( QPainter &p, int i ) {
 
     if ( buttons[i].isDown ) {

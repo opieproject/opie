@@ -68,10 +68,16 @@ bool MediaWidget::isOverButton( const QPoint &position, int buttonId ) const
              buttonMask.pixelIndex( position.x(), position.y() ) == buttonId + 1 );
 }
 
-void MediaWidget::repaintButton( int buttonId )
+void MediaWidget::paintButton( int buttonId )
 {
     QPainter p( this );
     paintButton( p, buttonId );
+}
+
+void MediaWidget::toggleButton( int buttonId )
+{
+    buttons[ buttonId ].isDown = !buttons[ buttonId ].isDown;
+    paintButton( buttonId );
 }
 
 /* vim: et sw=4 ts=4

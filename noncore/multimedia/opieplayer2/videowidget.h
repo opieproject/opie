@@ -108,7 +108,6 @@ private:
 
 
     virtual void paintButton( QPainter &p, int i );
-    void toggleButton( int );
     void setToggleButton( int, bool );
 
     QString backgroundPix;

@@ -332,14 +332,6 @@ void AudioWidget::setToggleButton( int i, bool down ) {
     }
 }
 
-
-void AudioWidget::toggleButton( int i ) {
-    buttons[i].isDown = !buttons[i].isDown;
-    QPainter p(this);
-    paintButton ( p, i );
-}
-
-
 void AudioWidget::paintButton( QPainter &p, int i ) {
     if ( buttons[i].isDown ) {
         p.drawPixmap( upperLeftOfButtonMask, *buttonPixDown[i] );
