@@ -1,8 +1,8 @@
 Files: pics/??*.*
 Priority: required
-Section: opie/system
+Section: qpe/system
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
+Version: $QPE_VERSION-3
 Description: Basic icons for Qtopia environment
  These icons are available to all QPE application.
