@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.15 2003-02-09 21:00:55 max Exp $
+ * $Id: cardmode.cc,v 1.16 2003-02-11 00:29:37 max Exp $
  */
 
 #include "cardmode.hh"
@@ -45,8 +45,9 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
   }
   else if (cardtype == CARD_TYPE_NG)
   {
-      char wlanngcmd[62];
+      char wlanngcmd[80];
       snprintf(wlanngcmd, sizeof(wlanngcmd) - 1, "$(which wlanctl-ng) %s lnxreq_wlansniff channel=%d enable=true", device, 1);
+      printf ("\n %s",wlanngcmd);  
       if (system(wlanngcmd) != 0)
       {
 	  wl_logerr("Could not set %s in raw mode, check cardtype", device);
@@ -161,9 +162,9 @@ int card_set_promisc_up (const char *device)
 /* Set channel (Wireless frequency) of the device */
 int card_set_channel (const char *device, int channel, int cardtype)
 {
-    if (cardtype == CARD_TYPE_CISCO)
+    if (cardtype == CARD_TYPE_CISCO || cardtype == CARD_TYPE_NG)
     {
-    	/* Cisco cards don't need channelswitching */
+    	/* Cisco and wlan-ng drivers don't need channelswitching */
     	return 1;
     }
     /* If it is a lucent orinocco card */ 
@@ -199,17 +200,6 @@ int card_set_channel (const char *device, int channel, int cardtype)
 			return 0;
 	   }
     }
-    else if (cardtype == CARD_TYPE_NG)
-	{
-		char wlanngcmd[62];
-		snprintf(wlanngcmd, sizeof(wlanngcmd) - 1, "$(which wlanctl-ng) %s lnxreq_wlansniff channel=%d enable=true", device, channel);
-		if (system(wlanngcmd) != 0)
-		{
-			wl_logerr("Could not set channel %d on %s, check cardtype",channel, device);
-			return 0;
-		}
-
-	}
     /* For undefined situations */
 	return 0;
 }
