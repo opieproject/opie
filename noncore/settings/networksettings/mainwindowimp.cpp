@@ -5,6 +5,7 @@
 #include "module.h"
 
 #include "kprocess.h"
+#include "namedialog.h"
 
 #include <qpushbutton.h>
 #include <qtabwidget.h>
@@ -128,11 +129,13 @@ Module* MainWindowImp::loadPlugin(QString pluginFileName, QString resolveString)
 void MainWindowImp::addClicked(){
   QMap<Module*, QLibrary*>::Iterator it;
   QMap<QString, QString> list;
+  QMap<QString, Module*> newInterfaceOwners;
   list.insert("USB (PPP) / (ADD_TEST)", "A dialup connection over the USB port");
   list.insert("IrDa (PPP) / (ADD_TEST)", "A dialup connection over the IdDa port");
   for( it = libraries.begin(); it != libraries.end(); ++it ){
-    if(it.key())
+    if(it.key()){
       (it.key())->possibleNewInterfaces(list);
+    }
   }
   // See if the list has anything that we can add.
   if(list.count() == 0){
@@ -143,7 +146,19 @@ void MainWindowImp::addClicked(){
   addNewConnection.addConnections(list);
   addNewConnection.showMaximized();
   if(QDialog::Accepted == addNewConnection.exec()){
-
+    QListViewItem *item = addNewConnection.registeredServicesList->currentItem();
+    if(!item)
+      return;
+    
+    for( it = libraries.begin(); it != libraries.end(); ++it ){
+      if(it.key()){
+        Interface *i = (it.key())->addNewInterface(item->text(0));
+	if(i){
+          interfaceNames.insert(i->getInterfaceName(), i);
+	  updateInterface(i);
+	}
+      }
+    }
   }
 }
 
@@ -153,18 +168,24 @@ void MainWindowImp::addClicked(){
  */ 
 void MainWindowImp::removeClicked(){
   QListViewItem *item = connectionList->currentItem();
-  if(item == NULL) {
-     QMessageBox::information(this, "Error","Please select an interface.", "Ok");
-     return; 
+  if(!item) {
+    QMessageBox::information(this, "Error","Please select an interface.", "Ok");
+    return; 
   }
   
-  if((interfaceItems[item])->getModuleOwner() == NULL){
+  Interface *i = interfaceItems[item];
+  if(i->getModuleOwner() == NULL){
     QMessageBox::information(this, "Can't remove interface.", "Interface is built in.", "Ok");
   }
   else{
-    // Try to remove. 
+    if(!i->getModuleOwner()->remove(i))
+      QMessageBox::information(this, "Error", "Unable to remove.", "Ok");
+    else{
+      QMessageBox::information(this, "Success", "Interface was removed.", "Ok");
+      // TODO memory managment....
+      // who deletes the interface?
+    }
   }
-
 }
 
 /**
@@ -311,12 +332,13 @@ void MainWindowImp::jobDone(KProcess *process){
 } 
 
 /**
- *
+ * Update this interface.  If no QListViewItem exists create one.
+ * @param Interface* pointer to the interface that needs to be updated.
  */ 
 void MainWindowImp::updateInterface(Interface *i){
   QListViewItem *item = NULL;
   
-  // See if we already have it
+  // Find the interface, making it if needed.
   if(items.find(i) == items.end()){
     item = new QListViewItem(connectionList, "", "", "");
     // See if you can't find a module owner for this interface
@@ -325,18 +347,14 @@ void MainWindowImp::updateInterface(Interface *i){
       if(it.key()->isOwner(i))
         i->setModuleOwner(it.key());
     }
-    
     items.insert(i, item);
     interfaceItems.insert(item, i);
   }
   else
     item = items[i];
-  
-  QString statusImage = "down";
-  if(i->getStatus())
-    statusImage = "up";
-  QPixmap status = (Resource::loadPixmap(statusImage));
-  item->setPixmap(0, status);
+ 
+  // Update the icons and information 
+  item->setPixmap(0, (Resource::loadPixmap(i->getStatus() ? "up": "down")));
  
   QString typeName = "lan";
   if(i->getHardwareName().contains("Local Loopback"))
@@ -346,30 +364,31 @@ void MainWindowImp::updateInterface(Interface *i){
   if(i->getInterfaceName().contains("wlan"))
     typeName = "wlan";
   // Actually try to use the Module
-  if(i->getModuleOwner() != NULL){
+  if(i->getModuleOwner() != NULL)
     typeName = i->getModuleOwner()->getPixmapName(i);
-  }
-  QPixmap type = (Resource::loadPixmap(typeName));
-  item->setPixmap(1, type);
-
-  item->setText(2, i->getHardwareName());
   
+  item->setPixmap(1, (Resource::loadPixmap(typeName)));
+  item->setText(2, i->getHardwareName());
+  item->setText(3, (i->getStatus()) ? i->getIp() : QString(""));
 }
 
 /**
  * Adds a new profile to the list of profiles.
  * Don't add profiles that already exists.
- * Appends to the combo and QStringList
+ * Appends to the list and QStringList
  */ 
 void MainWindowImp::addProfile(){
-  QString newProfileName = "New";
+  NameDialog foo(this, "namedialog", true);
+  QString newProfileName = foo.go();
+  if(newProfileName.length() == 0)
+    return;
+  
   if(profiles.grep(newProfileName).count() > 0){
-    QMessageBox::information(this, "Can't Add.","Profile already exists.", "Ok");
+    QMessageBox::information(this, "Can't Add","Profile already exists.", "Ok");
     return;
   }
   profiles.append(newProfileName);
   profilesList->insertItem(newProfileName);
-
 }
 
 /**

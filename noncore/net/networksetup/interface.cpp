@@ -1,6 +1,7 @@
 #include "interface.h"
 #include <qdatetime.h>
 #include <qfile.h>
+#include <qdir.h>
 #include <qfileinfo.h>
 #include <qtextstream.h>
 
@@ -127,9 +128,14 @@ bool Interface::refresh(){
   leaseObtained = "";
   leaseExpires = "";
   dhcp = false;
-    
+   
+  QString dhcpDirectory(HDCP_INFO_DIR);
+  QDir d(dhcpDirectory);
+  if(!d.exists(dhcpDirectory))
+    dhcpDirectory = "/var/run";
+  
   // See if we have 
-  QString dhcpFile(QString(HDCP_INFO_DIR "/dhcpcd-%1.info").arg(interfaceName));
+  QString dhcpFile(QString(dhcpDirectory+"/dhcpcd-%1.info").arg(interfaceName));
   // If there is no DHCP information then exit now with no errors.
   if(!QFile::exists(dhcpFile)){
     return true;
@@ -148,8 +154,8 @@ bool Interface::refresh(){
   stream.setDevice( &file );
   while ( !stream.eof() ) {
     line = stream.readLine();
-    if(line.contains("DHCPSID="))
-      dhcpServerIp = line.mid(8, line.length());
+    if(line.contains("DHCPSIADDR="))
+      dhcpServerIp = line.mid(11, line.length());
     if(line.contains("LEASETIME="))
       leaseTime = line.mid(10, line.length()).toInt();
     if(line.contains("RENEWALTIME="))
@@ -160,7 +166,7 @@ bool Interface::refresh(){
   //qDebug(QString("Interface: renewalTime: %1").arg(renewalTime).latin1());
   
   // Get the pid of the deamond
-  dhcpFile = (QString(HDCP_INFO_DIR "/dhcpcd-%1.pid").arg(interfaceName));
+  dhcpFile = (QString(dhcpDirectory+"/dhcpcd-%1.pid").arg(interfaceName));
   file.setName(dhcpFile);
   if (!file.open(IO_ReadOnly)){
     qDebug(QString("Interface: Can't open file: %1").arg(dhcpFile).latin1());

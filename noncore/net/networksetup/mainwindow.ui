@@ -45,7 +45,7 @@
                 </property>
                 <attribute>
                     <name>title</name>
-                    <string>Interfaces</string>
+                    <string>Connections</string>
                 </attribute>
                 <vbox>
                     <property stdset="1">
@@ -90,6 +90,20 @@
                             <property>
                                 <name>text</name>
                                 <string>Name</string>
+                            </property>
+                            <property>
+                                <name>clickable</name>
+                                <bool>true</bool>
+                            </property>
+                            <property>
+                                <name>resizeable</name>
+                                <bool>true</bool>
+                            </property>
+                        </column>
+                        <column>
+                            <property>
+                                <name>text</name>
+                                <string>IP</string>
                             </property>
                             <property>
                                 <name>clickable</name>
