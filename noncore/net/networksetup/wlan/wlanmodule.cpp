@@ -15,7 +15,6 @@ WLANModule::WLANModule() : Module() {
 /**
  */ 
 WLANModule::~WLANModule(){
-  qDebug("Deleting module");
   Interface *i;
   for ( i=list.first(); i != 0; i=list.next() )
     delete i;

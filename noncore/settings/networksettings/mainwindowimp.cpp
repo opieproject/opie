@@ -78,7 +78,6 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
  * Deconstructor. Save profiles.  Delete loaded libraries.
  */
 MainWindowImp::~MainWindowImp(){
-  qDebug("Deleting main window");
   // Save profiles.
   Config cfg("NetworkSetup");
   cfg.setGroup("General");
@@ -95,9 +94,9 @@ MainWindowImp::~MainWindowImp(){
   QMap<Module*, QLibrary*>::Iterator it;
   for( it = libraries.begin(); it != libraries.end(); ++it ){
     delete it.key();
+    // I wonder why I can't delete the libraries
     //delete it.data();
   }
-  qDebug("Done deleting main window");
 }
 
 /**
