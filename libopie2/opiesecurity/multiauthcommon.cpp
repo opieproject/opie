@@ -73,6 +73,15 @@ int runPlugins() {
     Config config("Security");
     config.setGroup("Plugins");
     QStringList plugins = config.readListEntry("IncludePlugins", ',');
+    /* if there are no configured plugins, we simply return 0 to
+     * let the user in:
+     */
+    if (plugins.isEmpty() == true) {
+        owarn << "No authentication plugin has been configured yet!" << oendl;
+        odebug << "Letting the user in..." << oendl;
+        if(oi) delete oi;
+        return 0;
+    }
     config.setGroup("Misc");
     int nbSuccessMin = config.readNumEntry("nbSuccessMin", 1);
     int nbSuccess = 0;
