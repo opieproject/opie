@@ -45,9 +45,9 @@
 
 #include <assert.h>
 #include <arpa/inet.h>
-#include <cerrno>
-#include <cstring>
-#include <cstdlib>
+#include <errno.h>
+#include <string.h>
+#include <stdlib.h>
 #include <math.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
@@ -57,11 +57,9 @@
 #include <net/if_arp.h>
 #include <stdarg.h>
 
-using namespace std;
-
 #ifndef NODEBUG
-#include <opie2/oioctlmap.h>
-IntStringMap* _ioctlmap = constructIoctlMap();
+#include <opie2/odebugmapper.h>
+DebugMapper* debugmapper = new DebugMapper();
 #endif
 
 /*======================================================================================
@@ -196,9 +194,9 @@ bool ONetworkInterface::ioctl( int call, struct ifreq& ifreq ) const
     #ifndef NODEBUG
     int result = ::ioctl( _sfd, call, &ifreq );
     if ( result == -1 )
-        qDebug( "ONetworkInterface::ioctl (%s) call %s (0x%04X) - Status: Failed: %d (%s)", name(), (const char*) *(*_ioctlmap)[call], call, result, strerror( errno ) );
+        qDebug( "ONetworkInterface::ioctl (%s) call %s (0x%04X) - Status: Failed: %d (%s)", name(), (const char*) debugmapper->map( call ), call, result, strerror( errno ) );
     else
-        qDebug( "ONetworkInterface::ioctl (%s) call %s (0x%04X) - Status: Ok.", name(), (const char*) *(*_ioctlmap)[call], call );
+        qDebug( "ONetworkInterface::ioctl (%s) call %s (0x%04X) - Status: Ok.", name(), (const char*) debugmapper->map( call ), call );
     return ( result != -1 );
     #else
     return ::ioctl( _sfd, call, &ifreq ) != -1;
@@ -969,9 +967,9 @@ bool OWirelessNetworkInterface::wioctl( int call, struct iwreq& iwreq ) const
     #ifndef NODEBUG
     int result = ::ioctl( _sfd, call, &iwreq );
     if ( result == -1 )
-        qDebug( "ONetworkInterface::wioctl (%s) call %s (0x%04X) - Status: Failed: %d (%s)", name(), (const char*) *(*_ioctlmap)[call], call, result, strerror( errno ) );
+        qDebug( "ONetworkInterface::wioctl (%s) call %s (0x%04X) - Status: Failed: %d (%s)", name(), (const char*) debugmapper->map( call ), call, result, strerror( errno ) );
     else
-        qDebug( "ONetworkInterface::wioctl (%s) call %s (0x%04X) - Status: Ok.", name(), (const char*) *(*_ioctlmap)[call], call );
+        qDebug( "ONetworkInterface::wioctl (%s) call %s (0x%04X) - Status: Ok.", name(), (const char*) debugmapper->map( call ), call );
     return ( result != -1 );
     #else
     return ::ioctl( _sfd, call, &iwreq ) != -1;

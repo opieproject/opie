@@ -34,19 +34,8 @@
 #include <opie2/omanufacturerdb.h>
 
 #include <net/if.h>
-#include <cassert>
-#include <cstdio>
-using namespace std;
-
-#define IW_PRIV_TYPE_MASK       0x7000
-#define IW_PRIV_TYPE_NONE       0x0000
-#define IW_PRIV_TYPE_BYTE       0x1000
-#define IW_PRIV_TYPE_CHAR       0x2000
-#define IW_PRIV_TYPE_INT        0x4000
-#define IW_PRIV_TYPE_FLOAT      0x5000
-#define IW_PRIV_TYPE_ADDR       0x6000
-#define IW_PRIV_SIZE_FIXED      0x0800
-#define IW_PRIV_SIZE_MASK       0x07FF
+#include <assert.h>
+#include <stdio.h>
 
 /*======================================================================================
  * OMacAddress

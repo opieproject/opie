@@ -5,13 +5,13 @@ HEADERS     = 802_11_user.h       \
               dhcp.h              \
               udp_ports.h         \
               wireless.h          \
-              oioctlmap.h         \
+              odebugmapper.h      \
               omanufacturerdb.h   \
               onetutils.h         \
               onetwork.h          \
               opcap.h             \
               ostation.h
-SOURCES     = oioctlmap.cpp       \
+SOURCES     = odebugmapper.cpp       \
               omanufacturerdb.cpp \
               onetutils.cpp       \
               onetwork.cpp        \

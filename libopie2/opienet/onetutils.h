@@ -125,6 +125,24 @@ void dumpBytes( const unsigned char* data, int num );
 QString modeToString( int );
 int stringToMode( const QString& );
 
+#define IW_PRIV_TYPE_MASK       0x7000
+#define IW_PRIV_TYPE_NONE       0x0000
+#define IW_PRIV_TYPE_BYTE       0x1000
+#define IW_PRIV_TYPE_CHAR       0x2000
+#define IW_PRIV_TYPE_INT        0x4000
+#define IW_PRIV_TYPE_FLOAT      0x5000
+#define IW_PRIV_TYPE_ADDR       0x6000
+#define IW_PRIV_SIZE_FIXED      0x0800
+#define IW_PRIV_SIZE_MASK       0x07FF
+
+#ifndef ARPHRD_IEEE80211
+#define ARPHRD_IEEE80211 801
+#endif
+#ifndef ARPHRD_IEEE80211_PRISM
+#define ARPHRD_IEEE80211_PRISM 802
+#endif
+
+
 /* Network to host order macros */
 
 #ifdef LBL_ALIGN
