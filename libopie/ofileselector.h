@@ -38,7 +38,10 @@
 #include <qstring.h>
 #include <qpixmap.h>
 #include <qstringlist.h>
+#include <qmap.h>
+#include <qvaluelist.h>
 
+#include <qpe/applnk.h>
 #include <qlistview.h>
 /** This is OPIEs FileDialog Widget. You can use it
  *  as a dropin replacement of the fileselector and
@@ -59,18 +62,23 @@ class QWidgetStack;
 class QHBoxLayout;
 class QVBoxLayout;
 class QPopupMenu;
-
-
+class QFileInfo;
+// 
 class OFileSelectorItem : public QListViewItem {
  public:
   OFileSelectorItem(QListView *view, const QPixmap &pixmap, const QString &path,
-		    const QString &date, const QString &size,
+		    const QString &date, const QString &size, const QString &mDir,
 		    bool isDir=false ): QListViewItem(view) {
     setPixmap(0, pixmap );
     setText(1, path );
     setText(2, size );
     setText(3, date );
+    //setText(4, mDir );
+    m_dir = mDir;
     dir = isDir;
+  }
+  QString directory()const{
+    return m_dir;
   }
   bool isDir()const{
     return dir;
@@ -78,8 +86,26 @@ class OFileSelectorItem : public QListViewItem {
   QString path()const{
     return text(1 );
   }
+  QString key(int id, bool )const {
+    QString ke;
+    if( id == 0 || id == 1 ){ // name
+      if( dir ){
+	ke.append("0" );
+	ke.append( text(1) );
+      }else{
+	ke.append("1" );
+	ke.append( text(1) );
+      }
+    }else if( id == 2 ){ // size
+      return text(2);
+    }else if( id == 3 ){ // date
+      return text(3);
+    }
+    return ke;
+  };
  private:
   bool dir:1;
+  QString m_dir;
 };
 
 class OFileSelector : public QWidget {
@@ -90,34 +116,60 @@ class OFileSelector : public QWidget {
   enum View { DIRS = 1, FILES = 2, TREE = 4, ICON = 8 };
   OFileSelector(QWidget *wid, int mode, int selector, const QString &dirName, const QString &fileName = QString::null, const QStringList mimetypes = QStringList() );
 
-  bool showToolbar() const { return m_shTool;  };
-  bool showPermissionBar() const {  return m_shPerm; };
-  bool showLineEdit()const { return m_shLne; };
-  bool showChooser( )const { return m_shChooser; };
-  bool showYesCancel()const { return m_shYesNo;  };
-  void setShowYesCancel( bool show );
-  void setShowToolbar( bool show );
-  void setShowPermissionBar( bool show );
-  void setShowLineEdit(bool show) ;
-  void setShowChooser( bool chooser );
+  bool isToolbarVisible() const { return m_shTool;  };
+  bool isPermissionBarVisible() const {  return m_shPerm; };
+  bool isLineEditVisible()const { return m_shLne; };
+  bool isChooserVisible( )const { return m_shChooser; };
+  bool isYesCancelVisible()const { return m_shYesNo;  };
+  void setYesCancelVisible( bool show );
+  void setToolbarVisible( bool show );
+  void setPermissionBarVisible( bool show );
+  void setLineEditVisible(bool show) ;
+  void setChooserVisible( bool chooser );
+
   QCheckBox* permissionCheckbox();
   bool setPermission() const;
   void setPermissionChecked( bool check );
+
   void setMode( int );
-  void setShowDirs(bool dir ) { };
-  bool showDirs() {bool turn; return turn; }
+
+  bool showDirs()const { return m_dir; }
+  void setShowDirs(bool );
+
+  const QListView* listview() { return m_View; };
+
+  bool isCaseSensetive()const {  return m_case; }
+  void setCaseSensetive(bool caSe );
+
+  bool showFiles()const { return m_files; };
+  void setShowFiles(bool );
+
+
+
   int mode()const { return m_mode;  };
   int selector()const { return m_selector; };
   void setSelector( int );
-  QString selectedName( );
+  
+
   void setPopupMenu( const QPopupMenu * );
 
-  const DocLnk* selectedDocument()const;
   void updateLay();
 
   void reparse(); // re reads the dir
-  QString directory();
+
+  QString selectedName( )const;
+  QStringList selectedNames()const;
+
+  QString selectedPath() const;
+  QStringList selectedPaths() const;
+
+  QString directory()const;
   int fileCount();
+
+  /* the user needs to delete it */
+  DocLnk selectedDocument()const;
+  /* the user needs to delete it */
+  QValueList<DocLnk> selectedDocuments();
 
  signals:
   void fileSelected( const DocLnk & );
@@ -164,24 +216,28 @@ class OFileSelector : public QWidget {
   bool m_shYesNo:1;
   bool m_boCheckPerm:1;
   bool m_autoMime:1;
+  bool m_case:1;
+  bool m_dir:1;
+  bool m_files:1;
 
  protected:
 
  private:
   // implementation todo
-  virtual void addFile(const QString &path, const QString &name, bool symlink = FALSE ) {};
-  virtual void addDir( const QString &path, const QString &dir , bool symlink = FALSE ){};
-  virtual void addSymlink(const QString &path, const QString &name, bool broken = FALSE ){};
+  virtual void addFile(const QString &mime, QFileInfo *info, bool symlink = FALSE );
+  virtual void addDir( const QString &mime, QFileInfo *info , bool symlink = FALSE );
+  virtual void addSymlink(const QString &mime, QFileInfo *info, bool broken = FALSE ){};
   void delItems();
   void initializeName();
   void initializeYes();
   void initializeChooser();
   void initializeListView();
+  void initPics();
   bool compliesMime(const QString &path, const QString &mime);
 
   class OFileSelectorPrivate;
   OFileSelectorPrivate *d;
-
+  static QMap<QString,QPixmap> *m_pixmaps;
 };
 
 
