@@ -36,16 +36,16 @@
 StorageInfo::StorageInfo( QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
-	QVBoxLayout *tmpvb = new QVBoxLayout( this );
-	QScrollView *sv = new QScrollView( this );
-	tmpvb->addWidget( sv, 0, 0 );
-	sv->setResizePolicy( QScrollView::AutoOneFit );
-	sv->setFrameStyle( QFrame::NoFrame );
-	container = new QWidget( sv->viewport() );
-	sv->addChild( container );
+  QVBoxLayout *tmpvb = new QVBoxLayout( this );
+  QScrollView *sv = new QScrollView( this );
+  tmpvb->addWidget( sv, 0, 0 );
+  sv->setResizePolicy( QScrollView::AutoOneFit );
+  sv->setFrameStyle( QFrame::NoFrame );
+  container = new QWidget( sv->viewport() );
+  sv->addChild( container );
     vb = 0x0;
 
-	disks.setAutoDelete(TRUE);
+  disks.setAutoDelete(TRUE);
     lines.setAutoDelete(TRUE);
     updateMounts();
     startTimer( 5000 );
@@ -95,7 +95,8 @@ void StorageInfo::updateMounts()
             QString fs = me->mnt_fsname;
             if ( fs.left(7)=="/dev/hd" || fs.left(7)=="/dev/sd"
                  || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd"
-                 || fs.left(9) == "/dev/root" || fs.left(5) == "/ramfs" || fs.left(5) == "tmpfs" ) {
+                 || fs.left(9) == "/dev/root" || fs.left(5) == "/ramfs"
+                 || fs.left(5) == "tmpfs" ) {
                 n++;
                 curdisks.append(fs);
                 QString d = me->mnt_dir;
@@ -116,10 +117,10 @@ void StorageInfo::updateMounts()
         delete vb;
         vb = new QVBoxLayout( container/*, n > 3 ? 1 : 5*/ );
         bool frst=TRUE;
-        QStringList::ConstIterator it=curdisks.begin();
-        QStringList::ConstIterator fsit=curfs.begin();
-        QStringList::ConstIterator fsmount=mountList.begin();
-        QStringList::ConstIterator fsTit=fsT.begin();
+        QStringList::ConstIterator it = curdisks.begin();
+        QStringList::ConstIterator fsit = curfs.begin();
+        QStringList::ConstIterator fsmount = mountList.begin();
+        QStringList::ConstIterator fsTit = fsT.begin();
 
     for (; it!=curdisks.end(); ++it, ++fsit) {
             if ( !frst ) {
@@ -134,20 +135,21 @@ void StorageInfo::updateMounts()
                 humanname = tr( "CF Card: " );
             else if ( humanname == "/dev/hda1" )
                 humanname = tr( "Hard Disk " );
+
             else if ( humanname.left(9) == "/dev/mmcd" )
                 humanname = tr( "SD Card " );
+
             else if ( humanname.left(7) == "/dev/hd" )
                 humanname = tr( "Hard Disk /dev/hd " );
+
             else if ( humanname.left(7) == "/dev/sd" )
                 humanname = tr( "SCSI Hard Disk /dev/sd " );
-            else if ( humanname == "/dev/mtdblock1" || humanname == "/dev/mtdblock/1" )
-                humanname = tr( "Int. Storage " );
-            else if ( humanname.left(14) == "/dev/mtdblock/" )
-                humanname = tr( "Int. Storage /dev/mtdblock/ " );
-            else if ( humanname.left(13) == "/dev/mtdblock" )
-                humanname = tr( "Int. Storage /dev/mtdblock " );
-            else if ( humanname.left(9) == "/dev/root" )
-                humanname = tr( "Int. Storage " );
+
+            else if ( humanname == "/dev/mtdblock1"
+                      || humanname.left(13) == "/dev/mtdblock"
+                      || humanname.left(9) == "/dev/root")
+                      humanname = tr( "Int. Storage " );
+
             else if ( humanname.left(5) == "tmpfs" )
                 humanname = tr( "RAM disk" );
               // etc.
