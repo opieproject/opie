@@ -73,7 +73,6 @@ CONFIG_LIBOPIE2UI	libopie2/opieui	opieui.pro
 CONFIG_LIBOPIETOOTH	noncore/net/opietooth/lib	lib.pro
 CONFIG_LIBOPIE_PIM	libopie/pim	pim.pro
 CONFIG_LIBQPE	library	library.pro
-CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
 CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro
 CONFIG_LIQUID	noncore/styles/liquid	liquid.pro
 CONFIG_LOGOUTAPPLET	core/applets/logoutapplet	logoutapplet.pro
@@ -90,7 +89,6 @@ CONFIG_NETWORKSETUP	noncore/settings/networksettings	networksettings.pro
 CONFIG_NETWORKAPPLET	noncore/applets/networkapplet	networkapplet.pro
 CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
 CONFIG_OBEX	core/applets/obex2	obex.pro
-CONFIG_OCOPSERVER	x11/ipc/server	ocopserver.pro
 CONFIG_ODICT	noncore/apps/odict	odict.pro
 CONFIG_OFILESELECTOR	libopie/ofileselector	ofileselector.pro
 CONFIG_OIPKG	core/apps/oipkg	oipkg.pro
