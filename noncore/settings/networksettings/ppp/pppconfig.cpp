@@ -26,8 +26,13 @@ PPPConfigWidget::PPPConfigWidget( Interface* iface, QWidget *parent,
     interface = iface;
     if (!PPPData::data()->setModemDevice( interface->getInterfaceName() ))
         PPPData::data()->setModemDevice("/dev/modem");
+    qDebug("PPPConfigWidget::PPPConfigWidget");
+    qDebug(" interface->getHardwareName >%s<", interface->getHardwareName().latin1());
     if (!PPPData::data()->setAccount( interface->getHardwareName() ))
         PPPData::data()->setAccount( 0 );
+
+    qDebug(" PPPData::data()->accname >%s<",PPPData::data()->accname().latin1());
+    qDebug(" PPPData::data()->currentAccountID() >%i<",PPPData::data()->currentAccountID());
     (void)new Modem;
 
   QVBoxLayout *layout = new QVBoxLayout( this );
@@ -55,6 +60,9 @@ PPPConfigWidget::~PPPConfigWidget()
 
 void PPPConfigWidget::accept()
 {
+    qDebug("PPPConfigWidget::accept");
+    qDebug(" PPPData::data()->accname >%s<",PPPData::data()->accname().latin1());
+    qDebug(" interface->getHardwareName >%s<", interface->getHardwareName().latin1());
     interface->setInterfaceName( PPPData::data()->modemDevice() );
     interface->setHardwareName( PPPData::data()->accname() );
     PPPData::data()->save();

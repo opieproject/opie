@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.4 2003-05-25 14:25:23 tille Exp $
+ * $Id: pppdata.h,v 1.5 2003-05-25 18:19:04 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -31,9 +31,10 @@
 #include <unistd.h>
 #include <sys/types.h>
 
+#include <qcolor.h>
+#include <qmap.h>
 #include <qstring.h>
 #include <qstringlist.h>
-#include <qcolor.h>
 
 #include "kpppconfig.h"
 
@@ -58,6 +59,7 @@ class Config;
 #define GENERAL_GRP        "PPP_General"
 #define MODEM_GRP          "PPP_Modem"
 #define ACCOUNT_GRP        "PPP_Account"
+#define ACCLIST_GRP        "PPP_Accounts_List"
 //#define GRAPH_GRP          "Graph"
 //#define WINPOS_GRP         "WindowPosition"
 
@@ -140,22 +142,14 @@ class Config;
 #define TOTALCOSTS_KEY     "TotalCosts"
 #define TOTALBYTES_KEY     "TotalBytes"
 
-// graph colors
-#define GENABLED           "Enabled"
-#define GCOLOR_BG          "Background"
-#define GCOLOR_TEXT        "Text"
-#define GCOLOR_IN          "InBytes"
-#define GCOLOR_OUT         "OutBytes"
-
 // pppd errors
 #define E_IF_TIMEOUT       1
 #define E_PPPD_DIED        2
 
-// window position
-#define WINPOS_CONWIN_X    "WindowPositionConWinX"
-#define WINPOS_CONWIN_Y    "WindowPositionConWinY"
-#define WINPOS_STATWIN_X   "WindowPositionStatWinX"
-#define WINPOS_STATWIN_Y   "WindowPositionStatWinY"
+// account list
+#define ACCOUNTS_COUNT     "Accounts_Count"
+#define ACOUNTS_DEV        "Accounts_Modem"
+#define ACOUNTS_ACC        "Accounts_Account"
 
 class PPPData {
 public:
@@ -170,6 +164,8 @@ public:
     void save();
     void cancel();
 
+    QMap<QString,QString> getConfiguredInterfaces();
+    void setConfiguredInterfaces( QMap<QString,QString> );
 
     // function to read/write date to configuration file
     QString readConfig(const QString &, const QString &, const QString &);
@@ -189,6 +185,7 @@ public:
   QString password() const;
   void setPassword(const QString &);
 
+    int currentAccountID() { return caccount; };
   const QString defaultAccount();
   void setDefaultAccount(const QString &);
 

@@ -1,0 +1,6 @@
+- impl. PPPData::copyaccount & PPPData::deleteAccount
+- update modem attribute inputs when modem has changed
+- fix layout of edit account
+- save pppd arguments in edit account
+- popup configure modem with the correct account prselected
+	not quite shure why it does not work... IMHO it should work

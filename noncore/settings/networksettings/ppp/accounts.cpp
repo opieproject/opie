@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.3 2003-05-24 17:03:27 tille Exp $
+ * $Id: accounts.cpp,v 1.4 2003-05-25 18:19:04 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -53,31 +53,18 @@ void parseargs(char* buf, char** args);
 AccountWidget::AccountWidget( QWidget *parent, const char *name )
   : QWidget( parent, name )
 {
-//  int min = 0;
   QVBoxLayout *l1 = new QVBoxLayout(this, 10, 10);
-
-  // add a hbox
-//   QHBoxLayout *l11 = new QHBoxLayout;
-//   l1->addLayout(l11);
-
   accountlist_l = new QListBox(this);
-//  accountlist_l->setMinimumSize(160, 128);
+
   connect(accountlist_l, SIGNAL(highlighted(int)),
 	  this, SLOT(slotListBoxSelect(int)));
   connect(accountlist_l, SIGNAL(selected(int)),
 	  this, SLOT(editaccount()));
   l1->addWidget(accountlist_l, 10);
 
-//   QVBoxLayout *l111 = new QVBoxLayout(this);
-//   l11->addLayout(l111, 1);
   edit_b = new QPushButton(i18n("&Edit..."), this);
   connect(edit_b, SIGNAL(clicked()), SLOT(editaccount()));
   QWhatsThis::add(edit_b, i18n("Allows you to modify the selected account"));
-
-//   min = edit_b->sizeHint().width();
-//   min = QMAX(70,min);
-//   edit_b->setMinimumWidth(min);
-
   l1->addWidget(edit_b);
 
   new_b = new QPushButton(i18n("&New..."), this);
@@ -172,7 +159,10 @@ AccountWidget::AccountWidget( QWidget *parent, const char *name )
     }
   }
 
-  slotListBoxSelect(accountlist_l->currentItem());
+//  slotListBoxSelect(accountlist_l->currentItem());
+  qDebug("setting listview index to %i",PPPData::data()->currentAccountID() );
+  accountlist_l->setCurrentItem( PPPData::data()->currentAccountID() );
+//  slotListBoxSelect( PPPData::data()->currentAccountID());
 
   l1->activate();
 }
@@ -184,27 +174,11 @@ void AccountWidget::slotListBoxSelect(int idx) {
   edit_b->setEnabled((bool)(idx != -1));
   copy_b->setEnabled((bool)(idx != -1));
   if(idx!=-1) {
+      qDebug("setting account to %i", idx);
     QString account = PPPData::data()->accname();
     PPPData::data()->setAccountbyIndex(accountlist_l->currentItem());
-//    reset->setEnabled(TRUE);
-//     costlabel->setEnabled(TRUE);
-//     costedit->setEnabled(TRUE);
-//     costedit->setText(AccountingBase::getCosts(accountlist_l->text(accountlist_l->currentItem())));
-
-//     vollabel->setEnabled(TRUE);
-//     voledit->setEnabled(TRUE);
-//    int bytes = PPPData::data()->totalBytes();
-//    voledit->setText(prettyPrintVolume(bytes));
-    PPPData::data()->setAccount(account);
- } else{
-     //  reset->setEnabled(FALSE);
-//     costlabel->setEnabled(FALSE);
-//     costedit->setText("");
-//     costedit->setEnabled(FALSE);
-//     vollabel->setEnabled(FALSE);
-//     voledit->setText("");
-//     voledit->setEnabled(FALSE);
-  }
+    //   PPPData::data()->setAccount(account);
+ }
 }
 
 

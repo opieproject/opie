@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.4 2003-05-25 14:25:23 tille Exp $
+ * $Id: pppdata.cpp,v 1.5 2003-05-25 18:19:04 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -55,13 +55,12 @@ PPPData* PPPData::data()
 }
 
 PPPData::PPPData()
-    :  //config(0L),
+    : modemDeviceGroup(-1),
      highcount(-1),        // start out with no entries
      caccount(-1),         // set the current account index also
      suidprocessid(-1),    // process ID of setuid child
      pppdisrunning(false),
-     pppderror(0),
-     modemDeviceGroup(-1)
+     pppderror(0)
 {
 }
 
@@ -329,7 +328,6 @@ const QString PPPData::modemDevice() {
 
 
 bool PPPData::setModemDevice(const QString &n) {
-    //FIXME: change modem group
     bool ret = false;
     for (int i = 0; devices[i]; i++)
         if (devices[i] == n){
@@ -804,7 +802,7 @@ int PPPData::newaccount() {
 }
 
 int PPPData::copyaccount(int i) {
-
+// FIXME
 //  if(highcount >= MAX_ACCOUNTS)
     return -1;
 
@@ -1221,28 +1219,34 @@ void PPPData::setpppdError(int err) {
 QString PPPData::modemGroup()
 {
     if (modemDeviceGroup<0)qFatal("wrong modem %i",modemDeviceGroup);
-    return QString("MODEM_GRP_%1").arg(modemDeviceGroup);
+    return QString("%1_%1").arg(MODEM_GRP).arg(modemDeviceGroup);
 }
 
-// //
-// // window position
-// //
-// void PPPData::winPosConWin(int& p_x, int& p_y) {
-//   p_x = readNumConfig(WINPOS_GRP, WINPOS_CONWIN_X, QApplication::desktop()->width()/2-160);
-//   p_y = readNumConfig(WINPOS_GRP, WINPOS_CONWIN_Y, QApplication::desktop()->height()/2-55);
-// }
 
-// void PPPData::setWinPosConWin(int p_x, int p_y) {
-//   writeConfig(WINPOS_GRP, WINPOS_CONWIN_X, p_x);
-//   writeConfig(WINPOS_GRP, WINPOS_CONWIN_Y, p_y);
-// }
+QMap<QString,QString> PPPData::getConfiguredInterfaces()
+{
+    QMap<QString,QString> ifaces;
+    int count = readNumConfig( ACCLIST_GRP, ACCOUNTS_COUNT, -1 );
+    QString accGrp;
+    for (int i = 0; i < count; i++){
+        accGrp = QString("%1_%1").arg(ACCLIST_GRP).arg(i);
+        ifaces.insert( readConfig( accGrp, ACOUNTS_DEV, "error" ),
+                       readConfig( accGrp, ACOUNTS_ACC, "error" ) );
+    }
 
-// void PPPData::winPosStatWin(int& p_x, int& p_y) {
-//   p_x = readNumConfig(WINPOS_GRP, WINPOS_STATWIN_X, QApplication::desktop()->width()/2-160);
-//   p_y = readNumConfig(WINPOS_GRP, WINPOS_STATWIN_Y, QApplication::desktop()->height()/2-55);
-// }
+    return ifaces;
+}
 
-// void PPPData::setWinPosStatWin(int p_x, int p_y) {
-//   writeConfig(WINPOS_GRP, WINPOS_STATWIN_X, p_x);
-//   writeConfig(WINPOS_GRP, WINPOS_STATWIN_Y, p_y);
-// }
+void PPPData::setConfiguredInterfaces( QMap<QString,QString> ifaces )
+{
+    QMap<QString,QString>::Iterator it;
+    QString accGrp;
+    int i = 0;
+    for( it = ifaces.begin(); it != ifaces.end(); ++it, ++i ){
+        accGrp = QString("%1_%1").arg(ACCLIST_GRP).arg(i);
+        writeConfig( accGrp, ACOUNTS_DEV, it.key() );
+        writeConfig( accGrp, ACOUNTS_ACC, it.data() );
+    }
+    writeConfig( ACCLIST_GRP, ACCOUNTS_COUNT, i );
+
+}

@@ -10,19 +10,30 @@
  */
 PPPModule::PPPModule() : Module()
 {
+    QMap<QString,QString> ifaces = PPPData::data()->getConfiguredInterfaces();
+    QMap<QString,QString>::Iterator it;
     Interface *iface;
-    iface = new Interface( 0, "device" );
-    iface->setHardwareName( "account" );
-    list.append( iface );
+    qDebug("getting interfaces");
+    for( it = ifaces.begin(); it != ifaces.end(); ++it ){
+        qDebug("ifaces %s", it.key().latin1());
+        iface = new Interface( 0, it.key() );
+        iface->setHardwareName( it.data() );
+        list.append( iface );
+    }
 }
 
 /**
  * Delete any interfaces that we own.
  */
 PPPModule::~PPPModule(){
-  Interface *i;
-  for ( i=list.first(); i != 0; i=list.next() )
-    delete i;
+    QMap<QString,QString> ifaces;
+    Interface *i;
+    for ( i=list.first(); i != 0; i=list.next() ){
+        ifaces.insert( i->getInterfaceName(), i->getHardwareName() );
+        delete i;
+    }
+    PPPData::data()->setConfiguredInterfaces( ifaces );
+    PPPData::data()->save();
 }
 
 /**
