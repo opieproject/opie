@@ -57,6 +57,8 @@
 
 extern MediaPlayerState *mediaPlayerState;
 
+QString audioMimes ="audio/mpeg;audio/x-wav;audio/x-ogg";
+// no m3u's here please
 
 PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     : PlayListWidgetGui( parent, name, fl ) {
@@ -205,7 +207,7 @@ void PlayListWidget::addToSelection( const DocLnk& lnk ) {
         if( QFileInfo( lnk.file() ).exists() ||
             lnk.file().left(4) == "http" )
             d->selectedFiles->addToSelection( lnk );
-          writeCurrentM3u();          
+//          writeCurrentM3u();          
     }
     else
         mediaPlayerState->setPlaying( TRUE );
@@ -252,7 +254,7 @@ void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *, const QPoi
 
 void PlayListWidget::addAllToList() {
     DocLnkSet filesAll;
-    Global::findDocuments(&filesAll, "video/*;audio/*");
+    Global::findDocuments(&filesAll, "video/*;"+audioMimes);
     QListIterator<DocLnk> Adit( filesAll.children() );
     for ( ; Adit.current(); ++Adit ) {
         if( QFileInfo( Adit.current()->file() ).exists() ) {
@@ -264,6 +266,8 @@ void PlayListWidget::addAllToList() {
 
 
 void PlayListWidget::addAllMusicToList() {
+    if(!audioScan)
+        scanForAudio();
     QListIterator<DocLnk> dit( files.children() );
     for ( ; dit.current(); ++dit ) {
         if( QFileInfo(dit.current()->file() ).exists() ) {
@@ -275,6 +279,8 @@ void PlayListWidget::addAllMusicToList() {
 
 
 void PlayListWidget::addAllVideoToList() {
+    if(!videoScan)
+        scanForVideo();
     QListIterator<DocLnk> dit( vFiles.children() );
     for ( ; dit.current(); ++dit ) {
         if( QFileInfo( dit.current()->file() ).exists() ) {
@@ -306,6 +312,8 @@ void PlayListWidget::setDocument( const QString& fileref ) {
     } else {
         clearList();
         addToSelection( DocLnk( fileref ) );
+        writeCurrentM3u();          
+        
         d->setDocumentUsed = TRUE;
         mediaPlayerState->setPlaying( FALSE );
         mediaPlayerState->setPlaying( TRUE );
@@ -612,7 +620,7 @@ void PlayListWidget::scanForAudio() {
     delete sdit.current();
   }
 //  Global::findDocuments( &files, "audio/*");
-  Global::findDocuments( &files, "audio/mpeg;audio/x-wav;audio/x-ogg");
+  Global::findDocuments( &files, audioMimes);
   audioScan = TRUE;
 }
 
@@ -844,16 +852,17 @@ void PlayListWidget::writeCurrentM3u() {
   Config cfg( "OpiePlayer" );
   cfg.setGroup("PlayList");
   QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
-  //    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
-  Om3u *m3uList;
-  m3uList = new Om3u( currentPlaylist, IO_ReadWrite |IO_Truncate );
-  d->selectedFiles->first();
 
+  Om3u *m3uList;
+  m3uList = new Om3u( currentPlaylist, IO_ReadWrite | IO_Truncate );
+  d->selectedFiles->first();
+      qDebug( d->selectedFiles->current()->file());
   do {
-    m3uList->add( d->selectedFiles->current()->file());
+      qDebug( d->selectedFiles->current()->file());
+    m3uList->add( d->selectedFiles->current()->file() );
   }
   while ( d->selectedFiles->next() );
-//    qDebug( list );
+    qDebug( "<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" );
   m3uList->write();
   m3uList->close();
 
