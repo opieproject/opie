@@ -278,6 +278,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags fl )
 
     changeBrushColor(Qt::white);
 
+    finishStartup();
 }
 
 
