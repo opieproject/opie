@@ -862,7 +862,7 @@ void AdvancedFm::remoteDelete()
         myFile = (*it);
         if(myFile.find(" -> ",0,TRUE) != -1)
             myFile = myFile.left(myFile.find(" -> ",0,TRUE));
-        QString f = currentDir.canonicalPath();
+        QString f = currentRemoteDir.canonicalPath();
          if(f.right(1).find("/",0,TRUE) == -1)
              f+="/";
         f+=myFile;
