@@ -55,9 +55,9 @@ PlayListSelection::PlayListSelection( QWidget *parent, const char *name )
 //    setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/background" ) );
     setBackgroundPixmap( Resource::loadPixmap( "opielogo" ) );
 // #endif
-    addColumn("Title",236);
-    setAllColumnsShowFocus( TRUE );
-    addColumn( tr( "Playlist Selection" ) );
+//      addColumn("Title",236);
+//      setAllColumnsShowFocus( TRUE );
+      addColumn( tr( "Playlist Selection" ) );
     header()->hide();
     setSorting( -1, FALSE );
 }

@@ -24,7 +24,8 @@
 
 #include <qstring.h>
 #include <qapplication.h>
-#include "../mediaplayerplugininterface.h"
+/* #include "../mediaplayerplugininterface.h" */
+#include <qpe/mediaplayerplugininterface.h>
 
 
 // #define OLD_MEDIAPLAYER_API
@@ -53,7 +54,7 @@ public:
     int audioStreams();
     int audioChannels( int stream ); 
     int audioFrequency( int stream );
-    int audioBitsPerSample( int stream );
+/*     int audioBitsPerSample( int stream ); */
     int audioSamples( int stream );
     bool audioSetSample( long sample, int stream );
     long audioGetSample( int stream );

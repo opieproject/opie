@@ -30,14 +30,14 @@ LibMadPluginImpl::LibMadPluginImpl()
 LibMadPluginImpl::~LibMadPluginImpl()
 {
     if ( libmadplugin )
-	delete libmadplugin;
+  delete libmadplugin;
 }
 
 
 MediaPlayerDecoder *LibMadPluginImpl::decoder()
 {
     if ( !libmadplugin )
-	libmadplugin = new LibMadPlugin;
+  libmadplugin = new LibMadPlugin;
     return libmadplugin;
 }
 
@@ -54,8 +54,8 @@ MediaPlayerEncoder *LibMadPluginImpl::encoder()
 QRESULT LibMadPluginImpl::queryInterface( const QUuid &uuid, QUnknownInterface **iface )
 {
     *iface = 0;
-    if ( ( uuid == IID_QUnknown ) || ( uuid == IID_MediaPlayerPlugin ) )
-	*iface = this, (*iface)->addRef();
+    if ( ( uuid == IID_QUnknown ) || ( uuid == IID_MediaPlayerPlugin )  )
+  *iface = this, (*iface)->addRef();
     return QS_OK;
 }
 

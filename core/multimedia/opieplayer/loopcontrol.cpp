@@ -34,7 +34,7 @@
 #include "loopcontrol.h"
 #include "videowidget.h"
 #include "audiodevice.h"
-#include "mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
 #include "mediaplayerstate.h"
 
 
@@ -101,7 +101,7 @@ LoopControl::LoopControl( QObject *parent, const char *name )
     : QObject( parent, name ) {
     isMuted = FALSE;
     connect( qApp, SIGNAL( volumeChanged(bool) ), this, SLOT( setMute(bool) ) );
-
+//qDebug("starting loopcontrol");
     audioMutex = new Mutex;
 
     pthread_attr_init(&audio_attr);
@@ -118,6 +118,7 @@ LoopControl::LoopControl( QObject *parent, const char *name )
   pthread_attr_init(&audio_attr);
     }
 #endif
+//qDebug("create audio thread");
     pthread_create(&audio_tid, &audio_attr, (void * (*)(void *))startAudioThread, this);
 }
 
@@ -220,8 +221,8 @@ void LoopControl::startVideo() {
 
 void LoopControl::startAudio() {
     
+//qDebug("start audio");
     audioMutex->lock();
-
     if ( moreAudio ) {
 
   if ( !isMuted && mediaPlayerState->curDecoder() ) {
@@ -236,14 +237,14 @@ void LoopControl::startAudio() {
       long sampleWeShouldBeAt = long( playtime.elapsed() ) * freq / 1000;
       long sampleWaitTime = currentSample - sampleWeShouldBeAt;
 
-        if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 20000 ) ) {
-      usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
-        }
-      else if ( sampleWaitTime <= -5000 ) {
-     qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
-     //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
-     currentSample = sampleWeShouldBeAt;
-       }
+//         if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 20000 ) ) {
+//       usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
+//         }
+//       else if ( sampleWaitTime <= -5000 ) {
+//      qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
+//      //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
+//      currentSample = sampleWeShouldBeAt;
+//        }
 
       audioDevice->write( audioBuffer, samplesRead * 2 * channels );
       audioSampleCounter = currentSample + samplesRead - 1;
@@ -391,8 +392,13 @@ bool LoopControl::init( const QString& filename ) {
   qDebug( "LC- frequency = %d", freq );
 
   audioSampleCounter = 0;
-
-   int bits_per_sample = mediaPlayerState->curDecoder()->audioBitsPerSample( astream);
+   int bits_per_sample;
+   if ( mediaPlayerState->curDecoder()->pluginName() == QString("LibWavPlugin") ) {
+       bits_per_sample =(int) mediaPlayerState->curDecoder()->getTime();
+       qDebug("using stupid hack");
+   } else {
+           bits_per_sample=0;
+   }
 
   audioDevice = new AudioDevice( freq, channels, bits_per_sample);
   audioBuffer = new char[ audioDevice->bufferSize() ];
@@ -437,7 +443,7 @@ bool LoopControl::init( const QString& filename ) {
 
 
 void LoopControl::play() {
-
+    qDebug("LC- play");
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     if ( !disabledSuspendScreenSaver || previousSuspendMode != hasVideoChannel ) {
   disabledSuspendScreenSaver = TRUE; 

@@ -23,8 +23,9 @@
 #include <qvaluelist.h>
 #include <qobject.h>
 #include <qdir.h>
-#include "mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
 #include "mediaplayerstate.h"
+
 
 
 #ifdef QT_NO_COMPONENT
@@ -60,6 +61,7 @@ void MediaPlayerState::readConfig( Config& cfg ) {
     isLooping = cfg.readBoolEntry( "Looping" );
     isShuffled = cfg.readBoolEntry( "Shuffle" );
     usePlaylist = cfg.readBoolEntry( "UsePlayList" );
+    usePlaylist = TRUE;
     isPlaying = FALSE;
     isPaused = FALSE;
     curPosition = 0;
@@ -121,7 +123,7 @@ MediaPlayerDecoder *MediaPlayerState::libMpeg3Decoder() {
 // }
 
 void MediaPlayerState::loadPlugins() {
-
+    qDebug("load plugins");
 #ifndef QT_NO_COMPONENT
     QValueList<MediaPlayerPlugin>::Iterator mit;
     for ( mit = pluginList.begin(); mit != pluginList.end(); ++mit ) {
@@ -138,12 +140,11 @@ void MediaPlayerState::loadPlugins() {
     for ( it = list.begin(); it != list.end(); ++it ) {
   MediaPlayerPluginInterface *iface = 0;
   QLibrary *lib = new QLibrary( path + "/" + *it );
-
-  MediaPlayerDebug(( "querying: %s", QString( path + "/" + *it ).latin1() ));
+//   qDebug( "querying: %s", QString( path + "/" + *it ).latin1() );
 
   if ( lib->queryInterface( IID_MediaPlayerPlugin, (QUnknownInterface**)&iface ) == QS_OK ) {
 
-      MediaPlayerDebug(( "loading: %s", QString( path + "/" + *it ).latin1() ));
+//       qDebug( "loading: %s", QString( path + "/" + *it ).latin1() );
 
       MediaPlayerPlugin plugin;
       plugin.library = lib;

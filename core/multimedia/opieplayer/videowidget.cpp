@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 #include <qpe/resource.h>
-#include "mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
 #include <qwidget.h>
 #include <qpainter.h>
 #include <qpixmap.h>

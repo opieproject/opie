@@ -187,17 +187,18 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
 
 
 AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
-    d = new AudioDevicePrivate;
+  qDebug("creating new audio device");
+  d = new AudioDevicePrivate;
     d->frequency = f;
     d->channels = chs;
     d->bytesPerSample = bps;
-//    qDebug("%d",bps);
+    qDebug("%d",bps);
     int format=0;
     if( bps == 8)  format  = AFMT_U8;
     else if( bps <= 0) format = AFMT_S16_LE;
     else format = AFMT_S16_LE;
 
-//    qDebug("AD- freq %d, channels %d, b/sample %d, bitrate %d",f,chs,bps,format);
+    qDebug("AD- freq %d, channels %d, b/sample %d, bitrate %d",f,chs,bps,format);
     connect( qApp, SIGNAL( volumeChanged(bool) ), this, SLOT( volumeChanged(bool) ) );
 
 

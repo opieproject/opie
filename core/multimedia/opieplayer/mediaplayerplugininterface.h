@@ -23,8 +23,12 @@
 #include <qpe/qcom.h>
 
 #ifndef QT_NO_COMPONENT
-// {c0093632-b44c-4cf7-a279-d82fe8a8890c}
+# ifndef IID_OpiePlayerPlugin
+// {F56F6CE0-1333-41FD-9B46-C0AF44D0B006}
+# define IID_OpiePlayerPlugin QUuid( 0xF56F6CE0, 0x1333, 0x41FD, 0x9B, 0x46, 0xC0, 0xAF, 0x44, 0xD0, 0xB0, 0x06);
+# endif
 # ifndef IID_MediaPlayerPlugin
+// {c0093632-b44c-4cf7-a279-d82fe8a8890c}
 #  define IID_MediaPlayerPlugin QUuid( 0xc0093632, 0xb44c, 0x4cf7, 0xa2, 0x79, 0xd8, 0x2f, 0xe8, 0xa8, 0x89, 0x0c )
 # endif
 #endif
@@ -93,7 +97,9 @@ public:
 
     // File Properies
     virtual long getPlayTime() { return -1; }
+#ifdef IID_OpiePlayerPlugin
     virtual int audioBitsPerSample( int stream ) = 0;
+#endif    
 };
 
 
@@ -106,6 +112,13 @@ struct MediaPlayerPluginInterface : public QUnknownInterface
     virtual MediaPlayerEncoder *encoder() = 0;
 };
 
+#ifdef IID_OpiePlayerPlugin
+struct OpiePlayerPluginInterface : public QUnknownInterface
+{
+    virtual MediaPlayerDecoder *decoder() = 0;
+    virtual MediaPlayerEncoder *encoder() = 0;
+};
+#endif
 
 #endif
 

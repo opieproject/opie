@@ -23,6 +23,9 @@
 #include <qmainwindow.h>
 #include <qpe/applnk.h>
 #include <qtabwidget.h>
+#include <fileselector.h>
+#include <qpushbutton.h>
+
 /* #include <qtimer.h> */
 
 
@@ -49,12 +52,12 @@ public:
     const DocLnk *current();
     void useSelectedDocument();
 /*     QTimer    * menuTimer; */
-
+    FileSelector*  playLists;
+    QPushButton *tbDeletePlaylist;
 public slots:
     void setDocument( const QString& fileref );
     void addToSelection( const DocLnk& ); // Add a media file to the playlist
     void addToSelection( QListViewItem* ); // Add a media file to the playlist
-    void addToSelection( QListViewItem*, const QPoint&,int ); // Add a media file to the playlist
     void setActiveWindow(); // need to handle this to show the right view
     void setPlaylist( bool ); // Show/Hide the playlist
     void setView( char );
@@ -63,8 +66,11 @@ public slots:
     void addAllMusicToList(); 
     void addAllVideoToList(); 
     void saveList();  // Save the playlist
-    void loadList();  // Load a playlist
+    void loadList( const DocLnk &);  // Load a playlist
     void playIt( QListViewItem *);
+    void fauxPlay(QListViewItem *);
+    void btnPlay(bool);
+    void deletePlaylist();
     bool first();
     bool last();
     bool next();

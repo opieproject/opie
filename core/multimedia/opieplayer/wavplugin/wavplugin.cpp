@@ -70,7 +70,7 @@ public:
   samples = -1;
     }
 
-    // expands out samples to the frequency of 44kHz
+    // expands out samples to the frequency of 44kHz //not any more
     bool add( short *output, long count, long& done, bool stereo )
     {
   done = 0;
@@ -88,6 +88,8 @@ public:
                 return FALSE;
             }
               samples_due += chunkdata.samplesPerSec;
+              printf("samples due %d\r", samples_due);
+              fflush(stdout);
              while ( count && (samples_due > chunkdata.samplesPerSec) ) {
                 *output++ = l;
                 if ( stereo )
@@ -328,13 +330,13 @@ bool WavPlugin::audioReadSamples( short *output, int channels, long samples, lon
 }
 
 double WavPlugin::getTime() {
-//    qDebug( "WavPlugin::getTime" );
-    return 0.0;
+//    qDebug( "WavPlugin::getTime" ); //this is a stupid hack here!!
+  return d->chunkdata.wBitsPerSample; /*0.0*/;
 }
 
-int WavPlugin::audioBitsPerSample( int ) {
-//    qDebug( "WavPlugin::audioFormat %d", d->chunkdata.wBitsPerSample );
-    return d->chunkdata.wBitsPerSample; // 
-}
+// int WavPlugin::audioBitsPerSample( int ) {
+// //    qDebug( "WavPlugin::audioFormat %d", d->chunkdata.wBitsPerSample );
+//     return d->chunkdata.wBitsPerSample; // 
+// }
 
 

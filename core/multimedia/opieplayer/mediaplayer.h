@@ -49,8 +49,8 @@ protected:
     void timerEvent( QTimerEvent *e );
 
 private:
-    int			volumeDirection;
-    const DocLnk	*currentFile;
+    int     volumeDirection;
+    const DocLnk  *currentFile;
 };
 
 
