@@ -1,4 +1,4 @@
   config MULTIAUTH_DUMMY
-    boolean "opie-multiauth-dummy (dummy authentication plugin for opie-multiauth testing)"
+    boolean "opie-multiauth-dummy (dummy authentication plugin, for testing purposes)"
     default "y"
     depends SECURITY

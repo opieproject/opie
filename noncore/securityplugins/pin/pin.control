@@ -5,8 +5,7 @@ Section: opie/settings
 Maintainer: Clement Seveillac <clement@nist.gov>
 Architecture: arm
 Version: 0.0.2.6
-Depends: opie-security
+Depends: libopiecore2, opie-security
 Description: PIN plugin for opie-security authentication.
- It implements the same kind of widgets as opie-security package,
- but this implementation can be used along with other authentication
- methods in the Opie Multi-Authentication Framework.
+ Simple PIN-based authentication plugin (replicate the functionality
+ Qtopia has, or Opie used to have, without plugins).
