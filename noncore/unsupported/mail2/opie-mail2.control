@@ -1,5 +1,4 @@
 Files: bin/mail $QTDIR/lib/libmail.so* apps/1Pim/mail.desktop pics/mail/*.png sounds/mail/*.wav
-Package: opie-mail2
 Priority: optional
 Section: opie/applications
 Maintainer: Constantin Bergemann <cbergemann@lisa.de>

@@ -7,4 +7,4 @@ Version: $QPE_VERSION-$SUB_VERSION.1
 Depends: opie-base ($QPE_VERSION)
 Description: Liquid style by Mosfet.
  Mosfet's well known Liquid GUI style from KDE,
-ported to OPIE.
+ ported to OPIE.

@@ -1,6 +1,5 @@
 Files: bin/opie-sh* apps/Applications/opie-sh.desktop pics/opie-sh/*.png help/opie-sh/*.html
 Priority: optional
-Package: opie-sh
 Section: opie/applications
 Maintainer: Thomas Stephens <spiralman@softhome.net>
 Architecture: arm

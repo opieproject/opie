@@ -1,7 +1,6 @@
 Files: $QTDIR/lib/libopietooth.so.1.0.0 $QTDIR/lib/libopietooth.so.1.0 $QTDIR/lib/libopietooth.so.1 
 Priority: optional
 Section: opie/system
-Package: libopietooth
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

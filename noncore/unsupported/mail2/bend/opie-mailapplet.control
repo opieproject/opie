@@ -1,5 +1,4 @@
 Files: plugins/applets/libbend.so*
-Package: opie-mailapplet
 Priority: optional
 Section: opie/applications
 Maintainer: Constantin Bergemann <cbergemann@lisa.de>

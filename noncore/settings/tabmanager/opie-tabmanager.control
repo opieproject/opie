@@ -1,4 +1,3 @@
-Package: opie-tabmanager
 Files: bin/tabmanager apps/Settings/tabmanager.desktop pics/tabmanager/tabmanager.png
 Priority: optional
 Section: opie/settings

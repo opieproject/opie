@@ -1,7 +1,6 @@
 Files: $QTDIR/lib/libopie.so.1.0.0 $QTDIR/lib/libopie.so.1.0 $QTDIR/lib/libopie.so.1 pics/opie/*
 Priority: optional
 Section: opie/system
-Package: libopie
 Maintainer: - 
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

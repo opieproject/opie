@@ -3,7 +3,7 @@ Priority: optional
 Section: base
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Version: 1.0.0-5
-Arch: iPAQ
+Architecture: arm
 Description: Pseudotty devices
  These files are not included in the Familiar libc6 package.
  This package contains just a few pty/tty pairs.

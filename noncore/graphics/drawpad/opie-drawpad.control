@@ -1,5 +1,4 @@
 Files: bin/drawpad apps/1Pim/drawpad.desktop pics/drawpad
-Package: opie-drawpad
 Priority: optional
 Section: opie/applications
 Maintainer: Sébastien Prud'homme <prudhomme@laposte.net>

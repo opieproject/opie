@@ -1,5 +1,4 @@
 Files: bin/qpdf apps/Applications/qpdf.desktop pics/qpdf/qpdf_icon.png
-Package: opie-qpdf
 Priority: optional
 Section: opie/applications
 Maintainer: Robert Griebl <sandman@handhelds.org>

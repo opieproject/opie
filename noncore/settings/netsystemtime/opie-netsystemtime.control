@@ -8,4 +8,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), ntpdate, libopie
 Description: ntp (Network  Time  Protocol) gui
-This utility syncs system time with a atomic timerserver via internet
+ This utility syncs system time with a atomic timerserver via internet

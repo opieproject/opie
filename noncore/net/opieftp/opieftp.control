@@ -1,6 +1,5 @@
 Files: bin/opieftp pics/opieftp apps/Applications/opieftp.desktop
 Priority: optional
-Package: opieftp
 Section: Communications
 Maintainer: L.J. Potter <ljp@llornkcor.com> 
 Architecture: arm

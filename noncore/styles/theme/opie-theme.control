@@ -7,5 +7,4 @@ Version: $QPE_VERSION-$SUB_VERSION.1
 Depends: opie-base ($QPE_VERSION)
 Description: Themed style.
  This style accepts all themes written
-for KDE 2.2
-
+ for KDE 2.2
