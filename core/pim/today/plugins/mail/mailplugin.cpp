@@ -34,7 +34,7 @@ double MailPlugin::versionNumber() const {
 }
 
 QString MailPlugin::pixmapNameWidget() const {
-    return "mail/desktopicon";
+    return "opiemail/desktopicon";
 }
 
 QWidget* MailPlugin::widget( QWidget * wid ) {
@@ -54,7 +54,7 @@ TodayConfigWidget* MailPlugin::configWidget( QWidget* ) {
 }
 
 QString MailPlugin::appName() const {
-    return "mail";
+    return "opiemail";
 }
 
 
