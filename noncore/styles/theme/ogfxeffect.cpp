@@ -5,7 +5,7 @@
 
 */
 
-// $Id: ogfxeffect.cpp,v 1.3 2002-11-01 16:07:10 sandman Exp $
+// $Id: ogfxeffect.cpp,v 1.4 2002-11-03 11:14:01 zecke Exp $
 
 #include <qimage.h>
 #include <qpainter.h>
@@ -14,6 +14,8 @@
 
 #include "ogfxeffect.h"
 
+#include <cstdlib>
+#include <cmath>
 
 //======================================================================
 //
