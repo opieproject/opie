@@ -3,3 +3,5 @@ Makefile*
 .libs
 *.o
 moc_*
+helpdialog.cpp
+helpdialog.h

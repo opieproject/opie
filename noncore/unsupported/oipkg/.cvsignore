@@ -3,3 +3,7 @@ Makefile*
 moc_*
 *~
 *.kdev*
+pksettingsbase.cpp
+pksettingsbase.h
+runwindow.cpp
+runwindow.h
