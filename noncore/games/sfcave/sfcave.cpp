@@ -826,7 +826,7 @@ void SFCave :: keyPressEvent( QKeyEvent *e )
             case Qt::Key_Up:
             case Qt::Key_F9:
             case Qt::Key_Space:
-                if ( !press )
+                if ( !replay && !press )
                 {
                     press = true;
                     replayList.append( new int( nrFrames ) );
@@ -862,7 +862,7 @@ void SFCave :: keyReleaseEvent( QKeyEvent *e )
             case Qt::Key_F9:
             case Qt::Key_Space:
             case Qt::Key_Up:
-                if ( press )
+                if ( !replay && press )
                 {
                     press = false;
 
@@ -883,11 +883,13 @@ void SFCave :: keyReleaseEvent( QKeyEvent *e )
                 break;
 
             case Qt::Key_S:
-                saveReplay();
+                if ( state == STATE_CRASHED )
+                    saveReplay();
                 break;
 
             case Qt::Key_L:
-                loadReplay();
+                if ( state == STATE_CRASHED )
+                    loadReplay();
                 break;
            default:
                 e->ignore();
@@ -1065,6 +1067,11 @@ void SFCave :: loadReplay()
 {
     FILE *in = fopen( (const char *)replayFile, "r" );
 
+    if ( in == 0 )
+    {
+        printf( "Couldn't load replay file!\n" );
+        return;
+    }   
     // Read size of next line
     char line[10+1];
     fgets( line, 10, in );
@@ -1093,4 +1100,6 @@ void SFCave :: loadReplay()
     delete data;
 
     fclose( in );
+    
+    printf( "Replay loaded from %s\n", (const char *)replayFile );
 }
