@@ -243,6 +243,10 @@ void AbView::setShowByLetter( char c )
 void AbView::setListOrder( const QValueList<int>& ordered )
 {
 	m_orderedFields = ordered;
+	if ( m_abTable ){
+		m_abTable->setOrderedList( ordered );
+		m_abTable->refresh();
+	}
 	updateView();
 }
 

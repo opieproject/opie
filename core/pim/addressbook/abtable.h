@@ -78,6 +78,10 @@ public:
 
     // Set the contacts shown in the table
     void setContacts( const OContactAccess::List& viewList );
+
+    // Set the list for primary contacts
+    void setOrderedList( const QValueList<int> ordered );
+
     // Selects a contact of a specific UID
     bool selectContact( int UID );
     

@@ -182,6 +182,12 @@ void AbTable::setContacts( const OContactAccess::List& viewList )
 
 }
 
+void AbTable::setOrderedList( const QValueList<int> ordered )
+{
+	intFields = ordered;
+}
+
+
 bool AbTable::selectContact( int UID )
 {
 	//	qWarning( "AbTable::selectContact( %d )", UID );
@@ -317,10 +323,13 @@ void AbTable::refresh()
 		abi = static_cast<AbTableItem*>( item(r, 0) );
 		contactItem = findContactContact( contactList[abi], r );
 		static_cast<AbTableItem*>( item(r, 1) )->setItem( contactItem.value, abi->text() );
-		if ( !contactItem.icon.isNull() )
+		if ( !contactItem.icon.isNull() ){
 			static_cast<AbTableItem*>( item(r, 1) )->
 				setPixmap( contactItem.icon );
-
+		}else{
+			static_cast<AbTableItem*>( item(r, 1) )->
+				setPixmap( QPixmap() );
+		}
 	}
 	resort();
 	setPaintingEnabled( TRUE );
