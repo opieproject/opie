@@ -30,7 +30,7 @@
 
 FILE *log; // debug only
 
-int resume ( void );
+int resume ( int resuspend );
 int suspend ( void );
 int main ( int argc, char **argv );
 int fork_with_pidfile ( void );
@@ -73,7 +73,10 @@ void sig_handler ( int sig )
 
 void usage ( void )
 {
-	fprintf ( stderr, "Usage: opiealarm -r|-s\n" );
+	fprintf ( stderr, "Usage: opiealarm -r|-s [-a]\n\n" );
+	fprintf ( stderr, "\t-s\tSuspend mode: set RTC alarm\n" );
+	fprintf ( stderr, "\t-r\tResume mode: kill running opiealarm\n" );
+	fprintf ( stderr, "\t-a <x>\tResuspend in <x> seconds (resume mode)\n\n" );
 	exit ( 1 );
 }
 
@@ -139,15 +142,24 @@ void remove_pidfile ( void )
 int main ( int argc, char **argv ) 
 {
 	int mode = 0;
+	int ac_resusp = 0;
 	int opt;
 
-	while (( opt = getopt ( argc, argv, "rs" )) != EOF ) {
+	while (( opt = getopt ( argc, argv, "a:rs" )) != EOF ) {
 		switch ( opt ) {
 			case 's':
 				mode = 's';
 				break;
 			case 'r':
 				mode = 'r';
+				break;
+			case 'a':
+				ac_resusp = atoi ( optarg );
+				if ( ac_resusp < 30 ) {
+					ac_resusp = 120;
+					
+					fprintf ( stderr, "Warning: resuspend timeout must be >= 30 sec. -- now set to 120 sec\n" );
+				}
 				break;
 			default:
 				usage ( );
@@ -166,11 +178,11 @@ int main ( int argc, char **argv )
 	opiealarm_was_running = kill_with_pidfile ( );
 	remove_pidfile ( );
 
-	if ( mode == 'r' ) 
-		return resume ( );
-	else 
-		return suspend ( );
-
+	switch ( mode ) {
+		case 'r': return resume ( ac_resusp );
+		case 's':
+		default : return suspend ( );
+	}
 	return 0;
 }		
 		
@@ -262,26 +274,26 @@ static int onac ( void )
 	return on;
 }
 
-int resume ( void )
+int resume ( int resuspend )
 {
 	FILE *fp;
 
 	// re-suspend when on AC (optional) when woken up via RTC
 
 	if ( !opiealarm_was_running ) { // opiealarm -s got it's RTC signal -> wake up by RTC
-		if ( onac ( )) {	
+		if ( resuspend && onac ( )) {	
 			time_t start, now;
 			char *argv [4];
 						
 			if ( !fork_with_pidfile ( ))
 				return 4;
 
-			// sleep 120sec (not less!)
+			// sleep <resuspend> sec (not less!)
 			time ( &start );
 			do {
 				sleep ( 1 );
 				time ( &now );
-			} while (( now - start ) < 120 );
+			} while (( now - start ) < resuspend );
 
 			if ( onac ( )) { // still on ac
 				// system() without fork
