@@ -86,13 +86,13 @@ LibraryDialog::LibraryDialog( QWidget* parent,  const char* name , bool modal, W
 
 LibraryDialog::~LibraryDialog()
 {
-		delete QList_Item2;
-		delete QList_Item1;
-		delete QList_Item3;
-		delete QList_Item4;
-		delete QList_Item5;
+// 		delete QList_Item2;
+// 		delete QList_Item1;
+// 		delete QList_Item3;
+// 		delete QList_Item4;
+// 		delete QList_Item5;
 
-		saveConfig();
+	//	saveConfig();
 }
 
   /*This groks using PGWHOLE.TXT */
