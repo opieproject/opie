@@ -1,9 +1,9 @@
 Files: bin/qpe apps/Settings/Calibrate.desktop pics/launcher
 Priority: required
 Section: opie/system
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Project Opie <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: qt-embedded (>=$QTE_VERSION)
+Depends: qt-embedded (>=$QTE_VERSION), libopie ($QPE_VERSION)
 Description: Launcher for Opie
  The "finder" or "explorer", or whatever you want to call it.
