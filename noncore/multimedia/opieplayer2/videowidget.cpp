@@ -204,6 +204,7 @@ void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
 void VideoWidget::backToNormal() {
      mediaPlayerState.setFullscreen( FALSE );
      makeVisible();
+     setToggleButton( FullScreen, false );
 }
 
 void VideoWidget::makeVisible() {
