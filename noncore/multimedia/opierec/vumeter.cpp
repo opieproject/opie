@@ -2,6 +2,7 @@
 //=======-VUMeter
 /////     copyright            : (C) 1999 by Martin Lorenz
 //////    email                : lorenz@ch.tum.de
+// also copyright 2005 lpotter@trolltech.com
 
 #include "vumeter.h"
 #include "qtrec.h"
@@ -10,15 +11,12 @@
 #include <qtimer.h>
 #include <qdrawutl.h>
 
-#include <opie2/odebug.h>
-using namespace Opie::Core;
-
 #include <math.h>
 
 VUMeter::VUMeter(QWidget *parent, const char *name, const int tr)
    : QWidget( parent, name )
 {
-   int tracks = tr;
+   tracks = tr;
    int i;
 
    qWarning("initialize peakvalues");
@@ -27,6 +25,8 @@ VUMeter::VUMeter(QWidget *parent, const char *name, const int tr)
       holdTime[i] = 20;
    }
 
+   colorScheme = 0;
+   
    readConf();
    
    //rainbow effect
@@ -39,7 +39,6 @@ VUMeter::VUMeter(QWidget *parent, const char *name, const int tr)
       for( i = 0; i < para.leds; i++) {
          int i16 = (j);
          color[i] = QColor(( 15 - i16) * 16, 255, 255, QColor::Hsv);
-//         owarn << color[i].name() << oendl;
          j--;
       }
    }
@@ -52,11 +51,10 @@ VUMeter::VUMeter(QWidget *parent, const char *name, const int tr)
 }
 
 VUMeter::~VUMeter(){
-   writeConf();
+//   writeConf();
 }
 
 void VUMeter::update(){
-//   qWarning("vumeter update");
    vuTimer->start(para.update, FALSE);
    if (para.onOff) {
       disconnect(vuTimer, SIGNAL(timeout()), this , SLOT(timeSlot()));
@@ -69,16 +67,15 @@ void VUMeter::update(){
 
 void VUMeter::slotOn() {
    connect(vuTimer, SIGNAL(timeout()), this , SLOT(timeSlot()));
-   para.onOff=true;
+   para.onOff = true;
 }
 
 void VUMeter::slotOff() {
    disconnect(vuTimer, SIGNAL(timeout()), this , SLOT(timeSlot()));
-   para.onOff=false;
+   para.onOff = false;
 }
 
 void VUMeter::slotProps() {
-   qDebug("VU-Dialog");
 }
 
 void VUMeter::paintEvent(QPaintEvent* e) {
@@ -98,9 +95,9 @@ void VUMeter::resizeEvent(QResizeEvent* event) {
 }
 
 void VUMeter::resize() {
-   qWarning("resize VUMeter painting");
+//   qWarning("resize VUMeter painting");
    if(buffer == 0)
-      qDebug("Dude NULL pixmap buffer!");
+      qWarning("Dude NULL pixmap buffer!");
 
    buffer->fill(black);
 
@@ -121,6 +118,7 @@ void VUMeter::resize() {
       if (2 * dy - 2 == 10) textOffset = 1;
       font = painter.font(); font.setPointSize( 2 * dy - 2);
       painter.setFont(font);
+
       for(i = 0; i < tracks + 2; i++) {
          painter.setPen(green); painter.setBrush(green);
          str.sprintf("%d",i+1);
@@ -131,6 +129,7 @@ void VUMeter::resize() {
          painter.setPen(black);
          painter.drawText(textOffset + ox + dx * i, oy + dy * (para.leds) - 2, sx, 2 * dy, AlignCenter, str);
       }
+      
       painter.end();
       paint();
    }
@@ -138,8 +137,6 @@ void VUMeter::resize() {
 
 void VUMeter::timeSlot() {
    int i;
-// getting stuck here
-//    qDebug("calling paint() from timeSlot()\n");
    paint();
    for(i = 0; i < tracks + 2; i++) {
       peak[i] /= para.resoFactor;
@@ -180,8 +177,6 @@ void VUMeter::paint() {
 
 void VUMeter::setPeak(int a[]) {
    int i;
-//	qDebug("set peak int");
-//    cerr<<"setting peak\n";
    for(i = 0; i < tracks + 2; i++) {
       if (a[i] > i_peak[i]) i_peak[i] = a[i];
       if (a[i] > i_hold[i]) { i_hold[i] = a[i]; holdTime[i] = para.hold; }
