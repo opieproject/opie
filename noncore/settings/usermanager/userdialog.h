@@ -18,6 +18,8 @@
 
 #include <qpe/resource.h>
 
+#include <opie/ofiledialog.h>
+
 class UserDialog : public QDialog 
 {
 	Q_OBJECT

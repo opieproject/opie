@@ -11,6 +11,7 @@
 
 // Needed for crypt_make_salt();
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <time.h>
 
@@ -139,7 +140,7 @@ bool Passwd::findUser(int uid) {
 	return searchUser(userRegExp);
 }
 
-bool Passwd::addUser(QString pw_name, QString pw_passwd, int pw_uid, int pw_gid, QString pw_gecos,QString pw_dir, QString pw_shell, bool createGroup=true) {
+bool Passwd::addUser(QString pw_name, QString pw_passwd, int pw_uid, int pw_gid, QString pw_gecos,QString pw_dir, QString pw_shell, bool createGroup) {
 	QString tempString;
 	if((createGroup) && (!(findGroup(pw_gid)))) addGroup(pw_name,pw_gid);
 	pw_passwd = crypt(pw_passwd, crypt_make_salt());
@@ -149,6 +150,8 @@ bool Passwd::addUser(QString pw_name, QString pw_passwd, int pw_uid, int pw_gid,
 	QDir d;
 	if(!(d.exists(pw_dir))) {
 		d.mkdir(pw_dir);
+		chown(pw_dir,pw_uid,pw_gid);
+		chmod(pw_dir,S_IRUSR|S_IWUSR|S_IXUSR);
 	}
 	return 1;
 }

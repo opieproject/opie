@@ -37,7 +37,8 @@ UserDialog::UserDialog(QWidget* parent, const char* name, bool modal, WFlags fl)
 	// And also fill the listview & the combobox with all available groups.
 	for( QStringList::Iterator it = accounts->groupStringList.begin(); it!=accounts->groupStringList.end(); ++it) {
 		accounts->splitGroupEntry(*it);
-		new QListViewItem(groupsListView,accounts->gr_name);
+		//new QListViewItem(groupsListView,accounts->gr_name);
+		new QCheckListItem(groupsListView,accounts->gr_name,QCheckListItem::CheckBox);
 		groupComboBox->insertItem(accounts->gr_name);
 	}
 	
@@ -155,6 +156,7 @@ void UserDialog::setupTab2() {
 	groupsListView->addColumn("Additional groups");
 	groupsListView->setColumnWidthMode(0,QListView::Maximum);
 	groupsListView->setMultiSelection(true);
+	groupsListView->setAllColumnsShowFocus(false);
 	
 	layout->addSpacing(5);
 		// Grouplist
@@ -315,5 +317,9 @@ void UserDialog::accept() {
  *
  */
 void UserDialog::clickedPicture() {
-	QMessageBox::information(0,"Sorry!","Icon selection not yet implemented.\nComming real soon now! (tm)");
+	QString filename=OFileDialog::getOpenFileName(OFileSelector::EXTENDED,"/opt/QtPalmtop/pics");
+	// OFileDialog *fd=new OFileDialog("Select Icon",this, OFileSelector::OPEN, OFileSelector::EXTENDED,"/");
+	//fd->showMaximized();
+	//fd->exec();
+	QMessageBox::information(0,"Sorry!","Icon selection not yet implemented.\nComming real soon now! (tm)\n"+filename);
 }
