@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.17 2003-02-12 01:03:29 max Exp $
+ * $Id: cardmode.cc,v 1.18 2003-02-12 20:49:39 max Exp $
  */
 
 #include "cardmode.hh"
@@ -60,7 +60,7 @@ int card_into_monitormode (pcap_t **orighandle, const char *device, int cardtype
 	  struct iwreq wrq;
 	  wrq.u.mode = IW_MODE_MONITOR;
 
-	  if(iw_set_ext(skfd,device,SIOCSIWMODE,&wrq)<0)
+	  if(iw_set_ext(skfd,(char *) device,SIOCSIWMODE,&wrq)<0)
  	 {
   	  wl_logerr("Could not set hostap card %s to raw mode, check cardtype", device);
   	  return 0;
@@ -103,7 +103,7 @@ int card_check_rfmon_datalink (const char *device)
 {
   int datalinktype=0;
   pcap_t *phandle;
-  phandle = pcap_open_live(device, 65,0,0,NULL);
+  phandle = pcap_open_live((char *)device, 65,0,0,NULL);
   datalinktype = pcap_datalink (phandle);
   pcap_close(phandle);
 
@@ -216,7 +216,7 @@ int card_set_channel (const char *device, int channel, int cardtype)
 	  struct iwreq wrq;
       iw_float2freq((double) channel, &wrq.u.freq);
 
-	  if(iw_set_ext(skfd,device,SIOCSIWFREQ,&wrq)<0)
+	  if(iw_set_ext(skfd,(char *) device,SIOCSIWFREQ,&wrq)<0)
  	 {
   	  wl_logerr("Could not set hostap card %s to channel %d", device, channel);
   	  return 0;
@@ -269,7 +269,7 @@ int iw_get_range_info(int skfd, const char * ifname,  iw_range * range)
   wrq2.u.data.length = sizeof(buffer);
   wrq2.u.data.flags = 0;
 
-  if(iw_get_ext(skfd, ifname, SIOCGIWRANGE, &wrq2) < 0)
+  if(iw_get_ext(skfd, (char *)ifname, SIOCGIWRANGE, &wrq2) < 0)
   {
       wl_logerr("Could not get the range from the interface");
   	return(-1);
