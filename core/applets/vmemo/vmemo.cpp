@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.37 2002-06-23 18:53:51 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.38 2002-06-28 23:37:17 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -209,6 +209,7 @@ VMemo::VMemo( QWidget *parent, const char *_name )
   struct utsname name; /* check for embedix kernel running on the zaurus*/
   if (uname(&name) != -1) {
     QString release=name.release;
+
     Config vmCfg("Vmemo");
     vmCfg.setGroup("Defaults");
     int toggleKey = setToggleButton(vmCfg.readNumEntry("toggleKey", -1));
@@ -233,7 +234,8 @@ VMemo::VMemo( QWidget *parent, const char *_name )
       e << QString("QPE/VMemo");
       e << QString("toggleRecord()");
     }
-    if( vmCfg.readNumEntry("hideIcon",0) == 1 || toggleKey > 0)
+
+    if( vmCfg.readNumEntry("hideIcon",0) == 1)
       hide();
   }
 }
@@ -244,6 +246,7 @@ VMemo::~VMemo()
 
 void VMemo::receive( const QCString &msg, const QByteArray &data )
 {
+  qDebug("receive");
   QDataStream stream( data, IO_ReadOnly );
   if (msg == "toggleRecord()")  {
     if (recording) {
@@ -275,7 +278,7 @@ void VMemo::mouseReleaseEvent( QMouseEvent * )
 bool VMemo::startRecording() {
 
   if ( recording)
-    return FALSE;;    
+    return FALSE;
 
   Config config( "Vmemo" );
   config.setGroup( "System" );
@@ -318,7 +321,8 @@ bool VMemo::startRecording() {
   s=fileName.find(':');
   if(s)
     fileName=fileName.right(fileName.length()-s-2);
-  qDebug("filename will be "+fileName);   
+  qDebug("pathname will be "+fileName);   
+
   if( fileName.left(1).find('/') == -1)
     fileName="/"+fileName;
   if( fileName.right(1).find('/') == -1)
@@ -334,7 +338,7 @@ bool VMemo::startRecording() {
   fileName.replace(QRegExp(","),"");
   
   if(openWAV(fileName.latin1()) == -1)  {
-    //    QString err("Could not open the output file\n");
+  //    QString err("Could not open the output file\n");
     //    err += fileName;
     //    QMessageBox::critical(0, "vmemo", err, "Abort");
     close(dsp);
@@ -360,10 +364,16 @@ bool VMemo::startRecording() {
 }
 
 void VMemo::stopRecording() {
+show();
+ qDebug("Stopped recording");
   recording = FALSE;
   if(useAlerts)
     if( msgLabel) delete msgLabel;
   t_timer->stop();
+  Config cfg("Vmemo");
+  cfg.setGroup("Defaults");
+    if( cfg.readNumEntry("hideIcon",0) == 1 )
+      hide();
 }
 
 int VMemo::openDSP()
@@ -384,10 +394,10 @@ int VMemo::openDSP()
   qDebug("samplerate: %d, channels %d, resolution %d", speed, channels, resolution);  
 
   if(systemZaurus) {
-    dsp = open("/dev/dsp1", O_RDWR); //Zaurus needs /dev/dsp1
+    dsp = open("/dev/dsp1", O_RDONLY); //Zaurus needs /dev/dsp1
     channels=1; //zaurus has one input channel
   }  else {
-    dsp = open("/dev/dsp", O_RDWR);
+    dsp = open("/dev/dsp", O_RDONLY);
   }
   
   if(dsp == -1)  {
@@ -565,7 +575,7 @@ void VMemo::record(void)
   write(wav, &length, 4);
 
   track.close();
-  qDebug("Tracvk closed");
+  qDebug("Track closed");
   
   if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
     perror("ioctl(\"SNDCTL_DSP_RESET\")");
@@ -575,6 +585,7 @@ void VMemo::record(void)
   //     if(useAlerts) 
   //         QMessageBox::message("Vmemo"," Done1 recording\n"+ fileName);
   qDebug("done recording "+fileName);
+
   QSound::play(Resource::findSound("vmemoe"));
 
   Config cfg("qpe");
