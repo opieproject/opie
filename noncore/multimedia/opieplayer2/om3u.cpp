@@ -63,7 +63,7 @@ void Om3u::readM3u() {
     QString s;
     while ( !t.atEnd() ) {
         s=t.readLine();
-                qDebug(s);
+//                qDebug(s);
         if( s.find( "#", 0, TRUE) == -1 ) {
                 if( s.left(2) == "E:" || s.left(2) == "P:" ) {
                     s = s.right( s.length() -2 );
@@ -128,7 +128,7 @@ void Om3u::write() { //writes list to m3u file
   QString list;
   if(count()>0) {
     for ( QStringList::ConstIterator it = begin(); it != end(); ++it ) {
-      qDebug(*it);
+//      qDebug(*it);
       list += *it+"\n";
     }
     f.writeBlock( list, list.length() );

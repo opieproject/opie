@@ -389,7 +389,7 @@ void PlayListWidget::addAllVideoToList() {
 
 
 void PlayListWidget::setDocument( const QString& fileref ) {
-    qDebug( "<<<<<<<<set document>>>>>>>>>> "+fileref );
+  //    qDebug( "<<<<<<<<set document>>>>>>>>>> "+fileref );
     fromSetDocument = TRUE;
     if ( fileref.isNull() ) {
         QMessageBox::warning( this, tr( "Invalid File" ),
@@ -959,11 +959,11 @@ void PlayListWidget::writeCurrentM3u() {
   if( d->selectedFiles->first()) {
 
   do {
-      qDebug( "add writeCurrentM3u " +d->selectedFiles->current()->file());
+    //      qDebug( "add writeCurrentM3u " +d->selectedFiles->current()->file());
     m3uList->add( d->selectedFiles->current()->file() );
   }
   while ( d->selectedFiles->next() );
-    qDebug( "<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" );
+  //    qDebug( "<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" );
   m3uList->write();
   m3uList->close();
 
