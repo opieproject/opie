@@ -198,16 +198,14 @@ bool MWirelessNetworkInterface::updateStatistics()
 
     wstream >> name >> status >> quality >> c >> signal >> c >> noise;
 
+#ifdef MDEBUG
     if ( quality > 92 )
-#ifdef MDEBUG
         qDebug( "WIFIAPPLET: D'oh! Quality %d > estimated max!\n", quality );
-#endif
+
     if ( ( signal > IW_UPPER ) || ( signal < IW_LOWER ) )
-#ifdef MDEBUG
         qDebug( "WIFIAPPLET: Doh! Strength %d > estimated max!\n", signal );
-#endif
+
     if ( ( noise > IW_UPPER ) || ( noise < IW_LOWER ) )
-#ifdef MDEBUG
         qDebug( "WIFIAPPLET: Doh! Noise %d > estimated max!\n", noise );
 #endif
 
