@@ -1006,7 +1006,7 @@ void ConnectWidget::cancelbutton() {
 
   //abort prompt window...
   if (prompt->isVisible()) {
-  	prompt->hide();
+      prompt->hide();
   }
   prompt->setConsumed();
 
@@ -1169,13 +1169,10 @@ void ConnectWidget::if_waiting_slot() {
 }
 
 void ConnectWidget::refresh()  {
-    qDebug( "IN REFRESH");
     _ifaceppp->refresh();
     if ( _ifaceppp->getStatus() )  {
-        qDebug( "STATUS IST TRUE " );
         messg->setText(i18n("Online"));
     } else {
-        qDebug("STATUS IST FALSE " ) ;
         messg->setText(i18n("Offline"));
     }
 }
