@@ -17,7 +17,7 @@
     </property>
     <property stdset="1">
         <name>caption</name>
-        <string>Wellenreiter II COnfiguration Dialog</string>
+        <string>Wellenreiter II Configuration Dialog</string>
     </property>
     <property>
         <name>layoutMargin</name>
@@ -1262,7 +1262,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Send proble requests</string>
+                                    <string>Send probe requests</string>
                                 </property>
                             </widget>
                             <widget row="0"  column="1" >
