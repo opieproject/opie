@@ -251,7 +251,7 @@ Il doit être vide</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Ajouter</translation>
+        <translation>Ajouter</translation>
     </message>
 </context>
 </TS>
