@@ -55,7 +55,12 @@ class Today : public TodayBase {
     void getMail();
     void autoStart();
     bool checkIfModified();
+    void setOwnerField();
+    void setOwnerField(QString &string);
     QList<TodoItem> loadTodo(const char *filename);
+private slots:
+    void channelReceived(const QCString &msg, const QByteArray & data);
+
  private:
     DateBookDB *db;
     todayconfig *conf;

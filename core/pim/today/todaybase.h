@@ -32,7 +32,7 @@ public:
     //QScrollView* Frame4;
     QFrame* Frame4;
     QPushButton* DatesButton;
-    //QLabel* DatesField;
+    QLabel* OwnerField;
     QLabel* Frame;
     QFrame* MailFrame;
     QLabel* TextLabel1;

@@ -27,6 +27,8 @@
 #include <qpe/qcopenvelope_qws.h> 
 #include <qpe/qprocess.h>
 #include <qpe/resource.h>
+#include <qpe/contact.h>
+#include <qpe/global.h>
 
 #include <qdir.h>
 #include <qfile.h>
@@ -66,11 +68,60 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
   QObject::connect( (QObject*)TodoButton, SIGNAL( clicked() ), this, SLOT(startTodo() ) );
   QObject::connect( (QObject*)DatesButton, SIGNAL( clicked() ), this, SLOT(startDatebook() ) );
   QObject::connect( (QObject*)MailButton, SIGNAL( clicked() ), this, SLOT(startMail() ) );
- 
+  
+#if defined(Q_WS_QWS) 
+#if !defined(QT_NO_COP)
+  QCopChannel *todayChannel = new QCopChannel("QPE/Today" , this );
+  connect (todayChannel, SIGNAL( received(const QCString &, const QByteArray &)),
+	   this, SLOT ( channelReceived(const QCString &, const QByteArray &)) );
+#endif  
+#endif 
+  
   draw();
+  setOwnerField();
   autoStart();
 }
 
+/*
+ * Qcop receive method.
+ */
+void Today::channelReceived(const QCString &msg, const QByteArray & data) {
+  QDataStream stream(data, IO_ReadOnly );
+  if ( msg == "message(QString)" ) {
+    QString message;
+    stream >> message;
+    setOwnerField(message);
+  }
+
+}
+
+/*
+ * Initialises the owner field with the default value, the username
+ */ 
+void Today::setOwnerField() {
+  QString file = Global::applicationFileName("addressbook", "businesscard.vcf");
+  if (QFile::exists(file)) {
+    Contact cont = Contact::readVCard(file)[0];
+    QString returnString = cont.fullName();
+    OwnerField->setText( tr ("<b>Owned by " + returnString + "</b>"));
+  } else {
+    OwnerField->setText( tr ("<b>to lame to fill out the business card </b>"));
+  }
+}
+
+/*
+ * Set the owner field with a given QString, for example per qcop.
+ */
+void Today::setOwnerField(QString &message) {
+  if (!message.isEmpty()) {
+    OwnerField->setText("<b>" + message + "</b>");
+  }
+}  
+
+/*
+ * Autostart, uses the new (opie only) autostart method in the launcher code.
+ * If registered against that today ist started on each resume.
+ */
 void Today::autoStart() {
   Config cfg("today");
   cfg.setGroup("Autostart"); 
@@ -86,6 +137,9 @@ void Today::autoStart() {
   }
 }
 
+/*
+ * Repaint method. Reread all fields.
+ */
 void Today::draw() {
   init();
   getDates();
@@ -94,7 +148,6 @@ void Today::draw() {
   // how often refresh
   QTimer::singleShot( 10*1000, this, SLOT(draw() ) );
 }
-
 
 /* 
  * Check if the todolist.xml was modified (if there are new entries.
@@ -122,10 +175,12 @@ bool Today::checkIfModified() {
 }
 
 
+/*
+ * Init stuff needed for today. Reads the config file.
+ */
 void Today::init() {
   QDate date = QDate::currentDate();
   QString time = (tr( date.toString()) );
-//  QString time = (tr( date.toString()) , white);
   
   TextLabel1->setText(time);
   db = new DateBookDB;
@@ -133,27 +188,29 @@ void Today::init() {
   // read config
   Config cfg("today");
   cfg.setGroup("BaseConfig"); 
-
+  
+  // -- config file section --
   // how many lines should be showed in the task section
   MAX_LINES_TASK = cfg.readNumEntry("maxlinestask",5);
   // after how many chars should the be cut off on tasks and notes
-  MAX_CHAR_CLIP = cfg.readNumEntry("maxcharclip",30);
+  MAX_CHAR_CLIP = cfg.readNumEntry("maxcharclip",40);
   // how many lines should be showed in the datebook section
   MAX_LINES_MEET = cfg.readNumEntry("maxlinesmeet",5);
   // If location is to be showed too, 1 to activate it.
   SHOW_LOCATION = cfg.readNumEntry("showlocation",1);
   // if notes should be shown 
   SHOW_NOTES = cfg.readNumEntry("shownotes",0);
+  // should only later appointments be shown or all for the current day.
   ONLY_LATER = cfg.readNumEntry("onlylater",1);
-
 }
 
-void Today::startConfig() {
-  conf = new todayconfig ( this, "", true );
-  
-  
-  //Config cfg = new Config("today");
 
+/*
+ * The method for the configuration dialog.
+ */
+void Today::startConfig() {
+
+  conf = new todayconfig ( this, "", true );
   // read the config
   Config cfg("today");
   cfg.setGroup("BaseConfig"); 
@@ -171,7 +228,7 @@ void Today::startConfig() {
   conf->SpinBox7->setValue(MAX_CHAR_CLIP);
   // only later
   conf->CheckBox3->setChecked(ONLY_LATER);
-  
+  // if today should be autostarted
   conf->CheckBoxAuto->setChecked(AUTOSTART);
 
   conf->exec();
@@ -192,6 +249,7 @@ void Today::startConfig() {
   cfg.writeEntry("onlylater", onlylater);
   cfg.setGroup("Autostart");
   cfg.writeEntry("autostart", autostart);
+  
   // sync it to "disk"
   cfg.write(); 
   NEW_START=1;
@@ -222,7 +280,7 @@ void Today::getDates() {
   int count=0;
   
   if ( list.count() > 0 ) {
-       
+    
     for ( QValueList<EffectiveEvent>::ConstIterator it=list.begin();
     it!=list.end(); ++it ) {
       
@@ -232,14 +290,14 @@ void Today::getDates() {
 	QTime time = QTime::currentTime();
 	
 	if (!ONLY_LATER) {
-	    count++;
+	  count++;
 	  DateBookEvent *l=new DateBookEvent(*it, AllDateBookEvents);
 	  layoutDates->addWidget(l);
 	  connect (l, SIGNAL(editEvent(const Event &)),
 		   this, SLOT(editEvent(const Event &)));
 	} else if ((time.toString() <= TimeString::dateString((*it).event().end())) ) {
-	    count++;
-
+	  count++;
+	  
 	  // show only later appointments
 	  DateBookEventLater *l=new DateBookEventLater(*it, AllDateBookEvents);
 	  layoutDates->addWidget(l);
@@ -262,8 +320,6 @@ void Today::getDates() {
   layoutDates->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
   sv1->addChild(AllDateBookEvents);
   AllDateBookEvents->show();
-    
-  
 }
   
 /*
@@ -339,17 +395,14 @@ void Today::getMail() {
   int NEW_MAILS = cfg.readNumEntry("newmails",0);
   int OUTGOING = cfg.readNumEntry("outgoing",0);
   
-
   QString output = tr("<b>%1</b> new mail(s), <b>%2</b> outgoing").arg(NEW_MAILS).arg(OUTGOING);
   
-
   MailField->setText(output);
 }
 
 
 /*
  * Get the todos
- *
  */
 void Today::getTodo() {
   
@@ -357,6 +410,7 @@ void Today::getTodo() {
   if (!checkIfModified() && !NEW_START) {
     return;
   }
+  // since it was the new start or the return from config dialog, set it to 0 again.
   NEW_START=0;
 
   QString output;
@@ -402,6 +456,10 @@ void Today::startDatebook() {
   QCopEnvelope e("QPE/System", "execute(QString)");
   e << QString("datebook");
 }
+
+/*
+ * starts the edit dialog as known from datebook
+ */ 
 void Today::editEvent(const Event &e) {
   startDatebook();
   
@@ -429,14 +487,15 @@ void Today::startMail() {
   e << QString("opiemail");
 }
 
-/*  
- *  Destroys the object and frees any allocated resources
- */
+
 Today::~Today() {
-  // no need to delete child widgets, Qt does it all for us
 }
 
 
+
+/*
+ * Gets the events for the current day, if it should get all dates 
+ */
 DateBookEvent::DateBookEvent(const EffectiveEvent &ev, 
 					   QWidget* parent = 0, 
 					   const char* name = 0, 
@@ -465,6 +524,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
         // end time of event
         + "<b> - </b>" + TimeString::timeString(QTime((ev).event().end().time()) );
     }
+    
     // include possible note or not
     if (SHOW_NOTES == 1) {
       msg += "<br> <i>note</i>:" +((ev).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
@@ -518,6 +578,7 @@ DateBookEventLater::DateBookEventLater(const EffectiveEvent &ev,
   connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
   setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
 }
+
 
 void DateBookEvent::editMe() {
   emit editEvent(event.event());

@@ -85,8 +85,12 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   TextLabel1->setFont( TextLabel1_font ); 
   TextLabel1->setBackgroundOrigin( QLabel::ParentOrigin );
   TextLabel1->setTextFormat( RichText );
-
-
+  
+  OwnerField = new QLabel(this , "Owner" );
+  OwnerField->setGeometry(QRect(0,0, this->width(), 12 ));
+  OwnerField->setAlignment(int (QLabel::AlignTop | QLabel::AlignLeft ) );
+  OwnerField->setMaximumHeight(12);
+    
   // --- dates section ---
   Frame4 = new QFrame( this, "Frame4" );
   Frame4->setPalette( pal );
@@ -94,9 +98,8 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   Frame4->setFrameShadow( QScrollView::Sunken );
   Frame4->setBackgroundOrigin( QScrollView::ParentOrigin );
   Frame4->setFrameStyle( QFrame::NoFrame );
-  Frame4->setGeometry (QRect( 0, 0, this->width() , this->height()) ); 
+  Frame4->setGeometry (QRect( 0, 8, this->width() , this->height()) ); 
   
-  // QScrollView* sv1 = new QScrollView( Frame4 );
   sv1 = new QScrollView( Frame4 );
   sv1->setResizePolicy(QScrollView::AutoOneFit);
   sv1->setHScrollBarMode( QScrollView::AlwaysOff );
@@ -110,16 +113,8 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   DatesButton->setPalette( pal );
   DatesButton->setPixmap( datebook  );
   DatesButton->setFlat( TRUE );
-
-  //DatesField = new QLabel( sv1->viewport(), "DatesField" );
-  //DatesField = new QVBox(sv1->viewport());
-  //QWidget *dummy = new QWidget(sv1->viewport());
-  //sv1->addChild(DatesField);
-  //DatesField->setText( tr( "No appointments today" ) );
-  // DatesField->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
-
-
- // --- mail section ---)
+  
+  // --- mail section ---)
   MailFrame = new QFrame( this ,"MailFrame" );
   MailFrame->setBackgroundOrigin( QScrollView::ParentOrigin );
   MailFrame->setGeometry (QRect( 0, 0, this->width() , 15) ); 
@@ -142,7 +137,6 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   MailField->setMaximumHeight(40);
   MailField->setMinimumHeight(15);
 
-  
   // --- todo section --
   Frame15 = new QFrame( this, "Frame15" );
   Frame15->setFrameStyle( QFrame::NoFrame );
@@ -179,6 +173,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   // -- layout --
   layout->addWidget(Frame);
+  layout->addWidget(OwnerField);
   layout->addWidget(Frame4);
   layout->addWidget(MailFrame);
   layout->addWidget(Frame15);
