@@ -1080,7 +1080,7 @@ void PlayListWidget::openFile() {
                m3uFile += "/";
             }
             filename = m3uFile;
-            =             }
+         }
          lnk.setName( m3uFile ); //sets name
          lnk.setFile( filename ); //sets file name
          lnk.setIcon("opieplayer2/musicfile");
