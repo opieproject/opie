@@ -6,7 +6,7 @@ SOURCES         = main.cpp bluebase.cpp scandialog.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 INCLUDEPATH   += $(OPIEDIR)/noncore/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lqpe -lopietooth
+LIBS            += -lqpe -lopietooth -lopie
 INTERFACES      = bluetoothbase.ui  devicedialog.ui  
 TARGET          = $(OPIEDIR)/bin/bluetooth-manager
 
