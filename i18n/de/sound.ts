@@ -62,11 +62,11 @@
     </message>
     <message>
         <source>Key_Calender</source>
-        <translation>Key_Home</translation>
+        <translation>Key_Calender</translation>
     </message>
     <message>
         <source>Key_Contacts</source>
-        <translation>Key_Home</translation>
+        <translation>Key_Contacts</translation>
     </message>
     <message>
         <source>Key_Menu</source>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Key_Mail</source>
-        <translation>Key_Menu</translation>
+        <translation>Key_Mail</translation>
     </message>
     <message>
         <source>30</source>
