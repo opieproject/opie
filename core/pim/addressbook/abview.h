@@ -29,6 +29,7 @@ public:
 
     void setView( Views view );
     void showPersonal( bool personal );
+    void setCurrentUid( int uid );
     void setShowByCategory( const QString& cat );
     void setShowToView( Views view );
     void setShowByLetter( char c );

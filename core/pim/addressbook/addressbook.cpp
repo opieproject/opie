@@ -686,36 +686,38 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		connect( ir, SIGNAL( done( Ir * ) ), this, SLOT( beamDone( Ir * ) ) );
 		QString description = "mycard.vcf";
 		ir->send( beamFilename, description, "text/x-vCard" );
-	}
-#if 0
-	else if (msg == "pickAddresses(QCString,QCString,QStringList,...)" ) {
+	} else if ( msg == "showUid(int)" ) {
 		QDataStream stream(data,IO_ReadOnly);
-		QCString ch,m;
-		QStringList types;
-		stream >> ch >> m >> types;
-		AddressPicker picker(abList,this,0,TRUE);
-		picker.showMaximized();
-		picker.setChoiceNames(types);
-		int i=0;
-		for (QStringList::ConstIterator it = types.begin(); it!=types.end(); ++it) {
-			QStringList sel;
-			stream >> sel;
-			picker.setSelection(i++,sel);
-		}
-		picker.showMaximized();
-		picker.exec();
+		int uid;
+		stream >> uid;
 
-		// ###### note: contacts may have been added - save here!
-
-		setCentralWidget(abList);
-		QCopEnvelope e(ch,m);
-		i=0;
-		for (QStringList::ConstIterator it = types.begin(); it!=types.end(); ++it) {
-			QStringList sel = picker.selection(i++);
-			e << sel;
+		// Deactivate Personal View..
+		if ( actionPersonal->isOn() ){
+			actionPersonal->setOn( false );
+			slotPersonalView();
 		}
-	}
-#endif
+
+		// Reset category and show as card..
+		m_abView -> setShowByCategory( QString::null );
+		m_abView -> setCurrentUid( uid );
+		slotViewSwitched ( AbView::CardView );
+
+	} else if ( msg == "editUid(int)" ) {
+		QDataStream stream(data,IO_ReadOnly);
+		int uid;
+		stream >> uid;
+
+		// Deactivate Personal View..
+		if ( actionPersonal->isOn() ){
+			actionPersonal->setOn( false );
+			slotPersonalView();
+		}
+
+		// Reset category and edit..
+		m_abView -> setShowByCategory( QString::null );
+		m_abView -> setCurrentUid( uid );
+		slotViewEdit();
+	} 
 
 }
 

@@ -296,6 +296,13 @@ void AbView::showPersonal( bool personal )
 	load();
 }
 
+void AbView::setCurrentUid( int uid ){
+
+	m_curr_Contact = uid;
+	updateView( true ); //true: Don't modificate the UID ! 
+}
+
+
 QStringList AbView::categories()
 {
 	mCat.load( categoryFileName() );
