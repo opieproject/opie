@@ -137,99 +137,99 @@
     <name>QObject</name>
     <message>
         <source>Standard</source>
-        <translation type="unfinished">Стандартный</translation>
+        <translation>Стандартный</translation>
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Вес</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Длина</translation>
     </message>
     <message>
         <source>Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Площадь</translation>
     </message>
     <message>
         <source>Temperatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Температура</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Объем</translation>
     </message>
     <message>
         <source>acres</source>
-        <translation type="unfinished"></translation>
+        <translation>акры</translation>
     </message>
     <message>
         <source>&#xb0;C</source>
-        <translation type="unfinished"></translation>
+        <translation>°C</translation>
     </message>
     <message>
         <source>carats</source>
-        <translation type="unfinished"></translation>
+        <translation>караты</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>см</translation>
     </message>
     <message>
         <source>cu cm</source>
-        <translation type="unfinished"></translation>
+        <translation>куб. см</translation>
     </message>
     <message>
         <source>cu ft</source>
-        <translation type="unfinished"></translation>
+        <translation>куб. футы</translation>
     </message>
     <message>
         <source>cu in</source>
-        <translation type="unfinished"></translation>
+        <translation>куб. дюймы</translation>
     </message>
     <message>
         <source>&#xb0;F</source>
-        <translation type="unfinished"></translation>
+        <translation>°F</translation>
     </message>
     <message>
         <source>fl oz (US)</source>
-        <translation type="unfinished"></translation>
+        <translation>жидк. унции</translation>
     </message>
     <message>
         <source>ft</source>
-        <translation type="unfinished"></translation>
+        <translation>футы</translation>
     </message>
     <message>
         <source>g</source>
-        <translation type="unfinished"></translation>
+        <translation>г</translation>
     </message>
     <message>
         <source>gal (US)</source>
-        <translation type="unfinished"></translation>
+        <translation>галлоны</translation>
     </message>
     <message>
         <source>hectares</source>
-        <translation type="unfinished"></translation>
+        <translation>гектары</translation>
     </message>
     <message>
         <source>in</source>
-        <translation type="unfinished"></translation>
+        <translation>дюймы</translation>
     </message>
     <message>
         <source>kg</source>
-        <translation type="unfinished"></translation>
+        <translation>кг</translation>
     </message>
     <message>
         <source>km</source>
-        <translation type="unfinished"></translation>
+        <translation>км</translation>
     </message>
     <message>
         <source>l</source>
-        <translation type="unfinished"></translation>
+        <translation>л</translation>
     </message>
     <message>
         <source>lb</source>
-        <translation type="unfinished"></translation>
+        <translation>фунты</translation>
     </message>
     <message>
         <source>Lg tons</source>
@@ -237,31 +237,31 @@
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>м</translation>
     </message>
     <message>
         <source>mg</source>
-        <translation type="unfinished"></translation>
+        <translation>мг</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished"></translation>
+        <translation>мили</translation>
     </message>
     <message>
         <source>ml</source>
-        <translation type="unfinished"></translation>
+        <translation>мл</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation>мм</translation>
     </message>
     <message>
         <source>naut. mi</source>
-        <translation type="unfinished"></translation>
+        <translation>морские мили</translation>
     </message>
     <message>
         <source>oz</source>
-        <translation type="unfinished"></translation>
+        <translation>унции</translation>
     </message>
     <message>
         <source>points</source>
@@ -269,43 +269,43 @@
     </message>
     <message>
         <source>pt</source>
-        <translation type="unfinished"></translation>
+        <translation>пинты</translation>
     </message>
     <message>
         <source>qt</source>
-        <translation type="unfinished"></translation>
+        <translation>кварты</translation>
     </message>
     <message>
         <source>sq cm</source>
-        <translation type="unfinished"></translation>
+        <translation>кв. см</translation>
     </message>
     <message>
         <source>sq ft</source>
-        <translation type="unfinished"></translation>
+        <translation>кв. футы</translation>
     </message>
     <message>
         <source>sq in</source>
-        <translation type="unfinished"></translation>
+        <translation>кв. дюймы</translation>
     </message>
     <message>
         <source>sq km</source>
-        <translation type="unfinished"></translation>
+        <translation>кв. км</translation>
     </message>
     <message>
         <source>sq m</source>
-        <translation type="unfinished"></translation>
+        <translation>кв. м</translation>
     </message>
     <message>
         <source>sq mi</source>
-        <translation type="unfinished"></translation>
+        <translation>кв. мили</translation>
     </message>
     <message>
         <source>sq mm</source>
-        <translation type="unfinished"></translation>
+        <translation>кв. мм</translation>
     </message>
     <message>
         <source>sq yd</source>
-        <translation type="unfinished"></translation>
+        <translation>кв. ярды</translation>
     </message>
     <message>
         <source>st</source>
@@ -317,19 +317,19 @@
     </message>
     <message>
         <source>tblspoon</source>
-        <translation type="unfinished"></translation>
+        <translation>стл. ложки</translation>
     </message>
     <message>
         <source>teaspoons</source>
-        <translation type="unfinished"></translation>
+        <translation>ч. ложки</translation>
     </message>
     <message>
         <source>tonnes</source>
-        <translation type="unfinished"></translation>
+        <translation>тонны</translation>
     </message>
     <message>
         <source>yd</source>
-        <translation type="unfinished"></translation>
+        <translation>ярды</translation>
     </message>
 </context>
 </TS>

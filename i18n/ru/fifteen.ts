@@ -3,7 +3,7 @@
     <name>FifteenMainWindow</name>
     <message>
         <source>Randomize</source>
-        <translation type="unfinished"></translation>
+        <translation>Перемешать</translation>
     </message>
     <message>
         <source>Solve</source>
@@ -27,16 +27,16 @@
     <message>
         <source>Congratulations!
 You win the game!</source>
-        <translation>Поздравления!
+        <translation>Поздравляю!
 Вы выиграли!</translation>
     </message>
     <message>
         <source>R&amp;andomize Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Перемешать фишки</translation>
     </message>
     <message>
         <source>&amp;Reset Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Сбросить фишки</translation>
     </message>
 </context>
 </TS>

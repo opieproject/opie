@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ок</translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>Details</source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Restore Failed.</source>
-        <translation>Восстановить не удалось !</translation>
+        <translation>Восстановить не удалось.</translation>
     </message>
     <message>
         <source>Unable to open File: %1</source>
@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Applications</source>
-        <translation>Программы</translation>
+        <translation>Приложения</translation>
     </message>
     <message>
         <source>Save To</source>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Select Source</source>
-        <translation>Источник</translation>
+        <translation>Выберите источник</translation>
     </message>
     <message>
         <source>Column 1</source>
@@ -118,7 +118,7 @@
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;Да</translation>
     </message>
 </context>
 </TS>

@@ -15,11 +15,11 @@
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">Отмена</translation>
+        <translation>&amp;Отмена</translation>
     </message>
 </context>
 <context>

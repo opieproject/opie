@@ -3,7 +3,7 @@
     <name>BuzzWord</name>
     <message>
         <source>buZzword</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Модные словечки</translation>
     </message>
     <message>
         <source>&amp;New game</source>
