@@ -1,12 +1,12 @@
 TEMPLATE	= lib
 CONFIG		+= qt plugin warn_on release
-HEADERS	=   battery.h batterystatus.h batteryappletimpl.h
-SOURCES	=   battery.cpp batterystatus.cpp batteryappletimpl.cpp
+HEADERS	=   battery.h batterystatus.h
+SOURCES	=   battery.cpp batterystatus.cpp
 TARGET		= batteryapplet
 DESTDIR		= $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += ../$(OPIEDIR)/include ..
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe -lopiecore2
 VERSION		= 1.0.0
 
 include ( $(OPIEDIR)/include.pro )

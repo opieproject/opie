@@ -35,6 +35,7 @@ class BatteryMeter : public QWidget
     ~BatteryMeter();
 
     QSize sizeHint() const;
+    static int position();
 
   protected:
     void timerEvent( QTimerEvent* );

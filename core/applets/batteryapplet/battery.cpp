@@ -20,11 +20,14 @@
 #include "battery.h"
 #include "batterystatus.h"
 
+/* OPIE */
+#include <opie2/otaskbarapplet.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/power.h>
 #include <qpe/qpeapplication.h>
 
+/* QT */
 #include <qpainter.h>
 #include <qtimer.h>
 
@@ -166,5 +169,15 @@ void BatteryMeter::paintEvent( QPaintEvent* )
         p.drawLine( x1+middle-i, y, x1+middle-i, y2 );
         p.drawLine( x1+middle+i, y, x1+middle+i, y2 );
     }
+}
+
+int BatteryMeter::position()
+{
+    return 8;
+}
+
+Q_EXPORT_INTERFACE()
+{
+    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<BatteryMeter> );
 }
 

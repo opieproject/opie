@@ -1,10 +1,11 @@
 
 #include "batterystatus.h"
 
+/* OPIE */
+#include <opie2/odevice.h>
 #include <qpe/power.h>
 
-#include <opie/odevice.h>
-
+/* QT */
 #include <qpainter.h>
 #include <qpushbutton.h>
 #include <qdrawutil.h>
