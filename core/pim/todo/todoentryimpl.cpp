@@ -133,7 +133,7 @@ Task NewTaskDialog::todoEntry()
 void NewTaskDialog::accept()
 {
     QString strText = txtTodo->text();
-    if ( !strText || strText == "") {
+    if ( strText.isEmpty() ) {
        // hmm... just decline it then, the user obviously didn't care about it
        QDialog::reject();
        return;

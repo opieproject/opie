@@ -124,6 +124,7 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
              this, SLOT( slotNew() ) );
     a->addTo( bar );
     a->addTo( edit );
+
     a = new QAction( tr( "Edit" ), Resource::loadIconSet( "edit" ),
 		     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ),
@@ -133,6 +134,7 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     a->addTo( contextMenu );
     a->setEnabled( FALSE );
     editAction = a;
+
     a = new QAction( tr( "Delete" ), Resource::loadIconSet( "trash" ),
 		     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ),
@@ -328,7 +330,7 @@ void TodoWindow::setCategory( int c )
 	catMenu->setItemChecked( i, c == (int)i );
     if ( c == 1 ) {
 	table->setShowCategory( QString::null );
-	setCaption( tr("Todo") + " - " + tr( "All" ) );
+	setCaption( tr("Todo") + " - " + tr( "All Categories" ) );
     } else if ( c == (int)catMenu->count() - 1 ) {
 	table->setShowCategory( tr( "Unfiled" ) );
 	setCaption( tr("Todo") + " - " + tr( "Unfiled" ) );
@@ -350,7 +352,7 @@ void TodoWindow::populateCategories()
     int id,
 	rememberId;
     id = 1;
-    catMenu->insertItem( tr( "All" ), id++ );
+    catMenu->insertItem( tr( "All Categories" ), id++ );
 //    catMenu->insertSeparator();
     QStringList categories = table->categories();
     categories.append( tr( "Unfiled" ) );

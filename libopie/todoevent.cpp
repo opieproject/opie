@@ -1,6 +1,8 @@
 
 #include <opie/todoevent.h>
 #include <qpe/palmtopuidgen.h>
+#include <qpe/stringutil.h>
+//#include <qpe/palmtoprecord.h>
 
 ToDoEvent::ToDoEvent(bool completed, int priority, const QString &category, 
 	       const QString &description, bool hasDate, QDate date, int uid )
@@ -11,7 +13,7 @@ ToDoEvent::ToDoEvent(bool completed, int priority, const QString &category,
     m_hasDate = hasDate;
     m_priority = priority;
     m_category = category;
-    m_desc = description;
+    m_desc = Qtopia::simplifyMultiLineSpace(description );
     if (uid == -1 ) {
 	Qtopia::UidGen *uidgen = new Qtopia::UidGen();
 	uid = uidgen->generate();
@@ -53,7 +55,7 @@ void ToDoEvent::setHasDate( bool hasDate )
 }
 void ToDoEvent::setDescription(const QString &desc )
 {
-    m_desc = desc;
+    m_desc = Qtopia::simplifyMultiLineSpace(desc );
 }
 void ToDoEvent::setCategory( const QString &cat )
 {

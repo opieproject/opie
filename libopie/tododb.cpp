@@ -138,6 +138,14 @@ ToDoDB::ToDoDB(const QString &fileName = QString::null, ToDoResource *res ){
     m_res = res;
     load();
 }
+ToDoResource* ToDoDB::resource(){
+  return m_res;
+};
+void ToDoDB::setResource( ToDoResource *res )
+{
+  delete m_res;
+  m_res = res;
+}
 ToDoDB::~ToDoDB()
 {
   delete m_res;
