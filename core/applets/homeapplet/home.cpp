@@ -71,6 +71,8 @@ QRESULT HomeApplet::queryInterface ( const QUuid &uuid, QUnknownInterface **ifac
 		*iface = this;
 	else if ( uuid == IID_MenuApplet )
 		*iface = this;
+	else
+	    return QS_FALSE;
 
 	if ( *iface )
 		(*iface)-> addRef ( );

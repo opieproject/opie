@@ -11,7 +11,7 @@
  *********************************************************************************************/
 
 /*
- * $Id: vmemoimpl.cpp,v 1.2 2002-06-23 03:12:26 llornkcor Exp $
+ * $Id: vmemoimpl.cpp,v 1.3 2004-01-27 18:48:11 zecke Exp $
  */
 
 #include "vmemo.h"
@@ -47,6 +47,8 @@ QRESULT VMemoAppletImpl::queryInterface( const QUuid &uuid, QUnknownInterface **
         *iface = this;
     else if ( uuid == IID_TaskbarApplet )
         *iface = this;
+    else
+	return QS_FALSE;
   
     if ( *iface )
         (*iface)->addRef();

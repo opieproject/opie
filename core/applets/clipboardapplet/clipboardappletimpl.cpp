@@ -50,6 +50,8 @@ QRESULT ClipboardAppletImpl::queryInterface( const QUuid &uuid, QUnknownInterfac
 	*iface = this;
     else if ( uuid == IID_TaskbarApplet )
 	*iface = this;
+    else
+	return QS_FALSE;
 
     if ( *iface )
 	(*iface)->addRef();

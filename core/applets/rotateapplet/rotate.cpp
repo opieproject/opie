@@ -242,6 +242,8 @@ QRESULT RotateApplet::queryInterface( const QUuid &uuid, QUnknownInterface **ifa
         *iface = this;
     else if ( uuid == IID_MenuApplet )
         *iface = this;
+    else
+	return QS_FALSE;
 
     if ( *iface )
         (*iface)->addRef();
