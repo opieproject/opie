@@ -1,4 +1,4 @@
-Packagename: opie-osearch
+Package: opie-osearch
 Files: bin/osearch apps/1Pim/osearch.desktop pics/osearch/*.png
 Priority: optional
 Section: opie/
