@@ -47,36 +47,36 @@ bool InterfaceSetupImp::saveChanges(){
   if(!saveSettings())
     return false;
 
-  qWarning("restarting interface %s\n", iface.latin1());
   interfaces->write();
 
-  QString ifup;
-  ifup += "ifdown ";
-  ifup += iface;
-  ifup += "; ifup ";
-  ifup += iface;
-  ifup += ";";
-
-  OProcess restart;
-  restart << "sh";
-  restart << "-c";
-  restart << ifup;
-
-  OWait *owait = new OWait();
-  Global::statusMessage( tr( "Restarting interface" ) );
-
-  owait->show();
-  qApp->processEvents();
-
-  if (!restart.start(OProcess::Block, OProcess::NoCommunication) ) {
-    qWarning("unstable to spawn ifdown/ifup");
+  if (interface->getStatus()) {
+    QString ifup;
+    ifup += "ifdown ";
+    ifup += iface;
+    ifup += "; ifup ";
+    ifup += iface;
+    ifup += ";";
+  
+    OProcess restart;
+    restart << "sh";
+    restart << "-c";
+    restart << ifup;
+  
+    OWait *owait = new OWait();
+    Global::statusMessage( tr( "Restarting interface" ) );
+  
+    owait->show();
+    qApp->processEvents();
+  
+    if (!restart.start(OProcess::Block, OProcess::NoCommunication) ) {
+      qWarning("unstable to spawn ifdown/ifup");
+    }
+  
+    owait->hide();
+    delete owait;
+  
+    interface->refresh();
   }
-
-  owait->hide();
-  delete owait;
-
-  interface->refresh();
-
   return true;
 }
 
