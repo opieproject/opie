@@ -233,7 +233,7 @@ Soll wirklich gelöscht werden?</translation>
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished">Dateimanager
+        <translation>Dateimanager
 Copyright 2002-2003 von
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 unter der GPL</translation>
@@ -242,19 +242,22 @@ unter der GPL</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Das aktuelle Verzeichnis ist nicht in 
+den Lesezeichen und kann deshalb
+nicht entfernt werden.
+</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesezeichen-Verzeichnis</translation>
     </message>
     <message>
         <source>Remove Current Directory from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelles Verzeichnis aus den Lesezeichen entfernen</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
 </context>
 <context>
