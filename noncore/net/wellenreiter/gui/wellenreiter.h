@@ -47,17 +47,23 @@ class Wellenreiter : public WellenreiterBase {
     MHexWindow* hexWindow() const { return hexwindow; };
     bool isDaemonRunning() const { return sniffing; };
 
+    bool sniffing;
+
   public slots:
     void channelHopped(int);
     void receivePacket(OPacket*);
-    void startStopClicked();
+    void startClicked();
+    void stopClicked();
+
+  signals:
+    void startedSniffing();
+    void stoppedSniffing();
 
   private:
     #ifdef QWS
     OSystem _system;                // Opie Operating System identifier
     #endif
 
-    bool sniffing;
     OWirelessNetworkInterface* iface;
     OPacketCapturer* pcap;
     ManufacturerDB* manufacturerdb;

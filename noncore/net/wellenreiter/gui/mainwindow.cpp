@@ -60,30 +60,26 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
     infoIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/InfoIcon" ) );
     settingsIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/SettingsIcon" ) );
-    #ifdef QWS
-    searchIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/SearchIcon" ) );
-    cancelIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/CancelIcon" ) );
-    #else
-    startStopIconSet = new QIconSet();
-    startStopIconSet->setPixmap( Resource::loadPixmap( "wellenreiter/SearchIcon" ), QIconSet::Automatic, QIconSet::Normal, QIconSet::Off );
-    startStopIconSet->setPixmap( Resource::loadPixmap( "wellenreiter/CancelIcon" ), QIconSet::Automatic, QIconSet::Normal, QIconSet::On );
-    #endif
+    startIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/SearchIcon" ) );
+    stopIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/CancelIcon" ) );
 
     // setup tool buttons
 
-    startStopButton = new QToolButton( 0 );
+    startButton = new QToolButton( 0 );
     #ifdef QWS
-    startStopButton->setAutoRaise( true );
+    startButton->setAutoRaise( true );
     #endif
+    startButton->setIconSet( *startIconSet );
+    startButton->setEnabled( false );
+    connect( startButton, SIGNAL( clicked() ), mw, SLOT( startClicked() ) );
+
+    stopButton = new QToolButton( 0 );
     #ifdef QWS
-    startStopButton->setOnIconSet( *cancelIconSet );
-    startStopButton->setOffIconSet( *searchIconSet );
-    #else
-    startStopButton->setIconSet( *startStopIconSet );
+    stopButton->setAutoRaise( true );
     #endif
-    startStopButton->setToggleButton( true );
-    connect( startStopButton, SIGNAL( clicked() ), mw, SLOT( startStopClicked() ) );
-    startStopButton->setEnabled( false );
+    stopButton->setIconSet( *stopIconSet );
+    stopButton->setEnabled( false );
+    connect( stopButton, SIGNAL( clicked() ), mw, SLOT( stopClicked() ) );
 
     QToolButton* c = new QToolButton( 0 );
     #ifdef QWS
@@ -125,8 +121,12 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     view->insertItem( "&Configure..." );
 
     QPopupMenu* sniffer = new QPopupMenu( mb );
-    sniffer->insertItem( "&Configure..." );
+    sniffer->insertItem( "&Configure...", this, SLOT( showConfigure() ) );
     sniffer->insertSeparator();
+    startID = sniffer->insertItem( "&Start", mw, SLOT( startClicked() ) );
+    sniffer->setItemEnabled( startID, false );
+    stopID = sniffer->insertItem( "Sto&p", mw, SLOT( stopClicked() ) );
+    sniffer->setItemEnabled( stopID, false );
 
     QPopupMenu* demo = new QPopupMenu( mb );
     demo->insertItem( "&Add something", this, SLOT( demoAddStations() ) );
@@ -135,19 +135,22 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     id = mb->insertItem( "&View", view );
     mb->setItemEnabled( id, false );
     id = mb->insertItem( "&Sniffer", sniffer );
-    mb->setItemEnabled( id, false );
     id = mb->insertItem( "&Demo", demo );
     mb->setItemEnabled( id, true );
 
     #ifdef QWS
-    mb->insertItem( startStopButton );
+    mb->insertItem( startButton );
+    mb->insertItem( stopButton );
     mb->insertItem( c );
     mb->insertItem( d );
     #else // Qt3 changed the insertion order. It's now totally random :(
     mb->insertItem( d );
     mb->insertItem( c );
-    mb->insertItem( startStopButton );
+    mb->insertItem( stopButton );
+    mb->insertItem( startButton );
     #endif
+
+    updateToolButtonState();
 
     // setup status bar (for now only on X11)
 
@@ -155,7 +158,11 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     statusBar()->message( "Ready." );
     #endif
 
+    connect( mw, SIGNAL( startedSniffing() ), this, SLOT( changedSniffingState() ) );
+    connect( mw, SIGNAL( stoppedSniffing() ), this, SLOT( changedSniffingState() ) );
 };
+
+
 
 void WellenreiterMainWindow::showConfigure()
 {
@@ -166,35 +173,45 @@ void WellenreiterMainWindow::showConfigure()
     #endif
     int result = cw->exec();
 
-    if ( result )
+    if ( result ) updateToolButtonState();
+}
+
+
+
+void WellenreiterMainWindow::updateToolButtonState()
+{
+    const QString& interface = cw->interfaceName->currentText();
+    const int cardtype = cw->daemonDeviceType();
+    const int interval = cw->daemonHopInterval();
+
+    if ( ( interface != "<select>" ) && ( cardtype != 0 ) )
     {
-        // check configuration from config window
-
-        const QString& interface = cw->interfaceName->currentText();
-        const int cardtype = cw->daemonDeviceType();
-        const int interval = cw->daemonHopInterval();
-
-        if ( ( interface != "<select>" ) && ( cardtype != 0 ) )
-            startStopButton->setEnabled( true );
-            //TODO ...
-        else
-            startStopButton->setEnabled( false );
-            //TODO ...
+        startButton->setEnabled( true );
+        menuBar()->setItemEnabled( startID, true );
+    }
+    else
+    {
+        startButton->setEnabled( false );
+        menuBar()->setItemEnabled( startID, false );
     }
 }
 
+
+void WellenreiterMainWindow::changedSniffingState()
+{
+    startButton->setEnabled( !mw->sniffing );
+    menuBar()->setItemEnabled( startID, !mw->sniffing );
+    stopButton->setEnabled( mw->sniffing );
+    menuBar()->setItemEnabled( stopID, mw->sniffing );
+}
+
+
 WellenreiterMainWindow::~WellenreiterMainWindow()
 {
-
     delete infoIconSet;
     delete settingsIconSet;
-    #ifdef QWS
-    delete searchIconSet;
-    delete cancelIconSet;
-    #else
-    delete startStopIconSet;
-    #endif
-
+    delete startIconSet;
+    delete stopIconSet;
 };
 
 void WellenreiterMainWindow::demoAddStations()

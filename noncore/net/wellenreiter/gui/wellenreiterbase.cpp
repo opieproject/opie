@@ -30,6 +30,7 @@
 #include "logwindow.h"
 #include "hexwindow.h"
 #include "scanlist.h"
+#include "statwindow.h"
 
 #ifdef QWS
 #include <qpe/resource.h>
@@ -40,8 +41,8 @@
 #endif
 
 
-/* 
- *  Constructs a WellenreiterBase which is a child of 'parent', with the 
+/*
+ *  Constructs a WellenreiterBase which is a child of 'parent', with the
  *  name 'name' and widget flags set to 'f' 
  */
 WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags fl )
@@ -78,15 +79,17 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     netview = new MScanListView( ap );
     apLayout->addWidget( netview );
 
-
     //--------- LOG TAB --------------
 
     logwindow = new MLogWindow( TabWidget, "Log" );
 
-
     //--------- HEX TAB --------------
 
     hexwindow = new MHexWindow( TabWidget, "Hex" );
+
+    //--------- STAT TAB --------------
+
+    statwindow = new MStatWindow( TabWidget, "Stat" );
 
     //--------- ABOUT TAB --------------
 
@@ -125,25 +128,27 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     aboutLayout->addWidget( TextLabel1_4_2, 1, 0 );
 
 #ifdef QWS
-    TabWidget->addTab( ap, "wellenreiter/networks", tr( "Networks" ) );
+    TabWidget->addTab( ap, "wellenreiter/networks", tr( "Nets" ) );
     TabWidget->addTab( logwindow, "wellenreiter/log", tr( "Log" ) );
     TabWidget->addTab( hexwindow, "wellenreiter/hex", tr( "Hex" ) );
+    TabWidget->addTab( statwindow, "wellenreiter/stat", tr( "Stats" ) );
     TabWidget->addTab( about, "wellenreiter/about", tr( "About" ) );
 #else
     TabWidget->addTab( ap, /* "wellenreiter/networks", */ tr( "Networks" ) );
     TabWidget->addTab( logwindow, /* "wellenreiter/log", */ tr( "Log" ) );
     TabWidget->addTab( hexwindow, /* "wellenreiter/hex", */ tr( "Hex" ) );
+    TabWidget->addTab( statwindow, /* "wellenreiter/hex", */ tr( "Stat" ) );
     TabWidget->addTab( about, /* "wellenreiter/about", */ tr( "About" ) );
 #endif
     WellenreiterBaseLayout->addWidget( TabWidget );
-   
+
 #ifdef QWS
-    TabWidget->setCurrentTab( tr( "Networks" ) );
+    TabWidget->setCurrentTab( tr( "Nets" ) );
 #endif
 
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 WellenreiterBase::~WellenreiterBase()

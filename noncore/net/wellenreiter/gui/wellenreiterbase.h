@@ -27,6 +27,7 @@ class MScanListItem;
 class QPushButton;
 class MLogWindow;
 class MHexWindow;
+class MStatWindow;
 
 #ifdef QWS
 class OTabWidget;
@@ -51,6 +52,7 @@ public:
     MScanListView* netview;
     MLogWindow* logwindow;
     MHexWindow* hexwindow;
+    MStatWindow* statwindow;
     QWidget* about;
     QLabel* PixmapLabel1_3_2;
     QLabel* TextLabel1_4_2;
@@ -66,7 +68,7 @@ protected:
     QPixmap* ani3;
     QPixmap* ani4;
 
-    
+
 };
 
 #endif // WELLENREITERBASE_H

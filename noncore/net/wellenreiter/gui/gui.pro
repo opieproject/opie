@@ -10,6 +10,7 @@ HEADERS         = wellenreiterbase.h \
                   scanlist.h \
                   logwindow.h \
                   hexwindow.h \
+                  statwindow.h \
                   configwindow.h \
                   manufacturers.h
 
@@ -20,6 +21,7 @@ SOURCES         = main.cpp \
                   scanlist.cpp \
                   logwindow.cpp \
                   hexwindow.cpp \
+                  statwindow.cpp \
                   configwindow.cpp \
                   manufacturers.cpp
 

@@ -34,6 +34,7 @@ using namespace Opie;
 #include <qmessagebox.h>
 #include <qcombobox.h>
 #include <qspinbox.h>
+#include <qtoolbutton.h>
 #include <qmainwindow.h>
 
 // Standard
@@ -52,7 +53,7 @@ using namespace Opie;
 #include "logwindow.h"
 #include "hexwindow.h"
 #include "configwindow.h"
-
+#include "statwindow.h"
 #include "manufacturers.h"
 
 Wellenreiter::Wellenreiter( QWidget* parent )
@@ -217,99 +218,122 @@ void Wellenreiter::receivePacket(OPacket* p)
     }
 }
 
-void Wellenreiter::startStopClicked()
+
+void Wellenreiter::stopClicked()
 {
-    if ( sniffing )
+    disconnect( SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
+    disconnect( SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
+    iface->setChannelHopping(); // stop hopping channels
+    pcap->close();
+    sniffing = false;
+    #ifdef QWS
+    oApp->setTitle();
+    #else
+    qApp->mainWidget()->setCaption( "Wellenreiter II" );
+    #endif
+
+    // get interface name from config window
+    const QString& interface = configwindow->interfaceName->currentText();
+    ONetwork* net = ONetwork::instance();
+    iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface ));
+
+    // switch off monitor mode
+    iface->setMonitorMode( false );
+    // switch off promisc flag
+    iface->setPromiscuousMode( false );
+
+    system( "cardctl reset; sleep 1" ); //FIXME: Use OProcess
+    logwindow->log( "(i) Stopped Scanning." );
+    assert( parent() );
+    ( (QMainWindow*) parent() )->setCaption( "Wellenreiter II" );
+
+    // message the user
+    QMessageBox::information( this, "Wellenreiter II", "Your wireless card\nshould now be usable again." );
+
+    sniffing = false;
+    emit( stoppedSniffing() );
+
+    // print out statistics
+    statwindow->log( "-----------------------------------------" );
+    statwindow->log( "- Wellenreiter II Capturing Statistic -" );
+    statwindow->log( "-----------------------------------------" );
+    statwindow->log( "Packet Type         |   Receive Count" );
+
+    for( QMap<QString,int>::ConstIterator it = pcap->statistics().begin(); it != pcap->statistics().end(); ++it )
     {
-        disconnect( SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
-        disconnect( SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
-        iface->setChannelHopping(); // stop hopping channels
-        pcap->close();
-        sniffing = false;
-        #ifdef QWS
-        oApp->setTitle();
-        #else
-        qApp->mainWidget()->setCaption( "Wellenreiter II" );
-        #endif
-
-        // get interface name from config window
-        const QString& interface = configwindow->interfaceName->currentText();
-        ONetwork* net = ONetwork::instance();
-        iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface ));
-
-        // switch off monitor mode
-        iface->setMonitorMode( false );
-        // switch off promisc flag
-        iface->setPromiscuousMode( false );
-
-        system( "cardctl reset; sleep 1" ); //FIXME: Use OProcess
-        logwindow->log( "(i) Stopped Scanning." );
-        assert( parent() );
-        ( (QMainWindow*) parent() )->setCaption( "Wellenreiter II" );
-
-        // message the user
-        QMessageBox::information( this, "Wellenreiter II", "Your wireless card\nshould now be usable again." );
+        QString left;
+        left.sprintf( "%s", (const char*) it.key() );
+        left = left.leftJustify( 20 );
+        left.append( '|' );
+        QString right;
+        right.sprintf( "%d", it.data() );
+        right = right.rightJustify( 7 );
+        statwindow->log( left + right );
     }
 
-    else
+}
+
+
+void Wellenreiter::startClicked()
+{
+    // get configuration from config window
+
+    const QString& interface = configwindow->interfaceName->currentText();
+    const int cardtype = configwindow->daemonDeviceType();
+    const int interval = configwindow->daemonHopInterval();
+
+    if ( ( interface == "" ) || ( cardtype == 0 ) )
     {
-        // get configuration from config window
+        QMessageBox::information( this, "Wellenreiter II", "Your device is not\nproperly configured. Please reconfigure!" );
+        return;
+    }
 
-        const QString& interface = configwindow->interfaceName->currentText();
-        const int cardtype = configwindow->daemonDeviceType();
-        const int interval = configwindow->daemonHopInterval();
+    // configure device
 
-        if ( ( interface == "" ) || ( cardtype == 0 ) )
-        {
-            QMessageBox::information( this, "Wellenreiter II", "Your device is not\nproperly configured. Please reconfigure!" );
-            return;
-        }
+    ONetwork* net = ONetwork::instance();
+    iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface ));
 
-        // configure device
+    // set monitor mode
 
-        ONetwork* net = ONetwork::instance();
-        iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface ));
+    switch ( cardtype )
+    {
+        case 1: iface->setMonitoring( new OCiscoMonitoringInterface( iface ) ); break;
+        case 2: iface->setMonitoring( new OWlanNGMonitoringInterface( iface ) ); break;
+        case 3: iface->setMonitoring( new OHostAPMonitoringInterface( iface ) ); break;
+        case 4: iface->setMonitoring( new OOrinocoMonitoringInterface( iface ) ); break;
+        default:
+            QMessageBox::information( this, "Wellenreiter II", "Bring your device into\nmonitor mode now." );
+    }
 
-        // set monitor mode
-
-        switch ( cardtype )
-        {
-            case 1: iface->setMonitoring( new OCiscoMonitoringInterface( iface ) ); break;
-            case 2: iface->setMonitoring( new OWlanNGMonitoringInterface( iface ) ); break;
-            case 3: iface->setMonitoring( new OHostAPMonitoringInterface( iface ) ); break;
-            case 4: iface->setMonitoring( new OOrinocoMonitoringInterface( iface ) ); break;
-            default: assert( 0 ); // shouldn't happen
-        }
-
+    if ( cardtype > 0 && cardtype < 5 )
         iface->setMonitorMode( true );
 
-        if ( !iface->monitorMode() )
-        {
-            QMessageBox::warning( this, "Wellenreiter II", "Can't set device into monitor mode." );
-            return;
-        }
-
-        // open pcap and start sniffing
-        pcap->open( interface );
-
-        if ( !pcap->isOpen() )
-        {
-            QMessageBox::warning( this, "Wellenreiter II", "Can't open packet capturer:\n" + QString(strerror( errno ) ));
-            return;
-        }
-
-        // set capturer to non-blocking mode
-        pcap->setBlocking( false );
-
-        // start channel hopper
-        iface->setChannelHopping( 1000 ); //use interval from config window
-
-        // connect
-        connect( pcap, SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
-        connect( iface->channelHopper(), SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
-
-        logwindow->log( "(i) Started Scanning." );
-        sniffing = true;
-
+    if ( !iface->monitorMode() )
+    {
+        QMessageBox::warning( this, "Wellenreiter II", "Can't set device into monitor mode." );
+        return;
     }
+
+    // open pcap and start sniffing
+    pcap->open( interface );
+
+    if ( !pcap->isOpen() )
+    {
+        QMessageBox::warning( this, "Wellenreiter II", "Can't open packet capturer:\n" + QString(strerror( errno ) ));
+        return;
+    }
+
+    // set capturer to non-blocking mode
+    pcap->setBlocking( false );
+
+    // start channel hopper
+    iface->setChannelHopping( 1000 ); //use interval from config window
+
+    // connect
+    connect( pcap, SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
+    connect( iface->channelHopper(), SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
+
+    logwindow->log( "(i) Started Scanning." );
+    sniffing = true;
+    emit( startedSniffing() );
 }

@@ -35,16 +35,19 @@ class WellenreiterMainWindow: public QMainWindow
     Wellenreiter* mw;
     WellenreiterConfigWindow* cw;
 
-    QIconSet* startStopIconSet;
-    const QIconSet* searchIconSet;
+    const QIconSet* startIconSet;
+    const QIconSet* stopIconSet;
     const QIconSet* infoIconSet;
     const QIconSet* settingsIconSet;
-    const QIconSet* cancelIconSet;
 
-    QToolButton* startStopButton;
+    QToolButton* startButton;
+    QToolButton* stopButton;
+    int startID;
+    int stopID;
 
   protected:
     virtual void closeEvent( QCloseEvent* );
+    void updateToolButtonState();
 
   private:
     QString getFileName( bool save );
@@ -57,6 +60,7 @@ class WellenreiterMainWindow: public QMainWindow
     void fileSaveSession();
     void fileLoadSession();
     void fileNew();
+    void changedSniffingState();
 };
 
 #endif
