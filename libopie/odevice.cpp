@@ -580,9 +580,7 @@ void iPAQ::alarmSound ( )
 	int vol;
 	bool vol_reset = false;
 
-	if ((( fd = ::open ( "/dev/sound/mixer", O_RDWR )) >= 0 ) ||
-	    (( fd = ::open ( "/dev/mixer", O_RDWR )) >= 0 )) {
-
+	if (( fd = ::open ( "/dev/sound/mixer", O_RDWR )) >= 0 ) {
 		if ( ::ioctl ( fd, MIXER_READ( 0 ), &vol ) >= 0 ) {
 			Config cfg ( "qpe" );
 			cfg. setGroup ( "Volume" );
@@ -651,8 +649,7 @@ bool iPAQ::setDisplayBrightness ( int bright )
 		bright = (int) ( 0.5 + ( ::pow ( 2, double( bright ) / 255.0 ) - 1 ) * 128.0 ); // logarithmic
 //	bright = ( bright + 1 ) / 2;
 	
-	if ((( fd = ::open ( "/dev/ts", O_WRONLY )) >= 0 ) ||
-	    (( fd = ::open ( "/dev/h3600_ts", O_WRONLY )) >= 0 )) {
+	if (( fd = ::open ( "/dev/touchscreen/0", O_WRONLY )) >= 0 ) {
 		FLITE_IN bl;
 		bl. mode = 1;
 		bl. pwr = bright ? 1 : 0;
