@@ -5,7 +5,7 @@ Section: opie/settings
 Maintainer: Clement Seveillac <clement@nist.gov>
 Architecture: arm
 Version: 0.0.1.6
-Depends: opie-security
+Depends: libopiecore2, opie-security
 Description: Notice plugin for opie-security authentication.
  It allows you to display e.g. a notice from your legal departement.
  
