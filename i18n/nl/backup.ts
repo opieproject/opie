@@ -22,7 +22,7 @@
     </message>
     <message>
         <source>Applications</source>
-        <translation>Programma's</translation>
+        <translation>Programma&apos;s</translation>
     </message>
     <message>
         <source>Save To</source>
