@@ -1314,18 +1314,17 @@ void QPEApplication::reset() {
     applyStyle();
 }
 
-#if QT_VERSION > 238
+#if (QT_VERSION < 238) & Q_OS_MACX
+bool qt_left_hand_scrollbars = false;
+#else
 #ifdef Q_OS_MACX
 #define WEAK_SYMBOL __attribute__((weak_import))
 #else
 #define WEAK_SYMBOL __attribute__((weak))
 #endif
-
 extern bool qt_left_hand_scrollbars WEAK_SYMBOL;
-
-#else
-bool qt_left_hand_scrollbars = false;
 #endif
+
 /*!
   \internal
 */
