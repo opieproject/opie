@@ -1,0 +1,60 @@
+As to popular request....
+
+1.) fix up the core/backend mess.
+    The actual Backend Implementation + Interface should be there
+    The API frontend used by the developer should not be used
+    
+2.) Move sorting, Query By Example, Exposing of Attributes of a Record
+    available to the Ptr base class and have sane implementation
+    on the template level
+    
+3.) Have something like QProperty to expose attributes from OPimRecord.
+    This would include exporting,importing of data, and translated names.
+    This can be used for Cross Reference, Selector Widget, Generic Table
+    Shower
+    
+4.) Marshall/Demarshall all PIM Records correctly
+
+5.) Add the Private Backend to the OPimRecord ( private ) make the base
+    access class friend and allow retrieving the backend. Make it virtual
+    so the template gets the right pointer. So it can only be accessed from
+    the inside
+    
+6.) Add signals for updating/adding/removing records to the access template
+    Internal connect method
+    
+7.) internal QCOP communication between the interfaces
+
+8.) GUI:Better and Improved Recurrence Widget
+
+9.) GUI:Improved Alarm Widget and handling classes
+
+10.) GUI:Undo/Redo template look at KDE
+
+11.) GUI: Generic X-Ref Selector using the factory and pointer interface
+
+12.) GUI: Factory and also registration of foreign services. generate a records of type
+
+13.) Multiple Backends for an Access Template
+
+14.) ReadOnly Access
+
+15.) GUI: Generic Table Widget maybe even baed on Selector with 
+     configuration of shown Attribute
+    
+16.) Multiple Categories with Sub Categories including popup selector
+     Widget. Fix Bug with changing visible. Both helper class + gui. 
+     Also group PopupNames  Like in Function Menu of XEmacs
+     
+17.) ListView for TodolIst At least introduce parents and child
+     And query for them
+     
+18.) Add querieng to Ptr Level for dates and date ranges. 
+     Return OEffectiveEvents or such which is also only loaded
+     if required.
+
+19.) Clean Up
+
+20.) Datebook Classes
+
+22.) Better helper for AlarmServer
