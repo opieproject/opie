@@ -10,9 +10,9 @@
         <name>geometry</name>
         <rect>
             <x>0</x>
-            <y>51</y>
-            <width>535</width>
-            <height>25</height>
+            <y>183</y>
+            <width>447</width>
+            <height>45</height>
         </rect>
     </property>
     <property stdset="1">
@@ -35,7 +35,7 @@
     <hbox>
         <property stdset="1">
             <name>margin</name>
-            <number>0</number>
+            <number>11</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
@@ -50,7 +50,7 @@
             <property stdset="1">
                 <name>sizePolicy</name>
                 <sizepolicy>
-                    <hsizetype>1</hsizetype>
+                    <hsizetype>7</hsizetype>
                     <vsizetype>0</vsizetype>
                 </sizepolicy>
             </property>
@@ -63,12 +63,24 @@
                 <pixmap>image0</pixmap>
             </property>
             <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
                 <name>autoRepeat</name>
                 <bool>true</bool>
             </property>
             <property stdset="1">
                 <name>autoRaise</name>
                 <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property>
+                <name>toolTip</name>
+                <string></string>
             </property>
         </widget>
         <spacer>
@@ -116,14 +128,87 @@
                 <string>W: 00,00</string>
             </property>
             <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
                 <name>autoRaise</name>
                 <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property>
+                <name>toolTip</name>
+                <string></string>
             </property>
         </widget>
         <spacer>
             <property>
                 <name>name</name>
                 <cstring>Spacer1</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget>
+            <class>QToolButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>dbl</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>font</name>
+                <font>
+                    <bold>1</bold>
+                </font>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>2</string>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>autoRaise</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>true</bool>
+            </property>
+            <property>
+                <name>toolTip</name>
+                <string></string>
+            </property>
+        </widget>
+        <spacer>
+            <property>
+                <name>name</name>
+                <cstring>Spacer1_3_2</cstring>
             </property>
             <property stdset="1">
                 <name>orientation</name>
@@ -163,10 +248,6 @@
             <property stdset="1">
                 <name>text</name>
                 <string>00 Jan-00 Jan</string>
-            </property>
-            <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
             </property>
             <property>
                 <name>hAlign</name>

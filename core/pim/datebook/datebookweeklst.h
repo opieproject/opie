@@ -31,6 +31,7 @@ public slots:
     void setDate(int y, int m, int d);
 signals:
     void dateChanged(int y, int w);
+    void setDbl(bool on);
 private:
     QDate date;
     bool onMonday;
@@ -73,7 +74,7 @@ class DateBookWeekLstView: public QWidget
 {
     Q_OBJECT
 public:
-    DateBookWeekLstView(QValueList<EffectiveEvent> &ev, QDate &d, bool onM,
+    DateBookWeekLstView(QValueList<EffectiveEvent> &ev, const QDate &d, bool onM,
 			QWidget* parent = 0, const char* name = 0, 
 			WFlags fl = 0 );
     ~DateBookWeekLstView();
@@ -88,6 +89,21 @@ protected slots:
     void keyPressEvent(QKeyEvent *);
 };
 
+class DateBookWeekLstDblView: public QWidget {
+        Q_OBJECT
+public:
+    DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1, 
+			   QValueList<EffectiveEvent> &ev2, 
+			   QDate &d, bool onM,
+			   QWidget* parent = 0, const char* name = 0, 
+			   WFlags fl = 0 );
+signals:
+    void editEvent(const Event &e);
+    void showDate(int y, int m, int d);
+    void addEvent(const QDateTime &start, const QDateTime &stop,
+		  const QString &str);
+};
+
 class DateBookWeekLst : public QWidget 
 {
     Q_OBJECT
@@ -96,6 +112,7 @@ public:
     DateBookWeekLst( bool ampm, bool onM, DateBookDB *newDB, 
 		     QWidget *parent = 0, 
 		     const char *name = 0 );
+    ~DateBookWeekLst();
     void setDate( int y, int w );
     void setDate(const QDate &d );
     int week() const { return _week; };
@@ -104,8 +121,10 @@ public:
 public slots:
     void redraw();
     void dateChanged(int y, int w);
+
 protected slots:
     void keyPressEvent(QKeyEvent *);
+    void setDbl(bool on);
 
 signals:
     void showDate(int y, int m, int d);
@@ -114,17 +133,18 @@ signals:
     void editEvent(const Event &e);
 
 private:
-  DateBookDB *db;
-  int startTime;
-  bool ampm;
-  bool onMonday;
-  int year, _week;
-  DateBookWeekLstHeader *header;
-  DateBookWeekLstView *view;
-  QVBoxLayout *layout;
-  QScrollView *scroll;
-  
-  void getEvents();
+    DateBookDB *db;
+    int startTime;
+    bool ampm;
+    bool onMonday;
+    bool dbl;
+    int year, _week;
+    DateBookWeekLstHeader *header;
+    QWidget *view;
+    QVBoxLayout *layout;
+    QScrollView *scroll;
+    
+    void getEvents();
 };
 
 #endif
