@@ -33,7 +33,8 @@
 /* --| main |------------------------------------------------------ */
 int main(int argc, char* argv[])
 {
-  setuid(getuid()); setgid(getgid()); // drop privileges
+  if(setuid(getuid()) !=0) qDebug("setuid failed");
+  if(setgid(getgid()) != 0) qDebug("setgid failed"); // drop privileges
 
   QPEApplication a( argc, argv );
 
@@ -42,7 +43,7 @@ int main(int argc, char* argv[])
   qDebug("keyboard grabbed");
 #ifdef FAKE_CTRL_AND_ALT
     qDebug("Fake Ctrl and Alt defined");
-  QPEApplication::grabKeyboard(); // for CTRL and ALT
+//  QPEApplication::grabKeyboard(); // for CTRL and ALT
 #endif
 
   QStrList tmp;
@@ -54,7 +55,8 @@ int main(int argc, char* argv[])
   if ( qstrcmp( shell, "/bin/shell" ) == 0 && QFile::exists( "/bin/bash" ) )
       shell = "/bin/bash";
   
-  putenv((char*)"COLORTERM="); // to trigger mc's color detection
+ if( putenv((char*)"COLORTERM=") !=0)
+     qDebug("putenv failed"); // to trigger mc's color detection
 
   Konsole m( "test", shell, tmp, TRUE  );
   m.setCaption( Konsole::tr("Terminal") );
@@ -62,3 +64,4 @@ int main(int argc, char* argv[])
 
   return a.exec();
 }
+
