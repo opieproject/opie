@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Search</source>
-        <translation>suchen</translation>
+        <translation>Suchen</translation>
     </message>
     <message>
         <source>Search all</source>
