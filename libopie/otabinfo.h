@@ -89,6 +89,14 @@ public:
     const QString &label()   const { return l; }
 
 /**
+ * @fn setLabel( const QString &label )
+ * @brief Set label for tab.
+ *
+ * @param label QString text label for OTabWidget selection control.
+ */
+    void setLabel( const QString &label ) { l = label; }
+
+/**
  * @fn control()
  * @brief Returns pointer to widget.
  */
@@ -99,6 +107,14 @@ public:
  * @brief Returns name of icon file.
  */
     const QString &icon()    const { return p; }
+
+/**
+ * @fn setIcon( const QString &icon )
+ * @brief Set icon for tab.
+ *
+ * @param icon QString name of icon file.
+ */
+    void setIcon( const QString &icon ) { p = icon; }
 
 private:
     int      i;

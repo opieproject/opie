@@ -98,7 +98,7 @@ void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &lab
     {
         tab->label = label;
     }
-    if ( tabBarStyle == IconTab || tabBarStyle == IconList)
+    if ( tabBarStyle == IconTab || tabBarStyle == IconList )
     {
         tab->iconset = new QIconSet( iconset );
     }
@@ -158,16 +158,52 @@ void OTabWidget::removePage( QWidget *childwidget )
     }
 }
 
+void OTabWidget::changeTab( QWidget *widget, const QString &iconset, const QString &label)
+{
+    OTabInfo *currtab = tabs.first();
+    while ( currtab && currtab->control() != widget )
+    {
+        currtab = tabs.next();
+    }
+    if ( currtab && currtab->control() == widget )
+    {
+        QTab *tab = tabBar->tab( currtab->id() );
+        QPixmap icon( loadSmooth( iconset ) );
+        tab->setText( label );
+        if ( tabBarStyle == IconTab )
+            tab->setIconSet( icon );
+        int i = 0;
+        while ( i < tabList->count() && tabList->text( i ) != currtab->label() )
+        {
+            i++;
+        }
+        if ( i < tabList->count() && tabList->text( i ) == currtab->label() )
+        {
+            if ( tabBarStyle == IconTab || tabBarStyle == IconList )
+            {
+                tabList->changeItem( icon, label, i );
+            }
+            else
+            {
+                tabList->changeItem( label, i );
+            }
+        }
+        currtab->setLabel( label );
+        currtab->setIcon( iconset );
+    }
+    setUpLayout();
+}
+
 void OTabWidget::setCurrentTab( QWidget *childwidget )
 {
-    OTabInfo *newtab = tabs.first();
-    while ( newtab && newtab->control() != childwidget )
+    OTabInfo *currtab = tabs.first();
+    while ( currtab && currtab->control() != childwidget )
     {
-        newtab = tabs.next();
+        currtab = tabs.next();
     }
-    if ( newtab && newtab->control() == childwidget )
+    if ( currtab && currtab->control() == childwidget )
     {
-        selectTab( newtab );
+        selectTab( currtab );
     }
 }
 

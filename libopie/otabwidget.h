@@ -126,6 +126,16 @@ public:
     void removePage( QWidget * );
 
 /**
+ * @fn changeTab( QWidget *widget, const QIconSet &icon, const QString &label )
+ * @brief Change text and/or icon for existing tab
+ *
+ * @param child Widget control.
+ * @param icon Path to icon.
+ * @param label Text label.
+ */
+    void changeTab( QWidget *, const QString &, const QString & );
+
+/**
  * @fn tabStyle()
  * @brief Returns current widget selection control style.
  */
