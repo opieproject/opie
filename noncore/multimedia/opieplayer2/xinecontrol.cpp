@@ -199,7 +199,7 @@ QString XineControl::getMetaInfo() {
     QString returnString;
 
     if ( !libXine->metaInfo( 0 ).isEmpty() ) {
-        returnString += tr( " Titel: " + libXine->metaInfo( 0 ) );
+        returnString += tr( " Title: " + libXine->metaInfo( 0 ) );
     }
 
     if ( !libXine->metaInfo( 1 ).isEmpty() ) {
