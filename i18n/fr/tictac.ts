@@ -17,5 +17,25 @@
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Click Play to start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make your move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You won!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Computer won!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>It&apos;s a draw</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
