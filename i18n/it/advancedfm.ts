@@ -256,11 +256,13 @@ Vuoi veramente eliminarlo?</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile rimuovere la directory corrente
+dai bookmark.
+Non è inserita nei bookmark!</translation>
     </message>
     <message>
         <source>File Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerca File</translation>
     </message>
 </context>
 <context>
