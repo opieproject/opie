@@ -32,3 +32,4 @@ TRANSLATIONS = ../../i18n/de/libqkjumpx.ts \
 
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/inputmethods

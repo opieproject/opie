@@ -33,3 +33,4 @@ TRANSLATIONS    = ../../i18n/pt_BR/libqmultikey.ts \
 
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/inputmethods

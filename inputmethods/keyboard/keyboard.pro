@@ -33,3 +33,4 @@ TRANSLATIONS = ../../i18n/de/libqkeyboard.ts \
 
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/inputmethods

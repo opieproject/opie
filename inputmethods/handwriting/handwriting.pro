@@ -51,3 +51,4 @@ TRANSLATIONS = ../../i18n/de/libqhandwriting.ts \
 
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/inputmethods

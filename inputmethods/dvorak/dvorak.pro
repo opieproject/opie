@@ -33,3 +33,4 @@ TRANSLATIONS = ../../i18n/de/libqdvorak.ts \
 
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/inputmethods

@@ -30,3 +30,4 @@ TRANSLATIONS = ../../i18n/de/libqpickboard.ts \
 
 
 include ( $(OPIEDIR)/include.pro )
+target.path = $$prefix/plugins/inputmethods
