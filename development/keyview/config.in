@@ -1,4 +1,4 @@
-#  config #KEYVIEW
-#    boolean "keyview"
-#    default "y"
-#    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+  config KEYVIEW
+    boolean "Keyview (Debugging tool for viewing keypresses)"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -2,6 +2,38 @@
 
 USER=$1
 
+# NOTE about permissions in OpenZaurus
+# 	The devices in question here by default
+#	are accessible to everyone in the group in
+#	question.  We wish to ensure that, as a policy
+#	choice, a login to opie makes access to these
+#	devices exclusive by 1) changing device ownership
+#	to the user, and 2) removing group access.
+#
+#	A better implementation would probably be to store
+#	existing device permissions at load time, and restore
+#	them at exit, rather than making assumptions about
+#	user/group ownership, or permissions.
+
+permin ()
+{
+	if [ -e $1 ]
+	then
+		
+	chown $USER $1
+	chmod g-rw $1
+
+	else
+		return 1
+	fi
+}
+
+permout ()
+{
+	[ -e $1 ]	&& chown root $1
+	[ -e $1 ]	&& chmod g+rw $1
+}
+
 if [ -e /proc/hal/model ]; then
 
   # fix for misconfigured devfsd
@@ -12,5 +44,13 @@ if [ -e /proc/hal/model ]; then
   [ -e /dev/touchscreen/0 ] && chown $USER /dev/touchscreen/0
   [ -e /dev/fb/0 ]          && chown $USER /dev/fb/0
   [ -e /dev/vc/0 ]          && chown $USER /dev/vc/0
-fi
 
+else
+
+  for dev in /dev/dsp /dev/dsp1 /dev/mixer \
+  	/dev/ts /dev/fb0 
+  do
+	permin( $dev )
+  done
+
+fi

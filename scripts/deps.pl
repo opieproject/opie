@@ -53,7 +53,7 @@ sub makedepends ($$)
 			if(defined(${$tokenpath}{"CONFIG_" . $_})){
 				print '$(if $(CONFIG_' . $_ . '),' . ${$tokenpath}{"CONFIG_" . $_} . ') ';
 			} else {
-				print STDERR "Warning: unable to locate path for token CONFIG_$_\n";
+#				print STDERR "Warning: unable to locate path for token CONFIG_$_\n";
 			}
 		}
 		print "\n";
