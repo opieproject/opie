@@ -1,43 +1,69 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>Security</name>
+    <name>LoginBase</name>
     <message>
-        <source>Set passcode</source>
-        <translation>Nastavi kodo</translation>
-    </message>
-    <message>
-        <source>Change passcode</source>
-        <translation>Zamenjaj kodo</translation>
-    </message>
-    <message>
-        <source>Enter passcode</source>
-        <translation>Vpišite kodo</translation>
-    </message>
-    <message>
-        <source>Passcode incorrect</source>
-        <translation>Koda ni pravilna</translation>
-    </message>
-    <message>
-        <source>The passcode entered is incorrect.
-Access denied</source>
-        <translation>Vpisana koda ni pravilna.
-Dostop zavrnjen</translation>
-    </message>
-    <message>
-        <source>Any</source>
-        <translation>Karkoli</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Brez</translation>
-    </message>
-    <message>
-        <source>Enter new passcode</source>
+        <source>LoginBase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Re-enter new passcode</source>
+        <source>Login</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login Automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you select this option, opie-login will automagically log you in with the user you have selected in the drop-down list.  
+
+For the Zaurus 5x00 this is always the user &quot;root&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This drop-down list allows you to select the user for auto-login
+(if enabled above).  
+
+You can only select an actually configured user.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MultiauthConfig</name>
+    <message>
+        <source>Security configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load which plugins in what order:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the order they will appear in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sync</source>
+        <translation type="unfinished">Sinhroniziraj</translation>
     </message>
     <message>
         <source>Attention</source>
@@ -79,32 +105,140 @@ Dostop zavrnjen</translation>
         <source>1.0.0.0/8</source>
         <translation type="unfinished">1.0.0.0/8</translation>
     </message>
+    <message>
+        <source>Any</source>
+        <translation type="unfinished">Karkoli</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MultiauthGeneralConfig</name>
+    <message>
+        <source>When to lock Opie</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on Opie start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on Opie resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiple plugins authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Required successes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Debug options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t protect this config screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show explanatory screens</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow to bypass authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note: the third option implies the second one</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Security</name>
+    <message>
+        <source>Set passcode</source>
+        <translation type="obsolete">Nastavi kodo</translation>
+    </message>
+    <message>
+        <source>Change passcode</source>
+        <translation type="obsolete">Zamenjaj kodo</translation>
+    </message>
+    <message>
+        <source>Enter passcode</source>
+        <translation type="obsolete">Vpišite kodo</translation>
+    </message>
+    <message>
+        <source>Passcode incorrect</source>
+        <translation type="obsolete">Koda ni pravilna</translation>
+    </message>
+    <message>
+        <source>The passcode entered is incorrect.
+Access denied</source>
+        <translation type="obsolete">Vpisana koda ni pravilna.
+Dostop zavrnjen</translation>
+    </message>
+    <message>
+        <source>Any</source>
+        <translation type="obsolete">Karkoli</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="obsolete">Brez</translation>
+    </message>
+    <message>
+        <source>192.168.129.0/24</source>
+        <translation type="obsolete">192.168.129.0/24</translation>
+    </message>
+    <message>
+        <source>192.168.1.0/24</source>
+        <translation type="obsolete">192.168.1.0/24</translation>
+    </message>
+    <message>
+        <source>192.168.0.0/16</source>
+        <translation type="obsolete">192.168.0.0/16</translation>
+    </message>
+    <message>
+        <source>172.16.0.0/12</source>
+        <translation type="obsolete">172.16.0.0/12</translation>
+    </message>
+    <message>
+        <source>10.0.0.0/8</source>
+        <translation type="obsolete">10.0.0.0/8</translation>
+    </message>
+    <message>
+        <source>1.0.0.0/8</source>
+        <translation type="obsolete">1.0.0.0/8</translation>
+    </message>
 </context>
 <context>
     <name>SecurityBase</name>
     <message>
         <source>Security Settings</source>
-        <translation>Varnostne nastavitve</translation>
+        <translation type="obsolete">Varnostne nastavitve</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation>Zamenjaj kodo</translation>
+        <translation type="obsolete">Zamenjaj kodo</translation>
     </message>
     <message>
         <source>Clear passcode</source>
-        <translation>Zbriši kodo</translation>
+        <translation type="obsolete">Zbriši kodo</translation>
     </message>
     <message>
         <source>Require pass code at power-on</source>
-        <translation>Potrebna koda pri vklopu</translation>
+        <translation type="obsolete">Potrebna koda pri vklopu</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation>Sinhroniziraj</translation>
+        <translation type="obsolete">Sinhroniziraj</translation>
     </message>
     <message>
         <source>Accept sync from network:</source>
-        <translation>Sperjmi sinhronizacijo iz mreže:</translation>
+        <translation type="obsolete">Sperjmi sinhronizacijo iz mreže:</translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
@@ -128,7 +262,7 @@ Dostop zavrnjen</translation>
     </message>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation>&lt;P&gt;Koda prinaša minimalno zaščito za varovanje vaše naprave.</translation>
+        <translation type="obsolete">&lt;P&gt;Koda prinaša minimalno zaščito za varovanje vaše naprave.</translation>
     </message>
     <message>
         <source>192.168.129.0/24 (default)</source>
@@ -142,45 +276,20 @@ Dostop zavrnjen</translation>
         <source>1.0.0.0/8</source>
         <translation type="obsolete">1.0.0.0/8</translation>
     </message>
+</context>
+<context>
+    <name>SyncBase</name>
     <message>
-        <source>Passcode</source>
+        <source>SyncBase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Login</source>
-        <translation type="unfinished"></translation>
+        <source>Sync</source>
+        <translation type="unfinished">Sinhroniziraj</translation>
     </message>
     <message>
-        <source>Login Automatically</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This button will let you change the security passcode.  
-
-Note: This is *not* the sync password.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete the current passcode.  
-You can enter a new one at any time.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you enable this option, a passcode must be entered after every resume event of your Zaurus.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you select this option, opie-login will automagically log you in with the user you have selected in the drop-down list.  
-
-For the Zaurus 5x00 this is always the user &quot;root&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This drop-down list allows you to select the user for auto-login
-(if enabled above).  
-
-You can only select an actually configured user.</source>
-        <translation type="unfinished"></translation>
+        <source>Accept sync from network:</source>
+        <translation type="unfinished">Sperjmi sinhronizacijo iz mreže:</translation>
     </message>
     <message>
         <source>Select a net-range or enter a new one.  
@@ -224,15 +333,15 @@ Beware that all manually entered net ranges will be lost!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>IntelliSync</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Qtopia 1.7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Opie 1.0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IntelliSync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

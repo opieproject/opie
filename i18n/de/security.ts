@@ -1,43 +1,70 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>Security</name>
+    <name>LoginBase</name>
     <message>
-        <source>Set passcode</source>
-        <translation>Passwort einstellen</translation>
+        <source>LoginBase</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Change passcode</source>
-        <translation>Passwort ändern</translation>
+        <source>Login</source>
+        <translation type="unfinished">Login</translation>
     </message>
     <message>
-        <source>Enter passcode</source>
-        <translation>Passwort eingeben</translation>
+        <source>Login Automatically</source>
+        <translation type="unfinished">Automatisch einloggen</translation>
     </message>
     <message>
-        <source>Passcode incorrect</source>
-        <translation>Passwort falsch</translation>
+        <source>If you select this option, opie-login will automagically log you in with the user you have selected in the drop-down list.  
+
+For the Zaurus 5x00 this is always the user &quot;root&quot;.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The passcode entered is incorrect.
-Access denied</source>
-        <translation>Das eingegebene Passwort ist falsch. Zugriff verwehrt</translation>
+        <source>This drop-down list allows you to select the user for auto-login
+(if enabled above).  
+
+You can only select an actually configured user.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MultiauthConfig</name>
+    <message>
+        <source>Security configuration</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Any</source>
-        <translation>Alle</translation>
+        <source>Load which plugins in what order:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>None</source>
-        <translation>Keine</translation>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the order they will appear in</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enter new passcode</source>
-        <translation>Neues Passwort eingeben</translation>
+        <source>Move Up</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Re-enter new passcode</source>
-        <translation>Passwort erneut eingeben</translation>
+        <source>Move Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation type="unfinished">Login</translation>
+    </message>
+    <message>
+        <source>Sync</source>
+        <translation type="unfinished">Synchroniseren</translation>
     </message>
     <message>
         <source>Attention</source>
@@ -79,33 +106,148 @@ Access denied</source>
         <source>1.0.0.0/8</source>
         <translation type="unfinished">1.0.0.0/8</translation>
     </message>
+    <message>
+        <source>Any</source>
+        <translation type="unfinished">Alle</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Keine</translation>
+    </message>
+</context>
+<context>
+    <name>MultiauthGeneralConfig</name>
+    <message>
+        <source>When to lock Opie</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on Opie start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on Opie resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiple plugins authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Required successes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Debug options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t protect this config screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show explanatory screens</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow to bypass authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note: the third option implies the second one</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Security</name>
+    <message>
+        <source>Set passcode</source>
+        <translation type="obsolete">Passwort einstellen</translation>
+    </message>
+    <message>
+        <source>Change passcode</source>
+        <translation type="obsolete">Passwort ändern</translation>
+    </message>
+    <message>
+        <source>Enter passcode</source>
+        <translation type="obsolete">Passwort eingeben</translation>
+    </message>
+    <message>
+        <source>Passcode incorrect</source>
+        <translation type="obsolete">Passwort falsch</translation>
+    </message>
+    <message>
+        <source>The passcode entered is incorrect.
+Access denied</source>
+        <translation type="obsolete">Das eingegebene Passwort ist falsch. Zugriff verwehrt</translation>
+    </message>
+    <message>
+        <source>Any</source>
+        <translation type="obsolete">Alle</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="obsolete">Keine</translation>
+    </message>
+    <message>
+        <source>Enter new passcode</source>
+        <translation type="obsolete">Neues Passwort eingeben</translation>
+    </message>
+    <message>
+        <source>Re-enter new passcode</source>
+        <translation type="obsolete">Passwort erneut eingeben</translation>
+    </message>
+    <message>
+        <source>192.168.129.0/24</source>
+        <translation type="obsolete">192.168.129.0/24</translation>
+    </message>
+    <message>
+        <source>192.168.1.0/24</source>
+        <translation type="obsolete">192.168.1.0/24</translation>
+    </message>
+    <message>
+        <source>192.168.0.0/16</source>
+        <translation type="obsolete">192.168.0.0/16</translation>
+    </message>
+    <message>
+        <source>172.16.0.0/12</source>
+        <translation type="obsolete">172.16.0.0/12</translation>
+    </message>
+    <message>
+        <source>10.0.0.0/8</source>
+        <translation type="obsolete">10.0.0.0/8</translation>
+    </message>
+    <message>
+        <source>1.0.0.0/8</source>
+        <translation type="obsolete">1.0.0.0/8</translation>
+    </message>
 </context>
 <context>
     <name>SecurityBase</name>
     <message>
         <source>Security Settings</source>
-        <translation>Sicherheitseinstellungen</translation>
+        <translation type="obsolete">Sicherheitseinstellungen</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation>Passwort ändern</translation>
+        <translation type="obsolete">Passwort ändern</translation>
     </message>
     <message>
         <source>Clear passcode</source>
-        <translation>Passwort löschen</translation>
+        <translation type="obsolete">Passwort löschen</translation>
     </message>
     <message>
         <source>Require pass code at power-on</source>
-        <translation>Passwort muss beim Starten 
+        <translation type="obsolete">Passwort muss beim Starten 
 eingegeben werden</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation>Synchroniseren</translation>
+        <translation type="obsolete">Synchroniseren</translation>
     </message>
     <message>
         <source>Accept sync from network:</source>
-        <translation>Synchronisierung gestatten aus dem Netzwerk:</translation>
+        <translation type="obsolete">Synchronisierung gestatten aus dem Netzwerk:</translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
@@ -129,7 +271,7 @@ eingegeben werden</translation>
     </message>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation>&lt;P&gt;Das Passwort bietet einen minimalen Schutz, 
+        <translation type="obsolete">&lt;P&gt;Das Passwort bietet einen minimalen Schutz, 
 sollte jemand unerwünscht Zugriff auf dieses 
 Gerät erhalten.</translation>
     </message>
@@ -147,43 +289,30 @@ Gerät erhalten.</translation>
     </message>
     <message>
         <source>Passcode</source>
-        <translation>Passwort</translation>
+        <translation type="obsolete">Passwort</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation>Login</translation>
+        <translation type="obsolete">Login</translation>
     </message>
     <message>
         <source>Login Automatically</source>
-        <translation>Automatisch einloggen</translation>
+        <translation type="obsolete">Automatisch einloggen</translation>
     </message>
+</context>
+<context>
+    <name>SyncBase</name>
     <message>
-        <source>This button will let you change the security passcode.  
-
-Note: This is *not* the sync password.</source>
+        <source>SyncBase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete the current passcode.  
-You can enter a new one at any time.</source>
-        <translation type="unfinished"></translation>
+        <source>Sync</source>
+        <translation type="unfinished">Synchroniseren</translation>
     </message>
     <message>
-        <source>If you enable this option, a passcode must be entered after every resume event of your Zaurus.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you select this option, opie-login will automagically log you in with the user you have selected in the drop-down list.  
-
-For the Zaurus 5x00 this is always the user &quot;root&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This drop-down list allows you to select the user for auto-login
-(if enabled above).  
-
-You can only select an actually configured user.</source>
-        <translation type="unfinished"></translation>
+        <source>Accept sync from network:</source>
+        <translation type="unfinished">Synchronisierung gestatten aus dem Netzwerk:</translation>
     </message>
     <message>
         <source>Select a net-range or enter a new one.  
@@ -227,15 +356,15 @@ Beware that all manually entered net ranges will be lost!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>IntelliSync</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Qtopia 1.7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Opie 1.0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IntelliSync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

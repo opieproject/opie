@@ -1,44 +1,70 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>Security</name>
+    <name>LoginBase</name>
     <message>
-        <source>Any</source>
-        <translation>Qualquer</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation>Nenhum</translation>
-    </message>
-    <message>
-        <source>Change passcode</source>
-        <translation>Mudar senha</translation>
-    </message>
-    <message>
-        <source>Passcode incorrect</source>
-        <translation>Senha incorreta</translation>
-    </message>
-    <message>
-        <source>Enter passcode</source>
-        <translation>Entre a senha</translation>
-    </message>
-    <message>
-        <source>Set passcode</source>
-        <translation>Ajustar senha</translation>
-    </message>
-    <message>
-        <source>The passcode entered is incorrect.
-Access denied</source>
-        <translation>A senha inserida está incorreta.
-Acesso negado</translation>
-    </message>
-    <message>
-        <source>Enter new passcode</source>
+        <source>LoginBase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Re-enter new passcode</source>
+        <source>Login</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login Automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you select this option, opie-login will automagically log you in with the user you have selected in the drop-down list.  
+
+For the Zaurus 5x00 this is always the user &quot;root&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This drop-down list allows you to select the user for auto-login
+(if enabled above).  
+
+You can only select an actually configured user.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MultiauthConfig</name>
+    <message>
+        <source>Security configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load which plugins in what order:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the order they will appear in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sync</source>
+        <translation type="unfinished">Sincronizar</translation>
     </message>
     <message>
         <source>Attention</source>
@@ -80,6 +106,90 @@ Acesso negado</translation>
         <source>1.0.0.0/8</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Any</source>
+        <translation type="unfinished">Qualquer</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Nenhum</translation>
+    </message>
+</context>
+<context>
+    <name>MultiauthGeneralConfig</name>
+    <message>
+        <source>When to lock Opie</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on Opie start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>on Opie resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Multiple plugins authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Required successes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Debug options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t protect this config screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show explanatory screens</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow to bypass authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note: the third option implies the second one</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Security</name>
+    <message>
+        <source>Any</source>
+        <translation type="obsolete">Qualquer</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="obsolete">Nenhum</translation>
+    </message>
+    <message>
+        <source>Change passcode</source>
+        <translation type="obsolete">Mudar senha</translation>
+    </message>
+    <message>
+        <source>Passcode incorrect</source>
+        <translation type="obsolete">Senha incorreta</translation>
+    </message>
+    <message>
+        <source>Enter passcode</source>
+        <translation type="obsolete">Entre a senha</translation>
+    </message>
+    <message>
+        <source>Set passcode</source>
+        <translation type="obsolete">Ajustar senha</translation>
+    </message>
+    <message>
+        <source>The passcode entered is incorrect.
+Access denied</source>
+        <translation type="obsolete">A senha inserida está incorreta.
+Acesso negado</translation>
+    </message>
 </context>
 <context>
     <name>SecurityBase</name>
@@ -93,75 +203,50 @@ Acesso negado</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation type="unfinished">Sincronizar</translation>
+        <translation type="obsolete">Sincronizar</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation type="unfinished">Mudar a senha</translation>
+        <translation type="obsolete">Mudar a senha</translation>
     </message>
     <message>
         <source>Accept sync from network:</source>
-        <translation type="unfinished">Aceitar sincronização da rede:</translation>
+        <translation type="obsolete">Aceitar sincronização da rede:</translation>
     </message>
     <message>
         <source>Security Settings</source>
-        <translation type="unfinished">Ajustes</translation>
+        <translation type="obsolete">Ajustes</translation>
     </message>
     <message>
         <source>Clear passcode</source>
-        <translation type="unfinished">Limpar a senha</translation>
+        <translation type="obsolete">Limpar a senha</translation>
     </message>
     <message>
         <source>Require pass code at power-on</source>
-        <translation type="unfinished">Requisitar senha ao ligar</translation>
+        <translation type="obsolete">Requisitar senha ao ligar</translation>
     </message>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation type="unfinished">&lt;P&gt;A senha provê um nível mínimo de segurança quantra o acesso casual a este dispositivo.</translation>
+        <translation type="obsolete">&lt;P&gt;A senha provê um nível mínimo de segurança quantra o acesso casual a este dispositivo.</translation>
     </message>
     <message>
         <source>192.168.129.0/24 (default)</source>
         <translation type="obsolete">192.168.129.0/24 (padrão)</translation>
     </message>
+</context>
+<context>
+    <name>SyncBase</name>
     <message>
-        <source>Passcode</source>
+        <source>SyncBase</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Login</source>
-        <translation type="unfinished"></translation>
+        <source>Sync</source>
+        <translation type="unfinished">Sincronizar</translation>
     </message>
     <message>
-        <source>Login Automatically</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This button will let you change the security passcode.  
-
-Note: This is *not* the sync password.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete the current passcode.  
-You can enter a new one at any time.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you enable this option, a passcode must be entered after every resume event of your Zaurus.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>If you select this option, opie-login will automagically log you in with the user you have selected in the drop-down list.  
-
-For the Zaurus 5x00 this is always the user &quot;root&quot;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This drop-down list allows you to select the user for auto-login
-(if enabled above).  
-
-You can only select an actually configured user.</source>
-        <translation type="unfinished"></translation>
+        <source>Accept sync from network:</source>
+        <translation type="unfinished">Aceitar sincronização da rede:</translation>
     </message>
     <message>
         <source>Select a net-range or enter a new one.  
@@ -205,15 +290,15 @@ Beware that all manually entered net ranges will be lost!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>IntelliSync</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Qtopia 1.7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Opie 1.0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IntelliSync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
