@@ -47,6 +47,7 @@ void DatebookPluginWidget::readConfig() {
     m_show_location = cfg.readNumEntry( "showlocation", 1 );
     m_show_notes = cfg.readNumEntry( "shownotes", 0 );
     m_onlyLater = cfg.readNumEntry( "onlylater", 1 );
+    m_moreDays = cfg.readNumEntry( "moredays", 0 );
 }
 
 
@@ -68,7 +69,7 @@ void DatebookPluginWidget::getDates() {
 
     db = new DateBookDB;
 
-    QValueList<EffectiveEvent> list = db->getEffectiveEvents( date, date );
+    QValueList<EffectiveEvent> list = db->getEffectiveEvents( date, date.addDays( m_moreDays )  );
 
     qBubbleSort( list );
 

@@ -35,6 +35,8 @@ DatebookPluginConfig::DatebookPluginConfig( QWidget* parent, const char* name)
     CheckBox3 = new QCheckBox ( box3, "CheckBox3" );
     QWhatsThis::add( CheckBox3 , tr( "Check this if only appointments later then current time should be shown" ) );
 
+
+
     QHBox *box4 = new QHBox( this );
     QLabel *TextLabel3 = new QLabel( box4, "TextLabel3" );
     TextLabel3->setText( tr( "How many \nappointment\n"
@@ -44,10 +46,21 @@ DatebookPluginConfig::DatebookPluginConfig( QWidget* parent, const char* name)
     SpinBox1->setMaxValue( 10 );
     SpinBox1->setValue( 5 );
 
+
+    QHBox *box5 = new QHBox( this );
+    QLabel *TextLabelDays = new QLabel( box5 );
+    TextLabelDays->setText( tr( "How many more days" ) );
+    SpinBox2 = new QSpinBox( box5, "SpinBox2" );
+    QWhatsThis::add( SpinBox2 , tr( "How many more days should be in the range" ) );
+    SpinBox2->setMaxValue( 7 );
+    SpinBox2->setSuffix( tr( " day(s)" ) );
+    SpinBox2->setSpecialValueText ( tr("only today") );
+
     layout->addWidget( box1 );
     layout->addWidget( box2 );
     layout->addWidget( box3 );
     layout->addWidget( box4 );
+    layout->addWidget( box5 );
 
     readConfig();
 }
@@ -64,6 +77,8 @@ void DatebookPluginConfig::readConfig() {
     CheckBox2->setChecked( m_show_notes );
     m_only_later = cfg.readNumEntry( "onlylater", 1 );
     CheckBox3->setChecked( m_only_later );
+    m_more_days = cfg.readNumEntry( "moredays", 0 );
+    SpinBox2->setValue( m_more_days );
 }
 
 
@@ -77,8 +92,10 @@ void DatebookPluginConfig::writeConfig() {
     cfg.writeEntry( "showlocation", m_show_location);
     m_show_notes = CheckBox2->isChecked();
     cfg.writeEntry( "shownotes", m_show_notes );
-     m_only_later  = CheckBox3->isChecked();
+    m_only_later  = CheckBox3->isChecked();
     cfg.writeEntry( "onlylater", m_only_later );
+    m_more_days = SpinBox2->value();
+    cfg.writeEntry( "moredays", m_more_days );
     cfg.write();
 }
 

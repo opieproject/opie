@@ -28,6 +28,8 @@ private:
     QCheckBox* CheckBox1;
     QCheckBox* CheckBox3;
     QSpinBox* SpinBox1;
+    QSpinBox* SpinBox2;
+
 
     // how many lines should be showed in the datebook section
     int m_max_lines_meet;
@@ -37,12 +39,9 @@ private:
     int m_show_notes;
     // should only later appointments be shown or all for the current day.
     int m_only_later;
-
+    int m_more_days;
 
 };
-
-
-
 
 
 #endif

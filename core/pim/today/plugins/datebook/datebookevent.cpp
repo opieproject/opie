@@ -57,9 +57,12 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
         msg += "<br>All day";
     }  else {
         // start time of event
-        msg += "<br>" + ampmTime(QTime( (ev).event().start().time() ) )
+        QDate tempDate = (ev).event().start().date();
+        msg += "<br>"
+               + ampmTime( QTime( (ev).event().start().time() ) )
                // end time of event
-               + "<b> - </b>" + ampmTime(QTime( (ev).event().end().time() ) );
+               + "<b> - </b>" + ampmTime( QTime( (ev).event().end().time() ) )
+               + differDate( tempDate );
     }
 
     // include possible note or not
@@ -93,6 +96,23 @@ QString DateBookEvent::ampmTime( QTime tm ) {
         s.sprintf( "%2d:%02d", tm.hour(), tm.minute() );
         return s;
     }
+}
+
+QString DateBookEvent::differDate( QDate date ) {
+    QDate currentDate = QDate::currentDate();
+    QString returnText = "<font color = #407DD9><b> ";
+    int differDate = currentDate.daysTo( date );
+    if ( currentDate.dayOfWeek() == date.dayOfWeek() ) {
+        returnText += "" ;
+        // not working right for recurring events
+        //} else if ( differDate == 1 ) {
+        //returnText += tr( "tomorrow" );
+    } else {
+        //returnText += tr( "in %1 days" ).arg( differDate );
+        returnText += "   [ " + date.dayName( date.dayOfWeek() ) + " ] ";
+    }
+    returnText += "</b></font>";
+    return returnText;
 }
 
 

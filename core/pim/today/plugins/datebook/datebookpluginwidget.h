@@ -46,6 +46,7 @@ private:
     bool m_show_notes;
     // should only later appointments be shown or all for the current day.
     bool m_onlyLater;
+    int m_moreDays;
 
 };
 
