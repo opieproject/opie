@@ -16,9 +16,6 @@
 #define MAXFONTSIZE 25
 #define MINFONTSIZE 8
 
-#include <iconv.h>
-#include <iostream>
-
 QtDasherScreen::QtDasherScreen (int _width, int _height,
 				CDasherInterface *_interface,
 				QWidget * _parent, Dasher::CDashEditbox *edit):
