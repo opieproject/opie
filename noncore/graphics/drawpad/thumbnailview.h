@@ -14,27 +14,60 @@
 #ifndef THUMBNAILVIEW_H
 #define THUMBNAILVIEW_H
 
-#include <qdialog.h>
+#include <qwidget.h>
+#include <qlistview.h>
 
-#include <qlist.h>
-
-class QListView;
-
+class DrawPadCanvas;
 class Page;
 
-class ThumbnailView : public QDialog
-{ 
-    Q_OBJECT
-
+class PageListViewItem : public QListViewItem
+{
 public:
-    ThumbnailView(QList<Page> pages, QWidget* parent = 0, const char* name = 0);
-    ~ThumbnailView();
+    PageListViewItem(Page* page, QListView* parent);
+    ~PageListViewItem();
+
+    Page* page() const;
+
+private:
+    Page* m_pPage;
+};
+
+class PageListView : public QListView
+{
+public:
+    PageListView(DrawPadCanvas* drawPadCanvas, QWidget* parent = 0, const char* name = 0);
+    ~PageListView();
+
+    void updateView();
+
+    Page* selected() const;
 
 protected:
     void resizeEvent(QResizeEvent* e);
 
 private:
-    QListView* m_pListView;
+    DrawPadCanvas* m_pDrawPadCanvas;
+};
+
+class ThumbnailView : public QWidget
+{
+    Q_OBJECT
+
+public:
+    ThumbnailView(DrawPadCanvas* drawPadCanvas, QWidget* parent = 0, const char* name = 0);
+    ~ThumbnailView();
+    
+    void hide();
+    void exec();
+
+public slots:
+    void deletePage();
+
+private:
+    bool inLoop;
+    DrawPadCanvas* m_pDrawPadCanvas;
+
+    PageListView* m_pPageListView;
 };
 
 #endif // THUMBNAILVIEW_H

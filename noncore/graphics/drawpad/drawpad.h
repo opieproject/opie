@@ -39,6 +39,9 @@ public:
     QBrush brush() { return m_brush; }
 
 private slots:
+    void clearPage();
+    void deletePage();
+
     void setPointTool();
     void setLineTool();
     void setRectangleTool();
@@ -57,6 +60,7 @@ private slots:
     void updateNavigationToolButtons();
     void updateCaption();
 
+    void deleteAll();
     void importPage();
     void exportPage();
     void thumbnailView();

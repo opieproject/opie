@@ -24,7 +24,6 @@
 
 #include <qbuffer.h>
 #include <qimage.h>
-#include <qmessagebox.h>
 #include <qpainter.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
@@ -346,29 +345,19 @@ void DrawPadCanvas::backupPage()
 
 void DrawPadCanvas::deleteAll()
 {
-    QMessageBox messageBox(tr("Delete All"), tr("Do you want to delete\nall the pages?"),
-                           QMessageBox::Information, QMessageBox::Yes,
-                           QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
-                           QMessageBox::NoButton, this);
+    m_pages.clear();
 
-    messageBox.setButtonText(QMessageBox::Yes, tr("Yes"));
-    messageBox.setButtonText(QMessageBox::No, tr("No"));
+    m_pages.append(new Page(contentsRect().size()));
+    m_pages.current()->fill(Qt::white);
 
-    if (messageBox.exec() == QMessageBox::Yes) {
-        m_pages.clear();
+    m_pageBackups.clear();
+    m_pageBackups.append(new Page(*(m_pages.current())));
 
-        m_pages.append(new Page(contentsRect().size()));
-        m_pages.current()->fill(Qt::white);
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
 
-        m_pageBackups.clear();
-        m_pageBackups.append(new Page(*(m_pages.current())));
-
-        resizeContents(m_pages.current()->width(), m_pages.current()->height());
-        viewport()->update();
-
-        emit pagesChanged();
-        emit pageBackupsChanged();
-    }
+    emit pagesChanged();
+    emit pageBackupsChanged();
 }
 
 void DrawPadCanvas::newPage()
@@ -396,48 +385,28 @@ void DrawPadCanvas::newPage()
 
 void DrawPadCanvas::clearPage()
 {
-    QMessageBox messageBox(tr("Clear Page"), tr("Do you want to clear\nthe current page?"),
-                           QMessageBox::Information, QMessageBox::Yes,
-                           QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
-                           QMessageBox::NoButton, this);
+    m_pages.current()->fill(Qt::white);
 
-    messageBox.setButtonText(QMessageBox::Yes, tr("Yes"));
-    messageBox.setButtonText(QMessageBox::No, tr("No"));
-
-    if (messageBox.exec() == QMessageBox::Yes) {
-        m_pages.current()->fill(Qt::white);
-
-        viewport()->update();
-    }
+    viewport()->update();
 }
 
 void DrawPadCanvas::deletePage()
 {
-   QMessageBox messageBox(tr("Delete Page"), tr("Do you want to delete\nthe current page?"),
-                           QMessageBox::Information, QMessageBox::Yes,
-                           QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
-                           QMessageBox::NoButton, this);
+    m_pages.remove(m_pages.current());
 
-    messageBox.setButtonText(QMessageBox::Yes, tr("Yes"));
-    messageBox.setButtonText(QMessageBox::No, tr("No"));
-
-    if (messageBox.exec() == QMessageBox::Yes) {
-        m_pages.remove(m_pages.current());
-
-        if (m_pages.isEmpty()) {
-            m_pages.append(new Page(contentsRect().size()));
-            m_pages.current()->fill(Qt::white);
-        }
-
-        m_pageBackups.clear();
-        m_pageBackups.append(new Page(*(m_pages.current())));
-
-        resizeContents(m_pages.current()->width(), m_pages.current()->height());
-        viewport()->update();
-
-        emit pagesChanged();
-        emit pageBackupsChanged();
+    if (m_pages.isEmpty()) {
+        m_pages.append(new Page(contentsRect().size()));
+        m_pages.current()->fill(Qt::white);
     }
+
+    m_pageBackups.clear();
+    m_pageBackups.append(new Page(*(m_pages.current())));
+
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
+
+    emit pagesChanged();
+    emit pageBackupsChanged();
 }
 
 bool DrawPadCanvas::undoEnabled()

@@ -13,19 +13,125 @@
 
 #include "thumbnailview.h"
 
+#include "drawpadcanvas.h"
 #include "page.h"
 
 #include <qpe/resource.h>
 
+#include <qapplication.h>
 #include <qheader.h>
 #include <qimage.h>
 #include <qlayout.h>
-#include <qlistview.h>
+#include <qmessagebox.h>
 #include <qtoolbutton.h>
 
-ThumbnailView::ThumbnailView(QList<Page> pages, QWidget* parent, const char* name)
-    : QDialog(parent, name, true)
+PageListViewItem::PageListViewItem(Page* page, QListView* parent)
+    : QListViewItem(parent)
 {
+    m_pPage = page;
+
+    QImage image = m_pPage->convertToImage();
+
+    int previewWidth = 64;
+    int previewHeight = 64;
+
+    float widthScale = 1.0;
+    float heightScale = 1.0;
+
+    if (previewWidth < image.width()) {
+        widthScale = (float)previewWidth / float(image.width());
+    }
+
+    if (previewHeight < image.height()) {
+        heightScale = (float)previewHeight / float(image.height());
+    }
+
+    float scale = (widthScale < heightScale ? widthScale : heightScale);
+    QImage previewImage = image.smoothScale((int)(image.width() * scale) , (int)(image.height() * scale));
+
+    QPixmap previewPixmap;
+    previewPixmap.convertFromImage(previewImage);
+
+    QPixmap pixmap(64, 64);
+
+    pixmap.fill(listView()->colorGroup().mid());
+    bitBlt(&pixmap, (pixmap.width() - previewPixmap.width()) / 2,
+           (pixmap.height() - previewPixmap.height()) / 2, &previewPixmap);
+
+    setPixmap(0, pixmap);
+}
+
+PageListViewItem::~PageListViewItem()
+{
+}
+
+Page* PageListViewItem::page() const
+{
+    return m_pPage;
+}
+
+PageListView::PageListView(DrawPadCanvas* drawPadCanvas, QWidget* parent, const char* name)
+    : QListView(parent, name)
+{
+    m_pDrawPadCanvas = drawPadCanvas;
+
+    header()->hide();
+    setVScrollBarMode(QScrollView::AlwaysOn);
+    setAllColumnsShowFocus(true);
+
+    addColumn(tr("Thumbnail"));
+    addColumn(tr("Information"));
+
+    updateView();
+}
+
+PageListView::~PageListView()
+{
+}
+
+void PageListView::updateView()
+{
+    clear();
+
+    if (m_pDrawPadCanvas) {
+        QList<Page> pageList = m_pDrawPadCanvas->pages();
+        QListIterator<Page> it(pageList);
+
+        for (; it.current(); ++it) {
+            new PageListViewItem(it.current(), this);
+        }
+    }
+}
+
+void PageListView::resizeEvent(QResizeEvent* e)
+{
+    Q_UNUSED(e);
+
+    setColumnWidth(1, contentsRect().width() - columnWidth(0) - verticalScrollBar()->width());
+}
+
+Page* PageListView::selected() const
+{
+    Page* page;
+
+    PageListViewItem* item = (PageListViewItem*)selectedItem();
+
+    if (item) {
+        page = item->page();
+    } else {
+        page = NULL;
+    }
+
+    return page;
+}
+
+
+ThumbnailView::ThumbnailView(DrawPadCanvas* drawPadCanvas, QWidget* parent, const char* name)
+    : QWidget(parent, name, Qt::WType_Modal | Qt::WType_TopLevel)
+{
+    inLoop = false;
+    m_pDrawPadCanvas = drawPadCanvas;
+
     setCaption(tr("Thumbnail"));
 
     QToolButton* newPageButton = new QToolButton(this);
@@ -48,51 +154,7 @@ ThumbnailView::ThumbnailView(QList<Page> pages, QWidget* parent, const char* nam
     movePageDownButton->setIconSet(Resource::loadIconSet("down"));
     movePageDownButton->setAutoRaise(true);
 
-    m_pListView = new QListView(this);
-
-    m_pListView->header()->hide();
-    m_pListView->setAllColumnsShowFocus(true);
-
-    m_pListView->addColumn(tr("Thumbnail"));
-    m_pListView->addColumn(tr("Information"));
-
-    m_pListView->setColumnAlignment(0, Qt::AlignHCenter | Qt::AlignVCenter);
-    m_pListView->setColumnAlignment(1, Qt::AlignTop);
-
-    QListIterator<Page> iterator(pages);
-
-    for (; iterator.current(); ++iterator) {
-        QImage image = iterator.current()->convertToImage();
-
-        int previewWidth = 64;
-        int previewHeight = 64;
-
-        float widthScale = 1.0;
-        float heightScale = 1.0;
-
-        if (previewWidth < image.width()) {
-            widthScale = (float)previewWidth / float(image.width());
-        }
-
-        if (previewHeight < image.height()) {
-            heightScale = (float)previewHeight / float(image.height());
-        }
-
-        float scale = (widthScale < heightScale ? widthScale : heightScale);
-        QImage previewImage = image.smoothScale((int)(image.width() * scale) , (int)(image.height() * scale));
-
-        QPixmap previewPixmap;
-        previewPixmap.convertFromImage(previewImage);
-
-        QPixmap pixmap(64, 64);
-
-        pixmap.fill(colorGroup().mid());
-        bitBlt(&pixmap, (pixmap.width() - previewPixmap.width()) / 2, 
-               (pixmap.height() - previewPixmap.height()) / 2, &previewPixmap);
-
-        QListViewItem* item = new QListViewItem(m_pListView);
-        item->setPixmap(0, pixmap);
-    }
+    m_pPageListView = new PageListView(m_pDrawPadCanvas, this);
 
     QVBoxLayout* mainLayout = new QVBoxLayout(this, 4, 4);
     QHBoxLayout* buttonLayout = new QHBoxLayout(0);
@@ -105,17 +167,45 @@ ThumbnailView::ThumbnailView(QList<Page> pages, QWidget* parent, const char* nam
     buttonLayout->addWidget(movePageDownButton);
 
     mainLayout->addLayout(buttonLayout);
-    mainLayout->addWidget(m_pListView);
+    mainLayout->addWidget(m_pPageListView);
 }
 
 ThumbnailView::~ThumbnailView()
 {
+    hide();
 }
 
-void ThumbnailView::resizeEvent(QResizeEvent* e)
+void ThumbnailView::hide()
 {
-    QDialog::resizeEvent(e);
+    QWidget::hide();
 
-    m_pListView->setColumnWidth(1, m_pListView->contentsRect().width() - m_pListView->columnWidth(0)
-                                   - m_pListView->verticalScrollBar()->width());
+    if (inLoop) {
+        inLoop = false;
+        qApp->exit_loop();
+    }
+}
+
+void ThumbnailView::exec()
+{
+    show();
+
+    if (!inLoop) {
+        inLoop = true;
+        qApp->enter_loop();
+    }
+}
+
+void ThumbnailView::deletePage()
+{
+    QMessageBox messageBox(tr("Delete Page"), tr("Do you want to delete\nthe selected page?"),
+                           QMessageBox::Information, QMessageBox::Yes,
+                           QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
+                           QMessageBox::NoButton, this);
+
+    messageBox.setButtonText(QMessageBox::Yes, tr("Yes"));
+    messageBox.setButtonText(QMessageBox::No, tr("No"));
+
+    if (messageBox.exec() == QMessageBox::Yes) {
+        m_pDrawPadCanvas->deletePage();
+    }
 }

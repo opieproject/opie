@@ -38,6 +38,7 @@
 
 #include <qaction.h>
 #include <qfile.h>
+#include <qmessagebox.h>
 #include <qpainter.h>
 #include <qspinbox.h>
 #include <qtoolbutton.h>
@@ -66,7 +67,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     QPopupMenu *toolsPopupMenu = new QPopupMenu(menuBar);
 
     QAction* deleteAllAction = new QAction(tr("Delete All"), QString::null, 0, this);
-    connect(deleteAllAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(deleteAll()));
+    connect(deleteAllAction, SIGNAL(activated()), this, SLOT(deleteAll()));
     deleteAllAction->addTo(toolsPopupMenu);
 
     toolsPopupMenu->insertSeparator();
@@ -96,11 +97,11 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     newPageAction->addTo(pageToolBar);
 
     QAction* clearPageAction = new QAction(tr("Clear Page"), Resource::loadIconSet("drawpad/clear"), QString::null, 0, this);
-    connect(clearPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(clearPage()));
+    connect(clearPageAction, SIGNAL(activated()), this, SLOT(clearPage()));
     clearPageAction->addTo(pageToolBar);
 
     QAction* deletePageAction = new QAction(tr("Delete Page"), Resource::loadIconSet("trash"), QString::null, 0, this);
-    connect(deletePageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(deletePage()));
+    connect(deletePageAction, SIGNAL(activated()), this, SLOT(deletePage()));
     deletePageAction->addTo(pageToolBar);
 
     QPEToolBar* emptyToolBar = new QPEToolBar(this);
@@ -264,6 +265,36 @@ DrawPad::~DrawPad()
     if (file.open(IO_WriteOnly)) {
         m_pDrawPadCanvas->save(&file);
         file.close();
+    }
+}
+
+void DrawPad::clearPage()
+{
+    QMessageBox messageBox(tr("Clear Page"), tr("Do you want to clear\nthe current page?"),
+                           QMessageBox::Information, QMessageBox::Yes,
+                           QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
+                           QMessageBox::NoButton, this);
+
+    messageBox.setButtonText(QMessageBox::Yes, tr("Yes"));
+    messageBox.setButtonText(QMessageBox::No, tr("No"));
+
+    if (messageBox.exec() == QMessageBox::Yes) {
+        m_pDrawPadCanvas->clearPage();
+    }
+}
+
+void DrawPad::deletePage()
+{
+    QMessageBox messageBox(tr("Delete Page"), tr("Do you want to delete\nthe current page?"),
+                           QMessageBox::Information, QMessageBox::Yes,
+                           QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
+                           QMessageBox::NoButton, this);
+
+    messageBox.setButtonText(QMessageBox::Yes, tr("Yes"));
+    messageBox.setButtonText(QMessageBox::No, tr("No"));
+
+    if (messageBox.exec() == QMessageBox::Yes) {
+        m_pDrawPadCanvas->deletePage();
     }
 }
 
@@ -499,6 +530,21 @@ void DrawPad::updateCaption()
                + QString::number(pagePosition) + "/" + QString::number(pageCount));
 }
 
+void DrawPad::deleteAll()
+{
+    QMessageBox messageBox(tr("Delete All"), tr("Do you want to delete\nall the pages?"),
+                           QMessageBox::Information, QMessageBox::Yes,
+                           QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
+                           QMessageBox::NoButton, this);
+
+    messageBox.setButtonText(QMessageBox::Yes, tr("Yes"));
+    messageBox.setButtonText(QMessageBox::No, tr("No"));
+
+    if (messageBox.exec() == QMessageBox::Yes) {
+        m_pDrawPadCanvas->deleteAll();
+    }
+}
+
 void DrawPad::importPage()
 {
     ImportDialog importDialog(this);
@@ -529,7 +575,7 @@ void DrawPad::exportPage()
 
 void DrawPad::thumbnailView()
 {
-    ThumbnailView thumbnailView(m_pDrawPadCanvas->pages(), this);
+    ThumbnailView thumbnailView(m_pDrawPadCanvas, this);
 
     thumbnailView.showMaximized();
     thumbnailView.exec();
