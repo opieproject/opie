@@ -1,5 +1,5 @@
 Package: opie-rdesktop
-Files: bin/ordesktop pics/opierdesktop apps/Applications/opierdesktop.desktop
+Files: bin/ordesktop pics/opierdesktop apps/Applications/ordesktop.desktop
 Priority: optional
 Section: opie/applications
 Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org> 
