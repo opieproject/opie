@@ -54,6 +54,8 @@
 #include <qtopia/qcom.h>
 #include <qtopia/applicationinterface.h>
 
+#include <opie2/odebug.h>
+
 namespace Opie {
 namespace Core {
     struct NullType;
@@ -128,8 +130,13 @@ struct OApplicationFactory : public ApplicationInterface {
                                        const char* name, Qt::WFlags f ) {
         if (appName == Product::appName() )
             return new Product(parent, name, f );
-        else
+        else{
+	    odebug << "Application Name = " << appName.latin1() << oendl;
+	    odebug << "ProductName      = " << Product::appName().latin1() << oendl;
+	    odebug << "The application name is not equal to the product name!" << oendl; 
+	    odebug << "Please compare TARGET entry in the project file (*.pro) and the call of the OApplicationFactory< productName >" << oendl;
             return 0l;
+	}
     }
 
     virtual QStringList applications()const {
