@@ -1,4 +1,8 @@
 #!/usr/bin/make -f
+ifndef QTDIR
+$(error QTDIR not set)
+endif
+
 export OPIEDIR:=$(shell pwd)
 export TOPDIR:=$(OPIEDIR)
 export QMAKE:=$(OPIEDIR)/qmake/qmake
