@@ -18,7 +18,6 @@
 **
 **********************************************************************/
 
-#include <qpoint.h>
 #include <qtimer.h>
 
 #include "stylusnormalizer.h"

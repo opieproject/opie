@@ -33,7 +33,6 @@
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
 #endif
-#include <qpe/qpeapplication.h>
 
 #include <qlabel.h>
 #include <qcheckbox.h>

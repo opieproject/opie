@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qinputdialog.cpp,v 1.1 2004-01-13 21:14:51 mickeyl Exp $
+** $Id: qinputdialog.cpp,v 1.2 2004-03-01 17:56:47 chicken Exp $
 **
 ** Implementation of QInputDialog class
 **
@@ -39,7 +39,6 @@
 
 #include <qlayout.h>
 #include <qlabel.h>
-#include <qlineedit.h>
 #include <qpushbutton.h>
 #include <qspinbox.h>
 #include <qcombobox.h>

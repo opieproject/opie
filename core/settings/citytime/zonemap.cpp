@@ -24,18 +24,11 @@
 #include "zonemap.h"
 
 #include <qpe/resource.h>
-#include <qpe/timestring.h>
 #include <qpe/qpeapplication.h>
 
-#include <qdatetime.h>
 #include <qfile.h>
-#include <qimage.h>
 #include <qlabel.h>
-#include <qlist.h>
 #include <qmessagebox.h>
-#include <qpixmap.h>
-#include <qpainter.h>
-#include <qregexp.h>
 #include <qtextstream.h>
 #include <qtimer.h>
 #include <qtoolbutton.h>

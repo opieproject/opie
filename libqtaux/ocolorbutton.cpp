@@ -31,11 +31,8 @@
 #include "ocolorbutton.h"
 
 /* OPIE */
-#include <qpe/resource.h>
 
 /* QT */
-#include <qcolor.h>
-#include <qpixmap.h>
 #include <qimage.h>
 
 using namespace Opie;

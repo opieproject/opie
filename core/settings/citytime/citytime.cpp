@@ -25,18 +25,13 @@
 
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
-#include <qpe/timestring.h>
 #include <qpe/tzselect.h>
 #if !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
 #endif
 
-#include <qdir.h>
-#include <qfile.h>
 #include <qlabel.h>
 #include <qmessagebox.h>
-#include <qregexp.h>
-#include <qtextstream.h>
 #include <qtoolbutton.h>
 #include <qlayout.h>
 

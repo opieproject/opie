@@ -5,12 +5,9 @@
 #include "citytimebase.h"
 
 #include <qlabel.h>
-#include <qpushbutton.h>
 #include <qtoolbutton.h>
 #include "zonemap.h"
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
 #include <qwhatsthis.h>
 
 

@@ -34,7 +34,6 @@
 #include "qcolordialog.h"
 
 /* QT */
-#include <qaction.h>
 #include <qlayout.h>
 #include <qpainter.h>
 

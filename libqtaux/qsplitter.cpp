@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qsplitter.cpp,v 1.1 2004-01-13 21:15:13 mickeyl Exp $
+** $Id: qsplitter.cpp,v 1.2 2004-03-01 17:56:47 chicken Exp $
 **
 **  Splitter widget
 **
@@ -36,12 +36,8 @@
 **********************************************************************/
 #include "qsplitter.h"
 
-#include "qpainter.h"
 #include "qdrawutil.h"
-#include "qbitmap.h"
 #include "qlayoutengine_p.h"
-#include "qlist.h"
-#include "qarray.h"
 #include "qobjectlist.h"
 #include "qapplication.h" //sendPostedEvents
 

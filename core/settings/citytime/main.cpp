@@ -19,7 +19,6 @@
 **********************************************************************/
 
 #include "citytime.h"
-#include <qpe/qpeapplication.h>
 #include <opie/oapplicationfactory.h>
 
 OPIE_EXPORT_APP( OApplicationFactory<CityTime> )

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcolordialog.cpp,v 1.3 2004-02-25 19:59:21 zecke Exp $
+** $Id: qcolordialog.cpp,v 1.4 2004-03-01 17:56:47 chicken Exp $
 **
 ** Implementation of QColorDialog class
 **
@@ -46,9 +46,7 @@
 #include "qpixmap.h"
 #include "qdrawutil.h"
 #include "qvalidator.h"
-#include "qdragobject.h"
 #include "qapplication.h"
-#include "qdragobject.h"
 
 //////////// QWellArray BEGIN
 
