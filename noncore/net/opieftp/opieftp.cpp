@@ -445,7 +445,16 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
         }
         currentRemoteDir=path;
     } else {
-        if(strItem.find("/",0,TRUE) != -1) {
+        if(strItem.find("->",0,TRUE) != -1) { //symlink on some servers
+            strItem=strItem.right( strItem.length() - strItem.find("->",0,TRUE)-3 );
+            strItem = strItem.stripWhiteSpace();
+            currentRemoteDir = strItem;
+            if( remoteChDir( (const QString &)strItem) ==0) {
+                QString msg;
+                msg.sprintf("Unable to change directories \n%s",FtpLastResponse(conn));
+                QMessageBox::message("Note",msg);
+            }
+        } else if(strItem.find("/",0,TRUE) != -1) {
             if( remoteChDir( (const QString &)currentRemoteDir+strItem) ==0) {
                 QString msg;
                 msg.sprintf("Unable to change directories \n%s",FtpLastResponse(conn));
