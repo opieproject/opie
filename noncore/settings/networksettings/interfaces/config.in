@@ -1,0 +1,4 @@
+config INTERFACES
+  boolean
+  depends LIBQPE && LIBOPIE
+  default "y"
