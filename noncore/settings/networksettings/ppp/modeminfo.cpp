@@ -1,7 +1,7 @@
 /*
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modeminfo.cpp,v 1.1 2003-05-22 15:08:21 tille Exp $
+ * $Id: modeminfo.cpp,v 1.2 2003-05-23 19:43:46 tille Exp $
  *
  * Copyright (C) 1997 Bernd Johannes Wuebben
  *                    wuebben@math.cornell.edu
@@ -105,6 +105,7 @@ void ModemTransfer::ati_done() {
   ModemInfo *mi = new ModemInfo(this);
   for(int i = 0; i < NUM_OF_ATI; i++)
     mi->setAtiString(i, ati_query_strings[i]);
+  mi->showMaximized();
   mi->exec();
   delete mi;
 

@@ -1,5 +1,7 @@
+#include "pppconfig.h"
 #include "pppmodule.h"
-#include "pppimp.h"
+//#include "pppimp.h"
+#include "kpppwidget.h"
 #include "interfaceinformationimp.h"
 //#include "devices.h"
 
@@ -53,7 +55,8 @@ bool PPPModule::isOwner(Interface *i){
  * @return QWidget* pointer to this modules configure.
  */
 QWidget *PPPModule::configure(Interface *i){
-    PPPConfigureImp *pppconfig = new PPPConfigureImp(0, "PPPConfig", /* i,*/ false,  Qt::WDestructiveClose);
+    qDebug("return ModemWidget");
+    PPPConfigWidget *pppconfig = new PPPConfigWidget( 0, "PPPConfig",  false,  Qt::WDestructiveClose );
 //    pppconfig->setProfile(profile);
     return pppconfig;
 }
@@ -65,6 +68,7 @@ QWidget *PPPModule::configure(Interface *i){
 QWidget *PPPModule::information(Interface *i){
   // We don't have any advanced pppd information widget yet :-D
   // TODO ^
+    qDebug("return PPPModule::information");
   InterfaceInformationImp *information = new InterfaceInformationImp(0, "InterfaceSetupImp", i);
   return information;
 }
@@ -86,9 +90,10 @@ QList<Interface> PPPModule::getInterfaces(){
  * @return Interface* NULL if it was unable to be created.
  */
 Interface *PPPModule::addNewInterface(const QString &newInterface){
-  // If the
+
   qDebug("try to add iface %s",newInterface.latin1());
-  PPPConfigureImp imp(0, "PPPConfigImp");
+
+  PPPConfigWidget imp(0, "PPPConfigImp", true);
   imp.showMaximized();
   if(imp.exec() == QDialog::Accepted ){
               qDebug("ACCEPTED");

@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.1 2003-05-22 15:08:21 tille Exp $
+ * $Id: modem.cpp,v 1.2 2003-05-23 19:43:46 tille Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -30,12 +30,13 @@
 #include <signal.h>
 #include <sys/ioctl.h>
 #include <setjmp.h>
+#include <regex.h>
 #include <qregexp.h>
 #include <assert.h>
 
+#include "auth.h"
 #include "modem.h"
 #include "pppdata.h"
-//#include "requester.h"
 //#include <klocale.h>
 #define i18n QObject::tr
 #define qError qDebug
@@ -51,16 +52,43 @@ static sigjmp_buf jmp_buffer;
 
 Modem *Modem::modem = 0;
 
-Modem::Modem() :
-  modemfd(-1),
-  sn(0L),
-  data_mode(false),
-  modem_is_locked(false)
+
+const char* pppdPath() {
+  // wasting a few bytes
+  static char buffer[sizeof(PPPDSEARCHPATH)+sizeof(PPPDNAME)];
+  static char *pppdPath = 0L;
+  char *p;
+
+  if(pppdPath == 0L) {
+    const char *c = PPPDSEARCHPATH;
+    while(*c != '\0') {
+      while(*c == ':')
+        c++;
+      p = buffer;
+      while(*c != '\0' && *c != ':')
+        *p++ = *c++;
+      *p = '\0';
+      strcat(p, "/");
+      strcat(p, PPPDNAME);
+      if(access(buffer, F_OK) == 0)
+        return (pppdPath = buffer);
+    }
+  }
+
+  return pppdPath;
+}
+
+
+Modem::Modem()
 {
+    if (Modem::modem != 0) return; //CORRECT?
+    modemfd = -1;
+    sn = 0L;
+    data_mode = false;
+    modem_is_locked = false;
     lockfile[0] = '\0';
     device = "/dev/modem";
-  assert(modem==0);
-  modem = this;
+    modem = this;
 }
 
 
@@ -644,28 +672,138 @@ void alarm_handler(int) {
 }
 
 
+const char* Modem::authFile(Auth method, int version) {
+  switch(method|version) {
+  case PAP|Original:
+    return PAP_AUTH_FILE;
+    break;
+  case PAP|New:
+    return PAP_AUTH_FILE".new";
+    break;
+  case PAP|Old:
+    return PAP_AUTH_FILE".old";
+    break;
+  case CHAP|Original:
+    return CHAP_AUTH_FILE;
+    break;
+  case CHAP|New:
+    return CHAP_AUTH_FILE".new";
+    break;
+  case CHAP|Old:
+    return CHAP_AUTH_FILE".old";
+    break;
+  default:
+    return 0L;
+  }
+}
 
-const char* pppdPath() {
-  // wasting a few bytes
-  static char buffer[sizeof(PPPDSEARCHPATH)+sizeof(PPPDNAME)];
-  static char *pppdPath = 0L;
-  char *p;
 
-  if(pppdPath == 0L) {
-    const char *c = PPPDSEARCHPATH;
-    while(*c != '\0') {
-      while(*c == ':')
-        c++;
-      p = buffer;
-      while(*c != '\0' && *c != ':')
-        *p++ = *c++;
-      *p = '\0';
-      strcat(p, "/");
-      strcat(p, PPPDNAME);
-      if(access(buffer, F_OK) == 0)
-        return (pppdPath = buffer);
+bool Modem::createAuthFile(Auth method, const char *username, const char *password) {
+  const char *authfile, *oldName, *newName;
+  char line[100];
+  char regexp[2*MaxStrLen+30];
+  regex_t preg;
+
+  if(!(authfile = authFile(method)))
+    return false;
+
+  if(!(newName = authFile(method, New)))
+    return false;
+
+  // look for username, "username" or 'username'
+  // if you modify this RE you have to adapt regexp's size above
+  snprintf(regexp, sizeof(regexp), "^[ \t]*%s[ \t]\\|^[ \t]*[\"\']%s[\"\']",
+          username,username);
+  MY_ASSERT(regcomp(&preg, regexp, 0) == 0);
+
+  // copy to new file pap- or chap-secrets
+  int old_umask = umask(0077);
+  FILE *fout = fopen(newName, "w");
+  if(fout) {
+    // copy old file
+    FILE *fin = fopen(authfile, "r");
+    if(fin) {
+      while(fgets(line, sizeof(line), fin)) {
+        if(regexec(&preg, line, 0, 0L, 0) == 0)
+           continue;
+        fputs(line, fout);
+      }
+      fclose(fin);
     }
+
+    // append user/pass pair
+    fprintf(fout, "\"%s\"\t*\t\"%s\"\n", username, password);
+    fclose(fout);
   }
 
-  return pppdPath;
+  // restore umask
+  umask(old_umask);
+
+  // free memory allocated by regcomp
+  regfree(&preg);
+
+  if(!(oldName = authFile(method, Old)))
+    return false;
+
+  // delete old file if any
+  unlink(oldName);
+
+  rename(authfile, oldName);
+  rename(newName, authfile);
+
+  return true;
 }
+
+
+bool Modem::setSecret(int method, const char* name, const char* password)
+{
+
+    Auth auth;
+    if(method == AUTH_PAPCHAP)
+        return setSecret(AUTH_PAP, name, password) &&
+            setSecret(AUTH_CHAP, name, password);
+
+    switch(method) {
+    case AUTH_PAP:
+        auth = Modem::PAP;
+        break;
+    case AUTH_CHAP:
+        auth = Modem::CHAP;
+        break;
+    default:
+        return false;
+    }
+
+    return createAuthFile(auth, name, password);
+
+}
+
+bool Modem::removeSecret(int)
+{
+    return true;
+}
+
+void Modem::killPPPDaemon()
+{
+}
+
+int Modem::pppdExitStatus()
+{
+    return -1;
+}
+
+bool Modem::execPPPDaemon(const QString & arguments)
+{
+    return true;
+}
+
+int Modem::openResolv(int flags)
+{
+    return -1;
+}
+
+bool Modem::setHostname(const QString & name)
+{
+    return true;
+}
+
