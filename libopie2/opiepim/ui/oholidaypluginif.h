@@ -1,13 +1,12 @@
 #ifndef _O_HOLIDAY_PLUGIN_IF_H
 #define _O_HOLIDAY_PLUGIN_IF_H
-
 #include <opie2/odebug.h>
-
 #include <qpe/qcom.h>
+#include <qpe/quuid.h>
 
 #ifndef QT_NO_COMPONENT
 //"b981b4e9-6d5d-4ee0-a193-f8d0e443809b"
-#define IID_HOLIDAY_PLUGIN QUuid(0xb981b4e9, 0x6d5d, 0x4ee0 0xa1, 0x93,0xf8, 0xd0, 0xe4, 0x43, 0x80, 0x9b)
+#define IID_HOLIDAY_PLUGIN QUuid( 0xb981b4e9, 0x6d5d, 0x4ee0, 0xa1, 0x93,0xf8, 0xd0, 0xe4, 0x43, 0x80, 0x9b)
 #endif
 
 namespace Opie {
@@ -24,7 +23,7 @@ public:
    virtual HolidayPlugin*plugin()=0;
 };
 
-template<class T>HolidayPluginWrapper:public HolidayPluginIf
+template<class T> class HolidayPluginWrapper:public HolidayPluginIf
 {
 public:
     HolidayPluginWrapper():HolidayPluginIf(),_plugin(0){}
@@ -33,7 +32,7 @@ public:
     QRESULT queryInterface( const QUuid& uuid, QUnknownInterface** iface ) {
         odebug << "HolidayPluginWrapper::queryInterface()" << oendl;
         *iface = 0;
-        if (uuid==IID_HOLIDAY_PLUGIN||uuid==IID_QUnknown) {
+        if (uuid == IID_HOLIDAY_PLUGIN || uuid == IID_QUnknown) {
             *iface = this;
         } else {
             return  QS_FALSE;

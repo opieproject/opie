@@ -1,12 +1,12 @@
 #ifndef _HOLIDAY_PLUGIN_H
 #define _HOLIDAY_PLUGIN_H
 
-namespace Opie {
-namespace Datebook {
-
 #include <qstring.h>
 #include <qstringlist.h>
-#include <qdate.h>
+#include <qdatetime.h>
+
+namespace Opie {
+namespace Datebook {
 
 class HolidayPlugin
 {
