@@ -21,6 +21,7 @@
 #define OTABWIDGET_H
 
 #include <qwidget.h>
+#include <qlist.h>
 
 class QComboBox;
 class QPixmap;
@@ -45,7 +46,7 @@ private:
     QString  l;
 };
 
-typedef QValueList<TabInfo> TabInfoList;
+typedef QList<TabInfo> TabInfoList;
 
 class OTabWidget : public QWidget
 {
@@ -63,6 +64,8 @@ public:
     ~OTabWidget();
 
     void addTab( QWidget *, const QString &, const QString & );
+    void setCurrentTab( QWidget * );
+    void setCurrentTab( QString );
     QSize sizeHint() const;
 
 
@@ -70,8 +73,8 @@ protected:
     void resizeEvent( QResizeEvent * );
 
 private:
-    TabInfoList tabs;
-    TabInfoList::Iterator currentTab;
+    TabInfoList  tabs;
+    TabInfo     *currentTab;
 
     TabStyle    tabBarStyle;
     TabPosition tabBarPosition;
@@ -83,8 +86,8 @@ private:
     QWidgetStack *widgetStack;
 
     QPixmap loadSmooth( const QString & );
-    void    selectTab( TabInfoList::Iterator );
-    void    setUpLayout( bool );
+    void    selectTab( TabInfo * );
+    void    setUpLayout();
 
 private slots:
     void slotTabBarSelected( int );

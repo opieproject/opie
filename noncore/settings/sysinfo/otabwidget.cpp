@@ -23,7 +23,6 @@
 #include <qpe/resource.h>
 
 #include <qcombobox.h>
-#include <qlist.h>
 #include <qtabbar.h>
 #include <qwidgetstack.h>
 
@@ -83,6 +82,8 @@ OTabWidget::OTabWidget( QWidget *parent, const char *name = 0x0,
     {
         tabBar->setShape( QTabBar::RoundedBelow );
     }
+	
+    currentTab= 0x0;
 }
 
 OTabWidget::~OTabWidget()
@@ -108,10 +109,8 @@ void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &lab
         tab->iconset = new QIconSet( iconset );
     }
     int tabid = tabBar->addTab( tab );
-    tabBar->setCurrentTab( tab );
 
     // Add to tabList
-
     if ( tabBarStyle == IconTab || tabBarStyle == IconList )
     {
         tabList->insertItem( iconset, label, -1 );
@@ -120,16 +119,43 @@ void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &lab
     {
         tabList->insertItem( label );
     }
-    tabList->setCurrentItem( tabList->count()-1 );
 
     // Add child to widget list
     widgetStack->addWidget( child, tabid );
     widgetStack->raiseWidget( child );
 
     // Save tab information
-    tabs.append( TabInfo( tabid, child, icon, label ) );
+    TabInfo *tabinfo = new TabInfo( tabid, child, icon, label );
+    tabs.append( tabinfo );
+    selectTab( tabinfo );
 
-    setUpLayout( FALSE );
+//    setUpLayout();
+}
+
+void OTabWidget::setCurrentTab( QWidget *childwidget )
+{
+    TabInfo *newtab = tabs.first();
+    while ( newtab && newtab->control() != childwidget )
+    {
+        newtab = tabs.next();
+    }
+    if ( newtab && newtab->control() == childwidget )
+    {
+        selectTab( newtab );
+    }
+}
+
+void OTabWidget::setCurrentTab( QString tabname )
+{
+    TabInfo *newtab = tabs.first();
+    while ( newtab && newtab->label() != tabname )
+    {
+        newtab = tabs.next();
+    }
+    if ( newtab && newtab->label() == tabname )
+    {
+        selectTab( newtab );
+    }
 }
 
 OTabWidget::TabStyle OTabWidget::tabStyle() const
@@ -154,11 +180,12 @@ void OTabWidget::setTabPosition( TabPosition p )
 
 void OTabWidget::slotTabBarSelected( int id )
 {
-
-    TabInfoList::Iterator newtab = tabs.begin();
-    while ( newtab != tabs.end() && (*newtab).id() != id )
-        newtab++;
-    if ( (*newtab).id() == id )
+    TabInfo *newtab = tabs.first();
+    while ( newtab && newtab->id() != id )
+    {
+        newtab = tabs.next();
+    }
+    if ( newtab && newtab->id() == id )
     {
         selectTab( newtab );
     }
@@ -166,8 +193,8 @@ void OTabWidget::slotTabBarSelected( int id )
 
 void OTabWidget::slotTabListSelected( int index )
 {
-    TabInfoList::Iterator newtab = tabs.at( index );
-    if ( newtab != tabs.end() )
+    TabInfo *newtab = tabs.at( index );
+    if ( newtab )
     {
         selectTab( newtab );
     }
@@ -181,27 +208,28 @@ QPixmap OTabWidget::loadSmooth( const QString &name )
     return pixmap;
 }
 
-void OTabWidget::selectTab( TabInfoList::Iterator tab )
+void OTabWidget::selectTab( TabInfo *tab )
 {
     if ( tabBarStyle == IconTab )
     {
-        if ( currentTab != 0x0 )
+        if ( currentTab )
         {
-            tabBar->tab( (*currentTab).id() )->label = QString::null;
+            tabBar->tab( currentTab->id() )->setText( QString::null );
+            setUpLayout();
         }
-        tabBar->tab( (*tab).id() )->label = (*tab).label();
+        tabBar->tab( tab->id() )->setText( tab->label() );
         currentTab = tab;
     }
-    tabBar->layoutTabs();
+    tabBar->setCurrentTab( tab->id() );
+    setUpLayout();
     tabBar->update();
 
-    widgetStack->raiseWidget( (*tab).control() );
-
-    setUpLayout( FALSE );
+    widgetStack->raiseWidget( tab->control() );
 }
 
-void OTabWidget::setUpLayout( bool onlyCheck )
+void OTabWidget::setUpLayout()
 {
+    tabBar->layoutTabs();
     QSize t( tabBarStack->sizeHint() );
     if ( t.width() > width() )
         t.setWidth( width() );
@@ -217,8 +245,8 @@ void OTabWidget::setUpLayout( bool onlyCheck )
         widgetStack->setGeometry( 0, t.height()-lw, width(), height()-t.height()+QMAX(0, lw-2));
     }
 
-    if ( !onlyCheck )
-        update();
+//    if ( !onlyCheck )
+//        update();
     if ( autoMask() )
         updateMask();
 }
@@ -232,5 +260,5 @@ QSize OTabWidget::sizeHint() const
 
 void OTabWidget::resizeEvent( QResizeEvent * )
 {
-    setUpLayout( FALSE );
+    setUpLayout();
 }
