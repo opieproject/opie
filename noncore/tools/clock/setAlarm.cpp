@@ -132,12 +132,15 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
             i_alarmHour = i_alarmHour - 12;
             Pm_RadioButton->setChecked(TRUE);
         }
-        Hour_Slider->setValue( i_alarmHour);
+        else if ( i_alarmHour == 0 ) {
+        	i_alarmHour = 12; 
+        }	
+        Hour_Slider->setValue( i_alarmHour );
         Minute_Slider->setValue( alarmMinute.toInt(&ok,10) );
         SnoozeSlider->setValue( snoozeTime.toInt(&ok,10) );
     } else {
         Hour_Slider->setMaxValue( 23);
-        Hour_Slider->setMinValue( 1);
+        Hour_Slider->setMinValue( 0);
         Hour_Slider->setValue( i_alarmHour);
         Minute_Slider->setValue( alarmMinute.toInt(&ok,10) );
         SnoozeSlider->setValue( snoozeTime.toInt(&ok,10) );

@@ -305,6 +305,9 @@ void Clock::slotSetAlarm()
         minute = setAlarmDlg->Minute_Slider->value();
         snoozeTime=setAlarmDlg->SnoozeSlider->value();
         if(ampm) {
+        	if ( hour == 12 )
+        		hour = 0;
+        
             if(setAlarmDlg->Pm_RadioButton->isChecked() && hour < 12 )
                 hour+=12;
         }
