@@ -547,6 +547,7 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
     bool normalAllDay = FALSE;
     bool repeatAllDay = FALSE;
     bool travelAllDay = FALSE;
+	bool holidayAllDay = FALSE;
 
     QValueListIterator<EffectiveEvent> itDays = d->mDayEvents.begin();
 
@@ -558,10 +559,14 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
 	int t = (*itDays).end().hour(); 	 // is truncated.
 
 	if (ev.isAllDay()) {
-	    if (!ev.hasRepeat())
-		normalAllDay = TRUE;
-	    else
-		repeatAllDay = TRUE;
+	    if (!ev.hasRepeat()) {
+			normalAllDay = TRUE;
+			if (!ev.isValidUid()) {
+				holidayAllDay = TRUE;
+			}
+	    } else {
+			repeatAllDay = TRUE;
+		}
 	} else {
 	    int sLine, eLine;
 	    if (f == 0)
@@ -599,7 +604,7 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
     }
 
     // draw the background
-    if (normalAllDay || repeatAllDay || travelAllDay) {
+    if (normalAllDay || repeatAllDay || travelAllDay || holidayAllDay) {
 	p->save();
 
 	if (normalAllDay)
@@ -608,12 +613,18 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
 			colorNormalLight );
 		p->fillRect( 0, cr.height() / 2, cr.width(), cr.height() / 2,
 			colorRepeatLight );
-	    } else
+	    } else {
+			if (!holidayAllDay) {
 		p->fillRect( 0, 0, cr.width(), cr.height(),
 			colorNormalLight );
-	    else if (repeatAllDay)
+			} else {
+		p->fillRect( 0, 0, cr.width(), cr.height(),
+			QColor(0,220,0) );
+			}
+	    } else if (repeatAllDay) {
 		p->fillRect( 0, 0, cr.width(), cr.height(),
 			colorRepeatLight );
+		}
     } else {
 	p->fillRect( 0, 0, cr.width(),
 		cr.height(), selected
