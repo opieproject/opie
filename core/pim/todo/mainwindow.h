@@ -118,6 +118,7 @@ private slots:
         void raiseCurrentView();
         ViewBase* currentView();
         ViewBase* m_curView;
+        bool m_showing : 1; // used to see if we show a todo in the cases we shouldn't change the table
         QuickEditBase* m_curQuick;
         Editor* m_curEdit;
         TodoShow* currentShow();

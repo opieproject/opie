@@ -71,6 +71,7 @@ MainWindow::MainWindow( QWidget* parent,
     : OPimMainWindow( "Todolist", parent, name, WType_TopLevel | WStyle_ContextHelp )
 {
     m_syncing = false;
+    m_showing = false;
     m_counter = 0;
     m_tempManager = new TemplateManager();
     m_tempManager->load();
@@ -352,6 +353,7 @@ void MainWindow::slotReload() {
 }
 void MainWindow::closeEvent( QCloseEvent* e ) {
     if (m_stack->visibleWidget() == currentShow()->widget() ) {
+        m_showing = false;
         raiseCurrentView();
         e->ignore();
         return;
@@ -650,6 +652,13 @@ ViewBase* MainWindow::currentView() {
     return m_curView;
 }
 void MainWindow::raiseCurrentView() {
+    // due QPE/Application/todolist show(int)
+    // we might not have the populateCategories slot called once
+    // we would show the otodo but then imediately switch to the currentView
+    // if we're initially showing we shouldn't raise the table
+    // in returnFromView we fix up m_showing
+    if (m_showing ) return;
+
     m_stack->raiseWidget( m_curView->widget() );
 }
 void MainWindow::slotShowDue(bool ov) {
@@ -849,6 +858,7 @@ void MainWindow::beam( int uid) {
 }
 void MainWindow::show( int uid ) {
     m_todoMgr.load(); // might not be loaded yet
+    m_showing = true;
     slotShow( uid );
     QPEApplication::setKeepRunning();
 }
@@ -872,6 +882,7 @@ void MainWindow::add( const OPimRecord& rec) {
     populateCategories();
 }
 void MainWindow::slotReturnFromView() {
+    m_showing = false;
     raiseCurrentView();
 }
 
