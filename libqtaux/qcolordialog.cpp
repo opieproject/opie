@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcolordialog.cpp,v 1.5 2004-03-31 13:23:53 mouse Exp $
+** $Id: qcolordialog.cpp,v 1.6 2004-09-10 11:07:29 zecke Exp $
 **
 ** Implementation of QColorDialog class
 **
@@ -540,7 +540,7 @@ QRgb QColorDialog::customColor( int i )
     if ( i < 0 || i >= customCount() ) {
 #ifdef CHECK_RANGE
 	qWarning( "QColorDialog::customColor() index %d out of range", i );
-#endif	
+#endif
 	i = 0;
     }
     return cusrgb[i];
@@ -555,7 +555,7 @@ void QColorDialog::setCustomColor( int i, QRgb c )
     if ( i < 0 || i >= customCount() ) {
 #ifdef CHECK_RANGE
 	qWarning( "QColorDialog::customColor() index %d out of range", i );
-#endif	
+#endif
 	return;
     }
     cusrgb[i] = c;
@@ -1103,6 +1103,8 @@ void QColorShowLabel::mouseMoveEvent( QMouseEvent *e )
 	mousePressed = FALSE;
 	drg->dragCopy();
     }
+#else
+    Q_UNUSED( e )
 #endif
 }
 
