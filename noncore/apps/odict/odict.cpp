@@ -201,10 +201,6 @@ void ODict::setupMenus()
 		error_tol_menu->insertItem( tr( "Until Hit" ), 5 );
 	parameter->insertItem( tr( "&Error tolerance" ), error_tol_menu );
 	
-	help = new QPopupMenu( menu );
-	help->insertItem("&About",this,SLOT( slotDisplayAbout() ));
-
 	menu->insertItem( tr( "Settings" ) , settings );
 	menu->insertItem( tr( "Parameter" ) , parameter );
-	menu->insertItem( tr( "Help" ) , help );
 }

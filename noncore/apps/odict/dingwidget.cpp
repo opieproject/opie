@@ -30,7 +30,6 @@
 #include <qtextbrowser.h>
 #include <stdlib.h> // for getenv
 
-
 DingWidget::DingWidget( )
 {
 	methodname = QString::null;
@@ -89,13 +88,6 @@ void DingWidget::setQueryWord( QString qword )
 	queryword = qword;
 }
 
-BroswerContent DingWidget::setText( QString word )
-{
-	queryword = word;
-	qDebug( queryword );
-	qDebug( "^ ^ ^ ^ ^ ^ ^ war das gesuchte Word");
-	return parseInfo();
-}
 
 void DingWidget::loadValues()
 {
@@ -104,9 +96,19 @@ void DingWidget::loadValues()
 	trenner = cfg.readEntry( "Seperator" );
 }
 
+BroswerContent DingWidget::setText( QString word )
+{
+	queryword = word;
+	qDebug( queryword );
+	qDebug( "^ ^ ^ ^ ^ ^ ^ war das gesuchte Word");
+	return parseInfo();
+}
+
+
 BroswerContent DingWidget::parseInfo()
 {
-	if ( isCompleteWord ) queryword = " " + queryword + " ";
+	if ( isCompleteWord ) 
+		queryword = " " + queryword + " ";
 	QStringList search = lines.grep( queryword , isCaseSensitive );
 
  	QString current;
@@ -118,62 +120,29 @@ BroswerContent DingWidget::parseInfo()
 	QStringList toplist, bottomlist;
 	QString substitute = "<strong>"+queryword+"</strong>";
 
-	/*             Dieser Block ist von Patrik. Ich versuche einen neuen
-	 *             Ansatz. Zum einen ist HTML scheiﬂe an dieser Stelle und 
-	 *             zum andern funktioniert der Code nicht so wie er sollte.
-	QString substitute = "<a href=''>"+queryword+"</a>";
-	
-	QString html_header      = "<html><table>";
-	QString html_footer      = "</table></html>";
-	QString html_table_left  = "<tr><td width='50'>";
-	QString html_table_sep   = "</td><td>";
-	QString html_table_right = "</td></tr>";
-	 
-	for( QStringList::Iterator it = search.begin() ; it != search.end() ; ++it )
-	{
-		current = *it;
-		left = current.left( current.find(reg_div) );
- 		right = current.right( current.length() - current.find(reg_div) - 1 );
- 		if ( left.contains( reg_word ) )
-		{
-		  left.replace( queryword, substitute );
- 		  toplist.append( html_table_left + left + html_table_sep + right + html_table_right );
-		}
-		else
-		{
-		  right.replace( reg_word, substitute );
- 		  bottomlist.append( html_table_left + right + html_table_sep + left + html_table_right );
-		}
-	}
-		
-	//thats it, the lists are rendered. Lets put them in one string
-	s_strings.bottom = html_header + bottomlist.join( "<br>" ) + html_footer;
-	s_strings.top    = html_header + toplist.join( "<br>" )    + html_footer;
-	*/
-
 	for( QStringList::Iterator it = search.begin() ; it != search.end() ; ++it )
 	{
 		current = *it;
 		left = current.left( current.find( trenner ) );
  		
-		right = current.right( current.length() - current.find(trenner) -2 );
+		right = current.right( current.length() - current.find(trenner) - trenner.length() );
 
  		if ( left.contains( queryword , isCaseSensitive ) )
 		{
 			left.replace( queryword, substitute );
-			left = left + "-->" + right;
+			left = left + " -- " + right;
 			toplist.append( left );
 		}
 		else
 		{
 			right.replace( queryword, substitute );
-			left = right + "-->" + left;
+			left = right + " -- " + left;
 			bottomlist.append( right );
 		}
 	}
 
-	s_strings.bottom = bottomlist.join( "\n" );
 	s_strings.top = toplist.join( "\n" );
+	s_strings.bottom = bottomlist.join( "\n" );
 
 	return s_strings;
 }
