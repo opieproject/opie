@@ -249,6 +249,8 @@ void OFileNotification::singleShot( const QString& path, QObject* receiver, cons
 
 void OFileNotification::__signalHandler( int sig, siginfo_t *si, void *data )
 {
+    Q_UNUSED( sig )
+    Q_UNUSED( data )
     qWarning( "OFileNotification::__signalHandler(): reached." );
     int fd = si->si_fd;
     OFileNotification* fn = notification_list[fd];

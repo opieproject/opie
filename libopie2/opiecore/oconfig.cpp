@@ -113,6 +113,8 @@ QColor OConfig::readColorEntry( const QString& key, const QColor* pDefault ) con
 
 QFont OConfig::readFontEntry( const QString& key, const QFont* pDefault ) const
 {
+    Q_CONST_UNUSED( key )
+    Q_CONST_UNUSED( pDefault )
   /*
   QFont aRetFont;
 

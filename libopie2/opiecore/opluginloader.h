@@ -64,7 +64,8 @@ private:
  * This is the generic non sepcialised loader for plugins. Normally
  * you would prefer using the OPluginLoader directly. This class
  * exists to minimize the application binary size due the usage
- * of templates in the specialized API
+ * of templates in the specialized API.
+ * 
  *
  * @since 1.2
  * @see OPluginLoader
