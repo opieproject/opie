@@ -268,9 +268,9 @@ inline void Event::setAllDay(bool enable)
 {
     if (enable)
 	setType(AllDay);
-    else 
+    else
 	setType(Normal);
-}; 
+};
 
 inline bool Event::isAllDay() const
 {
@@ -341,7 +341,7 @@ inline void Event::setRepeatOnWeekDay(int day, bool enable)
     if ( repeatOnWeekDay( day ) != enable )
 	pattern.days ^= 1 << (day - 1);
 }
-
+/*
 inline QDateTime Event::start( ) const
 {
     return start(FALSE);
@@ -351,7 +351,7 @@ inline QDateTime Event::end( ) const
 {
     return end(FALSE);
 }
-
+*/
 #ifdef PALMTOPCENTER
 class QPC_EXPORT EffectiveEventSizeSorter : public QSorter<EffectiveEvent>
 {

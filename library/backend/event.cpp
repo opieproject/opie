@@ -424,7 +424,7 @@ QMap<int, QString> Event::toMap() const
 
     if ( !description().isEmpty() )
 	m.insert( DatebookDescription, description() );
-    if ( !location().isEmpty() )	
+    if ( !location().isEmpty() )
 	m.insert ( Location, location() );
     if ( categories().count() )
 	m.insert ( DatebookCategory, idsToString( categories() ) );
@@ -585,7 +585,9 @@ Event::Type Event::type() const
 {
     return typ;
 }
-
+QDateTime Event::start() const {
+    return start( TRUE );
+}
 /*!
   \internal
 */
@@ -601,6 +603,9 @@ QDateTime Event::start( bool actual ) const
     return dt;
 }
 
+QDateTime Event::end() const {
+    return end( TRUE );
+}
 /*!
   \internal
 */
