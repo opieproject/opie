@@ -24,7 +24,7 @@
 
 #define QTEXTEDIT_OPEN_API
 
-#include "fileBrowser.h"
+//#include "fileBrowser.h"
 #include "fileSaver.h"
 
 #include <qpe/filemanager.h>
@@ -111,7 +111,7 @@ private:
 
 private:
     fileSaver *fileSaveDlg;
-    fileBrowser *browseForFiles;
+//    fileBrowser *browseForFiles;
     QpeEditor* editor;
     QToolBar *menu, *editBar, *searchBar;
     QLineEdit *searchEdit;
