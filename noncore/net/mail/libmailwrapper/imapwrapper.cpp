@@ -649,12 +649,14 @@ void IMAPwrapper::fillSingleBasicPart(RecPart&target_part,mailimap_body_type_bas
 void IMAPwrapper::fillBodyFields(RecPart&target_part,mailimap_body_fields*which)
 {
     if (!which) return;
-    clistcell*cur;
-    mailimap_single_body_fld_param*param;
-    for (cur = clist_begin(which->bd_parameter->pa_list);cur!=NULL;cur=clist_next(cur)) {
-        param = (mailimap_single_body_fld_param*)cur->data;
-        if (param) {
-            target_part.addParameter(QString(param->pa_name).lower(),QString(param->pa_value));
+    if (which->bd_parameter && which->bd_parameter->pa_list && which->bd_parameter->pa_list->count>0) {
+        clistcell*cur;
+        mailimap_single_body_fld_param*param=0;
+        for (cur = clist_begin(which->bd_parameter->pa_list);cur!=NULL;cur=clist_next(cur)) {
+            param = (mailimap_single_body_fld_param*)cur->data;
+            if (param) {
+                target_part.addParameter(QString(param->pa_name).lower(),QString(param->pa_value));
+            }
         }
     }
     mailimap_body_fld_enc*enc = which->bd_encoding;
