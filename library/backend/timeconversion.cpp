@@ -25,15 +25,24 @@
 
 QString TimeConversion::toString( const QDate &d )
 {
-    QString r = QString::number( d.day() ) + "." +
+	QString empty;
+	if ( d.isNull() )
+		return empty;
+
+	QString r = QString::number( d.day() ) + "." +
 		QString::number( d.month() ) + "." +
 		QString::number( d.year() );
-    //qDebug("TimeConversion::toString %s", r.latin1());
-    return r;
+	//qDebug("TimeConversion::toString %s", r.latin1());
+
+	return r;
 }
 
 QDate TimeConversion::fromString( const QString &datestr )
 {
+    QDate empty;
+    if ( datestr.isEmpty() )
+	    return empty;
+
     int monthPos = datestr.find('.');
     int yearPos = datestr.find('.', monthPos+1 );
     if ( monthPos == -1 || yearPos == -1 ) {

@@ -113,6 +113,8 @@ SOURCES	=   calendar.cpp \
 	findwidget_p.cpp \
 	finddialog.cpp \
 	lnkproperties.cpp
+# QPE crashes on my Notebook if it tries to play sound
+DEFINES = QT_NO_SOUND
 # Qt 3 compatibility
 HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h
 SOURCES += quuid.cpp qlibrary.cpp qlibrary_unix.cpp
