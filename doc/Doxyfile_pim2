@@ -76,7 +76,6 @@ WARN_LOGFILE           = Dox-Warning
 INPUT                  = . \
                          ui \
                          core \
-                         core/backends \
                          backend
 FILE_PATTERNS          = *.h \
                          *.cpp \
