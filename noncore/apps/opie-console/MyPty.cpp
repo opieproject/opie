@@ -82,6 +82,7 @@
 #include <pty.h>
 #endif
 
+#include "procctl.h"
 #include "MyPty.h"
 
 
@@ -113,11 +114,13 @@ void MyPty::donePty()
     ::close(m_fd);
 
     if (m_cpid) {
+        qWarning("killing!!!");
 	kill(m_cpid, SIGHUP);
 	waitpid(m_cpid, &status, 0);
     }
 
-    emit done(status);
+    m_cpid = 0;
+//    emit done(status);
 }
 
 
@@ -129,6 +132,7 @@ const char* MyPty::deviceName()
 
 void MyPty::error()
 {
+    qWarning("error");
     // This is code from the Qt DumbTerminal example
     donePty();
 }
@@ -182,9 +186,9 @@ int MyPty::run(const char* cmd, QStrList &, const char*, int)
 
     // parent - continue as a widget
     QSocketNotifier* sn_r = new QSocketNotifier(m_fd,QSocketNotifier::Read,this);
-    QSocketNotifier* sn_e = new QSocketNotifier(m_fd,QSocketNotifier::Exception,this);
+//    QSocketNotifier* sn_e = new QSocketNotifier(m_fd,QSocketNotifier::Exception,this);
     connect(sn_r,SIGNAL(activated(int)),this,SLOT(readPty()));
-    connect(sn_e,SIGNAL(activated(int)),this,SLOT(error()));
+//    connect(sn_e,SIGNAL(activated(int)),this,SLOT(error()));
 
     return 0;
 }
@@ -229,6 +233,7 @@ int MyPty::openPty()
 MyPty::MyPty(const Profile&) : m_cpid(0)
 {
   m_fd = openPty();
+  ProcCtl* ctl = ProcCtl::self();
 }
 
 /*!
@@ -259,7 +264,7 @@ void MyPty::reload( const Profile& ) {
 /*! sends len bytes through the line */
 void MyPty::send(const QByteArray& ar)
 {
-
+    qWarning("sending!");
 #ifdef VERBOSE_DEBUG
   // verbose debug
   printf("sending bytes:\n");
@@ -274,15 +279,22 @@ void MyPty::send(const QByteArray& ar)
 /*! indicates that a block of data is received */
 void MyPty::readPty()
 {
+    qWarning("read");
   QByteArray buf(4096);
 
   int len = ::read( m_fd, buf.data(), 4096 );
 
-  if (len == -1)
+  if (len == -1 || len == 0) {
+      qWarning("donePty!!! now!");
      donePty();
+     qWarning("return %s", sender()->className() );
+     delete sender();
+     return;
+  }
 
   if (len < 0)
      return;
+
 
   buf.resize(len);
   emit received(buf);
