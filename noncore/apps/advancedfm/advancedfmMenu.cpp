@@ -10,11 +10,11 @@
     *   (at your option) any later version.                                   *
     ***************************************************************************/
 #include "advancedfm.h"
-#include "inputDialog.h"
 #include "output.h"
 #include "filePermissions.h"
 
 #include <opie/otabwidget.h>
+#include <opie/oprocess.h>
 
 #include <qpe/lnkproperties.h>
 #include <qpe/qpeapplication.h>
@@ -233,7 +233,7 @@ void AdvancedFm::localDelete() {
         case 0: {
           f=f.left(f.length()-1);
           QString cmd="rm -rf "+f;
-          system( cmd.latin1());
+          startProcess( (const QString)cmd.latin1() );
           populateLocalView();
         }
           break;
@@ -255,7 +255,6 @@ void AdvancedFm::localDelete() {
         QFile file(f);
         if(QFileInfo(myFile).fileName().find("../",0,TRUE)==-1)
             file.remove();
-          //                   system( cmd.latin1());
       }
     }
   }
@@ -298,7 +297,7 @@ void AdvancedFm::remoteDelete() {
                   case 0: {
                       f=f.left(f.length()-1);
                       QString cmd="rm -rf "+f;
-                      system( cmd.latin1());
+                      startProcess( (const QString)cmd );
                       populateRemoteView();
                   }
                       break;
@@ -320,7 +319,6 @@ void AdvancedFm::remoteDelete() {
                 QFile file(f);
                 if(QFileInfo(myFile).fileName().find("../",0,TRUE)==-1)
                     file.remove();
-                  //                   system( cmd.latin1());
             }
         }
     }
@@ -810,49 +808,35 @@ bool AdvancedFm::copyFile( const QString & dest, const QString & src ) {
 }
 
 void AdvancedFm::runCommand() {
-  QString curFile;
-  if (TabWidget->getCurrentTab() == 0) {
-    if( Local_View->currentItem())
-      curFile = currentDir.canonicalPath() +"/"+ Local_View->currentItem()->text(0);
-  } else {
-    if(Remote_View->currentItem())
-      curFile = currentRemoteDir.canonicalPath() + "/"+Remote_View->currentItem()->text(0);
-  }
-
-  InputDialog *fileDlg;
-  fileDlg = new InputDialog(this,tr("Run Command"),TRUE, 0);
-  fileDlg->setInputText(curFile);
-  fileDlg->exec();
-  QString command;
-  if( fileDlg->result() == 1 ) {
-    command = fileDlg->LineEdit1->text();
-
-    Output *outDlg;
-    outDlg = new Output(this, tr("AdvancedFm Output"),FALSE);
-    outDlg->showMaximized();
-    outDlg->show();
-    qApp->processEvents();
-    FILE *fp;
-    char line[130];
-    sleep(1);
-    command +=" 2>&1";
-    fp = popen(  (const char *) command, "r");
-    if ( !fp ) {
-      qDebug("Could not execute '" + command + "'! err=%d", fp);
-      QMessageBox::warning( this, "AdvancedFm", tr("command failed!"), tr("&OK") );
-      pclose(fp);
-      return;
+    QString curFile;
+    if (TabWidget->getCurrentTab() == 0) {
+        if( Local_View->currentItem())
+            curFile = currentDir.canonicalPath() +"/"+ Local_View->currentItem()->text(0);
     } else {
-      while ( fgets( line, sizeof line, fp)) {
-        QString lineStr = line;
-        lineStr=lineStr.left(lineStr.length()-1);
-        outDlg->OutputEdit->append(lineStr);
-        outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-      }
+        if(Remote_View->currentItem())
+            curFile = currentRemoteDir.canonicalPath() + "/"+Remote_View->currentItem()->text(0);
     }
-    pclose(fp);
 
-  }
+    InputDialog *fileDlg;
+    fileDlg = new InputDialog(this,tr("Run Command"),TRUE, 0);
+    fileDlg->setInputText(curFile);
+    fileDlg->exec();
+      //QString command;
+
+    if( fileDlg->result() == 1 ) {
+        qDebug(fileDlg->LineEdit1->text());
+        QStringList command;
+
+        command << "/bin/sh";
+        command << "-c";
+        command <<  fileDlg->LineEdit1->text();
+        Output *outDlg;
+        outDlg = new Output( command, this, tr("AdvancedFm Output"), true);
+        outDlg->showMaximized();
+        outDlg->exec();
+        qApp->processEvents();
+
+    }
 }
 
 void AdvancedFm::runCommandStd() {
@@ -870,11 +854,10 @@ void AdvancedFm::runCommandStd() {
   fileDlg = new InputDialog(this,tr("Run Command"),TRUE, 0);
   fileDlg->setInputText(curFile);
   fileDlg->exec();
-  QString command;
+
   if( fileDlg->result() == 1 ) {
-    qApp->processEvents();
-    command = fileDlg->LineEdit1->text() + " &";
-    system(command.latin1());
+      qApp->processEvents();
+      startProcess( (const QString)fileDlg->LineEdit1->text().latin1());
   }
 }
 
@@ -885,31 +868,45 @@ void AdvancedFm::fileStatus() {
   } else {
     curFile = Remote_View->currentItem()->text(0);
   }
-  QString command = " stat -l "+ curFile +" 2>&1";
-  Output *outDlg;
-  outDlg = new Output(this, tr("AdvancedFm Output"),FALSE);
-  outDlg->showMaximized();
-  outDlg->show();
-  qApp->processEvents();
-  FILE *fp;
-  char line[130];
-  sleep(1);
-  fp = popen(  (const char *) command, "r");
-  if ( !fp ) {
-    qDebug("Could not execute '" + command + "'! err=%d", fp);
-    QMessageBox::warning( this, "AdvancedFm", tr("command failed!"), tr("&OK") );
-    pclose(fp);
-    return;
-  } else {
-    while ( fgets( line, sizeof line, fp)) {
-      outDlg->OutputEdit->append(line);
-      outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
-    }
+    QStringList command;
+    command << "/bin/sh";
+    command << "-c";
+    command << "stat -l "+ curFile;
 
-  }
-  pclose(fp);
+    Output *outDlg;
+    outDlg = new Output( command, this, tr("AdvancedFm Output"), true);
+    outDlg->showMaximized();
+    outDlg->exec();
+    qApp->processEvents();
+
+
+//   Output *outDlg;
+//   outDlg = new Output(this, tr("AdvancedFm Output"),FALSE);
+//   outDlg->showMaximized();
+//   outDlg->show();
+//   qApp->processEvents();
+
+//   FILE *fp;
+//   char line[130];
+//   sleep(1);
+//   fp = popen(  (const char *) command, "r");
+//   if ( !fp ) {
+//     qDebug("Could not execute '" + command + "'! err=%d", fp);
+//     QMessageBox::warning( this, "AdvancedFm", tr("command failed!"), tr("&OK") );
+//     pclose(fp);
+//     return;
+//   } else {
+//     while ( fgets( line, sizeof line, fp)) {
+//       outDlg->OutputEdit->append(line);
+//       outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+
+//     }
+
+//   }
+//   pclose(fp);
 }
+
 
 void AdvancedFm::mkDir() {
   if (TabWidget->getCurrentTab() == 0)
@@ -935,39 +932,39 @@ void AdvancedFm::del() {
 }
 
 void AdvancedFm::mkSym() {
-  QString cmd;
-  QStringList curFileList = getPath();
-  if( curFileList.count() > 0) {
+    QString cmd;
+    QStringList curFileList = getPath();
+    if( curFileList.count() > 0) {
 
-    if (TabWidget->getCurrentTab() == 0) {
-      for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+        if (TabWidget->getCurrentTab() == 0) {
+            for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
-        QString destName = currentRemoteDir.canonicalPath()+"/"+(*it);
-        if(destName.right(1) == "/") destName = destName.left( destName.length() -1);
-        QString curFile =  currentDir.canonicalPath()+"/"+(*it);
-        if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
-        cmd = "ln -s "+curFile+" "+destName;
-        qDebug(cmd);
-        system(cmd.latin1() );
-      }
-      populateRemoteView();
-      TabWidget->setCurrentTab(1);
-    } else {
-      for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+                QString destName = currentRemoteDir.canonicalPath()+"/"+(*it);
+                if(destName.right(1) == "/") destName = destName.left( destName.length() -1);
+                QString curFile =  currentDir.canonicalPath()+"/"+(*it);
+                if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
+                cmd = "ln -s "+curFile+" "+destName;
+                qDebug(cmd);
+                startProcess( (const QString)cmd );
+            }
+            populateRemoteView();
+            TabWidget->setCurrentTab(1);
+        } else {
+            for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
-        QString destName = currentDir.canonicalPath()+"/"+(*it);
-        if(destName.right(1) == "/") destName = destName.left( destName.length() -1);
-        QString curFile =  currentRemoteDir.canonicalPath()+"/"+(*it);
-        if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
+                QString destName = currentDir.canonicalPath()+"/"+(*it);
+                if(destName.right(1) == "/") destName = destName.left( destName.length() -1);
+                QString curFile =  currentRemoteDir.canonicalPath()+"/"+(*it);
+                if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
 
-        cmd = "ln -s "+curFile+" "+destName;
-        qDebug(cmd);
-        system(cmd.latin1() );
-      }
-      populateLocalView();
-      TabWidget->setCurrentTab(0);
+                cmd = "ln -s "+curFile+" "+destName;
+                qDebug(cmd);
+                startProcess( (const QString)cmd );
+            }
+            populateLocalView();
+            TabWidget->setCurrentTab(0);
+        }
     }
-  }
 }
 
 void AdvancedFm::doBeam() {
@@ -1017,4 +1014,24 @@ void AdvancedFm::selectAll() {
         Remote_View->selectAll(true);
         Remote_View->setSelected( Remote_View->firstChild(),false);
     }
+}
+
+void AdvancedFm::startProcess(const QString & cmd) {
+      QStringList command;
+      OProcess *process;
+      process = new OProcess();
+      connect(process, SIGNAL(processExited(OProcess *)),
+              this, SLOT( processEnded()));
+
+      command << "/bin/sh";
+      command << "-c";
+      command << cmd.latin1();
+      *process << command;
+      if(!process->start(OProcess::NotifyOnExit) )
+          qDebug("could not start process");
+}
+
+void AdvancedFm::processEnded() {
+  populateLocalView();
+  populateRemoteView();
 }

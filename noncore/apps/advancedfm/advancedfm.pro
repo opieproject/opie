@@ -1,7 +1,7 @@
 TEMPLATE  = app
 CONFIG    += qt warn_on release
-HEADERS   = advancedfm.h inputDialog.h filePermissions.h output.h
-SOURCES   = advancedfm.cpp advancedfmData.cpp advancedfmMenu.cpp inputDialog.cpp filePermissions.cpp output.cpp main.cpp
+HEADERS   = advancedfm.h filePermissions.h output.h
+SOURCES   = advancedfm.cpp advancedfmData.cpp advancedfmMenu.cpp filePermissions.cpp output.cpp main.cpp
 TARGET    = advancedfm
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include

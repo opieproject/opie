@@ -149,6 +149,9 @@ protected slots:
 
 private:
       QTimer menuTimer;
+      void startProcess(const QString &);
+private slots:
+    void processEnded();
 };
 
 #endif // ADVANCEDFM_H

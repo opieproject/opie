@@ -4,19 +4,24 @@
 ** Copyright: Fri Apr 12 15:12:58 2002 L.J. Potter <ljp@llornkcor.com>
 ****************************************************************************/
 #include "output.h"
-#include "inputDialog.h"
+
+#include <opie/oprocess.h>
 
 #include <qpe/filemanager.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
 
+#include <qmessagebox.h>
+#include <qstringlist.h>
 #include <qfile.h>
-
+#include <qcstring.h>
 #include <qlineedit.h>
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qvariant.h>
+
+#include <errno.h>
 
 /* XPM */
 static char * filesave_xpm[] = {
@@ -116,37 +121,64 @@ static char * filesave_xpm[] = {
 "     +...z]n$   ",
 "        +...    "};
 
-Output::Output( QWidget* parent,  const char* name, bool modal, WFlags fl )
+Output::Output( const QStringList commands, QWidget* parent,  const char* name, bool modal, WFlags fl)
     : QDialog( parent, name, modal, fl )
 {
-    if ( !name )
-  setName( "Output" );
+   QStringList cmmds;
+//   cmmds=QStringList::split( " ", commands, false);
+   cmmds=commands;
+//   qDebug("count %d", cmmds.count());   
+   if ( !name )
+       setName( tr("Output"));
     resize( 196, 269 ); 
     setCaption( name );
+
     OutputLayout = new QGridLayout( this ); 
-    OutputLayout->setSpacing( 6 );
-    OutputLayout->setMargin( 11 );
+    OutputLayout->setSpacing( 2);
+    OutputLayout->setMargin( 2);
 
     QPushButton *docButton;
-    docButton = new QPushButton(  QPixmap(( const char** ) filesave_xpm  ) ,"",this,"saveButton");
-    docButton->setFixedSize( QSize( 20, 20 ) );
-    connect( docButton,SIGNAL(released()),this,SLOT( saveOutput() ));
-//    docButton->setFlat(TRUE);
-    OutputLayout->addMultiCellWidget( docButton, 0,0,3,3 );
-    
+     docButton = new QPushButton(  QPixmap(( const char** ) filesave_xpm  ) ,"",this,"saveButton");
+     docButton->setFixedSize( QSize( 20, 20 ) );
+     connect( docButton,SIGNAL(released()),this,SLOT( saveOutput() ));
+ //    docButton->setFlat(TRUE);
+     OutputLayout->addMultiCellWidget( docButton, 0,0,3,3 );
 
     OutputEdit = new QMultiLineEdit( this, "OutputEdit" );
     OutputLayout->addMultiCellWidget( OutputEdit, 1,1,0,3 );
 
+    proc = new OProcess();
 
+    connect(proc, SIGNAL(processExited(OProcess *)),
+            this, SLOT( processFinished()));
+
+    connect(proc, SIGNAL(receivedStdout(OProcess *, char *, int)),
+            this, SLOT(commandStdout(OProcess *, char *, int)));
+
+    connect(proc, SIGNAL(receivedStderr(OProcess *, char *, int)),
+            this, SLOT(commandStderr(OProcess *, char *, int)));
+
+//     connect( , SIGNAL(received(const QByteArray &)),
+//             this, SLOT(commandStdin(const QByteArray &)));
+
+//    * proc << commands.latin1(); 
+      for ( QStringList::Iterator it = cmmds.begin(); it != cmmds.end(); ++it ) {
+         qDebug( "%s", (*it).latin1() );
+         * proc << (*it).latin1();
+      }
+
+     if(!proc->start(OProcess::NotifyOnExit, OProcess::All)) {
+
+         OutputEdit->append("Process could not start");
+         OutputEdit->setCursorPosition( OutputEdit->numLines() + 1,0,FALSE);
+         perror("Error: ");
+         QString errorMsg="Error\n"+(QString)strerror(errno);
+         OutputEdit->append( errorMsg);
+         OutputEdit->setCursorPosition( OutputEdit->numLines() + 1,0,FALSE);
+     }
 }
 
-/*  
- *  Destroys the object and frees any allocated resources
- */
-Output::~Output()
-{
-    // no need to delete child widgets, Qt does it all for us
+Output::~Output() {
 }
 
 void Output::saveOutput() {
@@ -175,6 +207,76 @@ void Output::saveOutput() {
       } else
           qWarning("Could not write file");
       f.close();
-
     }
+}
+
+void Output::commandStdout(OProcess*, char *buffer, int buflen) {
+    qWarning("received stdout %d bytes", buflen);
+
+//     QByteArray data(buflen);
+//     data.fill(*buffer, buflen);
+//     for (uint i = 0; i < data.count(); i++ ) {
+//         printf("%c", buffer[i] );
+//     }
+//     printf("\n");
+
+    QString lineStr = buffer;
+    lineStr=lineStr.left(lineStr.length()-1);
+    OutputEdit->append(lineStr);
+    OutputEdit->setCursorPosition( OutputEdit->numLines() + 1,0,FALSE);
+}
+
+
+void Output::commandStdin( const QByteArray &data) {
+    qWarning("received stdin  %d bytes", data.size());
+    // recieved data from the io layer goes to sz
+    proc->writeStdin(data.data(), data.size());
+}
+
+void Output::commandStderr(OProcess*, char *buffer, int buflen) {
+    qWarning("received stderrt %d bytes", buflen);
+
+    QString lineStr = buffer;
+//    lineStr=lineStr.left(lineStr.length()-1);
+    OutputEdit->append(lineStr);
+    OutputEdit->setCursorPosition( OutputEdit->numLines() + 1,0,FALSE);
+}
+
+void Output::processFinished() {
+
+    delete proc;
+    OutputEdit->append( "\nFinished\n");
+    OutputEdit->setCursorPosition( OutputEdit->numLines() + 1,0,FALSE);
+//    close();
+//     disconnect( layer(), SIGNAL(received(const QByteArray &)),
+//                this, SLOT(commandStdin(const QByteArray &)));
+}
+
+//==============================
+
+InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
+    : QDialog( parent, name, modal, fl )
+{
+    if ( !name )
+        setName( "InputDialog" );
+    resize( 234, 50 ); 
+    setMaximumSize( QSize( 240, 50 ) );
+    setCaption( tr(name ) );
+
+    LineEdit1 = new QLineEdit( this, "LineEdit1" );
+    LineEdit1->setGeometry( QRect( 10, 10, 216, 22 ) );
+    connect(LineEdit1,SIGNAL(returnPressed()),this,SLOT(returned() ));
+}
+
+InputDialog::~InputDialog() {
+    inputText = LineEdit1->text();
+}
+
+void InputDialog::setInputText(const QString &string) {
+    LineEdit1->setText( string);
+}
+
+void InputDialog::returned() {
+    inputText = LineEdit1->text();
+    this->accept();
 }
