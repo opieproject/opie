@@ -14,13 +14,12 @@
  *                                                                         *
  ***************************************************************************/
 
-#define QTOPIA_INTERNAL_LANGLIST
-
 #include "today.h"
 
 #include <opie2/odebug.h>
+#include <opie2/opluginloader.h>
+#include <opie2/oconfig.h>
 
-#include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
@@ -31,42 +30,41 @@
 #include <qwhatsthis.h>
 
 using namespace Opie::Ui;
+using Opie::Core::OPluginItem;
+using Opie::Core::OPluginLoader;
+using Opie::Core::OPluginManager;
+using Opie::Core::OConfig;
+
+
 struct TodayPlugin {
-    TodayPlugin() : library( 0 ), iface( 0 ), guiPart( 0 ), guiBox( 0 ) {}
-    QLibrary *library;
+TodayPlugin() : iface( 0 ), guiPart( 0 ), guiBox( 0 ) {}
     QInterfacePtr<TodayPluginInterface> iface;
     TodayPluginObject *guiPart;
+    OPluginItem oplugin;
     QWidget *guiBox;
     QString name;
-    bool active;
     bool excludeRefresh;
-    int pos;
 };
 
-static QValueList<TodayPlugin> pluginList;
-
-static  QMap<QString, TodayPlugin> tempList;
+static  QMap<QString, TodayPlugin> pluginList;
 
 Today::Today( QWidget* parent,  const char* name, WFlags fl )
-    : TodayBase( parent, name, fl ) {
+: TodayBase( parent, name, fl ) {
 
     QObject::connect( (QObject*)ConfigButton, SIGNAL( clicked() ), this, SLOT( startConfig() ) );
     QObject::connect( (QObject*)OwnerField, SIGNAL( clicked() ), this,  SLOT( editCard() ) );
 
-#if defined(Q_WS_QWS)
-#if !defined(QT_NO_COP)
+    #if defined(Q_WS_QWS)
+    #if !defined(QT_NO_COP)
+
     QCopChannel *todayChannel = new QCopChannel( "QPE/Today" , this );
     connect ( todayChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
               this, SLOT ( channelReceived(const QCString&,const QByteArray&) ) );
-#endif
-#endif
+    #endif
+    #endif
 
     setOwnerField();
-    m_refreshTimer = new QTimer( this );
-    connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
-    m_refreshTimer->start( 15000 );
     m_big_box = 0L;
-
 
     layout = new QVBoxLayout( this );
     layout->addWidget( Frame );
@@ -80,8 +78,12 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
     layout->addWidget( m_sv );
     layout->setStretchFactor( m_sv,4 );
 
-    qApp->processEvents();
+    m_refreshTimer = new QTimer( this );
+    connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
+
+    init();
     loadPlugins();
+    initialize();
     QPEApplication::showWidget( this );
 }
 
@@ -100,7 +102,6 @@ void Today::channelReceived( const QCString &msg, const QByteArray & data ) {
 void Today::setRefreshTimer( int interval ) {
 
     disconnect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
-
     // 0 is "never" case
     if ( !interval == 0 ) {
         connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
@@ -132,16 +133,16 @@ void Today::setOwnerField( QString &message ) {
     }
 }
 
+
 /**
  * Init stuff needed for today. Reads the config file.
  */
 void Today::init() {
     // read config
-    Config cfg( "today" );
-
+    OConfig cfg( "today" );
     cfg.setGroup( "Plugins" );
-    m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
-    m_allApplets = cfg.readListEntry( "AllApplets", ',' );
+    //     m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
+    //     m_allApplets = cfg.readListEntry( "AllApplets", ',' );
 
     cfg.setGroup( "General" );
     m_iconSize = cfg.readNumEntry( "IconSize", 18 );
@@ -169,169 +170,54 @@ void Today::init() {
     m_bblayout = new QVBoxLayout ( m_big_box );
 }
 
+
 /**
  * Load the plugins
  */
 void Today::loadPlugins() {
 
-    init();
+    m_pluginLoader = new OPluginLoader( "today", true );
+    m_pluginLoader->setAutoDelete( true );
 
-    QValueList<TodayPlugin>::Iterator tit;
-    if ( !pluginList.isEmpty() ) {
-        for ( tit = pluginList.begin(); tit != pluginList.end(); ++tit ) {
-            (*tit).guiBox->hide();
-            (*tit).guiBox->reparent( 0, QPoint( 0, 0 ) );
-            delete (*tit).guiBox;
-            (*tit).library->unload();
-            delete (*tit).library;
-        }
-        pluginList.clear();
+    OPluginItem::List lst = m_pluginLoader->allAvailable( true );
+
+    m_manager = new OPluginManager( m_pluginLoader );
+    m_manager->load();
+
+    for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+        TodayPluginInterface* iface = m_pluginLoader->load<TodayPluginInterface>( *it, IID_TodayPluginInterface );
+
+        TodayPlugin plugin;
+        plugin.iface = iface;
+        plugin.name = (*it).name();
+        plugin.oplugin = (*it);
+
+        plugin.guiPart = plugin.iface->guiPart();
+        plugin.excludeRefresh = plugin.guiPart->excludeFromRefresh();
+
+        // package the whole thing into a qwidget so it can be shown and hidden
+        plugin.guiBox = new QWidget( m_big_box );
+        QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
+        QPixmap plugPix;
+        plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
+        OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
+        plugIcon->setPixmap( plugPix );
+        QWhatsThis::add
+            ( plugIcon, tr("Click here to launch the associated app") );
+        plugIcon->setName( plugin.guiPart->appName() );
+        connect( plugIcon, SIGNAL( clicked() ), this, SLOT( startApplication() ) );
+
+        QWidget *plugWidget = plugin.guiPart->widget( plugin.guiBox );
+        boxLayout->addWidget( plugIcon, 0, AlignTop );
+        boxLayout->addWidget( plugWidget, 0, AlignTop );
+        boxLayout->setStretchFactor( plugIcon, 1 );
+        boxLayout->setStretchFactor( plugWidget, 9 );
+
+        pluginList.insert( plugin.name, plugin );
+        m_bblayout->addWidget(plugin.guiBox);
     }
 
-    QString path = QPEApplication::qpeDir() + "/plugins/today";
-#ifdef Q_OS_MACX
-	owarn << "Searching for Plugins in: " << path << oendl;
-    QDir dir( path, "lib*.dylib" );
-#else
-    QDir dir( path, "lib*.so" );
-#endif
-
-    QStringList list = dir.entryList();
-    QStringList::Iterator it;
-
-    //   QMap<QString, TodayPlugin> tempList;
-
-    for ( it = list.begin(); it != list.end(); ++it ) {
-        QInterfacePtr<TodayPluginInterface> iface;
-        QLibrary *lib = new QLibrary( path + "/" + *it );
-
-		odebug << "querying: " << path + "/" + *it << oendl;
-        if ( lib->queryInterface( IID_TodayPluginInterface, (QUnknownInterface**)&iface ) == QS_OK ) {
-			odebug << "accepted: " << path + "/" + *it << oendl;
-			odebug << *it << oendl;
-
-            TodayPlugin plugin;
-            plugin.library = lib;
-            plugin.iface = iface;
-            plugin.name = QString(*it);
-
-            QString type = (*it).left( (*it).find(".") );
-
-            QString lang;
-            Config config("locale");
-            config.setGroup("Language");
-            lang = config.readEntry( "Language", "en" );
-
-			odebug << "Languages: " << lang << oendl;
-            QTranslator * trans = new QTranslator( qApp );
-            QString tfn = QPEApplication::qpeDir()+"/i18n/" + lang + "/" + type + ".qm";
-            if ( trans->load( tfn ) )  {
-                qApp->installTranslator( trans );
-            }  else {
-                delete trans;
-            }
-
-
-            // find out if plugins should be shown
-            if ( m_excludeApplets.grep( *it ).isEmpty() ) {
-                plugin.active = true;
-            } else {
-                plugin.active = false;
-            }
-
-            plugin.guiPart = plugin.iface->guiPart();
-            plugin.excludeRefresh = plugin.guiPart->excludeFromRefresh();
-
-            // package the whole thing into a qwidget so it can be shown and hidden
-            plugin.guiBox = new QWidget( m_big_box );
-            QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
-            QPixmap plugPix;
-            plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
-            OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
-            plugIcon->setPixmap( plugPix );
-            QWhatsThis::add( plugIcon, tr("Click here to launch the associated app") );
-            plugIcon->setName( plugin.guiPart->appName() );
-            connect( plugIcon, SIGNAL( clicked() ), this, SLOT( startApplication() ) );
-
-            QWidget *plugWidget = plugin.guiPart->widget( plugin.guiBox );
-            boxLayout->addWidget( plugIcon, 0, AlignTop );
-            boxLayout->addWidget( plugWidget, 0, AlignTop );
-            boxLayout->setStretchFactor( plugIcon, 1 );
-            boxLayout->setStretchFactor( plugWidget, 9 );
-
-           // "prebuffer" it in one more list, to get the sorting done
-            tempList.insert( plugin.name, plugin );
-
-            // on first start the list is off course empty
-            if ( m_allApplets.isEmpty() ) {
-                pluginList.append( plugin );
-                m_bblayout->addWidget( plugin.guiBox );
-            }
-
-            // if plugin is not yet in the list, add it to the layout too
-            else if ( !m_allApplets.contains( plugin.name ) ) {
-                pluginList.append( plugin );
-            }
-        } else {
-			odebug << "could not recognize " << path + "/" + *it << oendl;
-            delete lib;
-        }
-
-    }
-
-
-    if ( !m_allApplets.isEmpty() ) {
-        TodayPlugin tempPlugin;
-        QStringList::Iterator stringit;
-
-        for( stringit = m_allApplets.begin(); stringit !=  m_allApplets.end(); ++stringit ) {
-            tempPlugin = ( tempList.find( *stringit ) ).data();
-            if ( !( (tempPlugin.name).isEmpty() ) ) {
-                pluginList.append( tempPlugin );
-                m_bblayout->addWidget( tempPlugin.guiBox );
-            }
-        }
-    }
-    m_bblayout->addStretch( 2 );
-    draw();
-}
-
-
-
-
-/**
- * Repaint method. Reread all fields.
- */
-void Today::draw() {
-
-    if ( pluginList.count() == 0 ) {
-        QLabel *noPlugins = new QLabel( this );
-        noPlugins->setText( tr( "No plugins found" ) );
-        layout->addWidget( noPlugins );
-        return;
-    }
-
-    uint count = 0;
-    TodayPlugin plugin;
-    for ( uint i = 0; i < pluginList.count(); i++ ) {
-	plugin = pluginList[i];
-
-        if ( plugin.active ) {
-			//odebug << plugin.name << " is ACTIVE " << oendl;
-            plugin.guiBox->show();
-        } else {
-			//odebug << plugin.name << " is INACTIVE " << oendl;
-            plugin.guiBox->hide();
-        }
-        count++;
-    }
-
-    if ( count == 0 ) {
-        QLabel *noPluginsActive = new QLabel( this );
-        noPluginsActive->setText( tr( "No plugins activated" ) );
-        layout->addWidget( noPluginsActive );
-    }
-    repaint();
+    m_bblayout->addStretch( 1 );
 }
 
 
@@ -345,69 +231,24 @@ void Today::startConfig() {
     m_refreshTimer->stop( );
 
     TodayConfig conf( this, "dialog", true );
-
-    TodayPlugin plugin;
-    QList<TodayConfigWidget> configWidgetList;
-
-    for ( int i = pluginList.count() - 1; i >= 0; i-- ) {
-        plugin = pluginList[i];
-
-        // load the config widgets in the tabs
-        if ( plugin.guiPart->configWidget( this ) != 0l ) {
-            TodayConfigWidget* widget = plugin.guiPart->configWidget( conf.TabWidget3  );
-            configWidgetList.append( widget );
-            conf.TabWidget3->addTab( widget, plugin.guiPart->pixmapNameConfig()
-                                     , plugin.guiPart->appName() );
-        }
-        // set the order/activate tab
-        conf.pluginManagement( plugin.name, plugin.guiPart->pluginName(),
-                              Resource::loadPixmap( plugin.guiPart->pixmapNameWidget() ) );
-    }
+    conf.setUpPlugins( m_manager, m_pluginLoader );
 
     if ( conf.exec() == QDialog::Accepted ) {
         conf.writeConfig();
-        TodayConfigWidget *confWidget;
-        for ( confWidget = configWidgetList.first(); confWidget != 0;
-              confWidget = configWidgetList.next() ) {
-            confWidget->writeConfig();
-        }
-
-        // make the plugins to reinitialize ( reread its configs )
-        reinitialize();
-        draw();
-
+        initialize();
     } else {
-        // since refresh is not called in that case , reconnect the signal
+        // since reinitialize is not called in that case , reconnect the signal
         m_refreshTimer->start( 15000 ); // get the config value in here later
         connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
     }
 }
 
 
-
-void Today::reinitialize()  {
+void Today::initialize()  {
 
     Config cfg( "today" );
     cfg.setGroup( "Plugins" );
-    m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
-    m_allApplets = cfg.readListEntry( "AllApplets", ',' );
 
-    /* reinitialize all plugins */
-    QValueList<TodayPlugin>::Iterator it;
-    for ( it = pluginList.begin(); it != pluginList.end(); ++it ) {
-        if ( !(*it).excludeRefresh ) {
-            (*it).guiPart->reinitialize();
-			odebug << "reinit" << oendl;
-        }
-
-        /* check if plugins is still to be shown */
-        if ( m_excludeApplets.grep( (*it).name ).isEmpty() ) {
-            (*it).active = true;
-        } else {
-            (*it).active = false;
-        }
-
-    }
 
     cfg.setGroup( "General" );
     m_iconSize = cfg.readNumEntry( "IconSize", 18 );
@@ -426,19 +267,45 @@ void Today::reinitialize()  {
         TodayLabel->show();
     }
 
-    delete m_bblayout;
-    m_bblayout = new QVBoxLayout( m_big_box );
-    TodayPlugin tempPlugin;
-    QStringList::Iterator stringit;
+    if ( m_bblayout ) {
+    	delete m_bblayout;
+    }
+    m_bblayout = new QVBoxLayout ( m_big_box );
 
-    for( stringit = m_allApplets.begin(); stringit !=  m_allApplets.end(); ++stringit ) {
-        tempPlugin = ( tempList.find( *stringit ) ).data();
-        if ( !( (tempPlugin.name).isEmpty() ) ) {
-            m_bblayout->addWidget( tempPlugin.guiBox );
+    if (  pluginList.count() == 0 ) {
+        QLabel *noPlugins = new QLabel( this );
+        noPlugins->setText( tr( "No plugins found" ) );
+        layout->addWidget( noPlugins );
+    } else {
+
+        uint count = 0;
+        TodayPlugin tempPlugin;
+        OPluginItem::List lst = m_pluginLoader->allAvailable( true );
+        for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+
+            TodayPluginInterface* iface = m_pluginLoader->load<TodayPluginInterface>( *it, IID_TodayPluginInterface );
+
+            tempPlugin = ( pluginList.find( (*it).name() ).data() );
+            if ( !( (tempPlugin.name).isEmpty() ) ) {
+                if ( (*it).isEnabled() ) {
+                    iface->guiPart()->reinitialize();
+                    odebug << "reinit" << oendl;
+                    tempPlugin.guiBox->show();
+		    m_bblayout->addWidget(tempPlugin.guiBox);
+                    count++;
+                } else {
+                    tempPlugin.guiBox->hide();
+                }
+            }
+        }
+        if ( count == 0 ) {
+            QLabel *noPluginsActive = new QLabel( this );
+            noPluginsActive->setText( tr( "No plugins activated" ) );
+            layout->addWidget( noPluginsActive );
         }
     }
-    m_bblayout->addStretch( 2 );
-
+    m_bblayout->addStretch( 1 );
+    repaint();
 }
 
 /**
@@ -447,12 +314,12 @@ void Today::reinitialize()  {
  */
 void Today::refresh() {
 
-    QValueList<TodayPlugin>::Iterator it;
-    for ( it = pluginList.begin(); it != pluginList.end(); ++it ) {
-        if ( !(*it).excludeRefresh ) {
-            (*it).guiPart->refresh();
-			odebug << "refresh" << oendl;
-        }
+    OPluginItem::List  lst = m_pluginLoader->filtered( true );
+
+    for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+        TodayPluginInterface* iface = m_pluginLoader->load<TodayPluginInterface>( *it, IID_TodayPluginInterface );
+        iface->guiPart()->refresh();
+        odebug << "refresh" << oendl;
     }
 
     DateLabel->setText( QString( "<font color=#FFFFFF>" +  TimeString::longDateString( QDate::currentDate() )  + "</font>" ) );
@@ -461,18 +328,27 @@ void Today::refresh() {
     repaint();
 }
 
+
 void Today::startApplication() {
     QCopEnvelope e( "QPE/System", "execute(QString)" );
     e << QString( sender()->name() );
 }
 
+
 /**
- * launch addressbook (personal card)
- */
+* launch addressbook (personal card)
+*/
 void Today::editCard() {
     QCopEnvelope env( "QPE/Application/addressbook", "editPersonalAndClose()" );
 }
 
+
 Today::~Today() {
+    if (m_pluginLoader) {
+        delete m_pluginLoader;
+    }
+    if (m_manager) {
+        delete m_manager;
+    }
 }
 

@@ -16,7 +16,10 @@
 
 #include "todayconfig.h"
 
-#include <qpe/config.h>
+#include <opie2/oconfig.h>
+#include <opie2/opluginloader.h>
+#include <opie2/todayplugininterface.h>
+
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
@@ -31,11 +34,16 @@
 #include <qwhatsthis.h>
 
 using namespace Opie::Ui;
+using Opie::Core::OConfig;
+using Opie::Core::OPluginManager;
+using Opie::Core::OPluginLoader;
+using Opie::Core::OPluginItem;
+
 class ToolButton : public QToolButton {
 
 public:
     ToolButton( QWidget *parent, const char *name, const QString& icon, QObject *handler, const QString& slot, bool t = FALSE )
-        : QToolButton( parent, name ) {
+: QToolButton( parent, name ) {
         setPixmap( Resource::loadPixmap( icon ) );
         setAutoRaise( TRUE );
         setFocusPolicy( QWidget::NoFocus );
@@ -51,7 +59,7 @@ public:
  *
  */
 TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
-    : QDialog( parent, name, modal, WStyle_ContextHelp ) {
+: QDialog( parent, name, modal, WStyle_ContextHelp ) {
 
     setCaption( tr( "Today Config" ) );
 
@@ -68,7 +76,8 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     m_appletListView->addColumn( "PluginList" );
     m_appletListView->header()->hide();
     m_appletListView->setSorting( -1 );
-    QWhatsThis::add( m_appletListView, tr( "Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order" ) );
+    QWhatsThis::add
+        ( m_appletListView, tr( "Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order" ) );
     QVBox *vbox1 = new QVBox( hbox1 );
     new ToolButton( vbox1, tr( "Move Up" ), "up",  this , SLOT( moveSelectedUp() ) );
     new ToolButton( vbox1, tr( "Move Down" ), "down", this , SLOT( moveSelectedDown() ) );
@@ -84,21 +93,47 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     tab3Layout->addWidget( m_guiMisc );
     TabWidget3->addTab( tab_3, "SettingsIcon", tr( "Misc" ) );
 
-    m_applets_changed = false;
-
     connect ( m_appletListView , SIGNAL( clicked(QListViewItem*) ), this, SLOT( appletChanged() ) );
-
+    previousItem = 0l;
     readConfig();
     QPEApplication::showDialog( this );
 }
 
+
+void TodayConfig::setUpPlugins( OPluginManager * plugManager, OPluginLoader *plugLoader ) {
+
+
+    m_pluginManager = plugManager;
+    m_pluginLoader = plugLoader;
+
+    OPluginItem::List inLst = m_pluginLoader->allAvailable( true );
+
+    OPluginItem::List lst;
+    for ( OPluginItem::List::Iterator it = inLst.begin(); it != inLst.end(); ++it ) {
+    	lst.prepend((*it));
+
+        TodayPluginInterface* iface = m_pluginLoader->load<TodayPluginInterface>( *it, IID_TodayPluginInterface );
+
+        if ( iface->guiPart()->configWidget(this) != 0l ) {
+            TodayConfigWidget* widget = iface->guiPart()->configWidget( TabWidget3  );
+            TabWidget3->addTab( widget, iface->guiPart()->pixmapNameConfig()
+                                , iface->guiPart()->appName() );
+        }
+    }
+
+    for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+        pluginManagement( (*it) );
+    }
+
+    TabWidget3->setCurrentTab( tab_2 );
+}
 
 /**
  * Autostart, uses the new (opie only) autostart method in the launcher code.
  * If registered against that today ist started on each resume.
  */
 void TodayConfig::setAutoStart() {
-    Config cfg( "today" );
+    OConfig cfg( "today" );
     cfg.setGroup( "Autostart" );
     if ( m_autoStart ) {
         QCopEnvelope e( "QPE/System", "autoStart(QString,QString,QString)" );
@@ -116,7 +151,7 @@ void TodayConfig::setAutoStart() {
  * Read the config part
  */
 void TodayConfig::readConfig() {
-    Config cfg( "today" );
+    OConfig cfg( "today" );
     cfg.setGroup( "Autostart" );
     m_autoStart = cfg.readNumEntry( "autostart", 1 );
     m_guiMisc->CheckBoxAuto->setChecked( m_autoStart );
@@ -128,47 +163,34 @@ void TodayConfig::readConfig() {
     m_guiMisc->SpinBoxIconSize->setValue( m_iconSize );
     m_guiMisc->SpinRefresh->setValue( cfg.readNumEntry( "checkinterval", 15000 ) / 1000 );
     m_guiMisc->CheckBoxHide->setChecked( cfg.readNumEntry( "HideBanner", 0 ) );
-
-
-    cfg.setGroup( "Plugins" );
-    m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
 }
 
 /**
  * Write the config part
  */
 void TodayConfig::writeConfig() {
-    Config cfg( "today" );
-    cfg.setGroup( "Plugins" );
-    if ( m_applets_changed ) {
-        QStringList exclude;
-        QStringList include;
-        QStringList all_applets;
+    OConfig cfg( "today" );
 
-        QListViewItemIterator list_it( m_appletListView );
+    int position = m_appletListView->childCount();
 
-        // this makes sure the names get saved in the order selected
-        for ( ; list_it.current(); ++list_it ) {
-            QMap <QString, QCheckListItem *>::Iterator it;
-            for ( it = m_applets.begin(); it != m_applets. end (); ++it ) {
-                if ( list_it.current() == (*it) && !(*it)-> isOn () ) {
-                    exclude << it.key();
-                } else if ( list_it.current() == (*it) && (*it)-> isOn () ){
-                    include << it.key();
-                }
-                if ( list_it.current() == (*it) ) {
-                    all_applets << it.key();
-                }
+    QListViewItemIterator list_it( m_appletListView );
+    //
+    // this makes sure the names get saved in the order selected
+    for ( ; list_it.current(); ++list_it ) {
+        OPluginItem::List lst = m_pluginLoader->allAvailable( true );
+        for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+            if ( QString::compare( (*it).name() , list_it.current()->text(0) ) == 0 ) {
+                (*it).setPosition(position--);
+                m_pluginManager->setEnabled( (*it),((QCheckListItem*)list_it.current())->isOn() );
             }
         }
-        cfg.writeEntry( "ExcludeApplets", exclude, ',' );
-        cfg.writeEntry( "IncludeApplets", include, ',' );
-        cfg.writeEntry( "AllApplets",  all_applets, ',' );
     }
+
+    m_pluginManager->save();
 
     cfg.setGroup( "Autostart" );
     m_autoStart = m_guiMisc->CheckBoxAuto->isChecked();
-    cfg.writeEntry( "autostart",  m_autoStart );
+    cfg.writeEntry( "autostart", m_autoStart );
     m_autoStartTimer = m_guiMisc->SpinBoxTime->value();
     cfg.writeEntry( "autostartdelay", m_autoStartTimer );
     m_iconSize = m_guiMisc->SpinBoxIconSize->value();
@@ -180,6 +202,14 @@ void TodayConfig::writeConfig() {
 
     // set autostart settings
     setAutoStart();
+
+    OPluginItem::List lst = m_pluginManager->managedPlugins();
+    for ( OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+        TodayPluginInterface* iface = m_pluginLoader->load<TodayPluginInterface>( *it, IID_TodayPluginInterface );
+        if ( iface->guiPart()->configWidget(this) != 0l ) {
+            iface->guiPart()->configWidget(this)->writeConfig();
+        }
+    }
 }
 
 
@@ -202,30 +232,19 @@ void TodayConfig::moveSelectedDown() {
 /**
  * Set up the icons in the order/active tab
  */
-void TodayConfig::pluginManagement( QString libName, QString name, QPixmap icon ) {
+void TodayConfig::pluginManagement( OPluginItem plugItem ) {
 
-	QCheckListItem *item;
-    	item = new QCheckListItem( m_appletListView, name, QCheckListItem::CheckBox );
+    QCheckListItem *item = new QCheckListItem( m_appletListView, plugItem.name(), QCheckListItem::CheckBox );
 
-        if ( !icon.isNull() ) {
-	    item->setPixmap( 0, icon );
-        }
-
-        if ( m_excludeApplets.find( libName ) == m_excludeApplets.end() ) {
-	    item->setOn( TRUE );
-        }
-
-	m_applets[libName] = item;
-
-        // kind of hack to get the first tab as default.
-        TabWidget3->setCurrentTab( tab_2 );
-}
-
-void TodayConfig::appletChanged() {
-    m_applets_changed = true;
+    TodayPluginInterface* iface = m_pluginLoader->load<TodayPluginInterface>( plugItem, IID_TodayPluginInterface );
+    QPixmap icon = Resource::loadPixmap( iface->guiPart()->pixmapNameWidget() );
+    if ( !icon.isNull() ) {
+        item->setPixmap( 0, icon );
+    }
+    item->setOn( plugItem.isEnabled() );
+    previousItem = item;
 }
 
 
-TodayConfig::~TodayConfig() {
-}
 
+TodayConfig::~TodayConfig() {}

@@ -22,23 +22,33 @@
 
 #include <opie2/todayplugininterface.h>
 #include <opie2/oclickablelabel.h>
+#include <opie2/opluginloader.h>
 
 #include <qpe/qlibrary.h>
 
 #include <qscrollview.h>
 #include <qvbox.h>
 
- 
+
 class QVBoxLayout;
+
+namespace Opie {
+    namespace Core {
+        class OPluginManager;
+        class OPluginLoader;
+    }
+}
 
 class Today : public TodayBase {
 
     Q_OBJECT
 
-  public:
+public:
     Today( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Today();
-    static QString appName() { return QString::fromLatin1("today"); }
+    static QString appName() {
+        return QString::fromLatin1("today");
+    }
 
 private slots:
     void startConfig();
@@ -50,16 +60,15 @@ private:
     void init();
     void setOwnerField();
     void setOwnerField(QString &string);
-    void loadPlugins();
-    void draw();
-    void reinitialize();
+    void initialize();
 
     void setRefreshTimer( int );
 
 private slots:
     void channelReceived(const QCString &msg, const QByteArray & data);
+    void loadPlugins();
 
- private:
+private:
     TodayConfig *conf;
     QStringList m_excludeApplets;
     QStringList m_allApplets;
@@ -68,7 +77,8 @@ private slots:
     QWidget* m_big_box;
     QVBoxLayout *m_bblayout;
 
-   
+    Opie::Core::OPluginLoader *m_pluginLoader;
+    Opie::Core::OPluginManager *m_manager;
 
     QTimer *m_refreshTimer;
 
@@ -78,5 +88,4 @@ private slots:
     int m_maxCharClip;
     int m_hideBanner;
 };
-
 #endif

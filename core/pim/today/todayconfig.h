@@ -20,6 +20,7 @@
 #include "todayconfigmiscbase.h"
 
 #include <opie2/otabwidget.h>
+#include <opie2/opluginloader.h>
 
 #include <qvariant.h>
 #include <qdialog.h>
@@ -29,6 +30,14 @@ class QCheckBox;
 class QLabel;
 class QSpinBox;
 class QTabWidget;
+
+namespace Opie {
+    namespace Core {
+        class OPluginManager;
+        class OPluginLoader;
+        class OPluginItem;
+    }
+}
 
 class TodayConfig : public QDialog {
 
@@ -41,17 +50,17 @@ public:
     Opie::Ui::OTabWidget* TabWidget3;
 
     void writeConfig();
-    void pluginManagement( QString libName, QString name, QPixmap icon );
 
+    void setUpPlugins( Opie::Core::OPluginManager * plugManager, Opie::Core::OPluginLoader * plugLoader );
 
 protected slots:
-    void appletChanged();
     void moveSelectedUp();
     void moveSelectedDown();
 
 private:
     void setAutoStart();
     void readConfig();
+    void pluginManagement( Opie::Core::OPluginItem plugItem);
 
     QListView* m_appletListView;
     QMap<QString,QCheckListItem*> m_applets;
@@ -66,6 +75,11 @@ private:
     QWidget* tab_3;
     QLabel* TextLabel1, *TextLabel4;
     QSpinBox* SpinBox7;
+
+    Opie::Core::OPluginManager *m_pluginManager;
+    Opie::Core::OPluginLoader *m_pluginLoader;
+
+    QCheckListItem *previousItem;
 
     TodayConfigMiscBase *m_guiMisc;
 };
