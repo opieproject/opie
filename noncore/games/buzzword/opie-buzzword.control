@@ -1,11 +1,11 @@
 Package: opie-buzzword
 Files: plugins/application/libbuzzword.so* bin/buzzword apps/Games/buzzword.desktop pics/buzzword/buzzword.png share/buzzword/buzzwords
-Version: 1.1-$SUB_VERSION 
-Depends: task-opie-minimal
+Version: 1.1-$SUB_VERSION
+Depends: task-opie-minimal,libopiecore2
 Priority: optional
 Section: opie/games
-Maintainer: Martin Imobersteg <imm@gmx.ch> 
+Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
 License: GPL
-Description: BuzzWord 
- A BuzzWord Bingo for Qtopia.
+Description: BuzzWord
+ A BuzzWord Bingo for the Opie environment.

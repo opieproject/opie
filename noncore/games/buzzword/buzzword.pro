@@ -1,9 +1,9 @@
 CONFIG		= qt warn_on release quick-app
-HEADERS		= buzzword.h 
+HEADERS		= buzzword.h
 SOURCES		= buzzword.cpp main.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS        += -lqpe
+LIBS        += -lqpe -lopiecore2
 
 TARGET 		= buzzword
 
