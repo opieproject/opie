@@ -67,14 +67,9 @@ void WLANImp::parseOpts() {
   }
 
   opt = interfaces->getInterfaceOption("wireless_mode", error).simplifyWhiteSpace();
-  if (opt == "Auto") {
-    mode->setCurrentItem(0);
-  } else if (opt == "Ad-Hoc") {
-    mode->setCurrentItem(2);
-  } else {
-    // Managed/Infrastructure mode
-    mode->setCurrentItem(1);
-  }
+
+  for ( int i = 0; i < mode->count(); i++)
+      if ( mode->text( i ) == opt ) mode->setCurrentItem( i );
 
   opt = interfaces->getInterfaceOption("wireless_ap", error).simplifyWhiteSpace();
   if (! opt.isNull()) {
