@@ -269,7 +269,7 @@ void AudioWidget::setView( char view ) {
     } else {
         // this stops the slider from being moved, thus
         // does not stop stream when it reaches the end
-        slider->show();
+        slider.show();
         connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
     }
@@ -298,15 +298,15 @@ void AudioWidget::updateSlider( long i, long max ) {
     }
     // Will flicker too much if we don't do this
     // Scale to something reasonable
-    int width = slider->width();
+    int width = slider.width();
     int val = int((double)i * width / max);
     if ( !audioSliderBeingMoved ) {
-        if ( slider->value() != val ) {
-            slider->setValue( val );
+        if ( slider.value() != val ) {
+            slider.setValue( val );
         }
 
-        if ( slider->maxValue() != width ) {
-            slider->setMaxValue( width );
+        if ( slider.maxValue() != width ) {
+            slider.setMaxValue( width );
         }
     }
 }
