@@ -7,7 +7,9 @@ MetaFactory::~MetaFactory() {
 
 }
 void MetaFactory::addConfigWidgetFactory( const QString& str,
+                                          const QString& name,
                                           configWidget wid) {
+    m_namemap.insert ( str, name );
     m_confFact.insert( str, wid );
 }
 void MetaFactory::addIOLayerFactory( const QString& str,
@@ -56,3 +58,8 @@ IOLayer* MetaFactory::newIOLayer( const QString& str,const Profile& prof ) {
 
     return lay;
 }
+
+QString MetaFactory::name( const QString& str ) {
+    return m_namemap[str];
+}
+

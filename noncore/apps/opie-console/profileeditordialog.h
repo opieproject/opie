@@ -48,8 +48,9 @@ private:
     QHBoxLayout* m_lay;
     Profile m_prof;
 
-	QLabel *frame_number;
-	QLineEdit *name_line, *frame_device_line, *frame_number_line;
+	//QLabel *frame_number;
+	QLineEdit *name_line;
+	//QLineEdit *frame_device_line, *frame_number_line;
 	QComboBox *terminal_box, *speed_box, *device_box;
 };
 

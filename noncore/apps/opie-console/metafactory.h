@@ -25,6 +25,7 @@ public:
     ~MetaFactory();
 
     void addConfigWidgetFactory( const QString&,
+                                 const QString&,
                                  configWidget );
     void addIOLayerFactory(const QString&,
                            iolayer );
@@ -35,10 +36,13 @@ public:
     QStringList fileTransferLayers()const;
     IOLayer* newIOLayer( const QString&,const Profile& );
 
+    QString name( const QString& );
+
 private:
     QMap<QString, configWidget> m_confFact;
     QMap<QString, iolayer> m_layerFact;
     QMap<QString, filelayer> m_fileFact;
+	QMap<QString, QString> m_namemap;
 };
 
 
