@@ -485,7 +485,7 @@ void AnalogClock::drawContents( QPainter *p )
 
 void AnalogClock::drawPointers ( QPainter *p, const QRect &r, const QColor &c, const QTime &t, const QTime *t2 )
 {
-	QPoint center( r.x() + r.width() / 2, r.y() + r.height() / 2 );
+	QPoint center = r. center ( );
 
 	QPoint h1( center. x ( ), r. y ( ) + r. height ( ) / 4 );
 	QPoint h2( center. x ( ), center. y ( ) );
