@@ -244,13 +244,16 @@ void VideoWidget::updateSlider( long i, long max ) {
 
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( unsigned int i = 0; i < buttons.count(); i++ ) {
+
+        Button &button = buttons[ i ];
+
         if ( event->state() == QMouseEvent::LeftButton ) {
             // The test to see if the mouse click is inside the button or not
             bool isOnButton = isOverButton( event->pos() - upperLeftOfButtonMask, i );
 
-            if ( isOnButton && !buttons[i].isHeld ) {
-                buttons[i].isHeld = TRUE;
-                toggleButton( buttons[ i ] );
+            if ( isOnButton && !button.isHeld ) {
+                button.isHeld = TRUE;
+                toggleButton( button );
 
                 switch (i) {
                 case VideoVolUp:
@@ -260,27 +263,27 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                     emit lessClicked();
                     return;
                 }
-            } else if ( !isOnButton && buttons[i].isHeld ) {
-                        buttons[i].isHeld = FALSE;
-                        toggleButton( buttons[ i ] );
+            } else if ( !isOnButton && button.isHeld ) {
+                        button.isHeld = FALSE;
+                        toggleButton( button );
             }
         } else {
 
-            if ( buttons[i].isHeld ) {
-                buttons[i].isHeld = FALSE;
-                if ( buttons[i].type != ToggleButton ) {
-                    setToggleButton( buttons[ i ], FALSE );
+            if ( button.isHeld ) {
+                button.isHeld = FALSE;
+                if ( button.type != ToggleButton ) {
+                    setToggleButton( button, FALSE );
                 }
 
                 switch(i) {
 
                 case VideoPlay: {
                     if( mediaPlayerState.isPaused() ) {
-                        setToggleButton( buttons[ i ], FALSE );
+                        setToggleButton( button, FALSE );
                         mediaPlayerState.setPaused( FALSE );
                         return;
                     } else if( !mediaPlayerState.isPaused() ) {
-                        setToggleButton( buttons[ i ], TRUE );
+                        setToggleButton( button, TRUE );
                         mediaPlayerState.setPaused( TRUE );
                         return;
                     } else {
