@@ -197,10 +197,10 @@ void Security::changePassCode()
     QString new2;
 
     do {
-  new1 = enterPassCode("Enter new passcode");
+  new1 = enterPassCode(tr("Enter new passcode"));
   if ( new1.isNull() )
       return;
-  new2 = enterPassCode("Re-enter new passcode");
+  new2 = enterPassCode(tr("Re-enter new passcode"));
   if ( new2.isNull() )
       return;
     } while (new1 != new2);
