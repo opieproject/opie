@@ -3,121 +3,123 @@
     <name>CategoryDialog</name>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorija</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
     <message>
         <source>Field 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 1</translation>
     </message>
     <message>
         <source>Field 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 2</translation>
     </message>
     <message>
         <source>Field 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 3</translation>
     </message>
     <message>
         <source>Field 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 4</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 5</translation>
     </message>
     <message>
         <source>Field 6</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 6</translation>
     </message>
 </context>
 <context>
     <name>InfoForm</name>
     <message>
         <source>Information:</source>
-        <translation type="unfinished"></translation>
+        <translation>Informācija:</translation>
     </message>
 </context>
 <context>
     <name>NewDialog</name>
     <message>
         <source>New Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns Ieraksts</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentārs</translation>
     </message>
     <message>
         <source>Field 6</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 6</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 5</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Parole</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietotāja vārds</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nosaukums</translation>
     </message>
 </context>
 <context>
     <name>PasswordForm</name>
     <message>
         <source>ZSafe</source>
-        <translation type="unfinished"></translation>
+        <translation>ZSeifs</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Parole</translation>
     </message>
 </context>
 <context>
     <name>ScQtFileDlg</name>
     <message>
         <source>FileDlg</source>
-        <translation type="unfinished"></translation>
+        <translation>FailuDlg</translation>
     </message>
     <message>
         <source>file type filter</source>
-        <translation type="unfinished"></translation>
+        <translation>failu tipu filtrs</translation>
     </message>
     <message>
         <source>ComboBox FileTypeFilter
 
 edit or select the filter</source>
-        <translation type="unfinished"></translation>
+        <translation>ComboBox FailuTipuFiltra
+
+rediģē vai izvēlies filtru</translation>
     </message>
     <message>
         <source>confirms the selection and closes the form</source>
-        <translation type="unfinished"></translation>
+        <translation>apstiprina izvēli un aizver formu</translation>
     </message>
     <message>
         <source>OKButton</source>
-        <translation type="unfinished"></translation>
+        <translation>OKPoga</translation>
     </message>
     <message>
         <source>cancels the selection and closes the form</source>
-        <translation type="unfinished"></translation>
+        <translation>atliek izvēli un aizver formu</translation>
     </message>
     <message>
         <source>CancelButton</source>
-        <translation type="unfinished"></translation>
+        <translation>AtliktPoga</translation>
     </message>
     <message>
         <source>shows the selected filename</source>
-        <translation type="unfinished"></translation>
+        <translation>rāda izvēlēto faila nosaukumu</translation>
     </message>
     <message>
         <source>Filename LineEdit
@@ -125,450 +127,481 @@ edit or select the filter</source>
 shows the selected file
 and allows the direct filename
 edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Faila nosaukums LineEdit
+
+rāda iezīmēto failu
+un atļauj tiešu faila nosaukuma
+labošanu</translation>
     </message>
     <message>
         <source>ComboBox Directory 
 edit or select the directories name</source>
-        <translation type="unfinished"></translation>
+        <translation>ComboBox Direktorija
+labo vai atzīmē direktorija vārdu</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārds</translation>
     </message>
     <message>
         <source>size</source>
-        <translation type="unfinished"></translation>
+        <translation>izmērs</translation>
     </message>
     <message>
         <source>type</source>
-        <translation type="unfinished"></translation>
+        <translation>tips</translation>
     </message>
     <message>
         <source>directory listview</source>
-        <translation type="unfinished"></translation>
+        <translation>direktoriju sarakstskats</translation>
     </message>
     <message>
         <source>Directory ListView
 
 shows the list of dirs and files</source>
-        <translation type="unfinished"></translation>
+        <translation>Direktorija SarakstaSkats
+
+rāda sarakstu ar direktorijiem un failiem</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>ScQtFileEditDlg</name>
     <message>
         <source>dir</source>
-        <translation type="unfinished"></translation>
+        <translation>dir</translation>
     </message>
     <message>
         <source>file</source>
-        <translation type="unfinished"></translation>
+        <translation>fails</translation>
     </message>
     <message>
         <source>link</source>
-        <translation type="unfinished"></translation>
+        <translation>saite</translation>
     </message>
 </context>
 <context>
     <name>SearchDialog</name>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietotājvārds</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārds</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentārs</translation>
     </message>
 </context>
 <context>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lūdzu Uzgaidiet...</translation>
     </message>
 </context>
 <context>
     <name>ZSafe</name>
     <message>
         <source>ZSafe</source>
-        <translation type="unfinished"></translation>
+        <translation>ZSeifs</translation>
     </message>
     <message>
         <source>Can&apos;t create directory
 .../Documents/application
 
 ZSafe will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru izveidot direktoriju
+../Documents/Application
+
+ZSeifs beidz darbu.</translation>
     </message>
     <message>
         <source>Can&apos;t create directory
 %1
 
 ZSafe will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru izveidot direktoriju
+%1
+
+ZSeifs beidz darbu.</translation>
     </message>
     <message>
         <source>Can&apos;t create directory
 ...//Documents/application/zsafe
 
 ZSafe will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru izveidot direktoriju
+../Documents/Application/zsafe
+
+ZSeifs beidz darbu.</translation>
     </message>
     <message>
         <source>&amp;New document</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jauns dokuments</translation>
     </message>
     <message>
         <source>&amp;Open document</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atvērt dokumentu</translation>
     </message>
     <message>
         <source>&amp;Save document as ..</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Saglabāt dokumentu kā ..</translation>
     </message>
     <message>
         <source>&amp;Save document</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Saglabāt dokumentu</translation>
     </message>
     <message>
         <source>S&amp;ave document with new Password</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;aglabāt dokumentu ar jaunu Paroli</translation>
     </message>
     <message>
         <source>&amp;Export text file</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Eksportēt teksta failu</translation>
     </message>
     <message>
         <source>&amp;Import text file</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Importēt teksta failu</translation>
     </message>
     <message>
         <source>&amp;Remove text file</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Izņemt teksta failu</translation>
     </message>
     <message>
         <source>&amp;Open entries expanded</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atvērt ierakstus izvērsti</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Iziet</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fails</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jauns</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Labot</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dzēst</translation>
     </message>
     <message>
         <source>&amp;Category</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Categorija</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Izgriezt</translation>
     </message>
     <message>
         <source>C&amp;opy</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopēt</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>I&amp;evietot</translation>
     </message>
     <message>
         <source>&amp;Search</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Meklēt</translation>
     </message>
     <message>
         <source>&amp;Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ieraksts</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>Pa&amp;r</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Palīdzība</translation>
     </message>
     <message>
         <source>New entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns ieraksts</translation>
     </message>
     <message>
         <source>Edit category or entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot ieraksta kategoriju</translation>
     </message>
     <message>
         <source>Delete category or entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst ieraksta kategoriju</translation>
     </message>
     <message>
         <source>Find entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt ierakstu</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārds</translation>
     </message>
     <message>
         <source>Field 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 2</translation>
     </message>
     <message>
         <source>Field 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 3</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentārs</translation>
     </message>
     <message>
         <source>Field 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 4</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Lauks 5</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Do you want to delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai vēlaties dzēst?</translation>
     </message>
     <message>
         <source>D&amp;on&apos;t Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>N&amp;edzēst</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Ierakstu</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietotājs</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Parole</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns Ieraksts</translation>
     </message>
     <message>
         <source>Entry name must be different
 from the category name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ieraksta nosaukmam jābūt atšķirīgam
+no kategorias nosaukuma.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt</translation>
     </message>
     <message>
         <source>Entry not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Ieraksts nav atrasts</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Labi</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Visi</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Teksts</translation>
     </message>
     <message>
         <source>Remove text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt teksta failu</translation>
     </message>
     <message>
         <source>Could not remove text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru izņemt teksta failu.</translation>
     </message>
     <message>
         <source>No document defined.
 You have to create a new document</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav definēts dokuments.
+Jums jāizveido jauns dokuments</translation>
     </message>
     <message>
         <source>Export text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportēt teksta failu</translation>
     </message>
     <message>
         <source>Import text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importēt teksta failu</translation>
     </message>
     <message>
         <source>Could not export to text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru eksportēt uz teksta failu.</translation>
     </message>
     <message>
         <source>Could not import text file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru importēt teksta failu.</translation>
     </message>
     <message>
         <source>Enter Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet Paroli</translation>
     </message>
     <message>
         <source>Wrong password.
 
 ZSafe will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūdaina parole.
+
+ZSeifs beidz darbu.</translation>
     </message>
     <message>
         <source>Wrong password.
 Enter again?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūdaina parole.
+Ievadīsiet vēlreiz?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jā</translation>
     </message>
     <message>
         <source>&amp;No.</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nē.</translation>
     </message>
     <message>
         <source>Empty document or
 wrong password.
 Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tukš dokuments vai
+kļūdaina parole.
+Turpināt?</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nē</translation>
     </message>
     <message>
         <source>&amp;Yes.</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jā.</translation>
     </message>
     <message>
         <source>Password is empty.
 Please enter again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Parole ir tukša.
+Lūdzu ievadiet to vēlreiz.</translation>
     </message>
     <message>
         <source>Reenter Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Atkārtojiet Paroles Ievadu</translation>
     </message>
     <message>
         <source>Passwords must be identical.
 Please enter again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Parolēm jābūt identiskām.
+Lūdzu ievadiet vēlreiz.</translation>
     </message>
     <message>
         <source>Do you want to save </source>
-        <translation type="unfinished"></translation>
+        <translation>Vai vēlaties saglabāt</translation>
     </message>
     <message>
         <source>
 before continuing?</source>
-        <translation type="unfinished"></translation>
+        <translation>
+pirms turpināšānas?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Saglabāt</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nesaglabāt</translation>
     </message>
     <message>
         <source>Password file saved.</source>
-        <translation type="unfinished"></translation>
+        <translation>Paroles fails saglabāts.</translation>
     </message>
     <message>
         <source>Do you want to save
 before exiting?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai vēlaties saglabāt
+pirms iziešanas?</translation>
     </message>
     <message>
         <source>S&amp;ave with
 new
 password</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;aglabāt ar
+jaunu
+paroli</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorija</translation>
     </message>
     <message>
         <source>Wait dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Gaidīšanas Dialogs</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished"></translation>
+        <translation>Savācu Ikonas...</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation type="unfinished"></translation>
+        <translation>Veidoju jaunu ZSefa dokumentu</translation>
     </message>
     <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tagad jūs variet ievadīt
+jūsu jaunizveidotā dokumenta 
+paroli divas reizes.</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
-        <translation type="unfinished"></translation>
+        <translation>Atvērt ZSefa dokumentu</translation>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt ZSeifa dokumentu kā..</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaurus Paroļu Menedžeris&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Zseifs versija 2.1.2-jv01b&lt;br&gt;</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>autors Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Tulkojis: Gints Polis&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>ZSafe versija 2.1.2&lt;br&gt;</translation>
     </message>
 </context>
 </TS>

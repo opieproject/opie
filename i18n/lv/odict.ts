@@ -3,109 +3,109 @@
     <name>ConfigDlg</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcijas</translation>
     </message>
     <message>
         <source>Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēšanas metodes</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Mainīt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
 </context>
 <context>
     <name>ODict</name>
     <message>
         <source>Opie-Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie-Vārdnīca</translation>
     </message>
     <message>
         <source>Query:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieprasījums:</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Labi</translation>
     </message>
     <message>
         <source>OPIE-Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE-Vārdnīca</translation>
     </message>
     <message>
         <source>No dictionary defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav definēta vārdnīca</translation>
     </message>
     <message>
         <source>&amp;Define one</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Definēt</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atlikt</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurācija</translation>
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēšanas metodes</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Reģistrjūtīgs</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādījumi</translation>
     </message>
     <message>
         <source>Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Parametrs</translation>
     </message>
 </context>
 <context>
     <name>SearchMethodDlg</name>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārds:</translation>
     </message>
     <message>
         <source>Dictionary file</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārdnīcas fails</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārlūkot</translation>
     </message>
     <message>
         <source>Language 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Valoda 1</translation>
     </message>
     <message>
         <source>Decollator</source>
-        <translation type="unfinished"></translation>
+        <translation>Atdalītājs</translation>
     </message>
     <message>
         <source>Language 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Valoda 2</translation>
     </message>
     <message>
         <source>New Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauna Meklēšanas Metode</translation>
     </message>
     <message>
         <source>Change Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Mainīt Meklēšanas Metodi</translation>
     </message>
 </context>
 </TS>

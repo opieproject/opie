@@ -3,47 +3,47 @@
     <name>MobileMsgBase</name>
     <message>
         <source>Mobile Messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Mobilās Ziņas</translation>
     </message>
     <message>
         <source>SMS</source>
-        <translation type="unfinished"></translation>
+        <translation>SMS</translation>
     </message>
     <message>
         <source>Flash</source>
-        <translation type="unfinished"></translation>
+        <translation>Flash</translation>
     </message>
     <message>
         <source>Messages: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziņas: %1</translation>
     </message>
     <message>
         <source>Unicode</source>
-        <translation type="unfinished"></translation>
+        <translation>Unikods</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziņa</translation>
     </message>
     <message>
         <source>Nokia</source>
-        <translation type="unfinished"></translation>
+        <translation>Nokia</translation>
     </message>
     <message>
         <source>Image:</source>
-        <translation type="unfinished"></translation>
+        <translation>Attēls:</translation>
     </message>
     <message>
         <source>EMS</source>
-        <translation type="unfinished"></translation>
+        <translation>EMS</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Sūtīt</translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaits:</translation>
     </message>
 </context>
 </TS>

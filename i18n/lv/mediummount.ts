@@ -3,105 +3,105 @@
     <name>MediumMountSetting::MainWindow</name>
     <message>
         <source>Medium Mount Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediju Montēšanas Uzstādījumi</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Globāli</translation>
     </message>
 </context>
 <context>
     <name>MediumMountSetting::MediumGlobalWidget</name>
     <message>
         <source>If a medium gets inserted into this device Opie tries to search the medium for Documents. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja mediju ievieto iekārtā Opie mēģina meklēt tajā Dokumentus.  Lieliem medijiem tas var aizņemt ilgu laiku.  Jūs variet izvēlēties vai Opie ir jāveic globālā Dokumentu skanēšana katram medijam.  Jums arī ir iespēja to atļaut katram medijam.</translation>
     </message>
     <message>
         <source>Enable medium checking</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut mediju pārbaudi</translation>
     </message>
     <message>
         <source>Use global settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietot globālos uzstādījumus</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurus mediju failus</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Visus</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Attēlus</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstu</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>MediumMountSetting::MediumMountWidget</name>
     <message>
         <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt šo mediju.  Izmaiņas stāsies spēkā pēc aplikācijas aizvēršanas.  Lai atjaunotu Dokumentu Tab jums jāizņem un jāievieto šis medijs.</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation type="unfinished"></translation>
+        <translation>Kuri mediju faili</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Visi</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Attēli</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Teksts</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Limit search to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ierobežot meklēšanu uz:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot</translation>
     </message>
     <message>
         <source>Always check this medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Vienmēr pārbaudīt šo mediju</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt</translation>
     </message>
     <message>
         <source>Scan whole media</source>
-        <translation type="unfinished"></translation>
+        <translation>Skanēt visu mediju</translation>
     </message>
 </context>
 </TS>
