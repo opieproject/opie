@@ -215,7 +215,7 @@ WirelessApplet::WirelessApplet( QWidget *parent, const char *name )
     setFixedHeight( 18 );
     setFixedWidth( 14 );
     network = new MWirelessNetwork();
-    status = new WirelessControl( this, 0, "wireless status" );
+    status = new WirelessControl( this, this, "wireless status" );
 }
 
 void WirelessApplet::checkInterface()
