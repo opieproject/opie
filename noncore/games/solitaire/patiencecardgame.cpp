@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #include "patiencecardgame.h"
 
 
@@ -117,9 +118,11 @@ void PatienceCardGame::readConfig( Config& cfg )
 {
     cfg.setGroup("GameState");
 
-	deckTurns = cfg.readNumEntry("DeckTurns", 2500);
+    // todo: make this eventually configurable
+    deckTurns = cfg.readNumEntry("DeckTurns", 2);
     // Do we have a config file to read in?
-    if ( !cfg.hasKey("numberOfTimesThroughDeck") ) {
+    if ( !cfg.hasKey("numberOfTimesThroughDeck") )
+    {
         // if not, create a new game
         newGame();
         return;
@@ -211,7 +214,7 @@ bool PatienceCardGame::mousePressCard( Card *card, QPoint p )
             else
                 item->flipTo( 35, (int)item->y() );
         }
-        else return FALSE;				// <- was missing, caused facedown card to react
+        else return FALSE;              // <- was missing, caused facedown card to react
         // to clicking, which is wrong
         moving = NULL;
         moved = FALSE;
@@ -276,13 +279,14 @@ void PatienceCardGame::mousePress(QPoint p)
     }
 }
 
-
-bool PatienceCardGame::canTurnOverDeck() {
-	return (numberOfTimesThroughDeck != deckTurns);
+bool PatienceCardGame::canTurnOverDeck()
+{
+    return (numberOfTimesThroughDeck != deckTurns);
 }
 
-void PatienceCardGame::throughDeck() {
-	numberOfTimesThroughDeck++;
-	if (numberOfTimesThroughDeck == deckTurns)
-		circleCross->setCross();
- }
+void PatienceCardGame::throughDeck()
+{
+    numberOfTimesThroughDeck++;
+    if (numberOfTimesThroughDeck == deckTurns)
+        circleCross->setCross();
+}
