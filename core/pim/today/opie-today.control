@@ -5,7 +5,7 @@ Section: opie/pim
 Maintainer: Maximilian Reiﬂ <harlekin@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION$EXTRAVERSION
-Depends: task-opie-minimal, libopie1
+Depends: task-opie-minimal, libopiecore2, libopiepim2, libopieui2
 License: GPL
 Description: Today screen application
  This app gives an overview of appointments and todos.
