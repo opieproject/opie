@@ -87,9 +87,9 @@ static void changeTextColor( QWidget *w ) {
 static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 
 
-AudioWidget::AudioWidget( MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name) :
+AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name) :
 
-    MediaWidget( mediaPlayerState, parent, name ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ) {
+    MediaWidget( playList, mediaPlayerState, parent, name ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ) {
 
     setCaption( tr("OpiePlayer") );
 

@@ -53,7 +53,6 @@
 #endif
 
 
-extern PlayListWidget *playList;
 
 
 static const int xo = 2; // movable x offset
@@ -81,10 +80,9 @@ const char *skinV_mask_file_names[7] = {
 static const int numVButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 
 
-VideoWidget::VideoWidget(MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name) :
-MediaWidget( mediaPlayerState, parent, name ), scaledWidth( 0 ), scaledHeight( 0 ) {
-
-
+VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name ) 
+    : MediaWidget( playList, mediaPlayerState, parent, name ), scaledWidth( 0 ), scaledHeight( 0 ) 
+{
     setCaption( tr("OpiePlayer - Video") );
 
     videoFrame = new XineVideoWidget ( this, "Video frame" );
@@ -332,8 +330,8 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 }
 
                 case VideoStop:       mediaPlayerState.setPlaying( FALSE ); return;
-		case VideoNext:       if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setNext(); return;
-		case VideoPrevious:   if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setPrev(); return;
+		case VideoNext:       if( playList.currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setNext(); return;
+		case VideoPrevious:   if( playList.currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setPrev(); return;
                 case VideoVolUp:      emit moreReleased(); return;
                 case VideoVolDown:    emit lessReleased(); return;
                 case VideoFullscreen: mediaPlayerState.setFullscreen( TRUE ); makeVisible(); return;

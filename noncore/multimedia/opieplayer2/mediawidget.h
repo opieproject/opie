@@ -23,6 +23,7 @@
 #include <qwidget.h>
 
 #include "mediaplayerstate.h"
+#include "playlistwidget.h"
 
 class MediaWidget : public QWidget
 {
@@ -30,7 +31,7 @@ class MediaWidget : public QWidget
 public:
     enum Command { Play = 0, Stop, Next, Previous, VolumeUp, VolumeDown, Loop, PlayList, Forward, Back };
 
-    MediaWidget( MediaPlayerState &_mediaPlayerState, QWidget *parent = 0, const char *name = 0 );
+    MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent = 0, const char *name = 0 );
     virtual ~MediaWidget();
 
 public slots:
@@ -50,6 +51,7 @@ protected:
     void handleCommand( Command command, bool buttonDown );
 
     MediaPlayerState &mediaPlayerState;
+    PlayListWidget &playList;
 };
 
 #endif // MEDIAWIDGET_H

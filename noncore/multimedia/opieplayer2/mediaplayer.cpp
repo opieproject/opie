@@ -24,14 +24,12 @@
 #include <sys/ioctl.h>
 
 
-extern VideoWidget *videoUI;
-extern PlayListWidget *playList;
 
 
 #define FBIOBLANK             0x4611
 
-MediaPlayer::MediaPlayer( MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name )
-    : QObject( parent, name ), volumeDirection( 0 ), mediaPlayerState( _mediaPlayerState ) {
+MediaPlayer::MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name )
+    : QObject( parent, name ), volumeDirection( 0 ), mediaPlayerState( _mediaPlayerState ), playList( _playList ) {
 
     audioUI = 0;
     videoUI = 0;
@@ -39,7 +37,7 @@ MediaPlayer::MediaPlayer( MediaPlayerState &_mediaPlayerState, QObject *parent, 
     recreateAudioAndVideoWidgets();
 
     fd=-1;fl=-1;
-    playList->setCaption( tr( "OpiePlayer: Initializating" ) );
+    playList.setCaption( tr( "OpiePlayer: Initializating" ) );
 
     qApp->processEvents();
     //    QPEApplication::grabKeyboard(); // EVIL
@@ -57,7 +55,7 @@ MediaPlayer::MediaPlayer( MediaPlayerState &_mediaPlayerState, QObject *parent, 
     Config cfg( "OpiePlayer" );
     cfg.setGroup("PlayList");
     QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "default");
-    playList->setCaption( tr( "OpiePlayer: " ) + QFileInfo(currentPlaylist).baseName() );
+    playList.setCaption( tr( "OpiePlayer: " ) + QFileInfo(currentPlaylist).baseName() );
 }
 
 MediaPlayer::~MediaPlayer() {
@@ -87,7 +85,7 @@ void MediaPlayer::setPlaying( bool play ) {
     }
 
     QString tickerText, time, fileName;
-    if ( playList->currentTab() != PlayListWidget::CurrentPlayList ) {
+    if ( playList.currentTab() != PlayListWidget::CurrentPlayList ) {
         //if playing in file list.. play in a different way
         // random and looping settings enabled causes problems here,
         // since there is no selected file in the playlist, but a selected file in the file list,
@@ -100,7 +98,7 @@ void MediaPlayer::setPlaying( bool play ) {
         mediaPlayerState.setShuffled( false );
     }
 
-    PlayListWidget::Entry playListEntry = playList->currentEntry();
+    PlayListWidget::Entry playListEntry = playList.currentEntry();
     fileName = playListEntry.name;
     xineControl->play( playListEntry.file );
 
@@ -126,11 +124,11 @@ void MediaPlayer::setPlaying( bool play ) {
 
 
 void MediaPlayer::prev() {
-    if( playList->currentTab() == PlayListWidget::CurrentPlayList ) { //if using the playlist
-        if ( playList->prev() ) {
+    if( playList.currentTab() == PlayListWidget::CurrentPlayList ) { //if using the playlist
+        if ( playList.prev() ) {
             play();
         } else if ( mediaPlayerState.isLooping() ) {
-            if ( playList->last() ) {
+            if ( playList.last() ) {
                 play();
             }
         } else {
@@ -142,11 +140,11 @@ void MediaPlayer::prev() {
 
 void MediaPlayer::next() {
 
-    if(playList->currentTab() == PlayListWidget::CurrentPlayList) { //if using the playlist
-        if ( playList->next() ) {
+    if(playList.currentTab() == PlayListWidget::CurrentPlayList) { //if using the playlist
+        if ( playList.next() ) {
             play();
         } else if ( mediaPlayerState.isLooping() ) {
-            if ( playList->first() ) {
+            if ( playList.first() ) {
                 play();
             }
         } else {
@@ -339,7 +337,7 @@ void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
 void MediaPlayer::cleanUp() {// this happens on closing
      Config cfg( "OpiePlayer" );
      mediaPlayerState.writeConfig( cfg );
-     playList->writeDefaultPlaylist( );
+     playList.writeDefaultPlaylist( );
 
 //     QPEApplication::grabKeyboard();
 //     QPEApplication::ungrabKeyboard();
@@ -350,8 +348,8 @@ void MediaPlayer::recreateAudioAndVideoWidgets()
     delete xineControl;
     delete audioUI;
     delete videoUI;
-    audioUI = new AudioWidget( mediaPlayerState, 0, "audioUI" );
-    videoUI = new VideoWidget( mediaPlayerState, 0, "videoUI" );
+    audioUI = new AudioWidget( playList, mediaPlayerState, 0, "audioUI" );
+    videoUI = new VideoWidget( playList, mediaPlayerState, 0, "videoUI" );
 
     connect( audioUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
     connect( audioUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );

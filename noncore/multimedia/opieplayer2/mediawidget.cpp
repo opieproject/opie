@@ -21,10 +21,8 @@
 #include "mediawidget.h"
 #include "playlistwidget.h"
 
-extern PlayListWidget *playList;
-
-MediaWidget::MediaWidget( MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name )
-    : QWidget( parent, name ), mediaPlayerState( _mediaPlayerState )
+MediaWidget::MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name )
+    : QWidget( parent, name ), mediaPlayerState( _mediaPlayerState ), playList( _playList )
 {
     connect( &mediaPlayerState, SIGNAL( displayTypeChanged( MediaPlayerState::DisplayType ) ),
              this, SLOT( setDisplayType( MediaPlayerState::DisplayType ) ) );
@@ -48,8 +46,8 @@ void MediaWidget::handleCommand( Command command, bool buttonDown )
     switch ( command ) {
         case Play:       mediaPlayerState.togglePaused();
         case Stop:       mediaPlayerState.setPlaying(FALSE); return;
-        case Next:       if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setNext(); return;
-        case Previous:   if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setPrev(); return;
+        case Next:       if( playList.currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setNext(); return;
+        case Previous:   if( playList.currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setPrev(); return;
         case Loop:       mediaPlayerState.setLooping( buttonDown ); return;
         case VolumeUp:   emit moreReleased(); return;
         case VolumeDown: emit lessReleased(); return;

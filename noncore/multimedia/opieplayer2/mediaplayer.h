@@ -39,6 +39,8 @@
 
 #include "xinecontrol.h"
 
+#include "playlistwidget.h"
+
 class DocLnk;
 class VolumeControl;
 class MediaPlayerState;
@@ -48,7 +50,7 @@ class VideoWidget;
 class MediaPlayer : public QObject {
     Q_OBJECT
 public:
-    MediaPlayer( MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name );
+    MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name );
     ~MediaPlayer();
 
 public slots:
@@ -77,6 +79,7 @@ private:
     XineControl *xineControl;
     VolumeControl *volControl;
     MediaPlayerState &mediaPlayerState;
+    PlayListWidget &playList;
     AudioWidget *audioUI;
     VideoWidget *videoUI;
 };
