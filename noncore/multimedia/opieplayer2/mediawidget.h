@@ -40,12 +40,11 @@ public:
 
     struct Button
     {
-        Button() : command( Undefined ), type( NormalButton ), isHeld( false ), isDown( false ) {}
+        Button() : command( Undefined ), type( NormalButton ), isDown( false ) {}
 
         Command command;
 
         ButtonType type; // this should be part of the bitfield but gcc2 is too buggy to support this :-(
-        bool isHeld : 1;
         bool isDown : 1;
 
         QBitmap mask;
