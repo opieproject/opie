@@ -194,7 +194,8 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	
 	edit->insertSeparator();
 	
-	a = new QAction( tr("Import vCard"), QString::null, 0, 0);
+	a = new QAction( tr("Import vCard"), Resource::loadPixmap( "addressbook/fileimport"), QString::null, 
+								   0, this, 0);
 	actionPersonal = a;
 	connect( a, SIGNAL( activated() ), this, SLOT( importvCard() ) );
 	a->addTo( edit );
