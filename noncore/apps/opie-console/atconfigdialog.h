@@ -3,6 +3,7 @@
 #define ATCONFIGDIALOG_H
 
 #include <qdialog.h>
+#include "profile.h"
 
 #define MODEM_DEFAULT_INIT_STRING  "~^M~ATZ^M~"
 #define MODEM_DEFAULT_RESET_STRING "~^M~ATZ^M~"
@@ -36,8 +37,8 @@ public:
 
     ~ATConfigDialog();
 
-    void readConfig();
-    void writeConfig();
+    void readConfig( const Profile& );
+    void writeConfig( Profile& );
 
 private:
     QWidget *tab0( QWidget* parent);

@@ -316,11 +316,11 @@ void MainWindow::create( const Profile& prof ) {
 
 void MainWindow::slotTransfer()
 {
-    if ( currentSession() ) {
+    //   if ( currentSession() ) {
 	TransferDialog dlg(this);
-	//dlg.showMaximized();
+	dlg.showMaximized();
 	dlg.exec();
-    }
+         // }
 }
 
 

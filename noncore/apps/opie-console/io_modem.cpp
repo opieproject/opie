@@ -49,14 +49,14 @@ void IOModem::reload( const Profile &config ) {
     m_dialSuf3 = config.readEntry("DialSuffix3", MODEM_DEFAULT_DIAL_SUFFIX1 );
     m_connect = config.readEntry("DefaultConnect" MODEM_DEFAULT_CONNECT_STRING );
     m_hangup = config.readEntry("HangupString", MODEM_DEFAULT_HANGUP_STRING );
-    m_cancel = config.readEntry("CancelString" MODEM_DEFAULT_CANCEL_STRING );
-    m_dialTime = config.readEntry("DialTime" MODEM_DEFAULT_DIAL_TIME );
-    m_delayRedial = config.readEntry("DelayRedial", MODEM_DEFAULT_DELAY_REDIAL );
-    m_numberTries = config.readEntry("NumberTries", MODEM_DEFAULT_NUMBER_TRIES );
-    m_dtrDropTime = config.readEntry("DTRDRopTime", MODEM_DEFAULT_DTR_DROP_TIME );
-    m_bpsDetect = config.readEntry("BPSDetect",  MODEM_DEFAULT_BPS_DETECT );
-    m_dcdLines = config.readEntry("DCDLines", MODEM_DEFAULT_DCD_LINES );
-    m_multiLineUntag = config.readEntry("MultiLineUntag", MODEM_DEFAULT_MULTI_LINE_UNTAG );
+    m_cancel = config.readEntry("CancelString", MODEM_DEFAULT_CANCEL_STRING );
+    m_dialTime = config.readNumEntry("DialTime", MODEM_DEFAULT_DIAL_TIME );
+    m_delayRedial = config.readNumEntry("DelayRedial", MODEM_DEFAULT_DELAY_REDIAL );
+    m_numberTries = config.readNumEntry("NumberTries", MODEM_DEFAULT_NUMBER_TRIES );
+    m_dtrDropTime = config.readNumEntry("DTRDRopTime", MODEM_DEFAULT_DTR_DROP_TIME );
+    m_bpsDetect = config.readBoolEntry("BPSDetect", MODEM_DEFAULT_BPS_DETECT );
+    m_dcdLines = config.readBoolEntry("DCDLines", MODEM_DEFAULT_DCD_LINES );
+    m_multiLineUntag = config.readBoolEntry("MultiLineUntag", MODEM_DEFAULT_MULTI_LINE_UNTAG );
 }
 
 

@@ -5,9 +5,8 @@
 #include <qpushbutton.h>
 #include <qhbox.h>
 
-#include "iolayerbase.h"
+
 #include "modemconfigwidget.h"
-#include "atconfigdialog.h"
 #include "dialdialog.h"
 
 namespace {
@@ -24,30 +23,29 @@ namespace {
     }
 }
 
-ModemConfigWidget::ModemConfigWidget( const QString& name,
-                                QWidget* parent,
+ModemConfigWidget::ModemConfigWidget( const QString& name, QWidget* parent,
                                 const char* na )
     : ProfileDialogConnectionWidget( name, parent, na ) {
 
-    m_lay = new QVBoxLayout(this );
-    m_device = new QLabel(tr("Modem is attached to:"), this );
+    m_lay = new QVBoxLayout( this );
+    m_device = new QLabel(tr( "Modem is attached to:" ), this );
     m_deviceCmb = new QComboBox(this );
     m_deviceCmb->setEditable( TRUE );
 
     QLabel* telLabel = new QLabel( this );
-    telLabel->setText( tr("Enter telefon number here:") );
+    telLabel->setText( tr( "Enter telefon number here:" ) );
     m_telNumber = new QLineEdit( this );
     QHBox *buttonBox = new QHBox( this );
     QPushButton *atButton = new QPushButton( buttonBox );
-    atButton->setText( tr("AT commands") );
+    atButton->setText( tr( "AT commands" ) );
     connect( atButton, SIGNAL( clicked() ), this, SLOT( slotAT() ) );
 
     QPushButton *dialButton = new QPushButton( buttonBox );
-    dialButton->setText( tr("Enter number") );
+    dialButton->setText( tr( "Enter number" ) );
     connect( dialButton, SIGNAL( clicked() ), this, SLOT( slotDial() ) );
 
 
-    m_base = new IOLayerBase(this, "base");
+    m_base = new IOLayerBase( this, "base" );
 
     m_lay->addWidget( m_device );
     m_lay->addWidget( m_deviceCmb );
@@ -60,7 +58,7 @@ ModemConfigWidget::ModemConfigWidget( const QString& name,
     m_deviceCmb->insertItem( "/dev/ttyS1" );
     m_deviceCmb->insertItem( "/dev/ttyS2" );
 
-
+    atConf = new  ATConfigDialog( this, "ATConfig", true );
 }
 
 ModemConfigWidget::~ModemConfigWidget() {
@@ -68,16 +66,16 @@ ModemConfigWidget::~ModemConfigWidget() {
 }
 void ModemConfigWidget::load( const Profile& prof ) {
 
-    int rad_flow = prof.readNumEntry("Flow");
-    int rad_parity = prof.readNumEntry("Parity");
-    int speed = prof.readNumEntry("Speed");
-    QString number = prof.readEntry("Number");
+    int rad_flow = prof.readNumEntry( "Flow" );
+    int rad_parity = prof.readNumEntry( "Parity" );
+    int speed = prof.readNumEntry( "Speed" );
+    QString number = prof.readEntry( "Number" );
 
-    if (!number.isEmpty() ) {
+    if ( !number.isEmpty() ) {
         m_telNumber->setText( number );
     }
 
-    if (rad_flow == 1) {
+    if ( rad_flow == 1 ) {
         m_base->setFlow( IOLayerBase::Hardware );
     } else if (rad_flow == 2) {
         m_base->setFlow( IOLayerBase::Software );
@@ -85,7 +83,7 @@ void ModemConfigWidget::load( const Profile& prof ) {
          m_base->setFlow( IOLayerBase::None );
     }
 
-    if (rad_parity == 1) {
+    if ( rad_parity == 1 ) {
         m_base->setParity( IOLayerBase::Even );
     } else {
         m_base->setParity( IOLayerBase::Odd );
@@ -93,27 +91,31 @@ void ModemConfigWidget::load( const Profile& prof ) {
 
     switch( speed ) {
     case 115200:
-        m_base->setSpeed(IOLayerBase::Baud_115200 );
+        m_base->setSpeed( IOLayerBase::Baud_115200 );
         break;
     case 57600:
-        m_base->setSpeed( IOLayerBase::Baud_57600  );
+        m_base->setSpeed( IOLayerBase::Baud_57600 );
         break;
     case 38400:
-        m_base->setSpeed(IOLayerBase::Baud_38400  );
+        m_base->setSpeed( IOLayerBase::Baud_38400 );
         break;
     case 19200:
-        m_base->setSpeed( IOLayerBase::Baud_19200  );
+        m_base->setSpeed( IOLayerBase::Baud_19200 );
         break;
     case 9600:
     default:
-        m_base->setSpeed(IOLayerBase::Baud_9600 );
+        m_base->setSpeed( IOLayerBase::Baud_9600 );
         break;
     }
 
-    if ( prof.readEntry("Device").isEmpty() ) return;
-    setCurrent( prof.readEntry("Device"), m_deviceCmb );
+    if ( prof.readEntry( "Device" ).isEmpty() ) {
+        return;
+    }
+    setCurrent( prof.readEntry( "Device" ), m_deviceCmb );
 
+    atConf->readConfig( prof );
 }
+
 /*
  * save speed,
  * flow,
@@ -121,7 +123,7 @@ void ModemConfigWidget::load( const Profile& prof ) {
  */
 void ModemConfigWidget::save( Profile& prof ) {
     int flow, parity, speed;
-    prof.writeEntry("Device", m_deviceCmb->currentText() );
+    prof.writeEntry( "Device", m_deviceCmb->currentText() );
 
 
     switch( m_base->flow() ) {
@@ -163,18 +165,17 @@ void ModemConfigWidget::save( Profile& prof ) {
         break;
     }
 
-    prof.writeEntry("Flow", flow);
-    prof.writeEntry("Parity", parity);
-    prof.writeEntry("Speed", speed);
-    prof.writeEntry("Number", m_telNumber->text() );
+    prof.writeEntry( "Flow", flow );
+    prof.writeEntry( "Parity", parity );
+    prof.writeEntry( "Speed", speed );
+    prof.writeEntry( "Number", m_telNumber->text() );
 }
 
 void ModemConfigWidget::slotAT() {
-    ATConfigDialog conf( this, "ATConfig", true );
-    conf.readConfig();
-    conf.showMaximized();
-    if ( conf.exec() == QDialog::Accepted ) {
-        conf.writeConfig();
+    //  ATConfigDialog conf( this, "ATConfig", true );
+    atConf->showMaximized();
+    if ( atConf->exec() == QDialog::Accepted ) {
+        //      atConf->writeConfig();
     }
 }
 

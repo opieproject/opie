@@ -151,8 +151,8 @@ QWidget* ATConfigDialog::tab1( QWidget* parent ) {
 }
 
 
-void ATConfigDialog::readConfig() {
-/*
+void ATConfigDialog::readConfig( const Profile& config ) {
+
     initStringLine->setText( config.readEntry("InitString", MODEM_DEFAULT_INIT_STRING ) );
     resetStringLine->setText( config.readEntry("ResetString", MODEM_DEFAULT_RESET_STRING ) );
     dialPref1Line->setText( config.readEntry("DialPrefix1", MODEM_DEFAULT_DIAL_PREFIX1 ) );
@@ -161,19 +161,36 @@ void ATConfigDialog::readConfig() {
     dialSuf2Line->setText( config.readEntry("DialSuffix2", MODEM_DEFAULT_DIAL_SUFFIX1 ) );
     dialPref3Line->setText( config.readEntry("DialPrefix3", MODEM_DEFAULT_DIAL_PREFIX1 ) );
     dialSuf3Line->setText( config.readEntry("DialSuffix3", MODEM_DEFAULT_DIAL_SUFFIX1 ) );
-    connectLine->setText( config.readEntry("DefaultConnect" MODEM_DEFAULT_CONNECT_STRING ) );
+    connectLine->setText( config.readEntry("DefaultConnect", MODEM_DEFAULT_CONNECT_STRING ) );
     hangupLine->setText( config.readEntry("HangupString", MODEM_DEFAULT_HANGUP_STRING ) );
-    dialTimeSpin;
-    delayRedialSpin;
-    numberTriesSpin;
-    dtrDropTimeSpin;
-    bpsDetectBox;
-    cdLinesBox;
-    multiLineUntagBox;
-*/
+    dialTimeSpin->setValue( config.readNumEntry("DialTime", MODEM_DEFAULT_DIAL_TIME ) );
+    delayRedialSpin->setValue( config.readNumEntry("DelayRedial", MODEM_DEFAULT_DELAY_REDIAL ) );
+    numberTriesSpin->setValue( config.readNumEntry("NumberTries", MODEM_DEFAULT_NUMBER_TRIES ) );
+    dtrDropTimeSpin->setValue( config.readNumEntry("DTRDRopTime", MODEM_DEFAULT_DTR_DROP_TIME ) );
+    bpsDetectBox->setCurrentItem( config.readBoolEntry("BPSDetect", MODEM_DEFAULT_BPS_DETECT ) );
+    dcdLinesBox->setCurrentItem( config.readBoolEntry("DCDLines", MODEM_DEFAULT_DCD_LINES ) );
+    multiLineUntagBox->setCurrentItem( config.readBoolEntry("MultiLineUntag", MODEM_DEFAULT_MULTI_LINE_UNTAG ) );
 }
 
-void ATConfigDialog::writeConfig() {
+void ATConfigDialog::writeConfig( Profile& config ) {
+
+    config.writeEntry( "InitString", initStringLine->text() );
+    config.writeEntry( "ResetString", resetStringLine->text() );
+    config.writeEntry( "DialPrefix1", dialPref1Line->text() );
+    config.writeEntry( "DialSuffix1", dialSuf1Line->text() );
+    config.writeEntry( "DialPrefix2", dialPref2Line->text() );
+    config.writeEntry( "DialSuffix2",  dialSuf2Line->text() );
+    config.writeEntry( "DialPrefix3", dialPref3Line->text() );
+    config.writeEntry( "DialSuffix3", dialSuf3Line->text() );
+    config.writeEntry( "DefaultConnect", connectLine->text() );
+    config.writeEntry( "HangupString", hangupLine->text() );
+    config.writeEntry( "DialTime", dialTimeSpin->value() );
+    config.writeEntry( "DelayRedial", delayRedialSpin->value() );
+    config.writeEntry( "NumberTries", numberTriesSpin->value() );
+    config.writeEntry( "DTRDRopTime", dtrDropTimeSpin->value() );
+    config.writeEntry( "BPSDetect", bpsDetectBox->currentItem() );
+    config.writeEntry( "DCDLines", dcdLinesBox->currentItem() );
+    config.writeEntry( "MultiLineUntag", multiLineUntagBox->currentItem() );
 
 }
 
