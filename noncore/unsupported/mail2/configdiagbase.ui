@@ -230,7 +230,7 @@
                                         </property>
                                         <property stdset="1">
                                             <name>text</name>
-                                            <string>Blink LED (Zaurus only)</string>
+                                            <string>Blink LED</string>
                                         </property>
                                     </widget>
                                     <widget row="2"  column="2" >
