@@ -10,9 +10,75 @@
         <source>note</source>
         <translation>Notiz</translation>
     </message>
+    <message>
+        <source>All day</source>
+        <translation>Ganzen Tag</translation>
+    </message>
 </context>
 <context>
     <name>DatebookPluginConfig</name>
+    <message>
+        <source>Show location</source>
+        <translation type="obsolete">Ort anzeigen</translation>
+    </message>
+    <message>
+        <source>Check this if the location of an appointment should be shown for each one</source>
+        <translation type="obsolete">Auswählen, um den Ort des Termins anzuzeigen</translation>
+    </message>
+    <message>
+        <source>Show notes</source>
+        <translation type="obsolete">Notizen anzeigen</translation>
+    </message>
+    <message>
+        <source>Check this if the note attached to an appointment should be shown for each one</source>
+        <translation type="obsolete">Auswählen, um die angehängte Notiz anzuzeigen</translation>
+    </message>
+    <message>
+        <source>Show only later
+ appointments</source>
+        <translation type="obsolete">Nur spätere
+Termine</translation>
+    </message>
+    <message>
+        <source>Check this if only appointments later then current time should be shown</source>
+        <translation type="obsolete">Auswählen, um nur spätere Termine anzuzeigen</translation>
+    </message>
+    <message>
+        <source>How many 
+appointment
+should be 
+shown?</source>
+        <translation type="obsolete">Wieviele Termine
+sollen
+angezeigt werden ?</translation>
+    </message>
+    <message>
+        <source>How many appointments should be shown maximal. In chronical order</source>
+        <translation type="obsolete">Wieviele Termine maxiaml angezeigt werden. In chronologischer Reihenfolge</translation>
+    </message>
+    <message>
+        <source>How many more days</source>
+        <translation type="obsolete">Wieviele weitere Tage</translation>
+    </message>
+    <message>
+        <source>How many more days should be in the range</source>
+        <translation type="obsolete">Wieviele Tage imVoraus sollen angezeigt werden</translation>
+    </message>
+    <message>
+        <source> day(s)</source>
+        <translation type="obsolete">Tag(e)</translation>
+    </message>
+    <message>
+        <source>only today</source>
+        <translation type="obsolete">Nur heute</translation>
+    </message>
+</context>
+<context>
+    <name>DatebookPluginConfigBase</name>
+    <message>
+        <source>DatebookPluginConfigBase</source>
+        <translation></translation>
+    </message>
     <message>
         <source>Show location</source>
         <translation>Ort anzeigen</translation>
@@ -30,43 +96,36 @@
         <translation>Auswählen, um die angehängte Notiz anzuzeigen</translation>
     </message>
     <message>
-        <source>Show only later
- appointments</source>
-        <translation>Nur spätere
-Termine</translation>
+        <source>Show only later appointments</source>
+        <translation>Nur spätere Termine zeigen</translation>
     </message>
     <message>
         <source>Check this if only appointments later then current time should be shown</source>
         <translation>Auswählen, um nur spätere Termine anzuzeigen</translation>
     </message>
     <message>
-        <source>How many 
-appointment
-should be 
-shown?</source>
-        <translation>Wieviele Termine
-sollen
-angezeigt werden ?</translation>
+        <source>Show time in extra line</source>
+        <translation>Zeit in extra Zeile</translation>
     </message>
     <message>
         <source>How many appointments should be shown maximal. In chronical order</source>
         <translation>Wieviele Termine maxiaml angezeigt werden. In chronologischer Reihenfolge</translation>
     </message>
     <message>
-        <source>How many more days</source>
-        <translation>Wieviele weitere Tage</translation>
+        <source>How many appointment should be shown?</source>
+        <translation>Wieviele Termine sollen gezeigt werden?</translation>
+    </message>
+    <message>
+        <source>only today</source>
+        <translation>Nur heute</translation>
     </message>
     <message>
         <source>How many more days should be in the range</source>
         <translation>Wieviele Tage imVoraus sollen angezeigt werden</translation>
     </message>
     <message>
-        <source> day(s)</source>
-        <translation>Tag(e)</translation>
-    </message>
-    <message>
-        <source>only today</source>
-        <translation>Nur heute</translation>
+        <source>How many more days</source>
+        <translation>Wieviele weitere Tage</translation>
     </message>
 </context>
 <context>
