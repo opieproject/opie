@@ -1124,6 +1124,7 @@ void Zaurus::init ( )
 	d-> m_vendor = Vendor_Sharp;
 
 	QFile f ( "/proc/filesystems" );
+	QString model;
 
 	if ( f. open ( IO_ReadOnly ) && ( QTextStream ( &f ). read ( ). find ( "\tjffs2\n" ) >= 0 )) {
 		d-> m_vendorstr = "OpenZaurus Team";
@@ -1144,27 +1145,31 @@ void Zaurus::init ( )
 		d-> m_system = System_Zaurus;
 	}
 
-	f. setName ( "/proc/deviceinfo/product" );
+	f. setName ( "/proc/cpuinfo" );
 	if ( f. open ( IO_ReadOnly ) ) {
 		QTextStream ts ( &f );
-		QString model = ts. readLine ( );
-		f. close ( );
-
-		d-> m_modelstr = QString("Zaurus ") + model;
-		if ( model == "SL-5500" )
-			d-> m_model = Model_Zaurus_SL5500;
-		else if ( model == "SL-C700" )
-			d-> m_model = Model_Zaurus_SLC700;
-		else if ( model == "SL-A300" )
-			d-> m_model = Model_Zaurus_SLA300;
-		else if ( model == "SL-B600" || model == "SL-5600" )
-			d-> m_model = Model_Zaurus_SLB600;
-		else
-			d-> m_model = Model_Zaurus_SL5000;
+		QString line;
+		while( line = ts. readLine ( ) ) {
+			if ( line. left ( 8 ) == "Hardware" )
+				break;
+		}
+		int loc = line. find ( ":" );
+		if ( loc != -1 )
+			model = line. mid ( loc + 2 ). simplifyWhitespace( );
 	}
-	else {
-		d-> m_model = Model_Zaurus_SL5000;
-		d-> m_modelstr = "Zaurus (model unknown)";
+
+	if ( model == "SHARP Corgi" ) {
+		d-> m_model = Model_Zaurus_SLC700;
+		d-> m_modelstr = "Zaurus SL-C700";
+	} else if ( model == "SHARP Poodle" ) {
+		d-> m_model = Model_Zaurus_SLB600;
+		d-> m_modelstr = "Zaurus SL-B500 or SL-5600";
+	} else if ( model = "Sharp-Collie" ) {
+		d-> m_model = Model_Zaurus_SL5500;
+		d-> m_modelstr = "Zaurus SL-5500 or SL-5000d";
+	} else {
+		d-> m_model = Model_Zaurus_SL5500;
+		d-> m_modelstr = "Zaurus (Model unknown)";
 	}
 
 	bool flipstate = false;
