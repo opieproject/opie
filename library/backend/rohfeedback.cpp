@@ -54,10 +54,10 @@ RoHFeedback::RoHFeedback() :
 
       for( int i = 0; i < NOOFICONS ; i ++ ) {
         Imgs[i] =  new QPixmap( Resource::loadPixmap(
-              "RoH/star/"+ QString::number(i+1) + ".png" ));
+              "RoH/star/"+ QString::number(i+1)  ));
         Masks[i] = new QBitmap();
         (*Masks[i]) = Resource::loadPixmap(
-              "RoH/star/"+QString::number(i+1) + "-mask.png" );
+              "RoH/star/"+QString::number(i+1) + "-mask" );
       }
     }
 
