@@ -585,13 +585,13 @@ void Konsole::setFont(int fontno)
 // --| color selection |-------------------------------------------------------
 
 void Konsole::changeColumns(int columns)
-{
-    qDebug("change columns");
-  TEWidget* te = getTe();
-  if (te != 0) {
-  setColLin(columns,te->Lines());
-  te->update();
-  }
+{ //FIXME this seems to cause silliness when reset command is executed
+//     qDebug("change columns");
+//   TEWidget* te = getTe();
+//   if (te != 0) {
+//   setColLin(columns,te->Lines());
+//   te->update();
+//   }
 }
 
 //FIXME: If a child dies during session swap,
