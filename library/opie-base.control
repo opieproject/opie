@@ -1,4 +1,4 @@
-Files: etc/qimpen etc/colors etc/init.d/opie etc/rc2.d/S98opie bin/opie-reorgfiles $QTDIR/lib/libqpe.so.1 $QTDIR/lib/libqpe.so.1.5 $QTDIR/lib/libqpe.so.1.5.0  apps/__7separator.desktop apps/__9quit.desktop apps/*/.directory etc/mime.types apps/Settings/quit.desktop
+Files: etc/qimpen etc/colors etc/init.d/opie etc/rc2.d/S98opie bin/opie-reorgfiles $QTDIR/lib/libqpe.so.1 $QTDIR/lib/libqpe.so.1.5 $QTDIR/lib/libqpe.so.1.5.0  apps/__7separator.desktop apps/__9quit.desktop apps/*/.directory etc/mime.types apps/Settings/quit.desktop pics/logo/*
 Priority: required
 Section: opie/system
 Maintainer:  Project Opie <opie@handhelds.org>
