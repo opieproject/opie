@@ -34,7 +34,7 @@ PSEWidget::PSEWidget() : QWidget()
     int h=0, v=0;
     
     Config configobj( QPEApplication::qpeDir() +"share/oxygen/oxygendata", Config::File );
-    for( int n = 0 ; n < 118 ; n++ )
+    for( int n = 0 ; n < 109 ; n++ )
     {
         configobj.setGroup( QString::number( n+1 ));
         
