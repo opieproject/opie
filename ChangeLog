@@ -2,13 +2,14 @@
 
 	New Features
 	------------
+	* PackageManager supports installation of local ipkg files (drw)
 
 	Fixed Bugs
 	----------
 	* #1464 - Packagemanager dont set active filter after install a package (drw)
 	* n.a. - PackageManager - (Minor UI tweak) in filter dialog, when option is enabled, set focus to widget that corresponds to that option (drw)
 	* n.a. - PackageManager - (Minor UI tweak) fix double entry in source feed configuration when adding a new feed (drw)
-
+    
 2004-11-14	Opie 1.1.7
 
 	New Features
