@@ -101,7 +101,7 @@ void DatebookPluginWidget::getDates() {
                     m_eventsList.append( l );
                     l->show();
                     QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
-                } else if ( QDateTime::currentDateTime()  <= (*it).event().end() ||  (*it).event().start().date() != date  ) {
+                } else if ( ( QDateTime::currentDateTime()  <=  (*it).event().end() )  || ( ( (*it).event().start().date() != date ) &&  (  QDateTime::currentDateTime()  <=  (*it).event().end() )  )  ) {
                     count++;
                     // show only later appointments
                     DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
