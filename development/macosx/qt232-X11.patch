@@ -1,0 +1,122 @@
+diff -ru qt-2.3.2/include/qconfig.h qt-2.3.2_changed/include/qconfig.h
+--- qt-2.3.2/include/qconfig.h	Fri Jan 26 14:43:06 2001
++++ qt-2.3.2_changed/include/qconfig.h	Sun Nov 16 12:57:23 2003
+@@ -1,10 +1 @@
+-// Empty leaves all features enabled.  See doc/html/features.html for choices.
+-
+-// Note that disabling some features will produce a libqt that is not
+-// compatible with other libqt builds. Such modifications are only
+-// supported on Qt/Embedded where reducing the library size is important
+-// and where the application-suite is often a fixed set.
+-
+-#ifndef QT_DLL
+-#define QT_DLL // Internal
+-#endif
++// Everything
+diff -ru qt-2.3.2/include/qglobal.h qt-2.3.2_changed/include/qglobal.h
+--- qt-2.3.2/include/qglobal.h	Mon Oct 29 15:21:15 2001
++++ qt-2.3.2_changed/include/qglobal.h	Sat Oct 25 13:08:27 2003
+@@ -73,6 +73,8 @@
+ 
+ #if defined(macintosh)
+ #define _OS_MAC_
++#elif defined(__APPLE__)
++#define _OS_MACX_
+ #elif defined(MSDOS) || defined(_MSDOS) || defined(__MSDOS__)
+ #define _OS_MSDOS_
+ #elif defined(OS2) || defined(_OS2) || defined(__OS2__)
+diff -ru qt-2.3.2/include/qmodules.h qt-2.3.2_changed/include/qmodules.h
+--- qt-2.3.2/include/qmodules.h	Fri Aug 31 17:00:56 2001
++++ qt-2.3.2_changed/include/qmodules.h	Sun Nov 16 12:57:23 2003
+@@ -1,14 +1,12 @@
+-#ifndef QT_H
+-#endif // QT_H
+-
++// These modules are licensed to you
+ #define QT_MODULE_TOOLS
+ #define QT_MODULE_KERNEL
+ #define QT_MODULE_WIDGETS
+ #define QT_MODULE_DIALOGS
+-
+ #define QT_MODULE_ICONVIEW
+ #define QT_MODULE_WORKSPACE
+-#define QT_MODULE_TABLE
++#define QT_MODULE_NETWORK
+ #define QT_MODULE_CANVAS
++#define QT_MODULE_TABLE
+ #define QT_MODULE_XML
+-#define QT_MODULE_NETWORK
++#define QT_MODULE_OPENGL
+diff -ru qt-2.3.2/src/network/qdns.cpp qt-2.3.2_changed/src/network/qdns.cpp
+--- qt-2.3.2/src/network/qdns.cpp	Mon Oct 29 15:21:14 2001
++++ qt-2.3.2_changed/src/network/qdns.cpp	Sun Nov 16 13:11:41 2003
+@@ -1981,7 +1981,7 @@
+     domains = new QStrList( TRUE );
+     domains->setAutoDelete( TRUE );
+ 
+-    res_init();
++    //res_init(); (se)
+     int i;
+     // find the name servers to use
+     for( i=0; i < MAXNS && i < _res.nscount; i++ ) {
+diff -ru qt-2.3.2/src/network/qsocketdevice_unix.cpp qt-2.3.2_changed/src/network/qsocketdevice_unix.cpp
+--- qt-2.3.2/src/network/qsocketdevice_unix.cpp	Mon Oct 29 15:21:14 2001
++++ qt-2.3.2_changed/src/network/qsocketdevice_unix.cpp	Sat Oct 25 13:08:27 2003
+@@ -112,7 +112,7 @@
+ #if defined(_OS_LINUX_) && defined(__GLIBC__) && ( __GLIBC__ >= 2 )
+ // new linux is Single Unix 1998, not old linux
+ #  define SOCKLEN_T socklen_t
+-#elif defined(BSD4_4)
++#elif defined(BSD4_4) && !defined(_OS_MACX_)
+ // BSD 4.4
+ #  if defined(_OS_FREEBSD_) && __FreeBSD_version < 400000
+ // FreeBSD 4.0 and higher
+diff -ru qt-2.3.2/src/tools/qconfig.h qt-2.3.2_changed/src/tools/qconfig.h
+--- qt-2.3.2/src/tools/qconfig.h	Fri Jan 26 14:43:06 2001
++++ qt-2.3.2_changed/src/tools/qconfig.h	Sun Nov 16 12:57:23 2003
+@@ -1,10 +1 @@
+-// Empty leaves all features enabled.  See doc/html/features.html for choices.
+-
+-// Note that disabling some features will produce a libqt that is not
+-// compatible with other libqt builds. Such modifications are only
+-// supported on Qt/Embedded where reducing the library size is important
+-// and where the application-suite is often a fixed set.
+-
+-#ifndef QT_DLL
+-#define QT_DLL // Internal
+-#endif
++// Everything
+diff -ru qt-2.3.2/src/tools/qglobal.h qt-2.3.2_changed/src/tools/qglobal.h
+--- qt-2.3.2/src/tools/qglobal.h	Mon Oct 29 15:21:15 2001
++++ qt-2.3.2_changed/src/tools/qglobal.h	Sat Oct 25 13:08:27 2003
+@@ -73,6 +73,8 @@
+ 
+ #if defined(macintosh)
+ #define _OS_MAC_
++#elif defined(__APPLE__)
++#define _OS_MACX_
+ #elif defined(MSDOS) || defined(_MSDOS) || defined(__MSDOS__)
+ #define _OS_MSDOS_
+ #elif defined(OS2) || defined(_OS2) || defined(__OS2__)
+diff -ru qt-2.3.2/src/tools/qmodules.h qt-2.3.2_changed/src/tools/qmodules.h
+--- qt-2.3.2/src/tools/qmodules.h	Fri Aug 31 17:00:56 2001
++++ qt-2.3.2_changed/src/tools/qmodules.h	Sun Nov 16 12:57:23 2003
+@@ -1,14 +1,12 @@
+-#ifndef QT_H
+-#endif // QT_H
+-
++// These modules are licensed to you
+ #define QT_MODULE_TOOLS
+ #define QT_MODULE_KERNEL
+ #define QT_MODULE_WIDGETS
+ #define QT_MODULE_DIALOGS
+-
+ #define QT_MODULE_ICONVIEW
+ #define QT_MODULE_WORKSPACE
+-#define QT_MODULE_TABLE
++#define QT_MODULE_NETWORK
+ #define QT_MODULE_CANVAS
++#define QT_MODULE_TABLE
+ #define QT_MODULE_XML
+-#define QT_MODULE_NETWORK
++#define QT_MODULE_OPENGL
