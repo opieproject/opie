@@ -30,14 +30,14 @@ OPimRecord &OPimRecord::operator=( const OPimRecord& rec) {
 /*
  * category names
  */
-QStringList OPimRecord::categoryNames()const {
+QStringList OPimRecord::categoryNames( const QString& appname ) const {
     QStringList list;
     QArray<int> cats = categories();
     Categories catDB;
     catDB.load( categoryFileName() );
 
     for (uint i = 0; i < cats.count(); i++ ) {
-        list << catDB.label("Todo List", cats[i] );
+        list << catDB.label( appname, cats[i] );
     }
 
     return list;

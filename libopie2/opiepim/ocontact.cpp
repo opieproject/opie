@@ -627,9 +627,9 @@ QString OContact::toRichText() const
 	text += "<b>" + QObject::tr("Nickname: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
 
-    if ( categoryNames().count() ){
+    if ( categoryNames("Contacts").count() ){
 	    text += "<b>" + QObject::tr( "Category:") + "</b> ";
-	    text += categoryNames().join(", ");
+	    text += categoryNames("Contacts").join(", ");
 	    text += "<br>";
     }
 

@@ -38,7 +38,7 @@ public:
     /**
      * category names resolved
      */
-    QStringList categoryNames()const;
+    QStringList categoryNames( const QString& appname )const;
 
     /**
      * set category names they will be resolved

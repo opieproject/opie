@@ -255,7 +255,7 @@ QString OTodo::toRichText() const
   }
 
   text += "<b>" + QObject::tr( "Category:") + "</b> ";
-  text += categoryNames().join(", ");
+  text += categoryNames( "Todo List" ).join(", ");
   text += "<br>";
 
   return text;
