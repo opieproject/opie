@@ -359,8 +359,8 @@ Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
  	tw-> addTab ( styletab = createStyleTab ( tw ), "appearance/styletabicon.png", tr( "Style" ));
     tw-> addTab ( createFontTab ( tw ), "appearance/fonttabicon.png", tr( "Font" ));
     tw-> addTab ( createColorTab ( tw ), "appearance/colorstabicon.png", tr( "Colors" ) );
-    tw-> addTab ( createDecoTab ( tw ), "appearance/styletabicon.png", tr( "Windows" ) );
-    tw-> addTab ( createGuiTab ( tw ), "appearance/backgroundtabicon.png", tr( "Gui" ) );
+    tw-> addTab ( createDecoTab ( tw ), "appearance/decotabicon.png", tr( "Windows" ) );
+    tw-> addTab ( createGuiTab ( tw ), "appearance/advancedtabicon.png", tr( "Gui" ) );
 
 	top-> addWidget ( tw, 10 );	
 	top-> addWidget ( m_sample, 1 );
