@@ -3,63 +3,63 @@
     <name>BenchmarkInfo</name>
     <message>
         <source>This area shows the available tests, the results for which the tests have been performed, and comparison values for one selected device. Use the checkboxes to define which tests you want to perform.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este área muestra las pruebas disponibles, los resultados para las que se han realizado, y la comparación con los valores para un dispositivo seleccionado. Use las casillas para seleccionar las pruebas que desea realizar.</translation>
     </message>
     <message>
         <source>Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Pruebas</translation>
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultados</translation>
     </message>
     <message>
         <source>Comparison</source>
-        <translation type="unfinished"></translation>
+        <translation>Comparación</translation>
     </message>
     <message>
         <source>1. Integer Arithmetic  </source>
-        <translation type="unfinished"></translation>
+        <translation>1. Aritmética de Enteros  </translation>
     </message>
     <message>
         <source>2. Floating Point Unit  </source>
-        <translation type="unfinished"></translation>
+        <translation>2. Unidad de Punto Flotante</translation>
     </message>
     <message>
         <source>3. Text Rendering  </source>
-        <translation type="unfinished"></translation>
+        <translation>3. Renderizado de Texto</translation>
     </message>
     <message>
         <source>4. Gfx Rendering  </source>
-        <translation type="unfinished"></translation>
+        <translation>4. Renderizado Gfx  </translation>
     </message>
     <message>
         <source>5. RAM Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>5. Rendimiento de la RAM</translation>
     </message>
     <message>
         <source>6. SD Card Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>6. Rendimiento de la Tarjeta SD</translation>
     </message>
     <message>
         <source>7. CF Card Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>7. Rendimiento de la Tarjeta CF  </translation>
     </message>
     <message>
         <source>&amp;Start Tests!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡&amp;Comenzar las Pruebas!</translation>
     </message>
     <message>
         <source>Click here to perform the selected tests.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para realizar las pruebas seleccionadas.</translation>
     </message>
     <message>
         <source>Choose a model to compare your results with.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escoja un modelo con el que comparar sus resultados.</translation>
     </message>
     <message>
         <source>error</source>
-        <translation type="unfinished"></translation>
+        <translation>error</translation>
     </message>
 </context>
 <context>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>Cached (%1 kB)</source>
-        <translation>Cached (%1 kB)</translation>
+        <translation>Cacheada (%1 kB)</translation>
     </message>
     <message>
         <source>Free (%1 kB)</source>
@@ -174,11 +174,17 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Está página muestra cómo la memoria (es decir RAM) está siendo usada.
+La memoria se cataloga como sigue:
+
+1. Usada - memoria usada por Opie y cualquier aplicación en ejecución.
+2. Buffers - almacenamiento temporal usada para mejorar el rendimiento.
+3. Cached - información usada recientemente, pero aún no liberada.
+4. Libre - memoria actualmente no usada por ninguna aplicación.</translation>
     </message>
     <message>
         <source>Total Swap: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>Memoria Swap Total: %1 kB</translation>
     </message>
 </context>
 <context>
@@ -240,7 +246,8 @@ Mantenga pulsado un módulo para ver información adicional sobre el módulo, o 
     <message>
         <source>You really want to execute
 %1 for this module?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Está seguro de que desea ejecutar
+%1 para este módulo?</translation>
     </message>
 </context>
 <context>
@@ -313,7 +320,8 @@ Mantenga pulsado un proceso para ver información adicional, o para enviarle una
     <message>
         <source>Really want to send %1
 to this process?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Está seguro de que sea enviar %1
+a este proceso?</translation>
     </message>
 </context>
 <context>
@@ -348,11 +356,11 @@ to this process?</source>
     </message>
     <message>
         <source>Benchmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Pruebas</translation>
     </message>
     <message>
         <source>Syslog</source>
-        <translation type="unfinished"></translation>
+        <translation>Registros</translation>
     </message>
 </context>
 <context>
@@ -391,15 +399,15 @@ to this process?</source>
     </message>
     <message>
         <source>&lt;br&gt;Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;Modelo: </translation>
     </message>
     <message>
         <source>&lt;br&gt;Vendor: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;Vendedor: </translation>
     </message>
     <message>
         <source>Built against Qt/E </source>
-        <translation type="unfinished"></translation>
+        <translation>Compilado contra Qt/E </translation>
     </message>
 </context>
 </TS>
