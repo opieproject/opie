@@ -4,16 +4,16 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.20 2004-07-10 01:59:00 llornkcor Exp $
+** $Id: zsafe.cpp,v 1.21 2004-07-13 10:35:23 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
 ** Compile Flags:
 **    Zaurus arm     : -DNO_OPIE
 **    Zaurus Opie arm: none
-**    Linux Desktop  : -DDESKTOP
-**    Windows Desktop: -DDESKTOP -DWIN32
-**
+**    Linux Desktop  : -DDESKTOP -DNO_OPIE
+**    Windows Desktop: -DDESKTOP -DNO_OPIE
+** use qmake
 **    for japanese version additional use: -DJPATCH_HDE
 **
 ****************************************************************************/
@@ -43,7 +43,7 @@ using namespace Opie::Ui;
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#ifndef WIN32
+#ifndef Q_WS_WIN
 #include <unistd.h>
 #endif
 #include <string.h>
@@ -55,7 +55,7 @@ using namespace Opie::Ui;
 #ifdef DESKTOP
 #include <qfiledialog.h>
 #include <qdragobject.h>
-#ifndef WIN32
+#ifndef Q_WS_WIN
 #include <qsettings.h>
 #else
 #include "qsettings.h"
@@ -97,7 +97,7 @@ using namespace Opie::Ui;
 
 extern int DeskW, DeskH;
 #ifdef DESKTOP
-extern QApplication   *appl;
+extern QApplication *appl;
 #else
 extern QPEApplication *appl;
 #endif
@@ -108,7 +108,7 @@ extern QPEApplication *appl;
 
 
 #ifdef DESKTOP
-#ifndef WIN32
+#ifndef Q_WS_WIN
 const QString APP_KEY="/.zsafe/";
 #else
 const QString APP_KEY="";
@@ -365,7 +365,7 @@ static const char* const general_data[] = {
        delete conf;
 
 #ifdef DESKTOP
-#ifndef WIN32
+#ifndef Q_WS_WIN
        conf = new QSettings ();
        conf->insertSearchPath (QSettings::Unix, QDir::homeDirPath());
 #else
@@ -417,7 +417,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
 
     // create a zsafe configuration object
 #ifdef DESKTOP
-#ifndef WIN32
+#ifndef Q_WS_WIN
     conf = new QSettings ();
     conf->insertSearchPath (QSettings::Unix, QDir::homeDirPath());
 #else
@@ -429,7 +429,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     conf->setGroup ("zsafePrefs");
 #endif
 #ifdef DESKTOP
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
     expandTree = conf->readBoolEntry(APP_KEY+"expandTree", false);
 // #endif
 #else
@@ -464,7 +464,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     setName( "ZSafe" );
 
 #ifdef DESKTOP
-#ifdef WIN32
+#ifdef Q_WS_WIN
     setGeometry(100, 150, DeskW, DeskH-30 );
 #else
     resize( DeskW, DeskH-30 );
@@ -498,7 +498,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
 
     // check if the directory application exists, if not
     // create it
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
     // QString d1("Documents/application");
 // #else
 	QString d1(QDir::homeDirPath() + "/Documents/application");
@@ -525,7 +525,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
           exitZs (1);
        }
     }
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
     // QString d2("Documents/application/zsafe");
 // #else
 	QString d2(QDir::homeDirPath() + "/Documents/application/zsafe");
@@ -556,7 +556,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
       //filename = "";
 
     QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef WIN32
+#ifdef Q_WS_WIN
     this->setCaption("Qt ZSafe: " + ti);
 #else
     this->setCaption("ZSafe: " + ti);
@@ -569,7 +569,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     lastSearchedUsername = "";
     lastSearchedComment = "";
 
-    infoForm = new InfoForm();
+    infoForm = new InfoForm(this, "show_info", TRUE);
     categoryDialog = NULL;
     infoForm->setIcon( image0);
 
@@ -770,8 +770,8 @@ void ZSafe::editPwd()
     if (!isCategory(selectedItem))
     {
        // open the 'New Entry' dialog
-       NewDialog *dialog = new NewDialog(this, tr("Edit Entry"), TRUE);
-#ifdef WIN32
+       NewDialog *dialog = new NewDialog(this, "edit_entry", TRUE);
+#ifdef Q_WS_WIN
        dialog->setCaption ("Qt " + tr("Edit Entry"));
        dialog->setGeometry(200, 250, 220, 310 );
 #endif
@@ -795,10 +795,20 @@ void ZSafe::editPwd()
        dialog->CommentField->insertLine(comment);
        dialog->CommentField->setCursorPosition(0,0);
 
+#ifdef Q_WS_QWS
        DialogCode result = (DialogCode) QPEApplication::execDialog( dialog );
-
+#endif
+			 
 #ifdef DESKTOP
-       result = Accepted;
+#ifndef Q_QW_QWIN
+       dialog->show();
+#endif
+#else
+       dialog->showMaximized();
+#endif
+       int result = dialog->exec();
+#ifdef DESKTOP
+//       result = QDialog::Accepted;
 #endif
        if (result == Accepted)
        {
@@ -840,8 +850,8 @@ void ZSafe::newPwd()
        QString cat = selectedItem->text(0);
 
        // open the 'New Entry' dialog
-       NewDialog *dialog = new NewDialog(this, tr("New Entry"), TRUE);
-#ifdef WIN32
+       NewDialog *dialog = new NewDialog(this, "new_entry", TRUE);
+#ifdef Q_WS_WIN
        dialog->setCaption ("Qt " + tr("New Entry"));
        dialog->setGeometry(200, 250, 220, 310 );
 #endif
@@ -854,9 +864,20 @@ void ZSafe::newPwd()
        dialog->Field6Label->setText(getFieldLabel (selectedItem,"6", tr("Field 5")));
 retype:
 
+#ifdef Q_WS_QWS
        DialogCode result = (DialogCode) QPEApplication::execDialog( dialog );
+#endif
+			 
 #ifdef DESKTOP
-       result = Accepted;
+#ifndef Q_QW_QWIN
+       dialog->show();
+#endif
+#else
+       dialog->showMaximized();
+#endif
+#ifdef DESKTOP
+       int result = dialog->exec();
+//       result = QDialog::Accepted;
 #endif
 
        if (result == Accepted)
@@ -898,7 +919,7 @@ void ZSafe::findPwd()
 
     // open the 'Search' dialog
     SearchDialog *dialog = new SearchDialog(this, tr("Search"), TRUE);
-#ifdef WIN32
+#ifdef Q_WS_WIN
     dialog->setCaption ("Qt " + tr("Search"));
 #endif
 
@@ -1078,15 +1099,15 @@ QString ZSafe::getFieldLabel (QListViewItem *_item, QString field, QString def)
 
    QString app_key = APP_KEY;
 #ifndef DESKTOP
-#ifndef WIN32
+#ifndef Q_WS_WIN
    conf->setGroup ("fieldDefs");
 #endif
 #else
-#ifndef WIN32
+#ifndef Q_WS_WIN
    app_key += "/fieldDefs/";
 #endif
 #endif
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
    QString label = conf->readEntry(app_key+category+"-field"+field,def);
 // #else
 //   QString label(def);
@@ -1104,11 +1125,11 @@ QString ZSafe::getFieldLabel (QString category, QString field, QString def)
 #ifndef DESKTOP
    conf->setGroup ("fieldDefs");
 #else
-#ifndef WIN32
+#ifndef Q_WS_WIN
    app_key += "/fieldDefs/";
 #endif
 #endif
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
    QString label = conf->readEntry(app_key+category+"-field"+field,
                                    def);
 // #else
@@ -1208,8 +1229,14 @@ void ZSafe::showInfo( QListViewItem *_item)
       text += "</body></html>";
 
       infoForm->InfoText->setText(text);
-      infoForm->hide();
+//      infoForm->hide();
+#ifdef Q_WS_QWS
       QPEApplication::showDialog( infoForm );
+#endif
+
+#ifdef DESKTOP
+      infoForm->show();
+#endif			
    }
 }
 
@@ -1231,7 +1258,7 @@ void ZSafe::listViewSelected( QListViewItem *_item)
    ListView->setColumnText(4, getFieldLabel (selectedItem, "5", tr("Field 4")));
    ListView->setColumnText(5, getFieldLabel (selectedItem, "6", tr("Field 5")));
 #endif
-#ifdef WIN32
+#ifdef Q_WS_WIN
    // set the column text dependent on the selected item
    ListView->setColumnText(0, getFieldLabel (selectedItem, "1", tr("Name")));
    ListView->setColumnText(1, getFieldLabel (selectedItem, "2", tr("Field 2")));
@@ -1486,7 +1513,7 @@ void ZSafe::readAllEntries()
       QString s = t.readLine();
       s.replace (QRegExp("\";\""), "\"|\"");
       // char buffer[1024];
-#ifndef WIN32
+#ifndef Q_WS_WIN
       char buffer[s.length()+1];
 #else
       char buffer[4048];
@@ -1585,7 +1612,7 @@ void ZSafe::readAllEntries()
          QString icon;
          QString fullIconPath;
          QPixmap *pix;
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
          icon = conf->readEntry(APP_KEY+category);
 // #endif
          bool isIconAv = false;
@@ -1738,7 +1765,7 @@ void ZSafe::readAllEntries()
       s.replace (QRegExp("\";\""), "\"|\"");
       // char buffer[1024];
       int len=s.length()+1;
-#ifdef WIN32
+#ifdef Q_WS_WIN
       char buffer[512];
 #else
       char buffer[len];
@@ -1818,7 +1845,7 @@ void ZSafe::readAllEntries()
          QString icon;
          QString fullIconPath;
          QPixmap *pix;
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
          icon = conf->readEntry(APP_KEY+category);
 // #endif
          bool isIconAv = false;
@@ -1896,7 +1923,7 @@ bool ZSafe::openDocument(const char* _filename, const char* )
 {
      int retval;
      char* entry[FIELD_SIZE];
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
      int validationFlag = conf->readNumEntry(APP_KEY+"valzsafe", 1);
 // #else
      // int validationFlag = 1;
@@ -1937,7 +1964,7 @@ bool ZSafe::openDocument(const char* _filename, const char* )
         }
         else
         {
-#ifdef WIN32
+#ifdef Q_WS_WIN
            this->setCaption("Qt ZSafe");
 #else
            this->setCaption("ZSafe");
@@ -2054,7 +2081,7 @@ bool ZSafe::openDocument(const char* _filename, const char* )
                    QString icon;
                    QString fullIconPath;
                    QPixmap *pix;
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
                    icon = conf->readEntry(APP_KEY+category);
 // #endif
                    bool isIconAv = false;
@@ -2140,7 +2167,7 @@ int ZSafe::loadInit(const char* _filename, const char *password)
     keylength = j;
     krc2->rc2_expandkey (key, keylength, 128);
 
-#ifndef WIN32
+#ifndef Q_WS_WIN
     size = read(fileno (fd), (unsigned char *) (charbuf + count), 8);
 #else
     size = fread ((unsigned char *) (charbuf + count), sizeof(unsigned char), 8, fd);
@@ -2157,7 +2184,7 @@ int ZSafe::loadInit(const char* _filename, const char *password)
 
     size = 0;
     bufferIndex = 0;
-#ifndef WIN32
+#ifndef Q_WS_WIN
     while ((count = read (fileno (fd), (unsigned char *) charbuf, 8)) > 0) {
         while (count < 8) {
             count2 = read (fileno (fd), (unsigned char *) (charbuf + count), 8);
@@ -2339,7 +2366,7 @@ bool ZSafe::saveDocument(const char* _filename,
               saveFinalize();
               return false;
            }
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
            conf->writeEntry(APP_KEY+"valzsafe", 1);
 // #endif
            saveConf();
@@ -2434,7 +2461,7 @@ void ZSafe::getDocPassword(QString title)
     // CS: !!!
     // int pos = filename.findRev ('/');
     QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef WIN32
+#ifdef Q_WS_WIN
     dialog->setCaption("Qt " + ti);
 #else
     dialog->setCaption(ti);
@@ -2664,7 +2691,7 @@ void ZSafe::addCategory()
         else
         {
            categoryDialog = new CategoryDialog(this, tr("Category"), TRUE);
-#ifdef WIN32
+#ifdef Q_WS_WIN
            categoryDialog->setCaption ("Qt " + tr("Category"));
 #endif
            dialog = categoryDialog;
@@ -2675,7 +2702,7 @@ void ZSafe::addCategory()
         }
 
 #ifdef DESKTOP
-#ifndef WIN32
+#ifndef Q_WS_WIN
         QStringList list = conf->entryList( APP_KEY+"/fieldDefs" );
 #else
         // read all categories from the config file and store
@@ -2718,7 +2745,7 @@ void ZSafe::addCategory()
            if (cat->contains("-field1", FALSE))
            {
 #ifdef DESKTOP
-#ifndef WIN32
+#ifndef Q_WS_WIN
               categ = cat->section ("-field1", 0, 0);
 #else
               int pos = cat->find ("-field1");
@@ -2786,7 +2813,7 @@ void ZSafe::addCategory()
         waitDialog.hide();
            }
 
-#ifndef WIN32
+#ifndef Q_WS_WIN
         dialog->show();
 #endif
 #ifndef DESKTOP
@@ -2825,7 +2852,7 @@ void ZSafe::addCategory()
                if (!pix->isNull())
                {
                   // save the full pixmap name into the config file
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
                   conf->writeEntry(APP_KEY+category, icon);
 // #endif
                   saveConf();
@@ -2877,7 +2904,7 @@ void ZSafe::delCategory()
           // Delete from the category list
           modified = true;
           categories.remove (selectedItem->text(0));
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
           conf->removeEntry (selectedItem->text(0));
 // #endif
           saveConf();
@@ -3037,12 +3064,12 @@ void ZSafe::saveCategoryDialogFields(CategoryDialog *dialog)
 #ifndef DESKTOP
    conf->setGroup ("fieldDefs");
 #else
-#ifndef WIN32
+#ifndef Q_WS_WIN
    app_key += "/fieldDefs/";
 #endif
 #endif
    QString category = dialog->CategoryField->currentText();
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
    conf->writeEntry(app_key+category+"-field1", dialog->Field1->text());
    conf->writeEntry(app_key+category+"-field2", dialog->Field2->text());
    conf->writeEntry(app_key+category+"-field3", dialog->Field3->text());
@@ -3073,7 +3100,7 @@ void ZSafe::editCategory()
         else
         {
            categoryDialog = new CategoryDialog(this, tr("Category"), TRUE);
-#ifdef WIN32
+#ifdef Q_WS_WIN
            categoryDialog->setCaption ("Qt " + tr("Category"));
 #endif
            dialog = categoryDialog;
@@ -3085,7 +3112,7 @@ void ZSafe::editCategory()
         setCategoryDialogFields(dialog);
 
 #ifdef DESKTOP
-#ifndef WIN32
+#ifndef Q_WS_WIN
         QStringList list = conf->entryList( APP_KEY+"/fieldDefs" );
 #else
         // read all categories from the config file and store
@@ -3129,7 +3156,7 @@ void ZSafe::editCategory()
            if (cat->contains("-field1", FALSE))
            {
 #ifdef DESKTOP
-#ifndef WIN32
+#ifndef Q_WS_WIN
               categ = cat->section ("-field1", 0, 0);
 #else
               int pos = cat->find ("-field1");
@@ -3272,7 +3299,7 @@ void ZSafe::editCategory()
            if (category != dialog->CategoryField->currentText())
            {
               categories.remove (category);
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
               conf->removeEntry(category);
 // #endif
               saveConf();
@@ -3298,7 +3325,7 @@ void ZSafe::editCategory()
                   if (!pix->isNull())
                   {
                      // save the full pixmap name into the config file
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
                      conf->writeEntry(APP_KEY+category, icon);
 // #endif
                      saveConf();
@@ -3310,7 +3337,7 @@ void ZSafe::editCategory()
               }
               else
               {
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
                  conf->removeEntry (category);
 // #endif
                  saveConf();
@@ -3489,7 +3516,7 @@ void ZSafe::newDocument()
        conf->writeEntry(APP_KEY+"document", filename);
        saveConf();
        QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef WIN32
+#ifdef Q_WS_WIN
        this->setCaption("Qt ZSafe: " + ti);
 #else
        this->setCaption("ZSafe: " + ti);
@@ -3573,7 +3600,7 @@ void ZSafe::loadDocument()
        conf->writeEntry(APP_KEY+"document", filename);
        saveConf();
        QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef WIN32
+#ifdef Q_WS_WIN
        this->setCaption("Qt ZSafe: " + ti);
 #else
        this->setCaption("ZSafe: " + ti);
@@ -3627,7 +3654,7 @@ void ZSafe::saveDocumentAs()
        conf->writeEntry(APP_KEY+"document", filename);
        saveConf();
        QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef WIN32
+#ifdef Q_WS_WIN
        this->setCaption("Qt ZSafe: " + ti);
 #else
        this->setCaption("ZSafe: " + ti);
@@ -3706,7 +3733,7 @@ void ZSafe::setExpandFlag()
 #ifndef DESKTOP
    conf->setGroup ("zsafePrefs");
 #endif
-// #ifndef WIN32
+// #ifndef Q_WS_WIN
    conf->writeEntry (APP_KEY+"expandTree", expandTree);
 // #endif
    saveConf();
@@ -3791,7 +3818,7 @@ void ZSafe::setDocument(const QString& fileref)
      conf->writeEntry(APP_KEY+"document", filename);
      saveConf();
      QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef WIN32
+#ifdef Q_WS_WIN
      this->setCaption("Qt ZSafe: " + ti);
 #else
      this->setCaption("ZSafe: " + ti);
