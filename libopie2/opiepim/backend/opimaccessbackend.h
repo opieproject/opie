@@ -142,6 +142,7 @@ OPimAccessBackend<T>::OPimAccessBackend(int acc)
     : m_acc( acc )
 {
     m_front = 0l;
+    m_read = 20;
 }
 template <class T>
 OPimAccessBackend<T>::~OPimAccessBackend() {
