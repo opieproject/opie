@@ -48,17 +48,23 @@ int main( int argc, char** argv )
 
 */
     OSoundCard* card = it.current();
-
     OMixerInterface* mixer = card->mixer();
+    odebug << "This device " << ( mixer->hasMultipleRecording() ? "does" : "does not" ) << " feature multiple recording sources." << oendl;
 
     QStringList channels = mixer->allChannels();
 
     for ( QStringList::Iterator it = channels.begin(); it != channels.end(); ++it )
     {
         bool stereo = mixer->isStereo( *it );
-        odebug << "OSSDEMO: Mixer has channel " << *it << ( stereo ? "[stereo]" : "[mono]" ) << oendl;
-        odebug << "OSSDEMO:              +--- volume " << ( mixer->volume( *it ) & 0xff )
-               << " (left) | " << ( mixer->volume( *it ) >> 8 ) << " (right)" << oendl;
+        bool recsrc = mixer->isRecordable( *it );
+        QString line = "OSSDEMO: Mixer has channel " + *it + " ";
+        line = line.leftJustify( 50 ) + ( stereo ? "[stereo]" : "[mono]" );
+        line = line.leftJustify( 60 ) + ( recsrc ? "[recsrc]" : "[      ]" );
+        line = line.leftJustify( 70 );
+        line += " [ " + QString::number( mixer->volume( *it ) & 0xff ).rightJustify( 3 );
+        if ( stereo ) line += " | " + QString::number( mixer->volume( *it ) >> 8 ).rightJustify( 3 );
+        line += " ]";
+        odebug << line << oendl;
     }
 
     return 0;

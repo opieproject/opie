@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-
-                             (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=
@@ -40,6 +39,8 @@
 #include <sys/soundcard.h>
 #include <sys/stat.h>
 
+static const char* device_label[] = SOUND_DEVICE_LABELS;
+static int max_device_nr = sizeof device_label / sizeof (const char*);
 
 using namespace Opie::Core;
 using namespace Opie::MM;
@@ -63,8 +64,7 @@ void OSoundSystem::synchronize()
 
     _interfaces.clear();
     _interfaces.insert( "soundcard", new OSoundCard( this, "soundcard" ) );
-
-
+    
     /*
 
     QString str;
@@ -176,7 +176,7 @@ void OAudioInterface::init()
  *======================================================================================*/
 
 OMixerInterface::OMixerInterface( QObject* parent, const char* name )
-                 :QObject( parent, name )
+                 :QObject( parent, name ), _devmask( 0 ), _recmask( 0 ), _stmask( 0 )
 {
     odebug << "OMixerInterface::OMixerInterface()" << oendl;
     init();
@@ -199,60 +199,32 @@ void OMixerInterface::init()
     }
 
     // construct the device capabilities
-    int devmask = 0;
-    if ( ioctl( _fd, SOUND_MIXER_READ_DEVMASK, &devmask ) != -1 )
+    if ( ioctl( _fd, SOUND_MIXER_READ_CAPS, &_capmask ) != -1 )
     {
-        if ( devmask & ( 1 << SOUND_MIXER_VOLUME ) )    _channels.insert( "PlayVolume", SOUND_MIXER_VOLUME );
-        if ( devmask & ( 1 << SOUND_MIXER_BASS ) )      _channels.insert( "PlayBass", SOUND_MIXER_BASS );
-        if ( devmask & ( 1 << SOUND_MIXER_TREBLE ) )    _channels.insert( "PlayTreble", SOUND_MIXER_TREBLE );
-        if ( devmask & ( 1 << SOUND_MIXER_SYNTH ) )     _channels.insert( "PlaySynth", SOUND_MIXER_SYNTH );
-        if ( devmask & ( 1 << SOUND_MIXER_PCM ) )       _channels.insert( "PlayPCM", SOUND_MIXER_PCM );
-        if ( devmask & ( 1 << SOUND_MIXER_SPEAKER ) )   _channels.insert( "PlaySpeaker", SOUND_MIXER_SPEAKER );
-        if ( devmask & ( 1 << SOUND_MIXER_LINE ) )      _channels.insert( "PlayLine", SOUND_MIXER_LINE );
-        if ( devmask & ( 1 << SOUND_MIXER_MIC ) )       _channels.insert( "PlayMic", SOUND_MIXER_MIC );
-        if ( devmask & ( 1 << SOUND_MIXER_CD ) )        _channels.insert( "PlayCD", SOUND_MIXER_CD );
-        if ( devmask & ( 1 << SOUND_MIXER_IMIX ) )      _channels.insert( "PlayInputMix", SOUND_MIXER_IMIX );
-        if ( devmask & ( 1 << SOUND_MIXER_ALTPCM ) )    _channels.insert( "PlayAltPCM", SOUND_MIXER_ALTPCM );
-        if ( devmask & ( 1 << SOUND_MIXER_RECLEV ) )    _channels.insert( "PlayRecord", SOUND_MIXER_RECLEV );
-        if ( devmask & ( 1 << SOUND_MIXER_IGAIN ) )     _channels.insert( "PlayInputGain", SOUND_MIXER_IGAIN );
-        if ( devmask & ( 1 << SOUND_MIXER_OGAIN ) )     _channels.insert( "PlayOutputGain", SOUND_MIXER_OGAIN );
-        //odebug << "devmask available and constructed." << oendl;
+        odebug << "OMixerInterface::init() - capmask = " << _capmask << oendl;
     }
-
-    devmask = 0;
-    if ( ioctl( _fd, SOUND_MIXER_READ_RECMASK, &devmask ) != -1 )
+    if ( ioctl( _fd, SOUND_MIXER_READ_DEVMASK, &_devmask ) != -1 )
     {
-        if ( devmask & ( 1 << SOUND_MIXER_VOLUME ) )    _channels.insert( "RecVolume", SOUND_MIXER_VOLUME );
-        if ( devmask & ( 1 << SOUND_MIXER_BASS ) )      _channels.insert( "RecBass", SOUND_MIXER_BASS );
-        if ( devmask & ( 1 << SOUND_MIXER_TREBLE ) )    _channels.insert( "RecTreble", SOUND_MIXER_TREBLE );
-        if ( devmask & ( 1 << SOUND_MIXER_SYNTH ) )     _channels.insert( "RecSynth", SOUND_MIXER_SYNTH );
-        if ( devmask & ( 1 << SOUND_MIXER_PCM ) )       _channels.insert( "RecPCM", SOUND_MIXER_PCM );
-        if ( devmask & ( 1 << SOUND_MIXER_SPEAKER ) )   _channels.insert( "RecSpeaker", SOUND_MIXER_SPEAKER );
-        if ( devmask & ( 1 << SOUND_MIXER_LINE ) )      _channels.insert( "RecLine", SOUND_MIXER_LINE );
-        if ( devmask & ( 1 << SOUND_MIXER_MIC ) )       _channels.insert( "RecMic", SOUND_MIXER_MIC );
-        if ( devmask & ( 1 << SOUND_MIXER_CD ) )        _channels.insert( "RecCD", SOUND_MIXER_CD );
-        if ( devmask & ( 1 << SOUND_MIXER_IMIX ) )      _channels.insert( "RecInputMix", SOUND_MIXER_IMIX );
-        if ( devmask & ( 1 << SOUND_MIXER_ALTPCM ) )    _channels.insert( "RecAltPCM", SOUND_MIXER_ALTPCM );
-        if ( devmask & ( 1 << SOUND_MIXER_RECLEV ) )    _channels.insert( "RecRecord", SOUND_MIXER_RECLEV );
-        if ( devmask & ( 1 << SOUND_MIXER_IGAIN ) )     _channels.insert( "RecInputGain", SOUND_MIXER_IGAIN );
-        if ( devmask & ( 1 << SOUND_MIXER_OGAIN ) )     _channels.insert( "RecOutputGain", SOUND_MIXER_OGAIN );
-        //odebug << "recmask available and constructed." << oendl;
+        odebug << "OMixerInterface::init() - devmask = " << _devmask << oendl;
     }
-
-    devmask = 0;
-    if ( ioctl( _fd, SOUND_MIXER_READ_STEREODEVS, &devmask ) != -1 )
+    if ( ioctl( _fd, SOUND_MIXER_READ_RECMASK, &_recmask ) != -1 )
     {
-        odebug << "stereomask = " << devmask << oendl;
+        odebug << "OMixerInterface::init() - recmask = " << _recmask << oendl;
     }
-
-/*    ChannelIterator it;
-    for ( it = _channels.begin(); it != _channels.end(); ++it )
+    if ( ioctl( _fd, SOUND_MIXER_READ_STEREODEVS, &_stmask ) != -1 )
     {
-        odebug << "Channel " <<  it.key() << " available (bit " << it.data() << ")" << oendl;
-        odebug << " +--- Volume: " << volume( it.key() ) & 0xff << " | " << volume( it.key() ) >> 8 << "" << oendl;
+        odebug << "OMixerInterface::init() - stereomask = " << _stmask << oendl;
     }
-*/
-}
+    for ( int i = 0; i < max_device_nr; ++i )
+    {
+        if ( _devmask & ( 1 << i ) ) 
+        {
+            _channels.insert( QString( device_label[i] ).stripWhiteSpace(), i );
+            odebug << "OMixerInterface::init() - channel '" << device_label[i] << "'" << oendl;
+        }
+    }
+}    
+    
 
 QStringList OMixerInterface::allChannels() const
 {
@@ -260,8 +232,7 @@ QStringList OMixerInterface::allChannels() const
     QStringList channels;
     while ( it != _channels.end() )
     {
-        channels += it.key();
-        it++;
+        channels += it++.key();
     }
     return channels;
 }
@@ -269,15 +240,25 @@ QStringList OMixerInterface::allChannels() const
 
 QStringList OMixerInterface::recChannels() const
 {
-    owarn << "NYI" << oendl;
-    return QStringList();
+    ChannelIterator it = _channels.begin();
+    QStringList channels;
+    while ( it != _channels.end() )
+    {
+        if ( _recmask & ( 1 << _channels[it.key()] ) ) channels += it++.key();
+    }
+    return channels;
 }
 
 
 QStringList OMixerInterface::playChannels() const
 {
-    owarn << "NYI" << oendl;
-    return QStringList();
+    return allChannels();
+}
+
+
+bool OMixerInterface::hasMultipleRecording() const
+{
+    return !( _capmask & SOUND_CAP_EXCL_INPUT );
 }
 
 
@@ -289,16 +270,13 @@ bool OMixerInterface::hasChannel( const QString& channel ) const
 
 bool OMixerInterface::isStereo( const QString& channel ) const
 {
-    bool result = false;
-    if ( _channels.contains( channel ) )
-    {
-        int devmask = 0;
-        if ( ioctl( _fd, SOUND_MIXER_READ_STEREODEVS, &devmask ) != -1 )
-        {
-            result = devmask & ( 1 << _channels[channel] );
-        }
-    }
-    return result;
+    return _channels.contains( channel ) && ( _stmask & ( 1 << _channels[channel] ) );
+}
+
+
+bool OMixerInterface::isRecordable( const QString& channel ) const
+{
+    return _channels.contains( channel ) && ( _recmask & ( 1 << _channels[channel] ) );
 }
 
 

@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-
-                             (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=
@@ -198,7 +197,10 @@ class OMixerInterface : public QObject
      * @returns playable channels.
      */
     QStringList playChannels() const;
-
+    /**
+     * @returns true, if the device features multiple recording sources.
+     */
+    bool hasMultipleRecording() const;
     /**
      * @returns true, if @a channel exists.
      */
@@ -207,7 +209,10 @@ class OMixerInterface : public QObject
      * @returns true, if @a channel is stereo.
      */
     bool isStereo( const QString& channel ) const;
-
+    /**
+     * @returns tru, if @a channel is a possible recording source.
+     */
+    bool isRecordable( const QString& channel ) const;
     /**
      * Set the @a left and @a right volumes for @a channel.
      * If no value for right is given, the value for left is taken for that.
@@ -221,7 +226,11 @@ class OMixerInterface : public QObject
 
   protected:
     int _fd;
-    QMap<QString, int> _channels;
+    int _capmask;
+    int _devmask;
+    int _recmask;
+    int _stmask;
+    QMap<QString,int> _channels;
 
   private:
     void init();
