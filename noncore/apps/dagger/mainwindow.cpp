@@ -31,6 +31,7 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 #include <qaction.h>
 #include <qclipboard.h>
 #include <qmenubar.h>
+#include <qmessagebox.h>
 #include <qobjectlist.h>
 #include <qpopupmenu.h>
 #include <qtimer.h>
@@ -687,27 +688,57 @@ void MainWindow::slotSearchResultClicked( const QString &key )
 
 void MainWindow::slotTextRefClicked( const QString &ref )
 {
+//printf( "Ref clicked: '%s'\n", ref.latin1() );
+/*
+Ref clicked: 'type=Strongs value=G3482'
+Ref clicked: 'type=Strongs value=H07225'
+Ref clicked: 'type=morph class=x-Robinson:N-PRI value=N-PRI'
+Ref clicked: 'type=morph class=x-StrongsMorph:TH8804 value=TH8804'
+*/
     //owarn << "Reference: " << ref << oendl;
     if ( !ref.isNull() )
     {
         TextWidget *text = reinterpret_cast<TextWidget *>(m_tabs.currentWidget());
         if ( text )
         {
-            QString module;
-            QString key( ref );
-            key.remove( 0, 2 );
-
-            QChar book = ref.at( 1 );
-            // TODO- this is ugly, need better way to determine type of reference
-            //       take a look at SWModule::getRawEntry()
-            int keyValue = key.toInt();
-            if ( book == 'H' && keyValue <= 8674 )
-                module = "StrongsHebrew";
-            else if ( book == 'G' && keyValue <= 5624 )
-                module = "StrongsGreek";
-
-            if ( !module.isEmpty() )
-                openModule( module, key );
+            // Parse type
+            int pos = ref.find( "type=", 0, false ) + 5;
+            QString typeStr = ref.mid( pos, ref.find( ' ', pos ) - pos );
+            
+            // Parse class (for morph. only)
+            QString classStr;
+            if ( typeStr == "morph" )
+            {
+                pos = ref.find( "class=", 0, false ) + 5;
+                QString classStr = ref.mid( pos, ref.find( ' ', pos ) - pos );
+                
+                // TODO - need to strip 'x-' from beginning and ':key' at end?
+            }
+            
+            // Parse value
+            pos = ref.find( "value=", 0, false ) + 6;
+            QString valueStr = ref.mid( pos, ref.find( ' ', pos ) - pos );
+            
+            if ( typeStr == "Strongs" )
+            {
+                //Determine if is a Hebrew or Greek reference
+                QString module;
+                if ( valueStr.at( 0 ) == 'H' )
+                    module = "StrongsHebrew";
+                else
+                    module = "StrongsGreek";
+                
+                // Get key
+                QString key( valueStr );
+                key.remove( 0, 1 );
+                // Open reference
+                 openModule( module, key );
+            }
+            else if ( typeStr == "morph" )
+            {
+                QMessageBox::information( this, tr( "Morphological Tags" ),
+                       tr( "Morphological tag cross-referencing not implemented yet." ) );
+            }
         }
     }
 }
