@@ -1,3 +1,4 @@
 config OPIEALARM
   boolean "Opiealarm"
+  depends ! TARGET_X86
   default "y"
