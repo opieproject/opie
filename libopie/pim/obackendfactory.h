@@ -12,11 +12,18 @@
  * =====================================================================
  * ToDo: Use plugins 
  * =====================================================================
- * Version: $Id: obackendfactory.h,v 1.2 2002-10-08 09:27:36 eilers Exp $
+ * Version: $Id: obackendfactory.h,v 1.3 2002-10-10 17:08:58 zecke Exp $
  * =====================================================================
  * History:
  * $Log: obackendfactory.h,v $
- * Revision 1.2  2002-10-08 09:27:36  eilers
+ * Revision 1.3  2002-10-10 17:08:58  zecke
+ * The Cache is finally in place
+ * I tested it with my todolist and it 'works' for 10.000 todos the hits are awesome ;)
+ * The read ahead functionality does not make sense for XMLs backends because most of the stuff is already in memory. While using readahead on SQL makes things a lot faster....
+ * I still have to fully implement read ahead
+ * This change is bic but sc
+ *
+ * Revision 1.2  2002/10/08 09:27:36  eilers
  * Fixed libopie.pro to include the new pim-API.
  * The SQL-Stuff is currently deactivated. Otherwise everyone who wants to
  * compile itself would need to install libsqlite, libopiesql...
@@ -28,8 +35,8 @@
  *
  * =====================================================================
  */
-#ifndef __OPIE_BACKENDFACTORY_H_
-#define __OPIE_BACKENDFACTORY_H_
+#ifndef OPIE_BACKENDFACTORY_H_
+#define OPIE_BACKENDFACTORY_H_
 
 #include <qstring.h>
 #include <qasciidict.h>
@@ -38,9 +45,10 @@
 #include "otodoaccessxml.h"
 #include "ocontactaccessbackend_xml.h"
 
-#ifdef __USE_SQL
+/*#ifdef __USE_SQL
 #include "otodoaccesssql.h"
 #endif
+*/
 
 template<class T>
 class OBackendFactory
@@ -72,13 +80,13 @@ class OBackendFactory
 	
 		switch ( *dict.take( backendName ) ){
 		case TODO:
-#ifdef __USE_SQL
+/*#ifdef __USE_SQL
 			if ( backend == "sql" ) 
 				return (T*) new OTodoAccessBackendSQL("");
-#else
+#else*/
 			if ( backend == "sql" ) 
 				qWarning ("OBackendFactory:: sql Backend not implemented! Using XML instead!");
-#endif
+//#endif
 
 			return (T*) new OTodoAccessXML( appName );
 		case CONTACT:

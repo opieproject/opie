@@ -68,6 +68,7 @@ private:
     const Base* m_temp;
     bool m_end : 1;
     T m_record;
+    bool m_direction :1;
 
     /* d pointer for future versions */
     class IteratorPrivate;
@@ -125,6 +126,8 @@ ORecordListIterator<T>::ORecordListIterator() {
     m_temp = 0l;
     m_end = true;
     m_record = T();
+    /* forward */
+    m_direction = TRUE;
 }
 template <class T>
 ORecordListIterator<T>::~ORecordListIterator() {
@@ -139,6 +142,7 @@ ORecordListIterator<T>::ORecordListIterator( const ORecordListIterator<T>& it) {
     m_temp = it.m_temp;
     m_end = it.m_end;
     m_record = it.m_record;
+    m_direction = it.m_direction;
 }
 
 template <class T>
@@ -156,11 +160,9 @@ template <class T>
 T ORecordListIterator<T>::operator*() {
     qWarning("operator* %d %d", m_current,  m_uids[m_current] );
     if (!m_end )
-        /* FIXME
-	 * until the cache is in place
-	 * we do the uid match uid check
-	 */
-        m_record = m_temp->find( m_uids[m_current] );
+        m_record = m_temp->find( m_uids[m_current], m_uids, m_current,
+                                 m_direction ? Base::Forward :
+                                 Base::Reverse  );
     else
         m_record = T();
 
@@ -169,6 +171,7 @@ T ORecordListIterator<T>::operator*() {
 
 template <class T>
 ORecordListIterator<T> &ORecordListIterator<T>::operator++() {
+    m_direction = true;
     if (m_current < m_uids.count() ) {
         m_end = false;
         ++m_current;
@@ -179,6 +182,7 @@ ORecordListIterator<T> &ORecordListIterator<T>::operator++() {
 }
 template <class T>
 ORecordListIterator<T> &ORecordListIterator<T>::operator--() {
+    m_direction = false;
     if ( m_current > 0 ) {
         --m_current;
         m_end = false;
@@ -207,7 +211,8 @@ bool ORecordListIterator<T>::operator!=( const ORecordListIterator<T>& it ) {
 template <class T>
 ORecordListIterator<T>::ORecordListIterator( const QArray<int> uids,
                                   const Base* t )
-    : m_uids( uids ), m_current( 0 ),  m_temp( t ), m_end( false )
+    : m_uids( uids ), m_current( 0 ),  m_temp( t ), m_end( false ),
+      m_direction( false )
 {
 }
 template <class T>
@@ -254,6 +259,7 @@ return m_ids.count();
 }
 template <class T>
 T ORecordList<T>::operator[]( uint i ) {
-    return m_acc->find( m_ids[i] );
+    /* forward */
+    return m_acc->find( m_ids[i], m_ids, i );
 }
 #endif

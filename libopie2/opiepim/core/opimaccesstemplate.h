@@ -7,6 +7,7 @@
 #include <opie/opimaccessbackend.h>
 #include <opie/orecordlist.h>
 
+#include "opimcache.h"
 #include "otemplatebase.h"
 
 /**
@@ -23,6 +24,7 @@ class OPimAccessTemplate : public OTemplateBase<T> {
 public:
     typedef ORecordList<T> List;
     typedef OPimAccessBackend<T> BackEnd;
+    typedef OPimCache<T> Cache;
 
     /**
      * our sort order
@@ -73,6 +75,12 @@ public:
      */
     virtual T find( int uid )const;
 
+    /**
+     * read ahead cache find method ;)
+     */
+    virtual T find( int uid, const QArray<int>&,
+                    uint current, CacheDirection dir = Forward )const;
+
     /* invalidate cache here */
     /**
      * clears the backend and invalidates the backend
@@ -99,6 +107,12 @@ public:
      * replace T from backend
      */
     virtual bool replace( const T& t) ;
+
+    /**
+     * @internal
+     */
+    void cache( const T& )const;
+    void setSaneCacheSize( int );
 protected:
     /**
      * invalidate the cache
@@ -111,6 +125,7 @@ protected:
      */
     BackEnd* backEnd();
     BackEnd* m_backEnd;
+    Cache m_cache;
 
 };
 
@@ -118,7 +133,8 @@ template <class T>
 OPimAccessTemplate<T>::OPimAccessTemplate( BackEnd* end )
     : OTemplateBase<T>(), m_backEnd( end )
 {
-
+    if (end )
+        end->setFrontend( this );
 }
 template <class T>
 OPimAccessTemplate<T>::~OPimAccessTemplate() {
@@ -127,6 +143,7 @@ OPimAccessTemplate<T>::~OPimAccessTemplate() {
 }
 template <class T>
 bool OPimAccessTemplate<T>::load() {
+    invalidateCache();
     return m_backEnd->load();
 }
 template <class T>
@@ -154,6 +171,26 @@ OPimAccessTemplate<T>::queryByExample( const T& t, int sortOrder ) {
 template <class T>
 T OPimAccessTemplate<T>::find( int uid ) const{
     T t = m_backEnd->find( uid );
+    cache( t );
+    return t;
+}
+template <class T>
+T OPimAccessTemplate<T>::find( int uid, const QArray<int>& ar,
+                               uint current, CacheDirection dir )const {
+    /*
+     * better do T.isEmpty()
+     * after a find this way we would
+     * avoid two finds in QCache...
+     */
+    // qWarning("find it now %d", uid );
+    if (m_cache.contains( uid ) ) {
+        qWarning("m cache contains %d", uid);
+        return m_cache.find( uid );
+    }
+
+    T t = m_backEnd->find( uid, ar, current, dir );
+    qWarning("found it and cache it now %d", uid);
+    cache( t );
     return t;
 }
 template <class T>
@@ -163,23 +200,26 @@ void OPimAccessTemplate<T>::clear() {
 }
 template <class T>
 bool OPimAccessTemplate<T>::add( const T& t ) {
+    cache( t );
     return m_backEnd->add( t );
 }
 template <class T>
 bool OPimAccessTemplate<T>::remove( const T& t ) {
-    return m_backEnd->remove( t.uid() );
+    return remove( t.uid() );
 }
 template <class T>
 bool OPimAccessTemplate<T>::remove( int uid ) {
+    m_cache.remove( uid );
     return m_backEnd->remove( uid );
 }
 template <class T>
 bool OPimAccessTemplate<T>::replace( const T& t ) {
+    m_cache.replace( t );
     return m_backEnd->replace( t );
 }
 template <class T>
 void OPimAccessTemplate<T>::invalidateCache() {
-
+    m_cache.invalidate();
 }
 template <class T>
 OPimAccessTemplate<T>::BackEnd* OPimAccessTemplate<T>::backEnd() {
@@ -192,5 +232,16 @@ bool OPimAccessTemplate<T>::wasChangedExternally()const {
 template <class T>
 void OPimAccessTemplate<T>::setBackEnd( BackEnd* end ) {
     m_backEnd = end;
+    if (m_backEnd )
+        m_backEnd->setFrontend( this );
+}
+template <class T>
+void OPimAccessTemplate<T>::cache( const T& t ) const{
+    /* hacky we need to work around the const*/
+    ((OPimAccessTemplate<T>*)this)->m_cache.add( t );
+}
+template <class T>
+void OPimAccessTemplate<T>::setSaneCacheSize( int size ) {
+    m_cache.setSize( size );
 }
 #endif

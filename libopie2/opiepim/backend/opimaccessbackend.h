@@ -3,6 +3,7 @@
 
 #include <qarray.h>
 
+#include <opie/otemplatebase.h>
 #include <opie/opimrecord.h>
 
 
@@ -17,6 +18,7 @@
 template <class T = OPimRecord>
 class OPimAccessBackend {
 public:
+    typedef OTemplateBase<T> Frontend;
     OPimAccessBackend();
     virtual ~OPimAccessBackend();
 
@@ -54,6 +56,8 @@ public:
      */
     virtual T find(int uid )const  = 0;
 
+    virtual T find(int uid, const QArray<int>& items,
+                   uint current, Frontend::CacheDirection )const ;
     /**
      * clear the back end
      */
@@ -74,16 +78,50 @@ public:
      */
     virtual bool replace( const T& t ) = 0;
 
+    /*
+     * setTheFrontEnd!!!
+     */
+    void setFrontend( Frontend* front );
+
+protected:
+    void cache( const T& t )const;
+
+    /**
+     * use a prime number here!
+     */
+    void setSaneCacheSize( int );
+
+private:
+    Frontend* m_front;
 
 };
 
 template <class T>
 OPimAccessBackend<T>::OPimAccessBackend() {
-
+    m_front = 0l;
 }
 template <class T>
 OPimAccessBackend<T>::~OPimAccessBackend() {
 
+}
+template <class T>
+void OPimAccessBackend<T>::setFrontend( Frontend* fr ) {
+    m_front = fr;
+}
+template <class T>
+void OPimAccessBackend<T>::cache( const T& t )const {
+    if (m_front )
+        m_front->cache( t );
+}
+template <class T>
+void OPimAccessBackend<T>::setSaneCacheSize( int size) {
+    if (m_front )
+        m_front->setSaneCacheSize( size );
+}
+template <class T>
+T OPimAccessBackend<T>::find( int uid, const QArray<int>&,
+                              uint, Frontend::CacheDirection )const {
+    return find( uid );
 }
 
 #endif
