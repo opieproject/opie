@@ -118,6 +118,14 @@ public:
     void addTab( QWidget *, const QString &, const QString & );
 
 /**
+ * @fn removePage( QWidget *widget )
+ * @brief Remove widget from control.  Does not delete widget.
+ *
+ * @param widget Widget control to be removed.
+ */
+    void removePage( QWidget * );
+
+/**
  * @fn tabStyle()
  * @brief Returns current widget selection control style.
  */
@@ -210,6 +218,15 @@ private:
  * @brief Internal function to adjust layout.
  */
     void    setUpLayout();
+
+signals:
+/**
+ * @fn currentChanegd( QWidget *widget )
+ * @brief This signal is emitted whenever the widget has changed.
+ *
+ * @param widget Pointer to new current widget.
+ */
+    void currentChanged( QWidget * );
 
 private slots:
 
