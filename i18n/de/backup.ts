@@ -3,7 +3,7 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation>Sichern und Wiederherstellen... arbeitet ...</translation>
+        <translation>Sichern und Wiederherstellen... arbeitet...</translation>
     </message>
     <message>
         <source>Backup and Restore</source>

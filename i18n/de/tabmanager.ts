@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AppEdit</name>
     <message>
@@ -15,66 +16,67 @@
     </message>
     <message>
         <source>Exec:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführen:</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommentar:</translation>
     </message>
 </context>
 <context>
     <name>TabManager</name>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht</translation>
     </message>
     <message>
         <source>Can&apos;t remove with applications
 still in the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Gruppe kann nicht entfernt werden,
+solange sie Programme enthält.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Are you sure you want to delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sind Sie sicher, dass gelöscht werden soll?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Can&apos;t remove.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kann nicht löschen</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Tab</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche Icons...</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished">Programm</translation>
+        <translation>Programm</translation>
     </message>
 </context>
 <context>
     <name>TabManagerBase</name>
     <message>
         <source>Tab Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Tab Manager</translation>
     </message>
     <message>
         <source>Hierarchy</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierarchie</translation>
     </message>
 </context>
 <context>

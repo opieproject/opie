@@ -48,7 +48,7 @@
     <message>
         <source>Game paused.
 Press P to continue!</source>
-        <translation>Spiel pausiert: Drücken Sie &lt;b&gt;P&lt;/b&gt; zum Fortfahren !</translation>
+        <translation>Spiel pausiert: Drücken Sie &lt;b&gt;P&lt;/b&gt; zum Fortfahren.</translation>
     </message>
     <message>
         <source>Game Over!
@@ -75,7 +75,7 @@ Spielstand: %1</translation>
     <message>
         <source>Successfully cleared more than 75%.
 </source>
-        <translation>Erfolgreiche aufgeräumt: 75%.</translation>
+        <translation>Erfolgreich aufgeräumt: 75%.</translation>
     </message>
     <message>
         <source>%1 points: 15 points per life
@@ -90,12 +90,12 @@ Spielstand: %1</translation>
     <message>
         <source>%1 points: Total score
 </source>
-        <translation>%1 Punkte: Gsamtstand</translation>
+        <translation>%1 Punkte: Gesamtpunkte</translation>
     </message>
     <message>
         <source>On to level %1.
 You get %2 lives this time!</source>
-        <translation>Auf zu Ebene %1: sie erhalten %2 Leben diesmal !</translation>
+        <translation>Auf zu Ebene %1: Sie erhalten dieses Mal %2 Leben.</translation>
     </message>
 </context>
 </TS>

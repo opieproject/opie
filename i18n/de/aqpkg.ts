@@ -14,7 +14,7 @@
     <name>DataManager</name>
     <message>
         <source>Reading configuration...</source>
-        <translation>Lese Konfiguration ...</translation>
+        <translation>Lese Konfiguration...</translation>
     </message>
 </context>
 <context>
@@ -32,7 +32,7 @@
     <name>InstallDlgImpl</name>
     <message>
         <source>Close</source>
-        <translation>Schliessen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Remove
@@ -66,7 +66,7 @@
     </message>
     <message>
         <source>Space Avail</source>
-        <translation>Verf. Speicher</translation>
+        <translation>Verfügbarer Speicher</translation>
     </message>
     <message>
         <source>Output</source>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Start</source>
-        <translation>Starten</translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Options</source>
@@ -119,19 +119,19 @@
     </message>
     <message>
         <source>Force Depends</source>
-        <translation>--force.depends</translation>
+        <translation>Installiere abhängige Pakete</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation>--force-reinstall</translation>
+        <translation>Erlaube Neuinstallation</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation>--force-removal</translation>
+        <translation>Entferne abhängige Pakete</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation>--force-overwrite</translation>
+        <translation>Erlaube Überschreiben bestehender Dateien</translation>
     </message>
     <message>
         <source>Information Level</source>
@@ -158,7 +158,7 @@
     <name>MainWindow</name>
     <message>
         <source>AQPkg - Package Manager</source>
-        <translation>AQPkg- der Paketmanager</translation>
+        <translation>AQPkg - der Paketmanager</translation>
     </message>
     <message>
         <source>Type the text to search for here.</source>
@@ -174,23 +174,23 @@
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation>Klicken Sie hier für eine aktualisierte Fassung der Serverliste.</translation>
+        <translation>Klicken Sie hier um die Paketlisten vom Server zu aktualisieren.</translation>
     </message>
     <message>
         <source>Upgrade</source>
-        <translation>Aktualisieren</translation>
+        <translation>Paket(e) aktualisieren</translation>
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation>Klicken Sie hier, um alle installierten Pakete zu aktualisieren, siofern eine neuere Version vorhanden ist.</translation>
+        <translation>Klicken Sie hier, um alle installierten Pakete zu aktualisieren, sofern eine neuere Version vorhanden ist.</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation>Download</translation>
+        <translation>Herunterladen</translation>
     </message>
     <message>
         <source>Click here to download the currently selected package(s).</source>
-        <translation>Klicken Sie hier um das ausgewählte Paket downzuloaden.</translation>
+        <translation>Klicken Sie hier um die ausgewählten Pakete herunterzuladen.</translation>
     </message>
     <message>
         <source>Apply changes</source>
@@ -198,7 +198,7 @@
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation>Klicken Sie hier, um das ausgewählte Paket zu löschen oder zu aktualisieren.</translation>
+        <translation>Klicken Sie hier, um die ausgewählten Pakete zu installieren, zu löschen oder zu aktualisieren.</translation>
     </message>
     <message>
         <source>Actions</source>
@@ -206,11 +206,11 @@
     </message>
     <message>
         <source>Show packages not installed</source>
-        <translation>Nicht installierte Pakete anz.</translation>
+        <translation>Nicht installierte Pakete anzeigen</translation>
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
-        <translation>Klicken Sie hier um Pakete anzuzeigen, die nicht installiert wurden.</translation>
+        <translation>Klicken Sie hier, um Pakete anzuzeigen, die nicht installiert sind.</translation>
     </message>
     <message>
         <source>Show installed packages</source>
@@ -222,7 +222,7 @@
     </message>
     <message>
         <source>Show updated packages</source>
-        <translation>Aktualisierte Pakete anz.</translation>
+        <translation>Aktualisierbare Pakete anzeigen</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
@@ -230,11 +230,11 @@
     </message>
     <message>
         <source>Filter by category</source>
-        <translation>Filtern n. Kategorie</translation>
+        <translation>Kategoriefilter</translation>
     </message>
     <message>
         <source>Click here to list packages belonging to one category.</source>
-        <translation>Klicken Sie hier um Pakete aufzulisten, die einer bestmmten Kategorie zugehören.</translation>
+        <translation>Klicken Sie hier, um Pakete aufzulisten, die einer bestimmten Kategorie zugehören.</translation>
     </message>
     <message>
         <source>Set filter category</source>
@@ -242,7 +242,7 @@
     </message>
     <message>
         <source>Click here to change package category to used filter.</source>
-        <translation>Klicken Sie hier um die Paketkategorie in den verwendeten Filter zu übernehmen.</translation>
+        <translation>Klicken Sie hier, um die Paketkategorie in den verwendeten Filter zu übernehmen.</translation>
     </message>
     <message>
         <source>Find</source>
@@ -250,11 +250,11 @@
     </message>
     <message>
         <source>Click here to search for text in package names.</source>
-        <translation>Klicken Sie hier um Text in Paketnamen zu suchen.</translation>
+        <translation>Klicken Sie hier, um nach Paketnamen zu suchen.</translation>
     </message>
     <message>
         <source>Find next</source>
-        <translation>Nächstes finden</translation>
+        <translation>Nächstes suchen</translation>
     </message>
     <message>
         <source>Click here to find the next package name containing the text you are searching for.</source>
@@ -266,15 +266,15 @@
     </message>
     <message>
         <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
-        <translation>Klicken Sie hier um die alphabetische Schnellliste ein- und auszublenden.</translation>
+        <translation>Klicken Sie hier, um die alphabetische Schnellliste ein- und auszublenden.</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Anzg.</translation>
+        <translation>Anzeigen</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation>Konfiguration</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Click here to configure this application.</source>
@@ -282,7 +282,7 @@
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
-        <translation>Klicken Sie hier um die Finden-Leiste auszublenden.</translation>
+        <translation>Klicken Sie hier um die Suchleiste auszublenden.</translation>
     </message>
     <message>
         <source>Servers:</source>
@@ -305,17 +305,17 @@ A blue dot with a star indicates that a newer version of the package is availabl
 
 Click inside the box at the left to select a package.</source>
         <translation>Dies ist eine Liste aller Pakete des oben gewählten Feed-Servers.
-Eine blaue Kugel neben dem Paketnamen zeigt an dass das Paket zur Zeit installiert ist.
-Ein blauer Punkt mit einem gelben Stern zeit dass eine neuere Version des Pakets auf dem Server verfügbar ist.
-Um ein Paket auszuwählen klicken Sie in das Rechtecke auf der linken Seite.</translation>
+Eine blaue Kugel neben dem Paketnamen zeigt an, dass das Paket installiert ist.
+Ein blauer Punkt mit einem gelben Stern zeigt, dass eine neuere Version des Pakets auf dem Server verfügbar ist.
+Um ein Paket auszuwählen klicken Sie in das Rechteck auf der linken Seite.</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Löschen</translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Click here to uninstall the currently selected package(s).</source>
-        <translation>Klicken Sie hier um asgewählte Pakete zu entfernen</translation>
+        <translation>Klicken Sie hier um die ausgewählten Pakete zu entfernen.</translation>
     </message>
     <message>
         <source>Building server list:
@@ -360,7 +360,7 @@ Um ein Paket auszuwählen klicken Sie in das Rechtecke auf der linken Seite.</tr
     </message>
     <message>
         <source>Refreshing server package lists</source>
-        <translation>Aktualisierung der Paketliste</translation>
+        <translation>Aktualisiere die Paketliste</translation>
     </message>
     <message>
         <source>WARNING: Upgrading while
@@ -369,12 +369,12 @@ is NOT recommended!
 
 Are you sure?
 </source>
-        <translation>WARNUNG !!!
+        <translation>WARNUNG
 Ein Upgrade während
 OPIE/Qtopia läuft ist
 nicht zu empfehlen.
 
-Sind Sie sicher ?</translation>
+Sind Sie sicher?</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -382,17 +382,16 @@ Sind Sie sicher ?</translation>
     </message>
     <message>
         <source>Upgrading installed packages</source>
-        <translation>Installierte Pakete upgraden</translation>
+        <translation>Installierte Pakete aktualisieren</translation>
     </message>
     <message>
         <source>Are you sure you wish to delete
 %1?</source>
-        <translation>Sind Sie sicher %1 
-löschen zu wollen ?</translation>
+        <translation>Soll %1 entfernt werden?</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation>Sind Sie sicher ?</translation>
+        <translation>Sind Sie sicher?</translation>
     </message>
     <message>
         <source>No</source>
@@ -404,15 +403,15 @@ löschen zu wollen ?</translation>
     </message>
     <message>
         <source>Download to where</source>
-        <translation>Wohin downloaden </translation>
+        <translation>Herunterladen nach</translation>
     </message>
     <message>
         <source>Enter path to download to</source>
-        <translation>Geben Sie den Downloadpfad ein</translation>
+        <translation>Geben Sie den Zielpfad zum Herunterladen ein.</translation>
     </message>
     <message>
         <source>Install Remote Package</source>
-        <translation>Entferntes Paket installieren</translation>
+        <translation>Paket vom Server installieren</translation>
     </message>
     <message>
         <source>Enter package location</source>
@@ -434,7 +433,7 @@ löschen zu wollen ?</translation>
         <source>Do you wish to remove or reinstall
 %1?</source>
         <translation>Möchten Sie %1
-löschen oder neu installieren ?</translation>
+löschen oder neu installieren?</translation>
     </message>
     <message>
         <source>Remove or ReInstall</source>
@@ -452,7 +451,7 @@ löschen oder neu installieren ?</translation>
         <source>Do you wish to remove or upgrade
 %1?</source>
         <translation>Möchten Sie %1
-löschen oder aktualisieren ?</translation>
+löschen oder aktualisieren?</translation>
     </message>
     <message>
         <source>Remove or Upgrade</source>
@@ -471,50 +470,50 @@ löschen oder aktualisieren ?</translation>
     <name>PackageWindow</name>
     <message>
         <source>&lt;b&gt;Description&lt;/b&gt; - </source>
-        <translation>&lt;b&gt;Bechreibung&lt;/B&gt;</translation>
+        <translation>&lt;b&gt;Beschreibung&lt;/b&gt;: </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Installed To&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Installiert&lt;/B&gt;</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Installiert nach&lt;/b&gt;: </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Size&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Größe&lt;/b&gt; - </translation>
+        <translation>&lt;p&gt;&lt;b&gt;Größe&lt;/b&gt;: </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Sektion&lt;/b&gt; -</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Kategorie&lt;/b&gt;: </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Filename&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Dateiname&lt;/b&gt; - </translation>
+        <translation>&lt;p&gt;&lt;b&gt;Dateiname&lt;/b&gt;: </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Installiete Version&lt;/b&gt; - </translation>
+        <translation>&lt;p&gt;&lt;b&gt;Installierte Version&lt;/b&gt;: </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Verfügbare Version&lt;/b&gt; - </translation>
+        <translation>&lt;p&gt;&lt;b&gt;Verfügbare Version&lt;/b&gt;: </translation>
     </message>
     <message>
         <source>Package Information</source>
-        <translation>Paketinformation</translation>
+        <translation>Paketinformationen</translation>
     </message>
     <message>
         <source>Package information is unavailable</source>
-        <translation>Paketinformation nicht verfügbar</translation>
+        <translation>Paketinformationen sind nicht verfügbar</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Schliessen</translation>
+        <translation>Schließen</translation>
     </message>
 </context>
 <context>
     <name>SettingsImpl</name>
     <message>
         <source>Configuration</source>
-        <translation>Konfiguration</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Servers</source>
@@ -526,7 +525,7 @@ löschen oder aktualisieren ?</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation>Proxys</translation>
+        <translation>Proxies</translation>
     </message>
     <message>
         <source>New</source>
@@ -550,11 +549,11 @@ löschen oder aktualisieren ?</translation>
     </message>
     <message>
         <source>Active Server</source>
-        <translation>Aktive Server</translation>
+        <translation>Aktiver Server</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation>Aktualisierung</translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <source>Destination</source>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>MScanListView</name>
     <message>
@@ -7,23 +8,23 @@
     </message>
     <message>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <source>MAC</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC-Adresse</translation>
     </message>
     <message>
         <source>Chn</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanal</translation>
     </message>
     <message>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>W</translation>
     </message>
     <message>
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation>T</translation>
     </message>
     <message>
         <source>Manufacturer</source>
@@ -126,7 +127,13 @@ Martin J. Muench&lt;br&gt;
 Michael Lauer&lt;br&gt;&lt;hr&gt;
 &lt;b&gt;www.remote-exploit.org&lt;/b&gt;
 &lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p align=center&gt;
+&lt;hr&gt;
+Max Moser&lt;br&gt;
+Martin J. Muench&lt;br&gt;
+Michael Lauer&lt;br&gt;&lt;hr&gt;
+&lt;b&gt;www.remote-exploit.org&lt;/b&gt;
+&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Nets</source>

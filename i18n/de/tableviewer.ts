@@ -1,69 +1,70 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>QObject</name>
     <message>
         <source>KeyList::addKey() Cannot make default value for type %1, Key not added.</source>
-        <translation type="unfinished"></translation>
+        <translation>KeyList::addKey() KeyList::addKey() Kann Standardwert für den Typ %1 nicht setzen, Schlüssel nicht hinzugefügt.</translation>
     </message>
     <message>
         <source>DataElem::setField(%1, %2) No valid type found</source>
-        <translation type="unfinished"></translation>
+        <translation>DataElem::setField(%1, %2) Kein gültiger Typ gefunden</translation>
     </message>
 </context>
 <context>
     <name>TVBrowseKeyEntry</name>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
         <source>key</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüssel</translation>
     </message>
 </context>
 <context>
     <name>TVKeyEdit_gen</name>
     <message>
         <source>TableViewer - Edit Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabellenbetrachter - Schlüssel bearbeiten</translation>
     </message>
     <message>
         <source>Key Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüsselname</translation>
     </message>
     <message>
         <source>Key Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüsseltyp</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Clear All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle löschen</translation>
     </message>
 </context>
 <context>
     <name>TVListView</name>
     <message>
         <source>List View</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste anzeigen</translation>
     </message>
 </context>
 <context>
     <name>TableViewerWindow</name>
     <message>
         <source>Table Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabellenbetrachter</translation>
     </message>
     <message>
         <source>could not load Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Dokument konnte nicht geladen werden</translation>
     </message>
 </context>
 </TS>
