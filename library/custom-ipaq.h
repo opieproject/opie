@@ -19,3 +19,6 @@
 **********************************************************************/
 
 #define QPE_NEED_CALIBRATION
+#define OPIE_SOUND_FRAGMENT_SHIFT 14
+#define USE_REALTIME_AUDIO_THREAD
+#define OPIE_NEW_MALLOC

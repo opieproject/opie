@@ -21,6 +21,9 @@
 #define QPE_NEED_CALIBRATION
 #define QPE_HAVE_TOGGLELIGHT
 #define QPE_STARTMENU
+#define USE_REALTIME_AUDIO_THREAD
+#define OPIE_NEW_MALLOC
+
 
 #include <unistd.h>
 #include <stdio.h>

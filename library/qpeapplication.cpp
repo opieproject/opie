@@ -167,7 +167,7 @@ public:
             // Addendum: Only Sharp currently has models with high resolution but (physically) small displays,
             // so this is only useful if QT_QWS_SIMPAD is NOT defined. E.g. SIMpad has 800x600 but has
             // a (physically) large enough display to use the small icons
-#ifndef QT_QWS_SIMPAD
+#if defined(OPIE_HIGH_RES_SMALL_PHY)
             if ( QPEApplication::desktop() ->width() >= 600 && ( mw->inherits("QMainWindow") || mw->isA("QMainWindow") ) )  {
                 ( (  QMainWindow* ) mw )->setUsesBigPixmaps( true );
             }
@@ -590,10 +590,10 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 		AppLnk::setSmallIconSize( 10 );
 		AppLnk::setBigIconSize( 28 );
 	}
-#ifndef QT_QWS_SIMPAD
+#ifndef OPIE_HIGH_RES_SMALL_PHY
 	else if ( dw > 600 ) {
-                               setFont( QFont( "vera", 16 ) );
-                                AppLnk::setSmallIconSize( 24 );
+                setFont( QFont( "vera", 16 ) );
+                AppLnk::setSmallIconSize( 24 );
 		AppLnk::setBigIconSize( 48 );
 	}
 #endif
@@ -2008,7 +2008,7 @@ void __cxa_pure_virtual()
 #endif
 
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX) || defined(QT_QWS_RAMSES)
+#if defined(OPIE_NEW_MALLOC)
 
 // The libraries with the skiff package (and possibly others) have
 // completely useless implementations of builtin new and delete that

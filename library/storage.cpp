@@ -21,9 +21,7 @@
 **********************************************************************/
 
 #include <qpe/storage.h>
-#if defined(QT_QWS_SL5XXX)
 #include <qpe/custom.h>
-#endif
 
 #include <qfile.h>
 #include <qtimer.h>
