@@ -1,17 +1,17 @@
 <!DOCTYPE UI><UI>
-<class>DialupBase</class>
+<class>PPP</class>
 <widget>
     <class>QDialog</class>
     <property stdset="1">
         <name>name</name>
-        <cstring>Form1</cstring>
+        <cstring>PPP</cstring>
     </property>
     <property stdset="1">
         <name>geometry</name>
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>273</width>
+            <width>277</width>
             <height>340</height>
         </rect>
     </property>
@@ -346,7 +346,7 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>1</string>
+                            <string>6</string>
                         </property>
                         <property stdset="1">
                             <name>alignment</name>
@@ -735,16 +735,16 @@
         <slot>setDisabled(bool)</slot>
     </connection>
     <connection>
-        <sender>connectdelay</sender>
-        <signal>valueChanged(int)</signal>
-        <receiver>connectdelay_text</receiver>
-        <slot>setNum(int)</slot>
-    </connection>
-    <connection>
         <sender>dial_manual</sender>
         <signal>toggled(bool)</signal>
         <receiver>idletime</receiver>
         <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>connectdelay</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>connectdelay_text</receiver>
+        <slot>setNum(int)</slot>
     </connection>
 </connections>
 <tabstops>
