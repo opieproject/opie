@@ -73,7 +73,7 @@ public:
     void setLinkFile( const QString& filename );
     void setComment( const QString& comment );
     void setType( const QString& mimetype );
-    inline void setRotation ( const QString &rotation ) { mRotation = rot; } // inline for BC 
+    inline void setRotation ( const QString &rot ) { mRotation = rot; } // inline for BC 
     void setIcon( const QString& iconname );
     void setCategories( const QArray<int> &v );
     bool writeLink() const;
