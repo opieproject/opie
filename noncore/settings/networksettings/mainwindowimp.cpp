@@ -67,7 +67,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   // Load connections.
   // /usr/local/kde/lib/libinterfaces.la
 #ifdef QWS
-  loadModules(QPEApplication::qpeDir() + "/plugins/networksettings");
+  loadModules(QPEApplication::qpeDir() + "plugins/networksettings");
 #else
   loader = KLibLoader::self();
   loadModules(QString("/usr/")+KStandardDirs::kde_default("lib"));
