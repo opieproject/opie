@@ -1,11 +1,10 @@
 /*
                              This file is part of the Opie Project
-                             (C) 2003 Michael 'Mickey' Lauer <mickey@Vanille.de>
-              =.
+              =.             (C) 2003-2004 Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
+.> <`_,   >  .   <=          redistribute it and/or modify it under
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
  - .   .-<_>     .<>         Foundation; either version 2 of the License,
@@ -25,7 +24,6 @@
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
-
 */
 
 #include "omanufacturerdb.h"

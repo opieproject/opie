@@ -197,7 +197,7 @@ namespace Internal {
 
 void dumpBytes( const unsigned char* data, int num )
 {
-    printf( "Dumping %d bytes @ %0x", num, data );
+    printf( "Dumping %d bytes @ 0x%p", num, data );
     printf( "-------------------------------------------\n" );
 
     for ( int i = 0; i < num; ++i )
