@@ -24,10 +24,6 @@
         </sizepolicy>
     </property>
     <property stdset="1">
-        <name>caption</name>
-        <string>MyDialog1</string>
-    </property>
-    <property stdset="1">
         <name>sizeGripEnabled</name>
         <bool>true</bool>
     </property>

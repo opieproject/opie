@@ -333,9 +333,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 
 
 		switch( QMessageBox::information( this, tr ( "Right file type ?" ),
-						  tr( "The selected File" ) + ( "\n" ) +
-						  tr ("does not end with \".vcf\" ") + ( "\n" ) +
-						  tr ( "Do you really want to open it?" ),
+						  tr( "The selected file \n does not end with \".vcf\" \n. Do you really want to open it?" ),
 						  tr( "&Yes" ), tr( "&No" ), QString::null,
 						  0,      // Enter == button 0
 						  2 ) ) { // Escape == button 2
@@ -809,7 +807,7 @@ void AddressbookWindow::slotWrapAround()
 	qWarning("Got wrap signal !");
 // 	if ( doNotifyWrapAround )
 // 		QMessageBox::information( this, tr( "End of list" ),
-// 					  tr( "End of list. Wrap around now.. !" ) + "\n" );
+// 					  tr( "End of list. Wrap around now...!" ) + "\n" );
 		
 }
 
