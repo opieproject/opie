@@ -145,17 +145,17 @@ void DebugBackend::debug(unsigned short level, unsigned int, const QString& data
     else areaName = "<unknown>";
 
     switch( m_outp ) {
-    case -1: // ignore
+    case ODEBUG_IGNORE:
         return;
-    case 0: // File
+    case ODEBUG_FILE:
         return debugFile( areaName, data );
-    case 1: // Message Box
+    case ODEBUG_MSGBOX:
         return debugMsgB( areaName, data );
-    case 2:
+    case ODEBUG_STDERR:
         return debugShel( areaName,data );
-    case 3: // syslog
+    case ODEBUG_SYSLOG:
         return debugSysl( priority, data );
-    case 4: // socket
+    case ODEBUG_SOCKET:
         return debugSock( areaName, data );
     }
 }

@@ -67,6 +67,13 @@ class ondbgstream;
 #define ofatal Opie::Core::odFatal()
 #define oendl "\n"
 
+const int ODEBUG_IGNORE = -1;
+const int ODEBUG_FILE   = 0;
+const int ODEBUG_MSGBOX = 1;
+const int ODEBUG_STDERR = 2;
+const int ODEBUG_SYSLOG = 3;
+const int ODEBUG_SOCKET = 4;
+
 class odbgstreamprivate;
 /**
  * odbgstream is a text stream that allows you to print debug messages.
@@ -397,7 +404,7 @@ class ondbgstream {
     ondbgstream& operator<<( const QStringList & ) { return *this; }
     ondbgstream& operator<<( const QColor & ) { return *this; }
     ondbgstream& operator<<( const QBrush & ) { return *this; }
-    
+
 private:
     class Private;
     Private *d;
