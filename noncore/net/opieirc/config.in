@@ -1,4 +1,4 @@
   config OPIEIRC
     boolean "opie-irc (chat via your favorite IRC server)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIEUI2 && LIBQTAUX
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && LIBQTAUX
