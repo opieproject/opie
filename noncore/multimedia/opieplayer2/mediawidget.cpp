@@ -114,20 +114,14 @@ void MediaWidget::paintButton( QPainter &p, const Button &button )
         p.drawPixmap( upperLeftOfButtonMask, button.pixUp );
 }
 
-void MediaWidget::setToggleButton( int buttonId, bool down )
+void MediaWidget::setToggleButton( Button &button, bool down )
 {
-    qDebug("setToggleButton %d", buttonId );
-
-    Button &button = buttons[ buttonId ];
-
     if ( down != button.isDown )
-        toggleButton( buttonId );
+        toggleButton( button );
 }
 
-void MediaWidget::toggleButton( int buttonId )
+void MediaWidget::toggleButton( Button &button )
 {
-    Button &button = buttons[ buttonId ];
-
     button.isDown = !button.isDown;
 
     paintButton( button );

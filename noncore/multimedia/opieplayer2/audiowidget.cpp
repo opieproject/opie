@@ -341,7 +341,7 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
 
             if ( isOnButton && !buttons[i].isHeld ) {
                 buttons[i].isHeld = TRUE;
-                toggleButton(i);
+                toggleButton( buttons[ i ] );
                 switch (i) {
                 case VolumeUp:
                     emit moreClicked();
@@ -358,13 +358,13 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                 }
             } else if ( !isOnButton && buttons[i].isHeld ) {
                 buttons[i].isHeld = FALSE;
-                toggleButton(i);
+                toggleButton( buttons[ i ] );
             }
         } else {
             if ( buttons[i].isHeld ) {
                 buttons[i].isHeld = FALSE;
                 if ( buttons[i].type != ToggleButton ) {
-                    setToggleButton( i, FALSE );
+                    setToggleButton( buttons[ i ], FALSE );
                 }
                 qDebug("mouseEvent %d", i);
                 handleCommand( static_cast<Command>( i ), buttons[ i ].isDown );

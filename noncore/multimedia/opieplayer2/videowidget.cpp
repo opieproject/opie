@@ -250,7 +250,7 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
 
             if ( isOnButton && !buttons[i].isHeld ) {
                 buttons[i].isHeld = TRUE;
-                toggleButton(i);
+                toggleButton( buttons[ i ] );
 
                 switch (i) {
                 case VideoVolUp:
@@ -262,25 +262,25 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 }
             } else if ( !isOnButton && buttons[i].isHeld ) {
                         buttons[i].isHeld = FALSE;
-                        toggleButton(i);
+                        toggleButton( buttons[ i ] );
             }
         } else {
 
             if ( buttons[i].isHeld ) {
                 buttons[i].isHeld = FALSE;
                 if ( buttons[i].type != ToggleButton ) {
-                    setToggleButton( i, FALSE );
+                    setToggleButton( buttons[ i ], FALSE );
                 }
 
                 switch(i) {
 
                 case VideoPlay: {
                     if( mediaPlayerState.isPaused() ) {
-                        setToggleButton( i, FALSE );
+                        setToggleButton( buttons[ i ], FALSE );
                         mediaPlayerState.setPaused( FALSE );
                         return;
                     } else if( !mediaPlayerState.isPaused() ) {
-                        setToggleButton( i, TRUE );
+                        setToggleButton( buttons[ i ], TRUE );
                         mediaPlayerState.setPaused( TRUE );
                         return;
                     } else {
@@ -423,11 +423,11 @@ XineVideoWidget* VideoWidget::vidWidget() {
 
 
 void VideoWidget::setFullscreen ( bool b ) {
-    setToggleButton( VideoFullscreen, b );
+    setToggleButton( buttons[ VideoFullscreen ], b );
 }
 
 
 void VideoWidget::setPlaying( bool b) {
-    setToggleButton( VideoPlay, b );
+    setToggleButton( buttons[ VideoPlay ], b );
 }
 
