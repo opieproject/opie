@@ -605,8 +605,8 @@ void PackageManager::writeSettings()
 	if ( !ipkg_old ) {
 	    for (int i=0; i<(int)settings->servers->count(); i++) {
 		QString url = serverurl[i] ? *serverurl[i] : QString("???");
-		if ( !settings->servers->isSelected(i) )
-		    s << "#";
+//		if ( !settings->servers->isSelected(i) )
+//		    s << "#";
 		s << "src " << settings->servers->text(i) << " " << url << "\n";
 	    }
 	    s << "dest root /\n"; // ### need UI
