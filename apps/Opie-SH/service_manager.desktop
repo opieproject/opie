@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
 Exec=service_manager.sh
-Icon=service_manager
+Icon=opie-sh-scripts/service_manager
 Name=Service Manager

@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=rsync helper
 Exec=rsyncme.sh
-Icon=rsyncme
+Icon=opie-sh-scripts/rsyncme
 Type=Application
 Name=RSYNC Helper
