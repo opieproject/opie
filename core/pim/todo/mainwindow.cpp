@@ -75,6 +75,7 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f ) :
 //     t.start();
     mView = 0l;
     mStack = new QWidgetStack(this, "main stack");
+    setCentralWidget( mStack );
     setCaption( tr("Todo") );
     QString str;
     table = new TodoTable( this );
