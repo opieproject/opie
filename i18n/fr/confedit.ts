@@ -4,19 +4,19 @@
     <name>EditWidget</name>
     <message>
         <source>File Name:</source>
-        <translation>Nom Fichier :</translation>
+        <translation>Nom Fichier : </translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation>Groupe :</translation>
+        <translation>Groupe : </translation>
     </message>
     <message>
         <source>Key:</source>
-        <translation>Clé :</translation>
+        <translation>Clé : </translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation>Valeur :</translation>
+        <translation>Valeur : </translation>
     </message>
 </context>
 <context>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation>ne peut être ouvert.</translation>
+        <translation>ne peut pas être ouvert.</translation>
     </message>
 </context>
 <context>
@@ -61,7 +61,7 @@
     <name>MainWindow</name>
     <message>
         <source>Conf File Editor</source>
-        <translation>Editeur de fichier conf</translation>
+        <translation>Editeur Fichier Conf</translation>
     </message>
     <message>
         <source>Save</source>

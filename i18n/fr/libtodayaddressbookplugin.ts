@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Days look ahead: </source>
-        <translation>Jours en avant :</translation>
+        <translation>Jours en avant : </translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Set Headline Color: </source>
-        <translation>Couleurs des Titres :</translation>
+        <translation>Couleurs des Titres : </translation>
     </message>
     <message>
         <source>Colors for the headlines !</source>
@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>Set Entry Color: </source>
-        <translation>Couleur des Entrées :</translation>
+        <translation>Couleur des Entrées : </translation>
     </message>
     <message>
         <source>This color will be used for shown birthdays/anniversaries !</source>
@@ -70,23 +70,26 @@ jours</translation>
     <name>QObject</name>
     <message>
         <source>AddressBook plugin</source>
-        <translation>Module &quot;Répertoire d&apos;Adresse&quot;</translation>
+        <translation>Module &quot;Contacts&quot;</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Prochaine date de naissance dans &lt;b&gt; %1 &lt;/b&gt; jours :</translation>
+        <translation>Prochain anniversaire de naissance
+prévu dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas d&apos;anniversaire dans les &lt;b&gt;%1&lt;/b&gt; prochains jours !</translation>
+        <translation>Pas d&apos;anniversaire de naissance prévu
+dans les &lt;b&gt;%1&lt;/b&gt; prochains jours !</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Prochain anniversaire dans &lt;b&gt;%1&lt;/b&gt; jours :</translation>
+        <translation>Prochain anniversaire dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas d&apos;anniversaire dans les &lt;b&gt;%1&lt;/b&gt; prochains jours !</translation>
+        <translation>Pas d&apos;anniversaire dans les &lt;b&gt;%1&lt;/b&gt;
+prochains jours !</translation>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>

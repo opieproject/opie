@@ -1,208 +1,213 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückwärts</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorwärts</translation>
     </message>
 </context>
 <context>
     <name>QtRec</name>
     <message>
         <source>OpieRecord </source>
-        <translation type="unfinished"></translation>
+        <translation>OpieRecord</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateien</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Sampling Rate</translation>
     </message>
     <message>
         <source>44100</source>
-        <translation type="unfinished"></translation>
+        <translation>44100</translation>
     </message>
     <message>
         <source>32000</source>
-        <translation type="unfinished"></translation>
+        <translation>32000</translation>
     </message>
     <message>
         <source>22050</source>
-        <translation type="unfinished"></translation>
+        <translation>22050</translation>
     </message>
     <message>
         <source>16000</source>
-        <translation type="unfinished"></translation>
+        <translation>16000</translation>
     </message>
     <message>
         <source>11025</source>
-        <translation type="unfinished"></translation>
+        <translation>11025</translation>
     </message>
     <message>
         <source>8000</source>
-        <translation type="unfinished"></translation>
+        <translation>8000</translation>
     </message>
     <message>
         <source>Limit Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe begrenzen</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbegrenzt</translation>
     </message>
     <message>
         <source>File Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei Verzeichnis</translation>
     </message>
     <message>
         <source>Bit Depth</source>
-        <translation type="unfinished"></translation>
+        <translation>Bit Tiefe</translation>
     </message>
     <message>
         <source>16</source>
-        <translation type="unfinished"></translation>
+        <translation>16</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinein</translation>
     </message>
     <message>
         <source>Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinaus</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Lautstärke</translation>
     </message>
     <message>
         <source>Low Disk Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Geringer Plattenplatz</translation>
     </message>
     <message>
         <source>You are running low of
 recording space
 or a card isn&apos;t being recognized</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufnahmeplatz wird 
+knapp oder eine Karte 
+wurde nicht erkannt</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunden</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wollen Sie wirklich die ausgewählte
+Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Could not remove file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Datei nicht löschen.</translation>
     </message>
     <message>
         <source>Opierec</source>
-        <translation type="unfinished"></translation>
+        <translation>Opierec</translation>
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte zu spielende Datei auswählen</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Notiz</translation>
     </message>
     <message>
         <source>Could not open audio file.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Tondatei nicht öffnen.
+</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Apspielen</translation>
     </message>
     <message>
         <source>Send with Ir</source>
-        <translation type="unfinished"></translation>
+        <translation>Über IR senden</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Umbenennen</translation>
     </message>
     <message>
         <source>Ir Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>IR Übertragung</translation>
     </message>
     <message>
         <source>Ir sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>IR übertragen.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Rec</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufn</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Ort</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Wave Compression (smaller files)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wave Komprimierung (kleinere Dateien)</translation>
     </message>
     <message>
         <source>auto Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>auto still</translation>
     </message>
     <message>
         <source>mute</source>
-        <translation type="unfinished"></translation>
+        <translation>still</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stopp</translation>
     </message>
 </context>
 </TS>

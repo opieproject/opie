@@ -3,7 +3,7 @@
     <name>KJezzball</name>
     <message>
         <source>Bounce</source>
-        <translation type="unfinished"></translation>
+        <translation>Bounce</translation>
     </message>
     <message>
         <source>&amp;New game</source>
@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Bounce Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Poziom Bounce</translation>
     </message>
     <message>
         <source>Score: %1</source>
@@ -76,7 +76,8 @@ Punkty: %1</translation>
     <message>
         <source>Successfully cleared more than 75%.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ukonczone ponad 75%.
+</translation>
     </message>
     <message>
         <source>%1 points: 15 points per life
@@ -104,7 +105,7 @@ Tym razem otrzymujesz %2 zyc!</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>O</translation>
     </message>
     <message>
         <source>Written by: Stefan Schimanski

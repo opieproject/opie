@@ -26,15 +26,15 @@
     <name>EditAccount</name>
     <message>
         <source>Edit Account</source>
-        <translation>Account bearbeiten</translation>
+        <translation>Konto bearbeiten</translation>
     </message>
     <message>
         <source>Create new Account</source>
-        <translation>Account erstellen</translation>
+        <translation>Konto erstellen</translation>
     </message>
     <message>
         <source>Account name</source>
-        <translation>Accountname</translation>
+        <translation>Kontoname</translation>
     </message>
     <message>
         <source>Your name</source>
@@ -81,7 +81,7 @@
     </message>
     <message>
         <source>Accounts</source>
-        <translation>Accounts</translation>
+        <translation>Konten</translation>
     </message>
     <message>
         <source>Get Mail in</source>
@@ -89,11 +89,11 @@
     </message>
     <message>
         <source>Edit account</source>
-        <translation>Account bearbeiten</translation>
+        <translation>Konto bearbeiten</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation>Account löschen</translation>
+        <translation>Konto löschen</translation>
     </message>
     <message>
         <source>Send mail</source>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>You must create an account</source>
-        <translation>Sie müssen einen Account erstellen ...</translation>
+        <translation>Sie müssen ein Konto erstellen</translation>
     </message>
     <message>
         <source>Main operation toolbar</source>
@@ -175,24 +175,25 @@ nicht heruntergeladen werden kann</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Unknown response from server&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Unbekannte Antwort vom Server&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;host not found&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Host nicht gefunden&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;connection refused&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Verbindung abgelehnt&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;socket packet error&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Socket Paket Fehler&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Login failed
 Check user name and password&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Login Fehler! Überprüfen 
+Sie Name und Passwort&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Receiving error</source>
@@ -203,6 +204,20 @@ Check user name and password&lt;/qt&gt;</source>
 </source>
         <translation>OK
 </translation>
+    </message>
+    <message>
+        <source>Mailit ! No account defined</source>
+        <translation>Mailit! Kein Konto definiert</translation>
+    </message>
+    <message>
+        <source>Delete account:
+</source>
+        <translation>Konto löschen:
+</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Neu</translation>
     </message>
 </context>
 <context>
@@ -257,11 +272,11 @@ Möchten Sie dies jetzt durchführen ?</translation>
     </message>
     <message>
         <source>Mailit</source>
-        <translation type="unfinished"></translation>
+        <translation>Mailit</translation>
     </message>
     <message>
         <source>Read Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail lesen</translation>
     </message>
 </context>
 <context>
@@ -356,7 +371,7 @@ können.</translation>
     </message>
     <message>
         <source>This button opens the address selector with all mail adresses from your Opie addressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Knopf öffnet die Adressen-Auswahl mit allen Mailadressen aus Ihrem Opie Adressbuch</translation>
     </message>
 </context>
 <context>
@@ -488,27 +503,27 @@ Halten Sie den Stift gedrückt für weitere Optionen.</translation>
     </message>
     <message>
         <source>Exploring attatchments</source>
-        <translation type="unfinished"></translation>
+        <translation>Anhänge anschauen</translation>
     </message>
     <message>
         <source>Attatchment</source>
-        <translation type="unfinished"></translation>
+        <translation>Anhang</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Installiert</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nein</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
 </context>
 <context>

@@ -28,14 +28,14 @@
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation>Composition Elementaire (%) :</translation>
+        <translation>Composition Elementaire (%) : </translation>
     </message>
 </context>
 <context>
     <name>OxydataWidget</name>
     <message>
         <source>Weight:</source>
-        <translation type="obsolete">Masse :</translation>
+        <translation type="obsolete">Masse : </translation>
     </message>
     <message>
         <source>Block</source>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Categories</name>
     <message>
@@ -863,6 +864,22 @@ frei und versuchen Sie es noch einmal
     <message>
         <source>Dec</source>
         <translation>Dez</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <source>Could not find the application </source>
+        <translation>Konnte die Anwendung nicht finden</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Could not start the application </source>
+        <translation>Konnte die Anwendung nicht starten</translation>
     </message>
 </context>
 <context>

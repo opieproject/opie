@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation>Chronomètre</translation>
+        <translation>Chrono</translation>
     </message>
     <message>
         <source>Start</source>
@@ -20,11 +20,11 @@
     </message>
     <message>
         <source>Reset</source>
-        <translation>Mettre à zéro</translation>
+        <translation>Initialiser</translation>
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation>Définir l&apos;alarme</translation>
+        <translation>Définir Alarme</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation>Paramétrer la date et l&apos;heure.</translation>
+        <translation>Paramétrer Date et Heure.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
@@ -80,12 +80,12 @@
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation>Délai avant Sonnerie
-(minutes)</translation>
+        <translation>Délai avant
+Sonnerie (mn)</translation>
     </message>
     <message>
         <source>mp3 alarm</source>
-        <translation>alarme mp3</translation>
+        <translation>Alarme mp3</translation>
     </message>
     <message>
         <source>All</source>

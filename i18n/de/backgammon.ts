@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AI_Dialog</name>
     <message>
@@ -19,7 +20,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Expose&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Aufdecken&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Protect&lt;/b&gt;</source>
@@ -52,7 +53,8 @@
     <message>
         <source>Expose you own pieces.
 After such a move only one piece will remain in the slot</source>
-        <translation type="unfinished"></translation>
+        <translation>Die eigenen Steine aufdecken.
+Danach wird nur ein Stein im Schacht verbleiben</translation>
     </message>
     <message>
         <source>Protect a single piece by

@@ -4,7 +4,7 @@
     <name>LogoutApplet</name>
     <message>
         <source>Logout shortcut</source>
-        <translation>Raccouci Déconnexion</translation>
+        <translation>Applet Déconnexion</translation>
     </message>
     <message>
         <source>Logout</source>

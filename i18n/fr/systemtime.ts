@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>Continue?</source>
-        <translation>Continuer?</translation>
+        <translation>Continuer ?</translation>
     </message>
     <message>
         <source>Running:
@@ -387,7 +387,8 @@ ntpdate</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation>secondes</translation>
+        <translation>Afficher les infos de prédiction
+de l&apos;heure</translation>
     </message>
 </context>
 <context>
@@ -476,19 +477,23 @@ ntpdate</translation>
     </message>
     <message>
         <source>minutes between time updates</source>
-        <translation>minutes entre 2 synchronisation de l&apos;heure</translation>
+        <translation>minutes entre 2 synchronisations
+de l&apos;heure</translation>
     </message>
     <message>
         <source>minutes between prediction updates</source>
-        <translation>minutes entre 2 mise à jour de prévision</translation>
+        <translation>minutes entre 2 mise-à-jour
+de prévision</translation>
     </message>
     <message>
         <source>Display time server information</source>
-        <translation>Afficher les informations sur le serveur NTP</translation>
+        <translation>Afficher les informations sur
+le serveur NTP</translation>
     </message>
     <message>
         <source>Display time prediction information</source>
-        <translation>Afficher les infos de prediction de l&apos;heure</translation>
+        <translation>Afficher les infos de prédiction
+de l&apos;heure</translation>
     </message>
 </context>
 <context>

@@ -861,6 +861,22 @@ novamente.</translation>
         <source>Dec</source>
         <translation>Dez</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation>Erro</translation>
+    </message>
+    <message>
+        <source>Could not find the application </source>
+        <translation>Não foi possível encontrar a aplicação</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Could not start the application </source>
+        <translation>Não foi possível iniciar a aplicação</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>

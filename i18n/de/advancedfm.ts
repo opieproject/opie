@@ -40,11 +40,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Lokalansicht</translation>
+        <translation type="obsolete">Lokalansicht</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Fernansicht</translation>
+        <translation type="obsolete">Fernansicht</translation>
     </message>
     <message>
         <source>Size</source>
@@ -268,11 +268,23 @@ and all it&apos;s contents ?</source>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="obsolete">AdvancedFm :: </translation>
+        <translation>AdvancedFm :: </translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="obsolete">kB frei</translation>
+        <translation>kB frei</translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation>Auf Ansicht 1 schalten</translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation>Auf Ansicht 2 schalten</translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation>Noch nicht implementiert</translation>
     </message>
 </context>
 <context>
@@ -363,6 +375,10 @@ Fertig</translation>
     <message>
         <source>Error setting mode</source>
         <translation>Fehler beim Setzen des Modus</translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
+        <translation>dateiBerechtigungen</translation>
     </message>
 </context>
 </TS>

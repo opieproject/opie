@@ -370,7 +370,7 @@ Trozdem beenden?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation>MDMDFSSM</translation>
+        <translation type="obsolete">MDMDFSSM</translation>
     </message>
 </context>
 <context>
@@ -457,7 +457,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Yearly...</source>
-        <translation>Jählich...</translation>
+        <translation>Jährlich...</translation>
     </message>
     <message>
         <source>No Repeat...</source>
@@ -516,7 +516,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Startzeit</translation>
+        <translation type="obsolete">Startzeit</translation>
     </message>
     <message>
         <source>All day</source>
@@ -561,6 +561,10 @@ Trozdem beenden?</translation>
     <message>
         <source>Note...</source>
         <translation>Notizen...</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation>Startzeit</translation>
     </message>
 </context>
 <context>

@@ -15,11 +15,11 @@
     <name>LanguageSettingsBase</name>
     <message>
         <source>Select language</source>
-        <translation>Sélectionner une langue</translation>
+        <translation>Sélectionnez une langue</translation>
     </message>
     <message>
         <source>Language Settings</source>
-        <translation>Configurer la langue</translation>
+        <translation>Langue</translation>
     </message>
 </context>
 </TS>

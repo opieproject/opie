@@ -205,6 +205,19 @@ Verifique nombre de usuario y contraseña&lt;/qt&gt;</translation>
         <translation>Ok
 </translation>
     </message>
+    <message>
+        <source>Mailit ! No account defined</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete account:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EmailHandler</name>

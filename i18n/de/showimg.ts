@@ -122,6 +122,56 @@
     </message>
 </context>
 <context>
+    <name>InfoDialog</name>
+    <message>
+        <source>File Name</source>
+        <translation>Dateiname</translation>
+    </message>
+    <message>
+        <source>Format</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>File Size</source>
+        <translation>Dateigröße</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Größe</translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation>Farben</translation>
+    </message>
+    <message>
+        <source>Alpha</source>
+        <translation>Alpha</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Größe</translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation type="obsolete">Farben</translation>
+    </message>
+    <message>
+        <source>Alpha</source>
+        <translation type="obsolete">Alpha</translation>
+    </message>
+    <message>
+        <source>File Name</source>
+        <translation type="obsolete">Dateiname</translation>
+    </message>
+    <message>
+        <source>File Size</source>
+        <translation type="obsolete">Dateigröße</translation>
+    </message>
+</context>
+<context>
     <name>SettingsDialogBase</name>
     <message>
         <source>Preferences</source>

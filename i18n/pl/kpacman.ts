@@ -83,7 +83,7 @@ the last 10 years of her friendship.
     </message>
     <message>
         <source>KPacman</source>
-        <translation type="unfinished"></translation>
+        <translation>KPacman</translation>
     </message>
 </context>
 <context>
@@ -160,7 +160,7 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source>QTOPIA PORT: CATALIN CLIMOV</source>
-        <translation type="unfinished"></translation>
+        <translation>PORT NA QTOPIA: CATALIN CLIMOV</translation>
     </message>
     <message>
         <source>PRESS CURSOR TO START</source>
@@ -171,15 +171,15 @@ or is of an unknown format.</source>
     <name>Score</name>
     <message>
         <source>  1UP </source>
-        <translation type="unfinished"></translation>
+        <translation>1UP</translation>
     </message>
     <message>
         <source> HIGH SCORE </source>
-        <translation type="unfinished"></translation>
+        <translation>WYSOKI WYNIK</translation>
     </message>
     <message>
         <source>  2UP </source>
-        <translation type="unfinished"></translation>
+        <translation>2UP</translation>
     </message>
     <message>
         <source>     CONGRATULATIONS      </source>
@@ -195,7 +195,7 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source>RNK   SCORE  NAME   DATE</source>
-        <translation type="unfinished"></translation>
+        <translation>RNK   PUNKTY  IMIE   DATA</translation>
     </message>
     <message>
         <source>PAUSED</source>
@@ -203,11 +203,7 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source>@YY@/@MM@/@DD@</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation>@YY@/@MM@/@DD@</translation>
     </message>
 </context>
 <context>
@@ -217,7 +213,7 @@ or is of an unknown format.</source>
 
 The file &apos;@PIXMAPNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Obrazek </translation>
     </message>
     <message>
         <source>Initialization Error</source>

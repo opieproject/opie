@@ -47,11 +47,12 @@
     </message>
     <message>
         <source>Visual Alerts</source>
-        <translation>Alertes visuelles</translation>
+        <translation>Alertes
+Visuelles</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation>Icone de la bare de la tâche</translation>
+        <translation>Icône de la barre de tâche</translation>
     </message>
     <message>
         <source>Key_Space</source>
@@ -99,19 +100,19 @@
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation>Taux d&apos;échantillonage :</translation>
+        <translation>Taux d&apos;échantillonage : </translation>
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation>Répertoire d&apos;enregistrement :</translation>
+        <translation>Répertoire d&apos;enregistrement : </translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation>Touche d&apos;enregistrement :</translation>
+        <translation>Touche d&apos;enregistrement : </translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation>Temps d&apos;enreg. max en secondes :</translation>
+        <translation>Temps d&apos;enreg. max en secondes : </translation>
     </message>
     <message>
         <source>Unlimited</source>

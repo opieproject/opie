@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Sauver</translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation>Sauver sous</translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <source>Close</source>
@@ -32,15 +32,15 @@
     </message>
     <message>
         <source>Font +</source>
-        <translation>Font +</translation>
+        <translation>Zoom avant</translation>
     </message>
     <message>
         <source>Font -</source>
-        <translation>Font -</translation>
+        <translation>Zoom arrière</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Utils</source>

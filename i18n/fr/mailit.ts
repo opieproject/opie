@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>attach...</source>
-        <translation>attache...</translation>
+        <translation>Attacher...</translation>
     </message>
     <message>
         <source>Adding attachments</source>
-        <translation>Ajout de(s) fichier(s)</translation>
+        <translation>Ajout de fichier</translation>
     </message>
 </context>
 <context>
@@ -47,11 +47,13 @@
     </message>
     <message>
         <source>POP username</source>
-        <translation>Nom Utilisateur POP</translation>
+        <translation>Nom Utilisateur
+POP</translation>
     </message>
     <message>
         <source>POP password</source>
-        <translation>Mot de passe POP</translation>
+        <translation>Mot de passe
+POP</translation>
     </message>
     <message>
         <source>POP server</source>
@@ -67,7 +69,8 @@
     </message>
     <message>
         <source>Mail Size (k)</source>
-        <translation>Taille Messages (k)</translation>
+        <translation>Taille
+Message (Ko)</translation>
     </message>
 </context>
 <context>
@@ -86,7 +89,7 @@
     </message>
     <message>
         <source>Get Mail in</source>
-        <translation>Recevoir les messages dans</translation>
+        <translation>Recevoir Messages</translation>
     </message>
     <message>
         <source>Edit account</source>
@@ -206,6 +209,20 @@ Vérifiez le nom d&apos;utilisateur et le mot de passe&lt;/qt&gt;</translation>
         <translation>OK
 </translation>
     </message>
+    <message>
+        <source>Mailit ! No account defined</source>
+        <translation>Aucun compte Défini</translation>
+    </message>
+    <message>
+        <source>Delete account:
+</source>
+        <translation>Supprimer compte : 
+</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Nouveau</translation>
+    </message>
 </context>
 <context>
     <name>EmailHandler</name>
@@ -213,7 +230,7 @@ Vérifiez le nom d&apos;utilisateur et le mot de passe&lt;/qt&gt;</translation>
         <source>Could not locate all files in 
 mail with subject: </source>
         <translation>Impossible de trouver tous 
-les fichiers du message intitulé :</translation>
+les fichiers du message intitulé : </translation>
     </message>
     <message>
         <source>
@@ -447,7 +464,7 @@ Cliquez et garder la pression pour plus d&apos;options.</translation>
     </message>
     <message>
         <source>Click here to reply to the selected mail to CC: addresses also</source>
-        <translation>Cliquez ici pour répondre à toutes les personnes du message sélectionné</translation>
+        <translation>Cliquez ici pour répondre à toutes les destinataires du message</translation>
     </message>
 </context>
 <context>
@@ -462,7 +479,7 @@ Cliquez et garder la pression pour plus d&apos;options.</translation>
     </message>
     <message>
         <source>Sending: </source>
-        <translation>Envoi :</translation>
+        <translation>Envoi : </translation>
     </message>
     <message>
         <source>Sent </source>
@@ -528,15 +545,15 @@ Cliquez et garder la pression pour plus d&apos;options.</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation>A :</translation>
+        <translation>A : </translation>
     </message>
     <message>
         <source>CC:</source>
-        <translation>Cc :</translation>
+        <translation>Cc : </translation>
     </message>
     <message>
         <source>Subject:</source>
-        <translation>Sujet :</translation>
+        <translation>Sujet : </translation>
     </message>
     <message>
         <source>...</source>
@@ -574,27 +591,29 @@ Cliquez et garder la pression pour plus d&apos;options.</translation>
     </message>
     <message>
         <source>Incorrect recipient separator</source>
-        <translation>Séparateur de destinataire incorrecte</translation>
+        <translation>Séparateur destinataire incorrecte</translation>
     </message>
     <message>
         <source>Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation>Les destinataires doivent être séparés par ;
-et être des adresses Emails valides</translation>
+        <translation>Les destinataires doivent être
+séparés par ; et être des
+adresses E-Mails valides</translation>
     </message>
     <message>
         <source>Incorrect carbon copy separator</source>
-        <translation>Séparateur des destinataires en copie incorrect</translation>
+        <translation>Séparateur copie carbone incorrect</translation>
     </message>
     <message>
         <source>CC Recipients must be separated by ;
 and be valid emailaddresses</source>
-        <translation>Les destinataires en copie doivent être séparés par ;
-et être des adresses Emails valides</translation>
+        <translation>Les destinataires en copie doivent
+être séparés par ; et être des
+adresses E-Mails valides</translation>
     </message>
     <message>
         <source>Re: </source>
-        <translation>Re :</translation>
+        <translation>Re : </translation>
     </message>
     <message>
         <source>======forwarded message from </source>
@@ -610,7 +629,7 @@ et être des adresses Emails valides</translation>
     </message>
     <message>
         <source>FWD: </source>
-        <translation>FWD:</translation>
+        <translation>FWD : </translation>
     </message>
     <message>
         <source>======end of forwarded message======

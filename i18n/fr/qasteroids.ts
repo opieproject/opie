@@ -4,7 +4,7 @@
     <name>KAstTopLevel</name>
     <message>
         <source>Asteroids</source>
-        <translation>Astéroîdes</translation>
+        <translation>Astéroïdes</translation>
     </message>
     <message>
         <source>Score</source>
@@ -24,7 +24,8 @@
     </message>
     <message>
         <source>Press Calendar to start playing</source>
-        <translation>Pressez le boutton &quot;Calendrier&quot; pour démarrer le jeu</translation>
+        <translation>Pressez le bouton &quot;Agenda&quot; pour
+démarrer une nouvelle partie</translation>
     </message>
     <message>
         <source>Ship Destroyed.
@@ -36,7 +37,8 @@ Pressez le boutton &quot;Contacts&quot;.</translation>
         <source>Game Over.
 Press Calendar for a new game.</source>
         <translation>Fin de partie.
-Pressez le boutton &quot;Calendrier&quot; pour démarrer un nouveau jeu.</translation>
+Pressez le boutton &quot;Agenda&quot; pour
+démarrer un nouveau jeu.</translation>
     </message>
 </context>
 </TS>

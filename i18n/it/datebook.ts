@@ -370,7 +370,7 @@ Uscire comunque?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation>LMMGVSDL</translation>
+        <translation type="obsolete">LMMGVSDL</translation>
     </message>
 </context>
 <context>
@@ -524,7 +524,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Ora inizio</translation>
+        <translation type="obsolete">Ora inizio</translation>
     </message>
     <message>
         <source>All day</source>
@@ -561,6 +561,10 @@ Uscire comunque?</translation>
     <message>
         <source>Note...</source>
         <translation>Note...</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished">Inizio</translation>
     </message>
 </context>
 <context>

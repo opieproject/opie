@@ -94,7 +94,8 @@
     <message>
         <source>Upgrade
 </source>
-        <translation>Mise-à-jour</translation>
+        <translation>Mise à jour
+</translation>
     </message>
     <message>
         <source>(ReInstall)</source>
@@ -102,7 +103,7 @@
     </message>
     <message>
         <source>(Upgrade)</source>
-        <translation>(Mise-à-jour)</translation>
+        <translation>(Mise à jour)</translation>
     </message>
     <message>
         <source>Destination</source>
@@ -222,7 +223,7 @@
     </message>
     <message>
         <source>Normal messages</source>
-        <translation>Messages Normaux</translation>
+        <translation>Messages normaux</translation>
     </message>
     <message>
         <source>Informative messages</source>
@@ -230,7 +231,7 @@
     </message>
     <message>
         <source>Troubleshooting output</source>
-        <translation>Sortie des erreurs</translation>
+        <translation>Problème rencontré</translation>
     </message>
 </context>
 <context>
@@ -283,7 +284,7 @@
     </message>
     <message>
         <source>Could not open :</source>
-        <translation>Ouverture impossible de :</translation>
+        <translation>Ouverture impossible de : </translation>
     </message>
     <message>
         <source>Creating directory </source>
@@ -330,15 +331,15 @@
     </message>
     <message>
         <source>Update lists</source>
-        <translation>Mettre à jour les listes</translation>
+        <translation>Mise à jour les listes</translation>
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation>Cliquez ici pour mettre les listes de paquets à jour depuis les serveurs.</translation>
+        <translation>Cliquez ici pour mettre les listes de paquets des serveurs à jour.</translation>
     </message>
     <message>
         <source>Upgrade</source>
-        <translation>Mettre à jour</translation>
+        <translation>Mise à jour</translation>
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
@@ -366,7 +367,7 @@
     </message>
     <message>
         <source>Show packages not installed</source>
-        <translation>Montrer les paquets non installés</translation>
+        <translation>Afficher les paquets non installés</translation>
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
@@ -422,7 +423,7 @@
     </message>
     <message>
         <source>Quick Jump keypad</source>
-        <translation>Clavier d&apos;Accès Rapide</translation>
+        <translation>Clavier Accès Rapide</translation>
     </message>
     <message>
         <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
@@ -466,15 +467,15 @@
     </message>
     <message>
         <source>Servers:</source>
-        <translation>Serveurs :</translation>
+        <translation>Serveurs : </translation>
     </message>
     <message>
         <source>Click here to select a package feed.</source>
-        <translation>Cliquez ici pour sélectionner un serveur de packages.</translation>
+        <translation>Cliquez ici pour sélectionner un serveur de paquets.</translation>
     </message>
     <message>
         <source>Packages</source>
-        <translation>Packages</translation>
+        <translation>Paquets</translation>
     </message>
     <message>
         <source>This is a listing of all packages for the server feed selected above.
@@ -484,13 +485,13 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Click inside the box at the left to select a package.</source>
-        <translation>Voici la liste de tous les packages disponibles sur le serveur sélectionné.
+        <translation>Voici la liste de tous les paquets disponibles sur le serveur sélectionné.
 
-Un point bleu signifie que le package est déjà installé sur cet appareil.
+Un point bleu signifie que le paquet est déjà installé sur cet appareil.
 
-Un point bleu avec une étoile signifie que le package est déjà installé, mais que la version du serveur est plus récente.
+Un point bleu avec une étoile signifie que le paquet est déjà installé, mais que la version du serveur est plus récente.
 
-Cochez la case en début de ligne pour sélectionner un package.</translation>
+Cochez la case en début de ligne pour sélectionner un paquet.</translation>
     </message>
     <message>
         <source>About AQPkg</source>
@@ -547,7 +548,7 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     </message>
     <message>
         <source>Refreshing server package lists</source>
-        <translation>Rafraîchit la liste de paquets des serveurs</translation>
+        <translation>Rafraîchit la liste des paquets des serveurs</translation>
     </message>
     <message>
         <source>WARNING: Upgrading while
@@ -568,7 +569,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Upgrading installed packages</source>
-        <translation>Met à jour les paquets installés</translation>
+        <translation>Mise à jour des paquets installés</translation>
     </message>
     <message>
         <source>Are you sure you wish to delete
@@ -650,7 +651,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>
-        <translation>Mise-à-jour du Bureau...</translation>
+        <translation>Mise à jour du Bureau...</translation>
     </message>
 </context>
 <context>
@@ -758,11 +759,11 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="obsolete">Nom :</translation>
+        <translation type="obsolete">Nom : </translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation type="obsolete">URL :</translation>
+        <translation type="obsolete">URL : </translation>
     </message>
     <message>
         <source>Change</source>
@@ -857,11 +858,11 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation>Addresse :</translation>
+        <translation>Addresse : </translation>
     </message>
     <message>
         <source>Active Server</source>
@@ -869,7 +870,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation>Mise-à-jour</translation>
+        <translation>Ajouter - Mettre à jour</translation>
     </message>
     <message>
         <source>Destination</source>
@@ -877,7 +878,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation>Emplacement :</translation>
+        <translation>Emplacement : </translation>
     </message>
     <message>
         <source>Link to root</source>
@@ -897,11 +898,11 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation>Nom Utilisateur :</translation>
+        <translation>Nom Utilisateur : </translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Mot de passe :</translation>
+        <translation>Mot de passe : </translation>
     </message>
 </context>
 </TS>

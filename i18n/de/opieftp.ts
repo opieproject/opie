@@ -240,5 +240,9 @@ It must be empty</source>
         <source>Sorry name already taken</source>
         <translation>Bedaure, der Name wird bereits verwendet.</translation>
     </message>
+    <message>
+        <source>Add</source>
+        <translation>Hinzu</translation>
+    </message>
 </context>
 </TS>

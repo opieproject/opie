@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Please fill out the business card</source>
-        <translation>Remplissez vos paramètres personnels</translation>
+        <translation>Entrez vos données personnels</translation>
     </message>
     <message>
         <source>No plugins found</source>
@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
-        <translation>Cliquer ici pour accéder à la fenêtre de configuration</translation>
+        <translation>Cliquez ici pour accéder à la fenêtre de configuration</translation>
     </message>
 </context>
 <context>
@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Load which plugins in what order:</source>
-        <translation>Chargement et ordre des modules :</translation>
+        <translation>Ordre chargement modules : </translation>
     </message>
     <message>
         <source>Move Up</source>
@@ -149,7 +149,7 @@ resume?
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation>Après combien de minutes de  veille du PDA la fonction &quot;Démarrage auto&quot; doit-elle être activée</translation>
+        <translation>Après combien de minutes de veille du PDA la fonction &quot;Démarrage auto&quot; doit-elle être activée</translation>
     </message>
     <message>
         <source>minutes inactive</source>
@@ -177,7 +177,7 @@ resume?
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation>Périodicité des rafraîchissements de &quot;Aujourd&apos;hui&quot;</translation>
+        <translation>Périodicité de rafraîchissement de &quot;Aujourd&apos;hui&quot;</translation>
     </message>
     <message>
         <source>refresh</source>

@@ -12,47 +12,48 @@
     <message>
         <source>Error from System:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Blad z Systemu:
+</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiadomosc</translation>
     </message>
     <message>
         <source>Backup Failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Tworzenie kopii sie nie powiodlo!</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Szczegoly</translation>
     </message>
     <message>
         <source>Backup and Restore.. Failed !!</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup and Restore.. Porazka!!</translation>
     </message>
     <message>
         <source>Backup Successfull.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tworzenie kopii udalo sie.</translation>
     </message>
     <message>
         <source>Please select something to restore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybiez cos do odtworzenia.</translation>
     </message>
     <message>
         <source>Restore Failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Odzyskiwanie sie nie powiodlo.</translation>
     </message>
     <message>
         <source>Unable to open File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie mozna otworzyc pliku: %1</translation>
     </message>
     <message>
         <source>Restore Successfull.</source>
-        <translation type="unfinished"></translation>
+        <translation>Odzyskiwanie udalo sie.</translation>
     </message>
 </context>
 <context>
@@ -95,22 +96,22 @@
     </message>
     <message>
         <source>Update Filelist</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizuj liste plikow</translation>
     </message>
 </context>
 <context>
     <name>ErrorDialog</name>
     <message>
         <source>Error Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacje o bledzie</translation>
     </message>
     <message>
         <source>Error Message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tresc Bledu:</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
 </context>
 </TS>

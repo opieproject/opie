@@ -35,11 +35,11 @@
     </message>
     <message>
         <source>Lease Expires</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzierzawa Wygasla</translation>
     </message>
     <message>
         <source>Lease Obtained</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzyskana Dzierzawa</translation>
     </message>
     <message>
         <source>Broadcast</source>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>be &amp;silent</source>
-        <translation type="unfinished"></translation>
+        <translation>badz &amp;cicho</translation>
     </message>
 </context>
 <context>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>255.255.255.0</source>
-        <translation type="unfinished">255.255.255.0</translation>
+        <translation>255.255.255.0</translation>
     </message>
 </context>
 <context>

@@ -144,7 +144,7 @@
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished">Sem Nome</translation>
+        <translation>Sem Nome</translation>
     </message>
     <message>
         <source>Permissions</source>

@@ -111,11 +111,11 @@
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Miniaturki</translation>
     </message>
     <message>
         <source>Thumbnail View...</source>
-        <translation type="unfinished"></translation>
+        <translation>Miniaturki...</translation>
     </message>
     <message>
         <source>Page Information</source>
@@ -229,7 +229,7 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Strona %1/%2</translation>
     </message>
 </context>
 <context>
@@ -268,7 +268,7 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>DrawPad - Export</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Eksport</translation>
     </message>
     <message>
         <source>All Images</source>
@@ -287,7 +287,7 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>DrawPad - Import</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Import</translation>
     </message>
     <message>
         <source>All images</source>
@@ -394,7 +394,7 @@ wszystkie strony?</translation>
     <name>ThumbnailView</name>
     <message>
         <source>DrawPad - Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Miniaturki</translation>
     </message>
     <message>
         <source>Clear Page</source>

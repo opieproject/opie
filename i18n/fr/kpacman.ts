@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Change Direction Keys</source>
-        <translation>Changer les touches de direction</translation>
+        <translation>Changer Touches de Direction</translation>
     </message>
     <message>
         <source>Undefined key</source>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>&amp;Hall of fame</source>
-        <translation>&amp;Hall of fame</translation>
+        <translation>&amp;La Salle de Renom</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -134,7 +134,7 @@ ou est dans un format inconnu.</translation>
     </message>
     <message>
         <source>READY!</source>
-        <translation>PRET!</translation>
+        <translation>PRET !</translation>
     </message>
     <message>
         <source>PAUSED</source>
@@ -190,7 +190,7 @@ ou est dans un format inconnu.</translation>
     </message>
     <message>
         <source>PRESS CURSOR TO START</source>
-        <translation>CLIQUEZ POUR DEMARRER</translation>
+        <translation>TOUCHE DE DIRECTION DEMARRER</translation>
     </message>
 </context>
 <context>

@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Mudar para Local</translation>
+        <translation type="obsolete">Mudar para Local</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Mudar para Remoto</translation>
+        <translation type="obsolete">Mudar para Remoto</translation>
     </message>
     <message>
         <source>Size</source>
@@ -264,11 +264,11 @@ e os seus conteúdos?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="obsolete">Gestor de Ficheiros ::</translation>
+        <translation>Gestor de Ficheiros ::</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="obsolete">KB livres</translation>
+        <translation>KB livres</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
@@ -281,6 +281,18 @@ e os seus conteúdos?</translation>
     <message>
         <source> As</source>
         <translation>Como</translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation>Mudar para a Vista 1</translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation>Mudar para a Vista 2</translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation>Ainda Não Implementado</translation>
     </message>
 </context>
 <context>
@@ -373,6 +385,10 @@ Terminado
     <message>
         <source>Error setting mode</source>
         <translation>Erro ao alterar o modo</translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
+        <translation>Permissões de Ficheiro</translation>
     </message>
 </context>
 </TS>

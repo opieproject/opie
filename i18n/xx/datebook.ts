@@ -364,7 +364,7 @@ Quit anyway?</source>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
 </context>
 <context>
@@ -518,7 +518,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Start time</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>All day</source>
@@ -555,6 +555,10 @@ Quit anyway?</source>
     <message>
         <source>Note...</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished">FOO</translation>
     </message>
 </context>
 <context>

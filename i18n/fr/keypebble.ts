@@ -97,7 +97,7 @@ sous ce compte, essayez plus tard.</translation>
     <name>KVNC</name>
     <message>
         <source>VNC Viewer</source>
-        <translation>Visualisateur VNC</translation>
+        <translation>Client VNC</translation>
     </message>
     <message>
         <source>Full Screen</source>
@@ -163,7 +163,7 @@ sous ce compte, essayez plus tard.</translation>
     <name>KVNCConnDlgBase</name>
     <message>
         <source>VNC Viewer Connection</source>
-        <translation>Connexion VNC Viewer</translation>
+        <translation>Connexion VNC</translation>
     </message>
     <message>
         <source>Server</source>
@@ -171,23 +171,23 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Show Password</source>
-        <translation>Montrer Mot de Passe</translation>
+        <translation>Montrer Code</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Mot de Passe :</translation>
+        <translation>Mot de Passe : </translation>
     </message>
     <message>
         <source>Bookmark Name:</source>
-        <translation>Nom du Favori :</translation>
+        <translation>Nom du Favori : </translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation>Nom d&apos;Hôte :</translation>
+        <translation>Nom d&apos;Hôte : </translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation>Numéro d&apos;écran :</translation>
+        <translation>Numéro écran : </translation>
     </message>
     <message>
         <source>Options</source>
@@ -195,7 +195,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation>Vérifier mise à jour de l&apos;écran toutes les :</translation>
+        <translation>Vérifier mise à jour écran toutes les : </translation>
     </message>
     <message>
         <source>Milliseconds</source>
@@ -247,7 +247,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation>Encodage Copie de Rectangle</translation>
+        <translation>Copie de Rectangle</translation>
     </message>
     <message>
         <source>The password of the VNC server</source>

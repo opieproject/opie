@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Play!</source>
-        <translation>Joué !</translation>
+        <translation>Jouer !</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Click Play to start</source>
-        <translation>Cliquez sur Joué pour démarrer</translation>
+        <translation>Cliquez sur Jouer pour démarrer</translation>
     </message>
     <message>
         <source>Make your move</source>

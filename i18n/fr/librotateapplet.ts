@@ -4,7 +4,7 @@
     <name>RotateApplet</name>
     <message>
         <source>Rotate shortcut</source>
-        <translation>Raccourci Rotation </translation>
+        <translation>Applet Rotation </translation>
     </message>
     <message>
         <source>Rotate</source>

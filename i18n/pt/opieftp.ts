@@ -244,5 +244,9 @@ Tem de estar vazia</translation>
         <source>Sorry name already taken</source>
         <translation>O nome já existe</translation>
     </message>
+    <message>
+        <source>Add</source>
+        <translation>Adicionar</translation>
+    </message>
 </context>
 </TS>

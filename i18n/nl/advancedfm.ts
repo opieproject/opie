@@ -125,11 +125,11 @@ er is hier geen favoriet van!</translation>
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Schakel naar lokaal</translation>
+        <translation type="obsolete">Schakel naar lokaal</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Schakel naar server</translation>
+        <translation type="obsolete">Schakel naar server</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
@@ -259,11 +259,11 @@ Wilt u het echt verwijderen?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="obsolete">AdvancedFM ::</translation>
+        <translation type="unfinished">AdvancedFM ::</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="obsolete">kB vrij</translation>
+        <translation type="unfinished">kB vrij</translation>
     </message>
     <message>
         <source>Cannot remove current directory
@@ -292,6 +292,18 @@ echt verwijderen?</translation>
     <message>
         <source>Copy &apos;%1&apos; As</source>
         <translation type="obsolete">Kopiëer &apos;%1&apos; als</translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -384,6 +396,10 @@ Klaar
     <message>
         <source>Error setting mode</source>
         <translation>Fout bij instellen modus</translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

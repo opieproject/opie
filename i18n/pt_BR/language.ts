@@ -4,22 +4,22 @@
     <name>LanguageSettings</name>
     <message>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Inglês</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>padrao</translation>
     </message>
 </context>
 <context>
     <name>LanguageSettingsBase</name>
     <message>
         <source>Select language</source>
-        <translation type="unfinished">Seleção de Linguagem</translation>
+        <translation>Seleçione a linguagem</translation>
     </message>
     <message>
         <source>Language Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração de Linguagem</translation>
     </message>
 </context>
 </TS>

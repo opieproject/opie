@@ -8,11 +8,11 @@
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation>Pourcentage de batterie restant</translation>
+        <translation>Pourcentage de batterie chargé </translation>
     </message>
     <message>
         <source>Battery status: </source>
-        <translation>Niveau de la batterie :</translation>
+        <translation>Niveau batterie : </translation>
     </message>
     <message>
         <source>Good</source>
@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>Power on-line</source>
-        <translation>Adaptateur secteur</translation>
+        <translation>Adaptateur secteur connecté</translation>
     </message>
     <message>
         <source>External power disconnected</source>
@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Battery time remaining</source>
-        <translation>Durée de batterie restante</translation>
+        <translation>Durée de batterie restante </translation>
     </message>
     <message>
         <source>Close</source>
@@ -72,15 +72,27 @@
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation>Pourcentage de batterie restant :</translation>
+        <translation>Pourcentage de batterie chargé : </translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation>Temps restant de la batterie :</translation>
+        <translation>Temps restant de la batterie : </translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
-        <translation>Aucune module d&apos;extention avec batterie présent</translation>
+        <translation>Aucune module avec batterie</translation>
+    </message>
+    <message>
+        <source>no data</source>
+        <translation>Aucune donné</translation>
+    </message>
+    <message>
+        <source>Ipaq  </source>
+        <translation>iPaq </translation>
+    </message>
+    <message>
+        <source>Jacket  </source>
+        <translation>Jaquette </translation>
     </message>
 </context>
 </TS>

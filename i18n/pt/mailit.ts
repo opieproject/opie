@@ -205,6 +205,20 @@ Verifique conta e palavra chave&lt;/qt&gt;</translation>
         <translation>Ok
 </translation>
     </message>
+    <message>
+        <source>Mailit ! No account defined</source>
+        <translation>Mailit | Sem conta definida</translation>
+    </message>
+    <message>
+        <source>Delete account:
+</source>
+        <translation>Apagar conta:
+</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>Nova</translation>
+    </message>
 </context>
 <context>
     <name>EmailHandler</name>

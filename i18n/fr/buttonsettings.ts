@@ -8,15 +8,15 @@
     </message>
     <message>
         <source>&lt;center&gt;Press or hold the button you want to remap.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Pressez et gardez appuyé le bouton que vous voulez reconfigurer.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Pressez et gardez appuyé le bouton que vous désirez reconfigurer.&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Press:</source>
-        <translation>Presser :</translation>
+        <translation>Presser : </translation>
     </message>
     <message>
         <source>Hold:</source>
-        <translation>Tenir :</translation>
+        <translation>Tenir : </translation>
     </message>
     <message>
         <source>Beam VCard</source>
@@ -36,11 +36,11 @@
     </message>
     <message>
         <source>Show Desktop</source>
-        <translation>Montrer Bureau</translation>
+        <translation>Afficher Bureau</translation>
     </message>
     <message>
         <source>Toggle Recording</source>
-        <translation>Sélectionner l&apos;Enregistrement</translation>
+        <translation>Sélectionner Enregistrement</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Ignored&lt;/nobr&gt;</source>
@@ -48,15 +48,15 @@
     </message>
     <message>
         <source>&lt;nobr&gt;Show &lt;b&gt;%1&lt;/b&gt;&lt;/nobr&gt;</source>
-        <translation>&lt;nobr&gt;Montrer &lt;b&gt;%1&lt;/b&gt;&lt;/nobr&gt;</translation>
+        <translation>&lt;nobr&gt;Ouvrir &lt;b&gt;%1&lt;/b&gt;&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation>&lt;nobr&gt;Appeler &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
+        <translation>&lt;nobr&gt;Lancer &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation>&lt;nobr&gt;Appeler &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
+        <translation>&lt;nobr&gt;Lancer &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
     </message>
 </context>
 <context>
@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Show</source>
-        <translation>Montrer</translation>
+        <translation>Afficher</translation>
     </message>
 </context>
 <context>

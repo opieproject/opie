@@ -12,11 +12,11 @@
     </message>
     <message>
         <source>New card: </source>
-        <translation>Nouvelle carte :</translation>
+        <translation>Nouvelle carte : </translation>
     </message>
     <message>
         <source>Ejected: </source>
-        <translation>Ejecté :</translation>
+        <translation>Ejecté : </translation>
     </message>
     <message>
         <source>Eject SD/MMC card</source>

@@ -51,15 +51,17 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>Utilisation du processeur par les applications (%)</translation>
+        <translation>Utilisation du processeur par
+les applications (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation>Utilisation du processeur par le système (%)</translation>
+        <translation>Utilisation du processeur par
+le système (%)</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation>Type :</translation>
+        <translation>Type : </translation>
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
@@ -86,7 +88,7 @@
     </message>
     <message>
         <source>Total Memory: %1 kB</source>
-        <translation>Mémoire Totale: %1 ko</translation>
+        <translation>Mémoire Totale : %1 Ko</translation>
     </message>
     <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
@@ -97,7 +99,7 @@ Memory is categorized as follows:
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
         <translation>Cette page montre l&apos;utilisation de la mémoire par votre PDA.
-La mémoire est divisée en catégories comme suit:
+La mémoire est divisée en catégories comme suit :
 
 1. Utilisée - Mémoire utilisée par Opie et toutes autres applications en cours d&apos;exécution.
 2. Buffers - Mémoire temporaire utilisée pour accroître les performances
@@ -341,31 +343,31 @@ Cliquez et maintenez appuyer pour voir les informations à propos du processus o
     <name>VersionInfo</name>
     <message>
         <source>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation>&lt;b&gt;Noyau Linux&lt;/b&gt;&lt;p&gt;Version :</translation>
+        <translation>&lt;b&gt;Noyau Linux&lt;/b&gt;&lt;p&gt;Version : </translation>
     </message>
     <message>
         <source>Compiled by: </source>
-        <translation>Compilé par :</translation>
+        <translation>Compilé par : </translation>
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version :</translation>
+        <translation>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version : </translation>
     </message>
     <message>
         <source>Built on: </source>
-        <translation>Construit le :</translation>
+        <translation>Construit le : </translation>
     </message>
     <message>
         <source>&lt;p&gt;Version: </source>
-        <translation>&lt;p&gt;Version :</translation>
+        <translation>&lt;p&gt;Version : </translation>
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation>&lt;p&gt;Modèle :</translation>
+        <translation>&lt;p&gt;Modèle : </translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation>&lt;p&gt;Fabricant :</translation>
+        <translation>&lt;p&gt;Fabricant : </translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

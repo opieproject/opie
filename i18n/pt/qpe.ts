@@ -1,6 +1,21 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>AppMonitor</name>
+    <name>@default</name>
+    <message>
+        <source>Language</source>
+        <translation>Idioma</translation>
+    </message>
+    <message>
+        <source>Time and Date</source>
+        <translation>Hora e Data</translation>
+    </message>
+    <message>
+        <source>Personal Information</source>
+        <translation>Informação Pessoal</translation>
+    </message>
+</context>
+<context>
+    <name>AppLauncher</name>
     <message>
         <source>Application Problem</source>
         <translation>Problema na Aplicação</translation>
@@ -13,66 +28,86 @@
         <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Quer forçar o término da aplicação?&lt;/p&gt;</translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;&lt;p&gt;Fast loading has been disabled for this application.  Tap and hold the application icon to reenable it.&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;&lt;p&gt;Foi desactivado o carregamento rápido da aplicação. Toque e espere no icon da aplicação para reactivar.&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; was terminated due to signal code %2&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;&lt;b&gt;A aplicação %1 terminou com o código %2.&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>Application terminated</source>
+        <translation>A aplicação terminou</translation>
+    </message>
+    <message>
+        <source>Application not found</source>
+        <translation>Não foi encontrada a aplicação</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Could not locate application &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;Não foi possível localizar a aplicação &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Erro</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Could not find the application %1&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;Não foi possível encontrar a aplicação %1&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>Ok</translation>
+    </message>
 </context>
 <context>
-    <name>Calibrate</name>
+    <name>DesktopPowerAlerter</name>
     <message>
-        <source>Touch the crosshairs firmly and
-accurately to calibrate your screen.</source>
-        <translation>Toque na cruz com firmeza e 
-precisão para calibrar o ecrâ.</translation>
+        <source>Battery Status</source>
+        <translation>Estado da Bateria</translation>
     </message>
     <message>
-        <source>Welcome to Opie</source>
-        <translation>Bem-vindo ao Opie</translation>
+        <source>Low Battery</source>
+        <translation>Bateria Fraca</translation>
     </message>
 </context>
 <context>
-    <name>CategoryTabWidget</name>
+    <name>FirstUse</name>
     <message>
-        <source>Documents</source>
-        <translation>Documentos</translation>
+        <source>&lt;&lt; Back</source>
+        <translation>&lt;&lt; Voltar</translation>
     </message>
     <message>
-        <source>Icon View</source>
-        <translation>Vista em Icones</translation>
+        <source>Next &gt;&gt;</source>
+        <translation>Próxima &gt;&gt;</translation>
     </message>
     <message>
-        <source>List View</source>
-        <translation>Vista em Lista</translation>
+        <source>Tap anywhere on the screen to continue.</source>
+        <translation>Toque no ecrâ para continuar.</translation>
+    </message>
+    <message>
+        <source>Please wait, loading %1 settings.</source>
+        <translation>Aguarde um momento. A carregar a configuração de %1.</translation>
+    </message>
+    <message>
+        <source>Please wait...</source>
+        <translation>Aguarde um momento...</translation>
+    </message>
+    <message>
+        <source>FirstUseBackground</source>
+        <translation>Ecrâ de Fundo no Primeiro Uso</translation>
+    </message>
+    <message>
+        <source>Finish</source>
+        <translation>Finalizar</translation>
     </message>
 </context>
 <context>
-    <name>DesktopApplication</name>
+    <name>InputMethods</name>
     <message>
-        <source>Battery level is critical!
-Keep power off until power restored!</source>
-        <translation>O nível de energia está muito baixo.
-Desligue o dispositivo ou ligue-o à corrente!</translation>
-    </message>
-    <message>
-        <source>Battery is running very low.</source>
-        <translation>O nível de energia está baixo.</translation>
-    </message>
-    <message>
-        <source>The Back-up battery is very low.
-Please charge the back-up battery.</source>
-        <translation>O nível de energia da bateria extra está baixo.
-Deve carregá-la.</translation>
-    </message>
-    <message>
-        <source>business card</source>
-        <translation>Cartão de Visita</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation>Informação</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
-(%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;A data do sistema não parece ser válida.
-(%1)&lt;/p&gt;&lt;p&gt;Deseja acertar o relógio?&lt;/p&gt;</translation>
+        <source>Unicode</source>
+        <translation>Unicode</translation>
     </message>
 </context>
 <context>
@@ -80,6 +115,10 @@ Deve carregá-la.</translation>
     <message>
         <source>Launcher</source>
         <translation>Execução</translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation>Documentos</translation>
     </message>
     <message>
         <source> - Launcher</source>
@@ -94,23 +133,34 @@ Deve carregá-la.</translation>
         <translation>&lt;p&gt;Não há nenhuma aplicação definida para este tipo de documento.&lt;p&gt;O tipo do documento é %1.</translation>
     </message>
     <message>
-        <source>Finding documents</source>
-        <translation>A procurar documentos</translation>
+        <source>OK</source>
+        <translation>Ok</translation>
     </message>
     <message>
-        <source>Searching documents</source>
-        <translation>A procurar nos documentos</translation>
+        <source>View as text</source>
+        <translation>Ver como texto</translation>
+    </message>
+</context>
+<context>
+    <name>LauncherTabWidget</name>
+    <message>
+        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
+        <translation>&lt;b&gt;A procurar documentos...&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>Icon View</source>
+        <translation>Vista em Icones</translation>
+    </message>
+    <message>
+        <source>List View</source>
+        <translation>Vista em Lista</translation>
     </message>
 </context>
 <context>
     <name>LauncherView</name>
     <message>
-        <source>%1 files</source>
-        <translation>%1 ficheiros</translation>
-    </message>
-    <message>
-        <source>All types of file</source>
-        <translation>Todos os tipos de ficheiros</translation>
+        <source>All types</source>
+        <translation>Todos os tipos</translation>
     </message>
     <message>
         <source>Document View</source>
@@ -118,69 +168,96 @@ Deve carregá-la.</translation>
     </message>
 </context>
 <context>
-    <name>MediumMountGui</name>
+    <name>SafeMode</name>
     <message>
-        <source>Medium inserted</source>
-        <translation>Cartão inserido</translation>
+        <source>Safe Mode</source>
+        <translation>Modo Salvaguarda</translation>
     </message>
     <message>
-        <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
-        <translation>Foi inserido um cartão. Quer indexar os ficheiros dele?</translation>
+        <source>Plugin Manager...</source>
+        <translation>Gestor de &quot;Plugins&quot;...</translation>
     </message>
     <message>
-        <source>Which media files</source>
-        <translation>Que tipos de ficheiros</translation>
+        <source>Restart Qtopia</source>
+        <translation>Reiniciar Opie</translation>
     </message>
     <message>
-        <source>Audio</source>
-        <translation>Àudio</translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation>Imagem</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Texto</translation>
-    </message>
-    <message>
-        <source>Video</source>
-        <translation>Vídeo</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation>Todos</translation>
-    </message>
-    <message>
-        <source>Link apps</source>
-        <translation>Aplicações</translation>
-    </message>
-    <message>
-        <source>Limit search to dir: (not used yet)</source>
-        <translation>Limitar a procura à directoria: (por implementar)</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Adicionar</translation>
-    </message>
-    <message>
-        <source>Your decision will be stored on the medium.</source>
-        <translation>A sua decisão será guardada no cartão.</translation>
-    </message>
-    <message>
-        <source>Do not ask again for this medium</source>
-        <translation>Não perguntar novamente para este cartão</translation>
+        <source>Help...</source>
+        <translation>Ajuda...</translation>
     </message>
 </context>
 <context>
-    <name>QObject</name>
+    <name>ServerApplication</name>
     <message>
-        <source>Battery Status</source>
-        <translation>Estado da Bateria</translation>
+        <source>Information</source>
+        <translation>Informação</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
+(%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
+        <translation>&lt;p&gt;A data do sistema não parece ser válida.
+(%1)&lt;/p&gt;&lt;p&gt;Deseja acertar o relógio?&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Battery level is critical!
+Keep power off until power restored!</source>
+        <translation>O nível de energia está muito baixo.
+Desligue o dispositivo ou ligue-o à corrente!</translation>
+    </message>
+    <message>
+        <source>Battery is running very low. </source>
+        <translation>O nível de energia da bateria está muito baixo.</translation>
+    </message>
+    <message>
+        <source>The Back-up battery is very low.
+Please charge the back-up battery.</source>
+        <translation>O nível de energia da bateria extra está baixo.
+Deve carregá-la.</translation>
+    </message>
+    <message>
+        <source>business card</source>
+        <translation>Cartão de Visita</translation>
+    </message>
+    <message>
+        <source>Safe Mode</source>
+        <translation>Modo de Salvaguarda</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;A system startup error occurred, and the system is now in Safe Mode. Plugins are not loaded in Safe Mode. You can use the Plugin Manager to disable plugins that cause system error.</source>
+        <translation>&lt;p&gt;Ocorreu um erro ao iniciar. O sistema está agora em modo de salvaguarda e os &quot;plugins&quot; não foram carregados. Poderá usar o gestor de &quot;plugins&quot; para desactivar os que estiverem a causar o erro.</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Plugin Manager...</source>
+        <translation>Gestor de &quot;Plugins&quot;...</translation>
+    </message>
+    <message>
+        <source>Memory Status</source>
+        <translation>Estado da Memória</translation>
+    </message>
+    <message>
+        <source>Memory Low
+Please save data.</source>
+        <translation>Memória Baixa
+Grave os seus dados.</translation>
+    </message>
+    <message>
+        <source>Critical Memory Shortage
+Please end this application
+immediately.</source>
+        <translation>Memória Criticamente em Baixo
+Termine esta aplicação imediatamente.</translation>
     </message>
 </context>
 <context>
     <name>ShutdownImpl</name>
+    <message>
+        <source>Shutdown...</source>
+        <translation>Desligar</translation>
+    </message>
     <message>
         <source>Terminate</source>
         <translation>Terminar</translation>
@@ -196,10 +273,6 @@ Deve carregá-la.</translation>
     <message>
         <source>Restart Opie</source>
         <translation>Reiniciar Opie</translation>
-    </message>
-    <message>
-        <source>Shutdown</source>
-        <translation>Desligar</translation>
     </message>
     <message>
         <source>&lt;p&gt;
@@ -242,16 +315,12 @@ Estas operações estão disponíveis principalmente para desenvolvimento e test
 <context>
     <name>SyncDialog</name>
     <message>
-        <source>Syncing</source>
-        <translation>A sincronizar</translation>
+        <source>Abort</source>
+        <translation>Abortar</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Contacts&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Contactos&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
+        <source>Syncing:</source>
+        <translation>A Sincronizar:</translation>
     </message>
 </context>
 </TS>

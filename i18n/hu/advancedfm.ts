@@ -38,14 +38,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
@@ -255,6 +247,26 @@ and all it&apos;s contents ?</source>
         <source> As</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -342,6 +354,10 @@ Finished
     </message>
     <message>
         <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Bitrate: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bitrate:</translation>
     </message>
     <message>
         <source>URL: </source>

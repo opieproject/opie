@@ -14,7 +14,7 @@
     <name>MindBreakerBoard</name>
     <message>
         <source>Go%1p%2</source>
-        <translation>Go%1p%2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>CurrentGo%1</source>
@@ -22,7 +22,7 @@
     </message>
     <message>
         <source>Answer%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Odpowiedz%1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>
@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>

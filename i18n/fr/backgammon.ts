@@ -52,8 +52,9 @@
     <message>
         <source>Expose you own pieces.
 After such a move only one piece will remain in the slot</source>
-        <translation>Expose vos propres pièces.
-Après un tel choix seul une pièce restera dans la case</translation>
+        <translation>Exposer vos propres pièces.
+Après un tel choix seul une pièce
+restera dans la case</translation>
     </message>
     <message>
         <source>Protect a single piece by
@@ -98,7 +99,7 @@ next to a field for help</source>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Supprimer</translation>
+        <translation>Quitter</translation>
     </message>
     <message>
         <source>Game</source>
@@ -118,7 +119,7 @@ next to a field for help</source>
     </message>
     <message>
         <source>AI</source>
-        <translation>AI</translation>
+        <translation>I.A</translation>
     </message>
     <message>
         <source>Rules</source>

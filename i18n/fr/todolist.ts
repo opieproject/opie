@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Task Editor</source>
-        <translation>Task Editor</translation>
+        <translation>Editeur de Tâches</translation>
     </message>
 </context>
 <context>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>silent</source>
-        <translation>Silencieuse</translation>
+        <translation>Muette</translation>
     </message>
     <message>
         <source>loud</source>
@@ -105,7 +105,7 @@
     </message>
     <message>
         <source>Delete completed</source>
-        <translation>Suppression Terminé</translation>
+        <translation>Supprimer Tâches Terminées</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Donnée</translation>
+        <translation>Tâches</translation>
     </message>
     <message>
         <source>Category</source>
@@ -181,12 +181,12 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation>&quot;Tâche&quot; n&apos;a pas pu
-enregistrer vos changements.
-Libérez de l&apos;espace
-et réessayez.
+        <translation>L&apos;application n&apos;a pas pu
+enregistrer vos modifications.
+Libérez de l&apos;espace et
+réessayez.
 
-Quitter?</translation>
+Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>Todo</source>
@@ -198,11 +198,11 @@ Quitter?</translation>
     </message>
     <message>
         <source>all tasks?</source>
-        <translation>toutes les tâches ?</translation>
+        <translation> toutes les tâches ?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
-        <translation>toutes les tâches effectuées ?</translation>
+        <translation> toutes les tâches effectuées ?</translation>
     </message>
     <message>
         <source>Unfiled</source>
@@ -242,7 +242,7 @@ Quitter?</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation>Priorité :</translation>
+        <translation>Priorité : </translation>
     </message>
     <message>
         <source>Data can not be edited, currently syncing</source>
@@ -395,7 +395,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     <name>TaskEditorOverView</name>
     <message>
         <source>Description:</source>
-        <translation>Description :</translation>
+        <translation>Description : </translation>
     </message>
     <message>
         <source>Enter brief description of the task here.</source>
@@ -467,7 +467,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Category:</source>
-        <translation>Catégorie :</translation>
+        <translation>Catégorie : </translation>
     </message>
     <message>
         <source>Select category to organize this task with.</source>
@@ -479,11 +479,11 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
-        <translation>Cliquer ici si cette tâches doit-être répétée. La fréquence est choisie dans le tableau de Répétition.</translation>
+        <translation>Cliquez ici si cette tâches doit-être répétée. La fréquence est choisie dans l&apos;onglet de Répétition.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="obsolete">Notes :</translation>
+        <translation type="obsolete">Notes : </translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
@@ -495,14 +495,14 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Summary:</source>
-        <translation>Résumé :</translation>
+        <translation>Résumé : </translation>
     </message>
 </context>
 <context>
     <name>TaskEditorStatus</name>
     <message>
         <source>Status:</source>
-        <translation>Etat :</translation>
+        <translation>Etat : </translation>
     </message>
     <message>
         <source>Click here to set the current status of this task.</source>
@@ -510,27 +510,27 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Started</source>
-        <translation>Démarrée</translation>
+        <translation>Démarré</translation>
     </message>
     <message>
         <source>Postponed</source>
-        <translation>Reportée</translation>
+        <translation>Reporté</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation>Terminée</translation>
+        <translation>Terminé</translation>
     </message>
     <message>
         <source>Not started</source>
-        <translation>Arrétée</translation>
+        <translation>Non Démarré</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation>Avancement :</translation>
+        <translation>Avancement : </translation>
     </message>
     <message>
         <source>Select progress made on this task here.</source>
-        <translation>Selectionnez l&apos;avancement de la tâche ici.</translation>
+        <translation>Sélectionnez l&apos;avancement de la tâche ici.</translation>
     </message>
     <message>
         <source>0 %</source>
@@ -558,7 +558,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Start Date:</source>
-        <translation>Date de début :</translation>
+        <translation>Date de début : </translation>
     </message>
     <message>
         <source>Click here to set the date this task was started.</source>
@@ -566,7 +566,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Due Date:</source>
-        <translation>Date d&apos;écheance :</translation>
+        <translation>Date d&apos;écheance : </translation>
     </message>
     <message>
         <source>Click here to set the date this task needs to be completed by.</source>
@@ -574,7 +574,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Completed:</source>
-        <translation>Terminée :</translation>
+        <translation>Terminée : </translation>
     </message>
     <message>
         <source>Click here to mark this task as completed.</source>
@@ -586,7 +586,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Maintainer Mode:</source>
-        <translation>Mode Maintenance :</translation>
+        <translation>Mode Maintenance : </translation>
     </message>
     <message>
         <source>Click here to set the maintainer&apos;s role.</source>
@@ -610,7 +610,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Maintainer:</source>
-        <translation>Mainteneur :</translation>
+        <translation>Mainteneur : </translation>
     </message>
     <message>
         <source>This is the name of the current task maintainer.</source>

@@ -30,11 +30,11 @@
     </message>
     <message>
         <source>&lt;b&gt;Port:</source>
-        <translation>&lt;b&gt;Port :</translation>
+        <translation>&lt;b&gt;Port : </translation>
     </message>
     <message>
         <source>&lt;b&gt;IMAP:</source>
-        <translation>&lt;b&gt;IMAP:</translation>
+        <translation>&lt;b&gt;IMAP : </translation>
     </message>
     <message>
         <source>[--]</source>
@@ -42,15 +42,15 @@
     </message>
     <message>
         <source>&lt;b&gt;SMTP:</source>
-        <translation>&lt;b&gt;SMTP:</translation>
+        <translation>&lt;b&gt;SMTP : </translation>
     </message>
     <message>
         <source>&lt;b&gt;User:</source>
-        <translation>&lt;b&gt;Nom Utilisateur :</translation>
+        <translation>&lt;b&gt;Nom Utilisateur : </translation>
     </message>
     <message>
         <source>&lt;b&gt;Pass:</source>
-        <translation>&lt;b&gt;Mot de Passe :</translation>
+        <translation>&lt;b&gt;Mot de Passe : </translation>
     </message>
     <message>
         <source>Identity</source>
@@ -58,15 +58,15 @@
     </message>
     <message>
         <source>&lt;b&gt;Name:</source>
-        <translation>&lt;b&gt;Nom :</translation>
+        <translation>&lt;b&gt;Nom : </translation>
     </message>
     <message>
         <source>&lt;b&gt;E-Mail:</source>
-        <translation>&lt;b&gt;E-Mail :</translation>
+        <translation>&lt;b&gt;E-Mail : </translation>
     </message>
     <message>
         <source>&lt;b&gt;Org:</source>
-        <translation>&lt;b&gt;Org. :</translation>
+        <translation>&lt;b&gt;Org. : </translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -86,7 +86,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Signature:</source>
-        <translation>&lt;b&gt;Signature :</translation>
+        <translation>&lt;b&gt;Signature : </translation>
     </message>
     <message>
         <source>SSL</source>
@@ -508,7 +508,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>&lt;p&gt;Renaming failed. (Server said: %1)&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Le changement de nom a échoué. (réponse du serveur : %1)&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Le changement de nom a échoué.&lt;br&gt; (réponse du serveur : %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Deletion successfull!</source>
@@ -814,11 +814,11 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>&lt;b&gt;Search&amp;nbsp;in:</source>
-        <translation>&lt;b&gt;Recherche&amp;nbsp;dans :</translation>
+        <translation>&lt;b&gt;Recherche&amp;nbsp;dans : </translation>
     </message>
     <message>
         <source>&lt;b&gt;For:</source>
-        <translation>Texte :</translation>
+        <translation>Texte : </translation>
     </message>
 </context>
 <context>

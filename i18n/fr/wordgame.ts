@@ -4,7 +4,7 @@
     <name>Board</name>
     <message>
         <source>Blanks: </source>
-        <translation>Vides :</translation>
+        <translation>Vides : </translation>
     </message>
     <message>
         <source>OK</source>
@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>AI3: Smart AI player</source>
-        <translation>AI3: Smart Al player</translation>
+        <translation>Machine</translation>
     </message>
     <message>
         <source>Rules</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>Name :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Board</source>
@@ -66,7 +66,7 @@
     </message>
     <message>
         <source>Size:</source>
-        <translation>Taille :</translation>
+        <translation>Taille : </translation>
     </message>
     <message>
         <source>Edit...</source>
@@ -78,7 +78,7 @@
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -89,11 +89,11 @@
     <name>ScoreInfo</name>
     <message>
         <source>&lt;P&gt;Invalid move</source>
-        <translation>&lt;P&gt;Movement non valide</translation>
+        <translation>&lt;P&gt;Mouvement non valide</translation>
     </message>
     <message>
         <source>&lt;P&gt;Score: </source>
-        <translation>&lt;P&gt;Score :</translation>
+        <translation>&lt;P&gt;Score : </translation>
     </message>
 </context>
 <context>
@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Do you want to end the game early?</source>
-        <translation>Voulez-vous mettre fin au jeu prématurément ?</translation>
+        <translation>Voulez-vous mettre fin au jeu ?</translation>
     </message>
     <message>
         <source>Yes</source>

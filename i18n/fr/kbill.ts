@@ -50,14 +50,13 @@
     <message>
         <source>&lt;b&gt;The Rules&lt;/b&gt;&lt;p&gt;kBill has been painstakingly designed and researched in order to make it as easy to use for the whole family as it is for little Sally. Years - nay - days of beta testing and consulting with the cheapest of human interface designers have resulted in a game that is easy to use, yet nothing at all like a Macintosh.&lt;p&gt;&lt;UL&gt;&lt;LI&gt;Whack the Bills (click)&lt;/LI&gt;&lt;LI&gt;Restart the computer (click)&lt;/LI&gt;&lt;LI&gt;Pick up stolen OSes &amp; return (drag) them to their respective computers&lt;/LI&gt;&lt;LI&gt;Drag the bucket to extinguish sparks&lt;/LI&gt;&lt;LI&gt;Scoring is based on total uptime, with bonuses for killing Bills.&lt;/LI&gt;&lt;/UL&gt;&lt;P&gt;As for the rest, you can probably work it out for yourself.  We did, so it can&apos;t be too hard</source>
         <translation>&lt;B&gt;La règle du jeu&lt;/B&gt;
-&lt;P&gt;kBill a été conçu pour être un jeu facile d&apos;accès pour tout le monde. Les années - non - les jours des essais du logiciels ont été supervisé par les meilleurs créateurs d&apos;interfaces homme/machine. Les conséquences sont là, même si l&apos;interface ne ressemble pas à celle de Macintosh. Quoi qu&apos;il en soit, il vous faudra&lt;/P&gt;
+&lt;P&gt;kBill a été conçu pour être un jeu facile d&apos;accès pour tout le monde. Les années - non - les jours des essais du logiciels ont été supervisés par les meilleurs créateurs d&apos;interfaces homme/machine. Les conséquences sont là, même si l&apos;interface ne ressemble pas à celle de Macintosh. Quoi qu&apos;il en soit, il vous faudra&lt;/P&gt;
 &lt;LI&gt;Attraper les &quot;Bill&quot; (cliquer)&lt;/LI&gt;
-&lt;LI&gt;Remettez en marche l&apos;ordinateur (cliquer)&lt;/LI&gt;
-&lt;LI&gt;Récupérer les OS volé &amp; les replacer sur leur machine d&apos;origine (cliquer-déplacer)&lt;/LI&gt;
+&lt;LI&gt;Remettez en marche les ordinateurs (un clique)&lt;/LI&gt;
+&lt;LI&gt;Récupérer les OS volés &amp; les replacer sur leur machine d&apos;origine (cliquer-déplacer)&lt;/LI&gt;
 &lt;LI&gt;Apporter des seaux pour éteindre les étincelles (cliquer-déplacer)&lt;/LI&gt;
 &lt;P&gt;Le score évolu en fonction du temps et du bon fonctionnement général du système, avec des bonifications pour le massacre des &quot;Bill&quot;.
-Et pour le reste, vous pourrez certainement trouver de vous même.&lt;/P&gt;
-Nous l&apos;avons fait donc ça doit pas être trop dur</translation>
+Et pour le reste, vous pourrez certainement trouver de vous même...&lt;/P&gt;</translation>
     </message>
 </context>
 <context>

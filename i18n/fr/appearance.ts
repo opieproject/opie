@@ -24,27 +24,28 @@
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation>Forcer le style pour toutes les appilcations.</translation>
+        <translation>Forcer style pour toutes les applications.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Désactiver le style pour ces applications (&lt;b&gt;*&lt;/b&gt; peut être utilisé comme joker):</translation>
+        <translation>Désactiver style pour les applications :
+(&lt;b&gt;*&lt;/b&gt; peut être utilisé comme joker):</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation>Fichier(s) binaire</translation>
+        <translation>Applications</translation>
     </message>
     <message>
         <source>Tab style:</source>
-        <translation>Style des onglets:</translation>
+        <translation>Type Onglets : </translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation>Onglets</translation>
+        <translation>Onglets simple</translation>
     </message>
     <message>
         <source>Tabs w/icons</source>
-        <translation>Onglets avec icônes</translation>
+        <translation>Onglets + icônes</translation>
     </message>
     <message>
         <source>Drop down list</source>
@@ -52,7 +53,7 @@
     </message>
     <message>
         <source>Drop down list w/icons</source>
-        <translation>Liste déroulante avec icônes</translation>
+        <translation>Liste déroulante + icônes</translation>
     </message>
     <message>
         <source>Top</source>
@@ -76,7 +77,7 @@
     </message>
     <message>
         <source>Windows</source>
-        <translation>Fenêtres</translation>
+        <translation>Fenêtre</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -226,11 +227,11 @@ Cette partie vous permet de sélectionner une application et de lui attribuer de
     </message>
     <message>
         <source>Appearance Settings</source>
-        <translation>Préferences d&apos;Apparence</translation>
+        <translation>Préférences d&apos;Apparence</translation>
     </message>
     <message>
         <source>Rotation direction:</source>
-        <translation>Sens de rotation:</translation>
+        <translation>Rotation : </translation>
     </message>
 </context>
 <context>
@@ -241,7 +242,7 @@ Cette partie vous permet de sélectionner une application et de lui attribuer de
     </message>
     <message>
         <source>Click here to select a color for: </source>
-        <translation>Cliquez ici pour sélectionner un couleur pour :</translation>
+        <translation>Cliquez ici pour sélectionner un couleur pour : </translation>
     </message>
 </context>
 <context>

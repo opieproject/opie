@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Wroc</translation>
+        <translation>Anuluj</translation>
     </message>
     <message>
         <source>Unknown word</source>
@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start</translation>
     </message>
 </context>
 <context>
@@ -77,11 +77,11 @@
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Wroc</translation>
+        <translation>&amp;Anuluj</translation>
     </message>
 </context>
 <context>

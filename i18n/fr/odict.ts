@@ -35,11 +35,11 @@
     <name>ODict</name>
     <message>
         <source>OPIE-Dictionary</source>
-        <translation>OPIE-Dictionnaire</translation>
+        <translation>Dictionnaire OPIE</translation>
     </message>
     <message>
         <source>Query:</source>
-        <translation>Requête :</translation>
+        <translation>Requête : </translation>
     </message>
     <message>
         <source>&amp;Ok</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation>Configurations</translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>Parameter</source>
@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Opie-Dictionary</source>
-        <translation>Opie-Dictionary</translation>
+        <translation>Dictionnaire Opie</translation>
     </message>
     <message>
         <source>No dictionary defined</source>
@@ -126,7 +126,7 @@
     <name>SearchMethodDlg</name>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Dictionary file</source>

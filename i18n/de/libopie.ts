@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Button</name>
     <message>
@@ -31,35 +32,35 @@
     </message>
     <message>
         <source>Lower+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiefgestellt+Hoch</translation>
     </message>
     <message>
         <source>Lower+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiefgestellt+Runter</translation>
     </message>
     <message>
         <source>Lower+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiefgestellt+Rechts</translation>
     </message>
     <message>
         <source>Lower+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiefgestellt+Links</translation>
     </message>
     <message>
         <source>Upper+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochgestellt +Hoch</translation>
     </message>
     <message>
         <source>Upper+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochgestellt +Runter</translation>
     </message>
     <message>
         <source>Upper+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochgestellt +Rechts</translation>
     </message>
     <message>
         <source>Upper+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Hochgestellt +Links</translation>
     </message>
 </context>
 <context>
@@ -392,7 +393,7 @@ und</translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>an</translation>
     </message>
 </context>
 <context>

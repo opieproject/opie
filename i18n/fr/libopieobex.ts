@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Sending:</source>
-        <translation type="obsolete">Envoie :</translation>
+        <translation type="obsolete">Envoie : </translation>
     </message>
     <message>
         <source>filename</source>
@@ -64,14 +64,14 @@ fichier.</translation>
     </message>
     <message>
         <source>&lt;p&gt;You received a file of type %1 (&lt;img src=&quot;%2&quot;&gt; )What do you want to do?</source>
-        <translation>&lt;p&gt;Vous avez reçu un fichier du type %1 (&lt;img src=&quot;%2&quot;&gt; )Que voulez-vous faire ?</translation>
+        <translation>&lt;p&gt;Vous avez reçu un fichier du type %1 (&lt;img src=&quot;%2&quot;&gt; ) Que voulez-vous faire ?</translation>
     </message>
 </context>
 <context>
     <name>OpieObex::SendWidget</name>
     <message>
         <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;&lt;h1&gt;Envoie :&lt;/h1&gt;&lt;/qt&gt;</translation>
+        <translation>&lt;qt&gt;&lt;h1&gt;Emission :&lt;/h1&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Done</source>

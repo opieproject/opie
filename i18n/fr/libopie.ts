@@ -71,27 +71,27 @@
     </message>
     <message>
         <source>Sat:</source>
-        <translation>Sat :</translation>
+        <translation>Sat : </translation>
     </message>
     <message>
         <source>Val:</source>
-        <translation>Val :</translation>
+        <translation>Val : </translation>
     </message>
     <message>
         <source>Red:</source>
-        <translation>Rouge :</translation>
+        <translation>Rouge : </translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation>Vert :</translation>
+        <translation>Vert : </translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation>Bleue :</translation>
+        <translation>Bleu : </translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation>Canal Apha :</translation>
+        <translation>Canal Apha : </translation>
     </message>
     <message>
         <source>Select color</source>
@@ -128,7 +128,7 @@
     <name>OFileSelector</name>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
 </context>
 <context>
@@ -184,11 +184,11 @@
     <name>ORecurranceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation>Répéter Evènement</translation>
+        <translation>Répétition</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Sans</translation>
+        <translation>Aucune</translation>
     </message>
     <message>
         <source>Day</source>
@@ -208,7 +208,7 @@
     </message>
     <message>
         <source>Every:</source>
-        <translation>Tous les :</translation>
+        <translation>Chaque : </translation>
     </message>
     <message>
         <source>Frequency</source>
@@ -216,7 +216,7 @@
     </message>
     <message>
         <source>End On:</source>
-        <translation>Fin :</translation>
+        <translation>Fin : </translation>
     </message>
     <message>
         <source>No End Date</source>
@@ -256,7 +256,7 @@
     </message>
     <message>
         <source>Every</source>
-        <translation>Tous</translation>
+        <translation>Chaque </translation>
     </message>
     <message>
         <source>Var1</source>
@@ -311,20 +311,21 @@
     </message>
     <message>
         <source> and </source>
-        <translation>et</translation>
+        <translation> et </translation>
     </message>
     <message>
         <source>,
 and </source>
-        <translation>, et</translation>
+        <translation>,
+et </translation>
     </message>
     <message>
         <source>, and </source>
-        <translation>, et</translation>
+        <translation>, et </translation>
     </message>
     <message>
         <source>on </source>
-        <translation>activé</translation>
+        <translation>Les </translation>
     </message>
     <message>
         <source>No Repeat</source>
@@ -392,14 +393,14 @@ and </source>
     </message>
     <message>
         <source>Every</source>
-        <translation>Tous</translation>
+        <translation>Chaque </translation>
     </message>
 </context>
 <context>
     <name>OTimePickerDialogBase</name>
     <message>
         <source>Time:</source>
-        <translation>Heure :</translation>
+        <translation>Heure : </translation>
     </message>
     <message>
         <source>:</source>
@@ -407,7 +408,7 @@ and </source>
     </message>
     <message>
         <source>Pick Time:</source>
-        <translation>Choisir l&apos;Heure :</translation>
+        <translation>Choisir Heure : </translation>
     </message>
 </context>
 <context>
@@ -426,11 +427,11 @@ and </source>
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notes :</translation>
+        <translation>Notes : </translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation>Priorité :</translation>
+        <translation>Priorité : </translation>
     </message>
     <message>
         <source>Very high</source>
@@ -454,19 +455,19 @@ and </source>
     </message>
     <message>
         <source>Progress:</source>
-        <translation>Etat :</translation>
+        <translation>Etat : </translation>
     </message>
     <message>
         <source>Deadline:</source>
-        <translation>Délai :</translation>
+        <translation>Délai : </translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>Catégorie :</translation>
+        <translation>Catégorie : </translation>
     </message>
     <message>
         <source>Default Email: </source>
-        <translation>E-Mail par Défaut :</translation>
+        <translation>E-Mail par Défaut : </translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
@@ -474,43 +475,43 @@ and </source>
     </message>
     <message>
         <source>Office: </source>
-        <translation>Bureau :</translation>
+        <translation>Service : </translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation>Page Web (bur):</translation>
+        <translation>Page Web (bur.):</translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation>Téléphone (bur):</translation>
+        <translation>Tél (bur.):</translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation>Fax (bur):</translation>
+        <translation>Fax (bur.):</translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation>Mobile (bur):</translation>
+        <translation>Mobile (bur.):</translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation>Radiomessage :</translation>
+        <translation>Radiomessage : </translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Adresse (perso):&lt;/b&gt;</translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Adresse (dom.):&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation>Page Web (bur):</translation>
+        <translation>Page Web (bur.):</translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation>Téléphone (perso):</translation>
+        <translation>Téléphone (dom.):</translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation>Fax (perso):</translation>
+        <translation>Fax (dom.):</translation>
     </message>
     <message>
         <source>Home Mobile: </source>
@@ -518,19 +519,19 @@ and </source>
     </message>
     <message>
         <source>All Emails: </source>
-        <translation>EMail(s) :</translation>
+        <translation>E-Mail(s) : </translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation>Profession :</translation>
+        <translation>Profession : </translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation>Assistant(e) :</translation>
+        <translation>Assistant(e) : </translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation>Responsable :</translation>
+        <translation>Responsable : </translation>
     </message>
     <message>
         <source>Male</source>
@@ -542,55 +543,57 @@ and </source>
     </message>
     <message>
         <source>Gender: </source>
-        <translation>sexe :</translation>
+        <translation>Type : </translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation>Epouse :</translation>
+        <translation>Epou(x|se) : </translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation>Date de Naissance :</translation>
+        <translation>Date de Naissance : </translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation>Autre Anniversaire :</translation>
+        <translation>Autre Anniversaire : </translation>
     </message>
     <message>
         <source>Children: </source>
-        <translation>Enfant :</translation>
+        <translation>Enfant(s) : </translation>
     </message>
     <message>
         <source>Nickname: </source>
-        <translation>Surnom :</translation>
+        <translation>Surnom : </translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation>Lieu :</translation>
+        <translation>Lieu : </translation>
     </message>
     <message>
         <source>This is an all day event</source>
-        <translation>Cet événement couvre toute la journée</translation>
+        <translation>Cet événement couvre
+toute la journée</translation>
     </message>
     <message>
         <source>This is a multiple day event</source>
-        <translation>Cet événement couvre plusieurs jours</translation>
+        <translation>Cet événement couvre
+plusieurs jours</translation>
     </message>
     <message>
         <source>Start:</source>
-        <translation>Début :</translation>
+        <translation>Début : </translation>
     </message>
     <message>
         <source>End:</source>
-        <translation>Fin :</translation>
+        <translation>Fin : </translation>
     </message>
     <message>
         <source>Note:</source>
-        <translation>Note :</translation>
+        <translation>Note : </translation>
     </message>
     <message>
         <source>Every</source>
-        <translation>Tous</translation>
+        <translation>Chaque </translation>
     </message>
     <message>
         <source>%1 %2 every </source>
@@ -602,7 +605,7 @@ and </source>
     </message>
     <message>
         <source>The %1 %2 of every</source>
-        <translation>Le %1 %2 tous les</translation>
+        <translation>Le %2 %1 chaque </translation>
     </message>
     <message>
         <source>Every </source>
@@ -641,19 +644,19 @@ and </source>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation>er</translation>
+        <translation>,</translation>
     </message>
     <message>
         <source>nd</source>
-        <translation></translation>
+        <translation>,</translation>
     </message>
     <message>
         <source>rd</source>
-        <translation></translation>
+        <translation>,</translation>
     </message>
     <message>
         <source>th</source>
-        <translation></translation>
+        <translation>,</translation>
     </message>
 </context>
 </TS>

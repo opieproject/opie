@@ -170,7 +170,7 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Ir Beam out</source>
-        <translation>Ir Emission</translation>
+        <translation>Emission Ir</translation>
     </message>
     <message>
         <source>Ir sent.</source>

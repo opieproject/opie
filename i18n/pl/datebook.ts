@@ -97,7 +97,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>error box</source>
-        <translation type="unfinished"></translation>
+        <translation>okienko bledu</translation>
     </message>
 </context>
 <context>
@@ -198,7 +198,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation type="unfinished"></translation>
+        <translation>Emituj to wydarzenie</translation>
     </message>
 </context>
 <context>
@@ -365,14 +365,6 @@ Wyjsc ?</translation>
     </message>
 </context>
 <context>
-    <name>DateBookWeekLstDayHdr</name>
-    <message>
-        <source>MTWTFSSM</source>
-        <comment>Week days</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -515,7 +507,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Poczatek</translation>
+        <translation type="obsolete">Poczatek</translation>
     </message>
     <message>
         <source>All day</source>
@@ -561,12 +553,16 @@ Wyjsc ?</translation>
         <source>Note...</source>
         <translation>Notatki...</translation>
     </message>
+    <message>
+        <source>Start Time</source>
+        <translation>Poczatek</translation>
+    </message>
 </context>
 <context>
     <name>DatebookAlldayDisp</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacje</translation>
     </message>
 </context>
 <context>
@@ -592,7 +588,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation>Kazdy</translation>
+        <translation>Co</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
@@ -666,11 +662,11 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation>dzienne</translation>
+        <translation>dni</translation>
     </message>
     <message>
         <source>week(s)</source>
-        <translation>tygodniowe</translation>
+        <translation>tygodni</translation>
     </message>
     <message>
         <source>Repeat By</source>
@@ -732,7 +728,7 @@ i </translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>
@@ -763,7 +759,7 @@ i </translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation>Kazdego:</translation>
+        <translation>Co:</translation>
     </message>
     <message>
         <source>Frequency</source>
@@ -771,7 +767,7 @@ i </translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation>Konic o:</translation>
+        <translation>Koniec:</translation>
     </message>
     <message>
         <source>No End Date</source>
@@ -779,7 +775,7 @@ i </translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation>Powtarzaj o:</translation>
+        <translation>Powtarzaj w</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -799,7 +795,7 @@ i </translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation>Pio</translation>
+        <translation>Pia</translation>
     </message>
     <message>
         <source>Sat</source>
@@ -811,7 +807,7 @@ i </translation>
     </message>
     <message>
         <source>Every</source>
-        <translation>Kazdego</translation>
+        <translation>Co</translation>
     </message>
     <message>
         <source>Var1</source>

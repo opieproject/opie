@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>切換至本地端</translation>
+        <translation type="obsolete">切換至本地端</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>切換至遠端</translation>
+        <translation type="obsolete">切換至遠端</translation>
     </message>
     <message>
         <source>Size</source>
@@ -261,6 +261,26 @@ and all it&apos;s contents ?</source>
 %1?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to View 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Yet Implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -348,6 +368,10 @@ Finished
     </message>
     <message>
         <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>filePermissions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

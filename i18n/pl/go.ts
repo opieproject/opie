@@ -38,7 +38,7 @@
     </message>
     <message>
         <source>A draw.</source>
-        <translation type="unfinished"></translation>
+        <translation>Remis.</translation>
     </message>
     <message>
         <source>I pass</source>

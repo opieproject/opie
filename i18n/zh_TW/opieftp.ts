@@ -245,5 +245,9 @@ It must be empty</source>
         <source>Sorry name already taken</source>
         <translation>名稱已經存在</translation>
     </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

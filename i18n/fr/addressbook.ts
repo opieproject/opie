@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Find</source>
-        <translation>Chercher</translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>Write Mail To</source>
@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Mes Informations Personnelles</translation>
+        <translation>Informations Personnelles</translation>
     </message>
     <message>
         <source>View</source>
@@ -59,19 +59,20 @@
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Edition non autorisée, synchronisation en cours</translation>
+        <translation>Edition non autorisée,&lt;br&gt;
+synchronisation en cours</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
-        <translation>Editer Mes Informations Personnelles</translation>
+        <translation>Editer Informations Personnelles</translation>
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Editer Adresse</translation>
+        <translation>Editer Contact</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
-        <translation>Contacts - Mes Informations Personnelles</translation>
+        <translation>Contacts - Informations Personnelles</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -83,19 +84,19 @@ Free up some space
 and try again.
 
 Quit anyway?</source>
-        <translation>Impossible de sauvegarder
-Libérez de la mémoire
-et réessayez
-
+        <translation>Impossible de sauvegarder&lt;br&gt;
+Libérez de la mémoire&lt;br&gt;
+et réessayez&lt;br&gt;
+&lt;br&gt;
 Quitter ?</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Tout</translation>
+        <translation>Toutes</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Non Classé</translation>
+        <translation>Non classée</translation>
     </message>
     <message>
         <source>Import vCard</source>
@@ -111,7 +112,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Config</translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -135,7 +136,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Right file type ?</source>
-        <translation>Type Fichier Valide ?</translation>
+        <translation>Type fichier valide ?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
@@ -155,8 +156,8 @@ Quitter ?</translation>
         <source>The selected file 
  does not end with &quot;.vcf&quot;.
  Do you really want to open it?</source>
-        <translation>Le fichier selectionné
-ne se termine pas par &quot;.vcf&quot;.
+        <translation>Le fichier selectionné&lt;br&gt;
+ne se termine pas par &quot;.vcf&quot;.&lt;br&gt;
 Voulez-vous vraiment l&apos;ouvrir ?</translation>
     </message>
     <message>
@@ -166,7 +167,8 @@ Voulez-vous vraiment l&apos;ouvrir ?</translation>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Voulez-vous vraimment ajouter un contact pour
+        <translation>Voulez-vous vraimment&lt;br&gt;
+ajouter un contact pour&lt;br&gt;
 %1 ?</translation>
     </message>
     <message>
@@ -179,26 +181,28 @@ Voulez-vous vraiment l&apos;ouvrir ?</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
-        <translation>Vous devez sélectionner un contact !</translation>
+        <translation>Vous devez sélectionner&lt;br&gt;
+un contact !</translation>
     </message>
     <message>
         <source>You have to set a filename !</source>
-        <translation>Vous devez rentrer un nom de fichier !</translation>
+        <translation>Vous devez entrer&lt;br&gt;
+un nom de fichier !</translation>
     </message>
     <message>
         <source>Unable to find a contact for this search pattern!</source>
-        <translation>Aucun contact trouvé correspondant au motif de recherche !</translation>
+        <translation>Aucun contact trouvé !</translation>
     </message>
 </context>
 <context>
     <name>ConfigDlg_Base</name>
     <message>
         <source>Query Style</source>
-        <translation>Style de Requête</translation>
+        <translation>Type de Requête</translation>
     </message>
     <message>
         <source>Use Regular Expressions</source>
-        <translation>Utiliser des Expressions Régulières</translation>
+        <translation>Utiliser les Expressions Régulières</translation>
     </message>
     <message>
         <source>Use Wildcards (*,?)</source>
@@ -225,10 +229,9 @@ Voulez-vous vraiment l&apos;ouvrir ?</translation>
 provided in the SHARP 
 default ROM. Opie-Mail 
 is provided free !</source>
-        <translation>Note : QT-Mail est fourni
-dans la ROM par défaut de
-SHARP. Opie-Mail est founi
-gratuitement !</translation>
+        <translation>Note : QT-Mail est fourni dans la ROM
+par défaut de SHARP. Opie-Mail est
+founi gratuitement !</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -236,7 +239,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Search Settings</source>
-        <translation>Config. Recherche</translation>
+        <translation>Préférences Recherche</translation>
     </message>
     <message>
         <source>Font</source>
@@ -260,7 +263,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Select Contact Order:</source>
-        <translation>Ordre des Contacts :</translation>
+        <translation>Ordre de recherche de contact : </translation>
     </message>
     <message>
         <source>Up</source>
@@ -276,7 +279,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Supprimer</translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -288,7 +291,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>
-        <translation>Paramètres du type de Recherche</translation>
+        <translation>Paramètres du type de recherche</translation>
     </message>
     <message>
         <source>Search widget expects regular expressions if selected</source>
@@ -340,11 +343,11 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
-        <translation>L&apos;ordre (haut -&gt; bas) définit le premier contact affiché dans la deuxième colonne en mode liste</translation>
+        <translation>L&apos;ordre (haut -&gt; bas) définit le premier élément affiché dans la deuxième colonne en mode liste</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
-        <translation>Outils/-Barre de Menus</translation>
+        <translation>Outils-/Barre de Menus</translation>
     </message>
     <message>
         <source>Fixed</source>
@@ -352,7 +355,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Switch to fixed menu-/toolbars after restarting application !</source>
-        <translation>Utiliser un menu/-barre d&apos;outils fixe après redémarrage de l&apos;application !</translation>
+        <translation>Utiliser un menu-/barre d&apos;outils fixe après redémarrage de l&apos;application !</translation>
     </message>
     <message>
         <source>Moveable</source>
@@ -371,7 +374,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Second Prénom</translation>
+        <translation>2nd Prénom</translation>
     </message>
     <message>
         <source>Last Name</source>
@@ -383,15 +386,15 @@ gratuitement !</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Fichier Sous</translation>
+        <translation>Classer sous</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Genre</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Fonction</translation>
+        <translation>Titre</translation>
     </message>
     <message>
         <source>City</source>
@@ -411,7 +414,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Organization</source>
-        <translation>Organisation</translation>
+        <translation>Société</translation>
     </message>
     <message>
         <source>Category</source>
@@ -419,7 +422,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Notes...</source>
-        <translation>Notes...</translation>
+        <translation>Note...</translation>
     </message>
     <message>
         <source>General</source>
@@ -431,7 +434,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Maison</translation>
+        <translation>Domicile</translation>
     </message>
     <message>
         <source>Address</source>
@@ -439,7 +442,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Zip Code</source>
-        <translation>Code postal</translation>
+        <translation>Code Postal</translation>
     </message>
     <message>
         <source>United States</source>
@@ -483,7 +486,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Enter Note</source>
-        <translation>Entrer Note</translation>
+        <translation>Note</translation>
     </message>
     <message>
         <source>Edit Name</source>
@@ -1247,7 +1250,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Date de naissance</translation>
+        <translation>Date de Naissance</translation>
     </message>
     <message>
         <source>Anniversary</source>
@@ -1339,7 +1342,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>La société ou organisation d&apos;appartenance</translation>
+        <translation>Le lieu de travail du contact</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
@@ -1354,15 +1357,15 @@ gratuitement !</translation>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation>Téléphone (Bureau)</translation>
+        <translation>Tél (Bur.)</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Fax (Bureau)</translation>
+        <translation>Fax (Bur.)</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Portable (Bureau)</translation>
+        <translation>Mobile (Bur.)</translation>
     </message>
     <message>
         <source>Default Email</source>
@@ -1374,19 +1377,19 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Téléphone (Domicile)</translation>
+        <translation>Tél (Dom.)</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Fax (Domicile)</translation>
+        <translation>Fax (Dom.)</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Portable (Domicile)</translation>
+        <translation>Mobile (Perso.)</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Bureau</translation>
+        <translation>Service</translation>
     </message>
     <message>
         <source>Profession</source>
@@ -1402,11 +1405,11 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Epouse</translation>
+        <translation>Epou(x|se)</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Genre</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <source>Birthday</source>
@@ -1434,7 +1437,7 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Second Prénom</translation>
+        <translation>2nd Prénom</translation>
     </message>
     <message>
         <source>Last Name</source>
@@ -1462,59 +1465,59 @@ gratuitement !</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Rue (Bureau)</translation>
+        <translation>Rue (Bur.)</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Ville (Bureau)</translation>
+        <translation>Ville (Bur.)</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Département (Bureau)</translation>
+        <translation>Département (Bur.)</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Code postal (Bureau)</translation>
+        <translation>Code Postal (Bur.)</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Pays (Bureau)</translation>
+        <translation>Pays (Bur.)</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Alphapage (Bureau)</translation>
+        <translation>Alphapage (Bur.)</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Page web (Bureau)</translation>
+        <translation>Page Web (Bur.)</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Rue (Domicile)</translation>
+        <translation>Rue (Dom.)</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Ville (Domicile)</translation>
+        <translation>Ville (Dom.)</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Département (Domicile)</translation>
+        <translation>Département (Dom.)</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Code postal (Domicile)</translation>
+        <translation>Code Postal (Dom.)</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Pays (Domicile)</translation>
+        <translation>Pays (Dom.)</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Page Web (Domicile)</translation>
+        <translation>Page Web (Perso.)</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notes</translation>
+        <translation>Note</translation>
     </message>
 </context>
 </TS>

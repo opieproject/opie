@@ -22,7 +22,7 @@
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation>Visualiseur d&apos;Images</translation>
+        <translation>Diaporama</translation>
     </message>
     <message>
         <source>Horizontal flip</source>
@@ -50,15 +50,15 @@
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation>- Visualiseur d&apos;images</translation>
+        <translation> - Diaporama</translation>
     </message>
     <message>
         <source> True color</source>
-        <translation>Vrai couleur</translation>
+        <translation>16777216</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Aficchage</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>8-bit alpha channel</source>
-        <translation>8-bit canal alpha</translation>
+        <translation>Canal alpha 8-bit </translation>
     </message>
     <message>
         <source>Slide show</source>
@@ -119,6 +119,33 @@
     <message>
         <source>Stop Slideshow</source>
         <translation>Arrêter Diaporama</translation>
+    </message>
+</context>
+<context>
+    <name>InfoDialog</name>
+    <message>
+        <source>File Name</source>
+        <translation>Nom Fichier</translation>
+    </message>
+    <message>
+        <source>Format</source>
+        <translation>Format</translation>
+    </message>
+    <message>
+        <source>File Size</source>
+        <translation>Taille Fichier</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Taille</translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation>Couleurs</translation>
+    </message>
+    <message>
+        <source>Alpha</source>
+        <translation>Alpha</translation>
     </message>
 </context>
 <context>
@@ -137,7 +164,7 @@
     </message>
     <message>
         <source>s</source>
-        <translation>s</translation>
+        <translation> s</translation>
     </message>
     <message>
         <source>Repeat slideshow</source>

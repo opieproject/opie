@@ -4,11 +4,12 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dotknij mocno i dokladnie krzyzyka
+zeby skalibrowac ekran.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Witamy w Opie</translation>
     </message>
 </context>
 </TS>

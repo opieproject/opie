@@ -81,5 +81,17 @@
         <source>No jacket with battery inserted</source>
         <translation>Adaptador externo sem bateria</translation>
     </message>
+    <message>
+        <source>no data</source>
+        <translation>sem dados</translation>
+    </message>
+    <message>
+        <source>Ipaq  </source>
+        <translation>Ipaq</translation>
+    </message>
+    <message>
+        <source>Jacket  </source>
+        <translation>Acessório</translation>
+    </message>
 </context>
 </TS>

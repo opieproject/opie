@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekspert</translation>
     </message>
     <message>
         <source>Game</source>

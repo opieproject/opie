@@ -19,11 +19,11 @@
     </message>
     <message>
         <source>&amp;Width:</source>
-        <translation>&amp;Largeur :</translation>
+        <translation>&amp;Largeur : </translation>
     </message>
     <message>
         <source>&amp;Color:</source>
-        <translation>&amp;Couleur :</translation>
+        <translation>&amp;Couleur : </translation>
     </message>
     <message>
         <source>&amp;Default Borders</source>
@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>&amp;Style:</source>
-        <translation>&amp;Style :</translation>
+        <translation>&amp;Style : </translation>
     </message>
     <message>
         <source>&amp;Default Background</source>
@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>&amp;Font:</source>
-        <translation>&amp;Police :</translation>
+        <translation>&amp;Police : </translation>
     </message>
     <message>
         <source>&amp;Size:</source>
-        <translation>&amp;Taille :</translation>
+        <translation>&amp;Taille : </translation>
     </message>
     <message>
         <source>&amp;Bold</source>
@@ -59,11 +59,11 @@
     </message>
     <message>
         <source>&amp;Vertical:</source>
-        <translation>&amp;Verticale :</translation>
+        <translation>&amp;Verticale : </translation>
     </message>
     <message>
         <source>&amp;Horizontal:</source>
-        <translation>&amp;Horizontale :</translation>
+        <translation>&amp;Horizontale : </translation>
     </message>
     <message>
         <source>&amp;Word Wrap</source>
@@ -94,11 +94,11 @@
     </message>
     <message>
         <source>&amp;Search for:</source>
-        <translation>&amp;Rechercher :</translation>
+        <translation>&amp;Rechercher : </translation>
     </message>
     <message>
         <source>&amp;Replace with:</source>
-        <translation>Remplacer &amp;par :</translation>
+        <translation>Remplacer &amp;par : </translation>
     </message>
     <message>
         <source>&amp;Type</source>
@@ -169,7 +169,7 @@
     </message>
     <message>
         <source>&amp;File Name:</source>
-        <translation>Nom &amp;Fichier :</translation>
+        <translation>Nom &amp;Fichier : </translation>
     </message>
     <message>
         <source>UnnamedFile</source>
@@ -665,15 +665,15 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Number of rows:</source>
-        <translation>&amp;Nombre de Lignes :</translation>
+        <translation>&amp;Nombre de Lignes : </translation>
     </message>
     <message>
         <source>&amp;Number of columns:</source>
-        <translation>&amp;Nombre de colonnes :</translation>
+        <translation>&amp;Nombre de colonnes : </translation>
     </message>
     <message>
         <source>&amp;Number of sheets:</source>
-        <translation>&amp;Nombre de feuilles :</translation>
+        <translation>&amp;Nombre de feuilles : </translation>
     </message>
     <message>
         <source>Sheet</source>
@@ -681,15 +681,15 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Height of each row:</source>
-        <translation>&amp;Hauteur de chaque ligne :</translation>
+        <translation>&amp;Hauteur de chaque ligne : </translation>
     </message>
     <message>
         <source>&amp;Width of each column:</source>
-        <translation>&amp;Largeur de chaque colonne :</translation>
+        <translation>&amp;Largeur de chaque colonne : </translation>
     </message>
     <message>
         <source>&amp;Sheet Name:</source>
-        <translation>&amp;Nom de Feuille :</translation>
+        <translation>&amp;Nom de Feuille : </translation>
     </message>
     <message>
         <source>There is only one sheet!</source>

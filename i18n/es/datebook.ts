@@ -368,7 +368,7 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation>LMXJVSDL</translation>
+        <translation type="obsolete">LMXJVSDL</translation>
     </message>
 </context>
 <context>
@@ -514,7 +514,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Start time</source>
-        <translation>Hora inicio</translation>
+        <translation type="obsolete">Hora inicio</translation>
     </message>
     <message>
         <source>All day</source>
@@ -559,6 +559,10 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>Note...</source>
         <translation>Nota...</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished">Hora inicio</translation>
     </message>
 </context>
 <context>

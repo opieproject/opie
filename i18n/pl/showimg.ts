@@ -3,18 +3,18 @@
     <name>ControlsDialog</name>
     <message>
         <source>Brightness</source>
-        <translation type="unfinished"></translation>
+        <translation>Jasnosc</translation>
     </message>
 </context>
 <context>
     <name>ImageFileSelector</name>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Tytul</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
 </context>
 <context>
@@ -25,7 +25,7 @@
     </message>
     <message>
         <source>Horizontal flip</source>
-        <translation>Odbicie oiziome</translation>
+        <translation>Odbicie poziome</translation>
     </message>
     <message>
         <source>Vertical flip</source>
@@ -53,106 +53,133 @@
     </message>
     <message>
         <source> True color</source>
-        <translation> Pelny kolor</translation>
+        <translation>True color</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Widok</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Widok Miniaturek</translation>
     </message>
     <message>
         <source>Preferences..</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia..</translation>
     </message>
     <message>
         <source>Image Info ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacje o Zdjeciu ...</translation>
     </message>
     <message>
         <source>Open ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Otworz ...</translation>
     </message>
     <message>
         <source>Rotate 270</source>
-        <translation type="unfinished">Obroc o 270</translation>
+        <translation>Obroc o 270</translation>
     </message>
     <message>
         <source>Brightness ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Jasnosc ...</translation>
     </message>
     <message>
         <source>Black And White</source>
-        <translation type="unfinished"></translation>
+        <translation>Czarno-bialy</translation>
     </message>
     <message>
         <source>Scale to Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaluj do ekranu</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Plik</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <source>%1 colors</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kolorow</translation>
     </message>
     <message>
         <source>%1 alpha levels</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 poziomow alfa</translation>
     </message>
     <message>
         <source>8-bit alpha channel</source>
-        <translation type="unfinished"></translation>
+        <translation>8-bitowy kanal alfa</translation>
     </message>
     <message>
         <source>Slide show</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaz slajdow</translation>
     </message>
     <message>
         <source>Stop Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatrzymaj pokaz</translation>
+    </message>
+</context>
+<context>
+    <name>InfoDialog</name>
+    <message>
+        <source>File Name</source>
+        <translation>Nazwa Pliku</translation>
+    </message>
+    <message>
+        <source>Format</source>
+        <translation>Format</translation>
+    </message>
+    <message>
+        <source>File Size</source>
+        <translation>Rozmiar Pliku</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Rozmiar</translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation>Kolory</translation>
+    </message>
+    <message>
+        <source>Alpha</source>
+        <translation>Alfa</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialogBase</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia</translation>
     </message>
     <message>
         <source>Slide Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaz Slajdow</translation>
     </message>
     <message>
         <source>Delay between pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Opoznienie pomieszy zdjeciami</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <source>Repeat slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Powtorz pokaz</translation>
     </message>
     <message>
         <source>Show pictures in reverse</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokazuj zdjecia odwrocone</translation>
     </message>
     <message>
         <source>Load pictures rotated 90 degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>Laduj zdjecia obrocone o 90 stopni</translation>
     </message>
     <message>
         <source>Fast load pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Szybkie ladownie zdjec</translation>
     </message>
 </context>
 </TS>

@@ -366,14 +366,6 @@ Izhod?</translation>
     </message>
 </context>
 <context>
-    <name>DateBookWeekLstDayHdr</name>
-    <message>
-        <source>MTWTFSSM</source>
-        <comment>Week days</comment>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -544,7 +536,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Začetni čas</translation>
+        <translation type="obsolete">Začetni čas</translation>
     </message>
     <message>
         <source>Time zone</source>
@@ -561,6 +553,10 @@ Izhod?</translation>
     <message>
         <source>Note...</source>
         <translation>Opombe...</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished">Začetni čas</translation>
     </message>
 </context>
 <context>

@@ -116,7 +116,7 @@
     </message>
     <message>
         <source>File Permissions</source>
-        <translation>Droits du Fichier</translation>
+        <translation>Permissions du Fichier</translation>
     </message>
     <message>
         <source>Search Bar Open</source>
@@ -148,7 +148,7 @@
     </message>
     <message>
         <source>Permissions</source>
-        <translation>Droits</translation>
+        <translation>Permissions</translation>
     </message>
     <message>
         <source>Choose font</source>
@@ -203,19 +203,18 @@ Continuer et sauvegarder ?</translation>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation>Confirmez-vous la &lt;BR&gt;&lt;B&gt;suppression&lt;/B&gt; du fichier courant ?
-&lt;B&gt;Cette suppression est irréversible !&lt;/B&gt;</translation>
+        <translation>Confirmez-vous la &lt;B&gt;suppression&lt;/B&gt; du fichier courant ?&lt;BR&gt;&lt;B&gt;Cette suppression est irréversible !&lt;/B&gt;</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Fixer les Droits du Fichier</translation>
+        <translation>Fixer les Permissions du Fichier</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation>Fixer les droits du fichier pour :</translation>
+        <translation>Fixer les Permissions du fichier pour : </translation>
     </message>
     <message>
         <source>owner</source>
@@ -255,11 +254,11 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation>Erreur- pas d&apos;utilisateur</translation>
+        <translation>Erreur - pas d&apos;utilisateur</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation>Erreur- pas de groupe</translation>
+        <translation>Erreur - pas de groupe</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
@@ -267,11 +266,11 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation>Erreur lors de la défintion du mode</translation>
+        <translation>Erreur lors de la définition du mode</translation>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation>Droits du Fichier</translation>
+        <translation>Permissions du Fichier</translation>
     </message>
 </context>
 </TS>

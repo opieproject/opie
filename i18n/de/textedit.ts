@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>TextEdit</name>
     <message>
@@ -204,7 +205,9 @@ Speichern und weitermachen ?</translation>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Wirklich aktuelle Datei von&lt;BR&gt;
+Platte &lt;B&gt;löschen&lt;/B&gt;?&lt;BR&gt;
+Das ist &lt;B&gt;irreversibel!&lt;/B&gt;</translation>
     </message>
 </context>
 <context>

@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Checking</source>
-        <translation type="unfinished"></translation>
+        <translation>Czeki</translation>
     </message>
     <message>
         <source>CD</source>
@@ -51,11 +51,11 @@
     </message>
     <message>
         <source>Money market</source>
-        <translation type="unfinished"></translation>
+        <translation>Rynek finansowy</translation>
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation type="unfinished"></translation>
+        <translation>Wspolny fundusz</translation>
     </message>
     <message>
         <source>Other</source>
@@ -518,7 +518,7 @@ Wpisana wartosc powinna byc liczba dodatnia.</translation>
     </message>
     <message>
         <source>Electronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Elektronika</translation>
     </message>
 </context>
 </TS>

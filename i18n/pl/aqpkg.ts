@@ -111,7 +111,7 @@
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Kb</translation>
     </message>
 </context>
 <context>
@@ -161,80 +161,81 @@
     <name>Ipkg</name>
     <message>
         <source>Dealing with package %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Przetwarzanie pakietu %1</translation>
     </message>
     <message>
         <source>Removing symbolic links...
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Usuwanie linkow symbolicznych...
+</translation>
     </message>
     <message>
         <source>Creating symbolic links for %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tworzenie linkow symbolicznych dla %1.</translation>
     </message>
     <message>
         <source>Creating symbolic links for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tworzenie linkow symbolicznych dla %1</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Skonczone</translation>
     </message>
     <message>
         <source>Removing status entry...</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuwanie wpisu statusu...</translation>
     </message>
     <message>
         <source>status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>plik statusu -</translation>
     </message>
     <message>
         <source>package - </source>
-        <translation type="unfinished"></translation>
+        <translation>pakiet - </translation>
     </message>
     <message>
         <source>Couldn&apos;t open status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie mozna otworzyc pliku statusu - </translation>
     </message>
     <message>
         <source>Couldn&apos;t create tempory status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie mozna utworzyc tymczasowego pliku statusu - </translation>
     </message>
     <message>
         <source>Couldn&apos;t start ipkg process</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie mozna rozpoczac procesu ipkg</translation>
     </message>
     <message>
         <source>Could not open :</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie mozna otworzyc: </translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Tworzenie katalogu</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 zlinkowany do %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udalo sie zlinkowanie %1 do %2</translation>
     </message>
     <message>
         <source>Removed %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuniete %1</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udalo sie usuniecie %1</translation>
     </message>
     <message>
         <source>Removed </source>
-        <translation type="unfinished"></translation>
+        <translation>Usuniete</translation>
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie udalo sie usunac</translation>
     </message>
 </context>
 <context>
@@ -562,37 +563,38 @@ Czy jestes pewien?</translation>
     <name>QObject</name>
     <message>
         <source>Installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Zainstalowane pakiety</translation>
     </message>
     <message>
         <source>Local packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokalne pakiety</translation>
     </message>
     <message>
         <source>N/A</source>
-        <translation type="unfinished"></translation>
+        <translation>niedostepne</translation>
     </message>
     <message>
         <source>Package - %1
               version - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakiet - %1
+             wersja - %2</translation>
     </message>
     <message>
         <source>
               inst version - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>zainst. wersja - %1</translation>
     </message>
     <message>
         <source>Version string is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Numer wersji jest pusty.</translation>
     </message>
     <message>
         <source>Epoch in version is not number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas w wersji nie jest liczba.</translation>
     </message>
     <message>
         <source>Nothing after colon in version number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie ma nic po dwukropku w numerze wersji.</translation>
     </message>
 </context>
 <context>

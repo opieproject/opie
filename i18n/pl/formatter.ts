@@ -173,40 +173,48 @@ zostal zamontowany.</translation>
 Changing parameters on this
 page may cause your system
 to stop functioning properly!</source>
-        <translation type="unfinished"></translation>
+        <translation>UWAGA:
+Zmiana parametrow na tej
+stronie moe spowodowac nieprawidlowe
+funkcjonowanie systemu!</translation>
     </message>
     <message>
         <source>Format?</source>
-        <translation type="unfinished"></translation>
+        <translation>Formatowac?</translation>
     </message>
     <message>
         <source>
 with %1 filesystem?
 You will loose all data!!</source>
-        <translation type="unfinished"></translation>
+        <translation>
+na system %1?
+Stracisz wszystkie dane!!</translation>
     </message>
     <message>
         <source>Trying to umount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Odmontowuje %1.</translation>
     </message>
     <message>
         <source>Trying to mount %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Montuje %1.</translation>
     </message>
     <message>
         <source>%1
 has been successfully mounted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+zostal zamontowany.</translation>
     </message>
     <message>
         <source>Storage Type: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ Nosnika: %1</translation>
     </message>
     <message>
         <source>Type: %1
 Formatted with %2
 %3, %4, %5</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ: %1
+Zformatowany na %2
+%3, %4, %5</translation>
     </message>
 </context>
 </TS>

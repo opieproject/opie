@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>Scroll Speed</source>
-        <translation>Vitesse de Défilement</translation>
+        <translation>Vitesse Défilement</translation>
     </message>
     <message>
         <source>Right Arrow</source>
@@ -202,7 +202,7 @@ Pression</translation>
     <message>
         <source>Apply font
 to dialogs</source>
-        <translation>Appliquer font
+        <translation>Appliquer fonte
 sur dialogues</translation>
     </message>
     <message>
@@ -430,15 +430,15 @@ Ligne</translation>
     </message>
     <message>
         <source>Depluck</source>
-        <translation>Déselecteur</translation>
+        <translation>Désélecteur</translation>
     </message>
     <message>
         <source>Dejpluck</source>
-        <translation>Dejpluck</translation>
+        <translation>Désélecteur</translation>
     </message>
     <message>
         <source>Continuous</source>
-        <translation>Permanent</translation>
+        <translation>Continu</translation>
     </message>
 </context>
 <context>
@@ -481,7 +481,8 @@ Ligne</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation>Défilement page/ligne</translation>
+        <translation>Défilement
+page/ligne</translation>
     </message>
 </context>
 <context>
@@ -554,7 +555,7 @@ Ligne</translation>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation>Ideogram</translation>
+        <translation>Ideograme</translation>
     </message>
 </context>
 <context>
@@ -605,7 +606,8 @@ Ligne</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation>Défilement page/ligne</translation>
+        <translation>Défilement
+page/ligne</translation>
     </message>
     <message>
         <source>Set Overlap</source>
@@ -909,11 +911,11 @@ Ligne</translation>
     </message>
     <message>
         <source>Set Encoding</source>
-        <translation>Fixé Encodage</translation>
+        <translation>Fixer Encodage</translation>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation>Ideogram</translation>
+        <translation>Ideogramme</translation>
     </message>
     <message>
         <source>Bookmark</source>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Checkbook</name>
     <message>
@@ -510,7 +511,7 @@ Der Wer der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Electronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Elektronik</translation>
     </message>
 </context>
 </TS>

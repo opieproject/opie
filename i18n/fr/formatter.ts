@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Main</source>
-        <translation>Principal</translation>
+        <translation>Option Principales</translation>
     </message>
     <message>
         <source>CAUTION:
@@ -50,7 +50,7 @@ instable!!</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation>Avancé(e)</translation>
+        <translation>Options Avancées</translation>
     </message>
     <message>
         <source>Format?!?</source>
@@ -111,8 +111,8 @@ Type inconnu</translation>
     <message>
         <source>Could not umount.
 Device is busy!</source>
-        <translation>Impossible de démonté.
-Périphérique occupé !</translation>
+        <translation>Impossible de démonter.
+Périphérique occupée !</translation>
     </message>
     <message>
         <source>Trying to format.</source>
@@ -144,7 +144,8 @@ a réussi a être monté. </translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
-        <translation>Vous ne pouvez pas fermer la fenêtre &quot;sortie&quot;.</translation>
+        <translation>Vous ne pouvez pas fermer
+la fenêtre &quot;sortie&quot;.</translation>
     </message>
     <message>
         <source>Internal</source>
@@ -152,7 +153,7 @@ a réussi a être monté. </translation>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation type="obsolete">Type de Support :</translation>
+        <translation type="obsolete">Type de Support : </translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
@@ -178,7 +179,8 @@ to stop functioning properly!</source>
         <translation>AVERTISSEMENT:
 Changer les paramêtres de
 cette page peut causer un
-disfonctionnement de votre système !</translation>
+disfonctionnement de votre
+système !</translation>
     </message>
     <message>
         <source>Format?</source>
@@ -190,7 +192,8 @@ with %1 filesystem?
 You will loose all data!!</source>
         <translation>
 en %1 ?
-Toutes vos données vont être effacées !!</translation>
+Toutes vos données
+vont être effacées !!</translation>
     </message>
     <message>
         <source>Trying to umount %1.</source>

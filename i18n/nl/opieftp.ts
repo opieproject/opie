@@ -243,5 +243,9 @@ Het moet leeg zijn</translation>
         <source>Sorry name already taken</source>
         <translation>Sorry, naam reeds in gebruik</translation>
     </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -11,15 +11,15 @@
     <name>CommandEditDialogBase</name>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation type="unfinished">&lt;B&gt;Comandos&lt;/B&gt;</translation>
+        <translation>&lt;B&gt;Comandos&lt;/B&gt;:</translation>
     </message>
     <message>
         <source>Commands</source>
-        <translation type="unfinished">Comandos</translation>
+        <translation>Comandos</translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
-        <translation type="unfinished">&lt;B&gt;Comandos Sugeridos&lt;/B&gt;:</translation>
+        <translation>&lt;B&gt;Comandos Sugeridos&lt;/B&gt;:</translation>
     </message>
 </context>
 <context>
@@ -208,11 +208,11 @@
     <name>editCommandBase</name>
     <message>
         <source>Enter command to add:</source>
-        <translation type="unfinished">Entre comando a adicionar:</translation>
+        <translation>Entre comando a adicionar:</translation>
     </message>
     <message>
         <source>Add command</source>
-        <translation type="unfinished">Adicionar comando</translation>
+        <translation>Adicionar comando</translation>
     </message>
 </context>
 </TS>

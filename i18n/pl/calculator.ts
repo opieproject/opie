@@ -133,4 +133,203 @@
         <translation>Standard</translation>
     </message>
 </context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Standard</source>
+        <translation>Standardowy</translation>
+    </message>
+    <message>
+        <source>Weight</source>
+        <translation>Waga</translation>
+    </message>
+    <message>
+        <source>Distance</source>
+        <translation>Odleglosc</translation>
+    </message>
+    <message>
+        <source>Area</source>
+        <translation>Powierzchnia</translation>
+    </message>
+    <message>
+        <source>Temperatures</source>
+        <translation>Temperatury</translation>
+    </message>
+    <message>
+        <source>Volume</source>
+        <translation>Dzwiek</translation>
+    </message>
+    <message>
+        <source>acres</source>
+        <translation>akry</translation>
+    </message>
+    <message>
+        <source>&#xb0;C</source>
+        <translation>°C</translation>
+    </message>
+    <message>
+        <source>carats</source>
+        <translation>karaty</translation>
+    </message>
+    <message>
+        <source>cm</source>
+        <translation>cm</translation>
+    </message>
+    <message>
+        <source>cu cm</source>
+        <translation>cm sz</translation>
+    </message>
+    <message>
+        <source>cu ft</source>
+        <translation>st sz</translation>
+    </message>
+    <message>
+        <source>cu in</source>
+        <translation>cal sz</translation>
+    </message>
+    <message>
+        <source>&#xb0;F</source>
+        <translation>°F</translation>
+    </message>
+    <message>
+        <source>fl oz (US)</source>
+        <translation>fl oz (US)</translation>
+    </message>
+    <message>
+        <source>ft</source>
+        <translation>st</translation>
+    </message>
+    <message>
+        <source>g</source>
+        <translation>g</translation>
+    </message>
+    <message>
+        <source>gal (US)</source>
+        <translation>gal (US)</translation>
+    </message>
+    <message>
+        <source>hectares</source>
+        <translation>hektary</translation>
+    </message>
+    <message>
+        <source>in</source>
+        <translation>cal</translation>
+    </message>
+    <message>
+        <source>kg</source>
+        <translation>kg</translation>
+    </message>
+    <message>
+        <source>km</source>
+        <translation>km</translation>
+    </message>
+    <message>
+        <source>l</source>
+        <translation>l</translation>
+    </message>
+    <message>
+        <source>lb</source>
+        <translation type="unfinished">lb</translation>
+    </message>
+    <message>
+        <source>Lg tons</source>
+        <translation type="unfinished">tony Lg</translation>
+    </message>
+    <message>
+        <source>m</source>
+        <translation>m</translation>
+    </message>
+    <message>
+        <source>mg</source>
+        <translation>mg</translation>
+    </message>
+    <message>
+        <source>mi</source>
+        <translation type="unfinished">mi</translation>
+    </message>
+    <message>
+        <source>ml</source>
+        <translation>ml</translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation>mm</translation>
+    </message>
+    <message>
+        <source>naut. mi</source>
+        <translation>mi mor</translation>
+    </message>
+    <message>
+        <source>oz</source>
+        <translation type="unfinished">oz</translation>
+    </message>
+    <message>
+        <source>points</source>
+        <translation>punkty</translation>
+    </message>
+    <message>
+        <source>pt</source>
+        <translation type="unfinished">pt</translation>
+    </message>
+    <message>
+        <source>qt</source>
+        <translation type="unfinished">qt</translation>
+    </message>
+    <message>
+        <source>sq cm</source>
+        <translation>cm kw</translation>
+    </message>
+    <message>
+        <source>sq ft</source>
+        <translation>st kw</translation>
+    </message>
+    <message>
+        <source>sq in</source>
+        <translation>cal kw</translation>
+    </message>
+    <message>
+        <source>sq km</source>
+        <translation>km kw</translation>
+    </message>
+    <message>
+        <source>sq m</source>
+        <translation>m kw</translation>
+    </message>
+    <message>
+        <source>sq mi</source>
+        <translation>mi kw</translation>
+    </message>
+    <message>
+        <source>sq mm</source>
+        <translation>mm kw</translation>
+    </message>
+    <message>
+        <source>sq yd</source>
+        <translation type="unfinished">yd kw</translation>
+    </message>
+    <message>
+        <source>st</source>
+        <translation type="unfinished">st</translation>
+    </message>
+    <message>
+        <source>St tons</source>
+        <translation type="unfinished">tony st</translation>
+    </message>
+    <message>
+        <source>tblspoon</source>
+        <translation>lyzka stolowa</translation>
+    </message>
+    <message>
+        <source>teaspoons</source>
+        <translation>lyzeczka</translation>
+    </message>
+    <message>
+        <source>tonnes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>yd</source>
+        <translation type="unfinished">yd</translation>
+    </message>
+</context>
 </TS>

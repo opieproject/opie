@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Game</source>
-        <translation>Jeux</translation>
+        <translation>Jeu</translation>
     </message>
     <message>
         <source>Fifteen Pieces</source>
@@ -33,11 +33,11 @@ Vous avez gagné !</translation>
     </message>
     <message>
         <source>R&amp;andomize Pieces</source>
-        <translation>Mél&amp;anger les Pièces</translation>
+        <translation>&amp;Mélanger les Pièces</translation>
     </message>
     <message>
         <source>&amp;Reset Pieces</source>
-        <translation>&amp;Reinitialiser les Pièces</translation>
+        <translation>&amp;Initialiser</translation>
     </message>
 </context>
 </TS>

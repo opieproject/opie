@@ -121,6 +121,33 @@
     </message>
 </context>
 <context>
+    <name>InfoDialog</name>
+    <message>
+        <source>File Name</source>
+        <translation>Nome de Ficheiro</translation>
+    </message>
+    <message>
+        <source>Format</source>
+        <translation>Formato</translation>
+    </message>
+    <message>
+        <source>File Size</source>
+        <translation>Tamanho do Ficheiro</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Tamanho</translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation>Cores</translation>
+    </message>
+    <message>
+        <source>Alpha</source>
+        <translation>Transparência</translation>
+    </message>
+</context>
+<context>
     <name>SettingsDialogBase</name>
     <message>
         <source>Preferences</source>

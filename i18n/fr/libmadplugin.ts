@@ -28,27 +28,27 @@
     </message>
     <message>
         <source>, Track: </source>
-        <translation>, Piste :</translation>
+        <translation>, Piste : </translation>
     </message>
     <message>
         <source>Info: </source>
-        <translation>Informations :</translation>
+        <translation>Informations : </translation>
     </message>
     <message>
         <source>Name: </source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Genre: </source>
-        <translation>Genre :</translation>
+        <translation>Genre : </translation>
     </message>
     <message>
         <source>Bitrate: </source>
-        <translation>Débit :</translation>
+        <translation>Débit : </translation>
     </message>
     <message>
         <source>URL: </source>
-        <translation>URL :</translation>
+        <translation>URL : </translation>
     </message>
 </context>
 </TS>

@@ -4,7 +4,7 @@
     <name>VolumeControl</name>
     <message>
         <source>Enable Sounds for:</source>
-        <translation>Activé le son pour :</translation>
+        <translation>Activé le son pour : </translation>
     </message>
     <message>
         <source>Alarm Sound</source>

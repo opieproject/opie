@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Two player option</source>
-        <translation>Jeux à deux joueurs</translation>
+        <translation>Jouer à deux</translation>
     </message>
     <message>
         <source>Game</source>

@@ -23,7 +23,7 @@
     <name>MenuSettings</name>
     <message>
         <source>Load applets in O-Menu:</source>
-        <translation>Afficher ces icônes dans le menu O :</translation>
+        <translation>Afficher ces icônes dans le menu O : </translation>
     </message>
     <message>
         <source>Show Launcher tabs in O-Menu</source>
@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>Type:</source>
-        <translation>Type :</translation>
+        <translation>Type : </translation>
     </message>
     <message>
         <source>Ruled</source>
@@ -124,7 +124,7 @@
     </message>
     <message>
         <source>Size:</source>
-        <translation>Taille :</translation>
+        <translation>Taille : </translation>
     </message>
     <message>
         <source>Small</source>
@@ -136,14 +136,14 @@
     </message>
     <message>
         <source>Color:</source>
-        <translation>Couleur :</translation>
+        <translation>Couleur : </translation>
     </message>
 </context>
 <context>
     <name>TabsSettings</name>
     <message>
         <source>Launcher Tabs:</source>
-        <translation>Onglets du bureau :</translation>
+        <translation>Onglets du bureau : </translation>
     </message>
     <message>
         <source>foobar</source>
@@ -214,7 +214,7 @@
     <name>TaskbarSettings</name>
     <message>
         <source>Load applets in Taskbar:</source>
-        <translation>Afficher ces icônes dans la barre des tâches :</translation>
+        <translation>Afficher ces icônes dans la barre des tâches : </translation>
     </message>
     <message>
         <source>Check the applets that you want displayed in the Taskbar.</source>

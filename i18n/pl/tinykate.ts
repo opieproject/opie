@@ -3,59 +3,59 @@
     <name>TinyKate</name>
     <message>
         <source>TinyKATE</source>
-        <translation type="unfinished"></translation>
+        <translation>TinyKATE</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Otworz</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz Jako</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamknij</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Plik</translation>
     </message>
     <message>
         <source>Font +</source>
-        <translation type="unfinished"></translation>
+        <translation>Czcionka +</translation>
     </message>
     <message>
         <source>Font -</source>
-        <translation type="unfinished"></translation>
+        <translation>Czcionka -</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Widok</translation>
     </message>
     <message>
         <source>Utils</source>
-        <translation type="unfinished"></translation>
+        <translation>Narzedzia</translation>
     </message>
     <message>
         <source>Highlighting</source>
-        <translation type="unfinished"></translation>
+        <translation>Podswietlanie</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia</translation>
     </message>
     <message>
         <source>Unnamed %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nienazwany %1</translation>
     </message>
 </context>
 </TS>

@@ -230,14 +230,14 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
-        <translation>DrawPad - Page %1/%2</translation>
+        <translation>Dessin - Page %1/%2</translation>
     </message>
 </context>
 <context>
     <name>ExportDialog</name>
     <message>
         <source>Page Selection</source>
-        <translation>Sélection Pages</translation>
+        <translation>Sélection Page</translation>
     </message>
     <message>
         <source>All</source>
@@ -253,7 +253,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation>A :</translation>
+        <translation>A : </translation>
     </message>
     <message>
         <source>Export As</source>
@@ -261,15 +261,15 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom :</translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation>Format :</translation>
+        <translation>Format : </translation>
     </message>
     <message>
         <source>DrawPad - Export</source>
-        <translation>DrawPad - Exporter</translation>
+        <translation>Dessin - Exporter</translation>
     </message>
     <message>
         <source>All Images</source>
@@ -288,7 +288,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>DrawPad - Import</source>
-        <translation>DrawPad - Importer</translation>
+        <translation>Dessin - Importer</translation>
     </message>
     <message>
         <source>All images</source>
@@ -311,7 +311,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation>Couleur de Pinceau</translation>
+        <translation>Couleur du Pinceau</translation>
     </message>
     <message>
         <source>Fill Color</source>
@@ -319,11 +319,11 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Général</translation>
+        <translation>Générale</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Titre :</translation>
+        <translation>Titre : </translation>
     </message>
     <message>
         <source>Size</source>
@@ -331,30 +331,30 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Largeur :</translation>
+        <translation>Largeur : </translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Hauteur :</translation>
+        <translation>Hauteur : </translation>
     </message>
 </context>
 <context>
     <name>PageInformationDialog</name>
     <message>
         <source>Page Information</source>
-        <translation>Informations sur la page</translation>
+        <translation>Informations Page</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Général</translation>
+        <translation>Générale</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Titre :</translation>
+        <translation>Titre : </translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation>Date :</translation>
+        <translation>Date : </translation>
     </message>
     <message>
         <source>Size</source>
@@ -362,11 +362,11 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Largeur :</translation>
+        <translation>Largeur : </translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Hauteur :</translation>
+        <translation>Hauteur : </translation>
     </message>
 </context>
 <context>
@@ -395,7 +395,7 @@ toutes les pages ?</translation>
     <name>ThumbnailView</name>
     <message>
         <source>DrawPad - Thumbnail View</source>
-        <translation>DrawPad - Vue miniature</translation>
+        <translation>Dessin - Vue miniature</translation>
     </message>
     <message>
         <source>Clear Page</source>

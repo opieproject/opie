@@ -107,15 +107,15 @@ Gerät erhalten.</translation>
     </message>
     <message>
         <source>Passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Login</translation>
     </message>
     <message>
         <source>Login Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch einloggen</translation>
     </message>
 </context>
 </TS>
