@@ -3,12 +3,12 @@
 
 #include <qpe/applnk.h>
 
-#include <mailmime.h>
-#include <mailimf.h>
-#include <mailsmtp.h>
-#include <mailimap.h>
-#include <mailstorage.h>
-#include <maildriver.h>
+#include <libetpan/mailmime.h>
+#include <libetpan/mailimf.h>
+#include <libetpan/mailsmtp.h>
+#include <libetpan/mailimap.h>
+#include <libetpan/mailstorage.h>
+#include <libetpan/maildriver.h>
 #include <qbitarray.h>
 #include <qdatetime.h>
 
