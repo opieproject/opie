@@ -1,4 +1,4 @@
-Packagename: opie-confeditor
+Package: opie-confeditor
 Files: bin/confedit apps/Settings/confedit.desktop pics/confedit/confedit.png
 Priority: optional
 Section: opie/
