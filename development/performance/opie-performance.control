@@ -1,0 +1,10 @@
+Files: bin/performance apps/Applications/performance.desktop
+Priority: optional
+Section: opie/other
+Maintainer: Trolltech (www.trolltech.com)
+Architecture: $CPU_ARCH
+Arch: $DEVICE_ARCH
+Version: $QPE_VERSION-10
+Depends: qpe-libqtopia
+Description: Graphics performance tester
+ Graphics performance tester for Qtopia.
