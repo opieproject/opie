@@ -26,11 +26,11 @@ class MHexWindow: public QVBox
 
   public:
     MHexWindow( QWidget * parent = 0, const char * name = "MHexWindow", WFlags f = 0 );
-  
-    void log( QString text );
+
+    void log( const QString& text );
     const QString getLog() const;
     void clear();
-    
+
   protected:
     QMultiLineEdit* ledit;
 

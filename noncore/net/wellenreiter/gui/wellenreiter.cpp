@@ -32,6 +32,7 @@ using namespace Opie;
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
+#include <qdatetime.h>
 #include <qpushbutton.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
@@ -257,23 +258,8 @@ void Wellenreiter::stopClicked()
     emit( stoppedSniffing() );
 
     // print out statistics
-    statwindow->log( "-----------------------------------------" );
-    statwindow->log( "- Wellenreiter II Capturing Statistic -" );
-    statwindow->log( "-----------------------------------------" );
-    statwindow->log( "Packet Type         |   Receive Count" );
-
     for( QMap<QString,int>::ConstIterator it = pcap->statistics().begin(); it != pcap->statistics().end(); ++it )
-    {
-        QString left;
-        left.sprintf( "%s", (const char*) it.key() );
-        left = left.leftJustify( 20 );
-        left.append( '|' );
-        QString right;
-        right.sprintf( "%d", it.data() );
-        right = right.rightJustify( 7 );
-        statwindow->log( left + right );
-    }
-
+       statwindow->updateCounter( it.key(), it.data() );
 }
 
 

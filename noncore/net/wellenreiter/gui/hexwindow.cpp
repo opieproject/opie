@@ -21,16 +21,15 @@ MHexWindow::MHexWindow( QWidget * parent, const char * name, WFlags f )
 {
     ledit = new QMultiLineEdit( this );
     ledit->setFont( QFont( "fixed", 10 ) );
-
-    // FIXME: Set properties( font, read-only, etc...)
-
+    ledit->setReadOnly( true );
 };
 
-void MHexWindow::log( QString text )
+void MHexWindow::log( const QString& text )
 {
-
-    ledit->append( text );
-
+    int col;
+    int row;
+    ledit->getCursorPosition( &col, &row );
+    ledit->insertAt( text, col, row );
 };
 
 const QString MHexWindow::getLog() const

@@ -21,25 +21,28 @@ MLogWindow::MLogWindow( QWidget * parent, const char * name, WFlags f )
            :QVBox( parent, name, f )
 {
     ledit = new QMultiLineEdit( this );
-    
-    // FIXME: Set properties( font, read-only, etc...)
-    
+    ledit->setReadOnly( true );
 }
+
 
 void MLogWindow::log( QString text )
 {
     QTime time = QTime::currentTime();
     QString line;
-    line.sprintf( "[%s] %s", (const char*) time.toString(), (const char*) text );
-    ledit->append( line );
+    line.sprintf( "[%s] %s\n", (const char*) time.toString(), (const char*) text );
+    int col;
+    int row;
+    ledit->getCursorPosition( &col, &row );
+    ledit->insertAt( line, col, row );
     qDebug( line );
-
 }
+
 
 void MLogWindow::clear()
 {
     ledit->clear();
 }
+
 
 const QString MLogWindow::getLog() const
 {

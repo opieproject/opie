@@ -19,20 +19,23 @@
 #include <qvbox.h>
 
 class QString;
-class QMultiLineEdit;
+class OListView;
 
 class MStatWindow: public QVBox
 {
+  Q_OBJECT
 
   public:
     MStatWindow( QWidget * parent = 0, const char * name = "MStatWindow", WFlags f = 0 );
-  
+
     void log( QString text );
     const QString getLog() const;
     void clear();
-    
+
+    void updateCounter( const QString&, int );
+
   protected:
-    QMultiLineEdit* ledit;
+    OListView* table;
 
 };
 

@@ -14,32 +14,30 @@
 **********************************************************************/
 
 #include "statwindow.h"
-#include <qmultilineedit.h>
+#include <opie2/olistview.h>
 
 MStatWindow::MStatWindow( QWidget * parent, const char * name, WFlags f )
            :QVBox( parent, name, f )
 {
-    ledit = new QMultiLineEdit( this );
-    ledit->setFont( QFont( "fixed", 10 ) );
-
-    // FIXME: Set properties( font, read-only, etc...)
-
+    table = new OListView( this );
+    table->addColumn( "Protocol" );
+    table->addColumn( "Count" );
+    table->setItemMargin( 2 );
 };
 
-void MStatWindow::log( QString text )
+
+void MStatWindow::updateCounter( const QString& protocol, int counter )
 {
+    QListViewItemIterator it( table );
+    for ( ; it.current(); ++it )
+    {
+        if ( it.current()->text( 0 ) == protocol )
+        {
+            it.current()->setText( 1, QString::number( counter ) );
+            return;
+        }
+    }
 
-    ledit->append( text );
-
-};
-
-const QString MStatWindow::getLog() const
-{
-    return ledit->text();
-}
-
-void MStatWindow::clear()
-{
-    ledit->clear();
+    new OListViewItem( table, protocol, QString::number( counter ) );
 }
 
