@@ -331,7 +331,7 @@ dans : </translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished">Lieu :</translation>
+        <translation>Lieu :</translation>
     </message>
     <message>
         <source>Office</source>
