@@ -1,10 +1,14 @@
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qlineedit.h>
 #include <qcombobox.h>
+#include <qlineedit.h>
+#include <qpushbutton.h>
+#include <qhbox.h>
 
 #include "iolayerbase.h"
-#include "btconfigwidget.h"
+#include "modemconfigwidget.h"
+#include "atconfigdialog.h"
+#include "dialdialog.h"
 
 namespace {
     void setCurrent( const QString& str, QComboBox* bo ) {
@@ -20,43 +24,57 @@ namespace {
     }
 }
 
-BTConfigWidget::BTConfigWidget( const QString& name,
+ModemConfigWidget::ModemConfigWidget( const QString& name,
                                 QWidget* parent,
                                 const char* na )
     : ProfileDialogConnectionWidget( name, parent, na ) {
 
     m_lay = new QVBoxLayout(this );
-    m_device = new QLabel(tr("Device"), this );
+    m_device = new QLabel(tr("Modem is attached to:"), this );
     m_deviceCmb = new QComboBox(this );
     m_deviceCmb->setEditable( TRUE );
 
-    QLabel *macLabel = new QLabel( this );
-    macLabel->setText( tr("Enter peer mac address here:") );
-    m_mac = new QLineEdit( this );
+    QLabel* telLabel = new QLabel( this );
+    telLabel->setText( tr("Enter telefon number here:") );
+    m_telNumber = new QLineEdit( this );
+    QHBox *buttonBox = new QHBox( this );
+    QPushButton *atButton = new QPushButton( buttonBox );
+    atButton->setText( tr("AT commands") );
+    connect( atButton, SIGNAL( clicked() ), this, SLOT( slotAT() ) );
+
+    QPushButton *dialButton = new QPushButton( buttonBox );
+    dialButton->setText( tr("Enter number") );
+    connect( dialButton, SIGNAL( clicked() ), this, SLOT( slotDial() ) );
+
 
     m_base = new IOLayerBase(this, "base");
 
     m_lay->addWidget( m_device );
     m_lay->addWidget( m_deviceCmb );
-    m_lay->addWidget( macLabel );
-    m_lay->addWidget( m_mac );
+    m_lay->addWidget( telLabel );
+    m_lay->addWidget( m_telNumber );
+    m_lay->addWidget( buttonBox );
     m_lay->addWidget( m_base );
 
-    m_deviceCmb->insertItem( "/dev/ttyU0" );
-    m_deviceCmb->insertItem( "/dev/ttyU1" );
+    m_deviceCmb->insertItem( "/dev/ttyS0" );
+    m_deviceCmb->insertItem( "/dev/ttyS1" );
+    m_deviceCmb->insertItem( "/dev/ttyS2" );
+
+
 }
 
-BTConfigWidget::~BTConfigWidget() {
+ModemConfigWidget::~ModemConfigWidget() {
 
 }
-void BTConfigWidget::load( const Profile& prof ) {
+void ModemConfigWidget::load( const Profile& prof ) {
+
     int rad_flow = prof.readNumEntry("Flow");
     int rad_parity = prof.readNumEntry("Parity");
     int speed = prof.readNumEntry("Speed");
-    QString mac = prof.readEntry("Mac");
+    QString number = prof.readEntry("Number");
 
-    if (!mac.isEmpty() ) {
-        m_mac->setText( mac );
+    if (!number.isEmpty() ) {
+        m_telNumber->setText( number );
     }
 
     if (rad_flow == 1) {
@@ -101,7 +119,7 @@ void BTConfigWidget::load( const Profile& prof ) {
  * flow,
  * parity
  */
-void BTConfigWidget::save( Profile& prof ) {
+void ModemConfigWidget::save( Profile& prof ) {
     int flow, parity, speed;
     prof.writeEntry("Device", m_deviceCmb->currentText() );
 
@@ -145,8 +163,25 @@ void BTConfigWidget::save( Profile& prof ) {
         break;
     }
 
-    prof.writeEntry("Flow",  flow);
+    prof.writeEntry("Flow", flow);
     prof.writeEntry("Parity", parity);
-    prof.writeEntry("Speed",  speed);
-    prof.writeEntry("Mac", m_mac->text() );
+    prof.writeEntry("Speed", speed);
+    prof.writeEntry("Number", m_telNumber->text() );
+}
+
+void ModemConfigWidget::slotAT() {
+    ATConfigDialog conf( this, "ATConfig", true );
+    conf.readConfig();
+    conf.showMaximized();
+    if ( conf.exec() == QDialog::Accepted ) {
+        conf.writeConfig();
+    }
+}
+
+void ModemConfigWidget::slotDial() {
+    DialDialog dial( this, "DialConfig", true );
+    dial.showMaximized();
+    if ( dial.exec() == QDialog::Accepted ) {
+        m_telNumber->setText( dial.number() );
+    }
 }

@@ -2,7 +2,7 @@ TEMPLATE     = app
 #CONFIG       = qt warn_on release
 CONFIG 	     = qt debug
 DESTDIR      = $(OPIEDIR)/bin
-HEADERS      = io_layer.h io_serial.h io_irda.h \
+HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h\
 	       file_layer.h filetransfer.h \
 	       metafactory.h \
 	       session.h \
@@ -26,11 +26,12 @@ HEADERS      = io_layer.h io_serial.h io_irda.h \
 	       default.h \
 	       terminalwidget.h \
 	       iolayerbase.h \
-	       serialconfigwidget.h irdaconfigwidget.h btconfigwidget.h \
-	       emulation_widget.h procctl.h
+	       serialconfigwidget.h irdaconfigwidget.h \
+	       btconfigwidget.h modemconfigwidget.h \
+	       atconfigdialog.h dialdialog.h \  
+               emulation_widget.h procctl.h \
 
-
-SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp \
+SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp \
 	       file_layer.cpp filetransfer.cpp \
                main.cpp \
 	       metafactory.cpp \
@@ -50,12 +51,13 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp \
 	       transferdialog.cpp \
 	       profiledialogwidget.cpp \
 	       profileeditordialog.cpp \
-	       default.cpp \
 	       terminalwidget.cpp \
 	       iolayerbase.cpp \
-	       serialconfigwidget.cpp irdaconfigwidget.cpp btconfigwidget.cpp \
-	       emulation_widget.cpp procctl.cpp
-   
+	       serialconfigwidget.cpp irdaconfigwidget.cpp \
+	       btconfigwidget.cpp modemconfigwidget.cpp \ 
+	       atconfigdialog.cpp dialdialog.cpp \
+	       emulation_widget.cpp default.cpp  procctl.cpp \
+
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include

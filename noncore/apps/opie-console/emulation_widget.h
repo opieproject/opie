@@ -35,18 +35,18 @@ public:
     ~EmulationWidget();
 
     /**
-     * sets the image 
+     * sets the image
      * @param QArray<Character> const newimg, the new image
      * @param int lines, lines of the new image
      * @param int columns, columns of the new image
      */
-    virtual void setImage( QArray<Character> const newimg, int columns, int lines );
+    virtual void setImage( QArray<Character> const newimg, int columns, int lines ) {};
 
     /**
      * reloads configuration
      * @param const Profile& config, configuration
      */
-    virtual void reloadConfig( const Profile& config );
+    virtual void reloadConfig( const Profile& config ) {};
 
     /**
      * sets the scrollbar (not yet implemented)
@@ -60,11 +60,11 @@ public:
     virtual void scroll( int value );
 
 protected:
-    
+
     /**
      * calculates current image bounds
      */
-    virtual void calcGeometry();
+    virtual void calcGeometry() {};
 
     /**
      * draws a String
@@ -72,9 +72,9 @@ protected:
      * @param QPainter& painter, painter, that should draw
      * @param QRect rect, rect to be drawn into
      * @param Character attr, attributes of Characters
-     * @param bool usePixmap, if to use the background pixmap (currently not supported) 
+     * @param bool usePixmap, if to use the background pixmap (currently not supported)
      * @param bool clear, if rect should be cleared
      */
     void drawAttrString( QString& string, QPainter& painter, QRect rect, Character attr, bool pm, bool clear );
 
-}; 
+};

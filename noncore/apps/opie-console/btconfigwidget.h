@@ -6,6 +6,7 @@
 class QVBoxLayout;
 class QLabel;
 class QComboBox;
+class QLineEdit;
 class IOLayerBase;
 class BTConfigWidget : public ProfileDialogConnectionWidget {
 
@@ -22,6 +23,7 @@ private:
     QLabel* m_device;
     QComboBox* m_deviceCmb;
     IOLayerBase* m_base;
+    QLineEdit* m_mac;
 
 };
 
