@@ -24,7 +24,7 @@ TARGET      = opiedb2
 VERSION     = 1.8.2
 INCLUDEPATH = $(OPIEDIR)/include
 DEPENDPATH  = $(OPIEDIR)/include
-LIBS       += -lsqlite -lqpe
+LIBS       += -lopiecore2 -lqpe -lsqlite
 
 !contains( platform, x11 ) {
   include ( $(OPIEDIR)/include.pro )
