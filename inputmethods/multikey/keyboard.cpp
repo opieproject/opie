@@ -41,8 +41,8 @@
 
 /* Keyboard::Keyboard {{{1 */
 Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
-    QFrame(parent, _name, f),  shift(0), lock(0), ctrl(0),
-    alt(0), useLargeKeys(TRUE), usePicks(0), useRepeat(0), pressedKeyRow(-1), pressedKeyCol(-1),
+    QFrame(parent, _name, f),  shift(0), lock(0), ctrl(0), alt(0), meta(0), 
+    useLargeKeys(TRUE), usePicks(0), useRepeat(0), pressedKeyRow(-1), pressedKeyCol(-1),
     unicode(-1), qkeycode(0), modifiers(0), schar(0), mchar(0), echar(0),
     configdlg(0)
 
@@ -182,10 +182,17 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
         ushort c = keys->uni(row, col);
 
         p.setPen(textcolor);
-        if (!pix)
+        if (!pix) {
+            if (shift || lock) 
+                c = keys->shift(c);
+            if (meta) {
+
+                c = keys->meta(c);
+            }
             p.drawText(x, y, 
-               defaultKeyWidth * keyWidth, keyHeight,
-               AlignCenter, ((shift || lock) && keys->shift(c)) ? (QChar)keys->shift(c) : (QChar)c);
+               defaultKeyWidth * keyWidth + 3, keyHeight,
+               AlignCenter, (QChar)c);
+        }
         else
             // center the image in the middle of the key
             p.drawPixmap( x + (defaultKeyWidth * keyWidth - pix->width())/2, 
@@ -225,10 +232,14 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
             ushort c = keys->uni(row, col);
 
             if (!pix) {
-                p.setPen(textcolor);
+                if ((shift || lock) && keys->shift(c)) 
+                    c = keys->shift(c);
+                else if (meta && keys->meta(c)) 
+                    c = keys->meta(c);
+
                 p.drawText(x, y, 
-                   keyWidthPix, keyHeight,
-                   AlignCenter, ((shift || lock) && keys->shift(c)) ? (QChar)keys->shift(c) : (QChar)c);
+                   defaultKeyWidth * keyWidth + 3, keyHeight,
+                   AlignCenter, (QChar)c);
             }
             else {
                 // center the image in the middle of the key
@@ -344,6 +355,11 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                     lock = 0;
                 }
             }
+            if (meta) {
+
+                *meta = 0;
+                meta = 0;
+            }
 
         } else if (qkeycode == Qt::Key_CapsLock) {
             need_repaint = TRUE;
@@ -360,13 +376,50 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                     shift = 0;
                 }
             }
+            if (meta) {
 
+                *meta = 0;
+                meta = 0;
+            }
+
+        } else if (qkeycode == Qt::Key_Meta) {
+            need_repaint = TRUE;
+
+            if (meta) {
+                *meta = 0;
+                meta = 0;
+
+            } else {
+
+                meta = keys->pressedPtr(row, col);
+                need_repaint = TRUE;
+                *meta = !keys->pressed(row, col);
+            }
+
+            if (shift) {
+
+                *shift = 0;
+                shift = 0;
+
+            }
+            if (lock) {
+
+                *lock = 0;
+                lock = 0;
+
+            }
+
+            // dont need to emit this key... acts same as alt
+            qkeycode = 0;
         }
 
     }
     else { // normal char
         if ((shift || lock) && keys->shift(unicode)) {
             unicode = keys->shift(unicode);
+        }
+        if (meta && keys->meta(unicode)) {
+            unicode = keys->meta(unicode);
         }
     }
 
@@ -447,6 +500,11 @@ void Keyboard::mouseReleaseEvent(QMouseEvent*)
         shift = 0;  // reset the shift pointer
         repaint(FALSE);
 
+    } else if (meta && unicode != 0) {
+
+        *meta = 0;
+        meta = 0;
+        repaint(FALSE);
     }
     else 
 
@@ -1046,6 +1104,19 @@ void Keys::setKeysFromFile(const char * filename) {
                 buf = t.readLine();
             }
 
+            // meta key map
+            else if (buf.contains(QRegExp("^\\s*m\\s+[0-9a-fx]+\\s+[0-9a-fx]+\\s*$", FALSE, FALSE))) {
+
+                QTextStream tmp (buf, IO_ReadOnly);
+                ushort lower, shift;
+                QChar m;
+                tmp >> m >> lower >> shift;
+
+                metaMap.insert(lower, shift);
+
+                buf = t.readLine();
+            }
+
             // other variables like lang & title
             else if (buf.contains(QRegExp("^\\s*[a-zA-Z]+\\s*=\\s*[a-zA-Z0-9/]+\\s*$", FALSE, FALSE))) {
 
@@ -1163,6 +1234,17 @@ ushort Keys::shift(const ushort uni) {
     if (shiftMap[uni]) {
 
         return shiftMap[uni];
+    }
+    else 
+        return 0;
+
+}
+
+ushort Keys::meta(const ushort uni) {
+
+    if (metaMap[uni]) {
+
+        return metaMap[uni];
     }
     else 
         return 0;

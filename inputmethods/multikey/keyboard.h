@@ -62,6 +62,7 @@ public:
     bool    pressed(const int row, const int col);
     bool    *pressedPtr(const int row, const int col);
     ushort  shift(const ushort);
+    ushort  meta(const ushort);
     QPixmap *pix(const int row, const int col);
     int     numKeys(const int row);
     void    setKeysFromFile(const char *filename);
@@ -85,6 +86,7 @@ private:
 
     QList<Key> keys[6];
     QMap<ushort,ushort> shiftMap;
+    QMap<ushort,ushort> metaMap;
 
 };
 
@@ -127,6 +129,7 @@ private:
     bool *lock;
     bool *ctrl;
     bool *alt;
+    bool *meta;
     uint useLargeKeys:1;
     uint usePicks:1;
     uint useRepeat:1;
