@@ -79,7 +79,7 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     QPixmap image0( ( const char** ) image0_data );
     QPixmap image1( ( const char** ) image1_data );
     if ( !name )
-	setName( "SoundSettingsBase" );
+  setName( "SoundSettingsBase" );
     resize( 255, 301 ); 
     setCaption( tr( "Sound Settings" ) );
     SoundSettingsBaseLayout = new QGridLayout( this ); 
@@ -227,13 +227,13 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     Layout11->addWidget( LocationComboBox );
     Layout12_2->addWidget( GroupBox1 );
 
-    touchsound = new QCheckBox( this, "touchsound" );
-    touchsound->setText( tr( "Screen sounds" ) );
-    Layout12_2->addWidget( touchsound );
+//      touchsound = new QCheckBox( this, "touchsound" );
+//      touchsound->setText( tr( "Screen sounds" ) );
+//      Layout12_2->addWidget( touchsound );
 
-    keysound = new QCheckBox( this, "keysound" );
-    keysound->setText( tr( "Keyboard sounds" ) );
-    Layout12_2->addWidget( keysound );
+//      keysound = new QCheckBox( this, "keysound" );
+//      keysound->setText( tr( "Keyboard sounds" ) );
+//      Layout12_2->addWidget( keysound );
     QSpacerItem* spacer_9 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     Layout12_2->addItem( spacer_9 );
 

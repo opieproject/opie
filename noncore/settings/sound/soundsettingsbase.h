@@ -45,8 +45,8 @@ public:
     QCheckBox* AlertCheckBox;
     QLabel* TextLabel1;
     QComboBox* LocationComboBox;
-    QCheckBox* touchsound;
-    QCheckBox* keysound;
+/*      QCheckBox* touchsound; */
+/*      QCheckBox* keysound; */
 
 protected:
     QGridLayout* SoundSettingsBaseLayout;
