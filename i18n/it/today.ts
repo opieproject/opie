@@ -54,11 +54,11 @@
     </message>
     <message>
         <source>Move Up</source>
-        <translation>Sposta Sopra</translation>
+        <translation>Muovi Sù</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation>Sposta Sotto</translation>
+        <translation>Muovi Giù</translation>
     </message>
     <message>
         <source>active/order</source>
@@ -98,23 +98,23 @@ resume?(new line)
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiorna</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished"></translation>
+        <translation>Quanto spesso Oggi deve aggiornarsi</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation> sec</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished"></translation>
+        <translation>mai</translation>
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca per attivare/disattivare un plugin o utilizza le frecce a destra per cambiare l&apos;ordine di visualizzazione</translation>
     </message>
 </context>
 </TS>

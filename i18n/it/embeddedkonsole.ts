@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CommandEditDialog</name>
     <message>
@@ -185,15 +186,15 @@
     </message>
     <message>
         <source>Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>A Capo</translation>
     </message>
     <message>
         <source>Use Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa Beep</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabs Sopra</translation>
     </message>
 </context>
 <context>

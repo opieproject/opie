@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Categories</name>
     <message>
@@ -843,7 +844,7 @@ riprovare.</translation>
     </message>
     <message>
         <source>MMC Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Card MMC</translation>
     </message>
 </context>
 <context>
@@ -857,12 +858,13 @@ riprovare.</translation>
     <name>TimeZoneSelector</name>
     <message>
         <source>citytime executable not found</source>
-        <translation type="unfinished"></translation>
+        <translation>eseguibile citytime non trovato</translation>
     </message>
     <message>
         <source>In order to choose the time zones,
 please install citytime.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per scegliere il fuso orario,
+prego installare citytime.</translation>
     </message>
 </context>
 <context>

@@ -1,505 +1,521 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Checkbook</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota Spese</translation>
     </message>
     <message>
         <source>New checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuova nota spese</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Transazioni</translation>
     </message>
     <message>
         <source>Charts</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafici</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Enter name of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui il nome della nota spese.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">Tipo:</translation>
+        <translation>Tipo:</translation>
     </message>
     <message>
         <source>Select type of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona qui il tipo di nota spese.</translation>
     </message>
     <message>
         <source>Savings</source>
-        <translation type="unfinished"></translation>
+        <translation>Risparmi</translation>
     </message>
     <message>
         <source>Checking</source>
-        <translation type="unfinished"></translation>
+        <translation>Deposito</translation>
     </message>
     <message>
         <source>CD</source>
-        <translation type="unfinished"></translation>
+        <translation>CD</translation>
     </message>
     <message>
         <source>Money market</source>
-        <translation type="unfinished"></translation>
+        <translation>Mercato finanziario</translation>
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation type="unfinished"></translation>
+        <translation>Mutui</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Altri</translation>
     </message>
     <message>
         <source>Bank:</source>
-        <translation type="unfinished"></translation>
+        <translation>Banca:</translation>
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui il nome della banca per questa nota spese.</translation>
     </message>
     <message>
         <source>Account number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numero conto:</translation>
     </message>
     <message>
         <source>Enter account number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui il numero di conto per questa nota spese.</translation>
     </message>
     <message>
         <source>PIN number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numero PIN:</translation>
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui il numero PIN per questa nota spese.</translation>
     </message>
     <message>
         <source>Starting balance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Inizio saldo:</translation>
     </message>
     <message>
         <source>Enter the initial balance for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui il saldo iniziale per questa nota spese.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Note:</translation>
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui ulteriori informazioni necessarie per questa nota spese.</translation>
     </message>
     <message>
         <source>Current balance: %10.00</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilancio attuale: %10.00</translation>
     </message>
     <message>
         <source>This area shows the current balance in this checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Quest&apos;area mostra l&apos;attuale saldo per questa nota spese.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
 
 To sort entries by a specific field, click on the column name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questa è una lista di tutte le transazioni inserite per questa nota spese.
+
+Per ordinarla per un campo specifico, clicca sul nome della colonna.</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrizione</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Ammontare</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuovo</translation>
     </message>
     <message>
         <source>Click here to add a new transaction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca qui per aggiungere una nuova transazione.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica</translation>
     </message>
     <message>
         <source>Select a transaction and then click here to edit it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona una transazione e clicca qui per modificarla.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to delete it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona una nota spese e clicca qui per eliminarla.</translation>
     </message>
     <message>
         <source>Select the desired chart below and then click on the Draw button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona il grafico desiderato e clicca su bottone Disegna.</translation>
     </message>
     <message>
         <source>Click here to select the desired chart type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca qui per selezionare il tipo di grafico desiderato.</translation>
     </message>
     <message>
         <source>Account balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Saldo del conto</translation>
     </message>
     <message>
         <source>Withdrawals by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Prelievi per categoria</translation>
     </message>
     <message>
         <source>Deposits by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Depositi per categoria</translation>
     </message>
     <message>
         <source>Draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Ritira</translation>
     </message>
     <message>
         <source>Click here to draw the selected chart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca qui per disegnare il grafico selezionato.</translation>
     </message>
     <message>
         <source>Current balance: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilancio attuale: %1%2</translation>
     </message>
     <message>
         <source>Delete transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina transazione</translation>
     </message>
     <message>
         <source>Password protect</source>
-        <translation type="unfinished"></translation>
+        <translation>Protetto da password</translation>
     </message>
     <message>
         <source>Click here to enable/disable password protection of this checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca qui per abilitare/disabilitare la protezione con password per questa nota spese.</translation>
     </message>
     <message>
         <source>Num</source>
-        <translation type="unfinished"></translation>
+        <translation>Num</translation>
     </message>
     <message>
         <source>Enter password</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci password</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prego inserisci la tua password:</translation>
     </message>
     <message>
         <source>Confirm password</source>
-        <translation type="unfinished"></translation>
+        <translation>Conferma password</translation>
     </message>
     <message>
         <source>Please confirm your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prego conferma la tua password:</translation>
     </message>
     <message>
         <source>Please enter your password to confirm removal of password protection:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prego inserisci la tua password per confermare l&apos;eliminazione della protezione con password:</translation>
     </message>
 </context>
 <context>
     <name>Configuration</name>
     <message>
         <source>Configure Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura Nota Spese</translation>
     </message>
     <message>
         <source>Enter currency symbol:</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci simbolo valuta:</translation>
     </message>
     <message>
         <source>Enter your local currency symbol here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui il tuo simbolo valuta.</translation>
     </message>
     <message>
         <source>Show whether checkbook is password
 protected</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra quando una nota spese è protetta
+da password</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display that the checkbook is protected with a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca qui per selezionare se nella finestra principale verrà o no mostrato se la nota spese è protetta da password.</translation>
     </message>
     <message>
         <source>Show checkbook balances</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra i saldi delle note spese</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca qui per selezionare se nella finestra principale verranno o no mostrati i saldi di ogni nota spese.</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota Spese</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuovo</translation>
     </message>
     <message>
         <source>Click here to create a new checkbook.
 
 You also can select New from the Checkbook menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca per creare una nuova nota spese.
+
+Puoi anche selezionare Nuovo dal menu.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifica</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to edit it.
 
 You also can select Edit from the Checkbook menu, or click and hold on a checkbook name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona una nota spese e clicca qui per modificarla.
+
+Puoi anche selezionare Modifica dal menu, o clicca e tieni premuto sul nome della nota spese.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here delete it.
 
 You also can select Delete from the Checkbook menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona una nota spese e clicca qui per eliminarla.
+
+Puoi anche selezionare Elimina dal menu.</translation>
     </message>
     <message>
         <source>This is a listing of all checkbooks currently available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Questa è la lista di tutte le note spese attualmente disponibili.</translation>
     </message>
     <message>
         <source>Delete checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina nota spese</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura</translation>
     </message>
     <message>
         <source>Click here to configure this app.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicca qui per configurare questa app.</translation>
     </message>
     <message>
         <source>Checkbook Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome Nota Spese</translation>
     </message>
     <message>
         <source>Balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilancio</translation>
     </message>
     <message>
         <source>Enter password</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci password</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prego inserisci la tua password:</translation>
     </message>
 </context>
 <context>
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>
-        <translation type="unfinished"></translation>
+        <translation>Transazione per</translation>
     </message>
     <message>
         <source>Withdrawal</source>
-        <translation type="unfinished"></translation>
+        <translation>Prelievo</translation>
     </message>
     <message>
         <source>Select whether the transaction is a withdrawal or deposit here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona qui se la transazione è un prelievo o un deposito.</translation>
     </message>
     <message>
         <source>Deposit</source>
-        <translation type="unfinished">Deposito</translation>
+        <translation>Deposito</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished">Data:</translation>
+        <translation>Data:</translation>
     </message>
     <message>
         <source>Select date of transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona qui la data della transazione.</translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numero:</translation>
     </message>
     <message>
         <source>Enter check number here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui il numero del conto.</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished">Descrizione:</translation>
+        <translation>Descrizione:</translation>
     </message>
     <message>
         <source>Enter description of transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui la descrizione della transazione.</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished">Categoria:</translation>
+        <translation>Categoria:</translation>
     </message>
     <message>
         <source>Select transaction category here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona qui la categoria della transazione.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished">Tipo:</translation>
+        <translation>Tipo:</translation>
     </message>
     <message>
         <source>Select transaction type here.
 
 The options available vary based on whether the transaction is a deposit or withdrawal.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona qui il tipo di transazione.
+
+Le opzioni disponibili variano a seconda se la transazione è un deposito o un prelievo.</translation>
     </message>
     <message>
         <source>Amount:</source>
-        <translation type="unfinished">Ammontare:</translation>
+        <translation>Ammontare:</translation>
     </message>
     <message>
         <source>Enter the amount of transaction here.
 
 The value entered should always be positive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui l&apos;importo della transazione.
+
+Il valore inserito deve essere sempre positivo.</translation>
     </message>
     <message>
         <source>Fee:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tassa:</translation>
     </message>
     <message>
         <source>Enter any fee amount assoiciated with this transaction.
 
 The value entered should always be positive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci ogni tassa associata a questa transazione.
+
+Il valore inserito deve essere sempre positivo.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Note:</translation>
     </message>
     <message>
         <source>Enter any additional information for this transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserisci qui ogni altra informazione per questa transazione.</translation>
     </message>
     <message>
         <source>Automobile</source>
-        <translation type="unfinished">Automobile</translation>
+        <translation>Automobile</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation type="unfinished">Conti</translation>
+        <translation>Conti</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation type="unfinished">CD</translation>
+        <translation>CD</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation type="unfinished">Vestiti</translation>
+        <translation>Vestiti</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation type="unfinished">Computer</translation>
+        <translation>Computer</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation type="unfinished">DVD</translation>
+        <translation>DVD</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation type="unfinished">Elettronica</translation>
+        <translation>Elettronica</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation type="unfinished">Intrattenimento</translation>
+        <translation>Intrattenimento</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished">Cibo</translation>
+        <translation>Cibo</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation type="unfinished">Benzina</translation>
+        <translation>Carburante</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished">Varie</translation>
+        <translation>Varie</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation type="unfinished">Film</translation>
+        <translation>Film</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished">Affitto</translation>
+        <translation>Affitto</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished">Viaggio</translation>
+        <translation>Viaggio</translation>
     </message>
     <message>
         <source>Debit Charge</source>
-        <translation type="unfinished">Debito</translation>
+        <translation>Debito</translation>
     </message>
     <message>
         <source>Written Check</source>
-        <translation type="unfinished">Assegno</translation>
+        <translation>Assegno</translation>
     </message>
     <message>
         <source>Transfer</source>
-        <translation type="unfinished">Trasferimento</translation>
+        <translation>Trasferimento</translation>
     </message>
     <message>
         <source>Credit Card</source>
-        <translation type="unfinished">Carta di Credito</translation>
+        <translation>Carta di Credito</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation type="unfinished">Lavoro</translation>
+        <translation>Lavoro</translation>
     </message>
     <message>
         <source>Family Member</source>
-        <translation type="unfinished">Familiare</translation>
+        <translation>Parente</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation type="unfinished">Credito</translation>
+        <translation>Spese Varie</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
-        <translation type="unfinished">Pagamento Automatico</translation>
+        <translation>Pagamento Automatico</translation>
     </message>
     <message>
         <source>Cash</source>
-        <translation type="unfinished">Contante</translation>
+        <translation>Contante</translation>
     </message>
 </context>
 </TS>

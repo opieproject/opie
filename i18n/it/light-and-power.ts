@@ -1,9 +1,10 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Calibration</name>
     <message>
         <source>%1 Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Intervalli</translation>
     </message>
 </context>
 <context>
@@ -34,55 +35,55 @@
     </message>
     <message>
         <source>on Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>con Batteria</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni Generali</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation> sec</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished"></translation>
+        <translation>mai</translation>
     </message>
     <message>
         <source>Deactivate LCD only (does not suspend)</source>
-        <translation type="unfinished"></translation>
+        <translation>Disattiva solo LCD (non sospendere)</translation>
     </message>
     <message>
         <source>Backlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Retroilluminazione</translation>
     </message>
     <message>
         <source>set a fix value for backlight</source>
-        <translation type="unfinished"></translation>
+        <translation>imposta un valore fisso per la retroilluminazione</translation>
     </message>
     <message>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Completo</translation>
     </message>
     <message>
         <source>Use Light Sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa Sensore Luminoso</translation>
     </message>
     <message>
         <source>Calibrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Tara</translation>
     </message>
     <message>
         <source>Advanced settings for light sensor handling</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni avanzate per sensore luminoso</translation>
     </message>
     <message>
         <source>on AC</source>
-        <translation type="unfinished"></translation>
+        <translation>con Corrente</translation>
     </message>
     <message>
         <source>Warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Avvisi</translation>
     </message>
     <message>
         <source>Low power warning interval</source>
@@ -90,7 +91,7 @@
     </message>
     <message>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <source>At what battery level should the low power warning pop up</source>
@@ -117,7 +118,7 @@
     <name>SensorBase</name>
     <message>
         <source>Sensor Calibration</source>
-        <translation type="unfinished"></translation>
+        <translation>Taratura Sensore</translation>
     </message>
     <message>
         <source>Full</source>
@@ -125,7 +126,7 @@
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished">Spento</translation>
+        <translation>Spento</translation>
     </message>
     <message>
         <source>Dark</source>
@@ -137,7 +138,7 @@
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervalli</translation>
     </message>
     <message>
         <source>Check interval</source>
@@ -145,7 +146,7 @@
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation> sec</translation>
     </message>
 </context>
 </TS>

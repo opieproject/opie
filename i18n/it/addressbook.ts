@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AbTable</name>
     <message>
@@ -110,27 +111,27 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Chiudi Trova</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva tutti i Dati</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurazione</translation>
     </message>
     <message>
         <source>Not Found</source>
-        <translation type="unfinished"></translation>
+        <translation>Non Trovato</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Cartellino</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Inizia Ricerca</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -138,11 +139,11 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sì</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;No</translation>
     </message>
     <message>
         <source>Unable to find a contact for this 
@@ -157,7 +158,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Add Contact?</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi Contatto?</translation>
     </message>
     <message>
         <source>Do you really want add contact for 
@@ -166,7 +167,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>&amp;All Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tutti Sì</translation>
     </message>
 </context>
 <context>
@@ -185,11 +186,11 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Maiuscole/minuscole</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Email</translation>
     </message>
     <message>
         <source>Prefer QT-Mail </source>
@@ -208,31 +209,31 @@ is provided free !</source>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Varie</translation>
     </message>
     <message>
         <source>Search Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni Ricerca</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished">Font</translation>
+        <translation>Font</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished">Piccolo</translation>
+        <translation>Piccolo</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished">Normale</translation>
+        <translation>Normale</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished">Grande</translation>
+        <translation>Grande</translation>
     </message>
     <message>
         <source>Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordine</translation>
     </message>
     <message>
         <source>Select Contact Order:</source>
@@ -240,23 +241,23 @@ is provided free !</source>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished">Sù</translation>
+        <translation>Sù</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished">Giù</translation>
+        <translation>Giù</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Aggiungi</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurazione</translation>
     </message>
 </context>
 <context>
@@ -1163,59 +1164,59 @@ is provided free !</source>
     </message>
     <message>
         <source>Afghanistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Afghanistan</translation>
     </message>
     <message>
         <source>Antarctica</source>
-        <translation type="unfinished"></translation>
+        <translation>Antarctica</translation>
     </message>
     <message>
         <source>Armenia</source>
-        <translation type="unfinished"></translation>
+        <translation>Armenia</translation>
     </message>
     <message>
         <source>Bolivia</source>
-        <translation type="unfinished"></translation>
+        <translation>Bolivia</translation>
     </message>
     <message>
         <source>Cameroon</source>
-        <translation type="unfinished"></translation>
+        <translation>Cameroon</translation>
     </message>
     <message>
         <source>Ghana</source>
-        <translation type="unfinished"></translation>
+        <translation>Ghana</translation>
     </message>
     <message>
         <source>Guadeloupe</source>
-        <translation type="unfinished"></translation>
+        <translation>Guadalupe</translation>
     </message>
     <message>
         <source>Guinea-Bissau</source>
-        <translation type="unfinished"></translation>
+        <translation>Guinea-Bissau</translation>
     </message>
     <message>
         <source>Jamaica</source>
-        <translation type="unfinished"></translation>
+        <translation>Jamaica</translation>
     </message>
     <message>
         <source>Kiribati</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiribati</translation>
     </message>
     <message>
         <source>Kyrgyzstan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kyrgyzstan</translation>
     </message>
     <message>
         <source>Palestinian Sovereign Areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Palestinian Sovereign Areas</translation>
     </message>
     <message>
         <source>Pitcairn Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Isole Pitcairn</translation>
     </message>
     <message>
         <source>Vietnam</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietnam</translation>
     </message>
 </context>
 <context>
