@@ -11,18 +11,20 @@
 
 #include <sys/vfs.h>
 #include <mntent.h>
+#include <errno.h>
 
 static const char *listDir = "/usr/lib/ipkg/externinfo/";
 
 static void createSymlinks( const QString &location, const QString &package )
 {
+
     QFile inFile( location + "/usr/lib/ipkg/info/" + package + ".list" );
     mkdir( "/usr/lib/ipkg", 0777 );
     mkdir( listDir, 0777 );
 
     QFile outFile( listDir + package + ".list");
 
-    //qDebug( "createSymlinks %s -> %s", inFile.name().ascii(), outFile.name().ascii() );
+//    qDebug( "createSymlinks %s -> %s", inFile.name().ascii(), outFile.name().ascii() );
     
 
     
@@ -33,24 +35,40 @@ static void createSymlinks( const QString &location, const QString &package )
 	QString s;
 	while ( !in.eof() ) {        // until end of file...
 	    s = in.readLine();       // line of text excluding '\n'
-	    //qDebug( "Read: %s", s.ascii() );
+//	    qDebug( "Read: %s", s.ascii() );
+	    if (s.find(location,0,true) >= 0){
+//		    qDebug( "Found!" );
+		    s = s.replace(location,"");
+	    }
+//	    qDebug( "Read after: %s", s.ascii() );
+	    
 	    // for s, do link/mkdir.
 	    if ( s.right(1) == "/" ) {
-		//qDebug("do mkdir for %s", s.ascii());
+//		qDebug("do mkdir for %s", s.ascii());
 		mkdir( s.ascii(), 0777 );
 		//possible optimization: symlink directories
 		//that don't exist already. -- Risky.
 	    } else {
-		//qDebug("do symlink for %s", s.ascii());
+//		qDebug("do symlink for %s", s.ascii());
 		QFileInfo ffi( s ); 
 		//Don't try to symlink if a regular file exists already
 		if ( !ffi.exists() || ffi.isSymLink() ) {
-		    symlink( (location+s).ascii(), s.ascii() );
+		    if (symlink( (location+s).ascii(), s.ascii() ) != 0){
+			if (errno == ENOENT){
+//			perror("Symlink Failed! ");
+			QString e=s.ascii();
+			e = e.replace(ffi.fileName(),"");
+//			qDebug("DirName : %s",e.ascii() );
+			system ( QString("mkdir -p ")+e.ascii() );
+		        if (symlink( (location+s).ascii(), s.ascii() ) != 0)
+				qDebug ("Big problem creating symlink and directory");
+			}
+		    }
 //		    qDebug ( "Created %s" ,s.ascii() );
 		    out << s << "\n";
-		} //else {
-		  //  qDebug( "%s  exists already, not symlinked", s.ascii() );
-//		}
+		} else {
+		    qDebug( "%s  exists already, not symlinked", s.ascii() );
+		}
 	    }
 	}
 	inFile.close();
@@ -70,14 +88,15 @@ static void removeSymlinks( const QString &package )
 	QString s;
 	while ( !in.eof() ) {        // until end of file...
 	    s = in.readLine();       // line of text excluding '\n'
-	    //qDebug("remove symlink %s", s.ascii());
+//	    qDebug("remove symlink %s", s.ascii());
 	    QFileInfo ffi( s ); 
 	    //Confirm that it's still a symlink.
-	    if ( ffi.isSymLink() )
+	    if ( ffi.isSymLink() ){
 		unlink( s.ascii() );
-//	    	qDebug ( "Removed %s", s.ascii() );
-//	    else
+//	    	qDebug ( "Removed %s", s.ascii() );}
+//	    else 
 //		qDebug( "Not removed %s", s.ascii() );
+	    }
 	}
 	inFile.close();
 	inFile.remove();
@@ -112,7 +131,7 @@ static void updateSymlinks()
 
 	    QString info = root + "/usr/lib/ipkg/info";
 	    QDir infoDir( info );
-	    //qDebug( "looking at %s", info.ascii() );
+//	    qDebug( "looking at %s", info.ascii() );
 	    if ( infoDir.isReadable() ) {
 		const QFileInfoList *packages = infoDir.entryInfoList( "*.list" ); // No tr
 		QFileInfoListIterator it( *packages );
@@ -120,7 +139,7 @@ static void updateSymlinks()
 		while (( fi = *it )) {
 		    ++it;
 		    if ( knownPackages.contains( fi->fileName() ) ) {
-			//qDebug( "found %s and we've seen it before", fi->fileName().latin1() );
+//			qDebug( "found %s and we've seen it before", fi->fileName().latin1() );
 			knownPackages.remove( fi->fileName() );
 		    } else {
 			//it's a new one
