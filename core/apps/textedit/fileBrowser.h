@@ -28,6 +28,8 @@ copyright Sun 02-17-2002 22:28:23 L. J. Potter ljp@llornkcor.com
 
 #include <qvariant.h>
 #include <qdialog.h>
+#include <qregexp.h>
+
 
 class QLineEdit;
 class QVBoxLayout;
@@ -41,7 +43,6 @@ class QWidgetStack;
 class FileSelector;
 class QPoint;
 class MenuButton;
-class QRegExp;
 
 
 class fileBrowser : public QDialog
@@ -112,6 +113,12 @@ public:
     InputDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
     ~InputDialog();
     QString inputText;
+    QLineEdit* LineEdit1;
+    void setTextEdit(const QString &);
+};
+
+#endif // FILEBROWSER_H
+ QString inputText;
     QLineEdit* LineEdit1;
     void setTextEdit(const QString &);
 };
