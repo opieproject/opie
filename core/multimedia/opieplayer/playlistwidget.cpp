@@ -90,7 +90,7 @@ static inline QString fullBaseName ( const QFileInfo &fi )
 }
 
 
-QString audioMimes ="audio/mpeg;audio/x-wav;audio/x-ogg;audio/x-mod";
+QString audioMimes ="audio/mpeg;audio/x-wav;audio/x-ogg;audio/x-mod;audio/x-ogg";
 // class myFileSelector {
 
 // };
