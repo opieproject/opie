@@ -67,7 +67,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     QPEToolBar* menuToolBar = new QPEToolBar(this);
     QPEMenuBar* menuBar = new QPEMenuBar(menuToolBar);
 
-    QPopupMenu *toolsPopupMenu = new QPopupMenu(menuBar);
+    QPopupMenu* toolsPopupMenu = new QPopupMenu(menuBar);
 
     QAction* deleteAllAction = new QAction(tr("Delete All"), QString::null, 0, this);
     connect(deleteAllAction, SIGNAL(activated()), this, SLOT(deleteAll()));
@@ -92,6 +92,12 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     QAction* pageInformationAction = new QAction(tr("Page Information"), tr("Page Information..."), 0, this);
     connect(pageInformationAction, SIGNAL(activated()), this, SLOT(pageInformation()));
     pageInformationAction->addTo(toolsPopupMenu);
+
+    toolsPopupMenu->insertSeparator();
+
+    m_pAntiAliasingAction = new QAction(tr("Anti-Aliasing"), QString::null, 0, this);
+    m_pAntiAliasingAction->setToggleAction(true);
+    m_pAntiAliasingAction->addTo(toolsPopupMenu);
 
     menuBar->insertItem(tr("Tools"), toolsPopupMenu);
 
@@ -273,6 +279,11 @@ DrawPad::~DrawPad()
         m_pDrawPadCanvas->save(&file);
         file.close();
     }
+}
+
+bool DrawPad::antiAliasing()
+{
+    return (m_pAntiAliasingAction->isOn());
 }
 
 void DrawPad::newPage()

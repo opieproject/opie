@@ -38,6 +38,8 @@ public:
     QPen pen() { return m_pen; }
     QBrush brush() { return m_brush; }
 
+    bool antiAliasing();
+
 private slots:
     void newPage();
     void clearPage();
@@ -73,6 +75,8 @@ private:
     Tool* m_pTool;
     QPen m_pen;
     QBrush m_brush;
+
+    QAction* m_pAntiAliasingAction;
 
     QAction* m_pUndoAction;
     QAction* m_pRedoAction;
