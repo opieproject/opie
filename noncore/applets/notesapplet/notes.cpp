@@ -27,14 +27,17 @@
 #include <qpe/config.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
-#include <qsocket.h>
+#include <qpe/ir.h>
 
+// #include <qsocket.h>
+// #include <qclipboard.h>
 #include <qmultilineedit.h>
 #include <qlistbox.h>
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
 
 #include <qdir.h>
+#include <qfile.h>
 #include <qpoint.h>
 #include <qpushbutton.h>
 #include <qpainter.h>
@@ -90,7 +93,9 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
     view = new QMultiLineEdit(this, "OpieNotesView");
 
     box = new QListBox(this, "OpieNotesBox");
+
     QPEApplication::setStylusOperation( box->viewport(),QPEApplication::RightOnHold);
+
     box->setFixedHeight(50);
 
     vbox->setMargin( 6 );
@@ -109,6 +114,10 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
     newButton->setText(tr("New"));
     hbox->addWidget( newButton);
 
+    saveButton= new QPushButton( this, "saveButton" );
+    saveButton->setText(tr("Save"));
+    hbox->addWidget( saveButton);
+
     deleteButton= new QPushButton( this, "deleteButton" );
     deleteButton->setText(tr("Delete"));
     hbox->addWidget( deleteButton);
@@ -117,11 +126,15 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
 
     connect( box, SIGNAL( mouseButtonPressed( int, QListBoxItem *, const QPoint&)),
              this,SLOT( boxPressed(int, QListBoxItem *, const QPoint&)) );
+
     connect(box, SIGNAL(highlighted(const QString&)), this, SLOT(slotBoxSelected(const QString &)));
+
     connect( &menuTimer, SIGNAL( timeout() ), SLOT( showMenu() ) );
 
     connect(view,SIGNAL( textChanged() ), this, SLOT(slotViewEdited() ) );
+
     connect(newButton, SIGNAL(clicked()), this, SLOT(slotNewButton()));
+    connect(saveButton, SIGNAL(clicked()), this, SLOT(slotSaveButton()));
     connect(deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteButtonClicked()));
 
     populateBox();
@@ -130,8 +143,16 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
       //  parent->setFocus();    
 }
 
+void NotesControl::slotSaveButton() {
+    if(edited) {
+        save();
+        populateBox();
+    }
+}
+
 void NotesControl::slotDeleteButtonClicked() {
-    switch ( QMessageBox::warning(this,tr("Delete?"),tr("Do you really want to<BR><B> delete</B> this note ?")
+    switch ( QMessageBox::warning(this,tr("Delete?")
+                                  ,tr("Do you really want to<BR><B> delete</B> this note ?")
                                   ,tr("Yes"),tr("No"),0,1,1) ) {
       case 0: 
           slotDeleteButton();
@@ -180,7 +201,27 @@ void NotesControl::slotNewButton() {
     view->setFocus();    
 }
 
-void NotesControl::boxPressed(int mouse, QListBoxItem *item, const QPoint&) {
+void NotesControl::slotBeamButton() {
+  Ir ir;
+  if(!ir.supported()){
+  } else {
+      this->hide();
+    QString selectedText = box->currentText();
+    if( !selectedText.isEmpty()) {
+        QString file = QDir::homeDirPath()+"/"+selectedText;
+        QFile f(file);
+           Ir *irFile = new Ir(this, "IR");
+          connect( irFile, SIGNAL(done(Ir*)), this, SLOT( slotBeamFinished( Ir * )));
+          irFile->send( file, "Note", "text/plain" );
+    }
+  }
+}
+
+void NotesControl::slotBeamFinished(Ir *) {
+    this->show();
+}
+
+void NotesControl::boxPressed(int mouse, QListBoxItem *, const QPoint&) {
   switch (mouse) {
     case 1:{
     }
@@ -204,8 +245,9 @@ void NotesControl::slotBoxSelected(const QString &itemString) {
 void NotesControl::showMenu() {
   QPopupMenu *m = new QPopupMenu(0);
 
+  m->insertItem(  tr( "Beam Out" ), this,  SLOT( slotBeamButton() ));
+  m->insertSeparator();
   m->insertItem(  tr( "Delete" ), this,  SLOT( slotDeleteButton() ));
-
   m->setFocus();
   m->exec( QCursor::pos() );
 
@@ -256,6 +298,8 @@ void NotesControl::save() {
                 cfg.writeEntry("NumberOfFiles", noOfFiles+1 );
                 cfg.write();
             }
+            else
+                qDebug("oldname equals docname");
             doc = new DocLnk(docname);
 
             doc->setType("text/plain");
@@ -293,6 +337,7 @@ void NotesControl::populateBox() {
     list.sort();
     box->insertStringList(list,-1);
     doPopulate=false;
+    update();
 }
 
 void NotesControl::load() {
@@ -345,6 +390,31 @@ void NotesControl::slotViewEdited() {
          edited=true;
      }
 }
+
+// void NotesControl::keyReleaseEvent( QKeyEvent *e) {
+
+//     switch ( e->state() ) {
+//           case ControlButton:
+//               if(e->key() == Key_C) { //copy
+//                   qDebug("copy");
+//     QClipboard *cb = QApplication::clipboard();
+//     QString text;
+
+//     // Copy text from the clipboard (paste)
+//     text = cb->text();
+//               }
+//               if(e->key() == Key_X) { //cut
+//               }
+//               if(e->key() == Key_V) { //paste
+//     QClipboard *cb = QApplication::clipboard();
+//     QString text;
+// view
+//     cb->setText();
+//               }
+//               break;
+//         };
+// QWidget::keyReleaseEvent(e);
+// }
 
 //===========================================================================
 

@@ -21,6 +21,7 @@
 #include <qguardedptr.h>
 #include <qtimer.h>
 #include <qpe/filemanager.h>
+#include <qpe/ir.h>
 #include <qstring.h>
 
 class QComboBox;
@@ -53,7 +54,10 @@ private:
       void focusOutEvent( QFocusEvent * );
       void load(const QString&);
 private slots:
+    void slotBeamButton();
+    void slotBeamFinished( Ir*);
     void slotDeleteButton();
+    void slotSaveButton();
     void slotDeleteButtonClicked();
     void slotNewButton();
     void boxPressed(int, QListBoxItem *, const QPoint&);
@@ -61,6 +65,8 @@ private slots:
     void loadDoc( const DocLnk &);
     void slotViewEdited();
     void slotBoxSelected(const QString &);
+//    void keyReleaseEvent( QKeyEvent *);
+
 };
 
 class NotesApplet : public QWidget {
