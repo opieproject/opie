@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.9 2002-02-15 17:01:32 jeremy Exp $
+ * $Id: vmemo.cpp,v 1.10 2002-02-15 21:10:04 jeremy Exp $
  */
 
 #include <sys/utsname.h>
@@ -138,14 +138,13 @@ VMemo::VMemo( QWidget *parent, const char *name )
 {
   setFixedHeight( 18 );
   setFixedWidth( 14 );
-
+  
   recording = FALSE;
   
   myChannel = new QCopChannel( "QPE/VMemo", this );
-  connect( myChannel, SIGNAL(sayHi()), this, SLOT(sayHi()) );
   connect( myChannel, SIGNAL(received(const QCString&, const QByteArray&)),
 		   this, SLOT(receive(const QCString&, const QByteArray&)) );
-
+  
   struct utsname name; /* check for embedix kernel running on the zaurus, if 
 						  lineo change string, this break
 					   */
@@ -157,51 +156,13 @@ VMemo::VMemo( QWidget *parent, const char *name )
 		  systemZaurus=TRUE;
 	  else
 		{
-		  int fr;
 		  systemZaurus=FALSE;
-
-		  if ((fr = fork()) == -1)
-			{
-			  qWarning("Fork failed");
-			}
-		  else if (fr == 0)
-			{
-			  int key, max;
-			  fd_set fdr;
-			  char buffer[10];
-
-			  key = open("/dev/touchscreen/key", O_RDONLY);
-			  if (key == -1)
-				{
-				  qWarning("Could not open key");
-				  exit(1);
-				}
-
-			  while(1)
-				{
-				  FD_ZERO(&fdr);
-				  FD_SET(key, &fdr);
-				  max = key;
-
-				  qWarning("while");
-
-				  read(key, buffer, 10);
-				  if(*buffer == (char)129)
-					{
-					  qWarning("REC = stop");
-					  QCopEnvelope( "QPE/VMemo", "toggleRecord()");
-					  QCopEnvelope( "QPE/VMemo", "sayHi()");
-					}
-				  else if(*buffer == (char)1)
-					{
-					  qWarning("REC = start");
-					  QCopEnvelope( "QPE/VMemo", "toggleRecord()");
-					  QCopEnvelope( "QPE/VMemo", "sayHi()");
-					}
-				}
-			}
-		  else if(fr)
-			qWarning("parent: Fork = good");
+		  
+		  // Register the REC key press.
+		  QCopEnvelope e("QPE/Desktop", "keyRegister(int key, QString channel, QString message)");
+		  e << 4096;
+		  e << QString("QPE/VMemo");
+		  e << QString("toggleRecord()");
 		}
 	}
   qWarning("VMemo done init");
@@ -211,18 +172,17 @@ VMemo::~VMemo()
 {
 }
 
-void VMemo::sayHi()
-{
-  qWarning("Hi");
-}
-
 void VMemo::receive( const QCString &msg, const QByteArray &data )
 {
     QDataStream stream( data, IO_ReadOnly );
-	qWarning(msg);
-    if ( msg == "toggleRecord()" ) {
-	  qWarning("Hello");
-    }
+	qWarning("VMemo::receive: %s", (const char *)msg);
+	if (msg == "toggleRecord()")
+	  {
+		if (recording)
+		  mouseReleaseEvent(NULL);
+		else
+		  mousePressEvent(NULL);
+	  }
 }
 
 void VMemo::paintEvent( QPaintEvent* )
@@ -233,8 +193,6 @@ void VMemo::paintEvent( QPaintEvent* )
 
 void VMemo::mousePressEvent( QMouseEvent * )
 {
-  QCopEnvelope( "QPE/VMemo", "sayHi()");
-
   // just to be safe
   if (recording)
 	{
@@ -395,8 +353,8 @@ int VMemo::openWAV(const char *filename)
 
 void VMemo::record(void)
 {
-  int length=0, result, value;
-  char sound[8192];
+  int length=0, result, value; //, i;
+  char sound[512]; //, leftBuffer[256], rightBuffer[256];
   
   qWarning("VMemo::record()");
   
@@ -404,12 +362,24 @@ void VMemo::record(void)
 	{
 	  result = read(dsp, sound, 512); // 8192
 	  qApp->processEvents();
+
+	  /* attempt to write only one channel...didnt work.
+	  for (i = 0; i < result; i++) {
+		leftBuffer[i] = sound[2*i];
+		rightBuffer[i] = sound[2*i+1];
+	  }
+	  */
+	  qApp->processEvents();
+
+	  /* needed to only write one channel. comment out above "write/length" code.
+	  write(wav, leftBuffer, result / 2);
+	  length += result/2;
+	  */
+
 	  write(wav, sound, result);
-	  qApp->processEvents();
 	  length += result;
+
 	  qApp->processEvents();
-	  //    printf("%d\r",length);
-	  //    fflush(stdout);
 	}
   
   qWarning("VMemo::record() -> Done recording");
@@ -420,7 +390,6 @@ void VMemo::record(void)
   write(wav, &value, 4);
   lseek(wav, 40, SEEK_SET);
   write(wav, &length, 4);
-  //  qDebug("File length %d, samplecount %d", value, length);
   track.close();
   
   if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
