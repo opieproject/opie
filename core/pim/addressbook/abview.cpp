@@ -411,9 +411,6 @@ void  AbView::updateView()
 {
 	qWarning("AbView::updateView()");
 
-	// Feed all views with new lists
-	updateListinViews();
-
 	if ( m_viewStack -> visibleWidget() ){
 		m_viewStack -> visibleWidget() -> clearFocus();
 	}
@@ -431,6 +428,9 @@ void  AbView::updateView()
 	}else
 		m_curr_Contact = 0;
 	
+	// Feed all views with new lists
+	updateListinViews();
+
 	// Inform the world that the view is changed
 	if ( m_curr_View != m_prev_View )
 		emit signalViewSwitched ( (int) m_curr_View );
