@@ -84,7 +84,7 @@ const FileSystem *StorageInfo::fileSystemOf( const QString &filename )
 void StorageInfo::cardMessage( const QCString& msg, const QByteArray& )
 {
     if ( msg == "mtabChanged()" )
-  update();
+        update();
 }
 // cause of the lack of a d pointer we need
 // to store informations in a config file :(
@@ -104,8 +104,9 @@ void StorageInfo::update()
   while ( (me = getmntent( mntfp )) != 0 ) {
       QString fs = me->mnt_fsname;
       if ( fs.left(7)=="/dev/hd" || fs.left(7)=="/dev/sd"
-        || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd"
-        || fs.left(5)=="tmpfs" )
+           || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd"
+           || fs.left( 14 ) == "/dev/mmc/part1"
+           || fs.left(5)=="tmpfs" )
       {
     n++;
     curdisks.append(fs);
@@ -132,8 +133,8 @@ void StorageInfo::update()
   QStringList::ConstIterator optsIt=curopts.begin();
   for (; it!=curdisks.end(); ++it, ++fsit, ++optsIt) {
       QString opts = *optsIt;
-  
-      QString disk = *it; 
+
+      QString disk = *it;
       QString humanname;
       bool removable = FALSE;
       if ( isCF(disk) ) {
@@ -143,6 +144,9 @@ void StorageInfo::update()
     humanname = tr("Hard Disk");
       } else if ( disk.left(9) == "/dev/mmcd" ) {
     humanname = tr("SD Card");
+    removable = TRUE;
+      } else if ( disk.left( 14 ) == "/dev/mmc/part1" ) {
+    humanname = tr("MMC Card");
     removable = TRUE;
       } else if ( disk.left(7) == "/dev/hd" )
     humanname = tr("Hard Disk") + " " + disk;
