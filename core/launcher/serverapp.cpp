@@ -296,7 +296,7 @@ void ServerApplication::switchLCD( bool on )
 }
 
 ServerApplication::ServerApplication( int& argc, char **argv, Type t )
-    : QPEApplication( argc, argv, t )
+    : Opie::Core::OApplication( argc, argv, t )
 {
     ms_is_starting = true;
 

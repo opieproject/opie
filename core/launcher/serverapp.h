@@ -21,7 +21,7 @@
 #ifndef SERVERAPP_H
 #define SERVERAPP_H
 
-#include <qtopia/qpeapplication.h>
+#include <opie2/oapplication.h>
 
 #include <qwidget.h>
 #ifdef QWS
@@ -85,7 +85,7 @@ private:
     KeyRegisterList m_keys;
 };
 
-class ServerApplication : public QPEApplication
+class ServerApplication : public Opie::Core::OApplication
 {
     Q_OBJECT
 public:
