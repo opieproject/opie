@@ -25,7 +25,6 @@ public:
     void setFile(const QString &filename);
     bool writeChanges(void);
     bool read(void);
-    void print(void);
     void addDrink(const QString &name, const QString &ingredients);
     DrinkList::Iterator getBegin(void);
     DrinkList::Iterator getEnd(void);

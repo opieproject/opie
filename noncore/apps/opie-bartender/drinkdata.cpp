@@ -18,7 +18,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <iostream>
 #include <errno.h>
 
 #include "drinkdata.h"
@@ -64,14 +63,6 @@ bool DrinkData::read(void) {
     dbFile.close(); 
 
     return true;
-}
-
-void DrinkData::print(void) {
-    DrinkList::Iterator it = items.begin();
-    while ( it != items.end() ) {
-        std::cout << (*it).getName() << '\n';
-        ++it;
-    }
 }
 
 void DrinkData::addDrink(const QString &name, const QString &ingredients) {
