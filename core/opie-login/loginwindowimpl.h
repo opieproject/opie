@@ -14,6 +14,7 @@ public:
 
 protected slots:
 	void restart ( );
+	void quit ( );
 	void showIM ( );
 	void suspend ( );
 	void backlight ( );

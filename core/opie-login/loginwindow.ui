@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>472</width>
+            <width>460</width>
             <height>341</height>
         </rect>
     </property>
@@ -43,6 +43,9 @@
             <property>
                 <name>layoutMargin</name>
             </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
             <vbox>
                 <property stdset="1">
                     <name>margin</name>
@@ -50,7 +53,7 @@
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>6</number>
+                    <number>4</number>
                 </property>
                 <widget>
                     <class>QLabel</class>
@@ -66,6 +69,15 @@
                         </sizepolicy>
                     </property>
                     <property stdset="1">
+                        <name>font</name>
+                        <font>
+                            <family>helvetica</family>
+                            <pointsize>18</pointsize>
+                            <bold>1</bold>
+                            <underline>1</underline>
+                        </font>
+                    </property>
+                    <property stdset="1">
                         <name>autoMask</name>
                         <bool>true</bool>
                     </property>
@@ -74,8 +86,12 @@
                         <enum>ParentOrigin</enum>
                     </property>
                     <property stdset="1">
+                        <name>margin</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
                         <name>text</name>
-                        <string>&lt;center&gt;&lt;h1&gt;Welcome to OPIE&lt;/h1&gt;&lt;/center&gt;</string>
+                        <string>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</string>
                     </property>
                 </widget>
                 <widget>

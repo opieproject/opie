@@ -20,6 +20,7 @@
 #include <grp.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <signal.h>
 
 #ifdef USEPAM
 extern "C" {
@@ -36,28 +37,29 @@ extern "C" {
 LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_Customize | WStyle_NoBorder | WDestructiveClose )
 {
 	QPopupMenu *pop = new QPopupMenu ( this );
-	pop-> insertItem ( tr( "Restart" ), this, SLOT( restart ( )));	
+	pop-> insertItem ( tr( "Restart" ), this, SLOT( restart ( )));
+	pop-> insertItem ( tr( "Quit" ), this, SLOT( quit ( )));
 	m_menu-> setPopup ( pop );
 
-	QHBoxLayout *lay = new QHBoxLayout ( m_taskbar, 4, 4 ); 
+	QHBoxLayout *lay = new QHBoxLayout ( m_taskbar, 4, 4 );
 	m_input = new InputMethods ( m_taskbar );
 	lay-> addWidget ( m_input );
 	lay-> addStretch ( 10 );
-	
+
 	setActiveWindow ( );
 	m_password-> setFocus ( );
 
 	m_user-> insertStringList ( getAllUsers ( ));
-	
+
 	QTimer::singleShot ( 0, this, SLOT( showIM ( )));
-		
-	QString opiedir = ::getenv ( "OPIEDIR" );	
+
+	QString opiedir = ::getenv ( "OPIEDIR" );
 	QPixmap bgpix ( opiedir + "/pics/launcher/opie-background.jpg" );
-	
+
 	if ( !bgpix. isNull ( ))
 		setBackgroundPixmap ( bgpix );
-	
-	m_caption-> setText ( m_caption-> text ( ) + tr( "<center><h1><u>%1 %2</u></h1></center>" ). arg ( ODevice::inst ( )-> systemString ( )). arg ( ODevice::inst ( )-> systemVersionString ( )));
+
+	m_caption-> setText ( m_caption-> text ( ) + tr( "<center>%1 %2</center>" ). arg ( ODevice::inst ( )-> systemString ( )). arg ( ODevice::inst ( )-> systemVersionString ( )));
 }
 
 LoginWindowImpl::~LoginWindowImpl ( )
@@ -67,12 +69,12 @@ LoginWindowImpl::~LoginWindowImpl ( )
 void LoginWindowImpl::keyPressEvent ( QKeyEvent *e )
 {
 	switch ( e-> key ( )) {
-		case Key_F34: suspend ( );
-		              break;
-		case Key_F35: backlight ( );
-		              break; 
-		default     : e-> ignore ( );
-		              break;
+		case HardKey_Suspend:   suspend ( );
+		                        break;
+		case HardKey_Backlight: backlight ( );
+		                        break;
+		default:                e-> ignore ( );
+		                        break;
 	}
 	LoginWindow::keyPressEvent ( e );
 }
@@ -88,13 +90,13 @@ QStringList LoginWindowImpl::getAllUsers ( )
 	struct passwd *pwd;
 	QStringList sl;
 
-	while (( pwd = getpwent ( ))) {
+	while (( pwd = ::getpwent ( ))) {
 		if (( pwd-> pw_uid == 0 ) || ( pwd-> pw_uid >= 500 && pwd-> pw_uid < 65534 ))
 			sl << QString ( pwd-> pw_name );
-	}		
-	
-	endpwent ( );
-	
+	}
+
+	::endpwent ( );
+
 	return sl;
 }
 
@@ -108,22 +110,24 @@ void LoginWindowImpl::restart ( )
 	qApp-> quit ( );
 }
 
+void LoginWindowImpl::quit ( )
+{
+	qApp-> quit ( );
+	::kill ( ::getppid ( ), SIGUSR1 );
+}
+
 void LoginWindowImpl::suspend ( )
 {
-	system ( "apm -s" );
-	usleep ( 1 * 1000 * 1000 );
-	{
-		QCopEnvelope e("QPE/System", "setBacklight(int)");
-		e << -3; // Force on
-	}
+	ODevice::inst ( )-> suspend ( );
+
+	QCopEnvelope e("QPE/System", "setBacklight(int)");
+	e << -3; // Force on
 }
 
 void LoginWindowImpl::backlight ( )
 {
-	{
-		QCopEnvelope e("QPE/System", "setBacklight(int)");
-		e << -2; // toggle
-	}
+	QCopEnvelope e("QPE/System", "setBacklight(int)");
+	e << -2; // toggle
 }
 
 #ifdef USEPAM
@@ -158,7 +162,7 @@ static int PAM_conv( int num_msg, pam_message_type **msg,
   int count = 0, replies = 0;
   struct pam_response *reply = NULL;
   int size = sizeof(struct pam_response);
-    
+
   for( count = 0; count < num_msg; count++ ) {
     switch (msg[count]->msg_style) {
     case PAM_PROMPT_ECHO_ON:
@@ -193,7 +197,7 @@ static bool pwcheck_PAM( const char *user, const char *password )
   int pam_return = 0;
   pam_handle_t *pamh = 0;
   PAM_password = password;
-  
+
   pam_error = pam_start( _PAM_SERVICE, user, &PAM_conversation, &pamh );
   if( pam_error == PAM_SUCCESS ) {
     pam_error = pam_authenticate( pamh, 0 );
@@ -222,18 +226,18 @@ static bool pwcheck_Unix( const char *user, const char *pass )
 
 	if ( !user || !pass )
 		return false;
-	
+
 	pw = getpwnam ( user );
-	
+
 	if ( !pw )
 		return false;
-	
+
 	if (( strcmp ( pw-> pw_passwd, "x" ) == 0 ) || ( strcmp ( pw-> pw_passwd, "*" ) == 0 )) {
 		struct spwd *sp = getspnam ( pw-> pw_name );
-		
+
 		if ( !sp )
 			return false;
-		
+
 		correct = sp-> sp_pwdp;
 	}
 	else
@@ -256,40 +260,30 @@ bool LoginWindowImpl::changeIdentity ( const char *user )
 
 	bool fail = false;
 	struct passwd *pw = getpwnam ( user );
-	
+
 	fail |= ( pw == 0 );
-	printf ( "1 %d\n", fail );
 	fail |= ( initgroups ( pw-> pw_name, pw-> pw_gid ));
 	endgrent ( );
-	printf ( "2 %d\n", fail );
 	fail |= ( setgid ( pw-> pw_gid ));
-	printf ( "3 %d\n", fail );
 	fail |= ( setuid ( pw-> pw_uid ));
-	
-	printf ( "4 %d\n", fail );
+
 	fail |= ( chdir ( pw-> pw_dir ) && chdir ( "/" ));
 
-	printf ( "5 %d\n", fail );
 	fail |= ( setenv ( "HOME",    pw-> pw_dir, 1 ));
-	printf ( "6 %d\n", fail );
 	fail |= ( setenv ( "SHELL",   pw-> pw_shell, 1 ));
-	printf ( "7 %d\n", fail );
 	fail |= ( setenv ( "USER",    pw-> pw_name, 1 ));
-	printf ( "8 %d\n", fail );
 	fail |= ( setenv ( "LOGNAME", pw-> pw_name, 1 ));
-	printf ( "9 %d\n", fail );
 	fail |= ( setenv ( "PATH",    ( pw-> pw_uid ? DEFAULT_LOGIN_PATH : DEFAULT_ROOT_LOGIN_PATH ), 1 ));
-	printf ( "10 %d\n", fail );
-	
+
 	return !fail;
 }
 
 void LoginWindowImpl::login ( )
 {
-	const char *user = strdup ( m_user-> currentText ( ). local8Bit ( ));	
-	const char *pass = strdup ( m_password-> text ( ). local8Bit ( ));
+	const char *user = ::strdup ( m_user-> currentText ( ). local8Bit ( ));
+	const char *pass = ::strdup ( m_password-> text ( ). local8Bit ( ));
 	bool ok;
-	
+
 	if ( !user || !user [0] )
 		return;
 	if ( !pass )
@@ -302,13 +296,19 @@ void LoginWindowImpl::login ( )
 #endif
 
 	if ( ok ) {
-		if ( changeIdentity ( user )) {		
-			QString opie = getenv ( "OPIEDIR" );
-			opie += "/bin/qpe";
-		
-			execl ( opie. latin1 ( ), "qpe", 0 );
-		
-			QMessageBox::critical ( this, tr( "Failure" ), tr( "Could not start OPIE." ));
+		if ( changeIdentity ( user )) {
+			char *opie = ::getenv ( "OPIEDIR" );
+			char *arg = new char [::strlen ( opie ) + 8 + 1];
+
+			::strcpy ( arg, opie );
+			::strcat ( arg, "/bin/qpe" );
+
+			// start qpe via a login shell
+			::execl ( "/bin/sh", "-sh", "-c", arg, 0 );
+
+			QMessageBox::critical ( this, tr( "Failure" ), tr( "Could not start OPIE\n(%1)." ). arg ( arg ));
+			delete [] arg;
+
 			restart ( );
 		}
 		else {

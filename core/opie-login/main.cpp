@@ -6,9 +6,12 @@
 #include <sys/wait.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <signal.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/qpestyle.h>
+#include <qpe/power.h>
 
 #include <opie/odevice.h>
 
@@ -17,134 +20,162 @@
 
 #include "loginwindowimpl.h"
 #include "calibrate.h"
-                                                              
+
 int login_main ( int argc, char **argv );
+void sigusr1 ( int sig );
+void exit_closelog ( );
+
 
 
 int main ( int argc, char **argv )
 {
-	if ( geteuid ( ) != 0 ) {
-		fprintf ( stderr, "%s can only be executed by root. (or chmod +s)", argv [0] );
+	if ( ::geteuid ( ) != 0 ) {
+		::fprintf ( stderr, "%s can only be executed by root. (or chmod +s)", argv [0] );
 		return 1;
 	}
 
 //	struct rlimit rl;
-//	getrlimit ( RLIMIT_NOFILE, &rl );
-	
-//	for ( unsigned int i = 0; i < rl. rlim_cur; i++ )
-//		close ( i );
+//	::getrlimit ( RLIMIT_NOFILE, &rl );
 
-	setpgid ( 0, 0 );
-	setsid ( );
-	
-	openlog ( "opie-login", LOG_CONS, LOG_AUTHPRIV );
-	
+//	for ( unsigned int i = 0; i < rl. rlim_cur; i++ )
+//		::close ( i );
+
+	::setpgid ( 0, 0 );
+	::setsid ( );
+
+	::signal ( SIGUSR1, sigusr1 );
+
+	::openlog ( "opie-login", LOG_CONS, LOG_AUTHPRIV );
+	::atexit ( exit_closelog );
+
 	while ( true ) {
-		pid_t child = fork ( );
-	
+		pid_t child = ::fork ( );
+
 		if ( child < 0 ) {
-			syslog ( LOG_ERR, "Could not fork process" );
+			::syslog ( LOG_ERR, "Could not fork process" );
 			break;
-			
+
 		}
 		else if ( child > 0 ) {
 			int status = 0;
-			
-			while ( waitpid ( child, &status, 0 ) < 0 ) { }	
+
+			while ( ::waitpid ( child, &status, 0 ) < 0 ) { }
 		}
 		else {
-			exit ( login_main ( argc, argv ));
+			::exit ( login_main ( argc, argv ));
 		}
 	}
-	closelog ( );
+	return 0;
+}
+
+void sigusr1 ( int /*sig*/ )
+{
+	::exit ( 0 );
+}
+
+void exit_closelog ( )
+{
+	::closelog ( );
 }
 
 
-class ModelKeyFilter : public QObject, public QWSServer::KeyboardFilter
+class LoginScreenSaver : public QWSScreenSaver
 {
 public:
-	ModelKeyFilter ( ) : QObject ( 0, "MODEL_KEY_FILTER" )
-	{
-		bool doinst = false;
-	
-		m_model = ODevice::inst ( )-> model ( );
-		m_power_timer = 0;
-		
-		switch ( m_model ) {
-			case OMODEL_iPAQ_H31xx:
-			case OMODEL_iPAQ_H36xx: 
-			case OMODEL_iPAQ_H37xx: 
-			case OMODEL_iPAQ_H38xx: doinst = true; 
-			                        break;
-			default               : break;
-		}
-		if ( doinst )
-			QWSServer::setKeyboardFilter ( this );
-	}
+  LoginScreenSaver ( )
+  {
+    m_lcd_status = true;
 
-	virtual bool filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat )
-	{
-		bool kill = false;
-	
-		// Rotate cursor keys 180°
-		switch ( m_model ) {
-			case OMODEL_iPAQ_H31xx:
-			case OMODEL_iPAQ_H38xx: {
-				int newkeycode = keycode;
-			
-				switch ( keycode ) {
-					case Key_Left : newkeycode = Key_Right; break;
-					case Key_Right: newkeycode = Key_Left; break;
-					case Key_Up   : newkeycode = Key_Down; break;
-					case Key_Down : newkeycode = Key_Up; break;
-				}
-				if ( newkeycode != keycode ) {
-					QWSServer::sendKeyEvent ( -1, newkeycode, modifiers, isPress, autoRepeat );
-					kill = true;
-				}
-				break;
-			}
-			default: break;
-		}	
-		
-		// map Power Button short/long press to F34/F35
-		switch ( m_model ) {
-			case OMODEL_iPAQ_H31xx:
-			case OMODEL_iPAQ_H36xx: 
-			case OMODEL_iPAQ_H37xx: 
-			case OMODEL_iPAQ_H38xx: {
-				if ( keycode == Key_SysReq ) {
-					if ( isPress ) {
-						m_power_timer = startTimer ( 500 );
-					}
-					else if ( m_power_timer ) {
-						killTimer ( m_power_timer );
-						m_power_timer = 0;
-						QWSServer::sendKeyEvent ( -1, Key_F34, 0, true, false );
-						QWSServer::sendKeyEvent ( -1, Key_F34, 0, false, false );
-					}
-					kill = true;			
-				}
-				break;
-			}
-			default: break;
-		}				
-		return kill;
-	}
+    m_backlight_bright = -1;
+    m_backlight_forcedoff = false;
 
-	virtual void timerEvent ( QTimerEvent * )
-	{
-		killTimer ( m_power_timer );
-		m_power_timer = 0;
-		QWSServer::sendKeyEvent ( -1, Key_F35, 0, true, false );
-		QWSServer::sendKeyEvent ( -1, Key_F35, 0, false, false );
-	}
+    // Make sure the LCD is in fact on, (if opie was killed while the LCD is off it would still be off)
+    ODevice::inst ( ) -> setDisplayStatus ( true );
+  }
+  void restore()
+  {
+    if ( !m_lcd_status )     // We must have turned it off
+      ODevice::inst ( ) -> setDisplayStatus ( true );
+
+    setBacklight ( -1 );
+  }
+  bool save( int level )
+  {
+    switch ( level ) {
+      case 0:
+        if ( backlight() > 1 )
+          setBacklight( 1 ); // lowest non-off
+        return true;
+        break;
+      case 1:
+        setBacklight( 0 ); // off
+        return true;
+        break;
+      case 2:
+        // We're going to suspend the whole machine
+        if ( PowerStatusManager::readStatus().acStatus() != PowerStatus::Online ) {
+          QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
+          return true;
+        }
+        break;
+    }
+    return false;
+  }
 
 private:
-	OModel  m_model;
-	int     m_power_timer;
-};
+public:
+  void setIntervals( int i1 = 30, int i2 = 20, int i3 = 60 )
+  {
+    int v [4];
 
+    v [ 0 ] = QMAX( 1000 * i1, 100 );
+    v [ 1 ] = QMAX( 1000 * i2, 100 );
+    v [ 2 ] = QMAX( 1000 * i3, 100 );
+    v [ 3 ] = 0;
+
+    if ( !i1 && !i2 && !i3 )
+      QWSServer::setScreenSaverInterval ( 0 );
+    else
+      QWSServer::setScreenSaverIntervals ( v );
+  }
+
+  int backlight ( )
+  {
+    if ( m_backlight_bright == -1 )
+      m_backlight_bright = 255;
+
+    return m_backlight_bright;
+  }
+
+  void setBacklight ( int bright )
+  {
+    if ( bright == -3 ) {
+      // Forced on
+      m_backlight_forcedoff = false;
+      bright = -1;
+    }
+    if ( m_backlight_forcedoff && bright != -2 )
+      return ;
+    if ( bright == -2 ) {
+      // Toggle between off and on
+      bright = m_backlight_bright ? 0 : -1;
+      m_backlight_forcedoff = !bright;
+    }
+
+    m_backlight_bright = bright;
+
+    bright = backlight ( );
+    ODevice::inst ( ) -> setDisplayBrightness ( bright );
+
+    m_backlight_bright = bright;
+  }
+
+private:
+  bool m_lcd_status;
+
+  int m_backlight_bright;
+  bool m_backlight_forcedoff;
+};
 
 
 
@@ -153,11 +184,14 @@ int login_main ( int argc, char **argv )
 	QWSServer::setDesktopBackground( QImage() );
 	QPEApplication app ( argc, argv, QApplication::GuiServer );
 
-	(void) new ModelKeyFilter ( );
-		
-	{	
-	    QCopEnvelope e("QPE/System", "setBacklight(int)" );
-    	e << -3; // Forced on
+	app. setFont ( QFont ( "Helvetica", 10 ));
+	app. setStyle ( new QPEStyle ( ));
+
+	ODevice::inst ( )-> setSoftSuspend ( true );
+
+	{
+		QCopEnvelope e("QPE/System", "setBacklight(int)" );
+		e << -3; // Forced on
 	}
 
 #if defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
@@ -168,12 +202,23 @@ int login_main ( int argc, char **argv )
 		delete cal;
 	}
 #endif
-	
+
+
+	LoginScreenSaver *saver = new LoginScreenSaver;
+
+	saver-> setIntervals ( );
+	QWSServer::setScreenSaver ( saver );
+
+
 	LoginWindowImpl *lw = new LoginWindowImpl ( );
 	app. setMainWidget ( lw );
 	lw-> setGeometry ( 0, 0, app. desktop ( )-> width ( ), app. desktop ( )-> height ( ));
 	lw-> show ( );
-	
-	return app. exec ( );
+
+	int rc = app. exec ( );
+
+	ODevice::inst ( )-> setSoftSuspend ( false );
+
+	return rc;
 }
 
