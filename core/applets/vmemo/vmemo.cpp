@@ -9,8 +9,9 @@
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ************************************************************************************/
+// copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.23 2002-05-09 10:44:26 dwmw2 Exp $
+ * $Id: vmemo.cpp,v 1.24 2002-05-18 01:36:32 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -254,10 +255,10 @@ void VMemo::mousePressEvent( QMouseEvent *me )
          No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
          mousePressEvent and mouseReleaseEvent with a NULL parameter.
       */
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
-        if (!systemZaurus )
-            return;
-#endif
+//  #if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
+//          if (!systemZaurus )
+//              return;
+//  #endif
     
      Config config( "Sound" );
      config.setGroup( "System" );
@@ -436,51 +437,43 @@ void VMemo::record(void)
         if(format==AFMT_S16_LE)  {
             while(recording)   {
                 result = read(dsp, sound, 512); // 8192
-                qApp->processEvents();
                 int j=0;
                 if(systemZaurus) {
                     for (int i = 0; i < result; i++) { //since Z is mono do normally
                         monoBuffer[i] = sound[i];
                     }
-                    qApp->processEvents();
                     length+=write(wav, monoBuffer, result);
                 } else { //ipaq /stereo inputs
                     for (int i = 0; i < result; i+=2) {
                         monoBuffer[j] = (sound[i]+sound[i+1])/2;
                         j++;
                     }
-                    qApp->processEvents();
                     length+=write(wav, monoBuffer, result/2);
                 }
-                printf("%d\r",length);
-                fflush(stdout);
+//                  printf("%d\r",length);
+//                  fflush(stdout);
             }
         }  else { //AFMT_U8 
 // 8bit unsigned
             unsigned short sound[512], monoBuffer[512];
             while(recording)   {
                 result = read(dsp, sound, 512); // 8192
-                qApp->processEvents();
                 int j=0;
                 if(systemZaurus) {
                     for (int i = 0; i < result; i++) { //since Z is mono do normally
                         monoBuffer[i] = sound[i];
                     }
-                    qApp->processEvents();
                     length+=write(wav, monoBuffer, result);
                 } else { //ipaq /stereo inputs
                     for (int i = 0; i < result; i+=2) {
                         monoBuffer[j] = (sound[i]+sound[i+1])/2;
                         j++;
                     }
-                    qApp->processEvents();
                     length+=write(wav, monoBuffer, result/2);
                 }
                 length += result;
-                printf("%d\r",length);
-                fflush(stdout);
-
-                qApp->processEvents();
+//                  printf("%d\r",length);
+//                  fflush(stdout);
             }
 
             qApp->processEvents();
@@ -492,15 +485,13 @@ void VMemo::record(void)
 
         while(recording)  {
             result = read(dsp, sound, 512); // 8192
-            qApp->processEvents();
-
             write(wav, sound, result);
             length += result;
 
             qApp->processEvents();
         }
-        printf("%d\r",length);
-        fflush(stdout);
+//          printf("%d\r",length);
+//          fflush(stdout);
           //  qDebug("file has length of %d lasting %d seconds",
           //         length, (( length / speed) / channels) / 2 );
           // medialplayer states wrong length in secs
