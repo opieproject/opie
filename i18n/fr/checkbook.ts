@@ -452,7 +452,7 @@ La valeur entrée devrait toujours être positive.</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation>Electronique</translation>
+        <translation type="obsolete">Electronique</translation>
     </message>
     <message>
         <source>Entertainment</source>
@@ -517,6 +517,10 @@ La valeur entrée devrait toujours être positive.</translation>
     <message>
         <source>Cash</source>
         <translation>Liquide</translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -20,24 +20,44 @@
     </message>
 </context>
 <context>
+    <name>TodoPluginConfigBase</name>
+    <message>
+        <source>Set the maximum number of task that should be shown</source>
+        <translation type="unfinished">Pour choisir le nombre maximum de tâches à afficher</translation>
+    </message>
+    <message>
+        <source>tasks shown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>After how many chars should be the info about the task be cut off</source>
+        <translation type="unfinished">Pour choisir le nombre de caractères à afficher pour chaque tâche</translation>
+    </message>
+    <message>
+        <source>Clip line after X chars</source>
+        <translation type="unfinished">Nombre de caractères
+par ligne</translation>
+    </message>
+</context>
+<context>
     <name>TodolistPluginConfig</name>
     <message>
         <source>tasks shown </source>
-        <translation>Nombre de tâches
+        <translation type="obsolete">Nombre de tâches
 à afficher</translation>
     </message>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation>Pour choisir le nombre maximum de tâches à afficher</translation>
+        <translation type="obsolete">Pour choisir le nombre maximum de tâches à afficher</translation>
     </message>
     <message>
         <source>Clip line after X chars</source>
-        <translation>Nombre de caractères
+        <translation type="obsolete">Nombre de caractères
 par ligne</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>Pour choisir le nombre de caractères à afficher pour chaque tâche</translation>
+        <translation type="obsolete">Pour choisir le nombre de caractères à afficher pour chaque tâche</translation>
     </message>
 </context>
 </TS>

@@ -144,11 +144,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation type="obsolete">Copier</translation>
+        <translation type="unfinished">Copier</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="obsolete">Sous</translation>
+        <translation type="unfinished">Sous</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -270,15 +270,15 @@ et tout son contenu?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation>AdvancedFm ::</translation>
+        <translation type="obsolete">AdvancedFm ::</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation>kb libre</translation>
+        <translation type="obsolete">kb libre</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
-        <translation>Copier &apos;%1&apos; sous</translation>
+        <translation type="obsolete">Copier &apos;%1&apos; sous</translation>
     </message>
 </context>
 <context>
