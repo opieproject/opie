@@ -1,7 +1,3 @@
-can we please get a working serial connection for now? if that works
-i can test file transfers and stuff. -hash
-sure. I finished the ConfigDialog and now doing the Profile->Session
-stuff. Then you just need to click Open -zecke
 
 From a UNIX point of view we want to do something like minicom
 with a better GUI.
@@ -12,28 +8,33 @@ in a session.
 A script would just write to the TEmulation and then be sent via
 an IOlayer.
 Then we would like to send keys? Do we want that?
+> what kind of keys would we send?
 
 We want a modular architecture which might support plugins in
 the future
 
 (Almost) DONE:
-Framework
-Serial IOLayer
-Saving and Restoring Profiles
-ConfigDialog Framework
-FilesendingLayer - hash
+  Framework
+  Serial IOLayer
+  Saving and Restoring Profiles
+  ConfigDialog Framework
 
 TASKS in progress:
-Profile->Session and MainWidget --- Harlekin
-IOLayer - wazlaf
-TE - ibotty
-Session->Profile - hash
-Scripting - wazlaf 
+  Profile->Session and MainWidget --- Harlekin
+  IOLayer - wazlaf
+  TE - ibotty
+  Scripting - wazlaf 
+  FilesendingLayer
+  Session->Profile - hash => why is this needed? you can not change any settings
+                             after you start the session, so all you would do is
+                             create a duplicate of the profile used to open the
+                             current session. maybe needed later when you can change
+                             settings while the session is running (colors, fonts...)
 
 OPEN tasks:
-Irda  ConfigWidget - Harlekin
-BT ConfigWidget
-Keys - open
-IRDA-Layer - open
-Bluetooth-Layer - open
-Fullscreen mode ( maybe spy at vnc viewer )
+  Irda  ConfigWidget - Harlekin
+  BT ConfigWidget
+  Keys - hash
+  IRDA-Layer - open
+  Bluetooth-Layer - open
+  Fullscreen mode ( maybe spy at vnc viewer )
