@@ -46,7 +46,7 @@ OImageScrollView::OImageScrollView (const QImage&img, QWidget * parent, const ch
     m_states[IMAGE_SCALED_LOADED]=false;
     m_states[SHOW_ZOOMER]=true;
     _original_data.convertDepth(QPixmap::defaultDepth());
-    _original_data.setAlphaBuffer(false);
+    //_original_data.setAlphaBuffer(false);
     init();
 }
 
@@ -70,7 +70,7 @@ void OImageScrollView::setImage(const QImage&img)
     _image_data = QImage();
     _original_data=img;
     _original_data.convertDepth(QPixmap::defaultDepth());
-    _original_data.setAlphaBuffer(false);
+    //_original_data.setAlphaBuffer(false);
     m_lastName = "";
     setImageIsJpeg(false);
     setImageScaledLoaded(false);
@@ -127,7 +127,7 @@ void OImageScrollView::setImage( const QString& path ) {
         setImageIsJpeg(false);
         _original_data.load(path);
         _original_data.convertDepth(QPixmap::defaultDepth());
-        _original_data.setAlphaBuffer(false);
+        //_original_data.setAlphaBuffer(false);
     }
     _image_data = QImage();
     if (FirstResizeDone()) {
@@ -434,49 +434,35 @@ void OImageScrollView::keyPressEvent(QKeyEvent * e)
 
 void OImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clipw, int cliph)
 {
+    if (!_pdata.size().isValid()) {
+        p->fillRect(clipx,clipy,clipw,cliph, backgroundColor());
+        return;
+    }
+
     int w = clipw;
     int h = cliph;
     int x = clipx;
     int y = clipy;
     bool erase = false;
 
-    if (!_pdata.size().isValid()) {
-        p->fillRect(clipx,clipy,clipw,cliph, backgroundColor());
-        return;
-    }
-
     if (w>_pdata.width()) {
-        w=_pdata.width();
-        x = 0;
-        erase = true;
-    } else if (x+w>_pdata.width()){
-        x = _pdata.width()-w;
+        w = _pdata.width()-x;
+        erase=true;
     }
-
     if (h>_pdata.height()) {
-        h=_pdata.height();
-        y = 0;
-        erase = true;
-    } else if (y+h>_pdata.height()){
-        y = _pdata.height()-h;
+        h = _pdata.height()-y;
+        erase=true;
     }
-
-    if (erase||_original_data.hasAlphaBuffer()||clipy>_pdata.height()||clipx>_pdata.width()) {
-        odebug << QSize(clipx,clipy) << " # " << QSize(clipw,cliph) << oendl;
+    if (!erase && (clipy+cliph>_pdata.height()||clipx+clipw>_pdata.width())) {
+        erase = true;
+    }
+    if (erase||_original_data.hasAlphaBuffer()) {
         p->fillRect(clipx,clipy,clipw,cliph, backgroundColor());
     }
-    odebug << QSize(x,y) << " - " << QSize(w,h) << oendl;
-    if (clipy<=_pdata.height()&&clipx<=_pdata.width()) {
-#if 0
-        odebug << "painting image content" << oendl;
-#endif
+    if (w>0 && h>0&&x<_pdata.width()&&y<_pdata.height()) {
+        odebug << "Drawing pixmap" << oendl;
         p->drawPixmap(clipx,clipy,_pdata,x,y,w,h);
-    } 
-#if 0
-else {
-        odebug << "not painting image content" << oendl;
     }
-#endif
 }
 
 /* using the real geometry points and not the translated points is wanted! */
