@@ -80,6 +80,18 @@ public:
         ButtonType type;
     };
 
+    struct GUIInfo
+    {
+        GUIInfo() : buttonInfo( 0 ), buttonCount( 0 ) {}
+        GUIInfo( const QString &_fileNameInfix, const SkinButtonInfo *_buttonInfo, const uint _buttonCount )
+            : fileNameInfix( _fileNameInfix ), buttonInfo( _buttonInfo ), buttonCount( _buttonCount )
+        {}
+
+        QString fileNameInfix;
+        const SkinButtonInfo *buttonInfo;
+        const uint buttonCount;
+    };
+
     MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent = 0, const char *name = 0 );
     virtual ~MediaWidget();
 
@@ -105,7 +117,7 @@ protected:
                        const Skin &skin );
     Button setupButton( const SkinButtonInfo &buttonInfo, const Skin &skin );
 
-    void loadDefaultSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const QString &fileNameInfix = QString::null );
+    void loadDefaultSkin( const GUIInfo &guiInfo );
     void loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const Skin &skin );
 
     virtual void closeEvent( QCloseEvent * );

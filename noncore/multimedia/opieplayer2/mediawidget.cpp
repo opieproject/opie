@@ -64,10 +64,10 @@ MediaWidget::Button MediaWidget::setupButton( const SkinButtonInfo &buttonInfo, 
     return button;
 }
 
-void MediaWidget::loadDefaultSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const QString &fileNameInfix )
+void MediaWidget::loadDefaultSkin( const GUIInfo &guiInfo )
 {
-    Skin skin( fileNameInfix );
-    loadSkin( skinInfo, buttonCount, skin );
+    Skin skin( guiInfo.fileNameInfix );
+    loadSkin( guiInfo.buttonInfo, guiInfo.buttonCount, skin );
 }
 
 void MediaWidget::loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const Skin &skin )

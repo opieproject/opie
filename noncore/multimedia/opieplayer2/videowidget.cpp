@@ -99,14 +99,9 @@ VideoWidget::~VideoWidget()
 {
 }
 
-const MediaWidget::SkinButtonInfo *VideoWidget::skinInfo()
+MediaWidget::GUIInfo VideoWidget::guiInfo()
 {
-    return ::skinInfo;
-}
-
-const uint VideoWidget::buttonCount()
-{
-    return ::buttonCount;
+    return GUIInfo( "V" /* infix */, ::skinInfo, ::buttonCount );
 }
 
 void VideoWidget::resizeEvent( QResizeEvent *e ) {
@@ -167,7 +162,7 @@ void VideoWidget::setDisplayType( MediaPlayerState::DisplayType displayType )
 
 void VideoWidget::loadSkin()
 {
-    loadDefaultSkin( ::skinInfo, ::buttonCount, "V" );
+    loadDefaultSkin( guiInfo() );
 
     setBackgroundPixmap( backgroundPixmap );
 
