@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qtopia/categories.h>
+#include <qtopia/private/categories.h>
 #include <qtopia/stringutil.h>
 #include <qfile.h>
 #include <qcstring.h>
