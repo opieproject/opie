@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.12 2002-06-27 01:39:00 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.13 2002-06-29 00:25:26 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -72,6 +72,9 @@
 #include <qmotifstyle.h>
 #include <qmotifplusstyle.h>
 #include "lightstyle.h"
+
+#include <qpe/qlibrary.h>
+#include <dlfcn.h>
 #endif
 #include "global.h"
 #include "resource.h"
@@ -101,7 +104,6 @@
 #endif
 #include <stdlib.h>
 
-#include <dlfcn.h> // for Liquid HACK
 
 class QPEApplicationData {
 public:
@@ -1328,23 +1330,50 @@ void QPEApplication::internalSetStyle( const QString &style )
 #endif
 
 	// HACK for Qt2 only
-	else if ( style == "Liquid" ) {
-		static void *lib = 0;	
-		QStyle *sty = 0;
+	else {
+		// style == "Liquid Style (libliquid.so)" (or "Windows XP (libxp.so)"
+	
+		int p2 = style. findRev ( ']' );
+		int p1 = style. findRev ( '[' );
+		QString style2;
 		
+		if (( p1 > 0 ) && ( p2 > 0 ) && (( p1 + 1 ) < p2 ))
+			style2 = "lib" + style. mid ( p1 + 1, p2 - p1 - 1 ). lower ( ) + ".so";
+		else
+			style2 = "lib" + style. lower ( ) + ".so";
+		
+		// static QLibrary *currentlib = 0;
+		static void *currentlib = 0;
 
-		if ( !lib ) {
-			QString path = QPEApplication::qpeDir() + "/plugins/styles/" + "libliquid.so";		
-			lib = ::dlopen ( path. local8Bit ( ), RTLD_NOW | RTLD_GLOBAL );
-		}
-		if ( lib ) {
-			void *sym = ::dlsym ( lib, "allocate" );
-		
-			if ( sym )
-				sty = ((QStyle * (*) ( )) sym ) ( );
-		}
-		if ( sty )
-			setStyle ( sty );
+		QString path = QPEApplication::qpeDir ( ) + "/plugins/styles/" + style2;
+
+		do { // try/catch simulation
+			// QLibrary *lib = new QLibrary ( path, QLibrary::Immediately );
+			void *lib = ::dlopen ( path. local8Bit ( ), RTLD_NOW | RTLD_GLOBAL );
+			
+			if ( lib ) {
+				//QStyle * (*fpa) ( ) = (QStyle * (*) ( )) lib-> resolve ( "allocate" );	
+				QStyle * (*fpa) ( ) = (QStyle * (*) ( )) ::dlsym ( lib, "allocate" );
+
+				if ( fpa ) {
+					QStyle *sty = ( *fpa ) ( );
+					
+					if ( sty ) {
+						setStyle ( sty );
+								
+						if ( currentlib ) {
+							//delete currentlib;
+							::dlclose ( currentlib );
+						}
+						currentlib = lib;
+						
+						break;
+					} 
+				}
+				//delete lib;
+				::dlclose ( lib );
+			}
+		} while ( false );
 	}
 	// HACK for Qt2 only 
 #endif
