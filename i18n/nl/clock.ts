@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Alarm set: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm ingesteld op: %1</translation>
     </message>
 </context>
 <context>

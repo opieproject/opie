@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;h1&gt;Alarm om %1&lt;/h1&gt;&lt;br&gt;</translation>
+        <translation>&lt;h1&gt;Alarm om %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
@@ -338,11 +338,11 @@ Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak ka
     </message>
     <message>
         <source>Data can not be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan data niet wijzigen tijdens synchronisatie</translation>
     </message>
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan data niet wijzigen tijdens synchronisatie</translation>
     </message>
 </context>
 <context>

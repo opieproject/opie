@@ -71,27 +71,27 @@
     </message>
     <message>
         <source>&amp;Change card backs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verander kaartillustratie</translation>
     </message>
     <message>
         <source>&amp;Snap to position</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spring naar plaats</translation>
     </message>
     <message>
         <source>Change card backs</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander kaartillustratie</translation>
     </message>
     <message>
         <source>Snap to position</source>
-        <translation type="unfinished"></translation>
+        <translation>Spring naar plaats</translation>
     </message>
     <message>
         <source>Turn one card</source>
-        <translation type="unfinished"></translation>
+        <translation>Draai een kaart</translation>
     </message>
     <message>
         <source>Turn three cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Draai drie kaarten</translation>
     </message>
 </context>
 </TS>

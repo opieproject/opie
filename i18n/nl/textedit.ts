@@ -200,12 +200,14 @@ Doorgaan met opslaan?
     </message>
     <message>
         <source>%1 - Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Tekstverwerker</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Moet dit bestand echt&lt;br&gt;
+van de schijf&lt;b&gt;verwijderd&lt;/b&gt;
+worden? Dit is onomkeerbaar!</translation>
     </message>
 </context>
 <context>

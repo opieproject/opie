@@ -41,11 +41,11 @@ Uw score: %1</translation>
     </message>
     <message>
         <source>Press any key to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk een toets om te beginnen</translation>
     </message>
     <message>
         <source>Press any key to begin a new game.</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk een toets om een nieuw spel te beginnen.</translation>
     </message>
 </context>
 </TS>

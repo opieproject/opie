@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>%1 - uBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Webbrowser</translation>
     </message>
 </context>
 <context>
@@ -34,15 +34,15 @@
     </message>
     <message>
         <source>IP-Address not found</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Adres niet gevonden</translation>
     </message>
     <message>
         <source>Error creating socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij aanmaken socket</translation>
     </message>
     <message>
         <source>Error connecting to socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij verbinden met socket</translation>
     </message>
 </context>
 </TS>

@@ -154,11 +154,11 @@ Druk een tijd op een module om meer informatie over de module te zien, of hem te
     </message>
     <message>
         <source>Used by</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruikt door</translation>
     </message>
     <message>
         <source>You really want to execute %1 for this module?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt u %1 echt gebruiken op dit onderdeel?</translation>
     </message>
 </context>
 <context>
@@ -226,7 +226,7 @@ Druk een tijd op een module om meer informatie over de module te zien, of een si
     </message>
     <message>
         <source>You really want to send %1 to this process?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt u %1 echt naar dit onderdeel sturen?</translation>
     </message>
 </context>
 <context>

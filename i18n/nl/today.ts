@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Eigenaar: %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
