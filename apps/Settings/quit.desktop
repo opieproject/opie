@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec=shutdown
-Icon=Shutdown
-Name=Shutdown
-Name[no]=Skru av
-Name[de]=Beenden
-Name[hu]=Leállítás

@@ -1,9 +1,0 @@
-Files: $QTDIR/lib/fonts/cyberbit_120_50_t10.qpf
-Priority: required
-Section: qpe/system
-Maintainer: Warwick Allison <warwick@trolltech.com>
-Architecture: arm
-Arch: iPAQ
-Version: 2.3.0-5
-Description: Unicode font
- A pre-rendered Unicode font.
