@@ -950,6 +950,11 @@ void PlayListWidget::populateSkinsMenu() {
     QString skin = cfg.readEntry( "Skin", "default" );
 
     QDir skinsDir( QPEApplication::qpeDir() + "pics/opieplayer2/skins" );
+		if(!skinsDir.exists()) {
+				QMessageBox::critical( 0,  tr("Opieplayer Error"),
+ 															 tr("<p><b>Opieplayer2 skin not found!</b></p><p>Please install an opieplayer2 skin package.</p>") );
+ 				exit(1) ;
+		}		
     skinsDir.setFilter( QDir::Dirs );
     skinsDir.setSorting(QDir::Name );
     const QFileInfoList *skinslist = skinsDir.entryInfoList();
