@@ -38,10 +38,13 @@ void IOSerial::close() {
 }
 
 bool IOSerial::open() {
+    qWarning("open");
     if (!m_fd) {
+        qWarning("going to open %s",  m_device.latin1());
         struct termios tty;
         m_fd = ::open(m_device, O_RDWR | O_NOCTTY | O_NONBLOCK);
         if (m_fd < 0) {
+            qWarning(" fd < 0 ");
             emit error(CouldNotOpen, strerror(errno));
             return FALSE;
         }
@@ -50,6 +53,7 @@ bool IOSerial::open() {
         /* Baud rate */
         int speed = baud(m_baud);
         if (speed == -1) {
+            qWarning("speed -1");
             emit error(Refuse, tr("Invalid baud rate"));
         }
         cfsetospeed(&tty, speed);
@@ -113,6 +117,7 @@ bool IOSerial::open() {
         connect(m_error, SIGNAL(activated(int)), this, SLOT(errorOccured()));
         return TRUE;
     } else {
+        qWarning("opened");
         emit error(Refuse, tr("Device is already connected"));
         m_fd = 0;
         return FALSE;
@@ -121,6 +126,8 @@ bool IOSerial::open() {
 
 void IOSerial::reload(const Profile &config) {
     m_device = config.readEntry("Device", SERIAL_DEFAULT_DEVICE);
+    qWarning( "Dev" +m_device );
+    qWarning( "Conf:" +config.readEntry("Device") );
     m_baud = config.readNumEntry("Baud", SERIAL_DEFAULT_BAUD);
     m_parity = config.readNumEntry("Parity", SERIAL_DEFAULT_PARITY);
     m_dbits = config.readNumEntry("DataBits", SERIAL_DEFAULT_DBITS);
@@ -150,15 +157,14 @@ void IOSerial::errorOccured() {
 }
 
 void IOSerial::dataArrived() {
-    QByteArray array;
-    char buf[4096];
+    QByteArray array(4096);
 
-    int len = read(m_fd, buf, 4096);
+    int len = read(m_fd, array.data(), 4096);
     if (len == 0)
         close();
     if (len < 0)
         return;
-    array.setRawData(buf, len);
+    array.resize( len );
     emit received(array);
 }
 

@@ -78,9 +78,11 @@ void Profile::clearConf() {
     m_conf.clear();
 }
 void Profile::writeEntry( const QString& key,  const QString& value ) {
+    qWarning("key %s value %s", key.latin1(), value.latin1() );
     m_conf.replace( key, value );
 }
 void Profile::writeEntry( const QString& key, int num ) {
+    qWarning("num");
     writeEntry( key,  QString::number( num ) );
 }
 void Profile::writeEntry( const QString& key, bool b ) {
