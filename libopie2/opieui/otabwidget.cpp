@@ -1,28 +1,28 @@
 /*
-                            This file is part of the Opie Project
+                    This file is part of the Opie Project
 
-                             Copyright (c)  2002 Dan Williams <williamsdr@acm.org>
+                      Copyright (c)  2002, 2005 Dan Williams <drw@handhelds.org>
               =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -45,88 +45,82 @@ using namespace Opie::Ui;
 
 OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPosition p )
         : QWidget( parent, name )
+        , m_currTab( 0l )
+        , m_usingTabs( true )
+        , m_tabBar( 0l )
+        , m_tabList( 0l )
 {
     if ( s == Global )
     {
+        // Read Opie global settings for style and position
         Config config( "qpe" );
         config.setGroup( "Appearance" );
+
+        // Style
         s = ( TabStyle ) config.readNumEntry( "TabStyle", (int) IconTab );
         if ( s <= Global || s > IconList)
-        {
             s = IconTab;
-        }
-        QString pos = config.readEntry( "TabPosition", "Top");
-        if ( pos == "Bottom" )
-        {
-            p = Bottom;
-        }
-        else
-        {
-            p = Top;
-        }
+
+        // Position
+        ( config.readEntry( "TabPosition", "Top" ) == "Bottom" ) ? p = Bottom
+                                                                 : p = Top;
     }
 
-    widgetStack = new QWidgetStack( this, "widgetstack" );
-    widgetStack->setFrameStyle( QFrame::NoFrame );
-    widgetStack->setLineWidth( style().defaultFrameWidth() );
+    // Initialize widget stack for tab widgets
+    m_widgetStack = new QWidgetStack( this );
+    m_widgetStack->setFrameStyle( QFrame::NoFrame );
+    m_widgetStack->setLineWidth( style().defaultFrameWidth() );
 
-    tabBarStack = new QWidgetStack( this, "tabbarstack" );
-
-    tabBar = new OTabBar( tabBarStack, "tabbar" );
-    tabBarStack->addWidget( tabBar, 0 );
-    connect( tabBar, SIGNAL( selected(int) ), this, SLOT( slotTabBarSelected(int) ) );
-
-    tabList = new QComboBox( false, tabBarStack, "tablist" );
-    tabBarStack->addWidget( tabList, 1 );
-    connect( tabList, SIGNAL( activated(int) ), this, SLOT( slotTabListSelected(int) ) );
-
-    tabBarPosition = p;
+    // Set initial selector control style and position
     setTabStyle( s );
     setTabPosition( p );
-
-    currTab= 0x0;
 }
 
 OTabWidget::~OTabWidget()
 {
-    tabs.setAutoDelete( true );
-    tabs.clear();
+    m_tabs.setAutoDelete( true );
+    m_tabs.clear();
 }
 
 void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &label )
 {
-    QPixmap iconset = loadSmooth( icon );
+    int tabid = -1;
 
-    QTab *tab = new QTab();
-    if ( tabBarStyle == IconTab )
+    if ( m_usingTabs )
     {
-        tab->label = QString::null;
+        // Create new tab in tab bar
+        QTab *tab = new QTab();
+
+        // Set label (and icon if necessary)
+        if ( m_tabBarStyle == IconTab )
+        {
+            tab->label = QString::null;
+            tab->iconset = new QIconSet( loadSmooth( icon ) );
+        }
+        else
+            tab->label = label;
+
+        tabid = m_tabBar->addTab( tab );
     }
     else
     {
-        tab->label = label;
-    }
-    if ( tabBarStyle == IconTab || tabBarStyle == IconList )
-    {
-        tab->iconset = new QIconSet( iconset );
-    }
-    int tabid = tabBar->addTab( tab );
-
-    if ( tabBarStyle == IconTab || tabBarStyle == IconList )
-    {
-        tabList->insertItem( iconset, label, -1 );
-    }
-    else
-    {
-        tabList->insertItem( label );
+        // Insert entry (with icon if necessary) into drop down list
+        if ( m_tabBarStyle == IconList )
+            m_tabList->insertItem( loadSmooth( icon ), label, -1 );
+        else
+            m_tabList->insertItem( label );
     }
 
-    widgetStack->addWidget( child, tabid );
-    widgetStack->raiseWidget( child );
-    widgetStack->setFrameStyle( QFrame::StyledPanel | QFrame::Raised );
+    // Add widget to stack
+    m_widgetStack->addWidget( child, tabid );
+    m_widgetStack->raiseWidget( child );
+    m_widgetStack->setFrameStyle( QFrame::StyledPanel | QFrame::Raised );
 
+    // Keep track of tab information
     OTabInfo *tabinfo = new OTabInfo( tabid, child, icon, label );
-    tabs.append( tabinfo );
+    m_tabs.append( tabinfo );
+
+    // Make newly added tab the current one displayed
     selectTab( tabinfo );
 }
 
@@ -134,33 +128,42 @@ void OTabWidget::removePage( QWidget *childwidget )
 {
     if ( childwidget )
     {
-        OTabInfo *tab = tabs.first();
+        // Find tab information for desired widget
+        OTabInfo *tab = m_tabs.first();
         while ( tab && tab->control() != childwidget )
-        {
-            tab = tabs.next();
-        }
+            tab = m_tabs.next();
+
         if ( tab && tab->control() == childwidget )
         {
-            tabBar->setTabEnabled( tab->id(), FALSE );
-            tabBar->removeTab( tabBar->tab( tab->id() ) );
-            int i = 0;
-            while ( i < tabList->count() && tabList->text( i ) != tab->label() )
+            if ( m_usingTabs )
             {
-                i++;
+                // Remove tab from tab bar
+                m_tabBar->setTabEnabled( tab->id(), false );
+                m_tabBar->removeTab( m_tabBar->tab( tab->id() ) );
             }
-            if ( tabList->text( i ) == tab->label() )
+            else
             {
-                tabList->removeItem( i );
-            }
-            widgetStack->removeWidget( childwidget );
-            tabs.remove( tab );
-            delete tab;
-            currTab = tabs.current();
-            if ( !currTab )
-            {
-                widgetStack->setFrameStyle( QFrame::NoFrame );
+                // Remove entry from drop down list
+                int i = 0;
+                while ( i < m_tabList->count() && m_tabList->text( i ) != tab->label() )
+                    i++;
+                if ( m_tabList->text( i ) == tab->label() )
+                    m_tabList->removeItem( i );
             }
 
+            // Remove widget from stack
+            m_widgetStack->removeWidget( childwidget );
+
+            // Get rid of tab information
+            m_tabs.remove( tab );
+            delete tab;
+
+            // Reset current tab
+            m_currTab = m_tabs.current();
+            if ( !m_currTab )
+                m_widgetStack->setFrameStyle( QFrame::NoFrame );
+
+            // Redraw widget
             setUpLayout();
         }
     }
@@ -168,46 +171,53 @@ void OTabWidget::removePage( QWidget *childwidget )
 
 void OTabWidget::changeTab( QWidget *widget, const QString &iconset, const QString &label)
 {
-    OTabInfo *currtab = tabs.first();
+    // Find tab information for desired widget
+    OTabInfo *currtab = m_tabs.first();
     while ( currtab && currtab->control() != widget )
-    {
-        currtab = tabs.next();
-    }
+        currtab = m_tabs.next();
+
     if ( currtab && currtab->control() == widget )
     {
-        QTab *tab = tabBar->tab( currtab->id() );
         QPixmap icon( loadSmooth( iconset ) );
-        tab->setText( label );
-        if ( tabBarStyle == IconTab )
-            tab->setIconSet( icon );
-        int i = 0;
-        while ( i < tabList->count() && tabList->text( i ) != currtab->label() )
+
+        if ( m_usingTabs )
         {
-            i++;
+            // Update tab label and icon (if necessary)
+            QTab *tab = m_tabBar->tab( currtab->id() );
+            tab->setText( label );
+            if ( m_tabBarStyle == IconTab )
+                tab->setIconSet( icon );
         }
-        if ( i < tabList->count() && tabList->text( i ) == currtab->label() )
+        else
         {
-            if ( tabBarStyle == IconTab || tabBarStyle == IconList )
+            // Update entry label and icon (if necessary)
+            int i = 0;
+            while ( i < m_tabList->count() && m_tabList->text( i ) != currtab->label() )
+                i++;
+            if ( i < m_tabList->count() && m_tabList->text( i ) == currtab->label() )
             {
-                tabList->changeItem( icon, label, i );
-            }
-            else
-            {
-                tabList->changeItem( label, i );
+                if ( m_tabBarStyle == IconList )
+                    m_tabList->changeItem( icon, label, i );
+                else
+                    m_tabList->changeItem( label, i );
             }
         }
+
+        // Update tab information
         currtab->setLabel( label );
         currtab->setIcon( iconset );
+
+        // Redraw widget
+        setUpLayout();
     }
-    setUpLayout();
 }
 
 void OTabWidget::setCurrentTab( QWidget *childwidget )
 {
-    OTabInfo *currtab = tabs.first();
+    OTabInfo *currtab = m_tabs.first();
     while ( currtab && currtab->control() != childwidget )
     {
-        currtab = tabs.next();
+        currtab = m_tabs.next();
     }
     if ( currtab && currtab->control() == childwidget )
     {
@@ -217,10 +227,10 @@ void OTabWidget::setCurrentTab( QWidget *childwidget )
 
 void OTabWidget::setCurrentTab( const QString &tabname )
 {
-    OTabInfo *newtab = tabs.first();
+    OTabInfo *newtab = m_tabs.first();
     while ( newtab && newtab->label() != tabname )
     {
-        newtab = tabs.next();
+        newtab = m_tabs.next();
     }
     if ( newtab && newtab->label() == tabname )
     {
@@ -230,10 +240,10 @@ void OTabWidget::setCurrentTab( const QString &tabname )
 
 void OTabWidget::setCurrentTab(int tabindex)
 {
-    OTabInfo *newtab = tabs.first();
+    OTabInfo *newtab = m_tabs.first();
     while ( newtab && newtab->id() != tabindex )
     {
-        newtab = tabs.next();
+        newtab = m_tabs.next();
     }
     if ( newtab && newtab->id() == tabindex )
     {
@@ -244,92 +254,113 @@ void OTabWidget::setCurrentTab(int tabindex)
 
 OTabWidget::TabStyle OTabWidget::tabStyle() const
 {
-    return tabBarStyle;
+    return m_tabBarStyle;
 }
 
 void OTabWidget::setTabStyle( TabStyle s )
 {
-    tabBarStyle = s;
-    if ( tabBarStyle == TextTab || tabBarStyle == IconTab )
+    // Get out if new and current styles are the same
+    if ( s == m_tabBarStyle )
+        return;
+
+    // Delete current selector control
+    if ( m_usingTabs )
     {
-        QTab *currtab;
-        for (  OTabInfo *tabinfo = tabs.first(); tabinfo; tabinfo = tabs.next() )
+        delete m_tabBar;
+        m_tabBar = 0l;
+    }
+    else
+    {
+        delete m_tabList;
+        m_tabList = 0l;
+    }
+
+    // Set new style information
+    m_tabBarStyle = s;
+    m_usingTabs = ( m_tabBarStyle == TextTab || m_tabBarStyle == IconTab );
+
+    // Create new selector control and populate with tab information
+    if ( m_usingTabs )
+    {
+        // Create new tab bar selector
+        m_tabBar = new OTabBar( this );
+        connect( m_tabBar, SIGNAL(selected(int)), this, SLOT(slotTabBarSelected(int)) );
+
+        // Add all current tabs to tab bar
+        for (  OTabInfo *tabinfo = m_tabs.first(); tabinfo; tabinfo = m_tabs.next() )
         {
-            currtab = tabBar->tab( tabinfo->id() );
-            if ( tabBarStyle == IconTab )
+            // Create new tab in tab bar
+            QTab *tab = new QTab();
+
+            // Set label (and icon if necessary)
+            if ( m_tabBarStyle == IconTab )
             {
-                currtab->iconset = new QIconSet( loadSmooth( tabinfo->icon() ) );
-                if ( tabinfo == currTab )
-                    currtab->setText( tabinfo->label() );
-                else
-                    currtab->setText( QString::null );
+                tab->label = QString::null;
+                tab->iconset = new QIconSet( loadSmooth( tabinfo->icon() ) );
             }
             else
-            {
-                currtab->iconset = 0x0;
-                currtab->setText( tabinfo->label() );
-            }
+                tab->label = tabinfo->label();
+
+            // Add tab and save its Id
+            int tabid = m_tabBar->addTab( tab );
+            tabinfo->setId( tabid );
         }
-        tabBarStack->raiseWidget( tabBar );
     }
-    else if ( tabBarStyle == TextList || tabBarStyle == IconList )
+    else
     {
-        tabList->clear();
-        for (  OTabInfo *tabinfo = tabs.first(); tabinfo; tabinfo = tabs.next() )
+        // Create new drop down list selector
+        m_tabList = new QComboBox( false, this );
+        connect( m_tabList, SIGNAL(activated(int)), this, SLOT(slotTabListSelected(int)) );
+
+        // Add all current tabs to drop down list
+        for (  OTabInfo *tabinfo = m_tabs.first(); tabinfo; tabinfo = m_tabs.next() )
         {
-            if ( tabBarStyle == IconList )
-            {
-                tabList->insertItem( loadSmooth( tabinfo->icon() ), tabinfo->label() );
-            }
+            if ( m_tabBarStyle == IconList )
+                m_tabList->insertItem( loadSmooth( tabinfo->icon() ), tabinfo->label() );
             else
-            {
-                tabList->insertItem( tabinfo->label() );
-            }
+                m_tabList->insertItem( tabinfo->label() );
         }
-        tabBarStack->raiseWidget( tabList );
     }
+
+    // Redraw widget
     setUpLayout();
 }
 
 OTabWidget::TabPosition OTabWidget::tabPosition() const
 {
-    return tabBarPosition;
+    return m_tabBarPosition;
 }
 
 void OTabWidget::setTabPosition( TabPosition p )
 {
-    tabBarPosition = p;
-    if ( tabBarPosition == Top )
+    m_tabBarPosition = p;
+
+    // If using the tab bar selector, set its shape
+    if ( m_usingTabs )
     {
-        tabBar->setShape( QTabBar::RoundedAbove );
+        ( m_tabBarPosition == Top ) ? m_tabBar->setShape( QTabBar::RoundedAbove )
+                                    : m_tabBar->setShape( QTabBar::RoundedBelow );
     }
-    else
-    {
-        tabBar->setShape( QTabBar::RoundedBelow );
-    }
+
+    // Redraw widget
     setUpLayout();
 }
 
 void OTabWidget::slotTabBarSelected( int id )
 {
-    OTabInfo *newtab = tabs.first();
+    OTabInfo *newtab = m_tabs.first();
     while ( newtab && newtab->id() != id )
-    {
-        newtab = tabs.next();
-    }
+        newtab = m_tabs.next();
+
     if ( newtab && newtab->id() == id )
-    {
         selectTab( newtab );
-    }
 }
 
 void OTabWidget::slotTabListSelected( int index )
 {
-    OTabInfo *newtab = tabs.at( index );
+    OTabInfo *newtab = m_tabs.at( index );
     if ( newtab )
-    {
         selectTab( newtab );
-    }
 }
 
 QPixmap OTabWidget::loadSmooth( const QString &name )
@@ -341,85 +372,94 @@ QPixmap OTabWidget::loadSmooth( const QString &name )
 
 void OTabWidget::selectTab( OTabInfo *tab )
 {
-    if ( tabBarStyle == IconTab )
+    if ( m_tabBarStyle == IconTab )
     {
-        if ( currTab )
+        // Remove text label from currently selected tab
+        if ( m_currTab )
         {
-            tabBar->tab( currTab->id() )->setText( QString::null );
-            setUpLayout();
+            m_tabBar->tab( m_currTab->id() )->setText( QString::null );
+            //setUpLayout();
         }
-        tabBar->tab( tab->id() )->setText( tab->label() );
-        tabBar->setCurrentTab( tab->id() );
+
+        // Set text label for newly selected tab
+        m_tabBar->tab( tab->id() )->setText( tab->label() );
+        m_tabBar->setCurrentTab( tab->id() );
+
         setUpLayout();
-        tabBar->update();
     }
-    else
+    else if ( m_tabBarStyle == TextTab )
     {
-        tabBar->setCurrentTab( tab->id() );
+        m_tabBar->setCurrentTab( tab->id() );
     }
 
-    widgetStack->raiseWidget( tab->control() );
+    m_widgetStack->raiseWidget( tab->control() );
 
     emit currentChanged( tab->control() );
 
-    currTab = tab;
+    m_currTab = tab;
 }
 
 void OTabWidget::setUpLayout()
 {
-    tabBar->layoutTabs();
-    QSize t( tabBarStack->sizeHint() );
-    if ( tabBarStyle == IconTab )
+    if ( m_usingTabs )
     {
-        if ( t.width() > width() )
-            t.setWidth( width() );
+        m_tabBar->update();
+        m_tabBar->layoutTabs();
+    }
+}
+
+void OTabWidget::resizeEvent( QResizeEvent * )
+{
+    QSize t;
+
+    if ( m_usingTabs )
+    {
+        m_tabBar->layoutTabs();
+        t = m_tabBar->sizeHint();
+    }
+    else
+        t = m_tabList->sizeHint();
+
+    t.setWidth( width() );
+
+    int lw = m_widgetStack->lineWidth();
+    if ( m_tabBarPosition == Bottom )
+    {
+        if ( m_usingTabs )
+            m_tabBar->setGeometry( QMAX(0, lw-2), height() - t.height() - lw, t.width(), t.height() );
+        else
+            m_tabList->setGeometry( QMAX(0, lw-2), height() - t.height() - lw, t.width(), t.height() );
+
+        m_widgetStack->setGeometry( 0, 0, width(), height()-t.height()+QMAX(0, lw-2) );
     }
     else
     {
-        t.setWidth( width() );
-    }
-    int lw = widgetStack->lineWidth();
-    if ( tabBarPosition == Bottom )
-    {
-        tabBarStack->setGeometry( QMAX(0, lw-2), height() - t.height() - lw, t.width(), t.height() );
-        widgetStack->setGeometry( 0, 0, width(), height()-t.height()+QMAX(0, lw-2) );
-    }
-    else
-    {
-        tabBarStack->setGeometry( QMAX(0, lw-2), 0, t.width(), t.height() );
-        widgetStack->setGeometry( 0, t.height()-lw, width(), height()-t.height()+QMAX( 0, lw-2 ) );
+        if ( m_usingTabs )
+            m_tabBar->setGeometry( QMAX(0, lw-2), 0, t.width(), t.height() );
+        else
+            m_tabList->setGeometry( QMAX(0, lw-2), 0, t.width(), t.height() );
+
+        m_widgetStack->setGeometry( 0, t.height()-lw, width(), height()-t.height()+QMAX( 0, lw-2 ) );
     }
 
     if ( autoMask() )
         updateMask();
 }
 
-QSize OTabWidget::sizeHint() const
-{
-    QSize s( widgetStack->sizeHint() );
-    QSize t( tabBarStack->sizeHint() );
-    return QSize( QMAX( s.width(), t.width() ), s.height() + t.height() );
-}
-
-void OTabWidget::resizeEvent( QResizeEvent * )
-{
-    setUpLayout();
-}
-
 int OTabWidget::currentTab()
 {
-    if ( currTab )
+    if ( m_currTab )
     {
-        return currTab->id();
+        return m_currTab->id();
     }
     return -1;
 }
 
 QWidget* OTabWidget::currentWidget()const
 {
-    if ( currTab )
+    if ( m_currTab )
     {
-        return currTab->control();
+        return m_currTab->control();
     }
 
     return 0;
