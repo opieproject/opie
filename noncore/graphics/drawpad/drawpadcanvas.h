@@ -55,6 +55,8 @@ public slots:
     void newPage(uint width, uint height, const QColor& color);
     void clearPage();
     void deletePage();
+    void movePageUp();
+    void movePageDown();
 
     void undo();
     void redo();

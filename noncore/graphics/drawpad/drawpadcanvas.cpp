@@ -419,6 +419,24 @@ void DrawPadCanvas::deletePage()
     emit pageBackupsChanged();
 }
 
+void DrawPadCanvas::movePageUp()
+{
+    int index = m_pages.at();
+    Page* page = m_pages.take();
+    m_pages.insert(index - 1, page);
+
+    emit pagesChanged();
+}
+
+void DrawPadCanvas::movePageDown()
+{
+    int index = m_pages.at();
+    Page* page = m_pages.take();
+    m_pages.insert(index + 1, page);
+
+    emit pagesChanged();
+}
+
 bool DrawPadCanvas::undoEnabled()
 {
     return (m_pageBackups.current() != m_pageBackups.getFirst());

@@ -170,13 +170,15 @@ ThumbnailView::ThumbnailView(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas, QWi
     deletePageButton->setAutoRaise(true);
     connect(deletePageButton, SIGNAL(clicked()), this, SLOT(deletePage()));
 
-    QToolButton* movePageUpButton = new QToolButton(this);
-    movePageUpButton->setIconSet(Resource::loadIconSet("up"));
-    movePageUpButton->setAutoRaise(true);
+    m_pMovePageUpButton = new QToolButton(this);
+    m_pMovePageUpButton->setIconSet(Resource::loadIconSet("up"));
+    m_pMovePageUpButton->setAutoRaise(true);
+    connect(m_pMovePageUpButton, SIGNAL(clicked()), this, SLOT(movePageUp()));
 
-    QToolButton* movePageDownButton = new QToolButton(this);
-    movePageDownButton->setIconSet(Resource::loadIconSet("down"));
-    movePageDownButton->setAutoRaise(true);
+    m_pMovePageDownButton = new QToolButton(this);
+    m_pMovePageDownButton->setIconSet(Resource::loadIconSet("down"));
+    m_pMovePageDownButton->setAutoRaise(true);
+    connect(m_pMovePageDownButton, SIGNAL(clicked()), this, SLOT(movePageDown()));
 
     m_pPageListView = new PageListView(m_pDrawPadCanvas, this);
     connect(m_pPageListView, SIGNAL(selectionChanged()), this, SLOT(changePage()));
@@ -188,16 +190,24 @@ ThumbnailView::ThumbnailView(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas, QWi
     buttonLayout->addWidget(clearPageButton);
     buttonLayout->addWidget(deletePageButton);
     buttonLayout->addStretch();
-    buttonLayout->addWidget(movePageUpButton);
-    buttonLayout->addWidget(movePageDownButton);
+    buttonLayout->addWidget(m_pMovePageUpButton);
+    buttonLayout->addWidget(m_pMovePageDownButton);
 
     mainLayout->addLayout(buttonLayout);
     mainLayout->addWidget(m_pPageListView);
+
+    updateView();
 }
 
 ThumbnailView::~ThumbnailView()
 {
     hide();
+}
+
+void ThumbnailView::updateView()
+{
+    m_pMovePageUpButton->setEnabled(m_pDrawPadCanvas->goPreviousPageEnabled());
+    m_pMovePageDownButton->setEnabled(m_pDrawPadCanvas->goNextPageEnabled());
 }
 
 void ThumbnailView::hide()
@@ -231,6 +241,7 @@ void ThumbnailView::newPage()
         m_pDrawPadCanvas->newPage(newPageDialog.selectedWidth(), newPageDialog.selectedHeight(),
                                   newPageDialog.selectedColor());
         m_pPageListView->updateView();
+        updateView();
     }
 }
 
@@ -263,10 +274,26 @@ void ThumbnailView::deletePage()
     if (messageBox.exec() == QMessageBox::Yes) {
         m_pDrawPadCanvas->deletePage();
         m_pPageListView->updateView();
+        updateView();
     }
+}
+
+void ThumbnailView::movePageUp()
+{
+    m_pDrawPadCanvas->movePageUp();
+    m_pPageListView->updateView();
+    updateView();
+}
+
+void ThumbnailView::movePageDown()
+{
+    m_pDrawPadCanvas->movePageDown();
+    m_pPageListView->updateView();
+    updateView();
 }
 
 void ThumbnailView::changePage()
 {
     m_pDrawPadCanvas->selectPage(m_pPageListView->selected());
+    updateView();
 }

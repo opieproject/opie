@@ -21,6 +21,8 @@ class DrawPad;
 class DrawPadCanvas;
 class Page;
 
+class QToolButton;
+
 class PageListViewItem : public QListViewItem
 {
 public:
@@ -58,7 +60,9 @@ class ThumbnailView : public QWidget
 public:
     ThumbnailView(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas, QWidget* parent = 0, const char* name = 0);
     ~ThumbnailView();
-    
+
+    void updateView();
+
     void hide();
     void exec();
 
@@ -66,6 +70,8 @@ public slots:
     void newPage();
     void clearPage();
     void deletePage();
+    void movePageUp();
+    void movePageDown();
     void changePage();
 
 private:
@@ -73,6 +79,9 @@ private:
 
     DrawPad* m_pDrawPad;
     DrawPadCanvas* m_pDrawPadCanvas;
+
+    QToolButton* m_pMovePageUpButton;
+    QToolButton* m_pMovePageDownButton;
 
     PageListView* m_pPageListView;
 };
