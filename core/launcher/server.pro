@@ -116,17 +116,13 @@ INCLUDEPATH += $(OPIEDIR)/include $(OPIEDIR)/rsync
 DEPENDPATH	+= $(OPIEDIR)/rsync
 
 INCLUDEPATH += $(OPIEDIR)/noncore/settings/mediummount
-DEPENDPATH	+= $(OPIEDIR)/noncore/settings/mediummount
+DEPENDPATH  += $(OPIEDIR)/noncore/settings/mediummount
 
+LIBS        += -lqpe -lopiecore2 -lopieui2
+TARGET       = qpe
 
-TARGET		= qpe
-
-#needs OWait and ODevice
-CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
-contains( CONFTEST, y ){
-  LIBS += -lqpe -lopiecore2 -lopieui2
-}else{
-  LIBS	+= -lcrypt -lqpe -lopiecore2 -lopieui2
+contains( $(CONFIG_TARGET_MACOSX), y ) {
+  LIBS += -lcrypt
 }
 
 include ( $(OPIEDIR)/include.pro )
