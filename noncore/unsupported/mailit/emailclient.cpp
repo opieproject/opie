@@ -158,12 +158,12 @@ void EmailClient::init()
   composeButton->addTo(bar);
   composeButton->addTo(mail);
   
-  cancelButton = new QAction(tr("Cancel transfer"), Resource::loadPixmap("reset"), QString::null, 0, this, 0);
+  cancelButton = new QAction(tr("Cancel transfer"), Resource::loadPixmap("close"), QString::null, 0, this, 0);
   connect(cancelButton, SIGNAL(activated()), this, SLOT(cancel()) );
   cancelButton->addTo(mail);
   cancelButton->setEnabled(FALSE);
   
-  mailboxView = new QTabWidget( this, "mailboxView" );
+  mailboxView = new OTabWidget( this, "mailboxView" );
 
   QWidget* widget = new QWidget( mailboxView, "widget" );
   grid_2 = new QGridLayout( widget );
@@ -178,7 +178,7 @@ void EmailClient::init()
   inboxView->setAllColumnsShowFocus(TRUE);
 
   grid_2->addWidget( inboxView, 2, 0 );
-  mailboxView->insertTab( widget, tr( "Inbox" ) );
+  mailboxView->addTab( widget, "mailit/inbox", tr( "Inbox" ) );
 
   QWidget* widget_2 = new QWidget( mailboxView, "widget_2" );
   grid_3 = new QGridLayout( widget_2 );
@@ -191,7 +191,7 @@ void EmailClient::init()
   outboxView->setAllColumnsShowFocus(TRUE);
 
   grid_3->addWidget( outboxView, 0, 0 );
-  mailboxView->insertTab( widget_2, tr( "Outbox" ) );
+  mailboxView->addTab( widget_2,"mailit/outbox", tr( "Outbox" ) );
   
   setCentralWidget(mailboxView);
 }

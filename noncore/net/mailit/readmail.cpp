@@ -56,7 +56,7 @@ void ReadMail::init()
 	bar = new QToolBar(this);
 	
     	//reply dependant on viewing inbox
-	replyButton = new QAction( tr( "Reply" ), Resource::loadPixmap( "pass" ),
+	replyButton = new QAction( tr( "Reply" ), Resource::loadPixmap( "mailit/reply" ),
 		QString::null, 0, this, 0 );
 	connect(replyButton, SIGNAL(activated()), this, SLOT(reply()) );
 
@@ -70,13 +70,13 @@ void ReadMail::init()
 	nextButton->addTo(bar);
 	nextButton->addTo(viewMenu);
 
-	attatchmentsButton = new QAction( tr( "Attatchments" ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
+	attatchmentsButton = new QAction( tr( "Attatchments" ), Resource::loadPixmap( "mailit/attach" ), QString::null, 0, this, 0 );
 	connect( attatchmentsButton, SIGNAL( activated() ), this,
 		SLOT( viewAttatchments() ) );
 	attatchmentsButton->addTo(bar);
 	attatchmentsButton->addTo(viewMenu);
 	
-	plainTextButton = new QAction( tr( "Text Format" ), Resource::loadPixmap( "new" ), QString::null, 0, this, 0, TRUE);
+	plainTextButton = new QAction( tr( "Text Format" ), Resource::loadPixmap( "DocsIcon" ), QString::null, 0, this, 0, TRUE);
 	connect( plainTextButton, SIGNAL( activated() ), this, SLOT( shiftText() ) );
 	plainTextButton->addTo(bar);
 	plainTextButton->addTo(viewMenu);

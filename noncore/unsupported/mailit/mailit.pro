@@ -34,7 +34,7 @@ SOURCES   = emailclient.cpp \
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include 
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 # -lssl
 MOC_DIR=qpeobj
 OBJECTS_DIR=qpeobj

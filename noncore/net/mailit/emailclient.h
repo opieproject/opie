@@ -29,7 +29,6 @@
 #include <qlabel.h>
 #include <qlineedit.h>
 #include <qlistview.h>
-#include <qtabwidget.h>
 #include <qaction.h>
 #include <qlayout.h>
 #include <qtooltip.h>
@@ -40,6 +39,7 @@
 #include <qstatusbar.h>
 #include <qdir.h>
 #include <stdlib.h>
+#include <opie/otabwidget.h>
 
 #include "emailhandler.h"
 #include "emaillistitem.h"
@@ -138,7 +138,7 @@ private:
   QPopupMenu *editAccountMenu;
   QPopupMenu *deleteAccountMenu;
 
-  QTabWidget* mailboxView;
+  OTabWidget* mailboxView;
   QListView* inboxView;
   QListView* outboxView;
 
