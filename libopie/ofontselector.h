@@ -49,6 +49,7 @@ public:
 	
 	QFont selectedFont ( );
 
+	bool setSelectedFont ( const QFont & );
 	bool setSelectedFont ( const QString &family, const QString &style, int size, const QString &charset = 0 );
 
 	QString fontFamily ( ) const;

@@ -51,7 +51,10 @@ OColorButton::OColorButton ( QWidget *parent, const char *name )
 	connect ( d-> m_menu, SIGNAL( colorSelected ( const QColor & )), this, SLOT( updateColor ( const QColor & )));
 	
 	updateColor ( black );
-	setMinimumSize ( sizeHint ( ) + QSize ( 8, 0 ));
+	
+	QSize s = sizeHint ( ) + QSize ( 12, 0 );
+	setMinimumSize ( s );
+	setMaximumSize ( s. width ( ) * 2, s. height ( )); 
 }
 
 OColorButton::~OColorButton ( )

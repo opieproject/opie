@@ -112,6 +112,11 @@ OFontSelector::~OFontSelector ( )
 {
 }
 
+bool OFontSelector::setSelectedFont ( const QFont &f )
+{
+	return setSelectedFont ( f. family ( ), m_fdb. styleString ( f ), f. pointSize ( ), QFont::encodingName ( f. charSet ( )));
+}
+
 bool OFontSelector::setSelectedFont ( const QString &familyStr, const QString &styleStr, int sizeVal, const QString & /*charset*/ )
 {
 	QString sizeStr = QString::number ( sizeVal );
