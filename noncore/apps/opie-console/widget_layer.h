@@ -123,6 +123,11 @@ public:
 
 
 	virtual bool eventFilter( QObject *obj, QEvent *event );
+
+
+	QSize sizeHint();
+
+	virtual QSize calcSize( int cols, int lins ) const = 0;
 signals:
 
 	/**

@@ -90,6 +90,13 @@ static QChar vt100extended(QChar c)
 }
 
 
+QSize EmulationWidget::calcSize( int cols, int lins ) const
+{
+    int frw = width() - contentsRect().width();
+    int frh = height() - contentsRect().height();
+    int scw = (scrollLoc == SCRNONE? 0 : m_scrollbar->width() );
+    return QSize( f_width * cols + 2 * rimX + frw + scw, f_height * lins + 2 * rimY + frh );
+}
 
 void EmulationWidget::setImage( QArray<Character> const newimg, int lines, int columns )
 {
@@ -117,7 +124,7 @@ void EmulationWidget::setImage( QArray<Character> const newimg, int lines, int c
 	for ( int y = 0; y < lins; ++y )
 	{	int len;
 		const Character* lcl = &m_image[y * m_columns];
-		const Character* ext = &newimg[y * columns];
+		const Character* ext = &newimg[y * m_columns];
 		if ( ! m_resizing )
 		for ( int x = 0; x < cols; ++x )
 		{

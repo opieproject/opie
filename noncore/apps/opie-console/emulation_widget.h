@@ -60,6 +60,8 @@ public:
      */
     virtual void scroll( int value );
 
+    virtual QSize calcSize( int cols, int lins ) const;
+
 protected:
 
     /**

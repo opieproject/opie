@@ -53,6 +53,12 @@ WidgetLayer::~WidgetLayer()
 }
 
 
+QSize WidgetLayer::sizeHint()
+{
+    return size();
+}
+
+
 /* --------------------------------- audio ---------------------------------- */
 
 void WidgetLayer::bell()
