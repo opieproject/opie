@@ -173,15 +173,15 @@ toevoegen voor %1?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporteer vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
-        <translation type="unfinished"></translation>
+        <translation>Je moet een contact selecteren!</translation>
     </message>
     <message>
         <source>You have to set a filename !</source>
-        <translation type="unfinished"></translation>
+        <translation>Je moet een bestandsnaam selecteren!</translation>
     </message>
 </context>
 <context>
@@ -219,7 +219,11 @@ toevoegen voor %1?</translation>
 provided in the SHARP 
 default ROM. Opie-Mail 
 is provided free !</source>
-        <translation type="unfinished"></translation>
+        <translation>Opmerking: QT-Mail is
+alleen voorhanden in de
+SHARP standaard ROM.
+Opie-Mail wordt gratis
+geleverd!</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -331,27 +335,27 @@ is provided free !</source>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
-        <translation type="unfinished"></translation>
+        <translation>Volgorde (op -&gt; neer) regelt wie het eerst wordt weergegeven in de tweede kolom in de lijstweergave</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Gereedschap-/Menubalk</translation>
     </message>
     <message>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Vast</translation>
     </message>
     <message>
         <source>Switch to fixed menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakel over naar vaste gereedschap-/menubalk na het wisselen van programma!</translation>
     </message>
     <message>
         <source>Movable</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaatsbaar</translation>
     </message>
     <message>
         <source>Switch to moveable menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Schakel over naar verplaatsbare gereedschap-/menubalk na het wisselen van programma!</translation>
     </message>
 </context>
 <context>
@@ -506,7 +510,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Anguilla</source>
-        <translation type="unfinished"></translation>
+        <translation>Anguilla</translation>
     </message>
     <message>
         <source>Argentina</source>
@@ -546,7 +550,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Belarus</source>
-        <translation type="unfinished"></translation>
+        <translation>Belarus</translation>
     </message>
     <message>
         <source>Belgium</source>
@@ -574,7 +578,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Bouvet Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouvet Eiland</translation>
     </message>
     <message>
         <source>Brazil</source>
@@ -582,7 +586,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Brunei Darussalam</source>
-        <translation type="unfinished"></translation>
+        <translation>Brunei Darussalam</translation>
     </message>
     <message>
         <source>Bulgaria</source>
@@ -622,7 +626,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Christmas Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Paaseiland</translation>
     </message>
     <message>
         <source>Colombia</source>
@@ -674,7 +678,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Dominica</source>
-        <translation type="unfinished"></translation>
+        <translation>Dominica</translation>
     </message>
     <message>
         <source>Dominican Republic</source>
@@ -718,7 +722,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Faroe Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Faroe Eilanden</translation>
     </message>
     <message>
         <source>Fiji</source>
@@ -786,7 +790,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Holy See</source>
-        <translation type="unfinished"></translation>
+        <translation>Holy See</translation>
     </message>
     <message>
         <source>Honduras</source>
@@ -846,7 +850,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Latvia</source>
-        <translation type="unfinished"></translation>
+        <translation>Latvia</translation>
     </message>
     <message>
         <source>Lebanon</source>
@@ -918,7 +922,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Mayotte</source>
-        <translation type="unfinished"></translation>
+        <translation>Mayotte</translation>
     </message>
     <message>
         <source>Mexico</source>
@@ -978,7 +982,7 @@ is provided free !</source>
     </message>
     <message>
         <source>New Zealand</source>
-        <translation type="unfinished">Nieuw Zeeland</translation>
+        <translation>Nieuw Zeeland</translation>
     </message>
     <message>
         <source>Nicaragua</source>
@@ -994,7 +998,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Niue</source>
-        <translation type="unfinished"></translation>
+        <translation>Niue</translation>
     </message>
     <message>
         <source>Oman</source>
@@ -1006,7 +1010,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Palau</source>
-        <translation type="unfinished"></translation>
+        <translation>Palau</translation>
     </message>
     <message>
         <source>Panama</source>
@@ -1046,7 +1050,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Reunion</source>
-        <translation type="unfinished"></translation>
+        <translation>Reunion</translation>
     </message>
     <message>
         <source>Romania</source>
@@ -1062,11 +1066,11 @@ is provided free !</source>
     </message>
     <message>
         <source>Saint Lucia</source>
-        <translation type="unfinished"></translation>
+        <translation>Santa Lucia</translation>
     </message>
     <message>
         <source>Samoa</source>
-        <translation type="unfinished"></translation>
+        <translation>Samoa</translation>
     </message>
     <message>
         <source>San Marino</source>
@@ -1150,7 +1154,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Tajikistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Tajikistan</translation>
     </message>
     <message>
         <source>Tanzania</source>
@@ -1186,7 +1190,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Tuvalu</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuvalu</translation>
     </message>
     <message>
         <source>Uganda</source>
@@ -1206,7 +1210,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Vanuatu</source>
-        <translation type="unfinished"></translation>
+        <translation>Vanuatu</translation>
     </message>
     <message>
         <source>Venezuela</source>
@@ -1214,7 +1218,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Virgin Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Maagdeneilanden</translation>
     </message>
     <message>
         <source>Western Sahara</source>
@@ -1262,7 +1266,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Antarctica</source>
-        <translation type="unfinished"></translation>
+        <translation>Antartica</translation>
     </message>
     <message>
         <source>Armenia</source>
@@ -1298,7 +1302,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Kyrgyzstan</source>
-        <translation type="unfinished"></translation>
+        <translation>Kirgyzstan</translation>
     </message>
     <message>
         <source>Palestinian Sovereign Areas</source>
@@ -1318,7 +1322,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Vul de hele naam direct in! Als een achternaam met meerdere woorden moet worden ingevuld (bijvoorbeeld &quot;de Vries&quot;), schrijf dan &lt;achternaam&gt;, &lt;voornamen&gt; zoals dit: &quot;de Vries, Peter Paul&quot;</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
@@ -1326,15 +1330,15 @@ is provided free !</source>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation type="unfinished"></translation>
+        <translation>Iets als &quot;jr.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation type="unfinished"></translation>
+        <translation>De plaats waar het contact werkt</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk om het te veranderen kenmerk te selecteren</translation>
     </message>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
