@@ -1,13 +1,6 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>HelpDialog</name>
-    <message>
-        <source>Form1</source>
-        <translation>Form1</translation>
-    </message>
-</context>
-<context>
     <name>KBill</name>
     <message>
         <source>kBill</source>

@@ -2,10 +2,6 @@
 <context>
     <name>CalcDlg</name>
     <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Molecular Weight</source>
         <translation>Molar Masse</translation>
     </message>

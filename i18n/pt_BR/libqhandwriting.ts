@@ -117,10 +117,6 @@
         <translation type="unfinished">Minúsculas (ligar Maiúsculas)</translation>
     </message>
     <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>ms</source>
         <translation type="unfinished"></translation>
     </message>

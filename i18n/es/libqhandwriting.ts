@@ -100,10 +100,6 @@
 <context>
     <name>QIMPenPrefBase</name>
     <message>
-        <source>Form1</source>
-        <translation>Impreso1</translation>
-    </message>
-    <message>
         <source>Multi-stroke character timeout:</source>
         <translation>Espera en caracteres multitrazo:</translation>
     </message>

@@ -33,10 +33,6 @@
 <context>
     <name>NewGameBase</name>
     <message>
-        <source>Form1</source>
-        <translation>Impreso1</translation>
-    </message>
-    <message>
         <source>Players</source>
         <translation>Jugadores</translation>
     </message>

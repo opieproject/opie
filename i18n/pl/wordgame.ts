@@ -33,10 +33,6 @@
 <context>
     <name>NewGameBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Players</source>
         <translation>Gracze</translation>
     </message>

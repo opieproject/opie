@@ -10,10 +10,6 @@
         <translation>Löschen</translation>
     </message>
     <message>
-        <source>Form1</source>
-        <translation>Form1</translation>
-    </message>
-    <message>
         <source>Molecular Weight</source>
         <translation>Moleculargewicht</translation>
     </message>

@@ -101,10 +101,6 @@
 <context>
     <name>QIMPenPrefBase</name>
     <message>
-        <source>Form1</source>
-        <translation>Form1</translation>
-    </message>
-    <message>
         <source>Multi-stroke character timeout:</source>
         <translation>Délais d&apos;écriture des caractères multi-trait :</translation>
     </message>

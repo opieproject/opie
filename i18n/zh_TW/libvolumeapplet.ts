@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>Key Clicks</source>
-        <translation >鍵般</translation>
+        <translation>鍵般</translation>
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation >觸控</translation>
+        <translation>觸控</translation>
     </message>
 </context>
 </TS>

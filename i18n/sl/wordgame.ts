@@ -33,10 +33,6 @@
 <context>
     <name>NewGameBase</name>
     <message>
-        <source>Form1</source>
-        <translation>Obrazec1</translation>
-    </message>
-    <message>
         <source>Players</source>
         <translation>Igralci</translation>
     </message>

@@ -56,7 +56,7 @@ Keep power off until power restored!</source>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation >低電量警告.
+        <translation>低電量警告.
 請換上備份電池</translation>
     </message>
     <message>
@@ -78,7 +78,7 @@ Please charge the back-up battery.</source>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
-        <translation >電池狀態</translation>
+        <translation>電池狀態</translation>
     </message>
 </context>
 <context>
@@ -123,7 +123,7 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
-        <translation >A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</translation>
+        <translation>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</translation>
     </message>
     <message>
         <source>Which media files</source>
@@ -131,7 +131,7 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>Audio</source>
-        <translation >音效</translation>
+        <translation>音效</translation>
     </message>
     <message>
         <source>Image</source>
@@ -155,7 +155,7 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>Limit search to dir: (not used yet)</source>
-        <translation >Limit search to dir: (not used yet)</translation>
+        <translation>Limit search to dir: (not used yet)</translation>
     </message>
     <message>
         <source>Add</source>
