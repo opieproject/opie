@@ -311,6 +311,21 @@ void Ipkg::commandStdout(OProcess*, char *buffer, int buflen)
         buflen --;
     lineStr = lineStr.left( buflen );
     emit outputText( lineStr );
+
+    // check if we are installing dependant packages
+    if ( option == "install" || option == "reinstall" )
+    {
+        // Need to keep track of any dependant packages that get installed
+        // so that we can create links to them as necessary
+        if ( lineStr.startsWith( "Installing " ) )
+        {
+            int start = lineStr.find( " " ) + 1;
+            int end = lineStr.find( " ", start );
+            QString *package = new QString( lineStr.mid( start, end-start ) );
+            dependantPackages->append( package );
+        }
+    }
+    
     qDebug(lineStr);
     buffer[0] = '\0';
 }
