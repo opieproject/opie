@@ -240,8 +240,9 @@ int suspend ( int fix_rtc )
 		time ( &syst );// get the UNIX system time
 		sys = *localtime ( &syst );		
 		
-		if (( fd = open ( "/dev/misc/rtc", O_RDWR )) < 0 )  // open the RTC device
-			break; //  ( 1, "/dev/misc/rtc" );	
+		if (( fd = open ( "/dev/misc/rtc", O_RDWR )) < 0 )
+			if (( fd = open ( "/dev/rtc", O_RDWR )) < 0 )
+				break; //  ( 1, "rtc" );	
 		
 		memset ( &rtc, 0, sizeof ( struct tm ));    // get the RTC time
 		if ( ioctl ( fd, RTC_RD_TIME, &rtc ) < 0 )
