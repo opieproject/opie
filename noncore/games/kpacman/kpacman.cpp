@@ -115,7 +115,7 @@ void Kpacman::menu()
 
     optionsPopup->insertItem(tr("Change &keys..."), this, SLOT(confKeys()));
 
-#ifndef QWS
+#ifndef QPE_PORT
     QString aboutText = tr("@PACKAGE@ - @VERSION@\n\n"
                              "Joerg Thoennissen (joe@dsite.de)\n\n"
                              "A pacman game for the KDE Desktop\n\n"
@@ -135,7 +135,7 @@ void Kpacman::menu()
     //_menuBar->insertItem(tr("&Game"), gamePopup);
     //_menuBar->insertItem(tr("&Options"), optionsPopup);
     //_menuBar->insertSeparator();
-#ifndef QWS
+#ifndef QPE_PORT
     _menuBar->insertItem(tr("&Help"), helpPopup);
 #endif
 }

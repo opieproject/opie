@@ -23,6 +23,9 @@
 KpacmanWidget::KpacmanWidget( QWidget *parent, const char *name)
         : QWidget( parent, name )
 {
+    score = 0l;
+    referee = 0l;
+    status = 0l;
     bitfont = NULL;
     fontName = "";
 
@@ -141,9 +144,11 @@ void KpacmanWidget::setScheme(int Scheme, int Mode)
 
 void KpacmanWidget::resizeEvent( QResizeEvent * )
 {
+    qWarning("Resize");
     referee->setGeometry(0, bitfont->height()*3, referee->width(), referee->height());
     referee->setBackgroundColor(BLACK);
 
+    if(!status ) return;
     status->setGeometry(0, bitfont->height()*3+referee->height(), referee->width(),
                         status->height());
     status->setBackgroundColor(BLACK);

@@ -22,6 +22,7 @@
 Status::Status( QWidget *parent, const char *name, int Scheme, int Mode ) :
     QWidget( parent, name )
 {
+    qWarning("Status::Status");
     actualLifes = 0;
     actualLevel = 0;
 

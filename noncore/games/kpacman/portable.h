@@ -19,12 +19,7 @@
 #ifndef PORTABLE_H
 #define PORTABLE_H
 
-#ifdef QWS
 #define QPE_PORT
-#else
-#define KDE2_PORT
-#define KDE_PORT
-#endif
 
 #if defined( KDE2_PORT )
 
