@@ -110,6 +110,7 @@ private slots:
     void writeCurrentM3u();
     void openFile();
     void openURL();
+    void openDirectory();
     void setDocument( const QString& fileref );
     void addToSelection( const DocLnk& ); // Add a media file to the playlist
     void addToSelection( QListViewItem* ); // Add a media file to the playlist
@@ -130,6 +131,7 @@ private slots:
     void playSelected();
 
 private:
+    DocLnk addFileToPlaylist(const QString& directory, const QString& name);
     bool fromSetDocument;
     bool insanityBool;
     QString setDocFileRef, currentPlayList;

@@ -85,6 +85,8 @@ PlayListWidget::PlayListWidget(QWidget* parent, const char* name, WFlags fl )
                         this,SLOT( openFile() ) );
     (void)new MenuItem( pmPlayList, tr("Add URL"),
                         this,SLOT( openURL() ) );
+    (void)new MenuItem( pmPlayList, tr( "Add Directory"),
+                        this, SLOT(openDirectory()));
     pmPlayList->insertSeparator(-1);
     (void)new MenuItem( pmPlayList, tr( "Save Playlist" ),
                         this, SLOT(writem3u() ) );
@@ -662,12 +664,7 @@ void PlayListWidget::openURL() {
 }
 
 
-void PlayListWidget::openFile() {
-
-    QString filename, name;
-
-    Config cfg( "OpiePlayer" );
-    cfg.setGroup("Dialog");
+static MimeTypes fileSelectorMimeTypes() {
     MimeTypes types;
     QStringList audio, video, all;
     audio << "audio/*";
@@ -684,33 +681,59 @@ void PlayListWidget::openFile() {
     types.insert("Audio",  audio );
     types.insert("Video", video );
 
-    QString str = OFileDialog::getOpenFileName( 1,
-                                                cfg.readEntry("LastDirectory",QPEApplication::documentDir()),"",
-                                                types, 0 );
+    return types;
+}
 
-    if(str.left(2) == "//")  {
-        str=str.right(str.length()-1);
-    }
-    cfg.writeEntry( "LastDirectory" ,QFileInfo( str ).dirPath() );
+void PlayListWidget::openFile() {
 
-    if( !str.isEmpty() ) {
+    QString filename, name;
 
-        odebug << "Selected filename is " + str << oendl;
-        filename = str;
-        DocLnk lnk;
+    Config cfg( "OpiePlayer" );
+    cfg.setGroup("Dialog");
+    MimeTypes types = fileSelectorMimeTypes();
 
-        if( filename.right( 3) == "m3u" ||  filename.right(3) == "pls" ) {
-            readListFromFile( filename );
-        } else {
-            lnk.setName( QFileInfo(filename).baseName() ); //sets name
-            lnk.setFile( filename ); //sets file name
-            d->selectedFiles->addToSelection(  lnk );
-            writeCurrentM3u();
-            d->selectedFiles->setSelectedItem( lnk.name() );
-        }
+
+    QString str = OFileDialog::getOpenFileName( 1, QString::null,
+                                                QString::null, types, 0,
+                                                tr("Add File to Playlist") );
+
+    if( str.isEmpty() )
+        return;
+
+    if(str.left(2) == "//") str=str.right(str.length()-1);
+
+
+    if( str.right( 3) == "m3u" ||  str.right(3) == "pls" ) {
+        readListFromFile( str );
+    } else {
+        QFileInfo info( str );
+        DocLnk lnk = addFileToPlaylist( str, info.baseName() );
+        d->selectedFiles->setSelectedItem( lnk.name() );
     }
 }
 
+void PlayListWidget::openDirectory() {
+    QString str = OFileDialog::getDirectory( OFileSelector::DirectorySelector,
+                                             QString::null, 0,
+                                             tr( "Add Files from Directory"));
+
+    if(str.isEmpty() )
+        return;
+
+    if(str.left(2) == "//") str=str.right(str.length()-1);
+    QDir dir( str );
+    QStringList lst = dir.entryList(QDir::Files|QDir::Readable);
+
+    for ( QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
+        QString filename = str + "/" + *it;
+
+        if( filename.right( 3) == "m3u" ||  filename.right(3) == "pls" )
+            readListFromFile( filename );
+        else {
+            addFileToPlaylist( filename, QFileInfo(*it).baseName() );
+        }
+    }
+}
 
 void PlayListWidget::readListFromFile( const QString &filename ) {
     odebug << "read list filename " + filename << oendl;
@@ -785,33 +808,16 @@ void PlayListWidget::readListFromFile( const QString &filename ) {
   /*
  writes current playlist to m3u file */
 void PlayListWidget::writem3u() {
-    //InputDilog *fileDlg;
-    //fileDlg = new InputDialog( this, tr( "Save m3u Playlist " ), TRUE, 0);
-    //fileDlg->exec();
 
     Config cfg( "OpiePlayer" );
     cfg.setGroup("Dialog");
-    MimeTypes types;
-    QStringList audio, video, all;
-    audio << "audio/*";
-    audio << "playlist/plain";
-    audio << "audio/x-mpegurl";
+    MimeTypes types = fileSelectorMimeTypes();
 
-    video << "video/*";
-    video << "playlist/plain";
+    QString str = OFileDialog::getOpenFileName( 1, QString::null,
+                                                QString::null, types, 0,
+                                                tr( "Save Playlist" ));
 
-    all += audio;
-    all += video;
-    types.insert("All Media Files", all );
-    types.insert("Audio",  audio );
-    types.insert("Video", video );
-
-    QString str = OFileDialog::getOpenFileName( 1,
-                  cfg.readEntry("LastDirectory",QPEApplication::documentDir()),"",
-                  types, 0 );
     if(str.left(2) == "//") str=str.right(str.length()-1);
-    cfg.writeEntry("LastDirectory" ,QFileInfo(str).dirPath());
-
 
     QString name, filename, list;
     Om3u *m3uList;
@@ -1007,7 +1013,6 @@ QString PlayListWidget::currentFileListPathName() const {
 
 
 void PlayListWidget::qcopReceive(const QCString &msg, const QByteArray &data) {
-   odebug << "qcop message "+msg << oendl;
    QDataStream stream ( data, IO_ReadOnly );
    if ( msg == "play()" ) { //plays current selection
       btnPlay( true);
@@ -1047,4 +1052,15 @@ void PlayListWidget::qcopReceive(const QCString &msg, const QByteArray &data) {
 
    }
 
+}
+
+DocLnk PlayListWidget::addFileToPlaylist( const QString& file,
+                                        const QString& name ) {
+    DocLnk lnk;
+    lnk.setName( name ); //sets name
+    lnk.setFile( file ); //sets file name
+    d->selectedFiles->addToSelection(  lnk );
+    writeCurrentM3u();
+
+    return lnk;
 }

@@ -157,7 +157,6 @@ void MediaPlayer::next() {
         if(l) mediaPlayerState.setLooping(l);
         if(r) mediaPlayerState.setShuffled(r);
     }
-    qApp->processEvents();
 }
 
 
