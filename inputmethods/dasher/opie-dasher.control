@@ -5,7 +5,7 @@ Section: opie/inputmethods
 Maintainer: Matthew Garrett <mjg59@srcf.ucam.org>
 Architecture: arm
 Version: $QPE_VERSION-1
-Depends: task-opie-minimal, libexpat1
+Depends: task-opie-minimal
 Description: Dasher text input method
  Dasher is a novel zooming text entry method that allows significantly faster
  text entry than traditional methods.
