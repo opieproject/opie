@@ -85,7 +85,7 @@ audio/x-pn-realaudio    ra ram
 audio/x-pn-realaudio-plugin
 audio/x-realaudio   ra
 audio/x-wav     wav
-audio/ogg    ogg
+audio/x-ogg    ogg
 chemical/x-pdb      xyz
 image/gif     gif
 image/ief     ief
