@@ -1,9 +1,0 @@
-Files: etc/qimpen/default.conf etc/qimpen/combining.qpt etc/qimpen/asciilower.qpt etc/qimpen/asciiupper.qpt etc/qimpen/numeric.qpt
-Priority: optional
-Section: opie/inputmethods
-Maintainer: Jake Richardson <jake@asdfnews.org>
-Architecture: none
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Classic character set for the Handwriting inputmethod.
- Classic character set for the Handwriting inputmethod.

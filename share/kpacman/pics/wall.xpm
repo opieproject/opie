@@ -1,9 +1,0 @@
-/* XPM */
-static char * wall_xpm[] = {
-"112 4 2 1",
-" 	s None	c None",
-"b	c #2020de",
-"  b  b                     bb            b    b    bb     b  b  bb    bb             b    b                     ",
-"  b  b      bbbb                   bb     b  b     bb     b  b    bbbb          bb   b    b   bb      bbbb      ",
-"  b  b  bbbb                      b  b     bb     b  b     bb             bbbb    b   bbbb   b    bb        bb  ",
-"  b  b             bb            b    b           b  b     bb           bb    bb  b          b                  "};

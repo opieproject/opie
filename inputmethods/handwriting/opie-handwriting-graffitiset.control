@@ -1,9 +1,0 @@
-Files: etc/qimpen/graffiti*
-Priority: optional
-Section: opie/inputmethods
-Maintainer: Jake Richardson <jake@asdfnews.org>
-Architecture: none
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Graffiti character set for the Handwriting inputmethod.
- Graffiti character set for the Handwriting inputmethod.

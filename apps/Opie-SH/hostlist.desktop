@@ -1,6 +1,0 @@
-[Desktop Entry]
-Comment=hostlist
-Exec=hostlist.sh
-Icon=opie-sh-scripts/hostlist
-Type=Application
-Name=Hostlist

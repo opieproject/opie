@@ -1,5 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec=usbnetctrl.sh
-Icon=opie-sh-scripts/usbnetctrl
-Name=USBNET Control

@@ -1,9 +1,0 @@
-Files: plugins/inputmethods/libqhandwriting.so*
-Priority: optional
-Section: opie/inputmethods
-Maintainer: Martin Jones <mjones@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base, ($QPE_VERSION) opie-handwriting-classicset | opie-handwriting-graffitiset
-Description: Handwriting input method
- Handwriting recognition input method for the Opie environment.

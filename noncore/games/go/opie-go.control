@@ -1,9 +1,0 @@
-Files: bin/go apps/Games/go.desktop pics/go
-Priority: optional
-Section: opie/games
-Maintainer: Warwick Allison <warwick@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: The game of Go
- A game for the Opie environment.

@@ -1,5 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec=filesystem_mounter.sh
-Icon=opie-sh-scripts/fsmounter
-Name=Filesystem Mounter
