@@ -124,6 +124,10 @@ $(OPIEDIR)/stamp-headers :
 	# all
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
+	( cd include/opie2; for generatedHeader in `cd ../../libopie2/opieui; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
+	ln -sf ../../libopie2/opieui/$$generatedHeader $$generatedHeader; done )
+	( cd include/opie2; for generatedHeader in `cd ../../libopie2/opiepim/ui; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
+	ln -sf ../../libopie2/opiepim/ui/$$generatedHeader $$generatedHeader; done )
 	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h
 	touch $@
 
