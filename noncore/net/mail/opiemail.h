@@ -20,6 +20,8 @@ public slots:
     virtual void slotwriteMail(const QString&name,const QString&email);
     virtual void slotComposeMail();
     virtual void appMessage(const QCString &msg, const QByteArray &data);
+            void setDocument(const QString&);
+    
 protected slots:
     virtual void slotSendQueued();
     virtual void slotSearchMails();
