@@ -39,6 +39,7 @@
 #include <qpe/config.h>
 #include <qpe/datebookdb.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/qpedialog.h>
 
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
@@ -110,7 +111,8 @@ MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal, WFlags 
 	slotCheckNtp( -1 );
 
 	// Display app
-	showMaximized();
+	//showMaximized();
+	(void)new QPEDialogListener(this);
 }
 
 MainWindow::~MainWindow()
