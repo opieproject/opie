@@ -170,4 +170,5 @@ CONFIG_WAVPLUGIN	core/multimedia/opieplayer/wavplugin	wavplugin.pro
 CONFIG_WELLENREITER	noncore/net/wellenreiter	wellenreiter.pro
 CONFIG_WIRELESSAPPLET	noncore/applets/wirelessapplet	wirelessapplet.pro
 CONFIG_WLAN	noncore/settings/networksettings/wlan	wlan.pro
+CONFIG_PPP	noncore/settings/networksettings/ppp	ppp.pro
 CONFIG_WORDGAME	noncore/games/wordgame	wordgame.pro
