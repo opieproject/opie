@@ -416,13 +416,19 @@ void PlayListWidget::writeConfig( Config& cfg ) const {
 
 void PlayListWidget::addToSelection( const DocLnk& lnk ) {
 //    qDebug("add");
-    d->setDocumentUsed = FALSE;
-    if ( mediaPlayerState->playlist() ) {
-        if(QFileInfo(lnk.file()).exists() || lnk.file().left(4) == "http" )
-            d->selectedFiles->addToSelection( lnk );
+    if( lnk.file().find(" ",0,TRUE) != -1 || lnk.file().find("%20",0,TRUE) != -1) {
+        QMessageBox::message("Note","You are trying to play\na malformed url.");
+        
+    } else { 
+
+        d->setDocumentUsed = FALSE;
+        if ( mediaPlayerState->playlist() ) {
+            if(QFileInfo(lnk.file()).exists() || lnk.file().left(4) == "http" )
+                d->selectedFiles->addToSelection( lnk );
+        }
+        else
+            mediaPlayerState->setPlaying( TRUE );
     }
-    else
-        mediaPlayerState->setPlaying( TRUE );
 }
 
 
@@ -846,34 +852,38 @@ void PlayListWidget::btnPlay(bool b) {
     switch ( tabWidget->currentPageIndex()) {
       case 0:
       {
+          qDebug("here we are");
+          if( d->selectedFiles->current()->file().find(" ",0,TRUE) != -1 || d->selectedFiles->current()->file().find("%20",0,TRUE) != -1) {
+              QMessageBox::message("Note","You are trying to play\na malformed url.");
+        
+          } else { 
 
-          mediaPlayerState->setPlaying(b);
-      }
+              mediaPlayerState->setPlaying(b);
+          }      }
       break;
       case 1:
       {
-          addToSelection( audioView->currentItem() );
-          mediaPlayerState->setPlaying(b);
-          d->selectedFiles->removeSelected( );
-          tabWidget->setCurrentPage(1);
-          d->selectedFiles->unSelect();
-          insanityBool=FALSE;         
-//          audioView->clearSelection();
-      }
+              addToSelection( audioView->currentItem() );
+              mediaPlayerState->setPlaying(b);
+              d->selectedFiles->removeSelected( );
+              tabWidget->setCurrentPage(1);
+              d->selectedFiles->unSelect();
+              insanityBool=FALSE;         
+          }//          audioView->clearSelection();
       break;
       case 2:
       {
-          addToSelection( videoView->currentItem() );
-          mediaPlayerState->setPlaying(b);
-          qApp->processEvents();
-          d->selectedFiles->removeSelected( );
-          tabWidget->setCurrentPage(2);
-          d->selectedFiles->unSelect();
-          insanityBool=FALSE;
-//          videoView->clearSelection();
-      }
+              addToSelection( videoView->currentItem() );
+              mediaPlayerState->setPlaying(b);
+              qApp->processEvents();
+              d->selectedFiles->removeSelected( );
+              tabWidget->setCurrentPage(2);
+              d->selectedFiles->unSelect();
+              insanityBool=FALSE;
+          }//          videoView->clearSelection();
       break;
     };
+ 
 }
 
 void PlayListWidget::deletePlaylist() {
@@ -1068,9 +1078,12 @@ void PlayListWidget::openFile() {
         filename = fileDlg->LineEdit1->text();
 // http://205.188.234.129:8030
 // http://66.28.68.70:8000
-      filename.replace(QRegExp("%20")," ");
-
-      qDebug("Selected filename is "+filename);
+//        filename.replace(QRegExp("%20")," ");
+        if(filename.find(" ",0,TRUE) != -1 || filename.find("%20",0,TRUE) != -1) {
+        QMessageBox::message("Note","Spaces in urls are not allowed.");
+        return;
+    } else {
+        qDebug("Selected filename is "+filename);
         if(filename.right(3) == "m3u")
             readm3u( filename);
         else if(filename.right(3) == "pls")
@@ -1093,6 +1106,7 @@ void PlayListWidget::openFile() {
 //     if(fileDlg2)
 //         delete fileDlg2;
         }
+    }
     }
     if(fileDlg)
         delete fileDlg;
@@ -1205,7 +1219,10 @@ void PlayListWidget::readm3u(const QString &filename) {
         while ( !t.atEnd()) {
 //        Lview->insertLine(t.readLine(),-1);
             s=t.readLine();
-            if(s.find("#",0,TRUE) == -1) {
+        if(s.find(" ",0,TRUE) != -1 || s.find("%20",0,TRUE) != -1) {
+        QMessageBox::message("Note","Spaces in urls are not allowed.");
+        } 
+           else if(s.find("#",0,TRUE) == -1) {
                  if(s.find(" ",0,TRUE) == -1)  { // not sure if this is neede since cf uses vfat
                     if(s.left(2) == "E:" || s.left(2) == "P:") {
                         s=s.right(s.length()-2);
@@ -1220,6 +1237,7 @@ void PlayListWidget::readm3u(const QString &filename) {
                         qDebug("add "+name);
                          d->selectedFiles->addToSelection( lnk);
                     } else { // is url
+
                         s.replace(QRegExp("%20")," ");
                          DocLnk lnk( s);
                          QString name = s.right( s.length() - 7);
@@ -1238,6 +1256,7 @@ void PlayListWidget::readm3u(const QString &filename) {
             }
         }
     }
+    f.close();
 }
 
 void PlayListWidget::writem3u(const QString &filename) {
