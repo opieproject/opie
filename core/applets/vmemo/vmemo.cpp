@@ -11,26 +11,22 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.56 2003-08-09 17:33:10 kergoth Exp $
+ * $Id: vmemo.cpp,v 1.57 2003-08-10 23:00:44 llornkcor Exp $
  */
-// Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
+// copyright 2002 and 2003  L.J.Potter <ljp@llornkcor.com>
+
 extern "C" {
 #include "adpcm.h"
 }
 
-#include <sys/utsname.h>
-#include <sys/time.h>
-#include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
-#include <sys/stat.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <linux/soundcard.h>
 
-#include <string.h>
-#include <stdlib.h>
 #include <errno.h>
+
 
 typedef struct _waveheader {
   u_long  main_chunk; /* 'RIFF'  */
@@ -208,19 +204,14 @@ VMemo::VMemo( QWidget *parent, const char *_name )
   t_timer = new QTimer( this );
   connect( t_timer, SIGNAL( timeout() ), SLOT( timerBreak() ) );
   
-  struct utsname name; /* check for embedix kernel running on the zaurus*/
-  if (uname(&name) != -1) {
-    QString release=name.release;
-
     Config vmCfg("Vmemo");
     vmCfg.setGroup("Defaults");
     int toggleKey = setToggleButton(vmCfg.readNumEntry("toggleKey", -1));
     useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
 
-    qDebug("toggleKey %d", toggleKey);  
-
-    if(release.find("embedix",0,TRUE) !=-1)
-      systemZaurus=TRUE;
+    qDebug("toggleKey %d", toggleKey);
+    if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
+         systemZaurus=TRUE;
     else 
       systemZaurus=FALSE;
       
@@ -244,7 +235,7 @@ VMemo::VMemo( QWidget *parent, const char *_name )
     if( vmCfg.readNumEntry("hideIcon",0) == 1)
       hide();
     recording = FALSE;
-  }
+    // }
 }
 
 VMemo::~VMemo() {
@@ -308,8 +299,12 @@ bool VMemo::startRecording() {
   }
   
   config.setGroup("Defaults");
-  
-  QDateTime dt = QDateTime::currentDateTime();
+
+  date = TimeString::dateString( QDateTime::currentDateTime(),false,true);
+  date.replace(QRegExp("'"),"");
+  date.replace(QRegExp(" "),"_");
+  date.replace(QRegExp(":"),".");
+  date.replace(QRegExp(","),"");
 
   QString fName;
   config.setGroup( "System" );
@@ -326,16 +321,9 @@ bool VMemo::startRecording() {
     fileName="/"+fileName;
   if( fileName.right(1).find('/') == -1)
     fileName+="/";
-  fName = "vm_"+ dt.toString()+ ".wav";
+  fName = "vm_"+ date+ ".wav";
   
   fileName+=fName;
-  // No spaces in the filename
-  fileName.replace(QRegExp("'"),"");
-  fileName.replace(QRegExp(" "),"_");
-  fileName.replace(QRegExp(":"),".");
-  fileName.replace(QRegExp(","),"");
-
-  
   qDebug("filename is "+fileName);
 // open tmp file here
   char *pointer;
@@ -344,7 +332,6 @@ bool VMemo::startRecording() {
   
   if(openWAV(pointer ) == -1)  {
 
-//  if(openWAV(fileName.latin1()) == -1)  {
     QString err("Could not open the temp file\n");
     err += fileName;
     QMessageBox::critical(0, "vmemo", err, "Abort");
@@ -366,7 +353,7 @@ bool VMemo::startRecording() {
   cats[0] = config.readNumEntry("Category", 0);
   
   QString dlName("vm_");
-  dlName += dt.toString();
+  dlName += date;
   DocLnk l;
   l.setFile(fileName);
   l.setName(dlName);
@@ -489,8 +476,8 @@ int VMemo::openWAV(const char *filename) {
 }
 
 bool VMemo::record() {
-
-    int length=0, result, value;
+   length=0;
+   int result, value;
   QString msg;
   msg.sprintf("Recording format %d", format);
   qDebug(msg);
@@ -576,7 +563,28 @@ bool VMemo::record() {
 
   ::close(dsp);
 
-  qDebug("done recording "+fileName);
+      Config cfgO("OpieRec");
+      cfgO.setGroup("Sounds");
+
+      int nFiles = cfgO.readNumEntry( "NumberofFiles",0);
+
+      QString currentFileName = fileName;
+      QString currentFile = "vm_"+ date;
+      
+      float numberOfRecordedSeconds=(float) length / (float)speed * (float)2;
+
+      cfgO.writeEntry( "NumberofFiles", nFiles + 1);
+      cfgO.writeEntry( QString::number( nFiles + 1), currentFile);
+      cfgO.writeEntry( currentFile, currentFileName);
+
+      QString time;
+      time.sprintf("%.2f", numberOfRecordedSeconds);
+      cfgO.writeEntry( currentFileName, time );
+      //      qDebug("writing config numberOfRecordedSeconds "+time);
+
+      cfgO.write();
+
+      qDebug("done recording "+fileName);
 
   Config cfg("qpe");
   cfg.setGroup("Volume");
