@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=An EMail Client
 Exec=opiemail
-Icon=Unknown
+Icon=opiemail
 Type=Application
 Name=EMail
