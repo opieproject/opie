@@ -3,39 +3,39 @@
     <name>Ntp</name>
     <message>
         <source>time.fu-berlin.de</source>
-        <translation type="unfinished"></translation>
+        <translation>time.fu-berlin.de</translation>
     </message>
     <message>
         <source>Run NTP?</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte NTP?</translation>
     </message>
     <message>
         <source>You asked for a delay of </source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben um eine Verzögerung von</translation>
     </message>
     <message>
         <source> minutes, but only </source>
-        <translation type="unfinished"></translation>
+        <translation>minuten gebeten, es sind nur</translation>
     </message>
     <message>
         <source> minutes elapsed since last lookup.</source>
-        <translation type="unfinished"></translation>
+        <translation>minuten vergangen seit dem letzten Lookup.</translation>
     </message>
     <message>
         <source>Rerun NTP?</source>
-        <translation type="unfinished"></translation>
+        <translation>NTP neu starten?</translation>
     </message>
     <message>
         <source>Running:</source>
-        <translation type="unfinished"></translation>
+        <translation>führe aus:</translation>
     </message>
     <message>
         <source>Error while executing ntpdate</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Ausführen</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>sekunden</translation>
     </message>
     <message>
         <source>last [h]</source>
@@ -59,11 +59,11 @@
     </message>
     <message>
         <source>Set predicted time: </source>
-        <translation type="unfinished"></translation>
+        <translation>Setz berechnete Zeit:</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Verbindung zu Server </translation>
     </message>
     <message>
         <source>Predict</source>
@@ -71,35 +71,36 @@
     </message>
     <message>
         <source>NTP</source>
-        <translation type="unfinished"></translation>
+        <translation>NTP</translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Main</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>ntp error</source>
-        <translation type="unfinished"></translation>
+        <translation>NTP Fehler</translation>
     </message>
     <message>
         <source>Error while getting time form network!</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Netz wollte mir die Zeit nicht verraten!</translation>
     </message>
     <message>
         <source>Error while getting time form
  server</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Nachsehen der
+Zeit auf dem Server</translation>
     </message>
 </context>
 <context>
     <name>NtpBase</name>
     <message>
         <source>Network Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerk Zeit</translation>
     </message>
     <message>
         <source>Get time from network</source>
@@ -143,19 +144,20 @@
     </message>
     <message>
         <source>Use</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwende</translation>
     </message>
     <message>
         <source>as</source>
-        <translation type="unfinished"></translation>
+        <translation>als</translation>
     </message>
     <message>
         <source>NTP server to get the time from the network.</source>
-        <translation type="unfinished"></translation>
+        <translation>NTP Server um die Zeit vom Netz zu holen.</translation>
     </message>
     <message>
         <source>Wait for </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hehe, also advanced features und Deutsche Sprache?
+wo kämen wir da hin...</translation>
     </message>
     <message>
         <source>minutes until</source>
@@ -262,7 +264,7 @@
     </message>
     <message>
         <source>System Time</source>
-        <translation type="unfinished"></translation>
+        <translation>System Zeit</translation>
     </message>
 </context>
 <context>
