@@ -10,6 +10,7 @@
 
 #include <qmenudata.h>
 #include "liquid.h"
+#include "liquiddeco.h"
 #include <qapplication.h>
 #include <qpe/config.h>
 #include "effects.h"
@@ -987,6 +988,8 @@ void LiquidStyle::polish(QApplication *app)
         app->setEffectEnabled(UI_FadeMenu, false);
 	
     qt_set_draw_menu_bar_impl((QDrawMenuBarItemImpl) &LiquidStyle::drawMenuBarItem);
+    
+    QApplication::qwsSetDecoration ( new LiquidDecoration ( ));
 }
 
 void LiquidStyle::unPolish(QApplication *app)
@@ -996,6 +999,8 @@ void LiquidStyle::unPolish(QApplication *app)
     app->setEffectEnabled(UI_FadeMenu, menuFade);
 
     qt_set_draw_menu_bar_impl ( 0 );
+    
+    QApplication::qwsSetDecoration ( new QPEDecoration ( ));
 }
 
 /*
