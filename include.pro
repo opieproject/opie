@@ -9,6 +9,8 @@ contains( CONFIG, quick-app-lib ) {
     CONFIG += plugin  # "plugin" will be removed automatically later if not MacOSX ! (eilers)
     DESTDIR  = $(OPIEDIR)/plugins/application
     DEFINES += OPIE_APP_INTERFACE
+    DEFINES += QUICKAPP_NAME="\"$${TARGET}\""
+    
     !contains( TARGET, launcher ) {
         message( Linking $$TARGET to quicklauncher )
 	system( rm -f $$(OPIEDIR)/bin/$$TARGET )
@@ -20,6 +22,7 @@ contains ( CONFIG, quick-app-bin ) {
     TEMPLATE = app
     DESTDIR  = $(OPIEDIR)/bin
     DEFINES -= OPIE_APP_INTERFACE
+    DEFINES += QUICKAPP_NAME="\"$${TARGET}\""
     message( Touching plugins/application/lib$${TARGET}.so.0 )
     system( touch $$(OPIEDIR)/plugins/application/lib$${TARGET}.so.0 )
 }
