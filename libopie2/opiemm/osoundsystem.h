@@ -230,4 +230,3 @@ class OMixerInterface : public QObject
 }
 
 #endif // OSOUNDSYSTEM_H
-

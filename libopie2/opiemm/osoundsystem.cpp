@@ -318,5 +318,3 @@ int OMixerInterface::volume( const QString& channel ) const
     }
     return -1;
 }
-
-
