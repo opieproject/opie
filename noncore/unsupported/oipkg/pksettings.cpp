@@ -169,12 +169,13 @@ void PackageManagerSettings::removeDestination()
 {
   disconnect( destinationname, SIGNAL(textChanged(const QString&)), this, SLOT(destNameChanged(const QString&)) );
   disconnect( destinationurl, SIGNAL(textChanged(const QString&)), this, SLOT(destUrlChanged(const QString&)) );
-  destinationname->setText(destinations->text(editedserver));
-  destinationurl->setText(*destinationurlDic[editedserver]);
+  destinationname->setText("");
+  destinationurl->setText("");
   disconnect( destinations, SIGNAL(highlighted(int)), this, SLOT(editDestination(int)) );
   destinations->removeItem(editeddestination);
   activeDestination->removeItem(editeddestination);
   activeLinkDestination->removeItem(editeddestination);
+  editeddestination=0;
   connect( destinations, SIGNAL(highlighted(int)), this, SLOT(editDestination(int)) );
   destinationname->setEnabled(FALSE);
   destinationurl->setEnabled(FALSE);
@@ -354,6 +355,7 @@ bool PackageManagerSettings::readIpkgConfig(const QString& conffile)
     QTextStream s(&conf);
     servers->clear();
     activeServers->clear();
+    destinations->clear();
     activeDestination->clear();
     activeLinkDestination->clear();
     serverurlDic.clear();

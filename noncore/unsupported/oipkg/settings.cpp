@@ -181,12 +181,12 @@ void PackageManagerSettings::writeIpkgConfig(const QString& conffile)
   QFile conf(conffile);
   if ( ! conf.open(IO_WriteOnly) ) return;
   QTextStream s(&conf);
-  s << "# Written by qpie Package Manager\n";
+  s << "# "+tr("Written by Opie Package Manager")+"\n";
   for (int i=0; i<(int)activeServers->count(); i++)
     {
       QString url = serverurlDic[i] ? *serverurlDic[i] : QString("???");
       if ( !activeServers->isSelected(i) )
-	s << "#";
+				s << "#";
       s << "src " << activeServers->text(i) << " " << url << "\n";
     }
   for (int i=0; i<(int)destinations->count(); i++)

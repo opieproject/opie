@@ -57,11 +57,11 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   makeMenu();	
   makeChannel();
   //opie is hardcoded default ;)
-	pvDebug(9,"section->setCurrentItem");
-  for (int i=0;i<section->count();i++)
-  	if (section->text(i)=="opie")
-   		section->setCurrentItem(i);
-  sectionChanged();
+//	pvDebug(9,"section->setCurrentItem");
+//  for (int i=0;i<section->count();i++)
+//  	if (section->text(i)=="opie")
+//   		section->setCurrentItem(i);
+//  sectionChanged();
 
   connect( section,    SIGNAL(activated(int)), SLOT(sectionChanged()) );
   connect( subsection, SIGNAL(activated(int)), SLOT(subSectionChanged()) );

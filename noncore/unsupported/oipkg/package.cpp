@@ -34,6 +34,7 @@ void Package::init( PackageManagerSettings *s )
   _dest = settings->getDestinationName();
   _link = settings->createLinks();
   _versions=0;
+  _version="";
 }
 
 Package::Package( QStringList pack, PackageManagerSettings *s  )
@@ -235,7 +236,12 @@ void Package::copyValues( Package* pack )
   if (_shortDesc.isEmpty() && !pack->_shortDesc.isEmpty()) _shortDesc = QString( pack->_shortDesc );
   if (_desc.isEmpty()      && !pack->_desc.isEmpty()) _desc = QString( pack->_desc );
   if (_name.isEmpty()      && !pack->_name.isEmpty()) _name = QString( pack->_name );
-  if (!installed() && _status.isEmpty()    && !pack->_status.isEmpty()) _status = QString( pack->_status );
+  if (_dest.isEmpty()      && !pack->_dest.isEmpty()) _dest= QString( pack->_dest );
+  if (_displayName.isEmpty()&& !pack->_displayName.isEmpty()) _displayName = QString( pack->_displayName );
+  if (_fileName.isEmpty()  && !pack->_fileName.isEmpty()) _fileName = QString( pack->_fileName );
+  if (_version.isEmpty()      && !pack->_version.isEmpty()) _version = QString( pack->_version );
+  if (_values.isEmpty()      && !pack->_values.isEmpty())_values = QDict<QString>( pack->_values );
+  if (!installed() && _status.isEmpty() && !pack->_status.isEmpty()) _status = QString( pack->_status );
 }
 
 QString Package::section()

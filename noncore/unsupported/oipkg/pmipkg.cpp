@@ -268,8 +268,10 @@ void PmIpkg::remove()
       runwindow->progress->setProgress( 1 );
      	linkOpp = removeLink;
     	to_remove.at(i)->processed();
+     	pvDebug(4,"link "+QString::number(i));
 		  if ( to_remove.at(i)->link() )
       		processFileList( fileList, to_remove.at(i)->dest() );
+     	pvDebug(4,"take "+QString::number(i));
      	to_remove.take( i );
           	
       out("\n");
