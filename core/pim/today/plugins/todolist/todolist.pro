@@ -1,12 +1,13 @@
 TEMPLATE = lib
 CONFIG -= moc
-CONFIG += qt plugin release
+CONFIG += qt release
 
 # Input
 HEADERS = todoplugin.h todopluginimpl.h todopluginconfig.h  \
 	todopluginwidget.h
 SOURCES = todoplugin.cpp todopluginimpl.cpp todopluginconfig.cpp \
 	todopluginwidget.cpp
+INTERFACES= todopluginconfigbase.ui
 
 INCLUDEPATH     += $(OPIEDIR)/include \
 		../ ../library
