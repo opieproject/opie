@@ -197,10 +197,8 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
     if( bps == 8)  format  = AFMT_U8;
     else if( bps <= 0) format = AFMT_S16_LE;
     else format = AFMT_S16_LE;
-
     qDebug("AD- freq %d, channels %d, b/sample %d, bitrate %d",f,chs,bps,format);
     connect( qApp, SIGNAL( volumeChanged(bool) ), this, SLOT( volumeChanged(bool) ) );
-
 
     int fragments = 0x10000 * 8 + sound_fragment_shift;
     int capabilities = 0;

@@ -184,36 +184,36 @@ void VideoWidget::paintButton( QPainter *p, int i ) {
 
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( int i = 0; i < numButtons; i++ ) {
-  int x = videoButtons[i].xPos;
-  int y = videoButtons[i].yPos;
-  if ( event->state() == QMouseEvent::LeftButton ) {
-      // The test to see if the mouse click is inside the circular button or not
-      // (compared with the radius squared to avoid a square-root of our distance)
-      int radius = 16;
-      QPoint center = QPoint( x + radius, y + radius );
-      QPoint dXY = center - event->pos();
-      int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
-      bool isOnButton = dist <= (radius * radius);
-      if ( isOnButton != videoButtons[i].isHeld ) {
-    videoButtons[i].isHeld = isOnButton;
-    toggleButton(i);
-      }
-  } else {
-      if ( videoButtons[i].isHeld ) {
-    videoButtons[i].isHeld = FALSE;
-    if ( !videoButtons[i].isToggle ) 
-        setToggleButton( i, FALSE );
-    switch (i) {
-        case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
-        case VideoStop:       mediaPlayerState->setPlaying(FALSE); return;
-        case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
-        case VideoNext:       mediaPlayerState->setNext(); return;
-        case VideoPrevious:   mediaPlayerState->setPrev(); return;
-        case VideoPlayList:   mediaPlayerState->setList(); return;
-        case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
-    }
-      }
-  }
+        int x = videoButtons[i].xPos;
+        int y = videoButtons[i].yPos;
+        if ( event->state() == QMouseEvent::LeftButton ) {
+              // The test to see if the mouse click is inside the circular button or not
+              // (compared with the radius squared to avoid a square-root of our distance)
+            int radius = 16;
+            QPoint center = QPoint( x + radius, y + radius );
+            QPoint dXY = center - event->pos();
+            int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
+            bool isOnButton = dist <= (radius * radius);
+            if ( isOnButton != videoButtons[i].isHeld ) {
+                videoButtons[i].isHeld = isOnButton;
+                toggleButton(i);
+            }
+        } else {
+            if ( videoButtons[i].isHeld ) {
+                videoButtons[i].isHeld = FALSE;
+                if ( !videoButtons[i].isToggle ) 
+                    setToggleButton( i, FALSE );
+                switch (i) {
+                  case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
+                  case VideoStop:       mediaPlayerState->setPlaying(FALSE); return;
+                  case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
+                  case VideoNext:       mediaPlayerState->setNext(); return;
+                  case VideoPrevious:   mediaPlayerState->setPrev(); return;
+                  case VideoPlayList:   mediaPlayerState->setList(); return;
+                  case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
+                }
+            }
+        }
     }
 }
 
@@ -227,7 +227,7 @@ void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
     if ( mediaPlayerState->fullscreen() ) {
   mediaPlayerState->setFullscreen( FALSE );
   makeVisible();
-    } else { 
+ 
   mouseMoveEvent( event );
     }
 }
@@ -421,3 +421,51 @@ bool VideoWidget::playVideo() {
 }
 
 
+
+void VideoWidget::keyReleaseEvent( QKeyEvent *e)
+{
+    switch ( e->key() ) {
+////////////////////////////// Zaurus keys
+      case Key_Home:
+          break;
+      case Key_F9: //activity
+          break;
+      case Key_F10: //contacts
+          break;
+      case Key_F11: //menu
+          break;
+      case Key_F12: //home
+          break;
+      case Key_F13: //mail
+          break;
+      case Key_Space: {
+          if(mediaPlayerState->playing()) {
+              mediaPlayerState->setPlaying(FALSE);
+          } else {
+              mediaPlayerState->setPlaying(TRUE);
+          }
+      }
+          break;
+      case Key_Down:
+//            toggleButton(6);
+//            emit lessClicked();
+//            emit lessReleased();
+//            toggleButton(6);
+          break;
+      case Key_Up:
+//             toggleButton(5);
+//             emit moreClicked();
+//             emit moreReleased();
+//             toggleButton(5);
+           break;
+      case Key_Right:
+          mediaPlayerState->setNext();
+          break;
+      case Key_Left:
+          mediaPlayerState->setPrev();
+          break;
+      case Key_Escape:
+          break;
+        
+    };
+}

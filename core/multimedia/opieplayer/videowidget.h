@@ -67,6 +67,7 @@ protected:
     void mousePressEvent( QMouseEvent *event );
     void mouseReleaseEvent( QMouseEvent *event );
     void closeEvent( QCloseEvent *event );
+    void keyReleaseEvent( QKeyEvent *e);
 
 private:
     void paintButton( QPainter *p, int i );
@@ -76,7 +77,7 @@ private:
     QSlider *slider;
     QPixmap *pixmaps[3];
     QImage *currentFrame;
-    int	scaledWidth;
+    int scaledWidth;
     int scaledHeight;
 };
 

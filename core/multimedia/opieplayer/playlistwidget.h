@@ -43,11 +43,13 @@ public:
     PlayListWidget( QWidget* parent=0, const char* name=0, WFlags fl=0 );
     ~PlayListWidget();
     QTabWidget * tabWidget;
-  QAction *fullScreenButton, *scaleButton;
-     DocLnkSet files;
-     DocLnkSet vFiles;
-     QListView *audioView, *videoView, *playlistView;
-     QLabel *libString; 
+    QAction *fullScreenButton, *scaleButton;
+    DocLnkSet files;
+    DocLnkSet vFiles;
+    QListView *audioView, *videoView, *playlistView;
+    QLabel *libString;
+    bool fromSetDocument;
+    QString setDocFileRef;
     // retrieve the current playlist entry (media file link)
     const DocLnk *current();
     void useSelectedDocument();
@@ -68,7 +70,7 @@ public slots:
     void saveList();  // Save the playlist
     void loadList( const DocLnk &);  // Load a playlist
     void playIt( QListViewItem *);
-    void fauxPlay(QListViewItem *);
+
     void btnPlay(bool);
     void deletePlaylist();
     bool first();
@@ -78,6 +80,9 @@ public slots:
     void addSelected();
     void removeSelected();
     void tabChanged(QWidget*);
+    void viewPressed( int, QListViewItem *, const QPoint&, int);
+    void playlistViewPressed( int, QListViewItem *, const QPoint&, int);
+    void playSelected();
 /*     void setFullScreen(); */
 /*     void setScaled(); */
 protected:

@@ -55,7 +55,7 @@ PlayListSelection::PlayListSelection( QWidget *parent, const char *name )
 //    setStaticBackground( TRUE );
 //      setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/background" ) );
 
-//    setBackgroundPixmap( Resource::loadPixmap( "opielogo" ) );
+    setBackgroundPixmap( Resource::loadPixmap( "opielogo" ) );
 // #endif
 //      addColumn("Title",236);
 //      setAllColumnsShowFocus( TRUE );
@@ -73,10 +73,9 @@ PlayListSelection::~PlayListSelection() {
 void PlayListSelection::drawBackground( QPainter *p, const QRect &r ) {
 //  qDebug("drawBackground");
    p->fillRect( r, QBrush( white ) );
-//      QImage logo = Resource::loadImage( "mpegplayer/background" );
-//  //      QImage logo = Resource::loadImage( "opielogo" );
-//        if ( !logo.isNull() )
-//      p->drawImage( (width() - logo.width()) / 2, (height() - logo.height()) / 2, logo );
+      QImage logo = Resource::loadImage( "opielogo" );
+        if ( !logo.isNull() )
+      p->drawImage( (width() - logo.width()) / 2, (height() - logo.height()) / 2, logo );
 }
 // #endif
 

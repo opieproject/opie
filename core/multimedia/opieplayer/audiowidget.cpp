@@ -17,12 +17,15 @@
 ** not clear to you.
 **
 **********************************************************************/
+#include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
+
 #include <qwidget.h>
 #include <qpixmap.h>
 #include <qbutton.h>
 #include <qpainter.h>
 #include <qframe.h>
-#include <qpe/resource.h>
+
 #include "audiowidget.h"
 #include "mediaplayerstate.h"
 
@@ -60,6 +63,7 @@ static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     QWidget( parent, name, f )
 {
+//    QPEApplication::grabKeyboard();
     setCaption( tr("OpiePlayer") );
     setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/metalFinish" ) );
     pixmaps[0] = new QPixmap( Resource::loadPixmap( "mpegplayer/mediaButtonsAll" ) );
@@ -200,48 +204,49 @@ void AudioWidget::timerEvent( QTimerEvent * ) {
 
 void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( int i = 0; i < numButtons; i++ ) {
-  int size = audioButtons[i].isBig;
-  int x = audioButtons[i].xPos;
-  int y = audioButtons[i].yPos;
-  if ( event->state() == QMouseEvent::LeftButton ) {
-      // The test to see if the mouse click is inside the circular button or not
-      // (compared with the radius squared to avoid a square-root of our distance)
-      int radius = 32 + 13 * size;
-      QPoint center = QPoint( x + radius, y + radius );
-      QPoint dXY = center - event->pos();
-      int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
-      bool isOnButton = dist <= (radius * radius);
+        int size = audioButtons[i].isBig;
+        int x = audioButtons[i].xPos;
+        int y = audioButtons[i].yPos;
+        if ( event->state() == QMouseEvent::LeftButton ) {
+              // The test to see if the mouse click is inside the circular button or not
+              // (compared with the radius squared to avoid a square-root of our distance)
+            int radius = 32 + 13 * size;
+            QPoint center = QPoint( x + radius, y + radius );
+            QPoint dXY = center - event->pos();
+            int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
+            bool isOnButton = dist <= (radius * radius);
 //      QRect r( x, y, 64 + 22*size, 64 + 22*size );
 //      bool isOnButton = r.contains( event->pos() ); // Rectangular Button code
-      if ( isOnButton && !audioButtons[i].isHeld ) {
-    audioButtons[i].isHeld = TRUE;
-    toggleButton(i);
-    switch (i) {
-                    case AudioVolumeUp:   emit moreClicked(); return;
-                    case AudioVolumeDown: emit lessClicked(); return;
-    }
-      } else if ( !isOnButton && audioButtons[i].isHeld ) {
-    audioButtons[i].isHeld = FALSE;
-    toggleButton(i);
-      }
-  } else {
-      if ( audioButtons[i].isHeld ) {
-    audioButtons[i].isHeld = FALSE;
-    if ( !audioButtons[i].isToggle )
-        setToggleButton( i, FALSE );
-    switch (i) {
-        case AudioPlay:       mediaPlayerState->setPlaying(audioButtons[i].isDown); return;
-        case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
-        case AudioPause:      mediaPlayerState->setPaused(audioButtons[i].isDown); return;
-        case AudioNext:       mediaPlayerState->setNext(); return;
-        case AudioPrevious:   mediaPlayerState->setPrev(); return;
-        case AudioLoop:       mediaPlayerState->setLooping(audioButtons[i].isDown); return;
-        case AudioVolumeUp:   emit moreReleased(); return;
-        case AudioVolumeDown: emit lessReleased(); return;
-        case AudioPlayList:   mediaPlayerState->setList();  return;
-    }
-      }
-  }
+            if ( isOnButton && !audioButtons[i].isHeld ) {
+                audioButtons[i].isHeld = TRUE;
+                toggleButton(i);
+                qDebug("button toggled %d",i);
+                switch (i) {
+                  case AudioVolumeUp:   emit moreClicked(); return;
+                  case AudioVolumeDown: emit lessClicked(); return;
+                }
+            } else if ( !isOnButton && audioButtons[i].isHeld ) {
+                audioButtons[i].isHeld = FALSE;
+                toggleButton(i);
+            }
+        } else {
+            if ( audioButtons[i].isHeld ) {
+                audioButtons[i].isHeld = FALSE;
+                if ( !audioButtons[i].isToggle )
+                    setToggleButton( i, FALSE );
+                switch (i) {
+                  case AudioPlay:       mediaPlayerState->setPlaying(audioButtons[i].isDown); return;
+                  case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
+                  case AudioPause:      mediaPlayerState->setPaused(audioButtons[i].isDown); return;
+                  case AudioNext:       mediaPlayerState->setNext(); return;
+                  case AudioPrevious:   mediaPlayerState->setPrev(); return;
+                  case AudioLoop:       mediaPlayerState->setLooping(audioButtons[i].isDown); return;
+                  case AudioVolumeUp:   emit moreReleased(); return;
+                  case AudioVolumeDown: emit lessReleased(); return;
+                  case AudioPlayList:   mediaPlayerState->setList();  return;
+                }
+            }
+        }
     }
 }
 
@@ -274,3 +279,58 @@ void AudioWidget::paintEvent( QPaintEvent * ) {
 }
 
 
+void AudioWidget::keyReleaseEvent( QKeyEvent *e)
+{
+    switch ( e->key() ) {
+////////////////////////////// Zaurus keys
+      case Key_Home:
+          break;
+      case Key_F9: //activity
+          break;
+      case Key_F10: //contacts
+          break;
+      case Key_F11: //menu
+          break;
+      case Key_F12: //home
+          break;
+      case Key_F13: //mail
+          break;
+      case Key_Space: {
+          if(mediaPlayerState->playing()) {
+//                toggleButton(1);
+              mediaPlayerState->setPlaying(FALSE);
+//                toggleButton(1);
+          } else {
+//                toggleButton(0);
+              mediaPlayerState->setPlaying(TRUE);
+//                toggleButton(0);
+          }
+      }
+          break;
+      case Key_Down:
+            toggleButton(6);
+          emit lessClicked();
+          emit lessReleased();
+          toggleButton(6);
+          break;
+      case Key_Up:
+           toggleButton(5);
+           emit moreClicked();
+           emit moreReleased();
+           toggleButton(5);
+           break;
+      case Key_Right:
+//            toggleButton(3);
+          mediaPlayerState->setNext();
+//            toggleButton(3);
+          break;
+      case Key_Left:
+//            toggleButton(4);
+          mediaPlayerState->setPrev();
+//            toggleButton(4);
+          break;
+      case Key_Escape:
+          break;
+        
+    };
+}

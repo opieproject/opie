@@ -221,7 +221,6 @@ void LoopControl::startVideo() {
 
 void LoopControl::startAudio() {
     
-//qDebug("start audio");
     audioMutex->lock();
     if ( moreAudio ) {
 
@@ -237,14 +236,14 @@ void LoopControl::startAudio() {
       long sampleWeShouldBeAt = long( playtime.elapsed() ) * freq / 1000;
       long sampleWaitTime = currentSample - sampleWeShouldBeAt;
 
-//         if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 20000 ) ) {
-//       usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
-//         }
-//       else if ( sampleWaitTime <= -5000 ) {
-//      qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
-//      //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
-//      currentSample = sampleWeShouldBeAt;
-//        }
+//             if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 20000 ) ) {
+//           usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
+//             }
+//           else if ( sampleWaitTime <= -5000 ) {
+//    //      qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
+//          //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
+//          currentSample = sampleWeShouldBeAt;
+//            }
 
       audioDevice->write( audioBuffer, samplesRead * 2 * channels );
       audioSampleCounter = currentSample + samplesRead - 1;
@@ -379,7 +378,7 @@ bool LoopControl::init( const QString& filename ) {
   int astream = 0;
 
   channels = mediaPlayerState->curDecoder()->audioChannels( astream );
-  qDebug( "LC- channels = %d", channels );
+//   qDebug( "LC- channels = %d", channels );
   
   if ( !total_audio_samples )
       total_audio_samples = mediaPlayerState->curDecoder()->audioSamples( astream );
@@ -389,15 +388,17 @@ bool LoopControl::init( const QString& filename ) {
   mediaPlayerState->setLength( total_audio_samples );
   
   freq = mediaPlayerState->curDecoder()->audioFrequency( astream );
-  qDebug( "LC- frequency = %d", freq );
+//    qDebug( "LC- frequency = %d", freq );
 
   audioSampleCounter = 0;
    int bits_per_sample;
-   if ( mediaPlayerState->curDecoder()->pluginName() == QString("LibWavPlugin") ) {
+   if ( mediaPlayerState->curDecoder()->pluginName() == QString("WavPlugin") ) {
        bits_per_sample =(int) mediaPlayerState->curDecoder()->getTime();
-       qDebug("using stupid hack");
+//         qDebug("using stupid hack");
    } else {
-           bits_per_sample=0;
+       bits_per_sample=0;
+//       freq=44100;
+       channels=2;
    }
 
   audioDevice = new AudioDevice( freq, channels, bits_per_sample);
