@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.8 2003-01-04 19:02:18 mickeyl Exp $ */
+/* $Id: cardmode.hh,v 1.9 2003-01-23 02:21:57 max Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -28,6 +28,7 @@ extern "C"
 #define   CARD_TYPE              CARD_TYPE_HOSTAP
 #define   SBIN_PATH	         "/sbin/ifconfig %s promisc up"
 #define   WLANCTL_PATH           "/sbin/wlanctl-ng"
+#define   IWPRIV_PATH		 "/sbin/iwpriv"
 
 /* Prototypes */
 int card_into_monitormode (pcap_t **, char *, int);

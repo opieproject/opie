@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.7 2002-12-28 12:59:38 mjm Exp $
+ * $Id: cardmode.cc,v 1.8 2003-01-23 02:21:57 max Exp $
  */
 
 #include "cardmode.hh"
@@ -56,6 +56,13 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
   else if (cardtype == CARD_TYPE_HOSTAP)
   {
       wl_logerr("Got a host-ap card, nothing is implemented now");
+     char hostapcmd[250];
+     snprintf(hostapcmd, sizeof(hostapcmd) -1, "%s %s monitor 2", IWPRIV_PATH, device);
+     if (system(hostapcmd) !=0)
+     {
+ 	wl_logerr("Could not set %s in raw mode, check cardtype", device);
+	return 0;
+     }
   }
    
   return 1;
