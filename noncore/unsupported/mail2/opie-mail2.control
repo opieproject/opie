@@ -1,4 +1,4 @@
-Files: bin/mail $QTDIR/lib/libmail.so* plugins/applets/libbend.so* apps/Applications/mail.desktop pics/mail/*.png
+Files: bin/mail $QTDIR/lib/libmail.so* plugins/applets/libbend.so* apps/Applications/mail.desktop pics/mail/*.png sounds/mail/*.wav
 Package: opie-mail2
 Priority: optional
 Section: opie/applications
