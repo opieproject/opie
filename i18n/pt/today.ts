@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="unfinished">De</translation>
+        <translation>De</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -128,63 +128,63 @@ quando ligar?
     <name>TodayConfigMiscBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished">Active aqui se quiser que o &quot;hoje&quot; seja iniciado ao ligar o dispositivo.</translation>
+        <translation>Active aqui se quiser que o &quot;hoje&quot; seja iniciado ao ligar o dispositivo.</translation>
     </message>
     <message>
         <source>autostart on resume?</source>
-        <translation type="unfinished"></translation>
+        <translation>iniciar ao ligar?</translation>
     </message>
     <message>
         <source>tiny banner</source>
-        <translation type="unfinished"></translation>
+        <translation>barra pequena</translation>
     </message>
     <message>
         <source>Have small banner </source>
-        <translation type="unfinished"></translation>
+        <translation>Com barra pequena</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished">Qual o intervalo de inactividade, em minutos, para que, ao ligar, o&quot;hoje&quot; seja iniciado </translation>
+        <translation>Qual o intervalo de inactividade, em minutos, para que o&quot;hoje&quot; seja iniciado ao ligar</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished">minutos inactivo</translation>
+        <translation>minutos inactivo</translation>
     </message>
     <message>
         <source> pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>píxel</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation type="unfinished">Altere o tamanho do icone, em pixeis</translation>
+        <translation>Altere o tamanho do icone, em pixeis</translation>
     </message>
     <message>
         <source>icon size</source>
-        <translation type="unfinished"></translation>
+        <translation>tamanho do icone</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished">seg</translation>
+        <translation>seg</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished">nunca</translation>
+        <translation>nunca</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished">Qual o intervalo de actualização</translation>
+        <translation>Qual o intervalo de actualização</translation>
     </message>
     <message>
         <source>refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>actualizar</translation>
     </message>
 </context>
 </TS>

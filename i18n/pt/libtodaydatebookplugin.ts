@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>All day</source>
-        <translation type="unfinished"></translation>
+        <translation>Dia todo</translation>
     </message>
 </context>
 <context>
@@ -77,55 +77,55 @@ marcações?
     <name>DatebookPluginConfigBase</name>
     <message>
         <source>DatebookPluginConfigBase</source>
-        <translation type="unfinished"></translation>
+        <translation>DatebookPluginConfigBase</translation>
     </message>
     <message>
         <source>Show location</source>
-        <translation type="unfinished">Mostrar localização</translation>
+        <translation>Mostrar localização</translation>
     </message>
     <message>
         <source>Check this if the location of an appointment should be shown for each one</source>
-        <translation type="unfinished">Active isto se quiser ver a localização de cada marcação</translation>
+        <translation>Active isto se quiser ver a localização de cada marcação</translation>
     </message>
     <message>
         <source>Show notes</source>
-        <translation type="unfinished">Mostrar notas</translation>
+        <translation>Mostrar notas</translation>
     </message>
     <message>
         <source>Check this if the note attached to an appointment should be shown for each one</source>
-        <translation type="unfinished">Active isto se quiser ver a nota associada a cada marcação</translation>
+        <translation>Active isto se quiser ver a nota associada a cada marcação</translation>
     </message>
     <message>
         <source>Show only later appointments</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar próximas marcações</translation>
     </message>
     <message>
         <source>Check this if only appointments later then current time should be shown</source>
-        <translation type="unfinished">Active isto se quiser ver apenas as próximas marcações</translation>
+        <translation>Active isto se quiser ver apenas as próximas marcações</translation>
     </message>
     <message>
         <source>Show time in extra line</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar tempo numa linha extra</translation>
     </message>
     <message>
         <source>How many appointments should be shown maximal. In chronical order</source>
-        <translation type="unfinished">Qual o máximo de marcações a mostrar em ordem temporal</translation>
+        <translation>Qual o máximo de marcações a mostrar em ordem temporal</translation>
     </message>
     <message>
         <source>How many appointment should be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Quantas marcações serão mostradas?</translation>
     </message>
     <message>
         <source>only today</source>
-        <translation type="unfinished">apenas hoje</translation>
+        <translation>apenas hoje</translation>
     </message>
     <message>
         <source>How many more days should be in the range</source>
-        <translation type="unfinished">Quantos dias mais deverão estar disponíveis</translation>
+        <translation>Quantos dias mais deverão estar disponíveis</translation>
     </message>
     <message>
         <source>How many more days</source>
-        <translation type="unfinished">Quantos dias mais</translation>
+        <translation>Quantos dias mais</translation>
     </message>
 </context>
 <context>

@@ -276,11 +276,11 @@ e os seus conteúdos?</translation>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished"></translation>
+        <translation>Como</translation>
     </message>
 </context>
 <context>

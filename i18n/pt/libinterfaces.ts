@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>be &amp;silent</source>
-        <translation type="unfinished"></translation>
+        <translation>modo &amp;silencioso</translation>
     </message>
 </context>
 <context>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>255.255.255.0</source>
-        <translation type="unfinished">255.255.255.0</translation>
+        <translation>255.255.255.0</translation>
     </message>
 </context>
 <context>

@@ -223,7 +223,7 @@ tem um formato desconhecido.</translation>
     </message>
     <message>
         <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation>                          </translation>
     </message>
 </context>
 <context>

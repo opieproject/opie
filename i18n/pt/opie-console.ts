@@ -482,11 +482,11 @@
     </message>
     <message>
         <source>New Profile</source>
-        <translation type="unfinished">Novo Perfil</translation>
+        <translation>Novo Perfil</translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar Perfil</translation>
     </message>
 </context>
 <context>

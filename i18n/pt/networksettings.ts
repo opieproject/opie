@@ -86,50 +86,50 @@
     </message>
     <message>
         <source>A list of network settings to be choosen from</source>
-        <translation type="unfinished"></translation>
+        <translation>Uma lista de configurações de rede para escolher</translation>
     </message>
     <message>
         <source>Add a new interface to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar uma nova interface à lista.</translation>
     </message>
     <message>
         <source>&amp;Start/Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Iniciar/Parar</translation>
     </message>
     <message>
         <source>Start and Stop the current interface, gives additional information about the interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicia e Para a interface actual, mostra informação adicional acerca da interface.</translation>
     </message>
     <message>
         <source>Configure the current interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar a interface actual</translation>
     </message>
     <message>
         <source>Remove the current interface from the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Apaga da lista a interface actual.</translation>
     </message>
 </context>
 <context>
     <name>MainWindowImp</name>
     <message>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Desligada</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>Unable to remove.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível remover.</translation>
     </message>
     <message>
         <source>Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>Desculpe</translation>
     </message>
     <message>
         <source>Please select an interface first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Primeiro escolha a interface.</translation>
     </message>
 </context>
 </TS>

@@ -518,7 +518,7 @@ O valor deverá ser sempre positivo.</translation>
     </message>
     <message>
         <source>Electronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Electrónico</translation>
     </message>
 </context>
 </TS>
