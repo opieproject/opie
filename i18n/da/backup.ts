@@ -3,50 +3,50 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sikkerhedskopiering... arbejder...</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Sikkerhedskopiering</translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Sikkerhedskopiering</translation>
     </message>
     <message>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiering</translation>
     </message>
     <message>
         <source>Applications</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmer</translation>
     </message>
     <message>
         <source>Save To</source>
-        <translation type="unfinished"></translation>
+        <translation>Gem som</translation>
     </message>
     <message>
         <source>&amp;Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopiering</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Gendan</translation>
     </message>
     <message>
         <source>Select Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg kilde</translation>
     </message>
     <message>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Column 1</translation>
     </message>
     <message>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gendan</translation>
     </message>
 </context>
 </TS>

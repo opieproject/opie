@@ -3,85 +3,86 @@
     <name>AppEdit</name>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Program</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Navn:</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikon:</translation>
     </message>
     <message>
         <source>Exec:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommando:</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommentar:</translation>
     </message>
 </context>
 <context>
     <name>TabManager</name>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Meddelelse</translation>
     </message>
     <message>
         <source>Can&apos;t remove with applications
 still in the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke slette når der stadig er
+programmer i gruppen.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Are you sure you want to delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Er du sikker på du vil slette?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbryd</translation>
     </message>
     <message>
         <source>Can&apos;t remove.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke slette.</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished"></translation>
+        <translation>Samler ikoner...</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Fane</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Program</translation>
     </message>
 </context>
 <context>
     <name>TabManagerBase</name>
     <message>
         <source>Tab Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Fane indstillinger</translation>
     </message>
     <message>
         <source>Hierarchy</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierarki</translation>
     </message>
 </context>
 <context>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vent venligst...</translation>
     </message>
 </context>
 </TS>
