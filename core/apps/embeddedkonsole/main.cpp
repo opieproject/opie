@@ -29,6 +29,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <pwd.h>
+#include <sys/types.h>
+
 
 /* --| main |------------------------------------------------------ */
 int main(int argc, char* argv[])
@@ -48,13 +51,22 @@ int main(int argc, char* argv[])
 
   QStrList tmp;
   const char* shell = getenv("SHELL");
-  if (shell == NULL || *shell == '\0')
-    shell = "/bin/sh";
 
-  // sh is completely broken on familiar. Let's try to get something better
-  if ( qstrcmp( shell, "/bin/shell" ) == 0 && QFile::exists( "/bin/bash" ) )
-      shell = "/bin/bash";
-  
+  if (shell == NULL || *shell == '\0') {
+    struct passwd *ent = 0;
+    uid_t me = getuid();
+    shell = "/bin/sh";
+    
+    while ( (ent = getpwent()) != 0 ) {
+      if (ent->pw_uid == me) {
+        if (ent->pw_shell != "")
+          shell = ent->pw_shell;
+        break;
+      }
+    }
+    endpwent();
+  }
+
  if( putenv((char*)"COLORTERM=") !=0)
      qDebug("putenv failed"); // to trigger mc's color detection
 
