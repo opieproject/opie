@@ -1,0 +1,4 @@
+  config NS2OPIETOOTHAPPLET
+    boolean "opietooth2 bluetooth applet"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && NS2OPIETOOTH
