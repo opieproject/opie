@@ -198,9 +198,9 @@ void AdvancedFm::doDelete() {
          } else {
 					 if(doMsg) {
 						 switch ( QMessageBox::warning(this,tr("Delete"),
-																					 tr("<p>Really delete %1?</p>").arg( myFile ),
-																					 tr("Yes"), tr("No"), 0, 0, 1) ) {
-							 case 0;
+									 tr("<p>Really delete %1?</p>").arg( myFile ),
+									 tr("Yes"), tr("No"), 0, 0, 1) ) {
+						 case 0:
 							 break;
 						 case 1:
 							 return;
@@ -324,7 +324,7 @@ void AdvancedFm::copy() {
 									switch ( QMessageBox::warning(this,tr("File Exists!"),
 																								tr("<p>%1 already  exists. Ok to overwrite?</P>").arg(item),
 																								tr("Yes"),tr("No"),0,0,1)) {
-										case 0;
+										case 0:
 										break;
 									case 1:
 										return;
