@@ -160,7 +160,7 @@ void BrightnessApplet::writeSystemBrightness(int brightness)
 {
     PowerStatus ps = PowerStatusManager::readStatus();
 
-    Config cfg("qpe");
+    Config cfg( "apm" );
     if (ps.acStatus() == PowerStatus::Online) {
         cfg.setGroup("AC");
     } else {
@@ -175,7 +175,7 @@ void BrightnessApplet::writeSystemBrightness(int brightness)
 int BrightnessApplet::readSystemBrightness(void)
 {
     PowerStatus ps = PowerStatusManager::readStatus();
-    Config cfg("qpe");
+    Config cfg( "apm" );
 
     if (ps.acStatus() == PowerStatus::Online) {
         cfg.setGroup("AC");
