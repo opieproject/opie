@@ -177,7 +177,23 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
     xmlSimpleReader.setContentHandler(&drawPadCanvasXmlHandler);
     xmlSimpleReader.parse(xmlInputSource);
 
-    m_pages = drawPadCanvasXmlHandler.pages();
+    /*
+     * we could have loaded something from setDocument already
+     * due the delayed loading we need to make sure we do
+     * not lose pages
+     */
+    if ( !m_pages.isEmpty() ) {
+        QList<Page> pages = drawPadCanvasXmlHandler.pages();
+        QListIterator<Page> it( pages );
+        Page *p;
+        while (  ( p = it.current() ) ) {
+            ++it;
+            m_pages.append( p );
+        }
+    }else
+        m_pages = drawPadCanvasXmlHandler.pages();
+
+
 
     if (m_pages.isEmpty()) {
         m_pages.append(new Page("",
@@ -194,6 +210,13 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
 
 void DrawPadCanvas::initialPage()
 {
+    /*
+     * by setDocument we've set a page already so
+     * don't add an empty one. This comes due the delayed initialisation
+     */
+    if (!m_pages.isEmpty() )
+        return;
+
     m_pages.append(new Page("",
 	clipper()->width()+(verticalScrollBar()->isVisible()?verticalScrollBar()->width():0),
 	clipper()->height()+(horizontalScrollBar()->isVisible()?horizontalScrollBar()->height():0)));
