@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=PDF Viewer
 Exec=qpdf
-Icon=qpdf_icon
+Icon=qpdf/qpdf_icon
 Type=Application
 MimeType=application/pdf
 Name=PDF Viewer
