@@ -121,7 +121,7 @@ namespace OpieTooth {
         //menu->insertItem( tr("More..."), 7 )
 
         QPoint p = mapToGlobal( QPoint(1, -menu->sizeHint().height()-1) );
-        ret = menu->exec(p, 2);
+        ret = menu->exec(p, 0);
 
         //    qDebug("ret was %d\n", ret);
 
