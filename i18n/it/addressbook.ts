@@ -297,6 +297,19 @@ Uscire comunque?</translation>
  Do you really want to open it?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add Contact ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want add contact for 
+%1 ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;AllYes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ConfigDlg_Base</name>
@@ -381,6 +394,10 @@ is provided free !</source>
     </message>
     <message>
         <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configuration</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -297,6 +297,19 @@ geöffnet werden?</translation>
 nicht mit &quot;.vcf&quot;. Wollen Sie sie
 trotzdem öffnen?</translation>
     </message>
+    <message>
+        <source>Add Contact ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want add contact for 
+%1 ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;AllYes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ConfigDlg_Base</name>
@@ -383,6 +396,10 @@ ist frei erhältlich !</translation>
     <message>
         <source>Remove</source>
         <translation>Entfernen</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

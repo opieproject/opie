@@ -119,7 +119,7 @@ Para ordenar las entradas por un campo específico, pulse el nombre de la column
     </message>
     <message>
         <source>ID</source>
-        <translation>ID</translation>
+        <translation type="obsolete">ID</translation>
     </message>
     <message>
         <source>Date</source>
@@ -193,6 +193,70 @@ Para ordenar las entradas por un campo específico, pulse el nombre de la column
         <source>Delete transaction</source>
         <translation>Borrar transacción</translation>
     </message>
+    <message>
+        <source>Password protect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to enable/disable password protection of this checkbook.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Num</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter your password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Confirm password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please confirm your password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter your password to confirm removal of password protection:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Configuration</name>
+    <message>
+        <source>Configure Checkbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter currency symbol:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter your local currency symbol here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show whether checkbook is password
+protected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select whether or not the main window will display that the checkbook is protected with a password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show checkbook balances</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -243,6 +307,30 @@ Puede también seleccionar Borrar del menú.</translation>
     <message>
         <source>Delete checkbook</source>
         <translation>Borrar chequera</translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to configure this app.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Checkbook Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter your password:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: i18n: it
- Italian UI texts for Opie environment.
+ Italian UI texts for OPIE environment.

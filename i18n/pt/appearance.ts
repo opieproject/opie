@@ -1,98 +1,36 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>AppearanceSettings</name>
+    <name>Appearance</name>
     <message>
-        <source>Appearance</source>
-        <translation>Aparência</translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation>Estilo</translation>
-    </message>
-    <message>
-        <source>Edit current scheme...</source>
-        <translation>Editar o esquema actual...</translation>
-    </message>
-    <message>
-        <source>Select</source>
-        <translation>Selecionar</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Apagar</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation>Gravar</translation>
-    </message>
-    <message>
-        <source>Colors</source>
-        <translation>Cores</translation>
-    </message>
-    <message>
-        <source>Enable background image</source>
-        <translation>Activar imagem de fundo</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation>Omissão</translation>
-    </message>
-    <message>
-        <source>Browse...</source>
-        <translation>Procurar...</translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation>Fundo</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Sim</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>Não</translation>
-    </message>
-    <message>
-        <source>Delete scheme</source>
-        <translation>Apagar esquema</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete
-</source>
-        <translation>Tem a certeza que quer apagar
-</translation>
-    </message>
-    <message>
-        <source>Unable to delete current scheme.</source>
-        <translation>O esquema actual não pode ser apagado.</translation>
+        <source>Settings...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Current scheme</source>
-        <translation>Esquema actual</translation>
+        <translation type="unfinished">Esquema actual</translation>
     </message>
     <message>
-        <source>Font</source>
-        <translation>Fonte</translation>
+        <source>Edit...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation>Tamanho</translation>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
     </message>
     <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>A rápida raposa castanha salta sobre o cão molenga</translation>
+        <source>Save</source>
+        <translation type="unfinished">Gravar</translation>
     </message>
     <message>
-        <source>Restart</source>
-        <translation>Reiniciar</translation>
+        <source>Force styling for all applications.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to restart Opie now?</source>
-        <translation>Reiniciar o Opie agora?</translation>
+        <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings...</source>
+        <source>Binary file(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -124,12 +62,167 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Enable advanced options in Opie apps</source>
+        <source>Appearance</source>
+        <translation type="unfinished">Aparência</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation type="unfinished">Estilo</translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="unfinished">Fonte</translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation type="unfinished">Cores</translation>
+    </message>
+    <message>
+        <source>Windows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Advanced</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation type="unfinished">Reiniciar</translation>
+    </message>
+    <message>
+        <source>Do you want to restart %1 now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Sim</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Não</translation>
+    </message>
+    <message>
+        <source>Save Scheme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save scheme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scheme does already exist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete scheme</source>
+        <translation type="unfinished">Apagar esquema</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete
+</source>
+        <translation type="unfinished">Tem a certeza que quer apagar
+</translation>
+    </message>
+    <message>
+        <source>Unable to delete current scheme.</source>
+        <translation type="unfinished">O esquema actual não pode ser apagado.</translation>
+    </message>
+    <message>
+        <source>&lt;new&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AppearanceSettings</name>
+    <message>
+        <source>Appearance</source>
+        <translation type="obsolete">Aparência</translation>
+    </message>
+    <message>
+        <source>Style</source>
+        <translation type="obsolete">Estilo</translation>
+    </message>
+    <message>
+        <source>Edit current scheme...</source>
+        <translation type="obsolete">Editar o esquema actual...</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="obsolete">Selecionar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="obsolete">Apagar</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="obsolete">Gravar</translation>
+    </message>
+    <message>
+        <source>Colors</source>
+        <translation type="obsolete">Cores</translation>
+    </message>
+    <message>
+        <source>Enable background image</source>
+        <translation type="obsolete">Activar imagem de fundo</translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="obsolete">Omissão</translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="obsolete">Procurar...</translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation type="obsolete">Fundo</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="obsolete">Sim</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="obsolete">Não</translation>
+    </message>
+    <message>
+        <source>Delete scheme</source>
+        <translation type="obsolete">Apagar esquema</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete
+</source>
+        <translation type="obsolete">Tem a certeza que quer apagar
+</translation>
+    </message>
+    <message>
+        <source>Unable to delete current scheme.</source>
+        <translation type="obsolete">O esquema actual não pode ser apagado.</translation>
+    </message>
+    <message>
+        <source>Current scheme</source>
+        <translation type="obsolete">Esquema actual</translation>
+    </message>
+    <message>
+        <source>Font</source>
+        <translation type="obsolete">Fonte</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="obsolete">Tamanho</translation>
+    </message>
+    <message>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <translation type="obsolete">A rápida raposa castanha salta sobre o cão molenga</translation>
+    </message>
+    <message>
+        <source>Restart</source>
+        <translation type="obsolete">Reiniciar</translation>
+    </message>
+    <message>
+        <source>Do you want to restart Opie now?</source>
+        <translation type="obsolete">Reiniciar o Opie agora?</translation>
     </message>
 </context>
 <context>
@@ -137,6 +230,45 @@
     <message>
         <source>Edit scheme</source>
         <translation>Editar esquema</translation>
+    </message>
+</context>
+<context>
+    <name>SampleWindow</name>
+    <message>
+        <source>Sample</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disabled Item</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Highlighted Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check Box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample window using the selected settings.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -181,7 +181,7 @@ wo kämen wir da hin...</translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Main</translation>
     </message>
     <message>
         <source>Manual</source>
@@ -189,7 +189,7 @@ wo kämen wir da hin...</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Einstellungen</translation>
     </message>
     <message>
         <source>Predict</source>
@@ -197,7 +197,7 @@ wo kämen wir da hin...</translation>
     </message>
     <message>
         <source>NTP</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">NTP</translation>
     </message>
     <message>
         <source>Advanced settings</source>

@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>View</source>
-        <translation>Ver</translation>
+        <translation type="obsolete">Ver</translation>
     </message>
     <message>
         <source>New from template</source>
@@ -218,7 +218,7 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Description</source>
-        <translation>Descripción</translation>
+        <translation type="obsolete">Descripción</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -336,6 +336,17 @@ e inténtelo de nuevo.
     <message>
         <source>Coordinating</source>
         <translation>Coordinador</translation>
+    </message>
+    <message>
+        <source>Nothing</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorAdvancedImpl</name>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Descripción</translation>
     </message>
 </context>
 <context>

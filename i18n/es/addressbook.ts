@@ -329,6 +329,19 @@ inténtelo de nuevo.
  Do you really want to open it?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Add Contact ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want add contact for 
+%1 ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;AllYes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ConfigDlg_Base</name>
@@ -447,6 +460,10 @@ suministra gratis!</translation>
     <message>
         <source>Remove</source>
         <translation>Borrar</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

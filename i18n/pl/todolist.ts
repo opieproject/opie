@@ -62,10 +62,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>New from template</source>
         <translation type="unfinished"></translation>
     </message>
@@ -169,7 +165,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Opis</translation>
+        <translation type="obsolete">Opis</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -287,6 +283,17 @@ Quit Anyway?</source>
     <message>
         <source>Coordinating</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nothing</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorAdvancedImpl</name>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Opis</translation>
     </message>
 </context>
 <context>
