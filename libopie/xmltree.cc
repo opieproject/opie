@@ -89,18 +89,20 @@ void XMLElement::insertAfter( XMLElement *newChild, XMLElement *refChild )
     if ( next )
         next->m_prev = newChild;
 }
-QString XMLElement::attribute(const QString &attr )const
+
+QString XMLElement::attribute( const QString &attr ) const
 {
-    if ( !m_attributes.contains( attr ) )
-	return QString::null;
     AttributeMap::ConstIterator it = m_attributes.find( attr );
+    if ( it == m_attributes.end() )
+	return QString::null;
     return it.data();
 }
-void XMLElement::setAttribute(const QString &attr, const QString &value )
+
+void XMLElement::setAttribute( const QString &attr, const QString &value )
 {
-    m_attributes.remove( attr );
-    m_attributes.insert( attr, value );
+    m_attributes.replace( attr, value );
 }
+
 void XMLElement::insertBefore( XMLElement *newChild, XMLElement *refChild )
 {
     assert( refChild );
@@ -315,4 +317,5 @@ XMLElement *XMLElement::load( const QString &fileName )
     return handler.root();;
 }
 
-
+/* vim: et sw=4
+ */
