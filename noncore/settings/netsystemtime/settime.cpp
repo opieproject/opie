@@ -60,14 +60,8 @@ SetDateTime::SetDateTime(QWidget *parent, const char *name, WFlags f )
     QVBoxLayout *vb = new QVBoxLayout( FrameSystemTime, 5 );
     QVBoxLayout *vb2 = new QVBoxLayout( FrameSetTime, 5 );
 
-    TextLabelMainPredTime = new QLabel( FrameSystemTime );
-    vb->addWidget( TextLabelMainPredTime, 1, 0 );
-    ButtonSetTime = new QPushButton( FrameSystemTime );
-    vb->addWidget( ButtonSetTime, 1, 0 );
-
-    QFrame *hline = new QFrame( FrameSystemTime );
-    hline->setFrameStyle( QFrame::HLine | QFrame::Sunken );
-    vb->addWidget( hline );
+#    TextLabelMainPredTime = new QLabel( FrameSystemTime );
+#    vb->addWidget( TextLabelMainPredTime, 1, 0 );
 
     QHBoxLayout *hb = new QHBoxLayout( vb, -1, "timezone layout" );
 
@@ -184,6 +178,13 @@ SetDateTime::SetDateTime(QWidget *parent, const char *name, WFlags f )
     clockAppletCombo->setCurrentItem( clockApplet );
 
     vb->addStretch( 0 );
+
+    QFrame *hline = new QFrame( FrameSystemTime );
+    hline->setFrameStyle( QFrame::HLine | QFrame::Sunken );
+    vb->addWidget( hline );
+
+    ButtonSetTime = new QPushButton( FrameSystemTime );
+    vb->addWidget( ButtonSetTime, 1, 0 );
 
     QObject::connect( PushButtonSetManualTime, SIGNAL(clicked()),
     									this, SLOT(commitTime()));
