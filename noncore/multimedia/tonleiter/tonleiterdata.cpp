@@ -58,12 +58,12 @@ void TonleiterData::loadData()
         //write some default values
         load.setGroup("General");
         load.writeEntry("currentInstrumentID",1);
-        load.writeEntry("currentNote",0);
-        load.writeEntry("currentScaleID",1);
+        load.writeEntry("currentNote",3);
+        load.writeEntry("currentScaleID",0);
         load.writeEntry("drawnames",1);
         load.setGroup("Instrument");
-        load.writeEntry("Inst0","Thumb6;26;11;16;21;26;31;36;");
-        load.writeEntry("Inst1","Bass 4;12;16;21;26;31;");
+        load.writeEntry("Inst0","Thumb6;26;14;19;24;29;34;39;");
+        load.writeEntry("Inst1","Bass 4;12;19;24;29;34;");
         load.writeEntry("noOfInstruments",2);
         load.setGroup("Scale");
         load.writeEntry("Scale0","ionian;0;2;4;5;7;9;11;");
