@@ -99,10 +99,8 @@ int Scale::noOfHaltones()
 //****************************************************************************
 int Scale::getHalfTone(int id)
 {
-    if(id>=0 && noOfHaltones()<id)
-    {
+    if(id>=0 && id<noOfHaltones())
         return halftones[id];
-    }
     else
         return 0;
 }
