@@ -481,7 +481,7 @@ QString OPimEvent::recordField( int /*id */ ) const
 }
 
 
-int OPimEvent::rtti()
+int OPimEvent::rtti() const
 {
     return OPimResolver::DateBook;
 }

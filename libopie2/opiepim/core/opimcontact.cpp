@@ -1275,7 +1275,7 @@ void OPimContact::insertEmails( const QStringList &v )
 }
 
 
-int OPimContact::rtti()
+int OPimContact::rtti() const
 {
     return OPimResolver::AddressBook;
 }

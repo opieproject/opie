@@ -160,7 +160,7 @@ class OPimRecord : public Qtopia::Record
      * used inside the Templates for casting
      * REIMPLEMENT in your ....
      */
-    static int rtti();
+    virtual int rtti() const;
 
     /**
      * some marshalling and de marshalling code

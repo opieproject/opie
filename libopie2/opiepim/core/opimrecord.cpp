@@ -147,7 +147,7 @@ OPimXRefManager &OPimRecord::xrefmanager()
 }
 
 
-int OPimRecord::rtti()
+int OPimRecord::rtti() const
 {
     return 0;
 }

@@ -3,7 +3,10 @@ As to popular request....
 1.) fix up the core/backend mess.
     The actual Backend Implementation + Interface should be there
     The API frontend used by the developer should not be used
-    
+
+	Rename ODateBookAccess* to OPimDateBookAccess*
+	Fix filenames to OPim* ...    
+
 2.) Move sorting, Query By Example, Exposing of Attributes of a Record
     available to the Ptr base class and have sane implementation
     on the template level

@@ -295,7 +295,7 @@ class OPimTodo : public OPimRecord
     bool operator==( const OPimTodo &toDoEvent ) const;
     OPimTodo &operator=( const OPimTodo &toDoEvent );
 
-    static int rtti();
+    int rtti() const;
 
   private:
     class OPimTodoPrivate;

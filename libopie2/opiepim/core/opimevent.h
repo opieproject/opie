@@ -183,7 +183,7 @@ class OPimEvent : public OPimRecord
     void fromMap( const QMap<int, QString>& map );
     QString recordField( int ) const;
 
-    static int rtti();
+    int rtti() const;
 
     bool loadFromStream( QDataStream& );
     bool saveToStream( QDataStream& ) const;

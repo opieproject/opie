@@ -703,7 +703,7 @@ QString OPimTodo::recordField( int /*id*/ ) const
 }
 
 
-int OPimTodo::rtti()
+int OPimTodo::rtti() const
 {
     return OPimResolver::TodoList;
 }
