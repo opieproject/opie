@@ -133,6 +133,22 @@ private slots:
 
 private:
     void getEvents();
+
+    /**
+     * Wow that's a hell lot of code duplication
+     * in datebook. I vote for a common base class
+     * but never the less. This add a note
+     * that the Event is an all day event
+     *
+     */
+    void generateAllDayTooltext( QString& text );
+
+    /**
+     * This will add the times to the text
+     * It will be shown in the Tooltip bubble
+     */
+    void generateNormalTooltext( QString& text,
+                                 const EffectiveEvent &ev);
     int year;
     int _week;
     int dow;

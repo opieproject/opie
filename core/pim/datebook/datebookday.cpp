@@ -566,7 +566,7 @@ DateBookDayWidget::DateBookDayWidget( const EffectiveEvent &e,
 				      DateBookDay *db )
     : QWidget( db->dayView()->viewport() ), ev( e ), dateBook( db )
 {
-    bool whichClock = db->dayView()->whichClock();
+
 
     // why would someone use "<"?  Oh well, fix it up...
     // I wonder what other things may be messed up...
@@ -597,27 +597,14 @@ DateBookDayWidget::DateBookDayWidget( const EffectiveEvent &e,
     }
 
     text = "<b>" + strDesc + "</b><br>" + "<i>"
-        + strCat + "</i>"
-	+ "<br><b>" + tr("Start") + "</b>: ";
+           + strCat + "</i><br>";
+    if (ev.event().type() == Event::Normal )
+        setEventText( text );
+    else
+        setAllDayText( text );
 
-
-    if ( e.startDate() != ev.date() ) {
-	// multi-day event.  Show start date
-	text += TimeString::longDateString( e.startDate() );
-    } else {
-	// Show start time.
-	text += TimeString::timeString( ev.start(), whichClock, FALSE );
-    }
-
-    text += "<br><b>" + tr("End") + "</b>: ";
-    if ( e.endDate() != ev.date() ) {
-	// multi-day event.  Show end date
-	text += TimeString::longDateString( e.endDate() );
-    } else {
-	// Show end time.
-	text += TimeString::timeString( ev.end(), whichClock, FALSE );
-    }
     text += "<br><br>" + strNote;
+
     setBackgroundMode( PaletteBase );
 
     QTime start = ev.start();
@@ -633,6 +620,30 @@ DateBookDayWidget::DateBookDayWidget( const EffectiveEvent &e,
     geom.setHeight( h );
     geom.setX( 0 );
     geom.setWidth(dateBook->dayView()->columnWidth(0)-1);
+
+}
+void DateBookDayWidget::setAllDayText( QString &text ) {
+    text += "<b>" + tr("This is an all day event.") + "</b><br>";
+}
+void DateBookDayWidget::setEventText( QString& text ) {
+    bool whichClock = dateBook->dayView()->whichClock();
+    text += "<b>" + tr("Start") + "</b>: ";
+    if ( ev.startDate() != ev.date() ) {
+	// multi-day event.  Show start date
+	text += TimeString::longDateString( ev.startDate() );
+    } else {
+	// Show start time.
+	text += TimeString::timeString( ev.start(), whichClock, FALSE );
+    }
+
+    text += "<br><b>" + tr("End") + "</b>: ";
+    if ( ev.endDate() != ev.date() ) {
+	// multi-day event.  Show end date
+	text += TimeString::longDateString( ev.endDate() );
+    } else {
+	// Show end time.
+	text += TimeString::timeString( ev.end(), whichClock, FALSE );
+    }
 
 }
 
@@ -689,6 +700,7 @@ void DateBookDayWidget::paintEvent( QPaintEvent *e )
     if ( ev.event().hasRepeat() ) {
         p.drawPixmap( width() - 16, y, Resource::loadPixmap( "repeat" ) );
         d = 20;
+	y += 20;
     }
 
     QSimpleRichText rt( text, font() );

@@ -40,7 +40,7 @@ class DateBookDayView : public QTable
 public:
     DateBookDayView( bool hourClock, QWidget *parent, const char *name );
     bool whichClock() const;
-    
+
     void setRowStyle( int style );
 
 public slots:
@@ -55,7 +55,7 @@ protected slots:
 protected:
     virtual void paintCell( QPainter *p, int row, int col, const QRect &cr, bool selected );
     virtual void paintFocus( QPainter *p, const QRect &cr );
-      
+
     virtual void resizeEvent( QResizeEvent *e );
     void keyPressEvent( QKeyEvent *e );
     void initHeader();
@@ -76,7 +76,7 @@ public:
     void setGeometry( const QRect &r );
 
     const EffectiveEvent &event() const { return ev; }
-        
+
 signals:
     void deleteMe( const Event &e );
     void editMe( const Event &e );
@@ -87,6 +87,17 @@ protected:
     void mousePressEvent( QMouseEvent *e );
 
 private:
+    /**
+     * Sets the text for an all day Event
+     * All day events have no time associated
+     */
+    void setAllDayText( QString& text );
+
+    /**
+     * Sets the EventText
+     * it got a start and an end Time
+     */
+    void setEventText( QString& text );
     const EffectiveEvent ev;
     DateBookDay *dateBook;
     QString text;
@@ -106,7 +117,7 @@ public:
     void setGeometry( const QRect &r );
     void setTime( const QTime &t );
 
-signals: 
+signals:
 
 protected:
     void paintEvent( QPaintEvent *e );
@@ -119,21 +130,21 @@ private:
 
 //reimplemented the compareItems function so that it sorts DayWidgets by geometry heights
 class WidgetListClass : public QList<DateBookDayWidget>
-{	
+{
 	private:
-		
-	int compareItems( QCollection::Item s1, QCollection::Item s2 ) 
-	{ 
+
+	int compareItems( QCollection::Item s1, QCollection::Item s2 )
+	{
 		//hmm, don't punish me for that ;)
 		if (reinterpret_cast<DateBookDayWidget*>(s1)->geometry().height() > reinterpret_cast<DateBookDayWidget*>(s2)->geometry().height())
-		{ 
+		{
 			return -1;
 		} else
 		{
 			return 1;
 		}
 	}
-	
+
 
 };
 

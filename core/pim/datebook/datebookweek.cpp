@@ -461,6 +461,33 @@ void DateBookWeek::getEvents()
     view->moveToHour( startTime );
 }
 
+void DateBookWeek::generateAllDayTooltext( QString& text ) {
+    text += "<b>" + tr("This is an all day event.") + "</b><br>";
+}
+
+void DateBookWeek::generateNormalTooltext( QString& str,
+                                           const EffectiveEvent &ev ) {
+    str += "<b>" + QObject::tr("Start") + "</b>: ";
+
+    if ( ev.startDate() != ev.date() ) {
+	// multi-day event.  Show start date
+	str += TimeString::longDateString( ev.startDate() );
+    } else {
+	// Show start time.
+	str += TimeString::timeString(ev.start(), ampm, FALSE );
+    }
+
+
+    str += "<br><b>" + QObject::tr("End") + "</b>: ";
+    if ( ev.endDate() != ev.date() ) {
+        // multi-day event.  Show end date
+        str += TimeString::longDateString( ev.endDate() );
+    } else {
+        // Show end time.
+        str += TimeString::timeString( ev.end(), ampm, FALSE );
+    }
+}
+
 void DateBookWeek::slotShowEvent( const EffectiveEvent &ev )
 {
     if ( tHide->isActive() )
@@ -495,26 +522,15 @@ void DateBookWeek::slotShowEvent( const EffectiveEvent &ev )
     }
 
     QString str = "<b>" + strDesc + "</b><br>" + "<i>"
-            + strCat + "</i>"
-	    + "<br>" + TimeString::longDateString( ev.date() )
-	    + "<br><b>" + QObject::tr("Start") + "</b>: ";
+                  + strCat + "</i>"
+                  + "<br>" + TimeString::longDateString( ev.date() )
+	          + "<br>";
 
-    if ( ev.startDate() != ev.date() ) {
-	// multi-day event.  Show start date
-	str += TimeString::longDateString( ev.startDate() );
-    } else {
-	// Show start time.
-	str += TimeString::timeString(ev.start(), ampm, FALSE );
-    }
+    if (ev.event().type() == Event::Normal )
+        generateNormalTooltext( str, ev );
+    else
+        generateAllDayTooltext( str );
 
-    str += "<br><b>" + QObject::tr("End") + "</b>: ";
-    if ( ev.endDate() != ev.date() ) {
-	// multi-day event.  Show end date
-	str += TimeString::longDateString( ev.endDate() );
-    } else {
-	// Show end time.
-	str += TimeString::timeString( ev.end(), ampm, FALSE );
-    }
     str += "<br><br>" + strNote;
 
     lblDesc->setText( str );

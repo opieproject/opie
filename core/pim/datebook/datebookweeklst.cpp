@@ -154,7 +154,10 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(const EffectiveEvent &ev,
 	strcpy(s, "    |---");
       }
     } else {
-      sprintf(s,"%.2d:%.2d",ev.start().hour(),ev.start().minute());
+      if(ev.event().type() == Event::Normal )
+        sprintf(s,"%.2d:%.2d",ev.start().hour(),ev.start().minute());
+      else
+        sprintf(s,"     ");
     }
     setText(QString(s) + " " + ev.description());
     connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
