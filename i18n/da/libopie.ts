@@ -3,7 +3,7 @@
     <name>ORecurranceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished"></translation>
+        <translation>Gentagende begivenhed</translation>
     </message>
     <message>
         <source>None</source>
@@ -31,11 +31,11 @@
     </message>
     <message>
         <source>Frequency</source>
-        <translation>Frekvens</translation>
+        <translation>Hyppighed</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished"></translation>
+        <translation>Afslut den:</translation>
     </message>
     <message>
         <source>No End Date</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished"></translation>
+        <translation>Gentagelse aktiv</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -79,22 +79,22 @@
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>OTimePickerDialogBase</name>
     <message>
         <source>TimePicker</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Time:</source>
