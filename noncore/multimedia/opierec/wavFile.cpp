@@ -152,7 +152,7 @@ bool WavFile::setWavHeader(int fd, wavhdr *hdr) {
   strncpy((*hdr).dataID, "data", 4);
 
   write( fd,hdr, sizeof(*hdr));
-   owarn << "writing header: bitrate " << wavResolution << ", samplerate " << wavSampleRate << ",  channels " << wavChannels << oendl;
+//   owarn << "writing header: bitrate " << wavResolution << ", samplerate " << wavSampleRate << ",  channels " << wavChannels << oendl;
   return true;
 }
 
@@ -162,12 +162,12 @@ bool WavFile::adjustHeaders(int fd, int total) {
   write( fd, &i, sizeof(i));
   lseek( fd, 40, SEEK_SET);
   write( fd, &total, sizeof(total));
-  owarn << "adjusting header " << total << "" << oendl;
+//  owarn << "adjusting header " << total << "" << oendl;
   return true;
 }
 
 int WavFile::parseWavHeader(int fd) {
-  owarn << "Parsing wav header" << oendl;
+//  owarn << "Parsing wav header" << oendl;
   char string[4];
   int found;
   short fmt;
@@ -175,71 +175,71 @@ int WavFile::parseWavHeader(int fd) {
   unsigned long samplerrate, longdata;
 
   if (read(fd, string, 4) < 4) {
-    owarn << " Could not read from sound file." << oendl;
+//    owarn << " Could not read from sound file." << oendl;
     return -1;
   }
   if (strncmp(string, "RIFF", 4)) {
-    owarn << " not a valid WAV file." << oendl;
+//    owarn << " not a valid WAV file." << oendl;
     return -1;
   }
   lseek(fd, 4, SEEK_CUR);
   if (read(fd, string, 4) < 4) {
-    owarn << "Could not read from sound file." << oendl;
+//    owarn << "Could not read from sound file." << oendl;
     return -1;
   }
   if (strncmp(string, "WAVE", 4)) {
-    owarn << "not a valid WAV file." << oendl;
+//    owarn << "not a valid WAV file." << oendl;
     return -1;
   }
   found = 0;
 
   while (!found) {
     if (read(fd, string, 4) < 4) {
-      owarn << "Could not read from sound file." << oendl;
+//      owarn << "Could not read from sound file." << oendl;
       return -1;
     }
     if (strncmp(string, "fmt ", 4)) {
       if (read(fd, &longdata, 4) < 4) {
-        owarn << "Could not read from sound file." << oendl;
+//        owarn << "Could not read from sound file." << oendl;
         return -1;
       }
       lseek(fd, longdata, SEEK_CUR);
     } else {
       lseek(fd, 4, SEEK_CUR);
       if (read(fd, &fmt, 2) < 2) {
-        owarn << "Could not read format chunk." << oendl;
+//        owarn << "Could not read format chunk." << oendl;
         return -1;
       }
       if (fmt != WAVE_FORMAT_PCM && fmt != WAVE_FORMAT_DVI_ADPCM) {
-        owarn << "Wave file contains unknown format. Unable to continue." << oendl;
+//        owarn << "Wave file contains unknown format. Unable to continue." << oendl;
         return -1;
       }
       wavFormat = fmt;
       //      compressionFormat=fmt;
-      owarn << "compressionFormat is " << fmt << "" << oendl;
+//      owarn << "compressionFormat is " << fmt << "" << oendl;
       if (read(fd, &ch, 2) < 2) {
-        owarn << "Could not read format chunk." << oendl;
+//        owarn << "Could not read format chunk." << oendl;
         return -1;
       } else {
         wavChannels = ch;
-        owarn << "File has " << ch << " channels" << oendl;
+//        owarn << "File has " << ch << " channels" << oendl;
       }
       if (read(fd, &samplerrate, 4) < 4) {
-        owarn << "Could not read from format chunk." << oendl;
+//        owarn << "Could not read from format chunk." << oendl;
         return -1;
       } else {
         wavSampleRate = samplerrate;
         //                sampleRate = samplerrate;
-        owarn << "File has samplerate of " << (int) samplerrate << "" << oendl;
+//        owarn << "File has samplerate of " << (int) samplerrate << "" << oendl;
       }
       lseek(fd, 6, SEEK_CUR);
       if (read(fd, &bitrate, 2) < 2) {
-        owarn << "Could not read format chunk." << oendl;
+//        owarn << "Could not read format chunk." << oendl;
         return -1;
       }  else {
         wavResolution=bitrate;
         //                 resolution =  bitrate;
-        owarn << "File has bitrate of " << bitrate << "" << oendl;
+//        owarn << "File has bitrate of " << bitrate << "" << oendl;
       }
       found++;
     }

@@ -720,8 +720,13 @@ void QtRec::initConnections() {
 		connect(toBeginningButton,SIGNAL(released()),this,SLOT(rewindReleased()));
 		connect(toEndButton,SIGNAL(pressed()),this,SLOT(FastforwardPressed()));
 		connect(toEndButton,SIGNAL(released()),this,SLOT(FastforwardReleased()));
+
 		connect(deleteSoundButton,SIGNAL(released()),this,SLOT(deleteSound()));
+
 		connect(Stop_PushButton,SIGNAL(released()),this,SLOT(doPlayBtn()));
+//		connect(Stop_PushButton,SIGNAL(released()),this,SLOT(doPlayBtn()));
+
+//		connect(Rec_PushButton,SIGNAL(released()),this,SIGNAL(startRecording()));
 		connect(Rec_PushButton,SIGNAL(released()),this,SLOT(newSound()));
 
 		connect(TabWidget,SIGNAL(currentChanged(QWidget*)),this,SLOT(thisTab(QWidget*)));
@@ -811,10 +816,13 @@ void QtRec::stop() {
 //		owarn << "STOP" << oendl;
 		setRecordButton(false);
 
-		if( !recording)
+		if( !recording) {
+				emit stopPlaying();
 				endPlaying();
-		else
+		} else {
+				emit stopRecording();
 				endRecording();
+		}
 		timeSlider->setValue(0);
 }
 
@@ -864,15 +872,7 @@ bool QtRec::rec() { //record
 								int fileSize = 0;
 								Config cfg("OpieRec");
 								cfg.setGroup("Settings");
-//             odebug << "<<<<<<<Device bits " << soundDevice->getDeviceBits()
-//                    << ", device rate " << soundDevice->getDeviceRate()
-//                    << ", device channels " << soundDevice->getDeviceChannels() << oendl;
-
-									//filePara.sampleRate = cfg.readNumEntry("samplerate", 22050);
-//             odebug << "sample rate is " << filePara.sampleRate << "" << oendl;
 								filePara.SecondsToRecord = getCurrentSizeLimit();
-
-//             odebug << "size limit " << filePara.SecondsToRecord << " sec" << oendl;
 								int diskSize = checkDiskSpace( (const QString &) wavFile->trackName());
 
 								if( filePara.SecondsToRecord == 0) {
@@ -1048,8 +1048,7 @@ bool QtRec::setupAudio( bool b) {
 //        flags= O_RDONLY;
 				recording = true;
 		}
-
-			// if(soundDevice) delete soundDevice;
+		
 		owarn << "<<<<<<<<<<<<<<<<<<<open dsp " << filePara.sampleRate << " " << filePara.channels << " " << sampleformat << "" << oendl;
 //		owarn << "change waveform settings" << oendl;
 		waveform->changeSettings( filePara.sampleRate, filePara.channels );
@@ -1089,8 +1088,6 @@ bool QtRec::setupAudio( bool b) {
 
 
 bool QtRec::setUpFile() { //setup file for recording
-//    odebug << "Setting up wavfile" << oendl;
-//  if(wavFile) delete wavFile;
 		wavFile = new WavFile( this, (const QString &)"",
 													 true,
 													 filePara.sampleRate,
@@ -1102,7 +1099,6 @@ bool QtRec::setUpFile() { //setup file for recording
 		if(filePara.fd == -1) {
 				return false;
 		} else {
-//      filePara.channels=1;
 		}
 		return true;
 }
@@ -1225,13 +1221,6 @@ void QtRec::deleteSound() {
 		cfg.setGroup("Sounds");
 		if( ListView1->currentItem() == NULL)
 				return;
-// #ifndef DEV_VERSION
-// 		switch ( QMessageBox::warning(this,tr("Delete"),
-// 																	tr("Do you really want to <font size=+2><B>DELETE</B></font>\nthe selected file?"),
-// 																	tr("Yes"),tr("No"),0,1,1) ) {
-// 			case 0:
-// #endif
-			//		{
 		QString file = ListView1->currentItem()->text(0);
 		QString fileName;
 		fileName = cfg.readEntry( file, "");
@@ -1401,9 +1390,7 @@ void QtRec::endRecording() {
 
 		if( wavFile->track.isOpen()) {
 				wavFile->adjustHeaders( filePara.fd, filePara.numberSamples);
-					//    soundDevice->sd=-1;
 				filePara.numberSamples = 0;
-					//      filePara.sd=-1;
 				wavFile->closeFile();
 				filePara.fd=0;
 

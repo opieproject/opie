@@ -60,7 +60,14 @@ public:
    ~QtRec();
    QSlider *OutputSlider,*InputSlider;
 
+signals:
+	 void stopRecording();
+	 void startRecording();
+	 void stopPlaying();
+	 void startPlaying();
+
 public slots:
+
 private:
 //    int fragment;
    int fd1;
@@ -97,9 +104,12 @@ private:
    void timerEvent( QTimerEvent *e );
     
 private slots:
+   void endPlaying();
+   void endRecording();
 
    void FastforwardPressed();
    void FastforwardReleased();
+
    void changeDirCombo(int);
    void changeSizeLimitCombo(int);
    void changeTimeSlider(int);
@@ -109,6 +119,7 @@ private slots:
    void changedInVolume();
    void changedOutVolume();
    void changesamplerateCombo(int);
+
    void cleanUp();
    void compressionSelected(bool);
    void deleteSound();
@@ -170,8 +181,6 @@ protected:
    bool openPlayFile();
    bool setUpFile();
    bool setupAudio( bool b);
-   void endPlaying();
-   void endRecording();
    void fileBeamFinished( Ir *ir);
    void keyPressEvent( QKeyEvent *e);
    void keyReleaseEvent( QKeyEvent *e);
