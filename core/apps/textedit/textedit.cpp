@@ -501,9 +501,6 @@ void TextEdit::fileNew()
 
 void TextEdit::fileOpen()
 {
-    // OFileSelector *fileSelector;
-    // fileSelector = new OFileSelector( this, 1,1,"/","", "text/*");
-    //fileSelector->showMaximized();
     QString str = OFileDialog::getOpenFileName(1,"/","", QStringList() , this );
     if(!str.isEmpty() )
         openFile( str );
@@ -645,10 +642,10 @@ void TextEdit::openFile( const QString &f )
     qDebug("filename is "+ f);
     QString filer;
 //    bFromDocView = TRUE;
-    if(f.find(".desktop",0,TRUE)) {
+    if(f.find(".desktop",0,TRUE) != -1) {
         switch ( QMessageBox::warning(this,tr("Text Editor"),
-                                      tr("Text Editor has detected\n you selected a .desktop file.\nOpen .desktop file or linked file?"),
-                                      tr(".desktop File"),tr("Link"),0,0,1) ) {
+        tr("Text Editor has detected\n you selected a .desktop file.\nOpen .desktop file or linked file?"),
+        tr(".desktop File"),tr("Linked Document"),0,1,1) ) {
           case 0:
               filer = f;
               break;
@@ -657,7 +654,9 @@ void TextEdit::openFile( const QString &f )
               filer = sf.file();
               break;
         }
-    }       
+    } else
+        filer = f;
+        
     DocLnk nf;
     nf.setType("text/plain");
     nf.setFile(filer);
@@ -682,7 +681,7 @@ void TextEdit::openFile( const DocLnk &f )
 //    bFromDocView = TRUE;
     FileManager fm;
     QString txt;
-    currentFileName=f.name();
+    currentFileName=f.file();
     qDebug("openFile doclnk " + currentFileName);
     if ( !fm.loadFile( f, txt ) ) {
           // ####### could be a new file
