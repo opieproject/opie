@@ -419,7 +419,7 @@ static void null_display_frame( vo_driver_t* self, vo_frame_t *frame_gen ){
 	if( display != NULL ) {
 	(*display)(this->caller, frame->data,
 		   frame->output_width, frame->output_height,
-		   this->bytes_per_pixel );
+		   frame->bytes_per_line );
 	printf("display done hope you enyoyed the frame");
 	}
 	//    }
