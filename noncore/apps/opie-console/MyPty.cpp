@@ -301,11 +301,9 @@ void MyPty::reload( const Profile& prof) {
      * will fallback to /bin/sh
      * which should be there 100%
      */
-    if ( !QFile::exists(QFile::encodeName(m_cmd) ) )
-        if (QFile::exists("/bin/bash") )
-            m_cmd = "/bin/bash";
-        else
+    if ( m_cmd.stripWhiteSpace() == "/bin/bash" && !QFile::exists(QFile::encodeName(m_cmd) ) )        
             m_cmd = "/bin/sh";
+        
 
     int envcount = prof.readNumEntry("EnvVars", 0);
     for (int i=0; i<envcount; i++) {
