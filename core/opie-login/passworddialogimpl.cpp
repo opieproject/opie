@@ -159,7 +159,6 @@ void PasswordDialogImpl::writePassword() {
 
     ::fclose( file );
     ::endpwent();
-    ::unlink("/etc/passwd");
     ::rename("/etc/passwd.new","/etc/passwd" );
 
     /* should be done now */
