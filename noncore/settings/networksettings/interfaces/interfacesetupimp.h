@@ -11,7 +11,9 @@ class InterfaceSetupImp : public InterfaceSetup {
   Q_OBJECT
 	
 public:
-  InterfaceSetupImp( QWidget* parent = 0, const char* name = 0, Interface *i=0, WFlags fl = 0);
+  InterfaceSetupImp( QWidget* parent = 0, const char* name = 0, Interface *i = 0, WFlags fl = 0);
+  InterfaceSetupImp( QWidget* parent = 0, const char* name = 0, Interface *i = 0, Interfaces *j = 0, WFlags fl = 0);
+  ~InterfaceSetupImp();
   bool saveChanges();
   
 public slots:
@@ -19,8 +21,10 @@ public slots:
   bool saveSettings();
 
 private:
-  Interfaces interfaces;
-  Interface *interface;
+  Interfaces *interfaces;
+  Interface  *interface;
+
+  bool delInterfaces;
 };
 
 
