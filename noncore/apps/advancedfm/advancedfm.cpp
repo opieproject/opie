@@ -58,6 +58,9 @@ AdvancedFm::AdvancedFm( )
    whichTab=1;
    rePopulate();
    currentPathCombo->setFocus();
+    channel = new QCopChannel( "QPE/Application/advancedfm", this );
+    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+        this, SLOT( qcopReceive(const QCString&, const QByteArray&)) );
 }
 
 AdvancedFm::~AdvancedFm() {
@@ -806,27 +809,28 @@ void AdvancedFm::removeCustomDir()
 void AdvancedFm::gotoCustomDir(const QString &dir)
 {
 //     qDebug("gotoCustomDir(const QString &dir) " +dir );
-  QString curDir = dir;
-  QDir *thisDir = CurrentDir();
+//  QString curDir = dir;
+//  QDir *thisDir = CurrentDir();
 //     if( curDir.isEmpty()) {
 //     }
-  if( curDir == s_addBookmark)
+  if( dir == s_addBookmark)
     {
       addCustomDir();
     }
-  if( curDir == s_removeBookmark)
+  if( dir == s_removeBookmark)
     {
       removeCustomDir( );
     }
   else
     {
-      if(QDir( curDir).exists() )
-        {
-          thisDir->setPath( curDir );
-          chdir( curDir.latin1() );
-          thisDir->cd( curDir, TRUE);
-          populateView();
-        }
+       gotoDirectory( dir);
+//       if(QDir( curDir).exists() )
+//         {
+//           thisDir->setPath( curDir );
+//           chdir( curDir.latin1() );
+//           thisDir->cd( curDir, TRUE);
+//           populateView();
+//         }
     }
 }
 
@@ -876,4 +880,33 @@ void AdvancedFm::setOtherTabCurrent()
     TabWidget->setCurrentTab(1);
   else
     TabWidget->setCurrentTab(0);
+}
+
+void AdvancedFm::qcopReceive(const QCString &msg, const QByteArray &data) {
+   qDebug("qcop message "+msg );
+   QDataStream stream ( data, IO_ReadOnly );
+   if ( msg == "openDirectory(QString)" ) {
+      qDebug("received");
+      QString file;
+      stream >> file;
+      gotoDirectory( (const QString &) file);
+   }
+}
+
+ void AdvancedFm::setDocument(const QString &file) {
+      gotoDirectory( file);
+
+ }
+
+void AdvancedFm::gotoDirectory(const QString &file) {
+
+  QString curDir = file;
+  QDir *thisDir = CurrentDir();
+
+  if(QDir( curDir).exists() )  {
+      thisDir->setPath( curDir );
+      chdir( curDir.latin1() );
+      thisDir->cd( curDir, TRUE);
+      populateView();
+   }
 }

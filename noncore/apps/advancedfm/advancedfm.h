@@ -16,7 +16,9 @@
 
 //#include <opie/otabwidget.h>
 #include <opie/oprocess.h>
+
 #include <qpe/ir.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include <qvariant.h>
 #include <qdialog.h>
@@ -89,6 +91,7 @@ protected slots:
 protected:
 
    OTabWidget *TabWidget;
+   QCopChannel * channel;
    QPixmap unknownXpm;
    int whichTab;
 //    QTabWidget *TabWidget;
@@ -161,11 +164,15 @@ private:
    void customDirsToMenu();
    void addCustomDir();
    void removeCustomDir();
+   void gotoDirectory(const QString &);
 
 private slots:
    void processEnded(OProcess *);
    void oprocessStderr(OProcess *, char *, int);
    void gotoCustomDir(const QString &);
+   void qcopReceive(const QCString&, const QByteArray&);
+   void setDocument(const QString &);
+   
 };
 
 #endif // ADVANCEDFM_H
