@@ -11,7 +11,7 @@ def regenDebugMapper( basename ):
     Debug Mapper - maps ioctl numbers to names, e.g. 0x4x5a -> SIOCGIWNAME
     """
 
-    result = os.popen( 'find /usr/include -name "*.h" |xargs grep -h SIOC|grep 0x' ).readlines()
+    result = os.popen( 'find /usr/include -name "*.h" |xargs -- grep -h SIOC|grep 0x' ).readlines()
 
     try:
         tablehfile = file( basename+".h", "w" )
