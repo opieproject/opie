@@ -194,6 +194,9 @@ bool PatienceCardGame::mousePressCard( Card *card, QPoint p )
 		item->flipTo( 30, (int)item->y() );
 	    else
 		item->flipTo( 35, (int)item->y() );
+	} else {
+	  // fix from  cmader by tille
+	  return false;
 	}
 	moving = NULL;
 	moved = FALSE;
