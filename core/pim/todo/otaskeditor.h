@@ -6,11 +6,12 @@
 #include <opie/otodo.h>
 #include <opie/otabwidget.h>
 
-class TaskEditorOverViewImpl;
+class TaskEditorOverView;
 class TaskEditorAdvancedImpl;
 class TaskEditorAlarms;
 class ORecurranceWidget;
 class QMultiLineEdit;
+
 class OTaskEditor : public QDialog {
     Q_OBJECT
 public:
@@ -30,13 +31,13 @@ private:
     void load( const OTodo& );
     void init();
 
-    OTabWidget *m_tab;
-    TaskEditorOverViewImpl* m_overView;
+    OTabWidget         *m_tab;
+    TaskEditorOverView *m_overView;
     TaskEditorAdvancedImpl *m_adv;
-    TaskEditorAlarms *m_alarm;
-    TaskEditorAlarms* m_remind;
-    ORecurranceWidget* m_rec;
-    int m_uid;
+    TaskEditorAlarms   *m_alarm;
+    TaskEditorAlarms   *m_remind;
+    ORecurranceWidget  *m_rec;
+    int                 m_uid;
 
 };
 

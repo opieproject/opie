@@ -16,9 +16,10 @@ HEADERS	= smalltodo.h \
 	  templatedialogimpl.h \
 	  quickedit.h \
 	  quickeditimpl.h \
-          otaskeditor.h \
-          taskeditoroverviewimpl.h \
-	  taskeditoradvancedimpl.h 
+	  otaskeditor.h \
+	  taskeditoroverview.h \
+	  taskeditoradvancedimpl.h \
+	  taskeditoralarms.h
 
 SOURCES	= smalltodo.cpp \
           todomanager.cpp \
@@ -35,11 +36,12 @@ SOURCES	= smalltodo.cpp \
 	  templatedialogimpl.cpp \
 	  quickeditimpl.cpp \
 	  quickedit.cpp \
-          otaskeditor.cpp \
-          taskeditoroverviewimpl.cpp \
-	  taskeditoradvancedimpl.cpp
+	  otaskeditor.cpp \
+	  taskeditoroverview.cpp \
+	  taskeditoradvancedimpl.cpp \
+	  taskeditoralarms.cpp
 
-INTERFACES	= taskeditoradvanced.ui taskeditoralarms.ui taskeditoroverview.ui
+INTERFACES	= taskeditoradvanced.ui
 TARGET		= todolist
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include

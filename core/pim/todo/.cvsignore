@@ -2,9 +2,5 @@ Makefile*
 moc_*
 taskeditoradvanced.cpp
 taskeditoradvanced.h
-taskeditoralarms.cpp
-taskeditoralarms.h
-taskeditoroverview.cpp
-taskeditoroverview.h
 todoentry.cpp
 todoentry.h

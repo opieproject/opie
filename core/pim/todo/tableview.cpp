@@ -61,7 +61,8 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     : QTable(  wid ), TodoView( window ) {
     
     // Load icons
-    // TODO - probably should be done globally somewhere else, see also quickeditimpl.cpp/h
+    // TODO - probably should be done globally somewhere else,
+    //        see also quickeditimpl.cpp/h, taskeditoroverview.cpp/h
     m_pic_completed = Resource::loadPixmap( "todo/completed" );
     QString namestr;
     for ( unsigned int i = 1; i < 6; i++ ) {

@@ -2,11 +2,10 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qmultilineedit.h>
-#include <qscrollview.h>
 
 #include <opie/orecurrancewidget.h>
 
-#include "taskeditoroverviewimpl.h"
+#include "taskeditoroverview.h"
 #include "taskeditoradvancedimpl.h"
 #include "taskeditoralarms.h"
 
@@ -41,50 +40,44 @@ OTodo OTaskEditor::todo()const{
     OTodo to;
     to.setUid(m_uid );
     m_overView->save( to );
-    m_adv->save( to );
+    //m_adv->save( to );
     to.setRecurrence( m_rec->recurrence() );
 
     return to;
 }
 void OTaskEditor::load(const OTodo& to) {
     m_overView->load( to );
-    m_adv->load( to );
+    //m_adv->load( to );
     m_rec->setRecurrence( to.recurrence(), to.hasDueDate() ? to.dueDate() : QDate::currentDate() );
 }
 void OTaskEditor::init() {
-    QVBoxLayout* lay = new QVBoxLayout(this );
-    QScrollView* view = new QScrollView( this );
-    view->setResizePolicy( QScrollView::AutoOneFit );
-    lay->addWidget( view );
-
     setCaption("Task Editor");
-    QWidget* container = new QWidget( view->viewport() );
-    view->addChild( container );
 
-    QVBoxLayout* layo = new QVBoxLayout( container );
-    m_tab = new OTabWidget(container );
+    QVBoxLayout* layo = new QVBoxLayout( this );
+    m_tab = new OTabWidget( this );
     layo->addWidget( m_tab );
+
     /*
      * Add the Widgets
      */
-    m_overView = new TaskEditorOverViewImpl(m_tab );
-    m_tab->addTab( m_overView, QString::null, tr("Overview") );
+    m_overView = new TaskEditorOverView( m_tab );
+    m_tab->addTab( m_overView, "TodoList", tr("Overview") );
 
     m_adv = new TaskEditorAdvancedImpl( m_tab );
-    m_tab->addTab( m_adv, QString::null, tr("Advanced") );
+    m_tab->addTab( m_adv, "todo/advanced", tr("Advanced") );
 
     m_alarm = new TaskEditorAlarms( m_tab );
-    m_tab->addTab( m_alarm, QString::null, tr("Alarms") );
+    m_tab->addTab( m_alarm, "todo/alarm", tr("Alarms") );
 
     m_remind = new TaskEditorAlarms( m_tab );
-    m_tab->addTab( m_remind, QString::null, tr("Reminders") );
+    m_tab->addTab( m_remind, "todo/reminder", tr("Reminders") );
 
-    QLabel* lbl = new QLabel(m_tab );
+    QLabel* lbl = new QLabel( m_tab );
     lbl->setText( tr("X-Ref") );
-    m_tab->addTab( lbl, QString::null, tr("X-Ref") );
+    m_tab->addTab( lbl, "todo/xref", tr("X-Ref") );
 
     m_rec = new ORecurranceWidget( true, QDate::currentDate(), this );
-    m_tab->addTab( m_rec, QString::null, tr("Recurrance") );
+    m_tab->addTab( m_rec, "repeat", tr("Recurrance") );
 
 
     /* signal and slots */
