@@ -11,6 +11,7 @@ Session::Session() {
     m_widget = 0l;
     m_layer = 0l;
     m_emu = 0l;
+    m_transfer = 0l;
 }
 Session::Session( const QString& na, QWidgetStack* widget, IOLayer* lay)
     : m_name( na ), m_widget( widget ), m_layer( lay )
@@ -104,4 +105,13 @@ void Session::setEmulationWidget( WidgetLayer* lay ) {
     m_widLay = lay;
 }
 */
+void Session::setTransferDialog(QWidget *d)
+{
+    m_transfer = d;
+}
+
+QWidget *Session::transferDialog()
+{
+    return m_transfer;
+}
 

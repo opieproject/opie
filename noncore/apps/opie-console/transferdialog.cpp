@@ -18,7 +18,7 @@
 #include "transferdialog.h"
 
 TransferDialog::TransferDialog(QWidget *parent, MainWindow *mainwindow, const char *)
-: QDialog(parent, 0l, true), m_win(mainwindow)
+: QDialog(parent, 0l, false), m_win(mainwindow)
 {
     m_lay = 0l;
 	m_recvlay = 0l;
@@ -29,6 +29,7 @@ TransferDialog::TransferDialog(QWidget *parent, MainWindow *mainwindow, const ch
 	QRadioButton *mode_send, *mode_receive;
 
 	m_autocleanup = 0;
+	m_running = true;
 
 	group = new QButtonGroup(QObject::tr("Transfer mode"), this);
 	mode_send = new QRadioButton(QObject::tr("Send"), group);
@@ -167,7 +168,11 @@ void TransferDialog::slotCancel()
 	if((m_lay) || (m_recvlay))
 	{
 		cleanup();
-		if(m_autocleanup) close();
+		if(m_autocleanup)
+		{
+			m_running = false;
+			close();
+		}
 		else
 		{
 			QMessageBox::information(this,
@@ -177,6 +182,7 @@ void TransferDialog::slotCancel()
 	}
 	else
 	{
+		m_running = false;
 		close();
 	}
 }
@@ -262,5 +268,10 @@ void TransferDialog::slotMode(int id)
 		filename->setEnabled(false);
 	}
 	m_transfermode = id;
+}
+
+bool TransferDialog::isRunning()
+{
+	return m_running;
 }
 

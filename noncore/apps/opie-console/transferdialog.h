@@ -18,6 +18,7 @@ class TransferDialog : public QDialog
 	public:
 		TransferDialog(QWidget *parent = 0l, MainWindow *mainwindow = 0l, const char *name = 0l);
 		~TransferDialog();
+		bool isRunning();
 
 	public slots:
 		void slotFilename();
@@ -48,6 +49,7 @@ class TransferDialog : public QDialog
 		ReceiveLayer *m_recvlay;
 		int m_transfermode;
 		int m_autocleanup;
+		bool m_running;
 };
 
 #endif

@@ -534,6 +534,9 @@ void MainWindow::slotProfile( int id) {
     create( prof );
 }
 void MainWindow::create( const Profile& prof ) {
+	if(m_curSession)
+		if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();
+
     Session *ses = manager()->fromProfile( prof, tabWidget() );
 
     if((!ses) || (!ses->layer()) || (!ses->widgetStack()))
@@ -578,10 +581,15 @@ void MainWindow::create( const Profile& prof ) {
 void MainWindow::slotTransfer()
 {
     if ( currentSession() ) {
-	TransferDialog dlg(currentSession()->widgetStack(), this);
-	dlg.showMaximized();
+	Session *mysession = currentSession();
+	TransferDialog dlg(mysession->widgetStack(), this);
+	mysession->setTransferDialog(&dlg);
+	dlg.show();
+	//dlg.showMaximized();
 	//currentSession()->widgetStack()->add(dlg);
-	dlg.exec();
+	//dlg.exec();
+	while(dlg.isRunning()) qApp->processEvents();
+	mysession->setTransferDialog(0l);
     }
 }
 
@@ -607,6 +615,12 @@ void MainWindow::slotOpenButtons( bool state ) {
 
 void MainWindow::slotSessionChanged( Session* ses ) {
     qWarning("changed!");
+
+	if(m_curSession)
+		if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();
+	if(ses)
+		if(ses->transferDialog()) ses->transferDialog()->show();
+
     if ( ses ) {
         m_curSession = ses;
         qDebug(QString("is connected : %1").arg(  m_curSession->layer()->isConnected() ) );
@@ -629,10 +643,6 @@ void MainWindow::slotSessionChanged( Session* ses ) {
         } else {
             m_transfer->setEnabled( true );
         }
-
-
-
-
 
         QWidget *w = m_curSession->widget();
         if(w) w->setFocus();

@@ -64,6 +64,9 @@ public:
     void setName( const QString& );
     void setProfile( const Profile& );
 
+    void setTransferDialog(QWidget *d);
+    QWidget *transferDialog();
+
 private:
     QString m_name;
     QWidgetStack* m_widget;
@@ -71,7 +74,7 @@ private:
     EmulationHandler* m_emu;
     bool m_connected : 1;
     Profile m_prof;
-
+    QWidget *m_transfer;
 };
 
 #endif
