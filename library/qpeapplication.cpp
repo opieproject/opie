@@ -98,7 +98,7 @@ public:
 	QPEApplicationData ( )
 		: presstimer( 0 ), presswidget( 0 ), rightpressed( false ), kbgrabbed( false ),
 		  notbusysent( false ), preloaded( false ), forceshow( false ), nomaximize( false ),
-		  keep_running( true ), qpe_main_widget( 0 )
+		  keep_running( true ), qpe_main_widget( 0 ), qcopQok( false )
 
 	{
 		qcopq.setAutoDelete( TRUE );
@@ -114,7 +114,9 @@ public:
 	bool preloaded    : 1;
 	bool forceshow    : 1;
 	bool nomaximize   : 1;
+        bool qcopQok      : 1;
 	bool keep_running : 1;
+
 
         QStringList langs;
 	QString appName;
@@ -142,6 +144,9 @@ public:
 	}
 	void sendQCopQ()
 	{
+            if (!qcopQok )
+                return;
+
 		QCopRec * r;
 #ifndef QT_NO_COP
 
@@ -1893,6 +1898,7 @@ void QPEApplication::grabKeyboard()
 */
 int QPEApplication::exec()
 {
+        d->qcopQok = true;
 #ifndef QT_NO_COP
 	d->sendQCopQ();
 #endif
