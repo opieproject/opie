@@ -350,10 +350,13 @@ bool DesktopApplication::checkButtonAction ( const ODeviceButton *db, int /*keyc
 			
 			if (!db-> pressedAction ( ). channel ( ) .isEmpty())
 			{
+
 				if ( db-> pressedAction ( ). channel ( )!="ignore") {
+
 					db-> pressedAction ( ). send ( );
 				}
-				else return false;
+				else 
+				   return false;
 			}
 		}
 		else if ( press && !autoRepeat ) {
@@ -374,13 +377,15 @@ bool DesktopApplication::checkButtonAction ( const ODeviceButton *db, int /*keyc
 
 bool DesktopApplication::eventFilter ( QObject *o, QEvent *e )
 {
+
 	if ( e-> type ( ) == QEvent::KeyPress || e-> type ( ) == QEvent::KeyRelease ) {
 		QKeyEvent *ke = (QKeyEvent *) e;
 	
 		const ODeviceButton *db = ODevice::inst ( )-> buttonForKeycode ( ke-> key ( ));
         
 		if ( db ) {
-			return checkButtonAction ( db, ke-> key ( ), e-> type ( ) == QEvent::KeyPress, ke-> isAutoRepeat ( ));
+			if (checkButtonAction ( db, ke-> key ( ), e-> type ( ) == QEvent::KeyPress, ke-> isAutoRepeat ( )))
+				return true;		//checkButtonAction retrune false if events should be routed through
 		}
 	}
 	return QPEApplication::eventFilter ( o, e );
@@ -664,8 +669,6 @@ void Desktop::execAutoStart()
 void Desktop::togglePower()
 {
 	static bool excllock = false;
-
-	qDebug ( "togglePower (locked == %d)", excllock ? 1 : 0 );
 
 	if ( excllock )
 		return ;
