@@ -7,6 +7,7 @@ using namespace OpieObex;
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/filemanager.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -195,8 +196,13 @@ QString OtherHandler::targetName( const QString& file ) {
 /* fast cpy */
 void OtherHandler::copy(const QString& src, const QString& file) {
     owarn << "src " << src << ", dest " << file << "" << oendl;
-    QString cmd = QString("mv %1 %2").arg( Global::shellQuote( src )).
-                  arg( Global::shellQuote( file ) );
-    ::system( cmd.latin1() );
+    FileManager *fm;
+    if(!fm->copyFile(src,file)) {
+    owarn << "Copy failed" << oendl;
+    }
+    
+//     QString cmd = QString("mv %1 %2").arg( Global::shellQuote( src )).
+//                   arg( Global::shellQuote( file ) );
+//     ::system( cmd.latin1() );
     // done
 }
