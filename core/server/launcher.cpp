@@ -576,6 +576,13 @@ void Launcher::select( const AppLnk *appLnk )
 	    if ( i == 1 )
 		Global::execute(Service::app("Open/text/*"),appLnk->file());
 #endif
+
+// as long as we dont have services use qcop to open the document
+       QCopEnvelope en( "QPE/Application/textedit", "raise()" );
+        QCopEnvelope env( "QPE/Application/textedit", "setDocument(QString)" );
+        env << appLnk->file();
+
+
 	    return;
 	}
 	tabs->setBusy(TRUE);
