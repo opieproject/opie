@@ -46,6 +46,9 @@ OpieScreenSaver::OpieScreenSaver ( )
 }
 
 
+/**
+ * Stops the screen saver
+ */
 void OpieScreenSaver::restore()
 {
 	m_level = -1;
@@ -59,6 +62,13 @@ void OpieScreenSaver::restore()
 }
 
 
+/**
+ * Starts the screen saver
+ *
+ * @param level what level of screen saving should happen (0=lowest non-off, 1=off,
+ * 2=suspend whole machine)
+ * @returns true on success
+ */
 bool OpieScreenSaver::save( int level )
 {
 	m_level = level;
@@ -98,6 +108,8 @@ bool OpieScreenSaver::save( int level )
 			// We're going to suspend the whole machine
 
 			if (( m_disable_suspend > 2 ) && !Network::networkOnline ( )) {
+				// TODO: why is this key F34 hard coded?  -- schurig
+				// Does this now only work an devices with a ODevice::filter?
 				QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
 				return true;
 			}
@@ -108,46 +120,65 @@ bool OpieScreenSaver::save( int level )
 }
 
 
-void OpieScreenSaver::setIntervals ( int i1, int i2, int i3 )
+/**
+ * Set intervals in seconds for automatic dimming, light off and suspend
+ *
+ * This function also sets the member variables m_m_enable_dim[_ac],
+ * m_enable_lightoff[_ac], m_enable_suspend[_ac], m_onlylcdoff[_ac]
+ *
+ * @param dim      time in seconds to dim, -1 to read value from config file,
+ *                 0 to disable
+ * @param lightoff time in seconds to turn LCD backlight off, -1 to
+ *                 read value from config file, 0 to disable
+ * @param suspend  time in seconds to do an APM suspend, -1 to
+ *                 read value from config file, 0 to disable
+ */
+void OpieScreenSaver::setIntervals ( int dim, int lightoff, int suspend )
 {
 	Config config ( "apm" );
 	config. setGroup ( m_on_ac ? "AC" : "Battery" );
 
 	int v[ 4 ];
-	if ( i1 < 0 )
-		i1 = config. readNumEntry ( "Dim", m_on_ac ? 60 : 30 );
-	if ( i2 < 0 )
-		i2 = config. readNumEntry ( "LightOff", m_on_ac ? 120 : 20 );
-	if ( i3 < 0 )
-		i3 = config. readNumEntry ( "Suspend", m_on_ac ? 0 : 60 );
+	if ( dim < 0 )
+		dim = config. readNumEntry ( "Dim", m_on_ac ? 60 : 30 );
+	if ( lightoff < 0 )
+		lightoff = config. readNumEntry ( "LightOff", m_on_ac ? 120 : 20 );
+	if ( suspend < 0 )
+		suspend = config. readNumEntry ( "Suspend", m_on_ac ? 0 : 60 );
 
 	if ( m_on_ac ) {
-		m_enable_dim_ac = ( i1 > 0 );
-		m_enable_lightoff_ac = ( i2 > 0 );
-		m_enable_suspend_ac = ( i3 > 0 );
+		m_enable_dim_ac = ( dim > 0 );
+		m_enable_lightoff_ac = ( lightoff > 0 );
+		m_enable_suspend_ac = ( suspend > 0 );
 		m_onlylcdoff_ac = config.readBoolEntry ( "LcdOffOnly", false );
 	}
 	else {
-		m_enable_dim = ( i1 > 0 );
-		m_enable_lightoff = ( i2 > 0 );
-		m_enable_suspend = ( i3 > 0 );
+		m_enable_dim = ( dim > 0 );
+		m_enable_lightoff = ( lightoff > 0 );
+		m_enable_suspend = ( suspend > 0 );
 		m_onlylcdoff = config.readBoolEntry ( "LcdOffOnly", false );
 	}
 	
-	//qDebug("screen saver intervals: %d %d %d", i1, i2, i3);
+	//qDebug("screen saver intervals: %d %d %d", dim, lightoff, suspend);
 
-	v [ 0 ] = QMAX( 1000 * i1, 100 );
-	v [ 1 ] = QMAX( 1000 * i2, 100 );
-	v [ 2 ] = QMAX( 1000 * i3, 100 );
+	v [ 0 ] = QMAX( 1000 * dim, 100 );
+	v [ 1 ] = QMAX( 1000 * lightoff, 100 );
+	v [ 2 ] = QMAX( 1000 * suspend, 100 );
 	v [ 3 ] = 0;
 
-	if ( !i1 && !i2 && !i3 )
+	if ( !dim && !lightoff && !suspend )
 		QWSServer::setScreenSaverInterval( 0 );
 	else
 		QWSServer::setScreenSaverIntervals( v );
 }
 
 
+/**
+ * Set suspend time. Will read the dim and lcd-off times from the config file.
+ *
+ * @param suspend  time in seconds to go into APM suspend, -1 to
+ *                 read value from config file, 0 to disable
+ */
 void OpieScreenSaver::setInterval ( int interval )
 {
 	setIntervals ( -1, -1, interval );
@@ -162,13 +193,21 @@ void OpieScreenSaver::setMode ( int mode )
 }
 
 
+/**
+ * Set display brightness
+ *
+ * Get's default values for backlight and light sensor from config file.
+ *
+ * @param bright desired brighness (-1 to use automatic sensor data or value
+ *               from config file, -2 to toggle backlight on and off, -3 to
+ *               force backlight off)
+ */
 void OpieScreenSaver::setBacklight ( int bright )
 {
 	// Read from config
 	Config config ( "apm" );
 	config. setGroup ( m_on_ac ? "AC" : "Battery" );
 	m_backlight_normal = config. readNumEntry ( "Brightness", m_on_ac ? 255 : 127 );
-
 	m_use_light_sensor = config. readBoolEntry ( "LightSensor", false );
 
 	//qDebug ( "setBacklight: %d (norm: %d) (ls: %d)", bright, m_backlight_normal, m_use_light_sensor ? 1 : 0 );
@@ -199,6 +238,15 @@ void OpieScreenSaver::setBacklight ( int bright )
 }
 
 
+/**
+ * Internal brightness setting method
+ *
+ * Get's default values for backlight and light sensor from config file.
+ *
+ * @param bright desired brighness (-1 to use automatic sensor data or value
+ *               from config file, -2 to toggle backlight on and off, -3 to
+ *               force backlight off)
+ */
 void OpieScreenSaver::setBacklightInternal ( int bright )
 {
 	if ( bright == -3 ) {
@@ -223,6 +271,10 @@ void OpieScreenSaver::setBacklightInternal ( int bright )
 }
 
 
+/**
+ * Timer event used for automatic setting the backlight according to a light sensor
+ * and to set the default brightness
+ */
 void OpieScreenSaver::timerEvent ( QTimerEvent * )
 {
 	int s = ODevice::inst ( )-> readLightSensor ( ) * 256 / ODevice::inst ( )-> lightSensorResolution ( );
@@ -247,6 +299,9 @@ void OpieScreenSaver::timerEvent ( QTimerEvent * )
 }
 
 
+/**
+ * Like ODevice::setDisplayStatus(), but keep current state in m_lcd_status.
+ */
 void OpieScreenSaver::setDisplayState ( bool on )
 {
 	if ( m_lcd_status != on ) {
@@ -256,6 +311,9 @@ void OpieScreenSaver::setDisplayState ( bool on )
 }
 
 
+/**
+ * Set display to default ac/battery settings when power status changed.
+ */
 void OpieScreenSaver::powerStatusChanged ( PowerStatus ps )
 {
 	bool newonac = ( ps. acStatus ( ) == PowerStatus::Online );
@@ -267,4 +325,3 @@ void OpieScreenSaver::powerStatusChanged ( PowerStatus ps )
 		restore ( );		
 	}
 }
-
