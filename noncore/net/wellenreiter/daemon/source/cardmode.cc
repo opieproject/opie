@@ -1,4 +1,4 @@
-/* $Id: cardmode.cc,v 1.2 2002-11-23 20:33:08 max Exp $ */
+/* $Id: cardmode.cc,v 1.3 2002-11-23 21:20:13 max Exp $ */
 
 #include "cardmode.hh"
 
@@ -41,8 +41,8 @@ int card_into_monitormode (char *device, int cardtype)
 		snprintf(wlanngcmd, sizeof(wlanngcmd),"%s %s lnxreq_wlansniff channel=1 enable=true",WLANCTL_PATH,device);
 		if (system (wlanngcmd) != 0)
 		{
-			printf ("\n Fatal error could not set %s in raw mode, check cardtype\n",device);
-			return 0;
+			printf ("\n Fatal error could not set %s in raw mode, check cardtype\n\n\tterminating now...\n\n",device);
+			exit(1);
 	    }
 	}
 	else if (cardtype == CARD_TYPE_HOSTAP)
@@ -66,9 +66,9 @@ int card_into_monitormode (char *device, int cardtype)
 	}
 	else 
 	{
-		printf ("Fatal error, cannot continue, your interface %s does not work in the correct 802.11 raw mode, check you driver please\n",device);
+		printf ("Fatal error, cannot continue, your interface %s does not work in the correct 802.11 raw mode, check you driver please\n\tterminating now",device);
 		pcap_close(handle); 
-		return 0;
+		exit(1);
 	}
 }
 
