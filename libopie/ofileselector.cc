@@ -86,7 +86,8 @@ OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString
   m_selector = selector;
   m_currentDir = dirName;
   m_name = fileName;
-   m_mimetypes = mimetypes;
+  requestedMimeTypesList = m_mimetypes = mimetypes;
+  
 //   if( mimetypes.isEmpty() )
 //     m_autoMime = true;
 
@@ -186,13 +187,11 @@ void OFileSelector::delItems()
 
 void OFileSelector::init()
 {
-
+//    qDebug("init");
   m_stack = new QWidgetStack(this, "wstack" );
-  if( m_selector == NORMAL ){
     QString currMime;
     if( m_mimeCheck != 0 )
       currMime = m_mimeCheck->currentText();
-
     updateMimes();
     m_select = new FileSelector( currMime == "All" ? QString::null : currMime , m_stack, "fileselector", FALSE, FALSE );
     m_stack->addWidget(m_select, NORMAL );
@@ -200,26 +199,24 @@ void OFileSelector::init()
     m_stack->raiseWidget(NORMAL );
     connect(m_select, SIGNAL(fileSelected( const DocLnk &) ), this, SLOT(slotFileBridgeSelected(const DocLnk &) ) );
     m_pseudoLayout = 0l;
-  }else {
+    if( m_selector != NORMAL ) {
     initializeListView();
   }
-
   if(m_shLne ){ 
     initializeName();
   }
-
   if(m_shPerm ){
     m_checkPerm = new QCheckBox(tr("Set Permission"), this, "Permission" );
     m_checkPerm->setChecked( false );
     m_lay->addWidget(m_checkPerm ); 
   }
-
   if( m_shChooser )
     initializeChooser();
-
   if(m_shYesNo )
     initializeYes();
- 
+
+  m_mimeCheck->setCurrentItem(indexByString( m_mimeCheck, requestedMimeTypesList.first()) );
+    reparse();
   
 }
 
@@ -416,12 +413,10 @@ bool OFileSelector::compliesMime(const QString &path, const QString &mime )
 
 void OFileSelector::reparse()
 {
+    qDebug("reparse");
   if(m_View== 0 || m_selector == NORMAL)
     return;
-
   m_View->clear();
- 
-  
   QString currMime =m_mimeCheck->currentText();
   // update the mimetype now
   if( m_autoMime ) {
@@ -470,7 +465,7 @@ void OFileSelector::reparse()
   else
     filter = QDir::Files | QDir::Dirs | QDir::All;
   dir.setFilter( filter );
-
+  qDebug("infoList");
   const QFileInfoList *list = dir.entryInfoList();
   QFileInfoListIterator it( *list );
   QFileInfo *fi;
@@ -479,31 +474,31 @@ void OFileSelector::reparse()
       ++it;
       continue;
     }
-    qWarning("Test:  %s", fi->fileName().latin1() );
+//    qWarning("Test:  %s", fi->fileName().latin1() );
     if(fi->isSymLink() ){
-      qWarning("Symlink %s", fi->fileName().latin1() );
+//      qWarning("Symlink %s", fi->fileName().latin1() );
       QString file = fi->dirPath(true)+"/"+ fi->readLink();
-      qWarning("File ->%s", file.latin1() );
+//      qWarning("File ->%s", file.latin1() );
       for(int i=0; i<=4; i++ ){ // prepend from dos
   QFileInfo info( file );
   if( !info.exists() ){
-    qWarning("does not exist" );
+//    qWarning("does not exist" );
     addSymlink(currMime,  fi, TRUE );
     break;
   }else if( info.isDir() ){ 
-    qWarning("isDir" );
+//    qWarning("isDir" );
     addDir(currMime, fi, TRUE  );
     break;
   }else if( info.isFile() ){
-    qWarning("isFile" );
+//    qWarning("isFile" );
     addFile(currMime, fi, TRUE );
     break;
   }else if( info.isSymLink() ){
     file = info.dirPath(true)+ "/"+ info.readLink();
-    qWarning("isSymlink again %s", file.latin1() );
+//    qWarning("isSymlink again %s", file.latin1() );
   }else if( i == 4 ){ // just insert it and have the symlink symbol
     addSymlink(currMime, fi );
-    qWarning("level too deep" );
+//    qWarning("level too deep" );
   }
       }
     }else if( fi->isDir() ){
@@ -514,6 +509,7 @@ void OFileSelector::reparse()
     ++it;  
   }
   m_View->sort();
+//  m_View->ensureItemVisible();
 }
 
 QString OFileSelector::directory()const
@@ -586,7 +582,7 @@ void OFileSelector::initializeChooser()
 //     m_mimeCheck->insertItem(m_mimetypes.join("," ) );
 //   else{ // check
     updateMimes();
-    m_mimeCheck->insertStringList( m_mimetypes );
+   m_mimeCheck->insertStringList( m_mimetypes );
 //   }
 
   connect( m_viewCheck, SIGNAL(activated(const QString &) ),
@@ -646,21 +642,17 @@ void OFileSelector::slotViewCheck(const QString &view ){
     m_stack->raiseWidget( NORMAL );
     connect(m_select, SIGNAL(fileSelected( const DocLnk &) ), this, SLOT(slotFileBridgeSelected(const DocLnk &) ) );    
 
-  }else if(view == QString::fromLatin1("Files") ){
+  } else if(view == QString::fromLatin1("Files") ){
     // remove from the stack
     delete m_select;
     m_select = 0;
     delete m_View;
     m_View = 0;
 
-    
-
     m_selector = EXTENDED;
-    // create the ListView or IconView
     initializeListView();
-
     reparse();
-  }else if(view == QString::fromLatin1("All Files") ) {
+  } else if(view == QString::fromLatin1("All Files") ) {
     // remove from the stack
     delete m_select;
     m_select = 0;
@@ -670,7 +662,7 @@ void OFileSelector::slotViewCheck(const QString &view ){
     m_selector = EXTENDED_ALL;
     initializeListView();
     reparse();
-  };
+  }
 }
 
 
@@ -679,7 +671,7 @@ void OFileSelector::updateMimes() // lets check which mode is active
 {
   m_mimetypes.clear();
   m_mimetypes.append("All" );
-  if( m_selector == NORMAL ){
+//  if( m_selector == NORMAL ){
     DocLnkSet set;
     Global::findDocuments(&set, QString::null );
     QListIterator<DocLnk> dit( set.children() );
@@ -687,22 +679,26 @@ void OFileSelector::updateMimes() // lets check which mode is active
       if( !m_mimetypes.contains((*dit)->type()  ) )
       m_mimetypes.append( (*dit)->type() );
     }
-  }else{
+//  }else{
     // should be allreday updatet
-    ;
-  }
+      //  ;
+      // }
 }
 
 void OFileSelector::initializeListView()
-{ 
+{
+      // in the instance that a developer selected the view to be Files or Entended,
+      // in the initial initialization, you are deleting objects here
+      // that aren't even existing yet.
+    
   // just to make sure but clean it up better FIXME
-  delete m_View;
-  m_View = 0;
-  delete m_boxToolbar;
-  delete m_homeButton;
-  delete m_docButton;
-  delete m_location;
-  delete m_up;
+  //      if( m_View) delete m_View;
+//   m_View = 0;
+//    if(m_boxToolbar) delete m_boxToolbar;
+//    if(m_homeButton) delete m_homeButton;
+//    if(m_docButton) delete m_docButton;
+//    if( m_location) delete m_location;
+//    if(m_up) delete m_up;
   //delete m_pseudo;
   //if(m_pseudoLayout!=0 ) // why did you overload malloc
     //delete m_pseudoLayout;
@@ -713,14 +709,16 @@ void OFileSelector::initializeListView()
   m_up = 0;
   m_pseudo = 0;
   m_pseudoLayout = 0;
-  // time for the toolbar 
+  qDebug(" time for the toolbar ");
   m_pseudo = new QWidget(m_stack, "Pseudo Widget");
   m_pseudoLayout = new QVBoxLayout(m_pseudo );
   if(m_shTool ){
     m_boxToolbar = new QHBoxLayout( );
     m_boxToolbar->setAutoAdd( true );
     m_location = new QComboBox(m_pseudo );
+    m_location ->setEditable(TRUE);
     connect( m_location, SIGNAL(activated(const QString &) ), this, SLOT( locationComboActivated(const QString & ) ) );
+    connect( m_location->lineEdit(),SIGNAL(returnPressed()), this,SLOT( locationComboChanged()));
 
     m_up = new QPushButton(Resource::loadIconSet("up"),"", m_pseudo,"cdUpButton");
     m_up->setFixedSize( QSize( 20, 20 ) );
@@ -742,7 +740,7 @@ void OFileSelector::initializeListView()
     m_boxToolbar->addWidget(m_homeButton );
     m_boxToolbar->addWidget(m_docButton );
     m_pseudoLayout->addLayout(m_boxToolbar );
-    // lets fill the combobox
+    qDebug("lets fill the combobox");
     StorageInfo storage;
     const QList<FileSystem> &fs = storage.fileSystems();
     QListIterator<FileSystem> it ( fs );
@@ -755,6 +753,7 @@ void OFileSelector::initializeListView()
     m_location->insertItem(m_currentDir );
     m_location->setCurrentItem( count );
   };
+
   m_View = new QListView(m_pseudo, "Extended view" );
   m_stack->addWidget( m_pseudo, EXTENDED );
   m_stack->raiseWidget( EXTENDED );
@@ -783,6 +782,7 @@ void OFileSelector::initializeListView()
 
  
 };
+
 /* If a item is locked  depends on the mode
    if we're in OPEN !isReadable is locked
    if we're in SAVE !isWriteable is locked
@@ -792,9 +792,9 @@ void OFileSelector::initializeListView()
 
 
 void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink ){
-  qWarning("Add Files" );
+//  qWarning("Add Files" );
   if( !m_files ){
-    qWarning("not mfiles" );
+//    qWarning("not mfiles" );
     return;
   }
 
@@ -901,17 +901,17 @@ void OFileSelector::slotSelectionChanged() // get the current items
 
 void OFileSelector::slotCurrentChanged(QListViewItem *item )
 {
-  qWarning("current changed" );
+//   qWarning("current changed" );
   if( item == 0 )
     return;
 
   if( m_selector == EXTENDED || m_selector == EXTENDED_ALL ){
     OFileSelectorItem *sel = (OFileSelectorItem*)item;
     if(!sel->isDir() ){
-      qWarning("is not dir" );
+//       qWarning("is not dir" );
       if(m_shLne ){
   m_edit->setText(sel->text(1) );
-  qWarning("setTexy" );
+//   qWarning("setTexy" );
       }
     }
   }else {
@@ -928,16 +928,16 @@ void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &
   if( button != Qt::LeftButton )
     return; 
 
- qWarning("clicked" );
+//  qWarning("clicked" );
   if(m_selector == EXTENDED || m_selector == EXTENDED_ALL ){
-    qWarning("inside" );
+//     qWarning("inside" );
     OFileSelectorItem *sel = (OFileSelectorItem*)item;
     if(!sel->isLocked() ){ // not locked either changedir or open
       QStringList str = QStringList::split("->", sel->text(1) );
       if(sel->isDir() ){
         cd( sel->directory() + "/" + str[0] );
       } else {
-          qWarning("file" );
+//           qWarning("file" );
           if(m_shLne )
               m_edit->setText(str[0] );
           emit fileSelected(str[0] );
@@ -956,13 +956,13 @@ void OFileSelector::slotRightButton(int button, QListViewItem *item, const QPoin
 
   if( button != Qt::RightButton )
     return; 
-  qWarning("right button" );
+//   qWarning("right button" );
   slotContextMenu(item);
 }
 
 void OFileSelector::slotContextMenu(QListViewItem *item)
 {
-  qWarning("context menu" );
+//   qWarning("context menu" );
   if( item ==0 || !m_showPopup )
     return;
  
@@ -1014,7 +1014,7 @@ void OFileSelector::slotContextMenu(QListViewItem *item)
 
 bool OFileSelector::cd(const QString &str )
 {
-  qWarning(" dir %s", str.latin1() );
+//   qWarning(" dir %s", str.latin1() );
   QDir dir( str);
   if(dir.exists() ){
     m_currentDir = dir.absPath();
@@ -1031,10 +1031,13 @@ bool OFileSelector::cd(const QString &str )
 
 void  OFileSelector::insertLocationPath(const QString &currentPath, int count) {
     QStringList pathList;
+    bool underDog = FALSE;
     for(int i=0;i<count;i++) {
         pathList << m_location->text(i);
+        if( m_location->text(i) == currentPath)
+            underDog = TRUE;
     }
-    if( pathList.grep( currentPath,TRUE).isEmpty() ) {
+    if( !underDog) {
         m_location->clear();
         if( currentPath.left(2)=="//")
             pathList.append( currentPath.right(currentPath.length()-1) );
@@ -1075,7 +1078,7 @@ void OFileSelector::slotRename()
 
 void OFileSelector::slotDelete()
 {
-  qWarning("delete slot" );
+//   qWarning("delete slot" );
   OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
   QStringList list = QStringList::split("->", sel->text(1) );
   if( sel->isDir() ){
@@ -1101,20 +1104,11 @@ void OFileSelector::cdUP()
     m_currentDir = dir.absPath();
     reparse();
     int count = m_location->count();
-    insertLocationPath( m_currentDir,count );
-    m_location->setCurrentItem( indexFromString(m_currentDir ));
+    insertLocationPath( m_currentDir, count);
+    m_location->setCurrentItem( indexByString( m_location, m_currentDir));
 //this wont work in all instances
       // FIXME
   }
-}
-
-int OFileSelector::indexFromString(const QString &str) {
-
-    for(int i=0;i<  m_location->count();i++) {
-        if(str == m_location->text(i))
-            return i;
-    }
-    return 0;
 }
 
 void OFileSelector::slotHome()
@@ -1134,5 +1128,10 @@ void OFileSelector::slotNavigate()
 
 void OFileSelector::locationComboActivated(const QString & file ) {
     cd(file.left(file.find("<-",0,TRUE)));
+    reparse();
+}
+
+void OFileSelector::locationComboChanged() {
+    cd( m_location->lineEdit()->text());
     reparse();
 }

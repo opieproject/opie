@@ -192,7 +192,7 @@ class OFileSelector : public QWidget {
   void slotMimeCheck(const QString & );
   void locationComboActivated(const QString & );
   void insertLocationPath(const QString &, int);
-  int indexFromString(const QString &);
+  void locationComboChanged();
  protected:
   void init();
   void updateMimes();
@@ -211,7 +211,7 @@ class OFileSelector : public QWidget {
 
   QString m_currentDir;
   QString m_name;
-  QStringList m_mimetypes;
+  QStringList m_mimetypes, requestedMimeTypesList;
 
   FileSelector *m_select;
   QWidgetStack *m_stack;
