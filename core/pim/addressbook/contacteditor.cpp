@@ -449,9 +449,9 @@ void ContactEditor::init() {
 	cmbChooserField2->insertStringList( *slChooserNames );
 	cmbChooserField3->insertStringList( *slChooserNames );
 
-	cmbChooserField1->setCurrentItem( 1 );
-	cmbChooserField2->setCurrentItem( 2 );
-	cmbChooserField3->setCurrentItem( 3 );
+	cmbChooserField1->setCurrentItem( 0 );
+	cmbChooserField2->setCurrentItem( 1 );
+	cmbChooserField3->setCurrentItem( 2 );
 	
 	connect( btnFullName, SIGNAL(clicked()), this, SLOT(slotName()) );
 			
@@ -959,6 +959,7 @@ void ContactEditor::setEntry( const Contact &entry ) {
 
 	cleanupFields();
 
+	
 	ent = entry;
 
 	useFullName = FALSE;
@@ -1014,6 +1015,11 @@ void ContactEditor::setEntry( const Contact &entry ) {
 		(*slBusinessAddress)[5] = ent.businessZip();
 	}
 
+	if (hasCountry) {
+		(*slHomeAddress)[6] = ent.homeCountry();
+		(*slBusinessAddress)[6] = ent.businessCountry();
+	}
+
 	QStringList::ConstIterator it;
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries->begin(); it != slDynamicEntries->end(); ++it, ++itLE) {
@@ -1055,16 +1061,16 @@ void ContactEditor::setEntry( const Contact &entry ) {
 	QStringList::Iterator itV;
 	for ( it = slChooserNames->begin(), itV = slChooserValues->begin(); it != slChooserNames->end(); ++it, ++itV ) {
 
-		if ( *it == "Business Phone" )
+		if ( *it == "Business Phone" || *it == "Work Phone" )
 			*itV = ent.businessPhone();
 /*
 		if ( *it == "Business 2 Phone" )
 			*itV = ent.business2Phone();
 */
-		if ( *it == "Business Fax" )
+		if ( *it == "Business Fax" || *it == "Work Fax" )
 			*itV = ent.businessFax();
 
-		if ( *it == "Business Mobile" )
+		if ( *it == "Business Mobile" || *it == "work Mobile" )
 			*itV = ent.businessMobile();
 /*
 		if ( *it == "Company Phone" )
@@ -1097,7 +1103,7 @@ void ContactEditor::setEntry( const Contact &entry ) {
 		if ( *it == "Other Phone" )
 			*itV = ent.otherPhone();
 */
-		if ( *it == "Business Pager" )
+		if ( *it == "Business Pager" || *it == "Work Pager" )
 			*itV = ent.businessPager();
 /*
 		if ( *it == "Home Pager")
@@ -1120,7 +1126,7 @@ void ContactEditor::setEntry( const Contact &entry ) {
 */
 		if ( *it == "Home Web Page" )
 			*itV = ent.homeWebpage();
-		if ( *it == "Business Web Page" )
+		if ( *it == "Business Web Page" || *it == "Work Web Page" )
 			*itV = ent.businessWebpage();
 
 
@@ -1132,6 +1138,12 @@ void ContactEditor::setEntry( const Contact &entry ) {
 	cmbGender->setCurrentItem( gender.toInt() );
 
 	txtNote->setText( ent.notes() );
+
+	slotCmbChooser1Change( cmbChooserField1->currentItem() );
+	slotCmbChooser2Change( cmbChooserField2->currentItem() );
+	slotCmbChooser3Change( cmbChooserField3->currentItem() );
+
+	slotAddressTypeChange( cmbAddress->currentItem() );
 
 }
 
@@ -1198,6 +1210,11 @@ void ContactEditor::saveEntry() {
 		ent.setHomeZip( (*slHomeAddress)[5] );
 		ent.setBusinessZip( (*slBusinessAddress)[5] );
 	}
+	
+	if (hasCountry) {
+		ent.setHomeCountry( (*slHomeAddress)[6] );
+		ent.setBusinessCountry( (*slBusinessAddress)[6] );
+	}
 
 	QStringList::ConstIterator it;
 	QListIterator<QLineEdit> itLE( listValue );
@@ -1240,26 +1257,31 @@ void ContactEditor::saveEntry() {
 	QStringList::ConstIterator itV;
 	for ( it = slChooserNames->begin(), itV = slChooserValues->begin(); it != slChooserNames->end(); ++it, ++itV ) {
 
-		if ( *it == "Business Phone" )
+		if ( *it == "Business Phone" || *it == "Work Phone" )
 			ent.setBusinessPhone( *itV );
 /*
 		if ( *it == "Business 2 Phone" )
 			ent.setBusiness2Phone( *itV );
 */
-		if ( *it == "Business Fax" )
+		if ( *it == "Business Fax" || *it == "Work Fax" )
 			ent.setBusinessFax( *itV );
 
-		if ( *it == "Business Mobile" )
+		if ( *it == "Business Mobile" || *it == "Work Mobile" )
 			ent.setBusinessMobile( *itV );
 /*
 		if ( *it == "Company Phone" )
 			ent.setCompanyPhone( *itV );
 */
-		if ( *it == "Default Email" )
-			ent.setDefaultEmail( *itV );
+		//if ( *it == "Default Email" )
+			//ent.setDefaultEmail( *itV );
 
-		if ( *it == "Emails" )
+		if ( *it == "Emails" ) {
+			QString allemail;
+			QString defaultmail;
+			parseEmailFrom( *itV, defaultmail, allemail );
+			ent.setDefaultEmail(  defaultmail );
 			ent.setEmails( *itV );
+		}
 
 		if ( *it == "Home Phone" )
 			ent.setHomePhone( *itV );
@@ -1282,7 +1304,7 @@ void ContactEditor::saveEntry() {
 		if ( *it == "Other Phone" )
 			ent.setOtherPhone( *itV );
 */
-		if ( *it == "Business Pager" )
+		if ( *it == "Business Pager" || *it == "Work Pager" )
 			ent.setBusinessPager( *itV );
 /*
 		if ( *it == "Home Pager" )
@@ -1305,7 +1327,7 @@ void ContactEditor::saveEntry() {
 */
 		if ( *it == "Home Web Page" )
 			ent.setHomeWebpage( *itV );
-		if ( *it == "Business Web Page" )
+		if ( *it == "Business Web Page" || *it == "Work Web Page" )
 			ent.setBusinessWebpage( *itV );
 
 
