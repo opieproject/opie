@@ -101,14 +101,14 @@ bool BatteryStatus::getProcApmStatusIpaq() {
   ipaqPercent = perc1.toInt();
 
   if (perc2.isEmpty()) {
-    perc2 = "no data";
+    perc2 = tr("no data");
   } else {
     perc2 += " %";
   }
 
 
   if (sec2 == "0" || sec2 == "" || sec2.isEmpty()) {
-    sec2 = "no data";
+    sec2 = tr("no data");
   } else {
     sec2 += " min";
   }
@@ -227,14 +227,14 @@ void BatteryStatus::paintEvent( QPaintEvent * ) {
 
   if ( ODevice::inst ( )-> series ( ) == Model_iPAQ ) {
 
-      p.drawText(15, 50, tr ("Ipaq  " + ipaqChem));
+      p.drawText(15, 50, tr ("Ipaq  ") + ipaqChem);
 
       QString jacketMsg;
       if (bat2) {
           p.setPen(black);
           p.drawText(10,220, tr("Percentage battery remaining: ") + perc2 + " " + jackStatus);
           p.drawText(10,240, tr("Battery time remaining: ") + sec2);
-          jacketMsg = tr("Jacket  " + jackChem);
+          jacketMsg = tr("Jacket  ") + jackChem;
       } else {
           jackPercent = 0;
           jacketMsg = tr("No jacket with battery inserted");
