@@ -1928,7 +1928,7 @@ bool SIMpad::setDisplayBrightness ( int bright )
 	if ( bright > 255 )
 		bright = 255;
 	if ( bright < 1 )
-		return setDisplayStatus( false );
+		bright = 0;
 
 	if (( fd = ::open ( SIMPAD_BACKLIGHT_CONTROL, O_WRONLY )) >= 0 ) {
 		int value = 255 - bright;
