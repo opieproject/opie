@@ -1,4 +1,108 @@
-diff -ru qt-2.3.7/include/qapplication.h qte-2.3.7/include/qapplication.h
+Binary files qt-2.3.7/bin/moc and qte-2.3.7/bin/moc differ
+Binary files qt-2.3.7/bin/uic and qte-2.3.7/bin/uic differ
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/configs/darwin-generic-g++-shared qte-2.3.7/configs/darwin-generic-g++-shared
+--- qt-2.3.7/configs/darwin-generic-g++-shared	Thu Jan  1 01:00:00 1970
++++ qte-2.3.7/configs/darwin-generic-g++-shared	Mon Oct 27 14:27:25 2003
+@@ -0,0 +1,98 @@
++# Compiling
++INTERFACE_DECL_PATH 	= .
++SYSCONF_CXX		= g++
++SYSCONF_CC		= gcc
++DASHCROSS		= 
++
++# Compiling with support libraries
++SYSCONF_CXXFLAGS_X11	= -I/usr/X11R6/include
++SYSCONF_CXXFLAGS_QT	= -I$(QTDIR)/include
++SYSCONF_CXXFLAGS_QTOPIA	= -I$(QPEDIR)/include
++SYSCONF_CXXFLAGS_OPENGL	= -I/usr/X11R6/include
++
++# Compiling YACC output
++SYSCONF_CXXFLAGS_YACC     = -Wno-unused -Wno-parentheses
++
++# Linking with support libraries
++SYSCONF_RPATH_X11	= -L/usr/X11R6/lib
++SYSCONF_RPATH_QT	= -L$(QTDIR)/lib
++SYSCONF_RPATH_QTOPIA	= -L$(QPEDIR)/lib
++SYSCONF_RPATH_OPENGL	= -L/usr/X11R6/lib
++
++# Linking with support libraries
++# X11
++SYSCONF_LFLAGS_X11	= -L/usr/X11R6/lib
++SYSCONF_LIBS_X11	= 
++# Qt, Qt+OpenGL
++SYSCONF_LFLAGS_QT	= -L$(QTDIR)/lib
++SYSCONF_LFLAGS_QTOPIA	= -L$(QPEDIR)/lib
++SYSCONF_LIBS_QT		= -lqte$(QT_THREAD_SUFFIX)
++SYSCONF_LIBS_QT_OPENGL	= 
++SYSCONF_LIBS_QTOPIA	= -lqtopia
++# OpenGL
++SYSCONF_LFLAGS_OPENGL	= -L/usr/X11R6/lib
++SYSCONF_LIBS_OPENGL	= -lGLU -lGL -lXmu
++# Yacc
++SYSCONF_LIBS_YACC	= 
++
++# Linking applications
++SYSCONF_LINK		= g++
++SYSCONF_LFLAGS		= 
++SYSCONF_LIBS		= 
++
++# Link flags for shared objects
++SYSCONF_LFLAGS_SHOBJ	= -dynamiclib
++
++# Flags for threading
++SYSCONF_CFLAGS_THREAD	= -pthread -D_THREAD_SAFE
++SYSCONF_CXXFLAGS_THREAD	= -pthread -D_THREAD_SAFE
++SYSCONF_LFLAGS_THREAD	= -pthread
++SYSCONF_LIBS_THREAD	= 
++
++# Meta-object compiler
++SYSCONF_MOC		= $(QTDIR)/bin/moc
++
++# UI compiler
++SYSCONF_UIC		= $(QTDIR)/bin/uic
++
++# Linking shared libraries
++#   - Build the $(TARGET) library, eg. lib$(TARGET).so.2.2.2
++#   - Place target in $(DESTDIR) - which has a trailing /
++#   - Usually needs to incorporate $(VER_MAJ), $(VER_MIN) and $(VER_PATCH)
++#
++SYSCONF_LINK_SHLIB	= g++
++SYSCONF_LINK_TARGET_SHARED	= lib$(TARGET).dylib.$(VER_MAJ).$(VER_MIN).$(VER_PATCH)
++SYSCONF_LINK_LIB_SHARED	=  $(SYSCONF_LINK_SHLIB) -dynamiclib  \
++				     $(LFLAGS) -o $(SYSCONF_LINK_TARGET_SHARED) \
++				     $(OBJECTS) $(OBJMOC) $(LIBS) && \
++				 mv $(SYSCONF_LINK_TARGET_SHARED) $(DESTDIR); \
++				 cd $(DESTDIR) && \
++				 rm -f lib$(TARGET).dylib lib$(TARGET).dylib.$(VER_MAJ) lib$(TARGET).dylib.$(VER_MAJ).$(VER_MIN); \
++				 ln -s $(SYSCONF_LINK_TARGET_SHARED) lib$(TARGET).dylib; \
++				 ln -s $(SYSCONF_LINK_TARGET_SHARED) lib$(TARGET).dylib.$(VER_MAJ); \
++				 ln -s $(SYSCONF_LINK_TARGET_SHARED) lib$(TARGET).dylib.$(VER_MAJ).$(VER_MIN)
++
++# Linking static libraries
++#   - Build the $(TARGET) library, eg. lib$(TARGET).a
++#   - Place target in $(DESTDIR) - which has a trailing /
++#
++SYSCONF_AR		= ar cqs
++SYSCONF_LINK_TARGET_STATIC = lib$(TARGET).a
++SYSCONF_LINK_LIB_STATIC	= rm -f $(DESTDIR)$(SYSCONF_LINK_TARGET_STATIC) ; \
++				 $(SYSCONF_AR) $(DESTDIR)$(SYSCONF_LINK_TARGET_STATIC) $(OBJECTS) $(OBJMOC) 
++# Compiling application source
++SYSCONF_CXXFLAGS	= -pipe -fno-exceptions -DQWS -fno-rtti -fno-exceptions -DQT_NO_QWS_LINUXFB -DQT_NO_QWS_TRANSFORMED -O0 -Wall -W -DNO_DEBUG
++SYSCONF_CFLAGS		= -pipe -fno-exceptions -O2 -Wall -W
++# Default link type (static linking is still be used where required)
++SYSCONF_LINK_LIB	= $(SYSCONF_LINK_LIB_SHARED)
++SYSCONF_LINK_TARGET	= $(SYSCONF_LINK_TARGET_SHARED)
++# Compiling library source
++SYSCONF_CXXFLAGS_LIB	= -fPIC
++SYSCONF_CFLAGS_LIB	= -fPIC
++# Compiling shared-object source
++SYSCONF_CXXFLAGS_SHOBJ	= -fPIC
++SYSCONF_CFLAGS_SHOBJ	= -fPIC
++# Linking Qt
++SYSCONF_LIBS_QTLIB	= $(SYSCONF_LFLAGS_X11) $(QT_LIBS_MT) $(QT_LIBS_OPT)
++# Linking Qt applications
++SYSCONF_LIBS_QTAPP	= 
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/include/qapplication.h qte-2.3.7/include/qapplication.h
 --- qt-2.3.7/include/qapplication.h	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/include/qapplication.h	Mon Oct 27 14:21:28 2003
 @@ -61,6 +61,10 @@
@@ -56,9 +160,113 @@ diff -ru qt-2.3.7/include/qapplication.h qte-2.3.7/include/qapplication.h
  #endif
  #endif
  
-diff -ru qt-2.3.7/include/qconfig.h qte-2.3.7/include/qconfig.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/include/qconfig-qpe.h qte-2.3.7/include/qconfig-qpe.h
+--- qt-2.3.7/include/qconfig-qpe.h	Thu Jan  1 01:00:00 1970
++++ qte-2.3.7/include/qconfig-qpe.h	Sun Dec 14 12:48:43 2003
+@@ -0,0 +1,100 @@
++/**********************************************************************
++** Copyright (C) 2000 Trolltech AS.  All rights reserved.
++**
++** This file is part of Qtopia Environment.
++**
++** This file may be distributed and/or modified under the terms of the
++** GNU General Public License version 2 as published by the Free Software
++** Foundation and appearing in the file LICENSE.GPL included in the
++** packaging of this file.
++**
++** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
++** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
++**
++** See http://www.trolltech.com/gpl/ for GPL licensing information.
++**
++** Contact info@trolltech.com if any conditions of this licensing are
++** not clear to you.
++**
++**********************************************************************/
++#ifndef QT_H
++#endif // QT_H
++
++// Empty leaves all features enabled.  See doc/html/features.html for choices.
++
++// Note that disabling some features will produce a libqt that is not
++// compatible with other libqt builds. Such modifications are only
++// supported on Qt/Embedded where reducing the library size is important
++// and where the application-suite is often a fixed set.
++
++#ifndef QT_DLL
++#define QT_DLL // Internal
++#endif
++
++#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_SL5XXX)
++# define QT_NO_QWS_CURSOR
++# define QT_NO_QWS_MOUSE_AUTO
++#endif
++#ifndef QT_NO_CODECS
++#define QT_NO_CODECS
++#endif
++#define QT_NO_UNICODETABLES
++//#define QT_NO_IMAGEIO_BMP
++#define QT_NO_IMAGEIO_PPM
++//#define QT_NO_ASYNC_IO
++//#define QT_NO_ASYNC_IMAGE_IO
++#define QT_NO_FREETYPE
++#define QT_NO_BDF
++//#define QT_NO_FONTDATABASE
++#define QT_NO_DRAGANDDROP
++//#define QT_NO_CLIPBOARD
++#define QT_NO_PROPERTIES
++#define QT_NO_NETWORKPROTOCOL
++
++#define QT_NO_IMAGE_TEXT
++
++//#define QT_NO_TOOLTIP
++#define QT_NO_COLORNAMES
++#define QT_NO_TRANSFORMATIONS
++#define QT_NO_TRANSLATION_BUILDER
++#define QT_NO_COMPLEXTEXT
++#define QT_NO_PRINTER
++#define QT_NO_PICTURE
++//#define QT_NO_ICONVIEW
++#define QT_NO_DIAL
++#define QT_NO_SIZEGRIP
++#define QT_NO_WORKSPACE
++//#define QT_NO_TABLE
++//#define QT_NO_ACTION
++//#define QT_NO_SETTINGS
++#define QT_NO_STYLE_POCKETPC
++#ifndef QT_NO_STYLE_AQUA
++# define QT_NO_STYLE_AQUA
++#endif
++#define QT_NO_STYLE_MOTIF
++#define QT_NO_STYLE_PLATINUM
++#define QT_NO_FILEDIALOG
++#define QT_NO_FONTDIALOG
++#define QT_NO_PRINTDIALOG
++#define QT_NO_COLORDIALOG
++#define QT_NO_INPUTDIALOG
++//#define QT_NO_MESSAGEBOX
++#define QT_NO_PROGRESSDIALOG
++//#define QT_NO_TABDIALOG
++#define QT_NO_WIZARD
++#define QT_NO_EFFECTS
++//#define QT_NO_COMPONENT
++#define QT_NO_DOM
++#define QT_NO_SEMIMODAL
++//#define QT_NO_PROGRESSBAR
++#define QT_NO_SPLITTER
++
++//#define QT_NO_QWS_SAVEFONTS
++//#define QT_NO_QWS_PROPERTIES
++
++#define QT_NO_QWS_BEOS_WM_STYLE
++#define QT_NO_QWS_KDE2_WM_STYLE
++#define QT_NO_QWS_KDE_WM_STYLE
++#define QT_NO_QWS_WINDOWS_WM_STYLE
++
++#define QT_NO_SOUND
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/include/qconfig.h qte-2.3.7/include/qconfig.h
 --- qt-2.3.7/include/qconfig.h	Fri Jan 26 14:43:06 2001
-+++ qte-2.3.7/include/qconfig.h	Sun Nov 16 13:35:10 2003
++++ qte-2.3.7/include/qconfig.h	Thu Dec 11 12:54:20 2003
 @@ -1,3 +1,26 @@
 +// Copied from qconfig-qpe.h
 +/**********************************************************************
@@ -159,7 +367,7 @@ diff -ru qt-2.3.7/include/qconfig.h qte-2.3.7/include/qconfig.h
 +
 +#define QT_NO_SOUND
 \ No newline at end of file
-diff -ru qt-2.3.7/include/qfontdatabase.h qte-2.3.7/include/qfontdatabase.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/include/qfontdatabase.h qte-2.3.7/include/qfontdatabase.h
 --- qt-2.3.7/include/qfontdatabase.h	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/include/qfontdatabase.h	Mon Oct 27 14:21:28 2003
 @@ -59,6 +59,10 @@
@@ -191,9 +399,69 @@ diff -ru qt-2.3.7/include/qfontdatabase.h qte-2.3.7/include/qfontdatabase.h
      QStringList styles( const QString &family,
  			const QString &charSet = QString::null ) const;
      QStringList charSets( const QString &familyName,
-diff -ru qt-2.3.7/include/qmodules.h qte-2.3.7/include/qmodules.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/include/qgifimageformat_p.h qte-2.3.7/include/qgifimageformat_p.h
+--- qt-2.3.7/include/qgifimageformat_p.h	Thu Jul 17 03:20:24 2003
++++ qte-2.3.7/include/qgifimageformat_p.h	Thu Jan  1 01:00:00 1970
+@@ -1,56 +0,0 @@
+-/****************************************************************************
+-** $Id: qte237-all-macosx.patch,v 1.3 2003-12-15 09:42:43 eilers Exp $
+-**
+-** Implementation of gif image/movie loading classes
+-**
+-** Created : 970617
+-**
+-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+-**
+-** This file is part of the kernel module of the Qt GUI Toolkit.
+-**
+-** This file may be distributed under the terms of the Q Public License
+-** as defined by Trolltech AS of Norway and appearing in the file
+-** LICENSE.QPL included in the packaging of this file.
+-**
+-** This file may be distributed and/or modified under the terms of the
+-** GNU General Public License version 2 as published by the Free Software
+-** Foundation and appearing in the file LICENSE.GPL included in the
+-** packaging of this file.
+-**
+-** Licensees holding valid Qt Enterprise Edition or Qt Professional Edition
+-** licenses may use this file in accordance with the Qt Commercial License
+-** Agreement provided with the Software.
+-**
+-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+-**
+-** See http://www.trolltech.com/pricing.html or email sales@trolltech.com for
+-**   information about Qt Commercial License Agreements.
+-** See http://www.trolltech.com/qpl/ for QPL licensing information.
+-** See http://www.trolltech.com/gpl/ for GPL licensing information.
+-**
+-** Contact info@trolltech.com if any conditions of this licensing are
+-** not clear to you.
+-**
+-**********************************************************************/
+-
+-#ifndef QT_H
+-#include "qasyncimageio.h"
+-#include "qgif.h"
+-#endif // QT_H
+-
+-#ifndef QT_NO_ASYNC_IMAGE_IO
+-
+-// See qgif.h for important information regarding this option
+-#if defined(QT_BUILTIN_GIF_READER) && QT_BUILTIN_GIF_READER == 1
+-
+-class Q_EXPORT QGIFFormatType : public QImageFormatType
+-{
+-    QImageFormat* decoderFor(const uchar* buffer, int length);
+-    const char* formatName() const;
+-};
+-
+-#endif // QT_BUILTIN_GIF_READER
+-
+-#endif // QT_NO_ASYNC_IMAGE_IO
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/include/qmodules.h qte-2.3.7/include/qmodules.h
 --- qt-2.3.7/include/qmodules.h	Fri Aug 31 17:00:56 2001
-+++ qte-2.3.7/include/qmodules.h	Sun Nov 16 13:34:58 2003
++++ qte-2.3.7/include/qmodules.h	Thu Dec 11 12:53:57 2003
 @@ -1,14 +1,12 @@
 -#ifndef QT_H
 -#endif // QT_H
@@ -213,7 +481,11 @@ diff -ru qt-2.3.7/include/qmodules.h qte-2.3.7/include/qmodules.h
  #define QT_MODULE_XML
 -#define QT_MODULE_NETWORK
 +#define QT_MODULE_OPENGL
-diff -ru qt-2.3.7/src/kernel/qapplication.cpp qte-2.3.7/src/kernel/qapplication.cpp
+Binary files qt-2.3.7/lib/libqte.dylib and qte-2.3.7/lib/libqte.dylib differ
+Binary files qt-2.3.7/lib/libqte.dylib.2 and qte-2.3.7/lib/libqte.dylib.2 differ
+Binary files qt-2.3.7/lib/libqte.dylib.2.3 and qte-2.3.7/lib/libqte.dylib.2.3 differ
+Binary files qt-2.3.7/lib/libqte.dylib.2.3.7 and qte-2.3.7/lib/libqte.dylib.2.3.7 differ
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qapplication.cpp qte-2.3.7/src/kernel/qapplication.cpp
 --- qt-2.3.7/src/kernel/qapplication.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qapplication.cpp	Mon Oct 27 14:21:28 2003
 @@ -35,6 +35,8 @@
@@ -298,7 +570,7 @@ diff -ru qt-2.3.7/src/kernel/qapplication.cpp qte-2.3.7/src/kernel/qapplication.
  			    const char* className )
  {
      bool all = FALSE;
-diff -ru qt-2.3.7/src/kernel/qapplication.h qte-2.3.7/src/kernel/qapplication.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qapplication.h qte-2.3.7/src/kernel/qapplication.h
 --- qt-2.3.7/src/kernel/qapplication.h	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qapplication.h	Mon Oct 27 14:21:28 2003
 @@ -61,6 +61,10 @@
@@ -356,7 +628,7 @@ diff -ru qt-2.3.7/src/kernel/qapplication.h qte-2.3.7/src/kernel/qapplication.h
  #endif
  #endif
  
-diff -ru qt-2.3.7/src/kernel/qapplication_qws.cpp qte-2.3.7/src/kernel/qapplication_qws.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qapplication_qws.cpp qte-2.3.7/src/kernel/qapplication_qws.cpp
 --- qt-2.3.7/src/kernel/qapplication_qws.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qapplication_qws.cpp	Mon Oct 27 14:21:28 2003
 @@ -2804,6 +2804,11 @@
@@ -371,7 +643,7 @@ diff -ru qt-2.3.7/src/kernel/qapplication_qws.cpp qte-2.3.7/src/kernel/qapplicat
      if ( d ) {
  	delete qws_decoration;
  	qws_decoration = d;
-diff -ru qt-2.3.7/src/kernel/qfontdatabase.cpp qte-2.3.7/src/kernel/qfontdatabase.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qfontdatabase.cpp qte-2.3.7/src/kernel/qfontdatabase.cpp
 --- qt-2.3.7/src/kernel/qfontdatabase.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qfontdatabase.cpp	Mon Oct 27 14:21:28 2003
 @@ -35,6 +35,8 @@
@@ -397,7 +669,7 @@ diff -ru qt-2.3.7/src/kernel/qfontdatabase.cpp qte-2.3.7/src/kernel/qfontdatabas
                                                   const QString &style,
                                                   const QString &charSet )
  {
-diff -ru qt-2.3.7/src/kernel/qfontdatabase.h qte-2.3.7/src/kernel/qfontdatabase.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qfontdatabase.h qte-2.3.7/src/kernel/qfontdatabase.h
 --- qt-2.3.7/src/kernel/qfontdatabase.h	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qfontdatabase.h	Mon Oct 27 14:21:28 2003
 @@ -59,6 +59,10 @@
@@ -429,7 +701,7 @@ diff -ru qt-2.3.7/src/kernel/qfontdatabase.h qte-2.3.7/src/kernel/qfontdatabase.
      QStringList styles( const QString &family,
  			const QString &charSet = QString::null ) const;
      QStringList charSets( const QString &familyName,
-diff -ru qt-2.3.7/src/kernel/qgfx_qws.cpp qte-2.3.7/src/kernel/qgfx_qws.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qgfx_qws.cpp qte-2.3.7/src/kernel/qgfx_qws.cpp
 --- qt-2.3.7/src/kernel/qgfx_qws.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qgfx_qws.cpp	Mon Oct 27 14:27:25 2003
 @@ -32,7 +32,7 @@
@@ -441,7 +713,7 @@ diff -ru qt-2.3.7/src/kernel/qgfx_qws.cpp qte-2.3.7/src/kernel/qgfx_qws.cpp
  #include <sys/types.h>
  #include <dirent.h>
  #include <stdlib.h>
-diff -ru qt-2.3.7/src/kernel/qgfxraster_qws.cpp qte-2.3.7/src/kernel/qgfxraster_qws.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qgfxraster_qws.cpp qte-2.3.7/src/kernel/qgfxraster_qws.cpp
 --- qt-2.3.7/src/kernel/qgfxraster_qws.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qgfxraster_qws.cpp	Mon Oct 27 14:27:25 2003
 @@ -75,7 +75,11 @@
@@ -502,7 +774,7 @@ diff -ru qt-2.3.7/src/kernel/qgfxraster_qws.cpp qte-2.3.7/src/kernel/qgfxraster_
      // ### fix for 8bpp
      // This seems to be reliable now, at least for 16bpp
  
-diff -ru qt-2.3.7/src/kernel/qkeyboard_qws.cpp qte-2.3.7/src/kernel/qkeyboard_qws.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qkeyboard_qws.cpp qte-2.3.7/src/kernel/qkeyboard_qws.cpp
 --- qt-2.3.7/src/kernel/qkeyboard_qws.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qkeyboard_qws.cpp	Mon Oct 27 14:42:11 2003
 @@ -69,7 +69,7 @@
@@ -572,7 +844,45 @@ diff -ru qt-2.3.7/src/kernel/qkeyboard_qws.cpp qte-2.3.7/src/kernel/qkeyboard_qw
  	ioctl(kbdFD, KDSKBMODE, K_XLATE);
  #endif
  	tcsetattr(kbdFD, TCSANOW, &origTermData);
-diff -ru qt-2.3.7/src/kernel/qlock_qws.cpp qte-2.3.7/src/kernel/qlock_qws.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qkeyboard_qws.cpp.rej qte-2.3.7/src/kernel/qkeyboard_qws.cpp.rej
+--- qt-2.3.7/src/kernel/qkeyboard_qws.cpp.rej	Thu Jan  1 01:00:00 1970
++++ qte-2.3.7/src/kernel/qkeyboard_qws.cpp.rej	Mon Oct 27 14:27:25 2003
+@@ -0,0 +1,34 @@
++***************
++*** 1023,1029 ****
++      struct termios termdata;
++      tcgetattr( kbdFD, &termdata );
++  
++- #if !defined(_OS_FREEBSD_) && !defined(_OS_SOLARIS_)
++      ioctl(kbdFD, KDSKBMODE, K_RAW);
++  #endif
++  
++--- 1023,1029 ----
++      struct termios termdata;
++      tcgetattr( kbdFD, &termdata );
++  
+++ #if !defined(_OS_MACX_) && !defined(_OS_FREEBSD_) && !defined(_OS_SOLARIS_)
++      ioctl(kbdFD, KDSKBMODE, K_RAW);
++  #endif
++  
++***************
++*** 1039,1045 ****
++  
++      signal(VTSWITCHSIG, vtSwitchHandler);
++  
++- #if !defined(_OS_FREEBSD_) && !defined(_OS_SOLARIS_)
++      struct vt_mode vtMode;
++      ioctl(kbdFD, VT_GETMODE, &vtMode);
++  
++--- 1039,1045 ----
++  
++      signal(VTSWITCHSIG, vtSwitchHandler);
++  
+++ #if !defined(_OS_MACX_) && !defined(_OS_FREEBSD_) && !defined(_OS_SOLARIS_)
++      struct vt_mode vtMode;
++      ioctl(kbdFD, VT_GETMODE, &vtMode);
++  
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qlock_qws.cpp qte-2.3.7/src/kernel/qlock_qws.cpp
 --- qt-2.3.7/src/kernel/qlock_qws.cpp	Thu Jul 17 03:20:25 2003
 +++ qte-2.3.7/src/kernel/qlock_qws.cpp	Mon Oct 27 14:27:25 2003
 @@ -38,7 +38,7 @@
@@ -584,7 +894,7 @@ diff -ru qt-2.3.7/src/kernel/qlock_qws.cpp qte-2.3.7/src/kernel/qlock_qws.cpp
  /* union semun is defined by including <sys/sem.h> */
  #else
  /* according to X/OPEN we have to define it ourselves */
-diff -ru qt-2.3.7/src/kernel/qwindowsystem_qws.cpp qte-2.3.7/src/kernel/qwindowsystem_qws.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qwindowsystem_qws.cpp qte-2.3.7/src/kernel/qwindowsystem_qws.cpp
 --- qt-2.3.7/src/kernel/qwindowsystem_qws.cpp	Thu Jul 17 03:20:26 2003
 +++ qte-2.3.7/src/kernel/qwindowsystem_qws.cpp	Mon Oct 27 14:27:25 2003
 @@ -844,6 +844,18 @@
@@ -623,7 +933,7 @@ diff -ru qt-2.3.7/src/kernel/qwindowsystem_qws.cpp qte-2.3.7/src/kernel/qwindows
  	if( mount(0, "/var/shm", "shm", 0, 0) ) {
  	    /* This just confuses people with 2.2 kernels
  	    if ( errno != EBUSY )
-diff -ru qt-2.3.7/src/kernel/qwsmouse_qws.cpp qte-2.3.7/src/kernel/qwsmouse_qws.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/kernel/qwsmouse_qws.cpp qte-2.3.7/src/kernel/qwsmouse_qws.cpp
 --- qt-2.3.7/src/kernel/qwsmouse_qws.cpp	Thu Jul 17 03:20:26 2003
 +++ qte-2.3.7/src/kernel/qwsmouse_qws.cpp	Mon Oct 27 14:27:25 2003
 @@ -336,7 +336,7 @@
@@ -644,7 +954,8 @@ diff -ru qt-2.3.7/src/kernel/qwsmouse_qws.cpp qte-2.3.7/src/kernel/qwsmouse_qws.
  		tty.c_line = 0;
  #endif // _OS_FREEBSD_
  		tty.c_cc[VTIME] = 0;
-diff -ru qt-2.3.7/src/network/qdns.cpp qte-2.3.7/src/network/qdns.cpp
+Binary files qt-2.3.7/src/moc/moc and qte-2.3.7/src/moc/moc differ
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/network/qdns.cpp qte-2.3.7/src/network/qdns.cpp
 --- qt-2.3.7/src/network/qdns.cpp	Thu Jul 17 03:20:26 2003
 +++ qte-2.3.7/src/network/qdns.cpp	Sun Nov 16 13:44:27 2003
 @@ -1991,7 +1991,7 @@
@@ -656,9 +967,113 @@ diff -ru qt-2.3.7/src/network/qdns.cpp qte-2.3.7/src/network/qdns.cpp
      int i;
      // find the name servers to use
      for( i=0; i < MAXNS && i < _res.nscount; i++ ) {
-diff -ru qt-2.3.7/src/tools/qconfig.h qte-2.3.7/src/tools/qconfig.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/tools/qconfig-qpe.h qte-2.3.7/src/tools/qconfig-qpe.h
+--- qt-2.3.7/src/tools/qconfig-qpe.h	Thu Jan  1 01:00:00 1970
++++ qte-2.3.7/src/tools/qconfig-qpe.h	Sun Dec 14 12:48:43 2003
+@@ -0,0 +1,100 @@
++/**********************************************************************
++** Copyright (C) 2000 Trolltech AS.  All rights reserved.
++**
++** This file is part of Qtopia Environment.
++**
++** This file may be distributed and/or modified under the terms of the
++** GNU General Public License version 2 as published by the Free Software
++** Foundation and appearing in the file LICENSE.GPL included in the
++** packaging of this file.
++**
++** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
++** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
++**
++** See http://www.trolltech.com/gpl/ for GPL licensing information.
++**
++** Contact info@trolltech.com if any conditions of this licensing are
++** not clear to you.
++**
++**********************************************************************/
++#ifndef QT_H
++#endif // QT_H
++
++// Empty leaves all features enabled.  See doc/html/features.html for choices.
++
++// Note that disabling some features will produce a libqt that is not
++// compatible with other libqt builds. Such modifications are only
++// supported on Qt/Embedded where reducing the library size is important
++// and where the application-suite is often a fixed set.
++
++#ifndef QT_DLL
++#define QT_DLL // Internal
++#endif
++
++#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_SL5XXX)
++# define QT_NO_QWS_CURSOR
++# define QT_NO_QWS_MOUSE_AUTO
++#endif
++#ifndef QT_NO_CODECS
++#define QT_NO_CODECS
++#endif
++#define QT_NO_UNICODETABLES
++//#define QT_NO_IMAGEIO_BMP
++#define QT_NO_IMAGEIO_PPM
++//#define QT_NO_ASYNC_IO
++//#define QT_NO_ASYNC_IMAGE_IO
++#define QT_NO_FREETYPE
++#define QT_NO_BDF
++//#define QT_NO_FONTDATABASE
++#define QT_NO_DRAGANDDROP
++//#define QT_NO_CLIPBOARD
++#define QT_NO_PROPERTIES
++#define QT_NO_NETWORKPROTOCOL
++
++#define QT_NO_IMAGE_TEXT
++
++//#define QT_NO_TOOLTIP
++#define QT_NO_COLORNAMES
++#define QT_NO_TRANSFORMATIONS
++#define QT_NO_TRANSLATION_BUILDER
++#define QT_NO_COMPLEXTEXT
++#define QT_NO_PRINTER
++#define QT_NO_PICTURE
++//#define QT_NO_ICONVIEW
++#define QT_NO_DIAL
++#define QT_NO_SIZEGRIP
++#define QT_NO_WORKSPACE
++//#define QT_NO_TABLE
++//#define QT_NO_ACTION
++//#define QT_NO_SETTINGS
++#define QT_NO_STYLE_POCKETPC
++#ifndef QT_NO_STYLE_AQUA
++# define QT_NO_STYLE_AQUA
++#endif
++#define QT_NO_STYLE_MOTIF
++#define QT_NO_STYLE_PLATINUM
++#define QT_NO_FILEDIALOG
++#define QT_NO_FONTDIALOG
++#define QT_NO_PRINTDIALOG
++#define QT_NO_COLORDIALOG
++#define QT_NO_INPUTDIALOG
++//#define QT_NO_MESSAGEBOX
++#define QT_NO_PROGRESSDIALOG
++//#define QT_NO_TABDIALOG
++#define QT_NO_WIZARD
++#define QT_NO_EFFECTS
++//#define QT_NO_COMPONENT
++#define QT_NO_DOM
++#define QT_NO_SEMIMODAL
++//#define QT_NO_PROGRESSBAR
++#define QT_NO_SPLITTER
++
++//#define QT_NO_QWS_SAVEFONTS
++//#define QT_NO_QWS_PROPERTIES
++
++#define QT_NO_QWS_BEOS_WM_STYLE
++#define QT_NO_QWS_KDE2_WM_STYLE
++#define QT_NO_QWS_KDE_WM_STYLE
++#define QT_NO_QWS_WINDOWS_WM_STYLE
++
++#define QT_NO_SOUND
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/tools/qconfig.h qte-2.3.7/src/tools/qconfig.h
 --- qt-2.3.7/src/tools/qconfig.h	Fri Jan 26 14:43:06 2001
-+++ qte-2.3.7/src/tools/qconfig.h	Sun Nov 16 13:35:10 2003
++++ qte-2.3.7/src/tools/qconfig.h	Thu Dec 11 12:54:20 2003
 @@ -1,3 +1,26 @@
 +// Copied from qconfig-qpe.h
 +/**********************************************************************
@@ -759,9 +1174,9 @@ diff -ru qt-2.3.7/src/tools/qconfig.h qte-2.3.7/src/tools/qconfig.h
 +
 +#define QT_NO_SOUND
 \ No newline at end of file
-diff -ru qt-2.3.7/src/tools/qmodules.h qte-2.3.7/src/tools/qmodules.h
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/tools/qmodules.h qte-2.3.7/src/tools/qmodules.h
 --- qt-2.3.7/src/tools/qmodules.h	Fri Aug 31 17:00:56 2001
-+++ qte-2.3.7/src/tools/qmodules.h	Sun Nov 16 13:34:58 2003
++++ qte-2.3.7/src/tools/qmodules.h	Thu Dec 11 12:53:57 2003
 @@ -1,14 +1,12 @@
 -#ifndef QT_H
 -#endif // QT_H
@@ -781,7 +1196,7 @@ diff -ru qt-2.3.7/src/tools/qmodules.h qte-2.3.7/src/tools/qmodules.h
  #define QT_MODULE_XML
 -#define QT_MODULE_NETWORK
 +#define QT_MODULE_OPENGL
-diff -ru qt-2.3.7/src/widgets/qcommonstyle.cpp qte-2.3.7/src/widgets/qcommonstyle.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/widgets/qcommonstyle.cpp qte-2.3.7/src/widgets/qcommonstyle.cpp
 --- qt-2.3.7/src/widgets/qcommonstyle.cpp	Thu Jul 17 03:20:26 2003
 +++ qte-2.3.7/src/widgets/qcommonstyle.cpp	Mon Oct 27 14:21:28 2003
 @@ -566,7 +566,7 @@
@@ -793,7 +1208,7 @@ diff -ru qt-2.3.7/src/widgets/qcommonstyle.cpp qte-2.3.7/src/widgets/qcommonstyl
      if (draw_menu_bar_impl != 0) {
  	QDrawMenuBarItemImpl impl = draw_menu_bar_impl;
  	(this->*impl)(p, x, y, w, h, mi, g, enabled, active);
-diff -ru qt-2.3.7/src/widgets/qlistview.cpp qte-2.3.7/src/widgets/qlistview.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/widgets/qlistview.cpp qte-2.3.7/src/widgets/qlistview.cpp
 --- qt-2.3.7/src/widgets/qlistview.cpp	Thu Jul 17 03:20:26 2003
 +++ qte-2.3.7/src/widgets/qlistview.cpp	Mon Oct 27 14:21:28 2003
 @@ -4968,9 +4968,9 @@
@@ -809,7 +1224,7 @@ diff -ru qt-2.3.7/src/widgets/qlistview.cpp qte-2.3.7/src/widgets/qlistview.cpp
  
      if ( s.width() > s.height() * 3 )
  	s.setHeight( s.width() / 3 );
-diff -ru qt-2.3.7/src/widgets/qtoolbutton.cpp qte-2.3.7/src/widgets/qtoolbutton.cpp
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src/widgets/qtoolbutton.cpp qte-2.3.7/src/widgets/qtoolbutton.cpp
 --- qt-2.3.7/src/widgets/qtoolbutton.cpp	Thu Jul 17 03:20:27 2003
 +++ qte-2.3.7/src/widgets/qtoolbutton.cpp	Mon Oct 27 14:21:28 2003
 @@ -230,7 +230,7 @@
@@ -839,3 +1254,9 @@ diff -ru qt-2.3.7/src/widgets/qtoolbutton.cpp qte-2.3.7/src/widgets/qtoolbutton.
  	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Small, QIconSet::Normal);
  	w = pm.width();
  	h = pm.height();
+diff -uNr --exclude-from=./diff_ignore qt-2.3.7/src-mt.mk qte-2.3.7/src-mt.mk
+--- qt-2.3.7/src-mt.mk	Thu Jan  1 01:00:00 1970
++++ qte-2.3.7/src-mt.mk	Thu Dec 11 12:53:57 2003
+@@ -0,0 +1,2 @@
++all:
++	@echo "(not building threaded Qt)"
