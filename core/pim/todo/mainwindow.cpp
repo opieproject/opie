@@ -36,6 +36,7 @@
 #include <qaction.h>
 #include <qtimer.h>
 #include <qvbox.h>
+#include <qlayout.h>
 #include <qlineedit.h>
 #include <qwhatsthis.h>
 
@@ -44,7 +45,6 @@
 #include <qpe/ir.h>
 #include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
-#include <qpe/qpetoolbar.h>
 
 #include <opie/orecur.h>
 #include <opie/otodoaccessvcal.h>
@@ -211,15 +211,18 @@ void MainWindow::initConfig() {
     m_quicktask = config.readBoolEntry("ShowQuickTask", TRUE);
 }
 void MainWindow::initUI() {
+
     m_stack = new QWidgetStack(this,  "main stack");
+
     setCentralWidget( m_stack );
 
     setToolBarsMovable( FALSE );
 
-    m_tool = new QPEToolBar( this );
-    m_tool->setHorizontalStretchable( TRUE );
+    QToolBar *menubarholder = new QToolBar( this );
+    menubarholder->setHorizontalStretchable( TRUE );
+    m_bar = new QMenuBar( menubarholder );
 
-    m_bar = new QMenuBar( m_tool );
+    m_tool = new QToolBar( this );
 
     /** QPopupMenu */
     m_edit = new QPopupMenu( this );
@@ -236,6 +239,7 @@ void MainWindow::initUI() {
             this, SLOT(slotNewFromTemplate(int) ) );
 }
 void MainWindow::initViews() {
+
     TableView* tableView = new TableView( this, m_stack );
     QWhatsThis::add( tableView, QWidget::tr( "This is a listing of all current tasks.\n\nThe list displays the following information:\n1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.\n2. Priority - a graphical representation of task priority.  Double-click here to modify.\n3. Description - description of task.  Click here to select the task.\n4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options->'Show task deadlines' from the menu above." ) );
     m_stack->addWidget( tableView,  m_counter++ );
