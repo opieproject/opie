@@ -11,7 +11,7 @@ int main( int argc, char **argv )
 {
     QPEApplication a( argc, argv );
 
-    OTabWidget *tabwidget = new OTabWidget(0, "tab widget");
+    Opie::Ui::OTabWidget *tabwidget = new Opie::Ui::OTabWidget(0, "tab widget");
 
     QString path = QPEApplication::qpeDir() + "/plugins/app";
     QDir dir( path, "lib*.so" );
