@@ -1,30 +1,15 @@
 #include "datebookweeklst.h"
 
-#include "datebookweekheaderimpl.h"
 
 #include "datebook.h"
 
-#include <qpe/calendar.h>
-#include <qpe/datebookdb.h>
-#include <qpe/event.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/timestring.h>
 #include <qpe/datebookmonth.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
+#include <qpe/calendar.h>
 
-#include <qdatetime.h>
-#include <qheader.h>
-#include <qlabel.h>
 #include <qlayout.h>
-#include <qpainter.h>
-#include <qpopupmenu.h>
-#include <qtimer.h>
-#include <qstyle.h>
 #include <qtoolbutton.h>
-#include <qvbox.h>
-#include <qsizepolicy.h>
-#include <qabstractlayout.h>
 #include <qtl.h>
 
 bool calcWeek(const QDate &d, int &week, int &year,bool startOnMonday = false);
@@ -73,9 +58,9 @@ void DateBookWeekLstHeader::setDate(const QDate &d) {
 	QDate start=date;
 	QDate stop=start.addDays(6);
 	labelDate->setText( QString::number(start.day()) + "." +
-			start.monthName(start.month()) + "-" +
+			Calendar::nameOfMonth( start.month() ) + "-" +
 			QString::number(stop.day()) + "." +
-			start.monthName(stop.month()) +" ("+
+                                                Calendar::nameOfMonth( stop.month()) +" ("+
 			tr("w")+":"+QString::number( week ) +")");
 	emit dateChanged(date);
 }
@@ -122,10 +107,7 @@ DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool /* onM */,
 
 	date=d;
 
-	static const QString wdays=tr("MTWTFSSM",  "Week days");
-	char day=wdays[d.dayOfWeek()-1];
-
-	label->setText( QString(QObject::tr(QString(QChar(day)))) + " " +QString::number(d.day()) );
+	label->setText( QString( Calendar::nameOfDay( d.dayOfWeek() ) ) + " " +QString::number(d.day()) );
 	add->setText("+");
 
 	if (d == QDate::currentDate()) {

@@ -21,12 +21,8 @@
 
 #include <qpe/datebookmonth.h>
 #include <qpe/resource.h>
-#include <qpe/timestring.h>
 
 #include <qbuttongroup.h>
-#include <qpopupmenu.h>
-#include <qstringlist.h>
-#include <qtimer.h>
 #include <qtoolbutton.h>
 
 
@@ -156,7 +152,7 @@ void DateBookDayHeader::goForwardWeek()
 void DateBookDayHeader::setDate( int y, int m, int d )
 {
     currDate.setYMD( y, m, d );
-    date->setText( TimeString::shortDate( currDate ) );
+    date->setText( TimeString::dateString( currDate ) );
 
     int iDayOfWeek = currDate.dayOfWeek();
     // cleverly adjust the day depending on how we start the week

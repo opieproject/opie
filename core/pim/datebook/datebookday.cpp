@@ -17,29 +17,18 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qmessagebox.h>
 
 #include "datebookday.h"
 #include "datebookdayheaderimpl.h"
 #include "datebookdayallday.h"
 
-#include <qpe/datebookdb.h>
 #include <qpe/resource.h>
-#include <qpe/event.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/timestring.h>
-#include <qpe/qpedebug.h>
 #include <qpe/ir.h>
 
-#include <qheader.h>
-#include <qdatetime.h>
-#include <qpainter.h>
 #include <qsimplerichtext.h>
 #include <qpopupmenu.h>
-#include <qtextcodec.h>
-#include <qpalette.h>
 
-#include <qlineedit.h>
 
 #include <qtimer.h>
 
