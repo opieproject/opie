@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/settings
 Maintainer: Dan Williams <drw@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal, libopie1
+Depends: task-opie-minimal, libqtaux2, libopiecore2, libopieui2
 Description: Appearance settings dialog for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION
