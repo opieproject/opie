@@ -1,16 +1,3 @@
 moc_*
 *.moc
 Makefile*
-qcheckdetailsbase.cpp
-qcheckdetailsbase.h
-qcheckentrybase.cpp
-qcheckentrybase.h
-qcheckgraphbase.cpp
-qcheckgraphbase.h
-qcheckmmbase.cpp
-qcheckmmbase.h
-qchecknamebase.cpp
-qchecknamebase.h
-qcheckviewbase.cpp
-qcheckviewbase.h
-
