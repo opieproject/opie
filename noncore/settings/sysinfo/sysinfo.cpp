@@ -23,6 +23,7 @@
 #include "storage.h"
 //#include "graphics.h"
 #include "processinfo.h"
+#include "modulesinfo.h"
 #include "versioninfo.h"
 #include "sysinfo.h"
 
@@ -47,6 +48,7 @@ SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags f )
     tab->addTab( new LoadInfo( tab ), tr("CPU") );
 //    tab->addTab( new Graphics( tab ), tr("Graphics") );
     tab->addTab( new ProcessInfo( tab ), tr("Process") );
+    tab->addTab( new ModulesInfo( tab ), tr("Modules") );
     tab->addTab( new VersionInfo( tab ), tr("Version") );
 
     resize( 220, 180 );

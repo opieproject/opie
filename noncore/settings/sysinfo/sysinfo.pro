@@ -7,6 +7,8 @@ HEADERS   = memory.h \
       storage.h \
       processinfo.h \
       processdetail.h \
+      modulesinfo.h \
+      modulesdetail.h \
       versioninfo.h \
       sysinfo.h
 SOURCES   = main.cpp \
@@ -15,7 +17,9 @@ SOURCES   = main.cpp \
       load.cpp \
       storage.cpp \
       processinfo.cpp \
+      modulesinfo.cpp \
       processdetail.cpp \
+      modulesdetail.cpp \
       versioninfo.cpp \
       sysinfo.cpp
 INTERFACES  = 
