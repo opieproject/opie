@@ -84,7 +84,7 @@ ButtonSettings::ButtonSettings ( )
 		if ( it != buttons. begin ( )) {
 			QFrame *f = new QFrame ( this );
 			f-> setFrameStyle ( QFrame::Sunken | QFrame::VLine );
-			lay-> addMultiCellWidget ( f, i, i, 0, 2 );
+			lay-> addMultiCellWidget ( f, i, i, 0, 3 );
 			i++;
 		}
 
