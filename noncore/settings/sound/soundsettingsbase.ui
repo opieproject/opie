@@ -509,6 +509,12 @@
                                 <item>
                                     <property>
                                         <name>text</name>
+                                        <string>8000</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
                                         <string>11025</string>
                                     </property>
                                 </item>
@@ -521,7 +527,7 @@
                                 <item>
                                     <property>
                                         <name>text</name>
-                                        <string>32000</string>
+                                        <string>33075</string>
                                     </property>
                                 </item>
                                 <item>
