@@ -314,6 +314,21 @@ void SettingsImpl :: changeServerDetails()
 	changed = true;
 
 	QString newName = servername->text();
+	
+	// Convert any spaces to underscores
+	char *tmpStr = new char[newName.length() + 1];
+	for ( unsigned int i = 0 ; i < newName.length() ; ++i )
+	{
+		if ( newName[i] == ' ' )
+			tmpStr[i] = '_';
+		else
+			tmpStr[i] = newName[i].latin1();
+	}
+	tmpStr[newName.length()] = '\0';
+	
+	newName = tmpStr;
+	delete tmpStr;
+	
 	if ( !newserver )
 	{
 		Server *s = dataMgr->getServer( servers->currentText() );
@@ -328,14 +343,10 @@ void SettingsImpl :: changeServerDetails()
 		{
 			// Update server name
 			s->setServerName( newName );
-
-			// See if this server is the active server
-//			if ( dataMgr->getActiveServer() == serverName )
-//				dataMgr->setActiveServer( newName );
-
-			// Update list box
-			servers->changeItem( newName, currentSelectedServer );
 		}
+		
+		// Update list box
+		servers->changeItem( newName, currentSelectedServer );
 	}
 	else
 	{
