@@ -205,8 +205,8 @@ do
             else
 	    	echo "Warning: You are not root. Unable to squash permissions."
 	    fi
-	    ( cd $CTRLDIR; tar --owner=root --group=root cfz ../control.tar.gz ./*; )
-	    ( cd $DATADIR; tar --owner=root --group=root cfz ../data.tar.gz ./*; )
+	    ( cd $CTRLDIR; tar cfz ../control.tar.gz ./*; )
+	    ( cd $DATADIR; tar cfz ../data.tar.gz ./*; )
 	    ( cd $TDIR; rm -rf control data; tar cf - ./debian-binary ./control.tar.gz ./data.tar.gz; ) | gzip >$RDIR/$package.ipk
 	    RESULT=$package.ipk
 	    if [ -n "$VERB" ]
