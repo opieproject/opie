@@ -50,6 +50,8 @@ public:
     VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlayerState, QWidget* parent=0, const char* name=0 );
     ~VideoWidget();
 
+    static const MediaWidget::SkinButtonInfo *skinInfo();
+    static const uint buttonCount();
 
     XineVideoWidget* vidWidget();
 public slots:

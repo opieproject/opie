@@ -55,6 +55,10 @@ public:
     AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlayerState, QWidget* parent=0, const char* name=0 );
     ~AudioWidget();
     void setTickerText( const QString &text ) { songInfo.setText( text ); }
+
+    static const MediaWidget::SkinButtonInfo *skinInfo();
+    static const uint buttonCount();
+
 public slots:
     void updateSlider( long, long );
     void sliderPressed( );

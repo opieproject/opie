@@ -111,6 +111,16 @@ AudioWidget::~AudioWidget() {
 //    mediaPlayerState->setPlaying(false);
 }
 
+const MediaWidget::SkinButtonInfo *AudioWidget::skinInfo()
+{
+    return ::skinInfo;
+}
+
+const uint AudioWidget::buttonCount()
+{
+    return ::buttonCount;
+}
+
 void AudioWidget::resizeEvent( QResizeEvent *e ) {
     int h = height();
     int w = width();
@@ -164,7 +174,7 @@ void AudioWidget::setDisplayType( MediaPlayerState::DisplayType mediaType ) {
 
 void AudioWidget::loadSkin()
 {
-    loadDefaultSkin( skinInfo, buttonCount );
+    loadDefaultSkin( ::skinInfo, ::buttonCount );
 
     setBackgroundPixmap( backgroundPixmap );
 
