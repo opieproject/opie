@@ -361,7 +361,7 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * the proper @ref OMonitoringInterface to be associated with the interface.
      * @see OMonitoringInterface
      */
-    virtual void setMonitorMode( bool ); //FIXME: ==> setMode( "monitor" );
+    virtual void setMonitorMode( bool ); //FIXME: ==> setMode( "monitor" ); Use IW_MONITOR first, if this doesn't work, then use iwpriv!
     /**
      * @returns true if the device is listening in IEEE 802.11 monitor mode
      */
@@ -397,12 +397,14 @@ class OWirelessNetworkInterface : public ONetworkInterface
      */
     virtual bool hasPrivate( const QString& command );
     virtual void getPrivate( const QString& command ); //FIXME: Implement and document this
-
-    virtual bool isAssociated() const {}; //FIXME: Implement and document this
     /**
-     * @returns the MAC address of the Access Point if the
-     * device is in infrastructure mode. @returns a (more or less random) CELL
-     * address if the device is in adhoc mode.
+     * @returns true if the interface is associated to an access point
+     * @note: This information is only valid if the interface is in managed mode.
+     */
+    virtual bool isAssociated() const;
+    /**
+     * @returns the MAC address of the Access Point if the device is in infrastructure mode.
+     * @returns a (more or less random) cell ID address if the device is in adhoc mode.
      */
     virtual QString associatedAP() const;
     /**
@@ -414,10 +416,16 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * @returns the current SSID (Service Set ID).
      */
     virtual QString SSID() const;
+    /**
+     * Perform scanning the wireless network neighbourhood.
+     * @note: UNSTABLE API - UNDER CONSTRUCTION - DON'T USE!
+     */
+    virtual int scanNetwork();
 
   protected:
-    void buildChannelList();
+    void buildInformation();
     void buildPrivateList();
+    void dumpInformation() const;
     virtual void init();
     struct iwreq& iwr() const;
     bool wioctl( int call ) const;
@@ -426,6 +434,7 @@ class OWirelessNetworkInterface : public ONetworkInterface
   protected:
     mutable struct iwreq _iwr;
     QMap<int,int> _channels;
+    struct iw_range _range;
 
   private:
     OChannelHopper* _hopper;
@@ -475,9 +484,11 @@ class OCiscoMonitoringInterface : public OMonitoringInterface
 
 };
 
+
 /*======================================================================================
  * OWlanNGMonitoringInterface
  *======================================================================================*/
+
 
 class OWlanNGMonitoringInterface : public OMonitoringInterface
 {
@@ -492,9 +503,11 @@ class OWlanNGMonitoringInterface : public OMonitoringInterface
 
 };
 
+
 /*======================================================================================
  * OHostAPMonitoringInterface
  *======================================================================================*/
+
 
 class OHostAPMonitoringInterface : public OMonitoringInterface
 {
@@ -507,9 +520,11 @@ class OHostAPMonitoringInterface : public OMonitoringInterface
     virtual QString name() const;
  };
 
+
 /*======================================================================================
  * OOrinocoMonitoringInterface
  *======================================================================================*/
+
 
 class OOrinocoMonitoringInterface : public OMonitoringInterface
 {

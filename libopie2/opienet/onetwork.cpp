@@ -76,6 +76,7 @@ void ONetwork::synchronize()
     // gather available interfaces by inspecting /proc/net/dev
     //FIXME: we could use SIOCGIFCONF here, but we aren't interested in virtual (e.g. eth0:0) devices
     //FIXME: Use SIOCGIFCONF anway, because we can disable listing of aliased devices
+    //FIXME: Best is use SIOCGIFCONF and if this doesn't work (result=-1), then fallback to parsing /proc/net/dev
 
     _interfaces.clear();
     QString str;
@@ -188,9 +189,9 @@ bool ONetworkInterface::ioctl( int call, struct ifreq& ifreq ) const
 {
     int result = ::ioctl( _sfd, call, &ifreq );
     if ( result == -1 )
-        qDebug( "ONetworkInterface::ioctl (%s) call %d - Status: Failed: %d (%s)", name(), call, result, strerror( errno ) );
+        qDebug( "ONetworkInterface::ioctl (%s) call %d (0x%04X) - Status: Failed: %d (%s)", name(), call, call, result, strerror( errno ) );
     else
-        qDebug( "ONetworkInterface::ioctl (%s) call %d - Status: Ok.", name(), call );
+        qDebug( "ONetworkInterface::ioctl (%s) call %d (0x%04X) - Status: Ok.", name(), call, call );
     return ( result != -1 );
 }
 
@@ -454,8 +455,16 @@ void OWirelessNetworkInterface::init()
 {
     qDebug( "OWirelessNetworkInterface::init()" );
     memset( &_iwr, 0, sizeof( struct iwreq ) );
-    buildChannelList();
+    buildInformation();
     buildPrivateList();
+    dumpInformation();
+}
+
+
+bool OWirelessNetworkInterface::isAssociated() const
+{
+    //FIXME: handle different modes
+    return associatedAP() != "44:44:44:44:44:44";
 }
 
 
@@ -482,7 +491,7 @@ QString OWirelessNetworkInterface::associatedAP() const
 }
 
 
-void OWirelessNetworkInterface::buildChannelList()
+void OWirelessNetworkInterface::buildInformation()
 {
     //ML: If you listen carefully enough, you can hear lots of WLAN drivers suck
     //ML: The HostAP drivers need more than sizeof struct_iw range to complete
@@ -505,7 +514,7 @@ void OWirelessNetworkInterface::buildChannelList()
 
     if ( ::ioctl( _sfd, SIOCGIWRANGE, &wrq ) == -1 )
     {
-        qDebug( "OWirelessNetworkInterface::buildChannelList(): SIOCGIWRANGE failed (%s) - defaulting to 11 channels", strerror( errno ) );
+        qDebug( "OWirelessNetworkInterface::buildInformation(): SIOCGIWRANGE failed (%s) - using default values.", strerror( errno ) );
         _channels.insert( 2412,  1 ); // 2.412 GHz
         _channels.insert( 2417,  2 ); // 2.417 GHz
         _channels.insert( 2422,  3 ); // 2.422 GHz
@@ -517,6 +526,8 @@ void OWirelessNetworkInterface::buildChannelList()
         _channels.insert( 2452,  9 ); // 2.452 GHz
         _channels.insert( 2457, 10 ); // 2.457 GHz
         _channels.insert( 2462, 11 ); // 2.462 GHz
+
+        memset( &_range, 0, sizeof( struct iw_range ) );
     }
     else
     {
@@ -527,15 +538,15 @@ void OWirelessNetworkInterface::buildChannelList()
                 max = r;
         if (max > 0)
         {
-            qWarning( "OWirelessNetworkInterface::buildChannelList(): Driver for wireless interface '%s'"
-                    "overwrote buffer end with at least %i bytes!\n", name(), max - sizeof( struct iw_range ) );
+            qWarning( "OWirelessNetworkInterface::buildInformation(): Driver for wireless interface '%s' sucks!\n"
+                    "It overwrote the buffer end with at least %i bytes!\n", name(), max - sizeof( struct iw_range ) );
         }
         // </check if the driver overwrites stuff>
 
         struct iw_range range;
         memcpy( &range, buffer, sizeof range );
 
-        qDebug( "OWirelessNetworkInterface::buildChannelList(): Interface %s reported to have %d channels.", name(), range.num_frequency );
+        qDebug( "OWirelessNetworkInterface::buildInformation(): Interface %s reported to have %d channels.", name(), range.num_frequency );
         for ( int i = 0; i < range.num_frequency; ++i )
         {
             int freq = (int) ( double( range.freq[i].m ) * pow( 10.0, range.freq[i].e ) / 1000000.0 );
@@ -543,7 +554,8 @@ void OWirelessNetworkInterface::buildChannelList()
         }
     }
 
-    qDebug( "OWirelessNetworkInterface::buildChannelList(): Channel list constructed." );
+    memcpy( &_range, buffer, sizeof( struct iw_range ) );
+    qDebug( "OWirelessNetworkInterface::buildInformation(): Information block constructed." );
     free(buffer);
 }
 
@@ -569,6 +581,17 @@ void OWirelessNetworkInterface::buildPrivateList()
         new OPrivateIOCTL( this, priv[i].name, priv[i].cmd, priv[i].get_args, priv[i].set_args );
     }
     qDebug( "OWirelessNetworkInterface::buildPrivateList(): Private IOCTL list constructed." );
+}
+
+
+void OWirelessNetworkInterface::dumpInformation() const
+{
+    qDebug( "OWirelessNetworkInterface::() -------------- dumping information block ----------------" );
+
+    qDebug( " - driver's idea of maximum throughput is %d bps = %d byte/s = %d Kb/s = %f.2 Mb/s", _range.throughput, _range.throughput / 8, _range.throughput / 8 / 1024, float( _range.throughput ) / 8.0 / 1024.0 / 1024.0 );
+    qDebug( " - driver for '%s' has been compiled against WE V%d (source=V%d)", name(), _range.we_version_compiled, _range.we_version_source );
+
+    qDebug( "OWirelessNetworkInterface::() ---------------------------------------------------------" );
 }
 
 
@@ -661,9 +684,7 @@ void OWirelessNetworkInterface::setMode( const QString& mode )
     else if ( mode == "master" )     _iwr.u.mode = IW_MODE_MASTER;
     else if ( mode == "repeater" )   _iwr.u.mode = IW_MODE_REPEAT;
     else if ( mode == "secondary" )  _iwr.u.mode = IW_MODE_SECOND;
-    #if WIRELESS_EXT > 14
     else if ( mode == "monitor" )    _iwr.u.mode = IW_MODE_MONITOR;
-    #endif
     else
     {
         qDebug( "ONetwork: Warning! Invalid IEEE 802.11 mode '%s' specified.", (const char*) mode );
@@ -687,9 +708,7 @@ QString OWirelessNetworkInterface::mode() const
         case IW_MODE_MASTER: return "master";
         case IW_MODE_REPEAT: return "repeater";
         case IW_MODE_SECOND: return "secondary";
-        #if WIRELESS_EXT > 14
         case IW_MODE_MONITOR: return "monitor";
-        #endif
         default: assert( 0 ); // shouldn't happen
     }
 }
@@ -708,7 +727,8 @@ bool OWirelessNetworkInterface::monitorMode() const
 {
     qDebug( "dataLinkType = %d", dataLinkType() );
     return ( dataLinkType() == ARPHRD_IEEE80211 || dataLinkType() == 802 );
-    // 802 is the header type for PRISM - Linux support for this is pending...
+    //FIXME: 802 is the header type for PRISM - Linux support for this is pending...
+    //FIXME: What is 119, by the way?
 }
 
 
@@ -800,13 +820,74 @@ void OWirelessNetworkInterface::setSSID( const QString& ssid )
 }
 
 
+int OWirelessNetworkInterface::scanNetwork()
+{
+    _iwr.u.param.flags = IW_SCAN_DEFAULT;
+    _iwr.u.param.value = 0;
+    if ( !wioctl( SIOCSIWSCAN ) )
+    {
+        return -1;
+    }
+
+    int timeout = 1000000;
+
+    qDebug( "ONetworkInterface::scanNetwork() - scan started." );
+
+    bool results = false;
+    struct timeval tv;
+    tv.tv_sec = 0;
+    tv.tv_usec = 250000; // initial timeout ~ 250ms
+    char buffer[IW_SCAN_MAX_DATA];
+
+    while ( !results && timeout > 0 )
+    {
+        timeout -= tv.tv_usec;
+        select( 0, 0, 0, 0, &tv );
+
+        _iwr.u.data.pointer = &buffer[0];
+        _iwr.u.data.flags = 0;
+        _iwr.u.data.length = sizeof buffer;
+        if ( wioctl( SIOCGIWSCAN ) )
+        {
+            results = true;
+            continue;
+        }
+        else if ( errno == EAGAIN)
+        {
+            qDebug( "ONetworkInterface::scanNetwork() - scan in progress..." );
+            #if 0
+            if ( qApp )
+            {
+                qApp->processEvents( 100 );
+                continue;
+            }
+            #endif
+            tv.tv_sec = 0;
+            tv.tv_usec = 100000;
+            continue;
+        }
+    }
+
+    qDebug( "ONetworkInterface::scanNetwork() - scan finished." );
+
+    if ( results )
+    {
+        qDebug( " - results are in!" );
+    }
+    else
+    {
+        qDebug( " - no results :(" );
+    }
+}
+
+
 bool OWirelessNetworkInterface::wioctl( int call, struct iwreq& iwreq ) const
 {
     int result = ::ioctl( _sfd, call, &iwreq );
     if ( result == -1 )
-        qDebug( "ONetworkInterface::wioctl (%s) call %d - Status: Failed: %d (%s)", name(), call, result, strerror( errno ) );
+        qDebug( "ONetworkInterface::wioctl (%s) call %d (0x%04X) - Status: Failed: %d (%s)", name(), call, call, result, strerror( errno ) );
     else
-        qDebug( "ONetworkInterface::wioctl (%s) call %d - Status: Ok.", name(), call );
+        qDebug( "ONetworkInterface::wioctl (%s) call %d (0x%04X) - Status: Ok.", name(), call, call );
     return ( result != -1 );
 }
 

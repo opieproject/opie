@@ -56,6 +56,18 @@ int main( int argc, char** argv )
 
             iface->setMode( "managed" );
 
+            // network scan
+
+            int stations = iface->scanNetwork();
+            if ( stations != -1 )
+            {
+                qDebug( "DEMO: # of stations around = %d", stations );
+            }
+            else
+            {
+                qDebug( "DEMO: Warning! Scan didn't work!" );
+            }
+
             /*
 
             // first some wrong calls to check if this is working
