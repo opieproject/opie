@@ -187,7 +187,6 @@ void OIpkg::setConfigItems( OConfItemList *configList )
                 absFile.prepend( QString( IPKG_CONF_DIR ) + "/" );
 
             // Delete file
-printf( "Deleting: \'%s\'\n", absFile.latin1() );
             QFile::remove( absFile );
         }
     }
