@@ -30,8 +30,8 @@ STRIP=arm-linux-strip
 STRIP_FILES="*ARM*not stripped"
 
 TDIR=/tmp/ipk$$
-DATADIR=$TDIR/data
-CTRLDIR=$TDIR/control
+DATADIR=$TDIR
+CTRLDIR=$TDIR/CONTROL
 
 IMAGEDIR=
 VERB=
@@ -187,16 +187,23 @@ do
 	elif [ -z "$IMAGEDIR" ]
 	then
 	    #size=$(du -h -s $DATADIR | sed -e 's/[	 ].*//')
-	    size=$(mkfs.jffs2 -r $DATADIR | wc -c)
+	    if (which mkfs.jffs2 >/dev/null 2>&1); then
+		size=$(mkfs.jffs2 -r $DATADIR | wc -c)
+	    fi
 	    echo "Package: $packagename" >$CTRLDIR/control
+	    if [ ! -z "$size" ]; then
 	    echo "Installed-Size: $size" >>$CTRLDIR/control
+	    else
+	    echo "Warning, no mkfs.jffs2 found, unable to set Installed-Size."
+	    fi
+	    echo "Architecture: $ARCH" >>$CTRLDIR/control 
 	    echo "Filename: ./$package.ipk" >>$CTRLDIR/control
 	    echo "Version: $version" >>$CTRLDIR/control
-	    echo "Depends: $depends" >>$CTRLDIR/control
-	    echo "Provides: $provides" >>$CTRLDIR/control
-	    echo "Conflicts: $conflicts" >>$CTRLDIR/control
-	    egrep -v "^(Files|Version|Depends|Provides|Conflicts):" >>$CTRLDIR/control $i
-	    echo "$DEB_VERSION" >$TDIR/debian-binary
+	    [ ! -z "$depends" ] && echo "Depends: $depends" >>$CTRLDIR/control
+	    [ ! -z "$provides" ] && echo "Provides: $provides" >>$CTRLDIR/control
+	    [ ! -z "$conflicts" ] && echo "Conflicts: $conflicts" >>$CTRLDIR/control
+	    egrep -v "^(Files|Version|Depends|Provides|Conflicts|Architecture):" >>$CTRLDIR/control $i
+#	    echo "$DEB_VERSION" >$TDIR/debian-binary
 	    base=${i%.control}
 	    scripts="preinst postinst prerm postrm"
 	    for pf in $scripts
@@ -206,15 +213,7 @@ do
 		    cp ${base}.$pf $CTRLDIR/$pf
 		fi
 	    done
-	    if [ "$UID" = 0 ]
-	    then
-		chown -R root.root $TDIR
-            else
-	    	echo "Warning: You are not root. Unable to squash permissions."
-	    fi
-	    ( cd $CTRLDIR; tar cfz ../control.tar.gz ./*; )
-	    ( cd $DATADIR; tar cfz ../data.tar.gz ./*; )
-	    ( cd $TDIR; rm -rf control data; tar cf - ./debian-binary ./control.tar.gz ./data.tar.gz; ) | gzip >$RDIR/$package.ipk
+	    $OPIEDIR/scripts/ipkg-build -o root -g root $TDIR
 	    RESULT=$package.ipk
 	    if [ -n "$VERB" ]
 	    then
@@ -229,3 +228,5 @@ do
 	echo >&2 "Not building $package package"
     fi
 done
+# clean up 
+rm -rf $TDIR
