@@ -69,18 +69,6 @@
         <translation type="unfinished">Forudsig</translation>
     </message>
     <message>
-        <source>You asked for a delay of </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> minutes, but only </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -112,11 +100,19 @@ ntpdate </source>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"> sekunder</translation>
+        <translation type="obsolete"> sekunder</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
         <translation type="unfinished">Kunne ikke forbinde til serveren </translation>
+    </message>
+    <message>
+        <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 seconds</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

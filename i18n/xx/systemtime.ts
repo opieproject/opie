@@ -70,15 +70,15 @@
     </message>
     <message>
         <source>You asked for a delay of </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source> minutes, but only </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source> minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Continue?</source>
@@ -112,11 +112,19 @@ ntpdate </source>
     </message>
     <message>
         <source> seconds</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 seconds</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
