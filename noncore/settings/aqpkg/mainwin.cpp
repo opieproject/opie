@@ -98,42 +98,9 @@ MainWindow :: MainWindow()
 
     mb->insertItem( tr( "Packages" ), popup );
 
-    // Search menu
-    popup = new QPopupMenu( this );
-    
-    a = new QAction( tr( "Find" ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to search for text in package names." ) );
-    connect( a, SIGNAL( activated() ), this, SLOT( displayFindBar() ) );
-    a->addTo( popup );
-
-    actionFindNext = new QAction( tr( "Find next" ), Resource::loadIconSet( "next" ), QString::null, 0, this, 0 );
-    actionFindNext->setEnabled( FALSE );
-    actionFindNext->setWhatsThis( tr( "Click here to search for the package name containing the text you are searching for." ) );
-    connect( actionFindNext, SIGNAL( activated() ), this, SLOT( repeatFind() ) );
-    actionFindNext->addTo( popup );
-    actionFindNext->addTo( findBar );
-
-    // Show 'quick jump' keypad?
-    
-    popup->insertSeparator();
-
-    actionFilter = new QAction( tr( "Filter by category" ), Resource::loadPixmap( "aqpkg/filter" ),  QString::null, 0, this, 0 );
-    actionFilter->setToggleAction( TRUE );
-    actionFilter->setWhatsThis( tr( "Click here to list packages belonging to one category." ) );
-    connect( actionFilter, SIGNAL( activated() ), this, SLOT( filterCategory() ) );
-    actionFilter->addTo( popup );
-
-    a = new QAction( tr( "Set filter category" ),  QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to change package category to used filter." ) );
-    connect( a, SIGNAL( activated() ), this, SLOT( setFilterCategory() ) );
-    a->addTo( popup );
-
-    mb->insertItem( tr( "Search" ), popup );
-
-    
     // View menu
     popup = new QPopupMenu( this );
-
+    
     actionUninstalled = new QAction( tr( "Show packages not installed" ), QString::null, 0, this, 0 );
     actionUninstalled->setToggleAction( TRUE );
     actionUninstalled->setWhatsThis( tr( "Click here to show packages available which have not been installed." ) );
@@ -154,6 +121,37 @@ MainWindow :: MainWindow()
 
     popup->insertSeparator();
 
+    actionFilter = new QAction( tr( "Filter by category" ), Resource::loadPixmap( "aqpkg/filter" ),  QString::null, 0, this, 0 );
+    actionFilter->setToggleAction( TRUE );
+    actionFilter->setWhatsThis( tr( "Click here to list packages belonging to one category." ) );
+    connect( actionFilter, SIGNAL( activated() ), this, SLOT( filterCategory() ) );
+    actionFilter->addTo( popup );
+
+    a = new QAction( tr( "Set filter category" ),  QString::null, 0, this, 0 );
+    a->setWhatsThis( tr( "Click here to change package category to used filter." ) );
+    connect( a, SIGNAL( activated() ), this, SLOT( setFilterCategory() ) );
+    a->addTo( popup );
+
+    popup->insertSeparator();
+
+    a = new QAction( tr( "Find" ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
+    a->setWhatsThis( tr( "Click here to search for text in package names." ) );
+    connect( a, SIGNAL( activated() ), this, SLOT( displayFindBar() ) );
+    a->addTo( popup );
+
+    actionFindNext = new QAction( tr( "Find next" ), Resource::loadIconSet( "next" ), QString::null, 0, this, 0 );
+    actionFindNext->setEnabled( FALSE );
+    actionFindNext->setWhatsThis( tr( "Click here to find the next package name containing the text you are searching for." ) );
+    connect( actionFindNext, SIGNAL( activated() ), this, SLOT( repeatFind() ) );
+    actionFindNext->addTo( popup );
+    actionFindNext->addTo( findBar );
+
+    mb->insertItem( tr( "View" ), popup );
+
+    
+    // Options menu
+    popup = new QPopupMenu( this );
+
     a = new QAction( tr( "Configure" ), Resource::loadPixmap( "aqpkg/config" ), QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to configure this application." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( displaySettings() ) );
@@ -171,7 +169,7 @@ MainWindow :: MainWindow()
     connect( a, SIGNAL( activated() ), this, SLOT( displayAbout() ) );
     a->addTo( popup );
 
-    mb->insertItem( tr( "View" ), popup );
+    mb->insertItem( tr( "Options" ), popup );
     
     // Finish find toolbar creation
     a = new QAction( QString::null, Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
