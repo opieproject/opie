@@ -20,8 +20,25 @@
 	*   <i>Libopie PIM</i>
 	* - <a href="network/html/index.html"><b>Network Settings Modules</b></a>
 	*   (<a href="network/html/classes.html">classes</a>)\n
-        *   <i>Networksettings</i>
-        *
+        *   <i>Networksettings</i>        
+	* - <a href="core2/html/index.html"><b>Opie2 Core Classes</b></a>
+	*   (<a href="core2/html/classes.html">classes</a>)\n
+        *   <i>Core Classes</i>
+	* - <a href="ui2/html/index.html"><b>Opie2 UI Classes</b></a>
+	*   (<a href="ui2/html/classes.html">classes</a>)\n
+        *   <i>UI Classes</i>
+	* - <a href="db2/html/index.html"><b>Opie2 DataBase Classes</b></a>
+	*   (<a href="db2/html/classes.html">classes</a>)\n
+        *   <i>DataBase Classes</i>
+	* - <a href="net2/html/index.html"><b>Opie2 Network Classes</b></a>
+	*   (<a href="net2/html/classes.html">classes</a>)\n
+        *   <i>Network Classes</i>
+	* - <a href="pim2/html/index.html"><b>Opie2 PIM Classes</b></a>
+	*   (<a href="pim2/html/classes.html">classes</a>)\n
+	*   <i>PIM Classes</i>
+	* - <a href="libopie2/html/index.html"><b>All Opie2 Classes</b></a>
+	*   (<a href="libopie2/html/classes.html">classes</a>)\n
+	*   <i>LIB OPIE2</i>	
 	*/
 
 /**

@@ -15,6 +15,11 @@ mkdir $OPIEDIR/apidocs/libqpe
 mkdir $OPIEDIR/apidocs/libopie
 mkdir $OPIEDIR/apidocs/pim
 mkdir $OPIEDIR/apidocs/network
+mkdir $OPIEDIR/apidocs/net2
+mkdir $OPIEDIR/apidocs/core2
+mkdir $OPIEDIR/apidocs/pim2
+mkdir $OPIEDIR/apidocs/ui2
+mkdir $OPIEDIR/apidocs/db2
 
 # now copy qt doc
 echo "Scanning and copying QT docu"
@@ -47,6 +52,48 @@ echo "Creating docu for NetworkSettings"
 # now do networksettings
 cp $OPIEDIR/doc/Doxyfile_net $OPIEDIR/noncore/settings/networksettings/Doxyfile
 cd $OPIEDIR/noncore/settings/networksettings
+doxygen Doxyfile
+rm -f Doxyfile
+
+echo "Creating docu for Opie2 Core"
+# now do networksettings
+cp $OPIEDIR/doc/Doxyfile_core2 $OPIEDIR/libopie2/opiecore/Doxyfile
+cd $OPIEDIR/libopie2/opiecore
+doxygen Doxyfile
+rm -f Doxyfile
+
+echo "Creating docu for Opie2 DB"
+# now do networksettings
+cp $OPIEDIR/doc/Doxyfile_db2 $OPIEDIR/libopie2/opiedb/Doxyfile
+cd $OPIEDIR/libopie2/opiedb
+doxygen Doxyfile
+rm -f Doxyfile
+
+echo "Creating docu for Opie2 mm"
+# now do networksettings
+cp $OPIEDIR/doc/Doxyfile_mm2 $OPIEDIR/libopie2/opiemm/Doxyfile
+cd $OPIEDIR/libopie2/opiemm
+doxygen Doxyfile
+rm -f Doxyfile
+
+echo "Creating docu for Opie2 net"
+# now do networksettings
+cp $OPIEDIR/doc/Doxyfile_net2 $OPIEDIR/libopie2/opienet/Doxyfile
+cd $OPIEDIR/libopie2/opienet
+doxygen Doxyfile
+rm -f Doxyfile
+
+echo "Creating docu for Opie2 ui"
+# now do networksettings
+cp $OPIEDIR/doc/Doxyfile_ui2 $OPIEDIR/libopie2/opieui/Doxyfile
+cd $OPIEDIR/libopie2/opieui
+doxygen Doxyfile
+rm -f Doxyfile
+
+echo "Creating docu for Opie2 pim"
+# now do networksettings
+cp $OPIEDIR/doc/Doxyfile_pim2 $OPIEDIR/libopie2/opiepim/Doxyfile
+cd $OPIEDIR/libopie2/opiepim
 doxygen Doxyfile
 rm -f Doxyfile
 
