@@ -61,8 +61,10 @@ public:
     bool b;
     
 protected slots:
-    void showLocalMenu( );
-    void showRemoteMenu( );
+    void showLocalMenu( QListViewItem *);
+    void showRemoteMenu( QListViewItem *);
+    void doLocalCd();
+    void doRemoteCd();
     void localUpload();
     void remoteDownload();
     void newConnection();

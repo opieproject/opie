@@ -423,7 +423,7 @@ void OpieFtp::populateLocalView()
 
 bool OpieFtp::populateRemoteView()
 {
- Remote_View->clear();
+    Remote_View->clear();
     QFile tmp("./._temp");
     QString s, File_Name;
     QString fileL, fileS, fileDate;
@@ -444,7 +444,8 @@ bool OpieFtp::populateRemoteView()
              new QListViewItem( Remote_View, fileL, fileS, fileDate);
         }
         tmp.close();
-    }
+    } else
+        qDebug("temp file not opened successfullly");
     return true;        
 }
 
@@ -504,7 +505,7 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
     QCopEnvelope ( "QPE/System", "notBusy()" );
 }
 
- void OpieFtp::localListClicked(QListViewItem *selectedItem)
+void OpieFtp::localListClicked(QListViewItem *selectedItem)
 {
     QString strItem=selectedItem->text(0);
     QString strSize=selectedItem->text(1);
@@ -540,6 +541,17 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
     }
 }
 
+void OpieFtp::doLocalCd()
+{
+    localListClicked( Local_View->currentItem());
+}
+
+void OpieFtp:: doRemoteCd()
+{
+    remoteListClicked( Remote_View->currentItem());
+
+}
+
 void OpieFtp::showHidden()
 {
     if (!b) {
@@ -560,8 +572,8 @@ void OpieFtp::ListPressed( int mouse, QListViewItem *item, const QPoint &point, 
     switch (mouse) {
       case 1:
           break;
-      case 2: 
-    showLocalMenu();
+      case 2:
+          showLocalMenu(item);
     break;
     };
 }
@@ -571,15 +583,18 @@ void OpieFtp::RemoteListPressed( int mouse, QListViewItem *item, const QPoint &p
  switch (mouse) {
       case 1:
           break;
-      case 2: 
-    showRemoteMenu();
+      case 2:
+          showRemoteMenu(item);
     break;
     };
 }
 
-void OpieFtp::showRemoteMenu()
+void OpieFtp::showRemoteMenu(QListViewItem * item)
 {
     QPopupMenu  m;// = new QPopupMenu( Local_View );
+    if(item->text(0).right(1) == "/")
+    m.insertItem( tr( "Change Directory" ), this, SLOT( doRemoteCd() ));
+    else
     m.insertItem( tr( "Download" ), this, SLOT( remoteDownload() ));
     m.insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
     m.insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
@@ -588,10 +603,14 @@ void OpieFtp::showRemoteMenu()
     m.exec( QCursor::pos() );
 }
 
-void OpieFtp::showLocalMenu()
+void OpieFtp::showLocalMenu(QListViewItem * item)
 {
     QPopupMenu  m;
     m.insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
+    m.insertSeparator();
+    if(item->text(0).right(1) == "/")
+    m.insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
+    else
     m.insertItem( tr( "Upload" ), this, SLOT( localUpload() ));
     m.insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
     m.insertItem( tr( "Rename" ), this, SLOT( localRename() ));
