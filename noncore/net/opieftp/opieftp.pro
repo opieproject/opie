@@ -4,6 +4,6 @@ SOURCES   = opieftp.cpp inputDialog.cpp main.cpp
 TARGET    = opieftp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lftplib
+LIBS            += -lqpe -lftplib -lopieui2 -lopiecore2
 
 include ( $(OPIEDIR)/include.pro )
