@@ -27,6 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
+#include "odevice_beagle.h"
 #include "odevice_ipaq.h"
 #include "odevice_jornada.h"
 #include "odevice_ramses.h"
@@ -139,6 +140,7 @@ ODevice *ODevice::inst()
                     else if ( line.contains( "simpad", false ) ) dev = new Internal::SIMpad();
                     else if ( line.contains( "jornada", false ) ) dev = new Internal::Jornada();
                     else if ( line.contains( "ramses", false ) ) dev = new Internal::Ramses();
+                    else if ( line.contains( "Tradesquare.NL", false ) ) dev = new Internal::Beagle();
                     else qWarning( "ODevice() - unknown hardware - using default." );
                     break;
                 }
@@ -266,7 +268,6 @@ bool ODevice::setSoftSuspend ( bool /*soft*/ )
 */
 bool ODevice::suspend()
 {
-    qDebug("ODevice::suspend");
     if ( !isQWS( ) ) // only qwsserver is allowed to suspend
         return false;
 
