@@ -1,0 +1,49 @@
+--- mailmime_decode.c.orig	2003-12-18 13:52:20.000000000 +0100
++++ mailmime_decode.c	2003-12-18 13:50:46.000000000 +0100
+@@ -102,8 +102,8 @@
+   size_t cur_token;
+   int r;
+   int res;
+-  char * str;
+-  char * wordutf8;
++  char * str = 0;
++  char * wordutf8 = 0;
+   int type;
+ 
+   cur_token = * index;
+@@ -147,14 +147,14 @@
+ 	goto free;
+       }
+ 
+-      if (mmap_string_append(gphrase, wordutf8) == NULL) {
++      if (wordutf8==NULL || mmap_string_append(gphrase, wordutf8) == NULL) {
+ 	mailmime_encoded_word_free(word);
+-        free(wordutf8);
++        if (wordutf8) free(wordutf8);
+ 	res = MAILIMF_ERROR_MEMORY;
+ 	goto free;
+       }
+       mailmime_encoded_word_free(word);
+-      free(wordutf8);
++      if (wordutf8) free(wordutf8);
+       first = FALSE;
+     }
+     else if (r == MAILIMF_ERROR_PARSE) {
+@@ -183,14 +183,14 @@
+         r = charconv(tocode, default_fromcode, raw_word,
+             strlen(raw_word), &wordutf8);
+ 
+-	if (mmap_string_append(gphrase, wordutf8) == NULL) {
+-          free(wordutf8);
++	if (wordutf8==NULL || mmap_string_append(gphrase, wordutf8) == NULL) {
++      if (wordutf8)free(wordutf8);
+ 	  mailimf_word_free(raw_word);
+ 	  res = MAILIMF_ERROR_MEMORY;
+ 	  goto free;
+ 	}
+ 
+-        free(wordutf8);
++    if (wordutf8) free(wordutf8);
+ 	mailimf_word_free(raw_word);
+ 	first = FALSE;
+       }
