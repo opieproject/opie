@@ -107,7 +107,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished">Zamenjaj imenik</translation>
+        <translation>Zamenjaj imenik</translation>
     </message>
     <message>
         <source>Execute</source>
@@ -190,25 +190,26 @@ in je licencirano pod GPL</translation>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberi vse</translation>
     </message>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ali zares izbrišem
+%1 datotek?</translation>
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbrišem imenik?</translation>
     </message>
     <message>
         <source>Really delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Delete Directory</source>
@@ -250,7 +251,7 @@ Do you really want to delete it?</source>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Izhod</translation>
     </message>
 </context>
 <context>
