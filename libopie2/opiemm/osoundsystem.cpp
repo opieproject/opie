@@ -39,6 +39,7 @@
 #include <sys/soundcard.h>
 #include <sys/stat.h>
 
+#include <qstringlist.h>
 
 /*======================================================================================
  * OSoundSystem

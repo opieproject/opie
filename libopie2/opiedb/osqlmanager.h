@@ -3,8 +3,10 @@
 #define OSQL_MANAGER_H
 
 #include <qobject.h>
+#include <qstringlist.h>
 
 #include "osqlbackend.h"
+
 
 /**
  * OSQLManager is responsible for loading

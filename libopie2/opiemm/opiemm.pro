@@ -12,5 +12,11 @@ LIBS        +=
 MOC_DIR     = moc
 OBJECTS_DIR = obj
 
-include ( $(OPIEDIR)/include.pro )
 
+!contains( platform, x11 ) {
+  include ( $(OPIEDIR)/include.pro )
+}
+
+contains( platform, x11 ) {
+  LIBS        = -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
+}

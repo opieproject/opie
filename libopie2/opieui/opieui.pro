@@ -15,8 +15,8 @@ HEADERS     = ocompletionbox.h       \
               oversatileviewitem.h   \
               #ojanuswidget.h         \
               odialog.h              \
-              oseparator.h           \
-              otaskbarapplet.h
+              oseparator.h           
+#              otaskbarapplet.h
 
 SOURCES     = ocompletionbox.cpp     \
               ocombobox.cpp          \
@@ -32,8 +32,8 @@ SOURCES     = ocompletionbox.cpp     \
               oversatileviewitem.cpp \
               #ojanuswidget.cpp       \
               odialog.cpp            \
-              oseparator.cpp         \
-              otaskbarapplet.cpp
+              oseparator.cpp         #\
+#              otaskbarapplet.cpp
 
 INTERFACES  =
 TARGET      = opieui2
@@ -44,5 +44,15 @@ LIBS        += -lopiecore2
 MOC_DIR     = moc
 OBJECTS_DIR = obj
 
-include ( $(OPIEDIR)/include.pro )
+
+!contains( platform, x11 ) {
+  include ( $(OPIEDIR)/include.pro )
+  HEADERS     += otaskbarapplet.h
+  SOURCES     += otaskbarapplet.cpp
+}
+
+contains( platform, x11 ) {
+  LIBS        += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
+  message( Warning: NO otaskbarapplet ATM )
+}
 

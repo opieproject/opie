@@ -38,7 +38,7 @@
 
 /* OPIE */
 
-#include <qpe/qpeapplication.h>
+#include <opie2/oapplication.h>
 
 /* FORWARDS */
 

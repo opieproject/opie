@@ -33,12 +33,20 @@
 
 #define oApp OApplication::oApplication()
 
+#ifdef QWS
 #include <qpe/qpeapplication.h>
+#else
+#include <qapplication.h>
+#endif
 
 class OApplicationPrivate;
 class OConfig;
 
-class OApplication: public QPEApplication
+#ifdef QWS
+class OApplication : public QPEApplication
+#else 
+class OApplication : public QApplication
+#endif
 {
   Q_OBJECT
 

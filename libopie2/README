@@ -11,6 +11,25 @@
           * reduce possible bugs through reusing tested code
 
 --------------------------------------------------------
+0. Building 
+--------------------------------------------------------
+
+* for QPE run:
+	qmake libopie2.pro
+	make
+
+OR (even better)
+	cd $OPIEDIR
+	make menuconfig
+	make -k
+
+* for QT/X11 run:
+	qmake "platform=x11" libopie2.pro
+	make
+
+Make sure you have set $PLATFORM=x86-linux
+
+--------------------------------------------------------
 1. General Overview
 --------------------------------------------------------
 
