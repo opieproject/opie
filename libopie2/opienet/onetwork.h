@@ -72,13 +72,6 @@ class OWirelessNetworkInterface;
 class OChannelHopper;
 class OMonitoringInterface;
 
-typedef struct ifreq ifreqstruct;
-typedef struct iwreq iwreqstruct;
-typedef struct iw_event iweventstruct;
-typedef struct iw_freq iwfreqstruct;
-typedef struct iw_priv_args iwprivargsstruct;
-typedef struct iw_range iwrangestruct;
-
 /*======================================================================================
  * ONetwork
  *======================================================================================*/
@@ -136,14 +129,14 @@ class ONetworkInterface : public QObject
 
   protected:
     const int _sfd;
-    mutable ifreqstruct _ifr;
+    mutable ifreq _ifr;
     OMonitoringInterface* _mon;
 
   protected:
-    ifreqstruct& ifr() const;
+    struct ifreq& ifr() const;
     virtual void init();
     bool ioctl( int call ) const;
-    bool ioctl( int call, ifreqstruct& ) const;
+    bool ioctl( int call, struct ifreq& ) const;
 };
 
 /*======================================================================================
@@ -222,12 +215,12 @@ class OWirelessNetworkInterface : public ONetworkInterface
     void buildChannelList();
     void buildPrivateList();
     virtual void init();
-    iwreqstruct& iwr() const;
+    struct iwreq& iwr() const;
     bool wioctl( int call ) const;
-    bool wioctl( int call, iwreqstruct& ) const;
+    bool wioctl( int call, struct iwreq& ) const;
 
   protected:
-    mutable iwreqstruct _iwr;
+    mutable struct iwreq _iwr;
     QMap<int,int> _channels;
 
   private:

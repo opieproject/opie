@@ -128,8 +128,8 @@ ONetwork::InterfaceIterator ONetwork::iterator() const
 bool ONetwork::isWirelessInterface( const char* name ) const
 {
     int sfd = socket( AF_INET, SOCK_STREAM, 0 );
-    iwreqstruct iwr;
-    memset( &iwr, 0, sizeof( iwreqstruct ) );
+    struct iwreq iwr;
+    memset( &iwr, 0, sizeof( struct iwreq ) );
     strcpy( (char*) &iwr.ifr_name, name );
     int result = ::ioctl( sfd, SIOCGIWNAME, &iwr );
     if ( result == -1 )
@@ -152,7 +152,7 @@ ONetworkInterface::ONetworkInterface( QObject* parent, const char* name )
 }
 
 
-ifreqstruct& ONetworkInterface::ifr() const
+struct ifreq& ONetworkInterface::ifr() const
 {
     return _ifr;
 }
@@ -172,7 +172,7 @@ void ONetworkInterface::init()
 }
 
 
-bool ONetworkInterface::ioctl( int call, ifreqstruct& ifreq ) const
+bool ONetworkInterface::ioctl( int call, struct ifreq& ifreq ) const
 {
     int result = ::ioctl( _sfd, call, &ifreq );
     if ( result == -1 )
@@ -377,7 +377,7 @@ OWirelessNetworkInterface::~OWirelessNetworkInterface()
 }
 
 
-iwreqstruct& OWirelessNetworkInterface::iwr() const
+struct iwreq& OWirelessNetworkInterface::iwr() const
 {
     return _iwr;
 }
@@ -417,20 +417,26 @@ QString OWirelessNetworkInterface::associatedAP() const
 
 void OWirelessNetworkInterface::buildChannelList()
 {
-    // IEEE802.11(b) radio frequency channels
-    struct iw_range range;
-
     //ML: If you listen carefully enough, you can hear lots of WLAN drivers suck
     //ML: The HostAP drivers need more than sizeof struct_iw range to complete
     //ML: SIOCGIWRANGE otherwise they fail with "Invalid Argument Length".
     //ML: The Wlan-NG drivers on the otherside fail (segfault!) if you allocate
     //ML: _too much_ space. This is damn shitty crap *sigh*
+    //ML: We allocate a large memory region in RAM and check whether the
+    //ML: driver pollutes this extra space. The complaint will be made on stdout,
+    //ML: so please forward this...
 
-    _iwr.u.data.pointer = (char*) &range;
-    _iwr.u.data.length = IW_MAX_FREQUENCIES; //sizeof range;
-    _iwr.u.data.flags = 0;
+    struct iwreq wrq;
+    int len = sizeof( struct iw_range )*2;
+    char *buffer = (char*) malloc( len );
+    //FIXME: Validate if we actually got the memory block
+    memset( buffer, 0, len );
+    memcpy( wrq.ifr_name, name(), IFNAMSIZ);
+    wrq.u.data.pointer = (caddr_t) buffer;
+    wrq.u.data.length = sizeof( struct iw_range );
+    wrq.u.data.flags = 0;
 
-    if ( !wioctl( SIOCGIWRANGE ) )
+    if ( ::ioctl( _sfd, SIOCGIWRANGE, &wrq ) == -1 )
     {
         qDebug( "OWirelessNetworkInterface::buildChannelList(): SIOCGIWRANGE failed (%s) - defaulting to 11 channels", strerror( errno ) );
         _channels.insert( 2412,  1 ); // 2.412 GHz
@@ -447,6 +453,21 @@ void OWirelessNetworkInterface::buildChannelList()
     }
     else
     {
+        // <check if the driver overwrites stuff>
+        int max = 0;
+        for ( int r = sizeof( struct iw_range ); r < len; r++ )
+            if (buffer[r] != 0)
+                max = r;
+        if (max > 0)
+        {
+            qWarning( "OWirelessNetworkInterface::buildChannelList(): Driver for wireless interface '%s'"
+                    "overwrote buffer end with at least %i bytes!\n", name(), max - sizeof( struct iw_range ) );
+        }
+        // </check if the driver overwrites stuff>
+
+        struct iw_range range;
+        memcpy( &range, buffer, sizeof range );
+
         qDebug( "OWirelessNetworkInterface::buildChannelList(): Interface %s reported to have %d channels.", name(), range.num_frequency );
         for ( int i = 0; i < range.num_frequency; ++i )
         {
@@ -454,7 +475,9 @@ void OWirelessNetworkInterface::buildChannelList()
             _channels.insert( freq, i+1 );
         }
     }
+
     qDebug( "OWirelessNetworkInterface::buildChannelList(): Channel list constructed." );
+    free(buffer);
 }
 
 
@@ -505,7 +528,7 @@ void OWirelessNetworkInterface::setChannel( int c ) const
 {
     if ( !_mon )
     {
-        memset( &_iwr, 0, sizeof( iwreqstruct ) );
+        memset( &_iwr, 0, sizeof( struct iwreq ) );
         _iwr.u.freq.m = c;
         _iwr.u.freq.e = 0;
         wioctl( SIOCSIWFREQ );
@@ -639,7 +662,7 @@ void OWirelessNetworkInterface::setSSID( const QString& ssid )
 }
 
 
-bool OWirelessNetworkInterface::wioctl( int call, iwreqstruct& iwreq ) const
+bool OWirelessNetworkInterface::wioctl( int call, struct iwreq& iwreq ) const
 {
     int result = ::ioctl( _sfd, call, &iwreq );
     if ( result == -1 )
@@ -675,7 +698,7 @@ OMonitoringInterface::~OMonitoringInterface()
 void OMonitoringInterface::setChannel( int c )
 {
     // use standard WE channel switching protocol
-    memset( &_if->_iwr, 0, sizeof( iwreqstruct ) );
+    memset( &_if->_iwr, 0, sizeof( struct iwreq ) );
     _if->_iwr.u.freq.m = c;
     _if->_iwr.u.freq.e = 0;
     _if->wioctl( SIOCSIWFREQ );
