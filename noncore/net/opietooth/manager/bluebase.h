@@ -10,7 +10,7 @@
 #include <qpixmap.h>
 
 #include "bluetoothbase.h"
-
+#include "btlistitem.h"
 
 #include <remotedevice.h>
 #include <manager.h>
@@ -49,9 +49,9 @@ namespace OpieTooth {
 	void initGui();
         void setInfo();
         Manager *localDevice;
-        QMap<QString,QListViewItem*> deviceList;
+        QMap<QString,BTListItem*> deviceList;
 
-        bool deviceActive( RemoteDevice *device );
+        void deviceActive( RemoteDevice *device );
 
 	QString deviceName;
 	QString defaultPasskey;
@@ -65,11 +65,12 @@ namespace OpieTooth {
 
 	private slots:
         void addSearchedDevices( QList<RemoteDevice> &newDevices );
-        void addServicesToDevice( QListViewItem *item );
+        void addServicesToDevice( BTListItem *item );
         void addServicesToDevice( const QString& device, Services::ValueList );
         void addConnectedDevices();
         void startServiceActionClicked( QListViewItem *item );
-        void startServiceActionHold( QListViewItem *, const QPoint &, int );
+        void startServiceActionHold( BTListItem *, const QPoint &, int );
+        void deviceActive( const QString& mac, bool connected  );
         void applyConfigChanges();
 
     };
