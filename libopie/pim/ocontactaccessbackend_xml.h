@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.11 2003-01-03 12:31:28 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.12 2003-01-03 16:58:03 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.11  2003-01-03 12:31:28  eilers
+ * Revision 1.12  2003-01-03 16:58:03  eilers
+ * Reenable debug output
+ *
+ * Revision 1.11  2003/01/03 12:31:28  eilers
  * Bugfix for calculating data diffs..
  *
  * Revision 1.10  2003/01/02 14:27:12  eilers
@@ -267,20 +270,22 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 								QDate current = QDate::currentDate();
 								// We have to equalize the year, otherwise
 								// the search will fail..
-								checkDate->setYMD( current.year(), checkDate->month(), checkDate->day() );
+								checkDate->setYMD( current.year(), 
+										   checkDate->month(), 
+										   checkDate->day() );
 								if ( *checkDate < current )
 									checkDate->setYMD( current.year()+1, 
 											   checkDate->month(), 
 											   checkDate->day() );
-								// qWarning("Checking if %s is between %s and %s ! ", 
-								//	 checkDate->toString().latin1(),
-								//	 current.toString().latin1(), 
-								//	 queryDate->toString().latin1() );
+								qWarning("Checking if %s is between %s and %s ! ", 
+									 checkDate->toString().latin1(),
+									 current.toString().latin1(), 
+									 queryDate->toString().latin1() );
 								if ( current.daysTo( *queryDate ) > 0 ){
 									if ( !( ( *checkDate >= current ) && 
 										( *checkDate <= *queryDate ) ) ){
 										allcorrect = false;
-										//qWarning (" Nope!..");
+										qWarning (" Nope!..");
 									}
 								}
 							}
