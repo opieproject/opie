@@ -47,14 +47,14 @@ COREMULTIMEDIA = core/multimedia/opieplayer
 
 CORESETTINGS = core/settings/light-and-power core/settings/security \
 	core/settings/systemtime core/settings/citytime \
+	core/settings/launcher
 
 NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
-	noncore/settings/appearance noncore/settings/sound \
+	noncore/settings/appearance2 noncore/settings/sound \
 	noncore/settings/mediummount \
 	noncore/settings/tabmanager noncore/settings/appskey \
 	noncore/settings/netsystemtime noncore/settings/wlansetup \
-	noncore/settings/sshkeys noncore/settings/usermanager \
- 
+	noncore/settings/sshkeys noncore/settings/usermanager
 
 NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
 	 noncore/tools/remote noncore/tools/opie-sh noncore/apps/advancedfm
