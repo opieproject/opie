@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.h,v 1.3 2003-05-24 23:34:09 tille Exp $
+ * $Id: modem.h,v 1.4 2003-05-30 15:06:17 tille Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -35,7 +35,7 @@
 
 #include <qsocketnotifier.h>
 
-//#include <config.h>
+class PPPData;
 
 void    alarm_handler(int);
 const char *pppdPath();
@@ -43,7 +43,7 @@ const char *pppdPath();
 class Modem : public QObject {
   Q_OBJECT
 public:
-  Modem();
+  Modem(PPPData*);
   ~Modem();
 
   const QString getDevice() {return device;};
@@ -76,7 +76,7 @@ public:
   
 public:
   enum Auth { PAP = 1, CHAP };
-  static Modem *modem;
+  //  static Modem *modem;
   int lastStatus;
 
 signals:
@@ -112,6 +112,7 @@ private:
   struct termios initial_tty;
   struct termios tty;
   bool modem_is_locked;
+  PPPData *_pppdata;
 };
 
 #endif

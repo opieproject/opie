@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.5 2003-05-25 18:19:04 tille Exp $
+ * $Id: pppdata.cpp,v 1.6 2003-05-30 15:06:17 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -38,21 +38,8 @@
 // #include <kapplication.h>
 #include <assert.h>
 
-PPPData *PPPData::_data = 0;
-Config *PPPData::config = 0;
-
-PPPData* PPPData::data()
-{
-    if (!_data){
-        qDebug("PPPData::data() creates new Instance");
-        _data = new PPPData();
-    }
-    if (!_data->config){
-        qDebug("PPPData::data() opens conffile");
-        _data->open();
-    }
-    return _data;
-}
+#define SEPARATOR -sseepp-
+#define SEP QString("%1SEPARATOR%1")
 
 PPPData::PPPData()
     : modemDeviceGroup(-1),
@@ -62,17 +49,6 @@ PPPData::PPPData()
      pppdisrunning(false),
      pppderror(0)
 {
-}
-
-
-//
-// open configuration file
-//
-bool PPPData::open() {
-    qDebug("opening configfile NetworkSetupPPP");
-    if (config) return true;
-    config = new Config("NetworkSetupPPP");
-
     highcount = readNumConfig(GENERAL_GRP, NUMACCOUNTS_KEY, 0) - 1;
 
   if (highcount > MAX_ACCOUNTS)
@@ -90,26 +66,54 @@ bool PPPData::open() {
 
   ::pppdVersion(&pppdVer, &pppdMod, &pppdPatch);
 
-  return true;
 }
 
+Config PPPData::config()
+{
+    return Config("NetworkSetupPPP");
+}
 
 //
 // save configuration
 //
-void PPPData::save() {
-
-  if (config) {
+void PPPData::save()
+{
+    qDebug("PPPData saving data");
     writeConfig(GENERAL_GRP, NUMACCOUNTS_KEY, count());
-    delete config;
-    config = 0;
-    qDebug("worte confi NetworkSetupPPP");
-  }
-  if (_data){
-    delete _data;
-    _data = 0;
-  }
-
+    QString key;
+    QStringList keys;
+    Config cfg = config();
+    for( QMap<QString,QString>::Iterator it = stringEntries.begin();
+         it != stringEntries.end(); ++it ){
+        QString val = it.data();
+        key = it.key();
+//        qDebug("saving %s -> %s", key.latin1(), val.latin1() );
+        keys = QStringList::split( "SEPARATOR", key );
+        qDebug("group >%s< key >%s< value >%s<", keys[0].latin1(), keys[1].latin1(), val.latin1() );
+        cfg.setGroup(keys[0]);
+        cfg.writeEntry(keys[1], val);
+    }
+    for( QMap<QString,int>::Iterator it = intEntries.begin();
+         it != intEntries.end(); ++it ){
+        int val = it.data();
+        key = it.key();
+//        qDebug("saving %s -> %i", key.latin1(), val );
+        keys = QStringList::split( "SEPARATOR", key );
+        qDebug("group >%s< key >%s< val %i", keys[0].latin1(), keys[1].latin1(), val );
+        cfg.setGroup(keys[0]);
+        cfg.writeEntry(keys[1], val);
+    }
+    for( QMap<QString,QStringList>::Iterator it = listEntries.begin();
+         it != listEntries.end(); ++it ){
+        QStringList val = it.data();
+        key = it.key();
+        QChar sep = sepEntries[key];
+//        qDebug("saving %s -> %s", key.latin1(), val.join(sep).latin1() );
+        keys = QStringList::split( "SEPARATOR", key );
+        qDebug("group >%s< key >%s<values >%s<", keys[0].latin1(), keys[1].latin1(), val.join(sep).latin1()  );
+        cfg.setGroup(keys[0]);
+        cfg.writeEntry(keys[1], val, sep);
+    }
 }
 
 
@@ -117,42 +121,40 @@ void PPPData::save() {
 // cancel changes
 //
 void PPPData::cancel() {
-
-//   if (config) {
-//     config->rollback();
-//     config->reparseConfiguration();
-//   }
-
+    stringEntries.clear();
+    intEntries.clear();
+    listEntries.clear();
 }
-
-
-// // currently differentiates between READWRITE and NONE only
-// int PPPData::access() const {
-
-//     return 1;//config->getConfigState();
-// }
-
 
 // functions to read/write date to configuration file
 QString PPPData::readConfig(const QString &group, const QString &key,
                             const QString &defvalue = "")
 {
 //    qDebug("PPPData::readConfig key >%s< group >%s<",key.latin1(), group.latin1());
-  if (config) {
-    config->setGroup(group);
-    return config->readEntry(key, defvalue);
-  } else
-    return defvalue;
+    QString idx = SEP.arg(group).arg(key);
+    if (stringEntries.find(idx) != stringEntries.end())
+        return stringEntries[idx];
+    Config cfg = config();
+    cfg.setGroup(group);
+    return cfg.readEntry(key, defvalue);
 }
 
 
 int PPPData::readNumConfig(const QString &group, const QString &key,
-			   int defvalue) {
-  if (config) {
-    config->setGroup(group);
-    return config->readNumEntry(key, defvalue);
-  } else
-    return defvalue;
+			   int defvalue)
+{
+    QString idx = SEP.arg(group).arg(key);
+    if (intEntries.find(idx) != intEntries.end())
+        return intEntries[idx];
+    Config cfg = config();
+    cfg.setGroup(group);
+    return cfg.readNumEntry(key, defvalue);
+
+//   if (config) {
+//     config->setGroup(group);
+//     return config->readNumEntry(key, defvalue);
+//   } else
+//     return defvalue;
 
 }
 
@@ -160,38 +162,55 @@ int PPPData::readNumConfig(const QString &group, const QString &key,
 bool PPPData::readListConfig(const QString &group, const QString &key,
                              QStringList &list, char sep) {
   list.clear();
-  if (config) {
-    config->setGroup(group);
-    list = config->readListEntry(key, sep);
-    return true;
-  } else
-    return false;
+  QString idx = SEP.arg(group).arg(key);
+  if (listEntries.find(idx) != listEntries.end()){
+      list = listEntries[idx];
+      return true;
+  }
+  Config cfg = config();
+  cfg.setGroup(group);
+  list = cfg.readListEntry(key, sep);
+  if (list.count() > 0) return true;
+  return false;
+
+//   if (config) {
+//     config->setGroup(group);
+//     list = config->readListEntry(key, sep);
+//     return true;
+//   } else
+//     return false;
 }
 
 
 void PPPData::writeConfig(const QString &group, const QString &key,
 			  const QString &value) {
-  if (config) {
-    config->setGroup(group);
-    config->writeEntry(key, value);
-  }
+    stringEntries.insert( SEP.arg(group).arg(key), value );
+//   if (config) {
+//     config->setGroup(group);
+//     config->writeEntry(key, value);
+//   }
 }
 
 
-void PPPData::writeConfig(const QString &group, const QString &key, int value) {
-  if (config) {
-    config->setGroup(group);
-    config->writeEntry(key, value);
-  }
+void PPPData::writeConfig(const QString &group, const QString &key, int value)
+{
+    intEntries.insert( SEP.arg(group).arg(key), value );
+//   if (config) {
+//     config->setGroup(group);
+//     config->writeEntry(key, value);
+//   }
 }
 
 
 void PPPData::writeListConfig(const QString &group, const QString &key,
-                              QStringList &list, char sep) {
-  if (config) {
-    config->setGroup(group);
-    config->writeEntry(key, list, sep);
-  }
+                              QStringList &list, char sep)
+{
+    listEntries.insert( SEP.arg(group).arg(key), list );
+    sepEntries.insert( SEP.arg(group).arg(key), sep );
+//   if (config) {
+//     config->setGroup(group);
+//     config->writeEntry(key, list, sep);
+//   }
 }
 
 
@@ -281,24 +300,24 @@ void PPPData::set_automatic_redial(bool set) {
 }
 
 
-bool PPPData::get_iconify_on_connect() {
-  return (bool) readNumConfig(GENERAL_GRP, ICONIFY_ON_CONNECT_KEY, TRUE);
-}
+// bool PPPData::get_iconify_on_connect() {
+//   return (bool) readNumConfig(GENERAL_GRP, ICONIFY_ON_CONNECT_KEY, TRUE);
+// }
 
 
-void PPPData::set_iconify_on_connect(bool set) {
-  writeConfig(GENERAL_GRP, ICONIFY_ON_CONNECT_KEY, (int) set);
-}
+// void PPPData::set_iconify_on_connect(bool set) {
+//   writeConfig(GENERAL_GRP, ICONIFY_ON_CONNECT_KEY, (int) set);
+// }
 
 
-bool PPPData::get_dock_into_panel() {
-  return (bool) readNumConfig(GENERAL_GRP, DOCKING_KEY, false);
-}
+// bool PPPData::get_dock_into_panel() {
+//   return (bool) readNumConfig(GENERAL_GRP, DOCKING_KEY, false);
+// }
 
 
-void PPPData::set_dock_into_panel(bool set) {
-  writeConfig(GENERAL_GRP, DOCKING_KEY, (int) set);
-}
+// void PPPData::set_dock_into_panel(bool set) {
+//   writeConfig(GENERAL_GRP, DOCKING_KEY, (int) set);
+// }
 
 
 QString PPPData::pppdVersion() {
@@ -790,7 +809,7 @@ bool PPPData::deleteAccount(const QString &aname) {
 int PPPData::newaccount() {
 
     qDebug("PPPData::newaccount highcount %i/%i",highcount,MAX_ACCOUNTS);
-  if(!config) open();
+//  if(!config) open();
   if (highcount >= MAX_ACCOUNTS) return -1;
 
   highcount++;
@@ -990,14 +1009,14 @@ void PPPData::setAcctEnabled(bool set) {
 }
 
 
-int PPPData::VolAcctEnabled() {
-  return readNumConfig(cgroup, VOLACCTENABLED_KEY, 0);
-}
+// int PPPData::VolAcctEnabled() {
+//   return readNumConfig(cgroup, VOLACCTENABLED_KEY, 0);
+// }
 
 
-void PPPData::setVolAcctEnabled(int set) {
-  writeConfig(cgroup, VOLACCTENABLED_KEY, set);
-}
+// void PPPData::setVolAcctEnabled(int set) {
+//   writeConfig(cgroup, VOLACCTENABLED_KEY, set);
+// }
 
 
 const QString PPPData::gateway() {
@@ -1023,7 +1042,7 @@ void PPPData::setDefaultroute(bool set) {
 
 bool PPPData::autoDNS() {
   bool set = (bool) readNumConfig(cgroup, AUTODNS_KEY, true);
-  return (set && PPPData::data()->pppdVersionMin(2, 3, 7));
+  return (set && pppdVersionMin(2, 3, 7));
 }
 
 
@@ -1226,12 +1245,16 @@ QString PPPData::modemGroup()
 QMap<QString,QString> PPPData::getConfiguredInterfaces()
 {
     QMap<QString,QString> ifaces;
-    int count = readNumConfig( ACCLIST_GRP, ACCOUNTS_COUNT, -1 );
-    QString accGrp;
+    Config config = PPPData::config();
+    config.setGroup(ACCLIST_GRP);
+    int count = config.readNumEntry( ACCOUNTS_COUNT, -1 );
+    QString accGrp, dev, acc;
     for (int i = 0; i < count; i++){
         accGrp = QString("%1_%1").arg(ACCLIST_GRP).arg(i);
-        ifaces.insert( readConfig( accGrp, ACOUNTS_DEV, "error" ),
-                       readConfig( accGrp, ACOUNTS_ACC, "error" ) );
+        config.setGroup(accGrp);
+        dev = config.readEntry( ACOUNTS_DEV, "error" );
+        acc = config.readEntry( ACOUNTS_ACC, "error" );
+        ifaces.insert( dev, acc );
     }
 
     return ifaces;
@@ -1240,13 +1263,14 @@ QMap<QString,QString> PPPData::getConfiguredInterfaces()
 void PPPData::setConfiguredInterfaces( QMap<QString,QString> ifaces )
 {
     QMap<QString,QString>::Iterator it;
-    QString accGrp;
     int i = 0;
+    Config cfg = config();
     for( it = ifaces.begin(); it != ifaces.end(); ++it, ++i ){
-        accGrp = QString("%1_%1").arg(ACCLIST_GRP).arg(i);
-        writeConfig( accGrp, ACOUNTS_DEV, it.key() );
-        writeConfig( accGrp, ACOUNTS_ACC, it.data() );
+        cfg.setGroup(QString("%1_%1").arg(ACCLIST_GRP).arg(i));
+        cfg.writeEntry( ACOUNTS_DEV, it.key() );
+        cfg.writeEntry( ACOUNTS_ACC, it.data() );
     }
-    writeConfig( ACCLIST_GRP, ACCOUNTS_COUNT, i );
+    cfg.setGroup( ACCLIST_GRP );
+    cfg.writeEntry( ACCOUNTS_COUNT, i );
 
 }

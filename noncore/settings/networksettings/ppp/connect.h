@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: connect.h,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: connect.h,v 1.2 2003-05-30 15:06:17 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -36,17 +36,17 @@
 
 #include "kpppconfig.h"
 #include "pwentry.h"
-//#include "docking.h"
-//#include "loginterm.h"
+
 
 #define MAXLOOPNEST (MAX_SCRIPT_ENTRIES/2)
 
-class PPPStats;
+class InterfacePPP;
+class PPPData;
 
 class ConnectWidget : public QWidget {
   Q_OBJECT
 public:
-  ConnectWidget(QWidget *parent, const char *name);
+  ConnectWidget(InterfacePPP*, QWidget *parent, const char *name);
   ~ConnectWidget();
 
 public:
@@ -136,17 +136,17 @@ private:
 
   unsigned int dialnumber; // the current number to dial
 
-//  PPPStats *stats;
+  InterfacePPP *_ifaceppp;
 };
 
 
 // non-member function to kill&wait on the pppd child process
-extern void killppp();
-void adddns();
-void addpeerdns();
-void removedns();
-void add_domain(const QString & newdomain);
-void auto_hostname();
+extern void killppp(PPPData*);
+void adddns(InterfacePPP*);
+void addpeerdns(InterfacePPP*);
+void removedns(InterfacePPP*);
+void add_domain(const QString & newdomain, InterfacePPP*);
+void auto_hostname(InterfacePPP*);
 
 #endif
 

@@ -2,7 +2,7 @@
  *
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.h,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: edit.h,v 1.2 2003-05-30 15:06:17 tille Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -47,11 +47,12 @@
 #include "pppdargs.h"
 
 class IPLineEdit;
+class PPPData;
 
 class DialWidget : public QWidget {
   Q_OBJECT
 public:
-  DialWidget( QWidget *parent=0, bool isnewaccount = true, const char *name=0 );
+  DialWidget( PPPData*, QWidget *parent=0, bool isnewaccount = true, const char *name=0 );
   ~DialWidget() {}
 
 public slots:
@@ -76,6 +77,7 @@ private:
   // for the phonenumber selection
   QPushButton *add, *del, *up, *down;
   QListBox *numbers;
+    PPPData *_pppdata;
 };
 
 
@@ -87,7 +89,7 @@ private:
 class ExecWidget : public QWidget {
   Q_OBJECT
 public:
-  ExecWidget(QWidget *parent=0, bool isnewaccount=true, const char *name=0);
+  ExecWidget(PPPData*, QWidget *parent=0, bool isnewaccount=true, const char *name=0);
 
 public slots:
   bool save();
@@ -104,13 +106,14 @@ private:
 
   QLineEdit *discommand;
   QLabel *discommand_label;
+    PPPData *_pppdata;
 };
 
 
 class IPWidget : public QWidget {
   Q_OBJECT
 public:
-  IPWidget( QWidget *parent=0, bool isnewaccount = true, const char *name=0 );
+  IPWidget(PPPData*, QWidget *parent=0, bool isnewaccount = true, const char *name=0 );
   ~IPWidget() {}
 
 public slots:
@@ -134,13 +137,14 @@ private:
   IPLineEdit *subnetmask_l;
 
   QCheckBox *autoname;
+    PPPData *_pppdata;
 };
 
 
 class DNSWidget : public QWidget {
   Q_OBJECT
 public:
-  DNSWidget( QWidget *parent=0, bool isnewaccount = true, const char *name=0 );
+  DNSWidget( PPPData*, QWidget *parent=0, bool isnewaccount = true, const char *name=0 );
   ~DNSWidget() {}
 
 public slots:
@@ -166,13 +170,14 @@ private:
   QLineEdit *dnsdomain;
   QLabel *dnsdomain_label;
   QCheckBox *exdnsdisabled_toggle;
+    PPPData *_pppdata;
 };
 
 
 class GatewayWidget : public QWidget {
   Q_OBJECT
 public:
-  GatewayWidget( QWidget *parent=0, bool isnewaccount = true, const char *name=0 );
+  GatewayWidget(PPPData*, QWidget *parent=0, bool isnewaccount = true, const char *name=0 );
   ~GatewayWidget() {}
 
 public slots:
@@ -190,13 +195,14 @@ private:
   QRadioButton *staticgateway;
   IPLineEdit *gatewayaddr;
   QCheckBox *defaultroute;
+    PPPData *_pppdata;
 };
 
 
 class ScriptWidget : public QWidget {
   Q_OBJECT
 public:
-  ScriptWidget( QWidget *parent=0, bool isnewaccount = true, const char *name=0 );
+  ScriptWidget(PPPData*, QWidget *parent=0, bool isnewaccount = true, const char *name=0 );
   ~ScriptWidget() {}
 
 public slots:
@@ -225,6 +231,7 @@ private:
   QListBox *sl, *stl;
 
   QScrollBar *slb;
+    PPPData *_pppdata;
 };
 
 
@@ -245,6 +252,7 @@ private slots:
 
 private:
   QLineEdit *le;
+
 };
 
 

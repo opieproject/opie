@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.h,v 1.2 2003-05-25 12:33:50 tille Exp $
+ * $Id: general.h,v 1.3 2003-05-30 15:06:17 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -34,13 +34,13 @@ class QCombobox;
 class QLabel;
 class QCheckBox;
 class QComboBox;
-
-
+class PPPData;
+class InterfacePPP;
 
 class ModemWidget : public QWidget {
   Q_OBJECT
 public:
-  ModemWidget( QWidget *parent=0, const char *name=0 );
+  ModemWidget( InterfacePPP*, QWidget *parent=0, const char *name=0 );
 
 private slots:
   void 	setmodemdc(int);
@@ -64,13 +64,14 @@ private:
 
   QSpinBox 	*modemtimeout;
   QCheckBox     *modemlockfile;
+  InterfacePPP *_ifaceppp;
 };
 
 
 class ModemWidget2 : public QWidget {
   Q_OBJECT
 public:
-  ModemWidget2( QWidget *parent=0, const char *name=0 );
+  ModemWidget2( InterfacePPP*, QWidget *parent=0, const char *name=0 );
 
 private slots:
   void  waitfordtchanged(bool);
@@ -91,6 +92,7 @@ private:
   QSpinBox 	*busywait;
   QCheckBox 	*chkbox1;
   QSlider       *volume;
+  InterfacePPP *_ifaceppp;
 };
 
 #endif

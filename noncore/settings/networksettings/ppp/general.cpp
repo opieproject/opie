@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.3 2003-05-25 12:33:50 tille Exp $
+ * $Id: general.cpp,v 1.4 2003-05-30 15:06:17 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -39,7 +39,7 @@
 // #include <qgroupbox.h>
 
 #include "general.h"
-//#include "version.h"
+#include "interfaceppp.h"
 //#include "miniterm.h"
 #include "modeminfo.h"
 #include "modemcmds.h"
@@ -50,8 +50,8 @@
 
 
 
-ModemWidget::ModemWidget( QWidget *parent, const char *name)
-  : QWidget(parent, name)
+ModemWidget::ModemWidget( InterfacePPP *ifppp, QWidget *parent, const char *name )
+    : QWidget(parent, name), _ifaceppp(ifppp)
 {
   int k;
 
@@ -172,7 +172,7 @@ ModemWidget::ModemWidget( QWidget *parent, const char *name)
   QWhatsThis::add(baud_c,tmp);
 
   for(int i=0; i <= enter->count()-1; i++) {
-    if(PPPData::data()->enter() == enter->text(i))
+    if(_ifaceppp->data()->enter() == enter->text(i))
       enter->setCurrentItem(i);
   }
 
@@ -181,7 +181,7 @@ ModemWidget::ModemWidget( QWidget *parent, const char *name)
   //Modem Lock File
   modemlockfile = new QCheckBox(i18n("&Use lock file"), this);
 
-  modemlockfile->setChecked(PPPData::data()->modemLockFile());
+  modemlockfile->setChecked(_ifaceppp->data()->modemLockFile());
   connect(modemlockfile, SIGNAL(toggled(bool)),
           SLOT(modemlockfilechanged(bool)));
   tl->addMultiCellWidget(modemlockfile, 5, 5, 0, 1);
@@ -201,10 +201,11 @@ ModemWidget::ModemWidget( QWidget *parent, const char *name)
   QHBoxLayout *timeoutLayout = new QHBoxLayout( this );
   QLabel *timeoutlabel = new QLabel( tr("Modem timeout:") ,this, "timeout" );
   modemtimeout = new QSpinBox( 1, 120, 1, this, "modemTimeout" );
-//   modemtimeout = new KIntNumInput(PPPData::data()->modemTimeout(), this);
+//   modemtimeout = new KIntNumInput(_pppdata->modemTimeout(), this);
 //   modemtimeout->setLabel(i18n("Modem &timeout:"));
 //  modemtimeout->setRange(1, 120, 1);
   modemtimeout->setSuffix(i18n(" sec"));
+  modemtimeout->setValue( _ifaceppp->data()->modemTimeout() );
   connect(modemtimeout, SIGNAL(valueChanged(int)),
 	  SLOT(modemtimeoutchanged(int)));
   timeoutLayout->addWidget(timeoutlabel);
@@ -218,23 +219,23 @@ ModemWidget::ModemWidget( QWidget *parent, const char *name)
 
   //set stuff from gpppdata
   for(int i=0; i <= enter->count()-1; i++) {
-    if(PPPData::data()->enter() == enter->text(i))
+    if(_ifaceppp->data()->enter() == enter->text(i))
       enter->setCurrentItem(i);
   }
 
   for(int i=0; i <= modemdevice->count()-1; i++) {
-    if(PPPData::data()->modemDevice() == modemdevice->text(i))
+    if(_ifaceppp->data()->modemDevice() == modemdevice->text(i))
       modemdevice->setCurrentItem(i);
   }
 
   for(int i=0; i <= flowcontrol->count()-1; i++) {
-    if(PPPData::data()->flowcontrol() == flowcontrol->text(i))
+    if(_ifaceppp->data()->flowcontrol() == flowcontrol->text(i))
       flowcontrol->setCurrentItem(i);
   }
 
   //set the modem speed
   for(int i=0; i < baud_c->count(); i++)
-    if(baud_c->text(i) == PPPData::data()->speed())
+    if(baud_c->text(i) == _ifaceppp->data()->speed())
       baud_c->setCurrentItem(i);
 
   tl->setRowStretch(7, 1);
@@ -242,43 +243,44 @@ ModemWidget::ModemWidget( QWidget *parent, const char *name)
 
 
 void ModemWidget::speed_selection(int) {
-  PPPData::data()->setSpeed(baud_c->text(baud_c->currentItem()));
+  _ifaceppp->data()->setSpeed(baud_c->text(baud_c->currentItem()));
 }
 
 
 void ModemWidget::setenter(int ) {
-  PPPData::data()->setEnter(enter->text(enter->currentItem()));
+  _ifaceppp->data()->setEnter(enter->text(enter->currentItem()));
 }
 
 
 void ModemWidget::setmodemdc(int i) {
-  PPPData::data()->setModemDevice(modemdevice->text(i));
+  _ifaceppp->data()->setModemDevice(modemdevice->text(i));
 }
 
 
 void ModemWidget::setflowcontrol(int i) {
-  PPPData::data()->setFlowcontrol(flowcontrol->text(i));
+  _ifaceppp->data()->setFlowcontrol(flowcontrol->text(i));
 }
 
 
 void ModemWidget::modemlockfilechanged(bool set) {
-  PPPData::data()->setModemLockFile(set);
+  _ifaceppp->data()->setModemLockFile(set);
 }
 
 
 void ModemWidget::modemtimeoutchanged(int n) {
-  PPPData::data()->setModemTimeout(n);
+  _ifaceppp->data()->setModemTimeout(n);
 }
 
 
-ModemWidget2::ModemWidget2( QWidget *parent, const char *name)
-  : QWidget(parent, name)
+ModemWidget2::ModemWidget2( InterfacePPP* ifp, QWidget *parent,
+                            const char *name)
+    : QWidget(parent, name), _ifaceppp(ifp)
 {
     QVBoxLayout *l1 = new QVBoxLayout(this, 0 );//, KDialog::spacingHint());
 
 
   waitfordt = new QCheckBox(i18n("&Wait for dial tone before dialing"), this);
-  waitfordt->setChecked(PPPData::data()->waitForDialTone());
+  waitfordt->setChecked(_ifaceppp->data()->waitForDialTone());
   connect(waitfordt, SIGNAL(toggled(bool)), SLOT(waitfordtchanged(bool)));
   l1->addWidget(waitfordt);
   QWhatsThis::add(waitfordt,
@@ -293,7 +295,7 @@ ModemWidget2::ModemWidget2( QWidget *parent, const char *name)
   QHBoxLayout *waitLayout = new QHBoxLayout( this );
   QLabel *waitLabel = new QLabel( tr("Busy wait:"), this, "busyWait" );
   busywait = new QSpinBox( 0, 300, 5, this, "busyWait" );
-//   busywait = new KIntNumInput(PPPData::data()->busyWait(), this);
+//   busywait = new KIntNumInput(_pppdata->busyWait(), this);
 //   busywait->setLabel(i18n("B&usy wait:"));
 //   busywait->setRange(0, 300, 5, true);
    busywait->setSuffix(i18n(" sec"));
@@ -318,7 +320,8 @@ ModemWidget2::ModemWidget2( QWidget *parent, const char *name)
 
   QLabel *volumeLabel = new QLabel(i18n("Modem &volume:"), this);
   hbl->addWidget(volumeLabel);
-  volume = new QSlider(0, 2, 1, PPPData::data()->volume(), QSlider::Horizontal, this);
+  volume = new QSlider(0, 2, 1, _ifaceppp->data()->volume(),
+                       QSlider::Horizontal, this);
   volumeLabel->setBuddy(volume);
   volume->setTickmarks(QSlider::Below);
   hbl->addWidget(volume);
@@ -342,7 +345,7 @@ ModemWidget2::ModemWidget2( QWidget *parent, const char *name)
 
 #if 0
   chkbox1 = new QCheckBox(i18n("Modem asserts CD line"), this);
-  chkbox1->setChecked(PPPData::data()->UseCDLine());
+  chkbox1->setChecked(_ifaceppp->data()->UseCDLine());
   connect(chkbox1,SIGNAL(toggled(bool)),
 	  this,SLOT(use_cdline_toggled(bool)));
   l12->addWidget(chkbox1);
@@ -399,14 +402,14 @@ ModemWidget2::ModemWidget2( QWidget *parent, const char *name)
 
 
 void ModemWidget2::modemcmdsbutton() {
-  ModemCommands mc(this);
+  ModemCommands mc(_ifaceppp->data(), this);
   mc.showMaximized();
   mc.exec();
 }
 
 
 void ModemWidget2::query_modem() {
-  ModemTransfer mt(this);
+  ModemTransfer mt(_ifaceppp->modem(), this);
   mt.exec();
 }
 
@@ -419,20 +422,20 @@ void ModemWidget2::query_modem() {
 
 #if 0
 void ModemWidget2::use_cdline_toggled(bool on) {
-    PPPData::data()->setUseCDLine(on);
+    _ifaceppp->data()->setUseCDLine(on);
 }
 #endif
 
 void ModemWidget2::waitfordtchanged(bool b) {
-  PPPData::data()->setWaitForDialTone((int)b);
+  _ifaceppp->data()->setWaitForDialTone((int)b);
 }
 
 void ModemWidget2::busywaitchanged(int n) {
-  PPPData::data()->setbusyWait(n);
+  _ifaceppp->data()->setbusyWait(n);
 }
 
 
 void ModemWidget2::volumeChanged(int v) {
-  PPPData::data()->setVolume(v);
+  _ifaceppp->data()->setVolume(v);
 }
 

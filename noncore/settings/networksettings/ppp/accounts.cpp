@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.4 2003-05-25 18:19:04 tille Exp $
+ * $Id: accounts.cpp,v 1.5 2003-05-30 15:06:17 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -50,8 +50,8 @@
 
 void parseargs(char* buf, char** args);
 
-AccountWidget::AccountWidget( QWidget *parent, const char *name )
-  : QWidget( parent, name )
+AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
+    : QWidget( parent, name ), _pppdata(pd)
 {
   QVBoxLayout *l1 = new QVBoxLayout(this, 10, 10);
   accountlist_l = new QListBox(this);
@@ -152,17 +152,17 @@ AccountWidget::AccountWidget( QWidget *parent, const char *name )
 //   l122->addStretch(1);
 
   //load up account list from gppdata to the list box
-  if(PPPData::data()->count() > 0) {
-    for(int i=0; i <= PPPData::data()->count()-1; i++) {
-      PPPData::data()->setAccountbyIndex(i);
-      accountlist_l->insertItem(PPPData::data()->accname());
+  if(_pppdata->count() > 0) {
+    for(int i=0; i <= _pppdata->count()-1; i++) {
+      _pppdata->setAccountbyIndex(i);
+      accountlist_l->insertItem(_pppdata->accname());
     }
   }
 
 //  slotListBoxSelect(accountlist_l->currentItem());
-  qDebug("setting listview index to %i",PPPData::data()->currentAccountID() );
-  accountlist_l->setCurrentItem( PPPData::data()->currentAccountID() );
-//  slotListBoxSelect( PPPData::data()->currentAccountID());
+  qDebug("setting listview index to %i",_pppdata->currentAccountID() );
+  accountlist_l->setCurrentItem( _pppdata->currentAccountID() );
+//  slotListBoxSelect( _pppdata->currentAccountID());
 
   l1->activate();
 }
@@ -175,9 +175,9 @@ void AccountWidget::slotListBoxSelect(int idx) {
   copy_b->setEnabled((bool)(idx != -1));
   if(idx!=-1) {
       qDebug("setting account to %i", idx);
-    QString account = PPPData::data()->accname();
-    PPPData::data()->setAccountbyIndex(accountlist_l->currentItem());
-    //   PPPData::data()->setAccount(account);
+    QString account = _pppdata->accname();
+    _pppdata->setAccountbyIndex(accountlist_l->currentItem());
+    //   _pppdata->setAccount(account);
  }
 }
 
@@ -214,14 +214,14 @@ void AccountWidget::slotListBoxSelect(int idx) {
 
 
 void AccountWidget::editaccount() {
-  PPPData::data()->setAccount(accountlist_l->text(accountlist_l->currentItem()));
+  _pppdata->setAccount(accountlist_l->text(accountlist_l->currentItem()));
 
   int result = doTab();
 
   if(result == QDialog::Accepted) {
-    accountlist_l->changeItem(PPPData::data()->accname(),accountlist_l->currentItem());
+    accountlist_l->changeItem(_pppdata->accname(),accountlist_l->currentItem());
 //    emit resetaccounts();
-    PPPData::data()->save();
+    _pppdata->save();
   }
 }
 
@@ -245,15 +245,15 @@ void AccountWidget::newaccount() {
 //   switch(query) {
 //   case QMessageBox::Yes:
 //     {
-//       if (PPPData::data()->newaccount() == -1)
+//       if (_pppdata->newaccount() == -1)
 // 	return;
 // //       ProviderDB pdb(this);
 // //       result = pdb.exec();
 //       break;
 //     }
 //   case QMessageBox::No:
-  if (PPPData::data()->newaccount() == -1){
-      qDebug("PPPData::data()->newaccount() == -1");
+  if (_pppdata->newaccount() == -1){
+      qDebug("_pppdata->newaccount() == -1");
       return;
   }
     result = doTab();
@@ -263,13 +263,13 @@ void AccountWidget::newaccount() {
 //   }
 
   if(result == QDialog::Accepted) {
-    accountlist_l->insertItem(PPPData::data()->accname());
-    accountlist_l->setSelected(accountlist_l->findItem(PPPData::data()->accname()),
+    accountlist_l->insertItem(_pppdata->accname());
+    accountlist_l->setSelected(accountlist_l->findItem(_pppdata->accname()),
 			       true);
 //    emit resetaccounts();
-    PPPData::data()->save();
+    _pppdata->save();
   } else
-    PPPData::data()->deleteAccount();
+    _pppdata->deleteAccount();
 }
 
 
@@ -284,11 +284,11 @@ void AccountWidget::copyaccount() {
     return;
   }
 
-  PPPData::data()->copyaccount(accountlist_l->currentItem());
+  _pppdata->copyaccount(accountlist_l->currentItem());
 
-  accountlist_l->insertItem(PPPData::data()->accname());
+  accountlist_l->insertItem(_pppdata->accname());
 //  emit resetaccounts();
-  PPPData::data()->save();
+  _pppdata->save();
 }
 
 
@@ -300,11 +300,11 @@ void AccountWidget::deleteaccount() {
   if(QMessageBox::warning(this, s, i18n("Confirm")) != QMessageBox::Yes)
     return;
 
-  if(PPPData::data()->deleteAccount(accountlist_l->text(accountlist_l->currentItem())))
+  if(_pppdata->deleteAccount(accountlist_l->text(accountlist_l->currentItem())))
     accountlist_l->removeItem(accountlist_l->currentItem());
 
   emit resetaccounts();
-  PPPData::data()->save();
+  _pppdata->save();
 
   slotListBoxSelect(accountlist_l->currentItem());
 
@@ -322,27 +322,27 @@ int AccountWidget::doTab(){
 
     bool isnewaccount;
 
-  if(PPPData::data()->accname().isEmpty()) {
+  if(_pppdata->accname().isEmpty()) {
       dlg->setCaption(i18n("New Account"));
       isnewaccount = true;
   } else {
       QString tit = i18n("Edit Account: ");
-      tit += PPPData::data()->accname();
+      tit += _pppdata->accname();
       dlg->setCaption(tit);
       isnewaccount = false;
   }
 
-  dial_w = new DialWidget( tabWindow, isnewaccount, "Dial Setup");
+  dial_w = new DialWidget( _pppdata, tabWindow, isnewaccount, "Dial Setup");
   tabWindow->addTab( dial_w, i18n("Dial") );
-  ip_w = new IPWidget( tabWindow, isnewaccount, i18n("IP Setup"));
+  ip_w = new IPWidget( _pppdata, tabWindow, isnewaccount, i18n("IP Setup"));
   tabWindow->addTab( ip_w, i18n("IP") );
-  gateway_w = new GatewayWidget( tabWindow, isnewaccount, i18n("Gateway Setup"));
+  gateway_w = new GatewayWidget( _pppdata, tabWindow, isnewaccount, i18n("Gateway Setup"));
   tabWindow->addTab( gateway_w, i18n("Gateway") );
-  dns_w = new DNSWidget( tabWindow, isnewaccount, i18n("DNS Servers") );
+  dns_w = new DNSWidget( _pppdata, tabWindow, isnewaccount, i18n("DNS Servers") );
   tabWindow->addTab( dns_w, i18n("DNS") );
-  script_w = new ScriptWidget( tabWindow, isnewaccount, i18n("Edit Login Script"));
+  script_w = new ScriptWidget( _pppdata, tabWindow, isnewaccount, i18n("Edit Login Script"));
   tabWindow->addTab( script_w, i18n("Login Script") );
-  ExecWidget *exec_w = new ExecWidget( tabWindow, isnewaccount, i18n("Execute Programs"));
+  ExecWidget *exec_w = new ExecWidget( _pppdata, tabWindow, isnewaccount, i18n("Execute Programs"));
   tabWindow->addTab( exec_w, i18n("Execute") );
 //   acct = new AccountingSelector( tabWindow, isnewaccount );
 //   tabWindow->addTab( acct, i18n("Accounting"));

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modemcmds.cpp,v 1.2 2003-05-24 16:12:04 tille Exp $
+ * $Id: modemcmds.cpp,v 1.3 2003-05-30 15:06:17 tille Exp $
  *
  * Copyright (C) 1997 Bernd Johannes Wuebben
  * wuebben@math.cornell.edu
@@ -40,8 +40,8 @@
 // a little trick to make the label look like a disabled lineedit
 #define FORMATSLIDERLABEL(l) //l->setFixedWidth(l->sizeHint().width()); l->setFixedHeight(QLineEdit(dummyWidget).sizeHint().height()); l->setAlignment(AlignCenter); l->setFrameStyle(QFrame::WinPanel|QFrame::Sunken); l->setLineWidth(2);
 
-ModemCommands::ModemCommands(QWidget *parent, const char *name)
-    : QDialog(parent, name, true ) //, i18n("Edit Modem Commands") , Ok|Cancel)
+ModemCommands::ModemCommands(PPPData *pd, QWidget *parent, const char *name)
+    : QDialog(parent, name, true ), _pppdata(pd)
 {
     setCaption(i18n("Edit Modem Commands"));
 
@@ -240,73 +240,73 @@ ModemCommands::ModemCommands(QWidget *parent, const char *name)
   l1->addRowSpacing(GRIDROWS, 5);
 
   //set stuff from gpppdata
-  preinitslider->setValue(PPPData::data()->modemPreInitDelay());
-  lpreinitslider->setNum(PPPData::data()->modemPreInitDelay());
+  preinitslider->setValue(_pppdata->modemPreInitDelay());
+  lpreinitslider->setNum(_pppdata->modemPreInitDelay());
   for(int i = 0; i < PPPData::NumInitStrings; i++)
-      initstr[i]->setText(PPPData::data()->modemInitStr(i));
-  initslider->setValue(PPPData::data()->modemInitDelay());
-  linitslider->setNum(PPPData::data()->modemInitDelay());
-  initresp->setText(PPPData::data()->modemInitResp());
+      initstr[i]->setText(_pppdata->modemInitStr(i));
+  initslider->setValue(_pppdata->modemInitDelay());
+  linitslider->setNum(_pppdata->modemInitDelay());
+  initresp->setText(_pppdata->modemInitResp());
 
-  durationslider->setValue(PPPData::data()->modemToneDuration());
-  ldurationslider->setNum(PPPData::data()->modemToneDuration());
+  durationslider->setValue(_pppdata->modemToneDuration());
+  ldurationslider->setNum(_pppdata->modemToneDuration());
 
-  nodetectdialtone->setText(PPPData::data()->modemNoDialToneDetectionStr());
-  dialstr->setText(PPPData::data()->modemDialStr());
-  connectresp->setText(PPPData::data()->modemConnectResp());
-  busyresp->setText(PPPData::data()->modemBusyResp());
-  nocarrierresp->setText(PPPData::data()->modemNoCarrierResp());
-  nodialtoneresp->setText(PPPData::data()->modemNoDialtoneResp());
+  nodetectdialtone->setText(_pppdata->modemNoDialToneDetectionStr());
+  dialstr->setText(_pppdata->modemDialStr());
+  connectresp->setText(_pppdata->modemConnectResp());
+  busyresp->setText(_pppdata->modemBusyResp());
+  nocarrierresp->setText(_pppdata->modemNoCarrierResp());
+  nodialtoneresp->setText(_pppdata->modemNoDialtoneResp());
 
-  escapestr->setText(PPPData::data()->modemEscapeStr());
-  escaperesp->setText(PPPData::data()->modemEscapeResp());
+  escapestr->setText(_pppdata->modemEscapeStr());
+  escaperesp->setText(_pppdata->modemEscapeResp());
 
-  hangupstr->setText(PPPData::data()->modemHangupStr());
-  hangupresp->setText(PPPData::data()->modemHangupResp());
+  hangupstr->setText(_pppdata->modemHangupStr());
+  hangupresp->setText(_pppdata->modemHangupResp());
 
-  answerstr->setText(PPPData::data()->modemAnswerStr());
-  ringresp->setText(PPPData::data()->modemRingResp());
-  answerresp->setText(PPPData::data()->modemAnswerResp());
+  answerstr->setText(_pppdata->modemAnswerStr());
+  ringresp->setText(_pppdata->modemRingResp());
+  answerresp->setText(_pppdata->modemAnswerResp());
 
-  slider->setValue(PPPData::data()->modemEscapeGuardTime());
-  lslider->setNum(PPPData::data()->modemEscapeGuardTime());
+  slider->setValue(_pppdata->modemEscapeGuardTime());
+  lslider->setNum(_pppdata->modemEscapeGuardTime());
 
-  volume_off->setText(PPPData::data()->volumeOff());
-  volume_medium->setText(PPPData::data()->volumeMedium());
-  volume_high->setText(PPPData::data()->volumeHigh());
+  volume_off->setText(_pppdata->volumeOff());
+  volume_medium->setText(_pppdata->volumeMedium());
+  volume_high->setText(_pppdata->volumeHigh());
 }
 
 
 void ModemCommands::slotOk() {
-  PPPData::data()->setModemPreInitDelay(lpreinitslider->text().toInt());
+  _pppdata->setModemPreInitDelay(lpreinitslider->text().toInt());
   for(int i = 0; i < PPPData::NumInitStrings; i++)
-      PPPData::data()->setModemInitStr(i, initstr[i]->text());
-  PPPData::data()->setModemInitResp(initresp->text());
-  PPPData::data()->setModemInitDelay(linitslider->text().toInt());
+      _pppdata->setModemInitStr(i, initstr[i]->text());
+  _pppdata->setModemInitResp(initresp->text());
+  _pppdata->setModemInitDelay(linitslider->text().toInt());
 
-  PPPData::data()->setModemToneDuration(ldurationslider->text().toInt());
-  PPPData::data()->setModemNoDialToneDetectionStr(nodetectdialtone->text());
-  PPPData::data()->setModemDialStr(dialstr->text());
-  PPPData::data()->setModemConnectResp(connectresp->text());
-  PPPData::data()->setModemBusyResp(busyresp->text());
-  PPPData::data()->setModemNoCarrierResp(nocarrierresp->text());
-  PPPData::data()->setModemNoDialtoneResp(nodialtoneresp->text());
+  _pppdata->setModemToneDuration(ldurationslider->text().toInt());
+  _pppdata->setModemNoDialToneDetectionStr(nodetectdialtone->text());
+  _pppdata->setModemDialStr(dialstr->text());
+  _pppdata->setModemConnectResp(connectresp->text());
+  _pppdata->setModemBusyResp(busyresp->text());
+  _pppdata->setModemNoCarrierResp(nocarrierresp->text());
+  _pppdata->setModemNoDialtoneResp(nodialtoneresp->text());
 
-  PPPData::data()->setModemEscapeStr(escapestr->text());
-  PPPData::data()->setModemEscapeResp(escaperesp->text());
-  PPPData::data()->setModemEscapeGuardTime(lslider->text().toInt());
-  PPPData::data()->setModemHangupStr(hangupstr->text());
-  PPPData::data()->setModemHangupResp(hangupresp->text());
+  _pppdata->setModemEscapeStr(escapestr->text());
+  _pppdata->setModemEscapeResp(escaperesp->text());
+  _pppdata->setModemEscapeGuardTime(lslider->text().toInt());
+  _pppdata->setModemHangupStr(hangupstr->text());
+  _pppdata->setModemHangupResp(hangupresp->text());
 
-  PPPData::data()->setModemAnswerStr(answerstr->text());
-  PPPData::data()->setModemRingResp(ringresp->text());
-  PPPData::data()->setModemAnswerResp(answerresp->text());
+  _pppdata->setModemAnswerStr(answerstr->text());
+  _pppdata->setModemRingResp(ringresp->text());
+  _pppdata->setModemAnswerResp(answerresp->text());
 
-  PPPData::data()->setVolumeHigh(volume_high->text());
-  PPPData::data()->setVolumeMedium(volume_medium->text());
-  PPPData::data()->setVolumeOff(volume_off->text());
+  _pppdata->setVolumeHigh(volume_high->text());
+  _pppdata->setVolumeMedium(volume_medium->text());
+  _pppdata->setVolumeOff(volume_off->text());
 
-  PPPData::data()->save();
+  _pppdata->save();
   accept();
 }
 

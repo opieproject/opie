@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.cpp,v 1.3 2003-05-24 17:03:27 tille Exp $
+ * $Id: edit.cpp,v 1.4 2003-05-30 15:06:17 tille Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -45,8 +45,9 @@
 #include "iplined.h"
 #include "auth.h"
 
-DialWidget::DialWidget( QWidget *parent, bool isnewaccount, const char *name )
-  : QWidget(parent, name)
+DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
+                        , const char *name )
+    : QWidget(parent, name), _pppdata(pd)
 {
   const int GRIDROWS = 6;
 
@@ -154,10 +155,10 @@ DialWidget::DialWidget( QWidget *parent, bool isnewaccount, const char *name )
 
   // Set defaults if editing an existing connection
   if(!isnewaccount) {
-    connectname_l->setText(PPPData::data()->accname());
+    connectname_l->setText(_pppdata->accname());
 
     // insert the phone numbers into the listbox
-    QString n = PPPData::data()->phonenumber();
+    QString n = _pppdata->phonenumber();
     QString tmp = "";
     uint idx = 0;
     while(idx != n.length()) {
@@ -172,8 +173,8 @@ DialWidget::DialWidget( QWidget *parent, bool isnewaccount, const char *name )
     if(tmp.length() > 0)
       numbers->insertItem(tmp);
 
-    auth->setCurrentItem(PPPData::data()->authMethod());
-    store_password->setChecked(PPPData::data()->storePassword());
+    auth->setCurrentItem(_pppdata->authMethod());
+    store_password->setChecked(_pppdata->storePassword());
   } else {
     // select PAP/CHAP as default
     auth->setCurrentItem(AUTH_PAPCHAP);
@@ -187,10 +188,10 @@ DialWidget::DialWidget( QWidget *parent, bool isnewaccount, const char *name )
 bool DialWidget::save() {
   //first check to make sure that the account name is unique!
   if(connectname_l->text().isEmpty() ||
-     !PPPData::data()->isUniqueAccname(connectname_l->text())) {
+     !_pppdata->isUniqueAccname(connectname_l->text())) {
     return false;
   } else {
-    PPPData::data()->setAccname(connectname_l->text());
+    _pppdata->setAccname(connectname_l->text());
 
     QString number = "";
     for(uint i = 0; i < numbers->count(); i++) {
@@ -199,9 +200,9 @@ bool DialWidget::save() {
       number += numbers->text(i);
     }
 
-    PPPData::data()->setPhonenumber(number);
-    PPPData::data()->setAuthMethod(auth->currentItem());
-    PPPData::data()->setStorePassword(store_password->isChecked());
+    _pppdata->setPhonenumber(number);
+    _pppdata->setAuthMethod(auth->currentItem());
+    _pppdata->setStorePassword(store_password->isChecked());
     return true;
   }
 }
@@ -222,7 +223,7 @@ void DialWidget::selectionChanged(int) {
 
 
 void DialWidget::addNumber() {
-   PhoneNumberDialog dlg(this);
+    PhoneNumberDialog dlg(this);
    if(dlg.exec()) {
      numbers->insertItem(dlg.phoneNumber());
      numbersChanged();
@@ -263,7 +264,7 @@ void DialWidget::downNumber() {
 
 
 void DialWidget::pppdargsbutton() {
-  PPPdArguments pa(this);
+    PPPdArguments pa(_pppdata, this);
   pa.exec();
 }
 
@@ -272,8 +273,8 @@ void DialWidget::pppdargsbutton() {
 /////////////////////////////////////////////////////////////////////////////
 // ExecWidget
 /////////////////////////////////////////////////////////////////////////////
-ExecWidget::ExecWidget(QWidget *parent, bool isnewaccount, const char *name) :
-  QWidget(parent, name)
+ExecWidget::ExecWidget(PPPData *pd, QWidget *parent, bool isnewaccount, const char *name) :
+    QWidget(parent, name), _pppdata(pd)
 {
     QVBoxLayout *tl = new QVBoxLayout(this, 0 );//, KDialog::spacingHint());
 
@@ -360,19 +361,19 @@ i18n("Here you can select commands to run at certain stages of the\n"
 
   // Set defaults if editing an existing connection
   if(!isnewaccount) {
-    before_connect->setText(PPPData::data()->command_before_connect());
-    command->setText(PPPData::data()->command_on_connect());
-    discommand->setText(PPPData::data()->command_on_disconnect());
-    predisconnect->setText(PPPData::data()->command_before_disconnect());
+    before_connect->setText(_pppdata->command_before_connect());
+    command->setText(_pppdata->command_on_connect());
+    discommand->setText(_pppdata->command_on_disconnect());
+    predisconnect->setText(_pppdata->command_before_disconnect());
   }
 }
 
 
 bool ExecWidget::save() {
-  PPPData::data()->setCommand_before_connect(before_connect->text());
-  PPPData::data()->setCommand_on_connect(command->text());
-  PPPData::data()->setCommand_before_disconnect(predisconnect->text());
-  PPPData::data()->setCommand_on_disconnect(discommand->text());
+  _pppdata->setCommand_before_connect(before_connect->text());
+  _pppdata->setCommand_on_connect(command->text());
+  _pppdata->setCommand_before_disconnect(predisconnect->text());
+  _pppdata->setCommand_on_disconnect(discommand->text());
   return true;
 }
 
@@ -383,8 +384,8 @@ bool ExecWidget::save() {
 // IPWidget
 //
 /////////////////////////////////////////////////////////////////////////////
-IPWidget::IPWidget( QWidget *parent, bool isnewaccount, const char *name )
-  : QWidget(parent, name)
+IPWidget::IPWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const char *name )
+    : QWidget(parent, name), _pppdata(pd)
 {
   QVBoxLayout *topLayout = new QVBoxLayout(this);
   topLayout->setSpacing( 3 );//KDialog::spacingHint());
@@ -449,7 +450,7 @@ IPWidget::IPWidget( QWidget *parent, bool isnewaccount, const char *name )
   QWhatsThis::add(subnetmask_l,tmp);
 
   autoname = new QCheckBox(i18n("Auto-configure hostname from this IP"), this);
-  autoname->setChecked(PPPData::data()->autoname());
+  autoname->setChecked(_pppdata->autoname());
   connect(autoname,SIGNAL(toggled(bool)),
 	  this,SLOT(autoname_t(bool)));
 
@@ -469,15 +470,15 @@ IPWidget::IPWidget( QWidget *parent, bool isnewaccount, const char *name )
 
   //load info from gpppdata
   if(!isnewaccount) {
-    if(PPPData::data()->ipaddr() == "0.0.0.0" &&
-       PPPData::data()->subnetmask() == "0.0.0.0") {
+    if(_pppdata->ipaddr() == "0.0.0.0" &&
+       _pppdata->subnetmask() == "0.0.0.0") {
       dynamicadd_rb->setChecked(true);
       hitIPSelect(0);
-      autoname->setChecked(PPPData::data()->autoname());
+      autoname->setChecked(_pppdata->autoname());
     }
     else {
-      ipaddress_l->setText(PPPData::data()->ipaddr());
-      subnetmask_l->setText(PPPData::data()->subnetmask());
+      ipaddress_l->setText(_pppdata->ipaddr());
+      subnetmask_l->setText(_pppdata->subnetmask());
       staticadd_rb->setChecked(true);
       autoname->setChecked(false);
     }
@@ -510,13 +511,13 @@ void IPWidget::autoname_t(bool on) {
 
 void IPWidget::save() {
   if(dynamicadd_rb->isChecked()) {
-    PPPData::data()->setIpaddr("0.0.0.0");
-    PPPData::data()->setSubnetmask("0.0.0.0");
+    _pppdata->setIpaddr("0.0.0.0");
+    _pppdata->setSubnetmask("0.0.0.0");
   } else {
-    PPPData::data()->setIpaddr(ipaddress_l->text());
-    PPPData::data()->setSubnetmask(subnetmask_l->text());
+    _pppdata->setIpaddr(ipaddress_l->text());
+    _pppdata->setSubnetmask(subnetmask_l->text());
   }
-  PPPData::data()->setAutoname(autoname->isChecked());
+  _pppdata->setAutoname(autoname->isChecked());
 }
 
 
@@ -537,8 +538,8 @@ void IPWidget::hitIPSelect( int i ) {
 
 
 
-DNSWidget::DNSWidget( QWidget *parent, bool isnewaccount, const char *name )
-  : QWidget(parent, name)
+DNSWidget::DNSWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const char *name )
+    : QWidget(parent, name), _pppdata(pd)
 {
   //  box = new QGroupBox(this);
     QGridLayout *tl = new QGridLayout(this, 7, 2, 0 );//, KDialog::spacingHint());
@@ -572,7 +573,7 @@ DNSWidget::DNSWidget( QWidget *parent, bool isnewaccount, const char *name )
   bg->insert(autodns, 0);
   tl->addWidget(autodns, 1, 1);
   // no automatic DNS detection for pppd < 2.3.7
-  if(!PPPData::data()->pppdVersionMin(2, 3, 7))
+  if(!_pppdata->pppdVersionMin(2, 3, 7))
     autodns->setEnabled(false);
 
   mandns = new QRadioButton(i18n("Manual"), this);
@@ -645,7 +646,7 @@ DNSWidget::DNSWidget( QWidget *parent, bool isnewaccount, const char *name )
   exdnsdisabled_toggle = new QCheckBox(i18n( \
 "Disable existing DNS servers during connection"),
 				     this);
-  exdnsdisabled_toggle->setChecked(PPPData::data()->exDNSDisabled());
+  exdnsdisabled_toggle->setChecked(_pppdata->exDNSDisabled());
   tl->addMultiCellWidget(exdnsdisabled_toggle, 6, 6, 0, 1, AlignCenter);
   QWhatsThis::add(exdnsdisabled_toggle,
 		  i18n("<p>When this option is selected, all DNS\n"
@@ -661,11 +662,11 @@ DNSWidget::DNSWidget( QWidget *parent, bool isnewaccount, const char *name )
 
   // restore data if editing
   if(!isnewaccount) {
-    dnsservers->insertStringList(PPPData::data()->dns());
-    dnsdomain->setText(PPPData::data()->domain());
+    dnsservers->insertStringList(_pppdata->dns());
+    dnsdomain->setText(_pppdata->domain());
   }
 
-  int mode = PPPData::data()->autoDNS() ? 0 : 1;
+  int mode = _pppdata->autoDNS() ? 0 : 1;
   bg->setButton(mode);
   DNS_Mode_Selected(mode);
 
@@ -695,20 +696,20 @@ void DNSWidget::DNS_Mode_Selected(int mode) {
 }
 
 void DNSWidget::save() {
-  PPPData::data()->setAutoDNS(bg->id(bg->selected()) == 0);
+  _pppdata->setAutoDNS(bg->id(bg->selected()) == 0);
   QStringList serverlist;
   for(uint i=0; i < dnsservers->count(); i++)
     serverlist.append(dnsservers->text(i));
-  PPPData::data()->setDns(serverlist);
+  _pppdata->setDns(serverlist);
 
   // strip leading dot
   QString s(dnsdomain->text());
   if(s.left(1) == ".")
-    PPPData::data()->setDomain(s.mid(1));
+    _pppdata->setDomain(s.mid(1));
   else
-    PPPData::data()->setDomain(dnsdomain->text());
+    _pppdata->setDomain(dnsdomain->text());
 
-  PPPData::data()->setExDNSDisabled(exdnsdisabled_toggle->isChecked());
+  _pppdata->setExDNSDisabled(exdnsdisabled_toggle->isChecked());
 }
 
 
@@ -732,8 +733,8 @@ void DNSWidget::removedns() {
 //
 // GatewayWidget
 //
-GatewayWidget::GatewayWidget( QWidget *parent, bool isnewaccount, const char *name )
-  : QWidget(parent, name)
+GatewayWidget::GatewayWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const char *name )
+    : QWidget(parent, name), _pppdata(pd)
 {
   QVBoxLayout *topLayout = new QVBoxLayout(this);
   topLayout->setSpacing( 2 );//KDialog::spacingHint());
@@ -785,15 +786,15 @@ GatewayWidget::GatewayWidget( QWidget *parent, bool isnewaccount, const char *na
 
   //load info from gpppdata
   if(!isnewaccount) {
-    if(PPPData::data()->gateway() == "0.0.0.0") {
+    if(_pppdata->gateway() == "0.0.0.0") {
       defaultgateway->setChecked(true);
       hitGatewaySelect(0);
     }
     else {
-      gatewayaddr->setText(PPPData::data()->gateway());
+      gatewayaddr->setText(_pppdata->gateway());
       staticgateway->setChecked(true);
     }
-    defaultroute->setChecked(PPPData::data()->defaultroute());
+    defaultroute->setChecked(_pppdata->defaultroute());
   }
   else {
     defaultgateway->setChecked(true);
@@ -803,8 +804,8 @@ GatewayWidget::GatewayWidget( QWidget *parent, bool isnewaccount, const char *na
 }
 
 void GatewayWidget::save() {
-  PPPData::data()->setGateway(gatewayaddr->text());
-  PPPData::data()->setDefaultroute(defaultroute->isChecked());
+  _pppdata->setGateway(gatewayaddr->text());
+  _pppdata->setDefaultroute(defaultroute->isChecked());
 }
 
 
@@ -823,8 +824,8 @@ void GatewayWidget::hitGatewaySelect( int i ) {
 
 
 
-ScriptWidget::ScriptWidget( QWidget *parent, bool isnewaccount, const char *name )
-  : QWidget(parent, name)
+ScriptWidget::ScriptWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const char *name )
+    : QWidget(parent, name),_pppdata(pd)
 {
 
   QVBoxLayout *tl = new QVBoxLayout(this, 0 );
@@ -867,8 +868,8 @@ ScriptWidget::ScriptWidget( QWidget *parent, bool isnewaccount, const char *name
 
   //load data from gpppdata
   if(!isnewaccount) {
-    QStringList &comlist = PPPData::data()->scriptType();
-    QStringList &arglist = PPPData::data()->script();
+    QStringList &comlist = _pppdata->scriptType();
+    QStringList &arglist = _pppdata->script();
     QStringList::Iterator itcom = comlist.begin();
     QStringList::Iterator itarg = arglist.begin();
 
@@ -914,8 +915,8 @@ void ScriptWidget::save() {
     typelist.append(stl->text(i));
     arglist.append(sl->text(i));
   }
-  PPPData::data()->setScriptType(typelist);
-  PPPData::data()->setScript(arglist);
+  _pppdata->setScriptType(typelist);
+  _pppdata->setScript(arglist);
 }
 
 

@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: kpppwidget.h,v 1.2 2003-05-25 00:47:30 tille Exp $
+ * $Id: kpppwidget.h,v 1.3 2003-05-30 15:06:17 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -34,13 +34,14 @@
 #include "connect.h"
 
 class QPushButton;
-
+class Interface;
+class PPPData;
 
 class KPPPWidget : public QDialog {
   Q_OBJECT
 public:
 
-  KPPPWidget( QWidget *parent=0, const char *name=0, bool modal = false, WFlags fl = 0 );
+  KPPPWidget(PPPData*, Interface*, QWidget *parent=0, const char *name=0, bool modal = false, WFlags fl = 0 );
   ~KPPPWidget();
 
   void setPW_Edit(const QString &);
@@ -70,8 +71,8 @@ public:
   QCheckBox *log;
   bool connected;
   QString con_speed;
-  //  ConnectWidget *con;
-  //  ConWindow *con_win;
+  ConnectWidget *con;
+  ConWindow *con_win;
   //  PPPStatsDlg *statdlg;
   // AccountingBase *acct;
   QPushButton *quit_b;
@@ -86,7 +87,7 @@ private:
   void showNews ();
 
   QString ruleset_load_errmsg;
-
+  PPPData *_pppdata;
   QPushButton *setup_b;
   QFrame *fline;
   QFrame *fline1;

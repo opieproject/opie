@@ -1,7 +1,7 @@
 /*
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modeminfo.cpp,v 1.2 2003-05-23 19:43:46 tille Exp $
+ * $Id: modeminfo.cpp,v 1.3 2003-05-30 15:06:17 tille Exp $
  *
  * Copyright (C) 1997 Bernd Johannes Wuebben
  *                    wuebben@math.cornell.edu
@@ -37,8 +37,9 @@
 //#include <klocale.h>
 #define i18n QObject::tr
 
-ModemTransfer::ModemTransfer(QWidget *parent, const char *name)
-  : QDialog(parent, name,TRUE, WStyle_Customize|WStyle_NormalBorder)
+ModemTransfer::ModemTransfer(Modem *mo, QWidget *parent, const char *name)
+    : QDialog(parent, name,TRUE, WStyle_Customize|WStyle_NormalBorder),
+    _modem(mo)
 {
   setCaption(i18n("ATI Query"));
 //  KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
@@ -97,8 +98,8 @@ ModemTransfer::ModemTransfer(QWidget *parent, const char *name)
 void ModemTransfer::ati_done() {
   scripttimer->stop();
   timeout_timer->stop();
-  Modem::modem->closetty();
-  Modem::modem->unlockdevice();
+  _modem->closetty();
+  _modem->unlockdevice();
   hide();
 
   // open the result window
@@ -126,7 +127,7 @@ void ModemTransfer::init() {
 
   qApp->processEvents();
 
-  int lock = Modem::modem->lockdevice();
+  int lock = _modem->lockdevice();
   if (lock == 1) {
 
     statusBar->setText(i18n("Modem device is locked."));
@@ -140,10 +141,10 @@ void ModemTransfer::init() {
   }
 
 
-  if(Modem::modem->opentty()) {
-    if(Modem::modem->hangup()) {
+  if(_modem->opentty()) {
+    if(_modem->hangup()) {
       usleep(100000);  // wait 0.1 secs
-      Modem::modem->writeLine("ATE0Q1V1"); // E0 don't echo the commands I send ...
+      _modem->writeLine("ATE0Q1V1"); // E0 don't echo the commands I send ...
 
       statusBar->setText(i18n("Modem Ready"));
       qApp->processEvents();
@@ -152,17 +153,17 @@ void ModemTransfer::init() {
       scripttimer->start(1000);	 	// this one does the ati query
 
       // clear modem buffer
-      Modem::modem->flush();
+      _modem->flush();
 
-      Modem::modem->notify(this, SLOT(readChar(unsigned char)));
+      _modem->notify(this, SLOT(readChar(unsigned char)));
       return;
     }
   }
 
   // opentty() or hangup() failed
-  statusBar->setText(Modem::modem->modemMessage());
+  statusBar->setText(_modem->modemMessage());
   step = 99; // wait until cancel is pressed
-  Modem::modem->unlockdevice();
+  _modem->unlockdevice();
 }
 
 
@@ -175,7 +176,7 @@ void ModemTransfer::do_script() {
     readtty();
     statusBar->setText("ATI...");
     progressBar->setProgress( progressBar->progress() + 1);
-    Modem::modem->writeLine("ATI\n");
+    _modem->writeLine("ATI\n");
     break;
 
   case 1:
@@ -190,7 +191,7 @@ void ModemTransfer::do_script() {
     query.sprintf("ATI%d\n", step);
     statusBar->setText(msg);
     progressBar->setProgress( progressBar->progress() + 1);
-    Modem::modem->writeLine(query.local8Bit());
+    _modem->writeLine(query.local8Bit());
     break;
 
   default:
@@ -223,16 +224,16 @@ void ModemTransfer::readtty() {
 
 void ModemTransfer::cancelbutton() {
   scripttimer->stop();
-  Modem::modem->stop();
+  _modem->stop();
   timeout_timer->stop();
 
   statusBar->setText(i18n("One moment please..."));
   qApp->processEvents();
 
-  Modem::modem->hangup();
+  _modem->hangup();
 
-  Modem::modem->closetty();
-  Modem::modem->unlockdevice();
+  _modem->closetty();
+  _modem->unlockdevice();
   reject();
 }
 

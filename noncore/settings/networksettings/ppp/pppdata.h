@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.5 2003-05-25 18:19:04 tille Exp $
+ * $Id: pppdata.h,v 1.6 2003-05-30 15:06:17 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -155,19 +155,18 @@ class PPPData {
 public:
     PPPData();
     ~PPPData() {};
-    static PPPData* data();
 
     enum { NumInitStrings = 2 };
 
     // general functions
-    bool open();
     void save();
     void cancel();
 
-    QMap<QString,QString> getConfiguredInterfaces();
-    void setConfiguredInterfaces( QMap<QString,QString> );
+    static QMap<QString,QString> getConfiguredInterfaces();
+    static void setConfiguredInterfaces( QMap<QString,QString> );
 
     // function to read/write date to configuration file
+    static Config config();
     QString readConfig(const QString &, const QString &, const QString &);
     int readNumConfig(const QString &, const QString &, int);
     bool readListConfig(const QString &, const QString &,
@@ -207,11 +206,11 @@ public:
   void set_automatic_redial(bool set);
   bool automatic_redial();
 
-  void set_iconify_on_connect(bool set);
-  bool get_iconify_on_connect();
+//   void set_iconify_on_connect(bool set);
+//   bool get_iconify_on_connect();
 
-  void set_dock_into_panel(bool set);
-  bool get_dock_into_panel();
+//   void set_dock_into_panel(bool set);
+//   bool get_dock_into_panel();
 
   const QString enter();
   void setEnter(const QString &);
@@ -311,11 +310,6 @@ public:
   QString volumeHigh();
   void setVolumeHigh(const QString &);
 
-#if 0
-  void setUseCDLine(const int n);
-  int  UseCDLine();
-#endif
-
   // functions to set/get account information
   int count() const;
   bool setAccount(const QString &);
@@ -374,8 +368,8 @@ public:
   bool AcctEnabled();
   void setAcctEnabled(bool set);
 
-  int VolAcctEnabled();
-  void setVolAcctEnabled(int set);
+//   int VolAcctEnabled();
+//   void setVolAcctEnabled(int set);
 
   bool autoDNS();
   void setAutoDNS(bool set);
@@ -415,41 +409,12 @@ public:
   int pppdError() const;
   void setpppdError(int err);
 
-  // functions to set/query the accounting info
-//   const QString accountingFile();
-//   void setAccountingFile(const QString &);
-
-//   const QString totalCosts();
-//   void setTotalCosts(const QString &);
-
-//   int totalBytes();
-//   void  setTotalBytes(int);
-
-//   // graphing widget
-//   void setGraphingOptions(bool enabled,
-// 			  QColor bg,
-// 			  QColor text,
-// 			  QColor in,
-// 			  QColor out);
-//   void graphingOptions(bool &enabled,
-// 		       QColor &bg,
-// 		       QColor &text,
-// 		       QColor &in,
-// 		       QColor &out);
-//   bool graphingEnabled();
-
-//   // window positions
-//   void winPosConWin(int &, int &);
-//   void setWinPosConWin(int, int);
-//   void winPosStatWin(int &, int &);
-//   void setWinPosStatWin(int, int);
-
 private:
 
-    static PPPData *_data;
+    //static PPPData *_data;
     int modemDeviceGroup;
     QString passwd;
-    static Config* config;                       // configuration object
+    //  static Config* config;                       // configuration object
     int highcount;                         // index of highest account
     int caccount;                          // index of the current account
     QString cgroup;                        // name of current config group
@@ -460,6 +425,11 @@ private:
     int pppdVer, pppdMod, pppdPatch;       // pppd version
 
     QStringList phonelist;
+    QMap<QString,QString> stringEntries;
+    QMap<QString,int> intEntries;
+    QMap<QString,QStringList> listEntries;
+    QMap<QString,QChar> sepEntries;
+
 };
 
 #endif

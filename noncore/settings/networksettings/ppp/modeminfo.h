@@ -2,7 +2,7 @@
  *
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modeminfo.h,v 1.1 2003-05-22 15:08:21 tille Exp $
+ * $Id: modeminfo.h,v 1.2 2003-05-30 15:06:17 tille Exp $
  * 
  * Copyright (C) 1997 Bernd Johannes Wuebben 
  * wuebben@math.cornell.edu
@@ -37,13 +37,15 @@
 //#include <kprogress.h>
 #include <qprogressbar.h>
 
+class Modem;
+
 const int NUM_OF_ATI = 8;
 
 
 class ModemTransfer : public QDialog {
   Q_OBJECT
 public:
-  ModemTransfer(QWidget *parent=0, const char *name=0);
+  ModemTransfer(Modem*, QWidget *parent=0, const char *name=0);
   
 public slots:
   void init();
@@ -60,6 +62,7 @@ protected:
   void closeEvent(QCloseEvent *e);
 
 private:
+  Modem *_modem;
   int 	step;
   QString readbuffer;
 

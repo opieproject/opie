@@ -1,7 +1,7 @@
 /* -*- C++ -*-
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.h,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: accounts.h,v 1.2 2003-05-30 15:06:17 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -42,11 +42,12 @@ class ScriptWidget;
 class IPWidget;
 class DNSWidget;
 class GatewayWidget;
+class PPPData;
 
 class AccountWidget : public QWidget {
   Q_OBJECT
 public:
-  AccountWidget( QWidget *parent=0, const char *name=0 );
+  AccountWidget( PPPData *pd, QWidget *parent=0, const char *name=0 );
   ~AccountWidget() {}
 
 private slots:
@@ -69,6 +70,7 @@ signals:
 private:
   QString prettyPrintVolume(unsigned int);
 
+    PPPData *_pppdata;
   QTabWidget *tabWindow;
   DialWidget *dial_w;
 //  AccountingSelector *acct;

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdargs.cpp,v 1.3 2003-05-24 17:03:27 tille Exp $
+ * $Id: pppdargs.cpp,v 1.4 2003-05-30 15:06:17 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -34,8 +34,8 @@
 //#include <klocale.h>
 #define i18n QObject::tr
 
-PPPdArguments::PPPdArguments(QWidget *parent, const char *name)
-  : QDialog(parent, name, TRUE)
+PPPdArguments::PPPdArguments( PPPData *pd, QWidget *parent, const char *name)
+    : QDialog(parent, name, TRUE), _pppdata(pd)
 {
   setCaption(i18n("Customize pppd Arguments"));
 //  KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
@@ -121,14 +121,14 @@ void PPPdArguments::removebutton() {
 void PPPdArguments::defaultsbutton() {
   // all of this is a hack
   // save current list
-  QStringList arglist(PPPData::data()->pppdArgument());
+  QStringList arglist(_pppdata->pppdArgument());
 
   // get defaults
-  PPPData::data()->setpppdArgumentDefaults();
+  _pppdata->setpppdArgumentDefaults();
   init();
 
   // restore old list
-  PPPData::data()->setpppdArgument(arglist);
+  _pppdata->setpppdArgument(arglist);
 }
 
 
@@ -136,7 +136,7 @@ void PPPdArguments::closebutton() {
   QStringList arglist;
   for(uint i=0; i < arguments->count(); i++)
     arglist.append(arguments->text(i));
-  PPPData::data()->setpppdArgument(arglist);
+  _pppdata->setpppdArgument(arglist);
 
   done(0);
 }
@@ -146,7 +146,7 @@ void PPPdArguments::init() {
   while(arguments->count())
     arguments->removeItem(0);
 
-  QStringList &arglist = PPPData::data()->pppdArgument();
+  QStringList &arglist = _pppdata->pppdArgument();
   for ( QStringList::Iterator it = arglist.begin();
         it != arglist.end();
         ++it )

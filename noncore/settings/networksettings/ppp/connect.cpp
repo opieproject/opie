@@ -65,7 +65,7 @@
 #include "auth.h"
 #include "connect.h"
 //#include "docking.h"
-//#include "main.h"
+#include "interfaceppp.h"
 #include "modem.h"
 #include "kpppconfig.h"
 #include "pppdata.h"
@@ -74,15 +74,12 @@
 //#include "utils.h"
 #define execute_command system
 
-extern KPPPWidget *p_kppp;
-
 QString old_hostname;
 bool modified_hostname;
 
 
-ConnectWidget::ConnectWidget(QWidget *parent, const char *name)
+ConnectWidget::ConnectWidget(InterfacePPP *ifp, QWidget *parent, const char *name)
   : QWidget(parent, name),
-    // initialize some important variables
     myreadbuffer(""),
     main_timer_ID(0),
     vmain(0),
@@ -96,9 +93,8 @@ ConnectWidget::ConnectWidget(QWidget *parent, const char *name)
     scanvar(""),
     scanning(false),
     pausing(false),
-//    termwindow(0),
-//    stats(st),
-    dialnumber(0)
+    dialnumber(0),
+    _ifaceppp(ifp)
 {
   modified_hostname = false;
 
@@ -179,7 +175,7 @@ void ConnectWidget::preinit() {
 
 
 void ConnectWidget::init() {
-  PPPData::data()->setpppdError(0);
+  _ifaceppp->data()->setpppdError(0);
   inittimer->stop();
   vmain = 0;
   substate = -1;
@@ -194,26 +190,26 @@ void ConnectWidget::init() {
 //  stats->totalbytes = 0;
   dialnumber = 0;
 
-  p_kppp->con_speed = "";
+//  p_kppp->con_speed = "";
 
-//  p_kppp->setQuitOnDisconnect (p_kppp->quitOnDisconnect() || PPPData::data()->quit_on_disconnect());
+//  p_kppp->setQuitOnDisconnect (p_kppp->quitOnDisconnect() || _ifaceppp->data()->quit_on_disconnect());
 
-  comlist = &PPPData::data()->scriptType();
-  arglist = &PPPData::data()->script();
+  comlist = &_ifaceppp->data()->scriptType();
+  arglist = &_ifaceppp->data()->script();
 
-  QString tit = i18n("Connecting to: %1").arg(PPPData::data()->accname());
+  QString tit = i18n("Connecting to: %1").arg(_ifaceppp->data()->accname());
   setCaption(tit);
 
   qApp->processEvents();
 
   // run the "before-connect" command
-  if (!PPPData::data()->command_before_connect().isEmpty()) {
+  if (!_ifaceppp->data()->command_before_connect().isEmpty()) {
     messg->setText(i18n("Running pre-startup command..."));
     emit debugMessage(i18n("Running pre-startup command..."));
 
     qApp->processEvents();
     QApplication::flushX();
-    pid_t id = execute_command(PPPData::data()->command_before_connect());
+    pid_t id = execute_command(_ifaceppp->data()->command_before_connect());
 //     int i, status;
 
 //     do {
@@ -223,7 +219,7 @@ void ConnectWidget::init() {
 //     } while (i == 0 && errno == 0);
   }
 
-  int lock = Modem::modem->lockdevice();
+  int lock = _ifaceppp->modem()->lockdevice();
 
   if (lock == 1) {
     messg->setText(i18n("Modem device is locked."));
@@ -237,20 +233,20 @@ void ConnectWidget::init() {
     return;
   }
 
-  if(Modem::modem->opentty()) {
-    messg->setText(Modem::modem->modemMessage());
+  if(_ifaceppp->modem()->opentty()) {
+    messg->setText(_ifaceppp->modem()->modemMessage());
     qApp->processEvents();
-    if(Modem::modem->hangup()) {
+    if(_ifaceppp->modem()->hangup()) {
 
       qApp->processEvents();
 
       semaphore = false;
 
-      Modem::modem->stop();
-      Modem::modem->notify(this, SLOT(readChar(unsigned char)));
+      _ifaceppp->modem()->stop();
+      _ifaceppp->modem()->notify(this, SLOT(readChar(unsigned char)));
 
       // if we are stuck anywhere we will time out
-      timeout_timer->start(PPPData::data()->modemTimeout()*1000);
+      timeout_timer->start(_ifaceppp->data()->modemTimeout()*1000);
 
       // this timer will run the script etc.
       main_timer_ID = startTimer(10);
@@ -260,9 +256,9 @@ void ConnectWidget::init() {
   }
 
   // initialization failed
-  messg->setText(Modem::modem->modemMessage());
+  messg->setText(_ifaceppp->modem()->modemMessage());
   vmain = 20; // wait until cancel is pressed
-  Modem::modem->unlockdevice();
+  _ifaceppp->modem()->unlockdevice();
 }
 
 
@@ -284,18 +280,18 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       substate = 0;
     }
 
-    QString initStr = PPPData::data()->modemInitStr(substate);
+    QString initStr = _ifaceppp->data()->modemInitStr(substate);
     if (!initStr.isEmpty()) {
 	// send a carriage return and then wait a bit so that the modem will
 	// let us issue commands.
-	if(PPPData::data()->modemPreInitDelay() > 0) {
-	    usleep(PPPData::data()->modemPreInitDelay() * 5000);
+	if(_ifaceppp->data()->modemPreInitDelay() > 0) {
+	    usleep(_ifaceppp->data()->modemPreInitDelay() * 5000);
 	    writeline("");
-	    usleep(PPPData::data()->modemPreInitDelay() * 5000);
+	    usleep(_ifaceppp->data()->modemPreInitDelay() * 5000);
 	}
-	setExpect(PPPData::data()->modemInitResp());
+	setExpect(_ifaceppp->data()->modemInitResp());
 	writeline(initStr);
-	usleep(PPPData::data()->modemInitDelay() * 10000); // 0.01 - 3.0 sec
+	usleep(_ifaceppp->data()->modemInitDelay() * 10000); // 0.01 - 3.0 sec
     }
 
     substate++;
@@ -306,7 +302,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
      * Speed Dragon). Even better would be to detect this when doing
      * a "Modem Query"
      */
-    if (MODEM_TONEDURATION != PPPData::data()->modemToneDuration())
+    if (MODEM_TONEDURATION != _ifaceppp->data()->modemToneDuration())
         vmain = 5;
     else
         vmain = 3;
@@ -316,11 +312,11 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
   if (vmain == 5) {
     if(!expecting) {
-        QString sToneDuration = "ATS11=" + QString::number(PPPData::data()->modemToneDuration());
+        QString sToneDuration = "ATS11=" + QString::number(_ifaceppp->data()->modemToneDuration());
         QString msg = i18n("Setting ") + sToneDuration;
         messg->setText(msg);
 	emit debugMessage(msg);
-	setExpect(PPPData::data()->modemInitResp());
+	setExpect(_ifaceppp->data()->modemInitResp());
 	writeline(sToneDuration);
       }
     vmain = 3;
@@ -336,18 +332,18 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       }
       substate = -1;
       // skip setting the volume if command is empty
-      if(PPPData::data()->volumeInitString().isEmpty()) {
+      if(_ifaceppp->data()->volumeInitString().isEmpty()) {
         vmain = 4;
         return;
       }
       messg->setText(i18n("Setting speaker volume..."));
       emit debugMessage(i18n("Setting speaker volume..."));
 
-      setExpect(PPPData::data()->modemInitResp());
+      setExpect(_ifaceppp->data()->modemInitResp());
       QString vol("AT");
-      vol += PPPData::data()->volumeInitString();
+      vol += _ifaceppp->data()->volumeInitString();
       writeline(vol);
-      usleep(PPPData::data()->modemInitDelay() * 10000); // 0.01 - 3.0 sec
+      usleep(_ifaceppp->data()->modemInitDelay() * 10000); // 0.01 - 3.0 sec
       vmain = 4;
       return;
     }
@@ -355,12 +351,12 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
   if(vmain == 4) {
     if(!expecting) {
-      if(!PPPData::data()->waitForDialTone()) {
+      if(!_ifaceppp->data()->waitForDialTone()) {
 	QString msg = i18n("Turning off dial tone waiting...");
 	messg->setText(msg);
 	emit debugMessage(msg);
-	setExpect(PPPData::data()->modemInitResp());
-	writeline(PPPData::data()->modemNoDialToneDetectionStr());
+	setExpect(_ifaceppp->data()->modemInitResp());
+	writeline(_ifaceppp->data()->modemNoDialToneDetectionStr());
       }
       vmain = 1;
       return;
@@ -372,23 +368,23 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
     if(!expecting) {
 
       timeout_timer->stop();
-      timeout_timer->start(PPPData::data()->modemTimeout()*1000);
+      timeout_timer->start(_ifaceppp->data()->modemTimeout()*1000);
 
-      QStringList &plist = PPPData::data()->phonenumbers();
-      QString bmarg= PPPData::data()->dialPrefix();
+      QStringList &plist = _ifaceppp->data()->phonenumbers();
+      QString bmarg= _ifaceppp->data()->dialPrefix();
       bmarg += *plist.at(dialnumber);
       QString bm = i18n("Dialing %1").arg(bmarg);
       messg->setText(bm);
       emit debugMessage(bm);
 
-      QString pn = PPPData::data()->modemDialStr();
-      pn += PPPData::data()->dialPrefix();
+      QString pn = _ifaceppp->data()->modemDialStr();
+      pn += _ifaceppp->data()->dialPrefix();
       pn += *plist.at(dialnumber);
       if(++dialnumber >= plist.count())
         dialnumber = 0;
       writeline(pn);
 
-      setExpect(PPPData::data()->modemConnectResp());
+      setExpect(_ifaceppp->data()->modemConnectResp());
       vmain = 100;
       return;
     }
@@ -398,52 +394,52 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
   // if NO CARRIER or NO DIALTONE
   if(vmain == 100) {
     if(!expecting) {
-      myreadbuffer = PPPData::data()->modemConnectResp();
+      myreadbuffer = _ifaceppp->data()->modemConnectResp();
       setExpect("\n");
       vmain = 101;
       return;
     }
 
-    if(readbuffer.contains(PPPData::data()->modemBusyResp())) {
+    if(readbuffer.contains(_ifaceppp->data()->modemBusyResp())) {
       timeout_timer->stop();
-      timeout_timer->start(PPPData::data()->modemTimeout()*1000);
+      timeout_timer->start(_ifaceppp->data()->modemTimeout()*1000);
 
       messg->setText(i18n("Line busy. Hanging up..."));
       emit debugPutChar('\n');
-      Modem::modem->hangup();
+      _ifaceppp->modem()->hangup();
 
-      if(PPPData::data()->busyWait() > 0) {
-	QString bm = i18n("Line busy. Waiting: %1 seconds").arg(PPPData::data()->busyWait());
+      if(_ifaceppp->data()->busyWait() > 0) {
+	QString bm = i18n("Line busy. Waiting: %1 seconds").arg(_ifaceppp->data()->busyWait());
 	messg->setText(bm);
 	emit debugMessage(bm);
 
 	pausing = true;
 
-	pausetimer->start(PPPData::data()->busyWait()*1000, true);
+	pausetimer->start(_ifaceppp->data()->busyWait()*1000, true);
 	timeout_timer->stop();
       }
 
-      Modem::modem->setDataMode(false);
+      _ifaceppp->modem()->setDataMode(false);
       vmain = 0;
       substate = -1;
       return;
     }
 
-    if(readbuffer.contains(PPPData::data()->modemNoDialtoneResp())) {
+    if(readbuffer.contains(_ifaceppp->data()->modemNoDialtoneResp())) {
       timeout_timer->stop();
 
       messg->setText(i18n("No Dialtone"));
       vmain = 20;
-      Modem::modem->unlockdevice();
+      _ifaceppp->modem()->unlockdevice();
       return;
     }
 
-    if(readbuffer.contains(PPPData::data()->modemNoCarrierResp())) {
+    if(readbuffer.contains(_ifaceppp->data()->modemNoCarrierResp())) {
       timeout_timer->stop();
 
       messg->setText(i18n("No Carrier"));
       vmain = 20;
-      Modem::modem->unlockdevice();
+      _ifaceppp->modem()->unlockdevice();
       return;
     }
   }
@@ -451,13 +447,13 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
   // wait for newline after CONNECT response (so we get the speed)
   if(vmain == 101) {
     if(!expecting) {
-      Modem::modem->setDataMode(true); // modem will no longer respond to AT commands
+      _ifaceppp->modem()->setDataMode(true); // modem will no longer respond to AT commands
 
       emit startAccounting();
 //      p_kppp->con_win->startClock();
 
       vmain = 2;
-      scriptTimeout=PPPData::data()->modemTimeout()*1000;
+      scriptTimeout=_ifaceppp->data()->modemTimeout()*1000;
       return;
     }
   }
@@ -494,10 +490,10 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	emit debugMessage(bm);
 
 	if (scriptArgument.lower() == "password") {
-	  PPPData::data()->setPassword(scanvar);
-	  p_kppp->setPW_Edit(scanvar);
-	  if(PPPData::data()->storePassword())
-	    PPPData::data()->setStoredPassword(scanvar);
+	  _ifaceppp->data()->setPassword(scanvar);
+//	  p_kppp->setPW_Edit(scanvar);
+	  if(_ifaceppp->data()->storePassword())
+	    _ifaceppp->data()->setStoredPassword(scanvar);
 	  firstrunPW = true;
 	}
 
@@ -513,8 +509,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	QString arg = scriptArgument;
 	QRegExp re1("%USERNAME%");
 	QRegExp re2("%PASSWORD%");
-	arg = arg.replace(re1, PPPData::data()->storedUsername());
-	arg = arg.replace(re2, PPPData::data()->storedPassword());
+	arg = arg.replace(re1, _ifaceppp->data()->storedUsername());
+	arg = arg.replace(re2, _ifaceppp->data()->storedPassword());
 
 	if (scriptCommand == "Send")
 	  bm = bm.arg(scriptArgument);
@@ -578,8 +574,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	messg->setText(i18n("Hangup"));
 	emit debugMessage(i18n("Hangup"));
 
-	writeline(PPPData::data()->modemHangupStr());
-	setExpect(PPPData::data()->modemHangupResp());
+	writeline(_ifaceppp->data()->modemHangupStr());
+	setExpect(_ifaceppp->data()->modemHangupResp());
 
 	scriptindex++;
 	return;
@@ -592,7 +588,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	messg->setText(i18n("Answer"));
 	emit debugMessage(i18n("Answer"));
 
-	setExpect(PPPData::data()->modemRingResp());
+	setExpect(_ifaceppp->data()->modemRingResp());
 	vmain = 150;
 	return;
       }
@@ -602,7 +598,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	messg->setText(bm);
 	emit debugMessage(bm);
 
-	QString idstring = PPPData::data()->storedUsername();
+	QString idstring = _ifaceppp->data()->storedUsername();
 
 	if(!idstring.isEmpty() && firstrunID) {
 	  // the user entered an Id on the main kppp dialog
@@ -638,7 +634,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	messg->setText(bm);
 	emit debugMessage(bm);
 
-	QString pwstring = PPPData::data()->password();
+	QString pwstring = _ifaceppp->data()->password();
 
 	if(!pwstring.isEmpty() && firstrunPW) {
 	  // the user entered a password on the main kppp dialog
@@ -659,7 +655,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	     } else {
 	       /* if prompt withdrawn ... then, */
 	       if(!(prompt->isVisible())) {
-		 p_kppp->setPW_Edit(prompt->text());
+//		 p_kppp->setPW_Edit(prompt->text());
 		 writeline(prompt->text());
 		 prompt->setConsumed();
 		 scriptindex++;
@@ -785,8 +781,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
   if(vmain == 150) {
     if(!expecting) {
-      writeline(PPPData::data()->modemAnswerStr());
-      setExpect(PPPData::data()->modemAnswerResp());
+      writeline(_ifaceppp->data()->modemAnswerStr());
+      setExpect(_ifaceppp->data()->modemAnswerResp());
 
       vmain = 2;
       scriptindex++;
@@ -812,9 +808,9 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       if_timeout_timer->stop(); // better be sure.
 
       // stop reading of data
-      Modem::modem->stop();
+      _ifaceppp->modem()->stop();
 
-      if(PPPData::data()->authMethod() == AUTH_TERMINAL) {
+      if(_ifaceppp->data()->authMethod() == AUTH_TERMINAL) {
       //     if (termwindow) {
 // 	  delete termwindow;
 // 	  termwindow = 0L;
@@ -831,12 +827,12 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       // Close the tty. This prevents the QTimer::singleShot() in
       // Modem::readtty() from re-enabling the socket notifier.
       // The port is still held open by the helper process.
-      Modem::modem->closetty();
+      _ifaceppp->modem()->closetty();
 
       killTimer( main_timer_ID );
 
-      if_timeout_timer->start(PPPData::data()->pppdTimeout()*1000);
-      qDebug( "started if timeout timer with %i", PPPData::data()->pppdTimeout()*1000);
+      if_timeout_timer->start(_ifaceppp->data()->pppdTimeout()*1000);
+      qDebug( "started if timeout timer with %i", _ifaceppp->data()->pppdTimeout()*1000);
 
       // find out PPP interface and notify the stats module
 //      stats->setUnit(pppInterfaceNumber());
@@ -849,8 +845,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       qDebug("execppp() returned with return-code %i", result );
 
       if(result) {
-        if(!PPPData::data()->autoDNS())
-          adddns();
+        if(!_ifaceppp->data()->autoDNS())
+          adddns( _ifaceppp );
 
 	// O.K we are done here, let's change over to the if_waiting loop
 	// where we wait for the ppp if (interface) to come up.
@@ -863,14 +859,14 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	if_timeout_timer->stop();
 	this->hide();
 	messg->setText("");
-	p_kppp->quit_b->setFocus();
-	p_kppp->show();
+//	p_kppp->quit_b->setFocus();
+//	p_kppp->show();
 	qApp->processEvents();
-	Modem::modem->hangup();
+	_ifaceppp->modem()->hangup();
 	emit stopAccounting();
 //	p_kppp->con_win->stopClock();
-	Modem::modem->closetty();
-        Modem::modem->unlockdevice();
+	_ifaceppp->modem()->closetty();
+        _ifaceppp->modem()->unlockdevice();
 
       }
 
@@ -890,7 +886,7 @@ void ConnectWidget::set_con_speed_string() {
   // Usually the modem responds after connect with something like
   // CONNECT 115200, so all we need to do is find the number after CONNECT
   // or whatever the modemConnectResp() is.
-  p_kppp->con_speed = Modem::modem->parseModemSpeed(myreadbuffer);
+//  p_kppp->con_speed = _ifaceppp->modem()->parseModemSpeed(myreadbuffer);
 }
 
 
@@ -969,7 +965,7 @@ void ConnectWidget::pause() {
 
 
 void ConnectWidget::cancelbutton() {
-  Modem::modem->stop();
+  _ifaceppp->modem()->stop();
   killTimer(main_timer_ID);
   timeout_timer->stop();
   if_timer->stop();
@@ -984,23 +980,23 @@ void ConnectWidget::cancelbutton() {
   messg->setText(i18n("One moment please..."));
 
   // just to be sure
-  Modem::modem->removeSecret(AUTH_PAP);
-  Modem::modem->removeSecret(AUTH_CHAP);
-  removedns();
+  _ifaceppp->modem()->removeSecret(AUTH_PAP);
+  _ifaceppp->modem()->removeSecret(AUTH_CHAP);
+  removedns(_ifaceppp);
 
   qApp->processEvents();
 
-  Modem::modem->killPPPDaemon();
-  Modem::modem->hangup();
+  _ifaceppp->modem()->killPPPDaemon();
+  _ifaceppp->modem()->hangup();
 
   this->hide();
   messg->setText("");
-  p_kppp->quit_b->setFocus();
-  p_kppp->show();
+//  p_kppp->quit_b->setFocus();
+//  p_kppp->show();
   emit stopAccounting();	// just to be sure
 //  p_kppp->con_win->stopClock();
-  Modem::modem->closetty();
-  Modem::modem->unlockdevice();
+  _ifaceppp->modem()->closetty();
+  _ifaceppp->modem()->unlockdevice();
 
   //abort prompt window...
   if (prompt->isVisible()) {
@@ -1026,7 +1022,7 @@ void ConnectWidget::script_timed_out() {
 
   prompt->setConsumed();
   messg->setText(i18n("Script timed out!"));
-  Modem::modem->hangup();
+  _ifaceppp->modem()->hangup();
   emit stopAccounting();
 //  p_kppp->con_win->stopClock();
 
@@ -1063,10 +1059,10 @@ void ConnectWidget::if_waiting_timed_out() {
   if_timeout_timer->stop();
   qDebug("if_waiting_timed_out()");
 
-  PPPData::data()->setpppdError(E_IF_TIMEOUT);
+  _ifaceppp->data()->setpppdError(E_IF_TIMEOUT);
 
   // let's kill the stuck pppd
-  Modem::modem->killPPPDaemon();
+  _ifaceppp->modem()->killPPPDaemon();
 
   emit stopAccounting();
 //  p_kppp->con_win->stopClock();
@@ -1088,7 +1084,7 @@ void ConnectWidget::if_waiting_slot() {
 
 //   if(!stats->ifIsUp()) {
 
-//     if(PPPData::data()->pppdError() != 0) {
+//     if(_ifaceppp->data()->pppdError() != 0) {
 //       // we are here if pppd died immediately after starting it.
 //       pppdDied();
 //       // error message handled in main.cpp: sigPPPDDied()
@@ -1105,27 +1101,27 @@ void ConnectWidget::if_waiting_slot() {
   if_timer->stop();
   usleep(200000);
 
-  if(PPPData::data()->autoDNS())
-    addpeerdns();
+  if(_ifaceppp->data()->autoDNS())
+    addpeerdns( _ifaceppp );
 
   // Close the debugging window. If we are connected, we
   // are not really interested in debug output
   emit closeDebugWindow();
 //  p_kppp->statdlg->take_stats(); // start taking ppp statistics
-  auto_hostname();
+  auto_hostname(_ifaceppp);
 
-  if(!PPPData::data()->command_on_connect().isEmpty()) {
+  if(!_ifaceppp->data()->command_on_connect().isEmpty()) {
     messg->setText(i18n("Running startup command..."));
 
     // make sure that we don't get any async errors
     qApp->flushX();
-    execute_command(PPPData::data()->command_on_connect());
+    execute_command(_ifaceppp->data()->command_on_connect());
     messg->setText(i18n("Done"));
   }
 
   // remove the authentication file
-  Modem::modem->removeSecret(AUTH_PAP);
-  Modem::modem->removeSecret(AUTH_CHAP);
+  _ifaceppp->modem()->removeSecret(AUTH_PAP);
+  _ifaceppp->modem()->removeSecret(AUTH_CHAP);
 
   emit debugMessage(i18n("Done"));
   set_con_speed_string();
@@ -1141,20 +1137,20 @@ void ConnectWidget::if_waiting_slot() {
 //   else
 //     p_kppp->con_win->accounting(false);
 
-  if (PPPData::data()->get_dock_into_panel()) {
-//    DockWidget::dock_widget->show();
-//    DockWidget::dock_widget->take_stats();
-//    this->hide();
-  }
-  else {
-//    p_kppp->con_win->show();
+//   if (_ifaceppp->data()->get_dock_into_panel()) {
+// //    DockWidget::dock_widget->show();
+// //    DockWidget::dock_widget->take_stats();
+// //    this->hide();
+//   }
+//   else {
+// //    p_kppp->con_win->show();
 
-    if(PPPData::data()->get_iconify_on_connect()) {
-        //    p_kppp->con_win->showMinimized();
-    }
-  }
+//     if(_ifaceppp->data()->get_iconify_on_connect()) {
+//         //    p_kppp->con_win->showMinimized();
+//     }
+//  }
 
-  Modem::modem->closetty();
+  _ifaceppp->modem()->closetty();
 }
 
 
@@ -1168,17 +1164,17 @@ bool ConnectWidget::execppp() {
   // we'll simply leave this argument away. pppd will then use the default tty
   // which is the serial port we connected stdin/stdout to in opener.cpp.
   //  command += " ";
-  //  command += PPPData::data()->modemDevice();
+  //  command += _ifaceppp->data()->modemDevice();
 
-  command += " " + PPPData::data()->speed();
+  command += " " + _ifaceppp->data()->speed();
 
   command += " -detach";
 
-  if(PPPData::data()->ipaddr() != "0.0.0.0" ||
-     PPPData::data()->gateway() != "0.0.0.0") {
-    if(PPPData::data()->ipaddr() != "0.0.0.0") {
+  if(_ifaceppp->data()->ipaddr() != "0.0.0.0" ||
+     _ifaceppp->data()->gateway() != "0.0.0.0") {
+    if(_ifaceppp->data()->ipaddr() != "0.0.0.0") {
       command += " ";
-      command += PPPData::data()->ipaddr();
+      command += _ifaceppp->data()->ipaddr();
       command +=  ":";
     }
     else {
@@ -1186,27 +1182,27 @@ bool ConnectWidget::execppp() {
       command += ":";
     }
 
-    if(PPPData::data()->gateway() != "0.0.0.0")
-      command += PPPData::data()->gateway();
+    if(_ifaceppp->data()->gateway() != "0.0.0.0")
+      command += _ifaceppp->data()->gateway();
   }
 
-  if(PPPData::data()->subnetmask() != "0.0.0.0")
-    command += " netmask " + PPPData::data()->subnetmask();
+  if(_ifaceppp->data()->subnetmask() != "0.0.0.0")
+    command += " netmask " + _ifaceppp->data()->subnetmask();
 
-  if(PPPData::data()->flowcontrol() != "None") {
-    if(PPPData::data()->flowcontrol() == "CRTSCTS")
+  if(_ifaceppp->data()->flowcontrol() != "None") {
+    if(_ifaceppp->data()->flowcontrol() == "CRTSCTS")
       command += " crtscts";
     else
       command += " xonxoff";
   }
 
-  if(PPPData::data()->defaultroute())
+  if(_ifaceppp->data()->defaultroute())
     command += " defaultroute";
 
-  if(PPPData::data()->autoDNS())
+  if(_ifaceppp->data()->autoDNS())
     command += " usepeerdns";
 
-  QStringList &arglist = PPPData::data()->pppdArgument();
+  QStringList &arglist = _ifaceppp->data()->pppdArgument();
   for ( QStringList::Iterator it = arglist.begin();
         it != arglist.end();
         ++it )
@@ -1215,25 +1211,25 @@ bool ConnectWidget::execppp() {
   }
 
   // PAP settings
-  if(PPPData::data()->authMethod() == AUTH_PAP) {
+  if(_ifaceppp->data()->authMethod() == AUTH_PAP) {
     command += " -chap user ";
-    command = command + "\"" + PPPData::data()->storedUsername() + "\"";
+    command = command + "\"" + _ifaceppp->data()->storedUsername() + "\"";
   }
 
   // CHAP settings
-  if(PPPData::data()->authMethod() == AUTH_CHAP) {
+  if(_ifaceppp->data()->authMethod() == AUTH_CHAP) {
     command += " -pap user ";
-    command = command + "\"" + PPPData::data()->storedUsername() + "\"";
+    command = command + "\"" + _ifaceppp->data()->storedUsername() + "\"";
   }
 
   // PAP/CHAP settings
-  if(PPPData::data()->authMethod() == AUTH_PAPCHAP) {
+  if(_ifaceppp->data()->authMethod() == AUTH_PAPCHAP) {
     command += " user ";
-    command = command + "\"" + PPPData::data()->storedUsername() + "\"";
+    command = command + "\"" + _ifaceppp->data()->storedUsername() + "\"";
   }
 
   // check for debug
-  if(PPPData::data()->getPPPDebug())
+  if(_ifaceppp->data()->getPPPDebug())
     command += " debug";
 
   if (command.length() > MAX_CMDLEN) {
@@ -1247,7 +1243,7 @@ bool ConnectWidget::execppp() {
 
   qApp->flushX();
 
-  return Modem::modem->execPPPDaemon(command);
+  return _ifaceppp->modem()->execPPPDaemon(command);
 }
 
 
@@ -1262,11 +1258,11 @@ void ConnectWidget::setMsg(const QString &msg) {
 }
 
 void ConnectWidget::writeline(const QString &s) {
-  Modem::modem->writeLine(s.local8Bit());
+  _ifaceppp->modem()->writeLine(s.local8Bit());
 }
 
 // Set the hostname and domain from DNS Server
-void auto_hostname() {
+void auto_hostname(InterfacePPP *_ifaceppp) {
   struct in_addr local_ip;
   struct hostent *hostname_entry;
   QString new_hostname;
@@ -1277,8 +1273,8 @@ void auto_hostname() {
   tmp_str[sizeof(tmp_str)-1]=0; // panic
   old_hostname=tmp_str; // copy to QString
 
-  // if (!p_kppp->stats->local_ip_address.isEmpty() && PPPData::data()->autoname()) {
-  if ( PPPData::data()->autoname()) {
+  // if (!p_kppp->stats->local_ip_address.isEmpty() && _ifaceppp->data()->autoname()) {
+  if ( _ifaceppp->data()->autoname()) {
 //    local_ip.s_addr=inet_addr(p_kppp->stats->local_ip_address.ascii());
     hostname_entry=gethostbyaddr((const char *)&local_ip,sizeof(in_addr),AF_INET);
 
@@ -1286,13 +1282,13 @@ void auto_hostname() {
       new_hostname=hostname_entry->h_name;
       dot=new_hostname.find('.');
       new_hostname=new_hostname.remove(dot,new_hostname.length()-dot);
-      Modem::modem->setHostname(new_hostname);
+      _ifaceppp->modem()->setHostname(new_hostname);
       modified_hostname = TRUE;
 
       new_hostname=hostname_entry->h_name;
       new_hostname.remove(0,dot+1);
 
-      add_domain(new_hostname);
+      add_domain(new_hostname, _ifaceppp);
     }
   }
 
@@ -1300,7 +1296,7 @@ void auto_hostname() {
 
 // Replace the DNS domain entry in the /etc/resolv.conf file and
 // disable the nameserver entries if option is enabled
-void add_domain(const QString &domain) {
+void add_domain(const QString &domain, InterfacePPP *_ifaceppp) {
 
   int fd;
   char c;
@@ -1309,7 +1305,7 @@ void add_domain(const QString &domain) {
   if (domain.isEmpty())
     return;
 
-  if((fd = Modem::modem->openResolv(O_RDONLY)) >= 0) {
+  if((fd = _ifaceppp->modem()->openResolv(O_RDONLY)) >= 0) {
 
     int i=0;
     while((read(fd, &c, 1) == 1) && (i < MAX_RESOLVCONF_LINES)) {
@@ -1323,7 +1319,7 @@ void add_domain(const QString &domain) {
     close(fd);
     if ((c != '\n') && (i < MAX_RESOLVCONF_LINES)) i++;
 
-    if((fd = Modem::modem->openResolv(O_WRONLY|O_TRUNC)) >= 0) {
+    if((fd = _ifaceppp->modem()->openResolv(O_WRONLY|O_TRUNC)) >= 0) {
       QCString tmp = "domain " + domain.local8Bit() +
 		     " \t\t#kppp temp entry\n";
       write(fd, tmp.data(), tmp.length());
@@ -1332,7 +1328,7 @@ void add_domain(const QString &domain) {
 	if((resolv[j].contains("domain") ||
 	      ( resolv[j].contains("nameserver")
 		&& !resolv[j].contains("#kppp temp entry")
-		&& PPPData::data()->exDNSDisabled()))
+		&& _ifaceppp->data()->exDNSDisabled()))
 	        && !resolv[j].contains("#entry disabled by kppp")) {
 	  QCString tmp = "# " + resolv[j].local8Bit() +
 			 " \t#entry disabled by kppp\n";
@@ -1350,12 +1346,12 @@ void add_domain(const QString &domain) {
 
 
 // adds the DNS entries in the /etc/resolv.conf file
-void adddns()
+void adddns( InterfacePPP *_ifaceppp)
 {
   int fd;
 
-  if ((fd = Modem::modem->openResolv(O_WRONLY|O_APPEND)) >= 0) {
-    QStringList &dnslist = PPPData::data()->dns();
+  if ((fd = _ifaceppp->modem()->openResolv(O_WRONLY|O_APPEND)) >= 0) {
+    QStringList &dnslist = _ifaceppp->data()->dns();
     for ( QStringList::Iterator it = dnslist.begin();
           it != dnslist.end();
           ++it )
@@ -1366,13 +1362,13 @@ void adddns()
     }
     close(fd);
   }
-  add_domain(PPPData::data()->domain());
+  add_domain(_ifaceppp->data()->domain(), _ifaceppp);
 }
 
-void addpeerdns() {
+void addpeerdns(InterfacePPP *_ifaceppp) {
   int fd, fd2;
 
-  if((fd = Modem::modem->openResolv(O_WRONLY|O_APPEND)) >= 0) {
+  if((fd = _ifaceppp->modem()->openResolv(O_WRONLY|O_APPEND)) >= 0) {
     if((fd2 = open("/etc/ppp/resolv.conf", O_RDONLY)) >= 0) {
       char c;
       int i = 0;
@@ -1387,17 +1383,17 @@ void addpeerdns() {
       fprintf(stderr, "failed to read from /etc/ppp/resolv.conf\n");
     close(fd);
   }
-  add_domain(PPPData::data()->domain());
+  add_domain(_ifaceppp->data()->domain(), _ifaceppp);
 }
 
 // remove the dns entries from the /etc/resolv.conf file
-void removedns() {
+void removedns(InterfacePPP *_ifaceppp) {
 
   int fd;
   char c;
   QString resolv[MAX_RESOLVCONF_LINES];
 
-  if((fd = Modem::modem->openResolv(O_RDONLY)) >= 0) {
+  if((fd = _ifaceppp->modem()->openResolv(O_RDONLY)) >= 0) {
 
     int i=0;
     while(read(fd, &c, 1) == 1 && i < MAX_RESOLVCONF_LINES) {
@@ -1410,7 +1406,7 @@ void removedns() {
     }
     close(fd);
 
-    if((fd = Modem::modem->openResolv(O_WRONLY|O_TRUNC)) >= 0) {
+    if((fd = _ifaceppp->modem()->openResolv(O_WRONLY|O_TRUNC)) >= 0) {
       for(int j=0; j < i; j++) {
 	if(resolv[j].contains("#kppp temp entry")) continue;
 	if(resolv[j].contains("#entry disabled by kppp")) {
@@ -1429,7 +1425,7 @@ void removedns() {
   }
 
   if (  modified_hostname ) {
-    Modem::modem->setHostname(old_hostname);
+    _ifaceppp->modem()->setHostname(old_hostname);
     modified_hostname = FALSE;
   }
 

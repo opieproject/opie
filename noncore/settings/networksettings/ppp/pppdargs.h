@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdargs.h,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: pppdargs.h,v 1.2 2003-05-30 15:06:17 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -33,11 +33,12 @@
 #include <qpushbutton.h>
 #include <qlistbox.h>
 #include <qlabel.h>
+class PPPData;
 
 class PPPdArguments : public QDialog {
 Q_OBJECT
 public:
-  PPPdArguments(QWidget *parent=0, const char *name=0);
+  PPPdArguments(PPPData*,QWidget *parent=0, const char *name=0);
   ~PPPdArguments() {}
 
 private slots:
@@ -62,6 +63,7 @@ private:
   QListBox *arguments;
 
   QPushButton *closebtn;
+  PPPData *_pppdata;
 };
 #endif
 

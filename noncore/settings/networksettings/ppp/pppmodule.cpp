@@ -1,24 +1,25 @@
+
 #include "pppconfig.h"
 #include "pppmodule.h"
 #include "pppdata.h"
-#include "kpppwidget.h"
-#include "interfaceinformationimp.h"
-//#include "devices.h"
+#include "interfaceinformationppp.h"
+#include "interfaceppp.h"
+
 
 /**
  * Constructor, find all of the possible interfaces
  */
 PPPModule::PPPModule() : Module()
 {
-    QMap<QString,QString> ifaces = PPPData::data()->getConfiguredInterfaces();
+    QMap<QString,QString> ifaces = PPPData::getConfiguredInterfaces();
     QMap<QString,QString>::Iterator it;
-    Interface *iface;
+    InterfacePPP *iface;
     qDebug("getting interfaces");
     for( it = ifaces.begin(); it != ifaces.end(); ++it ){
         qDebug("ifaces %s", it.key().latin1());
-        iface = new Interface( 0, it.key() );
+        iface = new InterfacePPP( 0, it.key() );
         iface->setHardwareName( it.data() );
-        list.append( iface );
+        list.append( (Interface*)iface );
     }
 }
 
@@ -32,8 +33,7 @@ PPPModule::~PPPModule(){
         ifaces.insert( i->getInterfaceName(), i->getHardwareName() );
         delete i;
     }
-    PPPData::data()->setConfiguredInterfaces( ifaces );
-    PPPData::data()->save();
+    PPPData::setConfiguredInterfaces( ifaces );
 }
 
 /**
@@ -67,8 +67,8 @@ bool PPPModule::isOwner(Interface *i){
  */
 QWidget *PPPModule::configure(Interface *i){
     qDebug("return ModemWidget");
-    PPPConfigWidget *pppconfig = new PPPConfigWidget( i, 0, "PPPConfig",
-                                                      false,
+    PPPConfigWidget *pppconfig = new PPPConfigWidget( (InterfacePPP*)i,
+                                                      0, "PPPConfig", false,
                                                       Qt::WDestructiveClose );
     return pppconfig;
 }
@@ -81,7 +81,8 @@ QWidget *PPPModule::information(Interface *i){
   // We don't have any advanced pppd information widget yet :-D
   // TODO ^
     qDebug("return PPPModule::information");
-  InterfaceInformationImp *information = new InterfaceInformationImp( 0, "InterfaceSetupImp", i);
+//  InterfaceInformationImp *information = new InterfaceInformationImp( 0, "InterfaceSetupImp", i);
+   InterfaceInformationPPP *information = new InterfaceInformationPPP( 0, "InterfaceInformationPPP", i );
   return information;
 }
 
@@ -106,12 +107,14 @@ Interface *PPPModule::addNewInterface(const QString &newInterface){
 
   qDebug("try to add iface %s",newInterface.latin1());
 
+  InterfacePPP *ifaceppp;
   Interface *iface;
-  iface = new Interface();
-  PPPConfigWidget imp(iface, 0, "PPPConfigImp", true);
+  ifaceppp = new InterfacePPP();
+  PPPConfigWidget imp(ifaceppp, 0, "PPPConfigImp", true);
   imp.showMaximized();
   if(imp.exec() == QDialog::Accepted ){
       iface->setModuleOwner( this );
+      iface = ifaceppp;
       list.append( iface );
       return iface;
   }else {
