@@ -1,0 +1,11 @@
+- crosscompile libEtPan!
+- do at least some error checking and report them to the user
+- thread the whole send/recieve thing
+- add mail recieve support
+- queue mails for sending
+- check source for memory leaks (there is a whole bunch out there)
+- make bigger (64x64) desktop icon
+- rename app to "mail"
+- opie taskbar plugin
+- integrate in opie pim
+- get some sleep

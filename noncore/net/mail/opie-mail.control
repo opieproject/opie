@@ -1,0 +1,10 @@
+Package: opie-mail
+Files: bin/opiemail apps/1Pim/opiemail.desktop pics/mail/*.png
+Priority: optional
+Section: opie/applications
+Maintainer: Juergen Graf <jgf@openbsd.de>
+Architecture: arm
+Version: 0.0.1-$SUB_VERSION
+Depends: task-opie-minimal, libopie1
+Description: Opie's mail and news client (POP3, IMAP and NNTP)
+License: LGPL

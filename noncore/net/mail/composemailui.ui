@@ -1,0 +1,328 @@
+<!DOCTYPE UI><UI>
+<class>ComposeMailUI</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>ComposeMailUI</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>264</width>
+            <height>360</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Compose Message</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>0</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>0</number>
+        </property>
+        <widget>
+            <class>QTabWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>tabWidget</cstring>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>mailTab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Mail</string>
+                </attribute>
+                <grid>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>4</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>3</number>
+                    </property>
+                    <widget row="2"  column="1" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>subjectLine</cstring>
+                        </property>
+                    </widget>
+                    <widget row="3"  column="0"  rowspan="1"  colspan="2" >
+                        <class>QMultiLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>message</cstring>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>subjectLabel</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Subject</string>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>fromLabel</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>From</string>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="1" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>toLine</cstring>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="1" >
+                        <class>QComboBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>fromBox</cstring>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="0" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>toButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>To</string>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>optionsTab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Options</string>
+                </attribute>
+                <grid>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>4</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>3</number>
+                    </property>
+                    <widget row="3"  column="0" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>replyButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Reply-To</string>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="0" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>bccButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>BCC</string>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="1" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>ccLine</cstring>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="1" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>bccLine</cstring>
+                        </property>
+                    </widget>
+                    <widget row="3"  column="1" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>replyLine</cstring>
+                        </property>
+                    </widget>
+                    <widget row="6"  column="0"  rowspan="1"  colspan="2" >
+                        <class>QMultiLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>sigMultiLine</cstring>
+                        </property>
+                    </widget>
+                    <widget row="5"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>sigLabel</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Signature</string>
+                        </property>
+                    </widget>
+                    <spacer row="4"  column="0" >
+                        <property>
+                            <name>name</name>
+                            <cstring>Spacer3</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>orientation</name>
+                            <enum>Vertical</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>sizeType</name>
+                            <enum>Expanding</enum>
+                        </property>
+                        <property>
+                            <name>sizeHint</name>
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget row="1"  column="0" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>ccButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>CC</string>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>attachTab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Attachment</string>
+                </attribute>
+                <grid>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>4</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>3</number>
+                    </property>
+                    <widget row="0"  column="0"  rowspan="1"  colspan="3" >
+                        <class>QListView</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>attList</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>selectionMode</name>
+                            <enum>Single</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>allColumnsShowFocus</name>
+                            <bool>true</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>showSortIndicator</name>
+                            <bool>true</bool>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="2" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>deleteButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Delete File</string>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="0" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>addButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Add File</string>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+        </widget>
+    </vbox>
+</widget>
+<tabstops>
+    <tabstop>fromBox</tabstop>
+    <tabstop>toButton</tabstop>
+    <tabstop>toLine</tabstop>
+    <tabstop>subjectLine</tabstop>
+    <tabstop>message</tabstop>
+    <tabstop>tabWidget</tabstop>
+    <tabstop>ccButton</tabstop>
+    <tabstop>ccLine</tabstop>
+    <tabstop>bccButton</tabstop>
+    <tabstop>bccLine</tabstop>
+    <tabstop>replyButton</tabstop>
+    <tabstop>replyLine</tabstop>
+    <tabstop>sigMultiLine</tabstop>
+    <tabstop>attList</tabstop>
+    <tabstop>addButton</tabstop>
+    <tabstop>deleteButton</tabstop>
+</tabstops>
+</UI>

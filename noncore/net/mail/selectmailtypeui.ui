@@ -1,0 +1,94 @@
+<!DOCTYPE UI><UI>
+<class>SelectMailTypeUI</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>SelectMailTypeUI</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>157</width>
+            <height>66</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Select Type</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>4</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>3</number>
+        </property>
+        <widget row="0"  column="0" >
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>groupBox</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Select Account Type</string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <grid>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>4</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>3</number>
+                </property>
+                <widget row="0"  column="0" >
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>IMAP</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>POP3</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>SMTP</string>
+                        </property>
+                    </item>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>typeBox</cstring>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+    </grid>
+</widget>
+<tabstops>
+    <tabstop>typeBox</tabstop>
+</tabstops>
+</UI>

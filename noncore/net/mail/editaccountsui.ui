@@ -1,0 +1,223 @@
+<!DOCTYPE UI><UI>
+<class>EditAccountsUI</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>EditAccountsUI</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>260</width>
+            <height>320</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Configure Accounts</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>0</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>0</number>
+        </property>
+        <widget>
+            <class>QTabWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>configTab</cstring>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>mailTab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Mail</string>
+                </attribute>
+                <grid>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>4</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>3</number>
+                    </property>
+                    <widget row="1"  column="2" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>deleteMail</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Delete</string>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="0" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>newMail</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>New</string>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="0"  rowspan="1"  colspan="3" >
+                        <class>QListView</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>mailList</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>sizePolicy</name>
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>7</vsizetype>
+                            </sizepolicy>
+                        </property>
+                        <property stdset="1">
+                            <name>resizePolicy</name>
+                            <enum>Manual</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>allColumnsShowFocus</name>
+                            <bool>true</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>showSortIndicator</name>
+                            <bool>true</bool>
+                        </property>
+                        <property>
+                            <name>toolTip</name>
+                            <string>Name of the Account</string>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="1" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>editMail</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Edit</string>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>newsTab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>News</string>
+                </attribute>
+                <grid>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>4</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>3</number>
+                    </property>
+                    <widget row="1"  column="2" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>deleteNews</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>sizePolicy</name>
+                            <sizepolicy>
+                                <hsizetype>1</hsizetype>
+                                <vsizetype>0</vsizetype>
+                            </sizepolicy>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Delete</string>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="1" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>editNews</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Edit</string>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="0"  rowspan="1"  colspan="3" >
+                        <class>QListView</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>newsList</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>allColumnsShowFocus</name>
+                            <bool>true</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>showSortIndicator</name>
+                            <bool>true</bool>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="0" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>newNews</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>New</string>
+                        </property>
+                    </widget>
+                </grid>
+            </widget>
+        </widget>
+    </vbox>
+</widget>
+<tabstops>
+    <tabstop>mailList</tabstop>
+    <tabstop>newMail</tabstop>
+    <tabstop>editMail</tabstop>
+    <tabstop>deleteMail</tabstop>
+    <tabstop>configTab</tabstop>
+    <tabstop>newsList</tabstop>
+    <tabstop>newNews</tabstop>
+    <tabstop>editNews</tabstop>
+    <tabstop>deleteNews</tabstop>
+</tabstops>
+</UI>
