@@ -334,34 +334,41 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
     box->setBackgroundMode( PaletteButton );
     box->setSpacing( 0 );
 
+    QPixmap pic;
     QToolButton *btn = new QToolButton( box );
-    btn->setIconSet( Resource::loadIconSet("up") );
+    pic.convertFromImage( Resource::loadImage( "up" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    btn->setPixmap( pic );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT( cdUP() ) );
 
     btn = new QToolButton( box );
-    btn->setIconSet( Resource::loadIconSet("home") );
+    pic.convertFromImage( Resource::loadImage( "home" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    btn->setPixmap( pic );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT( cdHome() ) );
 
     btn = new QToolButton( box );
-    btn->setIconSet( Resource::loadIconSet("DocsIcon") );
+    pic.convertFromImage( Resource::loadImage( "DocsIcon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    btn->setPixmap( pic );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT(cdDoc() ) );
 
     m_btnNew = new QToolButton( box );
-    m_btnNew->setIconSet( Resource::loadIconSet("new") );
+    pic.convertFromImage( Resource::loadImage( "new" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    btn->setPixmap( pic );
     connect(m_btnNew, SIGNAL(clicked() ),
             this, SLOT(slotNew() ) );
 
 
     m_btnClose = new QToolButton( box );
-    m_btnClose->setIconSet( Resource::loadIconSet("close") );
+    pic.convertFromImage( Resource::loadImage( "close" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    btn->setPixmap( pic );
     connect(m_btnClose, SIGNAL(clicked() ),
             selector(), SIGNAL(closeMe() ) );
 
     btn = new QToolButton( box );
-    btn->setIconSet( Resource::loadIconSet("cardmon/pcmcia") );
+    pic.convertFromImage( Resource::loadImage( "cardmon/pcmcia" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    btn->setPixmap( pic );
 
     m_fsButton = btn;
     /* let's fill device parts */
