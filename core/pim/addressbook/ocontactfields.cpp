@@ -72,6 +72,8 @@ QStringList OContactFields::trphonefields( bool sorted )
     list.append( mapIdToStr[Qtopia::BusinessPhone] );
     list.append( mapIdToStr[Qtopia::BusinessFax] );
     list.append( mapIdToStr[Qtopia::BusinessMobile] ); 
+    list.append( mapIdToStr[Qtopia::BusinessPager] );
+    list.append( mapIdToStr[Qtopia::BusinessWebPage] );
 
     list.append( mapIdToStr[Qtopia::DefaultEmail] );
     list.append( mapIdToStr[Qtopia::Emails] );
@@ -79,6 +81,8 @@ QStringList OContactFields::trphonefields( bool sorted )
     list.append( mapIdToStr[Qtopia::HomePhone] );
     list.append( mapIdToStr[Qtopia::HomeFax] );
     list.append( mapIdToStr[Qtopia::HomeMobile] );
+    // list.append( mapIdToStr[Qtopia::HomePager] );
+    list.append( mapIdToStr[Qtopia::HomeWebPage] );
 
     if (sorted) list.sort();
 
@@ -98,6 +102,8 @@ QStringList OContactFields::untrphonefields( bool sorted )
     list.append( mapIdToStr[ Qtopia::BusinessPhone ] );
     list.append( mapIdToStr[ Qtopia::BusinessFax ] );
     list.append( mapIdToStr[ Qtopia::BusinessMobile ] );
+    list.append( mapIdToStr[ Qtopia::BusinessPager ] );
+    list.append( mapIdToStr[ Qtopia::BusinessWebPage ] );
 
     list.append( mapIdToStr[ Qtopia::DefaultEmail ] );
     list.append( mapIdToStr[ Qtopia::Emails ] );
@@ -105,6 +111,8 @@ QStringList OContactFields::untrphonefields( bool sorted )
     list.append( mapIdToStr[ Qtopia::HomePhone ] );
     list.append( mapIdToStr[ Qtopia::HomeFax ] );
     list.append( mapIdToStr[ Qtopia::HomeMobile ] );
+    //list.append( mapIdToStr[Qtopia::HomePager] );
+    list.append( mapIdToStr[Qtopia::HomeWebPage] );
 
     if (sorted) list.sort();
 
@@ -139,15 +147,12 @@ QStringList OContactFields::trfields( bool sorted )
     list.append( mapIdToStr[Qtopia::BusinessState] );
     list.append( mapIdToStr[Qtopia::BusinessZip] );
     list.append( mapIdToStr[Qtopia::BusinessCountry] );
-    list.append( mapIdToStr[Qtopia::BusinessPager] );
-    list.append( mapIdToStr[Qtopia::BusinessWebPage] );
 
     list.append( mapIdToStr[Qtopia::HomeStreet] );
     list.append( mapIdToStr[Qtopia::HomeCity] );
     list.append( mapIdToStr[Qtopia::HomeState] );
     list.append( mapIdToStr[Qtopia::HomeZip] );
     list.append( mapIdToStr[Qtopia::HomeCountry] );
-    list.append( mapIdToStr[Qtopia::HomeWebPage] );
 
     list += trdetailsfields( sorted );
 
@@ -186,15 +191,12 @@ QStringList OContactFields::untrfields( bool sorted )
     list.append( mapIdToStr[ Qtopia::BusinessState ] );
     list.append( mapIdToStr[ Qtopia::BusinessZip ] );
     list.append( mapIdToStr[ Qtopia::BusinessCountry ] );
-    list.append( mapIdToStr[ Qtopia::BusinessPager ] );
-    list.append( mapIdToStr[ Qtopia::BusinessWebPage ] );
 
     list.append( mapIdToStr[ Qtopia::HomeStreet ] );
     list.append( mapIdToStr[ Qtopia::HomeCity ] );
     list.append( mapIdToStr[ Qtopia::HomeState ] );
     list.append( mapIdToStr[ Qtopia::HomeZip ] );
     list.append( mapIdToStr[ Qtopia::HomeCountry ] );
-    list.append( mapIdToStr[ Qtopia::HomeWebPage] );
 
     list += untrdetailsfields( sorted );
 

@@ -25,6 +25,7 @@
 #include <qpe/stringutil.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/timestring.h>
+#include <qpe/resource.h>
 
 #include <opie/orecordlist.h>
 
@@ -214,17 +215,19 @@ bool AbTable::selectContact( int UID )
 void AbTable::insertIntoTable( const OContact& cnt, int row )
 {
 	//	qWarning( "void AbTable::insertIntoTable( const OContact& cnt, %d )", row );
-	QString strName,
-		strContact;
+	QString strName;
+	ContactItem contactItem;
 	
 	strName = findContactName( cnt );
-	strContact = findContactContact( cnt, row );
+	contactItem = findContactContact( cnt, row );
 	
 	AbTableItem *ati;
-	ati = new AbTableItem( this, QTableItem::Never, strName, strContact);
+	ati = new AbTableItem( this, QTableItem::Never, strName, contactItem.value );
 	contactList.insert( ati, cnt );
 	setItem( row, 0, ati );
-	ati = new AbTableItem( this, QTableItem::Never, strContact, strName);
+	ati = new AbTableItem( this, QTableItem::Never, contactItem.value, strName);
+	if ( !contactItem.icon.isNull() )
+		ati->setPixmap( contactItem.icon );
 	setItem( row, 1, ati );
 	
 	//### cannot do this; table only has two columns at this point
@@ -306,14 +309,18 @@ void AbTable::refresh()
 {
 	//	qWarning( "void AbTable::refresh()" );
 	int rows = numRows();
-	QString value;
 	AbTableItem *abi;
+	ContactItem contactItem;
 
 	setPaintingEnabled( FALSE );
 	for ( int r = 0; r < rows; ++r ) {
 		abi = static_cast<AbTableItem*>( item(r, 0) );
-		value = findContactContact( contactList[abi], r );
-		static_cast<AbTableItem*>( item(r, 1) )->setItem( value, abi->text() );
+		contactItem = findContactContact( contactList[abi], r );
+		static_cast<AbTableItem*>( item(r, 1) )->setItem( contactItem.value, abi->text() );
+		if ( !contactItem.icon.isNull() )
+			static_cast<AbTableItem*>( item(r, 1) )->
+				setPixmap( contactItem.icon );
+
 	}
 	resort();
 	setPaintingEnabled( TRUE );
@@ -618,130 +625,156 @@ void AbTable::rowHeightChanged( int row )
 	if ( enablePainting )
 		QTable::rowHeightChanged( row );
 }
-QString AbTable::findContactContact( const OContact &entry, int /* row */ )
+ContactItem AbTable::findContactContact( const OContact &entry, int /* row */ )
 {
-	QString value;
-	value = "";
+
+	ContactItem item;
+
+	item.value = "";
+
 	for ( QValueList<int>::ConstIterator it = intFields.begin();
 	      it != intFields.end(); ++it ) {
 		switch ( *it ) {
 		default:
 			break;
 		case Qtopia::Title:
-			value = entry.title();
+			item.value = entry.title();
 			break;
 		case Qtopia::Suffix:
-			value = entry.suffix();
+			item.value = entry.suffix();
 			break;
 		case Qtopia::FileAs:
-			value = entry.fileAs();
+			item.value = entry.fileAs();
 			break;
 		case Qtopia::DefaultEmail:
-			value = entry.defaultEmail();
+			item.value = entry.defaultEmail();
+			if ( !item.value.isEmpty() )
+				item.icon = Resource::loadPixmap( "addressbook/email" );
+			break;
 		case Qtopia::Emails:
-			value = entry.emails();
+			item.value = entry.emails();
+			if ( !item.value.isEmpty() )
+				item.icon = Resource::loadPixmap( "addressbook/email" );
 			break;
 		case Qtopia::HomeStreet:
-			value = entry.homeStreet();
+			item.value = entry.homeStreet();
 			break;
 		case Qtopia::HomeCity:
-			value = entry.homeCity();
+			item.value = entry.homeCity();
 			break;
 		case Qtopia::HomeState:
-			value = entry.homeState();
+			item.value = entry.homeState();
 			break;
 		case Qtopia::HomeZip:
-			value = entry.homeZip();
+			item.value = entry.homeZip();
 			break;
 		case Qtopia::HomeCountry:
-			value = entry.homeCountry();
+			item.value = entry.homeCountry();
 			break;
 		case Qtopia::HomePhone:
-			value = entry.homePhone();
+			item.value = entry.homePhone();
+			if ( !item.value.isEmpty() )
+				item.icon = Resource::loadPixmap( "addressbook/phonehome" );
 			break;
 		case Qtopia::HomeFax:
-			value = entry.homeFax();
+			item.value = entry.homeFax();
+			if ( !item.value.isEmpty() )
+				item.icon = Resource::loadPixmap( "addressbook/faxhome" );
 			break;
 		case Qtopia::HomeMobile:
-			value = entry.homeMobile();
+			item.value = entry.homeMobile();
+			if ( !item.value.isEmpty() )
+				item.icon = Resource::loadPixmap( "addressbook/mobilehome" );
 			break;
 		case Qtopia::HomeWebPage:
-			value = entry.homeWebpage();
+			item.value = entry.homeWebpage();
+			if ( !item.value.isEmpty() )
+				item.icon = Resource::loadPixmap( "addressbook/webpagehome" );
 			break;
 		case Qtopia::Company:
-			value = entry.company();
+			item.value = entry.company();
 			break;
 		case Qtopia::BusinessCity:
-			value = entry.businessCity();
+			item.value = entry.businessCity();
 			break;
 		case Qtopia::BusinessStreet:
-			value = entry.businessStreet();
+			item.value = entry.businessStreet();
 			break;
 		case Qtopia::BusinessZip:
-			value = entry.businessZip();
+			item.value = entry.businessZip();
 			break;
 		case Qtopia::BusinessCountry:
-			value = entry.businessCountry();
+			item.value = entry.businessCountry();
 			break;
 		case Qtopia::BusinessWebPage:
-			value = entry.businessWebpage();
+			item.value = entry.businessWebpage();
+			if ( !item.value.isEmpty() )
+				item.icon = Resource::loadPixmap( "addressbook/webpagework" );
 			break;
 		case Qtopia::JobTitle:
-			value = entry.jobTitle();
+			item.value = entry.jobTitle();
 			break;
 		case Qtopia::Department:
-			value = entry.department();
+			item.value = entry.department();
 			break;
 		case Qtopia::Office:
-			value = entry.office();
+			item.value = entry.office();
 			break;
 		case Qtopia::BusinessPhone:
-			value = entry.businessPhone();
+			item.value = entry.businessPhone();
+			if ( !item.value.isEmpty() )
+				item.icon = Resource::loadPixmap( "addressbook/phonework" );
 			break;
 		case Qtopia::BusinessFax:
-			value = entry.businessFax();
+			item.value = entry.businessFax();
+			if ( !item.value.isEmpty() )
+				item.icon = Resource::loadPixmap( "addressbook/faxwork" );
 			break;
 		case Qtopia::BusinessMobile:
-			value = entry.businessMobile();
+			item.value = entry.businessMobile();
+			if ( !item.value.isEmpty() )
+				item.icon = Resource::loadPixmap( "addressbook/mobilework" );
 			break;
 		case Qtopia::BusinessPager:
-			value = entry.businessPager();
+			item.value = entry.businessPager();
 			break;
 		case Qtopia::Profession:
-			value = entry.profession();
+			item.value = entry.profession();
 			break;
 		case Qtopia::Assistant:
-			value = entry.assistant();
+			item.value = entry.assistant();
 			break;
 		case Qtopia::Manager:
-			value = entry.manager();
+			item.value = entry.manager();
 			break;
 		case Qtopia::Spouse:
-			value = entry.spouse();
+			item.value = entry.spouse();
 			break;
 		case Qtopia::Gender:
-			value = entry.gender();
+			item.value = entry.gender();
 			break;
 		case Qtopia::Birthday:
-			if ( ! entry.birthday().isNull() )
-				value = TimeString::numberDateString( entry.birthday() );
+			if ( ! entry.birthday().isNull() ){
+				item.value = TimeString::numberDateString( entry.birthday() );
+			}
 			break;
 		case Qtopia::Anniversary:
-			if ( ! entry.anniversary().isNull() )
-				value = TimeString::numberDateString( entry.anniversary() );
+			if ( ! entry.anniversary().isNull() ){
+				item.value = TimeString::numberDateString( entry.anniversary() );
+			}
 			break;
 		case Qtopia::Nickname:
-			value = entry.nickname();
+			item.value = entry.nickname();
 			break;
 		case Qtopia::Children:
-			value = entry.children();
+			item.value = entry.children();
 			break;
 		case Qtopia::Notes:
-			value = entry.notes();
+			item.value = entry.notes();
 			break;
 		}
-		if ( !value.isEmpty() )
+		if ( !item.value.isEmpty() )
 			break;
 	}
-	return value;
+	return item;
 }

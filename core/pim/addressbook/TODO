@@ -18,7 +18,8 @@ Feature requests:
 
 Known Bugs:
 -----------
-- Email-button: A lot of problems.. :(
+- Default Email-button: A lot of problems:
+	If on second tab: The combo chooser is on the top left of the screen ! :(
 - Default Email-Button: Sometimes not hiding the textfields completely
 
 Bugs but not in addressbook:
@@ -36,7 +37,6 @@ ContactEditor:
 - Category is on the wrong position after changing to personal and back to normal
 	( Temporarily workaround: Category is never deactivated.. :S )
 
-- Personal and Business Web-page is not editable 
 
 Important:
 ----------
@@ -115,3 +115,4 @@ Fixed/Ready:
 - Implement a picker/combo for the default email.
 - Overview window cleanup needed..
 - Store last settings of combo-boxes
+- Personal and Business Web-page is not editable 

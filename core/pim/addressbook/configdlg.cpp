@@ -1,9 +1,13 @@
 #include "configdlg.h"
 #include "ocontactfields.h"
+
 #include <qcheckbox.h>
 #include <qradiobutton.h>
 #include <qlistbox.h>
 #include <qpushbutton.h>
+#include <qiconset.h> 
+
+#include <qpe/resource.h>
 
 #include <opie/ocontact.h>
 
@@ -16,6 +20,13 @@ ConfigDlg::ConfigDlg( QWidget *parent, const char *name):
 	for (uint i=0; i < contFields.count(); i++) {
 		allFieldListBox->insertItem( contFields[i] );
 	}
+
+	// Set Pics to Buttons and Tabs
+	m_upButton->setIconSet( QIconSet( Resource::loadPixmap( "addressbook/up" ) ) );
+	m_downButton->setIconSet( QIconSet( Resource::loadPixmap( "addressbook/down" ) ) );
+	m_addButton->setIconSet( QIconSet( Resource::loadPixmap( "addressbook/add" ) ) );
+	m_removeButton->setIconSet( QIconSet( Resource::loadPixmap( "addressbook/sub" ) ) );
+	
 
 	// Get the translation maps between Field ID and translated strings
 	m_mapStrToID = OContactFields::trFieldsToId();

@@ -30,6 +30,7 @@
 #include <qtable.h>
 #include <qstringlist.h>
 #include <qcombobox.h>
+#include <qpixmap.h> 
 
 class AbTableItem : public QTableItem
 {
@@ -44,6 +45,15 @@ public:
 
 private:
     QString sortKey;
+};
+
+// This is a simple container, storing all contact
+// information
+class ContactItem
+{
+ public:
+	QPixmap icon;
+	QString value;
 };
 
 class AbPickItem : public QTableItem
@@ -115,7 +125,7 @@ protected slots:
 
 private:
     void insertIntoTable( const OContact &cnt, int row );
-    QString findContactContact( const OContact &entry, int row );
+    ContactItem findContactContact( const OContact &entry, int row );
     void fitColumns();
     void resizeRows();
     void realignTable();

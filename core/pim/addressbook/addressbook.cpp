@@ -201,7 +201,8 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	
 	edit->insertSeparator();
 	
-	a = new QAction( tr("My Personal Details"), QString::null, 0, 0, 0, TRUE );
+	a = new QAction( tr("My Personal Details"), Resource::loadPixmap( "addressbook/identity" ), 
+			 QString::null, 0, this, 0 );
 	actionPersonal = a;
 	connect( a, SIGNAL( activated() ), this, SLOT( slotPersonalView() ) );
 	a->addTo( edit );
@@ -214,7 +215,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	connect( a, SIGNAL( activated() ), this , SLOT( slotSave() ) );
 	a->addTo( edit );
 #endif
-	a = new QAction( tr( "Config" ), Resource::loadPixmap( "today/config" ), QString::null,
+	a = new QAction( tr( "Config" ), Resource::loadPixmap( "addressbook/configure" ), QString::null,
 			 0, this, 0 );
 	connect( a, SIGNAL( activated() ), this, SLOT( slotConfig() ) );
 	a->addTo( edit );
