@@ -208,16 +208,19 @@ public:
     QMap<QString,QString> OContact::toExtraMap() const;
     class QString OContact::recordField(int) const;
 
+    // Why private ? (eilers,se)
+    QString emailSeparator() const { return " "; }
+     // the emails should be seperated by a comma
+    void setEmails( const QString &v );
+    QString emails() const { return find( Qtopia::Emails ); }
+
+
 private:
     friend class AbEditor;
     friend class AbTable;
     friend class AddressBookAccessPrivate;
     friend class XMLIO;
 
-    QString emailSeparator() const { return " "; }
-     // the emails should be seperated by a comma
-    void setEmails( const QString &v );
-    QString emails() const { return find( Qtopia::Emails ); }
 
     void insert( int key, const QString &value );
     void replace( int key, const QString &value );

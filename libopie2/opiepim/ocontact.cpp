@@ -1409,25 +1409,25 @@ bool OContact::match( const QRegExp &r ) const
 }
 
 
-// Noch nicht definiert ! :SX
 QString OContact::toShortText() const
 {
-	return ( QString::fromLatin1( "Not defined!") );
+	return ( fullName() );
 }
 QString OContact::type() const
 {
 	return QString::fromLatin1( "OContact" );
 }
 
-// Noch nicht definiert ! :SX
+// Definition is missing ! (se)
 QMap<QString,QString> OContact::toExtraMap() const
 {
+	qWarning ("Function not implemented: OContact::toExtraMap()");
 	QMap <QString,QString> useless;
 	return useless;
 }
 
-// Noch nicht definiert ! :SX
-class QString OContact::recordField(int) const
+class QString OContact::recordField( int pos ) const
 {
-	return QString::fromLatin1( "Noch nicht implementiert !" );
+	QStringList SLFIELDS = fields(); // ?? why this ? (se)
+	return SLFIELDS[pos];
 }
