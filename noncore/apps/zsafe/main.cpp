@@ -1,7 +1,7 @@
 /*
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: main.cpp,v 1.5 2004-05-31 15:26:51 ar Exp $
+** $Id: main.cpp,v 1.6 2004-07-10 02:46:51 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 */
@@ -9,9 +9,11 @@
 
 #include "zsafe.h"
 
+#ifndef NO_OPIE
 /* OPIE */
 #include <opie2/odebug.h>
 using namespace Opie::Core;
+#endif
 
 /* QT */
 #ifdef DESKTOP
