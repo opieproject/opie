@@ -53,6 +53,7 @@
 
 #include <opie2/ocontactaccessbackend_xml.h>
 #include <opie2/opimresolver.h>
+#include <opie2/opimglobal.h>
 
 namespace Opie {
 
@@ -65,7 +66,7 @@ OPimContactAccess::OPimContactAccess ( const QString appname, const QString ,
 	 */
         if( end == 0 ) {
 		qWarning ("Using BackendFactory !");
-		end = OBackendFactory<OPimContactAccessBackend>::defaultBackend( "contact", appname );
+		end = OBackendFactory<OPimContactAccessBackend>::defaultBackend( OPimGlobal::CONTACTLIST, appname );
         }
 	// Set backend locally and in template
         m_backEnd = end;

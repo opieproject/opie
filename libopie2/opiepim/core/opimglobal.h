@@ -50,7 +50,7 @@ class OPimGlobal{
 		UNKNOWN,      // Unknown database style
 		XML,
 		SQL,
-		VCARD,
+		VCARD,        // Also used for VCARD !
 		_END_DatabaseStyle
 	};
 

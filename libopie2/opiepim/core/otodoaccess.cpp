@@ -34,6 +34,7 @@
 #include <opie2/otodoaccess.h>
 #include <opie2/obackendfactory.h>
 #include <opie2/opimresolver.h>
+#include <opie2/opimglobal.h>
 
 namespace Opie {
 OPimTodoAccess::OPimTodoAccess( OPimTodoAccessBackend* end, enum Access )
@@ -44,7 +45,7 @@ OPimTodoAccess::OPimTodoAccess( OPimTodoAccessBackend* end, enum Access )
 
 	// Zecke: Du musst hier noch fr das XML-Backend einen Appnamen bergeben !
         if (end == 0l )
-		m_todoBackEnd = OBackendFactory<OPimTodoAccessBackend>::defaultBackend ("todo", QString::null);
+		m_todoBackEnd = OBackendFactory<OPimTodoAccessBackend>::defaultBackend (OPimGlobal::TODOLIST, QString::null);
 
     setBackEnd( m_todoBackEnd );
 }

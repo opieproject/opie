@@ -29,6 +29,7 @@
 #include <opie2/obackendfactory.h>
 #include <opie2/odatebookaccess.h>
 #include <opie2/opimresolver.h>
+#include <opie2/opimglobal.h>
 
 namespace Opie {
 /**
@@ -42,7 +43,7 @@ ODateBookAccess::ODateBookAccess( ODateBookAccessBackend* back, enum Access ac )
     : OPimAccessTemplate<OPimEvent>( back )
 {
     if (!back )
-        back = OBackendFactory<ODateBookAccessBackend>::defaultBackend("datebook", QString::null );
+        back = OBackendFactory<ODateBookAccessBackend>::defaultBackend( OPimGlobal::DATEBOOK, QString::null );
 
     m_backEnd = back;
     setBackEnd( m_backEnd );
