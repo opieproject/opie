@@ -15,7 +15,7 @@ class PPPDialog : public QDialog {
     Q_OBJECT
 
 public:
-    PPPDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0);
+    PPPDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0, const QString& device = 0);
     ~PPPDialog();
 
 
@@ -28,5 +28,7 @@ protected:
     QPushButton* connectButton;
     QMultiLineEdit* outPut;
 
+private:
+    QString m_device;
 };
 #endif

@@ -7,17 +7,19 @@
 #include <qlabel.h>
 #include <opie/oprocess.h>
 
-PPPDialog::PPPDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
+PPPDialog::PPPDialog( QWidget* parent,  const char* name, bool modal, WFlags fl, const QString& device )
     : QDialog( parent, name, modal, fl ) {
 
     if ( !name )
 	setName( "PPPDialog" );
     setCaption( tr( "ppp connection " ) ) ;
 
+    m_device = device;
+
     layout = new QVBoxLayout( this );
 
     QLabel* info = new QLabel( this );
-    info->setText( "Enter an ppp script name:" );
+    info->setText( tr("Enter an ppp script name:") );
 
     cmdLine = new QLineEdit( this );
 
@@ -45,10 +47,9 @@ PPPDialog::~PPPDialog() {
 void PPPDialog::connectToDevice() {
     outPut->clear();
     // vom popupmenu beziehen
-    QString devName = "/dev/ttyU0";
     QString connectScript = "/etc/ppp/peers/" + cmdLine->text();
     OProcess* pppDial = new OProcess();
-    *pppDial << "pppd" << devName << "call" << connectScript;
+    *pppDial << "pppd" << m_device << "call" << connectScript;
     connect( pppDial, SIGNAL(receivedStdout(OProcess*, char*, int ) ),
                 this, SLOT(fillOutPut(OProcess*, char*, int ) ) );
      if (!pppDial->start(OProcess::DontCare, OProcess::AllOutput) ) {
