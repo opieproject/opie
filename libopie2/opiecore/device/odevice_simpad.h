@@ -40,7 +40,7 @@ namespace Core {
 namespace Internal {
 
 class SIMpad : public ODevice, public QWSServer::KeyboardFilter
-{
+{ 
   protected:
     virtual void init(const QString&);
     virtual void initButtons();
@@ -66,7 +66,7 @@ class SIMpad : public ODevice, public QWSServer::KeyboardFilter
 
     int m_power_timer;
 
-    OLedState m_leds [1];
+    OLedState m_leds [2];
 };
 
 struct s_button {

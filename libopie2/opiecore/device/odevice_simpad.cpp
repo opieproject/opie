@@ -117,7 +117,6 @@ void SIMpad::init(const QString&)
     d->m_vendorstr = "SIEMENS";
     d->m_vendor = Vendor_SIEMENS;
 
-    QFile f ( "/proc/hal/model" );
 
     //TODO Implement model checking
     //FIXME For now we assume an SL4
@@ -135,7 +134,6 @@ void SIMpad::init(const QString&)
     }
 
     //Distribution detecting code is now in base class
-
     m_leds [0] = m_leds [1] = Led_Off;
 
     m_power_timer = 0;
