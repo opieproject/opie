@@ -77,7 +77,7 @@ commit a new README or send a mail to opie-devel@handhelds.org
 * libpcap 0.7.2
   http://www.tcpdump.org/release/
 
-* libetpan 0.30 + patch (in $OPIEDIR/noncore/net/mail/libetpan)
+* libetpan 0.31
   http://prdownloads.sourceforge.net/libetpan/
 
 * libsqlite 2.8.6
