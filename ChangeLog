@@ -7,6 +7,9 @@
 
 	Fixed Bugs
 	----------
+	* #1380 - QDateBookAccess::remove() doesn't remove entries (eilers, zecke)
+	* #1445 - Opie Sheet Has No Icon (CoreDump)
+	* #1440 - The icon of opie-mobilemsg is missing (CoreDump)
 
 2004-09-17	Opie 1.1.6
 
@@ -28,13 +31,13 @@
 	* #1167 - Fixed Opie write crashing on more text than one page (ar)
 	* #1225 - Fixed repeated light flashing on Zaurus with keyz (mickeyl)
 	* #1359 - Fixed bookmarks in Gutenbrowser (ljp)
-	* #1361 - Fixed auto upercase in Opie-Addressbook (eilers) 
+	* #1361 - Fixed auto upercase in Opie-Addressbook (eilers)
 	* #1370 - Pimconverter now reacts on cancel key (eilers)
 	* #1376 - Bring back the capslock/numlock display (zecke)
 	* #1383 - Language settings now warns about losing open apps (Markus Litz)
 	* #1393 - Fixed line wrap issues in opie-console for the default profile (mickeyl)
 	* #1394 - Fixed oversized headline in opie-login (coredump)
-	* #1396 - Opie-console captures the escape key and vim is working (zecke) 
+	* #1396 - Opie-console captures the escape key and vim is working (zecke)
 	* #1401 - Scrollbar is now only visible if necessary in DocTab (mickeyl)
 
 2004-07-06	Opie 1.1.4
