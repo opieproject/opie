@@ -11,7 +11,7 @@
 ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.27 2002-05-23 02:03:12 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.28 2002-05-23 02:58:32 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -302,8 +302,10 @@ bool VMemo::startRecording() {
   if(s)
      fileName=fileName.right(fileName.length()-s-2);
   qDebug("filename will be "+fileName);   
-   if( fileName.right(1).find('/') == -1)
-           fileName+="/";
+    if( fileName.left(1).find('/') == -1)
+            fileName="/"+fileName;
+    if( fileName.right(1).find('/') == -1)
+            fileName+="/";
   fName = "vm_"+ dt.toString()+ ".wav";
   
   fileName+=fName;
