@@ -1,10 +1,10 @@
-Package: opie-opierec-help-en
+Package: opie-recorder-help-en
 Files: help/en/html/opierec.html
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
-Architecture: all
-Depends: opie-opierec
+Architecture: arm
+Depends: opie-recorder
 License: GPL
-Description: Opierec help files (English)
+Description: Opie-Recorder help files (English)
 Version: $QPE_VERSION$EXTRAVERSION
