@@ -1,4 +1,4 @@
-#!pyquicklauncher
+#!/usr/bin/env pyquicklauncher
 # -*- coding: iso8859-15 -*-
 #--------------------------------------------------------------------------------------------------#
 """           =.             This file is part of the PyQt examples collection
