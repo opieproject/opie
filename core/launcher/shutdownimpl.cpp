@@ -47,7 +47,7 @@ static void changeButtonColor ( QPushButton *btn, const QColor &col )
 ShutdownImpl::ShutdownImpl( QWidget* parent, const char *name, WFlags fl )
 		: QWidget ( parent, name, fl )
 {
-	setCaption ( tr( "Shut down..." ) );
+	setCaption ( tr( "Shutdown..." ) );
 
 	QVBoxLayout *vbox = new QVBoxLayout ( this );
 	vbox-> setSpacing ( 3 );
