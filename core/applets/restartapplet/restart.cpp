@@ -14,14 +14,9 @@
 
 #include "restart.h"
 
-#include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
 
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/resource.h>
 #include <qpainter.h>
-#include <qpixmap.h>
-#include <qdatastream.h>
 
 
 /* XPM */
