@@ -34,7 +34,7 @@
 
 #include "webstyle.h"
 
-static const int  _indicatorSize = 13;
+static const int  _indicatorSize = 9;
 static QButton *  _highlightedButton = 0;
 static const int  _scrollBarExtent = 12;
 
@@ -721,7 +721,7 @@ WebStyle::drawIndicator
   QSize
 WebStyle::exclusiveIndicatorSize() const
 {
-  return QSize(_indicatorSize, _indicatorSize);
+  return QSize(_indicatorSize+2, _indicatorSize+2);
 }
 
   void
