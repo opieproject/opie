@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Form implementation generated from reading ui file 'soundsettingsbase.ui'
 **
-** Created: Thu May 23 11:23:54 2002
+** Created: Sun May 19 12:11:35 2002
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -11,6 +11,8 @@
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qgroupbox.h>
+#include <qmainwindow.h>
+
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qslider.h>
@@ -74,14 +76,14 @@ static const char* const image1_data[] = {
  *  TRUE to construct a modal dialog.
  */
 SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl )
+    : QMainWindow( parent, name, fl )
 {
     QPixmap image0( ( const char** ) image0_data );
     QPixmap image1( ( const char** ) image1_data );
     if ( !name )
   setName( "SoundSettingsBase" );
     resize( 255, 301 ); 
-    setCaption( tr( "Sound Settings" ) );
+    setCaption( tr( "Vmemo Settings" ) );
     SoundSettingsBaseLayout = new QGridLayout( this ); 
     SoundSettingsBaseLayout->setSpacing( 6 );
     SoundSettingsBaseLayout->setMargin( 11 );
@@ -95,16 +97,16 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     GroupBox3->layout()->setMargin( 0 );
     GroupBox3Layout = new QVBoxLayout( GroupBox3->layout() );
     GroupBox3Layout->setAlignment( Qt::AlignTop );
-    GroupBox3Layout->setSpacing( 6 );
-    GroupBox3Layout->setMargin( 11 );
+    GroupBox3Layout->setSpacing( 2 );
+    GroupBox3Layout->setMargin( 2 );
 
     Layout10 = new QVBoxLayout; 
-    Layout10->setSpacing( 6 );
-    Layout10->setMargin( 0 );
+    Layout10->setSpacing( 2 );
+    Layout10->setMargin( 2 );
 
     Layout16 = new QHBoxLayout; 
-    Layout16->setSpacing( 6 );
-    Layout16->setMargin( 0 );
+    Layout16->setSpacing( 2 );
+    Layout16->setMargin( 2 );
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
     Layout16->addItem( spacer );
 
@@ -121,8 +123,8 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     Layout10->addLayout( Layout16 );
 
     Layout13 = new QHBoxLayout; 
-    Layout13->setSpacing( 6 );
-    Layout13->setMargin( 0 );
+    Layout13->setSpacing( 2 );
+    Layout13->setMargin( 2 );
 
     volLabel = new QLabel( GroupBox3, "volLabel" );
     volLabel->setText( tr( "Output" ) );
@@ -138,8 +140,8 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     Layout10->addLayout( Layout13 );
 
     Layout12 = new QHBoxLayout; 
-    Layout12->setSpacing( 6 );
-    Layout12->setMargin( 0 );
+    Layout12->setSpacing( 2 );
+    Layout12->setMargin( 2 );
 
     volume = new QSlider( GroupBox3, "volume" );
     volume->setMaxValue( 100 );
@@ -163,8 +165,8 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     Layout10->addLayout( Layout12 );
 
     Layout17 = new QHBoxLayout; 
-    Layout17->setSpacing( 6 );
-    Layout17->setMargin( 0 );
+    Layout17->setSpacing( 2 );
+    Layout17->setMargin( 2 );
     QSpacerItem* spacer_7 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
     Layout17->addItem( spacer_7 );
 
@@ -184,8 +186,8 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     SoundSettingsBaseLayout->addWidget( GroupBox3, 0, 0 );
 
     Layout12_2 = new QVBoxLayout; 
-    Layout12_2->setSpacing( 6 );
-    Layout12_2->setMargin( 0 );
+    Layout12_2->setSpacing( 2 );
+    Layout12_2->setMargin( 2 );
 
     GroupBox1 = new QGroupBox( this, "GroupBox1" );
     GroupBox1->setTitle( tr( "Vmemo" ) );
@@ -193,7 +195,7 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     QWidget* privateLayoutWidget = new QWidget( GroupBox1, "Layout11" );
     privateLayoutWidget->setGeometry( QRect( 5, 16, 96, 169 ) ); 
     Layout11 = new QVBoxLayout( privateLayoutWidget ); 
-    Layout11->setSpacing( 6 );
+    Layout11->setSpacing( 2 );
     Layout11->setMargin( 0 );
 
     sampleRateLabel = new QLabel( privateLayoutWidget, "sampleRateLabel" );
@@ -201,10 +203,12 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     Layout11->addWidget( sampleRateLabel );
 
     sampleRate = new QComboBox( FALSE, privateLayoutWidget, "sampleRate" );
+    sampleRate->insertItem( tr( "8000" ) );
     sampleRate->insertItem( tr( "11025" ) );
     sampleRate->insertItem( tr( "22050" ) );
-    sampleRate->insertItem( tr( "32000" ) );
+    sampleRate->insertItem( tr( "33075" ) );
     sampleRate->insertItem( tr( "44100" ) );
+    sampleRate->setFixedWidth(90);
     Layout11->addWidget( sampleRate );
 
     stereoCheckBox = new QCheckBox( privateLayoutWidget, "stereoCheckBox" );
@@ -227,15 +231,15 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     Layout11->addWidget( LocationComboBox );
     Layout12_2->addWidget( GroupBox1 );
 
-//      touchsound = new QCheckBox( this, "touchsound" );
-//      touchsound->setText( tr( "Screen sounds" ) );
-//      Layout12_2->addWidget( touchsound );
+// //     touchsound = new QCheckBox( this, "touchsound" );
+// //     touchsound->setText( tr( "Screen sounds" ) );
+// //     Layout12_2->addWidget( touchsound );
 
-//      keysound = new QCheckBox( this, "keysound" );
-//      keysound->setText( tr( "Keyboard sounds" ) );
-//      Layout12_2->addWidget( keysound );
-    QSpacerItem* spacer_9 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
-    Layout12_2->addItem( spacer_9 );
+// //     keysound = new QCheckBox( this, "keysound" );
+// //     keysound->setText( tr( "Keyboard sounds" ) );
+// //     Layout12_2->addWidget( keysound );
+     QSpacerItem* spacer_9 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+     Layout12_2->addItem( spacer_9 );
 
     SoundSettingsBaseLayout->addLayout( Layout12_2, 0, 1 );
 }
