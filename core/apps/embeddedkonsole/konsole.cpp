@@ -106,6 +106,7 @@ static const char *commonCmds[] =
     "cat ",
     "cd ",
     "chmod ",
+    "clear",
     "cp ",
     "dc ",
     "df ",
