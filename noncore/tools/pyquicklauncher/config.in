@@ -1,0 +1,5 @@
+  config PYQUICKLAUNCHER
+    boolean "python-quicklauncher (quicklaunch python scripts)"
+    default "n"
+
+
