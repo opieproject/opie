@@ -1,5 +1,5 @@
 Package: opie-today-stocktickerplugin
-Files: plugins/today/libstockticker.so* plugins/today/libtodaystocktickerplugin.so* bin/stockticker pics/stockticker/stockticker.png
+Files: plugins/today/libtodaystocktickerplugin.so* bin/stockticker pics/stockticker/stockticker.png
 Priority: optional
 Section: opie/applications
 Maintainer: ljp <llornkcor@handhelds.org>
