@@ -124,7 +124,11 @@ static void oDebugBackend( unsigned short level, unsigned int area, const char *
         output = 2; // need an application object to use MsgBox
     }
 
-    QString areaName = (oApp) ? oApp->appName() : "<unknown>";
+    // gcc 2.9x is dumb and sucks... can you hear it?
+    //QString areaName = (oApp) ? oApp->appName() : "<unknown>";
+    QString areaName;
+    if ( oApp ) areaName = oApp->appName();
+    else areaName = "<unknown>";
 
     // Output
     switch( output )
