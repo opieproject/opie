@@ -17,6 +17,7 @@ do
 	then
 #	    tar xfOz $i ./control.tar.gz | tar xfOz - ./control
 	    # new version of ipkg uses ar instead of tar
+	    echo "Filename: $i"
 	    ar pf $i control.tar.gz | tar xfOz - ./control
 	    echo
 	else
