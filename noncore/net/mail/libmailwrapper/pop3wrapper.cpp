@@ -228,12 +228,19 @@ void POP3wrapper::statusFolder(folderStat&target_stat,const QString&)
         &target_stat.message_recent,&target_stat.message_unseen);
 }
 
-void POP3wrapper::fetchRawBody(const RecMail&mail,char**target,size_t*length)
+encodedString* POP3wrapper::fetchRawBody(const RecMail&mail)
 {
+    char*target=0;
+    size_t length=0;
+    encodedString*res = 0;
     mailmessage * mailmsg = 0;
     int err = mailsession_get_message(m_folder->fld_session, mail.getNumber(), &mailmsg);
-    err = mailmessage_fetch(mailmsg,target,length);
+    err = mailmessage_fetch(mailmsg,&target,&length);
     if (mailmsg) mailmessage_free(mailmsg);  
+    if (target) {
+        res = new encodedString(target,length);
+    }
+    return res;
 }
 
 const QString&POP3wrapper::getType()const

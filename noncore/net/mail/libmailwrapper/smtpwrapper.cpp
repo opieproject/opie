@@ -485,7 +485,7 @@ void SMTPwrapper::progress( size_t current, size_t maximum )
     }
 }
 
-void SMTPwrapper::storeMail(char*mail, size_t length, const QString&box)
+void SMTPwrapper::storeMail(const char*mail, size_t length, const QString&box)
 {
     if (!mail) return;
     QString localfolders = AbstractMail::defaultLocalfolder();
@@ -536,7 +536,7 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp )
     if (rcpts) smtp_address_list_free( rcpts );
 }
 
-int SMTPwrapper::smtpSend(char*from,clist*rcpts,char*data,size_t size, SMTPaccount *smtp )
+int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMTPaccount *smtp )
 {
     char *server, *user, *pass;
     bool ssl;
@@ -640,8 +640,6 @@ void SMTPwrapper::sendMail(const Mail&mail,SMTPaccount*aSmtp,bool later )
 
 int SMTPwrapper::sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which)
 {
-    char*data = 0;
-    size_t length = 0;
     size_t curTok = 0;
     mailimf_fields *fields = 0;
     mailimf_field*ffrom = 0;
@@ -649,11 +647,11 @@ int SMTPwrapper::sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which)
     char*from = 0;
     int res = 0;
 
-    wrap->fetchRawBody(*which,&data,&length);
+    encodedString * data = wrap->fetchRawBody(*which);
     if (!data) return 0;
-    int err = mailimf_fields_parse( data, length, &curTok, &fields );
+    int err = mailimf_fields_parse( data->Content(), data->Length(), &curTok, &fields );
     if (err != MAILIMF_NO_ERROR) {
-        free(data);
+        delete data;
         delete wrap;
         return 0;
     }
@@ -662,16 +660,15 @@ int SMTPwrapper::sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which)
     ffrom = getField(fields, MAILIMF_FIELD_FROM );
     from = getFrom(ffrom);
 
-    qDebug("Size: %i vs. %i",length,strlen(data));
     if (rcpts && from) {
-        res = smtpSend(from,rcpts,data,length,smtp );
+        res = smtpSend(from,rcpts,data->Content(),data->Length(),smtp );
     }
     if (fields) {
         mailimf_fields_free(fields);
         fields = 0;
     }
     if (data) {
-        free(data);
+        delete data;
     }
     if (from) {
         free(from);

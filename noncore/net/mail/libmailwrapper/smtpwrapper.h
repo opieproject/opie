@@ -47,14 +47,14 @@ protected:
     void smtpSend( mailmime *mail,bool later, SMTPaccount *smtp );
     clist *createRcptList( mailimf_fields *fields );
     
-    static void storeMail(char*mail, size_t length, const QString&box);
+    static void storeMail(const char*mail, size_t length, const QString&box);
     static QString mailsmtpError( int err );
     static void progress( size_t current, size_t maximum );
     static void addRcpts( clist *list, mailimf_address_list *addr_list );
     static char *getFrom( mailmime *mail );
     static char *getFrom( mailimf_field *ffrom);
     static mailimf_field *getField( mailimf_fields *fields, int type );
-    int smtpSend(char*from,clist*rcpts,char*data,size_t size, SMTPaccount *smtp );
+    int smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMTPaccount *smtp );
 
     void storeMail(mailmime*mail, const QString&box);
     Settings *settings;

@@ -5,6 +5,7 @@
 #include "genericwrapper.h"
 #include <qstring.h>
 
+class encodedString;
 struct mailstorage;
 struct mailfolder;
 
@@ -26,7 +27,7 @@ public:
     virtual int deleteAllMail(const Folder*);
 
     virtual RecBody fetchBody( const RecMail &mail );
-    virtual void fetchRawBody(const RecMail&mail,char**target,size_t*length);
+    virtual encodedString* fetchRawBody(const RecMail&mail);
     virtual void logout();
     virtual const QString&getType()const;
     static void pop3_progress( size_t current, size_t maximum );

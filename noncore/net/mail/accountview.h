@@ -55,6 +55,9 @@ public:
     virtual QPopupMenu * getContextMenu();
     virtual void contextMenuSelected(int);
 
+protected:
+    void downloadMails();
+
 private:
     Folder *folder;
     POP3viewItem *pop3;
@@ -78,6 +81,7 @@ protected:
     IMAPfolderItem*findSubItem(const QString&path,IMAPfolderItem*start=0);
     virtual void refreshFolders(bool force=false);
     virtual void createNewFolder();
+    virtual void removeChilds();
 
 private:
     IMAPaccount *account;

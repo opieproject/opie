@@ -36,6 +36,7 @@ public:
     virtual QString fetchTextPart(const RecMail&mail,const RecPart&part);
     virtual encodedString* fetchDecodedPart(const RecMail&mail,const RecPart&part);
     virtual encodedString* fetchRawPart(const RecMail&mail,const RecPart&part);
+    virtual encodedString* fetchRawBody(const RecMail&mail);
 
     virtual int createMbox(const QString&,const Folder*parentfolder=0,const QString& delemiter="/",bool getsubfolder=false);
     virtual int deleteMbox(const Folder*folder);

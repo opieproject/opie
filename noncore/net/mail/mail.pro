@@ -11,7 +11,8 @@ HEADERS         = defines.h \
                mailistviewitem.h \
                settingsdialog.h \
                statuswidget.h \
-               newmaildir.h
+               newmaildir.h \
+               selectstore.h
                
 SOURCES         = main.cpp \
                opiemail.cpp \
@@ -24,7 +25,8 @@ SOURCES         = main.cpp \
                viewmailbase.cpp \
                settingsdialog.cpp \
                statuswidget.cpp \
-               newmaildir.cpp
+               newmaildir.cpp \
+               selectstore.cpp
                
 INTERFACES     = editaccountsui.ui \
                selectmailtypeui.ui \
@@ -36,7 +38,8 @@ INTERFACES     = editaccountsui.ui \
                composemailui.ui \
                settingsdialogui.ui \
                statuswidgetui.ui \
-               newmaildirui.ui 
+               newmaildirui.ui \
+               selectstoreui.ui
 	
 
 INCLUDEPATH += $(OPIEDIR)/include

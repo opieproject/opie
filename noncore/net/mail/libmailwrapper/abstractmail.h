@@ -26,6 +26,7 @@ public:
     virtual QString fetchTextPart(const RecMail&mail,const RecPart&part)=0;
     virtual encodedString* fetchDecodedPart(const RecMail&mail,const RecPart&part)=0;
     virtual encodedString* fetchRawPart(const RecMail&mail,const RecPart&part)=0;
+    virtual encodedString* fetchRawBody(const RecMail&mail)=0;
 
     virtual void deleteMail(const RecMail&mail)=0;
     virtual void answeredMail(const RecMail&mail)=0;

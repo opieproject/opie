@@ -172,7 +172,7 @@ void MBOXwrapper::storeMessage(const char*msg,size_t length, const QString&folde
     mailmbox_done(f);
 }
 
-void MBOXwrapper::fetchRawBody(const RecMail&mail,char**target,size_t*length)
+encodedString* MBOXwrapper::fetchRawBody(const RecMail&mail)
 {
     RecBody body;
     mailstorage*storage = mailstorage_new(NULL);
@@ -190,14 +190,14 @@ void MBOXwrapper::fetchRawBody(const RecMail&mail,char**target,size_t*length)
         Global::statusMessage(tr("Error initializing mbox"));
         mailfolder_free(folder);
         mailstorage_free(storage);
-        return;
+        return 0;
     }
     r = mailsession_get_message(folder->fld_session, mail.getNumber(), &msg);
     if (r != MAIL_NO_ERROR) {
         Global::statusMessage(tr("Error fetching mail %i").arg(mail.getNumber()));
         mailfolder_free(folder);
         mailstorage_free(storage);
-        return;
+        return 0;
     }
     r = mailmessage_fetch(msg,&data,&size);
     if (r != MAIL_NO_ERROR) {
@@ -205,13 +205,14 @@ void MBOXwrapper::fetchRawBody(const RecMail&mail,char**target,size_t*length)
         mailfolder_free(folder);
         mailstorage_free(storage);
         mailmessage_free(msg);
-        return;
+        return 0;
     }
-    *target = data;
-    *length = size;
+    encodedString*result = new encodedString(data,size);
+
     mailfolder_free(folder);
     mailstorage_free(storage);
     mailmessage_free(msg);
+    return result;
 }
 
 void MBOXwrapper::deleteMails(const QString & mailbox,QList<RecMail> &target)

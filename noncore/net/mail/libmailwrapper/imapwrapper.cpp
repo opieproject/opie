@@ -466,6 +466,10 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>
     mailimap_fetch_type *fetchType;
     mailimap_set *set;
     clistcell*current,*cur;
+    mailimap_section_part * section_part =  0;
+    mailimap_section_spec * section_spec =  0;
+    mailimap_section * section = 0;
+    mailimap_fetch_att * fetch_att = 0;
 
     login();
     if (!m_imap) {
@@ -480,17 +484,24 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>
         }
     }
     set = mailimap_set_new_single(mail.getNumber());
-    clist*id_list=clist_new();
-    for (unsigned j=0; j < path.count();++j) {
-        uint32_t * p_id = (uint32_t *)malloc(sizeof(*p_id));
-        *p_id = path[j];
-        clist_append(id_list,p_id);
-    }
-    mailimap_section_part * section_part =  mailimap_section_part_new(id_list);
-    mailimap_section_spec * section_spec =  mailimap_section_spec_new(MAILIMAP_SECTION_SPEC_SECTION_PART, NULL, section_part, NULL);
-    mailimap_section * section = mailimap_section_new(section_spec);
-    mailimap_fetch_att * fetch_att = mailimap_fetch_att_new_body_section(section);
     
+    clist*id_list = 0;
+    
+    /* if path == empty then its a request for the whole rfc822 mail and generates
+       a "fetch <id> (body[])" statement on imap server */
+    if (path.count()>0 ) {
+        id_list = clist_new();
+        for (unsigned j=0; j < path.count();++j) {
+            uint32_t * p_id = (uint32_t *)malloc(sizeof(*p_id));
+            *p_id = path[j];
+            clist_append(id_list,p_id);
+        }
+        section_part =  mailimap_section_part_new(id_list);
+        section_spec =  mailimap_section_spec_new(MAILIMAP_SECTION_SPEC_SECTION_PART, NULL, section_part, NULL);
+    }
+    
+    section =  mailimap_section_new(section_spec);
+    fetch_att = mailimap_fetch_att_new_body_section(section);
     fetchType = mailimap_fetch_type_new_fetch_att(fetch_att);
     
     clist*result = 0;
@@ -955,24 +966,28 @@ void IMAPwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
     r = mailimap_status_att_list_add(att_list, MAILIMAP_STATUS_ATT_RECENT);
     r = mailimap_status_att_list_add(att_list, MAILIMAP_STATUS_ATT_UNSEEN);
     r = mailimap_status(m_imap, mailbox.latin1(), att_list, &status);
-    for (cur = clist_begin(status->st_info_list);
-            cur != NULL ; cur = clist_next(cur)) {
-        mailimap_status_info * status_info;
-        status_info = (mailimap_status_info *)clist_content(cur);
-        switch (status_info->st_att) {
-        case MAILIMAP_STATUS_ATT_MESSAGES:
-            target_stat.message_count = status_info->st_value;
-        break;
-        case MAILIMAP_STATUS_ATT_RECENT:
-             target_stat.message_recent = status_info->st_value;
-        break;
-        case MAILIMAP_STATUS_ATT_UNSEEN:
-             target_stat.message_unseen = status_info->st_value;
-        break;
+    if (r==MAILIMAP_NO_ERROR&&status->st_info_list!=0) {
+        for (cur = clist_begin(status->st_info_list);
+                cur != NULL ; cur = clist_next(cur)) {
+            mailimap_status_info * status_info;
+            status_info = (mailimap_status_info *)clist_content(cur);
+            switch (status_info->st_att) {
+            case MAILIMAP_STATUS_ATT_MESSAGES:
+                target_stat.message_count = status_info->st_value;
+            break;
+            case MAILIMAP_STATUS_ATT_RECENT:
+                target_stat.message_recent = status_info->st_value;
+            break;
+            case MAILIMAP_STATUS_ATT_UNSEEN:
+                target_stat.message_unseen = status_info->st_value;
+            break;
+            }
         }
+    } else {
+        qDebug("Error retrieving status");
     }
-    mailimap_mailbox_data_status_free(status);
-    mailimap_status_att_list_free(att_list);
+    if (status) mailimap_mailbox_data_status_free(status);
+    if (att_list) mailimap_status_att_list_free(att_list);
 }
 
 void IMAPwrapper::storeMessage(const char*msg,size_t length, const QString&folder)
@@ -989,4 +1004,11 @@ void IMAPwrapper::storeMessage(const char*msg,size_t length, const QString&folde
 const QString&IMAPwrapper::getType()const
 {
     return account->getType();
+}
+
+encodedString* IMAPwrapper::fetchRawBody(const RecMail&mail)
+{
+    // dummy
+    QValueList<int> path;
+    return fetchRawPart(mail,path,false);
 }

@@ -6,6 +6,7 @@
 
 class RecMail;
 class RecBody;
+class encodedString;
 struct mailmbox_folder;
 
 class MBOXwrapper : public Genericwrapper
@@ -30,7 +31,7 @@ public:
     virtual RecBody fetchBody( const RecMail &mail );
     static void mbox_progress( size_t current, size_t maximum );
 
-    virtual void fetchRawBody(const RecMail&mail,char**target,size_t*length);
+    virtual encodedString* fetchRawBody(const RecMail&mail);
     virtual void deleteMails(const QString & mailbox,QList<RecMail> &target);
     virtual int deleteAllMail(const Folder*);
     virtual const QString&getType()const;

@@ -3,6 +3,7 @@
 #include <libmailwrapper/abstractmail.h>
 #include "defines.h"
 #include "newmaildir.h"
+#include "selectstore.h"
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
 
@@ -90,8 +91,16 @@ QPopupMenu * POP3folderItem::getContextMenu()
     if (m) {
         m->insertItem(QObject::tr("Refresh header list",contextName),0);
         m->insertItem(QObject::tr("Delete all mails",contextName),1);
+        m->insertItem(QObject::tr("Download all mails",contextName),2);
     }
     return m;
+}
+
+void POP3folderItem::downloadMails()
+{
+    Selectstore sels;
+    sels.showMaximized();
+    sels.exec();
 }
 
 void POP3folderItem::contextMenuSelected(int which)
@@ -99,10 +108,15 @@ void POP3folderItem::contextMenuSelected(int which)
     AccountView * view = (AccountView*)listView();
     switch (which) {
     case 0:
+        /* must be 'cause pop3 lists are cached */
+        pop3->getWrapper()->logout();
         view->refreshCurrent();
         break;
     case 1:
         deleteAllMail(pop3->getWrapper(),folder);
+        break;
+    case 2:
+        downloadMails();
         break;
     default:
         break;
@@ -158,17 +172,24 @@ void IMAPviewItem::refresh(QList<RecMail>&)
     refreshFolders(false);
 }
 
-void IMAPviewItem::refreshFolders(bool force)
+void IMAPviewItem::removeChilds()
 {
-    if (childCount()>0 && force==false) return;
-    QList<Folder> *folders = wrapper->listFolders();
-
     QListViewItem *child = firstChild();
     while ( child ) {
         QListViewItem *tmp = child;
         child = child->nextSibling();
         delete tmp;
     }
+
+}
+
+void IMAPviewItem::refreshFolders(bool force)
+{
+    if (childCount()>0 && force==false) return;
+    
+    removeChilds();
+
+    QList<Folder> *folders = wrapper->listFolders();
 
     Folder *it;
     QListViewItem*item = 0;
@@ -245,6 +266,10 @@ void IMAPviewItem::contextMenuSelected(int id)
         break;
     case 1:
         createNewFolder();
+        break;
+    case 2:
+        removeChilds();
+        wrapper->logout();
         break;
     default:
         break;
