@@ -1,3 +1,9 @@
+/**
+ * $Author: benmeyer $
+ * $Date: 2003-01-13 19:06:10 $
+ * $Name:  $
+ */ 
+
 #include "interface.h"
 #include <qdatetime.h>
 #include <qfile.h>
