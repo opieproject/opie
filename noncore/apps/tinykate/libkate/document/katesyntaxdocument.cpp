@@ -71,7 +71,7 @@ void SyntaxDocument::setupModeList(bool force)
       mli->section = config->readEntry("section","");
       mli->mimetype = config->readEntry("mimetype","");
       mli->extension = config->readEntry("extension","");
-      mli->identifier = *it;
+      mli->identifier = path+*it;
       myModeList.append(mli);
     }
     else
