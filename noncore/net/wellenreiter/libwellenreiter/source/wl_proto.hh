@@ -1,4 +1,4 @@
-/* $Id: wl_proto.hh,v 1.1 2002-12-27 16:35:28 mjm Exp $ */
+/* $Id: wl_proto.hh,v 1.2 2002-12-28 15:28:49 mjm Exp $ */
 
 #ifndef WLPROTO_HH
 #define WLPROTO_HH
@@ -22,7 +22,7 @@ typedef struct {
   int channel;     /* Channel                        */
   int wep;         /* 1 = WEP enabled ; 0 = disabled */
   char mac[64];    /* MAC address of Accesspoint     */
-  char bssid[128]; /* BSSID of Accesspoint           */
+  char bssid[128]; /* BSSID of Net                   */
 } wl_network_t;
 
 #endif /* WLPROTO_HH */

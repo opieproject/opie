@@ -1,7 +1,7 @@
 /*
  * Communication protocol
  *
- * $Id: wl_proto.cc,v 1.2 2002-12-28 12:59:38 mjm Exp $
+ * $Id: wl_proto.cc,v 1.3 2002-12-28 15:28:49 mjm Exp $
  */
 
 #include "wl_proto.hh"
@@ -43,11 +43,8 @@ int get_field(const char *buffer, char *out)
 int send_network_found (const char *guihost, int guiport, void *structure)
 {
   wl_network_t *ptr;
-  char buffer[2048];
-  char temp[128];
-  int retval=0, len=0;
-
-  memset(temp, 0, sizeof(temp));
+  char buffer[2048], temp[5];
+  int len = 0;
 
   ptr = (wl_network_t *)structure;
 
@@ -60,27 +57,26 @@ int send_network_found (const char *guihost, int guiport, void *structure)
   /* Set Net-type */
   memset(temp, 0, sizeof(temp));
   snprintf(temp, sizeof(temp), "%d", ptr->net_type);
-  retval = add_field(buffer + len, temp, 1);
-  len += retval;
+  len += add_field(buffer + len, temp, 1);
 
   /* Set channel */
   memset(temp, 0, sizeof(temp));
   snprintf(temp, sizeof(temp), "%.2d", ptr->channel);
-  retval = add_field(buffer + len, temp, 2); 
-  len += retval;
+  len += add_field(buffer + len, temp, 2); 
 
   /* Set WEP y/n */
   memset(temp, 0, sizeof(temp));
   snprintf(temp, sizeof(temp), "%d", ptr->wep);
-  retval = add_field(buffer + len, temp, 1);
-  len += retval;
+  len += add_field(buffer + len, temp, 1);
 
   /* Set Mac */
-  retval = add_field(buffer + len, ptr->mac, 17);
-  len += retval;
+  len += add_field(buffer + len, ptr->mac, 17);
 
   /* Set ssid */
-  retval = add_field(buffer + len, ptr->bssid, ptr->ssid_len);
+  if(len + ptr->ssid_len < sizeof(buffer) - 1)
+    len += add_field(buffer + len, ptr->bssid, ptr->ssid_len);
+  else
+    len += add_field(buffer + len, ptr->bssid, sizeof(buffer) - len - 1);
 
   /* Send prepared buffer to UI */
 #ifdef DEBUG
@@ -94,38 +90,34 @@ int send_network_found (const char *guihost, int guiport, void *structure)
 int get_network_found (void *structure, const char *buffer)
 {
   wl_network_t *ptr;
-  char temp[512];
-  int retval=0, len=0;
+  char temp[5];
+  int len = 0;
 
   ptr = (wl_network_t *)structure;
   
-  /* packet type already determined */
+  /* packet type already determined, skip check */
   len += 2;
 
-  /* Get net type */
+  /* Get net type (accesspoint || ad-hoc || ...) */
   memset(temp, 0, sizeof(temp));
-  retval = get_field(buffer + len, temp);
-  len += retval;
+  len += get_field(buffer + len, temp);
   ptr->net_type = atoi(temp); 
    
   /* Get channel */
   memset(temp, 0, sizeof(temp));
-  retval = get_field(buffer + len, temp);
-  len += retval;
+  len += get_field(buffer + len, temp);
   ptr->channel = atoi(temp);
 
   /* Set WEP y/n */
   memset(temp, 0, sizeof(temp));
-  retval = get_field(buffer + len, temp);
-  len += retval;
+  len += get_field(buffer + len, temp);
   ptr->wep = atoi(temp);
 
   /* Set MAC address */
-  retval = get_field(buffer + len, ptr->mac);
-  len += retval;
+  len += get_field(buffer + len, ptr->mac);
 
   /* Set BSSID */
-  retval = get_field(buffer + len, ptr->bssid);
+  len += get_field(buffer + len, ptr->bssid);
 
   return 1;
 }

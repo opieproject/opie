@@ -1,7 +1,7 @@
 /*
  * Socket operations for wellenreiter
  *
- * $Id: wl_sock.cc,v 1.2 2002-12-28 12:59:38 mjm Exp $
+ * $Id: wl_sock.cc,v 1.3 2002-12-28 15:28:49 mjm Exp $
  */
 
 #include "wl_sock.hh"
@@ -13,7 +13,7 @@ int wl_setupsock(const char *host, int port)
   struct sockaddr_in saddr;
   int sock;
 
-  if((sock=socket(AF_INET, SOCK_DGRAM, 0)) < 0)
+  if((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
   {
     wl_logerr("Cannot set up socket: %s", strerror(errno));
     return -1;
@@ -53,7 +53,7 @@ int wl_send(const char *host, int port, const char *string, ...)
   saddr.sin_addr.s_addr = inet_addr(host);
 
   /* Setup socket */
-  if((sock=socket(AF_INET, SOCK_DGRAM, 0)) < 0)
+  if((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
   {
     wl_logerr("Cannot set up socket: %s", strerror(errno));
     return 0;
@@ -76,7 +76,7 @@ int wl_send(const char *host, int port, const char *string, ...)
 int wl_recv(int *sock, char *out, int maxlen)
 {
   struct sockaddr_in *cliaddr;
-  socklen_t len=sizeof(struct sockaddr);
+  socklen_t len = sizeof(struct sockaddr);
   char retval[3];
 
   memset(out, 0, maxlen);
