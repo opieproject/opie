@@ -17,16 +17,18 @@
 #include "oxyframe.h"
 
 
-Element::Element( const QString &name )
+/*Element::Element( const QString &name )
 {
-}
+}*/
 
 
 PSEWidget::PSEWidget() : QWidget()
 {
     this->setCaption( "Periodic System" );
 
-    QGridLayout *grid = new QGridLayout( this, 18,10 );
+    QVBoxLayout *vlay = new QVBoxLayout( this );
+    
+    QGridLayout *grid = new QGridLayout( 18,10 );
     int h=0, v=0;
     for( int n = 0 ; n < 118 ; n++ )
     {
@@ -34,8 +36,18 @@ PSEWidget::PSEWidget() : QWidget()
         QList<OxyFrame> PSEframe;
         PSEframe.append( new OxyFrame( this , QString::number( n ) ) );
         grid->addWidget( PSEframe.current() , v/40+1 , h/40 );
+        PSEframe.current()->setMinimumHeight( 11 );
+        connect( PSEframe.current(), SIGNAL( clicked() ), this, SLOT( slotShowElement() ));
     }
+    
+    OxydataWidget *oxyDW = new OxydataWidget(this);
+    oxyDW->setElement( 1 );
+
+    vlay->addLayout( grid );
+    vlay->addWidget( oxyDW );
 }
+
+void PSEWidget::slotShowElement(){ qDebug( "ja genau" );};
 
 void PSEWidget::position(int n, int& h, int& v)
 {

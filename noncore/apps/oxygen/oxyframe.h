@@ -19,6 +19,11 @@ class OxyFrame : public QFrame
 	
     public:
         OxyFrame(  QWidget *parent=0, const char *name=0);
+
+        void mousePressEvent( QMouseEvent *);
+
+    signals:
+        void clicked();
 };
 
 #endif

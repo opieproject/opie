@@ -76,6 +76,9 @@ class PSEWidget : public QWidget
         
         void position( int, int&, int& );
 
+    public slots:
+        void slotShowElement();
+
 };
 
 #endif

@@ -19,3 +19,6 @@ OxyFrame::OxyFrame(QWidget *parent, const char *name) : QFrame(parent,name)
     this->setBackgroundColor( QColor( cyan ) );
 }
 
+void OxyFrame::mousePressEvent (  QMouseEvent * e ){
+    emit clicked();
+};
