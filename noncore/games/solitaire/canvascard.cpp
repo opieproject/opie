@@ -104,15 +104,15 @@ CanvasCard::CanvasCard( eValue v, eSuit s, bool f, QCanvas *canvas ) :
 {
     if ( !cardsFaces ) {
 	if ( qt_screen->deviceWidth() < 200 ) {
-	    cardsFaces = new QPixmap( Resource::loadPixmap( "cards/card_face_small" ) );
-	    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001_small" ) );
-	    cardsChars = new QBitmap( Resource::loadBitmap( "cards/card_chars_small" ) );
-	    cardsSuits = new QBitmap( Resource::loadBitmap( "cards/card_suits_small" ) );
+	    cardsFaces = new QPixmap( Resource::loadPixmap( "solitaire/card_face_small" ) );
+	    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0001_small" ) );
+	    cardsChars = new QBitmap( Resource::loadBitmap( "solitaire/card_chars_small" ) );
+	    cardsSuits = new QBitmap( Resource::loadBitmap( "solitaire/card_suits_small" ) );
 	} else {
-	    cardsFaces = new QPixmap( Resource::loadPixmap( "cards/card_face" ) );
-	    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001" ) );
-	    cardsChars = new QBitmap( Resource::loadBitmap( "cards/card_chars" ) );
-	    cardsSuits = new QBitmap( Resource::loadBitmap( "cards/card_suits" ) );
+	    cardsFaces = new QPixmap( Resource::loadPixmap( "solitaire/card_face" ) );
+	    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0001" ) );
+	    cardsChars = new QBitmap( Resource::loadBitmap( "solitaire/card_chars" ) );
+	    cardsSuits = new QBitmap( Resource::loadBitmap( "solitaire/card_suits" ) );
 	}
 	cardsCharsUpsideDown = Create180RotatedBitmap( cardsChars );
 	cardsSuitsUpsideDown = Create180RotatedBitmap( cardsSuits );
@@ -137,28 +137,28 @@ void CanvasCard::setCardBack(int b)
 	if ( qt_screen->deviceWidth() < 200 ) {
 	    switch (cardBack) {
 		case 0:
-		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001_small" ) ); break;
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0001_small" ) ); break;
 		case 1:
-		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0002_small" ) ); break;
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0002_small" ) ); break;
 		case 2:
-		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0003_small" ) ); break;
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0003_small" ) ); break;
 		case 3:
-		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0004_small" ) ); break;
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0004_small" ) ); break;
 		case 4:
-		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0005_small" ) ); break;
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0005_small" ) ); break;
 	    }
 	} else {
 	    switch (cardBack) {
 		case 0:
-		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001" ) ); break;
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0001" ) ); break;
 		case 1:
-		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0002" ) ); break;
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0002" ) ); break;
 		case 2:
-		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0003" ) ); break;
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0003" ) ); break;
 		case 3:
-		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0004" ) ); break;
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0004" ) ); break;
 		case 4:
-		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0005" ) ); break;
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "solitaire/card_back0005" ) ); break;
 	    }
 	}
 

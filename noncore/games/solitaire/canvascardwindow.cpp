@@ -42,7 +42,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
 	canvas.setBackgroundColor(QColor(0x08, 0x98, 0x2D));
     } else {
         QPixmap bg;
-	bg.convertFromImage( Resource::loadImage( "table_pattern" ), ThresholdDither );  
+	bg.convertFromImage( Resource::loadImage( "solitaire/table_pattern" ), ThresholdDither );  
         canvas.setBackgroundPixmap(bg);
     }
 
