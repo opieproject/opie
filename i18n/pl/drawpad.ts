@@ -3,7 +3,7 @@
     <name>DrawPad</name>
     <message>
         <source>Delete All</source>
-        <translation>Usun wszystkie</translation>
+        <translation>Usuń wszystkie</translation>
     </message>
     <message>
         <source>Import</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Tools</source>
-        <translation>Narzedzia</translation>
+        <translation>Narzędzia</translation>
     </message>
     <message>
         <source>New Page</source>
@@ -31,19 +31,19 @@
     </message>
     <message>
         <source>Clear Page</source>
-        <translation>Wyczysc strone</translation>
+        <translation>Wyczyść stronę</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation>Usun strone</translation>
+        <translation>Usuń stronę</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>Wroc</translation>
+        <translation>Wróć</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Powtorz</translation>
+        <translation>Powtórz</translation>
     </message>
     <message>
         <source>First Page</source>
@@ -51,11 +51,11 @@
     </message>
     <message>
         <source>Previous Page</source>
-        <translation>Wczesniejsza strona</translation>
+        <translation>Poprzednia strona</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation>Nastepna strona</translation>
+        <translation>Następna strona</translation>
     </message>
     <message>
         <source>Last Page</source>
@@ -67,35 +67,35 @@
     </message>
     <message>
         <source>Draw Line</source>
-        <translation>Rysuj linie</translation>
+        <translation>Rysuj linię</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation>Rysuj prostokat</translation>
+        <translation>Rysuj prostokąt</translation>
     </message>
     <message>
         <source>Draw Filled Rectangle</source>
-        <translation>Rysuj wypelniony prostokat</translation>
+        <translation>Rysuj wypełniony prostokąt</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
-        <translation>Rysuj elipse</translation>
+        <translation>Rysuj elipsę</translation>
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation>Rysuj wypelniona elipse</translation>
+        <translation>Rysuj wypełnioną elipsę</translation>
     </message>
     <message>
         <source>Fill Region</source>
-        <translation>Wypelnij obszar</translation>
+        <translation>Wypełnij obszar</translation>
     </message>
     <message>
         <source>Erase Point</source>
-        <translation>Wyczysc punkt</translation>
+        <translation>Wyczyść punkt</translation>
     </message>
     <message>
         <source>Pen Width</source>
-        <translation>Grubosc rysika</translation>
+        <translation>Grubość rysika</translation>
     </message>
     <message>
         <source>Pen Color</source>
@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Fill Color</source>
-        <translation>Kolor wypelnienia</translation>
+        <translation>Kolor wypełnienia</translation>
     </message>
     <message>
         <source>Insert Text</source>
@@ -128,8 +128,8 @@
     <message>
         <source>Do you want to clear
 the current page?</source>
-        <translation>Chcesz wyczyscic
-aktualna strone?</translation>
+        <translation>Chcesz wyczyścić
+aktualną stronę?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -142,13 +142,13 @@ aktualna strone?</translation>
     <message>
         <source>Do you want to delete
 the current page?</source>
-        <translation>Chcesz usunac
-aktualna strone?</translation>
+        <translation>Chcesz usunąć
+aktualną stronę?</translation>
     </message>
     <message>
         <source>Do you want to delete
 all the pages?</source>
-        <translation>Chcesz usunac
+        <translation>Chcesz usunąć
 wszystkie strony?</translation>
     </message>
     <message>
@@ -157,75 +157,75 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation>Kliknij tu aby dodac nowa kartke.</translation>
+        <translation>Kliknij tu aby dodać nową kartke.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation>Kliknij tu aby wyczyscic aktualna kartke.</translation>
+        <translation>Kliknij tu aby wyczyścić aktualną kartkę.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation>Kliknij tu aby usunac aktualna kartke.</translation>
+        <translation>Kliknij tu aby usunąć aktualną kartkę.</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation>Kliknij tu by cofnac ostatnia akcje.</translation>
+        <translation>Kliknij tu aby cofnąć ostatnią akcję.</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation>Kliknij tu aby powtorzyc ostatnia akcje.</translation>
+        <translation>Kliknij tu aby powtórzyć ostatnią akcję.</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
-        <translation>Kliknij tu aby zobaczyc pierwsza strone.</translation>
+        <translation>Kliknij tu aby zobaczyć pierwszą stronę.</translation>
     </message>
     <message>
         <source>Click here to view the previous page.</source>
-        <translation>Kliknij tu aby zobaczyc poprzednia strone.</translation>
+        <translation>Kliknij tu aby zobaczyć poprzednią stronę.</translation>
     </message>
     <message>
         <source>Click here to view the next page.</source>
-        <translation>Kliknij tu aby zobaczyc nastepna strone.</translation>
+        <translation>Kliknij tu aby zobaczyć nastepną stronę.</translation>
     </message>
     <message>
         <source>Click here to view the last page.</source>
-        <translation>Kliknij tu aby zobaczyc ostatnia strone.</translation>
+        <translation>Kliknij tu aby zobaczyć ostatnią stronę.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw lines.</source>
-        <translation>Kliknij tu aby wybrac jedno z dostepnych narzedzi do rysowania linii.</translation>
+        <translation>Kliknij tu aby wybrać jedno z dostępnych narzędzi do rysowania linii.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation>Kliknij tu aby wybrac jedno z dostepnych narzedzi do rysowania prostokatow.</translation>
+        <translation>Kliknij tu aby wybrać jedno z dostępnych narzędzi do rysowania prostokątow.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation>Kliknij tu aby wybrac jedno z dostepnych narzedzi do rysowania elips.</translation>
+        <translation>Kliknij tu aby wybrać jedno z dostępnych narzędzi do rysowania elips.</translation>
     </message>
     <message>
         <source>Click here to select the text drawing tool.</source>
-        <translation>Kliknij tu aby wybrac narzedzie do wstawiania tekstu.</translation>
+        <translation>Kliknij tu aby wybrać narzędzie do wstawiania tekstu.</translation>
     </message>
     <message>
         <source>Click here to select the fill tool.</source>
-        <translation>Kliknij tu aby wybrac narzedzie do wypelniania.</translation>
+        <translation>Kliknij tu aby wybrać narzędzie do wypełniania.</translation>
     </message>
     <message>
         <source>Click here to select the eraser tool.</source>
-        <translation>Kliknij tu aby wybrac gumke.</translation>
+        <translation>Kliknij tu aby wybrać gumkę.</translation>
     </message>
     <message>
         <source>Click here to select the width of the drawing pen.</source>
-        <translation>Kliknij tu aby wybrac szerokosc rysika.</translation>
+        <translation>Kliknij tu aby wybrać szerokość rysika.</translation>
     </message>
     <message>
         <source>Click here to select the color used when drawing.</source>
-        <translation>Kliknij tu aby wybrac kolor rysika.</translation>
+        <translation>Kliknij tu aby wybrać kolor rysika.</translation>
     </message>
     <message>
         <source>Click here to select the color used when filling in areas.</source>
-        <translation>Kliknij tu aby wybrac kolor wypelnienia.</translation>
+        <translation>Kliknij tu aby wybrać kolor wypełnienia.</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
@@ -236,7 +236,7 @@ wszystkie strony?</translation>
     <name>ExportDialog</name>
     <message>
         <source>Page Selection</source>
-        <translation>Wybor strony</translation>
+        <translation>Wybór strony</translation>
     </message>
     <message>
         <source>All</source>
@@ -279,11 +279,11 @@ wszystkie strony?</translation>
     <name>ImportDialog</name>
     <message>
         <source>Automatic preview</source>
-        <translation>Automatyczny podglad</translation>
+        <translation>Automatyczny podgląd</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation>Podglad</translation>
+        <translation>Podgląd</translation>
     </message>
     <message>
         <source>DrawPad - Import</source>
@@ -302,11 +302,11 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation>Tlo</translation>
+        <translation>Tło</translation>
     </message>
     <message>
         <source>White</source>
-        <translation>Bialy</translation>
+        <translation>Biały</translation>
     </message>
     <message>
         <source>Pen Color</source>
@@ -314,15 +314,15 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation>Kolor wypelnienia</translation>
+        <translation>Kolor wypełnienia</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Ogolne</translation>
+        <translation>Ogólne</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Tytul:</translation>
+        <translation>Tytuł:</translation>
     </message>
     <message>
         <source>Size</source>
@@ -330,11 +330,11 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Szerokosc:</translation>
+        <translation>Szerokość:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Wysokosc:</translation>
+        <translation>Wysokość:</translation>
     </message>
 </context>
 <context>
@@ -345,11 +345,11 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Ogolne</translation>
+        <translation>Ogólne</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Tytul:</translation>
+        <translation>Tytuł:</translation>
     </message>
     <message>
         <source>Date:</source>
@@ -361,18 +361,18 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Szerokosc:</translation>
+        <translation>Szerokość:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation>Wysokosc:</translation>
+        <translation>Wysokość:</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Title: %1</source>
-        <translation>Tytul: %1</translation>
+        <translation>Tytuł: %1</translation>
     </message>
     <message>
         <source>Dimension: %1x%2</source>
@@ -398,13 +398,13 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation>Wyczysc strone</translation>
+        <translation>Wyczyść stronę</translation>
     </message>
     <message>
         <source>Do you want to clear
 the selected page?</source>
-        <translation>Czy chcesz wyczyscic
-wybrana strone?</translation>
+        <translation>Czy chcesz wyczyścić
+wybraną stronę?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -416,33 +416,33 @@ wybrana strone?</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation>Usun strone</translation>
+        <translation>Usuń stronę</translation>
     </message>
     <message>
         <source>Do you want to delete
 the selected page?</source>
-        <translation>Czy chcesz usunac
-wybrana strone?</translation>
+        <translation>Czy chcesz usunąć
+wybraną stronę?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation>Kliknij tu aby dodac nowa kartke.</translation>
+        <translation>Kliknij tu aby dodać nową kartkę.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation>Kliknij tu aby wyczyscic aktualna kartke.</translation>
+        <translation>Kliknij tu aby wyczyścić aktualną kartkę.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation>Kliknij tu aby usunac aktualna kartke.</translation>
+        <translation>Kliknij tu aby usunąć aktualną kartkę.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet up one position in the list.</source>
-        <translation>Kliknij tu aby przesunac aktualna kartke w gore listy.</translation>
+        <translation>Kliknij tu aby przesunąć aktualną kartkę w górę listy.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet down one position in the list.</source>
-        <translation>Kliknij tu aby przesunac aktualna kartke w dol listy.</translation>
+        <translation>Kliknij tu aby przesunąć aktualną kartkę w dół listy.</translation>
     </message>
 </context>
 </TS>

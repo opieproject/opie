@@ -3,7 +3,7 @@
     <name>CommandEditDialog</name>
     <message>
         <source>Command Selection</source>
-        <translation>Wybor polecenia</translation>
+        <translation>Wybór polecenia</translation>
     </message>
     <message>
         <source>new</source>
@@ -49,27 +49,27 @@
     </message>
     <message>
         <source>Micro</source>
-        <translation>Bardzo male</translation>
+        <translation>Bardzo małe</translation>
     </message>
     <message>
         <source>Small Fixed</source>
-        <translation>Male</translation>
+        <translation>Małe</translation>
     </message>
     <message>
         <source>Medium Fixed</source>
-        <translation>Srednie</translation>
+        <translation>Średnie</translation>
     </message>
     <message>
         <source>Show command list</source>
-        <translation>Wyswietl liste polecen</translation>
+        <translation>Wyświetl listę poleceń</translation>
     </message>
     <message>
         <source>Hide command list</source>
-        <translation>Ukryj liste polecen</translation>
+        <translation>Ukryj listę poleceń</translation>
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation>Zakladki na dole</translation>
+        <translation>Zakładki na dole</translation>
     </message>
     <message>
         <source>Green on Black</source>
@@ -77,15 +77,15 @@
     </message>
     <message>
         <source>Black on White</source>
-        <translation>Czarne na bialym</translation>
+        <translation>Czarne na białym</translation>
     </message>
     <message>
         <source>White on Black</source>
-        <translation>Biale na czarnym</translation>
+        <translation>Białe na czarnym</translation>
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation>Czarne na przezroczystym</translation>
+        <translation>Czarne na przeźroczystym</translation>
     </message>
     <message>
         <source>Black on Red</source>
@@ -97,7 +97,7 @@
     </message>
     <message>
         <source>Green on Yellow</source>
-        <translation>Zielone na zoltym</translation>
+        <translation>Zielone na żółtym</translation>
     </message>
     <message>
         <source>Blue on Magenta</source>
@@ -109,11 +109,11 @@
     </message>
     <message>
         <source>Cyan on White</source>
-        <translation>Cyjan na bialym</translation>
+        <translation>Cyjan na białym</translation>
     </message>
     <message>
         <source>White on Cyan</source>
-        <translation>Biale na cyjan</translation>
+        <translation>Białe na cyjan</translation>
     </message>
     <message>
         <source>Blue on Black</source>
@@ -141,7 +141,7 @@
     </message>
     <message>
         <source>Enter</source>
-        <translation>Wprowadz</translation>
+        <translation>Wprowadź</translation>
     </message>
     <message>
         <source>Space</source>
@@ -153,11 +153,11 @@
     </message>
     <message>
         <source>Up</source>
-        <translation>Gora</translation>
+        <translation>Góra</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Dol</translation>
+        <translation>Dół</translation>
     </message>
     <message>
         <source>Paste</source>
@@ -189,11 +189,11 @@
     </message>
     <message>
         <source>Show Command List</source>
-        <translation>Wyswietl liste polecen</translation>
+        <translation>Wyświetl listę poleceń</translation>
     </message>
     <message>
         <source>Hide Command List</source>
-        <translation>Ukryj liste polecen</translation>
+        <translation>Ukryj listę poleceń</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -201,7 +201,7 @@
     </message>
     <message>
         <source>Command List</source>
-        <translation>Lista polecen</translation>
+        <translation>Lista poleceń</translation>
     </message>
     <message>
         <source>Wrap</source>
@@ -209,18 +209,18 @@
     </message>
     <message>
         <source>Use Beep</source>
-        <translation>Uzywaj sygnalu</translation>
+        <translation>Używaj sygnału</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation>Zakladki na gorze</translation>
+        <translation>Zakładki na górze</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Command Selection</source>
-        <translation>Wybor polecenia</translation>
+        <translation>Wybór polecenia</translation>
     </message>
 </context>
 <context>
@@ -231,7 +231,7 @@
     </message>
     <message>
         <source>Enter command to add:</source>
-        <translation>Wprowadz polecenie do dodania:</translation>
+        <translation>Wprowadź polecenie do dodania:</translation>
     </message>
 </context>
 </TS>
