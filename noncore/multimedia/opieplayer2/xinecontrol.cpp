@@ -44,21 +44,13 @@ using namespace Opie::Core;
 #include <qtimer.h>
 #include <qmessagebox.h>
 
-XineControl::XineControl( XineVideoWidget *xineWidget,
-                          MediaPlayerState &_mediaPlayerState,
-                          QObject *parent, const char *name )
-    : QObject( parent, name ), mediaPlayerState( _mediaPlayerState ), xineVideoWidget( xineWidget )
-{
-    libXine = new XINE::Lib( XINE::Lib::InitializeImmediately, xineWidget );
-
-    init();
-}
-
 XineControl::XineControl( XINE::Lib *xine, XineVideoWidget *xineWidget,
                           MediaPlayerState &_mediaPlayerState,
                           QObject *parent, const char *name )
     : QObject( parent, name ), libXine( xine ), mediaPlayerState( _mediaPlayerState ), xineVideoWidget( xineWidget )
 {
+    m_wasError = false;
+
     xine->ensureInitialized();
 
     xine->setWidget( xineWidget );
@@ -96,14 +88,17 @@ void XineControl::play( const QString& fileName ) {
     hasVideoChannel = FALSE;
     hasAudioChannel = FALSE;
     m_fileName = fileName;
+    m_wasError = false;
 
-    odebug << "<<FILENAME: " + fileName  + ">>>>" << oendl;
 
+    /*
+     * If Playing Fails we will fire up an MessgaeBox
+     * but present the AudioWidget so the User can
+     * either Quit and change the Playlist or Continue
+     */
     if ( !libXine->play( fileName, 0, 0 ) ) {
         QMessageBox::warning( 0l , tr( "Failure" ), getErrorCode() );
-        // toggle stop so the the play button is reset
-        mediaPlayerState.setPlaying( false );
-        return;
+        m_wasError = true;
     }
     mediaPlayerState.setPlaying( true );
 
@@ -214,6 +209,19 @@ QString XineControl::getMetaInfo() {
 
     QString returnString;
 
+    /*
+     * If there was an error let us
+     * change the Meta Info to contain the Error Message
+     */
+    if ( m_wasError ) {
+        returnString = tr("Error on file '%1' with reason: ",
+                          "Error when playing a file" ).arg( m_fileName );
+        returnString += getErrorCode();
+        returnString.replace( QRegExp("<qt>",  false), "" );
+        returnString.replace( QRegExp("</qt>", false), "" );
+        return returnString;
+    }
+
     if ( !libXine->metaInfo( 0 ).isEmpty() ) {
         returnString += tr( " Title: " + libXine->metaInfo( 0 ) );
     }
@@ -247,17 +255,17 @@ QString XineControl::getErrorCode() {
     odebug << QString("ERRORCODE: %1 ").arg(errorCode) << oendl;
 
     if ( errorCode == 1 ) {
-        return tr( "No input plugin found for this media type" );
+        return tr( "<qt>No input plugin found for this media type</qt>" );
     } else if ( errorCode == 2 ) {
-        return tr( "No demux plugin found for this media type" );
+        return tr( "<qt>No demux plugin found for this media type</qt>" );
     } else if ( errorCode == 3 ) {
-        return tr( "Demuxing failed for this media type" );
+        return tr( "<qt>Demuxing failed for this media type</qt>" );
     } else if ( errorCode == 4 ) {
-        return tr( "Malformed MRL" );
+        return tr( "<qt>Malformed MRL</qt>" );
     } else if ( errorCode == 5 ) {
-        return tr( "Input failed" );
+        return tr( "<qt>Input failed</qt>" );
     } else {
-        return tr( "Some other error" );
+        return tr( "<qt>Some other error</qt>" );
     }
 }
 

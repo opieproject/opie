@@ -54,6 +54,7 @@ using namespace Opie::Ui;
 PlayListWidget::PlayListWidget(QWidget* parent, const char* name, WFlags fl )
     : PlayListWidgetGui( parent, "playList" ) , currentFileListView( 0 )
 {
+    Global::statusMessage( tr( "Loading of Skin started" ) );
     mediaPlayerState = new MediaPlayerState(0, "mediaPlayerState" );
     m_mp = new MediaPlayer(*this, *mediaPlayerState, 0, "mediaPlayer");
 

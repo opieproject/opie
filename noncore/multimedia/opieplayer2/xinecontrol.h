@@ -41,9 +41,6 @@
 class XineControl : public QObject  {
     Q_OBJECT
 public:
-    XineControl( XineVideoWidget *xineWidget, 
-                 MediaPlayerState &_mediaPlayerState, 
-                 QObject *parent = 0, const char *name =0 );
     // note that this constructor takes over ownership of the passed
     // XINE::Lib object.
     XineControl( XINE::Lib *xine, XineVideoWidget *xineWidget, 
@@ -117,6 +114,7 @@ private:
     bool hasAudioChannel : 1;
     MediaPlayerState &mediaPlayerState;
     XineVideoWidget *xineVideoWidget;
+    bool m_wasError : 1; // used for chaeting on the metainfo
 
 signals:
     void positionChanged( long );
