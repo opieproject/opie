@@ -72,11 +72,10 @@ MediaWidget::Button MediaWidget::setupButton( const SkinButtonInfo &buttonInfo, 
 
 QBitmap MediaWidget::setupButtonMask( const Command &command, const QString &fileName )
 {
-    QBitmap mask( Resource::findPixmap( fileName ) );
-    if ( mask.isNull() )
-        return mask;
+    QImage imgMask( Resource::findPixmap( fileName ) );
+    if ( imgMask.isNull() )
+        return QBitmap();
 
-    QImage imgMask = mask.convertToImage();
     uchar **dest = buttonMask.jumpTable();
     for ( int y = 0; y < buttonMask.height(); y++ ) {
         uchar *line = dest[y];
@@ -85,7 +84,9 @@ QBitmap MediaWidget::setupButtonMask( const Command &command, const QString &fil
                 line[x] = command + 1;
     }
 
-    return mask;
+    // ### grmbl qt2. use constructor when switching to qt3.
+    QBitmap bm; bm = imgMask;
+    return bm;
 }
 
 void MediaWidget::loadDefaultSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const QString &fileNameInfix )
