@@ -720,6 +720,7 @@ void Zaurus::init ( )
 	QFile f ( "/proc/filesystems" );
 
 	if ( f. open ( IO_ReadOnly ) && ( QTextStream ( &f ). read ( ). find ( "\tjffs2\n" ) >= 0 )) {
+		d-> m_vendorstr = "OpenZaurus Team";
 		d-> m_systemstr = "OpenZaurus";
 		d-> m_system = System_OpenZaurus;
 
