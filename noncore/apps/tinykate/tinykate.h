@@ -1,6 +1,6 @@
 /***************************************************************************
                              tinykate.h
-			Tiny KATE mainwindow
+      Tiny KATE mainwindow
                              -------------------
     begin                : November 2002
     copyright            : (C) 2002 by Joseph Wenninger <jowenn@kde.org>
@@ -33,13 +33,15 @@ public:
     TinyKate( QWidget *parent=0, const char *name=0, WFlags f = 0);
 
 public slots:
+    QString currentFileName;
     void slotNew();
 
 protected slots:
     void slotOpen();
     void slotClose();
     void slotCurrentChanged(QWidget *);
-
+    void slotSave();
+    void slotSaveAs();
 protected:
     void open(const QString&);
 private:

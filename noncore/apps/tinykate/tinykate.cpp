@@ -34,6 +34,7 @@
 
 #include <katedocument.h>
 #include <katehighlight.h>
+#include <kateview.h>
 
 TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     QMainWindow( parent, name, f )
@@ -71,10 +72,12 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
   // Action for saving  document
         a = new QAction( tr( "Save" ), QPixmap((const char**)file_save_xpm), QString::null, 0, this, 0 );
   a->addTo(popup);
+        connect(a, SIGNAL(activated()), this, SLOT(slotSave()));
 
   // Action for saving document to a new name
         a = new QAction( tr( "Save As" ), QPixmap((const char**)file_save_xpm), QString::null, 0, this, 0 );
   a->addTo(popup);
+        connect(a, SIGNAL(activated()), this, SLOT(slotSaveAs()));
 
   // Action for closing the currently active document
         a = new QAction( tr( "Close" ), QPixmap(), QString::null, 0, this, 0 );
@@ -168,6 +171,7 @@ void TinyKate::open(const QString & filename)
 void TinyKate::slotCurrentChanged( QWidget * view)
 {
   if (currentView) {
+
     disconnect(editCopy,SIGNAL(activated()),currentView,SLOT(copy()));
     disconnect(editCut,SIGNAL(activated()),currentView,SLOT(cut()));
     disconnect(editPaste,SIGNAL(activated()),currentView,SLOT(paste()));
@@ -197,7 +201,9 @@ void TinyKate::slotNew( )
 {
   KateDocument *kd= new KateDocument(false, false, this,0,this);
   KTextEditor::View *kv;
-  tabwidget->addTab(kv=kd->createView(tabwidget,"BLAH"),"tinykate/tinykate",tr("Unnamed %1").arg(nextUnnamed++));
+  tabwidget->addTab(kv=kd->createView(tabwidget,"BLAH"),
+                    "tinykate/tinykate",
+                    tr("Unnamed %1").arg(nextUnnamed++));
   viewCount++;
 }
 
@@ -212,3 +218,36 @@ void TinyKate::slotClose( )
   if (!viewCount) slotNew();
 }
 
+void TinyKate::slotSave() {
+  // feel free to make this how you want
+  if (currentView==0) return;
+
+  //  KateView *kv = (KateView*) currentView;
+  KateDocument *kd = (KateDocument*) currentView->document();
+  //  qDebug("saving file "+kd->docName());
+  if( kd->docName().isEmpty())
+    slotSaveAs();
+  else
+     kd->saveFile();
+  //    kv->save();
+  //    kd->saveFile();
+}
+
+void TinyKate::slotSaveAs() {
+  if (currentView==0) return;
+  KateDocument *kd = (KateDocument*) currentView->document();
+
+  QString filename=OFileDialog::getSaveFileName(OFileSelector::EXTENDED_ALL);
+  if (!filename.isEmpty()) {
+    qDebug("saving file "+filename);
+    QFileInfo fi(filename);
+    QString filenamed = fi.fileName();
+    kd->setDocFile( filename);
+    kd->setDocName( filenamed);
+    kd->saveFile();
+//   KTextEditor::View *dv = currentView;
+//     tabwidget->changeTab( dv, filenamed);
+    // need to change tab label here
+  }
+
+}
