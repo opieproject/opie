@@ -6,6 +6,12 @@ $(configs) :
 
 $(TOPDIR)/gen.pro : $(TOPDIR)/.config
 	echo > $@
+# added for threaded version
+ifneq ($(CONFIG_THREADED),)
+	echo CONFIG += thread >> $@
+else
+	echo CONFIG -= thread >> $@
+endif
 ifneq ($(CONFIG_DEBUG),)
 	echo CONFIG += debug >> $@
 	echo CONFIG -= release >> $@
@@ -16,6 +22,7 @@ else
 	echo CONFIG += release >> $@
 	echo DEFINES += "OPIE_NO_DEBUG" >> $@
 endif
+
 ifeq ($(filter 3.%,$(QTE_VERSION)),) # not qt3
 	echo CONFIG -= qt3 >> $@
 else

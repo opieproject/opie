@@ -32,13 +32,28 @@ all : $(TOPDIR)/.config
 # and then only the *.control files in this directory will be processed
 ipks: $(OPIEDIR)/scripts/subst $(OPIEDIR)/scripts/filesubst FORCE $(TOPDIR)/.config
 	@find $(OPIEDIR)/$(IPK_START) -type f -name \*.control | ( for ctrl in `cat`; do \
-		prerm=`echo $$ctrl|sed -e 's,\.control$$,.prerm,'`; \
-		preinst=`echo $$ctrl|sed -e 's,\.control$$,.preinst,'`; \
-		postrm=`echo $$ctrl|sed -e 's,\.control$$,.postrm,'`; \
-		postinst=`echo $$ctrl|sed -e 's,\.control$$,.postinst,'`; \
+		prerm=`echo $${ctrl/.control/.prerm}`; \
+		preinst=`echo $${ctrl/.control/.preinst}`; \
+		postrm=`echo $${ctrl/.control/.postrm}`; \
+		postinst=`echo $${ctrl/.control/.postinst}`; \
 		echo "Building ipk of $$ctrl"; \
 		cd $(OPIEDIR); $(OPIEDIR)/scripts/mkipkg --subst=$(OPIEDIR)/scripts/subst --filesubst=$(OPIEDIR)/scripts/filesubst --control=$$ctrl --prerm=$$prerm --preinst=$$preinst --postrm=$$postrm --postinst=$$postinst --strip=$(STRIP) $(OPIEDIR); \
 		done )
+
+ipks-mt: $(OPIEDIR)/scripts/subst $(OPIEDIR)/scripts/filesubst FORCE $(TOPDIR)/.config
+	@> $(OPIEDIR)/AllThreadedPackages
+	@find $(OPIEDIR)/ -type f -name \*.control | grep -v -- "-mt" | while read ctrl ; do \
+		grep "Package[ ]*:" $${ctrl} | sed "s+Package[ ]*:[ ]*++"; \
+		done | sort | uniq >> $(OPIEDIR)/AllThreadedPackages
+	@find $(OPIEDIR)/ -type f -name \*.control | while read ctrl ; do \
+		echo "Converting $$ctrl to -mt package"; \
+		nctrl=`$(OPIEDIR)/scripts/tothreaded $$ctrl $(OPIEDIR)/AllThreadedPackages`; \
+		echo "Building ipk of $$ctrl"; \
+		[ -n $$nctrl ] && cd $(OPIEDIR) && $(OPIEDIR)/scripts/mkipkg --subst=$(OPIEDIR)/scripts/subst --filesubst=$(OPIEDIR)/scripts/filesubst --control=$$nctrl --prerm=$${nctrl/\.control$$/.prerm/} --preinst=$${nctrl/\.control$$/.preinst/} --postrm=$${nctrl/\.control$$/.postrm/} --postinst=$${nctrl/\.control$$/.postinst/} --strip=$(STRIP) $(OPIEDIR); \
+		done
+	@rm -f $(OPIEDIR)/AllThreadedPackages
+
+FORCE:
 
 $(TOPDIR)/.config : $(TOPDIR)/.depends.cfgs
 
