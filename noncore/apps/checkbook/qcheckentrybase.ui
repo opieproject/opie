@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>228</width>
+            <width>224</width>
             <height>291</height>
         </rect>
     </property>
@@ -600,4 +600,11 @@
         <data format="XPM.GZ" length="649">789c6dd23b0ec2300c00d03da7b0e22d42e9476c88232031222186c80c3074813220c4dd214dddd84dac0e759fe2386e1a07a7e3015c639e6318ef04740b0f70d7d730bccf97fdc7d8be87f8406737c62210606869dbb531f531a57f4a299d03a7e06c11cca1055508412c2889acc2ef425423b34840a645f28244936860d2c265d7923bae8b2f05cb35a91739002d2b5727d535cbe954a43ad1e22f700755caf7407cf4799fe286c47dbe3bf303014167a2</data>
     </image>
 </images>
+<tabstops>
+    <tabstop>payment</tabstop>
+    <tabstop>descriptionCombo</tabstop>
+    <tabstop>cmbCategory</tabstop>
+    <tabstop>transType</tabstop>
+    <tabstop>additionalNotes</tabstop>
+</tabstops>
 </UI>
