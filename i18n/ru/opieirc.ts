@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Type your message here to participate in the channel discussion</source>
-        <translation>Здесь введите свое сообщение чтобы поучаствовать в беседе</translation>
+        <translation>Введите здесь свое сообщение, чтобы поучаствовать в беседе</translation>
     </message>
     <message>
         <source>CTCP</source>
@@ -19,15 +19,15 @@
     </message>
     <message>
         <source>Query</source>
-        <translation>Запрос</translation>
+        <translation>Query</translation>
     </message>
     <message>
         <source>Ping</source>
-        <translation>Пинг</translation>
+        <translation>Ping</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Версия</translation>
+        <translation>Version</translation>
     </message>
     <message>
         <source>Whois</source>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source> by </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source> was kicked from </source>
@@ -243,7 +243,7 @@
     <name>IRCServerEditor</name>
     <message>
         <source>Profile name :</source>
-        <translation>Имя профиля:</translation>
+        <translation>Имя профиля :</translation>
     </message>
     <message>
         <source>The name of this server profile in the overview</source>
@@ -255,7 +255,7 @@
     </message>
     <message>
         <source>The server to connect to - can be any valid host name or IP address</source>
-        <translation>Сервер к которому нужно подключиться - может быть любым хостом или IP адресом</translation>
+        <translation>Сервер, к которому нужно подключиться - может быть любым хостом или IP адресом</translation>
     </message>
     <message>
         <source>Port :</source>
@@ -263,15 +263,15 @@
     </message>
     <message>
         <source>The server port to connect to. Usually 6667</source>
-        <translation>Порт на сервере к которому нужно подключиться. Обычно 6667</translation>
+        <translation>Порт на сервере, к которому нужно подключиться. Обычно 6667</translation>
     </message>
     <message>
         <source>Nickname :</source>
-        <translation>Кличка :</translation>
+        <translation>Ник :</translation>
     </message>
     <message>
         <source>Your nick name on the IRC network</source>
-        <translation>Ваша кличка на IRC сети</translation>
+        <translation>Ваш ник на IRC сети</translation>
     </message>
     <message>
         <source>Realname :</source>
@@ -338,7 +338,7 @@ comma separated list of channel
     <name>IRCServerList</name>
     <message>
         <source>Serverlist Browser</source>
-        <translation>Браузер серверов</translation>
+        <translation>Список серверов</translation>
     </message>
     <message>
         <source>Please choose a server profile</source>
@@ -392,11 +392,11 @@ comma separated list of channel
     <name>IRCSettings</name>
     <message>
         <source>Lines displayed :</source>
-        <translation>Линий отображено :</translation>
+        <translation>Число отображаемых строк :</translation>
     </message>
     <message>
         <source>Amount of lines to be displayed in chats before old lines get deleted - this is necessary to restrain memory consumption. Set to 0 if you don&apos;t need this</source>
-        <translation>Количество линий отображаемых в чатах прежде чем они удаляются - это необходимо чтобы ограничить расход памяти. Установите на 0 если вам это не нужно</translation>
+        <translation>Число отображаемых строк в чатах прежде чем они удаляются - это необходимо чтобы ограничить расход памяти. Установите на 0 если вам это не нужно</translation>
     </message>
     <message>
         <source>General</source>
@@ -404,11 +404,11 @@ comma separated list of channel
     </message>
     <message>
         <source>Background color :</source>
-        <translation>Цвет заднего плана :</translation>
+        <translation>Цвет фона :</translation>
     </message>
     <message>
         <source>Background color to be used in chats</source>
-        <translation>Цвет заднего плана используемый в чатах</translation>
+        <translation>Цвет фона, используемый в чатах</translation>
     </message>
     <message>
         <source>Normal text color :</source>
@@ -416,7 +416,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Text color to be used in chats</source>
-        <translation>Цвет текста используемого в чатах</translation>
+        <translation>Цвет текста, используемого в чатах</translation>
     </message>
     <message>
         <source>Error color :</source>
@@ -424,31 +424,31 @@ comma separated list of channel
     </message>
     <message>
         <source>Text color to be used to display errors</source>
-        <translation>Цвет текста используемого для отображения ошибок</translation>
+        <translation>Цвет текста, используемого для отображения ошибок</translation>
     </message>
     <message>
         <source>Text written by yourself :</source>
-        <translation>Текст написанный вами :</translation>
+        <translation>Текст, написанный вами :</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by yourself</source>
-        <translation>Цвет текста используемого чтобы видеть текст написанный вами</translation>
+        <translation>Цвет текста, используемого чтобы видеть текст написанный вами</translation>
     </message>
     <message>
         <source>Text written by others :</source>
-        <translation>Текст написанный другими :</translation>
+        <translation>Текст, написанный другими :</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by others</source>
-        <translation>Цвет текста используемого чтобы видеть текст написанный другими</translation>
+        <translation>Цвет текста, используемого чтобы видеть текст написанный другими</translation>
     </message>
     <message>
         <source>Text written by the server :</source>
-        <translation>Текст написанный сервером :</translation>
+        <translation>Текст, написанный сервером :</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by the server</source>
-        <translation>Цвет текста используемого чтобы видеть текст написанный сервером</translation>
+        <translation>Цвет текста, используемого чтобы видеть текст написанный сервером</translation>
     </message>
     <message>
         <source>Notifications :</source>
@@ -456,7 +456,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Text color to be used to display notifications</source>
-        <translation>Цвет текста используемого для отображения уведомлений</translation>
+        <translation>Цвет текста, используемого для отображения уведомлений</translation>
     </message>
     <message>
         <source>Colors</source>
