@@ -3,11 +3,11 @@
     <name>Button</name>
     <message>
         <source>Calendar Button</source>
-        <translation>Кнопка &quot;Календарь&quot;</translation>
+        <translation>Кнопка календаря</translation>
     </message>
     <message>
         <source>Contacts Button</source>
-        <translation>Кнопка &quot;Контакты&quot;</translation>
+        <translation>Кнопка контактов</translation>
     </message>
     <message>
         <source>Menu Button</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Mail Button</source>
-        <translation>Кнопка &quot;Почта&quot;</translation>
+        <translation>Кнопка почты</translation>
     </message>
     <message>
         <source>Home Button</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Record Button</source>
-        <translation>Кнопка записи</translation>
+        <translation>Кнопка &quot;Запись&quot;</translation>
     </message>
     <message>
         <source>Display Rotate</source>
@@ -31,39 +31,39 @@
     </message>
     <message>
         <source>Lower+Up</source>
-        <translation type="unfinished">Нижний+вверх</translation>
+        <translation>Ниже+вверх</translation>
     </message>
     <message>
         <source>Lower+Down</source>
-        <translation type="unfinished">Нижний+вниз</translation>
+        <translation>Ниже+вниз</translation>
     </message>
     <message>
         <source>Lower+Right</source>
-        <translation type="unfinished">Нижний+направо</translation>
+        <translation>Ниже+вправо</translation>
     </message>
     <message>
         <source>Lower+Left</source>
-        <translation type="unfinished">Нижний+налево</translation>
+        <translation>Ниже+влево</translation>
     </message>
     <message>
         <source>Upper+Up</source>
-        <translation type="unfinished">Верхний+вверх</translation>
+        <translation>Выше+вверх</translation>
     </message>
     <message>
         <source>Upper+Down</source>
-        <translation type="unfinished">Верхний+вниз</translation>
+        <translation>Выше+вниз</translation>
     </message>
     <message>
         <source>Upper+Right</source>
-        <translation type="unfinished">Верхний+направо</translation>
+        <translation>Выше+вправо</translation>
     </message>
     <message>
         <source>Upper+Left</source>
-        <translation type="unfinished">Верхний+налево</translation>
+        <translation>Выше+влево</translation>
     </message>
     <message>
         <source>Action Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Кнопка действия</translation>
     </message>
     <message>
         <source>OK Button</source>

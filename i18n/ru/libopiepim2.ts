@@ -187,79 +187,79 @@
     <name>OPimRecurrenceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished">Повторяющееся</translation>
+        <translation>Повторяющееся событие</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Нет</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">День</translation>
+        <translation>День</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">Неделя</translation>
+        <translation>Неделя</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">Месяц</translation>
+        <translation>Месяц</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished">Год</translation>
+        <translation>Год</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished">Каждый(е):</translation>
+        <translation>Каждый(е):</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished">Периодичность</translation>
+        <translation>Периодичность</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished">Завершить:</translation>
+        <translation>Завершить:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished">Нет даты</translation>
+        <translation>Нет даты</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished">Повторять по</translation>
+        <translation>Повторять по</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Пнд</translation>
+        <translation>Пнд</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Втр</translation>
+        <translation>Втр</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Срд</translation>
+        <translation>Срд</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Чтв</translation>
+        <translation>Чтв</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Птн</translation>
+        <translation>Птн</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Суб</translation>
+        <translation>Суб</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">Вск</translation>
+        <translation>Вск</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Каждые</translation>
     </message>
     <message>
         <source>Var1</source>
@@ -278,125 +278,125 @@
     <name>OPimRecurrenceWidget</name>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished">Нет даты</translation>
+        <translation>Нет даты</translation>
     </message>
     <message>
         <source>days</source>
-        <translation type="unfinished">дней</translation>
+        <translation>дней</translation>
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished">день</translation>
+        <translation>день</translation>
     </message>
     <message>
         <source>weeks</source>
-        <translation type="unfinished">недели</translation>
+        <translation>недели</translation>
     </message>
     <message>
         <source>week</source>
-        <translation type="unfinished">неделя</translation>
+        <translation>неделю</translation>
     </message>
     <message>
         <source>months</source>
-        <translation type="unfinished">месяцев</translation>
+        <translation>месяцев</translation>
     </message>
     <message>
         <source>month</source>
-        <translation type="unfinished">Месяц</translation>
+        <translation>месяц</translation>
     </message>
     <message>
         <source>years</source>
-        <translation type="unfinished">лет</translation>
+        <translation>лет</translation>
     </message>
     <message>
         <source>year</source>
-        <translation type="unfinished">год</translation>
+        <translation>год</translation>
     </message>
     <message>
         <source> and </source>
-        <translation type="unfinished">и</translation>
+        <translation>и</translation>
     </message>
     <message>
         <source>,
 and </source>
-        <translation type="unfinished">,
+        <translation>,
 и</translation>
     </message>
     <message>
         <source>, and </source>
-        <translation type="unfinished">, и</translation>
+        <translation>, и</translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished">по</translation>
+        <translation>по</translation>
     </message>
     <message>
         <source>No Repeat</source>
-        <translation type="unfinished">Нет повтора</translation>
+        <translation>Нет повтора</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation type="unfinished">день(дней)</translation>
+        <translation>день(дней)</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished">Повторять по</translation>
+        <translation>Повторять по</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Пнд</translation>
+        <translation>Пнд</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Втр</translation>
+        <translation>Втр</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Срд</translation>
+        <translation>Срд</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Чтв</translation>
+        <translation>Чтв</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Птн</translation>
+        <translation>Птн</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Суб</translation>
+        <translation>Суб</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">Вск</translation>
+        <translation>Вск</translation>
     </message>
     <message>
         <source>week(s)</source>
-        <translation type="unfinished">неделя(и)</translation>
+        <translation>неделя(и)</translation>
     </message>
     <message>
         <source>Repeat By</source>
-        <translation type="unfinished">Повтор</translation>
+        <translation>Повтор</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">День</translation>
+        <translation>День</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Дата</translation>
+        <translation>Дата</translation>
     </message>
     <message>
         <source>month(s)</source>
-        <translation type="unfinished">месяц(ев)</translation>
+        <translation>месяц(ев)</translation>
     </message>
     <message>
         <source>year(s)</source>
-        <translation type="unfinished">год(а)</translation>
+        <translation>год(а)</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Каждые</translation>
     </message>
 </context>
 <context>

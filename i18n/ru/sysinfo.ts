@@ -3,67 +3,67 @@
     <name>BenchmarkInfo</name>
     <message>
         <source>This area shows the available tests, the results for which the tests have been performed, and comparison values for one selected device. Use the checkboxes to define which tests you want to perform.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эта вкладка показывает доступные тесты, их результаты, и данные для сравнения их с выбранным устройством. Отметьте галочки напротив тестов, которые вы хотите провести.</translation>
     </message>
     <message>
         <source>Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Тесты</translation>
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Результаты</translation>
     </message>
     <message>
         <source>Comparison</source>
-        <translation type="unfinished"></translation>
+        <translation>Сравнение</translation>
     </message>
     <message>
         <source>1. Integer Arithmetic  </source>
-        <translation type="unfinished"></translation>
+        <translation>1. Целые числа  </translation>
     </message>
     <message>
         <source>2. Floating Point Unit  </source>
-        <translation type="unfinished"></translation>
+        <translation>2. Сопроцессор  </translation>
     </message>
     <message>
         <source>3. Text Rendering  </source>
-        <translation type="unfinished"></translation>
+        <translation>3. Вывод текста  </translation>
     </message>
     <message>
         <source>4. Gfx Rendering  </source>
-        <translation type="unfinished"></translation>
+        <translation>4. Вывод графики  </translation>
     </message>
     <message>
         <source>5. RAM Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>5. Производительность ОЗУ  </translation>
     </message>
     <message>
         <source>6. SD Card Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>6. Производительность SD карты  </translation>
     </message>
     <message>
         <source>7. CF Card Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>7. Производительность CF карты  </translation>
     </message>
     <message>
         <source>&amp;Start Tests!</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Начать тесты!</translation>
     </message>
     <message>
         <source>Click here to perform the selected tests.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите здесь чтобы начать выбранные тесты.</translation>
     </message>
     <message>
         <source>Choose a model to compare your results with.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите модель для сравнения результатов.</translation>
     </message>
     <message>
         <source>Compare To:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сравнить с:</translation>
     </message>
     <message>
         <source>error</source>
-        <translation type="unfinished"></translation>
+        <translation>ошибка</translation>
     </message>
 </context>
 <context>
@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>В</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
@@ -240,7 +240,8 @@ Click and hold on a module to see additional information about the module, or to
     <message>
         <source>You really want to execute
 %1 for this module?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы действительно хотите выполнить
+%1 для этого модуля?</translation>
     </message>
 </context>
 <context>
@@ -342,7 +343,7 @@ to this process?</source>
     </message>
     <message>
         <source>Benchmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Бенчмарки</translation>
     </message>
 </context>
 <context>

@@ -3,34 +3,34 @@
     <name>MindBreaker</name>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая игра</translation>
     </message>
     <message>
         <source>win avg: %1 turns (%2 games)</source>
-        <translation type="unfinished"></translation>
+        <translation>средний выигыш: %1 ходов (%2 игр)</translation>
     </message>
     <message>
         <source>Mind Breaker</source>
-        <translation type="unfinished"></translation>
+        <translation>Быки и коровы</translation>
     </message>
 </context>
 <context>
     <name>MindBreakerBoard</name>
     <message>
         <source>Reset Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить статистику</translation>
     </message>
     <message>
         <source>Reset the win ratio?</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить соотношение выигрышей?</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 </TS>
