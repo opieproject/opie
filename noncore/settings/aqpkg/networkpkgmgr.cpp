@@ -85,7 +85,7 @@ void NetworkPackageManager :: timerEvent ( QTimerEvent * )
 
 void NetworkPackageManager :: updateData()
 {
-	serversList->clear();
+    serversList->clear();
     packagesList->clear();
 
     
@@ -94,6 +94,7 @@ void NetworkPackageManager :: updateData()
     int i;
     for ( i = 0, it = dataMgr->getServerList().begin() ; it != dataMgr->getServerList().end() ; ++it, ++i )
     {
+        cout << "Adding " << it->getServerName() << " to combobox" << endl;
         if ( !it->isServerActive() )
         {
             i--;

@@ -45,6 +45,7 @@ Server :: Server( const char *name, const char *url )
     serverName = name;
     serverUrl = url;
     packageFile = IPKG_DIR;
+    active = true;
     packageFile += "lists/" + serverName;
 }
 
