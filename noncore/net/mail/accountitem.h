@@ -36,6 +36,11 @@ public:
     virtual AccountView*accountView();
     virtual bool matchName(const QString&name)const;
     virtual bool isDraftfolder();
+    /* 1 - server
+     * 2 - folder
+     * 3 - beides
+     */
+    virtual int isServer()const=0;
 
 protected:
     AccountViewItem*findSubItem(const QString&path,AccountViewItem*start=0);
@@ -58,6 +63,7 @@ public:
     AbstractMail *getWrapper();
     virtual QPopupMenu * getContextMenu();
     virtual void contextMenuSelected(int);
+    virtual int isServer()const{return 1;}
 
 protected:
     POP3account *account;
@@ -77,6 +83,7 @@ public:
     virtual RECBODYP fetchBody(const Opie::Core::OSmartPointer<RecMail>&);
     virtual QPopupMenu * getContextMenu();
     virtual void contextMenuSelected(int);
+    virtual int isServer()const{return 2;}
 
 protected:
     void downloadMails();
@@ -95,6 +102,7 @@ public:
     AbstractMail *getWrapper();
     virtual QPopupMenu * getContextMenu();
     virtual void contextMenuSelected(int);
+    virtual int isServer()const{return 1;}
 
 protected:
     NNTPaccount *account;
@@ -115,6 +123,7 @@ public:
     virtual RECBODYP fetchBody(const Opie::Core::OSmartPointer<RecMail>&);
     virtual QPopupMenu * getContextMenu();
     virtual void contextMenuSelected(int);
+    virtual int isServer()const{return 2;}
 
 protected:
     void downloadMails();
@@ -136,6 +145,7 @@ public:
     virtual void contextMenuSelected(int);
     const QStringList&subFolders();
     virtual void refreshFolders(bool force=false);
+    virtual int isServer()const{return 1;}
     bool offline();
 
 protected:
@@ -157,6 +167,7 @@ public:
     virtual QPopupMenu * getContextMenu();
     virtual void contextMenuSelected(int);
     virtual const QString& Delemiter()const;
+    virtual int isServer()const{return 2;}
 protected:
     virtual void createNewFolder();
     virtual void deleteFolder();
@@ -178,6 +189,7 @@ public:
     virtual void contextMenuSelected(int);
     QStringList subFolders();
     virtual void refresh(bool force=false);
+    virtual int isServer()const{return 3;}
 
 protected:
     void downloadMails();
@@ -200,6 +212,7 @@ public:
     virtual void contextMenuSelected(int);
     virtual const Opie::Core::OSmartPointer<Folder>&getFolder()const;
     virtual bool isDraftfolder();
+    virtual int isServer()const{return 2;}
 
 protected:
     void downloadMails();

@@ -79,7 +79,7 @@ void POP3viewItem::refresh()
 
 RECBODYP POP3viewItem::fetchBody( const RecMailP &mail )
 {
-    odebug << "POP3 fetchBody" << oendl; 
+    odebug << "POP3 fetchBody" << oendl;
     return wrapper->fetchBody( mail );
 }
 
@@ -90,12 +90,12 @@ QPopupMenu * POP3viewItem::getContextMenu()
     {
         if (!account->getOffline())
         {
-            m->insertItem(QObject::tr("Disconnect",contextName),0);
-            m->insertItem(QObject::tr("Set offline",contextName),1);
+            m->insertItem(QObject::tr("Disconnect",contextName),SERVER_MENU_DISCONNECT);
+            m->insertItem(QObject::tr("Set offline",contextName),SERVER_MENU_OFFLINE);
         }
         else
         {
-            m->insertItem(QObject::tr("Set online",contextName),1);
+            m->insertItem(QObject::tr("Set online",contextName),SERVER_MENU_OFFLINE);
         }
     }
     return m;
@@ -129,10 +129,10 @@ void POP3viewItem::contextMenuSelected(int which)
 {
     switch (which)
     {
-    case 0:
+    case SERVER_MENU_DISCONNECT:
         disconnect();
         break;
-    case 1:
+    case SERVER_MENU_OFFLINE:
         setOnOffline();
         break;
     }
@@ -172,9 +172,9 @@ QPopupMenu * POP3folderItem::getContextMenu()
     QPopupMenu *m = new QPopupMenu(0);
     if (m)
     {
-        m->insertItem(QObject::tr("Refresh header list",contextName),0);
-        m->insertItem(QObject::tr("Delete all mails",contextName),1);
-        m->insertItem(QObject::tr("Move/Copie all mails",contextName),2);
+        m->insertItem(QObject::tr("Refresh header list",contextName),FOLDER_MENU_REFRESH_HEADER);
+        m->insertItem(QObject::tr("Delete all mails",contextName),FOLDER_MENU_DELETE_ALL_MAILS);
+        m->insertItem(QObject::tr("Move/Copie all mails",contextName),FOLDER_MENU_MOVE_MAILS);
     }
     return m;
 }
@@ -191,15 +191,15 @@ void POP3folderItem::contextMenuSelected(int which)
     AccountView * view = (AccountView*)listView();
     switch (which)
     {
-    case 0:
+    case FOLDER_MENU_REFRESH_HEADER:
         /* must be 'cause pop3 lists are cached */
         pop3->getWrapper()->logout();
         view->refreshCurrent();
         break;
-    case 1:
+    case FOLDER_MENU_DELETE_ALL_MAILS:
         deleteAllMail(pop3->getWrapper(),folder);
         break;
-    case 2:
+    case FOLDER_MENU_MOVE_MAILS:
         downloadMails();
         break;
     default:
@@ -270,7 +270,7 @@ void NNTPviewItem::refresh()
 
 RECBODYP NNTPviewItem::fetchBody( const RecMailP &mail )
 {
-    odebug << "NNTP fetchBody" << oendl; 
+    odebug << "NNTP fetchBody" << oendl;
     return wrapper->fetchBody( mail );
 }
 
@@ -281,13 +281,13 @@ QPopupMenu * NNTPviewItem::getContextMenu()
     {
         if (!account->getOffline())
         {
-            m->insertItem(QObject::tr("Disconnect",contextName),0);
-            m->insertItem(QObject::tr("Set offline",contextName),1);
-            m->insertItem(QObject::tr("(Un-)Subscribe groups",contextName),2);
+            m->insertItem(QObject::tr("Disconnect",contextName),SERVER_MENU_DISCONNECT);
+            m->insertItem(QObject::tr("Set offline",contextName),SERVER_MENU_OFFLINE);
+            m->insertItem(QObject::tr("(Un-)Subscribe groups",contextName),SERVER_MENU_SUBSCRIBE);
         }
         else
         {
-            m->insertItem(QObject::tr("Set online",contextName),1);
+            m->insertItem(QObject::tr("Set online",contextName),SERVER_MENU_OFFLINE);
         }
     }
     return m;
@@ -330,13 +330,13 @@ void NNTPviewItem::contextMenuSelected(int which)
 {
     switch (which)
     {
-    case 0:
+    case SERVER_MENU_DISCONNECT:
         disconnect();
         break;
-    case 1:
+    case SERVER_MENU_OFFLINE:
         setOnOffline();
         break;
-    case 2:
+    case SERVER_MENU_SUBSCRIBE:
         subscribeGroups();
         break;
     }
@@ -376,8 +376,8 @@ QPopupMenu * NNTPfolderItem::getContextMenu()
     QPopupMenu *m = new QPopupMenu(0);
     if (m)
     {
-        m->insertItem(QObject::tr("Refresh header list",contextName),0);
-        m->insertItem(QObject::tr("Copy all postings",contextName),1);
+        m->insertItem(QObject::tr("Refresh header list",contextName),FOLDER_MENU_REFRESH_HEADER);
+        m->insertItem(QObject::tr("Copy all postings",contextName),FOLDER_MENU_MOVE_MAILS);
     }
     return m;
 }
@@ -394,12 +394,12 @@ void NNTPfolderItem::contextMenuSelected(int which)
     AccountView * view = (AccountView*)listView();
     switch (which)
     {
-    case 0:
-        /* must be 'cause pop3 lists are cached */
+    case FOLDER_MENU_REFRESH_HEADER:
+        /* must be 'cause nntp lists are cached */
         nntp->getWrapper()->logout();
         view->refreshCurrent();
         break;
-    case 1:
+    case FOLDER_MENU_MOVE_MAILS:
         downloadMails();
         break;
     default:
@@ -461,7 +461,7 @@ void IMAPviewItem::refreshFolders(bool force)
         {
             item = new IMAPfolderItem( (*it), this , item );
             folders->remove(it);
-            odebug << "inbox found" << oendl; 
+            odebug << "inbox found" << oendl;
             break;
         }
     }
@@ -498,15 +498,15 @@ QPopupMenu * IMAPviewItem::getContextMenu()
     {
         if (!account->getOffline())
         {
-            m->insertItem(QObject::tr("Refresh folder list",contextName),0);
-            m->insertItem(QObject::tr("Create new folder",contextName),1);
+            m->insertItem(QObject::tr("Disconnect",contextName),SERVER_MENU_DISCONNECT);
+            m->insertItem(QObject::tr("Set offline",contextName),SERVER_MENU_OFFLINE);
             m->insertSeparator();
-            m->insertItem(QObject::tr("Disconnect",contextName),2);
-            m->insertItem(QObject::tr("Set offline",contextName),3);
+            m->insertItem(QObject::tr("Refresh folder list",contextName),SERVER_MENU_REFRESH_FOLDER);
+            m->insertItem(QObject::tr("Create new folder",contextName),SERVER_MENU_CREATE_FOLDER);
         }
         else
         {
-            m->insertItem(QObject::tr("Set online",contextName),3);
+            m->insertItem(QObject::tr("Set online",contextName),SERVER_MENU_OFFLINE);
         }
     }
     return m;
@@ -534,20 +534,20 @@ void IMAPviewItem::createNewFolder()
 
 void IMAPviewItem::contextMenuSelected(int id)
 {
-    odebug << "Id selected: " << id << "" << oendl; 
+    odebug << "Id selected: " << id << "" << oendl;
     switch (id)
     {
-    case 0:
+    case SERVER_MENU_REFRESH_FOLDER:
         refreshFolders(true);
         break;
-    case 1:
+    case SERVER_MENU_CREATE_FOLDER:
         createNewFolder();
         break;
-    case 2:
+    case SERVER_MENU_DISCONNECT:
         removeChilds();
         wrapper->logout();
         break;
-    case 3:
+    case SERVER_MENU_OFFLINE:
         if (account->getOffline()==false)
         {
             removeChilds();
@@ -635,17 +635,17 @@ QPopupMenu * IMAPfolderItem::getContextMenu()
     {
         if (folder->may_select())
         {
-            m->insertItem(QObject::tr("Refresh header list",contextName),0);
-            m->insertItem(QObject::tr("Move/Copie all mails",contextName),4);
-            m->insertItem(QObject::tr("Delete all mails",contextName),1);
+            m->insertItem(QObject::tr("Refresh header list",contextName),FOLDER_MENU_REFRESH_HEADER);
+            m->insertItem(QObject::tr("Move/Copy all mails",contextName),FOLDER_MENU_MOVE_MAILS);
+            m->insertItem(QObject::tr("Delete all mails",contextName),FOLDER_MENU_DELETE_ALL_MAILS);
         }
         if (folder->no_inferior()==false)
         {
-            m->insertItem(QObject::tr("Create new subfolder",contextName),2);
+            m->insertItem(QObject::tr("Create new subfolder",contextName),FOLDER_MENU_NEW_SUBFOLDER);
         }
         if (folder->getDisplayName().lower()!="inbox")
         {
-            m->insertItem(QObject::tr("Delete folder",contextName),3);
+            m->insertItem(QObject::tr("Delete folder",contextName),FOLDER_MENU_DELETE_FOLDER);
         }
     }
     return m;
@@ -672,7 +672,7 @@ void IMAPfolderItem::deleteFolder()
                                      QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>",contextName).arg(folder->getDisplayName()),
                                      QObject::tr("Yes",contextName),
                                      QObject::tr("No",contextName),QString::null,1,1);
-    odebug << "Auswahl: " << yesno << "" << oendl; 
+    odebug << "Auswahl: " << yesno << "" << oendl;
     if (yesno == 0)
     {
         if (imap->getWrapper()->deleteMbox(folder))
@@ -699,23 +699,27 @@ void IMAPfolderItem::downloadMails()
 
 void IMAPfolderItem::contextMenuSelected(int id)
 {
-    odebug << "Selected id: " << id << "" << oendl; 
+    odebug << "Selected id: " << id << "" << oendl;
     AccountView * view = (AccountView*)listView();
     switch(id)
     {
-    case 0:
+    case FOLDER_MENU_REFRESH_HEADER:
         view->refreshCurrent();
         break;
-    case 1:
+    case FOLDER_MENU_DELETE_ALL_MAILS:
         deleteAllMail(imap->getWrapper(),folder);
         break;
-    case 2:
-        createNewFolder();
+    case FOLDER_MENU_NEW_SUBFOLDER:
+        if (folder->no_inferior()==false) {
+            createNewFolder();
+        }
         break;
-    case 3:
-        deleteFolder();
+    case FOLDER_MENU_DELETE_FOLDER:
+        if (folder->getDisplayName().lower()!="inbox") {
+            deleteFolder();
+        }
         break;
-    case 4:
+    case FOLDER_MENU_MOVE_MAILS:
         downloadMails();
         break;
     default:
@@ -759,6 +763,7 @@ void MHviewItem::refresh( QValueList<RecMailP> & target)
 void MHviewItem::refresh(bool force)
 {
     if (childCount()>0 && force==false) return;
+    odebug << "Refresh mh folders" << oendl;
     removeChilds();
     currentFolders.clear();
     QValueList<FolderP> *folders = wrapper->listFolders();
@@ -803,7 +808,7 @@ void MHviewItem::refresh(bool force)
 
 RECBODYP MHviewItem::fetchBody( const RecMailP &mail )
 {
-    odebug << "MH fetchBody" << oendl; 
+    odebug << "MH fetchBody" << oendl;
     return wrapper->fetchBody( mail );
 }
 
@@ -812,10 +817,10 @@ QPopupMenu * MHviewItem::getContextMenu()
     QPopupMenu *m = new QPopupMenu(0);
     if (m)
     {
-        m->insertItem(QObject::tr("Refresh folder list",contextName),0);
-        m->insertItem(QObject::tr("Create new folder",contextName),1);
-        m->insertItem(QObject::tr("Delete all mails",contextName),2);
-        m->insertItem(QObject::tr("Move/Copie all mails",contextName),3);
+        m->insertItem(QObject::tr("Refresh folder list",contextName),SERVER_MENU_REFRESH_FOLDER);
+        m->insertItem(QObject::tr("Create new folder",contextName),FOLDER_MENU_NEW_SUBFOLDER);
+        m->insertItem(QObject::tr("Delete all mails",contextName),FOLDER_MENU_DELETE_ALL_MAILS);
+        m->insertItem(QObject::tr("Move/Copie all mails",contextName),FOLDER_MENU_MOVE_MAILS);
     }
     return m;
 }
@@ -847,19 +852,25 @@ QStringList MHviewItem::subFolders()
 
 void MHviewItem::contextMenuSelected(int which)
 {
+    AccountView*view = 0;
+
     switch (which)
     {
-    case 0:
+    case SERVER_MENU_REFRESH_FOLDER:
         refresh(true);
         break;
-    case 1:
+    case FOLDER_MENU_NEW_SUBFOLDER:
         createFolder();
         break;
-    case 2:
+    case FOLDER_MENU_DELETE_ALL_MAILS:
         deleteAllMail(getWrapper(),folder);
         break;
-    case 3:
+    case FOLDER_MENU_MOVE_MAILS:
         downloadMails();
+        break;
+    case FOLDER_MENU_REFRESH_HEADER:
+        view = (AccountView*)listView();
+        if (view) view->refreshCurrent();
         break;
     default:
         break;
@@ -933,7 +944,7 @@ void MHfolderItem::deleteFolder()
                                      QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>",contextName).arg(folder->getDisplayName()),
                                      QObject::tr("Yes",contextName),
                                      QObject::tr("No",contextName),QString::null,1,1);
-    odebug << "Auswahl: " << yesno << "" << oendl; 
+    odebug << "Auswahl: " << yesno << "" << oendl;
     if (yesno == 0)
     {
         if (mbox->getWrapper()->deleteMbox(folder))
@@ -956,10 +967,11 @@ QPopupMenu * MHfolderItem::getContextMenu()
     QPopupMenu *m = new QPopupMenu(0);
     if (m)
     {
-        m->insertItem(QObject::tr("Move/Copie all mails",contextName),2);
-        m->insertItem(QObject::tr("Delete all mails",contextName),0);
-        m->insertItem(QObject::tr("Create new subfolder",contextName),3);
-        m->insertItem(QObject::tr("Delete folder",contextName),1);
+        m->insertItem(QObject::tr("Create new subfolder",contextName),FOLDER_MENU_NEW_SUBFOLDER);
+        m->insertItem(QObject::tr("Refresh header list",contextName),FOLDER_MENU_REFRESH_HEADER);
+        m->insertItem(QObject::tr("Move/Copie all mails",contextName),FOLDER_MENU_MOVE_MAILS);
+        m->insertItem(QObject::tr("Delete all mails",contextName),FOLDER_MENU_DELETE_ALL_MAILS);
+        m->insertItem(QObject::tr("Delete folder",contextName),FOLDER_MENU_DELETE_FOLDER);
     }
     return m;
 }
@@ -994,19 +1006,24 @@ void MHfolderItem::createFolder()
 
 void MHfolderItem::contextMenuSelected(int which)
 {
+    AccountView*view = 0;
     switch(which)
     {
-    case 0:
+    case FOLDER_MENU_DELETE_ALL_MAILS:
         deleteAllMail(mbox->getWrapper(),folder);
         break;
-    case 1:
+    case FOLDER_MENU_DELETE_FOLDER:
         deleteFolder();
         break;
-    case 2:
+    case FOLDER_MENU_MOVE_MAILS:
         downloadMails();
         break;
-    case 3:
+    case FOLDER_MENU_NEW_SUBFOLDER:
         createFolder();
+        break;
+    case FOLDER_MENU_REFRESH_HEADER:
+        view = (AccountView*)listView();
+        if (view) view->refreshCurrent();
         break;
     default:
         break;
@@ -1075,7 +1092,7 @@ void AccountViewItem::deleteAllMail(AbstractMail*wrapper,const FolderP&folder)
                                      arg(fname),
                                      QObject::tr("Yes",contextName),
                                      QObject::tr("No",contextName),QString::null,1,1);
-    odebug << "Auswahl: " << yesno << "" << oendl; 
+    odebug << "Auswahl: " << yesno << "" << oendl;
     if (yesno == 0)
     {
         if (wrapper->deleteAllMail(folder))

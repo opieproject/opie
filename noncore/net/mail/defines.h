@@ -18,13 +18,13 @@
 
 #define PIC_OFFLINE         "mail/notconnected"
 
-#define ICON_COMPOSEMAIL    QIconSet( Resource::loadPixmap( PIC_COMPOSEMAIL ) ) 
-#define ICON_SENDQUEUED     QIconSet( Resource::loadPixmap( PIC_SENDQUEUED ) ) 
-#define ICON_SHOWFOLDERS    QIconSet( Resource::loadPixmap( PIC_SHOWFOLDERS ) ) 
-#define ICON_SEARCHMAILS    QIconSet( Resource::loadPixmap( PIC_SEARCHMAILS ) ) 
-#define ICON_EDITSETTINGS   QIconSet( Resource::loadPixmap( PIC_EDITSETTINGS ) ) 
-#define ICON_EDITACCOUNTS   QIconSet( Resource::loadPixmap( PIC_EDITACCOUNTS ) ) 
-#define ICON_SYNC           QIconSet( Resource::loadPixmap( PIC_SYNC ) ) 
+#define ICON_COMPOSEMAIL    QIconSet( Resource::loadPixmap( PIC_COMPOSEMAIL ) )
+#define ICON_SENDQUEUED     QIconSet( Resource::loadPixmap( PIC_SENDQUEUED ) )
+#define ICON_SHOWFOLDERS    QIconSet( Resource::loadPixmap( PIC_SHOWFOLDERS ) )
+#define ICON_SEARCHMAILS    QIconSet( Resource::loadPixmap( PIC_SEARCHMAILS ) )
+#define ICON_EDITSETTINGS   QIconSet( Resource::loadPixmap( PIC_EDITSETTINGS ) )
+#define ICON_EDITACCOUNTS   QIconSet( Resource::loadPixmap( PIC_EDITACCOUNTS ) )
+#define ICON_SYNC           QIconSet( Resource::loadPixmap( PIC_SYNC ) )
 
 #define PIXMAP_IMAPFOLDER   QPixmap( Resource::loadPixmap( PIC_IMAPFOLDER ) )
 #define PIXMAP_POP3FOLDER   QPixmap( Resource::loadPixmap( PIC_POP3FOLDER ) )
@@ -53,5 +53,18 @@
 #define UTF16HIGHEND    0xDBFFUL
 #define UTF16LOSTART    0xDC00UL
 #define UTF16LOEND      0xDFFFUL
+
+/* used for making menuids transparent */
+#define FOLDER_MENU_REFRESH_HEADER 0
+#define FOLDER_MENU_DELETE_ALL_MAILS 1
+#define FOLDER_MENU_NEW_SUBFOLDER 2
+#define FOLDER_MENU_DELETE_FOLDER 3
+#define FOLDER_MENU_MOVE_MAILS 4
+
+#define SERVER_MENU_DISCONNECT 5
+#define SERVER_MENU_OFFLINE 6
+#define SERVER_MENU_REFRESH_FOLDER 7
+#define SERVER_MENU_CREATE_FOLDER 8
+#define SERVER_MENU_SUBSCRIBE 9
 
 #endif

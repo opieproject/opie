@@ -29,17 +29,26 @@ public slots:
     virtual void refreshAll();
     virtual void refresh(QListViewItem *item);
     virtual void refreshCurrent();
-    virtual void slotHold(int, QListViewItem *,const QPoint&,int);
     virtual void slotContextMenu(int id);
+
     void setupFolderselect(Selectstore*sels);
 
 signals:
     void refreshMailview(const QValueList<RecMailP>& );
+    void serverSelected(int);
 
 protected:
     QListViewItem* m_currentItem;
     QValueList<IMAPviewItem*> imapAccounts;
     QValueList<MHviewItem*> mhAccounts;
+    bool m_rightPressed:1;
+
+protected slots:
+    virtual void slotRightButton(int, QListViewItem *,const QPoint&,int);
+    virtual void slotLeftButton(int, QListViewItem *,const QPoint&,int);
+    virtual void slotMouseButton(int, QListViewItem *,const QPoint&,int);
+    virtual void slotMouseClicked(QListViewItem*);
+    virtual void slotSelectionChanged(QListViewItem*);
 };
 
 #endif

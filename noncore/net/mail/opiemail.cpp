@@ -80,8 +80,8 @@ void ValueExplode::splitit()
         m_LastParsed.append(tkeyvalues(m_Command,""));
         return;
     }
-    int pos,pos2,startpos;
-    startpos = 0;
+    int pos,pos2;
+    unsigned startpos = 0;
     iLine = m_Command;
     while ( (pos = iLine.find(mDelemiter,startpos))!=-1) {
         pos2 = iLine.find(m2Delemiter,startpos);

@@ -41,11 +41,13 @@ protected slots:
     virtual void slotAdjustLayout();
     virtual void slotEditSettings();
     virtual void mailLeftClicked( int, QListViewItem *,const QPoint&,int  );
+    virtual void serverSelected(int);
 
 protected:
     QToolBar *toolBar;
     QMenuBar *menuBar;
-    QPopupMenu *mailMenu, *settingsMenu;
+    QPopupMenu *mailMenu, *settingsMenu,*serverMenu,*folderMenu;
+
     QAction *composeMail, *sendQueued, *showFolders, *searchMails, *deleteMails,
             *editSettings, *editAccounts, *syncFolders;
     AccountView *folderView;
@@ -53,6 +55,7 @@ protected:
     QBoxLayout *layout;
     int m_Rotate;
     QCopChannel* m_sysChannel;
+    int m_ServerMenuId,m_FolderMenuId;
 };
 
 #endif

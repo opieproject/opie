@@ -20,17 +20,35 @@ using namespace Opie::Core;
 AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
         : QListView( parent, name, flags )
 {
-    connect( this, SIGNAL( selectionChanged(QListViewItem*) ),
-             SLOT( refresh(QListViewItem*) ) );
-    connect( this, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int) ),this,
-             SLOT( slotHold(int,QListViewItem*,const QPoint&,int) ) );
     setSorting(0);
+    setSelectionMode(Single);
+    m_rightPressed = false;
+
+    connect( this, SIGNAL( selectionChanged(QListViewItem*) ),
+             SLOT( slotSelectionChanged(QListViewItem*) ) );
+    connect( this, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int) ),this,
+             SLOT( slotMouseButton(int,QListViewItem*,const QPoint&,int) ) );
+    connect( this, SIGNAL(clicked(QListViewItem*) ),this,
+             SLOT( slotMouseClicked(QListViewItem*) ) );
+    m_currentItem = 0;
 }
 
 AccountView::~AccountView()
 {
     imapAccounts.clear();
     mhAccounts.clear();
+}
+
+void AccountView::slotSelectionChanged(QListViewItem*item)
+{
+    odebug << "AccountView: Selection changed" << oendl;
+    if (!item) {
+        emit serverSelected(0);
+        return;
+    }
+    AccountViewItem *view = static_cast<AccountViewItem *>(item);
+
+    emit serverSelected(view->isServer());
 }
 
 void AccountView::slotContextMenu(int id)
@@ -40,9 +58,9 @@ void AccountView::slotContextMenu(int id)
     view->contextMenuSelected(id);
 }
 
-void AccountView::slotHold(int button, QListViewItem * item,const QPoint&,int)
+void AccountView::slotRightButton(int button, QListViewItem * item,const QPoint&,int)
 {
-    if (button==1) {return;}
+    m_rightPressed = true;
     if (!item) return;
     AccountViewItem *view = static_cast<AccountViewItem *>(item);
     QPopupMenu*m = view->getContextMenu();
@@ -51,6 +69,30 @@ void AccountView::slotHold(int button, QListViewItem * item,const QPoint&,int)
     m->setFocus();
     m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
     delete m;
+    setSelected(item,true);
+}
+
+void AccountView::slotLeftButton(int button, QListViewItem * item,const QPoint&,int)
+{
+    m_rightPressed = false;
+}
+
+void AccountView::slotMouseClicked(QListViewItem*item)
+{
+    if (m_rightPressed) return;
+    if (!item || m_currentItem == item) return;
+    /* ### ToDo check settings if on single tab it should open */
+    m_currentItem = item;
+    refresh(m_currentItem);
+}
+
+void AccountView::slotMouseButton(int button, QListViewItem * item,const QPoint&pos,int column)
+{
+    if (button==1) {
+        slotLeftButton(button,item,pos,column);
+    } else if (button==2) {
+        slotRightButton(button,item,pos,column);
+    }
 }
 
 void AccountView::populate( QList<Account> list )
