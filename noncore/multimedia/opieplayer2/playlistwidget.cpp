@@ -56,7 +56,7 @@
 #include <assert.h>
 
 PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name )
-    : PlayListWidgetGui( mediaPlayerState, parent, name ) , currentFileListView( 0 ) 
+    : PlayListWidgetGui( mediaPlayerState, parent, name ) , currentFileListView( 0 )
 {
 
     d->tbAddToList =  new ToolButton( bar, tr( "Add to Playlist" ),
@@ -101,13 +101,13 @@ PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* par
     mediaPlayerState.setFullscreen(  b );
     pmView->setItemChecked( -16, b );
 
-    (void)new ToolButton( vbox1, tr( "Move Up" ),   "opieplayer2/up",
+    (void)new ToolButton( vbox1, tr( "Move Up" ), "opieplayer2/up",
                           d->selectedFiles, SLOT(moveSelectedUp() ) );
-    (void)new ToolButton( vbox1, tr( "Remove" ),    "opieplayer2/cut",
+    (void)new ToolButton( vbox1, tr( "Remove" ), "opieplayer2/cut",
                           d->selectedFiles, SLOT(removeSelected() ) );
     (void)new ToolButton( vbox1, tr( "Move Down" ), "opieplayer2/down",
                           d->selectedFiles, SLOT(moveSelectedDown() ) );
-    //    QVBox *stretch2 = new QVBox( vbox1 );
+    QVBox *stretch2 = new QVBox( vbox1 );
 
     connect( tbDeletePlaylist, ( SIGNAL( released() ) ),
              SLOT( deletePlaylist() ) );
@@ -188,7 +188,7 @@ void PlayListWidget::writeDefaultPlaylist() {
         m3uList->write();
         m3uList->close();
         delete m3uList;
-        
+
       }
     }
 }
@@ -199,7 +199,7 @@ void PlayListWidget::addToSelection( const DocLnk& lnk ) {
         lnk.file().left(4) == "http" ) {
         d->selectedFiles->addToSelection( lnk );
     }
-//          writeCurrentM3u();          
+//          writeCurrentM3u();
 }
 
 
@@ -261,7 +261,7 @@ void PlayListWidget::addAllToList() {
     lnk.setName( QFileInfo(filename).baseName() ); //sets name
     lnk.setFile( filename ); //sets file name
     d->selectedFiles->addToSelection(  lnk);
-  }      
+  }
 
   videoView->populateView();
 
@@ -271,17 +271,17 @@ void PlayListWidget::addAllToList() {
     lnk.setName( QFileInfo(filename).baseName() ); //sets name
     lnk.setFile( filename ); //sets file name
     d->selectedFiles->addToSelection(  lnk);
-  }      
+  }
 
   //      d->selectedFiles->addToSelection(  );
       //      if ( it.current()->isSelected() )
       //        lst->append( audioIt.current() );
   //    }
-    
+
 
 //       if(!audioScan)
 //       scanForAudio();
-//     if(!videoScan) 
+//     if(!videoScan)
 //       scanForVideo();
 
 //      DocLnkSet filesAll;
@@ -296,7 +296,7 @@ void PlayListWidget::addAllToList() {
   //     qDebug("elapsed time %d", t.elapsed() );
 
     tabWidget->setCurrentPage(0);
-    
+
     writeCurrentM3u();
     d->selectedFiles->first();
 }
@@ -315,7 +315,7 @@ void PlayListWidget::addAllMusicToList() {
     lnk.setName( QFileInfo(filename).baseName() ); //sets name
     lnk.setFile( filename ); //sets file name
     d->selectedFiles->addToSelection(  lnk);
-  }      
+  }
 
     /*    if(!audioScan)
         scanForAudio();
@@ -344,7 +344,7 @@ void PlayListWidget::addAllVideoToList() {
     lnk.setName( QFileInfo(filename).baseName() ); //sets name
     lnk.setFile( filename ); //sets file name
     d->selectedFiles->addToSelection(  lnk);
-  }      
+  }
 
 
   /*    if(!videoScan)
@@ -355,9 +355,9 @@ void PlayListWidget::addAllVideoToList() {
             d->selectedFiles->addToSelection( **dit );
         }
     }
-*/    
+*/
     tabWidget->setCurrentPage(0);
-    writeCurrentM3u();          
+    writeCurrentM3u();
     d->selectedFiles->first();
 }
 
@@ -383,8 +383,8 @@ void PlayListWidget::setDocument( const QString& fileref ) {
     } else {
         clearList();
         addToSelection( DocLnk( fileref ) );
-        writeCurrentM3u();          
-        
+        writeCurrentM3u();
+
         d->setDocumentUsed = TRUE;
         mediaPlayerState.setPlaying( FALSE );
         mediaPlayerState.setPlaying( TRUE );
@@ -505,7 +505,7 @@ void PlayListWidget::addSelected() {
 
 void PlayListWidget::removeSelected() {
     d->selectedFiles->removeSelected( );
-    writeCurrentM3u();          
+    writeCurrentM3u();
 }
 
 
@@ -531,10 +531,10 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
     lnk.setName( QFileInfo(filename).baseName() ); //sets name
     lnk.setFile( filename ); //sets file name
     d->selectedFiles->addToSelection(  lnk);
- 
-    writeCurrentM3u();          
+
+    writeCurrentM3u();
 //    tabWidget->setCurrentPage(0);
-        
+
   }
 }
 
@@ -693,13 +693,13 @@ void PlayListWidget::openFile() {
             d->selectedFiles->setSelectedItem( lnk.name());
         }
     }
-            
+
     delete fileDlg;
 }
 
 /*
 reads m3u and shows files/urls to playlist widget */
-void PlayListWidget::readm3u( const QString &filename ) { 
+void PlayListWidget::readm3u( const QString &filename ) {
     qDebug( "read m3u filename " + filename );
 
     Om3u *m3uList;
@@ -714,12 +714,12 @@ void PlayListWidget::readm3u( const QString &filename ) {
           lnk.setName( s ); //sets file name
           lnk.setIcon("opieplayer2/musicfile");
           lnk.setFile( s ); //sets file name
-            
+
         }  else {
           //               if( QFileInfo( s ).exists() ) {
           lnk.setName( QFileInfo(s).baseName());
           //                 if(s.right(4) == '.')   {//if regular file
-          if(s.left(1) != "/")  { 
+          if(s.left(1) != "/")  {
             //            qDebug("set link "+QFileInfo(filename).dirPath()+"/"+s);
             lnk.setFile( QFileInfo(filename).dirPath()+"/"+s);
 //            lnk.setIcon(MimeType(s).pixmap() );
@@ -746,7 +746,7 @@ void PlayListWidget::readm3u( const QString &filename ) {
 
     d->selectedFiles->setSelectedItem( s);
     setCaption(tr("OpiePlayer: ")+ QFileInfo(filename).baseName());
-    
+
 }
 
 /*
@@ -815,7 +815,7 @@ void PlayListWidget::writeCurrentM3u() {
       m3uList->close();
   }
   delete m3uList;
-  
+
 }
 
   /*
@@ -850,7 +850,7 @@ void PlayListWidget::writem3u() {
           m3uList->write();
           m3uList->close();
           delete m3uList;
-        
+
           delete fileDlg;
 
           DocLnk lnk;
@@ -861,7 +861,7 @@ void PlayListWidget::writem3u() {
           // qDebug(filename);
           Config config( "OpiePlayer" );
           config.setGroup( "PlayList" );
-    
+
           config.writeEntry("CurrentPlaylist",filename);
           currentPlayList=filename;
 
