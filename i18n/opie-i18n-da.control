@@ -3,7 +3,7 @@ Files: i18n/da/.directory i18n/da/*.qm
 Priority: optional
 Section: opie/i18n
 Maintainer: Niels Andersen <animal@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: task-opie-minimal, opie-language
 Description: i18n: Danish
  Danish UI texts and dictionary for Opie environment.
