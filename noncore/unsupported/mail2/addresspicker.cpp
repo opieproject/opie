@@ -104,13 +104,13 @@ QString AddressPicker::getNames()
 {
 	QString names = 0;
 	
-	AddressPicker *picker = new AddressPicker(0, 0, true);
-	picker->showMaximized();
-	picker->show();
+	AddressPicker picker(0, 0, true);
+	picker.showMaximized();
+	picker.show();
 
-	int ret = picker->exec();
+	int ret = picker.exec();
 	if (QDialog::Accepted == ret) {
-		return picker->selectedNames;
+		return picker.selectedNames;
 	}
 	return 0;
 }

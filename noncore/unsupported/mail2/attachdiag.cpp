@@ -57,12 +57,12 @@ void AttachDiag::fileSelected(const DocLnk &file)
 
 DocLnk AttachDiag::getFile(QWidget *parent)
 {
-	AttachDiag *attach = new AttachDiag(parent, 0, true);
-	attach->showMaximized();
-	attach->show();
+	AttachDiag attach(parent, 0, true);
+	attach.showMaximized();
+	attach.show();
 
-	if (QDialog::Accepted == attach->exec()) {
-		return attach->currentFile;
+	if (QDialog::Accepted == attach.exec()) {
+		return attach.currentFile;
 	}
 
 	return DocLnk();

@@ -79,12 +79,13 @@ void ConfigDiag::slotFillLists()
 
 void ConfigDiag::slotNewAccount()
 {
-	AccountEditor *editor = new AccountEditor(Account(), 0, 0, true);
-	editor->showMaximized();
-	editor->show();
+	Account account;
+	AccountEditor editor(account, 0, 0, true);
+	editor.showMaximized();
+	editor.show();
 
-	if (QDialog::Accepted == editor->exec()) {
-		ConfigFile::updateAccount(editor->_account);
+	if (QDialog::Accepted == editor.exec()) {
+		ConfigFile::updateAccount(editor._account);
 		slotFillLists();
 		emit changed();
 	}
@@ -98,12 +99,12 @@ void ConfigDiag::slotEditAccount()
 	}
 	Account account = ((AccountListItem *)accountList->currentItem())->account();
 
-	AccountEditor *editor = new AccountEditor(account, 0, 0, true);
-	editor->showMaximized();
-	editor->show();
+	AccountEditor editor(account, 0, 0, true);
+	editor.showMaximized();
+	editor.show();
 
-	if (QDialog::Accepted == editor->exec()) {
-		ConfigFile::updateAccount(editor->_account);
+	if (QDialog::Accepted == editor.exec()) {
+		ConfigFile::updateAccount(editor._account);
 		slotFillLists();
 		emit changed();
 	}
