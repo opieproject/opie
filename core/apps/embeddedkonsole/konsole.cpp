@@ -52,7 +52,6 @@
 #include "konsole.h"
 #include "keytrans.h"
 
-
 class EKNumTabBar : public QTabBar {
 public:
     void numberTabs()
@@ -112,6 +111,7 @@ static const char *commonCmds[] =
     "df ",
     "dmesg",
     "echo ",
+    "env",
     "find ",
     "free",
     "grep ",
@@ -121,7 +121,6 @@ static const char *commonCmds[] =
     "mv ",
     "nc localhost 7776",
     "nc localhost 7777",
-    "netstat ",
     "nslookup ",
     "ping ",
     "ps aux",
@@ -297,10 +296,12 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
   commonCombo = new QComboBox( secondToolBar );
 
-  if( listHidden) 
-      secondToolBar->hide();
   configMenu->insertItem( "Edit Command List");
-
+  if( listHidden) {
+      secondToolBar->hide();
+      configMenu->setItemEnabled(-20 ,FALSE);
+  }
+  
   cfg.setGroup("Commands");
   commonCombo->setInsertionPolicy(QComboBox::AtCurrent);
 
