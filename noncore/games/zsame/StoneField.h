@@ -91,8 +91,9 @@ public:
 
 	int undo(int count=1);
 
-	bool isGameover() const;
+        bool isGameover() const;
 	bool gotBonus() const;
+    void clearBonus();
 	bool undoPossible() const;
 	int getBoard() const;
 	int getScore() const;

@@ -352,6 +352,10 @@ bool StoneField::gotBonus() const {
 	return m_gotBonus;
 }
 
+void StoneField::clearBonus() {
+    m_gotBonus = false;
+}
+
 int
 StoneField::getBoard() const {
      return board;

@@ -185,6 +185,10 @@ bool StoneWidget::hasBonus() {
 	return stonefield.gotBonus(); // don't ask me why the names differ... ;-| [hlm]
 }
 
+void StoneWidget::clearBonus() {
+    stonefield.clearBonus();
+}
+
 bool StoneWidget::isOriginalBoard() {
 	return !modified;
 }

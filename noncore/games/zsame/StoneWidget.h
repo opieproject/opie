@@ -71,6 +71,7 @@ public:
     bool isGameover();
 	// if isGameover(): finished with bonus?
 	bool hasBonus();
+    void clearBonus();
 	// test for unchanged start position
 	bool isOriginalBoard();
 

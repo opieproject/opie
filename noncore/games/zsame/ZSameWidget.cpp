@@ -218,6 +218,7 @@ void ZSameWidget::gameover() {
 	  QMessageBox::information(this,i18n("Game won"),
 		  i18n("<qt>You even removed the last stone, great job! "
 			   "This gave you a score of %1 in total.</qt>").arg(stone->score()));
+          stone->clearBonus();
   } else {
 	  QMessageBox::information(this,i18n("Game over"),
 		  i18n("<qt>There are no more removeable stones. "
