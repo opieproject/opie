@@ -3,6 +3,9 @@
 #include "multiauthcommon.h"
 #include <qpe/config.h>
 
+namespace Opie {
+namespace Security {
+
 /// Initializes widgets according to allowBypass and explanScreens config
 MultiauthMainWindow::MultiauthMainWindow()
     : QDialog(0, "main Opie multiauth modal dialog", TRUE,
@@ -75,7 +78,7 @@ MultiauthMainWindow::~MultiauthMainWindow() {
 
 /// launch the authentication
 void MultiauthMainWindow::proceed() {
-    int result = runPlugins();
+    int result = Internal::runPlugins();
 
 
     if ( (result == 0) && !explanScreens )
@@ -126,4 +129,7 @@ void MultiauthMainWindow::proceed() {
  */
 bool MultiauthMainWindow::isAlreadyDone() {
     return alreadyDone;
+}
+
+}
 }

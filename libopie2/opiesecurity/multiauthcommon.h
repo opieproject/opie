@@ -41,6 +41,10 @@
 #include <qtextview.h>
 #include <qdialog.h>
 
+
+namespace Opie {
+namespace Security {
+
 class SecOwnerDlg : public QDialog
 {
     Q_OBJECT
@@ -55,8 +59,17 @@ class SecOwnerDlg : public QDialog
 
     private:
         QTextView *tv;
+	
+    private:
+	struct Private;
+	Private *d;
 };
 
+namespace Internal {
 int runPlugins();
+}
+
+}
+}
 
 #endif // MULTIAUTHCOMMON_H

@@ -16,6 +16,8 @@
 #include <unistd.h>
 #include <qpe/config.h>
 
+namespace Opie {
+namespace Security {
 
 SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name, Contact c,
                           bool modal, bool fullscreen = FALSE )
@@ -53,6 +55,7 @@ bool SecOwnerDlg::eventFilter(QObject *o, QEvent *e)
 void SecOwnerDlg::mousePressEvent( QMouseEvent * ) { accept(); }
 
 
+namespace Internal {
 /// run plugins until we reach nbSuccessMin successes
 int runPlugins() {
 
@@ -176,4 +179,8 @@ int runPlugins() {
     } //end for
     if(oi) delete oi;
     return 1;
+}
+
+}
+}
 }

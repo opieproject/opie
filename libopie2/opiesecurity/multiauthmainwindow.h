@@ -41,6 +41,10 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 
+
+namespace Opie {
+namespace Security {
+
 /// Multiauth main window
 /**
  * This QDialog window displays some information and an exit button,
@@ -68,7 +72,13 @@ class MultiauthMainWindow : public QDialog {
 
         private slots:
             void proceed();
+	private:
+	    struct Private;
+	    Private *d;
 };
+
+}
+}
 
 #endif // MULTIAUTHMAINWINDOW_H
 
