@@ -110,12 +110,14 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     buttonMask = QImage( imgUp.width(), imgUp.height(), 8, 255 );
     buttonMask.fill( 0 );
 
-    for ( int i = 0; i < 10; i++ ) {
-        QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_" + skin_mask_file_names[i] + ".png" );
-        masks[i] = new QBitmap( filename );
+    masks.reserve( 10 );
 
-        if ( !masks[i]->isNull() ) {
-            QImage imgMask = masks[i]->convertToImage();
+    for ( uint i = 0; i < masks.capacity(); i++ ) {
+        QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_" + skin_mask_file_names[i] + ".png" );
+        masks.push_back( QBitmap( filename ) );
+
+        if ( !masks[i].isNull() ) {
+            QImage imgMask = masks[i].convertToImage();
             uchar **dest = buttonMask.jumpTable();
             for ( int y = 0; y < imgUp.height(); y++ ) {
                 uchar *line = dest[y];
@@ -182,9 +184,6 @@ AudioWidget::~AudioWidget() {
         delete buttonPixUp[i];
         delete buttonPixDown[i];
     }
-    for ( int i = 0; i < 10; i++ ) {
-        delete masks[i];
-    }
 //    mediaPlayerState->setPlaying(false);
 }
 
@@ -225,11 +224,11 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     QPixmap pixDn = combineImageWithBackground( imgDn, pixBg, p );
 
     for ( int i = 0; i < 10; i++ ) {
-        if ( !masks[i]->isNull() ) {
+        if ( !masks[i].isNull() ) {
             delete buttonPixUp[i];
             delete buttonPixDown[i];
-            buttonPixUp[i] = maskPixToMask( pixUp, *masks[i] );
-            buttonPixDown[i] = maskPixToMask( pixDn, *masks[i] );
+            buttonPixUp[i] = maskPixToMask( pixUp, masks[i] );
+            buttonPixDown[i] = maskPixToMask( pixDn, masks[i] );
         }
     }
 }
