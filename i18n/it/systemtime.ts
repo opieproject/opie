@@ -120,7 +120,7 @@ ntpdate </source>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">n/d</translation>
     </message>
     <message>
         <source>Time shift</source>

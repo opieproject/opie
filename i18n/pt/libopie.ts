@@ -29,6 +29,38 @@
         <source>Display Rotate</source>
         <translation>Mostrar Rodar</translation>
     </message>
+    <message>
+        <source>Lower+Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lower+Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lower+Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lower+Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upper+Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upper+Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upper+Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upper+Left</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OColorDialog</name>
@@ -358,6 +390,10 @@ e</translation>
         <source>Every</source>
         <translation>Todos</translation>
     </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTimePickerDialogBase</name>
@@ -402,7 +438,7 @@ e</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Endereço Trabalho:&lt;/b&gt; </translation>
+        <translation type="obsolete">&lt;b&gt;Endereço Trabalho:&lt;/b&gt; </translation>
     </message>
     <message>
         <source>Office: </source>
@@ -430,7 +466,7 @@ e</translation>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Endereço Casa:&lt;/b&gt; </translation>
+        <translation type="obsolete">&lt;b&gt;Endereço Casa:&lt;/b&gt; </translation>
     </message>
     <message>
         <source>Home Web Page: </source>
@@ -526,7 +562,7 @@ e</translation>
     </message>
     <message>
         <source>The %1 %1 of every</source>
-        <translation>Todos os %1 %1</translation>
+        <translation type="obsolete">Todos os %1 %1</translation>
     </message>
     <message>
         <source>Every </source>
@@ -603,6 +639,18 @@ e</translation>
     <message>
         <source>This is a multiple day event</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The %1 %2 of every</source>
+        <translation type="unfinished">Todos os %1 %2</translation>
     </message>
 </context>
 <context>

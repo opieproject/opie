@@ -28,6 +28,10 @@
         <source>Recurrence</source>
         <translation>Ismétlődés</translation>
     </message>
+    <message>
+        <source>Task Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -45,6 +49,10 @@
     </message>
     <message>
         <source>loud</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opie Todolist</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -459,7 +467,7 @@ Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terül
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Jegyzetek:</translation>
+        <translation type="obsolete">Jegyzetek:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
@@ -468,6 +476,10 @@ Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terül
     <message>
         <source>Todo List</source>
         <translation>Teendők listája</translation>
+    </message>
+    <message>
+        <source>Summary:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -11,23 +11,23 @@
     </message>
     <message>
         <source>applications</source>
-        <translation>апликации</translation>
+        <translation type="obsolete">апликации</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation>документи</translation>
+        <translation type="obsolete">документи</translation>
     </message>
     <message>
         <source>todo</source>
-        <translation>задолжениа</translation>
+        <translation type="obsolete">задолжениа</translation>
     </message>
     <message>
         <source>datebook</source>
-        <translation>роковник</translation>
+        <translation type="obsolete">роковник</translation>
     </message>
     <message>
         <source>adressbook</source>
-        <translation>адресар</translation>
+        <translation type="obsolete">адресар</translation>
     </message>
     <message>
         <source>Search</source>
@@ -56,6 +56,26 @@
     <message>
         <source>Enter your search terms here</source>
         <translation>Внеси ги зборовите кои се пребаруваат</translation>
+    </message>
+    <message>
+        <source>Applications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

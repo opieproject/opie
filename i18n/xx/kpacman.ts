@@ -81,6 +81,10 @@ the last 10 years of her friendship.
         <source>&amp;Help</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>KPacman</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>
@@ -203,7 +207,7 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source>                          </source>
-        <translation>FOO</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -95,6 +95,10 @@ gli ultimi 10 anni della sua amicizia.
         <source>&amp;Help</source>
         <translation>&amp;Aiuto</translation>
     </message>
+    <message>
+        <source>KPacman</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>
@@ -217,6 +221,10 @@ oppure è in un formato sconosciuto.</translation>
     <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@YY@/@MM@/@DD@</translation>
+    </message>
+    <message>
+        <source>                          </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -7,23 +7,23 @@
     </message>
     <message>
         <source>new</source>
-        <translation>нов</translation>
+        <translation type="obsolete">нов</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation>уреди</translation>
+        <translation type="obsolete">уреди</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation>избриши</translation>
+        <translation type="obsolete">избриши</translation>
     </message>
     <message>
         <source>up</source>
-        <translation>нагоре</translation>
+        <translation type="obsolete">нагоре</translation>
     </message>
     <message>
         <source>down</source>
-        <translation>надоле</translation>
+        <translation type="obsolete">надоле</translation>
     </message>
 </context>
 <context>

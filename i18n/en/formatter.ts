@@ -22,13 +22,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>CAUTION:
-Changing parameters on this 
-page may cause your system 
-to stop functioning properly!!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Edit fstab</source>
         <translation type="unfinished"></translation>
     </message>
@@ -49,22 +42,8 @@ to stop functioning properly!!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Format?!?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Really format
 </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>
-with </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> filesystem?!?
-You will loose all data!!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -119,16 +98,7 @@ has been successfully formatted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Trying to mount.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Card mount failed!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>
-has been successfully mounted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -137,10 +107,6 @@ has been successfully mounted.</source>
     </message>
     <message>
         <source>Internal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Storage Type : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -155,6 +121,46 @@ has been successfully mounted.</source>
     </message>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CAUTION:
+Changing parameters on this
+page may cause your system
+to stop functioning properly!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+with %1 filesystem?
+You will loose all data!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to umount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to mount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1
+has been successfully mounted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Storage Type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type: %1
+Formatted with %2
+%3, %4, %5</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

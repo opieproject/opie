@@ -8,23 +8,23 @@
     </message>
     <message>
         <source>new</source>
-        <translation>nouveau</translation>
+        <translation type="obsolete">nouveau</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation>éditer</translation>
+        <translation type="obsolete">éditer</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation>effacer</translation>
+        <translation type="obsolete">effacer</translation>
     </message>
     <message>
         <source>up</source>
-        <translation>monter</translation>
+        <translation type="obsolete">monter</translation>
     </message>
     <message>
         <source>down</source>
-        <translation>descendre</translation>
+        <translation type="obsolete">descendre</translation>
     </message>
 </context>
 <context>

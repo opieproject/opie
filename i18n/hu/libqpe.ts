@@ -398,6 +398,17 @@ már szerkeszti a kategóriákat.</translation>
     </message>
 </context>
 <context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
@@ -493,7 +504,7 @@ Szabadítson fel némi memóriát és próbálja újra.</translation>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>Biztosan törli
+        <translation type="obsolete">Biztosan törli
 %1-t?</translation>
     </message>
     <message>
@@ -795,6 +806,11 @@ Szabadítson fel némi memóriát és próbálja újra.</translation>
     <message>
         <source>What&apos;s this...</source>
         <translation type="unfinished">Mi ez...</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete
+ %1?&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

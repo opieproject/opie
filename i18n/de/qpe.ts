@@ -67,12 +67,12 @@ Bitte laden Sie sie auf.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Information</translation>
+        <translation type="obsolete">Information</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation>&lt;p&lt;Das Systemdatum scheint nicht gültig zu sein.
+        <translation type="obsolete">&lt;p&lt;Das Systemdatum scheint nicht gültig zu sein.
 (%1)&lt;/p&gt;&lt;p&gt;Möchten Sie es anpassen ?&lt;/p&gt;</translation>
     </message>
 </context>

@@ -26,7 +26,7 @@
 Changing parameters on this 
 page may cause your system 
 to stop functioning properly!!</source>
-        <translation>ВНИМАНИЕ:
+        <translation type="obsolete">ВНИМАНИЕ:
 Промената на параметрите на оваа
 страна може да предизвикагрешки 
 во функционирањето на системот!!</translation>
@@ -53,7 +53,7 @@ to stop functioning properly!!</source>
     </message>
     <message>
         <source>Format?!?</source>
-        <translation>Формат?!?</translation>
+        <translation type="obsolete">Формат?!?</translation>
     </message>
     <message>
         <source>Really format
@@ -64,13 +64,13 @@ to stop functioning properly!!</source>
     <message>
         <source>
 with </source>
-        <translation>
+        <translation type="obsolete">
 со</translation>
     </message>
     <message>
         <source> filesystem?!?
 You will loose all data!!</source>
-        <translation>податочен систем?!?
+        <translation type="obsolete">податочен систем?!?
 Ќе ги изгубите сите податоци!!</translation>
     </message>
     <message>
@@ -129,7 +129,7 @@ has been successfully formatted.</source>
     </message>
     <message>
         <source>Trying to mount.</source>
-        <translation>Се обидувам да закачам.</translation>
+        <translation type="obsolete">Се обидувам да закачам.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
@@ -138,7 +138,7 @@ has been successfully formatted.</source>
     <message>
         <source>
 has been successfully mounted.</source>
-        <translation>
+        <translation type="obsolete">
 беше успешно прикачена.</translation>
     </message>
     <message>
@@ -151,7 +151,7 @@ has been successfully mounted.</source>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation>Тип на медиум:</translation>
+        <translation type="obsolete">Тип на медиум:</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
@@ -168,6 +168,46 @@ has been successfully mounted.</source>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
         <translation>Слободни: %1 kB (%d mB)</translation>
+    </message>
+    <message>
+        <source>CAUTION:
+Changing parameters on this
+page may cause your system
+to stop functioning properly!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+with %1 filesystem?
+You will loose all data!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to umount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to mount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1
+has been successfully mounted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Storage Type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type: %1
+Formatted with %2
+%3, %4, %5</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -143,11 +143,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation>複製 </translation>
+        <translation type="obsolete">複製 </translation>
     </message>
     <message>
         <source> As</source>
-        <translation> 為</translation>
+        <translation type="obsolete"> 為</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -261,6 +261,18 @@ and all it&apos;s contents ?</source>
 %1?</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy &apos;%1&apos; As</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -271,6 +283,21 @@ and all it&apos;s contents ?</source>
     <message>
         <source>Output</source>
         <translation>輸出</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -314,6 +341,26 @@ and all it&apos;s contents ?</source>
     <message>
         <source>execute</source>
         <translation>執行</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

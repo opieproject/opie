@@ -93,6 +93,10 @@ die letzten 10 Jahre Ihrer Freundschaft.</translation>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
+    <message>
+        <source>KPacman</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>

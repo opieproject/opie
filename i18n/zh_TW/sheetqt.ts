@@ -719,10 +719,6 @@ QWDC Beta Winner (以 Sheet/Qt)
 
 http://qtopia.sitebest.com</translation>
     </message>
-    <message>
-        <source>Sheets</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Sheet</name>

@@ -719,10 +719,6 @@ Este software está licenciado sob a licença GPL. A sua distribuição é livre
 
 http://qtopia.sitebest.com</translation>
     </message>
-    <message>
-        <source>Sheets</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Sheet</name>

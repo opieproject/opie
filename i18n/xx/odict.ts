@@ -68,6 +68,10 @@
         <source>Configuration</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Opie-Dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SearchMethodDlg</name>

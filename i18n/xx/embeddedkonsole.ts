@@ -7,23 +7,23 @@
     </message>
     <message>
         <source>new</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>up</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>down</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
 </context>
 <context>

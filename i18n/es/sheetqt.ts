@@ -719,10 +719,6 @@ Este producto está bajo licencia GPL. Es distribuible libremente. Si quiere la 
 
 http://qtopia.sitebest.com</translation>
     </message>
-    <message>
-        <source>Sheets</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Sheet</name>

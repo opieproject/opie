@@ -397,6 +397,17 @@ editing categories.</source>
     </message>
 </context>
 <context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>New Document</source>
@@ -461,7 +472,7 @@ Free some memory and try again.</source>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>All</source>
@@ -786,6 +797,11 @@ Free some memory and try again.</source>
     <message>
         <source>What&apos;s this...</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete
+ %1?&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -398,6 +398,17 @@ editing categories.</source>
     </message>
 </context>
 <context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>New Document</source>
@@ -526,7 +537,7 @@ Free some memory and try again.</source>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>Дали сакате да го избришете 
+        <translation type="obsolete">Дали сакате да го избришете 
 %1?</translation>
     </message>
     <message>
@@ -796,6 +807,11 @@ Free some memory and try again.</source>
     <message>
         <source>Groups</source>
         <translation>Групи</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete
+ %1?&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

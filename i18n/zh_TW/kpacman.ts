@@ -92,6 +92,10 @@ KDE 桌面環境的小精靈遊戲
         <source>&amp;Help</source>
         <translation>說明(&amp;H)</translation>
     </message>
+    <message>
+        <source>KPacman</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>

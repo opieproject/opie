@@ -30,5 +30,9 @@
         <source>Help Browser</source>
         <translation>Navigateur d&apos;aide</translation>
     </message>
+    <message>
+        <source>Go</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

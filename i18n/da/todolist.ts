@@ -28,6 +28,10 @@
         <source>Recurrence</source>
         <translation>Gentagelse</translation>
     </message>
+    <message>
+        <source>Task Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -45,6 +49,10 @@
     </message>
     <message>
         <source>loud</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opie Todolist</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -459,7 +467,7 @@ Det hjælper dig med hurtigt at tilføje en ny opgave til din liste. Dette områ
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Noter:</translation>
+        <translation type="obsolete">Noter:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
@@ -468,6 +476,10 @@ Det hjælper dig med hurtigt at tilføje en ny opgave til din liste. Dette områ
     <message>
         <source>Todo List</source>
         <translation>Opgaveliste</translation>
+    </message>
+    <message>
+        <source>Summary:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

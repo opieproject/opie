@@ -65,7 +65,7 @@ accurately to calibrate your screen.</source>
 by an uncaught signal
 (%1)
 </source>
-        <translation>O OPIE terminou 
+        <translation type="obsolete">O OPIE terminou 
 devido a um sinal
 de sistema (%1)</translation>
     </message>
@@ -75,10 +75,21 @@ de sistema (%1)</translation>
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation>Não foi possível iniciar o OPIE.</translation>
+        <translation type="obsolete">Não foi possível iniciar o OPIE.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opie was terminated
+by an uncaught signal
+(%1)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not start Opie.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -31,7 +31,11 @@
     </message>
     <message>
         <source>HelpBrowser</source>
-        <translation>BrskalnikPomoči</translation>
+        <translation type="obsolete">BrskalnikPomoči</translation>
+    </message>
+    <message>
+        <source>Go</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

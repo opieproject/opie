@@ -227,11 +227,11 @@ exists. Ok to overwrite?</source>
     </message>
     <message>
         <source>Copy </source>
-        <translation>Копирај</translation>
+        <translation type="obsolete">Копирај</translation>
     </message>
     <message>
         <source> As</source>
-        <translation>Како</translation>
+        <translation type="obsolete">Како</translation>
     </message>
     <message>
         <source> already exists.
@@ -267,6 +267,18 @@ Do you really want to delete it?</source>
         <source>Could not rename</source>
         <translation>Неможе да се преименува</translation>
     </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy &apos;%1&apos; As</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -277,6 +289,21 @@ Do you really want to delete it?</source>
     <message>
         <source>Save output to file (name only)</source>
         <translation>Сними го излезот во датотека (само име)</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -320,6 +347,26 @@ Do you really want to delete it?</source>
     <message>
         <source>execute</source>
         <translation>извршување</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

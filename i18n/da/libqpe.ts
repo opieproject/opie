@@ -399,6 +399,17 @@ redigere kategorierne.</translation>
     </message>
 </context>
 <context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>New Document</source>
@@ -471,7 +482,7 @@ Frigør noget hukommelse og prøv igen.</translation>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>Er du sikker på du vil slette
+        <translation type="obsolete">Er du sikker på du vil slette
 %1?</translation>
     </message>
     <message>
@@ -797,6 +808,11 @@ Frigør noget hukommelse og prøv igen.</translation>
     <message>
         <source>What&apos;s this...</source>
         <translation type="unfinished">Hvad er det...</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete
+ %1?&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

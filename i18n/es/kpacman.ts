@@ -94,6 +94,10 @@ Quiero agradecer a mi novia Elke Krueers sus
         <source>&amp;Help</source>
         <translation>&amp;Ayuda</translation>
     </message>
+    <message>
+        <source>KPacman</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>

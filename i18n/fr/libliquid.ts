@@ -1,10 +1,17 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
+    <name>Decoration</name>
+    <message>
+        <source>Liquid</source>
+        <translation type="obsolete">Liquid</translation>
+    </message>
+</context>
+<context>
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation>Thème Liquide</translation>
+        <translation type="unfinished">Thème Liquide</translation>
     </message>
     <message>
         <source>No translucency</source>
@@ -59,11 +66,11 @@
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation>Liquide</translation>
+        <translation type="unfinished">Liquide</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation>Thème Liquide haute performance par Mosfet</translation>
+        <translation type="unfinished">Thème Liquide haute performance par Mosfet</translation>
     </message>
 </context>
 </TS>

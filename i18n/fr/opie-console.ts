@@ -102,6 +102,17 @@
     </message>
 </context>
 <context>
+    <name>ConfigDialog</name>
+    <message>
+        <source>Edit Connection Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Connection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ConfigureBase</name>
     <message>
         <source>Configure</source>
@@ -512,6 +523,10 @@
     </message>
     <message>
         <source>Local Console</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Profile</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

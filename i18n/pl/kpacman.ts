@@ -81,6 +81,10 @@ the last 10 years of her friendship.
         <source>&amp;Help</source>
         <translation>&amp;Pomoc</translation>
     </message>
+    <message>
+        <source>KPacman</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>
@@ -199,6 +203,10 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source>@YY@/@MM@/@DD@</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>                          </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

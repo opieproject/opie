@@ -94,6 +94,10 @@ Libere espacio y vuelva a intentarlo.
         <source>Edit...</source>
         <translation>Editar...</translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -190,6 +194,10 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>Duplicate</source>
         <translation>Duplicar</translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -353,6 +361,14 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. Ene-00. Ene</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -546,6 +562,13 @@ Libere espacio y vuelva a intentarlo.
     </message>
 </context>
 <context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
@@ -705,6 +728,10 @@ y </translation>
     <message>
         <source>, and </source>
         <translation>, y </translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

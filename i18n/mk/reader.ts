@@ -36,6 +36,102 @@
         <source>Scroll Speed</source>
         <translation>Брзина на лизгање</translation>
     </message>
+    <message>
+        <source>&lt;Nothing&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Autoscroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bookmark</source>
+        <translation type="unfinished">Сними линк</translation>
+    </message>
+    <message>
+        <source>Annotate</source>
+        <translation type="unfinished">Нотација</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation type="unfinished">Цел екран</translation>
+    </message>
+    <message>
+        <source>Zoom in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished">Назад</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished">Напред</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Дома</translation>
+    </message>
+    <message>
+        <source>Page up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beginning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Escape Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Space Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left Arrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right Arrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down Arrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up Arrow</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CCloseDialog</name>
@@ -126,6 +222,15 @@ Touch</source>
         <translation>Две/Едно 
 кликање</translation>
     </message>
+    <message>
+        <source>Dictionary</source>
+        <translation type="unfinished">Речник</translation>
+    </message>
+    <message>
+        <source>Swap Tap
+Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CLayoutPrefs</name>
@@ -164,6 +269,10 @@ Touch</source>
     <message>
         <source>Full Justify</source>
         <translation>Целосно порамни</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -320,6 +429,14 @@ Leading</source>
     <message>
         <source>Continuous</source>
         <translation>Постојано</translation>
+    </message>
+    <message>
+        <source>Select Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plucker</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -643,6 +760,10 @@ Leading</source>
     <message>
         <source>Annotation</source>
         <translation>Нагласување</translation>
+    </message>
+    <message>
+        <source>Reader</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -29,5 +29,9 @@
         <source>Help Browser</source>
         <translation>Aiuto</translation>
     </message>
+    <message>
+        <source>Go</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

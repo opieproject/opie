@@ -7,23 +7,23 @@
     </message>
     <message>
         <source>adressbook</source>
-        <translation>contactos</translation>
+        <translation type="obsolete">contactos</translation>
     </message>
     <message>
         <source>todo</source>
-        <translation>tareas</translation>
+        <translation type="obsolete">tareas</translation>
     </message>
     <message>
         <source>datebook</source>
-        <translation>calendario</translation>
+        <translation type="obsolete">calendario</translation>
     </message>
     <message>
         <source>applications</source>
-        <translation>aplicaciones</translation>
+        <translation type="obsolete">aplicaciones</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation>documentos</translation>
+        <translation type="obsolete">documentos</translation>
     </message>
     <message>
         <source>Search</source>
@@ -56,6 +56,26 @@
     <message>
         <source>Enter your search terms here</source>
         <translation>Introduzca aquí sus términos de búsqueda</translation>
+    </message>
+    <message>
+        <source>Applications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

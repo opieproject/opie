@@ -66,7 +66,7 @@ accurately to calibrate your screen.</source>
 by an uncaught signal
 (%1)
 </source>
-        <translation>OPIE беше исклучен
+        <translation type="obsolete">OPIE беше исклучен
 од неозначен сигнал
 (%1)</translation>
     </message>
@@ -76,11 +76,22 @@ by an uncaught signal
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation>Неможе да се стартува OPIE.</translation>
+        <translation type="obsolete">Неможе да се стартува OPIE.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
         <translation>Неможе да се префрли на нов идентитет на корисник</translation>
+    </message>
+    <message>
+        <source>Opie was terminated
+by an uncaught signal
+(%1)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not start Opie.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -398,6 +398,17 @@ editando las categorías.</translation>
     </message>
 </context>
 <context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
@@ -466,7 +477,7 @@ Libere memoria e intételo de nuevo.</translation>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>¿Seguro que quiere borrar
+        <translation type="obsolete">¿Seguro que quiere borrar
 %1?</translation>
     </message>
     <message>
@@ -796,6 +807,11 @@ Libere memoria e intételo de nuevo.</translation>
     <message>
         <source>What&apos;s this...</source>
         <translation type="unfinished">Qué es esto...</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete
+ %1?&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -104,5 +104,21 @@ You get %2 lives this time!</source>
         <translation>Na stopnji %1.
 Dobite %2 življenj!</translation>
     </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Written by: Stefan Schimanski
+Ported by: Martin Imobersteg
+
+Click to form walls.
+Hit space to switch wall direction.
+Try to reduce total space by 75%.
+
+This program is distributed under
+the terms of the GPL v2.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -26,7 +26,7 @@
 Changing parameters on this 
 page may cause your system 
 to stop functioning properly!!</source>
-        <translation>UWAGA:
+        <translation type="obsolete">UWAGA:
 Zmiana parametrow na tej
 stronie moze zaklocic prawidlowe
 dzialanie twojego systemu!!</translation>
@@ -53,7 +53,7 @@ dzialanie twojego systemu!!</translation>
     </message>
     <message>
         <source>Format?!?</source>
-        <translation>Formatowac?!?</translation>
+        <translation type="obsolete">Formatowac?!?</translation>
     </message>
     <message>
         <source>Really format
@@ -64,13 +64,13 @@ dzialanie twojego systemu!!</translation>
     <message>
         <source>
 with </source>
-        <translation>
+        <translation type="obsolete">
 na</translation>
     </message>
     <message>
         <source> filesystem?!?
 You will loose all data!!</source>
-        <translation>system plikow?!?
+        <translation type="obsolete">system plikow?!?
 Stracisz wszystkie dane!!</translation>
     </message>
     <message>
@@ -128,7 +128,7 @@ zostal zformatowany.</translation>
     </message>
     <message>
         <source>Trying to mount.</source>
-        <translation>Probuje zamontowac.</translation>
+        <translation type="obsolete">Probuje zamontowac.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
@@ -137,7 +137,7 @@ zostal zformatowany.</translation>
     <message>
         <source>
 has been successfully mounted.</source>
-        <translation>
+        <translation type="obsolete">
 zostal zamontowany.</translation>
     </message>
     <message>
@@ -150,7 +150,7 @@ zostal zamontowany.</translation>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation>Typ pamieci:</translation>
+        <translation type="obsolete">Typ pamieci:</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
@@ -167,6 +167,46 @@ zostal zamontowany.</translation>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
         <translation>Dostepne: %1 kB ( %d mB)</translation>
+    </message>
+    <message>
+        <source>CAUTION:
+Changing parameters on this
+page may cause your system
+to stop functioning properly!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+with %1 filesystem?
+You will loose all data!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to umount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to mount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1
+has been successfully mounted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Storage Type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type: %1
+Formatted with %2
+%3, %4, %5</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

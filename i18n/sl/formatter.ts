@@ -26,7 +26,7 @@
 Changing parameters on this 
 page may cause your system 
 to stop functioning properly!!</source>
-        <translation>OPOZORILO:
+        <translation type="obsolete">OPOZORILO:
 Spreminjanje parametrov na tej
 strani lahko povzroči, da vaš
 sistem ne bo pravilno deloval!!</translation>
@@ -53,7 +53,7 @@ sistem ne bo pravilno deloval!!</translation>
     </message>
     <message>
         <source>Format?!?</source>
-        <translation>Format?!?</translation>
+        <translation type="obsolete">Format?!?</translation>
     </message>
     <message>
         <source>Really format
@@ -64,13 +64,13 @@ sistem ne bo pravilno deloval!!</translation>
     <message>
         <source>
 with </source>
-        <translation>
+        <translation type="obsolete">
 z</translation>
     </message>
     <message>
         <source> filesystem?!?
 You will loose all data!!</source>
-        <translation>datotečnim sistemom?!?
+        <translation type="obsolete">datotečnim sistemom?!?
 Zgubili boste vse podatke!!</translation>
     </message>
     <message>
@@ -130,7 +130,7 @@ je bila uspešno formatirana.</translation>
     </message>
     <message>
         <source>Trying to mount.</source>
-        <translation>Poizkušam priklopiti.</translation>
+        <translation type="obsolete">Poizkušam priklopiti.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
@@ -139,7 +139,7 @@ je bila uspešno formatirana.</translation>
     <message>
         <source>
 has been successfully mounted.</source>
-        <translation>
+        <translation type="obsolete">
 je bila uspešno priklopljena.</translation>
     </message>
     <message>
@@ -152,7 +152,7 @@ je bila uspešno priklopljena.</translation>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation>Tip skladišča:</translation>
+        <translation type="obsolete">Tip skladišča:</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
@@ -169,6 +169,46 @@ je bila uspešno priklopljena.</translation>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
         <translation>Na voljo: %1 kB ( %d mB)</translation>
+    </message>
+    <message>
+        <source>CAUTION:
+Changing parameters on this
+page may cause your system
+to stop functioning properly!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+with %1 filesystem?
+You will loose all data!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to umount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to mount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1
+has been successfully mounted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Storage Type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type: %1
+Formatted with %2
+%3, %4, %5</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

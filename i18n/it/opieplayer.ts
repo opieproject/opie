@@ -206,13 +206,13 @@ Chiusura player.</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Spazio esaurito</translation>
+        <translation type="obsolete">Spazio esaurito</translation>
     </message>
     <message>
         <source>There was a problem saving the playlist.
 Your playlist may be missing some entries
 the next time you start it.</source>
-        <translation>Errore nel salvare la playlist.
+        <translation type="obsolete">Errore nel salvare la playlist.
 Potrebbero mancare delle voci
 al prossimo avvio.</translation>
     </message>

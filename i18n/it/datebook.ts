@@ -96,6 +96,10 @@ Uscire comunque?</translation>
         <source>Edit...</source>
         <translation>Modifica...</translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -192,6 +196,10 @@ Uscire comunque?</translation>
     <message>
         <source>Duplicate</source>
         <translation>Copia</translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -355,6 +363,14 @@ Uscire comunque?</translation>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. Gen-00. Gen</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -548,6 +564,13 @@ Uscire comunque?</translation>
     </message>
 </context>
 <context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
@@ -707,6 +730,10 @@ e </translation>
     <message>
         <source>, and </source>
         <translation>, e </translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

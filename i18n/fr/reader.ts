@@ -37,6 +37,102 @@
         <source>Scroll Speed</source>
         <translation>Vitesse Défil.</translation>
     </message>
+    <message>
+        <source>&lt;Nothing&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Autoscroll</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Annotate</source>
+        <translation type="unfinished">Annoter</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation type="unfinished">Plein écran</translation>
+    </message>
+    <message>
+        <source>Zoom in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beginning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Escape Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Space Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Return Button</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Left Arrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Right Arrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down Arrow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up Arrow</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CCloseDialog</name>
@@ -127,6 +223,15 @@ Touch</source>
         <translation>Deux/Un
 click</translation>
     </message>
+    <message>
+        <source>Dictionary</source>
+        <translation type="unfinished">Dictionnaire</translation>
+    </message>
+    <message>
+        <source>Swap Tap
+Actions</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CLayoutPrefs</name>
@@ -164,6 +269,10 @@ click</translation>
     </message>
     <message>
         <source>Full Justify</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -317,6 +426,14 @@ Leading</source>
     <message>
         <source>Continuous</source>
         <translation>En continue</translation>
+    </message>
+    <message>
+        <source>Select Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plucker</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -563,7 +680,7 @@ Leading</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vue</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -639,6 +756,10 @@ Leading</source>
     </message>
     <message>
         <source>Bookmark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reader</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

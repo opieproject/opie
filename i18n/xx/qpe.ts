@@ -63,12 +63,12 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>Information</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
 </context>
 <context>

@@ -29,6 +29,38 @@
         <source>Display Rotate</source>
         <translation>ротирање на екран</translation>
     </message>
+    <message>
+        <source>Lower+Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lower+Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lower+Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lower+Left</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upper+Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upper+Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upper+Right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upper+Left</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OColorDialog</name>
@@ -358,6 +390,10 @@ and </source>
         <source>Every</source>
         <translation>Секој</translation>
     </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTimePickerDialogBase</name>
@@ -434,7 +470,7 @@ and </source>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Работна Адреса:&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Работна Адреса:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Office: </source>
@@ -462,7 +498,7 @@ and </source>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Домашна Адреса:&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Домашна Адреса:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
@@ -570,7 +606,7 @@ and </source>
     </message>
     <message>
         <source>The %1 %1 of every</source>
-        <translation>%1 %1 од секој</translation>
+        <translation type="obsolete">%1 %1 од секој</translation>
     </message>
     <message>
         <source>Every </source>
@@ -603,6 +639,18 @@ and </source>
     <message>
         <source>Sunday</source>
         <translation>Недела</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The %1 %2 of every</source>
+        <translation type="unfinished">%1 %2 од секој</translation>
     </message>
 </context>
 <context>

@@ -49,5 +49,9 @@
         <source>&amp;Restore</source>
         <translation>&amp;Restauration</translation>
     </message>
+    <message>
+        <source>Update Filelist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

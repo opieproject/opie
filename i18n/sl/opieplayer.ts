@@ -205,13 +205,13 @@ Zapiram predvajalnik.</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Zmanjkalo prostora</translation>
+        <translation type="obsolete">Zmanjkalo prostora</translation>
     </message>
     <message>
         <source>There was a problem saving the playlist.
 Your playlist may be missing some entries
 the next time you start it.</source>
-        <translation>Prišlo je do problema pri shranjevanju seznama.
+        <translation type="obsolete">Prišlo je do problema pri shranjevanju seznama.
 Vaš seznam bo mogoče drugačen
 naslednjič, ko poženete program.</translation>
     </message>

@@ -93,6 +93,10 @@ Quit anyway?</translation>
         <source>Duplicate Event</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -188,6 +192,10 @@ Quit anyway?</translation>
     </message>
     <message>
         <source>Duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -352,6 +360,14 @@ Quit anyway?</translation>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. 一月-00. 一月</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -545,6 +561,13 @@ Quit anyway?</translation>
     </message>
 </context>
 <context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
@@ -703,6 +726,10 @@ and </source>
     <message>
         <source>, and </source>
         <translation>, 和</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -29,6 +29,10 @@
         <source>Recurrence</source>
         <translation>Récurrence</translation>
     </message>
+    <message>
+        <source>Task Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -47,6 +51,10 @@
     <message>
         <source>loud</source>
         <translation>fort</translation>
+    </message>
+    <message>
+        <source>Opie Todolist</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -459,7 +467,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notes:</translation>
+        <translation type="obsolete">Notes:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
@@ -468,6 +476,10 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     <message>
         <source>Todo List</source>
         <translation>Liste des Tâches</translation>
+    </message>
+    <message>
+        <source>Summary:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

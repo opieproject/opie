@@ -96,6 +96,10 @@ Trozdem beenden?</translation>
         <source>Edit...</source>
         <translation>Editieren...</translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -192,6 +196,10 @@ Trozdem beenden?</translation>
     <message>
         <source>Duplicate</source>
         <translation>Duplizieren</translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -355,6 +363,14 @@ Trozdem beenden?</translation>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00.Jan-00.Jan</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -548,6 +564,13 @@ Trozdem beenden?</translation>
     </message>
 </context>
 <context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
@@ -708,6 +731,10 @@ und</translation>
         <source>, and </source>
         <translation>,
 und</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

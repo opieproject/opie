@@ -398,6 +398,17 @@ edytuje kategorie.</translation>
     </message>
 </context>
 <context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
@@ -466,7 +477,7 @@ Zwolnij wiecej pamieci</translation>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>Jestes pewnien ze chces zusunac
+        <translation type="obsolete">Jestes pewnien ze chces zusunac
  %1?</translation>
     </message>
     <message>
@@ -795,6 +806,11 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete
+ %1?&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

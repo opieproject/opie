@@ -17,6 +17,10 @@
         <source>attach...</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Adding attachments</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditAccount</name>
@@ -166,6 +170,36 @@ associated to this mail
  it can not be downloaded</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;Unknown response from server&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;host not found&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;connection refused&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;socket packet error&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Login failed
+Check user name and password&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receiving error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK
+</source>
+        <translation type="unfinished">FOO</translation>
+    </message>
 </context>
 <context>
     <name>EmailHandler</name>
@@ -197,7 +231,7 @@ Mail has NOT been sent</source>
     </message>
     <message>
         <source>Examine mail</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Central view area</source>
@@ -212,6 +246,14 @@ Mail has NOT been sent</source>
 has not been downloaded yet.
  Would you like to do it now ?</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Mailit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read Mail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -243,6 +285,10 @@ has not been downloaded yet.
     <message>
         <source>No new messages</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>DNS lookup</source>
+        <translation type="unfinished">FOO</translation>
     </message>
 </context>
 <context>
@@ -276,7 +322,7 @@ reviewed by double clicking the entry.</source>
     </message>
     <message>
         <source>This button opens the address selector with all mail adresses from your OPIE addressbook</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Enter your mail text here</source>
@@ -293,6 +339,10 @@ reviewed by double clicking the entry.</source>
     <message>
         <source>This is an overview about all attachments in the mail</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>This button opens the address selector with all mail adresses from your Opie addressbook</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -417,6 +467,30 @@ Press and hold for more options.</source>
         <source>Click here to install the attachment to your Documents</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Exploring attatchments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attatchment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WriteMail</name>
@@ -526,6 +600,14 @@ and be valid emailaddresses</source>
 
 </source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EMail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

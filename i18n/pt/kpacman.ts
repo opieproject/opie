@@ -81,6 +81,10 @@ the last 10 years of her friendship.
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>KPacman</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>

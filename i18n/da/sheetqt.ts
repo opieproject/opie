@@ -709,10 +709,6 @@ http://qtopia.sitebest.com</source>
         <source>Entire &amp;column</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Sheets</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Sheet</name>

@@ -61,22 +61,22 @@ accurately to calibrate your screen.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OPIE was terminated
+        <source>Failure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not switch to new user identity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opie was terminated
 by an uncaught signal
 (%1)
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not start OPIE.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not switch to new user identity</source>
+        <source>Could not start Opie.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

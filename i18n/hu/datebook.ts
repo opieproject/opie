@@ -95,6 +95,10 @@ Mégis kilép?</translation>
         <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -190,6 +194,10 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -354,6 +362,14 @@ Mégis kilép?</translation>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>Jan 00.-Jan 00.</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -547,6 +563,13 @@ Mégis kilép?</translation>
     </message>
 </context>
 <context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
@@ -706,6 +729,10 @@ and </source>
     <message>
         <source>, and </source>
         <translation>, és</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

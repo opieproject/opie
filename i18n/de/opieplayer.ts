@@ -205,16 +205,6 @@ Der Player wird beendet.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Out of space</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>There was a problem saving the playlist.
-Your playlist may be missing some entries
-the next time you start it.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Invalid File</source>
         <translation type="unfinished"></translation>
     </message>

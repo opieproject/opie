@@ -96,13 +96,17 @@ Rad bi se zahvalil svoji punci Elke Krueers za
     </message>
     <message>
         <source>Configuration Error</source>
-        <translation>Napaka pri nastavitvah</translation>
+        <translation type="obsolete">Napaka pri nastavitvah</translation>
     </message>
     <message>
         <source>There are no schemes defined,
 or no scheme is selected.</source>
-        <translation>Nobena shema ni definirana
+        <translation type="obsolete">Nobena shema ni definirana
 ali pa ni nobena izbrana.</translation>
+    </message>
+    <message>
+        <source>KPacman</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -226,6 +230,10 @@ ali pa je v neznani obliki.</translation>
     <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@DD@.@MM@.@YY@</translation>
+    </message>
+    <message>
+        <source>                          </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

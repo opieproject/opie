@@ -399,6 +399,17 @@ modificando le categorie.</translation>
     </message>
 </context>
 <context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
@@ -467,7 +478,7 @@ riprovare.</translation>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>Sei sicuro di voler cancellare
+        <translation type="obsolete">Sei sicuro di voler cancellare
 %1?</translation>
     </message>
     <message>
@@ -797,6 +808,11 @@ riprovare.</translation>
     <message>
         <source>What&apos;s this...</source>
         <translation>Cos&apos;è...</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete
+ %1?&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -96,6 +96,10 @@ Quit anyway?</source>
         <source>Continue</source>
         <translation>Продолжи</translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -192,6 +196,10 @@ Quit anyway?</source>
     <message>
         <source>Beam</source>
         <translation>Испрати</translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -355,6 +363,14 @@ Quit anyway?</source>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. Јан-00. Јан</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -555,6 +571,13 @@ Quit anyway?</source>
     </message>
 </context>
 <context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
@@ -713,6 +736,10 @@ and </source>
     <message>
         <source>, and </source>
         <translation>, и</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

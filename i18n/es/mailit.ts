@@ -17,6 +17,10 @@
         <source>attach...</source>
         <translation>adjuntar...</translation>
     </message>
+    <message>
+        <source>Adding attachments</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditAccount</name>
@@ -169,6 +173,37 @@ associated to this mail
 asociada a este correo.
 No puede ser descargado</translation>
     </message>
+    <message>
+        <source>&lt;qt&gt;Unknown response from server&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;host not found&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;connection refused&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;socket packet error&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Login failed
+Check user name and password&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receiving error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK
+</source>
+        <translation type="unfinished">Ok
+</translation>
+    </message>
 </context>
 <context>
     <name>EmailHandler</name>
@@ -203,7 +238,7 @@ El correo NO ha sido enviado</translation>
     </message>
     <message>
         <source>Examine mail</source>
-        <translation>Eximinar correo</translation>
+        <translation type="obsolete">Eximinar correo</translation>
     </message>
     <message>
         <source>Central view area</source>
@@ -220,6 +255,14 @@ has not been downloaded yet.
         <translation>El correo que ha pinchado 
 no ha sido descargado todavía.
 ¿Desea hacerlo ahora?</translation>
+    </message>
+    <message>
+        <source>Mailit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read Mail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -252,6 +295,10 @@ no ha sido descargado todavía.
         <source>No new messages</source>
         <translation>No hay mensajes nuevos</translation>
     </message>
+    <message>
+        <source>DNS lookup</source>
+        <translation type="unfinished">Búscando en DNS</translation>
+    </message>
 </context>
 <context>
     <name>QWidget</name>
@@ -269,7 +316,7 @@ no ha sido descargado todavía.
     </message>
     <message>
         <source>This button opens the address selector with all mail adresses from your OPIE addressbook</source>
-        <translation>Este botón abre el selector de direcciones con todas las direcciones de correo de Contactos OPIE</translation>
+        <translation type="obsolete">Este botón abre el selector de direcciones con todas las direcciones de correo de Contactos OPIE</translation>
     </message>
     <message>
         <source>Enter your mail text here</source>
@@ -308,6 +355,10 @@ que puedan ser revisados con un doble clic.</translation>
     <message>
         <source>Choose the recipients from this list</source>
         <translation>Elija los destinatarios de esta lista</translation>
+    </message>
+    <message>
+        <source>This button opens the address selector with all mail adresses from your Opie addressbook</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -434,6 +485,30 @@ Mantángalo pulsado para más opciones.</translation>
         <source>Click here to install the attachment to your Documents</source>
         <translation>Pulsa aquí para instalar el adjunto en sus Documentos</translation>
     </message>
+    <message>
+        <source>Exploring attatchments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attatchment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WriteMail</name>
@@ -548,6 +623,14 @@ y ser direcciones de correo válidas</translation>
     <message>
         <source> wrote on </source>
         <translation> escrito en </translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EMail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

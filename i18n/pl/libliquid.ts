@@ -1,64 +1,71 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>Decoration</name>
+    <message>
+        <source>Liquid</source>
+        <translation type="obsolete">Liquid</translation>
+    </message>
+</context>
+<context>
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation>Styl Liquid</translation>
+        <translation type="unfinished">Styl Liquid</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation>Bez przezroczystosci</translation>
+        <translation type="unfinished">Bez przezroczystosci</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation>Pasiasty, kolor tla</translation>
+        <translation type="unfinished">Pasiasty, kolor tla</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation>Pasiasty, kolor przycisku</translation>
+        <translation type="unfinished">Pasiasty, kolor przycisku</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation>Przezroczysty pasiasty, kolor tla</translation>
+        <translation type="unfinished">Przezroczysty pasiasty, kolor tla</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation>Przezroczysty pasiasty, kolor przycisku</translation>
+        <translation type="unfinished">Przezroczysty pasiasty, kolor przycisku</translation>
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation>Ustawiona przezroczystosc</translation>
+        <translation type="unfinished">Ustawiona przezroczystosc</translation>
     </message>
     <message>
         <source>Menu color</source>
-        <translation>Kolor menu</translation>
+        <translation type="unfinished">Kolor menu</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation>Kolor tekstu</translation>
+        <translation type="unfinished">Kolor tekstu</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation>Nieprzezroczystosc</translation>
+        <translation type="unfinished">Nieprzezroczystosc</translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation>Uzywaj cieniowanego tekstu menu</translation>
+        <translation type="unfinished">Uzywaj cieniowanego tekstu menu</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation>Plaskie przyciski na pasku narzedzi</translation>
+        <translation type="unfinished">Plaskie przyciski na pasku narzedzi</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
-        <translation>Kontrast pasków</translation>
+        <translation type="unfinished">Kontrast pasków</translation>
     </message>
 </context>
 <context>
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation>Liquid</translation>
+        <translation type="unfinished">Liquid</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>

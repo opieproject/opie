@@ -26,7 +26,7 @@
 Changing parameters on this 
 page may cause your system 
 to stop functioning properly!!</source>
-        <translation>WARNUNG
+        <translation type="obsolete">WARNUNG
 Das Ändern von Parametern
 hier kann zu Funktionsstörungen
 des Systems führen.</translation>
@@ -53,7 +53,7 @@ des Systems führen.</translation>
     </message>
     <message>
         <source>Format?!?</source>
-        <translation>Formatieren ?!?</translation>
+        <translation type="obsolete">Formatieren ?!?</translation>
     </message>
     <message>
         <source>Really format
@@ -64,12 +64,12 @@ des Systems führen.</translation>
     <message>
         <source>
 with </source>
-        <translation>mit</translation>
+        <translation type="obsolete">mit</translation>
     </message>
     <message>
         <source> filesystem?!?
 You will loose all data!!</source>
-        <translation>Dateisystem ?!? Sie verlieren alle Daten !!</translation>
+        <translation type="obsolete">Dateisystem ?!? Sie verlieren alle Daten !!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -127,7 +127,7 @@ wurde erfolgreich formatiert.</translation>
     </message>
     <message>
         <source>Trying to mount.</source>
-        <translation>Versuche zu mounten.</translation>
+        <translation type="obsolete">Versuche zu mounten.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
@@ -136,7 +136,7 @@ wurde erfolgreich formatiert.</translation>
     <message>
         <source>
 has been successfully mounted.</source>
-        <translation>
+        <translation type="obsolete">
 wurde erfolgreich gemountet.</translation>
     </message>
     <message>
@@ -149,7 +149,7 @@ wurde erfolgreich gemountet.</translation>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation>Medientyp:</translation>
+        <translation type="obsolete">Medientyp:</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
@@ -164,6 +164,46 @@ wurde erfolgreich gemountet.</translation>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
         <translation>Verfügbar: %1 KB ( %d MB)</translation>
+    </message>
+    <message>
+        <source>CAUTION:
+Changing parameters on this
+page may cause your system
+to stop functioning properly!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+with %1 filesystem?
+You will loose all data!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to umount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to mount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1
+has been successfully mounted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Storage Type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type: %1
+Formatted with %2
+%3, %4, %5</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

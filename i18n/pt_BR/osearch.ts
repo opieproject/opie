@@ -6,26 +6,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>adressbook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>todo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>datebook</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>applications</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>documents</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -55,6 +35,26 @@
     </message>
     <message>
         <source>Enter your search terms here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Applications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contacts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

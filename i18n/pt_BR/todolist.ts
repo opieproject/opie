@@ -29,6 +29,10 @@
         <source>Recurrence</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Task Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -46,6 +50,10 @@
     </message>
     <message>
         <source>loud</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opie Todolist</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -433,15 +441,15 @@ It allows you to quickly add a new task to your list.  This area can be shown or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Notes:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Enter any additional information about this task here.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Todo List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Summary:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
