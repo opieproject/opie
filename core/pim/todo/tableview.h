@@ -50,6 +50,8 @@ namespace Todo {
         QString type()const;
         int current();
         QString currentRepresentation();
+        int next();
+        int prev();
 
         void clear();
         void showOverDue( bool );

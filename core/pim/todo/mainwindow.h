@@ -186,6 +186,8 @@ private slots:
         void slotBeam();
         void beamDone( Ir* );
         void slotShowDetails();
+        void slotShowNext();
+        void slotShowPrev();
         void slotShowDue( bool );
         void slotReturnFromView(); // for TodoShow...
         /* reimplementation from opimmainwindow */

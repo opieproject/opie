@@ -144,10 +144,23 @@ QString TableView::type() const {
     return QString::fromLatin1( tr("Table View") );
 }
 int TableView::current() {
-    if (numRows() == 0 ) return 1;
+    if (numRows() == 0 ) return 0;
     int uid = sorted().uidAt(currentRow() );
 
     return uid;
+}
+int TableView::next() {
+    if ( numRows() == 0 ) return 0;
+    if ( currentRow() + 1 >= numRows() ) return 0;
+    setCurrentCell( currentRow() +1, currentColumn()  );
+    return sorted().uidAt( currentRow() );
+}
+int TableView::prev() {
+    if ( numRows() == 0 ) return 0;
+    if ( currentRow() - 1 < 0 ) return 0;
+    setCurrentCell( currentRow() -1, currentColumn()  );
+    return sorted().uidAt( currentRow() );
+
 }
 QString TableView::currentRepresentation() {
     OTodo to = sorted()[currentRow()];
@@ -573,3 +586,4 @@ void TableView::keyPressEvent( QKeyEvent* event) {
         QTable::keyPressEvent( event );
     }
 }
+

@@ -468,6 +468,7 @@ void MainWindow::slotDelete() {
     raiseCurrentView();
 }
 void MainWindow::slotDelete(int uid ) {
+    if( uid == 0 ) return;
     if(m_syncing) {
 	QMessageBox::warning(this, QWidget::tr("Todo"),
 			     QWidget::tr("Can not edit data, currently syncing"));
@@ -657,12 +658,23 @@ void MainWindow::slotShowDue(bool ov) {
     raiseCurrentView();
 }
 void MainWindow::slotShow( int uid ) {
+    if ( uid == 0 ) return;
     qWarning("slotShow");
     currentShow()->slotShow( event( uid ) );
     m_stack->raiseWidget( currentShow()->widget() );
 }
+void MainWindow::slotShowNext() {
+    int l = currentView()->next();
+    if (l!=0)
+        slotShow(l);
+}
+void MainWindow::slotShowPrev() {
+    int l = currentView()->prev();
+    if (l!=0)
+        slotShow(l);
+}
 void MainWindow::slotEdit( int uid ) {
-    if (uid == 1 ) return;
+    if (uid == 0 ) return;
     if(m_syncing) {
 	QMessageBox::warning(this, QWidget::tr("Todo"),
 			     QWidget::tr("Can not edit data, currently syncing"));
@@ -819,6 +831,7 @@ bool MainWindow::remove( int uid ) {
     return m_todoMgr.remove( uid );
 }
 void MainWindow::beam( int uid) {
+    if( uid == 0 ) return;
     ::unlink( beamfile );
     OTodo todo = event( uid );
     OTodoAccessVCal* cal = new OTodoAccessVCal(QString::fromLatin1(beamfile) );
