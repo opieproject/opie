@@ -21,6 +21,11 @@ namespace OpieObex {
     QCopChannel *m_chan;
    private slots:
      void slotMessage( const QCString&, const QByteArray& );
+   void slotError(int );
+   void slotCurrentTry( unsigned int );
+   void slotDone(bool);
+   void slotReceivedFile(const QString & );
+   void slotSent();
   };
 };
 #endif
