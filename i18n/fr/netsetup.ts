@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>&lt;P&gt;These are the network services available to be added.</source>
-        <translation>&lt;p&gt;Voici les services réseau disponibles pour ajout.</translation>
+        <translation>&lt;p&gt;Voici les services réseau pouvant être ajoutés.</translation>
     </message>
     <message>
         <source>Add</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>&lt;p&gt;Only one %1 can be added. Remove the current one, or change its Properties</source>
-        <translation>&lt;p&gt;Seulement un %1 peut-être ajouté. Enlever le %1 courant ou changez ses propriétés</translation>
+        <translation>&lt;p&gt;Seulement un %1 peut-être ajouté. Enlevez le service actuel ou changez ses propriétés.</translation>
     </message>
     <message>
         <source>Network</source>

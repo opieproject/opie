@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Tabs w/icons</source>
-        <translation>Onglets avec icone</translation>
+        <translation>Onglets avec icônes</translation>
     </message>
     <message>
         <source>Drop down list</source>
@@ -52,7 +52,7 @@
     </message>
     <message>
         <source>Drop down list w/icons</source>
-        <translation>Liste déroulante avec icone</translation>
+        <translation>Liste déroulante avec icônes</translation>
     </message>
     <message>
         <source>Top</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation>Voulez-vous redémarrer %1 maintenant?</translation>
+        <translation>Voulez-vous redémarrer %1 maintenant ?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -104,7 +104,7 @@
     </message>
     <message>
         <source>Save scheme</source>
-        <translation>Sauver lthème</translation>
+        <translation>Sauver le thème</translation>
     </message>
     <message>
         <source>Scheme does already exist.</source>
@@ -142,21 +142,21 @@ Note: Cette option n&apos;est pas disponible pour tous les styles.</translation>
         <source>Window decorations control the way the application title bar and its buttons appear.
 
 Click here to select an available decoration.</source>
-        <translation>Les décorations de fenêtres control la manière dont les barres de titres et les bouttons des appilcations apparaissent.
+        <translation>Les décorations de fenêtres contrôlent la manière dont les barres de titres et les bouttons des applications apparaissent.
 
 Cliquer ici pour sélectionner une décoration disponible.</translation>
     </message>
     <message>
         <source>Select the desired name, style and size of the default font applications will use.</source>
-        <translation>Sélectionner le nom, le style et la taille désirés pour la police par défaut que les applications utiliseront:.</translation>
+        <translation>Sélectionner le nom, le style et la taille désirés pour la police par défaut que les applications utiliseront.</translation>
     </message>
     <message>
         <source>Color schemes are a collection of colors which are used for various parts of the display.
 
 Click here to select an available scheme.</source>
-        <translation>Les thèmes de couleurs sont une collection de couleurs qui sont utilisés à différents endroit de la fenêtre de l&apos;application.
+        <translation>Les thèmes de couleurs sont une collection de couleurs utilisés à différents endroits des fenêtres.
 
-Cliquer ici pour sélectionner un type disponible.</translation>
+Cliquer ici pour sélectionner un thème.</translation>
     </message>
     <message>
         <source>Click here to change the colors in the current color scheme.</source>
@@ -168,7 +168,7 @@ Cliquer ici pour sélectionner un type disponible.</translation>
     </message>
     <message>
         <source>Click here to name and save the current color scheme.</source>
-        <translation>Cliquer ici pour définir un nom et sauvegarder le thème de couleu rcourant.</translation>
+        <translation>Cliquer ici pour définir un nom et sauvegarder le thème de couleur actuel.</translation>
     </message>
     <message>
         <source>Click here to allow all applications to use global appearance settings.</source>
@@ -178,7 +178,7 @@ Cliquer ici pour sélectionner un type disponible.</translation>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
 
 This area allows you to select an application and which settings you wish to disable.</source>
-        <translation>Si quelques applications ne peuvent afficher correctement les préférence globales d&apos;apparence, certaines fonctionnalité peuvent-être désactivées.
+        <translation>Si quelques applications ne peuvent afficher correctement les préférence globales d&apos;apparence, certaines fonctionnalité peuvent être désactivées.
 
 Cette partie vous permet de selectionner une application et quelle préférence vous souhaitez désactiver.</translation>
     </message>
@@ -222,15 +222,11 @@ Cette partie vous permet de selectionner une application et quelle préférence 
     </message>
     <message>
         <source>This is a preview window.  Look here to see your new appearance as options are changed.</source>
-        <translation>ceci est un aperçu de la fenêtre. Regarder ici pour voir les changement apporté.</translation>
+        <translation>Ceci est un aperçu de la fenêtre. Regardez ici pour voir les changements apportés.</translation>
     </message>
     <message>
         <source>Appearance Settings</source>
         <translation>Préference d&apos;Apparence</translation>
-    </message>
-    <message>
-        <source>Rotation direction:</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -280,7 +276,7 @@ Cette partie vous permet de selectionner une application et quelle préférence 
     </message>
     <message>
         <source>Sample window using the selected settings.</source>
-        <translation>Example de fenêtre utilisant les préférences sélectionnées.</translation>
+        <translation>Exemple de fenêtre utilisant les préférences sélectionnées.</translation>
     </message>
 </context>
 </TS>

@@ -4,19 +4,19 @@
     <name>VolumeControl</name>
     <message>
         <source>Enable Sounds for:</source>
-        <translation>Authoriser le sond pour:</translation>
+        <translation>Autoriser le son pour :</translation>
     </message>
     <message>
         <source>Alarm Sound</source>
-        <translation>Son de l&apos;alarme</translation>
+        <translation>Alarme</translation>
     </message>
     <message>
         <source>Key Clicks</source>
-        <translation type="unfinished"></translation>
+        <translation>Clic des touches</translation>
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation type="unfinished"></translation>
+        <translation>Stylet sur écran</translation>
     </message>
 </context>
 </TS>

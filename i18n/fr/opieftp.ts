@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Local</source>
-        <translation>local</translation>
+        <translation>Local</translation>
     </message>
     <message>
         <source>Remote</source>
@@ -24,15 +24,15 @@
     </message>
     <message>
         <source>New</source>
-        <translation>Nouveau</translation>
+        <translation>Nouvelle</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation>Connect</translation>
+        <translation>Se connecter</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation>Déconnecte</translation>
+        <translation>Se déconnecter</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Rename</source>
-        <translation>Renomer</translation>
+        <translation>Renommer</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -60,15 +60,15 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Passer au répertoire local</translation>
+        <translation>Aller au répertoire local</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Passer au répertoire distant</translation>
+        <translation>Aller au répertoire distant</translation>
     </message>
     <message>
         <source>Switch to Config</source>
-        <translation>Paser à la config</translation>
+        <translation>Aller à la configuration</translation>
     </message>
     <message>
         <source>File</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Config</source>
-        <translation>Config</translation>
+        <translation>Configuration</translation>
     </message>
     <message>
         <source>Ftp</source>
@@ -233,7 +233,7 @@ Il doit être vide</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="obsolete">A propos</translation>
+        <translation>A propos</translation>
     </message>
     <message>
         <source>Rescan</source>
@@ -241,11 +241,11 @@ Il doit être vide</translation>
     </message>
     <message>
         <source>New Server name</source>
-        <translation>nouveau de nom de serveur</translation>
+        <translation>nouveau nom de serveur</translation>
     </message>
     <message>
         <source>Sorry name already taken</source>
-        <translation>Désolé, nom déjà utiliser</translation>
+        <translation>Désolé, nom déjà utilisé</translation>
     </message>
 </context>
 </TS>

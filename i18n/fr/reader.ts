@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>On Action...</source>
-        <translation type="unfinished"></translation>
+        <translation>Si activé ...</translation>
     </message>
     <message>
         <source>Open File</source>
@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Autoscroll</source>
-        <translation>&quot;Scroller&quot; automatiquement</translation>
+        <translation>Défilement automatique</translation>
     </message>
     <message>
         <source>Mark</source>
@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>Scroll</source>
-        <translation>Scroll</translation>
+        <translation>Défilement</translation>
     </message>
     <message>
         <source>Jump</source>
@@ -48,79 +48,79 @@
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Faire défiler page/ligne</translation>
     </message>
     <message>
         <source>Set Overlap</source>
-        <translation type="unfinished"></translation>
+        <translation>Recouvrement</translation>
     </message>
     <message>
         <source>Use Cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser le curseur</translation>
     </message>
     <message>
         <source>Set Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Définir le dictionnaire</translation>
     </message>
     <message>
         <source>Two/One Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Deux/Une touche(s)</translation>
     </message>
     <message>
         <source>Target</source>
-        <translation type="unfinished"></translation>
+        <translation>Cible</translation>
     </message>
     <message>
         <source>Annotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Annotation</translation>
     </message>
     <message>
         <source>Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Dictionnaire</translation>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Presse-papiers</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Monter</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Descendre</translation>
     </message>
     <message>
         <source>Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>Chercher ...</translation>
     </message>
     <message>
         <source>Continuous</source>
-        <translation type="unfinished"></translation>
+        <translation>En continue</translation>
     </message>
     <message>
         <source>Markup</source>
-        <translation type="unfinished"></translation>
+        <translation>Marques</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <source>HTML</source>
-        <translation type="unfinished"></translation>
+        <translation>HTML</translation>
     </message>
     <message>
         <source>Peanut/PML</source>
-        <translation type="unfinished"></translation>
+        <translation>Peanut/PML</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -172,75 +172,75 @@
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Agrandir</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Réduire</translation>
     </message>
     <message>
         <source>Ideogram/Word</source>
-        <translation type="unfinished"></translation>
+        <translation>Idéogrammes/Mots</translation>
     </message>
     <message>
         <source>Set width</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixer largeur</translation>
     </message>
     <message>
         <source>Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Encodage</translation>
     </message>
     <message>
         <source>Ascii</source>
-        <translation type="unfinished"></translation>
+        <translation>Ascii</translation>
     </message>
     <message>
         <source>UTF-8</source>
-        <translation type="unfinished"></translation>
+        <translation>UTF-8</translation>
     </message>
     <message>
         <source>UCS-2(BE)</source>
-        <translation type="unfinished"></translation>
+        <translation>UCS-2(BE)</translation>
     </message>
     <message>
         <source>USC-2(LE)</source>
-        <translation type="unfinished"></translation>
+        <translation>USC-2(LE)</translation>
     </message>
     <message>
         <source>Palm</source>
-        <translation type="unfinished"></translation>
+        <translation>Palm</translation>
     </message>
     <message>
         <source>Windows(1252)</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows(1252)</translation>
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir la police</translation>
     </message>
     <message>
         <source>Annotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Annoter</translation>
     </message>
     <message>
         <source>Goto</source>
-        <translation type="unfinished"></translation>
+        <translation>Aller à</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Création auto.</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer</translation>
     </message>
     <message>
         <source>Tidy</source>
@@ -248,31 +248,31 @@
     </message>
     <message>
         <source>Start Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Début bloc</translation>
     </message>
     <message>
         <source>Copy Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier bloc</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format</translation>
     </message>
     <message>
         <source>Marks</source>
-        <translation type="unfinished"></translation>
+        <translation>Marques</translation>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Trouver suivant</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Clore la recherche</translation>
     </message>
     <message>
         <source>Do Reg</source>
@@ -280,14 +280,14 @@
     </message>
     <message>
         <source>Close Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer l&apos;édition</translation>
     </message>
 </context>
 <context>
     <name>fileBrowser</name>
     <message>
         <source>Browse for file</source>
-        <translation type="unfinished"></translation>
+        <translation>Parcourir</translation>
     </message>
     <message>
         <source>/</source>

@@ -22,7 +22,7 @@
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation>Visualisateur d&apos;image</translation>
+        <translation>Visualiseur d&apos;images</translation>
     </message>
     <message>
         <source>Horizontal flip</source>
@@ -38,11 +38,11 @@
     </message>
     <message>
         <source>Rotate 180</source>
-        <translation>Rotation 180</translation>
+        <translation>Rotation 180°</translation>
     </message>
     <message>
         <source>Rotate 90</source>
-        <translation>Rotation 90</translation>
+        <translation>Rotation 90°</translation>
     </message>
     <message>
         <source>Fullscreen</source>
@@ -50,7 +50,7 @@
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation>- Visualisateur d&apos;image</translation>
+        <translation>- Visualiseur d&apos;images</translation>
     </message>
     <message>
         <source> True color</source>
@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation>Vue en vignette</translation>
+        <translation>Vignettes</translation>
     </message>
     <message>
         <source>Preferences..</source>
@@ -78,7 +78,7 @@
     </message>
     <message>
         <source>Rotate 270</source>
-        <translation>Rotation 270</translation>
+        <translation>Rotation 270°</translation>
     </message>
     <message>
         <source>Brightness ...</source>
@@ -141,11 +141,11 @@
     </message>
     <message>
         <source>Repeat slideshow</source>
-        <translation>Revoir le diaporama</translation>
+        <translation>Diaporama en boucle</translation>
     </message>
     <message>
         <source>Show pictures in reverse</source>
-        <translation>Montrer les images en sens inverse</translation>
+        <translation>Montrer les images en ordre inverse</translation>
     </message>
     <message>
         <source>Load pictures rotated 90 degrees</source>
@@ -153,7 +153,7 @@
     </message>
     <message>
         <source>Fast load pictures</source>
-        <translation>chargement rapide des images</translation>
+        <translation>Chargement rapide des images</translation>
     </message>
 </context>
 </TS>
