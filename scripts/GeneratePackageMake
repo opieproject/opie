@@ -138,7 +138,7 @@ do
 #
 
 package-${Pkg} : \$(OPIEDIR)/Packages/$Pkg
-package-${Pkg}-mt : \$(OPIEDIR)/Packages/$Pkg-mt
+package-${Pkg}-mt : \$(ATP) \$(OPIEDIR)/Packages/$Pkg-mt
 
 # collect control files and package targets
 
