@@ -1,4 +1,4 @@
   config TODAY_WEATHER
     boolean "opie-today-weatherplugin (current weather report)"
     default "y"
-    depends (LIBQPE || LIBQPE-X11) && LIBOPIE2CORE && LIBOPIE2PIM
+    depends (LIBQPE || LIBQPE-X11) && LIBOPIE2CORE && LIBOPIE2PIM && TODAY
