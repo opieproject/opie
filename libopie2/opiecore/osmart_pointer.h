@@ -91,10 +91,10 @@ public:
     //! construction
     osmart_pointer(T* t) { if (ptr = t) ptr->Incr(); }
     //! Pointer copy
-    osmart_pointer(const smart_pointer<T>& p) 
+    osmart_pointer(const osmart_pointer<T>& p) 
     { if (ptr = p.ptr) ptr->Incr(); }
     //! pointer copy by assignment
-    osmart_pointer<T>& operator= (const smart_pointer<T>& p) 
+    osmart_pointer<T>& operator= (const osmart_pointer<T>& p) 
     {
         // already same: nothing to do
         if (ptr == p.ptr) return *this;
