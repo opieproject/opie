@@ -173,7 +173,7 @@ void WLANImp::changeAndSaveSettingFile(){
 	  stream << " open";
 	else
 	  stream << " restricted";
-	stream << "\n\"";
+	stream << "\"\n";
       }
       stream << "\tCHANNEL=" << networkChannel->value() << "\n";
       stream << "\tRATE=auto\n";
@@ -182,7 +182,7 @@ void WLANImp::changeAndSaveSettingFile(){
     }
     if(line.contains(";;"))
       output = true;
-    if(output)
+    if(output && (*it).length() )
       stream << (*it) << '\n';
   }
   file.close();
@@ -208,8 +208,6 @@ void WLANImp::accept(){
   if(!interfaceSetup->saveChanges())
     return;
  
-  QDialog::accept();
-  return;
   // Restart the device now that the settings have changed
   QString initpath;
   if( QDir("/etc/rc.d/init.d").exists() )
