@@ -23,7 +23,7 @@ AttachItem::AttachItem(QListViewItem *parent, AttachItemStore &attachItemStore)
 	setText(2, _attachItemStore.description());
 }
 
-void ViewMail::setMailInfo( const QString & from, const QStringList & to, const QString & subject, const QStringList & cc, const QStringList & bcc, const QString & date, const QString & bodytext ) {
+void ViewMail::setMailInfo( const QString & from, const QStringList & to, const QString & subject, const QStringList & cc, const QStringList & bcc, const QString & date, const QString & bodytext, const QString & messageID ) {
 
 m_mail[0] = from;
 m_mail2[0] = to;
@@ -32,9 +32,9 @@ m_mail2[1] = cc;
 m_mail2[2] = bcc;
 m_mail[2] = bodytext;
 m_mail[3] = date;
+m_mail[4] = messageID;
 
 setText();
-
 }
 
 

@@ -157,7 +157,7 @@ void MainWindow::displayMail(QListViewItem*item)
 
     ViewMail readMail( this );
 
-    readMail.setMailInfo( mail.getFrom(), mail.To(), mail.getSubject(), mail.CC(), mail.Bcc(), mail.getDate(),  body.Bodytext() );
+    readMail.setMailInfo( mail.getFrom(), mail.To(), mail.getSubject(), mail.CC(), mail.Bcc(), mail.getDate(),  body.Bodytext(), mail.Msgid() );
     readMail.showMaximized();
     readMail.exec();
 }

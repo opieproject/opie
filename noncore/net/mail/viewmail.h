@@ -50,7 +50,7 @@ public:
 	void hide();
 	void exec();
     static QString appName() { return QString::fromLatin1("mail"); }
-        void setMailInfo( const QString & from, const QStringList & to, const QString & subject, const QStringList & cc, const QStringList & bcc,const QString & date, const QString & bodytext );
+        void setMailInfo( const QString & from, const QStringList & to, const QString & subject, const QStringList & cc, const QStringList & bcc,const QString & date, const QString & bodytext, const QString & messageID );
 
 protected:
 //	void fillList(IMAPResponseBODYSTRUCTURE &structure);
