@@ -94,6 +94,7 @@ CONFIG_MINESWEEP	noncore/games/minesweep	minesweep.pro
 CONFIG_MOBILEMSG	noncore/comm/mobilemsg	mobilemsg.pro
 CONFIG_MODPLUG	core/multimedia/opieplayer/modplug	modplug.pro
 CONFIG_MULTIKEY	inputmethods/multikey	multikey.pro
+CONFIG_MULTIKEYAPPLET core/applets/multikeyapplet	multikeyapplet.pro
 CONFIG_NETSYSTEMTIME	noncore/settings/netsystemtime	netsystemtime.pro
 CONFIG_NETWORKAPPLET	noncore/applets/networkapplet	networkapplet.pro
 CONFIG_NETWORKSETUP	noncore/settings/networksettings	networksettings.pro
