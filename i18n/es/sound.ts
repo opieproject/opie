@@ -135,23 +135,23 @@
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasa muestreo:</translation>
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Carpeta grabación:</translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tecla grabación:</translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation type="unfinished"></translation>
+        <translation>Límite grabación en segundos:</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin límite</translation>
     </message>
 </context>
 </TS>

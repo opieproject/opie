@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>Search</source>
-        <translation>Búaqueda</translation>
+        <translation>Búsqueda</translation>
     </message>
     <message>
         <source>Destination: </source>
@@ -182,15 +182,15 @@
     </message>
     <message>
         <source>ipkgfind&amp;killefiz</source>
-        <translation type="unfinished"></translation>
+        <translation>ipkgfind&amp;killefiz</translation>
     </message>
     <message>
         <source>Section:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sección:</translation>
     </message>
     <message>
         <source>Search: </source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar: </translation>
     </message>
 </context>
 <context>

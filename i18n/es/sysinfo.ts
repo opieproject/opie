@@ -41,26 +41,26 @@
     <name>ModulesDetail</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Enviar</translation>
+        <translation>Enviar</translation>
     </message>
 </context>
 <context>
     <name>ModulesInfo</name>
     <message>
         <source>Module</source>
-        <translation type="unfinished"></translation>
+        <translation>Módulo</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Use#</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa#</translation>
     </message>
     <message>
         <source>Used By</source>
-        <translation type="unfinished"></translation>
+        <translation>Usado por</translation>
     </message>
 </context>
 <context>
@@ -147,7 +147,7 @@
     </message>
     <message>
         <source>Modules</source>
-        <translation type="unfinished"></translation>
+        <translation>Módulos</translation>
     </message>
 </context>
 <context>

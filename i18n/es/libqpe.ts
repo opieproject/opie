@@ -219,7 +219,7 @@ editando categorías.</translation>
     </message>
     <message>
         <source>File does not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>El fichero no existe.</translation>
     </message>
 </context>
 <context>
@@ -720,7 +720,7 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Ram FS</source>
-        <translation type="unfinished"></translation>
+        <translation>Ram FS</translation>
     </message>
 </context>
 <context>

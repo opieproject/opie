@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Teeclub</source>
-        <translation type="unfinished"></translation>
+        <translation>Club de té</translation>
     </message>
 </context>
 </TS>

@@ -222,7 +222,7 @@ de nuevo.
     </message>
     <message>
         <source>all tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>todas las tareas</translation>
     </message>
 </context>
 </TS>

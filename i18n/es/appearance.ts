@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar...</translation>
     </message>
 </context>
 <context>

@@ -23,19 +23,19 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Icono:</translation>
     </message>
     <message>
         <source>Exec:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ejecutar:</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Comentario:</translation>
     </message>
 </context>
 <context>
@@ -88,11 +88,11 @@ aún en el grupo.</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished"></translation>
+        <translation>Recolectando iconos...</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished">Aplicación</translation>
+        <translation>Aplicación</translation>
     </message>
 </context>
 <context>
@@ -111,18 +111,18 @@ aún en el grupo.</translation>
     </message>
     <message>
         <source>Tab Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestor Fichas</translation>
     </message>
     <message>
         <source>Hierarchy</source>
-        <translation type="unfinished"></translation>
+        <translation>Jerarquía</translation>
     </message>
 </context>
 <context>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Espere, por favor...</translation>
     </message>
 </context>
 </TS>

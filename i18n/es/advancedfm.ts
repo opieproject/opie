@@ -166,19 +166,20 @@
     <message>
         <source> already exists
 Do you really want to delete it?</source>
-        <translation type="unfinished"></translation>
+        <translation>ya existe
+¿seguro que quiere borrarlo?</translation>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished"></translation>
+        <translation>Como</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar misma carpeta</translation>
     </message>
 </context>
 <context>

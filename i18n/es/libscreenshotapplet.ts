@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>scap</source>
-        <translation type="unfinished"></translation>
+        <translation>scap</translation>
     </message>
     <message>
         <source>Name of screenshot </source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del pantallazo</translation>
     </message>
 </context>
 </TS>
