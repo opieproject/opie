@@ -55,6 +55,10 @@ void TableView::initConfig() {
     Config config( "todo" );
     config.setGroup( "Options" );
     m_completeStrokeWidth = config.readNumEntry( "CompleteStrokeWidth", 8 );
+    for (int i = 0; i < numCols(); i++ ) {
+        int width = config.readNumEntry("Width"+QString::number(i), -1 );
+        setColumnWidth(i, width == -1 ? columnWidth(i) : width );
+    }
 }
 
 TableView::TableView( MainWindow* window, QWidget* wid )
@@ -103,6 +107,10 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     connect( m_menuTimer, SIGNAL(timeout()),
              this, SLOT(slotShowMenu()) );
 
+    /* now let's init the config */
+    initConfig();
+
+
     m_enablePaint = true;
     setUpdatesEnabled( true );
     viewport()->setUpdatesEnabled( true );
@@ -111,8 +119,7 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     setAscending( TRUE );
     m_first = true;
 
-    /* now let's init the config */
-    initConfig();
+
 }
 /* a new day has started
  * update the day
@@ -122,7 +129,10 @@ void TableView::newDay() {
     updateView();
 }
 TableView::~TableView() {
-
+    Config config( "todo" );
+    config.setGroup( "Options" );
+    for (int i = 0; i < numCols(); i++ )
+        config.writeEntry("Width"+QString::number(i), columnWidth(i) );
 }
 void TableView::slotShowMenu() {
     QPopupMenu *menu = todoWindow()->contextMenu( current(), sorted()[currentRow()].recurrence().doesRecur() );
