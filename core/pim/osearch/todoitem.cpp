@@ -13,12 +13,13 @@
 #include "todoitem.h"
 
 #include <opie/otodo.h>
+#include <qpe/qcopenvelope_qws.h>
 
 TodoItem::TodoItem(OListViewItem* parent, OTodo *todo)
 : ResultItem(parent)
 {
 	_todo = todo;
-	setText( 0, todo->summary() );
+	setText( 0, todo->toShortText() );
 }
 
 
@@ -38,3 +39,16 @@ QString TodoItem::toRichText()
 	return _todo->toRichText();
 }
 
+void TodoItem::showItem()
+{
+//	QCopEnvelope e("QPE/Todolist", "show(int)");
+	qDebug("calling todolist for %i",_todo->uid());
+	QCopEnvelope e("QPE/Todolist", "show(int)");
+	e << _todo->uid();
+}
+
+void TodoItem::editItem()
+{
+	QCopEnvelope e("QPE/Todolist", "edit(int)");
+	e << _todo->uid();
+}

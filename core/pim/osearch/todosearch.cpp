@@ -35,18 +35,28 @@ TodoSearch::~TodoSearch()
 void TodoSearch::expand()
 {
 	SearchGroup::expand();
- 	if (!_todos){
+	if (_search.isEmpty()) return;
+
+	if (!_todos){
 	 _todos = new OTodoAccess();
 	 _todos->load();
 	 }
+
+	ORecordList<OTodo> results = _todos->matchRegexp(_search);
+	for (uint i = 0; i < results.count(); i++) {
+		new TodoItem( this, new OTodo( results[i] ));
+	}
+/*
 	ORecordList<OTodo> list = _todos->allRecords();
        QArray<int> m_currentQuery( list.count() );
        for( uint i=0; i<list.count(); i++ ){
+     //  	qDebug("todo: %s",list[i].summary().latin1() );
                  if ( list[i].match( _search ) ){
+	//	 	qDebug("FOUND");
 			new TodoItem( this, new OTodo( list[i] ) );
                  }
 
-        }
+        }*/
 
 }
 

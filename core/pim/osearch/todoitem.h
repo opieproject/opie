@@ -26,8 +26,9 @@ public:
     ~TodoItem();
 
     virtual void expand();
-    //virtual int rtti() { return Result;}
     virtual QString toRichText();
+    virtual void showItem();
+    virtual void editItem();
 
 private:
     OTodo *_todo;

@@ -19,7 +19,7 @@ EventItem::EventItem(OListViewItem* parent, OEvent *event)
  : ResultItem(parent)
 {
 	_event = event;
-	setText(0, _event->description() );
+	setText(0, _event->toShortText() );
 }
 
 

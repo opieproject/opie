@@ -37,10 +37,6 @@ void AdressSearch::expand()
  	if (!_contacts) _contacts = new OContactAccess("osearch");
 	ORecordList<OContact> results = _contacts->matchRegexp(_search);
 	for (uint i = 0; i < results.count(); i++) {
-//		qDebug("i=%i",i);
-//		OContact rec = results[i];
-//		qDebug("fullname %s",rec.fullName().latin1());
-//((		new OListViewItem( this, rec.fullName() );
 		new ContactItem( this, new OContact( results[i] ));
 	}
 }

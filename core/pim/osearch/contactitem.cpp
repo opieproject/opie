@@ -18,7 +18,7 @@ ContactItem::ContactItem(OListViewItem* parent, OContact *contact)
 : ResultItem(parent)
 {
 	_contact = contact;
-	setText(0, _contact->fullName());
+	setText(0, _contact->toShortText());
 }
 
 

@@ -13,7 +13,7 @@
 #ifndef TODOSEARCH_H
 #define TODOSEARCH_H
 
-#include "filesearch.h"
+#include "searchgroup.h"
 
 class OTodoAccess;
 
