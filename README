@@ -31,6 +31,8 @@ and then do:
 export LD_LIBRARY_PATH=$OPIEDIR/lib:$QTDIR/lib:$LD_LIBRARY_PATH
 
 You will want to apply the patches in the $OPIEDIR/qt directory to qt-embedded-2.3.7
+*NOTE* You can skip the qte234-for-opie091-simpad.patch
+patch, unless you are compiling for simpad. 
 
 qte234-for-opie091-gfxraster.patch
 qte234-for-opie091-listview.patch
@@ -46,11 +48,6 @@ cd $QTDIR; cat $OPIEDIR/qt/qte234*.patch | patch -p0
 OR just apply the one
 cd $QTDIR; cat $OPIEDIR/qt/qte237-all.patch | patch -p0
 
-
-*NOTE* You can skip the qte234-for-opie091-simpad.patch
-patch, unless you are compiling for simpad. 
-
-cd $QTDIR; cat $OPIEDIR/qt/qte234*.patch | patch -p0
 
 
 Now Qt Embedded is patched and ready to go! You are ready to configure and make qt embedded.
