@@ -42,7 +42,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
 
   connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));  
   // Load connections.
-  loadModules(QPEApplication::qpeDir() + "/plugins/networksetup");
+  loadModules(QPEApplication::qpeDir() + "/plugins/networksettings");
   getAllInterfaces();
   
   Interfaces i;
