@@ -4,7 +4,7 @@ DESTDIR      = $(OPIEDIR)/bin
 HEADERS      = launchersettings.h \
                tabssettings.h \
                taskbarsettings.h \
-               guisettings.h \
+               menusettings.h \
                tabconfig.h \
                tabdialog.h
 
@@ -12,7 +12,7 @@ SOURCES      = main.cpp \
                launchersettings.cpp \
                tabssettings.cpp \
                taskbarsettings.cpp \
-               guisettings.cpp \
+               menusettings.cpp \
                tabdialog.cpp
 
 INCLUDEPATH += $(OPIEDIR)/include

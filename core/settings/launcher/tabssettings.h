@@ -33,6 +33,8 @@
 #include "tabconfig.h"
 
 class QListBox;
+class QCheckBox;
+class Config;
 
 
 class TabsSettings : public QWidget {
@@ -50,13 +52,14 @@ protected slots:
 
 protected:
 	void init ( );
-	void readTabSettings ( );
+	void readTabSettings ( Config & );
 
 private:
 	QListBox *m_list;
 //	QString currentTab;
 	QStringList m_ids;
 	QMap <QString, TabConfig> m_tabs;
+	QCheckBox *m_busyblink;
 };
 
 

@@ -52,7 +52,7 @@ TaskbarSettings::TaskbarSettings ( QWidget *parent, const char *name )
 
 	QBoxLayout *lay = new QVBoxLayout ( this, 4, 4 );
 
-	QLabel *l = new QLabel ( tr( "Load applets:" ), this );
+	QLabel *l = new QLabel ( tr( "Load applets in Taskbar:" ), this );
 	lay-> addWidget ( l );
 
 	m_list = new QListView ( this );
@@ -84,37 +84,45 @@ void TaskbarSettings::init ( )
 
 		QLibrary *lib = new QLibrary ( path + "/" + *it );
 		lib-> queryInterface ( IID_TaskbarNamedApplet, (QUnknownInterface**) &iface );
-                if ( iface ) {
-
-                    QString lang = getenv( "LANG" );
-                    QTranslator *trans = new QTranslator ( qApp );
-                    QString type = (*it). left ((*it). find ("."));
-                    QString tfn = QPEApplication::qpeDir ( ) + "/i18n/" + lang + "/" + type + ".qm";
-                    if ( trans-> load ( tfn ))
-                        qApp-> installTranslator ( trans );
-		    else
-                        delete trans;
-                    name = iface-> name ( );
-                    icon = iface-> icon ( );
+		if ( iface ) {
+			QString lang = getenv( "LANG" );
+			QTranslator *trans = new QTranslator ( qApp );
+			QString type = (*it). left ((*it). find ("."));
+			QString tfn = QPEApplication::qpeDir ( ) + "/i18n/" + lang + "/" + type + ".qm";
+			if ( trans-> load ( tfn ))
+				qApp-> installTranslator ( trans );
+			else
+				delete trans;
+			name = iface-> name ( );
+			icon = iface-> icon ( );
 			iface-> release ( );
-			lib-> unload ( );
-		} else {
-			delete lib;
-			name = (*it). mid ( 3 );
-			int sep = name. find( ".so" );
-			if ( sep > 0 )
-                            name. truncate ( sep );
-			sep = name. find ( "applet" );
-			if ( sep == (int) name.length ( ) - 6 )
-				name. truncate ( sep );
-			name[0] = name[0]. upper ( );
 		}
-		QCheckListItem *item;
-		item = new QCheckListItem ( m_list, name, QCheckListItem::CheckBox );
-		if ( !icon. isNull ( ))
-			item-> setPixmap ( 0, icon );
-		item-> setOn ( exclude. find ( *it ) == exclude. end ( ));
-		m_applets [*it] = item;
+		if ( !iface ) {
+			lib-> queryInterface ( IID_TaskbarApplet, (QUnknownInterface**) &iface );
+			
+			if ( iface ) {
+				name = (*it). mid ( 3 );
+				int sep = name. find( ".so" );
+				if ( sep > 0 )
+					name. truncate ( sep );
+				sep = name. find ( "applet" );
+				if ( sep == (int) name.length ( ) - 6 )
+					name. truncate ( sep );
+				name[0] = name[0]. upper ( );
+				iface-> release ( );			
+			}					
+		}
+		
+		if ( iface ) {
+			QCheckListItem *item;
+			item = new QCheckListItem ( m_list, name, QCheckListItem::CheckBox );
+			if ( !icon. isNull ( ))
+				item-> setPixmap ( 0, icon );
+			item-> setOn ( exclude. find ( *it ) == exclude. end ( ));
+			m_applets [*it] = item;
+		}
+		lib-> unload ( );
+		delete lib;
 	}
 }
 

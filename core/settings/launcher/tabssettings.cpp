@@ -39,6 +39,7 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>
+#include <qcheckbox.h>
 
 #include "tabdialog.h"
 
@@ -75,6 +76,9 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 
 	lay-> setRowStretch ( 4, 10 );
 
+	m_busyblink = new QCheckBox ( tr( "Enable blinking busy indicator" ), this );
+	lay-> addMultiCellWidget ( m_busyblink, 5, 5, 0, 1 );       
+
 	init ( );
 }
 
@@ -93,12 +97,16 @@ void TabsSettings::init ( )
 	m_list-> insertItem ( pix, tr( "Documents" ));
 	m_ids += "Documents"; // No tr
 
-	readTabSettings ( );
+	Config cfg ( "Launcher" );
+
+	readTabSettings ( cfg );
+	
+	cfg. setGroup ( "GUI" );
+	m_busyblink-> setChecked ( cfg. readEntry ( "BusyType" ). lower ( ) == "blink" );
 }
 
-void TabsSettings::readTabSettings ( )
+void TabsSettings::readTabSettings ( Config &cfg )
 {
-	Config cfg ( "Launcher" );
 	QString grp ( "Tab %1" ); // No tr
 	m_tabs. clear ( );
 
@@ -197,6 +205,14 @@ void TabsSettings::accept ( )
 		fe << tc. m_font_weight << ( tc. m_font_italic ? 1 : 0 );
 
 		tc. m_changed = false;
+	}
+	cfg. setGroup ( "GUI" );    
+	QString busytype = QString ( m_busyblink-> isChecked ( ) ? "blink" : "" );
+
+	cfg. writeEntry ( "BusyType", busytype );
+	{
+		QCopEnvelope e ( "QPE/Launcher", "setBusyIndicatorType(QString)" );
+		e << busytype;
 	}
 }
 

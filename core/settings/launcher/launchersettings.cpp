@@ -26,13 +26,14 @@
 */
 
 #include <qlayout.h>
+#include <qapplication.h>
 
 #include <opie/otabwidget.h>
 
 #include "launchersettings.h"
 #include "tabssettings.h"
+#include "menusettings.h"
 #include "taskbarsettings.h"
-#include "guisettings.h"
 
 
 LauncherSettings::LauncherSettings ( ) : QDialog ( 0, "LauncherSettings", false )
@@ -46,11 +47,11 @@ LauncherSettings::LauncherSettings ( ) : QDialog ( 0, "LauncherSettings", false 
 
 	m_tabs = new TabsSettings ( tw );
 	m_taskbar = new TaskbarSettings ( tw );
-	m_gui = new GuiSettings ( tw );
+	m_menu = new MenuSettings ( tw );
 
 	tw-> addTab ( m_taskbar, "launchersettings/taskbartab.png", tr( "Taskbar" ));
+	tw-> addTab ( m_menu, "launchersettings/menutab.png", tr( "O-Menu" ));
 	tw-> addTab ( m_tabs, "launchersettings/tabstab.png", tr( "Tabs" ));
-	tw-> addTab ( m_gui, "launchersettings/guitab.png", tr( "GUI" ));
 	
 	tw-> setCurrentTab ( m_taskbar );
 }
@@ -58,8 +59,8 @@ LauncherSettings::LauncherSettings ( ) : QDialog ( 0, "LauncherSettings", false 
 void LauncherSettings::accept ( )
 {
 	m_taskbar-> accept ( );
+	m_menu-> accept ( );
 	m_tabs-> accept ( );
-	m_gui-> accept ( );
 
 	QDialog::accept ( );
 }
