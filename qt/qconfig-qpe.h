@@ -89,7 +89,7 @@
 //#define QT_NO_PROGRESSBAR
 #define QT_NO_SPLITTER
 
-#define QT_NO_QWS_SAVEFONTS
+//#define QT_NO_QWS_SAVEFONTS
 //#define QT_NO_QWS_PROPERTIES
 
 #define QT_NO_QWS_BEOS_WM_STYLE
