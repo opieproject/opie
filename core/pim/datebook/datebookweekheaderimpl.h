@@ -36,7 +36,7 @@ public:
 	void setStartOfWeek( bool onMonday );
 
 signals:
-	void dateChanged( int y, int w );
+	void dateChanged( QDate &date );
 
 public slots:
 	void pickDate();
@@ -53,7 +53,5 @@ private:
 	QDate date;
 	bool bStartOnMonday;
 };
-
-QDate dateFromWeek( int week, int year, bool startOnMonday );
 
 #endif // DATEBOOKDAYHEADER_H
