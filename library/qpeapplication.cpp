@@ -1045,14 +1045,6 @@ void QPEApplication::mapToDefaultAction( QWSKeyEvent * ke, int key )
 #endif
 }
 
-// class HackWidget : public QWidget
-// {
-// public:
-// 	bool needsOk()
-// 	{
-// 		return ( getWState() & WState_Reserved1 );
-// 	}
-// };
 
 /*!
   \internal
@@ -1122,6 +1114,7 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 			        ( int ) active->winId() == ke->simpleData.window &&
 			        !active->testWFlags( WStyle_Dialog | WStyle_Customize | WType_Popup | WType_Desktop ) ) {
 				if ( active->inherits( "QDialog" ) ) {
+					qDebug("dialog hack");
 					HackDialog * d = ( HackDialog * ) active;
 					d->rejectIt();
 					return TRUE;
