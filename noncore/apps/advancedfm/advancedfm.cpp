@@ -94,7 +94,7 @@ AdvancedFm::AdvancedFm( )
     menuBar->insertItem( tr( "View" ), viewMenu);
 
     qpeDirButton= new QToolButton(this,"QPEButton");
-	qpeDirButton->setPixmap( Resource::loadPixmap("launcher/opielogo16x16"));//,"",this,"QPEButton");
+  qpeDirButton->setPixmap( Resource::loadPixmap("launcher/opielogo16x16"));//,"",this,"QPEButton");
 //    qpeDirButton= new QPushButton(Resource::loadIconSet("launcher/opielogo16x16"),"",this,"QPEButton");
     qpeDirButton ->setFixedSize( QSize( 20, 20 ) );
     connect( qpeDirButton ,SIGNAL(released()),this,SLOT( QPEButtonPushed()) );
@@ -102,7 +102,7 @@ AdvancedFm::AdvancedFm( )
     layout->addMultiCellWidget( qpeDirButton , 0, 0, 2, 2);
 
     cfButton = new QToolButton( this,"CFButton");
-	cfButton->setPixmap(Resource::loadPixmap("cardmon/pcmcia"));
+  cfButton->setPixmap(Resource::loadPixmap("cardmon/pcmcia"));
 //    cfButton = new QPushButton(Resource::loadIconSet("cardmon/pcmcia"),"",this,"CFButton");
     cfButton ->setFixedSize( QSize( 20, 20 ) );
     connect( cfButton ,SIGNAL(released()),this,SLOT( CFButtonPushed()) );
@@ -110,7 +110,7 @@ AdvancedFm::AdvancedFm( )
     layout->addMultiCellWidget( cfButton , 0, 0, 3, 3);
 
     sdButton = new QToolButton( this,"SDButton");
-	sdButton->setPixmap(Resource::loadPixmap("sdmon/sdcard"));
+  sdButton->setPixmap(Resource::loadPixmap("sdmon/sdcard"));
 //    sdButton = new QPushButton(Resource::loadIconSet("sdmon/sdcard"),"",this,"SDButton");
     sdButton->setFixedSize( QSize( 20, 20 ) );
     connect( sdButton ,SIGNAL(released()),this,SLOT( SDButtonPushed()) );
@@ -118,7 +118,7 @@ AdvancedFm::AdvancedFm( )
     layout->addMultiCellWidget( sdButton , 0, 0, 4, 4);
 
     cdUpButton = new QToolButton( this,"cdUpButton");
-	cdUpButton->setPixmap(Resource::loadPixmap("up"));
+  cdUpButton->setPixmap(Resource::loadPixmap("up"));
 //    cdUpButton = new QPushButton(Resource::loadIconSet("up"),"",this,"cdUpButton");
     cdUpButton ->setFixedSize( QSize( 20, 20 ) );
     connect( cdUpButton ,SIGNAL(released()),this,SLOT( upDir()) );
@@ -126,7 +126,7 @@ AdvancedFm::AdvancedFm( )
     layout->addMultiCellWidget( cdUpButton , 0, 0, 5, 5);
 
     docButton = new QToolButton( this,"docsButton");
-	docButton->setPixmap(Resource::loadPixmap("DocsIcon"));
+  docButton->setPixmap(Resource::loadPixmap("DocsIcon"));
 //    docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
     docButton->setFixedSize( QSize( 20, 20 ) );
     connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
@@ -134,7 +134,7 @@ AdvancedFm::AdvancedFm( )
     layout->addMultiCellWidget( docButton, 0, 0, 6, 6);
 
     homeButton = new QToolButton( this,"homeButton");
-	homeButton->setPixmap(Resource::loadPixmap("home"));
+  homeButton->setPixmap(Resource::loadPixmap("home"));
 //    homeButton = new QPushButton( Resource::loadIconSet("home"),"",this,"homeButton");
     homeButton->setFixedSize( QSize( 20, 20 ) );
     connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
@@ -1185,8 +1185,18 @@ void AdvancedFm::copy()
 //             curFile +=(*it);
 
             QFile f(destFile);
-            if( f.exists())
+            if( f.exists()) {
+                switch ( QMessageBox::warning(this,tr("Delete"),
+                destFile+tr(" already exists\nDo you really want to delete it?"),
+                            tr("Yes"),tr("No"),0,0,1) ) {
+                  case 0: 
                 f.remove();
+                break;
+                  case 1:
+                  return;
+                break;
+                };
+            }
             if(!copyFile(destFile, curFile) ) {
                 QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
                 qWarning("nothin doing");
@@ -1202,8 +1212,18 @@ void AdvancedFm::copy()
             curFile = currentRemoteDir.canonicalPath()+"/"+(*it);
 
             QFile f(destFile);
-            if( f.exists())
+            if( f.exists()) {
+                switch ( QMessageBox::warning(this,tr("Delete"),
+                destFile+tr(" already exists\nDo you really want to delete it?"),
+                            tr("Yes"),tr("No"),0,0,1) ) {
+                  case 0: 
                 f.remove();
+                break;
+                  case 1:
+                  return;
+                break;
+                };
+            }
             if(!copyFile(destFile, curFile) ) {
                     QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
 
@@ -1213,126 +1233,253 @@ void AdvancedFm::copy()
         populateLocalView();
         TabWidget->setCurrentPage(0);
     }
-}
+    }
 }
 
 void AdvancedFm::copyAs()
 {
     QStringList curFileList = getPath();
     if( curFileList.count() > 0) {
-    QString curFile;
-    InputDialog *fileDlg;
-    fileDlg = new InputDialog(this,tr("Copy As"),TRUE, 0);
+        QString curFile;
+        InputDialog *fileDlg;
+        fileDlg = new InputDialog(this,tr("Copy As"),TRUE, 0);
 
-    if (TabWidget->currentPageIndex() == 0) {
-        for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-            QString destFile;
-            curFile = currentDir.canonicalPath()+"/"+(*it);
-//             InputDialog *fileDlg;
-//             fileDlg = new InputDialog(this,tr("Copy As"),TRUE, 0);
-            fileDlg->setInputText((const QString &) destFile );
-            fileDlg->exec();
-            if( fileDlg->result() == 1 ) {
-                QString  filename = fileDlg->LineEdit1->text();
-                destFile = currentRemoteDir.canonicalPath()+"/"+(*it);
-
-                QFile f(destFile);
-                if( f.exists())
-                    f.remove();
-                if(!copyFile(destFile, curFile) ) {
-                    QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
-                    qWarning("nothin doing");
-                }
-            }
-        }
-
-        populateRemoteView();
-        TabWidget->setCurrentPage(1);
-    } else {
         if (TabWidget->currentPageIndex() == 0) {
             for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-
-                curFile = currentDir.canonicalPath()+"/"+(*it);
                 QString destFile;
-                fileDlg->setInputText((const QString &) destFile);
+                curFile = currentDir.canonicalPath()+"/"+(*it);
+//             InputDialog *fileDlg;
+//             fileDlg = new InputDialog(this,tr("Copy As"),TRUE, 0);
+                fileDlg->setInputText((const QString &) destFile );
                 fileDlg->exec();
                 if( fileDlg->result() == 1 ) {
                     QString  filename = fileDlg->LineEdit1->text();
-                    destFile = currentDir.canonicalPath()+"/"+(*it);
+                    destFile = currentRemoteDir.canonicalPath()+"/"+(*it);
 
                     QFile f(destFile);
-                    if( f.exists())
-                        f.remove();
+                    if( f.exists()) {
+                        switch (QMessageBox::warning(this,tr("Delete"),
+                         destFile+tr(" already exists\nDo you really want to delete it?"),
+                          tr("Yes"),tr("No"),0,0,1) ) {
+                          case 0: 
+                              f.remove();
+                              break;
+                          case 1:
+                              return;
+                              break;
+                        };
+                    }
                     if(!copyFile(destFile, curFile) ) {
-                    QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
-                    qWarning("nothin doing");
+                        QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
+                        qWarning("nothin doing");
                     }
                 }
             }
-            populateLocalView();
-            TabWidget->setCurrentPage(0);
+            populateRemoteView();
+            TabWidget->setCurrentPage(1);
+        } else {
+            if (TabWidget->currentPageIndex() == 0) {
+                for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+
+                    curFile = currentDir.canonicalPath()+"/"+(*it);
+                    QString destFile;
+                    fileDlg->setInputText((const QString &) destFile);
+                    fileDlg->exec();
+                    if( fileDlg->result() == 1 ) {
+                        QString  filename = fileDlg->LineEdit1->text();
+                        destFile = currentDir.canonicalPath()+"/"+(*it);
+
+                        QFile f(destFile);
+                        if( f.exists()) {
+                            switch ( QMessageBox::warning(this,tr("Delete"),
+                                 destFile+tr(" already exists\nDo you really want to delete it?"),
+                                 tr("Yes"),tr("No"),0,0,1) ) {
+                              case 0: 
+                                  f.remove();
+                                  break;
+                              case 1:
+                                  return;
+                                  break;
+                            };
+                        }
+                        if(!copyFile(destFile, curFile) ) {
+                            QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
+                            qWarning("nothin doing");
+                        }
+                        
+                    }
+                }
+                populateLocalView();
+                TabWidget->setCurrentPage(0);
+            }
         }
-   }
-}
+    }
+
 }
 
+void AdvancedFm::copySameDir() {
+    QStringList curFileList = getPath();
+    if( curFileList.count() > 0) {
+        QString curFile;
+        InputDialog *fileDlg;
+
+        if (TabWidget->currentPageIndex() == 0) {
+            for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+                QString destFile;
+                curFile = currentDir.canonicalPath()+"/"+(*it);
+                fileDlg = new InputDialog(this,tr("Copy ")+curFile+tr(" As"),TRUE, 0);
+//             InputDialog *fileDlg;
+//             fileDlg = new InputDialog(this,tr("Copy As"),TRUE, 0);
+                fileDlg->setInputText((const QString &) destFile );
+                fileDlg->exec();
+                if( fileDlg->result() == 1 ) {
+                    QString filename = fileDlg->LineEdit1->text();
+                    destFile = currentDir.canonicalPath()+"/"+filename;
+
+                    QFile f(destFile);
+                    if( f.exists()) {
+                        switch (QMessageBox::warning(this,tr("Delete"),
+                         destFile+tr(" already exists\nDo you really want to delete it?"),
+                          tr("Yes"),tr("No"),0,0,1) ) {
+                          case 0:
+                              qDebug("");
+                              f.remove();
+                              break;
+                          case 1:
+                              return;
+                              break;
+                        };
+                    }
+                    if(!copyFile(destFile, curFile) ) {
+                        QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
+                        qWarning("nothin doing");
+                    }
+                    
+                    qDebug("copy "+curFile+" as "+destFile);
+                }
+                delete fileDlg;
+            }
+            populateRemoteView();
+            TabWidget->setCurrentPage(1);
+        } else {
+            if (TabWidget->currentPageIndex() == 0) {
+                for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+
+                    curFile = currentRemoteDir.canonicalPath()+"/"+(*it);
+                    fileDlg = new InputDialog(this,tr("Copy ")+curFile+tr(" As"),TRUE, 0);
+                    QString destFile;
+                    fileDlg->setInputText((const QString &) destFile);
+                    fileDlg->exec();
+                    if( fileDlg->result() == 1 ) {
+                        QString  filename = fileDlg->LineEdit1->text();
+                        destFile = currentDir.canonicalPath()+"/"+filename;
+
+                        QFile f(destFile);
+                        if( f.exists()) {
+                            switch ( QMessageBox::warning(this,tr("Delete"),
+                                 destFile+tr(" already exists\nDo you really want to delete it?"),
+                                 tr("Yes"),tr("No"),0,0,1) ) {
+                              case 0: 
+                                  f.remove();
+                                  break;
+                              case 1:
+                                  return;
+                                  break;
+                            };
+                        }
+                        if(!copyFile(destFile, curFile) ) {
+                            QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
+                            qWarning("nothin doing");
+                        }
+                        qDebug("copy "+curFile+" as "+destFile);
+                    }
+                    delete fileDlg;
+                }
+                populateLocalView();
+                TabWidget->setCurrentPage(0);
+            }
+        }
+    }
+
+}
+ 
 void AdvancedFm::move() {
 
     QStringList curFileList = getPath();
     if( curFileList.count() > 0) {
-    QString curFile;
+        QString curFile;
 //    qDebug(curFile);
-    QString destFile;
+        QString destFile;
 
-    if (TabWidget->currentPageIndex() == 0) {
-        for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-            QString destFile =  currentRemoteDir.canonicalPath();
+        if (TabWidget->currentPageIndex() == 0) {
+            for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+                QString destFile =  currentRemoteDir.canonicalPath();
                 if(destFile.right(1).find("/",0,TRUE) == -1)
                     destFile+="/";
                 destFile +=(*it);
-            curFile = currentDir.canonicalPath();
-            qDebug("Destination file is "+destFile);
-            if(curFile.right(1).find("/",0,TRUE) == -1)
-                curFile +="/";
-            curFile+=(*it);
+                curFile = currentDir.canonicalPath();
+                qDebug("Destination file is "+destFile);
+                if(curFile.right(1).find("/",0,TRUE) == -1)
+                    curFile +="/";
+                curFile+=(*it);
 
-            QFile f(destFile);
-            if( f.exists())
-                f.remove();
-            if(!copyFile( destFile, curFile) ) {
-                QMessageBox::message(tr("Note"),tr("Could not move\n"+curFile));
-                return;
+                QFile f(destFile);
+                if( f.exists()) {
+                    switch (QMessageBox::warning(this,tr("Delete"),
+                           destFile+tr(" already exists\nDo you really want to delete it?"),
+                           tr("Yes"),tr("No"),0,0,1) ) {
+                      case 0:
+                          f.remove();
+                          break;
+                      case 1:
+                          return;
+                          break;
+                    };
+                    if(!copyFile( destFile, curFile) ) {
+                        QMessageBox::message(tr("Note"),tr("Could not move\n"+curFile));
+                        return;
+                    }
+                    QFile::remove(curFile);
+                }
             }
-            QFile::remove(curFile);
-        }
-        TabWidget->setCurrentPage(1);
-    } else {
-        for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-            QString destFile = currentRemoteDir.canonicalPath();
+            TabWidget->setCurrentPage(1);
+        } else {
+            for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+                QString destFile = currentRemoteDir.canonicalPath();
                 if(destFile.right(1).find("/",0,TRUE) == -1)
                     destFile+="/";
                 destFile +=(*it);
-            qDebug("Destination file is "+destFile);
-            curFile = currentDir.canonicalPath();
-            if(curFile.right(1).find("/",0,TRUE) == -1)
-                curFile +="/";
-            curFile+=(*it);
+                qDebug("Destination file is "+destFile);
+                curFile = currentDir.canonicalPath();
+                if(curFile.right(1).find("/",0,TRUE) == -1)
+                    curFile +="/";
+                curFile+=(*it);
 
-            QFile f(destFile);
-            if( f.exists())
-                f.remove();
-            if(!copyFile(destFile, curFile) ) {
-                QMessageBox::message(tr("Note"),tr("Could not move\n"+curFile));
-                return;
+                QFile f(destFile);
+                if( f.exists()) {
+                    switch (QMessageBox::warning(this,tr("Delete"),
+                    destFile+tr(" already exists\nDo you really want to delete it?"),
+                   tr("Yes"),tr("No"),0,0,1) ) {
+                      case 0:
+                          f.remove();
+                          break;
+                      case 1:
+                          return;
+                          break;
+                    };
+                    if(!copyFile(destFile, curFile) ) {
+                        QMessageBox::message(tr("Note"),tr("Could not move\n"+curFile));
+                        return;
+                    }
+                }
+                    QFile::remove(curFile);
+                    TabWidget->setCurrentPage(0);
+                }
             }
-            QFile::remove(curFile);
-            TabWidget->setCurrentPage(0);
+            populateRemoteView();
+            populateLocalView();
         }
-    }
-        populateRemoteView();
-        populateLocalView();
 }
- }
 
  bool AdvancedFm::copyFile( const QString & dest, const QString & src )
 {
@@ -1755,6 +1902,7 @@ void AdvancedFm::showFileMenu() {
 
     m->insertItem( tr( "Copy" ), this, SLOT( copy() ));
     m->insertItem( tr( "Copy As" ), this, SLOT( copyAs() ));
+    m->insertItem( tr( "Copy Same Dir" ), this, SLOT( copySameDir() ));
     m->insertItem( tr( "Move" ), this, SLOT( move() ));
     m->insertSeparator();
 

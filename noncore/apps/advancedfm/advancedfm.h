@@ -124,6 +124,7 @@ protected slots:
   void currentPathComboChanged();
   void copy();
   void copyAs();
+  void copySameDir();
   void currentPathComboActivated(const QString &);
   void fillCombo(const QString &);
   bool copyFile( const QString & , const QString & );
