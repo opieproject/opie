@@ -87,7 +87,7 @@ protected:
 
     bool isOverButton( const QPoint &position, int buttonId ) const;
 
-    void paintButton( int buttonId );
+    void paintButton( const Button &button );
     void paintButton( QPainter &p, const Button &button );
 
     void toggleButton( int buttonId );
