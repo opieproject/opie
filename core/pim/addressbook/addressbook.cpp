@@ -542,14 +542,14 @@ static const char * beamfile = "/tmp/obex/contact.vcf";
 
 void AddressbookWindow::slotBeam()
 {
-	QString filename;
+	QString beamFilename;
 	OContact c;
 	if ( actionPersonal->isOn() ) {
-		filename = addressbookPersonalVCardName();
-		if (!QFile::exists(filename))
+		beamFilename = addressbookPersonalVCardName();
+		if ( !QFile::exists( beamFilename ) )
 			return; // can't beam a non-existent file
 		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null, 
-											filename );
+											beamFilename );
 		OContactAccess* access = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
 		OContactAccess::List allList = access->allRecords();
 		OContactAccess::List::Iterator it = allList.begin();  // Just take first
@@ -567,18 +567,20 @@ void AddressbookWindow::slotBeam()
 		access->save();
 		delete access;
 
-		filename = beamfile;
+		beamFilename = beamfile;
 	}
 
+	qWarning("Beaming: %s", beamFilename.latin1() );
 
 	Ir *ir = new Ir( this );
 	connect( ir, SIGNAL( done( Ir * ) ), this, SLOT( beamDone( Ir * ) ) );
 	QString description = c.fullName();
-	ir->send( filename, description, "text/x-vCard" );
+	ir->send( beamFilename, description, "text/x-vCard" );
 }
 
 void AddressbookWindow::beamDone( Ir *ir )
 {
+
 	delete ir;
 	unlink( beamfile );
 }
@@ -639,9 +641,15 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		
 		// :SXm_abView()->init( cnt );
 		editEntry( EditEntry );
-		
-		
-		
+	} else if ( msg == "beamBusinessCard()" ) {
+		QString beamFilename = addressbookPersonalVCardName();
+		if ( !QFile::exists( beamFilename ) )
+			return; // can't beam a non-existent file
+
+		Ir *ir = new Ir( this );
+		connect( ir, SIGNAL( done( Ir * ) ), this, SLOT( beamDone( Ir * ) ) );
+		QString description = "mycard.vcf";
+		ir->send( beamFilename, description, "text/x-vCard" );
 	}
 #if 0
 	else if (msg == "pickAddresses(QCString,QCString,QStringList,...)" ) {
