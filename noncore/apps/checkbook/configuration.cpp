@@ -27,9 +27,7 @@
 */
 
 #include "configuration.h"
-#include "mainwindow.h"
 #include "listedit.h"
-#include "tabledef.h"
 
 #include <qcheckbox.h>
 #include <qlabel.h>
@@ -37,9 +35,7 @@
 #include <qlineedit.h>
 #include <qwhatsthis.h>
 #include <qlistview.h>
-#include <qpushbutton.h>
 #include <qtabwidget.h>
-#include <qpe/resource.h>
 
 Configuration::Configuration( QWidget *parent, Cfg &cfg )
 	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )

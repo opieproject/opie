@@ -25,11 +25,9 @@
 /* OPIE */
 #include <opie2/onetwork.h>
 #include <opie2/otaskbarapplet.h>
-#include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 
 /* QT */
-#include <qpoint.h>
 #include <qradiobutton.h>
 #include <qpushbutton.h>
 #include <qpainter.h>
@@ -37,9 +35,6 @@
 #include <qslider.h>
 #include <qbuttongroup.h>
 #include <qlayout.h>
-#include <qframe.h>
-#include <qpixmap.h>
-#include <qstring.h>
 #include <qfile.h>
 #include <qtextstream.h>
 

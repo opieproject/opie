@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/qcopenvelope_qws.h>
 #include <qmainwindow.h>
 
-#include "cfgfile.h"
 #include "cfgdlg.h"
 
 int main( int argc, char **argv ) {

@@ -20,14 +20,11 @@
 #include <qstringlist.h>
 
 #include <qpe/filemanager.h>
-#include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/timestring.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
 #include <qpe/applnk.h>
-#include <qpe/config.h>
 #include <qpe/ir.h>
+#include <qpe/config.h>
 
 // #include <qsocket.h>
 // #include <qclipboard.h>

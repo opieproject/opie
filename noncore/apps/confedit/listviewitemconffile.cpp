@@ -11,7 +11,6 @@
 #include "listviewitemconffile.h"
 #include <qmessagebox.h>
 #include <qtextstream.h>
-#include <qstring.h>
 #include "listviewitemconfigentry.h"
 
 #define tr QObject::tr

@@ -15,23 +15,12 @@
 
 #include <qpe/lnkproperties.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
-#include <qpe/qcopenvelope_qws.h>
 #include <qpe/applnk.h>
-#include <qpe/ir.h>
 
 #include <qmessagebox.h>
-#include <qmultilineedit.h>
 
-#include <qstring.h>
 
-#include <qlayout.h>
-#include <qpixmap.h>
-#include <qcombobox.h>
 #include <qpopupmenu.h>
-#include <qtabwidget.h>
-#include <qtoolbutton.h>
-#include <qlineedit.h>
 #include <qlistview.h>
 
 #include <errno.h>

@@ -9,7 +9,6 @@
   // (c) 2002 Patrick S. Vogtp <tille@handhelds.org>
 
 #include "listviewitemconfigentry.h"
-#include "listviewitemconffile.h"
 #include <qtextstream.h>
 
 ListViewItemConfigEntry::ListViewItemConfigEntry(ListViewItemConfFile *parent, QString group, QString key)

@@ -19,15 +19,7 @@
 #include <qpe/resource.h>
 
 /* QT */
-#include <qapplication.h>
-#include <qfile.h>
-#include <qcopchannel_qws.h>
-#include <qmessagebox.h>
 #include <qpainter.h>
-#include <qpixmap.h>
-#include <qimage.h>
-#include <qtimer.h>
-#include <qtextstream.h>
 
 using namespace Opie;
 

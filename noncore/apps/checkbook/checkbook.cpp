@@ -33,7 +33,6 @@
 #include "graph.h"
 #include "graphinfo.h"
 #include "password.h"
-#include "mainwindow.h"
 #include "cfg.h"
 
 #include <qpe/qpeapplication.h>

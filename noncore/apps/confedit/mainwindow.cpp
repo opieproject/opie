@@ -12,20 +12,11 @@
 
 #include "mainwindow.h"
 
-#include <qaction.h>
-#include <qmessagebox.h>
-#include <qpopupmenu.h>
-#include <qtoolbutton.h>
-#include <qstring.h>
 #include <qlabel.h>
-#include <qfile.h>
-#include <qpushbutton.h>
 #include <qlayout.h>
 #include <qlineedit.h>
-#include <qcursor.h>
 
 #include "listviewconfdir.h"
-#include "listviewitemconf.h"
 #include "listviewitemconfigentry.h"
 
 

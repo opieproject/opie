@@ -9,20 +9,11 @@
     *   (at your option) any later version.                                   *
     ***************************************************************************/
 #include "showdrinks.h"
-#include "bartender.h"
 
-#include <qpe/resource.h>
 
-#include <qaction.h>
-#include <qlabel.h>
-#include <qlineedit.h>
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
-#include <qwidget.h>
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
 
 //extern Bartender  *bart;
 

@@ -16,7 +16,6 @@
 #include "advancedconfig.h"
 
 #include <qpe/config.h>
-#include <qwidget.h>
 #include <qcheckbox.h>
 
 AdvancedConfig::AdvancedConfig( QWidget* parent,  const char* name, bool modal, WFlags fl )

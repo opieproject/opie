@@ -28,10 +28,7 @@
 
 #include <stdio.h>
 
-#include <qstring.h>
-#include <qstringlist.h>
 #include <qwidget.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
 
 #include "cfg.h"

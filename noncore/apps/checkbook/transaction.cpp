@@ -32,7 +32,6 @@
 #include "checkbook.h"
 
 #include <qpe/datebookmonth.h>
-#include <qpe/resource.h>
 
 #include <qbuttongroup.h>
 #include <qcombobox.h>

@@ -10,18 +10,11 @@
     ***************************************************************************/
 #include "newdrinks.h"
 
-#include <qpe/resource.h>
 
-#include <qaction.h>
 #include <qlabel.h>
 #include <qlineedit.h>
 #include <qmultilineedit.h>
-#include <qpushbutton.h>
-#include <qwidget.h>
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
 
 New_Drink::New_Drink( QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )

@@ -2,15 +2,7 @@
 
 #include <qlabel.h>
 #include <qlineedit.h>
-#include <qpushbutton.h>
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qtimer.h>
-#include <qpopupmenu.h>
-#include <qaction.h>
-#include "listviewitemconfigentry.h"
 
 EditWidget::EditWidget( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )

@@ -1,5 +1,4 @@
 #include <qmap.h>
-#include <qstring.h>
 
 #include "zkbnames.h"
 

@@ -17,9 +17,6 @@
 #include <qpushbutton.h>
 #include <qspinbox.h>
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
 BacDialog::BacDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )
 {

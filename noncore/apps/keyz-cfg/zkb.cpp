@@ -1,4 +1,3 @@
-#include <qnamespace.h>
 #include "zkb.h"
 #include <stdio.h>
 

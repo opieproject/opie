@@ -31,10 +31,8 @@
 #include "configuration.h"
 #include "password.h"
 #include "checkbook.h"
-#include "listedit.h"
 
 #include <qpe/config.h>
-#include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/qpetoolbar.h>
@@ -42,9 +40,7 @@
 
 #include <qmenubar.h>
 #include <qaction.h>
-#include <qcheckbox.h>
 #include <qdir.h>
-#include <qlineedit.h>
 #include <qwhatsthis.h>
 
 

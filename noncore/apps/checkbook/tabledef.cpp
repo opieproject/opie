@@ -28,8 +28,6 @@
 
 #include "tabledef.h"
 
-#include <qstring.h>
-#include <qpe/resource.h>
 
 // --- ColumnDef --------------------------------------------------------------
 ColumnDef::ColumnDef(const char *sName, ColumnType type, const char *sNewValue)

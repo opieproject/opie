@@ -10,18 +10,9 @@
     ***************************************************************************/
 #include "searchresults.h"
 
-#include <qpe/resource.h>
 
-#include <qaction.h>
-#include <qlabel.h>
-#include <qlineedit.h>
 #include <qlistbox.h>
-#include <qpushbutton.h>
-#include <qwidget.h>
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
 
 Search_Results::Search_Results( QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {

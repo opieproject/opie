@@ -35,19 +35,13 @@
 #include <opie2/onetwork.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/applnk.h>
-#include <qpe/qlibrary.h>
 #include <qpe/resource.h>
 #include <qpainter.h>
 
 /* QT */
-#include <qhostaddress.h>
-#include <qimage.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qlineedit.h>
 #include <qobjectlist.h>
-#include <qpushbutton.h>
-#include <qtoolbutton.h>
 
 #include <assert.h>
 

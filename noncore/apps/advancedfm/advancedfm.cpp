@@ -12,29 +12,19 @@
 #define DEVELOPERS_VERSION
 #include "advancedfm.h"
 
-#include <qpe/filemanager.h>
-#include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
 #include <qpe/applnk.h>
-#include <qpe/ir.h>
 #include <qpe/resource.h>
 #include <qpe/menubutton.h>
 
-#include <qdatetime.h>
-#include <qfile.h>
 #include <qcombobox.h>
 #include <qpopupmenu.h>
 #include <qlistview.h>
-#include <qlabel.h>
-#include <qwidget.h>
-#include <qlayout.h>
-#include <qimage.h>
 #include <qmessagebox.h>
 #include <qlineedit.h>
 
-#include <qpe/qpemessagebox.h>
 
 #include <sys/stat.h>
 #include <time.h>

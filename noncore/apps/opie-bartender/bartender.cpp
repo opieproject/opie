@@ -11,7 +11,6 @@
     ***************************************************************************/
 
 #include "bartender.h"
-#include "newdrinks.h"
 #include "showdrinks.h"
 #include "inputDialog.h"
 #include "searchresults.h"
@@ -23,27 +22,17 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 
-#include <qcstring.h>
 #include <qlineedit.h>
 #include <qdir.h>
 #include <qpushbutton.h>
 #include <qlistbox.h>
-#include <qstringlist.h>
 #include <qmultilineedit.h>
 #include <qmessagebox.h>
-#include <qfile.h>
 #include <qtextstream.h>
-#include <qfile.h>
 #include <qaction.h>
 #include <qheader.h>
 #include <qlistview.h>
-#include <qwidget.h>
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qimage.h>
-#include <qpixmap.h>
 
 #include <fcntl.h>
 #include <unistd.h>

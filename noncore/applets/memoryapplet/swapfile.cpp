@@ -22,8 +22,6 @@
 
 #include <qlabel.h>
 #include <qtimer.h>
-#include <qfile.h>
-#include <qtextstream.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qhbuttongroup.h> 
@@ -37,8 +35,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <qfile.h>
-#include <qtextstream.h>
 
 #include <qcopchannel_qws.h>
 #include <qpe/resource.h>
