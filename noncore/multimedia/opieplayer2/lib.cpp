@@ -31,19 +31,21 @@
 
 */
 
-
-#include <qtextstream.h>
-
-#include <qdir.h>
-
-#include <qgfx_qws.h>
-
-#include <assert.h>
-
 #include "xinevideowidget.h"
 #include "frame.h"
 #include "lib.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qtextstream.h>
+#include <qdir.h>
+#include <qgfx_qws.h>
+
+/* STD */
+#include <assert.h>
 
 typedef void (*display_xine_frame_t) (void *user_data, uint8_t* frame,
 				      int  width, int height,int bytes );

@@ -31,14 +31,18 @@
 
 */
 
-
-#include <qtimer.h>
-#include <qmessagebox.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/qpeapplication.h>
-
 #include "xinecontrol.h"
 #include "xinevideowidget.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/qcopenvelope_qws.h>
+#include <qpe/qpeapplication.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qtimer.h>
+#include <qmessagebox.h>
 
 XineControl::XineControl( XineVideoWidget *xineWidget,
                           MediaPlayerState &_mediaPlayerState,

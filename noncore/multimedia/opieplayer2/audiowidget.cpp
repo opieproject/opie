@@ -34,9 +34,12 @@
 
 #include "audiowidget.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
-
+using namespace Opie::Core;
 using namespace Opie::Ui;
+
 namespace
 {
 

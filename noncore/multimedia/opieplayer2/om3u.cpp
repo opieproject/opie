@@ -31,7 +31,9 @@
 
 #include "om3u.h"
 
-
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 //extern PlayListWidget *playList;
 

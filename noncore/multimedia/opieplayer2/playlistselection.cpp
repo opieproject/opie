@@ -17,11 +17,16 @@
 ** not clear to you.
 **
 **********************************************************************/
-
-#include <qheader.h>
-
 #include "playlistselection.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qheader.h>
+
+/* STD */
 #include <stdlib.h>
 
 class PlayListSelectionItem : public QListViewItem {

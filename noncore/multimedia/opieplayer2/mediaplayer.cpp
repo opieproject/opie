@@ -1,20 +1,22 @@
-#include <qpe/qpeapplication.h>
-#include <qpe/config.h>
-#include <qfileinfo.h>
-
 #include "mediaplayer.h"
 #include "audiowidget.h"
 #include "videowidget.h"
 #include "volumecontrol.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/config.h>
 
- // for setBacklight()
+/* QT */
+#include <qfileinfo.h>
+
+/* STD */
 #include <linux/fb.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>
 
-
-#define FBIOBLANK             0x4611
+#define FBIOBLANK 0x4611
 
 MediaPlayer::MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), mediaPlayerState( _mediaPlayerState ), playList( _playList ) {

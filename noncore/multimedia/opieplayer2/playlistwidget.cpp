@@ -31,12 +31,6 @@
 
 */
 
-#include <qtoolbar.h>
-
-#include <opie2/ofiledialog.h>
-
-#include <qmessagebox.h>
-
 #include "playlistselection.h"
 #include "playlistwidget.h"
 #include "mediaplayer.h"
@@ -44,10 +38,19 @@
 #include "om3u.h"
 #include "playlistfileview.h"
 
-//only needed for the random play
+/* OPIE */
+#include <opie2/odebug.h>
+#include <opie2/ofiledialog.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
+
+/* QT */
+#include <qmessagebox.h>
+#include <qtoolbar.h>
+
+/* STD */
 #include <assert.h>
 
-using namespace Opie::Ui;
 PlayListWidget::PlayListWidget(QWidget* parent, const char* name, WFlags fl )
     : PlayListWidgetGui( parent, "playList" ) , currentFileListView( 0 )
 {
