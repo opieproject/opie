@@ -377,6 +377,7 @@ void VideoWidget::makeVisible() {
         videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
 
     } else {
+        showNormal();
         showMaximized();
         setBackgroundPixmap( *pixBg );
         if ( mediaPlayerState->streaming() ) {
