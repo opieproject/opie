@@ -123,7 +123,7 @@ QString Genericwrapper::getencoding(mailmime_mechanism*aEnc)
     return enc;
 }
 
-void Genericwrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mime,unsigned int current_rec)
+void Genericwrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mime,QValueList<int>recList,unsigned int current_rec,int current_count)
 {
     if (current_rec >= 10) {
         qDebug("too deep recursion!");
@@ -138,10 +138,18 @@ void Genericwrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mi
     QString b;
     RecPart part;
     
+    //current_count;
+    
     switch (mime->mm_type) {
     case MAILMIME_SINGLE:
+    {
+        QValueList<int>countlist = recList;
+        countlist.append(current_count);
         r = mailmessage_fetch_section(message,mime,&data,&len);
         part.setSize(len);
+        part.setPositionlist(countlist);
+        b = gen_attachment_id();
+        part.setIdentifier(b);
         fillSingleBody(part,message,mime);
         if (part.Type()=="text" && target.Bodytext().isNull()) {
             encodedString*r = new encodedString();
@@ -153,22 +161,42 @@ void Genericwrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mi
             target.setBodytext(b);
             target.setDescription(part);
         } else {
-            b = gen_attachment_id();
-            part.setIdentifier(b);
             bodyCache[b]=new encodedString(data,len);
             target.addPart(part);
         }
-        break;
+    }
+    break;
     case MAILMIME_MULTIPLE:
+    {
+        unsigned int ccount = current_count;
         for (cur = clist_begin(mime->mm_data.mm_multipart.mm_mp_list) ; cur != NULL ; cur = clist_next(cur)) {
-            traverseBody(target,message, (mailmime*)clist_content(cur),current_rec+1);
+            traverseBody(target,message, (mailmime*)clist_content(cur),recList,current_rec+1,ccount);
+            ++ccount;
         }
-        break;
+    }
+    break;
     case MAILMIME_MESSAGE:
-        if (mime->mm_data.mm_message.mm_msg_mime != NULL) {
-            traverseBody(target,message,mime->mm_data.mm_message.mm_msg_mime,current_rec+1);
+    {
+        QValueList<int>countlist = recList;
+        countlist.append(current_count);
+        /* the own header is always at recursion 0 - we don't need that */
+        if (current_rec > 0) {
+            part.setPositionlist(countlist);
+            r = mailmessage_fetch_section(message,mime,&data,&len);
+            part.setSize(len);
+            part.setPositionlist(countlist);
+            b = gen_attachment_id();
+            part.setIdentifier(b);
+            part.setType("message");
+            part.setSubtype("rfc822");
+            bodyCache[b]=new encodedString(data,len);
+            target.addPart(part);
         }
-        break;
+        if (mime->mm_data.mm_message.mm_msg_mime != NULL) {
+            traverseBody(target,message,mime->mm_data.mm_message.mm_msg_mime,countlist,current_rec+1);
+        }
+    }
+    break;
     }
 }
 
@@ -181,7 +209,8 @@ RecBody Genericwrapper::parseMail( mailmessage * msg )
     RecBody body;
     memset(&fields, 0, sizeof(struct mailmime_single_fields));
     err = mailmessage_get_bodystructure(msg,&mime);
-    traverseBody(body,msg,mime);
+    QValueList<int>recList;
+    traverseBody(body,msg,mime,recList);
     return body;
 }
 
