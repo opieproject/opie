@@ -19,7 +19,7 @@
 **********************************************************************/
 
 #define INCLUDE_MENUITEM_DEF
- 
+
 #include "startmenu.h"
 #include "sidething.h"
 //#include "mrulist.h"
@@ -56,7 +56,7 @@ StartMenu::StartMenu(QWidget *parent) : QLabel( parent )
     launchMenu = 0;
     applets. setAutoDelete ( true );
     sepId = 0;
-    
+
     reloadApps ( );
     reloadApplets ( );
 }
@@ -88,13 +88,13 @@ void StartMenu::loadOptions()
     startButtonIsFlat = ( tmpBoolString2 == "TRUE" ) ? TRUE : FALSE;
     QString tmpBoolString3 = config.readEntry( "UseMRUList", "TRUE" );
     popupMenuSidePixmap = config.readEntry( "PopupMenuSidePixmap", "launcher/sidebar" );
-    startButtonPixmap = config.readEntry( "StartButtonPixmap", "launcher/start_button" );
+    startButtonPixmap = config.readEntry( "StartButtonPixmap", "go" );
 #else
     // Basically just #include the .qpe_menu.conf file settings
     useWidePopupMenu = FALSE;
     popupMenuSidePixmap = "launcher/sidebar";
     startButtonIsFlat = TRUE;
-    startButtonPixmap = "launcher/start_button"; // No tr
+    startButtonPixmap = "go"; // No tr
 #endif
 }
 
@@ -109,7 +109,7 @@ void StartMenu::createMenu()
 
     loadMenu ( apps, launchMenu );
     loadApplets ( );
-    
+
 	connect( launchMenu, SIGNAL(activated(int)), SLOT(itemSelected(int)) );
 }
 
@@ -129,7 +129,7 @@ void StartMenu::reloadApps()
     }
     if ( launchMenu ) {
     	launchMenu-> hide ( );
-    
+
     	for ( QIntDictIterator<QPopupMenu> it ( tabdict ); it. current ( ); ++it ) {
     		launchMenu-> removeItem ( it. currentKey ( ));
     		delete it.current ( );
@@ -158,10 +158,10 @@ void StartMenu::itemSelected( int id )
         app->execute();
     else {
     	MenuApplet *applet = applets. find ( id );
-    	
+
     	if ( applet )
     		applet-> iface-> activated ( );
-	}   
+	}
 }
 
 bool StartMenu::loadMenu( AppLnkSet *folder, QPopupMenu *menu )
@@ -173,9 +173,9 @@ bool StartMenu::loadMenu( AppLnkSet *folder, QPopupMenu *menu )
 
     bool ltabs = cfg.readBoolEntry("LauncherTabs",TRUE);
     bool lot = cfg.readBoolEntry("LauncherOther",TRUE);
-    
+
     tabdict. clear ( );
-    
+
     if ( sepId )
     	menu-> removeItem ( sepId );
     sepId = ( menu-> count ( )) ? menu-> insertSeparator ( 0 ) : 0;
@@ -230,13 +230,13 @@ bool StartMenu::loadMenu( AppLnkSet *folder, QPopupMenu *menu )
         }
     }
 
-    if ( sepId && ( menu-> idAt ( 0 ) == sepId )) { // no tabs entries 
+    if ( sepId && ( menu-> idAt ( 0 ) == sepId )) { // no tabs entries
     	menu-> removeItem ( sepId );
     	sepId = 0;
 	}
 	if ( !menu-> count ( )) // if we don't do this QPopupMenu will insert a dummy Separator, which won't go away later
 		sepId = menu-> insertSeparator ( );
-		
+
     return result;
 }
 
@@ -252,7 +252,7 @@ void StartMenu::launch ( )
         QWidget *active = qApp-> activeWindow ( );
         if ( active && active-> isPopup ( ))
             active-> close ( );
-    
+
         launchMenu-> popup ( QPoint ( 1, y ));
     }
 }
@@ -293,7 +293,7 @@ void StartMenu::clearApplets()
     		launchMenu-> removeItem ( applet-> id );
     		delete applet-> popup;
     	}
-    
+
         applet-> iface-> release();
         applet-> library-> unload();
         delete applet-> library;
@@ -307,10 +307,10 @@ void StartMenu::loadApplets()
 {
     Config cfg( "StartMenu" );
     cfg.setGroup( "Applets" );
-    
+
     // SafeMode causes too much problems, so we disable it for now --
     // maybe we should reenable it for OPIE 1.0 - sandman 26.09.02
-    
+
     bool safe = false; //cfg.readBoolEntry("SafeMode",FALSE);
     if ( safe && !safety_tid )
         return;
@@ -335,14 +335,14 @@ void StartMenu::loadApplets()
             xapplets[napplets++] = applet;
             applet->library = lib;
             applet->iface = iface;
-            
+
             QTranslator *trans = new QTranslator(qApp);
             QString type = (*it).left( (*it).find(".") );
             QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
             if ( trans->load( tfn ))
                 qApp->installTranslator( trans );
             else
-                delete trans;            
+                delete trans;
         } else {
             exclude += *it;
             delete lib;
@@ -354,27 +354,27 @@ void StartMenu::loadApplets()
 	if ( sepId )
 		launchMenu-> removeItem ( sepId );
 	sepId = ( launchMenu-> count ( )) ? launchMenu-> insertSeparator ( ) : 0;
-               
+
     while (napplets--) {
         MenuApplet *applet = xapplets[napplets];
-            
+
         applet-> popup = applet-> iface-> popup ( this );
-        
+
         if ( applet-> popup )
 	    	applet-> id = launchMenu-> insertItem ( applet-> iface-> icon ( ), applet-> iface-> text ( ), applet-> popup );
-	    else 
+	    else
 	    	applet-> id = launchMenu-> insertItem ( applet-> iface-> icon ( ), applet-> iface-> text ( ) );
         applets.insert ( applet-> id, new MenuApplet(*applet));
     }
     delete [] xapplets;
-    
+
     if ( sepId && ( launchMenu-> idAt ( launchMenu-> count ( ) - 1 ) == sepId )) { // no applets
     	launchMenu-> removeItem ( sepId );
     	sepId = 0;
     }
 	if ( !launchMenu-> count ( )) // if we don't do this QPopupMenu will insert a dummy Separator, which won't go away later
 		sepId = launchMenu-> insertSeparator ( );
-    
+
     if ( !safety_tid )
         safety_tid = startTimer(2000); // TT has 5000, but this is a PITA for a developer ;) (sandman)
 }
