@@ -200,7 +200,7 @@ public:
     void save( QString &buf ) const;
 
     void setUid( int i )
-{ Record::setUid(i); replace( Qtopia::AddressUid , QString::number(i)); }
+{ OPimRecord::setUid(i); replace( Qtopia::AddressUid , QString::number(i)); }
 
     QString toShortText()const;
     QString OContact::type()const;
@@ -230,10 +230,6 @@ private:
 			    const QString &zip,
 			    const QString &country ) const;
 
-    Qtopia::UidGen &uidGen() { return sUidGen; }
-
-
-    static Qtopia::UidGen sUidGen;
     QMap<int, QString> mMap;
     ContactPrivate *d;
 };

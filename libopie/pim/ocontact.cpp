@@ -48,7 +48,6 @@
   \ingroup qtopiadesktop
 */
 
-Qtopia::UidGen OContact::sUidGen( Qtopia::UidGen::Qtopia );
 
 /*!
   Creates a new, empty contact.
@@ -1470,8 +1469,10 @@ QValueList<OContact> OContact::readVCard( const QString &filename )
          * this at least happens on
          * Nokia6210
          */
-        if ( con.uid() == 0 )
+        if ( con.uid() == 0 ){
             con.setUid( 1 );
+	    qWarning("assigned new uid %d",con.uid() );
+        }
 
 	contacts.append(con  );
 

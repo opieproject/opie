@@ -122,11 +122,9 @@ QString OPimRecord::crossToString()const {
 }
 /* if uid = 1 assign a new one */
 void OPimRecord::setUid( int uid ) {
-//    qWarning("setting uid" );
     if ( uid == 1)
         uid = uidGen().generate();
 
-//    qWarning(" uid %d",  uid);
     Qtopia::Record::setUid( uid );
 };
 Qtopia::UidGen &OPimRecord::uidGen() {
