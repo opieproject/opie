@@ -25,7 +25,7 @@
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancel</translation>
+        <translation>&amp;Annuleer</translation>
     </message>
 </context>
 <context>
@@ -61,7 +61,7 @@
     </message>
     <message>
         <source>Space Avail</source>
-        <translation>Ruinte Besch.</translation>
+        <translation>Beschikbare ruimte</translation>
     </message>
     <message>
         <source>Output</source>
@@ -281,7 +281,7 @@
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
-        <translation>Klik hier om de Zoek balk te verbergen.</translation>
+        <translation>Klik hier om de zoekbalk te verbergen.</translation>
     </message>
     <message>
         <source>Servers:</source>
@@ -377,7 +377,7 @@ pakket %1?</translation>
     </message>
     <message>
         <source>Download to where</source>
-        <translation>Waarheen Downloaden</translation>
+        <translation>Waarheen downloaden</translation>
     </message>
     <message>
         <source>Enter path to download to</source>
@@ -385,7 +385,7 @@ pakket %1?</translation>
     </message>
     <message>
         <source>Install Remote Package</source>
-        <translation>Installeer Remote Pakket</translation>
+        <translation>Installeer pakket van server</translation>
     </message>
     <message>
         <source>Enter package location</source>
@@ -397,7 +397,7 @@ pakket %1?</translation>
     </message>
     <message>
         <source>No packages selected</source>
-        <translation>Geen paketten geselecteerd</translation>
+        <translation>Geen pakketten geselecteerd</translation>
     </message>
     <message>
         <source>OK</source>
@@ -406,12 +406,12 @@ pakket %1?</translation>
     <message>
         <source>Do you wish to remove or reinstall
 %1?</source>
-        <translation>Wilt u verwijdering of herinstalatie van
+        <translation>Wilt u verwijdering of herinstallatie van
 %1?</translation>
     </message>
     <message>
         <source>Remove or ReInstall</source>
-        <translation>Verwijdering of Herinatallatie</translation>
+        <translation>Verwijdering of Herinstallatie</translation>
     </message>
     <message>
         <source>ReInstall</source>
@@ -429,7 +429,7 @@ pakket %1?</translation>
     </message>
     <message>
         <source>Remove or Upgrade</source>
-        <translation>Verwijdering of vernieuwing</translation>
+        <translation>Verwijdering of Vernieuwing</translation>
     </message>
     <message>
         <source>U</source>
@@ -464,11 +464,11 @@ pakket %1?</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Geinstalleerde Versie&lt;/b&gt; -</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Geinstalleerde versie&lt;/b&gt; -</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Beschikbare Versie&lt;/b&gt; -</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Beschikbare versie&lt;/b&gt; -</translation>
     </message>
     <message>
         <source>Package Information</source>

@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>&amp;Restore</source>
-        <translation>&amp;Herstel</translation>
+        <translation>He&amp;rstel</translation>
     </message>
 </context>
 </TS>

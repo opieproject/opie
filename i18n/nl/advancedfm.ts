@@ -17,7 +17,7 @@ and is licensed by the GPL</source>
         <translation>Advanced FileManager
 copyright 2002-2003
 L.J.Potter &lt;llorncor@handhelds.org&gt;
-en is valt onder de GPL</translation>
+en valt onder de GPL</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
@@ -53,15 +53,15 @@ en is valt onder de GPL</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Kopieer</translation>
+        <translation>Kopiëer</translation>
     </message>
     <message>
         <source>Copy As</source>
-        <translation>Kopieer als</translation>
+        <translation>Kopiëer als</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
-        <translation>Kopieer in zelfde map</translation>
+        <translation>Kopiëer in zelfde map</translation>
     </message>
     <message>
         <source>Move</source>
@@ -158,7 +158,7 @@ er is hier geen favoriet van!</translation>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation>%1 beatanden
+        <translation>%1 bestanden
 echt verwijderen?</translation>
     </message>
     <message>
@@ -205,7 +205,8 @@ exists. Ok to overwrite?</source>
     <message>
         <source>Could not copy
 </source>
-        <translation>Kan niet kopiëeren</translation>
+        <translation>Kan niet kopiëren
+</translation>
     </message>
     <message>
         <source>to
