@@ -49,4 +49,6 @@ private:
     void changeDestinationDetails();
 	void newDestination();
 	void removeDestination();
+
+    void toggleJumpTo( bool val );
 };

@@ -66,8 +66,8 @@ void SettingsImpl :: setupData()
     vector<Server>::iterator it;
     for ( it = dataMgr->getServerList().begin() ; it != dataMgr->getServerList().end() ; ++it )
 	{
-		if ( it->getServerName() == LOCAL_SERVER || it->getServerName() == LOCAL_IPKGS )
-			continue;
+        if ( it->getServerName() == LOCAL_SERVER || it->getServerName() == LOCAL_IPKGS )
+            continue;
 
         servers->insertItem( it->getServerName() );
 	}
@@ -77,6 +77,13 @@ void SettingsImpl :: setupData()
     for ( it2 = dataMgr->getDestinationList().begin() ; it2 != dataMgr->getDestinationList().end() ; ++it2 )
         destinations->insertItem( it2->getDestinationName() );
 
+#ifdef QWS
+    Config cfg( "aqpkg" );
+    cfg.setGroup( "settings" );
+    jumpTo->setChecked( cfg.readBoolEntry( "showJumpTo", "true" ) );
+#else
+    jumpTo->setChecked( true );
+#endif
 }
 
 //------------------ Servers tab ----------------------
@@ -224,3 +231,15 @@ void SettingsImpl :: changeDestinationDetails()
 #endif
 	}
 }
+
+//------------------ General tab ----------------------
+
+void SettingsImpl :: toggleJumpTo( bool val )
+{
+#ifdef QWS
+    Config cfg( "aqpkg" );
+    cfg.setGroup( "settings" );
+    cfg.writeEntry( "showJumpTo", val );
+#endif
+}
+

@@ -53,6 +53,7 @@ NetworkPackageManager::NetworkPackageManager( DataManager *dataManager, QWidget 
         Config cfg( "aqpkg" );
         cfg.setGroup( "settings" );
         currentlySelectedServer = cfg.readEntry( "selectedServer", "local" );
+        showJumpTo = cfg.readBoolEntry( "showJumpTo", "true" );
 #endif
     
 
@@ -124,17 +125,21 @@ void NetworkPackageManager :: initGui()
     QHBoxLayout *hbox3 = new QHBoxLayout( vbox, -1, "HBox1" );
     QHBoxLayout *hbox4 = new QHBoxLayout( vbox, -1, "HBox1" );
 
-    char text[2];
-    text[1] = '\0';
-    for ( int i = 0 ; i < 26 ; ++i )
-    {
-        text[0] = 'A' + i;
-        LetterPushButton *b = new LetterPushButton( text, this );
-        connect( b, SIGNAL( released( QString ) ), this, SLOT( letterPushed( QString ) ) );
-        if ( i < 16 )
-            hbox3->addWidget( b );
-        else
-            hbox4->addWidget( b );
+
+    if ( showJumpTo )
+    {    
+        char text[2];
+        text[1] = '\0';
+        for ( int i = 0 ; i < 26 ; ++i )
+        {
+                text[0] = 'A' + i;
+                LetterPushButton *b = new LetterPushButton( text, this );
+                connect( b, SIGNAL( released( QString ) ), this, SLOT( letterPushed( QString ) ) );
+                if ( i < 16 )
+                hbox3->addWidget( b );
+                else
+                hbox4->addWidget( b );
+        }
     }
 
     vbox->addWidget( packagesList );

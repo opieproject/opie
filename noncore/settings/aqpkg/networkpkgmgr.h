@@ -53,6 +53,7 @@ private:
     ProgressDlg *progressDlg;
     QString currentlySelectedServer;
 
+    bool showJumpTo;
     int timerId;
 
     void timerEvent ( QTimerEvent * );
