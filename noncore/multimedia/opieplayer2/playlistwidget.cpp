@@ -629,7 +629,7 @@ void PlayListWidget::addSelected() {
     Config cfg( "OpiePlayer" );
     cfg.setGroup("PlayList");
     QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
-    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
+//    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
 
     switch (tabWidget->currentPageIndex()) {
       case 0: //playlist
@@ -676,6 +676,7 @@ void PlayListWidget::removeSelected() {
 }
 
 void PlayListWidget::playIt( QListViewItem *it) {
+    if(it==NULL) return;
     qDebug("playIt");
     mediaPlayerState->setPlaying(FALSE);
     mediaPlayerState->setPlaying(TRUE);
@@ -712,7 +713,7 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
     }
 }
 
-void PlayListWidget::tabChanged(QWidget *widg) {
+void PlayListWidget::tabChanged(QWidget *) {
 
     switch ( tabWidget->currentPageIndex()) {
       case 0:
@@ -802,7 +803,7 @@ void PlayListWidget::deletePlaylist() {
     };
 }
 
-void PlayListWidget::viewPressed( int mouse, QListViewItem *item, const QPoint& point, int i) {
+void PlayListWidget::viewPressed( int mouse, QListViewItem *, const QPoint& , int) {
     switch (mouse) {
       case 1:
           break;
@@ -822,7 +823,7 @@ void PlayListWidget::playSelected() {
     btnPlay( TRUE);
 }
 
-void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *item, const QPoint& point, int i) {
+void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *, const QPoint& , int ) {
     switch (mouse) {
       case 1:
 
@@ -843,7 +844,7 @@ void PlayListWidget::listDelete() {
     cfg.setGroup("PlayList");
     QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
     QString file;
-    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
+//    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
     switch ( tabWidget->currentPageIndex()) {
       case 0:
           break;
@@ -1040,7 +1041,7 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
     }
 }
 
-void PlayListWidget::keyPressEvent( QKeyEvent *e)
+void PlayListWidget::keyPressEvent( QKeyEvent *)
 {
 //    qDebug("Key press");
 //     switch ( e->key() ) {
