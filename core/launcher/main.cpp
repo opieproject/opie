@@ -66,7 +66,7 @@ static void cleanup()
     QStringList stale = dir.entryList();
     QStringList::Iterator it;
     for ( it = stale.begin(); it != stale.end(); ++it ) {
-	dir.remove( *it );
+    dir.remove( *it );
     }
 }
 
@@ -87,7 +87,7 @@ void initEnvironment()
 
     // if not timezone set, pick New York
     if (tz.isNull() || tz.isEmpty())
-	tz = "America/New_York";
+    tz = "America/New_York";
 
     setenv( "TZ", tz, 1 );
     config.writeEntry( "Timezone", tz);
@@ -95,7 +95,7 @@ void initEnvironment()
     config.setGroup( "Language" );
     QString lang = config.readEntry( "Language", getenv("LANG") ).stripWhiteSpace();
     if( lang.isNull() || lang.isEmpty())
-	lang = "en_US";
+    lang = "en_US";
 
     setenv( "LANG", lang, 1 );
     config.writeEntry("Language", lang);
@@ -125,7 +125,7 @@ static void initKeyboard()
     int ard = config.readNumEntry( "RepeatDelay" );
     int arp = config.readNumEntry( "RepeatPeriod" );
     if ( ard > 0 && arp > 0 )
-	qwsSetKeyboardAutoRepeat( ard, arp );
+    qwsSetKeyboardAutoRepeat( ard, arp );
 
     QString layout = config.readEntry( "Layout", "us101" );
     Server::setKeyboardLayout( layout );
@@ -141,13 +141,13 @@ static bool firstUse()
     }
 
     {
-	Config config( "qpe" );
-	config.setGroup( "Startup" );
-	needFirstUse |= config.readBoolEntry( "FirstUse", TRUE );
+    Config config( "qpe" );
+    config.setGroup( "Startup" );
+    needFirstUse |= config.readBoolEntry( "FirstUse", TRUE );
     }
 
     if ( !needFirstUse )
-	return FALSE;
+    return FALSE;
 
     FirstUse *fu = new FirstUse();
     fu->exec();
@@ -175,15 +175,15 @@ int initApplication( int argc, char ** argv )
 
     // Don't use first use under Windows
     if ( firstUse() ) {
-	a.restart();
-	return 0;
+    a.restart();
+    return 0;
     }
 
     ODevice::inst ( )-> setSoftSuspend ( true );
 
     {
         QCopEnvelope e("QPE/System", "setBacklight(int)" );
-  	e << -3; // Forced on
+    e << -3; // Forced on
     }
 
     AlarmServer::initialize();
@@ -223,70 +223,52 @@ static const char *pidfile_path = "/var/run/opie.pid";
 
 void create_pidfile ( )
 {
-	FILE *f;
+    FILE *f;
 
-	if (( f = ::fopen ( pidfile_path, "w" ))) {
-		::fprintf ( f, "%d", getpid ( ));
-		::fclose ( f );
-	}
+    if (( f = ::fopen ( pidfile_path, "w" ))) {
+        ::fprintf ( f, "%d", getpid ( ));
+        ::fclose ( f );
+    }
 }
 
 void remove_pidfile ( )
 {
-	::unlink ( pidfile_path );
+    ::unlink ( pidfile_path );
 }
 
 void handle_sigterm ( int /* sig */ )
 {
-	if ( qApp )
-		qApp-> quit ( );
+    ::signal( SIGCHLD, SIG_IGN );
+    ::signal( SIGSEGV, SIG_IGN );
+    ::signal( SIGBUS, SIG_IGN );
+    ::signal( SIGILL, SIG_IGN );
+    ::signal( SIGTERM, SIG_IGN );
+    ::signal ( SIGINT, SIG_IGN );
+    if ( qApp ) qApp->quit();
 }
 
-#ifndef Q_OS_WIN32
 int main( int argc, char ** argv )
 {
-
-    ::signal ( SIGCHLD, SIG_IGN );
-
-    ::signal ( SIGTERM, handle_sigterm );
+    ::signal( SIGCHLD, SIG_IGN );
+    ::signal( SIGSEGV, handle_sigterm );
+    ::signal( SIGBUS, handle_sigterm );
+    ::signal( SIGILL, handle_sigterm );
+    ::signal( SIGTERM, handle_sigterm );
     ::signal ( SIGINT, handle_sigterm );
+    ::setsid();
+    ::setpgid( 0, 0 );
 
-    ::setsid ( );
-    ::setpgid ( 0, 0 );
-
-    ::atexit ( remove_pidfile );
-    create_pidfile ( );
+    ::atexit( remove_pidfile );
+    create_pidfile();
 
     int retVal = initApplication( argc, argv );
 
     // Have we been asked to restart?
-    if ( ServerApplication::doRestart ) {
-	for ( int fd = 3; fd < 100; fd++ )
-	    close( fd );
-
-	execl( (QPEApplication::qpeDir()+"bin/qpe").latin1(), "qpe", 0 );
-    }
-
-    // Kill them. Kill them all.
-    ::kill ( 0, SIGTERM );
-    ::sleep ( 1 );
-    ::kill ( 0, SIGKILL );
-
-    return retVal;
-}
-#else
-
-int main( int argc, char ** argv )
-{
-    int retVal = initApplication( argc, argv );
-
-    if ( DesktopApplication::doRestart ) {
-    odebug << "Trying to restart" << oendl;
-	execl( (QPEApplication::qpeDir()+"bin\\qpe").latin1(), "qpe", 0 );
+    if ( ServerApplication::doRestart )
+    {
+        for ( int fd = 3; fd < 100; fd++ ) close( fd );
+        execl( (QPEApplication::qpeDir()+"bin/qpe").latin1(), "qpe", 0 );
     }
 
     return retVal;
 }
-
-#endif
-
