@@ -15,9 +15,22 @@ CONFIG_TARGET_MACOSX=y
 # CONFIG_OPTIMIZE is not set
 CONFIG_DEBUG=y
 CONFIG_QUICK_LAUNCH=y
-# CONFIG_OPIE_NO_OVERRIDE_QT is not set
+CONFIG_QUICKLAUNCH_PATH="/Users/stefan/Developer/opie/bin/quicklauncher"
 CONFIG_SPECFILE="qws/macx-generic-g++"
 CONFIG_EXPERIMENTAL=y
+
+#
+# Configuration
+#
+# CONFIG_OPIE_NO_OVERRIDE_QT is not set
+# CONFIG_OPIE_NO_BUILTIN_SHUTDOWN is not set
+# CONFIG_OPIE_NO_BUILTIN_CALIBRATE is not set
+CONFIG_OPIE_SOUND_FRAGMENT_SHIFT="16"
+# CONFIG_USE_REALTIME_AUDIO_THREAD is not set
+# CONFIG_OPIE_HIGH_RES_SMALL_PHY is not set
+# CONFIG_OPIE_NEW_ALLOC is not set
+# CONFIG_OPIE_NO_SOUND_PCM_READ_BITS is not set
+CONFIG_OPIE_WE_VERSION="15"
 
 #
 # Base
@@ -25,13 +38,33 @@ CONFIG_EXPERIMENTAL=y
 CONFIG_LIBQPE=y
 # CONFIG_X11 is not set
 CONFIG_LIBOPIE=y
+
+#
+# 
+#
+CONFIG_LIBOPIE2CORE=y
+CONFIG_LIBOPIE2DB=y
+# CONFIG_LIBOPIE2NET is not set
+CONFIG_LIBOPIE2PIM=y
+CONFIG_SQL_PIM_BACKEND=y
+CONFIG_LIBOPIE2UI=y
+# CONFIG_LIBOPIE2MM is not set
+
+#
+# the examples need a libqpe, libopie2core, libopie2db, libopie2net, libopie2pim, libopie2ui and libopie2mm
+#
+
+#
+# 
+#
+CONFIG_LIBQTAUX=y
 # CONFIG_OPIE-LOGIN is not set
 # CONFIG_OPIEALARM is not set
 CONFIG_QUICKLAUNCHER=y
 CONFIG_LAUNCHER=y
 CONFIG_PRELOAD=y
 CONFIG_LAUNCHER_CORE=y
-CONFIG_QWS=y
+# CONFIG_SYMLINKER is not set
 
 #
 # 
@@ -56,27 +89,25 @@ CONFIG_HOMEAPPLET=y
 # CONFIG_VMEMO is not set
 # CONFIG_VOLUMEAPPLET is not set
 # CONFIG_VTAPPLET is not set
+# CONFIG_MEMORYAPPLET is not set
 
 #
 # Network applet needs a libqpe and libopie2 (core, ui, net)
 #
 CONFIG_NOTESAPPLET=y
-# CONFIG_WIRELESSAPPLET is not set
 
 #
 # Apps
 #
 # CONFIG_CALIBRATE is not set
 # CONFIG_EMBEDDEDKONSOLE is not set
-CONFIG_FILEBROWSER=y
 CONFIG_HELPBROWSER=y
 # CONFIG_OAPP is not set
-CONFIG_OIPKG=y
 CONFIG_QCOP=y
 CONFIG_TEXTEDIT=y
 # CONFIG_ADVANCEDFM is not set
-# CONFIG_AQPKG is not set
 CONFIG_CHECKBOOK=y
+CONFIG_CONFEDIT=y
 # CONFIG_ODICT is not set
 # CONFIG_BARTENDER is not set
 # CONFIG_OPIE-CONSOLE is not set
@@ -84,10 +115,9 @@ CONFIG_CHECKBOOK=y
 CONFIG_OPIE-SHEET=y
 CONFIG_OPIE-WRITE=y
 CONFIG_OXYGEN=y
-CONFIG_SYSINFO=y
+# CONFIG_QASHMONEY is not set
 CONFIG_TABLEVIEWER=y
-CONFIG_TINYKATE=y
-CONFIG_LIBKATE=y
+# CONFIG_LIBKATE is not set
 # CONFIG_ZSAFE is not set
 
 #
@@ -96,54 +126,56 @@ CONFIG_LIBKATE=y
 # CONFIG_GSMTOOL is not set
 # CONFIG_KEYPEBBLE is not set
 # CONFIG_MOBILEMSG is not set
-# CONFIG_MAIL is not set
+
+#
+# Net
+#
 # CONFIG_FTPLIB is not set
-# CONFIG_MAILIT is not set
+# CONFIG_LIBMAILWRAPPER is not set
 # CONFIG_OPIEIRC is not set
 # CONFIG_OPIE-RDESKTOP is not set
+# CONFIG_OPIETOOTH is not set
 # CONFIG_UBROWSER is not set
 
 #
-# wellenreiter needs libqpe, libopie1 and libopie2 (core+net+ui)
+# wellenreiter needs a libqpe and libopie2 (core+net+ui)
 #
 
 #
 # Games
 #
-CONFIG_BACKGAMMON=y
-CONFIG_BOUNCE=y
-CONFIG_BUZZWORD=y
-CONFIG_FIFTEEN=y
-CONFIG_GO=y
-CONFIG_KBILL=y
-CONFIG_KCHECKERS=y
-CONFIG_KPACMAN=y
-CONFIG_MINDBREAKER=y
-CONFIG_MINESWEEP=y
-# CONFIG_WORDGAME is not set
-CONFIG_PARASHOOT=y
-CONFIG_QASTEROIDS=y
+# CONFIG_BACKGAMMON is not set
+# CONFIG_BOUNCE is not set
+# CONFIG_BUZZWORD is not set
+# CONFIG_FIFTEEN is not set
+# CONFIG_GO is not set
+# CONFIG_KBILL is not set
+# CONFIG_KCHECKERS is not set
+# CONFIG_KPACMAN is not set
+# CONFIG_MINDBREAKER is not set
+# CONFIG_MINESWEEP is not set
+# CONFIG_YATZEE is not set
+# CONFIG_PARASHOOT is not set
+# CONFIG_QASTEROIDS is not set
 # CONFIG_SFCAVE is not set
 # CONFIG_SFCAVE-SDL is not set
 # CONFIG_SNAKE is not set
-CONFIG_SOLITAIRE=y
+# CONFIG_SOLITAIRE is not set
 # CONFIG_TETRIX is not set
 # CONFIG_TICTAC is not set
+# CONFIG_WORDGAME is not set
 
 #
 # Graphics and Multimedia
 #
 # CONFIG_FREETYPE is not set
 CONFIG_DRAWPAD=y
-# CONFIG_QPDF is not set
 # CONFIG_OPIEPLAYER is not set
-
-#
-# opie-camera needs a libqpe, libopie and libopie2core
-#
+# CONFIG_CAMERA is not set
 # CONFIG_OPIEPLAYER2 is not set
 # CONFIG_OPIEREC is not set
-CONFIG_SHOWIMG=y
+# CONFIG_SHOWIMG is not set
+# CONFIG_TONLEITER is not set
 
 #
 # Input methods
@@ -171,6 +203,7 @@ CONFIG_UNIKEYBOARD=y
 #
 CONFIG_ADDRESSBOOK=y
 CONFIG_DATEBOOK=y
+CONFIG_DATEBOOK2=y
 CONFIG_OSEARCH=y
 CONFIG_TODAY=y
 CONFIG_TODO=y
@@ -183,7 +216,10 @@ CONFIG_TODO=y
 # CONFIG_TODAY_WEATHER is not set
 CONFIG_TODAY_ADDRESSBOOK=y
 CONFIG_TODAY_DATEBOOK=y
-CONFIG_TODAY_MAIL=y
+
+#
+# opie-today-mailplugin requires libopie2core, libopie2pim, and libmailwrapper
+#
 CONFIG_TODAY_TODOLIST=y
 
 #
@@ -192,16 +228,18 @@ CONFIG_TODAY_TODOLIST=y
 CONFIG_BUTTON-SETTINGS=y
 CONFIG_CITYTIME=y
 CONFIG_LAUNCHER-SETTINGS=y
-CONFIG_LIGHT-AND-POWER=y
+# CONFIG_LIGHT-AND-POWER is not set
 CONFIG_SECURITY=y
 CONFIG_APPEARANCE2=y
+# CONFIG_AQPKG is not set
 CONFIG_BACKUP=y
+CONFIG_DOCTAB=y
 CONFIG_LANGUAGE=y
-CONFIG_MEDIUMMOUNT=y
-CONFIG_NETSYSTEMTIME=y
-# CONFIG_NETWORKSETUP is not set
+# CONFIG_MEDIUMMOUNT is not set
+# CONFIG_NETSYSTEMTIME is not set
 # CONFIG_SOUND is not set
 # CONFIG_SSHKEYS is not set
+CONFIG_SYSINFO=y
 CONFIG_TABMANAGER=y
 # CONFIG_USERMANAGER is not set
 
@@ -250,42 +288,19 @@ CONFIG_OPIE-SH=y
 #
 
 #
-# Experimental
+# Unsupported / Unmaintained
 #
-
-#
-# libopie2
-#
-# CONFIG_LIBOPIE2CORE is not set
-
-#
-# libopie2db needs a libqpe and libopie2core
-#
-
-#
-# libopie2net needs a libqpe and libopie2core
-#
-
-#
-# libopie2pim needs a libqpe and libopie2core
-#
-
-#
-# libopie2ui needs a libqpe and libopie2core
-#
-
-#
-# libopie2mm needs a libqpe and libopie2core
-#
+# CONFIG_FILEBROWSER is not set
+# CONFIG_MAILIT is not set
+# CONFIG_OIPKG is not set
+# CONFIG_QPDF is not set
 
 #
 # 
 #
 
 #
-# the examples need a libqpe, libopie2core, libopie2db, libopie2net, libopie2pim, libopie2ui and libopie2mm
+# Experimental
 #
-
-#
-# SQL-Support needs libopie2db!
-#
+# CONFIG_LIBSLCOMPAT is not set
+# CONFIG_QWS is not set

@@ -11,6 +11,9 @@ Thanks to Juergen Graf to debug this very generic README !
 
 Status:
 -------
+This work is done, do provide a development platform for Apple-Users! Please do not expect that you
+could create a productive Opie system for the Mac with it !!
+
 The basic system works quite well. But a lot of applications and plugins,
 which are platform specific, need some work to be compileable.
 
@@ -18,13 +21,9 @@ What is ready:
 
 libqpe
 libopie1
-libopie2/opiedb
+libopie2
 pim-applications (addressbook, todolist, datebook, today)
 A lot of applications and plugins which are not platform specific.
-
-What will follow soon:
-
-libopie2 (libopiecore and libopiedb works already !)
 
 ToDO:
 -----
@@ -96,7 +95,7 @@ Go into the basic directory of Opie
 make menuconfig" 
 set "Build Parameters"->"Target Machine"->"Mac OS X (DARWIN)" to activate the platform specific changes.
 save and exit the menuconfig app
-make
+make  (ATTENTION: See Known Bugs below!!)
 
 You will see that a lot of applications and plugins/applets will not compile
 successfully, due to the fact that they are not ported to this platform.
@@ -109,6 +108,25 @@ to get a working configuration to start with.
 
 (The missing apps/plugins will be ported on demand.)
 
+Known Bugs (compilation problems):
+-----------
+The Apple-Linker does not load indirect linked libraries automatically ( if somebody
+has a solution here, please inform me !!), therefore I had to add "-lopiedb2" and "-lqpe"
+for applications/libraries who used libraries which are linked against them.
+A goot solution would be to add it in the project files of these application, but this would
+influence the linux-platform as well... :(
+As a first (but stupid) solution, I added this linker parameter to the global "include.pro" 
+which adds them for everything.. Yes, also for libqpe etc.. 
+Therefore this project will not compile out of the box. You have to compile in a two-pass way:
+
+Pass 1: Find the line "LIBS += -lopiedb2 -lqpe" in the file include.pro and comment out it (put a "#" 
+        in front of it)
+	Do a "make -k" to compile what is already compileable (some will not compile)
+Pass 2: Remove the comment from Pass1 and do a "make". The rest should compile now successfully.
+
+
+I know, this is a silly solution ! But I don't have anything better without influence the Linux build 
+process too much .. I  would be happy, if somebody could help me here !
 
 SPECIAL INFORMATION FOR USERS OF PANTHER
 ----------------------------------------
