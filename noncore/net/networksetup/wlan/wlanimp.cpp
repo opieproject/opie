@@ -6,10 +6,12 @@
 #include <qtextstream.h>
 #include <qmessagebox.h>
 #include <qlineedit.h>
+#include <qlabel.h>
 #include <qspinbox.h>
 #include <qradiobutton.h>
 #include <qcheckbox.h>
 #include <qtabwidget.h>
+#include <qcombobox.h>
 
 /* system() */
 #include <stdlib.h>
@@ -39,6 +41,13 @@ WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, W
   }
   else
     qDebug(QString("WLANImp: Can't open file: %1 for reading.").arg(wlanFile).latin1());
+  connect(networkType, SIGNAL(activated(int)), this, SLOT(typeChanged(int)));
+
+}
+
+void WLANImp::typeChanged(int mod){
+  networkChannel->setEnabled(mod);
+  channelLabel->setEnabled(mod);
 }
 
 /**
@@ -71,23 +80,19 @@ void WLANImp::parseSettingFile(){
       if(line.contains("ESSID=")){
         QString id = line.mid(line.find("ESSID=")+6, line.length());
         if(id == "any"){
-          essNon->setChecked(true);
-          essSpecific->setChecked(false);
+          essAny->setChecked(false);
         }else{ 
-          essSpecific->setChecked(true);
+          essAny->setChecked(true);
 	  essSpecificLineEdit->setText(id);
-          essNon->setChecked(false);
 	}
       }
       if(line.contains("MODE=")){
         QString mode = line.mid(line.find("MODE=")+5, line.length());
         if(mode == "Managed"){
-          network802->setChecked( false );
-	  networkInfrastructure->setChecked( true );
+          networkType->setCurrentItem(0);
 	}
 	else{
-	  network802->setChecked( true );
-	  networkInfrastructure->setChecked( false );
+	  networkType->setCurrentItem(0);
 	}
       }
       if(line.contains("KEY0="))
@@ -154,10 +159,17 @@ void WLANImp::changeAndSaveSettingFile(){
       
       if(!line.contains("esac"))
         stream << line << "\n"; 
-      
-      stream << "\tESSID=" << (essNon->isChecked() == true ? QString("any") : essSpecificLineEdit->text()) << '\n';
-      stream << "\tMODE=" << (networkInfrastructure->isChecked() == true  ? "Managed" : "ad-hoc") << '\n';
-      
+      if(!essAny->isChecked() == true){
+        stream << "\tESSID=any\n";
+	stream << "\tMODE=Managed\n";
+        stream << "\tCHANNEL=6\n";
+      }
+      else{
+        stream << "\tESSID=" << essSpecificLineEdit->text() << '\n';
+        stream << "\tMODE=" << ( networkType->currentItem() == 0  ? "Managed" : "ad-hoc") << '\n';
+        stream << "\tCHANNEL=" << networkChannel->value() << "\n";
+      } 
+
       stream << "\tKEY0=" << keyLineEdit0->text() << "\n";
       stream << "\tKEY1=" << keyLineEdit1->text() << "\n";
       stream << "\tKEY2=" << keyLineEdit2->text() << "\n";
@@ -175,7 +187,6 @@ void WLANImp::changeAndSaveSettingFile(){
 	  stream << " restricted";
 	stream << "\"\n";
       }
-      stream << "\tCHANNEL=" << networkChannel->value() << "\n";
       stream << "\tRATE=auto\n";
       if(line.contains("esac"))
         stream << line << "\n"; 
@@ -196,10 +207,15 @@ void WLANImp::accept(){
   if(wepEnabled->isChecked()){
     if(keyLineEdit0->text().isEmpty() && keyLineEdit1->text().isEmpty() && keyLineEdit2->text().isEmpty() && keyLineEdit3->text().isEmpty() )
 	{
-    	QMessageBox::information(this, "", "Please enter a key for WEP.", QMessageBox::Ok);
+    	QMessageBox::information(this, "Error", "Please enter a key for WEP.", QMessageBox::Ok);
     	return;
 	}
   }	
+  
+  if(essSpecificLineEdit->text().isEmpty()){
+    QMessageBox::information(this, "Error", "Please enter a ESS-ID.", QMessageBox::Ok);
+    return;
+  }
   
   // Ok settings are good here, save
   changeAndSaveSettingFile();
@@ -208,6 +224,7 @@ void WLANImp::accept(){
   if(!interfaceSetup->saveChanges())
     return;
  
+  return;
   // Restart the device now that the settings have changed
   QString initpath;
   if( QDir("/etc/rc.d/init.d").exists() )

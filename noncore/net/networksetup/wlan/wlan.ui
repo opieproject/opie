@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>237</width>
-            <height>286</height>
+            <width>239</width>
+            <height>277</height>
         </rect>
     </property>
     <property stdset="1">
@@ -65,72 +65,29 @@
                         <number>6</number>
                     </property>
                     <widget>
-                        <class>QButtonGroup</class>
+                        <class>QCheckBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>ButtonGroup45</cstring>
+                            <cstring>essAny</cstring>
                         </property>
                         <property stdset="1">
-                            <name>title</name>
-                            <string>ESS ID</string>
+                            <name>text</name>
+                            <string>Sepecify Access Point</string>
                         </property>
-                        <vbox>
-                            <property stdset="1">
-                                <name>margin</name>
-                                <number>11</number>
-                            </property>
-                            <property stdset="1">
-                                <name>spacing</name>
-                                <number>6</number>
-                            </property>
-                            <widget>
-                                <class>QRadioButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>essNon</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Non-Spec ESSID: "ANY"</string>
-                                </property>
-                                <property stdset="1">
-                                    <name>checked</name>
-                                    <bool>true</bool>
-                                </property>
-                            </widget>
-                            <widget>
-                                <class>QRadioButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>essSpecific</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Specific ESSID</string>
-                                </property>
-                            </widget>
-                            <widget>
-                                <class>QLineEdit</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>essSpecificLineEdit</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>enabled</name>
-                                    <bool>false</bool>
-                                </property>
-                            </widget>
-                        </vbox>
                     </widget>
                     <widget>
-                        <class>QButtonGroup</class>
+                        <class>QGroupBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>ButtonGroup46</cstring>
+                            <cstring>GroupBox1</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>enabled</name>
+                            <bool>false</bool>
                         </property>
                         <property stdset="1">
                             <name>title</name>
-                            <string>Network Type</string>
+                            <string>Settings</string>
                         </property>
                         <grid>
                             <property stdset="1">
@@ -141,45 +98,63 @@
                                 <name>spacing</name>
                                 <number>6</number>
                             </property>
-                            <widget row="0"  column="0"  rowspan="1"  colspan="3" >
-                                <class>QRadioButton</class>
+                            <widget row="0"  column="0" >
+                                <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>networkInfrastructure</cstring>
+                                    <cstring>TextLabel1</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Infrastructure</string>
+                                    <string>ESS-ID</string>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>TextLabel2_2</cstring>
                                 </property>
                                 <property stdset="1">
-                                    <name>checked</name>
-                                    <bool>true</bool>
+                                    <name>text</name>
+                                    <string>Network Type</string>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="1"  rowspan="1"  colspan="2" >
+                                <class>QLineEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>essSpecificLineEdit</cstring>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="1"  rowspan="1"  colspan="2" >
+                                <class>QComboBox</class>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>Infrastructure</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>Ad-Hoc</string>
+                                    </property>
+                                </item>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>networkType</cstring>
                                 </property>
                             </widget>
                             <widget row="2"  column="0" >
                                 <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>TextLabel2</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>enabled</name>
-                                    <bool>false</bool>
+                                    <cstring>channelLabel</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>Channel</string>
-                                </property>
-                            </widget>
-                            <widget row="1"  column="0"  rowspan="1"  colspan="2" >
-                                <class>QRadioButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>network802</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Ad-Hoc</string>
                                 </property>
                             </widget>
                             <widget row="2"  column="1" >
@@ -194,7 +169,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>maxValue</name>
-                                    <number>11</number>
+                                    <number>15</number>
                                 </property>
                                 <property stdset="1">
                                     <name>minValue</name>
@@ -208,7 +183,7 @@
                             <spacer row="2"  column="2" >
                                 <property>
                                     <name>name</name>
-                                    <cstring>Spacer32</cstring>
+                                    <cstring>Spacer4</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>orientation</name>
@@ -336,7 +311,7 @@
                         <class>QButtonGroup</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>ButtonGroup44</cstring>
+                            <cstring>KeyButtonGroup</cstring>
                         </property>
                         <property stdset="1">
                             <name>enabled</name>
@@ -361,12 +336,20 @@
                                     <name>name</name>
                                     <cstring>keyLineEdit0</cstring>
                                 </property>
+                                <property stdset="1">
+                                    <name>echoMode</name>
+                                    <enum>Password</enum>
+                                </property>
                             </widget>
                             <widget row="1"  column="1" >
                                 <class>QLineEdit</class>
                                 <property stdset="1">
                                     <name>name</name>
                                     <cstring>keyLineEdit1</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>echoMode</name>
+                                    <enum>Password</enum>
                                 </property>
                             </widget>
                             <widget row="2"  column="1" >
@@ -375,12 +358,20 @@
                                     <name>name</name>
                                     <cstring>keyLineEdit2</cstring>
                                 </property>
+                                <property stdset="1">
+                                    <name>echoMode</name>
+                                    <enum>Password</enum>
+                                </property>
                             </widget>
                             <widget row="3"  column="1" >
                                 <class>QLineEdit</class>
                                 <property stdset="1">
                                     <name>name</name>
                                     <cstring>keyLineEdit3</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>echoMode</name>
+                                    <enum>Password</enum>
                                 </property>
                             </widget>
                             <widget row="0"  column="0" >
@@ -461,30 +452,6 @@
 </widget>
 <connections>
     <connection>
-        <sender>essSpecific</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>essSpecificLineEdit</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>network802</sender>
-        <signal>clicked()</signal>
-        <receiver>essSpecific</receiver>
-        <slot>animateClick()</slot>
-    </connection>
-    <connection>
-        <sender>network802</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>TextLabel2</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>network802</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>networkChannel</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
         <sender>wepEnabled</sender>
         <signal>toggled(bool)</signal>
         <receiver>ButtonGroup43</receiver>
@@ -493,17 +460,21 @@
     <connection>
         <sender>wepEnabled</sender>
         <signal>toggled(bool)</signal>
-        <receiver>ButtonGroup44</receiver>
+        <receiver>KeyButtonGroup</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>essAny</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>GroupBox1</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>
 <tabstops>
     <tabstop>tabWidget</tabstop>
-    <tabstop>essNon</tabstop>
-    <tabstop>essSpecific</tabstop>
+    <tabstop>essAny</tabstop>
     <tabstop>essSpecificLineEdit</tabstop>
-    <tabstop>networkInfrastructure</tabstop>
-    <tabstop>network802</tabstop>
+    <tabstop>networkType</tabstop>
     <tabstop>networkChannel</tabstop>
     <tabstop>wepEnabled</tabstop>
     <tabstop>authOpen</tabstop>

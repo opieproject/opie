@@ -18,6 +18,9 @@ public:
 protected:
   void accept();
 
+private slots:
+  void typeChanged(int);
+  
 private:
   void parseSettingFile();
   void changeAndSaveSettingFile();
