@@ -46,7 +46,7 @@ QString StockTickerPlugin::pixmapNameConfig() const {
 }
 
 TodayConfigWidget* StockTickerPlugin::configWidget( QWidget* wid ) {
-    return new StocktickerPluginConfig( wid , "Stockticker" );
+    return new StocktickerPluginConfig( wid , "Stockticker Config" );
 }
 
 QString StockTickerPlugin::appName() const {

@@ -63,7 +63,7 @@ QString WeatherPlugin::pixmapNameConfig() const
 
 TodayConfigWidget* WeatherPlugin::configWidget( QWidget* wid )
 {
-	return new WeatherPluginConfig( wid, "Weather" );
+	return new WeatherPluginConfig( wid, "Weather Config" );
 }
 
 QString WeatherPlugin::appName() const
