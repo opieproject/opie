@@ -1,0 +1,10 @@
+Package: libetpan
+Files: usr/lib/libetpan*
+Priority: optional
+Section: system
+Maintainer: Rajko Albrecht <alwin@handhelds.org>
+Architecture: arm
+Version: 0.33pre-$SUB_VERSION
+Depends: libssl0.9.7
+Description: libetpan mail/news library - A version of libetpan patched for Opies mailing app
+License: LGPL
