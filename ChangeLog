@@ -1,5 +1,10 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
-        * Added Generic Keyconfig Widget (zecke)
+
+2004-25-04	The Opie Team <opie@handhelds.org>
+
+	* Released as Version 1.1.3 (devel)
+	* Added a real system graffiti character set (brad)
+	* Added Generic Keyconfig Widget (zecke)
 	* Improved Screenshotapplet and Drawpad integration. You can now open a screenshot in drawpad and take notes (zecke)
 	* Added new Bible reader app - opie-dagger (drw)
 	* Added a new Image Viewer. Work is ongoing (zecke,alwin)
