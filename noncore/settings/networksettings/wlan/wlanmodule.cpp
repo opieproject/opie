@@ -70,7 +70,7 @@ bool WLANModule::isOwner(Interface *i){
  * @return QWidget* pointer to this modules configure.
  */
 QWidget *WLANModule::configure(Interface *i){
-  WLANImp *wlanconfig = new WLANImp(0, "WlanConfig", i, false,  Qt::WDestructiveClose);
+  WLANImp *wlanconfig = new WLANImp(0, "WlanConfig", i, true,  Qt::WDestructiveClose);
   wlanconfig->setProfile(profile);
   return wlanconfig;
 }
@@ -132,6 +132,7 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
     QDataStream stream(arg,IO_ReadOnly);
     QString interface;
     QString action;
+    QDialog *toShow;
     while (! stream.atEnd() ){
         stream >> interface;
         stream >> action;
@@ -147,8 +148,8 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
 
         if (ifa == 0){
             qDebug("WLANModule Did not find %s",interface.latin1());
-            qDebug("returning");
-            return;
+            qDebug("skipping");
+            count = 0;
         }
 
         if (count == 2){
@@ -170,6 +171,7 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
             if (!wlanconfigWiget){
                 //FIXME: what if it got closed meanwhile?
                 wlanconfigWiget = (WLANImp*) configure(ifa);
+                toShow = (QDialog*) wlanconfigWiget;
             }
             wlanconfigWiget->showMaximized();
             stream >> value;
@@ -191,8 +193,12 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
                     }
 
             }else if (action.contains("Channel")){
-                wlanconfigWiget->specifyChan->setChecked( true );
-                wlanconfigWiget->networkChannel->setValue( value.toInt() );
+                bool ok;
+                int chan = value.toInt( &ok );
+                if (ok){
+                    wlanconfigWiget->specifyChan->setChecked( true );
+                    wlanconfigWiget->networkChannel->setValue( chan );
+                }
             }else if (action.contains("MacAddr")){
                 wlanconfigWiget->specifyAp->setChecked( true );
                 wlanconfigWiget->macEdit->setText( value );
@@ -200,6 +206,7 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
                 qDebug("wlan plugin has no clue");
         }
     }// while stream
+    if (toShow) toShow->exec();
 }
 
 QWidget *WLANModule::getInfo( Interface *i)

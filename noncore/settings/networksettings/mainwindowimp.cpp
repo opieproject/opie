@@ -640,6 +640,11 @@ void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
     bool found = false;
     qDebug("MainWindowImp::receive QCop msg >"+msg+"<");
 
+    if (msg == "raise") {
+        raise();
+        return;
+    }
+
     QString dest = msg.left(msg.find("("));
     QCString param = msg.right(msg.length() - msg.find("(") - 1);
     param = param.left( param.length() - 1 );
