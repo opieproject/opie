@@ -1,0 +1,11 @@
+Package: opie-autorotate
+Files: plugins/applets/libautorotateapplet.so* pics/autorotate/*.png 
+Priority: optional
+Section: opie/taskbar
+Maintainer: Greg Gilbert <greg@treke.net>
+Architecture: arm
+Depends: task-opie-minimal, libopie1
+Description: Automatic screen rotation applet
+ Taskbar applet for enabled and disabling the automatic rotation
+ of the screen based on your devices physical orientation/
+Version: $QPE_VERSION$EXTRAVERSION

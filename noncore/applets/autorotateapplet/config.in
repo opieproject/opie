@@ -1,0 +1,4 @@
+  config AUTOROTATEAPPLET
+    boolean "opie-autorotate applet ( disables screen rotation based on the orientation of the device)"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
