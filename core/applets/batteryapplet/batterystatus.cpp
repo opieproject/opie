@@ -99,7 +99,8 @@ bool BatteryStatus::getProcApmStatusIpaq() {
         sec2 += " min";
     }
 
-    jackStatus == (" ( " + jackStatus + " )");
+    jackStatus.prepend( " ( " );
+    jackStatus.append( " )" );
     return true;
 }
 
@@ -139,45 +140,61 @@ QString  BatteryStatus::statusText() const {
             text = tr("Charging");
         }
     } else if ( ps->batteryPercentAccurate() ) {
-        text.sprintf( tr("Remaining Power") + ": %i%%", percent );
+        text = tr( "Remaining Power: %1%" ).arg( percent );
+        //text.sprintf( tr("Remaining Power") + ": %i%%", percent );
     } else {
-        text = tr("Battery status: ");
+        text = tr( "Battery status: " );
         switch ( ps->batteryStatus() ) {
         case PowerStatus::High:
-            text += tr("Good");
+            text.append( tr( "Good" ) );
             break;
         case PowerStatus::Low:
-            text += tr("Low");
+            text.append( tr( "Low" ) );
             break;
         case PowerStatus::VeryLow:
-            text += tr("Very Low");
+            text.append( tr( "Very Low" ) );
             break;
         case PowerStatus::Critical:
-            text += tr("Critical");
+            text.append( tr( "Critical" ) );
             break;
         default: // NotPresent, etc.
-            text += tr("Unknown");
+            text.append( tr( "Unknown" ) );
         }
     }
 
     if ( ps->acStatus() == PowerStatus::Backup )
-    text +=  "\n"  +  tr("On backup power");
+    {
+        text.append( '\n' );
+        text.append( tr( "On backup power" ) );
+    }
     else if ( ps->acStatus() == PowerStatus::Online )
-    text +=  "\n"  + tr("Power on-line");
+    {
+        text.append( '\n' );
+        text.append( tr( "Power on-line" ) );
+    }
     else if ( ps->acStatus() == PowerStatus::Offline )
-    text +=  "\n"  +  tr("External power disconnected");
+    {
+        text.append( '\n' );
+        text.append( tr( "External power disconnected" ) );
+    }
 
-    if ( ps->batteryTimeRemaining() >= 0 ) {
-        text += "\n" + QString().sprintf(  tr("Remaining Time") + ": %im %02is",
-              ps->batteryTimeRemaining() / 60, ps->batteryTimeRemaining() % 60 );
+    if ( ps->batteryTimeRemaining() >= 0 )
+    {
+        text.append( '\n' );
+        text.append( tr("Remaining Time: %1m %2s" ).arg( ps->batteryTimeRemaining() / 60 )
+                                                   .arg( ps->batteryTimeRemaining() % 60, 2 ) );
+/*        text += "\n" + QString().sprintf(  tr("Remaining Time") + ": %im %02is",
+              ps->batteryTimeRemaining() / 60, ps->batteryTimeRemaining() % 60 );*/
     }
     return text;
 }
 
 QString  BatteryStatus::statusTextIpaq() const {
-    QString text;
-    text +=  tr("Remaining Power: ") + perc2 + " " + jackStatus;
-    text += "\n"  + tr("Remaining Time: ") + sec2;
+    QString text = tr( "Remaing Power: %1 %2\nRemaining Time: %3" ).arg( perc2 )
+                                                                   .arg( jackStatus )
+                                                                   .arg( sec2 );
+/*    QString text =  tr("Remaining Power: ") + perc2 + " " + jackStatus;
+    text += "\n"  + tr("Remaining Time: ") + sec2;*/
     return text;
 }
 
@@ -220,14 +237,14 @@ void BatteryStatus::paintEvent( QPaintEvent * ev ) {
 
     if ( ODevice::inst ( )-> series ( ) == Model_iPAQ && bat2 ) {
 
-        p.drawText( 15, 30, tr ("Ipaq  ") + ipaqChem );
+        p.drawText( 15, 30, tr("Ipaq  %1").arg( ipaqChem ) );
 
         QString jacketMsg;
         if (bat2) {
             p.setPen(black);
             QString text = statusTextIpaq();
             p.drawText( 10, 150,  text );
-            jacketMsg = tr("Jacket  ") + jackChem;
+            jacketMsg = tr("Jacket  ").arg( jackChem );
         } else {
             jackPercent = 0;
             jacketMsg = tr("No jacket with battery inserted");
