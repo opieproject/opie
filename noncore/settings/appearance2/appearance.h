@@ -119,6 +119,7 @@ private:
     QRadioButton *m_rotdir_flip;
 
     QWidget *     m_advtab;
+    QCheckBox    *m_leftHand;
 };
 
 #endif

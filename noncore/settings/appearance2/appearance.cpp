@@ -293,6 +293,20 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
     QWidget *tab = new QWidget ( parent );
     QVBoxLayout *vertLayout = new QVBoxLayout( tab, 3, 3 );
 
+    /*
+     * show scrollbars on the left?
+     */
+    m_leftHand = new QCheckBox( tr("Show Scrollbars on the left"), tab );
+    m_leftHand->setChecked( cfg.readBoolEntry( "LeftHand", false ) );
+    QWhatsThis::add( m_leftHand, tr( "Click here to display scrollbars on the left side instead of the right." ) );
+    vertLayout->addWidget( m_leftHand );
+
+    QFrame *f = new QFrame ( tab );
+    f-> setFrameStyle ( QFrame::HLine | QFrame::Sunken );
+    vertLayout-> addWidget ( f );
+    vertLayout-> addSpacing ( 3 );
+
+
     QGridLayout* gridLayout = new QGridLayout ( vertLayout, 0, 0, 3, 0 );
 
     int style = cfg. readNumEntry ( "TabStyle", 2 ) - 1;
@@ -492,6 +506,8 @@ void Appearance::accept ( )
         rot = Flip;
     }
     config. writeEntry ( "rotatedir", (int)rot );
+
+    config. writeEntry( "LeftHand", m_leftHand->isChecked() );
 
     config. write ( ); // need to flush the config info first
     Global::applyStyle ( );
