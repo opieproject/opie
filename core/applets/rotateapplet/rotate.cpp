@@ -38,12 +38,13 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
+using namespace Opie;
 
 /* QT */
 #include <qiconset.h>
 #include <qpopupmenu.h>
 
-using namespace Opie;
+#include <time.h>
 
 RotateApplet::RotateApplet()
              :QObject( 0, "RotateApplet" ), ref( 0 ), m_flipped( false )
@@ -69,21 +70,37 @@ void RotateApplet::channelReceived( const QCString &msg, const QByteArray & data
 
     if ( ODevice::inst()->hasHingeSensor() )
     {
+        struct timespec interval;
+        struct timespec remain;
+        interval.tv_sec = 0;
+        interval.tv_nsec = 600;
+        ::nanosleep( &interval, &remain );
         OHingeStatus status = ODevice::inst()->readHingeSensor();
         qDebug( "RotateApplet::readHingeSensor = %d", (int) status );
+
+        Config cfg( "apm" );
+        cfg.setGroup( PowerStatusManager::readStatus().acStatus() == PowerStatus::Online ? "AC" : "Battery" );
+        int action = cfg.readNumEntry( "CloseHingeAction", 0 );
+
         if ( status == CASE_CLOSED )
         {
-            Config cfg( "apm" );
-            cfg.setGroup( PowerStatusManager::readStatus().acStatus() == PowerStatus::Online ? "AC" : "Battery" );
-            int action = cfg.readNumEntry( "CloseHingeAction", 0 );
             switch ( action )
             {
                 case 1: /* DISPLAY OFF */ ODevice::inst()->setDisplayBrightness( 0 ); break;
                 case 2: /* SUSPEND */ ODevice::inst()->suspend(); break;
                 default: /* IGNORE */ break;
             }
-            qDebug( "RotateApplet::switchAction %d performed.", cfg.readNumEntry( "CloseHingeAction", 0 ) );
         }
+        else /* status != CASE_CLOSED */
+        {
+            switch ( action )
+            {
+                case 1: /* DISPLAY OFF */ ODevice::inst()->setDisplayBrightness( 127 ); break;
+                case 2: /* SUSPEND */ /* How to wake up the device from kernel? */; break;
+                default: /* IGNORE */ break;
+            }
+        }
+        qDebug( "RotateApplet::switchAction %d performed.", cfg.readNumEntry( "CloseHingeAction", 0 ) );
     }
 
     QDataStream stream( data, IO_ReadOnly );
