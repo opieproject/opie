@@ -1,0 +1,40 @@
+\section{GUI Classes}
+
+\subsubsection{Recurrence Widget}
+Opie PIM offers a recurrence Widget to let the user
+configure the recurrence.
+
+\subsubsection{Mainwindow}
+The mainwindow implements a QCOP Interface for showing, 
+editing records. It can handle alarms and reminder activation.
+
+\section{Cross Reference}
+
+\subsection{The idea}
+Sometimes an Event or Todo is related to something else. 
+For example the Birthday Attribute of your children Record relate
+to the Birthday Event in your Datebook and the ``Book clown''
+in your Todolist.\\
+We need a way to select the Record and the attribute if we want
+that fine grained information.
+
+\subsection{Selecting the Reference}
+\subsubsection{Out Of Process Selection}
+For an Out of Process solution we could utilize the targeted
+Application to request the selection of an record.\\
+For that to work we need to know which application offers
+Cross Referencing and the API needs to be able to find the
+application and then call them via QCOP.\\
+Later for resolving the Cross Reference the same application\\
+would be either asked to give a summary string or it could
+display the reference on demand. This requires the application
+to start and a specific selection window, but more easily
+allows to cross reference attributes.
+
+\subsubsection{In Process Selection}
+In Process Selection is possible with the usage of OPimBase 
+and OPimRecord. It allows to query and sort in a generic way.
+This would allow to have a generic Selector widget which
+can be used to select a Record and possible files as well. To
+support new types one could dlopen the Frontends to allow
+custom Frontends.

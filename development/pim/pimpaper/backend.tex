@@ -1,0 +1,17 @@
+\section{The Backend Design}
+
+\subsection{The Template}
+OPimAccessBackend is a template interface of the Backend. 
+It consists out of pure virtual functions to implement for
+load, reload, save and clear. You will also need to implement
+add, remove and replace.
+Todo, Event and Address inherit from OPimAccessBackend to create
+their Backend Type with additional functionality and also some
+default implementation for some queries.
+
+\subsection{Read Ahead}
+You may implement Read Ahead or Read Behind by implementing
+the specific find function. First you need to give the Frontend
+a hint on how many items you want to cache and then you can call
+cache to cache items.
+read Ahead returns the number of Records to read behind/ahead.
