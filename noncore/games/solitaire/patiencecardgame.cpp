@@ -117,9 +117,9 @@ void PatienceCardGame::readConfig( Config& cfg )
 {
     cfg.setGroup("GameState");
 
+	deckTurns = cfg.readNumEntry("DeckTurns", 2500);
     // Do we have a config file to read in?
-    if ( !cfg.hasKey("numberOfTimesThroughDeck") )
-    {
+    if ( !cfg.hasKey("numberOfTimesThroughDeck") ) {
         // if not, create a new game
         newGame();
         return;
@@ -277,3 +277,12 @@ void PatienceCardGame::mousePress(QPoint p)
 }
 
 
+bool PatienceCardGame::canTurnOverDeck() {
+	return (numberOfTimesThroughDeck != deckTurns);
+}
+
+void PatienceCardGame::throughDeck() {
+	numberOfTimesThroughDeck++;
+	if (numberOfTimesThroughDeck == deckTurns)
+		circleCross->setCross();
+ }

@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 #ifndef PATIENCE_CARD_GAME_H
-#define PATIENCE_CARD_GAME_H 
+#define PATIENCE_CARD_GAME_H
 
 
 #include <qpopupmenu.h>
@@ -46,7 +46,7 @@ public:
 	//if ( ( !card->isFacing() ) && ( card == cardOnTop() ) )
 	if ( card == cardOnTop() )
 	    return TRUE;
-        return FALSE;	
+        return FALSE;
     }
 };
 
@@ -66,7 +66,7 @@ public:
 	//if ( ( card->isFacing() ) && ( card == cardOnTop() ) )
 	if ( card == cardOnTop() )
 	    return TRUE;
-        return FALSE;	
+        return FALSE;
     }
 };
 
@@ -83,12 +83,12 @@ public:
 	       ( (int)card->getValue() == (int)cardOnTop()->getValue() + 1 ) &&
 	       ( card->getSuit() == cardOnTop()->getSuit() ) ) ) )
 	    return TRUE;
-        return FALSE;	
+        return FALSE;
     }
     virtual bool isAllowedToBeMoved(Card *card) {
 	if ( card->isFacing() && ( card == cardOnTop() ) )
 	    return TRUE;
-        return FALSE;	
+        return FALSE;
     }
 };
 
@@ -105,12 +105,12 @@ public:
  	         ( (int)card->getValue() + 1 == (int)cardOnTop()->getValue() ) &&
 	         ( card->isRed() != cardOnTop()->isRed() ) ) ) )
 	    return TRUE;
-        return FALSE;	
+        return FALSE;
     }
     virtual bool isAllowedToBeMoved(Card *card) {
 	if ( card->isFacing() )
 	    return TRUE;
-        return FALSE;	
+        return FALSE;
     }
     virtual void cardAddedToTop(Card *card) {
 	Q_UNUSED(card);
@@ -148,12 +148,12 @@ public:
 	while ((card != c) && (card != NULL)) {
 	    if (card->isFacing()) {
 		int offsetDown = ( qt_screen->deviceWidth() < 200 ) ? 9 : 13;
-		y += offsetDown; 
+		y += offsetDown;
 	    } else {
-		x += 1;    
+		x += 1;
 		y += 3;
 	    }
-	    card = cardInfront(card); 
+	    card = cardInfront(card);
 	}
 	return QPoint( x, y );
     }
@@ -173,7 +173,8 @@ public:
     PatienceCardGame(QCanvas *c, bool snap, QWidget *parent = 0);
     virtual ~PatienceCardGame();
     virtual void deal(void);
-    virtual bool haveWeWon() { 
+	int deckTurns;
+    virtual bool haveWeWon() {
 	return ( discardPiles[0]->kingOnTop() &&
 		 discardPiles[1]->kingOnTop() &&
 		 discardPiles[2]->kingOnTop() &&
@@ -185,12 +186,8 @@ public:
     virtual bool mousePressCard(Card *card, QPoint p);
     virtual void mouseReleaseCard(Card *card, QPoint p) { Q_UNUSED(card); Q_UNUSED(p); }
 //    virtual void mouseMoveCard(Card *card, QPoint p) { Q_UNUSED(card); Q_UNUSED(p); }
-    bool canTurnOverDeck(void) { return (numberOfTimesThroughDeck != 3); }
-    void throughDeck(void) {
-	numberOfTimesThroughDeck++;
-	if (numberOfTimesThroughDeck == 3)
-    	    circleCross->setCross();
-    }
+    bool canTurnOverDeck();
+    void throughDeck();
     bool snapOn;
     virtual void writeConfig( Config& cfg );
     virtual void readConfig( Config& cfg );
