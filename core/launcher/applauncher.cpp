@@ -484,7 +484,7 @@ bool AppLauncher::executeBuiltin(const QString &c, const QString &document)
 
 bool AppLauncher::execute(const QString &c, const QString &docParam, bool noRaise)
 {
-    qWarning("AppLauncher::execute");
+    qWarning("AppLauncher::execute '%s' '%s'", (const char*) c, (const char*) docParam );
     // Convert the command line in to a list of arguments
     QStringList list = QStringList::split(QRegExp("  *"),c);
     if ( !docParam.isEmpty() )
