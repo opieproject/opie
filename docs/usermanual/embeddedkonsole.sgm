@@ -59,6 +59,8 @@ A shell is a program that accepts input from a user, and runs commands.  Each
 shell like BusyBox, which makes some of the more common commands part of its own
 program in order to save space).  Shells can actually be very powerful, and many 
 
+
+
 of them allow you to write something called "shell scripts" which are just a
 sequence of commands, sometimes with some flow control statements, saved to a 
 file and run each time the script is run.  For the most part, the average user
@@ -146,7 +148,7 @@ to delete a directory that is not empty, along with all its contents, run
 </para>
 </section>
 
-<section><title>Linking Files</title>
+<section id=symlink><title>Linking Files</title>
 <para>
 In Linux, you can have a special file called a "symbolic link" that acts just
 like a copy of another file, except it takes up less space.  This is convinient

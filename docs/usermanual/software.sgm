@@ -46,4 +46,71 @@ the same time by marking the ones you want to install and the ones you want to
 remove, and then pressing apply.
 </para>
 </section>
+
+<section><title>Destinations</title>
+<para>
+Software is distributed in a format called "ipkg" which contains all the 
+necessary files for the program, as well as information on where to put them.  
+However, this information is only half complete, as it tells the package manager 
+where in the "destination" to put the files, but the package manager must know 
+where this "destination" is.  The default destination is "/" (called "root") so
+if the package says to install a file in opt/QtPalmtop/ then the file will be
+installed in /opt/QtPalmtop/.  However, if ask the package manger to use a
+destination at /mnt/hda/ (this is typically where a compact flash card would be)
+then the files will be installed in /mnt/hda/opt/QtPalmtop/.
+</para>
+<para>
+The problem with installing file in a destination other than root is that the 
+software usually does not know where to fine the installed files, and Opie does 
+not know where to find the information that tells it how to display the program 
+in the Launcher.  To get around this, the package manager creates links 
+<footnote><para>See <xref linkend=symlink> for more information on symbolic 
+links in Linux</para></footnote> from where the files would be if they were 
+installed in root to where they are actually installed.  This means that no more 
+space is taken up where the files would normally be installed, but any programs
+can still find the files where they think they should be.
+</para>
+
+<section><title>Using Destinations</title>
+<para>
+To install a package in a destination other than root, go to 
+Settings&arrow;Setups to open the settings dialog to the Setups tab.  From here
+you can select the destination you would like to install the package to from the 
+pulldown menu at the bottom.  You will also want to check "Link to root 
+destination" so that links are properly made.  Once you have selected the 
+destination you want to install the package to, click the dialog's "Ok" button, 
+and all packages that you install will be installed to the destination you 
+selected.
+</para>
+</section>
+<section><title>Adding Destinations</title>
+<para>
+To add a destination, go to Settings&arrow;Destinations to bring up the settings 
+dialog at the Destinations tab, and press the "New" button to add a new 
+Destination to the list.  The new destination should be highlighted 
+automatically, and you can then change the name and the URL with the two text 
+entry fields below it.  The name is only for easy display of the destination, so 
+name it whatever makes the most sense to you.  The URL is the location that you 
+want the destination to have.  So, if you want all your software to be installed 
+under /usr/directory then you would set the URL to that.  You can then click 
+"Ok" to save, or "x" to cancel the changes.
+</para>
+</section>
+<section><title>Editing Destinations</title>
+<para>
+You can edit a destination by going to Settings&arrow;Destinations and selecting 
+the destination that you would like to edit.  Then you can edit the Name and URL 
+fields in the same manner as when you added a destination.  To save, click "Ok" 
+or cancel by clicking "x".
+</para>
+</section>
+<section><title>Deleting Destinations</title>
+<para>
+Deleting a destination is very easy.  Go to Settings&arrow;Destinations and 
+select the Destination that you would like to delete in the dialog that appears. 
+ Press the "Remove" button to delete the destination, and press "Ok" to save the 
+changes, or "x" to cancel them.
+</para>
+</section>
+</section>
 </chapter>
