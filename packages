@@ -145,9 +145,8 @@ CONFIG_TODAY	core/pim/today	today.pro
 CONFIG_TODAY_DATEBOOK	core/pim/today/plugins/datebook	datebook.pro
 CONFIG_TODAY_FORTUNE	noncore/todayplugins/fortune	fortune.pro
 CONFIG_TODAY_MAIL	core/pim/today/plugins/mail	mail.pro
-CONFIG_TODAY_STOCKTICKER	noncore/todayplugins/stockticker	stockticker.pro
+CONFIG_TODAY_STOCKTICKER	noncore/todayplugins/stockticker/stockticker	stockticker.pro
 CONFIG_TODAY_STOCKTICKERLIB	noncore/todayplugins/stockticker/stocktickerlib	stocktickerlib.pro
-CONFIG_TODAY_STOCKTICKERSUB	noncore/todayplugins/stockticker/stockticker	stockticker.pro
 CONFIG_TODAY_TODOLIST	core/pim/today/plugins/todolist	todolist.pro
 CONFIG_TODO	core/pim/todo	todo.pro
 CONFIG_UNIKEYBOARD	inputmethods/unikeyboard	unikeyboard.pro

@@ -1,4 +1,3 @@
-  config TODAY_STOCKTICKERLIB
-    boolean "stocktickerlib"
-    default "y"
-    depends LIBQPE && LIBOPIE
+config TODAY_STOCKTICKERLIB
+  boolean
+  default "y" if TODAY_STOCKTICKER

@@ -1,7 +1,4 @@
-menu "stockticker"
-
-  config TODAY_STOCKTICKERLIB
-    boolean "stockticker"
-    default "y"
-    depends LIBQPE && LIBOPIE
-endmenu
+config TODAY_STOCKTICKERSUB
+  boolean
+  depends TODAY_LIBSTOCKS && TODAY_STOCKTICKERLIB
+  default "y" if TODAY_STOCKTICKER
