@@ -1,0 +1,10 @@
+TEMPLATE	= app
+CONFIG		= qt warn_on debug
+#CONFIG		= qt warn_on release
+HEADERS		= mainwindowimp.h addserviceimp.h interface.h interfaceinformationimp.h interfacesetupimp.h interfaces.h defaultmodule.h  kprocctrl.h module.h  kprocess.h
+SOURCES		= main.cpp mainwindowimp.cpp addserviceimp.cpp interface.cpp interfaceinformationimp.cpp  interfacesetupimp.cpp kprocctrl.cpp kprocess.cpp interfaces.cpp
+INCLUDEPATH	+= $(QPEDIR)/include
+DEPENDPATH	+= $(QPEDIR)/include
+LIBS            += -lqpe
+INTERFACES	= mainwindow.ui addservice.ui interfaceinformation.ui interfaceadvanced.ui interfacesetup.ui
+TARGET		= networksetup

@@ -1,0 +1,274 @@
+<!DOCTYPE UI><UI>
+<class>InterfaceSetup</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>InterfaceSetup</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>193</width>
+            <height>310</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Interface Configuration</string>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>11</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>6</number>
+        </property>
+        <widget row="1"  column="0"  rowspan="1"  colspan="2" >
+            <class>Line</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Line1</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+        </widget>
+        <widget row="6"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel4</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>IP Address</string>
+            </property>
+        </widget>
+        <widget row="0"  column="0"  rowspan="1"  colspan="2" >
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>autoStart</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Automaticly bring up</string>
+            </property>
+        </widget>
+        <widget row="2"  column="1" >
+            <class>QComboBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>All</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>profileCombo</cstring>
+            </property>
+        </widget>
+        <widget row="5"  column="0"  rowspan="1"  colspan="2" >
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>staticGroupBox</cstring>
+            </property>
+            <property stdset="1">
+                <name>enabled</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Static Ip Configuration</string>
+            </property>
+        </widget>
+        <widget row="6"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>ipAddressEdit</cstring>
+            </property>
+        </widget>
+        <widget row="4"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>leaseHoursLabel</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Requested Lease</string>
+            </property>
+        </widget>
+        <widget row="3"  column="0"  rowspan="1"  colspan="2" >
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>dhcpCheckBox</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>DHCP</string>
+            </property>
+            <property stdset="1">
+                <name>checked</name>
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget row="7"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel5</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Subnet Mask</string>
+            </property>
+        </widget>
+        <widget row="2"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Profile:</string>
+            </property>
+        </widget>
+        <widget row="4"  column="1" >
+            <class>QSpinBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>leaseTime</cstring>
+            </property>
+            <property stdset="1">
+                <name>suffix</name>
+                <string> hours</string>
+            </property>
+            <property stdset="1">
+                <name>maxValue</name>
+                <number>336</number>
+            </property>
+            <property stdset="1">
+                <name>minValue</name>
+                <number>1</number>
+            </property>
+            <property stdset="1">
+                <name>value</name>
+                <number>24</number>
+            </property>
+        </widget>
+        <spacer row="11"  column="1" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer9</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Vertical</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget row="10"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>secondDNSLineEdit</cstring>
+            </property>
+        </widget>
+        <widget row="10"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel3</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Second DNS</string>
+            </property>
+        </widget>
+        <widget row="9"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>First DNS</string>
+            </property>
+        </widget>
+        <widget row="9"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>firstDNSLineEdit</cstring>
+            </property>
+        </widget>
+        <widget row="8"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Gateway</string>
+            </property>
+        </widget>
+        <widget row="7"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>subnetMaskEdit</cstring>
+            </property>
+        </widget>
+        <widget row="8"  column="1" >
+            <class>QLineEdit</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>gatewayEdit</cstring>
+            </property>
+        </widget>
+    </grid>
+</widget>
+<connections>
+    <connection>
+        <sender>dhcpCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>leaseHoursLabel</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>dhcpCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>leaseTime</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>dhcpCheckBox</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>staticGroupBox</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+</connections>
+</UI>
