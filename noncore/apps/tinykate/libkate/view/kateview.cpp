@@ -44,15 +44,12 @@
 #include "../document/katedocument.h"
 #include "../document/katecmd.h"
 #include "../document/katehighlight.h"
-#include "kateviewdialog.h"
 #include "../document/katedialogs.h"
+#include "kateviewdialog.h"
 #include <kateconfig.h>
 
-#include <qfocusdata.h>
-#include <kdebug.h>
 #include <kapplication.h>
 #include <qscrollbar.h>
-#include <qiodevice.h>
 #include <qpopupmenu.h>
 #include <kpopupmenu.h>
 #include <qkeycode.h>
@@ -67,12 +64,9 @@
 #include <qvbox.h>
 #include <qprintdialog.h>
 #include <qpaintdevicemetrics.h>
-#include <qiodevice.h>
 #include <qbuffer.h>
-#include <qfocusdata.h>
 #include <klocale.h>
 #include <kglobal.h>
-#include <kdebug.h>
 #include <kmessagebox.h>
 #include <qregexp.h>
 #include <kdialogbase.h>
@@ -81,7 +75,6 @@
 #include <kfiledialog.h>
 #include <kiconloader.h>
 #include "../document/katetextline.h"
-#include "kateviewdialog.h"
 #include "kateundohistory.h"
 #include <qlayout.h>
 #include <qpe/qpeapplication.h>

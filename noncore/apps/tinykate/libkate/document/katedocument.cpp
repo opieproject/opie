@@ -45,7 +45,6 @@
 #include <qdatetime.h>
 
 #include <kmessagebox.h>
-#include <klocale.h>
 #include <qpe/config.h>
 #include <qstring.h>
 
@@ -65,7 +64,6 @@
 #include <qtextcodec.h>
 #include <kglobal.h>
 
-#include <klocale.h>
 //#include <kcharsets.h>
 #include <kdebug.h>
 //#include <kinstance.h>

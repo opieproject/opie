@@ -1,8 +1,6 @@
 #include "liquid.h"
 
 #include <qapplication.h>
-#include <qpainter.h>
-#include <qpalette.h>
 #include <qdrawutil.h>
 
 

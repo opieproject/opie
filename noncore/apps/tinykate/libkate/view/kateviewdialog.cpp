@@ -25,8 +25,6 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlistbox.h>
-#include <qspinbox.h>
-#include <qcombobox.h>
 #include <qgroupbox.h>
 #include <qlineedit.h>
 #include <qcheckbox.h>
@@ -38,10 +36,10 @@
 #include <qstringlist.h>
 #include <klocale.h>
 #include <kcolorbtn.h>
-#include <qcombobox.h>
 #include <kglobal.h>
 #include <qvbox.h>
 #include <qspinbox.h>
+#include <qcombobox.h>
 #include <kfontdialog.h>
 
 #include "../document/katedocument.h"

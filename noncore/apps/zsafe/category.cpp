@@ -1,9 +1,8 @@
 /* C implementation of RC2 encryption algorithm, as described in RFC2268 */
 /* By Matthew Palmer <mjp16@uow.edu.au> */
-/* $Id: category.cpp,v 1.1 2003-07-22 19:23:20 zcarsten Exp $ */
+/* $Id: category.cpp,v 1.2 2004-03-01 20:04:34 chicken Exp $ */
 
 #include "category.h"
-#include <qlistview.h>
 
 Category::Category()
 {

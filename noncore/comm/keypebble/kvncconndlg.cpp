@@ -1,15 +1,7 @@
-#include <qframe.h>
-#include <qvbox.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qspinbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qwhatsthis.h>
-#include <qapplication.h>
 #include <qlineedit.h>
-#include <qpushbutton.h>
-#include "krfbserver.h"
 
 #include "kvncconndlg.h"
 

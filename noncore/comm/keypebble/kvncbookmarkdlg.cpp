@@ -1,21 +1,7 @@
-#include <qframe.h>
-#include <qvbox.h>
-#include <qcheckbox.h>
-#include <qspinbox.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qwhatsthis.h>
-#include <qfile.h>
 #include <qdir.h>
-#include <qstring.h>
-#include <qapplication.h>
-#include <qlineedit.h>
 #include <qtextstream.h>
-#include <qpushbutton.h>
 #include <qlistbox.h>
-#include <qpe/config.h>
 #include <qpe/global.h>
-#include "krfbserver.h"
 #include "kvncbookmarkdlg.h"
 
 KVNCBookmarkDlg::KVNCBookmarkDlg( QWidget * parent, const char * name, WFlags f ) 

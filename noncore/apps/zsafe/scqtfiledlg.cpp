@@ -9,17 +9,12 @@
 #include "scqtfiledlg.h"
 
 #include <qcombobox.h>
-#include <qheader.h>
 #include <qlineedit.h>
 #include <qlistview.h>
-#include <qpushbutton.h>
 #include <qtoolbutton.h>
 #include <qlayout.h>
-#include <qvariant.h>
 #include <qtooltip.h>
 #include <qwhatsthis.h>
-#include <qimage.h>
-#include <qpixmap.h>
 
 static const char* const image0_data[] = { 
 "24 16 3 1",

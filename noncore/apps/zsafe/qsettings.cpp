@@ -1,9 +1,8 @@
 /*
-** $Id: qsettings.cpp,v 1.1 2003-07-22 19:23:13 zcarsten Exp $
+** $Id: qsettings.cpp,v 1.2 2004-03-01 20:04:34 chicken Exp $
 */
 
 #include "qsettings.h"
-#include <qstringlist.h>
 #include <stdio.h>
 #include <qfile.h>
 #include <qtextstream.h>

@@ -14,13 +14,10 @@
  *   ONLY VERSION 2 OF THE LICENSE IS APPLICABLE                           *
  *                                                                         *
  ***************************************************************************/
-#include <qwidget.h>
 #include <qaction.h>
-#include <qlayout.h>
 #include <qtoolbutton.h>
 #include <qmenubar.h>
 #include <qpe/resource.h>
-#include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 
 #include <opie2/ofiledialog.h>
@@ -28,8 +25,6 @@
 #include "tinykate.h"
 
 #include <katedocument.h>
-#include <katehighlight.h>
-#include <kateview.h>
 #include <kglobal.h>
 
 TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :

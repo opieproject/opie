@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.10 2004-02-23 17:12:28 drw Exp $
+** $Id: zsafe.cpp,v 1.11 2004-03-01 20:04:34 chicken Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -79,7 +79,6 @@ using Opie::OFileSelector;
 #include <qheader.h>
 #include <qlistview.h>
 #include <qtoolbutton.h>
-#include <qlayout.h>
 #include <qvariant.h>
 #include <qtooltip.h>
 #include <qwhatsthis.h>

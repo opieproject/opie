@@ -1,19 +1,10 @@
 #include "krfbconnection.h"
 #include "krfbcanvas.h"
-#include "krfbserver.h"
 #include "krfbbuffer.h"
 
-#include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 
-#include <qapplication.h>
 #include <qclipboard.h>
-#include <qaction.h>
-#include <qpixmap.h>
-#include <qpoint.h>
-#include <qapplication.h>
-#include <qmainwindow.h>
-#include <qiconset.h>
 
 KRFBCanvas::KRFBCanvas( QWidget *parent, const char *name )
   : QScrollView( parent, name )

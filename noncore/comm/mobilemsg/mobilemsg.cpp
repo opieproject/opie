@@ -1,11 +1,6 @@
 #include "mobilemsg.h"
-#include <qpushbutton.h>
 
-#include <qpe/qpeapplication.h>
 
-#include <qlistbox.h>
-#include <qpushbutton.h>
-#include <qlayout.h>
 
 
 /* 

@@ -1,13 +1,10 @@
 #include <assert.h>
-#include <qpixmap.h>
-#include <qbrush.h>
 #include <qimage.h>
 #include <qpainter.h>
 #include <qapplication.h>
 #include "krfbdecoder.h"
 #include "krfbbuffer.h"
 #include "krfbconnection.h"
-#include "krfbserver.h"
 #include "krfbserverinfo.h"
 
 //

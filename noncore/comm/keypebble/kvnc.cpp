@@ -1,21 +1,9 @@
-#include <qiconset.h>
-#include <qdialog.h>
-#include <qpixmap.h>
-#include <qdom.h>
 #include <qaction.h>
-#include <qmenubar.h>
-#include <qstatusbar.h>
 #include <qpopupmenu.h>
 #include <qpushbutton.h>
-#include <qpe/qpetoolbar.h>
-#include <qtimer.h>
 #include <qmessagebox.h>
-#include <qspinbox.h>
 #include <qlistbox.h>
-#include <qlineedit.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/global.h>
-#include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
 
 #include <assert.h>
@@ -24,7 +12,6 @@
 #include "krfbcanvas.h"
 #include "krfbconnection.h"
 #include "kvncconndlg.h"
-#include "krfbserver.h"
 
 static int u_id = 1;
 static int get_unique_id()

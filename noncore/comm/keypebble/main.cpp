@@ -1,7 +1,6 @@
 
 
 
-#include <qpe/qpeapplication.h>
 #include "kvnc.h"
 #include <opie/oapplicationfactory.h>
 

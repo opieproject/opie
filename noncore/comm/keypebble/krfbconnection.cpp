@@ -5,7 +5,6 @@
 
 #include "krfbconnection.h"
 #include "krfblogin.h"
-#include "krfbserver.h"
 #include "krfbdecoder.h"
 #include "krfbbuffer.h"
 

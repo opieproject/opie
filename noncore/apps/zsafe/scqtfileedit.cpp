@@ -6,7 +6,7 @@
     email                : sc@schulte-ac.de
  ***************************************************************************/
 
-/* $Id: scqtfileedit.cpp,v 1.2 2004-02-08 19:14:56 ar Exp $ */
+/* $Id: scqtfileedit.cpp,v 1.3 2004-03-01 20:04:34 chicken Exp $ */
 
 /***************************************************************************
  *                                                                         *
@@ -19,10 +19,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "qdir.h"
-#include "qdialog.h"
-#include "qpixmap.h"
-#include "qlistview.h"
 #include "qlineedit.h"
 #include "qtoolbutton.h"
 

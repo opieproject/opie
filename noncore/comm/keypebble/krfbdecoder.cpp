@@ -1,16 +1,10 @@
 #include "krfbconnection.h"
-#include "krfbserver.h"
 #include "krfbserverinfo.h"
 #include "krfbdecoder.h"
 #include "krfbbuffer.h"
 
-#include <qpe/qpeapplication.h>
 
 #include <qpixmap.h>
-#include <qsocket.h>
-#include <qevent.h>
-#include <qstring.h>
-#include <qclipboard.h>
 
 #include <assert.h>
 

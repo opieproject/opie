@@ -1,7 +1,7 @@
 /*
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: main.cpp,v 1.3 2003-08-14 07:19:50 zcarsten Exp $
+** $Id: main.cpp,v 1.4 2004-03-01 20:04:34 chicken Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 */
@@ -15,7 +15,6 @@
 #endif
 #include <stdio.h>
 #include <signal.h>
-#include "qsettings.h"
 
 ZSafe *zs;
 #ifdef DESKTOP

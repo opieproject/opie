@@ -1,10 +1,8 @@
 /*
-** $Id: zlistview.cpp,v 1.1 2003-07-22 19:23:19 zcarsten Exp $
+** $Id: zlistview.cpp,v 1.2 2004-03-01 20:04:34 chicken Exp $
 */
 
 #include "zlistview.h"
-#include <qlistview.h>
-#include <qevent.h>
 #include <stdio.h>
 #include "zsafe.h"
 

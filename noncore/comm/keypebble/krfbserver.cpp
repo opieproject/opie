@@ -1,4 +1,3 @@
-#include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 #include "krfbserver.h"
 
