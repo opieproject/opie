@@ -90,11 +90,11 @@
     </message>
     <message>
         <source>Enable background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundbild aktivieren</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard</translation>
     </message>
 </context>
 <context>

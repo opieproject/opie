@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Heute</translation>
+        <translation>Heute</translation>
     </message>
 </context>
 <context>
@@ -140,7 +140,9 @@ gestartet werden?
         <source>Activate the  
 autostart after how
 many minutes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Autostart nach
+wievielen Minuten
+aktivieren?</translation>
     </message>
 </context>
 </TS>
