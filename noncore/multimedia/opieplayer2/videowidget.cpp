@@ -87,7 +87,7 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     connect ( videoFrame, SIGNAL( videoResized ( const QSize & )), this, SIGNAL( videoResized ( const QSize & )));
 
     Config cfg("OpiePlayer");
-    cfg.setGroup("VideoWidget");
+    cfg.setGroup("Options");
     skin = cfg.readEntry("Skin","default");
 
     QString skinPath = "opieplayer2/skins/" + skin;

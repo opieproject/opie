@@ -56,6 +56,8 @@ protected:
 void keyReleaseEvent( QKeyEvent *e);
 void keyPressEvent( QKeyEvent *e);
 private:
+    int defaultSkinIndex; 
+    QPopupMenu *skinsMenu; 
     bool audioScan, videoScan;
     void doBlank();
     void doUnblank();
@@ -69,6 +71,8 @@ private:
     void populateAudioView();
     void populateVideoView();
 private slots:
+    void populateSkinsMenu();
+    void skinsMenuActivated(int); 
     void pmViewActivated(int);
     void writem3u();
     void scanForAudio();

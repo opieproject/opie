@@ -173,6 +173,13 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     pmView->insertItem(  Resource::loadPixmap("opieplayer/scale") , tr( "Scale"), mediaPlayerState, SLOT(toggleScaled() ) );
 
+    pmView->insertSeparator(-1);
+
+    skinsMenu = new QPopupMenu( this );
+    pmView->insertItem( tr( "Skins" ), skinsMenu );
+    skinsMenu->isCheckable();
+    populateSkinsMenu();
+
     QVBox *vbox5 = new QVBox( this ); vbox5->setBackgroundMode( PaletteButton );
     QVBox *vbox4 = new QVBox( vbox5 ); vbox4->setBackgroundMode( PaletteButton );
 
@@ -250,7 +257,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     connect(tbDeletePlaylist,(SIGNAL(released())),SLOT( deletePlaylist()));
 
-connect( pmView, SIGNAL( activated(int)), this, SLOT( pmViewActivated(int) ) );
+    connect( pmView, SIGNAL( activated(int)), this, SLOT( pmViewActivated(int) ) );
+
+    connect( skinsMenu, SIGNAL( activated(int)), this, SLOT(skinsMenuActivated(int) ) );
 
 //    connect( scaleButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleScaled() ) );
 
@@ -1234,4 +1243,43 @@ switch(index) {
   }
   break;
 };
+}
+
+void PlayListWidget::populateSkinsMenu() {
+    int item=0;
+    defaultSkinIndex=0;
+    QString skinName;
+    Config cfg( "OpiePlayer" );
+    cfg.setGroup("Options");
+    QString skin = cfg.readEntry("Skin","default");
+
+    QDir skinsDir(QPEApplication::qpeDir()+"/pics/opieplayer2/skins");
+    skinsDir.setFilter( QDir::Dirs);
+    skinsDir.setSorting(QDir::Name);
+    const QFileInfoList *skinslist = skinsDir.entryInfoList();
+    QFileInfoListIterator it( *skinslist );
+    QFileInfo *fi;
+    while ( (fi=it.current()) ) {
+        skinName =  fi->fileName();
+        qDebug(  fi->fileName());
+        if( skinName != "." &&  skinName != ".." && skinName !="CVS")
+            item = skinsMenu->insertItem( fi->fileName());
+        if( skinName == "default")
+            defaultSkinIndex = item;
+        if( skinName == skin)
+            skinsMenu->setItemChecked( item, TRUE);
+                
+        ++it;
+    }
+}
+
+void PlayListWidget::skinsMenuActivated(int item) {
+    for(int i = defaultSkinIndex; i > defaultSkinIndex - skinsMenu->count(); i--) {
+        skinsMenu->setItemChecked( i, FALSE);
+    }
+    skinsMenu->setItemChecked( item, TRUE);
+
+    Config cfg( "OpiePlayer" );
+    cfg.setGroup("Options");
+    cfg.writeEntry("Skin", skinsMenu->text( item));
 }

@@ -132,7 +132,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     setCaption( tr("OpiePlayer") );
 
     Config cfg("OpiePlayer");
-    cfg.setGroup("AudioWidget");
+    cfg.setGroup("Options");
     skin = cfg.readEntry("Skin","default");
       //skin = "scaleTest";
 // color of background, frame, degree of transparency
