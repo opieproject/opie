@@ -110,6 +110,8 @@ contains( CONFTEST, y ){
 
   # Manual including indirect referenced libraries which are not loaded
   # by the mac-linker automatically
+  # IF YOU COMPILE FOR THE FIRST TIME, COMMENT OUT ONE OF THE FOLLOWING
+  # (regarding whether you activate SQL) and the last one (-lopiecore2)
   CONFTEST = $$system( echo $CONFIG_SQL_PIM_BACKEND )
   contains( CONFTEST, y ){
     LIBS += -lopiedb2 -lqpe
