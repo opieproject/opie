@@ -1,13 +1,13 @@
-<chapter><title>&today;</title>
+<chapter><title>&todayapp;</title>
 <para>
-The &today; application is a convenient way to view both the appointments from the Calendar and the tasks from the
+The &todayapp; application is a convenient way to view both the appointments from the Calendar and the tasks from the
 Todo application for the current day, as well as seeing what e-mail is available.  It provides no interface for editing your
 appointments, or your tasks, but if you click the icon of the application, it will be launched.  For those familiar with
-PocketPC, this is similar to the &today; application included with that.
+PocketPC, this is similar to the &todayapp; application included with that.
 </para>
 <section><title>Configuration</title>
 <para>
-You can configure the &today; application by pressing the wrench icon in the bottom left corner of the window.  This will 
+You can configure the &todayapp; application by pressing the wrench icon in the bottom left corner of the window.  This will 
 open the configuration dialog, from which you can change various settings related to display, amongst other things.
 </para>
 <section><title>Calendar</title>
@@ -18,7 +18,7 @@ The Calendar tab in the configuration dialog lets you change the settings for ho
 The first field allows you to select the number of appointments to be shown in the Calendar section of the application.  
 If you add more appointments, you will be taking away screen space from the other sections.
 The "Should location be shown?" is for determining exactly that.  If checked, the location field of the appointment 
-will be shown in the &today; main view.
+will be shown in the &todayapp; main view.
 "Show only later appoinmtnets" will only show appointments that begin after the current time.
 Finally, if the "Should the notes be shown" checkbox is checked, then the notes for each appointment will be visible 
 in the main view.
@@ -26,7 +26,7 @@ in the main view.
 </section>
 <section><title>Tasks</title>
 <para>
-The Tasks tab lets you change how tasks are displayed in the &today; main view.
+The Tasks tab lets you change how tasks are displayed in the &todayapp; main view.
 </para>
 <para>
 The first field lets you chose how many tasks to display in the main view.  The more that are shown, the more space 
@@ -40,13 +40,13 @@ The Misc. tab allows you to set global settings that affect the entire applicati
 <para>
 The "Clip after how many letters" field lets you change the number of characters from each appointment or task that 
 are displayed in the main view.  The "Should today be autostarted on resume" checkbox lets you set whether or not 
-the &today; application should be started each time you resume from a suspend or not.<note><para>This only works 
-if you have a full installation of &opie;.  If you are running &today; on some other environment (Qtopia, for example) 
+the &todayapp; application should be started each time you resume from a suspend or not.<note><para>This only works 
+if you have a full installation of &opie;.  If you are running &todayapp; on some other environment (Qtopia, for example) 
 this feature will not work.</para></note>The final field, "Activate autostart after how many minutes", lets you set 
-the number of minutes that the device must be suspended before the &today; application will start automatically on 
+the number of minutes that the device must be suspended before the &todayapp; application will start automatically on 
 resume.  For instance, if this is set to 5, and you suspend the device for 3 minutes, when you resume the device, the 
-&today; application will not start automatically.  However, if it is set to 5 and you leave the device in the suspend state 
-for 6 minutes, then &today; will be started automatically upon resume.
+&todayapp; application will not start automatically.  However, if it is set to 5 and you leave the device in the suspend state 
+for 6 minutes, then &todayapp; will be started automatically upon resume.
 </para>
 </section>
 </section>
