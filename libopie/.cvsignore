@@ -1,3 +1,5 @@
 moc_*
 *.moc
 Makefile*
+otimepickerbase.cpp
+otimepickerbase.h
