@@ -70,8 +70,8 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     menu->insertSeparator();
 
     settings = new QPopupMenu;
-    settings->insertItem(tr("&Change Card Backs"), this, SLOT(changeCardBacks()), Key_F2);
-    snap_id = settings->insertItem(tr("&Snap To Position"), this, SLOT(snapToggle()), Key_F3);
+    settings->insertItem(tr("&Change card backs"), this, SLOT(changeCardBacks()), Key_F2);
+    snap_id = settings->insertItem(tr("&Snap to position"), this, SLOT(snapToggle()), Key_F3);
     settings->setCheckable(TRUE);
     menu->insertItem(tr("&Settings"),settings);
 
@@ -96,11 +96,11 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
 
     settings = new QPopupMenu;
     settings->setCheckable(TRUE);
-    settings->insertItem(tr("Change Card Backs"), this, SLOT(changeCardBacks()));
-    snap_id = settings->insertItem(tr("Snap To Position"), this, SLOT(snapToggle()));
+    settings->insertItem(tr("Change card backs"), this, SLOT(changeCardBacks()));
+    snap_id = settings->insertItem(tr("Snap to position"), this, SLOT(snapToggle()));
     QString m;
 
-    drawId = settings->insertItem(tr("Turn One Card"), this, SLOT(drawnToggle()));
+    drawId = settings->insertItem(tr("Turn one card"), this, SLOT(drawnToggle()));
     menu->insertItem(tr("Settings"),settings);
     settings->setCheckable(TRUE);
 
@@ -283,9 +283,9 @@ void CanvasCardWindow::drawnToggle()
 
 void CanvasCardWindow::updateDraw() {
     if(cardGame->cardsDrawn() == 3){
-        settings->changeItem(drawId, tr("Turn One Card"));
+        settings->changeItem(drawId, tr("Turn one card"));
     }  else {
-        settings->changeItem(drawId, tr("Turn Three Cards"));
+        settings->changeItem(drawId, tr("Turn three cards"));
     }
 }
 
