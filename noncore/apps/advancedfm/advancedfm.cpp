@@ -285,6 +285,12 @@ void AdvancedFm::ListPressed( int mouse, QListViewItem *item, const QPoint& , in
 }
 
 
+void AdvancedFm::refreshCurrentTab() {
+     populateView();
+//	 if ( TabWidget->currentWidget() == tab) {
+		
+}
+
 void AdvancedFm::switchToLocalTab() {
    TabWidget->setCurrentWidget(0);
    Local_View->setFocus();

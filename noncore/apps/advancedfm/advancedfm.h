@@ -88,7 +88,7 @@ protected slots:
    void mkSym();
    void switchToLocalTab();
    void switchToRemoteTab();
-
+	 void refreshCurrentTab();
 protected:
 
    Opie::Ui::OSplitter *TabWidget;

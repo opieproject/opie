@@ -101,6 +101,7 @@ void AdvancedFm::init() {
 
 	 viewMenu->insertItem( tr( "Switch to View 1" ), this, SLOT( switchToLocalTab()));
 	 viewMenu->insertItem( tr( "Switch to View 2" ), this, SLOT( switchToRemoteTab()));
+	 viewMenu->insertItem( tr( "Refresh" ), this, SLOT( refreshCurrentTab()));
 //     viewMenu->insertSeparator();
 //     viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
 	 viewMenu->setCheckable(true);
