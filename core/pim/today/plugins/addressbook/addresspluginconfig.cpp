@@ -27,7 +27,6 @@
 #include <qwhatsthis.h>
 
 
-
 AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* name)
     : TodayConfigWidget(parent,  name ) {
 
