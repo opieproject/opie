@@ -1,5 +1,8 @@
 #include <time.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
+
+
 #include <qpainter.h>
 #include <qbitmap.h>
 #include <qtextstream.h>
@@ -252,6 +255,9 @@ QPixmap NodeCollection::devicePixmap( void ) {
             getToplevel()->nextNode()->pixmapName()+"-large");
 
     QPixmap Mini = NSResources->getPixmap( device()->netNode()->pixmapName() );
+
+    if( pm.isNull() || Mini.isNull() )
+	return Resource::loadPixmap("Unknown");
 
     QPainter painter( &pm );
     painter.drawPixmap( pm.width()-Mini.width(), 
