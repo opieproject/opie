@@ -42,7 +42,7 @@ class OFileSelectorView : public QWidget {
 		    const char *name ) 
     : QWidget(widget, name )
 { };
-  virtual ~OFileSelectorView();
+  virtual ~OFileSelectorView() = 0;
 
   virtual void addFile(const QString &mine,
 		       QFileInfo *info,
@@ -56,7 +56,7 @@ class OFileSelectorView : public QWidget {
 			  QFileInfo *info,
 			  bool isSymlink = FALSE ) = 0;
 
-  virtual void cd(const QString &path );
+  virtual void cd(const QString &path ) = 0;
  signals:
   void fileSelected(const QString &);
   void fileSelected(const DocLnk & );
@@ -69,7 +69,7 @@ class OFileViewFactory {
   // Q_OBJECT
  public:
   OFileViewFactory() {} ;
-  virtual ~OFileViewFactory();
+  virtual ~OFileViewFactory() = 0;
 
   OFileSelectorView* newView(QWidget *parent, const char *name );
   QString name()const;

@@ -891,7 +891,7 @@ void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink )
        dir, locked ); 
 }
 
-void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink  )
+void OFileSelector::addDir(const QString &/*mime*/, QFileInfo *info, bool symlink  )
 {
   if(!m_dir )
     return;
@@ -977,7 +977,7 @@ void OFileSelector::slotCurrentChanged(QListViewItem *item )
 }
 
 // either select or change dir
-void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &point, int )
+void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &/*point*/, int )
 {
   if( item == 0 )
     return;
