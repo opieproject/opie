@@ -109,10 +109,6 @@ void Yopy::initButtons()
         d->m_buttons->append ( b );
     }
     reloadButtonMapping();
-
-    QCopChannel *sysch = new QCopChannel( "QPE/System", this );
-    connect( sysch, SIGNAL( received(const QCString&,const QByteArray&) ),
-             this, SLOT( systemMessage(const QCString&,const QByteArray&) ) );
 }
 
 

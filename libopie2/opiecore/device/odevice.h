@@ -357,6 +357,7 @@ class ODeviceData {
     QValueList <ODeviceButton> *m_buttons;
     uint                        m_holdtime;
     QStrList                   *m_cpu_frequencies;
+    bool	m_initializedButtonQcop : 1;
 
     /* values for changeMixerForAlarm */
     int m_sound, m_vol, m_mixer;

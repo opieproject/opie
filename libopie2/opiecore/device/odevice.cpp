@@ -177,6 +177,9 @@ ODevice::ODevice()
 
     /* mixer */
     d->m_sound = d->m_vol   = d->m_mixer = -1;
+    
+    /* System QCopChannel created */
+    d->m_initializedButtonQcop = false;
 
     // New distribution detection code first checks for legacy distributions,
     // identified by /etc/familiar-version or /etc/oz_version.
@@ -233,9 +236,6 @@ void ODevice::initButtons()
     }
 
     reloadButtonMapping();
-
-    QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
-    connect ( sysch, SIGNAL( received(const QCString&,const QByteArray&)), this, SLOT( systemMessage(const QCString&,const QByteArray&)));
 }
 
 ODevice::~ODevice()
@@ -645,6 +645,13 @@ const ODeviceButton *ODevice::buttonForKeycode ( ushort code )
 void ODevice::reloadButtonMapping()
 {
     initButtons();
+    
+    if(!d->m_initializedButtonQcop) {
+	QCopChannel *chan = new QCopChannel("QPE/System", this, "ODevice button channel");
+	connect(chan,SIGNAL(received(const QCString&,const QByteArray&)),
+		this,SLOT(systemMessage(const QCString&,const QByteArray&)));
+	d->m_initializedButtonQcop = true;
+    }
 
     Config cfg ( "ButtonSettings" );
 
