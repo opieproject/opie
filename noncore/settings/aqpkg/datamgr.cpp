@@ -1,22 +1,31 @@
-/***************************************************************************
-                          datamgr.cpp  -  description
-                             -------------------
-    begin                : Thu Aug 29 2002
-    copyright            : (C) 2002 by Andy Qua
-    email                : andy.qua@blueyonder.co.uk
- ***************************************************************************/
+/*
+                             This file is part of the OPIE Project
+                             
+               =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
+             .=l.                                Dan Williams <drw@handhelds.org>
+           .>+-=
+ _;:,     .>    :=|.         This file is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This file is distributed in the hope that
+     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=       =       ;      Public License for more details.
+++=   -.     .`     .:
+ :     =  ...= . :.=-        You should have received a copy of the GNU
+ -.   .:....=;==+<;          General Public License along with this file;
+  -_. . .   )=.  =           see the file COPYING. If not, write to the
+    --        :-=`           Free Software Foundation, Inc.,
+                             59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-#include <fstream>
-#include <iostream>
-using namespace std;
+*/
 
 #ifdef QWS
 #include <qpe/config.h>
@@ -25,7 +34,8 @@ using namespace std;
 #include <qapplication.h>
 #endif
 
-#include <stdio.h>
+#include <qfile.h>
+#include <qtextstream.h>
 
 #include "datamgr.h"
 #include "global.h"
@@ -88,7 +98,6 @@ void DataManager :: loadServers()
     QString lineStr;
     if ( fp == NULL )
     {
-        cout << "Couldn't open " << ipkg_conf << "! err = " << fp << endl;
         return;
     }
     else
@@ -198,24 +207,32 @@ void DataManager :: reloadServerData( )
 
 void DataManager :: writeOutIpkgConf()
 {
+    QFile f( IPKG_CONF );
+    if ( !f.open( IO_WriteOnly ) )
+    {
+        return;
+    }
+    
+    QTextStream t( &f );
+/*
     QString ipkg_conf = IPKG_CONF;
     ofstream out( ipkg_conf );
+*/
+    t << "# Written by AQPkg\n";
+    t << "# Must have one or more source entries of the form:\n";
+    t << "#\n";
+    t << "#   src <src-name> <source-url>\n";
+    t << "#\n";
+    t << "# and one or more destination entries of the form:\n";
+    t << "#\n";
+    t << "#   dest <dest-name> <target-path>\n";
+    t << "#\n";
+    t << "# where <src-name> and <dest-names> are identifiers that\n";
+    t << "# should match [a-zA-Z0-9._-]+, <source-url> should be a\n";
+    t << "# URL that points to a directory containing a Familiar\n";
+    t << "# Packages file, and <target-path> should be a directory\n";
+    t << "# that exists on the target system.\n\n";
 
-    out << "# Written by AQPkg" << endl;
-    out << "# Must have one or more source entries of the form:" << endl;
-    out << "#" << endl;
-    out << "#   src <src-name> <source-url>" << endl;
-    out << "#" << endl;
-    out << "# and one or more destination entries of the form:" << endl;
-    out << "#" << endl;
-    out << "#   dest <dest-name> <target-path>" << endl;
-    out << "#" << endl;
-    out << "# where <src-name> and <dest-names> are identifiers that" << endl;
-    out << "# should match [a-zA-Z0-9._-]+, <source-url> should be a" << endl;
-    out << "# URL that points to a directory containing a Familiar" << endl;
-    out << "# Packages file, and <target-path> should be a directory" << endl;
-    out << "# that exists on the target system." << endl << endl;
-    
     // Write out servers
     Server *server;
     QListIterator<Server> it( serverList );
@@ -229,63 +246,67 @@ void DataManager :: writeOutIpkgConf()
             QString url = server->getServerUrl();;
 
             if ( !server->isServerActive() )
-                out << "#";
-            out << "src " << alias << " " << url << endl;
+                t << "#";
+            t << "src " << alias << " " << url << endl;
         }
 
         ++it;
     }
 
-    out << endl;
+    t << endl;
 
     // Write out destinations
     QListIterator<Destination> it2( destList );
     while ( it2.current() )
     {
-        out << "dest " << it2.current()->getDestinationName() << " " << it2.current()->getDestinationPath() << endl;
+        t << "dest " << it2.current()->getDestinationName() << " " << it2.current()->getDestinationPath() << endl;
         ++it2;
     }
 
-    out << endl;
-    out << "# Proxy Support" << endl;
+    t << endl;
+    t << "# Proxy Support\n";
 
     if ( !httpProxyEnabled && httpProxy == "" )
-        out << "#option http_proxy http://proxy.tld:3128" << endl;
+        t << "#option http_proxy http://proxy.tld:3128\n";
     else
     {
         if ( !httpProxyEnabled )
-            out << "#";
-        out << "option http_proxy " << httpProxy << endl;
+            t << "#";
+        t << "option http_proxy " << httpProxy << endl;
     }
 
     if ( !ftpProxyEnabled && ftpProxy == "" )
-        out << "#option ftp_proxy http://proxy.tld:3128" << endl;
+        t << "#option ftp_proxy http://proxy.tld:3128\n";
     else
     {
         if ( !ftpProxyEnabled )
-            out << "#";
-        out << "option ftp_proxy " << ftpProxy << endl;
+            t << "#";
+        t << "option ftp_proxy " << ftpProxy << endl;
     }
     if ( proxyUsername == "" || (!httpProxyEnabled && !ftpProxyEnabled) )
-        out << "#option proxy_username <username>" << endl;
+        t << "#option proxy_username <username>\n";
     else
-        out << "option proxy_username " << proxyUsername << endl;
+        t << "option proxy_username " << proxyUsername << endl;
     if ( proxyPassword == "" || (!httpProxyEnabled && !ftpProxyEnabled) )
-        out << "#option proxy_password <password>" << endl << endl;
+        t << "#option proxy_password <password>\n\n";
     else
-        out << "option proxy_password " << proxyPassword << endl<< endl;
+        t << "option proxy_password " << proxyPassword << endl<< endl;
 
-    out << "# Offline mode (for use in constructing flash images offline)" << endl;
-    out << "#option offline_root target" << endl;
-
+    t << "# Offline mode (for use in constructing flash images offline)\n";
+    t << "#option offline_root target\n";
     
-    out.close();
+    f.close();
 }
 
 
 void DataManager :: setAvailableCategories( QString section )
 {
-    section = section.lower();
-    if ( availableCategories.find( "#" + section + "#" ) == -1 )
-        availableCategories += section + "#";
+    QString sectstr = "#";
+    sectstr.append( section.lower() );
+    sectstr.append( "#" );
+    if ( availableCategories.find( sectstr ) == -1 )
+    {
+        availableCategories.append( section );
+        availableCategories.append( "#" );
+    }
 }

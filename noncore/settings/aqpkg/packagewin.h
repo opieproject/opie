@@ -1,7 +1,8 @@
 /*
                              This file is part of the OPIE Project
-               =.
-             .=l.            Copyright (c)  2002 OPIE team <opie@handhelds.org?>
+                             
+               =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
+             .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This file is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or modify it under

@@ -1,19 +1,31 @@
-/***************************************************************************
-                          main.cpp  -  description
-                             -------------------
-    begin                : Mon Aug 26 13:32:30 BST 2002
-    copyright            : (C) 2002 by Andy Qua
-    email                : andy.qua@blueyonder.co.uk
- ***************************************************************************/
+/*
+                             This file is part of the OPIE Project
+                             
+               =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
+             .=l.                                Dan Williams <drw@handhelds.org>
+           .>+-=
+ _;:,     .>    :=|.         This file is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This file is distributed in the hope that
+     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=       =       ;      Public License for more details.
+++=   -.     .`     .:
+ :     =  ...= . :.=-        You should have received a copy of the GNU
+ -.   .:....=;==+<;          General Public License along with this file;
+  -_. . .   )=.  =           see the file COPYING. If not, write to the
+    --        :-=`           Free Software Foundation, Inc.,
+                             59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
 
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+*/
 
 #ifdef QWS
 #include <qpe/qpeapplication.h>
@@ -32,7 +44,6 @@
 
 int main(int argc, char *argv[])
 {
-//  cout << "Root dir = " << ROOT << endl;
 #ifdef QWS
   QPEApplication a( argc, argv );
 #else
@@ -41,7 +52,6 @@ int main(int argc, char *argv[])
 
 #ifdef QWS
   // Disable suspend mode
-//  cout << "Disabling suspend mode" << endl;
   QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::DisableSuspend;
 #endif
 
@@ -53,7 +63,6 @@ int main(int argc, char *argv[])
 
 #ifdef QWS
   // Reenable suspend mode
-//  cout << "Enabling suspend mode" << endl;
   QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
 #endif
  #ifdef _DEBUG

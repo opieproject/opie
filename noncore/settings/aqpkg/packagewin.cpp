@@ -1,7 +1,8 @@
 /*
                              This file is part of the OPIE Project
-               =.
-             .=l.            Copyright (c)  2002 OPIE team <opie@handhelds.org?>
+                             
+               =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
+             .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This file is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or modify it under
@@ -104,8 +105,6 @@ PackageWindow::PackageWindow( Package *package, const QString &server )
 	QVBoxLayout *layout = new QVBoxLayout( this, 4, 4 );
 
 	QTextView *l = new QTextView( str, QString::null, this );
-	//l->setTextFormat( Qt::RichText );
-	//l->setAlignment( Qt::AlignLeft | Qt::AlignVCenter | Qt::WordBreak );
 	layout->addWidget( l );
 
 	QPushButton *btn = new QPushButton( Resource::loadPixmap( "enter" ), tr( "Close" ), this );
