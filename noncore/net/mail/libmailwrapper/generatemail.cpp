@@ -279,41 +279,50 @@ mailimf_mailbox *Generatemail::newMailbox(const QString&name, const QString&mail
                                 strdup( mail.latin1() ) );
 }
 
-mailimf_fields *Generatemail::createImfFields(const Mail&mail ) {
-    mailimf_fields *fields;
-    mailimf_field *xmailer;
+mailimf_fields *Generatemail::createImfFields(const Mail&mail )
+{
+    mailimf_fields *fields = NULL;
+    mailimf_field *xmailer = NULL;
     mailimf_mailbox *sender=0,*fromBox=0;
     mailimf_mailbox_list *from=0;
     mailimf_address_list *to=0, *cc=0, *bcc=0, *reply=0;
     clist*in_reply_to = 0;
     char *subject = strdup( mail.getSubject().latin1() );
     int err;
+    int res = 1;
 
     sender = newMailbox( mail.getName(), mail.getMail() );
-    if ( sender == NULL )
-        goto err_free;
+    if ( sender == NULL ) {
+        res = 0;
+    }
 
-    fromBox = newMailbox( mail.getName(), mail.getMail() );
-    if ( fromBox == NULL )
-        goto err_free_sender;
+    if (res) {
+        fromBox = newMailbox( mail.getName(), mail.getMail() );
+    }
+    if ( fromBox == NULL ) {
+        res = 0;
+    }
 
-    from = mailimf_mailbox_list_new_empty();
-    if ( from == NULL )
-        goto err_free_fromBox;
+    if (res) {
+        from = mailimf_mailbox_list_new_empty();
+    }
+    if ( from == NULL ) {
+        res = 0;
+    }
 
-    err = mailimf_mailbox_list_add( from, fromBox );
-    if ( err != MAILIMF_NO_ERROR )
-        goto err_free_from;
+    if (res && from) {
+        err = mailimf_mailbox_list_add( from, fromBox );
+        if ( err != MAILIMF_NO_ERROR ) {
+            res = 0;
+        }
+    }
 
-    to = parseAddresses( mail.getTo() );
-    if ( to == NULL )
-        goto err_free_from;
+    if (res) to = parseAddresses( mail.getTo() );
+    if (res) cc = parseAddresses( mail.getCC() );
+    if (res) bcc = parseAddresses( mail.getBCC() );
+    if (res) reply = parseAddresses( mail.getReply() );
 
-    cc = parseAddresses( mail.getCC() );
-    bcc = parseAddresses( mail.getBCC() );
-    reply = parseAddresses( mail.getReply() );
-
-    if (mail.Inreply().count()>0) {
+    if (res && mail.Inreply().count()>0) {
         in_reply_to = clist_new();
         char*c_reply;
         unsigned int nsize = 0;
@@ -339,51 +348,55 @@ mailimf_fields *Generatemail::createImfFields(const Mail&mail ) {
         }
     }
 
-    fields = mailimf_fields_new_with_data( from, sender, reply, to, cc, bcc,
+    if (res) {
+        fields = mailimf_fields_new_with_data( from, sender, reply, to, cc, bcc,
                                            in_reply_to, NULL, subject );
-    if ( fields == NULL )
-        goto err_free_reply;
-
-    xmailer = mailimf_field_new_custom( strdup( "User-Agent" ),
+        if ( fields == NULL ) {
+            qDebug("Error creating mailimf fields");
+            res = 0;
+        }
+    }
+    if (res) xmailer = mailimf_field_new_custom( strdup( "User-Agent" ),
                                         strdup( USER_AGENT ) );
-    if ( xmailer == NULL )
-        goto err_free_fields;
-
-    err = mailimf_fields_add( fields, xmailer );
-    if ( err != MAILIMF_NO_ERROR )
-        goto err_free_xmailer;
-
-    return fields;      // Success :)
-
-err_free_xmailer:
-    if (xmailer)
-        mailimf_field_free( xmailer );
-err_free_fields:
-    if (fields)
-        mailimf_fields_free( fields );
-err_free_reply:
-    if (reply)
-        mailimf_address_list_free( reply );
-    if (bcc)
-        mailimf_address_list_free( bcc );
-    if (cc)
-        mailimf_address_list_free( cc );
-    if (to)
-        mailimf_address_list_free( to );
-err_free_from:
-    if (from)
-        mailimf_mailbox_list_free( from );
-err_free_fromBox:
-    mailimf_mailbox_free( fromBox );
-err_free_sender:
-    if (sender)
-        mailimf_mailbox_free( sender );
-err_free:
-    if (subject)
-        free( subject );
-    qDebug( "createImfFields - error" );
-
-    return NULL;        // Error :(
+    if ( xmailer == NULL ) {
+        res = 0;
+    } else {
+        err = mailimf_fields_add( fields, xmailer );
+        if ( err != MAILIMF_NO_ERROR ) {
+            res = 0;
+        }
+    }
+    if (!res ) {
+        if (xmailer) {
+            mailimf_field_free( xmailer );
+            xmailer = NULL;
+        }
+        if (fields) {
+            mailimf_fields_free( fields );
+            fields = NULL;
+        } else {
+            if (reply)
+                mailimf_address_list_free( reply );
+            if (bcc)
+                mailimf_address_list_free( bcc );
+            if (cc)
+                mailimf_address_list_free( cc );
+            if (to)
+                mailimf_address_list_free( to );
+            if (fromBox) {
+                mailimf_mailbox_free( fromBox );
+            } else if (from) {
+                mailimf_mailbox_list_free( from );
+            }
+            if (sender) {
+                mailimf_mailbox_free( sender );
+            }
+            if (subject) {
+                free( subject );
+            }
+        }
+    }
+    return fields;
 }
 
 mailmime *Generatemail::createMimeMail(const Mail &mail ) {
