@@ -1,5 +1,5 @@
 Package: tonleiter
-Files: bin/tonleiter pics/tonleiter apps/Applications/tonleiter.desktop
+Files: plugins/applications/libtonleiter.so* bin/tonleiter pics/tonleiter apps/Applications/tonleiter.desktop
 Priority: optional
 Section: opie/multimedia
 Maintainer: Ralf Waspe <rwaspe@web.de>

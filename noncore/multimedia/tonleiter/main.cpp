@@ -6,14 +6,7 @@
  ***************************************************************************/
 
 #include "mainwidget.h"
-#include <qpe/qpeapplication.h>
+#include <opie2/oapplicationfactory.h>
 
-int main(int argc, char* argv[])
-{
-    QPEApplication a(argc, argv);
-    MainWidget mw;
-    a.showMainWidget( &mw);
-    return a.exec();
-}
-
+OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<MainWidget> )
 
