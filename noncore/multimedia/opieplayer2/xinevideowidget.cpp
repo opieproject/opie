@@ -3,7 +3,7 @@
                             This file is part of the Opie Project
 
                              Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
-                             Copyright (c)  2002 LJP <>
+                             Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
                              Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
               =.
             .=l.

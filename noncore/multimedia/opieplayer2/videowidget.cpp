@@ -1,3 +1,35 @@
+/*
+                            This file is part of the Opie Project
+
+                             Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
+                             Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
+                             Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+
+*/
 
 #include <qpe/resource.h>
 #include <qpe/mediaplayerplugininterface.h>
@@ -73,8 +105,8 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setGeometry( QRect( 7, 250, 220, 20 ) );
 
-    connect( slider,         SIGNAL( sliderPressed() ),      this, SLOT( sliderPressed() ) );
-    connect( slider,         SIGNAL( sliderReleased() ),     this, SLOT( sliderReleased() ) );
+    connect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
+    connect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
 
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
     connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
@@ -89,6 +121,9 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     setFullscreen( mediaPlayerState->fullscreen() );
     setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
+
+    videoFrame = new XineVideoWidget( 200, 150 ,this, "Video frame" );
+    videoFrame->setGeometry( QRect( 10, 20, 220, 160  ) );
 }
 
 
@@ -256,8 +291,6 @@ void VideoWidget::paintEvent( QPaintEvent * ) {
         p.setBrush( QBrush( Qt::black ) );
         p.drawRect( rect() );
 
-        // Draw the current frame
-        //p.drawImage( ); // If using directpainter we won't have a copy except whats on the screen
     } else {
         // draw border
         qDrawShadePanel( &p, 4, 15, 230, 170, colorGroup(), TRUE, 5, NULL );
@@ -267,7 +300,7 @@ void VideoWidget::paintEvent( QPaintEvent * ) {
         p.drawRect( 9, 20, 220, 160 );
 
         // draw current frame (centrally positioned from scaling to maintain aspect ratio)
-        p.drawImage( 9 + (220 - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
+        //p.drawImage( 9 + (220 - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
 
         // draw the buttons
         for ( int i = 0; i < numButtons; i++ ) {
@@ -290,135 +323,13 @@ bool VideoWidget::playVideo() {
 
     int stream = 0;
 
-    int sw = 240;     //mediaPlayerState->curDecoder()->videoWidth( stream );
-    int sh = 320;    //mediaPlayerState->curDecoder()->videoHeight( stream );
+    int sw = 240;
+    int sh = 320;
     int dd = QPixmap::defaultDepth();
     int w = height();
     int h = width();
 
-    ColorFormat format = (dd == 16) ? RGB565 : BGRA8888;
-
-    if ( mediaPlayerState->fullscreen() ) {
-#ifdef USE_DIRECT_PAINTER
-        QDirectPainter p(this);
-
-        if ( ( qt_screen->transformOrientation() == 3 ) &&
-             ( ( dd == 16 ) || ( dd == 32 ) ) && ( p.numRects() == 1 ) ) {
-
-            w = 320;
-            h = 240;
-
-            if ( mediaPlayerState->scaled() ) {
-                // maintain aspect ratio
-                if ( w * sh > sw * h )
-                    w = sw * h / sh;
-                else
-                    h = sh * w / sw;
-            } else  {
-                w = sw;
-                h = sh;
-            }
-
-            w--; // we can't allow libmpeg to overwrite.
-            QPoint roff = qt_screen->mapToDevice( p.offset(), QSize( qt_screen->width(), qt_screen->height() ) );
-
-            int ox = roff.x() - height() + 2 + (height() - w) / 2;
-            int oy = roff.y() + (width() - h) / 2;
-            int sx = 0, sy = 0;
-
-            uchar* fp = p.frameBuffer() + p.lineStep() * oy;
-            fp += dd * ox / 8;
-            uchar **jt = new uchar*[h];
-            for ( int i = h; i; i-- ) {
-                jt[h - i] = fp;
-                fp += p.lineStep();
-            }
-
-            result = 42;   //mediaPlayerState->curDecoder()->videoReadScaledFrame( jt, sx, sy, sw, sh, w, h, format, 0) == 0;
-
-            delete [] jt;
-        } else {
-#endif
-            QPainter p(this);
-
-            w = 320;
-            h = 240;
-
-            if ( mediaPlayerState->scaled() ) {
-                // maintain aspect ratio
-                if ( w * sh > sw * h ) {
-                    w = sw * h / sh;
-                } else {
-                    h = sh * w / sw;
-                }
-            } else  {
-                w = sw;
-                h = sh;
-            }
-
-            int bytes = ( dd == 16 ) ? 2 : 4;
-            QImage tempFrame( w, h, bytes << 3 );
-            result = 42; // mediaPlayerState->curDecoder()->videoReadScaledFrame( tempFrame.jumpTable(),
-            //                                                0, 0, sw, sh, w, h, format, 0) == 0;
-            if ( result && mediaPlayerState->fullscreen() ) {
-
-                int rw = h, rh = w;
-                QImage rotatedFrame( rw, rh, bytes << 3 );
-
-                ushort* in  = (ushort*)tempFrame.bits();
-                ushort* out = (ushort*)rotatedFrame.bits();
-                int spl = rotatedFrame.bytesPerLine() / bytes;
-                for (int x=0; x<h; x++) {
-                    if ( bytes == 2 ) {
-                        ushort* lout = out++ + (w - 1)*spl;
-                        for (int y=0; y<w; y++) {
-                            *lout=*in++;
-                            lout-=spl;
-                        }
-                    } else {
-                        ulong* lout = ((ulong *)out)++ + (w - 1)*spl;
-                        for (int y=0; y<w; y++) {
-                            *lout=*((ulong*)in)++;
-                            lout-=spl;
-                        }
-                    }
-                }
-
-                p.drawImage( (240 - rw) / 2, (320 - rh) / 2, rotatedFrame, 0, 0, rw, rh );
-            }
-#ifdef USE_DIRECT_PAINTER
-        }
-#endif
-    } else {
-
-        w = 220;
-        h = 160;
-
-        // maintain aspect ratio
-        if ( w * sh > sw * h ) {
-            w = sw * h / sh;
-        } else {
-            h = sh * w / sw;
-        }
-
-        result = 42 ; //mediaPlayerState->curDecoder()->videoReadScaledFrame( currentFrame->jumpTable(), 0, 0, sw, sh, w, h, format, 0) == 0;
-
-        QPainter p( this );
-
-  // Image changed size, therefore need to blank the possibly unpainted regions first
-        if ( scaledWidth != w || scaledHeight != h ) {
-            p.setBrush( QBrush( Qt::black ) );
-            p.drawRect( 9, 20, 220, 160 );
-        }
-
-        scaledWidth = w;
-        scaledHeight = h;
-
-        if ( result ) {
-            p.drawImage( 9 + (220 - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
-        }
-    }
-    return result;
+    return true;
 }
 
 
