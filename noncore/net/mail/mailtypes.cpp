@@ -132,7 +132,7 @@ void RecPart::setEncoding(const QString&encoding)
 }
 
 RecBody::RecBody()
-    : m_BodyText(""),m_PartsList()
+    : m_BodyText(),m_PartsList()
 {
     m_PartsList.setAutoDelete(true);
 }
