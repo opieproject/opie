@@ -163,7 +163,6 @@ endmenu
 
 menu "Communications and Networking"
   source noncore/comm/config.in
-  source noncore/mail/config.in
   source noncore/net/config.in
 endmenu
 
@@ -216,6 +215,16 @@ menu "Examples"
 endmenu
 
 comment ""
+
+menu "Unsupported / Unmaintained"
+  source noncore/unsupported/mail2/config.in
+  source noncore/unsupported/filebrowser/config.in
+  source noncore/unsupported/oipkg/config.in
+  source noncore/unsupported/qpdf/config.in
+  source noncore/unsupported/gsmtool/config.in
+endmenu
+
+comment ""
   depends on EXPERIMENTAL
 menu "Experimental"
   depends on EXPERIMENTAL
@@ -227,7 +236,7 @@ menu "Experimental"
   help
 	This adds the SQL-Support, using SQLite. Which database is used
 	by the backends is defined by the file "pimaccess.conf" in the
-	directory "Settings". 
+	directory "Settings".
 	There currently do exist to groups "[contact]" and "[todo]". You can
 	select the used backend by the variable "usebackend=<type>", where
 	<type> is "sql" or "xml". "xml" is the default !

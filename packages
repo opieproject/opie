@@ -6,7 +6,7 @@ CONFIG_AQPKG	noncore/settings/aqpkg	aqpkg.pro
 CONFIG_BACKGAMMON	noncore/games/backgammon backgammon.pro
 CONFIG_BACKUP	noncore/settings/backup	backup.pro
 CONFIG_BATTERYAPPLET	core/applets/batteryapplet	batteryapplet.pro
-CONFIG_BEND	noncore/mail/bend	bend.pro
+CONFIG_BEND	noncore/unsupported/mail2/bend	bend.pro
 CONFIG_BINARY	noncore/tools/calc2/binary	binary.pro
 CONFIG_BLUE-PIN	noncore/net/opietooth/blue-pin	blue-pin.pro
 CONFIG_BOUNCE	noncore/games/bounce	bounce.pro
