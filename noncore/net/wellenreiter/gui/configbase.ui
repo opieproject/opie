@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>228</width>
+            <width>224</width>
             <height>267</height>
         </rect>
     </property>
@@ -153,6 +153,10 @@
                         <name>enabled</name>
                         <bool>true</bool>
                     </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Choose the interface used for sniffing.</string>
+                    </property>
                 </widget>
                 <widget row="4"  column="0"  rowspan="1"  colspan="2" >
                     <class>QCheckBox</class>
@@ -180,13 +184,25 @@
                     <item>
                         <property>
                             <name>text</name>
-                            <string>orinoco</string>
+                            <string>cisco</string>
                         </property>
                     </item>
                     <item>
                         <property>
                             <name>text</name>
-                            <string>prism</string>
+                            <string>wlan-ng</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>hostap</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>orinoco</string>
                         </property>
                     </item>
                     <item>
@@ -202,6 +218,10 @@
                     <property stdset="1">
                         <name>enabled</name>
                         <bool>true</bool>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Choose the type of driver used for sniffing.</string>
                     </property>
                 </widget>
                 <widget row="3"  column="0"  rowspan="1"  colspan="2" >
@@ -244,6 +264,10 @@
                     <property stdset="1">
                         <name>lineStep</name>
                         <number>100</number>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Choose the channel hop interval.</string>
                     </property>
                 </widget>
                 <widget row="2"  column="1" >

@@ -17,14 +17,19 @@
 #define WELLENREITERCONFIGWINDOW_H
 
 #include "configbase.h"
+#include <qmap.h>
 
 class WellenreiterConfigWindow : public WellenreiterConfigBase
 {
 
   public:
     WellenreiterConfigWindow( QWidget * parent = 0, const char * name = "WellenreiterConfigWindow", WFlags f = 0 );
-  
-    
+    int daemonDeviceType();
+    int daemonHopInterval();
+
+  protected:
+    QMap<QString, int> _devicetype;
+
 };
 
 #endif

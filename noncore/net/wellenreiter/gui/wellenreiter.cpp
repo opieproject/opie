@@ -68,7 +68,7 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     //
     // construct manufacturer database
     //
-    
+
     QString manufile;
     #ifdef QWS
     manufile.sprintf( "%s/share/wellenreiter/manufacturers.dat", (const char*) QPEApplication::qpeDir() );
@@ -89,7 +89,7 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     _system = ODevice::inst()->system();
     logwindow->log( sys );
     #endif
-    
+
     //
     // setup socket for daemon communication, register socket notifier
     //
@@ -114,7 +114,7 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     connect( button, SIGNAL( clicked() ), this, SLOT( buttonClicked() ) );
     // button->setEnabled( false );
     netview->setColumnWidthMode( 1, QListView::Manual );
-    
+
     if ( manufacturerdb )
         netview->setManufacturerDB( manufacturerdb );
         
@@ -151,15 +151,15 @@ void Wellenreiter::handleMessage()
     */
     
     int result = wl_recv( &daemon_fd, sockaddr, (char*) &buffer, WL_SOCKBUF );
-        
+
     if ( result == -1 )
     {
         qDebug( "Warning: %s", strerror( errno ) );
         return;
     }
-    
+
     int command = buffer[1] - 48;
-    
+
 /*
 typedef struct {
   int net_type;     1 = Accesspoint ; 2 = Ad-Hoc
@@ -208,7 +208,7 @@ typedef struct {
 void Wellenreiter::dataReceived()
 {
     logwindow->log( "(d) Received data from daemon" );
-    handleMessage();    
+    handleMessage();
 }
 
 void Wellenreiter::buttonClicked()
@@ -226,88 +226,61 @@ void Wellenreiter::buttonClicked()
     if ( daemonRunning )
     {
         daemonRunning = false;
-        
+
         logwindow->log( "(i) Daemon has been stopped." );
         button->setText( "Start Scanning" );
-        
+
         // Stop daemon - ugly for now... later better
-        
-        system( "killall orinoco_hopper" );
+
         system( "killall wellenreiterd" );
-        
+
         // get configuration from config window
-        
+
         const QString& interface = configwindow->interfaceName->currentText();
         const QString& cardtype = configwindow->deviceType->currentText();
-        const QString& interval = configwindow->hopInterval->cleanText();
-        
+        //const QString& interval = configwindow->hopInterval->cleanText();
+
         // reset the card trying to get into a usable state again
-        
+
         QString cmdline;
-        cmdline.sprintf( "iwpriv %s monitor 1", (const char*) interface );
-        system( cmdline );
-        cmdline.sprintf( "iwpriv %s monitor 1 6", (const char*) interface );
-        system( cmdline );
-        cmdline.sprintf( "ifconfig %s -promisc", (const char*) interface );
+        cmdline.sprintf( "cardctl eject; cardctl insert" );
         system( cmdline );
         cmdline.sprintf( "killall -14 dhcpcd" );
         system( cmdline );
         cmdline.sprintf( "killall -10 udhcpc" );
-        
+
         // message the user
 
         QMessageBox::information( this, "Wellenreiter/Opie", "Your wireless card\nshould now be usable again." );
     }
-    
+
     else
-    {    
-    
-        logwindow->log( "(i) Daemon has been started." );
-        daemonRunning = true;
-        button->setText( "Stop Scanning" );
-        
+    {
+
         // get configuration from config window
-        
+
         const QString& interface = configwindow->interfaceName->currentText();
-        const QString& cardtype = configwindow->deviceType->currentText();
-        const QString& interval = configwindow->hopInterval->cleanText();
-        
-        if ( ( interface == "<select>" ) || ( cardtype == "<select>" ) )
+        const int cardtype = configwindow->daemonDeviceType();
+        const int interval = configwindow->daemonHopInterval();
+
+        if ( ( interface == "<select>" ) || ( cardtype == 0 ) )
         {
             QMessageBox::information( this, "Wellenreiter/Opie", "You must configure your\ndevice before scanning." );
             return;
         }
-        
-        // set interface into monitor mode
-        /* Global::Execute definitely does not work very well with non-gui stuff! :( */
-        
-        QString cmdline;
-        cmdline.sprintf( "iwpriv %s monitor 2", (const char*) interface );
-        system( cmdline );
-        cmdline.sprintf( "iwpriv %s monitor 2 1", (const char*) interface );
-        system( cmdline );
-        
-        // start channel hopper
-        
-        cmdline = "orinoco_hopper ";
-        cmdline += interface;
-        cmdline += " -i ";
-        cmdline += interval;
-        cmdline += " &";
-        qDebug( "execute: %s", (const char*) cmdline );
-        system( cmdline ); 
-        qDebug( "done" );
-        
-        // start daemon
-        
-        cmdline = "wellenreiterd ";
-        cmdline += interface;
-        cmdline += " 3";
-        cmdline += " &";
 
-        qDebug( "execute: %s", (const char*) cmdline );       
+        // start wellenreiterd
+
+        QString cmdline;
+        cmdline.sprintf( "wellenreiterd %s %d &", (const char*) interface, cardtype );
+
+        qDebug( "about to execute '%s' ...", (const char*) cmdline );
         system( cmdline );
-        qDebug( "done" );
+        qDebug( "done!" );
+
+        logwindow->log( "(i) Daemon has been started." );
+        daemonRunning = true;
+        button->setText( "Stop Scanning" );
 
     }
 }

@@ -14,10 +14,34 @@
 **********************************************************************/
 
 #include "configwindow.h"
+#include <qmap.h>
+#include <qcombobox.h>
+#include <qspinbox.h>
 
 WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char * name, WFlags f )
            :WellenreiterConfigBase( parent, name, f )
 {
-        
+    _devicetype[ "cisco" ] = 1;
+    _devicetype[ "wlan-ng" ] = 2;
+    _devicetype[ "hostap" ] = 3;
+    _devicetype[ "orinoco" ] = 4;
+    _devicetype[ "<manual>" ] = 5;
 };
 
+int WellenreiterConfigWindow::daemonDeviceType()
+{
+    QString name = deviceType->currentText();
+    if ( _devicetype.contains( name ) )
+    {
+        return _devicetype[name];
+    }
+    else
+    {
+        return 0;
+    }
+};
+
+int WellenreiterConfigWindow::daemonHopInterval()
+{
+    return hopInterval->cleanText().toInt();
+}

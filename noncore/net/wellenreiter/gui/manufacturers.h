@@ -17,7 +17,6 @@
 #define MANUFACTURERS_H
 
 #include <qmap.h>
-#include <string.h>
 
 class ManufacturerDB
 {
@@ -30,7 +29,7 @@ class ManufacturerDB
   private:
   
     QMap<QString, QString> manufacturers;
-    
+
 };
 
 #endif
