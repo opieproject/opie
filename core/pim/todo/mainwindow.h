@@ -191,7 +191,7 @@ private slots:
         void reload();
         int create();
         bool remove( int uid );
-        void beam(int uid, int transport = IrDa );
+        void beam(int uid);
         void show( int uid );
         void edit( int uid );
         void add( const OPimRecord& );

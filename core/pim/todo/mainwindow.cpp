@@ -780,7 +780,7 @@ bool MainWindow::remove( int uid ) {
 
     return m_todoMgr.remove( uid );
 }
-void MainWindow::beam( int uid, int ) {
+void MainWindow::beam( int uid) {
     ::unlink( beamfile );
     OTodo todo = event( uid );
     OTodoAccessVCal* cal = new OTodoAccessVCal(QString::fromLatin1(beamfile) );
