@@ -23,7 +23,7 @@ public slots :
 
 private :
 
-    QTimer TrafficRefresh;
+    QTimer RefreshTimer;
     ANetNodeInstance * NNI;
     AsDevice * Dev;
 };

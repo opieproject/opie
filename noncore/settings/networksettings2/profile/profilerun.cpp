@@ -12,7 +12,7 @@ void ProfileRun::detectState( NodeCollection * NC ) {
     }
 }
 
-bool ProfileRun::setState( NodeCollection * NC, Action_t A ) { 
+bool ProfileRun::setState( NodeCollection * NC, Action_t A, bool ) { 
     ANetNodeInstance * NNNI;
 
     NNNI = netNode()->nextNode();

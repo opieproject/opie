@@ -13,7 +13,7 @@ public :
         { Data = &D;  }
 
       void detectState( NodeCollection * NC );
-      bool setState( NodeCollection * NC, Action_t A );
+      bool setState( NodeCollection * NC, Action_t A, bool );
       bool canSetState( State_t Curr, Action_t A );
 
       bool handlesInterface( const QString & I );

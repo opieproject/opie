@@ -23,6 +23,7 @@ NetworkSettings::NetworkSettings( QWidget *parent,
                              NSD() {
 
     UpdateTimer = new QTimer( this );
+
     // set pixmaps 
     Add_TB->setPixmap( NSResources->getPixmap( "add" ) );
     Delete_TB->setPixmap( NSResources->getPixmap( "remove" ) );
@@ -31,8 +32,11 @@ NetworkSettings::NetworkSettings( QWidget *parent,
     GenConfig_TB->setPixmap( NSResources->getPixmap( "configure" ) );
 
     Connect_TB->setPixmap( NSResources->getPixmap( "connected" ) );
+    Disconnect_TB->setPixmap( NSResources->getPixmap( "disconnected" ) );
 
     On_TB->setPixmap( NSResources->getPixmap( "off" ) );
+
+    SLOT_ToProfile();
 
     // populate main Listbox
     Profiles_LB->clear();
@@ -276,7 +280,7 @@ void NetworkSettings::SLOT_ShowNode( QListBoxItem * LBI ) {
       Description_LBL->setText( NC->description() );
     }
 
-    CurProfile_GB->setTitle( LBI->text() );
+    Profile_GB->setTitle( LBI->text() );
     State_LBL->setText( NC->stateName() );
 }
 
@@ -407,6 +411,28 @@ void NetworkSettings::SLOT_Connect( void ) {
     }
 
     // we do not update the GUI but wait for the REAL upping of the device
+}
+
+void NetworkSettings::SLOT_Disconnect( void ) {
+    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
+
+    if ( ! LBI ) 
+      return;
+
+    NodeCollection * NC = 
+        NSResources->findConnection( LBI->text() );
+
+    NC->setState( Down, 1 );
+}
+
+void NetworkSettings::SLOT_ToMessages( void ) {
+    Profile_GB->hide();
+    Messages_GB->show();
+}
+
+void NetworkSettings::SLOT_ToProfile( void ) {
+    Profile_GB->show();
+    Messages_GB->hide();
 }
 
 void NetworkSettings::SLOT_QCopMessage(const QCString &msg, const QByteArray &data) {

@@ -75,7 +75,7 @@ void USBRun::detectState( NodeCollection * NC ) {
     NC->setCurrentState( Unavailable );
 }
 
-bool USBRun::setState( NodeCollection * NC, Action_t A ) {
+bool USBRun::setState( NodeCollection * NC, Action_t A, bool ) {
 
     // we only handle activate and deactivate
     switch( A ) {

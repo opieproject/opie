@@ -11,16 +11,18 @@
 #include "profileedit.h"
 
 ProfileEdit::ProfileEdit( QWidget * Parent, ANetNodeInstance * TNNI ) : 
-      ProfileGUI( Parent ), TrafficRefresh(this) {
+      ProfileGUI( Parent ), RefreshTimer(this) {
       InterfaceInfo * II;
 
       NNI = TNNI;
       Dev = NNI->runtime()->device();
       if( ( II = Dev->assignedInterface() ) ) {
+
         Refresh_CB->setEnabled( TRUE );
         Snd_GB->setEnabled( TRUE );
         Rcv_GB->setEnabled( TRUE );
         Collisions_FRM->setEnabled( TRUE );
+
         // show current content
         SLOT_Refresh();
 
@@ -42,10 +44,11 @@ ProfileEdit::ProfileEdit( QWidget * Parent, ANetNodeInstance * TNNI ) :
           S.prepend( " : " );
         }
         InterfaceOptions_LBL->setText( S  );
+
+        connect( &RefreshTimer, SIGNAL( timeout() ),
+                 this, SLOT( SLOT_Refresh() ) );
       }
 
-      connect( &TrafficRefresh, SIGNAL( timeout() ),
-               this, SLOT( SLOT_Refresh() ) );
 }
 
 QString ProfileEdit::acceptable( void ) {
@@ -85,9 +88,9 @@ void ProfileEdit::SLOT_Refresh( void ) {
 
 void ProfileEdit::SLOT_AutoRefresh( bool ar ) {
     if( ar ) {
-      TrafficRefresh.start( 1000 );
+      RefreshTimer.start( 1000 );
       SLOT_Refresh();
     } else {
-      TrafficRefresh.stop();
+      RefreshTimer.stop();
     }
 }

@@ -13,7 +13,7 @@ void CableRun::detectState( NodeCollection * NC ) {
       NC->setCurrentState( Available );
 }
 
-bool CableRun::setState( NodeCollection * NC, Action_t A ) { 
+bool CableRun::setState( NodeCollection * NC, Action_t A, bool ) { 
       if( A == Activate ) {
         detectState(NC);
         return (NC->currentState() == Available);

@@ -17,7 +17,7 @@ void NetworkRun::detectState( NodeCollection * NC ) {
     RI->detectState( NC );
 }
 
-bool NetworkRun::setState( NodeCollection * NC, Action_t A ) { 
+bool NetworkRun::setState( NodeCollection * NC, Action_t A, bool Force ) { 
     // we handle UP and DOWN
     RuntimeInfo * RI = netNode()->nextNode()->runtime();
     AsDevice * Next = RI->asDevice();
@@ -25,7 +25,7 @@ bool NetworkRun::setState( NodeCollection * NC, Action_t A ) {
 
     if( A == Up ) {
       // we can bring UP if lower level is available
-      if( NC->currentState() == Available ) {
+      if( NC->currentState() == Available || Force ) {
         QString S;
         S.sprintf( "ifup %s=%s-c%d-allowed", 
             II->Name.latin1(), II->Name.latin1(),
@@ -34,7 +34,7 @@ bool NetworkRun::setState( NodeCollection * NC, Action_t A ) {
       }
       return 1;
     } else if( A == Down ) {
-      if( NC->currentState() == IsUp ) {
+      if( NC->currentState() == IsUp || Force ) {
         QString S;
         S.sprintf( "ifdown %s=%s-c%d-allowed", 
             II->Name.latin1(), II->Name.latin1(),

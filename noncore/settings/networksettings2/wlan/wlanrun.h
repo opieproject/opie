@@ -21,20 +21,17 @@ public :
 
 protected :
 
-      void detectState( NodeCollection *  )
-        { }
-
-      bool setState( NodeCollection *, Action_t )
-        { return 0; }
-
-      bool canSetState( State_t, Action_t )
-        { return 0; }
-
+      void detectState( NodeCollection *  );
+      bool setState( NodeCollection *, Action_t, bool );
+      bool canSetState( State_t, Action_t );
       bool handlesInterface( const QString & I );
+      bool handlesInterface( const InterfaceInfo & II );
 
 private :
 
+      InterfaceInfo * getInterface( void );
       QRegExp Pat;
+      WLanData * Data;
 };
 
 #endif

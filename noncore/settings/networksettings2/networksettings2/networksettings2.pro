@@ -10,11 +10,13 @@ HEADERS		= netnode.h  \
                   asconnection.h \
                   asfullsetup.h \
                   systemfile.h \
+                  wextensions.h \
                   asdevice.h
 SOURCES		= netnode.cpp \
                   GUIUtils.cpp \
                   system.cpp \
                   systemfile.cpp \
+                  wextensions.cpp \
                   resources.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include ../networksettings2
 DEPENDPATH	+= $(OPIEDIR)/include

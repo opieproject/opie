@@ -23,7 +23,7 @@ public :
 protected :
 
       void detectState( NodeCollection * );
-      bool setState( NodeCollection * , Action_t A );
+      bool setState( NodeCollection * , Action_t A, bool );
       bool canSetState( State_t , Action_t A );
 
       bool handlesInterface( const QString & I );

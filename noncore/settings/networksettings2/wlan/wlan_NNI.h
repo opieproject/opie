@@ -28,7 +28,7 @@ public :
         { return (void *)&Data; }
 
       virtual bool hasDataFor( const QString & )
-        { return 0; }
+        { return 1; }
       virtual bool generateDataForCommonFile( 
           SystemFile & SF, long DevNr );
 protected :

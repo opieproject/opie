@@ -20,7 +20,7 @@ void PPPRun::detectState( NodeCollection * NC ) {
     }
 }
 
-bool PPPRun::setState( NodeCollection * NC, Action_t A ) { 
+bool PPPRun::setState( NodeCollection * NC, Action_t A, bool ) { 
     switch( A ) {
       case Activate :
         NC->setCurrentState( Available );

@@ -3,15 +3,14 @@
 
 #include <qstring.h>
 typedef struct WLanData {
-      QString Device;
-      QString LockFile;
-      long Speed;
-      short Parity;
-      short DataBits;
-      short StopBits;
-      bool HardwareControl;
-      bool SoftwareControl;
-
+      QString ESSID;
+      QString NodeName;
+      short Mode;
+      bool SpecificAP;
+      QString APMac;
+      bool Encrypted;
+      QString Key[4];
+      bool AcceptNonEncrypted;
 } WLanData_t; 
 
 #endif

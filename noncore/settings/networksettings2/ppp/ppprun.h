@@ -27,7 +27,7 @@ public :
  protected :
 
       void detectState( NodeCollection * NC );
-      bool setState( NodeCollection * NC, Action_t A );
+      bool setState( NodeCollection * NC, Action_t A, bool );
       bool canSetState( State_t S, Action_t A )
         { return AsDevice::connection()->findNext( 
             AsDevice::netNode() )->runtime()->canSetState( S,A ); }

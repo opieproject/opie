@@ -1,5 +1,7 @@
-#include <qpe/qpeapplication.h>
 #include <time.h>
+#include <qpe/qpeapplication.h>
+#include <qpainter.h>
+#include <qbitmap.h>
 #include <qtextstream.h>
 #include <qpixmap.h>
 
@@ -247,8 +249,17 @@ static char * State2PixmapTbl[] = {
 };
 
 QPixmap NodeCollection::devicePixmap( void ) {
-    return NSResources->getPixmap(
-          device()->netNode()->pixmapName()+"-large" );
+    QPixmap pm = NSResources->getPixmap(
+            getToplevel()->nextNode()->pixmapName()+"-large");
+
+    QPixmap Mini = NSResources->getPixmap( device()->netNode()->pixmapName() );
+
+    QPainter painter( &pm );
+    painter.drawPixmap( pm.width()-Mini.width(), 
+                        pm.height()-Mini.height(), 
+                        Mini );
+    pm.setMask( pm.createHeuristicMask( TRUE ) );
+    return pm;
 }
 
 QPixmap NodeCollection::statePixmap( State_t S) {

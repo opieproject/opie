@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>399</width>
-            <height>502</height>
+            <width>160</width>
+            <height>260</height>
         </rect>
     </property>
     <property stdset="1">
@@ -32,7 +32,7 @@
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>0</number>
+            <number>2</number>
         </property>
         <widget>
             <class>QFrame</class>
@@ -167,7 +167,7 @@
                     <class>QToolButton</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>On_TB</cstring>
+                        <cstring>Enable_TB</cstring>
                     </property>
                     <property stdset="1">
                         <name>sizePolicy</name>
@@ -193,7 +193,7 @@
                     <class>QToolButton</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Enable_TB</cstring>
+                        <cstring>On_TB</cstring>
                     </property>
                     <property stdset="1">
                         <name>sizePolicy</name>
@@ -241,6 +241,32 @@
                         <bool>true</bool>
                     </property>
                 </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Disconnect_TB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>...</string>
+                    </property>
+                    <property stdset="1">
+                        <name>toggleButton</name>
+                        <bool>true</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>toggleButton</name>
+                        <bool>true</bool>
+                    </property>
+                </widget>
             </hbox>
         </widget>
         <widget>
@@ -254,18 +280,11 @@
             <class>QGroupBox</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>CurProfile_GB</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>1</vsizetype>
-                </sizepolicy>
+                <cstring>Profile_GB</cstring>
             </property>
             <property stdset="1">
                 <name>title</name>
-                <string></string>
+                <string>Profile</string>
             </property>
             <property>
                 <name>layoutMargin</name>
@@ -280,7 +299,7 @@
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>1</number>
+                    <number>2</number>
                 </property>
                 <widget>
                     <class>QLayoutWidget</class>
@@ -301,7 +320,7 @@
                             <class>QLabel</class>
                             <property stdset="1">
                                 <name>name</name>
-                                <cstring>TextLabel2</cstring>
+                                <cstring>TextLabel2_2</cstring>
                             </property>
                             <property stdset="1">
                                 <name>text</name>
@@ -326,7 +345,7 @@
                         <spacer>
                             <property>
                                 <name>name</name>
-                                <cstring>Spacer6</cstring>
+                                <cstring>Spacer6_2</cstring>
                             </property>
                             <property stdset="1">
                                 <name>orientation</name>
@@ -378,6 +397,145 @@
                     <property>
                         <name>vAlign</name>
                     </property>
+                </widget>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout4</cstring>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <spacer>
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer4</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Expanding</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ToMessages_BUT</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>sizePolicy</name>
+                                <sizepolicy>
+                                    <hsizetype>1</hsizetype>
+                                    <vsizetype>0</vsizetype>
+                                </sizepolicy>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Messages ...</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+            </vbox>
+        </widget>
+        <widget>
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Messages_GB</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Messages</string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>4</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>2</number>
+                </property>
+                <widget>
+                    <class>QListBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Mesages_LB</cstring>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout2</cstring>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <spacer>
+                            <property>
+                                <name>name</name>
+                                <cstring>Spacer3</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>orientation</name>
+                                <enum>Horizontal</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>sizeType</name>
+                                <enum>Expanding</enum>
+                            </property>
+                            <property>
+                                <name>sizeHint</name>
+                                <size>
+                                    <width>20</width>
+                                    <height>20</height>
+                                </size>
+                            </property>
+                        </spacer>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>ToProfile_BUT</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Profile ...</string>
+                            </property>
+                        </widget>
+                    </hbox>
                 </widget>
             </vbox>
         </widget>
@@ -444,6 +602,18 @@
         <receiver>NetworkSettingsGUI</receiver>
         <slot>SLOT_EditNode( QListBoxItem *)</slot>
     </connection>
+    <connection>
+        <sender>ToProfile_BUT</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_ToProfile()</slot>
+    </connection>
+    <connection>
+        <sender>ToMessages_BUT</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_ToMessages()</slot>
+    </connection>
     <slot access="public">SLOT_AddNode()</slot>
     <slot access="public">SLOT_CheckState()</slot>
     <slot access="public">SLOT_Connect()</slot>
@@ -453,5 +623,8 @@
     <slot access="public">SLOT_GenerateConfig()</slot>
     <slot access="public">SLOT_On()</slot>
     <slot access="public">SLOT_ShowNode( QListBoxItem*)</slot>
+    <slot access="public">SLOT_ToMessages()</slot>
+    <slot access="public">SLOT_ToProfile()</slot>
+    <slot access="public">SLOT_Disconnect()</slot>
 </connections>
 </UI>

@@ -36,9 +36,12 @@ public slots :
       void SLOT_Enable( void );
       void SLOT_On( void );
       void SLOT_Connect( void );
+      void SLOT_Disconnect( void );
       void SLOT_GenerateConfig( void );
       void SLOT_RefreshStates( void );
       void SLOT_QCopMessage( const QCString&,const QByteArray& );
+      void SLOT_ToProfile( void );
+      void SLOT_ToMessages( void );
 
 private :
 

@@ -73,7 +73,7 @@ void LanCardRun::detectState( NodeCollection * NC ) {
 
 }
 
-bool LanCardRun::setState( NodeCollection * NC, Action_t A ) {
+bool LanCardRun::setState( NodeCollection * NC, Action_t A, bool ) {
 
     // we only handle activate and deactivate
     switch( A ) {

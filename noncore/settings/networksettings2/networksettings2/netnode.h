@@ -258,7 +258,7 @@ public :
         { return NNI->connection(); }
 
       virtual void detectState( NodeCollection * NC ) = 0;
-      virtual bool setState( NodeCollection * NC, Action_t A ) = 0;
+      virtual bool setState( NodeCollection * NC, Action_t A, bool Force = 0 ) = 0;
       virtual bool canSetState( State_t Curr, Action_t A ) = 0;
 
 signals :
@@ -322,8 +322,8 @@ public :
       QString stateName( bool Update = 0 ) 
         { return stateName( state(Update) ); }
 
-      bool setState( Action_t A )
-        { return getToplevel()->runtime()->setState( this, A ); }
+      bool setState( Action_t A, bool Force =0 )
+        { return getToplevel()->runtime()->setState( this, A, Force ); }
       bool canSetState( Action_t A )
         { return getToplevel()->runtime()->canSetState( CurrentState, A ); }
 
