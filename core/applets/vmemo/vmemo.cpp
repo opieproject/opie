@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.41 2002-07-02 17:11:46 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.42 2002-07-12 04:53:07 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -254,9 +254,11 @@ void VMemo::receive( const QCString &msg, const QByteArray &data )
   if (msg == "toggleRecord()")  {
     if (recording) {
       fromToggle = TRUE;
-      stopRecording();
+      mouseReleaseEvent(NULL);
+//      stopRecording();
     }  else {
       fromToggle = TRUE;
+      //      mousePressEvent(NULL);
       startRecording();
     }
   }
@@ -268,9 +270,21 @@ void VMemo::paintEvent( QPaintEvent* )
   p.drawPixmap( 0, 1,( const char** )  vmemo_xpm );
 }
 
-void VMemo::mousePressEvent( QMouseEvent * )
+void VMemo::mousePressEvent( QMouseEvent * me)
 {
-   if(!recording)
+  // just to be safe
+  if (recording) {
+          recording = FALSE;
+          return;
+        }
+  /*  No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
+         mousePressEvent and mouseReleaseEvent with a NULL parameter.  */
+  if ( me->button() != LeftButton)
+
+  //  if (!systemZaurus && me != NULL)
+        return;
+
+  if(!recording)
        startRecording();
    else
        stopRecording();
@@ -347,14 +361,26 @@ bool VMemo::startRecording() {
   fileName.replace(QRegExp(":"),".");
   fileName.replace(QRegExp(","),"");
   
-  if(openWAV(fileName.latin1()) == -1)  {
-  //    QString err("Could not open the output file\n");
-    //    err += fileName;
-    //    QMessageBox::critical(0, "vmemo", err, "Abort");
-    close(dsp);
+// open tmp file here
+  char *pointer;
+  pointer=tmpnam(NULL); 
+  qDebug("Opening tmp file %s",pointer);
+  
+  if(openWAV(pointer ) == -1)  {
+
+//  if(openWAV(fileName.latin1()) == -1)  {
+    QString err("Could not open the temp file\n");
+    err += fileName;
+    QMessageBox::critical(0, "vmemo", err, "Abort");
+    ::close(dsp);
     return FALSE;
   }
-  
+  QString cmd;
+  cmd.sprintf("mv %s "+fileName,pointer);
+
+// move tmp file to regular file here
+  system(cmd.latin1());
+
   QArray<int> cats(1);
   cats[0] = config.readNumEntry("Category", 0);
   
@@ -647,5 +673,5 @@ int VMemo::setToggleButton(int tog) {
 void VMemo::timerBreak() {
   //stop
     stopRecording();
-  QMessageBox::message("Vmemo","Vmemo recording has \ntimed out");
+  QMessageBox::message("Vmemo","Vmemo recording has ended");
 }
