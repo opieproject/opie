@@ -65,7 +65,7 @@ public slots:
 
 private slots:
     void fileNew();
-    void slotNewEntry(const QDateTime &start, const QDateTime &end, const QString &str);
+    void slotNewEntry(const QDateTime &start, const QDateTime &end, const QString &str, const QString &location=0);
     void slotSettings();
     void newDefaultView(QAction *a);
     void slotToday();	// view today
@@ -87,6 +87,7 @@ private slots:
     void showDay( int y, int m, int d );
 
     void editEvent( const Event &e );
+    void duplicateEvent( const Event &e );
     void removeEvent( const Event &e );
 
     void receive( const QCString &msg, const QByteArray &data );

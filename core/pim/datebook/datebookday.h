@@ -79,6 +79,7 @@ public:
 
 signals:
     void deleteMe( const Event &e );
+    void duplicateMe( const Event &e );
     void editMe( const Event &e );
     void beamMe( const Event &e );
 
@@ -175,6 +176,7 @@ public slots:
 signals:
     void removeEvent( const Event& );
     void editEvent( const Event& );
+    void duplicateEvent( const Event& );
     void beamEvent( const Event& );
     void newEvent();
     void sigNewEvent( const QString & );

@@ -313,6 +313,8 @@ void DateBookDay::getEvents()
 			DateBookDayWidget* w = new DateBookDayWidget( *it, this );
 			connect( w, SIGNAL( deleteMe( const Event & ) ),
 						this, SIGNAL( removeEvent( const Event & ) ) );
+			connect( w, SIGNAL( duplicateMe( const Event & ) ),
+						this, SIGNAL( duplicateEvent( const Event & ) ) );
 			connect( w, SIGNAL( editMe( const Event & ) ),
 						this, SIGNAL( editEvent( const Event & ) ) );
 			connect( w, SIGNAL( beamMe( const Event & ) ),
@@ -720,18 +722,21 @@ void DateBookDayWidget::mousePressEvent( QMouseEvent *e )
 	update();
 	dateBook->repaint();
 
-    QPopupMenu m;
-    m.insertItem( tr( "Edit" ), 1 );
-    m.insertItem( tr( "Delete" ), 2 );
-    if(Ir::supported()) m.insertItem( tr( "Beam" ), 3 );
-    int r = m.exec( e->globalPos() );
-    if ( r == 1 ) {
-        emit editMe( ev.event() );
-    } else if ( r == 2 ) {
-        emit deleteMe( ev.event() );
-    } else if ( r == 3 ) {
-	emit beamMe( ev.event() );
-    }
+	QPopupMenu m;
+	m.insertItem( tr( "Edit" ), 1 );
+	m.insertItem( tr( "Duplicate" ), 4 );
+	m.insertItem( tr( "Delete" ), 2 );
+	if(Ir::supported()) m.insertItem( tr( "Beam" ), 3 );
+	int r = m.exec( e->globalPos() );
+	if ( r == 1 ) {
+		emit editMe( ev.event() );
+	} else if ( r == 2 ) {
+		emit deleteMe( ev.event() );
+	} else if ( r == 3 ) {
+		emit beamMe( ev.event() );
+	} else if ( r == 4 ) {
+		emit duplicateMe( ev.event() );
+	}
 }
 
 void DateBookDayWidget::setGeometry( const QRect &r )

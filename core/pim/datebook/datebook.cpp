@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.17 2003-03-24 07:45:52 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.18 2003-03-24 09:06:06 umopapisdn Exp $
 **
 **********************************************************************/
 
@@ -402,6 +402,63 @@ void DateBook::viewMonth() {
     view(MONTH,currentDate());
 }
 
+void DateBook::duplicateEvent( const Event &e )
+{
+	qWarning("Hmmm...");
+    // Alot of code duplication, as this is almost like editEvent();
+	if (syncing) {
+	QMessageBox::warning( this, tr("Calendar"),
+	                      tr( "Can not edit data, currently syncing") );
+	return;
+    }
+	
+	Event dupevent;
+	dupevent.setStart(e.start());
+	dupevent.setEnd(e.end());
+	dupevent.setDescription(e.description());
+	dupevent.setLocation(e.location());
+//	dupevent.setCategory(e.category());	// how is this done??
+	dupevent.setNotes(e.notes());
+	dupevent.setAllDay(e.isAllDay());
+	dupevent.setTimeZone(e.timeZone());
+	if(e.hasAlarm()) dupevent.setAlarm(e.alarmDelay(),e.alarmSound());
+	if(e.hasRepeat()) dupevent.setRepeat(e.repeatPattern());
+	
+	// workaround added for text input.
+    QDialog editDlg( this, 0, TRUE );
+    DateEntry *entry;
+    editDlg.setCaption( tr("Duplicate Event") );
+    QVBoxLayout *vb = new QVBoxLayout( &editDlg );
+    QScrollView *sv = new QScrollView( &editDlg, "scrollview" );
+    sv->setResizePolicy( QScrollView::AutoOneFit );
+    // KLUDGE!!!
+    sv->setHScrollBarMode( QScrollView::AlwaysOff );
+    vb->addWidget( sv );
+    entry = new DateEntry( onMonday, dupevent, ampm, &editDlg, "editor" );
+    entry->timezone->setEnabled( FALSE );
+    sv->addChild( entry );
+
+#if defined(Q_WS_QWS) || defined(_WS_QWS_)
+    editDlg.showMaximized();
+#endif
+    while (editDlg.exec() ) {
+	Event newEv = entry->event();
+	if(newEv.description().isEmpty() && newEv.notes().isEmpty() )
+	    break;
+	newEv.setUid(e.uid()); // FIXME: Hack not to clear uid
+	QString error = checkEvent(newEv);
+	if (!error.isNull()) {
+	    if (QMessageBox::warning(this, "error box",
+				     error, "Fix it", "Continue",
+				     0, 0, 1) == 0)
+		continue;
+	}
+	db->addEvent(newEv);
+	emit newEvent();
+	break;
+    }
+}
+
 void DateBook::editEvent( const Event &e )
 {
     if (syncing) {
@@ -492,6 +549,8 @@ void DateBook::initDay()
 		 this, SLOT( removeEvent( const Event & ) ) );
 	connect( dayView, SIGNAL( editEvent( const Event & ) ),
 		 this, SLOT( editEvent( const Event & ) ) );
+	connect( dayView, SIGNAL( duplicateEvent( const Event & ) ),
+		 this, SLOT( duplicateEvent( const Event & ) ) );
 	connect( dayView, SIGNAL( beamEvent( const Event & ) ),
 		 this, SLOT( beamEvent( const Event & ) ) );
 	connect( dayView, SIGNAL(sigNewEvent(const QString &)),
@@ -816,7 +875,7 @@ void DateBook::slotNewEventFromKey( const QString &str )
 	}
     slotNewEntry(start, end, str);
 }
-void DateBook::slotNewEntry(const QDateTime &start, const QDateTime &end, const QString &str) {
+void DateBook::slotNewEntry(const QDateTime &start, const QDateTime &end, const QString &str, const QString &location) {
     // argh!  This really needs to be encapsulated in a class
     // or function.
     QDialog newDlg( this, 0, TRUE );
@@ -832,7 +891,11 @@ void DateBook::slotNewEntry(const QDateTime &start, const QDateTime &end, const 
     Event ev;
     ev.setDescription(  str );
     // When the new gui comes in, change this...
-    ev.setLocation( tr("(Unknown)") );
+	if(location==0) {
+		ev.setLocation( tr("(Unknown)") );
+	} else {
+		ev.setLocation(location);
+	}
     ev.setStart( start );
     ev.setEnd( end );
 
