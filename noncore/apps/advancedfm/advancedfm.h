@@ -149,6 +149,7 @@ protected slots:
    void currentPathComboActivated(const QString &);
    void fillCombo(const QString &);
    bool copyFile( const QString & , const QString & );
+   bool copyDirectory( const QString & , const QString & );
    void move();
    void fileStatus();
    void doAbout();
@@ -171,6 +172,7 @@ private:
    void removeCustomDir();
    void gotoDirectory(const QString &);
    void findFile(const QString &);
+   bool moveDirectory( const QString & , const QString & );
 
 private slots:
    void processEnded(OProcess *);
