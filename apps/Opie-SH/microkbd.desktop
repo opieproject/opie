@@ -1,0 +1,20 @@
+[Desktop Entry]
+Exec=microkbd.sh
+Icon=opie-sh-scripts/keyz-cfg
+Type=Application
+Name=Keyboard Control
+Comment=Start/Stop Keyboard
+Name[es]=Control MicroKbd
+Comment[es]=Activa/desactiva teclado MicroKbd
+Name[fr]=Control MicroKbd
+Comment[fr]=Gestion du clavier MicroKbd
+Name[it]=Controllo MicroKbd
+Comment[it]=Attiva/disattiva tastiera MicroKbd
+Name[pt]=Teclado MicroKbd
+Comment[pt]=Gestor teclado MicroKbd
+Name[pt_BR]=Teclado MicroKbd
+Comment[pt_BR]=Gerenciador teclado MicroKbd
+Name[sl]=MicroKbd kontrole
+Comment[sl]=MicroKbd kontrole za tipkovnico
+Name[nl]=MicroKbd Controle
+Comment[nl]=Activeer MicroKbd toetsenborden
