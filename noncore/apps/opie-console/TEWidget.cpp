@@ -1175,6 +1175,8 @@ void TEWidget::calcGeometry()
      columns = ( contentsRect().width() - 2 * rimX ) / font_w;
 	 if(vcolumns) columns = vcolumns;
      blX = (contentsRect().width() - (columns*font_w) ) / 2;
+     if(showhscrollbar)
+       blX = -hposition * font_w;
      brX = blX;
      scrollbar->hide();
      break;
@@ -1182,6 +1184,8 @@ void TEWidget::calcGeometry()
      columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
 	 if(vcolumns) columns = vcolumns;
      brX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
+     if(showhscrollbar)
+       brX = -hposition * font_w;
      blX = brX + scrollbar->width();
      scrollbar->move(contentsRect().topLeft());
      scrollbar->show();
@@ -1344,6 +1348,8 @@ QPushButton* TEWidget::cornerButton() {
 void TEWidget::setWrapAt(int columns)
 {
 	vcolumns = columns;
+    propagateSize();
+    update();
 }
 
 
