@@ -49,7 +49,7 @@ WeatherPluginWidget::WeatherPluginWidget( QWidget *parent,  const char* name )
 
 	weatherIcon = new QLabel( this );
 	weatherIcon->setMaximumWidth( 32 );
-	QImage logo1 = Resource::loadImage( "todayweatherplugin/wait" );
+	QImage logo1 = Resource::loadImage( "Clock" );
 	QPixmap pic;
 	pic.convertFromImage( logo1 );
 	weatherIcon->setPixmap( pic );
