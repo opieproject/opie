@@ -83,7 +83,7 @@ QWidget *WLANModule::information(Interface *i, QTabWidget **tabWidget){
   info->apLabel->setText(we.ap());
   info->stationLabel->setText(we.station());
   info->modeLabel->setText(we.mode());
-  info->freqLabel->setText(QString("%1").arg(we.frequency()));
+  info->freqLabel->setText(QString("%1 GHz").arg(we.frequency()));
   int signal = 0;
   int noise = 0;
   int quality = 0;
@@ -91,6 +91,7 @@ QWidget *WLANModule::information(Interface *i, QTabWidget **tabWidget){
   info->signalProgressBar->setProgress(signal);
   info->noiseProgressBar->setProgress(noise);
   info->qualityProgressBar->setProgress(quality);
+  info->rateLabel->setText(QString("%1 Mb/s").arg(we.rate()));
   return info;
 }
 

@@ -225,7 +225,7 @@
                         <name>spacing</name>
                         <number>6</number>
                     </property>
-                    <spacer row="3"  column="1" >
+                    <spacer row="4"  column="1" >
                         <property>
                             <name>name</name>
                             <cstring>Spacer2</cstring>
@@ -298,6 +298,39 @@
                         <property stdset="1">
                             <name>text</name>
                             <string>Quality</string>
+                        </property>
+                    </widget>
+                    <widget row="3"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel4_2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Rate</string>
+                        </property>
+                    </widget>
+                    <widget row="3"  column="1" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>rateLabel</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>sizePolicy</name>
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>1</vsizetype>
+                            </sizepolicy>
+                        </property>
+                        <property stdset="1">
+                            <name>frameShape</name>
+                            <enum>Panel</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>frameShadow</name>
+                            <enum>Sunken</enum>
                         </property>
                     </widget>
                 </grid>

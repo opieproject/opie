@@ -10,8 +10,8 @@
 #include <math.h>
 
 #define PROCNETWIRELESS "/proc/net/wireless"
-#define IW_LOWER 140
-#define IW_UPPER 200
+#define IW_LOWER 0
+#define IW_UPPER 256
 
 /**
  * Constructor.  Sets hasWirelessExtensions
@@ -89,8 +89,21 @@ double WExtensions::frequency(){
     return 0;
   if ( 0 == ioctl( fd, SIOCGIWFREQ, &iwr ))
     return (double( iwr.u.freq.m ) * pow( 10, iwr.u.freq.e ) / 1000000000);
-  return 0;;
+  return 0;
 }
+
+/***
+ * Get the current rate that the card is transmiting at.
+ */ 
+double WExtensions::rate(){
+  if(!hasWirelessExtensions)
+    return 0;
+  if(0 == ioctl(fd, SIOCGIWRATE, &iwr)){
+    return ((double)iwr.u.bitrate.value)/1000000;
+  }
+  return 0;
+}
+
 
 /**
  * @return QString the AccessPoint that the interface is connected to.
@@ -110,9 +123,15 @@ QString WExtensions::ap(){
     return ap;
   }
   else return QString();
-
 }
 
+/**
+ * Get the stats for interfaces
+ * @param signal the signal strength of interface
+ * @param noise the noise level of the interface
+ * @param quality the quality level of the interface
+ * @return bool true if successfull
+ */ 
 bool WExtensions::stats(int &signal, int &noise, int &quality){
   // gather link quality from /proc/net/wireless
   if(!QFile::exists(PROCNETWIRELESS))
@@ -131,24 +150,22 @@ bool WExtensions::stats(int &signal, int &noise, int &quality){
   wstream.readLine();  // because they only contain headers
   while(!wstream.atEnd()){
     wstream >> name >> status >> quality >> c >> signal >> c >> noise;
-    if(name == interface){
+    if(name == QString("%1:").arg(interface)){
       if ( quality > 92 )
-        #ifdef MDEBUG
         qDebug( "WIFIAPPLET: D'oh! Quality %d > estimated max!\n", quality );
-        #endif
       if ( ( signal > IW_UPPER ) || ( signal < IW_LOWER ) )
-        #ifdef MDEBUG
         qDebug( "WIFIAPPLET: Doh! Strength %d > estimated max!\n", signal );
-        #endif
       if ( ( noise > IW_UPPER ) || ( noise < IW_LOWER ) )
-        #ifdef MDEBUG
         qDebug( "WIFIAPPLET: Doh! Noise %d > estimated max!\n", noise );
-        #endif
+      qDebug(QString("q:%1, s:%2, n:%3").arg(quality).arg(signal).arg(noise).latin1());
+      signal = ( ( signal-IW_LOWER ) * 100 ) / IW_UPPER;
+      noise = ( ( noise-IW_LOWER ) * 100 ) / IW_UPPER;
+      quality = ( quality*100 ) / 92;
       return true;
     }  
   }
 
-  qDebug("Card no longer present");
+  qDebug("WExtensions::statsCard no longer present.");
   quality = -1;
   signal = IW_LOWER;
   noise = IW_LOWER;
