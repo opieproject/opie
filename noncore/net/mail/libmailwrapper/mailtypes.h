@@ -59,6 +59,8 @@ public:
     const QStringList&CC()const;
     void setBcc(const QStringList&list);
     const QStringList&Bcc()const;
+    void setInreply(const QStringList&list);
+    const QStringList&Inreply()const;
     const QBitArray&getFlags()const{return msg_flags;}
     void setFlags(const QBitArray&flags){msg_flags = flags;}
     
@@ -69,7 +71,7 @@ protected:
     QString subject,date,from,mbox,msg_id,replyto;
     int msg_number,msg_size;
     QBitArray msg_flags;
-    QStringList to,cc,bcc;
+    QStringList to,cc,bcc,in_reply_to;
     AbstractMail*wrapper;
     void init();
     void copy_old(const RecMail&old);

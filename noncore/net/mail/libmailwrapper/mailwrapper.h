@@ -55,10 +55,13 @@ public:
     void setSubject( const QString&s ) { subject = s; }
     const QString&getReply()const{ return reply; }
     void setReply( const QString&a ) { reply = a; }
+    void setInreply(const QStringList&list){m_in_reply_to = list;}
+    const QStringList&Inreply()const{return m_in_reply_to;}
 
 private:
     QList<Attachment> attList;
     QString name, mail, to, cc, bcc, reply, subject, message;
+    QStringList m_in_reply_to;
 };
 
 class Folder : public QObject

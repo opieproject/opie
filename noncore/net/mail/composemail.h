@@ -54,12 +54,10 @@ private slots:
     void addAttachment();
     void removeAttachment();
 
-
-
-private:
+protected:
     Settings *settings;
     QList<SMTPaccount> smtpAccounts;
-
+    QString m_replyid;
 };
 
 class AttachViewItem : public QListViewItem

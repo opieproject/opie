@@ -14,6 +14,7 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
     : ComposeMailUI( parent, name, modal, flags )
 {
     settings = s;
+    m_replyid = "";
 
     QString vfilename = Global::applicationFileName("addressbook",
                 "businesscard.vcf");
@@ -84,14 +85,7 @@ void ComposeMail::pickAddress( QLineEdit *line )
 
 void ComposeMail::setTo( const QString & to )
 {
-/*  QString toline;
-  QStringList toEntry = to;
-  for ( QStringList::Iterator it = toEntry.begin(); it != toEntry.end(); ++it ) {
-     toline += (*it);
-  }
-  toLine->setText( toline );
-*/
-toLine->setText( to );
+    toLine->setText( to );
 }
 
 void ComposeMail::setSubject( const QString & subject )
@@ -101,7 +95,7 @@ void ComposeMail::setSubject( const QString & subject )
 
 void ComposeMail::setInReplyTo( const QString & messageId )
 {
-
+    m_replyid = messageId;
 }
 
 void ComposeMail::setMessage( const QString & text )
@@ -207,6 +201,11 @@ void ComposeMail::accept()
     mail->setBCC( bccLine->text() );
     mail->setReply( replyLine->text() );
     mail->setSubject( subjectLine->text() );
+    if (!m_replyid.isEmpty()) {
+        QStringList ids;
+        ids.append(m_replyid);
+        mail->setInreply(ids);
+    }
     QString txt = message->text();
     if ( !sigMultiLine->text().isEmpty() ) {
         txt.append( "\n--\n" );

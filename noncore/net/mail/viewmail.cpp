@@ -409,14 +409,16 @@ void ViewMail::slotReply()
     rtext += "\n";
 
     QString prefix;
-    if ( m_mail[1].find(QRegExp("^Re: *$")) != -1) prefix = "";
+    if ( m_mail[1].find(QRegExp("^Re: .*$")) != -1) prefix = "";
     else prefix = "Re: ";				// no i18n on purpose
 
     Settings *settings = new Settings();
     ComposeMail composer( settings ,this, 0, true);
     composer.setTo( m_mail[0] );
-    composer.setSubject( "Re: " + m_mail[1] );
+    composer.setSubject( prefix + m_mail[1] );
     composer.setMessage( rtext );
+    composer.setInReplyTo(m_recMail.Msgid());
+    
     if ( QDialog::Accepted == QPEApplication::execDialog( &composer ) )
     {
         m_recMail.Wrapper()->answeredMail(m_recMail);

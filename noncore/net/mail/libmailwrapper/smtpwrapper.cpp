@@ -149,6 +149,7 @@ mailimf_fields *SMTPwrapper::createImfFields(const Mail&mail ) {
     mailimf_mailbox *sender=0,*fromBox=0;
     mailimf_mailbox_list *from=0;
     mailimf_address_list *to=0, *cc=0, *bcc=0, *reply=0;
+    clist*in_reply_to = 0;
     char *subject = strdup( mail.getSubject().latin1() );
     int err;
 
@@ -175,9 +176,35 @@ mailimf_fields *SMTPwrapper::createImfFields(const Mail&mail ) {
     cc = parseAddresses( mail.getCC() );
     bcc = parseAddresses( mail.getBCC() );
     reply = parseAddresses( mail.getReply() );
+    
+    if (mail.Inreply().count()>0) {
+        in_reply_to = clist_new();
+        char*c_reply;
+        unsigned int nsize = 0;
+        for (QStringList::ConstIterator it=mail.Inreply().begin();
+             it != mail.Inreply().end();++it) {
+            /* yes! must be malloc! */
+            if ((*it).isEmpty())
+                continue;
+            QString h((*it));
+            while (h.length()>0 && h[0]=='<') {
+                h.remove(0,1);
+            }
+            while (h.length()>0 && h[h.length()-1]=='>') {
+                h.remove(h.length()-1,1);
+            }
+            if (h.isEmpty()) continue;
+            nsize = strlen(h.latin1());
+            c_reply = (char*)malloc( (nsize+1)*sizeof(char));
+            memset(c_reply,0,nsize+1);
+            memcpy(c_reply,h.latin1(),nsize);
+            clist_append(in_reply_to,c_reply);
+            qDebug("In reply to: %s",c_reply);
+        }
+    }
 
     fields = mailimf_fields_new_with_data( from, sender, reply, to, cc, bcc,
-                                           NULL, NULL, subject );
+                                           in_reply_to, NULL, subject );
     if ( fields == NULL )
         goto err_free_reply;
 
