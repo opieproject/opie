@@ -48,3 +48,15 @@ You just have to sub class  it and voila you're done
 Hope you enjoy using OPIE PIM
 
 regards Holger 'zecke' Freyther
+
+
+Comment by Stefan Eilers:
+
+The opimaccesstemplate defines "SortOrder":
+I think sortorder is the wrong name for the meaning of it and
+it should be defined by the childs of opimaccesstemplate (every 
+implementation may use different values for this..)
+
+
+
+
