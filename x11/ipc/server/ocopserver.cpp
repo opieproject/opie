@@ -134,8 +134,6 @@ int OCopServer::accept() {
     return ::accept( m_serverfd,  (struct sockaddr*)&m_address, &m_adrlaenge );
 }
 void OCopServer::newOnClient( int fd ) {
-    int bug[4096];
-    //qWarning("new stuff for client on fd %d", fd );
     errno = 0;
     OCOPHead head;
     memset(&head, 0, sizeof(head) );
@@ -153,7 +151,7 @@ void OCopServer::newOnClient( int fd ) {
     /*
      * OCOPHead
      */
-    qWarning("data %s %d", bug, rea );
+    //qWarning("data %s %d", &bug, rea );
 
     /*
      * Check the magic
@@ -174,9 +172,11 @@ void OCopServer::newOnClient( int fd ) {
         /*
          * we do not check for errors
          */
+        qWarning("read ");
         int s = read(fd, channel.data(), head.chlen );
         s = read(fd, func.data(), head.funclen );
         s = read(fd, data.data(), head.datalen );
+        qWarning("read");
 
         /* debug output */
         qWarning("channel %s %d", channel.data(), head.chlen );
@@ -285,6 +285,7 @@ void OCopServer::dispatch( const OCOPPacket& packet, int sourceFD ) {
     case OCOPPacket::Signal:
         break;
     case OCOPPacket::IsRegistered:
+        qWarning("IsRegistered");
         isRegistered( packet.channel(), sourceFD );
         break;
     };
@@ -340,6 +341,7 @@ void OCopServer::delChannel( const QCString& channel,
     }
 }
 void OCopServer::isRegistered( const QCString& channel, int fd) {
+    qWarning("isRegistered");
     OCOPHead head;
     QCString func(2);
 
@@ -369,7 +371,7 @@ void OCopServer::isRegistered( const QCString& channel, int fd) {
 QValueList<int> OCopServer::clients( const QCString& channel ) {
     return m_channels[channel];
 }
-void OCopServer::call( const OCOPPacket& p, int fd ) {
+void OCopServer::call( const OCOPPacket& p, int ) {
     QValueList<int> cli = clients( p.channel() );
     QValueList<int>::Iterator it;
 

@@ -107,7 +107,7 @@ bool OCOPClient::isRegistered( const QCString& chan ) const{
     OCOPPacket packe(OCOPPacket::IsRegistered, chan );
     OCOPHead head = packe.head();
     write(m_socket, &head, sizeof(head) );
-
+    write(m_socket, chan.data(), chan.size() );
     /* block */
     OCOPPacket pack = packet();
 
@@ -144,7 +144,7 @@ void OCOPClient::startUP() {
     pid_t pi = fork();
     if ( pi == 0 ) {
         setsid();
-        execlp("opie-ipc", "opie-ipc", NULL );
+        execlp("ocopserver", "ocopserver", NULL );
         _exit(1);
     }
 }
