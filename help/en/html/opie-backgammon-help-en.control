@@ -3,6 +3,7 @@ Files: help/en/html/backgammon.html help/en/html/backgammon
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
+Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-backgammon
 License: GPL

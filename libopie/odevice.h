@@ -56,6 +56,14 @@ enum OModel {
 	Model_Zaurus_SLA300 = ( Model_Zaurus | 0x000003 ),
 	Model_Zaurus_SLB600 = ( Model_Zaurus | 0x000004 ),
 	Model_Zaurus_SLC700 = ( Model_Zaurus | 0x000005 ),
+
+	Model_SIMpad        = ( 3 << 24 ),
+
+	Model_SIMpad_All    = ( Model_SIMpad | 0xffffff ),
+	Model_SIMpad_CL4    = ( Model_SIMpad | 0x000001 ),
+	Model_SIMpad_SL4    = ( Model_SIMpad | 0x000002 ),
+	Model_SIMpad_SLC    = ( Model_SIMpad | 0x000004 ),
+	Model_SIMpad_TSinus = ( Model_SIMpad | 0x000008 ),
 };
 
 /**
@@ -65,7 +73,8 @@ enum OVendor {
 	Vendor_Unknown,
 
 	Vendor_HP,
-	Vendor_Sharp
+	Vendor_Sharp,
+	Vendor_SIEMENS,
 };
 
 /**

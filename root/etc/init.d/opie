@@ -1,5 +1,5 @@
 #!/bin/sh
-# 
+#
 
 [ -z $LOGNAME ] && export LOGNAME=root
 [ -z $HOME ] && export HOME=/$LOGNAME
@@ -13,7 +13,7 @@ export PATH=$PATH:$OPIEDIR/bin
 if [ -e /proc/hal/model ] ; then
 	ipaq=`cat /proc/hal/model`
 
-    case "$ipaq" in 
+    case "$ipaq" in
         "3100" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
         "3600" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
         "3700" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
@@ -23,6 +23,13 @@ if [ -e /proc/hal/model ] ; then
     esac
 else
     export QWS_DISPLAY=Transformed:Rot270:0
+fi
+
+if [ -e /proc/cpuinfo ] ; then
+	if (grep -qi "Simpad" /proc/cpuinfo) ; then
+           export QWS_KEYBOARD='SIMpad'
+           export QWS_DISPLAY=Transformed:Rot0:0
+    fi
 fi
 
 
