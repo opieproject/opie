@@ -215,6 +215,7 @@ void MediaPlayerState::setNext() {
 
 void MediaPlayerState::setList() {
     setPlaying( FALSE );
+    paused = false;
     setDisplayType( MediaSelection );
 }
 
