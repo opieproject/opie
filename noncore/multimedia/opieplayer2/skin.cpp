@@ -36,7 +36,7 @@ struct SkinData
 {
     typedef QMap<QString, QImage> ButtonMaskImageMap;
 
-    QImage backgroundImage;
+    QPixmap backgroundPixmap;
     QImage buttonUpImage;
     QImage buttonDownImage;
     QImage buttonMask;
@@ -54,13 +54,13 @@ public:
 
 private:
     typedef QCache<SkinData> DataCache;
-    typedef QCache<QImage> BackgroundImageCache;
+    typedef QCache<QPixmap> BackgroundPixmapCache;
 
     template <class CacheType>
     void store( const QCache<CacheType> &cache, const QString &key, CacheType *data );
 
     DataCache m_cache;
-    BackgroundImageCache m_backgroundImageCache;
+    BackgroundPixmapCache m_backgroundPixmapCache;
 };
 
 Skin::Skin( const QString &name, const QString &fileNameInfix )
@@ -88,17 +88,17 @@ void Skin::init( const QString &name )
 
 void Skin::preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount )
 {
-    backgroundImage();
+    backgroundPixmap();
     buttonUpImage();
     buttonDownImage();
     ( void )buttonMask( skinButtonInfo, buttonCount );
 }
 
-QImage Skin::backgroundImage() const
+QPixmap Skin::backgroundPixmap() const
 {
-    if ( d->backgroundImage.isNull() )
-        d->backgroundImage = loadImage( QString( "%1/background" ).arg( m_skinPath ) );
-    return d->backgroundImage;
+    if ( d->backgroundPixmap.isNull() )
+        d->backgroundPixmap = loadImage( QString( "%1/background" ).arg( m_skinPath ) );
+    return d->backgroundPixmap;
 }
 
 QImage Skin::buttonUpImage() const
@@ -173,7 +173,7 @@ SkinCache::SkinCache()
     // let's say we cache two skins (audio+video) at maximum
     m_cache.setMaxCost( 2 );
     // ... and one background pixmap
-    m_backgroundImageCache.setMaxCost( 1 );
+    m_backgroundPixmapCache.setMaxCost( 1 );
 }
 
 SkinData *SkinCache::lookupAndTake( const QString &skinPath, const QString &fileNameInfix )
@@ -186,22 +186,22 @@ SkinData *SkinCache::lookupAndTake( const QString &skinPath, const QString &file
     else
         qDebug( "SkinCache: hit" );
 
-    QImage *bgImage = m_backgroundImageCache.find( skinPath );
-    if ( bgImage ) {
-        qDebug( "SkinCache: hit on bgimage" );
-        data->backgroundImage = *bgImage;
+    QPixmap *bgPixmap = m_backgroundPixmapCache.find( skinPath );
+    if ( bgPixmap ) {
+        qDebug( "SkinCache: hit on bgpixmap" );
+        data->backgroundPixmap = *bgPixmap;
     }
     else
-        data->backgroundImage = QImage();
+        data->backgroundPixmap = QPixmap();
 
     return data;
 }
 
 void SkinCache::store( const QString &skinPath, const QString &fileNameInfix, SkinData *data )
 {
-    QImage *backgroundImage = new QImage( data->backgroundImage );
+    QPixmap *backgroundPixmap = new QPixmap( data->backgroundPixmap );
 
-    data->backgroundImage = QImage();
+    data->backgroundPixmap = QPixmap();
 
     QString key = skinPath + fileNameInfix;
 
@@ -209,23 +209,23 @@ void SkinCache::store( const QString &skinPath, const QString &fileNameInfix, Sk
          !m_cache.insert( key, data ) )
         delete data;
 
-    if ( m_backgroundImageCache.find( skinPath, false /*ref*/ ) != 0 ||
-         !m_backgroundImageCache.insert( skinPath, backgroundImage ) )
-        delete backgroundImage;
+    if ( m_backgroundPixmapCache.find( skinPath, false /*ref*/ ) != 0 ||
+         !m_backgroundPixmapCache.insert( skinPath, backgroundPixmap ) )
+        delete backgroundPixmap;
 }
 
 SkinLoader::IncrementalLoader::IncrementalLoader( const Info &info )
     : m_skin( info.skinName, info.fileNameInfix ), m_info( info )
 {
-    m_currentState = LoadBackgroundImage;
+    m_currentState = LoadBackgroundPixmap;
 }
 
 SkinLoader::IncrementalLoader::LoaderResult SkinLoader::IncrementalLoader::loadStep()
 {
     switch ( m_currentState ) {
-        case LoadBackgroundImage:
-            qDebug( "load bgimage" );
-            m_skin.backgroundImage();
+        case LoadBackgroundPixmap:
+            qDebug( "load bgpixmap" );
+            m_skin.backgroundPixmap();
             m_currentState = LoadButtonUpImage;
             break;
         case LoadButtonUpImage:

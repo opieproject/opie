@@ -40,7 +40,7 @@ public:
 
     void preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint buttonCount );
 
-    QImage backgroundImage() const;
+    QPixmap backgroundPixmap() const;
     QImage buttonUpImage() const;
     QImage buttonDownImage() const;
 
@@ -106,7 +106,7 @@ private:
         LoaderResult loadStep();
 
     private:
-        enum State { LoadBackgroundImage, LoadButtonUpImage, LoadButtonDownImage, LoadButtonMasks, LoadButtonMask };
+        enum State { LoadBackgroundPixmap, LoadButtonUpImage, LoadButtonDownImage, LoadButtonMasks, LoadButtonMask };
 
         Skin m_skin;
         Info m_info;
