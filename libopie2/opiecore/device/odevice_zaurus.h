@@ -75,13 +75,17 @@
 #define APM_IOCSEVTSRC          OD_IORW( 'A', 204, int )
 #define APM_EVT_POWER_BUTTON    (1 << 0)
 
-// Brightness
+// Brightness Embedix
 #define SHARP_FL_IOCTL_DEVICE   "/dev/sharp_fl"
 #define SHARP_FL_IOCTL_ON                  1
 #define SHARP_FL_IOCTL_OFF                 2
 #define SHARP_FL_IOCTL_STEP_CONTRAST     100
 #define SHARP_FL_IOCTL_GET_STEP_CONTRAST 101
 #define SHARP_FL_IOCTL_GET_STEP          102
+
+// Vesa Standard
+#define FB_BLANK_UNBLANK			0
+#define FB_BLANK_POWERDOWN			4
 
 namespace Opie {
 namespace Core {
