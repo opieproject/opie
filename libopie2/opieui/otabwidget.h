@@ -68,7 +68,7 @@ class OTabBar;
 class OTabWidget : public QWidget
 {
     Q_OBJECT
-  
+
   public:
 /**
  * @enum TabStyle
@@ -130,7 +130,6 @@ class OTabWidget : public QWidget
  *
  * @param widget Widget control to be removed.
  */
-    /* ### Page vs. Tab.. yes the widget is a Page but then is addTab wrong -zecke */
     void removePage( QWidget * );
 
 /**
