@@ -55,7 +55,7 @@ export QPE_VERSION
 
 SUB_VERSION=$(shell echo $$(sed -n -e 's,.*SUB_VERSION \"\(.*\)\".*,\1,p' <$(OPIEDIR)/library/version.h))
 ifeq ($(VERSION_CVS),)
-    VERSION_CVS:=$(shell date +%Y%m%d)
+    VERSION_CVS:=$(shell date +%s)
 endif
 ifneq ($(filter %snapshot",$(shell cat $(OPIEDIR)/library/version.h|grep QPE_VERSION)),)
     SUB_VERSION:=$(VERSION_CVS)
