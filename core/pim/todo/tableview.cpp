@@ -25,6 +25,7 @@
                              Boston, MA 02111-1307, USA.
 
 */
+#include <stdlib.h>
 
 #include <qtimer.h>
 #include <qpoint.h>
@@ -147,20 +148,17 @@ void TableView::updateView( ) {
     setUpdatesEnabled( false );
     viewport()->setUpdatesEnabled( false );
 
-    QTime t;
-    t.start();
     setNumRows( it.count() );
     if ( it.count() == 0 )
         killTimer(id);
+
     int elc = time.elapsed();
-    qWarning("Adding took %d", elc/1000 );
     setUpdatesEnabled( true );
     viewport()->setUpdatesEnabled( true );
     viewport()->update();
 
     m_enablePaint = true;
     int el = time.elapsed();
-    qWarning("adding took %d", el/1000 );
 }
 void TableView::setTodo( int, const OTodo&) {
     sort();
@@ -257,6 +255,7 @@ void TableView::slotClicked(int row, int col, int,
 void TableView::slotPressed(int row, int col, int,
                             const QPoint& point) {
 
+    m_prevP = point;
     /* TextColumn column */
     if ( col == 2 && cellGeometry( row, col ).contains( point ) )
         m_menuTimer->start( 750, TRUE );
@@ -284,7 +283,6 @@ void TableView::sortColumn( int col, bool asc, bool ) {
     updateView();
 }
 void TableView::viewportPaintEvent( QPaintEvent* e) {
-    qWarning("Paint event" );
     if (m_enablePaint )
         QTable::viewportPaintEvent( e );
 }
@@ -435,7 +433,6 @@ void TableView::timerEvent( QTimerEvent* ev ) {
         return;
 
     int row = currentRow();
-    qWarning("TimerEvent %d", row);
     if ( m_row ) {
         int ro = row-4;
         if (ro < 0 ) ro = 0;
@@ -453,4 +450,34 @@ void TableView::timerEvent( QTimerEvent* ev ) {
     }
 
     m_row = !m_row;
+}
+
+// We want  a strike through completed ;)
+// durchstreichen to complete
+/*
+ * MouseTracking is off this mean we only receive
+ * these events if the mouse button is pressed
+ * We've the previous point saved
+ * We check if the previous and current Point are
+ * in the same row.
+ * Then we check if they're some pixel horizontal away
+ * if the distance between the two points is greater than
+ * 8 we mark the underlying todo as completed and do a repaint
+ */
+void TableView::contentsMouseReleaseEvent( QMouseEvent* e) {
+    int row = rowAt(m_prevP.y());
+    if ( row == rowAt( e->y() ) ) {
+        if ( abs( m_prevP.x() - e->x() ) >= 8 ) {
+            OTodo todo = sorted()[row];
+            todo.setCompleted( !todo.isCompleted() );
+            TodoView::update( todo.uid(), todo );
+            updateView();
+            return;
+        }
+    }
+    QTable::contentsMouseReleaseEvent( e );
+}
+void TableView::contentsMouseMoveEvent( QMouseEvent* e ) {
+    m_menuTimer->stop();
+    QTable::contentsMouseMoveEvent( e );
 }

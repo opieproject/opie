@@ -82,6 +82,8 @@ namespace Todo {
         bool m_first : 1;
 
     protected:
+        void contentsMouseReleaseEvent( QMouseEvent* );
+        void contentsMouseMoveEvent( QMouseEvent* );
         void timerEvent( QTimerEvent* e );
         QWidget* createEditor(int row, int col, bool initFromCell )const;
         void setCellContentFromEditor( int row, int col );
@@ -97,6 +99,7 @@ private slots:
         void slotPriority();
     private:
         bool m_row : 1;
+        QPoint m_prevP;
     };
 };
 
