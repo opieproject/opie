@@ -1,0 +1,10 @@
+/* XPM */
+static char * prison_xpm[] = {
+"72 4 3 1",
+" 	s None	c None",
+"p	c #ffbade",
+"b	c #2020de",
+"  b  b                    b  b           b    b         ppb  bpp    pppp",
+"  b  b      bbbb          bbbb   bbbbbb  b    b           bbbb          ",
+"  b  b  bbbb      bbbb           b    b  bbbbbb   bbbb                  ",
+"  b  b            b  b           b    b         ppb  bpp        pppp    "};

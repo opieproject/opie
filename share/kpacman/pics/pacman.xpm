@@ -1,0 +1,21 @@
+/* XPM */
+static char * pacman_xpm[] = {
+"192 16 2 1",
+" 	s None  c None",
+"y	c #ffff00",
+"                                                                                                                                                                                                ",
+"     yyyyy                                            yyyyy           yyyyy           yyyyy                                                          yyyyy           yyyyy           yyyyy      ",
+"   yyyyyyyyy       yy     yy                        yyyyyyyyy       yyyyyyyyy       yyyyyyy          yyyyy           yyyyy           yyyyy         yyyyyyyyy       yyyyyyyyy         yyyyyyy    ",
+"  yyyyyyyyyyy     yyy     yyy                      yyyyyyyyyyy     yyyyyyyyyyy     yyyyyyy         yyyyyyyyy       yyyyyyyyy       yyyyyyyyy      yyyyyyyyyyy     yyyyyyyyyyy         yyyyyyy   ",
+"  yyyyyyyyyyy     yyyy   yyyy                      yyyyyyyyyyy     yyyyyyyyyyy     yyyyyy         yyyyyyyyyyy     yyyyyyyyyyy     yyyyyyyyyyy     yyyyyyyyyyy     yyyyyyyyyyy          yyyyyy   ",
+" yyyyyyyyyyyyy   yyyyy   yyyyy   yy         yy    yyyyyyyyyyyyy   yyyyyyyyyy      yyyyyy          yyyyyyyyyyy     yyyyyyyyyyy     yyyyyyyyyyy    yyyyyyyyyyyyy      yyyyyyyyyy          yyyyyy  ",
+" yyyyyyyyyyyyy   yyyyy   yyyyy   yyy       yyy    yyyyyyyyyyyyy   yyyyyyy         yyyyy          yyyyyyyyyyyyy   yyyyyy yyyyyy   yyyyyy yyyyyy   yyyyyyyyyyyyy         yyyyyyy           yyyyy  ",
+" yyyyyyyyyyyyy   yyyyyy yyyyyy   yyyy     yyyy    yyyyyyyyyyyyy   yyyy            yyyy           yyyyyyyyyyyyy   yyyyyy yyyyyy   yyyyy   yyyyy   yyyyyyyyyyyyy            yyyy            yyyy  ",
+" yyyyyyyyyyyyy   yyyyyy yyyyyy   yyyyy   yyyyy    yyyyyyyyyyyyy   yyyyyyy         yyyyy          yyyyyyyyyyyyy   yyyyyy yyyyyy   yyyy     yyyy   yyyyyyyyyyyyy         yyyyyyy           yyyyy  ",
+" yyyyyyyyyyyyy   yyyyyy yyyyyy   yyyyyy yyyyyy    yyyyyyyyyyyyy   yyyyyyyyyy      yyyyyy         yyyyyyyyyyyyy   yyyyy   yyyyy   yyy       yyy   yyyyyyyyyyyyy      yyyyyyyyyy          yyyyyy  ",
+"  yyyyyyyyyyy     yyyyyyyyyyy     yyyyyyyyyyy      yyyyyyyyyyy     yyyyyyyyyyy     yyyyyy        yyyyyyyyyyyyy   yyyyy   yyyyy   yy         yy    yyyyyyyyyyy     yyyyyyyyyyy          yyyyyy   ",
+"  yyyyyyyyyyy     yyyyyyyyyyy     yyyyyyyyyyy      yyyyyyyyyyy     yyyyyyyyyyy     yyyyyyy        yyyyyyyyyyy     yyyy   yyyy                     yyyyyyyyyyy     yyyyyyyyyyy         yyyyyyy   ",
+"   yyyyyyyyy       yyyyyyyyy       yyyyyyyyy        yyyyyyyyy       yyyyyyyyy       yyyyyyy       yyyyyyyyyyy     yyy     yyy                      yyyyyyyyy       yyyyyyyyy         yyyyyyy    ",
+"     yyyyy           yyyyy           yyyyy            yyyyy           yyyyy           yyyyy        yyyyyyyyy       yy     yy                         yyyyy           yyyyy           yyyyy      ",
+"                                                                                                     yyyyy                                                                                      ",
+"                                                                                                                                                                                                "};

@@ -1,0 +1,11 @@
+Files: bin/kpacman apps/Games/kpacman.desktop pics/kpacman.png share/kpacman
+Package: opie-kpacman
+Version: 0.3.1
+Depends: opie-base ($QPE_VERSION)
+Priority: optional
+Section: opie/games
+Maintainer: Catalin Climov <catalin@climov.com>
+Architecture: arm
+License: GPL
+Description: Kpacman
+ A Pacman clone for Qtopia.

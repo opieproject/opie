@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ ! -f $HOME/Settings/kpacman.conf ]
+then
+    cp $QPEDIR/share/kpacman/kpacman.conf $HOME/Settings/
+fi
