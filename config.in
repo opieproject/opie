@@ -40,7 +40,12 @@ config OPTIMIZE
 
 config DEBUG
   boolean "Enable debug builds"
-  default "n"
+  default n
+
+  config RELEASE
+    bool
+    default y
+    depends ! DEBUG
 
 config SPECFILE
   string
@@ -86,6 +91,7 @@ menu "Base"
   source core/opie-login/config.in
   source core/opiealarm/config.in
   source core/launcher/config.in
+  source core/qws/config.in
 endmenu
 
 comment ""

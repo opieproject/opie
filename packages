@@ -118,6 +118,7 @@ CONFIG_QASTEROIDS	noncore/games/qasteroids	qasteroids.pro
 CONFIG_QCOP	core/apps/qcop	qcop.pro
 CONFIG_QPDF	noncore/graphics/qpdf	qpdf.pro
 CONFIG_QUICKEXEC	quickexec	quickexec.pro
+CONFIG_QWS	core/qws	qws.pro
 CONFIG_REMOTE	noncore/tools/remote	remote.pro
 CONFIG_RESTARTAPPLET	core/applets/restartapplet	restartapplet.pro
 CONFIG_RESTARTAPPLET2	core/applets/restartapplet2	restartapplet2.pro
