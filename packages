@@ -12,7 +12,7 @@ CONFIG_BLUE-PIN	noncore/net/opietooth/blue-pin	blue-pin.pro
 CONFIG_BOUNCE	noncore/games/bounce	bounce.pro
 CONFIG_BUTTON-SETTINGS	core/settings/button	button.pro
 CONFIG_BUZZWORD	noncore/games/buzzword	buzzword.pro
-CONFIG_CALC2	noncore/tools/calc2	calc2.pro
+CONFIG_CALC2	noncore/tools/calc2	calc.pro
 CONFIG_CALCULATOR	noncore/tools/calculator	calculator.pro
 CONFIG_CALIBRATE	core/apps/calibrate	calibrate.pro
 CONFIG_CAMERA	noncore/multimedia/camera	camera.pro
@@ -109,6 +109,7 @@ CONFIG_OPIEIRC	noncore/net/opieirc	opieirc.pro
 CONFIG_OPIEMAIL2	noncore/mail mail.pro
 CONFIG_OPIEPLAYER	core/multimedia/opieplayer	opieplayer.pro
 CONFIG_OPIEPLAYER2	noncore/multimedia/opieplayer2	opieplayer2.pro
+CONFIG_OPIE-RDESKTOP	noncore/net/opierdesktop	opierdesktop.pro
 CONFIG_OPIEREC		noncore/multimedia/opierec	opierec.pro
 CONFIG_OPIETOOTH-APPLET	noncore/net/opietooth/applet	applet.pro
 CONFIG_OPIETOOTH-MANAGER	noncore/net/opietooth/manager	manager.pro
