@@ -1,7 +1,7 @@
 /*
  * Communication protocol
  *
- * $Id: wl_proto.cc,v 1.1 2002-12-27 16:35:28 mjm Exp $
+ * $Id: wl_proto.cc,v 1.2 2002-12-28 12:59:38 mjm Exp $
  */
 
 #include "wl_proto.hh"
@@ -35,10 +35,11 @@ int get_field(const char *buffer, char *out)
   memset(out, 0, atoi(len) + 1);
   memcpy(out, buffer + 3, atoi(len));
 
-  return atoi(len) + 3;
+  /* Return length of whole field (including 3 byte length) */
+  return (atoi(len) + 3);
 }
 
-/* Send found network to GUI */
+/* Send found network to UI */
 int send_network_found (const char *guihost, int guiport, void *structure)
 {
   wl_network_t *ptr;
@@ -75,20 +76,18 @@ int send_network_found (const char *guihost, int guiport, void *structure)
   len += retval;
 
   /* Set Mac */
-  retval = add_field(buffer + len, (char *)ptr->mac, 17);
+  retval = add_field(buffer + len, ptr->mac, 17);
   len += retval;
 
   /* Set ssid */
-  retval = add_field(buffer + len, (char *)ptr->bssid, ptr->ssid_len);
+  retval = add_field(buffer + len, ptr->bssid, ptr->ssid_len);
 
-  /* Send prepared buffer to GUI */
+  /* Send prepared buffer to UI */
 #ifdef DEBUG
-  wl_loginfo("Sending network to GUI: '%s'", buffer);
+  wl_loginfo("Sending network to UI: '%s'", buffer);
 #endif
 
-  wl_send(guihost, guiport, buffer);
-
-  return 1;
+  return ((!wl_send(guihost, guiport, buffer)) ? 0 : 1);
 }
 
 /* Fill buffer into structur */

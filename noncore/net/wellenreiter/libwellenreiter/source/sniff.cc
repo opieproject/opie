@@ -1,7 +1,7 @@
 /* 
  *  rfmon mode sniffer
  *
- *  $Id: sniff.cc,v 1.8 2002-12-27 16:35:28 mjm Exp $
+ *  $Id: sniff.cc,v 1.9 2002-12-28 12:59:38 mjm Exp $
  */
 
 #include "sniff.hh"
@@ -124,7 +124,11 @@ void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *pack
 	      wl_loginfo("Mac is: %s", pinfoptr->sndhwaddr);
 	      memcpy(wl_net.mac, pinfoptr->sndhwaddr, sizeof(wl_net.mac)-1);;
 	      
-	      send_network_found((char *)guihost, guiport, &wl_net);
+	      if(!send_network_found((char *)guihost, guiport, &wl_net))
+	      {
+		wl_logerr("Error sending data to UI: %s", strerror(errno));
+		break;
+	      }
 	      wl_loginfo("Sent network to GUI '%s:%d'", guihost, guiport);
 	    }
 	  break;	

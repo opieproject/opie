@@ -1,7 +1,7 @@
 /*
  * Socket operations for wellenreiter
  *
- * $Id: wl_sock.cc,v 1.1 2002-12-27 16:35:28 mjm Exp $
+ * $Id: wl_sock.cc,v 1.2 2002-12-28 12:59:38 mjm Exp $
  */
 
 #include "wl_sock.hh"
@@ -56,20 +56,20 @@ int wl_send(const char *host, int port, const char *string, ...)
   if((sock=socket(AF_INET, SOCK_DGRAM, 0)) < 0)
   {
     wl_logerr("Cannot set up socket: %s", strerror(errno));
-    return -1;
+    return 0;
   }
 
   if(sendto(sock, buffer, sizeof(buffer), 0, (struct sockaddr *)&saddr, sizeof(saddr)) < 0)
   {
     wl_logerr("Cannot write to socket: %s", strerror(errno));
     close(sock);
-    return -1;
+    return 0;
   }
 
   if(close(sock) < 0)
     wl_logerr("Cannot close socket: %s", strerror(errno));
 
-  return 0;
+  return 1;
 }
 
 /* Check for new messages on commsock */

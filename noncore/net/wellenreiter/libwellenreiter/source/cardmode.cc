@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.6 2002-12-27 16:35:28 mjm Exp $
+ * $Id: cardmode.cc,v 1.7 2002-12-28 12:59:38 mjm Exp $
  */
 
 #include "cardmode.hh"
@@ -20,7 +20,7 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
       return 0;
   }
   
-  /* Setting the prmiscous and up flag to the interface */
+  /* Setting the promiscous and up flag to the interface */
   if (!card_set_promisc_up(device))
   {
     wl_logerr("Cannot set interface to promisc mode: %s", strerror(errno));
@@ -64,14 +64,11 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
 /* Set card into promisc mode */
 int card_set_promisc_up (const char *device)
 {
-  char ifconfigcmd[32];
+  char ifconfigcmd[48];
   int retval=0;
 
   snprintf(ifconfigcmd, sizeof(ifconfigcmd) - 1, SBIN_PATH, device);
   retval = system(ifconfigcmd);
 
-  if(retval != 0)
-    return 0;
-  
-return 1;
+  return (retval ? 0 : 1);
 }
