@@ -33,9 +33,9 @@ class OMacAddress;
 class OIPPacket;
 class OPacketCapturer;
 class OWirelessNetworkInterface;
+class PacketView;
 class WellenreiterConfigWindow;
 class MLogWindow;
-class MHexWindow;
 class GPS;
 
 class Wellenreiter : public WellenreiterBase {
@@ -48,7 +48,7 @@ class Wellenreiter : public WellenreiterBase {
     void setConfigWindow( WellenreiterConfigWindow* cw );
     MScanListView* netView() const { return netview; };
     MLogWindow* logWindow() const { return logwindow; };
-    MHexWindow* hexWindow() const { return hexwindow; };
+    PacketView* hexWindow() const { return hexwindow; };
     bool isDaemonRunning() const { return sniffing; };
     QString captureFileName() const { return dumpname; };
 

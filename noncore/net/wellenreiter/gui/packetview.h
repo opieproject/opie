@@ -16,23 +16,32 @@
 #ifndef PACKETVIEW_H
 #define PACKETVIEW_H
 
-#include <qvbox.h>
+#include <qlist.h>
+#include <qframe.h>
 
 class QString;
-class QMultiLineEdit;
+class QSpinBox;
+class QLabel;
+class QTextView;
+class OPacket;
 
-class PacketView: public QVBox
+class PacketView: public QFrame
 {
 
   public:
     PacketView( QWidget * parent = 0, const char * name = "PacketView", WFlags f = 0 );
 
-    void log( const QString& text );
+    void add( OPacket* p );
     const QString getLog() const;
     void clear();
 
   protected:
-    QMultiLineEdit* ledit;
+
+    QSpinBox* _number;
+    QLabel* _label;
+    QLabel* _list;
+    QTextView* _hex;
+    QList<OPacket> _packets;
 
 };
 

@@ -52,6 +52,7 @@ int main( int argc, char **argv )
     bool check = true;
     for ( int i = 1; i < argc; ++i )
     {
+        qDebug( "Wellenreiter::main() parsing argument %d = '%s'", i, argv[i] );
         if ( !strcmp( "-nocheck", argv[i] ) )
         {
             qDebug( "-nocheck found" );

@@ -17,7 +17,7 @@
 #include "wellenreiter.h"
 #include "scanlist.h"
 #include "logwindow.h"
-#include "hexwindow.h"
+#include "packetview.h"
 #include "configwindow.h"
 #include "statwindow.h"
 #include "graphwindow.h"
@@ -380,7 +380,7 @@ bool Wellenreiter::checkDumpPacket( OPacket* p )
 
 void Wellenreiter::receivePacket( OPacket* p )
 {
-    hexWindow()->log( p->dump( 8 ) );
+    hexWindow()->add( p );
 
     if ( checkDumpPacket( p ) )
     {

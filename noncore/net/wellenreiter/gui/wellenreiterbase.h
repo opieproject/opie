@@ -26,9 +26,9 @@ class MScanListView;
 class MScanListItem;
 class QPushButton;
 class MLogWindow;
-class MHexWindow;
 class MStatWindow;
 class MGraphWindow;
+class PacketView;
 
 #ifdef QWS
 #include <opie2/otabwidget.h>
@@ -53,7 +53,7 @@ public:
     QWidget* ap;
     MScanListView* netview;
     MLogWindow* logwindow;
-    MHexWindow* hexwindow;
+    PacketView* hexwindow;
     MStatWindow* statwindow;
     MGraphWindow* graphwindow;
     QWidget* about;

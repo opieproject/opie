@@ -14,31 +14,55 @@
 **********************************************************************/
 
 #include "packetview.h"
-#include <qmultilineedit.h>
+
+/* OPIE */
+#include <opie2/opcap.h>
+
+/* QT */
+#include <qtextview.h>
+#include <qspinbox.h>
+#include <qlabel.h>
+#include <qlayout.h>
+#include <qlist.h>
 
 PacketView::PacketView( QWidget * parent, const char * name, WFlags f )
-           :QVBox( parent, name, f )
+           :QFrame( parent, name, f )
 {
-    ledit = new QMultiLineEdit( this );
-    ledit->setFont( QFont( "fixed", 10 ) );
-    ledit->setReadOnly( true );
+    _number = new QSpinBox( this );
+    _number->setPrefix( "Packet # " );
+    _label = new QLabel( this );
+    _label->setText( "eth0 2004/03/08 - 00:00:21" );
+    _list = new QLabel( this );
+    _hex = new QTextView( this );
+
+    QVBoxLayout* vb = new QVBoxLayout( this, 2, 2 );
+    QHBoxLayout* hb = new QHBoxLayout( vb, 2 );
+    hb->addWidget( _label );
+    hb->addWidget( _number );
+    vb->addWidget( _list );
+    vb->addWidget( _hex );
+
+    _packets.setAutoDelete( true );
+
+    _list->setText( "<b>[ 802.11 [ LLC [ IP [ UDP [ DHCP ] ] ] ] ]</b>" );
 };
 
-void PacketView::log( const QString& text )
+void PacketView::add( OPacket* p )
 {
-    int col;
-    int row;
-    ledit->getCursorPosition( &col, &row );
-    ledit->insertAt( text, col, row );
+    _packets.append( p );
 };
 
 const QString PacketView::getLog() const
 {
-    return ledit->text();
 }
 
 void PacketView::clear()
 {
-    ledit->clear();
+    _packets.clear();
+    _number->setMinValue( 0 );
+    _number->setMaxValue( 0 );
+    _label->setText( "---" );
+    _list->setText( " <b>-- no Packet available --</b> " );
+    _hex->setText( " <i>-- no Packet available --</i> " );
 }
 

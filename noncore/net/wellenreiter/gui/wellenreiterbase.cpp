@@ -19,7 +19,7 @@
 #include <qlayout.h>
 
 #include "logwindow.h"
-#include "hexwindow.h"
+#include "packetview.h"
 #include "scanlist.h"
 #include "statwindow.h"
 #include "graphwindow.h"
@@ -36,7 +36,7 @@ using namespace Opie;
 
 /*
  *  Constructs a WellenreiterBase which is a child of 'parent', with the
- *  name 'name' and widget flags set to 'f' 
+ *  name 'name' and widget flags set to 'f'
  */
 WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
@@ -45,7 +45,7 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     //ani2 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot90" ) );
     //ani3 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot180" ) );
     //ani4 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot270" ) );
-    
+
     if ( !name )
         setName( "WellenreiterBase" );
     resize( 191, 294 );
@@ -82,7 +82,7 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
 
     //--------- HEX TAB --------------
 
-    hexwindow = new MHexWindow( TabWidget, "Hex" );
+    hexwindow = new PacketView( TabWidget, "Hex" );
 
     //--------- STAT TAB --------------
 
@@ -155,18 +155,18 @@ WellenreiterBase::~WellenreiterBase()
     // no need to delete child widgets, Qt does it all for us
 }
 
-/*  
+/*
  *  Main event handler. Reimplemented to handle application
  *  font changes
  */
 bool WellenreiterBase::event( QEvent* ev )
 {
-    bool ret = QWidget::event( ev ); 
+    bool ret = QWidget::event( ev );
     if ( ev->type() == QEvent::ApplicationFontChange ) {
 	//QFont Log_2_font(  Log_2->font() );
 	//Log_2_font.setFamily( "adobe-courier" );
 	//Log_2_font.setPointSize( 8 );
-	//Log_2->setFont( Log_2_font ); 
+	//Log_2->setFont( Log_2_font );
 	QFont TextLabel1_4_2_font(  TextLabel1_4_2->font() );
 	TextLabel1_4_2_font.setFamily( "adobe-helvetica" );
 	TextLabel1_4_2_font.setPointSize( 10 );

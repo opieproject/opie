@@ -58,3 +58,10 @@ ENGINE
 - implement beacon stripping (the first beacon is enough to detect a
   new network - further beacons just blow up the capture file)
 
+- write wi-scan format like that:
+	# $Creator: Wellenreiter II Version 1.0.2
+	# $Format: wi-scan
+	# Latitude      Longitude       ( SSID )        Type    ( BSSID )       Time (GMT)      [ SNR Sig Noise ]
+	# $DateGMT: 2004-02-07
+	N 41.1008009    W 8.3893034     ( Porceven )    BBS     ( 00:a0:f8:41:91:63 )   22:32:39 (GMT)  [ 21 177 156 ]
+

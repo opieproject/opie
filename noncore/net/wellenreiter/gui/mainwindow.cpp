@@ -16,7 +16,7 @@
 #include "configwindow.h"
 #include "gps.h"
 #include "logwindow.h"
-#include "hexwindow.h"
+#include "packetview.h"
 #include "mainwindow.h"
 #include "wellenreiter.h"
 #include "scanlist.h"
@@ -332,6 +332,8 @@ void WellenreiterMainWindow::fileSaveSession()
 
 void WellenreiterMainWindow::fileSaveHex()
 {
+    #warning DOES NOT WORK AT THE MOMENT
+    /*
     QString fname = getFileName( true );
     if ( !fname.isEmpty() )
     {
@@ -348,6 +350,7 @@ void WellenreiterMainWindow::fileSaveHex()
             qDebug( "Problem saving hex log to file '%s'", (const char*) fname );
         }
     }
+    */
 }
 
 void WellenreiterMainWindow::fileLoadSession()
