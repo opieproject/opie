@@ -110,6 +110,8 @@ class MScanListItem: public Opie::Ui::OListViewItem
     virtual void serializeTo( QDataStream& s ) const;
     virtual void serializeFrom( QDataStream& s );
 
+    virtual QString key( int id, bool )const;
+
   private:
     QString _type;
     QString _essid;

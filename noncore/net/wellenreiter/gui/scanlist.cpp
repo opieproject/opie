@@ -567,3 +567,24 @@ void MScanListItem::receivedBeacon()
 
 }
 
+QString MScanListItem::key( int id, bool b )const {
+    QString str;
+
+    /*
+     * Pad the amount of received packages, number
+     * of the channel.
+     */
+    switch( id ) {
+    case col_sig:
+        str = text(col_sig).rightJustify( 20, '0' );
+        break;
+    case col_channel:
+        str = text(col_channel).rightJustify( 2, '0' );
+        break;
+    default:
+        str = Opie::Ui::OListViewItem::key( id, b );
+        break;
+    }
+
+    return str;
+}
