@@ -72,6 +72,21 @@ public:
      */
     void removeAllCompleted();
 
+    /**
+     * request information about what a backend supports.
+     * Supports in the sense of beeing able to store.
+     * This is related to the enum in OTodo
+     *
+     * @param backend Will be used in the future when we support multiple backend
+     */
+    QBitArray backendSupport( const QString& backend = QString::null )const;
+
+    /**
+     * see above but for a specefic attribute. This method was added for convience
+     * @param attr The attribute to be queried for
+     * @param backend Will be used in the future when we support multiple backends
+     */
+    bool backendSupports( int attr, const QString& backend = QString::null  )const;
 signals:
     /**
      * if the OTodoAccess was changed

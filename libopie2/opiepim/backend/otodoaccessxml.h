@@ -39,7 +39,9 @@ public:
     QArray<int> overDue();
     QArray<int> sorted( bool asc,  int sortOrder,
                         int sortFilter, int cat );
+    QBitArray supports()const;
 private:
+    static QBitArray sup();
     void todo( QAsciiDict<int>*, OTodo&,const QCString&,const QString& );
     QString toString( const OTodo& )const;
     QString toString( const QArray<int>& ints ) const;

@@ -54,3 +54,9 @@ OTodoAccess::List OTodoAccess::sorted( bool ascending, int sort,int filter, int 
 void OTodoAccess::removeAllCompleted() {
     m_todoBackEnd->removeAllCompleted();
 }
+QBitArray OTodoAccess::backendSupport( const QString& ) const{
+    return m_todoBackEnd->supports();
+}
+bool OTodoAccess::backendSupports( int attr,  const QString& ar) const{
+    return backendSupport(ar).testBit( attr );
+}

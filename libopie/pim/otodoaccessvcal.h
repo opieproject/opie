@@ -27,8 +27,10 @@ public:
     bool replace( const OTodo& );
 
     void removeAllCompleted();
+    virtual QBitArray supports()const;
 
 private:
+    static QBitArray sup();
     bool m_dirty : 1;
     QString m_file;
     QMap<int, OTodo> m_map;

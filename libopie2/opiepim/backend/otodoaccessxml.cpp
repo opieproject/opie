@@ -664,7 +664,6 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
     for (uint i= 0; i < vector.count(); i++ ) {
         array[i] = ( vector.at(i) )->todo.uid();
     }
-    qWarning("array count = %d %d", array.count(), vector.count() );
     return array;
 };
 void OTodoAccessXML::removeAllCompleted() {
@@ -672,4 +671,19 @@ void OTodoAccessXML::removeAllCompleted() {
         if ( (*it).isCompleted() )
             m_events.remove( it );
     }
+}
+QBitArray OTodoAccessXML::supports()const {
+    static QBitArray ar = sup();
+    return ar;
+}
+QBitArray OTodoAccessXML::sup() {
+    QBitArray ar( OTodo::CompletedDate +1 );
+    ar.fill( true );
+    ar[OTodo::CrossReference] = false;
+    ar[OTodo::State ] = false;
+    ar[OTodo::Reminders] = false;
+    ar[OTodo::Notifiers] = false;
+    ar[OTodo::Maintainer] = false;
+
+    return ar;
 }

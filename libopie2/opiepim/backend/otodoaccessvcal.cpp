@@ -199,3 +199,23 @@ QArray<int> OTodoAccessVCal::overDue() {
     QArray<int> ar(0);
     return ar;
 }
+QBitArray OTodoAccessVCal::supports()const {
+    static QBitArray ar = sup();
+
+    return ar;
+}
+QBitArray OTodoAccessVCal::sup() {
+    QBitArray ar ( OTodo::CompletedDate +1 );
+    ar.fill( true );
+
+    ar[OTodo::CrossReference] = false;
+    ar[OTodo::State ] = false;
+    ar[OTodo::Reminders] = false;
+    ar[OTodo::Notifiers] = false;
+    ar[OTodo::Maintainer] = false;
+    ar[OTodo::Progress] = false;
+    ar[OTodo::Alarms ] = false;
+    ar[OTodo::Recurrence] = false;
+
+    return ar;
+}
