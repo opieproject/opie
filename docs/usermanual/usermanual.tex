@@ -1,7 +1,8 @@
 \documentclass[12pt,letterpaper,oneside, openany]{book} \usepackage[latin1] {inputenc}
-\usepackage{amsmath} \usepackage{amsfonts} \usepackage{amssymb} 
+\usepackage{amsmath} \usepackage{amsfonts} \usepackage{amssymb}  \usepackage[pdftex]{hyperref}
 \title{Opie User Manual}
 \author{The Opie Team}
+\hypersetup{bookmarks=true, bookmarksopen=false,pdftitle={Opie User Manual},pdfauthor={The Opie Team}}
 \begin{document}
 \maketitle
 \tableofcontents
@@ -208,4 +209,48 @@ To delete a file, run the ``rm'' command, and to delete a directory, run the ``r
 \section{Linking Files}
 
 In Linux, you can have a special file called a ``symbolic link'' that acts just like a copy of another file, except it takes up less space.  This is convinient if two applications are looking for the same file in two separate places, because the file can be in both places at once, without taking up any extra space, and any change to one is automatically applied to the other (really, there is no other, one of them is just a file pointing to the other one).  This is also usefull for naming applications independant of their version number.  For instance, you could have a link called ``application'' that points to ``application1.0''.  To create a link, use the following command: \verb+ln -s originalfile link+.
+
+\chapter{File Manager}
+The file manager allows easy access to your file system, letting you browse, copy, move, delete and link files.  You can also use it to open the file in an application based upon the file type, or add the file to your ``Documents'' tab, as well as several other filesystem related things.
+
+\section{Navigating }
+
+To enter a directory, simply press its icon or name in the main view. There are also two buttons in the toolbar which help with navigation. The back arrow will take you back to the directory you were previously looking at, while the up arrow will take you up one level in the directory structure (so, if you are in /usr/bin, it will take you to /usr, regardless of where you were before). The ``Dir'' menu shows the current path, with each directory as a menu item. So, if you are in /opt/QtPalmtop/bin there will be four entries: /, opt, QtPalmtop, and bin. Selecting one of these will take you immediately to that directory. 
+
+\section{Selecting Files}
+
+When you click on a file, its selection status is toggled. So the first time you click on it, it will be selected, and the second time it will be deselected. To select multiple files, simply click on each one you want to select. 
+
+\section{Moving Files}
+
+To copy a file from one directory to another, press and hold on the filenam, and select ``Copy'' from the menu that pops up. Then, change into the directory thatyou want to copy it into, and press the "paste" icon (an image of a clipboard and a piece of paper). To move a file, do the same thing, except select ``Cut'' from the first menu, instead of ``Copy''. You can also move or copy multiple file by selecting all of them and using the cut or copy buttons in the toolbar. 
+
+\section{Deleting Files}
+
+To delete a file, press and hold it to bring up its menu, then select ``Delete'', and click ``Yes'' (or ``No'' to cancel). Delete will delete all the currently selected files, which may be more than the one that you pressed and held on. 
+
+\section{Renaming Files}
+
+To change a file's name, first bring up the input method you want to use (unless you are going to use the hardware keyboard), then press and hold on the filename, and select ``rename''. A new file will appear with a ``Name'' field that is editable, enter the new name in, and click another file to keep the new name. 
+
+\section{Creating Directories}
+
+To create a directory, first bring up the input method you want to use (if you are using one), and then click the new directory button (an image of a file folder with a ``+'' sign). A new folder will be created with the name ``New Folder'', and the folder name will be editable. Enter the name you want and then click another file to create the folder. 
+
+\section{Viewing Files}
+
+To view a file, press and hold on a file, and the menu that comes up will contain two entries for vieing the file, the first depends on the filetype, but usually lets you open the file in a specific program. The second is ``view as text'' which will open the file up in TextEdit (regardless of whether or not it is actually a text file). 
+
+\section{Adding to ``Documents''}
+
+To add a file to your ``Documents'', press and hold the file, and select ``Add to documents'' from the menu. This will add the file to the documents tab, which you can use to quickly open the file (simply click on the icon for the file in the Documents tab). Some programs also use the Documents list to aid in quickly opening files. 
+
+
+\section{Sorting Files}
+
+To sort the files, use the ``Sort'' menu to select wich field you want to sort the files by (``by Name'', for instance, will sort the file alphabetically by name). If ``Ascending'' is checked, the files will be sorted in ascending order, if it is not, they will be sorted in descending order. 
+
+\section{Viewing Options}
+
+The ``View'' menu lets you choose which files you view. If ``Hidden'' is checked, hidden files will be visible (in Linux, hidden files start with a ``.''). If ``Symlinks'' is checked, symbolic links (files or directories which are merely links to other files or directories) will be visible.
 \end{document}
