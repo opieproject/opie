@@ -17,6 +17,7 @@ FileTransfer::FileTransfer( Type t, IOLayer* lay )
     : FileTransferLayer( lay ), m_type( t ), m_pid ( 0 ) {
     signal(SIGPIPE,  SIG_IGN );
 
+    m_pid = 0;
     m_not = 0l;
     m_proc = 0l;
 }
@@ -48,6 +49,7 @@ void FileTransfer::sendFile( const QString& file ) {
     switch( m_pid ) {
     case -1:
         emit error( StartError, tr("Was not able to fork") );
+        slotExec();
         break;
     case 0:{
         setupChild();
@@ -177,7 +179,6 @@ void FileTransfer::slotRead() {
      */
     if ( lis[0].simplifyWhiteSpace() == "Transfer" ) {
         qWarning("sent!!!!");
-        emit sent();
         return;
     }
     /*
@@ -236,7 +237,7 @@ void FileTransfer::slotProgress( const QStringList& list ) {
 }
 void FileTransfer::cancel() {
     if(m_pid > 0) ::kill(m_pid,9 );
-    delete m_not;
+    
 }
 void FileTransfer::slotExec() {
     qWarning("exited!");
@@ -249,5 +250,7 @@ void FileTransfer::slotExec() {
     close( m_term[1] );
     close( m_comm[0] );
     close( m_comm[1] );
+    layer()->closeRawIO( m_fd );
     emit sent();
+    m_pid = 0;
 }

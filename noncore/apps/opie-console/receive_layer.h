@@ -45,12 +45,11 @@ public:
     };
 
     /**
-     * which protocol to use?
+     * Error codes
      */
-    enum Type{
-        SZ = 0,
-        SX,
-        SY
+    enum Error {
+        Unknown = 0,
+        StartError
     };
 
     /**
@@ -59,7 +58,7 @@ public:
      * @param t The Type
      * @param startDir In which dir should files be received?
      */
-    ReceiveLayer( IOLayer* lay, Type t, const QString& startDir = QString::null );
+    ReceiveLayer( IOLayer* lay, const QString& startDir = QString::null );
     virtual ~ReceiveLayer();
 
 public slots:
@@ -78,7 +77,7 @@ public slots:
     /**
      *  advanced method with features and Mode
      */
-    virtual void receive( const QString& dir,  Mode, Features ) {}
+    virtual void receive( const QString& dir,  Mode, Features );
 
     /**
      * cancel receive
@@ -107,6 +106,15 @@ signals:
      * completely received a file
      */
     void received( const QString& file );
+
+protected:
+    QString m_curDir;
+    IOLayer* layer();
+    /* from a variable set from the outside */
+    QString currentDir()const;
+    void changeDir( const QString& );
+private:
+    IOLayer* m_layer;
 
 };
 

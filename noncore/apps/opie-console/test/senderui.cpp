@@ -9,6 +9,7 @@
 #include "../profile.h"
 #include "../io_serial.h"
 #include "../filetransfer.h"
+#include "../filereceive.h"
 
 #include <opie/oprocess.h>
 
@@ -64,5 +65,11 @@ void SenderUI::fileTransComplete() {
     qWarning("file transfer complete");
 }
 void SenderUI::send() {
+
+}
+void SenderUI::slotRev(){
+qWarning("Going to receive!");
+FileReceive *rev = new FileReceive( FileReceive::SZ, ser );
+rev->receive();
 
 }

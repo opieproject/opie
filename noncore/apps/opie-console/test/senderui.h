@@ -19,6 +19,7 @@ public slots:
     void send();
     void slotSendFile();
     void slotSend();
+    void slotRev();
     void got(const QByteArray& );
     void fileTransComplete();
 private:

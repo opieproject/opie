@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>596</width>
+            <width>592</width>
             <height>480</height>
         </rect>
     </property>
@@ -33,6 +33,17 @@
             <property stdset="1">
                 <name>name</name>
                 <cstring>MultiLineEdit1</cstring>
+            </property>
+        </widget>
+        <widget>
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>PushButton3</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Receive File</string>
             </property>
         </widget>
         <widget>
@@ -66,13 +77,20 @@
         <receiver>Form1</receiver>
         <slot>slotSend()</slot>
     </connection>
-    <slot access="public">slotSend()</slot>
     <connection>
         <sender>PushButton2</sender>
         <signal>clicked()</signal>
         <receiver>Form1</receiver>
         <slot>slotSendFile()</slot>
     </connection>
+    <connection>
+        <sender>PushButton3</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>slotRev()</slot>
+    </connection>
+    <slot access="public">slotRev()</slot>
+    <slot access="public">slotSend()</slot>
     <slot access="public">slotSendFile()</slot>
 </connections>
 </UI>
