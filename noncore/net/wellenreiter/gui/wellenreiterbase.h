@@ -24,9 +24,10 @@ class QGridLayout;
 class QLabel;
 class QListView;
 class QListViewItem;
-class QMultiLineEdit;
 class QPushButton;
 class OTabWidget;
+class MLogWindow;
+class MHexWindow;
 
 class WellenreiterBase : public QWidget
 { 
@@ -39,10 +40,8 @@ public:
     OTabWidget* TabWidget;
     QWidget* ap;
     QListView* netview;
-    QWidget* Log;
-    QMultiLineEdit* Log_2;
-    QWidget* tab;
-    QMultiLineEdit* Log_2_2;
+    MLogWindow* logwindow;
+    MHexWindow* hexwindow;  
     QWidget* about;
     QLabel* PixmapLabel1_3_2;
     QLabel* TextLabel1_4_2;
@@ -51,8 +50,6 @@ public:
 protected:
     QVBoxLayout* WellenreiterBaseLayout;
     QVBoxLayout* apLayout;
-    QVBoxLayout* LogLayout;
-    QGridLayout* tabLayout;
     QGridLayout* aboutLayout;
     bool event( QEvent* );
 };

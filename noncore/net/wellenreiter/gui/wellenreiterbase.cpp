@@ -28,6 +28,9 @@
 #include <qimage.h>
 #include <qpixmap.h>
 
+#include "logwindow.h"
+#include "hexwindow.h"
+
 static const char* const image0_data[] = { 
 "150 105 949 2",
 "g0 c #000000",
@@ -1122,85 +1125,11 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     apLayout->addWidget( netview );
     TabWidget->addTab( ap, "wellenreiter/networks", tr( "Networks" ) );
 
-    Log = new QWidget( TabWidget, "Log" );
-    LogLayout = new QVBoxLayout( Log ); 
-    LogLayout->setSpacing( 2 );
-    LogLayout->setMargin( 2 );
+    logwindow = new MLogWindow( TabWidget, "Log" );
+    TabWidget->addTab( logwindow, "wellenreiter/log", tr( "Log" ) );
 
-    Log_2 = new QMultiLineEdit( Log, "Log_2" );
-    Log_2->setText( tr( "11/18 18:15 - log started\n"
-"11/19 20:13 - new net : \"ELAN\"\n"
-"11/19 20:15 - new station : \"pegasus\"" ) );
-    LogLayout->addWidget( Log_2 );
-    TabWidget->addTab( Log, "wellenreiter/log", tr( "Log" ) );
-
-    tab = new QWidget( TabWidget, "tab" );
-    tabLayout = new QGridLayout( tab ); 
-    tabLayout->setSpacing( 2 );
-    tabLayout->setMargin( 2 );
-
-    Log_2_2 = new QMultiLineEdit( tab, "Log_2_2" );
-    QPalette pal;
-    QColorGroup cg;
-    cg.setColor( QColorGroup::Foreground, white );
-    cg.setColor( QColorGroup::Button, QColor( 192, 192, 192) );
-    cg.setColor( QColorGroup::Light, white );
-    cg.setColor( QColorGroup::Midlight, QColor( 223, 223, 223) );
-    cg.setColor( QColorGroup::Dark, QColor( 96, 96, 96) );
-    cg.setColor( QColorGroup::Mid, QColor( 128, 128, 128) );
-    cg.setColor( QColorGroup::Text, white );
-    cg.setColor( QColorGroup::BrightText, white );
-    cg.setColor( QColorGroup::ButtonText, white );
-    cg.setColor( QColorGroup::Base, black );
-    cg.setColor( QColorGroup::Background, black );
-    cg.setColor( QColorGroup::Shadow, black );
-    cg.setColor( QColorGroup::Highlight, QColor( 0, 0, 128) );
-    cg.setColor( QColorGroup::HighlightedText, white );
-    pal.setActive( cg );
-    cg.setColor( QColorGroup::Foreground, white );
-    cg.setColor( QColorGroup::Button, QColor( 192, 192, 192) );
-    cg.setColor( QColorGroup::Light, white );
-    cg.setColor( QColorGroup::Midlight, QColor( 220, 220, 220) );
-    cg.setColor( QColorGroup::Dark, QColor( 96, 96, 96) );
-    cg.setColor( QColorGroup::Mid, QColor( 128, 128, 128) );
-    cg.setColor( QColorGroup::Text, white );
-    cg.setColor( QColorGroup::BrightText, white );
-    cg.setColor( QColorGroup::ButtonText, white );
-    cg.setColor( QColorGroup::Base, black );
-    cg.setColor( QColorGroup::Background, black );
-    cg.setColor( QColorGroup::Shadow, black );
-    cg.setColor( QColorGroup::Highlight, QColor( 0, 0, 128) );
-    cg.setColor( QColorGroup::HighlightedText, white );
-    pal.setInactive( cg );
-    cg.setColor( QColorGroup::Foreground, QColor( 128, 128, 128) );
-    cg.setColor( QColorGroup::Button, QColor( 192, 192, 192) );
-    cg.setColor( QColorGroup::Light, white );
-    cg.setColor( QColorGroup::Midlight, QColor( 220, 220, 220) );
-    cg.setColor( QColorGroup::Dark, QColor( 96, 96, 96) );
-    cg.setColor( QColorGroup::Mid, QColor( 128, 128, 128) );
-    cg.setColor( QColorGroup::Text, QColor( 128, 128, 128) );
-    cg.setColor( QColorGroup::BrightText, white );
-    cg.setColor( QColorGroup::ButtonText, QColor( 128, 128, 128) );
-    cg.setColor( QColorGroup::Base, black );
-    cg.setColor( QColorGroup::Background, black );
-    cg.setColor( QColorGroup::Shadow, black );
-    cg.setColor( QColorGroup::Highlight, QColor( 0, 0, 128) );
-    cg.setColor( QColorGroup::HighlightedText, white );
-    pal.setDisabled( cg );
-    Log_2_2->setPalette( pal );
-    QFont Log_2_2_font(  Log_2_2->font() );
-    Log_2_2_font.setFamily( "adobe-courier" );
-    Log_2_2_font.setPointSize( 8 );
-    Log_2_2->setFont( Log_2_2_font ); 
-    Log_2_2->setText( tr( "00 0a 20 00 a8 00 e2 00 ...ESD..\n"
-"00 0a 20 00 a8 00 e2 00 .*&23...\n"
-"00 0a 20 00 a8 00 e2 00 ........\n"
-"00 0a 20 00 a8 00 e2 00 ........\n"
-"00 0a 20 00 a8 00 e2 00 ........\n"
-"00 0a 20 00 a8 00 e2 00 ...BRA22" ) );
-
-    tabLayout->addWidget( Log_2_2, 0, 0 );
-    TabWidget->addTab( tab, "wellenreiter/hex", tr( "Hex" ) );
+    hexwindow = new MHexWindow( TabWidget, "tab" );
+    TabWidget->addTab( hexwindow, "wellenreiter/hex", tr( "Hex" ) );
 
     about = new QWidget( TabWidget, "about" );
     aboutLayout = new QGridLayout( about ); 
@@ -1267,10 +1196,10 @@ bool WellenreiterBase::event( QEvent* ev )
 {
     bool ret = QWidget::event( ev ); 
     if ( ev->type() == QEvent::ApplicationFontChange ) {
-	QFont Log_2_font(  Log_2->font() );
-	Log_2_font.setFamily( "adobe-courier" );
-	Log_2_font.setPointSize( 8 );
-	Log_2->setFont( Log_2_font ); 
+	//QFont Log_2_font(  Log_2->font() );
+	//Log_2_font.setFamily( "adobe-courier" );
+	//Log_2_font.setPointSize( 8 );
+	//Log_2->setFont( Log_2_font ); 
 	QFont TextLabel1_4_2_font(  TextLabel1_4_2->font() );
 	TextLabel1_4_2_font.setFamily( "adobe-helvetica" );
 	TextLabel1_4_2_font.setPointSize( 10 );

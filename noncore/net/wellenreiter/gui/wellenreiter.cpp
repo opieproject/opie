@@ -26,6 +26,8 @@
 
 #include "wellenreiter.h"
 #include "scanlistitem.h"
+#include "logwindow.h"
+#include "hexwindow.h"
 
 #include "../libwellenreiter/source/sock.hh"    // <--- ugly path, FIX THIS!
 #include "../libwellenreiter/source/proto.hh"    // <--- ugly path, FIX THIS!
@@ -35,6 +37,8 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     : WellenreiterBase( parent, name, fl )
 {
 
+    logwindow->log( "(i) Wellenreiter has been started." );
+    
     connect( button, SIGNAL( clicked() ), this, SLOT( buttonClicked() ) );
     netview->setColumnWidthMode( 1, QListView::Manual );
 
@@ -44,7 +48,10 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
 
     daemon_fd = commsock( GUIADDR, GUIPORT );
     if ( daemon_fd == -1 )
+    {
+        logwindow->log( "(E) Couldn't get file descriptor for commsocket." );
         qDebug( "D'oh! Could not get file descriptor for daemon-->gui communication socket." );
+    }
     else
         startTimer( 700 );
 
@@ -77,10 +84,12 @@ typedef struct {
 } wl_network_t;
 */
 
-    qDebug( "Sniffer sent: '%s'", buffer );
+    qDebug( "Sniffer sent: '%s'", (const char*) &buffer );
+    hexwindow->log( (const char*) &buffer );
 
     if ( result == NETFOUND )  /* new network found */
     {
+        logwindow->log( "(i) found new network" );
         qDebug( "Sniffer said: new network found." );
         wl_network_t n;
         get_network_found( &n, (char*) &buffer );
