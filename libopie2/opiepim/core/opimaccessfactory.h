@@ -57,7 +57,6 @@ namespace Opie {
  * @author Stefan Eilers
  * @version 0.1
  */
- */
 
 template<class T>
 class OPimAccessFactory
@@ -105,9 +104,9 @@ class OPimAccessFactory
 	 * @see OPimGlobal
 	 * 
 	 */
-	static T* default( OPimGlobal::PimType type, const QString& appName ){
+	static T* default( typename OPimGlobal::PimType type, const QString& appName ){
 
-		return create( type, OPimGlobal::DEFAULT, appName )
+		return create( type, OPimGlobal::DEFAULT, appName );
 
 	}
 };
