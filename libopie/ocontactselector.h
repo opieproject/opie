@@ -12,11 +12,14 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactselector.h,v 1.1.2.1 2002-07-01 16:49:46 eilers Exp $
+ * Version: $Id: ocontactselector.h,v 1.1.2.2 2002-07-02 16:36:47 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactselector.h,v $
- * Revision 1.1.2.1  2002-07-01 16:49:46  eilers
+ * Revision 1.1.2.2  2002-07-02 16:36:47  eilers
+ * changed interface
+ *
+ * Revision 1.1.2.1  2002/07/01 16:49:46  eilers
  * First attempt for cross reference
  *
  */
@@ -87,7 +90,7 @@ class OContactSelector: public QTable
 	/** Get all selected contacts.
 	 * @returns List of user id's from selected users
 	 */
- 	QValueList<int> getSelected ();
+ 	QValueList<int> selected ();
 
 	/** Set selected contacts.
 	 * The given list will select the contacts in the table with
@@ -121,7 +124,7 @@ class OContactSelectorDialog: public QDialog
 	/** Get all selected contacts.
 	 * @see OContactSelector
 	 */
-	QValueList<int> getSelected ();
+	QValueList<int> selected ();
 
 	/** Set selected contacts.
 	 * @see OContactSelector

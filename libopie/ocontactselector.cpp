@@ -12,11 +12,14 @@
  * =====================================================================
  * ToDo: There is a lot todo.. It is currently very simplistic..
  * =====================================================================
- * Version: $Id: ocontactselector.cpp,v 1.1.2.1 2002-07-01 16:49:46 eilers Exp $
+ * Version: $Id: ocontactselector.cpp,v 1.1.2.2 2002-07-02 16:36:47 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactselector.cpp,v $
- * Revision 1.1.2.1  2002-07-01 16:49:46  eilers
+ * Revision 1.1.2.2  2002-07-02 16:36:47  eilers
+ * changed interface
+ *
+ * Revision 1.1.2.1  2002/07/01 16:49:46  eilers
  * First attempt for cross reference
  *
  */
@@ -135,7 +138,7 @@ void OContactSelector::slotClicked( int row, int col, int, const QPoint &pos )
 		}
 }
 
-QValueList<int> OContactSelector::getSelected ()
+QValueList<int> OContactSelector::selected ()
 {
 	QValueList<int> listOfSelectedContacts;
 	ONameItem *curritem = NULL;
@@ -186,9 +189,9 @@ OContactSelectorDialog::OContactSelectorDialog( QWidget* , WFlags fl )
 	vb->add(contacttable);
 }
 
-QValueList<int> OContactSelectorDialog::getSelected ()
+QValueList<int> OContactSelectorDialog::selected ()
 {
-	return (contacttable -> getSelected());
+	return (contacttable -> selected());
 }
 void OContactSelectorDialog::setSelected (const QValueList<int> &selectedList){
 	contacttable -> setSelected (selectedList);
