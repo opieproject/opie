@@ -7,6 +7,7 @@
 
 #include <qpe/datebookmonth.h>
 #include <qpe/config.h>
+#include <qpe/ir.h>
 #include <qpe/resource.h>
 
 #include <qlayout.h>
@@ -192,13 +193,35 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(const EffectiveEvent &ev,
 		s="";
 	}
 	setText(QString(s) + " " + ev.description());
-	connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
+//	connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
 	setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
 }
 void DateBookWeekLstEvent::editMe() {
 	emit editEvent(event.event());
 }
-
+void DateBookWeekLstEvent::duplicateMe()
+{
+       emit duplicateEvent(event.event());
+}
+void DateBookWeekLstEvent::deleteMe()
+{
+       emit removeEvent(event.event());
+       emit redraw();
+}
+void DateBookWeekLstEvent::beamMe()
+{
+	emit beamEvent( event.event() );
+}
+void DateBookWeekLstEvent::mousePressEvent( QMouseEvent *e )
+{
+	popmenue = new QPopupMenu;
+	popmenue->insertItem( tr( "Edit" ), this, SLOT(editMe()));
+	popmenue->insertItem( tr( "Duplicate" ), this, SLOT(duplicateMe()));
+	popmenue->insertItem( tr( "Delete" ), this, SLOT(deleteMe()));
+	if(Ir::supported())
+		popmenue->insertItem( tr( "Beam" ), this, SLOT(beamMe()));
+	popmenue->popup( mapToGlobal( e->pos() ));
+}
 
 DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 					 const QDate &d, bool onM,
@@ -248,6 +271,10 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 				DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,weeklistviewconfig,this);
 				layout->addWidget(l);
 				connect (l, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
+				connect (l, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
+				connect (l, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
+				connect (l, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
+				connect (l, SIGNAL(redraw()), this, SIGNAL(redraw()));
 			}
 			it++;
 		}
@@ -269,6 +296,10 @@ DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
 	DateBookWeekLstView *w=new DateBookWeekLstView(ev1,d,onM,this);
 	layout->addWidget(w);
 	connect (w, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
+	connect (w, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
+	connect (w, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
+	connect (w, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
+	connect (w, SIGNAL(redraw()), this, SIGNAL(redraw()));
 	connect (w, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
 	connect (w, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
 		this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
@@ -277,6 +308,10 @@ DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
 	w=new DateBookWeekLstView(ev2,d.addDays(7),onM,this);
 	layout->addWidget(w);
 	connect (w, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
+	connect (w, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
+	connect (w, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
+	connect (w, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
+	connect (w, SIGNAL(redraw()), this, SIGNAL(redraw()));
 	connect (w, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
 	connect (w, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
 		this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
@@ -362,6 +397,10 @@ void DateBookWeekLst::getEvents() {
 	}
 
 	connect (view, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
+	connect (view, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
+	connect (view, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
+	connect (view, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
+	connect (view, SIGNAL(redraw()), this, SLOT(redraw()));
 	connect (view, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
 	connect (view, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
 		this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));

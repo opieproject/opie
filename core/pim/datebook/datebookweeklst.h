@@ -2,9 +2,9 @@
 #define DATEBOOKWEEKLST
 
 #include <qwidget.h>
-#include <qdatetime.h> 
+#include <qdatetime.h>
 #include <qpe/event.h>
-#include <qlabel.h> 
+#include <qlabel.h>
 #include <qscrollview.h>
 
 #include "datebookweeklstheader.h"
@@ -19,11 +19,11 @@ class DateBookWeekLstHeader: public DateBookWeekLstHeaderBase
 {
     Q_OBJECT
 public:
-    DateBookWeekLstHeader(bool onM, QWidget* parent = 0, const char* name = 0, 
+    DateBookWeekLstHeader(bool onM, QWidget* parent = 0, const char* name = 0,
 			  WFlags fl = 0 );
     ~DateBookWeekLstHeader();
     void setDate(const QDate &d);
-    
+
 public slots:
 	void nextWeek();
 	void prevWeek();
@@ -45,11 +45,11 @@ class DateBookWeekLstDayHdr: public DateBookWeekLstDayHdrBase
     Q_OBJECT
 public:
     DateBookWeekLstDayHdr(const QDate &d, bool onM,
-			  QWidget* parent = 0, const char* name = 0, 
+			  QWidget* parent = 0, const char* name = 0,
 			  WFlags fl = 0 );
 public slots:
     void showDay();
-    void newEvent(); 
+    void newEvent();
 signals:
     void showDate(int y, int m, int d);
     void addEvent(const QDateTime &start, const QDateTime &stop,
@@ -58,7 +58,7 @@ private:
     QDate date;
 };
 
-class DateBookWeekLstEvent: public Opie::Ui::OClickableLabel 
+class DateBookWeekLstEvent: public Opie::Ui::OClickableLabel
 {
   Q_OBJECT
 public:
@@ -67,10 +67,20 @@ public:
 			 WFlags fl = 0);
 signals:
     void editEvent(const Event &e);
+    void duplicateEvent(const Event &e);
+    void removeEvent(const Event &e);
+    void beamEvent(const Event &e);
+    void redraw();
 private slots:
     void editMe();
+    void duplicateMe();
+    void deleteMe();
+    void beamMe();
 private:
     const EffectiveEvent event;
+    QPopupMenu* popmenue;
+protected:
+    void mousePressEvent( QMouseEvent *e );
 };
 
 class DateBookWeekLstView: public QWidget
@@ -83,6 +93,10 @@ public:
     ~DateBookWeekLstView();
 signals:
 	void editEvent(const Event &e);
+	void duplicateEvent(const Event &e);
+	void removeEvent(const Event &e);
+	void beamEvent(const Event &e);
+	void redraw();
 	void showDate(int y, int m, int d);
 	void addEvent(const QDateTime &start, const QDateTime &stop,
 	const QString &str, const QString &location);
@@ -102,6 +116,10 @@ public:
 			   WFlags fl = 0 );
 signals:
     void editEvent(const Event &e);
+    void duplicateEvent(const Event &e);
+    void removeEvent(const Event &e);
+    void beamEvent(const Event &e);
+    void redraw();
     void showDate(int y, int m, int d);
     void addEvent(const QDateTime &start, const QDateTime &stop,
 		  const QString &str, const QString &location);
@@ -135,6 +153,9 @@ signals:
 	void addEvent(const QDateTime &start, const QDateTime &stop,
 	const QString &str, const QString &location);
 	void editEvent(const Event &e);
+	void duplicateEvent(const Event &e);
+	void removeEvent(const Event &e);
+	void beamEvent(const Event &e);
 
 private:
     DateBookDB *db;
