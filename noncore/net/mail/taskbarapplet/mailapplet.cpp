@@ -12,7 +12,7 @@
 
 #include "mailapplet.h"
 
-using namespace Opie;
+using namespace Opie::Core;
 
 MailApplet::MailApplet( QWidget *parent )
 : QWidget( parent ) {

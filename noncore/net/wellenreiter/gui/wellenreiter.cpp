@@ -61,6 +61,12 @@ using namespace Opie;
 #include <sys/types.h>
 #include <stdlib.h>
 
+using namespace Opie::Core;
+using namespace Opie::Net;
+using namespace Opie::Net;
+using namespace Opie::Core;
+using namespace Opie::Net;
+using namespace Opie::Core;
 Wellenreiter::Wellenreiter( QWidget* parent )
     : WellenreiterBase( parent, 0, 0 ),
       sniffing( false ), iface( 0 ), configwindow( 0 )
@@ -446,7 +452,7 @@ void Wellenreiter::stopClicked()
 {
     if ( iface )
     {
-        disconnect( SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
+        disconnect( SIGNAL( receivedPacket(Opie::Net::OPacket*) ), this, SLOT( receivePacket(Opie::Net::OPacket*) ) );
         disconnect( SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
         iface->setChannelHopping(); // stop hopping channels
     }
@@ -611,7 +617,7 @@ void Wellenreiter::startClicked()
     if ( cardtype != DEVTYPE_FILE )
     {
         // connect socket notifier and start channel hopper
-        connect( pcap, SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
+        connect( pcap, SIGNAL( receivedPacket(Opie::Net::OPacket*) ), this, SLOT( receivePacket(Opie::Net::OPacket*) ) );
         connect( iface->channelHopper(), SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
     }
     else

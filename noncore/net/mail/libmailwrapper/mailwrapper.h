@@ -28,7 +28,7 @@ protected:
 
 };
 
-class Mail:public Opie::ORefCount
+class Mail:public Opie::Core::ORefCount
 {
 public:
     Mail();
@@ -66,7 +66,7 @@ private:
     QStringList m_in_reply_to;
 };
 
-class Folder:public Opie::ORefCount
+class Folder:public Opie::Core::ORefCount
 {
 public:
     Folder( const QString&init_name,const QString&sep );
@@ -82,7 +82,7 @@ protected:
     QString nameDisplay, name, separator,prefix;
 };
 
-typedef Opie::OSmartPointer<Folder> FolderP;
+typedef Opie::Core::OSmartPointer<Folder> FolderP;
 
 class MHFolder : public Folder
 {

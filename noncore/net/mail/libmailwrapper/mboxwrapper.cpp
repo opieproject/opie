@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <qpe/global.h>
 
+using namespace Opie::Core;
 MBOXwrapper::MBOXwrapper(const QString & mbox_dir,const QString&mbox_name)
     : Genericwrapper(),MBOXPath(mbox_dir),MBOXName(mbox_name)
 {
@@ -44,9 +45,9 @@ void MBOXwrapper::listMessages(const QString & mailbox, QValueList<RecMailP> &ta
     Global::statusMessage(tr("Mailbox has %1 mail(s)").arg(target.count()));
 }
 
-QValueList<Opie::OSmartPointer<Folder> >* MBOXwrapper::listFolders()
+QValueList<Opie::Core::OSmartPointer<Folder> >* MBOXwrapper::listFolders()
 {
-    QValueList<Opie::OSmartPointer<Folder> >* folders = new QValueList<Opie::OSmartPointer<Folder> >();
+    QValueList<Opie::Core::OSmartPointer<Folder> >* folders = new QValueList<Opie::Core::OSmartPointer<Folder> >();
     QDir dir(MBOXPath);
     if (!dir.exists()) return folders;
     dir.setFilter(QDir::Files|QDir::Writable|QDir::Readable);

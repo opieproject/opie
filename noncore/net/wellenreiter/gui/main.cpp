@@ -29,6 +29,9 @@
 #include <string.h>
 #include <unistd.h>
 
+using namespace Opie::Core;
+using namespace Opie::Core;
+using namespace Opie::Core;
 int main( int argc, char **argv )
 {
     #ifdef QWS

@@ -34,7 +34,7 @@
 #include <qpe/config.h>
 #include <qpe/resource.h>
 
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 #include <qpoint.h>
 #include <qpainter.h>

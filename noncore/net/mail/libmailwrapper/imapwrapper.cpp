@@ -6,6 +6,7 @@
 #include "mailtypes.h"
 #include "logindialog.h"
 
+using namespace Opie::Core;
 IMAPwrapper::IMAPwrapper( IMAPaccount *a )
     : AbstractMail()
 {
@@ -205,7 +206,7 @@ void IMAPwrapper::logout()
     m_Lastmbox = "";
 }
 
-void IMAPwrapper::listMessages(const QString&mailbox,QValueList<Opie::OSmartPointer<RecMail> > &target )
+void IMAPwrapper::listMessages(const QString&mailbox,QValueList<Opie::Core::OSmartPointer<RecMail> > &target )
 {
     int err = MAILIMAP_NO_ERROR;
     clist *result = 0;
@@ -266,7 +267,7 @@ void IMAPwrapper::listMessages(const QString&mailbox,QValueList<Opie::OSmartPoin
     if (result) mailimap_fetch_list_free(result);
 }
 
-QValueList<Opie::OSmartPointer<Folder> >* IMAPwrapper::listFolders()
+QValueList<Opie::Core::OSmartPointer<Folder> >* IMAPwrapper::listFolders()
 {
     const char *path, *mask;
     int err = MAILIMAP_NO_ERROR;

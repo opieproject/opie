@@ -11,6 +11,7 @@
 #include <libetpan/mailmime_content.h>
 #include <libetpan/mailmime.h>
 
+using namespace Opie::Core;
 AbstractMail* AbstractMail::getWrapper(IMAPaccount *a)
 {
     return new IMAPwrapper(a);
@@ -129,7 +130,7 @@ QString AbstractMail::draftFolder()
 }
 
 /* temporary - will be removed when implemented in all classes */
-void AbstractMail::deleteMails(const QString &,const QValueList<Opie::OSmartPointer<RecMail> > &)
+void AbstractMail::deleteMails(const QString &,const QValueList<Opie::Core::OSmartPointer<RecMail> > &)
 {
 }
 

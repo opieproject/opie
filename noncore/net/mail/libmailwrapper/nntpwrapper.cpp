@@ -11,6 +11,7 @@
 
 #define HARD_MSG_SIZE_LIMIT 5242880
 
+using namespace Opie::Core;
 NNTPwrapper::NNTPwrapper( NNTPaccount *a )
 : Genericwrapper() {
     account = a;
@@ -96,7 +97,7 @@ RecBody NNTPwrapper::fetchBody( const RecMailP &mail ) {
 }
 
 
-void NNTPwrapper::listMessages(const QString & which, QValueList<Opie::OSmartPointer<RecMail> > &target )
+void NNTPwrapper::listMessages(const QString & which, QValueList<Opie::Core::OSmartPointer<RecMail> > &target )
 {
     login();
     if (!m_nntp)
@@ -188,9 +189,9 @@ void NNTPwrapper::logout()
    m_nntp = 0;
 }
 
-QValueList<Opie::OSmartPointer<Folder> >* NNTPwrapper::listFolders() {
+QValueList<Opie::Core::OSmartPointer<Folder> >* NNTPwrapper::listFolders() {
 
-    QValueList<Opie::OSmartPointer<Folder> >* folders = new QValueList<Opie::OSmartPointer<Folder> >();
+    QValueList<Opie::Core::OSmartPointer<Folder> >* folders = new QValueList<Opie::Core::OSmartPointer<Folder> >();
     QStringList groups;
     if (account) {
         groups = account->getGroups();

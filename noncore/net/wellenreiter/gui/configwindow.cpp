@@ -43,6 +43,12 @@ using namespace Opie;
 /* POSIX */
 #include <assert.h>
 
+using namespace Opie::Core;
+using namespace Opie::Net;
+using namespace Opie::Core;
+using namespace Opie::Net;
+using namespace Opie::Core;
+using namespace Opie::Net;
 WellenreiterConfigWindow* WellenreiterConfigWindow::_instance = 0;
 
 WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char * name, WFlags f )

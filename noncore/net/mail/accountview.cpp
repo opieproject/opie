@@ -14,6 +14,7 @@
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
 
+using namespace Opie::Core;
 AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
         : QListView( parent, name, flags )
 {

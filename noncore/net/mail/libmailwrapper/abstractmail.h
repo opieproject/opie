@@ -21,7 +21,7 @@ class AbstractMail:public QObject
 public:
     AbstractMail(){};
     virtual ~AbstractMail(){}
-    virtual QValueList<Opie::OSmartPointer<Folder> >* listFolders()=0;
+    virtual QValueList<Opie::Core::OSmartPointer<Folder> >* listFolders()=0;
     virtual void listMessages(const QString & mailbox,QValueList<RecMailP>&target )=0;
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX")=0;
     virtual RecBody fetchBody(const RecMailP&mail)=0;
@@ -32,12 +32,12 @@ public:
 
     virtual void deleteMail(const RecMailP&mail)=0;
     virtual void answeredMail(const RecMailP&mail)=0;
-    virtual int deleteAllMail(const Opie::OSmartPointer<Folder>&)=0;
-    virtual void deleteMails(const QString & FolderName,const QValueList<Opie::OSmartPointer<RecMail> >&target);
-    virtual int deleteMbox(const Opie::OSmartPointer<Folder>&)=0;
+    virtual int deleteAllMail(const Opie::Core::OSmartPointer<Folder>&)=0;
+    virtual void deleteMails(const QString & FolderName,const QValueList<Opie::Core::OSmartPointer<RecMail> >&target);
+    virtual int deleteMbox(const Opie::Core::OSmartPointer<Folder>&)=0;
     virtual void storeMessage(const char*msg,size_t length, const QString&folder)=0;
 
-    virtual void mvcpAllMails(const Opie::OSmartPointer<Folder>&fromFolder,
+    virtual void mvcpAllMails(const Opie::Core::OSmartPointer<Folder>&fromFolder,
         const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
     virtual void mvcpMail(const RecMailP&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
 
@@ -47,7 +47,7 @@ public:
      * if the implementing subclass has prefixes,
      * them has to be appended automatic.
      */
-    virtual int createMbox(const QString&,const Opie::OSmartPointer<Folder>&parentfolder=0,
+    virtual int createMbox(const QString&,const Opie::Core::OSmartPointer<Folder>&parentfolder=0,
         const QString& delemiter="/",bool getsubfolder=false);
     virtual void logout()=0;
 

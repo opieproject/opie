@@ -23,15 +23,15 @@ class IMAPwrapper : public AbstractMail
 public:
     IMAPwrapper( IMAPaccount *a );
     virtual ~IMAPwrapper();
-    virtual QValueList<Opie::OSmartPointer<Folder> >* listFolders();
-    virtual void listMessages(const QString & mailbox,QValueList<Opie::OSmartPointer<RecMail> >&target );
+    virtual QValueList<Opie::Core::OSmartPointer<Folder> >* listFolders();
+    virtual void listMessages(const QString & mailbox,QValueList<Opie::Core::OSmartPointer<RecMail> >&target );
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX");
 
     virtual void deleteMail(const RecMailP&mail);
     virtual void answeredMail(const RecMailP&mail);
-    virtual int deleteAllMail(const Opie::OSmartPointer<Folder>&folder);
+    virtual int deleteAllMail(const Opie::Core::OSmartPointer<Folder>&folder);
     virtual void storeMessage(const char*msg,size_t length, const QString&folder);
-    virtual void mvcpAllMails(const Opie::OSmartPointer<Folder>&fromFolder,
+    virtual void mvcpAllMails(const Opie::Core::OSmartPointer<Folder>&fromFolder,
         const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
     virtual void mvcpMail(const RecMailP&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
 
@@ -41,9 +41,9 @@ public:
     virtual encodedString* fetchRawPart(const RecMailP&mail,const RecPart&part);
     virtual encodedString* fetchRawBody(const RecMailP&mail);
 
-    virtual int createMbox(const QString&,const Opie::OSmartPointer<Folder>&parentfolder=0,
+    virtual int createMbox(const QString&,const Opie::Core::OSmartPointer<Folder>&parentfolder=0,
         const QString& delemiter="/",bool getsubfolder=false);
-    virtual int deleteMbox(const Opie::OSmartPointer<Folder>&folder);
+    virtual int deleteMbox(const Opie::Core::OSmartPointer<Folder>&folder);
 
     static void imap_progress( size_t current, size_t maximum );
 

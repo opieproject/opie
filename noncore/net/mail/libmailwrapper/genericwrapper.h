@@ -38,7 +38,7 @@ public:
     virtual encodedString* fetchRawPart(const RecMailP&mail,const RecPart&part);
     virtual QString fetchTextPart(const RecMailP&mail,const RecPart&part);
     virtual void cleanMimeCache();
-    virtual int deleteMbox(const Opie::OSmartPointer<Folder>&){return 1;}
+    virtual int deleteMbox(const Opie::Core::OSmartPointer<Folder>&){return 1;}
     virtual void logout(){};
     virtual void storeMessage(const char*msg,size_t length, const QString&folder){};
 
@@ -54,7 +54,7 @@ protected:
     static void fillSingleBody(RecPart&target,mailmessage*message,mailmime*mime);
     static void fillParameters(RecPart&target,clist*parameters);
     static QString getencoding(mailmime_mechanism*aEnc);
-    virtual void parseList(QValueList<Opie::OSmartPointer<RecMail> > &target,mailsession*session,const QString&mailbox,bool mbox_as_to=false);
+    virtual void parseList(QValueList<Opie::Core::OSmartPointer<RecMail> > &target,mailsession*session,const QString&mailbox,bool mbox_as_to=false);
     QStringList parseInreplies(mailimf_in_reply_to * in_replies);
 
     QString msgTempName;

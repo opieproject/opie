@@ -18,7 +18,7 @@ public:
     Storemail(const QString&aFolder);
     virtual ~Storemail();
 
-    int storeMail(const Opie::OSmartPointer<Mail>&mail);
+    int storeMail(const Opie::Core::OSmartPointer<Mail>&mail);
 
 protected:
     Account* m_Account;

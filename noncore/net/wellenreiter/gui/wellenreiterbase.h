@@ -46,7 +46,7 @@ public:
     ~WellenreiterBase();
 
 #ifdef QWS
-    OTabWidget* TabWidget;
+    Opie::Ui::OTabWidget* TabWidget;
 #else
     QTabWidget* TabWidget;
 #endif

@@ -3,7 +3,7 @@
 
 
 #include <qdialog.h>
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
 class QVBoxLayout;
 class QPushButton;

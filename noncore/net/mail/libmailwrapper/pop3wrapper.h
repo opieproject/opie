@@ -17,14 +17,14 @@ public:
     POP3wrapper( POP3account *a );
     virtual ~POP3wrapper();
     /* mailbox will be ignored */
-    virtual void listMessages(const QString & mailbox, QValueList<Opie::OSmartPointer<RecMail> > &target );
-    virtual QValueList<Opie::OSmartPointer<Folder> >* listFolders();
+    virtual void listMessages(const QString & mailbox, QValueList<Opie::Core::OSmartPointer<RecMail> > &target );
+    virtual QValueList<Opie::Core::OSmartPointer<Folder> >* listFolders();
     /* mailbox will be ignored */
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX");
 
     virtual void deleteMail(const RecMailP&mail);
     virtual void answeredMail(const RecMailP&mail);
-    virtual int deleteAllMail(const Opie::OSmartPointer<Folder>&);
+    virtual int deleteAllMail(const Opie::Core::OSmartPointer<Folder>&);
 
     virtual RecBody fetchBody( const RecMailP &mail );
     virtual encodedString* fetchRawBody(const RecMailP&mail);

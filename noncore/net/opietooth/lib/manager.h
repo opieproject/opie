@@ -11,7 +11,7 @@
 #include "remotedevice.h"
 #include "services.h"
 
-class OProcess;
+namespace Opie {namespace Core {class Opie::Core::OProcess;}}
 namespace OpieTooth {
     class Device;
     /** Manager manages a blueZ device (hci0 for example)
@@ -142,30 +142,30 @@ namespace OpieTooth {
 	void signalStrength( const QString& mac, const QString& strengh );
 
 private slots:
-        void slotProcessExited(OProcess* );
+        void slotProcessExited(Opie::Core::OProcess* );
 
-        void slotSDPExited(OProcess*);
-        void slotSDPOut(OProcess*, char*, int);
+        void slotSDPExited(Opie::Core::OProcess*);
+        void slotSDPOut(Opie::Core::OProcess*, char*, int);
 
-        void slotHCIExited(OProcess* );
-        void slotHCIOut(OProcess*, char*, int );
+        void slotHCIExited(Opie::Core::OProcess* );
+        void slotHCIOut(Opie::Core::OProcess*, char*, int );
 
-        void slotConnectionExited(OProcess* );
-        void slotConnectionOutput(OProcess*, char*, int );
+        void slotConnectionExited(Opie::Core::OProcess* );
+        void slotConnectionOutput(Opie::Core::OProcess*, char*, int );
 
-	void slotSignalStrengthOutput( OProcess*, char*, int );
-	void slotSignalStrengthExited( OProcess* );
+	void slotSignalStrengthOutput( Opie::Core::OProcess*, char*, int );
+	void slotSignalStrengthExited( Opie::Core::OProcess* );
     private:
         Services::ValueList parseSDPOutput( const QString& );
         RemoteDevice::ValueList parseHCIOutput( const QString& );
         ConnectionState::ValueList parseConnections( const QString& );
-        OProcess *m_hcitool;
-        OProcess *m_sdp; // not only one
+        Opie::Core::OProcess *m_hcitool;
+        Opie::Core::OProcess *m_sdp; // not only one
         QString m_device;
 	QMap<QString, int> m_signalStrength;
         QMap<QString, QString> m_out;
         QMap<QString, QString> m_devices;
-	QMap<OProcess*, QString> m_signalMac;
+	QMap<Opie::Core::OProcess*, QString> m_signalMac;
         QString m_hcitoolCon;
     };
 };

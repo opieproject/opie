@@ -3,7 +3,7 @@
 
 
 #include <qdialog.h>
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
 class QVBoxLayout;
 class QPushButton;
@@ -23,7 +23,7 @@ namespace OpieTooth {
 
     private slots:
         void connectToDevice();
-        void fillOutPut( OProcess* pppDial, char* cha, int len );
+        void fillOutPut( Opie::Core::OProcess* pppDial, char* cha, int len );
     protected:
         QVBoxLayout* layout;
         QLineEdit* cmdLine;

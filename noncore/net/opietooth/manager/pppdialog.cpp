@@ -5,10 +5,12 @@
 #include <qlineedit.h>
 #include <qlayout.h>
 #include <qlabel.h>
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
 using namespace OpieTooth;
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 PPPDialog::PPPDialog( QWidget* parent,  const char* name, bool modal, WFlags fl, const QString& device )
     : QDialog( parent, name, modal, fl ) {
 
@@ -52,7 +54,7 @@ void PPPDialog::connectToDevice() {
     QString connectScript = "/etc/ppp/peers/" + cmdLine->text();
     OProcess* pppDial = new OProcess();
     *pppDial << "pppd" << m_device << "call" << connectScript;
-    connect( pppDial, SIGNAL(receivedStdout(OProcess*,char*,int) ),
+    connect( pppDial, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int) ),
                 this, SLOT(fillOutPut(OProcess*,char*,int) ) );
      if (!pppDial->start(OProcess::DontCare, OProcess::AllOutput) ) {
         qWarning("could not start");

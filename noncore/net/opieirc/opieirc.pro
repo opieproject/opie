@@ -18,7 +18,7 @@ SOURCES		= ircchannel.cpp ircconnection.cpp \
               ircquerytab.cpp ircsettings.cpp ircmisc.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS        += -lqpe -lopie
+LIBS        += -lqpe -lopieui2 -lqtaux2
 
 TARGET	= opieirc
 

@@ -18,6 +18,7 @@
 #include <qpopupmenu.h>
 #include <qfile.h>
 
+using namespace Opie::Ui;
 AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&desc,const QString&file,
                        const QString&fsize,int num,const QValueList<int>&path)
         : QListViewItem(parent,after),_partNum(num)
@@ -220,7 +221,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
         {
             MimeTypes types;
             types.insert( "all", "*" );
-            QString str = Opie::OFileDialog::getSaveFileName( 1,
+            QString str = OFileDialog::getSaveFileName( 1,
                           "/", item->text( 2 )  , types, 0 );
 
             if( !str.isEmpty() )

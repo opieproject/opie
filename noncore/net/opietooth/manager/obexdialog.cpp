@@ -9,11 +9,14 @@
 
 #include <qpe/resource.h>
 
-#include <opie/oprocess.h>
-#include <opie/ofiledialog.h>
+#include <opie2/oprocess.h>
+#include <opie2/ofiledialog.h>
 
 using namespace OpieTooth;
 
+using namespace Opie::Core;
+using namespace Opie::Ui;
+using namespace Opie::Core;
 ObexDialog::ObexDialog( QWidget* parent,  const char* name, bool modal, WFlags fl, const QString& device )
     : QDialog( parent, name, modal, fl ) {
 

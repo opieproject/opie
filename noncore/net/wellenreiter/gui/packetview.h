@@ -23,7 +23,7 @@ class QString;
 class QSpinBox;
 class QLabel;
 class QTextView;
-class OPacket;
+namespace Opie {namespace Net {class Opie::Net::OPacket;}}
 
 class PacketView: public QFrame
 {
@@ -31,7 +31,7 @@ class PacketView: public QFrame
   public:
     PacketView( QWidget * parent = 0, const char * name = "PacketView", WFlags f = 0 );
 
-    void add( OPacket* p );
+    void add( Opie::Net::OPacket* p );
     const QString getLog() const;
     void clear();
 
@@ -41,7 +41,7 @@ class PacketView: public QFrame
     QLabel* _label;
     QLabel* _list;
     QTextView* _hex;
-    QList<OPacket> _packets;
+    QList<Opie::Net::OPacket> _packets;
 
 };
 

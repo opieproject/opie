@@ -21,6 +21,7 @@
 #define UTF16LOEND      0xDFFFUL
 
 
+using namespace Opie::Core;
 Attachment::Attachment( DocLnk lnk )
 {
     doc = lnk;
@@ -155,7 +156,7 @@ QString IMAPFolder::decodeFolderName( const QString &name )
 }
 
 Mail::Mail()
-    :Opie::ORefCount(),name(""), mail(""), to(""), cc(""), bcc(""), reply(""), subject(""), message("")
+    :Opie::Core::ORefCount(),name(""), mail(""), to(""), cc(""), bcc(""), reply(""), subject(""), message("")
 {
 }
 

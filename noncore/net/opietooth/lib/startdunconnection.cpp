@@ -4,6 +4,8 @@
 using namespace OpieTooth;
 
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 StartDunConnection::StartDunConnection() {
     m_dunConnect = 0l;
     setConnectionType();
@@ -39,9 +41,9 @@ void StartDunConnection::start()  {
     m_dunConnect = new OProcess();
     *m_dunConnect << "dund" << "--listen" << "--connect"  << m_mac;
 
-    connect( m_dunConnect, SIGNAL( processExited(OProcess*) ) ,
+    connect( m_dunConnect, SIGNAL( processExited(Opie::Core::OProcess*) ) ,
              this, SLOT( slotExited(OProcess*) ) );
-    connect( m_dunConnect, SIGNAL( receivedStdout(OProcess*,char*,int) ),
+    connect( m_dunConnect, SIGNAL( receivedStdout(Opie::Core::OProcess*,char*,int) ),
              this, SLOT( slotStdOut(OProcess*,char*,int) ) );
     if (!m_dunConnect->start( OProcess::NotifyOnExit, OProcess::AllOutput) ) {
         qWarning( "could not start" );

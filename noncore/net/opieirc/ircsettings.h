@@ -25,7 +25,9 @@
 #include <qdialog.h>
 #include <qlineedit.h>
 
+namespace Opie {
 class OColorButton;
+}
 
 class IRCSettings : public QDialog {
     Q_OBJECT
@@ -36,13 +38,13 @@ protected slots:
     void accept();
 protected:
     Config       *m_config;
-    OColorButton *m_background;
-    OColorButton *m_text;
-    OColorButton *m_error;
-    OColorButton *m_self;
-    OColorButton *m_server;
-    OColorButton *m_other;
-    OColorButton *m_notification;
+    Opie::OColorButton *m_background;
+    Opie::OColorButton *m_text;
+    Opie::OColorButton *m_error;
+    Opie::OColorButton *m_self;
+    Opie::OColorButton *m_server;
+    Opie::OColorButton *m_other;
+    Opie::OColorButton *m_notification;
     QLineEdit    *m_lines;
 };
 

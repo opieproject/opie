@@ -46,6 +46,12 @@ const int col_firstseen = 8;
 const int col_lastseen = 9;
 const int col_location = 10;
 
+using namespace Opie::Net;
+using namespace Opie::Ui;
+using namespace Opie::Net;
+using namespace Opie::Ui;
+using namespace Opie::Ui;
+using namespace Opie::Net;
 MScanListView::MScanListView( QWidget* parent, const char* name )
               :OListView( parent, name )
 {

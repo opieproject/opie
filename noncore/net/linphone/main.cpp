@@ -14,9 +14,11 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <opie/oapplicationfactory.h>
+#include <opie2/oapplicationfactory.h>
 #include "mainwindow.h"
 
+
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )
 
 

@@ -36,8 +36,8 @@ protected:
     mailmime *buildFilePart(const QString&filename,const QString&mimetype,const QString&content);
     mailmime *buildTxtPart(const QString&str );
     mailimf_mailbox *newMailbox(const QString&name,const QString&mail );
-    mailimf_fields *createImfFields(const Opie::OSmartPointer<Mail> &mail );
-    mailmime *createMimeMail(const Opie::OSmartPointer<Mail>&mail );
+    mailimf_fields *createImfFields(const Opie::Core::OSmartPointer<Mail> &mail );
+    mailmime *createMimeMail(const Opie::Core::OSmartPointer<Mail>&mail );
     clist *createRcptList( mailimf_fields *fields );
 
     static const char* USER_AGENT;

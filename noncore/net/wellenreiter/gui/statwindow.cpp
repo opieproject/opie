@@ -16,6 +16,9 @@
 #include "statwindow.h"
 #include <opie2/olistview.h>
 
+using namespace Opie::Ui;
+using namespace Opie::Ui;
+using namespace Opie::Ui;
 MStatWindow::MStatWindow( QWidget * parent, const char * name, WFlags f )
            :QVBox( parent, name, f )
 {

@@ -13,6 +13,8 @@
 #include <libmailwrapper/abstractmail.h>
 #include <libmailwrapper/mailtypes.h>
 
+using namespace Opie::Core;
+using namespace Opie::Ui;
 ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool modal, WFlags flags )
     : ComposeMailUI( parent, name, modal, flags )
 {
@@ -160,7 +162,7 @@ void ComposeMail::slotAdjustColumns()
 
 void ComposeMail::addAttachment()
 {
-    DocLnk lnk = Opie::OFileDialog::getOpenFileName( 1, "/" );
+    DocLnk lnk = OFileDialog::getOpenFileName( 1, "/" );
     if ( !lnk.name().isEmpty() ) {
         Attachment *att = new Attachment( lnk );
         (void) new AttachViewItem( attList, att );
@@ -188,7 +190,7 @@ void ComposeMail::accept()
     qDebug( "Sending Mail with " +
             smtpAccounts.at( smtpAccountBox->currentItem() )->getAccountName() );
 #endif
-    Opie::OSmartPointer<Mail> mail=new Mail;
+    Opie::Core::OSmartPointer<Mail> mail=new Mail;
 
     SMTPaccount *smtp = smtpAccounts.at( smtpAccountBox->currentItem() );
     mail->setMail(fromBox->currentText());
@@ -236,7 +238,7 @@ void ComposeMail::reject()
                                      tr("No"),QString::null,0,1);
 
     if (yesno == 0) {
-        Opie::OSmartPointer<Mail> mail=new Mail();
+        Opie::Core::OSmartPointer<Mail> mail=new Mail();
         mail->setMail(fromBox->currentText());
         mail->setTo( toLine->text() );
         mail->setName(senderNameEdit->text());

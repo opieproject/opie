@@ -37,7 +37,7 @@ public:
     ComposeMail( Settings *s, QWidget *parent = 0, const char *name = 0, bool modal = false, WFlags flags = 0 );
     virtual ~ComposeMail();
 
-    void reEditMail(const Opie::OSmartPointer<RecMail>&current);
+    void reEditMail(const Opie::Core::OSmartPointer<RecMail>&current);
 
 public slots:
     void slotAdjustColumns();

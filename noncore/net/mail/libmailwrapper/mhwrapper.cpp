@@ -8,6 +8,9 @@
 #include <qpe/global.h>
 #include <opie2/oprocess.h>
 
+using namespace Opie::Core;
+using namespace Opie::Core;
+using namespace Opie::Core;
 MHwrapper::MHwrapper(const QString & mbox_dir,const QString&mbox_name)
     : Genericwrapper(),MHPath(mbox_dir),MHName(mbox_name)
 {
@@ -60,7 +63,7 @@ MHwrapper::~MHwrapper()
     clean_storage();
 }
 
-void MHwrapper::listMessages(const QString & mailbox, QValueList<Opie::OSmartPointer<RecMail> > &target )
+void MHwrapper::listMessages(const QString & mailbox, QValueList<Opie::Core::OSmartPointer<RecMail> > &target )
 {
     init_storage();
     if (!m_storage) {
@@ -76,9 +79,9 @@ void MHwrapper::listMessages(const QString & mailbox, QValueList<Opie::OSmartPoi
     Global::statusMessage(tr("Mailbox has %1 mail(s)").arg(target.count()));
 }
 
-QValueList<Opie::OSmartPointer<Folder> >* MHwrapper::listFolders()
+QValueList<Opie::Core::OSmartPointer<Folder> >* MHwrapper::listFolders()
 {
-    QValueList<Opie::OSmartPointer<Folder> >* folders = new QValueList<Opie::OSmartPointer<Folder> >();
+    QValueList<Opie::Core::OSmartPointer<Folder> >* folders = new QValueList<Opie::Core::OSmartPointer<Folder> >();
     /* this is needed! */
     if (m_storage) mailstorage_disconnect(m_storage);
     init_storage();
@@ -317,9 +320,9 @@ int MHwrapper::deleteMbox(const FolderP&tfolder)
     command << cmd.latin1();
     OProcess *process = new OProcess();
 
-    connect(process, SIGNAL(processExited(OProcess*)),
+    connect(process, SIGNAL(processExited(Opie::Core::OProcess*)),
             this, SLOT( processEnded(OProcess*)));
-    connect(process, SIGNAL( receivedStderr(OProcess*,char*,int)),
+    connect(process, SIGNAL( receivedStderr(Opie::Core::OProcess*,char*,int)),
             this, SLOT( oprocessStderr(OProcess*,char*,int)));
 
     *process << command;

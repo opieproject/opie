@@ -23,7 +23,7 @@ class SMTPwrapper : public Generatemail
 public:
     SMTPwrapper(SMTPaccount * aSmtp);
     virtual ~SMTPwrapper();
-    void sendMail(const Opie::OSmartPointer<Mail>& mail,bool later=false );
+    void sendMail(const Opie::Core::OSmartPointer<Mail>& mail,bool later=false );
     bool flushOutbox();
 
     static progressMailSend*sendProgress;
@@ -50,7 +50,7 @@ protected:
 
     void storeMail(mailmime*mail, const QString&box);
 
-    int sendQueuedMail(AbstractMail*wrap,const Opie::OSmartPointer<RecMail>&which);
+    int sendQueuedMail(AbstractMail*wrap,const Opie::Core::OSmartPointer<RecMail>&which);
     void storeFailedMail(const char*data,unsigned int size, const char*failuremessage);
 
     int m_queuedMail;

@@ -18,21 +18,21 @@
 
 #ifdef QWS
 #include <opie2/odevice.h>
-using namespace Opie;
 #endif
 
 class QTimerEvent;
 class QPixmap;
-class OPacket;
-class OWaveLanManagementPacket;
-class OWaveLanControlPacket;
-class OWaveLanDataPacket;
-class OEthernetPacket;
-class OARPPacket;
-class OMacAddress;
-class OIPPacket;
-class OPacketCapturer;
-class OWirelessNetworkInterface;
+namespace Opie {namespace Net {class Opie::Net::OPacket;}}
+namespace Opie {namespace Net {class Opie::Net::OWaveLanManagementPacket;}}
+namespace Opie {namespace Net {class Opie::Net::OWaveLanControlPacket;}}
+namespace Opie {namespace Net {class Opie::Net::OWaveLanDataPacket;}}
+namespace Opie {namespace Net {class Opie::Net::OEthernetPacket;}}
+namespace Opie {namespace Net {class Opie::Net::OARPPacket;}}
+namespace Opie {namespace Net {class Opie::Net::OMacAddress;}}
+namespace Opie {namespace Net {class Opie::Net::OIPPacket;}}
+namespace Opie {namespace Net {class Opie::Net::OPacket;}}
+namespace Opie {namespace Net {class Opie::Net::OWirelessNetworkInterface;}}
+namespace Opie {namespace Net {class Opie::Net::OPacketCapturer;}}
 class PacketView;
 class WellenreiterConfigWindow;
 class MLogWindow;
@@ -62,7 +62,7 @@ class Wellenreiter : public WellenreiterBase {
     void initialTimer();
 
     void channelHopped(int);
-    void receivePacket(OPacket*);
+    void receivePacket(Opie::Net::OPacket*);
     void startClicked();
     void stopClicked();
 
@@ -73,28 +73,28 @@ class Wellenreiter : public WellenreiterBase {
     void stoppedSniffing();
 
   private:
-    void handleManagementFrame( OPacket* p, OWaveLanManagementPacket* );
-    void handleManagementFrameBeacon( OPacket* p, OWaveLanManagementPacket* );
-    void handleManagementFrameProbeRequest( OPacket* p, OWaveLanManagementPacket* );
-    void handleManagementFrameProbeResponse( OPacket* p, OWaveLanManagementPacket* );
-    void handleControlFrame( OPacket* p, OWaveLanControlPacket* control );
-    void handleWlanData( OPacket* p, OWaveLanDataPacket* data, OMacAddress& from, OMacAddress& to );
-    void handleEthernetData( OPacket* p, OEthernetPacket* data, OMacAddress& from, OMacAddress& to );
-    void handleARPData( OPacket* p, OARPPacket* arp, OMacAddress& from, OMacAddress& to );
-    void handleIPData( OPacket* p, OIPPacket* ip, OMacAddress& from, OMacAddress& to );
-    void handleNotification( OPacket* p );
-    void doAction( const QString& action, const QString& protocol, OPacket* p );
-    QObject* childIfToParse( OPacket* p, const QString& protocol );
-    bool checkDumpPacket( OPacket* p );
+    void handleManagementFrame( Opie::Net::OPacket* p, Opie::Net::OWaveLanManagementPacket* );
+    void handleManagementFrameBeacon( Opie::Net::OPacket* p, Opie::Net::OWaveLanManagementPacket* );
+    void handleManagementFrameProbeRequest( Opie::Net::OPacket* p, Opie::Net::OWaveLanManagementPacket* );
+    void handleManagementFrameProbeResponse( Opie::Net::OPacket* p, Opie::Net::OWaveLanManagementPacket* );
+    void handleControlFrame( Opie::Net::OPacket* p, Opie::Net::OWaveLanControlPacket* control );
+    void handleWlanData( Opie::Net::OPacket* p, Opie::Net::OWaveLanDataPacket* data, Opie::Net::OMacAddress& from, Opie::Net::OMacAddress& to );
+    void handleEthernetData( Opie::Net::OPacket* p, Opie::Net::OEthernetPacket* data, Opie::Net::OMacAddress& from, Opie::Net::OMacAddress& to );
+    void handleARPData( Opie::Net::OPacket* p, Opie::Net::OARPPacket* arp, Opie::Net::OMacAddress& from, Opie::Net::OMacAddress& to );
+    void handleIPData( Opie::Net::OPacket* p, Opie::Net::OIPPacket* ip, Opie::Net::OMacAddress& from, Opie::Net::OMacAddress& to );
+    void handleNotification( Opie::Net::OPacket* p );
+    void doAction( const QString& action, const QString& protocol, Opie::Net::OPacket* p );
+    QObject* childIfToParse( Opie::Net::OPacket* p, const QString& protocol );
+    bool checkDumpPacket( Opie::Net::OPacket* p );
 
   private:
     #ifdef QWS
-    OSystem _system;                // Opie Operating System identifier
+    Opie::Core::OSystem _system;                // Opie Operating System identifier
     #endif
 
     QString dumpname;
-    OWirelessNetworkInterface* iface;
-    OPacketCapturer* pcap;
+    Opie::Net::OWirelessNetworkInterface* iface;
+    Opie::Net::OPacketCapturer* pcap;
     WellenreiterConfigWindow* configwindow;
     GPS* gps;
 

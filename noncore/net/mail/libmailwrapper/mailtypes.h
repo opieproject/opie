@@ -29,7 +29,7 @@ class AbstractMail;
    make a request to the mailwrapper with this class as parameter to
    get the body. Same words for the attachments.
 */
-class RecMail:public Opie::ORefCount
+class RecMail:public Opie::Core::ORefCount
 {
 public:
     RecMail();
@@ -81,7 +81,7 @@ protected:
     void copy_old(const RecMail&old);
 };
 
-typedef Opie::OSmartPointer<RecMail> RecMailP;
+typedef Opie::Core::OSmartPointer<RecMail> RecMailP;
 typedef QMap<QString,QString> part_plist_t;
 
 class RecPart

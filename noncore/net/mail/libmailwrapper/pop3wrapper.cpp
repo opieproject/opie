@@ -10,6 +10,7 @@
 /* we don't fetch messages larger than 5 MB */
 #define HARD_MSG_SIZE_LIMIT 5242880
 
+using namespace Opie::Core;
 POP3wrapper::POP3wrapper( POP3account *a )
 : Genericwrapper() {
     account = a;
@@ -93,7 +94,7 @@ RecBody POP3wrapper::fetchBody( const RecMailP &mail ) {
     return body;
 }
 
-void POP3wrapper::listMessages(const QString &, QValueList<Opie::OSmartPointer<RecMail> > &target )
+void POP3wrapper::listMessages(const QString &, QValueList<Opie::Core::OSmartPointer<RecMail> > &target )
 {
     login();
     if (!m_pop3)
@@ -176,8 +177,8 @@ void POP3wrapper::logout()
 }
 
 
-QValueList<Opie::OSmartPointer<Folder> >* POP3wrapper::listFolders() {
-    QValueList<Opie::OSmartPointer<Folder> >* folders = new QValueList<FolderP>();
+QValueList<Opie::Core::OSmartPointer<Folder> >* POP3wrapper::listFolders() {
+    QValueList<Opie::Core::OSmartPointer<Folder> >* folders = new QValueList<FolderP>();
     FolderP inb=new Folder("INBOX","/");
     folders->append(inb);
     return folders;

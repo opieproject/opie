@@ -3,14 +3,16 @@
 #include "irctab.h"
 
 /* OPIE */
-#include <opie/ocolorbutton.h>
-#include <opie/otabwidget.h>
+#include <opie2/ocolorbutton.h>
+#include <opie2/otabwidget.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
 #include <qvalidator.h>
 #include <qwhatsthis.h>
 
+using namespace Opie;
+using namespace Opie::Ui;
 IRCSettings::IRCSettings(QWidget* parent, const char* name, bool modal, WFlags) : QDialog(parent, name, modal, WStyle_ContextHelp)
 {
     setCaption(tr("Settings") );

@@ -2,6 +2,7 @@
 #include <libetpan/libetpan.h>
 #include "mailtypes.h"
 
+using namespace Opie::Core;
 Genericwrapper::Genericwrapper()
     : AbstractMail()
 {
@@ -387,7 +388,7 @@ QStringList Genericwrapper::parseInreplies(mailimf_in_reply_to * in_replies)
     return res;
 }
 
-void Genericwrapper::parseList(QValueList<Opie::OSmartPointer<RecMail> > &target,mailsession*session,const QString&mailbox,bool mbox_as_to)
+void Genericwrapper::parseList(QValueList<Opie::Core::OSmartPointer<RecMail> > &target,mailsession*session,const QString&mailbox,bool mbox_as_to)
 {
     int r;
     mailmessage_list * env_list = 0;

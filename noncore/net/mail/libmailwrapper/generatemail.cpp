@@ -5,6 +5,7 @@
 
 #include <qt.h>
 
+using namespace Opie::Core;
 const char* Generatemail::USER_AGENT="OpieMail v0.6";
 
 Generatemail::Generatemail()
@@ -279,7 +280,7 @@ mailimf_mailbox *Generatemail::newMailbox(const QString&name, const QString&mail
                                 strdup( mail.latin1() ) );
 }
 
-mailimf_fields *Generatemail::createImfFields(const Opie::OSmartPointer<Mail>&mail )
+mailimf_fields *Generatemail::createImfFields(const Opie::Core::OSmartPointer<Mail>&mail )
 {
     mailimf_fields *fields = NULL;
     mailimf_field *xmailer = NULL;
@@ -399,7 +400,7 @@ mailimf_fields *Generatemail::createImfFields(const Opie::OSmartPointer<Mail>&ma
     return fields;
 }
 
-mailmime *Generatemail::createMimeMail(const Opie::OSmartPointer<Mail> &mail ) {
+mailmime *Generatemail::createMimeMail(const Opie::Core::OSmartPointer<Mail> &mail ) {
     mailmime *message, *txtPart;
     mailimf_fields *fields;
     int err;

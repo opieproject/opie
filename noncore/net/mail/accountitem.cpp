@@ -15,6 +15,7 @@
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
 
+using namespace Opie::Core;
 #define SETPIX(x) if (!account->getOffline()) {setPixmap( 0,x);} else {setPixmap( 0, PIXMAP_OFFLINE );}
 /**
  * POP3 Account stuff
@@ -49,7 +50,7 @@ AbstractMail *POP3viewItem::getWrapper()
     return wrapper;
 }
 
-void POP3viewItem::refresh(QValueList<Opie::OSmartPointer<RecMail> > & )
+void POP3viewItem::refresh(QValueList<Opie::Core::OSmartPointer<RecMail> > & )
 {
     refresh();
 }
@@ -1042,7 +1043,7 @@ AccountViewItem::AccountViewItem( QListViewItem *parent , QListViewItem*after  )
     init();
 }
 
-AccountViewItem::AccountViewItem( const Opie::OSmartPointer<Folder>&folderInit,QListViewItem *parent , QListViewItem*after  )
+AccountViewItem::AccountViewItem( const Opie::Core::OSmartPointer<Folder>&folderInit,QListViewItem *parent , QListViewItem*after  )
        :QListViewItem( parent,after ),folder(folderInit)
 {
     init();

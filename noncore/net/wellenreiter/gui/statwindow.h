@@ -19,7 +19,7 @@
 #include <qvbox.h>
 
 class QString;
-class OListView;
+namespace Opie {namespace Ui {class Opie::Ui::OListView;}}
 
 class MStatWindow: public QVBox
 {
@@ -35,7 +35,7 @@ class MStatWindow: public QVBox
     void updateCounter( const QString&, int );
 
   protected:
-    OListView* table;
+    Opie::Ui::OListView* table;
 
 };
 

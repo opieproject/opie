@@ -38,6 +38,9 @@ using namespace Opie;
  *  Constructs a WellenreiterBase which is a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'
  */
+using namespace Opie::Ui;
+using namespace Opie::Ui;
+using namespace Opie::Ui;
 WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {

@@ -51,6 +51,11 @@ using namespace Opie;
 
 #include <unistd.h>
 
+using namespace Opie::Ui;
+using namespace Opie::Net;
+using namespace Opie::Ui;
+using namespace Opie::Net;
+using namespace Opie::Net;
 WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * name, WFlags f )
            :QMainWindow( parent, name, f )
 {

@@ -13,6 +13,7 @@
 #include <libetpan/libetpan.h>
 
 
+using namespace Opie::Core;
 progressMailSend*SMTPwrapper::sendProgress = 0;
 
 SMTPwrapper::SMTPwrapper(SMTPaccount * aSmtp )
@@ -312,7 +313,7 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size )
     return result;
 }
 
-void SMTPwrapper::sendMail(const Opie::OSmartPointer<Mail>&mail,bool later )
+void SMTPwrapper::sendMail(const Opie::Core::OSmartPointer<Mail>&mail,bool later )
 {
     mailmime * mimeMail;
 

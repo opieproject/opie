@@ -3,7 +3,7 @@
 
 #include <qobject.h>
 #include "connection.h"
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
 namespace OpieTooth {
 
@@ -27,11 +27,11 @@ namespace OpieTooth {
 	QString m_name;
 	QString m_mac;
 	ConnectionType m_connectionType;
-	OProcess* m_dunConnect;
+	Opie::Core::OProcess* m_dunConnect;
 	
     private slots:
-	void slotExited( OProcess* proc );
-                void slotStdOut( OProcess* proc, char* chars, int len );
+	void slotExited( Opie::Core::OProcess* proc );
+                void slotStdOut( Opie::Core::OProcess* proc, char* chars, int len );
     };
 
  

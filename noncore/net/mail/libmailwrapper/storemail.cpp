@@ -9,6 +9,7 @@
 
 #include <stdlib.h>
 
+using namespace Opie::Core;
 Storemail::Storemail(Account*aAccount,const QString&aFolder)
     : Generatemail()
 {
@@ -49,7 +50,7 @@ Storemail::~Storemail()
 {
 }
 
-int Storemail::storeMail(const Opie::OSmartPointer<Mail>&mail)
+int Storemail::storeMail(const Opie::Core::OSmartPointer<Mail>&mail)
 {
     if (!wrapper) return 0;
     int ret = 1;

@@ -1,14 +1,15 @@
 #include "mailtypes.h"
 #include <stdlib.h>
 
+using namespace Opie::Core;
 RecMail::RecMail()
-    :Opie::ORefCount(),subject(""),date(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_size(0),msg_flags(7)
+    :Opie::Core::ORefCount(),subject(""),date(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_size(0),msg_flags(7)
 {
     init();
 }
 
 RecMail::RecMail(const RecMail&old)
-    :Opie::ORefCount(),subject(""),date(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_flags(7)
+    :Opie::Core::ORefCount(),subject(""),date(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_flags(7)
 {
     init();
     copy_old(old);

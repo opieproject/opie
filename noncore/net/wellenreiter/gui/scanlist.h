@@ -28,7 +28,7 @@
 class QString;
 class MScanListItem;
 
-class MScanListView: public OListView
+class MScanListView: public Opie::Ui::OListView
 {
   Q_OBJECT
 
@@ -36,20 +36,20 @@ class MScanListView: public OListView
     MScanListView( QWidget* parent = 0, const char* name = 0 );
     virtual ~MScanListView();
 
-    virtual OListViewItem* childFactory();
+    virtual Opie::Ui::OListViewItem* childFactory();
     virtual void serializeTo( QDataStream& s ) const;
     virtual void serializeFrom( QDataStream& s );
 
   public slots:
-    void addNewItem( const QString& type, const QString&, const OMacAddress&, bool, int, int, const GpsLocation&, bool = false );
-    void addService( const QString& name, const OMacAddress& macaddr, const QString& ip );
+    void addNewItem( const QString& type, const QString&, const Opie::Net::OMacAddress&, bool, int, int, const GpsLocation&, bool = false );
+    void addService( const QString& name, const Opie::Net::OMacAddress& macaddr, const QString& ip );
 
-    void fromDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via );
-    void toDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via );
-    void WDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& viaFrom, const OMacAddress& viaTo );
-    void IBSStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via );
+    void fromDStraffic( const Opie::Net::OMacAddress& from, const Opie::Net::OMacAddress& to, const Opie::Net::OMacAddress& via );
+    void toDStraffic( const Opie::Net::OMacAddress& from, const Opie::Net::OMacAddress& to, const Opie::Net::OMacAddress& via );
+    void WDStraffic( const Opie::Net::OMacAddress& from, const Opie::Net::OMacAddress& to, const Opie::Net::OMacAddress& viaFrom, const Opie::Net::OMacAddress& viaTo );
+    void IBSStraffic( const Opie::Net::OMacAddress& from, const Opie::Net::OMacAddress& to, const Opie::Net::OMacAddress& via );
 
-    void identify( const OMacAddress&, const QString& ipaddr );
+    void identify( const Opie::Net::OMacAddress&, const QString& ipaddr );
 
     void contextMenuRequested( QListViewItem* item, const QPoint&, int );
 
@@ -58,13 +58,13 @@ class MScanListView: public OListView
     void joinNetwork( const QString&, const QString&, int, const QString& );
 
   protected:
-    void addIfNotExisting( MScanListItem* parent, const OMacAddress& addr, const QString& type = "station" );
+    void addIfNotExisting( MScanListItem* parent, const Opie::Net::OMacAddress& addr, const QString& type = "station" );
 
 };
 
 //****************************** MScanListItem ****************************************************************
 
-class MScanListItem: public OListViewItem
+class MScanListItem: public Opie::Ui::OListViewItem
 {
   public:
     MScanListItem::MScanListItem( QListView* parent,
@@ -106,7 +106,7 @@ class MScanListItem: public OListViewItem
     void setManufacturer( const QString& manufacturer );
     void setLocation( const QString& location );
 
-    virtual OListViewItem* childFactory();
+    virtual Opie::Ui::OListViewItem* childFactory();
     virtual void serializeTo( QDataStream& s ) const;
     virtual void serializeFrom( QDataStream& s );
 
@@ -125,7 +125,7 @@ class MScanListItem: public OListViewItem
 
 /*
 
-class MScanListViewFactory : public OListViewFactory
+class MScanListViewFactory : public Opie::Ui::OListViewFactory
 {
 public:
     virtual QListView* listViewFactory();

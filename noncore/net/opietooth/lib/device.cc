@@ -1,12 +1,14 @@
 
 #include <signal.h>
 
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
 #include "device.h"
 
 using namespace OpieTooth;
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 namespace {
   int parsePid( const QCString& par ){
     int id=0;
@@ -47,11 +49,11 @@ void Device::attach(){
     *m_process << "hciattach";
     *m_process << "-p";
     *m_process << m_device << m_mode << m_speed;
-    connect(m_process, SIGNAL( processExited(OProcess*) ),
+    connect(m_process, SIGNAL( processExited(Opie::Core::OProcess*) ),
 	    this, SLOT( slotExited(OProcess* ) ) );
-    connect(m_process, SIGNAL( receivedStdout(OProcess*, char*, int) ),
+    connect(m_process, SIGNAL( receivedStdout(Opie::Core::OProcess*, char*, int) ),
 	    this, SLOT(slotStdOut(OProcess*,char*,int ) ) );
-    connect(m_process, SIGNAL(receivedStderr(OProcess*, char*, int ) ),
+    connect(m_process, SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int ) ),
 	    this, SLOT(slotStdErr(OProcess*,char*,int) ) );
     if(!m_process->start(OProcess::NotifyOnExit, OProcess::AllOutput ) ){
       qWarning("Could not start" );
@@ -96,7 +98,7 @@ void Device::slotExited( OProcess* proc)
 	m_hci = new OProcess( );
 	*m_hci << "hciconfig";
 	*m_hci << "hci0 up";
-	connect(m_hci, SIGNAL( processExited(OProcess*) ),
+	connect(m_hci, SIGNAL( processExited(Opie::Core::OProcess*) ),
 		this, SLOT( slotExited(OProcess* ) ) );
 	if(!m_hci->start() ){
 	  qWarning("could not start" );

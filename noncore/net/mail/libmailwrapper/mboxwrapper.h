@@ -16,15 +16,15 @@ public:
     virtual ~MBOXwrapper();
 
     virtual void listMessages(const QString & mailbox, QValueList<RecMailP>&target );
-    virtual QValueList<Opie::OSmartPointer<Folder> >* listFolders();
+    virtual QValueList<Opie::Core::OSmartPointer<Folder> >* listFolders();
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX");
 
     virtual void deleteMail(const RecMailP&mail);
     virtual void answeredMail(const RecMailP&mail);
 
-    virtual int createMbox(const QString&folder,const Opie::OSmartPointer<Folder>&f=0,
+    virtual int createMbox(const QString&folder,const Opie::Core::OSmartPointer<Folder>&f=0,
         const QString&d="",bool s=false);
-    virtual int deleteMbox(const Opie::OSmartPointer<Folder>&);
+    virtual int deleteMbox(const Opie::Core::OSmartPointer<Folder>&);
 
     virtual void storeMessage(const char*msg,size_t length, const QString&folder);
 
@@ -33,7 +33,7 @@ public:
 
     virtual encodedString* fetchRawBody(const RecMailP&mail);
     virtual void deleteMails(const QString & FolderName,const QValueList<RecMailP> &target);
-    virtual int deleteAllMail(const Opie::OSmartPointer<Folder>&);
+    virtual int deleteAllMail(const Opie::Core::OSmartPointer<Folder>&);
     virtual MAILLIB::ATYPE getType()const;
     virtual const QString&getName()const;
 
