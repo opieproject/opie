@@ -41,6 +41,10 @@ public:
     void selectLocalPackage( const QString &pkg );
     void updateData();
     void searchForPackage( bool findNext );
+    void showOnlyUninstalledPackages( bool val );
+    void showOnlyInstalledPackages( bool val );
+    void showUpgradedPackages( bool val );
+    
 private:
     DataManager *dataMgr;
 
@@ -56,6 +60,9 @@ private:
     QString lastSearchText;
 
     bool showJumpTo;
+    bool showUninstalledPkgs;
+    bool showInstalledPkgs;
+    bool showUpgradedPkgs;
     int timerId;
 
     void timerEvent ( QTimerEvent * );

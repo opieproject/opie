@@ -36,8 +36,18 @@ public:
 private:
     DataManager *mgr;
 
+    QMenuBar *menu;
+    QPopupMenu *help;
+    QPopupMenu *settings;
+    QPopupMenu *edit;
+    QPopupMenu *filter;
 	QWidgetStack *stack;
-	NetworkPackageManager *networkPkgWindow;
+
+    NetworkPackageManager *networkPkgWindow;
+
+    int mnuShowUninstalledPkgsId;
+    int mnuShowInstalledPkgsId;
+    int mnuShowUpgradedPkgsId;
 
 public slots:
     void setDocument( const QString &doc );
@@ -46,5 +56,8 @@ public slots:
     void repeatSearchForPackage();
     void displayAbout();
     void displaySettings();
+    void filterUninstalledPackages();
+    void filterInstalledPackages();
+    void filterUpgradedPackages();
 };
 #endif

@@ -37,22 +37,27 @@ MainWindow :: MainWindow( QWidget *p, char *name )
     setCaption( "AQPkg - Package Manager" );
 
     // Create our menu
-	QPopupMenu *help = new QPopupMenu( this );
-
-	help->insertItem( "&General", this, SLOT(displayHelp()), Qt::CTRL+Qt::Key_H );
+    help = new QPopupMenu( this );
+	help->insertItem( "&General", this, SLOT(displayHelp()), Qt::CTRL+Qt::Key_G );
 	help->insertItem( "&About", this, SLOT(displayAbout()), Qt::CTRL+Qt::Key_A );
 
-    QPopupMenu *settings = new QPopupMenu( this );
+    settings = new QPopupMenu( this );
 	settings->insertItem( "&Settings", this, SLOT(displaySettings()), Qt::CTRL+Qt::Key_S );
 
-    QPopupMenu *edit = new QPopupMenu( this );
-	edit->insertItem( "&Find", this, SLOT(searchForPackage()), Qt::CTRL+Qt::Key_F );
-	edit->insertItem( "&Find Next", this, SLOT(repeatSearchForPackage()), Qt::CTRL+Qt::Key_R );
+    edit = new QPopupMenu( this );
+	edit->insertItem( "&Find", this, SLOT(searchForPackage()), Qt::CTRL+Qt::Key_I );
+	edit->insertItem( "Find &Next", this, SLOT(repeatSearchForPackage()), Qt::CTRL+Qt::Key_N );
 
+    filter = new QPopupMenu( this );
+	mnuShowUninstalledPkgsId = filter->insertItem( "Show &Uninstalled Packages", this, SLOT(filterUninstalledPackages()), Qt::CTRL+Qt::Key_U );
+	mnuShowInstalledPkgsId = filter->insertItem( "Show In&stalled Packages", this, SLOT(filterInstalledPackages()), Qt::CTRL+Qt::Key_S );
+	mnuShowUpgradedPkgsId = filter->insertItem( "Show U&pdated Packages", this, SLOT(filterUpgradedPackages()), Qt::CTRL+Qt::Key_P );
+    
 	// Create the main menu
-	QMenuBar *menu = menuBar();  //new QMenuBar( this );
+	menu = menuBar();  //new QMenuBar( this );
 	menu->insertItem( "&Settings", settings );
 	menu->insertItem( "&Edit", edit );
+	menu->insertItem( "&Filter", filter );
 	menu->insertItem( "&Help", help );
 
     mgr = new DataManager();
@@ -108,4 +113,72 @@ void MainWindow :: repeatSearchForPackage()
 void MainWindow :: displayAbout()
 {
     QMessageBox::about( this, "About AQPkg", VERSION_TEXT );
+}
+
+
+void MainWindow :: filterUninstalledPackages()
+{
+    bool val;
+    if ( filter->isItemChecked( mnuShowUninstalledPkgsId ) )
+    {
+        val = false;
+        filter->setItemChecked( mnuShowUninstalledPkgsId, false );
+    }
+    else
+    {
+        val = true;
+        filter->setItemChecked( mnuShowUninstalledPkgsId, true );
+    }
+
+    filter->setItemChecked( mnuShowInstalledPkgsId, false );
+    networkPkgWindow->showOnlyInstalledPackages( false );
+    filter->setItemChecked( mnuShowUpgradedPkgsId, false );
+    networkPkgWindow->showUpgradedPackages( false );
+    
+    networkPkgWindow->showOnlyUninstalledPackages( val );
+    
+}
+
+void MainWindow :: filterInstalledPackages()
+{
+    bool val;
+    if ( filter->isItemChecked( mnuShowInstalledPkgsId ) )
+    {
+        val = false;
+        filter->setItemChecked( mnuShowInstalledPkgsId, false );
+    }
+    else
+    {
+        val = true;
+        filter->setItemChecked( mnuShowInstalledPkgsId, true );
+    }
+
+    filter->setItemChecked( mnuShowUninstalledPkgsId, false );
+    networkPkgWindow->showOnlyUninstalledPackages( false );
+    filter->setItemChecked( mnuShowUpgradedPkgsId, false );
+    networkPkgWindow->showUpgradedPackages( false );
+   
+    networkPkgWindow->showOnlyInstalledPackages( val );
+}
+
+void MainWindow :: filterUpgradedPackages()
+{
+    bool val;
+    if ( filter->isItemChecked( mnuShowUpgradedPkgsId ) )
+    {
+        val = false;
+        filter->setItemChecked( mnuShowUpgradedPkgsId, false );
+    }
+    else
+    {
+        val = true;
+        filter->setItemChecked( mnuShowUpgradedPkgsId, true );
+    }
+
+    filter->setItemChecked( mnuShowUninstalledPkgsId, false );
+    networkPkgWindow->showOnlyUninstalledPackages( false );
+    filter->setItemChecked( mnuShowInstalledPkgsId, false );
+    networkPkgWindow->showOnlyInstalledPackages( false );
+
+    networkPkgWindow->showUpgradedPackages( val );
 }

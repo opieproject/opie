@@ -56,15 +56,18 @@ NetworkPackageManager::NetworkPackageManager( DataManager *dataManager, QWidget 
         cfg.setGroup( "settings" );
         currentlySelectedServer = cfg.readEntry( "selectedServer", "local" );
         showJumpTo = cfg.readBoolEntry( "showJumpTo", "true" );
+
 #endif
+
+    showUninstalledPkgs = false;
+    showInstalledPkgs = false;
+    showUpgradedPkgs = false;
     
 
     initGui();
     setupConnections();
 
     updateData();
-//    progressDlg = 0;
-//    timerId = startTimer( 100 );
 }
 
 NetworkPackageManager::~NetworkPackageManager()
@@ -75,11 +78,8 @@ void NetworkPackageManager :: timerEvent ( QTimerEvent * )
 {
     killTimer( timerId );
 
-//    showProgressDialog();
     // Add server names to listbox
     updateData();
-
-//    progressDlg->hide();
 }
 
 void NetworkPackageManager :: updateData()
@@ -223,9 +223,26 @@ void NetworkPackageManager :: serverSelected( int )
 
         QString text = "";
 
-		// If the local server, only display installed packages
-		if ( serverName == LOCAL_SERVER && !it->isInstalled() )
-			continue;
+        // Apply show only uninstalled packages filter
+        if ( showUninstalledPkgs && it->isInstalled() )
+            continue;
+
+        // Apply show only installed packages filter
+        if ( showInstalledPkgs && !it->isInstalled() )
+            continue;
+
+        // Apply show only new installed packages filter
+        if ( showUpgradedPkgs )
+        {
+            if ( !it->isInstalled() ||
+                 compareVersions( it->getInstalledVersion(), it->getVersion() ) != 1 )
+                continue;
+        }
+
+        // If the local server, only display installed packages
+        if ( serverName == LOCAL_SERVER && !it->isInstalled() )
+            continue;
+
 
         text += it->getPackageName();
         if ( it->isInstalled() )
@@ -768,4 +785,22 @@ void NetworkPackageManager :: searchForPackage( bool findNext )
             }
         }   
     }
+}
+
+void NetworkPackageManager :: showOnlyUninstalledPackages( bool val )
+{
+    showUninstalledPkgs = val;
+    serverSelected( -1 );
+}
+
+void NetworkPackageManager :: showOnlyInstalledPackages( bool val )
+{
+    showInstalledPkgs = val;
+    serverSelected( -1 );
+}
+
+void NetworkPackageManager :: showUpgradedPackages( bool val )
+{
+    showUpgradedPkgs = val;
+    serverSelected( -1 );
 }
