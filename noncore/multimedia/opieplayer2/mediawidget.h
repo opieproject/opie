@@ -44,7 +44,7 @@ public:
 
         Command command;
 
-        ButtonType type : 1;
+        ButtonType type; // this should be part of the bitfield but gcc2 is too buggy to support this :-(
         bool isHeld : 1;
         bool isDown : 1;
 
