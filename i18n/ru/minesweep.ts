@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Mine Sweep</source>
-        <translation type="unfinished"></translation>
+        <translation>Сапер</translation>
     </message>
 </context>
 </TS>

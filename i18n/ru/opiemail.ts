@@ -76,31 +76,31 @@
     </message>
     <message>
         <source>Sending mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправляю почту</translation>
     </message>
     <message>
         <source>No Receiver spezified</source>
-        <translation type="unfinished"></translation>
+        <translation>Не задан адресат</translation>
     </message>
     <message>
         <source>Store message</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить сообщение</translation>
     </message>
     <message>
         <source>Store message into drafts?</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить сообщение в черновиках?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Да</translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Нет</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>&lt;center&gt;Attachments will not be stored in &quot;Draft&quot; folder&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Вложение не будут сохранены в папке &quot;Черновики&quot;&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
@@ -276,11 +276,11 @@
     </message>
     <message>
         <source>ssh $SERVER exec</source>
-        <translation type="unfinished"></translation>
+        <translation>ssh $SERVER exec</translation>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished">Использовать защищенные сокеты:</translation>
+        <translation>Использовать защищенные сокеты:</translation>
     </message>
 </context>
 <context>
@@ -342,40 +342,42 @@
     <name>NNTPGroupsDlg</name>
     <message>
         <source>Subscribed newsgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Выписанные группы новостей</translation>
     </message>
 </context>
 <context>
     <name>NNTPGroupsUI</name>
     <message>
         <source>newsgroupslist</source>
-        <translation type="unfinished"></translation>
+        <translation>список групп новостей</translation>
     </message>
     <message>
         <source>Newsgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Группы новостей</translation>
     </message>
     <message>
         <source>List of groups from the server. On start, only subscribed groups are listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Список групп на сервере. При запуске, только выписанные группы будут показаны.</translation>
     </message>
     <message>
         <source>Groupfilter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр групп:</translation>
     </message>
     <message>
         <source>Enter a filter string here.
 Then hit &quot;get newsgroup list&quot; again and only groups starting 
 with that filter will be listet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите строку фильтра.
+Потом нажмите &quot;получить список групп новостей&quot; снова и только группы,
+начинающиеся с этой строки, будут показаны.</translation>
     </message>
     <message>
         <source>Get newsgroup list from server</source>
-        <translation type="unfinished"></translation>
+        <translation>Получить список групп новостей с сервера</translation>
     </message>
     <message>
         <source>Retrieve the list of groups from server</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить список групп новостей с сервера</translation>
     </message>
 </context>
 <context>
@@ -418,15 +420,15 @@ with that filter will be listet.</source>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Группы</translation>
     </message>
     <message>
         <source>Newsgroup</source>
-        <translation type="unfinished"></translation>
+        <translation>Группы новостей</translation>
     </message>
     <message>
         <source>Get newsgroup list from server</source>
-        <translation type="unfinished"></translation>
+        <translation>Получить список групп новостей с сервера</translation>
     </message>
 </context>
 <context>
@@ -484,15 +486,15 @@ with that filter will be listet.</source>
     </message>
     <message>
         <source>Define a smtp account first</source>
-        <translation type="unfinished"></translation>
+        <translation>Сначала укажите учетную запись SMTP</translation>
     </message>
     <message>
         <source>Read this posting</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочитать этот пост</translation>
     </message>
     <message>
         <source>Edit this mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка этого сообщения</translation>
     </message>
 </context>
 <context>
@@ -582,11 +584,11 @@ with that filter will be listet.</source>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished">Использовать защищенные сокеты:</translation>
+        <translation>Использовать защищенные сокеты:</translation>
     </message>
     <message>
         <source>ssh $SERVER exec</source>
-        <translation type="unfinished"></translation>
+        <translation>ssh $SERVER exec</translation>
     </message>
 </context>
 <context>
@@ -722,7 +724,7 @@ with that filter will be listet.</source>
     </message>
     <message>
         <source>Display image preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать предв. просмотр изображения</translation>
     </message>
 </context>
 <context>
@@ -772,7 +774,7 @@ with that filter will be listet.</source>
     <name>selectsmtp</name>
     <message>
         <source>Select SMTP Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите учетную запись SMTP</translation>
     </message>
 </context>
 <context>

@@ -3,129 +3,129 @@
     <name>NetworkEdit</name>
     <message>
         <source>Hostname needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо имя хоста</translation>
     </message>
     <message>
         <source>IPAddress needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходим IP адрес</translation>
     </message>
     <message>
         <source>Broadcast needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходим широковещательный адрес</translation>
     </message>
     <message>
         <source>Subnet mask needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Небходима маска подсети</translation>
     </message>
     <message>
         <source>IPAddress not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>IP адрес неверен</translation>
     </message>
     <message>
         <source>Subnet mask not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Маска сети неверна</translation>
     </message>
     <message>
         <source>Broadcast address not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Широковещательный адрес неверен</translation>
     </message>
     <message>
         <source>Gateway address not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес шлюза неверен</translation>
     </message>
     <message>
         <source>DNS1 address not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес DNS1 неверен</translation>
     </message>
     <message>
         <source>DNS2 address not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес DNS2 неверен</translation>
     </message>
 </context>
 <context>
     <name>NetworkGUI</name>
     <message>
         <source>Interface Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка интерфейса</translation>
     </message>
     <message>
         <source>Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка</translation>
     </message>
     <message>
         <source>Address from server</source>
-        <translation type="unfinished"></translation>
+        <translation>Адрес от сервера</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP адрес</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Маска подсети</translation>
     </message>
     <message>
         <source>First DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Первичный DNS</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Шлюз</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Широковещательный</translation>
     </message>
     <message>
         <source>Second DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Вторичный DNS</translation>
     </message>
     <message>
         <source>255.255.255.0</source>
-        <translation type="unfinished"></translation>
+        <translation>255.255.255.0</translation>
     </message>
     <message>
         <source>DHCP Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки DHCP</translation>
     </message>
     <message>
         <source>Send hostname</source>
-        <translation type="unfinished"></translation>
+        <translation>Посылать имя хоста</translation>
     </message>
     <message>
         <source>Extra commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Дополнительные команды</translation>
     </message>
     <message>
         <source>Pre-Up</source>
-        <translation type="unfinished"></translation>
+        <translation>До соединения</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Post-Up</source>
-        <translation type="unfinished"></translation>
+        <translation>После соединения</translation>
     </message>
     <message>
         <source>Pre-Down</source>
-        <translation type="unfinished"></translation>
+        <translation>До отключения</translation>
     </message>
     <message>
         <source>Post-Down</source>
-        <translation type="unfinished"></translation>
+        <translation>После отключения</translation>
     </message>
 </context>
 <context>
     <name>NetworkNetNode</name>
     <message>
         <source>IP Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка IP</translation>
     </message>
     <message>
         <source>&lt;p&gt;Sets up TCP/IP options.&lt;/p&gt;&lt;p&gt;Use this to configure the TCP/IP protocol&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Задает TCP/IP опции.&lt;/p&gt;&lt;p&gt;Используйте для настройки TCP/IP протокола&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>

@@ -3,34 +3,34 @@
     <name>VPNGUI</name>
     <message>
         <source>VPN</source>
-        <translation type="unfinished"></translation>
+        <translation>VPN</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <source>Start automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Запускать автоматически</translation>
     </message>
     <message>
         <source>Confirm before start</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтвердить перед запуском</translation>
     </message>
 </context>
 <context>
     <name>VPNNetNode</name>
     <message>
         <source>VPN Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>VPN соединение</translation>
     </message>
     <message>
         <source>&lt;p&gt;Configure private IP connection.&lt;/p&gt;&lt;p&gt;Defines Secure tunnels over non secure IP sessions&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Настроить частное IP соединение.&lt;/p&gt;&lt;p&gt;Устанавливает безопасные туннели поверх открытых IP сессий&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>

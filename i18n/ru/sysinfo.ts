@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Compare:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сравнить:</translation>
     </message>
 </context>
 <context>

@@ -3,34 +3,34 @@
     <name>ModemGUI</name>
     <message>
         <source>Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Модем</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <source>Start automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Запускать автоматически</translation>
     </message>
     <message>
         <source>Confirm before start</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтвердить перед запуском</translation>
     </message>
 </context>
 <context>
     <name>ModemNetNode</name>
     <message>
         <source>Dialup modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Телефонный модем</translation>
     </message>
     <message>
         <source>&lt;p&gt;Sets up a dialing procedures.&lt;/p&gt;&lt;p&gt;Use this to dial up over modems, ISDN, GSM, ...&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Настраивает процедуру дозвона.&lt;/p&gt;&lt;p&gt;Используйте для соединения через модемы, ISDN, GSM, ...&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>

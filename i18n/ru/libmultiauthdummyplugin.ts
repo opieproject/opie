@@ -3,11 +3,11 @@
     <name>DummyPlugin</name>
     <message>
         <source>&quot;Dummy&quot; &lt;br /&gt;demonstration plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;Холостой&quot; &lt;br /&gt;плагин для демонстрации</translation>
     </message>
     <message>
         <source>You can simulate the following outcomes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы можете симулировать следующие результаты:</translation>
     </message>
 </context>
 </TS>
