@@ -369,7 +369,8 @@ void OPimMainWindow::initBars( const QString &itemName ) {
     m_itemEditAction->setWhatsThis( tr( "Click here to edit the selected item." ) );
     m_itemEditAction->addTo( toolbar );
 
-    m_itemDuplicateAction = new QAction( tr( "Duplicate" ), QString::null, 0, m_itemMenuGroup1, 0 );
+    m_itemDuplicateAction = new QAction( tr( "Duplicate" ), Resource::loadPixmap( "copy" ),
+                                         QString::null, 0, m_itemMenuGroup1, 0 );
     connect( m_itemDuplicateAction, SIGNAL(activated()), this, SLOT(slotItemDuplicate()) );
     m_itemDuplicateAction->setWhatsThis( tr( "Click here to duplicate the selected item." ) );
     
