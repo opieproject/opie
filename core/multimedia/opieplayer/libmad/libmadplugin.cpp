@@ -17,6 +17,11 @@
 ** not clear to you.
 **
 **********************************************************************/
+#include <qapplication.h>
+#include <qpe/config.h>
+#include <qmessagebox.h>
+#include <qstring.h>
+
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
@@ -31,8 +36,7 @@
 #include <locale.h>
 #include <math.h>
 #include <assert.h>
-#include <qapplication.h>
-#include <qpe/config.h>
+
 
 // for network handling
 #include <netinet/in.h>
@@ -233,6 +237,7 @@ int LibMadPlugin::http_read_line(int tcp_sock, char *buf, int size) {
 }
 
 int LibMadPlugin::http_open(const QString& path ) {
+    qDebug("Open http");
     char *host;
     int port;
     char *request;
@@ -242,15 +247,21 @@ int LibMadPlugin::http_open(const QString& path ) {
     char c;
     char *arg =strdup(path.latin1());
 
-    /* Check for URL syntax */
-    if (strncmp(arg, "http://", strlen("http://")))
-        return (0);
+    QString errorMsg;
 
-    /* Parse URL */
+    /* Check for URL syntax */
+//     if (strncmp(arg, "http://", strlen("http://"))) {
+//         qDebug("Url syntax error");
+//         return (0);
+//     }
+
+    qDebug("Parse URL");
     port = 80;
     host = arg + strlen("http://");
-    if ((request = strchr(host, '/')) == NULL)
+    if ((request = strchr(host, '/')) == NULL) {
+        qDebug("Url syntax 2error %s", host);
         return (0);
+    }
     *request++ = 0;
 
     if (strchr(host, ':') != NULL)  /* port is specified */
@@ -259,10 +270,11 @@ int LibMadPlugin::http_open(const QString& path ) {
         *strchr(host, ':') = 0;
     }
 
-    /* Open a TCP socket */
-    if (!(tcp_sock = tcp_open(host, port)))
-    {
-        perror("http_open");
+    qDebug("Open a TCP socket");
+    if (!(tcp_sock = tcp_open(host, port)))  {
+       perror("http_open");
+       errorMsg="http_open "+(QString)strerror(errno);
+       QMessageBox::message("OPiePlayer",errorMsg);
         return (0);
     }
 
@@ -274,11 +286,12 @@ int LibMadPlugin::http_open(const QString& path ) {
     snprintf(http_request, sizeof(http_request), "GET /%s HTTP/1.0\r\n"
 /*  "User-Agent: Mozilla/2.0 (Win95; I)\r\n" */
              "Pragma: no-cache\r\n" "Host: %s\r\n" "Accept: */*\r\n" "\r\n", filename, host);
-
+    qDebug("send");
     send(tcp_sock, http_request, strlen(http_request), 0);
 
-    /* Parse server reply */
+    qDebug("Parse server reply");
 #if 0
+    qDebug("do 0");
     do
         read(tcp_sock, &c, sizeof(char));
     while (c != ' ');
@@ -312,7 +325,7 @@ int LibMadPlugin::http_open(const QString& path ) {
 
         if (strncmp(http_request, "Location:", 9) == 0)
         {
-            /* redirect */
+            qDebug("redirect");
             std::close(tcp_sock);
 
             http_request[strlen(http_request) - 1] = '\0';
@@ -322,7 +335,7 @@ int LibMadPlugin::http_open(const QString& path ) {
 
         if (strncmp(http_request, "ICY ", 4) == 0)
         {
-            /* This is icecast streaming */
+            qDebug(" This is icecast streaming");
             if (strncmp(http_request + 4, "200 ", 4))
             {
                 fprintf(stderr, "http_open: %s\n", http_request);
@@ -352,11 +365,16 @@ bool LibMadPlugin::open( const QString& path ) {
     d->flush = TRUE;
     info = QString( "" );
 
-    //qDebug( "Opening %s", path.latin1() );
+    qDebug( "Opening %s", path.latin1() );
 
-
+    bool isStream=FALSE;
     if (path.left( 4 ) == "http" ) {
         d->input.fd = http_open(path);
+        if(d->input.fd == 0) {
+            qDebug("http_open error");
+        }
+        isStream=TRUE;
+       qDebug("Opened ok");
 
     } else {
         d->input.path = path.latin1();
@@ -366,8 +384,10 @@ bool LibMadPlugin::open( const QString& path ) {
         qDebug("error opening %s", d->input.path );
   return FALSE;
     }
-
-    printID3Tags();
+    if(!isStream) {
+        qDebug("Print ID#tags");
+        printID3Tags();
+    }
 
 #if defined(HAVE_MMAP)
     struct stat stat;
@@ -395,8 +415,11 @@ bool LibMadPlugin::open( const QString& path ) {
 
     d->input.eof = 0;
 
+qDebug("about to mad_stream");
     mad_stream_init(&d->stream);
+qDebug("mad_frame");
     mad_frame_init(&d->frame);
+qDebug("mad_synth");
     mad_synth_init(&d->synth);
 
     return TRUE;
