@@ -42,6 +42,8 @@
 #include <qaction.h>
 #include <qpopupmenu.h>
 #include <qcursor.h>
+#include <qstringlist.h>
+#include <qmessagebox.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/fileselector.h>
@@ -134,6 +136,7 @@ OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString
   init();
   m_edit->setText( fileName );
 }
+
 void OFileSelector::initPics()
 {
   qWarning("init pics" );
@@ -151,7 +154,8 @@ void OFileSelector::initPics()
   pm2.setMask( pm2.createHeuristicMask( FALSE ) );
   m_pixmaps->insert("symlinkedlocked", pm2 );
 
-};
+}
+
 // let's initialize the gui
 /**
    --------------------
@@ -179,6 +183,7 @@ void OFileSelector::delItems()
     it.deleteCurrent();
   }
 }
+
 void OFileSelector::init()
 {
 
@@ -216,7 +221,7 @@ void OFileSelector::init()
     initializeYes();
  
   
-};
+}
 
 void OFileSelector::setYesCancelVisible( bool show )
 {
@@ -261,6 +266,7 @@ void OFileSelector::setPermissionBarVisible( bool show )
 
   updateLay();
 }
+
 void OFileSelector::setLineEditVisible( bool show )
 {
   if( show == m_shLne )
@@ -276,6 +282,7 @@ void OFileSelector::setLineEditVisible( bool show )
   }
   updateLay();
 }
+
 void OFileSelector::setChooserVisible( bool show )
 {
   if( show = m_shChooser )
@@ -289,24 +296,29 @@ void OFileSelector::setChooserVisible( bool show )
   }
   updateLay();
 }
+
 QCheckBox* OFileSelector::permissionCheckbox( )
 {
   return m_checkPerm;
 }
+
 void OFileSelector::setCaseSensetive( bool caSe )
 {
   m_case = caSe;
   reparse();
 }
+
 void OFileSelector::setShowFiles(bool files ){
   m_files = files;
   reparse();
 }
+
 void OFileSelector::setPopupMenu(QPopupMenu *pop )
 {
   //delete oldpopup;
   m_custom = pop;
 }
+
 bool OFileSelector::setPermission( ) const
 {
   if( m_checkPerm == 0 )
@@ -314,12 +326,14 @@ bool OFileSelector::setPermission( ) const
   else
     return m_checkPerm->isChecked(); 
 }
+
 void OFileSelector::setPermissionChecked( bool check )
 {
   if( m_checkPerm == 0 )
     return;
   m_checkPerm->setChecked( check );
 }
+
 QString OFileSelector::selectedName( )const
 {
   QString string;
@@ -334,11 +348,13 @@ QString OFileSelector::selectedName( )const
   }
   return string;
 }
+
 QStringList OFileSelector::selectedNames()const
 {
   QStringList list;
   return list;
 }
+
 DocLnk OFileSelector::selectedDocument( )const
 {
   DocLnk lnk;
@@ -385,6 +401,7 @@ void OFileSelector::updateLay()
   if( m_shPerm )
     m_checkPerm->setChecked(check );
 }
+
 // let's update the mimetypes. Use the current mimefilter for the 2nd QDir retrieve
 // insert QListViewItems with the right options
 bool OFileSelector::compliesMime(const QString &path, const QString &mime )
@@ -432,6 +449,7 @@ void OFileSelector::reparse()
     // set it to the current mimetype
     m_mimeCheck->setCurrentItem( indexByString( m_mimeCheck, currMime ) ); 
   };
+  
   QDir dir( m_currentDir );
   //dir.setFilter(-1 );
   int sort = QDir::Name | QDir::DirsFirst | QDir::Reversed;
@@ -497,18 +515,23 @@ void OFileSelector::reparse()
   }
   m_View->sort();
 }
+
 QString OFileSelector::directory()const
 {
-  return m_currentDir;
+    QDir d( m_currentDir);
+  return d.absPath();
 }
+
 int OFileSelector::fileCount()
 {
   return 0;
 }
+
 void OFileSelector::slotOk( )
 {
   emit ok();
 }
+
 void OFileSelector::slotCancel( )
 {
   emit cancel();
@@ -526,6 +549,7 @@ void OFileSelector::initializeName()
 
   m_lay->addLayout(m_boxName);
 }
+
 void OFileSelector::initializeYes()
 {
   m_ok = new QPushButton("&Save", this, "save" );
@@ -541,6 +565,7 @@ void OFileSelector::initializeYes()
     this, SLOT(slotCancel() )  );
 
 }
+
 void OFileSelector::initializeChooser()
 {
   m_boxView = new QHBoxLayout(this );
@@ -570,6 +595,7 @@ void OFileSelector::initializeChooser()
   connect( m_mimeCheck, SIGNAL(activated(const QString &) ),
      this, SLOT(slotMimeCheck(const QString & ) ) );
 }
+
 void OFileSelector::slotMimeCheck(const QString &view ){
   if(m_selector == NORMAL ){
     delete m_select;
@@ -645,7 +671,7 @@ void OFileSelector::slotViewCheck(const QString &view ){
     initializeListView();
     reparse();
   };
-};
+}
 
 
 void OFileSelector::updateMimes() // lets check which mode is active
@@ -665,7 +691,8 @@ void OFileSelector::updateMimes() // lets check which mode is active
     // should be allreday updatet
     ;
   }
-};
+}
+
 void OFileSelector::initializeListView()
 { 
   // just to make sure but clean it up better FIXME
@@ -693,6 +720,7 @@ void OFileSelector::initializeListView()
     m_boxToolbar = new QHBoxLayout( );
     m_boxToolbar->setAutoAdd( true );
     m_location = new QComboBox(m_pseudo );
+    connect( m_location, SIGNAL(activated(const QString &) ), this, SLOT( locationComboActivated(const QString & ) ) );
 
     m_up = new QPushButton(Resource::loadIconSet("up"),"", m_pseudo,"cdUpButton");
     m_up->setFixedSize( QSize( 20, 20 ) );
@@ -805,6 +833,7 @@ void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink )
        QString::number( info->size() ),
        dir, locked ); 
 }
+
 void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink  )
 {
   if(!m_dir )
@@ -842,6 +871,7 @@ void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink  )
 
   }
 }
+
 void OFileSelector::setShowDirs(bool dir )
 {
   m_dir = dir;
@@ -856,16 +886,19 @@ void OFileSelector::slotFileSelected(const QString &string )
   emit fileSelected( string );
   // do AppLnk stuff
 } 
+
 void OFileSelector::slotFileBridgeSelected( const DocLnk &lnk )
 {
   slotFileSelected(lnk.name() );
   emit fileSelected( lnk );
 }
+
 void OFileSelector::slotSelectionChanged() // get the current items
   // fixme
 {
   qWarning("selection changed" );
 }
+
 void OFileSelector::slotCurrentChanged(QListViewItem *item )
 {
   qWarning("current changed" );
@@ -885,6 +918,7 @@ void OFileSelector::slotCurrentChanged(QListViewItem *item )
     qWarning("mode not extended" );
   }
 }
+
 // either select or change dir
 void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &point, int )
 {
@@ -901,19 +935,20 @@ void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &
     if(!sel->isLocked() ){ // not locked either changedir or open
       QStringList str = QStringList::split("->", sel->text(1) );
       if(sel->isDir() ){
-  cd( sel->directory() + "/" + str[0] );     
-      }else{
-  qWarning("file" );
-  if(m_shLne )
-    m_edit->setText(str[0] );
-  emit fileSelected(str[0] );
-  // emit DocLnk need to do it
+        cd( sel->directory() + "/" + str[0] );
+      } else {
+          qWarning("file" );
+          if(m_shLne )
+              m_edit->setText(str[0] );
+          emit fileSelected(str[0] );
+            // emit DocLnk need to do it
       }
-    }else{
+    } else {
       qWarning( "locked" );
     }
   };
 }
+
 void OFileSelector::slotRightButton(int button, QListViewItem *item, const QPoint &, int )
 {
   if (item == 0 )
@@ -924,6 +959,7 @@ void OFileSelector::slotRightButton(int button, QListViewItem *item, const QPoin
   qWarning("right button" );
   slotContextMenu(item);
 }
+
 void OFileSelector::slotContextMenu(QListViewItem *item)
 {
   qWarning("context menu" );
@@ -975,21 +1011,37 @@ void OFileSelector::slotContextMenu(QListViewItem *item)
     menu.exec(QCursor::pos() );
   }
 }
+
 bool OFileSelector::cd(const QString &str )
 {
   qWarning(" dir %s", str.latin1() );
   QDir dir( str);
   if(dir.exists() ){
-    m_currentDir = str;
+    m_currentDir = dir.absPath();
     reparse();
     if(m_shTool ){
-      int count = m_location->count();
-      m_location->insertItem(str );
+        int count = m_location->count();
+        insertLocationPath( str ,count );
       m_location->setCurrentItem( count );
     }
     return true;
   }
   return false;
+}
+
+void  OFileSelector::insertLocationPath(const QString &currentPath, int count) {
+    QStringList pathList;
+    for(int i=0;i<count;i++) {
+        pathList << m_location->text(i);
+    }
+    if( pathList.grep( currentPath,TRUE).isEmpty() ) {
+        m_location->clear();
+        if( currentPath.left(2)=="//")
+            pathList.append( currentPath.right(currentPath.length()-1) );
+        else
+            pathList.append( currentPath );
+        m_location->insertStringList( pathList,-1);
+    }
 }
 
 void OFileSelector::slotChangedDir()
@@ -998,8 +1050,10 @@ void OFileSelector::slotChangedDir()
   if(sel->isDir() ){
     QStringList str = QStringList::split("->", sel->text(1) );
     cd( sel->directory() + "/" + str[0] );
+        
   }
 }
+
 void OFileSelector::slotOpen()
 {
   OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
@@ -1008,23 +1062,31 @@ void OFileSelector::slotOpen()
     slotFileSelected( str[0] );
   }
 }
+
 void OFileSelector::slotRescan()
 {
   reparse();
 }
+
 void OFileSelector::slotRename()
 {
   // rename inline
 }
+
 void OFileSelector::slotDelete()
 {
   qWarning("delete slot" );
   OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
   QStringList list = QStringList::split("->", sel->text(1) );
   if( sel->isDir() ){
-    QString str = QString::fromLatin1("rm -rf ") + list[0];
-    ::system(str.utf8().data() );
-  }else{
+      QString str = QString::fromLatin1("rm -rf ") + list[0]; //better safe than sorry
+    switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+list[0],
+                                  tr("Yes"),tr("No"),0,1,1) ) {
+          case 0:
+              ::system(str.utf8().data() );
+          break;
+    }
+  } else {
     QFile::remove( list[0] );
   }
   m_View->takeItem( sel );
@@ -1039,19 +1101,38 @@ void OFileSelector::cdUP()
     m_currentDir = dir.absPath();
     reparse();
     int count = m_location->count();
-    m_location->insertItem(m_currentDir );
-    m_location->setCurrentItem( count );
+    insertLocationPath( m_currentDir,count );
+    m_location->setCurrentItem( indexFromString(m_currentDir ));
+//this wont work in all instances
+      // FIXME
   }
 }
+
+int OFileSelector::indexFromString(const QString &str) {
+
+    for(int i=0;i<  m_location->count();i++) {
+        if(str == m_location->text(i))
+            return i;
+    }
+    return 0;
+}
+
 void OFileSelector::slotHome()
 {
   cd(QDir::homeDirPath() );
 }
+
 void OFileSelector::slotDoc()
 {
   cd(QDir::homeDirPath() + "/Documents" );
 }
+
 void OFileSelector::slotNavigate()
 {
 
+}
+
+void OFileSelector::locationComboActivated(const QString & file ) {
+    cd(file.left(file.find("<-",0,TRUE)));
+    reparse();
 }

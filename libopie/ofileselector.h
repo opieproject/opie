@@ -67,8 +67,8 @@ class QFileInfo;
 class OFileSelectorItem : public QListViewItem {
  public:
   OFileSelectorItem(QListView *view, const QPixmap &pixmap, const QString &path,
-		    const QString &date, const QString &size, const QString &mDir,
-		    bool isLocked=false, bool isDir=false ): QListViewItem(view) {
+        const QString &date, const QString &size, const QString &mDir,
+        bool isLocked=false, bool isDir=false ): QListViewItem(view) {
     setPixmap(0, pixmap );
     setText(1, path );
     setText(2, size );
@@ -94,11 +94,11 @@ class OFileSelectorItem : public QListViewItem {
     QString ke;
     if( id == 0 || id == 1 ){ // name
       if( dir ){
-	ke.append("0" );
-	ke.append( text(1) );
+  ke.append("0" );
+  ke.append( text(1) );
       }else{
-	ke.append("1" );
-	ke.append( text(1) );
+  ke.append("1" );
+  ke.append( text(1) );
       }
     }else if( id == 2 ){ // size
       return text(2);
@@ -190,6 +190,9 @@ class OFileSelector : public QWidget {
   void slotCancel();
   void slotViewCheck(const QString & );
   void slotMimeCheck(const QString & );
+  void locationComboActivated(const QString & );
+  void insertLocationPath(const QString &, int);
+  int indexFromString(const QString &);
  protected:
   void init();
   void updateMimes();
