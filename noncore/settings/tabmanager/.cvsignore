@@ -1,3 +1,7 @@
 moc_*
 *.moc
 Makefile*
+app.cpp
+app.h
+wait.cpp
+wait.h
