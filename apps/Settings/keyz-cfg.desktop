@@ -5,3 +5,5 @@ Icon=keyz-cfg
 Type=Application
 Name=keyz configurator
 Name[lv]=keyz konfigurators
+Name[ru]=Конфигуратор keyz
+Comment[ru]=Конфигурация встроенной клавиатуры

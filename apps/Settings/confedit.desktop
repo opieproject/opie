@@ -22,3 +22,5 @@ Name[nl]=Wijzig instellingen
 Comment[nl]=Wijzig de ~/Settings/*.conf bestanden
 Name[lv]=Conf Failu Redaktors
 Comment[lv]=Labo ~/Settings/*.conf failus
+Name[ru]=Правка конфигурации
+Comment[ru]=Редактор для ~/Settings/*.conf файлов

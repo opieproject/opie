@@ -24,3 +24,5 @@ Name[nl]=Systeemtijd
 Comment[nl]=Synchroniseer de systeemtijd met NTP
 Name[lv]=Datums/Laiks
 Comment[lv]=Uzstādīt Datumu un Laiku no tīkla
+Name[ru]=Дата/время
+Comment[ru]=Установить дату и время из сети (по NTP)
