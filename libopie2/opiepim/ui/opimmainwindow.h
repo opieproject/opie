@@ -134,6 +134,7 @@ protected:
     void setItemDeleteEnabled( bool enable );
     void setItemBeamEnabled( bool enable );
     void setConfigureEnabled( bool enable );
+    void setShowCategories( bool show );
 
 private slots:
     void appMessage( const QCString&, const QByteArray& );

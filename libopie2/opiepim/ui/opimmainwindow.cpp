@@ -294,6 +294,11 @@ void OPimMainWindow::setConfigureEnabled( bool enable ) {
     m_configureAction->setEnabled( enable );
 }
 
+void OPimMainWindow::setShowCategories( bool show ) {
+    show ? m_catSelect->show()
+         : m_catSelect->hide();
+}
+
 void OPimMainWindow::initBars( const QString &itemName ) {
     QString itemStr = itemName.lower();
 
