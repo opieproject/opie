@@ -32,15 +32,19 @@
 */
 
 /* OPIE */
-
 #include <opie2/opcap.h>
 
 /* QT */
-
 #include <qapplication.h> // don't use oapplication here (will decrease reusability in other projects)
 #include <qsocketnotifier.h>
 #include <qobjectlist.h>
 
+/* SYSTEM */
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+/* LOCAL */
 #include "udp_ports.h"
 
 /*======================================================================================
@@ -196,7 +200,7 @@ OEthernetPacket::OEthernetPacket( const unsigned char* end, const struct ether_h
     switch ( type() )
     {
         case ETHERTYPE_IP: new OIPPacket( end, (const struct iphdr*) (data+1), this ); break;
-        case ETHERTYPE_ARP: { qDebug( "OPacket::OPacket(): Received Ethernet Packet : Type = ARP" ); break; }
+        case ETHERTYPE_ARP: new OARPPacket( end, (const struct myarphdr*) (data+1), this ); break;
         case ETHERTYPE_REVARP: { qDebug( "OPacket::OPacket(): Received Ethernet Packet : Type = RARP" ); break; }
         default: qDebug( "OPacket::OPacket(): Received Ethernet Packet : Type = UNKNOWN" );
     }
@@ -1129,6 +1133,23 @@ int OPacketCapturer::fileno() const
         return -1;
     }
 }
+
+
+OPacket* OPacketCapturer::next( int time )
+{
+    fd_set fds;
+    struct timeval tv;
+    FD_ZERO( &fds );
+    FD_SET( pcap_fileno( _pch ), &fds );
+    tv.tv_sec = time / 1000;
+    tv.tv_usec = time % 1000;
+    int retval = select( 1, &fds, NULL, NULL, &tv);
+    if ( retval > 0 ) // clear to read!
+        return next();
+    else
+        return 0;
+}
+
 
 OPacket* OPacketCapturer::next()
 {

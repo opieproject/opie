@@ -605,6 +605,11 @@ class OPacketCapturer : public QObject
      */
     OPacket* next();
     /**
+     * @returns the next @ref OPacket from the packet capturer, if
+     * one arrives within @a time milliseconds.
+     */
+    OPacket* next( int time );
+    /**
      * Open the packet capturer to capture packets in live-mode from @a interface.
      */
     bool open( const QString& interface );

@@ -931,10 +931,16 @@ QString OWlanNGMonitoringInterface::name() const
 }
 
 
-void OWlanNGMonitoringInterface::setChannel( int )
+void OWlanNGMonitoringInterface::setChannel( int c )
 {
-    // wlan-ng devices automatically switch channels when in monitor mode
-    // NOTE: The above note no longer seems to be true for recent driver versions!
+    //NOTE: Older wlan-ng drivers automatically hopped channels while lnxreq_wlansniff=true. Newer ones don't.
+
+    QString enable = "true"; //_if->monitorMode() ? "true" : "false";
+    QString prism = _prismHeader ? "true" : "false";
+    QString cmd;
+    cmd.sprintf( "$(which wlanctl-ng) %s lnxreq_wlansniff channel=%d enable=%s prismheader=%s",
+                 (const char*) _if->name(), c+1, (const char*) enable, (const char*) prism );
+    system( cmd );
 }
 
 
