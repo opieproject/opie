@@ -724,36 +724,39 @@ void AdvancedFm::showFileMenu() {
         curApp = Remote_View->currentItem()->text(0);
     }
 
-    MimeType mt( curApp );
-    const AppLnk* app = mt.application();
-    QFile fi(curApp);
+     MimeType mt( curApp );
 
-    QPopupMenu *m = new QPopupMenu(0);
-    QPopupMenu *n = new QPopupMenu(0);
-//    QPopupMenu *o = new QPopupMenu(0);
+     const AppLnk* app = mt.application();
 
-    m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
-    if ( !QFileInfo(fi).isDir() ) {
-//    m->insertSeparator();
-//         m->insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
-//     } else {
+     QFile fi(curApp);
 
-        if ( app )
-            m->insertItem( app->pixmap(), tr( "Open in "
-                                              + app->name() ), this, SLOT( runThis() ) );
-        else if( QFileInfo(fi).isExecutable() )
-            m->insertItem( Resource::loadPixmap( app->name()), tr( "Execute" ), this, SLOT( runThis() ) );
+     QPopupMenu *m = new QPopupMenu(0);
+     QPopupMenu *n = new QPopupMenu(0);
+     //    QPopupMenu *o = new QPopupMenu(0);
 
-        m->insertItem( Resource::loadPixmap( "txt" ), tr( "Open as text" ),this, SLOT( runText() ) );
-    }
+     m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
+    
+     if ( QFileInfo(fi).isDir() ) {
+       m->insertSeparator();
+       m->insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
+     } else {
 
-    m->insertItem(tr("Actions"),n);
-    if(isLocalView)
-        n->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
-    else
-        n->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
+       if ( app )
+         m->insertItem( app->pixmap(), tr( "Open in "
+                                           + app->name() ), this, SLOT( runThis() ) );
+       else if( QFileInfo(fi).isExecutable() ) //damn opie doesnt like this
+         m->insertItem( /*Resource::loadPixmap( app->name()),*/ tr( "Execute" ), this, SLOT( runThis() ) );
 
-    n->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
+       m->insertItem( Resource::loadPixmap( "txt" ), tr( "Open as text" ),this, SLOT( runText() ) );
+     }
+
+     m->insertItem(tr("Actions"),n);
+     if(isLocalView)
+       n->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
+     else
+       n->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
+
+     n->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
 
     n->insertSeparator();
     
