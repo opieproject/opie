@@ -173,7 +173,7 @@ void FolderWidget::slotMenuActivated(int itemid)
 		Folder folder = (((FolderWidgetItem *)currentItem())->folder());
 		_rescanAccount = folder.topFolder().account();
 
-		folder.topFolder().handler()->iList("", "*");
+		folder.topFolder().handler()->iList(_rescanAccount.pathPrefix(), "*");
 		connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPList(IMAPResponse &)));
 	}
 }
@@ -256,7 +256,7 @@ void FolderWidget::slotIMAPDelete(IMAPResponse &response)
 
 		_rescanAccount = _createFolder.topFolder().account();
 
-		_createFolder.topFolder().handler()->iList(".", "*");
+		_createFolder.topFolder().handler()->iList(_rescanAccount.pathPrefix(), "*");
 		connect(_createFolder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPList(IMAPResponse &)));
 	} else {
 		QMessageBox::warning(this, tr("Error"), tr("<p>Delete failed. (Server said: %1)</p>").arg(response.statusResponse().comment()), tr("Ok"));
@@ -272,7 +272,7 @@ void FolderWidget::slotIMAPCreate(IMAPResponse &response)
 
 		_rescanAccount = _createFolder.topFolder().account();
 
-		_createFolder.topFolder().handler()->iList(".", "*");
+		_createFolder.topFolder().handler()->iList(_rescanAccount.pathPrefix(), "*");
 		connect(_createFolder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPList(IMAPResponse &)));
 	} else {
 		QMessageBox::warning(this, tr("Error"), tr("<p>The folder could not be created. (Server said: %1)</p>").arg(response.statusResponse().comment()), tr("Ok"));
@@ -298,10 +298,19 @@ void FolderWidget::slotIMAPList(IMAPResponse &response)
 
 		QValueList<IMAPResponseLIST>::Iterator it;
 		QValueList<IMAPResponseLIST> lists = response.LIST();
-		for (it = lists.begin(); it != lists.end(); it++) {
+        bool inbox_found = false;
+		for (it = lists.begin(); it != lists.end(); ++it) {
 			t << (*it).folderSeparator() << "\n";
 			t << (*it).folder() << "\n";
+            if ((*it).folder().upper() == "INBOX") {
+                inbox_found=true;
+            }
 		}
+        if (!inbox_found) {
+            it = lists.begin();
+            t << (*it).folderSeparator() << "\n";
+            t << "INBOX" << "\n";
+        }
 
 		f.close();
 
@@ -311,4 +320,3 @@ void FolderWidget::slotIMAPList(IMAPResponse &response)
 		QMessageBox::warning(this, tr("Error"), tr("<p>Couldn't retrieve the folder list. (Server said: %1)</p>").arg(response.statusResponse().comment()), tr("Ok"));
 	}
 }
-

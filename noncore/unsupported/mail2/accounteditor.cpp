@@ -64,6 +64,7 @@ void AccountEditor::accept()
 	_account.setBcc(bcc->text());
 	_account.setReplyTo(replyTo->text());
 	_account.setSignature(signature->text());
+    _account.setPathprefix(prefixEdit->text());
 
 	QDialog::accept();
 }
@@ -93,5 +94,6 @@ void AccountEditor::fillValues()
 	bcc->setText(_account.bcc());
 	replyTo->setText(_account.replyTo());
 	signature->setText(_account.signature());
+    prefixEdit->setText(_account.pathPrefix());
 }
 

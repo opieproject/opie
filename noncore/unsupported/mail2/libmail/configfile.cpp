@@ -40,6 +40,7 @@ ConfigFile::ConfigFile() : QObject()
 		account.setBcc(config->readEntry("Bcc"));
 		account.setReplyTo(config->readEntry("ReplyTo"));
 		account.setSignature(config->readEntry("Signature").replace(QRegExp("<br>"), "\n"));
+        account.setPathprefix(config->readEntry("Prefix"));
 
 		_accounts.append(account);
 	}
@@ -77,6 +78,7 @@ void ConfigFile::updateAccount(Account account)
 	config->writeEntry("Bcc", account.bcc());
 	config->writeEntry("ReplyTo", account.replyTo());
 	config->writeEntry("Signature", account.signature().replace(QRegExp("\\n"), "<br>"));
+    config->writeEntry("Prefix",account.pathPrefix());
 
 	config->write();
 }

@@ -43,6 +43,7 @@ public:
 	void setBcc(QString bcc) { _bcc = bcc; }
 	void setReplyTo(QString replyTo) { _replyTo = replyTo; }
 	void setSignature(QString signature) { _signature = signature; }
+    void setPathprefix(QString prefix) {_pathPrefix=prefix;}
 
 	QString accountName() { return _accountName; }
 
@@ -68,9 +69,10 @@ public:
 	QString bcc() { return _bcc; }
 	QString replyTo() { return _replyTo; }
 	QString signature() { return _signature; }
+    QString pathPrefix() {return _pathPrefix;}
 
 private:
-	QString _accountName, _name, _email, _org, _imapServer, _smtpServer, _user, _pass, _cc, _bcc, _replyTo, _imapPort, _smtpPort, _signature, _smtpSslPort, _imapSslPort;
+	QString _accountName, _name, _email, _org, _imapServer, _smtpServer, _user, _pass, _cc, _bcc, _replyTo, _imapPort, _smtpPort, _signature, _smtpSslPort, _imapSslPort,_pathPrefix;
 	bool _dateField, _msgIdField, _defaultCc, _defaultBcc, _defaultRep, _smtpssl, _imapssl;
 
 };
