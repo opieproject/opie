@@ -5,10 +5,12 @@
 QString Null_String((const char*) 0);
 
 // Implementation of KeyNames
-static struct {
+struct Key_Names_t {
 	int key;
 	char *name;
-} Key_Names[] = {
+};
+
+static const Key_Names_t Key_Names[] = {
 	{ 32, "Space" },
 	{ 39, "Apostrophe" },
 	{ 44, "Comma" },
@@ -105,10 +107,12 @@ const QString& KeyNames::find(int k) {
 }
 
 // Implementation of ModifierNames
-struct {
+struct Modifier_Names_t {
 	int value;
 	char* name;
-} Modifier_Names[] = {
+};
+
+static const Modifier_Names_t Modifier_Names[] = {
 	{ 8, "Shift" },
 	{ 16, "Control" },
 	{ 32, "Alt" },
@@ -159,14 +163,16 @@ const QString& ModifierNames::find(int k) {
 
 // Implementation of KeycodeNames
 
-struct {
+struct Keycode_Names_t {
 	char* name;
 	int keycode;
-} Keycode_Names[] = {
+};
+
+static const Keycode_Names_t Keycode_Names[] = {
 	{ "Escape", 0x1000 },
 	{ "Tab", 0x1001 },
 	{ "Backtab", 0x1002 },
-	{ "Backspace", 0x1003 }, 
+	{ "Backspace", 0x1003 },
 	{ "BackSpace", 0x1003 },
 	{ "Return", 0x1004 },
 	{ "Enter", 0x1005 },
@@ -181,9 +187,9 @@ struct {
 	{ "Up", 0x1013 },
 	{ "Right", 0x1014 },
 	{ "Down", 0x1015 },
-	{ "Prior", 0x1016 }, 
-	{ "PageUp", 0x1016 }, 
-	{ "Next", 0x1017 }, 
+	{ "Prior", 0x1016 },
+	{ "PageUp", 0x1016 },
+	{ "Next", 0x1017 },
 	{ "PageDown", 0x1017 },
 	{ "Shift", 0x1020 },
 	{ "Control", 0x1021 },

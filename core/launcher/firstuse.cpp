@@ -61,14 +61,15 @@ using namespace Opie::Core;
 #endif
 
 
-struct {
-    bool enabled;
+struct settingsTable_t {
+    bool enabled : 1;
     const char *app;
     const char *start;
     const char *stop;
     const char *desc;
-}
-settingsTable [] =
+};
+
+static settingsTable_t settingsTable [] =
 {
     { FALSE, "language", "raise()", "accept()", // No tr
 	QT_TR_NOOP("Language") },

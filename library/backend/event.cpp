@@ -399,7 +399,7 @@ int Event::dayOfWeek( char day )
 {
     int dayOfWeek = 1;
     char i = Event::MON;
-    while ( !( i & day ) && i <= Event::SUN ) {
+    while ( !( i & day ) && i <= static_cast<char>(Event::SUN) ) {
 	i <<= 1;
 	++dayOfWeek;
     }

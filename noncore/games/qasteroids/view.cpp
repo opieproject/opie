@@ -55,13 +55,14 @@
 #define M_PI 3.141592654
 #endif
 
-struct
+struct kas_animations_t
 {
     int id;
     const char *path;
     int frames;
-}
-kas_animations [] =
+};
+
+static const kas_animations_t kas_animations [] =
 {
 //    { ID_ROCK_LARGE,       "rock1/rock1\%1.png",       32 },
     { ID_ROCK_MEDIUM,      "rock2/rock2\%1.png",       32 },

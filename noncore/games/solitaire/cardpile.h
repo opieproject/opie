@@ -20,6 +20,8 @@
 #ifndef CARD_PILE_H
 #define CARD_PILE_H
 
+#include "card.h"
+
 
 #include <qpoint.h>
 #include <qlist.h>

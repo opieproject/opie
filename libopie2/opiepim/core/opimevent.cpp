@@ -70,7 +70,7 @@ int OCalendarHelper::dayOfWeek( char day )
 {
     int dayOfWeek = 1;
     char i = OPimRecurrence::MON;
-    while ( !( i & day ) && i <= OPimRecurrence::SUN )
+    while ( !( i & day ) && i <= static_cast<char>(OPimRecurrence::SUN) )
     {
         i <<= 1;
         ++dayOfWeek;
