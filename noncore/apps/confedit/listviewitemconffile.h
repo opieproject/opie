@@ -22,14 +22,15 @@ class ListViewItemConfFile : public ListViewItemConf  {
 public:
 	ListViewItemConfFile(QFileInfo *file, QListView *parent=0);
 	~ListViewItemConfFile();
-  void parseFile();
 	QString fileName();
   void save();
   virtual void displayText();
   virtual bool revertable();
   virtual void revert();
   virtual void remove();
+  virtual void expand();
   QString backupFileName();
+  void parseFile();
 protected:
 private:
 	bool _valid;

@@ -18,16 +18,20 @@ class EditWidget : public QWidget
     Q_OBJECT
 
 public:
+		enum{ Entry, Group, File, Nothing};
+
     EditWidget( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~EditWidget();
 
 		QLabel *TextLabelKey;
     QLabel *TextLabelValue;
+    QLabel *TextLabelGroup;
+    QLabel *TextLabelFileName;
     QLabel *TextFileName;
     QLineEdit *LineEditGroup;
     QLineEdit *LineEditKey;
     QLineEdit *LineEditValue;
-    void isKey(bool h);
+    void layoutType(int t);
 protected:
     QGridLayout* EditWidgetLayout;
 

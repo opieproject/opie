@@ -24,6 +24,8 @@ ListViewConfDir::ListViewConfDir(QString settingsPath, QWidget *parent, const ch
 	if (!confDir.isReadable())
  		QMessageBox::critical(this,tr("Could not open"),tr("The directory ")+settingsPath+tr(" could not be opened."),1,0);
 	readConfFiles();
+
+ 	connect( this, SIGNAL(expanded(QListViewItem*)), SLOT(expand(QListViewItem*)));
 }
 
 
@@ -47,7 +49,13 @@ void ListViewConfDir::readConfFiles()
  	{
     qDebug( "opening: >%s<", fi->fileName().data() );
   	fileEntry = new ListViewItemConfFile( fi, this );
-   	
+    QListViewItem *dummy = new QListViewItem(fileEntry, "dummy");
   	++it;
   }
 }
+
+void ListViewConfDir::expand(QListViewItem *item)
+{
+ 	((ListViewItemConf*)item)->expand();
+}
+

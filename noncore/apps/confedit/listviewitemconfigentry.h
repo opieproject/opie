@@ -35,6 +35,7 @@ public:
   virtual void displayText();
   virtual void changed();
   virtual void remove();
+  virtual void expand();
   void save(QTextStream*);
   virtual void revert();
 private:

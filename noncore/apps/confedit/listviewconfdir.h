@@ -23,7 +23,8 @@ class ListViewConfDir : public QListView  {
 public: 
 	ListViewConfDir(QString settingsPath, QWidget *parent=0, const char *name=0);
 	~ListViewConfDir();
-
+protected slots:
+	void expand(QListViewItem*);
 private:
 	QDir confDir;
 

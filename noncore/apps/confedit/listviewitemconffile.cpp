@@ -20,7 +20,7 @@ ListViewItemConfFile::ListViewItemConfFile(QFileInfo *file, QListView *parent)
    : ListViewItemConf(parent), _valid(false)
 {
   confFileInfo = file;
-  parseFile();
+//  parseFile();
   displayText();
 }
 
@@ -41,6 +41,7 @@ QString ListViewItemConfFile::fileName()
 
 void ListViewItemConfFile::parseFile()
 {
+	//qDebug("ListViewItemConfFile::parseFile BEGIN");
   QFile confFile(confFileInfo->absFilePath());
 	if(! confFile.open(IO_ReadOnly))
  		QMessageBox::critical(0,tr("Could not open"),tr("The file ")+confFileInfo->fileName()+tr(" could not be opened."),1,0);	
@@ -52,7 +53,7 @@ void ListViewItemConfFile::parseFile()
   while ( !t.atEnd() )
   {
   	s = t.readLine().stripWhiteSpace();
-	//	qDebug( "line: >%s<\n", s.latin1() );
+		//qDebug( "line: >%s<\n", s.latin1() );
   	if (s.contains("<?xml"))
    	{
     	_valid = false;
@@ -62,19 +63,21 @@ void ListViewItemConfFile::parseFile()
    	{
   //    qDebug("got group"+s);
       group = s.mid(1,s.length()-2);
+      if (!groupItem) groupItem = new ListViewItemConfigEntry(this, tr("no group") );
       groupItem = new ListViewItemConfigEntry(this, group );
       insertItem( groupItem );
     } else
     if ( int pos = s.find('=') )
     {
- //     qDebug("got key"+s);
+//      qDebug("got key"+s);
+     	if (!groupItem) qDebug("PANIK NO GROUP! >%s<",group.latin1());
     	item = new ListViewItemConfigEntry(this, group, s );
       groupItem->insertItem( item );
     }
   }	
 	confFile.close();
- 	unchanged();
 	setExpandable( _valid );
+//	qDebug("ListViewItemConfFile::parseFile END");
 }
 
 
@@ -139,4 +142,10 @@ bool ListViewItemConfFile::revertable()
 QString ListViewItemConfFile::backupFileName()
 {
 	return confFileInfo->absFilePath()+"~";
+}
+
+
+void ListViewItemConfFile::expand()
+{
+	parseFile();
 }

@@ -17,16 +17,17 @@ EditWidget::EditWidget( QWidget* parent,  const char* name, WFlags fl )
 {
 
     EditWidgetLayout = new QGridLayout( this );
-    EditWidgetLayout->setSpacing( 3 );
-    EditWidgetLayout->setMargin( 3 );
+    EditWidgetLayout->setSpacing( 0 );
+    EditWidgetLayout->setMargin( 0 );
+//    setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Maximum));//, sizePolicy().hasHeightForWidth() ) );
 
-    QLabel *TextLabelFileName = new QLabel( this, "TextLabelFileName" );
+    TextLabelFileName = new QLabel( this, "TextLabelFileName" );
     TextLabelFileName->setText( tr( "File Name:" ) );
     EditWidgetLayout->addWidget( TextLabelFileName, 0, 0 );
     TextFileName = new QLabel( this, "TextFileName" );
     EditWidgetLayout->addWidget( TextFileName, 0, 1 );
 
-    QLabel *TextLabelGroup = new QLabel( this, "TextLabelGroup" );
+    TextLabelGroup = new QLabel( this, "TextLabelGroup" );
     TextLabelGroup->setText( tr( "Group:" ) );
     EditWidgetLayout->addWidget( TextLabelGroup, 1, 0 );
     LineEditGroup = new QLineEdit( this, "LineEditGroup" );
@@ -44,6 +45,7 @@ EditWidget::EditWidget( QWidget* parent,  const char* name, WFlags fl )
     LineEditValue = new QLineEdit( this, "LineEditValue" );
     EditWidgetLayout->addWidget( LineEditValue, 3, 1 );
 
+  //  layoutType(Nothing);
 }
 
 
@@ -52,22 +54,44 @@ EditWidget::~EditWidget()
 }
 
 
-void EditWidget::isKey(bool h)
+void EditWidget::layoutType(int t)
 {
-	if (h)
+	switch (t)
  	{
-    LineEditGroup->setEnabled(false);
-    TextLabelKey->show();
-    LineEditKey->show();
-    TextLabelValue->show();
-    LineEditValue->show();
-  }else{
-    LineEditGroup->setEnabled(true);
-    TextLabelKey->hide();
-    LineEditKey->hide();
-    TextLabelValue->hide();
-    LineEditValue->hide();
+	 	case Entry:
+  	  LineEditGroup->setEnabled(false);
+    	TextLabelKey->show();
+	    LineEditKey->show();
+  	  TextLabelValue->show();
+    	LineEditValue->show();
+     	TextLabelGroup->show();
+    	LineEditGroup->show();
+     	TextLabelFileName->show();
+      TextFileName->show();
+	    break;
+  	case Group:
+    	LineEditGroup->setEnabled(true);
+	    TextLabelKey->hide();
+  	  LineEditKey->hide();
+    	TextLabelValue->hide();
+	    LineEditValue->hide();
+     	TextLabelGroup->show();
+    	LineEditGroup->show();
+     	TextLabelFileName->show();
+      TextFileName->show();
+  	  break;
+   	default:
+	    TextLabelKey->hide();
+  	  LineEditKey->hide();
+    	TextLabelValue->hide();
+	    LineEditValue->hide();
+     	TextLabelGroup->hide();
+    	LineEditGroup->hide();
+     	TextLabelFileName->hide();
+      TextFileName->hide();
   }
-  update();
+//  update();
+// updateGeometry();
+//  adjustSize();
 }
 

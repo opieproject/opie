@@ -13,6 +13,7 @@
 #define MAINWINDOW_H
 
 #include <qmainwindow.h>
+#include <qdialog.h>
 #include <qaction.h>
 #include <qtimer.h>
 #include <qpopupmenu.h>
@@ -23,7 +24,7 @@ class ListViewItemConfFile;
 class ListViewConfDir;
 class ListViewItemConf;
 
-class MainWindow : public QMainWindow
+class MainWindow : public QDialog//QMainWindow
 {
     Q_OBJECT
 
@@ -47,6 +48,7 @@ public slots:
 private:
 	ListViewConfDir *settingList;
  	EditWidget *editor;
+  QVBoxLayout *mainLayout;
   ListViewItemConf *_item;
   ListViewItemConfigEntry *_currentItem;
   ListViewItemConfFile *_fileItem;

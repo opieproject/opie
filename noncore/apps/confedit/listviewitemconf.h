@@ -27,6 +27,7 @@ public:
   virtual void revert() = 0;
   virtual void remove() = 0;
   virtual void displayText() = 0;
+  virtual void expand() = 0;
   virtual void changed();
   bool isChanged() {return _changed;};
   virtual void unchanged();

@@ -22,7 +22,6 @@ ListViewItemConfigEntry::ListViewItemConfigEntry(ListViewItemConfFile *parent, Q
  	_groupOrig = group;
   _keyOrig = _key;
   _valueOrig = _value;
- 	_fileItem->unchanged();
 }
 
 ListViewItemConfigEntry::~ListViewItemConfigEntry()
@@ -143,4 +142,10 @@ void ListViewItemConfigEntry::revert()
 	_value = _valueOrig;	
 	_changed=false;
  	displayText();
+}
+
+
+void ListViewItemConfigEntry::expand()
+{
+
 }

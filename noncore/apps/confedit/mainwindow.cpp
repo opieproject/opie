@@ -17,6 +17,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/qpetoolbar.h>
+#include <qpe/qpeapplication.h>
 #include <qaction.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
@@ -34,34 +35,35 @@
 
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
-  QMainWindow( parent, name, f ), _currentItem(0), _fileItem(0)
+  QDialog( parent, name, f ), _currentItem(0), _fileItem(0)
 {	
   setCaption( tr("Conf File Editor") );
 
-  QWidget *mainWidget = new  QWidget(this);
-  setCentralWidget( mainWidget);
-  QGridLayout *mainLayout = new QGridLayout( mainWidget );
-	mainLayout->setSpacing( 3 );
-  mainLayout->setMargin( 3 );
+//	setBaseSize(  qApp->globalStrut() );
+  setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));//, sizePolicy().hasHeightForWidth() ) );
+
+  mainLayout = new QVBoxLayout( this );
+	mainLayout->setSpacing( 0 );
+  mainLayout->setMargin( 0 );
 
 
-  qDebug("settingList");
+  qDebug("creating settingList");
   settingList = new ListViewConfDir( "/root/Settings/", this, "settingslist");
-  settingList->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding));//, sizePolicy().hasHeightForWidth() ) );
-  mainLayout->addWidget( settingList, 0, 0 );
+  settingList->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));//, sizePolicy().hasHeightForWidth() ) );
+  mainLayout->addWidget( settingList, 0);
 
-  qDebug("editor");
+  qDebug("creating editor");
   editor = new EditWidget(this);
-  editor->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum));//, sizePolicy().hasHeightForWidth() ) );
-//  editor->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)3, (QSizePolicy::SizeType)3));//, sizePolicy().hasHeightForWidth() ) );
-  mainLayout->addWidget( editor, 1, 0 );
+  editor->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Maximum));//, sizePolicy().hasHeightForWidth() ) );
+  mainLayout->addWidget( editor, 1 );
+  editor->layoutType( ListViewItemConf::File );
 
   makeMenu();
 
-  qDebug("connect");
   connect(settingList, SIGNAL( pressed(QListViewItem*) ),
 						this, SLOT(setCurrent(QListViewItem*)));
-
+	connect( settingList, SIGNAL( clicked( QListViewItem* ) ),
+					   this, SLOT( stopTimer( QListViewItem* ) ) );	
 
  	connect( editor->LineEditGroup, SIGNAL( textChanged(const QString&) ),
 	           SLOT( groupChanged(const QString&) ) );
@@ -69,47 +71,36 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 	           SLOT( keyChanged(const QString&) ) );
  	connect( editor->LineEditValue, SIGNAL( textChanged(const QString&) ),
 	           SLOT( valueChanged(const QString&) ) );
-//  qDebug("editor->hide()");
-// 	editor->hide();
-  qDebug("connect");
-	connect( settingList, SIGNAL( clicked( QListViewItem* ) ),
-					   this, SLOT( stopTimer( QListViewItem* ) ) );	
+
  	setCurrent(0);
 }
 
 void MainWindow::makeMenu()
 {
-  qDebug("MainWindow::makeMenu()");
-
   popupTimer = new QTimer(this);
   popupMenuFile = new QPopupMenu(this);
   popupMenuEntry = new QPopupMenu(this);
 
-  qDebug("Save");
 	popupActionSave = new QAction( tr("Save"),QString::null,  0, this, 0 );
 	popupActionSave->addTo( popupMenuFile );
  // popupActionSave->addTo( popupMenuEntry );
   connect( popupActionSave, SIGNAL( activated() ),
 		  	 	this , SLOT( saveConfFile() ) );
 
-  qDebug("Revert");
 	popupActionRevert = new QAction( tr("Revert"),QString::null,  0, this, 0 );
 	popupActionRevert->addTo( popupMenuFile );
   popupActionRevert->addTo( popupMenuEntry );
   connect( popupActionRevert, SIGNAL( activated() ),
 		  	 	this , SLOT( revertConfFile() ) );
 
-  qDebug("Delete");
   popupActionDelete = new QAction( tr("Delete"),QString::null,  0, this, 0 );
 	popupActionDelete->addTo( popupMenuFile );
   popupActionDelete->addTo( popupMenuEntry );
   connect( popupActionDelete, SIGNAL( activated() ),
 		  	 	this , SLOT( removeConfFile() ) );
 
-  qDebug("connect");
   connect( popupTimer, SIGNAL(timeout()),
 		  			this, SLOT(showPopup()) );
-  qDebug("connect");
 }
 
 MainWindow::~MainWindow()
@@ -120,19 +111,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::setCurrent(QListViewItem *item)
 {
-  editor->hide();
+//	qDebug("MainWindow::setCurrent");
 	if (!item) return;
  	_item = (ListViewItemConf*) item;
   if (!_item) return;
   popupTimer->start( 750, true );
   if (_item->getType() == ListViewItemConf::File)
   {
-   	updateGeometry();
+	  editor->layoutType(EditWidget::File);
     _currentItem=0;
     _fileItem = (ListViewItemConfFile*)item;
    	return;
   }
-  editor->show();
   _fileItem = 0;
  	_currentItem = (ListViewItemConfigEntry*)item;
   if (!_currentItem) return;
@@ -144,15 +134,12 @@ void MainWindow::setCurrent(QListViewItem *item)
   editor->LineEditGroup->setText(group);
   if (!key.isEmpty())
   {
-   	editor->isKey(true);
+   	editor->layoutType(EditWidget::Entry);
     editor->LineEditKey->setText(key);
     editor->LineEditValue->setText(val);
   }else{
-    editor->isKey(false);
+    editor->layoutType(EditWidget::Group);
   }
-  updateGeometry();
-  editor->updateGeometry();
-  settingList->updateGeometry();
 }
 
 
@@ -197,6 +184,7 @@ void MainWindow::removeConfFile()
 	if (!_item) return;	
  	_item->remove();
 }
+
 void MainWindow::showPopup()
 {
 qDebug("showPopup");
