@@ -26,7 +26,7 @@
 #include <qaction.h>
 #include <qtimer.h>
 #include <qstringlist.h>
-
+class QLabel;
 class InlineEdit;
 
 class FileItem : public QListViewItem
@@ -58,6 +58,7 @@ public:
     void    setDir( const QString & dir );
     QString cd(){ return currentDir; }
     QStringList history() const { return dirHistory; }
+    bool showingHidden;
 
 public slots:
     void updateDir();
@@ -114,6 +115,8 @@ public:
          const char * name = 0, WFlags f = 0 );
     FileBrowser( const QString & dir, QWidget * parent = 0,
          const char * name = 0, WFlags f = 0 );
+public slots:
+        void changeCaption(const QString &);
 private:
     void init(const QString & dir);
     QString      fileToCopy;
@@ -136,6 +139,7 @@ private slots:
 
     void updateDirMenu();
     void dirSelected( int id );
+    void showHidden();
 };
 
 #endif

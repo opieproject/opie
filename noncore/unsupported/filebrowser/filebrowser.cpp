@@ -176,6 +176,8 @@ FileView::FileView( const QString & dir, QWidget * parent,
     addColumn( "Size" );
     addColumn( "Type" );
 
+    showingHidden=FALSE;
+
     setMultiSelection( TRUE );
     header()->hide();
 
@@ -206,6 +208,9 @@ void FileView::resizeEvent( QResizeEvent *e )
 
 void FileView::updateDir()
 {
+      setCaption( "Boogie on boogieboy");
+      //qDebug("Caption should be "+currentDir);
+  
     generateDir( currentDir );
 }
 
@@ -228,9 +233,13 @@ void FileView::generateDir( const QString & dir )
 
     currentDir = d.canonicalPath();
 
+      if( !showingHidden)
     d.setFilter( QDir::Dirs | QDir::Files );
-    d.setSorting( QDir::Name | QDir::DirsFirst | QDir::IgnoreCase |
-          QDir::Reversed );
+      else
+    d.setFilter( QDir::Dirs | QDir::Files |QDir::Hidden | QDir::All);
+
+     d.setSorting( QDir::Name | QDir::DirsFirst | QDir::IgnoreCase |  QDir::Reversed );
+        
 
     const QFileInfoList * list = d.entryInfoList();
     QFileInfoListIterator it( *list );
@@ -238,14 +247,13 @@ void FileView::generateDir( const QString & dir )
 
     clear();
     while( (fi = it.current()) ){
-    if( (fi->fileName() == ".") || (fi->fileName() == "..") ){
+        if( (fi->fileName() == ".") || (fi->fileName() == "..") ){
       ++it;
       continue;
     }
     (void) new FileItem( (QListView *) this, *fi );
     ++it;
     }
-
     emit dirChanged();
 }
 
@@ -655,11 +663,12 @@ void FileView::showFileMenu()
     m->insertItem( Resource::loadPixmap("cut"),
             tr( "Cut" ), this, SLOT( cut() ) );
     m->insertItem( Resource::loadPixmap("copy"),
+
            tr( "Copy" ), this, SLOT( copy() ) );
     m->insertItem( Resource::loadPixmap("paste"),
            tr( "Paste" ), this, SLOT( paste() ) );
     m->insertItem( tr( "Change Permissions" ), this, SLOT( chPerm() ) );
-    m->insertItem( tr( "Delete" ), this, SLOT( del() ) );
+    m->insertItem(Resource::loadPixmap( "close" ), tr( "Delete" ), this, SLOT( del() ) );
     m->insertSeparator();
     m->insertItem( tr( "Select all" ), this, SLOT( selectAll() ) );
     m->insertItem( tr( "Deselect all" ), this, SLOT( deselectAll() ) );
@@ -711,6 +720,10 @@ void FileBrowser::init(const QString & dir)
     sortMenu->insertItem( tr( "by Type "), this, SLOT( sortType() ) );
     sortMenu->insertSeparator();
     sortMenu->insertItem( tr( "Ascending" ), this, SLOT( updateSorting() ) );
+    sortMenu->insertSeparator();
+    sortMenu->insertItem( tr( "Show Hidden "), this, SLOT( showHidden() ) );
+     fileView->showingHidden=FALSE;    
+
     sortMenu->setItemChecked( sortMenu->idAt( 5 ), TRUE );
     sortMenu->setItemChecked( sortMenu->idAt( 0 ), TRUE );
 
@@ -747,6 +760,7 @@ void FileBrowser::init(const QString & dir)
     connect( pasteAction, SIGNAL( activated() ), fileView, SLOT( paste() ) );
     pasteAction->addTo( toolBar );
 
+//    dirLabel = new QLabel(this, "DirLabel");
 
     connect( fileView, SIGNAL( dirChanged() ), SLOT( updateDirMenu() ) );
     updateDirMenu();
@@ -762,6 +776,10 @@ void FileBrowser::pcmciaMessage( const QCString &msg, const QByteArray &)
   // ## Only really needed if current dir is on a card
         fileView->updateDir();
     }
+}
+
+void FileBrowser::changeCaption(const QString & dir) {
+    setCaption( dir);
 }
 
 void FileBrowser::dirSelected( int id )
@@ -852,6 +870,17 @@ void FileBrowser::updateSorting()
     sortDate();
     else
     sortType();
+}
+
+void FileBrowser::showHidden() {
+    if(! fileView->showingHidden) {
+         fileView->showingHidden=TRUE;
+    sortMenu->setItemChecked( sortMenu->idAt( 7),TRUE);
+    } else {
+         fileView->showingHidden=FALSE;
+    sortMenu->setItemChecked( sortMenu->idAt( 7),FALSE);
+    }
+    fileView->updateDir();
 }
 
 void FileView::chPerm() {
