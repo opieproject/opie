@@ -103,9 +103,15 @@ bool ProtocolListView::isProtocolChecked( const QString& name )
 }
 
 
-QString ProtocolListView::protocolAction( const QString& name ) const
+QString ProtocolListView::protocolAction( const QString& name )
 {
-    //FIXME
-}
+    //QObject * child ( const char * objName, const char * inheritsClass = 0,
+    //       bool recursiveSearch = TRUE )
 
+    QComboBox* combo = (QComboBox*) child( (const char*) name, "QComboBox" );
+    if ( combo )
+        return combo->currentText();
+    else
+        return "<unknown>";
+}
 

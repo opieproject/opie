@@ -32,7 +32,7 @@ class ProtocolListView : public QScrollView
     virtual ~ProtocolListView();
 
     bool isProtocolChecked( const QString& name );
-    QString protocolAction( const QString& name ) const;
+    QString protocolAction( const QString& name );
 
   protected:
     virtual void addProtocol( const QString& name );

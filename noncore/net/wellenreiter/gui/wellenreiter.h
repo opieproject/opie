@@ -66,6 +66,9 @@ class Wellenreiter : public WellenreiterBase {
   private:
     void handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon );
     void handleData( OPacket* p, OWaveLanDataPacket* data );
+    void handleNotification( OPacket* p );
+    void doAction( const QString& action, const QString& protocol, OPacket* p );
+    QObject* childIfToParse( OPacket* p, const QString& protocol );
 
   private:
     #ifdef QWS

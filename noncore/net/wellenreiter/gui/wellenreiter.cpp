@@ -13,6 +13,18 @@
 **
 ***********************************************************************/
 
+// Local
+
+#include "wellenreiter.h"
+#include "scanlist.h"
+#include "logwindow.h"
+#include "hexwindow.h"
+#include "configwindow.h"
+#include "statwindow.h"
+#include "graphwindow.h"
+#include "manufacturers.h"
+#include "protolistview.h"
+
 // Opie
 
 #ifdef QWS
@@ -36,6 +48,7 @@ using namespace Opie;
 #include <qpushbutton.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
+#include <qobjectlist.h>
 #include <qregexp.h>
 #include <qspinbox.h>
 #include <qtoolbutton.h>
@@ -49,17 +62,6 @@ using namespace Opie;
 #include <string.h>
 #include <sys/types.h>
 #include <stdlib.h>
-
-// Local
-
-#include "wellenreiter.h"
-#include "scanlist.h"
-#include "logwindow.h"
-#include "hexwindow.h"
-#include "configwindow.h"
-#include "statwindow.h"
-#include "graphwindow.h"
-#include "manufacturers.h"
 
 Wellenreiter::Wellenreiter( QWidget* parent )
     : WellenreiterBase( parent, 0, 0 ),
@@ -134,6 +136,30 @@ void Wellenreiter::channelHopped(int c)
     //title.append( QString().sprintf( " %02d", c ) );
     assert( parent() );
     ( (QMainWindow*) parent() )->setCaption( title );
+}
+
+
+void Wellenreiter::handleNotification( OPacket* p )
+{
+    QObjectList* l = p->queryList();
+    QObjectListIt it( *l );
+    QObject* o;
+
+    while ( (o = it.current()) != 0 )
+    {
+        QString name = it.current()->name();
+        if ( configwindow->parsePackets->isProtocolChecked( name ) )
+        {
+            QString action = configwindow->parsePackets->protocolAction( name );
+            qDebug( "action for '%s' seems to be '%s'", (const char*) name, (const char*) action );
+            doAction( action, name, p );
+        }
+        else
+        {
+            qDebug( "protocol '%s' not checked.", (const char*) name );
+        }
+    ++it;
+    }
 }
 
 
@@ -245,9 +271,17 @@ void Wellenreiter::handleData( OPacket* p, OWaveLanDataPacket* data )
 }
 
 
+QObject* childIfToParse( OPacket* p, const QString& protocol )
+{
+    //FIXME: Implement
+}
+
+
 void Wellenreiter::receivePacket( OPacket* p )
 {
     hexWindow()->log( p->dump( 8 ) );
+
+    handleNotification( p );
 
     // check if we received a beacon frame
     OWaveLanManagementPacket* beacon = static_cast<OWaveLanManagementPacket*>( p->child( "802.11 Management" ) );
@@ -431,3 +465,22 @@ void Wellenreiter::timerEvent( QTimerEvent* )
     }
 }
 
+
+void Wellenreiter::doAction( const QString& action, const QString& protocol, OPacket* p )
+{
+    if ( action == "TouchSound" )
+        ODevice::inst()->touchSound();
+    else if ( action == "AlarmSound" )
+        ODevice::inst()->alarmSound();
+    else if ( action == "KeySound" )
+        ODevice::inst()->keySound();
+    else if ( action == "LedOn" )
+        ODevice::inst()->setLedState( Led_Mail, Led_On );
+    else if ( action == "LedOff" )
+        ODevice::inst()->setLedState( Led_Mail, Led_Off );
+    else if ( action == "LogMessage" )
+        logwindow->log( QString().sprintf( "Got packet with protocol '%s'", (const char*) protocol ) );
+    else if ( action == "MessageBox" )
+        QMessageBox::information ( this, "Notification!",
+        QString().sprintf( "Got packet with protocol '%s'", (const char*) protocol ) );
+}
