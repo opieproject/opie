@@ -16,7 +16,7 @@
 #define MAINWINDOW_H
 
 #include <qpe/applnk.h>
-#include <opie/ofileselector.h>
+#include <qpe/fileselector.h>
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qmainwindow.h>
@@ -42,7 +42,7 @@ class MainWindow: public QMainWindow
   DocLnk* currentDoc;
   QPEMenuBar *menu;
   QPEToolBar *toolbarFunctions, *toolbarEdit, *toolbarStandard;
-  OFileSelector *fileSelector;
+  FileSelector *fileSelector;
 
   // QT objects
   QPopupMenu *menuFile, *menuEdit, *menuInsert, *menuFormat, *menuData, *menuHelp,
