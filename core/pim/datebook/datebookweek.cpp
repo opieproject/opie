@@ -408,7 +408,6 @@ void DateBookWeek::showDay( int day )
 	day--;
 	d=d.addDays(day-dayoffset);
 	emit showDate( d.year(), d.month(), d.day() );
-	qDebug("%4d-%02d-%02d  / Day %d\n",d.year(),d.month(),d.day(),day);
 }
 
 void DateBookWeek::setDate( int y, int m, int d )
