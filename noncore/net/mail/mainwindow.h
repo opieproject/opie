@@ -26,16 +26,18 @@ protected slots:
     virtual void slotShowFolders( bool show );
     virtual void refreshMailView(QList<RecMail>*);
     virtual void displayMail(QListViewItem*);
+    virtual void slotDeleteMail();
     void slotAdjustLayout();
     
 protected:
     QToolBar *toolBar;
     QMenuBar *menuBar;
     QPopupMenu *mailMenu, *settingsMenu;
-    QAction *composeMail, *sendQueued, *showFolders, *searchMails, 
+    QAction *composeMail, *sendQueued, *showFolders, *searchMails, *deleteMails, 
             *editSettings, *editAccounts, *syncFolders;
     AccountView *folderView;
     QListView *mailView;
+    QListViewItem* m_currentItem;
     QBoxLayout *layout;
 };
 

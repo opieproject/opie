@@ -61,14 +61,14 @@ AbstractMail *IMAPviewItem::getWrapper()
 void IMAPviewItem::refresh(QList<RecMail>&)
 {
     QList<Folder> *folders = wrapper->listFolders();
-    
+
     QListViewItem *child = firstChild();
     while ( child ) {
         QListViewItem *tmp = child;
         child = child->nextSibling();
         delete tmp;
     }
-    
+
     Folder *it;
     for ( it = folders->first(); it; it = folders->next() ) {
         (void) new IMAPfolderItem( it, this );
@@ -80,7 +80,7 @@ RecBody IMAPviewItem::fetchBody(const RecMail&)
     return RecBody();
 }
 
-IMAPfolderItem::~IMAPfolderItem() 
+IMAPfolderItem::~IMAPfolderItem()
 {
     delete folder;
 }
@@ -94,7 +94,7 @@ IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPviewItem *parent )
     setText( 0, folder->getDisplayName() );
 }
 
-void IMAPfolderItem::refresh(QList<RecMail>&target) 
+void IMAPfolderItem::refresh(QList<RecMail>&target)
 {
     imap->getWrapper()->listMessages( folder->getName(),target );
 }
@@ -118,7 +118,7 @@ AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
 void AccountView::populate( QList<Account> list )
 {
     clear();
-    
+
     Account *it;
     for ( it = list.first(); it; it = list.next() ) {
         if ( it->getType().compare( "IMAP" ) == 0 ) {
@@ -134,8 +134,10 @@ void AccountView::populate( QList<Account> list )
 }
 
 void AccountView::refresh(QListViewItem *item) {
+
     qDebug("AccountView refresh...");
-    if ( item ) { 
+    if ( item ) {
+        m_currentItem = item;
         QList<RecMail> headerlist;
         headerlist.setAutoDelete(true);
         AccountViewItem *view = static_cast<AccountViewItem *>(item);
@@ -144,9 +146,19 @@ void AccountView::refresh(QListViewItem *item) {
     }
 }
 
+void AccountView::refreshCurrent()
+{
+   if ( !m_currentItem ) return;
+   QList<RecMail> headerlist;
+   headerlist.setAutoDelete(true);
+   AccountViewItem *view = static_cast<AccountViewItem *>(m_currentItem);
+   view->refresh(headerlist);
+   emit refreshMailview(&headerlist);
+}
+
 void AccountView::refreshAll()
 {
-    
+
 }
 
 RecBody AccountView::fetchBody(const RecMail&aMail)

@@ -11,6 +11,7 @@
 #include "composemail.h"
 #include "viewmail.h"
 #include "abstractmail.h"
+#include "accountview.h"
 
 AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&file,const QString&desc,int num)
 	: QListViewItem(parent,after),_partNum(num)
@@ -169,6 +170,7 @@ ViewMail::ViewMail( QWidget *parent, const char *name, WFlags fl)
 
 	connect(reply, SIGNAL(activated()), SLOT(slotReply()));
 	connect(forward, SIGNAL(activated()), SLOT(slotForward()));
+        connect( deleteMail, SIGNAL( activated() ),  SLOT( slotDeleteMail(  ) ) );
 
 	attachments->setEnabled(m_gotBody);
         connect( attachments,  SIGNAL( clicked ( QListViewItem *, const QPoint & , int ) ), SLOT( slotItemClicked(  QListViewItem *,  const QPoint & , int ) ) );
@@ -315,3 +317,9 @@ void ViewMail::slotForward()
 	composer.exec();
 }
 
+void ViewMail::slotDeleteMail( )
+{
+    m_recMail.Wrapper()->deleteMail( m_recMail );
+    hide();
+    deleted = true;
+}

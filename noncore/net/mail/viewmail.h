@@ -30,6 +30,7 @@ public:
 	void exec();
         void setMail( RecMail mail );
         void setBody( RecBody body );
+        bool deleted;
 
 protected:
 	QString deHtml(const QString &string);
@@ -39,6 +40,8 @@ protected slots:
 	void slotForward();
         void setText();
         void slotItemClicked( QListViewItem * item , const QPoint & point, int c );
+        void slotDeleteMail( );
+
 
 private:
 	bool _inLoop;

@@ -77,9 +77,13 @@ public:
 public slots:
     void refreshAll();
     void refresh(QListViewItem *item);
+    void refreshCurrent();
     
 signals:
-    void refreshMailview(QList<RecMail>*);    
+    void refreshMailview(QList<RecMail>*);  
+
+private: 
+    QListViewItem* m_currentItem; 
 };
 
 #endif

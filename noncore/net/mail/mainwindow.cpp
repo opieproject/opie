@@ -60,6 +60,11 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     searchMails->addTo( toolBar );
     searchMails->addTo( mailMenu );
 
+    deleteMails = new QAction(tr("Delete Mail"), QIconSet(Resource::loadPixmap("mail/delete")), 0, 0, this);
+    deleteMails->addTo( toolBar );
+    deleteMails->addTo( mailMenu );
+    connect( deleteMails, SIGNAL( activated() ),
+             SLOT( slotDeleteMail() ) );
 
     editSettings = new QAction( tr( "Edit settings" ), ICON_EDITSETTINGS,
                                 0, 0, this );
@@ -98,7 +103,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     connect( mailView, SIGNAL( clicked( QListViewItem * ) ),this,
              SLOT( displayMail( QListViewItem * ) ) );
 
-    connect(folderView,SIGNAL(refreshMailview(QList<RecMail>*)),this,SLOT(refreshMailView(QList<RecMail>*)));
+    connect(folderView, SIGNAL(refreshMailview(QList<RecMail>*)),this,SLOT(refreshMailView(QList<RecMail>*)));
 
    QTimer::singleShot( 1000, this, SLOT( slotAdjustColumns() ) );
 }
@@ -131,7 +136,7 @@ void MainWindow::slotAdjustColumns()
 
 void MainWindow::slotShowFolders( bool show )
 {
-    qDebug( "Show Folders" );
+   qDebug( "Show Folders" );
     if ( show && folderView->isHidden() ) {
         qDebug( "-> showing" );
         folderView->show();
@@ -153,6 +158,9 @@ void MainWindow::refreshMailView(QList<RecMail>*list)
 }
 void MainWindow::displayMail(QListViewItem*item)
 {
+
+    m_currentItem = item;
+
     if (!item) return;
     RecMail mail = ((MailListViewItem*)item)->data();
     RecBody body = folderView->fetchBody(mail);
@@ -162,8 +170,23 @@ void MainWindow::displayMail(QListViewItem*item)
     readMail.setMail( mail );
     readMail.showMaximized();
     readMail.exec();
-    ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgunseen") );
+
+    if (  readMail.deleted ) {
+         folderView->refreshCurrent();
+    } else {
+        ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgunseen") );
+    }
 }
+
+void MainWindow::slotDeleteMail()
+{
+    if (!m_currentItem) return;
+    RecMail mail = ((MailListViewItem*)m_currentItem)->data();
+    mail.Wrapper()->deleteMail( mail );
+    folderView->refreshCurrent();
+}
+
+
 
 MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * item )
         :QListViewItem(parent,item),mail_data()
