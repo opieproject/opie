@@ -32,7 +32,28 @@ endif
 ifeq ($(CONFIG_OPIE_NO_OVERRIDE_QT),y)
 	echo CONFIG += no-override >> $@
 endif
-
+ifeq ($(CONFIG_OPIE_NO_BUILTIN_SHUTDOWN),y)
+	echo DEFINES += OPIE_NO_BUILTIN_SHUTDOWN >> $@
+endif
+ifeq ($(CONFIG_OPIE_NO_BUILTIN_CALIBRATE),y)
+	echo DEFINES += OPIE_NO_BUILTIN_CALIBRATE >> $@
+endif
+ifeq ($(CONFIG_USE_REALTIME_AUDIO_THREAD),y)
+	echo DEFINES += USE_REALTIME_AUDIO_THREAD >> $@
+endif
+ifeq ($(CONFIG_QT_QWS_ALLOW_CLOCK),y)
+	echo DEFINES += QT_QWS_ALLOW_OVERCLOCK >> $@
+endif
+ifeq ($(CONFIG_OPIE_HIGH_RES_SMALL_PHY),y)
+	echo DEFINES += OPIE_HIGH_RES_SMALL_PHY >> $@
+endif
+ifeq ($(CONFIG_OPIE_NEW_ALLOC),y)
+	echo DEFINES += OPIE_NEW_ALLOC >> $@
+endif
+ifeq ($(CONFIG_OPIE_NO_SOUND_PCM_READ_BITS),y)
+	echo DEFINES += OPIE_NO_SOUND_PCM_READ_BITS >> $@
+endif
+	echo DEFINES += OPIE_SOUND_FRAGMENT_SHIFT=$(CONFIG_OPIE_SOUND_FRAGMENT_SHIFT) >> $@
 $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;) $(TOPDIR)/.config $(TOPDIR)/packages
 	@echo Generating dependency information...
 # add to subdir-y, and add descend rules

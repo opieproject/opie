@@ -48,9 +48,6 @@ config QUICK_LAUNCH
   boolean "Enable Quick Launch"
   default n
   
-config OPIE_NO_OVERRIDE_QT
-  boolean "Build Opie against an unpatched version of Qt"
-  default n
 
 config SPECFILE
   string
@@ -87,6 +84,53 @@ config OPTIMIZATIONS
 config EXPERIMENTAL
   bool "Prompt for development and/or incomplete items"
   default y
+
+endmenu
+
+menu "Opie Compile Configs"
+config OPIE_NO_OVERRIDE_QT
+  boolean "Build Opie against an unpatched version of Qt"
+  default n
+
+
+config OPIE_NO_BUILTIN_SHUTDOWN
+  boolean "Disable the built in shutdown application"
+  default n
+
+config OPIE_NO_BUILTIN_CALIBRATE
+  boolean "Disable the built in calibrate application"
+  default y if TARGET_YOPY
+  default n
+
+config OPIE_SOUND_FRAGMENT_SHIFT
+  string  "The sound fragment used in Opie Player I"
+  default "14" if TARGET_IPAQ
+  default "16" if (!TARGET_IPAQ)
+
+config USE_REALTIME_AUDIO_THREAD
+  boolean "Use a realtime thread in Opie Player I"
+  default y if TARGET_IPAQ || TARGET_SIMPAD || TARGET_RAMSES || TARGET_SHARP
+  default n
+
+config QT_QWS_ALLOW_OVERCLOCK
+  boolean "Allow the user to overclock the device"
+  depends TARGET_RAMSES
+  default n
+
+config OPIE_HIGH_RES_SMALL_PHY
+  boolean "Resolution is bigger than physical scrren"
+  default y if TARGET_C700
+  default n
+
+config OPIE_NEW_ALLOC
+  boolean "Use malloc and free for the implementation"
+  default y if TARGET_RAMSES || TARGET_IPAQ || TARGET_SIMPAD || TARGET_SHARP
+  default n
+
+config OPIE_NO_SOUND_PCM_READ_BITS
+  boolean "there is not a pcm_read_bits io control"
+  default y if TARGET_SHARP
+  default n
 
 endmenu
 
