@@ -6,7 +6,7 @@
 #include <opie/orecurrancewidget.h>
 
 #include "taskeditoroverview.h"
-#include "taskeditoradvancedimpl.h"
+#include "taskeditoradvanced.h"
 #include "taskeditoralarms.h"
 
 #include "otaskeditor.h"
@@ -40,14 +40,14 @@ OTodo OTaskEditor::todo()const{
     OTodo to;
     to.setUid(m_uid );
     m_overView->save( to );
-    //m_adv->save( to );
+    m_adv->save( to );
     to.setRecurrence( m_rec->recurrence() );
 
     return to;
 }
 void OTaskEditor::load(const OTodo& to) {
     m_overView->load( to );
-    //m_adv->load( to );
+    m_adv->load( to );
     m_rec->setRecurrence( to.recurrence(), to.hasDueDate() ? to.dueDate() : QDate::currentDate() );
 }
 void OTaskEditor::init() {
@@ -63,7 +63,7 @@ void OTaskEditor::init() {
     m_overView = new TaskEditorOverView( m_tab );
     m_tab->addTab( m_overView, "TodoList", tr("Overview") );
 
-    m_adv = new TaskEditorAdvancedImpl( m_tab );
+    m_adv = new TaskEditorAdvanced( m_tab );
     m_tab->addTab( m_adv, "todo/advanced", tr("Advanced") );
 
     m_alarm = new TaskEditorAlarms( m_tab );

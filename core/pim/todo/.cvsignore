@@ -1,6 +1,4 @@
 Makefile*
 moc_*
-taskeditoradvanced.cpp
-taskeditoradvanced.h
 todoentry.cpp
 todoentry.h

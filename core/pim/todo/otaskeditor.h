@@ -7,7 +7,7 @@
 #include <opie/otabwidget.h>
 
 class TaskEditorOverView;
-class TaskEditorAdvancedImpl;
+class TaskEditorAdvanced;
 class TaskEditorAlarms;
 class ORecurranceWidget;
 class QMultiLineEdit;
@@ -33,7 +33,7 @@ private:
 
     OTabWidget         *m_tab;
     TaskEditorOverView *m_overView;
-    TaskEditorAdvancedImpl *m_adv;
+    TaskEditorAdvanced *m_adv;
     TaskEditorAlarms   *m_alarm;
     TaskEditorAlarms   *m_remind;
     ORecurranceWidget  *m_rec;

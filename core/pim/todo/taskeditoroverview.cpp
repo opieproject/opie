@@ -40,8 +40,6 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
-#include <qtooltip.h>
-#include <qvariant.h>
 #include <qwhatsthis.h>
 
 TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFlags fl )
@@ -61,7 +59,6 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     m_start = m_comp = m_due = curDate;
     QString curDateStr = TimeString::longDateString( curDate );
 
-    // TODO - add QScrollView for contents
     QVBoxLayout *vb = new QVBoxLayout( this );
 
     QScrollView *sv = new QScrollView( this );
