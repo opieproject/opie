@@ -170,9 +170,6 @@ protected:
     #endif
 #endif
 private:
-#ifndef QT_NO_TRANSLATION
-    void installTranslation( const QString& baseName );
-#endif
     void mapToDefaultAction( QWSKeyEvent *ke, int defKey );
     void processQCopFile();
 
