@@ -183,6 +183,12 @@ public:
 	virtual bool setDisplayContrast ( int contrast );
 	virtual int displayContrastResolution ( ) const;
 
+	// don't add new virtual methods, use this:
+	//	/*virtual */ void boo(int i ) { return virtual_hook(1,&i); };
+	// and in your subclass do do overwrite
+	//	protected virtual int virtual_hook(int, void *)
+	// which is defined below
+
 // input / output
         //FIXME playAlarmSound and al might be better -zecke
 	virtual void alarmSound ( );
