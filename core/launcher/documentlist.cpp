@@ -63,6 +63,8 @@ public:
     const DocLnk *iterate();
     bool store( DocLnk* dl );
     void estimatedPercentScanned();
+    void appendDocpath(FileSystem*);
+    
 
     DocLnkSet dls;
     QDict<void> reference;
@@ -427,6 +429,32 @@ DocumentListPrivate::DocumentListPrivate( ServerInterface *gui )
     tid = 0;
 }
 
+void DocumentListPrivate::appendDocpath(FileSystem*fs)
+{
+    QDir defPath(fs->path()+"/Documents");
+    QFileInfo f(fs->path()+"/.opiestorage.cf");
+    if (!f.exists()) {
+        if (defPath.exists()) {
+            docPaths+=defPath.path();
+        }
+        return;
+    }
+    Config conf(f.filePath(), Config::File );
+    conf.setGroup("subdirs");
+    QStringList subDirs = conf.readListEntry("subdirs",':');
+    if (subDirs.isEmpty()) {
+        if (defPath.exists()) {
+            docPaths+=defPath.path();
+        }
+        return;
+    }
+    for (unsigned c = 0; c < subDirs.count();++c) {
+        QDir docDir(QString(fs->path()+"/"+subDirs[c]));
+        if (docDir.exists()) {
+            docPaths+=docDir.path();
+        }
+    }
+}
 
 void DocumentListPrivate::initialize()
 {
@@ -441,13 +469,14 @@ void DocumentListPrivate::initialize()
     int i = 1;
     const QList<FileSystem> &fs = storage->fileSystems();
     QListIterator<FileSystem> it( fs );
-    for ( ; it.current(); ++it )
-	if ( (*it)->isRemovable() ) {
-	    docPaths += (*it)->path();
-	    i++;
-	}
+    for ( ; it.current(); ++it ) {
+        if ( (*it)->isRemovable() ) {
+            appendDocpath((*it));
+            ++i;
+        }
+    }
 
-    for ( int i = 0; i < MAX_SEARCH_DEPTH; i++ ) {
+    for ( int i = 0; i < MAX_SEARCH_DEPTH; ++i ) {
 	if ( listDirs[i] ) {
 	    delete listDirs[i];
 	    listDirs[i] = 0;
