@@ -8,7 +8,7 @@ HEADERS     =
 
 INCLUDEPATH += $(QTDIR)/include
 
-DESTDIR      = $(OPIEDIR)/lib
+DESTDIR      = $(QTDIR)/lib
 TARGET       = preload
 
 VERSION      = 1.0.0
