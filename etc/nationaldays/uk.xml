@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nationaldays>
+<description value="UK. Holidays"/>
+<entries>
+<entry name="New Year's Day" date="01-01"/>
+<entry name="Christmas Day" date="12-25"/>
+<entry name="Boxing Day" date="12-26"/>
+<entry name="St Patrick's Day (Northern Ireland)" date="03-17"/>
+<entry name="Good Friday" type="floating">
+  <calculation>
+    <date value="easter"/>
+    <offset value="-2"/>
+  </calculation>
+</entry>
+<entry name="Easter Sunday" type="floating">
+  <calculation>
+    <date value="easter"/>
+  </calculation>
+</entry>
+<entry name="Early May Bank Holiday" type="floating">
+  <calculation>
+    <weekday value="monday"/>
+    <dayofmonth value="first"/>
+    <month value="may"/>
+  </calculation>
+</entry>
+<entry name="Spring Bank Holiday" type="floating">
+  <calculation>
+     <weekday value="monday"/>
+     <dayofmonth value="last"/>
+     <month value="may"/>
+  </calculation>
+</entry>
+<entry name="Battle of the Boyne (Northern Ireland)" date="07-12"/>
+<entry name="Summer Bank Holiday" type="floating">
+  <calculation>
+    <weekday value="monday"/>
+    <dayofmonth value="last"/>
+    <month value="august"/>
+  </calculation>
+</entry>
+</entries>
+</nationaldays>
