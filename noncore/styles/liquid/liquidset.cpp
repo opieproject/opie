@@ -88,6 +88,7 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 
 	m_opacsld = new QSlider ( Horizontal, this );
 	m_opacsld-> setRange ( -20, 20 );
+	m_opacsld-> setSteps ( 1, 1 );
 	m_opacsld-> setValue ( opacity );
 	m_opacsld-> setTickmarks ( QSlider::Below );
 	grid-> addMultiCellWidget ( m_opacsld, 1, 1, 2, 5 );
@@ -112,6 +113,7 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 	
 	m_contsld = new QSlider ( Horizontal, this );
 	m_contsld-> setRange ( 0, 10 );
+	m_contsld-> setSteps ( 1, 1 );
 	m_contsld-> setValue ( contrast );
 	m_contsld-> setTickmarks ( QSlider::Below );
 	hbox-> addWidget ( m_contsld, 10 );
