@@ -1,5 +1,4 @@
-TEMPLATE	= 	app
-CONFIG		+= 	qt warn_on debug
+CONFIG		+= 	qt warn_on debug quick-app
 #CONFIG		+= 	qt warn_on release
 HEADERS		= 	accounteditor.h \
 		  	addresspicker.h \
@@ -43,7 +42,6 @@ INTERFACES	= 	accounteditorbase.ui \
 INCLUDEPATH    += 	$(OPIEDIR)/include libmail
 LIBS           += 	-lmail -lqpe -lopie
 TARGET		= 	mail 
-DESTDIR		= 	$(OPIEDIR)/bin
 
 TRANSLATIONS = ../../i18n/de/mail.ts \
 	 ../../i18n/nl/mail.ts \
