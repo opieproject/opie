@@ -960,7 +960,7 @@ you setup the modem</source>
     </message>
     <message>
         <source>&amp;Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Apparaten</translation>
     </message>
 </context>
 <context>
@@ -1054,7 +1054,7 @@ you setup the modem</source>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Modem Query timed out.</source>
@@ -1078,7 +1078,7 @@ you setup the modem</source>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit</translation>
     </message>
     <message>
         <source>You&apos;re not allowed to dial out with kppp.
@@ -1200,7 +1200,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume:</translation>
     </message>
     <message>
         <source>Session Bill:</source>
