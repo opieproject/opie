@@ -29,7 +29,7 @@
 #include <qtopia/qpeapplication.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/private/categories.h>
-#include <qtopia/custom.h>
+//#include <qtopia/custom.h>
 
 #include <qdir.h>
 #ifdef Q_WS_QWS
@@ -82,7 +82,7 @@ static bool isVisibleWindow( int );
 //===========================================================================
 
 LauncherTabWidget::LauncherTabWidget( Launcher* parent ) :
-    QVBox( parent )
+    QVBox( parent ), docview( 0 )
 {
     docLoadingWidgetEnabled = false;
     docLoadingWidget = 0;
@@ -131,20 +131,32 @@ void LauncherTabWidget::createDocLoadingWidget()
     waitPixmap->setPixmap( Resource::loadPixmap( "bigwait" ) );
     waitPixmap->setAlignment( int( QLabel::AlignCenter ) );
 
-    QLabel *textLabel = new QLabel( docLoadingVBox );
-    textLabel->setText( tr( "<b>Finding Documents...</b>" ) );
-    textLabel->setAlignment( int( QLabel::AlignCenter ) );
+    Config cfg( "Launcher" );
+    cfg.setGroup( "DocTab" );
+    bool docTabEnabled = cfg.readBoolEntry( "Enable", true );
 
+    QLabel *textLabel = new QLabel( docLoadingVBox );
+    textLabel->setAlignment( int( QLabel::AlignCenter ) );
     docLoadingWidgetProgress = new QProgressBar( docLoadingVBox );
     docLoadingWidgetProgress->setProgress( 0 );
     docLoadingWidgetProgress->setCenterIndicator( TRUE );
     docLoadingWidgetProgress->setBackgroundMode( NoBackground ); // No flicker
     setProgressStyle();
 
+    if ( docTabEnabled )
+    {
+        textLabel->setText( tr( "<b>Finding Documents...</b>" ) );
+    }
+    else
+    {
+        textLabel->setText( tr( "<b>The Documents Tab<p>has been disabled.<p>"
+                                "Use Settings->Launcher->DocTab<p>to reenable it.</b></center>" ) );
+        docLoadingWidgetProgress->hide();
+    }
+
     QWidget *space2 = new QWidget( docLoadingVBox );
     docLoadingVBox->setStretchFactor( space2, 1 );
 
-    Config cfg("Launcher");
     cfg.setGroup( "Tab Documents" ); // No tr
     setTabViewAppearance( docLoadingWidget, cfg );
 
@@ -429,6 +441,9 @@ Launcher::Launcher()
 {
     tabs = 0;
     tb = 0;
+    Config cfg( "Launcher" );
+    cfg.setGroup( "DocTab" );
+    docTabEnabled = cfg.readBoolEntry( "Enable", true );
 }
 
 void Launcher::createGUI()
@@ -472,17 +487,16 @@ void Launcher::createGUI()
     QPixmap pm;
     pm = img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
     // It could add this itself if it handles docs
+
     tabs->newView("Documents", pm, tr("Documents") )->setToolsEnabled( TRUE );
+
     QTimer::singleShot( 0, tabs, SLOT( initLayout() ) );
-
     qApp->setMainWidget( this );
-
     QTimer::singleShot( 500, this, SLOT( makeVisible() ) );
 }
 
 Launcher::~Launcher()
 {
-    qApp->setMainWidget( 0 );
     if ( tb )
 	destroyGUI();
 }
@@ -576,13 +590,6 @@ void Launcher::select( const AppLnk *appLnk )
 	    if ( i == 1 )
 		Global::execute(Service::app("Open/text/*"),appLnk->file());
 #endif
-
-// as long as we dont have services use qcop to open the document
-       QCopEnvelope en( "QPE/Application/textedit", "raise()" );
-        QCopEnvelope env( "QPE/Application/textedit", "setDocument(QString)" );
-        env << appLnk->file();
-
-
 	    return;
 	}
 	tabs->setBusy(TRUE);
@@ -715,7 +722,6 @@ void Launcher::allDocumentsRemoved()
 
 void Launcher::applicationStateChanged( const QString& name, ApplicationState state )
 {
-    qWarning("State changed %s %d",name.latin1(),state );
     tb->setApplicationState( name, state );
 }
 
@@ -743,6 +749,14 @@ void Launcher::applicationScanningProgress( int percent )
 
 void Launcher::documentScanningProgress( int percent )
 {
+    if ( !docTabEnabled )
+    {
+        qDebug( "Launcher: document tab disabled!" );
+        tabs->setLoadingProgress( 100 );
+	    tabs->setLoadingWidgetEnabled( TRUE );
+        return;
+    }
+
     switch ( percent ) {
         case 0: {
 	    tabs->setLoadingProgress( 0 );
