@@ -1,0 +1,7 @@
+18/03/03
+
+1. (BUG*) reported size in -fsz mode was 8 bytes too small
+2. (NEW) added -f switch for specifying the frame rate in fps
+3. (BUG*) some DWORDs weren't being converted to little-endian
+4. (NEW) added --version switch
+5. *** VERSION 1.2 frozen ***
