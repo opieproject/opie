@@ -133,7 +133,7 @@ QDateTime TimeConversion::fromISO8601( const QCString &s )
     tzset();
 #endif
 
-    struct tm *thetime = new tm;
+    struct tm thetime;
 
     QCString str = s.copy();
     str.replace(QRegExp("-"), "" );
@@ -152,23 +152,24 @@ QDateTime TimeConversion::fromISO8601( const QCString &s )
     }
 
 //     qDebug("--- parsing ISO time---");
-    thetime->tm_year = 100;
-    thetime->tm_mon = 0;
-    thetime->tm_mday = 0;
-    thetime->tm_hour = 0;
-    thetime->tm_min = 0;
-    thetime->tm_sec = 0;
+    memset( &thetime, 0, sizeof(tm) );
+    thetime.tm_year = 100;
+    thetime.tm_mon = 0;
+    thetime.tm_mday = 0;
+    thetime.tm_hour = 0;
+    thetime.tm_min = 0;
+    thetime.tm_sec = 0;
 
 //     qDebug("date = %s", date.data() );
 
     switch( date.length() ) {
 	case 8:
-	    thetime->tm_mday = date.right( 2 ).toInt();
+	    thetime.tm_mday = date.right( 2 ).toInt();
 	case 6:
-	    thetime->tm_mon = date.mid( 4, 2 ).toInt() - 1;
+	    thetime.tm_mon = date.mid( 4, 2 ).toInt() - 1;
 	case 4:
-	    thetime->tm_year = date.left( 4 ).toInt();
-	    thetime->tm_year -= 1900;
+	    thetime.tm_year = date.left( 4 ).toInt();
+	    thetime.tm_year -= 1900;
 	    break;
 	default:
 	    break;
@@ -206,11 +207,11 @@ QDateTime TimeConversion::fromISO8601( const QCString &s )
     // get the time:
     switch( timestr.length() ) {
 	case 6:
-	    thetime->tm_sec = timestr.mid( 4 ).toInt();
+	    thetime.tm_sec = timestr.mid( 4 ).toInt();
 	case 4:
-	    thetime->tm_min = timestr.mid( 2, 2 ).toInt();
+	    thetime.tm_min = timestr.mid( 2, 2 ).toInt();
 	case 2:
-	    thetime->tm_hour = timestr.left( 2 ).toInt();
+	    thetime.tm_hour = timestr.left( 2 ).toInt();
 	default:
 	    break;
     }
@@ -227,10 +228,10 @@ QDateTime TimeConversion::fromISO8601( const QCString &s )
 //     qDebug("time: %d %d %d, tzloc=%d, tzoff=%d", thetime->tm_hour, thetime->tm_min, thetime->tm_sec,
 //  	   tzloc, tzoff );
 
-    tmp = mktime( thetime );
+    tmp = mktime( &thetime );
     tmp += 60*(-tzloc + tzoff);
 
-    delete thetime;
+
 
     return fromUTC( tmp );
 }
