@@ -98,13 +98,13 @@ void WLANImp::parseSettingFile(){
 	  channelLabel->setEnabled(true);
 	}
       }
-      if(line.contains("KEY0="))
+      if(line.contains("#KEY0="))
         keyLineEdit0->setText(line.mid(5, line.length()));
-      if(line.contains("KEY1="))
+      if(line.contains("#KEY1="))
         keyLineEdit1->setText(line.mid(5, line.length()));
-      if(line.contains("KEY2="))
+      if(line.contains("#KEY2="))
         keyLineEdit2->setText(line.mid(5, line.length()));
-      if(line.contains("KEY3="))
+      if(line.contains("#KEY3="))
         keyLineEdit3->setText(line.mid(5, line.length()));
       
       if(line.contains("KEY=")){
@@ -165,7 +165,6 @@ void WLANImp::changeAndSaveSettingFile(){
       if(!essAny->isChecked() == true){
         stream << "\tESSID=any\n";
 	stream << "\tMODE=Managed\n";
-        stream << "\tCHANNEL=6\n";
       }
       else{
         stream << "\tESSID=" << essSpecificLineEdit->text() << '\n';
@@ -173,10 +172,10 @@ void WLANImp::changeAndSaveSettingFile(){
         stream << "\tCHANNEL=" << networkChannel->value() << "\n";
       } 
 
-      stream << "\tKEY0=" << keyLineEdit0->text() << "\n";
-      stream << "\tKEY1=" << keyLineEdit1->text() << "\n";
-      stream << "\tKEY2=" << keyLineEdit2->text() << "\n";
-      stream << "\tKEY3=" << keyLineEdit3->text() << "\n";
+      stream << "\t#KEY0=" << keyLineEdit0->text() << "\n";
+      stream << "\t#KEY1=" << keyLineEdit1->text() << "\n";
+      stream << "\t#KEY2=" << keyLineEdit2->text() << "\n";
+      stream << "\t#KEY3=" << keyLineEdit3->text() << "\n";
       
       if(wepEnabled->isChecked()){
         stream << "\tKEY=\"";
@@ -208,14 +207,13 @@ void WLANImp::changeAndSaveSettingFile(){
  */
 void WLANImp::accept(){
   if(wepEnabled->isChecked()){
-    if(keyLineEdit0->text().isEmpty() && keyLineEdit1->text().isEmpty() && keyLineEdit2->text().isEmpty() && keyLineEdit3->text().isEmpty() )
-	{
-    	QMessageBox::information(this, "Error", "Please enter a key for WEP.", QMessageBox::Ok);
-    	return;
-	}
+    if(keyLineEdit0->text().isEmpty() && keyLineEdit1->text().isEmpty() && keyLineEdit2->text().isEmpty() && keyLineEdit3->text().isEmpty() ){
+      QMessageBox::information(this, "Error", "Please enter a key for WEP.", QMessageBox::Ok);
+      return;
+    }
   }	
   
-  if(essSpecificLineEdit->text().isEmpty()){
+  if(essAny->isChecked() && essSpecificLineEdit->text().isEmpty()){
     QMessageBox::information(this, "Error", "Please enter a ESS-ID.", QMessageBox::Ok);
     return;
   }
