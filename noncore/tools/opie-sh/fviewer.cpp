@@ -48,8 +48,9 @@ FViewer::FViewer(QString filename, QString title, QWidget *parent=0, const char*
 	stream =  new QTextStream(file);
 
 	string = stream->read();
-	textView->setText(string);
-	textView->mimeSourceFactory()->setFilePath(QDir::currentDirPath());
+	textView->mimeSourceFactory()->setFilePath(QDir::currentDirPath()+"/");
+	textView->setText(string, QDir::currentDirPath()+"/");
+	printf("%s\n", QDir::currentDirPath().latin1());
 	file->close();
 
 }
