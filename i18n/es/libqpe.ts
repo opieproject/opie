@@ -745,6 +745,34 @@ Libere memoria e intételo de nuevo.</translation>
         <source>New Document</source>
         <translation>Nuevo documento</translation>
     </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Lun</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Mar</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Mie</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Jue</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Vie</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Sáb</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">Dom</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -823,37 +851,6 @@ Libere memoria e intételo de nuevo.</translation>
     <message>
         <source>None</source>
         <translation>Ninguno</translation>
-    </message>
-</context>
-<context>
-    <name>TimeString</name>
-    <message>
-        <source>Mon</source>
-        <translation type="unfinished">Lun</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation type="unfinished">Mar</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation type="unfinished">Mie</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation type="unfinished">Jue</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation type="unfinished">Vie</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation type="unfinished">Sáb</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation type="unfinished">Dom</translation>
     </message>
 </context>
 <context>

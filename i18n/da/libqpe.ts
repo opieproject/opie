@@ -746,6 +746,34 @@ Frigør noget hukommelse og prøv igen.</translation>
         <source>Groups</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Man</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Tir</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Ons</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Tor</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Fre</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Lør</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">Søn</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -824,37 +852,6 @@ Frigør noget hukommelse og prøv igen.</translation>
     <message>
         <source>None</source>
         <translation>Ingen</translation>
-    </message>
-</context>
-<context>
-    <name>TimeString</name>
-    <message>
-        <source>Mon</source>
-        <translation type="unfinished">Man</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation type="unfinished">Tir</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation type="unfinished">Ons</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation type="unfinished">Tor</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation type="unfinished">Fre</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation type="unfinished">Lør</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation type="unfinished">Søn</translation>
     </message>
 </context>
 <context>

@@ -12,7 +12,7 @@
     </message>
     <message>
         <source> (multi.)</source>
-        <translation>Mehrere</translation>
+        <translation>(Mehrere)</translation>
     </message>
     <message>
         <source>Business</source>
@@ -20,14 +20,14 @@
     </message>
     <message>
         <source>Personal</source>
-        <translation>Persönlich</translation>
+        <translation>Privat</translation>
     </message>
 </context>
 <context>
     <name>CategoryCombo</name>
     <message>
         <source> (Multi.)</source>
-        <translation>Mehrere</translation>
+        <translation>(Mehrere)</translation>
     </message>
 </context>
 <context>
@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Nicht zugeordnet</translation>
+        <translation>Nicht zugewiesen</translation>
     </message>
 </context>
 <context>
@@ -112,8 +112,7 @@
     <message>
         <source>Sorry, another application is
 editing categories.</source>
-        <translation>Tut mir leid.
-Eine andere Anwendung bearbeitet gerade 
+        <translation>Eine andere Anwendung bearbeitet gerade 
 die Kategorien.</translation>
     </message>
     <message>
@@ -524,19 +523,19 @@ frei und versuchen Sie es noch einmal
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation>Tel. gesch.: </translation>
+        <translation>Gesch.Tel.: </translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation>Fax gesch.: </translation>
+        <translation>Gesch. Fax: </translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation>Handy gesch.: </translation>
+        <translation>Gesch. Handy: </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation>Pieper gesch.: </translation>
+        <translation>Gesch. Pager:</translation>
     </message>
     <message>
         <source>Profession: </source>
@@ -544,7 +543,7 @@ frei und versuchen Sie es noch einmal
     </message>
     <message>
         <source>Assistant: </source>
-        <translation>Assistent:</translation>
+        <translation>Assistent: </translation>
     </message>
     <message>
         <source>Manager: </source>
@@ -750,6 +749,34 @@ frei und versuchen Sie es noch einmal
         <source>New Document</source>
         <translation>Neues Dokument</translation>
     </message>
+    <message>
+        <source>Mon</source>
+        <translation>Mon</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation>Die</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation>Mit</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation>Don</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation>Fre</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation>Sam</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation>Son</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -766,7 +793,7 @@ frei und versuchen Sie es noch einmal
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation>Was ist das ?</translation>
+        <translation>Was ist das...</translation>
     </message>
 </context>
 <context>
@@ -828,37 +855,6 @@ frei und versuchen Sie es noch einmal
     <message>
         <source>None</source>
         <translation>Keine</translation>
-    </message>
-</context>
-<context>
-    <name>TimeString</name>
-    <message>
-        <source>Mon</source>
-        <translation>Mon</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>Die</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>Mit</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>Don</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>Fre</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>Sam</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>Son</translation>
     </message>
 </context>
 <context>

@@ -745,6 +745,34 @@ Zwolnij wiecej pamieci</translation>
         <source>New Document</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Pon</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Wto</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Sro</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Czw</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Pia</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Sob</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">Nie</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -823,37 +851,6 @@ Zwolnij wiecej pamieci</translation>
     <message>
         <source>None</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TimeString</name>
-    <message>
-        <source>Mon</source>
-        <translation type="unfinished">Pon</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation type="unfinished">Wto</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation type="unfinished">Sro</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation type="unfinished">Czw</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation type="unfinished">Pia</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation type="unfinished">Sob</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation type="unfinished">Nie</translation>
     </message>
 </context>
 <context>

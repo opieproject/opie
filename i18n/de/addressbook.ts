@@ -99,7 +99,7 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>nicht eingeteilt</translation>
+        <translation>nicht zugewiesen</translation>
     </message>
     <message>
         <source>Close Find</source>
@@ -111,7 +111,7 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Konfigurations</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -135,7 +135,7 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>Right file type ?</source>
-        <translation>Korrekter Dateityp?</translation>
+        <translation>Korrekter Dateityp ?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
@@ -148,15 +148,15 @@ Dennoch beenden?</translation>
     <message>
         <source>Unable to find a contact for this 
  search pattern!</source>
-        <translation>Suchmuster konnte nicht gefunden werden!</translation>
+        <translation>Suchmuster konnte nicht gefunden werden !</translation>
     </message>
     <message>
         <source>The selected file 
  does not end with &quot;.vcf&quot;.
  Do you really want to open it?</source>
         <translation>Die ausgewählte Datei endet
-nicht mit &quot;.vcf&quot;. Wollen Sie sie
-trotzdem öffnen?</translation>
+nicht mit &quot;.vcf&quot;. 
+Wollen Sie sie trotzdem öffnen ?</translation>
     </message>
     <message>
         <source>Add Contact?</source>
@@ -170,7 +170,7 @@ hinzufügen?</translation>
     </message>
     <message>
         <source>&amp;All Yes</source>
-        <translation>&amp;Alle Ja</translation>
+        <translation>&amp;Ja, alle</translation>
     </message>
 </context>
 <context>
@@ -241,7 +241,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Select Contact Order:</source>
-        <translation>Wähle Reihenfolge für Kontakt:</translation>
+        <translation>Wähle Reihenfolge für Kontakt: </translation>
     </message>
     <message>
         <source>Up</source>
@@ -261,7 +261,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation>Konfiguration</translation>
+        <translation>Einstellungen</translation>
     </message>
 </context>
 <context>
@@ -1239,7 +1239,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Haupt-E-Mail</translation>
+        <translation>Gesch. Tel.</translation>
     </message>
     <message>
         <source>Emails</source>
@@ -1247,15 +1247,15 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Telefonnummer</translation>
+        <translation>Priv. Telefon</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Fax privat</translation>
+        <translation>Priv. Fax</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Handy privat</translation>
+        <translation>Priv. Handy</translation>
     </message>
     <message>
         <source>Office</source>
@@ -1339,51 +1339,51 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Stadt, gesch.</translation>
+        <translation>Gesch. Stadt</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Staat, gesch.</translation>
+        <translation>Gesch. Staat</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Postleitzahl, gesch.</translation>
+        <translation>Gesch. PLZ</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Land, gesch.</translation>
+        <translation>Gesch. Land</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Pager, gesch.</translation>
+        <translation>Gesch. Pager</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Web, gesch.</translation>
+        <translation>Gesch. Web</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Straße, privat</translation>
+        <translation>Priv. Straße</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Stadt, privat</translation>
+        <translation>Priv. Stadt</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Staat, privat</translation>
+        <translation>Priv. Staat</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Postleitzahl, privat</translation>
+        <translation>Priv. PLZ</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Land, privat</translation>
+        <translation>Priv. Land</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Web, privat</translation>
+        <translation>Priv. Webseite</translation>
     </message>
     <message>
         <source>Notes</source>

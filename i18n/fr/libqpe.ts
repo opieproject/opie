@@ -746,6 +746,34 @@ Libérez de la mémoire et réessayez.</translation>
         <source>New Document</source>
         <translation>Nouveau document</translation>
     </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Lu</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Ma</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Me</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Je</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Ve</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Sa</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">Di</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -824,37 +852,6 @@ Libérez de la mémoire et réessayez.</translation>
     <message>
         <source>None</source>
         <translation>Aucun</translation>
-    </message>
-</context>
-<context>
-    <name>TimeString</name>
-    <message>
-        <source>Mon</source>
-        <translation>Lu</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>Ma</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>Me</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>Je</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>Ve</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>Sa</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>Di</translation>
     </message>
 </context>
 <context>

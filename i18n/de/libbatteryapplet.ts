@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Charging both devices</source>
-        <translation>Beide Einheiten werden geladen</translation>
+        <translation>Beide Akkus werden geladen</translation>
     </message>
     <message>
         <source>Charging</source>
@@ -24,11 +24,11 @@
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation>Verbleibende Energie in Prozent:</translation>
+        <translation>Verbleibende Energie in Prozent: </translation>
     </message>
     <message>
         <source>Battery status: </source>
-        <translation>Batteriestatus:</translation>
+        <translation>Batteriestatus: </translation>
     </message>
     <message>
         <source>Good</source>
@@ -60,7 +60,7 @@
     </message>
     <message>
         <source>External power disconnected</source>
-        <translation>Externe Stromquelle nicht mehr verbuden</translation>
+        <translation>Vom Netz getrennt</translation>
     </message>
     <message>
         <source>Battery time remaining</source>

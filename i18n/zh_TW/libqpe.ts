@@ -745,6 +745,34 @@ Free some memory and try again.</source>
         <source>New Document</source>
         <translation>新增文件</translation>
     </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">一</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">二</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">三</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">四</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">五</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">六</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">日</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -823,37 +851,6 @@ Free some memory and try again.</source>
     <message>
         <source>None</source>
         <translation>無</translation>
-    </message>
-</context>
-<context>
-    <name>TimeString</name>
-    <message>
-        <source>Mon</source>
-        <translation type="unfinished">一</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation type="unfinished">二</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation type="unfinished">三</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation type="unfinished">四</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation type="unfinished">五</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation type="unfinished">六</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation type="unfinished">日</translation>
     </message>
 </context>
 <context>

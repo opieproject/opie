@@ -746,6 +746,34 @@ tente novamente.</translation>
         <source>New Document</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Seg</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Ter</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Qua</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Qui</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Sex</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Sab</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">Dom</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -824,37 +852,6 @@ tente novamente.</translation>
     <message>
         <source>None</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TimeString</name>
-    <message>
-        <source>Mon</source>
-        <translation type="unfinished">Seg</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation type="unfinished">Ter</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation type="unfinished">Qua</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation type="unfinished">Qui</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation type="unfinished">Sex</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation type="unfinished">Sab</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation type="unfinished">Dom</translation>
     </message>
 </context>
 <context>
