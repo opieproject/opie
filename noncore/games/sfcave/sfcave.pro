@@ -1,8 +1,8 @@
 TEMPLATE	= app
 CONFIG		+= qt warn_on release
 DESTDIR		= $(OPIEDIR)/bin
-SOURCES 	= sfcave.cpp
-HEADERS 	= sfcave.h
+SOURCES 	= sfcave.cpp helpwindow.cpp
+HEADERS 	= sfcave.h helpwindow.h
 TARGET		= sfcave
 INCLUDEPATH 	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
