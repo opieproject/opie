@@ -25,8 +25,13 @@
 
 #include <qpe/qpeapplication.h>
 
+void myMessages( QtMsgType, const char*  ) {
+
+}
+
 int main( int argc, char **argv )
 {
+    qInstallMsgHandler( myMessages );
     QPEApplication a( argc, argv );
 
     QTime time;
@@ -37,7 +42,7 @@ int main( int argc, char **argv )
     mw.setCaption("Opie Todolist");
     QObject::connect( &a, SIGNAL( flush() ), &mw, SLOT( slotFlush() ) );
     QObject::connect( &a, SIGNAL( reload() ), &mw, SLOT( slotReload() ) );
-    
+
     a.showMainWidget(&mw);
 
     return a.exec();
