@@ -49,11 +49,10 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         bool rem = remove( uid );
         QCopEnvelope e(m_str, "removed(bool)" );
         e << rem;
-    }else if ( cmd == "beam(int,int)" ) {
+    }else if ( cmd == "beam(int)" ) {
         int uid, trans;
         stream >> uid;
-        stream >> trans;
-        beam( uid, trans );
+        beam( uid);
     }else if ( cmd == "show(int)" ) {
         int uid;
         stream >> uid;
