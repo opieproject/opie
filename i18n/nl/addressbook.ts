@@ -185,7 +185,7 @@ toevoegen voor %1?</translation>
     </message>
     <message>
         <source>Unable to find a contact for this search pattern!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan geen kontakt vinden met dit zoekpatroon!</translation>
     </message>
 </context>
 <context>
