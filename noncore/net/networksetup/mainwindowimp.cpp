@@ -304,33 +304,34 @@ void MainWindowImp::jobDone(KProcess *process){
       // We have found an interface
       QString interfaceName = line.mid(0, space);
       Interface *i;
+      // We have found an interface
+      //qDebug(QString("MainWindowImp: Found Interface: %1").arg(line).latin1());
       // See if we already have it
       if(interfaceNames.find(interfaceName) == interfaceNames.end()){
         if(fileName == TEMP_ALL)
-          i = new Interface(interfaceName, false);
+          i = new Interface(this, interfaceName, false);
         else
-          i = new Interface(interfaceName, true);
+          i = new Interface(this, interfaceName, true);
+        i->setAttached(true);
+
+        QString hardName = "Ethernet";
+        int hardwareName = line.find("Link encap:");
+        int macAddress = line.find("HWaddr");
+        if(macAddress == -1)
+          macAddress = line.length();
+        if(hardwareName != -1)
+          i->setHardwareName(line.mid(hardwareName+11, macAddress-(hardwareName+11)) + QString(" (%1)").arg(i->getInterfaceName()));
+      
+        interfaceNames.insert(i->getInterfaceName(), i);
+        updateInterface(i);
+        connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
       }
+      // It was an interface we already had.
       else{
         i = interfaceNames[interfaceName];
         if(fileName != TEMP_ALL)
           i->setStatus(true);
       }
-      
-      i->setAttached(true);
-      i->setInterfaceName(interfaceName);
-
-      QString hardName = "Ethernet";
-      int hardwareName = line.find("Link encap:");
-      int macAddress = line.find("HWaddr");
-      if(macAddress == -1)
-        macAddress = line.length();
-      if(hardwareName != -1)
-        i->setHardwareName(line.mid(hardwareName+11, macAddress-(hardwareName+11)) + QString(" (%1)").arg(i->getInterfaceName()));
-      // We have found an interface
-      //qDebug(QString("MainWindowImp: Found Interface: %1").arg(line).latin1());
-      interfaceNames.insert(i->getInterfaceName(), i);
-      updateInterface(i);
     }
   }
   file.close();
@@ -347,12 +348,12 @@ void MainWindowImp::jobDone(KProcess *process){
 	  found = true;
       }
       if(!found){
-        Interface *i = new Interface(*ni, false);
+        Interface *i = new Interface(this, *ni, false);
 	i->setAttached(false);
 	i->setHardwareName(QString("Disconnected (%1)").arg(*ni));
-	i->setInterfaceName(*ni);
 	interfaceNames.insert(i->getInterfaceName(), i);
 	updateInterface(i);
+      	connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
       }
     }
   }
@@ -395,7 +396,9 @@ void MainWindowImp::updateInterface(Interface *i){
     typeName = "irda";
   if(i->getInterfaceName().contains("wlan"))
     typeName = "wlan";
-  
+  if(i->getInterfaceName().contains("usb"))
+    typeName = "usb";
+   
   if(!i->isAttached())
     typeName = "connect_no";
   // Actually try to use the Module

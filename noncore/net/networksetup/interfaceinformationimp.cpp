@@ -13,16 +13,22 @@ InterfaceInformationImp::InterfaceInformationImp(QWidget *parent, const char *na
   assert(i);
   
   interface = i;
-  updateInterface();
-  connect(startButton, SIGNAL(clicked()), this, SLOT(start()));
-  connect(stopButton, SIGNAL(clicked()), this, SLOT(stop()));
-  connect(restartButton, SIGNAL(clicked()), this, SLOT(restart()));
-  connect(refreshButton, SIGNAL(clicked()), this, SLOT(refresh()));
+  connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
+  updateInterface(interface);
+  connect(startButton, SIGNAL(clicked()), interface, SLOT(start()));
+  connect(stopButton, SIGNAL(clicked()), interface, SLOT(stop()));
+  connect(restartButton, SIGNAL(clicked()), interface, SLOT(restart()));
+  connect(refreshButton, SIGNAL(clicked()), interface, SLOT(refresh()));
   connect(advancedButton, SIGNAL(clicked()), this, SLOT(advanced()));
   
 }
 
-void InterfaceInformationImp::updateInterface(){
+/**
+ * Update the interface information and buttons.
+ * @param Intarface *i the interface to update (should be the one we already
+ *                     know about).
+ */ 
+void InterfaceInformationImp::updateInterface(Interface *i){
   if(interface->getStatus()){
     startButton->setEnabled(false);
     stopButton->setEnabled(true);
@@ -38,39 +44,6 @@ void InterfaceInformationImp::updateInterface(){
   subnetMaskLabel->setText(interface->getSubnetMask());
   broadcastLabel->setText(interface->getBroadcast());
 }
-
-/**
- * Start the interface. Update the information if successfull
- */ 
-void InterfaceInformationImp::start(){
-  if(interface->start()){
-    updateInterface();
-  }
-}
-
-/**
- * Stop the interface.
- */ 
-void InterfaceInformationImp::stop(){
-  if(interface->stop()){
-    updateInterface();
-  }
-}
-
-/***
- * Tell the interface to refresh its information.
- **/
-void InterfaceInformationImp::refresh(){
-  if(interface->refresh())
-    updateInterface();
-}
-
-void InterfaceInformationImp::restart(){
-  if(interface->restart()){
-     updateInterface();
-  }
-}
-
 
 /**
  * Create the advanced widget. Fill it with the current interface's information.

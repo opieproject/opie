@@ -11,51 +11,92 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Interface::Interface(QString name, bool newSatus): status(newSatus), attached(false), interfaceName(name), hardareName("Unknown"), moduleOwner(NULL), macAddress(""), ip("0.0.0.0"), broadcast(""), subnetMask("0.0.0.0"), dhcp(false){
+Interface::Interface(QObject * parent, const char * name, bool newSatus): QObject(parent, name), status(newSatus), attached(false), hardareName("Unknown"), moduleOwner(NULL), macAddress(""), ip("0.0.0.0"), broadcast(""), subnetMask("0.0.0.0"), dhcp(false){
   refresh();
 }
 
 /**
- * Try to start the interface.
- * @return bool true if successfull.
+ * Set status
+ * @param newStatus - the new status
+ * emit updateInterface
  */ 
-bool Interface::start(){
+void Interface::setStatus(bool newStatus){
+  if(status != newStatus){
+    status = newStatus;
+    refresh();
+  }
+};
+
+/**
+ * Set if attached or not (802.11 card pulled out for example)
+ * @param isAttached - if attached
+ * emit updateInterface
+ */ 
+void Interface::setAttached(bool isAttached){
+  attached = isAttached;
+  emit(updateInterface(this));
+};
+  
+/**
+ * Set Hardware name
+ * @param name - the new name
+ * emit updateInterface
+ */ 
+void Interface::setHardwareName(QString name){
+  hardareName = name;
+  emit(updateInterface(this));
+};
+ 
+/**
+ * Set Module owner
+ * @param owner - the new owner
+ * emit updateInterface
+ */ 
+void Interface::setModuleOwner(Module *owner){
+  moduleOwner = owner;
+  emit(updateInterface(this));
+};
+
+
+/**
+ * Try to start the interface.
+ */ 
+void Interface::start(){
   // check to see if we are already running.	
-  if(status)
-    return false;
+  if(true == status)
+    return;
 
   int ret = system(QString("%1 %2 up").arg(IFCONFIG).arg(interfaceName).latin1());
+  // See if it was successfull...
   if(ret != 0)
-    return false;
+    return;
   
   status = true;
   refresh();
-  return true;
 }
 
 /**
  * Try to stop the interface.
- * @return bool true if successfull.
  */
-bool Interface::stop(){
+void Interface::stop(){
   // check to see if we are already stopped.	
-  if(status == false)
-    return false;
+  if(false == status)
+    return;
 	  
   int ret = system(QString("%1 %2 down").arg(IFCONFIG).arg(interfaceName).latin1());
   if(ret != 0)
-    return false;
+    return;
 
   status = true;
   refresh();
-  return true;
 }
+
 /**
  * Try to restart the interface.
- * @return bool true if successfull.
  */ 
-bool Interface::restart(){
-  return (stop() && start());
+void Interface::restart(){
+  stop();
+  start();
 }
 
 /**
@@ -74,6 +115,7 @@ bool Interface::refresh(){
     dhcpServerIp = "";
     leaseObtained = "";
     leaseExpires = "";
+    emit(updateInterface(this));
     return true;
   }
 	
@@ -138,6 +180,7 @@ bool Interface::refresh(){
   QString dhcpFile(QString(dhcpDirectory+"/dhcpcd-%1.info").arg(interfaceName));
   // If there is no DHCP information then exit now with no errors.
   if(!QFile::exists(dhcpFile)){
+    emit(updateInterface(this));
     return true;
   }
   
@@ -235,6 +278,8 @@ bool Interface::refresh(){
   leaseExpires = datetime.toString();
   
   dhcp = true;
+  
+  emit(updateInterface(this));
   return true;
 }
 

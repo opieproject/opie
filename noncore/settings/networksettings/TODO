@@ -1,3 +1,5 @@
+Write a class that parses /proc and not ifconfig
+
 [ ] Wlanmodule needs to check if an interface supports wireless
     extensions.
 [x] When you set options in wlanmodule, hit OK, it exits all of

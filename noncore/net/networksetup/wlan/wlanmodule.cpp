@@ -24,8 +24,10 @@ QString WLANModule::getPixmapName(Interface* ){
  * @return bool true if i is owned by this module, false otherwise.
  */ 
 bool WLANModule::isOwner(Interface *i){
-  if(i->getInterfaceName() == "eth0" || i->getInterfaceName() == "wlan0")
+  if(i->getInterfaceName() == "eth0" || i->getInterfaceName() == "wlan0"){
+    i->setHardwareName(QString("802.11b (%1)").arg(i->getInterfaceName()));
     return true;
+  }
   return false;
 }
 

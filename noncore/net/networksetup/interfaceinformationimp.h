@@ -13,15 +13,11 @@ public:
   ~InterfaceInformationImp(){};
   
 private slots:
-  void start();
-  void stop();
-  void refresh();
-  void restart();
   void advanced();
+  void updateInterface(Interface *i);
 
 private:
   Interface *interface;
-  void updateInterface();
   
 };
 
