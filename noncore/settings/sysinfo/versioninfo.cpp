@@ -30,6 +30,7 @@
 #include <qscrollview.h>
 #include <qtextstream.h>
 #include <qtimer.h>
+#include <qstringlist.h>
 #include <qwhatsthis.h>
 
 #include "versioninfo.h"
@@ -59,15 +60,15 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QFile file( "/proc/version" );
     if ( file.open( IO_ReadOnly ) ) {
   QTextStream t( &file );
-  QString v;
-  t >> v; t >> v; t >> v;
-  v = v.left( 20 );
+  QStringList strList;
+
+  strList = QStringList::split(  " " , t.read(),  false );
   kernelVersionString = "<qt>"+tr( "<b>Linux Kernel</b><p>Version: " );
-  kernelVersionString.append( v );
+  kernelVersionString.append( strList[2] );
   kernelVersionString.append( "<p>" );
-  t >> v;
+
   kernelVersionString.append( tr( "Compiled by: " ) );
-  kernelVersionString.append( v );
+  kernelVersionString.append(  strList[3] );
   kernelVersionString.append("</qt>");
   file.close();
     }
@@ -86,7 +87,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     palmtopVersionString.append( tr( "Built on: " ) );
     palmtopVersionString.append( __DATE__  );
     palmtopVersionString.append( "</qt>" );
-    
+
 
     QHBoxLayout *hb1 = new QHBoxLayout( vb );
     hb1->setSpacing( 2 );
