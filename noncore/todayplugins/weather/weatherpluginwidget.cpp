@@ -258,7 +258,7 @@ void WeatherPluginWidget::getPressure( const QString &data )
 			if ( data.mid( pos, 1 ) == "A" )
 				value *= 33.8639 / 100;
 			dataStr = QString::number( value, 'f', 2 );
-			dataStr.append( tr( " hPa" ) );
+			dataStr.append( tr( " kPa" ) );
 		}
 		else
 		{
