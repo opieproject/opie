@@ -62,6 +62,8 @@ public slots:
 	void reload();
 	void appMessage(const QCString &, const QByteArray &);
 	void setDocument( const QString & );
+	void slotFindNext();
+	void slotFindPrevious();
 #ifdef __DEBUG_RELEASE
 	void slotSave();
 #endif
@@ -87,7 +89,8 @@ private slots:
 	void slotFindOpen();
 	void slotFindClose();
 	void slotFind();
-	void slotFindNext();
+	void slotNotFound();
+	void slotWrapAround();
 
 	void slotConfig();
 
@@ -112,7 +115,7 @@ private:
 	OFloatBar* searchBar;
 	QLineEdit* searchEdit;
 	bool useRegExp;
-	bool DoSignalWrapAround;
+	bool doNotifyWrapAround;
 	bool caseSensitive;
 
 	QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, *actionPersonal, *actionMail;

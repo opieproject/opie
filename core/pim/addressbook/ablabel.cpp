@@ -47,7 +47,44 @@ void AbLabel::sync()
 
 void AbLabel::keyPressEvent( QKeyEvent *e )
 {
-    if ( e->key() == Qt::Key_F33 ) {
-	emit okPressed();
-    }
+	// Commonly handled keys
+	switch( e->key() ) {
+	case Qt::Key_Left:
+		qWarning( "Left..");
+	case Qt::Key_F33:
+		qWarning( "OK..");
+		emit okPressed();
+		break;
+	}
+
+
+	if ( /* m_inSearch */ false ) {
+		// Running in seach-mode, therefore we will interprete
+		// some key differently
+		qWarning("Received key in search mode");
+		switch( e->key() ) {
+		case Qt::Key_Up:
+			qWarning("a");
+			// emit signalSearchBackward();
+			break;
+		case Qt::Key_Down:
+			qWarning("b");
+			// emit signalSearchNext();
+			break;
+		}
+		
+	} else {
+		qWarning("Received key in NON search mode");
+		
+		switch( e->key() ) {
+		case Qt::Key_Up:
+			qWarning("a");
+			// emit signalSearchBackward();
+			break;
+		case Qt::Key_Down:
+			qWarning("b");
+			// emit signalSearchNext();
+			break;
+		}
+	}
 }

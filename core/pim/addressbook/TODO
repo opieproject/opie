@@ -6,10 +6,11 @@ Urgent:
 
 Important:
 
-- Picker: Activated letter schould be more visible
+- Cursor keys should work in detail-view (ablabel)
 - "What's this" should be added
 - Store last settings of combo-boxes
 - Mail-Icon is missing
+- Overview window cleanup needed..
 - Finishing of new View functions (List, Phonebook...)
 - The names of the countries are sorted by there english names, only..
   Even if they are translated.. :S
@@ -31,3 +32,5 @@ Fixed:
 - Find widget should be replaced by something like 
   qpdf has.
 - Adding a configuration dialog
+- Picker: Activated letter schould be more visible
+- Advanced handling of cursor keys (search..)

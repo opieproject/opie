@@ -78,12 +78,19 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	: QMainWindow( parent, name, f ),
 	  abEditor(0),
 	  useRegExp(false),
-	  DoSignalWrapAround(false),
+	  doNotifyWrapAround(true),
 	  caseSensitive(false),
 	  bAbEditFirstTime(TRUE),
 	  syncing(FALSE)
 {
 	isLoading = true;
+
+	// Read Config settings
+	Config cfg("AddressBook");
+	cfg.setGroup("Search");
+	useRegExp = cfg.readBoolEntry( "useRegExp" );
+	caseSensitive = cfg.readBoolEntry( "caseSensitive" );
+	doNotifyWrapAround = cfg.readBoolEntry( "doNotifyWrapAround" );
 
 	initFields();
 	
@@ -161,7 +168,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
 	connect( a, SIGNAL( activated() ), this, SLOT( slotFindClose() ) );
 	a->addTo( searchBar );
-	
+
 	a = new QAction( tr( "Write Mail To" ), Resource::loadPixmap( "qtmail/reply" ),
 			 QString::null, 0, this, 0 );
 	//a->setEnabled( FALSE ); we got support for it now :) zecke
@@ -223,7 +230,13 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	// abList->setHScrollBarMode( QScrollView::AlwaysOff );
 	connect( abList, SIGNAL( empty( bool ) ), this, SLOT( listIsEmpty( bool ) ) );
 	connect( abList, SIGNAL( details() ), this, SLOT( slotListView() ) );
-	connect( abList, SIGNAL(currentChanged(int,int)), this, SLOT(slotUpdateToolbar()) );
+	connect( abList, SIGNAL( currentChanged(int,int) ), this, SLOT( slotUpdateToolbar() ) );
+	connect( abList, SIGNAL( signalSearchNext() ), this, SLOT( slotFindNext() ) );
+	connect( abList, SIGNAL( signalSearchBackward() ), this, SLOT( slotFindPrevious() ) );
+	
+	// Maybe we should react on Wraparound and notfound ?
+	QObject::connect( abList, SIGNAL(signalNotFound()), this, SLOT(slotNotFound()) );
+	QObject::connect( abList, SIGNAL(signalWrapAround()), this, SLOT(slotWrapAround()) );
 	
 	mView = 0;
 	
@@ -258,13 +271,6 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	//    qDebug("adressbook contrsuction: t=%d", t.elapsed() );
 
 	abList->setCurrentCell( 0, 0 );
-
-	// Read Config settings
-	Config cfg("AddressBook");
-	cfg.setGroup("Search");
-	useRegExp = cfg.readBoolEntry( "useRegExp" );
-	caseSensitive = cfg.readBoolEntry( "caseSensitive" );
-	DoSignalWrapAround = cfg.readBoolEntry( "signalWrapAround" );
 	
 	isLoading = false;
 }
@@ -275,13 +281,13 @@ void AddressbookWindow::slotConfig()
 	ConfigDlg* dlg = new ConfigDlg( this, "Config" );
 	dlg -> setUseRegExp ( useRegExp );
 	dlg -> setBeCaseSensitive( caseSensitive );
-	dlg -> setSignalWrapAround( DoSignalWrapAround );
+	dlg -> setSignalWrapAround( doNotifyWrapAround );
 	dlg -> showMaximized();
 	if ( dlg -> exec() ) {
 		qWarning ("Config Dialog accepted !");
 		useRegExp = dlg -> useRegExp();
 		caseSensitive = dlg -> beCaseSensitive();
-		DoSignalWrapAround = dlg -> signalWrapAround();
+		doNotifyWrapAround = dlg -> signalWrapAround();
 	}
 
 	delete dlg;
@@ -373,7 +379,7 @@ AddressbookWindow::~AddressbookWindow()
 	cfg.setGroup("Search");
 	cfg.writeEntry("useRegExp", useRegExp);
 	cfg.writeEntry("caseSensitive", caseSensitive);
-	cfg.writeEntry("signalWrapAround", DoSignalWrapAround);
+	cfg.writeEntry("doNotifyWrapAround", doNotifyWrapAround);
 }
 
 void AddressbookWindow::slotUpdateToolbar()
@@ -656,9 +662,7 @@ void AddressbookWindow::slotPersonalView()
 		setCaption( tr("Contacts") );
 		actionNew->setEnabled(TRUE);
 		actionTrash->setEnabled(TRUE);
-#ifndef MAKE_FOR_SHARP_ROM
 		actionFind->setEnabled(TRUE);
-#endif
 		slotUpdateToolbar(); // maybe some of the above could be moved there
 		showList();
 		return;
@@ -928,11 +932,13 @@ AbLabel *AddressbookWindow::abView()
 void AddressbookWindow::slotFindOpen()
 {
 	searchBar->show();
+	abList -> inSearch();
 	searchEdit->setFocus();
 }
 void AddressbookWindow::slotFindClose()
 {
 	searchBar->hide();
+	abList -> offSearch();
 	abList->setFocus();
 }
 void AddressbookWindow::slotFindNext()
@@ -940,12 +946,20 @@ void AddressbookWindow::slotFindNext()
 	if ( centralWidget() == abView() )
 		showList();
 
-	// Maybe we should react on Wraparound and notfound ?
-// 	QObject::connect( abList, SIGNAL(signalNotFound()), &frmFind, SLOT(slotNotFound()) );
-// 	QObject::connect( abList, SIGNAL(signalWrapAround()), &frmFind, SLOT(slotWrapAround()) );
-
 	abList->slotDoFind( searchEdit->text(), caseSensitive, useRegExp, false);
 	
+	searchEdit->clearFocus();
+	abList->setFocus();
+	if ( abList->numSelections() )
+		abList->clearSelection();
+
+}
+void AddressbookWindow::slotFindPrevious()
+{
+	if ( centralWidget() == abView() )
+		showList();
+
+	abList->slotDoFind( searchEdit->text(), caseSensitive, useRegExp, true);
 	
 	if ( abList->numSelections() )
 		abList->clearSelection();
@@ -957,6 +971,24 @@ void AddressbookWindow::slotFind()
 	
 	abList->clearFindRow();
 	slotFindNext();
+}
+
+void AddressbookWindow::slotNotFound()
+{
+	qWarning("Got notfound signal !");
+	QMessageBox::information( this, tr( "Not Found" ),
+				  tr( "Unable to find a contact for this" ) + "\n"
+				  + tr( "search pattern !" ) );
+
+	
+}
+void AddressbookWindow::slotWrapAround()
+{
+	qWarning("Got wrap signal !");
+	if ( doNotifyWrapAround )
+		QMessageBox::information( this, tr( "End of list" ),
+					  tr( "End of list. Wrap around now.. !" ) + "\n" );
+		
 }
 
 void AddressbookWindow::slotSetCategory( int c )

@@ -98,6 +98,9 @@ public:
 
     QString showBook() const;
 
+    void inSearch()  { m_inSearch = true; }
+    void offSearch() { m_inSearch = false; }
+
 public slots:
     void slotDoFind( const QString &str, bool caseSensitive, bool useRegExp, bool backwards,
                      QString category = QString::null );
@@ -106,6 +109,8 @@ signals:
     void details();
     void signalNotFound();
     void signalWrapAround();
+    void signalSearchBackward(); // Signalled if backward search is requested
+    void signalSearchNext();    // Singalled if forward search is requested
 
 protected:
     virtual void keyPressEvent( QKeyEvent *e );
@@ -147,6 +152,8 @@ private:
 
     QString showBk;
     bool columnVisible;
+
+    bool m_inSearch;
 
     OContactAccess m_contactdb;
 

@@ -31,6 +31,7 @@ Q_OBJECT
 	protected:
 
 		void mouseReleaseEvent( QMouseEvent *e );
+		void mousePressEvent( QMouseEvent *e );
 
 	private:
 
@@ -48,6 +49,7 @@ Q_OBJECT
 	public:
 		LetterPicker( QWidget *parent = 0, const char *name = 0 );
 		~LetterPicker();
+		
 
 	public slots:
 		void clear();
@@ -57,6 +59,7 @@ Q_OBJECT
 
 	private:
 		PickerLabel *lblABC, *lblDEF, *lblGHI, *lblJKL, *lblMNO, *lblPQR, *lblSTU, *lblVWX, *lblYZ;
+		PickerLabel *lastLabel;
 
 	private slots:
 		void newLetter( char letter );

@@ -130,6 +130,7 @@ AbTable::AbTable( const QValueList<int> *order, QWidget *parent, const char *nam
 		 intFields( order ),
 		 currFindRow( -1 ),
 		 mCat( 0 ),
+		 m_inSearch (false),
 		 m_contactdb ("addressbook", 0l, 0l, false) // Handle syncing myself.. !
 {
 	mCat.load( categoryFileName() );
@@ -260,14 +261,40 @@ void AbTable::keyPressEvent( QKeyEvent *e )
 	if ( key >= 'A' && key <= 'Z' )
 		moveTo( key );
 	
-	switch( e->key() ) {
-	case Qt::Key_Space:
-	case Qt::Key_Return:
-	case Qt::Key_Enter:
-		emit details();
-		break;
-	default:
-		QTable::keyPressEvent( e );
+	if ( m_inSearch ) {
+		// Running in seach-mode, therefore we will interprete
+		// some key differently
+		qWarning("Received key in search mode");
+		switch( e->key() ) {
+		case Qt::Key_Space:
+		case Qt::Key_Return:
+		case Qt::Key_Enter:
+			emit details();
+			break;
+		case Qt::Key_Up:
+			qWarning("a");
+			emit signalSearchBackward();
+			break;
+		case Qt::Key_Down:
+			qWarning("b");
+			emit signalSearchNext();
+			break;
+		default:
+			QTable::keyPressEvent( e );
+		}
+		
+	} else {
+		qWarning("Received key in NON search mode");
+
+		switch( e->key() ) {
+		case Qt::Key_Space:
+		case Qt::Key_Return:
+		case Qt::Key_Enter:
+			emit details();
+			break;
+		default:
+			QTable::keyPressEvent( e );
+		}
 	}
 }
 
@@ -683,7 +710,7 @@ void AbTable::slotDoFind( const QString &findString, bool caseSensitive, bool us
 			emit signalWrapAround();
 		else
 			emit signalNotFound();
-		
+
 		wrapAround = !wrapAround;
 	} else {
 		currFindRow = row;

@@ -75,7 +75,16 @@ void PickerLabel::clearLetter()
 
 }
 
-void PickerLabel::mouseReleaseEvent( QMouseEvent *e )
+void PickerLabel::mousePressEvent( QMouseEvent* e )
+{
+	// If one pickerlabel is was, and an other is now selected, we 
+	// have to simulate the releaseevent.. Otherwise the new label
+	// will not get a highlighted  letter.. 
+	// Maybe there is a more intelligent solution, but this works and I am tired.. (se)
+	if ( ( currentLetter == 0 ) && ( lastLetter != '\0' ) ) mouseReleaseEvent( e );
+} 
+
+void PickerLabel::mouseReleaseEvent( QMouseEvent* /* e */ )
 {
 	QString tmpStr;
 
@@ -84,9 +93,9 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent *e )
 	
 	switch (currentLetter) {
 		case 0:
-			tmpStr = "<qt><font color=\"#7F0000\">";
+			tmpStr = "<qt><u><font color=\"#7F0000\">";
 			tmpStr += letter1;
-			tmpStr += "</font>";
+			tmpStr += "</font></u>";
 			tmpStr += letter2;
 			tmpStr += letter3;
 			tmpStr += "</qt>";
@@ -101,9 +110,9 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent *e )
 		case 1:
 			tmpStr = "<qt>";
 			tmpStr += letter1;
-			tmpStr += "<font color=\"#7F0000\">";
+			tmpStr += "<u><font color=\"#7F0000\">";
 			tmpStr += letter2;
-			tmpStr += "</font>";
+			tmpStr += "</font></u>";
 			tmpStr += letter3;
 			tmpStr += "</qt>";
 
@@ -118,9 +127,9 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent *e )
 			tmpStr = "<qt>";
 			tmpStr += letter1;
 			tmpStr += letter2;
-			tmpStr += "<font color=\"#7F0000\">";
+			tmpStr += "<u><font color=\"#7F0000\">";
 			tmpStr += letter3;
-			tmpStr += "</font></qt>";
+			tmpStr += "</font></u></qt>";
 
 			setText(tmpStr);
 
@@ -224,6 +233,7 @@ void LetterPicker::clear()
 
 void LetterPicker::newLetter( char letter )
 {
+	qWarning("LetterClicked");
 	emit letterClicked( letter );
 
 }
