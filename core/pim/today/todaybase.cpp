@@ -57,6 +57,15 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   QVBoxLayout * layout = new QVBoxLayout(this);
 
+
+  QPalette pal = this->palette();
+  QColor col = pal.color(QPalette::Active, QColorGroup::Background);
+  pal.setColor(QPalette::Active, QColorGroup::Button, col);
+  pal.setColor(QPalette::Inactive, QColorGroup::Button, col);
+  pal.setColor(QPalette::Normal, QColorGroup::Button, col);
+  pal.setColor(QPalette::Disabled, QColorGroup::Button, col);
+  this->setPalette(pal);
+
   // --- logo Section ---
   QPalette pal2;
   QColorGroup cg;
@@ -121,7 +130,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   DatesButton = new QPushButton (Frame4, "DatesButton" );
   DatesButton->setGeometry( QRect( 2, 4, 36, 32 ) );
   DatesButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
-//  DatesButton->setPalette( pal );
+  DatesButton->setPalette( pal );
   DatesButton->setPixmap( datebook  );
   DatesButton->setFlat( TRUE );
 
@@ -137,7 +146,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   MailButton = new QPushButton (MailFrame, "MailButton" );
   MailButton->setGeometry( QRect( 2, 3, 36, 19 ) );
-//  MailButton->setPalette( pal );
+  MailButton->setPalette( pal );
   MailButton->setPixmap( mail  );
   MailButton->setFlat( TRUE );
 
@@ -159,7 +168,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   TodoButton = new QPushButton (Frame15, "TodoButton" );
   TodoButton->setGeometry( QRect( 2, 4, 36, 32 ) );
-//  TodoButton->setPalette( pal );
+  TodoButton->setPalette( pal );
   TodoButton->setPixmap( todo  );
   TodoButton->setFlat( TRUE );
 
@@ -178,7 +187,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   PushButton1 = new QPushButton (Frame15, "PushButton1" );
   PushButton1->setGeometry( QRect( 2, 68, 25, 21 ) );
   PushButton1->setPixmap( config  );
-//  PushButton1->setPalette( pal );
+  PushButton1->setPalette( pal );
   PushButton1->setAutoDefault( TRUE );
   PushButton1->setFlat( TRUE );
 
