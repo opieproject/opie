@@ -20,6 +20,9 @@ using namespace std;
 
 #ifdef QWS
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
+#else
+#include <qapplication.h>
 #endif
 
 #include <stdio.h>
@@ -30,6 +33,7 @@ using namespace std;
 
 QString DataManager::availableCategories = "";
 DataManager::DataManager()
+    : QObject( 0x0, 0x0 )
 {
     activeServer = "";
     availableCategories = "#";
@@ -165,17 +169,27 @@ void DataManager :: loadServers()
 
 void DataManager :: reloadServerData( )
 {
-	vector<Server>::iterator it = serverList.begin();
+    emit progressSetSteps( serverList.size() );
+    emit progressSetMessage( tr( "Reading configuration..." ) );
+
+    vector<Server>::iterator it = serverList.begin();
+    QString serverName;
+    int i = 0;
     for ( it = serverList.begin() ; it != serverList.end() ; ++it )
     {
+        serverName = it->getServerName();
+        i++;
+        emit progressUpdate( i );
+        qApp->processEvents();
+        
     	// Now we've read the config file in we need to read the servers
     	// The local server is a special case. This holds the contents of the
     	// status files the number of which depends on how many destinations
     	// we've set up
     	// The other servers files hold the contents of the server package list
-    	if ( it->getServerName() == LOCAL_SERVER )
+    	if ( serverName == LOCAL_SERVER )
         	it->readStatusFile( destList );
-    	else if ( it->getServerName() == LOCAL_IPKGS )
+    	else if ( serverName == LOCAL_IPKGS )
             it->readLocalIpks( &( *getServer( LOCAL_SERVER ) ) );
     	else
             it->readPackageFile( &( *getServer( LOCAL_SERVER ) ) );     

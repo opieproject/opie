@@ -21,7 +21,7 @@
 #include <qmainwindow.h>
 #include <qwidgetstack.h>
 
-
+class ProgressWidget;
 class NetworkPackageManager;
 class DataManager;
 
@@ -44,6 +44,7 @@ private:
 	QWidgetStack *stack;
 
     NetworkPackageManager *networkPkgWindow;
+    ProgressWidget *progressWindow;
 
     int mnuShowUninstalledPkgsId;
     int mnuShowInstalledPkgsId;
@@ -63,6 +64,10 @@ public slots:
     void filterUpgradedPackages();
     void filterCategory();
     void setFilterCategory();
+    void raiseMainWidget();
+    void raiseProgressWidget();
 
+private slots:
+    void init();
 };
 #endif

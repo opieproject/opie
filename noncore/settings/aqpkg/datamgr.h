@@ -21,6 +21,7 @@
 #include <map>
 using namespace std;
 
+#include <qobject.h>
 #include <qstring.h>
 
 #include "server.h"
@@ -34,8 +35,9 @@ using namespace std;
   */
 
 
-class DataManager
+class DataManager : public QObject
 {
+    Q_OBJECT
 public:
     DataManager();
     ~DataManager();
@@ -86,6 +88,11 @@ private:
 
     vector<Server> serverList;
     vector<Destination> destList;
+
+signals:
+    void progressSetSteps( int );
+    void progressSetMessage( const QString & );
+    void progressUpdate( int );
 };
 
 #endif

@@ -19,10 +19,12 @@
 using namespace std;
 
 #include <qmenubar.h>
-#include <qpopupmenu.h>
 #include <qmessagebox.h>
+#include <qpopupmenu.h>
+#include <qtimer.h>
 
 #include "mainwin.h"
+#include "progresswidget.h"
 #include "datamgr.h"
 #include "networkpkgmgr.h"
 #include "settingsimpl.h"
@@ -66,21 +68,46 @@ MainWindow :: MainWindow( QWidget *p, char *name )
 	menu->insertItem( tr( "&Filter" ), filter );
 	menu->insertItem( tr( "&Help" ), help );
 
-    mgr = new DataManager();
-    mgr->loadServers();
-
+	// Create UI widgets
 	stack = new QWidgetStack( this );
 
-	networkPkgWindow = new NetworkPackageManager( mgr, stack );
+	progressWindow = new ProgressWidget( stack );
+	stack->addWidget( progressWindow, 2 );
+
+	networkPkgWindow = new NetworkPackageManager( stack );
+	connect( networkPkgWindow, SIGNAL( appRaiseMainWidget() ), this, SLOT( raiseMainWidget() ) );
+	connect( networkPkgWindow, SIGNAL( appRaiseProgressWidget() ), this, SLOT( raiseProgressWidget() ) );
+	connect( networkPkgWindow, SIGNAL( progressSetSteps( int ) ), progressWindow, SLOT( setSteps( int ) ) );
+	connect( networkPkgWindow, SIGNAL( progressSetMessage( const QString & ) ),
+             progressWindow, SLOT( setMessage( const QString & ) ) );
+	connect( networkPkgWindow, SIGNAL( progressUpdate( int ) ), progressWindow, SLOT( update( int ) ) );
 	stack->addWidget( networkPkgWindow, 1 );
 
 	setCentralWidget( stack );
-	stack->raiseWidget( networkPkgWindow );
+	stack->raiseWidget( progressWindow );
+
+	// Delayed call to finish initialization
+	QTimer::singleShot( 100, this, SLOT( init() ) );
+
 }
 
 MainWindow :: ~MainWindow()
 {
-	delete networkPkgWindow;
+	delete mgr;
+}
+
+void MainWindow :: init()
+{
+    stack->raiseWidget( progressWindow );
+    mgr = new DataManager();
+	connect( mgr, SIGNAL( progressSetSteps( int ) ), progressWindow, SLOT( setSteps( int ) ) );
+	connect( mgr, SIGNAL( progressSetMessage( const QString & ) ),
+             progressWindow, SLOT( setMessage( const QString & ) ) );
+	connect( mgr, SIGNAL( progressUpdate( int ) ), progressWindow, SLOT( update( int ) ) );
+    mgr->loadServers();
+    networkPkgWindow->setDataManager( mgr );
+    networkPkgWindow->updateData();
+    stack->raiseWidget( networkPkgWindow );
 }
 
 void MainWindow :: setDocument( const QString &doc )
@@ -207,4 +234,14 @@ void MainWindow :: filterCategory()
         if ( networkPkgWindow->filterByCategory( true ) )
             filter->setItemChecked( mnuFilterByCategory, true );
     }
+}
+
+void MainWindow :: raiseMainWidget()
+{
+    stack->raiseWidget( networkPkgWindow );
+}
+
+void MainWindow :: raiseProgressWidget()
+{
+    stack->raiseWidget( progressWindow );
 }

@@ -8,6 +8,7 @@ HEADERS		= global.h \
 		  networkpkgmgr.h \
 		  package.h \
 		  progressdlg.h \
+		  progresswidget.h \
 		  installdlgimpl.h \
 		  instoptionsimpl.h \
 		  destination.h \
@@ -26,6 +27,7 @@ SOURCES		= mainwin.cpp \
 		  main.cpp \
 		  package.cpp \
 		  progressdlg.cpp \
+		  progresswidget.cpp \
 		  installdlgimpl.cpp \
 		  instoptionsimpl.cpp \
 		  destination.cpp \

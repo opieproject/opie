@@ -26,6 +26,7 @@
 
 #include "datamgr.h"
 #include "progressdlg.h"
+
 class InstallData;
 
 /** NetworkPackageManager is the base class of the project */
@@ -34,10 +35,11 @@ class NetworkPackageManager : public QWidget
   Q_OBJECT
 public:
     /** construtor */
-    NetworkPackageManager( DataManager *dataManager, QWidget* parent=0, const char *name=0);
+    NetworkPackageManager( QWidget* parent=0, const char *name=0 );
     /** destructor */
     ~NetworkPackageManager();
 
+    void setDataManager( DataManager *dm );
     void selectLocalPackage( const QString &pkg );
     void updateData();
     void searchForPackage( bool findNext );
@@ -67,26 +69,32 @@ private:
     bool showUninstalledPkgs;
     bool showInstalledPkgs;
     bool showUpgradedPkgs;
-    int timerId;
-
-    void timerEvent ( QTimerEvent * );
 
     void initGui();
     void setupConnections();
     void showProgressDialog( char *initialText );
     void downloadSelectedPackages();
     void downloadRemotePackage();
+    void serverSelected( int index, bool showProgress );
+    
     InstallData dealWithItem( QCheckListItem *item );
     QString stickyOption;
 
+signals:
+    void appRaiseMainWidget();
+    void appRaiseProgressWidget();
+    void progressSetSteps( int );
+    void progressSetMessage( const QString & );
+    void progressUpdate( int );
+
 public slots:
-    void serverSelected( int index );
     void applyChanges();
     void upgradePackages();
     void downloadPackage();
     void updateServer();
     void displayText( const QString &t );
     void letterPushed( QString t );
+    void serverSelected( int index );
 };
 
 #endif

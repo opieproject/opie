@@ -46,10 +46,9 @@ using namespace std;
 
 extern int compareVersions( const char *v1, const char *v2 );
 
-NetworkPackageManager::NetworkPackageManager( DataManager *dataManager, QWidget *parent, const char *name)
+NetworkPackageManager::NetworkPackageManager( QWidget *parent, const char *name )
   : QWidget(parent, name)
 {
-    dataMgr = dataManager;
 
 #ifdef QWS
         // read download directory from config file
@@ -68,48 +67,53 @@ NetworkPackageManager::NetworkPackageManager( DataManager *dataManager, QWidget 
     initGui();
     setupConnections();
 
-    updateData();
+    //updateData();
 }
 
 NetworkPackageManager::~NetworkPackageManager()
 {
 }
 
-void NetworkPackageManager :: timerEvent ( QTimerEvent * )
+void NetworkPackageManager :: setDataManager( DataManager *dm )
 {
-    killTimer( timerId );
-
-    // Add server names to listbox
-    updateData();
+    dataMgr = dm;
 }
 
 void NetworkPackageManager :: updateData()
 {
+    emit progressSetSteps( dataMgr->getServerList().size() );
+    
     serversList->clear();
     packagesList->clear();
 
-    
     vector<Server>::iterator it;
     int activeItem = -1;
     int i;
+    QString serverName;
     for ( i = 0, it = dataMgr->getServerList().begin() ; it != dataMgr->getServerList().end() ; ++it, ++i )
     {
+        serverName = it->getServerName();
+        emit progressSetMessage( tr( "Building server list:\n\t%1" ).arg( serverName ) );
+        emit progressUpdate( i );
+        qApp->processEvents();
+        
 //        cout << "Adding " << it->getServerName() << " to combobox" << endl;
         if ( !it->isServerActive() )
         {
-            cout << it->getServerName() << " is not active" << endl;
+            cout << serverName << " is not active" << endl;
             i--;
             continue;
         }
-        serversList->insertItem( it->getServerName() );
-        if ( it->getServerName() == currentlySelectedServer )
+        
+        serversList->insertItem( serverName );
+        if ( serverName == currentlySelectedServer )
         	activeItem = i;
 	}
 
 	// set selected server to be active server
 	if ( activeItem != -1 )
 		serversList->setCurrentItem( activeItem );
-    serverSelected( 0 );
+    serverSelected( 0, FALSE );
 }
 
 void NetworkPackageManager :: selectLocalPackage( const QString &pkg )
@@ -193,22 +197,35 @@ void NetworkPackageManager :: setupConnections()
     connect( update, SIGNAL(released()), this, SLOT(updateServer()) );
 }
 
-void NetworkPackageManager :: showProgressDialog( char *initialText )
+void NetworkPackageManager :: serverSelected( int index )
 {
-    if ( !progressDlg )
-        progressDlg = new ProgressDlg( this, "Progress", false );
-    progressDlg->setText( initialText );
-    progressDlg->show();
+    serverSelected( index, TRUE );
 }
 
-
-void NetworkPackageManager :: serverSelected( int )
+void NetworkPackageManager :: serverSelected( int, bool raiseProgress )
 {
-    packagesList->clear();
-
     // display packages
     QString serverName = serversList->currentText();
     currentlySelectedServer = serverName;
+
+    vector<Server>::iterator s = dataMgr->getServer( serverName );
+
+    vector<Package> &list = s->getPackageList();
+    vector<Package>::iterator it;
+    
+    // Display progress widget while loading list
+    bool doProgress = ( list.size() > 200 );
+    if ( doProgress )
+    {
+        if ( raiseProgress )
+        {
+            emit appRaiseProgressWidget();
+        }
+        emit progressSetSteps( list.size() );
+        emit progressSetMessage( tr( "Building package list for:\n\t%1" ).arg( serverName ) );
+    }
+
+    packagesList->clear();
 
 #ifdef QWS
         // read download directory from config file
@@ -217,13 +234,20 @@ void NetworkPackageManager :: serverSelected( int )
         cfg.writeEntry( "selectedServer", currentlySelectedServer );
 #endif
 
-    vector<Server>::iterator s = dataMgr->getServer( serverName );
-
-    vector<Package> &list = s->getPackageList();
-    vector<Package>::iterator it;
+    int i = 0;
     for ( it = list.begin() ; it != list.end() ; ++it )
     {
-
+        // Update progress after every 100th package (arbitrary value, seems to give good balance)
+        i++;
+        if ( ( i % 100 ) == 0 )
+        {
+            if ( doProgress )
+            {
+                emit progressUpdate( i );
+            }
+            qApp->processEvents();
+        }
+        
         QString text = "";
 
         // Apply show only uninstalled packages filter
@@ -331,6 +355,12 @@ void NetworkPackageManager :: serverSelected( int )
         upgrade->setEnabled( true );
         download->setEnabled( true );
         download->setText( "Download" );
+    }
+
+    // Display this widget once everything is done
+    if ( doProgress && raiseProgress )
+    {
+        emit appRaiseMainWidget();
     }
 }
 
