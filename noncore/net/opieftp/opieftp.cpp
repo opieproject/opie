@@ -190,9 +190,10 @@ OpieFtp::OpieFtp( )
     Remote_View = new QListView( tab_2, "Remote_View" );
     Remote_View->addColumn( tr("File"),150);
     Remote_View->addColumn( tr("Date"),-1);
-    Remote_View->setColumnAlignment(1,QListView::AlignRight);
+//    Remote_View->setColumnAlignment(1,QListView::AlignRight);
     Remote_View->addColumn( tr("Size"),-1);
     Remote_View->setColumnAlignment(2,QListView::AlignRight);
+    Remote_View->setColumnAlignment(3,QListView::AlignCenter);
     Remote_View->addColumn( tr("Dir"),-1);
     Remote_View->setColumnAlignment(4,QListView::AlignRight);
     Remote_View->setAllColumnsShowFocus(TRUE);
@@ -721,36 +722,38 @@ bool OpieFtp::populateRemoteView( )
     Remote_View->clear();
     QString s, File_Name;
     QListViewItem *itemDir=NULL, *itemFile=NULL;
+    QRegExp monthRe(" [JFMASOND][eapuecoe][brynlgptvc] [ 0-9][0-9] [ 0-9][0-9][:0-9][0-9][0-9] ");
     QString fileL, fileS, fileDate;
     if ( file.open(IO_ReadOnly)) {
         QTextStream t( &file );   // use a text stream
         while ( !t.eof()) {
             s = t.readLine();
-            fileL = s.right(s.length()-55);
-            fileL = fileL.stripWhiteSpace();
+
+            if(s.find("total",0,TRUE) == 0)
+               continue;
+
+           int len, month = monthRe.match(s, 0, &len);
+           fileDate = s.mid(month + 1, len - 2);       // minus spaces
+           fileL = s.right(s.length() - month - len);
             if(s.left(1) == "d") 
                 fileL = fileL+"/";
-//                  fileL = "/"+fileL+"/";
-            fileS = s.mid( 30, 42-30);
+            fileS = s.mid(month - 8, 8);  // FIXME
             fileS = fileS.stripWhiteSpace();
-            fileDate = s.mid( 42, 55-42);
-            fileDate = fileDate.stripWhiteSpace();
-            if(fileL.find("total",0,TRUE) == -1) {
-                if(s.left(1) == "d" || fileL.find("/",0,TRUE) != -1) {
-                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileDate, fileS,"d");
-                    item->setPixmap( 0, Resource::loadPixmap( "folder" ));
+
+           if(s.left(1) == "d" || fileL.find("/",0,TRUE) != -1) {
+               QListViewItem * item = new QListViewItem( Remote_View, fileL, fileDate, fileS,"d");
+               item->setPixmap( 0, Resource::loadPixmap( "folder" ));
 //                      if(itemDir)
-                          item->moveItem(itemDir);
-                      itemDir=item;
-                } else {
-                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileDate, fileS,"f");
-                    item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
+                     item->moveItem(itemDir);
+                 itemDir=item;
+           } else {
+               QListViewItem * item = new QListViewItem( Remote_View, fileL, fileDate, fileS,"f");
+               item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
 //                      if(itemFile)
-                          item->moveItem(itemDir);
-                          item->moveItem(itemFile);
-                      itemFile=item;
-                }
-            }
+                     item->moveItem(itemDir);
+                     item->moveItem(itemFile);
+                 itemFile=item;
+           }
         }
         QListViewItem * item1 = new QListViewItem( Remote_View, "../");
         item1->setPixmap( 0, Resource::loadPixmap( "folder" ));
