@@ -224,31 +224,31 @@ Pour trier la liste par rapport à un champ spécifique, cliquez sur le nom de l
     </message>
     <message>
         <source>Sort by:</source>
-        <translation type="unfinished"></translation>
+        <translation>Trier par : </translation>
     </message>
     <message>
         <source>Select checkbook sorting here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez la méthode de trie du livre de compte ici.</translation>
     </message>
     <message>
         <source>Entry Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordre d&apos;entrée</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>SortDate</source>
-        <translation type="unfinished"></translation>
+        <translation>Trier Date</translation>
     </message>
     <message>
         <source>Balance</source>
-        <translation type="unfinished">Solde</translation>
+        <translation>Solde</translation>
     </message>
 </context>
 <context>
@@ -285,86 +285,86 @@ par mot de passe</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Paramètres</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type</translation>
     </message>
     <message>
         <source>New Account Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau type de compte</translation>
     </message>
     <message>
         <source>&amp;Account Types</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Types de compte</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Catégorie</translation>
     </message>
     <message>
         <source>New Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvelle catégorie</translation>
     </message>
     <message>
         <source>Expense</source>
-        <translation type="unfinished"></translation>
+        <translation>Dépense</translation>
     </message>
     <message>
         <source>Income</source>
-        <translation type="unfinished"></translation>
+        <translation>Revenu</translation>
     </message>
     <message>
         <source>&amp;Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Catégories</translation>
     </message>
     <message>
         <source>Payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Bénéficiaire</translation>
     </message>
     <message>
         <source>New Payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau bénéficiaire</translation>
     </message>
     <message>
         <source>&amp;Payees</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bénéficiaires</translation>
     </message>
     <message>
         <source>Open last checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir dernier Livre de Comptes</translation>
     </message>
     <message>
         <source>Click here to select whether the last open checkbook will be opened at startup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez ici pour que le dernier livre de compte utilisé soit ouvert au démarrage.</translation>
     </message>
     <message>
         <source>Show last checkbook tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher dernier onglet du livre de compte</translation>
     </message>
     <message>
         <source>Click here to select whether the last tab in a checkbook should be displayed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez ici pour définir si le dernier onglet affiché du livre de compte doit être sélectionné.</translation>
     </message>
     <message>
         <source>Save new description as payee</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer nouvelle description comme bénéficiaire</translation>
     </message>
     <message>
         <source>Click here to save new descriptions in the list of payess.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez ici pour enregistrer la nouvelle description dans la liste des bénéficiaires.</translation>
     </message>
 </context>
 <context>
     <name>ListEdit</name>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Ajouter</translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
+        <translation>Supprimer</translation>
     </message>
 </context>
 <context>
@@ -447,119 +447,119 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     <name>QWidget</name>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Date</translation>
+        <translation>Date</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Modifier</translation>
+        <translation>Modifier</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nouveau</translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Supprimer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Savings</source>
-        <translation type="unfinished">Epargne</translation>
+        <translation>Epargne</translation>
     </message>
     <message>
         <source>Checking</source>
-        <translation type="unfinished">Compte chèques</translation>
+        <translation>Compte chèques</translation>
     </message>
     <message>
         <source>CD</source>
-        <translation type="unfinished">CD</translation>
+        <translation>CD</translation>
     </message>
     <message>
         <source>Money market</source>
-        <translation type="unfinished">Liquidités</translation>
+        <translation>Liquidités</translation>
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation type="unfinished">Fond de pension</translation>
+        <translation>Fond de pension</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished">Autre</translation>
+        <translation>Autre</translation>
     </message>
     <message>
         <source>Expense</source>
-        <translation type="unfinished">Dépense</translation>
+        <translation>Dépense</translation>
     </message>
     <message>
         <source>Automobile</source>
-        <translation type="unfinished">Véhicule</translation>
+        <translation>Véhicule</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation type="unfinished">Factures</translation>
+        <translation>Factures</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation type="unfinished">CDs</translation>
+        <translation>CDs</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation type="unfinished">Vêtements</translation>
+        <translation>Vêtements</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation type="unfinished">Ordinateur</translation>
+        <translation>Ordinateur</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation type="unfinished">DVDs</translation>
+        <translation>DVDs</translation>
     </message>
     <message>
         <source>Electronics</source>
-        <translation type="unfinished">Electronique</translation>
+        <translation>Electronique</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation type="unfinished">Loisirs</translation>
+        <translation>Loisirs</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished">Alimentation</translation>
+        <translation>Alimentation</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation type="unfinished">Carburant</translation>
+        <translation>Carburant</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished">Divers</translation>
+        <translation>Divers</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation type="unfinished">Cinéma</translation>
+        <translation>Cinéma</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished">Location</translation>
+        <translation>Location</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished">Voyage</translation>
+        <translation>Voyage</translation>
     </message>
     <message>
         <source>Income</source>
-        <translation type="unfinished">Revenu</translation>
+        <translation>Revenu</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation type="unfinished">Professionnel</translation>
+        <translation>Professionnel</translation>
     </message>
     <message>
         <source>Family Member</source>
-        <translation type="unfinished">Membre de la famille</translation>
+        <translation>Membre de la famille</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation type="unfinished">Crédit Divers</translation>
+        <translation>Crédit Divers</translation>
     </message>
 </context>
 <context>

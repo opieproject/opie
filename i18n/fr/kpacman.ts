@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>&amp;Hall of fame</source>
-        <translation type="unfinished">&amp;Meilleurs scores</translation>
+        <translation>&amp;Meilleurs scores</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -76,11 +76,11 @@ The design was strongly influenced by the pacman
 I like to thank my girlfriend Elke Krueers for
 the last 10 years of her friendship.
 </source>
-        <translation type="unfinished">@PACKAGE@ - @VERSION@
+        <translation>@PACKAGE@ - @VERSION@
 
 Joerg Thoennissen (joe@dsite.de)
 
-Un jeu pacman pour le bureau KDE 
+Un jeu de pacman pour le bureau KDE 
 
 Le programme est basé sur les sources de ksnake
 de Michel Filippi (mfilippi@sade.rhein-main.de).
