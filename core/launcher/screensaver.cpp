@@ -188,6 +188,8 @@ void OpieScreenSaver::setBacklight ( int bright )
 			if ( i < sl. count ( ))
 				m_sensordata [i] = sl [i]. toInt ( );
 		}
+		if ( m_sensordata [LS_Steps] < 2 ) // sanity check to avoid SIGFPE
+			m_sensordata [LS_Steps] = 2;
 
 		timerEvent ( 0 );
 		startTimer ( m_sensordata [LS_Interval] );
@@ -233,7 +235,7 @@ void OpieScreenSaver::timerEvent ( QTimerEvent * )
 		int dx = m_sensordata [LS_SensorMax] - m_sensordata [LS_SensorMin];
 		int dy = m_sensordata [LS_LightMax] - m_sensordata [LS_LightMin];
 		
-		int stepno = ( s - m_sensordata [LS_SensorMin] ) * m_sensordata [LS_Steps] / dx;
+		int stepno = ( s - m_sensordata [LS_SensorMin] ) * m_sensordata [LS_Steps] / dx; // dx is never 0
 		
 		m_backlight_sensor = m_sensordata [LS_LightMax] - dy * stepno / ( m_sensordata [LS_Steps] - 1 );
 	}
