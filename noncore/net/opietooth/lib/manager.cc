@@ -224,3 +224,68 @@ RemoteDevice::ValueList Manager::parseHCIOutput(const QString& output ) {
     }
     return list;
 }
+
+////// hcitool cc and hcitool con
+
+/**
+ * Create it on the stack as don't care
+ * so we don't need to care for it
+ * cause hcitool gets reparented
+ */
+void Manager::connectTo( const QString& mac) {
+    OProcess proc;
+    proc << "hcitool";
+    proc << "cc";
+    proc << "mac";
+    proc.start(OProcess::DontCare); // the lib does not care at this point
+}
+
+
+void Manager::searchConnections() {
+    qWarning("searching connections?");
+    OProcess* proc = new OProcess();
+    m_hcitoolCon = QString::null;
+
+    connect(proc, SIGNAL(processExited(OProcess*) ),
+            this, SLOT(slotConnectionExited( OProcess*) ) );
+    connect(proc, SIGNAL(receivedStdout(OProcess*, char*, int) ),
+            this, SLOT(slotConnectionOutput(OProcess*, char*, int) ) );
+    *proc << "hcitool";
+    *proc << "con";
+
+    if (!proc->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
+        Connection::ValueList list;
+        emit connections( list  );
+        delete proc;
+    }
+}
+void Manager::slotConnectionExited( OProcess* proc ) {
+    qWarning("exited");
+    Connection::ValueList list;
+    list = parseConnections( m_hcitoolCon );
+    emit connections(list );
+}
+void Manager::slotConnectionOutput(OProcess* proc, char* cha, int len) {
+    QCString str(cha, len );
+    m_hcitoolCon.append( str );
+    delete proc;
+}
+Connection::ValueList Manager::parseConnections( const QString& out ) {
+    Connection::ValueList list2;
+    QStringList list = QStringList::split('\n',  out );
+    QStringList::Iterator it;
+    for (it = list.begin(); it != list.end(); ++it ) {
+        QString row = (*it).stripWhiteSpace();
+        QStringList value = QStringList::split(' ', row );
+        qWarning("0: %s", value[0].latin1() );
+        qWarning("1: %s", value[1].latin1() );
+        qWarning("2: %s", value[2].latin1() );
+        qWarning("3: %s", value[3].latin1() );
+        qWarning("4: %s", value[4].latin1() );
+        qWarning("5: %s", value[5].latin1() );
+        qWarning("6: %s", value[6].latin1() );
+        qWarning("7: %s", value[7].latin1() );
+        qWarning("8: %s", value[8].latin1() );
+    }
+    return list2;
+}

@@ -7,6 +7,7 @@
 #include <qmap.h>
 #include <qvaluelist.h>
 
+#include "connection.h"
 #include "remotedevice.h"
 #include "services.h"
 
@@ -109,8 +110,24 @@ namespace OpieTooth {
          * search for services on a remote device
          */
         void searchServices( const RemoteDevice& );
+
+        /**
+         * Starts to connect to the device
+         * in @param
+         */
+        void connectTo(const QString& );
+
+        /**
+         * Searches for active connections
+         * the result is emitted with the
+         * connections signal
+         */
+        void searchConnections();
+
+//// not implemented yet
         /*static*/ QString toDevice( const QString& mac );
         /*static*/ QString toMac( const QString &device );
+//// not implemented yet over
 
     signals:
         // device either mac or dev name
@@ -136,6 +153,7 @@ private slots:
     private:
         Services::ValueList parseSDPOutput( const QString& );
         RemoteDevice::ValueList parseHCIOutput( const QString& );
+        Connection::ValueList parseConnections( const QString& );
         OProcess *m_hcitool;
         OProcess *m_sdp; // not only one
         QString m_device;
