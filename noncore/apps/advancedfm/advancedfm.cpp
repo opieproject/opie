@@ -609,7 +609,8 @@ void AdvancedFm::showFileMenu() {
    if(Ir::supported())
       m->insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
    m->setFocus();
-   m->exec( QPoint( 4,QCursor::pos().y()) );
+
+   m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
 
    if(m) delete m;
 }
