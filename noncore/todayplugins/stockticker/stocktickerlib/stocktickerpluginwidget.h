@@ -18,6 +18,7 @@
 #ifndef STOCKTICKERL_PLUGIN_WIDGET_H
 #define STOCKTICKERL_PLUGIN_WIDGET_H
 
+#include <qsocket.h>
 #include <qstring.h>
 #include <qwidget.h>
 #include <qlineedit.h>
@@ -33,12 +34,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-//#include "ticker.h"
-
-/* extern "C" { */
-/* #include "stocks.h" */
-/* } */
-
 class QTimer;
 
 class StockTickerPluginWidget : public QWidget {
@@ -48,16 +43,17 @@ class StockTickerPluginWidget : public QWidget {
 public:
     StockTickerPluginWidget( QWidget *parent,  const char *name );
     ~StockTickerPluginWidget();
-    QString output;
 
 protected slots:
     void doStocks();
-
+    void isConnected();
+    void socketError(int);
+    void checkConnection();
 private:
-    OTicker *stocktickerTicker;
+    bool wasError;
+    QSocket *Sock;
     void timerEvent( QTimerEvent * );
     void init();
-    void getStocks( const char *stock_liste);
     void DefProxy(void);
     int timerDelay;
 };

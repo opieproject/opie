@@ -14,6 +14,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <qsocket.h>
 #include <qvaluelist.h>
 #include <qtl.h>
 #include <qstring.h>
@@ -23,59 +24,32 @@
 #include <qlineedit.h>
 #include <qregexp.h>
 #include <qtimer.h>
+#include <qmessagebox.h>
 
 #include <qpe/config.h>
 #include <qpe/timestring.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/network.h>
 
 #include <opie/oticker.h>
-//#include "ticker.h"
 
 extern "C" {
 #include "libstocks/stocks.h"
 }
 
+#include <pthread.h>
+
 #include "stocktickerpluginwidget.h"
 
-StockTickerPluginWidget::StockTickerPluginWidget( QWidget *parent,  const char* name)
-    : QWidget(parent,  name ) {
-    init();
-    startTimer(1000);
-}
+QString output;
+OTicker *stocktickerTicker;
 
-StockTickerPluginWidget::~StockTickerPluginWidget() {
-}
+void getStocks( const QString *blah) {
 
-void StockTickerPluginWidget::init() {
-
-    QHBoxLayout* layout = new QHBoxLayout( this );
-
-    stocktickerTicker = new OTicker(this);
-    stocktickerTicker->setMinimumHeight(15);
-    connect( stocktickerTicker, SIGNAL( mousePressed()), this, SLOT( doStocks() ));
- 
-    layout->addWidget( stocktickerTicker);
-
-}
-
-void StockTickerPluginWidget::doStocks() {
-    Config cfg( "stockticker");
-    cfg.setGroup( "Symbols" );
-    QString symbollist;
-    symbollist = cfg.readEntry("Symbols", "");
-    symbollist.replace(QRegExp(" "),"+");//seperated by +
-//    qDebug(symbollist);
-
-    getStocks( symbollist.latin1());
-    
-    stocktickerTicker->setText( output );
-}
-
-void StockTickerPluginWidget::getStocks( const char *blah) {
-
+//    stocktickerTicker->setText( "Downloading stock data.");
     stock *stocks_quotes=NULL;
     stock *stocks_tmp;
-
+    qDebug("%s", blah->latin1());
     QString tempString;
     output = "";
 
@@ -101,8 +75,29 @@ void StockTickerPluginWidget::getStocks( const char *blah) {
     dovariationCheck=cfg.readBoolEntry("variationCheck",1);
     dovolumeCheck=cfg.readBoolEntry("volumeCheck",1);
 
-    DefProxy();
-    char *stock_liste = (char *)blah;
+//    DefProxy();
+ {
+     char *proxy;
+     libstocks_return_code error;
+
+       /* Proxy support */
+       /* Checks for "http_proxy" environment variable */
+     proxy = getenv("http_proxy");
+     if(proxy) {
+           /* printf("proxy set\n"); */
+         error = set_proxy(proxy);
+         if (error) {
+             printf("Proxy error (%d)\n", error);
+             QString tempString;
+             tempString.sprintf("Proxy error (%d)\n", error);
+             output = tempString;
+             return;
+//             exit(1);
+         }
+     }
+ }
+    char *stock_liste = (char *)blah->latin1();
+//    char *stock_liste = (char *)blah;
       /* Get the stocks and process errors */
     error = get_stocks( stock_liste, &stocks_quotes);
 
@@ -217,38 +212,118 @@ void StockTickerPluginWidget::getStocks( const char *blah) {
 
       /* frees stocks */
     free_stocks(stocks_quotes);
+    stocktickerTicker->setText( output );
 
+}
+
+StockTickerPluginWidget::StockTickerPluginWidget( QWidget *parent,  const char* name)
+    : QWidget(parent,  name ) {
+    init();
+    startTimer(1000);
+//    checkConnection();
+}
+
+StockTickerPluginWidget::~StockTickerPluginWidget() {
+}
+
+void StockTickerPluginWidget::init() {
+
+    QHBoxLayout* layout = new QHBoxLayout( this );
+    stocktickerTicker = new OTicker(this);
+    stocktickerTicker->setMinimumHeight(15);
+    connect( stocktickerTicker, SIGNAL( mousePressed()), this, SLOT( checkConnection() ));
+    layout->addWidget( stocktickerTicker);
+    wasError = true;
+}
+
+void StockTickerPluginWidget::doStocks() {
+    Config cfg( "stockticker");
+    cfg.setGroup( "Symbols" );
+    QString symbollist;
+    symbollist = cfg.readEntry("Symbols", "");
+    symbollist.replace(QRegExp(" "),"+");//seperated by +
+
+//    qDebug(symbollist);
+    if (!symbollist.isEmpty()) {
+        pthread_t thread1;
+        pthread_create(&thread1,NULL, (void * (*)(void *))getStocks, &symbollist);
+    }
+//    pthread_join(thread1,NULL);
+//    getStocks( symbollist.latin1() );
 }
 
 void StockTickerPluginWidget::DefProxy(void) {
-    char *proxy;
-    libstocks_return_code error;
+//     char *proxy;
+//     libstocks_return_code error;
 
-      /* Proxy support */
-      /* Checks for "http_proxy" environment variable */
-    proxy = getenv("http_proxy");
-    if(proxy) {
-          /* printf("proxy set\n"); */
-        error = set_proxy(proxy);
-        if (error) {
-//             printf("Proxy error (%d)\n", error);
-          QString tempString;
-            tempString.sprintf("Proxy error (%d)\n", error);
-            output = tempString;
-            return;
-//             exit(1);
-        }
-    }
+//       /* Proxy support */
+//       /* Checks for "http_proxy" environment variable */
+//     proxy = getenv("http_proxy");
+//     if(proxy) {
+//           /* printf("proxy set\n"); */
+//         error = set_proxy(proxy);
+//         if (error) {
+// //             printf("Proxy error (%d)\n", error);
+//           QString tempString;
+//             tempString.sprintf("Proxy error (%d)\n", error);
+//             output = tempString;
+//             return;
+// //             exit(1);
+//         }
+//     }
 }
 
-void  StockTickerPluginWidget::timerEvent( QTimerEvent *e ) {
-    killTimer(e->timerId());    
+void StockTickerPluginWidget::timerEvent( QTimerEvent *e ) {
+    killTimer(e->timerId());
+    checkConnection();
+}
+
+void StockTickerPluginWidget::checkConnection() {
+//     qDebug("checking connection");
+//     Sock = new QSocket( this );
+
+//      if( wasError)
+//          stocktickerTicker->setText("Checking connection");
+
+//     if(Sock->state() == QSocket::Idle) {    
+//         Sock->connectToHost("finance.yahoo.com", 80);
+//         connect( Sock, SIGNAL( error(int) ),  SLOT(socketError(int)) );
+//         connect( Sock, SIGNAL( hostFound() ), SLOT(isConnected()) );
+//     } else {
+//         qDebug("State is not Idle");
+        isConnected();
+//    }
+}
+
+void StockTickerPluginWidget::isConnected() {
+//    qDebug("We connect, so ok to grab stocks");
     doStocks();
+
     Config cfg( "stockticker");
-     cfg.setGroup("Timer");
-     timerDelay= cfg.readNumEntry("Delay",0);
+    cfg.setGroup("Timer");
+    timerDelay= cfg.readNumEntry("Delay",0);
     if(timerDelay > 0)
         startTimer(timerDelay*60000);
     qDebug("timer set for %d",(timerDelay*60000)/60000);
-    
+    wasError = false;
+        
+//    Sock->close();
+}
+
+void StockTickerPluginWidget::socketError(int errcode) {
+    switch(errcode) {
+      case QSocket::ErrConnectionRefused:
+          output = tr("Connection refused.");
+          break;
+      case QSocket::ErrHostNotFound:
+          output = tr("Could not find server.");
+          break;
+      case QSocket::ErrSocketRead :
+          output = tr("Socket read error.");
+          break;
+    };
+    stocktickerTicker->setText( output );
+    wasError = true;
+//    Sock->close();
+
 }
