@@ -1,0 +1,72 @@
+<chapter><title>Text Editor</title>
+<para>
+The Text Editor is a very basic text editor that can read and save ASCII text files, and is not intended to be a fully
+featured word processor.  It supports basic functions like "Cut and Paste", searching, and word wrap.
+</para>
+
+<section><title>Introduction</title>
+<para>
+When you start Text Editor, you will see the usual menu bar and tool bar (which provides quick access to functions in 
+the menus), and a main view where you can read and edit text files.  In the upper right corner you will see, in addition 
+to the usual "x" to close the window, a button labeled "Ok".  The "x" button will close Text Editor without saving (or 
+asking you to save) the file, while the "Ok" button will save the file before closing the application.
+</para>
+</section>
+
+<section><title>Opening Files</title>
+<para>
+To open a file, go to File&arrow;Open, or press the Open button on the toolbar (an open folder), and the Open File 
+dialog will appear.  The main view you see is a list of all the files and directories in the current directory (usually /).  
+You can change which files are visible with the two pulldown menus on the bottom of the dialog.  The menu on the 
+left lets you chose where to look for the files.  If it is set to "Documents" you will only see files that are in your 
+documents tab, while if it is set to "Files" you will see all the files and directories on your file system (All Files is 
+like Files except that hidden files are visible).  The menu on the right lets you select which types of files to view.  
+"All" will display all the files that are available based on the what you have selected in the left menu, while "Text" 
+will display all files ending in ".txt".  The "Name" field lets you enter the name of the file to open in the current 
+directory.  When you have selected the file you wish to open, press "Ok" in the upper right hand corner.
+</para>
+</section>
+
+<section><title>Creating New Files</title>
+<para>
+To create a new file, select File&arrow;New, or press the new file button on the toolbar (a blank page).  This will 
+ask you to save the current file (if there is one) and then close it, and a blank file should then be available.
+</para>
+</section>
+
+<section><title>Saving Files</title>
+<para>
+Once you are done changing the file, you will want to save it.  Youc can do this by going to File&arrow;Save.  If the 
+file has already been saved, or you opened it, it will simply be saved over the old version, however if you started 
+with a new file, the Save dialog will open.  To avoid saving over a file you have already saved, or that you opened
+and modified, you can chose File&arrow;Save As instead.
+</para>
+<para>
+The Save dialog looks the same as the Open dialog, with all the fields doing the same thing as before, with the
+exception of the "Name" field.  Unless you want to save over a file, you must enter the name of the new file in this 
+field.  Once you have entered the name of the file, move into the directory you want to save it in in the main view 
+and press "Ok" to save it ("x" cancels the save).
+</para>
+</section>
+
+<section><title>Cut and Paste</title>
+<para>
+For a more detailed description of Cut and Paste in Opie, see <xref linkend=cutpaste>.  To cut or copy text
+to the clipboard, highlight the text and select Edit&arrow;Copy to add it without deleting the original text, or 
+Edit&arrow;Cut to add it to the clipboard and delete the original text.  Then move the cursor to where you want to 
+paste the text and chose Edit&arrow;Paste.  These three menu items do the same thing as those in the Clipboard 
+Applet (they even use the same clipboard), and can also be access from their respective icons in the toolbar.
+</para>
+</section>
+
+<section><title>Inserting Date and Time</title>
+<para>
+To insert the date and time, chose Edit&arrow;Insert Time and Date. 
+</para>
+</section>
+
+<section><title>Finding Text</title>
+<para>
+
+
+</chapter>
