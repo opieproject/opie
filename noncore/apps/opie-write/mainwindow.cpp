@@ -23,6 +23,8 @@
 #include <qpe/fileselector.h>
 #include <qpe/applnk.h>
 #include <qpe/resource.h>
+#include <qpe/fontdatabase.h>
+
 //#include "qspellchecker.h"
 #include "qtextedit.h"
 #include <qaction.h>
@@ -49,30 +51,30 @@ class ButtonMenu : public QToolButton
     Q_OBJECT
 public:
     ButtonMenu( QWidget *parent, const char *name=0 )
-	: QToolButton( parent, name ), current(0)
+  : QToolButton( parent, name ), current(0)
     {
-	setPopup( new QPopupMenu( this ) );
-	setPopupDelay( 1 );
-	connect( popup(), SIGNAL(activated(int)), this, SLOT(selected(int)) );
+  setPopup( new QPopupMenu( this ) );
+  setPopupDelay( 1 );
+  connect( popup(), SIGNAL(activated(int)), this, SLOT(selected(int)) );
     }
 
     int insertItem(const QIconSet &icon, const QString &text, int id ) {
-	if ( !popup()->count() ) {
-	    setIconSet( icon );
-	    current = id;
-	}
-	return popup()->insertItem( icon, text, id );
+  if ( !popup()->count() ) {
+      setIconSet( icon );
+      current = id;
+  }
+  return popup()->insertItem( icon, text, id );
     }
 
     void setCurrentItem( int id ) {
-	if ( id != current ) {
-	    current = id;
-	    setIconSet( *popup()->iconSet( id ) );
-	}
+  if ( id != current ) {
+      current = id;
+      setIconSet( *popup()->iconSet( id ) );
+  }
     }
 
     virtual QSize sizeHint() const {
-	return QToolButton::sizeHint() + QSize( 4, 0 );
+  return QToolButton::sizeHint() + QSize( 4, 0 );
     }
 
 signals:
@@ -80,16 +82,16 @@ signals:
 
 protected slots:
     void selected( int id ) {
-	current = id;
-	setIconSet( *popup()->iconSet( id ) );
-	emit activated( id );
+  current = id;
+  setIconSet( *popup()->iconSet( id ) );
+  emit activated( id );
     }
 
 protected:
     virtual void drawButtonLabel( QPainter *p ) {
-	p->translate( -4, 0 );
-	QToolButton::drawButtonLabel( p );
-	p->translate( 4, 0 );
+  p->translate( -4, 0 );
+  QToolButton::drawButtonLabel( p );
+  p->translate( 4, 0 );
     }
 
 private:
@@ -107,7 +109,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name )
     editorStack = new QWidgetStack( this );
 
     fileSelector = new FileSelector( "text/html",
-				     editorStack, "fileselector" );
+             editorStack, "fileselector" );
 
 
     fileSelector->setCloseVisible( FALSE );
@@ -120,16 +122,16 @@ MainWindow::MainWindow( QWidget *parent, const char *name )
     setupActions();
 
     QObject::connect( fileSelector, SIGNAL(closeMe()),
-		      this, SLOT(showEditTools()) );
+          this, SLOT(showEditTools()) );
     QObject::connect( fileSelector, SIGNAL(fileSelected(const DocLnk &)),
-		      this, SLOT(openFile(const DocLnk &)) );
+          this, SLOT(openFile(const DocLnk &)) );
     QObject::connect( fileSelector, SIGNAL(newSelected(const DocLnk&)),
-		      this, SLOT(newFile(const DocLnk&)) );
+          this, SLOT(newFile(const DocLnk&)) );
 
     if ( fileSelector->fileCount() < 1 )
-	fileNew();
+  fileNew();
     else {
-	fileOpen();
+  fileOpen();
     }
     doConnections( editor );
 
@@ -171,13 +173,13 @@ void MainWindow::setupActions()
     a->addTo( file );
 
     a = new QAction( tr( "Undo" ), Resource::loadIconSet("opie-write/undo"),
-		     QString::null, 0, this, "editUndo" );
+         QString::null, 0, this, "editUndo" );
     connect( a, SIGNAL( activated() ), this, SLOT( editUndo() ) );
     connect( editor, SIGNAL(undoAvailable(bool)), a, SLOT(setEnabled(bool)) );
     a->addTo( tbEdit );
     a->addTo( edit );
     a = new QAction( tr( "Redo" ), Resource::loadIconSet("opie-write/redo"),
-		     QString::null, 0, this, "editRedo" );
+         QString::null, 0, this, "editRedo" );
     connect( a, SIGNAL( activated() ), this, SLOT( editRedo() ) );
     connect( editor, SIGNAL(redoAvailable(bool)), a, SLOT(setEnabled(bool)) );
     a->addTo( tbEdit );
@@ -186,19 +188,19 @@ void MainWindow::setupActions()
     edit->insertSeparator();
     
     a = new QAction( tr( "Copy" ), Resource::loadIconSet("copy"),
-		     QString::null, 0, this, "editCopy" );
+         QString::null, 0, this, "editCopy" );
     connect( a, SIGNAL( activated() ), this, SLOT( editCopy() ) );
     connect( editor, SIGNAL(copyAvailable(bool)), a, SLOT(setEnabled(bool)) );
     a->addTo( tbEdit );
     a->addTo( edit );
     a = new QAction( tr( "Cut" ), Resource::loadIconSet("cut"),
-		     QString::null, 0, this, "editCut" );
+         QString::null, 0, this, "editCut" );
     connect( a, SIGNAL( activated() ), this, SLOT( editCut() ) );
     connect( editor, SIGNAL(copyAvailable(bool)), a, SLOT(setEnabled(bool)) );
     a->addTo( tbEdit );
     a->addTo( edit );
     a = new QAction( tr( "Paste" ), Resource::loadPixmap("paste"),
-		     QString::null, 0, this, "editPaste" );
+         QString::null, 0, this, "editPaste" );
     connect( a, SIGNAL( activated() ), this, SLOT( editPaste() ) );
     a->addTo( tbEdit );
     a->addTo( edit );
@@ -208,19 +210,21 @@ void MainWindow::setupActions()
     tbFont->setHorizontalStretchable(TRUE);
 
     comboFont = new QComboBox( FALSE, tbFont );
-    QFontDatabase db;
+    FontDatabase db;
+    QStringList f= db.families();
     comboFont->insertStringList( db.families() );
     connect( comboFont, SIGNAL( activated( const QString & ) ),
-	     this, SLOT( textFamily( const QString & ) ) );
+       this, SLOT( textFamily( const QString & ) ) );
     comboFont->setCurrentItem( comboFont->listBox()->index( comboFont->listBox()->findItem( QApplication::font().family() ) ) );
+    comboFont->setMaximumWidth(90);
 
     comboSize = new QComboBox( TRUE, tbFont );
     QValueList<int> sizes = db.standardSizes();
     QValueList<int>::Iterator it = sizes.begin();
     for ( ; it != sizes.end(); ++it )
-	comboSize->insertItem( QString::number( *it ) );
+  comboSize->insertItem( QString::number( *it ) );
     connect( comboSize, SIGNAL( activated( const QString & ) ),
-	     this, SLOT( textSize( const QString & ) ) );
+       this, SLOT( textSize( const QString & ) ) );
     comboSize->lineEdit()->setText( QString::number( QApplication::font().pointSize() ) );
     comboSize->setFixedWidth( 38 );
 
@@ -228,26 +232,26 @@ void MainWindow::setupActions()
     tbStyle->setLabel( "Style Actions" );
 
     actionTextBold = new QAction( tr( "Bold" ),
-				  Resource::loadPixmap("bold"),
-				  QString::null, CTRL + Key_B,
-				  this, "textBold" );
+          Resource::loadPixmap("bold"),
+          QString::null, CTRL + Key_B,
+          this, "textBold" );
     connect( actionTextBold, SIGNAL( activated() ), this, SLOT( textBold() ) );
     actionTextBold->addTo( tbStyle );
     actionTextBold->setToggleAction( TRUE );
     actionTextItalic = new QAction( tr( "Italic" ),
-				    Resource::loadPixmap("italic"),
-				    tr( "&Italic" ), CTRL + Key_I,
-				    this, "textItalic" );
+            Resource::loadPixmap("italic"),
+            tr( "&Italic" ), CTRL + Key_I,
+            this, "textItalic" );
     connect( actionTextItalic, SIGNAL( activated() ), this,
-	     SLOT( textItalic() ) );
+       SLOT( textItalic() ) );
     actionTextItalic->addTo( tbStyle );
     actionTextItalic->setToggleAction( TRUE );
     actionTextUnderline = new QAction( tr( "Underline" ),
-				       Resource::loadPixmap("underline"),
-				       tr( "&Underline" ), CTRL + Key_U,
-				       this, "textUnderline" );
+               Resource::loadPixmap("underline"),
+               tr( "&Underline" ), CTRL + Key_U,
+               this, "textUnderline" );
     connect( actionTextUnderline, SIGNAL( activated() ),
-	     this, SLOT( textUnderline() ) );
+       this, SLOT( textUnderline() ) );
     actionTextUnderline->addTo( tbStyle );
     actionTextUnderline->setToggleAction( TRUE );
 
@@ -261,89 +265,89 @@ void MainWindow::setupActions()
 
 Qt3::QTextEdit *MainWindow::currentEditor() const
 {
-    return editor;	
+    return editor;  
 }
 
 void MainWindow::doConnections( Qt3::QTextEdit *e )
 {
     connect( e, SIGNAL( currentFontChanged( const QFont & ) ),
-	     this, SLOT( fontChanged( const QFont & ) ) );
+       this, SLOT( fontChanged( const QFont & ) ) );
     connect( e, SIGNAL( currentColorChanged( const QColor & ) ),
-	     this, SLOT( colorChanged( const QColor & ) ) );
+       this, SLOT( colorChanged( const QColor & ) ) );
     connect( e, SIGNAL( currentAlignmentChanged( int ) ),
-	     this, SLOT( alignmentChanged( int ) ) );
+       this, SLOT( alignmentChanged( int ) ) );
 }
 
 void MainWindow::updateFontSizeCombo( const QFont &f )
 {
     comboSize->clear();
-    QFontDatabase fdb;
+    FontDatabase fdb;
     QValueList<int> sizes = fdb.pointSizes( f.family() );
     QValueList<int>::Iterator it = sizes.begin();
     for ( ; it != sizes.end(); ++it )
-	comboSize->insertItem( QString::number( *it ) );
+  comboSize->insertItem( QString::number( *it ) );
 }
 
 void MainWindow::editUndo()
 {
     if ( !currentEditor() )
-	return;
+  return;
     currentEditor()->undo();
 }
 
 void MainWindow::editRedo()
 {
     if ( !currentEditor() )
-	return;
+  return;
     currentEditor()->redo();
 }
 
 void MainWindow::editCut()
 {
     if ( !currentEditor() )
-	return;
+  return;
     currentEditor()->cut();
 }
 
 void MainWindow::editCopy()
 {
     if ( !currentEditor() )
-	return;
+  return;
     currentEditor()->copy();
 }
 
 void MainWindow::editPaste()
 {
     if ( !currentEditor() )
-	return;
+  return;
     currentEditor()->paste();
 }
 
 void MainWindow::textBold()
 {
     if ( !currentEditor() )
-	return;
+  return;
     currentEditor()->setBold( actionTextBold->isOn() );
 }
 
 void MainWindow::textUnderline()
 {
     if ( !currentEditor() )
-	return;
+  return;
     currentEditor()->setUnderline( actionTextUnderline->isOn() );
 }
 
 void MainWindow::textItalic()
 {
     if ( !currentEditor() )
-	return;
+  return;
     currentEditor()->setItalic( actionTextItalic->isOn() );
 }
 
 void MainWindow::textFamily( const QString &f )
 {
     if ( !currentEditor() )
-	return;
+  return;
     currentEditor()->setFamily( f );
     currentEditor()->viewport()->setFocus();
 }
@@ -351,7 +355,7 @@ void MainWindow::textFamily( const QString &f )
 void MainWindow::textSize( const QString &p )
 {
     if ( !currentEditor() )
-	return;
+  return;
     currentEditor()->setPointSize( p.toInt() );
     currentEditor()->viewport()->setFocus();
 }
@@ -359,35 +363,35 @@ void MainWindow::textSize( const QString &p )
 void MainWindow::textStyle( int i )
 {
     if ( !currentEditor() )
-	return;
+  return;
     if ( i == 0 )
-	currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayBlock,
-				       Qt3::QStyleSheetItem::ListDisc );
+  currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayBlock,
+               Qt3::QStyleSheetItem::ListDisc );
     else if ( i == 1 )
-	currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
-				       Qt3::QStyleSheetItem::ListDisc );
+  currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
+               Qt3::QStyleSheetItem::ListDisc );
     else if ( i == 2 )
-	currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
-				       Qt3::QStyleSheetItem::ListCircle );
+  currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
+               Qt3::QStyleSheetItem::ListCircle );
     else if ( i == 3 )
-	currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
-				       Qt3::QStyleSheetItem::ListSquare );
+  currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
+               Qt3::QStyleSheetItem::ListSquare );
     else if ( i == 4 )
-	currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
-				       Qt3::QStyleSheetItem::ListDecimal );
+  currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
+               Qt3::QStyleSheetItem::ListDecimal );
     else if ( i == 5 )
-	currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
-				       Qt3::QStyleSheetItem::ListLowerAlpha );
+  currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
+               Qt3::QStyleSheetItem::ListLowerAlpha );
     else if ( i == 6 )
-	currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
-				       Qt3::QStyleSheetItem::ListUpperAlpha );
+  currentEditor()->setParagType( Qt3::QStyleSheetItem::DisplayListItem,
+               Qt3::QStyleSheetItem::ListUpperAlpha );
     currentEditor()->viewport()->setFocus();
 }
 
 void MainWindow::textAlign( int a )
 {
     if ( !currentEditor() )
-	return;
+  return;
     editor->setAlignment( a );
 }
 
@@ -408,20 +412,20 @@ void MainWindow::colorChanged( const QColor & )
 void MainWindow::alignmentChanged( int a )
 {
     if ( ( a == Qt3::AlignAuto ) || ( a & AlignLeft )) {
-	alignMenu->setCurrentItem(AlignLeft);
+  alignMenu->setCurrentItem(AlignLeft);
     } else if ( ( a & AlignCenter ) ) {
-	alignMenu->setCurrentItem(AlignCenter);
+  alignMenu->setCurrentItem(AlignCenter);
     } else if ( ( a & AlignRight ) ) {
-	alignMenu->setCurrentItem(AlignRight);
+  alignMenu->setCurrentItem(AlignRight);
     } else if ( ( a & Qt3::AlignJustify ) ) {
-	alignMenu->setCurrentItem(Qt3::AlignJustify);
+  alignMenu->setCurrentItem(Qt3::AlignJustify);
     }
 }
 
 void MainWindow::editorChanged( QWidget * )
 {
     if ( !currentEditor() )
-	return;
+  return;
     fontChanged( currentEditor()->font() );
     colorChanged( currentEditor()->color() );
     alignmentChanged( currentEditor()->alignment() );
@@ -471,7 +475,7 @@ void MainWindow::openFile( const DocLnk &dl )
     FileManager fm;
     QString txt;
     if ( !fm.loadFile( dl, txt ) )
-	qDebug( "couldn't open file" );
+  qDebug( "couldn't open file" );
     clear();
     editorStack->raiseWidget( editor );
     editor->viewport()->setFocus();
@@ -503,13 +507,13 @@ void MainWindow::hideEditTools( void )
     tbStyle->hide();
 }
 
-	
+  
 void MainWindow::save()
 {
     if ( !doc )
-	return;
+  return;
     if ( !editor->isModified() )
-	return;
+  return;
 
     QString rt = editor->text();
 
@@ -519,19 +523,19 @@ void MainWindow::save()
     editor->setTextFormat( Qt::RichText );
 
     if ( doc->name().isEmpty() ) {
-	unsigned ispace = pt.find( ' ' );
-	unsigned ienter = pt.find( '\n' );
-	int i = (ispace < ienter) ? ispace : ienter;
-	QString docname;
-	if ( i == -1 ) {
-	    if ( pt.isEmpty() )
-		docname = "Empty Text";
-	    else
-		docname = pt;
-	} else {
-	    docname = pt.left( i );
-	}
-	doc->setName(docname);
+  unsigned ispace = pt.find( ' ' );
+  unsigned ienter = pt.find( '\n' );
+  int i = (ispace < ienter) ? ispace : ienter;
+  QString docname;
+  if ( i == -1 ) {
+      if ( pt.isEmpty() )
+    docname = "Empty Text";
+      else
+    docname = pt;
+  } else {
+      docname = pt.left( i );
+  }
+  doc->setName(docname);
     }
     FileManager fm;
     fm.saveFile( *doc, rt );
@@ -547,23 +551,23 @@ void MainWindow::clear()
 void MainWindow::updateCaption()
 {
     if ( !doc )
-	setCaption( tr("Rich Text Editor") );
+  setCaption( tr("Rich Text Editor") );
     else {
-	QString s = doc->name();
-	if ( s.isEmpty() )
-	    s = tr( "Unnamed" );
-	setCaption( s + " - " + tr("Rich Text Editor") );
+  QString s = doc->name();
+  if ( s.isEmpty() )
+      s = tr( "Unnamed" );
+  setCaption( s + " - " + tr("Rich Text Editor") );
     }
 }
 
 void MainWindow::closeEvent( QCloseEvent *e )
 {
     if ( editorStack->visibleWidget() == editor ) {
-	// call fileOpen instead, don't close it
-	fileOpen();
-	e->ignore();
+  // call fileOpen instead, don't close it
+  fileOpen();
+  e->ignore();
     } else {
-	e->accept();
+  e->accept();
     }
 }
 
