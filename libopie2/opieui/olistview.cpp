@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-              =.             (C) 2003 Michael 'Mickey' Lauer <mickey@Vanille.de>
+              =.             (C) 2003-2004 Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -174,7 +174,7 @@ void OListView::serializeFrom( QDataStream& s )
 
     int cols;
     s >> cols;
-    qDebug( "read number of columns = %d", cols );
+    odebug << "read number of columns = " << cols << oendl;
 
     while ( columns() < cols ) addColumn( QString::null );
 
@@ -188,7 +188,7 @@ void OListView::serializeFrom( QDataStream& s )
 
     int items;
     s >> items;
-    qDebug( "read number of items = %d", items );
+    odebug << "read number of items = " << items << oendl;
 
     for ( int i = 0; i < items; ++i )
     {
@@ -199,6 +199,30 @@ void OListView::serializeFrom( QDataStream& s )
     odebug << "OListView loaded." << oendl;
 
 }
+
+
+void OListView::expand()
+{
+    odebug << "OListView::expand" << oendl;
+
+    QListViewItemIterator it( this );
+    while ( it.current() ) {
+        it.current()->setOpen( true );
+        ++it;
+    }
+}
+
+
+void OListView::collapse()
+{
+    odebug << "OListView::collapse" << oendl;
+    QListViewItemIterator it( this );
+    while ( it.current() ) {
+        it.current()->setOpen( false );
+        ++it;
+    }
+}
+
 
 QDataStream& operator<<( QDataStream& s, const OListView& lv )
 {
@@ -442,6 +466,129 @@ QDataStream& operator>>( QDataStream& s, OListViewItem& lvi )
     lvi.serializeFrom( s );
 }
 #endif // QT_NO_DATASTREAM
+
+
+/*======================================================================================
+ * OCheckListItem
+ *======================================================================================*/
+
+OCheckListItem::OCheckListItem( QCheckListItem* parent, const QString& text, Type t )
+               :QCheckListItem( parent, text, t )
+{
+    init();
+}
+
+
+OCheckListItem::OCheckListItem( QListViewItem* parent, const QString& text, Type t)
+               :QCheckListItem( parent, text, t )
+{
+    init();
+}
+
+
+OCheckListItem::OCheckListItem( QListView* parent, const QString& text, Type t )
+               :QCheckListItem( parent, text, t )
+{
+    init();
+}
+
+
+OCheckListItem::OCheckListItem( QListViewItem* parent, const QString& text, const QPixmap& p )
+               :QCheckListItem( parent, text, p )
+{
+    init();
+}
+
+
+OCheckListItem::OCheckListItem( QListView* parent, const QString& text, const QPixmap& p )
+               :QCheckListItem( parent, text, p )
+{
+    init();
+}
+
+
+OCheckListItem::~OCheckListItem()
+{
+}
+
+void OCheckListItem::init()
+{
+    m_known = false;
+}
+
+
+const QColor &OCheckListItem::backgroundColor()
+{
+    return isAlternate() ? static_cast<OListView*>(listView())->alternateBackground() :
+                           listView()->viewport()->colorGroup().base();
+}
+
+
+bool OCheckListItem::isAlternate()
+{
+    OListView *lv = static_cast<OListView*>( listView() );
+
+    // check if the item above is an OCheckListItem
+    OCheckListItem *above = static_cast<OCheckListItem*>( itemAbove() );
+    /*if (! itemAbove()->inherits( "OCheckListItem" )) return false;*/
+
+    // check if we have a valid alternate background color
+    if (!(lv && lv->alternateBackground().isValid())) return false;
+
+    m_known = above ? above->m_known : true;
+    if (m_known)
+    {
+       m_odd = above ? !above->m_odd : false;
+    }
+    else
+    {
+        OCheckListItem *item;
+        bool previous = true;
+        if (parent())
+        {
+            item = static_cast<OCheckListItem *>(parent());
+            if ( item /*&& item->inherits( "OCheckListItem" )*/ ) previous = item->m_odd;
+            item = static_cast<OCheckListItem *>(parent()->firstChild());
+            /* if ( !item.inherits( "OCheckListItem" ) item = 0; */
+        }
+        else
+        {
+            item = static_cast<OCheckListItem *>(lv->firstChild());
+        }
+
+        while(item)
+        {
+            item->m_odd = previous = !previous;
+            item->m_known = true;
+            item = static_cast<OCheckListItem *>(item->nextSibling());
+            /* if (!item.inherits( "OCheckListItem" ) ) break; */
+        }
+    }
+    return m_odd;
+}
+
+
+void OCheckListItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
+{
+    QColorGroup _cg = cg;
+    const QPixmap *pm = listView()->viewport()->backgroundPixmap();
+    if (pm && !pm->isNull())
+    {
+        _cg.setBrush( QColorGroup::Base, QBrush(backgroundColor(), *pm) );
+        p->setBrushOrigin( -listView()->contentsX(), -listView()->contentsY() );
+    }
+    else if ( isAlternate() )
+    {
+        _cg.setColor( QColorGroup::Base, static_cast<OListView*>( listView() )->alternateBackground() );
+    }
+    QCheckListItem::paintCell( p, _cg, column, width, alignment );
+
+    //FIXME: Use styling here!
+
+    const QPen& pen = static_cast<OListView*>( listView() )->columnSeparator();
+    p->setPen( pen );
+    p->drawLine( width-1, 0, width-1, height() );
+}
 
 
 /*======================================================================================

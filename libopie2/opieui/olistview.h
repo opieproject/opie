@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-
-              =.             (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+              =.             (C) 2003-2004 Michael 'Mickey' Lauer <mickey@vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -51,7 +50,7 @@ class OListViewItem;
  * like an alternate background for odd rows, an autostretch mode
  * for the width of the widget ( >= Qt 3 only ) and persistence capabilities.
  *
- * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ * @author Michael 'Mickey' Lauer <mickey@vanille.de>
  */
 class OListView: public QListView
 {
@@ -122,11 +121,21 @@ class OListView: public QListView
     virtual void serializeFrom( QDataStream& s );
 #endif
 
-protected slots:
-    /** 
+  public slots:
+    /**
+     * Expand all items
+     */
+     void expand();
+    /**
+     * Collapse all items
+     */
+     void collapse();
+
+  protected slots:
+    /**
      * expand the current OListViewItem
      */
-    void expand(QListViewItem*);    
+    void expand(QListViewItem*);
 
   private:
     QColor m_alternateBackground;
@@ -153,6 +162,7 @@ QDataStream& operator>>( QDataStream& stream, OListView& listview );
 
 class OListViewItem: public QListViewItem
 {
+    friend class OCheckListItem;
   public:
     /**
      * Constructors.
@@ -250,6 +260,51 @@ QDataStream& operator<<( QDataStream& stream, const OListViewItem& item );
 QDataStream& operator>>( QDataStream& stream, OListViewItem& item );
 #endif // QT_NO_DATASTREAM
 
+
+/*======================================================================================
+ * OCheckListItem
+ *======================================================================================*/
+
+class OCheckListItem : public QCheckListItem
+{
+  public:
+
+    OCheckListItem( QCheckListItem *parent, const QString &text,
+                    Type = Controller );
+    OCheckListItem( QListViewItem *parent, const QString &text,
+                    Type = Controller );
+    OCheckListItem( QListView *parent, const QString &text,
+                    Type = Controller );
+    OCheckListItem( QListViewItem *parent, const QString &text,
+                    const QPixmap & );
+    OCheckListItem( QListView *parent, const QString &text,
+                    const QPixmap & );
+    ~OCheckListItem();
+    /**
+     * @returns the background color of the list item.
+     */
+    const QColor& backgroundColor();
+    /**
+     * @returns true, if the item is at an odd position and
+     * thus have to be painted with the alternate background color.
+     */
+    bool isAlternate();
+    /**
+     * @note: Reimplemented for internal purposes - the API is not affected
+     *
+     */
+    void paintCell( QPainter *p, const QColorGroup &cg, int column, int width, int alignment );
+    /**
+     * Perform object initialization.
+     */
+    void init();
+
+  private:
+    bool m_known;
+    bool m_odd;
+};
+
+
 /*======================================================================================
  * ONamedListView
  *======================================================================================*/
@@ -261,7 +316,7 @@ class ONamedListViewItem;
  *
  * This class provides a higher-level interface to an OListView.
  *
- * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ * @author Michael 'Mickey' Lauer <mickey@vanille.de>
  */
 class ONamedListView: public OListView
 {
@@ -310,7 +365,7 @@ class ONamedListView: public OListView
  *
  * This class provides a higher-level interface to an OListViewItem.
  *
- * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ * @author Michael 'Mickey' Lauer <mickey@vanille.de>
  */
 class ONamedListViewItem: public OListViewItem
 {
