@@ -15,7 +15,8 @@ namespace {
 
     enum FlowIds {
         id_flow_hw,
-        id_flow_sw
+        id_flow_sw,
+        id_flow_none,
     };
 
     enum SpeedIds {
@@ -38,12 +39,13 @@ IOLayerBase::IOLayerBase( QWidget* par,  const char* name )
     m_groupFlow = new QButtonGroup(tr("Flow control"),this );
     m_flowHw = new QRadioButton(tr("Hardware"), m_groupFlow );
     m_flowSw = new QRadioButton(tr("Software"), m_groupFlow );
+    m_flowNone = new QRadioButton( tr("None"), m_groupFlow );
 
     m_groupParity = new QButtonGroup(tr("Parity"), this );
     m_parityOdd = new QRadioButton(tr("Odd"), m_groupParity );
     m_parityEven = new QRadioButton(tr("Even"), m_groupParity );
 
-    m_lroot = new QVBoxLayout(this );
+    m_lroot = new QVBoxLayout( this );
     m_lroot->add(m_speedLabel );
     m_lroot->add(m_speedBox );
     m_lroot->setStretchFactor(m_speedLabel, 1);
@@ -52,6 +54,7 @@ IOLayerBase::IOLayerBase( QWidget* par,  const char* name )
     m_hbox = new QHBoxLayout(m_groupFlow, 2 );
     m_hbox->add(m_flowHw );
     m_hbox->add(m_flowSw );
+    m_hbox->add(m_flowNone );
     m_lroot->add(m_groupFlow );
     m_lroot->setStretchFactor(m_groupFlow, 2 );
 
@@ -79,8 +82,12 @@ void IOLayerBase::setFlow( Flow flo ) {
     case Hardware:
         m_flowHw->setChecked( true );
         break;
+    case None:
+        m_flowNone->setChecked( true );
+        break;
     }
 }
+
 void IOLayerBase::setParity( Parity par ) {
     switch( par ) {
     case Odd:
@@ -116,9 +123,12 @@ IOLayerBase::Flow IOLayerBase::flow()const {
     if (m_flowHw->isChecked() ) {
         qWarning("Hardware flow");
         return Hardware;
-    }else {
+    }else if( m_flowSw->isChecked() ) {
         qWarning("Software");
         return Software;
+    } else {
+        qWarning("None");
+        return None;
     }
 }
 IOLayerBase::Parity IOLayerBase::parity()const {

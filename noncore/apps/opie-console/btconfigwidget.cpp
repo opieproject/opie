@@ -3,7 +3,7 @@
 #include <qcombobox.h>
 
 #include "iolayerbase.h"
-#include "serialconfigwidget.h"
+#include "btconfigwidget.h"
 
 namespace {
     void setCurrent( const QString& str, QComboBox* bo ) {
@@ -17,13 +17,11 @@ namespace {
         bo->insertItem( str );
         bo->setCurrentItem( b );
     }
-
-
 }
 
-SerialConfigWidget::SerialConfigWidget( const QString& name,
-                                        QWidget* parent,
-                                        const char* na )
+BTConfigWidget::BTConfigWidget( const QString& name,
+                                QWidget* parent,
+                                const char* na )
     : ProfileDialogConnectionWidget( name, parent, na ) {
 
     m_lay = new QVBoxLayout(this );
@@ -37,19 +35,18 @@ SerialConfigWidget::SerialConfigWidget( const QString& name,
     m_lay->addWidget( m_deviceCmb );
     m_lay->addWidget( m_base );
 
-    m_deviceCmb->insertItem( "/dev/ttyS0" );
-    m_deviceCmb->insertItem( "/dev/ttyS1" );
-    m_deviceCmb->insertItem( "/dev/ttySA0");
-    m_deviceCmb->insertItem( "/dev/ttySA1");
+    m_deviceCmb->insertItem( "/dev/ttyU0" );
+    m_deviceCmb->insertItem( "/dev/ttyU1" );
+}
+
+BTConfigWidget::~BTConfigWidget() {
 
 }
-SerialConfigWidget::~SerialConfigWidget() {
-
-}
-void SerialConfigWidget::load( const Profile& prof ) {
+void BTConfigWidget::load( const Profile& prof ) {
     int rad_flow = prof.readNumEntry("Flow");
     int rad_parity = prof.readNumEntry("Parity");
     int speed = prof.readNumEntry("Speed");
+
 
     if (rad_flow == 1) {
         m_base->setFlow( IOLayerBase::Hardware );
@@ -59,10 +56,11 @@ void SerialConfigWidget::load( const Profile& prof ) {
          m_base->setFlow( IOLayerBase::None );
     }
 
-    if (rad_parity == 1)
+    if (rad_parity == 1) {
         m_base->setParity( IOLayerBase::Even );
-    else
+    } else {
         m_base->setParity( IOLayerBase::Odd );
+    }
 
     switch( speed ) {
     case 115200:
@@ -92,9 +90,10 @@ void SerialConfigWidget::load( const Profile& prof ) {
  * flow,
  * parity
  */
-void SerialConfigWidget::save( Profile& prof ) {
+void BTConfigWidget::save( Profile& prof ) {
     int flow, parity, speed;
     prof.writeEntry("Device", m_deviceCmb->currentText() );
+
 
     switch( m_base->flow() ) {
     case IOLayerBase::None:

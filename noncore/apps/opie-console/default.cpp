@@ -1,6 +1,8 @@
 #include "io_serial.h"
 #include "sz_transfer.h"
 #include "serialconfigwidget.h"
+#include "irdaconfigwidget.h"
+#include "btconfigwidget.h"
 #include "terminalwidget.h"
 #include "vt102emulation.h"
 
@@ -30,14 +32,14 @@ extern "C" {
     }
 
     // Connection Widgets
-    ProfileDialogWidget* newSerialWidget(const QString& str, QWidget* wid) {
-        return new SerialConfigWidget(str, wid );
+    ProfileDialogWidget* newSerialWidget( const QString& str, QWidget* wid ) {
+        return new SerialConfigWidget( str, wid );
     }
-    ProfileDialogWidget* newIrDaWidget( const QString& str, QWidget* wid) {
-        return newSerialWidget(str, wid);
+    ProfileDialogWidget* newIrDaWidget( const QString& str, QWidget* wid ) {
+        return new IrdaConfigWidget( str, wid );
     }
-    ProfileDialogWidget* newBTWidget( const QString& str, QWidget* wid) {
-        return newSerialWidget(str, wid );
+    ProfileDialogWidget* newBTWidget( const QString& str, QWidget* wid ) {
+        return new BTConfigWidget(str, wid );
     }
 
     // Terminal Widget(s)

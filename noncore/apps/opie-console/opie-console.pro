@@ -2,7 +2,7 @@ TEMPLATE     = app
 #CONFIG       = qt warn_on release
 CONFIG 	     = qt debug
 DESTDIR      = $(OPIEDIR)/bin
-HEADERS      = io_layer.h io_serial.h \
+HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h \
 	       file_layer.h sz_transfer.h \
 	       metafactory.h \
 	       session.h \
@@ -27,9 +27,10 @@ HEADERS      = io_layer.h io_serial.h \
 	       default.h \
 	       terminalwidget.h \
 	       iolayerbase.h \
-	       serialconfigwidget.h
+	       serialconfigwidget.h irdaconfigwidget.h btconfigwidget.h \
 
-SOURCES      = io_layer.cpp io_serial.cpp \
+
+SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp \
 	       file_layer.cpp sz_transfer.cpp \
                main.cpp \
 	       metafactory.cpp \
@@ -53,7 +54,7 @@ SOURCES      = io_layer.cpp io_serial.cpp \
 	       default.cpp \
 	       terminalwidget.cpp \
 	       iolayerbase.cpp \
-	       serialconfigwidget.cpp
+	       serialconfigwidget.cpp irdaconfigwidget.cpp btconfigwidget.cpp \
    
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include

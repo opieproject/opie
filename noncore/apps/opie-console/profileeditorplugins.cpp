@@ -194,15 +194,18 @@ QWidget *ProfileEditorPlugin::terminal_widget()
 
 void ProfileEditorPlugin::slotConnFlow(int id)
 {
-	switch(id)
-	{
-		case id_flow_hw:
-			m_profile->writeEntry("Flow", IOSerial::FlowHW);
-			break;
-		case id_flow_sw:
-			m_profile->writeEntry("Flow", IOSerial::FlowSW);
-			break;
-	}
+    switch(id)
+    {
+    case id_flow_hw:
+        m_profile->writeEntry("Flow", IOSerial::FlowHW);
+        break;
+    case id_flow_sw:
+        m_profile->writeEntry("Flow", IOSerial::FlowSW);
+        break;
+    case id_flow_sw:
+        m_profile->writeEntry("None", IOSerial::None);
+        break;
+    }
 }
 
 void ProfileEditorPlugin::slotConnParity(int id)

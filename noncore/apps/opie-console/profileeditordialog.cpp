@@ -179,7 +179,7 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
     m_con = m_fact->newConnectionPlugin( str, m_tabCon );
 
     if (m_con ) {
-        m_con->load(m_prof );
+        m_con->load( m_prof );
         m_layCon->addWidget( m_con );
     }
 }

@@ -13,7 +13,7 @@ class QHBoxLayout;
 class IOLayerBase : public QWidget {
     Q_OBJECT
 public:
-    enum Flow { Hardware, Software };
+    enum Flow { Hardware, Software, None };
     enum Parity{ Odd  =2 , Even =1 };
     enum Speed{ Baud_115200,
                 Baud_57600,
@@ -35,7 +35,7 @@ private:
     QLabel* m_speedLabel;
     QComboBox* m_speedBox;
     QButtonGroup* m_groupFlow;
-    QRadioButton *m_flowHw, *m_flowSw;
+    QRadioButton *m_flowHw, *m_flowSw, *m_flowNone;
 
     QButtonGroup* m_groupParity;
     QRadioButton *m_parityOdd, *m_parityEven;

@@ -87,7 +87,7 @@ public:
 	 * @param QString text, the text to be inserted
 	 */
 	void insertText( QString text );
-	
+
 	/**
 	 * set selection (clipboard) to text
 	 * @param const QString &text, the text to be selected
@@ -103,7 +103,7 @@ public:
 	/**
 	 * reload configuration
 	 */
-	virtual void reloadConfig();
+	virtual void reloadConfig() = 0;
 
 
 signals:

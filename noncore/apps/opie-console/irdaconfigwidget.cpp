@@ -3,7 +3,7 @@
 #include <qcombobox.h>
 
 #include "iolayerbase.h"
-#include "serialconfigwidget.h"
+#include "irdaconfigwidget.h"
 
 namespace {
     void setCurrent( const QString& str, QComboBox* bo ) {
@@ -21,7 +21,7 @@ namespace {
 
 }
 
-SerialConfigWidget::SerialConfigWidget( const QString& name,
+IrdaConfigWidget::IrdaConfigWidget( const QString& name,
                                         QWidget* parent,
                                         const char* na )
     : ProfileDialogConnectionWidget( name, parent, na ) {
@@ -37,16 +37,14 @@ SerialConfigWidget::SerialConfigWidget( const QString& name,
     m_lay->addWidget( m_deviceCmb );
     m_lay->addWidget( m_base );
 
-    m_deviceCmb->insertItem( "/dev/ttyS0" );
-    m_deviceCmb->insertItem( "/dev/ttyS1" );
-    m_deviceCmb->insertItem( "/dev/ttySA0");
-    m_deviceCmb->insertItem( "/dev/ttySA1");
+    m_deviceCmb->insertItem( "/dev/ircomm0" );
+    m_deviceCmb->insertItem( "/dev/ircomm1" );
+}
+
+IrdaConfigWidget::~IrdaConfigWidget() {
 
 }
-SerialConfigWidget::~SerialConfigWidget() {
-
-}
-void SerialConfigWidget::load( const Profile& prof ) {
+void IrdaConfigWidget::load( const Profile& prof ) {
     int rad_flow = prof.readNumEntry("Flow");
     int rad_parity = prof.readNumEntry("Parity");
     int speed = prof.readNumEntry("Speed");
@@ -59,10 +57,11 @@ void SerialConfigWidget::load( const Profile& prof ) {
          m_base->setFlow( IOLayerBase::None );
     }
 
-    if (rad_parity == 1)
+    if (rad_parity == 1) {
         m_base->setParity( IOLayerBase::Even );
-    else
+    } else {
         m_base->setParity( IOLayerBase::Odd );
+    }
 
     switch( speed ) {
     case 115200:
@@ -92,7 +91,7 @@ void SerialConfigWidget::load( const Profile& prof ) {
  * flow,
  * parity
  */
-void SerialConfigWidget::save( Profile& prof ) {
+void IrdaConfigWidget::save( Profile& prof ) {
     int flow, parity, speed;
     prof.writeEntry("Device", m_deviceCmb->currentText() );
 
@@ -107,6 +106,7 @@ void SerialConfigWidget::save( Profile& prof ) {
         flow = 1;
         break;
     }
+
 
     switch( m_base->parity() ) {
     case IOLayerBase::Odd:
