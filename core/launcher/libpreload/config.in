@@ -1,0 +1,5 @@
+config LIBPRELOAD
+  boolean "Preload library"
+  default "y" if ! X11
+  default "n" if X11
+  depends on ! X11
