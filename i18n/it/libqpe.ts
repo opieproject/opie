@@ -366,6 +366,10 @@ modificando le categorie.</translation>
         <source>Beam this document to another device.</source>
         <translation>Trasmetti via IrDA questo documento.</translation>
     </message>
+    <message>
+        <source>Use custom rotation</source>
+        <translation>Utilizza rotazione personalizzata</translation>
+    </message>
 </context>
 <context>
     <name>OwnerDlg</name>

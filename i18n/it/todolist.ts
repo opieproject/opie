@@ -1,6 +1,126 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Nuovo</translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished">Modifica</translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished">Visualizza</translation>
+    </message>
+    <message>
+        <source>Delete...</source>
+        <translation type="unfinished">Cancella...</translation>
+    </message>
+    <message>
+        <source>Delete all...</source>
+        <translation type="unfinished">Cancella tutti...</translation>
+    </message>
+    <message>
+        <source>Delete completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Copia</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Trasmetti via IrDA</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">Trova</translation>
+    </message>
+    <message>
+        <source>Completed tasks</source>
+        <translation type="unfinished">Impegni completati</translation>
+    </message>
+    <message>
+        <source>Show Deadline</source>
+        <translation type="unfinished">Mostra scadenza</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished">Dati</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished">Categoria</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Opzioni</translation>
+    </message>
+    <message>
+        <source>Show over due</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New from template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Categories</source>
+        <translation type="unfinished">Tutte</translation>
+    </message>
+    <message>
+        <source>Out of space</source>
+        <translation type="unfinished">Spazio esaurito</translation>
+    </message>
+    <message>
+        <source>Todo was unable
+to save your changes.
+Free up some space
+and try again.
+
+Quit Anyway?</source>
+        <translation type="unfinished">Impossibile salvare le modifiche.
+Liberare dello spazio e
+ritentare.
+
+Uscire comunque?</translation>
+    </message>
+    <message>
+        <source>Todo</source>
+        <translation type="unfinished">Impegni</translation>
+    </message>
+    <message>
+        <source>Can not edit data, currently syncing</source>
+        <translation type="unfinished">Impossibile modificare i dati, sincronizzazione in corso</translation>
+    </message>
+    <message>
+        <source>all tasks?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>all completed tasks?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Vuota</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NewTaskDialog</name>
     <message>
         <source>Todo List</source>
@@ -85,127 +205,206 @@
         <source>Category:</source>
         <translation>Categoria:</translation>
     </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished">Modifica</translation>
+    </message>
+</context>
+<context>
+    <name>TableView</name>
+    <message>
+        <source>C.</source>
+        <translation type="unfinished">C.</translation>
+    </message>
+    <message>
+        <source>Prior.</source>
+        <translation type="unfinished">Prior.</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Descrizione</translation>
+    </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished">Scadenza</translation>
+    </message>
+    <message>
+        <source>Table View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TemplateDialog</name>
+    <message>
+        <source>Template Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TemplateDialogImpl</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Template %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TemplateEditor</name>
+    <message>
+        <source>Configure Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodoTable</name>
     <message>
         <source>C.</source>
-        <translation>C.</translation>
+        <translation type="obsolete">C.</translation>
     </message>
     <message>
         <source>Prior.</source>
-        <translation>Prior.</translation>
+        <translation type="obsolete">Prior.</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Descrizione</translation>
+        <translation type="obsolete">Descrizione</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation>Scadenza</translation>
+        <translation type="obsolete">Scadenza</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Vuota</translation>
+        <translation type="obsolete">Vuota</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Tutte</translation>
+        <translation type="obsolete">Tutte</translation>
     </message>
 </context>
 <context>
     <name>TodoWindow</name>
     <message>
         <source>Todo</source>
-        <translation>Impegni</translation>
+        <translation type="obsolete">Impegni</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation>Spazio Esaurito</translation>
+        <translation type="obsolete">Spazio Esaurito</translation>
     </message>
     <message>
         <source>Unable to create startup files
 Free up some space
 before you enter any data</source>
-        <translation>Impossibile creare file di avvio
+        <translation type="obsolete">Impossibile creare file di avvio
 Liberare dello spazio prima
 di inserire i dati</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Nuovo</translation>
+        <translation type="obsolete">Nuovo</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Modifica</translation>
+        <translation type="obsolete">Modifica</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Visualizza</translation>
+        <translation type="obsolete">Visualizza</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Cancella...</translation>
+        <translation type="obsolete">Cancella...</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Cancella tutti...</translation>
+        <translation type="obsolete">Cancella tutti...</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Copia</translation>
+        <translation type="obsolete">Copia</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Trasmetti via IrDA</translation>
+        <translation type="obsolete">Trasmetti via IrDA</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Trova</translation>
+        <translation type="obsolete">Trova</translation>
     </message>
     <message>
         <source>Completed tasks</source>
-        <translation>Impegni completati</translation>
+        <translation type="obsolete">Impegni completati</translation>
     </message>
     <message>
         <source>Show Deadline</source>
-        <translation>Mostra scadenza</translation>
+        <translation type="obsolete">Mostra scadenza</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation>Font</translation>
+        <translation type="obsolete">Font</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation>Dati</translation>
+        <translation type="obsolete">Dati</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Categoria</translation>
+        <translation type="obsolete">Categoria</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Opzioni</translation>
+        <translation type="obsolete">Opzioni</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Impossibile modificare i dati, sincronizzazione in corso</translation>
+        <translation type="obsolete">Impossibile modificare i dati, sincronizzazione in corso</translation>
     </message>
     <message>
         <source>all tasks</source>
-        <translation>tutti gli impegni</translation>
+        <translation type="obsolete">tutti gli impegni</translation>
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Tutte</translation>
+        <translation type="obsolete">Tutte</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Vuota</translation>
+        <translation type="obsolete">Vuota</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Spazio esaurito</translation>
+        <translation type="obsolete">Spazio esaurito</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -214,7 +413,7 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation>Impossibile salvare le modifiche.
+        <translation type="obsolete">Impossibile salvare le modifiche.
 Liberare dello spazio e
 ritentare.
 

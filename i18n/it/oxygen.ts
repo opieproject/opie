@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>chemical Formula</source>
-        <translation>Formula Chimica</translation>
+        <translation type="obsolete">Formula Chimica</translation>
     </message>
     <message>
         <source>Molecular Weight (u):</source>
@@ -52,6 +52,10 @@
     <message>
         <source>Elemental Composition (%):</source>
         <translation>Composizione Molecolare (%):</translation>
+    </message>
+    <message>
+        <source>Chemical Formula</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

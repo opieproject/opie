@@ -184,39 +184,39 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Titolo</translation>
+        <translation type="obsolete">Titolo</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Note</translation>
+        <translation type="obsolete">Note</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation>Lavoro</translation>
+        <translation type="obsolete">Lavoro</translation>
     </message>
     <message>
         <source>Mb</source>
-        <translation>Mb</translation>
+        <translation type="obsolete">Mb</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Nome</translation>
+        <translation type="obsolete">Nome</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Cognome</translation>
+        <translation type="obsolete">Cognome</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Visualizza come</translation>
+        <translation type="obsolete">Visualizza come</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Email Principale</translation>
+        <translation type="obsolete">Email Principale</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Sesso</translation>
+        <translation type="obsolete">Sesso</translation>
     </message>
     <message>
         <source>All</source>
@@ -225,6 +225,30 @@ Uscire comunque?</translation>
     <message>
         <source>Unfiled</source>
         <translation>Vuota</translation>
+    </message>
+    <message>
+        <source>OContacts</source>
+        <translation>OContatti</translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation>Lista</translation>
+    </message>
+    <message>
+        <source>Phone Book</source>
+        <translation>Elenco Numeri Telefonici</translation>
+    </message>
+    <message>
+        <source>Company Book</source>
+        <translation>Elenco Compagnia</translation>
+    </message>
+    <message>
+        <source>Email Book</source>
+        <translation>Elenco Email</translation>
+    </message>
+    <message>
+        <source>Cards</source>
+        <translation>Cartellini</translation>
     </message>
 </context>
 <context>
@@ -275,7 +299,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Titolo</translation>
+        <translation type="obsolete">Titolo</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -315,47 +339,47 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Note</translation>
+        <translation type="obsolete">Note</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation>Gruppi</translation>
+        <translation type="obsolete">Gruppi</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Indirizzo Lavoro</translation>
+        <translation type="obsolete">Indirizzo Lavoro</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Indirizzo Abitazione</translation>
+        <translation type="obsolete">Indirizzo Abitazione</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Città Lavoro</translation>
+        <translation type="obsolete">Città Lavoro</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Stato Lavoro</translation>
+        <translation type="obsolete">Stato Lavoro</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Paese Ufficio</translation>
+        <translation type="obsolete">Paese Ufficio</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Città Abitazione</translation>
+        <translation type="obsolete">Città Abitazione</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Stato Abitazione</translation>
+        <translation type="obsolete">Stato Abitazione</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>CAP Abitazione</translation>
+        <translation type="obsolete">CAP Abitazione</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Paese Abitazione</translation>
+        <translation type="obsolete">Paese Abitazione</translation>
     </message>
     <message>
         <source>Full Name...</source>
@@ -1295,23 +1319,23 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Work Phone</source>
-        <translation>Telefono Ufficio</translation>
+        <translation type="obsolete">Telefono Ufficio</translation>
     </message>
     <message>
         <source>Work Fax</source>
-        <translation>Fax Ufficio</translation>
+        <translation type="obsolete">Fax Ufficio</translation>
     </message>
     <message>
         <source>work Mobile</source>
-        <translation>Cellulare Ufficio</translation>
+        <translation type="obsolete">Cellulare Ufficio</translation>
     </message>
     <message>
         <source>Work Pager</source>
-        <translation>Cercapersone Ufficio</translation>
+        <translation type="obsolete">Cercapersone Ufficio</translation>
     </message>
     <message>
         <source>Work Web Page</source>
-        <translation>Pagina Web Ufficio</translation>
+        <translation type="obsolete">Pagina Web Ufficio</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -1319,11 +1343,11 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Work Mobile</source>
-        <translation>Cellulare Ufficio</translation>
+        <translation type="obsolete">Cellulare Ufficio</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Paese Lavoro</translation>
+        <translation type="obsolete">Paese Lavoro</translation>
     </message>
     <message>
         <source>Kuwait</source>

@@ -679,7 +679,7 @@ Release Date: July 04, 2002
 This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
 
 http://qtopia.sitebest.com</source>
-        <translation>Opie Sheet
+        <translation type="obsolete">Opie Sheet
 Foglio di Calcolo per Opie
 Vincitore QWDC Beta (come Sheet/Qt)
 
@@ -746,6 +746,20 @@ http://qtopia.sitebest.com</translation>
     <message>
         <source>Entire &amp;column</source>
         <translation>Tutta la &amp;colonna</translation>
+    </message>
+    <message>
+        <source>Opie Sheet
+Spreadsheet Software for Opie
+QWDC Beta Winner (as Sheet/Qt)
+
+Developed by: Serdar Ozler
+Release 1.0.2
+Release Date: October 08, 2002
+
+This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
+
+http://qtopia.sitebest.com</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
