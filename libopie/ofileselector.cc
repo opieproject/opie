@@ -77,7 +77,7 @@ namespace {
 
 
 OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString &dirName,
-			     const QString &fileName, const QStringList mimetypes ) : QWidget( wid )
+			     const QString &fileName, const QStringList &mimetypes ) : QWidget( wid )
 {
   m_selector = selector;
   m_currentDir = dirName;

@@ -116,11 +116,11 @@ class OFileSelectorItem : public QListViewItem {
 class OFileSelector : public QWidget {
   Q_OBJECT
  public:
-  enum Mode {OPEN=1, SAVE, FILESELECTOR };
+  enum Mode {OPEN=1, SAVE=2, FILESELECTOR=4, DIR=8 };
   enum Selector{NORMAL=1, EXTENDED = 2, EXTENDED_ALL =4 };
   enum View { DIRS = 1, FILES = 2, TREE = 4, ICON = 8 };
-  OFileSelector(QWidget *wid, int mode, int selector, const QString &dirName, const QString &fileName = QString::null, const QStringList mimetypes = QStringList() );
-
+  OFileSelector(QWidget *wid, int mode, int selector, const QString &dirName, const QString &fileName = QString::null, const QStringList &mimetypes = QStringList() );
+  ~OFileSelector() {};
   bool isToolbarVisible() const { return m_shTool;  };
   bool isPermissionBarVisible() const {  return m_shPerm; };
   bool isLineEditVisible()const { return m_shLne; };
@@ -180,6 +180,7 @@ class OFileSelector : public QWidget {
  signals:
   void fileSelected( const DocLnk & );
   void fileSelected( const QString & );
+  void dirSelected(const QString &dir );
   void closeMe();
   void ok();
   void cancel();
