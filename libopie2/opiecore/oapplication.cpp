@@ -54,11 +54,7 @@ class OApplicationPrivate
 
 
 OApplication::OApplication( int& argc, char** argv, const QCString& rAppName )
-#ifdef QWS
              :QPEApplication( argc, argv ),
-#else
-             :QApplication( argc, argv ),
-#endif
              _appname( rAppName ),
              _config( 0 )
 {
@@ -112,14 +108,7 @@ void OApplication::init()
 
 void OApplication::showMainWidget( QWidget* widget, bool nomax )
 {
-#ifdef QWS
     QPEApplication::showMainWidget( widget, nomax );
-#else
-// tille: I am quit sure if this is the right way to do..
-    odDebug(nomax,7) << "ignoring nomax";
-    setMainWidget( widget );
-    widget->show();
-#endif
     widget->setCaption( _appname );
 }
 

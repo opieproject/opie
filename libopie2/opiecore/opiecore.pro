@@ -1,8 +1,7 @@
 TEMPLATE    = lib
 CONFIG      += qt warn_on debug
 DESTDIR     = $(OPIEDIR)/lib
-HEADERS     = oapplication.h            \
-              oconfig.h                 \
+HEADERS     = oconfig.h                 \
               ocompletionbase.h         \
               ocompletion.h             \
               odebug.h                  \
@@ -10,8 +9,7 @@ HEADERS     = oapplication.h            \
               oglobalsettings.h         \
               osortablevaluelist.h
               
-SOURCES     = oapplication.cpp          \
-              oconfig.cpp               \
+SOURCES     = oconfig.cpp               \
               ocompletionbase.cpp       \
               ocompletion.cpp           \
               odebug.cpp                \
@@ -28,11 +26,14 @@ OBJECTS_DIR = obj
 
 
 !contains( platform, x11 ) {
+  HEADERS    += oapplication.h
+  SOURCES    += oapplication.cpp
   LIBS        = -lqpe
   include ( $(OPIEDIR)/include.pro )
 }
 
 contains( platform, x11 ) {
+  message( NOT building oapplication for X11 )
   LIBS        = -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
 }
 
