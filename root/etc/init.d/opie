@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 
-[ -z $LOGNAME ] && export LOGNAME=root
+[ -z $LOGNAME ] && export LOGNAME=root && export HOME=/root
 [ -z $HOME ] && export HOME=/$LOGNAME
 
 export QTDIR=/opt/QtPalmtop
