@@ -57,7 +57,7 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
   	QVBoxLayout *vb = new QVBoxLayout( this );
  	m_viewStack = new QWidgetStack( this );
 	vb->addWidget( m_viewStack );
-	
+
 	// Creat TableView
  	QVBox* tableBox = new QVBox( m_viewStack );
  	m_abTable = new AbTable( m_orderedFields, tableBox, "table" );
@@ -73,8 +73,8 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	m_viewStack -> addWidget( cardBox , CardView );
 
 	// Connect views to me
-	connect ( m_abTable, SIGNAL( signalSwitch( void ) ), 
-		  this, SLOT( slotSwitch( void ) ) ); 
+	connect ( m_abTable, SIGNAL( signalSwitch( void ) ),
+		  this, SLOT( slotSwitch( void ) ) );
 	connect ( m_ablabel, SIGNAL( signalOkPressed( void ) ),
 		  this, SLOT( slotSwitch( void ) ) );
 
@@ -105,7 +105,7 @@ void AbView::addEntry( const OContact &newContact )
 	qWarning("abview:AddContact");
 	m_contactdb->add ( newContact );
 	load();
-	
+
 }
 void AbView::removeEntry( const int UID )
 {
@@ -151,7 +151,7 @@ void AbView::load()
 
 	// Letter Search is stopped at this place
 	emit signalClearLetterPicker();
-	
+
 	if ( m_inPersonal )
 		m_list = m_contactdb->allRecords();
 	else{
@@ -161,8 +161,8 @@ void AbView::load()
 
 	qWarning ("Number of contacts: %d", m_list.count());
 
-	updateView( true ); 
-	
+	updateView( true );
+
 }
 
 void AbView::reload()
@@ -196,7 +196,7 @@ void AbView::setShowByCategory( const QString& cat )
 
 		m_curr_category = intCat;
 		emit signalClearLetterPicker();
-		
+
 		load();
 	}
 
@@ -240,7 +240,7 @@ void AbView::setListOrder( const QValueList<int>& ordered )
 }
 
 
-QString AbView::showCategory() const 
+QString AbView::showCategory() const
 {
 	return mCat.label( "Contacts", m_curr_category );
 }
@@ -259,13 +259,13 @@ void AbView::showPersonal( bool personal )
 		// to avoid unneeded load/stores.
 		m_storedDB = m_contactdb;
 
-		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null, 
+		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null,
 									  addressbookPersonalVCardName() );
 		m_contactdb = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
 
 		m_inPersonal = true;
 		m_curr_View = CardView;
-		
+
 	}else{
 
 		if ( !m_inPersonal )
@@ -280,21 +280,21 @@ void AbView::showPersonal( bool personal )
 
 		m_curr_View = TableView;
 		m_inPersonal = false;
-		
+
 	}
 	load();
 }
 
-QStringList AbView::categories() 
+QStringList AbView::categories()
 {
 	mCat.load( categoryFileName() );
 	QStringList categoryList = mCat.labels( "Contacts" );
 	return categoryList;
 }
- 
-// BEGIN: Slots 
-void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp, 
-			 bool , QString cat = QString::null )
+
+// BEGIN: Slots
+void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
+			 bool , QString cat )
 {
 	qWarning( "void AbView::slotDoFind" );
 
@@ -315,7 +315,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 	QRegExp r( str );
 	r.setCaseSensitive( caseSensitive );
 	r.setWildcard( !useRegExp );
-	
+
 	// Get all matching entries out of the database
 	m_list = m_contactdb->matchRegexp( r );
 
@@ -329,7 +329,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 	// This algorithm is a litte bit ineffective, but
 	// we will not have a lot of matching entries..
 	clearForCategory();
-	
+
 	// Now show all found entries
 	updateView( true );
 }
@@ -356,7 +356,7 @@ void AbView::slotSwitch(){
 		break;
 	}
 	updateView();
-	
+
 }
 
 // END: Slots
@@ -369,7 +369,7 @@ void AbView::clearForCategory()
 	OContactAccess::List allList = m_list;
 	if ( m_curr_category != -1 ){
 		for ( it = allList.begin(); it != allList.end(); ++it ){
-			if ( !contactCompare( *it, m_curr_category ) ){ 
+			if ( !contactCompare( *it, m_curr_category ) ){
 				qWarning("Removing %d", (*it).uid());
 				m_list.remove( (*it).uid() );
 			}
@@ -435,7 +435,7 @@ void  AbView::updateView( bool newdata )
 		}else
 			m_curr_Contact = 0;
 	}
-	
+
 	// Feed all views with new lists
 	if ( newdata )
 		updateListinViews();
@@ -460,7 +460,7 @@ void  AbView::updateView( bool newdata )
 		m_ablabel -> setFocus();
 		break;
 	}
-	
+
 	// Raise the current View
 	m_viewStack -> raiseWidget( m_curr_View );
 }
