@@ -3,7 +3,7 @@
     <name>Calculator</name>
     <message>
         <source>Experimental Calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksperymantalny kalkulator</translation>
     </message>
     <message>
         <source>M+</source>
@@ -126,7 +126,7 @@
     <name>CalculatorImpl</name>
     <message>
         <source>Calculator</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalkulator</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>Clock</name>
     <message>
         <source>Snooze</source>
-        <translation type="unfinished"></translation>
+        <translation>Drzemka</translation>
     </message>
     <message>
         <source>PM</source>
@@ -11,15 +11,15 @@
     </message>
     <message>
         <source>Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Zegar</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatrzymaj</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruchom</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -27,15 +27,15 @@
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw alarm</translation>
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm jest wlaczony</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm jest wylaczony</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -46,15 +46,15 @@
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw alarm</translation>
     </message>
     <message>
         <source>Hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Godzina</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuta</translation>
     </message>
     <message>
         <source>AM</source>
@@ -67,7 +67,8 @@
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation>Opoznienie drzemni
+(minuty)</translation>
     </message>
 </context>
 </TS>
