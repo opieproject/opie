@@ -24,6 +24,7 @@
 
 #include <assert.h>
 
+using namespace Opie;
 
 XMLElement::XMLElement()
     : m_parent( 0 ), m_next( 0 ), m_prev( 0 ), m_first( 0 ), m_last( 0 )

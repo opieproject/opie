@@ -6,6 +6,8 @@
 #include <qpe/palmtoprecord.h>
 #include <qpe/global.h>
 
+using namespace Opie;
+
 namespace {
 
 class FileToDoResource : public ToDoResource {

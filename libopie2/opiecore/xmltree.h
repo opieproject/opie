@@ -25,6 +25,9 @@
 #include <qmap.h>
 #include <qtextstream.h>
 
+namespace Opie
+{
+
 /**
  *  A small xml lib written by Simon Hausmann.
  */ 
@@ -108,5 +111,7 @@ private:
     XMLElement( const XMLElement &rhs );
     XMLElement &operator=( const XMLElement &rhs );
 };
+
+} // namespace Opie
 
 #endif
