@@ -603,7 +603,7 @@ et</translation>
     </message>
     <message>
         <source>This is a multiple day event</source>
-        <translation type="unfinished"></translation>
+        <translation>C&apos;est un évènement sur plusieur jour</translation>
     </message>
 </context>
 <context>

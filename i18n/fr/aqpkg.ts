@@ -452,121 +452,121 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Size&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Taille&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Filename&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Nom de fichier&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Version installée&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Version disponible&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Package Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information sur le paquetage</translation>
     </message>
     <message>
         <source>Package information is unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Information sur le paquetage non disponible</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Fermer</translation>
+        <translation>Fermer</translation>
     </message>
 </context>
 <context>
     <name>QuestionDlg</name>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Enlever</translation>
+        <translation>Enlever</translation>
     </message>
 </context>
 <context>
     <name>SettingsImpl</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Configuration</translation>
+        <translation>Configuration</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished">Serveurs</translation>
+        <translation>Serveurs</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished">Destinations</translation>
+        <translation>Destinations</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished">Proxies</translation>
+        <translation>Proxies</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Nouveau</translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveur</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Nom :</translation>
+        <translation>Nom:Nom :</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse:</translation>
     </message>
     <message>
         <source>Active Server</source>
-        <translation type="unfinished">Serveur actif</translation>
+        <translation>Serveur actif</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Mise à jour</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished">Destination</translation>
+        <translation>Destination</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Emplacement:</translation>
     </message>
     <message>
         <source>Link to root</source>
-        <translation type="unfinished"></translation>
+        <translation>lié à la racine</translation>
     </message>
     <message>
         <source>HTTP Proxy</source>
-        <translation type="unfinished">Proxy HTTP</translation>
+        <translation>Proxy HTTP</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Activé</translation>
+        <translation>Activé</translation>
     </message>
     <message>
         <source>FTP Proxy</source>
-        <translation type="unfinished">Proxy FTP</translation>
+        <translation>Proxy FTP</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Identifiant:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe:</translation>
     </message>
 </context>
 </TS>
