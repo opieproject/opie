@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 
   MainWindow *win = new MainWindow();
   a.setMainWidget(win);
-  win->show();
+  win->showMaximized();
 
   a.exec();
 

@@ -53,10 +53,6 @@ private:
 
     QComboBox *serversList;
     QListView *packagesList;
-    QPushButton *update;
-    QPushButton *upgrade;
-    QPushButton *download;
-    QPushButton *apply;
 
     QString currentlySelectedServer;
     QString lastSearchText;
@@ -68,8 +64,9 @@ private:
     bool showInstalledPkgs;
     bool showUpgradedPkgs;
 
+    bool downloadEnabled;
+    
     void initGui();
-    void setupConnections();
     void showProgressDialog( char *initialText );
     void downloadSelectedPackages();
     void downloadRemotePackage();
@@ -81,6 +78,8 @@ private:
 signals:
     void appRaiseMainWidget();
     void appRaiseProgressWidget();
+    void appEnableUpgrade( bool );
+    void appEnableDownload( bool );
     void progressSetSteps( int );
     void progressSetMessage( const QString & );
     void progressUpdate( int );

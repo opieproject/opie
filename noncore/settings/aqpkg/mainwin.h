@@ -19,8 +19,12 @@
 #define MAINWIN_H
 
 #include <qmainwindow.h>
-#include <qwidgetstack.h>
+#include <qpixmap.h>
+//#include <qwidgetstack.h>
 
+class QWidgetStack;
+class QPEToolBar;
+class QAction;
 class ProgressWidget;
 class NetworkPackageManager;
 class DataManager;
@@ -30,7 +34,7 @@ class MainWindow :public  QMainWindow
 	Q_OBJECT
 public:
 
-	MainWindow( QWidget *p = 0, char *name = 0 );
+	MainWindow();
 	~MainWindow();
 
 private:
@@ -41,8 +45,12 @@ private:
     QPopupMenu *settings;
     QPopupMenu *edit;
     QPopupMenu *filter;
-	QWidgetStack *stack;
-
+    QWidgetStack *stack;
+    QAction *actionUpgrade;
+    QAction *actionDownload;
+    QPixmap iconDownload;
+    QPixmap iconRemove;
+    
     NetworkPackageManager *networkPkgWindow;
     ProgressWidget *progressWindow;
 
@@ -66,6 +74,8 @@ public slots:
     void setFilterCategory();
     void raiseMainWidget();
     void raiseProgressWidget();
+    void enableUpgrade( bool );
+    void enableDownload( bool );
 
 private slots:
     void init();

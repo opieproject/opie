@@ -65,9 +65,6 @@ NetworkPackageManager::NetworkPackageManager( QWidget *parent, const char *name 
     categoryFilterEnabled = false;
 
     initGui();
-    setupConnections();
-
-    //updateData();
 }
 
 NetworkPackageManager::~NetworkPackageManager()
@@ -147,11 +144,9 @@ void NetworkPackageManager :: initGui()
 {
     QLabel *l = new QLabel( tr( "Servers" ), this );
     serversList = new QComboBox( this );
+    connect( serversList, SIGNAL(activated( int )), this, SLOT(serverSelected( int )));
+    
     packagesList = new QListView( this );
-    update = new QPushButton( tr( "Refresh Lists" ), this );
-    download = new QPushButton( tr( "Download" ), this );
-    upgrade = new QPushButton( tr( "Upgrade" ), this );
-    apply = new QPushButton( tr( "Apply" ), this );
 
     QVBoxLayout *vbox = new QVBoxLayout( this, 0, -1 );
     QHBoxLayout *hbox1 = new QHBoxLayout( vbox, -1 );
@@ -180,21 +175,8 @@ void NetworkPackageManager :: initGui()
 
     vbox->addWidget( packagesList );
     packagesList->addColumn( tr( "Packages" ) );
-
-    QHBoxLayout *hbox2 = new QHBoxLayout( vbox, -1 );
-    hbox2->addWidget( update );
-    hbox2->addWidget( download );
-    hbox2->addWidget( upgrade );
-    hbox2->addWidget( apply );
-}
-
-void NetworkPackageManager :: setupConnections()
-{
-    connect( serversList, SIGNAL(activated( int )), this, SLOT(serverSelected( int )));
-    connect( apply, SIGNAL(released()), this, SLOT(applyChanges()) );
-    connect( download, SIGNAL(released()), this, SLOT(downloadPackage()) );
-    connect( upgrade, SIGNAL( released()), this, SLOT(upgradePackages()) );
-    connect( update, SIGNAL(released()), this, SLOT(updateServer()) );
+    
+    downloadEnabled = TRUE;
 }
 
 void NetworkPackageManager :: serverSelected( int index )
@@ -340,22 +322,20 @@ void NetworkPackageManager :: serverSelected( int, bool raiseProgress )
     // If the local server or the local ipkgs server disable the download button
     if ( serverName == LOCAL_SERVER )
     {
-        upgrade->setEnabled( false );
-        download->setText( tr( "Download" ) );
-        download->setEnabled( true );
+        downloadEnabled = TRUE;
+        emit appEnableUpgrade( FALSE );
     }
     else if ( serverName == LOCAL_IPKGS )
     {
-        upgrade->setEnabled( false );
-        download->setEnabled( true );
-        download->setText( tr( "Remove" ) );
+        downloadEnabled = FALSE;
+        emit appEnableUpgrade( FALSE );
     }
     else
     {
-        upgrade->setEnabled( true );
-        download->setEnabled( true );
-        download->setText( tr( "Download" ) );
+        downloadEnabled = TRUE;
+        emit appEnableUpgrade( TRUE );
     }
+    emit appEnableDownload( downloadEnabled );
 
     // Display this widget once everything is done
     if ( doProgress && raiseProgress )
@@ -421,7 +401,7 @@ void NetworkPackageManager :: upgradePackages()
 void NetworkPackageManager :: downloadPackage()
 {
     bool doUpdate = true;
-    if ( download->text() == tr( "Download" ) )
+    if ( downloadEnabled )
     {
         // See if any packages are selected
         bool found = false;
@@ -445,7 +425,7 @@ void NetworkPackageManager :: downloadPackage()
             downloadRemotePackage();
         
     }
-    else if ( download->text() == tr( "Remove" ) )
+    else
     {
         doUpdate = false;
         for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
