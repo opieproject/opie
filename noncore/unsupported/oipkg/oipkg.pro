@@ -21,7 +21,6 @@ LIBS            += -lqpe
 INTERFACES	= pkdesc.ui \
 		pkfind.ui \
 		runwindow.ui \
-		pkwindow.ui \
 		pksettingsbase.ui
 TARGET		= oipkg
 

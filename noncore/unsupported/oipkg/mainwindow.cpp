@@ -12,8 +12,10 @@
 #include <qpopupmenu.h>
 #include <qtoolbutton.h>
 #include <qstring.h>
+#include <qlabel.h>
 #include <qlistview.h>
 #include <qtextview.h>
+#include <qlineedit.h>
 #include <qtabwidget.h>
 #include <qcombobox.h>
 #include <qlayout.h>
@@ -25,26 +27,31 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   QMainWindow( parent, name, f )
 {	
   setCaption( tr("Package Manager") );
-  table =  new PackageWindow( this,0,0 );
-  setCentralWidget( table );
+
+  listViewPackages =  new QListView( this,0,0 );
+  setCentralWidget( listViewPackages );
+
   makeMenu();		
 
   QFontMetrics fm = fontMetrics();
-  int w0 = fm.width(tr("Package"))+30;
-  int w2 = fm.width("00000")+4;
-  table->ListViewPackages->setColumnWidth(0,w0);
-  table->ListViewPackages->setColumnWidth(1,228-w2-w0); // ### screen-biased
-  table->ListViewPackages->setColumnWidth(2,w2);
-  table->ListViewPackages->setColumnWidthMode(0,QListView::Manual);
-  table->ListViewPackages->setColumnWidthMode(1,QListView::Manual);
-  table->ListViewPackages->setColumnWidthMode(2,QListView::Manual);
-  table->ListViewPackages->setSelectionMode( QListView::Multi );
+  int wlw = width()*2;
+  int w0  = fm.width(tr("Package"))+30;
+ // int w0  = fm.width(tr("Package"))+30;
+  int w2  = fm.width("00000")+4;
+  int w1  = wlw-w2-w0-20;
+	listViewPackages->addColumn( tr("Package"), w0 );
+	listViewPackages->addColumn( tr("Description"), w1 );
+	listViewPackages->addColumn( tr("Size"), w2 );
+  listViewPackages->setColumnWidthMode(0,QListView::Manual);
+  listViewPackages->setColumnWidthMode(1,QListView::Manual);
+  listViewPackages->setColumnWidthMode(2,QListView::Manual);
+  listViewPackages->setSelectionMode( QListView::Multi );
 
-  connect( table->section, SIGNAL( activated(int) ),
+  connect( section, SIGNAL( activated(int) ),
 	   this, SLOT( sectionChanged() ) );
-  connect( table->subsection, SIGNAL(activated(int) ),
+  connect( subsection, SIGNAL(activated(int) ),
 	   this, SLOT( subSectionChanged() ) );
-  connect( table->ListViewPackages, SIGNAL( clicked( QListViewItem* ) ),
+  connect( listViewPackages, SIGNAL( pressed( QListViewItem* ) ),
 	   this, SLOT( setCurrent( QListViewItem* ) ) );
 	
   settings = new PackageManagerSettings(this,0,TRUE);
@@ -63,28 +70,27 @@ void MainWindow::makeMenu()
   QPEToolBar *toolBar = new QPEToolBar( this );
   QPEMenuBar *menuBar = new QPEMenuBar( toolBar );
   QPopupMenu *srvMenu = new QPopupMenu( menuBar );
+  QPopupMenu *viewMenu = new QPopupMenu( menuBar );
   QPopupMenu *cfgMenu = new QPopupMenu( menuBar );
   //    QPopupMenu *sectMenu = new QPopupMenu( menuBar );
 
-//#define TOOLBAR
-#ifdef TOOLBAR
-	QPEToolBar *secBar = new QPEToolBar( this );
-  QComboBox *sections = new QComboBox( false, this );
- 	secBar->addTo( sections );
-#endif
+  popupMenu = new QPopupMenu( this );
 
   contextMenu = new QPopupMenu( this );
 
   setToolBarsMovable( false );
   toolBar->setHorizontalStretchable( true );
   menuBar->insertItem( tr( "Package" ), srvMenu );
+  menuBar->insertItem( tr( "View" ), viewMenu );
   menuBar->insertItem( tr( "Settings" ), cfgMenu );
   //    menuBar->insertItem( tr( "Sections" ), sectMenu );
 
-  toolBar->setStretchableWidget (srvMenu);
+  QLabel *spacer = new QLabel( "", toolBar );
+  spacer->setBackgroundColor( toolBar->backgroundColor() );
+  toolBar->setStretchableWidget( spacer );
 
 		
-  runAction = new QAction( tr( "Run" ),
+  runAction = new QAction( tr( "Commit" ),
 			   Resource::loadPixmap( "oipkg/install" ),
 			   QString::null, 0, this, 0 );
   connect( runAction, SIGNAL( activated() ),
@@ -102,36 +108,82 @@ void MainWindow::makeMenu()
   updateAction->addTo( toolBar );
   updateAction->addTo( srvMenu );
 
-  //    detailsAction = new QAction( tr( "Details" ),
-  //    		Resource::loadIconSet( "oipkg/details" ),
-  //		    QString::null, 0, this, 0 );
-  //    connect( detailsAction, SIGNAL( activated() ),
-  //             this , SLOT( showDetails() ) );
-  //    detailsAction->addTo( toolBar );
-  //    detailsAction->addTo( srvMenu );
+  detailsAction = new QAction( tr( "Details" ),
+      		Resource::loadIconSet( "find" ),
+  		    QString::null, 0, this, 0 );
+  connect( detailsAction, SIGNAL( activated() ),
+               this , SLOT( showDetails() ) );
+  detailsAction->addTo( toolBar );
+  detailsAction->addTo( srvMenu );
 
   QAction *cfgact;
 
   cfgact = new QAction( tr( "Setups" ),
-			Resource::loadIconSet( "" ),
+	//		Resource::loadIconSet( "" ),
 			QString::null, 0, this, 0 );
   connect( cfgact, SIGNAL( activated() ),
 	   SLOT( showSettings() ) );
   cfgact->addTo( cfgMenu );
 		
   cfgact = new QAction( tr( "Servers" ),
-			Resource::loadIconSet( "" ),
+	//		Resource::loadIconSet( "" ),
 			QString::null, 0, this, 0 );
   connect( cfgact, SIGNAL( activated() ),
 	   SLOT( showSettingsSrv() ) );
   cfgact->addTo( cfgMenu );
   cfgact = new QAction( tr( "Destinations" ),
-			Resource::loadIconSet( "" ),
+		//	Resource::loadIconSet( "" ),
 			QString::null, 0, this, 0 );
   connect( cfgact, SIGNAL( activated() ),
 	   SLOT( showSettingsDst() ) );
   cfgact->addTo( cfgMenu );
-	
+
+    QAction *a;
+
+	sectionBar = new QPEToolBar( this );
+ 	addToolBar( sectionBar,  "Section", QMainWindow::Top, TRUE );
+  sectionBar->setHorizontalStretchable( true );
+  QLabel *label = new QLabel( tr("Section: "), sectionBar );
+  label->setBackgroundColor( sectionBar->backgroundColor() );
+  section = new QComboBox( false, sectionBar );
+//  section->setBackgroundMode( PaletteBackground );
+  label = new QLabel( " / ", sectionBar );
+  label->setBackgroundColor( sectionBar->backgroundColor() );
+  subsection = new QComboBox( false, sectionBar );
+ 	sectionBar->setStretchableWidget( label );
+
+  a = new QAction( tr( "Close Section" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+  connect( a, SIGNAL( activated() ), this, SLOT( sectionClose() ) );
+  a->addTo( sectionBar );
+
+  sectionAction = new QAction( tr( "Sections" ), QString::null, 0, this, 0 );
+  connect( sectionAction, SIGNAL( toggled(bool) ), this, SLOT( sectionShow(bool) ) );
+  sectionAction->setToggleAction( true );
+  sectionAction->setOn( true );
+  sectionAction->addTo( viewMenu );
+
+  findBar = new QPEToolBar(this);
+  addToolBar( findBar,  "Search", QMainWindow::Top, TRUE );
+  label = new QLabel( tr("Filter: "), findBar );
+  label->setBackgroundColor( findBar->backgroundColor() );
+  findBar->setHorizontalStretchable( TRUE );
+  findEdit = new QLineEdit( findBar, "findEdit" );
+  findBar->setStretchableWidget( findEdit );
+  connect( findEdit, SIGNAL( textChanged( const QString & ) ),
+       this, SLOT( displayList() ) );
+//	a = new QAction( tr( "Filter" ), Resource::loadPixmap( "next" ), QString::null, 0, this, 0 );
+//  connect( a, SIGNAL( activated() ), this, SLOT( filterList() ) );
+//  a->addTo( findBar );
+//    a->addTo( edit );
+  a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+  connect( a, SIGNAL( activated() ), this, SLOT( findClose() ) );
+  a->addTo( findBar );
+  findAction = new QAction( tr( "Find" ), QString::null, 0, this, 0 );
+  connect( findAction, SIGNAL( toggled(bool) ), this, SLOT( findShow(bool) ) );
+  findAction->setToggleAction( true );
+  findAction->setOn( true );
+  findAction->addTo( viewMenu );
+
 }
 
 MainWindow::~MainWindow()
@@ -141,12 +193,12 @@ MainWindow::~MainWindow()
 void MainWindow::runIpkg()
 {
   ipkg->commit( packageList );
-  updateList();
+  updateList(); //to remove
 }
 
 void MainWindow::updateList()
 {
- // todo: packageList.clear();
+	packageList.clear();
   ipkg->update();
   getList();
 }
@@ -159,66 +211,64 @@ void MainWindow::getList()
 
 void MainWindow::filterList()
 {
-  packageList.filterPackages();
+ 	QString f = "";
+  if ( findAction->isOn() ) f = findEdit->text();
+  packageList.filterPackages( f );
 }
 
 void MainWindow::displayList()
 {
-  table->ListViewPackages->clear();
+	filterList();
+  listViewPackages->clear();
   Package *pack = packageList.first();
   while( pack )
-    {
-      if ( pack && (pack->name() != "") )
-	{
-	  table->ListViewPackages->insertItem(
-					      new PackageListItem( table->ListViewPackages, pack ) );
-	}
-      pack = packageList.next();
-    }	
+  {
+  	if ( pack && (pack->name() != "") )
+	  	listViewPackages->insertItem( new PackageListItem( listViewPackages, pack ) );
+    pack = packageList.next();
+  }	
 }
 
 void MainWindow::sectionChanged()
 {
-  disconnect( table->section, SIGNAL( activated(int) ),
+  disconnect( section, SIGNAL( activated(int) ),
 	      this, SLOT( sectionChanged() ) );
-  disconnect( table->subsection, SIGNAL(activated(int) ),
+  disconnect( subsection, SIGNAL(activated(int) ),
 	      this, SLOT( subSectionChanged() ) );
-  table->subsection->clear();
-  packageList.setSection( table->section->currentText() );
+  subsection->clear();
+  packageList.setSection( section->currentText() );
   setSubSections();
-  filterList();
-  connect( table->section, SIGNAL( activated(int) ),
+  connect( section, SIGNAL( activated(int) ),
 	   this, SLOT( sectionChanged() ) );
-  connect( table->subsection, SIGNAL(activated(int) ),
+  connect( subsection, SIGNAL(activated(int) ),
 	   this, SLOT( subSectionChanged() ) );
   displayList();
 }
 
 void MainWindow::subSectionChanged()
 {
-  disconnect( table->section, SIGNAL( activated(int) ),
+  disconnect( section, SIGNAL( activated(int) ),
 	      this, SLOT( sectionChanged() ) );
-  disconnect( table->subsection, SIGNAL(activated(int) ),
+  disconnect( subsection, SIGNAL(activated(int) ),
 	      this, SLOT( subSectionChanged() ) );
-  packageList.setSubSection( table->subsection->currentText() );
-  filterList();
-  connect( table->section, SIGNAL( activated(int) ),
+  packageList.setSubSection( subsection->currentText() );
+  connect( section, SIGNAL( activated(int) ),
 	   this, SLOT( sectionChanged() ) );
-  connect( table->subsection, SIGNAL(activated(int) ),
+  connect( subsection, SIGNAL(activated(int) ),
 	   this, SLOT( subSectionChanged() ) );
   displayList();
 }
 
 void MainWindow::setSections()
 {
-  table->section->clear();
-  table->section->insertStringList( packageList.getSections() );
+  section->clear();
+  section->insertStringList( packageList.getSections() );
 }
 
 void MainWindow::setSubSections()
 {
-  table->subsection->clear();
-  table->subsection->insertStringList( packageList.getSubSections() );
+  subsection->clear();
+  subsection->insertStringList( packageList.getSubSections() );
 }
 
 
@@ -267,6 +317,32 @@ void MainWindow::toggleActivePackage()
 void MainWindow::setCurrent( QListViewItem* p )
 {
   pvDebug(2, "MainWindow::setCurrent ");
-  //+((Package*)p)->name());
+  return;
+  pvDebug(2, "name "+((Package*)p)->name());
   activePackage = (Package*)p;
 }
+
+void MainWindow::sectionShow(bool b)
+{
+	if (b) sectionBar->show();
+  else sectionBar->hide();
+  sectionAction->setOn( b );
+}
+
+void MainWindow::sectionClose()
+{
+  sectionAction->setOn( false );
+}
+
+void MainWindow::findShow(bool b)
+{
+	if (b) findBar->show();
+  else findBar->hide();
+  findAction->setOn( b );
+}
+
+void MainWindow::findClose()
+{
+  findAction->setOn( false );
+}
+

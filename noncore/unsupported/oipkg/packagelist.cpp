@@ -25,8 +25,6 @@ PackageList::PackageList()
 	cfg.writeEntry( "listsDir", listsDir );
       }
   }
-  pvDebug( 5, "PackageList::PackageList statusDir "+statusDir);
-  pvDebug( 5, "PackageList::PackageList listsDir "+listsDir);
   sections << "All";
   subSections.insert("All", new QStringList() );
   QStringList *ss = subSections["All"];
@@ -63,7 +61,7 @@ void PackageList::insertPackage( Package* pack )
   updateSections( pack );
 }
 
-void PackageList::filterPackages()
+void PackageList::filterPackages( QString f )
 {	
   packageList.clear();
   QDictIterator<Package> filterIter( origPackageList );
@@ -71,11 +69,14 @@ void PackageList::filterPackages()
   Package *pack= filterIter.current() ;
   while ( pack )
     {	
-      if ( ((aktSection=="All")||(pack->getSection()==aktSection)) &&
-	   ((aktSubSection=="All")||(pack->getSubSection()==aktSubSection)) )
-	{
-	  packageList.insert( pack->name(), pack );
-	}
+      if (
+      			((aktSection=="All")||(pack->getSection()==aktSection)) &&
+	   				((aktSubSection=="All")||(pack->getSubSection()==aktSubSection)) &&
+        		 pack->name().contains( f )
+    			)
+			{
+	  		packageList.insert( pack->name(), pack );
+			}
       ++filterIter;
       pack = filterIter.current();
     }
@@ -213,4 +214,10 @@ void PackageList::setSettings( PackageManagerSettings *s )
 Package* PackageList::getByName( QString n )
 {
 	origPackageList[n];
+}
+
+void PackageList::clear()
+{
+	origPackageList.clear();
+	packageList.clear();
 }

@@ -14,6 +14,8 @@
 
 class PackageList {
 public:
+//	static QString all = QObject::tr("All");
+
   PackageList();
   PackageList( PackageManagerSettings* );
   ~PackageList();
@@ -25,9 +27,10 @@ public:
   QStringList getSections();
   QStringList getSubSections();
   void setSettings( PackageManagerSettings* );
-  void filterPackages();
-  /** No descriptions */
+  void filterPackages( QString );
   Package* getByName( QString );
+  /** No descriptions */
+  void clear();
 
 public slots:
   void setSection(QString);

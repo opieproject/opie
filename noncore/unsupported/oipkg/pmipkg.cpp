@@ -33,7 +33,7 @@ PmIpkg::PmIpkg( PackageManagerSettings* s, QWidget* p,  const char * name, WFlag
 {
   settings = s;
   runwindow = new RunWindow ( p, name, f );
-  linkDest = new QCopChannel( "QPE/MakeLinks", this );
+  linkDest = new QCopChannel( "QPE/oipkg", this );
   connect( linkDest, SIGNAL(received(const QCString &, const QByteArray &)),
 	   this, SLOT(linkDestination( const QString &, const  QByteArray&)) );
 }

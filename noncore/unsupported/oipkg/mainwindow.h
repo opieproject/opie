@@ -10,7 +10,11 @@
 #include "pksettings.h"
 #include "pkdesc.h"
 
-#include "pkwindow.h"
+class QComboBox;
+class QPEToolBar;
+class QLineEdit;
+class QListView;
+
 
 class MainWindow : public QMainWindow
 {
@@ -21,16 +25,10 @@ public:
   MainWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
   ~MainWindow();
 
-
-protected:
-  PackageWindow *table;
-
-
 protected slots:
   void runIpkg();
   void getList();
   void updateList();
-  void filterList();
   void displayList();
   void subSectionChanged();
   void sectionChanged();
@@ -42,6 +40,11 @@ public slots:
   void showDetails();
   void toggleActivePackage();
   void setCurrent( QListViewItem* );
+  void sectionClose();
+  void sectionShow(bool);
+  void findClose();
+  void findShow(bool);
+  void filterList();
 
 private:
   void makeMenu();
@@ -56,7 +59,16 @@ private:
   QAction *runAction;
   QAction *detailsAction;
   QAction *updateAction;
+  QAction *findAction;
+  QAction *sectionAction;
+  QListView *listViewPackages;
   QPopupMenu *contextMenu;
+  QPEToolBar *findBar;
+  QLineEdit *findEdit;
+  QPEToolBar *sectionBar;
+  QComboBox *section;
+  QComboBox *subsection;
+  QPopupMenu *popupMenu;
 };
 
 #endif
