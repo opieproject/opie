@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.25 2003-05-05 21:44:39 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.25.4.1 2003-05-17 10:47:02 zecke Exp $
 **
 **********************************************************************/
 
@@ -713,6 +713,13 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 				needShow = TRUE;
 			}
 		}
+    }   else if (msg == "editEvent(int)") {
+        /* simple copy from receive */
+        QDataStream stream(data,IO_ReadOnly);
+	int uid;
+	stream >> uid;
+	Event e=db->eventByUID(uid);
+	editEvent(e);
     }
     if ( needShow ) {
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
