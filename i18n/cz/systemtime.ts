@@ -114,7 +114,7 @@ ze serveru:</translation>
     </message>
     <message>
         <source>Retrieving time from network...</source>
-        <translation type="unfinished"></translation>
+        <translation>Získávám čas ze sítě...</translation>
     </message>
 </context>
 <context>

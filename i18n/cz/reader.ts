@@ -675,7 +675,7 @@ Leading</source>
     </message>
     <message>
         <source>Pause Paras</source>
-        <translation type="unfinished"></translation>
+        <translation>Přerušit odstavce</translation>
     </message>
     <message>
         <source>Fullscreen</source>
@@ -751,7 +751,7 @@ Leading</source>
     </message>
     <message>
         <source>Do Reg</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaregistrovat</translation>
     </message>
     <message>
         <source>Close Edit</source>
