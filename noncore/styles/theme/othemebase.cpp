@@ -34,6 +34,7 @@
 
 #include <stdio.h>
 
+
 template class QIntCache<OThemePixmap>
 ;
 
@@ -273,26 +274,26 @@ void OThemeBase::readConfig( Qt::GUIStyle /*style*/ )
 	}
 	MyConfig config( configFilePath + "/themes/" + configFileName + ".themerc" , Config::File );
 
-	printf ( "Opened config file: %s\n", ( configFilePath + "/themes/" + configFileName + ".themerc" ). ascii());
+//	printf ( "Opened config file: %s\n", ( configFilePath + "/themes/" + configFileName + ".themerc" ). ascii());
 
 	// Are we initalized?
 	for ( i = 0; i < INHERIT_ITEMS; ++i ) {
 		applyResourceGroup( &config, i, copyfrom, pixnames, brdnames );		
-		printf ( "%d [%s]: copy=%s, pix=%s, brd=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1() );
+//		printf ( "%d [%s]: copy=%s, pix=%s, brd=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1() );
 	}
 	for ( ; i < INHERIT_ITEMS*2; ++i ) {
 		if ( config.hasGroup( QString( widgetEntries[ i ] ) ) ) {
 			applyResourceGroup( &config, i, copyfrom, pixnames, brdnames );
-			printf ( "%d [%s]: copy=%s, pix=%s, brd=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1() );
+//			printf ( "%d [%s]: copy=%s, pix=%s, brd=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1() );
 		}
 		else {
 			copyfrom [ i ] = widgetEntries[ i - INHERIT_ITEMS ];
-			printf ( "%d [%s]: copy=%s\n", i, widgetEntries [i], copyfrom [i].latin1());
+//			printf ( "%d [%s]: copy=%s\n", i, widgetEntries [i], copyfrom [i].latin1());
 		}
 	}
 	for ( ; i < WIDGETS; ++i ) {
 		applyResourceGroup( &config, i, copyfrom, pixnames, brdnames );
-		printf ( "%d [%s]: copy=%s, pix=%s, brd=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1() );
+//		printf ( "%d [%s]: copy=%s, pix=%s, brd=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1() );
 	}
 	applyMiscResourceGroup( &config );
 
@@ -306,7 +307,7 @@ void OThemeBase::readConfig( Qt::GUIStyle /*style*/ )
 
 	for ( i = 0; i < WIDGETS; ++i ) {
 		readResourceGroup( i, copyfrom, pixnames, brdnames, loaded );
-		printf ( "%d [%s]: copy=%s, pix=%s, brd=%s, colors=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1(), (colors[i]?colors[i]->background().name().latin1():"<none)" ));
+//		printf ( "%d [%s]: copy=%s, pix=%s, brd=%s, colors=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1(), (colors[i]?colors[i]->background().name().latin1():"<none)" ));
 	}
 
 	// misc items
