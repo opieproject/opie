@@ -12,7 +12,7 @@
             <x>0</x>
             <y>0</y>
             <width>344</width>
-            <height>291</height>
+            <height>442</height>
         </rect>
     </property>
     <property stdset="1">
@@ -45,20 +45,7 @@
                 <number>0</number>
             </property>
         </widget>
-        <widget row="1"  column="0" >
-            <class>QTextView</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>outPut</cstring>
-            </property>
-            <property stdset="1">
-                <name>font</name>
-                <font>
-                    <pointsize>6</pointsize>
-                </font>
-            </property>
-        </widget>
-        <widget row="2"  column="0" >
+        <widget row="3"  column="0" >
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
@@ -98,7 +85,7 @@
                     </property>
                     <property stdset="1">
                         <name>autoResize</name>
-                        <bool>true</bool>
+                        <bool>false</bool>
                     </property>
                 </widget>
                 <widget>
@@ -165,6 +152,19 @@
                     </property>
                 </widget>
             </hbox>
+        </widget>
+        <widget row="1"  column="0" >
+            <class>QTextView</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>outPut</cstring>
+            </property>
+            <property stdset="1">
+                <name>font</name>
+                <font>
+                    <pointsize>6</pointsize>
+                </font>
+            </property>
         </widget>
     </grid>
 </widget>

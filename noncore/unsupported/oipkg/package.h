@@ -43,11 +43,15 @@ class Package //: public QObject
   void setOn();
   bool link();
   void setLink(bool);
+  void parseIpkgFile( QString );;
 public slots:
+  /** No descriptions */
+  QString getPackageName();
   void toggleProcess();
 
 private:
   PackageManagerSettings *settings;
+  QString _packageName;
   QString _name;
   bool    _toProcess;
   bool    _link;

@@ -1,5 +1,4 @@
 #include "pmipkg.h"
-#include "pkdesc.h"
 #include "pksettings.h"
 #include "package.h"
 #include "packagelistitem.h"
@@ -12,6 +11,7 @@
 #include <qfile.h>
 #include <qmultilineedit.h>
 #include <qstring.h>
+#include <qcheckbox.h>
 #include <qtextstream.h>
 #include <qtextview.h>
 
@@ -57,6 +57,9 @@ int PmIpkg::runIpkg(const QString& args, const QString& dest )
 
  	cmd += " -force-defaults ";
 
+//  if (runwindow->forcedepends->isChecked())
+//  	 cmd += " -force-depends ";
+
   out( "<hr><br>Starting to "+ args+"<br>\n");
   cmd += args;
   int r = 0;
@@ -71,7 +74,7 @@ int PmIpkg::runIpkg(const QString& args, const QString& dest )
 #ifdef SYSTEM
   out( "running:<br>\n"+cmd+"<br>\n" );
   QString redirect = "/tmp/oipkg.pipe";
-  cmd += " | tee "+redirect+" 2>&1";
+  cmd += " 2>&1 | tee "+redirect+" 2>&1";
   pvDebug(2, "running >"+cmd+"<");
 	r = system(cmd.latin1());
   QFile f( redirect );
@@ -103,8 +106,6 @@ void PmIpkg::makeLinks(Package *pack)
 	pvDebug( 2, "PmIpkg::makeLinks "+ pack->name());
   QString dest = settings->getDestinationUrlByName( pack->dest() );
   if (dest == "/" ) return;
-  out( "<br>creating links<br>" );
-  out("for package "+pack->name()+" in "+dest+"<br>");
 	{
     Config cfg( "oipkg", Config::User );
     cfg.setGroup( "Common" );
@@ -122,6 +123,8 @@ void PmIpkg::linkPackage( QString packFileName, QString dest )
   	out( "<b>Panik!</b> Could not open:<br>"+packFileName );
    	return;
   };
+  out( "<br>creating links<br>" );
+  out("for package "+packFileName+" in "+dest+"<br>");
   QTextStream t( &f );
   QString fp;
   while ( !t.eof() )
@@ -134,6 +137,7 @@ void PmIpkg::linkPackage( QString packFileName, QString dest )
 
 void PmIpkg::processLinkDir( QString file, QString dest )
 {
+	pvDebug( 7,"PmIpkg::processLinkDir "+file+" to "+ dest);
 	if ( dest == "???" ) return;
   QString destFile = file;
 	file = dest+"/"+file;
@@ -167,15 +171,11 @@ void PmIpkg::processLinkDir( QString file, QString dest )
 
 void PmIpkg::commit( PackageList pl )
 {   	
-	show( false );
-  runwindow->outPut->setText("");
-  out( "<h1>"+tr("Todo")+"</h1>\n"); 	
-
+  int sizecount = 0;  	
   to_install.clear();
   to_remove.clear();
-  int sizecount = 0;
-  QString rem="<b>To remove:</b><br>\n";
-  QString inst="<b>To install:</b><br>\n";;
+  QString rem="<b>"+tr("To remove:")+"</b><br>\n";
+  QString inst="<b>"+tr("To install:")+"</b><br>\n";
   pl.allPackages();
   for( Package *pack = pl.first();pack ; (pack = pl.next())  )
     {
@@ -185,7 +185,7 @@ void PmIpkg::commit( PackageList pl )
 	    {
 	      to_install.append( pack );
        	sizecount += pack->size().toInt();
-	      inst += pack->name()+"\t(on "+pack->dest()+")<br>";
+	      inst += pack->name()+"\t("+tr("on ")+pack->dest()+")<br>";
 	    }
 	  if ( pack->toRemove() )
 	    {
@@ -196,23 +196,77 @@ void PmIpkg::commit( PackageList pl )
 	}
     }
 
-  out("<p>"+inst+"</p>"+"<p>"+rem+"</p><hl>");
+	startDialog();
 
-  qDebug("to remove=%i; to install=%i",to_remove.count(),to_install.count());
+}
 
-  runwindow->progress->setTotalSteps( sizecount );
+void PmIpkg::startDialog()
+{
+  QDialog *d = new QDialog();
+  QGridLayout *RunWindowLayout = new QGridLayout( d );
+  RunWindowLayout->setSpacing( 2 );
+  RunWindowLayout->setMargin( 2 );
 
-  connect( runwindow->doItButton, SIGNAL( clicked() ),
-  					 SLOT( doIt() ) );
-  connect( runwindow->installButton, SIGNAL( clicked() ),
+    QHBoxLayout *buttons = new QHBoxLayout;
+    buttons->setSpacing( 6 );
+    buttons->setMargin( 0 );
+
+    PackageListView *plv = new PackageListView(d, "install",settings);
+    RunWindowLayout->addWidget( plv, 1, 0 );
+    for (Package *it=to_remove.first(); it != 0; it=to_remove.next() )
+	  {
+      plv->insertItem( new PackageListItem(plv, it,settings) );
+   	} 	
+    for (Package *it=to_install.first(); it != 0; it=to_install.next() )
+    {
+      plv->insertItem( new PackageListItem(plv, it,settings) );
+    }
+    QPushButton *doItButton = new QPushButton( d, "doItButton" );
+    doItButton->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)0, (QSizePolicy::SizeType)0, doItButton->sizePolicy().hasHeightForWidth() ) );
+    QFont doItButton_font(  doItButton->font() );
+    doItButton_font.setPointSize( 8 );
+    doItButton->setFont( doItButton_font );
+    doItButton->setText( tr( "Do all " ) );
+    doItButton->setAutoResize( FALSE );
+    buttons->addWidget( doItButton );
+
+    QPushButton *installButton = new QPushButton( d, "installButton" );
+    QFont installButton_font(  installButton->font() );
+    installButton_font.setPointSize( 8 );
+    installButton->setFont( installButton_font );
+    installButton->setText( tr( "Install" ) );
+    installButton->setAutoResize( TRUE );
+    buttons->addWidget( installButton );
+
+    QPushButton *removeButton = new QPushButton( d, "removeButton" );
+    QFont removeButton_font(  removeButton->font() );
+    removeButton_font.setPointSize( 7 );
+    removeButton->setFont( removeButton_font );
+    removeButton->setText( tr( "Remove" ) );
+    removeButton->setAutoResize( TRUE );
+    buttons->addWidget( removeButton );
+
+    QPushButton *cancelButton = new QPushButton( d, "cancelButton" );
+    QFont cancelButton_font(  cancelButton->font() );
+    cancelButton_font.setPointSize( 8 );
+    cancelButton->setFont( cancelButton_font );
+    cancelButton->setText( tr( "Cancel" ) );
+    cancelButton->setAutoResize( TRUE );
+    buttons->addWidget( cancelButton );
+
+    RunWindowLayout->addLayout( buttons, 3, 0 );
+
+  connect( doItButton, SIGNAL( clicked() ),
+  					this, SLOT( doIt() ) );
+  connect( installButton, SIGNAL( clicked() ),
   					this, SLOT( install() ) );
-  connect( runwindow->removeButton, SIGNAL( clicked() ),
+  connect( removeButton, SIGNAL( clicked() ),
   					this, SLOT( remove() ) );
-  connect( runwindow->cancelButton, SIGNAL( clicked() ),
-  					runwindow, SLOT( close() ) );
-
-	runwindow->exec();
-  out("<h1>"+tr("Its now save to close this window")+"<h1>");
+  connect( cancelButton, SIGNAL( clicked() ),
+  					d, SLOT( close() ) );
+  d->showMaximized();
+  d->exec();
+ // d->close();
 }
 
 void PmIpkg::doIt()
@@ -251,7 +305,7 @@ void PmIpkg::install()
  	for (Package *it=to_install.first(); it != 0; it=to_install.next() )
     {
 
-      if ( runIpkg("install " + it->name(), it->dest() ) == 0 )
+      if ( runIpkg("install " + it->getPackageName(), it->dest() ) == 0 )
 		  {    	
       	runwindow->progress->setProgress( it->size().toInt() + runwindow->progress->progress());
 	    	if ( it->link() )
@@ -314,7 +368,7 @@ void PmIpkg::show(bool b)
 	if (!runwindow->isVisible())
 	  runwindow->showMaximized();
 	showButtons(b);
-	if ( b )
+	if ( !b )
  		runwindow->progress->hide();
   else
  		runwindow->progress->show();
@@ -322,27 +376,11 @@ void PmIpkg::show(bool b)
 
 void PmIpkg::installFile(const QString &fileName)
 {
+
+	to_install.clear();
+  to_remove.clear();
 	pvDebug( 2,"PmIpkg::installFile "+ fileName);
- 	show( false );
-  runwindow->outPut->setText("");
-  fileNameToInstall = fileName;
- 	runwindow->doItButton->hide();
-	runwindow->removeButton->hide();
-  out("<b>"+tr("Install: ")+fileName);
-  connect( runwindow->installButton, SIGNAL( clicked() ),
-  					this, SLOT( installFileName() ) );
-  connect( runwindow->cancelButton, SIGNAL( clicked() ),
-  					runwindow, SLOT( close() ) );
-
-	runwindow->exec();
+	to_install.append( new Package(fileName,settings) );
+	startDialog();
 }
 
-void PmIpkg::installFileName()
-{
- 	if ( !QFile::exists( fileNameToInstall ) ) return;
-	out(tr("Installing pacakge ")+fileNameToInstall+"<br>"+tr("please wait")+"</b><br>");
-  runIpkg("install " + fileNameToInstall );
-  if ( settings->createLinks() )
-	  linkPackage( fileNameToInstall, settings->getDestinationUrl() );
-   out("<h1>"+tr("Its now save to close this window")+"<h1>");
-}

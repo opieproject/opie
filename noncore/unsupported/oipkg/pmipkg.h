@@ -33,6 +33,7 @@ private:
   bool runwindowopen;
   QString fileNameToInstall;
 
+  void startDialog();
   void makeLinks(Package*);
   void linkPackage( QString, QString );
   void processLinkDir( QString, QString );
@@ -42,7 +43,6 @@ private:
 public slots:
 	void doIt();
  	void install();
-  void installFileName();
   void remove();
   void installFile(const QString &fileName);
   void linkDestination( const QString, const QByteArray );

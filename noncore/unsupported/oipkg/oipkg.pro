@@ -7,9 +7,11 @@ HEADERS		= mainwindow.h \
 		pmipkg.h \
 		packagelistitem.h \
 		packagelist.h \
+		packagelistview.h \
 		package.h
 SOURCES		= main.cpp \
 		mainwindow.cpp \
+		packagelistview.cpp \
 		pksettings.cpp \
 		pmipkg.cpp \
 		packagelistitem.cpp \
@@ -18,8 +20,7 @@ SOURCES		= main.cpp \
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/ioclude
 LIBS            += -lqpe 
-INTERFACES	= pkdesc.ui \
-		runwindow.ui \
+INTERFACES	= runwindow.ui \
 		pksettingsbase.ui
 TARGET		= oipkg
 

@@ -9,12 +9,11 @@
 #include "packagelist.h"
 #include "pmipkg.h"
 #include "pksettings.h"
-#include "pkdesc.h"
+#include "packagelistview.h"
 
 class QComboBox;
 class QPEToolBar;
 class QLineEdit;
-class QListView;
 class PackageListItem;
 class QCopChannel;
 
@@ -39,48 +38,37 @@ protected slots:
   void showSettings();
   void showSettingsSrv();
   void showSettingsDst();
-	void setDocument (const QString &);
 
 public slots:
-  void showDetails();
-  void toggleActivePackage();
-  void setCurrent( QListViewItem* );
   void sectionClose();
   void sectionShow(bool);
   void findClose();
   void findShow(bool);
   void filterList();
-  void showPopup();
-  void changePackageDest( int );
-  void stopTimer( QListViewItem* );
 	void receive (const QCString &, const QByteArray &);
+	void setDocument (const QString &);
 
 private:
   void makeMenu();
   void setSections();
   void setSubSections();
+	void installFile(const QString &);
+  bool updateIcon;
 
   PmIpkg* ipkg;
   PackageManagerSettings *settings;
-  PackageDetails* details;
   PackageList packageList;
-  Package *activePackage;
-  PackageListItem *activePackageListItem;
   QAction *runAction;
   QAction *detailsAction;
   QAction *updateAction;
   QAction *findAction;
   QAction *sectionAction;
-  QListView *listViewPackages;
+  PackageListView *listViewPackages;
   QPEToolBar *findBar;
   QLineEdit *findEdit;
   QPEToolBar *sectionBar;
   QComboBox *section;
   QComboBox *subsection;
-  QTimer *popupTimer;
-  QPopupMenu *popupMenu;
-  QPopupMenu *destsMenu;
-  bool updateIcon;
 private slots:
   void rotateUpdateIcon();
 };

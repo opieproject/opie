@@ -15,7 +15,7 @@ if ( debugLevel < 3 ) \
 	if ( I <= debugLevel ) qDebug(S);\
 }else{\
 	if ( I <= debugLevel ) \
-		printf("# %s \t\t(Level: %i)\n",QString(S).latin1(),I);\
+		qDebug("# %s \t\t(Level: %i)\n",QString(S).latin1(),I);\
 }
 
 #endif

@@ -2,6 +2,10 @@
 
 #include <qpe/process.h>
 #include <qpe/stringutil.h>
+#include <qfile.h>
+#include <qtextstream.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 #include "debug.h"
 
@@ -25,28 +29,33 @@ void Package::init( PackageManagerSettings *s )
   _name = "";
   _toProcess = false;
   _status = "";
-  _dest = "";
+  _dest = settings->getDestinationName();
+  _link = settings->createLinks();
 }
 
 Package::Package( QStringList pack, PackageManagerSettings *s  )
 {	
   init(s);
   parsePackage( pack );
-  _toProcess = false;
 }
 
 Package::Package( QString n, PackageManagerSettings *s )
 {	
   init(s);
-  _name = QString( n );
-  _toProcess = false;
+ 	if ( !QFile::exists( n ) )
+  {
+	  _name = QString( n );
+  }else{
+   	parseIpkgFile( n );
+    _toProcess = true;
+    _packageName = QString( n );
+  }
 }
 
 Package::Package( Package *pi )
 {
   init(pi->settings);
   copyValues( pi );
-  _toProcess = false;
 }
 
 
@@ -211,12 +220,12 @@ void Package::parsePackage( QStringList pack )
       QString line = pack[i];
       int sep = line.find( QRegExp(":[\t ]+") );
       if ( sep >= 0 )
-	{
-	  QString tag = line.left(sep);
-	  QString value = line.mid(sep+2).simplifyWhiteSpace();
-	  setValue( tag, value );
-  	}else{
-   	}
+			{
+	  		QString tag = line.left(sep);
+	  		QString value = line.mid(sep+2).simplifyWhiteSpace();
+	  		setValue( tag, value );
+  		}else{
+   		}
     }
   return;
 }
@@ -294,4 +303,29 @@ bool Package::link()
 void Package::setLink(bool b)
 {
 	_link = b;
+}
+
+void Package::parseIpkgFile( QString file)
+{
+	system("tar xzf "+file+" -C /tmp");
+ 	system("tar xzf /tmp/control.tar.gz -C /tmp");
+  QFile f("/tmp/control");
+  if ( f.open(IO_ReadOnly) )
+  {
+  	QTextStream t( &f );
+		QStringList pack;
+		while ( !t.eof() )
+  	{
+			pack << t.readLine();
+   	}
+    f.close();
+  	parsePackage( pack );
+  }
+	
+}
+
+QString Package::getPackageName()
+{
+	if ( _packageName.isEmpty() ) return _name;
+	else return _packageName;
 }

@@ -14,6 +14,7 @@
 #include <qtoolbutton.h>
 #include <qstring.h>
 #include <qlabel.h>
+#include <qfile.h>
 #include <qlistview.h>
 #include <qtextview.h>
 #include <qlineedit.h>
@@ -27,48 +28,23 @@
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   QMainWindow( parent, name, f )
 {	
-  setCaption( tr("Package Manager") );
+  settings = new PackageManagerSettings(this,0,TRUE);
+  listViewPackages =  new PackageListView( this,"listViewPackages",settings );
+  ipkg = new PmIpkg( settings, this );
 
-  listViewPackages =  new QListView( this,0,0 );
-  listViewPackages->setSelectionMode(QListView::NoSelection);
   setCentralWidget( listViewPackages );
+  setCaption( tr("Package Manager") );
 
 	channel = new QCopChannel( "QPE/Application/oipkg", this );
 	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
 		this, SLOT(receive(const QCString&, const QByteArray&)) );
 
   makeMenu();		
-#ifdef NEWLAYOUT
-	listViewPackages->addColumn( tr("Package") );
- 	listViewPackages->setRootIsDecorated( true );
-#endif
-#ifndef NEWLAYOUT
-  QFontMetrics fm = fontMetrics();
-  int wlw = width()*2;
-  int w0  = fm.width(tr("Package"))+30;
- // int w0  = fm.width(tr("Package"))+30;
-  int w2  = fm.width("00000")+4;
-  int w1  = wlw-w2-w0-24;
-	listViewPackages->addColumn( tr("Package"), w0 );
-	listViewPackages->addColumn( tr("Description"), w1 );
-	listViewPackages->addColumn( tr("Size"), w2 );
-  listViewPackages->setColumnWidthMode(0,QListView::Manual);
-  listViewPackages->setColumnWidthMode(1,QListView::Manual);
-  listViewPackages->setColumnWidthMode(2,QListView::Manual);
-  listViewPackages->setSelectionMode( QListView::Multi );
-#endif
+
   connect( section, SIGNAL( activated(int) ),
 	   this, SLOT( sectionChanged() ) );
   connect( subsection, SIGNAL(activated(int) ),
 	   this, SLOT( subSectionChanged() ) );
-  connect( listViewPackages, SIGNAL( pressed( QListViewItem* ) ),
-	   this, SLOT( setCurrent( QListViewItem* ) ) );
-	connect( listViewPackages, SIGNAL( clicked( QListViewItem* ) ),
-	   this, SLOT( stopTimer( QListViewItem* ) ) );	
-
-	popupMenu = new QPopupMenu( this );
-
-  settings = new PackageManagerSettings(this,0,TRUE);
 
   ipkg = new PmIpkg( settings, this );
   packageList.setSettings( settings );
@@ -87,11 +63,6 @@ void MainWindow::makeMenu()
   QPopupMenu *viewMenu = new QPopupMenu( menuBar );
   QPopupMenu *cfgMenu = new QPopupMenu( menuBar );
   //    QPopupMenu *sectMenu = new QPopupMenu( menuBar );
-
-	popupMenu = new QPopupMenu( this );	
-	destsMenu = new QPopupMenu( popupMenu );
-  popupTimer = new QTimer( this );
-  connect( popupTimer, SIGNAL(timeout()), this, SLOT(showPopup()) );
 
   setToolBarsMovable( false );
   toolBar->setHorizontalStretchable( true );
@@ -123,13 +94,14 @@ void MainWindow::makeMenu()
   updateAction->addTo( toolBar );
   updateAction->addTo( srvMenu );
 
-  detailsAction = new QAction( tr( "Details" ),
-      		Resource::loadIconSet( "find" ),
-  		    QString::null, 0, this, 0 );
-  connect( detailsAction, SIGNAL( activated() ),
-               this , SLOT( showDetails() ) );
-  detailsAction->addTo( toolBar );
-  detailsAction->addTo( srvMenu );
+// would we use for find
+//  detailsAction = new QAction( tr( "Details" ),
+//      		Resource::loadIconSet( "find" ),
+//  		    QString::null, 0, this, 0 );
+//  connect( detailsAction, SIGNAL( activated() ),
+//               this , SLOT( showDetails() ) );
+//  detailsAction->addTo( toolBar );
+//  detailsAction->addTo( srvMenu );
 
   QAction *cfgact;
 
@@ -316,45 +288,6 @@ void MainWindow::showSettingsDst()
     updateList();
 }
 
-
-void MainWindow::showDetails()
-{
-  if ( details )
-  {
-     details = new PackageDetails( this );
-     connect( details->install, SIGNAL(clicked()), SLOT( toggleActivePackage() ) );
-  	 connect( details->remove,  SIGNAL(clicked()), SLOT( toggleActivePackage() ) );
-     connect( details->ignore,  SIGNAL(clicked()), details, SLOT(close()));
-     details->description->setTextFormat(RichText);
-  }
-  if ( !activePackage )
-  {
-   details->description->setText(tr("no package selected"));
-   details->description->setText(tr("errmm...<br>...not working?"));
-  }else{
-  	details->setCaption("Package: " + activePackage->name());
-	  details->description->setText(activePackage->details() );
-	  details->install->setEnabled(!activePackage->installed());
-	  details->remove->setEnabled(activePackage->installed());
-  }
-  details->showMaximized();
-}
-
-void MainWindow::toggleActivePackage()
-{
-  activePackage->toggleProcess();
-  if ( details ) details->close();
-}
-
-void MainWindow::setCurrent( QListViewItem* p )
-{
-  if ( !p ) return;
-  activePackageListItem = (PackageListItem*)p;
-  activePackage = activePackageListItem->getPackage();
-  pvDebug(5, "start timer");
-  popupTimer->start( 750, true );
-}
-
 void MainWindow::sectionShow(bool b)
 {
 	if (b) sectionBar->show();
@@ -389,48 +322,36 @@ void MainWindow::rotateUpdateIcon()
  updateIcon = !updateIcon;
 }
 
-void MainWindow::showPopup()
-{
-  popupMenu->clear();
-  destsMenu->clear();
- 		
- 	QAction *popupAction;
-  popupMenu->insertItem( tr("Install to"), destsMenu );
-  QStringList dests = settings->getDestinationNames();
-  for (uint i = 0; i < dests.count(); i++ )
-  {		
-	  popupAction = new QAction( dests[i], QString::null, 0, this, 0 );
-	  popupAction->addTo( destsMenu );
-  }
-  connect( destsMenu, SIGNAL( activated( int ) ),
-	   this, SLOT( changePackageDest( int ) ) );
-  popupMenu->popup( QCursor::pos() );
-}
-
-void MainWindow::changePackageDest( int i )
-{
- 	activePackage->setDest( destsMenu->text(i) );
-  activePackage->setOn();
-  activePackage->setLink( settings->createLinks() );
-  activePackageListItem->displayDetails();
-}
-
-void MainWindow::stopTimer( QListViewItem* )
-{
-	pvDebug( 5, "stop timer" );
-	popupTimer->stop();
-}
 
 void MainWindow::setDocument(const QString &fileName)
 {
+  installFile(fileName);
+  // ##### If we looked in the list of files, we could send out accurate
+  // ##### messages. But we don't bother yet, and just do an "all".
+  QCopEnvelope e("QPE/System", "linkChanged(QString)");
+  QString lf = QString::null;
+  e << lf;
+  displayList();
+}
+
+void MainWindow::installFile(const QString &fileName)
+{
+	pvDebug(3, "MainWindow::installFile "+fileName);
+ 	if ( !QFile::exists( fileName ) ) return;
 	ipkg->installFile( fileName );
+  // ##### If we looked in the list of files, we could send out accurate
+  // ##### messages. But we don't bother yet, and just do an "all".
+  QCopEnvelope e("QPE/System", "linkChanged(QString)");
+  QString lf = QString::null;
+  e << lf;
+  displayList();
 }
 
 void MainWindow::receive(const QCString &msg, const QByteArray &arg)
 {
 	pvDebug(3, "QCop "+msg);
-	if ( msg == "setDocument(QString)" )
+	if ( msg == "installFile(QString)" )
  	{
-  	setDocument( QString(arg) );
+  	installFile( QString(arg) );
 	}
 }
