@@ -19,10 +19,6 @@ extern "C" {
 
 #include <sys/soundcard.h>
 
-// #if defined (QTOPIA_INTERNAL_FSLP)
-// #include <qpe/lnkproperties.h>
-// #endif
-
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
@@ -57,10 +53,11 @@ extern "C" {
 #include <sys/types.h>
 #include <sys/vfs.h>
 #include <unistd.h>
-#include<sys/wait.h>
+#include <sys/wait.h>
 #include <sys/signal.h>
 
-#if defined(QT_QWS_EBX)
+#if defined(QT_QWS_SL5XXX)
+///#if defined(QT_QWS_EBX)
 
 #define DSPSTROUT "/dev/dsp"
 #define DSPSTRIN "/dev/dsp1"
@@ -110,7 +107,9 @@ Waveform* waveform;
 Device *soundDevice;
 
 // threaded recording
-void quickRec() {
+//fuckin fulgy here
+void quickRec()
+{
 //void QtRec::quickRec() {
 
    qDebug("%d",
@@ -126,7 +125,6 @@ void quickRec() {
    QString num;
    int level = 0;
    int threshold = 0;
-   recording = true;
 //   int bits = filePara.resolution;
 //   qDebug("bits %d", bits);
 
@@ -272,7 +270,9 @@ void quickRec() {
    }
 } /// END quickRec()
 
-void playIt() {
+
+void playIt()
+{
    int bytesWritten, number;
    int total = 0;  // Total number of bytes read in so far.
    if( filePara.resolution == 16 ) { //AFMT_S16_LE) {
@@ -285,9 +285,10 @@ void playIt() {
          memset( sbuf2, 0, BUFSIZE * 2);
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<  WAVE_FORMAT_DVI_ADPCM  >>>>>>>>>>>>>>>>>>>>>>
          for(;;) {  // play loop
-            if ( stopped)
-               break;  // stop if playing was set to false
-
+            if ( stopped) {
+               break;
+               return;
+            }// stop if playing was set to false
 
             number = ::read( filePara.fd, abuf, BUFSIZE / 2);
             adpcm_decoder( abuf, sbuf, number * 2, &decoder_state);
@@ -301,15 +302,15 @@ void playIt() {
             //              total += bytesWritten/2; //mono
             //          else
             total += bytesWritten;
-            timeSlider->setValue( total / 4);
-
+            filePara.numberSamples = total/4;
             filePara.numberOfRecordedSeconds = (float)total / (float)filePara.sampleRate / 2;
 
+            timeSlider->setValue( total/4);
 //            timeString.sprintf("%.2f", filePara.numberOfRecordedSeconds);
 //         if(filePara.numberOfRecordedSeconds>1)
 //            timeLabel->setText( timeString+ tr(" seconds"));
-//         printf("playing number %d, bytes %d, total %d\n",number,  bytesWritten, total/4);
-//           fflush(stdout);
+         printf("playing number %d, bytes %d, total %d\n",number,  bytesWritten, total/4);
+         fflush(stdout);
 
             qApp->processEvents();
 
@@ -326,8 +327,11 @@ void playIt() {
          memset( outbuffer, 0, BUFSIZE);
 
          for(;;) {  // play loop
-            if ( stopped)
-               break;  // stop if playing was set to false
+            if ( stopped) {
+               break;
+               return;
+            }
+// stop if playing was set to false
             number = ::read( filePara.fd, inbuffer, BUFSIZE);
 //                 for (int i=0;i< number * 2; 2 * i++) { //2*i is left channel
 //                       //        for (int i=0;i< number ; i++) { //2*i is left channel
@@ -341,8 +345,9 @@ void playIt() {
             //              total += bytesWritten/2; //mono
             //          else
             total += bytesWritten;
-
             timeSlider->setValue( total);
+
+            filePara.numberSamples = total;
             filePara.numberOfRecordedSeconds = (float)total / (float)filePara.sampleRate / (float)2;
 
 //             timeString.sprintf("%.2f",filePara.numberOfRecordedSeconds);
@@ -357,15 +362,19 @@ void playIt() {
                break;
             }
          }
-//            printf("\nplaying number %d, bytes %d, total %d\r",number,  bytesWritten, total);
-//            fflush(stdout);
+            printf("\nplaying number %d, bytes %d, total %d\r",number,  bytesWritten, total);
+            fflush(stdout);
       } //end loop
-   } else { /////////////////////////////// format = AFMT_U8;
+   } else {
+/////////////////////////////// format = AFMT_U8;
       unsigned char unsigned_inbuffer[ BUFSIZE ]; //, unsigned_outbuffer[BUFSIZE];
       memset( unsigned_inbuffer, 0, BUFSIZE);
-      for(;;) {          // main loop
-         if (stopped)
+      for(;;) {
+// main loop
+         if (stopped) {
             break;  // stop if playing was set to false
+            return;
+         }
          number = ::read( filePara.fd, unsigned_inbuffer, BUFSIZE);
 //data = (val >> 8) ^ 0x80;
          //          unsigned_outbuffer = (unsigned_inbuffer >> 8) ^ 0x80;
@@ -373,7 +382,8 @@ void playIt() {
          waveform->newSamples(  (const short *)unsigned_inbuffer, bytesWritten );
          total += bytesWritten;
 
-         timeSlider->setValue( total);
+            timeSlider->setValue( total);
+         filePara.numberSamples = total;
 
          filePara.numberOfRecordedSeconds = (float)total / (float)filePara.sampleRate;
 //          timeString.sprintf("%.2f",filePara.numberOfRecordedSeconds);
@@ -385,8 +395,8 @@ void playIt() {
                stopped = true;
             break;
          }
-         //             printf("Writing number %d, bytes %d, total %d, numberSamples %d\r",number,  bytesWritten , total, filePara.numberSamples);
-         //             fflush(stdout);
+         printf("Writing number %d, bytes %d, total %d, numberSamples %d\r",number,  bytesWritten , total, filePara.numberSamples);
+        fflush(stdout);
       }
    }
 }
@@ -394,7 +404,8 @@ void playIt() {
 /////////////////<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>
 
 QtRec::QtRec( QWidget* parent,  const char* name, WFlags fl )
-   : QWidget( parent, name, fl ) {
+   : QWidget( parent, name, fl )
+{
    if ( !name )
       setName( "OpieRec" );
    init();
@@ -455,7 +466,7 @@ void QtRec::init() {
    QPixmap image6( ( const char** ) image6_data );
 
    stopped = true;
-   setCaption( tr( "OpieRecord " ));// + QString::number(VERSION) );
+   setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
    QGridLayout *layout = new QGridLayout( this );
    layout->setSpacing( 2);
    layout->setMargin( 2);
@@ -718,7 +729,7 @@ void QtRec::init() {
 
    waveform = new Waveform( this, "waveform" );
 //   waveform->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)3, waveform->sizePolicy().hasHeightForWidth() ) );
-   waveform->setMinimumSize( QSize( 0, 30 ) );
+   waveform->setMinimumSize( QSize( 0, 50 ) );
 
    layout->addMultiCellWidget( waveform, 8, 8, 0, 7 );
    waveform->setBackgroundColor ( black );
@@ -870,9 +881,8 @@ void QtRec::initConfig() {
 }
 
 void QtRec::stop() {
+   qWarning("STOP");
    setRecordButton(false);
-   monitoring = false;
-   stopped = true;
 
    if( !recording)
       endPlaying();
@@ -921,7 +931,6 @@ bool QtRec::rec() { //record
       playLabel2->setText(tr("Stop"));
       monitoring = false;
       setRecordButton( true);
-      stopped = false;
 
       if( setupAudio( true))
          if(setUpFile())  {
@@ -1044,7 +1053,8 @@ bool QtRec::setupAudio( bool b) {
 
    filePara.resolution = bitRateComboBox->currentText().toInt( &ok,10);  //16
 
-   if( !b){ // we want to play
+   if( !b) {
+// we want to play
       if( filePara.resolution == 16 || compressionCheckBox->isChecked() ) {
          sampleformat = AFMT_S16_LE;
          filePara.resolution = 16;
@@ -1057,6 +1067,7 @@ bool QtRec::setupAudio( bool b) {
       flags = O_WRONLY;
       dspString = DSPSTROUT;
       mixerString = DSPSTRMIXEROUT;
+      recording = false;
    } else { // we want to record
 
       if( !bitRateComboBox->isEnabled() || bitRateComboBox->currentText() == "16")
@@ -1079,6 +1090,7 @@ bool QtRec::setupAudio( bool b) {
 //        flags= O_RDONLY;
       dspString = DSPSTRIN;
       mixerString = DSPSTRMIXEROUT;
+      recording = true;
    }
 
    // if(soundDevice) delete soundDevice;
@@ -1110,8 +1122,7 @@ bool QtRec::setupAudio( bool b) {
       monitoring = false;
       stopped = true;
       update();
-      setCaption( tr( "OpieRecord " ));// + QString::number(VERSION) );
-      stopped = true;
+      setCaption( tr( "OpieRecord " )+ QString::number(VERSION) );
       return false;
    }
    if(autoMute)
@@ -1143,7 +1154,6 @@ bool QtRec::setUpFile() { //setup file for recording
 /// <<<<<<<<<<<<<<<<  PLAY >>>>>>>>>>>>>>>>>>>
 bool QtRec::doPlay() {
 
-   recording = false;
    if( !paused) {
       total = 0;
       filePara.numberOfRecordedSeconds = 0;
@@ -1153,13 +1163,14 @@ bool QtRec::doPlay() {
    }
    playing = true;
    stopped = false;
+   recording = false;
 
    QString num;
    qDebug( "Play number of samples %d", filePara.numberSamples);
 
-   timeSlider->setRange( 0, filePara.numberSamples);
+//   timeSlider->setRange( 0, filePara.numberSamples);
 
-   timeString.sprintf("%.2f",  filePara.numberOfRecordedSeconds);
+   timeString.sprintf("%d",  filePara.numberOfRecordedSeconds);
    timeLabel->setText( timeString+ tr(" seconds"));
 
    QString msg;
@@ -1295,7 +1306,7 @@ void QtRec::deleteSound() {
 #ifndef DEV_VERSION
    };
 #endif
-   setCaption( tr( "OpieRecord " ) );//+ QString::number(VERSION) );
+   setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
 
 }
 
@@ -1414,13 +1425,14 @@ void  QtRec::keyReleaseEvent( QKeyEvent *e) {
 }
 
 void QtRec::endRecording() {
+   monitoring = false;
+   recording = false;
+   stopped = true;
    waveform->reset();
    setRecordButton( false);
-   timeSlider->setValue(0);
+
    toBeginningButton->setEnabled( true);
    toEndButton->setEnabled( true);
-
-   monitoring = false;
 
    killTimers();
 
@@ -1428,10 +1440,6 @@ void QtRec::endRecording() {
       doMute( true);
 
    soundDevice->closeDevice( true);
-
-   recording = false;
-   stopped = true;
-   t->stop();
 
    if( wavFile->track.isOpen()) {
       wavFile->adjustHeaders( filePara.fd, filePara.numberSamples);
@@ -1449,7 +1457,6 @@ void QtRec::endRecording() {
          system( cmd.latin1());
       }
       
-
       qDebug("Just moved " + wavFile->currentFileName);
       Config cfg("OpieRec");
       cfg.setGroup("Sounds");
@@ -1469,19 +1476,24 @@ void QtRec::endRecording() {
 //       qDebug("writing config numberOfRecordedSeconds "+time);
 
       cfg.write();
-//       qDebug("finished recording");
+      qDebug("finished recording");
       timeLabel->setText("");
    }
 
    if(soundDevice) delete soundDevice;
 
+   timeSlider->setValue(0);
    initIconView();
    selectItemByName( currentFile);
 }
 
 void QtRec::endPlaying() {
+   monitoring = false;
+   recording = false;
+   playing = false;
+   stopped = true;
    waveform->reset();
-
+//   errorStop();
 //    qDebug("end playing");
    setRecordButton( false);
 
@@ -1495,19 +1507,17 @@ void QtRec::endPlaying() {
    soundDevice->sd = -1;
    //  if(soundDevice) delete soundDevice;
 //    qDebug("file and sound device closed");
-   stopped = true;
-   recording = false;
-   playing = false;
    timeLabel->setText("");
-   monitoring = false;
    total = 0;
    filePara.numberSamples = 0;
    filePara.sd = -1;
-   wavFile->closeFile();
+//   wavFile->closeFile();
    filePara.fd = 0;
 //  if(wavFile) delete wavFile; //this crashes
 
 //    qDebug("track closed");
+   killTimers();
+   qWarning("reset slider");
    timeSlider->setValue(0);
 
    if(soundDevice) delete soundDevice;
@@ -1540,20 +1550,26 @@ bool QtRec::openPlayFile() {
       //  if(!track.open(IO_ReadOnly)) {
       QString errorMsg = (QString)strerror(errno);
       monitoring = false;
-      setCaption( tr( "OpieRecord " ));// + QString::number(VERSION) );
+      setCaption( tr( "OpieRecord " ) + QString::number(VERSION) );
       QMessageBox::message(tr("Note"), tr("Could not open audio file.\n")
                            + errorMsg + "\n" + currentFile);
       return false;
    } else {
+
       filePara.numberSamples = wavFile->getNumberSamples();
       filePara.format = wavFile->getFormat();
-      //      qDebug("file %d, samples %f", filePara.fd, filePara.numberSamples);
       filePara.sampleRate = wavFile->getSampleRate();
       filePara.resolution = wavFile->getResolution();
+      filePara.channels = wavFile->getChannels();
       timeSlider->setPageStep(1);
       monitoring = true;
+
+      qDebug("file %d, samples %d %d", filePara.fd, filePara.numberSamples, filePara.sampleRate);
+      int sec = (int) (( filePara.numberSamples / filePara.sampleRate) / filePara.channels) / ( filePara.channels*( filePara.resolution/8));
+
+      qWarning("seconds %d", sec);
+
       timeSlider->setRange(0, filePara.numberSamples );
-      filePara.numberOfRecordedSeconds = (float) filePara.numberSamples / (float)filePara.sampleRate * (float)2;
    }
 
    return true;
@@ -1798,6 +1814,24 @@ void QtRec::receive( const QCString &msg, const QByteArray & ) {
 
 ///////////////////////////// timerEvent
 void QtRec::timerEvent( QTimerEvent *e ) {
+
+//    if(!recording)
+//       timeSlider->setValue( secCount);
+//     else
+//        timeSlider->setValue( filePara.numberOfRecordedSeconds);
+
+   if( stopped && playing) {
+      stop();
+   }
+
+   if( stopped && recording ){
+      stop();
+   }
+      
+   if( recording && filePara.SecondsToRecord < secCount && filePara.SecondsToRecord != 0) {
+      stop();
+   }
+   
    qDebug( "%d", secCount );
    QString  timeString;
 #ifdef DEV_VERSION
@@ -1806,25 +1840,9 @@ void QtRec::timerEvent( QTimerEvent *e ) {
    setCaption( msg +" ::  "+QString::number(secCount));
 #endif
 
-   if( stopped && playing) {
-      killTimer( e->timerId());
-      endPlaying();
-   }
-
-   if( stopped && recording ){
-      recording = false;
-      killTimer( e->timerId());
-      endRecording();
-   }
-      
-   if( recording && filePara.SecondsToRecord < secCount && filePara.SecondsToRecord != 0) {
-      recording = false;
-      killTimer( e->timerId());
-      stop();
-   }
-   
-   timeString.sprintf("%.0f", filePara.numberOfRecordedSeconds);
+   timeString.sprintf("%d", secCount);
    timeLabel->setText( timeString + " seconds");
+
    secCount++;
 }
 
