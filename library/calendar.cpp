@@ -30,6 +30,32 @@
   \ingroup qtopiaemb
 */
 
+
+
+static void never_called_tr_function_um_libqpe_ts_etwas_unter_zu_jubeln() {
+    (void)QObject::tr("Jan");
+    (void)QObject::tr("Feb");
+    (void)QObject::tr("Mar");
+    (void)QObject::tr("Apr");
+    (void)QObject::tr("May");
+    (void)QObject::tr("Jun");
+    (void)QObject::tr("Jul");
+    (void)QObject::tr("Aug");
+    (void)QObject::tr("Sep");
+    (void)QObject::tr("Oct");
+    (void)QObject::tr("Nov");
+    (void)QObject::tr("Dec");
+    (void)QObject::tr("Mon");
+    (void)QObject::tr("Tue");
+    (void)QObject::tr("Wed");
+    (void)QObject::tr("Thu");
+    (void)QObject::tr("Fri");
+    (void)QObject::tr("Sat");
+    (void)QObject::tr("Sun");
+}
+
+
+
 /*!
     Returns the name of the month for \a m.
     Equivalent to QDate::monthName().
@@ -38,6 +64,7 @@
 QString Calendar::nameOfMonth( int m )
 {
     QDate d;
+    qDebug( d.monthName( m ) );
     return QObject::tr( d.monthName( m ) );
 }
 
