@@ -1,349 +1,144 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>IRCChannelTab</name>
+    <name>Button</name>
     <message>
-        <source>Talking on channel</source>
-        <translation>Spreche auf Kanal</translation>
-    </message>
-    <message>
-        <source>Channel discussion</source>
+        <source>Calendar Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type your message here to participate in the channel discussion</source>
+        <source>Contacts Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>CTCP</source>
+        <source>Menu Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Query</source>
+        <source>Mail Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ping</source>
+        <source>Home Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Version</source>
+        <source>Record Button</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Whois</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Disconnected</source>
+        <source>Display Rotate</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCConnection</name>
+    <name>OColorDialog</name>
     <message>
-        <source>Connected, logging in ..</source>
+        <source>Hue:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Successfully logged in.</source>
+        <source>Sat:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Socket error : </source>
+        <source>Val:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connection closed</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCMessageParser</name>
-    <message>
-        <source>Received unhandled numeric command : </source>
+        <source>Red:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Received unhandled ctcp command : </source>
+        <source>Green:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Received unhandled literal command : </source>
+        <source>Blue:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Nonexistant channel join - desynchronized?</source>
+        <source>Alpha channel:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> joined channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Person has already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You left channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> left channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parting person not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel for part not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel message with unknown sender</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel message with unknown channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received PRIVMSG of unknown type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You are now known as </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> is now known as </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname change of an unknown person</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> has quit </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown person quit - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> changed topic to </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown channel topic - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received a CTCP PING from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received a CTCP VERSION from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with bad recipient</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change has unknown type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown kannel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>User modes not supported yet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You were kicked from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> by </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> was kicked from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown person kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown channel kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Server message with unknown channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You joined channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname is in use, please reconnect with a different nickname</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No such nickname</source>
+        <source>Select color</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCQueryTab</name>
+    <name>OColorPopupMenu</name>
     <message>
-        <source>Talking to </source>
+        <source>More</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Private discussion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type your text here in order to send a message to the other person</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Disconnected</source>
+        <source>More...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCServerEditor</name>
+    <name>OFileDialog</name>
     <message>
-        <source>Profile name :</source>
+        <source>FileDialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The name of this server profile in the overview</source>
+        <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hostname :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The server to connect to - can be any valid host name or IP address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Port :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The server port to connect to. Usually 6667</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your nick name on the IRC network</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Realname :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your real name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password to connect to the server (if required)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channels :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Comma-Separated list of all channels you would like to join automatically</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit server information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Profile name required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Host name required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Port required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Realname required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The channel list needs to contain a
-comma separated list of channel
- names which start with either &apos;#&apos; or &apos;+&apos;</source>
+        <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCServerList</name>
+    <name>OFileSelector</name>
     <message>
-        <source>Serverlist Browser</source>
+        <source>Documents</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please choose a server profile</source>
+        <source>Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select a server profile from this list and then tap on OK in the upper-right corner</source>
+        <source>All Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C&amp;ancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mime Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ser Permission</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -351,160 +146,483 @@ comma separated list of channel
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit</source>
+        <source>Do you really want to delete
+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add</source>
+        <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete the currently selected server profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit the currently selected server profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add a new server profile</source>
+        <source>No</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCServerTab</name>
+    <name>OFontMenu</name>
     <message>
-        <source>Connection to</source>
+        <source>Large</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Server messages</source>
+        <source>Medium</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type commands here. A list of available commands can be found inside the OpieIRC help</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCSettings</name>
-    <message>
-        <source>Lines displayed :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Amount of lines to be displayed in chats before old lines get deleted - this is necessary to restrain memory consumption. Set to 0 if you don&apos;t need this</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Background color :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Background color to be used in chats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal text color :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used in chats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error color :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to display errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text written by yourself :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to identify text written by yourself</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text written by others :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to identify text written by others</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text written by the server :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to identify text written by the server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notifications :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to display notifications</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colors</source>
+        <source>Small</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCTab</name>
+    <name>OFontSelector</name>
     <message>
-        <source>Missing description</source>
+        <source>Style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Description of the tab&apos;s content</source>
+        <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close this tab</source>
+        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>MainWindow</name>
+    <name>ORecurranceBase</name>
     <message>
-        <source>IRC Client</source>
-        <translation>IRC Klient</translation>
+        <source>Repeating Event </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Server connections, channels, queries and other things will be placed here</source>
-        <translation>Serververbindungen, Kanäle, Gespräche und andere Sachen werden hier sein</translation>
+        <source>None</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>IRC</source>
-        <translation>IRC</translation>
+        <source>Day</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New connection</source>
-        <translation>Neue Verbindung</translation>
+        <source>Week</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create a new connection to an IRC server</source>
-        <translation>Erstelle eine neue Verbindung zu einem IRC-Server</translation>
+        <source>Month</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <source>Year</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Configure OpieIRC&apos;s behavior and appearance</source>
-        <translation>Konfiguriere OpieIRC&apos;s Verhalten und Aussehen</translation>
+        <source>Every:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frequency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End On:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No End Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Var1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Var 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WeekVar</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ORecurranceWidget</name>
+    <message>
+        <source>No End Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>weeks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>months</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>years</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>year</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> and </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>,
+and </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>, and </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No Repeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>day(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>week(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat By</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>month(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>year(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OTimePickerDialogBase</name>
+    <message>
+        <source>Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pick Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Summary:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deadline:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Email: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Web Page: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Phone: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Fax: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Mobile: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Pager: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Web Page: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Phone: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Fax: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Mobile: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Emails: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profession: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assistant: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manager: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Male</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Female</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gender: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spouse: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthday: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anniversary: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Children: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2 every </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The %1 every </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The %1 %1 of every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Monday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wednesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thursday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saturday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sunday</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
+    <message>
+        <source>st</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>nd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>rd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>th</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

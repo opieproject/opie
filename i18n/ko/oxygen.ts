@@ -1,510 +1,561 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>IRCChannelTab</name>
+    <name>CalcDlg</name>
     <message>
-        <source>Talking on channel</source>
-        <translation>Spreche auf Kanal</translation>
-    </message>
-    <message>
-        <source>Channel discussion</source>
+        <source>Molecular Weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type your message here to participate in the channel discussion</source>
+        <source>Chemical Formula</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>CTCP</source>
+        <source>Calculate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Query</source>
+        <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ping</source>
+        <source>Molecular Weight (u):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Version</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Whois</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Disconnected</source>
+        <source>Elemental Composition (%):</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCConnection</name>
+    <name>OxydataWidget</name>
     <message>
-        <source>Connected, logging in ..</source>
+        <source>%1 u</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Successfully logged in.</source>
+        <source>%1 pm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Socket error : </source>
+        <source>%1 J</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connection closed</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCMessageParser</name>
-    <message>
-        <source>Received unhandled numeric command : </source>
+        <source>%1 g/cm^3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Received unhandled ctcp command : </source>
+        <source>%1 K</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Received unhandled literal command : </source>
+        <source>Weight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Nonexistant channel join - desynchronized?</source>
+        <source>Block</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> joined channel </source>
+        <source>Group</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Person has already joined the channel - desynchronized?</source>
+        <source>Electronegativity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You already joined the channel - desynchronized?</source>
+        <source>Atomic radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You left channel </source>
+        <source>Ionizationenergie</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> left channel </source>
+        <source>Density</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Parting person not found - desynchronized?</source>
+        <source>Boilingpoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Channel for part not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel message with unknown sender</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel message with unknown channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received PRIVMSG of unknown type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You are now known as </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> is now known as </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname change of an unknown person</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> has quit </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown person quit - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> changed topic to </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown channel topic - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received a CTCP PING from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received a CTCP VERSION from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with bad recipient</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change has unknown type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown kannel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>User modes not supported yet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You were kicked from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> by </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> was kicked from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown person kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown channel kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Server message with unknown channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You joined channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname is in use, please reconnect with a different nickname</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No such nickname</source>
+        <source>Meltingpoint</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCQueryTab</name>
+    <name>Oxygen</name>
     <message>
-        <source>Talking to </source>
+        <source>Oxygen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Private discussion</source>
+        <source>PSE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type your text here in order to send a message to the other person</source>
+        <source>Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disconnected</source>
+        <source>Calculations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hydrogen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Helium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lithium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beryllium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boron</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Carbon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nitrogen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fluorine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Neon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sodium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Magnesium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Aluminum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silicon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phosphorus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sulfur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chlorine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Argon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Potassium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calcium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scandium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Titanium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vanadium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chromium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manganese</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Iron</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cobalt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zinc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gallium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Germanium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Arsenic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Selenium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bromine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Krypton</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rubidium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Strontium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yttrium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zirconium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Niobium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Molybdenum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Technetium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ruthenium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rhodium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palladium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Silver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cadmium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Indium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Antimony</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tellurium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Iodine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Xenon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cesium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lanthanum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cerium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Praseodymium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Neodymium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Promethium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Samarium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Europium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gadolinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Terbium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dysprosium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Holmium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Erbium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thulium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ytterbium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lutetium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hafnium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tantalum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tungsten</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rhenium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Osmium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Iridium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Platinum</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mercury</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thallium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lead</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bismuth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Polonium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Astatine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Francium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Radium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Actinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thorium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protactinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uranium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Neptunium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plutonium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Americium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Curium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Berkelium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Californium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Einsteinium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fermium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mendelevium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nobelium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lawrencium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rutherfordium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dubnium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Seaborgium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bohrium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hassium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Meitnerium</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCServerEditor</name>
+    <name>PSEWidget</name>
     <message>
-        <source>Profile name :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The name of this server profile in the overview</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hostname :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The server to connect to - can be any valid host name or IP address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Port :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The server port to connect to. Usually 6667</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your nick name on the IRC network</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Realname :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your real name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password to connect to the server (if required)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channels :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Comma-Separated list of all channels you would like to join automatically</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit server information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Profile name required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Host name required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Port required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Realname required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The channel list needs to contain a
-comma separated list of channel
- names which start with either &apos;#&apos; or &apos;+&apos;</source>
+        <source>Periodic System</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCServerList</name>
+    <name>calcDlgUI</name>
     <message>
-        <source>Serverlist Browser</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please choose a server profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select a server profile from this list and then tap on OK in the upper-right corner</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete the currently selected server profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit the currently selected server profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Add a new server profile</source>
+        <source>ERROR: 
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCServerTab</name>
+    <name>dataWidgetUI</name>
     <message>
-        <source>Connection to</source>
+        <source>Chemical Data</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Server messages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type commands here. A list of available commands can be found inside the OpieIRC help</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCSettings</name>
-    <message>
-        <source>Lines displayed :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Amount of lines to be displayed in chats before old lines get deleted - this is necessary to restrain memory consumption. Set to 0 if you don&apos;t need this</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Background color :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Background color to be used in chats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal text color :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used in chats</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error color :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to display errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text written by yourself :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to identify text written by yourself</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text written by others :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to identify text written by others</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text written by the server :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to identify text written by the server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notifications :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to display notifications</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCTab</name>
-    <message>
-        <source>Missing description</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description of the tab&apos;s content</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close this tab</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MainWindow</name>
-    <message>
-        <source>IRC Client</source>
-        <translation>IRC Klient</translation>
-    </message>
-    <message>
-        <source>Server connections, channels, queries and other things will be placed here</source>
-        <translation>Serververbindungen, Kanäle, Gespräche und andere Sachen werden hier sein</translation>
-    </message>
-    <message>
-        <source>IRC</source>
-        <translation>IRC</translation>
-    </message>
-    <message>
-        <source>New connection</source>
-        <translation>Neue Verbindung</translation>
-    </message>
-    <message>
-        <source>Create a new connection to an IRC server</source>
-        <translation>Erstelle eine neue Verbindung zu einem IRC-Server</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Einstellungen</translation>
-    </message>
-    <message>
-        <source>Configure OpieIRC&apos;s behavior and appearance</source>
-        <translation>Konfiguriere OpieIRC&apos;s Verhalten und Aussehen</translation>
     </message>
 </context>
 </TS>

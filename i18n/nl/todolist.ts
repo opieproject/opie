@@ -1,357 +1,220 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>IRCChannelTab</name>
+    <name>MainWindow</name>
     <message>
-        <source>Talking on channel</source>
-        <translation>Spreche auf Kanal</translation>
-    </message>
-    <message>
-        <source>Channel discussion</source>
+        <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type your message here to participate in the channel discussion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Query</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Whois</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Disconnected</source>
+        <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCConnection</name>
+    <name>OTaskEditor</name>
     <message>
-        <source>Connected, logging in ..</source>
+        <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Successfully logged in.</source>
+        <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Socket error : </source>
+        <source>Alarms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connection closed</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCMessageParser</name>
-    <message>
-        <source>Received unhandled numeric command : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received unhandled ctcp command : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received unhandled literal command : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nonexistant channel join - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> joined channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Person has already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You left channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> left channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parting person not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel for part not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel message with unknown sender</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel message with unknown channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received PRIVMSG of unknown type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You are now known as </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> is now known as </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname change of an unknown person</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> has quit </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown person quit - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> changed topic to </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown channel topic - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received a CTCP PING from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received a CTCP VERSION from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with bad recipient</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change has unknown type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown kannel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>User modes not supported yet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You were kicked from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> by </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> was kicked from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown person kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown channel kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Server message with unknown channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You joined channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname is in use, please reconnect with a different nickname</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No such nickname</source>
+        <source>Recurrence</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCQueryTab</name>
+    <name>QObject</name>
     <message>
-        <source>Talking to </source>
+        <source>Enter Task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Private discussion</source>
+        <source>Edit Task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type your text here in order to send a message to the other person</source>
+        <source>silent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disconnected</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCServerEditor</name>
-    <message>
-        <source>Profile name :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The name of this server profile in the overview</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hostname :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The server to connect to - can be any valid host name or IP address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Port :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The server port to connect to. Usually 6667</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your nick name on the IRC network</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Realname :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Your real name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password to connect to the server (if required)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channels :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Comma-Separated list of all channels you would like to join automatically</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit server information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Profile name required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Host name required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Port required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Realname required</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The channel list needs to contain a
-comma separated list of channel
- names which start with either &apos;#&apos; or &apos;+&apos;</source>
+        <source>loud</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCServerList</name>
+    <name>QWidget</name>
     <message>
-        <source>Serverlist Browser</source>
+        <source>New from template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please choose a server profile</source>
+        <source>New Task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select a server profile from this list and then tap on OK in the upper-right corner</source>
+        <source>Click here to create a new task.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
+        <source>Edit Task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit</source>
+        <source>Click here to modify the current task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to remove the current task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to send the current task to another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show only over-due tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show task deadlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show quick task bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>QuickEdit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a listing of all current tasks.
+
+The list displays the following information:
+1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
+2. Priority - a graphical representation of task priority.  Double-click here to modify.
+3. Description - description of task.  Click here to select the task.
+4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Categories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Out of space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo was unable
+to save your changes.
+Free up some space
+and try again.
+
+Quit Anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can not edit data, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>all tasks?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>all completed tasks?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Template Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -359,152 +222,348 @@ comma separated list of channel
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete the currently selected server profile</source>
+        <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit the currently selected server profile</source>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add a new server profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCServerTab</name>
-    <message>
-        <source>Connection to</source>
+        <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Server messages</source>
+        <source>New Template %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type commands here. A list of available commands can be found inside the OpieIRC help</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCSettings</name>
-    <message>
-        <source>Lines displayed :</source>
+        <source>Click here to set the priority of new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Amount of lines to be displayed in chats before old lines get deleted - this is necessary to restrain memory consumption. Set to 0 if you don&apos;t need this</source>
+        <source>Enter description of new task here.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>General</source>
+        <source>More</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Background color :</source>
+        <source>Click here to enter additional information for new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Background color to be used in chats</source>
+        <source>Enter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Normal text color :</source>
+        <source>Click here to add new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text color to be used in chats</source>
+        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error color :</source>
+        <source>Click here to reset new task information.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text color to be used to display errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text written by yourself :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to identify text written by yourself</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text written by others :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to identify text written by others</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text written by the server :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to identify text written by the server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notifications :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to display notifications</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colors</source>
+        <source>Priority:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCTab</name>
+    <name>TableView</name>
     <message>
-        <source>Missing description</source>
+        <source>Table View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Description of the tab&apos;s content</source>
+        <source>%1 day(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close this tab</source>
+        <source>None</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>MainWindow</name>
+    <name>TaskEditorAlarms</name>
     <message>
-        <source>IRC Client</source>
-        <translation>IRC Klient</translation>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Server connections, channels, queries and other things will be placed here</source>
-        <translation>Serververbindungen, Kanäle, Gespräche und andere Sachen werden hier sein</translation>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>IRC</source>
-        <translation>IRC</translation>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New connection</source>
-        <translation>Neue Verbindung</translation>
+        <source>New</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create a new connection to an IRC server</source>
-        <translation>Erstelle eine neue Verbindung zu einem IRC-Server</translation>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorOverView</name>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Configure OpieIRC&apos;s behavior and appearance</source>
-        <translation>Konfiguriere OpieIRC&apos;s Verhalten und Aussehen</translation>
+        <source>Enter brief description of the task here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Complete </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work on </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Buy </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Organize </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plan </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Call </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select priority of task here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select category to organize this task with.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recurring task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter any additional information about this task here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorStatus</name>
+    <message>
+        <source>Status:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the current status of this task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postponed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finished</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select progress made on this task here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>20 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>40 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>60 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>80 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>100 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the date this task was started.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Due Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the date this task needs to be completed by.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to mark this task as completed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the date this task was completed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maintainer Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to set the maintainer&apos;s role.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nothing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Responsible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Done By</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coordinating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maintainer:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is the name of the current task maintainer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the task maintainer.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

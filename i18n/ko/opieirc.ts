@@ -3,7 +3,7 @@
     <name>IRCChannelTab</name>
     <message>
         <source>Talking on channel</source>
-        <translation>Spreche auf Kanal</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Channel discussion</source>
@@ -480,31 +480,31 @@ comma separated list of channel
     <name>MainWindow</name>
     <message>
         <source>IRC Client</source>
-        <translation>IRC Klient</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Server connections, channels, queries and other things will be placed here</source>
-        <translation>Serververbindungen, Kanäle, Gespräche und andere Sachen werden hier sein</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>IRC</source>
-        <translation>IRC</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New connection</source>
-        <translation>Neue Verbindung</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Create a new connection to an IRC server</source>
-        <translation>Erstelle eine neue Verbindung zu einem IRC-Server</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Configure OpieIRC&apos;s behavior and appearance</source>
-        <translation>Konfiguriere OpieIRC&apos;s Verhalten und Aussehen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

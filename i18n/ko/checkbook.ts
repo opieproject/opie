@@ -1,353 +1,150 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>IRCChannelTab</name>
+    <name>Checkbook</name>
     <message>
-        <source>Talking on channel</source>
-        <translation>Spreche auf Kanal</translation>
-    </message>
-    <message>
-        <source>Channel discussion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type your message here to participate in the channel discussion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Query</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Version</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Whois</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Disconnected</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCConnection</name>
-    <message>
-        <source>Connected, logging in ..</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Successfully logged in.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Socket error : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Connection closed</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCMessageParser</name>
-    <message>
-        <source>Received unhandled numeric command : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received unhandled ctcp command : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received unhandled literal command : </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nonexistant channel join - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> joined channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Person has already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You left channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> left channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Parting person not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel for part not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel message with unknown sender</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Channel message with unknown channel </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received PRIVMSG of unknown type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You are now known as </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> is now known as </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname change of an unknown person</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> has quit </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown person quit - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> changed topic to </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown channel topic - desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received a CTCP PING from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Received a CTCP VERSION from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CTCP ACTION with bad recipient</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change has unknown type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mode change with unknown kannel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>User modes not supported yet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>You were kicked from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> by </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> was kicked from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown person kick - desynchronized?</source>
+        <source>Checkbook</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unknown channel kick - desynchronized?</source>
+        <source>New checkbook</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Server message with unknown channel</source>
+        <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You joined channel </source>
+        <source>Transactions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Nickname is in use, please reconnect with a different nickname</source>
+        <source>Charts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No such nickname</source>
+        <source>Password protect</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>IRCQueryTab</name>
     <message>
-        <source>Talking to </source>
+        <source>Click here to enable/disable password protection of this checkbook.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Private discussion</source>
+        <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type your text here in order to send a message to the other person</source>
+        <source>Enter name of checkbook here.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disconnected</source>
+        <source>Type:</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>IRCServerEditor</name>
     <message>
-        <source>Profile name :</source>
+        <source>Select type of checkbook here.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The name of this server profile in the overview</source>
+        <source>Savings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hostname :</source>
+        <source>Checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The server to connect to - can be any valid host name or IP address</source>
+        <source>CD</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Port :</source>
+        <source>Money market</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The server port to connect to. Usually 6667</source>
+        <source>Mutual fund</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Nickname :</source>
+        <source>Other</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Your nick name on the IRC network</source>
+        <source>Bank:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Realname :</source>
+        <source>Enter name of the bank for this checkbook here.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Your real name</source>
+        <source>Account number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Password :</source>
+        <source>Enter account number for this checkbook here.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Password to connect to the server (if required)</source>
+        <source>PIN number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Channels :</source>
+        <source>Enter PIN number for this checkbook here.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Comma-Separated list of all channels you would like to join automatically</source>
+        <source>Starting balance:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit server information</source>
+        <source>Enter the initial balance for this checkbook here.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
+        <source>Notes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Profile name required</source>
+        <source>Enter any additional information for this checkbook here.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Host name required</source>
+        <source>Current balance: %10.00</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Port required</source>
+        <source>This area shows the current balance in this checkbook.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Nickname required</source>
+        <source>This is a listing of all transactions entered for this checkbook.
+
+To sort entries by a specific field, click on the column name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Realname required</source>
+        <source>Num</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The channel list needs to contain a
-comma separated list of channel
- names which start with either &apos;#&apos; or &apos;+&apos;</source>
+        <source>Date</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>IRCServerList</name>
     <message>
-        <source>Serverlist Browser</source>
+        <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please choose a server profile</source>
+        <source>Amount</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select a server profile from this list and then tap on OK in the upper-right corner</source>
+        <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
+        <source>Click here to add a new transaction.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -355,156 +152,354 @@ comma separated list of channel
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add</source>
+        <source>Select a transaction and then click here to edit it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete the currently selected server profile</source>
+        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Edit the currently selected server profile</source>
+        <source>Select a checkbook and then click here to delete it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add a new server profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCServerTab</name>
-    <message>
-        <source>Connection to</source>
+        <source>Select the desired chart below and then click on the Draw button.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Server messages</source>
+        <source>Click here to select the desired chart type.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type commands here. A list of available commands can be found inside the OpieIRC help</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRCSettings</name>
-    <message>
-        <source>Lines displayed :</source>
+        <source>Account balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Amount of lines to be displayed in chats before old lines get deleted - this is necessary to restrain memory consumption. Set to 0 if you don&apos;t need this</source>
+        <source>Withdrawals by category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>General</source>
+        <source>Deposits by category</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Background color :</source>
+        <source>Draw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Background color to be used in chats</source>
+        <source>Click here to draw the selected chart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Normal text color :</source>
+        <source>Current balance: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text color to be used in chats</source>
+        <source>Enter password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error color :</source>
+        <source>Please enter your password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text color to be used to display errors</source>
+        <source>Confirm password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text written by yourself :</source>
+        <source>Please confirm your password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text color to be used to identify text written by yourself</source>
+        <source>Please enter your password to confirm removal of password protection:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text written by others :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to identify text written by others</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text written by the server :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to identify text written by the server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notifications :</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text color to be used to display notifications</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colors</source>
+        <source>Delete transaction</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>IRCTab</name>
+    <name>Configuration</name>
     <message>
-        <source>Missing description</source>
+        <source>Configure Checkbook</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Description of the tab&apos;s content</source>
+        <source>Enter currency symbol:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close this tab</source>
+        <source>Enter your local currency symbol here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show whether checkbook is password
+protected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select whether or not the main window will display that the checkbook is protected with a password.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show checkbook balances</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <source>IRC Client</source>
-        <translation>IRC Klient</translation>
+        <source>Checkbook</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Server connections, channels, queries and other things will be placed here</source>
-        <translation>Serververbindungen, Kanäle, Gespräche und andere Sachen werden hier sein</translation>
+        <source>New</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>IRC</source>
-        <translation>IRC</translation>
+        <source>Click here to create a new checkbook.
+
+You also can select New from the Checkbook menu.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New connection</source>
-        <translation>Neue Verbindung</translation>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Create a new connection to an IRC server</source>
-        <translation>Erstelle eine neue Verbindung zu einem IRC-Server</translation>
+        <source>Select a checkbook and then click here to edit it.
+
+You also can select Edit from the Checkbook menu, or click and hold on a checkbook name.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Configure OpieIRC&apos;s behavior and appearance</source>
-        <translation>Konfiguriere OpieIRC&apos;s Verhalten und Aussehen</translation>
+        <source>Select a checkbook and then click here delete it.
+
+You also can select Delete from the Checkbook menu.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to configure this app.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a listing of all checkbooks currently available.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Checkbook Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Balance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please enter your password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete checkbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Transaction</name>
+    <message>
+        <source>Transaction for </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Withdrawal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select whether the transaction is a withdrawal or deposit here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deposit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select date of transaction here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter check number here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter description of transaction here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select transaction category here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select transaction type here.
+
+The options available vary based on whether the transaction is a deposit or withdrawal.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Amount:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter the amount of transaction here.
+
+The value entered should always be positive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fee:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter any fee amount assoiciated with this transaction.
+
+The value entered should always be positive.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter any additional information for this transaction here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bills</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CDs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clothing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DVDs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eletronics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entertainment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Food</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gasoline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Movies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Travel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Debit Charge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Written Check</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Credit Card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Family Member</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc. Credit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Automatic Payment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cash</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
