@@ -36,12 +36,13 @@ OTodo::OTodo(const OTodo &event )
     : OPimRecord( event ),  data( event.data )
 {
     data->ref();
-    qWarning("ref up");
+//    qWarning("ref up");
 }
 OTodo::~OTodo() {
-    qWarning("~OTodo " + data->sum );
+
+//    qWarning("~OTodo "  );
     if ( data->deref() ) {
-        qWarning("OTodo::dereffing");
+//        qWarning("OTodo::dereffing");
         delete data;
         data = 0l;
     }
@@ -54,7 +55,7 @@ OTodo::OTodo(bool completed, int priority,
                      bool hasDate, QDate date, int uid )
     : OPimRecord(  uid )
 {
-    qWarning("OTodoData " + summary);
+//    qWarning("OTodoData " + summary);
     setCategories( category );
 
     data = new OTodoData;
@@ -77,12 +78,12 @@ OTodo::OTodo(bool completed, int priority,
                      bool hasDate, QDate date, int uid )
     : OPimRecord(  uid )
 {
-    qWarning("OTodoData" + summary);
+//    qWarning("OTodoData" + summary);
     setCategories( idsFromString( category.join(";") ) );
 
     data = new OTodoData;
-    data->date = date;
 
+    data->date = date;
     data->isCompleted = completed;
     data->hasDate = hasDate;
     data->priority = priority;
@@ -160,6 +161,7 @@ void OTodo::setHasAlarmDateTime( bool hasAlarmDateTime )
 }
 void OTodo::setDescription(const QString &desc )
 {
+    qWarning( "desc " + desc );
     changeOrModify();
     data->desc = Qtopia::simplifyMultiLineSpace(desc );
 }
@@ -307,19 +309,20 @@ bool OTodo::operator==(const OTodo &toDoEvent )const
 }
 void OTodo::deref() {
 
-    //qWarning("deref in ToDoEvent");
+//    qWarning("deref in ToDoEvent");
     if ( data->deref() ) {
-        //qWarning("deleting");
+//        qWarning("deleting");
         delete data;
-        d= 0;
+        data= 0;
     }
 }
 OTodo &OTodo::operator=(const OTodo &item )
 {
-    OPimRecord::operator=( item );
+//    OPimRecord::operator=( item );
     //qWarning("operator= ref ");
     item.data->ref();
     deref();
+    data = item.data;
 
     return *this;
 }
@@ -355,7 +358,7 @@ QMap<QString, QString> OTodo::toExtraMap()const {
  */
 void OTodo::changeOrModify() {
     if ( data->count != 1 ) {
-        qWarning("changeOrModify");
+//        qWarning("changeOrModify");
         data->deref();
         OTodoData* d2 = new OTodoData();
         copy(data, d2 );

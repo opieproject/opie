@@ -40,7 +40,7 @@ public:
      * a * operator ;)
      * use it like this T = (*it);
      */
-    T &operator*();
+    T operator*();
     ORecordListIterator &operator++();
     ORecordListIterator &operator--();
 
@@ -99,6 +99,7 @@ ORecordListIterator<T>::ORecordListIterator() {
     m_current = 0;
     m_temp = 0l;
     m_end = true;
+    m_record = T();
 }
 template <class T>
 ORecordListIterator<T>::~ORecordListIterator() {
@@ -107,7 +108,7 @@ ORecordListIterator<T>::~ORecordListIterator() {
 
 template <class T>
 ORecordListIterator<T>::ORecordListIterator( const ORecordListIterator<T>& it) {
-    qWarning("ORecordListIterator");
+//    qWarning("ORecordListIterator copy c'tor");
     m_uids = it.m_uids;
     m_current = it.m_current;
     m_temp = it.m_temp;
@@ -121,14 +122,14 @@ ORecordListIterator<T> &ORecordListIterator<T>::operator=( const ORecordListIter
     m_current = it.m_current;
     m_temp = it.m_temp;
     m_end = it.m_end;
-    m_record = it.m_record;
+//    m_record = it.m_record;
 
     return *this;
 }
 
 template <class T>
-T &ORecordListIterator<T>::operator*() {
-    qWarning("operator* %d %d", m_current,  m_uids[m_current] );
+T ORecordListIterator<T>::operator*() {
+//    qWarning("operator* %d %d", m_current,  m_uids[m_current] );
     if (!m_end )
         m_record = m_temp->find( m_uids[m_current] );
     else
@@ -193,7 +194,6 @@ ORecordList<T>::~ORecordList() {
 }
 template <class T>
 ORecordList<T>::Iterator ORecordList<T>::begin() {
-    qWarning("ORecordList::begin");
     Iterator it( m_ids, m_acc );
     return it;
 }

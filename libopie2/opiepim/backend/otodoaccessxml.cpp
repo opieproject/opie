@@ -68,7 +68,6 @@ bool OTodoAccessXML::load() {
 
             element = element->nextChild();
         }
-        return true;
     }else {
         qWarning("could not parse");
         return false;;
@@ -76,6 +75,7 @@ bool OTodoAccessXML::load() {
     delete root;
 
     m_opened = true;
+    qWarning("Access %d" + m_events.count() );
     return true;
 }
 bool OTodoAccessXML::reload() {
