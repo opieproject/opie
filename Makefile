@@ -62,6 +62,9 @@ NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
 
 NONCORESTYLES = noncore/styles/liquid noncore/styles/theme noncore/styles/metal
 
+NONCOREDECOS = noncore/decorations/liquid noncore/decorations/flat \
+	noncore/decorations/polished
+
 GAMES = noncore/games/minesweep noncore/games/solitaire \
 	noncore/games/tetrix noncore/games/wordgame \
 	noncore/games/parashoot noncore/games/snake \
@@ -88,7 +91,7 @@ NONCOMM = noncore/comm/keypebble
 APPS=$(LOCALAPPS) $(PIMAPPS)  $(COREAPPS)     \
 	$(COREMULTIMEDIA) $(CORESETTINGS) \
 	$(NONCORESETTINGS) $(NONCORETOOLS) $(NONCORESTYLES) \
-	$(NONAPPS) $(NONNET) $(NONMULT) \
+	$(NONCOREDECOS) $(NONAPPS) $(NONNET) $(NONMULT) \
 	$(NONCOMM) $(GAMES) $(TODAYPLUGINS)
     
     
