@@ -46,6 +46,7 @@ class QListView;
 class QListViewItem;
 class QToolBar;
 class QProgressBar;
+class QPushButton;
 class QWidgetStack;
 
 class MainWindow :public  QMainWindow
@@ -151,4 +152,24 @@ private slots:
     void letterPushed( QString t );
     void slotDisplayPackage( QListViewItem * );
 };
+
+class QuestionDlg : public QWidget
+{
+    Q_OBJECT
+public:
+    QuestionDlg( const QString &caption, const QString &text, const QString &secondbtn );
+    
+    int exec();
+    
+private:
+    QPushButton *btn1;
+    QPushButton *btn2;
+    
+    bool executing;
+    int  buttonpressed;
+    
+private slots:
+    void slotButtonPressed();
+};
+
 #endif
