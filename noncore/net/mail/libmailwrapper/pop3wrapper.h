@@ -32,10 +32,9 @@ public:
 protected:
     void login();
     void logout();
-
-private:
+    
     RecMail *parseHeader( const char *header );
-    RecBody parseBody( const char *message );
+    RecBody parseMail( char *message );
     QString parseMailboxList( mailimf_mailbox_list *list );
     QString parseMailbox( mailimf_mailbox *box );
     QString parseGroup( mailimf_group *group );
@@ -43,6 +42,8 @@ private:
     QString parseDateTime( mailimf_date_time *date );
     POP3account *account;
     mailpop3 *m_pop3;
+    QString msgTempName;
+    unsigned int last_msg_id;
 };
 
 #endif

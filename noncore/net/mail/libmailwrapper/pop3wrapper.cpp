@@ -2,16 +2,24 @@
 #include "pop3wrapper.h"
 #include "mailtypes.h"
 #include <libetpan/mailpop3.h>
+#include <libetpan/mailmime.h>
+#include <qfile.h>
 
 POP3wrapper::POP3wrapper( POP3account *a )
 {
     account = a;
     m_pop3 = NULL;
+    msgTempName = a->getFileName()+"_msg_cache";
+    last_msg_id = 0;
 }
 
 POP3wrapper::~POP3wrapper()
 {
     logout();
+    QFile msg_cache(msgTempName);
+    if (msg_cache.exists()) {
+        msg_cache.remove();
+    }
 }
 
 void POP3wrapper::pop3_progress( size_t current, size_t maximum )
@@ -26,37 +34,80 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail )
     size_t length = 0;
 
     login();
-    if ( !m_pop3 ) return RecBody();
-    
-    err = mailpop3_retr( m_pop3, mail.getNumber(), &message, &length );
-    if ( err != MAILPOP3_NO_ERROR ) {
-        qDebug( "POP3: error retrieving body with index %i", mail.getNumber() );
+    if ( !m_pop3 ) {
         return RecBody();
     }
+    RecBody body;
     
-    return parseBody( message );
+    QFile msg_cache(msgTempName);
+
+    if (mail.getNumber()!=last_msg_id) {
+        if (msg_cache.exists()) {
+            msg_cache.remove();
+        }
+        msg_cache.open(IO_ReadWrite|IO_Truncate);
+        last_msg_id = mail.getNumber();
+        err = mailpop3_retr( m_pop3, mail.getNumber(), &message, &length );    
+        if ( err != MAILPOP3_NO_ERROR ) {
+            qDebug( "POP3: error retrieving body with index %i", mail.getNumber() );
+            last_msg_id = 0;
+            return RecBody();
+        }
+        msg_cache.writeBlock(message,length);
+    } else {    
+        QString msg="";
+        msg_cache.open(IO_ReadOnly);
+        message = new char[4096];
+        memset(message,0,4096);
+        while (msg_cache.readBlock(message,4095)>0) {
+            msg+=message;
+            memset(message,0,4096);
+        }
+        delete message;
+        message = (char*)malloc(msg.length()+1*sizeof(char));
+        memset(message,0,msg.length()+1);
+        memcpy(message,msg.latin1(),msg.length());
+    }
+    body = parseMail(message);
+    free(message);
+    return body;
 }
 
-RecBody POP3wrapper::parseBody( const char *message )
+RecBody POP3wrapper::parseMail( char *message )
 {
     int err = MAILIMF_NO_ERROR;
     /* these vars are used recurcive! set it to 0!!!!!!!!!!!!!!!!! */
     size_t curTok = 0;
     mailimf_message *result = 0;
     RecBody body;
-    
+
+
     err = mailimf_message_parse( (char *) message, strlen( message ), &curTok, &result );
     if ( err != MAILIMF_NO_ERROR ) {
         if (result) mailimf_message_free(result);
         return body;
     }
     
+    struct mailimf_body * b = 0;
+    struct mailimf_fields * f = 0;
+    
+    
     if ( result && result->msg_body && result->msg_body->bd_text ) {
         qDebug( "POP3: bodytext found" );
         // when curTok isn't set to 0 this line will fault! 'cause upper line faults!
         body.setBodytext( QString( result->msg_body->bd_text ) );
+#if 0
+        curTok = 0;
+        mailmime_content*mresult = 0;
+        size_t index = 0;
+        mailmime_content_parse(result->msg_body->bd_text,
+            strlen(result->msg_body->bd_text),&index,&mresult);
+        if (mresult) {
+            mailmime_content_free(mresult);
+        }
+#endif
+        mailimf_message_free(result);
     }
-    if (result) mailimf_message_free(result);
     return body;
 }
 
