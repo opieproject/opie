@@ -59,15 +59,15 @@
     </message>
     <message>
         <source>Left</source>
-        <translation>Gauche</translation>
+        <translation>A gauche</translation>
     </message>
     <message>
         <source>Center</source>
-        <translation>Centre</translation>
+        <translation>Centré</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation>Droite</translation>
+        <translation>A droite</translation>
     </message>
     <message>
         <source>Full</source>
@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Rich Text Editor</source>
-        <translation>Rich Text Editor</translation>
+        <translation>Opie Write</translation>
     </message>
     <message>
         <source>Unnamed</source>

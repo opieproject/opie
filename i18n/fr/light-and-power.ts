@@ -50,7 +50,8 @@
     </message>
     <message>
         <source>Deactivate LCD only (does not suspend)</source>
-        <translation>Désactive l&apos;écran (ne met pas veille)</translation>
+        <translation>Désactiver l&apos;écran
+(ne met pas en veille)</translation>
     </message>
     <message>
         <source>Backlight</source>
@@ -66,7 +67,8 @@
     </message>
     <message>
         <source>Use Light Sensor</source>
-        <translation>Utiliser le capteur de lumière</translation>
+        <translation>Utiliser le capteur
+de lumière</translation>
     </message>
     <message>
         <source>Calibrate</source>
@@ -86,7 +88,7 @@
     </message>
     <message>
         <source>Low power warning interval</source>
-        <translation>Message &quot;Batterie faible&quot;</translation>
+        <translation>Message Batterie faible</translation>
     </message>
     <message>
         <source> %</source>
@@ -106,11 +108,11 @@
     </message>
     <message>
         <source>very low battery warning at</source>
-        <translation>Message &quot;Batterie très faible&quot;</translation>
+        <translation>Message Batterie très faible</translation>
     </message>
     <message>
         <source>critical power warning at</source>
-        <translation>Message &quot;Batterie critique&quot;</translation>
+        <translation>Message Batterie critique</translation>
     </message>
 </context>
 <context>

@@ -47,11 +47,12 @@
     </message>
     <message>
         <source>Visual Alerts</source>
-        <translation>Alertes visuelles</translation>
+        <translation>Alertes
+Visuelles</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation>Icone de la bare de la tâche</translation>
+        <translation>Icône de la barre de tâche</translation>
     </message>
     <message>
         <source>Key_Space</source>

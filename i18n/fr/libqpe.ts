@@ -569,7 +569,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation>Type:</translation>
+        <translation>Type : </translation>
     </message>
     <message>
         <source>Spouse: </source>

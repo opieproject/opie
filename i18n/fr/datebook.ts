@@ -552,7 +552,7 @@ Horaire
     </message>
     <message>
         <source>Repeat</source>
-        <translation>Répéter</translation>
+        <translation>Répétition</translation>
     </message>
     <message>
         <source>No Repeat...</source>
@@ -789,7 +789,7 @@ de fin</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation>Répéter le</translation>
+        <translation>Répéter Le</translation>
     </message>
     <message>
         <source>Mon</source>

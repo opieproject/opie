@@ -4,11 +4,13 @@
     <name>Security</name>
     <message>
         <source>Set passcode</source>
-        <translation>Fixer mot de passe</translation>
+        <translation>Entrer le
+mot de passe</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation>Changer mot de passe</translation>
+        <translation>Changer le
+mot de passe</translation>
     </message>
     <message>
         <source>Enter passcode</source>
@@ -49,11 +51,13 @@ Accès refusé</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation>Changer le mot de passe</translation>
+        <translation>Changer le
+mot de passe</translation>
     </message>
     <message>
         <source>Clear passcode</source>
-        <translation>Effacer le mot de passe</translation>
+        <translation>Effacer le
+mot de passe</translation>
     </message>
     <message>
         <source>Require pass code at power-on</source>
@@ -89,7 +93,7 @@ Accès refusé</translation>
     </message>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation>&lt;P&gt;Ce code secret permet un niveau de protection minimal pour l&apos;accès à votre organiseur.</translation>
+        <translation>&lt;P&gt;Ce mot de passe vous permet de protéger l&apos;accès à votre organiseur.</translation>
     </message>
     <message>
         <source>192.168.129.0/24 (default)</source>
