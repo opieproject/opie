@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.cpp,v 1.8.2.1 2003-07-15 15:29:08 tille Exp $
+ * $Id: edit.cpp,v 1.8.2.2 2003-07-27 10:52:30 harlekin Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -76,9 +76,9 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
   del = new QPushButton(tr("&Remove"), this);
 
   up = new QPushButton(this);
-  up->setPixmap( Resource::loadPixmap("inline/up") );
+  up->setPixmap( Resource::loadPixmap("up") );
   down = new QPushButton(this);
-  down->setPixmap( Resource::loadPixmap("inline/down") );
+  down->setPixmap( Resource::loadPixmap("down") );
   lpn1->addWidget(add);
   lpn1->addWidget(del);
   lpn1->addStretch(1);
