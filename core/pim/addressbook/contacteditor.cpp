@@ -47,6 +47,8 @@
 #include <qaction.h>
 #include <qiconset.h> 
 
+#include <assert.h>
+
 static inline bool containsAlphaNum( const QString &str );
 static inline bool constainsWhiteSpace( const QString &str );
 
@@ -94,6 +96,25 @@ void ContactEditor::init() {
 	slChooserNames    = OContactFields::untrphonefields( false );
 	slDynamicEntries  = OContactFields::untrdetailsfields( false );
 	trlDynamicEntries = OContactFields::trdetailsfields( false );
+
+	// Ok, we have to remove elements from the list of dynamic entries
+	// which are now stored in special (not dynamic) widgets..
+	// Otherwise we will get problems with field assignments! (se)
+	slDynamicEntries.remove("Anniversary");
+	slDynamicEntries.remove("Birthday");
+	slDynamicEntries.remove("Gender");
+
+	// The same with translated fields.. But I will
+	// use the translation map to avoid mismatches..
+	QMap<int, QString> translMap = OContactFields::idToTrFields();
+	trlDynamicEntries.remove( translMap[Qtopia::Anniversary] );
+	trlDynamicEntries.remove( translMap[Qtopia::Birthday] );
+	trlDynamicEntries.remove( translMap[Qtopia::Gender] );
+
+	// Last Check to be sure..
+	assert( slDynamicEntries.count() == trlDynamicEntries.count() );
+	assert( slChooserNames.count() == trlChooserNames.count() );
+
 	for (i = 0; i < slChooserNames.count(); i++)
 	  slChooserValues.append("");
 
@@ -1176,6 +1197,9 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	QStringList::ConstIterator it;
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries.begin(); itLE.current()/* != slDynamicEntries.end()*/; ++it, ++itLE) {
+
+		qWarning(" Filling dynamic Field: %s", (*it).latin1() );
+
 		if ( *it ==  "Department"  )
 			(*itLE)->setText( ent.department() );
 
@@ -1197,8 +1221,10 @@ void ContactEditor::setEntry( const OContact &entry ) {
 		if ( *it == "Spouse" )
 			(*itLE)->setText( ent.spouse() );
 
-		if ( *it == "Nickname" )
+		if ( *it == "Nickname" ){
+			qWarning("**** Nichname: %s", ent.nickname().latin1() );
 			(*itLE)->setText( ent.nickname() );
+		}
 
 		if ( *it == "Children" )
 			(*itLE)->setText( ent.children() );
