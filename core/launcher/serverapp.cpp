@@ -750,7 +750,7 @@ void ServerApplication::restart()
         prepareForTermination( true );
         for ( int fd = 3; fd < 100; fd++ )
         close( fd );
-        execl( ( qpeDir() + "/bin/qpe" ).latin1(), "qpe", 0 );
+        execl( ( qpeDir() + "/bin/qpe" ).local8Bit(), "qpe", NULL );
         exit( 1 );
 #endif
     }
