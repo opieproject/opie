@@ -23,6 +23,7 @@
 
 
 #include <qwidget.h>
+#include <qpushbutton.h>
 #include <qframe.h>
 #include <qpixmap.h>
 #include <qguardedptr.h>
