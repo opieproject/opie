@@ -1,4 +1,4 @@
-Files: bin/networksetup apps/Settings/networksetup.desktop pics/Network plugins/networksetup/* pics/networksetup $QTDIR/lib/libinterfaces.so.1.0.0 $QTDIR/lib/libinterfaces.so.1.0 $QTDIR/lib/libinterfaces.so.1 $OPIEDIR/bin/changedns.sh $OPIEDIR/bin/getprofile.sh 
+Files: bin/networksetup apps/Settings/networksetup.desktop pics/Network plugins/networksetup/* pics/networksetup $QTDIR/lib/libinterfaces.so.1.0.0 $QTDIR/lib/libinterfaces.so.1.0 $QTDIR/lib/libinterfaces.so.1 $OPIEDIR/bin/changedns $OPIEDIR/bin/getprofile
 Priority: optional
 Section: opie/settings
 Maintainer: Ben Meyer <meyerb@sharpsec.com> 
