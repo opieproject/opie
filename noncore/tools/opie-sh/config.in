@@ -1,4 +1,4 @@
   config OPIE-SH
     boolean "opie-sh (qdialog frontend allows you to write dialogs from shell scripts)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) 

@@ -5,7 +5,7 @@ HEADERS		= remotetab.h learntab.h configtab.h topgroup.h dvdgroup.h channelgroup
 SOURCES		=remote.cpp remotetab.cpp learntab.cpp configtab.cpp topgroup.cpp dvdgroup.cpp channelgroup.cpp vcrgroup.cpp buttondialog.cpp topgroupconf.cpp dvdgroupconf.cpp channelgroupconf.cpp vcrgroupconf.cpp mainview.cpp recorddialog.cpp helptab.cpp
 INCLUDEPATH	+=$(OPIEDIR)/include
 DEPENDPATH	+=$(OPIEDIR)/include
-LIBS		+=-lqpe -lopie
+LIBS		+=-lqpe -lopiecore2
 TARGET          = remote
 
 include ( $(OPIEDIR)/include.pro )

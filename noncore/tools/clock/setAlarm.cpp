@@ -32,6 +32,7 @@
 #include <qbuttongroup.h>
 #include <qcheckbox.h>
 
+using namespace Opie::Ui;
 Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
@@ -209,7 +210,7 @@ void Set_Alarm::slotChangemp3CkeckBox(bool b) {
         QStringList text;
         text << "audio/*";
         map.insert(tr("Audio"), text );
-        QString str = Opie::OFileDialog::getOpenFileName( 2,"/", QString::null, map);//,"", "*", this );
+        QString str = OFileDialog::getOpenFileName( 2,"/", QString::null, map);//,"", "*", this );
 //        QString str = Opie::OFileDialog::getOpenFileName( 2,"/");//,"", "*", this );
         if(!str.isEmpty() ) {
             qDebug(str);

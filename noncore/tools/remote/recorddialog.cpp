@@ -16,6 +16,8 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "recorddialog.h"
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 RecordDialog::RecordDialog(QWidget *parent, const char *name)
     :QDialog(parent, name)
 {
@@ -49,9 +51,9 @@ void RecordDialog::retPressed()
 
 	if(where == 0)
 	{
-		connect(record, SIGNAL(receivedStdout(OProcess*,char*,int)), this, SLOT(incoming(OProcess*,char*,int)) );
-		connect(record, SIGNAL(receivedStderr(OProcess*,char*,int)), this, SLOT(incoming(OProcess*,char*,int)) );
-		connect(record, SIGNAL(processExited(OProcess*)), this, SLOT(done(OProcess*)) );
+		connect(record, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)), this, SLOT(incoming(Opie::Core::OProcess*,char*,int)) );
+		connect(record, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)), this, SLOT(incoming(Opie::Core::OProcess*,char*,int)) );
+		connect(record, SIGNAL(processExited(Opie::Core::OProcess*)), this, SLOT(done(Opie::Core::OProcess*)) );
 		printf("RecordDialog::retPressed: starting irrecord\n");
 		QString file = "/tmp/" + input->text();
 		*record<<"irrecord"<<file.latin1();

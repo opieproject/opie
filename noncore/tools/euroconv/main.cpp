@@ -1,5 +1,7 @@
 /****************************************************************************
  *
+using namespace Opie::Core;
+using namespace Opie::Core;
  * File:        main.cpp
  *
  * Description: main file for OPIE Euroconv aapp
@@ -18,7 +20,7 @@
 #include "calcdisplay.h"
 #include "calckeypad.h"
 
-#include <opie/oapplicationfactory.h>
+#include <opie2/oapplicationfactory.h>
 
 struct Layout : QVBox{
     static QString appName() { return QString::fromLatin1("euroconv"); }

@@ -27,7 +27,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include <stdio.h>
 
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 
 class RecordDialog : public QDialog
 {
@@ -36,12 +36,12 @@ public:
 	RecordDialog(QWidget *parent=0, const char *name=0);
 public slots:
 	void retPressed();
-	void incoming(OProcess *proc, char *buffer, int len);
-	void done(OProcess *proc);
+	void incoming(Opie::Core::OProcess *proc, char *buffer, int len);
+	void done(Opie::Core::OProcess *proc);
 private:
 	QTextView *output;
 	QLineEdit *input;
-	OProcess *record;
+	Opie::Core::OProcess *record;
 	int where;
 };
 

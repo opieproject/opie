@@ -56,6 +56,7 @@
 const double deg2rad = 0.017453292519943295769; // pi/180
 const int sw_prec = 2;
 
+using namespace Opie::Ui;
 void startPlayer()
 {
   Config config( "qpe" );
@@ -145,7 +146,7 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
 
   alarmBtn->setText( tr( "Set Alarm" ) );
 
-  Opie::OClickableLabel *click = new Opie::OClickableLabel( controls, "label" );
+  OClickableLabel *click = new Opie::Ui::OClickableLabel( controls, "label" );
   click->setText( tr( "Set date and time." ) );
   gl->addMultiCellWidget( click, 3, 3, 0, 2, AlignHCenter );
   connect( click, SIGNAL( clicked() ), this, SLOT( slotAdjustTime() ) );
