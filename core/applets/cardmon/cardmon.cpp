@@ -160,12 +160,10 @@ void CardMonitor::cardMessage( const QCString &msg, const QByteArray & ) {
     if ( msg == "stabChanged()" ) {
        // qDebug("Pcmcia: stabchanged");
             getStatusPcmcia();
-        }
     } else if ( msg == "mtabChanged()" ) {
         qDebug("CARDMONAPPLET: mtabchanged");
             getStatusSd();
         }
-    }
 }
 
 bool CardMonitor::getStatusPcmcia( int showPopUp ) {
