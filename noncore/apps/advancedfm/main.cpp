@@ -1,5 +1,7 @@
 
 /***************************************************************************
+using namespace Opie::Core;
+using namespace Opie::Core;
                           main.cpp  -  description
                              -------------------
     begin                : March 10, 2002
@@ -12,22 +14,9 @@
  ***************************************************************************/
 
 #include "advancedfm.h"
-
-#ifdef NOQUICKLAUNCH
-
-#include <qpe/qpeapplication.h>
-
-int main(int argc, char *argv[])
-{
-    QPEApplication a(argc, argv);
-
-    AdvancedFm advencedFm;
-    a.showMainWidget( &advencedFm);
-    return a.exec();
-}
-#else
 #include <opie2/oapplicationfactory.h>
+
+using namespace Opie::Core;
 
 OPIE_EXPORT_APP( OApplicationFactory<AdvancedFm> )
 
-#endif

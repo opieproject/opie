@@ -30,7 +30,6 @@
 #include <qtimer.h>
 #include <qpixmap.h>
 
-using Opie::OSplitter;
 
 class QVBoxLayout;
 class QHBoxLayout;
@@ -96,7 +95,7 @@ protected slots:
 
 protected:
 
-   OSplitter *TabWidget;
+   Opie::Ui::OSplitter *TabWidget;
    QCopChannel * channel;
    QPixmap unknownXpm;
    int whichTab;
@@ -181,8 +180,8 @@ private:
    void findFile(const QString &);
 
 private slots:
-   void processEnded(OProcess *);
-   void oprocessStderr(OProcess *, char *, int);
+   void processEnded(Opie::Core::OProcess *);
+   void oprocessStderr(Opie::Core::OProcess *, char *, int);
    void gotoCustomDir(const QString &);
    void qcopReceive(const QCString&, const QByteArray&);
    void setDocument(const QString &);

@@ -32,6 +32,8 @@
 #include <fcntl.h>
 
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 void AdvancedFm::doDirChange() {
    QString pathItem = CurrentView()->currentItem()->text(0);
    if( pathItem == "../") {
@@ -702,10 +704,10 @@ void AdvancedFm::startProcess(const QString & cmd) {
   QStringList command;
   OProcess *process;
   process = new OProcess();
-  connect(process, SIGNAL(processExited(OProcess*)),
+  connect(process, SIGNAL(processExited(Opie::Core::OProcess*)),
           this, SLOT( processEnded(OProcess*)));
 
-  connect(process, SIGNAL( receivedStderr(OProcess*,char*,int)),
+  connect(process, SIGNAL( receivedStderr(Opie::Core::OProcess*,char*,int)),
             this, SLOT( oprocessStderr(OProcess*,char*,int)));
 
   command << "/bin/sh";

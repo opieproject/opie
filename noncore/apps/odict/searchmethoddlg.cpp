@@ -29,8 +29,7 @@
 #include <qlineedit.h>
 #include <qdir.h>
 
-using Opie::OFileDialog;
-using Opie::OFileSelector;
+using namespace Opie::Ui;
 
 SearchMethodDlg::SearchMethodDlg(QWidget *parent, const char *name, bool modal, QString itemname) : QDialog(parent, name, modal)
 {

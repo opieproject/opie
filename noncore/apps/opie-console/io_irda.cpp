@@ -1,6 +1,8 @@
 
 #include "io_irda.h"
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 IOIrda::IOIrda( const Profile &config ) : IOSerial( config ) {
     m_attach = 0;
 }
@@ -27,7 +29,7 @@ bool IOIrda::open() {
     m_attach = new OProcess();
     *m_attach << "irattach /dev/ttyS2 -s";
 
-    connect( m_attach, SIGNAL( processExited(OProcess*) ),
+    connect( m_attach, SIGNAL( processExited(Opie::Core::OProcess*) ),
             this, SLOT( slotExited(OProcess*) ) );
 
     if ( m_attach->start() ) {

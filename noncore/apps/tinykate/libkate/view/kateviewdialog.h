@@ -184,7 +184,7 @@ public:
   QFont getFont ( ) { return myFont; };
 
   private:
-  Opie::OFontSelector *m_fontselect;
+  Opie::Opie::Ui::OFontSelector *m_fontselect;
 //    class KFontChooser *m_fontchooser;
     QFont myFont;
 

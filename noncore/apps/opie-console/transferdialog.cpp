@@ -15,6 +15,7 @@
 
 #include "transferdialog.h"
 
+using namespace Opie::Ui;
 TransferDialog::TransferDialog(QWidget *parent, MainWindow *mainwindow, const char *)
 : QDialog(parent, 0l, false), m_win(mainwindow)
 {
@@ -98,7 +99,7 @@ void TransferDialog::slotFilename()
 {
     QString f;
 
-    f = Opie::OFileDialog::getOpenFileName(0);
+    f = OFileDialog::getOpenFileName(0);
     if(!f.isNull()) filename->setText(f);
 }
 

@@ -1,4 +1,5 @@
 /***************************************************************************
+
                              main.cpp
                              -------------------
     begin                : November 2002
@@ -17,6 +18,8 @@
 #include <opie2/oapplicationfactory.h>
 
 #include "tinykate.h"
+
+using namespace Opie::Core;
 
 OPIE_EXPORT_APP( OApplicationFactory<TinyKate> )
 

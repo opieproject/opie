@@ -50,7 +50,7 @@ protected:
     void open(const QString&);
 private:
     QString currentFileName;
-    OTabWidget *tabwidget;
+    Opie::Ui::OTabWidget *tabwidget;
     KTextEditor::View *currentView;
     bool shutDown;
 

@@ -47,6 +47,8 @@
 #include <opie2/ofontselector.h>
 
 
+using namespace Opie::Ui;
+using namespace Opie::Ui;
 SearchDialog::SearchDialog( QWidget *parent, QStringList &searchFor, QStringList &replaceWith, int flags )
   : KDialogBase( parent, 0L, true, i18n( "Find Text" ), Ok | Cancel, Ok )
   , m_replace( 0L )

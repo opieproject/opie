@@ -15,6 +15,8 @@
 
 #include "senderui.h"
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 SenderUI::SenderUI()
     : Sender() {
 

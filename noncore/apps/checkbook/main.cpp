@@ -28,6 +28,8 @@
 
 #include <opie2/oapplicationfactory.h>
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 #include "mainwindow.h"
 
 OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )

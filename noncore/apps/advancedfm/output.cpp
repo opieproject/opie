@@ -16,6 +16,8 @@
 #include <errno.h>
 
 /* XPM */
+using namespace Opie::Core;
+using namespace Opie::Core;
 static char * filesave_xpm[] = {
 "16 16 78 1",
 "   c None",
@@ -141,13 +143,13 @@ Output::Output( const QStringList commands, QWidget* parent,  const char* name, 
 
     proc = new OProcess();
 
-    connect(proc, SIGNAL(processExited(OProcess*)),
+    connect(proc, SIGNAL(processExited(Opie::Core::OProcess*)),
             this, SLOT( processFinished()));
 
-    connect(proc, SIGNAL(receivedStdout(OProcess*,char*,int)),
+    connect(proc, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
             this, SLOT(commandStdout(OProcess*,char*,int)));
 
-    connect(proc, SIGNAL(receivedStderr(OProcess*,char*,int)),
+    connect(proc, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),
             this, SLOT(commandStderr(OProcess*,char*,int)));
 
 //     connect( , SIGNAL(received(const QByteArray&)),

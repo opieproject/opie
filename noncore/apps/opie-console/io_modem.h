@@ -67,7 +67,7 @@ private:
     Profile m_profile;
 
 private slots:
-    void slotExited(OProcess* proc);
+    void slotExited(Opie::Core::OProcess* proc);
 
 };
 

@@ -27,6 +27,7 @@
 #include <katedocument.h>
 #include <kglobal.h>
 
+using namespace Opie::Ui;
 TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     QMainWindow( parent, name, f )
 {
@@ -166,7 +167,7 @@ TinyKate::~TinyKate( )
 
 void TinyKate::slotOpen( )
 {
-    QString filename = Opie::OFileDialog::getOpenFileName( OFileSelector::EXTENDED_ALL,
+    QString filename = OFileDialog::getOpenFileName( OFileSelector::EXTENDED_ALL,
                                                 QString::null);
   if (!filename.isEmpty()) {
     open(filename);
@@ -261,8 +262,8 @@ void TinyKate::slotSaveAs() {
   if (currentView==0) return;
   KateDocument *kd = (KateDocument*) currentView->document();
 
-  QString filename= Opie::OFileDialog::getSaveFileName(OFileSelector::EXTENDED_ALL,
-                                                QString::null);
+  QString filename= OFileDialog::getSaveFileName(OFileSelector::EXTENDED_ALL,
+                                                 QString::null);
   if (!filename.isEmpty()) {
     qDebug("saving file "+filename);
     QFileInfo fi(filename);

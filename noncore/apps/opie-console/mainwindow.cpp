@@ -24,6 +24,7 @@
 #include "script.h"
 
 
+using namespace Opie::Ui;
 MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(parent, name, WStyle_ContextHelp)  {
     KeyTrans::loadAll();
     for (int i = 0; i < KeyTrans::count(); i++ ) {
@@ -332,7 +333,7 @@ void MainWindow::slotSaveScript() {
         QStringList text;
         text << "text/plain";
         map.insert(tr("Script"), text );
-        QString filename = Opie::OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
+        QString filename = OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
         if (!filename.isEmpty()) {
             QFileInfo info(filename);
             if (info.extension(FALSE) != "script")
@@ -705,7 +706,7 @@ void MainWindow::slotSaveHistory() {
     QStringList text;
     text << "text/plain";
     map.insert(tr("History"), text );
-    QString filename = Opie::OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
+    QString filename = OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
     if (filename.isEmpty() ) return;
 
     QFileInfo info(filename);

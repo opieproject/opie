@@ -1,6 +1,8 @@
 
 #include "io_bt.h"
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 IOBt::IOBt( const Profile &config ) : IOSerial( config ) {
     m_attach = 0;
 }
@@ -36,7 +38,7 @@ bool IOBt::open() {
 
         // then start hcid, then rcfomm handling (m_mac)
 
-        connect( m_attach, SIGNAL( processExited(OProcess*) ),
+        connect( m_attach, SIGNAL( processExited(Opie::Core::OProcess*) ),
                  this, SLOT( slotExited(OProcess*) ) );
 
         if ( m_attach->start() ) {

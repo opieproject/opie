@@ -9,6 +9,7 @@
 #include "metafactory.h"
 #include "profileeditordialog.h"
 
+using namespace Opie::Ui;
 namespace {
     void setCurrent( const QString& str, QComboBox* bo ) {
         for (int i = 0; i < bo->count(); i++ ) {

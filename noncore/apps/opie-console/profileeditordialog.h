@@ -53,7 +53,7 @@ private:
     QWidget *m_tabCon, *m_tabTerm, *m_tabKey;
     ProfileDialogWidget* m_con, *m_term, *m_key;
     QHBoxLayout *m_layCon, *m_layTerm, *m_layKey;
-    OTabWidget *tabWidget;
+    Opie::Ui::OTabWidget *tabWidget;
     QWidget *tabprof;
     int m_showconntab;
 };

@@ -23,7 +23,7 @@
 #include <qwidgetstack.h>
 #ifdef USEQPE
 #include <qmenubar.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #endif
 #include <qmenubar.h>
 #include <qtoolbar.h>

@@ -35,12 +35,12 @@ public:
 
 protected:
     QGridLayout* OutputLayout;
-    OProcess *proc;
+    Opie::Core::OProcess *proc;
 protected slots:
     void saveOutput();
-    void commandStdout(OProcess*, char *, int);
+    void commandStdout(Opie::Core::OProcess*, char *, int);
     void commandStdin(const QByteArray &);
-    void commandStderr(OProcess*, char *, int);
+    void commandStderr(Opie::Core::OProcess*, char *, int);
     void processFinished();
   private:
     QString cmmd;

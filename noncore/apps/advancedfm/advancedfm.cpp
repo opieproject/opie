@@ -33,6 +33,8 @@
 #include <sys/vfs.h>
 #include <mntent.h>
 
+using namespace Opie::Ui;
+
 #ifdef NOQUICKLAUNCH
 AdvancedFm::AdvancedFm( )
 #else

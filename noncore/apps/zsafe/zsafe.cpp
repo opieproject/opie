@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.12 2004-03-02 12:21:23 alwin Exp $
+** $Id: zsafe.cpp,v 1.13 2004-03-13 22:42:01 zecke Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -30,8 +30,7 @@
 #ifndef NO_OPIE
 #include <opie2/ofiledialog.h>
 
-using Opie::OFileDialog;
-using Opie::OFileSelector;
+using namespace Opie::Ui;
 #else
 #include "scqtfileedit.h"
 #endif

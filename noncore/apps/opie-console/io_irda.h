@@ -39,10 +39,10 @@ public slots:
     virtual void reload(const Profile &);
 
 private:
-    OProcess *m_attach;
+    Opie::Core::OProcess *m_attach;
 
 private slots:
-    void slotExited(OProcess* proc);
+    void slotExited(Opie::Core::OProcess* proc);
 
 };
 

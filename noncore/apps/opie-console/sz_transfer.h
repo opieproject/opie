@@ -27,12 +27,12 @@ public slots:
     void sent();
 
 private slots:
-    void SzReceivedStdout(OProcess *, char *, int);
-    void SzReceivedStderr(OProcess *, char *, int);
+    void SzReceivedStdout(Opie::Core::OProcess *, char *, int);
+    void SzReceivedStderr(Opie::Core::OProcess *, char *, int);
     void receivedStdin(const QByteArray &);
 
 private:
-    OProcess *proc;
+    Opie::Core::OProcess *proc;
     Type m_t;
 
 };

@@ -6,6 +6,8 @@
 
 
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 SzTransfer::SzTransfer(Type t, IOLayer *layer) : FileTransferLayer(layer), m_t(t)
 {
 }
@@ -25,11 +27,11 @@ void SzTransfer::sendFile(const QString& file) {
     proc = new OProcess;
     *proc << "sz";
     *proc << "-v" << "-v" << "-b" << file;
-    connect(proc, SIGNAL(processExited(OProcess*)),
+    connect(proc, SIGNAL(processExited(Opie::Core::OProcess*)),
             this, SLOT(sent()));
-    connect(proc, SIGNAL(receivedStdout(OProcess*,char*,int)),
+    connect(proc, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
             this, SLOT(SzReceivedStdout(OProcess*,char*,int)));
-    connect(proc, SIGNAL(receivedStderr(OProcess*,char*,int)),
+    connect(proc, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),
             this, SLOT(SzReceivedStderr(OProcess*,char*,int)));
     connect(layer(), SIGNAL(received(const QByteArray&)),
             this, SLOT(receivedStdin(const QByteArray&)));

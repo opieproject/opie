@@ -35,7 +35,7 @@
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpemessagebox.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpe/resource.h>
 
 #include <qmenubar.h>

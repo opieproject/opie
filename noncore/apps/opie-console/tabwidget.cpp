@@ -1,6 +1,7 @@
 
 #include "tabwidget.h"
 
+using namespace Opie::Ui;
 TabWidget::TabWidget( QWidget* parent, const char* name )
     : OTabWidget( parent, name ) {
     connect(this, SIGNAL( currentChanged(QWidget*) ),

@@ -35,7 +35,6 @@
 #include <qdialog.h>
 #include <qlistview.h>
 
-using Opie::OTabWidget;
 
 class CBInfo;
 class Graph;
@@ -73,7 +72,7 @@ class Checkbook : public QDialog
         TranInfoList *tranList;
         Cfg *_pCfg;
 
-        OTabWidget *mainWidget;
+        Opie::Ui::OTabWidget *mainWidget;
         void        loadCheckbook();
         void        adjustBalance();
 

@@ -16,7 +16,7 @@
 #include "searchresults.h"
 #include "bac.h"
 
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qmenubar.h>
 //#include <opie2/colorpopupmenu.h>
 #include <qpe/qpeapplication.h>

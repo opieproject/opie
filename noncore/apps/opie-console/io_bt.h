@@ -41,10 +41,10 @@ public slots:
     virtual void reload(const Profile &);
 
 private:
-    OProcess *m_attach;
+    Opie::Core::OProcess *m_attach;
     QString m_mac;
 private slots:
-    void slotExited(OProcess* proc);
+    void slotExited(Opie::Core::OProcess* proc);
 
 };
 

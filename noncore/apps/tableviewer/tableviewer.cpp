@@ -30,7 +30,7 @@
 /* QPE includes */
 #include <qpe/fileselector.h>
 #include <qpe/resource.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 
 /* QTE includes */
 #include <qmenubar.h>

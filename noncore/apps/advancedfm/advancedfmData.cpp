@@ -27,6 +27,7 @@
 #include <sys/utsname.h>
 
 
+using namespace Opie::Ui;
 void AdvancedFm::init() {
 #if defined(QT_QWS_OPIE)
     qDebug("<<<<<<<<<<<<<<<<<<<<<<<< OPIE!!!");

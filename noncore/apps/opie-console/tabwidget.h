@@ -9,7 +9,7 @@
  * This is our central tab widget
  * we can add sessions here
  */
-class TabWidget : public OTabWidget{
+class TabWidget : public Opie::Ui::OTabWidget{
     Q_OBJECT
 public:
     TabWidget(QWidget *parent, const char* name );

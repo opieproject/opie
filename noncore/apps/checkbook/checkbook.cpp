@@ -58,6 +58,7 @@
 #define COL_BAL         6
 
 // --- Checkbook --------------------------------------------------------------
+using namespace Opie::Ui;
 Checkbook::Checkbook( QWidget *parent, CBInfo *i, Cfg *cfg )
     : QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {

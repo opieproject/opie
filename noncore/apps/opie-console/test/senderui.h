@@ -8,7 +8,7 @@
 class IOSerial;
 class FileTransfer;
 class QSocketNotifier;
-class OProcess;
+namespace Opie {namespace Core {class Opie::Core::OProcess;}}
 class SenderUI : public Sender {
     Q_OBJECT
 public:
@@ -27,7 +27,7 @@ private:
     FileTransfer* sz;
     int m_fd;
     QSocketNotifier* m_sock;
-    OProcess* m_proc;
+    Opie::Core::OProcess* m_proc;
 };
 
 

@@ -20,4 +20,6 @@
 #include "oxygen.h"
 
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<Oxygen> )

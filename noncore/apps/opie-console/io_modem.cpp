@@ -3,6 +3,8 @@
 
 #include "dialer.h"
 
+using namespace Opie::Core;
+using namespace Opie::Core;
 IOModem::IOModem( const Profile &profile )
 	: IOSerial( profile ) {
 	m_profile = profile;
