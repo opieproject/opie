@@ -258,7 +258,7 @@
     </message>
     <message>
         <source>naut. mi</source>
-        <translation type="unfinished">milles naut.</translation>
+        <translation>milles naut</translation>
     </message>
     <message>
         <source>oz</source>
@@ -318,11 +318,11 @@
     </message>
     <message>
         <source>tblspoon</source>
-        <translation type="unfinished">cuil. à soupe</translation>
+        <translation>cuil. à soupe</translation>
     </message>
     <message>
         <source>teaspoons</source>
-        <translation type="unfinished">cuil. à café</translation>
+        <translation>cuil. à café</translation>
     </message>
     <message>
         <source>tonnes</source>
