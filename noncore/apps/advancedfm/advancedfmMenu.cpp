@@ -654,7 +654,7 @@ void AdvancedFm::copySameDir() {
         QFile f(destFile);
         if( f.exists()) {
           switch (QMessageBox::warning(this,tr("Delete"),
-                  destFile+tr(" already exists\nDo you really want to delete it?"),
+                  destFile+tr(" already exists.\nDo you really want to delete it?"),
                   tr("Yes"),tr("No"),0,0,1) ) {
           case 0:
 
@@ -693,7 +693,7 @@ void AdvancedFm::copySameDir() {
         QFile f(destFile);
         if( f.exists()) {
           switch ( QMessageBox::warning(this,tr("Delete"),
-                   destFile+tr(" already exists\nDo you really want to delete it?"),
+                   destFile+tr(" already exists.\nDo you really want to delete it?"),
                    tr("Yes"),tr("No"),0,0,1) ) {
           case 0: 
             f.remove();
