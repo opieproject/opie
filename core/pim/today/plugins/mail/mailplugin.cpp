@@ -1,8 +1,7 @@
 /*
  * mailplugin.cpp
  *
- * copyright   : (c) 2002,2003,2004 by Maximilian Reiß
- * email       : harlekin@handhelds.org
+ * copyright   : (c) 2002,2003,2004 by Maximilian Reiï¿½ * email       : harlekin@handhelds.org
  *
  */
 /***************************************************************************
@@ -33,7 +32,7 @@ double MailPlugin::versionNumber() const {
 }
 
 QString MailPlugin::pixmapNameWidget() const {
-    return "opiemail/desktopicon";
+    return "mail/desktopicon";
 }
 
 QWidget* MailPlugin::widget( QWidget * wid ) {
