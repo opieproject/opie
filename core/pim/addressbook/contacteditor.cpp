@@ -65,10 +65,13 @@ ContactEditor::ContactEditor(	const OContact &entry,
 				WFlags fl )
 	: QDialog( parent, name, TRUE, fl ),
 	  m_personalView ( false )
+	  
 {
 
 	init();
 	setEntry( entry );
+
+	cmbDefaultEmail = 0;
 }
 
 ContactEditor::~ContactEditor() {
@@ -631,7 +634,7 @@ void ContactEditor::defaultEmailChanged(int i){
 void ContactEditor::chooserChange( const QString &textChanged, int index, QLineEdit *inputWid ) {
 
         if (slChooserNames[index] == "Default Email"){         
-	  delete cmbDefaultEmail;
+	  if (cmbDefaultEmail) delete cmbDefaultEmail;
 	  cmbDefaultEmail = new QComboBox(inputWid->parentWidget());	   
 	  cmbDefaultEmail->setGeometry(inputWid->frameGeometry());        
 	  cmbDefaultEmail->insertStringList(ent.emailList());
