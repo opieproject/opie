@@ -52,17 +52,17 @@ SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags )
     QVBoxLayout *lay = new QVBoxLayout( this );
     OTabWidget *tab = new OTabWidget( this, "tabwidget", OTabWidget::Global );
     lay->addWidget( tab );
-    tab->addTab( new MemoryInfo( tab ), "sysinfo/memorytabicon.png", tr("Memory") );
+    tab->addTab( new MemoryInfo( tab ), "sysinfo/memorytabicon", tr("Memory") );
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
-    tab->addTab( new StorageInfo( tab ), "sysinfo/storagetabicon.png", tr("Storage") );
+    tab->addTab( new StorageInfo( tab ), "sysinfo/storagetabicon", tr("Storage") );
 #endif
-    tab->addTab( new LoadInfo( tab ), "sysinfo/cputabicon.png", tr("CPU") );
+    tab->addTab( new LoadInfo( tab ), "sysinfo/cputabicon", tr("CPU") );
     if ( advanced )
     {
-        tab->addTab( new ProcessInfo( tab ), "sysinfo/processtabicon.png", tr("Process") );
-        tab->addTab( new ModulesInfo( tab ), "sysinfo/moduletabicon.png", tr("Modules") );
+        tab->addTab( new ProcessInfo( tab ), "sysinfo/processtabicon", tr("Process") );
+        tab->addTab( new ModulesInfo( tab ), "sysinfo/moduletabicon", tr("Modules") );
     }
-    tab->addTab( new VersionInfo( tab ), "sysinfo/versiontabicon.png", tr("Version") );
+    tab->addTab( new VersionInfo( tab ), "sysinfo/versiontabicon", tr("Version") );
 
     tab->setCurrentTab( tr( "Memory" ) );
 }
