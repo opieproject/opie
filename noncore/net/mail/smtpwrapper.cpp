@@ -113,12 +113,10 @@ mailimf_address_list *SMTPwrapper::parseAddresses(const QString&addr )
     }
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); it++ ) {
-        char *str = strdup( (*it).latin1() );
-        int err = mailimf_address_list_add_parse( addresses, str );
+        int err = mailimf_address_list_add_parse( addresses, (char*)(*it).latin1() );
         if ( err != MAILIMF_NO_ERROR ) {
             qDebug( "Error parsing" );
             qDebug( *it );
-            free( str );
         } else {
             qDebug( "Parse success! %s",(*it).latin1());
         }
@@ -196,7 +194,6 @@ mailmime *SMTPwrapper::buildTxtPart(const QString&str )
     mailmime_fields *fields;
     mailmime_content *content;
     mailmime_parameter *param;
-    char *txt = strdup( str.latin1() );
     int err;
 
     param = mailmime_parameter_new( strdup( "charset" ),
@@ -209,13 +206,13 @@ mailmime *SMTPwrapper::buildTxtPart(const QString&str )
     err = clist_append( content->ct_parameters, param );
     if ( err != MAILIMF_NO_ERROR ) goto err_free_content;
 
-    fields = mailmime_fields_new_encoding( MAILMIME_MECHANISM_8BIT );
+    fields = mailmime_fields_new_encoding(MAILMIME_MECHANISM_QUOTED_PRINTABLE);
     if ( fields == NULL ) goto err_free_content;
 
     txtPart = mailmime_new_empty( content, fields );
     if ( txtPart == NULL ) goto err_free_fields;
 
-    err = mailmime_set_body_text( txtPart, txt, strlen( txt ) );
+    err = mailmime_set_body_text( txtPart, (char*)str.data(), str.length() );
     if ( err != MAILIMF_NO_ERROR ) goto err_free_txtPart;
 
     return txtPart;     // Success :)
@@ -229,7 +226,6 @@ err_free_content:
 err_free_param:
     mailmime_parameter_free( param );
 err_free:
-    free( txt );
     qDebug( "buildTxtPart - error" );
 
     return NULL;        // Error :(
@@ -252,22 +248,20 @@ mailmime *SMTPwrapper::buildFilePart(const QString&filename,const QString&mimety
         name = strdup( tmp.latin1() );        // just filename
         file = strdup( filename.latin1() );   // full name with path
     }
-    char *mime = strdup( mimetype.latin1() );   // mimetype -e.g. text/plain
-
+    
     int disptype = MAILMIME_DISPOSITION_TYPE_ATTACHMENT;
     int mechanism = MAILMIME_MECHANISM_BASE64;
 
     if ( mimetype.startsWith( "text/" ) ) {
         param = mailmime_parameter_new( strdup( "charset" ),
                                         strdup( "iso-8859-1" ) );
-        disptype = MAILMIME_DISPOSITION_TYPE_INLINE;
         mechanism = MAILMIME_MECHANISM_QUOTED_PRINTABLE;
     }
 
     fields = mailmime_fields_new_filename(
                 disptype, name,
                 mechanism );
-    content = mailmime_content_new_with_str( mime );
+    content = mailmime_content_new_with_str( (char*)mimetype.latin1() );
     if (content!=0 && fields != 0) {
         if (param) {
             clist_append(content->ct_parameters,param);
@@ -285,7 +279,7 @@ mailmime *SMTPwrapper::buildFilePart(const QString&filename,const QString&mimety
         if (filename.length()>0) {
             err = mailmime_set_body_file( filePart, file );
         } else {
-            err = mailmime_set_body_text(filePart,strdup(TextContent.ascii()),TextContent.length());
+            err = mailmime_set_body_text(filePart,strdup(TextContent.data()),TextContent.length());
         }
         if (err != MAILIMF_NO_ERROR) {
             qDebug("Error setting body with file %s",file);
@@ -300,10 +294,6 @@ mailmime *SMTPwrapper::buildFilePart(const QString&filename,const QString&mimety
         }
         if (content) {
             mailmime_content_free( content );
-        } else {
-            if (mime) {
-                free( mime );
-            }
         }
         if (fields) {
             mailmime_fields_free( fields );
@@ -359,11 +349,8 @@ mailmime *SMTPwrapper::createMimeMail(const Mail &mail )
 
     mailmime_set_imf_fields( message, fields );
 
-    if (mail.getAttachments().count()==0) {
-        txtPart = buildTxtPart( mail.getMessage() );
-    } else {
-        txtPart = buildFilePart("","text/plain",mail.getMessage());
-    }
+    txtPart = buildTxtPart( mail.getMessage() );
+    
     if ( txtPart == NULL ) goto err_free_message;
 
     err = mailmime_smart_add_part( message, txtPart );
@@ -471,7 +458,6 @@ char *SMTPwrapper::getFrom( mailmime *mail )
 {
     /* no need to delete - its just a pointer to structure content */
     mailimf_field *ffrom = 0;
-    char*f = 0;
     ffrom = getField( mail->mm_data.mm_message.mm_fields, MAILIMF_FIELD_FROM );
     return getFrom(ffrom);
 }
@@ -494,61 +480,6 @@ SMTPaccount *SMTPwrapper::getAccount(const QString&name )
     }
 
     return NULL;
-}
-
-QString SMTPwrapper::getTmpFile() {
-    int num = 0;
-    QString unique;
-
-    QDir dir( "/tmp" );
-
-    QStringList list = dir.entryList( "opiemail-tmp-*" );
-
-    do {
-        unique.setNum( num++ );
-    } while ( list.contains( "opiemail-tmp-" + unique ) > 0 );
-
-    return "/tmp/opiemail-tmp-" + unique;
-}
-
-void SMTPwrapper::writeToFile(const QString&file, mailmime *mail )
-{
-    FILE *f;
-    int err, col = 0;
-
-    f = fopen( file.latin1(), "w" );
-    if ( f == NULL ) {
-        qDebug( "writeToFile: error opening file" );
-        return;
-    }
-
-    err = mailmime_write( f, &col, mail );
-    if ( err != MAILIMF_NO_ERROR ) {
-        fclose( f );
-        qDebug( "writeToFile: error writing mailmime" );
-        return;
-    }
-
-    fclose( f );
-}
-
-void SMTPwrapper::readFromFile(const QString&file, char **data, size_t *size )
-{
-
-    QFile msg_cache(file);
-    QString msg = "";
-    msg_cache.open(IO_ReadOnly);
-    char*message = new char[4096];
-    memset(message,0,4096);
-    while (msg_cache.readBlock(message,4095)>0) {
-         msg+=message;
-         memset(message,0,4096);
-    }
-    delete message;
-    *data = (char*)malloc(msg.length()+1*sizeof(char));
-    memset(*data,0,msg.length()+1);
-    memcpy(*data,msg.ascii(),msg.length());
-    *size=msg.length();
 }
 
 void SMTPwrapper::progress( size_t current, size_t maximum )
@@ -578,15 +509,23 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp )
         return;
     }
     from = data = 0;
-
-    QString file = getTmpFile();
-    writeToFile( file, mail );
-    readFromFile( file, &data, &size );
-    QFile f( file );
-    f.remove();
-
+    
+    mailmessage * msg = 0;
+    msg = mime_message_init(mail);
+    mime_message_set_tmpdir(msg,getenv( "HOME" ));
+    int r = mailmessage_fetch(msg,&data,&size);
+    mime_message_detach_mime(msg);
+    mailmessage_free(msg);
+    if (r != MAIL_NO_ERROR || !data) {
+        if (data) free(data);
+        qDebug("Error fetching mime...");
+        return;
+    }
+    QString tmp = data;
+    tmp.replace(QRegExp("\r+",true,false),"");
+    msg = 0;
     if (later) {
-        storeMail(data,size,"Outgoing");
+        storeMail((char*)tmp.data(),tmp.length(),"Outgoing");
         if (data) free( data );
         return;
     }
@@ -688,11 +627,11 @@ void SMTPwrapper::sendMail(const Mail&mail,bool later )
         sendProgress->show();
         sendProgress->setMaxMails(1);
         smtpSend( mimeMail,later,smtp);
-        mailmime_free( mimeMail );
         qDebug("Clean up done");
         sendProgress->hide();
         delete sendProgress;
         sendProgress = 0;
+        mailmime_free( mimeMail );
     }
 }
 
@@ -747,7 +686,7 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp)
 
     if (!smtp) return false;
 
-   QString localfolders = (QString) getenv( "HOME" ) + QString("/Applications/opiemail/localmail/");
+    QString localfolders = (QString) getenv( "HOME" ) + QString("/Applications/opiemail/localmail/");
     MBOXwrapper*wrap = new MBOXwrapper(localfolders);
     if (!wrap) {
         qDebug("memory error");
@@ -770,7 +709,6 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp)
         if (sendQueuedMail(wrap,smtp,mailsToSend.at(0))==0) {
             QMessageBox::critical(0,tr("Error sending mail"),
                 tr("Error sending queued mail - breaking"));
-
             returnValue = false;
             break;
         }

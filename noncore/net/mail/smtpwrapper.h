@@ -43,12 +43,9 @@ protected:
     void smtpSend( mailmime *mail,bool later, SMTPaccount *smtp );
     clist *createRcptList( mailimf_fields *fields );
     SMTPaccount *getAccount(const QString&from );
-    void writeToFile(const QString&file, mailmime *mail );
-    void readFromFile(const QString&file, char **data, size_t *size );
     
     static void storeMail(char*mail, size_t length, const QString&box);
     static QString mailsmtpError( int err );
-    static QString getTmpFile();
     static void progress( size_t current, size_t maximum );
     static void addRcpts( clist *list, mailimf_address_list *addr_list );
     static char *getFrom( mailmime *mail );
