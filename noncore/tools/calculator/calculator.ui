@@ -30,8 +30,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>271</width>
-            <height>404</height>
+            <width>389</width>
+            <height>562</height>
         </rect>
     </property>
     <property stdset="1">
@@ -72,56 +72,28 @@
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>0</number>
+            <number>2</number>
         </property>
-        <widget>
-            <class>QLCDNumber</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>LCD</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>1</hsizetype>
-                    <vsizetype>1</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>font</name>
-                <font>
-                    <pointsize>7</pointsize>
-                </font>
-            </property>
-            <property stdset="1">
-                <name>numDigits</name>
-                <number>15</number>
-            </property>
-            <property stdset="1">
-                <name>segmentStyle</name>
-                <enum>Flat</enum>
-            </property>
-        </widget>
         <widget>
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Layout4</cstring>
+                <cstring>Layout7</cstring>
             </property>
-            <hbox>
+            <vbox>
                 <property stdset="1">
                     <name>margin</name>
                     <number>0</number>
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>0</number>
+                    <number>6</number>
                 </property>
                 <widget>
-                    <class>QComboBox</class>
+                    <class>QLCDNumber</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>ComboBoxFunction</cstring>
+                        <cstring>LCD</cstring>
                     </property>
                     <property stdset="1">
                         <name>sizePolicy</name>
@@ -130,380 +102,445 @@
                             <vsizetype>1</vsizetype>
                         </sizepolicy>
                     </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
                     <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonMPlus</cstring>
+                        <name>font</name>
+                        <font>
+                            <pointsize>7</pointsize>
+                        </font>
                     </property>
                     <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
+                        <name>numDigits</name>
+                        <number>15</number>
                     </property>
                     <property stdset="1">
-                        <name>focusPolicy</name>
-                        <enum>TabFocus</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>M+</string>
+                        <name>segmentStyle</name>
+                        <enum>Flat</enum>
                     </property>
                 </widget>
                 <widget>
-                    <class>QPushButton</class>
+                    <class>QLayoutWidget</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>PushButtonMR</cstring>
+                        <cstring>Layout6</cstring>
                     </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
+                    <property>
+                        <name>layoutSpacing</name>
                     </property>
-                    <property stdset="1">
-                        <name>focusPolicy</name>
-                        <enum>TabFocus</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>MR</string>
-                    </property>
+                    <vbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>2</number>
+                        </property>
+                        <widget>
+                            <class>QLayoutWidget</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Layout4</cstring>
+                            </property>
+                            <hbox>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>0</number>
+                                </property>
+                                <widget>
+                                    <class>QComboBox</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>ComboBoxFunction</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>1</hsizetype>
+                                            <vsizetype>1</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonMPlus</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>focusPolicy</name>
+                                        <enum>TabFocus</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>M+</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonMR</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>focusPolicy</name>
+                                        <enum>TabFocus</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>MR</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonMC</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>focusPolicy</name>
+                                        <enum>TabFocus</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>MC</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonCE</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>focusPolicy</name>
+                                        <enum>TabFocus</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>CE</string>
+                                    </property>
+                                </widget>
+                            </hbox>
+                        </widget>
+                        <widget>
+                            <class>QLayoutWidget</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Layout10</cstring>
+                            </property>
+                            <property>
+                                <name>layoutSpacing</name>
+                            </property>
+                            <hbox>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>0</number>
+                                </property>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF6</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string></string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF7</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string></string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF8</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>log</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF9</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>focusPolicy</name>
+                                        <enum>TabFocus</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>ln</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF11</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>(</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF12</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>)</string>
+                                    </property>
+                                </widget>
+                            </hbox>
+                        </widget>
+                        <widget>
+                            <class>QLayoutWidget</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Layout11</cstring>
+                            </property>
+                            <property>
+                                <name>layoutSpacing</name>
+                            </property>
+                            <hbox>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>0</number>
+                                </property>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF1</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>focusPolicy</name>
+                                        <enum>TabFocus</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>sin</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF2</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>focusPolicy</name>
+                                        <enum>TabFocus</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>cos</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF3</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>focusPolicy</name>
+                                        <enum>TabFocus</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>tan</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF4</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>focusPolicy</name>
+                                        <enum>TabFocus</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string></string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF5</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>focusPolicy</name>
+                                        <enum>TabFocus</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>%</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>PushButtonF10</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>sizePolicy</name>
+                                        <sizepolicy>
+                                            <hsizetype>5</hsizetype>
+                                            <vsizetype>5</vsizetype>
+                                        </sizepolicy>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>focusPolicy</name>
+                                        <enum>TabFocus</enum>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>+/-</string>
+                                    </property>
+                                </widget>
+                            </hbox>
+                        </widget>
+                    </vbox>
                 </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonMC</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>focusPolicy</name>
-                        <enum>TabFocus</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>MC</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonCE</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>focusPolicy</name>
-                        <enum>TabFocus</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>CE</string>
-                    </property>
-                </widget>
-            </hbox>
-        </widget>
-        <widget>
-            <class>QLayoutWidget</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>Layout10</cstring>
-            </property>
-            <property>
-                <name>layoutSpacing</name>
-            </property>
-            <hbox>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>0</number>
-                </property>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF6</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string></string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF7</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string></string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF8</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>log</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF9</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>focusPolicy</name>
-                        <enum>TabFocus</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>ln</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF11</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>(</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF12</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>)</string>
-                    </property>
-                </widget>
-            </hbox>
-        </widget>
-        <widget>
-            <class>QLayoutWidget</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>Layout11</cstring>
-            </property>
-            <property>
-                <name>layoutSpacing</name>
-            </property>
-            <hbox>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>0</number>
-                </property>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF1</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>focusPolicy</name>
-                        <enum>TabFocus</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>sin</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF2</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>focusPolicy</name>
-                        <enum>TabFocus</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>cos</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF3</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>focusPolicy</name>
-                        <enum>TabFocus</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>tan</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF4</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>focusPolicy</name>
-                        <enum>TabFocus</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string></string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF5</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>focusPolicy</name>
-                        <enum>TabFocus</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>%</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButtonF10</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>5</hsizetype>
-                            <vsizetype>5</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>focusPolicy</name>
-                        <enum>TabFocus</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>+/-</string>
-                    </property>
-                </widget>
-            </hbox>
+            </vbox>
         </widget>
         <widget>
             <class>QLayoutWidget</class>
@@ -536,8 +573,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -565,8 +602,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -594,8 +631,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -623,8 +660,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -652,8 +689,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -681,8 +718,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -710,8 +747,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -739,8 +776,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -768,8 +805,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -797,8 +834,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -826,8 +863,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -855,8 +892,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -884,8 +921,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -913,8 +950,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -942,8 +979,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
@@ -971,8 +1008,8 @@
                     <property stdset="1">
                         <name>font</name>
                         <font>
-                            <family>adobe-helvetica</family>
-                            <pointsize>24</pointsize>
+                            <family>adobe-courier</family>
+                            <pointsize>16</pointsize>
                         </font>
                     </property>
                     <property stdset="1">
