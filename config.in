@@ -100,6 +100,7 @@ menu "Base"
   source libopie/config.in
   source core/opie-login/config.in
   source core/opiealarm/config.in
+  source core/tools/quicklauncher/config.in
   source core/launcher/config.in
   source core/qws/config.in
 endmenu
