@@ -44,10 +44,10 @@ AdvancedFm::AdvancedFm(QWidget *,const char*, WFlags )
    unknownXpm = Resource::loadImage("UnknownDocument").smoothScale(AppLnk::smallIconSize(),AppLnk::smallIconSize() );
 
 	 initConnections();
-	 populateView();
+	 rePopulate();
 	 channel = new QCopChannel( "QPE/Application/advancedfm", this );
 	 connect(channel,SIGNAL(received(const QCString&,const QByteArray&)),this,SLOT(qcopReceive(const QCString&,const QByteArray&)));
-	 switchToLocalTab();	 
+	 switchToLocalTab();
 }
 
 AdvancedFm::~AdvancedFm() {
@@ -374,91 +374,50 @@ void AdvancedFm::doAbout() {
 }
 
 void AdvancedFm::keyPressEvent( QKeyEvent *e) {
-//   owarn << "key " << e->key() << "" << oendl;
-//   if( CurrentView()->hasFocus()  )
-   {
-      switch ( e->key() ) {
-      case Key_Left:
-         upDir();
-         break;
-      case Key_Next:
-         break;
-      case Key_Return:
-      case Key_Enter:
-         navigateToSelected();
-         break;
-      case Key_Tab: {
-         setOtherTabCurrent();
-      }
-         break;
-      case Key_Delete:
-         del();
-         break;
-      case Key_A:
-         copyAs();
-         break;
-      case Key_C:
-         copy();
-         break;
-      case Key_E:
-         runThis();
-         break;
-      case Key_G:
-      {
-         currentPathCombo->lineEdit()->setFocus();
-      }
-      break;
-
-      case Key_H:
-         showHidden();
-         break;
-      case Key_I:
-         fileStatus();
-         break;
-      case Key_M:
-         move();
-         break;
-      case Key_N:
-         mkDir();
-         break;
-      case Key_P:
-         filePerms();
-         break;
-      case Key_R:
-         rn();
-         break;
-      case Key_U:
-         upDir();
-         break;
-      case Key_1:
-         switchToLocalTab();
-         break;
-      case Key_2:
-         switchToRemoteTab();
-         break;
-      case Key_3:
-         CFButtonPushed();
-         break;
-      case Key_4:
-         SDButtonPushed();
-         break;
-      case Key_5:
-         homeButtonPushed();
-         break;
-      case Key_6:
-         docButtonPushed();
-         break;
-      case Key_7:
-         break;
-      case Key_8:
-         break;
-      case Key_9:
-         break;
-      case Key_0:
-         break;
-      };
-      e->accept();
-   }
+		if(  e->key() ==  Key_Left ) 
+				upDir();
+		else if( e->key() == Key_Return || e->key() == Key_Enter)
+				navigateToSelected();
+		else if( e->key() == Key_Tab)
+				setOtherTabCurrent();
+		else if( e->key() == Key_Delete )
+				del();
+		else if( e->key() ==  Key_A)
+				copyAs();
+		else if( e->key() ==  Key_C)
+				copy();
+		else if( e->key() ==  Key_E)
+				runThis();
+		else if( e->key() ==  Key_G)
+				currentPathCombo->lineEdit()->setFocus();
+		else if( e->key() == Key_H )
+				showHidden();
+		else if( e->key() == Key_I)
+				fileStatus();
+		else if( e->key() == Key_M)
+				move();
+		else if( e->key() == Key_N )
+				mkDir();
+		else if( e->key() ==  Key_P)
+				filePerms();
+		else if( e->key() ==  Key_R )
+				rn();
+		else if( e->key() ==  Key_U )
+				upDir();
+		else if( e->key() ==  Key_1)
+				switchToLocalTab();
+		else if( e->key() == Key_2)
+				switchToRemoteTab();
+		else if( e->key() ==  Key_3)
+				CFButtonPushed();
+		else if( e->key() == Key_4)
+				SDButtonPushed();
+		else if( e->key() == Key_5 )
+				homeButtonPushed();
+		else if( e->key() ==  Key_6 )
+				docButtonPushed();
+		else
+				e->accept();
 }
 
 void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {

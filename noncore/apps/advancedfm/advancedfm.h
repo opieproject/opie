@@ -97,7 +97,7 @@ protected:
    QListView *CurrentView();
    QListView *OtherView();
    void setOtherTabCurrent();
-	 void changeTo(QString & dir);
+	 void changeTo(QString dir);
 
 //protected signals:
 //		void newPath(QString);
