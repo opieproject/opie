@@ -111,6 +111,10 @@ config EXPERIMENTAL
   bool "Prompt for development and/or incomplete items"
   default y
 
+config USE_CCACHE
+  bool "Use ccache, if available?"
+  default y
+
 endmenu
 
 menu "Configuration"
