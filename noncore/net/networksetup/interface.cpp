@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Interface::Interface(QObject * parent, const char * name, bool newSatus): QObject(parent, name), status(newSatus), attached(false), hardareName("Unknown"), moduleOwner(NULL), macAddress(""), ip("0.0.0.0"), broadcast(""), subnetMask("0.0.0.0"), dhcp(false){
+Interface::Interface(QObject * parent, const char * name, bool newSatus): QObject(parent, name), status(newSatus), attached(false), hardwareName("Unknown"), moduleOwner(NULL), macAddress(""), ip("0.0.0.0"), broadcast(""), subnetMask("0.0.0.0"), dhcp(false){
   refresh();
 }
 
@@ -43,7 +43,7 @@ void Interface::setAttached(bool isAttached){
  * emit updateInterface
  */ 
 void Interface::setHardwareName(QString name){
-  hardareName = name;
+  hardwareName = name;
   emit(updateInterface(this));
 };
  
@@ -66,7 +66,7 @@ void Interface::start(){
   if(true == status)
     return;
 
-  int ret = system(QString("%1 %2 up").arg(IFCONFIG).arg(interfaceName).latin1());
+  int ret = system(QString("%1 %2 up").arg(IFCONFIG).arg(this->name()).latin1());
   // See if it was successfull...
   if(ret != 0)
     return;
@@ -83,7 +83,7 @@ void Interface::stop(){
   if(false == status)
     return;
 	  
-  int ret = system(QString("%1 %2 down").arg(IFCONFIG).arg(interfaceName).latin1());
+  int ret = system(QString("%1 %2 down").arg(IFCONFIG).arg(this->name()).latin1());
   if(ret != 0)
     return;
 
@@ -119,8 +119,8 @@ bool Interface::refresh(){
     return true;
   }
 	
-  QString fileName = QString("/tmp/%1_ifconfig_info").arg(interfaceName);
-  int ret = system(QString("%1 %2 > %3").arg(IFCONFIG).arg(interfaceName).arg(fileName).latin1());
+  QString fileName = QString("/tmp/%1_ifconfig_info").arg(this->name());
+  int ret = system(QString("%1 %2 > %3").arg(IFCONFIG).arg(this->name()).arg(fileName).latin1());
   if(ret != 0){
     qDebug(QString("Interface: Ifconfig return value: %1, is not 0").arg(ret).latin1());
     return false;
@@ -177,7 +177,7 @@ bool Interface::refresh(){
     dhcpDirectory = "/var/run";
   
   // See if we have 
-  QString dhcpFile(QString(dhcpDirectory+"/dhcpcd-%1.info").arg(interfaceName));
+  QString dhcpFile(QString(dhcpDirectory+"/dhcpcd-%1.info").arg(this->name()));
   // If there is no DHCP information then exit now with no errors.
   if(!QFile::exists(dhcpFile)){
     emit(updateInterface(this));
@@ -209,7 +209,7 @@ bool Interface::refresh(){
   //qDebug(QString("Interface: renewalTime: %1").arg(renewalTime).latin1());
   
   // Get the pid of the deamond
-  dhcpFile = (QString(dhcpDirectory+"/dhcpcd-%1.pid").arg(interfaceName));
+  dhcpFile = (QString(dhcpDirectory+"/dhcpcd-%1.pid").arg(this->name()));
   file.setName(dhcpFile);
   if (!file.open(IO_ReadOnly)){
     qDebug(QString("Interface: Can't open file: %1").arg(dhcpFile).latin1());

@@ -24,7 +24,7 @@ public:
   virtual bool isAttached(){ return attached; };
   virtual void setAttached(bool isAttached=false);
   
-  virtual QString getHardwareName(){ return hardareName; };
+  virtual QString getHardwareName(){ return hardwareName; };
   virtual void setHardwareName(QString name="Unknown");
   
   virtual Module* getModuleOwner(){ return moduleOwner; };
@@ -51,7 +51,7 @@ private:
   bool status;
   bool attached;
   QString interfaceName;
-  QString hardareName;
+  QString hardwareName;
   Module *moduleOwner;
   
   // Network information

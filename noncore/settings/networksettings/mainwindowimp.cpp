@@ -308,7 +308,7 @@ void MainWindowImp::jobDone(KProcess *process){
       //qDebug(QString("MainWindowImp: Found Interface: %1").arg(line).latin1());
       // See if we already have it
       if(interfaceNames.find(interfaceName) == interfaceNames.end()){
-        if(fileName == TEMP_ALL)
+	if(fileName == TEMP_ALL)
           i = new Interface(this, interfaceName, false);
         else
           i = new Interface(this, interfaceName, true);
@@ -328,9 +328,8 @@ void MainWindowImp::jobDone(KProcess *process){
       }
       // It was an interface we already had.
       else{
-        i = interfaceNames[interfaceName];
         if(fileName != TEMP_ALL)
-          i->setStatus(true);
+          (interfaceNames[interfaceName])->setStatus(true);
       }
     }
   }
@@ -398,7 +397,7 @@ void MainWindowImp::updateInterface(Interface *i){
     typeName = "wlan";
   if(i->getInterfaceName().contains("usb"))
     typeName = "usb";
-   
+  
   if(!i->isAttached())
     typeName = "connect_no";
   // Actually try to use the Module
