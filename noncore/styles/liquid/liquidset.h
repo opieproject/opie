@@ -5,7 +5,7 @@
 #include <qcolor.h>
 
 class QLabel;
-class OColorButton;
+namespace Opie {class OColorButton;}
 class QSlider;
 
 class LiquidSettings : public QWidget {
@@ -31,7 +31,7 @@ private:
 	QLabel *      m_menulbl;
 	QLabel *      m_textlbl;
 	QLabel *      m_opaclbl;
-	OColorButton *m_menubtn;
-	OColorButton *m_textbtn;
+	Opie::OColorButton *m_menubtn;
+	Opie::OColorButton *m_textbtn;
 };
 #endif

@@ -35,9 +35,10 @@
 
 #include <qpe/config.h>
 
-#include <opie/ocolorbutton.h>
+#include <opie2/ocolorbutton.h>
 
 
+using namespace Opie;
 LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 		: QWidget ( parent, name, fl )
 {

@@ -10,7 +10,7 @@ HEADERS     =  liquid.h \
                liquidset.h \
                plugin.h
                
-LIBS       += -lqpe -lopie
+LIBS       += -lqpe -lqtaux2
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/plugins/styles
 TARGET       = liquid
