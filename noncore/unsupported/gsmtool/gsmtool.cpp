@@ -74,7 +74,8 @@ void GSMTool::setConnected( bool conn )
 {
 	TabWidget2->setTabEnabled(tab_2, conn);
 	TabWidget2->setTabEnabled(tab_3, conn);
-	TabWidget2->setTabEnabled(tab_4, conn);
+	//TabWidget2->setTabEnabled(tab_4, conn);
+        NewSMSSendButton->setEnabled(conn);
 	MfrLabel->setEnabled(conn);
 	MfrText->setEnabled(conn);
 	ModelLabel->setEnabled(conn);
