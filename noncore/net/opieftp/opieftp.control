@@ -1,7 +1,7 @@
 Files: bin/opieftp pics/opieftp apps/Applications/opieftp.desktop
 Priority: optional
 Package: opieftp
-Section: opie/applications
+Section: Communications
 Maintainer: L.J. Potter <ljp@llornkcor.com> 
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
