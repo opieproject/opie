@@ -1,4 +1,4 @@
-Files: bin/sysinfo apps/Applications/sysinfo.desktop pics/sysinfo
+Files: bin/sysinfo apps/Settings/sysinfo.desktop pics/sysinfo
 Priority: optional
 Section: opie/applications
 Maintainer: Dan Williams <williamsdr@acm.org>
