@@ -23,19 +23,20 @@
 #include <qlabel.h>
 #include <qfont.h>
 #include <qlayout.h>
+#include <qpe/qpeapplication.h>
 
 OxydataWidget::OxydataWidget(QWidget *parent) : QWidget(parent)
 {
     QGridLayout *qgrid = new QGridLayout( this, 2,1 );
-    
+
     QHBox *hbox = new QHBox( this );
     left = new QLabel( hbox );
     middle = new QLabel( hbox );
     right = new QLabel( hbox );
-    
+
     right->setAlignment( AlignRight );
     middle->setAlignment( AlignHCenter );
-    
+
     QFont bf;
     bf.setBold( true );
     bf.setPointSize( bf.pointSize()+2 );
@@ -46,30 +47,31 @@ OxydataWidget::OxydataWidget(QWidget *parent) : QWidget(parent)
     DataTable->setColumnWidth ( 0 , 118 );
     setTable();
 
-    qgrid->addWidget( hbox,0,0 );    
-    qgrid->addWidget( DataTable,1,0 );    
+    qgrid->addWidget( hbox,0,0 );
+    qgrid->addWidget( DataTable,1,0 );
 }
 
 void OxydataWidget::setElement( int el )
 {
-    Config configobj( "oxygendata" );
+    Config configobj( QPEApplication::qpeDir() +"share/oxygen/oxygendata", Config::File );
+
     configobj.setGroup( QString::number( el+1 ));
-    
+
     left->setText( configobj.readEntry( "Symbol" ) );
     middle->setText( configobj.readEntry( "Name" ) );
     right->setText( QString::number( el+1 ) );
 
 
-    DataTable->setText( 0,1,configobj.readEntry( "Weight" ) ); 
-    DataTable->setText( 1,1,configobj.readEntry( "Block" ) ); 
-    DataTable->setText( 2,1,configobj.readEntry( "Group" ) ); 
-    DataTable->setText( 3,1,configobj.readEntry( "EN" ) ); 
-    DataTable->setText( 4,1,configobj.readEntry( "AR" ) ) ; 
-    DataTable->setText( 5,1,configobj.readEntry( "IE" ) ); 
-    DataTable->setText( 6,1,configobj.readEntry( "Density" ) ); 
-    DataTable->setText( 7,1,configobj.readEntry( "BP" ) ); 
-    DataTable->setText( 8,1,configobj.readEntry( "MP" ) ); 
-    
+    DataTable->setText( 0,1,configobj.readEntry( "Weight" ) );
+    DataTable->setText( 1,1,configobj.readEntry( "Block" ) );
+    DataTable->setText( 2,1,configobj.readEntry( "Group" ) );
+    DataTable->setText( 3,1,configobj.readEntry( "EN" ) );
+    DataTable->setText( 4,1,configobj.readEntry( "AR" ) ) ;
+    DataTable->setText( 5,1,configobj.readEntry( "IE" ) );
+    DataTable->setText( 6,1,configobj.readEntry( "Density" ) );
+    DataTable->setText( 7,1,configobj.readEntry( "BP" ) );
+    DataTable->setText( 8,1,configobj.readEntry( "MP" ) );
+
 }
 
 void OxydataWidget::setTable() const
@@ -83,7 +85,7 @@ void OxydataWidget::setTable() const
     DataTable->setText( 6,0, tr( "Density" )) ;
     DataTable->setText( 7,0, tr( "Boilingpoint" ) );
     DataTable->setText( 8,0, tr( "Meltingpoint" ) );
-    
+
 }
 
 OxydataTable::OxydataTable(int numRows, int numCols, QWidget *parent,
@@ -114,7 +116,7 @@ void OxydataTable::paintCell(  QPainter *p, int row, int col, const QRect &cr, b
 
     QTableItem *itm = item( row, col );
     QColorGroup colgrp = colorGroup();
-    if ( itm ) 
+    if ( itm )
     {
         if ( row%2 )
             colgrp.setColor(  QColorGroup::Base, QColor( 180,200,210 ) );
@@ -133,9 +135,9 @@ OxydataQTI::OxydataQTI(QTable * table, EditType et, const QString & text )
 
 int OxydataQTI::alignment() const
 {
-    if ( col()%2 ) 
+    if ( col()%2 )
     {
-        return AlignRight | AlignVCenter; 
+        return AlignRight | AlignVCenter;
     }else return AlignLeft | AlignVCenter;
 };
 
