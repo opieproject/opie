@@ -151,8 +151,7 @@ void PackageList::updateSections( Package* pack )
 {
   QString s = pack->section();
   if ( s.isEmpty() || s == "") return;
-  if ( sections.contains(s) )  return;
-  sections += s;
+  if ( !sections.contains(s) ) sections += s;
   QString ss = pack->subSection();
   if ( ss.isEmpty() || ss == "" ) return;
   if ( !subSections[s] ) {
@@ -161,10 +160,10 @@ void PackageList::updateSections( Package* pack )
     *subsecs += "All";
   }
   QStringList *subsecs = subSections[s];
-  *subsecs += ss;
-  if ( !subSections["All"] ) subSections.insert( "All", new QStringList() );
-  subsecs = subSections["All"];
-  *subsecs += ss;
+  if ( !subsecs->contains(ss) ) *subsecs += ss;
+//  if ( !subSections["All"] ) subSections.insert( "All", new QStringList() );
+//  subsecs = subSections["All"];
+//  *subsecs += ss;
 }
 
 
