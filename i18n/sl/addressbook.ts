@@ -1,118 +1,165 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>AbEditor</name>
+    <message>
+        <source>First Name</source>
+        <translation>Ime</translation>
+    </message>
+    <message>
+        <source>Last Name</source>
+        <translation>Priimek</translation>
+    </message>
+    <message>
+        <source>Categories</source>
+        <translation>Kategorija</translation>
+    </message>
+    <message>
+        <source>Gender</source>
+        <translation>Spol</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation>Zapiski</translation>
+    </message>
+    <message>
+        <source>Middle Name</source>
+        <translation>Medimek</translation>
+    </message>
+    <message>
+        <source>Male</source>
+        <translation>Moški</translation>
+    </message>
+    <message>
+        <source>Female</source>
+        <translation>Ženski</translation>
+    </message>
+    <message>
+        <source>Enter Note</source>
+        <translation>Vpišite zapiske</translation>
+    </message>
+    <message>
+        <source>Notes...</source>
+        <translation>Zapiski...</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation>Stiki</translation>
+    </message>
+</context>
+<context>
     <name>AbTable</name>
     <message>
         <source>Full Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Polno ime</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Stik</translation>
     </message>
     <message>
         <source>Pick</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberi</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizpolnjen</translation>
     </message>
 </context>
 <context>
     <name>AddressSettings</name>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Priimek</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Datoteka kot</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Privzeta Epošta</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapiski</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Spol</translation>
     </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>AddressSettingsBase</name>
-    <message>
+    <message encoding="UTF-8">
         <source>Arrange Edit Fields</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi polja</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Select the field order:</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberi zaporedje polj:</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Gor</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Dol</translation>
     </message>
 </context>
 <context>
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Stiki</translation>
     </message>
     <message>
         <source>Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Stik</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Najdi</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation type="unfinished"></translation>
+        <translation>Napiši sporočilo</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Prežarčen vnos</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Moje osebne podrobnosti</translation>
     </message>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi polja</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmanjkalo je prostora</translation>
     </message>
     <message>
         <source>There is not enough space to create
@@ -120,31 +167,35 @@ neccessary startup files.
 
 Free up some space before
 entering data!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ni dovolj prostora za potrebne
+zagonske datoteke.
+
+Sprostite nekaj prostora preden
+vnesete podatke!</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogled</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem urediti podatkov, trenutno sinhroniziram</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi moje osebne podrobnosti</translation>
     </message>
     <message>
         <source>Edit Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi naslov</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Stiki - Moje osebne podrobnosti</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmanjkalo je prostora</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -152,246 +203,55 @@ Free up some space
 and try again.
 
 Quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem shraniti informacije.
+Sprostite nekaj prostora
+in poizkusite ponovno.
+
+Izhod?</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Naziv</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapiski</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation type="unfinished"></translation>
+        <translation>Delo</translation>
     </message>
     <message>
         <source>Mb</source>
-        <translation type="unfinished"></translation>
+        <translation>Mobitel</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Priimek</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Datoteka kot</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Privzeta Epošta</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Spol</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Vse</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ContactEditor</name>
-    <message>
-        <source>Fax</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Phone</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>IM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mobile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pager</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Middle Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Suffix</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Job Title</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Street</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Street 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>P.O. Box</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>City</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>State</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zip</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Country</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Full Name...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Organization</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notes...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Zip Code</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>United States</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>United Kingdom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Japan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>France</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Germany</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Norway</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Canada</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Male</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Female</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Details</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter Note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Neizpolnjeno</translation>
     </message>
 </context>
 </TS>

@@ -26,11 +26,11 @@
     </message>
     <message>
         <source>Matched: </source>
-        <translation type="unfinished">Najdeno:</translation>
+        <translation>Najdeno: </translation>
     </message>
     <message>
         <source>Similar to: </source>
-        <translation type="unfinished">Podobno:</translation>
+        <translation>Podobno kot: </translation>
     </message>
     <message>
         <source>%1%</source>

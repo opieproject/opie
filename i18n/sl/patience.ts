@@ -3,59 +3,59 @@
     <name>CanvasCardWindow</name>
     <message>
         <source>Patience</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasjansa</translation>
     </message>
     <message>
         <source>Freecell</source>
-        <translation type="unfinished"></translation>
+        <translation>Freecell</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Igra</translation>
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zamenjaj zadnjo stran kart</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Z&amp;askoči na položaj</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nastavitve</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;O</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pomoč</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Igraj</translation>
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamenjaj zadnje strani kart</translation>
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaskoči na položaj</translation>
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrni eno karto</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitve</translation>
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrni tri karte</translation>
     </message>
 </context>
 </TS>

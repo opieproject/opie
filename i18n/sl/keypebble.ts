@@ -70,7 +70,8 @@ povezavo.</translation>
     <message>
         <source>Error: This server requires a password, but none has been specified.
 </source>
-        <translation type="unfinished">Napaka: Ta strežnik potrebuje geslo, a nobeno ni bilo podano.</translation>
+        <translation>Napaka: Ta strežnik potrebuje geslo, a nobeno ni bilo podano.
+ </translation>
     </message>
     <message>
         <source>Error: The password you specified was incorrect.</source>

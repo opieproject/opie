@@ -3,37 +3,39 @@
     <name>KAstTopLevel</name>
     <message>
         <source>Asteroids</source>
-        <translation type="unfinished"></translation>
+        <translation>Asteroidi</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Točke</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Stopnja</translation>
     </message>
     <message>
         <source>Ships</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladje</translation>
     </message>
     <message>
         <source>Fuel</source>
-        <translation type="unfinished"></translation>
+        <translation>Gorivo</translation>
     </message>
     <message>
         <source>Press Calendar to start playing</source>
-        <translation type="unfinished"></translation>
+        <translation>Pritisnite Koledar za začetek igranja</translation>
     </message>
     <message>
         <source>Ship Destroyed.
 Press Contacts/Home key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladja uničena.
+Pritisnite Kontakti/Domov tipko.</translation>
     </message>
     <message>
         <source>Game Over.
 Press Calendar for a new game.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konec igre.
+Pritisnite Koledar za novo igro.</translation>
     </message>
 </context>
 </TS>

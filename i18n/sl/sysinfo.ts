@@ -3,148 +3,148 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporaba CPE v aplikacijah (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporaba CPE v sistemu (%)</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <translation>Type: </translation>
     </message>
 </context>
 <context>
     <name>MemoryInfo</name>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabljeno (%1 kB)</translation>
     </message>
     <message>
         <source>Buffers (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Medpomnilniki (%1 kB)</translation>
     </message>
     <message>
         <source>Cached (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Predpomneno (%1 kB)</translation>
     </message>
     <message>
         <source>Free (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosto (%1 kB)</translation>
     </message>
     <message>
         <source>Total Memory: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupen spomin: %1 kB</translation>
     </message>
 </context>
 <context>
     <name>MountInfo</name>
     <message>
         <source> total: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>skupaj: %1 kB</translation>
     </message>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabljeno (%1 kB)</translation>
     </message>
     <message>
         <source>Available (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Na voljo (%1 kB)</translation>
     </message>
 </context>
 <context>
     <name>ProcessDetail</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Pošlji</translation>
     </message>
 </context>
 <context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
-        <translation type="unfinished"></translation>
+        <translation>PID</translation>
     </message>
     <message>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukaz</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas</translation>
     </message>
 </context>
 <context>
     <name>StorageInfo</name>
     <message>
         <source>CF Card</source>
-        <translation type="unfinished"></translation>
+        <translation>CF kartica</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Trdi disk</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation type="unfinished"></translation>
+        <translation>SD kartica</translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>SCSI trdi disk</translation>
     </message>
     <message>
         <source>Internal Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Notranji pomnilnik</translation>
     </message>
 </context>
 <context>
     <name>SystemInfo</name>
     <message>
         <source>System Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacija o sistemu</translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Spomin</translation>
     </message>
     <message>
         <source>Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomnilnik</translation>
     </message>
     <message>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation>CPE</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Proces</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Različica</translation>
     </message>
 </context>
 <context>
     <name>VersionInfo</name>
     <message>
         <source>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Linux jedro&lt;/b&gt;&lt;p&gt;Različica: </translation>
     </message>
     <message>
         <source>Compiled by: </source>
-        <translation type="unfinished"></translation>
+        <translation>Prevedel: </translation>
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Različica: </translation>
     </message>
     <message>
         <source>Built on: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zgrajeno na: </translation>
     </message>
 </context>
 </TS>

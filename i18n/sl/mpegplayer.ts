@@ -42,11 +42,11 @@
     </message>
     <message>
         <source> File: </source>
-        <translation type="unfinished">Datoteka:</translation>
+        <translation>Datoteka: </translation>
     </message>
     <message>
         <source>, Length: </source>
-        <translation type="unfinished">, Dolžina:</translation>
+        <translation>, Dolžina: </translation>
     </message>
 </context>
 <context>

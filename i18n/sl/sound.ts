@@ -3,67 +3,67 @@
     <name>SoundSettingsBase</name>
     <message>
         <source>Sound Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitve zvoka</translation>
     </message>
     <message>
         <source>Vmemo</source>
-        <translation type="unfinished"></translation>
+        <translation>Gzapis</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzorčna stopnja</translation>
     </message>
     <message>
         <source>11025</source>
-        <translation type="unfinished"></translation>
+        <translation>11025</translation>
     </message>
     <message>
         <source>22050</source>
-        <translation type="unfinished"></translation>
+        <translation>22050</translation>
     </message>
     <message>
         <source>32000</source>
-        <translation type="unfinished"></translation>
+        <translation>32000</translation>
     </message>
     <message>
         <source>44100</source>
-        <translation type="unfinished"></translation>
+        <translation>44100</translation>
     </message>
     <message>
         <source>Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <source>16 bit</source>
-        <translation type="unfinished"></translation>
+        <translation>16 bit</translation>
     </message>
     <message>
         <source>Screen sounds</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaslonski zvoki</translation>
     </message>
     <message>
         <source>Keyboard sounds</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvoki tipkovnice</translation>
     </message>
     <message>
         <source>Levels</source>
-        <translation type="unfinished"></translation>
+        <translation>Nivoji</translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation type="unfinished"></translation>
+        <translation>Glasno</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Izhod</translation>
     </message>
     <message>
         <source>Mic</source>
-        <translation type="unfinished"></translation>
+        <translation>Mik</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiho</translation>
     </message>
 </context>
 </TS>

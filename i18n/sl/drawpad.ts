@@ -244,7 +244,7 @@ trenutno stran?</translation>
     </message>
     <message>
         <source>Sat:</source>
-        <translation type="unfinished">Nasičenje:</translation>
+        <translation>Nasičenje:</translation>
     </message>
     <message>
         <source>Val:</source>

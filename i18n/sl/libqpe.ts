@@ -441,59 +441,59 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     </message>
     <message>
         <source>Email Addresses: </source>
-        <translation type="unfinished">Epoštni naslovi:</translation>
+        <translation>Epoštni naslovi: </translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation type="unfinished">Domači telefon:</translation>
+        <translation>Domači telefon: </translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation type="unfinished">Domači faks:</translation>
+        <translation>Domači faks: </translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation type="unfinished">Domači mobitel:</translation>
+        <translation>Domači mobitel: </translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation type="unfinished">Domača spletna stran:</translation>
+        <translation>Domača spletna stran: </translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation type="unfinished">Službena spletna stran:</translation>
+        <translation>Službena spletna stran: </translation>
     </message>
     <message>
         <source>Office: </source>
-        <translation type="unfinished">Pisarna:</translation>
+        <translation>Pisarna: </translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation type="unfinished">Službeni telefon:</translation>
+        <translation>Službeni telefon: </translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation type="unfinished">Službeni faks:</translation>
+        <translation>Službeni faks: </translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation type="unfinished">Službeni mobitel:</translation>
+        <translation>Službeni mobitel: </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation type="unfinished">Službeni pager:</translation>
+        <translation>Službeni pager: </translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation type="unfinished">Poklic:</translation>
+        <translation>Poklic: </translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation type="unfinished">Pomočnik:</translation>
+        <translation>Pomočnik: </translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation type="unfinished">Upravnik:</translation>
+        <translation>Upravnik: </translation>
     </message>
     <message>
         <source>Male</source>
@@ -505,23 +505,23 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation type="unfinished">Spol:</translation>
+        <translation>Spol: </translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation type="unfinished">Sopotnik:</translation>
+        <translation>Sopotnik: </translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation type="unfinished">Rojstni dan:</translation>
+        <translation>Rojstni dan: </translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation type="unfinished">Obletnica:</translation>
+        <translation>Obletnica: </translation>
     </message>
     <message>
         <source>Nickname: </source>
-        <translation type="unfinished">Vzdevek:</translation>
+        <translation>Vzdevek: </translation>
     </message>
     <message>
         <source>Name Title</source>

@@ -26,7 +26,7 @@
     </message>
     <message>
         <source>&lt;p&gt;Only one %1 can be added. Remove the current one, or change its Properties</source>
-        <translation type="unfinished">&lt;p&gt;Dodate lahko samo en %1. Odstranite trenutnega ali pa spremenite njegove lastnosti</translation>
+        <translation>&lt;p&gt;Dodate lahko samo en %1. Odstranite trenutnega ali pa spremenite njegove lastnosti</translation>
     </message>
     <message>
         <source>Network</source>

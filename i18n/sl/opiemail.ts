@@ -3,342 +3,343 @@
     <name>@default</name>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Odgovori</translation>
     </message>
     <message>
         <source>Reply All</source>
-        <translation type="unfinished"></translation>
+        <translation>Odgovori vsem</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši</translation>
     </message>
 </context>
 <context>
     <name>Composer</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrazec1</translation>
     </message>
     <message>
         <source>CC</source>
-        <translation type="unfinished"></translation>
+        <translation>KP</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadeva</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Prekliči</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponastavi</translation>
     </message>
     <message>
         <source>Queue</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrsta</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Pošlji</translation>
     </message>
     <message>
         <source>From:</source>
-        <translation type="unfinished"></translation>
+        <translation>Od:</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation type="unfinished"></translation>
+        <translation>Za:</translation>
     </message>
 </context>
 <context>
     <name>MailviewerApp</name>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogled</translation>
     </message>
     <message>
         <source>Compose</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo sporočilo</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitve</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pošta</translation>
     </message>
     <message>
         <source>Mailboxes</source>
-        <translation type="unfinished"></translation>
+        <translation>Poštni nabiralniki</translation>
     </message>
     <message>
         <source>Configure OpieMail</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavi OpiePošta</translation>
     </message>
 </context>
 <context>
     <name>OpieMailConfig</name>
     <message>
         <source>OpieMail Config</source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePošta nastavitve</translation>
     </message>
     <message>
         <source>Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Mape</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dodaj</translation>
     </message>
     <message>
         <source>&amp;Modify</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spremeni</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zbriši</translation>
     </message>
     <message>
         <source>Folder name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime mape</translation>
     </message>
     <message>
         <source>Identity</source>
-        <translation type="unfinished"></translation>
+        <translation>Identiteta</translation>
     </message>
     <message>
         <source>Transport</source>
-        <translation type="unfinished"></translation>
+        <translation>Prenos</translation>
     </message>
     <message>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Vhod</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime</translation>
     </message>
     <message>
         <source>Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Mapa</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabnik</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Strežnik</translation>
     </message>
     <message>
         <source>Protocol</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokol</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Izhod</translation>
     </message>
 </context>
 <context>
     <name>OpieMailConfigImpl</name>
     <message>
         <source>Delete mailbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbriši poštni nabiralnik</translation>
     </message>
     <message>
         <source>Delete the mailbox?
 All mails will be deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Naj zbrišem poštni nabiralnik?
+Vsa pošta bo zbrisana.</translation>
     </message>
 </context>
 <context>
     <name>OpieMailFolder</name>
     <message>
         <source>OpieMail Folder Config</source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePošta nastavitev map</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Opis:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime:</translation>
     </message>
 </context>
 <context>
     <name>OpieMailIdenty</name>
     <message>
         <source>OpieMail Identity - Config</source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePošta nastavitev identitete</translation>
     </message>
     <message>
         <source>Signature:</source>
-        <translation type="unfinished"></translation>
+        <translation>Podpis:</translation>
     </message>
     <message>
         <source>Identity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Identiteta:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime:</translation>
     </message>
     <message>
         <source>Organization:</source>
-        <translation type="unfinished"></translation>
+        <translation>Organizacija:</translation>
     </message>
     <message>
         <source>EMail:</source>
-        <translation type="unfinished"></translation>
+        <translation>Epošta:</translation>
     </message>
     <message>
         <source>Reply To</source>
-        <translation type="unfinished"></translation>
+        <translation>Odgovori</translation>
     </message>
     <message>
         <source>Use for sending</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi za pošiljanje</translation>
     </message>
 </context>
 <context>
     <name>OpieMailInputConfig</name>
     <message>
         <source>OpieMailInput</source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePoštaVhod</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime:</translation>
     </message>
     <message>
         <source>Server:</source>
-        <translation type="unfinished"></translation>
+        <translation>Strežnik:</translation>
     </message>
     <message>
         <source>Protocol</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokol</translation>
     </message>
     <message>
         <source>Destination Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciljna mapa</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabnik:</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Geslo</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrata</translation>
     </message>
     <message>
         <source>110</source>
-        <translation type="unfinished"></translation>
+        <translation>110</translation>
     </message>
     <message>
         <source>Enable intervall checking.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi intervalno preverjanje.</translation>
     </message>
     <message>
         <source>Check every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Preveri vsakih:</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minut</translation>
     </message>
     <message>
         <source>&amp;Delete mail from server when deleted local.</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Izbriši pošto iz strežnika, ko zbrišeš lokalno.</translation>
     </message>
     <message>
         <source>&amp;Keep Mail on Server</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pusti pošto na strežniku</translation>
     </message>
 </context>
 <context>
     <name>OpieMailOutputConfig</name>
     <message>
         <source>OpieMailOutPut</source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePoštaIzhod</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime:</translation>
     </message>
     <message>
         <source>Protocol</source>
-        <translation type="unfinished"></translation>
+        <translation>Protokol</translation>
     </message>
     <message>
         <source>Server:</source>
-        <translation type="unfinished"></translation>
+        <translation>Strežnik:</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabnik:</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Geslo</translation>
     </message>
     <message>
         <source>Server requires authentication</source>
-        <translation type="unfinished"></translation>
+        <translation>Strežnik potrebuje avtorizacijo</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrata</translation>
     </message>
     <message>
         <source>25</source>
-        <translation type="unfinished"></translation>
+        <translation>25</translation>
     </message>
 </context>
 <context>
     <name>QMailView</name>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadeva</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Za</translation>
     </message>
     <message>
         <source>Sender</source>
-        <translation type="unfinished"></translation>
+        <translation>Pošiljatelj</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>(Re)edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi</translation>
     </message>
     <message>
         <source>Copy To</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiraj v</translation>
     </message>
     <message>
         <source>Move To</source>
-        <translation type="unfinished"></translation>
+        <translation>Premakni v</translation>
     </message>
 </context>
 <context>
     <name>SplitterWidgetBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrazec1</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>LibMadPlugin</name>
     <message>
         <source>No Song Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Nobene odprte pesmi</translation>
     </message>
     <message>
         <source>Title</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>, Track: </source>
-        <translation type="unfinished">, Pesem:</translation>
+        <translation>, Pesem: </translation>
     </message>
 </context>
 </TS>

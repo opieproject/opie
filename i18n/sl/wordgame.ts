@@ -3,135 +3,135 @@
     <name>Board</name>
     <message>
         <source>Blanks: </source>
-        <translation type="unfinished"></translation>
+        <translation>Praznine: </translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Vredu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Prekliči</translation>
     </message>
     <message>
         <source>Unknown word</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznana beseda</translation>
     </message>
     <message>
         <source>&lt;p&gt;The word &quot;%1&quot; is not in the dictionary.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Beseda &quot;%1&quot; ni v slovarju.</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Prezri</translation>
     </message>
 </context>
 <context>
     <name>NewGameBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrazec1</translation>
     </message>
     <message>
         <source>Players</source>
-        <translation type="unfinished"></translation>
+        <translation>Igralci</translation>
     </message>
     <message>
         <source>AI3: Smart AI player</source>
-        <translation type="unfinished"></translation>
+        <translation>UI3: Pameten UI igralec</translation>
     </message>
     <message>
         <source>Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Pravila</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Začni</translation>
     </message>
 </context>
 <context>
     <name>RulesBase</name>
     <message>
         <source>Game Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Pravila igre</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime:</translation>
     </message>
     <message>
         <source>Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Deska</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost:</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vredu</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Prekliči</translation>
     </message>
 </context>
 <context>
     <name>ScoreInfo</name>
     <message>
         <source>&lt;P&gt;Invalid move</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Neveljavna poteza</translation>
     </message>
     <message>
         <source>&lt;P&gt;Score: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Točke: </translation>
     </message>
 </context>
 <context>
     <name>WordGame</name>
     <message>
         <source>Word Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Besedna igra</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazaj</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Storjeno</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapri</translation>
     </message>
     <message>
         <source>End game</source>
-        <translation type="unfinished"></translation>
+        <translation>Konec igre</translation>
     </message>
     <message>
         <source>Do you want to end the game early?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ali želite predčasno končati igro?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Da</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
 </context>
 </TS>

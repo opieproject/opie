@@ -3,11 +3,11 @@
     <name>RotationSettingsBase</name>
     <message>
         <source>Rotation Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitve rotacije</translation>
     </message>
     <message>
         <source>&lt;p&gt;The chosen rotation will only affect new applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Izbrana rotacija bo vplivala le na nove aplikacije.</translation>
     </message>
 </context>
 </TS>

@@ -3,76 +3,77 @@
     <name>DateBook</name>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Koledar</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogled</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitve</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Danes</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Dan</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Teden</translation>
     </message>
     <message>
         <source>WeekLst</source>
-        <translation type="unfinished"></translation>
+        <translation>TedenSeznam</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Mesec</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Najdi</translation>
     </message>
     <message>
         <source>Alarm and Start Time...</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm in začetni čas...</translation>
     </message>
     <message>
         <source>Default View</source>
-        <translation type="unfinished"></translation>
+        <translation>Privzet pogled</translation>
     </message>
     <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dogodek je potencialno daljsi,
+kot interval med ponovitvijo.</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem urediti podatkov, trenutno sinhroniziram</translation>
     </message>
     <message>
         <source>Edit Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi dogodke</translation>
     </message>
     <message>
         <source> minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation>minut)</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Vredu</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmanjkalo je prostora</translation>
     </message>
     <message>
         <source>Calendar was unable to save
@@ -80,207 +81,212 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Koledar ne more shraniti
+vaših sprememb.
+Sprostite nekaj prostora in
+poizkusite ponovno.
+
+Izhod?</translation>
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Neznano)</translation>
     </message>
     <message>
         <source>Error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka!</translation>
     </message>
     <message>
         <source>Fix it</source>
-        <translation type="unfinished"></translation>
+        <translation>Popravi</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadaljuj</translation>
     </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>DateBookDayHeaderBase</name>
-    <message>
+    <message encoding="UTF-8">
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrazec1</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>P</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation>T</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>S</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation>P</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponedeljek</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Torek</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sreda</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Četrtek</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Petek</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobota</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedelja</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayView</name>
     <message>
         <source>:00p</source>
-        <translation type="unfinished"></translation>
+        <translation>:00p</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayWidget</name>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Začetek</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Konec</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Prežarči</translation>
     </message>
 </context>
 <context>
     <name>DateBookSettings</name>
     <message>
         <source>:00 PM</source>
-        <translation type="unfinished"></translation>
+        <translation>:00 PM</translation>
     </message>
     <message>
         <source>:00 AM</source>
-        <translation type="unfinished"></translation>
+        <translation>:00 AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>:00</source>
-        <translation type="unfinished"></translation>
+        <translation>:00</translation>
     </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>DateBookSettingsBase</name>
-    <message>
+    <message encoding="UTF-8">
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Možnosti</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Start viewing events</source>
-        <translation type="unfinished"></translation>
+        <translation>Začni pregledovati dogodke</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Start Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Začetni čas:</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>:00</source>
-        <translation type="unfinished"></translation>
+        <translation>:00</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Alarm Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitev alarma</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Alarm Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Prednastavitev alarma</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source> minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minut</translation>
     </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>DateBookWeekHeaderBase</name>
-    <message>
+    <message encoding="UTF-8">
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrazec1</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Y: </source>
-        <translation type="unfinished"></translation>
+        <translation>L: </translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>W: </source>
-        <translation type="unfinished"></translation>
+        <translation>T: </translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>00. Jan-00. Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>00. Jan-00. Jan</translation>
     </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>DateBookWeekLstDayHdrBase</name>
-    <message>
+    <message encoding="UTF-8">
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrazec1</translation>
     </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>DateBookWeekLstHeaderBase</name>
-    <message>
+    <message encoding="UTF-8">
         <source>Form2</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrazec2</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>W: 00,00</source>
-        <translation type="unfinished"></translation>
+        <translation>T: 00,00</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>00 Jan-00 Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>00 Jan-00 Jan</translation>
     </message>
 </context>
 <context>
@@ -288,408 +294,601 @@ Quit anyway?</source>
     <message>
         <source>M</source>
         <comment>Monday</comment>
-        <translation type="unfinished"></translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>T</translation>
     </message>
     <message>
         <source>W</source>
         <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Č</translation>
     </message>
     <message>
         <source>F</source>
         <comment>Friday</comment>
-        <translation type="unfinished"></translation>
+        <translation>P</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
+        <translation>N</translation>
     </message>
     <message>
         <source>p</source>
-        <translation type="unfinished"></translation>
+        <translation>p</translation>
     </message>
 </context>
 <context>
     <name>DateEntry</name>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Koledar</translation>
     </message>
     <message>
         <source>Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponovi...</translation>
     </message>
     <message>
         <source>Daily...</source>
-        <translation type="unfinished"></translation>
+        <translation>Dnevno...</translation>
     </message>
     <message>
         <source>Weekly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tedensko...</translation>
     </message>
     <message>
         <source>Monthly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Mesečno...</translation>
     </message>
     <message>
         <source>Yearly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Letno...</translation>
     </message>
     <message>
         <source>No Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne ponovi...</translation>
     </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>DateEntryBase</name>
     <message>
         <source>New Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov dogodek</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokacija</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorija</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation>Sestanek</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Lunch</source>
-        <translation type="unfinished"></translation>
+        <translation>Kosilo</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Dinner</source>
-        <translation type="unfinished"></translation>
+        <translation>Večerja</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Potovanje</translation>
     </message>
-    <message>
-        <source>Description</source>
-        <translation type="unfinished"></translation>
+    <message encoding="UTF-8">
+        <source>Description:</source>
+        <translation>Opis:</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Pisarna</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Dom</translation>
     </message>
-    <message>
-        <source>Start - End</source>
-        <translation type="unfinished"></translation>
+    <message encoding="UTF-8">
+        <source>Start</source>
+        <translation>Začetek</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Jan 02 00</source>
-        <translation type="unfinished"></translation>
+        <translation>Jan 02 00</translation>
     </message>
-    <message>
-        <source>Start time</source>
-        <translation type="unfinished"></translation>
+    <message encoding="UTF-8">
+        <source>00:00</source>
+        <translation>00:00</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
+        <source>00:30</source>
+        <translation>00:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>01:00</source>
+        <translation></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>01:30</source>
+        <translation></translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>02:00</source>
+        <translation>02:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>02:30</source>
+        <translation>02:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>03:00</source>
+        <translation>03:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>03:30</source>
+        <translation>03:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>04:00</source>
+        <translation>04:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>04:30</source>
+        <translation>04:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>05:00</source>
+        <translation>05:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>05:30</source>
+        <translation>05:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>06:00</source>
+        <translation>06:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>06:30</source>
+        <translation>06:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>07:00</source>
+        <translation>07:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>07:30</source>
+        <translation>07:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>08:00</source>
+        <translation>08:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>08:30</source>
+        <translation>08:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>09:00</source>
+        <translation>09:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>09:30</source>
+        <translation>09:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>10:00</source>
+        <translation>10:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>10:30</source>
+        <translation>10:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>11:00</source>
+        <translation>11:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>11:30</source>
+        <translation>11:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>12:00</source>
+        <translation>12:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>12:30</source>
+        <translation>12:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>13:00</source>
+        <translation>13:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>13:30</source>
+        <translation>13:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>14:00</source>
+        <translation>14:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>14:30</source>
+        <translation>14:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>15:00</source>
+        <translation>15:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>15:30</source>
+        <translation>15:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>16:00</source>
+        <translation>16:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>16:30</source>
+        <translation>16:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>17:00</source>
+        <translation>17:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>17:30</source>
+        <translation>17:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>18:00</source>
+        <translation>18:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>18:30</source>
+        <translation>18:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>19:00</source>
+        <translation>19:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>19:30</source>
+        <translation>19:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>20:00</source>
+        <translation>20:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>20:30</source>
+        <translation>20:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>21:00</source>
+        <translation>21:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>21:30</source>
+        <translation>21:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>22:00</source>
+        <translation>22:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>22:30</source>
+        <translation>22:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>23:00</source>
+        <translation>23:00</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>23:30</source>
+        <translation>23:30</translation>
+    </message>
+    <message encoding="UTF-8">
+        <source>End</source>
+        <translation>Konec</translation>
+    </message>
+    <message encoding="UTF-8">
         <source>All day</source>
-        <translation type="unfinished"></translation>
+        <translation>Cel dan</translation>
     </message>
-    <message>
-        <source>Time zone</source>
-        <translation type="unfinished"></translation>
+    <message encoding="UTF-8">
+        <source>Time zone:</source>
+        <translation>Časovni pas:</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>&amp;Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Alarm</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source> minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>minut</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Silent</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiho</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Loud</source>
-        <translation type="unfinished"></translation>
+        <translation>Glasno</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponovi</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>No Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne ponovi...</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Začetek</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Konec</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Vsak</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
-        <translation type="unfinished"></translation>
+        <translation>Vsak %1 %2</translation>
     </message>
     <message>
         <source>The %1 every </source>
-        <translation type="unfinished"></translation>
+        <translation>Vsak %1</translation>
     </message>
     <message>
         <source>The %1 %1 of every</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %1 od vsakega</translation>
     </message>
     <message>
         <source>Every </source>
-        <translation type="unfinished"></translation>
+        <translation>Vsak</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponedeljek</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Torek</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sreda</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Četrtek</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Petek</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobota</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedelja</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>nd</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>rd</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>th</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>RepeatEntry</name>
     <message>
         <source>No Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne ponovi</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>dni</translation>
     </message>
     <message>
         <source>week(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>tednov</translation>
     </message>
     <message>
         <source>Repeat By</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponovi</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Dan</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>month(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>mesecev</translation>
     </message>
     <message>
         <source>year(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>let</translation>
     </message>
     <message>
         <source>days</source>
-        <translation type="unfinished"></translation>
+        <translation>dni</translation>
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished"></translation>
+        <translation>dan</translation>
     </message>
     <message>
         <source>weeks</source>
-        <translation type="unfinished"></translation>
+        <translation>tednov</translation>
     </message>
     <message>
         <source>week</source>
-        <translation type="unfinished"></translation>
+        <translation>teden</translation>
     </message>
     <message>
         <source>month</source>
-        <translation type="unfinished"></translation>
+        <translation>mesec</translation>
     </message>
     <message>
         <source>year</source>
-        <translation type="unfinished"></translation>
+        <translation>leto</translation>
     </message>
     <message>
         <source> and </source>
-        <translation type="unfinished"></translation>
+        <translation>in</translation>
     </message>
     <message>
         <source>,
 and </source>
-        <translation type="unfinished"></translation>
+        <translation>,
+in</translation>
     </message>
     <message>
         <source>, and </source>
-        <translation type="unfinished"></translation>
+        <translation>, in</translation>
     </message>
 </context>
-<context>
+<context encoding="UTF-8">
     <name>RepeatEntryBase</name>
-    <message>
+    <message encoding="UTF-8">
         <source>Repeating Event </source>
-        <translation type="unfinished"></translation>
+        <translation>Ponavljajoči dogodek</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Brez</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Dan</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Teden</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Mesec</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Leto</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vsak:</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Frekvenca</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>End On:</source>
-        <translation type="unfinished"></translation>
+        <translation>Končaj na:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Brez končnega datuma</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponovi</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Pon</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Tor</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sre</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Čet</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Pet</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Sob</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Ned</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Vsak</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremenljivka1</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Spremenljivka 2</translation>
     </message>
-    <message>
+    <message encoding="UTF-8">
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation>TedenskaSpremenljivka</translation>
     </message>
     <message>
         <source>months</source>
-        <translation type="unfinished"></translation>
+        <translation>meseci</translation>
     </message>
     <message>
         <source>years</source>
-        <translation type="unfinished"></translation>
+        <translation>leta</translation>
     </message>
 </context>
 </TS>

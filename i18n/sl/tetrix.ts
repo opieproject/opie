@@ -3,27 +3,27 @@
     <name>QTetrix</name>
     <message>
         <source>Tetrix</source>
-        <translation type="unfinished"></translation>
+        <translation>Tetrix</translation>
     </message>
     <message>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Naslednji</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Točke</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Nivo</translation>
     </message>
     <message>
         <source>Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranjen</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Začetek</translation>
     </message>
 </context>
 </TS>

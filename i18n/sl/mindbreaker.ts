@@ -22,7 +22,7 @@
     </message>
     <message>
         <source>Answer%1</source>
-        <translation type="unfinished">Odgovor%1</translation>
+        <translation>Odgovor%1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>

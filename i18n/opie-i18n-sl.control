@@ -1,4 +1,4 @@
-Files: i18n/sl/.directory i18n/ko/*.qm
+Files: i18n/sl/.directory i18n/sl/*.qm etc/dict/dawg.sl
 Priority: optional
 Section: opie/i18n
 Maintainer: Matej Dakol <matej.dakol@gvskupina.si>
@@ -6,5 +6,5 @@ Architecture: arm
 Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), qpf-cyberbit-120-50-t10
-Description: i18n: Korean
- Korean UI texts for Qtopia environment.
+Description: i18n: Slovenian
+ Slovenian UI texts for Opie environment and dictionary.
