@@ -1,6 +1,0 @@
-  config LIBOPIE2EXAMPLES
-    boolean "libopie2 examples"
-    default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2NET && LIBOPIE2UI && LIBOPIE2PIM && LIBOPIE2UI
-    comment "the examples need a libqpe, libopie2core, libopie2db, libopie2net, libopie2pim and libopie2ui"
-    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2NET && LIBOPIE2UI && LIBOPIE2PIM && LIBOPIE2UI)
