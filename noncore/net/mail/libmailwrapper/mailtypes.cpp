@@ -35,6 +35,7 @@ void RecMail::copy_old(const RecMail&old)
     bcc = old.bcc;
     wrapper = old.wrapper;
     in_reply_to = old.in_reply_to;
+    references = old.references;
 }
 
 void RecMail::init()
@@ -43,6 +44,7 @@ void RecMail::init()
     cc.clear();
     bcc.clear();
     in_reply_to.clear();
+    references.clear();
     wrapper = 0;
 }
 
@@ -96,6 +98,15 @@ const QStringList& RecMail::Inreply()const
     return in_reply_to;
 }
 
+void RecMail::setReferences(const QStringList&list)
+{
+    references = list;
+}
+
+const QStringList& RecMail::References()const
+{
+    return references;
+}
 
 RecPart::RecPart()
     : m_type(""),m_subtype(""),m_identifier(""),m_encoding(""),m_description(""),m_lines(0),m_size(0)
@@ -112,7 +123,7 @@ void RecPart::setSize(unsigned int size)
 {
     m_size = size;
 }
-    
+
 const unsigned int RecPart::Size()const
 {
     return m_size;
@@ -122,7 +133,7 @@ void RecPart::setLines(unsigned int lines)
 {
     m_lines = lines;
 }
-    
+
 const unsigned int RecPart::Lines()const
 {
     return m_lines;
@@ -177,7 +188,7 @@ void RecPart::setDescription(const QString&desc)
 {
     m_description = desc;
 }
-    
+
 void RecPart::setParameters(const part_plist_t&list)
 {
     m_Parameters = list;
@@ -337,7 +348,7 @@ void encodedString::setContent(const char*nContent,int nSize)
     if (nSize>0 && nContent) {
         content = (char*)malloc(nSize*sizeof(char));
         memcpy(content,nContent,nSize);
-        size = nSize;    
+        size = nSize;
     }
 }
 

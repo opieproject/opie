@@ -113,22 +113,22 @@ void IMAPwrapper::login()
     }
     server = account->getServer().latin1();
     port = account->getPort().toUInt();
-	if ( account->getUser().isEmpty() || account->getPassword().isEmpty() ) {
-	  LoginDialog login( account->getUser(), account->getPassword(), NULL, 0, true );
-	  login.show();
-	  if ( QDialog::Accepted == login.exec() ) {
-		// ok
-		user = login.getUser().latin1();
-		pass = login.getPassword().latin1();
-	  } else {
-		// cancel
-		qDebug( "IMAP: Login canceled" );
-		return;
-	  }
-	} else {
-	  user = account->getUser().latin1();
-	  pass = account->getPassword().latin1();
-	}
+    if ( account->getUser().isEmpty() || account->getPassword().isEmpty() ) {
+      LoginDialog login( account->getUser(), account->getPassword(), NULL, 0, true );
+      login.show();
+      if ( QDialog::Accepted == login.exec() ) {
+        // ok
+        user = login.getUser().latin1();
+        pass = login.getPassword().latin1();
+      } else {
+        // cancel
+        qDebug( "IMAP: Login canceled" );
+        return;
+      }
+    } else {
+      user = account->getUser().latin1();
+      pass = account->getPassword().latin1();
+    }
 
     m_imap = mailimap_new( 20, &imap_progress );
 
@@ -438,13 +438,28 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
                 addresslist = address_list_to_stringlist(head->env_bcc->bcc_list);
                 m->setBcc(addresslist);
             }
+            /* reply to address, eg. email. */
             if (head->env_reply_to!=NULL) {
                 addresslist = address_list_to_stringlist(head->env_reply_to->rt_list);
                 if (addresslist.count()) {
                     m->setReplyto(addresslist.first());
                 }
             }
-            m->setMsgid(QString(head->env_message_id));
+            if (head->env_in_reply_to!=NULL) {
+                QString h(head->env_in_reply_to);
+                while (h.length()>0 && h[0]=='<') {
+                    h.remove(0,1);
+                }
+                while (h.length()>0 && h[h.length()-1]=='>') {
+                    h.remove(h.length()-1,1);
+                }
+                if (h.length()>0) {
+                    m->setInreply(QStringList(h));
+                }
+            }
+            if (head->env_message_id) {
+                m->setMsgid(QString(head->env_message_id));
+            }
         } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_INTERNALDATE) {
 #if 0
             mailimap_date_time*d = item->att_data.att_static->att_data.att_internal_date;

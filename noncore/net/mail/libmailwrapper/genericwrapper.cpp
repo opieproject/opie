@@ -33,7 +33,7 @@ void Genericwrapper::fillSingleBody(RecPart&target,mailmessage*,mailmime*mime)
         mailmime_single_fields_init(&fields, mime->mm_mime_fields,
             mime->mm_content_type);
     }
-    
+
     mailmime_content*type = fields.fld_content;
     clistcell*current;
     if (!type) {
@@ -145,7 +145,7 @@ void Genericwrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mi
     clistiter * cur = 0;
     QString b;
     RecPart part;
-    
+
     switch (mime->mm_type) {
     case MAILMIME_SINGLE:
     {
@@ -241,10 +241,10 @@ RecBody Genericwrapper::parseMail( mailmessage * msg )
 QString Genericwrapper::parseDateTime( mailimf_date_time *date )
 {
     char tmp[23];
-    
-    snprintf( tmp, 23,  "%02i.%02i.%04i %02i:%02i:%02i %+05i", 
+
+    snprintf( tmp, 23,  "%02i.%02i.%04i %02i:%02i:%02i %+05i",
         date->dt_day, date->dt_month, date->dt_year, date->dt_hour, date->dt_min, date->dt_sec, date->dt_zone );
-    
+
     return QString( tmp );
 }
 
@@ -256,7 +256,7 @@ QString Genericwrapper::parseAddressList( mailimf_address_list *list )
     if (list == 0) return result;
     for ( clistiter *current = clist_begin( list->ad_list ); current != NULL; current = current->next ) {
         mailimf_address *addr = (mailimf_address *) current->data;
-        
+
         if ( !first ) {
             result.append( "," );
         } else {
@@ -275,7 +275,7 @@ QString Genericwrapper::parseAddressList( mailimf_address_list *list )
                 break;
         }
     }
-    
+
     return result;
 }
 
@@ -291,7 +291,7 @@ QString Genericwrapper::parseGroup( mailimf_group *group )
     }
 
     result.append( ";" );
-    
+
     return result;
 }
 
@@ -307,7 +307,7 @@ QString Genericwrapper::parseMailbox( mailimf_mailbox *box )
         result.append( box->mb_addr_spec );
         result.append( ">" );
     }
-        
+
     return result;
 }
 
@@ -324,10 +324,10 @@ QString Genericwrapper::parseMailboxList( mailimf_mailbox_list *list )
         } else {
             first = false;
         }
-       
+
         result.append( parseMailbox( box ) );
     }
-    
+
     return result;
 }
 
@@ -367,6 +367,26 @@ void Genericwrapper::cleanMimeCache()
     qDebug("Genericwrapper: cache cleaned");
 }
 
+QStringList Genericwrapper::parseInreplies(mailimf_in_reply_to * in_replies)
+{
+    QStringList res;
+    if (!in_replies || !in_replies->mid_list) return res;
+    clistiter * current = 0;
+    for ( current = clist_begin( in_replies->mid_list ); current != NULL; current = current->next ) {
+        QString h((char*)current->data);
+        while (h.length()>0 && h[0]=='<') {
+            h.remove(0,1);
+        }
+        while (h.length()>0 && h[h.length()-1]=='>') {
+            h.remove(h.length()-1,1);
+        }
+        if (h.length()>0) {
+            res.append(h);
+        }
+    }
+    return res;
+}
+
 void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const QString&mailbox,bool mbox_as_to)
 {
     int r;
@@ -384,7 +404,8 @@ void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const 
         }
         return;
     }
-    mailimf_references * refs;
+    mailimf_references * refs = 0;
+    mailimf_in_reply_to * in_replies = 0;
     uint32_t i = 0;
     for(; i < carray_count(env_list->msg_tab) ; ++i) {
         mailmessage * msg;
@@ -426,12 +447,17 @@ void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const 
         // crashes when accessing pop3 account?
         if (single_fields.fld_message_id->mid_value) {
             mail->setMsgid(QString(single_fields.fld_message_id->mid_value));
-            qDebug("Msqgid == %s",mail->Msgid().latin1());
+            qDebug("Msgid == %s",mail->Msgid().latin1());
         }
+
         refs = single_fields.fld_references;
         if (refs && refs->mid_list && clist_count(refs->mid_list)) {
             char * text = (char*)refs->mid_list->first->data;
             mail->setReplyto(QString(text));
+        }
+        if (single_fields.fld_in_reply_to && single_fields.fld_in_reply_to->mid_list &&
+                clist_count(single_fields.fld_in_reply_to->mid_list)) {
+            mail->setInreply(parseInreplies(single_fields.fld_in_reply_to));
         }
         target.append(mail);
     }

@@ -21,6 +21,7 @@ struct mailimf_address_list;
 struct mailsession;
 struct mailstorage;
 struct mailfolder;
+struct mailimf_in_reply_to;
 
 /* this class hold just the funs shared between
  * mbox and pop3 (later mh, too) mail access.
@@ -48,12 +49,13 @@ protected:
     QString parseGroup( mailimf_group *group );
     QString parseAddressList( mailimf_address_list *list );
     QString parseDateTime( mailimf_date_time *date );
-    
+
     void traverseBody(RecBody&target,mailmessage*message,mailmime*mime,QValueList<int>recList,unsigned int current_rek=0,int current_count=1);
     static void fillSingleBody(RecPart&target,mailmessage*message,mailmime*mime);
     static void fillParameters(RecPart&target,clist*parameters);
     static QString getencoding(mailmime_mechanism*aEnc);
     virtual void parseList(QList<RecMail> &target,mailsession*session,const QString&mailbox,bool mbox_as_to=false);
+    QStringList parseInreplies(mailimf_in_reply_to * in_replies);
 
     QString msgTempName;
     unsigned int last_msg_id;

@@ -20,8 +20,8 @@ class AbstractMail;
 /* Attention!
    From programmers point of view it would make sense to
    store the mail body into this class, too.
-   But: not from the point of view of the device. 
-   Mailbodies can be real large. So we request them when 
+   But: not from the point of view of the device.
+   Mailbodies can be real large. So we request them when
    needed from the mail-wrapper class direct from the server itself
    (imap) or from a file-based cache (pop3?)
    So there is no interface "const QString&body()" but you should
@@ -61,9 +61,12 @@ public:
     const QStringList&Bcc()const;
     void setInreply(const QStringList&list);
     const QStringList&Inreply()const;
+    void setReferences(const QStringList&list);
+    const QStringList&References()const;
+
     const QBitArray&getFlags()const{return msg_flags;}
     void setFlags(const QBitArray&flags){msg_flags = flags;}
-    
+
     void setWrapper(AbstractMail*wrapper);
     AbstractMail* Wrapper();
 
@@ -71,7 +74,7 @@ protected:
     QString subject,date,from,mbox,msg_id,replyto;
     int msg_number,msg_size;
     QBitArray msg_flags;
-    QStringList to,cc,bcc,in_reply_to;
+    QStringList to,cc,bcc,in_reply_to,references;
     AbstractMail*wrapper;
     void init();
     void copy_old(const RecMail&old);
@@ -91,7 +94,7 @@ protected:
 public:
     RecPart();
     virtual ~RecPart();
-    
+
     const QString&Type()const;
     void setType(const QString&type);
     const QString&Subtype()const;
@@ -107,7 +110,7 @@ public:
     void setSize(unsigned int size);
     const unsigned int Size()const;
 
-    
+
     void setParameters(const part_plist_t&list);
     const part_plist_t&Parameters()const;
     void addParameter(const QString&key,const QString&value);
@@ -131,7 +134,7 @@ public:
 
     void setDescription(const RecPart&des);
     const RecPart& Description()const;
-    
+
     void setParts(const QValueList<RecPart>&parts);
     const QValueList<RecPart>& Parts()const;
     void addPart(const RecPart&part);
@@ -142,7 +145,7 @@ class encodedString
 public:
     encodedString();
     /*
-       creates an new content string. 
+       creates an new content string.
        it makes a deep copy of it!
      */
     encodedString(const char*nContent,unsigned int length);
@@ -158,12 +161,12 @@ public:
     encodedString& operator=(const encodedString&old);
     /* destructor - cleans the content */
     virtual ~encodedString();
-    
+
     /* returns a pointer to the content - do not delete yoursel! */
     const char*Content()const;
     /* returns the lengths of the content 'cause it must not be a null-terminated string! */
     const int Length()const;
-    
+
     /*
        makes a deep copy of nContent!
      */
@@ -178,7 +181,7 @@ public:
 protected:
     char * content;
     unsigned int size;
-    
+
     void init();
     void copy_old(const encodedString&old);
     void clean();

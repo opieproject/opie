@@ -1,5 +1,5 @@
 TEMPLATE        = lib
-CONFIG        += qt warn_on debug 
+CONFIG        += qt warn_on debug
 
 HEADERS         = mailwrapper.h \
                imapwrapper.h \
@@ -14,8 +14,9 @@ HEADERS         = mailwrapper.h \
                sendmailprogress.h \
                statusmail.h \
                mhwrapper.h \
-	nntpwrapper.h 
-               
+               nntpwrapper.h \
+               generatemail.h
+
 SOURCES         = imapwrapper.cpp \
                mailwrapper.cpp \
                mailtypes.cpp \
@@ -29,11 +30,12 @@ SOURCES         = imapwrapper.cpp \
                sendmailprogress.cpp \
                statusmail.cpp \
                mhwrapper.cpp \
-              nntpwrapper.cpp
+              nntpwrapper.cpp \
+              generatemail.cpp
 
-INTERFACES 	= logindialogui.ui \
+INTERFACES     = logindialogui.ui \
               sendmailprogressui.ui
-               
+
 
 INCLUDEPATH += $(OPIEDIR)/include
 
@@ -41,7 +43,7 @@ CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
 contains( CONFTEST, y ){
     LIBS        += -lqpe -letpan -lssl -lcrypto -liconv
 }else{
-    LIBS        += -lqpe -letpan -lssl -lcrypto  
+    LIBS        += -lqpe -letpan -lssl -lcrypto
 }
 
 DESTDIR         = $(OPIEDIR)/lib$(PROJMAK)
