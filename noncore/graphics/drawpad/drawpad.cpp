@@ -23,6 +23,7 @@
 #include "importdialog.h"
 #include "linetool.h"
 #include "newpagedialog.h"
+#include "page.h"
 #include "pageinformationdialog.h"
 #include "pointtool.h"
 #include "rectangletool.h"
@@ -281,8 +282,8 @@ void DrawPad::newPage()
     NewPageDialog newPageDialog(rect.width(), rect.height(), m_pen.color(), m_brush.color(), this);
 
     if (newPageDialog.exec() == QDialog::Accepted) {
-        m_pDrawPadCanvas->newPage(newPageDialog.selectedWidth(), newPageDialog.selectedHeight(),
-                                  newPageDialog.selectedColor());
+        m_pDrawPadCanvas->newPage(newPageDialog.selectedTitle(), newPageDialog.selectedWidth(),
+                                  newPageDialog.selectedHeight(), newPageDialog.selectedColor());
     }
 }
 
@@ -604,5 +605,6 @@ void DrawPad::pageInformation()
     PageInformationDialog pageInformationDialog(m_pDrawPadCanvas->currentPage());
 
     if (pageInformationDialog.exec() == QDialog::Accepted) {
+        m_pDrawPadCanvas->currentPage()->setTitle(pageInformationDialog.selectedTitle());
     }
 }

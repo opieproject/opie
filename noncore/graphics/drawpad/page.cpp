@@ -19,15 +19,17 @@ Page::Page()
     m_lastModified = QDateTime::currentDateTime();
 }
 
-Page::Page(int w, int h)
+Page::Page(QString title, int w, int h)
     : QPixmap(w, h)
 {
+    m_title = title;
     m_lastModified = QDateTime::currentDateTime();
 }
 
-Page::Page(const QSize& size)
+Page::Page(QString title, const QSize& size)
     : QPixmap(size)
 {
+    m_title = title;
     m_lastModified = QDateTime::currentDateTime();
 }
 

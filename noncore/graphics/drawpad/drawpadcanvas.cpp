@@ -47,10 +47,14 @@ public:
 private:
     enum State {
         Unknown,
+        InTitle,
+        InDate,
         InData
     };
 
     State m_state;
+    QString m_title;
+    QDateTime m_date;
     ulong m_dataLenght;
     QString m_dataFormat;
     QList<Page> m_pages;
@@ -76,7 +80,14 @@ bool DrawPadCanvasXmlHandler::startElement(const QString& namespaceURI, const QS
     Q_CONST_UNUSED(namespaceURI)
     Q_CONST_UNUSED(localName)
 
-    if (qName.compare("data") == 0) {
+    if (qName == "image") {
+        m_title = QString();
+        m_date = QDateTime(QDate(1970, 1, 1));
+    } else if (qName == "title") {
+        m_state = InTitle;
+    } else if (qName == "date") {
+        m_state = InDate;
+    } else if (qName == "data") {
         m_state = InData;
         m_dataLenght = atts.value("length").toULong();
         m_dataFormat = atts.value("format");
@@ -95,16 +106,24 @@ bool DrawPadCanvasXmlHandler::endElement(const QString& namespaceURI, const QStr
     Q_CONST_UNUSED(namespaceURI)
     Q_CONST_UNUSED(localName)
 
-    if (qName.compare("data") == 0) {
+    if (qName == "title") {
+        m_state = Unknown;
+    } else if (qName == "date") {
+        m_state = Unknown;
+    } else if (qName == "data") {
         m_state = Unknown;
     }
 
     return true;
 }
 
-bool DrawPadCanvasXmlHandler::characters(const QString& ch) 
+bool DrawPadCanvasXmlHandler::characters(const QString& ch)
 {
-    if (m_state == InData) {
+    if (m_state == InTitle) {
+        m_title = ch;
+    } else if (m_state == InDate) {
+        m_date = m_date.addSecs(ch.toInt());
+    } else if (m_state == InData) {
         QByteArray byteArray(ch.length() / 2);
 
         for (int i = 0; i < (int)ch.length() / 2; i++) {
@@ -145,7 +164,8 @@ bool DrawPadCanvasXmlHandler::characters(const QString& ch)
             image.loadFromData((const uchar*)byteArray.data(), m_dataLenght, m_dataFormat);
         }
 
-        Page* page = new Page(image.width(), image.height());
+        Page* page = new Page(m_title, image.width(), image.height());
+        page->setLastModified(m_date);
         page->convertFromImage(image);
         m_pages.append(page);
     }
@@ -182,7 +202,7 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
     m_pages = drawPadCanvasXmlHandler.pages();
 
     if (m_pages.isEmpty()) {
-        m_pages.append(new Page(contentsRect().size()));
+        m_pages.append(new Page("", contentsRect().size()));
         m_pages.current()->fill(Qt::white);
     }
 
@@ -198,7 +218,7 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
 
 void DrawPadCanvas::initialPage()
 {
-    m_pages.append(new Page(236, 232));
+    m_pages.append(new Page("", 236, 232));
     m_pages.current()->fill(Qt::white);
 
     m_pageBackups.clear();
@@ -223,6 +243,10 @@ void DrawPadCanvas::save(QIODevice* ioDevice)
 
     for (bufferIterator.toFirst(); bufferIterator.current() != 0; ++bufferIterator) {
         textStream << "        <image>" << endl;
+        textStream << "            <title>" << bufferIterator.current()->title() << "</title>" << endl;
+        
+        int intDate = QDateTime(QDate(1970, 1, 1)).secsTo(bufferIterator.current()->lastModified());
+        textStream << "            <date>" << intDate << "</date>" << endl;
 
         QImage image = bufferIterator.current()->convertToImage();
         QByteArray byteArray;
@@ -341,7 +365,9 @@ void DrawPadCanvas::selectPage(Page* page)
 
 void DrawPadCanvas::backupPage()
 {
-    QPixmap* currentBackup = m_pageBackups.current();
+    m_pages.current()->setLastModified(QDateTime::currentDateTime());
+
+    Page* currentBackup = m_pageBackups.current();
     while (m_pageBackups.last() != currentBackup) {
         m_pageBackups.removeLast();
     }
@@ -359,7 +385,7 @@ void DrawPadCanvas::deleteAll()
 {
     m_pages.clear();
 
-    m_pages.append(new Page(contentsRect().size()));
+    m_pages.append(new Page("", contentsRect().size()));
     m_pages.current()->fill(Qt::white);
 
     m_pageBackups.clear();
@@ -372,9 +398,9 @@ void DrawPadCanvas::deleteAll()
     emit pageBackupsChanged();
 }
 
-void DrawPadCanvas::newPage(uint width, uint height, const QColor& color)
+void DrawPadCanvas::newPage(QString title, uint width, uint height, const QColor& color)
 {
-    m_pages.insert(m_pages.at() + 1, new Page(width, height));
+    m_pages.insert(m_pages.at() + 1, new Page(title, width, height));
     m_pages.current()->fill(color);
 
     m_pageBackups.clear();
@@ -405,7 +431,7 @@ void DrawPadCanvas::deletePage()
     m_pages.remove(m_pages.current());
 
     if (m_pages.isEmpty()) {
-        m_pages.append(new Page(contentsRect().size()));
+        m_pages.append(new Page("", contentsRect().size()));
         m_pages.current()->fill(Qt::white);
     }
 

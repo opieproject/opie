@@ -85,6 +85,11 @@ NewPageDialog::~NewPageDialog()
 {
 }
 
+QString NewPageDialog::selectedTitle()
+{
+    return (m_pTitleLineEdit->text());
+}
+
 uint NewPageDialog::selectedWidth()
 {
     return (m_pWidthSpinBox->value());

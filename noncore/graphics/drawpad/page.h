@@ -22,8 +22,8 @@ class Page : public QPixmap
 {
 public:
     Page();
-    Page(int w, int h);
-    Page(const QSize& size);
+    Page(QString title, int w, int h);
+    Page(QString title, const QSize& size);
 
     ~Page();
     

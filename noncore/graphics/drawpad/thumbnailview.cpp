@@ -321,8 +321,8 @@ void ThumbnailView::newPage()
                                 m_pDrawPad->brush().color(), this);
 
     if (newPageDialog.exec() == QDialog::Accepted) {
-        m_pDrawPadCanvas->newPage(newPageDialog.selectedWidth(), newPageDialog.selectedHeight(),
-                                  newPageDialog.selectedColor());
+        m_pDrawPadCanvas->newPage(newPageDialog.selectedTitle(), newPageDialog.selectedWidth(),
+                                  newPageDialog.selectedHeight(), newPageDialog.selectedColor());
         m_pPageListBox->updateView();
         updateView();
     }
