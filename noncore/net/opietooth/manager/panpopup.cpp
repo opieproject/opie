@@ -58,6 +58,6 @@ void PanPopup::slotConnectAndConfig() {
 
     // more intelligence here later like passing the device ( bnepX )
     QCopEnvelope e( "QPE/System", "execute(QString)" );
-    e << QString( "networksetup" );
+    e << QString( "networksettings" );
 
 }

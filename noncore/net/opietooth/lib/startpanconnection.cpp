@@ -37,6 +37,7 @@ StartConnection::ConnectionType StartPanConnection::type() {
 
 void StartPanConnection::start()  {
     m_panConnect = new OProcess();
+    qDebug( "IM START " + m_mac );
     *m_panConnect << "pand" << "--connect" << m_mac;
 
     connect( m_panConnect, SIGNAL( processExited( OProcess* ) ) ,
