@@ -4,10 +4,13 @@ Priority: optional
 Section: opie/settings
 Maintainer: Clement Seveillac <clement@nist.gov>
 Architecture: arm
-Version: 0.0.1.13
+Version: 0.0.2
 Depends: opie-security
 Description: multi-plugin authentication demonstrator for Opie.
  This demonstration application allows us to use one or several
- ways to lock and unlock our device.
+ ways to lock and unlock our device. Since it really locks your
+ PDA the way you configured it in the Security settings, you can
+ map a button to it through the Buttons settings to lock your
+ PDA on demand, with one simple click.
  You must install some opie-multiauth-* plugins, and configure
  them through opie-security, to really see its possibilities.

@@ -2,5 +2,5 @@
 Exec=multiauth
 Icon=security/multiauth
 Type=Application
-Name=Multiauth demo
-Comment=Multi-authentication demonstration
+Name=Multiauth lock
+Comment=Call the Multi-authentication protection now
