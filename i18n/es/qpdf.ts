@@ -99,7 +99,7 @@
     </message>
     <message>
         <source>File does not exist!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡El fichero no existe!</translation>
     </message>
 </context>
 </TS>

@@ -105,11 +105,11 @@
     <name>ConfigDialog</name>
     <message>
         <source>Edit Connection Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar perfil de conexión</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation type="unfinished">Nueva conexión</translation>
+        <translation>Nueva conexión</translation>
     </message>
 </context>
 <context>
@@ -482,11 +482,11 @@
     </message>
     <message>
         <source>New Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo perfil</translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar perfil</translation>
     </message>
 </context>
 <context>
@@ -535,7 +535,7 @@
     </message>
     <message>
         <source>New Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo perfil</translation>
     </message>
 </context>
 <context>

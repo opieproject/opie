@@ -41,11 +41,11 @@ Puntuación: %1</translation>
     </message>
     <message>
         <source>Press any key to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse una tecla para empezar</translation>
     </message>
     <message>
         <source>Press any key to begin a new game.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse una tecla para comenzar un nuevo juego.</translation>
     </message>
 </context>
 </TS>

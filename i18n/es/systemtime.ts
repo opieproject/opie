@@ -76,7 +76,7 @@
         <source>Running:
 ntpdate </source>
         <translation>Ejecutando:
-ntpdate</translation>
+ntpdate </translation>
     </message>
     <message>
         <source>Error</source>
@@ -98,7 +98,7 @@ ntpdate</translation>
         <source>Error while getting time from
  server: </source>
         <translation>Error al obtener la hora del
-servidor:</translation>
+servidor: </translation>
     </message>
     <message>
         <source>Could not connect to server </source>
@@ -106,11 +106,11 @@ servidor:</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Preguntó por un retraso de %1 minutos, pero sólo %2 minutos transcurrieron desde el último ajuste.&lt;br&gt;¿Continúo?</translation>
     </message>
     <message>
         <source>%1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 segundos</translation>
     </message>
 </context>
 <context>

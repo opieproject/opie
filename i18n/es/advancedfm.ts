@@ -143,11 +143,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished">Copiar </translation>
+        <translation>Copiar </translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished"> Como</translation>
+        <translation> Como</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>

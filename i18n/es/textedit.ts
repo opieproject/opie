@@ -198,12 +198,13 @@ tiene cambios sin salvar.
     </message>
     <message>
         <source>%1 - Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Editor de Textos</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguro que quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
+del disco?&lt;BR&gt;¡Es &lt;B&gt;irreversible&lt;/B&gt;!</translation>
     </message>
 </context>
 <context>

@@ -22,19 +22,19 @@
     <name>TodoPluginConfigBase</name>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation type="unfinished">Fija el número máximo de tareas que deben mostrarse</translation>
+        <translation>Fija el número máximo de tareas que deben mostrarse</translation>
     </message>
     <message>
         <source>tasks shown</source>
-        <translation type="unfinished"></translation>
+        <translation>tareas mostradas</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="unfinished">Después de cuántos caracteres la información de la tarea debe ser cortada</translation>
+        <translation>Después de cuántos caracteres la información de la tarea debe ser cortada</translation>
     </message>
     <message>
         <source>Clip line after X chars</source>
-        <translation type="unfinished">Cortar línea tras X caracteres</translation>
+        <translation>Cortar línea tras X caracteres</translation>
     </message>
 </context>
 <context>

@@ -401,11 +401,11 @@ editando las categorías.</translation>
     <name>QMessageBox</name>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
 </context>
 <context>
@@ -782,84 +782,85 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished">Pulse para cerrar esta ventana, descartando los cambios.</translation>
+        <translation>Pulse para cerrar esta ventana, descartando los cambios.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished">Pulse para cerrar esta ventana.</translation>
+        <translation>Pulse para cerrar esta ventana.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished">Pulse para cerrar esta ventana y aplicar los cambios.</translation>
+        <translation>Pulse para cerrar esta ventana y aplicar los cambios.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished">Pulse para hacer esta ventana móvil.</translation>
+        <translation>Pulse para hacer esta ventana móvil.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished">Pulse para hacer que esta ventana use toda la pantalla disponible.</translation>
+        <translation>Pulse para hacer que esta ventana use toda la pantalla disponible.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="unfinished">&lt;Qt&gt;No se dispone de ayuda exhaustiva para esta aplicación, sin embargo hay ayuda sensible al contexto.&lt;p&gt;Para usar esta ayuda:&lt;p&gt;&lt;ol&gt;&lt;li&gt;mantenga pulsado el botón de ayuda.&lt;li&gt;cuando la barra de título muestre &lt;b&gt;Qué es esto...&lt;/b&gt;, pulse en cualquier control.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+        <translation>&lt;Qt&gt;No se dispone de ayuda exhaustiva para esta aplicación, sin embargo hay ayuda sensible al contexto.&lt;p&gt;Para usar esta ayuda:&lt;p&gt;&lt;ol&gt;&lt;li&gt;mantenga pulsado el botón de ayuda.&lt;li&gt;cuando la barra de título muestre &lt;b&gt;Qué es esto...&lt;/b&gt;, pulse en cualquier control.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation type="unfinished">Qué es esto...</translation>
+        <translation>Qué es esto...</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Are you sure you want to delete
  %1?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;¿Seguro que quiere borrar
+%1?&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>Ene</translation>
     </message>
     <message>
         <source>Feb</source>
-        <translation type="unfinished"></translation>
+        <translation>Feb</translation>
     </message>
     <message>
         <source>Mar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>Apr</source>
-        <translation type="unfinished"></translation>
+        <translation>Abr</translation>
     </message>
     <message>
         <source>May</source>
-        <translation type="unfinished"></translation>
+        <translation>May</translation>
     </message>
     <message>
         <source>Jun</source>
-        <translation type="unfinished"></translation>
+        <translation>Jun</translation>
     </message>
     <message>
         <source>Jul</source>
-        <translation type="unfinished"></translation>
+        <translation>Jul</translation>
     </message>
     <message>
         <source>Aug</source>
-        <translation type="unfinished"></translation>
+        <translation>Ago</translation>
     </message>
     <message>
         <source>Sep</source>
-        <translation type="unfinished"></translation>
+        <translation>Sep</translation>
     </message>
     <message>
         <source>Oct</source>
-        <translation type="unfinished"></translation>
+        <translation>Oct</translation>
     </message>
     <message>
         <source>Nov</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov</translation>
     </message>
     <message>
         <source>Dec</source>
-        <translation type="unfinished"></translation>
+        <translation>Dic</translation>
     </message>
 </context>
 <context>

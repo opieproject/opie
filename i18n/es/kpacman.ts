@@ -96,7 +96,7 @@ Quiero agradecer a mi novia Elke Krueers sus
     </message>
     <message>
         <source>KPacman</source>
-        <translation type="unfinished"></translation>
+        <translation>KPacman</translation>
     </message>
 </context>
 <context>
@@ -220,10 +220,6 @@ o está en un formato desconocido.</translation>
     <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@YY@/@MM@/@DD@</translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

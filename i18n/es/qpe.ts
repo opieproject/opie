@@ -66,12 +66,12 @@ Por favor cárguela.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Información</translation>
+        <translation>Información</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;La fecha del sistema parece no ser válida.
+        <translation>&lt;p&gt;La fecha del sistema parece no ser válida.
 (%1)&lt;/p&gt;&lt;p&gt;¿Quiere poner en hora el reloj?&lt;/p&gt;</translation>
     </message>
 </context>
@@ -176,7 +176,7 @@ Por favor cárguela.</translation>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished">Estado de la Batería</translation>
+        <translation>Estado de la Batería</translation>
     </message>
 </context>
 <context>

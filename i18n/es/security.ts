@@ -104,15 +104,15 @@ Acceso denegado</translation>
     </message>
     <message>
         <source>Passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Código</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificación</translation>
     </message>
     <message>
         <source>Login Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificación automática</translation>
     </message>
 </context>
 </TS>

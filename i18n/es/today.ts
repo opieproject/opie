@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="unfinished">Pertenece a </translation>
+        <translation>Pertenece a </translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -113,70 +113,70 @@ al encender?
     </message>
     <message>
         <source>Today Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de Hoy</translation>
     </message>
 </context>
 <context>
     <name>TodayConfigMiscBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished">Marque aquí si HOY debe ser autoarrancado al arrancar.</translation>
+        <translation>Marque aquí si HOY debe ser autoarrancado al arrancar.</translation>
     </message>
     <message>
         <source>autostart on resume?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿arrancar al encender?</translation>
     </message>
     <message>
         <source>tiny banner</source>
-        <translation type="unfinished"></translation>
+        <translation>mini-avisos</translation>
     </message>
     <message>
         <source>Have small banner </source>
-        <translation type="unfinished"></translation>
+        <translation>Tiene aviso pequeño</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished">Cuantos minutos ha estado suspendidad la PDA antes que se active la opción de autoarranque</translation>
+        <translation>Cuantos minutos ha estado suspendidad la PDA antes que se active la opción de autoarranque</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished">minutos inactivo</translation>
+        <translation>minutos inactivo</translation>
     </message>
     <message>
         <source> pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>pixel</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation type="unfinished">Fijar el tamaño del icono en pixel</translation>
+        <translation>Fijar el tamaño del icono en pixel</translation>
     </message>
     <message>
         <source>icon size</source>
-        <translation type="unfinished"></translation>
+        <translation>tamaño del icono</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"> seg</translation>
+        <translation> seg</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished">nunca</translation>
+        <translation>nunca</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished">Con qué frecuencia debe Hoy actualizarse</translation>
+        <translation>Con qué frecuencia debe Hoy actualizarse</translation>
     </message>
     <message>
         <source>refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>actualizar</translation>
     </message>
 </context>
 </TS>

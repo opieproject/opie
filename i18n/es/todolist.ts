@@ -3,11 +3,11 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;Alarma en %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
@@ -30,7 +30,7 @@
     </message>
     <message>
         <source>Task Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de tarear</translation>
     </message>
 </context>
 <context>
@@ -45,15 +45,15 @@
     </message>
     <message>
         <source>silent</source>
-        <translation type="unfinished"></translation>
+        <translation>silenciosa</translation>
     </message>
     <message>
         <source>loud</source>
-        <translation type="unfinished"></translation>
+        <translation>sonora</translation>
     </message>
     <message>
         <source>Opie Todolist</source>
-        <translation type="unfinished"></translation>
+        <translation>Tareas Opie</translation>
     </message>
 </context>
 <context>
@@ -238,27 +238,27 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Template Editor</source>
-        <translation type="unfinished">Editor de plantillas</translation>
+        <translation>Editor de plantillas</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Añadir</translation>
+        <translation>Añadir</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Editar</translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Eliminar</translation>
+        <translation>Eliminar</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>New Template %1</source>
-        <translation type="unfinished">Nueva plantilla %1</translation>
+        <translation>Nueva plantilla %1</translation>
     </message>
     <message>
         <source>Click here to set the priority of new task.
@@ -266,7 +266,7 @@ e inténtelo de nuevo.
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished">Pulse aquí para fijar la prioridad de la nueva tarea.
+        <translation>Pulse aquí para fijar la prioridad de la nueva tarea.
 
 Esta área se llama barra rápida de tareas.
 
@@ -278,7 +278,7 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished">Introduzca aquí la descripción de la nueva tarea.
+        <translation>Introduzca aquí la descripción de la nueva tarea.
 
 Esta área se llama barra rápida de tareas.
 
@@ -286,7 +286,7 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished">Más</translation>
+        <translation>Más</translation>
     </message>
     <message>
         <source>Click here to enter additional information for new task.
@@ -294,7 +294,7 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished">Pulse aquí para introducir información adicional en una nueva tarea.
+        <translation>Pulse aquí para introducir información adicional en una nueva tarea.
 
 Esta área se llama barra rápida de tareas.
 
@@ -302,7 +302,7 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
     </message>
     <message>
         <source>Enter</source>
-        <translation type="unfinished">Introducir</translation>
+        <translation>Introducir</translation>
     </message>
     <message>
         <source>Click here to add new task.
@@ -310,7 +310,7 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished">Pulse aquí para añadir una nueva tarea.
+        <translation>Pulse aquí para añadir una nueva tarea.
 
 Esta área se llama barra rápida de tareas.
 
@@ -318,7 +318,7 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Click here to reset new task information.
@@ -326,7 +326,7 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished">Pulse aquí para reiniciar la información de una nueva tarea.
+        <translation>Pulse aquí para reiniciar la información de una nueva tarea.
 
 Esta área se llama barra rápida de tareas.
 
@@ -334,11 +334,11 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
     </message>
     <message>
         <source>Data can not be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Los datos no pueden ser editados, estoy sincronizando</translation>
     </message>
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Los datos no pueden ser editados, estoy sincronizando</translation>
     </message>
 </context>
 <context>
@@ -372,15 +372,15 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
 </context>
 <context>
@@ -487,7 +487,7 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
     </message>
     <message>
         <source>Summary:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sumario:</translation>
     </message>
 </context>
 <context>

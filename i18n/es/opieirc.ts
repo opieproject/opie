@@ -221,43 +221,43 @@
     </message>
     <message>
         <source>Received unhandled numeric command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Recivido comando numérico no manejado: %1</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Recivido comando ctcp no manejado: %1</translation>
     </message>
     <message>
         <source>Received unhandled literal command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Recivido comando literal no manejado: %1</translation>
     </message>
     <message>
         <source>%1 joined channel %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 unido al canal %2</translation>
     </message>
     <message>
         <source>You left channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha dejado el canal %1</translation>
     </message>
     <message>
         <source>%1 left channel %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dejó el canal %2</translation>
     </message>
     <message>
         <source>Channel message with unknown channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensaje del canal con canal desconocido %1</translation>
     </message>
     <message>
         <source>You are now known as %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ahora es conocido como %1</translation>
     </message>
     <message>
         <source>%1 is now known as %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 es ahora conocido como %2</translation>
     </message>
     <message>
         <source>%1 has quit (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ha salido (%2)</translation>
     </message>
 </context>
 <context>
@@ -504,7 +504,7 @@ de canales que empiezan por &apos;#&apos; o &apos;+&apos;</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Configuración</translation>
+        <translation>Configuración</translation>
     </message>
 </context>
 <context>

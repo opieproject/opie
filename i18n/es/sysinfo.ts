@@ -3,47 +3,47 @@
     <name>FileSysInfo</name>
     <message>
         <source>CF</source>
-        <translation type="unfinished">CF</translation>
+        <translation>CF</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation type="unfinished">Este gráfico representa la memoria usada actualmente es esta tarjeta de memoria Compact Flash.</translation>
+        <translation>Este gráfico representa la memoria usada actualmente es esta tarjeta de memoria Compact Flash.</translation>
     </message>
     <message>
         <source>Ha</source>
-        <translation type="unfinished">Ha</translation>
+        <translation>Ha</translation>
     </message>
     <message>
         <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation type="unfinished">Este gráfico representa el almacenamiento usado en este disco duro.</translation>
+        <translation>Este gráfico representa el almacenamiento usado en este disco duro.</translation>
     </message>
     <message>
         <source>SD</source>
-        <translation type="unfinished">SD</translation>
+        <translation>SD</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation type="unfinished">Este gráfico representa cuanta memoria se usa actualmente en esta tarjeta Secure Digital.</translation>
+        <translation>Este gráfico representa cuanta memoria se usa actualmente en esta tarjeta Secure Digital.</translation>
     </message>
     <message>
         <source>SC</source>
-        <translation type="unfinished">SC</translation>
+        <translation>SC</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished">En</translation>
+        <translation>En</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation type="unfinished">Este gráfico representa cuanta memoria se usa actualmente de la memoria incorporada (p.e. Flash) en este dispositivo.</translation>
+        <translation>Este gráfico representa cuanta memoria se usa actualmente de la memoria incorporada (p.e. Flash) en este dispositivo.</translation>
     </message>
     <message>
         <source>RA</source>
-        <translation type="unfinished">RA</translation>
+        <translation>RA</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation type="unfinished">Este gráfico representa cuánta memoria usa actualmente el disco RAM temporal.</translation>
+        <translation>Este gráfico representa cuánta memoria usa actualmente el disco RAM temporal.</translation>
     </message>
 </context>
 <context>
@@ -154,11 +154,11 @@ Mantenga pulsado un módulo para ver información adicional sobre el módulo, o 
     </message>
     <message>
         <source>Used by</source>
-        <translation type="unfinished"></translation>
+        <translation>Usado por</translation>
     </message>
     <message>
         <source>You really want to execute %1 for this module?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguro que quiere ejecutar %1 para este módulo?</translation>
     </message>
 </context>
 <context>
@@ -226,7 +226,7 @@ Mantenga pulsado un proceso para ver información adicional, o para enviarle una
     </message>
     <message>
         <source>You really want to send %1 to this process?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguro que quiere enviar %1 a este proceso?</translation>
     </message>
 </context>
 <context>

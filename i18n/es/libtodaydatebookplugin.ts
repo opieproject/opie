@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>All day</source>
-        <translation type="unfinished"></translation>
+        <translation>Día completo</translation>
     </message>
 </context>
 <context>
@@ -77,55 +77,55 @@ mostradas?</translation>
     <name>DatebookPluginConfigBase</name>
     <message>
         <source>DatebookPluginConfigBase</source>
-        <translation type="unfinished"></translation>
+        <translation>DatebookPluginConfigBase</translation>
     </message>
     <message>
         <source>Show location</source>
-        <translation type="unfinished">Mostrar localidad</translation>
+        <translation>Mostrar localidad</translation>
     </message>
     <message>
         <source>Check this if the location of an appointment should be shown for each one</source>
-        <translation type="unfinished">Verifique esto si la localización de una cita debe ser mostrada para cada una</translation>
+        <translation>Verifique esto si la localización de una cita debe ser mostrada para cada una</translation>
     </message>
     <message>
         <source>Show notes</source>
-        <translation type="unfinished">Mostrar notas</translation>
+        <translation>Mostrar notas</translation>
     </message>
     <message>
         <source>Check this if the note attached to an appointment should be shown for each one</source>
-        <translation type="unfinished">Verifique esto si la nota adjunta a una cita debe ser mostrada en cada una</translation>
+        <translation>Verifique esto si la nota adjunta a una cita debe ser mostrada en cada una</translation>
     </message>
     <message>
         <source>Show only later appointments</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar sólo últimas citas</translation>
     </message>
     <message>
         <source>Check this if only appointments later then current time should be shown</source>
-        <translation type="unfinished">Verifique esto si sólo las citas porteriores al momento actual deben ser mostradas</translation>
+        <translation>Verifique esto si sólo las citas porteriores al momento actual deben ser mostradas</translation>
     </message>
     <message>
         <source>Show time in extra line</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar hora en línea extra</translation>
     </message>
     <message>
         <source>How many appointments should be shown maximal. In chronical order</source>
-        <translation type="unfinished">Cuántas citas deben ser mostradas como máximo. En orden cronológico</translation>
+        <translation>Cuántas citas deben ser mostradas como máximo. En orden cronológico</translation>
     </message>
     <message>
         <source>How many appointment should be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Cuántas citas deben ser mostradas?</translation>
     </message>
     <message>
         <source>only today</source>
-        <translation type="unfinished">sólo hoy</translation>
+        <translation>sólo hoy</translation>
     </message>
     <message>
         <source>How many more days should be in the range</source>
-        <translation type="unfinished">Cuántos días más deben estar en el rango</translation>
+        <translation>Cuántos días más deben estar en el rango</translation>
     </message>
     <message>
         <source>How many more days</source>
-        <translation type="unfinished">Cuántos días mas</translation>
+        <translation>Cuántos días mas</translation>
     </message>
 </context>
 <context>

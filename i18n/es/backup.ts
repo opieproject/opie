@@ -12,47 +12,48 @@
     <message>
         <source>Error from System:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Error del Sistema:
+</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensaje</translation>
     </message>
     <message>
         <source>Backup Failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Copia fallida!</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Detalles</translation>
     </message>
     <message>
         <source>Backup and Restore.. Failed !!</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia y restauración.. ¡¡Falló!!</translation>
     </message>
     <message>
         <source>Backup Successfull.</source>
-        <translation type="unfinished"></translation>
+        <translation>Copia exitosa.</translation>
     </message>
     <message>
         <source>Please select something to restore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, seleccione algo a restaurar.</translation>
     </message>
     <message>
         <source>Restore Failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Restauración fallida.</translation>
     </message>
     <message>
         <source>Unable to open File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de abrir fichero: %1</translation>
     </message>
     <message>
         <source>Restore Successfull.</source>
-        <translation type="unfinished"></translation>
+        <translation>Restauración exitosa.</translation>
     </message>
 </context>
 <context>
@@ -102,15 +103,15 @@
     <name>ErrorDialog</name>
     <message>
         <source>Error Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Información de error</translation>
     </message>
     <message>
         <source>Error Message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensaje de error:</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
 </context>
 </TS>

@@ -88,11 +88,14 @@ una señal no capturada
 by an uncaught signal
 (%1)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Opie fue terminado por
+una señal no capturada
+(%1)
+</translation>
     </message>
     <message>
         <source>Could not start Opie.</source>
-        <translation type="unfinished"></translation>
+        <translation>No pude iniciar Opie.</translation>
     </message>
 </context>
 </TS>
