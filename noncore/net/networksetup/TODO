@@ -1,5 +1,10 @@
 test WEP
 WEP key in file wireless.conf is not encrypted !, therefore it is very easy to get the key out of the zaurus..
+WEP transimtion rat
+1 or 2
+5.5
+1
+Auto
 
 udchcp needs to output the dhcp information so interfaces can read it
 
