@@ -218,7 +218,7 @@ void WLANImp::accept(){
   }	
   
   if(essAny->isChecked() && essSpecificLineEdit->text().isEmpty()){
-    QMessageBox::information(this, "Error", "Please enter a ESS-ID.", QMessageBox::Ok);
+    QMessageBox::information(this, "Error", "Please enter a SSID.", QMessageBox::Ok);
     return;
   }
   

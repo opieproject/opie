@@ -2,27 +2,42 @@
 #include "keyedit.h"
 #include "interfacesetupimp.h"
 
+#include "../interfaces/interface.h"
+
+#include <assert.h>
+#include <errno.h>
+#include <string.h>
+
+#include <qapplication.h>
 #include <qfile.h>
 #include <qdir.h>
+#include <qdialog.h>
 #include <qtextstream.h>
 #include <qmessagebox.h>
 #include <qlineedit.h>
 #include <qlabel.h>
 #include <qspinbox.h>
 #include <qradiobutton.h>
+#include <qpushbutton.h>
 #include <qcheckbox.h>
 #include <qtabwidget.h>
 #include <qcombobox.h>
+#include <qlistview.h>
+#include <qvbox.h>
+#include <qprogressbar.h>
 
 #ifdef QWS
+ #include <qpe/resource.h>
  #include <opie/oprocess.h>
+ #include <opie2/onetwork.h>
+ #include <opie2/opcap.h>
 #else
  #define OProcess KProcess
  #include <kprocess.h>
 #endif
 
 #define WIRELESS_OPTS "/etc/pcmcia/wireless.opts"
-#define PREUP "/etc/netwrok/if-pre-up.d/wireless-tools"
+#define PREUP "/etc/network/if-pre-up.d/wireless-tools"
 
 /**
  * Constructor, read in the wireless.opts file for parsing later.
@@ -37,6 +52,13 @@ WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, W
   if (file.exists()) {
     qWarning(QString("WLANImp: Unable to open /etc/network/if-pre-up.d/wireless-tools"));
   }
+
+  connect( rescanButton, SIGNAL( clicked() ), this, SLOT( rescanNeighbourhood() ) );
+  connect( netView, SIGNAL( clicked( QListViewItem* ) ), this, SLOT( selectNetwork( QListViewItem* ) ) );
+  netView->setColumnAlignment( col_chn, AlignCenter );
+  netView->setItemMargin( 3 );
+  netView->setAllColumnsShowFocus( true );
+
 }
 
 WLANImp::~WLANImp() {
@@ -273,4 +295,196 @@ void WLANImp::writeOpts() {
     return;
 
   QDialog::accept();
+}
+
+/*
+ * Scan for possible wireless networks around...
+ * ... powered by Wellenreiter II technology (C) Michael 'Mickey' Lauer <mickeyl@handhelds.org>
+ */
+
+void WLANImp::rescanNeighbourhood()
+{
+    QString name = interface->getInterfaceName();
+    qDebug( "rescanNeighbourhood via '%s'", (const char*) name );
+
+    OWirelessNetworkInterface* wiface = static_cast<OWirelessNetworkInterface*>( ONetwork::instance()->interface( name ) );
+    assert( wiface );
+
+    // try to guess device type
+    QString devicetype;
+    QFile m( "/proc/modules" );
+    if ( m.open( IO_ReadOnly ) )
+    {
+        QString line;
+        QTextStream modules( &m );
+        while( !modules.atEnd() && !devicetype )
+        {
+            modules >> line;
+            if ( line.contains( "cisco" ) ) devicetype = "cisco";
+            else if ( line.contains( "hostap" ) ) devicetype = "hostap";
+            else if ( line.contains( "prism" ) ) devicetype = "wlan-ng"; /* puke */
+            else if ( line.contains( "orinoco" ) ) devicetype = "orinoco";
+        }
+    }
+    if ( devicetype.isEmpty() )
+    {
+        qWarning( "rescanNeighbourhood(): couldn't guess device type :(" );
+        return;
+    }
+    else
+    {
+        qDebug( "rescanNeighbourhood(): device type seems to be '%s'", (const char*) devicetype );
+    }
+
+    // configure interface to receive 802.11 management frames
+
+    wiface->setUp( true );
+    wiface->setPromiscuousMode( true );
+
+    if ( devicetype == "cisco" ) wiface->setMonitoring( new OCiscoMonitoringInterface( wiface, false ) );
+    else if ( devicetype == "hostap" ) wiface->setMonitoring( new OHostAPMonitoringInterface( wiface, false ) );
+    else if ( devicetype == "wlan-ng" ) wiface->setMonitoring( new OWlanNGMonitoringInterface( wiface, false ) );
+    else if ( devicetype == "orinoco" ) wiface->setMonitoring( new OOrinocoMonitoringInterface( wiface, false ) );
+    else
+    {
+        qDebug( "rescanNeighbourhood(): unsupported device type for monitoring :(" );
+        return;
+    }
+
+    wiface->setMonitorMode( true );
+    if ( !wiface->monitorMode() )
+    {
+        qWarning( "rescanNeighbourhood(): Unable to bring device into monitor mode (%s).", strerror( errno ) );
+        return;
+    }
+
+    // open a packet capturer
+    OPacketCapturer* cap = new OPacketCapturer();
+    cap->open( name );
+    if ( !cap->isOpen() )
+    {
+        qWarning( "rescanNeighbourhood(): Unable to open libpcap (%s).", strerror( errno ) );
+        return;
+    }
+
+    // display splash screen
+    QFrame* splash = new QFrame( this, "splash", false, WStyle_StaysOnTop | WStyle_DialogBorder | WStyle_Customize );
+    splash->setLineWidth( 2 );
+    splash->setFrameStyle( QFrame::Panel | QFrame::Raised );
+    QVBoxLayout* vbox = new QVBoxLayout( splash, 4, 4 );
+    QLabel* lab = new QLabel( "<center><b>Scanning...</b><br>Please Wait...</center>", splash );
+    QProgressBar* pb = new QProgressBar( wiface->channels(), splash );
+    vbox->addWidget( lab );
+    vbox->addWidget( pb );
+    pb->setCenterIndicator( true );
+    pb->setFixedHeight( pb->sizeHint().height() );
+    QWidget* widgetDesktop = qApp->desktop();
+    int dw = widgetDesktop->width();
+    int dh = widgetDesktop->height();
+    int pw = vbox->sizeHint().width();
+    int ph = vbox->sizeHint().height();
+    splash->setGeometry((dw-pw)/2,(dh-ph)/2,pw,ph);
+    splash->show();
+    splash->raise();
+    qApp->processEvents();
+
+    // set capturer to non-blocking mode
+    cap->setBlocking( false );
+
+    for ( int i = 1; i <= wiface->channels(); ++i )
+    {
+        wiface->setChannel( i );
+        pb->setProgress( i );
+        qApp->processEvents();
+        qDebug( "rescanNeighbourhood(): listening on channel %d...", i );
+        OPacket* p = cap->next( 1000 );
+        if ( !p )
+        {
+            qDebug( "rescanNeighbourhood(): nothing received on channel %d", i );
+        }
+        else
+        {
+            qDebug( "rescanNeighbourhood(): TADAA - something came in on channel %d", i );
+            handlePacket( p );
+        }
+    }
+
+    cap->close();
+    wiface->setMonitorMode( false );
+    wiface->setPromiscuousMode( true );
+
+    splash->hide();
+    delete splash;
+
+}
+
+void WLANImp::handlePacket( OPacket* p )
+{
+
+    // check if we received a beacon frame
+    OWaveLanManagementPacket* beacon = static_cast<OWaveLanManagementPacket*>( p->child( "802.11 Management" ) );
+    if ( beacon && beacon->managementType() == "Beacon" )
+    {
+
+        QString type;
+        if ( beacon->canIBSS() )
+        {
+            type = "adhoc";
+        }
+        else if ( beacon->canESS() )
+        {
+            type = "managed";
+        }
+        else
+        {
+            qWarning( "handlePacket(): invalid frame [possibly noise] detected!" );
+            return;
+        }
+
+        OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
+        QString essid = ssid ? ssid->ID() : QString("<unknown>");
+        OWaveLanManagementDS* ds = static_cast<OWaveLanManagementDS*>( p->child( "802.11 DS" ) );
+        int channel = ds ? ds->channel() : -1;
+        OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
+        displayFoundNetwork( type, channel, essid, header->macAddress2() );
+    }
+}
+
+
+void WLANImp::displayFoundNetwork( const QString& mode, int channel, const QString& ssid, const OMacAddress& mac )
+{
+
+    qDebug( "found network: <%s>, chn %d, ssid '%s', mac '%s'", (const char*) mode, channel,
+                                                                (const char*) ssid,
+                                                                (const char*) mac.toString() );
+
+    QListViewItemIterator it( netView );
+    while ( it.current() && it.current()->text( col_ssid ) != ssid ) ++it;
+    if ( !it.current() ) // ssid didn't show up yet
+    {
+        QListViewItem* item = new QListViewItem( netView, mode.left( 1 ).upper(), ssid, QString::number( channel ), mac.toString() );
+        QString name;
+        name.sprintf( "networksettings/%s", (const char*) mode );
+        item->setPixmap( col_mode, Resource::loadPixmap( name ) );
+        qApp->processEvents();
+    }
+
+}
+
+
+void WLANImp::selectNetwork( QListViewItem* item )
+{
+    bool ok;
+    if ( item )
+    {
+        specifyAp->setChecked(true);
+        macEdit->setText( item->text( col_mac ) );
+        specifyChan->setChecked( item->text( col_mode ) == "A" );
+        networkChannel->setValue( item->text( col_chn ).toInt( &ok ) );
+        essid->setEditText( item->text( col_ssid ) );
+        if ( item->text( col_mode ) == "A" )
+            mode->setCurrentItem( 3 );
+        else
+            mode->setCurrentItem( 2 );
+    }
 }
