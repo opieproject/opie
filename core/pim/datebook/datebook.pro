@@ -11,6 +11,7 @@ HEADERS	= datebookday.h \
       modules/weeklst/datebookweeklstevent.h \
       modules/weeklst/datebookweeklstview.h \
       modules/weeklst/datebookweeklstdblview.h \
+      modules/monthview/odatebookmonth.h \
 	  datebookweekheaderimpl.h \
 	  repeatentry.h \
 	  noteentryimpl.h \
@@ -31,6 +32,7 @@ SOURCES	= main.cpp \
       modules/weeklst/datebookweeklstevent.cpp \
       modules/weeklst/datebookweeklstview.cpp \
       modules/weeklst/datebookweeklstdblview.cpp \
+      modules/monthview/odatebookmonth.cpp \
 	  datebookweekheaderimpl.cpp \
 	  repeatentry.cpp \
 	  noteentryimpl.cpp \

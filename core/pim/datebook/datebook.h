@@ -31,7 +31,7 @@ class QWidgetStack;
 class DateBookDay;
 class DateBookWeek;
 class DateBookWeekLst;
-class DateBookMonth;
+class ODateBookMonth;
 class Event;
 class QDate;
 class Ir;
@@ -108,7 +108,7 @@ private:
     QWidgetStack *views;
     DateBookDay *dayView;
     DateBookWeek *weekView;
-    DateBookMonth *monthView;
+    ODateBookMonth *monthView;
     DateBookWeekLst *weekLstView;
     QAction *dayAction, *weekAction, *weekLstAction, *monthAction;
     int weeklistviewconfig;

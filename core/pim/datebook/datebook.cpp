@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.43 2005-03-19 13:44:30 alwin Exp $
+** $Id: datebook.cpp,v 1.44 2005-03-20 10:51:54 alwin Exp $
 **
 **********************************************************************/
 
@@ -27,6 +27,7 @@
 #include "datebooksettings.h"
 #include "datebookweek.h"
 #include "modules/weeklst/datebookweeklst.h"
+#include "modules/monthview/odatebookmonth.h"
 #include "dateentryimpl.h"
 
 #include <opie2/odebug.h>
@@ -35,7 +36,7 @@
 #include <opie2/opluginloader.h>
 #include <opie2/todayplugininterface.h>
 
-#include <qpe/datebookmonth.h>
+//#include <qpe/datebookmonth.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/finddialog.h>
@@ -589,7 +590,7 @@ void DateBook::initWeekLst() {
 void DateBook::initMonth()
 {
     if ( !monthView ) {
-        monthView = new DateBookMonth( views, "month view", FALSE, db );
+        monthView = new ODateBookMonth( views, "month view", FALSE, db );
         views->addWidget( monthView, MONTH );
         connect( monthView, SIGNAL( dateClicked(int,int,int) ), this, SLOT( showDay(int,int,int) ) );
         connect( this, SIGNAL( newEvent() ), monthView, SLOT( redraw() ) );
