@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #ifndef __VOLUME_APPLET_H__
 #define __VOLUME_APPLET_H__
 
@@ -25,33 +26,33 @@
 #include <qframe.h>
 #include <qpixmap.h>
 #include <qguardedptr.h>
+#include <qtimer.h>
 
 class QSlider;
 class QCheckBox;
-class QPushButton;
-class QTimer;
 
 class VolumeControl : public QFrame
 {
     Q_OBJECT
 public:
-    VolumeControl( QWidget *parent=0, const char *name=0 );
+    VolumeControl( bool showMic=FALSE, QWidget *parent=0, const char *name=0 );
 
 public:
     QSlider *slider;
+    QSlider *mic;
     QCheckBox *muteBox;
-
-private:
-    void keyPressEvent( QKeyEvent * );
-
-private slots:
-    void ButtonChanged();
-    void rateTimerDone();
 
 private:
     QPushButton *upButton;
     QPushButton *downButton;
     QTimer *rateTimer;
+    
+    void keyPressEvent( QKeyEvent * );
+    void createView(bool showMic = FALSE);
+private slots:
+    void ButtonChanged();
+    void rateTimerDone();
+    
 };
 
 class VolumeApplet : public QWidget
@@ -65,21 +66,35 @@ public:
 
 public slots:
     void volumeChanged( bool muted );
-    void setVolume( int percent );
+    void micChanged( bool muted );
     void sliderMoved( int percent );
     void mute( bool );
 
+    void micMoved( int percent );
+    void setVolume( int percent );
+    void setMic( int percent );
+
+    void showVolControl(bool showMic = FALSE);
+    void advVolControl();
+
 private:
+    int volumePercent, micPercent;
+    bool muted, micMuted;
+    QPixmap volumePixmap;
+    QTimer *advancedTimer;
+
     void readSystemVolume();
     void writeSystemVolume();
     void mousePressEvent( QMouseEvent * );
     void paintEvent( QPaintEvent* );
 
-private:
-    int volumePercent;
-    bool muted;
-    QPixmap volumePixmap;
+    void readSystemMic();
+    void keyPressEvent ( QKeyEvent * e );
+    void mouseReleaseEvent( QMouseEvent *);
+    void writeSystemMic();
+
 };
 
 
 #endif // __VOLUME_APPLET_H__
+
