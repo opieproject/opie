@@ -42,6 +42,7 @@
 #include <qlayout.h>
 #include <qtl.h>
 
+
 //#include <iostream.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -127,20 +128,21 @@ void Today::setOwnerField(QString &message) {
  * If registered against that today ist started on each resume.
  */
 void Today::autoStart() {
-    // Config cfg("today");
-    //cfg.setGroup("Autostart");
-    //AUTOSTART = cfg.readNumEntry("autostart",1);
-
-  if (AUTOSTART) {
-    QCopEnvelope e("QPE/System", "autoStart(QString, QString, QString)");
-    e << QString("add");
-    e << QString("today");
-    e << AUTOSTART_TIMER;
-  } else {
-    QCopEnvelope e("QPE/System", "autoStart(QString, QString)");
-    e << QString("remove");
-    e << QString("today");
-  }
+    Config cfg("today");
+    cfg.setGroup("Autostart");
+    int AUTOSTART = cfg.readNumEntry("autostart",1);
+    qDebug(QString("%1").arg(AUTOSTART));
+    if (AUTOSTART) {
+        QCopEnvelope e("QPE/System", "autoStart(QString, QString, QString)");
+        e << QString("add");
+        e << QString("today");
+        e << AUTOSTART_TIMER;
+    } else {
+        qDebug("Nun in else bei autostart");
+        QCopEnvelope e("QPE/System", "autoStart(QString, QString)");
+        e << QString("remove");
+        e << QString("today");
+    }
 }
 
 /*
@@ -261,6 +263,7 @@ void Today::startConfig() {
   int autostart = conf->CheckBoxAuto->isChecked();
   int autostartdelay = conf->SpinBoxTime->value();
 
+
   cfg.writeEntry("maxlinestask",maxlinestask);
   cfg.writeEntry("maxcharclip", maxcharclip);
   cfg.writeEntry("maxlinesmeet",maxmeet);
@@ -275,6 +278,7 @@ void Today::startConfig() {
   cfg.write();
   NEW_START=1;
   draw();
+  AUTOSTART=autostart;
   autoStart();
 }
 
@@ -453,7 +457,7 @@ void Today::startMail() {
   e << QString("opiemail");
 //Right now start both, maybe decide which to rum via config file ..
   QCopEnvelope f("QPE/System", "execute(QString)");
-  e << QString("qtmail");
+  f << QString("qtmail");
 }
 
 
