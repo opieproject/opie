@@ -58,9 +58,35 @@
 #include <linux/soundcard.h>
 #endif
 
-const char* PATH_PROC_CPUINFO = "/proc/cpuinfo";
+namespace Opie {
+namespace Core {
 
-using namespace Opie::Core;
+static const char* PATH_PROC_CPUINFO = "/proc/cpuinfo";
+
+
+/* STATIC and common implementation */
+/* EXPORT */ ODistribution distributions[] = {
+    { System_Familiar,        "FamiliarLinux",   "/etc/familiar-version" },
+    { System_OpenZaurus,      "OpenZaurus",      "/etc/oz_version" },
+    { System_OpenEmbedded,    "OpenEmbedded",    "/etc/oe-version" },
+    { System_Unknown,         "Linux",           "/etc/issue" },
+};
+
+
+/* EXPORT */ bool isQWS(){
+    return qApp ? ( qApp->type() == QApplication::GuiServer ) : false;
+}
+
+/* EXPORT */ QCString makeChannel ( const char *str ){
+    if ( str && !::strchr ( str, '/' ))
+        return QCString ( "QPE/Application/" ) + str;
+    else
+        return str;
+}
+
+
+
+/* Now the default implementation of ODevice */
 
 struct default_button default_buttons [] =  {
     { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
@@ -684,4 +710,8 @@ void ODevice::sendSuspendmsg()
         return;
 
     QCopEnvelope ( "QPE/System", "aboutToSuspend()" );
+}
+
+
+}
 }

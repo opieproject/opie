@@ -134,14 +134,8 @@ typedef struct {
     char* sysvfile;
 } ODistribution;
 
-static ODistribution distributions[] =
-{
-    { System_Familiar,        "FamiliarLinux",   "/etc/familiar-version" },
-    { System_OpenZaurus,      "OpenZaurus",      "/etc/oz_version" },
-    { System_OpenEmbedded,    "OpenEmbedded",    "/etc/oe-version" },
-    { System_Unknown,         "Linux",           "/etc/issue" },
+extern ODistribution distributions[];
 
-};
 
 enum OLedState {
     Led_Off,
@@ -352,21 +346,12 @@ class ODeviceData {
     QStrList                   *m_cpu_frequencies;
 };
 
+extern bool isQWS();
+extern QCString makeChannel ( const char *str );
 }
 }
 
-static inline bool isQWS()
-{
-    return qApp ? ( qApp->type() == QApplication::GuiServer ) : false;
-}
 
-static QCString makeChannel ( const char *str )
-{
-    if ( str && !::strchr ( str, '/' ))
-        return QCString ( "QPE/Application/" ) + str;
-    else
-        return str;
-}
 
 
 #endif
