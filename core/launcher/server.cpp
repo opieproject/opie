@@ -32,34 +32,29 @@
 #include "launcher.h"
 #include "shutdownimpl.h"
 #include "applauncher.h"
+#if 0
 #include "suspendmonitor.h"
+#endif
 #include "documentlist.h"
 
 #include <qtopia/applnk.h>
-#include <qtopia/categories.h>
+#include <qtopia/private/categories.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/config.h>
-#include <qtopia/services.h>
-#include <qtopia/devicebuttonmanager.h>
-#include <qtopia/pluginloader.h>
 #include <qtopia/resource.h>
 #include <qtopia/version.h>
 #include <qtopia/storage.h>
 
-#ifdef Q_WS_QWS
 #include <qtopia/qcopenvelope_qws.h>
 #include <qwindowsystem_qws.h>
 #include <qgfx_qws.h>
-#endif
 #include <qtopia/global.h>
 #include <qtopia/custom.h>
 
-#ifdef Q_OS_WIN32
-#include <io.h>
-#include <process.h>
-#else
+#include <opie/odevicebutton.h>
+#include <opie/odevice.h>
+
 #include <unistd.h>
-#endif
 #include <qmainwindow.h>
 #include <qmessagebox.h>
 #include <qtimer.h>
@@ -68,6 +63,8 @@
 #include <stdlib.h>
 
 extern QRect qt_maxWindowRect;
+
+using namespace Opie;
 
 static QWidget *calibrate(bool)
 {
@@ -109,11 +106,12 @@ static Global::Command builtins[] = {
 #undef APP
 #endif
 
+    /* FIXME defines need to be defined*/
 #if defined(QPE_NEED_CALIBRATION)
-        { "calibrate",          calibrate,	1, 0 }, // No tr
+        { "calibrate",          calibrate,	        1, 0 }, // No tr
 #endif
 #if !defined(QT_QWS_CASSIOPEIA)
-	{ "shutdown",           Global::shutdown,		1, 0 }, // No tr
+	{ "shutdown",           Global::shutdown,      	1, 0 }, // No tr
 //	{ "run",                run,			1, 0 }, // No tr
 #endif
 
@@ -136,11 +134,14 @@ Server::Server() :
     Global::setBuiltinCommands(builtins);
 
     tid_xfer = 0;
-    tid_today = startTimer(3600*2*1000);
+    /* ### FIXME ### */
+/*    tid_today = startTimer(3600*2*1000);*/
     last_today_show = QDate::currentDate();
 
-    tsmMonitor = new TempScreenSaverMonitor();
+#if 0
+    tsmMonitor = new TempScreenSaverMode();
     connect( tsmMonitor, SIGNAL(forceSuspend()), qApp, SIGNAL(power()) );
+#endif
 
     serverGui = new Launcher;
     serverGui->createGUI();
@@ -159,7 +160,8 @@ Server::Server() :
     (void) new IrServer( this );
 
     packageHandler = new PackageHandler( this );
-    connect(qApp, SIGNAL(activate(const DeviceButton*,bool)),this,SLOT(activate(const DeviceButton*,bool)));
+    connect(qApp, SIGNAL(activate(const Opie::ODeviceButton*,bool)),
+            this,SLOT(activate(const Opie::ODeviceButton*,bool)));
 
     setGeometry( -10, -10, 9, 9 );
 
@@ -190,7 +192,9 @@ Server::~Server()
     delete qcopBridge;
     delete transferServer;
     delete serverGui;
+#if 0
     delete tsmMonitor;
+#endif
 }
 
 static bool hasVisibleWindow(const QString& clientname, bool partial)
@@ -218,17 +222,23 @@ static bool hasVisibleWindow(const QString& clientname, bool partial)
     return FALSE;
 }
 
-void Server::activate(const DeviceButton* button, bool held)
+void Server::activate(const Opie::ODeviceButton* button, bool held)
 {
     Global::terminateBuiltin("calibrate"); // No tr
-    ServiceRequest sr;
+    Opie::OQCopMessage om;
     if ( held ) {
-	sr = button->heldAction();
+	om = button->heldAction();
     } else {
-	sr = button->pressedAction();
+	om = button->pressedAction();
     }
+
+    if ( om.channel() != "ignore" )
+        om.send();
+
     // A button with no action defined, will return a null ServiceRequest.  Don't attempt
     // to send/do anything with this as it will crash
+    /* ### FIXME */
+#if 0
     if ( !sr.isNull() ) {
 	QString app = sr.app();
 	bool vis = hasVisibleWindow(app, app != "qpe");
@@ -241,6 +251,7 @@ void Server::activate(const DeviceButton* button, bool held)
 
 	sr.send();
     }
+#endif
 }
 
 
@@ -307,11 +318,16 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 	   transferServer->authorizeConnections();
 	if ( qcopBridge )
 	    qcopBridge->authorizeConnections();
-    } else if ( msg == "setTempScreenSaverMode(int,int)" ) {
+    }
+    /* ### FIXME support TempScreenSaverMode */
+#if 0
+    else if ( msg == "setTempScreenSaverMode(int,int)" ) {
 	int mode, pid;
 	stream >> mode >> pid;
 	tsmMonitor->setTempMode(mode, pid);
-    } else if ( msg == "linkChanged(QString)" ) {
+    }
+#endif
+    else if ( msg == "linkChanged(QString)" ) {
 	QString link;
 	stream >> link;
 	qDebug( "desktop.cpp systemMsg -> linkchanged( %s )", link.latin1() );
@@ -360,10 +376,17 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 	e << locked;
 #endif
 
-    } else if ( msg == "sendVersionInfo()" ) {
+    }
+    /*
+     * QtopiaDesktop relies on the major number
+     * to start with 1. We're at 0.9
+     * so wee need to fake at least 1.4 to be able
+     * to sync with QtopiaDesktop1.6
+     */
+    else if ( msg == "sendVersionInfo()" ) {
 	QCopEnvelope e( "QPE/Desktop", "versionInfo(QString,QString)" );
-	QString v = QPE_VERSION;
-	e << Global::version() << Global::architecture();
+        /* ### FIXME Architecture ### */
+	e << QString::fromLatin1("1.7") << "Uncustomized Device";
     } else if ( msg == "sendCardInfo()" ) {
 #ifndef QT_NO_COP
 	QCopEnvelope e( "QPE/Desktop", "cardInfo(QString)" );
@@ -455,6 +478,49 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 	Config cfg( "qpe" );
 	cfg.setGroup("Keyboard");
 	cfg.writeEntry( "Layout", kb );
+    } else if ( msg == "autoStart(QString)" ) {
+        QString appName;
+        stream >> appName;
+        Config cfg( "autostart" );
+        cfg.setGroup( "AutoStart" );
+        if ( appName.compare("clear") == 0){
+            cfg.writeEntry("Apps", "");
+        }
+    } else if ( msg == "autoStart(QString,QString)" ) {
+        QString modifier, appName;
+        stream >> modifier >> appName;
+        Config cfg( "autostart" );
+        cfg.setGroup( "AutoStart" );
+        if ( modifier.compare("add") == 0 ){
+            // only add if appname is entered
+           if (!appName.isEmpty()) {
+                cfg.writeEntry("Apps", appName);
+            }
+        } else if (modifier.compare("remove") == 0 ) {
+            // need to change for multiple entries
+            // actually remove is right now simular to clear, but in future there
+            // should be multiple apps in autostart possible.
+            QString checkName;
+            checkName = cfg.readEntry("Apps", "");
+            if (checkName == appName) {
+                cfg.writeEntry("Apps", "");
+            }
+        }
+        // case the autostart feature should be delayed
+    } else if ( msg == "autoStart(QString,QString,QString)") {
+         QString modifier, appName, delay;
+         stream >> modifier >> appName >> delay;
+        Config cfg( "autostart" );
+
+        cfg.setGroup( "AutoStart" );
+        if ( modifier.compare("add") == 0 ){
+            // only add it appname is entered
+            if (!appName.isEmpty()) {
+                cfg.writeEntry("Apps", appName);
+                cfg.writeEntry("Delay", delay);
+            }
+        } else {
+        }
     }
 #endif
 }
@@ -466,15 +532,20 @@ void Server::receiveTaskBar(const QCString &msg, const QByteArray &data)
     if ( msg == "reloadApps()" ) {
 	docList->reloadAppLnks();
     } else if ( msg == "soundAlarm()" ) {
-	soundAlarm();
+	ServerApplication::soundAlarm();
     }
-#ifdef CUSTOM_LEDS
     else if ( msg == "setLed(int,bool)" ) {
 	int led, status;
 	stream >> led >> status;
-	CUSTOM_LEDS( led, status );
+
+        QValueList <OLed> ll = ODevice::inst ( )-> ledList ( );
+        if ( ll. count ( ))	{
+            OLed l = ll. contains ( Led_Mail ) ? Led_Mail : ll [0];
+            bool canblink = ODevice::inst ( )-> ledStateList ( l ). contains ( Led_BlinkSlow );
+
+            ODevice::inst ( )-> setLedState ( l, status ? ( canblink ? Led_BlinkSlow : Led_On ) : Led_Off );
+        }
     }
-#endif
 }
 
 void Server::cancelSync()
@@ -570,7 +641,10 @@ void Server::timerEvent( QTimerEvent *e )
 	killTimer( tid_xfer );
 	tid_xfer = 0;
 	startTransferServer();
-    } else if ( e->timerId() == tid_today ) {
+    }
+    /* ### FIXME today startin */
+#if 0
+    else if ( e->timerId() == tid_today ) {
 	QDate today = QDate::currentDate();
 	if ( today != last_today_show ) {
 	    last_today_show = today;
@@ -584,6 +658,7 @@ void Server::timerEvent( QTimerEvent *e )
 	    }
 	}
     }
+#endif
 }
 
 void Server::terminateServers()
@@ -603,6 +678,7 @@ void Server::syncConnectionClosed( const QHostAddress & )
 
 void Server::pokeTimeMonitors()
 {
+#if 0
     // inform all TimeMonitors
     QStrList tms = Service::channels("TimeMonitor");
     for (const char* ch = tms.first(); ch; ch=tms.next()) {
@@ -610,6 +686,7 @@ void Server::pokeTimeMonitors()
 	QCopEnvelope e(ch, "timeChange(QString)");
 	e << t;
     }
+#endif
 }
 
 void Server::applicationLaunched(int, const QString &app)
@@ -620,7 +697,9 @@ void Server::applicationLaunched(int, const QString &app)
 void Server::applicationTerminated(int pid, const QString &app)
 {
     serverGui->applicationStateChanged( app, ServerInterface::Terminated );
+#if 0
     tsmMonitor->applicationTerminated( pid );
+#endif
 }
 
 void Server::applicationConnected(const QString &app)
@@ -636,12 +715,6 @@ void Server::storageChanged()
 }
 
 
-void Server::soundAlarm()
-{
-#ifdef CUSTOM_SOUND_ALARM
-    CUSTOM_SOUND_ALARM;
-#endif
-}
 
 void Server::preloadApps()
 {

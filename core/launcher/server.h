@@ -29,7 +29,6 @@ class QCopBridge;
 class QHostAddress;
 class TransferServer;
 class PackageHandler;
-class DeviceButton;
 class ServiceRequest;
 class TempScreenSaverMonitor;
 class AppLauncher;
@@ -38,6 +37,9 @@ class StorageInfo;
 class SyncDialog;
 class DocumentList;
 class ServerInterface;
+namespace Opie {
+    class ODeviceButton;
+}
 
 class Server : public QWidget {
     Q_OBJECT
@@ -49,7 +51,6 @@ public:
 
     void show();
 
-    static void soundAlarm();
     static bool setKeyboardLayout( const QString &kb );
 
 public slots:
@@ -59,7 +60,7 @@ public slots:
     void pokeTimeMonitors();
 
 private slots:
-    void activate(const DeviceButton*,bool);
+    void activate(const Opie::ODeviceButton*,bool);
     void syncConnectionClosed( const QHostAddress & );
     void applicationLaunched(int pid, const QString &app);
     void applicationTerminated(int pid, const QString &app);
@@ -72,6 +73,7 @@ protected:
     void timerEvent( QTimerEvent *e );
 
 private:
+    void layout();
     void startTransferServer();
     void preloadApps();
 
@@ -80,8 +82,9 @@ private:
     PackageHandler *packageHandler;
     QDate last_today_show;
     int tid_xfer;
-    int tid_today;
-    TempScreenSaverMonitor *tsmMonitor;
+    /* ### FIXME two below### */
+//    int tid_today;
+//    TempScreenSaverMonitor *tsmMonitor;
     StorageInfo *storage;
     SyncDialog *syncDialog;
     AppLauncher *appLauncher;
