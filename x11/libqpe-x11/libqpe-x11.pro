@@ -134,7 +134,7 @@ INTERFACES =  ../../library/passwordbase_p.ui \
               ../../library/findwidgetbase_p.ui \
               ../../library/lnkpropertiesbase_p.ui
 
-TARGET		= qpe-x11
+TARGET		= qpe
 DESTDIR		= $(QTDIR)/lib$(PROJMAK)
 # This is set by configure$(OPIEDIR).
 VERSION		= 1.5.0.1
