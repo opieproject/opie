@@ -124,11 +124,11 @@ namespace OpieTooth {
 
     }
 
-    void ScanDialog::fillList(const QString& device, RemoteDevices::ValueList deviceList) {
+    void ScanDialog::fillList(const QString& device, RemoteDevice::ValueList deviceList) {
 
         QCheckListItem * deviceItem;
 
-        RemoteDevices::ValueList::Iterator it;
+        RemoteDevice::ValueList::Iterator it;
         for( it = deviceList.begin(); it != deviceList.end(); ++it ) {
 
             deviceItem = new QCheckListItem( ListView1, (*it).name() );
@@ -146,13 +146,13 @@ namespace OpieTooth {
             return;
         }
 
-        QList<RemoteDevices> *deviceList = new QList<RemoteDevices>;
+        QList<RemoteDevice> *deviceList = new QList<RemoteDevice>;
 
         QListViewItemIterator it( ListView1 );
         for ( ; it.current(); ++it ) {
             if ( ((QCheckListItem*)it.current())->isOn() ) {
-                RemoteDevices* device = new RemoteDevices(  it.current()->text(1), it.current()->text(0));
-                   deviceList->append( device );
+                RemoteDevice * device = new RemoteDevice(  it.current()->text(1), it.current()->text(0));
+                deviceList->append( device );
             }
         }
         emit selectedDevices( *deviceList );

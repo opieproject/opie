@@ -34,6 +34,7 @@
 #include <qapplication.h>
 #include <qcheckbox.h>
 #include <qlineedit.h>
+#include <qlistview.h>
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
@@ -41,7 +42,8 @@
 
 namespace OpieTooth {
 
-    class RemoteDevices;
+
+    #include <remotedevice.h>
 
     BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
         : BluetoothBase( parent, name, fl ) {
@@ -153,10 +155,19 @@ namespace OpieTooth {
 }
 
 
-    void BlueBase::addSearchedDevices( QList<RemoteDevices> &newDevices ) {
+    void BlueBase::addSearchedDevices( QList<RemoteDevice> &newDevices ) {
+
+        QListViewItem * deviceItem;
+
+        QListIterator<RemoteDevice> it(newDevices);
+
+        for( ; it.current(); ++it ) {
 
 
-
+            RemoteDevice *dev = it.current();
+            deviceItem = new QListViewItem( ListView4, dev->name() );
+            deviceItem->setText(1, dev->mac() );
+        }
     }
 
 
@@ -165,8 +176,8 @@ namespace OpieTooth {
  */
     void BlueBase::startScan() {
         ScanDialog *scan = new ScanDialog( this, "", true);
-        QObject::connect((QObject*)scan, SIGNAL( selectedDevices(QList<RemoteDevices>&) ),
-                         this, SLOT( addSearchedDevices(QList<RemoteDevices>& ) ));
+        QObject::connect((QObject*)scan, SIGNAL( selectedDevices(QList<RemoteDevice>&) ),
+                         this, SLOT( addSearchedDevices(QList<RemoteDevice>& ) ));
 
         scan->showMaximized();
     }

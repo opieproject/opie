@@ -60,7 +60,7 @@ class Device;
         void stopSearch();
         void startSearch();
           void progressTimer();
-        void fillList(const QString& device, RemoteDevices::ValueList list);
+        void fillList(const QString& device, RemoteDevice::ValueList list);
 
     private:
         void emitToManager();
@@ -68,7 +68,7 @@ class Device;
         int progressStat;
 
     signals:
-        void selectedDevices(QList<RemoteDevices>&);
+        void selectedDevices(QList<RemoteDevice>&);
     };
 
 

@@ -53,7 +53,7 @@ namespace OpieTooth {
 	int enableInquiryscan;
 
 	private slots:
-        void addSearchedDevices( QList<RemoteDevices> &newDevices );
+        void addSearchedDevices( QList<RemoteDevice> &newDevices );
       	void applyConfigChanges();
 
     };
