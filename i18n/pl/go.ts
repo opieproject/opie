@@ -7,15 +7,15 @@
     </message>
     <message>
         <source>Pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas</translation>
     </message>
     <message>
         <source>Resign</source>
-        <translation type="unfinished"></translation>
+        <translation>Rezygnuj</translation>
     </message>
     <message>
         <source>Two player option</source>
-        <translation>Opcje dla 2 graczy</translation>
+        <translation>Opcja dla 2 graczy</translation>
     </message>
     <message>
         <source>Game</source>
@@ -42,7 +42,7 @@
     </message>
     <message>
         <source>I pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasuje</translation>
     </message>
     <message>
         <source>Prisoners: black %1, white %2</source>

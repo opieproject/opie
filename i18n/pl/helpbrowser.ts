@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Home</source>
-        <translation>Dom</translation>
+        <translation>Poczatek</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
