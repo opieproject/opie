@@ -286,18 +286,19 @@ OTodo OTodoAccessBackendSQL::find(int uid ) const{
     return todo( m_driver->query(&query) );
 
 }
+#define CACHE 32
 OTodo OTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
                                    uint cur, Frontend::CacheDirection dir ) const{
     qWarning("searching for %d", uid );
-    QArray<int> search( 8 );
+    QArray<int> search( CACHE );
     uint size =0;
     OTodo to;
 
-    // we try to cache 8 items
+    // we try to cache CACHE items
     switch( dir ) {
         /* forward */
     case 0:
-        for (uint i = cur; i < ints.count() && size < 8; i++ ) {
+        for (uint i = cur; i < ints.count() && size < CACHE; i++ ) {
             qWarning("size %d %d", size,  ints[i] );
             search[size] = ints[i];
             size++;
@@ -305,7 +306,7 @@ OTodo OTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
         break;
         /* reverse */
     case 1:
-        for (uint i = cur; i != 0 && size <  8; i-- ) {
+        for (uint i = cur; i != 0 && size <  CACHE; i-- ) {
             search[size] = ints[i];
             size++;
         }
