@@ -91,7 +91,7 @@ void ConfigDlg::slotChangeMethod()
 		if ( dlg.exec() == QDialog::Accepted )
 		{
 			dlg.saveItem();
-			QListViewItem *item = new QListViewItem( list );
+			QListViewItem *item = list->selectedItem();
 			item->setText( 0 , dlg.nameLE->text() );
 		}
 		else qDebug( "SearchMethodDlg abgebrochen" );
@@ -102,7 +102,14 @@ void ConfigDlg::slotChangeMethod()
 void ConfigDlg::slotDeleteMethod()
 {
 	if ( list->selectedItem() )
+	{
+		Config cfg ( "odict" );
+		cfg.setGroup( "Method_"+list->selectedItem()->text(0) );
+		cfg.clearGroup();
+		//FIXME: this only removes the entries but not the group itself
+		
 		list->takeItem( list->selectedItem() );
+	}
 	else qDebug("no item selected"); 
 }
 

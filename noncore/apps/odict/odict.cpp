@@ -69,6 +69,7 @@ void ODict::loadConfig()
 	completewords = cfg.readEntry( "completewords" ).toInt();
 
 	QStringList groupListCfg = cfg.groupList().grep( "Method_" );
+	query_co->clear();
 	for ( QStringList::Iterator it = groupListCfg.begin() ; it != groupListCfg.end() ; ++it )
 	{
 		cfg.setGroup( *it );
@@ -89,7 +90,7 @@ void ODict::saveConfig()
 
 void ODict::slotDisplayAbout()
 {
-	QMessageBox::about(  this, tr( "About ODict" ), tr( "OPIE-Dictionary ODict \n (c) 2002, 2003 Carsten  Niehaus \n cniehaus@handhelds.org \n Version 20030103" ) );
+	QMessageBox::about(  this, tr( "About ODict" ), tr( "OPIE-Dictionary ODict \n (c) 2002, 2003 Carsten  Niehaus \n cniehaus@handhelds.org \n Version 20030104" ) );
 }
 
 void ODict::slotStartQuery()
@@ -97,7 +98,7 @@ void ODict::slotStartQuery()
 	QString querystring = query_le->text();
 	qDebug("opening dict >%s< for >%s<", activated_name.latin1(),querystring.latin1());
 	if (querystring.isEmpty()){
-	  qWarning("empty querysting");
+	  qWarning("empty querystring");
 	  return;
 	}
 	if (!activated_name || activated_name.isEmpty())
@@ -116,7 +117,10 @@ void ODict::slotSettings()
 {
 	ConfigDlg dlg( this, "Config" , true);
 	if ( dlg.exec() == QDialog::Accepted )
+	{
 		dlg.writeEntries();
+		loadConfig();
+	}
 	else qDebug( "abgebrochen" );
 }
 
