@@ -15,7 +15,7 @@ usage ( ) {
 
 shift
 
-cp /etc/resolv.conf $tmpfile
+[ -f /etc/resolv.conf ] && cp /etc/resolv.conf $tmpfile
 
 case "$arg1" in
 	"-a")
