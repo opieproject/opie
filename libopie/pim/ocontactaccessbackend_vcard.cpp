@@ -13,11 +13,14 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.4 2002-11-13 14:14:51 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.5 2002-12-07 13:26:22 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.4  2002-11-13 14:14:51  eilers
+ * Revision 1.5  2002-12-07 13:26:22  eilers
+ * Fixing bug in storing anniversary..
+ *
+ * Revision 1.4  2002/11/13 14:14:51  eilers
  * Added sorted for Contacts..
  *
  * Revision 1.3  2002/11/11 16:41:09  kergoth
@@ -383,7 +386,7 @@ OContact OContactAccessBackend_VCard::parseVObject( VObject *obj )
 			c.setGender( value );
 		}
 		else if ( name == "X-Qtopia-Anniversary" ) {
-			c.setAnniversary( TimeConversion::fromString( value ) );
+			c.setAnniversary( convVCardDateToDate( value ) );
 		}
 		else if ( name == "X-Qtopia-Nickname" ) {
 			c.setNickname( value );
@@ -494,17 +497,8 @@ VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
 	
 	// Exporting Birthday regarding RFC 2425 (5.8.4)
 	if ( c.birthday().isValid() ){
-		QString birthd_rfc2425 = QString("%1-%2-%3")
-			.arg( c.birthday().year() )
-			.arg( c.birthday().month(), 2 )
-			.arg( c.birthday().day(), 2 );
-		// Now replace spaces with "0"...
-		int pos = 0;
-		while ( ( pos = birthd_rfc2425.find (' ')  ) > 0 )
-			birthd_rfc2425.replace( pos, 1, "0" );
-		
-		qWarning("Exporting birthday as: %s", birthd_rfc2425.latin1());
-		safeAddPropValue( vcard, VCBirthDateProp, birthd_rfc2425.latin1() );
+		qWarning("Exporting birthday as: %s", convDateToVCardDate( c.birthday() ).latin1() );
+		safeAddPropValue( vcard, VCBirthDateProp, convDateToVCardDate( c.birthday() ) );
 	}
 	
 	if ( !c.company().isEmpty() || !c.department().isEmpty() || !c.office().isEmpty() ) {
@@ -521,11 +515,28 @@ VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
 	
 	safeAddPropValue( vcard, "X-Qtopia-Spouse", c.spouse() );
 	safeAddPropValue( vcard, "X-Qtopia-Gender", c.gender() );
-	safeAddPropValue( vcard, "X-Qtopia-Anniversary", TimeConversion::toString( c.anniversary() ) );
+	if ( c.anniversary().isValid() ){
+		qWarning("Exporting anniversary as: %s", convDateToVCardDate( c.anniversary() ).latin1() );
+		safeAddPropValue( vcard, "X-Qtopia-Anniversary", convDateToVCardDate( c.anniversary() ) );
+	}
 	safeAddPropValue( vcard, "X-Qtopia-Nickname", c.nickname() );
 	safeAddPropValue( vcard, "X-Qtopia-Children", c.children() );
 	
 	return vcard;
+}
+
+QString OContactAccessBackend_VCard::convDateToVCardDate( const QDate& d ) const
+{
+		QString str_rfc2425 = QString("%1-%2-%3")
+			.arg( d.year() )
+			.arg( d.month(), 2 )
+			.arg( d.day(), 2 );
+		// Now replace spaces with "0"...
+		int pos = 0;
+		while ( ( pos = str_rfc2425.find (' ')  ) > 0 )
+			str_rfc2425.replace( pos, 1, "0" );
+		
+		return str_rfc2425;
 }
 
 QDate OContactAccessBackend_VCard::convVCardDateToDate( const QString& datestr )

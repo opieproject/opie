@@ -13,11 +13,14 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.h,v 1.3 2002-11-13 14:14:51 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.h,v 1.4 2002-12-07 13:26:22 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.h,v $
- * Revision 1.3  2002-11-13 14:14:51  eilers
+ * Revision 1.4  2002-12-07 13:26:22  eilers
+ * Fixing bug in storing anniversary..
+ *
+ * Revision 1.3  2002/11/13 14:14:51  eilers
  * Added sorted for Contacts..
  *
  * Revision 1.2  2002/11/10 15:41:53  eilers
@@ -62,6 +65,7 @@ class OContactAccessBackend_VCard : public OContactAccessBackend {
 private:
 	OContact parseVObject( VObject* obj );
 	VObject* createVObject( const OContact& c );
+	QString convDateToVCardDate( const QDate& c ) const;
 	QDate convVCardDateToDate( const QString& datestr );
 	VObject *safeAddPropValue( VObject *o, const char* prop, const QString& value );
 	VObject *safeAddProp( VObject* o, const char* prop);
