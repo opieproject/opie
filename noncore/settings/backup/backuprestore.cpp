@@ -1,11 +1,15 @@
 #include "backuprestore.h"
 #include "errordialog.h"
 
+
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/ostorageinfo.h>
-#include <qpe/qpeapplication.h>
 using namespace Opie::Core;
+
+#include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
+#include <qpe/config.h>
 
 /* QT */
 #include <qapplication.h>
@@ -16,15 +20,13 @@ using namespace Opie::Core;
 #include <qlistview.h>
 #include <qpushbutton.h>
 #include <qheader.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
 #include <qmessagebox.h>
 #include <qcombobox.h>
 #include <qlist.h>
-#include <stdlib.h>
 #include <qregexp.h>
 #include <qtextstream.h>
 #include <qtextview.h>
+#include <qlineedit.h>
 
 /* STD */
 #include <errno.h>
@@ -46,16 +48,14 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
 {
     backupList->header()->hide();
     restoreList->header()->hide();
-    connect(backupButton, SIGNAL(clicked()),
-            this, SLOT(backup()));
-    connect(restoreButton, SIGNAL(clicked()),
-            this, SLOT(restore()));
-    connect(backupList, SIGNAL(clicked(QListViewItem*)),
-            this, SLOT(selectItem(QListViewItem*)));
-    connect(restoreSource, SIGNAL(activated(int)),
-            this, SLOT(sourceDirChanged(int)));
-    connect(updateList, SIGNAL(clicked()),
-            this, SLOT( fileListUpdate()));
+    locationList->header()->hide();
+    connect( backupButton, SIGNAL( clicked() ), this, SLOT( backup() ) );
+    connect( restoreButton, SIGNAL( clicked() ), this, SLOT( restore() ) );
+    connect( backupList, SIGNAL( clicked( QListViewItem* ) ), this, SLOT( selectItem( QListViewItem* ) ) );
+    connect( restoreSource, SIGNAL( activated( int ) ), this, SLOT( sourceDirChanged( int ) ) );
+    connect( addLocationButton, SIGNAL( clicked() ), this, SLOT( addLocation() ) );
+    connect( removeLocationButton, SIGNAL( clicked() ), this, SLOT( removeLocation() ) );
+    connect( saveLocationsButton, SIGNAL( clicked() ), this, SLOT( saveLocations() ) );
 
     //add directorys for backing up
     applicationSettings = new QListViewItem(backupList, "Application Settings", "", "Settings/");
@@ -66,25 +66,8 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
     selectItem(documents);
 
     scanForApplicationSettings();
-
-    Opie::Core::OStorageInfo storage;
-
-    backupLocations.insert( "Documents", QDir::homeDirPath() + "/Documents" );
-    if ( storage.hasCf() )
-    {
-        backupLocations.insert( "CF", storage.cfPath() );
-        odebug << "Cf Path: " + storage.cfPath() << oendl; 
-    }
-    if ( storage.hasSd() )
-    {
-        backupLocations.insert( "SD", storage.sdPath() );
-        odebug << " Sd Path: " + storage.sdPath() << oendl; 
-    }
-    if ( storage.hasMmc() )
-    {
-        backupLocations.insert( "MMC", storage.mmcPath() );
-        odebug << "Mmc Path: " + storage.mmcPath() << oendl; 
-    }
+    refreshBackupLocations();
+    refreshLocations();
 
     Config config("BackupAndRestore");
     //read last locations
@@ -160,6 +143,32 @@ BackupAndRestore::~BackupAndRestore()
         QFile::remove( tempFileName );
 }
 
+void BackupAndRestore::refreshBackupLocations()
+{
+    backupLocations.clear();
+    // Add cards
+    Opie::Core::OStorageInfo storage;
+    backupLocations.insert( "Documents", QDir::homeDirPath() + "/Documents" );
+    if ( storage.hasCf() )
+    {
+        backupLocations.insert( "CF", storage.cfPath() );
+        odebug << "Cf Path: " + storage.cfPath() << oendl;
+    }
+    if ( storage.hasSd() )
+    {
+        backupLocations.insert( "SD", storage.sdPath() );
+        odebug << " Sd Path: " + storage.sdPath() << oendl;
+    }
+    if ( storage.hasMmc() )
+    {
+        backupLocations.insert( "MMC", storage.mmcPath() );
+        odebug << "Mmc Path: " + storage.mmcPath() << oendl;
+    }
+
+    // Add own locations from locationList
+    // todo implementation
+}
+
 QList<QListViewItem> BackupAndRestore::getAllItems(QListViewItem *item, QList<QListViewItem> &list)
 {
     while(item)
@@ -203,7 +212,7 @@ void BackupAndRestore::scanForApplicationSettings()
     QFileInfo *fi;
     while ( (fi=it.current()) )
     {
-        //odebug << (d.path()+"/"+fi->fileName()).latin1() << oendl; 
+        //odebug << (d.path()+"/"+fi->fileName()).latin1() << oendl;
         if ( ( fi->fileName() != "." ) && ( fi->fileName() != ".." ) )
         {
             QListViewItem *newItem = new QListViewItem(applicationSettings, fi->fileName());
@@ -249,7 +258,7 @@ void BackupAndRestore::backup()
     // We execute tar and compressing its output with gzip..
     // The error output will be written into a temp-file which could be provided
     // for debugging..
-    odebug << "Storing file: " << outputFile.latin1() << "" << oendl; 
+    odebug << "Storing file: " << outputFile.latin1() << "" << oendl;
     outputFile += EXTENSION;
 
     QString commandLine = QString( "cd %1 && (tar -X %1 -cz %2 Applications/backup/exclude -f %3 ) 2> %4" ).arg( QDir::homeDirPath() )
@@ -258,7 +267,7 @@ void BackupAndRestore::backup()
                           .arg( outputFile.latin1() )
                           .arg( tempFileName.latin1() );
 
-    odebug << commandLine << oendl; 
+    odebug << commandLine << oendl;
 
     int r = system( commandLine );
 
@@ -272,7 +281,7 @@ void BackupAndRestore::backup()
         {
 
         case 1:
-            owarn << "Details pressed !" << oendl; 
+            owarn << "Details pressed !" << oendl;
             ErrorDialog* pErrDialog = new ErrorDialog( this, NULL, true );
             QFile errorFile( tempFileName );
             if ( errorFile.open(IO_ReadOnly) )
@@ -359,7 +368,7 @@ void BackupAndRestore::sourceDirChanged(int selection)
 
 void BackupAndRestore::fileListUpdate()
 {
-    owarn << "void BackupAndRestore::fileListUpdate()" << oendl; 
+    owarn << "void BackupAndRestore::fileListUpdate()" << oendl;
     restoreList->clear();
     rescanFolder( backupLocations[restoreSource->currentText()] );
 }
@@ -371,7 +380,7 @@ void BackupAndRestore::fileListUpdate()
  */
 void BackupAndRestore::rescanFolder(QString directory)
 {
-    //odebug << QString("rescanFolder: ") + directory.latin1() << oendl; 
+    //odebug << QString("rescanFolder: ") + directory.latin1() << oendl;
     QDir d(directory);
     if(!d.exists())
         return;
@@ -419,7 +428,7 @@ void BackupAndRestore::restore()
 
     restoreFile += "/" + restoreItem->text(0);
 
-    odebug << restoreFile << oendl; 
+    odebug << restoreFile << oendl;
 
     //check if backup file come from opie 1.0.x
 
@@ -442,7 +451,7 @@ void BackupAndRestore::restore()
                   .arg( restoreFile.latin1() )
                   .arg( tempFileName.latin1() );
 
-    odebug << commandLine << oendl; 
+    odebug << commandLine << oendl;
 
     r = system( commandLine );
 
@@ -454,7 +463,7 @@ void BackupAndRestore::restore()
                                       + errorMsg, QString( tr( "Ok") ), QString( tr( "Details" ) ) ) )
         {
         case 1:
-            owarn << "Details pressed !" << oendl; 
+            owarn << "Details pressed !" << oendl;
             ErrorDialog* pErrDialog = new ErrorDialog( this, NULL, true );
             QFile errorFile( tempFileName );
             if ( errorFile.open(IO_ReadOnly) )
@@ -499,7 +508,7 @@ void BackupAndRestore::restore()
 /**
  * Check for exclude in Applications/backup
  * If it does not exist, the function will create the file with *.bck as content
- * The exclude_files is read by tar and will provide to exclude special files out from backup. 
+ * The exclude_files is read by tar and will provide to exclude special files out from backup.
  * e.g. alle *.bck files (backup-files) will not be backed up by default
  */
 
@@ -523,6 +532,38 @@ QString BackupAndRestore::getExcludeFile()
 
     return excludeFileName;
 }
+
+void BackupAndRestore::refreshLocations()
+{
+    locationList->clear();
+    //todo: implement add locations
+    odebug << "not implemented yet" << oendl;
+}
+
+void BackupAndRestore::addLocation()
+{
+    if ( ( !locationEdit->text().isEmpty() ) &&
+         ( QDir( locationEdit->text() ).exists() ) )
+    {
+        (void) new QListViewItem( locationList, locationEdit->text() );
+        locationEdit->setText( "" );
+    }
+}
+
+void BackupAndRestore::removeLocation()
+{
+    if ( locationList->selectedItem() )
+    {
+        delete( locationList->selectedItem() );
+    }
+}
+
+void BackupAndRestore::saveLocation()
+{
+    //todo: implement
+    odebug << "not implemented yet" << oendl;
+}
+
 
 // backuprestore.cpp
 

@@ -28,12 +28,18 @@ private slots:
     void rescanFolder(QString directory);
     void fileListUpdate();
 
+    void addLocation();
+    void removeLocation();
+    void saveLocation();
+
 private:
     void scanForApplicationSettings();
     int getBackupFiles(QString &backupFiles, QListViewItem *parent);
     QString getExcludeFile();
     QMap<QString, QString> backupLocations;
     QList<QListViewItem> getAllItems(QListViewItem *item, QList<QListViewItem> &list);
+    void refreshBackupLocations();
+    void refreshLocations();
 
     QListViewItem *systemSettings;
     QListViewItem *applicationSettings;

@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>231</width>
-            <height>275</height>
+            <width>290</width>
+            <height>243</height>
         </rect>
     </property>
     <property stdset="1">
@@ -22,6 +22,9 @@
     <property>
         <name>layoutMargin</name>
     </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
     <vbox>
         <property stdset="1">
             <name>margin</name>
@@ -29,7 +32,7 @@
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>6</number>
+            <number>0</number>
         </property>
         <widget>
             <class>QTabWidget</class>
@@ -39,6 +42,9 @@
             </property>
             <property>
                 <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
             </property>
             <widget>
                 <class>QWidget</class>
@@ -53,11 +59,11 @@
                 <grid>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>11</number>
+                        <number>4</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>6</number>
+                        <number>4</number>
                     </property>
                     <widget row="0"  column="0" >
                         <class>QLabel</class>
@@ -132,11 +138,11 @@
                 <grid>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>11</number>
+                        <number>4</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>6</number>
+                        <number>4</number>
                     </property>
                     <widget row="0"  column="1" >
                         <class>QComboBox</class>
@@ -146,6 +152,28 @@
                         </property>
                     </widget>
                     <widget row="2"  column="0"  rowspan="1"  colspan="2" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>restoreButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&amp;Restore</string>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel1_2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Select Source</string>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="0"  rowspan="1"  colspan="2" >
                         <class>QListView</class>
                         <column>
                             <property>
@@ -173,37 +201,104 @@
                             </size>
                         </property>
                     </widget>
-                    <widget row="3"  column="0"  rowspan="1"  colspan="2" >
+                </grid>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>Locations</string>
+                </attribute>
+                <grid>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>4</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>4</number>
+                    </property>
+                    <widget row="0"  column="0"  rowspan="1"  colspan="3" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>locationEdit</cstring>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="3" >
+                        <class>QToolButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>locationSelectBtn</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>maximumSize</name>
+                            <size>
+                                <width>20</width>
+                                <height>30</height>
+                            </size>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>...</string>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="0"  rowspan="1"  colspan="4" >
+                        <class>QListView</class>
+                        <column>
+                            <property>
+                                <name>text</name>
+                                <string>Locations</string>
+                            </property>
+                            <property>
+                                <name>clickable</name>
+                                <bool>true</bool>
+                            </property>
+                            <property>
+                                <name>resizeable</name>
+                                <bool>true</bool>
+                            </property>
+                        </column>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>locationList</cstring>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="0" >
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>restoreButton</cstring>
+                            <cstring>addLocationButton</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>&amp;Restore</string>
+                            <string>Add</string>
                         </property>
                     </widget>
-                    <widget row="0"  column="0" >
-                        <class>QLabel</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>TextLabel1_2</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Select Source</string>
-                        </property>
-                    </widget>
-                    <widget row="1"  column="0"  rowspan="1"  colspan="2" >
+                    <widget row="2"  column="1" >
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>updateList</cstring>
+                            <cstring>removeLocationButton</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>Update Filelist</string>
+                            <string>Remove</string>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="2"  rowspan="1"  colspan="2" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>saveLocationsButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Save</string>
                         </property>
                     </widget>
                 </grid>
