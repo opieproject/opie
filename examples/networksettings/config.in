@@ -1,4 +1,4 @@
   config EXAMPLE_VPN
     boolean "opie-networksettingsplugin-example (VPN module)"
     default "n" if NETWORKSETUP
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NETWORKSETUP && NETWORKSETUP-CORE && INTERFACES
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NETWORKSETUP && NETWORKSETUP-CORE && INTERFACES && EXAMPLES
