@@ -69,7 +69,7 @@ TimeTabWidget::TimeTabWidget( QWidget *parent )
 	sv->setFrameStyle( QFrame::NoFrame );
 	QWidget *container = new QWidget( sv->viewport() );
 	sv->addChild( container );
-    
+
 	QGridLayout *layout = new QGridLayout( container );
 	layout->setMargin( 2 );
 	layout->setSpacing( 4 );
@@ -187,7 +187,7 @@ void TimeTabWidget::setDateTime( const QDateTime &dt )
 		sbHour->setValue( t.hour() );
 	}
 	sbMin->setValue( t.minute() );
-	
+
 	// Set date
 	btnDate->setDate( dt.date() );
 }
@@ -203,14 +203,20 @@ void TimeTabWidget::setSystemTime( const QDateTime &dt )
 		myTv.tv_usec = 0;
 
 		if ( myTv.tv_sec != -1 )
-			::settimeofday( &myTv, 0 );
+                    ::settimeofday( &myTv, 0 );
+
+                /*
+                 * Commit the datetime to the  'hardware'
+                 * as Global::writeHWClock() is a NOOP with Opie Alarm
+                 */
+                system("/sbin/hwclock --systohc --utc");
 	}
 }
 
 void TimeTabWidget::slotUse12HourTime( int i )
 {
 	use12HourTime = (i == 1);
-    
+
 	cbAmpm->setEnabled( use12HourTime );
 
 	int show_hour = sbHour->value();
