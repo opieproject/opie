@@ -39,6 +39,7 @@ public slots:
     void slotReturn();
     void slotRotateToggled(bool);
     void slotScaleToggled(bool);
+    void setDocument( const QString& );
 
 protected:
     void raiseIconView();

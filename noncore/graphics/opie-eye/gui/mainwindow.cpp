@@ -21,6 +21,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/ir.h>
+#include <qpe/applnk.h>
 
 #include <qtoolbar.h>
 #include <qtoolbutton.h>
@@ -280,4 +281,13 @@ void PMainWindow::closeEvent( QCloseEvent* ev ) {
 
 void PMainWindow::raiseIconView() {
     m_stack->raiseWidget( IconView );
+}
+
+void PMainWindow::setDocument( const QString& showImg ) {
+    QString file = showImg;
+    DocLnk lnk(showImg);
+    if (lnk.isValid() )
+        file = lnk.file();
+
+    slotDisplay( file );
 }
