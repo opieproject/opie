@@ -57,7 +57,9 @@ HEADERS	=   calendar.h \
 	lnkproperties.h \
 	windowdecorationinterface.h \
 	textcodecinterface.h \
-	imagecodecinterface.h
+	imagecodecinterface.h \
+	qt_override_p.h
+	
 SOURCES	=   calendar.cpp \
 	    global.cpp \
 	    xmlreader.cpp \
@@ -112,7 +114,8 @@ SOURCES	=   calendar.cpp \
 	backend/vobject.cpp \
 	findwidget_p.cpp \
 	finddialog.cpp \
-	lnkproperties.cpp
+	lnkproperties.cpp \
+	qt_override.cpp
 
 # Qt 3 compatibility
 HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.30 2002-12-03 22:51:55 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.31 2002-12-07 19:58:03 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -85,6 +85,8 @@
 #include <sys/file.h>
 #include <sys/ioctl.h>
 #include <sys/soundcard.h>
+
+#include "qt_override_p.h"
 
 
 class QPEApplicationData
@@ -899,8 +901,6 @@ void QPEApplication::setDefaultRotation( int r )
 	}
 }
 
-// exported to libpreload.so
-int opie_block_style = 0;
 
 /*!
   \internal
@@ -911,25 +911,9 @@ void QPEApplication::applyStyle()
 	config.setGroup( "Appearance" );
 	
 	// don't block ourselves ...
-	opie_block_style = 0;
-	
-	
-	static QString appname;
-	
-	if ( appname. isNull ( )) {
-		char src [32];
-		char dst [PATH_MAX + 1];
-		::sprintf ( src, "/proc/%d/exe", ::getpid ( ));
-		int l = ::readlink ( src, dst, PATH_MAX );
-		if ( l > 0 ) {
-			dst [l] = 0;
-			const char *b = ::strrchr ( dst, '/' );
-			appname = ( b ? b + 1 : dst );
-		}
-		else
-			appname = "";
-	}
-	
+	Opie::force_appearance = 0;
+		
+	static QString appname = Opie::binaryName ( );
 	
 	QStringList ex = config. readListEntry ( "NoStyle", ';' );
 	int nostyle = 0;
@@ -944,7 +928,7 @@ void QPEApplication::applyStyle()
 	QString style = config.readEntry( "Style", "Light" );
 	
 	// don't set a custom style
-	if ( nostyle & 0x01 )
+	if ( nostyle & Opie::Force_Style )
 		style = "Light";
 	
 	internalSetStyle ( style );
@@ -973,7 +957,7 @@ void QPEApplication::applyStyle()
 	QString dec = config.readEntry( "Decoration", "Qtopia" );
 	
 	// don't set a custom deco
-	if ( nostyle & 0x04 )
+	if ( nostyle & Opie::Force_Decoration )
 		dec = "";
 	
 	//qDebug ( "Setting Deco: %s -- old %s (%d)", dec.latin1(), d-> decorationName.latin1(), nostyle);
@@ -988,7 +972,7 @@ void QPEApplication::applyStyle()
 	int fs = config.readNumEntry( "FontSize", font().pointSize() );
 
 	// don't set a custom font	
-	if ( nostyle & 0x02 ) {
+	if ( nostyle & Opie::Force_Font ) {
 		ff = "Helvetica";
 		fs = 10;
 	}
@@ -996,8 +980,8 @@ void QPEApplication::applyStyle()
 	setFont ( QFont ( ff, fs ), true );
 	
 	// revert to global blocking policy ...
-	opie_block_style = config. readBoolEntry ( "ForceStyle", false ) ? 0xff : 0x00;
-	opie_block_style -= nostyle;
+	Opie::force_appearance = config. readBoolEntry ( "ForceStyle", false ) ? Opie::Force_All : Opie::Force_None;
+	Opie::force_appearance &= ~nostyle;
 }
 
 void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data )
@@ -1692,6 +1676,10 @@ void QPEApplication::hideOrQuit()
 	else
 		quit();
 }
+
+
+// These 6 stubs below need 1.5K in the binary and besides that -
+// we are not using ancient toolchains anymore     - sandman
 
 #if defined(QT_QWS_IPAQ) || defined(QT_QWS_SHARP)
 

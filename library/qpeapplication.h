@@ -114,6 +114,8 @@ protected:
     bool raiseAppropriateWindow();
     virtual void tryQuit();
 
+	virtual void polish ( QWidget * ); // this is actually implemented in qt_override.cpp (!)
+
 private:
     void mapToDefaultAction( QWSKeyEvent *ke, int defKey );
 
