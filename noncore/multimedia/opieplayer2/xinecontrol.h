@@ -45,6 +45,11 @@ public:
     XineControl( XineVideoWidget *xineWidget, 
                  MediaPlayerState &_mediaPlayerState, 
                  QObject *parent = 0, const char *name =0 );
+    // note that this constructor takes over ownership of the passed
+    // XINE::Lib object.
+    XineControl( XINE::Lib *xine, XineVideoWidget *xineWidget, 
+                 MediaPlayerState &_mediaPlayerState, 
+                 QObject *parent = 0, const char *name =0 );
     ~XineControl();
 
     bool hasVideo() const { return hasVideoChannel; }
@@ -101,6 +106,8 @@ public slots:
     void setGamma( int );
 
 private:
+    void init();
+
     XINE::Lib *libXine;
     long m_currentTime;
     long m_position;

@@ -48,6 +48,19 @@ XineControl::XineControl( XineVideoWidget *xineWidget,
 
     libXine = new XINE::Lib( xineWidget );
 
+    init();
+}
+
+XineControl::XineControl( XINE::Lib *xine, XineVideoWidget *xineWidget, 
+                          MediaPlayerState &_mediaPlayerState, 
+                          QObject *parent, const char *name )
+    : QObject( parent, name ), libXine( xine ), mediaPlayerState( _mediaPlayerState ), xineVideoWidget( xineWidget )
+{
+    init();
+}
+
+void XineControl::init()
+{
     connect( &mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pause( bool ) ) );
     connect( this, SIGNAL( positionChanged( long ) ), &mediaPlayerState, SLOT( updatePosition( long ) ) );
     connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
