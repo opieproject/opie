@@ -38,7 +38,7 @@ OStorageInfo::~OStorageInfo()
 {
 }
 
-QString OStorageInfo::getCfPath()
+QString OStorageInfo::cfPath()const
 {
     QString r = "";
 
@@ -54,11 +54,10 @@ QString OStorageInfo::getCfPath()
 }
 
 /*!
-* @fn QString StorageInfo::getSdPath()
 * @brief returns the Mount-Path of Sd Card
 *
 */
-QString OStorageInfo::getSdPath()
+QString OStorageInfo::sdPath()const
 {
     QString r = "";
 
@@ -74,11 +73,10 @@ QString OStorageInfo::getSdPath()
 }
 
 /*!
-* @fn QString StorageInfo::getMmcPath()
 * @brief returns the Mount-Path of Mmc Card
 *
 */
-QString OStorageInfo::getMmcPath()
+QString OStorageInfo::mmcPath()const
 {
     QString r = "";
 

@@ -70,18 +70,18 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
     backupLocations.insert( "Documents", QDir::homeDirPath() + "/Documents" );
     if ( storage.hasCf() )
     {
-        backupLocations.insert( "CF", storage.getCfPath() );
-        qDebug( "Cf Path: " + storage.getCfPath() );
+        backupLocations.insert( "CF", storage.cfPath() );
+        qDebug( "Cf Path: " + storage.cfPath() );
     }
     if ( storage.hasSd() )
     {
-        backupLocations.insert( "SD", storage.getSdPath() );
-        qDebug( " Sd Path: " + storage.getSdPath() );
+        backupLocations.insert( "SD", storage.sdPath() );
+        qDebug( " Sd Path: " + storage.sdPath() );
     }
     if ( storage.hasMmc() )
     {
-        backupLocations.insert( "MMC", storage.getMmcPath() );
-        qDebug( "Mmc Path: " + storage.getMmcPath() );
+        backupLocations.insert( "MMC", storage.mmcPath() );
+        qDebug( "Mmc Path: " + storage.mmcPath() );
     }
 
     Config config("BackupAndRestore");

@@ -41,9 +41,9 @@ public:
     OStorageInfo( QObject *parent=0 );
     ~OStorageInfo();
 
-    QString getCfPath();
-    QString getSdPath();
-    QString getMmcPath();
+    QString cfPath()const;
+    QString sdPath()const;
+    QString mmcPath()const;
 };
 
 #endif // OSTORAGE_H
