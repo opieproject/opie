@@ -1,4 +1,4 @@
-Package: opie-drawpad
+Package: opie-eye
 Files: plugins/application/libopie-eye.so* bin/opie-eye apps/Applications/opie-eye.desktop
 Priority: optional
 Section: opie/pim
