@@ -76,17 +76,15 @@ void Receiver::tidyUp( QString& _file, const QString& ending) {
     if ( fd == -1 )
         return;
 
-    (void)::strncat( foo, ending.latin1(), 4 );
-    _file = QString::fromLatin1( foo );
+    (void)::strncat( foo, QFile::encodeName(ending), 4 );
+    _file = QString::fromLocal8Bit( foo );
     QString cmd = QString("sed -e \"s/^\\(X-MICROSOFT-BODYINK\\)\\;/\\1:/;\" < %2 > %2 ").arg( Global::shellQuote(file)).arg( Global::shellQuote(_file) );
-    owarn << "Executing: " << cmd << "" << oendl;
-    (void)::system( cmd.latin1() );
+    (void)::system( QFile::encodeName(cmd) );
 
     cmd = QString("rm %1").arg( Global::shellQuote(file) );
-    (void)::system( cmd.latin1() );
+    (void)::system( QFile::encodeName(cmd) );
 }
 int Receiver::checkFile( QString& file ) {
-    owarn << "check file!! " << file << "" << oendl;
     int ret;
     QString ending;
 
@@ -111,7 +109,6 @@ int Receiver::checkFile( QString& file ) {
      */
     tidyUp( file, ending );
 
-    owarn << "check it now " << ret << "" << oendl;
     return ret;
 }
 
@@ -152,7 +149,6 @@ void OtherHandler::handle( const QString& file ) {
     m_file = file;
     m_na->setText(file);
     DocLnk lnk(file);
-    owarn << " " << lnk.type() << " " << lnk.icon() << "" << oendl;
 
     QString str = tr("<p>You received a file of type %1 (<img src=\"%2\"> )What do you want to do?").arg(lnk.type() ).arg(lnk.icon() );
     m_view->setText( str );
@@ -195,14 +191,8 @@ QString OtherHandler::targetName( const QString& file ) {
 
 /* fast cpy */
 void OtherHandler::copy(const QString& src, const QString& file) {
-    owarn << "src " << src << ", dest " << file << "" << oendl;
     FileManager *fm;
     if(!fm->copyFile(src,file)) {
     owarn << "Copy failed" << oendl;
     }
-    
-//     QString cmd = QString("mv %1 %2").arg( Global::shellQuote( src )).
-//                   arg( Global::shellQuote( file ) );
-//     ::system( cmd.latin1() );
-    // done
 }

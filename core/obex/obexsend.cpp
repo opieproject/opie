@@ -105,7 +105,6 @@ void SendWidget::send( const QString& file, const QString& desc ) {
     }
 }
 void SendWidget::slotIrDaDevices( const QStringList& list) {
-    owarn << "slot it irda devices " << oendl;
     for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
         int id = m_devBox->addDevice( (*it), DeviceBox::IrDa, tr("Scheduling for beam.") );
         m_irDa.insert( id, (*it) );
@@ -123,8 +122,7 @@ void SendWidget::slotBTDevices( const QMap<QString, QString>& str ) {
     }
     m_devBox->removeDevice( m_btDeSearch );
 }
-void SendWidget::slotSelectedDevice( int name, int dev ) {
-    owarn << "Start beam? " << name << " " << dev << "" << oendl;
+void SendWidget::slotSelectedDevice( int name, int ) {
     if ( name ==  m_irDeSearch ) {
         for (QMap<int, QString>::Iterator it= m_irDa.begin(); it != m_irDa.end(); ++it )
             m_devBox->removeDevice( it.key() );
@@ -133,7 +131,6 @@ void SendWidget::slotSelectedDevice( int name, int dev ) {
     }
 }
 void SendWidget::dispatchIrda( const QCString& str, const QByteArray& ar ) {
-    owarn << "dispatch irda " << str.data() << "" << oendl;
     if ( str == "devices(QStringList)" ) {
         QDataStream stream( ar, IO_ReadOnly );
         QStringList list;
@@ -148,7 +145,6 @@ void SendWidget::slotIrError( int ) {
 
 }
 void SendWidget::slotIrSent( bool b) {
-    owarn << "irda sent!!" << oendl;
     QString text = b ? tr("Sent") : tr("Failure");
     m_devBox->setStatus( m_irDaIt.key(), text );
     ++m_irDaIt;
@@ -205,7 +201,6 @@ void DeviceBox::setStatus( int id, const QString& status ) {
     setText( allText() );
 }
 void DeviceBox::setSource( const QString& str ) {
-    owarn << "SetSource:" << str.toInt() << "" << oendl;
     int id = str.toInt();
     emit selectedDevice( id, m_dev[id].device() );
 }
