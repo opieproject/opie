@@ -72,14 +72,16 @@ void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
 		current = *it;
 		left = current.left( current.find(reg_div) );
  		right = current.right( current.length() - current.find(reg_div) - 1 );
- 		if ( left.contains( reg_word ) ){
+ 		if ( left.contains( reg_word ) )
+		{
 		  left.replace( queryword, substitute );
  		  toplist.append( left + " -> " + right);
-		}else{
+		}
+		else
+		{
 		  right.replace( reg_word, substitute );
  		  bottomlist.append( right + " -> " + left );
 		}
-		//		.replace( reg_word, substitute );
 	}
 		
 	//thats it, the lists are rendered. Lets put them in one string

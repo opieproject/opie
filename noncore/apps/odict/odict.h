@@ -20,6 +20,7 @@ class QVBoxLayout;
 class QActionGroup;
 class DingWidget;
 class QTextBrowser;
+class QComboBox;
 
 class ODict : public QMainWindow
 {
@@ -36,6 +37,7 @@ class ODict : public QMainWindow
 		QMenuBar *menu;
 		QHBox *hbox;
 		QLineEdit *query_le;
+		QComboBox *query_co;
 		QPushButton *ok_button;
 
 		QVBoxLayout *vbox_layout;

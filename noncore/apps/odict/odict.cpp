@@ -32,6 +32,7 @@
 #include <qstring.h>
 #include <qaction.h>
 #include <qtextbrowser.h>
+#include <qcombobox.h>
 
 #include <qpe/resource.h>
 
@@ -45,6 +46,7 @@ ODict::ODict() : QMainWindow()
 	QHBox *hbox = new QHBox( vbox );
 	QLabel* query_label = new QLabel( tr( "Query:" ) , hbox ); query_label->show();
 	query_le = new QLineEdit( hbox );
+	query_co = new QComboBox( hbox );
 	ok_button = new QPushButton( tr( "&Ok" ), hbox );
 	connect( ok_button, SIGNAL( released() ), this, SLOT( slotStartQuery() ) );
 	browser_top = new QTextBrowser( vbox );
@@ -62,6 +64,13 @@ void ODict::loadConfig()
 	casesens = cfg.readEntry( "casesens" ).toInt();
 	regexp = cfg.readEntry( "regexp" ).toInt();
 	completewords = cfg.readEntry( "completewords" ).toInt();
+
+	QStringList groupListCfg = cfg.groupList().grep( "Method_" );
+	for ( QStringList::Iterator it = groupListCfg.begin() ; it != groupListCfg.end() ; ++it )
+	{
+		cfg.setGroup( *it );
+		query_co->insertItem( cfg.readEntry( "Name" ) );
+	}
 }
 
 
