@@ -2,6 +2,7 @@
 #define __GENERIC_WRAPPER_H
 
 #include "abstractmail.h"
+#include "mailstatics.h"
 #include <qmap.h>
 #include <qstring.h>
 #include <libetpan/clist.h>
@@ -15,7 +16,6 @@ struct mailmime;
 struct mailmime_mechanism;
 struct mailimf_mailbox_list;
 struct mailimf_mailbox;
-struct mailimf_date_time;
 struct mailimf_group;
 struct mailimf_address_list;
 struct mailsession;
@@ -27,7 +27,7 @@ struct mailimf_in_reply_to;
  * mbox and pop3 (later mh, too) mail access.
  * it is not desigend to make a instance of it!
  */
-class Genericwrapper : public AbstractMail
+class Genericwrapper : public AbstractMail,public MailStatics
 {
     Q_OBJECT
 public:
@@ -48,7 +48,6 @@ protected:
     QString parseMailbox( mailimf_mailbox *box );
     QString parseGroup( mailimf_group *group );
     QString parseAddressList( mailimf_address_list *list );
-    QString parseDateTime( mailimf_date_time *date );
 
     void traverseBody(RecBodyP&target,mailmessage*message,mailmime*mime,QValueList<int>recList,unsigned int current_rek=0,int current_count=1);
     static void fillSingleBody(RecPartP&target,mailmessage*message,mailmime*mime);
