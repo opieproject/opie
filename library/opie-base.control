@@ -4,7 +4,7 @@ Section: opie/system
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: qt-embedded (>=$QTE_VERSION), opie-qcop, opie-taskbar, qpe-pics, opie-sounds, apmd
+Depends: qt-embedded (>=$QTE_VERSION), opie-qcop, opie-taskbar, qpe-pics, opie-sounds, apmd, qpe2uschedule
 Description: Base Qtopia environment
  A complete GUI environment for handhelds.
  You will probably want to install one of the opie-i18n-* packages.
