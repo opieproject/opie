@@ -14,9 +14,14 @@
 **********************************************************************/
 
 #include "scanlistitem.h"
-#include <qpe/resource.h>
 #include <assert.h>
 #include <qpixmap.h>
+
+#ifdef QWS
+#include <qpe/resource.h>
+#else
+#include "resource.h"
+#endif
 
 const int col_type = 0;
 const int col_essid = 0;

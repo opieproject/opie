@@ -13,31 +13,14 @@
 **
 **********************************************************************/
 
-#include "wellenreiter.h"
+#ifndef RESOURCE_H
+#define RESOURCE_H
 
-#ifdef QWS
-#include <qpe/qpeapplication.h>
-#else
-#include <qapplication.h>
-#endif
+#include <qpixmap.h>
 
-int main( int argc, char **argv )
+namespace Resource
 {
-#ifdef QWS
-    QPEApplication a( argc, argv );
-#else
-    QApplication a( argc, argv );
-#endif
-
-    Wellenreiter e;
-
-    e.setCaption( Wellenreiter::tr("Wellenreiter") );
-#ifdef QWS
-    a.showMainWidget(&e);
-#else
-    a.setMainWidget(&e);
-    e.show();
-#endif
-
-    return a.exec();
+    QPixmap loadPixmap( const QString& );
 }
+
+#endif // RESOURCE_H

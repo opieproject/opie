@@ -25,10 +25,15 @@ class QLabel;
 class QListView;
 class QListViewItem;
 class QPushButton;
-class OTabWidget;
 class MLogWindow;
 class MHexWindow;
 class WellenreiterConfigWindow;
+
+#ifdef QWS
+class OTabWidget;
+#else
+class QTabWidget;
+#endif
 
 class WellenreiterBase : public QWidget
 { 
@@ -38,7 +43,11 @@ public:
     WellenreiterBase( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~WellenreiterBase();
 
+#ifdef QWS
     OTabWidget* TabWidget;
+#else
+    QTabWidget* TabWidget;
+#endif
     QWidget* ap;
     QListView* netview;
     MLogWindow* logwindow;

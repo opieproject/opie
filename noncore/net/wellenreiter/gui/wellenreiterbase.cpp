@@ -20,7 +20,6 @@
 #include <qlistview.h>
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
-#include <opie/otabwidget.h>
 #include <qlayout.h>
 #include <qvariant.h>
 #include <qtooltip.h>
@@ -32,7 +31,13 @@
 #include "hexwindow.h"
 #include "configwindow.h"
 
+#ifdef QWS
 #include <qpe/resource.h>
+#include <opie/otabwidget.h>
+#else
+#include "resource.h"
+#include <qtabwidget.h>
+#endif
 
 
 /* 
@@ -49,9 +54,11 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     WellenreiterBaseLayout = new QVBoxLayout( this ); 
     WellenreiterBaseLayout->setSpacing( 2 );
     WellenreiterBaseLayout->setMargin( 0 );
-
+#ifdef QWS
     TabWidget = new OTabWidget( this, "TabWidget", OTabWidget::Global );
-
+#else
+    TabWidget = new QTabWidget( this, "TabWidget" );
+#endif
     ap = new QWidget( TabWidget, "ap" );
     apLayout = new QVBoxLayout( ap ); 
     apLayout->setSpacing( 2 );
@@ -77,22 +84,20 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     netview->setFrameShadow( QListView::Sunken );
     netview->setRootIsDecorated( TRUE );
     apLayout->addWidget( netview );
-    TabWidget->addTab( ap, "wellenreiter/networks", tr( "Networks" ) );
+    
 
     //--------- LOG TAB --------------
     
     logwindow = new MLogWindow( TabWidget, "Log" );
-    TabWidget->addTab( logwindow, "wellenreiter/log", tr( "Log" ) );
+    
 
     //--------- HEX TAB --------------
     
     hexwindow = new MHexWindow( TabWidget, "Hex" );
-    TabWidget->addTab( hexwindow, "wellenreiter/hex", tr( "Hex" ) );
 
     //--------- CONFIG TAB --------------
     
     configwindow = new WellenreiterConfigWindow( TabWidget, "Config" );
-    TabWidget->addTab( configwindow, "wellenreiter/config", tr( "Config" ) );
     
     //--------- ABOUT TAB --------------
     
@@ -129,15 +134,30 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     TextLabel1_4_2->setAlignment( int( QLabel::AlignCenter ) );
 
     aboutLayout->addWidget( TextLabel1_4_2, 1, 0 );
-    TabWidget->addTab( about, "wellenreiter/about", tr( "About" ) );
-    WellenreiterBaseLayout->addWidget( TabWidget );
    
     button = new QPushButton( this, "button" );
     button->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)1, (QSizePolicy::SizeType)0, button->sizePolicy().hasHeightForWidth() ) );
     button->setText( tr( "Start Scanning" ) );
-    WellenreiterBaseLayout->addWidget( button );
 
+#ifdef QWS    
+    TabWidget->addTab( ap, "wellenreiter/networks", tr( "Networks" ) );
+    TabWidget->addTab( logwindow, "wellenreiter/log", tr( "Log" ) );
+    TabWidget->addTab( hexwindow, "wellenreiter/hex", tr( "Hex" ) );
+    TabWidget->addTab( configwindow, "wellenreiter/config", tr( "Config" ) );
+    TabWidget->addTab( about, "wellenreiter/about", tr( "About" ) );
+#else
+    TabWidget->addTab( ap, /* "wellenreiter/networks", */ tr( "Networks" ) );
+    TabWidget->addTab( logwindow, /* "wellenreiter/log", */ tr( "Log" ) );
+    TabWidget->addTab( hexwindow, /* "wellenreiter/hex", */ tr( "Hex" ) );
+    TabWidget->addTab( configwindow, /* "wellenreiter/config", */ tr( "Config" ) );
+    TabWidget->addTab( about, /* "wellenreiter/about", */ tr( "About" ) );
+#endif   
+    WellenreiterBaseLayout->addWidget( TabWidget );
+    WellenreiterBaseLayout->addWidget( button );
+   
+#ifdef QWS   
     TabWidget->setCurrentTab( tr( "Networks" ) );
+#endif
 
 }
 

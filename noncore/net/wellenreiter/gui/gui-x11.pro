@@ -1,0 +1,11 @@
+DESTDIR         = .
+TEMPLATE        = app
+CONFIG          = qt warn_on debug
+#CONFIG         = qt warn_on release
+HEADERS         = wellenreiterbase.h wellenreiter.h scanlistitem.h scanlist.h logwindow.h hexwindow.h configwindow.h resource.h
+SOURCES         = main.cpp wellenreiterbase.cpp wellenreiter.cpp scanlistitem.cpp scanlist.cpp logwindow.cpp hexwindow.cpp configwindow.cpp resource.cpp
+INCLUDEPATH     += ../daemon
+DEPENDPATH      += ../daemon
+LIBS            += -lwellenreiter
+INTERFACES      = configbase.ui
+TARGET          = wellenreiter

@@ -13,31 +13,23 @@
 **
 **********************************************************************/
 
-#include "wellenreiter.h"
+#include "resource.h"
 
-#ifdef QWS
-#include <qpe/qpeapplication.h>
-#else
-#include <qapplication.h>
-#endif
+#define PIXMAPPATH "/home/mickey/work/opie/pics"
 
-int main( int argc, char **argv )
+namespace Resource
 {
-#ifdef QWS
-    QPEApplication a( argc, argv );
-#else
-    QApplication a( argc, argv );
-#endif
 
-    Wellenreiter e;
+QPixmap loadPixmap( const QString& pix )
+{
+    QString filename;
+    filename.sprintf( "%s/%s.png", (const char*) PIXMAPPATH, (const char*) pix );
+    QPixmap pixmap( filename );
+    if ( pixmap.isNull() )
+    {
+        qDebug( "Wellenreiter::Resource: can't find pixmap " + filename );
+    }
+    return pixmap;
+};
 
-    e.setCaption( Wellenreiter::tr("Wellenreiter") );
-#ifdef QWS
-    a.showMainWidget(&e);
-#else
-    a.setMainWidget(&e);
-    e.show();
-#endif
-
-    return a.exec();
-}
+};
