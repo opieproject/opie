@@ -1,0 +1,6 @@
+  config X11
+    boolean "X11"
+    default "n"
+
+  source x11/libqpe-x11/config.in
+  source x11/ipc/server/config.in
