@@ -1,7 +1,7 @@
 /*= -*- c-basic-offset: 4; indent-tabs-mode: nil; -*-
  *
  * librsync -- the library for network deltas
- * $Id: job.c,v 1.1 2002-01-25 22:15:09 kergoth Exp $
+ * $Id: job.c,v 1.2 2004-09-10 11:18:45 zecke Exp $
  * 
  * Copyright (C) 2000, 2001 by Martin Pool <mbp@samba.org>
  * 
@@ -94,6 +94,7 @@ rs_result rs_job_free(rs_job_t *job)
 
 static rs_result rs_job_s_complete(rs_job_t *job)
 {
+    job = job;
     rs_fatal("should not be reached");
     return RS_INTERNAL_ERROR;
 }

@@ -1,7 +1,7 @@
 /*= -*- c-basic-offset: 4; indent-tabs-mode: nil; -*-
  *
  * librsync -- the library for network deltas
- * $Id: buf.c,v 1.1 2002-01-25 22:15:09 kergoth Exp $
+ * $Id: buf.c,v 1.2 2004-09-10 11:18:45 zecke Exp $
  * 
  * Copyright (C) 2000, 2001 by Martin Pool <mbp@samba.org>
  * 
@@ -96,6 +96,7 @@ void rs_filebuf_free(rs_filebuf_t *fb)
 rs_result rs_infilebuf_fill(rs_job_t *job, rs_buffers_t *buf,
                             void *opaque)
 {
+    job=job;
     int                     len;
     rs_filebuf_t            *fb = (rs_filebuf_t *) opaque;
     FILE                    *f = fb->f;
@@ -147,6 +148,7 @@ rs_result rs_infilebuf_fill(rs_job_t *job, rs_buffers_t *buf,
  */
 rs_result rs_outfilebuf_drain(rs_job_t *job, rs_buffers_t *buf, void *opaque)
 {
+    job=job;
     int present;
     rs_filebuf_t *fb = (rs_filebuf_t *) opaque;
     FILE *f = fb->f;
