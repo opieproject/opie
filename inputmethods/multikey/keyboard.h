@@ -69,7 +69,7 @@ public:
                     const int width, QPixmap *pix);
     void    setPressed(const int row, const int col, const bool pressed);
     QString lang;
-    QString title;
+    QString label;
 
 private:
 

@@ -176,6 +176,8 @@ void ConfigDlg::setMap(int index) {
 
         remove_button->setDisabled(true);
 
+        emit setMapToFile(keymaps->text(index));
+
     } else {
 
         remove_button->setEnabled(true);
