@@ -21,6 +21,8 @@
 #include "canvascardwindow.h"
 #include "patiencecardgame.h"
 #include "freecellcardgame.h"
+#include "chicanecardgame.h"
+#include "harpcardgame.h"
 
 #include <qpe/resource.h>
 
@@ -59,6 +61,8 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     QPopupMenu* file = new QPopupMenu;
     file->insertItem(tr("Patience"), this, SLOT(initPatience()), CTRL+Key_F);
     file->insertItem(tr("Freecell"), this, SLOT(initFreecell()), CTRL+Key_F);
+    file->insertItem(tr("Chicane"), this, SLOT(initChicane()), CTRL+Key_F);
+    file->insertItem(tr("Harp"), this, SLOT(initHarp()), CTRL+Key_F);
     menu->insertItem(tr("&Game"), file);
     
     menu->insertSeparator();
@@ -81,6 +85,8 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     QPopupMenu* file = new QPopupMenu;
     file->insertItem(tr("Patience"), this, SLOT(initPatience()));
     file->insertItem(tr("Freecell"), this, SLOT(initFreecell()));
+    file->insertItem(tr("Chicane"), this, SLOT(initChicane()));
+    file->insertItem(tr("Harp"), this, SLOT(initHarp()));
     menu->insertItem(tr("Play"), file);
     
     menu->insertSeparator();
@@ -114,6 +120,22 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     } else if ( gameType == 1 ) {
 	cardGame = new FreecellCardGame( &canvas, snapOn, this );
 	setCaption(tr("Freecell"));
+	setCentralWidget(cardGame);
+	//cardGame->newGame(); // Until we know how to handle reading freecell config
+	cardGame->readConfig( cfg );
+	setCardBacks();
+    } else if ( gameType == 2 ) {
+	cardGame = new ChicaneCardGame( &canvas, snapOn, this );
+	cardGame->setNumberToDraw(1);
+	setCaption(tr("Chicane"));
+	setCentralWidget(cardGame);
+	//cardGame->newGame(); // Until we know how to handle reading freecell config
+	cardGame->readConfig( cfg );
+	setCardBacks();
+    } else if ( gameType == 3 ) {
+	cardGame = new HarpCardGame( &canvas, snapOn, this );
+	cardGame->setNumberToDraw(1);
+	setCaption(tr("Harp"));
 	setCentralWidget(cardGame);
 	//cardGame->newGame(); // Until we know how to handle reading freecell config
 	cardGame->readConfig( cfg );
@@ -175,6 +197,37 @@ void CanvasCardWindow::initFreecell()
     cardGame = new FreecellCardGame( &canvas, snapOn, this );
     gameType = 1;
     setCaption(tr("Freecell"));
+    setCentralWidget(cardGame);
+    cardGame->newGame();
+    setCardBacks();
+}
+
+
+void CanvasCardWindow::initChicane()
+{
+    // Create New Game
+    if ( cardGame ) {
+	delete cardGame;
+    }
+    cardGame = new ChicaneCardGame( &canvas, snapOn, this );
+    cardGame->setNumberToDraw(1);
+    gameType = 2;
+    setCaption(tr("Chicane"));
+    setCentralWidget(cardGame);
+    cardGame->newGame();
+    setCardBacks();
+}
+
+void CanvasCardWindow::initHarp()
+{
+    // Create New Game
+    if ( cardGame ) {
+	delete cardGame;
+    }
+    cardGame = new HarpCardGame( &canvas, snapOn, this );
+    cardGame->setNumberToDraw(1);
+    gameType = 3;
+    setCaption(tr("Harp"));
     setCentralWidget(cardGame);
     cardGame->newGame();
     setCardBacks();

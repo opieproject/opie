@@ -57,6 +57,9 @@ public:
     bool isShowing() { return showing; }
     bool isRed() { return ((suit == diamonds) || (suit == hearts)); }
 
+    int getDeckNumber() { return deckNumber; }
+    void setDeckNumber(int n) { deckNumber=n; }
+
     int getX(void) { return ix; }
     int getY(void) { return iy; }
     int getZ(void) { return iz; }
@@ -75,6 +78,7 @@ private:
     eSuit suit;
     bool faceUp;
     bool showing;
+    int deckNumber;
     int ix, iy, iz;
     CardPile *cardPile;
 };

@@ -31,7 +31,7 @@
 class CardGame : public CardGameLayout, public CardDeck
 {
 public:
-    CardGame(int numOfJokers = 0) : CardGameLayout(), CardDeck(numOfJokers) { }
+    CardGame(int numOfJokers = 0, int numOfDecks = 1) : CardGameLayout(), CardDeck(numOfJokers,numOfDecks) { }
     virtual ~CardGame() { }
     virtual void newGame();
     virtual void mousePress(QPoint p) { Q_UNUSED(p); }

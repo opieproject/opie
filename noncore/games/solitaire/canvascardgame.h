@@ -41,8 +41,9 @@ class CanvasCardPile;
 class CanvasCardGame : public QCanvasView, public CardGame
 {
 public:
-    CanvasCardGame(QCanvas &c, bool snap, QWidget *parent = 0, const char *name = 0, WFlags f = 0) :
+    CanvasCardGame(QCanvas &c, bool snap, QWidget *parent = 0, int numOfDecks = 1, const char *name = 0, WFlags f = 0) :
     	QCanvasView( &c, parent, name, f ),
+	CardGame(0,numOfDecks),
 	moved(FALSE),
 	moving(NULL),
 	alphaCardPile( NULL ), 

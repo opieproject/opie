@@ -23,7 +23,7 @@
 #include "carddeck.h"
 
 
-CardDeck::CardDeck(int jokers) : numberOfJokers(jokers), deckCreated(FALSE)
+CardDeck::CardDeck(int jokers, int numOfDecks) : numberOfJokers(jokers), numberOfDecks(numOfDecks), deckCreated(FALSE)
 {
     cards = new (Card *)[getNumberOfCards()];
 }
@@ -40,10 +40,14 @@ CardDeck::~CardDeck()
 void CardDeck::createDeck()
 {
     if (!deckCreated) {
-        for (int i = 0; i < 52; i++)
-	    cards[i] = newCard( (eValue)((i % 13) + 1), (eSuit)((i / 13) + 1), FALSE );
+	for (int j = 0; j < getNumberOfDecks(); j++) {
+            for (int i = 0; i < 52; i++) {
+                cards[i+j*52] = newCard( (eValue)((i % 13) + 1), (eSuit)((i / 13) + 1), FALSE);
+		cards[i+j*52]->setDeckNumber(j);
+	    }
+	}
         for (int i = 0; i < getNumberOfJokers(); i++)
-	    cards[52 + i] = newCard( jokerVal, jokerSuit, FALSE );
+	    cards[52*getNumberOfDecks() + i] = newCard( jokerVal, jokerSuit, FALSE);
         deckCreated = TRUE;
     }
 }
@@ -63,9 +67,15 @@ void CardDeck::shuffle()
 
 int CardDeck::getNumberOfCards()
 {
-    return 52 + getNumberOfJokers();
+    return 52*getNumberOfDecks() + getNumberOfJokers();
 }
 
+
+int CardDeck::getNumberOfDecks()
+{
+    return numberOfDecks;
+}
+    
 
 int CardDeck::getNumberOfJokers()
 {
@@ -73,7 +83,7 @@ int CardDeck::getNumberOfJokers()
 }
     
 
-Card *CardDeck::newCard( eValue v, eSuit s, bool f )
+Card *CardDeck::newCard( eValue v, eSuit s, bool f)
 {
     return new Card(v, s, f);
 }

@@ -366,12 +366,14 @@ void CanvasCardGame::readPile( Config& cfg, CardPile *pile, QString name, int& h
     cfg.setGroup( name );
     int numberOfCards = cfg.readNumEntry("NumberOfCards", 0);
     Card *card = NULL;
+
     for ( int i = 0; i < numberOfCards; i++ ) {
 	QString cardStr;
 	cardStr.sprintf( "%i", i );
 	int val = cfg.readNumEntry( "Card" + cardStr );
 	bool facing = cfg.readBoolEntry( "CardFacing" + cardStr );
-	card = cards[ val ];
+
+        card = cards[ val ];
 	card->setFace(facing);
 	pile->addCardToTop(card);
 	card->setCardPile(pile);

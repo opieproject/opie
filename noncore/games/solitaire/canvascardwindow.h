@@ -45,6 +45,8 @@ public slots:
 private slots:
     void initFreecell();
     void initPatience();
+    void initChicane();
+    void initHarp();
 
 protected:
     virtual void resizeEvent(QResizeEvent *e);

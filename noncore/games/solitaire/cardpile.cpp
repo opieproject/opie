@@ -102,7 +102,7 @@ void CardPile::writeConfig( Config& cfg, QString name ) {
     while ( card ) {
 	QString cardStr;
 	cardStr.sprintf( "%i", numberOfCards );
-	int val  = (int)card->getValue() - 1 + ( (int)card->getSuit() - 1 ) * 13;
+	int val  = (int)card->getValue()-1 + ((int)card->getSuit()-1)*13 + (int)card->getDeckNumber()*52;
 	cfg.writeEntry( "Card" + cardStr, val );
 	cfg.writeEntry( "CardFacing" + cardStr, card->isFacing() );
 	card = cardInfront( card );

@@ -194,10 +194,8 @@ bool PatienceCardGame::mousePressCard( Card *card, QPoint p )
 		item->flipTo( 30, (int)item->y() );
 	    else
 		item->flipTo( 35, (int)item->y() );
-	} else {
-	  // fix from  cmader by tille
-	  return false;
-	}
+	} else return FALSE;				// <- was missing, caused facedown card to react
+							// to clicking, which is wrong
 	moving = NULL;
 	moved = FALSE;
 

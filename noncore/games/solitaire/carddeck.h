@@ -27,12 +27,13 @@ class Card;
 class CardDeck
 {
 public:
-    CardDeck(int jokers = 0);
+    CardDeck(int jokers = 0, int numOfDecks = 1);
     virtual ~CardDeck();
 
     void createDeck();
     void shuffle();
     int getNumberOfCards();
+    int getNumberOfDecks();
     int getNumberOfJokers();
     
     virtual Card *newCard( eValue v, eSuit s, bool f );
@@ -41,6 +42,7 @@ public:
     Card **cards;
 private:
     int numberOfJokers;
+    int numberOfDecks;
     bool deckCreated;
 };
 
