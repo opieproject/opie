@@ -1,0 +1,63 @@
+<chapter><title>VNC Viewer</title>
+<para>
+The OPIE VNC Viewer allows you to connect to servers that are compatible with
+the Remote Frame Buffer (RFB) protocol, most commonly used by the VNC remote 
+access software. 
+</para>
+
+<section><title>Adding a bookmark</title>
+<para>
+To add a new bookmark to your bookmark list, lick the New icon on the 
+window's toolbar. The "VNC Viewer Connection" dialog will appear. Enter the 
+hostname or IP address of the computer you would like to connect to in the 
+"Host Name" field. In the "Display Number" field, enter the number of the 
+display you would like to connect to. If you are connecting to a Windows or 
+Mac OS server, you typically select display 0. Unix servers typically use
+display 1 or higher. You must also enter the password for the server you 
+would like to connect to if it requires one. If you are having difficulties
+entering the password, you can select "Show Password" to show the password 
+you are entering. You must also add a descriptive name for the bookmark if
+you would like it to be saved. You can then either select the OK button to
+save the bookmark and connect to the server, or the cancel button to return 
+to the bookmark list.
+</para>
+</section>
+<section><title>Connecting to a bookmarked server</title>
+<para>
+To connect to a server that has already been bookmarked, select the bookmark 
+from the list and press the "Open" icon on the toolbar.  The "VNC Viewer
+Connection" dialog will appear, and you will have the chance to modify the 
+bookmark before actually connecting. Pressing the OK button will connect to
+the server, and pressing the cancel button will return to the bookmark list.
+</para>
+</section>
+<section><title>Deleting a bookmark</title>
+<para>
+To delete a bookmark, choose the bookmark that you would like to delete, and 
+select the delete item from the toolbar. 
+</para>
+</section>
+<section><title>Advanced Connection Options</title>
+<para>
+In addition to the display number, hostname, and password, you can choose many 
+advanced options from the "VNC Viewer Connection" dialog box that will affect
+the performance of the connection.
+</para>
+<para> 
+On the options tab you can set the delay in between requesting updates to the 
+screen, a higher value will result in a more up to date screen, but you will 
+use more bandwidth. You can also choose to restrict your connection to 8 bit 
+color, which is much faster than using the color depth of the remote server 
+at the cost of image quality. Requesting a shared session tells the RFB server
+that you are willing to let other users connect at the same time.  You can use
+the scaling factor on fit more of the remote screen into the space available on
+your PDA, if you are willing to accept the performance hit involved in the 
+scaling.
+</para>
+<para> 
+The Encodings tab allows you to select which of the supported encodings you would
+would like the VNC Viewer to use to communicate with the remote server. In most 
+cases you don't need to modify anything on this tab.
+</para>
+</chapter>
+

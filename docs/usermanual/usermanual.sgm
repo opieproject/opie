@@ -12,6 +12,7 @@
 <!ENTITY software SYSTEM "software.sgm">
 <!ENTITY today SYSTEM "today.sgm">
 <!ENTITY irda SYSTEM "irda.sgm">
+<!ENTITY keypebble SYSTEM "keypebble.sgm">
 ]>
 <book><title>Opie User Manual</title>
 <bookinfo><authorgroup><collab>
@@ -30,6 +31,7 @@
 &today;
 &filemanager;
 &embeddedkonsole;
+&keypebble;
 </part>
 <part><title>Settings</title>
 &software;
