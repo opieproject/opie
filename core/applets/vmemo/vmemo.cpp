@@ -212,17 +212,18 @@ VMemo::VMemo( QWidget *parent, const char *_name )
     useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
 
     odebug << "toggleKey " << toggleKey << "" << oendl;
-    if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
-         systemZaurus=TRUE;
-    else
-      systemZaurus=FALSE;
+
+//     if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
+//          systemZaurus=TRUE;
+//     else
+      systemZaurus = FALSE;
 
     myChannel = new QCopChannel( "QPE/VMemo", this );
     connect( myChannel, SIGNAL(received(const QCString&,const QByteArray&)),
              this, SLOT(receive(const QCString&,const QByteArray&)) );
 
     if( toggleKey != -1 ) {
-      // keyRegister(key, channel, message)
+				qDebug("Register key %d", toggleKey);
       QCopEnvelope e("QPE/Launcher", "keyRegister(int,QCString,QCString)");
       //           e << 4096; // Key_Escape
       //          e << Key_F5; //4148
@@ -231,11 +232,11 @@ VMemo::VMemo( QWidget *parent, const char *_name )
       e << QString("toggleRecord()");
     }
     if(toggleKey == 1)
-        usingIcon=TRUE;
+        usingIcon = TRUE;
     else
-        usingIcon=FALSE;
-    if( vmCfg.readNumEntry("hideIcon",0) == 1)
-      hide();
+        usingIcon = FALSE;
+//     if( vmCfg.readNumEntry("hideIcon",0) == 1)
+//       hide();
     recording = FALSE;
     // }
 }
@@ -249,7 +250,7 @@ int VMemo::position()
 }
 
 void VMemo::receive( const QCString &msg, const QByteArray &data ) {
-  odebug << "receive" << oendl;
+  odebug << "Vmemo receive" << oendl;
   QDataStream stream( data, IO_ReadOnly );
 
   if (msg == "toggleRecord()")  {
@@ -328,10 +329,10 @@ bool VMemo::startRecording() {
     fileName="/"+fileName;
   if( fileName.right(1).find('/') == -1)
     fileName+="/";
-  fName = "vm_"+ date+ ".wav";
+  fName = "vm_"+ date + ".wav";
 
   fileName+=fName;
-  odebug << "filename is "+fileName << oendl;
+  odebug << "filename is " + fileName << oendl;
 // open tmp file here
   char *pointer;
   pointer=tmpnam(NULL);
@@ -385,8 +386,8 @@ void VMemo::stopRecording() {
     t_timer->stop();
     Config cfg("Vmemo");
     cfg.setGroup("Defaults");
-    if( cfg.readNumEntry("hideIcon",0) == 1 )
-        hide();
+//     if( cfg.readNumEntry("hideIcon",0) == 1 )
+//         hide();
 }
 
 int VMemo::openDSP() {
@@ -483,16 +484,16 @@ int VMemo::openWAV(const char *filename) {
 }
 
 bool VMemo::record() {
-   length=0;
-   int result, value;
-  QString msg;
-  msg.sprintf("Recording format %d", format);
-  odebug << msg << oendl;
-  Config config("Vmemo");
-  config.setGroup("Record");
-  int sRate=config.readNumEntry("SizeLimit", 30);
-  if(sRate > 0)
-      t_timer->start( sRate * 1000+1000, TRUE);
+		length = 0;
+		int result, value;
+		QString msg;
+		msg.sprintf("Recording format %d", format);
+		odebug << msg << oendl;
+		Config config("Vmemo");
+		config.setGroup("Record");
+		int sRate=config.readNumEntry("SizeLimit", 30);
+		if(sRate > 0)
+				t_timer->start( sRate * 1000+1000, TRUE);
 
 //    if(systemZaurus) {
 //    } else { // 16 bit only capabilities
@@ -500,105 +501,108 @@ bool VMemo::record() {
     msg.sprintf("Recording format other");
     odebug << msg << oendl;
 
-    int bufsize=1024;
-    int bytesWritten=0;
-    signed short sound[1024], monoBuffer[1024];
-    char abuf[bufsize/2];
-    short sbuf[bufsize];
+
+    int bytesWritten = 0;
+
     Config vmCfg("Vmemo");
     vmCfg.setGroup("Defaults");
     useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
 
+	int bufsize = vmCfg.readNumEntry("BufferSize",1024);
+	signed short sound[bufsize], monoBuffer[bufsize];
+    char abuf[bufsize / 2];
+    short sbuf[bufsize];
+
     while(recording)  {
 
         if(useADPCM)
-            result = read( dsp, sbuf, bufsize); // 8192
+            result = ::read(dsp, sbuf, bufsize); // 8192
         else
-            result = read(dsp, sound, 1024); // 8192
+            result = ::read(dsp, sound, bufsize); // 8192
         if( result <= 0) {
-          perror("recording error ");
+						perror("recording error ");
 //          odebug << currentFileName << oendl;
-          QMessageBox::message(tr("Note"),tr("error recording"));
-          recording=FALSE;
-          break;
-          return FALSE;
+						QMessageBox::message(tr("Note"),tr("error recording"));
+						recording = FALSE;
+						break;
+						return FALSE;
         }
 
         if(useADPCM) {
             adpcm_coder( sbuf, abuf, result/2, &encoder_state);
-            bytesWritten =  ::write(wav, abuf, result/4);
+            bytesWritten = ::write(wav, abuf, result/4);
 
         } else {
-            for (int i = 0; i < result; i++) { //since Z is mono do normally
-                monoBuffer[i] = sound[i];
-            }
+//             for (int i = 0; i < result; i++) { //since Z is mono do normally
+//                 monoBuffer[i] = sound[i];
+//             }
 
-            length+=write(wav, monoBuffer, result);
+            length += write(wav, sound, result);
         }
-        length +=bytesWritten;
+        length += bytesWritten;
 
-      if(length<0) {
-        recording=false;
-        perror("dev/dsp's is a lookin' messy");
-        QMessageBox::message("Vmemo","Error writing to file\n"+ fileName);
-          break;
-          return FALSE;
-      }
-      //       odebug << "" << length << "\r" << oendl;
-      //       fflush(stdout);
-      qApp->processEvents();
+				if(length<0) {
+						recording = false;
+						perror("dev/dsp's is a lookin' messy");
+						QMessageBox::message("Vmemo","Error writing to file\n"+ fileName);
+						break;
+						return FALSE;
+				}
+					//       odebug << "" << length << "\r" << oendl;
+					//       fflush(stdout);
+				qApp->processEvents();
     }
-    //  qDebug("file has length of %d lasting %d seconds",
-    //         length, (( length / speed) / channels) / 2 );
-    //  }
+			//  qDebug("file has length of %d lasting %d seconds",
+			//         length, (( length / speed) / channels) / 2 );
+			//  }
 
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<//
+			//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<//
 
-  value = length+36;
+		value = length + 36;
 
-  lseek(wav, 4, SEEK_SET);
-  write(wav, &value, 4);
-  lseek(wav, 40, SEEK_SET);
+		lseek(wav, 4, SEEK_SET);
+		write(wav, &value, 4);
+		lseek(wav, 40, SEEK_SET);
 
-  write(wav, &length, 4);
+		write(wav, &length, 4);
 
-  track.close();
-  odebug << "Track closed" << oendl;
+		track.close();
+		odebug << "Track closed" << oendl;
 
-  if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
-    perror("ioctl(\"SNDCTL_DSP_RESET\")");
+		if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
+				perror("ioctl(\"SNDCTL_DSP_RESET\")");
 
-  ::close(dsp);
+		::close(dsp);
 
-      Config cfgO("OpieRec");
-      cfgO.setGroup("Sounds");
+		Config cfgO("OpieRec");
+		cfgO.setGroup("Sounds");
 
-      int nFiles = cfgO.readNumEntry( "NumberofFiles",0);
+		int nFiles = cfgO.readNumEntry( "NumberofFiles",0);
 
-      QString currentFileName = fileName;
-      QString currentFile = "vm_"+ date;
+		QString currentFileName = fileName;
+		QString currentFile = "vm_"+ date;
 
-      float numberOfRecordedSeconds=(float) length / (float)speed * (float)2;
+		float numberOfRecordedSeconds=(float) length / (float)speed * (float)2;
 
-      cfgO.writeEntry( "NumberofFiles", nFiles + 1);
-      cfgO.writeEntry( QString::number( nFiles + 1), currentFile);
-      cfgO.writeEntry( currentFile, currentFileName);
+		cfgO.writeEntry( "NumberofFiles", nFiles + 1);
+		cfgO.writeEntry( QString::number( nFiles + 1), currentFile);
+		cfgO.writeEntry( currentFile, currentFileName);
 
-      QString time;
-      time.sprintf("%.2f", numberOfRecordedSeconds);
-      cfgO.writeEntry( currentFileName, time );
+		QString time;
+		time.sprintf("%.2f", numberOfRecordedSeconds);
+		cfgO.writeEntry( currentFileName, time );
       //      odebug << "writing config numberOfRecordedSeconds "+time << oendl;
 
-      cfgO.write();
+		cfgO.write();
 
-      odebug << "done recording "+fileName << oendl;
+		odebug << "done recording "+fileName << oendl;
 
-  Config cfg("qpe");
-  cfg.setGroup("Volume");
-  QString foo = cfg.readEntry("Mute","TRUE");
-  if(foo.find("TRUE",0,TRUE) != -1)
-    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; //mute
-return TRUE;
+		Config cfg("qpe");
+		cfg.setGroup("Volume");
+		QString foo = cfg.readEntry("Mute","TRUE");
+		if(foo.find("TRUE",0,TRUE) != -1)
+				QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; //mute
+		return TRUE;
 }
 
 int VMemo::setToggleButton(int tog) {
