@@ -4,5 +4,5 @@ Priority: optional
 Section: base
 Maintainer: Holger Schurig
 Version: 1.0.1-2
-Architecture: noarch
+Architecture: all
 Description: Common timezone data
