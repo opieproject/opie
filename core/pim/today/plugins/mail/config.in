@@ -1,5 +1,5 @@
   config TODAY_MAIL
     boolean "mail"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBMAILWRAPPER
-    comment "opie-today-mailplugin requires libmailwrapper enabled"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2PIM && LIBMAILWRAPPER
+    comment "opie-today-mailplugin requires libopie2core, libopie2pim, and libmailwrapper"
