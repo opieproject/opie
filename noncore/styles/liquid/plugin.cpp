@@ -25,5 +25,5 @@ int major_version ( )
 
 const char *description ( )
 {
-    return "High performance liquid plugin";
+    return "High Performance Liquid";
 }
