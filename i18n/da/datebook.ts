@@ -90,11 +90,11 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopier begivenhed</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rediger...</translation>
     </message>
     <message>
         <source>error box</source>
@@ -187,7 +187,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tid</translation>
     </message>
     <message>
         <source> - </source>
@@ -195,7 +195,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopier</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
@@ -226,7 +226,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished">Kalender</translation>
+        <translation>Kalender</translation>
     </message>
 </context>
 <context>
@@ -281,67 +281,67 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Visninger</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Standard visning:</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Dag</translation>
+        <translation>Dag</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">Uge</translation>
+        <translation>Uge</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ugeliste</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">Måned</translation>
+        <translation>Måned</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gå til dags dato</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Klokketslet for</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Ingen</translation>
+        <translation>Ingen</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Start</translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation type="unfinished"></translation>
+        <translation>Start-slut</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardindstillinger</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sted:</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished">Kontor</translation>
+        <translation>Kontor</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">Hjemme</translation>
+        <translation>Hjemme</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategori:</translation>
     </message>
 </context>
 <context>

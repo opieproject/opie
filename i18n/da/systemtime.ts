@@ -3,47 +3,47 @@
     <name>FormatTabWidget</name>
     <message>
         <source>Time format</source>
-        <translation type="unfinished">Tidsformat</translation>
+        <translation>Tidsformat</translation>
     </message>
     <message>
         <source>hh:mm</source>
-        <translation type="unfinished">hh:mm</translation>
+        <translation>tt:mm</translation>
     </message>
     <message>
         <source>D/M hh:mm</source>
-        <translation type="unfinished">D/M hh:mm</translation>
+        <translation>D/M tt:mm</translation>
     </message>
     <message>
         <source>M/D hh:mm</source>
-        <translation type="unfinished">M/D hh:mm</translation>
+        <translation>M/D tt:mm</translation>
     </message>
     <message>
         <source>12/24 hour</source>
-        <translation type="unfinished">12/24 timer</translation>
+        <translation>12/24 timer</translation>
     </message>
     <message>
         <source>24 hour</source>
-        <translation type="unfinished">24 timer</translation>
+        <translation>24 timer</translation>
     </message>
     <message>
         <source>12 hour</source>
-        <translation type="unfinished">12 timer</translation>
+        <translation>12 timer</translation>
     </message>
     <message>
         <source>Date format</source>
-        <translation type="unfinished">Datoformat</translation>
+        <translation>Datoformat</translation>
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation type="unfinished">Ugen starter med</translation>
+        <translation>Ugen starter med</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished">Søndag</translation>
+        <translation>Søndag</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished">Mandag</translation>
+        <translation>Mandag</translation>
     </message>
 </context>
 <context>
@@ -58,32 +58,33 @@
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Indstillinger</translation>
+        <translation>Indstillinger</translation>
     </message>
     <message>
         <source>Predict</source>
-        <translation type="unfinished">Forudsig</translation>
+        <translation>Forudsig</translation>
     </message>
     <message>
         <source>Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vil du fortsætte?</translation>
     </message>
     <message>
         <source>Running:
 ntpdate </source>
-        <translation type="unfinished"></translation>
+        <translation>Kører:
+ntpdate</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fejl</translation>
     </message>
     <message>
         <source>Error while getting time from network.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Der opstod en fejl, kunne ikke hente klokken over netværket.</translation>
     </message>
     <message>
         <source>Error while executing ntpdate</source>
@@ -110,12 +111,13 @@ ntpdate </source>
         <source>%1 seconds</source>
         <translation type="unfinished"></translation>
     </message>
+
 </context>
 <context>
     <name>NTPTabWidget</name>
     <message>
         <source>Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>Starttidspunkt</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -174,11 +176,11 @@ ntpdate </source>
     </message>
     <message>
         <source> s/h</source>
-        <translation type="unfinished"> s/t</translation>
+        <translation> s/t</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"> sekunder</translation>
+        <translation> sekunder</translation>
     </message>
 </context>
 <context>
@@ -208,35 +210,35 @@ ntpdate </source>
     <name>TimeTabWidget</name>
     <message>
         <source>Hour</source>
-        <translation type="unfinished">Time</translation>
+        <translation>Time</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished">Minut</translation>
+        <translation>Minut</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished">AM</translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished">PM</translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Dato</translation>
+        <translation>Dato</translation>
     </message>
     <message>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Tidszone</translation>
     </message>
     <message>
         <source>Get time from the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Hent tid fra netværket</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished">Brug forudsagt tid</translation>
+        <translation>Brug forudsagt tid</translation>
     </message>
 </context>
 </TS>

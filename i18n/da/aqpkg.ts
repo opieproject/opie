@@ -3,11 +3,11 @@
     <name>CategoryFilterImpl</name>
     <message>
         <source>Category Filter</source>
-        <translation type="unfinished">Kategori filter</translation>
+        <translation>Kategorifilter</translation>
     </message>
     <message>
         <source>Select one or more groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg én eller flere grupper</translation>
     </message>
 </context>
 <context>
@@ -37,33 +37,33 @@
     <message>
         <source>Remove
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern</translation>
     </message>
     <message>
         <source>Install
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Installer</translation>
     </message>
     <message>
         <source>Upgrade
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Opgrader</translation>
     </message>
     <message>
         <source>(ReInstall)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Geninstaller)</translation>
     </message>
     <message>
         <source>(Upgrade)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Opgrader)</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished">Destination</translation>
+        <translation>Destination</translation>
     </message>
     <message>
         <source>Space Avail</source>
-        <translation type="unfinished">Ledig plads</translation>
+        <translation>Ledig plads</translation>
     </message>
     <message>
         <source>Output</source>
@@ -71,40 +71,41 @@
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Start</translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Indstillinger</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbryd</translation>
     </message>
     <message>
         <source>
 **** User Clicked ABORT ***</source>
-        <translation type="unfinished"></translation>
+        <translation>
+**** Brugeren klikkede AFBRYD ***</translation>
     </message>
     <message>
         <source>**** Process Aborted ****</source>
-        <translation type="unfinished"></translation>
+        <translation>**** Process afbrudt ****</translation>
     </message>
     <message>
         <source>Save output</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gem output</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukendt</translation>
     </message>
     <message>
         <source>%1 Kb</source>
@@ -115,7 +116,7 @@
     <name>InstallOptionsDlgImpl</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Indstillinger</translation>
     </message>
     <message>
         <source>Force Depends</source>
@@ -135,23 +136,23 @@
     </message>
     <message>
         <source>Information Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Informationsniveau</translation>
     </message>
     <message>
         <source>Errors only</source>
-        <translation type="unfinished"></translation>
+        <translation>Kun fejl</translation>
     </message>
     <message>
         <source>Normal messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Almindelige meddelelser</translation>
     </message>
     <message>
         <source>Informative messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Oplysende meddelelser</translation>
     </message>
     <message>
         <source>Troubleshooting output</source>
-        <translation type="unfinished"></translation>
+        <translation>Meddelelser til fejlfinding</translation>
     </message>
 </context>
 <context>
@@ -518,50 +519,50 @@ Er du sikker?
     </message>
     <message>
         <source>Updating Launcher...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opdaterer Launcher...</translation>
     </message>
 </context>
 <context>
     <name>PackageWindow</name>
     <message>
         <source>&lt;b&gt;Description&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Beskrivelse&lt;/b&gt; - </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Installed To&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p&gt;&lt;b&gt;Installeret i&lt;/b&gt; - </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Size&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Størrelse&lt;/b&gt; - </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Sektion&lt;/b&gt; - </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Filename&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Filnavn&lt;/b&gt; - </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Version installeret&lt;/b&gt; - </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Version tilgængelig&lt;/b&gt; - </translation>
     </message>
     <message>
         <source>Package Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakkeinformation</translation>
     </message>
     <message>
         <source>Package information is unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakkeinformation er ikke tilgængelig</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Luk</translation>
+        <translation>Luk</translation>
     </message>
 </context>
 <context>
@@ -612,63 +613,63 @@ Er du sikker?
     <name>SettingsImpl</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Konfiguration</translation>
+        <translation>Konfiguration</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished">Servere</translation>
+        <translation>Servere</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished">Destinationer</translation>
+        <translation>Destinationer</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished">Proxyer</translation>
+        <translation>Proxyer</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Ny</translation>
+        <translation>Ny</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Slet</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Navn:</translation>
+        <translation>Navn:</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse:</translation>
     </message>
     <message>
         <source>Active Server</source>
-        <translation type="unfinished">Aktive servere</translation>
+        <translation>Aktiv server</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdater</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished">Destination</translation>
+        <translation>Destination</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Placering:</translation>
     </message>
     <message>
         <source>Link to root</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>HTTP Proxy</source>
-        <translation type="unfinished">HTTP Proxy</translation>
+        <translation>HTTP Proxy</translation>
     </message>
     <message>
         <source>Enabled</source>
@@ -676,15 +677,15 @@ Er du sikker?
     </message>
     <message>
         <source>FTP Proxy</source>
-        <translation type="unfinished">FTP Proxy</translation>
+        <translation>FTP Proxy</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Brugernavn:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodeord:</translation>
     </message>
 </context>
 </TS>

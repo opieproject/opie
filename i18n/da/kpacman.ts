@@ -3,46 +3,46 @@
     <name>Keys</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Okay</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardindstillinger</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Fortryd</translation>
     </message>
     <message>
         <source>Change Direction Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Ændre retningsknapper</translation>
     </message>
     <message>
         <source>Undefined key</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Udefineret knap</translation>
     </message>
 </context>
 <context>
     <name>Kpacman</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nyt</translation>
     </message>
     <message>
         <source>&amp;Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pause</translation>
     </message>
     <message>
         <source>&amp;Hall of fame</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Rangliste</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Afslut</translation>
     </message>
     <message>
         <source>&amp;Hide Mousecursor</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gem musepil</translation>
     </message>
     <message>
         <source>&amp;Select graphic scheme</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Change &amp;keys...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ændre &amp;knapper...</translation>
     </message>
     <message>
         <source>@PACKAGE@ - @VERSION@
@@ -79,7 +79,7 @@ the last 10 years of her friendship.
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hjælp</translation>
     </message>
     <message>
         <source>KPacman</source>
@@ -100,19 +100,19 @@ or is of an unknown format.</source>
     <name>Referee</name>
     <message>
         <source>GAME  OVER</source>
-        <translation type="unfinished"></translation>
+        <translation>SPILLET ER SLUT</translation>
     </message>
     <message>
         <source>PLAYER ONE</source>
-        <translation type="unfinished"></translation>
+        <translation>SPILLER ET</translation>
     </message>
     <message>
         <source>READY!</source>
-        <translation type="unfinished"></translation>
+        <translation>KLAR!</translation>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>PAUSE</translation>
     </message>
     <message>
         <source>CHARACTER</source>
@@ -171,7 +171,7 @@ or is of an unknown format.</source>
     <name>Score</name>
     <message>
         <source>  1UP </source>
-        <translation type="unfinished"></translation>
+        <translation>1. SPILLER</translation>
     </message>
     <message>
         <source> HIGH SCORE </source>
@@ -179,19 +179,19 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source>  2UP </source>
-        <translation type="unfinished"></translation>
+        <translation>2. SPILLER</translation>
     </message>
     <message>
         <source>     CONGRATULATIONS      </source>
-        <translation type="unfinished"></translation>
+        <translation>TILLYKKE</translation>
     </message>
     <message>
         <source>    YOU HAVE ARCHIEVED    </source>
-        <translation type="unfinished"></translation>
+        <translation>DU HAR OPNÅET</translation>
     </message>
     <message>
         <source>  A SCORE IN THE TOP 10.  </source>
-        <translation type="unfinished"></translation>
+        <translation>EN PLADS I TOP 10.</translation>
     </message>
     <message>
         <source>RNK   SCORE  NAME   DATE</source>
@@ -199,15 +199,11 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>PAUSE</translation>
     </message>
     <message>
         <source>@YY@/@MM@/@DD@</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">@DD@/@MM@ &apos;@YY@</translation>
     </message>
 </context>
 <context>

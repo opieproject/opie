@@ -229,7 +229,7 @@ Dette område lader dig vælge et program og hvilke indstillinger to vil slå fr
     </message>
     <message>
         <source>Rotation direction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotationsretning:</translation>
     </message>
 </context>
 <context>

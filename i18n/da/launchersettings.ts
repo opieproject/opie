@@ -3,7 +3,7 @@
     <name>LauncherSettings</name>
     <message>
         <source>Launcher Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Launcher indstillinger</translation>
     </message>
     <message>
         <source>Taskbar</source>

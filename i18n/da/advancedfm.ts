@@ -249,7 +249,9 @@ og er licenseret som GPL</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kan ikke fjerne den aktuelle mappe
+fra bogmærker.
+Den er ikke bogmærket!</translation>
     </message>
     <message>
         <source>File Search</source>

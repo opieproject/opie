@@ -3,7 +3,7 @@
     <name>Decoration</name>
     <message>
         <source>Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Flad</translation>
     </message>
 </context>
 </TS>

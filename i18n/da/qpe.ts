@@ -95,11 +95,11 @@ Genoplad venligst back-up batteriet.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Finder dokumenter</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Søger dokumenter</translation>
     </message>
 </context>
 <context>
