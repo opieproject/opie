@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation>Préférences</translation>
+        <translation>Préf.</translation>
     </message>
     <message>
         <source>New</source>
@@ -457,7 +457,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>All day</source>
-        <translation>Toute la journée</translation>
+        <translation>Tte la jrnée</translation>
     </message>
     <message>
         <source>Time zone</source>

@@ -3,181 +3,181 @@
     <name>CategoryFilterDlg</name>
     <message>
         <source>Category Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre par catégorie</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Select groups to show</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner les groupes à afficher</translation>
     </message>
 </context>
 <context>
     <name>DataManager</name>
     <message>
         <source>Reading configuration...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lecture de la configuration...</translation>
     </message>
 </context>
 <context>
     <name>InputDialog</name>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Annuler</translation>
     </message>
 </context>
 <context>
     <name>InstallDlg</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Installer</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrer</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Sortie</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Destination</translation>
     </message>
     <message>
         <source>Space Avail</source>
-        <translation type="unfinished"></translation>
+        <translation>Espace dispo</translation>
     </message>
 </context>
 <context>
     <name>InstallDlgImpl</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer</translation>
     </message>
 </context>
 <context>
     <name>InstallOptionsDlg</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>Force Depends</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer les dépendances</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer la réinstallation</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer l&apos;effacement</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation type="unfinished"></translation>
+        <translation>Forcer la ré-écriture</translation>
     </message>
     <message>
         <source>Verbose WGet</source>
-        <translation type="unfinished"></translation>
+        <translation>WGet info</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>AQPkg - Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>AQPkg - Gestionnaire de package</translation>
     </message>
     <message>
         <source>Type the text to search for here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Taper le texte à rechercher ici.</translation>
     </message>
     <message>
         <source>Click here to hide the Quick Jump toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour cacher la barre d&apos;outil.</translation>
     </message>
     <message>
         <source>Update lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Mettre à jour les listes</translation>
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour mettre les listes de packages à jour à partir des serveurs.</translation>
     </message>
     <message>
         <source>Upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Mettre à jour</translation>
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour mettre à jour tous les packages installés si une nouvelle version est disponible.</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Télécharger</translation>
     </message>
     <message>
         <source>Click here to download the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour télécharger le(s) package(s) sélectionné(s).</translation>
     </message>
     <message>
         <source>Apply changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer les changements</translation>
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour installer, enlever ou mettre à jour le(s) package(s) sélectionné(s).</translation>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Actions</translation>
     </message>
     <message>
         <source>Show packages not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer les packages non installés</translation>
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour afficher les packages disponibles qui n&apos;ont pas été installés.</translation>
     </message>
     <message>
         <source>Show installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les packages installés</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour afficher les packages installés sur ce périphérique.</translation>
     </message>
     <message>
         <source>Show updated packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les packages mis à jour</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour afficher les packages installés sur ce périphérique et qui ont une version plus récente disponible.</translation>
     </message>
     <message>
         <source>Filter by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Fltre par catégorie</translation>
     </message>
     <message>
         <source>Click here to list packages belonging to one category.</source>
