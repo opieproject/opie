@@ -364,8 +364,16 @@ void IRCMessageParser::parseLiteralError(IRCMessage *message) {
 
 void IRCMessageParser::parseCTCPPing(IRCMessage *message) {
     IRCPerson mask(message->prefix());
+    if(message->isCTCPReply()) {
+        unsigned int sentTime = message->param(0).toUInt();
+        QDateTime tm;
+        tm.setTime_t(0);
+        unsigned int receivedTime = tm.secsTo(QDateTime::currentDateTime());
+        emit outputReady(IRCOutput(OUTPUT_CTCP, tr("Received a CTCP PING reply from %1: %2 seconds").arg(mask.nick()).arg(receivedTime-sentTime)));
+        return;
+    } 
     m_session->m_connection->sendCTCPReply(mask.nick(), "PING", message->allParameters());
-    emit outputReady(IRCOutput(OUTPUT_CTCP, tr("Received a CTCP PING from ") + mask.nick()));
+    emit outputReady(IRCOutput(OUTPUT_CTCP, tr("Received a CTCP PING request from %1").arg(mask.nick())));
 
     //IRCPerson mask(message->prefix());
     QString dest = message->ctcpDestination();
