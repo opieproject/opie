@@ -197,10 +197,18 @@ void fileBrowser::populateList()
         item= new QListViewItem( ListView,fileL,fileS , fileDate);
          QPixmap pm;
          pm= Resource::loadPixmap( "folder" );
-         if(isDir || fileL.find("/",0,TRUE) != -1)
+         
+         if(isDir || fileL.find("/",0,TRUE) != -1) {
+             if( !QDir( fi->filePath() ).isReadable())
+                  pm = Resource::loadPixmap( "lockedfolder" );
              item->setPixmap( 0,pm );
-         else
-             item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
+         } else {
+             if( !fi->isReadable() )
+                   pm = Resource::loadPixmap( "locked" );
+             else
+                 pm =  Resource::loadPixmap( "fileopen" );
+             item->setPixmap( 0,pm);
+         }
          if(  fileL.find("->",0,TRUE) != -1) {
                // overlay link image
              QPixmap lnk = Resource::loadPixmap( "symlink" );

@@ -22,6 +22,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 
+#include <qstringlist.h>
 #include <qtextstream.h>
 #include <qpushbutton.h>
 #include <qtoolbutton.h>
@@ -236,11 +237,17 @@ OpieFtp::OpieFtp( )
     currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
     currentDir.setPath( QDir::currentDirPath());
 //      currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
-    currentPathEdit = new QLineEdit( "/", this, "currentPathEdit" );
-    layout->addMultiCellWidget( currentPathEdit, 3, 3, 0, 3 );
 
-    currentPathEdit->setText( currentDir.canonicalPath());
-    connect( currentPathEdit,SIGNAL(returnPressed()),this,SLOT(currentPathEditChanged()));
+    currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
+    layout->addMultiCellWidget( currentPathCombo, 3, 3, 0, 3 );
+
+    currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
+
+    connect( currentPathCombo, SIGNAL( activated( const QString & ) ),
+              this, SLOT(  currentPathComboChanged()currentPathCombo( const QString & ) ) );
+
+    connect( currentPathCombo->lineEdit(),SIGNAL(returnPressed()),
+             this,SLOT(currentPathComboChanged()));
 
     ProgressBar = new QProgressBar( this, "ProgressBar" );
     layout->addMultiCellWidget( ProgressBar, 4, 4, 0, 3 );
@@ -287,13 +294,13 @@ void OpieFtp::cleanUp()
 void OpieFtp::tabChanged(QWidget *w)
 {
     if (TabWidget->currentPageIndex() == 0) {
-            currentPathEdit->setText( currentDir.canonicalPath());
+            currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
             tabMenu->setItemChecked(tabMenu->idAt(0),TRUE);
             tabMenu->setItemChecked(tabMenu->idAt(1),FALSE);
             tabMenu->setItemChecked(tabMenu->idAt(2),FALSE);
     }
   if (TabWidget->currentPageIndex() == 1) {
-            currentPathEdit->setText( currentRemoteDir );
+            currentPathCombo->lineEdit()->setText( currentRemoteDir );
             tabMenu->setItemChecked(tabMenu->idAt(1),TRUE);
             tabMenu->setItemChecked(tabMenu->idAt(0),FALSE);
             tabMenu->setItemChecked(tabMenu->idAt(2),FALSE);
@@ -544,17 +551,37 @@ void OpieFtp::populateLocalView()
             }
         }
         if(fileL !="./") {
-        item = new QListViewItem( Local_View,fileL,fileS, fileDate);
-        if(isDir || fileL.find("/",0,TRUE) != -1)
-            item->setPixmap( 0,  Resource::loadPixmap( "folder" ));
-        else
-            item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
+            item= new QListViewItem( ListView,fileL,fileS , fileDate);
+            QPixmap pm;
+            pm= Resource::loadPixmap( "folder" );
+         
+            if(isDir || fileL.find("/",0,TRUE) != -1) {
+                if( !QDir( fi->filePath() ).isReadable())
+                    pm = Resource::loadPixmap( "lockedfolder" );
+                item->setPixmap( 0,pm );
+            } else {
+                if( !fi->isReadable() )
+                    pm = Resource::loadPixmap( "locked" );
+                else
+                    pm =  Resource::loadPixmap( "fileopen" );
+                item->setPixmap( 0,pm);
+            }
+            if(  fileL.find("->",0,TRUE) != -1) {
+                  // overlay link image
+                QPixmap lnk = Resource::loadPixmap( "symlink" );
+                QPainter painter( &pm );
+                painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
+                pm.setMask( pm.createHeuristicMask( FALSE ) );
+                item->setPixmap( 0, pm);
+            }
         }
         isDir=FALSE;
         ++it;
-     }
+    }
     Local_View->setSorting( 3,FALSE);
-    currentPathEdit->setText( currentDir.canonicalPath() );
+    currentPathCombo->lineEdit()->setText( currentDir.canonicalPath() );
+    fillCombo( (const QString &)currentDir);
+
 }
 
 bool OpieFtp::populateRemoteView( )
@@ -661,7 +688,8 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
     remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
     if(currentRemoteDir.right(1) !="/")
         currentRemoteDir +="/";
-    currentPathEdit->setText( currentRemoteDir );
+    currentPathCombo->lineEdit()->setText( currentRemoteDir );
+    fillRemoteCombo( (const QString &)currentDir);
     QCopEnvelope ( "QPE/System", "notBusy()" );
 }
 
@@ -932,27 +960,68 @@ void OpieFtp::localRename()
     populateLocalView();
 }
 
-void OpieFtp::currentPathEditChanged()
+void OpieFtp::currentPathComboActivated(const QString & currentPath) {
+    if (TabWidget->currentPageIndex() == 0) {
+    chdir( currentPath.latin1() );
+    currentDir.cd( currentPath, TRUE);
+    populateLocalList();
+    update();
+    } else {
+//     chdir( currentPath.latin1() );
+//     currentDir.cd( currentPath, TRUE);
+//     populateList();
+//     update();
+
+    }
+}
+
+void OpieFtp::fillCombo(const QString &currentPath) {
+
+        currentPathComboBox->lineEdit()->setText(currentPath);
+        if( localDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
+            currentPathComboBox->clear();
+            localDirPathStringList.prepend(currentPath );
+            currentPathComboBox->insertStringList( localDirPathStringList,-1);
+        }
+        currentPathComboBox->lineEdit()->setText(currentPath);
+        if( remoteDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
+            currentPathComboBox->clear();
+            remoteDirPathStringList.prepend(currentPath );
+            currentPathComboBox->insertStringList( remoteDirPathStringList,-1);
+        }
+}
+
+void OpieFtp::fillRemoteCombo(const QString &currentPath) {
+
+        dirPathCombo->lineEdit()->setText(currentPath);
+        if( remoteDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
+            dirPathCombo->clear();
+            remoteDirPathStringList.prepend(currentPath );
+            dirPathCombo->insertStringList( remoteDirPathStringList,-1);
+        }
+}
+
+void OpieFtp::currentPathComboChanged()
 {
     QString  oldRemoteCurrentDir =  currentRemoteDir;
 //    qDebug("oldRemoteCurrentDir "+oldRemoteCurrentDir);
     if (TabWidget->currentPageIndex() == 0) {
-        if(QDir( currentPathEdit->text()).exists()) {
-            currentDir.setPath( currentPathEdit->text() );
+        if(QDir( currentPathCombo->lineEdit()->text()).exists()) {
+            currentDir.setPath( currentPathCombo->lineEdit()->text() );
             populateLocalView();
         } else {
             QMessageBox::message(tr("Note"),tr("That directory does not exist"));
         }
     }
     if (TabWidget->currentPageIndex() == 1) {
-        currentRemoteDir = currentPathEdit->text();
+        currentRemoteDir = currentPathCombo->lineEdit()->text();
         if(currentRemoteDir.right(1) !="/") {
             currentRemoteDir = currentRemoteDir +"/";
-            currentPathEdit->setText( currentRemoteDir );
+            currentPathCombo->lineEdit()->setText( currentRemoteDir );
         }
             if( !remoteChDir( (const QString &)currentRemoteDir) ) {
                 currentRemoteDir = oldRemoteCurrentDir;
-                currentPathEdit->setText( currentRemoteDir );
+                currentPathCombo->lineEdit()->setText( currentRemoteDir );
             }
 
         remoteDirList( (const QString &)currentRemoteDir);

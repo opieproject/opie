@@ -37,6 +37,7 @@ class QFile;
 class QListViewItem;
 class QLineEdit;
 class QPushButton;
+class QStringList;
 
 class OpieFtp : public QMainWindow
 {
@@ -50,7 +51,7 @@ public:
     QWidget *tab, *tab_2, *tab_3;
     QListView *Local_View, *Remote_View;
 
-    QComboBox *UsernameComboBox, *ServerComboBox;
+    QComboBox *UsernameComboBox, *ServerComboBox, *currentPathCombo;
     QLineEdit *PasswordEdit, *remotePath, *currentPathEdit;
     QLabel *TextLabel2, *TextLabel1, *TextLabel3, *TextLabel4;;
     QSpinBox* PortSpinBox;
@@ -92,15 +93,20 @@ protected slots:
     void cleanUp();
     void remoteRename();
     void localRename();
-    void currentPathEditChanged();
+    void currentPathComboChanged();
+    void fillCombos();
+    void fillCombo(const QString &);
+    void currentPathComboActivated(const QString &);
   void switchToLocalTab();
   void switchToRemoteTab();
   void switchToConfigTab();
-  void fillCombos();
+  void fillCombo();
+  void fillRemoteCombo();
   void serverComboSelected(int);
   void deleteServer();
   void connectorBtnToggled(bool);  
 protected:
+  QStringList remoteDirPathStringList, localDirPathStringList;
     void nullifyCallBack();
     QGridLayout* tabLayout;
     QGridLayout* tabLayout_2;
