@@ -2,6 +2,7 @@
 #define OPIE_PIM_ACCESS_BACKEND
 
 #include <qarray.h>
+#include <qdatetime.h>
 
 #include <opie/otemplatebase.h>
 #include <opie/opimrecord.h>
