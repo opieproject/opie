@@ -15,7 +15,10 @@ IOModem::~IOModem() {
 
 
 void IOModem::close() {
-	// maybe do a hangup here just in case...?
+	// Hangup, discarding result
+	Dialer d(m_profile, rawIO());
+	d.setHangupOnly();
+	d.exec();
 
     IOSerial::close();
 }

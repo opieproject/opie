@@ -16,7 +16,7 @@ class TransferDialog : public QDialog
 {
 	Q_OBJECT
 	public:
-		TransferDialog(MainWindow *parent = 0l, const char *name = 0l);
+		TransferDialog(QWidget *parent = 0l, MainWindow *mainwindow = 0l, const char *name = 0l);
 		~TransferDialog();
 
 	public slots:

@@ -17,8 +17,8 @@
 
 #include "transferdialog.h"
 
-TransferDialog::TransferDialog(MainWindow *parent, const char *name)
-: QDialog(0l, 0l, true), m_win(parent)
+TransferDialog::TransferDialog(QWidget *parent, MainWindow *mainwindow, const char *name)
+: QDialog(parent, 0l, true), m_win(mainwindow)
 {
     m_lay = 0l;
 	m_recvlay = 0l;

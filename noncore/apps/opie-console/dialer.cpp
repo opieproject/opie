@@ -84,6 +84,12 @@ Dialer::~Dialer()
 {
 }
 
+void Dialer::setHangupOnly()
+{
+	state = state_cancel;
+	usercancel = 1;
+}
+
 void Dialer::slotCancel()
 {
 	if(state != state_online)

@@ -442,8 +442,9 @@ void MainWindow::create( const Profile& prof ) {
 void MainWindow::slotTransfer()
 {
     if ( currentSession() ) {
-	TransferDialog dlg(this);
+	TransferDialog dlg(currentSession()->widgetStack(), this);
 	dlg.showMaximized();
+	//currentSession()->widgetStack()->add(dlg);
 	dlg.exec();
     }
 }

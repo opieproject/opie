@@ -14,6 +14,7 @@ class Dialer : public QDialog
 	public:
 		Dialer(const Profile& profile, int fd, QWidget *parent = NULL, const char *name = NULL);
 		~Dialer();
+		void setHangupOnly();
 
 	public slots:
 		void slotCancel();
