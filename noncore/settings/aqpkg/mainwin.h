@@ -21,13 +21,18 @@
 #include <qmainwindow.h>
 #include <qpixmap.h>
 
-class QWidgetStack;
-class QPEToolBar;
-class QLineEdit;
-class QAction;
-class ProgressWidget;
-class NetworkPackageManager;
 class DataManager;
+class InstallData;
+
+class QAction;
+class QCheckListItem;
+class QComboBox;
+class QLabel;
+class QLineEdit;
+class QListView;
+class QPEToolBar;
+class QProgressBar;
+class QWidgetStack;
 
 class MainWindow :public  QMainWindow
 {
@@ -55,15 +60,45 @@ private:
     QPixmap iconDownload;
     QPixmap iconRemove;
     
-    NetworkPackageManager *networkPkgWindow;
-    ProgressWidget *progressWindow;
-
     int mnuShowUninstalledPkgsId;
     int mnuShowInstalledPkgsId;
     int mnuShowUpgradedPkgsId;
     int mnuFilterByCategory;
     int mnuSetFilterCategory;
 
+    // Main package list widget
+    QWidget   *networkPkgWindow;
+    QComboBox *serversList;
+    QListView *packagesList;
+    QPixmap    installedIcon;
+    QPixmap    updatedIcon;
+    QString    currentlySelectedServer;
+    QString    categoryFilter;
+    QString    stickyOption;
+
+    bool categoryFilterEnabled;
+    bool showJumpTo;
+    bool showUninstalledPkgs;
+    bool showInstalledPkgs;
+    bool showUpgradedPkgs;
+    bool downloadEnabled;
+
+    void initMainWidget();
+    void updateData();
+    void serverSelected( int index, bool showProgress );
+    void searchForPackage( const QString & );
+    bool filterByCategory( bool val );
+    void downloadSelectedPackages();
+    void downloadRemotePackage();
+    InstallData dealWithItem( QCheckListItem *item );
+    
+    // Progress widget
+    QWidget      *progressWindow;
+    QLabel       *m_status;
+    QProgressBar *m_progress;
+    
+    void initProgressWidget();
+    
 public slots:
     void setDocument( const QString &doc );
     void displayHelp();
@@ -77,7 +112,7 @@ public slots:
     void filterInstalledPackages();
     void filterUpgradedPackages();
     void filterCategory();
-    void setFilterCategory();
+    bool setFilterCategory();
     void raiseMainWidget();
     void raiseProgressWidget();
     void enableUpgrade( bool );
@@ -85,5 +120,14 @@ public slots:
 
 private slots:
     void init();
+    void setProgressSteps( int );
+    void setProgressMessage( const QString & );
+    void updateProgress( int );
+    void serverSelected( int index );
+    void updateServer();
+    void upgradePackages();
+    void downloadPackage();
+    void applyChanges();
+    void letterPushed( QString t );
 };
 #endif

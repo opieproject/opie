@@ -5,9 +5,7 @@ HEADERS		= global.h \
 		  datamgr.h \
 		  settingsimpl.h \
 		  ipkg.h \
-		  networkpkgmgr.h \
 		  package.h \
-		  progresswidget.h \
 		  installdlgimpl.h \
 		  instoptionsimpl.h \
 		  destination.h \
@@ -22,10 +20,8 @@ SOURCES		= mainwin.cpp \
 		  mem.cpp \
 		  settingsimpl.cpp \
 		  ipkg.cpp \
-		  networkpkgmgr.cpp \
 		  main.cpp \
 		  package.cpp \
-		  progresswidget.cpp \
 		  installdlgimpl.cpp \
 		  instoptionsimpl.cpp \
 		  destination.cpp \
