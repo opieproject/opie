@@ -1,0 +1,11 @@
+DESTDIR         = $(OPIEDIR)/bin
+TEMPLATE        = app
+CONFIG          = warn_on debug
+#CONFIG         = warn_on release
+HEADERS         = config.hh daemon.hh
+SOURCES         = daemon.cc
+INCLUDEPATH     += ../../libwellenreiter/source
+DEPENDPATH      += $(OPIEDIR)/include ../daemon
+LIBS            += -lpcap -L../../libwellenreiter/source -lwellenreiter
+INTERFACES      = 
+TARGET          = wellenreiterd
