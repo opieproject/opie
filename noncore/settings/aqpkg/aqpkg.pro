@@ -34,7 +34,7 @@ SOURCES        = mainwin.cpp \
 TARGET        = aqpkg
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe -lopiecore2 -lopieui2 -lstdc++
+LIBS        += -lqpe -lopiecore2 -lopieui2 
 
 include ( $(OPIEDIR)/include.pro )
 

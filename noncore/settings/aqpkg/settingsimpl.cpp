@@ -47,11 +47,6 @@
 #include <qlistbox.h>
 #include <qpushbutton.h>
 
-/* STD */
-#include <fstream>
-#include <algorithm>
-using namespace std;
-
 using namespace Opie::Ui;
 using namespace Opie::Ui;
 SettingsImpl :: SettingsImpl( DataManager *dataManager, QWidget * parent, const char* name, bool modal, WFlags fl )
