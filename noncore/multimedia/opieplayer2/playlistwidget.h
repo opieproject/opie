@@ -1,7 +1,7 @@
 /*
                             This file is part of the Opie Project
 
-                             Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
+                             Copyright (c)  2002,2003 Max Reiss <harlekin@handhelds.org>
                              Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
                              Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
               =.
@@ -111,6 +111,7 @@ private slots:
     void writem3u();
     void writeCurrentM3u();
     void openFile();
+    void openURL();
     void setDocument( const QString& fileref );
     void addToSelection( const DocLnk& ); // Add a media file to the playlist
     void addToSelection( QListViewItem* ); // Add a media file to the playlist
