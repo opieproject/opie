@@ -25,7 +25,6 @@ public:
 
 private:
     ExamplePlugin *examplePlugin;
-    ulong ref;
 };
 
 #endif
