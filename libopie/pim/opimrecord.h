@@ -95,6 +95,7 @@ public:
      * converts the internal structure to a map
      */
     virtual QMap<int, QString> toMap()const = 0;
+    // virtual fromMap( const <int, QString>& map ) = 0; // Should be added in the future (eilers)
 
     /**
      * key value representation of extra items

@@ -93,7 +93,7 @@ namespace {
         buf += " uid=\"" + QString::number( ev.uid() ) + "\"";
 
         if (ev.isAllDay() )
-            buf += " type=\"AllDay\"";
+		buf += " type=\"AllDay\""; // is that all ?? (eilers)
 
         if (ev.hasNotifiers() ) {
             OPimAlarm alarm = ev.notifiers().alarms()[0]; // take only the first
