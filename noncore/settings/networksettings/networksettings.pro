@@ -8,4 +8,4 @@ INCLUDEPATH += $(OPIEDIR)/include interfaces/
 DEPENDPATH  += $(OPIEDIR)/include interfaces/ wlan/
 LIBS            += -lqpe -L$(OPIEDIR)/plugins/networksetup -Linterfaces/ -linterfaces
 INTERFACES  = mainwindow.ui addconnection.ui
-TARGET    = networksetup
+TARGET    = networksettings
