@@ -47,7 +47,7 @@ class MScanListView: public OListView
     void IBSStraffic( QString from, QString to, QString via ); // NYI
 
   protected:
-    void addIfNotExisting( MScanListItem* parent, QString addr );
+    void addIfNotExisting( MScanListItem* parent, QString addr, const QString& type = "station" );
 
   private:
     ManufacturerDB* _manufacturerdb;

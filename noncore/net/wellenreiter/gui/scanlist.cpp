@@ -174,7 +174,7 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
 }
 
 
-void MScanListView::addIfNotExisting( MScanListItem* network, QString addr )
+void MScanListView::addIfNotExisting( MScanListItem* network, QString addr, const QString& type )
 {
     MScanListItem* subitem = static_cast<MScanListItem*>( network->firstChild() );
 
@@ -195,7 +195,7 @@ void MScanListView::addIfNotExisting( MScanListItem* network, QString addr )
     }
 
     // Hey, it seems to be a new item :-D
-    MScanListItem* station = new MScanListItem( network, "station", /* network->text( col_essid ) */ "", addr, false, -1, -1 );
+    MScanListItem* station = new MScanListItem( network, type, /* network->text( col_essid ) */ "", addr, false, -1, -1 );
     if ( _manufacturerdb )
     station->setManufacturer( _manufacturerdb->lookup( addr ) );
 }
@@ -237,7 +237,7 @@ void MScanListView::toDStraffic( QString from, QString to, QString via )
 
     if ( item ) // AP has shown up yet, so just add our new "from" - station
     {
-        addIfNotExisting( static_cast<MScanListItem*>(item->parent()), from );
+        addIfNotExisting( static_cast<MScanListItem*>(item->parent()), from, "adhoc" );
     }
     else
     {
@@ -247,7 +247,22 @@ void MScanListView::toDStraffic( QString from, QString to, QString via )
 
 void MScanListView::fromDStraffic( QString from, QString to, QString via )
 {
-    qWarning( "D'oh! Not yet implemented..." );
+    QString s;
+    MScanListItem* network;
+
+    QListViewItemIterator it( this );
+    while ( it.current() && it.current()->text( col_ap ) != via ) ++it;
+
+    MScanListItem* item = static_cast<MScanListItem*>( it.current() );
+
+    if ( item ) // AP has shown up yet, so just add our new "from" - station
+    {
+        addIfNotExisting( static_cast<MScanListItem*>(item->parent()), from, "station" );
+    }
+    else
+    {
+        qDebug( "D'Oh! Station without AP... ignoring for now... will handle this in 1.1 :-D" );
+    }
 }
 
 void MScanListView::IBSStraffic( QString from, QString to, QString via )
