@@ -1,0 +1,211 @@
+\documentclass[12pt,letterpaper,oneside, openany]{book} \usepackage[latin1] {inputenc}
+\usepackage{amsmath} \usepackage{amsfonts} \usepackage{amssymb} 
+\title{Opie User Manual}
+\author{The Opie Team}
+\begin{document}
+\maketitle
+\tableofcontents
+\part{Getting Started}
+\chapter{What is Opie?}
+Opie is a GUI (Graphical User Interface) for the Linux operating system (and might work on other OSes as well).  It was originally designed for handheld computers (such as the Compaq/HP iPaq and the Sharp Zaurus), but which could probably function well in other environments requiring a light GUI, such as an old laptop, or an internet kiosk.  It is bassed upon QT/Embedded from Trolltech, which is in turn a graphical environment designed for embedded applications, based upon the QT toolkit.
+
+Opie has been designed for devices with small screens, and a touchscreen input device (ie, only one mouse click, and no constant mouse position), as well as designed to fit in a relatively small amount of storage space (about 5 megabytes for the base libraries and the launcher).
+\chapter{Installation}
+\section{iPaq}
+To install opie on an ipaq, you will need a fresh familiar installation (ie, install familiar, and stop before you do ipkg install task-complete or ipkg install task-x), go to http://familiar.handhelds.org to get the latest version, and to get installation instructions.
+
+Note: If you had qpe/qtopia installed previously, \emph{completely} remove it, and remove the src line for it from your /etc/ipkg.conf file before attempting to install opie.
+
+Once you have familiar installed, set up a network connection between your ipaq and the ouside world (ppp, usbnet, or some network/modem card), and then run this command:
+\begin{verbatim}
+     echo src opie "http://131.152.105.154/feeds/ipaq/unstable/" \
+          >> /etc/ipkg.conf
+\end{verbatim} 
+then, run:
+\begin{verbatim}
+     ipkg update && ipkg install task-opie
+\end{verbatim}
+If you have a 3100 or 3800 series iPaq:
+\begin{verbatim}
+     ipkg install qt-embedded-rotation
+\end{verbatim}
+finally:
+\begin{verbatim}
+     /etc/init.d/opie start
+\end{verbatim}
+
+Opie should now be running (if you should have to reboot, which is rare, Opie will start automatically). From here, you can use either OpieOipkg (``Software'' in the settings tab of the launcher) or ipkg from the command line to install other opie apps. Check out the various task-opie-* ipkgs to install various sets of apps at once (you can always uninstall individual apps individually). You will probably want to install opie-embeddedkonsole first, so you have access to the command line in Opie. 
+
+\section{Zaurus}
+
+To install Opie completely on the Zaurus, you will have to install OpenZaurus, which includes Opie. However, individual Opie apps will work fine on the default Zaurus rom. Do not install Opie's launcher on a default Zaurus ROM though. 
+
+
+\chapter{Upgrading} 
+
+First, you should probably shutdown Opie from the ``Shutdown'' app in the Settings tab. Normally, simply running 
+\begin{verbatim}
+     ipkg update && ipkg upgrade
+\end{verbatim}
+will upgrade Opie. However, if you currently have a version with the 1.5.0 version number, you will have to upgrade it differently, because Opie now uses a different version number (the 1.5.0 was Qtopia's version number, now we use our own). To upgrade from one of these older versions, run: 
+\begin{verbatim}
+     ipkg update
+     ipkg install opie-update
+\end{verbatim}
+Opie should then be upgraded.
+
+\part{Applications}
+\chapter{Contacts}
+Contacts is a way to keep track of all the people you know, and how to contact them.  as well as other information, such as their birthday, the company they work for, etc.
+
+\section{Adding Contacts}
+
+To Add a user, go to Contact->Add, or click the add icon in the toolbar (looks like a blank piece of paper). First, you need to give the person a name. You can do this by either entering their name in the name field, or by pressing ``Full Name...'', which will open up a new dialog that lets you enter each part of their name individually. Three of the entry fields have pulldown menus instead of labels that let you set which parameter these input fields control. The File As field lets you control how their name is displayed in the main view, use the pulldown arrow to select from some common ways of ordering their first and last names. You can also select a category for the user to be filed under, and clicking the button labeled ``...'' lets you edit the available catagories (these are convinient for displaying just the contacts you want when you have a lot of them). 
+
+The address tab lets you edit their buisness and home addresses (select which one you want to change from the pulldown menu at the top). The bottom field behaves just like the three custom fields in the ``General'' tab (and if you select the same thing from the pulldown list, it will modify the same parameter). 
+
+The Details tab is used for miscelaneous things like the persons position, the name of their spouse, etc. 
+
+When you are done, click ``Ok'' in the top right of the screen (you can always edit their profile later), click the ``x'' to cancel, and not add the contact. 
+
+\section{Editing Contacts}
+
+To edit the contacts, select the person you want to edit, anc click the pencil icon, or go to ``Contact'' and then ``Edit'', and it will open up the same dialog used to add a user, except their information that is already entered will already be filled in. To finalise the changes, click ``ok'', or to cancel them, click ``x''. 
+
+\section{Deleting Contacts}
+
+To delete a contact, select the person from the list of contacts, and click the trash can icon, or go to Contact then Delete. A dialog will pop up asking if you want to actually delete that contact, click yes to delete them, no will cancel. 
+
+\section{Editing Contacts}
+
+To find a specific person, click the find icon (green magnifying glass), or go to Contact->Find. A dialog will pop up, and in the ``Find what'' input, enter the string you want to search for. You can also select if you want the search to be case sensative, or if you want it to search backwards from the currently selected user. The Category drop down menu lets you search only a specific category (``All'' to search all of them). When you click ``Find'', it will start search for the string in all the fields in all the contacts. When it finds a match, it will highlight the user in the main view. You can use this to search for (as an example) who a certain phone number belongs to, by entering the phone number in the ``find what'' field, and clicking ``Find''. 
+
+
+\section{Viewing Contacts}
+
+To view only the contacts in a certain category, go to the View menu, and check the categories you want to view. 
+
+The list of letters on the bottom of the window lets you look at only the contacts whos names begin with that letter. These work much like entering text on a mobile phone. For example, to view all the contacts whos name starts with ``B'', press the ``ABC'' group twice (since ``B'' is the second letter in that group). To go back to displaying all of the letters, click it two more times (pressing it four times brings you back to all the letters, so you pressed it 2 times to get to ``B'' and 2 more times to get back to all letters. 2+2=4). 
+
+
+\section{Personal Details}
+
+Change your personal details by going to Contact then My Personal Details. This is used in today to display who the device belongs to, as well as other apps.
+
+\chapter{Calendar}
+The calendar is a way to keep track of all your appointments, birthdays, meetings, or any other even that you would put in a calendar.
+
+\section{Navigation}
+
+Navigation in the calendar is simple. along the top are five different buttons that allow you to set the type of view, which correspond to the five items in the ``View'' menu. Each one (except for ``Today'') changes the amount of time shown on the screen. ``Day'' shows one day, ``Week'' one week, etc. Today is the same as Day, except that it automatically sets the view to the current day. 
+
+\subsection{The Day view}
+
+The day view shows your day divided up into blocks representing each hour. At the top is the navigation bar, wher you will see a row of buttons, which represent the days of the current week, and on the left and right sides of the navigation bar are arrows, which allow you to move one day in that direction. If you are on the last day of the week, pressing the arrow will bring you into the first day of the next week (or vice-versa if you are going backwards). There is also a button that lists the current day, which you can press to select a day to view from a callendar dialog. 
+
+In the main view, there is a collumn of buttons, each of which represents one hour. If you select one, any new appointments will automatically default to begining at that time and ending an hour later (which you can, of course, change when you create the appointment). 
+
+Clicking on an appointment will open a menu that lets you edit, delete or beam the appointment. Beam will beam the appointment to any device supporting the Obex protocol (palm devices, cellphones, etc). libopieobex must be installed to use this feature. 
+
+\subsection{The Week view}
+
+The week view allows you to see your week divided up into collumns, representing each day of the week, and rows, representing each hour of the day. In the navigation bar at the top, there are two scroll boxes, the one on the left shows the current year, and the one to the right shows which week it is of thar year. To the right of both of those is a label which shows the date range for the currently selected week. 
+
+In the main view, you see the week divided up into rows and collumns representing the days of the week, and hours of the day. In each cell, you will see a blue square which represents an appointment, which you can press to see details of the appointment. If you press anywhere in the free space, you will go to the day of the column that you clicked in. 
+
+\subsection{The Week List view}
+
+The week list view shows you all the appointments that you have that week without graphically representing how long they are or showing the free time between them. This is convinient if you need to see a list of all your appointments, but do not need to see how your time is mapped out. The navigation bar has an arrow button on either side, allowing you to move to the next or previous week, as well as a button which give the current week number for that year. Pressing the week number button will bring up a calendar dialog, which allows you to select the week you are viewing. Selecting a day from the calendar will bring you to the week that day is in. To the right of that is a button with a ``2'' in it. When this is depressed, the main view will show two weeks at a time, instead of one. The last item is a label which shows the range of dates for the currently selected week. 
+
+The main view is comprised of several rows, each one represents a day of the week. If you have an appointment on that day, the date will be red, otherwise it will be black (the current day is blue). Clicking on the date itself will bring you to the day view for that day. Under each day is a list of all the appointments for that day, as well as their start times. If you click on an appointment, you will go to an edit dialog for that appointment, which lets you view its details. Next to each day heading is a ``+'' sign, clicking it will create a new appointment for that day. 
+
+\subsection{The Month view}
+
+The month view looks like a normal monthly calendar, allowing you to see on what days of the month you have appointments. In the navigation bar, there are two pairs of arrows. The pair with an arrow and a vertical line will take you to the first or last month of the currently selected year, while the normal arrow buttons will take you to the next or previous month. There is a dropdown menu which allows you to select the month, and a entry field which allows you to select the year (press the up or down arrows, or enter in your own year). 
+
+The main view is divided up into a grid, where the columns are the days of the week, and the rows are the weeks (just like an ordinary calendar). The currently selected day has a bold box drawn around it, and if the day has an appointment, there will be a small blue square in the bottom right corner of it (that square will have a smaller white square if it is a recurring appointment). If the appointment is an all day event, it will be drawn as a green dot instead. When you click on the sqaure of a day, you will be taken to the day view for that day. 
+
+
+\section{Adding appointments}
+
+To add an appointment, click on the add appointment button in the toolbar at the top of the window (a blank page), and a dialog will open up, allowing you to enter information about the appointment (depending on the current view, and what you may have selected, there may be certain default settings). 
+
+At the top of the window is the description field, where you can enter in a short description of the appointment, or select a common one from the dropdown list. The location field allows you to do the same. The category dropdown allows you to assign the appointment to a category, which you can use later to view only some of your appointments. The button labeled ``...'' to the right of that will open up a dialog where you can add, delete, or edit certain categories. 
+
+To enter a start and end time, select the date for each from the dropdown menu, and then you can either manually enter a time, or you can use the three rows of numbers to more quickly enter it in. To use the fast input method, first click in the text entry field of the time you want to edit, then you need to select the hour. The first two rows are the hours, click whichever one you want. The third row of numbers are the minutes, in units of five. When you select the minutes field for the start time, it will automatically set the minutes field for the end time to the same thing, but you can change this by selecting the end field and giving it its own minutes field. Because of this, it is fastest to set the start time first and then the end time (assuming they dont have the same minutes field). There is also an ``all day'' checkbox, which will make the appointment take up the entire day. 
+
+Underneath this you can set the timezone of the appointment from the dropdown list. To change the available timezones, click the world icon, and it will open the CityTime application. Refer to its documentation for changing the timezones. If you want to have an alarm go off, check the ``alarm'' checkbox, and then set the number of minutes before the appointment that you want the alarm to sound. If you set the dropdown list next to that to ``silent'' you will only be given a visual alarm, wheras if you set the alarm to ``Loud'', there will be an alarm sound as well. Note: opie-alarm must be installed for alarms to work. 
+
+To set whether the appointment repeats, click the "Repeat" button and a new dialog will open up. At the top is a row of buttons, which lets you set how often the appointment repeats. Selecting one of these buttons will change the interface below, to represent the available options for that type of repatition (selecting ``None'' will turn off repetition if you turned it on and no longer want it). When you are done, click ``ok'' in the upper right to select that type of repetition, or ``x'' to set it back to what it was (none if it is a new appointment). 
+
+Finally, you can add notes to the appointment by clicking the ``Notes...'' button which will open a dialog with a text entry field for adding notes. Press ``ok'' to accept the changes to the notes, ``x'' to cancel. 
+
+When you are done setting up the appointment, click ``ok'' in the top right of the window, or ``x'' to cancel adding the appointment. 
+
+
+\section{Editing Appointments}
+
+How you start editing an appointment varies depending on what view you are in, but they will all open the same dialog. The dialog is the same as the Add Appointment dialog, except that the fields will already be filled in with the information that the appointment contains. Clicking ``ok'' will keep your changes, ``x'' will revert them to what they were before you edited them. 
+
+
+\section{Finding Appointments}
+
+To find a specific appointment, click the find button in the toolbar (small green magnifying glass) and it will open a find dialog. Here you can enter the text you want to search for, as well as the category you want to search for, as well as the start date, and whether you want the search to be case sensitive. Click ``Find'' to find the next appointment that matches your criteria.
+
+\chapter{Todo}
+Todo is designed for storing information about things you need to do, but which arent going to happen at a specific time, like "change the oil" or "mow the lawn". You can also give todo items a deadline, if they have to be completed by a certain time. 
+
+\section{Adding Tasks}
+
+Go to Data then New Task, or click on the new task icon (blank page). The priority drop down menu lets you select the priority of the task. The lower the number, the more important it is. The Category behaves in much the same way that they do in AddressBook, you can select the category from the drop down menu, or you can click the ``...'' button to add/delete/edit categories. To give the task a due date, check the ``Due'' checkbox, and then click the button next to it (it should contain the current date). That will open a calendar from which you can select the due date. The ``Completed'' check box is the same as the checkbox next to each item in the main view. There is a large text entry area where you can enter what the task is, along with a description of what you need to do. Since only the first little bit gets shown in the main window, or in OpieToday you probably want to start out with a brief description, followed by a more in depth one. For instance: ``Document OpieTodo - add information about adding, editing and viewing tasks''. This way, if there isnt enough room to show the full description, you will at least see ``Document OpieTodo''. Click ``ok'' in the upper right to add the new task, or ``x'' to close the window without adding the new task. 
+
+
+\section{Editing Tasks}
+
+To edit a task, you can select it, and then go to Data->Edit Task, or click the edit task icon (pencil). The same dialog should apear as if you were adding a task, but the information for that task should already be filled in. You can change any of it you want to, and then click ``ok'' in the top right corner to save the changes, or ``x'' to go back to the way it was. 
+
+\section{Deleting Tasks}
+
+To delete a task, first select it, and then either select Data->Delete... or press the Delete icon (trash can). a dialog should pop up, asking if you want to delete the task, click yes to delete it, or no to cancel. 
+
+\section{Finding Tasks}
+
+To find a task, either go to Options and then Find, or click the find icon (green magnifying glass), and a dialog should pop up. Enter the text you want to search for in the description, and select the category that you want it to search through (this will speed it up, if you know what category its in). You can also select ``case sensative'' which makes the search pay attention to the case of what you type (so if you look for ``mow lawn'', it wont find a task called ``Mow lawn''). ``Search Backwards'' will search backwards from the currently selected task. Click ``Find'' to initiate the search, when it finds a task that matches the string, it will select it. If you click Find again, it will find the next one in the list (or the previous one, if ``Search backwards'' is selected) 
+
+\section{Viewing Tasks}
+
+To only view tasks filled under certain categories, go to the Category menu, and check the categories you want to view. Also, under the Options menu, you can select whether or not you want completed tasks to be visible, and whether or not you want to see the deadline (usefull for getting more space for descriptions). 
+
+\section{Completing Tasks}
+
+To mark a task as completed without deleting it, you can either check the checkbox next to it in the main view, or edit it, and check the "completed" check box in the edit dialog. If Options then Completed tasks is not checked, the task will disapear when you mark it completed. but dont worry, its not gone forever, just check Completed tasks in the options menu, and you can see it, and edit it again.
+
+\chapter{EmbeddedKonsole}
+EmbeddedKonsole is Opie's terminal emulator.  From here you can do pretty much anything in (since Linux is actually a command line based OS by itself).  I will not go into much detail on using the linux command line, as that is covered in many other places (http://www.tldp.org is a good place to start, or read O'Reilly's \underline{Running Linux} for a comprehensive look at Linux for the beginner).  I will, however, give a quick overview of using a Linux shell.
+
+\section{What is a shell}
+
+A shell is a program that accepts input from a user, and runs commands.  Each ``command'' in the shell is actually a separate program (unless you are using a shell like BusyBox, which makes some of the more common commands part of its own program in order to save space).  Shells can actually be very powerful, and many of them allow you to write something called ``shell scripts'' which are just a sequence of commands, sometimes with some flow control statements.  For the most part, the average user does not need to know about any of this, though.  If you are running Opie on your iPaq, it is advisable to install the bash shell (ipkg install bash) because it offers things like tab completion, use of the backspace key, and a command history, as well as offering a more advanced scripting languauge than most other shells.
+
+\section{Running Programs}
+
+To run a program or a command (remember, a command is just a program), you simply type the name of the program and hit ``Return'' (in Linux, program names do not have a special suffix like they do in windows, in fact the ``.'' character has no special meaning unless it is at the begining of a filename).  When you type a program name and hit ``Return'' the shell looks in a special list of directories called your ``path'', and if it cannot find it in any of those directories, it stops looking and tells you it could not find them.  If you want to run a program that is not in your path, you must specify a absolute or relative path to that program.  For instance, to run a program that is in the directory you are currently in, you would type \verb+./program+ (``./'' is a special directory that is explained below), or to run a program in /home/username/ you would call \verb+/home/username/program+.
+
+Most programs take ``arguments'' when run from the command line.  An argument is a string that contains no spaces that changes how the program behaves (a text editor, for instance, might take a single argument, which would be the name of the file you wish to edit).  Usually, you can use the arguments ``-h'' or ``--help'' to get a list of the common arguments that that program takes, along with a short usage description, and a short description of what each argument does.
+
+\section{Basic Navigation}
+
+The command that you will use most often in the shell is probably the ``cd'' command, which stands for ``change directory.''  With this command, you can move around in the file system, by issuing the command like this: \verb+cd [new directory]+, where \verb+[new directory]+ is the directory you want to move to.  This directory name does not have to include the entire directory structure, but can be ``relative'' which means it assumes you are talking about directories relative to the directory you are in.  For example, if you are in a directory called /home/username and you want to move to the directory /home/username/other/dir you could simply type \verb+cd other/dir+ and you would end up in /home/username/other/dir.  You can also specify a full, or ``absolute'' path, by specifying the entire path name starting with / ( / is a special directory called the ``root'' directory, and does not have a ``parent'', which means that it is not in any other directory).  There are also two special directories called ``./'' and ``../''.  The ``./'' directory is the current directory you are in, and you will probably never use this in conjunction with the cd command (why would you want to move to the directory you are already in?).  The ``../'' directory represents the parent directory of the directory you are currently in, so if you are in /home/username, ../ is the same as /home.  You can string several ../'s together, so if you are in /home/username/dir/ ../../ represents /home.  There is one other special directory, called ``$\sim$/'' that points to your home directory (usually /home/username or /root for the root user).
+
+\section{Moving Files}
+
+To move files around, you need to use the ``cp'' (copy) and ``mv'' (move) commands.  Both of these are run the same way: \verb+command originalfile newfile+.  The only difference is that cp creates a new file without touching the old one, while mv deletes the original file.  The two path names can be either absolute or relative.  If you only specify a directory for the destination, and no filename, it will use the filename for the original file.
+
+\section{Deleting Files}
+
+To delete a file, run the ``rm'' command, and to delete a directory, run the ``rmdir'' command, each of them take the file to be removed as their only argument.
+
+\section{Linking Files}
+
+In Linux, you can have a special file called a ``symbolic link'' that acts just like a copy of another file, except it takes up less space.  This is convinient if two applications are looking for the same file in two separate places, because the file can be in both places at once, without taking up any extra space, and any change to one is automatically applied to the other (really, there is no other, one of them is just a file pointing to the other one).  This is also usefull for naming applications independant of their version number.  For instance, you could have a link called ``application'' that points to ``application1.0''.  To create a link, use the following command: \verb+ln -s originalfile link+.
+\end{document}
