@@ -17,10 +17,33 @@
 ** not clear to you.
 **
 **********************************************************************/
+#ifndef ANALOGCLOCK_H
+#define ANALOGCLOCK_H
 
-#include "clock.h"
-#include <qtopia/qpeapplication.h>
+#include <qdatetime.h>
+#include <qframe.h>
 
-QTOPIA_ADD_APPLICATION("clock",Clock)
-QTOPIA_MAIN
+class AnalogClock : public QFrame
+{
+    Q_OBJECT
+public:
+    AnalogClock( QWidget *parent=0, const char *name=0 );
+
+    QSizePolicy sizePolicy() const;
+
+    void display( const QTime& time );
+
+protected:
+    void drawContents( QPainter *p );
+    void drawHand( QPainter *p, QPoint, QPoint );
+
+private:
+    QPoint rotate( QPoint center, QPoint p, int angle );
+
+    QTime currTime;
+    QTime prevTime;
+    bool clear;
+};
+
+#endif
 

@@ -1,13 +1,20 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
-DESTDIR		= $(QPEDIR)/bin
-HEADERS		= clock.h
+multiprocess:TEMPLATE	= app
+multiprocess:DESTDIR	= $(QPEDIR)/bin
+singleprocess:TEMPLATE	= lib
+singleprocess:DESTDIR   = $(QPEDIR)/lib
+quicklaunch:TEMPLATE	= lib
+quicklaunch:DESTDIR	= $(QPEDIR)/plugins/application
+
+CONFIG	+= qtopia warn_on release
+HEADERS		= clock.h \
+		analogclock.h
 SOURCES		= clock.cpp \
-		  main.cpp
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= $(QPEDIR)/include
-LIBS            += -lqpe
-INTERFACES	= 
+		analogclock.cpp
+
+multiprocess:SOURCES+=main.cpp
+
+INTERFACES	= clockbase.ui \
+		alarmdlgbase.ui
 TARGET		= clock
 
-TRANSLATIONS = ../i18n/de/clock.ts
+TRANSLATIONS = clock-en_GB.ts clock-de.ts clock-ja.ts clock-no.ts
