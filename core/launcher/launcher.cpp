@@ -593,11 +593,10 @@ void Launcher::select( const AppLnk *appLnk )
 		tr("<p>No application is defined for this document."
 		"<p>Type is %1.").arg(appLnk->type()), tr("OK"), tr("View as text"), 0, 0, 1);
 
-#if 0
             /* ### Fixme */
 	    if ( i == 1 )
-		Global::execute(Service::app("Open/text/*"),appLnk->file());
-#endif
+		Global::execute("textedit",appLnk->file());
+
 	    return;
 	}
 	tabs->setBusy(TRUE);
