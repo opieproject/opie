@@ -54,19 +54,19 @@
     <name>AddressSettingsBase</name>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>필드의 순서 정하기</translation>
+        <translation type='obsolete'>필드의 순서 정하기</translation>
     </message>
     <message>
         <source>Select the field order:</source>
-        <translation>필드의 순서를 고르세요</translation>
+        <translation type='obsolete'>필드의 순서를 고르세요</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>위로</translation>
+        <translation type='obsolete'>위로</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>아래로</translation>
+        <translation type='obsolete'>아래로</translation>
     </message>
 </context>
 <context>
@@ -1174,7 +1174,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Western Sahara</source>
-        <translation type='unfinished'></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Yemen</source>
