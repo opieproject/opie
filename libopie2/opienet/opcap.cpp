@@ -724,8 +724,12 @@ OWaveLanManagementPacket::OWaveLanManagementPacket( const unsigned char* end, co
     odebug << "OWaveLanManagementPacket::OWaveLanManagementPacket(): decoding frame..." << oendl;
     odebug << "Detected subtype is " << managementType() << oendl;
 
-    // grab tagged values
-    const unsigned char* ptr = (const unsigned char*) (_body+1);
+    // Grab tagged values.
+    // Beacons contain a 12 byte long fixed parameters set before the tagged parameters come,
+    // Other management frames don't - which is why we have to inspect the subtype here.
+
+    const unsigned char* ptr = managementType() == "Beacon" ?  (const unsigned char*) (_body+1) : (const unsigned char*) (_header+1);
+    
     while (ptr < end)
     {
         switch ( *ptr )
