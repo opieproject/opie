@@ -107,7 +107,6 @@ protected slots:
     virtual void slotItemDuplicate() = 0;
     virtual void slotItemDelete() = 0;
     virtual void slotItemBeam() = 0;
-    //virtual void slotItemFind() = 0;
     virtual void slotConfigure() = 0;
 
 protected:
@@ -163,7 +162,7 @@ private:
     QActionGroup *m_itemMenuGroup1;      // Action group containing default items in Item menu
     QActionGroup *m_itemMenuGroup2;      // Action group containing default items in Item menu
     QActionGroup *m_viewMenuAppGroup;    // Action group containing application items in View menu
-    QActionGroup *m_viewMenuGroup;       // Action group containing default items in View menu
+//    QActionGroup *m_viewMenuGroup;       // Action group containing default items in View menu
     QAction      *m_itemNewAction;       // Add new item action
     QAction      *m_itemEditAction;      // Edit current item action
     QAction      *m_itemDuplicateAction; // Duplicate current item action

@@ -239,8 +239,8 @@ void OPimMainWindow::insertViewMenuItems( QActionGroup *items ) {
     if ( items ) {
         // Rebuild Item menu
         m_viewMenu->clear();
-        m_viewMenuGroup->addTo( m_viewMenu );
-        m_viewMenu->insertSeparator();
+//        m_viewMenuGroup->addTo( m_viewMenu );
+//        m_viewMenu->insertSeparator();
         m_viewMenuAppGroup = items;
         m_viewMenuAppGroup->addTo( m_viewMenu );
     }
@@ -364,12 +364,6 @@ void OPimMainWindow::initBars( const QString &itemName ) {
 
     m_itemMenuGroup2 = new QActionGroup( this, QString::null, false );
 
-//     a = new QAction( tr( "Find" ), Resource::loadPixmap( "find" ),
-//                      QString::null, 0, m_itemMenuGroup2, 0 );
-//     connect( a, SIGNAL(activated()), this, SLOT(slotItemFind()) );
-//     a->setWhatsThis( tr( "Click here to search for an item." ) );
-//     a->addTo( toolbar );
-
     m_configureAction = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ),
                                      QString::null, 0, m_itemMenuGroup2, 0 );
     connect( m_configureAction, SIGNAL(activated()), this, SLOT(slotConfigure()) );
@@ -378,15 +372,15 @@ void OPimMainWindow::initBars( const QString &itemName ) {
     m_itemMenuGroup2->addTo( m_itemMenu );
 
     // View menu
-    m_viewMenuGroup = new QActionGroup( this, QString::null, false );
+//    m_viewMenuGroup = new QActionGroup( this, QString::null, false );
 
-    QAction *a = new QAction( tr( "Filter" ), QString::null, 0, m_viewMenuGroup, 0 );
-    connect( a, SIGNAL(activated()), this, SLOT(slotViewFilter()) );
-    a->setWhatsThis( tr( "Click here to filter the items displayed." ) );
-
-    a = new QAction( tr( "Filter Settings" ), QString::null, 0, m_viewMenuGroup, 0 );
-    connect( a, SIGNAL(activated()), this, SLOT(slotViewFilterSettings()) );
-    a->setWhatsThis( tr( "Click here to modify the current filter settings." ) );
+//     QAction *a = new QAction( tr( "Filter" ), QString::null, 0, m_viewMenuGroup, 0 );
+//     connect( a, SIGNAL(activated()), this, SLOT(slotViewFilter()) );
+//     a->setWhatsThis( tr( "Click here to filter the items displayed." ) );
+//
+//     a = new QAction( tr( "Filter Settings" ), QString::null, 0, m_viewMenuGroup, 0 );
+//     connect( a, SIGNAL(activated()), this, SLOT(slotViewFilterSettings()) );
+//     a->setWhatsThis( tr( "Click here to modify the current filter settings." ) );
 
     // Create view toolbar
     toolbar = new QToolBar( this );
