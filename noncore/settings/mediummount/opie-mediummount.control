@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/settings
 Maintainer: Holger Freyther <zecke@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 License: GPL
 Description: Medium mount configuration
  Configuration application for the medium mounter.
