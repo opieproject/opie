@@ -1,0 +1,17 @@
+2004-??-??	The Opie Team <opie@handhelds.org>
+
+	* Added a new mail client based on libetpan (harlekin,alwin,jgf)
+	* Improved light-n-power for C7x0 (mickeyl)
+	* Added automatic rotation support for C7x0 (treke)
+
+2003-11-29	The Opie Team <opie@handhelds.org>
+
+	* Released as Version 1.0.3
+	* Improved i18n (various contributors)
+	* Reduced application startup time by integrating the TT quicklauncher (zecke,harlekin)
+	* Made the Documents Tab optional (mickeyl)
+	* Integrated basic support for HP iPAQ 54xx and the Jornada 5xx (chicken)
+
+2003-08-04	The Opie Team <opie@handhelds.org>
+
+	* Released as Version 1.0.0
