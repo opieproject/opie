@@ -3,7 +3,7 @@
     <name>Today</name>
     <message>
         <source>Today</source>
-        <translation type="obsolete">Heute</translation>
+        <translation>Heute</translation>
     </message>
     <message>
         <source>Owned by </source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>No plugins found</source>
-        <translation>Keine Plugins gefunden</translation>
+        <translation type="obsolete">Keine Plugins gefunden</translation>
     </message>
     <message>
         <source>No plugins activated</source>
@@ -29,6 +29,14 @@ Programm zu starten</translation>
     <message>
         <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
         <translation type="obsolete">&lt;b&gt;Besitzer: %1&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>Today Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The plugin &apos;%1&apos; caused Today to crash. It could be that the plugin is not properly installed.&lt;br&gt;Today tries to continue loading plugins.&lt;/qt&gt;</source>
+        <translation type="unfinished">&lt;qt&gt;Das Today Modul &apos;%1&apos; verursachte beim letzten Laden einen Absturz. Stellen Sie sicher, dass das Modul richtig installiert ist. Today fährt fort und probiert Module zu läden.</translation>
     </message>
 </context>
 <context>
@@ -142,8 +150,7 @@ automatisch laden?
     </message>
     <message>
         <source>tiny banner</source>
-        <translation>
-Kleiner Banner</translation>
+        <translation>Kleiner Banner</translation>
     </message>
     <message>
         <source>Have small banner </source>
