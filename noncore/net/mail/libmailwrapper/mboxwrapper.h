@@ -33,10 +33,12 @@ public:
     virtual void fetchRawBody(const RecMail&mail,char**target,size_t*length);
     virtual void deleteMails(const QString & mailbox,QList<RecMail> &target);
     virtual int deleteAllMail(const Folder*);
+    virtual const QString&getType()const;
 
 protected:
     static void deleteMails(mailmbox_folder*f,QList<RecMail> &target);
     QString MBOXPath;
+    static const QString wrapperType;
 };
 
 #endif

@@ -43,6 +43,7 @@ public:
     static void imap_progress( size_t current, size_t maximum );
     
     virtual void logout();
+    virtual const QString&getType()const;
 protected:
     RecMail*parse_list_result(mailimap_msg_att*);
     void login();

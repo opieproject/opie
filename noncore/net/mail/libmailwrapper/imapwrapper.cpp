@@ -985,3 +985,8 @@ void IMAPwrapper::storeMessage(const char*msg,size_t length, const QString&folde
         Global::statusMessage("Error storing mail!");
     }
 }
+
+const QString&IMAPwrapper::getType()const
+{
+    return account->getType();
+}

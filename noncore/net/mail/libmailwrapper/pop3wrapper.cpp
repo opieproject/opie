@@ -235,3 +235,8 @@ void POP3wrapper::fetchRawBody(const RecMail&mail,char**target,size_t*length)
     err = mailmessage_fetch(mailmsg,target,length);
     if (mailmsg) mailmessage_free(mailmsg);  
 }
+
+const QString&POP3wrapper::getType()const
+{
+    return account->getType();
+}

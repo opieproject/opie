@@ -49,6 +49,8 @@ public:
 
     static QString defaultLocalfolder();
     
+    virtual const QString&getType()const=0;
+
 protected:
     static encodedString*decode_String(const encodedString*text,const QString&enc);
     static QString convert_String(const char*text);

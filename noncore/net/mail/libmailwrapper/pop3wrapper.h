@@ -28,7 +28,7 @@ public:
     virtual RecBody fetchBody( const RecMail &mail );
     virtual void fetchRawBody(const RecMail&mail,char**target,size_t*length);
     virtual void logout();
-
+    virtual const QString&getType()const;
     static void pop3_progress( size_t current, size_t maximum );
 
 protected:

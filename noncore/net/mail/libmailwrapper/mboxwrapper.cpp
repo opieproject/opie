@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <qpe/global.h>
 
+const QString MBOXwrapper::wrapperType="MBOX";
+
 MBOXwrapper::MBOXwrapper(const QString & mbox_dir)
     : Genericwrapper(),MBOXPath(mbox_dir)
 {
@@ -321,4 +323,9 @@ void MBOXwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
         &target_stat.message_recent,&target_stat.message_unseen);
     if (folder) mailfolder_free(folder);
     if (storage) mailstorage_free(storage);
+}
+
+const QString&MBOXwrapper::getType()const
+{
+    return wrapperType;
 }
