@@ -25,7 +25,6 @@
 
 */
 
-
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qlineedit.h>
@@ -34,12 +33,18 @@
 #include <qhbox.h>
 #include <qtoolbutton.h>
 
+
+
 #include <sys/types.h>
 #include <pwd.h>
 #include <shadow.h>
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
+
+// Shitty gcc2 toolchain
+extern "C" char* crypt( const char*, const char* );
+
 
 
 #include "passworddialogimpl.h"
