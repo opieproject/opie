@@ -122,8 +122,18 @@ void BatteryMeter::paintEvent( QPaintEvent* )
         QFont f( "Fixed", AppLnk::smallIconSize()/2 );
         QFontMetrics fm( f );
         p.setFont( f );
-        p.drawText( 0, AppLnk::smallIconSize()/2, QString::number( percent ) );
-        p.drawText( AppLnk::smallIconSize()/4, AppLnk::smallIconSize(), "%" );
+        if ( percent > 98 ) {
+            p.drawText( 0, 0, width(), height(), Qt::AlignCenter, tr( "F" ) );
+        }
+        else if ( percent < 5 )
+        {
+            p.drawText( 0, 0, width(), height(), Qt::AlignCenter, tr( "E" ) );
+        }
+        else
+        {
+            p.drawText( 0, AppLnk::smallIconSize()/2, QString::number( percent ) );
+            p.drawText( AppLnk::smallIconSize()/4, AppLnk::smallIconSize(), "%" );
+        }
         return;
     }
 
