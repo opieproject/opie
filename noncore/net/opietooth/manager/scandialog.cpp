@@ -88,10 +88,11 @@ namespace OpieTooth {
 
         localDevice = new Manager( "hci0" );
 
-        connect( (QObject*)StartButton, SIGNAL( clicked() ), this, SLOT( startSearch() ) );
-        connect( (QObject*)StopButton, SIGNAL( clicked() ),  this,  SLOT( stopSearch() ) );
-        connect( (QObject*)localDevice, SIGNAL( foundDevices( const QString& , RemoteDevices::ValueList ) ),
-                 this, SLOT(fillList(const QString& , RemoteDevices::ValueList ) ) ) ;
+        connect( StartButton, SIGNAL( clicked() ), this, SLOT( startSearch() ) );
+        connect( StopButton, SIGNAL( clicked() ),  this,  SLOT( stopSearch() ) );
+        connect( localDevice, SIGNAL( foundDevices( const QString& , RemoteDevice::ValueList ) ),
+                 this, SLOT(fillList(const QString& , RemoteDevice::ValueList ) ) ) ;
+        //     connect( this, SIGNAL( accept() ), this, SLOT( emitToManager() ));
         progressStat = 0;
     }
 
@@ -105,6 +106,12 @@ namespace OpieTooth {
             progress->setProgress(progressStat++);
 
     }
+
+    void ScanDialog::accept() {
+        emitToManager();
+        QDialog::accept();
+    }
+
 
     void ScanDialog::startSearch() {
         progress->setProgress(0);
@@ -126,12 +133,13 @@ namespace OpieTooth {
 
     void ScanDialog::fillList(const QString& device, RemoteDevice::ValueList deviceList) {
 
+        qDebug("fill List");
         QCheckListItem * deviceItem;
 
         RemoteDevice::ValueList::Iterator it;
         for( it = deviceList.begin(); it != deviceList.end(); ++it ) {
 
-            deviceItem = new QCheckListItem( ListView1, (*it).name() );
+            deviceItem = new QCheckListItem( ListView1, (*it).name(),  QCheckListItem::CheckBox );
             deviceItem->setText(1, (*it).mac() );
         }
     }
@@ -141,6 +149,7 @@ namespace OpieTooth {
  * Then it emits it, so the manager can connect to the signal to fill the listing.
  */
     void ScanDialog::emitToManager() {
+        qDebug("vor liste durchsuchen");
 
         if (!ListView1) {
             return;
@@ -156,6 +165,7 @@ namespace OpieTooth {
                 deviceList->append( device );
             }
         }
+        qDebug("vor emit");
         emit selectedDevices( *deviceList );
         delete deviceList;
     }
@@ -164,7 +174,6 @@ namespace OpieTooth {
  * Cleanup
  */
     ScanDialog::~ScanDialog() {
-        emitToManager();
         delete localDevice;
     }
 

@@ -52,6 +52,8 @@ class Device;
         QPushButton* StopButton;
         QListView* ListView1;
 
+public slots:
+         void accept();
 
     protected:
         QVBoxLayout* Layout11;
@@ -59,7 +61,7 @@ class Device;
     private slots:
         void stopSearch();
         void startSearch();
-          void progressTimer();
+        void progressTimer();
         void fillList(const QString& device, RemoteDevice::ValueList list);
 
     private:
