@@ -56,8 +56,6 @@ void AdvancedFm::init() {
 	 cdUpButton->setAutoRaise( true );
 	 menuBar->insertItem( cdUpButton );
 
-
-
 	 qpeDirButton= new QToolButton( 0,"QPEButton");
 	 qpeDirButton->setPixmap( Resource::loadPixmap("launcher/opielogo16x16"));//,"",this,"QPEButton");
 	 qpeDirButton->setAutoRaise( true );

@@ -177,7 +177,6 @@ private:
    void addCustomDir();
    void removeCustomDir();
    void navigateToSelected();
-   void findFile(const QString &);
 
 private slots:
    void processEnded(Opie::Core::OProcess *);

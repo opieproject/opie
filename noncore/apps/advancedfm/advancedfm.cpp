@@ -13,6 +13,9 @@
 #include "advancedfm.h"
 
 #include <opie2/odebug.h>
+
+#include <opie2/ostorageinfo.h>
+
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
@@ -210,24 +213,9 @@ void AdvancedFm::rePopulate() {
 		populateView();
 		setOtherTabCurrent();
 		populateView();
-
-//      int tmpTab = whichTab;
-// //  odebug << "" << tmpTab << "" << oendl;
-
-//    for(int i =1; i < 3; i++) {
-//       TabWidget->setCurrentWidget(i - 1);
-//       populateView();
-//    }
-//    TabWidget->setCurrentWidget( tmpTab - 1);
 }
 
 void AdvancedFm::ListClicked(QListViewItem *selectedItem) {
-// 		if ( TabWidget->currentWidget() == tab)
-// 				qDebug("XXXXXXXXXXXXXXXXXXXXXXXX ListClicked local");
-// 		else
-// 				qDebug("XXXXXXXXXXXXXXXXXXXXXXXX ListClicked remote");
-			 
-
 		if(selectedItem) {
 				QString strItem=selectedItem->text(0);
 //      owarn << strItem << oendl;
@@ -277,7 +265,6 @@ void AdvancedFm::ListPressed( int mouse, QListViewItem *item, const QPoint& , in
 void AdvancedFm::refreshCurrentTab() {
      populateView();
 //	 if ( TabWidget->currentWidget() == tab) {
-		
 }
 
 void AdvancedFm::switchToLocalTab() {
@@ -352,14 +339,13 @@ void AdvancedFm::docButtonPushed() {
 }
 
 void AdvancedFm::SDButtonPushed() {
-   changeTo("/mnt/card");// this can change so fix
+		Opie::Core::OStorageInfo info;
+   changeTo(info.sdPath());
 }
 
 void AdvancedFm::CFButtonPushed() {
-   if(zaurusDevice)
-			 changeTo("/mnt/cf"); //zaurus
-   else
-			 changeTo("/mnt/hda"); //ipaq
+		Opie::Core::OStorageInfo info;
+   changeTo(info.cfPath());
 }
 
 void AdvancedFm::QPEButtonPushed() {
@@ -770,21 +756,8 @@ void AdvancedFm::qcopReceive(const QCString &msg, const QByteArray &data) {
 
 void AdvancedFm::setDocument(const QString &file) {
    changeTo( file);
-
 }
 
-
-void AdvancedFm::findFile(const QString &fileName) {
-   QFileInfo fi(fileName);
-   QListView *thisView = CurrentView();
-   QListViewItemIterator it( thisView );
-   for ( ; it.current(); ++it ) {
-      if(it.current()->text(0) == fi.fileName()) {
-         it.current()->setSelected(true);
-         thisView->ensureItemVisible(it.current());
-      }
-   }
-}
 
 void AdvancedFm::slotSwitchMenu(int item) {
 		Q_UNUSED(item);
