@@ -224,7 +224,7 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
 
     m_btnClose = new QToolButton( box );
     m_btnClose->setIconSet( Resource::loadIconSet("close") );
-    connect(btn, SIGNAL(clicked() ),
+    connect(m_btnClose, SIGNAL(clicked() ),
             selector(), SIGNAL(closeMe() ) );
 
     btn = new QToolButton( box );
