@@ -1,7 +1,7 @@
 
 #include <stdlib.h>
 
-#include <libetpan/mailimap.h>
+#include <libetpan/libetpan.h>
 
 #include "imapwrapper.h"
 #include "mailtypes.h"
@@ -322,8 +322,7 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
             }
             m->setMsgid(QString(head->env_message_id));
         } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_INTERNALDATE) {
-#if 0            
-
+#if 0
             mailimap_date_time*d = item->att_data.att_static->att_data.att_internal_date;
             QDateTime da(QDate(d->dt_year,d->dt_month,d->dt_day),QTime(d->dt_hour,d->dt_min,d->dt_sec));
             qDebug("%i %i %i - %i %i %i",d->dt_year,d->dt_month,d->dt_day,d->dt_hour,d->dt_min,d->dt_sec);
@@ -554,28 +553,28 @@ void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_mpart*mai
         ++count;
         current_body = (mailimap_body*)current->data;
         if (current_body->bd_type==MAILIMAP_BODY_MPART) {
-            QValueList<int>clist = recList;
-            clist.append(count);
-            searchBodyText(mail,current_body->bd_data.bd_body_mpart,target_body,current_recursion+1,clist);
+            QValueList<int>countlist = recList;
+            countlist.append(count);
+            searchBodyText(mail,current_body->bd_data.bd_body_mpart,target_body,current_recursion+1,countlist);
         } else if (current_body->bd_type==MAILIMAP_BODY_1PART){
             RecPart currentPart;
             fillSinglePart(currentPart,current_body->bd_data.bd_body_1part);
-            QValueList<int>clist = recList;    
-            clist.append(count);
+            QValueList<int>countlist = recList;    
+            countlist.append(count);
             /* important: Check for is NULL 'cause a body can be empty! */
             if (currentPart.Type()=="text" && target_body.Bodytext().isNull() ) {
-                QString body_text = fetchTextPart(mail,clist,true,currentPart.Encoding());
+                QString body_text = fetchTextPart(mail,countlist,true,currentPart.Encoding());
                 target_body.setDescription(currentPart);
                 target_body.setBodytext(body_text);
             } else {
                 QString id("");
-                for (unsigned int j = 0; j < clist.count();++j) {
+                for (unsigned int j = 0; j < countlist.count();++j) {
                     id+=(j>0?" ":"");
-                    id+=QString("%1").arg(clist[j]);
+                    id+=QString("%1").arg(countlist[j]);
                 }
                 qDebug("ID= %s",id.latin1());
                 currentPart.setIdentifier(id);
-                currentPart.setPositionlist(clist);
+                currentPart.setPositionlist(countlist);
                 target_body.addPart(currentPart);
             }
         }
