@@ -153,7 +153,6 @@ class OEthernetPacket : public QObject
     const struct ether_header* _ether;
 };
 
-
 /*======================================================================================
  * OPrismHeaderPacket - DLT_PRISM_HEADER frame
  *======================================================================================*/
@@ -171,7 +170,6 @@ class OPrismHeaderPacket : public QObject
   private:
     const struct prism_hdr* _header;
 };
-
 
 /*======================================================================================
  * OWaveLanPacket - DLT_IEEE802_11 frame
@@ -352,7 +350,6 @@ class OWaveLanManagementIBSS : public QObject
  * OWaveLanManagementChallenge
  *======================================================================================*/
 
-// Qobject do we need that??
 class OWaveLanManagementChallenge : public QObject
 {
   Q_OBJECT
@@ -368,7 +365,7 @@ class OWaveLanManagementChallenge : public QObject
 /*======================================================================================
  * OWaveLanDataPacket - type: data (T_DATA)
  *======================================================================================*/
-// Qobject?
+
 class OWaveLanDataPacket : public QObject
 {
   Q_OBJECT

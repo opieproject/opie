@@ -113,7 +113,7 @@ class ONetwork : public QObject
     /**
      * @internal Rebuild the internal interface database
      * @note Sometimes it might be useful to call this from client code,
-     * e.g. after cardctl insert
+     * e.g. after issuing a cardctl insert
      */
     void synchronize();
 
@@ -253,16 +253,40 @@ class OChannelHopper : public QObject
   Q_OBJECT
 
   public:
+    /**
+     * Constructor.
+     */
     OChannelHopper( OWirelessNetworkInterface* );
+    /**
+     * Destructor.
+     */
     virtual ~OChannelHopper();
+    /**
+     * @returns true, if the channel hopper is hopping channels
+     */
     bool isActive() const;
+    /**
+     * @returns the last hopped channel
+     */
     int channel() const;
-    virtual void timerEvent( QTimerEvent* );
-    void setInterval( int );
+    /**
+     * Set the channel hopping @a interval.
+     * An interval of 0 deactivates the channel hopper.
+     */
+    void setInterval( int interval );
+    /**
+     * @returns the channel hopping interval
+     */
     int interval() const;
 
   signals:
+    /**
+     * This signal is emitted right after the channel hopper performed a hop
+     */
     void hopped( int );
+
+  protected:
+    virtual void timerEvent( QTimerEvent* );
 
   private:
     OWirelessNetworkInterface* _iface;

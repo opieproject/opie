@@ -17,7 +17,7 @@ HEADERS     = ocompletionbox.h       \
               odialog.h              \
               oseparator.h           \
               otaskbarapplet.h
-              
+
 SOURCES     = ocompletionbox.cpp     \
               ocombobox.cpp          \
               oeditlistbox.cpp       \
@@ -32,7 +32,7 @@ SOURCES     = ocompletionbox.cpp     \
               oversatileviewitem.cpp \
               #ojanuswidget.cpp       \
               odialog.cpp            \
-              oseparator.cpp        \
+              oseparator.cpp         \
               otaskbarapplet.cpp
 
 INTERFACES  =

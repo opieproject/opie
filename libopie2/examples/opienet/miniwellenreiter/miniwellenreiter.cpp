@@ -112,7 +112,7 @@ public:
 
     // enable monitoring mode
     printf( "Enabling monitor mode...\n" );
-    wiface->setMonitorMode( true );
+    //wiface->setMonitorMode( true );
 
     // open a packet capturer
     cap = new OPacketCapturer();
@@ -127,7 +127,7 @@ public:
     cap->setBlocking( false );
 
     // start channel hopper
-    wiface->setChannelHopping( 1000 );
+    //wiface->setChannelHopping( 1000 );
 
     // connect
     connect( cap, SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
