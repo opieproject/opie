@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=E-Mail
-Exec=mail
+Exec=maild
 Type=Application
 Icon=mail/desktopicon
 Name[pt]=E-Mail
