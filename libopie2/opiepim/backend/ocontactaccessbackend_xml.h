@@ -1,99 +1,45 @@
 /*
+                             This file is part of the Opie Project
+                             Copyright (C) Stefan Eilers (Eilers.Stefan@epost.de)
+              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
+/*
  * XML Backend for the OPIE-Contact Database.
- *
- * Copyright (c) 2002 by Stefan Eilers (Eilers.Stefan@epost.de)
- *
- * =====================================================================
- *	This program is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU Library General Public
- *      License as published by the Free Software Foundation; either
- *      version 2 of the License, or (at your option) any later version.
- * =====================================================================
- * ToDo: XML-Backend: Automatic reload if something was changed...
- *       File Locking to protect against concurrent access
- *
- *
- * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.15 2003-09-22 14:31:16 eilers Exp $
- * =====================================================================
- * History:
- * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.15  2003-09-22 14:31:16  eilers
- * Added first experimental incarnation of sql-backend for addressbook.
- * Some modifications to be able to compile the todo sql-backend.
- * A lot of changes fill follow...
- *
- * Revision 1.14  2003/04/13 18:07:10  zecke
- * More API doc
- * QString -> const QString&
- * QString = 0l -> QString::null
- *
- * Revision 1.13  2003/03/21 10:33:09  eilers
- * Merged speed optimized xml backend for contacts to main.
- * Added QDateTime to querybyexample. For instance, it is now possible to get
- * all Birthdays/Anniversaries between two dates. This should be used
- * to show all birthdays in the datebook..
- * This change is sourcecode backward compatible but you have to upgrade
- * the binaries for today-addressbook.
- *
- * Revision 1.12.2.2  2003/02/11 12:17:28  eilers
- * Speed optimization. Removed the sequential search loops.
- *
- * Revision 1.12.2.1  2003/02/09 15:05:01  eilers
- * Nothing happened.. Just some cleanup before I will start..
- *
- * Revision 1.12  2003/01/03 16:58:03  eilers
- * Reenable debug output
- *
- * Revision 1.11  2003/01/03 12:31:28  eilers
- * Bugfix for calculating data diffs..
- *
- * Revision 1.10  2003/01/02 14:27:12  eilers
- * Improved query by example: Search by date is possible.. First step
- * for a today plugin for birthdays..
- *
- * Revision 1.9  2002/12/08 12:48:57  eilers
- * Moved journal-enum from ocontact into i the xml-backend..
- *
- * Revision 1.8  2002/11/14 17:04:24  eilers
- * Sorting will now work if fullname is identical on some entries
- *
- * Revision 1.7  2002/11/13 15:02:46  eilers
- * Small Bug in sorted fixed
- *
- * Revision 1.6  2002/11/13 14:14:51  eilers
- * Added sorted for Contacts..
- *
- * Revision 1.5  2002/11/01 15:10:42  eilers
- * Added regExp-search in database for all fields in a contact.
- *
- * Revision 1.4  2002/10/16 10:52:40  eilers
- * Added some docu to the interface and now using the cache infrastucture by zecke.. :)
- *
- * Revision 1.3  2002/10/14 16:21:54  eilers
- * Some minor interface updates
- *
- * Revision 1.2  2002/10/07 17:34:24  eilers
- * added OBackendFactory for advanced backend access
- *
- * Revision 1.1  2002/09/27 17:11:44  eilers
- * Added API for accessing the Contact-Database ! It is compiling, but
- * please do not expect that anything is working !
- * I will debug that stuff in the next time ..
- * Please read README_COMPILE for compiling !
- *
- *
  */
 
 #ifndef _OContactAccessBackend_XML_
 #define _OContactAccessBackend_XML_
 
-#include "ocontactaccessbackend.h"
-#include "ocontactaccess.h"
+#include <opie2/ocontactaccessbackend.h>
+#include <opie2/ocontactaccess.h>
 
 #include <qlist.h>
 #include <qdict.h>
 
+namespace Opie {
 /* the default xml implementation */
 /**
  * This class is the XML implementation of a Contact backend
@@ -156,5 +102,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 
 	QDict<OContact> m_uidToContact;
 };
+
+}
 
 #endif

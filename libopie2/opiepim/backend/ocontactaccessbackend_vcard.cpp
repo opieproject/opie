@@ -1,100 +1,43 @@
 /*
+                             This file is part of the Opie Project
+                             Copyright (C) The Main Author <main-author@whereever.org>
+              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
+/*
  * VCard Backend for the OPIE-Contact Database.
- *
- * Copyright (C) 2000 Trolltech AS.  All rights reserved.
- * Copyright (c) 2002 by Stefan Eilers (Eilers.Stefan@epost.de)
- *
- * =====================================================================
- *	This program is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU Library General Public
- *      License as published by the Free Software Foundation; either
- *      version 2 of the License, or (at your option) any later version.
- * =====================================================================
- * ToDo:
- *
- * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.11 2003-08-01 12:30:16 eilers Exp $
- * =====================================================================
- * History:
- * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.11  2003-08-01 12:30:16  eilers
- * Merging changes from BRANCH_1_0 to HEAD
- *
- * Revision 1.10.4.3  2003/07/23 08:54:37  eilers
- * Default email was added to the list of all emails, which already contains
- * the default email..
- * This closes bug #1045
- *
- * Revision 1.10.4.2  2003/07/23 08:44:45  eilers
- * Importing of Notes in vcard files wasn't implemented.
- * Closes bug #1044
- *
- * Revision 1.10.4.1  2003/06/02 13:37:49  eilers
- * Fixing memory leak
- *
- * Revision 1.10  2003/04/13 18:07:10  zecke
- * More API doc
- * QString -> const QString&
- * QString = 0l -> QString::null
- *
- * Revision 1.9  2003/03/21 10:33:09  eilers
- * Merged speed optimized xml backend for contacts to main.
- * Added QDateTime to querybyexample. For instance, it is now possible to get
- * all Birthdays/Anniversaries between two dates. This should be used
- * to show all birthdays in the datebook..
- * This change is sourcecode backward compatible but you have to upgrade
- * the binaries for today-addressbook.
- *
- * Revision 1.8  2003/02/21 16:52:49  zecke
- * -Remove old Todo classes they're deprecated and today I already using the
- * new API
- * -Guard against self assignment in OTodo
- * -Add test apps for OPIM
- * -Opiefied Event classes
- * -Added TimeZone handling and pinning of TimeZones to OEvent
- * -Adjust ORecur and the widget to better timezone behaviour
- *
- * Revision 1.7  2003/02/16 22:25:46  zecke
- * 0000276 Fix for that bug.. or better temp workaround
- * A Preferred Number is HOME|VOICE
- * A CellPhone is HOME|VOICE|CELL the type & HOME|VOICE test
- * triggers both
- * and the cell phone number overrides the other entries..
- *
- * as a temp I check that it's not equal to HOME|VOICE|CELL before setting the
- * number
- *
- * The right and final fix would be to reorder the if statement to make it
- * if else based and the less common thing put to the bottom
- *
- * OTodoAccessVcal fix the date for beaming
- *
- * Revision 1.6  2003/01/13 15:49:31  eilers
- * Fixing crash when businesscard.vcf is missing..
- *
- * Revision 1.5  2002/12/07 13:26:22  eilers
- * Fixing bug in storing anniversary..
- *
- * Revision 1.4  2002/11/13 14:14:51  eilers
- * Added sorted for Contacts..
- *
- * Revision 1.3  2002/11/11 16:41:09  kergoth
- * no default arguments in implementation
- *
- * Revision 1.2  2002/11/10 15:41:53  eilers
- * Bugfixes..
- *
- * Revision 1.1  2002/11/09 14:34:52  eilers
- * Added VCard Backend.
- *
  */
-#include "ocontactaccessbackend_vcard.h"
-#include "../../library/backend/vobject_p.h"
-#include "../../library/backend/qfiledirect_p.h"
+#include <opie2/ocontactaccessbackend_vcard.h>
+#include "../../../../library/backend/vobject_p.h"
+#include "../../../../library/backend/qfiledirect_p.h"
 
 #include <qpe/timeconversion.h>
 
 #include <qfile.h>
+
+namespace Opie {
 
 OContactAccessBackend_VCard::OContactAccessBackend_VCard ( const QString& , const QString& filename ):
 	m_dirty( false ),
@@ -643,4 +586,6 @@ VObject* OContactAccessBackend_VCard::safeAddProp( VObject *o, const char *prop)
 	if ( o )
 		ret = addProp( o, prop );
 	return ret;
+}
+
 }

@@ -1,37 +1,33 @@
 /*
+                             This file is part of the Opie Project
+                             Copyright (C) Stefan Eilers (Eilers.Stefan@epost.de)
+              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
+/*
  * SQL Backend for the OPIE-Calender Database.
- *
- * Copyright (c) 2003 by Stefan Eilers (Eilers.Stefan@epost.de)
- *
- * =====================================================================
- *	This program is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU Library General Public
- *      License as published by the Free Software Foundation; either
- *      version 2 of the License, or (at your option) any later version.
- * =====================================================================
- * =====================================================================
- * Version: $Id: odatebookaccessbackend_sql.cpp,v 1.3 2003-12-22 11:41:39 eilers Exp $
- * =====================================================================
- * History:
- * $Log: odatebookaccessbackend_sql.cpp,v $
- * Revision 1.3  2003-12-22 11:41:39  eilers
- * Fixing stupid bug, found by sourcode review..
- *
- * Revision 1.2  2003/12/22 10:19:26  eilers
- * Finishing implementation of sql-backend for datebook. But I have to
- * port the PIM datebook application to use it, before I could debug the
- * whole stuff.
- * Thus, PIM-Database backend is finished, but highly experimental. And some
- * parts are still generic. For instance, the "queryByExample()" methods are
- * not (or not fully) implemented. Todo: custom-entries not stored.
- * The big show stopper: matchRegExp() (needed by OpieSearch) needs regular
- * expression search in the database, which is not supported by sqlite !
- * Therefore we need either an extended sqlite or a workaround which would
- * be very slow and memory consuming..
- *
- * Revision 1.1  2003/12/08 15:18:12  eilers
- * Committing unfinished sql implementation before merging to libopie2 starts..
- *
  *
  */
 
@@ -47,9 +43,10 @@
 #include <opie2/osqlmanager.h>
 #include <opie2/osqlquery.h>
 
-#include "orecur.h"
-#include "odatebookaccessbackend_sql.h"
+#include <opie2/orecur.h>
+#include <opie2/odatebookaccessbackend_sql.h>
 
+namespace Opie {
 
 
 ODateBookAccessBackend_SQL::ODateBookAccessBackend_SQL( const QString& ,
@@ -363,5 +360,7 @@ QArray<int> ODateBookAccessBackend_SQL::extractUids( OSQLResult& res ) const
 	qWarning("extractUids ready: count2 = %d needs %d ms", i, t.elapsed() );
 
 	return ints;
+
+}
 
 }

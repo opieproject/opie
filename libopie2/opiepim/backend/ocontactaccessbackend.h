@@ -1,3 +1,31 @@
+/*
+                             This file is part of the Opie Project
+                             Copyright (C) The Main Author <main-author@whereever.org>
+              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
 /**
  * The class responsible for managing a backend.
  * The implementation of this abstract class contains
@@ -6,62 +34,17 @@
  * Copyright (c) 2002 by Stefan Eilers (Eilers.Stefan@epost.de)
  * Copyright (c) 2002 by Holger Freyther (zecke@handhelds.org)
  *
- * =====================================================================
- *	This program is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU Library General Public
- *      License as published by the Free Software Foundation;
- *      either version 2 of the License, or (at your option) any later
- *      version.
- * =====================================================================
- * ToDo: Define enum for query settings
- * =====================================================================
- * Version: $Id: ocontactaccessbackend.h,v 1.7 2004-02-19 02:05:37 zecke Exp $
- * =====================================================================
- * History:
- * $Log: ocontactaccessbackend.h,v $
- * Revision 1.7  2004-02-19 02:05:37  zecke
- * Add notes for API fixes and BC stuff
- *
- * Revision 1.6  2003/08/01 12:30:16  eilers
- * Merging changes from BRANCH_1_0 to HEAD
- *
- * Revision 1.5.4.1  2003/06/30 14:34:19  eilers
- * Patches from Zecke:
- * Fixing and cleaning up extraMap handling
- * Adding d_ptr for binary compatibility in the future
- *
- * Revision 1.5  2003/04/13 18:07:10  zecke
- * More API doc
- * QString -> const QString&
- * QString = 0l -> QString::null
- *
- * Revision 1.4  2002/11/13 14:14:51  eilers
- * Added sorted for Contacts..
- *
- * Revision 1.3  2002/11/01 15:10:42  eilers
- * Added regExp-search in database for all fields in a contact.
- *
- * Revision 1.2  2002/10/07 17:34:24  eilers
- * added OBackendFactory for advanced backend access
- *
- * Revision 1.1  2002/09/27 17:11:44  eilers
- * Added API for accessing the Contact-Database ! It is compiling, but
- * please do not expect that anything is working !
- * I will debug that stuff in the next time ..
- * Please read README_COMPILE for compiling !
- *
- * =====================================================================
- *
  */
 
 #ifndef _OCONTACTACCESSBACKEND_H_
 #define _OCONTACTACCESSBACKEND_H_
 
-#include "ocontact.h"
-#include "opimaccessbackend.h"
+#include <opie2/ocontact.h>
+#include <opie2/opimaccessbackend.h>
 
 #include <qregexp.h>
 
+namespace Opie {
 /**
  * This class represents the interface of all Contact Backends.
  * Derivates of this class will be used to access the contacts.
@@ -125,4 +108,7 @@ private:
 	class Private;
 	Private *d;
 };
+
+}
+
 #endif

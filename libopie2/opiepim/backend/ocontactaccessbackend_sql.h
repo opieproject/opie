@@ -1,44 +1,50 @@
 /*
+                             This file is part of the Opie Project
+                             Copyright (C) Stefan Eilers (Eilers.Stefan@epost.de)
+              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
+/*
  * SQL Backend for the OPIE-Contact Database.
- *
- * Copyright (c) 2002 by Stefan Eilers (Eilers.Stefan@epost.de)
- *
- * =====================================================================
- *	This program is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU Library General Public
- *      License as published by the Free Software Foundation; either
- *      version 2 of the License, or (at your option) any later version.
- * =====================================================================
- *
- *
- * =====================================================================
- * Version: $Id: ocontactaccessbackend_sql.h,v 1.2 2003-12-08 15:18:11 eilers Exp $
- * =====================================================================
- * History:
- * $Log: ocontactaccessbackend_sql.h,v $
- * Revision 1.2  2003-12-08 15:18:11  eilers
- * Committing unfinished sql implementation before merging to libopie2 starts..
- *
- * Revision 1.1  2003/09/22 14:31:16  eilers
- * Added first experimental incarnation of sql-backend for addressbook.
- * Some modifications to be able to compile the todo sql-backend.
- * A lot of changes fill follow...
- *
- *
  */
 
 #ifndef _OContactAccessBackend_SQL_
 #define _OContactAccessBackend_SQL_
 
-#include "ocontactaccessbackend.h"
-#include "ocontactaccess.h"
+#include <opie2/ocontactaccessbackend.h>
+#include <opie2/ocontactaccess.h>
 
 #include <qlist.h>
 #include <qdict.h>
 
+/* aren't in namespace Opie yet - alwin */
 class OSQLDriver;
 class OSQLResult;
 class OSQLResultItem;
+
+namespace Opie {
 
 /* the default xml implementation */
 /**
@@ -97,5 +103,7 @@ class OContactAccessBackend_SQL : public OContactAccessBackend {
 
 	OSQLDriver* m_driver;
 };
+
+}
 
 #endif

@@ -1,73 +1,34 @@
 /*
- * Class to manage the Contacts.
- *
- * Copyright (c) 2002 by Stefan Eilers (Eilers.Stefan@epost.de)
- * Copyright (c) 2002 by Holger Freyther (zecke@handhelds.org)
- *
- * =====================================================================
- *	This program is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU Library General Public
- *      License as published by the Free Software Foundation;
- *      either version 2 of the License, or (at your option) any later
- *      version.
+                             This file is part of the Opie Project
+                             Copyright (C) The Main Author <main-author@whereever.org>
+              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
+/*
  * =====================================================================
  * ToDo: Define enum for query settings
- * =====================================================================
- * Version: $Id: ocontactaccess.h,v 1.10 2003-12-22 10:19:26 eilers Exp $
- * =====================================================================
- * History:
- * $Log: ocontactaccess.h,v $
- * Revision 1.10  2003-12-22 10:19:26  eilers
- * Finishing implementation of sql-backend for datebook. But I have to
- * port the PIM datebook application to use it, before I could debug the
- * whole stuff.
- * Thus, PIM-Database backend is finished, but highly experimental. And some
- * parts are still generic. For instance, the "queryByExample()" methods are
- * not (or not fully) implemented. Todo: custom-entries not stored.
- * The big show stopper: matchRegExp() (needed by OpieSearch) needs regular
- * expression search in the database, which is not supported by sqlite !
- * Therefore we need either an extended sqlite or a workaround which would
- * be very slow and memory consuming..
- *
- * Revision 1.9  2003/08/01 12:30:16  eilers
- * Merging changes from BRANCH_1_0 to HEAD
- *
- * Revision 1.8.2.1  2003/06/30 14:34:19  eilers
- * Patches from Zecke:
- * Fixing and cleaning up extraMap handling
- * Adding d_ptr for binary compatibility in the future
- *
- * Revision 1.8  2003/05/08 13:55:09  tille
- * search stuff
- * and match, toRichText & toShortText in oevent
- *
- * Revision 1.7  2003/04/13 18:07:10  zecke
- * More API doc
- * QString -> const QString&
- * QString = 0l -> QString::null
- *
- * Revision 1.6  2003/01/02 14:27:12  eilers
- * Improved query by example: Search by date is possible.. First step
- * for a today plugin for birthdays..
- *
- * Revision 1.5  2002/11/13 14:14:51  eilers
- * Added sorted for Contacts..
- *
- * Revision 1.4  2002/11/01 15:10:42  eilers
- * Added regExp-search in database for all fields in a contact.
- *
- * Revision 1.3  2002/10/16 10:52:40  eilers
- * Added some docu to the interface and now using the cache infrastucture by zecke.. :)
- *
- * Revision 1.2  2002/10/14 16:21:54  eilers
- * Some minor interface updates
- *
- * Revision 1.1  2002/09/27 17:11:44  eilers
- * Added API for accessing the Contact-Database ! It is compiling, but
- * please do not expect that anything is working !
- * I will debug that stuff in the next time ..
- * Please read README_COMPILE for compiling !
- *
  * =====================================================================
  */
 #ifndef _OCONTACTACCESS_H
@@ -80,10 +41,11 @@
 #include <qvaluelist.h>
 #include <qfileinfo.h>
 
-#include "ocontact.h"
-#include "ocontactaccessbackend.h"
-#include "opimaccesstemplate.h"
+#include <opie2/ocontact.h>
+#include <opie2/ocontactaccessbackend.h>
+#include <opie2/opimaccesstemplate.h>
 
+namespace Opie {
 /**
  * Class to access the contacts database.
  * This is just a frontend for the real database handling which is
@@ -190,4 +152,7 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 	Private *d;
 
 };
+
+}
+
 #endif

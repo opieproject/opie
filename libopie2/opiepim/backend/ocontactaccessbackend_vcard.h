@@ -1,57 +1,44 @@
 /*
+                             This file is part of the Opie Project
+                             Copyright (C) The Main Author <main-author@whereever.org>
+              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
+/*
  * VCard Backend for the OPIE-Contact Database.
- *
- * Copyright (C) 2000 Trolltech AS.  All rights reserved.
- * Copyright (c) 2002 by Stefan Eilers (Eilers.Stefan@epost.de)
- *
- * =====================================================================
- *	This program is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU Library General Public
- *      License as published by the Free Software Foundation; either
- *      version 2 of the License, or (at your option) any later version.
- * =====================================================================
- * ToDo:
- *
- * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.h,v 1.6 2003-04-13 18:07:10 zecke Exp $
- * =====================================================================
- * History:
- * $Log: ocontactaccessbackend_vcard.h,v $
- * Revision 1.6  2003-04-13 18:07:10  zecke
- * More API doc
- * QString -> const QString&
- * QString = 0l -> QString::null
- *
- * Revision 1.5  2003/03/21 10:33:09  eilers
- * Merged speed optimized xml backend for contacts to main.
- * Added QDateTime to querybyexample. For instance, it is now possible to get
- * all Birthdays/Anniversaries between two dates. This should be used
- * to show all birthdays in the datebook..
- * This change is sourcecode backward compatible but you have to upgrade
- * the binaries for today-addressbook.
- *
- * Revision 1.4  2002/12/07 13:26:22  eilers
- * Fixing bug in storing anniversary..
- *
- * Revision 1.3  2002/11/13 14:14:51  eilers
- * Added sorted for Contacts..
- *
- * Revision 1.2  2002/11/10 15:41:53  eilers
- * Bugfixes..
- *
- * Revision 1.1  2002/11/09 14:34:52  eilers
- * Added VCard Backend.
- *
  */
 #ifndef __OCONTACTACCESSBACKEND_VCARD_H_
 #define __OCONTACTACCESSBACKEND_VCARD_H_
 
-#include <opie/ocontact.h>
+#include <opie2/ocontact.h>
 
-#include "ocontactaccessbackend.h"
+#include <opie2/ocontactaccessbackend.h>
 
 class VObject;
 
+namespace Opie {
 /**
  * This is the vCard 2.1 implementation of the Contact Storage
  * @see OContactAccessBackend_XML
@@ -92,5 +79,7 @@ private:
 	QString m_file;
 	QMap<int, OContact> m_map;
 };
+
+}
 
 #endif

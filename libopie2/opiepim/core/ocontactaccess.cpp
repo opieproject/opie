@@ -1,53 +1,34 @@
 /*
- * Class to manage the Contacts.
- *
- * Copyright (c) 2002 by Stefan Eilers (Eilers.Stefan@epost.de)
- *
- * =====================================================================
- *	This program is free software; you can redistribute it and/or
- *	modify it under the terms of the GNU Library General Public
- *      License as published by the Free Software Foundation; either
- *      version 2 of the License, or (at your option) any later version.
- * =====================================================================
- * Info: This class could just work with a change in the header-file
- *       of the Contact class ! Therefore our libopie only compiles
- *       with our version of libqpe
+                             This file is part of the Opie Project
+                             Copyright (C) The Main Author <main-author@whereever.org>
+              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
+/*
  * =====================================================================
  * ToDo: XML-Backend: Automatic reload if something was changed...
- *
- *
- * =====================================================================
- * Version: $Id: ocontactaccess.cpp,v 1.8 2003-05-08 13:55:09 tille Exp $
- * =====================================================================
- * History:
- * $Log: ocontactaccess.cpp,v $
- * Revision 1.8  2003-05-08 13:55:09  tille
- * search stuff
- * and match, toRichText & toShortText in oevent
- *
- * Revision 1.7  2002/11/13 14:14:51  eilers
- * Added sorted for Contacts..
- *
- * Revision 1.6  2002/11/01 15:10:42  eilers
- * Added regExp-search in database for all fields in a contact.
- *
- * Revision 1.5  2002/10/16 10:52:40  eilers
- * Added some docu to the interface and now using the cache infrastucture by zecke.. :)
- *
- * Revision 1.4  2002/10/14 16:21:54  eilers
- * Some minor interface updates
- *
- * Revision 1.3  2002/10/07 17:34:24  eilers
- * added OBackendFactory for advanced backend access
- *
- * Revision 1.2  2002/10/02 16:18:11  eilers
- * debugged and seems to work almost perfectly ..
- *
- * Revision 1.1  2002/09/27 17:11:44  eilers
- * Added API for accessing the Contact-Database ! It is compiling, but
- * please do not expect that anything is working !
- * I will debug that stuff in the next time ..
- * Please read README_COMPILE for compiling !
  *
  *
  */
@@ -70,8 +51,9 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#include "ocontactaccessbackend_xml.h"
+#include <opie2/ocontactaccessbackend_xml.h>
 
+namespace Opie {
 
 OContactAccess::OContactAccess ( const QString appname, const QString ,
 			 OContactAccessBackend* end, bool autosync ):
@@ -165,4 +147,6 @@ void OContactAccess::copMessage( const QCString &msg, const QByteArray & )
 		reload ();
 		emit signalChanged ( this );
 	}
+}
+
 }
