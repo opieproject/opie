@@ -23,6 +23,7 @@
 	Fixed Bugs
 	--------
 	* #1005 - Fixed backup to CompactFlash (ar)
+	* #1167 - Fixed Opie write crashing on more text than one page (ar)
 	* #1225 - Fixed repeated light flashing on Zaurus with keyz (mickeyl)
 	* #1359 - Fixed bookmarks in Gutenbrowser (ljp)
 	* #1361 - Fixed auto upercase in Opie-Addressbook (eilers) 
