@@ -97,7 +97,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>error box</source>
-        <translation type="unfinished"></translation>
+        <translation>okienko bledu</translation>
     </message>
 </context>
 <context>
@@ -198,7 +198,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation type="unfinished"></translation>
+        <translation>Emituj to wydarzenie</translation>
     </message>
 </context>
 <context>
@@ -566,7 +566,7 @@ Wyjsc ?</translation>
     <name>DatebookAlldayDisp</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacje</translation>
     </message>
 </context>
 <context>
@@ -732,7 +732,7 @@ i </translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>
@@ -771,7 +771,7 @@ i </translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation>Konic o:</translation>
+        <translation>Koniec:</translation>
     </message>
     <message>
         <source>No End Date</source>
@@ -779,7 +779,7 @@ i </translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation>Powtarzaj o:</translation>
+        <translation>Powtarzaj w</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -799,7 +799,7 @@ i </translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation>Pio</translation>
+        <translation>Pia</translation>
     </message>
     <message>
         <source>Sat</source>
