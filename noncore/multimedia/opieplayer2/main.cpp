@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     VideoWidget vw( 0, "videoUI" );
     videoUI = &vw;
     a.processEvents();
-    MediaPlayer mp( 0, "mediaPlayer" );
+    MediaPlayer mp( st, 0, "mediaPlayer" );
 
     a.showMainDocumentWidget(&pl);
 

@@ -41,11 +41,12 @@
 
 class DocLnk;
 class VolumeControl;
+class MediaPlayerState;
 
 class MediaPlayer : public QObject {
     Q_OBJECT
 public:
-    MediaPlayer( QObject *parent, const char *name );
+    MediaPlayer( MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name );
     ~MediaPlayer();
 private slots:
     void setPlaying( bool );
@@ -68,6 +69,7 @@ private:
     int     volumeDirection;
     XineControl *xineControl;
     VolumeControl *volControl;
+    MediaPlayerState &mediaPlayerState;
 };
 
 

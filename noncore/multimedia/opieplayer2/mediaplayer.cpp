@@ -27,13 +27,12 @@
 extern AudioWidget *audioUI;
 extern VideoWidget *videoUI;
 extern PlayListWidget *playList;
-extern MediaPlayerState *mediaPlayerState;
 
 
 #define FBIOBLANK             0x4611
 
-MediaPlayer::MediaPlayer( QObject *parent, const char *name )
-    : QObject( parent, name ), volumeDirection( 0 ) {
+MediaPlayer::MediaPlayer( MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name )
+    : QObject( parent, name ), volumeDirection( 0 ), mediaPlayerState( _mediaPlayerState ) {
 
     fd=-1;fl=-1;
     playList->setCaption( tr( "OpiePlayer: Initializating" ) );
@@ -42,13 +41,13 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     //    QPEApplication::grabKeyboard(); // EVIL
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
-    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( setPlaying( bool ) ) );
+    connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( setPlaying( bool ) ) );
 
-    connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pauseCheck( bool ) ) );
+    connect( &mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pauseCheck( bool ) ) );
 
-    connect( mediaPlayerState, SIGNAL( next() ), this, SLOT( next() ) );
-    connect( mediaPlayerState, SIGNAL( prev() ), this, SLOT( prev() ) );
-    connect( mediaPlayerState, SIGNAL( blankToggled( bool ) ), this, SLOT ( blank( bool ) ) );
+    connect( &mediaPlayerState, SIGNAL( next() ), this, SLOT( next() ) );
+    connect( &mediaPlayerState, SIGNAL( prev() ), this, SLOT( prev() ) );
+    connect( &mediaPlayerState, SIGNAL( blankToggled( bool ) ), this, SLOT ( blank( bool ) ) );
 
     connect( audioUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
     connect( audioUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
@@ -74,14 +73,14 @@ MediaPlayer::~MediaPlayer() {
 }
 
 void MediaPlayer::pauseCheck( bool b ) {
-     if ( b && !mediaPlayerState->isPlaying() ) {
-         mediaPlayerState->setPaused( FALSE );
+     if ( b && !mediaPlayerState.isPlaying() ) {
+         mediaPlayerState.setPaused( FALSE );
      }
 }
 
 void MediaPlayer::play() {
-    mediaPlayerState->setPlaying( FALSE );
-    mediaPlayerState->setPlaying( TRUE );
+    mediaPlayerState.setPlaying( FALSE );
+    mediaPlayerState.setPlaying( TRUE );
 }
 
 void MediaPlayer::setPlaying( bool play ) {
@@ -89,8 +88,8 @@ void MediaPlayer::setPlaying( bool play ) {
         return;
     }
 
-    if ( mediaPlayerState->isPaused() ) {
-        mediaPlayerState->setPaused( FALSE );
+    if ( mediaPlayerState.isPaused() ) {
+        mediaPlayerState.setPaused( FALSE );
         return;
     }
 
@@ -100,19 +99,19 @@ void MediaPlayer::setPlaying( bool play ) {
         // random and looping settings enabled causes problems here,
         // since there is no selected file in the playlist, but a selected file in the file list,
         // so we remember and shutoff
-        l = mediaPlayerState->isLooping();
+        l = mediaPlayerState.isLooping();
         if(l) {
-            mediaPlayerState->setLooping( false );
+            mediaPlayerState.setLooping( false );
         }
-        r = mediaPlayerState->isShuffled();
-        mediaPlayerState->setShuffled( false );
+        r = mediaPlayerState.isShuffled();
+        mediaPlayerState.setShuffled( false );
     }
 
     PlayListWidget::Entry playListEntry = playList->currentEntry();
     fileName = playListEntry.name;
     xineControl->play( playListEntry.file );
 
-    long seconds = mediaPlayerState->length();
+    long seconds = mediaPlayerState.length();
     time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
 
     if( fileName.left(4) == "http" ) {
@@ -137,12 +136,12 @@ void MediaPlayer::prev() {
     if( playList->currentTab() == PlayListWidget::CurrentPlayList ) { //if using the playlist
         if ( playList->prev() ) {
             play();
-        } else if ( mediaPlayerState->isLooping() ) {
+        } else if ( mediaPlayerState.isLooping() ) {
             if ( playList->last() ) {
                 play();
             }
         } else {
-            mediaPlayerState->setList();
+            mediaPlayerState.setList();
         }
     }
 }
@@ -153,19 +152,19 @@ void MediaPlayer::next() {
     if(playList->currentTab() == PlayListWidget::CurrentPlayList) { //if using the playlist
         if ( playList->next() ) {
             play();
-        } else if ( mediaPlayerState->isLooping() ) {
+        } else if ( mediaPlayerState.isLooping() ) {
             if ( playList->first() ) {
                 play();
             }
         } else {
-            mediaPlayerState->setList();
+            mediaPlayerState.setList();
         }
     } else { //if playing from file list, let's just stop
         qDebug("<<<<<<<<<<<<<<<<<stop for filelists");
-        mediaPlayerState->setPlaying(false);
-        mediaPlayerState->setDisplayType( MediaPlayerState::MediaSelection );
-        if(l) mediaPlayerState->setLooping(l);
-        if(r) mediaPlayerState->setShuffled(r);
+        mediaPlayerState.setPlaying(false);
+        mediaPlayerState.setDisplayType( MediaPlayerState::MediaSelection );
+        if(l) mediaPlayerState.setLooping(l);
+        if(r) mediaPlayerState.setShuffled(r);
     }
     qApp->processEvents();
 }
@@ -346,7 +345,7 @@ void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
 
 void MediaPlayer::cleanUp() {// this happens on closing
      Config cfg( "OpiePlayer" );
-     mediaPlayerState->writeConfig( cfg );
+     mediaPlayerState.writeConfig( cfg );
      playList->writeDefaultPlaylist( );
 
 //     QPEApplication::grabKeyboard();
