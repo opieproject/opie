@@ -16,9 +16,11 @@
 	* Added new O-menu icon to lock the PDA immediately: opie-lockapplet (clem)
 	* Opie-Security now hides the plugin-based authentication tabs if no auth. plugin package is installed (clem)
 	* Opie-Security gained a 'test authentication' button (clem)
+	* Opie-Eye got a more unique layout (menubar), a slideshow, user can setup some defaults
 
 	Fixed Bugs
 	----------
+	* n.a.  - Opie-mail: fixed some crasher, some layout-problems
 	* #501  - Pickboard is able to show 'Umlaute' (TT,zecke)
 	* #608  - Make Opie usable for left handed users (zecke)
 	* #957  - Import of VCards/VTodos/VEvents with BASE64 encoding (ljp,zecke)
