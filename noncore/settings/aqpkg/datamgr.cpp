@@ -86,7 +86,7 @@ void DataManager :: loadServers()
         while ( fgets( line, sizeof line, fp) != NULL )
         {
             lineStr = line;
-            if ( lineStr.startsWith( "src" ) || lineStr.startsWith( "#src" ) || lineStr.startsWith( "# src" ) )
+            if ( lineStr.startsWith( "src" ) ) //|| lineStr.startsWith( "#src" ) || lineStr.startsWith( "# src" ) )
             {
                 char alias[20];
                 char url[100];
@@ -98,10 +98,13 @@ void DataManager :: loadServers()
                 // Should Handle #src, # src, src, and combinations of
                 sscanf( lineStr, "%*[^r]%*[^ ] %s %s", alias, url );
                 Server s( alias, url );
+                if ( lineStr.startsWith( "src" ) )
+               		s.setActive( true );
+                else
+               		s.setActive( false );
+
                 serverList.push_back( s );
 
-                if ( lineStr.startsWith( "src" ) )
-               		setActiveServer( alias );
             }
             else if ( lineStr.startsWith( "dest" ) )
             {
@@ -115,40 +118,6 @@ void DataManager :: loadServers()
     }
     fclose( fp );
 
-    // Go through the server destination list and add root, cf and card if they
-    // don't already exist
-/* AQ - commented out as if you don't have a CF or SD card in then
- * this causes IPKG to try to create directories on non existant devices
- * (which of course fails), gives a nasty error message and can cause ipkg
- * to seg fault.
- *
-    vector<Destination>::iterator dit;
-    bool foundRoot = false;
-    bool foundCF = false;
-    bool foundCard = false;
-    for ( dit = destList.begin() ; dit != destList.end() ; ++dit )
-    {
-        if ( dit->getDestinationPath() == "/" )
-            foundRoot = true;
-        if ( dit->getDestinationPath() == "/mnt/cf" )
-            foundCF = true;
-        if ( dit->getDestinationPath() == "/mnt/card" )
-            foundCard = true;
-    }
-
-    // If running on a Zaurus (arm) then if we didn't find root, CF or card
-    // destinations, add them as default
-#ifdef QWS
-#ifndef X86
-    if ( !foundRoot )
-        destList.push_back( Destination( "root", "/" ) );
-    if ( !foundCF )
-        destList.push_back( Destination( "cf", "/mnt/cf" ) );
-    if ( !foundCF )
-        destList.push_back( Destination( "card", "/mnt/card" ) );
-#endif
-#endif
-*/    
     vector<Server>::iterator it;
     for ( it = serverList.begin() ; it != serverList.end() ; ++it )
         reloadServerData( it->getServerName() );
@@ -201,7 +170,7 @@ void DataManager :: writeOutIpkgConf()
         {
             QString url = it->getServerUrl();;
 
-            if ( !activeServer || alias != activeServer )
+            if ( !it->isServerActive() )
                 out << "#";
             out << "src " << alias << " " << url << endl;
         }
