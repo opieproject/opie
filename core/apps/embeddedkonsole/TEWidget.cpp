@@ -931,7 +931,8 @@ void TEWidget::emitSelection()
 {
 #ifndef QT_NO_CLIPBOARD
   QString text = QApplication::clipboard()->text();
-  if ( ! text.isNull() )
+//	qDebug(text);
+  if ( ! text.isNull())
   {
     text.replace(QRegExp("\n"), "\r");
     QKeyEvent e(QEvent::KeyPress, 0, -1, 0, text);
@@ -1066,6 +1067,9 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
         }
         else if( ke->state() == ControlButton && ke->key() == Key_V) {
           pasteClipboard();
+        }
+        else if( ke->state() == ControlButton && ke->key() == Key_C) {
+//          pasteClipboard();
         }
         else
             emit keyPressedSignal(ke); // expose
