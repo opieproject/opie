@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>You exploded!</source>
-        <translation">Je bent ontploft!</translation>
+        <translation>Je bent ontploft!</translation>
     </message>
     <message>
         <source>Mine Hunt</source>
