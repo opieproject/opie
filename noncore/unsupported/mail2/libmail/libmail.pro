@@ -7,7 +7,7 @@ HEADERS		=	configfile.h \
 			imaphandler.h \
 			imapresponse.h \
 			mailfactory.h \
-			md5.cpp \
+			md5.h \
 			miscfunctions.h \
 			smtphandler.h
 SOURCES		=	configfile.cpp \
@@ -15,7 +15,7 @@ SOURCES		=	configfile.cpp \
 			imaphandler.cpp \
 			imapresponse.cpp \
 			mailfactory.cpp \
-			md5.h \
+			md5.cpp \
 			miscfunctions.cpp \
 			smtphandler.cpp
 INCLUDEPATH	+=	$(OPIEDIR)/include
