@@ -44,6 +44,7 @@ public:
 
 	// inline for better SharpROM BC
 	inline bool hasGroup ( const QString &gname ) const  { return ( groups. find ( gname ) != groups. end ( )); };
+	inline QStringList groupList ( ) const { QStringList sl; for ( QMap< QString, ConfigGroup >::ConstIterator it = groups. begin ( ); it != groups. end ( ); ++it ) { sl << it.key(); } return sl; };
     
     void setGroup( const QString &gname );
     void writeEntry( const QString &key, const char* value );
