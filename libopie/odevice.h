@@ -102,8 +102,6 @@ protected:
 
 private:
 	ODevice ( const ODevice & );
-
-	static void tstp_sighandler ( int );
 };
 
 #endif

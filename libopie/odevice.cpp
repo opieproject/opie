@@ -131,12 +131,6 @@ ODevice::~ODevice ( )
 
 #define APM_IOC_SUSPEND          (( 0<<30 ) | ( 'A'<<8 ) | ( 2 ) | ( 0<<16 ))
 
-
-void ODevice::tstp_sighandler ( int )
-{
-}
-
-
 bool ODevice::suspend ( )
 {
 	if ( d-> m_model == OMODEL_Unknown ) // better don't suspend in qvfb / on unkown devices
@@ -149,7 +143,7 @@ bool ODevice::suspend ( )
 	    (( fd = ::open ( "/dev/misc/apm_bios",O_RDWR )) >= 0 )) {	
 		struct timeval tvs, tvn;
 
-		::signal ( SIGTSTP, tstp_sighandler );	// we don't want to be stopped
+		::signal ( SIGTSTP, SIG_IGN );	// we don't want to be stopped
 		::gettimeofday ( &tvs, 0 );
 	
 		res = ( ::ioctl ( fd, APM_IOC_SUSPEND ) == 0 ); // tell the kernel to "start" suspending
