@@ -438,7 +438,7 @@ QUnknownInterface* OGenericPluginLoader::load( const OPluginItem& item, const QU
      */
     QUnknownInterface*  iface=0;
     if ( lib->queryInterface(  uuid,  &iface ) == QS_OK ) {
-        installTranslators(pa.left( pa.find(".")));
+        installTranslators( item.name() );
         m_library.insert( iface, lib );
     }else
         iface = 0;
@@ -603,16 +603,22 @@ QStringList OGenericPluginLoader::languageList() {
         /*
          * be_BY.CP1251 We will add, be_BY.CP1251,be_BY,be
          * to our list of languages.
+	 * Also for de_DE@euro we will add de_DE@eurp, de_DE, de
+	 * to our list of languages
          */
         QString str = ::getenv( "LANG" );
         m_languages += str;
-        int pos = str.find( '.' );
-
+        int pos = str.find( '@' );
+	if( pos > 0 )
+	    m_languages += str.left( pos );
+	
+	
+	pos = str.find( '.' );
         if ( pos > 0 )
             m_languages += str.left( pos );
 
         int n_pos = str.find( '_' );
-        if ( pos > 0 && n_pos >= pos )
+        if ( n_pos > 0  )
             m_languages += str.left( n_pos );
 
     }
@@ -632,13 +638,13 @@ void OGenericPluginLoader::installTranslators(const QString& type) {
      */
     for ( QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
         QTranslator* trans = new QTranslator(  qApp );
-        QString tfn = QPEApplication::qpeDir()+"/i18n/" + *it + "/" + type + ".qm" ;
+        QString tfn = QPEApplication::qpeDir()+"/i18n/" + *it + "/lib" + type + ".qm" ;
 
         /*
          * If loaded then install else clean up and don't leak
          */
-        if ( trans->load( tfn ) )
-            qApp->installTranslator( trans );
+        if ( trans->load( tfn ) ) 
+            qApp->installTranslator( trans );	
         else
             delete trans;
     }
