@@ -28,7 +28,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include <omenubar.h>
+#include <opie2/omenubar.h>
 
 OMenuBar::OMenuBar(QWidget* parent, const char* name)
 :OpieMenuBar(parent, name)
