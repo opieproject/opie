@@ -21,12 +21,13 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include <qlayout.h>
 #include <qtimer.h>
 #include <qdir.h>
+#include <qpe/resource.h>
 
 class FViewer :public QWidget
 {
 	Q_OBJECT
 public:
-	FViewer(QString filename, QString title, QWidget *parent=0, const char*name=0);
+	FViewer(QString icon, QString filename, QString title, QWidget *parent=0, const char*name=0);
 private:
 	QFile *file;
 	QTextBrowser *textView;

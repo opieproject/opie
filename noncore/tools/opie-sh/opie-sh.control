@@ -1,9 +1,10 @@
-Files: bin/opie-sh pics/opie-sh/*.png
+Files: bin/opie-sh* apps/Applications/opie-sh.desktop pics/opie-sh/*.png help/opie-sh/*.html
 Priority: optional
+Package: opie-sh
 Section: opie/applications
 Maintainer: Thomas Stephens <spiralman@softhome.net>
 Architecture: arm
-Version: 0.4-$SUB_VERSION
+Version: 0.5-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 License: GPL
 Description: a QDialog shell frontend

@@ -128,13 +128,13 @@ void printusage()
 	printf("      -L [label]         The label for the input field\n");
 	printf("      -F [filename]      An input file (for when it makes sense) [Default = stdin]\n");
 	printf("      -E                 Makes list input editable\n");
-	printf("      -g                 Disable fullscreen\n");
+	printf("      -g                 Disable fullscreen\n\0");
 }
 
 int fileviewer(QPEApplication *a, int argc, QStringList args)
 {
 	int i;
-	QString filename, title;
+	QString filename, title, icon;
 	bool update=false;
 
 	for(i=0; i < argc; i++)
@@ -147,12 +147,17 @@ int fileviewer(QPEApplication *a, int argc, QStringList args)
 			}
 		}
 
+		if(args[i] == "-I")
+		{
+			icon=args[i+1];
+		}
+
 		if(args[i] == "-t")
 		{
 			title = args[i+1];
 		}
 	}
-	FViewer *fview = new FViewer(filename, title, 0, (QString) "fileviewer");
+	FViewer *fview = new FViewer(icon, filename, title, 0, (QString) "fileviewer");
 	a->setMainWidget(fview);
 	fview->showMaximized();
 	return a->exec();
@@ -193,7 +198,10 @@ int input(int wi, int h, QWidget *w, int argc, QStringList args)
 
 		if(args[i] == "-F")
 		{
-			filename = args[i+1];
+			if(args[i+1][0] != '-')
+			{
+				filename = args[i+1];
+			}
 		}
 
 		if(args[i] =="-E")
