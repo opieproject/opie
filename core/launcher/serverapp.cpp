@@ -144,7 +144,7 @@ void DesktopPowerAlerter::hideEvent( QHideEvent *e )
 
 //---------------------------------------------------------------------------
 
-KeyFilter::KeyFilter(QObject* parent) : QObject(parent), held_tid(0), heldButton(0)
+KeyFilter::KeyFilter(QObject* parent) : QObject(parent), held_tid(0), heldButton(0),firedHeldButton(0)
 {
     /* We don't do this cause it would interfere with ODevice */
 #if 0
@@ -159,6 +159,7 @@ void KeyFilter::timerEvent(QTimerEvent* e)
     // button held
     if ( heldButton ) {
         emit activate(heldButton, TRUE);
+        firedHeldButton = heldButton;
         heldButton = 0;
     }
     held_tid = 0;
@@ -202,16 +203,25 @@ bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepe
         && keycode != Key_Down )
     return TRUE;
 
+//    odebug << " KeyFilter::checkButtonAction("<<db<<","<<keycode<<","<<press<<","<<autoRepeat<<")"<<oendl;
         /* check if it was registered */
     if (!db ) {
         if (keycode != 0 &&press && !autoRepeat && keyRegistered(keycode) )
             return true;
     } else {
-
         // First check to see if DeviceButtonManager knows something about this button:
         const ODeviceButton* button = ODevice::inst()->buttonForKeycode(keycode);
         if (button && !autoRepeat) {
-            if ( held_tid ) {
+            if (firedHeldButton) {
+                if (held_tid) {
+                    killTimer(held_tid);
+                    held_tid = 0;
+                }
+                if (!press && button == firedHeldButton) {
+                    firedHeldButton = 0;
+                    return TRUE;
+                }
+            } else if ( held_tid && heldButton != button) {
                 killTimer(held_tid);
                 held_tid = 0;
             }
@@ -219,8 +229,10 @@ bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepe
                 if ( press )
                     emit activate(button, FALSE);
             } else if ( press ) {
-                heldButton = button;
-                held_tid = startTimer( ODevice::inst ()->buttonHoldTime () );
+                if (heldButton != button) {
+                   heldButton = button;
+                   held_tid = startTimer( ODevice::inst ()->buttonHoldTime () );
+                }
             } else if ( heldButton ) {
                 heldButton = 0;
                 emit activate(button, FALSE);
