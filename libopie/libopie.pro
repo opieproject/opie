@@ -1,5 +1,5 @@
 TEMPLATE        = lib
-CONFIG          += qte warn_on release
+CONFIG          += qte warn_on 
 HEADERS   = ofontmenu.h \
     ocolorbutton.h \
     ofiledialog.h ofileselector.h \
@@ -94,17 +94,6 @@ INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/lib$(PROJMAK)
 
 LIBS += -lqpe
-
-# Add SQL-Support if selected by config (eilers) 
-CONFTEST = $$system( echo $CONFIG_SQL_PIM_BACKEND )
-contains( CONFTEST, y ){
-
-DEFINES += __USE_SQL
-LIBS    += -lopiedb2
-HEADERS += pim/otodoaccesssql.h pim/ocontactaccessbackend_sql.h pim/odatebookaccessbackend_sql.h
-SOURCES += pim/otodoaccesssql.cpp pim/ocontactaccessbackend_sql.cpp pim/odatebookaccessbackend_sql.cpp
-
-}
 
 INTERFACES      = otimepickerbase.ui orecurrancebase.ui
 TARGET          = opie
