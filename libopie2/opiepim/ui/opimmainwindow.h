@@ -65,7 +65,6 @@ public:
                      IrDa };
 
     OPimMainWindow( const QString &serviceName,
-                    const QString &appName = QString::null,
                     const QString &catName = QString::null,
                     const QString &itemName = QString::null,
                     const QString &configName = QString::null,
@@ -133,9 +132,6 @@ private slots:
     void appMessage( const QCString&, const QByteArray& );
     void setDocument( const QString& );
 
-    /** UI-related slots */
-    void slotViewCategory( const QString &category );
-
 private:
     class Private;
     Private* d;
@@ -149,7 +145,6 @@ private:
     int m_playedCount;
     int m_timerId;
 
-    QString    m_appName;      // Name of application for title bar
     QString    m_catGroupName; // Name of category group
     Config     m_config;       // Configuration settings file
 

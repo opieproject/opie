@@ -50,14 +50,14 @@
 #include <qobjectlist.h>
 #include <qpopupmenu.h>
 #include <qtoolbar.h>
+#include <qwhatsthis.h>
 
 namespace Opie {
-OPimMainWindow::OPimMainWindow( const QString &serviceName,
-                                const QString &appName, const QString &catName,
+OPimMainWindow::OPimMainWindow( const QString &serviceName, const QString &catName,
                                 const QString &itemName, const QString &configName,
                                 QWidget *parent, const char* name, WFlags f )
     : QMainWindow( parent, name, f ), m_rtti(-1), m_service( serviceName ), m_fallBack( 0l ),
-      m_appName( appName ), m_catGroupName( catName ), m_config( configName ), m_itemContextMenu( 0l )
+      m_catGroupName( catName ), m_config( configName ), m_itemContextMenu( 0l )
 {
 
     /*
@@ -76,8 +76,6 @@ OPimMainWindow::OPimMainWindow( const QString &serviceName,
     connect(qApp, SIGNAL(reload() ),
             this, SLOT(reload() ) );
 
-    // Initialize user interface items
-    setCaption( m_appName );
     initBars( itemName );
 }
 
@@ -247,23 +245,12 @@ void OPimMainWindow::insertViewMenuItems( QActionGroup *items ) {
     }
 }
 
-void OPimMainWindow::slotViewCategory( const QString &category ) {
-    // Set application caption
-    QString caption = m_appName;
-    if ( category != tr( "All" ) )
-        caption.append( QString( " - %1" ).arg( category ) );
-    setCaption( caption );
-
-    // Notify application
-    emit categorySelected( category );
-}
-
 void OPimMainWindow::setViewCategory( const QString &category ) {
     // Find category in list
     for ( int i = 0; i < m_catSelect->count(); i++ ) {
         if ( m_catSelect->text( i ) == category ) {
             m_catSelect->setCurrentItem( i );
-            slotViewCategory( category );
+            emit categorySelected( category );
             return;
         }
     }
@@ -375,7 +362,8 @@ void OPimMainWindow::initBars( const QString &itemName ) {
     // Create view toolbar
     toolbar = new QToolBar( this );
     m_catSelect = new QComboBox( toolbar );
-    connect( m_catSelect, SIGNAL(activated(const QString&)), this, SLOT(slotViewCategory(const QString&)) );
+    connect( m_catSelect, SIGNAL(activated(const QString&)), this, SIGNAL(categorySelected(const QString&)) );
+    QWhatsThis::add( m_catSelect, tr( "Click here to filter items by category." ) );
 
     // Do initial load of categories
     reloadCategories();
