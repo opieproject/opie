@@ -1,0 +1,3 @@
+  config LIBQRSYNC
+    boolean "qt rsync wrapper library"
+    default "y"

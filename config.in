@@ -176,7 +176,7 @@ menu "Base"
 
   source libopie2/config.in
   source libqtaux/config.in
-
+  source rsync/config.in
   source core/opie-login/config.in
   source core/opiealarm/config.in
   source core/tools/quicklauncher/config.in

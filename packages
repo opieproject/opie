@@ -91,6 +91,7 @@ CONFIG_LIBOPIE_PIM	libopie/pim	pim.pro
 CONFIG_LIBOPIETOOTH	noncore/net/opietooth/lib	lib.pro
 CONFIG_LIBQPE	library	library.pro
 CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
+CONFIG_LIBQRSYNC    rsync   rsync.pro
 CONFIG_LIBQTAUX	libqtaux	libqtaux.pro
 CONFIG_LIBSLCOMPAT	libslcompat	libslcompat.pro
 CONFIG_LIBSQL	libsql	libsql.pro
