@@ -48,11 +48,10 @@ void MediaWidget::setupButtons( const SkinButtonInfo *skinInfo, uint buttonCount
     buttonMask = skin.buttonMask( skinInfo, buttonCount );
 
     buttons.clear();
-    buttons.reserve( buttonCount );
 
     for ( uint i = 0; i < buttonCount; ++i ) {
         Button button = setupButton( skinInfo[ i ], skin );
-        buttons.push_back( button );
+        buttons.append( button );
     }
 }
 
@@ -87,15 +86,9 @@ void MediaWidget::closeEvent( QCloseEvent * )
     mediaPlayerState.setList();
 }
 
-void MediaWidget::paintEvent( QPaintEvent *pe )
+void MediaWidget::paintEvent( QPaintEvent * )
 {
     QPainter p( this );
-
-    if ( mediaPlayerState.isFullscreen() ) {
-        // Clear the background
-        p.setBrush( QBrush( Qt::black ) );
-        return;
-    }
 
     QPixmap buffer( size() );
     QPainter bufferedPainter( &buffer );
@@ -109,7 +102,7 @@ void MediaWidget::resizeEvent( QResizeEvent *e )
     QPixmap pixUp = combineImageWithBackground( buttonUpImage, backgroundPixmap, upperLeftOfButtonMask );
     QPixmap pixDn = combineImageWithBackground( buttonDownImage, backgroundPixmap, upperLeftOfButtonMask );
 
-    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it ) {
+    for ( ButtonVector::Iterator it = buttons.begin(); it != buttons.end(); ++it ) {
         Button &button = *it;
 
         if ( button.mask.isNull() )
@@ -129,8 +122,8 @@ MediaWidget::Button *MediaWidget::buttonAt( const QPoint &position )
         return 0;
 
     int pixelIdx = buttonMask.pixelIndex( position.x(), position.y() );
-    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it )
-        if ( it->command + 1 == pixelIdx )
+    for ( ButtonVector::Iterator it = buttons.begin(); it != buttons.end(); ++it )
+        if ( (*it).command + 1 == pixelIdx )
             return &( *it );
 
     return 0;
@@ -193,15 +186,15 @@ void MediaWidget::handleCommand( Command command, bool buttonDown )
 
 bool MediaWidget::isOverButton( const QPoint &position, int buttonId ) const
 {
-    return ( position.x() > 0 && position.y() > 0 && 
-             position.x() < buttonMask.width() && 
-             position.y() < buttonMask.height() && 
+    return ( position.x() > 0 && position.y() > 0 &&
+             position.x() < buttonMask.width() &&
+             position.y() < buttonMask.height() &&
              buttonMask.pixelIndex( position.x(), position.y() ) == buttonId + 1 );
 }
 
 void MediaWidget::paintAllButtons( QPainter &p )
 {
-    for ( ButtonVector::const_iterator it = buttons.begin();
+    for ( ButtonVector::ConstIterator it = buttons.begin();
           it != buttons.end(); ++it )
         paintButton( p, *it );
 }
@@ -222,8 +215,8 @@ void MediaWidget::paintButton( QPainter &p, const Button &button )
 
 void MediaWidget::setToggleButton( Command command, bool down )
 {
-    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it )
-        if ( it->command == command ) {
+    for ( ButtonVector::Iterator it = buttons.begin(); it != buttons.end(); ++it )
+        if ( (*it).command == command ) {
             setToggleButton( *it, down );
             return;
         }

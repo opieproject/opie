@@ -184,12 +184,10 @@ void PlayListWidget::writeDefaultPlaylist() {
     QString filename=QPEApplication::documentDir() + "/default.m3u";
     QString currentString = config.readEntry( "CurrentPlaylist", filename);
     if( currentString == filename) {
-      Om3u *m3uList;
-      //    odebug << "<<<<<<<<<<<<<default>>>>>>>>>>>>>>>>>>>" << oendl; 
+        Om3u *m3uList;
       if( d->selectedFiles->first() ) {
         m3uList = new Om3u(filename, IO_ReadWrite | IO_Truncate);
         do {
-          //        odebug << d->selectedFiles->current()->file() << oendl; 
           m3uList->add( d->selectedFiles->current()->file() );
         }
         while ( d->selectedFiles->next() );
@@ -208,7 +206,6 @@ void PlayListWidget::addToSelection( const DocLnk& lnk ) {
         lnk.file().left(4) == "http" ) {
         d->selectedFiles->addToSelection( lnk );
     }
-//          writeCurrentM3u();
 }
 
 
@@ -328,14 +325,14 @@ void PlayListWidget::addAllVideoToList() {
 
 
 void PlayListWidget::setDocument( const QString& _fileref ) {
-  //    odebug << "<<<<<<<<set document>>>>>>>>>> "+fileref << oendl; 
+  //    odebug << "<<<<<<<<set document>>>>>>>>>> "+fileref << oendl;
     QString fileref  = _fileref;
     fromSetDocument = TRUE;
-    
+
     DocLnk lnk(_fileref);
     if(lnk.isValid())
 	fileref = lnk.file();
-    
+
     QFileInfo fileInfo(fileref);
 
     if ( !fileInfo.exists() ) {
@@ -410,7 +407,7 @@ bool PlayListWidget::prev() {
 
 
 bool PlayListWidget::next() {
-//odebug << "<<<<<<<<<<<<next()" << oendl; 
+//odebug << "<<<<<<<<<<<<next()" << oendl;
     if ( mediaPlayerState->isShuffled() ) {
         return prev();
     } else {
@@ -621,7 +618,7 @@ void PlayListWidget::openURL() {
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
         filename = fileDlg->text();
-        odebug << "Selected filename is " + filename << oendl; 
+        odebug << "Selected filename is " + filename << oendl;
         //            Om3u *m3uList;
             DocLnk lnk;
             Config cfg( "OpiePlayer" );
@@ -697,7 +694,7 @@ void PlayListWidget::openFile() {
 
     if( !str.isEmpty() ) {
 
-        odebug << "Selected filename is " + str << oendl; 
+        odebug << "Selected filename is " + str << oendl;
         filename = str;
         DocLnk lnk;
 
@@ -715,7 +712,7 @@ void PlayListWidget::openFile() {
 
 
 void PlayListWidget::readListFromFile( const QString &filename ) {
-    odebug << "read list filename " + filename << oendl; 
+    odebug << "read list filename " + filename << oendl;
     QFileInfo fi(filename);
     Om3u *m3uList;
     QString s, name;
@@ -728,7 +725,7 @@ void PlayListWidget::readListFromFile( const QString &filename ) {
     DocLnk lnk;
     for ( QStringList::ConstIterator it = m3uList->begin(); it != m3uList->end(); ++it ) {
         s = *it;
-        //        odebug << s << oendl; 
+        //        odebug << s << oendl;
         if(s.left(4)=="http") {
           lnk.setName( s ); //sets file name
           lnk.setIcon("opieplayer2/musicfile");
@@ -762,7 +759,7 @@ void PlayListWidget::readListFromFile( const QString &filename ) {
 
 //  writes current playlist to current m3u file */
  void PlayListWidget::writeCurrentM3u() {
-   odebug << "writing to current m3u" << oendl; 
+   odebug << "writing to current m3u" << oendl;
    Config cfg( "OpiePlayer" );
    cfg.setGroup("PlayList");
    QString currentPlaylist = cfg.readEntry("CurrentPlaylist","default");
@@ -772,11 +769,11 @@ void PlayListWidget::readListFromFile( const QString &filename ) {
    if( d->selectedFiles->first()) {
 
        do {
-           //      odebug << "add writeCurrentM3u " +d->selectedFiles->current()->file() << oendl; 
+           //      odebug << "add writeCurrentM3u " +d->selectedFiles->current()->file() << oendl;
            m3uList->add( d->selectedFiles->current()->file() );
        }
        while ( d->selectedFiles->next() );
-       //    odebug << "<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" << oendl; 
+       //    odebug << "<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" << oendl;
        m3uList->write();
       m3uList->close();
    }
@@ -821,7 +818,7 @@ void PlayListWidget::writem3u() {
     if( !str.isEmpty() ) {
         name = str;
         //       name = fileDlg->text();
-//        odebug << filename << oendl; 
+//        odebug << filename << oendl;
         if( name.find("/",0,true) != -1) {// assume they specify a file path
             filename = name;
             name = name.right(name.length()- name.findRev("/",-1,true) - 1 );
@@ -839,7 +836,7 @@ void PlayListWidget::writem3u() {
             m3uList->add( d->selectedFiles->current()->file());
           }
           while ( d->selectedFiles->next() );
-          //    odebug << list << oendl; 
+          //    odebug << list << oendl;
           m3uList->write();
           m3uList->close();
           delete m3uList;
@@ -851,7 +848,7 @@ void PlayListWidget::writem3u() {
           lnk.setIcon("opieplayer2/playlist2");
           lnk.setName( name); //sets file name
 
-          // odebug << filename << oendl; 
+          // odebug << filename << oendl;
           Config config( "OpiePlayer" );
           config.setGroup( "PlayList" );
 
@@ -859,7 +856,7 @@ void PlayListWidget::writem3u() {
           currentPlayList=filename;
 
           if(!lnk.writeLink()) {
-            odebug << "Writing doclink did not work" << oendl; 
+            odebug << "Writing doclink did not work" << oendl;
           }
 
           setCaption(tr("OpiePlayer: ") + name);
@@ -893,7 +890,7 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e ) {
     removeSelected();
     break;
     //       case Key_P: //play
-    //           odebug << "Play" << oendl; 
+    //           odebug << "Play" << oendl;
     //           playSelected();
     //           break;
   case Key_Space:
@@ -923,7 +920,7 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e ) {
 }
 
 void PlayListWidget::pmViewActivated(int index) {
-//  odebug << "" << index << "" << oendl; 
+//  odebug << "" << index << "" << oendl;
     switch(index) {
     case -16:
     {
@@ -953,7 +950,7 @@ void PlayListWidget::populateSkinsMenu() {
     QFileInfo *fi;
     while ( ( fi = it.current() ) ) {
         skinName =  fi->fileName();
-//        odebug << fi->fileName() << oendl; 
+//        odebug << fi->fileName() << oendl;
         if( skinName != "." &&  skinName != ".." && skinName !="CVS" )  {
             item = skinsMenu->insertItem( fi->fileName() ) ;
         }
@@ -1009,7 +1006,7 @@ QString PlayListWidget::currentFileListPathName() const {
 
 
 void PlayListWidget::qcopReceive(const QCString &msg, const QByteArray &data) {
-   odebug << "qcop message "+msg << oendl; 
+   odebug << "qcop message "+msg << oendl;
    QDataStream stream ( data, IO_ReadOnly );
    if ( msg == "play()" ) { //plays current selection
       btnPlay( true);

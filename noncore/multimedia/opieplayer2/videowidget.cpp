@@ -145,6 +145,7 @@ void VideoWidget::setDisplayType( MediaPlayerState::DisplayType displayType )
     // Effectively blank the view next time we show it so it looks nicer
     scaledWidth = 0;
     scaledHeight = 0;
+    videoFrame->hide();
     hide();
 }
 
@@ -194,6 +195,7 @@ void VideoWidget::backToNormal() {
 }
 
 void VideoWidget::makeVisible() {
+    videoFrame->show();
     if ( mediaPlayerState.isFullscreen() ) {
         showFullScreen();
         resize( qApp->desktop()->size() );
@@ -204,7 +206,6 @@ void VideoWidget::makeVisible() {
         disconnect( &mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
         disconnect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
         disconnect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
-
     } else {
         showNormal();
         showMaximized();

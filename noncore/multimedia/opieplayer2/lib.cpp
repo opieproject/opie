@@ -130,21 +130,13 @@ void Lib::initialize()
     m_audioOutput = xine_open_audio_driver( m_xine,  "oss", NULL );
     m_videoOutput = ::init_video_out_plugin( m_xine, NULL, xine_display_frame, this );
 
-
-//xine_open_video_driver( m_xine,  NULL,  XINE_VISUAL_TYPE_FB,  NULL);
-
-
-//    null_display_handler( m_videoOutput, xine_display_frame, this );
-
     m_stream = xine_stream_new (m_xine,  m_audioOutput,  m_videoOutput );
 
-    if (m_wid != 0 ) {
-        printf( "!0\n" );
+    if (m_wid != 0 )
         setWidget( m_wid );
-    }
+
 
     m_queue = xine_event_new_queue (m_stream);
-
     xine_event_create_listener_thread (m_queue, xine_event_handler, this);
 
     ::null_preload_decoders( m_stream );
@@ -159,12 +151,10 @@ Lib::~Lib() {
 //    free( m_config );
 
     xine_close( m_stream );
-
     xine_event_dispose_queue( m_queue );
-
     xine_dispose( m_stream );
-
     xine_exit( m_xine );
+
     /* FIXME either free or delete but valgrind bitches against both */
     //free( m_videoOutput );
     //delete m_audioOutput;
@@ -199,26 +189,18 @@ int Lib::subVersion() {
 
 int Lib::play( const QString& fileName, int startPos, int start_time ) {
     assert( m_initialized );
-    // FIXME actually a hack imho. Should not be needed to dispose the whole stream
-    // but without we get wrong media length reads from libxine for the second media
-    //xine_dispose ( m_stream );
 
     QString str = fileName.stripWhiteSpace();
 
-    //m_stream = xine_stream_new (m_xine,  m_audioOutput,  m_videoOutput );
-    //m_queue = xine_event_new_queue (m_stream);
-    //xine_event_create_listener_thread (m_queue, xine_event_handler, this);
 
-     if ( !xine_open( m_stream, str.utf8().data() ) ) {
-        return 0;
+    if ( !xine_open( m_stream, str.utf8().data() ) ) {
+         return 0;
     }
     return xine_play( m_stream, startPos, start_time);
 }
 
 void Lib::stop() {
     assert( m_initialized );
-
-    odebug << "<<<<<<<< STOP IN LIB TRIGGERED >>>>>>>" << oendl;
     xine_stop( m_stream );
 }
 
@@ -258,12 +240,12 @@ int Lib::currentTime() const {
     assert( m_initialized );
 
     int pos, time, length;
-    xine_get_pos_length( m_stream, &pos, &time, &length );
-    if ( time > 0 )  {
+    pos = time = length = 0;
+
+    if ( xine_get_pos_length( m_stream, &pos, &time, &length ) )
         return time/1000;
-    } else {
+    else
         return 0;
-    }
 }
 
 int Lib::length() const {
@@ -300,8 +282,6 @@ bool Lib::isSeekable() const {
 void Lib::seekTo( int time ) {
     assert( m_initialized );
 
-    //xine_trick_mode ( m_stream, XINE_TRICK_MODE_SEEK_TO_TIME, time ); NOT IMPLEMENTED YET IN XINE :_(
-    // since its now milliseconds we need *1000
     xine_play( m_stream, 0, time*1000 );
 }
 
@@ -425,7 +405,6 @@ void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
     assert( m_initialized );
 
     if ( !m_video ) {
-        owarn << "not showing video now" << oendl;
         return;
     }
 

@@ -29,9 +29,6 @@
 #include "mediaplayerstate.h"
 #include "playlistwidget.h"
 
-#include <vector>
-#include <memory>
-
 class Skin;
 
 class MediaWidget : public QWidget
@@ -54,7 +51,7 @@ public:
         QPixmap pixUp;
         QPixmap pixDown;
     };
-    typedef std::vector<Button> ButtonVector;
+    typedef QValueList<Button> ButtonVector;
 
     struct SkinButtonInfo
     {

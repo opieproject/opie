@@ -81,7 +81,7 @@ void XineControl::init()
 }
 
 XineControl::~XineControl() {
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
     if ( disabledSuspendScreenSaver ) {
         disabledSuspendScreenSaver = FALSE;
         // Re-enable the suspend mode
@@ -97,7 +97,7 @@ void XineControl::play( const QString& fileName ) {
     hasAudioChannel = FALSE;
     m_fileName = fileName;
 
-    odebug << "<<FILENAME: " + fileName  + ">>>>" << oendl; 
+    odebug << "<<FILENAME: " + fileName  + ">>>>" << oendl;
 
     if ( !libXine->play( fileName, 0, 0 ) ) {
         QMessageBox::warning( 0l , tr( "Failure" ), getErrorCode() );
@@ -110,12 +110,10 @@ void XineControl::play( const QString& fileName ) {
     MediaPlayerState::DisplayType displayType;
     if ( !libXine->hasVideo() ) {
         displayType = MediaPlayerState::Audio;
-        odebug << "HAS AUDIO" << oendl; 
         libXine->setShowVideo( false );
         hasAudioChannel = TRUE;
     } else {
         displayType = MediaPlayerState::Video;
-        odebug << "HAS VIDEO" << oendl; 
         libXine->setShowVideo( true );
         hasVideoChannel = TRUE;
     }
@@ -150,7 +148,7 @@ void XineControl::stop( bool isSet ) {
     if ( !isSet ) {
         libXine->stop();
 
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
         if ( disabledSuspendScreenSaver ) {
             disabledSuspendScreenSaver = FALSE;
             // Re-enable the suspend mode
@@ -176,7 +174,6 @@ long XineControl::currentTime() {
     // todo: jede sekunde überprüfen
     m_currentTime = libXine->currentTime();
     return m_currentTime;
-    QTimer::singleShot( 1000, this, SLOT( currentTime() ) );
 }
 
 /**
@@ -247,16 +244,18 @@ QString XineControl::getErrorCode() {
 
     int errorCode = libXine->error();
 
-    odebug << QString("ERRORCODE: %1 ").arg(errorCode) << oendl; 
+    odebug << QString("ERRORCODE: %1 ").arg(errorCode) << oendl;
 
     if ( errorCode == 1 ) {
         return tr( "No input plugin found for this media type" );
     } else if ( errorCode == 2 ) {
-         return tr( "No demux plugin found for this media type" );
+        return tr( "No demux plugin found for this media type" );
     } else if ( errorCode == 3 ) {
         return tr( "Demuxing failed for this media type" );
     } else if ( errorCode == 4 ) {
         return tr( "Malformed MRL" );
+    } else if ( errorCode == 5 ) {
+        return tr( "Input failed" );
     } else {
         return tr( "Some other error" );
     }

@@ -5,6 +5,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/odevice.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 
@@ -34,10 +35,6 @@ MediaPlayer::MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPla
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     connect( &mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
-
-// What is pauseCheck good for? (Simon)
-//    connect( &mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( pauseCheck(bool) ) );
-
     connect( &mediaPlayerState, SIGNAL( next() ), this, SLOT( next() ) );
     connect( &mediaPlayerState, SIGNAL( prev() ), this, SLOT( prev() ) );
     connect( &mediaPlayerState, SIGNAL( blankToggled(bool) ), this, SLOT ( blank(bool) ) );
@@ -154,7 +151,7 @@ void MediaPlayer::next() {
             mediaPlayerState.setList();
         }
     } else { //if playing from file list, let's just stop
-        odebug << "<<<<<<<<<<<<<<<<<stop for filelists" << oendl; 
+        odebug << "<<<<<<<<<<<<<<<<<stop for filelists" << oendl;
         mediaPlayerState.setPlaying(false);
         mediaPlayerState.setDisplayType( MediaPlayerState::MediaSelection );
         if(l) mediaPlayerState.setLooping(l);
@@ -281,42 +278,7 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
 
 
 void MediaPlayer::blank( bool b ) {
-#ifdef QT_QWS_DEVFS
-    fd=open("/dev/fb/0",O_RDWR);
-#else
-    fd=open("/dev/fb0",O_RDWR);
-#endif
-#ifdef QT_QWS_SL5XXX
-    fl= open( "/dev/fl", O_RDWR );
-#endif
-    if (fd != -1) {
-        if ( b ) {
-            odebug << "do blanking" << oendl; 
-#ifdef QT_QWS_SL5XXX
-            ioctl( fd, FBIOBLANK, 1 );
-            if(fl !=-1) {
-                ioctl( fl, 2 );
-                ::close(fl);
-            }
-#else
-            ioctl( fd, FBIOBLANK, 3 );
-#endif
-            isBlanked = TRUE;
-        } else {
-            odebug << "do unblanking" << oendl; 
-            ioctl( fd, FBIOBLANK, 0);
-#ifdef QT_QWS_SL5XXX
-            if(fl != -1) {
-                ioctl( fl, 1);
-                ::close(fl);
-            }
-#endif
-            isBlanked = FALSE;
-        }
-        close( fd );
-    } else {
-        odebug << "<< /dev/fb0 could not be opened  >>" << oendl; 
-    }
+    Opie::Core::ODevice::inst()->setDisplayStatus( b );
 }
 
 void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
@@ -331,11 +293,11 @@ void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
       case Key_F11: //menu
           break;
       case Key_F12: //home
-          odebug << "Blank here" << oendl; 
+          odebug << "Blank here" << oendl;
 //          mediaPlayerState->toggleBlank();
           break;
       case Key_F13: //mail
-          odebug << "Blank here" << oendl; 
+          odebug << "Blank here" << oendl;
           //  mediaPlayerState->toggleBlank();
           break;
     }
@@ -346,8 +308,6 @@ void MediaPlayer::cleanUp() {// this happens on closing
      mediaPlayerState.writeConfig( cfg );
      playList.writeDefaultPlaylist( );
 
-//     QPEApplication::grabKeyboard();
-//     QPEApplication::ungrabKeyboard();
 }
 
 void MediaPlayer::recreateAudioAndVideoWidgets() const
