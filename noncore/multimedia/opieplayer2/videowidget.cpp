@@ -234,21 +234,6 @@ void VideoWidget::setLength( long max ) {
 
 void VideoWidget::setView( char view ) {
 
-    if ( mediaPlayerState->streaming() ) {
-        qDebug("<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>");
-        if( !slider->isHidden()) {
-            slider->hide();
-        }
-        disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-        disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-    } else {
-        // this stops the slider from being moved, thus
-        // does not stop stream when it reaches the end
-        slider->show();
-        connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-        connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-    }
-
     if ( view == 'v' ) {
         makeVisible();
     } else {
@@ -394,7 +379,11 @@ void VideoWidget::makeVisible() {
     } else {
         showMaximized();
         setBackgroundPixmap( *pixBg );
-        slider->show();
+        if ( mediaPlayerState->streaming() ) {
+            slider->hide();
+        } else {
+            slider->show();
+        }
         videoFrame->setGeometry( QRect( 0, 30, 240, 170  ) );
         qApp->processEvents();
     }
@@ -485,7 +474,7 @@ void VideoWidget::keyReleaseEvent( QKeyEvent *e) {
           } else if( !mediaPlayerState->isPaused ) {
               setToggleButton( i, TRUE );
               mediaPlayerState->setPaused( TRUE );
-          }           
+          }
 #endif
           break;
 
