@@ -5,6 +5,6 @@ Section: opie/applications
 Maintainer: Constantin Bergemann <cbergemann@lisa.de>
 Architecture: arm
 Version: 0.0.9-$SUB_VERSION
-Depends: opie-base libopie
+Depends: opie-base, libopie
 Description: An IMAP mail client
 License: LGPL
