@@ -168,11 +168,6 @@ bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
 }
 
 
-static int qt_version ( )
-{
-	const char *qver = qVersion ( );
-	return ( qver [0] - '0' ) * 100 + ( qver [2] - '0' ) * 10 + ( qver [4] - '0' );
-}
         
 
 LiquidStyle::LiquidStyle()
@@ -180,7 +175,6 @@ LiquidStyle::LiquidStyle()
 {
     setName ( "LiquidStyle" );
 
-	oldqte = ( qt_version ( ) < 234 );
 	flatTBButtons = false;
 	currentHeader = 0;
 
@@ -707,10 +701,8 @@ void LiquidStyle::polish(QPalette &appPal)
 
     // button color stuff
     config. setGroup ( "Appearance" );
-    QColor c = oldqte ? QColor ( config. readEntry("Button", ( Qt::lightGray ). name ( ))) 
-                      : appPal. color ( QPalette::Active, QColorGroup::Button );
-    if ( c == ( oldqte ?  QColor ( config. readEntry ( "background", ( Qt::lightGray ). name ( )))
-                       : appPal. color ( QPalette::Active, QColorGroup::Background ))) {
+    QColor c = appPal. color ( QPalette::Active, QColorGroup::Button );
+    if ( c == appPal. color ( QPalette::Active, QColorGroup::Background )) {
         // force button color to be different from background
         QBrush btnBrush(QColor(200, 202, 228));
         appPal.setBrush(QColorGroup::Button, btnBrush);
@@ -761,8 +753,7 @@ void LiquidStyle::polish(QPalette &appPal)
 //    pagerBrush.setPixmap(*pix);
 
     // background color stuff
-    c = oldqte ? QColor ( config. readEntry ( "Background", ( Qt::lightGray ).name ( )))
-               : appPal. color ( QPalette::Active, QColorGroup::Background );
+    c = appPal. color ( QPalette::Active, QColorGroup::Background );
 
     c.hsv(&bH, &bS, &bV);
     c.light(120).hsv(&bHoverH, &bHoverS, &bHoverV);
