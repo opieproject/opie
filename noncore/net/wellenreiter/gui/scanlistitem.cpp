@@ -44,7 +44,11 @@ MScanListItem::MScanListItem( QListViewItem* parent, QString type, QString essid
 
 void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal )
 {
-    qDebug( "decorating scanlist item" );
+    qDebug( "decorating scanlist item %s / %s / %s [%d]",
+        (const char*) type,
+        (const char*) essid,
+        (const char*) macaddr,
+        channel );
 
     // set icon for managed or adhoc mode
     QString name;

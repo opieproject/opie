@@ -32,6 +32,7 @@ void MLogWindow::log( QString text )
     QString line;
     line.sprintf( "[%s] %s", (const char*) time.toString(), (const char*) text );
     ledit->append( line );
+    qDebug( line );
 
 };
 

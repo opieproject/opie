@@ -19,6 +19,7 @@
 
 // Standard
 
+#include <assert.h>
 #include <unistd.h>
 #include <sys/types.h>
 
@@ -84,12 +85,11 @@ typedef struct {
 } wl_network_t;
 */
 
-    qDebug( "Sniffer sent: '%s'", (const char*) &buffer );
+    // qDebug( "Sniffer sent: '%s'", (const char*) buffer );
     hexwindow->log( (const char*) &buffer );
 
     if ( result == NETFOUND )  /* new network found */
     {
-        logwindow->log( "(i) found new network" );
         qDebug( "Sniffer said: new network found." );
         wl_network_t n;
         get_network_found( &n, (char*) &buffer );
@@ -100,12 +100,12 @@ typedef struct {
         //n.bssid[n.ssid_len] = "\0";
 
         QString type;
-
+        
         if ( n.net_type == 1 )
             type = "managed";
         else
             type = "adhoc";
-            
+
         addNewItem( type, n.bssid, QString( (const char*) &n.mac ), n.wep, n.channel, 0 );
 
     }
@@ -138,7 +138,10 @@ void Wellenreiter::timerEvent( QTimerEvent* e )
 {
     qDebug( "checking for message..." );
 
-    if ( hasMessage() )
+    int result = hasMessage();
+    qDebug( "hasMessage() returned %d", result );
+    
+    if ( result )
     {
         handleMessage();
     }
@@ -151,41 +154,75 @@ void Wellenreiter::timerEvent( QTimerEvent* e )
 void Wellenreiter::addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal )
 {
     // FIXME: this code belongs in customized QListView, not into this class
+    // FIXME: scanlistitem needs a proper encapsulation and not such a damn dealing with text(...)
 
-    // search, if we had an item with this essid once before
-
-    //MScanListItem* item = dynamic_cast<MScanListItem*>( netview->firstChild() );
-    MScanListItem* item = static_cast<MScanListItem*>( netview->firstChild() );
+        qDebug( "Wellenreiter::addNewItem( %s / %s / %s [%d]",
+        (const char*) type,
+        (const char*) essid,
+        (const char*) macaddr,
+        channel );
+        
+    // search, if we already have seen this net
+      
+    QString s;
+    MScanListItem* network;
+    MScanListItem* item = (MScanListItem*) netview->firstChild();
 
     while ( item && ( item->text( 0 ) != essid ) )
     {
         qDebug( "itemtext: %s", (const char*) item->text( 0 ) );
-        item = dynamic_cast<MScanListItem*>( item->itemBelow() );
+        item = item->itemBelow();
     }
     if ( item )
     {
-        qDebug( "found!" );
+        // we have already seen this net, check all childs if MAC exists
         
-        // check, if it is the same item (based on MACaddr)
+        network = item;
         
-        if ( macaddr == item->text( 2 ) )
+        item = item->firstChild();
+        assert( item ); // this shouldn't fail
+        
+        while ( item && ( item->text( 2 ) != macaddr ) )
         {
-            qDebug( "already had item with mac %s", (const char*) item->text( 2 ) );
+            qDebug( "subitemtext: %s", (const char*) item->text( 2 ) );
+            item = item->itemBelow();
+        }
+        
+        if ( item )
+        {
+            // we have already seen this item, it's a dupe
+            qDebug( "%s is a dupe - ignoring...", (const char*) macaddr );
             return;
         }
-               
-        // another item belonging to the same net, so: insert the new item as child
-        
-        new MScanListItem( item, type, essid, macaddr, wep, channel, signal );
     }
-    
     else
     {
-        qDebug( "inserting new network" );
-        MScanListItem* network = new MScanListItem( netview, "networks", essid, QString::null, 0, 0, 0 );
+        s.sprintf( "(i) new network: '%s'", (const char*) essid );
+        logwindow->log( s );
+        
+        network = new MScanListItem( netview, "networks", essid, QString::null, 0, 0, 0 );
+    }    
+        
+        
+    // insert new station as child from network
+        
+    // no essid to reduce clutter, maybe later we have a nick or stationname to display!?
     
-        new MScanListItem( network, type, essid, macaddr, wep, channel, signal );
+    qDebug( "inserting new station %s", (const char*) macaddr );
+    
+    new MScanListItem( network, type, "", macaddr, wep, channel, signal ); 
+
+    if ( type == "managed" )
+    {
+        s.sprintf( "(i) new AP in '%s' [%d]", (const char*) essid, channel );
     }
+    else
+    {
+        s.sprintf( "(i) new adhoc station in '%s' [%d]", (const char*) essid, channel );
+    }
+    
+    logwindow->log( s );
+
 }
 
 void Wellenreiter::buttonClicked()
