@@ -26,7 +26,6 @@ public:
   void loadList( PackageList );
   void commit( PackageList );
   void update();
- // PackageList* getPackageList();
   void showButtons(bool b=true);
   void show( bool buttons=true );
 

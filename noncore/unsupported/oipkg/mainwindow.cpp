@@ -63,8 +63,6 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   connect( settings->createLinksButton, SIGNAL( clicked()),
   					 SLOT(createLinks()) );
 
-//	rootLocal = new QCheckListItem(listViewPackages,tr("local"));
-//	rootSearch = new QCheckListItem(listViewPackages,tr("ipkgfind"));
   displayList();
 }
 
@@ -286,8 +284,11 @@ void MainWindow::displayList()
   Package *pack = packageList.first();
   PackageListItem *item;
 
+//  if (!rootLocal)
+//  {
 	QCheckListItem *rootLocal = new QCheckListItem(listViewPackages,tr("local"));
 	QCheckListItem *rootSearch = new QCheckListItem(listViewPackages,tr("ipkgfind"));
+//  }
   while( pack )
   {
 	 	item = new PackageListItem( rootLocal, pack, settings );				

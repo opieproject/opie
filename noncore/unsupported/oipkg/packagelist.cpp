@@ -33,17 +33,26 @@ PackageList::~PackageList()
 /** Inserts a package into the list */
 void PackageList::insertPackage( Package* pack )
 {
+	if (!pack) return;
   Package* p = packageList.find( pack->name() );
   if ( p )
     {
-      p->copyValues( pack );
-      delete pack;
-      pack = p;
+      if ( p->version() == pack->version() )
+      {
+	      p->copyValues( pack );
+  	    delete pack;
+    	  pack = p;
+      } else {
+       	p->setName( pack->name()+"["+p->version()+"]" );
+       	pack->setName( pack->name()+"["+pack->version()+"]" );
+				packageList.insert( pack->name(), pack );
+      	origPackageList.insert( pack->name(), pack );
+      }
     }else{
       packageList.insert( pack->name(), pack );
       origPackageList.insert( pack->name(), pack );
-      empty=false;
     };
+  empty=false;
   updateSections( pack );
 }
 

@@ -32,6 +32,7 @@ class Package //: public QObject
   QString desc();
   QString size();
   QString sizeUnits();
+  QString version();
   void    setSection( QString );
   QString section();
   QString subSection();
@@ -47,13 +48,13 @@ class Package //: public QObject
   void setLink(bool);
   void parseIpkgFile( QString );
   void instalFromFile(bool iff=true);
+  void setName(QString);
 public slots:
-//  QString getPackageName();
   void toggleProcess();
 
 private:
   PackageManagerSettings *settings;
-//  QString _packageName;
+  QString _displayName;
   QString _name;
   QString _fileName;
   bool    _toProcess;
@@ -64,7 +65,9 @@ private:
   QString _subsection;
   QString _shortDesc;
   QString _desc;
+  QString _version;
   QString _dest;
+  QDict<QString> _values;
   bool _useFileName;
   void parsePackage( QStringList );
   void init(PackageManagerSettings *);

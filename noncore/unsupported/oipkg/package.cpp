@@ -69,55 +69,55 @@ void Package::setValue( QString n, QString t )
   }else if ( n == "Installed-Size" )
   {
       _size = t;
-  }else if ( n == "Priority")
-  {
+//  }else if ( n == "Priority")
+//  {
 
   }else if ( n == "Section")
   {
       setSection( t );
-  }else if ( n == "Maintainer")
-  {
-
-  }else if ( n == "Architecture")
-  {
+//  }else if ( n == "Maintainer")
+//  {
+//
+//  }else if ( n == "Architecture")
+//  {
 
   }else if ( n == "Version")
   {
-
-  }else if ( n == "Pre-Depends")
-  {
-
-  }else if ( n == "Depends")
-  {
+     _version = t;
+//  }else if ( n == "Pre-Depends")
+//  {
+//
+//  }else if ( n == "Depends")
+//  {
 
   }else if ( n == "Filename")
   {
     _fileName = t;
-  }else if ( n == "Size")
- 	{
-  	
-	}else if ( n == "MD5Sum")
-	{
+//  }else if ( n == "Size")
+// 	{
+//  	
+//	}else if ( n == "MD5Sum")
+//	{
 
-	}
-  if ( n == "Description")
+	}else if ( n == "Description")
   {
       setDesc( t );
-  }
-  if ( n == "Status")
+  }else if ( n == "Status")
   {
       if ( installed() ) return;
       _status = t;
-  }
-  if ( t == "Essential")
-  {
+//  }else if ( n == "Essential")
+//  {
 
+  }else{
+  	_values.insert(n,new QString(t));
   }
-};
+}
 
 QString Package::name()
 {
-  return _name;
+	if (_displayName.isEmpty() ) return _name;
+ 	else return _displayName;
 }
 
 
@@ -151,6 +151,12 @@ QString Package::shortDesc()
 QString Package::size()
 {
   return _size;
+}
+
+
+QString Package::version()
+{
+  return _version;
 }
 
 QString Package::sizeUnits()
@@ -349,4 +355,9 @@ void Package::parseIpkgFile( QString file)
 void Package::instalFromFile(bool iff)
 {
 	_useFileName = iff;
+}
+
+void Package::setName(QString n)
+{
+	_displayName = n;
 }

@@ -64,7 +64,6 @@ void PackageListView::showPopup()
 	  connect( destsMenu, SIGNAL( activated( int ) ),
 		   this, SLOT( changePackageDest( int ) ) );
    }else{
-//   	popupActcat setOn( activePackage->toProcess() );
    }
   popupMenu->popup( QCursor::pos() );
 }

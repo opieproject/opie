@@ -286,15 +286,6 @@ void PmIpkg::startDialog()
     _force_remove->setAutoResize( TRUE );
     GroupBox1Layout->addWidget( _force_remove, 1, 0 );
     RunWindowLayout->addWidget( GroupBox1 , 3, 0 );
-
-//  connect( doItButton, SIGNAL( clicked() ),
-//  					this, SLOT( doIt() ) );
-//  connect( installButton, SIGNAL( clicked() ),
-//  					this, SLOT( install() ) );
-//  connect( removeButton, SIGNAL( clicked() ),
-//  					this, SLOT( remove() ) );
-//  connect( cancelButton, SIGNAL( clicked() ),
-//  					installDialog, SLOT( close() ) );
   installDialog->showMaximized();
   if ( installDialog->exec() ) doIt();
  	installDialog->close();
@@ -335,7 +326,6 @@ void PmIpkg::remove()
   		}else{
       	out("<b>"+tr("Error while removing")+"</b><hr>"+it->name());
       }
-     	pvDebug(2,"delete File List");
 	  if ( it->link() )delete fileList;
     }
     out("<br>");
