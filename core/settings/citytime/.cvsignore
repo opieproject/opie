@@ -1,5 +1,5 @@
 moc_*
 *.moc
-Makefile
+Makefile*
 citytimebase.cpp
 citytimebase.h

@@ -1,5 +1,5 @@
 moc_*
-Makefile
+Makefile*
 dateentry.h
 datebookdayheader.h
 dateentry.cpp

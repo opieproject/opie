@@ -1,5 +1,5 @@
 moc_*
-Makefile
+Makefile*
 abeditorbase.h
 abaddress.h
 abcompanybase.h

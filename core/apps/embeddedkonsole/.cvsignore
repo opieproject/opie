@@ -1,2 +1,6 @@
 moc_*
-Makefile
+Makefile*
+commandeditdialogbase.cpp
+commandeditdialogbase.h
+smallcommandeditdialogbase.cpp
+smallcommandeditdialogbase.h
