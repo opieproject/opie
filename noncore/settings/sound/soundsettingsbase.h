@@ -48,6 +48,7 @@ public:
     QLabel* TextLabel1;
     QComboBox* LocationComboBox;
     QComboBox* keyComboBox;
+    QComboBox* timeLimitComboBox;
     bool keyReset;
 protected:
     QGridLayout* SoundSettingsBaseLayout;

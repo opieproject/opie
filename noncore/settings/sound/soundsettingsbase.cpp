@@ -195,7 +195,8 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     GroupBox1->setTitle( tr( "Vmemo" ) );
 
     QWidget* privateLayoutWidget = new QWidget( GroupBox1, "Layout11" );
-    privateLayoutWidget->setGeometry( QRect( 5, 16, 96, 169 ) ); 
+    privateLayoutWidget->setGeometry( QRect( 5, 16, 96, 230 ) ); 
+
     Layout11 = new QVBoxLayout( privateLayoutWidget ); 
     Layout11->setSpacing( 2 );
     Layout11->setMargin( 0 );
@@ -236,6 +237,7 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     QLabel *TextLabelKey;
     TextLabelKey = new QLabel( privateLayoutWidget, "TextLabelKey" );
     TextLabelKey->setText( tr( "Record Key:" ) );
+    Layout11->addWidget( TextLabelKey );
 
     keyComboBox = new QComboBox( FALSE, privateLayoutWidget, "keyComboBox" );
     keyComboBox->insertItem( tr( "" ) );
@@ -248,14 +250,26 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     keyComboBox->insertItem( tr( "Key_Menu" ) );
     keyComboBox->insertItem( tr( "Key_Mail" ) );
 
-    Layout11->addWidget( TextLabelKey );
-
     Layout11->addWidget( keyComboBox );
 
-    QSpacerItem* spacer_9 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
-    Layout11->addItem( spacer_9 );
+    QLabel *timeLimitLabel;
+    timeLimitLabel= new QLabel( privateLayoutWidget, "timeLimitLabel" );
+    timeLimitLabel->setText( tr( "Recording Limit:" ) );
+    Layout11->addWidget( timeLimitLabel );
 
+    timeLimitComboBox = new QComboBox( FALSE, privateLayoutWidget, "timeLimitComboBox" );
+    timeLimitComboBox->insertItem( tr( "30" ) );
+    timeLimitComboBox->insertItem( tr( "20" ) );
+    timeLimitComboBox->insertItem( tr( "15" ) );
+    timeLimitComboBox->insertItem( tr( "10" ) );
+    timeLimitComboBox->insertItem( tr( "5" ) );
 
+    Layout11->addWidget(timeLimitComboBox);
+    QLabel *timeLimitLabel2;
+    timeLimitLabel2= new QLabel( privateLayoutWidget, "timeLimitLabel2" );
+    timeLimitLabel2->setText( tr( "seconds" ) );
+    Layout11->addWidget( timeLimitLabel2 );
+   
     Layout12_2->addWidget( GroupBox1 );
 // //     touchsound = new QCheckBox( this, "touchsound" );
 // //     touchsound->setText( tr( "Screen sounds" ) );

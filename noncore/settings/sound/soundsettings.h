@@ -38,7 +38,8 @@ protected:
  void updateLocationCombo();
   
 private slots:
-    void setKeyButton(const QString &);
+ void setKeyButton(const QString &);
+ void setSizeLimitButton(const QString &);
  void setLocation(const QString &);
  void cleanUp();    
  void setVolume(int);

@@ -76,6 +76,18 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     }
 //         else
 //            stereoCheckBox->hide();
+    int sRate=config.readNumEntry("SizeLimit", 30);
+    if(sRate ==30)
+        timeLimitComboBox->setCurrentItem(0);
+    else if(sRate==20)
+        timeLimitComboBox->setCurrentItem(1);
+    else if(sRate == 15)
+        timeLimitComboBox->setCurrentItem(2);
+    else if(sRate == 10)
+
+        timeLimitComboBox->setCurrentItem(3);
+    else
+        timeLimitComboBox->setCurrentItem(4);
 
 
     sixteenBitCheckBox->setChecked(cfg.readNumEntry("SixteenBit", 1));
@@ -91,6 +103,7 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     connect(qApp, SIGNAL( micChanged(bool) ), this, SLOT ( micChanged(bool) ) );
     connect( LocationComboBox,SIGNAL(activated(const QString &)),this,SLOT( setLocation(const QString &)));
     connect( keyComboBox,SIGNAL(activated(const QString &)),this,SLOT(setKeyButton(const QString &)));
+    connect( timeLimitComboBox,SIGNAL(activated( const QString &)),this,SLOT(setSizeLimitButton(const QString &)));
 //     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 }
 
@@ -247,4 +260,12 @@ void SoundSettings::setKeyButton(const QString &name) {
 
 void SoundSettings::updateLocationCombo() {
 
+}
+
+void SoundSettings::setSizeLimitButton(const QString &index) {
+
+    Config cfg("Vmemo");
+    cfg.setGroup("Record");
+    cfg.writeEntry("SizeLimit", index);
+    cfg.write();    
 }
