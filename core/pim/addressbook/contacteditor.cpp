@@ -1417,7 +1417,7 @@ void ContactEditor::setEntry( const OContact &entry ) {
 			*itV = ent.defaultEmail();
 
 		if ( *it == tr("Emails" ))
-			*itV = ent.emailList().join(";");
+			*itV = ent.emailList().join(","); // :SX
 
 		if ( *it == tr("Home Phone" ))
 			*itV = ent.homePhone();
@@ -1617,6 +1617,7 @@ void ContactEditor::saveEntry() {
 			QString allemail;
 			QString defaultmail;
 			parseEmailFrom( *itV, defaultmail, allemail );
+			ent.clearEmails();
 			ent.setDefaultEmail(  defaultmail );
 			ent.insertEmails( *itV );
 		}
