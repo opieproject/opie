@@ -216,9 +216,10 @@ do
 	    scripts="preinst postinst prerm postrm"
 	    for pf in $scripts
 	    do
-		if [ -x ${base}.$pf ]
+		if [ -e ${base}.$pf ]
 		then
 		    cp ${base}.$pf $CTRLDIR/$pf
+		    chmod 755 $CTRLDIR/$pf
 		fi
 	    done
 	    cd $ORIGDIR; $OPIEDIR/scripts/ipkg-build $classicopts -o root -g root $TDIR; cd $OPIEDIR;
