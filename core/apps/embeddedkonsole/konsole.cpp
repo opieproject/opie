@@ -677,7 +677,7 @@ void Konsole::colorMenuSelected(int iD)
     }
     lastSelectedMenu = iD;
     te->setColorTable(m_table);
-//    update();
+    update();
 }
 
 void Konsole::configMenuSelected(int iD)
