@@ -93,11 +93,13 @@ NONMULT = noncore/multimedia/showimg noncore/graphics/drawpad \
 
 NONCOMM = noncore/comm/keypebble
 
+PLUGINS = freetype
+
 APPS=$(LOCALAPPS) $(PIMAPPS)  $(COREAPPS)     \
 	$(COREMULTIMEDIA) $(CORESETTINGS) \
 	$(NONCORESETTINGS) $(NONCORETOOLS) $(NONCORESTYLES) \
 	$(NONCOREDECOS) $(NONAPPS) $(NONNET) $(NONMULT) \
-	$(NONCOMM) $(GAMES) $(TODAYPLUGINS)
+	$(NONCOMM) $(GAMES) $(TODAYPLUGINS) $(PLUGINS)
     
     
 
