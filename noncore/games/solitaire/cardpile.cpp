@@ -22,9 +22,7 @@
 #include "card.h"
 
 #include <qpe/config.h>
-#include <qpoint.h>
 
-#include <qlist.h>
 
 
 CardPile::CardPile(int x, int y) : pileX(x), pileY(y), dealing(FALSE), PileResize(FALSE) {

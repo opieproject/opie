@@ -20,7 +20,6 @@
 #include <stdlib.h>
 #include <qtimer.h>
 #include <qpe/qpeapplication.h>
-#include <qimage.h>
 
 #include "game.h"
 

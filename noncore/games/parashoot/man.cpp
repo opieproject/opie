@@ -24,7 +24,6 @@
 
 #include <qtopia/resource.h>
 
-#include <qregexp.h>
 
 int mancount;
 

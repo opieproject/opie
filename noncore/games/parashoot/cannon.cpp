@@ -20,7 +20,6 @@
 
 #include <qtopia/resource.h>
 
-#include <qregexp.h>
 
 #include "codes.h"  
 #include "cannon.h"

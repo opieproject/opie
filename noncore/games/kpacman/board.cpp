@@ -1,13 +1,10 @@
 
-#include "portable.h"
 
 #if defined( KDE2_PORT )
 #include <kapp.h>
 #include <klocale.h>
 #endif
 
-#include <qrect.h>
-#include <qregexp.h>
 #include <qmessagebox.h>
 #include <qfile.h>
 #include <qtextstream.h>

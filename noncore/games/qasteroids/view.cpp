@@ -26,9 +26,6 @@
 
 #include <qpe/resource.h>
 
-#include <qapplication.h>
-#include <qkeycode.h>
-#include <qaccel.h>
 
 #include <stdlib.h>
 #include <math.h>

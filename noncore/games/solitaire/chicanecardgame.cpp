@@ -26,7 +26,6 @@
 **	deal 8 cards at once
 **
 **********************************************************************/
-#include <qgfx_qws.h>
 #include "chicanecardgame.h"
 
 

@@ -18,14 +18,10 @@
 
 #include <qlayout.h>
 #include <qtimer.h>
-#include <qlcdnumber.h>
 #include <qmessagebox.h>
-#include <qmainwindow.h>
-#include <qpe/qpeapplication.h>
 
 #include "kbounce.h"
 #include "game.h"
-#include <qlabel.h>
 
 KJezzball::KJezzball(QWidget *p, const char* n, WFlags f) 
     : QMainWindow(p,n,f), m_gameWidget( 0 )

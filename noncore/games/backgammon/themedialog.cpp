@@ -1,9 +1,7 @@
 #include "themedialog.h"
 
 #include <qdir.h>
-#include <qfileinfo.h>
 #include <qlabel.h>
-#include <qpushbutton.h>
 #include <qpe/qpeapplication.h>
 
 

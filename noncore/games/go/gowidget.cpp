@@ -24,18 +24,14 @@
 #include <qpe/resource.h>
 
 #include <qpainter.h>
-#include <qpixmap.h>
 #include <qpe/qpetoolbar.h>
 #include <qmenubar.h>
-#include <qpopupmenu.h>
 #include <qaction.h>
 #include <qapplication.h> //processEvents()
 #include <qlabel.h>
 
 //#include <stdio.h>
 
-#include "amigo.h"
-#include "goplayutils.h"
 
 static const enum bVal computer_color = BLACK;
 

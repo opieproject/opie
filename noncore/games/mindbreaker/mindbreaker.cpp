@@ -25,12 +25,8 @@
 #include <qtopia/qpeapplication.h>
 #include <qtoolbar.h>
 
-#include <qpainter.h>
-#include <qpixmap.h>
 #include <qtoolbutton.h>
-#include <qpushbutton.h>
 #include <qmessagebox.h>
-#include <qlabel.h>
 #include <qlayout.h>
 #include <qtimer.h>
 

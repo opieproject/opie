@@ -17,9 +17,6 @@
  *                                                                         *
  ***************************************************************************/
 #include <qpainter.h>
-#include <qpixmap.h>
-#include <qcolor.h>
-#include <qkeycode.h>
 #include <stdlib.h>
 
 #include "linesboard.h"

@@ -17,7 +17,6 @@
  */
 
 #include <qlayout.h>
-#include <qmessagebox.h>
 #include <qmainwindow.h>
 #include <qlabel.h>
 #include <qgrid.h>

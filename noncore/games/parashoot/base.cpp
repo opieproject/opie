@@ -19,11 +19,9 @@
 **********************************************************************/
 #include "codes.h"  
 #include "base.h"
-#include "man.h"
 
 #include <qtopia/resource.h>
 
-#include <qregexp.h>
 
 int damage;
 

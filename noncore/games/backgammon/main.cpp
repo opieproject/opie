@@ -1,4 +1,3 @@
-#include <qpe/qpeapplication.h>
 #include "backgammon.h"
 
 #include <opie/oapplicationfactory.h>

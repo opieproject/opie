@@ -14,10 +14,9 @@
  **************************************************************************/
 
 #include <qdialog.h>
-#include <qpe/config.h>
 #include <qlayout.h>
-#include <qpe/config.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/config.h>
 
 #include <qstring.h>
 #include <qhbox.h>

@@ -13,9 +13,7 @@
 #include "status.h"
 #endif
 
-#include <qpixmap.h>
 #include <qbitmap.h>
-#include <qstring.h>
 #include <qmsgbox.h>
 #include <qfileinfo.h>
 

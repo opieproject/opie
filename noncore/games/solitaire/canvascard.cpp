@@ -18,15 +18,10 @@
 **
 **********************************************************************/
 
-#include "cardgame.h"
 #include "canvascard.h"
 
 #include <qpe/resource.h>
 
-#include <qpainter.h>
-#include <qimage.h>
-#include <qpaintdevice.h>
-#include <qbitmap.h>
 #include <qgfx_qws.h> // Needed to get the device's width
 
 #include <math.h>

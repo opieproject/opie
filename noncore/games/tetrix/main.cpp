@@ -20,7 +20,6 @@
 
 #include "qtetrix.h"
 
-#include <qpe/qpeapplication.h>
 
 #include <opie/oapplicationfactory.h>
 

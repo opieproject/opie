@@ -25,15 +25,10 @@
 
 #include <qvbox.h>
 #include <qaction.h>
-#include <qlayout.h>
 #include <qpainter.h>
-#include <qpopupmenu.h>
 #include <qmessagebox.h>
 #include <qtoolbar.h>
 #include <qmenubar.h>
-#include <qstringlist.h>
-#include <qapplication.h>
-#include <qtoolbutton.h>
 
 #include <stdlib.h>
 #include <time.h>

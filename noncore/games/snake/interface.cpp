@@ -21,13 +21,9 @@
 #include "interface.h"
 
 #include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
 
 #include <qpe/qpetoolbar.h>
 #include <qtoolbutton.h>
-#include <qstyle.h>
-#include <qapplication.h>
-#include <qmessagebox.h>
 
 SnakeGame::SnakeGame(QWidget* parent, const char* name, WFlags f) :
     QMainWindow(parent,name,f),

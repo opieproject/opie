@@ -1,15 +1,9 @@
 #include "oyatzee.h"
 
 #include <qmessagebox.h>
-#include <qapplication.h>
-#include <qdir.h>
-#include <qlabel.h>
 #include <qpushbutton.h>
-#include <qtimer.h>
-#include <qvbox.h>
 #include <qpainter.h>
 #include <qlayout.h>
-#include <qpoint.h>
 
 #include <stdlib.h>
 

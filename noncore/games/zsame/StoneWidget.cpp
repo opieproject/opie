@@ -21,11 +21,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qbitmap.h>
-#include <qimage.h>
-#include <qcursor.h>
 
 
 #include <qpe/resource.h>

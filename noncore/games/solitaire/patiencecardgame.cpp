@@ -17,7 +17,6 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qgfx_qws.h>
 #include "patiencecardgame.h"
 
 

@@ -20,11 +20,9 @@
 
 #include "snake.h"
 #include "target.h"
-#include "codes.h"
 
 #include <qpe/resource.h>
 
-#include <qregexp.h>
 
 static int Piecekey[4][4] = { {6, 0, 4, 3 }, {0, 6, 2, 1 }, { 1, 3, 5, 0 }, {2, 4, 0, 5 } };
 

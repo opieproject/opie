@@ -17,7 +17,6 @@ email                : Roman.Razilov@gmx.de
  *                                                                         *
  ***************************************************************************/
 #include <stdlib.h>
-#include "cfg.h"
 #include "field.h"
 
 Field::Field(QWidget* parent, const char* name)

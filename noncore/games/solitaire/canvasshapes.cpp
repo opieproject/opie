@@ -17,8 +17,6 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qpainter.h>
-#include <qcanvas.h>
 #include <qgfx_qws.h>
 #include "canvasshapes.h"
 

@@ -18,17 +18,9 @@
 **
 **********************************************************************/
 
-#include "cardgame.h"
-#include "canvasshapes.h"
-#include "canvascard.h"
 #include "canvascardgame.h"
 
-#include <qpe/resource.h>
-#include <qpe/config.h>
 
-#include <qmainwindow.h>
-#include <qmenubar.h>
-#include <qpainter.h>
 #include <qgfx_qws.h>
 
 #include <stdlib.h>

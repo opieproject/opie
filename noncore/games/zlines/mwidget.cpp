@@ -18,7 +18,6 @@ email                : Roman.Razilov@gmx.de
  ***************************************************************************/
 #include "mwidget.h"
 #include <qlayout.h>
-#include "ballpainter.h"
 #include <qhbox.h>
 #include <qlabel.h>
 

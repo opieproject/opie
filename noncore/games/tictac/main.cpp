@@ -6,7 +6,6 @@
 **
 *****************************************************************************/
 
-#include <qpe/qpeapplication.h>
 #include <opie/oapplicationfactory.h>
 #include "tictac.h"
 

@@ -15,11 +15,9 @@
  *                                                                         *
  ***************************************************************************/
 #include "Picture.h"
-#include "objects.h"
 
 #include <iostream>
 
-#include <qstring.h>
 #include <qpe/resource.h>
 #ifdef KDEVER
 #include <kapp.h>

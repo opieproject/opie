@@ -15,12 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 #include "MCursor.h"
-#include "objects.h"
 
-#include <qcursor.h>
-#include <qbitmap.h>
-#include <qwidget.h>
-#include <qstring.h>
 #ifdef KDEVER
 #include <kapp.h>
 #include <kstandarddirs.h>

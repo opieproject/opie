@@ -16,7 +16,6 @@
  ***************************************************************************/
 
 #include "inputbox.h"
-#include <qdialog.h>
 InputBox::InputBox(QWidget *parent, const char *name, const char *caption, const char *text) : QDialog(parent, name, TRUE) {
 // 	setCaption(caption);
 // 

@@ -1,6 +1,5 @@
 
 #include <qimage.h>
-#include <qframe.h>
 #include <qlayout.h>
 #include <qmenubar.h>
 #include <qtoolbar.h>

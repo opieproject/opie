@@ -15,19 +15,10 @@
 #include "referee.h"
 #endif
 
-#include <qdatetm.h>
 #include <stdlib.h>
 #include <qtimer.h>
-#include <qevent.h>
-#include <qcolor.h>
-#include <qkeycode.h>
 #include <qfileinfo.h>
 
-#include "board.h"
-#include "pacman.h"
-#include "monster.h"
-#include "fruit.h"
-#include "painter.h"
 
 Referee::Referee( QWidget *parent, const char *name, int Scheme, int Mode, Bitfont *font)
     : QWidget( parent, name )

@@ -22,13 +22,10 @@
 #include "qtetrix.h"
 
 #include <qpe/resource.h>
-#include <qpe/config.h>
 
-#include <qapplication.h>
 #include <qlabel.h>
 #include <qdatetime.h>
 #include <qlayout.h>
-#include <qstring.h>
 
 #include "ohighscoredlg.h"
 

@@ -6,13 +6,10 @@
 #include "rulesdialog.h"
 #include "themedialog.h"
 
-#include <qdatetime.h>
 #include <qfile.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
-#include <qstring.h>
 #include <qtimer.h>
-#include <qmainwindow.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qmenubar.h>

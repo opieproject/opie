@@ -22,10 +22,6 @@
 #include <qtopia/config.h>
 #include <qtopia/qpeapplication.h>
 
-#include <qpainter.h>
-#include <qdrawutil.h>
-#include <qpixmap.h>
-#include <qimage.h>
 #include <qtimer.h>
 
 #include <stdlib.h>

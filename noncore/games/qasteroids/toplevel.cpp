@@ -29,11 +29,9 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 
-#include <qaccel.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlcdnumber.h>
-#include <qpushbutton.h>
 
 #include <sys/utsname.h>
 

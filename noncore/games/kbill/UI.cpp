@@ -14,15 +14,12 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include "kbill.h"
 #include "objects.h"
 #include "Strings.h"
 #ifdef KDEVER
 #include <kapplication.h>
 #endif
-#include <qpixmap.h>
 #include <qmessagebox.h>
-#include <qnamespace.h>
 
 #include "inputbox.h"
 

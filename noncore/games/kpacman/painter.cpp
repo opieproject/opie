@@ -10,18 +10,10 @@
 #include <qpe/config.h>
 #endif
 
-#include <qcolor.h>
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qbitmap.h>
-#include <qrect.h>
-#include <qstring.h>
 
-#include <qmessagebox.h>
 #include <qfileinfo.h>
 
 #include "painter.h"
-#include "board.h"
 
 Painter::Painter( Board *b, QWidget *parent, int Scheme, int Mode, Bitfont *font)
 {

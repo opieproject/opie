@@ -27,14 +27,9 @@
 
 #include <qtoolbar.h>
 #include <qmenubar.h>
-#include <qpopupmenu.h>
 #include <qpushbutton.h>
 #include <qlcdnumber.h>
-#include <qmessagebox.h>
 #include <qtimer.h>
-#include <qpalette.h>
-#include <qapplication.h>
-#include <qlayout.h>
 #include <qlabel.h>
 
 #include <stdlib.h>

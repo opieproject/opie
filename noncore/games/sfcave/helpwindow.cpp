@@ -15,9 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qwidget.h>
 #include <qlayout.h>
-#include <qstring.h>
 #include <qtextview.h>
 
 #include <qpe/qpeapplication.h>

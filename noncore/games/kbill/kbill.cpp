@@ -16,13 +16,9 @@
  ***************************************************************************/
 
 #include <qmessagebox.h>
-#include <qmultilinedit.h>
 #include <qmenubar.h>
 #include <qtextbrowser.h>
-#include <qfont.h>
-#include <qwidget.h>
 #include "kbill.h"
-#include "inputbox.h"
 #include "helpdialog.h"
 #include "objects.h"
 #include "Strings.h"

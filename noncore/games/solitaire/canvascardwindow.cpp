@@ -19,17 +19,12 @@
 **********************************************************************/
 
 #include "canvascardwindow.h"
-#include "patiencecardgame.h"
 #include "freecellcardgame.h"
 #include "chicanecardgame.h"
 #include "harpcardgame.h"
 #include "teeclubcardgame.h"
 
-#include <qpe/resource.h>
 
-#include <qmainwindow.h>
-#include <qpopupmenu.h>
-#include <qstyle.h>
 
 
 CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) :

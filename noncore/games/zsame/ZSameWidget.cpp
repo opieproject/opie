@@ -21,11 +21,6 @@
 
 #include <stdio.h>
 
-#include <qwidget.h>
-#include <qpushbutton.h>
-#include <qpixmap.h>
-#include <qvbox.h>
-#include <qpopupmenu.h>
 #include <qtoolbar.h>
 #include <qmenubar.h>
 
@@ -39,8 +34,6 @@
 
 
 #include "ZSameWidget.h"
-#include "StoneWidget.h"
-#include "version.h"
 
 static int default_colors=3;
 

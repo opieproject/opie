@@ -1,10 +1,6 @@
 #include "filedialog.h"
 
 #include <qdir.h>
-#include <qfileinfo.h>
-#include <qmessagebox.h>
-#include <qpixmap.h>
-#include <qpushbutton.h>
 #include <qpe/qpeapplication.h>
 
 FileDialog::FileDialog(QWidget* parent,QString header,QString extension,const char* name,bool modal,WFlags f)

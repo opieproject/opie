@@ -12,11 +12,6 @@
 #include "kpacman.h"
 #endif
 
-#include <qkeycode.h>
-#include <qcolor.h>
-#include <qstring.h>
-#include <qpopmenu.h>
-#include <qmsgbox.h>
 
 Kpacman::Kpacman(QWidget *parent, const char *name)
         : KTMainWindow(parent, name)

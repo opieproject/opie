@@ -22,8 +22,6 @@
 #include "qtetrixb.h"
 #include "qtetrix.h"
 #include <qtimer.h>
-#include <qkeycode.h>
-#include <qpainter.h>
 
 const int waitAfterLineTime = 500;
 

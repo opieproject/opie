@@ -10,15 +10,11 @@
 
 #include "tictac.h"
 #include <qpe/qpeapplication.h>
-#include <qpainter.h>
 #include <qdrawutil.h>
 #include <qcombobox.h>
-#include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <stdlib.h>       // rand() function
-#include <qdatetime.h>        // seed for rand()
-#include <qstringlist.h> //needed for proper internationalization
 
 
 //***************************************************************************

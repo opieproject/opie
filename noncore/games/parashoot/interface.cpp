@@ -24,10 +24,6 @@
 #include <qtopia/qpeapplication.h>
 #include <qtopia/resource.h>
 
-#include <qlabel.h>
-#include <qmessagebox.h>
-#include <qapplication.h>
-#include <qstyle.h>
 #include <qtoolbar.h>
 #include <qtoolbutton.h>
 

@@ -16,7 +16,6 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <qpe/qpeapplication.h>
 #include "kbounce.h"
 #include <opie/oapplicationfactory.h>
 

@@ -13,12 +13,7 @@
 #include "kpacmanwidget.h"
 #endif
 
-#include <qmessagebox.h>
 
-#include "bitfont.h"
-#include "score.h"
-#include "referee.h"
-#include "status.h"
 
 KpacmanWidget::KpacmanWidget( QWidget *parent, const char *name)
         : QWidget( parent, name )

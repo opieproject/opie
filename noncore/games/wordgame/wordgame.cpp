@@ -21,21 +21,14 @@
 
 #include "wordgame.h"
 
-#include <qpe/applnk.h>
 #include <qpe/global.h>
-#include <qpe/filemanager.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
 #include <qapplication.h>
 #include <qmessagebox.h>
 #include <qcombobox.h>
-#include <qdatetime.h>
-#include <qfileinfo.h>
-#include <qfile.h>
 #include <qdir.h>
-#include <qiconset.h>
-#include <qlabel.h>
 #include <qlineedit.h>
 #include <qpushbutton.h>
 #include <qtextstream.h>
@@ -44,9 +37,7 @@
 #include <qtoolbutton.h>
 #include <qvbox.h>
 #include <qwidgetstack.h>
-#include <qpainter.h>
 #include <qlayout.h>
-#include <qregexp.h>
 
 #include <stdlib.h>
 #include <unistd.h>

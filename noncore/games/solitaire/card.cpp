@@ -20,10 +20,7 @@
 
 #include "card.h"
 
-#include <qpe/config.h>
 
-#include <qpoint.h>
-#include <qlist.h>
 
 /*
 Card( eValue v, eSuit s, bool f ) :

@@ -21,7 +21,6 @@
   * Roman Razilov 2000-05-21 qimgio
 */
 
-#include <qglobal.h>
 
 
 #include <opie/oapplicationfactory.h>

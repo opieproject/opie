@@ -19,14 +19,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include <qpixmap.h>
-#include <qstring.h>
-#include <qdstream.h>
-#include <qkeycode.h>
 #include <qtimer.h>
-#include <qfileinfo.h>
 
-#include "bitfont.h"
 
 Score::Score(QWidget *parent, const char *name, int Scheme, int Mode, Bitfont *font) : QWidget(parent, name)
 {

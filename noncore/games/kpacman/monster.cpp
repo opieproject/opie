@@ -1,5 +1,4 @@
 #include "monster.h"
-#include "board.h"
 
 Monster::Monster(Board *b, int mid)
 {

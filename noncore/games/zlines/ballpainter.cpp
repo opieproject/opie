@@ -19,13 +19,10 @@
 
 #include <qpe/resource.h>
 
-#include <qapplication.h>
 #include "ballpainter.h"
 //#include "shotcounter.h"
 #include <qpainter.h>
-#include "linesboard.h"
 //#include <qcolor.h>
-#include <qjpegio.h>
 
 
 #define PIXSIZE 21

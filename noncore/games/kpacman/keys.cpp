@@ -18,11 +18,6 @@
 #endif
 
 #include <qpushbt.h>
-#include <qlabel.h>
-#include <qframe.h>
-#include <qkeycode.h>
-#include <qpixmap.h>
-#include <qstring.h>
 
 Keys::Keys( QWidget *parent, const char *name)
     : QDialog( parent, name, TRUE )

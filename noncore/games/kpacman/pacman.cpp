@@ -1,5 +1,4 @@
 #include "pacman.h"
-#include "board.h"
 
 Pacman::Pacman(Board *b)
 {
