@@ -3,5 +3,5 @@ Comment=An E-Text Reader
 Exec=uqtreader
 Icon=opie-reader/uqtreader
 Type=Application
-Name=QT Reader (Unicode)
+Name=Opie Reader (Unicode)
 CanFastLoad=1
