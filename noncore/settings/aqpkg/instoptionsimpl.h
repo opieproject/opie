@@ -24,6 +24,7 @@ class InstallOptionsDlgImpl : public InstallOptionsDlg
 public:
     InstallOptionsDlgImpl( int flags, QWidget * parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
     ~InstallOptionsDlgImpl();
+    int getFlags();
 
 protected:
 

@@ -37,6 +37,8 @@ InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, QWidget * parent, const
     	forceRemove->setChecked( true );
     if ( flags & FORCE_OVERWRITE )
     	forceOverwrite->setChecked( true );
+    if ( flags & VERBOSE_WGET )
+    	verboseWget->setChecked( true );
 //    if ( flags & MAKE_LINKS )
 //    	makeLinks->setChecked( true );
 
@@ -46,4 +48,23 @@ InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, QWidget * parent, const
 
 InstallOptionsDlgImpl::~InstallOptionsDlgImpl()
 {
+}
+
+
+int InstallOptionsDlgImpl :: getFlags()
+{
+    int flags = 0;
+
+    if ( forceDepends->isChecked() )
+        flags |= FORCE_DEPENDS;
+    if ( forceReinstall->isChecked() )
+        flags |= FORCE_REINSTALL;
+    if ( forceRemove->isChecked() )
+        flags |= FORCE_REMOVE;
+    if ( forceOverwrite->isChecked() )
+        flags |= FORCE_OVERWRITE;
+    if ( verboseWget->isChecked() )
+        flags |= VERBOSE_WGET;
+
+    return flags;
 }

@@ -17,6 +17,7 @@
 
 #ifdef QWS
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 #endif
 
 #include <qmultilineedit.h>
@@ -91,15 +92,15 @@ InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *d
 		}
 		else if ( item.option == "U" || item.option == "R" )
 		{
-			updateList.push_back( item );
+            updateList.push_back( item );
             QString type = " (Upgrade)";
             if ( item.option == "R" )
                 type = " (ReInstall)";
-			upgrade += "   " + item.packageName + type + "\n";
-		}
-	}
+            upgrade += "   " + item.packageName + type + "\n";
+    }
+    }
 
-	output->setText( remove + install + upgrade );
+    output->setText( remove + install + upgrade );
 }
 
 InstallDlgImpl::InstallDlgImpl( Ipkg *ipkg, QString initialText, QWidget *parent, const char *name, bool modal, WFlags fl )
@@ -116,27 +117,19 @@ InstallDlgImpl::~InstallDlgImpl()
 
 bool InstallDlgImpl :: showDlg()
 {
-	showMaximized();
-	bool ret = exec();
+    showMaximized();
+    bool ret = exec();
 
-	return ret;
+    return ret;
 }
 
 void InstallDlgImpl :: optionsSelected()
 {
-	InstallOptionsDlgImpl opt( flags, this, "Option", true );
-	opt.exec();
+    InstallOptionsDlgImpl opt( flags, this, "Option", true );
+    opt.exec();
 
-	// set options selected from dialog
-    flags = 0;
-    if ( opt.forceDepends->isChecked() )
-        flags |= FORCE_DEPENDS;
-    if ( opt.forceReinstall->isChecked() )
-        flags |= FORCE_REINSTALL;
-    if ( opt.forceRemove->isChecked() )
-        flags |= FORCE_REMOVE;
-    if ( opt.forceOverwrite->isChecked() )
-        flags |= FORCE_OVERWRITE;
+    // set options selected from dialog
+    flags = opt.getFlags();
 
 #ifdef QWS
     Config cfg( "aqpkg" );
@@ -147,13 +140,16 @@ void InstallDlgImpl :: optionsSelected()
 
 void InstallDlgImpl :: installSelected()
 {
-	if ( btnInstall->text() == "Close" )
-	{
-		done( 1 );
-		return;
-	}
+    
+    if ( btnInstall->text() == "Close" )
+    {
+        done( 1 );
+        return;
+    }
 
-	btnInstall->setEnabled( false );
+    // Disable buttons
+    btnOptions->setEnabled( false );
+    btnInstall->setEnabled( false );
 
     if ( pIpkg )
     {
@@ -183,7 +179,7 @@ void InstallDlgImpl :: installSelected()
         connect( pIpkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
         
         // First run through the remove list, then the install list then the upgrade list
-    	vector<InstallData>::iterator it;
+        vector<InstallData>::iterator it;
         pIpkg->setOption( "remove" );
         for ( it = removeList.begin() ; it != removeList.end() ; ++it )
         {
@@ -230,7 +226,8 @@ void InstallDlgImpl :: installSelected()
         delete pIpkg;
     }
 
-	btnInstall->setEnabled( true );
+    btnOptions->setEnabled( true );
+    btnInstall->setEnabled( true );
     btnInstall->setText( tr( "Close" ) );
 }
 
