@@ -4,80 +4,84 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse las cruces firmemente y con
+precisión para calibrar la pantalla.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Bienvenido a Opie</translation>
     </message>
 </context>
 <context>
     <name>LoginWindow</name>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingreso</translation>
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Bienvenido a Opie&lt;/center&gt;</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuario</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraseña</translation>
     </message>
     <message>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Suspender</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menú</translation>
     </message>
 </context>
 <context>
     <name>LoginWindowImpl</name>
     <message>
         <source>Restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Salir</translation>
     </message>
     <message>
         <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;%1 %2&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Wrong password</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraseña incorrecta</translation>
     </message>
     <message>
         <source>The given password is incorrect.</source>
-        <translation type="unfinished"></translation>
+        <translation>La contraseña es incorrecta.</translation>
     </message>
     <message>
         <source>OPIE was terminated
 by an uncaught signal
 (%1)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Opie ha terminado por
+una señal no capturada
+(%1)
+</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo</translation>
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation type="unfinished"></translation>
+        <translation>No pude iniciar Opie.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
-        <translation type="unfinished"></translation>
+        <translation>No pude pasar a la nueva identidad de usuario</translation>
     </message>
 </context>
 </TS>

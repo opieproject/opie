@@ -3,29 +3,29 @@
     <name>GroupDialog</name>
     <message>
         <source>Add Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir grupo</translation>
     </message>
     <message>
         <source>Edit Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar grupo</translation>
     </message>
 </context>
 <context>
     <name>UserConfig</name>
     <message>
         <source>OPIE User Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestor de Usuarios de Opie</translation>
     </message>
 </context>
 <context>
     <name>UserDialog</name>
     <message>
         <source>Add User</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir usuario</translation>
     </message>
     <message>
         <source>Edit User</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar usuario</translation>
     </message>
 </context>
 </TS>

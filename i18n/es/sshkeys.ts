@@ -3,38 +3,38 @@
     <name>SSHKeysApp</name>
     <message>
         <source>Error running ssh-add</source>
-        <translation type="unfinished"></translation>
+        <translation>Error ejecutando ssh-add</translation>
     </message>
 </context>
 <context>
     <name>SSHKeysBase</name>
     <message>
         <source>SSH Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Claves SSH</translation>
     </message>
     <message>
         <source>Add Keys:</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir claves:</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>Clear Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar claves</translation>
     </message>
     <message>
         <source>Key Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre clave</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Fingerprint</source>
-        <translation type="unfinished"></translation>
+        <translation>Huella dactilar</translation>
     </message>
 </context>
 </TS>
