@@ -141,6 +141,7 @@
     </connection>
     <slot access="public">displayAvailableSpace( const QString&amp; )</slot>
     <slot access="public">installSelected()</slot>
+    <slot access="public">displayText( const QString &amp; )</slot>
     <slot access="public">optionsSelected()</slot>
 </connections>
 </UI>
