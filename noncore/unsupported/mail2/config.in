@@ -1,10 +1,10 @@
   config MAIL
-    boolean "mail"
+    boolean "EMail support"
     default "y" if OPIEMAIL
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
 
  config OPIEMAIL2
-    boolean "opiemail"
+    boolean "opie-mail2 (an IMAP mail client)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && BEND && LIBMAIL && MAIL
 

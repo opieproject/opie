@@ -1,5 +1,5 @@
   config OPIEPLAYER
-    boolean "Opieplayer"
+    boolean "opie-mediaplayer (mediaplayer that plays mp3, mpeg, and wav)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
 
@@ -10,4 +10,3 @@
   source core/multimedia/opieplayer/wavplugin/config.in
   source core/multimedia/opieplayer/vorbis/tremor/config.in
   source core/multimedia/opieplayer/vorbis/config.in
-  

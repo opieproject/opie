@@ -1,4 +1,4 @@
   config WAVPLUGIN
-    boolean "wavplugin"
+    boolean "opieplayer1-wavplugin (play WAV files)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIEPLAYER
