@@ -211,7 +211,11 @@ void DateBookDayViewQuickLineEdit::slotReturnPressed()
 		emit(insertEvent(quickEvent));
 		active=0;
 	}
-	this->close(true);	// Close and also delete this widget
+        /* we need to return to this object.. */
+	QTimer::singleShot(500, this, SLOT(finallyCallClose())  );	// Close and also delete this widget
+}
+void DateBookDayViewQuickLineEdit::finallyCallClose() {
+    close(true); // also deletes this widget...
 }
 
 void DateBookDayViewQuickLineEdit::focusOutEvent ( QFocusEvent * e )
@@ -245,6 +249,7 @@ DateBookDay::DateBookDay( bool ampm, bool startOnMonday, DateBookDB *newDb, QWid
 	timeMarker =  new DateBookDayTimeMarker( this );
 	timeMarker->setTime( QTime::currentTime() );
 	rowStyle = -1; // initialize with bogus values
+        jumpToCurTime = false;
 }
 
 void DateBookDay::setJumpToCurTime( bool bJump )

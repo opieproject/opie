@@ -48,6 +48,7 @@ protected:
 	void focusOutEvent( QFocusEvent *e );
 protected slots:
 	void slotReturnPressed(void);
+        void finallyCallClose();
 signals:
 	void insertEvent(const Event &e);
 };

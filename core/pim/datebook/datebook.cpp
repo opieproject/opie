@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.25.4.2 2003-05-17 11:06:35 zecke Exp $
+** $Id: datebook.cpp,v 1.25.4.3 2003-06-02 17:23:32 zecke Exp $
 **
 **********************************************************************/
 
@@ -523,8 +523,8 @@ void DateBook::initDay()
 	if ( !dayView ) {
 		dayView = new DateBookDay( ampm, onMonday, db, views, "day view" );
 		views->addWidget( dayView, DAY );
+                dayView->setJumpToCurTime( bJumpToCurTime );
 		dayView->setStartViewTime( startTime );
-		dayView->setJumpToCurTime( bJumpToCurTime );
 		dayView->setRowStyle( rowStyle );
 		connect( this, SIGNAL( newEvent() ), dayView, SLOT( redraw() ) );
 		connect( dayView, SIGNAL( newEvent() ), 	this, SLOT( fileNew() ) );
