@@ -4,7 +4,7 @@ Priority: required
 Section: opie/system
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
-Arch: iPAQ
-Version: 2.3.0-5
+Version: 2.3.0-6
+Depends: qte-fonts-common
 Description: Unicode font
  A pre-rendered Unicode font.

@@ -1,0 +1,9 @@
+Package: qpf-micro
+Files: $QTDIR/lib/fonts/micro_*{50,50_t15,50_t5}.* $QTDIR/lib/fonts/micro_*t10*
+Priority: required
+Section: opie/system
+Maintainer: Chris Larson <kergoth@handhelds.org>
+Architecture: arm
+Depends: qte-fonts-common
+Version: 1:$QTE_VERSION-$QTE_REVISION
+Description: Micro font - precompiled QPFs

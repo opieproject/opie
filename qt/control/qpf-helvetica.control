@@ -1,0 +1,9 @@
+Package: qpf-helvetica
+Files: $QTDIR/lib/fonts/helvetica_*_{50,50i,75,75i}.* $QTDIR/lib/fonts/helvetica_*_t*5* $QTDIR/lib/fonts/helvetica_*t10*
+Priority: required
+Section: opie/system
+Maintainer: Chris Larson <kergoth@handhelds.org>
+Depends: qte-fonts-common
+Architecture: arm
+Version: 1:$QTE_VERSION-$QTE_REVISION
+Description: Helvetica font - precompiled QPFs
