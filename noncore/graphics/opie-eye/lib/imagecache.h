@@ -28,11 +28,16 @@ class PPixmapCache : public  QCache<QPixmap> {
 private:
     PPixmapCache();
     ~PPixmapCache();
+
+    unsigned int m_MaxImages;
+
 public:
     static PPixmapCache *self();
     QPixmap* cachedImage(  const QString&  path, int width, int height );
     void insertImage( const QString& path, const QPixmap &, int width,  int height );
     void insertImage( const QString& path, const QPixmap *, int width, int height );
+    void setMaxImages(unsigned int aMax);
+    unsigned int maxImages()const{return m_MaxImages;}
 };
 
 inline void PPixmapCache::insertImage( const QString& path, const QPixmap& p, int width, int height ) {

@@ -62,6 +62,12 @@ PPixmapCache::PPixmapCache() {
 PPixmapCache::~PPixmapCache() {
 }
 
+void PPixmapCache::setMaxImages(unsigned int aMax)
+{
+    m_MaxImages = aMax;
+    setMaxCost( 64*64*QPixmap::defaultDepth()/8*m_MaxImages);
+}
+
 PPixmapCache* PPixmapCache::self() {
     if ( !_pxmCache )
         _pxmCache = new PPixmapCache;

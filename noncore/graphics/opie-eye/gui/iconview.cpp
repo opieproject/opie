@@ -52,7 +52,9 @@ namespace {
         void setText( const QString& );
         bool textOnly()const{return m_textOnly;}
         void setTextOnly(bool how){m_textOnly=how;}
+        /* just for starting recalc of item rect! */
         virtual void setPixmap( const QPixmap & icon, bool recalc, bool redraw = TRUE );
+        /* just for starting recalc of item rect! */
         virtual void setPixmap( const QPixmap & icon);
 
     protected:
@@ -99,12 +101,12 @@ namespace {
     inline void IconViewItem::setPixmap( const QPixmap & icon, bool recalc, bool redraw)
     {
         m_Pixset = true;
-        QIconViewItem::setPixmap(icon,recalc,redraw);
+        calcRect(text());
     }
     inline void IconViewItem::setPixmap( const QPixmap & icon)
     {
         m_Pixset = true;
-        QIconViewItem::setPixmap(icon);
+        calcRect(text());
     }
 
     inline QPixmap* IconViewItem::pixmap()const {
@@ -125,12 +127,9 @@ namespace {
             }
 
             m_pix = PPixmapCache::self()->cachedImage( m_path, 64, 64 );
-            if (!m_pix && !g_stringPix.contains( m_path )&&!m_Pixset) {
+            if (!m_pix && !g_stringPix.contains( m_path )) {
                 currentView()->dirLister()->thumbNail( m_path, 64, 64 );
                 g_stringPix.insert( m_path, const_cast<IconViewItem*>(this));
-            }
-            if (m_Pixset) {
-                return QIconViewItem::pixmap();
             }
             return m_pix ? m_pix : _unkPix;
         }
@@ -409,8 +408,12 @@ void PIconView::addFiles(  const QStringList& lst) {
     for (it=lst.begin(); it!= lst.end(); ++it ) {
          m_pix = PPixmapCache::self()->cachedImage( m_path+"/"+(*it), 64, 64 );
         _iv = new IconViewItem( m_view, m_path+"/"+(*it), (*it) );
-        if (m_mode==3) _iv->setTextOnly(true);
-        if (m_pix) _iv->setPixmap(*m_pix);
+        if (m_mode==3) {
+            _iv->setTextOnly(true);
+            _iv->setPixmap(QPixmap());
+        } else {
+            if (m_pix) _iv->setPixmap(*m_pix);
+        }
     }
 
 }
@@ -592,17 +595,20 @@ void PIconView::calculateGrid() {
 
     switch (m_mode) {
         case 2:
-            m_view->setGridX(80);
-            m_view->setGridY(80);
+            m_view->setGridX(50);
+            m_view->setGridY(20);
+            PPixmapCache::self()->setMaxImages(40);
             break;
         case 3:
             m_view->setGridX(m_view->width());
             m_view->setGridY(8);
+            PPixmapCache::self()->setMaxImages(2);
             break;
         case 1:
         default:
             m_view->setGridX(m_view->width());
             m_view->setGridY(80);
+            PPixmapCache::self()->setMaxImages(20);
             break;
     }
 }
