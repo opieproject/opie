@@ -133,7 +133,7 @@ QImage Peg::imageForType(int t)
     return *normalPegs[t];
 }
 
-Peg::Peg(QCanvas *canvas , int t, int g = -1, int p = -1) 
+Peg::Peg(QCanvas *canvas , int t, int g, int p) 
         : QCanvasRectangle(canvas)
 {
     setSize(normalPegs[t]->width(), normalPegs[t]->height() );
@@ -205,7 +205,7 @@ inline int Peg::type() const
 /* Load the main image, copy from it the pegs, the board, and the answer image 
  * and use these to create the tray, answer and board
  */
-MindBreaker::MindBreaker( QWidget *parent=0, const char *name=0, int wFlags=0 )
+MindBreaker::MindBreaker( QWidget *parent, const char *name, int wFlags )
 : QMainWindow(parent, name, wFlags),
     canvas(board_height, board_width)
 {
@@ -250,9 +250,9 @@ void MindBreaker::setScore(int turns, int games)
 }
 
 
-MindBreakerBoard::MindBreakerBoard( QCanvas &c, QWidget *parent=0, 
-                                    const char *name=0, int wFlags=0 )
-                     :  QCanvasView(&c, parent, name, wFlags)
+MindBreakerBoard::MindBreakerBoard( QCanvas &canv, QWidget *parent, 
+                                    const char *name, int wFlags )
+                     :  QCanvasView(&canv, parent, name, wFlags)
 {
     int i, x, y;
     struct timeval tv;
