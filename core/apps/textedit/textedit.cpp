@@ -698,10 +698,7 @@ void TextEdit::openFile( const QString &f ) {
 //    bFromDocView = true;
   if(f.find(".desktop",0,true) != -1 && !openDesktop )
     {
-      switch ( QMessageBox::warning(this,tr("Text Editor"),
-                                    tr("Text Editor has detected<BR>you selected a <B>.desktop</B>
-file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
-                                    tr(".desktop File"),tr("Linked Document"),0,1,1) )
+      switch ( QMessageBox::warning(this,tr("Text Editor"),tr("Text Editor has detected<BR>you selected a <B>.desktop</B>file.<BR>Open<B>.desktop</B> file or <B>linked</B> file?"),tr(".desktop File"),tr("Linked Document"),0,1,1) )
         {
         case 0: //desktop
           filer = f;
