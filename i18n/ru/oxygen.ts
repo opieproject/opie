@@ -86,15 +86,15 @@
     </message>
     <message>
         <source>Ionization Energy</source>
-        <translation type="unfinished"></translation>
+        <translation>Энергия ионизации</translation>
     </message>
     <message>
         <source>Boiling point</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка кипения</translation>
     </message>
     <message>
         <source>Melting point</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка плавления</translation>
     </message>
 </context>
 <context>
