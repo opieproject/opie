@@ -155,6 +155,7 @@ menu "Base"
   source core/tools/quicklauncher/config.in
   source core/launcher/config.in
   source core/qws/config.in
+  source core/symlinker/config.in
 endmenu
 
 comment ""

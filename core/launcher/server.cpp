@@ -708,7 +708,7 @@ void Server::applicationConnected(const QString &app)
 
 void Server::storageChanged()
 {
-    system( "qtopia-update-symlinks" );
+    system( "opie-update-symlinks" );
     serverGui->storageChanged( storage->fileSystems() );
     docList->storageChanged();
 }
