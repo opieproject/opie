@@ -69,9 +69,10 @@ using namespace Todo;
 
 MainWindow::MainWindow( QWidget* parent,
                         const char* name, WFlags )
-    : Opie::OPimMainWindow( "Todolist", tr( "Todo List" ), "Todo List", tr( "Task" ), "todo",
+    : Opie::OPimMainWindow( "Todolist", "Todo List", tr( "Task" ), "todo",
                             parent, name, WType_TopLevel | WStyle_ContextHelp )
 {
+    setCaption( tr( "Todo List" ) );
     if (!name)
         setName("todo window");
 
@@ -91,7 +92,7 @@ MainWindow::MainWindow( QWidget* parent,
     raiseCurrentView();
     QTimer::singleShot( 0, this, SLOT(initStuff()) );
 }
-void MainWindow::initStuff() {   
+void MainWindow::initStuff() {
     m_todoMgr.load();
     setViewCategory( m_curCat );
     setCategory( m_curCat );
@@ -99,16 +100,16 @@ void MainWindow::initStuff() {
 void MainWindow::initActions() {
     // Insert Task menu items
     QActionGroup *items = new QActionGroup( this, QString::null, false );
-    
+
     m_deleteCompleteAction = new QAction( QString::null, QWidget::tr( "Delete completed" ),
                                           0, items, 0 );
     connect( m_deleteCompleteAction, SIGNAL(activated()), this, SLOT(slotDeleteCompleted()) );
 
-    insertItemMenuItems( items );    
+    insertItemMenuItems( items );
 
     // Insert View menu items
     items = new QActionGroup( this, QString::null, false );
-    
+
     m_completedAction = new QAction( QString::null, QWidget::tr("Show completed tasks"),
                                      0, items, 0, true );
     m_completedAction->setOn( showCompleted() );
@@ -128,7 +129,7 @@ void MainWindow::initActions() {
                                          0, items, 0, true );
     m_showQuickTaskAction->setOn( showQuickTask() );
     connect( m_showQuickTaskAction, SIGNAL(toggled(bool)), this, SLOT(slotShowQuickTask(bool)) );
-    
+
     insertViewMenuItems( items );
 }
 /* m_curCat from Config */
@@ -147,7 +148,7 @@ void MainWindow::initUI() {
     setCentralWidget( m_stack );
     connect( this, SIGNAL(categorySelected(const QString&)),
             this, SLOT(setCategory(const QString&)) );
-    
+
     // Create quick task toolbar
     m_curQuick = new QuickEditImpl( this, m_quicktask );
     addToolBar( (QToolBar *)m_curQuick->widget(), QWidget::tr( "QuickEdit" ),
@@ -199,7 +200,7 @@ OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
         filter |= OPimTodoAccess::DoNotShowCompleted;
     if (m_overdue)
         filter |= OPimTodoAccess::OnlyOverDue;
-    
+
     return m_todoMgr.sorted( asc, sortOrder, filter, cat );
 }
 OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter) {
@@ -209,7 +210,7 @@ OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter)
 
     if ( m_curCat == tr( "Unfiled" ) )
         cat = -1;
-    
+
     return m_todoMgr.sorted(asc, sortOrder, addFilter,  cat );
 }
 OPimTodo MainWindow::event( int uid ) {
@@ -298,7 +299,7 @@ void MainWindow::slotItemNew() {
                 handleAlarms( OPimTodo(), event );
                 m_todoMgr.add( event );
                 currentView()->addEvent( event );
-        
+
                 reloadCategories();
             }
             raiseCurrentView();
@@ -405,7 +406,7 @@ void MainWindow::setCategory( const QString &category ) {
     m_curCat = category;
     if ( m_curCat == tr( "All" ) )
         m_curCat = QString::null;
-    
+
     currentView()->setShowCategory( m_curCat );
     raiseCurrentView();
 }
