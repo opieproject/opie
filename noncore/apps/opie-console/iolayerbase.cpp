@@ -66,6 +66,7 @@ IOLayerBase::IOLayerBase( QWidget* par,  const char* name )
     m_hboxPar->add(m_parityNone );
     m_lroot->add(m_groupParity );
     m_lroot->setStretchFactor(m_groupParity, 2 );
+    m_lroot->addStretch(2);
 
     // profiles
     m_speedBox->insertItem(tr("115200 baud"), id_baud_115200 );
@@ -73,6 +74,7 @@ IOLayerBase::IOLayerBase( QWidget* par,  const char* name )
     m_speedBox->insertItem(tr("38400 baud"), id_baud_38400   );
     m_speedBox->insertItem(tr("19200 baud"), id_baud_19200   );
     m_speedBox->insertItem(tr("9600 baud"), id_baud_9600     );
+
 };
 IOLayerBase::~IOLayerBase() {
 
