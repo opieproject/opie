@@ -103,14 +103,16 @@ int sqliteRlikeCompare(const char *zPattern, const char *zString, sqregex *reg){
     return res;
 }
 
-void rlikeFunc(sqlite_func *context, int arg, const char **argv){
-    if( arg < 2 || argv[0]==0 || argv[1]==0 ){
-        printf("One of arguments Null!!\n");
-        return;
+void rlikeFunc( sqlite3_context* context, int count, sqlite3_value** values ){
+    const unsigned char* argv0 = sqlite3_value_text( values[0] );
+    const unsigned char* argv1 = sqlite3_value_text( values[1] ); 
+    if( count < 2 || argv0 == 0 || argv1 == 0 ){
+	    qWarning( "One of arguments Null!!\n" );
+	    return;
     }
-        sqlite_set_result_int(context,
-        sqliteRlikeCompare((const char*)argv[0],
-    (const char*)argv[1], (sqregex *)sqlite_user_data(context) ));
+    sqlite3_result_int(context, sqliteRlikeCompare((const char*)argv0,
+						      (const char*)argv1, 
+						      (sqregex *) sqlite3_user_data( context ) ));
 }
 
 /*
@@ -118,25 +120,25 @@ void rlikeFunc(sqlite_func *context, int arg, const char **argv){
  * and options
  */
 bool OSQLiteDriver::open() {
-    char *error;
-
     odebug << "OSQLiteDriver::open: about to open" << oendl;
-    m_sqlite = sqlite_open(m_url.local8Bit(),
-                           0,
-                           &error );
+
+    int error = sqlite3_open( m_url.utf8(),
+                           &m_sqlite );
 
     /* failed to open */
-    if (m_sqlite == 0l ) {
+    if ( error != SQLITE_OK ) {
         // FIXME set the last error
         owarn << "OSQLiteDriver::open: " << error << "" << oendl;
-        free( error );
+        sqlite3_close( m_sqlite );
         return false;
     }
-    if (sqlite_create_function(m_sqlite,"rlike",2,rlikeFunc,&sqreg) != 0)
-        odebug << "Unable to create user defined function!" << oendl;
-    if (sqlite_function_type(m_sqlite,"rlike",SQLITE_NUMERIC) != 0)
-        odebug << "Unable to set rlike function result type!" << oendl;
+    if ( sqlite3_create_function( m_sqlite, "rlike", 2, SQLITE_UTF8, &sqreg, rlikeFunc, NULL, NULL ) != SQLITE_OK ){
+	    odebug << "Unable to create user defined function!" << oendl;
+	    return false;
+    }
+
     sqreg.regex_raw = NULL;
+
     return true;
 }
 
@@ -146,39 +148,41 @@ bool OSQLiteDriver::open() {
  * telling failure or success
  */
 bool OSQLiteDriver::close() {
-    if (m_sqlite )
-        sqlite_close( m_sqlite ), m_sqlite=0l;
-    if (sqreg.regex_raw != NULL){
-        odebug << "Freeing regex on close" << oendl;
-        free(sqreg.regex_raw);
-        sqreg.regex_raw=NULL;
-        regfree(&sqreg.regex_c);
-    }
-    return true;
+	if ( m_sqlite ){
+		sqlite3_close( m_sqlite );
+		m_sqlite=0l;
+	}
+	if ( sqreg.regex_raw != NULL){
+		odebug << "Freeing regex on close" << oendl;
+		free( sqreg.regex_raw );
+		sqreg.regex_raw = NULL;
+		regfree( &sqreg.regex_c );
+	}
+	return true;
 }
 
 
 /* Query */
 OSQLResult OSQLiteDriver::query( OSQLQuery* qu) {
-    if ( !m_sqlite ) {
-        // FIXME set error code
-        OSQLResult result( OSQLResult::Failure );
-        return result;
-    }
-    Query query;
-    query.driver = this;
-    char *err;
-    /* SQLITE_OK 0 if return code > 0 == failure */
-    if ( sqlite_exec(m_sqlite, qu->query().utf8(),&call_back, &query, &err)  > 0 ) {
-	    owarn << "OSQLiteDriver::query: Error while executing " << err << "" << oendl;
-	    free( err );
-	    // FixMe Errors
-    }
+	if ( !m_sqlite ) {
+		// FIXME set error code
+		OSQLResult result( OSQLResult::Failure );
+		return result;
+	}
+	Query query;
+	query.driver = this;
+	char *err;
+	/* SQLITE_OK 0 if return code > 0 == failure */
+	if ( sqlite3_exec( m_sqlite, qu->query().utf8(), &call_back, &query, &err )  > SQLITE_OK ) {
+		owarn << "OSQLiteDriver::query: Error while executing " << err << "" << oendl;
+		free( err );
+		// FixMe Errors
+	}
 
-    OSQLResult result(OSQLResult::Success,
-                      query.items,
-                      query.errors );
-    return result;
+	OSQLResult result(OSQLResult::Success,
+			  query.items,
+			  query.errors );
+	return result;
 }
 
 
@@ -203,7 +207,7 @@ int OSQLiteDriver::handleCallBack( int, char**, char** ) {
 
 /* callback_handler add the values to the list*/
 int OSQLiteDriver::call_back( void* voi, int argc,
-                              char** argv, char** columns) {
+                              char** argv, char** columns ) {
     Query* qu = (Query*)voi;
 
     //copy them over to a OSQLResultItem

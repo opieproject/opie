@@ -1,7 +1,7 @@
 #ifndef OSQL_LITE_DRIVER_H
 #define OSQL_LITE_DRIVER_H
 
-#include <sqlite.h>
+#include <sqlite3.h>
 #include <sys/types.h>
 #include <regex.h>
 
@@ -41,7 +41,7 @@ private:
     int handleCallBack( int, char**, char** );
     static int call_back( void*, int, char**, char** );
     QString m_url;
-    sqlite *m_sqlite;
+    sqlite3 *m_sqlite;
     sqregex sqreg;
 };
 }

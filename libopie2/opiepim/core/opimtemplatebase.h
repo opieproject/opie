@@ -93,12 +93,6 @@ public:
                     uint current, CacheDirection dir = Forward )const = 0;
 
    /**
-    * Find in Cache..
-    * Returns empty object if nothing found.
-    */
-    virtual T cacheFind( int uid )const = 0;
-
-   /**
     * Put element into Cache
     */
     virtual void cache( const T& )const = 0;

@@ -178,7 +178,6 @@ public:
     /**
      * @internal
      */
-    virtual T cacheFind( int uid )const;
     void cache( const T& )const;
     void setSaneCacheSize( int );
 
@@ -263,12 +262,6 @@ T OPimAccessTemplate<T>::find( int uid ) const{
     cache( t );
 
     return t;
-}
-
-template <class T>
-T OPimAccessTemplate<T>::cacheFind( int uid ) const
-{
-	return m_cache.find( uid );
 }
 
 template <class T>

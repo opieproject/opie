@@ -12,7 +12,7 @@ Design goal is a fast and extendable layout on a sql database to support cross r
 \subsection{Copyright}
 
 Copyright notice
-\copyright 2002, Maximilian Rei{\ss} \& Stefan Eilers \& Holger Freyther
+\copyright 2002-2004, Maximilian Rei{\ss} \& Stefan Eilers \& Holger Freyther
 
 \pagebreak
 \section{Relations}
@@ -22,7 +22,7 @@ Some of the tables are just using 5 attributes:
 \begin{enumerate}
 \item UID: This countains an unique ID for the complete entry. An entry may consist of multiple
 rows, seperated by ID.
-\item ID: This defines a number to seperate the rows of an entry. UID + ID must be unique for every entry.
+\item ID: This defines a number to seperate the rows of an entry. UID + ID must be unique for every entry (primary key).
 \item Type: Describes the type of this entry.
 \item Priority: For instance: Your default email-address will get the priority 1 and the other 2.. . 0 means ``not defined''.
 \item Value: The data which was described by ``Type'' is stored here.

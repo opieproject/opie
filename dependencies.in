@@ -23,7 +23,7 @@
     depends LIBPCAP_DEP
 
   config LIBSQLITE_DEP
-    boolean "Have sqlite >= 2.8.6"
+    boolean "Have sqlite >= 3.0.7"
     default n
 
   config LIBSQLITE_LIB_DIR
