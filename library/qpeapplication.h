@@ -122,6 +122,7 @@ public:
     void showMainDocumentWidget( QWidget*, bool nomax=FALSE );
     static void showDialog( QDialog*, bool nomax=FALSE );
     static int execDialog( QDialog*, bool nomax=FALSE );
+    static int showWidget( QWidget*, bool nomax=FALSE );
     /* Merge setTempScreenSaverMode */
 #ifdef QTOPIA_INTERNAL_INITAPP
     void initApp( int argv, char **argv );
@@ -205,6 +206,22 @@ inline int QPEApplication::execDialog( QDialog* d, bool nomax )
 {
     showDialog(d,nomax);
     return d->exec();
+}
+
+inline int QPEApplication::showWidget( QWidget* wg, bool nomax )
+{
+    QSize sh = wg->sizeHint();
+    int w = QMAX(sh.width(),wg->width());
+    int h = QMAX(sh.height(),wg->height());
+    if ( !nomax
+            && ( w > qApp->desktop()->width()*3/4
+                 || h > qApp->desktop()->height()*3/4 ) )
+    {
+        wg->showMaximized();
+    } else {
+        wg->resize(w,h);
+        wg->show();
+    }
 }
 
 enum Transformation { Rot0, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws.cpp */
