@@ -39,6 +39,7 @@
 	* n.a.  - Build system: Fix deps in several config.in (and fix scripts/deps.pl too) to stop breaking builds, especially with make -j highNumber (clem)
 	* n.a.  - Removed hardcoded icon size in a couple of applets (mickeyl)
 	* n.a.  - Opie-Qashmoney has been moved to unsupported (mickeyl)
+	* n.a.  - Opie-Ubrowser has been moved to unsupported (mickeyl)
 
 2004-09-17	Opie 1.1.6
 
