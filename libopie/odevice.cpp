@@ -139,7 +139,9 @@ protected:
 
 public:
 	virtual bool setSoftSuspend ( bool soft );
+	virtual bool suspend();
 
+	virtual bool setDisplayStatus( bool on );
 	virtual bool setDisplayBrightness ( int b );
 	virtual int displayBrightnessResolution ( ) const;
 
@@ -1715,15 +1717,51 @@ void SIMpad::alarmSound ( )
 }
 
 
+bool SIMpad::suspend ( ) // Must override because SIMpad does NOT have apm
+{
+	qDebug( "ODevice for SIMpad: suspend()" );
+	if ( !isQWS( ) ) // only qwsserver is allowed to suspend
+		return false;
+
+	bool res = false;
+
+	struct timeval tvs, tvn;
+	::gettimeofday ( &tvs, 0 );
+
+	::sync ( ); // flush fs caches
+	res = ( ::system ( "echo > /proc/sys/pm/suspend" ) == 0 ); //TODO make better :)
+
+	return res;
+}
+
+
 bool SIMpad::setSoftSuspend ( bool soft )
 {
-	//TODO
+	qDebug( "ODevice for SIMpad: UNHANDLED setSoftSuspend(%s)", soft? "on" : "off" );
 	return false;
+}
+
+
+bool SIMpad::setDisplayStatus ( bool on )
+{
+	qDebug( "ODevice for SIMpad: setDisplayStatus(%s)", on? "on" : "off" );
+
+	bool res = false;
+	int fd;
+
+	QString cmdline = QString().sprintf( "echo %s > /proc/cs3", on ? "0xd41a" : "0xd40a" ); //TODO make better :)
+
+	if (( fd = ::open ( "/dev/fb0", O_RDWR )) >= 0 ) {
+		res = ( ::system( (const char*) cmdline ) == 0 );
+		::close ( fd );
+	}
+	return res;
 }
 
 
 bool SIMpad::setDisplayBrightness ( int bright )
 {
+	qDebug( "ODevice for SIMpad: setDisplayBrightness( %d )", bright );
 	bool res = false;
 	int fd;
 
