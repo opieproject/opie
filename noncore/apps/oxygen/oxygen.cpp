@@ -16,10 +16,7 @@
  **************************************************************************/
 #include "oxygen.h"
 
-#include <qlabel.h>
 #include <qapplication.h>
-#include <qpushbutton.h>
-#include <qvbox.h>
 #include <qtabwidget.h>
 #include "calcdlg.h"
 #include "calcdlgui.h"
@@ -38,5 +35,5 @@ Oxygen::Oxygen() : QMainWindow()
     tabw->addTab( pse, tr( "PSE" ));
     tabw->addTab( DataWidgetUI , tr( "Data" ) );
     tabw->addTab( CalcDlgUI, tr( "Calculations" ) );
-     setCentralWidget( tabw );
+    setCentralWidget( tabw );
 }

@@ -45,7 +45,7 @@ void calcDlgUI::calc()
         ea = kmolcalc->getEmpFormula() + " :\n" + kmolcalc->getEA();
     } else {
         mw = "???";
-        ea = tr( "ERROR: \n" ) + errors + "\n";
+        ea = tr( "ERROR: \n" ).arg( errors )+ "\n";
     }
     result->setText( mw );
     anal_display->setText( ea );

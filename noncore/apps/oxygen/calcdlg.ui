@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>245</width>
+            <width>241</width>
             <height>318</height>
         </rect>
     </property>
@@ -42,7 +42,7 @@
             </property>
             <attribute>
                 <name>title</name>
-                <string>Tab 1</string>
+                <string>Molecular Weight</string>
             </attribute>
             <widget>
                 <class>QLayoutWidget</class>
@@ -76,7 +76,7 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>TextLabel2</string>
+                            <string>chemical Formula</string>
                         </property>
                     </widget>
                     <widget>
@@ -109,7 +109,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>PushButton3</string>
+                                    <string>Calculate</string>
                                 </property>
                             </widget>
                             <widget>
@@ -120,7 +120,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>PushButton4</string>
+                                    <string>Clear</string>
                                 </property>
                             </widget>
                         </hbox>
@@ -133,7 +133,7 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>TextLabel3</string>
+                            <string>Molecular Weight (u):</string>
                         </property>
                     </widget>
                     <widget>
@@ -151,7 +151,7 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>TextLabel1</string>
+                            <string>Elemental Composition (%):</string>
                         </property>
                     </widget>
                     <widget>
@@ -160,20 +160,13 @@
                             <name>name</name>
                             <cstring>anal_display</cstring>
                         </property>
+                        <property stdset="1">
+                            <name>readOnly</name>
+                            <bool>true</bool>
+                        </property>
                     </widget>
                 </vbox>
             </widget>
-        </widget>
-        <widget>
-            <class>QWidget</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>tab</cstring>
-            </property>
-            <attribute>
-                <name>title</name>
-                <string>Tab 2</string>
-            </attribute>
         </widget>
     </widget>
 </widget>

@@ -39,7 +39,7 @@ dataWidgetUI::dataWidgetUI() : QWidget()
     {
         configobj.setGroup( QString::number( i ) );
         QString foo = configobj.readEntry( "Name" );
-        dataCombo->insertItem( foo );
+        dataCombo->insertItem( QString::number( i )+" - "+foo );
     }
     
     OxydataWidget *oxyDW = new OxydataWidget(this);
