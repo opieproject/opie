@@ -141,8 +141,8 @@ OpieFtp::OpieFtp( )
               this,SLOT( localListClicked(QListViewItem *)) );
 //     connect( Local_View, SIGNAL( doubleClicked( QListViewItem*)),
 //              this,SLOT( localListClicked(QListViewItem *)) );
-//     connect( Local_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-//              this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
+     connect( Local_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
+              this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
 
     TabWidget->insertTab( tab, tr( "Local" ) );
 
