@@ -235,14 +235,14 @@ void LoopControl::startAudio() {
       long sampleWeShouldBeAt = long( playtime.elapsed() ) * freq / 1000;
       long sampleWaitTime = currentSample - sampleWeShouldBeAt;
 
-//        if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 5000 ) ) {
-//      usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
-//        }
-//      else if ( sampleWaitTime <= -5000 ) {
-//     qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
-//     //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
-//     currentSample = sampleWeShouldBeAt;
-//       }
+        if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 20000 ) ) {
+      usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
+        }
+      else if ( sampleWaitTime <= -5000 ) {
+     qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
+     //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
+     currentSample = sampleWeShouldBeAt;
+       }
 
       audioDevice->write( audioBuffer, samplesRead * 2 * channels );
       audioSampleCounter = currentSample + samplesRead - 1;

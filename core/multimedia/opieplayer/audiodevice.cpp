@@ -109,7 +109,7 @@ void AudioDevice::getVolume( unsigned int& leftVolume, unsigned int& rightVolume
     formatData.wBitsPerSample = 16;
     waveOutOpen(&handle, WAVE_MAPPER, &formatData, 0L, 0L, CALLBACK_NULL);
     if ( waveOutGetVolume( handle, (LPDWORD)&volume ) )
-  qDebug( "get volume of audio device failed" );
+//  qDebug( "get volume of audio device failed" );
     waveOutClose( handle );
     leftVolume = volume & 0xFFFF;
     rightVolume = volume >> 16;
@@ -151,7 +151,7 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
     waveOutOpen(&handle, WAVE_MAPPER, &formatData, 0L, 0L, CALLBACK_NULL);
     unsigned int volume = (rightVolume << 16) | leftVolume;
     if ( waveOutSetVolume( handle, volume ) )
-  qDebug( "set volume of audio device failed" );
+//  qDebug( "set volume of audio device failed" );
     waveOutClose( handle );
 #else
     // Volume can be from 0 to 100 which is 101 distinct values
@@ -192,13 +192,13 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
     d->frequency = f;
     d->channels = chs;
     d->bytesPerSample = bps;
-    qDebug("%d",bps);
+//    qDebug("%d",bps);
     int format=0;
     if( bps == 8)  format  = AFMT_U8;
     else if( bps <= 0) format = AFMT_S16_LE;
     else format = AFMT_S16_LE;
 
-    qDebug("AD- freq %d, channels %d, b/sample %d, bitrate %d",f,chs,bps,format);
+//    qDebug("AD- freq %d, channels %d, b/sample %d, bitrate %d",f,chs,bps,format);
     connect( qApp, SIGNAL( volumeChanged(bool) ), this, SLOT( volumeChanged(bool) ) );
 
 

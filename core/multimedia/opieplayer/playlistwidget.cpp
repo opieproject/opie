@@ -39,7 +39,7 @@
 #include <qtabwidget.h>
 #include <qlistview.h>
 #include <qpoint.h>
-#include <qtimer.h>
+//#include <qtimer.h>
 
 #include "playlistselection.h"
 #include "playlistwidget.h"
@@ -98,8 +98,8 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     d = new PlayListWidgetPrivate;
     d->setDocumentUsed = FALSE;
     d->current = NULL;
-    menuTimer = new QTimer( this ,"menu timer"),
-    connect( menuTimer, SIGNAL( timeout() ), SLOT( addSelected() ) );
+//    menuTimer = new QTimer( this ,"menu timer"),
+//     connect( menuTimer, SIGNAL( timeout() ), SLOT( addSelected() ) );
 
     setBackgroundMode( PaletteButton );
 
@@ -204,11 +204,13 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
      for ( ; dit.current(); ++dit ) {
          QListViewItem * newItem;
          if(dit.current()->file().find("/mnt/cf") != -1 ) storage="CF";
+         else if(dit.current()->file().find("/mnt/hda") != -1 ) storage="CF";
          else if(dit.current()->file().find("/mnt/card") != -1 ) storage="SD";
          else storage="RAM";
-         
+         if ( QFile( dit.current()->file()).exists() ) {
          newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(), QString::number( QFile( dit.current()->file()).size() ), storage);
          newItem->setPixmap(0, Resource::loadPixmap( "mpegplayer/musicfile" ));
+         }
      }
 // videowidget
      
@@ -229,11 +231,14 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     QListIterator<DocLnk> Vdit( vFiles.children() );
     for ( ; Vdit.current(); ++Vdit ) {
          if( Vdit.current()->file().find("/mnt/cf") != -1 ) storage="CF";
+         else if( Vdit.current()->file().find("/mnt/hda") != -1 ) storage="CF";
          else if( Vdit.current()->file().find("/mnt/card") != -1 ) storage="SD";
          else storage="RAM";
         QListViewItem * newItem;
+         if ( QFile( Vdit.current()->file()).exists() ) {
         newItem= /*(void)*/ new QListViewItem( videoView, Vdit.current()->name(), QString::number( QFile( Vdit.current()->file()).size() ), storage);
         newItem->setPixmap(0, Resource::loadPixmap( "mpegplayer/videofile" ));
+         }
      }
 
 
@@ -663,28 +668,28 @@ void PlayListWidget::tabChanged(QWidget *widg) {
       };
 }
 
-void PlayListWidget::cancelMenuTimer() {
-    if( menuTimer->isActive() )
-    menuTimer->stop();
-}
+// void PlayListWidget::cancelMenuTimer() {
+//     if( menuTimer->isActive() )
+//     menuTimer->stop();
+// }
 
-void PlayListWidget::showFileMenu() {
+// void PlayListWidget::showFileMenu() {
 
-}
+// }
 
-void PlayListWidget::contentsMousePressEvent( QMouseEvent * e )
-{
-//    QListView::contentsMousePressEvent( e );
-    menuTimer->start( 750, TRUE );
-}
+// void PlayListWidget::contentsMousePressEvent( QMouseEvent * e )
+// {
+// //    QListView::contentsMousePressEvent( e );
+//     menuTimer->start( 750, TRUE );
+// }
 
 
-void PlayListWidget::contentsMouseReleaseEvent( QMouseEvent * e )
-{
-//    QListView::contentsMouseReleaseEvent( e );
-    menuTimer->stop();
-}
-// void PlayListWidget::setFullScreen() {
+// void PlayListWidget::contentsMouseReleaseEvent( QMouseEvent * e )
+// {
+// //    QListView::contentsMouseReleaseEvent( e );
+//     menuTimer->stop();
+// }
+// // void PlayListWidget::setFullScreen() {
 //  mediaPlayerState->toggleFullscreen( );
 // }
 

@@ -24,7 +24,7 @@
 #include <qmainwindow.h>
 #include <qpe/applnk.h>
 #include <qtabwidget.h>
-#include <qtimer.h>
+/* #include <qtimer.h> */
 
 
 class PlayListWidgetPrivate;
@@ -49,7 +49,7 @@ public:
     // retrieve the current playlist entry (media file link)
     const DocLnk *current();
     void useSelectedDocument();
-    QTimer    * menuTimer;
+/*     QTimer    * menuTimer; */
 
 public slots:
     void setDocument( const QString& fileref );
@@ -76,8 +76,8 @@ public slots:
 /*     void setFullScreen(); */
 /*     void setScaled(); */
 protected:
-    void contentsMousePressEvent( QMouseEvent * e );
-    void contentsMouseReleaseEvent( QMouseEvent * e );
+/*     void contentsMousePressEvent( QMouseEvent * e ); */
+/*     void contentsMouseReleaseEvent( QMouseEvent * e ); */
 
 private:
     void initializeStates();
@@ -86,8 +86,8 @@ private:
     PlayListWidgetPrivate *d; // Private implementation data
 
 protected slots:
-    void cancelMenuTimer();
-    void showFileMenu();
+/*     void cancelMenuTimer(); */
+/*     void showFileMenu(); */
 
 
 };
