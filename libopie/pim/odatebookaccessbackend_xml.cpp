@@ -151,8 +151,7 @@ bool ODateBookAccessBackend_XML::reload() {
     return load();
 }
 bool ODateBookAccessBackend_XML::save() {
-    qWarning("going to save now");
-//    if (!m_changed) return true;
+    if (!m_changed) return true;
 
     int total_written;
     QString strFileNew = m_name + ".new";
@@ -192,7 +191,6 @@ bool ODateBookAccessBackend_XML::save() {
     }
     f.close();
 
-    exit(0);
     if ( ::rename( strFileNew, m_name ) < 0 ) {
         QFile::remove( strFileNew );
         return false;
