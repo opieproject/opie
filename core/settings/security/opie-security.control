@@ -1,5 +1,5 @@
 Package: opie-security
-Files: plugins/application/libsecurity.so* bin/security apps/Settings/Security.desktop pics/security
+Files: plugins/application/libsecurity.so* bin/security apps/Settings/security.desktop pics/security
 Priority: optional
 Section: opie/settings
 Maintainer: Opie Team <opie@handhelds.org>

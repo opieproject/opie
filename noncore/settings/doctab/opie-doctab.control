@@ -1,5 +1,5 @@
 Package: opie-doctab
-Files: plugins/application/libdoctab.so* bin/doctab apps/Settings/DocTab.desktop
+Files: plugins/application/libdoctab.so* bin/doctab apps/Settings/doctab.desktop
 Priority: optional
 Section: opie/settings
 Maintainer: The Opie Team <opie-devel@handhelds.org>
