@@ -221,4 +221,3 @@ m_PlayListSelection->addStringToSelection(d->commandEdit->text());
 
 }
 
-

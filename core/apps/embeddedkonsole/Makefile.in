@@ -32,6 +32,9 @@ HEADERS =	TEWidget.h \
 		session.h \
 		keytrans.h \
 		konsole.h \
+		commandeditdialog.h \
+		commandeditwidget.h \
+		playlistselection.h \
 		MyPty.h
 SOURCES =	TEScreen.cpp \
 		TEWidget.cpp \
@@ -41,8 +44,11 @@ SOURCES =	TEScreen.cpp \
 		session.cpp \
 		keytrans.cpp \
 		konsole.cpp \
-		main.cpp \
-		MyPty.cpp
+		commandeditdialog.cpp \
+		commandeditwidget.cpp \
+		playlistselection.cpp \
+		MyPty.cpp \
+		main.cpp
 OBJECTS =	TEScreen.o \
 		TEWidget.o \
 		TEHistory.o \
@@ -51,23 +57,41 @@ OBJECTS =	TEScreen.o \
 		session.o \
 		keytrans.o \
 		konsole.o \
+		commandeditdialog.o \
+		commandeditwidget.o \
+		playlistselection.o \
+		MyPty.o \
 		main.o \
-		MyPty.o
-INTERFACES =    
-UICDECLS =      
-UICIMPLS =      
+		commandeditdialogbase.o \
+		smallcommandeditdialogbase.o
+INTERFACES =    commandeditdialogbase.ui \
+		smallcommandeditdialogbase.ui
+UICDECLS =      commandeditdialogbase.h \
+		smallcommandeditdialogbase.h
+UICIMPLS =      commandeditdialogbase.cpp \
+		smallcommandeditdialogbase.cpp
 SRCMOC	=	moc_TEWidget.cpp \
 		moc_TEmulation.cpp \
 		moc_TEmuVt102.cpp \
 		moc_session.cpp \
 		moc_konsole.cpp \
-		moc_MyPty.cpp
+		moc_commandeditdialog.cpp \
+		moc_commandeditwidget.cpp \
+		moc_playlistselection.cpp \
+		moc_MyPty.cpp \
+		moc_commandeditdialogbase.cpp \
+		moc_smallcommandeditdialogbase.cpp
 OBJMOC	=	moc_TEWidget.o \
 		moc_TEmulation.o \
 		moc_TEmuVt102.o \
 		moc_session.o \
 		moc_konsole.o \
-		moc_MyPty.o
+		moc_commandeditdialog.o \
+		moc_commandeditwidget.o \
+		moc_playlistselection.o \
+		moc_MyPty.o \
+		moc_commandeditdialogbase.o \
+		moc_smallcommandeditdialogbase.o
 
 
 ####### Implicit rules
@@ -147,7 +171,8 @@ TEWidget.o: TEWidget.cpp \
 		TEScreen.h \
 		TEHistory.h \
 		TEmulation.h \
-		keytrans.h
+		keytrans.h \
+		$(OPIEDIR)/include/qpe/config.h
 
 TEHistory.o: TEHistory.cpp \
 		TEHistory.h \
@@ -200,7 +225,33 @@ konsole.o: konsole.cpp \
 		TEHistory.h \
 		TEmulation.h \
 		keytrans.h \
-		session.h
+		session.h \
+		commandeditdialog.h \
+		commandeditdialogbase.h
+
+commandeditdialog.o: commandeditdialog.cpp \
+		commandeditdialog.h \
+		commandeditdialogbase.h \
+		playlistselection.h \
+		$(OPIEDIR)/include/qpe/applnk.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/qpetoolbar.h \
+		$(OPIEDIR)/include/qpe/qpemenubar.h \
+		$(OPIEDIR)/include/qpe/resource.h \
+		smallcommandeditdialogbase.h
+
+commandeditwidget.o: commandeditwidget.cpp \
+		commandeditwidget.h \
+		playlistselection.h \
+		$(OPIEDIR)/include/qpe/applnk.h
+
+playlistselection.o: playlistselection.cpp \
+		$(OPIEDIR)/include/qpe/applnk.h \
+		$(OPIEDIR)/include/qpe/resource.h \
+		playlistselection.h
+
+MyPty.o: MyPty.cpp \
+		MyPty.h
 
 main.o: main.cpp \
 		konsole.h \
@@ -216,8 +267,25 @@ main.o: main.cpp \
 		session.h \
 		$(OPIEDIR)/include/qpe/qpeapplication.h
 
-MyPty.o: MyPty.cpp \
-		MyPty.h
+commandeditdialogbase.h: commandeditdialogbase.ui
+	$(UIC) commandeditdialogbase.ui -o $(INTERFACE_DECL_PATH)/commandeditdialogbase.h
+
+commandeditdialogbase.cpp: commandeditdialogbase.ui
+	$(UIC) commandeditdialogbase.ui -i commandeditdialogbase.h -o commandeditdialogbase.cpp
+
+smallcommandeditdialogbase.h: smallcommandeditdialogbase.ui
+	$(UIC) smallcommandeditdialogbase.ui -o $(INTERFACE_DECL_PATH)/smallcommandeditdialogbase.h
+
+smallcommandeditdialogbase.cpp: smallcommandeditdialogbase.ui
+	$(UIC) smallcommandeditdialogbase.ui -i smallcommandeditdialogbase.h -o smallcommandeditdialogbase.cpp
+
+commandeditdialogbase.o: commandeditdialogbase.cpp \
+		commandeditdialogbase.h \
+		playlistselection.h \
+		$(OPIEDIR)/include/qpe/applnk.h
+
+smallcommandeditdialogbase.o: smallcommandeditdialogbase.cpp \
+		smallcommandeditdialogbase.h
 
 moc_TEWidget.o: moc_TEWidget.cpp \
 		TEWidget.h \
@@ -264,8 +332,25 @@ moc_konsole.o: moc_konsole.cpp \
 		keytrans.h \
 		session.h
 
+moc_commandeditdialog.o: moc_commandeditdialog.cpp \
+		commandeditdialog.h \
+		commandeditdialogbase.h
+
+moc_commandeditwidget.o: moc_commandeditwidget.cpp \
+		commandeditwidget.h
+
+moc_playlistselection.o: moc_playlistselection.cpp \
+		playlistselection.h \
+		$(OPIEDIR)/include/qpe/applnk.h
+
 moc_MyPty.o: moc_MyPty.cpp \
 		MyPty.h
+
+moc_commandeditdialogbase.o: moc_commandeditdialogbase.cpp \
+		commandeditdialogbase.h
+
+moc_smallcommandeditdialogbase.o: moc_smallcommandeditdialogbase.cpp \
+		smallcommandeditdialogbase.h
 
 moc_TEWidget.cpp: TEWidget.h
 	$(MOC) TEWidget.h -o moc_TEWidget.cpp
@@ -282,7 +367,22 @@ moc_session.cpp: session.h
 moc_konsole.cpp: konsole.h
 	$(MOC) konsole.h -o moc_konsole.cpp
 
+moc_commandeditdialog.cpp: commandeditdialog.h
+	$(MOC) commandeditdialog.h -o moc_commandeditdialog.cpp
+
+moc_commandeditwidget.cpp: commandeditwidget.h
+	$(MOC) commandeditwidget.h -o moc_commandeditwidget.cpp
+
+moc_playlistselection.cpp: playlistselection.h
+	$(MOC) playlistselection.h -o moc_playlistselection.cpp
+
 moc_MyPty.cpp: MyPty.h
 	$(MOC) MyPty.h -o moc_MyPty.cpp
+
+moc_commandeditdialogbase.cpp: commandeditdialogbase.h
+	$(MOC) commandeditdialogbase.h -o moc_commandeditdialogbase.cpp
+
+moc_smallcommandeditdialogbase.cpp: smallcommandeditdialogbase.h
+	$(MOC) smallcommandeditdialogbase.h -o moc_smallcommandeditdialogbase.cpp
 
 

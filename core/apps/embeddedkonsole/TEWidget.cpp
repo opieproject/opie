@@ -541,7 +541,7 @@ void TEWidget::blinkEvent()
 
 void TEWidget::resizeEvent(QResizeEvent* ev)
 {
-  //printf("resize: %d,%d\n",ev->size().width(),ev->size().height());
+//  printf("resize: %d,%d\n",ev->size().width(),ev->size().height());
   //printf("approx: %d,%d\n",ev->size().width()/font_w,ev->size().height()/font_h);
   //printf("leaves: %d,%d\n",ev->size().width()%font_w,ev->size().height()%font_h);
   //printf("curren: %d,%d\n",width(),height());
