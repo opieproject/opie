@@ -39,5 +39,5 @@ TRANSLATIONS = ../../../i18n/de/oxygen.ts \
 	 ../../../i18n/sl/oxygen.ts \
 	 ../../../i18n/zh_CN/oxygen.ts \
 	 ../../../i18n/zh_TW/oxygen.ts \
-   	 ../../../i18n/it/oxygen.ts
-   	 ../../../i18n/dk/oxygen.ts
+   	 ../../../i18n/it/oxygen.ts \
+   	 ../../../i18n/da/oxygen.ts
