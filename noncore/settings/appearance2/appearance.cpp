@@ -380,6 +380,8 @@ Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
 	top-> addWidget ( m_sample, 1 );
 
     tw-> setCurrentTab ( styletab );
+    
+    m_style_changed = m_font_changed = m_color_changed = m_deco_changed = false;
 }
 
 Appearance::~Appearance()
@@ -388,12 +390,11 @@ Appearance::~Appearance()
 
 void Appearance::accept ( )
 {
-    Config config("qpe");
-    config.setGroup( "Appearance" );
-
-	int newtabstyle = m_tabstyle_list-> currentItem ( );
 	bool newtabpos = m_tabstyle_top-> isChecked ( );
+	int newtabstyle = m_tabstyle_list-> currentItem ( );
 
+    Config config ( "qpe" );
+    config. setGroup ( "Appearance" );
 
     if ( m_style_changed ) { 
 	    StyleListItem *item = (StyleListItem *) m_style_list-> item ( m_style_list-> currentItem ( ));
