@@ -25,6 +25,8 @@ HEADERS   = ofontmenu.h \
     pim/obackendfactory.h \
     pim/opimcache.h \ 
     pim/otodoaccessvcal.h \
+    pim/orecur.h \
+    orecurrancewidget.h
 #    pim/otodoaccesssql.h \
 
 SOURCES   = ofontmenu.cc  \
@@ -46,6 +48,8 @@ SOURCES   = ofontmenu.cc  \
              pim/ocontact.cpp \
              pim/ocontactaccess.cpp \
 	     pim/otodoaccessvcal.cpp \
+	     pim/orecur.cpp \
+	     orecurrancewidget.cpp
 #             pim/otodoaccesssql.cpp \
 
 TARGET    = opie
@@ -55,7 +59,7 @@ DESTDIR      = $(QTDIR)/lib$(PROJMAK)
 
 # LIBS            += -lopiesql
 
-INTERFACES      = otimepickerbase.ui
+INTERFACES      = otimepickerbase.ui oreccurancebase.ui
 
 TRANSLATIONS = ../i18n/de/libopie.ts \
    ../i18n/en/libopie.ts \
