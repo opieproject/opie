@@ -49,7 +49,7 @@ Verbindung beendet.</translation>
     </message>
     <message>
         <source>Waiting for server initialization...</source>
-        <translation type="unfinished"></translation>
+        <translation>Warte auf Server-Initialisierung...</translation>
     </message>
 </context>
 <context>
