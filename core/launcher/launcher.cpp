@@ -73,6 +73,10 @@
 #include "mediummountgui.h"
 //#define SHOW_ALL
 
+// uidGen
+
+// uidGen
+
 CategoryTabWidget::CategoryTabWidget( QWidget* parent ) :
     QVBox( parent )
 {
@@ -422,7 +426,9 @@ Launcher::Launcher( QWidget* parent, const char* name, WFlags fl )
     tabs = 0;
     rootFolder = 0;
     docsFolder = 0;
-    m_timeStamp = QDateTime::currentDateTime().toString();
+    int stamp = uidgen.generate();
+    uidgen.store( stamp );
+    m_timeStamp = QString::number( stamp  );
 
     tabs = new CategoryTabWidget( this );
     tabs->setMaximumWidth( qApp->desktop()->width() );
@@ -500,38 +506,57 @@ void Launcher::updateMimeTypes(AppLnkSet* folder)
 
 void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 {
+    qWarning("loading Documents" );
+    qWarning("The currentTimeStamp is: %s", m_timeStamp.latin1() );
     delete docsFolder;
     docsFolder = new DocLnkSet;
+    qWarning("new DocLnkSet" );
     // find out wich filesystems are new in this round
     // We will do this by having a timestamp inside each mountpoint
     // if the current timestamp doesn't match this is a new file system and 
     // come up with our MediumMountGui :) let the hacking begin
-    QString newStamp = QDateTime::currentDateTime().toString();
+    int stamp = uidgen.generate();
+    
+    QString newStamp = QString::number( stamp );
+    qWarning("new time stamp is: %s", newStamp.latin1() );
     StorageInfo storage;
     const QList<FileSystem> &fileSystems = storage.fileSystems();
+    qWarning("QList<FileSystem>" );
     QListIterator<FileSystem> it ( fileSystems );
+    qWarning("iterator initiliazed" );
     for ( ; it.current(); ++it ) {
+      qWarning("inside for loop" );
+      qWarning("checking device %s", (*it)->path().latin1() );
       if ( (*it)->isRemovable() ) { // let's find out  if we should search on it
+	qWarning("%s is removeable", (*it)->path().latin1() );
 	OConfig cfg( (*it)->path() + "/.opiestorage.cf");
 	cfg.setGroup("main");
 	QString stamp = cfg.readEntry("timestamp", QDateTime::currentDateTime().toString() );
 	if( stamp == m_timeStamp ){ // ok we know this card
+	  qWarning("time stamp match" );
 	  cfg.writeEntry("timestamp", newStamp );
 	  // we need to scan the list now. Hopefully the cache will be there
 	}else{ // come up with the gui
-	  MediumMountGui medium((*it)->path() + "/.opiestorage.cf" );
+	  qWarning("time stamp doesn't match" );
+	  MediumMountGui medium((*it)->path() );
+	  qWarning("medium mount gui created" );
 	  if( medium.check() ){
+	    qWarning("need to check this device" );
 	    if( medium.exec()  ){ //ok
 	      // speicher
+	      qWarning("execed" );
 	      cfg.writeEntry("timestamp", newStamp );
 	    }
 	  }else{
+	    qWarning("wrong :(" );
 	    // do something different see what we need to do
 	  }
 	} 
       }
     }
+    qWarning("findDocuments" );
     Global::findDocuments(docsFolder); // get rid of this call later
+    qWarning("done" );
     m_timeStamp = newStamp;
 }
 

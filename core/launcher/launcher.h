@@ -25,6 +25,7 @@
 #include <qstringlist.h>
 #include <qvbox.h>
 #include <qlist.h>
+#include <qpe/palmtopuidgen.h>
 #include "launcherview.h"
 
 class AppLnk;
@@ -132,6 +133,7 @@ private:
     bool got_lnk_change;
     QString lnk_change;
     QString m_timeStamp;
+    Qtopia::UidGen uidgen;
 };
 
 #endif // LAUNCHERVIEW_H

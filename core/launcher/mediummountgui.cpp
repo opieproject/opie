@@ -21,7 +21,7 @@
 
 
 MediumMountGui::MediumMountGui( const QString &path ,QWidget* parent,  const char* name, bool modal, WFlags fl )
-  : QDialog( parent, name, modal, fl ) {
+  : QDialog( parent, name, true ) {
  
 
   QWidget *d = QApplication::desktop();
@@ -39,7 +39,7 @@ void MediumMountGui::readConfig(){
 
   OConfig cfg (mediumPath +"/.opiestorage.cf");
   cfg.setGroup("main");
-  checkagain = cfg.readBoolEntry("check", false);
+  checkagain = cfg.readBoolEntry("check", true);
   
   cfg.setGroup("mimetypes");
   checkmimeaudio = cfg.readBoolEntry("audio", true);
