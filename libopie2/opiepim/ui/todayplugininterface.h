@@ -80,6 +80,12 @@ public:
      * widget for the today view
      * It _needs_ a parent here.
      * Plugin authors need to take parent as parent!
+     * 
+     * Note that you always need to create a new QWidget
+     * on this call and the ownership is transfered to the
+     * caller.
+     *
+     * @param The parent of your to be created widget
      */
     virtual QWidget* widget( QWidget *parent ) = 0;
 
@@ -92,8 +98,11 @@ public:
      * Config plugin widget - optional
      * If the plugin has a config widget, it  _needs_  a parent here.
      * may return 0 if no config widget is needed
+     *
+     * Note: Always create a new Widget on this call and ownership
+     * is transfered
      */
-    virtual TodayConfigWidget* configWidget( QWidget * ) = 0;
+    virtual TodayConfigWidget* configWidget( QWidget *parent ) = 0;
 
     /**
      * The application that should be assigned to the button (pixmap)

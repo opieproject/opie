@@ -16,7 +16,7 @@
  * @short base class of all today config widgets
  */
 class TodayConfigWidget : public QWidget {
-
+    Q_OBJECT
 
 public:
 
@@ -27,8 +27,8 @@ public:
      * @param parent The parent of the widget
      * @param name The name of the object
      */
-    TodayConfigWidget( QWidget *parent,  const char *name ) : QWidget( parent,  name ) {} ;
-    virtual ~TodayConfigWidget() {};
+    TodayConfigWidget( QWidget *parent,  const char *name = 0, WFlags fl = 0 );
+    virtual ~TodayConfigWidget();
 
     /**
      * Plugins need to reimplement this in the config widget
