@@ -27,6 +27,11 @@ public:
 
 protected:
 
+
+        private slots:
+    void startScan();
+
+
 };
 
 

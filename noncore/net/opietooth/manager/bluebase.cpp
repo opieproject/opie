@@ -17,6 +17,7 @@
  ***************************************************************************/
 
 #include "bluebase.h"
+#include "scandialog.h"
 
 #include <qframe.h>
 #include <qlabel.h>
@@ -38,6 +39,8 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     : BluetoothBase( parent, name, fl ) {
 
 
+    QObject::connect( (QObject*) PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan()));
+
     QPalette pal = this->palette();
     QColor col = pal.color(QPalette::Active, QColorGroup::Background);
     pal.setColor(QPalette::Active, QColorGroup::Button, col);
@@ -47,6 +50,11 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     this->setPalette(pal);
 }
 
+
+void BlueBase::startScan() {
+    Form3 *scan = new Form3( this, "", true);
+    scan->exec();
+}
 
 BlueBase::~BlueBase(){
 }
