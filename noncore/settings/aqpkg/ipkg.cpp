@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -111,7 +111,7 @@ void Ipkg :: runIpkg()
                 flags ^= MAKE_LINKS;
         }
     }
-    
+
 #ifdef X86
     commands << "-f";
     commands << IPKG_CONF;
@@ -127,7 +127,7 @@ void Ipkg :: runIpkg()
 
 
     if ( package != "" )
-        emit outputText( QString( "Dealing with package " ) + package );
+        emit outputText( tr( "Dealing with package %1" ).arg( package) );
 
     qApp->processEvents();
 
@@ -138,12 +138,12 @@ void Ipkg :: runIpkg()
         createLinks = false;
         if ( flags & MAKE_LINKS )
         {
-            emit outputText( QString( "Removing symbolic links...\n" ) );
+            emit outputText( tr( "Removing symbolic links...\n" ) );
             linkPackage( Utils::getPackageNameFromIpkFilename( package ), destination, destDir );
             emit outputText( QString( " " ) );
         }
     }
-    
+
     // Execute command
     dependantPackages = new QList<QString>;
     dependantPackages->setAutoDelete( true );
@@ -162,7 +162,7 @@ void Ipkg :: createSymLinks()
         if ( flags & MAKE_LINKS )
         {
             emit outputText( " " );
-            emit outputText( QString( "Creating symbolic links for " )+ package );
+            emit outputText( tr( "Creating symbolic links for %1." ).arg( package) );
 
             linkPackage( Utils::getPackageNameFromIpkFilename( package ), destination, destDir );
 
@@ -173,7 +173,7 @@ void Ipkg :: createSymLinks()
                 if ( *pkg == package )
                     continue;
                 emit outputText( " " );
-                emit outputText( QString( "Creating symbolic links for " )+ (*pkg) );
+                emit outputText( tr( "Creating symbolic links for %1" ).arg( *pkg ) );
                 linkPackage( Utils::getPackageNameFromIpkFilename( *pkg ), destination, destDir );
             }
         }
@@ -181,7 +181,7 @@ void Ipkg :: createSymLinks()
 
     delete dependantPackages;
 
-    emit outputText( "Finished" );
+    emit outputText( tr("Finished") );
     emit outputText( "" );
 }
 
@@ -195,19 +195,19 @@ void Ipkg :: removeStatusEntry()
     outStatusFile.append( ".tmp" );
 
     emit outputText( "" );
-    emit outputText( "Removing status entry..." );
-    QString tempstr = "status file - ";
+    emit outputText( tr("Removing status entry...") );
+    QString tempstr = tr("status file - ");
     tempstr.append( statusFile );
     emit outputText( tempstr );
-    tempstr = "package - ";
+    tempstr = tr("package - ");
     tempstr.append( package );
     emit outputText( tempstr );
-    
+
     ifstream in( statusFile );
     ofstream out( outStatusFile );
     if ( !in.is_open() )
     {
-        tempstr = "Couldn't open status file - ";
+        tempstr = tr("Couldn't open status file - ");
         tempstr.append( statusFile );
         emit outputText( tempstr );
         return;
@@ -215,7 +215,7 @@ void Ipkg :: removeStatusEntry()
 
     if ( !out.is_open() )
     {
-        tempstr = "Couldn't create tempory status file - ";
+        tempstr = tr("Couldn't create tempory status file - ");
         tempstr.append( outStatusFile );
         emit outputText( tempstr );
         return;
@@ -256,7 +256,7 @@ void Ipkg :: removeStatusEntry()
         lines.push_back( QString( line ) );
         out << line << endl;
 
-        // Improve UI responsiveness    
+        // Improve UI responsiveness
         i++;
         if ( ( i % 50 ) == 0 )
             qApp->processEvents();
@@ -267,13 +267,13 @@ void Ipkg :: removeStatusEntry()
     for ( it = lines.begin() ; it != lines.end() ; ++it )
     {
         out << (const char *)(*it) << endl;
-        
-        // Improve UI responsiveness    
+
+        // Improve UI responsiveness
         i++;
         if ( ( i % 50 ) == 0 )
             qApp->processEvents();
     }
-    
+
     in.close();
     out.close();
 
@@ -290,7 +290,7 @@ int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString /*option*/ )
         delete proc;
         proc = 0;
     }
-    
+
     // OK we're gonna use OProcess to run this thing
     proc = new OProcess();
     aborted = false;
@@ -305,7 +305,7 @@ int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString /*option*/ )
 
     connect(proc, SIGNAL(receivedStderr(OProcess *, char *, int)),
             this, SLOT(commandStderr(OProcess *, char *, int)));
-    
+
     for ( QStringList::Iterator it = cmd.begin(); it != cmd.end(); ++it )
     {
          *proc << (*it).latin1();
@@ -315,7 +315,7 @@ int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString /*option*/ )
     finished = false;
     if(!proc->start(OProcess::NotifyOnExit, OProcess::All))
     {
-        emit outputText( QString( "Couldn't start ipkg process" ) );
+        emit outputText( tr("Couldn't start ipkg process" ) );
     }
 }
 
@@ -346,7 +346,7 @@ void Ipkg::commandStdout(OProcess*, char *buffer, int buflen)
         // Ipkg should send this to STDERR, but doesn't - so trap here
         error = true;
     }
-    
+
     buffer[0] = '\0';
 }
 
@@ -368,7 +368,7 @@ void Ipkg::processFinished()
 
     if ( !error && option == "remove" )
         removeStatusEntry();
-    
+
     delete proc;
     proc = 0;
     finished = true;
@@ -386,77 +386,11 @@ void Ipkg :: abort()
     }
 }
 
-/*
-int Ipkg :: executeIpkgCommand( QString &cmd, const QString option )
-{
-    FILE *fp = NULL;
-    char line[130];
-    QString lineStr, lineStrOld;
-    int ret = false;
-
-    fp = popen( (const char *) cmd, "r");
-    if ( fp == NULL )
-    {
-        QString text;
-        text.sprintf( "Couldn't execute %s! See stdout for error code", (const char *)cmd );
-        emit outputText( text );
-    }
-    else
-    {
-        while ( fgets( line, sizeof line, fp) != NULL )
-        {
-            lineStr = line;
-            lineStr=lineStr.left( lineStr.length()-1 );
-
-            if ( lineStr != lineStrOld )
-            {
-                //See if we're finished
-                if ( option == "install" || option == "reinstall" )
-                {
-                    // Need to keep track of any dependant packages that get installed
-                    // so that we can create links to them as necessary
-                    if ( lineStr.startsWith( "Installing " ) )
-                    {
-                        int start = lineStr.find( " " ) + 1;
-                        int end = lineStr.find( " ", start );
-                        QString *package = new QString( lineStr.mid( start, end-start ) );
-                        dependantPackages->append( package );
-                    }
-                }
-
-                if ( option == "update" )
-                {
-                    if (lineStr.contains("Updated list"))
-                        ret = true;
-                }
-                else if ( option == "download" )
-                {
-                    if (lineStr.contains("Downloaded"))
-                        ret = true;
-                }
-                else
-                {
-                    if (lineStr.contains("Done"))
-                        ret = true;
-                }
-
-                emit outputText( lineStr );
-            }
-            lineStrOld = lineStr;
-            qApp->processEvents();
-        }
-        pclose(fp);
-    }
-
-    return ret;
-}
-*/
-
 void Ipkg :: linkPackage( const QString &packFileName, const QString &dest, const QString &destDir )
 {
     if ( dest == "root" || dest == "/" )
         return;
-        
+
     qApp->processEvents();
     QStringList *fileList = getList( packFileName, destDir );
     qApp->processEvents();
@@ -476,14 +410,14 @@ QStringList* Ipkg :: getList( const QString &packageFilename, const QString &des
     {
         // Couldn't open from dest, try from /
         f.close();
-        
+
         packageFileDir = "/usr/lib/ipkg/info/";
         packageFileDir.append( packageFilename );
         packageFileDir.append( ".list" );
         f.setName( packageFileDir );
         if ( ! f.open(IO_ReadOnly) )
         {
-            QString tempstr = "Could not open :";
+            QString tempstr = tr("Could not open :");
             tempstr.append( packageFileDir );
             emit outputText( tempstr );
             return (QStringList*)0;
@@ -528,12 +462,12 @@ void Ipkg :: processLinkDir( const QString &file, const QString &destDir, const 
 
     QString sourceFile = baseDir;
     sourceFile.append( file );
-    
+
     QString linkFile = destDir;
     if ( file.startsWith( "/" ) && destDir.right( 1 ) == "/" )
     {
         linkFile.append( file.mid( 1 ) );
-    }   
+    }
     else
     {
         linkFile.append( file );
@@ -548,7 +482,7 @@ void Ipkg :: processLinkDir( const QString &file, const QString &destDir, const 
             QFileInfo f( linkFile );
             if ( !f.exists() )
             {
-                QString tempstr = "Creating directory ";
+                QString tempstr = tr("Creating directory ");
                 tempstr.append( linkFile );
                 emit outputText( tempstr );
                 QDir d;
@@ -556,15 +490,14 @@ void Ipkg :: processLinkDir( const QString &file, const QString &destDir, const 
             }
 //            else
 //                emit outputText( QString( "Directory " ) + linkFile + " already exists" );
-            
+
         }
         else
         {
             int rc = symlink( sourceFile, linkFile );
-            text = (rc == 0 ? "Linked " : "Failed to link ");
-            text.append( sourceFile );
-            text.append( " to " );
-            text.append( linkFile );
+            text = ( rc == 0 ? tr( "Linked %1 to %2" ) : tr( "Failed to link %1 to %2" ) ).
+                    arg( sourceFile ).
+                    arg( linkFile );
             emit outputText( text );
         }
     }
@@ -578,8 +511,7 @@ void Ipkg :: processLinkDir( const QString &file, const QString &destDir, const 
                 QFile f( linkFile );
                 bool rc = f.remove();
 
-                text = (rc ? "Removed " : "Failed to remove ");
-                text.append( linkFile );
+                text = ( rc ? tr( "Removed %1" ) : tr( "Failed to remove %1" ) ).arg( linkFile );
                 emit outputText( text );
             }
             else if ( f.isDir() )
@@ -588,8 +520,7 @@ void Ipkg :: processLinkDir( const QString &file, const QString &destDir, const 
                 bool rc = d.rmdir( linkFile, true );
                 if ( rc )
                 {
-                    text = (rc ? "Removed " : "Failed to remove ");
-                    text.append( linkFile );
+                    text = ( rc ? tr( "Removed " ) : tr( "Failed to remove " ) ).arg( linkFile );
                     emit outputText( text );
                 }
             }

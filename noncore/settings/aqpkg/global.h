@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -30,7 +30,7 @@
 #ifndef __GLOBAL_H
 #define __GLOBAL_H
 
-#define VERSION_TEXT "AQPkg Version 1.11"
+//extern QString VERSION_TEXT;
 
 // Uncomment the below line to run on a Linux box rather than a Zaurus
 // box this allows you to change where root is, and where to load config files from

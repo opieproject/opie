@@ -1054,7 +1054,7 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
                 caption = tr( "Do you wish to remove or reinstall\n%1?" );
                 text = tr( "Remove or ReInstall" );
                 secondButton = tr( "ReInstall" );
-                secondOption = tr( "R" );
+                secondOption = "R"; // Internal action code, do not translate
             }
             else if ( val == 1 )
             {
@@ -1062,7 +1062,7 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
                 caption = tr( "Do you wish to remove or upgrade\n%1?" );
                 text = tr( "Remove or Upgrade" );
                 secondButton = tr( "Upgrade" );
-                secondOption = tr( "U" );
+                secondOption = "U"; // Internal action code, do not translate
             }
 
             // Sticky option not implemented yet, but will eventually allow
@@ -1071,8 +1071,6 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
             {
                 QString msgtext;
                 msgtext = caption.arg( ( const char * )name );
-//                switch( QMessageBox::information( this, text,
-//                        msgtext, tr( "Remove" ), secondButton ) )
                 QuestionDlg dlg( text, msgtext, secondButton );
                 switch( dlg.exec() )
                 {

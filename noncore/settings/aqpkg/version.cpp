@@ -23,7 +23,9 @@
 #include <ctype.h>
 #include <string.h>
 
-# define _(Text) Text
+#include <qobject.h>
+
+//# define _(Text) Text
 
 class versionrevision
 {
@@ -44,14 +46,14 @@ public:
         version = new char[(strlen(str)+1)];
         strcpy( version, str );
     }
-    
+
   unsigned long epoch;
   char *version;
   const char *revision;
   const char *familiar_revision;
-};  
+};
 
-static int verrevcmp(const char *val, const char *ref) 
+static int verrevcmp(const char *val, const char *ref)
 {
   int vc, rc;
   long vl, rl;
@@ -82,7 +84,7 @@ static int verrevcmp(const char *val, const char *ref)
 }
 
 int versioncompare(const struct versionrevision *version,
-                   const struct versionrevision *refversion) 
+                   const struct versionrevision *refversion)
 {
   int r;
 
@@ -95,7 +97,7 @@ int versioncompare(const struct versionrevision *version,
 
 int versionsatisfied3(const struct versionrevision *it,
                       const struct versionrevision *ref,
-                      const char *op) 
+                      const char *op)
 {
   int r;
   r= versioncompare(it,ref);
@@ -109,23 +111,26 @@ int versionsatisfied3(const struct versionrevision *it,
     return r > 0;
   if (strcmp(op, "=") == 0)
     return r == 0;
-  fprintf(stderr, "unknown operator: %s", op);
+//  fprintf(stderr, "unknown operator: %s", op);
 
   exit(1);
 }
 
-const char *parseversion(struct versionrevision *rversion, const char *string) 
+const char *parseversion(struct versionrevision *rversion, const char *string)
 {
   char *hyphen, *colon, *eepochcolon;
   unsigned long epoch;
 
-  if (!*string) return _("version string is empty");
-  
+  if ( !*string )
+    return QObject::tr( "Version string is empty." );
+
   colon= strchr(string,':');
   if (colon) {
     epoch= strtoul(string,&eepochcolon,10);
-    if (colon != eepochcolon) return _("epoch in version is not number");
-    if (!*++colon) return _("nothing after colon in version number");
+    if ( colon != eepochcolon )
+        return QObject::tr( "Epoch in version is not number." );
+    if ( !*++colon )
+        return QObject::tr( "Nothing after colon in version number." );
     string= colon;
     rversion->epoch= epoch;
   } else {
@@ -156,7 +161,7 @@ const char *parseversion(struct versionrevision *rversion, const char *string)
 	  rversion->version,
 	  rversion->revision,
 	  rversion->familiar_revision);
-*/  
+*/
   return 0;
 }
 
@@ -167,13 +172,13 @@ int compareVersions( const char *v1, const char *v2 )
 
   err = parseversion(&ref, v1);
   if (err) {
-    fprintf(stderr, "Invalid version `%s': %s\n", v2, err);
+//    fprintf(stderr, "Invalid version `%s': %s\n", v2, err);
     return -2;
   }
 
   err = parseversion(&ver, v2);
   if (err) {
-    fprintf(stderr, "Invalid version `%s': %s\n", v1, err);
+//    fprintf(stderr, "Invalid version `%s': %s\n", v1, err);
     return -2;
   }
 
@@ -186,7 +191,7 @@ int compareVersions( const char *v1, const char *v2 )
 }
 
 /*
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
   const char *err;
   versionrevision ver, ref;
@@ -201,7 +206,7 @@ int main(int argc, char *argv[])
     fprintf(stderr, "Invalid version `%s': %s\n", argv[1], err);
     return 2;
   }
-    
+
   err = parseversion(&ref, argv[3]);
   if (err) {
     fprintf(stderr, "Invalid version `%s': %s\n", argv[3], err);

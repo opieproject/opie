@@ -59,8 +59,8 @@ int main(int argc, char *argv[])
   QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::DisableSuspend;
 #endif
 
-  LOCAL_SERVER = QObject::tr("Installed packages");
-  LOCAL_IPKGS = QObject::tr("Local packages");
+  LOCAL_SERVER = QObject::tr( "Installed packages" );
+  LOCAL_IPKGS = QObject::tr( "Local packages" );
 
   MainWindow *win = new MainWindow();
   a.setMainWidget(win);
