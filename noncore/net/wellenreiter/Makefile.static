@@ -9,7 +9,7 @@
 MAKEFILE=	Makefile
 TMAKE	=	tmake
 
-SUBDIRS	=	libwellenreiter daemon gui
+SUBDIRS	=	libwellenreiter/source daemon/source gui
 
 all: $(SUBDIRS)
 

@@ -6,6 +6,6 @@ HEADERS         = wellenreiterbase.h wellenreiter.h scanlistitem.h scanlist.h lo
 SOURCES         = main.cpp wellenreiterbase.cpp wellenreiter.cpp scanlistitem.cpp scanlist.cpp logwindow.cpp hexwindow.cpp
 INCLUDEPATH     += $(OPIEDIR)/include ../daemon
 DEPENDPATH      += $(OPIEDIR)/include ../daemon
-LIBS            += -lqpe -lopie -L../libwellenreiter/source -lwellenreiter
+LIBS            += -lqpe -lopie -lwellenreiter
 INTERFACES      = wellenreitertemplate.ui
 TARGET          = wellenreiter

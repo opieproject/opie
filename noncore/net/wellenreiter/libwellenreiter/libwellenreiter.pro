@@ -1,9 +1,9 @@
 TEMPLATE = lib
 CONFIG -= moc
 CONFIG += debug
-
-HEADERS = cardmode.hh log.hh proto.hh sniff.hh sock.hh
-SOURCES = cardmode.cc log.cc proto.cc sniff.cc sock.cc
+VERSION = 0.1
+HEADERS = source/cardmode.hh source/log.hh source/proto.hh source/sniff.hh source/sock.hh
+SOURCES = source/cardmode.cc source/log.cc source/proto.cc source/sniff.cc source/sock.cc
 
 #INCLUDEPATH += ../ ../library
 #DEPENDPATH      += $(OPIEDIR)/include ../ ../library
@@ -11,5 +11,5 @@ SOURCES = cardmode.cc log.cc proto.cc sniff.cc sock.cc
 LIBS =
 TMAKE_CFLAGS += -D__UNIX__
 
-DESTDIR = $(OPIEDIR)/noncore/net/wellenreiter/libwellenreiter/source
+DESTDIR = $(QTDIR)/lib
 TARGET = wellenreiter
