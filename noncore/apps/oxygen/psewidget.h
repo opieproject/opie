@@ -34,7 +34,6 @@ class PSEWidget : public QWidget
         QGridLayout *bottom_grid;
         OxydataWidget *oxyDW;
 
-		void inverseColor( QString );
         QList<OxyFrame> PSEframe;
 
     private:
@@ -45,6 +44,7 @@ class PSEWidget : public QWidget
 
     public slots:
         void slotShowElement(QString);
+		void inverseColor( QString );
 
 };
 

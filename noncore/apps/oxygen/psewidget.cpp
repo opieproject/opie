@@ -44,6 +44,7 @@ PSEWidget::PSEWidget() : QWidget()
         PSEframe.current()->setMinimumHeight( 11 );
         PSEframe.current()->setPalette(  QPalette(  PSEColor( configobj.readEntry( "Block" )  ) ) );
         connect( PSEframe.current(), SIGNAL( num(QString) ), this, SLOT( slotShowElement(QString) ));
+        connect( PSEframe.current(), SIGNAL( num(QString) ), this, SLOT( inverseColor(QString) ));
     }
     
     oxyDW = new OxydataWidget(this);
@@ -66,7 +67,17 @@ QColor PSEWidget::PSEColor( QString block )
 
 void PSEWidget::inverseColor( QString number )
 {
-	//foo
+    Config configobj( QPEApplication::qpeDir() +"share/oxygen/oxygendata", Config::File );
+    configobj.setGroup(  number );
+	QString block = configobj.readEntry( "Block" );
+    QColor c;
+    if ( block == "s" ) c.setRgb( 213 , 233 , 231 );
+    else if ( block == "d" ) c.setRgb( 200,230,160 );
+    else if ( block == "p" ) c.setRgb( 238,146,138 );
+    else if ( block == "f" ) c.setRgb( 190 , 190 , 190 );
+	c.dark();
+
+	PSEframe.at( number.toUInt() )->setPalette(  QPalette( c ) );
 }
 
 void PSEWidget::slotShowElement(QString number)
