@@ -12,7 +12,11 @@
 //#define DEVELOPERS_VERSION
 
 #include "opieftp.h"
+
+extern "C" {
 #include "ftplib.h"
+}
+
 #include "inputDialog.h"
 
 #include <qpe/qpemenubar.h>
@@ -1232,6 +1236,8 @@ void OpieFtp::serverComboSelected(int index)
 
     username =  cfg.readEntry("Username", "anonymous");
     UsernameComboBox->lineEdit()->setText(username);
+
+//    qDebug("Password is "+cfg.readEntryCrypt(username, "me@opieftp.org"));
     PasswordEdit->setText(cfg.readEntryCrypt(username, "me@opieftp.org"));
 
     cfg.setGroup("Server");
