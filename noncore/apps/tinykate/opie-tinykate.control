@@ -5,3 +5,4 @@ Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
+Description: Kate for opie
