@@ -104,7 +104,7 @@
     </message>
     <message>
         <source>No Receiver specified</source>
-        <translation type="unfinished"></translation>
+        <translation>Nespecifikován příjemce</translation>
     </message>
 </context>
 <context>
@@ -383,7 +383,9 @@ pouze skupiny začínající filtrem.</translation>
         <source>Enter a filter string here.
 Then hit &quot;get newsgroup list&quot; again and only groups starting 
 with that filter will be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem zadejte řetězec filtru.
+Potom dejte znovu &quot;stáhnou seznam skupin&quot; a uvidíte pouze
+skupiny začínající tímto filtrem.</translation>
     </message>
 </context>
 <context>
@@ -543,15 +545,15 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>ask before downloading large mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeptat se před stažením velkých zpráv</translation>
     </message>
     <message>
         <source>Large mail size (kb):</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost velké zprávy (kb):</translation>
     </message>
     <message>
         <source> kB</source>
-        <translation type="unfinished"></translation>
+        <translation>kB</translation>
     </message>
 </context>
 <context>
@@ -742,7 +744,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>E-Mail by %1</source>
-        <translation type="unfinished">E-Mail podle %1</translation>
+        <translation>E-Mail podle %1</translation>
     </message>
 </context>
 <context>
@@ -789,7 +791,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>E-Mail view</source>
-        <translation type="unfinished"></translation>
+        <translation>E-Mail zobrazení</translation>
     </message>
 </context>
 <context>

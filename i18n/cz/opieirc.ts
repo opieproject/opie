@@ -61,15 +61,15 @@
     <name>IRCHistoryLineEdit</name>
     <message>
         <source>Next Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Další záložka</translation>
     </message>
     <message>
         <source>Previous Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Předchozí záložka</translation>
     </message>
     <message>
         <source>Close Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít záložku</translation>
     </message>
 </context>
 <context>
@@ -236,100 +236,101 @@
     </message>
     <message>
         <source>Server %1 version %2 supports usermodes &apos;%3&apos; and channelmodes &apos;%4&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Server %1 verze %2 podporuje uživ. režimy &apos;%3&apos; a kanálové režimy &apos;%4&apos;</translation>
     </message>
     <message>
         <source>There are %1 operators connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Je zde připojeno %1 operátorů</translation>
     </message>
     <message>
         <source>There are %1 unknown connection(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Je zde %1 neznámých připojení</translation>
     </message>
     <message>
         <source>There are %1 channels formed</source>
-        <translation type="unfinished"></translation>
+        <translation>Je zde zformováno %1 kanálů</translation>
     </message>
     <message>
         <source>Please wait a while and try again</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím chvíli počkejte a zkuste to znovu</translation>
     </message>
     <message>
         <source>Whois %1 (%2@%3)
 Real name: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Whois %1 (%2@%3)
+Skutečné jméno: %4</translation>
     </message>
     <message>
         <source>%1 is using server %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 používá server %2</translation>
     </message>
     <message>
         <source>%1 is on channels: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 je na kanálech: %2</translation>
     </message>
     <message>
         <source>Names for %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Jména pro %1: %2</translation>
     </message>
     <message>
         <source>Time on server %1 is %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas na serveru %1 je %2</translation>
     </message>
     <message>
         <source>Channel or nick %1 doesn&apos;t exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanál, nebo přezdívka %1 neexistuje</translation>
     </message>
     <message>
         <source>There is no history information for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Chybí zde informace historie pro %1</translation>
     </message>
     <message>
         <source>Unknown command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámý příkaz: %1</translation>
     </message>
     <message>
         <source>Can&apos;t change nick to %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze změnit přezdívku na %1: %2</translation>
     </message>
     <message>
         <source>You&apos;re not on channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejste na kanálu %1</translation>
     </message>
     <message>
         <source>[%1] Operation not permitted, you don&apos;t have enough channel privileges</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] Operace není povolena, nemáte dostatečná práva na kanálu</translation>
     </message>
     <message>
         <source>Connected to</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojeno k</translation>
     </message>
     <message>
         <source>%1 has been idle for %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 nic nedělá už %2</translation>
     </message>
     <message>
         <source>%1 signed on %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 přihlášen na %2</translation>
     </message>
     <message>
         <source>CTCP PING with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP PING s neznámou osobou - Rozsynchronizováno?</translation>
     </message>
     <message>
         <source>CTCP PING with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP PING s neznámým kanálem - Rozsynchronizováno?</translation>
     </message>
     <message>
         <source>CTCP PING with bad recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP PING se špatným příjemcem</translation>
     </message>
     <message>
         <source>Received a CTCP VERSION request from </source>
-        <translation type="unfinished"></translation>
+        <translation>Přijata CTCP VERSION žádost od</translation>
     </message>
     <message>
         <source>Malformed DCC request from </source>
-        <translation type="unfinished"></translation>
+        <translation>Zdeformovaná DCC žádost od</translation>
     </message>
 </context>
 <context>
@@ -501,22 +502,22 @@ a nezačínající na &apos;#&apos; nebo &apos;+&apos;</translation>
     </message>
     <message>
         <source>Connecting to</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojování k</translation>
     </message>
 </context>
 <context>
     <name>IRCSession</name>
     <message>
         <source>You are now known as %1</source>
-        <translation type="unfinished">Přejmenoval jste se na %1</translation>
+        <translation>Přejmenoval jste se na %1</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
-        <translation type="unfinished">Změna přezdívky neznámé osoby</translation>
+        <translation>Změna přezdívky neznámé osoby</translation>
     </message>
     <message>
         <source>%1 is now known as %2</source>
-        <translation type="unfinished">%1 se přejmenoval na %2</translation>
+        <translation>%1 se přejmenoval na %2</translation>
     </message>
 </context>
 <context>
@@ -599,11 +600,11 @@ a nezačínající na &apos;#&apos; nebo &apos;+&apos;</translation>
     </message>
     <message>
         <source>Display time in chat log</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit čas v chat logu</translation>
     </message>
     <message>
         <source>Keyboard Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Klávesové zkratky</translation>
     </message>
 </context>
 <context>
@@ -656,27 +657,27 @@ a nezačínající na &apos;#&apos; nebo &apos;+&apos;</translation>
     <name>QObject</name>
     <message>
         <source> User</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatel</translation>
     </message>
     <message>
         <source>Opie IRC</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie IRC</translation>
     </message>
     <message>
         <source> gives channel operator status to </source>
-        <translation type="unfinished"></translation>
+        <translation>dát stav operátora kanálu</translation>
     </message>
     <message>
         <source> removes channel operator status from </source>
-        <translation type="unfinished"></translation>
+        <translation>vzít stav operátora kanálu</translation>
     </message>
     <message>
         <source> gives voice to </source>
-        <translation type="unfinished"></translation>
+        <translation>dát hlas komu</translation>
     </message>
     <message>
         <source> removes voice from </source>
-        <translation type="unfinished"></translation>
+        <translation>vzít hlas komu</translation>
     </message>
 </context>
 </TS>

@@ -182,11 +182,11 @@ vybraný soubor?</translation>
     </message>
     <message>
         <source>Del</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo</translation>
     </message>
 </context>
 </TS>
