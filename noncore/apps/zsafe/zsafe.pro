@@ -1,6 +1,4 @@
-TEMPLATE     = app
-CONFIG       = qt warn_on 
-DESTDIR      = $(OPIEDIR)/bin
+CONFIG       = qt quick-app
 HEADERS      = zsafe.h krc2.h category.h categorylist.h zlistview.h \
                scqtfiledlg.h
 SOURCES      = main.cpp zsafe.cpp krc2.cpp category.cpp \
