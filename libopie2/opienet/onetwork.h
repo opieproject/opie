@@ -452,7 +452,7 @@ class OMonitoringInterface
 {
   public:
     OMonitoringInterface();
-    OMonitoringInterface( ONetworkInterface* );
+    OMonitoringInterface( ONetworkInterface*, bool _prismHeader );
     virtual ~OMonitoringInterface();
 
   public:
@@ -464,6 +464,7 @@ class OMonitoringInterface
 
   protected:
     OWirelessNetworkInterface* _if;
+    bool _prismHeader;
 
 };
 
@@ -476,7 +477,7 @@ class OMonitoringInterface
 class OCiscoMonitoringInterface : public OMonitoringInterface
 {
   public:
-    OCiscoMonitoringInterface( ONetworkInterface* );
+    OCiscoMonitoringInterface( ONetworkInterface*, bool _prismHeader );
     virtual ~OCiscoMonitoringInterface();
 
     virtual void setEnabled( bool );
@@ -492,7 +493,7 @@ class OCiscoMonitoringInterface : public OMonitoringInterface
 class OWlanNGMonitoringInterface : public OMonitoringInterface
 {
   public:
-    OWlanNGMonitoringInterface( ONetworkInterface* );
+    OWlanNGMonitoringInterface( ONetworkInterface*, bool _prismHeader );
     virtual ~OWlanNGMonitoringInterface();
 
   public:
@@ -509,7 +510,7 @@ class OWlanNGMonitoringInterface : public OMonitoringInterface
 class OHostAPMonitoringInterface : public OMonitoringInterface
 {
   public:
-    OHostAPMonitoringInterface( ONetworkInterface* );
+    OHostAPMonitoringInterface( ONetworkInterface*, bool _prismHeader );
     virtual ~OHostAPMonitoringInterface();
 
   public:
@@ -524,7 +525,7 @@ class OHostAPMonitoringInterface : public OMonitoringInterface
 class OOrinocoMonitoringInterface : public OMonitoringInterface
 {
   public:
-    OOrinocoMonitoringInterface( ONetworkInterface* );
+    OOrinocoMonitoringInterface( ONetworkInterface*, bool _prismHeader );
     virtual ~OOrinocoMonitoringInterface();
 
    public:

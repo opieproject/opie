@@ -71,7 +71,7 @@ OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* 
             break;
 
         default:
-            qWarning( "OPacket::OPacket(): Received Packet over unsupported datalink '%s'!", datalink );
+            qWarning( "OPacket::OPacket(): Received Packet over unsupported datalink (type %d)!", datalink );
     }
 }
 

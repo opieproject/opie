@@ -809,8 +809,8 @@ bool OWirelessNetworkInterface::wioctl( int call ) const
  * OMonitoringInterface
  *======================================================================================*/
 
-OMonitoringInterface::OMonitoringInterface( ONetworkInterface* iface )
-                      :_if( static_cast<OWirelessNetworkInterface*>( iface ) )
+OMonitoringInterface::OMonitoringInterface( ONetworkInterface* iface, bool prismHeader )
+                      :_if( static_cast<OWirelessNetworkInterface*>( iface ) ), _prismHeader( prismHeader )
 {
 }
 
@@ -845,8 +845,8 @@ void OMonitoringInterface::setEnabled( bool b )
  * OCiscoMonitoringInterface
  *======================================================================================*/
 
-OCiscoMonitoringInterface::OCiscoMonitoringInterface( ONetworkInterface* iface )
-                           :OMonitoringInterface( iface )
+OCiscoMonitoringInterface::OCiscoMonitoringInterface( ONetworkInterface* iface, bool prismHeader )
+                           :OMonitoringInterface( iface, prismHeader )
 {
     iface->setMonitoring( this );
 }
@@ -893,8 +893,8 @@ void OCiscoMonitoringInterface::setChannel( int )
  *======================================================================================*/
 
 
-OWlanNGMonitoringInterface::OWlanNGMonitoringInterface( ONetworkInterface* iface )
-                           :OMonitoringInterface( iface )
+OWlanNGMonitoringInterface::OWlanNGMonitoringInterface( ONetworkInterface* iface, bool prismHeader )
+                           :OMonitoringInterface( iface, prismHeader )
 {
     iface->setMonitoring( this );
 }
@@ -910,8 +910,10 @@ void OWlanNGMonitoringInterface::setEnabled( bool b )
     //FIXME: do nothing if its already in the same mode
 
     QString enable = b ? "true" : "false";
+    QString prism = _prismHeader ? "true" : "false";
     QString cmd;
-    cmd.sprintf( "$(which wlanctl-ng) %s lnxreq_wlansniff channel=%d enable=%s", (const char*) _if->name(), 1, (const char*) enable );
+    cmd.sprintf( "$(which wlanctl-ng) %s lnxreq_wlansniff channel=%d enable=%s prismheader=%s",
+                 (const char*) _if->name(), 1, (const char*) enable, (const char*) prism );
     system( cmd );
 }
 
@@ -932,8 +934,8 @@ void OWlanNGMonitoringInterface::setChannel( int )
  * OHostAPMonitoringInterface
  *======================================================================================*/
 
-OHostAPMonitoringInterface::OHostAPMonitoringInterface( ONetworkInterface* iface )
-                           :OMonitoringInterface( iface )
+OHostAPMonitoringInterface::OHostAPMonitoringInterface( ONetworkInterface* iface, bool prismHeader )
+                           :OMonitoringInterface( iface, prismHeader )
 {
     iface->setMonitoring( this );
 }
@@ -950,9 +952,11 @@ void OHostAPMonitoringInterface::setEnabled( bool b )
     //TODO: check wireless extensions version on runtime and use
     //TODO: SIOCSIWMODE( IW_MODE_MONITOR ) if running on WE >= 15
 
+    int monitorCode = _prismHeader ? 1 : 2;
+
     if ( b )
     {
-        _if->setPrivate( "monitor", 1, 2 );
+        _if->setPrivate( "monitor", 1, monitorCode );
     }
     else
     {
@@ -971,8 +975,8 @@ QString OHostAPMonitoringInterface::name() const
  * OOrinocoNetworkInterface
  *======================================================================================*/
 
-OOrinocoMonitoringInterface::OOrinocoMonitoringInterface( ONetworkInterface* iface )
-                           :OMonitoringInterface( iface )
+OOrinocoMonitoringInterface::OOrinocoMonitoringInterface( ONetworkInterface* iface, bool prismHeader )
+                           :OMonitoringInterface( iface, prismHeader )
 {
     iface->setMonitoring( this );
 }
@@ -985,7 +989,8 @@ OOrinocoMonitoringInterface::~OOrinocoMonitoringInterface()
 
 void OOrinocoMonitoringInterface::setChannel( int c )
 {
-    _if->setPrivate( "monitor", 2, 1, c );
+    int monitorCode = _prismHeader ? 1 : 2;
+    _if->setPrivate( "monitor", 2, monitorCode, c );
 }
 
 
