@@ -393,8 +393,8 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
      * to sync with QtopiaDesktop1.6
      */
         QCopEnvelope e( "QPE/Desktop", "versionInfo(QString,QString)" );
-            /* ### FIXME Architecture ### */
-        e << QString::fromLatin1("1.7") << "Uncustomized Device";
+        QString opiename = "Opie";
+        e << QString(QPE_VERSION) << opiename;
     } else if ( msg == "sendCardInfo()" ) {
 #ifndef QT_NO_COP
         QCopEnvelope e( "QPE/Desktop", "cardInfo(QString)" );
