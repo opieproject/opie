@@ -36,6 +36,7 @@ APPS=$(LOCALAPPS) core/addressbook calculator clock datebook \
     settings/sound \
     settings/systemtime \
     settings/mediummount \
+    settings/tabmanager \
     solitaire spreadsheet tetrix textedit \
     todo wordgame embeddedkonsole launcher sysinfo \
     parashoot snake citytime showimg netsetup core/wlansetup tableviewer \
@@ -74,3 +75,4 @@ lrelease:
 
 
 .PHONY: default dynamic $(NONTMAKEAPPS) $(LIBS) $(APPS) $(COMPONENTS) $(DOCS) single showcomponents clean
+AKEAPPS) $(LIBS) $(APPS) $(COMPONENTS) $(DOCS) single showcomponents clean
