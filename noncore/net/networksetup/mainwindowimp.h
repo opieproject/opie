@@ -18,14 +18,13 @@ public:
   ~MainWindowImp();
   
 private slots:
+  void getAllInterfaces();
+	
   void addClicked();
   void removeClicked();
   void configureClicked();
   void informationClicked();
   
-  void jobDone(KProcess *process);
-  void getInterfaceList();
- 
   void addProfile();
   void removeProfile();
   void changeProfile();

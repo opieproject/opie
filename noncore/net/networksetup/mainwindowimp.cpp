@@ -3,10 +3,7 @@
 #include "interfaceinformationimp.h"
 #include "interfacesetupimp.h"
 #include "interfaces.h"
-
 #include "module.h"
-
-#include "kprocess.h"
 
 #include <qpushbutton.h>
 #include <qlistbox.h>
@@ -28,8 +25,8 @@
 #include <qfile.h>
 #include <qtextstream.h>
 
-#define TEMP_ALL "/tmp/ifconfig-a"
-#define TEMP_UP "/tmp/ifconfig"
+#include <net/if.h>
+#include <sys/ioctl.h>
 
 #define DEFAULT_SCHEME "/var/lib/pcmcia/scheme"
 
@@ -46,9 +43,31 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));  
   // Load connections.
   loadModules(QPEApplication::qpeDir() + "/plugins/networksetup");
-  getInterfaceList();
+  getAllInterfaces();
+  
+  Interfaces i;
+  QStringList list = i.getInterfaceList();
+  QMap<QString, Interface*>::Iterator it;
+  for ( QStringList::Iterator ni = list.begin(); ni != list.end(); ++ni ) {
+    bool found = false;
+    for( it = interfaceNames.begin(); it != interfaceNames.end(); ++it ){
+      if(it.key() == (*ni))
+        found = true;
+    }
+    if(!found){
+      if(!(*ni).contains("_")){
+        Interface *i = new Interface(this, *ni, false);
+        i->setAttached(false);
+        i->setHardwareName("Disconnected");
+        interfaceNames.insert(i->getInterfaceName(), i);
+        updateInterface(i);
+        connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
+      }
+    }
+  }
+  
+  //getInterfaceList();
   connectionList->header()->hide();
-
 
   Config cfg("NetworkSetup");
   profiles = QStringList::split(" ", cfg.readEntry("Profiles", "All"));
@@ -65,8 +84,8 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
       QString line = stream.readLine();       // line of text excluding '\n'
       if(line.contains("SCHEME")){
         line = line.mid(7, line.length());
-	currentProfileLabel->setText(line);
-	break;
+        currentProfileLabel->setText(line);
+        break;
       }
     }
     file.close();
@@ -96,6 +115,72 @@ MainWindowImp::~MainWindowImp(){
     // I wonder why I can't delete the libraries
     // What fucking shit this is.
     //delete it.data();
+  }
+}
+
+/**
+ * Query the kernel for all of the interfaces.
+ */ 
+void MainWindowImp::getAllInterfaces(){
+  int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+  if(sockfd == -1)
+    return;
+  
+  char buf[8*1024];
+  struct ifconf ifc;
+  ifc.ifc_len = sizeof(buf);
+  ifc.ifc_req = (struct ifreq *) buf;
+  int result=ioctl(sockfd, SIOCGIFCONF, &ifc);
+
+  for (char* ptr = buf; ptr < buf + ifc.ifc_len; ){
+    struct ifreq *ifr =(struct ifreq *) ptr;
+    int len = sizeof(struct sockaddr);
+#ifdef  HAVE_SOCKADDR_SA_LEN
+    if (ifr->ifr_addr.sa_len > len)
+      len = ifr->ifr_addr.sa_len;    /* length > 16 */
+#endif
+    ptr += sizeof(ifr->ifr_name) + len;  /* for next one in buffer */
+
+    int flags;
+    struct sockaddr_in *sinptr;
+    Interface *i = NULL;
+    switch (ifr->ifr_addr.sa_family){
+      case AF_INET:
+        sinptr = (struct sockaddr_in *) &ifr->ifr_addr;
+        flags=0;
+
+        struct ifreq ifcopy;
+        ifcopy=*ifr;
+        result=ioctl(sockfd,SIOCGIFFLAGS,&ifcopy);
+        flags=ifcopy.ifr_flags;
+        i = new Interface(this, ifr->ifr_name, false);
+	i->setAttached(true);
+        if ((flags & IFF_UP) == IFF_UP)
+          i->setStatus(true);
+        else
+          i->setStatus(false);
+
+        if ((flags & IFF_BROADCAST) == IFF_BROADCAST)
+          i->setHardwareName("Ethernet");
+        else if ((flags & IFF_POINTOPOINT) == IFF_POINTOPOINT)
+          i->setHardwareName("Point to Point");
+        else if ((flags & IFF_MULTICAST) == IFF_MULTICAST)
+          i->setHardwareName("Multicast");
+        else if ((flags & IFF_LOOPBACK) == IFF_LOOPBACK)
+          i->setHardwareName("Loopback");
+        else
+          i->setHardwareName("Unknown");
+
+        interfaceNames.insert(i->getInterfaceName(), i);
+        updateInterface(i);
+        connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
+	break;
+
+      default:
+	qDebug(ifr->ifr_name);
+	qDebug(QString("%1").arg(ifr->ifr_addr.sa_family).latin1());
+        break;
+    }
   }
 }
 
@@ -183,10 +268,10 @@ void MainWindowImp::addClicked(){
     for( it = libraries.begin(); it != libraries.end(); ++it ){
       if(it.key()){
         Interface *i = (it.key())->addNewInterface(item->text(0));
-	if(i){
+        if(i){
           interfaceNames.insert(i->getInterfaceName(), i);
-	  updateInterface(i);
-	}
+          updateInterface(i);
+        }
       }
     }
   }
@@ -279,103 +364,6 @@ void MainWindowImp::informationClicked(){
   information->showMaximized();
   information->show();
 }
-
-/**
- * Aquire the list of active interfaces from ifconfig
- * Call ifconfig and ifconfig -a
- */ 
-void MainWindowImp::getInterfaceList(){
-  KShellProcess *processAll = new KShellProcess();
-  *processAll << "/sbin/ifconfig" << "-a" << " > " TEMP_ALL;
-  connect(processAll, SIGNAL(processExited(KProcess *)),
-          this, SLOT(jobDone(KProcess *)));
-  threads.insert(processAll, TEMP_ALL);
-
-  KShellProcess *process = new KShellProcess();
-  *process << "/sbin/ifconfig" << " > " TEMP_UP;
-  connect(process, SIGNAL(processExited(KProcess *)),
-          this, SLOT(jobDone(KProcess *)));
-  threads.insert(process, TEMP_UP);
-  
-  processAll->start(KShellProcess::NotifyOnExit);
-  process->start(KShellProcess::NotifyOnExit);
-}
-
-void MainWindowImp::jobDone(KProcess *process){
-  QString fileName = threads[process];
-  threads.remove(process);
-  delete process;
-
-  QFile file(fileName);
-  if (!file.open(IO_ReadOnly)){
-    qDebug(QString("MainWindowImp: Can't open file: %1").arg(fileName).latin1());
-    return;
-  }
-  
-  QTextStream stream( &file );
-  QString line;
-  while ( !stream.eof() ) {
-    line = stream.readLine();
-    int space = line.find(" ");
-    if(space > 1){
-      // We have found an interface
-      QString interfaceName = line.mid(0, space);
-      Interface *i;
-      // We have found an interface
-      //qDebug(QString("MainWindowImp: Found Interface: %1").arg(line).latin1());
-      // See if we already have it
-      if(interfaceNames.find(interfaceName) == interfaceNames.end()){
-	if(fileName == TEMP_ALL)
-          i = new Interface(this, interfaceName, false);
-        else
-          i = new Interface(this, interfaceName, true);
-        i->setAttached(true);
-
-        QString hardName = "Ethernet";
-        int hardwareName = line.find("Link encap:");
-        int macAddress = line.find("HWaddr");
-        if(macAddress == -1)
-          macAddress = line.length();
-        if(hardwareName != -1)
-          i->setHardwareName(line.mid(hardwareName+11, macAddress-(hardwareName+11)) );
-      
-        interfaceNames.insert(i->getInterfaceName(), i);
-        updateInterface(i);
-        connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
-      }
-      // It was an interface we already had.
-      else{
-        if(fileName != TEMP_ALL)
-          (interfaceNames[interfaceName])->setStatus(true);
-      }
-    }
-  }
-  file.close();
-  QFile::remove(fileName);
-  
-  if(threads.count() == 0){
-    Interfaces i;
-    QStringList list = i.getInterfaceList();
-    QMap<QString, Interface*>::Iterator it;
-    for ( QStringList::Iterator ni = list.begin(); ni != list.end(); ++ni ) {
-      bool found = false;
-      for( it = interfaceNames.begin(); it != interfaceNames.end(); ++it ){
-	if(it.key() == (*ni))
-	  found = true;
-      }
-      if(!found){
-        if(!(*ni).contains("_")){
-	  Interface *i = new Interface(this, *ni, false);
-	  i->setAttached(false);
-	  i->setHardwareName("Disconnected");
-	  interfaceNames.insert(i->getInterfaceName(), i);
-	  updateInterface(i);
-      	  connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
-	}
-      }
-    }
-  }
-} 
 
 /**
  * Update this interface.  If no QListViewItem exists create one.
@@ -495,7 +483,7 @@ void MainWindowImp::removeProfile(){
           }
         }
         interfaces.write();
-	break;
+        break;
       }
     }
   }
