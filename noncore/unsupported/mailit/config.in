@@ -1,0 +1,4 @@
+  config MAILIT
+    boolean "mailit"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) 
