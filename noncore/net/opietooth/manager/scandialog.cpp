@@ -117,6 +117,9 @@ namespace OpieTooth {
         progress->setProgress(0);
         progressStat = 0;
 
+        // empty list before a new scan
+        ListView1->clear();
+
         QCheckListItem  *deviceItem2 = new QCheckListItem( ListView1, "Test1", QCheckListItem::CheckBox );
         deviceItem2->setText(1, "BLAH" );
 

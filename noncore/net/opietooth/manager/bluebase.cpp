@@ -35,6 +35,7 @@
 #include <qlineedit.h>
 #include <qlistview.h>
 #include <qdir.h>
+#include <qpopupmenu.h>
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
@@ -52,16 +53,18 @@ namespace OpieTooth {
 
         connect( PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
         connect( configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
-        connect( ListView2, SIGNAL( expanded ( QListViewItem* ) ),
-                          this, SLOT( addServicesToDevice( QListViewItem * ) ) );
+        // not good since lib is async
+        //       connect( ListView2, SIGNAL( expanded ( QListViewItem* ) ),
+        //                  this, SLOT( addServicesToDevice( QListViewItem * ) ) );
         connect( ListView2, SIGNAL( clicked( QListViewItem* )),
                           this, SLOT( startServiceActionClicked( QListViewItem* ) ) );
+        connect( ListView2, SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int ) ),
+                 this,  SLOT(startServiceActionHold( QListViewItem *, const QPoint &, int) ) );
         connect( localDevice , SIGNAL( foundServices( const QString& , Services::ValueList ) ),
                 this, SLOT( addServicesToDevice( const QString& , Services::ValueList ) ) );
 
 
         //Load all icons needed
-
 
         offPix = Resource::loadPixmap( "editdelete" );
         onPix = Resource::loadPixmap( "installed" );
@@ -84,6 +87,7 @@ namespace OpieTooth {
 
         QListViewItem *topLV2 = new QListViewItem( ListView2, "Siemens S45" , "no" );
         topLV2->setPixmap( 1, onPix );
+        topLV2->setText(4,  "device" );
         (void) new QListViewItem( topLV2, "Serial"  );
         (void) new QListViewItem( topLV2, "BlueNiC" );
     }
@@ -251,6 +255,8 @@ namespace OpieTooth {
             }
 
             deviceItem->setText( 3, dev->mac() );
+            // what kind of entry is it.
+            deviceItem->setText( 4, "device");
 
             // ggf auch hier?
             addServicesToDevice( deviceItem );
@@ -271,6 +277,38 @@ namespace OpieTooth {
      */
     void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & point, int column ) {
 
+          QPopupMenu *menu = new QPopupMenu();
+          QPopupMenu *groups = new QPopupMenu();
+          int ret=0;
+
+          //QSize s = menu->sizeHint ( );
+
+          if ( item->text(4) == "device") {
+              menu->insertItem( tr("rescan sevices:"),  0);
+              menu->insertItem( tr("to group"), groups ,  1);
+              menu->insertItem( tr("delete"),  2);
+          } else if ( item->text(4) == "service") {
+              menu->insertItem( tr("Test1:"),  0);
+              menu->insertItem( tr("connect"), 1);
+              menu->insertItem( tr("delete"),  2);
+          }
+
+          ret = menu->exec( point  , 0);
+
+// noch differenzieren
+          switch(ret) {
+          case 0:
+              break;
+          case 1:
+              break;
+          case 2:
+              // delete childs too
+              delete item;
+              break;
+          }
+
+          delete menu;
+          delete groups;
     }
 
     /**
@@ -280,7 +318,7 @@ namespace OpieTooth {
     void BlueBase::addServicesToDevice( QListViewItem * item ) {
 
         qDebug("addServicesToDevice");
-        // row of mac adress
+        // row of mac adress text(3)
         RemoteDevice *device = new RemoteDevice( item->text(3),  item->text(0) );
 
         deviceList.insert( item->text(3) ,  item );
@@ -301,23 +339,40 @@ namespace OpieTooth {
 
         qDebug("fill services list");
 
-
         QMap<QString,QListViewItem*>::Iterator it;
 
         QListViewItem* deviceItem;
 
+        // get the right devices which requested the search
         for( it = deviceList.begin(); it != deviceList.end(); ++it ) {
             if ( it.key() == device ) {
                 deviceItem = it.data();
             }
         }
 
+
+        // empty entries
+        //  QListViewItem * myChild = deviceItem->firstChild();
+        //QList<QListViewItem*> tmpList;
+        //while( myChild ) {
+        //    tmpList.append(myChild);
+        //    myChild = myChild->nextSibling();
+        // }
+
+
         QValueList<OpieTooth::Services>::Iterator it2;
 
         QListViewItem * serviceItem;
 
-        for( it2 = servicesList.begin(); it2 != servicesList.end(); ++it2 ) {
-            serviceItem = new QListViewItem( deviceItem  ,  (*it2).serviceName()   );
+        if (!servicesList.isEmpty() ) {
+            // add services
+            for( it2 = servicesList.begin(); it2 != servicesList.end(); ++it2 ) {
+                serviceItem = new QListViewItem( deviceItem  ,  (*it2).serviceName()   );
+                serviceItem->setText(4, "service");
+            }
+        } else {
+            serviceItem = new QListViewItem( deviceItem  , tr("no services found")  );
+            serviceItem->setText(4, "service");
         }
     }
 

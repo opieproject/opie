@@ -71,7 +71,7 @@ namespace OpieTooth {
         void addServicesToDevice( const QString& device, Services::ValueList );
         void addConnectedDevices();
         void startServiceActionClicked( QListViewItem *item );
-        void startServiceActionHold( QListViewItem *item, const QPoint &point, int column);
+        void startServiceActionHold( QListViewItem *, const QPoint &, int );
         void applyConfigChanges();
 
     };
