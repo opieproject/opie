@@ -33,14 +33,19 @@ export LD_LIBRARY_PATH=$OPIEDIR/lib:$QTDIR/lib:$LD_LIBRARY_PATH
 
 You have to apply the qte<version>-all.patch to the Qt/Embedded
 sources and copy the qconfig-qpe.h file to $QTDIR/src/tools:
-cd $QTDIR; cat $OPIEDIR/qt/qte<version>*.patch | patch -p0
-cp $OPIEDIR/qt/qpe-config.h $QTDIR/src/tools
+cd $QTDIR; cat $OPIEDIR/qt/qte<version>*.patch | patch -p1
+cp $OPIEDIR/qt/qconfig-qpe.h $QTDIR/src/tools
 
 You are now ready to configure and build Qt/Embedded
 
 cd $QTDIR
 echo 'yes' | ./configure -qconfig qpe -depths 4,16,24,32 -system-jpeg -system-libpng -system-zlib -no-xft -qvfb
 make
+
+Note that the above command ( -qvfb ) compiles in the Virtual 
+Framebuffer and is mostly meant on your host system. For cross
+compiling you will need to use the -xplatform switch but call
+./configure --help to see your options.
 
 Once you have these compiled, be sure to set the PATH to ensure your (cross)compiler
 is available.
