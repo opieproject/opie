@@ -36,10 +36,11 @@
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/global.h>
-#include <qmenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
 
+#include <qmenubar.h>
 #include <qaction.h>
 #include <qfile.h>
 #include <qmessagebox.h>
@@ -601,9 +602,7 @@ void DrawPad::importPage()
 {
     ImportDialog importDialog(this);
 
-    importDialog.showMaximized();
-
-    if (importDialog.exec() == QDialog::Accepted) {
+    if ( QPEApplication::execDialog( &importDialog ) == QDialog::Accepted ) {
         const DocLnk* docLnk = importDialog.selected();
 
         if (docLnk) {
@@ -617,9 +616,7 @@ void DrawPad::exportPage()
 {
     ExportDialog exportDialog(m_pDrawPadCanvas->pagePosition(), m_pDrawPadCanvas->pageCount(), this);
 
-    exportDialog.showMaximized();
-
-    if (exportDialog.exec() == QDialog::Accepted) {
+    if ( QPEApplication::execDialog( &exportDialog ) == QDialog::Accepted ) {
         m_pDrawPadCanvas->exportPage(exportDialog.selectedFromPage(), exportDialog.selectedToPage(),
                                      exportDialog.selectedName(), exportDialog.selectedFormat());
     }
@@ -629,7 +626,7 @@ void DrawPad::thumbnailView()
 {
     ThumbnailView thumbnailView(this, m_pDrawPadCanvas, this);
 
-    thumbnailView.showMaximized();
+    QPEApplication::showWidget( &thumbnailView );
     thumbnailView.exec();
 }
 
