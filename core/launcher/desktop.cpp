@@ -39,7 +39,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/global.h>
 
-#ifdef QT_QWS_CUSTOM
+#if defined( QT_QWS_CUSTOM ) || defined( QT_QWS_IPAQ )
 #include <qpe/custom.h>
 #endif
 

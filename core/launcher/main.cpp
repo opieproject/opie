@@ -25,7 +25,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/network.h>
 #include <qpe/config.h>
-#ifdef QT_QWS_CUSTOM
+#if defined( QT_QWS_CUSTOM ) || defined( QT_QWS_IPAQ )
 #include <qpe/custom.h>
 #endif
 
