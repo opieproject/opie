@@ -39,7 +39,7 @@ Enclosure* EnclosureList::dupl(Enclosure *in)
 
 EmailHandler::EmailHandler()
 {
-	qDebug("EMailHandler::EmailHandler");
+  qDebug("EMailHandler::EmailHandler");
 
   smtpClient = new SmtpClient();
   popClient = new PopClient();
@@ -148,7 +148,7 @@ void EmailHandler::messageArrived(const QString &message, int id, uint size, boo
   emit mailArrived(mail, FALSE);
 }
 
-bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
+bool EmailHandler::parse(const QString &in, const QString &lineShift, Email *mail)
 {
   QString temp, boundary;
   int pos;
@@ -175,8 +175,10 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
   if ((body.at(body.length()-2) == '.') && (body.at(body.length()-3) == '\n'))
       body.truncate(body.length()-2);
   
-  TextParser p(header, lineShift);
-  
+  //  TextParser p(header, lineShift);
+  TextParser * lp = new TextParser(header, lineShift);
+#define p (*lp)
+
   if ((pos = p.find("FROM",':', 0, TRUE)) != -1) {
     pos++;
     if (p.separatorAt(pos) == ' ') {
@@ -204,21 +206,21 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
   //Search for To: after the FROM: attribute to prevent hitting the Delivered-To:
   while((pos = p.find("TO",':', pos+1, TRUE))!=-1)
   {
-  	QString rec;
-	
-  	if (p.separatorAt(pos-1)!='-')	//The - separator means that this is a Delivered-To: or Reply-To:
-	{
-		pos++;
-		mail->recipients.append(p.getString(&pos, '\r', TRUE));
-      	} 
+    QString rec;
+  
+    if (p.separatorAt(pos-1)!='-')  //The - separator means that this is a Delivered-To: or Reply-To:
+  {
+    pos++;
+    mail->recipients.append(p.getString(&pos, '\r', TRUE));
+        } 
   }
   //
   //if (pos==-1) mail->recipients.append (tr("undisclosed recipients") ); 
   
   if ((pos = p.find("CC",':', 0, TRUE)) != -1)
   {
-    	pos++;
-    	mail->carbonCopies.append (p.getString(&pos, 'z', TRUE) );
+      pos++;
+      mail->carbonCopies.append (p.getString(&pos, 'z', TRUE) );
   }
  
   if ((pos = p.find("SUBJECT",':', 0, TRUE)) != -1) {
@@ -270,6 +272,7 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
     if (boundary == "") {     //fooled by Mime-Version
       mail->body = body;
       mail->bodyPlain = body;
+     delete lp;
       return mail;
     }
     
@@ -338,6 +341,7 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
     mail->bodyPlain = body;
     mail->body = body;
   }
+  delete lp;
   return TRUE;
 }
 
@@ -440,8 +444,8 @@ int EmailHandler::encodeMime(Email *mail)
   Enclosure *ePtr;
   
   QString userName = mailAccount.name;
-  if (userName.length()>0)	//only embrace it if there is a user name
-  	userName += " <" + mailAccount.emailAddress + ">";
+  if (userName.length()>0)  //only embrace it if there is a user name
+    userName += " <" + mailAccount.emailAddress + ">";
   
   //add standard headers
   newBody = "From: " + userName + "\r\nTo: ";
@@ -510,7 +514,7 @@ int EmailHandler::encodeMime(Email *mail)
   return 0;
 }
 
-int EmailHandler::encodeFile(QString fileName, QString *toBody)
+int EmailHandler::encodeFile(const QString &fileName, QString *toBody)
 {
   char *fileData;
   char *dataPtr;

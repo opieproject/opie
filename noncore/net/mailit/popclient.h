@@ -35,8 +35,8 @@ class PopClient: public QObject
 public:
   PopClient();
   ~PopClient();
-  void newConnection(QString target, int port);
-  void setAccount(QString popUser, QString popPasswd);
+  void newConnection(const QString &target, int port);
+  void setAccount(const QString &popUser, const QString &popPasswd);
   void setSynchronize(int lastCount);
   void removeSynchronize();
   void headersOnly(bool headers, int limit);

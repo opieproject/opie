@@ -23,36 +23,36 @@
 #include <qobject.h>
 #include <qlist.h>
 
-struct Contact
+struct AContact
 {
-	QString email;
-	QString name;
+  QString email;
+  QString name;
 };
 
 class AddressList : public QObject
 {
-	Q_OBJECT
+  Q_OBJECT
 
 public:
-	AddressList();
-	~AddressList();
-	void addContact(QString email, QString name);
-	bool containsEmail(QString email);
-	bool containsName(QString name);
-	QString getNameByEmail(QString email);
-	QString getEmailByName(QString name);
-	QList<Contact>* getContactList();
+  AddressList();
+  ~AddressList();
+  void addContact(const QString &email, const QString &name);
+  bool containsEmail(const QString &email);
+  bool containsName(const QString &name);
+  QString getNameByEmail(const QString &email);
+  QString getEmailByName(const QString &name);
+  QList<AContact>* getContactList();
 
 private:
-	int getEmailRef(QString email);
-	int getNameRef(QString name);
-	QString getRightString(QString in);
-	void read();
+  int getEmailRef(const QString &email);
+  int getNameRef(const QString &name);
+  QString getRightString(const QString &in);
+  void read();
 
 private:
-	QList<Contact> addresses;
-	QString filename;
-	bool dirty;
+  QList<AContact> addresses;
+  QString filename;
+  bool dirty;
 };
 
 #endif

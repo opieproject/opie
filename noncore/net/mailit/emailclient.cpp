@@ -365,7 +365,7 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
   Enclosure *ePtr;
   Email newMail;
   int thisMailId;
-  emailHandler->parse(mail.rawMail, lineShift, &newMail);
+  emailHandler->parse( mail.rawMail, lineShift, &newMail);
   mailconf->setGroup(newMail.id);
   
   if (fromDisk) 
@@ -461,17 +461,18 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
       if (mailPtr->id == newMail.id) {
         item->setMail(newMail);
         emit mailUpdated(item->getMail());
-      	found = true;
+        found = true;
       }
       item = (EmailListItem *) item->nextSibling();
     }
   }
-  if ((!found)||(fromDisk)) item = new EmailListItem(inboxView, newMail, TRUE);
-  
-  if (item->getMail()->files.count()>0)
-  {
-	item->setPixmap(0, Resource::loadPixmap("mailit/attach"));
-  }  
+  if ((!found)||(fromDisk)) {
+     item = new EmailListItem(inboxView, newMail, TRUE);
+  }
+//        if (item->getMail()->files.count()>0)
+//        {
+//        item->setPixmap(0, Resource::loadPixmap("mailit/attach"));
+//        }  
     /*if (!newMail.downloaded)
       mailDownloadList.sizeInsert(newMail.serverId, newMail.size);*/
   
@@ -642,7 +643,7 @@ void EmailClient::readMail()
   }
 }
 
-void EmailClient::saveMail(QString fileName, QListView *view)
+void EmailClient::saveMail(const QString &fileName, QListView *view)
 {
   QFile f(fileName);
   Email *mail;
@@ -712,7 +713,7 @@ void EmailClient::readSettings()
       account.synchronize = (mailconf->readEntry("Synchronize","No")=="Yes");
       if (account.synchronize)
       {
-    	mailconf->readNumEntry("LASTSERVERMAILCOUNT",0); 
+      mailconf->readNumEntry("LASTSERVERMAILCOUNT",0); 
       }
       
       accountList.append(&account);
@@ -915,32 +916,32 @@ void EmailClient::setDownloadedSize(int size)
 
 void EmailClient::deleteItem()
 {
-	bool inbox=mailboxView->currentTab()==0;
-	QListView* box;
-	
-	EmailListItem* eli;
-	int pos;
-		
-	inbox ? box=inboxView : box=outboxView;
-	
-	eli=(EmailListItem*)box->selectedItem();
-	
-	if (eli)
-	{
-		box->setSelected(eli->itemBelow(),true);	//select the previous item
-		
-		deleteMail(eli,(bool&)inbox);		//remove mail entry
-	}
+  bool inbox=mailboxView->currentTab()==0;
+  QListView* box;
+  
+  EmailListItem* eli;
+  int pos;
+    
+  inbox ? box=inboxView : box=outboxView;
+  
+  eli=(EmailListItem*)box->selectedItem();
+  
+  if (eli)
+  {
+    box->setSelected(eli->itemBelow(),true);  //select the previous item
+    
+    deleteMail(eli,(bool&)inbox);   //remove mail entry
+  }
 }
 
 void EmailClient::inboxItemPressed()
 {
-//	timerID=startTimer(500);
+//  timerID=startTimer(500);
 }
 
 void EmailClient::inboxItemReleased()
 {
-  //	killTimer(timerID);
+  //  killTimer(timerID);
 }
 
 /*void EmailClient::timerEvent(QTimerEvent *e)
@@ -965,72 +966,72 @@ void EmailClient::inboxItemReleased()
 
 Email* EmailClient::getCurrentMail()
 {
-	EmailListItem *eli=(EmailListItem* ) (inboxView->selectedItem());
-	if (eli!=NULL)
-		return eli->getMail();
-	else
-		return NULL;
+  EmailListItem *eli=(EmailListItem* ) (inboxView->selectedItem());
+  if (eli!=NULL)
+    return eli->getMail();
+  else
+    return NULL;
 }
   
 void EmailClient::download(Email* mail)
 {
-	MailAccount* acc=0;
-	
-	tempMailDownloadList.clear();
-	tempMailDownloadList.sizeInsert(mail->serverId, mail->size);
-	
-	acc=accountList.at(mail->fromAccountId-1);
-	if (acc)
-	{ 
-		emailHandler->setAccount(*acc);
-		emailHandler->getMailByList(&tempMailDownloadList);
-	}
-	else 
-		QMessageBox::warning(qApp->activeWindow(),
-      		tr("No account associated"), tr("There is no active account \nassociated to this mail\n it can not be downloaded"), "Abort\n");
+  MailAccount* acc=0;
+  
+  tempMailDownloadList.clear();
+  tempMailDownloadList.sizeInsert(mail->serverId, mail->size);
+  
+  acc=accountList.at(mail->fromAccountId-1);
+  if (acc)
+  { 
+    emailHandler->setAccount(*acc);
+    emailHandler->getMailByList(&tempMailDownloadList);
+  }
+  else 
+    QMessageBox::warning(qApp->activeWindow(),
+          tr("No account associated"), tr("There is no active account \nassociated to this mail\n it can not be downloaded"), "Abort\n");
 }
 
 void EmailClient::receive(const QCString& msg, const QByteArray& data)
 {
-	/*if (msg=="getMail()")
-	{
-		/*QDialog qd(qApp->activeWindow(),"Getting mail",true);
-		QVBoxLayout *vbProg = new QVBoxLayout( &qd );
-	
-		initStatusBar(&qd);
-		
-		if (statusBar==0)
-		{
-			qDebug("No Bar ...");
-			//statusBar=new ProgressBar(&qd);
-		}
-		statusBar->show();
-		vbProg->addWidget(statusBar);
-		qd.showMaximized();
-		qd.show();
-		emit getAllNewMail();
-		//qd.exec();
-	}
-	else if (msg=="compose()")
-	{	
-		QDialog qd(qApp->activeWindow(),"Getting mail",true);
-		
-		WriteMail wm(&qd,"write new mail");
-		QVBoxLayout vbProg( &qd );
-		
-		wm.showMaximized();
-		vbProg.addWidget(&wm);
-		
-		qd.showMaximized();
-		
-		emit composeRequested();
-		qd.exec();
-		
-		QMessageBox::warning(qApp->activeWindow(),tr("Info"), tr("Info"), "OK\n");
-	}
-		
-	else if (msg=="dialog()")
-	{
-	    QMessageBox::warning(qApp->activeWindow(),tr("Info"), tr("Info"), "OK\n");
-	}*/
+  /*if (msg=="getMail()")
+  {
+    /*QDialog qd(qApp->activeWindow(),"Getting mail",true);
+    QVBoxLayout *vbProg = new QVBoxLayout( &qd );
+  
+    initStatusBar(&qd);
+    
+    if (statusBar==0)
+    {
+      qDebug("No Bar ...");
+      //statusBar=new ProgressBar(&qd);
+    }
+    statusBar->show();
+    vbProg->addWidget(statusBar);
+    qd.showMaximized();
+    qd.show();
+    emit getAllNewMail();
+    //qd.exec();
+  }
+  else if (msg=="compose()")
+  { 
+    QDialog qd(qApp->activeWindow(),"Getting mail",true);
+    
+    WriteMail wm(&qd,"write new mail");
+    QVBoxLayout vbProg( &qd );
+    
+    wm.showMaximized();
+    vbProg.addWidget(&wm);
+    
+    qd.showMaximized();
+    
+    emit composeRequested();
+    qd.exec();
+    
+    QMessageBox::warning(qApp->activeWindow(),tr("Info"), tr("Info"), "OK\n");
+  }
+    
+  else if (msg=="dialog()")
+  {
+      QMessageBox::warning(qApp->activeWindow(),tr("Info"), tr("Info"), "OK\n");
+  }*/
 }

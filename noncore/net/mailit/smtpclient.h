@@ -30,46 +30,46 @@
 
 struct RawEmail
 {
-	QString from;
-	QString subject;
-	QStringList to;
-	QString body;
+  QString from;
+  QString subject;
+  QStringList to;
+  QString body;
 };
 
 class SmtpClient: public QObject
 {
-	Q_OBJECT
-	
+  Q_OBJECT
+  
 public:
-	SmtpClient();
-	~SmtpClient();
-	void newConnection(QString target, int port);
-	void addMail(QString from, QString subject, QStringList to, QString body);
+  SmtpClient();
+  ~SmtpClient();
+  void newConnection(const QString &target, int port);
+  void addMail(const QString &from, const QString &subject, const QStringList &to, const QString &body);
 
 signals:
-	void errorOccurred(int);
-	void updateStatus(const QString &);
-	void mailSent();
-	
+  void errorOccurred(int);
+  void updateStatus(const QString &);
+  void mailSent();
+  
 public slots:
-	void errorHandling(int);
+  void errorHandling(int);
 
 protected slots:
-	void connectionEstablished();
-	void incomingData();
-	
+  void connectionEstablished();
+  void incomingData();
+  
 private:
-	QSocket *socket;
-	QTextStream *stream;
-	enum transferStatus
-	{
-		Init, From, Recv, MRcv, Data, Body, Quit, Done
-	};
-	int status;
-	QList<RawEmail> mailList;
-	RawEmail *mailPtr;
-	bool sending;
-	QStringList::Iterator it;
+  QSocket *socket;
+  QTextStream *stream;
+  enum transferStatus
+  {
+    Init, From, Recv, MRcv, Data, Body, Quit, Done
+  };
+  int status;
+  QList<RawEmail> mailList;
+  RawEmail *mailPtr;
+  bool sending;
+  QStringList::Iterator it;
 };
 
 #endif

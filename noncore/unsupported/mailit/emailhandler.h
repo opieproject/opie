@@ -37,114 +37,114 @@
 
 struct Enclosure
 {
-	int id;
-	QString originalName;
-	QString name;
-	QString path;
-	QString contentType;
-	QString contentAttribute;
-	QString encoding;
-	QString body;			//might use to much mem. check!!
-	bool saved, installed;
+  int id;
+  QString originalName;
+  QString name;
+  QString path;
+  QString contentType;
+  QString contentAttribute;
+  QString encoding;
+  QString body;     //might use to much mem. check!!
+  bool saved, installed;
 };
 
 class EnclosureList : public QList<Enclosure>
 {
 public:
-	Item newItem(Item d);
+  Item newItem(Item d);
 private:
-	Enclosure* dupl(Enclosure *in);
-	Enclosure *ac;
+  Enclosure* dupl(Enclosure *in);
+  Enclosure *ac;
 };
 
 struct Email
 {
-	QString id;
-	QString from;
-	QString fromMail;
-	QStringList recipients;
-	QStringList carbonCopies;
-	QString date;
-	QString subject;
-	QString body;
-	QString bodyPlain;
-	bool sent, received, read, downloaded;
-	QString rawMail;
-	int mimeType;					//1 = Mime 1.0
-	int serverId;
-	int internalId;
-	int fromAccountId;
-	QString contentType;				//0 = text
-	QString contentAttribute;			//0 = plain, 1 = html
-	EnclosureList files;
-	uint size;
-	
-	void addEnclosure(Enclosure *e)
-	{
-		files.append(e);
-	}
+  QString id;
+  QString from;
+  QString fromMail;
+  QStringList recipients;
+  QStringList carbonCopies;
+  QString date;
+  QString subject;
+  QString body;
+  QString bodyPlain;
+  bool sent, received, read, downloaded;
+  QString rawMail;
+  int mimeType;         //1 = Mime 1.0
+  int serverId;
+  int internalId;
+  int fromAccountId;
+  QString contentType;        //0 = text
+  QString contentAttribute;     //0 = plain, 1 = html
+  EnclosureList files;
+  uint size;
+  
+  void addEnclosure(Enclosure *e)
+  {
+    files.append(e);
+  }
 };
 
 struct MailAccount
 {
-	QString accountName;
-	QString name;
-	QString emailAddress;
-	QString popUserName;
-	QString popPasswd;
-	QString popServer;
-	QString smtpServer;
-	bool synchronize;
-	int syncLimit;
-	int lastServerMailCount;
-	int id;
+  QString accountName;
+  QString name;
+  QString emailAddress;
+  QString popUserName;
+  QString popPasswd;
+  QString popServer;
+  QString smtpServer;
+  bool synchronize;
+  int syncLimit;
+  int lastServerMailCount;
+  int id;
 };
 
-	const int ErrUnknownResponse = 1001;
-	const int ErrLoginFailed = 1002;
-	const int ErrCancel = 1003;
-	
+  const int ErrUnknownResponse = 1001;
+  const int ErrLoginFailed = 1002;
+  const int ErrCancel = 1003;
+  
 
 class EmailHandler : public QObject
 {
-	Q_OBJECT
+  Q_OBJECT
 
 public:
-	EmailHandler();
-	void setAccount(MailAccount account);
-	MailAccount* getAccount(){return &mailAccount;}
-	void sendMail(QList<Email> *mailList);
-	void getMail();
-	void getMailHeaders();
-	void getMailByList(MailList *mailList);
-	bool parse(QString in, QString lineShift, Email *mail);
-	bool getEnclosure(Enclosure *ePtr);
-	int parse64base(char *src, char *dest);
-	int encodeMime(Email *mail);
-	int encodeFile(QString fileName, QString *toBody);
-	void encode64base(char *src, QString *dest, int len);
-	void cancel();
-	
+  EmailHandler();
+  void setAccount(MailAccount account);
+  MailAccount* getAccount(){return &mailAccount;}
+  void sendMail(QList<Email> *mailList);
+  void getMail();
+  void getMailHeaders();
+  void getMailByList(MailList *mailList);
+  bool parse(const QString &in, const QString &lineShift, Email *mail);
+  bool getEnclosure(Enclosure *ePtr);
+  int parse64base(char *src, char *dest);
+  int encodeMime(Email *mail);
+  int encodeFile(const QString &fileName, QString *toBody);
+  void encode64base(char *src, QString *dest, int len);
+  void cancel();
+  
 signals:
-	void mailSent();
-	void smtpError(int);
-	void popError(int);
-	void mailArrived(const Email &, bool);
-	void updatePopStatus(const QString &);
-	void updateSmtpStatus(const QString &);
-	void mailTransfered(int);
-	void mailboxSize(int);
-	void currentMailSize(int);
-	void downloadedSize(int);
+  void mailSent();
+  void smtpError(int);
+  void popError(int);
+  void mailArrived(const Email &, bool);
+  void updatePopStatus(const QString &);
+  void updateSmtpStatus(const QString &);
+  void mailTransfered(int);
+  void mailboxSize(int);
+  void currentMailSize(int);
+  void downloadedSize(int);
 
 public slots:
-	void messageArrived(const QString &, int id, uint size, bool complete);
-	
+  void messageArrived(const QString &, int id, uint size, bool complete);
+  
 private:
-	MailAccount mailAccount;
-	SmtpClient *smtpClient;
-	PopClient *popClient;
-	bool headers;
+  MailAccount mailAccount;
+  SmtpClient *smtpClient;
+  PopClient *popClient;
+  bool headers;
 };
 
 #endif

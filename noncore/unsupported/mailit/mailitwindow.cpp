@@ -122,25 +122,25 @@ void MailItWindow::viewMail(QListView *view, Email *mail)
   
   if ((mail->received)&&(!mail->downloaded))
   {   
-  	QMessageBox mb( tr("Mail not downloaded"),
+    QMessageBox mb( tr("Mail not downloaded"),
                     tr("The mail you have clicked \n"
-		    "has not been downloaded yet.\n "
-		    "Would you like to do it now ?"),
+        "has not been downloaded yet.\n "
+        "Would you like to do it now ?"),
                     QMessageBox::Information,
                     QMessageBox::Yes | QMessageBox::Default,
                     QMessageBox::No | QMessageBox::Escape,0 );
-		 
-	result=mb.exec();
-	
-	if (result==QMessageBox::Yes)
-	{
-		emailClient->download(mail);
-	}
+     
+  result=mb.exec();
+  
+  if (result==QMessageBox::Yes)
+  {
+    emailClient->download(mail);
+  }
   }
   
   readMail->update(view, mail);
   views->raiseWidget(readMail);
-  setCaption( tr( "Examine mail"  ) );
+  setCaption( tr( "Read Mail"  ) );
 }
 
 void MailItWindow::updateMailView(Email *mail)
