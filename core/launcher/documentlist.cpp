@@ -390,7 +390,7 @@ void DocumentList::DiffAppLnks()
     it1 = appLnkSet->children();
     found = false;
     while ( (i=it1.current()) ){
-        if (strcmp(i->name().ascii(),j->name().ascii()) == 0)
+        if (j->name().ascii() && i->name().ascii() && strcmp(i->name().ascii(),j->name().ascii()) == 0)
         found = true;
         ++it1;
     }
@@ -406,7 +406,7 @@ void DocumentList::DiffAppLnks()
     it2 = appLnkSet2->children();
     found = false;
     while ( (j=it2.current()) ){
-        if (strcmp(i->name().ascii(),j->name().ascii()) == 0)
+        if (j->name().ascii() && i->name().ascii() && strcmp(i->name().ascii(),j->name().ascii()) == 0)
         found = true;
         ++it2;
     }
