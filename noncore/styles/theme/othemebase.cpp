@@ -277,6 +277,7 @@ void OThemeBase::readConfig( Qt::GUIStyle /*style*/ )
 //	printf ( "Opened config file: %s\n", ( configFilePath + "/themes/" + configFileName + ".themerc" ). ascii());
 
 	// Are we initalized?
+	applyMiscResourceGroup( &config );
 	for ( i = 0; i < INHERIT_ITEMS; ++i ) {
 		applyResourceGroup( &config, i, copyfrom, pixnames, brdnames );		
 //		printf ( "%d [%s]: copy=%s, pix=%s, brd=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1() );
@@ -295,7 +296,6 @@ void OThemeBase::readConfig( Qt::GUIStyle /*style*/ )
 		applyResourceGroup( &config, i, copyfrom, pixnames, brdnames );
 //		printf ( "%d [%s]: copy=%s, pix=%s, brd=%s\n", i, widgetEntries [i], copyfrom [i].latin1(), pixnames[i].latin1(),brdnames[i].latin1() );
 	}
-	applyMiscResourceGroup( &config );
 
 	// initalize defaults that may not be read
 	for ( i = 0; i < WIDGETS; ++i )
