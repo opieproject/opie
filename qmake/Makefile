@@ -1,4 +1,3 @@
-TOPDIR=$(shell pwd)
 QMAKESPECSDIR=$(OPIEDIR)/mkspecs
 
 ########################################################################
@@ -21,8 +20,8 @@ QOBJS=qstring.o qtextstream.o qiodevice.o qglobal.o qgdict.o qcstring.o \
 
 CFLAGS=  \
 	-I. -Igenerators -Igenerators/unix -Igenerators/win32 -Igenerators/mac \
-	-I$(TOPDIR)/include -I$(TOPDIR)/include/qmake -I$(QMAKESPECSDIR)/default \
-	-I$(TOPDIR)/include/private \
+	-I$(OPIEDIR)/qmake/include -I$(OPIEDIR)/qmake/include/qmake -I$(QMAKESPECSDIR)/default \
+	-I$(OPIEDIR)/qmake/include/private \
 	-DQT_NO_TEXTCODEC -DQT_LITE_COMPONENT -DQT_NO_STL -DQT_NO_COMPRESS -I$(QMAKESPECSDIR)/qws/linux-x86-g++
 CXXFLAGS= $(CFLAGS)
 LFLAGS=
@@ -36,7 +35,7 @@ install: qmake
 	[ -d $(INSTALL_ROOT)$(QTDIR)/bin ] || mkdir -p $(INSTALL_ROOT)$(QTDIR)/bin
 	-cp -f $(QTDIR)/bin/qmake $(INSTALL_ROOT)$(QTDIR)/bin
 	[ -d $(INSTALL_ROOT)$(QTDIR) ] || mkdir -p $(INSTALL_ROOT)$(QTDIR)
-	-cp -r -f $(QMAKESPECDIR) $(INSTALL_ROOT)$(QTDIR)
+	-cp -r -f $(QMAKESPECSDIR) $(INSTALL_ROOT)$(QTDIR)
 
 clean::
 	rm -f $(OBJS) $(QOBJS)
@@ -45,80 +44,80 @@ distclean:: clean
 	rm -rf qmake .deps
 
 # don't use optimization for these
-qtextstream.o: $(TOPDIR)/tools/qtextstream.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qtextstream.cpp
+qtextstream.o: $(OPIEDIR)/qmake/tools/qtextstream.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qtextstream.cpp
 
-qiodevice.o: $(TOPDIR)/tools/qiodevice.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qiodevice.cpp
+qiodevice.o: $(OPIEDIR)/qmake/tools/qiodevice.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qiodevice.cpp
 
-qglobal.o: $(TOPDIR)/tools/qglobal.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qglobal.cpp
+qglobal.o: $(OPIEDIR)/qmake/tools/qglobal.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qglobal.cpp
 
-qgdict.o: $(TOPDIR)/tools/qgdict.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qgdict.cpp
+qgdict.o: $(OPIEDIR)/qmake/tools/qgdict.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qgdict.cpp
 
-qcstring.o: $(TOPDIR)/tools/qcstring.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qcstring.cpp
+qcstring.o: $(OPIEDIR)/qmake/tools/qcstring.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qcstring.cpp
 
-qstring.o: $(TOPDIR)/tools/qstring.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qstring.cpp
+qstring.o: $(OPIEDIR)/qmake/tools/qstring.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qstring.cpp
 
-qdatastream.o: $(TOPDIR)/tools/qdatastream.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qdatastream.cpp
+qdatastream.o: $(OPIEDIR)/qmake/tools/qdatastream.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qdatastream.cpp
 
-qgarray.o: $(TOPDIR)/tools/qgarray.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qgarray.cpp
+qgarray.o: $(OPIEDIR)/qmake/tools/qgarray.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qgarray.cpp
 
-qbuffer.o: $(TOPDIR)/tools/qbuffer.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qbuffer.cpp
+qbuffer.o: $(OPIEDIR)/qmake/tools/qbuffer.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qbuffer.cpp
 
-qglist.o: $(TOPDIR)/tools/qglist.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qglist.cpp
+qglist.o: $(OPIEDIR)/qmake/tools/qglist.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qglist.cpp
 
-qptrcollection.o: $(TOPDIR)/tools/qptrcollection.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qptrcollection.cpp
+qptrcollection.o: $(OPIEDIR)/qmake/tools/qptrcollection.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qptrcollection.cpp
 
-qfile.o: $(TOPDIR)/tools/qfile.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qfile.cpp
+qfile.o: $(OPIEDIR)/qmake/tools/qfile.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qfile.cpp
 
-qfile_unix.o: $(TOPDIR)/tools/qfile_unix.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qfile_unix.cpp
+qfile_unix.o: $(OPIEDIR)/qmake/tools/qfile_unix.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qfile_unix.cpp
 
-qregexp.o: $(TOPDIR)/tools/qregexp.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qregexp.cpp
+qregexp.o: $(OPIEDIR)/qmake/tools/qregexp.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qregexp.cpp
 
-qgvector.o: $(TOPDIR)/tools/qgvector.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qgvector.cpp
+qgvector.o: $(OPIEDIR)/qmake/tools/qgvector.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qgvector.cpp
 
-qgcache.o: $(TOPDIR)/tools/qgcache.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qgcache.cpp
+qgcache.o: $(OPIEDIR)/qmake/tools/qgcache.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qgcache.cpp
 
-qbitarray.o: $(TOPDIR)/tools/qbitarray.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qbitarray.cpp
+qbitarray.o: $(OPIEDIR)/qmake/tools/qbitarray.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qbitarray.cpp
 
-qdir.o: $(TOPDIR)/tools/qdir.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qdir.cpp
+qdir.o: $(OPIEDIR)/qmake/tools/qdir.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qdir.cpp
 
-qfileinfo_unix.o: $(TOPDIR)/tools/qfileinfo_unix.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qfileinfo_unix.cpp
+qfileinfo_unix.o: $(OPIEDIR)/qmake/tools/qfileinfo_unix.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qfileinfo_unix.cpp
 
-qdir_unix.o: $(TOPDIR)/tools/qdir_unix.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qdir_unix.cpp
+qdir_unix.o: $(OPIEDIR)/qmake/tools/qdir_unix.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qdir_unix.cpp
 
-qfileinfo.o: $(TOPDIR)/tools/qfileinfo.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qfileinfo.cpp
+qfileinfo.o: $(OPIEDIR)/qmake/tools/qfileinfo.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qfileinfo.cpp
 
-qdatetime.o: $(TOPDIR)/tools/qdatetime.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qdatetime.cpp
+qdatetime.o: $(OPIEDIR)/qmake/tools/qdatetime.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qdatetime.cpp
 
-qstringlist.o: $(TOPDIR)/tools/qstringlist.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qstringlist.cpp
+qstringlist.o: $(OPIEDIR)/qmake/tools/qstringlist.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qstringlist.cpp
 
-qmap.o: $(TOPDIR)/tools/qmap.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qmap.cpp
+qmap.o: $(OPIEDIR)/qmake/tools/qmap.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qmap.cpp
 
-qconfig.o: $(TOPDIR)/tools/qconfig.cpp
-	$(CXX) -c -o $@ $(CXXFLAGS) $(TOPDIR)/tools/qconfig.cpp
+qconfig.o: $(OPIEDIR)/qmake/tools/qconfig.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qconfig.cpp
 
 winmakefile.o: generators/win32/winmakefile.cpp
 	$(CXX) -c -o $@ $(CXXFLAGS) generators/win32/winmakefile.cpp
