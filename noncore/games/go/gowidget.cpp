@@ -38,7 +38,7 @@
 #include "goplayutils.h"
 
 static const enum bVal computer_color = BLACK;
-    
+
 static int current_handicap = 1;
 
 static QBrush *goBrush;
@@ -52,7 +52,7 @@ static QPixmap *whiteStone;
 static bool smallStones = FALSE;
 
 GoMainWidget::GoMainWidget( QWidget *parent, const char* name) :
-	QMainWindow( parent, name ) 
+	QMainWindow( parent, name )
 {
      setToolBarsMovable( FALSE );
     GoWidget *go = new GoWidget(this);
@@ -74,8 +74,8 @@ GoMainWidget::GoMainWidget( QWidget *parent, const char* name) :
     connect( a, SIGNAL( activated() ), go, SLOT( pass() ) );
     a->addTo( file );
     a->addTo( toolbar );
-    
-    
+
+
     a = new QAction( tr( "Resign" ), Resource::loadPixmap( "reset" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), go, SLOT( resign() ) );
     a->addTo( file );
@@ -84,22 +84,22 @@ GoMainWidget::GoMainWidget( QWidget *parent, const char* name) :
     a->setToggleAction( TRUE );
     connect( a, SIGNAL( toggled(bool) ), go, SLOT( setTwoplayer(bool) ) );
     a->addTo( file );
-    
+
     mb->insertItem( tr( "Game" ), file );
-    
+
     QLabel *turnLabel = new QLabel( toolbar );
     turnLabel->setBackgroundMode( PaletteButton );
-    connect( go, SIGNAL(showTurn(const QPixmap&)), 
+    connect( go, SIGNAL(showTurn(const QPixmap&)),
 	     turnLabel, SLOT(setPixmap(const QPixmap&)) );
 
-    
+
     QLabel * scoreLabel = new QLabel( toolbar );
     scoreLabel->setBackgroundMode( PaletteButton );
-    connect( go, SIGNAL(showScore(const QString&)), 
+    connect( go, SIGNAL(showScore(const QString&)),
 	     scoreLabel, SLOT(setText(const QString&)) );
 
     toolbar->setStretchableWidget( scoreLabel );
-    
+
     go->readConfig();
 }
 
@@ -117,17 +117,17 @@ void GoMainWidget::resizeEvent( QResizeEvent * )
 GoWidget *GoWidget::self = 0;
 
 GoWidget::GoWidget( QWidget *parent, const char* name) :
-	QWidget( parent, name ) 
+	QWidget( parent, name )
 {
     if ( self )
 	fatal( "Only one Go widget allowed" );
     self = this;
     twoplayer = FALSE;
 
-    
+
     d = bx = by = 1;
-    
-    QPixmap pix = Resource::loadPixmap( "pine" );
+
+    QPixmap pix = Resource::loadPixmap( "go/pine" );
     goBrush = new QBrush( black, pix );
     /*
     QString fn = Resource::findPixmap("Go-black");
@@ -204,7 +204,7 @@ void GoWidget::resizeEvent( QResizeEvent * )
 	blackStone->convertFromImage( blackStone->convertToImage().smoothScale(8,8) );
 	whiteStone->convertFromImage( whiteStone->convertToImage().smoothScale(8,8) );
 	newBlackStone->convertFromImage( newBlackStone->convertToImage().smoothScale(8,8) );
-	
+
 	smallStones = TRUE;
     } else if ( d >= 10 && smallStones ) {
 	blackStone = new QPixmap(Resource::loadPixmap( "Go-black" ));
@@ -238,7 +238,7 @@ void GoWidget::paintEvent( QPaintEvent *e )
     int i,j;
 
     int r = whiteStone->width()/2;
-    
+
     QPainter p(this);
     p.fillRect( bx - d/2, by - d/2, 19*d, 19*d, *goBrush );
 
@@ -249,7 +249,7 @@ void GoWidget::paintEvent( QPaintEvent *e )
 
     QColor pine( 255, 186, 89 );
     p.setPen( pine.dark() );
-    
+
     for ( i = xMin; i < xMax+1 ; i ++ ) {
 	p.drawLine( bx+i*d, by, bx+i*d, by+18*d );
     }
@@ -262,11 +262,11 @@ void GoWidget::paintEvent( QPaintEvent *e )
     for ( i = 3; i < xMax+1; i+=6 )
 	for ( j = 3; j < yMax+1; j+=6 )
 	    p.drawEllipse( bx+i*d-2, by+j*d-2, 5, 5 );
-    
-    
+
+
     for ( i = xMin; i < xMax+1; i++ )
 	for ( j = yMin; j < yMax+1; j++ ) {
-	    if ( board[i][j] == WHITE || 
+	    if ( board[i][j] == WHITE ||
 		 currentPlayer==WHITE && newX == i && newY == j )
 		p.drawPixmap( bx+i*d - r, by+j*d - r, *whiteStone );
 	    else if ( i == lastX && j == lastY )
@@ -394,7 +394,7 @@ void GoWidget::showStone( int x, int y, enum bVal c )
 	newY = y;
 	refresh(x,y);
     }
-    
+
 }
 
 void GoWidget::mouseReleaseEvent( QMouseEvent * )
@@ -406,7 +406,7 @@ void GoWidget::mouseReleaseEvent( QMouseEvent * )
 
 void GoWidget::refresh( int x, int y )
 {
-    update( bx+d*x-d/2-1, by+d*y-d/2-1, d+2, d+2 );    
+    update( bx+d*x-d/2-1, by+d*y-d/2-1, d+2, d+2 );
 }
 
 void GoWidget::removeStone(short x, short y)
