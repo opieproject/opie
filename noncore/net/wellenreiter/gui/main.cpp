@@ -14,16 +14,29 @@
 **********************************************************************/
 
 #include "wellenreiter.h"
+
+#ifdef QWS
 #include <qpe/qpeapplication.h>
+#else
+#include <qapplication.h>
+#endif
 
 int main( int argc, char **argv )
 {
+#ifdef QWS
     QPEApplication a( argc, argv );
+#else
+    QApplication a( argc, argv );
+#endif
 
     Wellenreiter e;
 
     e.setCaption( Wellenreiter::tr("Wellenreiter") );
+#ifdef QWS
     a.showMainWidget(&e);
+#else
+    a.setMainWidget(&e);
+#endif
 
     return a.exec();
 }

@@ -2,5 +2,5 @@
 *~
 Makefile*
 moc_*
-wellenreiterbase.cpp
-wellenreiterbase.h
+wellenreitertemplate.cpp
+wellenreitertemplate.h

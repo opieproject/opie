@@ -27,7 +27,7 @@ class MScanListItem: public QListViewItem
     MScanListItem::MScanListItem( QListView* parent,
                                   QString type,
                                   QString essid,
-                                  QString ap,
+                                  QString macaddr,
                                   bool wep,
                                   int channel,
                                   int signal );
@@ -35,7 +35,7 @@ class MScanListItem: public QListViewItem
     MScanListItem::MScanListItem( QListViewItem* parent,
                                   QString type,
                                   QString essid,
-                                  QString ap,
+                                  QString macaddr,
                                   bool wep,
                                   int channel,
                                   int signal );
@@ -43,7 +43,7 @@ class MScanListItem: public QListViewItem
 
   protected:
 
-    virtual void decorateItem( QString type, QString essid, QString ap, bool wep, int channel, int signal );
+    virtual void decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
 
 };
 

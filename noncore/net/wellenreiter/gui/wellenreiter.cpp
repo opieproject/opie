@@ -45,8 +45,8 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     daemon_fd = commsock( GUIADDR, GUIPORT );
     if ( daemon_fd == -1 )
         qDebug( "D'oh! Could not get file descriptor for daemon-->gui communication socket." );
-    //else
-        //startTimer( 700 );
+    else
+        startTimer( 700 );
 
 }
 
@@ -60,7 +60,7 @@ void Wellenreiter::handleMessage()
     // FIXME: receive message and handle it
 
     qDebug( "received message from daemon." );
-    
+
     char buffer[128];
 
     int result = recvcomm( &daemon_fd, (char*) &buffer, sizeof(buffer) );
@@ -77,21 +77,27 @@ typedef struct {
 } wl_network_t;
 */
 
+    qDebug( "Sniffer sent: '%s'", buffer );
+
     if ( result == NETFOUND )  /* new network found */
     {
         qDebug( "Sniffer said: new network found." );
         wl_network_t n;
         get_network_found( &n, (char*) &buffer );
-        n.bssid[n.ssid_len] = "\0";
+        
+        qDebug( "Sniffer said: net_type is %d.", n.net_type );
+        qDebug( "Sniffer said: MAC is %s", (const char*) &n.mac );
+
+        //n.bssid[n.ssid_len] = "\0";
 
         QString type;
 
         if ( n.net_type == 1 )
-            type == "managed";
+            type = "managed";
         else
-            type == "adhoc";
-
-        addNewItem( type, n.bssid, n.mac, n.wep, n.channel, 0 );
+            type = "adhoc";
+            
+        addNewItem( type, n.bssid, QString( (const char*) &n.mac ), n.wep, n.channel, 0 );
 
     }
 
@@ -114,14 +120,14 @@ bool Wellenreiter::hasMessage()
     FD_SET( daemon_fd, &rfds );
     struct timeval tv;
     tv.tv_sec = 0;
-    tv.tv_usec = 0;
+    tv.tv_usec = 10;
     int result = select( daemon_fd+1, &rfds, NULL, NULL, &tv );
     return FD_ISSET( daemon_fd, &rfds );
 }
 
 void Wellenreiter::timerEvent( QTimerEvent* e )
 {
-    //qDebug( "checking for message..." );
+    qDebug( "checking for message..." );
 
     if ( hasMessage() )
     {
@@ -129,11 +135,11 @@ void Wellenreiter::timerEvent( QTimerEvent* e )
     }
     else
     {
-        //qDebug( "no message :(" );
+        qDebug( "no message :(" );
     }
 }
 
-void Wellenreiter::addNewItem( QString type, QString essid, QString ap, bool wep, int channel, int signal )
+void Wellenreiter::addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal )
 {
     // FIXME: this code belongs in customized QListView, not into this class
 
@@ -149,11 +155,11 @@ void Wellenreiter::addNewItem( QString type, QString essid, QString ap, bool wep
     if ( item )
     {
         qDebug( "found!" );
-        new MScanListItem( item, type, essid, ap, wep, channel, signal );
+        new MScanListItem( item, type, essid, macaddr, wep, channel, signal );
     }
     else
     {
-        new MScanListItem( netview, type, essid, ap, wep, channel, signal );
+        new MScanListItem( netview, type, essid, macaddr, wep, channel, signal );
     }
 }
 

@@ -26,23 +26,23 @@ const int col_channel = 3;
 const int col_wep = 4;
 const int col_traffic = 5;
 
-MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QString ap,
+MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QString macaddr,
                               bool wep, int channel, int signal )
-               :QListViewItem( parent, essid, ap, QString::null, QString::null, QString::null )
+               :QListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null )
 {
     qDebug( "creating scanlist item" );
-    decorateItem( type, essid, ap, wep, channel, signal );
+    decorateItem( type, essid, macaddr, wep, channel, signal );
 }
 
-MScanListItem::MScanListItem( QListViewItem* parent, QString type, QString essid, QString ap,
+MScanListItem::MScanListItem( QListViewItem* parent, QString type, QString essid, QString macaddr,
                               bool wep, int channel, int signal )
-               :QListViewItem( parent, essid, ap, QString::null, QString::null, QString::null )
+               :QListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null )
 {
     qDebug( "creating scanlist item" );
-    decorateItem( type, essid, ap, wep, channel, signal );
+    decorateItem( type, essid, macaddr, wep, channel, signal );
 }
 
-void MScanListItem::decorateItem( QString type, QString essid, QString ap, bool wep, int channel, int signal )
+void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal )
 {
     qDebug( "decorating scanlist item" );
 
@@ -58,6 +58,7 @@ void MScanListItem::decorateItem( QString type, QString essid, QString ap, bool 
     // set channel and signal text
     setText( col_sig, QString::number( signal ) );
     setText( col_channel, QString::number( channel ) );
+    //setText
 
     listView()->triggerUpdate();
 

@@ -1,11 +1,2 @@
-DESTDIR         = $(OPIEDIR)/bin
-TEMPLATE        = app
-CONFIG          = qt warn_on debug
-#CONFIG         = qt warn_on release
-HEADERS         = gui/mainwindowbase.h gui/wellenreiter.h gui/scanlistitem.h gui/scanlist.h
-SOURCES         = gui/main.cpp gui/wellenreiter.cpp gui/scanlistitem.cpp gui/scanlist.cpp
-INCLUDEPATH     += $(OPIEDIR)/include gui daemon
-DEPENDPATH      += $(OPIEDIR)/include gui daemon
-LIBS            += -lqpe -Llibwellenreiter/source -lwellenreiter
-INTERFACES      = gui/wellenreiterbase.ui
-TARGET          = wellenreiter
+TEMPLATE        = subdirs
+unix:SUBDIRS    = libwellenreiter daemon gui

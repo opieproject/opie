@@ -1,0 +1,11 @@
+DESTDIR         = $(OPIEDIR)/bin
+TEMPLATE        = app
+CONFIG          = qt warn_on debug
+#CONFIG         = qt warn_on release
+HEADERS         = wellenreiterbase.h wellenreiter.h scanlistitem.h scanlist.h
+SOURCES         = main.cpp wellenreiterbase.cpp wellenreiter.cpp scanlistitem.cpp scanlist.cpp
+INCLUDEPATH     += $(OPIEDIR)/include ../daemon
+DEPENDPATH      += $(OPIEDIR)/include ../daemon
+LIBS            += -lqpe -lopie -L../libwellenreiter/source -lwellenreiter
+INTERFACES      = wellenreitertemplate.ui
+TARGET          = wellenreiter
