@@ -30,11 +30,6 @@ DatebookPluginWidget::DatebookPluginWidget( QWidget *parent, const char* name )
     db = 0l;
     m_layoutDates = 0l;
 
-    if ( db ) {
-        delete db;
-    }
-    db = new DateBookDB;
-
     if ( m_layoutDates )  {
         delete m_layoutDates;
     }
@@ -84,6 +79,12 @@ void DatebookPluginWidget::refresh()  {
  *  Get all events that are in the datebook xml file for today
  */
 void DatebookPluginWidget::getDates() {
+
+
+    if ( db ) {
+        delete db;
+    }
+    db = new DateBookDB;
 
     QDate date = QDate::currentDate();
     QValueList<EffectiveEvent> list = db->getEffectiveEvents( date, date.addDays( m_moreDays )  );
