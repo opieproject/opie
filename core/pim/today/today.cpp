@@ -468,11 +468,11 @@ Today::~Today() {
  * Gets the events for the current day, if it should get all dates
  */
 DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
-			     QWidget* parent = 0,
-			     int SHOW_LOCATION = 0,
-			     int SHOW_NOTES = 0,
-			     const char* name = 0,
-			     WFlags fl = 0) :
+			     QWidget* parent,
+			     int SHOW_LOCATION,
+			     int SHOW_NOTES,
+			     const char* name,
+			     WFlags fl) :
   ClickableLabel(parent,name,fl), event(ev) {
 
   QString msg;
@@ -535,11 +535,11 @@ QString DateBookEvent::ampmTime(QTime tm) {
 
 
 DateBookEventLater::DateBookEventLater(const EffectiveEvent &ev,
-				       QWidget* parent = 0,
-				       int SHOW_LOCATION = 0,
-				       int SHOW_NOTES = 0,
-				       const char* name = 0,
-				       WFlags fl = 0) :
+				       QWidget* parent,
+				       int SHOW_LOCATION,
+				       int SHOW_NOTES,
+				       const char* name,
+				       WFlags fl) :
   ClickableLabel(parent,name,fl), event(ev) {
 
   QString msg;
