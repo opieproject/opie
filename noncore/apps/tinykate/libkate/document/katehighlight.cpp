@@ -1,8 +1,8 @@
 /*
    Copyright (C) 1998, 1999 Jochen Wilhelmy
                             digisnap@cs.tu-berlin.de
-	     (C) 2002, 2001 The Kate Team <kwrite-devel@kde.org>
-	     (C) 2002 Joseph Wenninger <jowenn@kde.org>
+         (C) 2002, 2001 The Kate Team <kwrite-devel@kde.org>
+         (C) 2002 Joseph Wenninger <jowenn@kde.org>
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
     License as published by the Free Software Foundation; either
@@ -19,25 +19,29 @@
     Boston, MA 02111-1307, USA.
 */
 
-#include <string.h>
-
-#include <qtextstream.h>
-#include <qpe/config.h>
-#include <kglobal.h>
-//#include <kinstance.h>
-//#include <kmimemagic.h>
-#include <klocale.h>
-//#include <kregexp.h>
-#include <kglobalsettings.h>
-#include <kdebug.h>
-#include <kstddirs.h>
-
 #include "katehighlight.h"
-
-
 #include "katetextline.h"
 #include "katedocument.h"
 #include "katesyntaxdocument.h"
+
+#include "kglobal.h"
+//#include "kinstance.h"
+//#include "kmimemagic.h"
+#include "klocale.h"
+//#include "kregexp.h"
+#include "kglobalsettings.h"
+#include "kdebug.h"
+#include "kstddirs.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/config.h>
+
+/* QT */
+#include <qtextstream.h>
+
+/* STD */
+#include <string.h>
 
 
 HlManager *HlManager::s_pSelf = 0;
@@ -120,8 +124,8 @@ const QChar *HlStringDetect::checkHgl(const QChar *s, int len, bool) {
   if (!_inSensitive) {if (memcmp(s, str.unicode(), str.length()*sizeof(QChar)) == 0) return s + str.length();}
      else
        {
-	 QString tmp=QString(s,str.length()).upper();
-	 if (tmp==str) return s+str.length();
+     QString tmp=QString(s,str.length()).upper();
+     if (tmp==str) return s+str.length();
        }
   return 0L;
 }
@@ -213,10 +217,10 @@ const QChar *HlInt::checkHgl(const QChar *str, int len, bool) {
    {
      if (subItems)
        {
-	 for (HlItem *it=subItems->first();it;it=subItems->next())
+     for (HlItem *it=subItems->first();it;it=subItems->next())
           {
             s1=it->checkHgl(s, len, false);
-	    if (s1) return s1;
+        if (s1) return s1;
           }
        }
      return s;
@@ -248,14 +252,14 @@ const QChar *HlFloat::checkHgl(const QChar *s, int len, bool) {
   if ((*s&0xdf) == 'E') s++;
     else
       if (!p) return 0L;
-	else
-	{
+    else
+    {
           if (subItems)
             {
-	      for (HlItem *it=subItems->first();it;it=subItems->next())
+          for (HlItem *it=subItems->first();it;it=subItems->next())
                 {
                   s1=it->checkHgl(s, len, false);
-	          if (s1) return s1;
+              if (s1) return s1;
                 }
             }
           return s;
@@ -345,7 +349,7 @@ const QChar *HlCHex::checkHgl(const QChar *str, int len, bool) {
   int pos=rx.search(line,0);
   if(pos > -1) return str+rx.matchedLength();
   else
-	return 0L;
+    return 0L;
 
 #else
   if (str[0] == '0' && ((str[1]&0xdf) == 'X' )) {
@@ -400,7 +404,7 @@ const QChar *HlRegExpr::checkHgl(const QChar *s, int len, bool lineStart)
   int pos = Expr->search( line, 0 );
   if (pos==-1) return 0L;
     else
-	 return (s+Expr->matchedLength());
+     return (s+Expr->matchedLength());
 };
 
 
@@ -411,9 +415,9 @@ HlLineContinue::HlLineContinue(int attribute, int context)
 const QChar *HlLineContinue::checkHgl(const QChar *s, int len, bool) {
 
   if ((s[0].latin1() == '\\') && (len == 1))
-	{
+    {
            return s + 1;
-	}
+    }
   return 0L;
 }
 
@@ -621,7 +625,7 @@ int Highlight::doHighlight(int ctxNum, TextLine *textLine)
         s2 = item->checkHgl(s1, len-z, z==0);
         if (s2 > s1)
         {
-	    qDebug("An item has been detected");
+        odebug << "An item has been detected" << oendl;
             textLine->setAttribs(item->attr,s1 - str,s2 - str);
             ctxNum = item->ctx;
             context = contextList[ctxNum];
@@ -853,7 +857,7 @@ void Highlight::done()
 
 void Highlight::createItemData(ItemDataList &list)
 {
-    qDebug("Highlight::createItemData");
+    odebug << "Highlight::createItemData" << oendl;
 
   // If no highlighting is selected we need only one default.
   if (noHl)
@@ -874,7 +878,7 @@ void Highlight::createItemData(ItemDataList &list)
     internalIDList.setAutoDelete(true);
     syntaxContextData *data;
 
-    qDebug("Trying to read itemData section");
+    odebug << "Trying to read itemData section" << oendl;
 
     //Tell the syntax document class which file we want to parse and which data group
     HlManager::self()->syntax->setIdentifier(identifier);
@@ -882,7 +886,7 @@ void Highlight::createItemData(ItemDataList &list)
     //begin with the real parsing
     while (HlManager::self()->syntax->nextGroup(data))
       {
-	qDebug("Setting up one itemData element");
+    odebug << "Setting up one itemData element" << oendl;
         // read all attributes
         color=HlManager::self()->syntax->groupData(data,QString("color"));
         selColor=HlManager::self()->syntax->groupData(data,QString("selColor"));
@@ -933,12 +937,12 @@ void Highlight::createItemData(ItemDataList &list)
 
 int  Highlight::lookupAttrName(const QString& name, ItemDataList &iDl)
 {
-	for (int i=0;i<iDl.count();i++)
-		{
-			if (iDl.at(i)->name==name) return i;
-		}
-	kdDebug(13010)<<"Couldn't resolve itemDataName"<<endl;
-	return 0;
+    for (int i=0;i<iDl.count();i++)
+        {
+            if (iDl.at(i)->name==name) return i;
+        }
+    kdDebug(13010)<<"Couldn't resolve itemDataName"<<endl;
+    return 0;
 }
 
 
@@ -1077,11 +1081,11 @@ void Highlight::readCommentConfig()
       {
 
         if (HlManager::self()->syntax->groupData(data,"name")=="singleLine")
-		cslStart=HlManager::self()->syntax->groupData(data,"start");
-	if (HlManager::self()->syntax->groupData(data,"name")=="multiLine")
+        cslStart=HlManager::self()->syntax->groupData(data,"start");
+    if (HlManager::self()->syntax->groupData(data,"name")=="multiLine")
            {
-		cmlStart=HlManager::self()->syntax->groupData(data,"start");
-		cmlEnd=HlManager::self()->syntax->groupData(data,"end");
+        cmlStart=HlManager::self()->syntax->groupData(data,"start");
+        cmlEnd=HlManager::self()->syntax->groupData(data,"end");
            }
       }
     HlManager::self()->syntax->freeGroupInfo(data);
@@ -1112,10 +1116,10 @@ void Highlight::readGlobalKeywordConfig()
   syntaxContextData * data=HlManager::self()->syntax->getConfig("general","keywords");
   if (data)
     {
-	kdDebug(13010)<<"Found global keyword config"<<endl;
+    kdDebug(13010)<<"Found global keyword config"<<endl;
 
         if (HlManager::self()->syntax->groupItemData(data,QString("casesensitive"))!="0")
-		casesensitive=true; else {casesensitive=false; kdDebug(13010)<<"Turning on case insensitiveness"<<endl;}
+        casesensitive=true; else {casesensitive=false; kdDebug(13010)<<"Turning on case insensitiveness"<<endl;}
      //get the weak deliminators
      weakDeliminator=(!HlManager::self()->syntax->groupItemData(data,QString("weakDeliminator")));
 
@@ -1133,7 +1137,7 @@ void Highlight::readGlobalKeywordConfig()
      deliminatorChars = deliminator.unicode();
      deliminatorLen = deliminator.length();
 
-	HlManager::self()->syntax->freeGroupInfo(data);
+    HlManager::self()->syntax->freeGroupInfo(data);
     }
   else
     {
@@ -1204,25 +1208,25 @@ void Highlight::makeContextList()
             //Let's create all items for the context
             while (HlManager::self()->syntax->nextItem(data))
               {
-//		kdDebug(13010)<< "In make Contextlist: Item:"<<endl;
-		c=createHlItem(data,iDl);
-		if (c)
-			{
+//      kdDebug(13010)<< "In make Contextlist: Item:"<<endl;
+        c=createHlItem(data,iDl);
+        if (c)
+            {
                                 contextList[i]->items.append(c);
 
                                 // Not supported completely atm and only one level. Subitems.(all have to be matched to at once)
-				datasub=HlManager::self()->syntax->getSubItems(data);
-				bool tmpbool;
-				if (tmpbool=HlManager::self()->syntax->nextItem(datasub))
-					{
+                datasub=HlManager::self()->syntax->getSubItems(data);
+                bool tmpbool;
+                if (tmpbool=HlManager::self()->syntax->nextItem(datasub))
+                    {
                                           c->subItems=new QList<HlItem>;
-					  for (;tmpbool;tmpbool=HlManager::self()->syntax->nextItem(datasub))
+                      for (;tmpbool;tmpbool=HlManager::self()->syntax->nextItem(datasub))
                                             c->subItems->append(createHlItem(datasub,iDl));
                                         }
-				HlManager::self()->syntax->freeGroupInfo(datasub);
+                HlManager::self()->syntax->freeGroupInfo(datasub);
                                 // end of sublevel
-			}
-//		kdDebug(13010)<<"Last line in loop"<<endl;
+            }
+//      kdDebug(13010)<<"Last line in loop"<<endl;
               }
           i++;
         }
@@ -1312,7 +1316,7 @@ int HlManager::makeAttribs(Highlight *highlight, Attribute *a, int maxAttribs) {
   ItemData *itemData;
   int nAttribs, z;
 
-  qDebug("HlManager::makeAttribs");
+  odebug << "HlManager::makeAttribs" << oendl;
 
   defaultStyleList.setAutoDelete(true);
   getDefaults(defaultStyleList);
@@ -1321,7 +1325,7 @@ int HlManager::makeAttribs(Highlight *highlight, Attribute *a, int maxAttribs) {
   highlight->getItemDataList(itemDataList);
   nAttribs = itemDataList.count();
   for (z = 0; z < nAttribs; z++) {
-    qDebug("HlManager::makeAttribs: createing one attribute definition");
+    odebug << "HlManager::makeAttribs: createing one attribute definition" << oendl;
     itemData = itemDataList.at(z);
     if (itemData->defStyle) {
       // default style
@@ -1415,7 +1419,7 @@ void HlManager::setDefaults(ItemStyleList &list) {
   ItemStyle *i;
   char s[64];
 #warning fixme
-/* 
+/*
   config =  KateFactory::instance()->config();
   config->setGroup("Default Item Styles");
   for (z = 0; z < defaultStyles(); z++) {

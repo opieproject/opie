@@ -16,15 +16,20 @@
  ***************************************************************************/
 
 #include "katesyntaxdocument.h"
-#include <kateconfig.h>
-#include <qfile.h>
-#include <kdebug.h>
-#include <kstddirs.h>
-#include <klocale.h>
-#include <kmessagebox.h>
-#include <qstringlist.h>
-#include <kglobal.h>
+#include "kateconfig.h"
+#include "kdebug.h"
+#include "kstddirs.h"
+#include "klocale.h"
+#include "kmessagebox.h"
+#include "kglobal.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
+
+/* QT */
+#include <qfile.h>
+#include <qstringlist.h>
 #include <qdir.h>
 
 SyntaxDocument::SyntaxDocument()
@@ -39,7 +44,7 @@ void SyntaxDocument::setIdentifier(const QString& identifier)
 #warning FIXME  delete m_root;
   m_root=Opie::Core::XMLElement::load(identifier);
   if (!m_root)    KMessageBox::error( 0L, i18n("Can't open %1").arg(identifier) );
-  
+
 }
 
 SyntaxDocument::~SyntaxDocument()
@@ -76,13 +81,13 @@ void SyntaxDocument::setupModeList(bool force)
     }
     else
     {
-	qDebug("Found a description file:"+path+(*it));
+    odebug << "Found a description file:"+path+(*it) << oendl;
         setIdentifier(path+(*it));
         Opie::Core::XMLElement *e=m_root;
         if (e)
         {
-	  e=e->firstChild();
-	  qDebug(e->tagName());
+      e=e->firstChild();
+      odebug << e->tagName() << oendl;
           if (e->tagName()=="language")
           {
             syntaxModeListItem *mli=new syntaxModeListItem;
@@ -90,7 +95,7 @@ void SyntaxDocument::setupModeList(bool force)
             mli->section = e->attribute("section");
             mli->mimetype = e->attribute("mimetype");
             mli->extension = e->attribute("extensions");
-	    qDebug(QString("valid description for: %1/%2").arg(mli->section).arg(mli->name));
+        odebug << QString("valid description for: %1/%2").arg(mli->section).arg(mli->name) << oendl;
             if (mli->section.isEmpty())
               mli->section=i18n("Other");
 
@@ -180,9 +185,9 @@ void SyntaxDocument::freeGroupInfo( syntaxContextData* data)
 syntaxContextData* SyntaxDocument::getSubItems(syntaxContextData* data)
 {
   syntaxContextData *retval=new syntaxContextData;
-	retval->parent=0;
-	retval->currentGroup=0;
-	retval->item=0;
+    retval->parent=0;
+    retval->currentGroup=0;
+    retval->item=0;
   if (data != 0)
   {
     retval->parent=data->currentGroup;
@@ -212,8 +217,8 @@ syntaxContextData* SyntaxDocument::getConfig(const QString& mainGroupName, const
         if (e1->tagName()==Config)
         {
           syntaxContextData *data=new ( syntaxContextData);
-	  data->currentGroup=0;
-	  data->parent=0;
+      data->currentGroup=0;
+      data->parent=0;
           data->item=e1;
           return data;
         }
@@ -254,8 +259,8 @@ syntaxContextData* SyntaxDocument::getGroupInfo(const QString& mainGroupName, co
         {
           syntaxContextData *data=new ( syntaxContextData);
           data->parent=e1;
-	  data->currentGroup=0;
-	  data->item=0;
+      data->currentGroup=0;
+      data->item=0;
           return data;
         }
 
@@ -284,19 +289,19 @@ QStringList& SyntaxDocument::finddata(const QString& mainGroup,const QString& ty
   {
     if (e->tagName()==mainGroup)
     {
-	for (Opie::Core::XMLElement *e1=e->firstChild();e1;e1=e1->nextChild())
-	{
-	  if (e1->tagName()!="list") continue;
+    for (Opie::Core::XMLElement *e1=e->firstChild();e1;e1=e1->nextChild())
+    {
+      if (e1->tagName()!="list") continue;
 
-	        if (e1->attribute("name")==type)
-        	{
-			for (Opie::Core::XMLElement *e2=e1->firstChild();e2;e2=e2->nextChild())
-			{
-				qDebug("FOUND A LIST ENTRY("+e2->tagName()+"):"+e2->firstChild()->value());
-	            		m_data+=e2->firstChild()->value().stripWhiteSpace();
-			}
-	           break;
-		}
+            if (e1->attribute("name")==type)
+            {
+            for (Opie::Core::XMLElement *e2=e1->firstChild();e2;e2=e2->nextChild())
+            {
+                odebug << "FOUND A LIST ENTRY("+e2->tagName()+"):"+e2->firstChild()->value() << oendl;
+                        m_data+=e2->firstChild()->value().stripWhiteSpace();
+            }
+               break;
+        }
         }
       break;
     }

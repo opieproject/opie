@@ -10,6 +10,7 @@ copyright 2001 by L.J. Potter ljp@llornkcor.com
 
 /* OPIE */
 #include <opie2/ofiledialog.h>
+#include <opie2/odebug.h>
 using namespace Opie::Ui;
 
 /* QT */
@@ -52,7 +53,7 @@ void optionsDialog::BrowseSelected() {
     if( !str.isEmpty() && QFile(str).exists() && !QFileInfo(str).isDir() )  {
       fileName = str;
 //      QStringList fileList=browseForFiles->fileList;
-//      qDebug(selFile);
+//      odebug << selFile << oendl;
 //      QStringList::ConstIterator f;
 //      QString fileTemp,filer;
 //      for (  f = fileList.begin(); f != fileList.end(); f++ ) {
@@ -76,7 +77,7 @@ void optionsDialog::BrowseSelected() {
 void optionsDialog::setHttp(int index) {
     Config config("Gutenbrowser");
     config.setGroup( "HttpServer" );
-    qDebug("writing http server");
+    odebug << "writing http server" << oendl;
     if( index== 0) {
         config.writeEntry("Preferred", "http://sailor.gutenberg.org");
     } else {

@@ -1,5 +1,5 @@
-CONFIG		= qt warn_on 
-HEADERS		= Aportis.h \
+CONFIG      = qt warn_on
+HEADERS     = Aportis.h \
                   Bkmks.h \
                   BuffDoc.h \
                   CAnnoEdit.h \
@@ -49,7 +49,7 @@ HEADERS		= Aportis.h \
                   version.h \
                   ztxt.h
 
-SOURCES		= Aportis.cpp \
+SOURCES     = Aportis.cpp \
                   Bkmks.cpp \
                   BuffDoc.cpp \
                   CBuffer.cpp \
@@ -83,9 +83,9 @@ SOURCES		= Aportis.cpp \
 DESTDIR = $(OPIEDIR)/bin
 TARGET = reader
 
-INCLUDEPATH	+= $(OPIEDIR)/include
-DEPENDPATH	+= $(OPIEDIR)/include
-LIBS		+= -lqpe
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH  += $(OPIEDIR)/include
+LIBS        += -lqpe -lopiecore2
 
 include ( $(OPIEDIR)/include.pro )
 

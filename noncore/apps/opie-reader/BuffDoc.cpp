@@ -32,7 +32,7 @@ linkType BuffDoc::hyperlink(unsigned int n, QString& wrd)
 
 void BuffDoc::locate(unsigned int n)
 {
-  //  //qDebug("BuffDoc:locating:%u",n);
+  //  //odebug << "BuffDoc:locating:" << n << "" << oendl; 
     lastword.empty();
   lastsizes[0] = laststartline = n;
 #ifdef NEWLINEBREAK
@@ -42,7 +42,7 @@ void BuffDoc::locate(unsigned int n)
 #endif
   //    tchar linebuf[1024];
   if (exp != NULL) exp->locate(n);
-  //  //qDebug("BuffDoc:Located");
+  //  //odebug << "BuffDoc:Located" << oendl; 
 }
 
 #ifdef NEWLINEBREAK
@@ -188,7 +188,7 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth, unsigned char _border)
       margindone = true;
   }
   else buff->empty();
-//  //qDebug("Buff:%s Lastword:%s", (const char*)toQString(buff->data()), (const char*)toQString(lastword.data()));
+//  //odebug << "Buff:" << toQString(buff->data()) << " Lastword:" << toQString(lastword.data()) << "" << oendl; 
   lastcheck = len = buff->length();
   unsigned int slen = buff->width(len);
   if (slen > w)
@@ -322,8 +322,8 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth, int cw, unsigned char _border)
 
 int BuffDoc::openfile(QWidget* _parent, const char *src)
 {
-    //    //qDebug("BuffDoc:Openfile:%s", src);
-    //    //qDebug("Trying aportis %x",exp);
+    //    //odebug << "BuffDoc:Openfile:" << src << "" << oendl; 
+    //    //odebug << "Trying aportis " << exp << "" << oendl; 
     if (exp != NULL) delete exp;
     lastword.empty();
     lastsizes[0] = laststartline = 0;
@@ -378,7 +378,7 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
     if (ret != 0)
     {
 	delete exp;
-	//qDebug("Trying ppms");
+	//odebug << "Trying ppms" << oendl; 
 	exp = new ppm_expander;
 	ret = exp->openfile(src);
     }
@@ -386,7 +386,7 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
     {
 	delete exp;
 	exp = new Text;
-//		//qDebug("Trying text");
+//		//odebug << "Trying text" << oendl; 
 	ret = exp->openfile(src);
     }
 
@@ -396,7 +396,7 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
 	QMessageBox::information(_parent, PROGNAME, "Unknown file compression type","Try another file");
 	return ret;
     }
-    //        //qDebug("Doing final open:%x:%x",exp,filt);
+    //        //odebug << "Doing final open:" << exp << ":" << filt << "" << oendl; 
 
     lastword.empty();
     lastsizes[0] = laststartline = 0;
@@ -407,6 +407,6 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
 #endif
     exp->locate(0);
     filt->setsource(exp);
-    //        //qDebug("BuffDoc:file opened");
+    //        //odebug << "BuffDoc:file opened" << oendl; 
     return 0;
 }

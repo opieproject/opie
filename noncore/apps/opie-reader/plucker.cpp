@@ -57,19 +57,19 @@ int CPlucker::bgetch()
     {
 	if (!m_continuous) return EOF;
 	if (bufferrec >= ntohs(head.recordList.numRecords) - 1) return EOF;
-////	qDebug("Passing through %u", currentpos);
+////	odebug << "Passing through " << currentpos << "" << oendl; 
 	if (!expand(bufferrec+1)) return EOF;
 	mystyle.unset();
 	if (m_ParaOffsets[m_nextParaIndex] == 0)
 	{
 	    while (m_ParaOffsets[m_nextParaIndex+1] == 0)
 	    {
-//		qDebug("Skipping extraspace:%d", m_ParaAttrs[m_nextParaIndex]&7);
+//		odebug << "Skipping extraspace:" << m_ParaAttrs[m_nextParaIndex]&7 << "" << oendl; 
 		m_nextParaIndex++;
 	    }
 	}
 	mystyle.setExtraSpace((m_ParaAttrs[m_nextParaIndex]&7)*2);
-//	qDebug("Using extraspace:%d", m_ParaAttrs[m_nextParaIndex]&7);
+//	odebug << "Using extraspace:" << m_ParaAttrs[m_nextParaIndex]&7 << "" << oendl; 
 	ch = 10;
 	EOPPhase = 4;
     }
@@ -79,7 +79,7 @@ int CPlucker::bgetch()
 	{
 	    UInt16 attr = m_ParaAttrs[m_nextParaIndex];
 	    m_nextParaIndex++;
-//	    qDebug("Skipping extraspace:%d", m_ParaAttrs[m_nextParaIndex]&7);
+//	    odebug << "Skipping extraspace:" << m_ParaAttrs[m_nextParaIndex]&7 << "" << oendl; 
 	    if (m_nextParaIndex == m_nParas)
 	    {
 		m_nextPara = -1;
@@ -91,7 +91,7 @@ int CPlucker::bgetch()
 	}
 	mystyle.unset();
 	mystyle.setExtraSpace((m_ParaAttrs[m_nextParaIndex]&7)*2);
-//	qDebug("Using extraspace:%d", m_ParaAttrs[m_nextParaIndex]&7);
+//	odebug << "Using extraspace:" << m_ParaAttrs[m_nextParaIndex]&7 << "" << oendl; 
 	if (m_lastBreak == locate())
 	{
 	    currentpos++;

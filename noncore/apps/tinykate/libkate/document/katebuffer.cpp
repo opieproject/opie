@@ -3,7 +3,7 @@
    Copyright (c) 2000 Waldo Bastian <bastian@kde.org>
    Copyright (c) 2002 Joseph Wenninger <jowenn@kde.org>
 
-   $Id: katebuffer.cpp,v 1.3 2003-08-09 16:21:40 kergoth Exp $
+   $Id: katebuffer.cpp,v 1.4 2004-05-03 21:35:19 ar Exp $
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -22,24 +22,25 @@
 
 
 #include "katebuffer.h"
+#include "kdebug.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* QT */
+#include <qfile.h>
+#include <qtextstream.h>
+#include <qtimer.h>
+#include <qtextcodec.h>
+
+/* STD */
 // Includes for reading file
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <unistd.h>
-
-#include <qfile.h>
-#include <qtextstream.h>
-
-#include <qtimer.h>
-#include <qtextcodec.h>
-
-//
-
 #include <assert.h>
-#include <kdebug.h>
 
 /**
  * Create an empty buffer.
@@ -65,35 +66,35 @@ KWBuffer::clear()
 void
 KWBuffer::insertFile(int line, const QString &file, QTextCodec *codec)
 {
-	if (line) {
-		qDebug("insert File only supports insertion at line 0 == file opening");
-		return;
-	}
-	clear();
-	QFile iofile(file);
-	iofile.open(IO_ReadOnly);
-	QTextStream stream(&iofile);
-	stream.setCodec(codec);
-	QString qsl;
-	int count=0;
-	for (count=0;((qsl=stream.readLine())!=QString::null);	count++)
-	{
-		if (count==0)
-		{
-			(*m_stringListIt)->append(qsl.unicode(),qsl.length());
-		} 
-		else 
-		{
-			TextLine::Ptr tl=new TextLine();
-			tl ->append(qsl.unicode(),qsl.length());
-			m_stringListIt=m_stringList.append(tl);
-		}
-	}
-	if (count!=0) 
-	{
-		m_stringListCurrent=count-1;
-		m_lineCount=count;
-	}
+    if (line) {
+        odebug << "insert File only supports insertion at line 0 == file opening" << oendl;
+        return;
+    }
+    clear();
+    QFile iofile(file);
+    iofile.open(IO_ReadOnly);
+    QTextStream stream(&iofile);
+    stream.setCodec(codec);
+    QString qsl;
+    int count=0;
+    for (count=0;((qsl=stream.readLine())!=QString::null);  count++)
+    {
+        if (count==0)
+        {
+            (*m_stringListIt)->append(qsl.unicode(),qsl.length());
+        }
+        else
+        {
+            TextLine::Ptr tl=new TextLine();
+            tl ->append(qsl.unicode(),qsl.length());
+            m_stringListIt=m_stringList.append(tl);
+        }
+    }
+    if (count!=0)
+    {
+        m_stringListCurrent=count-1;
+        m_lineCount=count;
+    }
 }
 
 void
@@ -121,9 +122,9 @@ KWBuffer::slotLoadFile()
 int
 KWBuffer::count()
 {
-  qDebug("m_stringList.count %d",m_stringList.count());
+  odebug << "m_stringList.count " << m_stringList.count() << "" << oendl;
   return m_lineCount;
-//	return m_stringList.count();
+//  return m_stringList.count();
 //   return m_totalLines;
 }
 
@@ -148,9 +149,9 @@ void KWBuffer::seek(int i)
 TextLine::Ptr
 KWBuffer::line(int i)
 {
-	if (i>=m_stringList.count()) return 0;
-	seek(i);
-	return *m_stringListIt;
+    if (i>=m_stringList.count()) return 0;
+    seek(i);
+    return *m_stringListIt;
 }
 
 void

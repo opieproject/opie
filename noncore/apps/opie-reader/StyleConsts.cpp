@@ -6,7 +6,7 @@ GraphicLink::~GraphicLink() { delete graphic; }
 
 pmstore::~pmstore()
 { 
-////    qDebug("Deleting image");
+////    odebug << "Deleting image" << oendl; 
     delete graphic;
 }
 

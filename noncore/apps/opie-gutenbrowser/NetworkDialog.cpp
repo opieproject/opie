@@ -10,15 +10,15 @@
 //  ***************************************************************************/
 // // half-assed attempt at providing a network dialog.
 // /* Created: Sun Aug 27 15:24:52 2000*/
-#include <unistd.h>
 
-extern "C" {
-#include <ftplib.h>
-}
 
 #include "NetworkDialog.h"
 #include "gutenbrowser.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* QT */
 #include <qprogressbar.h>
 #include <qstringlist.h>
 #include <qpe/config.h>
@@ -29,6 +29,12 @@ extern "C" {
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
+
+/* STD */
+#include <unistd.h>
+extern "C" {
+#include <ftplib.h>
+}
 
 QProgressBar* ProgressBar1;
 QPushButton* buttonCancel;
@@ -46,20 +52,20 @@ static int log_progress(netbuf *ctl, int xfered, void *arg) {
 }
 
 NetworkDialog::NetworkDialog( QWidget* parent,  const char* name, bool modal, WFlags fl, const QStringList netL)
-				: QDialog( parent, name, modal, fl )
+                : QDialog( parent, name, modal, fl )
 {
 
     ftp_host = netL[0];
     networkUrl = strUrl =  netL[0];
 
     dir = ftp_base_dir = netL[1];
-		localFileName = netL[2];
-		s_partialFileName = netL[3];
+        localFileName = netL[2];
+        s_partialFileName = netL[3];
 
-		resize(240,110);
+        resize(240,110);
 
-		local_library = (QDir::homeDirPath ()) +"/Applications/gutenbrowser/";
-//		autoOk = autoDownload;
+        local_library = (QDir::homeDirPath ()) +"/Applications/gutenbrowser/";
+//      autoOk = autoDownload;
 //      if( networkUrl.find("ftp",0,false)== -1 ) {
 //         if ( !name )
 //              setName( "HTTP NetworkDialog" );
@@ -118,11 +124,11 @@ void NetworkDialog::initDialog() {
     connect(buttonCancel,SIGNAL(clicked()),this,SLOT(reject()));
 //    connect( timer, SIGNAL(timeout()), this , SLOT(timeSlot()));
 //    connect( connectionTimer,SIGNAL( timeout()),this,SLOT( connectionTimeSlot()));
-		if(autoOk) {
-				qWarning("XXXXXXXXXXXXXXXXXXXXXXXX");
-				buttonOk->setDown(true);
-				doOk();
-		}
+        if(autoOk) {
+                owarn << "XXXXXXXXXXXXXXXXXXXXXXXX" << oendl;
+                buttonOk->setDown(true);
+                doOk();
+        }
 }
 
 void NetworkDialog::timeSlot() {
@@ -143,13 +149,13 @@ void NetworkDialog::timeSlot() {
 //      timerProgess--;
 //          posTimer=TRUE;
 //      }
-//  //    qDebug("timer event");
+//  //    odebug << "timer event" << oendl;
 //      qApp->processEvents();
 //      repaint();
 }
 
 void NetworkDialog::connectionTimeSlot() {
-//      qDebug("Connections timed out");
+//      odebug << "Connections timed out" << oendl;
 //      ftpQuit();
 //      qApp->processEvents();
 //      repaint();
@@ -167,21 +173,21 @@ bool NetworkDialog::downloadFile( QString networkUrl )
 //    connectionTimer->start( 600 , FALSE);
     warnLabel ->setText( "");
     qApp->processEvents();
-    qDebug("Downloading: %s",networkUrl.latin1());
-    qDebug("Into: %s",localFileName.latin1());
+    odebug << "Downloading: " << networkUrl << "" << oendl;
+    odebug << "Into: " << localFileName << "" << oendl;
     if( networkUrl.length() > 5) {
         QString ftp_user = "anonymous";
         QString ftp_pass = "zaurus@gutenbrowser.com";
 //    ftp_host= networkUrl.mid(networkUrl.find("ftp://",0, TRUE),
         if(ftp_host.length() < 2) {
-            qDebug("Please select an ftp host" );
+            odebug << "Please select an ftp host" << oendl;
             successDownload=false;
             QMessageBox::message("Note","You need to select an ftp host");
             return false;
         }
         QString msg;
-        qDebug(ftp_host);
-        qDebug("Opening ftp connection.");
+        odebug << ftp_host << oendl;
+        odebug << "Opening ftp connection." << oendl;
         warnLabel->setText("connecting to: "+ftp_host );
         qApp->processEvents();
           /////////// Open FTP connection
@@ -200,7 +206,7 @@ bool NetworkDialog::downloadFile( QString networkUrl )
             QMessageBox::message("Note",msg);
             return  false;
         }
-        qDebug("Changing directories.");
+        odebug << "Changing directories." << oendl;
         TextLabel3->setText("Changing directories.");
         qApp->processEvents();
         if (!FtpChdir( dir.latin1(), conn )) {
@@ -217,7 +223,7 @@ bool NetworkDialog::downloadFile( QString networkUrl )
 //              FtpQuit(conn);
 //              return false;
 //      }
-        qDebug("Requesting directory list.");
+        odebug << "Requesting directory list." << oendl;
         TextLabel3->setText("Getting directory list.");
         qApp->processEvents();
         if (!FtpDir( "./.guten_temp", dir.latin1(), conn) ) {
@@ -232,7 +238,7 @@ bool NetworkDialog::downloadFile( QString networkUrl )
 
         if (tmp.open(IO_ReadOnly)) {
             QTextStream t( &tmp );   // use a text stream
-            qDebug("Finding partial filename "+s_partialFileName);
+            odebug << "Finding partial filename "+s_partialFileName << oendl;
             while ( !t.eof()) {
                 s = t.readLine();
 
@@ -241,30 +247,30 @@ bool NetworkDialog::downloadFile( QString networkUrl )
 
                     if (str.contains(".txt")) {
                         File_Name = str;
-                        qDebug("Found file_name "+ File_Name);
+                        odebug << "Found file_name "+ File_Name << oendl;
                         break;
                     }
 //                      if (str.contains(".zip")) {
 //                          File_Name = str;
-//                          qDebug("Found file_name "+ File_Name);
+//                          odebug << "Found file_name "+ File_Name << oendl;
 //                          break;
 //                      }
-                    
+
                 }
             }  //end of while loop
             tmp.close();
 //        tmp.remove(); ///TODO this is for release version Zaurus
         }
         else
-            qDebug("Error opening temp file.");
+            odebug << "Error opening temp file." << oendl;
 
         Config cfg("Gutenbrowser");
         cfg.setGroup("General");
         QString temp=cfg.readEntry("DownloadDirectory",local_library);
 
         localFileName = temp+File_Name;
-        qDebug("Requesting file "+ File_Name);
-        qDebug( "Saving as "+localFileName);
+        odebug << "Requesting file "+ File_Name << oendl;
+        odebug << "Saving as "+localFileName << oendl;
         msg="Requesting file "+ File_Name;
         TextLabel3->setText(msg);
         qApp->processEvents();
@@ -272,9 +278,9 @@ bool NetworkDialog::downloadFile( QString networkUrl )
             if (!FtpSize( File_Name.latin1(), &fsz, FTPLIB_ASCII, conn))
                 fsz = 0;
             QString temp;
-            temp.sprintf( File_Name+" "+" %dkb", fsz); 
+            temp.sprintf( File_Name+" "+" %dkb", fsz);
             TextLabel3->setText(temp);
-            
+
              ProgressBar1->setTotalSteps(fsz);
             FtpOptions(FTPLIB_CALLBACK, (long) log_progress, conn);
             FtpOptions(FTPLIB_IDLETIME, (long) 1000, conn);
@@ -293,7 +299,7 @@ bool NetworkDialog::downloadFile( QString networkUrl )
             FtpQuit(conn);
             return false;
         }
-        qDebug("Ftp session successful");
+        odebug << "Ftp session successful" << oendl;
         successDownload=TRUE;
         FtpQuit(conn);
         return true;
@@ -302,7 +308,7 @@ bool NetworkDialog::downloadFile( QString networkUrl )
 }
 
 void NetworkDialog::doOk() {
-		qWarning("Do OK");
+        owarn << "Do OK" << oendl;
     QString loginStr;
     loginStr = "gutenbrowser";
     if ( !ftp_host.isEmpty() )   {
@@ -314,7 +320,7 @@ void NetworkDialog::doOk() {
                 successDownload = true;
             else {
                 successDownload = false;
-                reject(); 
+                reject();
             }
         } else {
             if(downloadFile(ftp_host))

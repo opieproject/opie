@@ -13,17 +13,19 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+
+
 #include "optionsDialog.h"
-#include <qpe/config.h>
 #include "fontDialog.h"
-
-// #include <unistd.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-
 //#include "ftpsitedlg.h"
 //#include "browserDialog.h"
 //#define Inherited  QDialog
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/config.h>
+
+/* QT */
 #include <qfont.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
@@ -38,6 +40,12 @@
 #ifndef Q_WS_QWS
 #include <qwhatsthis.h>
 #endif
+
+/* STD */
+// #include <unistd.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+
 /*
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  TRUE to construct a modal dialog.
@@ -60,7 +68,7 @@ optionsDialog::optionsDialog( QWidget* parent,  const char* name, bool modal, WF
 
 optionsDialog::~optionsDialog()
 {
-//qDebug("OnExit()");
+//odebug << "OnExit()" << oendl;
 //    writeConfig();
 }
 
@@ -125,15 +133,15 @@ void optionsDialog::getConfig()
     QString qExit=config.readEntry("queryExit","TRUE");
     if(qExit=="TRUE") {
         cb_queryExit->setChecked(TRUE);
-        qDebug("Config Setting    b_qExit=TRUE;");
+        odebug << "Config Setting    b_qExit=TRUE;" << oendl;
         b_qExit=TRUE;
     } else {
         cb_queryExit->setChecked(FALSE);
-        qDebug("ConfigSetting    b_qExit=FALSE;");
+        odebug << "ConfigSetting    b_qExit=FALSE;" << oendl;
         b_qExit=FALSE;
     }
 
-     
+
       useWordWrap_CheckBox->setChecked( config.readBoolEntry("WordWrap", 1));
       QString downDir=config.readEntry( "DownloadDirectory",local_library);
       downloadDirEdit->setText(downDir);
@@ -141,7 +149,7 @@ void optionsDialog::getConfig()
 
 //  //  void optionsDialog::setStyle( int index) {
 
-//  //      qDebug("Set style%d",index);
+//  //      odebug << "Set style" << index << "" << oendl;
 //  //  //int styleInt= index;
 //  //   styleChanged=TRUE;
 //  //        if( ComboBoxStyle->currentItem()==0) styleInt=0;//"styleMetal"));
@@ -167,15 +175,15 @@ void optionsDialog::slotQueryExit()
 {
     Config config("Gutenbrowser");
     config.setGroup("General");
-    qDebug("writing queryExit");
+    odebug << "writing queryExit" << oendl;
     if(cb_queryExit->isChecked()) {
         b_qExit=TRUE;
         config.writeEntry("queryExit","TRUE");
-        qDebug("WritingConfig queryExit=TRUE");
+        odebug << "WritingConfig queryExit=TRUE" << oendl;
     } else {
         b_qExit=FALSE;
         config.writeEntry("queryExit","FALSE");
-        qDebug("WritingConfig queryExit=FALSE");
+        odebug << "WritingConfig queryExit=FALSE" << oendl;
     }
     config.write();
 }
@@ -187,10 +195,10 @@ void optionsDialog::slotQueryExit()
 //  }
 
 //  void optionsDialog::lineEditChanged(const QString &editText) {
-//      qDebug(editText);
+//      odebug << editText << oendl;
 //  }
 
-void optionsDialog::changeFonts() 
+void optionsDialog::changeFonts()
 {
     changedFonts=TRUE;
 }
@@ -203,5 +211,5 @@ void optionsDialog::slotWordWrap(bool b) {
 
   config.writeEntry("WordWrap", b);
   config.write();
-  
+
 }

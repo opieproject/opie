@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: QTReader.cpp,v 1.10 2004-03-01 19:23:21 chicken Exp $
+** $Id: QTReader.cpp,v 1.11 2004-05-03 21:35:19 ar Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -80,7 +80,7 @@ QTReader::QTReader( const QString& filename, QWidget *parent=0, const tchar *nam
   m_fm(NULL)
 {
   init();
-//  //  qDebug("Load_file(1)");
+//  //  odebug << "Load_file(1)" << oendl; 
   load_file((const tchar*)filename);
 }
 */
@@ -91,7 +91,7 @@ void QTReader::mouseMoveEvent(QMouseEvent* _e)
 
     mouseUpOn = !(_e->pos().x() == -1);
 
-    qDebug("MouseMove:[%d, %d]", _e->pos().x(), _e->pos().y());
+    odebug << "MouseMove:[" << _e->pos().x() << ", " << _e->pos().y() << "]" << oendl; 
 }
 */
 long QTReader::real_delay()
@@ -104,7 +104,7 @@ void QTReader::mousePressEvent( QMouseEvent* _e )
     buffdoc.unsuspend();
     if (_e->button() == RightButton)
     {
-//	qDebug("MousePress");
+//	odebug << "MousePress" << oendl; 
 	mouseUpOn = false;
 	if (m_swapmouse)
 	{
@@ -317,7 +317,7 @@ void QTReader::processmousewordevent(size_t startpos, size_t startoffset, QMouse
 	    if (t->width(i, true, width(), m_border) > tgt)
 	    {
 		wrd = toQString(t->data()+first, i - first);
-//			    qDebug("Got %s", (const char *)wrd);
+//			    odebug << "Got " << (const char *)wrd << "" << oendl; 
 		break;
 	    }
 	    while (!QChar((*t)[i]).isLetter() && (*t)[i] != 0) i++;
@@ -327,7 +327,7 @@ void QTReader::processmousewordevent(size_t startpos, size_t startoffset, QMouse
     }
     if (!wrd.isEmpty())
     {
-//	qDebug("Selected:%s", (const char*)wrd);
+//	odebug << "Selected:" << wrd << "" << oendl; 
 	emit OnWordSelected(wrd, locnarray[lineno], (m_twotouch) ? wrd : toQString(textarray[lineno]->data()));
     }
 }
@@ -339,7 +339,7 @@ void QTReader::mouseReleaseEvent( QMouseEvent* _e )
     {
 	if (mouseUpOn)
 	{
-//	    qDebug("MouseRelease");
+//	    odebug << "MouseRelease" << oendl; 
 	    if (_e->x() > width() - m_border)
 	    {
 		locate(buffdoc.startSection()+((buffdoc.endSection()-buffdoc.startSection())*_e->y()+height()/2)/height());
@@ -394,7 +394,7 @@ void QTReader::mouseReleaseEvent( QMouseEvent* _e )
 		    }
 		    case ePicture:
 		    {
-//			qDebug("Picture:%x", tgt);
+//			odebug << "Picture:" << tgt << "" << oendl; 
 			QImage* pm = buffdoc.getPicture(tgt);
 			if (pm != NULL)
 			{
@@ -410,7 +410,7 @@ void QTReader::mouseReleaseEvent( QMouseEvent* _e )
 		    case eNone:
 			break;
 		    default:
-//			qDebug("Unknown linktype");
+//			odebug << "Unknown linktype" << oendl; 
 			return;
 		}
 		if (m_swapmouse)
@@ -696,7 +696,7 @@ void QTReader::setautoscroll(bool _sc)
 #ifdef _SCROLLPIPE
 	if (!m_pipetarget.isEmpty())
 	{
-//	    qDebug("Opening pipe to %s", (const char*)m_pipetarget);
+//	    odebug << "Opening pipe to " << m_pipetarget << "" << oendl; 
 	    m_pipeout = popen((const char*)m_pipetarget, "w");
 	    m_isPaused = false;
 	}
@@ -823,24 +823,24 @@ void QTReader::drawFonts( QPainter *p )
 {
     if (bDoUpdates)
     {
-//	qDebug("How refreshing...");
+//	odebug << "How refreshing..." << oendl; 
 	if (buffdoc.empty()) return;
 	setfont();
 	if (m_lastwidth != width())
 	{
-//	    qDebug("Not Optimised %d", m_lastwidth);
+//	    odebug << "Not Optimised " << m_lastwidth << "" << oendl; 
 	    m_lastwidth = width();
 	    m_lastheight = height();
 	    buffdoc.setwidth(m_lastwidth-2*m_border);
 	    locate(pagelocate());
-//	    qDebug("Not Optimised %d", m_lastwidth);
+//	    odebug << "Not Optimised " << m_lastwidth << "" << oendl; 
 	}
 	else 
 	{
 	    int newht = height();
 	    if (m_lastheight > newht)
 	    {
-//		qDebug("Optimised < %d %d %d", numlines, m_lastheight, newht);
+//		odebug << "Optimised < " << numlines << " " << m_lastheight << " " << newht << "" << oendl; 
 		int ypos = 0;
 		for (int i = 0; i < numlines; i++)
 		{
@@ -851,19 +851,19 @@ void QTReader::drawFonts( QPainter *p )
 			break;
 		    }
 		}
-//		qDebug("Optimised < %d", numlines);
+//		odebug << "Optimised < " << numlines << "" << oendl; 
 		m_lastheight = newht;
 	    }
 	    else if (m_lastheight < newht)
 	    {
-//		qDebug("Optimised > %d", numlines);
+//		odebug << "Optimised > " << numlines << "" << oendl; 
 		int ypos = 0;
 		for (int i = 0; i <= numlines; i++)
 		{
 		    ypos += textarray[i]->lineSpacing();
 		}
 		fillbuffer(numlines+1, ypos, newht);
-//		qDebug("Optimised > %d", numlines);
+//		odebug << "Optimised > " << numlines << "" << oendl; 
 	    }
 	    if (numlines > 0)
 	    {
@@ -897,7 +897,7 @@ void QTReader::drawFonts( QPainter *p )
 /*
     else
     {
-	qDebug("Not so refreshing...");
+	odebug << "Not so refreshing..." << oendl; 
     }
 */
 }
@@ -1028,7 +1028,7 @@ void QTReader::paintEvent( QPaintEvent * )
 /*
 void QTReader::resizeEvent( QResizeEvent * )
 {
-//  //  qDebug("resize:(%u,%u)", width(), height());
+//  //  odebug << "resize:(" << width() << "," << height() << ")" << oendl; 
   //    bgroup->move( width()-bgroup->width(), 0 );
 }
 */
@@ -1053,11 +1053,11 @@ bool QTReader::locate(unsigned long n) {
   //printf("Locate\n");
     buffdoc.unsuspend();
   buffdoc.locate(n);
-//  //  qDebug("&buffdoc.located");
+//  //  odebug << "&buffdoc.located" << oendl; 
   fillbuffer();
-//  //  qDebug("&Buffer filled");
+//  //  odebug << "&Buffer filled" << oendl; 
   update();
-//  //  qDebug("&Located");
+//  //  odebug << "&Located" << oendl; 
   return true;
 }
 
@@ -1117,12 +1117,12 @@ bool QTReader::fillbuffer(int reuse, int ht, int newht)
 
 void QTReader::dopagedn()
 {
-//    qDebug("HEIGHT(2):%d", m_lastheight);
+//    odebug << "HEIGHT(2):" << m_lastheight << "" << oendl; 
     buffdoc.unsuspend();
     int skip = 0, ypos = 0;
     if (locate() != mylastpos)
     {
-////	qDebug("Jumping to %u", mylastpos);
+////	odebug << "Jumping to " << mylastpos << "" << oendl; 
 	jumpto(mylastpos);
     }
     CDrawBuffer* reusebuffer = textarray[numlines];
@@ -1313,13 +1313,13 @@ bool QTReader::load_file(const char *newfile, unsigned int _lcn)
       buffdoc.setwidth(m_lastwidth-2*m_border);
       bRC = true;
       buffdoc.setContinuous(m_continuousDocument);
-//      //  qDebug("buffdoc.openfile done");
+//      //  odebug << "buffdoc.openfile done" << oendl; 
       locate(lcn);
-//      //  qDebug("buffdoc.locate done");
+//      //  odebug << "buffdoc.locate done" << oendl; 
     }
   setfilter(getfilter());
   update();
-//  //  qDebug("Updated");
+//  //  odebug << "Updated" << oendl; 
   return bRC;
 }
 

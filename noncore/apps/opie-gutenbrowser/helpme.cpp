@@ -14,15 +14,20 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/qpeapplication.h>
 
 #include "helpme.h"
 #include "helpwindow.h"
 
+/* OPIE */
+#include <qpe/qcopenvelope_qws.h>
+#include <qpe/qpeapplication.h>
+#include <opie2/odebug.h>
+
+/* QT */
 #include <qprogressdialog.h>
 #include <qlayout.h>
 
+/* STD */
 #include <sys/stat.h>
 #include <unistd.h>
 
@@ -111,12 +116,12 @@ void HelpMe::help()
 {
     QString msg ;
     msg=QPEApplication::qpeDir()+"help/html/gutenbrowser-index.html"; // or where ever this ends up to be
-qDebug(msg);
+odebug << msg << oendl;
     QString url = "file://"+msg;
     goGetit( url);
 
 //       QCopEnvelope e("QPE/Application/helpbrowser", "setDocument(QString)" );
 //       e << msg;
- 
+
 //    goGetit( msg);
 }

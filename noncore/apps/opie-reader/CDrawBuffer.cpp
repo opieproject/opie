@@ -40,7 +40,7 @@ void CDrawBuffer::setright(CDrawBuffer& rhs, int f)
 CDrawBuffer& CDrawBuffer::operator=(CDrawBuffer& rhs)
 {
   int i;
-//  //qDebug("Trying 2");
+//  //odebug << "Trying 2" << oendl; 
   len = rhs.len;
   m_maxstyle = rhs.m_maxstyle;
   m_ascent = rhs.m_ascent;
@@ -58,7 +58,7 @@ CDrawBuffer& CDrawBuffer::operator=(CDrawBuffer& rhs)
   for (i = 0; rhs[i] != '\0'; i++) (*this)[i] = rhs[i];
   (*this)[i] = '\0';
   len = i;
-//  //qDebug("Tried 2");
+//  //odebug << "Tried 2" << oendl; 
   return *this;
 }
 
@@ -208,7 +208,7 @@ int CDrawBuffer::width(int numchars, bool onscreen, int scwidth, unsigned char _
 			else
 			{
 			    QString nstr = str.mid(lastspace+1, nsp-lastspace);
-//			    qDebug("str:%s: last:%d new:%d nstr:%s:", (const char*)str, lastspace, nsp, (const char*)nstr);
+//			    odebug << "str:" << str << ": last:" << lastspace << " new:" << nsp << " nstr:" << nstr << ":" << oendl; 
 			    int lw = fm.width(nstr);
 			    cx += lw;
 			    lastspace = nsp;
@@ -317,7 +317,7 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 	CStyle currentstyle = textstart->style;
 	QFont f((currentstyle.isMono() && fc->hasCourier()) ? fc->fixedfontname() : fc->name(), fc->getsize(currentstyle), (currentstyle.isBold()) ? QFont::Bold : QFont::Normal, (currentstyle.isItalic()) );
 //	f.setUnderline(currentstyle.isUnderline());
-//	if (currentstyle.isUnderline()) qDebug("UNDERLINE");
+//	if (currentstyle.isUnderline()) odebug << "UNDERLINE" << oendl; 
 	_p->setFont(f);
 	QString str = text.mid(textstart->start, end-textstart->start);
 #if defined(OPIE) || !defined(USEQPE)
@@ -408,7 +408,7 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 				spacenumber++;
 				int nexttoadd = (extraspace*spacenumber+spaces/2)/spaces - spacesofar;
 				QString nstr = str.mid(lastspace+1, nsp-lastspace);
-//			    qDebug("str:%s: last:%d new:%d nstr:%s:", (const char*)str, lastspace, nsp, (const char*)nstr);
+//			    odebug << "str:" << str << ": last:" << lastspace << " new:" << nsp << " nstr:" << nstr << ":" << oendl; 
 				int lw = fm.width(nstr);
 				_p->drawText( cx, _y+voffset, nstr);
 				cx += lw+nexttoadd;
@@ -418,7 +418,7 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 			    else
 			    {
 				QString nstr = str.mid(lastspace+1, nsp-lastspace);
-//			    qDebug("str:%s: last:%d new:%d nstr:%s:", (const char*)str, lastspace, nsp, (const char*)nstr);
+//			    odebug << "str:" << str << ": last:" << lastspace << " new:" << nsp << " nstr:" << nstr << ":" << oendl; 
 				int lw = fm.width(nstr);
 				_p->drawText( cx, _y+voffset, nstr);
 				cx += lw;
@@ -470,14 +470,14 @@ linkType CDrawBuffer::getLinkType(int numchars, size_t& tgt)
 	end = (textend != segs.end()) ? textend->start : len;
 	currentstyle = textstart->style;
 /*
-	if (currentstyle.isPicture()) qDebug("Passed thru picture");
-	if (currentstyle.getLink()) qDebug("Passed thru link");
-	//qDebug("islink:%d - %d", numchars, end);
+	if (currentstyle.isPicture()) odebug << "Passed thru picture" << oendl; 
+	if (currentstyle.getLink()) odebug << "Passed thru link" << oendl; 
+	//odebug << "islink:" << numchars << " - " << end << "" << oendl; 
 */
 	textstart = textend;
     }
     while (textend != segs.end() && end <= numchars);
-//    if (currentstyle.isPicture()) qDebug("Clicked on picture");
+//    if (currentstyle.isPicture()) odebug << "Clicked on picture" << oendl; 
     if (currentstyle.getPictureLink())
     {
 	tgt = currentstyle.getPictureLinkData();
@@ -539,7 +539,7 @@ void CDrawBuffer::resize()
     if (m_bSop)
     {
 	int xt = ((segs.begin()->style.getExtraSpace()+fc->getextraspace())*fc->getsize(segs.begin()->style)+5)/10;
-//	qDebug("ExtraSpace:%d", xt);
+//	odebug << "ExtraSpace:" << xt << "" << oendl; 
 	m_ascent += xt;
 	m_lineSpacing += xt;
     }

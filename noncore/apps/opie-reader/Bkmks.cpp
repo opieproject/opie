@@ -217,15 +217,15 @@ CList<Bkmk>* BkmkFile::readall()
 		case 6:
 		    isUpgraded = false;
 		    bl = readall00(read06);
-//		    qDebug("Correct version!");
+//		    odebug << "Correct version!" << oendl; 
 		    break;
 		case 5:
 		    isUpgraded = true;
 		    bl = readall00(read05);
-//		    qDebug("Known version!");
+//		    odebug << "Known version!" << oendl; 
 		    break;
 		default:
-//		    qDebug("Unknown version!");
+//		    odebug << "Unknown version!" << oendl; 
 		    isUpgraded = true;
 		    bl = readall00(read05);
 	    }

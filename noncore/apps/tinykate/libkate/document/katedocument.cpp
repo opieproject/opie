@@ -6,7 +6,7 @@
                            (C) 2002 by Joseph Wenninger
     email                : crossfire@babylon2k.de
                            jowenn@kde.org
- 
+
 ***************************************************************************/
 
 /***************************************************************************
@@ -39,20 +39,31 @@
 */
 
 #include "katedocument.h"
+#include "kmessagebox.h"
+#include "kglobal.h"
 
+//#include "kcharsets.h"
+#include "kdebug.h"
+//#include "kinstance.h"
 
+#include "kglobalsettings.h"
+//#include "kaction.h"
+//#include "kstdaction.h"
+
+#include "../view/kateview.h"
+#include "katebuffer.h"
+#include "katetextline.h"
+
+#include "katecmd.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/config.h>
+
+/* QT */
 #include <qfileinfo.h>
 #include <qdatetime.h>
-
-#include <kmessagebox.h>
-#include <qpe/config.h>
 #include <qstring.h>
-
-#include <sys/time.h>
-#include <unistd.h>
-
-#include <stdio.h>
-
 #include <qtimer.h>
 #include <qobject.h>
 #include <qapplication.h>
@@ -62,21 +73,11 @@
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qtextcodec.h>
-#include <kglobal.h>
 
-//#include <kcharsets.h>
-#include <kdebug.h>
-//#include <kinstance.h>
-
-#include <kglobalsettings.h>
-//#include <kaction.h>
-//#include <kstdaction.h>
-
-#include "../view/kateview.h"
-#include "katebuffer.h"
-#include "katetextline.h"
-
-#include "katecmd.h"
+/* STD */
+#include <sys/time.h>
+#include <unistd.h>
+#include <stdio.h>
 
 KateAction::KateAction(Action a, PointStruc &cursor, int len, const QString &text)
   : action(a), cursor(cursor), len(len), text(text) {
@@ -130,7 +131,7 @@ QStringList KateDocument::replaceWithList = QStringList();
 
 uint KateDocument::uniqueID = 0;
 
-QPtrDict<KateDocument::KateDocPrivate>* KateDocument::d_ptr = 0;    
+QPtrDict<KateDocument::KateDocPrivate>* KateDocument::d_ptr = 0;
 
 
 KateDocument::KateDocument(bool bSingleViewMode, bool bBrowserView,
@@ -141,8 +142,8 @@ KateDocument::KateDocument(bool bSingleViewMode, bool bBrowserView,
     myFontMetrics (myFont), myFontMetricsBold (myFontBold), myFontMetricsItalic (myFontItalic), myFontMetricsBI (myFontBI),
     hlManager(HlManager::self ())
 {
- 
-  d(this)->hlSetByUser = false;  
+
+  d(this)->hlSetByUser = false;
   PreHighlightedTill=0;
   RequestPreHighlightTill=0;
 
@@ -152,7 +153,7 @@ KateDocument::KateDocument(bool bSingleViewMode, bool bBrowserView,
   m_url = QString::null;
 
   // NOTE: QFont::CharSet doesn't provide all the charsets KDE supports
-  // (esp. it doesn't distinguish between UTF-8 and iso10646-1) 
+  // (esp. it doesn't distinguish between UTF-8 and iso10646-1)
 
   myEncoding = QString::fromLatin1(QTextCodec::codecForLocale()->name());
 
@@ -292,20 +293,20 @@ KateDocument::~KateDocument()
 void KateDocument::openURL(const QString &filename)
 {
 
-  m_file=filename;  
+  m_file=filename;
   fileInfo->setFile (m_file);
   setMTime();
 
   if (!fileInfo->exists() || !fileInfo->isReadable())
   {
-    qDebug("File doesn't exit or couldn't be read");
+    odebug << "File doesn't exit or couldn't be read" << oendl;
     return ;
   }
 
   buffer->clear();
 #warning fixme
 //  buffer->insertFile(0, m_file, KGlobal::charsets()->codecForName(myEncoding));
-  qDebug("Telling buffer to open file");
+  odebug << "Telling buffer to open file" << oendl;
   buffer->insertFile(0, m_file, QTextCodec::codecForLocale());
 
   setMTime();
@@ -321,13 +322,13 @@ void KateDocument::openURL(const QString &filename)
   updateViews();
 
   emit fileNameChanged();
-  
+
   return ;
 }
 
 bool KateDocument::saveFile()
 {
-    
+
   QFile f( m_file );
   if ( !f.open( IO_WriteOnly ) )
     return false; // Error
@@ -611,7 +612,7 @@ void KateDocument::readConfig()
 
   colors[0] = config->readColorEntry("Color Background", colors[0]);
   colors[1] = config->readColorEntry("Color Selected", colors[1]);
-  
+
 //  config->sync();
 }
 
@@ -683,7 +684,7 @@ void KateDocument::setHighlight(int n) {
 }
 
 void KateDocument::makeAttribs() {
-  qDebug("KateDocument::makeAttribs()");
+  odebug << "KateDocument::makeAttribs()" << oendl;
   m_numAttribs = hlManager->makeAttribs(m_highlight, m_attribs, maxAttribs);
   updateFontData();
   updateLines();
@@ -1923,8 +1924,8 @@ void KateDocument::updateLines(int startLine, int endLine, int flags, int cursor
       updateMaxLength(textLine);
     }
     endCtx = textLine->getContext();
-//    qDebug("DOHIGHLIGHT");
-    
+//    odebug << "DOHIGHLIGHT" << oendl;
+
     ctxNum = m_highlight->doHighlight(ctxNum,textLine);
     textLine->setContext(ctxNum);
     line++;

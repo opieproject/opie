@@ -90,7 +90,7 @@ void FontDialog::familyListBoxSlot(const QString & text)
     styleListBox->clear();
 //  clearListBoxes();
   family = text;
-//  qDebug(family);
+//  odebug << family << oendl; 
   QStringList styles = fdb.styles( family ); // string list of styles of our current font family
   styleListBox->insertStringList( styles);
   QString dstyle;// = "\t" + style + " (";
@@ -100,7 +100,7 @@ void FontDialog::familyListBoxSlot(const QString & text)
 QValueList<int> smoothies = fdb.smoothSizes( family, styleListBox->text(0) );
    for ( QValueList<int>::Iterator points = smoothies.begin(); points != smoothies.end(); ++points ) {
        dstyle = QString::number( *points );
-       qDebug(dstyle);
+       odebug << dstyle << oendl; 
       sizeComboBox->insertItem(  dstyle.left( dstyle.length() - 1 ));
   }
 #else
@@ -151,7 +151,7 @@ void FontDialog::populateLists()
   for ( QStringList::Iterator f = families.begin(); f != families.end();++f ) {
       QString family = *f;
 //      if(family == defaultFont.family())
-//          qDebug(family);
+//          odebug << family << oendl; 
       familyListBox->insertItem( family);
 
       if( familyListBox->text(0) == family) {
@@ -209,13 +209,13 @@ void FontDialog::changeText()
     else {
         family = familyListBox->currentText();
     }
-//          qDebug("Font family is "+family);
+//          odebug << "Font family is "+family << oendl; 
     if( styleListBox->currentItem() == -1)
         style=styleListBox->text(0);
     else {
         style = styleListBox->currentText();
     }
-//          qDebug("font style is "+style);
+//          odebug << "font style is "+style << oendl; 
 
     if( sizeComboBox->currentItem() == -1 )
         size = sizeComboBox->text(0);
@@ -223,7 +223,7 @@ void FontDialog::changeText()
      size = sizeComboBox->currentText();
     }
 
-//       qDebug("Font size is "+size);
+//       odebug << "Font size is "+size << oendl; 
     bool ok;
     int i_size = size.toInt(&ok,10);
     QStringList charSetList = fdb.charSets(family);
@@ -231,13 +231,13 @@ void FontDialog::changeText()
     QString charSet;
           for ( QStringList::Iterator s = charSetList.begin(); s != charSetList.end();++s ) { // for each font style
             charSet = *s;
-//            qDebug(charSet);
+//            odebug << charSet << oendl; 
           }
     selectedFont = fdb.font(family,style,i_size,charSet);
     QFontInfo fontInfo( selectedFont);
-//      if(fontInfo.italic() ) qDebug("italic");
+//      if(fontInfo.italic() ) odebug << "italic" << oendl; 
     selectedFont.setWeight(fontInfo.weight() );    
-//      qDebug("Style are "+style+" %d ",fontInfo.weight());
+//      odebug << "Style are "+style+" " << fontInfo.weight() << " " << oendl; 
     Config cfg("Gutenbrowser");
     cfg.setGroup("Font");
     cfg.writeEntry("Family",family);
@@ -249,7 +249,7 @@ void FontDialog::changeText()
           selectedFont = fdb.font(family,"Regular",i_size,charSet);
           selectedFont.setItalic(TRUE); //ya right
           cfg.writeEntry("Italic","TRUE");
-//            qDebug("Style is "+styleListBox->currentText());
+//            odebug << "Style is "+styleListBox->currentText() << oendl; 
       } else
           cfg.writeEntry("Italic","FALSE");
 

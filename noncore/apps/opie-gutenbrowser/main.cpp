@@ -37,7 +37,7 @@ OPIE_EXPORT_APP( OApplicationFactory<Gutenbrowser> )
 // //                     {
 // //                     case 'v': // help
 // //                         printf("Gutenbrowser: "VERSION"\n");
-// // //                        qDebug("Gutenbrowser: "VERSION);
+// // //                        odebug << "Gutenbrowser: "VERSION << oendl; 
 // //                           //                      return 0;
 // //                         break;
 // //                     case 't': // current time 19:34:20 04/03/00

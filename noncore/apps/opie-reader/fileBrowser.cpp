@@ -132,7 +132,7 @@ fileBrowser::~fileBrowser()
 void fileBrowser::populateList()
 {
     ListView->clear();
-////qDebug(currentDir.canonicalPath());
+////odebug << currentDir.canonicalPath() << oendl; 
 //    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::NoSymLinks );
     currentDir.setFilter( filterspec );
     currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
@@ -156,7 +156,7 @@ void fileBrowser::populateList()
 	    } 
 	    else 
 	    {
-////        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
+////        odebug << "Not a dir: "+currentDir.canonicalPath()+fileL << oendl; 
 	    }
 	    new QListViewItem( ListView,fileL,fileS );
 	}
@@ -169,7 +169,7 @@ void fileBrowser::populateList()
 
 void fileBrowser::upDir()
 {
-////    qDebug(currentDir.canonicalPath());
+////    odebug << currentDir.canonicalPath() << oendl; 
 }
 
 void fileBrowser::listClicked(QListViewItem *selectedItem)
@@ -177,7 +177,7 @@ void fileBrowser::listClicked(QListViewItem *selectedItem)
     if (selectedItem == NULL) return;
     QString strItem=selectedItem->text(0);
 
-////    qDebug("%s", (const char*)strItem);
+////    odebug << "" << strItem << "" << oendl; 
     
 
     QString strSize=selectedItem->text(1);

@@ -14,18 +14,23 @@
  *   ONLY VERSION 2 OF THE LICENSE IS APPLICABLE                           *
  *                                                                         *
  ***************************************************************************/
-#include <qaction.h>
-#include <qtoolbutton.h>
-#include <qmenubar.h>
-#include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
-
-#include <opie2/ofiledialog.h>
 
 #include "tinykate.h"
 
-#include <katedocument.h>
-#include <kglobal.h>
+#include "katedocument.h"
+#include "kglobal.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <opie2/ofiledialog.h>
+#include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
+
+/* QT */
+#include <qaction.h>
+#include <qtoolbutton.h>
+#include <qmenubar.h>
+
 
 using namespace Opie::Ui;
 TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
@@ -152,7 +157,7 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
 
 TinyKate::~TinyKate( )
 {
-  qWarning("TinyKate destructor\n");
+  owarn << "TinyKate destructor\n" << oendl;
 
   shutDown=true;
   while (currentView!=0) {
@@ -160,7 +165,7 @@ TinyKate::~TinyKate( )
   }
 
   if( KGlobal::config() != 0 ) {
-    qWarning("deleting KateConfig object..\n");
+    owarn << "deleting KateConfig object..\n" << oendl;
     delete KGlobal::config();
   }
 }
@@ -181,7 +186,7 @@ void TinyKate::open(const QString & filename)
     QFileInfo fi(filename);
     QString filenamed = fi.fileName();
     tabwidget->addTab(kv=kd->createView(tabwidget,"bLAH"),"tinykate/tinykate", filenamed );
-    qDebug(filename);
+    odebug << filename << oendl;
 
     kd->setDocName( filenamed);
     kd->open( filename );
@@ -249,7 +254,7 @@ void TinyKate::slotSave() {
 
   //  KateView *kv = (KateView*) currentView;
   KateDocument *kd = (KateDocument*) currentView->document();
-  //  qDebug("saving file "+kd->docName());
+  //  odebug << "saving file "+kd->docName() << oendl;
   if( kd->docName().isEmpty())
     slotSaveAs();
   else
@@ -265,7 +270,7 @@ void TinyKate::slotSaveAs() {
   QString filename= OFileDialog::getSaveFileName(OFileSelector::EXTENDED_ALL,
                                                  QString::null);
   if (!filename.isEmpty()) {
-    qDebug("saving file "+filename);
+    odebug << "saving file "+filename << oendl;
     QFileInfo fi(filename);
     QString filenamed = fi.fileName();
     kd->setDocFile( filename);

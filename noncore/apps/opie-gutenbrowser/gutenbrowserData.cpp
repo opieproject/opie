@@ -11,15 +11,19 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
+
 //#include "gutenbrowserData.h"
 #include "gutenbrowser.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/config.h>
 #include <qpe/fontdatabase.h>
 #include <qpe/menubutton.h>
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 
+/* QT */
 #include <qfontinfo.h>
 #include <qtoolbutton.h>
 
@@ -35,11 +39,11 @@ void Gutenbrowser::initSlots() {
     connect(InfoBar,SIGNAL(clicked()),SLOT(InfoBarClick()));
     connect(qApp,SIGNAL(aboutToQuit()),SLOT(cleanUp()));
     connect(mainList,SIGNAL(clicked(QListBoxItem *)),SLOT(listClickedSlot(QListBoxItem *)));
-    connect(bookmarksMenu,SIGNAL(activated(int)),SLOT(Bookmark(int)));    
+    connect(bookmarksMenu,SIGNAL(activated(int)),SLOT(Bookmark(int)));
 }
 
 void Gutenbrowser::initConfig() {
-//qDebug("Starting configuration.");
+//odebug << "Starting configuration." << oendl;
     QDir library(local_library);
     if ( !library.exists()) {
         library.mkdir(local_library, TRUE);
@@ -57,7 +61,7 @@ void Gutenbrowser::initConfig() {
 // #endif
 
     }
-      //    qDebug( "init file is %s",iniFile.latin1());
+      //    odebug << "init file is " << iniFile << "" << oendl;
 
 #ifdef Q_WS_QWS
     useSplitter=FALSE;
@@ -137,7 +141,7 @@ void Gutenbrowser::initConfig() {
 
     ftp_base_dir= config.readEntry("base",  "/pub/gutenberg");
 
-			//bool ok2;
+            //bool ok2;
     QString temp;
     QString copying;
     copying="";
@@ -147,21 +151,21 @@ void Gutenbrowser::initConfig() {
     qExit=config.readEntry("queryExit","TRUE");
     if(qExit=="TRUE") {
         b_queryExit=TRUE;
-//    qDebug("Please query before leaving the library.");
+//    odebug << "Please query before leaving the library." << oendl;
     } else {
-//    qDebug("Please DO NOT query before leaving the library.");
+//    odebug << "Please DO NOT query before leaving the library." << oendl;
         b_queryExit=FALSE;
     }
 // bookmarks
 //       config.setGroup("Titles");
 //      QString tmpTitle=config.readEntry(file_name,"");
-  
+
 
 }// end initConfig()
 
 void Gutenbrowser::initMenuBar()
 {
-//    qDebug("Starting menu init.");
+//    odebug << "Starting menu init." << oendl;
       // menuBar entry fileMenu
     menubar = new QPEMenuBar(this);
 
@@ -176,14 +180,14 @@ void Gutenbrowser::initMenuBar()
       // menuBar entry editMenu
 
     editMenu=new QPopupMenu();
-    
+
     editMenu->insertItem(Resource::loadPixmap("up"), "Top",
-												 this, SLOT(TopBtn()) );
+                                                 this, SLOT(TopBtn()) );
     editMenu->insertItem( Resource::loadPixmap("back"), "Beginning",
                           this, SLOT(doBeginBtn()) );
     editMenu->insertItem( Resource::loadPixmap("gutenbrowser/search"), "Search",
                           this, SLOT(SearchBtn()) );
-    
+
     editMenu->insertItem("Clear", this, SLOT(ClearEdit()) );
 
     optionsMenu= new QPopupMenu();
@@ -207,7 +211,7 @@ void Gutenbrowser::initMenuBar()
 
 void Gutenbrowser::initButtonBar()
 {
-//qDebug("Starting buttonbar init.");
+//odebug << "Starting buttonbar init." << oendl;
 
     OpenButton = new QPushButton( this, "OpenButton" );
     OpenButton->setFocusPolicy( QWidget::TabFocus );
@@ -222,7 +226,7 @@ void Gutenbrowser::initButtonBar()
     ForwardButton = new QPushButton( this, "ForwardButton" );
     ForwardButton->setFocusPolicy( QWidget::TabFocus );
 //    ForwardButton->setAutoRepeat(TRUE);
-    
+
     SearchButton = new QPushButton( this, "SearchButton" );
     SearchButton->setFocusPolicy( QWidget::TabFocus );
 
@@ -234,14 +238,14 @@ void Gutenbrowser::initButtonBar()
 
     bookmarksMenu = new QPopupMenu();
     bookmarksMenu->insertItem("Last Set", this, SLOT(Bookmark( int) ));
-    
+
     lastBmkButton->setPopup(bookmarksMenu);
 
     dictionaryButton = new QPushButton( this, "dictionaryButton" );
     dictionaryButton->setFocusPolicy( QWidget::TabFocus );
 
     InfoBar = new QPushButton( this, "Info_Bar" );
-//    qDebug("Infobar");
+//    odebug << "Infobar" << oendl;
 //    if(!useSplitter) {
 
     buttonsHidden=FALSE;
@@ -276,7 +280,7 @@ void Gutenbrowser::initView()
       // set the main widget here
 //        QFont defaultFont( "charter", 10, 50, 0 );
     Lview = new MultiLine_Ex(this);
-      
+
     Config cfg("Gutenbrowser");
     cfg.setGroup("Font");
 
@@ -293,7 +297,7 @@ void Gutenbrowser::initView()
 
     QString italic=cfg.readEntry("Italic","FALSE");
     if(italic=="TRUE") {
-        qDebug("Set Italic font");
+        odebug << "Set Italic font" << oendl;
         defaultFont = fdb.font(family,"Regular",i_size,charSet); //workaround
         defaultFont.setItalic(TRUE);
     }

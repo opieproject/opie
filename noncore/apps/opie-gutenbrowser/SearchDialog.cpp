@@ -98,7 +98,7 @@ void SearchDialog::byeBye()
 {
 
     searchString = get_text();
-//    qDebug("Search string is "+searchString);
+//    odebug << "Search string is "+searchString << oendl; 
     Config cfg("Gutenbrowser");
     cfg.setGroup("General");
     cfg.writeEntry("LastSearch",searchString);
@@ -119,7 +119,7 @@ void SearchDialog::byeBye()
 void SearchDialog::closed()
 {
     searchString = get_text();
-//    qDebug("Search string is "+searchString);
+//    odebug << "Search string is "+searchString << oendl; 
     Config cfg("Gutenbrowser");
     cfg.setGroup("General");
     cfg.writeEntry("LastSearch",searchString);

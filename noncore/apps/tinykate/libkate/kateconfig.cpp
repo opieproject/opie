@@ -18,6 +18,14 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_LANGLIST
+#include "kateconfig.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/global.h>
+
+/* QT */
 #include <qdir.h>
 #include <qmessagebox.h>
 #if QT_VERSION <= 230 && defined(QT_NO_CODECS)
@@ -25,15 +33,12 @@
 #endif
 #include <qtextstream.h>
 
+/* STD */
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-#define QTOPIA_INTERNAL_LANGLIST
-#include "kateconfig.h"
-#include <qpe/global.h>
 
 
 /*!
@@ -42,14 +47,14 @@
 QString KateConfig::configFilename(const QString& name, Domain d)
 {
     switch (d) {
-	case File:
-	    return name;
-	case User: {
-	    QDir dir = (QString(getenv("HOME")) + "/Settings");
-	    if ( !dir.exists() )
-		mkdir(dir.path().local8Bit(),0700);
-	    return dir.path() + "/" + name + ".conf";
-	}
+    case File:
+        return name;
+    case User: {
+        QDir dir = (QString(getenv("HOME")) + "/Settings");
+        if ( !dir.exists() )
+        mkdir(dir.path().local8Bit(),0700);
+        return dir.path() + "/" + name + ".conf";
+    }
     }
     return name;
 }
@@ -93,7 +98,7 @@ QString KateConfig::configFilename(const QString& name, Domain d)
 KateConfig::KateConfig( const QString &name, Domain domain )
     : filename( configFilename(name,domain) )
 {
-    qWarning("KateConfig constructor\n");
+    owarn << "KateConfig constructor\n" << oendl;
     git = groups.end();
     read();
     QStringList l = Global::languageList();
@@ -104,7 +109,7 @@ KateConfig::KateConfig( const QString &name, Domain domain )
 
 // Sharp ROM compatibility
 KateConfig::KateConfig ( const QString &name, bool what )
-	: filename( configFilename(name,what ? User : File) )
+    : filename( configFilename(name,what ? User : File) )
 {
     git = groups.end();
     read();
@@ -118,9 +123,9 @@ KateConfig::KateConfig ( const QString &name, bool what )
 */
 KateConfig::~KateConfig()
 {
-    qWarning("KateConfig destructor\n");
+    owarn << "KateConfig destructor\n" << oendl;
     if ( changed )
-	write();
+    write();
 }
 
 /*!
@@ -129,7 +134,7 @@ KateConfig::~KateConfig()
 bool KateConfig::hasKey( const QString &key ) const
 {
     if ( groups.end() == git )
-	return FALSE;
+    return FALSE;
     KateConfigGroup::ConstIterator it = ( *git ).find( key );
     return it != ( *git ).end();
 }
@@ -147,9 +152,9 @@ void KateConfig::setGroup( const QString &gname )
 {
     QMap< QString, KateConfigGroup>::Iterator it = groups.find( gname );
     if ( it == groups.end() ) {
-	git = groups.insert( gname, KateConfigGroup() );
-	changed = TRUE;
-	return;
+    git = groups.insert( gname, KateConfigGroup() );
+    changed = TRUE;
+    return;
     }
     git = it;
 }
@@ -172,12 +177,12 @@ void KateConfig::writeEntry( const QString &key, const char* value )
 void KateConfig::writeEntry( const QString &key, const QString &value )
 {
     if ( git == groups.end() ) {
-	qWarning( "no group set" );
-	return;
+    owarn << "no group set" << oendl;
+    return;
     }
     if ( (*git)[key] != value ) {
-	( *git ).insert( key, value );
-	changed = TRUE;
+    ( *git ).insert( key, value );
+    changed = TRUE;
     }
 }
 
@@ -196,12 +201,12 @@ static QString encipher(const QString& plain)
     QString cipher;
     int mix=28730492;
     for (int i=0; i<(int)plain.length(); i++) {
-	int u = plain[i].unicode();
-	int c = u ^ mix;
-	QString x = QString::number(c,36);
-	cipher.append(QChar('a'+x.length()));
-	cipher.append(x);
-	mix *= u;
+    int u = plain[i].unicode();
+    int c = u ^ mix;
+    QString x = QString::number(c,36);
+    cipher.append(QChar('a'+x.length()));
+    cipher.append(x);
+    mix *= u;
     }
     return cipher;
 }
@@ -211,11 +216,11 @@ static QString decipher(const QString& cipher)
     QString plain;
     int mix=28730492;
     for (int i=0; i<(int)cipher.length();) {
-	int l = cipher[i].unicode()-'a';
-	QString x = cipher.mid(i+1,l); i+=l+1;
-	int u = x.toInt(0,36) ^ mix;
-	plain.append(QChar(u));
-	mix *= u;
+    int l = cipher[i].unicode()-'a';
+    QString x = cipher.mid(i+1,l); i+=l+1;
+    int u = x.toInt(0,36) ^ mix;
+    plain.append(QChar(u));
+    mix *= u;
     }
     return plain;
 }
@@ -232,13 +237,13 @@ static QString decipher(const QString& cipher)
 void KateConfig::writeEntryCrypt( const QString &key, const QString &value )
 {
     if ( git == groups.end() ) {
-	qWarning( "no group set" );
-	return;
+    owarn << "no group set" << oendl;
+    return;
     }
     QString evalue = encipher(value);
     if ( (*git)[key] != evalue ) {
-	( *git ).insert( key, evalue );
-	changed = TRUE;
+    ( *git ).insert( key, evalue );
+    changed = TRUE;
     }
 }
 
@@ -287,7 +292,7 @@ void KateConfig::writeEntry( const QString &key, const QStringList &lst, const Q
     QString s;
     QStringList::ConstIterator it = lst.begin();
     for ( ; it != lst.end(); ++it )
-	s += *it + sep;
+    s += *it + sep;
     writeEntry( key, s );
 }
 
@@ -297,7 +302,7 @@ void KateConfig::writeEntry( const QString &key, const QColor &val )
     l.append( QString().setNum(val.red()) );
     l.append( QString().setNum(val.green()) );
     l.append( QString().setNum(val.blue()) );
-    
+
     writeEntry( key, l, QChar(',') );
 }
 
@@ -309,7 +314,7 @@ void KateConfig::writeEntry( const QString &key, const QFont &val )
     l.append( QString().setNum(val.weight()) );
     l.append( QString().setNum((int)val.italic()) );
     l.append( QString().setNum((int)val.charSet()) );
-    
+
     writeEntry( key, l, QChar(',') );
 }
 
@@ -321,8 +326,8 @@ void KateConfig::writeEntry( const QString &key, const QFont &val )
 void KateConfig::removeEntry( const QString &key )
 {
     if ( git == groups.end() ) {
-	qWarning( "no group set" );
-	return;
+    owarn << "no group set" << oendl;
+    return;
     }
     ( *git ).remove( key );
     changed = TRUE;
@@ -354,11 +359,11 @@ QString KateConfig::readEntry( const QString &key, const QString &deflt )
 {
     QString res = readEntryDirect( key+"["+lang+"]" );
     if ( !res.isNull() )
-	return res;
+    return res;
     if ( !glang.isEmpty() ) {
-	res = readEntryDirect( key+"["+glang+"]" );
-	if ( !res.isNull() )
-	    return res;
+    res = readEntryDirect( key+"["+glang+"]" );
+    if ( !res.isNull() )
+        return res;
     }
     return readEntryDirect( key, deflt );
 }
@@ -377,11 +382,11 @@ QString KateConfig::readEntryCrypt( const QString &key, const QString &deflt )
 {
     QString res = readEntryDirect( key+"["+lang+"]" );
     if ( res.isNull() && glang.isEmpty() )
-	res = readEntryDirect( key+"["+glang+"]" );
+    res = readEntryDirect( key+"["+glang+"]" );
     if ( res.isNull() )
-	res = readEntryDirect( key, QString::null );
+    res = readEntryDirect( key, QString::null );
     if ( res.isNull() )
-	return deflt;
+    return deflt;
     return decipher(res);
 }
 
@@ -397,14 +402,14 @@ QString KateConfig::readEntryCrypt( const QString &key, const QString &deflt )
 QString KateConfig::readEntryDirect( const QString &key, const QString &deflt )
 {
     if ( git == groups.end() ) {
-	//qWarning( "no group set" );
-	return deflt;
+    //owarn << "no group set" << oendl;
+    return deflt;
     }
     KateConfigGroup::ConstIterator it = ( *git ).find( key );
     if ( it != ( *git ).end() )
-	return *it;
+    return *it;
     else
-	return deflt;
+    return deflt;
 }
 
 /*!
@@ -420,9 +425,9 @@ int KateConfig::readNumEntry( const QString &key, int deflt )
 {
     QString s = readEntry( key );
     if ( s.isEmpty() )
-	return deflt;
+    return deflt;
     else
-	return s.toInt();
+    return s.toInt();
 }
 
 /*!
@@ -438,9 +443,9 @@ bool KateConfig::readBoolEntry( const QString &key, bool deflt )
 {
     QString s = readEntry( key );
     if ( s.isEmpty() )
-	return deflt;
+    return deflt;
     else
-	return (bool)s.toInt();
+    return (bool)s.toInt();
 }
 
 /*!
@@ -456,9 +461,9 @@ QStringList KateConfig::readListEntry( const QString &key, const QChar &sep )
 {
     QString s = readEntry( key );
     if ( s.isEmpty() )
-	return QStringList();
+    return QStringList();
     else
-	return QStringList::split( sep, s );
+    return QStringList::split( sep, s );
 }
 
 QColor KateConfig::readColorEntry( const QString &key, const QColor &def ) const
@@ -484,7 +489,7 @@ QValueList<int> KateConfig::readIntListEntry( const QString &key ) const
     QString s = readEntry( key );
     QValueList<int> il;
     if ( s.isEmpty() )
-	return il;
+    return il;
 
     QStringList l = QStringList::split( QChar(','), s );
 
@@ -500,12 +505,12 @@ QValueList<int> KateConfig::readIntListEntry( const QString &key ) const
 void KateConfig::clearGroup()
 {
     if ( git == groups.end() ) {
-	qWarning( "no group set" );
-	return;
+    owarn << "no group set" << oendl;
+    return;
     }
     if ( !(*git).isEmpty() ) {
-	( *git ).clear();
-	changed = TRUE;
+    ( *git ).clear();
+    changed = TRUE;
     }
 }
 
@@ -516,45 +521,45 @@ void KateConfig::write( const QString &fn )
 {
     QString strNewFile;
     if ( !fn.isEmpty() )
-	filename = fn;
+    filename = fn;
     strNewFile = filename + ".new";
 
     QFile f( strNewFile );
     if ( !f.open( IO_WriteOnly|IO_Raw ) ) {
-	qWarning( "could not open for writing `%s'", strNewFile.latin1() );
-	git = groups.end();
-	return;
+    owarn << "could not open for writing `" << strNewFile << "'" << oendl;
+    git = groups.end();
+    return;
     }
-    
+
     QString str;
-    QCString cstr;    
+    QCString cstr;
     QMap< QString, KateConfigGroup >::Iterator g_it = groups.begin();
 
     for ( ; g_it != groups.end(); ++g_it ) {
- 	str += "[" + g_it.key() + "]\n";
- 	KateConfigGroup::Iterator e_it = ( *g_it ).begin();
- 	for ( ; e_it != ( *g_it ).end(); ++e_it )
- 	    str += e_it.key() + " = " + *e_it + "\n";
+    str += "[" + g_it.key() + "]\n";
+    KateConfigGroup::Iterator e_it = ( *g_it ).begin();
+    for ( ; e_it != ( *g_it ).end(); ++e_it )
+        str += e_it.key() + " = " + *e_it + "\n";
     }
     cstr = str.utf8();
-    
+
     int total_length;
     total_length = f.writeBlock( cstr.data(), cstr.length() );
     if ( total_length != int(cstr.length()) ) {
-	QMessageBox::critical( 0, QObject::tr("Out of Space"),
-			       QObject::tr("There was a problem creating\nKateConfiguration Information \nfor this program.\n\nPlease free up some space and\ntry again.") );
-	f.close();
-	QFile::remove( strNewFile );
-	return;
+    QMessageBox::critical( 0, QObject::tr("Out of Space"),
+                   QObject::tr("There was a problem creating\nKateConfiguration Information \nfor this program.\n\nPlease free up some space and\ntry again.") );
+    f.close();
+    QFile::remove( strNewFile );
+    return;
     }
-    
+
     f.close();
     // now rename the file...
     if ( rename( strNewFile, filename ) < 0 ) {
-	qWarning( "problem renaming the file %s to %s", strNewFile.latin1(), 
-		  filename.latin1() );
-	QFile::remove( strNewFile );
-    }	
+    qWarning( "problem renaming the file %s to %s", strNewFile.latin1(),
+          filename.latin1() );
+    QFile::remove( strNewFile );
+    }
 }
 
 /*!
@@ -573,14 +578,14 @@ void KateConfig::read()
     changed = FALSE;
 
     if ( !QFileInfo( filename ).exists() ) {
-	git = groups.end();
-	return;
+    git = groups.end();
+    return;
     }
 
     QFile f( filename );
     if ( !f.open( IO_ReadOnly ) ) {
-	git = groups.end();
-	return;
+    git = groups.end();
+    return;
     }
 
     QTextStream s( &f );
@@ -608,25 +613,25 @@ void KateConfig::read()
 bool KateConfig::parse( const QString &l )
 {
     QString line = l.stripWhiteSpace();
-    
+
     if ( line [0] == QChar ( '#' ))
-    	return true; // ignore comments
-    
+        return true; // ignore comments
+
     if ( line[ 0 ] == QChar( '[' ) ) {
-	QString gname = line;
-	gname = gname.remove( 0, 1 );
-	if ( gname[ (int)gname.length() - 1 ] == QChar( ']' ) )
-	    gname = gname.remove( gname.length() - 1, 1 );
-	git = groups.insert( gname, KateConfigGroup() );
+    QString gname = line;
+    gname = gname.remove( 0, 1 );
+    if ( gname[ (int)gname.length() - 1 ] == QChar( ']' ) )
+        gname = gname.remove( gname.length() - 1, 1 );
+    git = groups.insert( gname, KateConfigGroup() );
     } else if ( !line.isEmpty() ) {
-	if ( git == groups.end() )
-	    return FALSE;
-	int eq = line.find( '=' );
-	if ( eq == -1 )
-	    return FALSE;
-	QString key = line.left(eq).stripWhiteSpace();
-	QString value = line.mid(eq+1).stripWhiteSpace();
-	( *git ).insert( key, value );
+    if ( git == groups.end() )
+        return FALSE;
+    int eq = line.find( '=' );
+    if ( eq == -1 )
+        return FALSE;
+    QString key = line.left(eq).stripWhiteSpace();
+    QString value = line.mid(eq+1).stripWhiteSpace();
+    ( *git ).insert( key, value );
     }
     return TRUE;
 }
