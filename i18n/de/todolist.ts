@@ -80,21 +80,23 @@
     <name>TodoWindow</name>
     <message>
         <source>Todo</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgaben</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht genügend Speicherplatz</translation>
     </message>
     <message>
         <source>Unable to create startup files
 Free up some space
 before you enter any data</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte keine Startdateien erstellen.
+Machen Sie Speicherplatzfrei,
+bevor Sie Daten eingeben.</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">Neue Aufgabe</translation>
+        <translation>Neue Aufgabe</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -122,7 +124,7 @@ before you enter any data</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
