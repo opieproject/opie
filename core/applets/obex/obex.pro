@@ -1,11 +1,11 @@
 TEMPLATE	= lib
 CONFIG		+= qt warn_on release
-HEADERS	=   kprocess.h kprocctrl.h obex.h
-SOURCES	=   kprocess.cpp kprocctrl.cpp obex.cc
+HEADERS	=   obex.h obeximpl.h
+SOURCES	=   obex.cc obeximpl.cc
 TARGET		= obex
-DESTDIR		= ../../plugins/applets
+DESTDIR		= ../../plugins/obex
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += ../$(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 VERSION		= 0.0.1
 

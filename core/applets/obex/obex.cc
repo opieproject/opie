@@ -1,6 +1,6 @@
 
 
-#include "kprocess.h"
+#include <opie/oprocess.h>
 #include "obex.h"
 
 using namespace  OpieObex;
@@ -17,16 +17,16 @@ Obex::~Obex() {
   delete m_send;
 }
 void Obex::receive()  {
-   m_rec = new KProcess();
+   m_rec = new OProcess();
    *m_rec << "irobex_palm3";
    // connect to the necessary slots
-   connect(m_rec,  SIGNAL(processExited(KProcess*) ),
-	   this,  SLOT(slotExited(KProcess*) ) );
+   connect(m_rec,  SIGNAL(processExited(OProcess*) ),
+	   this,  SLOT(slotExited(OProcess*) ) );
    
-   connect(m_rec,  SIGNAL(receivedStdout(KProcess*, char*,  int ) ),
-	   this,  SLOT(slotStdOut(KProcess*, char*, int) ) );
+   connect(m_rec,  SIGNAL(receivedStdout(OProcess*, char*,  int ) ),
+	   this,  SLOT(slotStdOut(OProcess*, char*, int) ) );
    
-   if(!m_rec->start(KProcess::NotifyOnExit, KProcess::AllOutput) ) {
+   if(!m_rec->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
      qWarning("could not start :(");
      emit done( false );
    }
@@ -42,18 +42,18 @@ void Obex::sendNow(){
   if ( m_count >= 15 ) { // could not send
     emit error(-1 );
   }
-  // KProcess inititialisation
-  m_send = new KProcess();
+  // OProcess inititialisation
+  m_send = new OProcess();
   *m_send << "irobex_palm3";
   *m_send << m_file;
   
   // connect to slots Exited and and StdOut
-  connect(m_send,  SIGNAL(processExited(KProcess*) ),
-	  this, SLOT(slotExited(KProcess*)) );
-  connect(m_send,  SIGNAL(receivedStdout(KProcess*, char*,  int )), 
-	  this, SLOT(slotStdOut(KProcess*, char*, int) ) );
+  connect(m_send,  SIGNAL(processExited(OProcess*) ),
+	  this, SLOT(slotExited(OProcess*)) );
+  connect(m_send,  SIGNAL(receivedStdout(OProcess*, char*,  int )), 
+	  this, SLOT(slotStdOut(OProcess*, char*, int) ) );
   // now start it
-  if (!m_send->start(/*KProcess::NotifyOnExit,  KProcess::AllOutput*/ ) ) {
+  if (!m_send->start(/*OProcess::NotifyOnExit,  OProcess::AllOutput*/ ) ) {
     m_count = 15;
     emit error(-1 );
   }
@@ -62,14 +62,14 @@ void Obex::sendNow(){
   emit currentTry( m_count );
 }
 
-void Obex::slotExited(KProcess* proc ){
+void Obex::slotExited(OProcess* proc ){
    if (proc == m_rec ) { // recieve process
         recieved();
     }else if ( proc == m_send ) {
         sendEnd();
     }
 }
-void Obex::slotStdOut(KProcess* proc, char* buf, int len){
+void Obex::slotStdOut(OProcess* proc, char* buf, int len){
   if ( proc == m_rec ) { // only recieve
     QCString cstring( buf,  len );
     m_outp.append( cstring.data() );
