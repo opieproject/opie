@@ -97,14 +97,12 @@ bool AbView::save()
 	return m_contactdb.save();
 }
 
-// :SX Add: Just load for specific Category
 void AbView::load()
 {
 	qWarning("abView:Load data");
 	
 	m_list = m_contactdb.allRecords();
 	clearForCategory();
-	m_curr_Contact = 0;
 	
 	qWarning ("Number of contacts: %d", m_list.count());
 
@@ -299,7 +297,7 @@ void  AbView::updateView()
 	}
 
 	// If we switching the view, we have to store some information
-	if ( m_prev_View != m_curr_View ){
+// 	if ( m_prev_View != m_curr_View ){
 		switch ( (int) m_prev_View ) {
 		case TableView:
 			m_curr_Contact = m_abTable -> currentEntry_UID();
@@ -308,7 +306,7 @@ void  AbView::updateView()
 			m_curr_Contact = m_ablabel -> currentEntry_UID();
 			break;
 		}
-	}
+// 	}
 	
 	m_prev_View = m_curr_View;
 

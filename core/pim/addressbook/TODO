@@ -11,13 +11,19 @@ Known Bugs:
 - Personal Details not working
 - Contact-Editor is temporarely reanabled. Wait for replacement.
 - If category changed, the letterpicker should be resetted
-- Return from Contacteditor: Category resettet to all
 - OK-Key does not switch from Detailview to Listview
+
+- VCARD: Import of Anniversary does not work correctly (currently disabled)
+
 
 Urgent:
 
 Important:
 
+- Smarter handling of "Cancel" and klicking on exit:
+	User of the old Addressbook always closing addressbook accidentely.. :(
+
+- When click in Table: Pullup Menu ?
 - Add "Do you really want to close app" Box.
 - Redesign of Contacteditor
 - Store last settings of combo-boxes
@@ -61,3 +67,4 @@ Fixed:
 	need configuration)
 - Select of primary contact (see #274 on mantis)
 - Category-select does not work completely: "Unfiled" is always in listview ..
+- Return from Contacteditor: Category resettet to all

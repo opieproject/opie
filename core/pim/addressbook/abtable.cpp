@@ -209,6 +209,7 @@ bool AbTable::selectContact( int UID )
 
 void AbTable::insertIntoTable( const OContact& cnt, int row )
 {
+	// qWarning( "void AbTable::insertIntoTable( const OContact& cnt, %d )", row );
 	QString strName,
 		strContact;
 	
@@ -249,6 +250,7 @@ void AbTable::columnClicked( int col )
 
 void AbTable::resort()
 {
+	qWarning( "void AbTable::resort()" );
 	if ( sorting() ) {
 		if ( lastSortCol == -1 )
 			lastSortCol = 0;
@@ -260,6 +262,7 @@ void AbTable::resort()
 
 OContact AbTable::currentEntry()
 {
+	qWarning( "OContact AbTable::currentEntry()" );
 	OContact cnt;
 	AbTableItem *abItem;
 	abItem = static_cast<AbTableItem*>(item( currentRow(), 0 ));
@@ -292,6 +295,7 @@ void AbTable::clear()
 // Refresh updates column 2 if the contactsettings changed
 void AbTable::refresh()
 {
+	qWarning( "void AbTable::refresh()" );
 	int rows = numRows();
 	QString value;
 	AbTableItem *abi;
@@ -334,6 +338,7 @@ void AbTable::keyPressEvent( QKeyEvent *e )
 
 void AbTable::moveTo( char c )
 {
+	qWarning( "void AbTable::moveTo( char c )" );
 	
 	int rows = numRows();
 	QString value;
@@ -395,6 +400,7 @@ void AbTable::resizeRows() {
 
 void AbTable::realignTable()
 {
+	qWarning( "void AbTable::realignTable()" );
 
 	setPaintingEnabled( FALSE );
 
@@ -444,6 +450,7 @@ void QTable::paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch )
 
 void AbTable::fitColumns()
 {
+	qWarning( "void AbTable::fitColumns()" );
 	int contentsWidth = visibleWidth() / 2; // :SX Why too low
 	// Fix to better value
 	// contentsWidth = 130; 
@@ -463,6 +470,7 @@ void AbTable::fitColumns()
 
 void AbTable::show()
 {
+	qWarning( "void AbTable::show()" );
 	realignTable();
 	QTable::show();
 }

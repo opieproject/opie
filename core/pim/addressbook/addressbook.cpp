@@ -625,7 +625,7 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 			m_abView -> replaceEntry( replEntry );
 		}
 	}
-	populateCategories();
+	// populateCategories();
 
 }
 
@@ -663,6 +663,9 @@ void AddressbookWindow::editPersonal()
 	abEditor->setPersonalView( false );
 }
 
+
+// Die Funktion muß noch überarbeitet werden !
+// -> Soll AbLabel reaktiviert werden ? 
 void AddressbookWindow::slotPersonalView()
 {
 	if (!actionPersonal->isOn()) {
@@ -682,13 +685,16 @@ void AddressbookWindow::slotPersonalView()
 	actionFind->setEnabled(FALSE);
 	actionMail->setEnabled(FALSE);
 	
-	setCaption( tr("Contacts - My Personal Details") );
-	QString filename = addressbookPersonalVCardName();
-	OContact me;
-	if (QFile::exists(filename))
-		me = OContact::readVCard( filename )[0];
+// 	setCaption( tr("Contacts - My Personal Details") );
+// 	QString filename = addressbookPersonalVCardName();
+// 	OContact me;
+// 	if (QFile::exists(filename))
+// 		me = OContact::readVCard( filename )[0];
 	
-	m_abView -> showContact ( me );
+// 	// m_abView -> showContact ( me );
+	
+
+	editPersonal();
 
 	// :SX
 // 	listContainer->hide();
