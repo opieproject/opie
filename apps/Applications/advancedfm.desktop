@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment = An advanced file manager program
 Comment[es]=Un gestor de ficheros avanzado
+Comment[da]=Et advanceret filstyringsprogram
 Exec = advancedfm
 File = advancedfm
 Icon = advancedfm/FileBrowser
@@ -12,3 +13,4 @@ Name[de]=Dateimanager
 Name[it]=Gestione File
 Name[zh_TW]=進階檔案總管
 Name[ko]=발달된 파일 관리자
+Name[da]=Filstyring
