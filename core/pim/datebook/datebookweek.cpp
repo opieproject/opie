@@ -190,20 +190,23 @@ void DateBookWeekView::positionItem( DateBookWeekItem *i )
     // 30 minute intervals
     int y = ev.start().hour() * 2;
     y += db_round30min( ev.start().minute() );
+    int y2 = ev.end().hour() * 2;
+    y2 += db_round30min( ev.end().minute() );
     if ( y > 47 )
 	y = 47;
+    if ( y2 > 48 )
+        y2 = 48;
     y = y * rowHeight / 2;
+    y2 = y2 * rowHeight / 2;
 
     int h;
     if ( ev.event().type() == Event::AllDay ) {
-	h = 48;
+	h = 48 * rowHeight / 2;
 	y = 0;
     } else {
-	h = ( ev.end().hour() - ev.start().hour() ) * 2;
-	h += db_round30min( ev.end().minute() - ev.start().minute() );
+	h=y2-y;
 	if ( h < 1 ) h = 1;
     }
-    h = h * rowHeight / 2;
 
     int dow = ev.date().dayOfWeek();
     if ( !bOnMonday ) {
@@ -468,23 +471,15 @@ void DateBookWeek::generateAllDayTooltext( QString& text ) {
 void DateBookWeek::generateNormalTooltext( QString& str,
                                            const EffectiveEvent &ev ) {
     str += "<b>" + QObject::tr("Start") + "</b>: ";
-
-    if ( ev.startDate() != ev.date() ) {
-	// multi-day event.  Show start date
-	str += TimeString::longDateString( ev.startDate() );
-    } else {
-	// Show start time.
-	str += TimeString::timeString(ev.start(), ampm, FALSE );
+    str += TimeString::timeString( ev.event().start().time(), ampm, FALSE );
+    if( ev.startDate()!=ev.endDate() ) {
+        str += " <i>" + TimeString::longDateString( ev.startDate() )+"</i>";
     }
-
-
-    str += "<br><b>" + QObject::tr("End") + "</b>: ";
-    if ( ev.endDate() != ev.date() ) {
-        // multi-day event.  Show end date
-        str += TimeString::longDateString( ev.endDate() );
-    } else {
-        // Show end time.
-        str += TimeString::timeString( ev.end(), ampm, FALSE );
+    str += "<br>";
+    str += "<b>" + QObject::tr("End") + "</b>: ";
+    str += TimeString::timeString( ev.event().end().time(), ampm, FALSE );
+    if( ev.startDate()!=ev.endDate() ) {
+        str += " <i>" + TimeString::longDateString( ev.endDate() ) + "</i>";
     }
 }
 
