@@ -12,6 +12,7 @@ HEADERS		= drawpad.h \
 		  linetool.h \
 		  newpagedialog.h \
 		  page.h \
+		  pageinformationdialog.h \
 		  pointtool.h \
 		  rectangletool.h \
 		  shapetool.h \
@@ -31,6 +32,7 @@ SOURCES		= drawpad.cpp \
 		  main.cpp \
 		  newpagedialog.cpp \
 		  page.cpp \
+		  pageinformationdialog.cpp \
 		  pointtool.cpp \
 		  rectangletool.cpp \
 		  shapetool.cpp \

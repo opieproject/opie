@@ -65,6 +65,7 @@ private slots:
     void importPage();
     void exportPage();
     void thumbnailView();
+    void pageInformation();
 
 private:
     DrawPadCanvas* m_pDrawPadCanvas;

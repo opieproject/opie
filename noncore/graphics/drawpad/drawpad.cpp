@@ -23,6 +23,7 @@
 #include "importdialog.h"
 #include "linetool.h"
 #include "newpagedialog.h"
+#include "pageinformationdialog.h"
 #include "pointtool.h"
 #include "rectangletool.h"
 #include "texttool.h"
@@ -86,6 +87,10 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     QAction* thumbnailViewAction = new QAction(tr("Thumbnail View"), tr("Thumbnail View..."), 0, this);
     connect(thumbnailViewAction, SIGNAL(activated()), this, SLOT(thumbnailView()));
     thumbnailViewAction->addTo(toolsPopupMenu);
+    
+    QAction* pageInformationAction = new QAction(tr("Page Information"), tr("Page Information..."), 0, this);
+    connect(pageInformationAction, SIGNAL(activated()), this, SLOT(pageInformation()));
+    pageInformationAction->addTo(toolsPopupMenu);
 
     menuBar->insertItem(tr("Tools"), toolsPopupMenu);
 
@@ -592,4 +597,12 @@ void DrawPad::thumbnailView()
 
     thumbnailView.showMaximized();
     thumbnailView.exec();
+}
+
+void DrawPad::pageInformation()
+{
+    PageInformationDialog pageInformationDialog(m_pDrawPadCanvas->currentPage());
+
+    if (pageInformationDialog.exec() == QDialog::Accepted) {
+    }
 }

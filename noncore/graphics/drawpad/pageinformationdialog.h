@@ -11,38 +11,29 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef NEWPAGEDIALOG_H
-#define NEWPAGEDIALOG_H
+#ifndef PAGEINFORMATIONDIALOG_H
+#define PAGEINFORMATIONDIALOG_H
 
 #include <qdialog.h>
 
-class QButtonGroup;
-class QLineEdit;
-class QSpinBox;
+class Page;
 
-class NewPageDialog : public QDialog
-{ 
+class QLineEdit;
+
+class PageInformationDialog : public QDialog
+{
     Q_OBJECT
 
 public:
-    NewPageDialog(uint width, uint height, const QColor& foregroundColor,
-                  const QColor& backgroundColor, QWidget* parent = 0, const char* name = 0);
-    ~NewPageDialog();
+    PageInformationDialog(Page* page, QWidget* parent = 0, const char* name = 0);
+    ~PageInformationDialog();
 
-    uint selectedWidth();
-    uint selectedHeight();
-    const QColor& selectedColor();
+    QString selectedTitle();
 
 private:
+    Page* m_pPage;
+
     QLineEdit* m_pTitleLineEdit;
-
-    QSpinBox* m_pWidthSpinBox;
-    QSpinBox* m_pHeightSpinBox;
-
-    QColor m_penColor;
-    QColor m_brushColor;
-
-    QButtonGroup* m_pContentButtonGroup;
 };
 
-#endif // NEWPAGEDIALOG_H
+#endif // PAGEINFORMATIONDIALOG_H

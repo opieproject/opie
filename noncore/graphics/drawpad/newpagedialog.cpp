@@ -17,6 +17,7 @@
 #include <qgroupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
+#include <qlineedit.h>
 #include <qradiobutton.h>
 #include <qspinbox.h>
 
@@ -29,7 +30,12 @@ NewPageDialog::NewPageDialog(uint width, uint height, const QColor& penColor,
     m_penColor = penColor;
     m_brushColor = brushColor;
 
-    QGroupBox* sizeGroupBox = new QGroupBox(0, Qt::Vertical, tr("Page Size"), this);
+    QGroupBox* generalGroupBox = new QGroupBox(0, Qt::Vertical, tr("General"), this);
+
+    QLabel* titleLabel = new QLabel(tr("Title:"), generalGroupBox);
+    m_pTitleLineEdit = new QLineEdit(generalGroupBox);
+
+    QGroupBox* sizeGroupBox = new QGroupBox(0, Qt::Vertical, tr("Size"), this);
 
     QLabel* widthLabel = new QLabel(tr("Width:"), sizeGroupBox);
     QLabel* heightLabel = new QLabel(tr("Height:"), sizeGroupBox);
@@ -49,10 +55,15 @@ NewPageDialog::NewPageDialog(uint width, uint height, const QColor& penColor,
     m_pContentButtonGroup->setButton(0);
 
     QVBoxLayout* mainLayout = new QVBoxLayout(this, 4, 4);
+    generalGroupBox->layout()->setSpacing(4);
     sizeGroupBox->layout()->setSpacing(4);
     m_pContentButtonGroup->layout()->setSpacing(4);
+    QGridLayout* generalLayout = new QGridLayout(generalGroupBox->layout(), 1, 1);
     QGridLayout* sizeLayout = new QGridLayout(sizeGroupBox->layout(), 2, 2);
     QVBoxLayout* contentLayout = new QVBoxLayout(m_pContentButtonGroup->layout());
+
+    generalLayout->addWidget(titleLabel, 0, 0);
+    generalLayout->addWidget(m_pTitleLineEdit, 0, 1);
 
     sizeLayout->addWidget(widthLabel, 0, 0);
     sizeLayout->addWidget(heightLabel, 1, 0);
@@ -65,6 +76,7 @@ NewPageDialog::NewPageDialog(uint width, uint height, const QColor& penColor,
     contentLayout->addWidget(penColorRadioButton);
     contentLayout->addWidget(brushColorRadioButton);
 
+    mainLayout->addWidget(generalGroupBox);
     mainLayout->addWidget(sizeGroupBox);
     mainLayout->addWidget(m_pContentButtonGroup);
 }
