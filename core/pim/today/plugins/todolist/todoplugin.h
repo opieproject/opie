@@ -27,14 +27,13 @@
 #include <qguardedptr.h>
 #include <qwidget.h>
 
-using namespace Opie; 
 
 class TodolistPlugin : public TodayPluginObject {
 
 public:
     TodolistPlugin();
     ~TodolistPlugin();
-    
+
     QString pluginName()  const;
     double versionNumber() const;
     QString pixmapNameWidget() const;

@@ -17,6 +17,7 @@
 #include <qpe/qcopenvelope_qws.h>
 
 
+using namespace Opie;
 EventItem::EventItem(OListViewItem* parent, OPimEvent *event)
  : ResultItem(parent)
 {

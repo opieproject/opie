@@ -17,7 +17,6 @@
 #include <opie2/opimtodo.h>
 #include "resultitem.h"
 
-using namespace Opie;
 
 /**
 @author Patrick S. Vogt
@@ -25,7 +24,7 @@ using namespace Opie;
 class TodoItem : public ResultItem
 {
 public:
-    TodoItem(OListViewItem* parent, OPimTodo *todo);
+    TodoItem(OListViewItem* parent, Opie::OPimTodo *todo);
     ~TodoItem();
 
     virtual QString toRichText();
@@ -34,7 +33,7 @@ public:
 
 private:
     void setIcon();
-    OPimTodo *_todo;
+    Opie::OPimTodo *_todo;
 
 };
 

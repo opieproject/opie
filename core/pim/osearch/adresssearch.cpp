@@ -17,6 +17,7 @@
 
 //#include <qwhatsthis.h>
 
+using namespace Opie;
 AdressSearch::AdressSearch(QListView* parent, QString name):
 	SearchGroup(parent, name)
 {

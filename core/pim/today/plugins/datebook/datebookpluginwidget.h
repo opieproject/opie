@@ -27,7 +27,6 @@
 #include <qguardedptr.h>
 #include <qlist.h>
 
-using namespace Opie; 
 
 class DatebookPluginWidget :  public QWidget {
 
@@ -46,7 +45,7 @@ private:
     void readConfig();
     void getDates();
 
-    
+
     // how many lines should be showed in the datebook section
     int m_max_lines_meet;
     // If location is to be showed too, 1 to activate it.

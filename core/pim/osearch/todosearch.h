@@ -20,7 +20,6 @@
 
 class QAction;
 
-using namespace Opie;
 
 /**
 @author Patrick S. Vogt
@@ -39,7 +38,7 @@ protected:
 	virtual void insertItem( void* );
 
 private:
-    OPimTodoAccess *_todos;
+    Opie::OPimTodoAccess *_todos;
     QAction *actionShowCompleted;
     QPopupMenu *_popupMenu;
 };

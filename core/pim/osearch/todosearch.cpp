@@ -19,7 +19,7 @@
 #include <qaction.h>
 #include <qpopupmenu.h>
 
-
+using namespace Opie;
 TodoSearch::TodoSearch(QListView* parent, QString name)
 : SearchGroup(parent, name), _todos(0), _popupMenu(0)
 {

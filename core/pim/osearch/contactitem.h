@@ -18,7 +18,6 @@
 
 #include "resultitem.h"
 
-using namespace Opie;
 
 /**
 @author Patrick S. Vogt
@@ -26,7 +25,7 @@ using namespace Opie;
 class ContactItem : public ResultItem
 {
 public:
-    ContactItem(OListViewItem* parent, OPimContact *contact);
+    ContactItem(OListViewItem* parent, Opie::OPimContact *contact);
 
     ~ContactItem();
 
@@ -37,7 +36,7 @@ public:
 
 private:
 	void setIcon();
-	OPimContact *_contact;
+    Opie::OPimContact *_contact;
 
 };
 

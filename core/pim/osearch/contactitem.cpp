@@ -16,7 +16,7 @@
 #include <qpe/qcopenvelope_qws.h>
 
 
-
+using namespace Opie;
 ContactItem::ContactItem(OListViewItem* parent, OPimContact *contact)
 : ResultItem(parent)
 {

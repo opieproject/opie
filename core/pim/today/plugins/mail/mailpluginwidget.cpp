@@ -18,6 +18,7 @@
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 
+using namespace Opie::Ui;
 MailPluginWidget::MailPluginWidget( QWidget *parent,  const char* name)
     : QWidget(parent,  name ) {
 

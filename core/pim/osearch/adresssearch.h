@@ -14,7 +14,6 @@
 #include "searchgroup.h"
 #include <opie2/ocontactaccess.h>
 
-using namespace Opie;
 
 
 /**
@@ -32,7 +31,7 @@ protected:
 	virtual void insertItem( void* );
 
 private:
-    OPimContactAccess *_contacts;
+    Opie::OPimContactAccess *_contacts;
 };
 
 #endif
