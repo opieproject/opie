@@ -1,27 +1,27 @@
 <chapter><title>Installation</title>
 <section><title>&ipaq;</title>
 <para>
-To install opie on an &ipaq;, you will need a fresh Familiar installation (ie,
-install Familiar, and stop before you do ipkg install task-complete or ipkg
-install task-x), go to http://familiar.handhelds.org to get the latest version,
-and to get installation instructions (again, stop after the initial boot and do
-not install X, as it is not necessary, and will only take up space).
+To install &opie; on an &ipaq;, you will need a recent Familiar installation (i.e.
+install the Familiar "bootstrap" image, and do not install task-complete or task-x),
+go to http://familiar.handhelds.org to get the latest version, and to get installation
+instructions (again, stop after the initial boot and do not install X, as it is not
+necessary, and will only take up space).
 </para>
 
 <note>
 <para>
-If you had qpe/qtopia installed previously,
-<emphasis>completely</emphasis> remove it, and remove the src line for it from
-your /etc/ipkg.conf file before attempting to install opie.
+If you had QPE/QTopia installed previously, <emphasis>completely</emphasis> remove
+it, and then remove the source line for that feed from your /etc/ipkg.conf file before
+attempting to install &opie;.
 </para>
 </note>
 <para>
-Once you have Familiar installed, set up a network connection between your $ipaq;
+Once you have Familiar installed, set up a network connection between your &ipaq;
 and the ouside world (again, see the Familiar site for instructions on this),
 and then run this command:
 <informalexample>
 <literallayout>
-     echo src opie "http://131.152.105.154/feeds/ipaq/unstable/" \
+     echo src opie "http://opie.handhelds.org/feed/ipaq/unstable/" \
           >> /etc/ipkg.conf
 </literallayout>
 </informalexample>
@@ -34,7 +34,7 @@ then, run:
 If you have a 3100 or 3800 series &ipaq;, run:
 <informalexample>
 <literallayout>
-     ipkg install qt-embedded-rotation
+     ipkg install libqt2-emb-fonts
 </literallayout>
 </informalexample>
 finally, start &opie; with:
@@ -47,21 +47,27 @@ finally, start &opie; with:
 
 <para>
 &opie; should now be running (if you should have to reboot, which is rare, &opie;
-will start automatically). From here, you can use either the "Software"
+will start automatically). From here, you can use either the "Packages"
 application in the Settings tab, or run ipkg from the command line to install
-other &opie; apps. Check out the various task-opie-* ipkgs to install various sets
-of apps at once (you can always uninstall individual apps individually). You
-will probably want to install opie-embeddedkonsole first, so you have access to
-the command line in &opie;.
+other &opie; applications. Check out the various task-opie-* packages to install
+various sets of applications all at once (you can always uninstall individual
+applications individually). You will probably want to install opie-embeddedkonsole
+or opie-console first, so you have access to the command line in &opie;.
 </para>
 </section>
 
 <section><title>&zaurus;</title>
 <para>
-To completely install &opie; on the &zaurus;, you will have to install OpenZaurus,
-which includes &opie;. However, individual &opie; applications will work fine on the
-default &zaurus; rom. Do not install &opie;'s launcher on a default &zaurus; ROM
-though.
+&opie; applications will install and run on the default &zaurus; ROM with no problems,
+except for Launcher. It is not compatible with the default ROM, and should not be
+installed.
+</para>
+
+<para>
+Another option is to replace the default &zaurus; ROM with the OpenZaurus
+ROM. OpenZaurus is a openly developed Linux distribution designed to run on the
+&zaurus;, and uses &opie; as its default user interface. For more information and
+installation instructions, please visit their site, http://www.openzaurus.org/.
 </para>
 </section>
 </chapter>
