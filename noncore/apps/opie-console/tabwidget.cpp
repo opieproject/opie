@@ -1,9 +1,11 @@
+
+
 #include "tabwidget.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
 using namespace Opie::Core;
-using namespace Opie::Ui;
+using Opie::Ui::OTabWidget;
 
 TabWidget::TabWidget( QWidget* parent, const char* name )
     : OTabWidget( parent, name ) {
@@ -15,7 +17,7 @@ TabWidget::~TabWidget() {
 }
 
 void TabWidget::add( Session* ses ) {
-    owarn << "session ses " + ses->name() << oendl; 
+    owarn << "session ses " + ses->name() << oendl;
     if ( !ses->widgetStack() ) return;
     //reparent( ses->widgetStack(), QPoint() );
     addTab( ses->widgetStack(), "console/konsole", ses->name() );
