@@ -79,7 +79,8 @@
     <message>
         <source>Running:
 ntpdate </source>
-        <translation type="unfinished"></translation>
+        <translation>Starte:
+ntpdate</translation>
     </message>
     <message>
         <source>Error</source>
@@ -87,156 +88,157 @@ ntpdate </source>
     </message>
     <message>
         <source>Error while getting time from network.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Holen der Zeit vom Netzwerk.</translation>
     </message>
     <message>
         <source>Error while executing ntpdate</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler biem Aufruf von ntpdate</translation>
     </message>
     <message>
         <source>Time Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitserver</translation>
     </message>
     <message>
         <source>Error while getting time from
  server: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Holen der Zeit
+vom Server: </translation>
     </message>
     <message>
         <source>%1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Sekunden</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Verbindung zum Server</translation>
     </message>
 </context>
 <context>
     <name>NTPTabWidget</name>
     <message>
         <source>Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>Startzeit</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n.V.</translation>
     </message>
     <message>
         <source>Time shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitverschiebung</translation>
     </message>
     <message>
         <source>New time</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Zeit</translation>
     </message>
     <message>
         <source>Get time from the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit vom Netzwerk holen</translation>
     </message>
 </context>
 <context>
     <name>PredictTabWidget</name>
     <message>
         <source>Predicted time drift</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorhergesagte Abweichung</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n.V.</translation>
     </message>
     <message>
         <source>Estimated shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Erwartete Abw.</translation>
     </message>
     <message>
         <source>Predicted time</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorhergesagte Zeit</translation>
     </message>
     <message>
         <source>Shift [s/h]</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiebung  [s/h]</translation>
     </message>
     <message>
         <source>Last [h]</source>
-        <translation type="unfinished"></translation>
+        <translation>Letzte [Std.]</translation>
     </message>
     <message>
         <source>Offset [s]</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset [sek]</translation>
     </message>
     <message>
         <source>Predict time</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorraussage</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorhersage setzen</translation>
     </message>
     <message>
         <source> s/h</source>
-        <translation type="unfinished"></translation>
+        <translation>Sek./Std.</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunden</translation>
     </message>
 </context>
 <context>
     <name>SettingsTabWidget</name>
     <message>
         <source>Time server</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitserver</translation>
     </message>
     <message>
         <source>minutes between time updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuten zw. Aktualisierung</translation>
     </message>
     <message>
         <source>minutes between prediction updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuten zw. Vorhersageaktualisierung</translation>
     </message>
     <message>
         <source>Display time server information</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitserverinformation anzg.</translation>
     </message>
     <message>
         <source>Display time prediction information</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitvoraussageninform. anzeigen</translation>
     </message>
 </context>
 <context>
     <name>TimeTabWidget</name>
     <message>
         <source>Hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Stunde</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Minute</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitzone</translation>
     </message>
     <message>
         <source>Get time from the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit v. Netzwerk holen</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorausgesagte Zeit setzen</translation>
     </message>
 </context>
 </TS>
