@@ -161,7 +161,7 @@ void MainWindow::initUI() {
      * action that open/closes the keyboard
      */
     m_openKeys = new QAction (tr("Open Keyboard..."),
-                             Resource::loadPixmap( "down" ),
+                             Resource::loadPixmap( "console/keyboard_icon.png" ),
                              QString::null, 0, this, 0);
 
     m_openKeys->setToggleAction(true);

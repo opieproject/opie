@@ -17,6 +17,7 @@ public:
     ushort getQ() { return qcode; }
     ushort getU() { return unicode; }
 
+
 private:
 
     QString label;
@@ -36,14 +37,16 @@ public:
     void mousePressEvent(QMouseEvent*);
     void mouseReleaseEvent(QMouseEvent*);
     void resizeEvent(QResizeEvent*);
-
-    
-
     QSize sizeHint() const;
 
 signals:
 
     void keyPressed(ushort, ushort, bool, bool, bool);
+
+private:
+
+    void loadDefaults();
+
 
 private:
 
