@@ -6,10 +6,8 @@ CONFIG += qt release
 HEADERS = exampleplugin.h examplepluginimpl.h examplepluginwidget.h
 SOURCES = exampleplugin.cpp examplepluginimpl.cpp examplepluginwidget.cpp
 
-INCLUDEPATH     += $(OPIEDIR)/include \
-		../ ../library
-DEPENDPATH      += $(OPIEDIR)/include \
-		../ ../library
+INCLUDEPATH     += $(OPIEDIR)/include 
+DEPENDPATH      += $(OPIEDIR)/include 
 
 LIBS+= -lqpe -lopie
 

@@ -1,20 +1,9 @@
 /*
  * exampleplugin.cpp
  *
- * copyright   : (c) 2002,2003,2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-
-
 #include "exampleplugin.h"
 
 ExamplePlugin::ExamplePlugin() {
@@ -35,7 +24,7 @@ double ExamplePlugin::versionNumber() const {
 
 // this sets the image that will be shown on the left side of the plugin
 QString ExamplePlugin::pixmapNameWidget() const {
-    return "Tux";
+    return QString::fromLatin1("Tux");
 }
 
 QWidget* ExamplePlugin::widget( QWidget * wid ) {
@@ -52,13 +41,13 @@ QString ExamplePlugin::pixmapNameConfig() const {
 }
 
 // No config widget yet, look at the datebook plugin for an example of that
-TodayConfigWidget* ExamplePlugin::configWidget( QWidget* ) {
+TodayConfigWidget* ExamplePlugin::configWidget( QWidget* /*parent*/ ) {
     return 0l;
 }
 
 // add the binary name of the app to launch here
 QString ExamplePlugin::appName() const {
-    return "";
+    return QString::null;
 }
 
 // if the plugin should be excluded form the refresh cycles that can be set in the today app

@@ -194,3 +194,4 @@ CONFIG_SIMPLE_MAIN	examples/simple-main	example.pro
 CONFIG_SIMPLE_PIM	examples/simple-pim	example.pro
 CONFIG_BIGSCREEN_EXAMPLE       libopie/big-screen/example      osplitter_mail.pro
 CONFIG_APPLET_EXAMPLE	examples/applet	example.pro
+CONFIG_TODAY_EXAMPLE	examples/todayplugin	example.pro
