@@ -10,19 +10,19 @@
 
 #include <qpe/config.h>
 #include "datawidgetui.h"
-#include <qtable.h>
 #include <qstring.h>
 #include <qcombobox.h>
 #include <qlayout.h>
 
 dataWidgetUI::dataWidgetUI() : QDialog()
 {
-    this->setCaption("foo");
+    this->setCaption("Chemical Data");
     
     QVBoxLayout *vbox = new QVBoxLayout( this );
     
     dataCombo = new QComboBox( this );
     DataTable = new OxydataTable( 7,2, this );
+    DataTable->setShowGrid( false );
 
     vbox->addWidget( dataCombo );
     vbox->addWidget( DataTable );

@@ -16,32 +16,25 @@ OxydataTable::OxydataTable(int numRows, int numCols, QWidget *parent,
 {
 }
 
-
 void OxydataTable::paintCell(  QPainter *p, int row, int col, const QRect &cr, bool selected)
 {
-    if (  cr.width() == 0 || cr.height() == 0 )
+    if ( cr.width() == 0 || cr.height() == 0 )
         return;
-    if (  selected &&
-            row == currentRow() &&
-            col == currentColumn() )
-        selected = FALSE;
+    selected = FALSE;
 
     int w = cr.width();
     int h = cr.height();
 
-    QTableItem *itm = item(  row, col );
-    if (  itm ) {
+    QTableItem *itm = item( row, col );
+    QColorGroup colgrp = colorGroup();
+    if ( itm ) 
+    {
+        if ( row%2 )
+            colgrp.setColor(  QColorGroup::Base, QColor( cyan ) );
+        else
+            colgrp.setColor(  QColorGroup::Base, QColor( white ) );
         p->save();
-        itm->paint(  p, colorGroup(), cr, selected );
+        itm->paint( p, colgrp, cr, selected );
         p->restore();
-    } else {
-        if ( currentRow()%2 ) //every even row
-            p->fillRect(  0, 0, w, h, selected ? colorGroup().brush(  QColorGroup::Highlight ) : colorGroup().brush(  QColorGroup::Base ) );
-        else                  //every odd row
-            p->fillRect(  0, 0, w, h, selected ? colorGroup().brush(  QColorGroup::Highlight ) : colorGroup().brush(  QColorGroup::Base ) );
     }
 }
-
-
-
-
