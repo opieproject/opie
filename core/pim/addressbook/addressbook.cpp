@@ -202,7 +202,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	edit->insertSeparator();
 	
 	a = new QAction( tr("My Personal Details"), Resource::loadPixmap( "addressbook/identity" ), 
-			 QString::null, 0, this, 0 );
+			 QString::null, 0, this, 0 , TRUE );
 	actionPersonal = a;
 	connect( a, SIGNAL( activated() ), this, SLOT( slotPersonalView() ) );
 	a->addTo( edit );
