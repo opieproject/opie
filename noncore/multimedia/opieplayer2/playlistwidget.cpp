@@ -901,9 +901,8 @@ void PlayListWidget::writem3u() {
 //    qDebug( list );
         m3uList->write();
         m3uList->close();
-        
-    }
     if(m3uList) delete m3uList;
+        
     if(fileDlg) delete fileDlg;
 
     DocLnk lnk;
@@ -923,6 +922,8 @@ void PlayListWidget::writem3u() {
     }
 
     setCaption(tr("OpiePlayer: ") + name);
+    }
+
 }
 
 void PlayListWidget::keyReleaseEvent( QKeyEvent *e ) {
