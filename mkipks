@@ -18,7 +18,7 @@ then
         QTE_VERSION=2.3.4
     fi
 fi
-[ -z "$QTE_REVISION" ] && QTE_REVISION=3
+[ -z "$QTE_REVISION" ] && QTE_REVISION=4
 DEB_VERSION=2.0
 
 # Have to do this here, since CVS can't store symlinks

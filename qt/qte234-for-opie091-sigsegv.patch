@@ -1,6 +1,6 @@
 --- ./src/kernel/qwindowsystem_qws.cpp~sigsegv	2003-03-18 18:29:00.000000000 -0600
 +++ ./src/kernel/qwindowsystem_qws.cpp	2003-03-18 19:09:08.000000000 -0600
-@@ -843,6 +843,16 @@
+@@ -843,6 +843,18 @@
  {
  }
  
@@ -11,13 +11,15 @@
 +	qwsServer->closeKeyboard();
 +#endif
 +    QWSServer::closedown();
++    fprintf(stderr, "Segmentation fault.\n");
++    exit(1);
 +}
 +
 +
  /*!
    \class QWSServer qwindowsystem_qws.h
    \brief Server-specific functionality in Qt/Embedded
-@@ -912,6 +922,7 @@
+@@ -912,6 +924,7 @@
      }
  
      signal(SIGPIPE, ignoreSignal); //we get it when we read
