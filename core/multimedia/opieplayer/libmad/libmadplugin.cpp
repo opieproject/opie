@@ -36,6 +36,7 @@
 
 #include <qapplication.h>
 #include <qmessagebox.h>
+#include <qregexp.h>
 
 #include <qpe/config.h>
 
