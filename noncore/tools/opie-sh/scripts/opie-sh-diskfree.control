@@ -1,0 +1,11 @@
+Files: bin/diskfree.sh apps/Opie-SH/diskfree.desktop pics/opie-sh-scripts/diskfree.png
+Package: opie-sh-diskfree
+Installed-Size:  0
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION), opie-sh
+Priority: optional
+Section: opie/settings
+Maintainer: gonz <gonz@directbox.com>
+Architecture: arm
+License: GPL
+Description: frontend to df (show space left on mountpoints)

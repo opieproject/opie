@@ -1,0 +1,11 @@
+Files: bin/opie-sh-wavelanchooser.sh apps/Opie-SH/opie-sh-wavelanchooser.desktop pics/opie-sh-scripts/qtwavelan.png
+Package: opie-sh-wavelanchooser
+Installed-Size:  0 
+Version: 0.1-20020527-1
+Depends: opie-base (1.5.0+), opie-sh, opie-sh-launchertab
+Priority: optional
+Section: opie/settings
+Maintainer: gonz <gonz@directbox.com>
+Architecture: arm
+License: GPL
+Description: frontend to choose wavelan config
