@@ -3,7 +3,7 @@
     <name>Shutdown</name>
     <message>
         <source>Shut down...</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunterfahren...</translation>
     </message>
     <message>
         <source>Terminate</source>
@@ -15,15 +15,15 @@
     </message>
     <message>
         <source>Reboot</source>
-        <translation type="unfinished"></translation>
+        <translation>Neustart</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie neu starten</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunterfahren</translation>
     </message>
     <message>
         <source>&lt;p&gt;
@@ -32,7 +32,7 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>

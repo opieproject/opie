@@ -3,51 +3,51 @@
     <name>Security</name>
     <message>
         <source>Set passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort einstellen</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort ändern</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort eingeben</translation>
     </message>
     <message>
         <source>Passcode incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort falsch</translation>
     </message>
     <message>
         <source>The passcode entered is incorrect.
 Access denied</source>
-        <translation type="unfinished"></translation>
+        <translation>Das eingegebene Passwort ist falsch. Zugriff verwehrt</translation>
     </message>
     <message>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine</translation>
     </message>
 </context>
 <context>
     <name>SecurityBase</name>
     <message>
         <source>Security Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherheitseinstellungen</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort ändern</translation>
     </message>
     <message>
         <source>Clear passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort löschen</translation>
     </message>
     <message>
         <source>Require pass code at power-on</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort muss beim Starten eingegeben werden</translation>
     </message>
     <message>
         <source>Sync</source>
@@ -75,15 +75,15 @@ Access denied</source>
     </message>
     <message>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine</translation>
     </message>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Das Passwort bietet einen minimalen Schutz, sollte jemand unerwünscht Zugriff auf dieses Gerät erhalten.</translation>
     </message>
 </context>
 </TS>

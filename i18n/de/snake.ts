@@ -33,11 +33,13 @@ Wände noch Ihren Schwanz berühren.</translation>
     <message>
         <source>GAME OVER!
  Your Score: %1</source>
-        <translation>VERLOREN! Ihre Punktezahl: %1</translation>
+        <translation>VERLOREN! 
+Ihre Punktezahl: %1</translation>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation>Drücke Sie eine Taste, um ein neues Spiel zu beginnen.</translation>
+        <translation>Drücken Sie eine Taste, um ein neues
+Spiel zu beginnen.</translation>
     </message>
 </context>
 </TS>
