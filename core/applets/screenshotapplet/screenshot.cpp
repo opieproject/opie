@@ -36,6 +36,7 @@
 #include <qlayout.h>
 #include <qframe.h>
 #include <qpixmap.h>
+#include <qregexp.h>
 #include <qstring.h>
 #include <qfile.h>
 #include <qtimer.h>
