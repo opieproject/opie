@@ -502,7 +502,8 @@ bool Interfaces::setOption(const QStringList::Iterator &start, const QString &op
   qDebug("setting option");
   bool found = false;
   for ( QStringList::Iterator it = start; it != interfaces.end(); ++it ) {
-      // FIXME: was  not completly stupid just wrong sice all options got inserted bevor the iface line
+      // FIXME: was  not completly stupid just wrong sice all options got inserted bevore the iface line
+      // but since it works with an empty interfaces file I (tille) will not do anything more
    //  if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO))  && it != start){
 //       if(!found && value != ""){
 //         // Got to the end of the stanza without finding it, so append it.
