@@ -62,6 +62,16 @@ using namespace Opie::Ui::Internal;
 namespace Opie {
 namespace Ui   {
 namespace Internal {
+/*
+ * Create a path by adding a '/'/QDir::seperator in between
+ * base and ending, but only if base is not empty
+ */
+static inline QString createNewPath(const QString& base, const QString &ending) {
+    return  base == QString::fromLatin1("/") ? 
+	    base + ending : base + "/" + ending;
+}
+
+
 OFileViewInterface::OFileViewInterface( OFileSelector* _selector )
         : m_selector( _selector )
 {
@@ -470,7 +480,7 @@ void OFileViewFileListView::reread( bool all )
          */
         if( fi->isSymLink() )
         {
-            QString file = fi->dirPath( true ) + "/" + fi->readLink();
+            QString file = createNewPath(fi->dirPath( true ),fi->readLink());
             for( int i = 0; i<=4; i++)
             { // 5 tries to prevent dos
                 QFileInfo info( file );
@@ -491,7 +501,7 @@ void OFileViewFileListView::reread( bool all )
                 }
                 else if( info.isSymLink() )
                 {
-                    file = info.dirPath(true ) + "/" + info.readLink() ;
+                    file = createNewPath(info.dirPath(true ),info.readLink());
                     break;
                 }
                 else if( i == 4)
@@ -563,7 +573,7 @@ void OFileViewFileListView::slotCurrentChanged( QListViewItem* item)
         {
             odebug << "slot Current Changed" << oendl;
             QStringList str = QStringList::split("->", sel->text(1) );
-            QString path = sel->directory() + "/" + str[0].stripWhiteSpace();
+            QString path = createNewPath(sel->directory(),str[0].stripWhiteSpace());
             emit selector()->fileSelected( path );
             DocLnk lnk( path );
             emit selector()->fileSelected( lnk );
@@ -583,7 +593,7 @@ void OFileViewFileListView::slotClicked(int button , QListViewItem* item, const 
         QStringList str = QStringList::split("->", sel->text(1) );
         if (sel->isDir() )
         {
-            m_currentDir = sel->directory() + "/" + str[0].stripWhiteSpace();
+            m_currentDir = createNewPath(sel->directory(),str[0].stripWhiteSpace());
             emit selector()->dirSelected( m_currentDir );
             reread( m_all );
         }
@@ -591,7 +601,7 @@ void OFileViewFileListView::slotClicked(int button , QListViewItem* item, const 
         { // file
             odebug << "slot Clicked" << oendl;
             selector()->m_lneEdit->setText( str[0].stripWhiteSpace() );
-            QString path = sel->directory() + "/" + str[0].stripWhiteSpace();
+            QString path = createNewPath(sel->directory(),str[0].stripWhiteSpace());
             emit selector()->fileSelected( path );
             DocLnk lnk( path );
             emit selector()->fileSelected( lnk );
@@ -617,7 +627,7 @@ void OFileViewFileListView::addFile( QFileInfo* info, bool symlink )
     dir = info->dirPath( true );
     locked = false;
     if ( symlink )
-        name = info->fileName() + " -> " + info->dirPath() + "/" + info->readLink();
+        name = info->fileName() + " -> " + createNewPath(info->dirPath(),info->readLink());
     else
     {
         name = info->fileName();
@@ -648,7 +658,7 @@ void OFileViewFileListView::addDir( QFileInfo* info, bool symlink )
     else
         pix = symlink ? Resource::loadPixmap( "opie/symlink") : Resource::loadPixmap("folder");
 
-    name = symlink ? info->fileName() + " -> " + info->dirPath(true) + "/" + info->readLink() :
+    name = symlink ? info->fileName() + " -> " + createNewPath(info->dirPath(true),info->readLink()) :
            info->fileName();
 
     (void)new OFileSelectorItem( m_view, pix, name,
@@ -780,7 +790,7 @@ QString OFileViewFileSystem::selectedName()const
 
     QString cFN=currentFileName();
     if (cFN.startsWith("/")) return cFN;
-    return m_view->currentDir() + "/" + cFN;
+    return createNewPath(m_view->currentDir(),cFN);
 }
 
 QString OFileViewFileSystem::selectedPath()const
