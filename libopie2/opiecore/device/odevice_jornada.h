@@ -42,8 +42,9 @@ class Jornada : public ODevice
     virtual void init(const QString&);
 
   public:
-    virtual bool setSoftSuspend ( bool soft );
+    virtual bool suspend ( );
     virtual bool setDisplayBrightness ( int b );
+    virtual bool setDisplayStatus ( bool on);
     virtual int displayBrightnessResolution() const;
 };
 }

@@ -103,7 +103,7 @@ void Jornada::init(const QString&)
 
 int Jornada::displayBrightnessResolution() const
 {
-    return 0;
+    return 255;
 }
 
 
@@ -117,33 +117,49 @@ bool Jornada::setDisplayBrightness( int bright )
     if ( bright < 0 )
         bright = 0;
 
-    if (( fd = ::open ( "/dev/touchscreen/0", O_WRONLY )) >= 0 ) {
-        FLITE_IN bl;
-        bl. mode = 1;
-        bl. pwr = bright ? 1 : 0;
-        bl. brightness = ( bright * ( displayBrightnessResolution() - 1 ) + 127 ) / 255;
-        res = ( ::ioctl ( fd, FLITE_ON, &bl ) == 0 );
-        ::close ( fd );
-    }
+    QString cmdline;
+
+    int value = 255 - bright;
+    if ( !bright )
+    	cmdline = QString().sprintf( "echo 0 > /sys/class/backlight/sa1100fb/power");
+    else
+    	cmdline = QString().sprintf( "echo 1 > /sys/class/backlight/sa1100fb/power; echo %d > /sys/class/backlight/sa1100fb/brightness", value );
+    
+    res = ( ::system( (const char*) cmdline ) == 0 );
+    
     return res;
 }
 
 
-bool Jornada::setSoftSuspend( bool soft )
+bool Jornada::suspend( )
+{
+    qDebug("ODevice::suspend");
+    if ( !isQWS( ) ) // only qwsserver is allowed to suspend
+        return false;
+
+    if ( d->m_model == Model_Unknown ) // better don't suspend in qvfb / on unkown devices
+        return false;
+
+    bool res = false;
+    ODevice::sendSuspendmsg();
+
+    struct timeval tvs, tvn;
+    ::gettimeofday ( &tvs, 0 );
+
+    ::sync(); // flush fs caches
+    res = ( ::system ( "apm --suspend" ) == 0 );
+
+    return res;
+}
+
+bool Jornada::setDisplayStatus ( bool on )
 {
     bool res = false;
     int fd;
 
-    if (( fd = ::open ( "/proc/sys/ts/suspend_button_mode", O_WRONLY )) >= 0 ) {
-        if ( ::write ( fd, soft ? "1" : "0", 1 ) == 1 )
-            res = true;
-        else
-            ::perror ( "write to /proc/sys/ts/suspend_button_mode" );
+    QString cmdline = QString().sprintf( "echo %d > /sys/class/lcd/sa1100fb/power; echo %d > /sys/class/backlight/sa1100fb/power", on ? "1" : "0",on ? "1" : "0" );
 
-        ::close ( fd );
-    }
-    else
-        ::perror ( "/proc/sys/ts/suspend_button_mode" );
+    res = ( ::system( (const char*) cmdline ) == 0 );
 
     return res;
 }
