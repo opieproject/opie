@@ -420,8 +420,5 @@ int CardMonitor::position()
     return 7;
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( Opie::Ui::Private::OTaskbarAppletWrapper<CardMonitor> );
-}
+EXPORT_OPIE_APPLET_v1( CardMonitor )
 
