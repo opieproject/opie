@@ -596,13 +596,22 @@ void TableView::keyPressEvent( QKeyEvent* event) {
         m_editorWidget.releaseCellWidget();
         setFocus();
     }
+
+    if ( sorted().count() < 1 ) {
+        QTable::keyPressEvent( event );
+        return;
+    }
+
     int row = currentRow();
     int col = currentColumn();
 
     char key = ::toupper( event->ascii() );
-    /* let QTable also handle the d later */
-    if ( key == 'D' )
+    /* let QTable also handle the d letter */
+    if ( key == 'D'  ) {
+        event->accept();
         removeQuery( sorted().uidAt( row ) );
+        return;
+    }
 
 
     switch( event->key() ) {
@@ -620,7 +629,7 @@ void TableView::keyPressEvent( QKeyEvent* event) {
         }else if ( col == 3 ) {
             TodoView::edit( sorted().uidAt(row) );
         }
-
+        event->accept();
         break;
     default:
         QTable::keyPressEvent( event );
