@@ -744,7 +744,7 @@ int main(int ac, char **av)
 
 	sym = sym_lookup("KERNELRELEASE", 0);
 	sym_calc_value(sym);
-	sprintf(menu_backtitle, "Linux Kernel v%s Configuration",
+	sprintf(menu_backtitle, "Opie %s Configuration",
 		sym_get_string_value(sym));
 
 	mode = getenv("MENUCONFIG_MODE");
@@ -770,11 +770,11 @@ int main(int ac, char **av)
 	if (stat == 0) {
 		conf_write(NULL);
 		printf("\n\n"
-			"*** End of Linux kernel configuration.\n"
+			"*** End of Opie configuration.\n"
 			"*** Check the top-level Makefile for additional configuration.\n"
-			"*** Next, you may run 'make bzImage', 'make bzdisk', or 'make install'.\n\n");
+			"*** Next, you may run 'makee'.\n\n");
 	} else
-		printf("\n\nYour kernel configuration changes were NOT saved.\n\n");
+		printf("\n\nYour Opie  configuration changes were NOT saved.\n\n");
 
 	return 0;
 }
