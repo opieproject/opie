@@ -151,7 +151,11 @@ bool LibFlashPlugin::open( const QString& fileName ) {
     FlashGetInfo(file, &fi);
     //FlashSettings(flashHandle, PLAYER_LOOP);
     FlashGraphicInit(file, fd);
+#ifdef QT_QWS_DEVFS
+    FlashSoundInit(file, "/dev/sound/dsp");
+#else
     FlashSoundInit(file, "/dev/dsp");
+#endif
     FlashSetGetUrlMethod(file, showUrl, 0);
     FlashSetGetSwfMethod(file, getSwf, (void*)file);
 

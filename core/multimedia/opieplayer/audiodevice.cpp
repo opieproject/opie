@@ -91,7 +91,11 @@ unsigned int AudioDevicePrivate::rightVolume = 0;
 void AudioDevice::getVolume( unsigned int& leftVolume, unsigned int& rightVolume, bool &muted ) {
     muted = AudioDevicePrivate::muted;
     unsigned int volume;
+#ifdef QT_QWS_DEVFS
+    int mixerHandle = open( "/dev/sound/mixer", O_RDWR );
+#else
     int mixerHandle = open( "/dev/mixer", O_RDWR );
+#endif
     if ( mixerHandle >= 0 ) {
         if(ioctl( mixerHandle, MIXER_READ(0), &volume )==-1)
             perror("ioctl(\"MIXER_READ\")");
@@ -121,7 +125,11 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
     unsigned int lV = (leftVolume  * 101) >> 16;
     unsigned int volume = ((rV << 8) & 0xFF00) | (lV & 0x00FF);
     int mixerHandle = 0;
+#ifdef QT_QWS_DEVFS
+    if ( ( mixerHandle = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
+#else
     if ( ( mixerHandle = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
+#endif
         if(ioctl( mixerHandle, MIXER_WRITE(0), &volume ) ==-1)
             perror("ioctl(\"MIXER_WRITE\")");
         close( mixerHandle );
@@ -168,15 +176,16 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
 #ifdef KEEP_DEVICE_OPEN
     if ( AudioDevicePrivate::dspFd == 0 ) {
 #endif
+#ifdef QT_QWS_DEVFS
+        if ( ( d->handle = ::open( "/dev/sound/dsp", O_WRONLY ) ) < 0 ) {
+#else
         if ( ( d->handle = ::open( "/dev/dsp", O_WRONLY ) ) < 0 ) {
+#endif
 
-//            perror("open(\"/dev/dsp\") sending to /dev/null instead");
         perror("open(\"/dev/dsp\")");
         QString errorMsg=tr("Somethin's wrong with\nyour sound device.\nopen(\"/dev/dsp\")\n")+(QString)strerror(errno)+tr("\n\nClosing player now.");
         QMessageBox::critical(0, "Vmemo", errorMsg, tr("Abort"));
         exit(-1); //harsh?
-//            d->handle = ::open( "/dev/null", O_WRONLY );
-          // WTF?!?!
         }
 #ifdef KEEP_DEVICE_OPEN 
         AudioDevicePrivate::dspFd = d->handle;

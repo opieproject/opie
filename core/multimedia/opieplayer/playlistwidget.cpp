@@ -1372,8 +1372,12 @@ void PlayListWidget::keyPressEvent( QKeyEvent *)
 }
 
 void PlayListWidget::doBlank() {
-   //    qDebug("do blanking");
+	// TODO: why do we blank this way, why don't we use ODevice or ScreenSaver?
+#ifdef QT_QWS_DEVFS
+   fd=open("/dev/fb/0",O_RDWR);
+#else
    fd=open("/dev/fb0",O_RDWR);
+#endif
    if (fd != -1) {
       ioctl(fd,FBIOBLANK,1);
       //            close(fd);
