@@ -63,8 +63,8 @@ SnakeGame::SnakeGame(QWidget* parent, const char* name, WFlags f) :
 
     setCentralWidget(cv);
 
-    QTimer::singleShot( 16, this, SLOT(welcomescreen()) ); 
-    gamestopped = true; 
+    QTimer::singleShot( 16, this, SLOT(welcomescreen()) );
+    gamestopped = true;
     waitover = true;
 }
 
@@ -84,14 +84,14 @@ void SnakeGame::welcomescreen()
 {
    QCanvasText* title = new QCanvasText(tr("SNAKE!"), &canvas);
    title->setColor(yellow);
-   title->setFont( QFont("times", 18, QFont::Bold) );  
+   title->setFont( QFont("times", 18, QFont::Bold) );
    int w = title->boundingRect().width();
    title->move(canvas.width()/2 -w/2, canvas.height()/2-110);
    title->show();
-   QCanvasPixmapArray* titlearray = new QCanvasPixmapArray(Resource::findPixmap("title"));
+   QCanvasPixmapArray* titlearray = new QCanvasPixmapArray(Resource::findPixmap("snake/title"));
    QCanvasSprite* titlepic = new QCanvasSprite(titlearray, &canvas);
    titlepic->move(canvas.width()/2 - 33, canvas.height()/2-85);
-   titlepic->show(); 
+   titlepic->show();
    QCanvasText* instr = new QCanvasText(tr("Use the arrow keys to guide the\n"
 				  "snake to eat the mouse. You must not\n"
 			          "crash into the walls, edges or its tail."),
@@ -104,12 +104,12 @@ void SnakeGame::welcomescreen()
    w = cont->boundingRect().width();
    cont->move(canvas.width()/2-w/2, canvas.height()-20);
    cont->setColor(yellow);
-   cont->show(); 
+   cont->show();
 
 }
 
 void SnakeGame::newGame()
-{   
+{
     clear();
     snake = new Snake(&canvas);
     connect(snake, SIGNAL(dead()), this, SLOT(gameOver()) );
@@ -158,7 +158,7 @@ void SnakeGame::levelUp()
 }
 
 void SnakeGame::createTargets()
-{  
+{
    for (int i = 0; i < targetamount; i++)
        (void)new Target(&canvas);
    notargets = targetamount;
@@ -171,7 +171,7 @@ void SnakeGame::clear()
    QCanvasItemList l = canvas.allItems();
    for (QCanvasItemList::Iterator it=l.begin(); it!=l.end(); ++it) {
         delete *it;
-   }  
+   }
 }
 
 void SnakeGame::gameOver()
@@ -179,8 +179,8 @@ void SnakeGame::gameOver()
    int score = snake->getScore();
    QString scoreoutput="";
    scoreoutput.setNum(score);
-   QCanvasText* gameover = new QCanvasText(tr("GAME OVER!\n Your Score: %1").arg( scoreoutput), &canvas); 
- 
+   QCanvasText* gameover = new QCanvasText(tr("GAME OVER!\n Your Score: %1").arg( scoreoutput), &canvas);
+
    gameover->setZ(100);
    gameover->setColor(yellow);
    gameover->setFont( QFont("times", 18, QFont::Bold) );
@@ -197,7 +197,7 @@ void SnakeGame::wait()
    waitover = true;
    pauseTimer->stop();
    QCanvasText* cont = new QCanvasText(tr("Press Any Key to Begin a New Game."),
-                                       &canvas);         
+                                       &canvas);
    cont->setZ(100);
    cont->setColor(white);
    int w = cont->boundingRect().width();
@@ -206,14 +206,14 @@ void SnakeGame::wait()
 }
 
 void SnakeGame::keyPressEvent(QKeyEvent* event)
-{ 
+{
    if (gamestopped) {
-        if (waitover) 
+        if (waitover)
            newGame();
-        else 
+        else
            return;
    }
-   else { 
+   else {
        int newkey = event->key();
        snake->go(newkey);
    }
