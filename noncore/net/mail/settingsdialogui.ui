@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>316</width>
+            <width>312</width>
             <height>379</height>
         </rect>
     </property>
@@ -206,6 +206,10 @@
                                 <property stdset="1">
                                     <name>suffix</name>
                                     <string> min</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>1</number>
                                 </property>
                                 <property stdset="1">
                                     <name>value</name>

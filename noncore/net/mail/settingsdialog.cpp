@@ -38,7 +38,9 @@ void SettingsDialog::writeConfig() {
     cfg.writeEntry( "sendLater", checkBoxLater->isChecked() );
     cfg.setGroup( "Applet" );
     cfg.writeEntry( "Disabled", cbEnableTaskbarApplet->isChecked() );
-    cfg.writeEntry( "CheckEvery", spCheckOften->value() );
+    int check = spCheckOften->value();
+    if (check<1)check=1;if (check>99)check=99;
+    cfg.writeEntry( "CheckEvery", check);
     cfg.writeEntry( "BlinkLed", cbBlinkLed->isChecked() );
     cfg.writeEntry( "PlaySound", cbPlaySound->isChecked() );
 }
