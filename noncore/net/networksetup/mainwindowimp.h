@@ -48,6 +48,7 @@ private:
   QMap<KProcess*, QString> threads;
   QStringList profiles;
 
+  bool advancedUserMode;
 };
 
 #endif

@@ -1,10 +1,10 @@
 #include "mainwindowimp.h"
-#include "addserviceimp.h"
+#include "addconnectionimp.h"
 #include "interfaceinformationimp.h"
 #include "interfacesetupimp.h"
-#include "kprocess.h"
 #include "module.h"
 
+#include "kprocess.h"
 
 #include <qpushbutton.h>
 #include <qtabwidget.h>
@@ -25,72 +25,68 @@
 #include <qfile.h>
 #include <qtextstream.h>
 
-// For library loading.
-#include <dlfcn.h>
-
 #define TEMP_ALL "/tmp/ifconfig-a"
 #define TEMP_UP "/tmp/ifconfig"
 
-MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name, true) {
-  connect(addServiceButton, SIGNAL(clicked()), this, SLOT(addClicked()));
-  connect(removeServiceButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
-  connect(informationServiceButton, SIGNAL(clicked()), this, SLOT(informationClicked()));
-  connect(configureServiceButton, SIGNAL(clicked()), this, SLOT(configureClicked())); 
+MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name, true), advancedUserMode(false){
+  connect(addConnectionButton, SIGNAL(clicked()), this, SLOT(addClicked()));
+  connect(removeConnectionButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
+  connect(informationConnectionButton, SIGNAL(clicked()), this, SLOT(informationClicked()));
+  connect(configureConnectionButton, SIGNAL(clicked()), this, SLOT(configureClicked())); 
   
   connect(newProfileButton, SIGNAL(clicked()), this, SLOT(addProfile()));
   connect(removeProfileButton, SIGNAL(clicked()), this, SLOT(removeProfile()));
   connect(profilesList, SIGNAL(highlighted(const QString&)), this, SLOT(changeProfile(const QString&)));
 		  
-  // Make sure we have a plugin directory to scan.
-  QString DirStr = QDir::homeDirPath() + "/.networksetup/" ;
-  QDir pluginDir( DirStr );
-  pluginDir.mkdir( DirStr );
-  pluginDir.mkdir( ( DirStr + "plugins/" ) );
-  QString path = DirStr + "plugins";
-  pluginDir.setPath(path);
-  if(!pluginDir.exists()){
-    qDebug(QString("MainWindowImp: ERROR: %1 %2").arg(__FILE__).arg(__LINE__).latin1());
-    return;
-  }
-
-  // Load any saved services.
-  loadModules(path);
+  // Load connections.
+  loadModules(QDir::homeDirPath() + "/.networksetup/plugins");
   getInterfaceList();
-  serviceList->header()->hide();
+  connectionList->header()->hide();
 
 
   Config cfg("NetworkSetup");
   profiles = QStringList::split(" ", cfg.readEntry("Profiles", "All"));
   for ( QStringList::Iterator it = profiles.begin(); it != profiles.end(); ++it)
     profilesList->insertItem((*it));  
+  advancedUserMode = cfg.readBoolEntry("AdvancedUserMode", false);
 }
 
 /**
- * Deconstructor.  Unload libraries and save profile list.
+ * Deconstructor. Save profiles.  Delete loaded libraries.
  */
 MainWindowImp::~MainWindowImp(){
+  // Save profiles.
   if(profiles.count() > 1){
     Config cfg("NetworkSetup");
     cfg.writeEntry("Profiles", profiles.join(" "));
   }
+  // Delete Modules and Libraries
+  QMap<Module*, QLibrary*>::Iterator it;
+  for( it = libraries.begin(); it != libraries.end(); ++it ){
+    delete it.key();
+    delete it.data();
+  }
 }
 
+/**
+ * Load all modules that are found in the path
+ * @param path a directory that is scaned for any plugins that can be loaded
+ *  and attempts to load them
+ */ 
 void MainWindowImp::loadModules(QString path){
   qDebug(path.latin1());
-  QDir d;
-  d.setPath(path);
-  if(!d.exists()){
-    qDebug("MainWindowImp:: Path doesn't exists");
+  QDir d(path);
+  if(!d.exists())
     return;
-  }
+
+  // Don't want sym links
   d.setFilter( QDir::Files | QDir::NoSymLinks );
   const QFileInfoList *list = d.entryInfoList();
   QFileInfoListIterator it( *list );
   QFileInfo *fi;
   while ( (fi=it.current()) ) {
     if(fi->fileName().contains(".so")){
-      qDebug("Found");
-      Module *foo = loadPlugin(path + "/" + fi->fileName());
+      loadPlugin(path + "/" + fi->fileName());
     }
     ++it;
   }
@@ -103,7 +99,7 @@ void MainWindowImp::loadModules(QString path){
  * @return pointer to the function with name resolveString or NULL
  */ 
 Module* MainWindowImp::loadPlugin(QString pluginFileName, QString resolveString){
-  qDebug(pluginFileName.latin1());
+  qDebug(QString("MainWindowImp::loadPlugin: %1").arg(pluginFileName).latin1());
   QLibrary *lib = new QLibrary(pluginFileName);
   void *functionPointer = lib->resolve(resolveString);
   if( !functionPointer ){
@@ -120,7 +116,7 @@ Module* MainWindowImp::loadPlugin(QString pluginFileName, QString resolveString)
     return NULL;
   }
 
-  // Store for reference
+  // Store for deletion later
   libraries.insert(object, lib);
   return object;
 }
@@ -130,14 +126,25 @@ Module* MainWindowImp::loadPlugin(QString pluginFileName, QString resolveString)
  * load the plugin and append it to the list
  */ 
 void MainWindowImp::addClicked(){
-  // Now that we have a list of all of the protocals, list them.
-  {
-    QMessageBox::information(this, "No Modules", "Nothing to add.", "Ok");
+  QMap<Module*, QLibrary*>::Iterator it;
+  QMap<QString, QString> list;
+  list.insert("USB (PPP) / (ADD_TEST)", "A dialup connection over the USB port");
+  list.insert("IrDa (PPP) / (ADD_TEST)", "A dialup connection over the IdDa port");
+  for( it = libraries.begin(); it != libraries.end(); ++it ){
+    if(it.key())
+      (it.key())->possibleNewInterfaces(list);
+  }
+  // See if the list has anything that we can add.
+  if(list.count() == 0){
+    QMessageBox::information(this, "Sorry", "Nothing to add.", "Ok");
     return;
   }
-  AddServiceImp service(this, "AddService", true);
-  service.showMaximized();
-  service.exec();
+  AddConnectionImp addNewConnection(this, "AddConnectionImp", true);
+  addNewConnection.addConnections(list);
+  addNewConnection.showMaximized();
+  if(QDialog::Accepted == addNewConnection.exec()){
+
+  }
 }
 
 /**
@@ -145,7 +152,7 @@ void MainWindowImp::addClicked(){
  * If they do then remove from the list and unload.
  */ 
 void MainWindowImp::removeClicked(){
-  QListViewItem *item = serviceList->currentItem();
+  QListViewItem *item = connectionList->currentItem();
   if(item == NULL) {
      QMessageBox::information(this, "Error","Please select an interface.", "Ok");
      return; 
@@ -161,76 +168,69 @@ void MainWindowImp::removeClicked(){
 }
 
 /**
- * See if there is a configuration for the selected protocal.
- * Prompt with errors.
+ * Pull up the configure about the currently selected interface.
+ * Report an error if no interface is selected.
+ * If the interface has a module owner then request its configure with a empty
+ * tab.  If tab is !NULL then append the interfaces setup widget to it.
  */ 
 void MainWindowImp::configureClicked(){
-  QListViewItem *item = serviceList->currentItem();
-  if(item == NULL){
-   	 QMessageBox::information(this, "Error","Please select an interface.", "Ok");
-     return;
+  QListViewItem *item = connectionList->currentItem();
+  if(!item){
+    QMessageBox::information(this, "Error","Please select an interface.", QMessageBox::Ok);
+    return;
   } 
-  
-  if((interfaceItems[item])->getModuleOwner() == NULL){
-    InterfaceSetupImp *conf = new InterfaceSetupImp(0, "InterfaceConfiguration", interfaceItems[item]);
-    conf->showMaximized();
-    conf->show();
-  }
-  else{
-    QTabWidget *t = NULL;
-    QWidget *conf = (interfaceItems[item])->getModuleOwner()->configure(&t);
-    if(conf != NULL){
-      qDebug("Conf found");
-      if(t != NULL){
-        qDebug("Adding Interface");
-	InterfaceSetupImp *i = new InterfaceSetupImp(t, "TCPIPInformation", interfaceItems[item], true);
-        t->insertTab(i, "TCP/IP");
+ 
+  Interface *i = interfaceItems[item];
+  if(i->getModuleOwner()){
+    QTabWidget *tabWidget = NULL;
+    QWidget *moduleConfigure = i->getModuleOwner()->configure(&tabWidget);
+    if(moduleConfigure != NULL){
+      if(tabWidget != NULL){
+	InterfaceSetupImp *configure = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i, true);
+        tabWidget->insertTab(configure, "TCP/IP");
       }
-      conf->showMaximized();
-      conf->show();
-    }
-    else{
-       InterfaceSetupImp *i = new InterfaceSetupImp(0, "TCPIPInformation", interfaceItems[item], true);
-      i->showMaximized();
-      i->show();
+      moduleConfigure->showMaximized();
+      moduleConfigure->show();
+      return;
     }
   }
+  
+  InterfaceSetupImp *configure = new InterfaceSetupImp(0, "InterfaceSetupImp", i, true);
+  configure->showMaximized();
+  configure->show();
 }
 
 /**
- * Pull up the information about the selected interface
- * Report an error
+ * Pull up the information about the currently selected interface.
+ * Report an error if no interface is selected.
+ * If the interface has a module owner then request its configure with a empty
+ * tab.  If tab is !NULL then append the interfaces setup widget to it.
  */ 
 void MainWindowImp::informationClicked(){
-  QListViewItem *item = serviceList->currentItem();
-  if(item == NULL){
-    QMessageBox::information(this, "Error","Please select an interface.", "Ok");
+  QListViewItem *item = connectionList->currentItem();
+  if(!item){
+    QMessageBox::information(this, "Error","Please select an interface.", QMessageBox::Ok);
     return;
-  }
-
-  if( (interfaceItems[item])->getModuleOwner() == NULL){
-    InterfaceInformationImp *i = new InterfaceInformationImp(0, "InterfaceInformationImp", interfaceItems[item]);
-    i->showMaximized();
-    i->show();
-  }
-  else{
-    QTabWidget *t = NULL;
-    QWidget *conf = (interfaceItems[item])->getModuleOwner()->information(&t);
-    if(conf != NULL){
-      if(t){
-        qDebug("Adding Interface");
-	InterfaceInformationImp *i = new InterfaceInformationImp(t, "TCPIPInformation", interfaceItems[item], true);
-        t->insertTab(i, "TCP/IP");
+  } 
+ 
+  Interface *i = interfaceItems[item];
+  if(i->getModuleOwner()){
+    QTabWidget *tabWidget = NULL;
+    QWidget *moduleInformation = i->getModuleOwner()->information(&tabWidget);
+    if(moduleInformation != NULL){
+      if(tabWidget != NULL){
+	InterfaceInformationImp *information = new InterfaceInformationImp(tabWidget, "InterfaceSetupImp", i, true);
+        tabWidget->insertTab(information, "TCP/IP");
       }
-      conf->showMaximized();
-      conf->show();
+      moduleInformation->showMaximized();
+      moduleInformation->show();
+      return;
     }
-    else{
-      InterfaceInformationImp *i = new InterfaceInformationImp(0, "TCPIPInformation", interfaceItems[item], true);
-      i->showMaximized();
-      i->show();
-    }
-  }
+  }  
+  
+  InterfaceInformationImp *information = new InterfaceInformationImp(0, "InterfaceSetupImp", i, true);
+  information->showMaximized();
+  information->show();
 }
 
 /**
@@ -272,6 +272,10 @@ void MainWindowImp::jobDone(KProcess *process){
     if(space > 1){
       // We have found an interface
       QString interfaceName = line.mid(0, space);
+      if(!advancedUserMode){
+        if(interfaceName == "lo")
+		break;
+      }
       Interface *i;
       // See if we already have it
       if(interfaceNames.find(interfaceName) == interfaceNames.end()){
@@ -306,12 +310,15 @@ void MainWindowImp::jobDone(KProcess *process){
   QFile::remove(fileName);
 } 
 
+/**
+ *
+ */ 
 void MainWindowImp::updateInterface(Interface *i){
   QListViewItem *item = NULL;
   
   // See if we already have it
   if(items.find(i) == items.end()){
-    item = new QListViewItem(serviceList, "", "", "");
+    item = new QListViewItem(connectionList, "", "", "");
     // See if you can't find a module owner for this interface
     QMap<Module*, QLibrary*>::Iterator it;
     for( it = libraries.begin(); it != libraries.end(); ++it ){

@@ -20,6 +20,7 @@ QString WLANModule::getPixmapName(Interface* ){
 
 /**
  * Check to see if the interface i is owned by this module.
+ * @param Interface* interface to check against
  * @return bool true if i is owned by this module, false otherwise.
  */ 
 bool WLANModule::isOwner(Interface *i){
@@ -50,17 +51,12 @@ QWidget *WLANModule::information(QTabWidget **tabWidget){
 }
 
 /**
- *
- */ 
+ * Get all active (up or down) interfaces
+ * @return QList<Interface> A list of interfaces that exsist that havn't
+ * been called by isOwner()
+ */
 QList<Interface> WLANModule::getInterfaces(){
-  return list
-}
-
-/**
- * Return a list of possible new interfaces 
- */ 
-QMap<QString, QString> WLANModule::possibleNewInterfaces(){
-  //return list;       
+  return list;
 }
 
 /**
@@ -69,7 +65,9 @@ QMap<QString, QString> WLANModule::possibleNewInterfaces(){
  *  by possibleNewInterfaces();
  * @return Interface* NULL if it was unable to be created.
  */ 
-Interface *WLANModule::addNewInterface(QString name){
+Interface *WLANModule::addNewInterface(QString ){
+  // We can't add a 802.11 interface, either the hardware will be there
+  // or it wont. 
   return NULL; 
 }
 
@@ -77,7 +75,8 @@ Interface *WLANModule::addNewInterface(QString name){
  * Attempts to remove the interface, doesn't delete i
  * @return bool true if successfull, false otherwise.
  */ 
-bool WLANModule::remove(Interface* i){
+bool WLANModule::remove(Interface*){
+  // Can't remove a hardware device, you can stop it though.
   return false; 
 }
 

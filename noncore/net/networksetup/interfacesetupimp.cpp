@@ -13,7 +13,6 @@
 
 #include <assert.h>
 
-#define INTERFACE_FILE "/home/ben/interfaces"
 #define DNSSCRIPT "interfacednsscript"
 
 /**
@@ -22,7 +21,7 @@
 InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interface *i, bool modal, WFlags fl) : InterfaceSetup(parent, name, modal, fl){
   assert(i);
   interface = i;
-  interfaces = new Interfaces(INTERFACE_FILE);
+  interfaces = new Interfaces();
   changeProfile(profileCombo->currentText());
   bool error = false;
   if(interfaces->getInterfaceMethod(error) == INTERFACES_LOOPBACK){

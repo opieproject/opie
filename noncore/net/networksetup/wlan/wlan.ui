@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>254</width>
+            <width>250</width>
             <height>286</height>
         </rect>
     </property>
@@ -53,7 +53,7 @@
                 </property>
                 <attribute>
                     <name>title</name>
-                    <string>Config</string>
+                    <string>WLAN General</string>
                 </attribute>
                 <vbox>
                     <property stdset="1">

@@ -1,23 +1,23 @@
 <!DOCTYPE UI><UI>
-<class>AddService</class>
+<class>AddConnection</class>
 <widget>
     <class>QDialog</class>
     <property stdset="1">
         <name>name</name>
-        <cstring>AddService</cstring>
+        <cstring>AddConnection</cstring>
     </property>
     <property stdset="1">
         <name>geometry</name>
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>245</width>
+            <width>233</width>
             <height>268</height>
         </rect>
     </property>
     <property stdset="1">
         <name>caption</name>
-        <string>Add Network Service</string>
+        <string>Add Network Connection</string>
     </property>
     <grid>
         <property stdset="1">
@@ -36,7 +36,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Cancel</string>
+                <string>&amp;Cancel</string>
             </property>
         </widget>
         <widget row="3"  column="0" >
@@ -47,7 +47,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Add</string>
+                <string>&amp;Add</string>
             </property>
         </widget>
         <widget row="0"  column="0"  rowspan="1"  colspan="2" >
@@ -121,8 +121,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>LAN - TCP/IP
-For Local-area network connections through PC_CARD network interfdace cards.</string>
+                <string></string>
             </property>
             <property stdset="1">
                 <name>alignment</name>
@@ -141,13 +140,13 @@ For Local-area network connections through PC_CARD network interfdace cards.</st
     <connection>
         <sender>cancelButton</sender>
         <signal>clicked()</signal>
-        <receiver>AddService</receiver>
+        <receiver>AddConnection</receiver>
         <slot>reject()</slot>
     </connection>
     <connection>
         <sender>addButton</sender>
         <signal>clicked()</signal>
-        <receiver>AddService</receiver>
+        <receiver>AddConnection</receiver>
         <slot>accept()</slot>
     </connection>
 </connections>

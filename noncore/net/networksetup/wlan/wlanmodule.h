@@ -15,7 +15,7 @@ public:
   virtual QWidget *configure(QTabWidget **tabWidget);
   virtual QWidget *information(QTabWidget **tabWidget);
   virtual QList<Interface> getInterfaces();
-  virtual QMap<QString, QString> possibleNewInterfaces();
+  virtual void possibleNewInterfaces(QMap<QString, QString> &list){};
   virtual Interface *addNewInterface(QString name);
   virtual bool remove(Interface* i);
   virtual QString getPixmapName(Interface* i);

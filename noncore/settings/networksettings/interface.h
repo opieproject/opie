@@ -4,6 +4,7 @@
 #include <qstring.h>
 
 class Module;
+
 class Interface {
 
 public:

@@ -102,7 +102,7 @@
                         </column>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>serviceList</cstring>
+                            <cstring>connectionList</cstring>
                         </property>
                         <property stdset="1">
                             <name>allColumnsShowFocus</name>
@@ -131,7 +131,7 @@
                                 <class>QPushButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>addServiceButton</cstring>
+                                    <cstring>addConnectionButton</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -142,7 +142,7 @@
                                 <class>QPushButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>informationServiceButton</cstring>
+                                    <cstring>informationConnectionButton</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -153,7 +153,7 @@
                                 <class>QPushButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>configureServiceButton</cstring>
+                                    <cstring>configureConnectionButton</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
@@ -164,7 +164,7 @@
                                 <class>QPushButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>removeServiceButton</cstring>
+                                    <cstring>removeConnectionButton</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
