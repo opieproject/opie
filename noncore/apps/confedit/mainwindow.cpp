@@ -12,12 +12,12 @@
 
 #include "mainwindow.h"
 
-#include <qpe/qpemenubar.h>
-#include <qpe/qpemessagebox.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
-#include <qpe/qpetoolbar.h>
-#include <qpe/qpeapplication.h>
+#include <opie2/omenubar.h>
+#include <opie2/omessagebox.h>
+#include <opie2/oresource.h>
+#include <opie2/oconfig.h>
+#include <opie2/otoolbar.h>
+#include <opie2/oapplication.h>
 #include <qaction.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
@@ -28,6 +28,7 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qlineedit.h>
+#include <qcursor.h>
 
 #include "listviewconfdir.h"
 #include "listviewitemconf.h"

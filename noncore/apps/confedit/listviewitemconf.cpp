@@ -13,13 +13,13 @@ ListViewItemConf::ListViewItemConf(ListViewItemConf *parent)
 	: QListViewItem(parent), _changed(false)
 {
 }
-	
+
 ListViewItemConf::ListViewItemConf(QListView *parent)
 	: QListViewItem(parent), _changed(false)
 {
 	_type = File;
 }
-	
+
 ListViewItemConf::~ListViewItemConf()
 {
 }
@@ -49,3 +49,6 @@ bool ListViewItemConf::revertable()
 {
 	return _changed;
 }
+
+
+

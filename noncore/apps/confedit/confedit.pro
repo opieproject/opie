@@ -6,8 +6,8 @@ HEADERS		= mainwindow.h listviewconfdir.h listviewitemconffile.h listviewitemcon
 SOURCES		= main.cpp mainwindow.cpp listviewconfdir.cpp listviewitemconffile.cpp listviewitemconfigentry.cpp editwidget.cpp listviewitemconf.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/ioclude
-LIBS            += -lqpe
 INTERFACES	= 
+LIBS            += -lopiecore2 -lopieui2
 TARGET		= confedit
 
 TRANSLATIONS = ../../../i18n/de/confedit.ts \
@@ -29,5 +29,15 @@ TRANSLATIONS = ../../../i18n/de/confedit.ts \
 	 ../../../i18n/zh_TW/confedit.ts
 
 
+!contains( platform, x11 ) {
+  
+  include ( $(OPIEDIR)/include.pro )
+  LIBS += -lqpe 
+}
 
-include ( $(OPIEDIR)/include.pro )
+contains( platform, x11 ) {
+  LIBS        += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
+}
+
+
+
