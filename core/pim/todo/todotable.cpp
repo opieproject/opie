@@ -216,6 +216,10 @@ void TodoTable::addEntry( const ToDoEvent &todo )
     updateJournal( todo, ACTION_ADD );
     insertIntoTable( new ToDoEvent(todo), row );
     setCurrentCell(row, currentColumn());
+
+    // Resort the table to find the correct position 
+    sortColumn ( 0, TRUE, TRUE );
+
     updateVisible();
 }
 
@@ -335,6 +339,30 @@ void TodoTable::removeCurrentEntry()
     delete oldTodo;
 }
 
+void TodoTable::removeCompletedEntries()
+{
+    ToDoEvent *oldTodo;
+    OCheckItem *chk;
+
+    for (int row = 0; row < numRows(); row++){
+	    chk = static_cast<OCheckItem*>(item(row, 0 ));
+	    if ( chk ){
+		    if ( chk->isChecked() ){
+			    oldTodo = todoList[chk];
+			    todoList.remove ( chk );
+			    realignTable( row );
+			    updateJournal( *oldTodo, ACTION_REMOVE);
+			    delete oldTodo;
+			    
+			    // Check the current row again. This row may contain
+			    // an entry which should be deleted.
+			    --row;
+		    }
+	    }
+    }
+
+    updateVisible();
+}
 
 bool TodoTable::save( const QString &fn )
 {

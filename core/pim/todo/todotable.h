@@ -113,6 +113,7 @@ public:
     void clear();
     void removeCurrentEntry();
     void removeAllEntries() { clear(); };
+    void removeCompletedEntries();
     //void removeAllEntriesInCategory(const QString &category );
 
     void setPaintingEnabled( bool e );

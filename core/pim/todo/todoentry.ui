@@ -30,7 +30,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>247</width>
+            <width>239</width>
             <height>320</height>
         </rect>
     </property>
@@ -466,4 +466,16 @@
     <slot access="protected">dateChanged( int, int, int )</slot>
     <slot access="protected">slotCopy()</slot>
 </connections>
+<tabstops>
+    <tabstop>comboPriority</tabstop>
+    <tabstop>comboCategory</tabstop>
+    <tabstop>selectGroupButton</tabstop>
+    <tabstop>cmbProg</tabstop>
+    <tabstop>checkCompleted</tabstop>
+    <tabstop>checkDate</tabstop>
+    <tabstop>buttonDate</tabstop>
+    <tabstop>lneSum</tabstop>
+    <tabstop>lblDown</tabstop>
+    <tabstop>txtTodo</tabstop>
+</tabstops>
 </UI>

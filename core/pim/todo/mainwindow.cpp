@@ -182,6 +182,13 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f ) :
     a->setEnabled( FALSE );
     deleteAllAction = a;  
 
+    a = new QAction( QString::null, tr( "Delete completed"), 0, this, 0 );
+    connect(a, SIGNAL( activated() ),
+	    this, SLOT( slotDeleteCompleted() ) );
+    a->addTo(edit );
+    a->setEnabled( TRUE );
+    deleteCompletedAction = a;  
+
     edit->insertSeparator();
     a = new QAction( QString::null, tr("Duplicate" ), 0, this, 0 );
     connect(a, SIGNAL( activated() ),
@@ -350,13 +357,35 @@ void TodoWindow::slotDeleteAll()
   
   //QString strName = table->text( table->currentRow(), 2 ).left( 30 );
   
-  if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("Delete all tasks?") ) )
+  if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("all tasks?") ) )
     return;
-  
-  
-  
+
   table->setPaintingEnabled( false );
   table->removeAllEntries();
+  table->setPaintingEnabled( true );
+  
+  if ( table->numRows() == 0 ) {
+    currentEntryChanged( -1, 0 );
+    findAction->setEnabled( FALSE );
+  }
+  mStack->raiseWidget(1 );
+}
+
+void TodoWindow::slotDeleteCompleted()
+{
+  if(syncing) {
+    QMessageBox::warning(this, tr("Todo"),
+			 tr("Can not edit data, currently syncing"));
+    return;
+  }
+  
+  //QString strName = table->text( table->currentRow(), 2 ).left( 30 );
+  
+  if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("all completed tasks?") ) )
+    return;
+  
+  table->setPaintingEnabled( false );
+  table->removeCompletedEntries();
   table->setPaintingEnabled( true );
   
   if ( table->numRows() == 0 ) {

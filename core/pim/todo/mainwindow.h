@@ -49,7 +49,11 @@ public slots:
 
 protected slots:
     void slotNew();
+
     void slotDelete();
+    void slotDeleteAll();
+    void slotDeleteCompleted();
+
     void slotEdit();
     void slotShowPopup( const QPoint & );
     void showCompleted( bool );
@@ -65,7 +69,6 @@ protected slots:
     void setDocument( const QString & );
     void slotBeam();
     void beamDone( Ir * );
-    void slotDeleteAll();
     void slotDuplicate();
 
 protected:
@@ -79,12 +82,13 @@ private:
     TodoTable *table;
     TodoLabel *mView;
     QAction *editAction,
-      *deleteAction,
-      *findAction,
-      *completedAction,
-      *showdeadlineAction,
-      *deleteAllAction,
-      *duplicateAction;
+	    *deleteAction,
+	    *findAction,
+	    *completedAction,
+	    *showdeadlineAction,
+	    *deleteAllAction,
+	    *deleteCompletedAction,
+	    *duplicateAction;
     QPopupMenu *contextMenu, *catMenu;
     QWidgetStack *mStack;
 
