@@ -1,0 +1,5 @@
+*.moc
+*.~
+Makefile*
+moc_*
+opieobj
