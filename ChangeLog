@@ -1,5 +1,6 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
 
+	* Added namespace usage in libopie2 and everywhere (zecke,alwin)
 	* Enabled the possibility to pass command line arguments to applications (mickeyl)
 	* Added an about applet showing some credits and information about Opie (mickeyl)
 	* Added benchmarking functionality to sysinfo (mickeyl)

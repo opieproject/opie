@@ -48,7 +48,7 @@ ifeq ($(QPE_VERSION),)
     QPE_VERSION:=$(VERSION_MAJ).$(VERSION_MIN).$(VERSION_PAT)
 
     ifeq ($(QPE_VERSION),..)
-        QPE_VERSION=1.1.0
+        QPE_VERSION=1.1.2
     endif
 endif
 export QPE_VERSION
