@@ -15,9 +15,9 @@
 
 #include "drawpad.h"
 #include "drawpadcanvas.h"
+#include "page.h"
 
 #include <qimage.h>
-#include <qpixmap.h>
 
 FillTool::FillTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
     : Tool(drawPad, drawPadCanvas)

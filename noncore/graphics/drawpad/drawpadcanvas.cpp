@@ -15,6 +15,7 @@
 
 #include "drawpad.h"
 #include "newpagedialog.h"
+#include "page.h"
 #include "tool.h"
 
 #include <qpe/applnk.h>
@@ -25,7 +26,6 @@
 #include <qimage.h>
 #include <qmessagebox.h>
 #include <qpainter.h>
-#include <qpixmap.h>
 #include <qtextcodec.h>
 #include <qtextstream.h>
 #include <qxml.h>
@@ -38,7 +38,7 @@ public:
     DrawPadCanvasXmlHandler();
     ~DrawPadCanvasXmlHandler();
 
-    QList<QPixmap> pixmaps();
+    QList<Page> pages();
 
     bool startElement(const QString& namespaceURI, const QString& localName,
                       const QString& qName, const QXmlAttributes& atts);
@@ -55,7 +55,7 @@ private:
     State m_state;
     ulong m_dataLenght;
     QString m_dataFormat;
-    QList<QPixmap> m_pixmaps;
+    QList<Page> m_pages;
 };
 
 DrawPadCanvasXmlHandler::DrawPadCanvasXmlHandler()
@@ -67,9 +67,9 @@ DrawPadCanvasXmlHandler::~DrawPadCanvasXmlHandler()
 {
 }
 
-QList<QPixmap> DrawPadCanvasXmlHandler::pixmaps()
+QList<Page> DrawPadCanvasXmlHandler::pages()
 {
-    return m_pixmaps;
+    return m_pages;
 }
 
 bool DrawPadCanvasXmlHandler::startElement(const QString& namespaceURI, const QString& localName,
@@ -147,9 +147,9 @@ bool DrawPadCanvasXmlHandler::characters(const QString& ch)
             image.loadFromData((const uchar*)byteArray.data(), m_dataLenght, m_dataFormat);
         }
 
-        QPixmap* pixmap = new QPixmap(image.width(), image.height());
-        pixmap->convertFromImage(image);
-        m_pixmaps.append(pixmap);
+        Page* page = new Page(image.width(), image.height());
+        page->convertFromImage(image);
+        m_pages.append(page);
     }
 
     return true;
@@ -181,15 +181,15 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
     xmlSimpleReader.setContentHandler(&drawPadCanvasXmlHandler);
     xmlSimpleReader.parse(xmlInputSource);
 
-    m_pages = drawPadCanvasXmlHandler.pixmaps();
+    m_pages = drawPadCanvasXmlHandler.pages();
 
     if (m_pages.isEmpty()) {
-        m_pages.append(new QPixmap(contentsRect().size()));
+        m_pages.append(new Page(contentsRect().size()));
         m_pages.current()->fill(Qt::white);
     }
 
     m_pageBackups.clear();
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+    m_pageBackups.append(new Page(*(m_pages.current())));
 
     resizeContents(m_pages.current()->width(), m_pages.current()->height());
     viewport()->update();
@@ -200,11 +200,11 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
 
 void DrawPadCanvas::initialPage()
 {
-    m_pages.append(new QPixmap(236, 232));
+    m_pages.append(new Page(236, 232));
     m_pages.current()->fill(Qt::white);
 
     m_pageBackups.clear();
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+    m_pageBackups.append(new Page(*(m_pages.current())));
 
     resizeContents(m_pages.current()->width(), m_pages.current()->height());
     viewport()->update();
@@ -221,7 +221,7 @@ void DrawPadCanvas::save(QIODevice* ioDevice)
     textStream << "<drawpad>" << endl;
     textStream << "    <images>" << endl;
 
-    QListIterator<QPixmap> bufferIterator(m_pages);
+    QListIterator<Page> bufferIterator(m_pages);
 
     for (bufferIterator.toFirst(); bufferIterator.current() != 0; ++bufferIterator) {
         textStream << "        <image>" << endl;
@@ -256,13 +256,13 @@ void DrawPadCanvas::save(QIODevice* ioDevice)
 
 void DrawPadCanvas::importPage(const QString& fileName)
 {
-    QPixmap* importedPixmap = new QPixmap();
+    Page* importedPage = new Page();
 
-    importedPixmap->load(fileName);
-    m_pages.insert(m_pages.at() + 1, importedPixmap);
+    importedPage->load(fileName);
+    m_pages.insert(m_pages.at() + 1, importedPage);
 
     m_pageBackups.clear();
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+    m_pageBackups.append(new Page(*(m_pages.current())));
 
     resizeContents(m_pages.current()->width(), m_pages.current()->height());
     viewport()->update();
@@ -308,12 +308,12 @@ void DrawPadCanvas::exportPage(uint fromPage, uint toPage, const QString& name,c
     }
 }
 
-QPixmap* DrawPadCanvas::currentPage()
+Page* DrawPadCanvas::currentPage()
 {
     return m_pages.current();
 }
 
-QList<QPixmap> DrawPadCanvas::pages()
+QList<Page> DrawPadCanvas::pages()
 {
     return m_pages;
 }
@@ -339,7 +339,7 @@ void DrawPadCanvas::backupPage()
         m_pageBackups.removeFirst();
     }
 
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+    m_pageBackups.append(new Page(*(m_pages.current())));
 
     emit pageBackupsChanged();
 }
@@ -357,11 +357,11 @@ void DrawPadCanvas::deleteAll()
     if (messageBox.exec() == QMessageBox::Yes) {
         m_pages.clear();
 
-        m_pages.append(new QPixmap(contentsRect().size()));
+        m_pages.append(new Page(contentsRect().size()));
         m_pages.current()->fill(Qt::white);
 
         m_pageBackups.clear();
-        m_pageBackups.append(new QPixmap(*(m_pages.current())));
+        m_pageBackups.append(new Page(*(m_pages.current())));
 
         resizeContents(m_pages.current()->width(), m_pages.current()->height());
         viewport()->update();
@@ -379,12 +379,12 @@ void DrawPadCanvas::newPage()
                                 m_pDrawPad->brush().color(), this);
 
     if (newPageDialog.exec() == QDialog::Accepted) {
-        m_pages.insert(m_pages.at() + 1, new QPixmap(newPageDialog.selectedWidth(),
-                                                     newPageDialog.selectedHeight()));
+        m_pages.insert(m_pages.at() + 1, new Page(newPageDialog.selectedWidth(),
+                                                  newPageDialog.selectedHeight()));
         m_pages.current()->fill(newPageDialog.selectedColor());
 
         m_pageBackups.clear();
-        m_pageBackups.append(new QPixmap(*(m_pages.current())));
+        m_pageBackups.append(new Page(*(m_pages.current())));
 
         resizeContents(m_pages.current()->width(), m_pages.current()->height());
         viewport()->update();
@@ -425,12 +425,12 @@ void DrawPadCanvas::deletePage()
         m_pages.remove(m_pages.current());
 
         if (m_pages.isEmpty()) {
-            m_pages.append(new QPixmap(contentsRect().size()));
+            m_pages.append(new Page(contentsRect().size()));
             m_pages.current()->fill(Qt::white);
         }
 
         m_pageBackups.clear();
-        m_pageBackups.append(new QPixmap(*(m_pages.current())));
+        m_pageBackups.append(new Page(*(m_pages.current())));
 
         resizeContents(m_pages.current()->width(), m_pages.current()->height());
         viewport()->update();
@@ -482,7 +482,7 @@ void DrawPadCanvas::goFirstPage()
 {
     m_pages.first();
     m_pageBackups.clear();
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+    m_pageBackups.append(new Page(*(m_pages.current())));
 
     resizeContents(m_pages.current()->width(), m_pages.current()->height());
     viewport()->update();
@@ -495,7 +495,7 @@ void DrawPadCanvas::goPreviousPage()
 {
     m_pages.prev();
     m_pageBackups.clear();
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+    m_pageBackups.append(new Page(*(m_pages.current())));
 
     resizeContents(m_pages.current()->width(), m_pages.current()->height());
     viewport()->update();
@@ -508,7 +508,7 @@ void DrawPadCanvas::goNextPage()
 {
     m_pages.next();
     m_pageBackups.clear();
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+    m_pageBackups.append(new Page(*(m_pages.current())));
 
     resizeContents(m_pages.current()->width(), m_pages.current()->height());
     viewport()->update();
@@ -521,7 +521,7 @@ void DrawPadCanvas::goLastPage()
 {
     m_pages.last();
     m_pageBackups.clear();
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+    m_pageBackups.append(new Page(*(m_pages.current())));
 
     resizeContents(m_pages.current()->width(), m_pages.current()->height());
     viewport()->update();

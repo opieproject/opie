@@ -15,9 +15,9 @@
 
 #include "drawpad.h"
 #include "drawpadcanvas.h"
+#include "page.h"
 
 #include <qpainter.h>
-#include <qpixmap.h>
 
 ShapeTool::ShapeTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
     : Tool(drawPad, drawPadCanvas)

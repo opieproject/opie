@@ -25,6 +25,7 @@
 #include "pointtool.h"
 #include "rectangletool.h"
 #include "texttool.h"
+#include "thumbnailview.h"
 
 #include <opie/colordialog.h>
 #include <opie/colorpopupmenu.h>
@@ -77,6 +78,12 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     QAction* exportPageAction = new QAction(tr("Export"), tr("Export..."), 0, this);
     connect(exportPageAction, SIGNAL(activated()), this, SLOT(exportPage()));
     exportPageAction->addTo(toolsPopupMenu);
+
+    toolsPopupMenu->insertSeparator();
+
+    QAction* thumbnailViewAction = new QAction(tr("Thumbnail View"), tr("Thumbnail View..."), 0, this);
+    connect(thumbnailViewAction, SIGNAL(activated()), this, SLOT(thumbnailView()));
+    thumbnailViewAction->addTo(toolsPopupMenu);
 
     menuBar->insertItem(tr("Tools"), toolsPopupMenu);
 
@@ -518,4 +525,12 @@ void DrawPad::exportPage()
         m_pDrawPadCanvas->exportPage(exportDialog.selectedFromPage(), exportDialog.selectedToPage(),
                                      exportDialog.selectedName(), exportDialog.selectedFormat());
     }
+}
+
+void DrawPad::thumbnailView()
+{
+    ThumbnailView thumbnailView(m_pDrawPadCanvas->pages(), this);
+
+    thumbnailView.showMaximized();
+    thumbnailView.exec();
 }

@@ -15,11 +15,11 @@
 
 #include "drawpad.h"
 #include "drawpadcanvas.h"
+#include "page.h"
 
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qpainter.h>
-#include <qpixmap.h>
 
 TextToolDialog::TextToolDialog(QWidget* parent, const char* name)
     : QDialog(parent, name, true)

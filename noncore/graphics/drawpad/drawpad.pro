@@ -11,10 +11,12 @@ HEADERS		= drawpad.h \
 		  importdialog.h \
 		  linetool.h \
 		  newpagedialog.h \
+		  page.h \
 		  pointtool.h \
 		  rectangletool.h \
 		  shapetool.h \
 		  texttool.h \
+		  thumbnailview.h \
 		  tool.h
 SOURCES		= drawpad.cpp \
 		  drawpadcanvas.cpp \
@@ -28,10 +30,12 @@ SOURCES		= drawpad.cpp \
 		  linetool.cpp \
 		  main.cpp \
 		  newpagedialog.cpp \
+		  page.cpp \
 		  pointtool.cpp \
 		  rectangletool.cpp \
 		  shapetool.cpp \
 		  texttool.cpp \
+		  thumbnailview.cpp \
 		  tool.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include \
 		  $(QTDIR)/src/3rdparty/zlib

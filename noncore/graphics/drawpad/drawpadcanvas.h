@@ -20,8 +20,7 @@
 #include <qpointarray.h>
 
 class DrawPad;
-
-class QPixmap;
+class Page;
 
 class DrawPadCanvas : public QScrollView
 { 
@@ -43,8 +42,8 @@ public:
     bool goPreviousPageEnabled();
     bool goNextPageEnabled();
 
-    QPixmap* currentPage();
-    QList<QPixmap> pages();
+    Page* currentPage();
+    QList<Page> pages();
     uint pagePosition();
     uint pageCount();
 
@@ -76,8 +75,8 @@ protected:
 
 private:
     DrawPad* m_pDrawPad;
-    QList<QPixmap> m_pages;
-    QList<QPixmap> m_pageBackups;
+    QList<Page> m_pages;
+    QList<Page> m_pageBackups;
 };
 
 #endif // DRAWPADCANVAS_H
