@@ -264,7 +264,7 @@ const QByteArray HttpFactory::recieveNormal( int sockfd, int dataLen ) const
 	int recieved, i;
 	
 	recieved = recv( sockfd, temp.data(), temp.size(), 0 );
-	printf( "HttpFactory::recieveNormal: found some data: %s\n", (char *)temp.data() );
+//	printf( "HttpFactory::recieveNormal: found some data: %s\n", (char *)temp.data() );
 	for( i = 0; i < recieved; i++ )
 	{
 		data[i] = temp[i];
@@ -296,7 +296,7 @@ const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 	int recieved, i = 0, cSize = 0;
 	QString cSizeS;
 	
-	printf( "HttpFactory::recieveChunked: temp.size(): %d\n", temp.size() );
+//	printf( "HttpFactory::recieveChunked: temp.size(): %d\n", temp.size() );
 	recv( sockfd, temp.data(), temp.size(), 0 );
 	while( *(temp.data()) != '\n' && *(temp.data()) != ';' )
 	{
@@ -335,7 +335,7 @@ const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 			temp.fill('\0', cSize);
 		}
 		
-		printf( "HttpFactory::recieveChunked: current data:\n%s", data.data() );
+//		printf( "HttpFactory::recieveChunked: current data:\n%s", data.data() );
 		
 		temp.fill('\0', 1);
 		cSizeS = "";
@@ -350,7 +350,7 @@ const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 		while( *(temp.data()) != '\n' && *(temp.data()) != ';' )
 		{
 //			printf( "HttpFactory::recieveChunked: temp.size(): %d\n", temp.size() );
-			printf( "HttpFactory::recieveChunked: temp.data(): %d\n", temp[0] );
+//			printf( "HttpFactory::recieveChunked: temp.data(): %d\n", temp[0] );
 			cSizeS += temp[0];
 			recv( sockfd, temp.data(), temp.size(), 0 );
 		}
