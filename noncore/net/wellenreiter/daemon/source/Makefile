@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.2 2002-11-22 23:41:17 mjm Exp $
+# $Id: Makefile,v 1.3 2002-11-23 20:12:57 max Exp $
 
 CPP	       = g++
 
@@ -19,6 +19,11 @@ all:	wellenreiterd
 wellenreiterd:	$(OBJ)
 	$(CPP) $(OPTIMFLAGS) $(WARNFLAGS) $(OBJ) $(LDFLAGS) $(LIBS) -o $@
 	@echo Build wellenreiterd
+
+sniffer: sniffer.o cardmode.o
+	$(CPP) $(OPTIMFLAGS) $(WARNFLAGS) sniffer.o cardmode.o $(LDFLAGS) $(LIBS) -o $@
+	@echo Build sniffer
+
 
 clean distclean realclean:
 	@rm -rf wellenreiterd *~ *.o
