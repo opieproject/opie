@@ -42,6 +42,8 @@ public:
     TaskBar();
     ~TaskBar();
 
+    static QWidget *calibrate( bool );
+
     bool recoverMemory();
 
     StartMenu *startMenu() const { return sm; }

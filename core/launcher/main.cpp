@@ -30,7 +30,6 @@
 #endif
 
 #include <opie/odevice.h>
-#include <opie/oprocess.h>
 
 #include <qmessagebox.h>
 #include <qfile.h>
@@ -44,6 +43,8 @@
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
+
+#include "../calibrate/calibrate.h"
 
 using namespace Opie;
 
@@ -117,14 +118,10 @@ int initApplication( int argc, char ** argv )
 
     if ( QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
 	if ( !QFile::exists( "/etc/pointercal" ) ) {
-            OProcess cal;
-            cal << "calibrate";
-          
-            if ( ! cal.start(OProcess::Block, OProcess::NoCommunication) ) {
-		QMessageBox::warning( 0, "Unable to calibrate",
-                    "Failed to start the calibration tool.\n"
-		);
-            }
+	    // Make sure calibration widget starts on top.
+	    Calibrate *cal = new Calibrate;
+	    cal->exec();
+	    delete cal;
 	}
     }
 

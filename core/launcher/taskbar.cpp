@@ -22,6 +22,7 @@
 #include "inputmethods.h"
 #include "runningappbar.h"
 #include "systray.h"
+#include "calibrate.h"
 #include "wait.h"
 #include "appicons.h"
 
@@ -81,12 +82,15 @@ static Global::Command builtins[] = {
 #undef APP
 #endif
 
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_SL5XXX)
+        { "calibrate",          TaskBar::calibrate, 1, 0 },
+#endif
 #if !defined(QT_QWS_CASSIOPEIA)
   { "shutdown",           Global::shutdown,   1, 0 },
 //  { "run",                run,      1, 0 },
 #endif
 
-  { 0, 0, 0, 0 },
+  { 0,            TaskBar::calibrate, 0, 0 },
 };
 
 static bool initNumLock()
@@ -300,6 +304,17 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
 	else if ( msg == "toggleStartMenu()" ) {
 		sm-> launch ( );
 	}
+}
+
+QWidget *TaskBar::calibrate(bool)
+{
+#ifdef Q_WS_QWS
+    Calibrate *c = new Calibrate;
+    c->show();
+    return c;
+#else
+    return 0;
+#endif
 }
 
 void TaskBar::toggleNumLockState()

@@ -98,6 +98,7 @@ static int loggedin = 0;
 static void login( bool at_poweron )
 {
 	if ( !loggedin ) {
+		Global::terminateBuiltin( "calibrate" );
 		Password::authenticate( at_poweron );
 		loggedin = 1;
 		QCopEnvelope e( "QPE/Desktop", "unlocked()" );
@@ -621,6 +622,7 @@ void Desktop::executeOrModify( const QString& appLnkFile )
 	AppLnk lnk( MimeType::appsFolderName() + "/" + appLnkFile );
 	if ( lnk.isValid() ) {
 		QCString app = lnk.exec().utf8();
+		Global::terminateBuiltin( "calibrate" );
 		if ( QCopChannel::isRegistered( "QPE/Application/" + app ) ) {
 			//  MRUList::addTask( &lnk );
 			if ( hasVisibleWindow( app ) )
