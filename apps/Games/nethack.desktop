@@ -1,0 +1,8 @@
+[Desktop Entry]
+CanFastload = 0
+Categories = 
+Comment = Classic Dungeon Adventure Game
+Exec = nethack
+Icon = nethack
+Name = NetHack
+Type = Games
