@@ -1,6 +1,6 @@
 Files: bin/kbill apps/Games/kbill.desktop pics/kbill/*
 Priority: optional
-Section: opie/applications
+Section: opie/games
 Maintainer: Mark Westcott <mark@houseoffish.org>
 Architecture: arm
 Version: 0.8-$SUB_VERSION
