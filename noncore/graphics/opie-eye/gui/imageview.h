@@ -34,7 +34,7 @@ public:
     ImageView(Opie::Core::OConfig *cfg,QWidget* parent,const char* name = 0, WFlags fl = 0 );
     virtual ~ImageView();
     Opie::Core::OKeyConfigManager* manager();
-    void setFullScreen(bool how);
+    void setFullScreen(bool how,bool force=true);
     bool fullScreen(){return m_isFullScreen;}
     virtual void enableFullscreen();
     void stopSlide();

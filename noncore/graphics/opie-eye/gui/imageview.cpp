@@ -87,7 +87,7 @@ void ImageView::initKeys()
 {
     odebug << "init imageview keys" << oendl;
     if (!m_cfg) {
-        m_cfg = new Opie::Core::OConfig("phunkview");
+        m_cfg = new Opie::Core::OConfig("opie-eye");
         m_cfg->setGroup("image_view_keys" );
     }
     Opie::Core::OKeyPair::List lst;
@@ -190,13 +190,13 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
     delete m;
 }
 
-void ImageView::setFullScreen(bool how)
+void ImageView::setFullScreen(bool how,bool force)
 {
     m_isFullScreen = how;
     if (how) {
         m_ignore_next_in = true;
         setFixedSize(qApp->desktop()->size());
-        showFullScreen();
+        if (force) showFullScreen();
     } else {
         setMinimumSize(10,10);
     }
@@ -234,5 +234,4 @@ void ImageView::enableFullscreen()
       m_ignore_next_in = true;
       showFullScreen();
       setUpdatesEnabled(true);
-
 }

@@ -64,11 +64,13 @@ protected slots:
     void closeEvent( QCloseEvent* );
     void showToolbar(bool);
     void listviewselected(QAction*);
+    void slotFullScreenButton(bool);
 
 private:
     template<class T>  void initT( const char* name, T**, int );
     void initInfo();
     void initDisp();
+    void setupViewWindow(bool full, bool forceDisplay);
 
 private:
     Opie::Core::OConfig *m_cfg;
@@ -81,7 +83,7 @@ private:
     bool zoomerOn;
     QToolButton*fsButton;
     QToolBar *toolBar;
-    QPopupMenu *fileMenu,*dispMenu,*fsMenu,*listviewMenu;
+    QPopupMenu *fileMenu,*dispMenu,*fsMenu,*listviewMenu,*settingsMenu;
     QAction*m_aShowInfo,*m_aBeam,*m_aTrash,*m_aViewfile,*m_aDirUp,*m_aStartSlide;
     QAction*m_aHideToolbar,*m_aSetup,*m_aDirName,*m_aDirShort,*m_aDirLong;
     QActionGroup *m_gListViewMode,*m_gDisplayType,*m_gPrevNext,*m_hGroup;

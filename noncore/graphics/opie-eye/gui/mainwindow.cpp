@@ -43,8 +43,8 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     : QMainWindow( wid, name, style ), m_info( 0 ), m_disp( 0 )
 {
     setCaption( QObject::tr("Opie Eye Caramba" ) );
-    m_cfg = new Opie::Core::OConfig("phunkview");
-    m_cfg->setGroup("Zecke_view" );
+    m_cfg = new Opie::Core::OConfig("opie-eye");
+    m_cfg->setGroup("main" );
 
     m_storage = new StorageInfo();
     connect(m_storage, SIGNAL(disksChanged() ),
@@ -108,7 +108,6 @@ void PMainWindow::slotToggleAutoscale()
 
 void PMainWindow::slotRotateToggled(bool how)
 {
-    odebug << "Autorotate: " << how << oendl;
     autoRotate = how;
     if (m_disp) {
         m_disp->setAutoScaleRotate(!m_aAutoScale->isOn(),m_aAutoRotate->isOn());
@@ -226,10 +225,12 @@ void PMainWindow::initT( const char* name, T** ptr, int id) {
             this,SLOT(slotReturn()));
 
 }
+
 void PMainWindow::initInfo() {
     initT<imageinfo>( "Image Info", &m_info, ImageInfo );
     connect(m_info,SIGNAL(dispImage(const QString&)),this,SLOT(slotDisplay(const QString&)));
 }
+
 void PMainWindow::initDisp() {
     initT<ImageView>( "Image ScrollView", &m_disp, ImageDisplay );
     if (m_disp) {
@@ -256,17 +257,32 @@ void PMainWindow::initDisp() {
 
 void PMainWindow::slotToggleFullScreen()
 {
-    odebug << "Toggle full " << oendl;
     bool current = !m_aFullScreen->isOn();
     m_aFullScreen->setOn(current);
 }
 
-void PMainWindow::slotFullScreenToggled(bool current)
+void PMainWindow::slotFullScreenButton(bool current)
 {
-    odebug << "slotFullScreenToggled " << current << oendl;
+    if (m_disp) odebug << "Disp fenster ist hidden: "<<m_disp->isHidden()<<oendl;
+    if (!m_disp) return;
+
+    /* I can not solve this effects here - it seems that we require some
+       status variable, too. so we will live with some interesting effects
+       meanwhile */
+#if 0
+    bool th = m_disp->isHidden();
+    setupViewWindow(current, false);
+    /* realy - after setting up the fullscreenmode while the window is hidden
+       it is unvisibile not hidden!!!!! Hell. */
+    if (th) m_disp->hide();
+#endif
+    setupViewWindow(current, true);
+}
+
+void PMainWindow::setupViewWindow(bool current, bool forceDisplay)
+{
     if (!m_disp) return;
     if (current) {
-        odebug << "full" << oendl;
         m_disp->setBackgroundColor(black);
         m_disp->reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));
         m_disp->setVScrollBarMode(QScrollView::AlwaysOff);
@@ -274,7 +290,6 @@ void PMainWindow::slotFullScreenToggled(bool current)
         m_disp->resize(qApp->desktop()->width(), qApp->desktop()->height());
     } else {
         setUpdatesEnabled(false);
-        odebug << "window" << oendl;
         if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
             m_disp->setMinimumSize(QApplication::desktop()->size()/2);
         } else {
@@ -289,13 +304,19 @@ void PMainWindow::slotFullScreenToggled(bool current)
         m_stack->addWidget(m_disp,ImageDisplay);
         m_disp->setVScrollBarMode(QScrollView::Auto);
         m_disp->setHScrollBarMode(QScrollView::Auto);
-        m_stack->raiseWidget(m_disp);
+        if (forceDisplay || m_disp->isVisible())
+            m_stack->raiseWidget(m_disp);
         if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
             m_disp->resize(m_disp->minimumSize());
         }
         setUpdatesEnabled(true);
     }
-    m_disp->setFullScreen(current);
+    m_disp->setFullScreen(current,forceDisplay);
+}
+
+void PMainWindow::slotFullScreenToggled(bool current)
+{
+    setupViewWindow(current,true);
 }
 
 /**
@@ -329,7 +350,6 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
 }
 
 void PMainWindow::slotDisplay( const QString& inf ) {
-    odebug << "slotDisplay: " << inf << oendl;
     if ( !m_disp ) {
         initDisp();
     }
@@ -347,7 +367,6 @@ void PMainWindow::slotDisplay( const QString& inf ) {
         }
     }
     if (m_disp->fullScreen()) {
-        //m_disp->showFullScreen();
         qwsDisplay()->requestFocus( m_disp->winId(), TRUE);
     } else {
         m_stack->raiseWidget( ImageDisplay );
@@ -518,7 +537,7 @@ void PMainWindow::setupActions()
         Resource::loadIconSet("fullscreen"), 0, 0, this, 0, true );
     m_aFullScreen->setToggleAction(true);
     m_aFullScreen->setOn(false);
-    connect(m_aFullScreen,SIGNAL(toggled(bool)),this,SLOT(slotFullScreenToggled(bool)));
+    connect(m_aFullScreen,SIGNAL(toggled(bool)),this,SLOT(slotFullScreenButton(bool)));
 
     m_gDisplayType = new QActionGroup(this,"imagedisplaytype",false);
     m_aAutoRotate = new QAction( tr( "Auto rotate images" ), Resource::loadIconSet( "rotate" ), 0, 0, this, 0, true );
@@ -569,7 +588,7 @@ void PMainWindow::setupToolbar()
     }
     m_aShowInfo->addTo(toolBar);
     m_aTrash->addTo(toolBar);
-    m_aSetup->addTo(toolBar);
+//    m_aSetup->addTo(toolBar);
 
     m_gDisplayType->addTo(toolBar);
 
@@ -586,6 +605,8 @@ void PMainWindow::setupMenu()
     menuBar()->insertItem( tr( "File" ), fileMenu );
     dispMenu = new QPopupMenu( menuBar() );
     menuBar()->insertItem( tr( "Show" ), dispMenu );
+    settingsMenu = new QPopupMenu( menuBar() );
+    menuBar()->insertItem( tr( "Settings" ), settingsMenu );
 
     m_aViewfile->addTo(fileMenu);
     m_aShowInfo->addTo(fileMenu);
@@ -604,10 +625,8 @@ void PMainWindow::setupMenu()
         m_aBeam->addTo( fileMenu );
     }
     fileMenu->insertSeparator();
-    m_aSetup->addTo(fileMenu);
     m_aTrash->addTo(fileMenu);
 
-    m_aHideToolbar->addTo(dispMenu);
     listviewMenu = new QPopupMenu(dispMenu);
     dispMenu->insertItem(Resource::loadIconSet("opie-eye/opie-eye-thumb"),tr("Listview mode"),listviewMenu);
     m_gListViewMode->addTo(listviewMenu);
@@ -616,6 +635,9 @@ void PMainWindow::setupMenu()
     m_gDisplayType->addTo(dispMenu);
     dispMenu->insertSeparator();
     m_gPrevNext->addTo(dispMenu);
+
+    m_aSetup->addTo(settingsMenu);
+    m_aHideToolbar->addTo(settingsMenu);
 }
 
 void PMainWindow::listviewselected(QAction*which)

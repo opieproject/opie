@@ -56,7 +56,6 @@ Opie::Core::OKeyConfigManager* imageinfo::manager()
 
 void imageinfo::initKeys()
 {
-    odebug << "init imageinfo keys" << oendl;
 #if 0
     if (!m_cfg) {
         m_cfg = new Opie::Core::OConfig("phunkview");
