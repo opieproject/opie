@@ -166,7 +166,7 @@ void PmIpkg::linkPackage( QString packFileName, QString dest )
 
 void PmIpkg::processFileList( QStringList *fileList, QString d )
 {
-	if (!fileList) return;
+	if (!fileList || fileList->isEmpty()) return;
   for (uint i=0; i < fileList->count(); i++)
     {
       QString dest = settings->getDestinationUrlByName( d );
@@ -292,7 +292,7 @@ void PmIpkg::remove()
 	QStringList *fileList;
   for (uint i=0; i < to_remove.count(); i++)
   {
-		if ( to_remove.at(i)->link() )fileList = getList( to_remove.at(i)->name(), to_remove.at(i)->dest() );     	
+		if ( to_remove.at(i)->link() ) fileList = getList( to_remove.at(i)->name(), to_remove.at(i)->dest() );     	
     if ( runIpkg("remove " + to_remove.at(i)->installName(), to_remove.at(i)->dest() ))
     {
       runwindow->progress->setProgress( 1 );
