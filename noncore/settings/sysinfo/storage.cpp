@@ -82,6 +82,11 @@ void FileSysInfo::updateMounts()
         {
             fs = it.current();
 
+            if(fs->disk().left(5) == "tmpfs")
+            {
+            	continue;
+            }
+
             if ( !frst )
             {
                 QFrame *f = new QFrame( container );
@@ -135,7 +140,7 @@ MountInfo::MountInfo( FileSystem *filesys, QWidget *parent, const char *name )
     vb->addWidget( totalSize );
 
     fs = filesys;
-    title = fs->name();
+    title = fs->name() + "\t (" + fs->path() + ')';
 
     data = new GraphData();
     graph = new BarGraph( this );
