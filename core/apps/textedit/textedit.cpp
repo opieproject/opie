@@ -989,8 +989,8 @@ bool TextEdit::saveAs() {
     if( !featureAutoSave)
       {
           str = OFileDialog::getSaveFileName( 2,
-                                                      dire,
-                                                      filee, map);
+                                              dire,
+                                              filee, map);
       }
     else
         str=currentFileName;
@@ -1218,22 +1218,19 @@ int TextEdit::savePrompt()
 
 void TextEdit::timerCrank()
 {
-    if(featureAutoSave)
+    if(featureAutoSave && edited1)
       {
-          if( edited1 )
+          if(currentFileName.isEmpty())
             {
-                if(currentFileName.isEmpty())
-                  {
-                    currentFileName = QDir::homeDirPath()+"/textedit.tmp";
-                    saveAs();
-                  }
-                else
-                  {
-                      qDebug("autosave");
-                      save();
-                  }
-                setTimer();
+                currentFileName = QDir::homeDirPath()+"/textedit.tmp";
+                saveAs();
             }
+          else
+            {
+//                qDebug("autosave");
+                save();
+            }
+          setTimer();
       }
 }
 
@@ -1246,20 +1243,20 @@ void TextEdit::doTimer(bool b)
     nAutoSave->setOn(b);
     if(b)
       {
-          qDebug("doTimer true");
+//          qDebug("doTimer true");
           setTimer();      
       }
-    else
-        qDebug("doTimer false");
+//     else
+//         qDebug("doTimer false");
 }
 
 void TextEdit::setTimer()
 {
 if(featureAutoSave)
   {
-      qDebug("setting autosave");
+//      qDebug("setting autosave");
       QTimer *timer = new QTimer(this );
       connect( timer, SIGNAL(timeout()), this, SLOT(timerCrank()) );
-      timer->start( 30000/*0*/, true); //5 minutes
+      timer->start( 300000, true); //5 minutes
     }
 }
