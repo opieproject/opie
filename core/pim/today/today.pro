@@ -22,3 +22,4 @@ TRANSLATIONS   += ../i18n/zh_CN/today.ts
 TRANSLATIONS   += ../i18n/zh_TW/today.ts
 TRANSLATIONS   += ../i18n/fr/today.ts
 TRANSLATIONS   += ../i18n/pl/today.ts
+TRANSLATIONS   += ../i18n/es/today.ts

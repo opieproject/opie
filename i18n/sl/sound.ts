@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>8000</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">8000</translation>
     </message>
     <message>
         <source>33075</source>
@@ -83,6 +83,46 @@
     </message>
     <message>
         <source>Location</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Record Key:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Taskbar Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key_Escape</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key_Space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key_Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key_Calender</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key_Contacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key_Menu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Key_Mail</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

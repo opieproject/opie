@@ -135,9 +135,9 @@
     <message>
         <source>Do you really want
 to delete the current file
->from the disk?
+&gt;from the disk?
 This is irreversable!!</source>
-        <translation>Wollen Sie diese Datei wirklich
+        <translation type="obsolete">Wollen Sie diese Datei wirklich
 löschen? Dieser Befehl ist
 unwiderruflich!</translation>
     </message>
@@ -155,7 +155,7 @@ unwiderruflich!</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation>Datei öffnen</translation>
+        <translation type="obsolete">Datei öffnen</translation>
     </message>
     <message>
         <source>Text Editor has detected
@@ -175,56 +175,63 @@ editieren?</translation>
         <source>Linked Document</source>
         <translation>Verknüpfung</translation>
     </message>
+    <message>
+        <source>Do you really want
+to delete the current file
+from the disk?
+This is irreversable!!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>fileBrowser</name>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="obsolete">Name</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Größe</translation>
+        <translation type="obsolete">Größe</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation>Dokumente</translation>
+        <translation type="obsolete">Dokumente</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation>Alle Dateien</translation>
+        <translation type="obsolete">Alle Dateien</translation>
     </message>
     <message>
         <source>Hidden files</source>
-        <translation>versteckte Dateien</translation>
+        <translation type="obsolete">versteckte Dateien</translation>
     </message>
     <message>
         <source>Type: %1</source>
-        <translation>Typ: %1</translation>
+        <translation type="obsolete">Typ: %1</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation>Verzeichnis wechseln</translation>
+        <translation type="obsolete">Verzeichnis wechseln</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Verzeichnis erstellen</translation>
+        <translation type="obsolete">Verzeichnis erstellen</translation>
     </message>
     <message>
         <source>Rescan</source>
-        <translation>neu laden</translation>
+        <translation type="obsolete">neu laden</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation>Umbenennen</translation>
+        <translation type="obsolete">Umbenennen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation type="obsolete">Löschen</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Alle</translation>
+        <translation type="obsolete">Alle</translation>
     </message>
 </context>
 <context>

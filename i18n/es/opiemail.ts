@@ -1,305 +1,320 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>FontDialog</name>
+    <name>@default</name>
     <message>
-        <source>Font Dialog</source>
+        <source>Reply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
+        <source>Reply All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Font Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FontDialog</source>
+        <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>TextEdit</name>
+    <name>Composer</name>
     <message>
-        <source>New</source>
+        <source>Form1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open</source>
+        <source>CC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save</source>
+        <source>Subject</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save As</source>
+        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cut</source>
+        <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy</source>
+        <source>Queue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Paste</source>
+        <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Find...</source>
+        <source>From:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Zoom in</source>
+        <source>To:</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Zoom out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Italic</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wrap lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start with new file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
+</context>
+<context>
+    <name>MailviewerApp</name>
     <message>
         <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Find Next</source>
+        <source>Compose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close Find</source>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
+        <source>Mail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text Editor</source>
+        <source>Mailboxes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unnamed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save File As?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Permissions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FontDialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want
-to delete the current file
-from the disk?
-This is irreversable!!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Open File</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Text Editor has detected
- you selected a .desktop file.
-Open .desktop file or linked file?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>.desktop File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Linked Document</source>
+        <source>Configure OpieMail</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>fileBrowser</name>
+    <name>OpieMailConfig</name>
     <message>
-        <source>Name</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Documents</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>All files</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Hidden files</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Type: %1</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Change Directory</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Make Directory</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Rescan</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete"></translation>
-    </message>
-</context>
-<context>
-    <name>filePermissions</name>
-    <message>
-        <source>Set File Permissions</source>
+        <source>OpieMail Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Set file permissions for:</source>
+        <source>Folders</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>owner</source>
+        <source>&amp;Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>group</source>
+        <source>&amp;Modify</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>others</source>
+        <source>&amp;Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Owner</source>
+        <source>Folder name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Group</source>
+        <source>Identity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>read</source>
+        <source>Transport</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>write</source>
+        <source>Input</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>execute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>filePermissions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error- no user</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>fileSaver</name>
     <message>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
+        <source>Folder</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>fileSaver</source>
+        <source>User</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpieMailConfigImpl</name>
+    <message>
+        <source>Delete mailbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete the mailbox?
+All mails will be deleted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpieMailFolder</name>
+    <message>
+        <source>OpieMail Folder Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpieMailIdenty</name>
+    <message>
+        <source>OpieMail Identity - Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Signature:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Identity:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Organization:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EMail:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reply To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use for sending</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpieMailInputConfig</name>
+    <message>
+        <source>OpieMailInput</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>110</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable intervall checking.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check every:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete mail from server when deleted local.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Keep Mail on Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OpieMailOutputConfig</name>
+    <message>
+        <source>OpieMailOutPut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protocol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server requires authentication</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>25</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QMailView</name>
+    <message>
+        <source>Subject</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sender</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -307,7 +322,22 @@ Open .desktop file or linked file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>set file permissions</source>
+        <source>(Re)edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move To</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SplitterWidgetBase</name>
+    <message>
+        <source>Form1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

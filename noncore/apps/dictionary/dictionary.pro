@@ -25,3 +25,4 @@ TRANSLATIONS   += ../i18n/ko/dictionary.ts
 TRANSLATIONS   += ../i18n/no/dictionary.ts
 TRANSLATIONS   += ../i18n/zh_CN/dictionary.ts
 TRANSLATIONS   += ../i18n/zh_TW/dictionary.ts
+TRANSLATIONS   += ../i18n/es/dictionary.ts

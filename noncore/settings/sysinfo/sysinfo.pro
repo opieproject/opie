@@ -38,3 +38,4 @@ TRANSLATIONS   += ../i18n/pl/sysinfo.ts
 TRANSLATIONS   += ../i18n/sl/sysinfo.ts
 TRANSLATIONS   += ../i18n/zh_CN/sysinfo.ts
 TRANSLATIONS   += ../i18n/zh_TW/sysinfo.ts
+TRANSLATIONS   += ../i18n/es/sysinfo.ts

@@ -20,3 +20,4 @@ TRANSLATIONS   += ../i18n/sl/qasteroids.ts
 TRANSLATIONS   += ../i18n/no/qasteroids.ts
 TRANSLATIONS   += ../i18n/zh_CN/qasteroids.ts
 TRANSLATIONS   += ../i18n/zh_TW/qasteroids.ts
+TRANSLATIONS   += ../i18n/es/qasteroids.ts

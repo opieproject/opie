@@ -125,37 +125,26 @@
         <source>Insert Text</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>DrawPadCanvas</name>
     <message>
-        <source>Delete All</source>
-        <translation>Izbriši vse</translation>
+        <source>Thumbnail View</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to delete
-all the pages?</source>
-        <translation>Ali želite izbrisati
-vse strani?</translation>
+        <source>Thumbnail View...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clear Page</source>
-        <translation>Pobriši stran</translation>
+        <source>Page Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Information...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you want to clear
 the current page?</source>
-        <translation>Ali želite pobrisati
-trenutno stran?</translation>
-    </message>
-    <message>
-        <source>Delete Page</source>
-        <translation>Izbriši stran</translation>
-    </message>
-    <message>
-        <source>Do you want to delete
-the current page?</source>
-        <translation>Ali želite izbrisati
+        <translation type="unfinished">Ali želite pobrisati
 trenutno stran?</translation>
     </message>
     <message>
@@ -166,12 +155,65 @@ trenutno stran?</translation>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Do you want to delete
+the current page?</source>
+        <translation type="unfinished">Ali želite izbrisati
+trenutno stran?</translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+all the pages?</source>
+        <translation type="unfinished">Ali želite izbrisati
+vse strani?</translation>
+    </message>
+</context>
+<context>
+    <name>DrawPadCanvas</name>
+    <message>
+        <source>Delete All</source>
+        <translation type="obsolete">Izbriši vse</translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+all the pages?</source>
+        <translation type="obsolete">Ali želite izbrisati
+vse strani?</translation>
+    </message>
+    <message>
+        <source>Clear Page</source>
+        <translation type="obsolete">Pobriši stran</translation>
+    </message>
+    <message>
+        <source>Do you want to clear
+the current page?</source>
+        <translation type="obsolete">Ali želite pobrisati
+trenutno stran?</translation>
+    </message>
+    <message>
+        <source>Delete Page</source>
+        <translation type="obsolete">Izbriši stran</translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+the current page?</source>
+        <translation type="obsolete">Ali želite izbrisati
+trenutno stran?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="obsolete"></translation>
+    </message>
 </context>
 <context>
     <name>ExportDialog</name>
     <message>
         <source>Export</source>
-        <translation>Izvoz</translation>
+        <translation type="obsolete">Izvoz</translation>
     </message>
     <message>
         <source>Page Selection</source>
@@ -205,12 +247,16 @@ trenutno stran?</translation>
         <source>Format:</source>
         <translation>Oblika:</translation>
     </message>
+    <message>
+        <source>DrawPad - Export</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImportDialog</name>
     <message>
         <source>Import</source>
-        <translation>Uvozi</translation>
+        <translation type="obsolete">Uvozi</translation>
     </message>
     <message>
         <source>Automatic preview</source>
@@ -218,6 +264,10 @@ trenutno stran?</translation>
     </message>
     <message>
         <source>Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DrawPad - Import</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -229,15 +279,15 @@ trenutno stran?</translation>
     </message>
     <message>
         <source>Page Size</source>
-        <translation>Velikost strani</translation>
+        <translation type="obsolete">Velikost strani</translation>
     </message>
     <message>
         <source>Width :</source>
-        <translation>Širina:</translation>
+        <translation type="obsolete">Širina:</translation>
     </message>
     <message>
         <source>Height :</source>
-        <translation>Višina:</translation>
+        <translation type="obsolete">Višina:</translation>
     </message>
     <message>
         <source>Contents</source>
@@ -270,6 +320,57 @@ trenutno stran?</translation>
     <message>
         <source>Fill Color</source>
         <translation type="unfinished">Barva polnila</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PageInformationDialog</name>
+    <message>
+        <source>Page Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -308,9 +409,57 @@ trenutno stran?</translation>
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ThumbnailView</name>
+    <message>
+        <source>DrawPad - Thumbnail View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Page</source>
+        <translation type="unfinished">Pobriši stran</translation>
+    </message>
+    <message>
+        <source>Do you want to clear
+the selected page?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Page</source>
+        <translation type="unfinished">Izbriši stran</translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+the selected page?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

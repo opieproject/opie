@@ -221,32 +221,36 @@ Zakonczyc?</translation>
         <source>Large</source>
         <translation>Duzy</translation>
     </message>
+    <message>
+        <source>Import vCard</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ContactEditor</name>
     <message>
         <source>Fax</source>
-        <translation>Fax</translation>
+        <translation type="obsolete">Fax</translation>
     </message>
     <message>
         <source>Phone</source>
-        <translation>Telefon</translation>
+        <translation type="obsolete">Telefon</translation>
     </message>
     <message>
         <source>IM</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Mobile</source>
-        <translation>Komorka</translation>
+        <translation type="obsolete">Komorka</translation>
     </message>
     <message>
         <source>Page</source>
-        <translation>Strona</translation>
+        <translation type="obsolete">Strona</translation>
     </message>
     <message>
         <source>Pager</source>
-        <translation>Biper</translation>
+        <translation type="obsolete">Biper</translation>
     </message>
     <message>
         <source>Default Email</source>
@@ -302,15 +306,15 @@ Zakonczyc?</translation>
     </message>
     <message>
         <source>Street</source>
-        <translation>Ulica</translation>
+        <translation type="obsolete">Ulica</translation>
     </message>
     <message>
         <source>Street 2</source>
-        <translation>Ulica 2</translation>
+        <translation type="obsolete">Ulica 2</translation>
     </message>
     <message>
         <source>P.O. Box</source>
-        <translation>Skrytka Pocztowa</translation>
+        <translation type="obsolete">Skrytka Pocztowa</translation>
     </message>
     <message>
         <source>City</source>
@@ -322,7 +326,7 @@ Zakonczyc?</translation>
     </message>
     <message>
         <source>Zip</source>
-        <translation>Kod pocztowy</translation>
+        <translation type="obsolete">Kod pocztowy</translation>
     </message>
     <message>
         <source>Country</source>
@@ -1227,6 +1231,146 @@ Zakonczyc?</translation>
     <message>
         <source>Contacts</source>
         <translation>Kontakty</translation>
+    </message>
+    <message>
+        <source>Business Fax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Fax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Mobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Mobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business WebPage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Web Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Pager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Street</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Street</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business Country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home Country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Department</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profession</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Assistant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Spouse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Birthday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Anniversary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Nickname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Children</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work Fax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>work Mobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work Pager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work Web Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Work Mobile</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -52,6 +52,10 @@
         <source>1 Jan 2001</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Summary:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodoTable</name>

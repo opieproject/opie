@@ -125,33 +125,24 @@
         <source>Insert Text</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>DrawPadCanvas</name>
     <message>
-        <source>Delete All</source>
+        <source>Thumbnail View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to delete
-all the pages?</source>
+        <source>Thumbnail View...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clear Page</source>
+        <source>Page Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Information...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you want to clear
-the current page?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you want to delete
 the current page?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -163,12 +154,60 @@ the current page?</source>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Do you want to delete
+the current page?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+all the pages?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DrawPadCanvas</name>
+    <message>
+        <source>Delete All</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+all the pages?</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Clear Page</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Do you want to clear
+the current page?</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Delete Page</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+the current page?</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="obsolete"></translation>
+    </message>
 </context>
 <context>
     <name>ExportDialog</name>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Page Selection</source>
@@ -202,12 +241,16 @@ the current page?</source>
         <source>Format:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>DrawPad - Export</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImportDialog</name>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Automatic preview</source>
@@ -215,6 +258,10 @@ the current page?</source>
     </message>
     <message>
         <source>Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DrawPad - Import</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -226,15 +273,15 @@ the current page?</source>
     </message>
     <message>
         <source>Page Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Width :</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Height :</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Contents</source>
@@ -266,6 +313,57 @@ the current page?</source>
     </message>
     <message>
         <source>Fill Color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PageInformationDialog</name>
+    <message>
+        <source>Page Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -305,9 +403,57 @@ the current page?</source>
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Dimension:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ThumbnailView</name>
+    <message>
+        <source>DrawPad - Thumbnail View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to clear
+the selected page?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to delete
+the selected page?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

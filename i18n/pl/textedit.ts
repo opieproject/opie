@@ -155,7 +155,7 @@ To jest nieodwracalne!</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Text Editor has detected
@@ -176,51 +176,51 @@ Open .desktop file or linked file?</source>
     <name>fileBrowser</name>
     <message>
         <source>Name</source>
-        <translation>Nazwa</translation>
+        <translation type="obsolete">Nazwa</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Rozmiar</translation>
+        <translation type="obsolete">Rozmiar</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation>Dokumenty</translation>
+        <translation type="obsolete">Dokumenty</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation>Wszystkie pliki</translation>
+        <translation type="obsolete">Wszystkie pliki</translation>
     </message>
     <message>
         <source>Hidden files</source>
-        <translation>Ukryte pliki</translation>
+        <translation type="obsolete">Ukryte pliki</translation>
     </message>
     <message>
         <source>Type: %1</source>
-        <translation>Typ: %1</translation>
+        <translation type="obsolete">Typ: %1</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation>Zmiana katalogu</translation>
+        <translation type="obsolete">Zmiana katalogu</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Nowy katalog</translation>
+        <translation type="obsolete">Nowy katalog</translation>
     </message>
     <message>
         <source>Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation>Zmien nazwe</translation>
+        <translation type="obsolete">Zmien nazwe</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usun</translation>
+        <translation type="obsolete">Usun</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Wszystkie</translation>
+        <translation type="obsolete">Wszystkie</translation>
     </message>
 </context>
 <context>

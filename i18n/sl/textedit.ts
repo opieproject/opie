@@ -153,7 +153,7 @@ This is irreversable!!</source>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Text Editor has detected
@@ -174,51 +174,51 @@ Open .desktop file or linked file?</source>
     <name>fileBrowser</name>
     <message>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation type="obsolete">Ime</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation type="obsolete">Velikost</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation>Dokumenti</translation>
+        <translation type="obsolete">Dokumenti</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation>Vse datoteke</translation>
+        <translation type="obsolete">Vse datoteke</translation>
     </message>
     <message>
         <source>Hidden files</source>
-        <translation>Skrite datoteke</translation>
+        <translation type="obsolete">Skrite datoteke</translation>
     </message>
     <message>
         <source>Type: %1</source>
-        <translation>Tip: %1</translation>
+        <translation type="obsolete">Tip: %1</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation>Zamenjaj imenik</translation>
+        <translation type="obsolete">Zamenjaj imenik</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Ustvari imenik</translation>
+        <translation type="obsolete">Ustvari imenik</translation>
     </message>
     <message>
         <source>Rescan</source>
-        <translation>Preišči</translation>
+        <translation type="obsolete">Preišči</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation>Preimenuj</translation>
+        <translation type="obsolete">Preimenuj</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Izbriši</translation>
+        <translation type="obsolete">Izbriši</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Vse</translation>
+        <translation type="obsolete">Vse</translation>
     </message>
 </context>
 <context>

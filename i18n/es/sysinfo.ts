@@ -1,128 +1,141 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>SoundSettingsBase</name>
+    <name>LoadInfo</name>
     <message>
-        <source>Sound Settings</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Vmemo</source>
+        <source>Application CPU usage (%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sample Rate</source>
+        <source>System CPU usage (%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>11025</source>
+        <source>Type: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MemoryInfo</name>
+    <message>
+        <source>Used (%1 kB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>22050</source>
+        <source>Buffers (%1 kB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>32000</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>44100</source>
+        <source>Cached (%1 kB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Stereo</source>
+        <source>Free (%1 kB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>16 bit</source>
+        <source>Total Memory: %1 kB</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MountInfo</name>
+    <message>
+        <source> : %1 kB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Screen sounds</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Keyboard sounds</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Levels</source>
+        <source>Used (%1 kB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Loud</source>
+        <source>Available (%1 kB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProcessDetail</name>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProcessInfo</name>
+    <message>
+        <source>PID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Output</source>
+        <source>Command</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Mic</source>
+        <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Silent</source>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>StorageInfo</name>
+    <message>
+        <source>Hard Disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Vmemo Settings</source>
+        <source>SCSI Hard Disk</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>8000</source>
+        <source>Int. Storage</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SystemInfo</name>
+    <message>
+        <source>System Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>33075</source>
+        <source>Memory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Visual Alerts</source>
+        <source>Storage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Location</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Location:</source>
+        <source>CPU</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Record Key:</source>
+        <source>Process</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Taskbar Icon</source>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VersionInfo</name>
+    <message>
+        <source>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Key_Escape</source>
+        <source>Compiled by: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Key_Space</source>
+        <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Key_Home</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key_Calender</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key_Contacts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key_Menu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Key_Mail</source>
+        <source>Built on: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

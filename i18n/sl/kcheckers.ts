@@ -3,51 +3,51 @@
     <name>KCheckers</name>
     <message>
         <source>New</source>
-        <translation>Novo</translation>
+        <translation type="obsolete">Novo</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Izhod</translation>
+        <translation type="obsolete">Izhod</translation>
     </message>
     <message>
         <source>Beginner</source>
-        <translation>Začetnik</translation>
+        <translation type="obsolete">Začetnik</translation>
     </message>
     <message>
         <source>Novice</source>
-        <translation>Novinec</translation>
+        <translation type="obsolete">Novinec</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation>Povprečen</translation>
+        <translation type="obsolete">Povprečen</translation>
     </message>
     <message>
         <source>Good</source>
-        <translation>Dober</translation>
+        <translation type="obsolete">Dober</translation>
     </message>
     <message>
         <source>Expert</source>
-        <translation>Strokovnjak</translation>
+        <translation type="obsolete">Strokovnjak</translation>
     </message>
     <message>
         <source>Master</source>
-        <translation>Mojster</translation>
+        <translation type="obsolete">Mojster</translation>
     </message>
     <message>
         <source>English Rules</source>
-        <translation>Angleška pravila</translation>
+        <translation type="obsolete">Angleška pravila</translation>
     </message>
     <message>
         <source>Russian Rules</source>
-        <translation>Ruska pravila</translation>
+        <translation type="obsolete">Ruska pravila</translation>
     </message>
     <message>
         <source>Marble Board</source>
-        <translation>Marmornata plošča</translation>
+        <translation type="obsolete">Marmornata plošča</translation>
     </message>
     <message>
         <source>Wooden Board</source>
-        <translation>Lesena plošča</translation>
+        <translation type="obsolete">Lesena plošča</translation>
     </message>
     <message>
         <source>What&apos;s This</source>
@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>About KCheckers</source>
-        <translation>O KCheckers</translation>
+        <translation type="obsolete">O KCheckers</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -63,19 +63,19 @@
     </message>
     <message>
         <source>Game</source>
-        <translation>Igra</translation>
+        <translation type="obsolete">Igra</translation>
     </message>
     <message>
         <source>Skill</source>
-        <translation>Izkušnje</translation>
+        <translation type="obsolete">Izkušnje</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Možnosti</translation>
+        <translation type="obsolete">Možnosti</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>Pomoč</translation>
+        <translation type="obsolete">Pomoč</translation>
     </message>
     <message>
         <source>Go!</source>
@@ -96,6 +96,102 @@
     <message>
         <source>Incorrect course.</source>
         <translation>Napačna pot.</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Undo Move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Quit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Beginner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Novice</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Average</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Good</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Expert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Master</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Show Numeration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;English Rules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Russian Rules</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Green Board</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Marble Board</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Wooden Board</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rules of Play</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;About KCheckers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Skill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> New Game </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Undo Move </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> Rules of Play </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
