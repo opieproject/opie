@@ -1,6 +1,7 @@
 #include "io_serial.h"
 #include "io_irda.h"
 #include "io_bt.h"
+#include "io_modem.h"
 #include "filetransfer.h"
 #include "filereceive.h"
 #include "serialconfigwidget.h"
@@ -45,6 +46,9 @@ extern "C" {
     IOLayer* newIrDaLayer( const Profile& prof ) {
         return new IOIrda( prof );
     }
+    IOLayer* newModemLayer( const Profile& prof ) {
+        return new IOModem( prof );
+    }
 
     // Connection Widgets
     ProfileDialogWidget* newSerialWidget( const QString& str, QWidget* wid ) {
@@ -85,6 +89,7 @@ Default::Default( MetaFactory* fact ) {
     fact->addIOLayerFactory( "serial", QObject::tr("Serial"), newSerialLayer );
     fact->addIOLayerFactory( "irda", QObject::tr("Infrared"), newIrDaLayer   );
     fact->addIOLayerFactory( "bt", QObject::tr("Bluetooth"),  newBTLayer     );
+    fact->addIOLayerFactory( "modem", QObject::tr("Modem"),   newModemLayer  );
 
     fact->addConnectionWidgetFactory( "serial", QObject::tr("Serial"), newSerialWidget );
     fact->addConnectionWidgetFactory( "irda", QObject::tr("Infrared"), newIrDaWidget );

@@ -45,13 +45,12 @@
 //QString number = prof.readEntry("Number");
 
 Dialer::Dialer(const Profile& profile, QWidget *parent, const char *name)
-: QDialog(parent, name, true)
+: QDialog(parent, name, true), m_profile(profile)
 {
 	QVBoxLayout *vbox;
 	QLabel *desc;
 
 	usercancel = 0;
-	m_profile = profile;
 
 	desc = new QLabel(QObject::tr("Dialing number: %1").arg(m_profile.readEntry("Number")), this);
 	progress = new QProgressBar(this);

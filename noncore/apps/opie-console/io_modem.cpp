@@ -20,10 +20,14 @@ void IOModem::close() {
 }
 
 bool IOModem::open() {
-	qWarning("IOModem::open");
-    IOSerial::open();
+    bool ret = IOSerial::open();
+	if(!ret) return false;
+
+	qWarning("IOModem::open continues...");
 
 	Dialer d(m_profile);
+	qWarning("dialer created");
+
 	int result = d.exec();
 	if(result == QDialog::Accepted)
 	{
