@@ -1,8 +1,8 @@
 [Desktop Entry]
+Icon=Games
 Name=Games
 Name[bg]=Èãðè
 Name[ca]=Jocs
-Name[sl]=Igre
 Name[cs]=Hry
 Name[da]=Spil
 Name[de]=Spiele
@@ -19,6 +19,7 @@ Name[hu]=Játékok
 Name[is]=Leikir
 Name[it]=Giochi
 Name[ja]=ゲーム
+Name[ko]=게임
 Name[lt]=Žaidimai
 Name[mk]=Игри
 Name[nl]=Amusement
@@ -36,6 +37,4 @@ Name[ta]=Å¢¨ÇÂ¡ðÎì¸û
 Name[tr]=Oyunlar
 Name[uk]=Ігри
 Name[zh_CN]=游戏
-Icon=Games
 Name[zh_TW]=遊戲
-Name[ko]=게임

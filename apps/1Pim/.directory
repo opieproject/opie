@@ -1,9 +1,9 @@
 [Desktop Entry]
-Categories = 
-Comment = 
-File = /opt/opie/apps/Pim/.directory
-Icon = Clock
-Name = Pim 
-Type = application/octet-stream
-Name[ko] = 개인 정보 관리
+File=/opt/opie/apps/Pim/.directory
+Icon=Clock
+Type=application/octet-stream
+Name=Pim
 Name[es]=PIM
+Name[ko]=개인 정보 관리
+Name[pt]=Agenda
+Name[pt_BR]=Agenda
