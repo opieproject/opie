@@ -115,9 +115,6 @@ private slots:
     void removeSenderFromStylusDict();
     void hideOrQuit();
 
-private:
-    QWidget *nextWidget( QWidgetList*, QWidget* );
-
 protected:
     bool qwsEventFilter( QWSEvent * );
     void internalSetStyle( const QString &style );

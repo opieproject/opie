@@ -130,7 +130,7 @@ public:
 		QByteArray data;
 	};
 	QWidget* qpe_main_widget;
-        QGuardedPtr<QWidget> lastWidget;
+        QGuardedPtr<QWidget> lastraised;
 	QList<QCopRec> qcopq;
         QString styleName;
 	QString decorationName;
@@ -151,7 +151,7 @@ public:
 
 		qcopq.clear();
 	}
-	static void show_mx(QWidget* mw, bool nomaximize)
+	static void show_mx(QWidget* mw, bool nomaximize,  const QString & = QString::null )
 	{
 
             // ugly hack, remove that later after finding a sane solution
@@ -704,6 +704,7 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 #ifdef QTOPIA_INTERNAL_INITAPP
 void QPEApplication::initApp( int argc, char **argv )
 {
+    bool initial = pidChannel; // was set to 0 in the initializer
     delete pidChannel;
     d->keep_running = TRUE;
     d->preloaded = FALSE;
@@ -723,8 +724,10 @@ void QPEApplication::initApp( int argc, char **argv )
     connect( pidChannel, SIGNAL(received(const QCString &, const QByteArray &)),
 	    this, SLOT(pidMessage(const QCString &, const QByteArray &)));
 
-    processQCopFile();
-    d->keep_running = d->qcopq.isEmpty();
+    if (!initial) {
+        processQCopFile();
+        d->keep_running = d->qcopq.isEmpty();
+    }
 
     for (int a=0; a<argc; a++) {
 	if ( qstrcmp(argv[a],"-preload")==0 ) {
@@ -1362,97 +1365,82 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
 #endif
 }
 
-#include <qmetaobject.h>
 
-QWidget *QPEApplication::nextWidget(QWidgetList* list,  QWidget* _wid) {
-    QWidget *next = 0;
-    if ( list->isEmpty() || list->count() == 1 )
-        next = _wid;
-    else{
-        QWidget* wid;
-        uint idx   = list->findRef( _wid );
-        uint count = list->count();
 
-        /* one time through the list hacky we may not start with idx but end with it*/
-        for (uint i = (idx + 1)%count; true; i=(i+1)%count ) {
-            wid = list->at(i);
-            if ( wid == _wid ) {
-                next = _wid;
-                break;
-            }else if ((( wid->inherits("QMainWindow") ||
-                        wid->inherits("QDialog") ) &&
-                      wid != qApp->desktop() && !wid->isHidden() ) ||
-                      ( wid == mainWidget() || wid == d->qpe_main_widget ) ){
-                next = wid;
-                break;
-            }
-        }
-    }
 
-    delete list;
-    return next;
-}
+
 /*!
   \internal
 */
-// ########## raise()ing main window should raise and set active
-// ########## it and then all childen. This belongs in Qt/Embedded
-/*
- * slightly change in behaviour to kill the need of modality in Opie
- * If any of the topLevelWidgets !isFullyObscured we highlight the next
- * top level window
- * 1)If visible and not modal we iterate over the list of top level widgets
- * 2)If modal we we make the modal and its parent toplevel widget visible if available
- * 3)else make topLevel visible
- *
- * send qcop if necessary and save current visible widget if not modal
- */
 bool QPEApplication::raiseAppropriateWindow()
 {
-    bool r = FALSE;
+    bool r=FALSE;
 
-    QWidget *top = d->qpe_main_widget ? d->qpe_main_widget : mainWidget();
-    /* 1. */
-    if ( ( top && (top->isVisible() ) || ( d->lastWidget && d->lastWidget->isVisible() ) ) &&
-         !activeModalWidget() ) {
-        r = TRUE;
-        /*wid will be valid and topLevelWidgets will be deleted properly.. */
-        QWidget *wid = nextWidget( topLevelWidgets(),
-                                   d->lastWidget ? (QWidget*)d->lastWidget : top  );
-        /* keep the size window got but not for root*/
-        if ( top == wid )
-            d->show_mx(top, d->nomaximize );
-        else
-            wid->show();
+    // 1. Raise the main widget
+    QWidget *top = d->qpe_main_widget;
+    if ( !top ) top = mainWidget();
 
-        wid->raise();
-        wid->setActiveWindow();
-        d->lastWidget = wid;
-    }else if ( activeModalWidget() ) {
-        QWidget*  mod = activeModalWidget();
-        /* get the parent of the modal and its topLevelWidget as background widget */
-        QWidget*  par = activeModalWidget()->parentWidget() ? activeModalWidget()->parentWidget()->topLevelWidget() : 0;
-        if (par ) {
-            if (par == top )
-                d->show_mx(par, d->nomaximize );
-            else
-                par->show();
-            par->raise();
-            par->setActiveWindow();
-        }
-        mod->show();
-        mod->raise();
-        mod->setActiveWindow();
-    }else if (top){
-        d->show_mx(top, d->nomaximize );
-        top->raise();
-        top->setActiveWindow();
-        d->lastWidget = top;
+    if ( top && d->keep_running ) {
+	if ( top->isVisible() )
+	    r = TRUE;
+	else if (d->preloaded) {
+	    // We are preloaded and not visible.. pretend we just started..
+#ifndef QT_NO_COP
+	    QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
+	    e << d->appName;
+#endif
+	}
+
+	d->show_mx(top,d->nomaximize, d->appName);
+	top->raise();
     }
 
-    if (!r && d->preloaded ) {
-        QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
-        e << d->appName;
+    QWidget *topm = activeModalWidget();
+
+    // 2. Raise any parentless widgets (except top and topm, as they
+    //     are raised before and after this loop).  Order from most
+    //     recently raised as deepest to least recently as top, so
+    //     that repeated calls cycle through widgets.
+    QWidgetList *list = topLevelWidgets();
+    if ( list ) {
+	bool foundlast = FALSE;
+	QWidget* topsub = 0;
+	if ( d->lastraised ) {
+	    for (QWidget* w = list->first(); w; w = list->next()) {
+		if ( !w->parentWidget() && w != topm && w->isVisible() && !w->isDesktop() ) {
+		    if ( w == d->lastraised )
+			foundlast = TRUE;
+		    if ( foundlast ) {
+			w->raise();
+			topsub = w;
+		    }
+		}
+	    }
+	}
+	for (QWidget* w = list->first(); w; w = list->next()) {
+	    if ( !w->parentWidget() && w != topm && w->isVisible() && !w->isDesktop() ) {
+		if ( w == d->lastraised )
+		    break;
+		w->raise();
+		topsub = w;
+	    }
+	}
+	d->lastraised = topsub;
+	delete list;
+    }
+
+    // 3. Raise the active modal widget.
+    if ( topm && topm != top ) {
+	topm->show();
+	topm->raise();
+	// If we haven't already handled the fastAppShowing message
+	if (!top && d->preloaded) {
+#ifndef QT_NO_COP
+	    QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
+	    e << d->appName;
+#endif
+	}
+	r = FALSE;
     }
 
     return r;
