@@ -118,8 +118,9 @@ namespace {
     CreateQuery::~CreateQuery() {}
     QString CreateQuery::query()const {
         QString qu;
-        qu += "create table todolist( uid, categories, completed, progress, ";
-        qu += "summary, DueDate, priority, description )";
+        qu += "create table todolist( uid PRIMARY KEY, categories, completed, ";
+        qu += "description, summary, priority, DueDate, progress ,  state, ";
+	qu += "Recurrence, notifiers, maintainer, startdate, completeddate)";
         return qu;
     }
 
@@ -127,7 +128,9 @@ namespace {
     LoadQuery::~LoadQuery() {}
     QString LoadQuery::query()const {
         QString qu;
-        qu += "select distinct uid from todolist";
+	// We do not need "distinct" here. The primary key is always unique..
+        //qu += "select distinct uid from todolist";
+        qu += "select uid from todolist";
 
         return qu;
     }
@@ -150,12 +153,46 @@ namespace {
             year = date.year();
             month = date.month();
             day = date.day();
-        }
+	}
+	int sYear = 0, sMonth = 0, sDay = 0;
+	if( m_todo.hasStartDate() ){
+		QDate sDate = m_todo.startDate();
+		sYear = sDate.year();
+		sMonth= sDate.month();
+		sDay  = sDate.day();
+	} 
+
+	int eYear = 0, eMonth = 0, eDay = 0;
+	if( m_todo.hasCompletedDate() ){
+		QDate eDate = m_todo.completedDate();
+		eYear = eDate.year();
+		eMonth= eDate.month();
+		eDay  = eDate.day();
+	} 
         QString qu;
-        qu  = "insert into todolist VALUES(" +  QString::number( m_todo.uid() ) + ",'" + m_todo.idsToString( m_todo.categories() ) + "',";
-        qu += QString::number( m_todo.isCompleted() ) + "," + QString::number( m_todo.progress() ) + ",";
-        qu += "'"+m_todo.summary()+"','"+QString::number(year)+"-"+QString::number(month)+"-"+QString::number(day)+"',";
-        qu += QString::number(m_todo.priority() ) +",'" + m_todo.description() + "')";
+        qu  = "insert into todolist VALUES(" 
+		+  QString::number( m_todo.uid() ) + "," 
+		+ "'" + m_todo.idsToString( m_todo.categories() ) + "'" + ","
+		+       QString::number( m_todo.isCompleted() )         + ","  
+		+ "'" + m_todo.description()                      + "'" + ","
+		+ "'" + m_todo.summary()                          + "'" + "," 
+		+       QString::number(m_todo.priority() )             + ","
+		+ "'" + QString::number(year) + "-" 
+		+       QString::number(month)
+		+       "-" + QString::number( day )              + "'" + ","
+		+       QString::number( m_todo.progress() )            + ","
+		+ "''"                                                  + "," // state (conversion needed)
+// 		+       QString::number( m_todo.state() )               + ","
+		+ "''"                                                  + "," // Recurrence (conversion needed)
+		+ "''"                                                  + "," // Notifiers (conversion needed)
+		+ "''"                                                  + "," // Maintainers (conversion needed)
+		+ "'" + QString::number(sYear) + "-" 
+		      + QString::number(sMonth)
+		+       "-" + QString::number(sDay)               + "'" + ","
+		+ "'" + QString::number(eYear) + "-"
+		+       QString::number(eMonth)
+		+       "-"+QString::number(eDay)                 + "'"
+		+ ")";
 
         qWarning("add %s", qu.latin1() );
         return qu;
@@ -192,13 +229,11 @@ namespace {
             return multi();
     }
     QString FindQuery::single()const{
-        QString qu = "select uid, categories, completed, progress, summary, ";
-        qu += "DueDate, priority, description from todolist where uid = " + QString::number(m_uid);
+        QString qu = "select * from todolist where uid = " + QString::number(m_uid);
         return qu;
     }
     QString FindQuery::multi()const {
-        QString qu = "select uid, categories, completed, progress, summary, ";
-        qu += "DueDate, priority, description from todolist where ";
+        QString qu = "select * from todolist where ";
         for (uint i = 0; i < m_uids.count(); i++ ) {
             qu += " UID = " + QString::number( m_uids[i] ) + " OR";
         }
@@ -288,7 +323,7 @@ OTodo OTodoAccessBackendSQL::find(int uid ) const{
 }
 OTodo OTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
                                    uint cur, Frontend::CacheDirection dir ) const{
-    int CACHE = readAhead();
+    uint CACHE = readAhead();
     qWarning("searching for %d", uid );
     QArray<int> search( CACHE );
     uint size =0;
@@ -472,14 +507,30 @@ OTodo OTodoAccessBackendSQL::todo( const OSQLResult& res) const{
 }
 OTodo OTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
     qWarning("todo");
-    bool has = false; QDate da = QDate::currentDate();
-    has = date( da, item.data("DueDate") );
+    bool hasDueDate = false; QDate dueDate = QDate::currentDate();
+    hasDueDate = date( dueDate, item.data("DueDate") );
     QStringList cats = QStringList::split(";", item.data("categories") );
 
     OTodo to( (bool)item.data("completed").toInt(), item.data("priority").toInt(),
               cats, item.data("summary"), item.data("description"),
-              item.data("progress").toUShort(), has, da,
+              item.data("progress").toUShort(), hasDueDate, dueDate,
               item.data("uid").toInt() );
+
+    bool isOk;
+    int prioInt = QString( item.data("priority") ).toInt( &isOk );
+    if ( isOk )
+	    to.setPriority( prioInt );
+
+    bool hasStartDate = false; QDate startDate = QDate::currentDate();
+    hasStartDate = date( startDate, item.data("startdate") );
+    bool hasCompletedDate = false; QDate completedDate = QDate::currentDate();
+    hasCompletedDate = date( completedDate, item.data("completeddate") );
+
+    if ( hasStartDate )
+	    to.setStartDate( startDate );
+    if ( hasCompletedDate )
+	    to.setCompletedDate( completedDate );
+
     return to;
 }
 OTodo OTodoAccessBackendSQL::todo( int uid )const {
@@ -570,7 +621,14 @@ QArray<int> OTodoAccessBackendSQL::matchRegexp(  const QRegExp &r ) const
 }
 QBitArray OTodoAccessBackendSQL::supports()const {
 
-	static QBitArray ar = sup();
+	QBitArray ar( OTodo::CompletedDate + 1 );
+	ar.fill( true );
+	ar[OTodo::CrossReference] = false;
+	ar[OTodo::State ] = false;
+	ar[OTodo::Reminders] = false;
+	ar[OTodo::Notifiers] = false;
+	ar[OTodo::Maintainer] = false;
+
 	return ar;
 }
 

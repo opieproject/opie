@@ -173,6 +173,9 @@ QStringList OContactFields::untrfields( bool sorted )
     QStringList list;
     QMap<int, QString> mapIdToStr = idToUntrFields();
 
+    list.append( mapIdToStr[ Qtopia::AddressUid ] );
+    list.append( mapIdToStr[ Qtopia::AddressCategory ] );
+
     list.append( mapIdToStr[ Qtopia::Title ] );
     list.append( mapIdToStr[ Qtopia::FirstName ] );
     list.append( mapIdToStr[ Qtopia::MiddleName ] );
@@ -210,6 +213,9 @@ QStringList OContactFields::untrfields( bool sorted )
 QMap<int, QString> OContactFields::idToTrFields()
 {
 	QMap<int, QString> ret_map;
+
+	ret_map.insert( Qtopia::AddressUid, QObject::tr( "User Id" ) );
+	ret_map.insert( Qtopia::AddressCategory, QObject::tr( "Categories" ) );
 
 	ret_map.insert( Qtopia::Title, QObject::tr( "Name Title") );
 	ret_map.insert( Qtopia::FirstName, QObject::tr( "First Name" ) );
@@ -274,6 +280,9 @@ QMap<int, QString> OContactFields::idToUntrFields()
 {
 	QMap<int, QString> ret_map;
 
+	ret_map.insert( Qtopia::AddressUid, "User Id" );
+	ret_map.insert( Qtopia::AddressCategory, "Categories" );
+
 	ret_map.insert( Qtopia::Title, "Name Title" );
 	ret_map.insert( Qtopia::FirstName, "First Name" );
 	ret_map.insert( Qtopia::MiddleName, "Middle Name" );
@@ -328,6 +337,7 @@ QMap<int, QString> OContactFields::idToUntrFields()
 
 	// other
 	ret_map.insert( Qtopia::Notes, "Notes" );
+	ret_map.insert( Qtopia::Groups, "Groups" );
 
 
 	return ret_map;
