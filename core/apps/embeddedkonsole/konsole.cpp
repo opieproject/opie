@@ -288,72 +288,57 @@ void Konsole::initCommandList()
     //    commonCombo->setInsertionPolicy(QComboBox::AtCurrent);
     commonCombo->clear();
 
-    if (cfg.readEntry("ShellHistory","TRUE") == "TRUE")
-    {
+    if (cfg.readEntry("ShellHistory","TRUE") == "FALSE") {
         QString histfilename = QString(getenv("HOME")) + "/.bash_history";
         histfilename = cfg.readEntry("ShellHistoryPath",histfilename);
         QFile histfile(histfilename);
         // note: compiler barfed on:
         // QFile histfile(QString(getenv("HOME")) + "/.bash_history");
-        if (histfile.open( IO_ReadOnly ))
-        {
+        if (histfile.open( IO_ReadOnly ))  {
             QString line;
             uint i;
             HistoryList items;
 
             int lineno = 0;
-            while(!histfile.atEnd())
-            {
-                if (histfile.readLine(line, 200) < 0)
-                {
+            while(!histfile.atEnd()) {
+                if (histfile.readLine(line, 200) < 0) {
                     break;
                 }
                 line = line.left(line.length()-1);
                 lineno++;
 
-                for(i=0; i<items.count(); i++)
-                {
-                    if (line == items.at(i)->line)
-                    {
+                for(i=0; i<items.count(); i++) {
+                    if (line == items.at(i)->line) {
                         // weight recent commands & repeated commands more
                         // by adding up the index of each command
                         items.at(i)->count += lineno;
                         break;
                     }
                 }
-                if (i >= items.count())
-                {
+                if (i >= items.count()) {
                     items.append(new HistoryItem(lineno, line));
                 }
             }
             items.sort();
             int n = items.count();
-            if (n > 40)
-            {
+            if (n > 40) {
                 n = 40;
             }
-            for(int i=0; i<n; i++)
-            {
+            for(int i=0; i<n; i++) {
                 // should insert start of command, but keep whole thing
-                if (items.at(items.count()-i-1)->line.length() < 30)
-                {
+                if (items.at(items.count()-i-1)->line.length() < 30) {
                     commonCombo->insertItem(items.at(items.count()-i-1)->line);
                 }
             }
             histfile.close();
         }
     }
-    if (cfg.readEntry("Commands Set","FALSE") == "FALSE")
-    {
-        for (int i = 0; commonCmds[i] != NULL; i++)
-        {
+    if (cfg.readEntry("Commands Set","FALSE") == "FALSE") {
+        for (int i = 0; commonCmds[i] != NULL; i++) {
             commonCombo->insertItem(commonCmds[i]);
         }
-    }
-    else
-    {
-        for (int i = 0; i < 100; i++)
-        {
+    } else {
+        for (int i = 0; i < 100; i++) {
             if (!(cfg.readEntry( QString::number(i),"")).isEmpty())
                 commonCombo->insertItem(cfg.readEntry( QString::number(i),""));
         }
