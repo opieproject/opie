@@ -18,17 +18,12 @@
 #include "configdlg.h"
 #include "dingwidget.h"
 
-#include <qlayout.h>
-#include <qpopupmenu.h>
 #include <qmenubar.h>
 #include <qmessagebox.h>
-#include <qhbox.h>
 #include <qvbox.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qlineedit.h>
-#include <qmainwindow.h>
-#include <qstring.h>
 #include <qaction.h>
 #include <qtextbrowser.h>
 #include <qcombobox.h>

@@ -18,10 +18,7 @@
 
 #include <qfile.h>
 #include <qpe/config.h>
-#include <qstring.h>
 #include <qtextstream.h>
-#include <qstringlist.h>
-#include <qregexp.h>
 
 DingWidget::DingWidget( )
 {

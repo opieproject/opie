@@ -22,13 +22,10 @@
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 
-#include <qdialog.h>
 #include <qlayout.h>
-#include <qhbox.h>
 #include <qvbox.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
-#include <qstring.h>
 #include <qlineedit.h>
 #include <qdir.h>
 

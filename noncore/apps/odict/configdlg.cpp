@@ -20,15 +20,11 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 
-#include <qdialog.h>
 #include <qlayout.h>
-#include <qhbox.h>
 #include <qvbox.h>
-#include <qlabel.h>
 #include <qlistview.h>
 #include <qpushbutton.h>
 #include <qlineedit.h>
-#include <qstringlist.h>
 
 ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(parent, name, modal)
 {
