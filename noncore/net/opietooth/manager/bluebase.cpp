@@ -297,19 +297,11 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         switch(ret) {
         case -1:
             break;
-        case 0:
+        case 2:
             addServicesToDevice( (BTDeviceItem*)item );
             break;
-        case 1:
 
-            break;
-
-            // NO need to, since hcid does that on the fly
-            // case 2:
-            // make connection
-            //m_localDevice->connectTo( ((BTDeviceItem*)item)->mac() );
-            //break;
-        case 3:
+        case 4:
             // deletes childs too
             delete item;
             break;
