@@ -12,17 +12,15 @@
 #define DEVELOPERS_VERSION
 #include "advancedfm.h"
 
-#include <opie/otabwidget.h>
+
 //  #include <opie/ofileselector.h>
 //  #include <opie/ofiledialog.h>
 
-#include <qpe/config.h>
+#include <opie/otabwidget.h>
+
 #include <qpe/filemanager.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/qpemenubar.h>
-#include <qpe/qpetoolbar.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
 #include <qpe/applnk.h>
@@ -30,55 +28,32 @@
 #include <qpe/resource.h>
 #include <qpe/menubutton.h>
 
-
-#include <qwmatrix.h>
-#include <qregexp.h>
-#include <qtabwidget.h>
-#include <qtextstream.h>
-#include <qpushbutton.h>
 #include <qdatetime.h>
-#include <qdir.h>
 #include <qfile.h>
-#include <qstring.h>
 #include <qcombobox.h>
 #include <qpopupmenu.h>
 #include <qlistview.h>
-#include <qmainwindow.h>
 #include <qlabel.h>
-#include <qprogressbar.h>
-#include <qspinbox.h>
 #include <qwidget.h>
 #include <qlayout.h>
 #include <qimage.h>
-#include <qpixmap.h>
 #include <qmessagebox.h>
 #include <qlineedit.h>
-#include <qregexp.h>
 
-#include <unistd.h>
-#include <stdlib.h>
 #include <sys/stat.h>
-#include <dirent.h>
-#include <stdio.h>
 #include <time.h>
+#include <dirent.h>
 #include <fcntl.h>
-#include <mntent.h>
-#include <string.h>
-#include <errno.h>
 #include <sys/vfs.h>
 #include <mntent.h>
-#include <sys/utsname.h>
 
 AdvancedFm::AdvancedFm( )
     : QMainWindow( ) {
    init();
    renameBox = 0;
 
-   QWMatrix matrix;
-   QPixmap pix(Resource::loadPixmap( "UnknownDocument" ));
-   matrix.scale( .4, .4);
-   unknownXpm =  pix.xForm(matrix);
-   
+   unknownXpm = Resource::loadImage(  "UnknownDocument" ).smoothScale( AppLnk::smallIconSize(),  AppLnk::smallIconSize() );
+
    initConnections();
    whichTab=1;
    rePopulate();
@@ -210,7 +185,7 @@ void AdvancedFm::populateView()
               pm.setMask( pm.createHeuristicMask( FALSE ) );
             }
           item->setPixmap( 0,pm);
-          
+
         }
       isDir=FALSE;
       ++it;

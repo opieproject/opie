@@ -18,8 +18,6 @@
 
 #include <qpe/lnkproperties.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/qpemenubar.h>
-#include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/applnk.h>
@@ -774,7 +772,7 @@ void AdvancedFm::oprocessStderr(OProcess*, char *buffer, int buflen) {
     QString lineStr = buffer;
 //    lineStr=lineStr.left(lineStr.length()-1);
     QMessageBox::warning( this, tr("Error"), lineStr ,tr("Ok") );
-    
+
 //     OutputEdit->append(lineStr);
 //     OutputEdit->setCursorPosition( OutputEdit->numLines() + 1,0,FALSE);
 }

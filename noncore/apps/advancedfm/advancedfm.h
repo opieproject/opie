@@ -40,21 +40,18 @@ class QProgressBar;
 class QSpinBox;
 class QTabWidget;
 class QWidget;
-class QPEToolBar;
-class QPEMenuBar;
 class QPopupMenu;
 class QFile;
 class QListViewItem;
 class QLineEdit;
 class MenuButton;
 
-//class QPushButton;
 class QToolButton;
 class Ir;
 
 class AdvancedFm : public QMainWindow
 {
-   Q_OBJECT
+    Q_OBJECT
 public:
    AdvancedFm();
    ~AdvancedFm();

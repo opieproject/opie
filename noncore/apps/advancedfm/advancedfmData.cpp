@@ -13,17 +13,13 @@
 
 #include <opie/otabwidget.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/qpemenubar.h>
-#include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
 #include <qpe/menubutton.h>
-#include <qpe/config.h>
 
 #include <qlayout.h>
-#include <qpixmap.h>
+#include <qhbox.h>
+#include <qmenubar.h>
 #include <qcombobox.h>
-#include <qpopupmenu.h>
-#include <qtabwidget.h>
 #include <qtoolbutton.h>
 #include <qlineedit.h>
 #include <qlistview.h>
@@ -37,56 +33,53 @@ void AdvancedFm::init() {
 #endif
     setCaption( tr( "AdvancedFm" ) );
 
-  QGridLayout *layout = new QGridLayout( this );
-  layout->setSpacing( 2);
-  layout->setMargin( 2);
+    QVBoxLayout *layout = new QVBoxLayout( this );
+    layout->setSpacing( 2);
+    layout->setMargin( 2);
 
 
-  QPEMenuBar *menuBar = new QPEMenuBar(this);
+  QMenuBar *menuBar = new QMenuBar(this);
   fileMenu = new QPopupMenu( this );
   viewMenu  = new QPopupMenu( this );
 //  customDirMenu  = new QPopupMenu( this );
 
-  layout->addMultiCellWidget( menuBar, 0, 0, 0, 1 );
+  layout->addWidget( menuBar );
 
   menuBar->insertItem( tr( "File" ), fileMenu);
   menuBar->insertItem( tr( "View" ), viewMenu);
-//  menuBar->insertItem( tr( "^" ), customDirMenu);
 
-  cdUpButton = new QToolButton( this,"cdUpButton");
+  cdUpButton = new QToolButton( 0,"cdUpButton");
   cdUpButton->setPixmap(Resource::loadPixmap("up"));
-  cdUpButton->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( cdUpButton , 0, 0, 2, 2);
+  cdUpButton->setAutoRaise( true );
+  menuBar->insertItem( cdUpButton );
 
-   menuButton = new MenuButton(this);
-   menuButton->setFixedSize( QSize( 20, 20 ) );
-   layout->addMultiCellWidget( menuButton , 0, 0, 3, 3);
 
-  qpeDirButton= new QToolButton(this,"QPEButton");
+  QHBox *lineBox = new QHBox( this );
+
+  qpeDirButton= new QToolButton( 0,"QPEButton");
   qpeDirButton->setPixmap( Resource::loadPixmap("launcher/opielogo16x16"));//,"",this,"QPEButton");
-  qpeDirButton ->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( qpeDirButton , 0, 0, 4, 4);
+  qpeDirButton->setAutoRaise( true );
+  menuBar->insertItem( qpeDirButton );
 
-  cfButton = new QToolButton( this,"CFButton");
+  cfButton = new QToolButton( 0, "CFButton");
   cfButton->setPixmap(Resource::loadPixmap("cardmon/pcmcia"));
-  cfButton ->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( cfButton , 0, 0, 5, 5);
+  cfButton->setAutoRaise( true );
+  menuBar->insertItem( cfButton );
 
-  sdButton = new QToolButton( this,"SDButton");
+  sdButton = new QToolButton( 0, "SDButton");
   sdButton->setPixmap(Resource::loadPixmap("advancedfm/sdcard"));
-  sdButton->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( sdButton , 0, 0, 6, 6);
+  sdButton->setAutoRaise( true );
+  menuBar->insertItem( sdButton );
 
-
-  docButton = new QToolButton( this,"docsButton");
+  docButton = new QToolButton( 0,"docsButton");
   docButton->setPixmap(Resource::loadPixmap("DocsIcon"));
-  docButton->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( docButton, 0, 0, 7, 7);
+  docButton->setAutoRaise( true );
+  menuBar->insertItem( docButton );
 
-  homeButton = new QToolButton( this,"homeButton");
+  homeButton = new QToolButton( 0, "homeButton");
   homeButton->setPixmap(Resource::loadPixmap("home"));
-  homeButton->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( homeButton, 0, 0, 8, 8);
+  homeButton->setAutoRaise( true );
+  menuBar->insertItem( homeButton );
 
   fileMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showMenuHidden() ));
   fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
@@ -111,10 +104,6 @@ void AdvancedFm::init() {
   s_addBookmark = tr("Bookmark Directory");
   s_removeBookmark = tr("Remove Current Directory from Bookmarks");
 
-  menuButton->setUseLabel(false);
-  menuButton->insertItem( s_addBookmark);
-  menuButton->insertItem( s_removeBookmark);
-  menuButton->insertSeparator();
 //    menuButton->insertItem("");
 
 //     customDirMenu->insertItem(tr("Add This Directory"));
@@ -123,19 +112,24 @@ void AdvancedFm::init() {
 
     customDirsToMenu();
 
-  currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
+  menuButton = new MenuButton( lineBox );
+
+  menuButton->setUseLabel(false);
+  menuButton->setMaximumWidth( 20 );
+  menuButton->insertItem( s_addBookmark);
+  menuButton->insertItem( s_removeBookmark);
+  menuButton->insertSeparator();
+
+  currentPathCombo = new QComboBox( FALSE, lineBox, "currentPathCombo" );
   currentPathCombo->setEditable(TRUE);
-  layout->addMultiCellWidget( currentPathCombo, 1, 1, 0, 8);
   currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
 
-  currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
-
-  layout->addMultiCellWidget( currentPathCombo, 1, 1, 0, 8);
+  layout->addWidget( lineBox );
 
 
   TabWidget = new OTabWidget( this, "TabWidget",/* OTabWidget::Global | */OTabWidget::IconTab);
 //  TabWidget = new QTabWidget( this, "TabWidget" );
-  layout->addMultiCellWidget( TabWidget, 2, 2, 0, 8);
+  layout->addWidget( TabWidget, 4 );
 
   tab = new QWidget( TabWidget, "tab" );
   tabLayout = new QGridLayout( tab );
