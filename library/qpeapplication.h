@@ -220,6 +220,19 @@ inline void QPEApplication::setCurrentRotation( int r )
 #endif
 }
 
+/*
+ * Qtopia 1.7 SDK compatibility macros
+ * FIXME: Support Opie Quicklaunch Interface
+ */
+#define QTOPIA_ADD_APPLICATION(NAME,IMPLEMENTATION) 			\
+	int main( int argc, char** argv )				\
+	{ 								\
+		QPEApplication app = QPEApplication( argc, argv );	\
+		IMPLEMENTATION* mw = new IMPLEMENTATION();		\
+		app.showMainWidget( mw );				\
+		app.exec();						\
+	}
+#define QTOPIA_MAIN // Bee-Bop-Alula
 
 /*
  * -remove me

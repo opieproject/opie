@@ -9,6 +9,7 @@
 
 	Internal
 	--------
+	* Added the Qtopia 1.7 SDK macros for quick-apps to easa compilation of 3rd party apps against our headers (mickeyl)
 
 2004-11-26	Opie 1.1.8
 
@@ -17,8 +18,8 @@
 	* PackageManager supports installation of local ipkg files (drw)
 	* PackageManager supports linking of applications to root (drw)
 	* PackageManager supports src/gz feeds (drw,wimpie)
-	* Add a syslog information tab to sysinfo (mickeyl)
-	* Add new, more consistent, PIM icons + a GIMP teplate (ar)
+	* Added a syslog information tab to sysinfo (mickeyl)
+	* Added new, more consistent, PIM icons + a GIMP teplate (ar)
 
 	Fixed Bugs
 	----------
@@ -29,7 +30,7 @@
 	* #1493 - Fixed one column layout bug of the launcher (hrw)
 	* n.a. - PackageManager - (Minor UI tweak) in filter dialog, when option is enabled, set focus to widget that corresponds to that option (drw)
 	* n.a. - PackageManager - (Minor UI tweak) fix double entry in source feed configuration when adding a new feed (drw)
-	* n.a. - Battery Applet - fix sizing of battery info popup
+	* n.a. - Battery Applet - fix sizing of battery info popup (drw,mickeyl)
 
 	Internal
 	--------
