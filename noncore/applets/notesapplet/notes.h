@@ -42,6 +42,7 @@ public:
     QPushButton *saveButton, *deleteButton, *newButton;
     QString FileNamePath;
     bool loaded, edited, doPopulate, isNew;
+    bool showMax;
     void save();
     void populateBox();
     void load();
@@ -53,6 +54,8 @@ private:
       void focusOutEvent( QFocusEvent * );
       void load(const QString&);
 private slots:
+    void slotSearch();
+    void slotShowMax();
     void slotBeamButton();
     void slotBeamFinished( Ir*);
     void slotDeleteButton();

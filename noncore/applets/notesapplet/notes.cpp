@@ -83,7 +83,17 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
         : QFrame( parent, name,/* WDestructiveClose | */WStyle_StaysOnTop )
 //        : QFrame( parent, name, WDestructiveClose | WStyle_StaysOnTop | WType_Popup )
 {
-    setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
+    QDir d( QDir::homeDirPath()+"/notes");
+    if( !d.exists()) {
+        qDebug("make dir");
+        if(!d.mkdir( QDir::homeDirPath()+"/notes", true))
+            qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<make dir failed");
+    }
+    Config cfg("Notes");
+     cfg.setGroup("Options");
+     showMax = cfg.readBoolEntry("ShowMax", false); 
+
+     setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
     loaded=false;
     edited=false;
     doPopulate=true;
@@ -104,10 +114,6 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
 
     vbox->addWidget( view);
     vbox->addWidget( box);
-
-    setFixedHeight(180);
-    QWidget *wid = QPEApplication::desktop();
-    setFixedWidth( wid->width()-10 /*200*/);
 
     setFocusPolicy(QWidget::StrongFocus);
 
@@ -253,15 +259,15 @@ void NotesControl::slotBoxSelected(const QString &itemString) {
 
 void NotesControl::showMenu() {
   QPopupMenu *m = new QPopupMenu(0);
-
   m->insertItem(  tr( "Beam Out" ), this,  SLOT( slotBeamButton() ));
+  m->insertItem(  tr( "Search For..." ), this,  SLOT( slotSearch() ));
+  m->insertItem(  tr( "Toggle Maximized" ), this,  SLOT( slotShowMax() ));
   m->insertSeparator();
   m->insertItem(  tr( "Delete" ), this,  SLOT( slotDeleteButton() ));
   m->setFocus();
   m->exec( QCursor::pos() );
 
   if(m) delete m;
-
 }
 
 void NotesControl::focusOutEvent ( QFocusEvent * e) {
@@ -284,10 +290,10 @@ void NotesControl::save() {
         QString rt = view->text();
         if( rt.length()>1) {
             QString pt = rt.simplifyWhiteSpace();
-            int i = pt.find( ' ' );
+            int i = pt.find( ' ', pt.find( ' ' )+2 );
             QString docname = pt;
             if ( i > 0 )
-                docname = pt.left( i );
+                docname = pt.left(i);
               // remove "." at the beginning
             while( docname.startsWith( "." ) )
                 docname = docname.mid( 1 );
@@ -311,15 +317,13 @@ void NotesControl::save() {
 //             else
 //                 qDebug("oldname equals docname");
 
-            
             doc = new DocLnk(docname);
-
             if(QFile(doc->linkFile()).exists())
                qDebug("puppie");
             doc->setType("text/plain");
-            doc->setFile(QDir::homeDirPath()+"/"+docname);
             doc->setName(docname);
-
+            QString temp = docname.replace( QRegExp(" "), "_" );
+            doc->setFile( QDir::homeDirPath()+"/notes/"+temp);
             FileManager fm;
             if ( !fm.saveFile( *doc, rt ) ) {
             }
@@ -374,10 +378,16 @@ void NotesControl::load() {
 
 void NotesControl::load(const QString & file) {
     qDebug("loading "+file);
-    if(!loaded) {
+    QString name = file;
+    QString temp;
+    if( !QFile( QDir::homeDirPath()+"/"+file).exists() )
+        temp =  QDir::homeDirPath()+"/notes/"+ name.replace( QRegExp(" "), "_" );
+    else
+        temp = name;
+            if(!loaded) {
         DocLnk nf;
         nf.setType("text/plain");
-        nf.setFile( file);
+        nf.setFile( temp);
 
         loadDoc(nf);
         loaded=true;
@@ -394,6 +404,7 @@ void NotesControl::loadDoc( const DocLnk &f) {
     FileManager fm;
     QString txt;
     if ( !fm.loadFile( f, txt ) ) {
+        qDebug("could not load file "+f.file());
         return;
     }
     view->setText(txt);
@@ -403,6 +414,23 @@ void NotesControl::slotViewEdited() {
      if(loaded) {
          edited=true;
      }
+}
+
+
+void NotesControl::slotShowMax() {
+     Config cfg("Notes");
+     cfg.setGroup("Options");
+     showMax=!showMax;
+     cfg.writeEntry("ShowMax", showMax);
+     cfg.write();
+     hide();
+}
+
+void NotesControl::slotSearch() {
+    int boxCount = box->count();
+    for(int i=0;i< boxCount;i++) {
+
+    }
 }
 
 // void NotesControl::keyReleaseEvent( QKeyEvent *e) {
@@ -450,8 +478,18 @@ void NotesApplet::mousePressEvent( QMouseEvent *) {
     } else {
 //    vc = new NotesControl;
 //    QPoint curPos = mapToGlobal( rect().topLeft() );
+         if(vc->showMax) {
+             qDebug("show max");
+             vc->showMaximized();
+         } else {
+             qDebug("no show max");
+             QWidget *wid = QPEApplication::desktop();
+            QRect rect = QApplication::desktop()->geometry();
+             vc->setGeometry( ( wid->width() / 2) - ( vc->width() / 2 ) , 28 , wid->width() -10 , 180);
+            vc->move ( (rect.center()/2) - (vc->rect().center()/2));
+//             vc->move(  (( wid->width() / 2) - ( vc->width() / 2 ))-4, 28);
+        }
         vc->show();
-        vc->move( 2, 28);
         vc->doPopulate=true;
         vc->populateBox();
         vc->doPopulate=false;
