@@ -21,6 +21,7 @@ signals:
     void changeDir( const QString& );
 
 private slots:
+    void slotPopUp();
     void slotSelectDir( int );
     void changed();
 

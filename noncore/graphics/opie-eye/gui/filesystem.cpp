@@ -26,7 +26,7 @@ PFileSystem::PFileSystem(  QToolBar* bar)
             this, SLOT( changed() ) );
     changed();
 
-    setPopup( m_pop );
+    connect(this,SIGNAL(pressed()),SLOT(slotPopUp()));
 }
 
 PFileSystem::~PFileSystem() {
@@ -53,6 +53,11 @@ void PFileSystem::changed() {
         m_dev.insert( disk, path );
         m_pop->insertItem( disk );
     }
+}
+
+void PFileSystem::slotPopUp() {
+    m_pop->exec(QCursor::pos());
+    setDown(false);
 }
 
 void PFileSystem::slotSelectDir( int id ) {
