@@ -66,7 +66,7 @@ private:
  * Pixmap, A default OKeyPair and the set OKeyPair.
  * You can also pass an id to it
  *
- * @since 1.1.2
+ * @since 1.2
  */
 class OKeyConfigItem {
     friend class OKeyConfigManager;
@@ -156,9 +156,12 @@ public:
                       const char* name = 0      );
     virtual ~OKeyConfigManager();
 
+public slots:
     virtual void load();
     virtual void save();
+    void handleWidget( QWidget* );
 
+public:
     virtual OKeyConfigItem handleKeyEvent( QKeyEvent* );
     int            handleKeyEventId( QKeyEvent* );
 
@@ -170,8 +173,6 @@ public:
     void removeFromBlackList( const OKeyPair& );
     void clearBlackList();
     OKeyPair::List blackList()const;
-
-    void handleWidget( QWidget* );
 
     bool eventFilter( QObject*, QEvent* );
 

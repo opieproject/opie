@@ -638,6 +638,9 @@ Opie::Core::OKeyConfigItem::List OKeyConfigManager::keyConfigList()const{
 /**
  * Add this OKeyPair to the blackList.
  * Internal lists will be destroyed
+ *
+ * @see clearBlackList
+ * @see removeFromBlackList
  */
 void OKeyConfigManager::addToBlackList( const OKeyPair& key) {
     m_blackKeys.append( key );
@@ -648,6 +651,9 @@ void OKeyConfigManager::addToBlackList( const OKeyPair& key) {
 /**
  * Remove this OKeyPair from the black List
  * Internal lists will be destroyed
+ *
+ * @see addToBlackList
+ * @see clearBlackList
  */
 void OKeyConfigManager::removeFromBlackList( const OKeyPair& key ) {
     m_blackKeys.remove( key );
@@ -666,6 +672,10 @@ void OKeyConfigManager::clearBlackList() {
 
 /**
  * Return a copy of the blackList
+ *
+ * @see addToBlackList
+ * @see clearBlackList
+ * @see removeFromBlackList
  */
 OKeyPair::List OKeyConfigManager::blackList()const {
     return m_blackKeys;
