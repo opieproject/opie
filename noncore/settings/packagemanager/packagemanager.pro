@@ -34,8 +34,8 @@ LIBS        += -lqpe -lopiecore2 -lopieui2 -lipkg
 include ( $(OPIEDIR)/include.pro )
 
 !isEmpty( LIBIPK_INC_DIR ) {
-	INCLUDEPATH += $$LIBIPK_INC_DIR
+    INCLUDEPATH = $$LIBIPK_INC_DIR $$INCLUDEPATH
 }
 !isEmpty( LIBIPK_LIB_DIR ) {
-	LIBS += -L$$LIBIPK_LIB_DIR
+    LIBS = -L$$LIBIPK_LIB_DIR $$LIBS
 }
