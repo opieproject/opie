@@ -599,7 +599,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	messg->setText(bm);
 	emit debugMessage(bm);
 
-	QString idstring = _ifaceppp->data()->storedUsername();
+	QString idstring = _ifaceppp->data()->password();
 
 	if(!idstring.isEmpty() && firstrunID) {
 	  // the user entered an Id on the main kppp dialog

@@ -45,11 +45,12 @@ bool InterfacePPP::refresh()
 void InterfacePPP::start()
 {
     qDebug("InterfacePPP::start");
-    if (data()->password().isEmpty() ){
-//FIXME: ask for password
-        qDebug("using dummy password");
-        QMessageBox::critical( 0, "no password", "you should be prompted for a password, but you are not! ;-)");
-    }
+// should work...
+//     if (data()->password().isEmpty() ){
+// //FIXME: ask for password
+//         qDebug("using dummy password");
+//         QMessageBox::critical( 0, "no password", "you should be prompted for a password, but you are not! ;-)");
+//     }
 
 
   QFileInfo info(pppdPath());

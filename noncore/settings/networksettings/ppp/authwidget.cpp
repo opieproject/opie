@@ -166,12 +166,14 @@ void AuthWidget::showUsernamePassword( bool show )
         pw_l->show();
         passWord->show();
         store_password->show();
+        hidePw->show();
     }else{//!show
         user_l->hide();
         userName->hide();
         pw_l->hide();
         passWord->hide();
         store_password->hide();
+        hidePw->hide();
     }
 }
 
