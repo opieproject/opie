@@ -24,7 +24,7 @@
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/inputmethodinterface.h>
-#include <qpe/qlibrary.h>
+#include <qpe/opielibrary.h>
 #include <qpe/global.h>
 
 #include <qpopupmenu.h>
@@ -172,7 +172,7 @@ void InputMethods::loadInputMethods()
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
   InputMethodInterface *iface = 0;
-  QLibrary *lib = new QLibrary( path + "/" + *it );
+  OpieLibrary *lib = new OpieLibrary( path + "/" + *it );
   if ( lib->queryInterface( IID_InputMethod, (QUnknownInterface**)&iface ) == QS_OK ) {
       InputMethod input;
       input.library = lib;

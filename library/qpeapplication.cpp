@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.7 2002-04-17 12:56:38 llornkcor Exp $
+** $Id: qpeapplication.cpp,v 1.7.2.1 2002-05-17 14:19:40 dwmw2 Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -565,9 +565,10 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
   }
     }
 
+#if QT_VERSION < 300 /* FIXME: Do we need to replace this? */
     /* overide stored arguments */
     setArgs(argc, argv);
-
+#endif
 #endif
 
     qwsSetDecoration( new QPEDecoration() );
@@ -1023,8 +1024,8 @@ void QPEApplication::systemMessage( const QCString &msg, const QByteArray &data)
     int tmp;
     stream >> tmp;
     emit weekChanged( tmp );
-    } else if ( msg == "setDateFormat(DateFormat)" ) {
-    DateFormat tmp;
+    } else if ( msg == "setDateFormat(OpieDateFormat)" ) {
+    OpieDateFormat tmp;
     stream >> tmp;
     emit dateFormatChanged( tmp );
     } else if ( msg == "setVolume(int,int)" ) {

@@ -22,7 +22,7 @@
 #include "fontfactoryinterface.h"
 #include "fontdatabase.h"
 
-#include <qpe/qlibrary.h>
+#include <qpe/opielibrary.h>
 
 #include <qfontmanager_qws.h>
 #include <qdir.h>
@@ -167,7 +167,7 @@ void FontDatabase::loadRenderers()
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
 	FontFactoryInterface *iface = 0;
-	QLibrary *lib = new QLibrary( path + "/" + *it );
+	OpieLibrary *lib = new OpieLibrary( path + "/" + *it );
 	if ( lib->queryInterface( IID_FontFactory, (QUnknownInterface**)&iface ) == QS_OK ) {
 	    FontFactory factory;
 	    factory.library = lib;

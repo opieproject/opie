@@ -88,7 +88,7 @@ signals:
 	void micChanged( bool muted );
     void appMessage( const QCString& msg, const QByteArray& data);
     void weekChanged( bool startOnMonday );
-    void dateFormatChanged( DateFormat );
+    void dateFormatChanged( OpieDateFormat );
     void flush();
     void reload();
     

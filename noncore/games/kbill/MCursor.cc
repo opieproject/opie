@@ -25,7 +25,7 @@
 #include <kapp.h>
 #include <kstandarddirs.h>
 #endif
-#include <iostream.h>
+//#include <iostream.h>
 #include <qpe/resource.h>
 MCursor::~MCursor() {
 	delete cursor;

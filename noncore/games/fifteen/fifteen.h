@@ -22,7 +22,12 @@
 #define __fifteenapplet_h__
 
 #include <qmainwindow.h>
+#if QT_VERSION >= 300
+#include <qttableview.h>
+#define QTableView QtTableView
+#else 
 #include <qtableview.h>
+#endif
 #include <qarray.h>
 
 class QPopupMenu;

@@ -32,6 +32,7 @@
 //#include <opie/ofileselector.h>
 #include <qmultilineedit.h>
 
+#include <qcursor.h>
 #include <qtextstream.h>
 #include <qpushbutton.h>
 #include <qtoolbutton.h>
@@ -50,6 +51,7 @@
 #include <qwidget.h>
 #include <qlayout.h>
 #include <qimage.h>
+#include <qpainter.h>
 #include <qpixmap.h>
 #include <qmessagebox.h>
 #include <qlineedit.h>

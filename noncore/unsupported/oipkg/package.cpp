@@ -3,6 +3,7 @@
 #include <qpe/process.h>
 #include <qpe/stringutil.h>
 #include <qfile.h>
+#include <qregexp.h>
 #include <qtextstream.h>
 #include <stdlib.h>
 #include <unistd.h>

@@ -4,7 +4,7 @@
 #include <qobject.h>
 
 class QCopChannel;
-class QLibrary;
+class OpieLibrary;
 
 class IrServer : public QObject
 {
@@ -14,7 +14,7 @@ public:
     ~IrServer();
 
 private:
-    QLibrary *lib;
+    OpieLibrary *lib;
 };
 
 #endif

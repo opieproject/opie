@@ -22,7 +22,7 @@
 
 #include <qmainwindow.h>
 #include <qframe.h>
-#include <qpe/qlibrary.h>
+#include <qpe/opielibrary.h>
 #include <qpe/mediaplayerplugininterface.h>
 
 

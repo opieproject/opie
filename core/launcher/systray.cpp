@@ -19,7 +19,7 @@
 **********************************************************************/
 
 #include <qpe/qpeapplication.h>
-#include <qpe/qlibrary.h>
+#include <qpe/opielibrary.h>
 #include <qpe/config.h>
 
 #include <qlayout.h>
@@ -61,7 +61,7 @@ void SysTray::loadApplets()
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
 	TaskbarAppletInterface *iface = 0;
-	QLibrary *lib = new QLibrary( path + "/" + *it );
+	OpieLibrary *lib = new OpieLibrary( path + "/" + *it );
 	if ( lib->queryInterface( IID_TaskbarApplet, (QUnknownInterface**)&iface ) == QS_OK ) {
 	    TaskbarApplet applet;
 	    applet.library = lib;

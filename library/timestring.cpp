@@ -28,38 +28,38 @@ class TimeStringFormatKeeper : public QObject
 {
     Q_OBJECT
 public:
-    static DateFormat currentFormat()
+    static OpieDateFormat currentFormat()
     {
 	if ( !self )
 	    self  = new TimeStringFormatKeeper;
 	return self->format;
     }
 private slots:
-    void formatChanged( DateFormat f )
+    void formatChanged( OpieDateFormat f )
     {
 	format = f;
     }
 private:
     static TimeStringFormatKeeper *self;
-    DateFormat format;
+    OpieDateFormat format;
 
     TimeStringFormatKeeper()
 	: QObject( qApp )
     {
 	Config config("qpe");
 	config.setGroup( "Date" );
-	format = DateFormat(QChar(config.readEntry("Separator", "/")[0]),
-		(DateFormat::Order)config .readNumEntry("ShortOrder", DateFormat::DayMonthYear), 
-		(DateFormat::Order)config.readNumEntry("LongOrder", DateFormat::DayMonthYear));
+	format = OpieDateFormat(QChar(config.readEntry("Separator", "/")[0]),
+		(OpieDateFormat::Order)config .readNumEntry("ShortOrder", OpieDateFormat::DayMonthYear), 
+		(OpieDateFormat::Order)config.readNumEntry("LongOrder", OpieDateFormat::DayMonthYear));
 
-	connect( qApp, SIGNAL( dateFormatChanged(DateFormat) ),
-		 this, SLOT( formatChanged( DateFormat ) ) );
+	connect( qApp, SIGNAL( dateFormatChanged(OpieDateFormat) ),
+		 this, SLOT( formatChanged( OpieDateFormat ) ) );
     }
 };
 
 TimeStringFormatKeeper *TimeStringFormatKeeper::self = 0;
 
-QString DateFormat::toNumberString() const
+QString OpieDateFormat::toNumberString() const
 {
     QString buf = "";
     // for each part of the order
@@ -82,7 +82,7 @@ QString DateFormat::toNumberString() const
     return buf;
 }
 
-QString DateFormat::toWordString() const
+QString OpieDateFormat::toWordString() const
 {
     QString buf = "";
     // for each part of the order
@@ -113,7 +113,7 @@ QString DateFormat::toWordString() const
     return buf;
 }
 
-QString DateFormat::numberDate(const QDate &d, int v) const
+QString OpieDateFormat::numberDate(const QDate &d, int v) const
 {
     QString buf = "";
 
@@ -151,7 +151,7 @@ QString DateFormat::numberDate(const QDate &d, int v) const
     return buf;
 }
 
-QString DateFormat::wordDate(const QDate &d, int v) const
+QString OpieDateFormat::wordDate(const QDate &d, int v) const
 {
     QString buf = "";
     // for each part of the order
@@ -214,7 +214,7 @@ QString DateFormat::wordDate(const QDate &d, int v) const
 }
 
 #ifndef QT_NO_DATASTREAM
-void DateFormat::save(QDataStream &d) const
+void OpieDateFormat::save(QDataStream &d) const
 {
     d << _shortSeparator.unicode();
     uint v= _shortOrder;
@@ -223,7 +223,7 @@ void DateFormat::save(QDataStream &d) const
     d << v;
 }
 
-void DateFormat::load(QDataStream &d) 
+void OpieDateFormat::load(QDataStream &d) 
 {
     ushort value;
     d >> value;
@@ -236,42 +236,42 @@ void DateFormat::load(QDataStream &d)
     _longOrder = (Order)v;
 }
 
-QDataStream &operator<<(QDataStream &s, const DateFormat&df)
+QDataStream &operator<<(QDataStream &s, const OpieDateFormat&df)
 {
         df.save(s);
 	    return s;
 }
-QDataStream &operator>>(QDataStream &s, DateFormat&df)
+QDataStream &operator>>(QDataStream &s, OpieDateFormat&df)
 {
         df.load(s);
 	    return s;
 }
 #endif
 
-QString TimeString::shortDate( const QDate &d, DateFormat dtf )
+QString TimeString::shortDate( const QDate &d, OpieDateFormat dtf )
 {
     return dtf.wordDate(d);
 }
 
-QString TimeString::dateString( const QDate &d, DateFormat dtf )
+QString TimeString::dateString( const QDate &d, OpieDateFormat dtf )
 {
-    return dtf.wordDate(d, DateFormat::longNumber | DateFormat::longWord);
+    return dtf.wordDate(d, OpieDateFormat::longNumber | OpieDateFormat::longWord);
 }
 
 
-QString TimeString::longDateString( const QDate &d, DateFormat dtf )
+QString TimeString::longDateString( const QDate &d, OpieDateFormat dtf )
 {
-    return dtf.wordDate(d, DateFormat::showWeekDay | DateFormat::longNumber 
-	    | DateFormat::longWord);
+    return dtf.wordDate(d, OpieDateFormat::showWeekDay | OpieDateFormat::longNumber 
+	    | OpieDateFormat::longWord);
 }
 
-DateFormat TimeString::currentDateFormat()
+OpieDateFormat TimeString::currentDateFormat()
 {
     return TimeStringFormatKeeper::currentFormat();
 }
 
 
-QString TimeString::dateString( const QDateTime &dt, bool ampm, bool seconds, DateFormat dtf )
+QString TimeString::dateString( const QDateTime &dt, bool ampm, bool seconds, OpieDateFormat dtf )
 {
     const QDate& d = dt.date();
     const QTime& t = dt.time();

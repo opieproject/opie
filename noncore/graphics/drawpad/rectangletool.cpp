@@ -11,6 +11,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <qpainter.h>
 #include "rectangletool.h"
 
 #include "drawpad.h"

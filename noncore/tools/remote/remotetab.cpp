@@ -75,7 +75,7 @@ int RemoteTab::sendIR()
 	}
 
 
-	if(std::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
+	if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
 	{
 		QMessageBox *mb = new QMessageBox("Error!",
 											"couldnt connect to socket",
@@ -103,7 +103,7 @@ int RemoteTab::sendIR()
 			done=true;
 		}
 	}
-	std::close(fd);
+	::close(fd);
 }
 
 //		printf("%s\n", readPacket());

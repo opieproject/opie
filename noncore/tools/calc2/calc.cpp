@@ -67,7 +67,7 @@ LCD->setSegmentStyle(QLCDNumber::Filled);
   QStringList::Iterator it;
   for (it = list.begin (); it != list.end (); ++it) {
     CalcInterface *iface = 0;
-    QLibrary *lib = new QLibrary (path + "/" + *it);
+    OpieLibrary *lib = new OpieLibrary (path + "/" + *it);
 
     Plugin plugin;
     plugin.pluginWidget = 0;

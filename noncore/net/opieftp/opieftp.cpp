@@ -51,6 +51,8 @@ extern "C" {
 #include <qmessagebox.h>
 #include <qlineedit.h>
 #include <qregexp.h>
+#include <qpainter.h>
+#include <qcursor.h>
 
 #include <unistd.h>
 #include <stdlib.h>

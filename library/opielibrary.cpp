@@ -19,7 +19,7 @@
 **********************************************************************/
 
 
-#include "qlibrary_p.h"
+#include "opielibrary_p.h"
 
 // uncomment this to get error messages
 //#define QT_DEBUG_COMPONENT 1 
@@ -44,19 +44,19 @@
 #define QT_NO_LIBRARY_UNLOAD
 #endif
 
-/* Platform independent QLibraryPrivate implementations */
+/* Platform independent OpieLibraryPrivate implementations */
 #ifndef QT_LITE_COMPONENT
 
 #include "qtimer.h"
 
 extern Q_EXPORT QApplication *qApp;
 
-QLibraryPrivate::QLibraryPrivate( QLibrary *lib )
+OpieLibraryPrivate::OpieLibraryPrivate( OpieLibrary *lib )
     : QObject( 0, lib->library().latin1() ), pHnd( 0 ), libIface( 0 ), unloadTimer( 0 ), library( lib )
 {
 }
 
-QLibraryPrivate::~QLibraryPrivate()
+OpieLibraryPrivate::~OpieLibraryPrivate()
 {
     if ( libIface )
 	libIface->release();
@@ -64,12 +64,12 @@ QLibraryPrivate::~QLibraryPrivate()
 }
 
 /*
-  Only components that implement the QLibraryInterface can
+  Only components that implement the OpieLibraryInterface can
   be unloaded automatically.
 */
-void QLibraryPrivate::tryUnload()
+void OpieLibraryPrivate::tryUnload()
 {
-    if ( library->policy() == QLibrary::Manual || !pHnd || !libIface )
+    if ( library->policy() == OpieLibrary::Manual || !pHnd || !libIface )
 	return;
 
     if ( !libIface->canUnload() )
@@ -85,14 +85,14 @@ void QLibraryPrivate::tryUnload()
 
 #else // QT_LITE_COMPOINENT
 
-QLibraryPrivate::QLibraryPrivate( QLibrary *lib )
+OpieLibraryPrivate::OpieLibraryPrivate( OpieLibrary *lib )
     : pHnd( 0 ), libIface( 0 ), library( lib )
 {
 }
 
 #endif // QT_LITE_COMPOINENT
 
-void QLibraryPrivate::startTimer()
+void OpieLibraryPrivate::startTimer()
 {
 #ifndef QT_LITE_COMPONENT
     unloadTimer = new QTimer( this );
@@ -101,7 +101,7 @@ void QLibraryPrivate::startTimer()
 #endif
 }
 
-void QLibraryPrivate::killTimer()
+void OpieLibraryPrivate::killTimer()
 {
 #ifndef QT_LITE_COMPONENT
     delete unloadTimer;
@@ -110,17 +110,17 @@ void QLibraryPrivate::killTimer()
 }
 
 /*!
-  \class QLibrary qlibrary.h
+  \class OpieLibrary opielibrary.h
 
-  \brief The QLibrary class provides a wrapper for handling shared libraries.
+  \brief The OpieLibrary class provides a wrapper for handling shared libraries.
 
   This class is temporarily copied from Qt 3.0.
 */
 
 /*!
-  \enum QLibrary::Policy
+  \enum OpieLibrary::Policy
 
-  This enum type defines the various policies a QLibrary can have with respect to
+  This enum type defines the various policies a OpieLibrary can have with respect to
   loading and unloading the shared library.
 
   The \e policy can be:
@@ -131,41 +131,41 @@ void QLibraryPrivate::killTimer()
 */
 
 /*!
-  Creates a QLibrary object for the shared library \a filename.
+  Creates a OpieLibrary object for the shared library \a filename.
   The library get's loaded if \a pol is Immediately.
 
   Note that \a filename does not need to include the (platform specific)
   file extension, so calling
 
   \code
-  QLibrary lib( "mylib" );
+  OpieLibrary lib( "mylib" );
   \endcode
 
   would be equivalent to
 
   \code
-  QLibrary lib( "mylib.dll" );
+  OpieLibrary lib( "mylib.dll" );
   \endcode
 
   on Windows. But \e "mylib.dll" will obviously not work on other platforms.
 
   \sa setPolicy(), unload()
 */
-QLibrary::QLibrary( const QString& filename, Policy pol )
+OpieLibrary::OpieLibrary( const QString& filename, Policy pol )
     : libfile( filename ), libPol( pol ), entry( 0 )
 {
-    d = new QLibraryPrivate( this );
+    d = new OpieLibraryPrivate( this );
     if ( pol == Immediately )
 	load();
 }
 
 /*!
-  Deletes the QLibrary object.
+  Deletes the OpieLibrary object.
   The library will be unloaded if the policy is not Manual.
 
   \sa unload(), setPolicy()
 */
-QLibrary::~QLibrary()
+OpieLibrary::~OpieLibrary()
 {
     if ( libPol == Manual || !unload() ) {
 	if ( entry ) {
@@ -176,7 +176,7 @@ QLibrary::~QLibrary()
     delete d;
 }
 
-void QLibrary::createInstanceInternal()
+void OpieLibrary::createInstanceInternal()
 {
     if ( libfile.isEmpty() )
 	return;
@@ -195,11 +195,11 @@ void QLibrary::createInstanceInternal()
 	ucmInstanceProc = (UCMInstanceProc) resolve( "ucm_instantiate" );
 	entry = ucmInstanceProc ? ucmInstanceProc() : 0;
 	if ( entry ) {
-	    entry->queryInterface( IID_QLibrary, (QUnknownInterface**)&d->libIface);
+	    entry->queryInterface( IID_OpieLibrary, (QUnknownInterface**)&d->libIface);
 	    if ( d->libIface ) {
 		if ( !d->libIface->init() ) {
 #if defined(QT_DEBUG_COMPONENT)
-		    qWarning( "%s: QLibraryInterface::init() failed.", library().latin1() );
+		    qWarning( "%s: OpieLibraryInterface::init() failed.", library().latin1() );
 #endif
 		    unload();
 		    return;
@@ -235,7 +235,7 @@ void QLibrary::createInstanceInternal()
 
   \sa queryInterface()
 */
-void *QLibrary::resolve( const char* symb )
+void *OpieLibrary::resolve( const char* symb )
 {
     if ( !d->pHnd )
 	load();
@@ -263,9 +263,9 @@ void *QLibrary::resolve( const char* symb )
   The function returns a null pointer if the symbol could not be resolved or if loading
   the library failed.
 */
-void *QLibrary::resolve( const QString &filename, const char *symb )
+void *OpieLibrary::resolve( const QString &filename, const char *symb )
 {
-    QLibrary lib( filename, Manual );
+    OpieLibrary lib( filename, Manual );
     return lib.resolve( symb );
 }
 
@@ -274,7 +274,7 @@ void *QLibrary::resolve( const QString &filename, const char *symb )
 
   \sa unload()
 */
-bool QLibrary::isLoaded() const
+bool OpieLibrary::isLoaded() const
 {
     return d->pHnd != 0;
 }
@@ -282,7 +282,7 @@ bool QLibrary::isLoaded() const
 /*!
   Loads the library.
 */
-bool QLibrary::load()
+bool OpieLibrary::load()
 {
     return d->loadLibrary();
 }
@@ -290,7 +290,7 @@ bool QLibrary::load()
 /*!
   Releases the component and unloads the library when successful.
   Returns TRUE if the library could be unloaded, otherwise FALSE.
-  If the component implements the QLibraryInterface, the cleanup()
+  If the component implements the OpieLibraryInterface, the cleanup()
   function of this interface will be called. The unloading will be
   cancelled if the subsequent call to canUnload() returns FALSE.
 
@@ -304,7 +304,7 @@ bool QLibrary::load()
 
   \sa queryInterface(), resolve()
 */
-bool QLibrary::unload( bool force )
+bool OpieLibrary::unload( bool force )
 {
     if ( !d->pHnd )
 	return TRUE;
@@ -370,7 +370,7 @@ bool QLibrary::unload( bool force )
   Sets the current policy to \a pol.
   The library is loaded if \a pol is set to Immediately.
 */
-void QLibrary::setPolicy( Policy pol )
+void OpieLibrary::setPolicy( Policy pol )
 {
     libPol = pol;
 
@@ -383,23 +383,23 @@ void QLibrary::setPolicy( Policy pol )
 
   \sa setPolicy()
 */
-QLibrary::Policy QLibrary::policy() const
+OpieLibrary::Policy OpieLibrary::policy() const
 {
     return libPol;
 }
 
 /*!
-  Returns the filename of the shared library this QLibrary object handles,
+  Returns the filename of the shared library this OpieLibrary object handles,
   including the platform specific file extension.
 
   \code
-  QLibrary lib( "mylib" );
+  OpieLibrary lib( "mylib" );
   QString str = lib.library();
   \endcode
 
   will set \e str to "mylib.dll" on Windows, and "libmylib.so" on Linux.
 */
-QString QLibrary::library() const
+QString OpieLibrary::library() const
 {
     if ( libfile.isEmpty() )
 	return libfile;
@@ -425,7 +425,7 @@ QString QLibrary::library() const
 
   The library gets loaded if necessary.
 */
-QRESULT QLibrary::queryInterface( const QUuid& request, QUnknownInterface** iface )
+QRESULT OpieLibrary::queryInterface( const QUuid& request, QUnknownInterface** iface )
 {
     if ( !entry ) {
 	createInstanceInternal();

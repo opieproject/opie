@@ -22,10 +22,12 @@
 #include <qpe/menubutton.h>
 #include <qpe/mimetype.h>
 
+#include <qcursor.h>
 #include <qdict.h>
 #include <qwidgetstack.h>
 #include <qlistview.h>
 #include <qcombo.h>
+#include <qpainter.h>
 #include <qpushbutton.h>
 #include <qfile.h>
 #include <qmessagebox.h>

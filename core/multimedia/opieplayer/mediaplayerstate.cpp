@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 #include <qpe/qpeapplication.h>
-#include <qpe/qlibrary.h>
+#include <qpe/opielibrary.h>
 #include <qpe/config.h>
 #include <qvaluelist.h>
 #include <qobject.h>
@@ -82,7 +82,7 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
 
 struct MediaPlayerPlugin {
 #ifndef QT_NO_COMPONENT
-    QLibrary *library;
+    OpieLibrary *library;
 #endif
     MediaPlayerPluginInterface *iface;
     MediaPlayerDecoder *decoder;
@@ -143,7 +143,7 @@ void MediaPlayerState::loadPlugins() {
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
   MediaPlayerPluginInterface *iface = 0;
-  QLibrary *lib = new QLibrary( path + "/" + *it );
+  OpieLibrary *lib = new OpieLibrary( path + "/" + *it );
 //   qDebug( "querying: %s", QString( path + "/" + *it ).latin1() );
 
   if ( lib->queryInterface( IID_MediaPlayerPlugin, (QUnknownInterface**)&iface ) == QS_OK ) {

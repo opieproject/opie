@@ -25,12 +25,12 @@
 #include <qfontdatabase.h>
 #include <qvaluelist.h>
 
-class QLibrary;
+class OpieLibrary;
 
 struct FontFactory
 {
 #ifndef QT_NO_COMPONENT
-    QLibrary *library;
+    OpieLibrary *library;
 #endif
     FontFactoryInterface *interface;
     QFontFactory *factory;

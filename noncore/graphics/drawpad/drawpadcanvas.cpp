@@ -75,8 +75,8 @@ QList<QPixmap> DrawPadCanvasXmlHandler::pixmaps()
 bool DrawPadCanvasXmlHandler::startElement(const QString& namespaceURI, const QString& localName,
                                            const QString& qName, const QXmlAttributes& atts)
 {
-    Q_CONST_UNUSED(namespaceURI)
-    Q_CONST_UNUSED(localName)
+//    Q_CONST_UNUSED(namespaceURI)
+//    Q_CONST_UNUSED(localName)
 
     if (qName.compare("data") == 0) {
         m_state = InData;
@@ -94,8 +94,8 @@ bool DrawPadCanvasXmlHandler::startElement(const QString& namespaceURI, const QS
 bool DrawPadCanvasXmlHandler::endElement(const QString& namespaceURI, const QString& localName,
                                          const QString& qName)
 {
-    Q_CONST_UNUSED(namespaceURI)
-    Q_CONST_UNUSED(localName)
+//    Q_CONST_UNUSED(namespaceURI)
+//    Q_CONST_UNUSED(localName)
 
     if (qName.compare("data") == 0) {
         m_state = Unknown;

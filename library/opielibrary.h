@@ -27,9 +27,9 @@
 
 #include <qpe/qcom.h>
 
-class QLibraryPrivate;
+class OpieLibraryPrivate;
 
-class Q_EXPORT QLibrary
+class Q_EXPORT OpieLibrary
 {
 public:
     enum Policy
@@ -39,8 +39,8 @@ public:
 	Manual
     };
 
-    QLibrary( const QString& filename, Policy = Delayed );
-    ~QLibrary();
+    OpieLibrary( const QString& filename, Policy = Delayed );
+    ~OpieLibrary();
 
     void *resolve( const char* );
     static void *resolve( const QString &filename, const char * );
@@ -59,7 +59,7 @@ private:
     bool load();
     void createInstanceInternal();
 
-    QLibraryPrivate *d;
+    OpieLibraryPrivate *d;
 
     QString libfile;
     Policy libPol;
@@ -67,8 +67,8 @@ private:
 
 private:	// Disabled copy constructor and operator=
 #if defined(Q_DISABLE_COPY)
-    QLibrary( const QLibrary & );
-    QLibrary &operator=( const QLibrary & );
+    OpieLibrary( const OpieLibrary & );
+    OpieLibrary &operator=( const OpieLibrary & );
 #endif
 };
 

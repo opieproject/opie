@@ -194,7 +194,7 @@ public slots:
     void setDate( int y, int m, int d );
     void setDate( QDate );
     void setWeekStartsMonday( int );
-    void setDateFormat( DateFormat );
+    void setDateFormat( OpieDateFormat );
 
 private slots:
     void pickDate();
@@ -204,7 +204,7 @@ private:
     bool longFormat;
     bool weekStartsMonday;
     QDate currDate;
-    DateFormat df;
+    OpieDateFormat df;
 };
 
 

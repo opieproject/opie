@@ -1,6 +1,6 @@
 #include "irserver.h"
 
-#include <qpe/qlibrary.h>
+#include <qpe/opielibrary.h>
 #include <qpe/qpeapplication.h>
 
 #include <qtranslator.h>
@@ -20,7 +20,7 @@ IrServer::IrServer( QObject *parent, const char *name )
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
 	ObexInterface *iface = 0;
-	QLibrary *trylib = new QLibrary( path + *it );
+	OpieLibrary *trylib = new OpieLibrary( path + *it );
 	qDebug("trying lib %s", (path + (*it)).latin1() );
 	if ( trylib->queryInterface( IID_ObexInterface, (QUnknownInterface**)&iface ) == QS_OK ) {
 	    lib = trylib;

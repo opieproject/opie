@@ -111,7 +111,7 @@ QStringList ButtonDialog::getRemotes()
 		return NULL;
 	}
 
-	if(std::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
+	if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
 	{
 		QMessageBox *mb = new QMessageBox("Error!",
 											"couldnt connect to socket",
@@ -154,7 +154,7 @@ QStringList ButtonDialog::getRemotes()
 		return NULL;
 	}
 
-	std::close(fd);
+	::close(fd);
 	return list;
 }
 
@@ -184,7 +184,7 @@ QStringList ButtonDialog::getButtons(const char *remoteName)
 	}
 
 
-	if(std::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
+	if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
 	{
 		QMessageBox *mb = new QMessageBox("Error!",
 											"couldnt connect to socket",
@@ -230,7 +230,7 @@ QStringList ButtonDialog::getButtons(const char *remoteName)
 		return NULL;
 	}
 
-	std::close(fd);
+	::close(fd);
 	return list;
 }
 

@@ -26,14 +26,14 @@
 //  -------------
 //
 // This file is not part of the Qt API.  It exists for the convenience
-// of the QLibrary class.  This header file may change from
+// of the OpieLibrary class.  This header file may change from
 // version to version without notice, or even be removed.
 //
 // We mean it.
 //
 //
 
-#include "qlibrary.h"
+#include "opielibrary.h"
 
 //#ifndef QT_NO_COMPONENT
 
@@ -45,20 +45,20 @@
 //#endif // QT_H
 
 class QTimer;
-class QLibrary;
-class QLibraryInterface;
+class OpieLibrary;
+class OpieLibraryInterface;
 
 /*
   Private helper class that saves the platform dependent handle
   and does the unload magic using a QTimer.
 */
 //#ifndef QT_LITE_COMPONENT
-class QLibraryPrivate : public QObject
+class OpieLibraryPrivate : public QObject
 {
     Q_OBJECT
 public:
-    QLibraryPrivate( QLibrary *lib );
-    ~QLibraryPrivate();
+    OpieLibraryPrivate( OpieLibrary *lib );
+    ~OpieLibraryPrivate();
  
     void startTimer();
     void killTimer();
@@ -69,7 +69,7 @@ public:
     void *pHnd;
 #endif
 
-    QLibraryInterface *libIface;
+    OpieLibraryInterface *libIface;
 
     bool loadLibrary();
     bool freeLibrary();
@@ -80,14 +80,14 @@ private slots:
 
 private:
     QTimer *unloadTimer;
-    QLibrary *library;
+    OpieLibrary *library;
 };
 
 #else // QT_LITE_COMPONENT
-class QLibraryPrivate
+class OpieLibraryPrivate
 {
 public:
-    QLibraryPrivate( QLibrary *lib );
+    OpieLibraryPrivate( OpieLibrary *lib );
 
     void startTimer();
     void killTimer();
@@ -97,14 +97,14 @@ public:
 #else
     void *pHnd;
 #endif
-    QLibraryInterface *libIface;
+    OpieLibraryInterface *libIface;
 
     bool loadLibrary();
     bool freeLibrary();
     void *resolveSymbol( const char * );
 
 private:
-    QLibrary *library;
+    OpieLibrary *library;
 };
 //#endif // QT_LITE_COMPONENT
 

@@ -18,6 +18,7 @@
 
 #include <qpe/qpeapplication.h>
 #include <qlistview.h>
+#include <qpainter.h>
 #include <qpushbutton.h>
 #include <qfile.h>
 #include <qmessagebox.h>

@@ -1,7 +1,7 @@
 # Compiling
 INTERFACE_DECL_PATH 	= .
-SYSCONF_CXX		= arm-linux-g++
-SYSCONF_CC		= arm-linux-gcc
+SYSCONF_CXX		= arm-linux-gnu-g++
+SYSCONF_CC		= arm-linux-gnu-gcc
 DASHCROSS		= -arm
 
 # Compiling with support libraries
@@ -32,7 +32,7 @@ SYSCONF_LIBS_OPENGL	=
 SYSCONF_LIBS_YACC	= 
 
 # Linking applications
-SYSCONF_LINK		= arm-linux-gcc
+SYSCONF_LINK		= arm-linux-gnu-gcc
 SYSCONF_LFLAGS		= 
 SYSCONF_LIBS		= 
 
@@ -56,7 +56,7 @@ SYSCONF_UIC		= $(QTDIR)/bin/uic
 #   - Place target in $(DESTDIR) - which has a trailing /
 #   - Usually needs to incorporate $(VER_MAJ), $(VER_MIN) and $(VER_PATCH)
 #
-SYSCONF_LINK_SHLIB	= arm-linux-gcc
+SYSCONF_LINK_SHLIB	= arm-linux-gnu-gcc
 SYSCONF_LINK_TARGET_SHARED	= lib$(TARGET).so.$(VER_MAJ).$(VER_MIN).$(VER_PATCH)
 SYSCONF_LINK_LIB_SHARED	=  $(SYSCONF_LINK_SHLIB) -shared -Wl,-soname,lib$(TARGET).so.$(VER_MAJ) \
 				     $(LFLAGS) -o $(SYSCONF_LINK_TARGET_SHARED) \
@@ -72,7 +72,7 @@ SYSCONF_LINK_LIB_SHARED	=  $(SYSCONF_LINK_SHLIB) -shared -Wl,-soname,lib$(TARGET
 #   - Build the $(TARGET) library, eg. lib$(TARGET).a
 #   - Place target in $(DESTDIR) - which has a trailing /
 #
-SYSCONF_AR		= arm-linux-ar cqs
+SYSCONF_AR		= arm-linux-gnu-ar cqs
 SYSCONF_LINK_TARGET_STATIC = lib$(TARGET).a
 SYSCONF_LINK_LIB_STATIC	= rm -f $(DESTDIR)$(SYSCONF_LINK_TARGET_STATIC) ; \
 				 $(SYSCONF_AR) $(DESTDIR)$(SYSCONF_LINK_TARGET_STATIC) $(OBJECTS) $(OBJMOC) 

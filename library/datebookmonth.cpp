@@ -648,7 +648,7 @@ DateButton::DateButton( bool longDate, QWidget *parent, const char * name )
     :QPushButton( parent, name )
 {
     longFormat = longDate;
-    df = DateFormat('/', DateFormat::MonthDayYear, DateFormat::MonthDayYear);
+    df = OpieDateFormat('/', OpieDateFormat::MonthDayYear, OpieDateFormat::MonthDayYear);
     setDate( QDate::currentDate() );
 
     connect(this,SIGNAL(pressed()),this,SLOT(pickDate()));
@@ -706,7 +706,7 @@ void DateButton::setDate( QDate d )
 
 }
 
-void DateButton::setDateFormat( DateFormat f )
+void DateButton::setDateFormat( OpieDateFormat f )
 {
     df = f;
     setDate( currDate );

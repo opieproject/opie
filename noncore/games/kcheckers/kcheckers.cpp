@@ -39,7 +39,7 @@ KCheckers::KCheckers():QMainWindow(0,0,WStyle_DialogBorder)
   QPopupMenu* gameMenu=new QPopupMenu;
   gameMenu->insertItem(QPixmap(logo),tr("New"),this,SLOT(newGame()));
   gameMenu->insertSeparator();
-  gameMenu->insertItem(QPixmap(exit),tr("Quit"),qApp,SLOT(quit()));
+  gameMenu->insertItem(QPixmap(exitx),tr("Quit"),qApp,SLOT(quit()));
 
   skillMenu=new QPopupMenu;
 

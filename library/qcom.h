@@ -50,11 +50,11 @@ struct Q_EXPORT QUnknownInterface
 };
 
 // {D16111D4-E1E7-4C47-8599-24483DAE2E07}
-#ifndef IID_QLibrary
-#define IID_QLibrary QUuid( 0xd16111d4, 0xe1e7, 0x4c47, 0x85, 0x99, 0x24, 0x48, 0x3d, 0xae, 0x2e, 0x07)
+#ifndef IID_OpieLibrary
+#define IID_OpieLibrary QUuid( 0xd16111d4, 0xe1e7, 0x4c47, 0x85, 0x99, 0x24, 0x48, 0x3d, 0xae, 0x2e, 0x07)
 #endif
  
-struct Q_EXPORT QLibraryInterface : public QUnknownInterface
+struct Q_EXPORT OpieLibraryInterface : public QUnknownInterface
 {
     virtual bool    init() = 0;
     virtual void    cleanup() = 0;

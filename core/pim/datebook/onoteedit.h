@@ -1,7 +1,13 @@
 #ifndef ONOTEEDIT_H
 #define ONOTEEDIT_H
 
+#include <qglobal.h>
+#if QT_VERSION < 300
 #include <qmultilineedit.h>
+#else
+#include <qtmultilineedit.h>
+#define QMultiLineEdit QtMultiLineEdit
+#endif
 
 class ONoteEdit: public QMultiLineEdit {
 

@@ -36,6 +36,8 @@
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qfontinfo.h>
+#include <qfont.h>
 //#include <qpe/finddialog.h>
 
 #include <opie/ofileselector.h>
@@ -157,7 +159,7 @@ static char * filesave_xpm[] = {
 "        +...    "};
 
 
-#if QT_VERSION < 300
+#if 1 //QT_VERSION  300
 
 class QpeEditor : public QMultiLineEdit
 {
@@ -399,9 +401,9 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     QString family = cfg.readEntry("Family", fontInfo.family());
     QString style = cfg.readEntry("Style", fdb.styleString(defaultFont));
     int i_size = cfg.readNumEntry("Size", fontInfo.pointSize()/10);
-    QString charSet = cfg.readEntry("CharSet", QFont::encodingName( fontInfo.charSet()) );
+    //    QString charSet = cfg.readEntry("CharSet", QFont::encodingName( fontInfo.charSet()) );
 
-    defaultFont = fdb.font(family,style,i_size,charSet);
+    defaultFont = fdb.font(family,style,i_size/*,charSet*/);
     editor->setFont( defaultFont);
 
     wa->setOn(wrap);
@@ -926,9 +928,9 @@ void TextEdit::changeFont() {
     QString family = cfg.readEntry("Family", fontInfo.family());
     QString style = cfg.readEntry("Style", fdb.styleString(defaultFont));
     int i_size = cfg.readNumEntry("Size", fontInfo.pointSize()/10);
-    QString charSet = cfg.readEntry("CharSet", QFont::encodingName( fontInfo.charSet()) );
+    //    QString charSet = cfg.readEntry("CharSet", QFont::encodingName( fontInfo.charSet()) );
 
-    defaultFont = fdb.font(family,style,i_size,charSet);
+    defaultFont = fdb.font(family,style,i_size/*,charSet*/);
 
     FontDialog *fontDlg;
     fontDlg=new FontDialog(this,tr("FontDialog"),TRUE);

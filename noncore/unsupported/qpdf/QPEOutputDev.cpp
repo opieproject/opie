@@ -4,6 +4,7 @@
 
 #include <qapplication.h>
 #include <qlabel.h>
+#include <qpainter.h>
 #include "qbusybar.h"
 
 

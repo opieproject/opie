@@ -13,7 +13,7 @@ class DocLnk;
 class FileSelector;
 class QWidgetStack;
 class QLineEdit;
-
+class QToolButton;
 
 class QPdfDlg : public QMainWindow {
 	Q_OBJECT

@@ -26,7 +26,7 @@
 #include "qpe/resource.h"
 #include "qpe/qpeapplication.h"
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/qlibrary.h>
+#include <qpe/opielibrary.h>
 
 #include <qlistbox.h>
 #include <qdir.h>
@@ -415,7 +415,7 @@ NetworkInterface* Network::loadPlugin(const QString& type)
     NetworkInterface *iface = ifaces->find(type);
     if ( !iface ) {
 	QString libfile = QPEApplication::qpeDir() + "/plugins/network/lib" + type + ".so";
-	QLibrary lib(libfile);
+	OpieLibrary lib(libfile);
 	if ( !lib.queryInterface( IID_Network, (QUnknownInterface**)&iface ) == QS_OK )
 	    return 0;
 	ifaces->insert(type,iface);

@@ -2,6 +2,7 @@
 
 #include <qpopupmenu.h>
 #include <qaction.h>
+#include <qcursor.h>
 
 #include "packagelistitem.h"
 #include "pksettings.h"

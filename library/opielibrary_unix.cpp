@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 
-#include "qlibrary_p.h"
+#include "opielibrary_p.h"
 
 #ifndef QT_NO_COMPONENT
 
@@ -34,7 +34,7 @@
 // for HP-UX < 11.x and 32 bit
 #include <dl.h>
 
-bool QLibraryPrivate::loadLibrary()
+bool OpieLibraryPrivate::loadLibrary()
 {
     if ( pHnd )
 	return TRUE;
@@ -49,7 +49,7 @@ bool QLibraryPrivate::loadLibrary()
     return pHnd != 0;
 }
 
-bool QLibraryPrivate::freeLibrary()
+bool OpieLibraryPrivate::freeLibrary()
 {
     if ( !pHnd )
 	return TRUE;
@@ -61,7 +61,7 @@ bool QLibraryPrivate::freeLibrary()
     return FALSE;
 }
 
-void* QLibraryPrivate::resolveSymbol( const char* symbol )
+void* OpieLibraryPrivate::resolveSymbol( const char* symbol )
 {
     if ( !pHnd )
 	return 0;
@@ -80,7 +80,7 @@ void* QLibraryPrivate::resolveSymbol( const char* symbol )
 // Something else, assuming POSIX
 #include <dlfcn.h>
 
-bool QLibraryPrivate::loadLibrary()
+bool OpieLibraryPrivate::loadLibrary()
 {
     if ( pHnd )
 	return TRUE;
@@ -95,7 +95,7 @@ bool QLibraryPrivate::loadLibrary()
     return pHnd != 0;
 }
 
-bool QLibraryPrivate::freeLibrary()
+bool OpieLibraryPrivate::freeLibrary()
 {
     if ( !pHnd )
 	return TRUE;
@@ -113,7 +113,7 @@ bool QLibraryPrivate::freeLibrary()
     return pHnd == 0;
 }
 
-void* QLibraryPrivate::resolveSymbol( const char* f )
+void* OpieLibraryPrivate::resolveSymbol( const char* f )
 {
     if ( !pHnd )
 	return 0;

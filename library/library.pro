@@ -114,8 +114,12 @@ SOURCES	=   calendar.cpp \
 	lnkproperties.cpp
 
 # Qt 3 compatibility
-qt2:HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h
-qt2:SOURCES += quuid.cpp qlibrary.cpp qlibrary_unix.cpp
+qt2:HEADERS += quuid.h
+qt2:SOURCES += quuid.cpp
+HEADERS += qcom.h opielibrary.h opielibrary_p.h
+SOURCES += opielibrary.cpp opielibrary_unix.cpp
+qt3:HEADERS += qtmultilineedit.h qttableview.h
+qt3:SOURCES += qtmultilineedit.cpp qttableview.cpp
 
 INCLUDEPATH += $(OPIEDIR)/include backend
 LIBS		+= -ldl -lcrypt -lm

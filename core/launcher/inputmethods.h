@@ -28,12 +28,12 @@
 #include <qvaluelist.h>
 
 class QToolButton;
-class QLibrary;
+class OpieLibrary;
 
 struct InputMethod
 {
 #ifndef QT_NO_COMPONENT
-    QLibrary *library;
+    OpieLibrary *library;
 #endif
     QWidget *widget;
     InputMethodInterface *interface;

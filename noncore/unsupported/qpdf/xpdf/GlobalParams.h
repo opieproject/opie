@@ -42,6 +42,15 @@ enum DisplayFontParamKind {
   displayFontTT
 };
 
+struct _x_x_x1 {
+      GString *xlfd;
+      GString *encoding;
+};
+
+struct _x_x_x2 {
+      GString *fileName;
+};
+
 class DisplayFontParam {
 public:
 
@@ -49,6 +58,10 @@ public:
 				//   collection name for CID fonts
   DisplayFontParamKind kind;
   union {
+    struct _x_x_x1 x;
+    struct _x_x_x2 t1;
+    struct _x_x_x2 tt;
+#if 0
     struct {
       GString *xlfd;
       GString *encoding;
@@ -59,6 +72,7 @@ public:
     struct {
       GString *fileName;
     } tt;
+#endif
   };
 
   DisplayFontParam(GString *nameA, DisplayFontParamKind kindA);

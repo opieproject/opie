@@ -3,6 +3,7 @@
 #include <assert.h>
 #include <qfile.h>
 #include <qfileinfo.h>
+#include <qregexp.h>
 #include <qtextstream.h>
 
 #include "debug.h"

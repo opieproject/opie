@@ -39,6 +39,7 @@
 #include <qpainter.h>
 #include <qregexp.h>
 #include <qtoolbutton.h>
+#include <qstyle.h>
 
 class LauncherIconView : public QIconView {
 public:

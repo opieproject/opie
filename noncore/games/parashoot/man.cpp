@@ -25,6 +25,7 @@
 #include <qpe/resource.h>
 
 #include <qregexp.h>
+#include <qstring.h>
 
 int mancount;
 
@@ -49,7 +50,7 @@ Man::Man(QCanvas* canvas, int x, int y) :
 {
     manarray = new QCanvasPixmapArray();
     QString m0 = Resource::findPixmap("parashoot/man0001");
-    m0.replace(QString("0001"),"%1");
+    m0.replace(QRegExp("0001"),"%1");
     manarray->readPixmaps(m0, 7);
     setSequence(manarray);
     move(x, y);

@@ -17,7 +17,7 @@
 #include "Picture.h"
 #include "objects.h"
 
-#include <iostream.h>
+//#include <iostream.h>
 
 #include <qstring.h>
 #include <qpe/resource.h>

@@ -127,10 +127,10 @@ void FontDialog::populateLists()
           QString familyStr = config.readEntry("Family", "fixed");
           QString styleStr = config.readEntry("Style", "Regular");
           QString sizeStr = config.readEntry("Size", "10");
-          QString charSetStr = config.readEntry("CharSet", "iso10646-1" );
+	  //          QString charSetStr = config.readEntry("CharSet", "iso10646-1" );
           bool ok;
           int i_size=sizeStr.toInt(&ok,10);
-          selectedFont = fdb.font(familyStr,styleStr,i_size,charSetStr);
+          selectedFont = fdb.font(familyStr,styleStr,i_size/*,charSetStr*/);
 //          defaultFont.setItalic(TRUE);
   families = fdb.families();
   for ( QStringList::Iterator f = families.begin(); f != families.end();++f ) {
@@ -203,6 +203,7 @@ void FontDialog::changeText()
 //       qDebug("Font size is "+size);
     bool ok;
     int i_size= size.toInt(&ok,10);
+#if QT_VERSION < 300
     QStringList charSetList= fdb.charSets(family);
 //      QStringList styles = fdb.styles( family ); // string list of styles of our current font family
     QString charSet;
@@ -210,7 +211,8 @@ void FontDialog::changeText()
             charSet = *s;
 //            qDebug(charSet);
           }
-    selectedFont = fdb.font(family,style,i_size,charSet);
+#endif
+	  selectedFont = fdb.font(family,style,i_size/*,charSet*/);
     QFontInfo fontInfo( selectedFont);
 //      if(fontInfo.italic() ) qDebug("italic");
     selectedFont.setWeight(fontInfo.weight() );
@@ -220,10 +222,10 @@ void FontDialog::changeText()
     cfg.writeEntry("Family",family);
     cfg.writeEntry("Style",style);
     cfg.writeEntry("Size",size);
-    cfg.writeEntry("CharSet",charSet);
+    //    cfg.writeEntry("CharSet",charSet);
 
     if(style.find("Italic",0,TRUE) != -1) {
-          selectedFont = fdb.font(family,"Regular",i_size,charSet);
+	    selectedFont = fdb.font(family,"Regular",i_size/*,charSet*/);
           selectedFont.setItalic(TRUE); //ya right
           cfg.writeEntry("Italic","TRUE");
 //            qDebug("Style is "+styleListBox->currentText());

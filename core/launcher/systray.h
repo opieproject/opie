@@ -27,12 +27,12 @@
 #include <qvaluelist.h>
 
 class QHBoxLayout;
-class QLibrary;
+class OpieLibrary;
 
 struct TaskbarApplet
 {
 #ifndef QT_NO_COMPONENT
-    QLibrary *library;
+    OpieLibrary *library;
 #endif
     TaskbarAppletInterface *iface;
     QWidget *applet;

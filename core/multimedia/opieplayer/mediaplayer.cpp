@@ -19,7 +19,7 @@
 **********************************************************************/
 
 #include <qpe/qpeapplication.h>
-#include <qpe/qlibrary.h>
+#include <qpe/opielibrary.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 

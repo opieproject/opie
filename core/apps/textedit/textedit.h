@@ -33,7 +33,12 @@
 #include <opie/ofileselector.h>
 
 #include <qmainwindow.h>
+#if QT_VERSION >= 300
+#include <qtmultilineedit.h>
+#define QMultiLineEdit QtMultiLineEdit
+#else
 #include <qmultilineedit.h>
+#endif
 #include <qlist.h>
 #include <qmap.h>
 

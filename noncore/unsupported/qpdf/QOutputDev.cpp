@@ -41,6 +41,7 @@
 #include <qapplication.h>
 #include <qclipboard.h>
 
+using namespace std;
 //#define QPDFDBG(x) x		// special debug mode
 #define QPDFDBG(x)   		// normal compilation
 

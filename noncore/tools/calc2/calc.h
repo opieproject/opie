@@ -30,7 +30,7 @@
 
 #ifndef NO_PLUGINS
 #include <qvaluelist.h>
-#include <qpe/qlibrary.h>
+#include <qpe/opielibrary.h>
 #endif
 
 #include "engine.h"
@@ -38,7 +38,7 @@
 
 struct Plugin {
 #ifndef NO_PLUGINS
-  QLibrary *library;
+  OpieLibrary *library;
 #endif
   QWidget *pluginWidget;
   CalcInterface *interface;

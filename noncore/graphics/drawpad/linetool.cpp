@@ -11,6 +11,8 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <qpainter.h>
+
 #include "linetool.h"
 
 #include "drawpad.h"

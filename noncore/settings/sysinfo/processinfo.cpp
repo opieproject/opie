@@ -25,6 +25,7 @@
 #include <qtimer.h>
 #include <qfile.h>
 #include <qdir.h>
+#include <qregexp.h>
 
 #include "processinfo.h"
 

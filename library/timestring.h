@@ -27,7 +27,7 @@
 // you want it in 12 hour form.   if ampm is true, then return
 // it in 12 hour (am/pm) form otherwise return it in 24 hour form
 // in theory Qt 3,0 handles this better (hopefully obsoleteing this)
-class DateFormat 
+class OpieDateFormat 
 {
 public:
     // date format type 001,010,100 = day month year
@@ -37,14 +37,14 @@ public:
 	YearMonthDay = 0x0054
     };
 
-    DateFormat(QChar s = '/', Order so = MonthDayYear) : _shortOrder(so),
+    OpieDateFormat(QChar s = '/', Order so = MonthDayYear) : _shortOrder(so),
         _longOrder(so), _shortSeparator(s) { }
-    DateFormat(QChar s, Order so, Order lo) :  _shortOrder(so),
+    OpieDateFormat(QChar s, Order so, Order lo) :  _shortOrder(so),
         _longOrder(lo), _shortSeparator(s) { }
-    DateFormat(const DateFormat &o) : _shortOrder(o._shortOrder),
+    OpieDateFormat(const OpieDateFormat &o) : _shortOrder(o._shortOrder),
         _longOrder(o._longOrder), _shortSeparator(o._shortSeparator) { }
 
-    bool operator==(const DateFormat &o)
+    bool operator==(const OpieDateFormat &o)
     {
 	if (o._shortOrder == _shortOrder && o._longOrder == _longOrder &&
 		o._shortSeparator == _shortSeparator)
@@ -87,15 +87,15 @@ private:
 };
 
 #ifndef QT_NO_DATASTREAM
-QDataStream &operator<<(QDataStream &s, const DateFormat&df);
-QDataStream &operator>>(QDataStream &s, DateFormat&df);
+QDataStream &operator<<(QDataStream &s, const OpieDateFormat&df);
+QDataStream &operator>>(QDataStream &s, OpieDateFormat&df);
 #endif
 
 class TimeString
 {
 public:
 
-    //enum DateFormat { MonthDayYear, DayMonthYear, ISO8601, 
+    //enum OpieDateFormat { MonthDayYear, DayMonthYear, ISO8601, 
 		      //YearMonthDay = ISO8601 };
 
 
@@ -116,14 +116,14 @@ public:
 
 
 
-    static QString shortDate( const QDate &, DateFormat );
-    static QString dateString( const QDate &, DateFormat  );
-    static QString longDateString( const QDate &, DateFormat );
+    static QString shortDate( const QDate &, OpieDateFormat );
+    static QString dateString( const QDate &, OpieDateFormat  );
+    static QString longDateString( const QDate &, OpieDateFormat );
 
-    static DateFormat currentDateFormat();
+    static OpieDateFormat currentDateFormat();
 
 private:
-    static QString dateString( const QDateTime &t, bool ampm, bool seconds, DateFormat );
+    static QString dateString( const QDateTime &t, bool ampm, bool seconds, OpieDateFormat );
     
 
 };
