@@ -22,6 +22,37 @@
 #include <stdlib.h>
 #include <qtextstream.h>
 
+static QString encodeAttr( const QString& str )
+{
+    QString tmp( str );
+    uint len = tmp.length();
+    uint i = 0;
+    while ( i < len ) {
+        if ( tmp[(int)i] == '<' ) {
+            tmp.replace( i, 1, "&lt;" );
+            len += 3;
+            i += 4;
+        } else if ( tmp[(int)i] == '"' ) {
+            tmp.replace( i, 1, "&quot;" );
+            len += 5;
+            i += 6;
+        } else if ( tmp[(int)i] == '&' ) {
+            tmp.replace( i, 1, "&amp;" );
+            len += 4;
+            i += 5;
+        } else if ( tmp[(int)i] == '>'  ) {
+            tmp.replace( i, 1, "&gt;" );
+            len += 3;
+            i += 4;
+        } else {
+            ++i;
+        }
+    }
+
+    return tmp;
+}
+
+
 
 DBXml::DBXml(DBStore *d) 
 {
@@ -68,7 +99,7 @@ bool DBXml::saveSource(QIODevice *outDev)
             outstream << "type=\"" 
                       << TVVariant::typeToName(it.current()->type()) 
                       << "\">";
-            outstream << it.current()->name() << "</key>" << endl;
+            outstream << encodeAttr(it.current()->name()) << "</key>" << endl;
         }
         ++it;
     }
@@ -94,7 +125,7 @@ bool DBXml::saveSource(QIODevice *outDev)
                               << date.month() << "/"
                               << date.year();
                 } else {
-                    outstream << elem->toQString(i);
+                    outstream << encodeAttr(elem->toQString(i));
                 }
                 outstream << "</KEYID" << i << ">" << endl;
             }
