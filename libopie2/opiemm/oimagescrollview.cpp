@@ -4,6 +4,7 @@
 #include <opie2/odebug.h>
 #include <opie2/oapplication.h>
 #include <opie2/owait.h>
+#include <opie2/opieexif.h>
 
 #include <qimage.h>
 #include <qlayout.h>
@@ -87,6 +88,8 @@ void OImageScrollView::loadJpeg(bool interncall)
     bool real_load = false;
     if (AutoScale()) {
         if (!interncall) {
+            ExifData xf;
+            bool scanned = xf.scan(m_lastName);
             int wid, hei;
             wid = QApplication::desktop()->width();
             hei = QApplication::desktop()->height();
@@ -95,10 +98,13 @@ void OImageScrollView::loadJpeg(bool interncall)
             } else {
                 hei = wid;
             }
-            param = QString( "Fast Shrink( 3 ) Scale( %1, %2, ScaleMin)" ).arg( wid ).arg( hei );
-            odebug << "Load jpeg scaled \"" << param << "\"" << oendl;
-            iio.setParameters(param.latin1());
-            setImageScaledLoaded(true);
+            if ( (scanned && (wid<xf.getWidth()||hei<xf.getHeight()))||!scanned ) {
+                param = QString( "Fast Shrink( 3 ) Scale( %1, %2, ScaleMin)" ).arg( wid ).arg( hei );
+                odebug << "Load jpeg scaled \"" << param << "\"" << oendl;
+                iio.setParameters(param.latin1());
+                setImageScaledLoaded(true);
+            }
+
             real_load = true;
         }
     } else {

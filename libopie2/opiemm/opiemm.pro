@@ -1,8 +1,8 @@
 TEMPLATE    = lib
 CONFIG      += qt warn_on 
 DESTDIR     = $(OPIEDIR)/lib
-HEADERS     = osoundsystem.h oimagezoomer.h oimagescrollview.h
-SOURCES     = osoundsystem.cpp oimagezoomer.cpp oimagescrollview.cpp
+HEADERS     = osoundsystem.h oimagezoomer.h oimagescrollview.h opieexif.h
+SOURCES     = osoundsystem.cpp oimagezoomer.cpp oimagescrollview.cpp opieexif.cpp
 INTERFACES  =
 TARGET      = opiemm2
 VERSION     = 1.9.0
