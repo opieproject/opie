@@ -38,6 +38,7 @@ extern "C" {
 #include <qmessagebox.h>
 #include <qlineedit.h>
 #include <qlistbox.h>
+#include <qvbox.h>
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -60,12 +61,18 @@ static int log_progress(netbuf *, int xfered, void *)
 OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
         : QMainWindow( parent,  name, fl )
 {
+    qDebug("OpieFtp constructor");
     setCaption( tr( "OpieFtp" ) );
     fuckeduphack=FALSE;
-    QGridLayout *layout = new QGridLayout( this );
+
+    QVBox* wrapperBox = new QVBox( this );
+    setCentralWidget( wrapperBox );
+
+    QWidget *view = new QWidget( wrapperBox );
+
+    QGridLayout *layout = new QGridLayout( view );
     layout->setSpacing( 2);
     layout->setMargin( 2);
-
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     QMenuBar *menuBar = new QMenuBar(this);
@@ -82,7 +89,9 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     remoteMenu  = new QPopupMenu( this );
     tabMenu = new QPopupMenu( this );
 
+#if 0
     layout->addMultiCellWidget( menuBar, 0, 0, 0, 2 );
+#endif
 
     menuBar->insertItem( tr( "Connection" ), connectionMenu);
 //      menuBar->insertItem( tr( "Local" ), localMenu);
@@ -120,28 +129,27 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     tabMenu->setCheckable(TRUE);
 
 
-
-    cdUpButton = new QToolButton( this,"cdUpButton");
+    cdUpButton = new QToolButton( view,"cdUpButton");
     cdUpButton->setPixmap(Resource::loadPixmap("up"));
     cdUpButton ->setFixedSize( QSize( 20, 20 ) );
     connect( cdUpButton ,SIGNAL(released()),this,SLOT( upDir()) );
     layout->addMultiCellWidget( cdUpButton, 0, 0, 3, 3 );
     cdUpButton->hide();
 
-//     docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
+//     docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",view,"docsButton");
 //     docButton->setFixedSize( QSize( 20, 20 ) );
 //     connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
 //     docButton->setFlat(TRUE);
 //     layout->addMultiCellWidget( docButton, 0, 0, 6, 6 );
 
-    homeButton = new QToolButton(this,"homeButton");
+    homeButton = new QToolButton(view,"homeButton");
     homeButton->setPixmap( Resource::loadPixmap("home"));
     homeButton->setFixedSize( QSize( 20, 20 ) );
     connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
     layout->addMultiCellWidget( homeButton, 0, 0, 4, 4);
      homeButton->hide();
 
-    TabWidget = new QTabWidget( this, "TabWidget" );
+    TabWidget = new QTabWidget( view, "TabWidget" );
     layout->addMultiCellWidget( TabWidget, 1, 1, 0, 4 );
 
 //     TabWidget->setTabShape(QTabWidget::Triangular);
@@ -291,36 +299,42 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
 
     TabWidget->insertTab( tab_3, tr( "Config" ) );
 
+#if 0
     connect(TabWidget,SIGNAL(currentChanged(QWidget *)),
             this,SLOT(tabChanged(QWidget*)));
+#endif
 
     currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
     currentDir.setPath( QDir::currentDirPath());
 //      currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
 
-    currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
+    currentPathCombo = new QComboBox( FALSE, view, "currentPathCombo" );
     layout->addMultiCellWidget( currentPathCombo, 3, 3, 0, 4);
    currentPathCombo ->setFixedWidth(220);
     currentPathCombo->setEditable(TRUE);
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
 
+#if 0
     connect( currentPathCombo, SIGNAL( activated( const QString & ) ),
               this, SLOT(  currentPathComboActivated( const QString & ) ) );
 
     connect( currentPathCombo->lineEdit(),SIGNAL(returnPressed()),
              this,SLOT(currentPathComboChanged()));
-
-    ProgressBar = new QProgressBar( this, "ProgressBar" );
+#endif
+    ProgressBar = new QProgressBar( view, "ProgressBar" );
     layout->addMultiCellWidget( ProgressBar, 4, 4, 0, 4);
     ProgressBar->setMaximumHeight(10);
     filterStr="*";
     b=FALSE;
+#if 0
     populateLocalView();
+#endif
     readConfig();
 
 //    ServerComboBox->setCurrentItem(currentServerConfig);
 
     TabWidget->setCurrentPage(2);
+	qDebug("Constructor done");
 }
 
 OpieFtp::~OpieFtp()
@@ -650,20 +664,20 @@ void OpieFtp::populateLocalView()
     while ( (fi=it.current()) ) {
         if (fi->isSymLink() ){
             QString symLink=fi->readLink();
-//         qDebug("Symlink detected "+symLink);
+         qDebug("Symlink detected "+symLink);
             QFileInfo sym( symLink);
             fileS.sprintf( "%10i", sym.size() );
             fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.absFilePath().data() );
             fileDate = sym.lastModified().toString();
         } else {
-//        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
+        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
             fileS.sprintf( "%10i", fi->size() );
             fileL.sprintf( "%s",fi->fileName().data() );
             fileDate= fi->lastModified().toString();
             if( QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+fileL)).exists() ) {
                 fileL+="/";
                 isDir=TRUE;
-//     qDebug( fileL);
+     qDebug( fileL);
             }
         }
         if(fileL !="./" && fi->exists()) {
