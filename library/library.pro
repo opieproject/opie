@@ -130,6 +130,7 @@ VERSION		= 1.5.0
 TRANSLATIONS = ../i18n/de/libqpe.ts
 TRANSLATIONS += ../i18n/pt_BR/libqpe.ts
 TRANSLATIONS   += ../i18n/en/libqpe.ts
+TRANSLATIONS   += ../i18n/sl/libqpe.ts
 TRANSLATIONS   += ../i18n/hu/libqpe.ts
 TRANSLATIONS   += ../i18n/ja/libqpe.ts
 TRANSLATIONS   += ../i18n/ko/libqpe.ts

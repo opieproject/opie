@@ -13,6 +13,7 @@ TARGET		= calculator
 TRANSLATIONS    = ../i18n/pt_BR/calculator.ts
 TRANSLATIONS   += ../i18n/de/calculator.ts
 TRANSLATIONS   += ../i18n/en/calculator.ts
+TRANSLATIONS   += ../i18n/sl/calculator.ts
 TRANSLATIONS   += ../i18n/hu/calculator.ts
 TRANSLATIONS   += ../i18n/ja/calculator.ts
 TRANSLATIONS   += ../i18n/fr/calculator.ts

@@ -14,6 +14,7 @@ TRANSLATIONS = ../i18n/de/clock.ts
 TRANSLATIONS += ../i18n/pt_BR/clock.ts
 TRANSLATIONS   += ../i18n/en/clock.ts
 TRANSLATIONS   += ../i18n/hu/clock.ts
+TRANSLATIONS   += ../i18n/sl/clock.ts
 TRANSLATIONS   += ../i18n/ja/clock.ts
 TRANSLATIONS   += ../i18n/ko/clock.ts
 TRANSLATIONS   += ../i18n/fr/clock.ts

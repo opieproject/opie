@@ -47,6 +47,7 @@ TRANSLATIONS   += ../../i18n/de/drawpad.ts
 TRANSLATIONS   += ../../i18n/en/drawpad.ts
 TRANSLATIONS   += ../../i18n/hu/drawpad.ts
 TRANSLATIONS   += ../../i18n/ja/drawpad.ts
+TRANSLATIONS   += ../../i18n/sl/drawpad.ts
 TRANSLATIONS   += ../../i18n/fr/drawpad.ts
 TRANSLATIONS   += ../../i18n/ko/drawpad.ts
 TRANSLATIONS   += ../../i18n/no/drawpad.ts

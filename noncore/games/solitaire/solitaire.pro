@@ -20,6 +20,7 @@ TRANSLATIONS += ../i18n/pt_BR/patience.ts
 TRANSLATIONS   += ../i18n/en/patience.ts
 TRANSLATIONS   += ../i18n/hu/patience.ts
 TRANSLATIONS   += ../i18n/ja/patience.ts
+TRANSLATIONS   += ../i18n/sl/patience.ts
 TRANSLATIONS   += ../i18n/ko/patience.ts
 TRANSLATIONS   += ../i18n/no/patience.ts
 TRANSLATIONS   += ../i18n/fr/patience.ts

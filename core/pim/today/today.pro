@@ -14,6 +14,7 @@ TRANSLATIONS    = ../i18n/pt_BR/today.ts
 TRANSLATIONS   += ../i18n/de/today.ts
 TRANSLATIONS   += ../i18n/en/today.ts
 TRANSLATIONS   += ../i18n/hu/today.ts
+TRANSLATIONS   += ../i18n/sl/today.ts
 TRANSLATIONS   += ../i18n/ja/today.ts
 TRANSLATIONS   += ../i18n/ko/today.ts
 TRANSLATIONS   += ../i18n/no/today.ts
