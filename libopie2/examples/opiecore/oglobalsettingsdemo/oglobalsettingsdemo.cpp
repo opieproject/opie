@@ -1,5 +1,5 @@
 #include <opie2/oglobalsettings.h>
-#include <iostream>
+#include <stdio.h>
 
 using namespace Opie::Core;
 
