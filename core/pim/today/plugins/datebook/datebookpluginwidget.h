@@ -17,14 +17,17 @@
 #ifndef DATEBOOK_PLUGIN_WIDGET_H
 #define DATEBOOK_PLUGIN_WIDGET_H
 
+#include "datebookevent.h"
+
+#include <opie2/oclickablelabel.h>
+
+#include <qpe/datebookdb.h>
+
 #include <qlayout.h>
 #include <qguardedptr.h>
 #include <qlist.h>
 
-#include <qpe/datebookdb.h>
-#include <opie/oclickablelabel.h>
-
-#include "datebookevent.h"
+using namespace Opie; 
 
 class DatebookPluginWidget :  public QWidget {
 

@@ -17,11 +17,11 @@
 #ifndef TODOLIST_PLUGIN_CONFIG_H
 #define TODOLIST_PLUGIN_CONFIG_H
 
-#include <qspinbox.h>
-
-#include <opie/todayconfigwidget.h>
-
 #include "todopluginconfigbase.h"
+
+#include <opie2/todayconfigwidget.h>
+
+#include <qspinbox.h>
 
 class TodolistPluginConfig : public TodayConfigWidget {
     Q_OBJECT

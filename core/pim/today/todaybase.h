@@ -1,7 +1,7 @@
 /*
  * todaybase.h
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003, 2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -17,8 +17,9 @@
 #ifndef TODAYBASE_H
 #define TODAYBASE_H
 
+#include <opie2/oclickablelabel.h>
+
 #include <qlayout.h>
-#include <opie/oclickablelabel.h>
 
 class QVBox;
 class QGridLayout;
@@ -26,6 +27,9 @@ class QFrame;
 class QLabel;
 class QPushButton;
 class QBoxLayout;
+
+
+using namespace Opie;
 
 
 class TodayBase : public QWidget
@@ -39,16 +43,13 @@ public:
     QFrame* Frame4;
     QPushButton* DatesButton;
     QVBoxLayout* layout;
-    OClickableLabel* OwnerField;
+    Opie::OClickableLabel* OwnerField;
     QLabel* Frame;
     QLabel* DateLabel;
     QFrame* Frame15;
     QLabel* Opiezilla;
     QLabel* TodayLabel;
     OClickableLabel* ConfigButton;
-
-protected:
-
 
 };
 

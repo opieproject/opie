@@ -19,7 +19,9 @@
 
 #include <qlayout.h>
 
-#include <opie/oclickablelabel.h>
+#include <opie2/oclickablelabel.h>
+
+using namespace Opie;
 
 class MailPluginWidget : public QWidget {
 

@@ -4,7 +4,7 @@
  * ---------------------
  *
  * begin       : Sun 10 17:20:00 CEST 2002
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003, 2004 by Maximilian Reiﬂ
  * email       : max.reiss@gmx.de
  *
  */
@@ -18,6 +18,7 @@
  ***************************************************************************/
 
 #include "today.h"
-#include <opie/oapplicationfactory.h>
+
+#include <opie2/oapplicationfactory.h>
 
 OPIE_EXPORT_APP( OApplicationFactory<Today> )

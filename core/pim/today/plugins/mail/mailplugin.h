@@ -18,13 +18,16 @@
 #ifndef MAIL_PLUGIN_H
 #define MAIL_PLUGIN_H
 
+#include "mailpluginwidget.h"
+
+#include <opie2/todayplugininterface.h>
+#include <opie2/todayconfigwidget.h>
+
 #include <qwidget.h>
 #include <qguardedptr.h>
 
-#include <opie/todayplugininterface.h>
-#include <opie/todayconfigwidget.h>
 
-#include "mailpluginwidget.h"
+
 
 class MailPlugin : public TodayPluginObject {
 

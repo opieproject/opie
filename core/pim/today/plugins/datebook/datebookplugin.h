@@ -17,12 +17,12 @@
 #ifndef DATEBOOK_PLUGIN_H
 #define DATEBOOK_PLUGIN_H
 
-#include <qguardedptr.h>
-
-#include <opie/oclickablelabel.h>
-#include <opie/todayplugininterface.h>
-
 #include "datebookpluginwidget.h"
+
+#include <opie2/oclickablelabel.h>
+#include <opie2/todayplugininterface.h>
+
+#include <qguardedptr.h>
 
 class DatebookPlugin : public TodayPluginObject {
 

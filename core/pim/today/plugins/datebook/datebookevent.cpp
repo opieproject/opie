@@ -1,7 +1,7 @@
 /*
  * datebookevent.cpp
  *
- * copyright   : (c) 2002, 2003 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003, 2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -15,11 +15,12 @@
  ***************************************************************************/
 
 #include "datebookevent.h"
+
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/calendar.h>
 
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 using namespace Opie;
 

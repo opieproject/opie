@@ -1,7 +1,7 @@
 /*
  * datebookpluginimpl.h
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003, 2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -17,7 +17,7 @@
 #ifndef DATEBOOK_PLUGIN_IMPL_H
 #define DATEBOOK_PLUGIN_IMPL_H
 
-#include <opie/todayplugininterface.h>
+#include <opie2/todayplugininterface.h>
 
 class DatebookPlugin;
 

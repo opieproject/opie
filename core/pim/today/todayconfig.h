@@ -1,7 +1,7 @@
 /*
  * todayconfig.h
  *
- * copyright   : (c) 2002,2003 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003, 2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -17,13 +17,13 @@
 #ifndef TODAYCONFIG_H
 #define TODAYCONFIG_H
 
+#include "todayconfigmiscbase.h"
+
+#include <opie2/otabwidget.h>
+
 #include <qvariant.h>
 #include <qdialog.h>
 #include <qlistview.h>
-#include <opie/otabwidget.h>
-
-
-#include "todayconfigmiscbase.h"
 
 class QCheckBox;
 class QLabel;

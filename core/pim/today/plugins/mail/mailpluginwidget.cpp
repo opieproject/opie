@@ -13,11 +13,10 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+#include "mailpluginwidget.h"
 
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
-
-#include "mailpluginwidget.h"
 
 MailPluginWidget::MailPluginWidget( QWidget *parent,  const char* name)
     : QWidget(parent,  name ) {

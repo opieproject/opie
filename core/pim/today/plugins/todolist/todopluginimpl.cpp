@@ -1,7 +1,7 @@
 /*
  * todopluginimpl.cpp
  *
- * copyright   : (c) 2002 by Maximilian Reiß
+ * copyright   : (c) 2002, 2003, 2004 by Maximilian Reiß
  * email       : harlekin@handhelds.org
  *
  */
@@ -36,7 +36,7 @@ QRESULT TodolistPluginImpl::queryInterface( const QUuid & uuid,  QUnknownInterfa
         *iface = this, (*iface)->addRef();
     }else
 	return QS_FALSE;
-	
+
     return QS_OK;
 
 }

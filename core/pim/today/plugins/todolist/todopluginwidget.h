@@ -19,9 +19,10 @@
 
 #include <qlayout.h>
 
-#include <opie/otodoaccess.h>
-#include <opie/oclickablelabel.h>
+#include <opie2/otodoaccess.h>
+#include <opie2/oclickablelabel.h>
 
+using namespace Opie; 
 
 class TodolistPluginWidget : public QWidget {
 
@@ -41,9 +42,9 @@ private:
     OClickableLabel *todoLabel;
     QVBoxLayout* layoutTodo;
 
-    OTodoAccess *todo;
-    OTodoAccess::List m_list;
-    OTodoAccess::List::Iterator m_it;
+    OPimTodoAccess *todo;
+    OPimTodoAccess::List m_list;
+    OPimTodoAccess::List::Iterator m_it;
 
     void readConfig();
     void getTodo();

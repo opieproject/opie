@@ -29,7 +29,7 @@ TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name )
     if ( todo ) {
         delete todo;
     }
-    todo = new OTodoAccess();
+    todo = new OPimTodoAccess();
     todo->load();
 
     if ( layoutTodo ) {

@@ -1,7 +1,7 @@
 /*
  * datebookpluginconfig.h
  *
- * copyright   : (c) 2002,2003 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003,2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -17,13 +17,16 @@
 #ifndef DATEBOOK_PLUGIN_CONFIG_H
 #define DATEBOOK_PLUGIN_CONFIG_H
 
+#include "datebookpluginconfigbase.h"
+
+#include <opie2/todayconfigwidget.h>
 
 #include <qcheckbox.h>
 #include <qspinbox.h>
 
-#include <opie/todayconfigwidget.h>
 
-#include "datebookpluginconfigbase.h"
+
+
 
 class DatebookPluginConfig : public TodayConfigWidget  {
 

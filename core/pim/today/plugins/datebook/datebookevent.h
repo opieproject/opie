@@ -1,7 +1,7 @@
 /*
  * datebookplugin.h
  *
- * copyright   : (c) 2002, 2003 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003, 2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -17,9 +17,11 @@
 #ifndef DATEBOOKEVENT_PLUGIN_H
 #define DATEBOOKEVENT_PLUGIN_H
 
-#include <opie/oclickablelabel.h>
+#include <opie2/oclickablelabel.h>
+
 #include <qpe/datebookdb.h>
 
+using namespace Opie; 
 
 class DateBookEvent: public OClickableLabel {
 

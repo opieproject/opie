@@ -1,7 +1,7 @@
 /*
  * todaybase.cpp
  *
- * copyright   : (c) 2002, 2003 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003, 2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -16,11 +16,10 @@
 
 #include "todaybase.h"
 
-#include <qvbox.h>
-#include <qwhatsthis.h>
-
 #include <qpe/resource.h>
 
+#include <qvbox.h>
+#include <qwhatsthis.h>
 
 TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
     : QWidget( parent, name, WStyle_ContextHelp ) {

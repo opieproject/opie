@@ -1,8 +1,7 @@
-
 /*
  * datebookplugin.cpp
  *
- * copyright   : (c) 2002,2003 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003, 2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -14,8 +13,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-
-
 
 #include "datebookplugin.h"
 #include "datebookpluginconfig.h"

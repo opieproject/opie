@@ -1,7 +1,7 @@
 /*
  * today.h
  *
- * copyright   : (c) 2002,2003 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003,2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -13,24 +13,24 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-
-
 #ifndef TODAY_H
 #define TODAY_H
 
-#include <qscrollview.h>
-#include <qvbox.h>
-
-#include <qpe/qlibrary.h>
 
 #include "todayconfig.h"
 #include "todaybase.h"
 
-#include <opie/todayplugininterface.h>
+#include <opie2/todayplugininterface.h>
+#include <opie2/oclickablelabel.h>
 
+#include <qpe/qlibrary.h>
+
+#include <qscrollview.h>
+#include <qvbox.h>
+
+using namespace Opie; 
+ 
 class QVBoxLayout;
-class OClickableLabel;
-
 
 class Today : public TodayBase {
 

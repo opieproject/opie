@@ -1,7 +1,7 @@
 /*
  * todoplugin.h
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003, 2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -17,14 +17,17 @@
 #ifndef TODOLIST_PLUGIN_H
 #define TODOLIST_PLUGIN_H
 
+
+#include "todopluginwidget.h"
+
+#include <opie2/oclickablelabel.h>
+#include <opie2/todayplugininterface.h>
+
 #include <qstring.h>
 #include <qguardedptr.h>
 #include <qwidget.h>
 
-#include <opie/oclickablelabel.h>
-#include <opie/todayplugininterface.h>
-
-#include "todopluginwidget.h"
+using namespace Opie; 
 
 class TodolistPlugin : public TodayPluginObject {
 
