@@ -18,7 +18,12 @@
 **
 **********************************************************************/
 // changes added by L. J. Potter Sun 02-17-2002 21:31:31
-
+/*
+  useAdvancedfeatures =
+  1) do not prompt on cancel, even if text is edited.
+  2) prompt user is .desktop file
+  3) prompt user for File Permissions on saveAs
+ */
 #include "textedit.h"
 #include "filePermissions.h"
 #include "fontDialog.h"
