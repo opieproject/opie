@@ -96,3 +96,4 @@ void StylusNormalizer::stop( void )
     _tExpire->stop();
     bFirst = true;
 }
+
