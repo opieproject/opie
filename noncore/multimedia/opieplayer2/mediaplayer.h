@@ -55,6 +55,7 @@ public:
 
 public slots:
     void recreateAudioAndVideoWidgets();
+    void reloadSkins();
 
 private slots:
     void setPlaying( bool );

@@ -72,6 +72,8 @@ public slots:
     virtual void setLength( long length ) = 0;
     virtual void setPlaying( bool playing ) = 0;
 
+    virtual void loadSkin() = 0;
+
 signals:
     void moreReleased();
     void lessReleased();

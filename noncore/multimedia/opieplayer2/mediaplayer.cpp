@@ -367,3 +367,9 @@ void MediaPlayer::recreateAudioAndVideoWidgets()
     xineControl = new XineControl( videoUI, videoUI->vidWidget(), mediaPlayerState );
 }
 
+void MediaPlayer::reloadSkins()
+{
+    audioUI->loadSkin();
+    videoUI->loadSkin();
+}
+

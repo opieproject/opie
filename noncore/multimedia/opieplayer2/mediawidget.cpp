@@ -45,6 +45,9 @@ void MediaWidget::setupButtons( const SkinButtonInfo *skinInfo, uint buttonCount
     buttonMask = QImage( buttonAreaSize, 8, 255 );
     buttonMask.fill( 0 );
 
+    buttons.clear();
+    buttons.reserve( buttonCount );
+
     for ( uint i = 0; i < buttonCount; ++i ) {
         Button button = setupButton( skinInfo[ i ], imagePrefix );
         buttons.push_back( button );

@@ -88,45 +88,7 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 {
     setCaption( tr("OpiePlayer") );
 
-    Config cfg("OpiePlayer");
-    cfg.setGroup("Options");
-    skin = cfg.readEntry("Skin","default");
-    //skin = "scaleTest";
-    // color of background, frame, degree of transparency
-
-    QString skinPath = "opieplayer2/skins/" + skin;
-    backgroundPixmap = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
-    imgUp = QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
-    imgDn = QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
-
-    setupButtons( skinInfo, buttonCount, QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_", imgUp.size() );
-
-    setBackgroundPixmap( backgroundPixmap );
-
-    songInfo.setFocusPolicy( QWidget::NoFocus );
-//    changeTextColor( &songInfo );
-//    songInfo.setBackgroundColor( QColor( 167, 212, 167 ));
-//    songInfo.setFrameStyle( QFrame::NoFrame);
-    songInfo.setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
-//    songInfo.setForegroundColor(Qt::white);
-
-    slider.setFixedHeight( 20 );
-    slider.setMinValue( 0 );
-    slider.setMaxValue( 1 );
-    slider.setFocusPolicy( QWidget::NoFocus );
-    slider.setBackgroundPixmap( backgroundPixmap );
-
-//     Config cofg("qpe");
-//     cofg.setGroup("Appearance");
-//     QColor backgroundcolor = QColor( cofg.readEntry( "Background", "#E5E1D5" ) );
-
-    time.setFocusPolicy( QWidget::NoFocus );
-    time.setAlignment( Qt::AlignCenter );
-    
-//    time.setFrame(FALSE);
-//    changeTextColor( &time );
-
-    resizeEvent( NULL );
+    loadSkin();
 
     connect( &mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
     connect( &mediaPlayerState, SIGNAL( isSeekableToggled( bool ) ), this, SLOT( setSeekable( bool ) ) );
@@ -142,7 +104,6 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     setLooping( mediaPlayerState.isFullscreen() );
     //    setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState.isPlaying() );
-
 }
 
 AudioWidget::~AudioWidget() {
@@ -229,6 +190,48 @@ void AudioWidget::setDisplayType( MediaPlayerState::DisplayType mediaType ) {
     hide();
 }
 
+void AudioWidget::loadSkin()
+{
+    Config cfg("OpiePlayer");
+    cfg.setGroup("Options");
+    skin = cfg.readEntry("Skin","default");
+    //skin = "scaleTest";
+    // color of background, frame, degree of transparency
+
+    QString skinPath = "opieplayer2/skins/" + skin;
+    backgroundPixmap = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
+    imgUp = QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
+    imgDn = QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
+
+    setupButtons( skinInfo, buttonCount, QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_", imgUp.size() );
+
+    setBackgroundPixmap( backgroundPixmap );
+
+    songInfo.setFocusPolicy( QWidget::NoFocus );
+//    changeTextColor( &songInfo );
+//    songInfo.setBackgroundColor( QColor( 167, 212, 167 ));
+//    songInfo.setFrameStyle( QFrame::NoFrame);
+    songInfo.setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
+//    songInfo.setForegroundColor(Qt::white);
+
+    slider.setFixedHeight( 20 );
+    slider.setMinValue( 0 );
+    slider.setMaxValue( 1 );
+    slider.setFocusPolicy( QWidget::NoFocus );
+    slider.setBackgroundPixmap( backgroundPixmap );
+
+//     Config cofg("qpe");
+//     cofg.setGroup("Appearance");
+//     QColor backgroundcolor = QColor( cofg.readEntry( "Background", "#E5E1D5" ) );
+
+    time.setFocusPolicy( QWidget::NoFocus );
+    time.setAlignment( Qt::AlignCenter );
+    
+//    time.setFrame(FALSE);
+//    changeTextColor( &time );
+
+    resizeEvent( 0 );
+}
 
 void AudioWidget::setSeekable( bool isSeekable ) {
 

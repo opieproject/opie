@@ -68,6 +68,8 @@ public:
     virtual void setPlaying( bool b) { setToggleButton( Play, b ); }
     virtual void setDisplayType( MediaPlayerState::DisplayType displayType );
 
+    virtual void loadSkin();
+
 signals:
     void sliderMoved(long);
 

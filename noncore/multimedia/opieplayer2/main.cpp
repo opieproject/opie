@@ -12,7 +12,7 @@ int main(int argc, char **argv) {
     pl.showMaximized();
     MediaPlayer mp( pl, st, 0, "mediaPlayer" );
     QObject::connect( &pl, SIGNAL( skinSelected() ),
-                      &mp, SLOT( recreateAudioAndVideoWidgets() ) );
+                      &mp, SLOT( reloadSkins() ) );
 
     a.showMainDocumentWidget(&pl);
 

@@ -79,32 +79,14 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 {
     setCaption( tr("OpiePlayer - Video") );
 
-
     videoFrame = new XineVideoWidget ( this, "Video frame" );
 
     connect ( videoFrame, SIGNAL( videoResized ( const QSize & )), this, SIGNAL( videoResized ( const QSize & )));
     connect ( videoFrame,  SIGNAL( clicked () ),  this,  SLOT ( backToNormal() ) );
 
-    Config cfg("OpiePlayer");
-    cfg.setGroup("Options");
-    skin = cfg.readEntry("Skin","default");
+    slider = 0;
 
-    QString skinPath = "opieplayer2/skins/" + skin;
-    backgroundPixmap = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
-    imgUp = QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
-    imgDn = QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
-
-    setupButtons( skinInfo, buttonCount, QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skinV_mask_", imgUp.size() );
-
-    setBackgroundPixmap( backgroundPixmap );
-
-    slider = new QSlider( Qt::Horizontal, this );
-    slider->setMinValue( 0 );
-    slider->setMaxValue( 1 );
-    slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
-    //slider->setFocusPolicy( QWidget::NoFocus );
-
-    resizeEvent( NULL );
+    loadSkin();
 
     setLength( mediaPlayerState.length() );
     setPosition( mediaPlayerState.position() );
@@ -199,6 +181,31 @@ void VideoWidget::setDisplayType( MediaPlayerState::DisplayType displayType )
     scaledWidth = 0;
     scaledHeight = 0;
     hide();
+}
+
+void VideoWidget::loadSkin()
+{
+    Config cfg("OpiePlayer");
+    cfg.setGroup("Options");
+    skin = cfg.readEntry("Skin","default");
+
+    QString skinPath = "opieplayer2/skins/" + skin;
+    backgroundPixmap = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
+    imgUp = QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
+    imgDn = QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
+
+    setupButtons( skinInfo, buttonCount, QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skinV_mask_", imgUp.size() );
+
+    setBackgroundPixmap( backgroundPixmap );
+
+    delete slider;
+    slider = new QSlider( Qt::Horizontal, this );
+    slider->setMinValue( 0 );
+    slider->setMaxValue( 1 );
+    slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
+    //slider->setFocusPolicy( QWidget::NoFocus );
+
+    resizeEvent( 0 );
 }
 
 void VideoWidget::updateSlider( long i, long max ) {

@@ -66,6 +66,8 @@ public:
     virtual void setLength( long );
     virtual void setDisplayType( MediaPlayerState::DisplayType displayType );
 
+    virtual void loadSkin();
+
 signals:
     void moreClicked();
     void lessClicked();
