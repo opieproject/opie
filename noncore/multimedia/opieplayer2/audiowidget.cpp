@@ -41,7 +41,7 @@
 #include <qpainter.h>
 #include <qframe.h>
 #include <qlayout.h>
-
+#include <qdir.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -253,9 +253,9 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     int h = height();
     int w = width();
 
-    songInfo.setGeometry( QRect( 2, 10, w - 4, 20 ) );
+    songInfo.setGeometry( QRect( 2, 2, w - 4, 20 ) );
     slider.setFixedWidth( w - 110 );
-    slider.setGeometry( QRect( 15, h - 30, w - 90, 20 ) );
+    slider.setGeometry( QRect( 15, h - 22, w - 90, 20 ) );
     slider.setBackgroundOrigin( QWidget::ParentOrigin );
     time.setGeometry( QRect( w - 85, h - 30, 70, 20 ) );
 
