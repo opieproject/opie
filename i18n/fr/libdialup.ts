@@ -144,19 +144,19 @@
     </message>
     <message>
         <source>Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Périphérique:</translation>
     </message>
     <message>
         <source>IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>irDA</translation>
     </message>
     <message>
         <source>PCMCIA</source>
-        <translation type="unfinished"></translation>
+        <translation>PCMCIA</translation>
     </message>
     <message>
         <source>Serial</source>
-        <translation type="unfinished"></translation>
+        <translation>Serial</translation>
     </message>
 </context>
 <context>

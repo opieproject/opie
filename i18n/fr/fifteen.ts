@@ -33,7 +33,7 @@ Vous avez gagné !</translation>
     </message>
     <message>
         <source>R&amp;andomize Pieces</source>
-        <translation>&amp;Mélanger les pièces</translation>
+        <translation>Mél&amp;anger les pièces</translation>
     </message>
     <message>
         <source>&amp;Reset Pieces</source>

@@ -1,31 +1,32 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>GroupDialog</name>
     <message>
         <source>Add Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un groupe</translation>
     </message>
     <message>
         <source>Edit Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer un groupe</translation>
     </message>
 </context>
 <context>
     <name>UserConfig</name>
     <message>
         <source>OPIE User Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestion des Utilisateurs OPIE </translation>
     </message>
 </context>
 <context>
     <name>UserDialog</name>
     <message>
         <source>Add User</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un utilisateur</translation>
     </message>
     <message>
         <source>Edit User</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer un utilisateur</translation>
     </message>
 </context>
 </TS>
