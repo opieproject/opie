@@ -148,7 +148,7 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
         while( !ts.eof() )
         {
             QString machline = ts.readLine();
-            odebug << "sysinfo: parsing benchmark results for '" << machline << "'" << oendl; 
+            odebug << "sysinfo: parsing benchmark results for '" << machline << "'" << oendl;
             QString resline = ts.readLine();
             machines.insert( machline, new QStringList( QStringList::split( ",", resline ) ) );
             machineCombo->insertItem( machline );
@@ -173,7 +173,7 @@ void BenchmarkInfo::machineActivated( int index )
     QStringList* results = machines[ machineCombo->text( index ) ];
     if ( !results )
     {
-        odebug << "sysinfo: no results available." << oendl; 
+        odebug << "sysinfo: no results available." << oendl;
         return;
     }
     QStringList::Iterator it = results->begin();
@@ -196,7 +196,7 @@ void BenchmarkInfo::run()
     if ( test_alu->isOn() )
     {
         int d = round( dhry_main( DHRYSTONE_RUNS ) );
-        test_alu->setText( 1, QString( "%1 dhrys" ).arg( QString::number( d ) ) );
+        test_alu->setText( 1, QString().sprintf( "%d dhrys", d ) );
         test_alu->setOn( false );
     }
 
@@ -204,21 +204,21 @@ void BenchmarkInfo::run()
     {
         t.start();
         BenchFFT();
-        test_fpu->setText( 1, QString( "%1 secs" ).arg( QString::number( t.elapsed() / 1000.0 ) ) );
+        test_fpu->setText( 1, QString().sprintf( "%.2f secs", t.elapsed() / 1000.0 ) );;
         test_fpu->setOn( false );
     }
 
     if ( test_txt->isOn() )
     {
         int value = textRendering( TEST_DURATION );
-        test_txt->setText( 1, QString( "%1 chars/sec" ).arg( QString::number( value / TEST_DURATION ) ) );
+        test_txt->setText( 1, QString().sprintf( "%d chars/sec", value / TEST_DURATION ) );
         test_txt->setOn( false );
     }
 
     if ( test_gfx->isOn() )
     {
         int value = gfxRendering( TEST_DURATION );
-        test_gfx->setText( 1, QString( "%1 gops/sec" ).arg( QString::number( value / 4 / TEST_DURATION ) ) ); // 4 tests
+        test_gfx->setText( 1, QString().sprintf( "%.2f gops/sec", value / 4 / TEST_DURATION ) ); // 4 tests
         test_gfx->setOn( false );
     }
 
@@ -340,141 +340,50 @@ int BenchmarkInfo::gfxRendering( int seconds )
 
 }
 
+const unsigned int FILE_TEST_COUNT = 8000;
+const unsigned int FILE_TEST_BLOCKSIZE = 1024;
+
 void BenchmarkInfo::performFileTest( const QString& fname, OCheckListItem* item )
 {
+    QString filename = fname == "/benchmarkFile.dat" ? QString( "/tmp/bla" ) : fname;
+    odebug << "performing file test on " << filename << oendl;
+
+    QString writeCommand = QString( "dd if=/dev/zero of=%1 count=%2 bs=%3 && sync" ).arg( filename )
+                                                                                  .arg( FILE_TEST_COUNT )
+                                                                                  .arg( FILE_TEST_BLOCKSIZE );
+    QString readCommand = QString( "dd if=%1 of=/dev/null count=%2 bs=%3").arg( filename )
+                                                                                  .arg( FILE_TEST_COUNT )
+                                                                                  .arg( FILE_TEST_BLOCKSIZE );
+    ::system( "sync" );
+    odebug << "performing file test on " << filename << oendl;
+
+    int write = 0;
+    int read = 0;
+
     QTime time;
     time.start();
-    if ( writeFile( fname ) &&
-            readFile( fname ) )
+    if ( ::system( writeCommand ) == 0 )
     {
-        QFile::remove( fname );
-        item->setText( 1, QString( "%1 kb/sec" ).arg( QString::number( 1024.0 / ( time.elapsed() / 1000.0 ) ) ) );
-        item->setOn( false );
+        write = time.elapsed();
     }
     else
     {
         item->setText( 1, tr( "error" ) );
+        return;
     }
-}
 
-char FileBuf[ BUFF_SIZE + 1 ];
-
-bool BenchmarkInfo::writeFile( const QString& w_path )
-{
-    int i;
-    int k;
-    int n;
-    int pos;
-    int len;
-    char *data = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 62
-
-
-    // /*------------------------------------
-    int w_len;
-
-    QFile writeFile( w_path );
-    srand( time( NULL ) );
-
-    for ( n = 0 ; n < 20 ; n++ )
+    time.restart();
+    if ( ::system( readCommand ) == 0 )
     {
-        if ( ! writeFile.open( IO_WriteOnly ) )
-        {
-            writeFile.close();
-            writeFile.remove();
-            return ( false );
-        }
-        // ------------------------------------------ sequential write
-        for ( k = 0 ; k < 256 ; k++ )
-        {
-            n = rand() % 30;
-            memcpy( &FileBuf[ k * 32 ], &data[ n ], 32 );
-        }
-
-        for ( i = 0 ; i < FILE_SIZE / BUFF_SIZE ; i++ )
-        {
-            w_len = writeFile.writeBlock( FileBuf, BUFF_SIZE );
-            if ( w_len != BUFF_SIZE )
-            {
-                writeFile.close();
-                writeFile.remove();
-                return ( false );
-            }
-            writeFile.flush();
-        }
-        // ------------------------------------------ random write
-        for ( i = 0 ; i < 400 ; i++ )
-        {
-            len = rand() % 90 + 4000;
-            for ( k = 0 ; k < 128 ; k++ )
-            {
-                n = rand() % 30;
-                memcpy( &FileBuf[ k * 8 ], &data[ n ], 32 );
-            }
-            pos = rand() % ( FILE_SIZE - BUFF_SIZE );
-
-            writeFile.at( pos );
-            w_len = writeFile.writeBlock( FileBuf, len );
-            if ( w_len != len )
-            {
-                writeFile.close();
-                writeFile.remove();
-                return ( false );
-            }
-            writeFile.flush();
-        }
-        writeFile.close();
+        read = time.elapsed();
     }
-    return ( true );
-
-}
-
-
-bool BenchmarkInfo::readFile( const QString& r_path )
-{
-    int i;
-    int k;
-    int len;
-    int pos;
-    int r_len;
-
-    QFile readFile( r_path );
-    srand( time( NULL ) );
-
-    for ( k = 0 ; k < 200 ; k++ )
+    else
     {
-        if ( ! readFile.open( IO_ReadOnly ) )
-        {
-            readFile.remove();
-            return ( false );
-        }
-        // ------------------------------------------ sequential read
-        readFile.at( 0 );
-        for ( i = 0 ; i < FILE_SIZE / BUFF_SIZE ; i++ )
-        {
-            readFile.at( i * BUFF_SIZE );
-            r_len = readFile.readBlock( FileBuf, BUFF_SIZE );
-            if ( r_len != BUFF_SIZE )
-            {
-                readFile.close();
-                readFile.remove();
-                return ( false );
-            }
-        }
-        // ------------------------------------------ random read
-        for ( i = 0 ; i < 1000 ; i++ )
-        {
-            len = rand() % 120 + 8;
-            pos = rand() % ( FILE_SIZE / BUFF_SIZE - BUFF_SIZE );
-            readFile.at( pos );
-            r_len = readFile.readBlock( FileBuf, len );
-            if ( r_len != len )
-            {
-                readFile.close();
-                readFile.remove();
-                return ( false );
-            }
-        }
-        readFile.close();
+        item->setText( 1, tr( "error" ) );
+        return;
     }
-    return ( true );
+
+    QFile::remove( filename );
+    item->setText( 1, QString().sprintf( "%.2f kb/s, %.2f kb/s", FILE_TEST_COUNT / ( read / 1000.0 ), FILE_TEST_COUNT / ( write / 1000.0 ) ) );
+    item->setOn( false );
 }

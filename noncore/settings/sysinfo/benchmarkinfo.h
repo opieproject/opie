@@ -61,8 +61,6 @@ public:
     void performFileTest( const QString& fname, Opie::Ui::OCheckListItem* item );
 
 private slots:
-    bool writeFile( const QString& );
-    bool readFile( const QString& );
     void run();
     void machineActivated( int );
 };
