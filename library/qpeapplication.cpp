@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.19 2002-09-10 14:27:11 zecke Exp $
+** $Id: qpeapplication.cpp,v 1.20 2002-09-25 16:26:19 llornkcor Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -88,145 +88,145 @@
 
 class QPEApplicationData {
 public:
-	QPEApplicationData() : presstimer( 0 ), presswidget( 0 ), rightpressed( FALSE ),
-			kbgrabber( 0 ), kbregrab( FALSE ), notbusysent( FALSE ), preloaded( FALSE ),
-			forceshow( FALSE ), nomaximize( FALSE ), qpe_main_widget( 0 ),
-			keep_running( TRUE )
-	{
-		qcopq.setAutoDelete( TRUE );
-	}
+  QPEApplicationData() : presstimer( 0 ), presswidget( 0 ), rightpressed( FALSE ),
+      kbgrabber( 0 ), kbregrab( FALSE ), notbusysent( FALSE ), preloaded( FALSE ),
+      forceshow( FALSE ), nomaximize( FALSE ), qpe_main_widget( 0 ),
+      keep_running( TRUE )
+  {
+    qcopq.setAutoDelete( TRUE );
+  }
 
-	int presstimer;
-	QWidget* presswidget;
-	QPoint presspos;
+  int presstimer;
+  QWidget* presswidget;
+  QPoint presspos;
         bool rightpressed : 1; // AEH why not use uint foobar :1; if it's tt style -zecke
-	int kbgrabber;
-	bool kbregrab : 1;
-	bool notbusysent : 1;
-	QString appName;
-	struct QCopRec {
+  int kbgrabber;
+  bool kbregrab : 1;
+  bool notbusysent : 1;
+  QString appName;
+  struct QCopRec {
             QCopRec( const QCString &ch, const QCString &msg,
                      const QByteArray &d ) :
                 channel( ch ), message( msg ), data( d ) { }
 
-		QCString channel;
-		QCString message;
-		QByteArray data;
-	};
-	bool preloaded : 1;
-	bool forceshow : 1;
-	bool nomaximize : 1;
-	QWidget* qpe_main_widget;
-	bool keep_running : 1;
-	QList<QCopRec> qcopq;
+    QCString channel;
+    QCString message;
+    QByteArray data;
+  };
+  bool preloaded : 1;
+  bool forceshow : 1;
+  bool nomaximize : 1;
+  QWidget* qpe_main_widget;
+  bool keep_running : 1;
+  QList<QCopRec> qcopq;
 
-	void enqueueQCop( const QCString &ch, const QCString &msg,
-	                  const QByteArray &data )
-	{
-		qcopq.append( new QCopRec( ch, msg, data ) );
-	}
-	void sendQCopQ() {
+  void enqueueQCop( const QCString &ch, const QCString &msg,
+                    const QByteArray &data )
+  {
+    qcopq.append( new QCopRec( ch, msg, data ) );
+  }
+  void sendQCopQ() {
             QCopRec * r;
 #ifndef QT_NO_COP
-		for ( QListIterator<QCopRec> it( qcopq ); ( r = it.current() ); ++it )
-			QCopChannel::sendLocally( r->channel, r->message, r->data );
+    for ( QListIterator<QCopRec> it( qcopq ); ( r = it.current() ); ++it )
+      QCopChannel::sendLocally( r->channel, r->message, r->data );
 #endif
-		qcopq.clear();
-	}
+    qcopq.clear();
+  }
     static void show_mx(QWidget* mw, bool nomaximize) {
-	if ( mw->layout() && mw->inherits("QDialog") ) {
-	    QPEApplication::showDialog((QDialog*)mw,nomaximize);
-	} else {
+  if ( mw->layout() && mw->inherits("QDialog") ) {
+      QPEApplication::showDialog((QDialog*)mw,nomaximize);
+  } else {
 #ifdef Q_WS_QWS
-	    if ( !nomaximize )
-		mw->showMaximized();
-	    else
+      if ( !nomaximize )
+    mw->showMaximized();
+      else
 #endif
-	    mw->show();
-	}
+      mw->show();
+  }
     }
     static bool setWidgetCaptionFromAppName( QWidget* /*mw*/, const QString& /*appName*/, const QString& /*appsPath*/ )
     {
     /*
-	// This works but disable it for now until it is safe to apply
-	// What is does is scan the .desktop files of all the apps for
-	// the applnk that has the corresponding argv[0] as this program
-	// then it uses the name stored in the .desktop file as the caption
-	// for the main widget. This saves duplicating translations for
-	// the app name in the program and in the .desktop files.
+  // This works but disable it for now until it is safe to apply
+  // What is does is scan the .desktop files of all the apps for
+  // the applnk that has the corresponding argv[0] as this program
+  // then it uses the name stored in the .desktop file as the caption
+  // for the main widget. This saves duplicating translations for
+  // the app name in the program and in the .desktop files.
 
-	AppLnkSet apps( appsPath );
+  AppLnkSet apps( appsPath );
 
-	QList<AppLnk> appsList = apps.children();
-	for ( QListIterator<AppLnk> it(appsList); it.current(); ++it ) {
-	    if ( (*it)->exec() == appName ) {
-		mw->setCaption( (*it)->name() );
-		return TRUE;
-	    }
-	}
+  QList<AppLnk> appsList = apps.children();
+  for ( QListIterator<AppLnk> it(appsList); it.current(); ++it ) {
+      if ( (*it)->exec() == appName ) {
+    mw->setCaption( (*it)->name() );
+    return TRUE;
+      }
+  }
     */
-	return FALSE;
+  return FALSE;
     }
 
 
     void show(QWidget* mw, bool nomax)
     {
-	setWidgetCaptionFromAppName( mw, appName, QPEApplication::qpeDir() + "apps" );
-	nomaximize = nomax;
-	qpe_main_widget = mw;
+  setWidgetCaptionFromAppName( mw, appName, QPEApplication::qpeDir() + "apps" );
+  nomaximize = nomax;
+  qpe_main_widget = mw;
 #ifndef QT_NO_COP
-	sendQCopQ();
+  sendQCopQ();
 #endif
-	if ( preloaded ) {
-	    if(forceshow)
-		show_mx(mw,nomax);
-	} else if ( keep_running ) {
-	    show_mx(mw,nomax);
-	}
+  if ( preloaded ) {
+      if(forceshow)
+    show_mx(mw,nomax);
+  } else if ( keep_running ) {
+      show_mx(mw,nomax);
+  }
     }
 
     void loadTextCodecs()
     {
-	QString path = QPEApplication::qpeDir() + "/plugins/textcodecs";
-	QDir dir( path, "lib*.so" );
-	QStringList list = dir.entryList();
-	QStringList::Iterator it;
-	for ( it = list.begin(); it != list.end(); ++it ) {
-	    TextCodecInterface *iface = 0;
-	    QLibrary *lib = new QLibrary( path + "/" + *it );
-	    if ( lib->queryInterface( IID_QtopiaTextCodec, (QUnknownInterface**)&iface ) == QS_OK && iface ) {
-		QValueList<int> mibs = iface->mibEnums();
-		for (QValueList<int>::ConstIterator i=mibs.begin(); i!=mibs.end(); ++i) {
-		    (void)iface->createForMib(*i);
-		    // ### it exists now; need to remember if we can delete it
-		}
-	    } else {
-		lib->unload();
-		delete lib;
-	    }
-	}
+  QString path = QPEApplication::qpeDir() + "/plugins/textcodecs";
+  QDir dir( path, "lib*.so" );
+  QStringList list = dir.entryList();
+  QStringList::Iterator it;
+  for ( it = list.begin(); it != list.end(); ++it ) {
+      TextCodecInterface *iface = 0;
+      QLibrary *lib = new QLibrary( path + "/" + *it );
+      if ( lib->queryInterface( IID_QtopiaTextCodec, (QUnknownInterface**)&iface ) == QS_OK && iface ) {
+    QValueList<int> mibs = iface->mibEnums();
+    for (QValueList<int>::ConstIterator i=mibs.begin(); i!=mibs.end(); ++i) {
+        (void)iface->createForMib(*i);
+        // ### it exists now; need to remember if we can delete it
+    }
+      } else {
+    lib->unload();
+    delete lib;
+      }
+  }
     }
 
     void loadImageCodecs()
     {
-	QString path = QPEApplication::qpeDir() + "/plugins/imagecodecs";
-	QDir dir( path, "lib*.so" );
-	QStringList list = dir.entryList();
-	QStringList::Iterator it;
-	for ( it = list.begin(); it != list.end(); ++it ) {
-	    ImageCodecInterface *iface = 0;
-	    QLibrary *lib = new QLibrary( path + "/" + *it );
-	    if ( lib->queryInterface( IID_QtopiaImageCodec, (QUnknownInterface**)&iface ) == QS_OK && iface ) {
-		QStringList formats = iface->keys();
-		for (QStringList::ConstIterator i=formats.begin(); i!=formats.end(); ++i) {
-		    (void)iface->installIOHandler(*i);
-		    // ### it exists now; need to remember if we can delete it
-		}
-	    } else {
-		lib->unload();
-		delete lib;
-	    }
-	}
+  QString path = QPEApplication::qpeDir() + "/plugins/imagecodecs";
+  QDir dir( path, "lib*.so" );
+  QStringList list = dir.entryList();
+  QStringList::Iterator it;
+  for ( it = list.begin(); it != list.end(); ++it ) {
+      ImageCodecInterface *iface = 0;
+      QLibrary *lib = new QLibrary( path + "/" + *it );
+      if ( lib->queryInterface( IID_QtopiaImageCodec, (QUnknownInterface**)&iface ) == QS_OK && iface ) {
+    QStringList formats = iface->keys();
+    for (QStringList::ConstIterator i=formats.begin(); i!=formats.end(); ++i) {
+        (void)iface->installIOHandler(*i);
+        // ### it exists now; need to remember if we can delete it
+    }
+      } else {
+    lib->unload();
+    delete lib;
+      }
+  }
     }
     QString styleName;
     QString decorationName;
@@ -234,31 +234,31 @@ public:
 
 class ResourceMimeFactory : public QMimeSourceFactory {
 public:
-	ResourceMimeFactory()
-	{
-		setFilePath( Global::helpPath() );
-		setExtensionType( "html", "text/html;charset=UTF-8" );
-	}
+  ResourceMimeFactory()
+  {
+    setFilePath( Global::helpPath() );
+    setExtensionType( "html", "text/html;charset=UTF-8" );
+  }
 
-	const QMimeSource* data( const QString& abs_name ) const
-	{
-		const QMimeSource * r = QMimeSourceFactory::data( abs_name );
-		if ( !r ) {
-			int sl = abs_name.length();
-			do {
-				sl = abs_name.findRev( '/', sl - 1 );
-				QString name = sl >= 0 ? abs_name.mid( sl + 1 ) : abs_name;
-				int dot = name.findRev( '.' );
-				if ( dot >= 0 )
-					name = name.left( dot );
-				QImage img = Resource::loadImage( name );
-				if ( !img.isNull() )
-					r = new QImageDrag( img );
-			}
-			while ( !r && sl > 0 );
-		}
-		return r;
-	}
+  const QMimeSource* data( const QString& abs_name ) const
+  {
+    const QMimeSource * r = QMimeSourceFactory::data( abs_name );
+    if ( !r ) {
+      int sl = abs_name.length();
+      do {
+        sl = abs_name.findRev( '/', sl - 1 );
+        QString name = sl >= 0 ? abs_name.mid( sl + 1 ) : abs_name;
+        int dot = name.findRev( '.' );
+        if ( dot >= 0 )
+          name = name.left( dot );
+        QImage img = Resource::loadImage( name );
+        if ( !img.isNull() )
+          r = new QImageDrag( img );
+      }
+      while ( !r && sl > 0 );
+    }
+    return r;
+  }
 };
 
 static int muted = 0;
@@ -520,7 +520,7 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 
 #endif
 
-//	qwsSetDecoration( new QPEDecoration() );
+//  qwsSetDecoration( new QPEDecoration() );
 
 #ifndef QT_NO_TRANSLATION
 
@@ -545,12 +545,12 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
         else
             delete trans;
 
-       	//###language/font hack; should look it up somewhere
+        //###language/font hack; should look it up somewhere
 #ifdef QWS
-	if ( lang == "ja" || lang == "zh_CN" || lang == "zh_TW" || lang == "ko" ) {
-	    QFont fn = FontManager::unicodeFont( FontManager::Proportional );
-	    setFont( fn );
- 	}
+  if ( lang == "ja" || lang == "zh_CN" || lang == "zh_TW" || lang == "ko" ) {
+      QFont fn = FontManager::unicodeFont( FontManager::Proportional );
+      setFont( fn );
+  }
 #endif
     }
 #endif
@@ -804,10 +804,11 @@ QString QPEApplication::qpeDir()
 
 /*!
   Returns the user's current Document directory. There is a trailing "/".
+  .. well, it does now,, and there's no trailing '/'
 */
 QString QPEApplication::documentDir()
 {
-    return QString( qpeDir() + "Documents");
+    return QString( QDir::homeDirPath() + "/Documents");
 }
 
 static int deforient = -1;
@@ -858,33 +859,33 @@ void QPEApplication::setDefaultRotation( int r )
 */
 void QPEApplication::applyStyle()
 {
-	Config config( "qpe" );
+  Config config( "qpe" );
 
-	config.setGroup( "Appearance" );
+  config.setGroup( "Appearance" );
 
-	// Widget style
-	QString style = config.readEntry( "Style", "Light" );
-	internalSetStyle( style );
+  // Widget style
+  QString style = config.readEntry( "Style", "Light" );
+  internalSetStyle( style );
 
-	// Colors
-	QColor bgcolor( config.readEntry( "Background", "#E5E1D5" ) );
-	QColor btncolor( config.readEntry( "Button", "#D6CDBB" ) );
-	QPalette pal( btncolor, bgcolor );
-	QString color = config.readEntry( "Highlight", "#800000" );
-	pal.setColor( QColorGroup::Highlight, QColor( color ) );
-	color = config.readEntry( "HighlightedText", "#FFFFFF" );
-	pal.setColor( QColorGroup::HighlightedText, QColor( color ) );
-	color = config.readEntry( "Text", "#000000" );
-	pal.setColor( QColorGroup::Text, QColor( color ) );
-	color = config.readEntry( "ButtonText", "#000000" );
-	pal.setColor( QPalette::Active, QColorGroup::ButtonText, QColor( color ) );
-	color = config.readEntry( "Base", "#FFFFFF" );
-	pal.setColor( QColorGroup::Base, QColor( color ) );
+  // Colors
+  QColor bgcolor( config.readEntry( "Background", "#E5E1D5" ) );
+  QColor btncolor( config.readEntry( "Button", "#D6CDBB" ) );
+  QPalette pal( btncolor, bgcolor );
+  QString color = config.readEntry( "Highlight", "#800000" );
+  pal.setColor( QColorGroup::Highlight, QColor( color ) );
+  color = config.readEntry( "HighlightedText", "#FFFFFF" );
+  pal.setColor( QColorGroup::HighlightedText, QColor( color ) );
+  color = config.readEntry( "Text", "#000000" );
+  pal.setColor( QColorGroup::Text, QColor( color ) );
+  color = config.readEntry( "ButtonText", "#000000" );
+  pal.setColor( QPalette::Active, QColorGroup::ButtonText, QColor( color ) );
+  color = config.readEntry( "Base", "#FFFFFF" );
+  pal.setColor( QColorGroup::Base, QColor( color ) );
 
-	pal.setColor( QPalette::Disabled, QColorGroup::Text,
-	              pal.color( QPalette::Active, QColorGroup::Background ).dark() );
+  pal.setColor( QPalette::Disabled, QColorGroup::Text,
+                pal.color( QPalette::Active, QColorGroup::Background ).dark() );
 
-	setPalette( pal, TRUE );
+  setPalette( pal, TRUE );
 
         // Window Decoration
         QString dec = config.readEntry( "Decoration", "Qtopia" );
@@ -1027,29 +1028,29 @@ bool QPEApplication::raiseAppropriateWindow()
     QWidget *top = d->qpe_main_widget;
     if ( !top ) top =mainWidget();
     if ( top && d->keep_running ) {
-	if ( top->isVisible() )
+  if ( top->isVisible() )
             r = TRUE;
         else if (d->preloaded) {
-	  // We are preloaded and not visible.. pretend we just started..
- 	  QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
- 	  e << d->appName;
-	}
+    // We are preloaded and not visible.. pretend we just started..
+    QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
+    e << d->appName;
+  }
 
-	d->show_mx(top,d->nomaximize);
-	top->raise();
-	top->setActiveWindow();
+  d->show_mx(top,d->nomaximize);
+  top->raise();
+  top->setActiveWindow();
     }
     QWidget *topm = activeModalWidget();
     if ( topm && topm != top ) {
-	topm->show();
-	topm->raise();
-	topm->setActiveWindow();
-	// If we haven't already handled the fastAppShowing message
-	if (!top && d->preloaded) {
- 	  QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
- 	  e << d->appName;
-	}
-	r = FALSE;
+  topm->show();
+  topm->raise();
+  topm->setActiveWindow();
+  // If we haven't already handled the fastAppShowing message
+  if (!top && d->preloaded) {
+    QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
+    e << d->appName;
+  }
+  r = FALSE;
     }
     return r;
 }
@@ -1059,53 +1060,53 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 #ifdef Q_WS_QWS
 
     if ( msg == "quit()" ) {
-	tryQuit();
+  tryQuit();
     } else if ( msg == "quitIfInvisible()" ) {
-	if ( d->qpe_main_widget && !d->qpe_main_widget->isVisible() )
-	    quit();
+  if ( d->qpe_main_widget && !d->qpe_main_widget->isVisible() )
+      quit();
     } else if ( msg == "close()" ) {
-	hideOrQuit();
+  hideOrQuit();
     } else if ( msg == "disablePreload()" ) {
-	d->preloaded = FALSE;
-	d->keep_running = TRUE;
-	/* so that quit will quit */
+  d->preloaded = FALSE;
+  d->keep_running = TRUE;
+  /* so that quit will quit */
     } else if ( msg == "enablePreload()" ) {
       if (d->qpe_main_widget)
-	d->preloaded = TRUE;
-	d->keep_running = TRUE;
-	/* so next quit won't quit */
+  d->preloaded = TRUE;
+  d->keep_running = TRUE;
+  /* so next quit won't quit */
     } else if ( msg == "raise()" ) {
-	d->keep_running = TRUE;
-	d->notbusysent = FALSE;
-	raiseAppropriateWindow();
-	// Tell the system we're still chugging along...
-	QCopEnvelope e("QPE/System", "appRaised(QString)");
-	e << d->appName;
+  d->keep_running = TRUE;
+  d->notbusysent = FALSE;
+  raiseAppropriateWindow();
+  // Tell the system we're still chugging along...
+  QCopEnvelope e("QPE/System", "appRaised(QString)");
+  e << d->appName;
     } else if ( msg == "flush()" ) {
-	emit flush();
-	// we need to tell the desktop
-	QCopEnvelope e( "QPE/Desktop", "flushDone(QString)" );
-	e << d->appName;
+  emit flush();
+  // we need to tell the desktop
+  QCopEnvelope e( "QPE/Desktop", "flushDone(QString)" );
+  e << d->appName;
     } else if ( msg == "reload()" ) {
-	emit reload();
+  emit reload();
     } else if ( msg == "setDocument(QString)" ) {
-	d->keep_running = TRUE;
-	QDataStream stream( data, IO_ReadOnly );
-	QString doc;
-	stream >> doc;
-	QWidget *mw = mainWidget();
-	if ( !mw )
-	    mw = d->qpe_main_widget;
-	if ( mw )
-	    Global::setDocument( mw, doc );
+  d->keep_running = TRUE;
+  QDataStream stream( data, IO_ReadOnly );
+  QString doc;
+  stream >> doc;
+  QWidget *mw = mainWidget();
+  if ( !mw )
+      mw = d->qpe_main_widget;
+  if ( mw )
+      Global::setDocument( mw, doc );
     } else if ( msg == "nextView()" ) {
         qDebug("got nextView()");
 /*
-	if ( raiseAppropriateWindow() )
+  if ( raiseAppropriateWindow() )
 */
         emit appMessage( msg, data);
     } else {
-	emit appMessage( msg, data);
+  emit appMessage( msg, data);
     }
 
 #endif
@@ -1169,7 +1170,7 @@ void QPEApplication::setKeepRunning()
 */
 bool QPEApplication::keepRunning() const
 {
-	return d->keep_running;
+  return d->keep_running;
 }
 
 /*!
@@ -1351,62 +1352,62 @@ bool QPEApplication::eventFilter( QObject *o, QEvent *e )
     if ( stylusDict && e->type() >= QEvent::MouseButtonPress && e->type() <= QEvent::MouseMove ) {
         QMouseEvent * me = ( QMouseEvent* ) e;
         StylusMode mode = (StylusMode)(int)stylusDict->find(o);
-	switch (mode) {
+  switch (mode) {
         case RightOnHold:
-	    switch ( me->type() ) {
+      switch ( me->type() ) {
             case QEvent::MouseButtonPress:
-		if ( me->button() == LeftButton ) {
+    if ( me->button() == LeftButton ) {
                     d->presstimer = startTimer(500); // #### pref.
-		    d->presswidget = (QWidget*)o;
-		    d->presspos = me->pos();
-		    d->rightpressed = FALSE;
-		}
-		break;
+        d->presswidget = (QWidget*)o;
+        d->presspos = me->pos();
+        d->rightpressed = FALSE;
+    }
+    break;
             case QEvent::MouseMove:
-		if (d->presstimer && (me->pos()-d->presspos).manhattanLength() > 8) {
-		    killTimer(d->presstimer);
-		    d->presstimer = 0;
- 		}
+    if (d->presstimer && (me->pos()-d->presspos).manhattanLength() > 8) {
+        killTimer(d->presstimer);
+        d->presstimer = 0;
+    }
                 break;
-	      case QEvent::MouseButtonRelease:
-		if ( me->button() == LeftButton ) {
-		    if ( d->presstimer ) {
-			killTimer(d->presstimer);
-			d->presstimer = 0;
-		    }
-		    if ( d->rightpressed && d->presswidget ) {
-			// Right released
-			postEvent( d->presswidget,
-			    new QMouseEvent( QEvent::MouseButtonRelease, me->pos(),
-				    RightButton, LeftButton+RightButton ) );
-			// Left released, off-widget
-			postEvent( d->presswidget,
-			    new QMouseEvent( QEvent::MouseMove, QPoint(-1,-1),
-				    LeftButton, LeftButton ) );
-			postEvent( d->presswidget,
-			    new QMouseEvent( QEvent::MouseButtonRelease, QPoint(-1,-1),
-				    LeftButton, LeftButton ) );
-			d->rightpressed = FALSE;
-		return TRUE; // don't send the real Left release
-		    }
-		}
-		break;
-	      default:
-		break;
-	    }
-	    break;
-	  default:
-	    ;
-	}
+        case QEvent::MouseButtonRelease:
+    if ( me->button() == LeftButton ) {
+        if ( d->presstimer ) {
+      killTimer(d->presstimer);
+      d->presstimer = 0;
+        }
+        if ( d->rightpressed && d->presswidget ) {
+      // Right released
+      postEvent( d->presswidget,
+          new QMouseEvent( QEvent::MouseButtonRelease, me->pos(),
+            RightButton, LeftButton+RightButton ) );
+      // Left released, off-widget
+      postEvent( d->presswidget,
+          new QMouseEvent( QEvent::MouseMove, QPoint(-1,-1),
+            LeftButton, LeftButton ) );
+      postEvent( d->presswidget,
+          new QMouseEvent( QEvent::MouseButtonRelease, QPoint(-1,-1),
+            LeftButton, LeftButton ) );
+      d->rightpressed = FALSE;
+    return TRUE; // don't send the real Left release
+        }
+    }
+    break;
+        default:
+    break;
+      }
+      break;
+    default:
+      ;
+  }
     }else if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
-	QKeyEvent *ke = (QKeyEvent *)e;
-	if ( ke->key() == Key_Enter ) {
-	    if ( o->isA( "QRadioButton" ) || o->isA( "QCheckBox" ) ) {
-		postEvent( o, new QKeyEvent( e->type(), Key_Space, ' ',
-		    ke->state(), " ", ke->isAutoRepeat(), ke->count() ) );
-		return TRUE;
-		}
-	}
+  QKeyEvent *ke = (QKeyEvent *)e;
+  if ( ke->key() == Key_Enter ) {
+      if ( o->isA( "QRadioButton" ) || o->isA( "QCheckBox" ) ) {
+    postEvent( o, new QKeyEvent( e->type(), Key_Space, ' ',
+        ke->state(), " ", ke->isAutoRepeat(), ke->count() ) );
+    return TRUE;
+    }
+  }
     }
     return FALSE;
 }
@@ -1430,7 +1431,7 @@ void QPEApplication::timerEvent( QTimerEvent *e )
 void QPEApplication::removeSenderFromStylusDict()
 {
     stylusDict->remove
-	( ( void* ) sender() );
+  ( ( void* ) sender() );
     if ( d->presswidget == sender() )
         d->presswidget = 0;
 }
@@ -1541,9 +1542,9 @@ void QPEApplication::hideOrQuit()
     if ( d->preloaded && d->qpe_main_widget )
 #ifndef QT_NO_COP
       {
-	QCopEnvelope e("QPE/System", "fastAppHiding(QString)" );
+  QCopEnvelope e("QPE/System", "fastAppHiding(QString)" );
         e << d->appName;
-	d->qpe_main_widget->hide();
+  d->qpe_main_widget->hide();
       }
 #endif
     else
