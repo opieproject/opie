@@ -13,12 +13,17 @@
 
 #include "drawpadcanvas.h"
 
-#include "drawmode.h"
 #include "drawpad.h"
 #include "newpagedialog.h"
+#include "tool.h"
+
+#include <qpe/applnk.h>
+#include <qpe/filemanager.h>
+#include <qpe/mimetype.h>
 
 #include <qbuffer.h>
 #include <qimage.h>
+#include <qmessagebox.h>
 #include <qpainter.h>
 #include <qpixmap.h>
 #include <qtextcodec.h>
@@ -239,6 +244,60 @@ void DrawPadCanvas::save(QIODevice* ioDevice)
     textStream << "</drawpad>";
 }
 
+void DrawPadCanvas::importPage(const QString& fileName)
+{
+    QPixmap* importedPixmap = new QPixmap();
+
+    importedPixmap->load(fileName);
+    m_pages.insert(m_pages.at() + 1, importedPixmap);
+
+    m_pageBackups.clear();
+    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
+
+    emit pagesChanged();
+    emit pageBackupsChanged();
+}
+
+void DrawPadCanvas::exportPage(uint fromPage, uint toPage, const QString& name,const QString& format)
+{
+    if (fromPage == toPage) {
+        DocLnk docLnk;
+        MimeType mimeType(format);
+
+        docLnk.setName(name);
+        docLnk.setType(mimeType.id());
+
+        FileManager fileManager;
+        QIODevice* ioDevice = fileManager.saveFile(docLnk);
+        QImageIO imageIO(ioDevice, format);
+
+        QImage image = m_pages.current()->convertToImage();
+        imageIO.setImage(image);
+        imageIO.write();
+        delete ioDevice;
+    } else {
+        for (uint i = fromPage; i <= toPage; i++) {
+            DocLnk docLnk;
+            MimeType mimeType(format);
+
+            docLnk.setName(name + QString::number(i));
+            docLnk.setType(mimeType.id());
+
+            FileManager fileManager;
+            QIODevice* ioDevice = fileManager.saveFile(docLnk);
+            QImageIO imageIO(ioDevice, format);
+
+            QImage image = m_pages.at(i - 1)->convertToImage();
+            imageIO.setImage(image);
+            imageIO.write();
+            delete ioDevice;
+        }
+    }
+}
+
 QPixmap* DrawPadCanvas::currentPage()
 {
     return m_pages.current();
@@ -254,34 +313,41 @@ uint DrawPadCanvas::pageCount()
     return m_pages.count();
 }
 
-void DrawPadCanvas::clearAll()
+void DrawPadCanvas::deleteAll()
 {
-    m_pages.clear();
+   QMessageBox messageBox(tr("Delete All"), tr("Do you want to delete\nall the pages?"),
+                           QMessageBox::Information, QMessageBox::Yes,
+                           QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
+                           QMessageBox::NoButton, this);
 
-    m_pages.append(new QPixmap(contentsRect().size()));
-    m_pages.current()->fill(Qt::white);
+    if (messageBox.exec() == QMessageBox::Yes) {
+        m_pages.clear();
 
-    m_pageBackups.clear();
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
+        m_pages.append(new QPixmap(contentsRect().size()));
+        m_pages.current()->fill(Qt::white);
 
-    resizeContents(m_pages.current()->width(), m_pages.current()->height());
-    viewport()->update();
+        m_pageBackups.clear();
+        m_pageBackups.append(new QPixmap(*(m_pages.current())));
 
-    emit pagesChanged();
-    emit pageBackupsChanged();
+        resizeContents(m_pages.current()->width(), m_pages.current()->height());
+        viewport()->update();
+
+        emit pagesChanged();
+        emit pageBackupsChanged();
+    }
 }
 
 void DrawPadCanvas::newPage()
 {
     QRect rect = contentsRect();
 
-    NewPageDialog newPageDialog(this);
-    newPageDialog.setWidth(rect.width());
-    newPageDialog.setHeight(rect.height());
+    NewPageDialog newPageDialog(rect.width(), rect.height(), m_pDrawPad->pen().color(),
+                                m_pDrawPad->brush().color(), this);
 
     if (newPageDialog.exec() == QDialog::Accepted) {
-        m_pages.insert(m_pages.at() + 1, new QPixmap(newPageDialog.width(), newPageDialog.height()));
-        m_pages.current()->fill(Qt::white);
+        m_pages.insert(m_pages.at() + 1, new QPixmap(newPageDialog.selectedWidth(),
+                                                     newPageDialog.selectedHeight()));
+        m_pages.current()->fill(newPageDialog.selectedColor());
 
         m_pageBackups.clear();
         m_pageBackups.append(new QPixmap(*(m_pages.current())));
@@ -296,28 +362,42 @@ void DrawPadCanvas::newPage()
 
 void DrawPadCanvas::clearPage()
 {
-    m_pages.current()->fill(Qt::white);
+    QMessageBox messageBox(tr("Clear Page"), tr("Do you want to clear\nthe current page?"),
+                           QMessageBox::Information, QMessageBox::Yes,
+                           QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
+                           QMessageBox::NoButton, this);
 
-    viewport()->update();
+    if (messageBox.exec() == QMessageBox::Yes) {
+        m_pages.current()->fill(Qt::white);
+
+        viewport()->update();
+    }
 }
 
 void DrawPadCanvas::deletePage()
 {
-    m_pages.remove(m_pages.current());
+   QMessageBox messageBox(tr("Delete Page"), tr("Do you want to delete\nthe current page?"),
+                           QMessageBox::Information, QMessageBox::Yes,
+                           QMessageBox::No | QMessageBox::Escape | QMessageBox::Default,
+                           QMessageBox::NoButton, this);
 
-    if (m_pages.isEmpty()) {
-        m_pages.append(new QPixmap(contentsRect().size()));
-        m_pages.current()->fill(Qt::white);
+    if (messageBox.exec() == QMessageBox::Yes) {
+        m_pages.remove(m_pages.current());
+
+        if (m_pages.isEmpty()) {
+            m_pages.append(new QPixmap(contentsRect().size()));
+            m_pages.current()->fill(Qt::white);
+        }
+
+        m_pageBackups.clear();
+        m_pageBackups.append(new QPixmap(*(m_pages.current())));
+
+        resizeContents(m_pages.current()->width(), m_pages.current()->height());
+        viewport()->update();
+
+        emit pagesChanged();
+        emit pageBackupsChanged();
     }
-
-    m_pageBackups.clear();
-    m_pageBackups.append(new QPixmap(*(m_pages.current())));
-
-    resizeContents(m_pages.current()->width(), m_pages.current()->height());
-    viewport()->update();
-
-    emit pagesChanged();
-    emit pageBackupsChanged();
 }
 
 bool DrawPadCanvas::undoEnabled()
@@ -412,12 +492,12 @@ void DrawPadCanvas::goLastPage()
 
 void DrawPadCanvas::contentsMousePressEvent(QMouseEvent* e)
 {
-    m_pDrawPad->drawMode()->mousePressEvent(e);
+    m_pDrawPad->tool()->mousePressEvent(e);
 }
 
 void DrawPadCanvas::contentsMouseReleaseEvent(QMouseEvent* e)
 {
-    m_pDrawPad->drawMode()->mouseReleaseEvent(e);
+    m_pDrawPad->tool()->mouseReleaseEvent(e);
 
     QPixmap* currentBackup = m_pageBackups.current();
     while (m_pageBackups.last() != currentBackup) {
@@ -435,7 +515,7 @@ void DrawPadCanvas::contentsMouseReleaseEvent(QMouseEvent* e)
 
 void DrawPadCanvas::contentsMouseMoveEvent(QMouseEvent* e)
 {
-    m_pDrawPad->drawMode()->mouseMoveEvent(e);
+    m_pDrawPad->tool()->mouseMoveEvent(e);
 }
 
 void DrawPadCanvas::drawContents(QPainter* p, int cx, int cy, int cw, int ch)

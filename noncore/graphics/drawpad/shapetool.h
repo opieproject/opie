@@ -11,52 +11,31 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLORPANEL_H
-#define COLORPANEL_H
+#ifndef SHAPETOOL_H
+#define SHAPETOOL_H
 
-#include <qframe.h>
-#include <qwidget.h>
+#include "tool.h"
 
-class QGridLayout;
+#include <qpointarray.h>
 
-class ColorPanelButton : public QFrame
+class ShapeTool : public Tool
 {
-    Q_OBJECT
-
 public:
-    ColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
-    ~ColorPanelButton();
+    ShapeTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas);
+    ~ShapeTool();
 
-    void enterEvent(QEvent* e);
-    void leaveEvent(QEvent* e);
-    void paintEvent(QPaintEvent* e);
+    void mousePressEvent(QMouseEvent* e);
     void mouseReleaseEvent(QMouseEvent* e);
+    void mouseMoveEvent(QMouseEvent* e);
 
-signals:
-    void selected(const QColor&);
+protected:
+    virtual void drawFinalShape(QPainter& p) = 0;
+    virtual void drawTemporaryShape(QPainter& p) = 0;
 
-private:
-    QColor m_color;
-};
-
-class ColorPanel : public QWidget
-{ 
-    Q_OBJECT
-
-public:
-    ColorPanel(QWidget* parent = 0, const char* name = 0);
-    ~ColorPanel();
-
-    void addColor(const QColor& color, int row, int col);
-
-public slots:
-    void buttonSelected(const QColor& color);
-
-signals:
-    void colorSelected(const QColor&);
+    QPointArray m_polyline;
 
 private:
-    QGridLayout* m_pGridLayout;
+    bool m_mousePressed;
 };
 
-#endif // COLORPANEL_H
+#endif // SHAPETOOL_H

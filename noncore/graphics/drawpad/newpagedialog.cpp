@@ -13,49 +13,90 @@
 
 #include "newpagedialog.h"
 
+#include <qbuttongroup.h>
+#include <qgroupbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
+#include <qradiobutton.h>
 #include <qspinbox.h>
 
-NewPageDialog::NewPageDialog(QWidget* parent, const char* name)
+NewPageDialog::NewPageDialog(uint width, uint height, const QColor& foregroundColor,
+                             const QColor& backgroundColor, QWidget* parent, const char* name)
     : QDialog(parent, name, true)
 {
     setCaption(tr("New Page"));
 
-    QLabel* widthLabel = new QLabel(tr("Width :"), this);
-    QLabel* heightLabel = new QLabel(tr("Height :"), this);
+    m_foregroundColor = foregroundColor;
+    m_backgroundColor = backgroundColor;
 
-    m_pWidthSpinBox = new QSpinBox(1, 1024, 1, this);
-    m_pHeightSpinBox = new QSpinBox(1, 1024, 1, this);
+    QGroupBox* sizeGroupBox = new QGroupBox(0, Qt::Vertical, tr("Page Size"), this);
 
-    QGridLayout* gridLayout = new QGridLayout(this, 2, 2, 2, 2);
+    QLabel* widthLabel = new QLabel(tr("Width :"), sizeGroupBox);
+    QLabel* heightLabel = new QLabel(tr("Height :"), sizeGroupBox);
 
-    gridLayout->addWidget(widthLabel, 0, 0);
-    gridLayout->addWidget(heightLabel, 1, 0);
-    gridLayout->addWidget(m_pWidthSpinBox, 0, 1);
-    gridLayout->addWidget(m_pHeightSpinBox, 1, 1);
+    m_pWidthSpinBox = new QSpinBox(1, 1024, 1, sizeGroupBox);
+    m_pHeightSpinBox = new QSpinBox(1, 1024, 1, sizeGroupBox);
+
+    m_pWidthSpinBox->setValue(width);
+    m_pHeightSpinBox->setValue(height);
+
+    m_pContentButtonGroup = new QButtonGroup(0, Qt::Vertical, tr("Contents"), this);
+
+    QRadioButton* whiteColorRadioButton = new QRadioButton(tr("White"), m_pContentButtonGroup);
+    QRadioButton* foregroundColorRadioButton = new QRadioButton(tr("Foreground Color"), m_pContentButtonGroup);
+    QRadioButton* backgroundColorRadioButton = new QRadioButton(tr("Background Color"), m_pContentButtonGroup);
+
+    m_pContentButtonGroup->setButton(0);
+
+    QVBoxLayout* mainLayout = new QVBoxLayout(this, 4, 4);
+    sizeGroupBox->layout()->setSpacing(4);
+    m_pContentButtonGroup->layout()->setSpacing(4);
+    QGridLayout* sizeLayout = new QGridLayout(sizeGroupBox->layout(), 2, 2);
+    QVBoxLayout* contentLayout = new QVBoxLayout(m_pContentButtonGroup->layout());
+
+    sizeLayout->addWidget(widthLabel, 0, 0);
+    sizeLayout->addWidget(heightLabel, 1, 0);
+    sizeLayout->addWidget(m_pWidthSpinBox, 0, 1);
+    sizeLayout->addWidget(m_pHeightSpinBox, 1, 1);
+
+    sizeLayout->setColStretch(1, 1);
+
+    contentLayout->addWidget(whiteColorRadioButton);
+    contentLayout->addWidget(foregroundColorRadioButton);
+    contentLayout->addWidget(backgroundColorRadioButton);
+
+    mainLayout->addWidget(sizeGroupBox);
+    mainLayout->addWidget(m_pContentButtonGroup);
 }
 
 NewPageDialog::~NewPageDialog()
 {
 }
 
-void NewPageDialog::setWidth(int width)
+uint NewPageDialog::selectedWidth()
 {
-    m_pWidthSpinBox->setValue(width);
+    return (m_pWidthSpinBox->value());
 }
 
-void NewPageDialog::setHeight(int height)
+uint NewPageDialog::selectedHeight()
 {
-    m_pHeightSpinBox->setValue(height);
+    return (m_pHeightSpinBox->value());
 }
 
-int NewPageDialog::width()
+const QColor& NewPageDialog::selectedColor()
 {
-    return m_pWidthSpinBox->value();
-}
-
-int NewPageDialog::height()
-{
-    return m_pHeightSpinBox->value();
+    switch (m_pContentButtonGroup->id(m_pContentButtonGroup->selected())) {
+        case 0:
+            return (Qt::white);
+            break;
+        case 1:
+            return (m_foregroundColor);
+            break;
+        case 2:
+            return (m_backgroundColor);
+            break;
+        default:
+            return (Qt::white);
+            break;
+    }
 }

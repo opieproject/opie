@@ -2,31 +2,39 @@ TEMPLATE	= app
 CONFIG		= qt warn_on release
 HEADERS		= colordialog.h \
 		  colorpanel.h \
-		  drawmode.h \
 		  drawpad.h \
 		  drawpadcanvas.h \
-		  ellipsedrawmode.h \
-		  erasedrawmode.h \
-		  filldrawmode.h \
-		  linedrawmode.h \
+		  ellipsetool.h \
+		  erasetool.h \
+		  exportdialog.h \
+		  filltool.h \
+		  filledellipsetool.h \
+		  filledrectangletool.h \
+		  importdialog.h \
+		  linetool.h \
 		  newpagedialog.h \
-		  pointdrawmode.h \
-		  rectangledrawmode.h \
-		  shapedrawmode.h
+		  pointtool.h \
+		  rectangletool.h \
+		  shapetool.h \
+		  tool.h
 SOURCES		= colordialog.cpp \
 		  colorpanel.cpp \
-		  drawmode.cpp \
 		  drawpad.cpp \
 		  drawpadcanvas.cpp \
-		  ellipsedrawmode.cpp \
-		  erasedrawmode.cpp \
-		  filldrawmode.cpp \
-		  linedrawmode.cpp \
+		  ellipsetool.cpp \
+		  erasetool.cpp \
+		  exportdialog.cpp \
+		  filltool.cpp \
+		  filledellipsetool.cpp \
+		  filledrectangletool.cpp \
+		  importdialog.cpp \
+		  linetool.cpp \
 		  main.cpp \
 		  newpagedialog.cpp \
-		  pointdrawmode.cpp \
-		  rectangledrawmode.cpp \
-		  shapedrawmode.cpp
+		  pointtool.cpp \
+		  rectangletool.cpp \
+		  shapetool.cpp \
+		  tool.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include \
 		  $(QTDIR)/src/3rdparty/zlib
 DEPENDPATH	+= $(OPIEDIR)/include

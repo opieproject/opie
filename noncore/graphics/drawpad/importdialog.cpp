@@ -11,52 +11,31 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLORPANEL_H
-#define COLORPANEL_H
+#include "importdialog.h"
 
-#include <qframe.h>
-#include <qwidget.h>
+#include <qpe/applnk.h>
+#include <qpe/fileselector.h>
 
-class QGridLayout;
+#include <qlayout.h>
 
-class ColorPanelButton : public QFrame
+ImportDialog::ImportDialog(QWidget* parent, const char* name)
+    : QDialog(parent, name, true)
 {
-    Q_OBJECT
+    setCaption(tr("Import"));
 
-public:
-    ColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
-    ~ColorPanelButton();
+    m_pFileSelector = new FileSelector("image/*", this, "fileselector");
+    m_pFileSelector->setNewVisible(false);
+    m_pFileSelector->setCloseVisible(false);
 
-    void enterEvent(QEvent* e);
-    void leaveEvent(QEvent* e);
-    void paintEvent(QPaintEvent* e);
-    void mouseReleaseEvent(QMouseEvent* e);
+    QVBoxLayout* mainLayout = new QVBoxLayout(this, 4, 4);
+    mainLayout->addWidget(m_pFileSelector);
+}
 
-signals:
-    void selected(const QColor&);
+ImportDialog::~ImportDialog()
+{
+}
 
-private:
-    QColor m_color;
-};
-
-class ColorPanel : public QWidget
-{ 
-    Q_OBJECT
-
-public:
-    ColorPanel(QWidget* parent = 0, const char* name = 0);
-    ~ColorPanel();
-
-    void addColor(const QColor& color, int row, int col);
-
-public slots:
-    void buttonSelected(const QColor& color);
-
-signals:
-    void colorSelected(const QColor&);
-
-private:
-    QGridLayout* m_pGridLayout;
-};
-
-#endif // COLORPANEL_H
+const DocLnk* ImportDialog::selected()
+{
+    return m_pFileSelector->selected();
+}

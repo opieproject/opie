@@ -11,52 +11,20 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLORPANEL_H
-#define COLORPANEL_H
+#ifndef FILLEDRECTANGLETOOL_H
+#define FILLEDRECTANGLETOOL_H
 
-#include <qframe.h>
-#include <qwidget.h>
+#include "shapetool.h"
 
-class QGridLayout;
-
-class ColorPanelButton : public QFrame
+class FilledRectangleTool : public ShapeTool
 {
-    Q_OBJECT
-
 public:
-    ColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
-    ~ColorPanelButton();
+    FilledRectangleTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas);
+    ~FilledRectangleTool();
 
-    void enterEvent(QEvent* e);
-    void leaveEvent(QEvent* e);
-    void paintEvent(QPaintEvent* e);
-    void mouseReleaseEvent(QMouseEvent* e);
-
-signals:
-    void selected(const QColor&);
-
-private:
-    QColor m_color;
+protected:
+    void drawFinalShape(QPainter& p);
+    void drawTemporaryShape(QPainter& p);
 };
 
-class ColorPanel : public QWidget
-{ 
-    Q_OBJECT
-
-public:
-    ColorPanel(QWidget* parent = 0, const char* name = 0);
-    ~ColorPanel();
-
-    void addColor(const QColor& color, int row, int col);
-
-public slots:
-    void buttonSelected(const QColor& color);
-
-signals:
-    void colorSelected(const QColor&);
-
-private:
-    QGridLayout* m_pGridLayout;
-};
-
-#endif // COLORPANEL_H
+#endif // FILLEDRECTANGLETOOL_H

@@ -18,7 +18,7 @@
 
 #include <qpen.h>
 
-class DrawMode;
+class Tool;
 class DrawPadCanvas;
 
 class QAction;
@@ -34,17 +34,19 @@ public:
     DrawPad(QWidget* parent = 0, const char* name = 0);
     ~DrawPad();
 
-    DrawMode* drawMode() { return m_pDrawMode; }
+    Tool* tool() { return m_pTool; }
     QPen pen() { return m_pen; }
     QBrush brush() { return m_brush; }
 
 private slots:
-    void setPointDrawMode();
-    void setLineDrawMode();
-    void setRectangleDrawMode();
-    void setEllipseDrawMode();
-    void setFillDrawMode();
-    void setEraseDrawMode();
+    void setPointTool();
+    void setLineTool();
+    void setRectangleTool();
+    void setFilledRectangleTool();
+    void setEllipseTool();
+    void setFilledEllipseTool();
+    void setFillTool();
+    void setEraseTool();
 
     void changePenWidth(int value);
     void changePenColor(const QColor& color);
@@ -56,10 +58,13 @@ private slots:
     void updateNavigationToolButtons();
     void updateCaption();
 
+    void importPage();
+    void exportPage();
+
 private:
     DrawPadCanvas* m_pDrawPadCanvas;
 
-    DrawMode* m_pDrawMode;
+    Tool* m_pTool;
     QPen m_pen;
     QBrush m_brush;
 
@@ -71,13 +76,17 @@ private:
     QAction* m_pNextPageAction;
     QAction* m_pLastPageAction;
 
-    QAction* m_pPointDrawModeAction;
-    QAction* m_pLineDrawModeAction;
-    QAction* m_pRectangleDrawModeAction;
-    QAction* m_pEllipseDrawModeAction;
-    QAction* m_pFillDrawModeAction;
-    QAction* m_pEraseDrawModeAction;
+    QAction* m_pPointToolAction;
+    QAction* m_pLineToolAction;
+    QAction* m_pRectangleToolAction;
+    QAction* m_pFilledRectangleToolAction;
+    QAction* m_pEllipseToolAction;
+    QAction* m_pFilledEllipseToolAction;
+    QAction* m_pFillToolAction;
+    QAction* m_pEraseToolAction;
 
+    QToolButton* m_pRectangleToolButton;
+    QToolButton* m_pEllipseToolButton;
     QToolButton* m_pPenColorToolButton;
     QToolButton* m_pBrushColorToolButton;
 };

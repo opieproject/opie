@@ -22,40 +22,25 @@ ColorPanelButton::ColorPanelButton(const QColor& color, QWidget* parent, const c
     m_color = color;
 
     setFixedSize(16, 16);
-    setActive(false);
+    setFrameStyle(NoFrame);
 }
 
 ColorPanelButton::~ColorPanelButton()
 {
 }
 
-void ColorPanelButton::setActive(bool active)
-{
-    m_active = active;
-
-    if (m_active) {
-        setFrameStyle(Panel | Sunken);
-    } else {
-        setFrameStyle(NoFrame);
-    }
-}
-
 void ColorPanelButton::enterEvent(QEvent* e)
 {
     Q_UNUSED(e)
 
-    if (!m_active) {
-        setFrameStyle(Panel | Sunken);
-    }
+    setFrameStyle(Panel | Sunken);
 }
 
 void ColorPanelButton::leaveEvent(QEvent* e)
 {
     Q_UNUSED(e)
 
-    if (!m_active) {
-        setFrameStyle(NoFrame);
-    }
+    setFrameStyle(NoFrame);
 }
 
 void ColorPanelButton::paintEvent(QPaintEvent* e)
@@ -125,6 +110,7 @@ void ColorPanel::addColor(const QColor& color, int row, int col)
 {
     ColorPanelButton* panelButton = new ColorPanelButton(color, this);
     connect(panelButton, SIGNAL(selected(const QColor&)), this, SLOT(buttonSelected(const QColor&)));
+
     m_pGridLayout->addWidget(panelButton, row, col);
 }
 

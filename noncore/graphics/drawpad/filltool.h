@@ -11,52 +11,29 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLORPANEL_H
-#define COLORPANEL_H
+#ifndef FILLTOOL_H
+#define FILLTOOL_H
 
-#include <qframe.h>
-#include <qwidget.h>
+#include "tool.h"
 
-class QGridLayout;
+#include <qimage.h>
 
-class ColorPanelButton : public QFrame
+class FillTool : public Tool
 {
-    Q_OBJECT
-
 public:
-    ColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
-    ~ColorPanelButton();
+    FillTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas);
+    ~FillTool();
 
-    void enterEvent(QEvent* e);
-    void leaveEvent(QEvent* e);
-    void paintEvent(QPaintEvent* e);
+    void mousePressEvent(QMouseEvent* e);
     void mouseReleaseEvent(QMouseEvent* e);
-
-signals:
-    void selected(const QColor&);
+    void mouseMoveEvent(QMouseEvent* e);
 
 private:
-    QColor m_color;
+    void fillLine(int x, int y);
+
+    QImage m_image;
+    QRgb m_fillRgb;
+    QRgb m_oldRgb;
 };
 
-class ColorPanel : public QWidget
-{ 
-    Q_OBJECT
-
-public:
-    ColorPanel(QWidget* parent = 0, const char* name = 0);
-    ~ColorPanel();
-
-    void addColor(const QColor& color, int row, int col);
-
-public slots:
-    void buttonSelected(const QColor& color);
-
-signals:
-    void colorSelected(const QColor&);
-
-private:
-    QGridLayout* m_pGridLayout;
-};
-
-#endif // COLORPANEL_H
+#endif // FILLTOOL_H

@@ -11,52 +11,33 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLORPANEL_H
-#define COLORPANEL_H
+#include "filledrectangletool.h"
 
-#include <qframe.h>
-#include <qwidget.h>
+#include "drawpad.h"
+#include "drawpadcanvas.h"
 
-class QGridLayout;
-
-class ColorPanelButton : public QFrame
+FilledRectangleTool::FilledRectangleTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
+    : ShapeTool(drawPad, drawPadCanvas)
 {
-    Q_OBJECT
+}
 
-public:
-    ColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
-    ~ColorPanelButton();
+FilledRectangleTool::~FilledRectangleTool()
+{
+}
 
-    void enterEvent(QEvent* e);
-    void leaveEvent(QEvent* e);
-    void paintEvent(QPaintEvent* e);
-    void mouseReleaseEvent(QMouseEvent* e);
+void FilledRectangleTool::drawFinalShape(QPainter& p)
+{
+    p.setRasterOp(Qt::NotROP);
+    p.drawRect(QRect(m_polyline[2], m_polyline[0]));
+    p.setRasterOp(Qt::CopyROP);
+    p.fillRect(QRect(m_polyline[2], m_polyline[0]), m_pDrawPad->brush());
+    p.setPen(m_pDrawPad->pen());
+    p.drawRect(QRect(m_polyline[2], m_polyline[0]));
+}
 
-signals:
-    void selected(const QColor&);
-
-private:
-    QColor m_color;
-};
-
-class ColorPanel : public QWidget
-{ 
-    Q_OBJECT
-
-public:
-    ColorPanel(QWidget* parent = 0, const char* name = 0);
-    ~ColorPanel();
-
-    void addColor(const QColor& color, int row, int col);
-
-public slots:
-    void buttonSelected(const QColor& color);
-
-signals:
-    void colorSelected(const QColor&);
-
-private:
-    QGridLayout* m_pGridLayout;
-};
-
-#endif // COLORPANEL_H
+void FilledRectangleTool::drawTemporaryShape(QPainter& p)
+{
+    p.setRasterOp(Qt::NotROP);
+    p.drawRect(QRect(m_polyline[2], m_polyline[1]));
+    p.drawRect(QRect(m_polyline[2], m_polyline[0]));
+}

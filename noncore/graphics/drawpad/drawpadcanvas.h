@@ -35,6 +35,9 @@ public:
     void initialPage();
     void save(QIODevice* ioDevice);
 
+    void importPage(const QString& fileName);
+    void exportPage(uint fromPage, uint toPage, const QString& name, const QString& format);
+
     bool undoEnabled();
     bool redoEnabled();
     bool goPreviousPageEnabled();
@@ -45,7 +48,7 @@ public:
     uint pageCount();
 
 public slots:
-    void clearAll();
+    void deleteAll();
     void newPage();
     void clearPage();
     void deletePage();

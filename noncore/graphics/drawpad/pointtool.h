@@ -11,52 +11,26 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLORPANEL_H
-#define COLORPANEL_H
+#ifndef POINTTOOL_H
+#define POINTTOOL_H
 
-#include <qframe.h>
-#include <qwidget.h>
+#include "tool.h"
 
-class QGridLayout;
+#include <qpointarray.h>
 
-class ColorPanelButton : public QFrame
+class PointTool : public Tool
 {
-    Q_OBJECT
-
 public:
-    ColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
-    ~ColorPanelButton();
+    PointTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas);
+    ~PointTool();
 
-    void enterEvent(QEvent* e);
-    void leaveEvent(QEvent* e);
-    void paintEvent(QPaintEvent* e);
+    void mousePressEvent(QMouseEvent* e);
     void mouseReleaseEvent(QMouseEvent* e);
-
-signals:
-    void selected(const QColor&);
+    void mouseMoveEvent(QMouseEvent* e);
 
 private:
-    QColor m_color;
+    bool m_mousePressed;
+    QPointArray m_polyline;
 };
 
-class ColorPanel : public QWidget
-{ 
-    Q_OBJECT
-
-public:
-    ColorPanel(QWidget* parent = 0, const char* name = 0);
-    ~ColorPanel();
-
-    void addColor(const QColor& color, int row, int col);
-
-public slots:
-    void buttonSelected(const QColor& color);
-
-signals:
-    void colorSelected(const QColor&);
-
-private:
-    QGridLayout* m_pGridLayout;
-};
-
-#endif // COLORPANEL_H
+#endif // POINTTOOL_H

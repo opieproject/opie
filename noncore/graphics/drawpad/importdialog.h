@@ -11,52 +11,26 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLORPANEL_H
-#define COLORPANEL_H
+#ifndef IMPORTDIALOG_H
+#define IMPORTDIALOG_H
 
-#include <qframe.h>
-#include <qwidget.h>
+#include <qdialog.h>
 
-class QGridLayout;
+class DocLnk;
+class FileSelector;
 
-class ColorPanelButton : public QFrame
-{
-    Q_OBJECT
-
-public:
-    ColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
-    ~ColorPanelButton();
-
-    void enterEvent(QEvent* e);
-    void leaveEvent(QEvent* e);
-    void paintEvent(QPaintEvent* e);
-    void mouseReleaseEvent(QMouseEvent* e);
-
-signals:
-    void selected(const QColor&);
-
-private:
-    QColor m_color;
-};
-
-class ColorPanel : public QWidget
+class ImportDialog : public QDialog
 { 
     Q_OBJECT
 
 public:
-    ColorPanel(QWidget* parent = 0, const char* name = 0);
-    ~ColorPanel();
+    ImportDialog(QWidget* parent = 0, const char* name = 0);
+    ~ImportDialog();
 
-    void addColor(const QColor& color, int row, int col);
-
-public slots:
-    void buttonSelected(const QColor& color);
-
-signals:
-    void colorSelected(const QColor&);
+    const DocLnk* selected();
 
 private:
-    QGridLayout* m_pGridLayout;
+    FileSelector* m_pFileSelector;
 };
 
-#endif // COLORPANEL_H
+#endif // IMPORTDIALOG_H

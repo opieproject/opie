@@ -16,6 +16,7 @@
 
 #include <qdialog.h>
 
+class QButtonGroup;
 class QSpinBox;
 
 class NewPageDialog : public QDialog
@@ -23,18 +24,22 @@ class NewPageDialog : public QDialog
     Q_OBJECT
 
 public:
-    NewPageDialog(QWidget* parent = 0, const char* name = 0);
+    NewPageDialog(uint width, uint height, const QColor& foregroundColor,
+                  const QColor& backgroundColor, QWidget* parent = 0, const char* name = 0);
     ~NewPageDialog();
 
-    void setWidth(int width);
-    void setHeight(int height);
-
-    int width();
-    int height();
+    uint selectedWidth();
+    uint selectedHeight();
+    const QColor& selectedColor();
 
 private:
     QSpinBox* m_pWidthSpinBox;
     QSpinBox* m_pHeightSpinBox;
+
+    QColor m_foregroundColor;
+    QColor m_backgroundColor;
+
+    QButtonGroup* m_pContentButtonGroup;
 };
 
 #endif // NEWPAGEDIALOG_H

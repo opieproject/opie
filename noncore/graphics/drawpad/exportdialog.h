@@ -11,52 +11,48 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef COLORPANEL_H
-#define COLORPANEL_H
+#ifndef EXPORTDIALOG_H
+#define EXPORTDIALOG_H
 
-#include <qframe.h>
-#include <qwidget.h>
+#include <qdialog.h>
 
-class QGridLayout;
+#include <qstrlist.h>
 
-class ColorPanelButton : public QFrame
-{
-    Q_OBJECT
+class QComboBox;
+class QLineEdit;
+class QSpinBox;
 
-public:
-    ColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
-    ~ColorPanelButton();
-
-    void enterEvent(QEvent* e);
-    void leaveEvent(QEvent* e);
-    void paintEvent(QPaintEvent* e);
-    void mouseReleaseEvent(QMouseEvent* e);
-
-signals:
-    void selected(const QColor&);
-
-private:
-    QColor m_color;
-};
-
-class ColorPanel : public QWidget
+class ExportDialog : public QDialog
 { 
     Q_OBJECT
 
 public:
-    ColorPanel(QWidget* parent = 0, const char* name = 0);
-    ~ColorPanel();
+    ExportDialog(uint pageAt, uint pageCount, QWidget* parent = 0, const char* name = 0);
+    ~ExportDialog();
 
-    void addColor(const QColor& color, int row, int col);
+    uint selectedFromPage();
+    uint selectedToPage();
+
+    QString selectedName();
+    QString selectedFormat();
 
 public slots:
-    void buttonSelected(const QColor& color);
+    void accept();
 
-signals:
-    void colorSelected(const QColor&);
+private slots:
+    void selectionChanged(int id);
+    void fromPageChanged(int value);
+    void toPageChanged(int value);
 
 private:
-    QGridLayout* m_pGridLayout;
+    uint m_pageAt;
+    uint m_pageCount;
+
+    QSpinBox* m_pFromPageSpinBox;
+    QSpinBox* m_pToPageSpinBox;
+
+    QLineEdit* m_pNameLineEdit;
+    QComboBox* m_pFormatComboBox;
 };
 
-#endif // COLORPANEL_H
+#endif // EXPORTDIALOG_H

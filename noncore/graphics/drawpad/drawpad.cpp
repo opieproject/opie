@@ -16,13 +16,18 @@
 #include "colordialog.h"
 #include "colorpanel.h"
 #include "drawpadcanvas.h"
-#include "ellipsedrawmode.h"
-#include "erasedrawmode.h"
-#include "filldrawmode.h"
-#include "linedrawmode.h"
-#include "pointdrawmode.h"
-#include "rectangledrawmode.h"
+#include "ellipsetool.h"
+#include "erasetool.h"
+#include "exportdialog.h"
+#include "filledellipsetool.h"
+#include "filledrectangletool.h"
+#include "filltool.h"
+#include "importdialog.h"
+#include "linetool.h"
+#include "pointtool.h"
+#include "rectangletool.h"
 
+#include <qpe/applnk.h>
 #include <qpe/global.h>
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
@@ -57,14 +62,19 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     QPopupMenu *toolsPopupMenu = new QPopupMenu(menuBar);
 
-    QAction* clearAllAction = new QAction(tr("Clear All"), QString::null, 0, this);
-    connect(clearAllAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(clearAll()));
-    clearAllAction->addTo(toolsPopupMenu);
+    QAction* deleteAllAction = new QAction(tr("Delete All"), QString::null, 0, this);
+    connect(deleteAllAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(deleteAll()));
+    deleteAllAction->addTo(toolsPopupMenu);
 
     toolsPopupMenu->insertSeparator();
 
-    QAction* setOptionsAction = new QAction(tr("Options"), tr("Options..."), 0, this);
-    setOptionsAction->addTo(toolsPopupMenu);
+    QAction* importPageAction = new QAction(tr("Import"), tr("Import..."), 0, this);
+    connect(importPageAction, SIGNAL(activated()), this, SLOT(importPage()));
+    importPageAction->addTo(toolsPopupMenu);
+
+    QAction* exportPageAction = new QAction(tr("Export"), tr("Export..."), 0, this);
+    connect(exportPageAction, SIGNAL(activated()), this, SLOT(exportPage()));
+    exportPageAction->addTo(toolsPopupMenu);
 
     menuBar->insertItem(tr("Tools"), toolsPopupMenu);
 
@@ -119,38 +129,60 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     QPEToolBar* drawModeToolBar = new QPEToolBar(this);
 
-    m_pPointDrawModeAction = new QAction(tr("Draw Point"), Resource::loadIconSet("drawpad/point.png"), QString::null, 0, this);
-    m_pPointDrawModeAction->setToggleAction(true);
-    connect(m_pPointDrawModeAction, SIGNAL(activated()), this, SLOT(setPointDrawMode()));
-    m_pPointDrawModeAction->addTo(drawModeToolBar);
+    m_pPointToolAction = new QAction(tr("Draw Point"), Resource::loadIconSet("drawpad/point.png"), QString::null, 0, this);
+    m_pPointToolAction->setToggleAction(true);
+    connect(m_pPointToolAction, SIGNAL(activated()), this, SLOT(setPointTool()));
+    m_pPointToolAction->addTo(drawModeToolBar);
 
-    m_pLineDrawModeAction = new QAction(tr("Draw Line"), Resource::loadIconSet("drawpad/line.png"), QString::null, 0, this);
-    m_pLineDrawModeAction->setToggleAction(true);
-    connect(m_pLineDrawModeAction, SIGNAL(activated()), this, SLOT(setLineDrawMode()));
-    m_pLineDrawModeAction->addTo(drawModeToolBar);
+    m_pLineToolAction = new QAction(tr("Draw Line"), Resource::loadIconSet("drawpad/line.png"), QString::null, 0, this);
+    m_pLineToolAction->setToggleAction(true);
+    connect(m_pLineToolAction, SIGNAL(activated()), this, SLOT(setLineTool()));
+    m_pLineToolAction->addTo(drawModeToolBar);
 
-    m_pRectangleDrawModeAction = new QAction(tr("Draw Rectangle"), Resource::loadIconSet("drawpad/rectangle.png"), QString::null, 0, this);
-    m_pRectangleDrawModeAction->setToggleAction(true);
-    connect(m_pRectangleDrawModeAction, SIGNAL(activated()), this, SLOT(setRectangleDrawMode()));
-    m_pRectangleDrawModeAction->addTo(drawModeToolBar);
+    m_pRectangleToolButton = new QToolButton(drawModeToolBar);
+    m_pRectangleToolButton->setToggleButton(true);
 
-    m_pEllipseDrawModeAction = new QAction(tr("Draw Ellipse"), Resource::loadIconSet("drawpad/ellipse.png"), QString::null, 0, this);
-    m_pEllipseDrawModeAction->setToggleAction(true);
-    connect(m_pEllipseDrawModeAction, SIGNAL(activated()), this, SLOT(setEllipseDrawMode()));
-    m_pEllipseDrawModeAction->addTo(drawModeToolBar);
+    QPopupMenu* rectanglePopupMenu = new QPopupMenu(m_pRectangleToolButton);
 
-    m_pFillDrawModeAction = new QAction(tr("Fill Region"), Resource::loadIconSet("drawpad/fill.png"), QString::null, 0, this);
-    m_pFillDrawModeAction->setToggleAction(true);
-    connect(m_pFillDrawModeAction, SIGNAL(activated()), this, SLOT(setFillDrawMode()));
-    m_pFillDrawModeAction->addTo(drawModeToolBar);
+    m_pRectangleToolAction = new QAction(tr("Draw Rectangle"), Resource::loadIconSet("drawpad/rectangle.png"), "", 0, this);
+    connect(m_pRectangleToolAction, SIGNAL(activated()), this, SLOT(setRectangleTool()));
+    m_pRectangleToolAction->addTo(rectanglePopupMenu);
 
-    m_pEraseDrawModeAction = new QAction(tr("Erase Point"), Resource::loadIconSet("drawpad/erase.png"), QString::null, 0, this);
-    m_pEraseDrawModeAction->setToggleAction(true);
-    connect(m_pEraseDrawModeAction, SIGNAL(activated()), this, SLOT(setEraseDrawMode()));
-    m_pEraseDrawModeAction->addTo(drawModeToolBar);
+    m_pFilledRectangleToolAction = new QAction(tr("Draw Filled Rectangle"), Resource::loadIconSet("drawpad/filledrectangle.png"), "", 0, this);
+    connect(m_pFilledRectangleToolAction, SIGNAL(activated()), this, SLOT(setFilledRectangleTool()));
+    m_pFilledRectangleToolAction->addTo(rectanglePopupMenu);
 
-    m_pDrawMode = 0;
-    setPointDrawMode();
+    m_pRectangleToolButton->setPopup(rectanglePopupMenu);
+
+    m_pEllipseToolButton = new QToolButton(drawModeToolBar);
+    m_pEllipseToolButton->setToggleButton(true);
+
+    QPopupMenu* ellipsePopupMenu = new QPopupMenu(m_pEllipseToolButton);
+
+    m_pEllipseToolAction = new QAction(tr("Draw Ellipse"), Resource::loadIconSet("drawpad/ellipse.png"), "", 0, this);
+    connect(m_pEllipseToolAction, SIGNAL(activated()), this, SLOT(setEllipseTool()));
+    m_pEllipseToolAction->addTo(ellipsePopupMenu);
+
+    m_pFilledEllipseToolAction = new QAction(tr("Draw Filled Ellipse"), Resource::loadIconSet("drawpad/filledellipse.png"), "", 0, this);
+    connect(m_pFilledEllipseToolAction, SIGNAL(activated()), this, SLOT(setFilledEllipseTool()));
+    m_pFilledEllipseToolAction->addTo(ellipsePopupMenu);
+
+    m_pEllipseToolButton->setPopup(ellipsePopupMenu);
+
+    m_pFillToolAction = new QAction(tr("Fill Region"), Resource::loadIconSet("drawpad/fill.png"), QString::null, 0, this);
+    m_pFillToolAction->setToggleAction(true);
+    connect(m_pFillToolAction, SIGNAL(activated()), this, SLOT(setFillTool()));
+    m_pFillToolAction->addTo(drawModeToolBar);
+
+    m_pEraseToolAction = new QAction(tr("Erase Point"), Resource::loadIconSet("drawpad/erase.png"), QString::null, 0, this);
+    m_pEraseToolAction->setToggleAction(true);
+    connect(m_pEraseToolAction, SIGNAL(activated()), this, SLOT(setEraseTool()));
+    m_pEraseToolAction->addTo(drawModeToolBar);
+
+    m_pTool = 0;
+    setRectangleTool();
+    setEllipseTool();
+    setPointTool();
 
     emptyToolBar = new QPEToolBar(this);
     emptyToolBar->setHorizontalStretchable(true);
@@ -163,7 +195,9 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     QSpinBox* penWidthSpinBox = new QSpinBox(1, 9, 1, drawParametersToolBar);
     connect(penWidthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changePenWidth(int)));
 
+    QToolTip::add(penWidthSpinBox, tr("Pen Width"));
     penWidthSpinBox->setValue(1);
+    penWidthSpinBox->setFocusPolicy(QWidget::NoFocus);
 
     m_pPenColorToolButton = new QToolButton(drawParametersToolBar);
     m_pPenColorToolButton->setPixmap(Resource::loadPixmap("drawpad/pencolor.png"));
@@ -172,8 +206,8 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     ColorPanel* penColorPanel = new ColorPanel(penColorPopupMenu);
     connect(penColorPanel, SIGNAL(colorSelected(const QColor&)), this, SLOT(changePenColor(const QColor&)));
-    penColorPopupMenu->insertItem(penColorPanel);
 
+    penColorPopupMenu->insertItem(penColorPanel);
     penColorPopupMenu->insertSeparator();
 
     QAction* choosePenColorAction = new QAction(tr("More"), tr("More..."), 0, this);
@@ -184,7 +218,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     m_pPenColorToolButton->setPopup(penColorPopupMenu);
     m_pPenColorToolButton->setPopupDelay(0);
 
-    penColorPopupMenu->activateItemAt(0);
+    penColorPanel->buttonSelected(Qt::black);
 
     m_pBrushColorToolButton = new QToolButton(drawParametersToolBar);
     m_pBrushColorToolButton->setPixmap(Resource::loadPixmap("drawpad/brushcolor.png"));
@@ -193,8 +227,8 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     ColorPanel* brushColorPanel = new ColorPanel(brushColorPopupMenu);
     connect(brushColorPanel, SIGNAL(colorSelected(const QColor&)), this, SLOT(changeBrushColor(const QColor&)));
-    brushColorPopupMenu->insertItem(brushColorPanel);
 
+    brushColorPopupMenu->insertItem(brushColorPanel);
     brushColorPopupMenu->insertSeparator();
 
     QAction* chooseBrushColorAction = new QAction(tr("More"), tr("More..."), 0, this);
@@ -205,7 +239,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     m_pBrushColorToolButton->setPopup(brushColorPopupMenu);
     m_pBrushColorToolButton->setPopupDelay(0);
 
-    brushColorPopupMenu->activateItemAt(1);
+    brushColorPanel->buttonSelected(Qt::white);
 
     // init pages
 
@@ -229,100 +263,156 @@ DrawPad::~DrawPad()
     }
 }
 
-void DrawPad::setPointDrawMode()
+void DrawPad::setPointTool()
 {
-    if (m_pDrawMode) {
-        delete m_pDrawMode;
+    if (m_pTool) {
+        delete m_pTool;
     }
 
-    m_pDrawMode = new PointDrawMode(this, m_pDrawPadCanvas);
+    m_pTool = new PointTool(this, m_pDrawPadCanvas);
 
-    m_pPointDrawModeAction->setOn(true);
-    m_pLineDrawModeAction->setOn(false);
-    m_pRectangleDrawModeAction->setOn(false);
-    m_pEllipseDrawModeAction->setOn(false);
-    m_pFillDrawModeAction->setOn(false);
-    m_pEraseDrawModeAction->setOn(false);
+    m_pPointToolAction->setOn(true);
+    m_pLineToolAction->setOn(false);
+    m_pRectangleToolButton->setOn(false);
+    m_pEllipseToolButton->setOn(false);
+    m_pFillToolAction->setOn(false);
+    m_pEraseToolAction->setOn(false);
 }
 
-void DrawPad::setLineDrawMode()
+void DrawPad::setLineTool()
 {
-    if (m_pDrawMode) {
-        delete m_pDrawMode;
+    if (m_pTool) {
+        delete m_pTool;
     }
 
-    m_pDrawMode = new LineDrawMode(this, m_pDrawPadCanvas);
+    m_pTool = new LineTool(this, m_pDrawPadCanvas);
 
-    m_pPointDrawModeAction->setOn(false);
-    m_pLineDrawModeAction->setOn(true);
-    m_pRectangleDrawModeAction->setOn(false);
-    m_pEllipseDrawModeAction->setOn(false);
-    m_pFillDrawModeAction->setOn(false);
-    m_pEraseDrawModeAction->setOn(false);
+    m_pPointToolAction->setOn(false);
+    m_pLineToolAction->setOn(true);
+    m_pRectangleToolButton->setOn(false);
+    m_pEllipseToolButton->setOn(false);
+    m_pFillToolAction->setOn(false);
+    m_pEraseToolAction->setOn(false);
 }
 
-void DrawPad::setRectangleDrawMode()
+void DrawPad::setRectangleTool()
 {
-    if (m_pDrawMode) {
-        delete m_pDrawMode;
+    if (m_pTool) {
+        delete m_pTool;
     }
 
-    m_pDrawMode = new RectangleDrawMode(this, m_pDrawPadCanvas);
+    m_pTool = new RectangleTool(this, m_pDrawPadCanvas);
 
-    m_pPointDrawModeAction->setOn(false);
-    m_pLineDrawModeAction->setOn(false);
-    m_pRectangleDrawModeAction->setOn(true);
-    m_pEllipseDrawModeAction->setOn(false);
-    m_pFillDrawModeAction->setOn(false);
-    m_pEraseDrawModeAction->setOn(false);
+    m_pRectangleToolButton->setIconSet(m_pRectangleToolAction->iconSet());
+    QToolTip::add(m_pRectangleToolButton, m_pRectangleToolAction->text());
+
+    disconnect(m_pRectangleToolButton, SIGNAL(clicked()), 0, 0);
+    connect(m_pRectangleToolButton, SIGNAL(clicked()), m_pRectangleToolAction, SIGNAL(activated()));
+
+    m_pPointToolAction->setOn(false);
+    m_pLineToolAction->setOn(false);
+    m_pRectangleToolButton->setOn(true);
+    m_pEllipseToolButton->setOn(false);
+    m_pFillToolAction->setOn(false);
+    m_pEraseToolAction->setOn(false);
 }
 
-void DrawPad::setEllipseDrawMode()
+void DrawPad::setFilledRectangleTool()
 {
-    if (m_pDrawMode) {
-        delete m_pDrawMode;
+    if (m_pTool) {
+        delete m_pTool;
     }
 
-    m_pDrawMode = new EllipseDrawMode(this, m_pDrawPadCanvas);
+    m_pTool = new FilledRectangleTool(this, m_pDrawPadCanvas);
 
-    m_pPointDrawModeAction->setOn(false);
-    m_pLineDrawModeAction->setOn(false);
-    m_pRectangleDrawModeAction->setOn(false);
-    m_pEllipseDrawModeAction->setOn(true);
-    m_pFillDrawModeAction->setOn(false);
-    m_pEraseDrawModeAction->setOn(false);
+    m_pRectangleToolButton->setIconSet(m_pFilledRectangleToolAction->iconSet());
+    QToolTip::add(m_pRectangleToolButton, m_pFilledRectangleToolAction->text());
+
+    disconnect(m_pRectangleToolButton, SIGNAL(clicked()), 0, 0);
+    connect(m_pRectangleToolButton, SIGNAL(clicked()), m_pFilledRectangleToolAction, SIGNAL(activated()));
+
+    m_pPointToolAction->setOn(false);
+    m_pLineToolAction->setOn(false);
+    m_pRectangleToolButton->setOn(true);
+    m_pEllipseToolButton->setOn(false);
+    m_pFillToolAction->setOn(false);
+    m_pEraseToolAction->setOn(false);
 }
 
-void DrawPad::setFillDrawMode()
+void DrawPad::setEllipseTool()
 {
-    if (m_pDrawMode) {
-        delete m_pDrawMode;
+    if (m_pTool) {
+        delete m_pTool;
     }
 
-    m_pDrawMode = new FillDrawMode(this, m_pDrawPadCanvas);
+    m_pTool = new EllipseTool(this, m_pDrawPadCanvas);
 
-    m_pPointDrawModeAction->setOn(false);
-    m_pLineDrawModeAction->setOn(false);
-    m_pRectangleDrawModeAction->setOn(false);
-    m_pEllipseDrawModeAction->setOn(false);
-    m_pFillDrawModeAction->setOn(true);
-    m_pEraseDrawModeAction->setOn(false);
+    m_pEllipseToolButton->setIconSet(m_pEllipseToolAction->iconSet());
+    QToolTip::add(m_pEllipseToolButton, m_pEllipseToolAction->text());
+
+    disconnect(m_pEllipseToolButton, SIGNAL(clicked()), 0, 0);
+    connect(m_pEllipseToolButton, SIGNAL(clicked()), m_pEllipseToolAction, SIGNAL(activated()));
+
+    m_pPointToolAction->setOn(false);
+    m_pLineToolAction->setOn(false);
+    m_pRectangleToolButton->setOn(false);
+    m_pEllipseToolButton->setOn(true);
+    m_pFillToolAction->setOn(false);
+    m_pEraseToolAction->setOn(false);
 }
 
-void DrawPad::setEraseDrawMode()
+void DrawPad::setFilledEllipseTool()
 {
-    if (m_pDrawMode) {
-        delete m_pDrawMode;
+    if (m_pTool) {
+        delete m_pTool;
     }
 
-    m_pDrawMode = new EraseDrawMode(this, m_pDrawPadCanvas);
+    m_pTool = new FilledEllipseTool(this, m_pDrawPadCanvas);
 
-    m_pPointDrawModeAction->setOn(false);
-    m_pLineDrawModeAction->setOn(false);
-    m_pRectangleDrawModeAction->setOn(false);
-    m_pEllipseDrawModeAction->setOn(false);
-    m_pFillDrawModeAction->setOn(false);
-    m_pEraseDrawModeAction->setOn(true);
+    m_pEllipseToolButton->setIconSet(m_pFilledEllipseToolAction->iconSet());
+    QToolTip::add(m_pEllipseToolButton, m_pFilledEllipseToolAction->text());
+
+    disconnect(m_pEllipseToolButton, SIGNAL(clicked()), 0, 0);
+    connect(m_pEllipseToolButton, SIGNAL(clicked()), m_pFilledEllipseToolAction, SIGNAL(activated()));
+
+    m_pPointToolAction->setOn(false);
+    m_pLineToolAction->setOn(false);
+    m_pRectangleToolButton->setOn(false);
+    m_pEllipseToolButton->setOn(true);
+    m_pFillToolAction->setOn(false);
+    m_pEraseToolAction->setOn(false);
+}
+
+void DrawPad::setFillTool()
+{
+    if (m_pTool) {
+        delete m_pTool;
+    }
+
+    m_pTool = new FillTool(this, m_pDrawPadCanvas);
+
+    m_pPointToolAction->setOn(false);
+    m_pLineToolAction->setOn(false);
+    m_pRectangleToolButton->setOn(false);
+    m_pEllipseToolButton->setOn(false);
+    m_pFillToolAction->setOn(true);
+    m_pEraseToolAction->setOn(false);
+}
+
+void DrawPad::setEraseTool()
+{
+    if (m_pTool) {
+        delete m_pTool;
+    }
+
+    m_pTool = new EraseTool(this, m_pDrawPadCanvas);
+
+    m_pPointToolAction->setOn(false);
+    m_pLineToolAction->setOn(false);
+    m_pRectangleToolButton->setOn(false);
+    m_pEllipseToolButton->setOn(false);
+    m_pFillToolAction->setOn(false);
+    m_pEraseToolAction->setOn(true);
 }
 
 void DrawPad::changePenWidth(int value)
@@ -387,4 +477,27 @@ void DrawPad::updateCaption()
 
     setCaption(tr("DrawPad") + " - " + tr("Page") + " "
                + QString::number(pagePosition) + "/" + QString::number(pageCount));
+}
+
+void DrawPad::importPage()
+{
+    ImportDialog importDialog(this);
+
+    importDialog.showMaximized();
+
+    if (importDialog.exec() == QDialog::Accepted) {
+        m_pDrawPadCanvas->importPage(importDialog.selected()->file());
+    }
+}
+
+void DrawPad::exportPage()
+{
+    ExportDialog exportDialog(m_pDrawPadCanvas->pagePosition(), m_pDrawPadCanvas->pageCount(), this);
+
+    exportDialog.showMaximized();
+
+    if (exportDialog.exec() == QDialog::Accepted) {
+        m_pDrawPadCanvas->exportPage(exportDialog.selectedFromPage(), exportDialog.selectedToPage(),
+                                     exportDialog.selectedName(), exportDialog.selectedFormat());
+    }
 }
