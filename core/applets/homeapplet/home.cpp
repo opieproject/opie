@@ -28,7 +28,7 @@ QString HomeApplet::name ( ) const
 
 QString HomeApplet::text ( ) const
 {
-	return tr( "Home" );
+	return tr( "Desktop" );
 }
 
 QIconSet HomeApplet::icon ( ) const
