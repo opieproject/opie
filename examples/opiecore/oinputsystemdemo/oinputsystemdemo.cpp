@@ -48,15 +48,40 @@ int main( int argc, char** argv )
     
     while ( it.current() )
     {
-        odebug << "DEMO: OInputSystem contains Device '" <<  it.current()->name() << "'" << oendl;
+        odebug << "DEMO: OInputSystem contains OInputDevice '" <<  it.current()->name() << "'" << oendl;
         
         dev = it.current();
+        
+        QString features;
+        features += QString( "\nSynchronous:     " );
+        if ( dev->hasFeature( OInputDevice::Synchronous ) ) features += "[ x ]"; else features += "[   ]";
+        features += QString( "\nKeys or Buttons: " );
+        if ( dev->hasFeature( OInputDevice::Keys ) ) features += "[ x ]"; else features += "[   ]";   
+        features += QString( "\nRelative Axes:   " );
+        if ( dev->hasFeature( OInputDevice::Relative ) ) features += "[ x ]"; else features += "[   ]";
+        features += QString( "\nAbsolute Axes:   " );
+        if ( dev->hasFeature( OInputDevice::Absolute ) ) features += "[ x ]"; else features += "[   ]";
+        features += QString( "\nMiscellaneous:   " );
+        if ( dev->hasFeature( OInputDevice::Miscellaneous ) ) features += "[ x ]"; else features += "[   ]";
+        features += QString( "\nLeds:            " );
+        if ( dev->hasFeature( OInputDevice::Leds ) ) features += "[ x ]"; else features += "[   ]";
+        features += QString( "\nSound:           " );
+        if ( dev->hasFeature( OInputDevice::Sound ) ) features += "[ x ]"; else features += "[   ]";
+        features += QString( "\nAutoRepeat       " );
+        if ( dev->hasFeature( OInputDevice::AutoRepeat ) ) features += "[ x ]"; else features += "[   ]";
+        features += QString( "\nForceFeedback:   " );
+        if ( dev->hasFeature( OInputDevice::ForceFeedback ) ) features += "[ x ]"; else features += "[   ]";
+        features += QString( "\nPowerManagement: " );
+        if ( dev->hasFeature( OInputDevice::PowerManagement ) ) features += "[ x ]"; else features += "[   ]";
+        features += QString( "\nFeedbackStatus:  " );
+        if ( dev->hasFeature( OInputDevice::ForceFeedbackStatus ) ) features += "[ x ]"; else features += "[   ]";
         
         odebug << "========================================"
             << "\nDevice: " << dev->name()
             << "\nName: " << dev->identity()
             << "\nPath: " << dev->path()
             << "\nUniq: " << dev->uniq()
+            << features << "\n"
             << oendl;
     
         ++it;
@@ -137,25 +162,6 @@ int Open_cPad()
                     break;
                 /* ... */
             }
-
-            // Get device 'name'
-
-            char    name[256] = "Unknown";
-            if( ioctl( fd, EVIOCGNAME(sizeof name ), name) < 0 )
-            {
-                perror( "event device ioctl" );
-            }else
-            printf( "Device name '%s'\n", name );
-
-            if(ioctl(fd, EVIOCGPHYS(sizeof(name)), name) < 0) {
-                perror("event ioctl");
-            }else
-            printf("Device path '%s'\n", name );
-
-            if(ioctl(fd, EVIOCGUNIQ(sizeof(name)), name) < 0) {
-                perror("event ioctl");
-            }else
-            printf("Device identity '%s'\n", name );
 
             // Get feature types
 

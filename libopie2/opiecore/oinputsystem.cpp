@@ -39,7 +39,12 @@ using namespace Opie::Core;
 #include <sys/fcntl.h>
 #include <sys/ioctl.h>
 
-#define BUFSIZE 256
+#define     BUFSIZE 256
+#define     BIT_MASK( name, numbits )                                        \
+    unsigned short  name[ ((numbits) - 1) / (sizeof( short ) * 8) + 1 ];    \
+    memset( name, 0, sizeof( name ) )
+#define     BIT_TEST( bitmask, bit )    \
+    ( bitmask[ (bit) / sizeof(short) / 8 ] & (1u << ( (bit) % (sizeof(short) * 8))) )
 
 /*======================================================================================
  * OInputSystem
@@ -138,5 +143,15 @@ QString OInputDevice::uniq() const
     char buf[BUFSIZE] = "<unknown>";
     ::ioctl( _fd, EVIOCGUNIQ(sizeof buf), buf );
     return buf;
+}
+
+bool OInputDevice::hasFeature( Feature bit ) const
+{
+    BIT_MASK( features, EV_MAX );
+            
+    if( ioctl( _fd, EVIOCGBIT( 0, EV_MAX ), features) < 0 )
+        return false;
+    else
+        return BIT_TEST( features, bit );
 }
 

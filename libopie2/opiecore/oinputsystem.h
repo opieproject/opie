@@ -93,14 +93,14 @@ class OInputDevice : public QObject
 {  
   public:
     
-    enum EventType
+    enum Feature
     {
         Synchronous     = EV_SYN,
-        Keyboard        = EV_KEY,
+        Keys            = EV_KEY,
         Relative        = EV_REL,
         Absolute        = EV_ABS,
         Miscellaneous   = EV_MSC,
-        Led             = EV_LED,
+        Leds            = EV_LED,
         Sound           = EV_SND,
         AutoRepeat      = EV_REP,
         ForceFeedback   = EV_FF,
@@ -134,6 +134,7 @@ class OInputDevice : public QObject
     QString identity() const;
     QString path() const;
     QString uniq() const;
+    bool    hasFeature( Feature ) const;
     
   private:
     int _fd;
