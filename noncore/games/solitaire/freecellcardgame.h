@@ -46,7 +46,7 @@ public:
 	if ( cardOnBottom() == NULL ) {
 	    int numberOfCardsBeingMoved = 0;
 	    Card *tempCard = card;
-
+	    
 	    while ((tempCard != NULL)) {
 		numberOfCardsBeingMoved++;
 		tempCard = cardInfront(tempCard); 
@@ -62,6 +62,7 @@ public:
         return PatienceWorkingPile::isAllowedOnTop( card );	
     }
     
+
     virtual bool isAllowedToBeMoved(Card *card) {
 	int nextExpectedValue = (int)card->getValue();
 	bool nextExpectedColor = card->isRed();
@@ -138,10 +139,12 @@ public:
     virtual bool mousePressCard(Card *card, QPoint p);
     virtual void mouseReleaseCard(Card *card, QPoint p) { Q_UNUSED(card); Q_UNUSED(p); }
 //    virtual void mouseMoveCard(Card *card, QPoint p) { Q_UNUSED(card); Q_UNUSED(p); }
+     virtual void checkUnusable();
     void readConfig( Config& cfg );
     void writeConfig( Config& cfg );
     bool snapOn;
 private:
+    bool checkNeeded(Card *card);
     FreecellFreecellPile *freecellPiles[8];
     FreecellWorkingPile *workingPiles[8];
     FreecellDiscardPile *discardPiles[4];

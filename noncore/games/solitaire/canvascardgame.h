@@ -78,6 +78,7 @@ protected:
     void contentsMousePressEvent(QMouseEvent *e);
     void contentsMouseReleaseEvent(QMouseEvent *e);
     void contentsMouseMoveEvent(QMouseEvent *e);
+	virtual	void checkUnusable() { }  //added for freecell
 
 protected:
     // Mouse event state variables

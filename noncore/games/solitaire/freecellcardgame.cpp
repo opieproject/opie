@@ -69,6 +69,89 @@ void FreecellCardGame::deal(void)
     endDealing();
 }
 
+// 	checks if smaller card with different color, that could be put on top on the
+// 	card, is present in working or freecell pile
+bool FreecellCardGame::checkNeeded(Card *card)
+{
+	if (card->getValue() > 2){
+		int i;
+		Card *c;
+		for (i=0;i<4;i++){
+			c = freecellPiles[i]->cardOnBottom();
+			if (c != NULL){
+				if (card->isRed()!= c->isRed() && card->getValue()== c->getValue()+1){
+					return (false); 
+				}
+			}
+		}
+		for (i=0;i<8;i++){
+			c=workingPiles[i]->cardOnBottom();
+			while (c!=NULL){
+				if (card->isRed() != c->isRed()	&& card->getValue() == c->getValue()+1) {
+					return (false);
+				}
+				c=workingPiles[i]->cardInfront(c);
+			}
+		}
+	}
+	return(true);
+}
+	
+//  added to move cards, on which no card can be moved, to discard pile 
+void FreecellCardGame::checkUnusable()
+{
+	int i,j;
+//	printf("void FreecellCardGame::checkUnusable()\n");
+	Card *top_one;
+	for (i=0;i < 8;i++)
+	{
+		top_one = workingPiles[i]->cardOnTop();
+		if (top_one != NULL)
+		{
+			j = 0;
+			while ((j < 4))
+			{
+				if (discardPiles[j]->isAllowedOnTop(top_one)){
+					if (checkNeeded(top_one)){
+						top_one->setCardPile(discardPiles[j]);
+						workingPiles[i]->removeCard(top_one);
+//						printf("k %d f work%d to disk%d on %d\n ",top_one->getValue(),i+1,j+1,highestZ);
+						discardPiles[j]->addCardToTop(top_one);
+						top_one->setPos(discardPiles[j]->getX(),discardPiles[j]->getY(),highestZ);
+						highestZ++;
+						j = 4;
+						checkUnusable();
+					}
+				}
+				j++;
+			}
+		} 
+	}
+	for (i=0;i<4;i++){
+		top_one = freecellPiles[i]->cardOnTop();
+		if (top_one != NULL)
+		{
+			j = 0;
+			while ((j < 4))
+			{
+				if (discardPiles[j]->isAllowedOnTop(top_one)){
+					if (checkNeeded(top_one)){
+						top_one->setCardPile(discardPiles[j]);
+						freecellPiles[i]->removeCard(top_one);
+//						printf("k %d f work%d to disk%d on %d\n ",top_one->getValue(),i+1,j+1,highestZ);
+						discardPiles[j]->addCardToTop(top_one);
+						top_one->setPos(discardPiles[j]->getX(),discardPiles[j]->getY(),highestZ);
+						highestZ++;
+						j = 4;
+						checkUnusable();
+					}
+				}
+				j++;
+			}
+		} 
+	}		
+}
+
 
 bool FreecellCardGame::mousePressCard( Card *c, QPoint p )
 {

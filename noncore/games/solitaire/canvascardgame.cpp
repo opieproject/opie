@@ -327,12 +327,13 @@ void CanvasCardGame::contentsMouseReleaseEvent(QMouseEvent *e)
 				c = oldPile->cardInfront(item);
 				oldPile->removeCard(item);
 			    }    
-			    pile->addCardToTop(item);
 			    item->setCardPile(pile);
 			    //item->move( pile->getCardPos(item) );
+			    pile->addCardToTop(item);
 			    QPoint p = pile->getCardPos(item);
 			    item->setPos( p.x(), p.y(), highestZ );
 			    highestZ++;
+				checkUnusable();   // added for freecell to move card to discard pile
 
 			    if (item->getValue() == king && haveWeWon()) {
 				alphaCardPile->hide();
