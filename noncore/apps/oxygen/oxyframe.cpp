@@ -13,4 +13,9 @@
 
 OxyFrame::OxyFrame(QWidget *parent, const char *name) : QFrame(parent,name)
 {
+    this->setFrameStyle( QFrame::Panel );
+    this->setLineWidth( 2 );
+    this->setFrameShadow( QFrame::Raised );
+    this->setBackgroundColor( QColor( cyan ) );
 }
+

@@ -61,15 +61,20 @@ class Element
         ar;               //     atomic radius
 };
 
+class QGridLayout;
+
 class PSEWidget : public QWidget
 {
 	Q_OBJECT
 	
     public:
 		PSEWidget();
+        QGridLayout *bottom_grid;
 
     private:
         QGridLayout *maingrid;
+        
+        void position( int, int&, int& );
 
 };
 
