@@ -101,6 +101,17 @@ class OApplication : public QPEApplication
      */
     virtual void setTitle( const QString& title = QString::null ) const;
 
+  signals:
+  
+    /**
+     * Emit signals when messages are received on QPE/System
+     * QCOP Channel.
+     *
+     * @param msg  The QCOP Message
+     * @param data The QCOP Data
+     */
+    void systemMessageSignal(const QCString& msg, const QByteArray& data);
+
   protected:
     void init();
 

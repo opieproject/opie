@@ -31,6 +31,9 @@
 #include <opie2/oconfig.h>
 #include <opie2/odebug.h>
 
+#include <qcopchannel_qws.h>
+
+
 #include <signal.h>
 #include <stdio.h>
 
@@ -101,6 +104,10 @@ void OApplication::init()
     if ( !OApplication::_instance )
     {
         OApplication::_instance = this;
+	
+	QCopChannel *chan = new QCopChannel("QPE/System", this, "OApplication System Channel");
+	connect(chan,SIGNAL(received(const QCString&,const QByteArray&)),
+		this,SIGNAL(systemMessageSignal(const QCString&,const QByteArray&)));
 
         /* register SIGSEGV handler to give programs an option
          * to exit gracefully, e.g. save or close devices or files.
