@@ -27,12 +27,31 @@
 #include <qvbox.h>
 #include <qlist.h>
 
+#include "datebook.h"
+#include <qlineedit.h>
+
 class DateBookDayHeader;
 class DateBookDB;
 class QDateTime;
 class QMouseEvent;
 class QPaintEvent;
 class QResizeEvent;
+
+class DateBookDayViewQuickLineEdit : public QLineEdit
+{
+	Q_OBJECT
+public:
+	DateBookDayViewQuickLineEdit(const QDateTime &start, const QDateTime &end,QWidget * parent, const char *name=0);
+protected:
+	Event quickEvent;
+	int active;
+	void focusOutEvent( QFocusEvent *e );
+protected slots:
+	void slotReturnPressed(void);
+signals:
+	void insertEvent(const Event &e);
+};
+
 
 class DateBookDayView : public QTable
 {
@@ -46,21 +65,25 @@ public:
 public slots:
     void moveUp();
     void moveDown();
+	void slotDateChanged( int year, int month, int day );
 
 signals:
     void sigColWidthChanged();
     void sigCapturedKey( const QString &txt );
 protected slots:
-    void slotChangeClock( bool );
+	void slotChangeClock( bool );
 protected:
     virtual void paintCell( QPainter *p, int row, int col, const QRect &cr, bool selected );
     virtual void paintFocus( QPainter *p, const QRect &cr );
 
     virtual void resizeEvent( QResizeEvent *e );
     void keyPressEvent( QKeyEvent *e );
+    void contentsMouseReleaseEvent( QMouseEvent *e );
     void initHeader();
 private:
     bool ampm;
+	QDate currDate;
+	DateBookDayViewQuickLineEdit *quickLineEdit;
 };
 
 class DateBookDay;

@@ -88,7 +88,8 @@ private slots:
 
     void showDay( int y, int m, int d );
 
-    void editEvent( const Event &e );
+	void insertEvent( const Event &e );
+	void editEvent( const Event &e );
     void duplicateEvent( const Event &e );
     void removeEvent( const Event &e );
 

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.22 2003-04-12 03:56:46 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.23 2003-04-13 21:41:19 umopapisdn Exp $
 **
 **********************************************************************/
 
@@ -381,6 +381,13 @@ void DateBook::viewWeekLst() {
 
 void DateBook::viewMonth() {
     view(MONTH,currentDate());
+}
+
+void DateBook::insertEvent( const Event &e )
+{
+	qWarning("Adding Event!");
+	db->addEvent(e);
+	emit newEvent();
 }
 
 void DateBook::duplicateEvent( const Event &e )
