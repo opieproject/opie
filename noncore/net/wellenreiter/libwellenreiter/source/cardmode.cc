@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.19 2003-02-12 22:38:17 mickeyl Exp $
+ * $Id: cardmode.cc,v 1.20 2003-02-12 22:38:48 mickeyl Exp $
  */
 
 #include "cardmode.hh"
@@ -55,7 +55,7 @@ int card_into_monitormode (pcap_t **orighandle, const char *device, int cardtype
   }
   else if (cardtype == CARD_TYPE_HOSTAP)
   {
-#if WIRELESS_EXT < 14
+#if WIRELESS_EXT < 15
 	  int skfd;
 	  skfd = socket(AF_INET, SOCK_STREAM, 0);
 	  struct iwreq wrq;
