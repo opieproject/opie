@@ -11,6 +11,7 @@
 
 	Fixed Bugs
 	--------
+	* #1225 - Fixed repeated light flashing on Zaurus with keyz (mickeyl)
 	* #1361 - Fixed auto upercase in Opie-Addressbook (eilers) 
 	* #1370 - Pimconverter now reacts on cancel key (eilers)
 

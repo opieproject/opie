@@ -515,7 +515,7 @@
 		<event keycode="F34" unicode="-1" pressed="true"/>
 	</map>
 	<map keycode="Light" pressed="true">
-		<event keycode="F35" unicode="-1" pressed="true" autorepeat="true"/>
+		<event keycode="F35" unicode="-1" pressed="true" autorepeat="false"/>
 	</map>
 	<map keycode="Space" pressed="false">
 		<event keycode="Space" unicode="32" pressed="false" autorepeat="true"/>
