@@ -1,9 +1,9 @@
 /*
-** Author: Carsten Schneider <CarstenSchneider@t-online.de>
+** Author: Carsten Schneider <zcarsten@gmx.net>
 **
-** $Id: main.cpp,v 1.1 2003-07-22 19:23:15 zcarsten Exp $
+** $Id: main.cpp,v 1.2 2003-07-24 16:54:29 zcarsten Exp $
 **
-** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
+** Homepage: http://z-soft.z-portal.info/zsafe/index.html
 */
 
 
