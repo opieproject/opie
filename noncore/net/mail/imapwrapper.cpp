@@ -648,7 +648,8 @@ void IMAPwrapper::fillSingleMsgPart(RecPart&target_part,mailimap_body_type_msg*w
 void IMAPwrapper::fillMultiPart(RecPart&target_part,mailimap_body_type_mpart*which)
 {       
     if (!which) return;
-    target_part.setSubtype(which->bd_media_subtype);
+    QString sub = which->bd_media_subtype;
+    target_part.setSubtype(sub.lower());
     if (which->bd_ext_mpart && which->bd_ext_mpart->bd_parameter && which->bd_ext_mpart->bd_parameter->pa_list) {
         clistcell*cur = 0;
         mailimap_single_body_fld_param*param=0;
