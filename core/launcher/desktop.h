@@ -80,11 +80,16 @@ protected slots:
   void psTimeout();
   void sendCard();
 private:
-  DesktopPowerAlerter *pa;
-  PowerStatus *ps;
-  QTimer *cardSendTimer;
-  QCopChannel *channel;
-  QPEScreenSaver *m_screensaver;
+        void reloadPowerWarnSettings();
+	DesktopPowerAlerter *pa;
+	PowerStatus *ps;
+	QTimer *cardSendTimer;
+	QCopChannel *channel;
+	QPEScreenSaver *m_screensaver;
+        QTimer * m_timer;
+        int m_powerVeryLow;
+        int m_powerCritical;
+
 };
 
 

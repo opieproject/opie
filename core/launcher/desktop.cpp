@@ -165,9 +165,14 @@ public:
     m_enable_lightoff = false;
     m_enable_onlylcdoff = false;
 
+    m_disable_suspend_ac = 100;
+    m_enable_dim_ac = false;
+    m_enable_lightoff_ac = false;
+    m_enable_onlylcdoff_ac = false;
+
     m_lcd_status = true;
 
-	m_backlight_normal = -1;
+    m_backlight_normal = -1;
     m_backlight_current = -1;
     m_backlight_forcedoff = false;
 
@@ -186,38 +191,54 @@ public:
   }
   bool save( int level )
   {
-    switch ( level ) {
+      bool onAC = ( PowerStatusManager::readStatus().acStatus() == PowerStatus::Online );
+
+      switch ( level ) {
       case 0:
-        if ( m_disable_suspend > 0 && m_enable_dim ) {
-          if ( m_backlight_current > 1 )
-            setBacklightInternal ( 1 ); // lowest non-off
-        }
-        return true;
-        break;
-      case 1:
-        if ( m_disable_suspend > 1 && m_enable_lightoff ) {
-          setBacklightInternal ( 0 ); // off
-        }
-        return true;
-        break;
-      case 2:
-        if ( m_enable_onlylcdoff ) {
-          ODevice::inst ( )-> setDisplayStatus ( false );
-          m_lcd_status = false;
-          return true;
-        }
-        else // We're going to suspend the whole machine
-        {
-          if ( ( m_disable_suspend > 2 ) &&
-                  ( PowerStatusManager::readStatus().acStatus() != PowerStatus::Online ) &&
-                  ( !Network::networkOnline ( ) ) ) {
-            QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
-            return true;
+
+          if ( m_disable_suspend_ac > 0 && m_enable_dim_ac && onAC ) {
+              if ( m_backlight_current > 1 )
+                  setBacklight( 1 ); // lowest non-off
+          } else  if ( m_disable_suspend > 0 && m_enable_dim ) {
+              if ( m_backlight_current > 1 )
+                  setBacklightInternal( 1 ); // lowest non-off
           }
-        }
-        break;
-    }
-    return false;
+          return true;
+          break;
+      case 1:
+
+          if ( m_disable_suspend_ac > 1 && m_enable_lightoff_ac && onAC ) {
+              setBacklightInternal( 0 ); // off
+          } else if ( m_disable_suspend > 1 && m_enable_lightoff ) {
+              setBacklightInternal( 0 ); // off
+          }
+          return true;
+          break;
+      case 2:
+          if ( m_enable_onlylcdoff_ac && onAC ) {
+              ODevice::inst ( ) -> setDisplayStatus ( false );
+              m_lcd_status = false;
+              return true;
+          }
+          else if ( m_enable_onlylcdoff ) {
+              ODevice::inst ( ) -> setDisplayStatus ( false );
+              m_lcd_status = false;
+              return true;
+          }
+          else // We're going to suspend the whole machine
+          {
+              if ( ( m_disable_suspend_ac > 2 && onAC ) && ( !Network::networkOnline ( ) ) ) {
+                  QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
+                  return true;
+              }
+              if ( ( m_disable_suspend > 2 ) && ( !Network::networkOnline ( ) ) ) {
+                  QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
+                  return true;
+              }
+          }
+          break;
+      }
+      return false;
   }
 
 private:
@@ -260,6 +281,32 @@ public:
       QWSServer::setScreenSaverIntervals( v );
   }
 
+    void setIntervalsAC( int i1, int i2, int i3 )
+  {
+    Config config( "qpe" );
+    config.setGroup( "Screensaver" );
+
+    int v[ 4 ];
+    i1 = ssi( i1, config, "DimAC", "Interval_DimAC", 30 );
+    i2 = ssi( i2, config, "LightOffAC", "Interval_LightOffAC", 20 );
+    i3 = ssi( i3, config, "", "IntervalAC", 60 );
+
+    //qDebug("screen saver intervals: %d %d %d", i1, i2, i3);
+
+    v [ 0 ] = QMAX( 1000 * i1, 100 );
+    v [ 1 ] = QMAX( 1000 * i2, 100 );
+    v [ 2 ] = QMAX( 1000 * i3, 100 );
+    v [ 3 ] = 0;
+    m_enable_dim_ac = ( ( i1 != 0 ) ? config.readNumEntry ( "DimAC", 1 ) : false );
+    m_enable_lightoff_ac = ( ( i2 != 0 ) ? config.readNumEntry ( "LightOffAC", 1 ) : false );
+    m_enable_onlylcdoff_ac = config.readNumEntry ( "LcdOffOnlyAC", 0 );
+
+    if ( !i1 && !i2 && !i3 )
+      QWSServer::setScreenSaverInterval( 0 );
+    else
+      QWSServer::setScreenSaverIntervals( v );
+  }
+
   void setInterval ( int interval )
   {
     setIntervals ( -1, -1, interval );
@@ -271,7 +318,7 @@ public:
       setInterval( -1 );
     m_disable_suspend = mode;
   }
-  
+
   void setBacklight ( int bright )
   {
     // Read from config
@@ -299,7 +346,7 @@ private:
     }
 	if ( bright == -1 )
 		bright = m_backlight_normal;
-	
+
 	if ( bright != m_backlight_current ) {
       ODevice::inst ( )-> setDisplayBrightness ( bright );
       m_backlight_current = bright;
@@ -321,6 +368,11 @@ private:
   bool m_enable_lightoff;
   bool m_enable_onlylcdoff;
 
+  int m_disable_suspend_ac;
+  bool m_enable_dim_ac;
+  bool m_enable_lightoff_ac;
+  bool m_enable_onlylcdoff_ac;
+
   bool m_lcd_status;
 
   int m_backlight_normal;
@@ -335,7 +387,7 @@ void DesktopApplication::switchLCD ( bool on )
 
     if ( dapp-> m_screensaver ) {
       if ( on ) {
-        dapp-> m_screensaver-> setDisplayState ( true ); 
+        dapp-> m_screensaver-> setDisplayState ( true );
         dapp-> m_screensaver-> setBacklight ( -3 );
       }
       else {
@@ -350,9 +402,14 @@ DesktopApplication::DesktopApplication( int& argc, char **argv, Type appType )
     : QPEApplication( argc, argv, appType )
 {
 
-  QTimer * t = new QTimer( this );
-  connect( t, SIGNAL( timeout() ), this, SLOT( psTimeout() ) );
-  t->start( 10000 );
+    //FIXME, need also a method for setting different timer ( changed runtime )
+  m_timer = new QTimer( this );
+  connect( m_timer, SIGNAL( timeout() ), this, SLOT( psTimeout() ) );
+  Config cfg( "qpe" );
+  cfg.setGroup( "APM" );
+  m_timer->start( cfg.readNumEntry( "check_interval", 10000 ) );
+  m_powerVeryLow = cfg.readNumEntry( "power_verylow", 10 );
+  m_powerCritical = cfg.readNumEntry( "power_critical", 5 );
   ps = new PowerStatus;
   pa = new DesktopPowerAlerter( 0 );
 
@@ -407,6 +464,11 @@ void DesktopApplication::systemMessage( const QCString & msg, const QByteArray &
     stream >> t1 >> t2 >> t3;
     m_screensaver-> setIntervals( t1, t2, t3 );
   }
+  else if ( msg == "setScreenSaverIntervalsAC(int,int,int)" ) {
+      int t1, t2, t3;
+      stream >> t1 >> t2 >> t3;
+      m_screensaver-> setIntervalsAC( t1, t2, t3 );
+  }
   else if ( msg == "setBacklight(int)" ) {
     int bright;
     stream >> bright;
@@ -417,6 +479,9 @@ void DesktopApplication::systemMessage( const QCString & msg, const QByteArray &
     stream >> mode;
     m_screensaver-> setMode ( mode );
   }
+  else if ( msg == "reloadPowerWarnSettings()" ) {
+      reloadPowerWarnSettings();
+  }
   else if ( msg == "setDisplayState(int)" ) {
     int state;
     stream >> state;
@@ -426,6 +491,16 @@ void DesktopApplication::systemMessage( const QCString & msg, const QByteArray &
     emit power();
   }
 }
+
+void DesktopApplication::reloadPowerWarnSettings() {
+    Config cfg( "apm" );
+    cfg.setGroup( "Warnings" );
+
+    m_timer->changeInterval( cfg.readNumEntry( "checkinterval", 10000 ) );
+    m_powerVeryLow = cfg.readNumEntry( "powerverylow", 10 );
+    m_powerCritical = cfg.readNumEntry( "powervcritical", 5 );
+}
+
 
 enum MemState { Unknown, VeryLow, Low, Normal } memstate = Unknown;
 
@@ -479,12 +554,12 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
         }
         return TRUE;
       }
-//       menu key now opens application menu/toolbar
+
 //         if ( ke->simpleData.keycode == Key_F11 ) {
 //         if ( press ) emit menu();
 //         return TRUE;
 //         }
-      
+
       if ( ke->simpleData.keycode == Key_F12 ) {
         while ( activePopupWidget() )
           activePopupWidget() ->close();
@@ -563,13 +638,15 @@ void DesktopApplication::psTimeout()
 
   *ps = PowerStatusManager::readStatus();
 
-  if ( ( ps->batteryStatus() == PowerStatus::VeryLow ) ) {
-    pa->alert( tr( "Battery is running very low." ), 6 );
+  // if ( ( ps->batteryStatus() == PowerStatus::VeryLow ) ) {
+   if ( ( ps->batteryPercentRemaining() == m_powerVeryLow ) ) {
+       pa->alert( tr( "Battery is running very low." ), 6 );
   }
 
-  if ( ps->batteryStatus() == PowerStatus::Critical ) {
-    pa->alert( tr( "Battery level is critical!\n"
-                   "Keep power off until power restored!" ), 1 );
+   // if ( ps->batteryStatus() == PowerStatus::Critical ) {
+   if ( ps->batteryPercentRemaining() == m_powerCritical ) {
+       pa->alert( tr( "Battery level is critical!\n"
+                      "Keep power off until power restored!" ), 1 );
   }
 
   if ( ps->backupBatteryStatus() == PowerStatus::VeryLow ) {
