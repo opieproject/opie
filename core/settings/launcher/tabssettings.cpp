@@ -47,7 +47,7 @@
 #include <qmessagebox.h>
 
 
-#define GLOBALID 	"_launchersettings_global_dummy_"
+#define GLOBALID 	".global."
 
 
 TabsSettings::TabsSettings ( QWidget *parent, const char *name )
@@ -124,42 +124,50 @@ void TabsSettings::readTabSettings ( Config &cfg )
 	QString grp ( "Tab %1" ); // No tr
 	m_tabs. clear ( );
 
+	TabConfig global_def;
+	global_def. m_view        = TabConfig::Icon;
+	global_def. m_bg_type     = TabConfig::Ruled;
+	global_def. m_bg_image    = "launcher/opie-background";
+	global_def. m_bg_color    = colorGroup ( ). color ( QColorGroup::Base ). name ( );
+	global_def. m_text_color  = colorGroup ( ). color ( QColorGroup::Text ). name ( );
+	global_def. m_font_use    = false;
+	global_def. m_font_family = font ( ). family ( );
+	global_def. m_font_size   = font ( ). pointSize ( );
+	global_def. m_font_weight = 50;
+	global_def. m_font_italic = false;
+	global_def. m_changed     = false;
+	 
+
 	for ( QStringList::Iterator it = m_ids. begin ( ); it != m_ids. end ( ); ++it ) {
-		TabConfig tc;
-		tc. m_view    = TabConfig::Icon;
-		tc. m_bg_type = TabConfig::Ruled;
-		tc. m_changed = false;
+		TabConfig tc = ( it != m_ids. begin ( )) ? m_tabs [GLOBALID] : global_def;
 
 		cfg. setGroup ( grp. arg ( *it ));
-		if ( *it == GLOBALID )
-			cfg. clearGroup ( );
 
-		QString view = cfg. readEntry ( "View", "Icon" );
+		QString view = cfg. readEntry ( "View" );
+		if ( view == "Icon" ) // No tr
+			tc. m_view = TabConfig::Icon;
 		if ( view == "List" ) // No tr
 			tc. m_view = TabConfig::List;
 
-		QString bgType = cfg. readEntry ( "BackgroundType", "Image" );
-		if ( bgType == "SolidColor" )
+		QString bgType = cfg. readEntry ( "BackgroundType" );
+		if ( bgType == "Image" )
+			tc. m_bg_type = TabConfig::Image;
+		else if ( bgType == "SolidColor" )
 			tc. m_bg_type = TabConfig::SolidColor;
 		else if ( bgType == "Image" ) // No tr
 			tc. m_bg_type = TabConfig::Image;
 
-		tc. m_bg_image = cfg. readEntry ( "BackgroundImage", "launcher/opie-background" );
-		tc. m_bg_color = cfg. readEntry ( "BackgroundColor", colorGroup ( ). color ( QColorGroup::Base ). name ( ));
-		tc. m_text_color = cfg. readEntry ( "TextColor", colorGroup ( ). color ( QColorGroup::Text ). name ( ));
+		tc. m_bg_image = cfg. readEntry ( "BackgroundImage", tc. m_bg_image );
+		tc. m_bg_color = cfg. readEntry ( "BackgroundColor", tc. m_bg_color );
+		tc. m_text_color = cfg. readEntry ( "TextColor", tc. m_text_color );
 		QStringList f = cfg. readListEntry ( "Font", ',' );
 		if ( f. count ( ) == 4 ) {
+			tc. m_font_use = true;
 			tc. m_font_family = f [0];
 			tc. m_font_size = f [1]. toInt ( );
 			tc. m_font_weight = f [2]. toInt ( );
 			tc. m_font_italic = ( f [3]. toInt ( ));
-		} else {
-			tc. m_font_family = font ( ). family ( );
-			tc. m_font_size = font ( ). pointSize ( );
-			tc. m_font_weight = 50;
-			tc. m_font_italic = false;
-		}
-		
+		} 		
 		m_tabs [*it] = tc;
 	}
 
@@ -176,8 +184,10 @@ void TabsSettings::readTabSettings ( Config &cfg )
 		else
 			same &= ( *first == m_tabs [*it] );
 	}
-	if ( same )
+	if ( same ) {
 		m_tabs [GLOBALID] = *first;
+		m_tabs [GLOBALID]. m_changed = true;
+	}
 }
 
 
@@ -191,7 +201,7 @@ void TabsSettings::accept ( )
 	for ( QStringList::Iterator it = m_ids. begin ( ); it != m_ids. end ( ); ++it ) {
 		TabConfig &tc = m_tabs [*it];
 
-		if ( !tc. m_changed || ( *it == GLOBALID ))
+		if ( !tc. m_changed )
 			continue;
 			
 		cfg. setGroup ( grp. arg ( *it ));
@@ -211,8 +221,13 @@ void TabsSettings::accept ( )
 		cfg. writeEntry ( "BackgroundColor", tc. m_bg_color );
 		cfg. writeEntry ( "TextColor", tc. m_text_color );
 
-		QString f = tc. m_font_family + "," + QString::number ( tc. m_font_size ) + "," + QString::number ( tc. m_font_weight ) + "," + ( tc. m_font_italic ? "1" : "0" );
-		cfg. writeEntry ( "Font", f );
+		if ( tc. m_font_use ) {
+			QString f = tc. m_font_family + "," + QString::number ( tc. m_font_size ) + "," + QString::number ( tc. m_font_weight ) + "," + ( tc. m_font_italic ? "1" : "0" );
+			cfg. writeEntry ( "Font", f );
+		}
+		else
+			cfg. removeEntry ( "Font" );
+		
 		QCopEnvelope be ( "QPE/Launcher", "setTabBackground(QString,int,QString)" );
 
 		switch ( tc. m_bg_type ) {
@@ -234,9 +249,11 @@ void TabsSettings::accept ( )
 		te << *it << tc. m_text_color;
 
 		QCopEnvelope fe ( "QPE/Launcher", "setFont(QString,QString,int,int,int)" );
-		fe << *it << tc. m_font_family;
+		fe << *it;
+		fe << ( tc. m_font_use ? tc. m_font_family : QString::null );
 		fe << tc. m_font_size;
-		fe << tc. m_font_weight << ( tc. m_font_italic ? 1 : 0 );
+		fe << tc. m_font_weight;
+		fe << ( tc. m_font_italic ? 1 : 0 );
 
 		tc. m_changed = false;
 	}

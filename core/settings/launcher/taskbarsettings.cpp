@@ -135,6 +135,7 @@ void TaskbarSettings::accept ( )
 {
 	Config cfg ( "Taskbar" );
 	cfg. setGroup ( "Applets" );
+
 	if ( m_applets_changed ) {
 		QStringList exclude;
 		QMap <QString, QCheckListItem *>::Iterator it;
@@ -148,7 +149,7 @@ void TaskbarSettings::accept ( )
 	cfg. write ( );
 
 	if ( m_applets_changed ) {
-		QCopEnvelope ( "QPE/TaskBar", "reloadApplets()" );
+		QCopEnvelope e ( "QPE/TaskBar", "reloadApplets()" );
 		m_applets_changed = false;
 	}
 }

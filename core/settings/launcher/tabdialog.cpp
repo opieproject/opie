@@ -39,6 +39,7 @@
 #include <qbuttongroup.h>
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
+#include <qcheckbox.h>
 
 #include <opie/ofontselector.h>
 #include <opie/otabwidget.h>
@@ -267,7 +268,7 @@ TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig
 {
 	setCaption ( tr( "Edit Tab" ));
 	
-	QVBoxLayout *lay = new QVBoxLayout ( this, 4, 4 );
+	QVBoxLayout *lay = new QVBoxLayout ( this, 3, 3 );
 	
 	OTabWidget *tw = new OTabWidget ( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );
 	QWidget *bgtab;
@@ -297,7 +298,9 @@ TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig
 	m_solidcolor-> setColor ( QColor ( tc. m_bg_color ));
 	m_bgimage = tc. m_bg_image;
 	bgTypeClicked ( tc. m_bg_type );
+	m_fontuse-> setChecked ( tc. m_font_use );
 	m_fontselect-> setSelectedFont ( QFont ( tc. m_font_family, tc. m_font_size, tc. m_font_weight, tc. m_font_italic ));
+	m_fontselect-> setEnabled ( m_fontuse-> isChecked ( ));
 	fontClicked ( m_fontselect-> selectedFont ( ));
 
 	QWhatsThis::add ( sample, tr( "This is a rough preview of what the currently selected Tab will look like." ));
@@ -310,18 +313,26 @@ TabDialog::~TabDialog ( )
 
 QWidget *TabDialog::createFontTab ( QWidget *parent )
 {
-    m_fontselect = new OFontSelector ( false, parent, "FontTab" );    
+    QWidget *tab = new QWidget ( parent, "FontTab" );
+    QVBoxLayout *vertLayout = new QVBoxLayout ( tab, 3, 3 );
+
+	m_fontuse = new QCheckBox ( tr( "Use a custom font" ), tab );
+	vertLayout-> addWidget ( m_fontuse );
+
+    m_fontselect = new OFontSelector ( false, tab, "fontsel" );    
+    vertLayout-> addWidget ( m_fontselect );
     
+	connect ( m_fontuse, SIGNAL( toggled ( bool )), m_fontselect, SLOT( setEnabled ( bool )));
     connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
              this, SLOT( fontClicked ( const QFont & )));
 
-    return m_fontselect; 
+    return tab; 
 }
 
 QWidget *TabDialog::createBgTab ( QWidget *parent )
 {
-    QWidget *tab = new QWidget( parent, "AdvancedTab" );
-    QVBoxLayout *vertLayout = new QVBoxLayout( tab, 4, 4 );
+    QWidget *tab = new QWidget( parent, "BgTab" );
+    QVBoxLayout *vertLayout = new QVBoxLayout( tab, 3, 3 );
         
     QGridLayout* gridLayout = new QGridLayout ( vertLayout );
     gridLayout-> setColStretch ( 1, 10 );
@@ -338,7 +349,7 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
     gridLayout-> addWidget( rb, 0, 1 );
 
 	QHBoxLayout *hb = new QHBoxLayout ( );
-	hb-> setSpacing ( 4 );
+	hb-> setSpacing ( 3 );
 
     rb = new QRadioButton( tr( "Solid color" ), tab, "solid" );
     m_bgtype-> insert ( rb, TabConfig::SolidColor ); 
@@ -353,7 +364,7 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
     gridLayout-> addLayout ( hb, 1, 1 );
 
 	hb = new QHBoxLayout ( );
-	hb-> setSpacing ( 4 );
+	hb-> setSpacing ( 3 );
 	
 	rb = new QRadioButton( tr( "Image" ), tab, "image" );
     m_bgtype-> insert ( rb, TabConfig::Image );
@@ -380,8 +391,8 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
 
 QWidget *TabDialog::createIconTab ( QWidget *parent )
 {
-    QWidget *tab = new QWidget( parent, "AdvancedTab" );
-    QVBoxLayout *vertLayout = new QVBoxLayout( tab, 4, 4 );
+    QWidget *tab = new QWidget( parent, "IconTab" );
+    QVBoxLayout *vertLayout = new QVBoxLayout( tab, 3, 3 );
         
     QGridLayout* gridLayout = new QGridLayout ( vertLayout );
     gridLayout-> setColStretch ( 1, 10 );
@@ -489,13 +500,17 @@ void TabDialog::accept ( )
 	m_tc. m_bg_color = m_solidcolor-> color ( ). name ( );
 	m_tc. m_bg_image = m_bgimage;
 	m_tc. m_text_color = m_iconcolor-> color ( ). name ( );
+		
+	m_tc. m_font_use = m_fontuse-> isChecked ( );
+
+	if ( m_tc. m_font_use ) {	
+		QFont f = m_fontselect-> selectedFont ( );
 	
-	QFont f = m_fontselect-> selectedFont ( );
-	
-	m_tc. m_font_family = f. family ( );
-	m_tc. m_font_size = f. pointSize ( );
-	m_tc. m_font_weight = f. weight ( );
-	m_tc. m_font_italic = f. italic ( );
+		m_tc. m_font_family = f. family ( );
+		m_tc. m_font_size = f. pointSize ( );
+		m_tc. m_font_weight = f. weight ( );
+		m_tc. m_font_italic = f. italic ( );
+	}
 	
 	QDialog::accept ( );
 }

@@ -36,6 +36,7 @@ class OFontSelector;
 class SampleView;
 class OColorButton;
 class QPushButton;
+class QCheckBox;
 
 
 class TabDialog : public QDialog {
@@ -71,6 +72,7 @@ private:
 	QPushButton *m_imagebrowse;
 	QString m_bgimage;	
 	QButtonGroup *m_bgtype;
+	QCheckBox *m_fontuse;
 	
 	TabConfig &m_tc;
 };

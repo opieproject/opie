@@ -43,6 +43,7 @@ struct TabConfig {
 	QString        m_bg_image;
 	QString        m_bg_color;
 	QString        m_text_color;
+	bool           m_font_use;
 	QString        m_font_family;
 	int            m_font_size;
 	int            m_font_weight;
@@ -56,10 +57,14 @@ struct TabConfig {
 		       ( m_bg_image == tc. m_bg_image ) &&
 		       ( m_bg_color == tc. m_bg_color ) &&
 		       ( m_text_color == tc. m_text_color ) &&
-		       ( m_font_family == tc. m_font_family ) &&
-		       ( m_font_size == tc. m_font_size ) &&
-		       ( m_font_weight == tc. m_font_weight ) &&
-		       ( m_font_italic == tc. m_font_italic );
+		       ( m_font_use == tc. m_font_use ) && 
+		       ( m_font_use ? (
+		         ( m_font_family == tc. m_font_family ) &&
+		         ( m_font_size == tc. m_font_size ) &&
+		         ( m_font_weight == tc. m_font_weight ) &&
+		         ( m_font_italic == tc. m_font_italic )
+		        ) : true );
+		        
 	}
 };
 
