@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: option.cpp,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
-** Definition of ________ class.
+** Implementation of Option class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -44,15 +42,19 @@
 //convenience
 QString Option::prf_ext;
 QString Option::prl_ext;
+QString Option::libtool_ext;
+QString Option::pkgcfg_ext;
 QString Option::ui_ext;
 QStringList Option::h_ext;
-QString Option::moc_ext;
+QString Option::cpp_moc_ext;
+QString Option::h_moc_ext;
 QStringList Option::cpp_ext;
 QString Option::obj_ext;
 QString Option::lex_ext;
 QString Option::yacc_ext;
 QString Option::dir_sep;
-QString Option::moc_mod;
+QString Option::h_moc_mod;
+QString Option::cpp_moc_mod;
 QString Option::yacc_mod;
 QString Option::lex_mod;
 
@@ -80,6 +82,9 @@ Option::TARG_MODE Option::target_mode = Option::TARG_QNX6_MODE;
 Option::TARG_MODE Option::target_mode = Option::TARG_UNIX_MODE;
 #endif
 
+//QMAKE_*_PROPERTY stuff
+QStringList Option::prop::properties;
+
 //QMAKE_GENERATE_PROJECT stuff
 bool Option::projfile::do_pwd = TRUE;
 bool Option::projfile::do_recursive = TRUE;
@@ -104,6 +109,8 @@ static Option::QMAKE_MODE default_mode(QString progname)
 	progname = progname.right(progname.length() - (s + 1));
     if(progname == "qmakegen")
 	return Option::QMAKE_GENERATE_PROJECT;
+    else if(progname == "qt-config")
+	return Option::QMAKE_QUERY_PROPERTY;
     return Option::QMAKE_GENERATE_MAKEFILE;
 }
 
@@ -161,7 +168,12 @@ bool usage(const char *a0)
     return FALSE;
 }
 
-bool
+enum {
+    QMAKE_CMDLINE_SUCCESS,
+    QMAKE_CMDLINE_SHOW_USAGE,
+    QMAKE_CMDLINE_BAIL
+};
+int
 Option::internalParseCommandLine(int argc, char **argv, int skip)
 {
     bool before = TRUE;
@@ -178,6 +190,10 @@ Option::internalParseCommandLine(int argc, char **argv, int skip)
 		    Option::mkfile::do_deps = FALSE;
 		    Option::mkfile::do_mocs = FALSE;
 		    Option::qmake_mode = Option::QMAKE_GENERATE_PRL;
+		} else if(opt == "set") {
+		    Option::qmake_mode = Option::QMAKE_SET_PROPERTY;
+		} else if(opt == "query") {
+		    Option::qmake_mode = Option::QMAKE_QUERY_PROPERTY;
 		} else if(opt == "makefile") {
 		    Option::qmake_mode = Option::QMAKE_GENERATE_MAKEFILE;
 		} else {
@@ -208,9 +224,9 @@ Option::internalParseCommandLine(int argc, char **argv, int skip)
 	    } else if(opt == "version" || opt == "v" || opt == "-version") {
 		fprintf(stderr, "Qmake version: %s (Qt %s)\n", qmake_version(), QT_VERSION_STR);
 		fprintf(stderr, "Qmake is free software from Trolltech AS.\n");
-		return FALSE;
+		return QMAKE_CMDLINE_BAIL;
 	    } else if(opt == "h" || opt == "help") {
-		return FALSE;
+		return QMAKE_CMDLINE_SHOW_USAGE;
 	    } else if(opt == "Wall") {
 		Option::warn_level |= WarnAll;
 	    } else if(opt == "Wparser") {
@@ -239,7 +255,7 @@ Option::internalParseCommandLine(int argc, char **argv, int skip)
 			Option::mkfile::qmakespec_commandline = argv[x];
 		    } else {
 			fprintf(stderr, "***Unknown option -%s\n", opt.latin1());
-			return usage(argv[0]);
+			return QMAKE_CMDLINE_SHOW_USAGE;
 		    }
 		} else if(Option::qmake_mode == Option::QMAKE_GENERATE_PROJECT) {
 		    if(opt == "nopwd") {
@@ -250,7 +266,7 @@ Option::internalParseCommandLine(int argc, char **argv, int skip)
 			Option::projfile::do_recursive = FALSE;
 		    } else {
 			fprintf(stderr, "***Unknown option -%s\n", opt.latin1());
-			return FALSE;
+			return QMAKE_CMDLINE_SHOW_USAGE;
 		    }
 		}
 	    }
@@ -262,32 +278,46 @@ Option::internalParseCommandLine(int argc, char **argv, int skip)
 		else
 		    Option::after_user_vars.append(arg);
 	    } else {
-		QFileInfo fi(arg);
-		if(!fi.convertToAbs()) //strange
-		    arg = fi.filePath();
-		if(Option::qmake_mode == Option::QMAKE_GENERATE_MAKEFILE ||
-		   Option::qmake_mode == Option::QMAKE_GENERATE_PRL)
-		    Option::mkfile::project_files.append(arg);
-		else
-		    Option::projfile::project_dirs.append(arg);
+		bool handled = TRUE;
+		if(Option::qmake_mode == Option::QMAKE_QUERY_PROPERTY ||
+		    Option::qmake_mode == Option::QMAKE_SET_PROPERTY) {
+		    Option::prop::properties.append(arg);
+		} else {
+		    QFileInfo fi(arg);
+		    if(!fi.convertToAbs()) //strange
+			arg = fi.filePath();
+		    if(Option::qmake_mode == Option::QMAKE_GENERATE_MAKEFILE ||
+		       Option::qmake_mode == Option::QMAKE_GENERATE_PRL)
+			Option::mkfile::project_files.append(arg);
+		    else if(Option::qmake_mode == Option::QMAKE_GENERATE_PROJECT)
+			Option::projfile::project_dirs.append(arg);
+		    else 
+			handled = FALSE;
+		}
+		if(!handled)
+		    return QMAKE_CMDLINE_SHOW_USAGE;
 	    }
 	}
     }
-    return TRUE;
+    return QMAKE_CMDLINE_SUCCESS;
 }
 
 
 bool
 Option::parseCommandLine(int argc, char **argv)
 {
-    Option::moc_mod = "moc_";
+    Option::cpp_moc_mod = "";
+    Option::h_moc_mod = "moc_";
     Option::lex_mod = "_lex";
     Option::yacc_mod = "_yacc";
     Option::prl_ext = ".prl";
+    Option::libtool_ext = ".la";
+    Option::pkgcfg_ext = ".pc";
     Option::prf_ext = ".prf";
     Option::ui_ext = ".ui";
     Option::h_ext << ".h" << ".hpp" << ".hh" << ".H" << ".hxx";
-    Option::moc_ext = ".moc";
+    Option::cpp_moc_ext = ".moc";
+    Option::h_moc_ext = ".cpp";
     Option::cpp_ext << ".cpp" << ".cc" << ".cxx" << ".C";
     Option::lex_ext = ".l";
     Option::yacc_ext = ".y";
@@ -334,8 +364,11 @@ Option::parseCommandLine(int argc, char **argv)
 	}
 	free(env_argv);
     }
-    if(!internalParseCommandLine(argc, argv, 1))
-	return usage(argv[0]);
+    {
+	int ret = internalParseCommandLine(argc, argv, 1);
+	if(ret != QMAKE_CMDLINE_SUCCESS) 
+	    return ret == QMAKE_CMDLINE_SHOW_USAGE ? usage(argv[0]) : FALSE;
+    }
 
     //last chance for defaults
     if(Option::qmake_mode == Option::QMAKE_GENERATE_MAKEFILE ||
@@ -381,22 +414,30 @@ bool Option::postProcessProject(QMakeProject *project)
     if(h_ext.isEmpty())
 	h_ext << ".h";
 
+    if(!project->isEmpty("QMAKE_EXT_PKGCONFIG"))
+	Option::pkgcfg_ext = project->first("QMAKE_EXT_PKGCONFIG");
+    if(!project->isEmpty("QMAKE_EXT_LIBTOOL"))
+	Option::libtool_ext = project->first("QMAKE_EXT_LIBTOOL");
     if(!project->isEmpty("QMAKE_EXT_PRL"))
 	Option::prl_ext = project->first("QMAKE_EXT_PRL");
     if(!project->isEmpty("QMAKE_EXT_PRF"))
 	Option::prf_ext = project->first("QMAKE_EXT_PRF");
     if(!project->isEmpty("QMAKE_EXT_UI"))
 	Option::ui_ext = project->first("QMAKE_EXT_UI");
-    if(!project->isEmpty("QMAKE_EXT_MOC"))
-	Option::moc_ext = project->first("QMAKE_EXT_MOC");
+    if(!project->isEmpty("QMAKE_EXT_CPP_MOC"))
+	Option::cpp_moc_ext = project->first("QMAKE_EXT_CPP_MOC");
+    if(!project->isEmpty("QMAKE_EXT_H_MOC"))
+	Option::h_moc_ext = project->first("QMAKE_EXT_H_MOC");
     if(!project->isEmpty("QMAKE_EXT_LEX"))
 	Option::lex_ext = project->first("QMAKE_EXT_LEX");
     if(!project->isEmpty("QMAKE_EXT_YACC"))
 	Option::yacc_ext = project->first("QMAKE_EXT_YACC");
     if(!project->isEmpty("QMAKE_EXT_OBJ"))
 	Option::obj_ext = project->first("QMAKE_EXT_OBJ");
-    if(!project->isEmpty("QMAKE_MOD_MOC"))
-	Option::moc_mod = project->first("QMAKE_MOD_MOC");
+    if(!project->isEmpty("QMAKE_H_MOD_MOC"))
+	Option::h_moc_mod = project->first("QMAKE_H_MOD_MOC");
+    if(!project->isEmpty("QMAKE_CPP_MOD_MOC"))
+	Option::cpp_moc_mod = project->first("QMAKE_CPP_MOD_MOC");
     if(!project->isEmpty("QMAKE_MOD_LEX"))
 	Option::lex_mod = project->first("QMAKE_MOD_LEX");
     if(!project->isEmpty("QMAKE_MOD_YACC"))

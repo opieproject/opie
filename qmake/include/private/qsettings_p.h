@@ -1,24 +1,34 @@
 /****************************************************************************
-** $Id: qsettings_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
+** 
 **
 ** Definition of QSettings related classes
 **
-** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
+** Created : 990124
 **
-** This file is part of the tools module of the Qt GUI Toolkit.
+** Copyright (C) 1999-2002 Trolltech AS.  All rights reserved.
+**
+** This file is part of the kernel module of the Qt GUI Toolkit.
+**
+** This file may be distributed under the terms of the Q Public License
+** as defined by Trolltech AS of Norway and appearing in the file
+** LICENSE.QPL included in the packaging of this file.
+**
+** This file may be distributed and/or modified under the terms of the
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
 **
 ** Licensees holding valid Qt Enterprise Edition or Qt Professional Edition
-** licenses for Windows may use this file in accordance with the Qt Commercial
-** License Agreement provided with the Software.
-**
-** This file is not available for use under any other license without
-** express written permission from the copyright holder.
+** licenses may use this file in accordance with the Qt Commercial License
+** Agreement provided with the Software.
 **
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ** See http://www.trolltech.com/pricing.html or email sales@trolltech.com for
 **   information about Qt Commercial License Agreements.
+** See http://www.trolltech.com/qpl/ for QPL licensing information.
+** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
@@ -46,6 +56,7 @@
 #include "qvaluestack.h"
 #endif // QT_H
 
+#ifndef QT_NO_SETTINGS
 class QSettingsSysPrivate;
 
 // QSettingsGroup is a map of key/value pairs
@@ -128,6 +139,7 @@ public:
     void	sysInsertSearchPath( QSettings::System, const QString & );
     void	sysRemoveSearchPath( QSettings::System, const QString & );
 #endif
-};
 
+};
+#endif //QT_NO_SETTINGS
 #endif // QSETTINGS_P_H

@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: option.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
-** Definition of ________ class.
+** Definition of Option class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -34,6 +32,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #ifndef __OPTION_H__
 #define __OPTION_H__
 
@@ -43,7 +42,7 @@
 #include <qfile.h>
 
 #define QMAKE_VERSION_MAJOR 1
-#define QMAKE_VERSION_MINOR 5
+#define QMAKE_VERSION_MINOR 7
 #define QMAKE_VERSION_PATCH 0
 const char *qmake_version();
 
@@ -60,16 +59,20 @@ void warn_msg(QMakeWarn t, const char *fmt, ...);
 struct Option
 {
     //simply global convenience
+    static QString libtool_ext;
+    static QString pkgcfg_ext;
     static QString prf_ext;
     static QString prl_ext;
     static QString ui_ext;
     static QStringList h_ext;
     static QStringList cpp_ext;
-    static QString moc_ext;
+    static QString h_moc_ext;
+    static QString cpp_moc_ext;
     static QString obj_ext;
     static QString lex_ext;
     static QString yacc_ext;
-    static QString moc_mod;
+    static QString h_moc_mod;
+    static QString cpp_moc_mod;
     static QString lex_mod;
     static QString yacc_mod;
     static QString dir_sep;
@@ -83,7 +86,7 @@ struct Option
 
     //global qmake mode, can only be in one mode per invocation!
     enum QMAKE_MODE { QMAKE_GENERATE_NOTHING, QMAKE_GENERATE_PROJECT, QMAKE_GENERATE_MAKEFILE, 
-		      QMAKE_GENERATE_PRL };
+		      QMAKE_GENERATE_PRL, QMAKE_SET_PROPERTY, QMAKE_QUERY_PROPERTY };
     static QMAKE_MODE qmake_mode;
 
     //all modes
@@ -95,6 +98,12 @@ struct Option
     enum TARG_MODE { TARG_UNIX_MODE, TARG_WIN_MODE, TARG_MACX_MODE, TARG_MAC9_MODE, TARG_QNX6_MODE };
     static TARG_MODE target_mode;
     static QString user_template, user_template_prefix;
+
+    
+    //QMAKE_*_PROPERTY options
+    struct prop {
+	static QStringList properties;
+    };
 
     //QMAKE_GENERATE_PROJECT options
     struct projfile {
@@ -118,7 +127,7 @@ struct Option
     };
 
 private:
-    static bool internalParseCommandLine(int, char **, int=0);
+    static int internalParseCommandLine(int, char **, int=0);
 };
 
 

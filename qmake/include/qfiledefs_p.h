@@ -1,11 +1,11 @@
 /****************************************************************************
 ** 
 **
-** Definition of some private QDir functions.
+** Common macros and system include files for QFile, QFileInfo and QDir.
 **
-** Created : 001106
+** Created : 930812
 **
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2001 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the tools module of the Qt GUI Toolkit.
 **
@@ -35,45 +35,30 @@
 **
 **********************************************************************/
 
-#ifndef QDIR_P_H
-#define QDIR_P_H
+#ifndef QFILEDEFS_P_H
+#define QFILEDEFS_P_H
 
 //
 //  W A R N I N G
 //  -------------
 //
 // This file is not part of the Qt API.  It exists for the convenience
-// of qdir.cpp and qdir_*.cpp.
-// This header file may change from version to version without notice,
-// or even be removed.
+// of qfileinfo*.cpp.  This header file may change from version to version
+// without notice, or even be removed.
 //
 // We mean it.
 //
 //
 
-#ifndef QT_H
-#include "qregexp.h"
-#include "qvaluelist.h"
-#endif // QT_H
-
-extern QValueList<QRegExp> qt_makeFilterList( const QString & );
-extern bool qt_matchFilterList( const QValueList<QRegExp> &, const QString & );
-
-extern int qt_cmp_si_sortSpec;
-
-#if defined(Q_C_CALLBACKS)
-extern "C" {
-#endif
-
-#ifdef Q_OS_TEMP
-extern int __cdecl qt_cmp_si( const void *, const void * );
+// Be sure to include qplatformdefs.h first!
+struct QFileInfoCache
+{
+#if defined(Q_WS_WIN)
+    QT_STATBUF st;
 #else
-extern int qt_cmp_si( const void *, const void * );
+    struct stat st;
 #endif
+};
 
-#if defined(Q_C_CALLBACKS)
-}
+
 #endif
-
-
-#endif // QDIR_P_H

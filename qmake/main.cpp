@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: main.cpp,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
-** Definition of ________ class.
+** ???
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -36,6 +34,7 @@
 **********************************************************************/
 
 #include "project.h"
+#include "property.h"
 #include "option.h"
 #include "makefile.h"
 #include <qnamespace.h>
@@ -50,6 +49,10 @@
 
 // for Borland, main is defined to qMain which breaks qmake
 #undef main
+#ifdef Q_OS_MAC
+// for qurl
+bool qt_resolve_symlinks = FALSE;
+#endif
 
 int main(int argc, char **argv)
 {
@@ -59,15 +62,36 @@ int main(int argc, char **argv)
 
     QDir sunworkshop42workaround = QDir::current();
     QString oldpwd = sunworkshop42workaround.currentDirPath();
-    Option::output_dir = oldpwd; //for now this is the output dir
 #ifdef Q_WS_WIN
-    if ( !(Option::output_dir.length() == 3 && Option::output_dir[0].isLetter() && Option::output_dir.endsWith(":/") ) )
+    if(!(oldpwd.length() == 3 && oldpwd[0].isLetter() && oldpwd.endsWith(":/") ) )
 #endif
     {
-	if(Option::output_dir.right(1) != QString(QChar(QDir::separator())))
-	    Option::output_dir += QDir::separator();
+	if(oldpwd.right(1) != QString(QChar(QDir::separator())))
+	    oldpwd += QDir::separator();
     }
-    QMakeProject proj;
+    Option::output_dir = oldpwd; //for now this is the output dir
+
+    if(Option::output.name() != "-") {
+	QFileInfo fi(Option::output);
+	QString dir;
+	if(fi.isDir()) {
+	    dir = fi.filePath();
+	} else {
+	    QString tmp_dir = fi.dirPath();
+	    if(!tmp_dir.isEmpty() && QFile::exists(tmp_dir))
+		dir = tmp_dir;
+	}
+	if(!dir.isNull() && dir != ".") 
+	    Option::output_dir = dir;
+	if(QDir::isRelativePath(Option::output_dir))
+	    Option::output_dir.prepend(oldpwd);
+    }
+
+    QMakeProperty prop;
+    if(Option::qmake_mode == Option::QMAKE_QUERY_PROPERTY || Option::qmake_mode == Option::QMAKE_SET_PROPERTY) 
+	return prop.exec() ? 0 : 101;
+
+    QMakeProject proj(&prop);
     int exit_val = 0;
     QStringList files;
     if(Option::qmake_mode == Option::QMAKE_GENERATE_PROJECT)
@@ -77,7 +101,7 @@ int main(int argc, char **argv)
     for(QStringList::Iterator pfile = files.begin(); pfile != files.end(); pfile++) {
 	if(Option::qmake_mode == Option::QMAKE_GENERATE_MAKEFILE ||
 	   Option::qmake_mode == Option::QMAKE_GENERATE_PRL) {
-	    QString fn = (*pfile);
+	    QString fn = Option::fixPathToLocalOS((*pfile));
 
 	    //setup pwd properly
 	    debug_msg(1, "Resetting dir to: %s", oldpwd.latin1());
@@ -85,7 +109,7 @@ int main(int argc, char **argv)
 	    int di = fn.findRev(Option::dir_sep);
 	    if(di != -1) {
 		debug_msg(1, "Changing dir to: %s", fn.left(di).latin1());
-		if(!QDir::setCurrent(fn.left(fn.findRev(Option::dir_sep))))
+		if(!QDir::setCurrent(fn.left(di)))
 		    fprintf(stderr, "Cannot find directory: %s\n", fn.left(di).latin1());
 		fn = fn.right(fn.length() - di - 1);
 	    }
@@ -123,6 +147,7 @@ int main(int argc, char **argv)
 		} else {
 		    if(Option::output.name().isEmpty() && Option::qmake_mode == Option::QMAKE_GENERATE_MAKEFILE)
 			Option::output.setName(proj.first("QMAKE_MAKEFILE"));
+		    Option::output_dir = oldpwd;
 		    if(!mkfile->openOutput(Option::output)) {
 			fprintf(stderr, "Failure to open file: %s\n",
 				Option::output.name().isEmpty() ? "(stdout)" : Option::output.name().latin1());
@@ -149,7 +174,7 @@ int main(int argc, char **argv)
 	if(Option::debug_level) {
 	    QMap<QString, QStringList> &vars = proj.variables();
 	    for(QMap<QString, QStringList>::Iterator it = vars.begin(); it != vars.end(); ++it) {
-		if(it.key().left(1) != "." && !it.data().isEmpty())
+		if(!it.key().startsWith(".") && !it.data().isEmpty())
 		    debug_msg(1, "%s === %s", it.key().latin1(), it.data().join(" :: ").latin1());
 	    }
 	}

@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: msvc_objectmodel.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
-** Definition of ________ class.
+** Definition of VCProject class.
 **
-** Copyright (C) 2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2002-2003 Trolltech AS.  All rights reserved.
 **
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -32,6 +32,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #ifndef __MSVC_OBJECTMODEL_H__
 #define __MSVC_OBJECTMODEL_H__
 
@@ -56,7 +57,8 @@ enum customBuildCheck {
     none,
     moc,
     uic,
-    lexyacc
+    lexyacc,
+    resource
 };
 enum triState {
     unset = -1,
@@ -114,6 +116,7 @@ enum ConfigurationTypes {
     typeGeneric        = 10
 };
 enum debugOption {
+    debugUnknown = -1,
     debugDisabled,
     debugOldStyleInfo,
     debugLineInfoOnly,
@@ -240,7 +243,8 @@ enum genProxyLanguage {
 enum inlineExpansionOption {
     expandDisable,
     expandOnlyInline,
-    expandAnySuitable
+    expandAnySuitable,
+    expandDefault // Not useful number, but stops the output
 };
 enum linkIncrementalType {
     linkIncrementalDefault,
@@ -296,7 +300,8 @@ enum optimizeOption {
     optimizeMinSpace,
     optimizeMaxSpeed,
     optimizeFull,
-    optimizeCustom
+    optimizeCustom,
+    optimizeDefault // Not useful number, but stops the output
 };
 enum optRefType {
     optReferencesDefault,
@@ -315,6 +320,7 @@ enum pchOption {
     pchUseUsingSpecific
 };
 enum preprocessOption {
+    preprocessUnknown = -1,
     preprocessNo,
     preprocessYes,
     preprocessNoLineNumbers
@@ -330,6 +336,7 @@ enum RemoteDebuggerType {
     DbgRemoteTCPIP
 };
 enum runtimeLibraryOption {
+    rtUnknown = -1,
     rtMultiThreaded,
     rtMultiThreadedDebug,
     rtMultiThreadedDLL,
@@ -379,6 +386,7 @@ enum useOfMfc {
     useMfcDynamic
 };
 enum warningLevelOption {
+    warningLevelUnknown = -1,
     warningLevel_0,
     warningLevel_1,
     warningLevel_2,
@@ -611,9 +619,9 @@ public:
 
     // Variables
     QStringList		    AdditionalDependencies;
-    QString		    CommandLine;
+    QStringList		    CommandLine;
     QString		    Description;
-    QString		    Outputs;
+    QStringList		    Outputs;
     QString		    ToolName;
     QString		    ToolPath;
 };
@@ -719,8 +727,10 @@ public:
     // Functions
     VCFilter();
     ~VCFilter(){}
-    void generateMOC( QTextStream &strm, QString str ) const;
-    void generateUIC( QTextStream &strm, const QString& str ) const;
+    void addMOCstage( QTextStream &strm, QString str );
+    void addUICstage( QTextStream &strm, QString str );
+    bool addIMGstage( QTextStream &strm, QString str );
+    void modifyPCHstage( QTextStream &strm, QString str );
 
     // Variables
     QString		Name;
@@ -728,8 +738,13 @@ public:
     triState		ParseFiles;
     QStringList		Files;
     VcprojGenerator*	Project;
-    VCConfiguration*	Config;
+    QValueList<VCConfiguration> *Config;
     customBuildCheck	CustomBuild;
+    bool		useCustomBuildTool;
+    VCCustomBuildTool   CustomBuildTool;
+    bool		useCompilerTool;
+    VCCLCompilerTool    CompilerTool;
+    bool		flat_files;
 };
 
 class VCProject
@@ -748,7 +763,7 @@ public:
     QString		PlatformName;
 
     // XML sub-parts
-    VCConfiguration	Configuration;
+    QValueList<VCConfiguration> Configuration;
     VCFilter		SourceFiles;
     VCFilter		HeaderFiles;
     VCFilter		MOCFiles;
@@ -767,7 +782,7 @@ QTextStream &operator<<( QTextStream &, const VCLibrarianTool & );
 QTextStream &operator<<( QTextStream &, const VCResourceCompilerTool & );
 QTextStream &operator<<( QTextStream &, const VCEventTool & );
 QTextStream &operator<<( QTextStream &, const VCConfiguration & );
-QTextStream &operator<<( QTextStream &, const VCFilter & );
+QTextStream &operator<<( QTextStream &, VCFilter & );
 QTextStream &operator<<( QTextStream &, const VCProject & );
 
 #endif //__MSVC_OBJECTMODEL_H__

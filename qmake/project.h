@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: project.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
-** Definition of ________ class.
+** Definition of QMakeProject class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -34,6 +32,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #ifndef __PROJECT_H__
 #define __PROJECT_H__
 
@@ -41,12 +40,16 @@
 #include <qstring.h>
 #include <qmap.h>
 
+class QMakeProperty;
+
 class QMakeProject
 {
     enum TestStatus { TestNone, TestFound, TestSeek } test_status;
     int scope_block, scope_flag;
 
     QString pfile, cfile;
+    QMakeProperty *prop;
+    void reset();
     QMap<QString, QStringList> vars, base_vars, cache;
     bool parse(const QString &text, QMap<QString, QStringList> &place);
     bool doProjectTest(const QString &func, const QString &params, QMap<QString, QStringList> &place);
@@ -56,8 +59,12 @@ class QMakeProject
 
 public:
     QMakeProject();
+    QMakeProject(QMakeProperty *);
 
-    bool read(const QString &project, const QString &pwd, bool just_project=FALSE);
+    enum { ReadCache=0x01, ReadConf=0x02, ReadCmdLine=0x04, ReadProFile=0x08, ReadPostFiles=0x10, ReadAll=0xFF };
+    bool read(const QString &project, const QString &pwd, uchar cmd=ReadAll);
+    bool read(uchar cmd=ReadAll);
+
     QString projectFile();
     QString configFile();
 
@@ -65,7 +72,7 @@ public:
     QStringList &values(const QString &v);
     QString first(const QString &v);
     QMap<QString, QStringList> &variables();
-    bool isActiveConfig(const QString &x, bool regex=FALSE);
+    bool isActiveConfig(const QString &x, bool regex=FALSE, QMap<QString, QStringList> *place=NULL);
 
 protected:
     friend class MakefileGenerator;

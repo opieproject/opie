@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: msvc_dsp.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
-** Definition of ________ class.
+** Definition of DspMakefileGenerator class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -34,6 +32,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #ifndef __MSVC_DSP_H__
 #define __MSVC_DSP_H__
 
@@ -62,6 +61,10 @@ public:
 protected:
     virtual void processPrlVariable(const QString &, const QStringList &);
     virtual bool findLibraries();
+
+    QString precompH, 
+	    precompObj, precompPch;
+    bool usePCH;
 };
 
 inline DspMakefileGenerator::~DspMakefileGenerator()

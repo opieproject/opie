@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: winmakefile.cpp,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
-** Definition of ________ class.
+** Implementation of Win32MakefileGenerator class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -38,6 +36,7 @@
 #include "winmakefile.h"
 #include "option.h"
 #include "project.h"
+#include "meta.h"
 #include <qtextstream.h>
 #include <qstring.h>
 #include <qdict.h>
@@ -97,14 +96,13 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
     }
     QPtrListIterator<SubDir> it(subdirs);
 
-    if(!project->isEmpty("MAKEFILE"))
-	t << "MAKEFILE=	" << var("MAKEFILE") << endl;
+    t << "MAKEFILE = " << (project->isEmpty("MAKEFILE") ? QString("Makefile") : var("MAKEFILE")) << endl;
     t << "QMAKE =	" << (project->isEmpty("QMAKE_QMAKE") ? QString("qmake") : var("QMAKE_QMAKE")) << endl;
     t << "SUBTARGETS	= ";
     for( it.toFirst(); it.current(); ++it)
 	t << " \\\n\t\t" << it.current()->target;
     t << endl << endl;
-    t << "all: qmake_all $(SUBTARGETS)" << endl << endl;
+    t << "all: $(MAKEFILE) $(SUBTARGETS)" << endl << endl;
 
     for( it.toFirst(); it.current(); ++it) {
 	bool have_dir = !(*it)->directory.isEmpty();
@@ -114,8 +112,6 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
 	if(have_dir)
 	    mkfile.prepend((*it)->directory + Option::dir_sep);
 	t << mkfile << ":";
-	if(project->variables()["QMAKE_NOFORCE"].isEmpty())
-	    t << " FORCE";
 	if(have_dir)
 	    t << "\n\t" << "cd " << (*it)->directory;
 	t << "\n\t" << "$(QMAKE) " << (*it)->profile << " " << buildArgs();
@@ -143,6 +139,16 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
 		t << Option::dir_sep << "..";
 	}
 	t << endl << endl;
+    }
+
+    if (project->isActiveConfig("ordered")) {   // generate dependencies
+        for( it.toFirst(); it.current(); ) {
+            QString tar = it.current()->target;
+            ++it;
+            if (it.current())
+                t << it.current()->target << ": " << tar << endl;
+        }
+        t << endl;
     }
 
     if(project->variables()["QMAKE_INTERNAL_QMAKE_DEPS"].findIndex("qmake_all") == -1)
@@ -175,11 +181,18 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
     }
     t << endl << endl;
 
-    QString targs[] = { QString("clean"), QString("install"), QString("mocclean"), QString::null };
-    for(int x = 0; targs[x] != QString::null; x++) {
-        t << targs[x] << ": qmake_all";
-	if(targs[x] == "clean")
-	    t << varGlue("QMAKE_CLEAN","\n\t-del ","\n\t-del ", "");
+    QStringList targs;
+    targs << "clean" << "install_subdirs" << "mocables" << "uicables" << "uiclean" << "mocclean";
+    targs += project->values("SUBDIR_TARGETS");
+    for(QStringList::Iterator targ_it = targs.begin(); targ_it != targs.end(); ++targ_it) {
+        t << (*targ_it) << ": qmake_all";
+	QString targ = (*targ_it);
+	if(targ == "install_subdirs")
+	    targ = "install";
+	else if(targ == "uninstall_subdirs")
+	    targ = "uninstall";
+	if(targ == "clean")
+	    t << varGlue("QMAKE_CLEAN","\n\t-$(DEL_FILE) ","\n\t-$(DEL_FILE) ", "");
 	if (!subdirs.isEmpty()) {
 	    for( it.toFirst(); it.current(); ++it) {
 		int subLevels = (*it)->directory.contains(Option::dir_sep) + 1;
@@ -187,7 +200,7 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
 		if(have_dir)
 		    t << "\n\t" << "cd " << (*it)->directory;
 		QString in_file = " -f " + (*it)->makefile;
-		t << "\n\t" << "$(MAKE) " << in_file << " " << targs[x];
+		t << "\n\t" << "$(MAKE) " << in_file << " " << targ;
 		if(have_dir) {
 		    t << "\n\t" << "@cd ..";
 		    for(int i = 1; i < subLevels; i++ )
@@ -200,6 +213,32 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
 	    t << "\n\t" << "@cd .";
 	}
 	t << endl << endl;
+    }
+
+    //installations
+    project->variables()["INSTALLDEPS"]   += "install_subdirs";
+    project->variables()["UNINSTALLDEPS"] += "uninstall_subdirs";
+    writeInstalls(t, "INSTALLS");
+
+    // user defined targets
+    QStringList &qut = project->variables()["QMAKE_EXTRA_WIN_TARGETS"];
+    for(QStringList::Iterator sit = qut.begin(); sit != qut.end(); ++sit) {
+	QString targ = var((*sit) + ".target"),
+		 cmd = var((*sit) + ".commands"), deps;
+	if(targ.isEmpty())
+	    targ = (*sit);
+	QStringList &deplist = project->variables()[(*sit) + ".depends"];
+	for(QStringList::Iterator dep_it = deplist.begin(); dep_it != deplist.end(); ++dep_it) {
+	    QString dep = var((*dep_it) + ".target");
+	    if(dep.isEmpty())
+		dep = (*dep_it);
+	    deps += " " + dep;
+	}
+	if(!project->variables()["QMAKE_NOFORCE"].isEmpty() && 
+	   project->variables()[(*sit) + ".CONFIG"].findIndex("phony") != -1)
+	    deps += QString(" ") + "FORCE";
+	t << "\n\n" << targ << ":" << deps << "\n\t"
+	  << cmd;
     }
 
     if(project->variables()["QMAKE_NOFORCE"].isEmpty())
@@ -226,16 +265,50 @@ Win32MakefileGenerator::findHighestVersion(const QString &d, const QString &stem
 	    biggest = QMAX(biggest, (regx.cap(1) == dllStem ||
 				     regx.cap(2).isEmpty()) ? -1 : regx.cap(2).toInt());
     }
-    if(dir.exists(dllStem + Option::prl_ext)) {
-	QMakeProject proj;
-	if(proj.read(bd + dllStem + Option::prl_ext, QDir::currentDirPath(), TRUE)) {
-	    if(!proj.isEmpty("QMAKE_PRL_VERSION"))
-		biggest = QMAX(biggest, proj.first("QMAKE_PRL_VERSION").replace(".", "").toInt());
-	}
+    QMakeMetaInfo libinfo;
+    if(libinfo.readLib(bd + dllStem)) {
+	if(!libinfo.isEmpty("QMAKE_PRL_VERSION"))
+	    biggest = QMAX(biggest, libinfo.first("QMAKE_PRL_VERSION").replace(".", "").toInt());
     }
     return biggest;
 }
 
+QString
+Win32MakefileGenerator::findDependency(const QString &dep)
+{
+    {
+	QStringList &qut = project->variables()["QMAKE_EXTRA_WIN_TARGETS"];
+	for(QStringList::Iterator it = qut.begin(); it != qut.end(); ++it) {
+	    QString targ = var((*it) + ".target");
+	    if(targ.isEmpty())
+		targ = (*it);
+	    if(targ.endsWith(dep)) 
+		return targ;
+	}
+    }
+    {
+	QStringList &quc = project->variables()["QMAKE_EXTRA_WIN_COMPILERS"];
+	for(QStringList::Iterator it = quc.begin(); it != quc.end(); ++it) {
+	    QString tmp_out = project->variables()[(*it) + ".output"].first();
+	    QString tmp_cmd = project->variables()[(*it) + ".commands"].join(" ");
+	    if(tmp_out.isEmpty() || tmp_cmd.isEmpty())
+		continue;
+	    QStringList &tmp = project->variables()[(*it) + ".input"];
+	    for(QStringList::Iterator it2 = tmp.begin(); it2 != tmp.end(); ++it2) {
+		QStringList &inputs = project->variables()[(*it2)];
+		for(QStringList::Iterator input = inputs.begin(); input != inputs.end(); ++input) {
+		    QString out = tmp_out;
+		    QFileInfo fi(Option::fixPathToLocalOS((*input)));
+		    out.replace("${QMAKE_FILE_BASE}", fi.baseName());
+		    out.replace("${QMAKE_FILE_NAME}", fi.fileName());
+		    if(out.endsWith(dep)) 
+			return out;
+		}
+	    }
+	}
+    }
+    return MakefileGenerator::findDependency(dep);
+}
 
 bool
 Win32MakefileGenerator::findLibraries(const QString &where)
@@ -278,7 +351,7 @@ Win32MakefileGenerator::findLibraries(const QString &where)
 		    if(ver > 0)
 			extension += QString::number(ver);
 		    extension += ".lib";
-		    if(QFile::exists(mdd->local_dir + Option::dir_sep + lib + Option::prl_ext) ||
+		    if(QMakeMetaInfo::libExists(mdd->local_dir + Option::dir_sep + lib) ||
 		       QFile::exists(mdd->local_dir + Option::dir_sep + lib + extension)) {
 			out = mdd->real_dir + Option::dir_sep + lib + extension;
 			break;
@@ -303,26 +376,28 @@ Win32MakefileGenerator::findLibraries(const QString &where)
             } else {
 		lib_dirs = dirs;
 	    }
-	    if(file.endsWith(".lib")) {
-		file = file.left(file.length() - 4);
-		if(!file.at(file.length()-1).isNumber()) {
-		    for(MakefileDependDir *mdd = lib_dirs.first(); mdd; mdd = lib_dirs.next() ) {
-			QString lib_tmpl(file + "%1" + ".lib");
-			int ver = findHighestVersion(mdd->local_dir, file);
-			if(ver != -1) {
-			    if(ver)
-				lib_tmpl = lib_tmpl.arg(ver);
-			    else
-				lib_tmpl = lib_tmpl.arg("");
-			    if(slsh != -1) {
-				QString dir = mdd->real_dir;
-				if(!dir.endsWith(Option::dir_sep))
-				    dir += Option::dir_sep;
-				lib_tmpl.prepend(dir);
+	    if (!project->variables()["QMAKE_QT_DLL"].isEmpty()) {
+		if(file.endsWith(".lib")) {
+		    file = file.left(file.length() - 4);
+		    if(!file.at(file.length()-1).isNumber()) {
+			for(MakefileDependDir *mdd = lib_dirs.first(); mdd; mdd = lib_dirs.next() ) {
+			    QString lib_tmpl(file + "%1" + ".lib");
+			    int ver = findHighestVersion(mdd->local_dir, file);
+			    if(ver != -1) {
+				if(ver)
+				    lib_tmpl = lib_tmpl.arg(ver);
+				else
+				     lib_tmpl = lib_tmpl.arg("");
+				if(slsh != -1) {
+				    QString dir = mdd->real_dir;
+				    if(!dir.endsWith(Option::dir_sep))
+					dir += Option::dir_sep;
+				    lib_tmpl.prepend(dir);
+				}
+				modified_opt = TRUE;
+				(*it) = lib_tmpl;
+				break;
 			    }
-			    modified_opt = TRUE;
-			    (*it) = lib_tmpl;
-			    break;
 			}
 		    }
 		}

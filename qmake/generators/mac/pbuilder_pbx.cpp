@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: pbuilder_pbx.cpp,v 1.2 2004-01-05 14:45:54 zecke Exp $
+** 
 **
-** Definition of ________ class.
+** Implementation of ProjectBuilderMakefileGenerator class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -37,18 +35,19 @@
 
 #include "pbuilder_pbx.h"
 #include "option.h"
+#include "meta.h"
 #include <qdir.h>
 #include <qdict.h>
 #include <qregexp.h>
 #include <stdlib.h>
 #include <time.h>
+#include "qtmd5.h"
 #ifdef Q_OS_UNIX
 #  include <sys/types.h>
 #  include <sys/stat.h>
 #endif
 
 // Note: this is fairly hacky, but it does the job...
-
 
 ProjectBuilderMakefileGenerator::ProjectBuilderMakefileGenerator(QMakeProject *p) : UnixMakefileGenerator(p)
 {
@@ -67,13 +66,207 @@ ProjectBuilderMakefileGenerator::writeMakefile(QTextStream &t)
 
     project->variables()["MAKEFILE"].clear();
     project->variables()["MAKEFILE"].append("Makefile");
-    if(project->first("TEMPLATE") == "app" || project->first("TEMPLATE") == "lib") {
+    if(project->first("TEMPLATE") == "app" || project->first("TEMPLATE") == "lib") 
 	return writeMakeParts(t);
-    } else if(project->first("TEMPLATE") == "subdirs") { 
-	writeSubdirs(t, FALSE);
-	return TRUE;
-    }
+    else if(project->first("TEMPLATE") == "subdirs") 
+	return writeSubdirs(t, FALSE);
     return FALSE;
+}
+
+bool
+ProjectBuilderMakefileGenerator::writeSubdirs(QTextStream &t, bool direct)
+{
+    QString mkwrap = fileFixify(pbx_dir + Option::dir_sep + ".." + Option::dir_sep + project->first("MAKEFILE"), 
+				QDir::currentDirPath());
+    QFile mkwrapf(mkwrap);
+    if(mkwrapf.open(IO_WriteOnly | IO_Translate)) {
+	debug_msg(1, "pbuilder: Creating file: %s", mkwrap.latin1());
+	QTextStream mkwrapt(&mkwrapf);
+	UnixMakefileGenerator::writeSubdirs(mkwrapt, direct);
+    }
+
+    //HEADER
+    t << "// !$*UTF8*$!" << "\n"
+      << "{" << "\n"
+      << "\t" << "archiveVersion = 1;" << "\n"
+      << "\t" << "classes = {" << "\n" << "\t" << "};" << "\n"
+      << "\t" << "objectVersion = " << pbuilderVersion() << ";" << "\n"
+      << "\t" << "objects = {" << endl;
+
+    //SUBDIRS
+    QStringList subdirs = project->variables()["SUBDIRS"];
+    QString oldpwd = QDir::currentDirPath();
+    QMap<QString, QStringList> groups;
+    for(QStringList::Iterator it = subdirs.begin(); it != subdirs.end(); ++it) {
+	QFileInfo fi(Option::fixPathToLocalOS((*it), TRUE));
+	if(fi.exists()) {
+	    if(fi.isDir()) {
+		QString profile = (*it);
+		if(!profile.endsWith(Option::dir_sep))
+		    profile += Option::dir_sep;
+		profile += fi.baseName() + ".pro";
+		subdirs.append(profile);
+	    } else {
+		QMakeProject tmp_proj;
+		QString dir = fi.dirPath(), fn = fi.fileName();
+		if(!dir.isEmpty()) {
+		    if(!QDir::setCurrent(dir))
+			fprintf(stderr, "Cannot find directory: %s\n", dir.latin1());
+		}
+		if(tmp_proj.read(fn, oldpwd)) {
+		    if(Option::debug_level) {
+			QMap<QString, QStringList> &vars = tmp_proj.variables();
+			for(QMap<QString, QStringList>::Iterator it = vars.begin();
+			    it != vars.end(); ++it) {
+			    if(it.key().left(1) != "." && !it.data().isEmpty())
+				debug_msg(1, "%s: %s === %s", fn.latin1(), it.key().latin1(),
+					  it.data().join(" :: ").latin1());
+			}
+		    }
+		    if(tmp_proj.first("TEMPLATE") == "subdirs") {
+			subdirs += fileFixify(tmp_proj.variables()["SUBDIRS"]);
+		    } else if(tmp_proj.first("TEMPLATE") == "app" || tmp_proj.first("TEMPLATE") == "lib") {
+			QString pbxproj = QDir::currentDirPath() + Option::dir_sep + tmp_proj.first("TARGET") + projectSuffix();
+			if(!QFile::exists(pbxproj)) {
+			    warn_msg(WarnLogic, "Ignored (not found) '%s'", pbxproj.latin1());
+			    goto nextfile; // # Dirty!
+			}
+			project->variables()["QMAKE_PBX_SUBDIRS"] += pbxproj;
+			//PROJECTREF
+			{
+			    bool in_root = TRUE;
+			    QString name = QDir::currentDirPath();
+			    QString project_key = keyFor(pbxproj + "_PROJECTREF");
+			    if(project->isActiveConfig("flat")) {
+				QString flat_file = fileFixify(name, oldpwd, Option::output_dir, TRUE);
+				if(flat_file.find(Option::dir_sep) != -1) {
+				    QStringList dirs = QStringList::split(Option::dir_sep, flat_file);
+				    name = dirs.back();
+				}
+			    } else {
+				QString flat_file = fileFixify(name, oldpwd, Option::output_dir, TRUE);
+				if(QDir::isRelativePath(flat_file) && flat_file.find(Option::dir_sep) != -1) {
+				    QString last_grp("QMAKE_PBX_HEIR_GROUP");
+				    QStringList dirs = QStringList::split(Option::dir_sep, flat_file);
+				    name = dirs.back();
+				    for(QStringList::Iterator dir_it = dirs.begin(); dir_it != dirs.end(); ++dir_it) {
+					QString new_grp(last_grp + Option::dir_sep + (*dir_it)), new_grp_key(keyFor(new_grp));
+					if(dir_it == dirs.begin()) {
+					    if(!groups.contains(new_grp)) 
+						project->variables()["QMAKE_PBX_GROUPS"].append(new_grp_key);
+					} else {
+					    if(!groups[last_grp].contains(new_grp_key)) 
+						groups[last_grp] += new_grp_key;
+					}
+					last_grp = new_grp;
+				    }
+				    groups[last_grp] += project_key;
+				    in_root = FALSE;
+				}
+			    }
+			    if(in_root)
+				project->variables()["QMAKE_PBX_GROUPS"] += project_key;
+			    t << "\t\t" << project_key << " = {" << "\n"
+			      << "\t\t\t" << "isa = PBXFileReference;" << "\n"
+			      << "\t\t\t" << "name = " << tmp_proj.first("TARGET") << ";" << "\n"
+			      << "\t\t\t" << "path = " << pbxproj << ";" << "\n"
+			      << "\t\t\t" << "refType = 0;" << "\n"
+			      << "\t\t\t" << "sourceTree = \"<absolute>\";" << "\n"
+			      << "\t\t" << "};" << "\n";
+			    //PRODUCTGROUP
+			    t << "\t\t" << keyFor(pbxproj + "_PRODUCTGROUP") << " = {" << "\n"
+			      << "\t\t\t" << "children = (" << "\n"
+			      << "\t\t\t" << ");" << "\n"
+			      << "\t\t\t" << "isa = PBXGroup;" << "\n"
+			      << "\t\t\t" << "name = Products;" << "\n"
+			      << "\t\t\t" << "refType = 4;" << "\n"
+			      << "\t\t\t" << "sourceTree = \"<group>\";" << "\n"
+			      << "\t\t" << "};" << "\n";
+			}
+		    }
+		}
+nextfile:
+		QDir::setCurrent(oldpwd);
+	    }
+	}
+    }
+    for(QMap<QString, QStringList>::Iterator grp_it = groups.begin(); grp_it != groups.end(); ++grp_it) {
+	t << "\t\t" << keyFor(grp_it.key()) << " = {" << "\n"
+	  << "\t\t\t" << "isa = PBXGroup;" << "\n"
+	  << "\t\t\t" << "children = (" << "\n"
+	  << valGlue(grp_it.data(), "\t\t\t\t", ",\n\t\t\t\t", "\n")
+	  << "\t\t\t" << ");" << "\n"
+	  << "\t\t\t" << "name = \"" << grp_it.key().section(Option::dir_sep, -1) << "\";" << "\n"
+	  << "\t\t\t" << "refType = 4;" << "\n"
+	  << "\t\t" << "};" << "\n";
+    }
+
+    //DUMP EVERYTHING THAT TIES THE ABOVE TOGETHER
+    //BUILDSTYLE
+    QString active_buildstyle;
+#if 0
+    for(int as_release = 0; as_release < 2; as_release++) 
+#else
+	bool as_release = !project->isActiveConfig("debug");
+#endif
+    {
+	QString key = keyFor("QMAKE_PBX_" + QString(as_release ? "RELEASE" : "DEBUG"));
+	if(project->isActiveConfig("debug") != as_release) 
+	    active_buildstyle = key;
+	project->variables()["QMAKE_PBX_BUILDSTYLES"].append(key);
+	t << "\t\t" << key << " = {" << "\n"
+	  << "\t\t\t" << "buildRules = (" << "\n"
+	  << "\t\t\t" << ");" << "\n"
+	  << "\t\t\t" << "buildSettings = {" << "\n"
+	  << "\t\t\t\t" << "COPY_PHASE_STRIP = " << (as_release ? "YES" : "NO") << ";" << "\n";
+	if(as_release) 
+	    t << "\t\t\t\t" << "DEBUGGING_SYMBOLS = NO;" << "\n";
+	t << "\t\t\t" << "};" << "\n"
+	  << "\t\t\t" << "isa = PBXBuildStyle;" << "\n"
+	  << "\t\t\t" << "name = " << (as_release ? "Deployment" : "Development") << ";" << "\n"
+	  << "\t\t" << "};" << "\n";
+    }
+
+    //ROOT_GROUP
+    t << "\t\t" << keyFor("QMAKE_PBX_ROOT_GROUP") << " = {" << "\n"
+      << "\t\t\t" << "children = (" << "\n"
+      << varGlue("QMAKE_PBX_GROUPS", "\t\t\t\t", ",\n\t\t\t\t", "\n")
+      << "\t\t\t" << ");" << "\n"
+      << "\t\t\t" << "isa = PBXGroup;" << "\n"
+      << "\t\t\t" << "refType = 4;" << "\n"
+      << "\t\t\t" << "sourceTree = \"<group>\";" << "\n"
+      << "\t\t" << "};" << "\n";
+
+    //ROOT
+    t << "\t\t" << keyFor("QMAKE_PBX_ROOT") << " = {" << "\n"
+      << "\t\t\t" << "buildSettings = {" << "\n"
+      << "\t\t\t" << "};" << "\n"
+      << "\t\t\t" << "buildStyles = (" << "\n"
+      << varGlue("QMAKE_PBX_BUILDSTYLES", "\t\t\t\t", ",\n\t\t\t\t", "\n")
+      << "\t\t\t" << ");" << "\n"
+      << "\t\t\t" << "isa = PBXProject;" << "\n"
+      << "\t\t\t" << "mainGroup = " << keyFor("QMAKE_PBX_ROOT_GROUP") << ";" << "\n"
+      << "\t\t\t" << "projectDirPath = \"\";" << "\n"
+      << "\t\t\t" << "projectReferences = (" << "\n";
+    {
+	QStringList &libdirs = project->variables()["QMAKE_PBX_SUBDIRS"];
+	for(QStringList::Iterator it = libdirs.begin(); it != libdirs.end(); ++it)
+	    t << "\t\t\t\t" << "{" << "\n"
+	      << "\t\t\t\t\t" << "ProductGroup = " << keyFor((*it) + "_PRODUCTGROUP") << ";" << "\n"
+	      << "\t\t\t\t\t" << "ProjectRef = " << keyFor((*it) + "_PROJECTREF") << ";" << "\n"
+	      << "\t\t\t\t" << "}," << "\n";
+    }
+    t << "\t\t\t" << ");" << "\n"
+      << "\t\t\t" << "targets = (" << "\n"
+      << "\t\t\t" << ");" << "\n"
+      << "\t\t" << "};" << "\n";
+
+    //FOOTER
+    t << "\t" << "};" << "\n"
+      << "\t" << "rootObject = " << keyFor("QMAKE_PBX_ROOT") << ";" << "\n"
+      << "}" << endl;
+
+    return TRUE;
 }
 
 bool
@@ -107,7 +300,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	}
 	QString phase_key = keyFor("QMAKE_PBX_MAKEQMAKE_BUILDPHASE");
 	mkfile = fileFixify(mkfile, QDir::currentDirPath());
-	project->variables()["QMAKE_PBX_BUILDPHASES"].append(phase_key);
+	project->variables()["QMAKE_PBX_PRESCRIPT_BUILDPHASES"].append(phase_key);
 	t << "\t\t" << phase_key << " = {" << "\n"
 	  << "\t\t\t" << "buildActionMask = 2147483647;" << "\n"
 	  << "\t\t\t" << "files = (" << "\n"
@@ -126,60 +319,118 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 
     //DUMP SOURCES
     QMap<QString, QStringList> groups;
-    QString srcs[] = { "SOURCES", "SRCMOC", "UICIMPLS", QString::null };
+    QString srcs[] = { "HEADERS", "SOURCES", "SRCMOC", "UICIMPLS", "QMAKE_IMAGE_COLLECTION", 
+		       "FORMS", "QMAKE_INTERNAL_INCLUDED_FILES", QString::null };
     for(i = 0; !srcs[i].isNull(); i++) {
 	tmp = project->variables()[srcs[i]];
+	if(srcs[i] == "QMAKE_INTERNAL_INCLUDED_FILES") {
+	    QString pfile = project->projectFile();
+	    if(pfile != "(stdin)")
+		tmp.prepend(pfile);
+	}
 	QStringList &src_list = project->variables()["QMAKE_PBX_" + srcs[i]];
+	QStringList &root_group_list = project->variables()["QMAKE_PBX_GROUPS"];
+
+	//hard coded groups..
+	QString src_group;
+	if(srcs[i] == "SOURCES") 
+	    src_group = "Sources";
+	else if(srcs[i] == "HEADERS")
+	    src_group = "Headers";
+	else if(srcs[i] == "SRCMOC")
+	    src_group = "Sources [moc]";
+	else if(srcs[i] == "UICIMPLS" || srcs[i] == "FORMS")
+	    src_group = "Sources [uic]";
+	else if(srcs[i] == "QMAKE_IMAGE_COLLECTION")
+	    src_group = "Sources [images]";
+	else if(srcs[i] == "QMAKE_INTERNAL_INCLUDED_FILES")
+	    src_group = "Sources [qmake]";
+
 	for(QStringList::Iterator it = tmp.begin(); it != tmp.end(); ++it) {
-	    QString file = fileFixify((*it));
-	    if(file.endsWith(Option::moc_ext)) 
-		continue;
-	    bool in_root = TRUE;
-	    QString src_key = keyFor(file);
-	    if(!project->isActiveConfig("flat")) {
-		QString flat_file = fileFixify(file, QDir::currentDirPath(), Option::output_dir, TRUE);
-		if(QDir::isRelativePath(flat_file) && flat_file.find(Option::dir_sep) != -1) {
-		    QString last_grp("QMAKE_PBX_" + srcs[i] + "_HEIR_GROUP");
-		    QStringList dirs = QStringList::split(Option::dir_sep, flat_file);
-		    dirs.pop_back(); //remove the file portion as it will be added via src_key
-		    for(QStringList::Iterator dir_it = dirs.begin(); dir_it != dirs.end(); ++dir_it) {
-			QString new_grp(last_grp + Option::dir_sep + (*dir_it)),
-			        new_grp_key(keyFor(new_grp)), last_grp_key(keyFor(last_grp));
-			if(dir_it == dirs.begin()) {
-			    if(!groups.contains(new_grp)) 
-				project->variables()["QMAKE_PBX_" + srcs[i]].append(new_grp_key);
-			} else {
-			    groups[last_grp] += new_grp_key;
-			}
-			last_grp = new_grp;
+	    QStringList files = (*it);
+	    bool buildable = TRUE;
+	    if(srcs[i] == "FORMS") {
+		QString form_dot_h = (*it) + Option::h_ext.first();
+		if(QFile::exists(form_dot_h))
+		    files += form_dot_h;
+		buildable = FALSE;
+	    } else if(srcs[i] == "HEADERS" || srcs[i] == "QMAKE_INTERNAL_INCLUDED_FILES") {
+		buildable = FALSE;
+	    }
+
+	    files = fileFixify(files);
+	    for(QStringList::Iterator file_it = files.begin(); file_it != files.end(); ++file_it) {
+		QString file = (*file_it);
+		if(file.length() >= 2 && (file[0] == '"' || file[0] == '\'') && file[(int) file.length()-1] == file[0])
+		    file = file.mid(1, file.length()-2);
+		if(file.endsWith(Option::cpp_moc_ext) || file.endsWith(Option::prl_ext)) 
+		    continue;
+		bool in_root = TRUE;
+		QString src_key = keyFor(file), name = file;
+		if(project->isActiveConfig("flat")) {
+		    QString flat_file = fileFixify(file, QDir::currentDirPath(), Option::output_dir, TRUE);
+		    if(flat_file.find(Option::dir_sep) != -1) {
+			QStringList dirs = QStringList::split(Option::dir_sep, flat_file);
+			name = dirs.back();
 		    }
-		    groups[last_grp] += src_key;
-		    in_root = FALSE;
+		} else {
+		    QString flat_file = fileFixify(file, QDir::currentDirPath(), Option::output_dir, TRUE);
+		    if(QDir::isRelativePath(flat_file) && flat_file.find(Option::dir_sep) != -1) {
+			QString last_grp("QMAKE_PBX_" + src_group + "_HEIR_GROUP");
+			QStringList dirs = QStringList::split(Option::dir_sep, flat_file);
+			name = dirs.back();
+			dirs.pop_back(); //remove the file portion as it will be added via src_key
+			for(QStringList::Iterator dir_it = dirs.begin(); dir_it != dirs.end(); ++dir_it) {
+			    QString new_grp(last_grp + Option::dir_sep + (*dir_it)), new_grp_key(keyFor(new_grp));
+			    if(dir_it == dirs.begin()) {
+				if(!src_list.contains(new_grp_key)) 
+				    src_list.append(new_grp_key);
+			    } else {
+				if(!groups[last_grp].contains(new_grp_key))
+				    groups[last_grp] += new_grp_key;
+			    }
+			    last_grp = new_grp;
+			}
+			groups[last_grp] += src_key;
+			in_root = FALSE;
+		    }
+		}
+		if(in_root) 
+		    src_list.append(src_key);
+		//source reference
+		t << "\t\t" << src_key << " = {" << "\n"
+		  << "\t\t\t" << "isa = PBXFileReference;" << "\n"
+		  << "\t\t\t" << "name = \"" << name << "\";" << "\n"
+		  << "\t\t\t" << "path = \"" << file << "\";" << "\n"
+		  << "\t\t\t" << "refType = " << reftypeForFile(file) << ";" << "\n";
+		if (ideType() == MAC_XCODE) {
+		    QString filetype;
+		    for(QStringList::Iterator cppit = Option::cpp_ext.begin(); cppit != Option::cpp_ext.end(); ++cppit) {
+			if(file.endsWith((*cppit))) {
+			    filetype = "sourcecode.cpp.cpp";
+			    break;
+			}
+		    }
+		    if(!filetype.isNull())
+			t << "\t\t\t" << "lastKnownFileType = " << filetype << ";" << "\n";
+		}
+		t << "\t\t" << "};" << "\n";
+		if(buildable) { //build reference
+		    QString obj_key = file + ".o";
+		    obj_key = keyFor(obj_key);
+		    t << "\t\t" << obj_key << " = {" << "\n"
+		      << "\t\t\t" << "fileRef = " << src_key << ";" << "\n"
+		      << "\t\t\t" << "isa = PBXBuildFile;" << "\n"
+		      << "\t\t\t" << "settings = {" << "\n"
+		      << "\t\t\t\t" << "ATTRIBUTES = (" << "\n"
+		      << "\t\t\t\t" << ");" << "\n"
+		      << "\t\t\t" << "};" << "\n"
+		      << "\t\t" << "};" << "\n";
+		    project->variables()["QMAKE_PBX_OBJ"].append(obj_key);
 		}
 	    }
-	    if(in_root)
-		src_list.append(src_key);
-	    //source reference
-	    t << "\t\t" << src_key << " = {" << "\n"
-	      << "\t\t\t" << "isa = PBXFileReference;" << "\n"
-	      << "\t\t\t" << "path = \"" << file << "\";" << "\n"
-	      << "\t\t\t" << "refType = " << reftypeForFile(file) << ";" << "\n"
-	      << "\t\t" << "};" << "\n";
-	    //build reference
-	    QString obj_key = file + ".o";
-	    obj_key = keyFor(obj_key);
-	    t << "\t\t" << obj_key << " = {" << "\n"
-	      << "\t\t\t" << "fileRef = " << src_key << ";" << "\n"
-	      << "\t\t\t" << "isa = PBXBuildFile;" << "\n"
-	      << "\t\t\t" << "settings = {" << "\n"
-	      << "\t\t\t\t" << "ATTRIBUTES = (" << "\n"
-	      << "\t\t\t\t" << ");" << "\n"
-	      << "\t\t\t" << "};" << "\n"
-	      << "\t\t" << "};" << "\n";
-	    project->variables()["QMAKE_PBX_OBJ"].append(obj_key);
 	}
 	if(!src_list.isEmpty()) {
-	    QString grp;
 	    if(srcs[i] == "SOURCES") {
 		if(project->first("TEMPLATE") == "app" && !project->isEmpty("RC_FILE")) { //Icon
 		    QString icns_file = keyFor("ICNS_FILE");
@@ -196,26 +447,15 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 		      << "\t\t\t" << "};" << "\n"
 		      << "\t\t" << "};" << "\n";
 		}
-		grp = "Sources";
-	    } else if(srcs[i] == "SRCMOC") {
-		grp = "Mocables";
-	    } else if(srcs[i] == "UICIMPLS") {
-		grp = "UICables";
 	    }
-	    QString grp_key = keyFor(grp);
-	    project->variables()["QMAKE_PBX_GROUPS"].append(grp_key);
-	    t << "\t\t" << grp_key << " = {" << "\n"
-	      << "\t\t\t" << "children = (" << "\n"
-	      << varGlue("QMAKE_PBX_" + srcs[i], "\t\t\t\t", ",\n\t\t\t\t", "\n")
-	      << "\t\t\t" << ");" << "\n"
-	      << "\t\t\t" << "isa = PBXGroup;" << "\n"
-	      << "\t\t\t" << "name = " << grp << ";" << "\n"
-	      << "\t\t\t" << "refType = 4;" << "\n"
-	      << "\t\t" << "};" << "\n";
+
+	    QString src_group_key = keyFor(src_group);
+	    if(root_group_list.findIndex(src_group_key) == -1) 
+		root_group_list += src_group_key;
+	    groups[src_group] += src_list;
 	}
     }
-    for(QMap<QString, QStringList>::Iterator grp_it = groups.begin(); 
-	grp_it != groups.end(); ++grp_it) {
+    for(QMap<QString, QStringList>::Iterator grp_it = groups.begin(); grp_it != groups.end(); ++grp_it) {
 	t << "\t\t" << keyFor(grp_it.key()) << " = {" << "\n"
 	  << "\t\t\t" << "isa = PBXGroup;" << "\n"
 	  << "\t\t\t" << "children = (" << "\n"
@@ -236,8 +476,8 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	    debug_msg(1, "pbuilder: Creating file: %s", mkfile.latin1());
 	    QTextStream mkt(&mkf);
 	    writeHeader(mkt);
-	    mkt << "MOC       = " << var("QMAKE_MOC") << endl;
-	    mkt << "UIC       = " << var("QMAKE_UIC") << endl;
+	    mkt << "MOC       = " << Option::fixPathToTargetOS(var("QMAKE_MOC")) << endl;
+	    mkt << "UIC       = " << Option::fixPathToTargetOS(var("QMAKE_UIC")) << endl;
 	    mkt << "LEX       = " << var("QMAKE_LEX") << endl;
 	    mkt << "LEXFLAGS  = " << var("QMAKE_LEXFLAGS") << endl;
 	    mkt << "YACC      = " << var("QMAKE_YACC") << endl;
@@ -245,6 +485,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	    mkt << "DEL_FILE  = " << var("QMAKE_DEL_FILE") << endl;
 	    mkt << "MOVE      = " << var("QMAKE_MOVE") << endl << endl;
 	    mkt << "FORMS = " << varList("UICIMPLS") << endl;
+	    mkt << "IMAGES = " << varList("QMAKE_IMAGE_COLLECTION") << endl;
 	    mkt << "MOCS = " << varList("SRCMOC") << endl;
 	    mkt << "PARSERS =";
 	    if(!project->isEmpty("YACCSOURCES")) {
@@ -264,14 +505,16 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 		}
 	    }
 	    mkt << "\n";
-	    mkt << "preprocess: $(FORMS) $(MOCS) $(PARSERS)" << endl;
-	    mkt << "preprocess_clean: mocclean uiclean parser_clean" << endl << endl;
+	    mkt << "preprocess: $(FORMS) $(MOCS) $(PARSERS) $(IMAGES)" << endl;
+	    mkt << "clean preprocess_clean: mocclean uiclean parser_clean" << endl << endl;
 	    mkt << "mocclean:" << "\n";
 	    if(!project->isEmpty("SRCMOC"))
 		mkt << "\t-rm -f $(MOCS)" << "\n";
 	    mkt << "uiclean:" << "\n";
 	    if(!project->isEmpty("UICIMPLS"))
 		mkt << "\t-rm -f $(FORMS)" << "\n";
+	    if(!project->isEmpty("QMAKE_IMAGE_COLLECTION"))
+		mkt << "\t-rm -f $(IMAGES)" << "\n";
 	    mkt << "parser_clean:" << "\n";
 	    if(!project->isEmpty("YACCSOURCES") || !project->isEmpty("LEXSOURCES"))
 		mkt << "\t-rm -f $(PARSERS)" << "\n";
@@ -281,36 +524,31 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	    writeMocSrc(mkt, "UICDECLS");
 	    writeYaccSrc(mkt, "YACCSOURCES");
 	    writeLexSrc(mkt, "LEXSOURCES");
+	    writeImageSrc(mkt, "QMAKE_IMAGE_COLLECTION");
 	    mkf.close();
 	}
-	QString target_key = keyFor("QMAKE_PBX_PREPROCESS_TARGET");
 	mkfile = fileFixify(mkfile, QDir::currentDirPath());
-	t << "\t\t" << target_key << " = {" << "\n"
-	  << "\t\t\t" << "buildArgumentsString = \"-f " << mkfile << "\";" << "\n"
-	  << "\t\t\t" << "buildPhases = (" << "\n"
+	QString phase_key = keyFor("QMAKE_PBX_PREPROCESS_TARGET");
+//	project->variables()["QMAKE_PBX_BUILDPHASES"].append(phase_key);
+	project->variables()["QMAKE_PBX_PRESCRIPT_BUILDPHASES"].append(phase_key);
+	t << "\t\t" << phase_key << " = {" << "\n"
+	  << "\t\t\t" << "buildActionMask = 2147483647;" << "\n"
+	  << "\t\t\t" << "files = (" << "\n"
 	  << "\t\t\t" << ");" << "\n"
-	  << "\t\t\t" << "buildSettings = {" << "\n"
-	  << "\t\t\t" << "};" << "\n"
-	  << "\t\t\t" << "buildToolPath = \"/usr/bin/gnumake\";"<< "\n"
-	  << "\t\t\t" << "buildWorkingDirectory = \"" << QDir::currentDirPath() << "\";" << "\n"
-	  << "\t\t\t" << "dependencies = (" << "\n"
+	  << "\t\t\t" << "generatedFileNames = (" << "\n"
+	  << varGlue("QMAKE_PBX_OBJ", "\t\t\t\t", ",\n\t\t\t\t", "\n")
 	  << "\t\t\t" << ");" << "\n"
-	  << "\t\t\t" << "isa = PBXLegacyTarget;" << "\n"
-	  << "\t\t\t" << "name = QtPreprocessors;" << "\n"
-	  << "\t\t\t" << "productName = QtPreprocessors;" << "\n"
-	  << "\t\t\t" << "settingsToExpand = 6;" << "\n"
-	  << "\t\t\t" << "settingsToPassInEnvironment = 287;" << "\n"
-	  << "\t\t\t" << "settingsToPassOnCommandLine = 280;" << "\n"
-	  << "\t\t\t" << "shouldsUseHeadermap = 0;" << "\n"
+	  << "\t\t\t" << "isa = PBXShellScriptBuildPhase;" << "\n"
+	  << "\t\t\t" << "name = \"Qt Preprocessors\";" << "\n"
+	  << "\t\t\t" << "neededFileNames = (" << "\n"
+	  << varGlue("QMAKE_PBX_OBJ", "\t\t\t\t", ",\n\t\t\t\t", "\n")
+	  << "\t\t\t" << ");" << "\n"
+	  << "\t\t\t" << "shellPath = /bin/sh;" << "\n"
+	  << "\t\t\t" << "shellScript = \"make -C " << QDir::currentDirPath() <<
+	    " -f " << mkfile << "\";" << "\n"
 	  << "\t\t" << "};" << "\n";
+   }
 
-	QString target_depend_key = keyFor("QMAKE_PBX_PREPROCESS_TARGET_DEPEND");
-	project->variables()["QMAKE_PBX_TARGETDEPENDS"].append(target_depend_key);
-	t << "\t\t" << target_depend_key << " = {" << "\n"
-	  << "\t\t\t" << "isa = PBXTargetDependency;" << "\n"
-	  << "\t\t\t" << "target = " << target_key << ";" << "\n"
-	  << "\t\t" << "};" << "\n";
-    }
     //SOURCE BUILDPHASE
     if(!project->isEmpty("QMAKE_PBX_OBJ")) {
 	QString grp = "Build Sources", key = keyFor(grp);
@@ -327,40 +565,44 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 
     if(!project->isActiveConfig("staticlib")) { //DUMP LIBRARIES
 	QStringList &libdirs = project->variables()["QMAKE_PBX_LIBPATHS"];
-	QString libs[] = { "QMAKE_LIBDIR_FLAGS", "QMAKE_LIBS", QString::null };
+	QString libs[] = { "QMAKE_LFLAGS", "QMAKE_LIBDIR_FLAGS", "QMAKE_LIBS", QString::null };
 	for(i = 0; !libs[i].isNull(); i++) {
 	    tmp = project->variables()[libs[i]];
 	    for(QStringList::Iterator it = tmp.begin(); it != tmp.end();) {
 		bool remove = FALSE;
 		QString library, name, opt = (*it).stripWhiteSpace();
+		if(opt.length() >= 2 && (opt[0] == '"' || opt[0] == '\'') && opt[(int) opt.length()-1] == opt[0])
+		    opt = opt.mid(1, opt.length()-2);
 		if(opt.startsWith("-L")) {
 		    QString r = opt.right(opt.length() - 2);
 		    fixEnvVariables(r);
 		    libdirs.append(r);
+		} else if(opt == "-prebind") {
+		    project->variables()["QMAKE_DO_PREBINDING"].append("TRUE");
+		    remove = TRUE;
 		} else if(opt.startsWith("-l")) {
 		    name = opt.right(opt.length() - 2);
 		    QString lib("lib" + name);
 		    for(QStringList::Iterator lit = libdirs.begin(); lit != libdirs.end(); ++lit) {
 			if(project->isActiveConfig("link_prl")) {
-			    /* This isn't real nice, but it is real useful. This looks in a prl
+			    /* This isn't real nice, but it is real usefull. This looks in a prl
 			       for what the library will ultimately be called so we can stick it
 			       in the ProjectFile. If the prl format ever changes (not likely) then
 			       this will not really work. However, more concerning is that it will
 			       encode the version number in the Project file which might be a bad
 			       things in days to come? --Sam
 			    */
-			    QString prl_file = (*lit) + Option::dir_sep + lib + Option::prl_ext;
-			    if(QFile::exists(prl_file)) {
-				QMakeProject proj;
-				if(proj.read(prl_file, QDir::currentDirPath())) {
-				    if(!proj.isEmpty("QMAKE_PRL_TARGET")) {
-					library = (*lit) + Option::dir_sep + proj.first("QMAKE_PRL_TARGET");
+			    QString lib_file = (*lit) + Option::dir_sep + lib;
+			    if(QMakeMetaInfo::libExists(lib_file)) {
+				QMakeMetaInfo libinfo;
+				if(libinfo.readLib(lib_file)) {
+				    if(!libinfo.isEmpty("QMAKE_PRL_TARGET")) {
+					library = (*lit) + Option::dir_sep + libinfo.first("QMAKE_PRL_TARGET");
 					debug_msg(1, "pbuilder: Found library (%s) via PRL %s (%s)", 
-						  opt.latin1(), prl_file.latin1(), library.latin1());
+						  opt.latin1(), lib_file.latin1(), library.latin1());
 					remove = TRUE;
 				    }
 				}
-
 			    }
 			}
 			if(!remove) {
@@ -392,6 +634,8 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 			    break;
 			}
 		    }
+		} else if(opt == "-undefined") {
+		    ++it; //the next option is not a library..
 		} else if(opt.left(1) != "-") {
 		    remove = TRUE;
 		    library = opt;
@@ -453,7 +697,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	}
 	QString phase_key = keyFor("QMAKE_PBX_SUBLIBS_BUILDPHASE");
 	mkfile = fileFixify(mkfile, QDir::currentDirPath());
-	project->variables()["QMAKE_PBX_BUILDPHASES"].append(phase_key);
+	project->variables()["QMAKE_PBX_PRESCRIPT_BUILDPHASES"].append(phase_key);
 	t << "\t\t" << phase_key << " = {" << "\n"
 	  << "\t\t\t" << "buildActionMask = 2147483647;" << "\n"
 	  << "\t\t\t" << "files = (" << "\n"
@@ -498,8 +742,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	  << "\t\t\t" << "name = \"" << grp << "\";" << "\n"
 	  << "\t\t" << "};" << "\n";
     }
-    if(project->isActiveConfig("resource_fork") && !project->isActiveConfig("console") &&
-       project->first("TEMPLATE") == "app") { //BUNDLE RESOURCES
+    if(!project->isActiveConfig("console") && project->first("TEMPLATE") == "app") { //BUNDLE RESOURCES
 	QString grp("Bundle Resources"), key = keyFor(grp);
 	project->variables()["QMAKE_PBX_BUILDPHASES"].append(key);
 	t << "\t\t" << key << " = {" << "\n"
@@ -509,21 +752,6 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	  << "\t\t\t" << ");" << "\n"
 	  << "\t\t\t" << "isa = PBXResourcesBuildPhase;" << "\n"
 	  << "\t\t\t" << "name = \"" << grp << "\";" << "\n"
-	  << "\t\t" << "};" << "\n";
-    }
-
-    //DUMP EVERYTHING THAT TIES THE ABOVE TOGETHER
-    //PRODUCTS
-    {
-	QString grp("Products"), key = keyFor(grp);
-	project->variables()["QMAKE_PBX_GROUPS"].append(key);
-	t << "\t\t" << key << " = {" << "\n"
-	  << "\t\t\t" << "children = (" << "\n"
-	  << "\t\t\t\t" << keyFor("QMAKE_PBX_REFERENCE") << "\n"
-	  << "\t\t\t" << ");" << "\n"
-	  << "\t\t\t" << "isa = PBXGroup;" << "\n"
-	  << "\t\t\t" << "name = Products;" << "\n"
-	  << "\t\t\t" << "refType = 4;" << "\n"
 	  << "\t\t" << "};" << "\n";
     }
     { //INSTALL BUILDPHASE (sh script)
@@ -540,7 +768,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	if(project->first("TEMPLATE") == "app") {
 	    if(project->isActiveConfig("resource_fork") && !project->isActiveConfig("console"))
 		targ += ".app";
-	} else if(!project->isActiveConfig("staticlib") &&
+	} else if(!project->isActiveConfig("staticlib") && !project->isActiveConfig("plugin") && 
 	   !project->isActiveConfig("frameworklib")) {
 	    QString li[] = { "TARGET_", "TARGET_x", "TARGET_x.y", QString::null };
 	    for(int n = 0; !li[n].isNull(); n++) {
@@ -559,7 +787,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	    QString targ = project->first("QMAKE_ORIG_TARGET"), cpflags;
 	    if(project->first("TEMPLATE") == "app") {
 		targ = project->first("TARGET");
-		if(project->isActiveConfig("resource_fork") && !project->isActiveConfig("console")) {
+		if(!project->isActiveConfig("console")) {
 		    targ += ".app";
 		    cpflags += "-r ";
 		}
@@ -568,24 +796,26 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 		    targ = project->first("TARGET");
 		else
 		    targ = project->first("TARGET_");
-		int slsh = targ.findRev(Option::dir_sep);
-		if(slsh != -1)
-		    targ = targ.right(targ.length() - slsh - 1);
 	    }
-	    QTextStream sht(&shf);
+            int slsh = targ.findRev(Option::dir_sep);
+            if(slsh != -1)
+                targ = targ.right(targ.length() - slsh - 1);
+
 	    QString dstdir = project->first("DESTDIR");
 	    fixEnvVariables(dstdir);
 
+	    QTextStream sht(&shf);
 	    sht << "#!/bin/sh" << endl;
 	    //copy the actual target
-	    sht << "OUT_TARG=\"" << targ << "\"\n" 
-		<< "[ -z \"$BUILD_ROOT\" ] || OUT_TARG=\"${BUILD_ROOT}/${OUT_TARG}\"" << endl;
-	    sht << "[ \"$OUT_TARG\" = \"" 
+	    sht << "OUT_TARG=\"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\"\n" 
+                << "if [ -e \"$OUT_TARG\" ]; then" << "\n"
+                << "  [ \"$OUT_TARG\" = \"" 
 		<< (dstdir.isEmpty() ? QDir::currentDirPath() + QDir::separator(): dstdir) << targ << "\" ] || " 
 		<< "[ \"$OUT_TARG\" = \"" << targ << "\" ] || " 
-		<< "cp -r \"$OUT_TARG\" " << "\"" << dstdir << targ << "\"" << endl;
+		<< "cp -r \"$OUT_TARG\" " << "\"" << dstdir << targ << "\"" << "\n"
+                << "fi" << endl;
 	    //rename as a framework
-	    if(project->first("TEMPLATE") == "lib" && project->isActiveConfig("frameworklib"))
+	    if(project->first("TEMPLATE") == "lib" && project->isActiveConfig("frameworklib") && !project->isActiveConfig("plugin"))
 		sht << "ln -sf \"" << targ <<  "\" " << "\"" << dstdir << targ << "\"" << endl;
 	    //create all the version symlinks (just to be like unixmake)
 	    for(QStringList::Iterator it = links.begin(); it != links.end(); ++it) {
@@ -600,7 +830,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	    script = fileFixify(script, QDir::currentDirPath());
 	    project->variables()["QMAKE_PBX_BUILDPHASES"].append(phase_key);
 	    t << "\t\t" << phase_key << " = {" << "\n"
-	      << "\t\t\t" << "buildActionMask = 8;" << "\n" //only on install!
+	      << "\t\t\t" << "buildActionMask = 2147483647;" << "\n"
 	      << "\t\t\t" << "files = (" << "\n"
 	      << "\t\t\t" << ");" << "\n"
 	      << "\t\t\t" << "generatedFileNames = (" << "\n"
@@ -614,6 +844,45 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	      << "\t\t" << "};" << "\n";
 	}
     }
+    if(/*ideType() == MAC_XCODE &&*/ !project->isEmpty("QMAKE_PBX_PRESCRIPT_BUILDPHASES") && 0) {
+	// build reference
+	t << "\t\t" << keyFor("QMAKE_PBX_PRESCRIPT_BUILDREFERENCE") << " = {" << "\n"
+	  << "\t\t\t" << "includeInIndex = 0;" << "\n"
+	  << "\t\t\t" << "isa = PBXFileReference;" << "\n"
+	  << "\t\t\t" << "path = preprocessor.out;" << "\n"
+	  << "\t\t\t" << "refType = 3;" << "\n"
+	  << "\t\t\t" << "sourceTree = BUILT_PRODUCTS_DIR;" << "\n"
+	  << "\t\t" << "};" << "\n";
+	project->variables()["QMAKE_PBX_PRODUCTS"].append(keyFor("QMAKE_PBX_PRESCRIPTS_BUILDREFERENCE"));
+	//build phase
+        QString prescript_key = keyFor("QMAKE_PBX_PRESCRIPTS_BUILDPHASE");
+        project->variables()["QMAKE_PBX_TARGETS"].append(prescript_key);
+	t << "\t\t" << prescript_key << " = {" << "\n"
+	  << "\t\t\t" << "buildPhases = (" << "\n"
+	  << varGlue("QMAKE_PBX_PRESCRIPT_BUILDPHASES", "\t\t\t\t", ",\n\t\t\t\t", "\n")
+	  << "\t\t\t" << ");" << "\n"
+	  << "\t\t\t" << "buildRules = (" << "\n"
+	  << "\t\t\t" << ");" << "\n"
+	  << "\t\t\t" << "buildSettings = {" << "\n"
+	  << "\t\t\t" << "};" << "\n"
+	  << "\t\t\t" << "dependencies = (" << "\n"
+	  << "\t\t\t" << ");" << "\n"
+	  << "\t\t\t" << "isa = PBXNativeTarget;" << "\n"
+	  << "\t\t\t" << "name = \"Qt Preprocessor Steps\";" << "\n"
+	  << "\t\t\t" << "productName = \"Qt Preprocessor Steps\";" << "\n"
+	  << "\t\t\t" << "productReference = " << keyFor("QMAKE_PBX_PRESCRIPTS_BUILDREFERENCE") << ";" << "\n"
+	  << "\t\t\t" << "productType = \"com.apple.product-type.tool\";" << "\n"
+	  << "\t\t" << "};" << "\n";
+	//dependency
+	t << "\t\t" << keyFor("QMAKE_PBX_PRESCRIPTS_DEPENDENCY") << " = {" << "\n"
+	  << "\t\t\t" << "isa = PBXTargetDependency;" << "\n"
+	  << "\t\t\t" << "target = " << keyFor("QMAKE_PBX_PRESCRIPTS_BUILDPHASE") << ";" << "\n"
+	  << "\t\t" << "};" << "\n";
+	project->variables()["QMAKE_PBX_TARGET_DEPENDS"].append(keyFor("QMAKE_PBX_PRESCRIPTS_DEPENDENCY"));
+	project->variables()["QMAKE_PBX_PRESCRIPT_BUILDPHASES"].clear(); //these are already consumed above
+    }
+
+    //DUMP EVERYTHING THAT TIES THE ABOVE TOGETHER
     //ROOT_GROUP
     t << "\t\t" << keyFor("QMAKE_PBX_ROOT_GROUP") << " = {" << "\n"
       << "\t\t\t" << "children = (" << "\n"
@@ -625,7 +894,9 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
       << "\t\t\t" << "refType = 4;" << "\n"
       << "\t\t" << "};" << "\n";
     //REFERENCE
-    t << "\t\t" << keyFor("QMAKE_PBX_REFERENCE") << " = {" << "\n";
+    project->variables()["QMAKE_PBX_PRODUCTS"].append(keyFor(pbx_dir + "QMAKE_PBX_REFERENCE"));
+    t << "\t\t" << keyFor(pbx_dir + "QMAKE_PBX_REFERENCE") << " = {" << "\n"
+      << "\t\t\t" << "fallbackIsa = PBXFileReference;" << "\n";
     if(project->first("TEMPLATE") == "app") {
 	QString targ = project->first("QMAKE_ORIG_TARGET");
 	if(project->isActiveConfig("resource_fork") && !project->isActiveConfig("console")) {
@@ -653,31 +924,80 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	if(slsh != -1)
 	    lib = lib.right(lib.length() - slsh - 1);
 	t << "\t\t\t" << "isa = PBXLibraryReference;" << "\n"
+	  << "\t\t\t" << "expectedFileType = \"compiled.mach-o.dylib\";" << "\n"
 	  << "\t\t\t" << "path = " << lib << ";\n"
-	  << "\t\t\t" << "refType = " << reftypeForFile(lib) << ";" << "\n";
+	  << "\t\t\t" << "refType = " << 3/*reftypeForFile(lib)*/ << ";" << "\n"
+	  << "\t\t\t" << "sourceTree = BUILT_PRODUCTS_DIR" << ";" << "\n";
     }
     t << "\t\t" << "};" << "\n";
+    { //Products group
+	QString grp("Products"), key = keyFor(grp);
+	project->variables()["QMAKE_PBX_GROUPS"].append(key);
+	t << "\t\t" << key << " = {" << "\n"
+	  << "\t\t\t" << "children = (" << "\n"
+	  << varGlue("QMAKE_PBX_PRODUCTS", "\t\t\t\t", ",\n\t\t\t\t", "\n")
+	  << "\t\t\t" << ");" << "\n"
+	  << "\t\t\t" << "isa = PBXGroup;" << "\n"
+	  << "\t\t\t" << "name = Products;" << "\n"
+	  << "\t\t\t" << "refType = 4;" << "\n"
+	  << "\t\t" << "};" << "\n";
+    }
     //TARGET
-    t << "\t\t" << keyFor("QMAKE_PBX_TARGET") << " = {" << "\n"
+    QString target_key = keyFor("QMAKE_PBX_TARGET");
+    project->variables()["QMAKE_PBX_TARGETS"].append(target_key);
+    t << "\t\t" << target_key << " = {" << "\n"
       << "\t\t\t" << "buildPhases = (" << "\n"
+      << varGlue("QMAKE_PBX_PRESCRIPT_BUILDPHASES", "\t\t\t\t", ",\n\t\t\t\t", ",\n")
       << varGlue("QMAKE_PBX_BUILDPHASES", "\t\t\t\t", ",\n\t\t\t\t", "\n")
       << "\t\t\t" << ");" << "\n"
       << "\t\t\t" << "buildSettings = {" << "\n"
+      << "\t\t\t\t" << "CC = \"" << fixEnvsList("QMAKE_CC") << "\";" << "\n"
+      << "\t\t\t\t" << "CPLUSPLUS = \"" << fixEnvsList("QMAKE_CXX") << "\";" << "\n"
       << "\t\t\t\t" << "FRAMEWORK_SEARCH_PATHS = \"\";" << "\n"
       << "\t\t\t\t" << "HEADER_SEARCH_PATHS = \"" << fixEnvsList("INCLUDEPATH") << " " << fixEnvs(specdir()) << "\";" << "\n"
       << "\t\t\t\t" << "LIBRARY_SEARCH_PATHS = \"" << var("QMAKE_PBX_LIBPATHS") << "\";" << "\n"
       << "\t\t\t\t" << "OPTIMIZATION_CFLAGS = \"\";" << "\n"
       << "\t\t\t\t" << "OTHER_CFLAGS = \"" <<
-	fixEnvsList("QMAKE_CFLAGS") << varGlue("PRL_EXPORT_DEFINES"," -D"," -D","") <<
-	varGlue("DEFINES"," -D"," -D","") << "\";" << "\n"
+	fixEnvsList("QMAKE_CFLAGS") << fixQuotes(varGlue("PRL_EXPORT_DEFINES"," -D"," -D","")) <<
+	fixQuotes(varGlue("DEFINES"," -D"," -D","")) << "\";" << "\n"
       << "\t\t\t\t" << "LEXFLAGS = \"" << var("QMAKE_LEXFLAGS") << "\";" << "\n"
       << "\t\t\t\t" << "YACCFLAGS = \"" << var("QMAKE_YACCFLAGS") << "\";" << "\n"
       << "\t\t\t\t" << "OTHER_CPLUSPLUSFLAGS = \"" <<
-	fixEnvsList("QMAKE_CXXFLAGS") << varGlue("PRL_EXPORT_DEFINES"," -D"," -D","") <<
-	varGlue("DEFINES"," -D"," -D","") << "\";" << "\n"
+	fixEnvsList("QMAKE_CXXFLAGS") << fixQuotes(varGlue("PRL_EXPORT_DEFINES"," -D"," -D","")) <<
+	fixQuotes(varGlue("DEFINES"," -D"," -D","")) << "\";" << "\n"
       << "\t\t\t\t" << "OTHER_REZFLAGS = \"\";" << "\n"
       << "\t\t\t\t" << "SECTORDER_FLAGS = \"\";" << "\n"
-      << "\t\t\t\t" << "WARNING_CFLAGS = \"\";" << "\n";
+      << "\t\t\t\t" << "WARNING_CFLAGS = \"\";" << "\n"
+      << "\t\t\t\t" << "PREBINDING = " << (project->isEmpty("QMAKE_DO_PREBINDING") ? "NO" : "YES") << ";" << "\n";
+    if(!project->isEmpty("PRECOMPILED_HEADER")) {
+	if (ideType() == MAC_XCODE) {
+	    t << "\t\t\t\t" << "GCC_PRECOMPILE_PREFIX_HEADER = \"YES\";" << "\n"
+		<< "\t\t\t\t" << "GCC_PREFIX_HEADER = \"" <<  project->first("PRECOMPILED_HEADER") << "\";" << "\n";
+	} else {
+	    t << "\t\t\t\t" << "PRECOMPILE_PREFIX_HEADER = \"YES\";" << "\n"
+		<< "\t\t\t\t" << "PREFIX_HEADER = \"" <<  project->first("PRECOMPILED_HEADER") << "\";" << "\n";
+	}
+    }
+    if(project->first("TEMPLATE") == "app") {
+        QString plist = fileFixify(project->first("QMAKE_INFO_PLIST"));
+        if(plist.isEmpty())
+            plist = specdir() + QDir::separator() + "Info.plist." + project->first("TEMPLATE");
+	if(QFile::exists(plist)) {
+	    QFile plist_in_file(plist);
+	    if(plist_in_file.open(IO_ReadOnly)) {
+		QTextStream plist_in(&plist_in_file);
+		QString plist_in_text = plist_in.read();
+                plist_in_text = plist_in_text.replace("@ICON@", (project->isEmpty("RC_FILE") ? QString("") : project->first("RC_FILE").section(Option::dir_sep, -1)));
+                plist_in_text = plist_in_text.replace("@EXECUTABLE@", project->first("QMAKE_ORIG_TARGET"));
+		QFile plist_out_file("Info.plist");
+		if(plist_out_file.open(IO_WriteOnly | IO_Translate)) {
+		    QTextStream plist_out(&plist_out_file);
+		    plist_out << plist_in_text;
+		    t << "\t\t\t\t" << "INFOPLIST_FILE = \"Info.plist\";" << "\n";
+		}
+	    }
+	}
+    }
 #if 1
     t << "\t\t\t\t" << "BUILD_ROOT = \"" << QDir::currentDirPath() << "\";" << "\n";
 #endif
@@ -685,104 +1005,166 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	t << "\t\t\t\t" << "OTHER_LDFLAGS = \"" << fixEnvsList("SUBLIBS") << " " <<
 	    fixEnvsList("QMAKE_LFLAGS") << " " << fixEnvsList("QMAKE_LIBDIR_FLAGS") <<
 	    " " << fixEnvsList("QMAKE_LIBS") << "\";" << "\n";
+    if(!project->isEmpty("DESTDIR")) {
+	QString dir = project->first("DESTDIR");
+	if (QDir::isRelativePath(dir))
+	    dir.prepend(QDir::currentDirPath() + Option::dir_sep);
+	t << "\t\t\t\t" << "INSTALL_DIR = \"" << dir << "\";" << "\n";
+    }
+    if ( project->first("TEMPLATE") == "lib") {
+	t << "\t\t\t\t" << "INSTALL_PATH = \"" <<  "\";" << "\n";
+    }
+    if(!project->isEmpty("VERSION") && project->first("VERSION") != "0.0.0") {
+	t << "\t\t\t\t" << "DYLIB_CURRENT_VERSION = \"" << project->first("VER_MAJ") << "." 
+	  << project->first("VER_MIN") << "." << project->first("VER_PAT")  << "\";" << "\n";
+	if(project->isEmpty("COMPAT_VERSION"))
+	    t << "\t\t\t\t" << "DYLIB_COMPATIBILITY_VERSION = \"" << project->first("VER_MAJ") << "." 
+	      << project->first("VER_MIN")  << "\";" << "\n";
+    }
+    if(!project->isEmpty("COMPAT_VERSION"))
+	t << "\t\t\t\t" << "DYLIB_COMPATIBILITY_VERSION = \"" << project->first("COMPAT_VERSION") << "\";" << "\n";
+
+    if(ideType() == MAC_XCODE) {
+	if(!project->isEmpty("OBJECTS_DIR"))
+	    t << "\t\t\t\t" << "OBJROOT = \"" << project->first("OBJECTS_DIR") << "\";" << "\n";
+    }
+#if 0
     if(!project->isEmpty("DESTDIR"))
-	t << "\t\t\t\t" << "INSTALL_PATH = \"" << project->first("DESTDIR") << "\";" << "\n";
-    if(!project->isEmpty("VERSION") && project->first("VERSION") != "0.0.0")
-	t << "\t\t\t\t" << "DYLIB_CURRENT_VERSION = \"" << project->first("VERSION") << "\";" << "\n";
-    if(!project->isEmpty("OBJECTS_DIR"))
-	t << "\t\t\t\t" << "OBJECT_FILE_DIR = \"" << project->first("OBJECTS_DIR") << "\";" << "\n";
+	t << "\t\t\t\t" << "SYMROOT = \"" << project->first("DESTDIR") << "\";" << "\n";
+    else
+	t << "\t\t\t\t" << "SYMROOT = \"" << QDir::currentDirPath() << "\";" << "\n";
+#endif
     if(project->first("TEMPLATE") == "app") {
-	if(project->isActiveConfig("resource_fork") && !project->isActiveConfig("console"))
+	if(ideType() == MAC_PBUILDER && !project->isActiveConfig("console"))
 	    t << "\t\t\t\t" << "WRAPPER_EXTENSION = app;" << "\n";
 	t << "\t\t\t\t" << "PRODUCT_NAME = " << project->first("QMAKE_ORIG_TARGET") << ";" << "\n";
     } else {
-	QString lib = project->first("QMAKE_ORIG_TARGET");
 	if(!project->isActiveConfig("plugin") && project->isActiveConfig("staticlib")) {
 	    t << "\t\t\t\t" << "LIBRARY_STYLE = STATIC;" << "\n";
-	    lib = project->first("TARGET");
 	} else {
 	    t << "\t\t\t\t" << "LIBRARY_STYLE = DYNAMIC;" << "\n";
-	    if(!project->isActiveConfig("frameworklib")) {
-		if(project->isActiveConfig("plugin"))
-		    lib = project->first("TARGET");
-		else
-		    lib = project->first("TARGET_");
-	    }
 	}
-	int slsh = lib.findRev(Option::dir_sep);
-	if(slsh != -1)
-	    lib = lib.right(lib.length() - slsh - 1);
+	QString lib = project->first("QMAKE_ORIG_TARGET");
+	if (!project->isActiveConfig("frameworklib") && !project->isActiveConfig("staticlib"))
+	    lib.prepend("lib");
 	t << "\t\t\t\t" << "PRODUCT_NAME = " << lib << ";" << "\n";
     }
     tmp = project->variables()["QMAKE_PBX_VARS"];
-    for(QStringList::Iterator it = tmp.begin(); it != tmp.end(); ++it)
-	t << "\t\t\t\t" << (*it) << " = \"" << getenv((*it)) << "\";" << "\n";
+    for(QStringList::Iterator it = tmp.begin(); it != tmp.end(); ++it) {
+	QString var = (*it), val = getenv(var);
+	if(!val && var == "TB")
+	    val = "/usr/bin/";
+	t << "\t\t\t\t" << var << " = \"" << val << "\";" << "\n";
+    }
     t << "\t\t\t" << "};" << "\n"
       << "\t\t\t" << "conditionalBuildSettings = {" << "\n"
       << "\t\t\t" << "};" << "\n"
       << "\t\t\t" << "dependencies = (" << "\n"
-      << varGlue("QMAKE_PBX_TARGETDEPENDS", "\t\t\t\t", ",\n\t\t\t\t", "\n")
+      << varGlue("QMAKE_PBX_TARGET_DEPENDS", "\t\t\t\t", ",\n\t\t\t\t", "\n")
       << "\t\t\t" << ");" << "\n"
-      << "\t\t\t" << "productReference = " << keyFor("QMAKE_PBX_REFERENCE") << ";" << "\n"
+      << "\t\t\t" << "productReference = " << keyFor(pbx_dir + "QMAKE_PBX_REFERENCE") << ";" << "\n"
       << "\t\t\t" << "shouldUseHeadermap = 1;" << "\n";
+    if(ideType() == MAC_XCODE)
+	t << "\t\t\t" << "isa = PBXNativeTarget;" << "\n";
     if(project->first("TEMPLATE") == "app") {
-	if(project->isActiveConfig("resource_fork") && !project->isActiveConfig("console")) {
-	    t << "\t\t\t" << "isa = PBXApplicationTarget;" << "\n"
-	      << "\t\t\t" << "productSettingsXML = " << "\"" << "<?xml version=" 
-	      << "\\\"1.0\\\" encoding=" << "\\\"UTF-8\\\"" << "?>" << "\n"
-	      << "\t\t\t\t" << "<!DOCTYPE plist SYSTEM \\\"file://localhost/System/" 
-	      << "Library/DTDs/PropertyList.dtd\\\">" << "\n"
-	      << "\t\t\t\t" << "<plist version=\\\"0.9\\\">" << "\n"
-	      << "\t\t\t\t" << "<dict>" << "\n"
-	      << "\t\t\t\t\t" << "<key>CFBundleDevelopmentRegion</key>" << "\n"
-	      << "\t\t\t\t\t" << "<string>English</string>" << "\n"
-	      << "\t\t\t\t\t" << "<key>CFBundleExecutable</key>" << "\n"
-	      << "\t\t\t\t\t" << "<string>" << project->first("QMAKE_ORIG_TARGET") << "</string>" << "\n"
-	      << "\t\t\t\t\t" << "<key>CFBundleIconFile</key>" << "\n"
-	      << "\t\t\t\t\t" << "<string>" << var("RC_FILE").section(Option::dir_sep, -1) << "</string>" << "\n"
-	      << "\t\t\t\t\t" << "<key>CFBundleInfoDictionaryVersion</key>"  << "\n"
-	      << "\t\t\t\t\t" << "<string>6.0</string>" << "\n"
-	      << "\t\t\t\t\t" << "<key>CFBundlePackageType</key>" << "\n"
-	      << "\t\t\t\t\t" << "<string>APPL</string>" << "\n"
-	      << "\t\t\t\t\t" << "<key>CFBundleSignature</key>" << "\n"
-	      << "\t\t\t\t\t" << "<string>????</string>" << "\n"
-	      << "\t\t\t\t\t" << "<key>CFBundleVersion</key>" << "\n"
-	      << "\t\t\t\t\t" << "<string>0.1</string>" << "\n"
-	      << "\t\t\t\t\t" << "<key>CSResourcesFileMapped</key>" << "\n"
-	      << "\t\t\t\t\t" << "<true/>" << "\n"
-	      << "\t\t\t\t" << "</dict>" << "\n"
-	      << "\t\t\t\t" << "</plist>" << "\";" << "\n";
+	if(project->isActiveConfig("console")) {
+	    if(ideType() == MAC_XCODE) 
+		t << "\t\t\t" << "productType = \"com.apple.product-type.tool\";" << "\n";
+	    else
+		t << "\t\t\t" << "isa = PBXToolTarget;" << "\n";
 	} else {
-	    t << "\t\t\t" << "isa = PBXToolTarget;" << "\n";
+	    if(ideType() == MAC_XCODE)
+		t << "\t\t\t" << "productType = \"com.apple.product-type.application\";" << "\n";
+	    else
+		t << "\t\t\t" << "isa = PBXApplicationReference;" << "\n";
+	    t << "\t\t\t" << "productSettingsXML = \"";
+            bool read_plist = false;
+            if(QFile::exists("Info.plist")) {
+                QFile plist("Info.plist");
+                if(plist.open(IO_ReadOnly)) {
+                    read_plist = true;
+                    QTextStream stream(&plist);
+                    while(!stream.eof()) 
+                        t << stream.readLine().replace('"', "\\\"") << endl;
+                }
+            }
+            if(!read_plist) {
+                t << "<?xml version=" 
+                  << "\\\"1.0\\\" encoding=" << "\\\"UTF-8\\\"" << "?>" << "\n"
+                  << "\t\t\t\t" << "<!DOCTYPE plist SYSTEM \\\"file://localhost/System/" 
+                  << "Library/DTDs/PropertyList.dtd\\\">" << "\n"
+                  << "\t\t\t\t" << "<plist version=\\\"0.9\\\">" << "\n"
+                  << "\t\t\t\t" << "<dict>" << "\n"
+                  << "\t\t\t\t\t" << "<key>CFBundleDevelopmentRegion</key>" << "\n"
+                  << "\t\t\t\t\t" << "<string>English</string>" << "\n"
+                  << "\t\t\t\t\t" << "<key>CFBundleExecutable</key>" << "\n"
+                  << "\t\t\t\t\t" << "<string>" << project->first("QMAKE_ORIG_TARGET") << "</string>" << "\n"
+                  << "\t\t\t\t\t" << "<key>CFBundleIconFile</key>" << "\n"
+                  << "\t\t\t\t\t" << "<string>" << var("RC_FILE").section(Option::dir_sep, -1) << "</string>" << "\n"
+                  << "\t\t\t\t\t" << "<key>CFBundleInfoDictionaryVersion</key>"  << "\n"
+                  << "\t\t\t\t\t" << "<string>6.0</string>" << "\n"
+                  << "\t\t\t\t\t" << "<key>CFBundlePackageType</key>" << "\n"
+                  << "\t\t\t\t\t" << "<string>APPL</string>" << "\n"
+                  << "\t\t\t\t\t" << "<key>CFBundleSignature</key>" << "\n"
+                    //Although the output below looks strange it is to avoid the trigraph ??<
+                  << "\t\t\t\t\t" << "<string>????" << "</string>" << "\n"
+                  << "\t\t\t\t\t" << "<key>CFBundleVersion</key>" << "\n"
+                  << "\t\t\t\t\t" << "<string>0.1</string>" << "\n"
+                  << "\t\t\t\t\t" << "<key>CSResourcesFileMapped</key>" << "\n"
+                  << "\t\t\t\t\t" << "<true/>" << "\n"
+                  << "\t\t\t\t" << "</dict>" << "\n"
+                  << "\t\t\t\t" << "</plist>";
+            }
 	}
+        t << "\";" << "\n";
 	t << "\t\t\t" << "name = \"" << project->first("QMAKE_ORIG_TARGET") << "\";" << "\n"
 	  << "\t\t\t" << "productName = " << project->first("QMAKE_ORIG_TARGET") << ";" << "\n";
     } else {
 	QString lib = project->first("QMAKE_ORIG_TARGET");
-	if(!project->isActiveConfig("frameworklib"))
+	if(!project->isActiveConfig("frameworklib") && !project->isActiveConfig("staticlib"))
 	   lib.prepend("lib");
-	t << "\t\t\t" << "isa = PBXLibraryTarget;" << "\n"
-	  << "\t\t\t" << "name = \"" << lib << "\";" << "\n"
+	t << "\t\t\t" << "name = \"" << lib << "\";" << "\n"
 	  << "\t\t\t" << "productName = " << lib << ";" << "\n";
+	if(ideType() == MAC_XCODE) {
+	    if(project->isActiveConfig("staticlib"))
+		t << "\t\t\t" << "productType = \"com.apple.product-type.library.static\";" << "\n";
+	    else
+		t << "\t\t\t" << "productType = \"com.apple.product-type.library.dynamic\";" << "\n";
+	} else {
+	    t << "\t\t\t" << "isa = PBXLibraryTarget;" << "\n";
+	}
     }
+    t << "\t\t\t" << "startupPath = \"<<ProjectDirectory>>\";" << "\n";
     if(!project->isEmpty("DESTDIR"))
 	t << "\t\t\t" << "productInstallPath = \"" << project->first("DESTDIR") << "\";" << "\n";
     t << "\t\t" << "};" << "\n";
     //DEBUG/RELEASE
-    for(i = 0; i < 2; i++) {
-	bool as_release = !i;
-	if(project->isActiveConfig("debug")) 
-	    as_release = i;
-	QString key = "QMAKE_PBX_" + QString(as_release ? "RELEASE" : "DEBUG");
-	key = keyFor(key);
+    QString active_buildstyle;
+#if 0
+    for(int as_release = 0; as_release < 2; as_release++) 
+#else
+	bool as_release = !project->isActiveConfig("debug");
+#endif
+    {
+	QString key = keyFor("QMAKE_PBX_" + QString(as_release ? "RELEASE" : "DEBUG"));
+	if(project->isActiveConfig("debug") != as_release) 
+	    active_buildstyle = key;
 	project->variables()["QMAKE_PBX_BUILDSTYLES"].append(key);
 	t << "\t\t" << key << " = {" << "\n"
 	  << "\t\t\t" << "buildRules = (" << "\n"
 	  << "\t\t\t" << ");" << "\n"
 	  << "\t\t\t" << "buildSettings = {" << "\n"
 	  << "\t\t\t\t" << "COPY_PHASE_STRIP = " << (as_release ? "YES" : "NO") << ";" << "\n";
-	if(as_release) 
+	if(as_release) {
 	    t << "\t\t\t\t" << "DEBUGGING_SYMBOLS = NO;" << "\n";
+	} else {
+	    t << "\t\t\t\t" << "GCC_ENABLE_FIX_AND_CONTINUE = " 
+	      << (project->isActiveConfig("no_fix_and_continue") ? "NO" : "YES") << ";" << "\n"
+	      << "\t\t\t\t" << "GCC_GENERATE_DEBUGGING_SYMBOLS = YES;" << "\n"
+	      << "\t\t\t\t" << "GCC_OPTIMIZATION_LEVEL = 0;" << "\n"
+	      << "\t\t\t\t" << "ZERO_LINK ="
+	      << (project->isActiveConfig("no_zero_link") ? "NO" : "YES") << ";" << "\n";
+	}
 	t << "\t\t\t" << "};" << "\n"
 	  << "\t\t\t" << "isa = PBXBuildStyle;" << "\n"
 	  << "\t\t\t" << "name = " << (as_release ? "Deployment" : "Development") << ";" << "\n"
@@ -793,10 +1175,12 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
       << "\t\t\t" << "buildStyles = (" << "\n"
       << varGlue("QMAKE_PBX_BUILDSTYLES", "\t\t\t\t", ",\n\t\t\t\t", "\n")
       << "\t\t\t" << ");" << "\n"
+      << "\t\t\t" << "hasScannedForEncodings = 1;" << "\n"
       << "\t\t\t" << "isa = PBXProject;" << "\n"
       << "\t\t\t" << "mainGroup = " << keyFor("QMAKE_PBX_ROOT_GROUP") << ";" << "\n"
+      << "\t\t\t" << "projectDirPath = \"\";" << "\n"
       << "\t\t\t" << "targets = (" << "\n"
-      << "\t\t\t\t" << keyFor("QMAKE_PBX_TARGET") << "\n"
+      << varGlue("QMAKE_PBX_TARGETS", "\t\t\t\t", ",\n\t\t\t\t", "\n")
       << "\t\t\t" << ");" << "\n"
       << "\t\t" << "};" << "\n";
 
@@ -805,32 +1189,42 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
       << "\t" << "rootObject = " << keyFor("QMAKE_PBX_ROOT") << ";" << "\n"
       << "}" << endl;
 
-    QString mkwrap = fileFixify(pbx_dir + Option::dir_sep + ".." + Option::dir_sep + project->first("MAKEFILE"), 
-				QDir::currentDirPath());
-    QFile mkwrapf(mkwrap);
-    if(mkwrapf.open(IO_WriteOnly | IO_Translate)) {
-	debug_msg(1, "pbuilder: Creating file: %s", mkwrap.latin1());
-	QTextStream mkwrapt(&mkwrapf);
-	writeHeader(mkwrapt);
-	const char *cleans = "uiclean mocclean preprocess_clean ";
-	mkwrapt << "#This is a makefile wrapper for PROJECT BUILDER\n"
-		<< "all:" << "\n\t" 
-		<< "cd " << (project->first("QMAKE_ORIG_TARGET") + ".pbproj/ && pbxbuild") << "\n"
-		<< "install: all" << "\n\t" 
-		<< "cd " << (project->first("QMAKE_ORIG_TARGET") + ".pbproj/ && pbxbuild install") << "\n"
-		<< "distclean clean: preprocess_clean" << "\n\t" 
-		<< "cd " << (project->first("QMAKE_ORIG_TARGET") + ".pbproj/ && pbxbuild clean") << "\n"
-		<< (!did_preprocess ? cleans : "") << ":" << "\n";
-	if(did_preprocess) 
-	    mkwrapt << cleans << ":" << "\n\t"
-		    << "make -f " 
-		    << pbx_dir << Option::dir_sep << "qt_preprocess.mak $@" << endl;
+    if(project->isActiveConfig("generate_pbxbuild_makefile")) {
+	QString mkwrap = fileFixify(pbx_dir + Option::dir_sep + ".." + Option::dir_sep + project->first("MAKEFILE"), 
+				    QDir::currentDirPath());
+	QFile mkwrapf(mkwrap);
+	if(mkwrapf.open(IO_WriteOnly | IO_Translate)) {
+	    debug_msg(1, "pbuilder: Creating file: %s", mkwrap.latin1());
+	    QTextStream mkwrapt(&mkwrapf);
+	    writeHeader(mkwrapt);
+	    const char *cleans = "uiclean mocclean preprocess_clean ";
+	    mkwrapt << "#This is a makefile wrapper for PROJECT BUILDER\n"
+		    << "all:" << "\n\t" 
+		    << "cd " << project->first("QMAKE_ORIG_TARGET") << projectSuffix() << "/ && " << pbxbuild() << "\n"
+		    << "install: all" << "\n\t" 
+		    << "cd " << project->first("QMAKE_ORIG_TARGET") << projectSuffix() << "/ && " << pbxbuild() << " install\n"
+		    << "distclean clean: preprocess_clean" << "\n\t" 
+		    << "cd " << project->first("QMAKE_ORIG_TARGET") << projectSuffix() << "/ && " << pbxbuild() << " clean" << "\n"
+		    << (!did_preprocess ? cleans : "") << ":" << "\n";
+	    if(did_preprocess) 
+		mkwrapt << cleans << ":" << "\n\t"
+			<< "make -f " 
+			<< pbx_dir << Option::dir_sep << "qt_preprocess.mak $@" << endl;
+	}
     }
     return TRUE;
 }
 
 QString
-ProjectBuilderMakefileGenerator::fixEnvs(QString file)
+ProjectBuilderMakefileGenerator::fixQuotes(const QString &val)
+{
+    QString ret(val);
+    ret = ret.replace(QRegExp("('|\")"), "\\\\1");
+    return ret;
+}
+
+QString
+ProjectBuilderMakefileGenerator::fixEnvs(const QString &file)
 {
     QRegExp reg_var("\\$\\((.*)\\)");
     for(int rep = 0; (rep = reg_var.search(file, rep)) != -1; ) {
@@ -842,7 +1236,7 @@ ProjectBuilderMakefileGenerator::fixEnvs(QString file)
 }
 
 QString
-ProjectBuilderMakefileGenerator::fixEnvsList(QString where)
+ProjectBuilderMakefileGenerator::fixEnvsList(const QString &where)
 {
     QString ret;
     const QStringList &l = project->variables()[where];
@@ -856,32 +1250,15 @@ ProjectBuilderMakefileGenerator::fixEnvsList(QString where)
 }
 
 QString
-ProjectBuilderMakefileGenerator::keyFor(QString block)
+ProjectBuilderMakefileGenerator::keyFor(const QString &block)
 {
-#if 0 //This make this code much easier to debug..
-    return block;
+#if 1 //This make this code much easier to debug..
+    if(project->isActiveConfig("no_pb_munge_key"))
+       return block;
 #endif
-
     QString ret;
     if(!keys.contains(block)) {
-#if 0
-	static unsigned int r = 0;
-	ret.sprintf("%024x", ++r);
-#else //not really necesary, but makes it look more interesting..
-	static struct { unsigned int a1, a2, a3; } r = { 0, 0, 0 };
-	if(!r.a1 && !r.a2 && !r.a3) {
-	    r.a1 = rand();
-	    r.a2 = rand();
-	    r.a3 = rand();
-	}
-	switch(rand() % 3) {
-	case 0: ++r.a1; break;
-	case 1: ++r.a2; break;
-	case 2: ++r.a3; break;
-	}
-	ret.sprintf("%08x%08x%08x", r.a1, r.a2, r.a3);
-#endif
-	ret = ret.upper();
+	ret = qtMD5(block.utf8()).left(24).upper();
 	keys.insert(block, ret);
     } else {
 	ret = keys[block];
@@ -892,28 +1269,27 @@ ProjectBuilderMakefileGenerator::keyFor(QString block)
 bool
 ProjectBuilderMakefileGenerator::openOutput(QFile &file) const
 {
-    if(project->first("TEMPLATE") != "subdirs") {
-	QFileInfo fi(file);
-	if(fi.extension() != "pbxproj" || file.name().isEmpty()) {
-	    QString output = file.name();
-	    if(fi.isDir())
-		output += QDir::separator();
-	    if(fi.extension() != "pbproj") {
-		if(file.name().isEmpty() || fi.isDir())
-		    output += project->first("TARGET");
-		output += QString(".pbproj") + QDir::separator();
-	    } else if(output[(int)output.length() - 1] != QDir::separator()) {
-		output += QDir::separator();
-	    }
-	    output += QString("project.pbxproj");
-	    file.setName(output);
+    if(QDir::isRelativePath(file.name()))
+	file.setName(Option::output_dir + file.name()); //pwd when qmake was run
+    QFileInfo fi(file);
+    if(fi.extension() != "pbxproj" || file.name().isEmpty()) {
+	QString output = file.name();
+	if(fi.isDir())
+	    output += QDir::separator();
+	if(!output.endsWith(projectSuffix())) {
+	    if(file.name().isEmpty() || fi.isDir())
+		output += project->first("TARGET");
+	    output += projectSuffix() + QDir::separator();
+	} else if(output[(int)output.length() - 1] != QDir::separator()) {
+	    output += QDir::separator();
 	}
-	bool ret = UnixMakefileGenerator::openOutput(file);
-	((ProjectBuilderMakefileGenerator*)this)->pbx_dir = Option::output_dir.section(Option::dir_sep, 0, -1);
-	Option::output_dir = pbx_dir.section(Option::dir_sep, 0, -2); 
-	return ret;
+	output += QString("project.pbxproj");
+	file.setName(output);
     }
-    return UnixMakefileGenerator::openOutput(file);
+    bool ret = UnixMakefileGenerator::openOutput(file);
+    ((ProjectBuilderMakefileGenerator*)this)->pbx_dir = Option::output_dir.section(Option::dir_sep, 0, -1);
+    Option::output_dir = pbx_dir.section(Option::dir_sep, 0, -2); 
+    return ret;
 }
 
 /* This function is such a hack it is almost pointless, but it
@@ -928,10 +1304,14 @@ ProjectBuilderMakefileGenerator::pbuilderVersion() const
     QString ret;
     if(project->isEmpty("QMAKE_PBUILDER_VERSION")) {
 	QString version, version_plist = project->first("QMAKE_PBUILDER_VERSION_PLIST");
-	if(version_plist.isEmpty())
-	    version_plist = "/Developer/Applications/Project Builder.app/Contents/version.plist";
-	else
+	if(version_plist.isEmpty()) {
+	    if(ideType() == MAC_XCODE && QFile::exists("/Developer/Applications/Xcode.app/Contents/version.plist"))
+		version_plist = "/Developer/Applications/Xcode.app/Contents/version.plist";
+	    else
+		version_plist = "/Developer/Applications/Project Builder.app/Contents/version.plist";
+	} else {
 	    version_plist = version_plist.replace(QRegExp("\""), "");
+	}
 	QFile version_file(version_plist);
 	if(version_file.open(IO_ReadOnly)) {
 	    debug_msg(1, "pbuilder: version.plist: Reading file: %s", version_plist.latin1());
@@ -954,11 +1334,15 @@ ProjectBuilderMakefileGenerator::pbuilderVersion() const
 		}
 	    }
 	    version_file.close();
-	} else debug_msg(1, "pbuilder: version.plist: Failure to open %s", version_plist.latin1());
-	if(version.startsWith("2.0"))
-	    ret = "38";
-	else if(version == "1.1")
-	    ret = "34";
+	} else { debug_msg(1, "pbuilder: version.plist: Failure to open %s", version_plist.latin1()); }
+	if(version_plist.contains("Xcode")) {
+	    ret = "39";
+	} else {
+	    if(version.startsWith("2."))
+		ret = "38";
+	    else if(version == "1.1")
+		ret = "34";
+	}
     } else {
 	ret = project->first("QMAKE_PBUILDER_VERSION");
     }
@@ -974,10 +1358,39 @@ ProjectBuilderMakefileGenerator::pbuilderVersion() const
     return 34; //my fallback
 }
 
-QString
-ProjectBuilderMakefileGenerator::reftypeForFile(QString where)
+int
+ProjectBuilderMakefileGenerator::reftypeForFile(const QString &where)
 {
+    int ret = 0; //absolute is the default..
     if(QDir::isRelativePath(where))
-	return "4"; //relative
-    return "0"; //absolute
+	ret = 4; //relative
+    return ret; 
 }
+
+ProjectBuilderMakefileGenerator::IDE_TYPE
+ProjectBuilderMakefileGenerator::ideType() const
+{
+    if(!project->isActiveConfig("no_pbx_xcode") &&
+       (QFile::exists("/Developer/Applications/Xcode.app") || project->isActiveConfig("pbx_xcode")))
+	return ProjectBuilderMakefileGenerator::MAC_XCODE;
+    return ProjectBuilderMakefileGenerator::MAC_PBUILDER;
+}
+
+QString
+ProjectBuilderMakefileGenerator::projectSuffix() const
+{
+    if(ideType() == MAC_XCODE)
+	return ".xcode";
+    return ".pbproj";
+}
+
+QString
+ProjectBuilderMakefileGenerator::pbxbuild()
+{
+    if(QFile::exists("/usr/bin/pbbuild"))
+	return "pbbuild";
+    if(QFile::exists("/usr/bin/xcodebuild"))
+       return "xcodebuild";
+    return (ideType() == MAC_XCODE ? "xcodebuild" : "pbxbuild");
+}
+

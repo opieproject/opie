@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: makefile.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
-** Definition of ________ class.
+** Definition of MakefileGenerator class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -41,13 +39,21 @@
 #include "project.h"
 #include <qtextstream.h>
 
+#ifdef Q_OS_WIN32
+#define QT_POPEN _popen
+#else
+#define QT_POPEN popen
+#endif
+
 class MakefileGenerator
 {
     QString spec;
     bool init_opath_already, init_already, moc_aware, no_io;
     QStringList createObjectList(const QString &var);
     QString build_args();
-    QMap<QString, QString> depHeuristics, depKeyMap, fileFixed;
+    QString dependencyKey(const QString &file) const;
+    QMap<QString, bool> depProcessed;
+    QMap<QString, QString> depHeuristics, fileFixed;
     QMap<QString, QString> mocablesToMOC, mocablesFromMOC;
     QMap<QString, QStringList> depends;
 
@@ -81,7 +87,7 @@ protected:
 
     QString findMocSource(const QString &moc_file) const;
     QString findMocDestination(const QString &src_file) const;
-    QStringList &findDependencies(const QString &file);
+    virtual QStringList &findDependencies(const QString &file);
 
     void setNoIO(bool o);
     bool noIO() const;
@@ -97,6 +103,9 @@ protected:
     void initOutPaths();
     virtual void init();
 
+    //for cross-platform dependent directories
+    virtual void usePlatformDir();
+
     //for installs
     virtual QString defaultInstall(const QString &);
 
@@ -108,8 +117,12 @@ protected:
 
     //make sure libraries are found
     virtual bool findLibraries();
+    virtual QString findDependency(const QString &);
 
-    QString var(const QString &var);
+    void setProcessedDependencies(const QString &file, bool b);
+    bool processedDependencies(const QString &file);
+
+    virtual QString var(const QString &var);
     QString varGlue(const QString &var, const QString &before, const QString &glue, const QString &after);
     QString varList(const QString &var);
     QString val(const QStringList &varList);
@@ -118,15 +131,15 @@ protected:
 
 
     QString fileFixify(const QString& file, const QString &out_dir=QString::null, 
-		    const QString &in_dir=QString::null, bool force_fix=FALSE) const;
+		       const QString &in_dir=QString::null, bool force_fix=FALSE, bool canon=TRUE) const;
     QStringList fileFixify(const QStringList& files, const QString &out_dir=QString::null, 
-		    const QString &in_dir=QString::null, bool force_fix=FALSE) const;
+			   const QString &in_dir=QString::null, bool force_fix=FALSE, bool canon=TRUE) const;
 public:
     MakefileGenerator(QMakeProject *p);
     virtual ~MakefileGenerator();
 
     static MakefileGenerator *create(QMakeProject *);
-    bool write();
+    virtual bool write();
     virtual bool openOutput(QFile &) const;
 };
 
@@ -166,8 +179,12 @@ inline QString MakefileGenerator::defaultInstall(const QString &)
 inline bool MakefileGenerator::findLibraries()
 { return TRUE; }
 
+inline QString MakefileGenerator::findDependency(const QString &)
+{ return QString(""); }
+
 inline MakefileGenerator::~MakefileGenerator()
 { }
 
+QString mkdir_p_asstring(const QString &dir);
 
 #endif /* __MAKEFILE_H__ */

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: quuid.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
+** 
 **
 ** Definition of QUuid class
 **
@@ -39,7 +39,7 @@
 #define QUUID_H
 
 #ifndef QT_H
-#include <qstring.h>
+#include "qstring.h"
 #endif // QT_H
 
 #include <string.h>
@@ -57,8 +57,25 @@ typedef struct _GUID
 #endif
 #endif
 
+
 struct Q_EXPORT QUuid
 {
+    enum Variant {
+	VarUnknown	=-1,
+	NCS		= 0, // 0 - -
+	DCE		= 2, // 1 0 -
+	Microsoft	= 6, // 1 1 0
+	Reserved	= 7  // 1 1 1
+    };
+
+    enum Version {
+	VerUnknown	=-1,
+	Time		= 1, // 0 0 0 1
+	EmbeddedPOSIX	= 2, // 0 0 1 0
+	Name		= 3, // 0 0 1 1
+	Random		= 4  // 0 1 0 0
+    };
+
     QUuid()
     {
 	memset( this, 0, sizeof(QUuid) );
@@ -114,6 +131,9 @@ struct Q_EXPORT QUuid
 	return !( *this == orig );
     }
 
+    bool operator<(const QUuid &other ) const;
+    bool operator>(const QUuid &other ) const;
+
 #if defined(Q_OS_WIN32)
     // On Windows we have a type GUID that is used by the platform API, so we
     // provide convenience operators to cast from and to this type.
@@ -153,6 +173,9 @@ struct Q_EXPORT QUuid
 	return !( *this == guid );
     }
 #endif
+    static QUuid createUuid();
+    QUuid::Variant variant() const;
+    QUuid::Version version() const;
 
     uint    data1;
     ushort  data2;

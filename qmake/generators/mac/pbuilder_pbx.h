@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: pbuilder_pbx.h,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** 
 **
-** Definition of ________ class.
+** Definition of ProjectBuilderMakefileGenerator class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -34,8 +32,9 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef __PBUILDERMAKE_H__
-#define __PBUILDERMAKE_H__
+
+#ifndef __PBUILDER_PBX_H__
+#define __PBUILDER_PBX_H__
 
 #include "unixmake.h"
 
@@ -43,14 +42,21 @@ class ProjectBuilderMakefileGenerator : public UnixMakefileGenerator
 {
     QString pbx_dir;
     int pbuilderVersion() const;
+    bool writeSubdirs(QTextStream &, bool);
     bool writeMakeParts(QTextStream &);
     bool writeMakefile(QTextStream &);
 
+    QString pbxbuild();
     QMap<QString, QString> keys;
-    QString keyFor(QString file);
-    QString fixEnvs(QString file);
-    QString fixEnvsList(QString where);
-    QString reftypeForFile(QString file);
+    QString keyFor(const QString &file);
+    QString fixQuotes(const QString &val);
+    QString fixEnvs(const QString &file);
+    QString fixEnvsList(const QString &where);
+    int     reftypeForFile(const QString &where);
+    QString projectSuffix() const;
+
+    enum IDE_TYPE { MAC_XCODE, MAC_PBUILDER };
+    IDE_TYPE ideType() const;
 
 public:
     ProjectBuilderMakefileGenerator(QMakeProject *p);
@@ -58,6 +64,7 @@ public:
 
     virtual bool openOutput(QFile &) const;
 protected:
+    bool doPrecompiledHeaders() const { return FALSE; }
     virtual bool doDepends() const { return FALSE; } //never necesary
 };
 
@@ -65,4 +72,4 @@ inline ProjectBuilderMakefileGenerator::~ProjectBuilderMakefileGenerator()
 { }
 
 
-#endif /* __PBUILDERMAKE_H__ */
+#endif /* __PBUILDER_PBX_H__ */

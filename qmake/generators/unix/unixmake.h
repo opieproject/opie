@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: unixmake.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
-** Definition of ________ class.
+** Definition of UnixMakefileGenerator class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -34,6 +32,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #ifndef __UNIXMAKE_H__
 #define __UNIXMAKE_H__
 
@@ -43,19 +42,30 @@ class UnixMakefileGenerator : public MakefileGenerator
 {
     bool init_flag, include_deps;
     bool writeMakefile(QTextStream &);
-    QStringList uniqueSetLFlags(const QStringList &list1, QStringList &list2);
+    void writeExtraVariables(QTextStream &);
+    QString libtoolFileName();
+    void writeLibtoolFile();     // for libtool
+    QString pkgConfigPrefix() const;
+    QString pkgConfigFileName();
+    QString pkgConfigFixPath(QString) const;
+    void writePkgConfigFile();   // for pkg-config
+    QStringList combineSetLFlags(const QStringList &list1, const QStringList &list2);
+    void writePrlFile(QTextStream &);
 
 public:
     UnixMakefileGenerator(QMakeProject *p);
     ~UnixMakefileGenerator();
 
 protected:
+    virtual bool doPrecompiledHeaders() const { return project->isActiveConfig("precompile_header"); }
     virtual bool doDepends() const { return !include_deps && MakefileGenerator::doDepends(); }
     virtual QString defaultInstall(const QString &);
     virtual void processPrlVariable(const QString &, const QStringList &);
     virtual void processPrlFiles();
 
     virtual bool findLibraries();
+    virtual QString findDependency(const QString &);
+    virtual QStringList &findDependencies(const QString &);
     virtual void init();
 
     void writeMakeParts(QTextStream &);

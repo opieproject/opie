@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: metrowerks_xml.cpp,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** 
 **
-** Definition of ________ class.
+** Implementation of MetrowerksMakefileGenerator class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -42,12 +40,11 @@
 #include <qregexp.h>
 #include <stdlib.h>
 #include <time.h>
-#ifdef Q_OS_MAC
+#if !defined(QWS) && defined(Q_OS_MAC)
 #include <Carbon/Carbon.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #endif
-
 
 MetrowerksMakefileGenerator::MetrowerksMakefileGenerator(QMakeProject *p) : MakefileGenerator(p), init_flag(FALSE)
 {
@@ -607,7 +604,7 @@ MetrowerksMakefileGenerator::init()
 
 
 QString
-MetrowerksMakefileGenerator::findTemplate(QString file)
+MetrowerksMakefileGenerator::findTemplate(const QString &file)
 {
     QString ret;
     if(!QFile::exists(ret = file) && 
@@ -621,7 +618,7 @@ MetrowerksMakefileGenerator::findTemplate(QString file)
 bool
 MetrowerksMakefileGenerator::createFork(const QString &f)
 {
-#if defined(Q_OS_MACX)
+#if !defined(QWS) && defined(Q_OS_MACX)
     FSRef fref;
     FSSpec fileSpec;
     if(QFile::exists(f)) {
@@ -664,7 +661,7 @@ MetrowerksMakefileGenerator::fixifyToMacPath(QString &p, QString &v, bool )
     static QString st_volume;
     if(st_volume.isEmpty()) {
 	st_volume = var("QMAKE_VOLUMENAME");
-#ifdef Q_OS_MAC
+#if !defined(QWS) && defined(Q_OS_MACX)
 	if(st_volume.isEmpty()) {
 	    uchar foo[512];
 	    HVolumeParam pb;
@@ -733,7 +730,7 @@ MetrowerksMakefileGenerator::processPrlFiles()
 		    } else if(opt.left(2) == "-l") {
 			QString lib = opt.right(opt.length() - 2), prl;
 			for(MakefileDependDir *mdd = libdirs.first(); mdd; mdd = libdirs.next() ) {
-			    prl = mdd->local_dir + Option::dir_sep + "lib" + lib + Option::prl_ext;
+			    prl = mdd->local_dir + Option::dir_sep + "lib" + lib;
 			    if(processPrlFile(prl)) {
 				if(prl.startsWith(mdd->local_dir))
 				    prl.replace(0, mdd->local_dir.length(), mdd->real_dir);
@@ -751,7 +748,7 @@ MetrowerksMakefileGenerator::processPrlFiles()
 			++it;
 			opt = (*it);
 			QString prl = "/System/Library/Frameworks/" + opt +
-				      ".framework/" + opt + Option::prl_ext;
+				      ".framework/" + opt;
 			if(processPrlFile(prl))
 			    ret = TRUE;
 		    }

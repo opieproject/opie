@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: qglobal.h,v 1.3 2003-11-03 16:52:29 eilers Exp $
+** 
 **
 ** Global type declarations and definitions
 **
 ** Created : 920529
 **
-** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the tools module of the Qt GUI Toolkit.
 **
@@ -38,17 +38,18 @@
 #ifndef QGLOBAL_H
 #define QGLOBAL_H
 
-#define QT_VERSION_STR   "3.1.2"
+#define QT_VERSION_STR   "3.3.2"
 /*
    QT_VERSION is (major << 16) + (minor << 8) + patch.
  */
-#define QT_VERSION 0x030102
+#define QT_VERSION 0x030302
 
 /*
    The operating system, must be one of: (Q_OS_x)
 
      MACX	- Mac OS X
      MAC9	- Mac OS 9
+     DARWIN     - Darwin OS (Without Mac OS X)
      MSDOS	- MS-DOS and Windows
      OS2	- OS/2
      OS2EMX	- XFree86 on OS/2 (not PM)
@@ -78,7 +79,9 @@
      UNIX	- Any UNIX BSD/SYSV system
 */
 
-#if defined(__APPLE__) && defined(__GNUC__)
+#if defined(__DARWIN_X11__)
+#  define Q_OS_DARWIN
+#elif defined(__APPLE__) && defined(__GNUC__)
 #  define Q_OS_MACX
 #elif defined(__MACOSX__)
 #  define Q_OS_MACX
@@ -111,7 +114,7 @@
 #  define Q_OS_RELIANT
 #elif defined(__linux__) || defined(__linux)
 #  define Q_OS_LINUX
-#elif defined(__FreeBSD__)
+#elif defined(__FreeBSD__) || defined(__DragonFly__)
 #  define Q_OS_FREEBSD
 #  define Q_OS_BSD4
 #elif defined(__NetBSD__)
@@ -149,22 +152,20 @@
 #elif defined(__svr4__) && defined(i386) /* Open UNIX 8 + GCC */
 #  define Q_OS_UNIXWARE
 #  define Q_OS_UNIXWARE7
+#elif defined(__MAKEDEPEND__)
 #else
 #  error "Qt has not been ported to this OS - talk to qt-bugs@trolltech.com"
 #endif
 
-#if defined(Q_OS_MAC9) || defined(Q_OS_MACX)
-/* This hack forces the generater to compile qmake not for maxosx native. It is 
- * compiled for Linux and generates usual makefiles..
- * Does anyone has a better solution for this ? (eilers)
- */
-// #  define Q_OS_MAC
-#define Q_OS_LINUX
-#warning "boeser Hack !! (se)"
-#undef Q_OS_MACX
+#if defined(Q_OS_WIN32) || defined(Q_OS_WIN64)
+#  define Q_OS_WIN
 #endif
 
-#if defined(Q_OS_MAC9) || defined(Q_OS_MSDOS) || defined(Q_OS_OS2) || defined(Q_OS_WIN32) || defined(Q_OS_WIN64)
+#if defined(Q_OS_MAC9) || defined(Q_OS_MACX)
+#  define Q_OS_MAC
+#endif
+
+#if defined(Q_OS_MAC9) || defined(Q_OS_MSDOS) || defined(Q_OS_OS2) || defined(Q_OS_WIN)
 #  undef Q_OS_UNIX
 #elif !defined(Q_OS_UNIX)
 #  define Q_OS_UNIX
@@ -177,7 +178,7 @@
      SYM	- Symantec C++ for both PC and Macintosh
      MPW	- MPW C++
      MWERKS	- Metrowerks CodeWarrior
-     MSVC	- Microsoft Visual C/C++
+     MSVC	- Microsoft Visual C/C++, Intel C++ for Windows
      BOR	- Borland/Turbo C++
      WAT	- Watcom C++
      GNU	- GNU C++
@@ -192,7 +193,7 @@
      USLC	- SCO OUDK, UDK, and UnixWare 2.X C++
      CDS	- Reliant C++
      KAI	- KAI C++
-     INTEL	- Intel C++
+     INTEL	- Intel C++ for Linux, Intel C++ for Windows
      HIGHC	- MetaWare High C/C++
      PGI	- Portland Group C++
      GHS	- Green Hills Optimizing C++ Compilers
@@ -222,7 +223,6 @@
 #  define Q_CC_MWERKS
 /* "explicit" recognized since 4.0d1 */
 #  define QMAC_PASCAL pascal
-#  define Q_NO_USING_KEYWORD /* ### check "using" status */
 
 #elif defined(_MSC_VER)
 #  define Q_CC_MSVC
@@ -232,11 +232,19 @@
 /* Visual C++.Net issues for _MSC_VER >= 1300 */
 #  if _MSC_VER >= 1300
 #    define Q_CC_MSVC_NET
-#    if _MSC_VER < 1310
+#    if _MSC_VER < 1310 || defined(Q_OS_WIN64)
 #      define Q_TYPENAME
 #    endif
 #  endif
-#  define Q_NO_USING_KEYWORD /* ### check "using" status */
+/* Intel C++ disguising as Visual C++: the `using' keyword avoids warnings */
+#  if defined(__INTEL_COMPILER)
+#    define Q_CC_INTEL
+#    if !defined(__EXCEPTIONS)
+#      define Q_NO_EXCEPTIONS
+#    endif
+#  else
+#    define Q_NO_USING_KEYWORD /* ### check "using" status */
+#  endif
 
 #elif defined(__BORLANDC__) || defined(__TURBOC__)
 #  define Q_CC_BOR
@@ -284,8 +292,17 @@
 #  if defined(Q_OS_HPUX) && __GNUC__ == 3 && __GNUC_MINOR__ >= 1
 #    define Q_WRONG_SB_CTYPE_MACROS
 #  endif
+
+/* ARM gcc pads structs to 32 bits, even when they contain a single
+   char, or short.  We tell gcc to pack QChars to 16 bits, to avoid
+   QString bloat. However, gcc 3.4 doesn't allow us to create references to
+   members of a packed struct. (Pointers are OK, because then you
+   supposedly know what you are doing.) */
 #  if (defined(__arm__) || defined(__ARMEL__)) && !defined(QT_MOC_CPP)
 #    define Q_PACKED __attribute__ ((packed))
+#    if __GNUC__ == 3 && __GNUC_MINOR__ >= 4
+#      define Q_NO_PACKED_REFERENCE
+#    endif
 #  endif
 #  if !defined(__EXCEPTIONS)
 #    define Q_NO_EXCEPTIONS
@@ -305,6 +322,8 @@
    Visual Age C++ 4.0         ...
                   ...         ...
    Visual Age C++ 5.0         C Compiler 5.0
+                  ...         ...
+   Visual Age C++ 6.0         C Compiler 6.0
 
    Now:
    __xlC__    is the version of the C compiler in hexadecimal notation
@@ -329,7 +348,7 @@
    Compaq C++ V6.3-002.
    This compiler is different enough from other EDG compilers to handle
    it separately anyway. */
-#elif defined(__DECCXX)
+#elif defined(__DECCXX) || defined(__DECC)
 #  define Q_CC_DEC
 /* Compaq C++ V6 compilers are EDG-based but I'm not sure about older
    DEC C++ V5 compilers. */
@@ -370,19 +389,23 @@
 #    define Q_NO_BOOL_TYPE
 #  endif
 
-/* The Portland Group compiler is based on EDG and does define __EDG__ */
+/* The Comeau compiler is based on EDG and does define __EDG__ */
 #  if defined(__COMO__)
 #    define Q_CC_COMEAU
 #    define Q_C_CALLBACKS
 
-/* Using the `using' keyword avoids KAI C++ warnings */
+/* The `using' keyword was introduced to avoid KAI C++ warnings
+   but it's now causing KAI C++ errors instead. The standard is
+   unclear about the use of this keyword, and in practice every
+   compiler is using its own set of rules. Forget it. */
 #  elif defined(__KCC)
 #    define Q_CC_KAI
 #    if !defined(_EXCEPTIONS)
 #      define Q_NO_EXCEPTIONS
 #    endif
+#    define Q_NO_USING_KEYWORD
 
-/* Using the `using' keyword avoids Intel C++ warnings */
+/* Using the `using' keyword avoids Intel C++ for Linux warnings */
 #  elif defined(__INTEL_COMPILER)
 #    define Q_CC_INTEL
 #    if !defined(__EXCEPTIONS)
@@ -430,7 +453,6 @@
 #    if defined(_MIPS_SIM) && (_MIPS_SIM == _ABIO32) /* o32 ABI */
 #      define Q_TYPENAME
 #      define Q_BROKEN_TEMPLATE_SPECIALIZATION
-#      define Q_STRICT_INLINING_RULES
 #      define Q_NO_EXPLICIT_KEYWORD
 #      define Q_INLINE_TEMPLATES inline
 #    elif defined(_COMPILER_VERSION) && (_COMPILER_VERSION < 730) /* 7.2 */
@@ -438,6 +460,9 @@
 #      define Q_BROKEN_TEMPLATE_SPECIALIZATION
 #    endif
 #    define Q_NO_USING_KEYWORD /* ### check "using" status */
+#    if defined(_COMPILER_VERSION) && (_COMPILER_VERSION >= 740)
+#      pragma set woff 3624,3625, 3649 /* turn off some harmless warnings */
+#    endif
 #  endif
 
 /* The older UnixWare 2.X compiler? */
@@ -453,7 +478,7 @@
 #elif defined(__HIGHC__)
 #  define Q_CC_HIGHC
 
-#elif defined(__SUNPRO_CC)
+#elif defined(__SUNPRO_CC) || defined(__SUNPRO_C)
 #  define Q_CC_SUN
 /* 5.0 compiler or better
     'bool' is enabled by default but can be disabled using -features=nobool
@@ -605,6 +630,13 @@ const bool true = TRUE;
 #  endif
 #endif
 
+//
+// Proper for-scoping
+// ### turn on in 4.0
+
+#if 0 && defined(Q_CC_MSVC) && !defined(Q_CC_MSVC_NET)
+#  define for if(0){}else for
+#endif
 
 //
 // Use the "explicit" keyword on platforms that support it.
@@ -665,26 +697,31 @@ typedef unsigned short		Q_UINT16;	// 16 bit unsigned
 typedef int			Q_INT32;	// 32 bit signed
 typedef unsigned int		Q_UINT32;	// 32 bit unsigned
 #if defined(Q_OS_WIN64)
-// LLP64 64-bit model on Windows
 typedef __int64			Q_LONG;		// word up to 64 bit signed
 typedef unsigned __int64	Q_ULONG;	// word up to 64 bit unsigned
 #else
-// LP64 64-bit model on Linux
-typedef long			Q_LONG;
-typedef unsigned long		Q_ULONG;
+typedef long			Q_LONG;		// word up to 64 bit signed
+typedef unsigned long		Q_ULONG;	// word up to 64 bit unsigned
 #endif
-
-#if !defined(QT_CLEAN_NAMESPACE)
-// mininum size of 64 bits is not guaranteed
-#define Q_INT64			Q_LONG
-#define Q_UINT64		Q_ULONG
+#if defined(Q_OS_WIN) && !defined(Q_CC_GNU)
+#  define Q_INT64_C(c) 		c ## i64	// signed 64 bit constant
+#  define Q_UINT64_C(c)		c ## ui64	// unsigned 64 bit constant
+typedef __int64			Q_INT64;	// 64 bit signed
+typedef unsigned __int64	Q_UINT64;	// 64 bit unsigned
+#else
+#  define Q_INT64_C(c) 		c ## LL		// signed 64 bit constant
+#  define Q_UINT64_C(c)		c ## ULL	// unsigned 64 bit constant
+typedef long long		Q_INT64;	// 64 bit signed
+typedef unsigned long long	Q_UINT64;	// 64 bit unsigned
 #endif
+typedef Q_INT64			Q_LLONG;	// signed long long
+typedef Q_UINT64		Q_ULLONG;	// unsigned long long
 
 #if defined(Q_OS_MACX) && !defined(QT_LARGEFILE_SUPPORT)
 #  define QT_LARGEFILE_SUPPORT 64
 #endif
 #if defined(QT_LARGEFILE_SUPPORT)
-    typedef unsigned long long QtOffset;
+    typedef Q_ULLONG QtOffset;
 #else
     typedef Q_ULONG QtOffset;
 #endif
@@ -708,17 +745,17 @@ class QDataStream;
 
 #if !defined(QT_MOC)
 #if defined(QCONFIG_LOCAL)
-#include <qconfig-local.h>
+#include "qconfig-local.h"
 #elif defined(QCONFIG_MINIMAL)
-#include <qconfig-minimal.h>
+#include "qconfig-minimal.h"
 #elif defined(QCONFIG_SMALL)
-#include <qconfig-small.h>
+#include "qconfig-small.h"
 #elif defined(QCONFIG_MEDIUM)
-#include <qconfig-medium.h>
+#include "qconfig-medium.h"
 #elif defined(QCONFIG_LARGE)
-#include <qconfig-large.h>
+#include "qconfig-large.h"
 #else // everything...
-#include <qconfig.h>
+#include "qconfig.h"
 #endif
 #endif
 
@@ -729,6 +766,9 @@ class QDataStream;
 
 // prune to local config
 #include "qmodules.h"
+#ifndef QT_MODULE_DIALOGS
+# define QT_NO_DIALOG
+#endif
 #ifndef QT_MODULE_ICONVIEW
 # define QT_NO_ICONVIEW
 #endif
@@ -781,8 +821,8 @@ class QDataStream;
 #endif
 
 #ifndef QT_H
-#include <qfeatures.h>
-#endif // QT_H
+#include "qfeatures.h"
+#endif /* QT_H */
 
 
 //
@@ -790,7 +830,7 @@ class QDataStream;
 // or QT_SHARED is defined (Kylix only)
 //
 
-#if defined(Q_OS_WIN32) || defined(Q_OS_WIN64)
+#if defined(Q_OS_WIN)
 #  if defined(QT_NODLL)
 #    undef QT_MAKEDLL
 #    undef QT_DLL
@@ -850,6 +890,7 @@ extern Q_EXPORT bool qt_winunicode;
 
 Q_EXPORT const char *qVersion();
 Q_EXPORT bool qSysInfo( int *wordSize, bool *bigEndian );
+Q_EXPORT bool qSharedBuild();
 #if defined(Q_OS_MAC)
 int qMacVersion();
 #elif defined(Q_WS_WIN)
@@ -883,7 +924,6 @@ Q_EXPORT int qWinVersion();
 //
 // Use to avoid "unused parameter" warnings
 //
-
 #define Q_UNUSED(x) (void)x;
 
 //
@@ -1015,15 +1055,19 @@ Q_EXPORT const char *qInstallPathLibs();
 Q_EXPORT const char *qInstallPathBins();
 Q_EXPORT const char *qInstallPathPlugins();
 Q_EXPORT const char *qInstallPathData();
+Q_EXPORT const char *qInstallPathTranslations();
+Q_EXPORT const char *qInstallPathSysconf();
 
-#endif // __cplusplus
+#endif /* __cplusplus */
 
-// compilers which follow outdated template instantiation rules
-// require a class to have a comparison operator to exist when
-// a QValueList of this type is instantiated. It's not actually
-// used in the list, though. Hence the dummy implementation.
-// Just in case other code relies on it we better trigger a warning
-// mandating a real implementation.
+/*
+ compilers which follow outdated template instantiation rules
+ require a class to have a comparison operator to exist when
+ a QValueList of this type is instantiated. It's not actually
+ used in the list, though. Hence the dummy implementation.
+ Just in case other code relies on it we better trigger a warning
+ mandating a real implementation.
+*/
 #ifdef Q_FULL_TEMPLATE_INSTANTIATION
 #  define Q_DUMMY_COMPARISON_OPERATOR(C) \
     bool operator==( const C& ) const { \
@@ -1034,13 +1078,13 @@ Q_EXPORT const char *qInstallPathData();
 #  define Q_DUMMY_COMPARISON_OPERATOR(C)
 #endif
 
-#endif // QGLOBAL_H
+#endif /* QGLOBAL_H */
 
-//
-// Avoid some particularly useless warnings from some stupid compilers.
-// To get ALL C++ compiler warnings, define QT_CC_WARNINGS or comment out
-// the line "#define QT_NO_WARNINGS"
-//
+/*
+ Avoid some particularly useless warnings from some stupid compilers.
+ To get ALL C++ compiler warnings, define QT_CC_WARNINGS or comment out
+ the line "#define QT_NO_WARNINGS"
+*/
 
 #if !defined(QT_CC_WARNINGS)
 #  define QT_NO_WARNINGS
@@ -1066,7 +1110,6 @@ Q_EXPORT const char *qInstallPathData();
 #    pragma warn -ccc
 #    pragma warn -rch
 #    pragma warn -sig
-#  elif defined(Q_CC_MWERKS)
-#    pragma warn_possunwant off
 #  endif
 #endif
+

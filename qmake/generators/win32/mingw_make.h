@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: mingw_make.h,v 1.1 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
-** Definition of ________ class.
+** Definition of MingwMakefileGenerator class.
 **
-** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -32,6 +32,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #ifndef __MINGW_MAKE_H__
 #define __MINGW_MAKE_H__
 
@@ -45,6 +46,8 @@ class MingwMakefileGenerator : public Win32MakefileGenerator
 
     bool writeMakefile(QTextStream &);
     void init();
+    
+    virtual bool findLibraries();
 
 public:
     MingwMakefileGenerator(QMakeProject *p);

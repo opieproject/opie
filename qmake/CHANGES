@@ -1,3 +1,31 @@
+1.07a -
+
+   support for precompiled headers added
+
+1.06b -
+  
+   support for reading and writing libtool (.la) files
+   support for reading pkgconfig (.pkg) files
+
+   PWD added as an automatic variable to mean the directory
+   the file being parsed is in (this change required that the
+   directory be set to the file being parsed as well, function
+   tests that query relative paths will need to be relative the
+   file being parsed).
+
+   persistant data cache introduced
+
+1.05a -
+
+  caching of more information (speed ups)
+  $$list() added to be used as a lambda function in qmake
+  $$files() added to allow regular expression matching
+  $$fromfile() added to grab one single variable value from a parsed file
+  $$prompt() added to allow querying for user input from qmake
+  include() modified to support specifying which variables to import
+  equals() test added to test for equality
+  MSVC.net generator added [partial solution files in vcsubdirs]
+
 1.04a -
 
   subdirs supports multiple project files in a single directory.
@@ -8,7 +36,7 @@
 
 1.02a -
 
-  Dependancy / Mocable caching. qmake can cache these expensive operations with qmake_cache
+  Dependency / Mocable caching. qmake can cache these expensive operations with qmake_cache
   CONFIG.
 
   The parser has been improved to cover more error cases, as well as more forgiving 
@@ -21,7 +49,7 @@
 
  New system for library linking. This system allows a user several different features:
 
- 1) libtool like library dependancies to static libraries build with qmake
+ 1) libtool like library dependencies to static libraries build with qmake
  2) library dependencies, when on .pro depends on another library - it will
     automatically build that other library (unix makefiles only)
  3) automatic detection of configurations for Qt, if CONFIG qt is specified

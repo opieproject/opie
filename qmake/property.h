@@ -1,7 +1,7 @@
 /****************************************************************************
 ** 
 **
-** Definition of MetrowerksMakefileGenerator class.
+** Definition of QMakeProperty class.
 **
 ** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
@@ -33,36 +33,28 @@
 **
 **********************************************************************/
 
-#ifndef __METROWERKS_XML_H__
-#define __METROWERKS_XML_H__
+#ifndef __PROPERTY_H__
+#define __PROPERTY_H__
 
-#include "makefile.h"
+#include <qstring.h>
 
-class MetrowerksMakefileGenerator : public MakefileGenerator
+class QSettings;
+
+class QMakeProperty 
 {
-    bool createFork(const QString &f);
-    bool fixifyToMacPath(QString &c, QString &v, bool exists=TRUE);
-
-    bool init_flag;
-
-    bool writeMakeParts(QTextStream &);
-    bool writeSubDirs(QTextStream &);
-
-    bool writeMakefile(QTextStream &);
-    QString findTemplate(const QString &file);
-    void init();
+    QSettings *sett;
+    QString keyBase(bool =TRUE) const;
+    bool initSettings();
+    QString value(QString, bool just_check); 
 public:
-    MetrowerksMakefileGenerator(QMakeProject *p);
-    ~MetrowerksMakefileGenerator();
+    QMakeProperty();
+    ~QMakeProperty();
 
-    bool openOutput(QFile &file) const;
-protected:
-    virtual void processPrlFiles();
-    virtual void processPrlVariable(const QString &var, const QStringList &l);
-    virtual bool doDepends() const { return FALSE; } //never necesary
+    bool hasValue(QString);
+    QString value(QString v) { return value(v, FALSE); }
+    void setValue(QString, const QString &);
+
+    bool exec();
 };
 
-inline MetrowerksMakefileGenerator::~MetrowerksMakefileGenerator()
-{ }
-
-#endif /* __METROWERKS_XML_H__ */
+#endif /* __PROPERTY_H__ */

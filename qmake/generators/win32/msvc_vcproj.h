@@ -1,13 +1,12 @@
+
 /****************************************************************************
-** $Id: msvc_vcproj.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
 ** Definition of VcprojGenerator class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -34,6 +33,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #ifndef __MSVC_VCPROJ_H__
 #define __MSVC_VCPROJ_H__
 
@@ -63,6 +63,9 @@ public:
 
     QString defaultMakefile() const;
     virtual bool doDepends() const { return FALSE; } //never necesary
+    QString precompH, precompHFilename,
+	    precompObj, precompPch;
+    bool usePCH;
 
 protected:
     virtual bool openOutput(QFile &file) const;
@@ -95,6 +98,7 @@ protected:
     target projectTarget;
 
 private:
+    QUuid getProjectUUID(const QString &filename=QString::null);
     QUuid increaseUUID(const QUuid &id);
     friend class VCFilter;
 };

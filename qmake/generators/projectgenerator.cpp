@@ -1,13 +1,11 @@
 /****************************************************************************
-** $Id: projectgenerator.cpp,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
+** 
 **
-** Definition of ________ class.
+** Implementation of ProjectGenerator class.
 **
-** Created : 970521
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of the network module of the Qt GUI Toolkit.
+** This file is part of qmake.
 **
 ** This file may be distributed under the terms of the Q Public License
 ** as defined by Trolltech AS of Norway and appearing in the file
@@ -157,6 +155,7 @@ ProjectGenerator::init()
 	QStringList dirs = Option::projfile::project_dirs;
 	if(Option::projfile::do_pwd)
 	    dirs.prepend(".");
+	const QString out_file = fileFixify(Option::output.name());
 	for(QStringList::Iterator pd = dirs.begin(); pd != dirs.end(); pd++) {
 	    if(QFile::exists((*pd))) {
 		QString newdir = (*pd);
@@ -171,12 +170,15 @@ ProjectGenerator::init()
 			QDir d(newdir, "*.pro");
 			d.setFilter(QDir::Files);
 			for(int i = 0; i < (int)d.count(); i++) {
-			    QString nd = newdir + QDir::separator() + d[i];
+			    QString nd = newdir;
+			    if(nd == ".")
+				nd = "";
+			    else if(!nd.isEmpty() && !nd.endsWith(QString(QChar(QDir::separator()))))
+				nd += QDir::separator();
+			    nd += d[i];
 			    fileFixify(nd);
-			    if(d[i] != "." && d[i] != ".." && !subdirs.contains(nd)) {
-				if(newdir + d[i] != Option::output_dir + Option::output.name())
-				    subdirs.append(nd);
-			    }
+			    if(d[i] != "." && d[i] != ".." && !subdirs.contains(nd) && !out_file.endsWith(nd)) 
+				subdirs.append(nd);
 			}
 		    }
 		    if(Option::projfile::do_recursive) {
@@ -324,7 +326,7 @@ ProjectGenerator::init()
 			break;
 		    }
 		}
-		if(!found && (*val_it).endsWith(Option::moc_ext))
+		if(!found && (*val_it).endsWith(Option::cpp_moc_ext))
 		    found = TRUE;
 		if(found)
 		    val_it = l.remove(val_it);
@@ -391,7 +393,7 @@ ProjectGenerator::addFile(QString file)
     int s = file.findRev(Option::dir_sep);
     if(s != -1)
 	dir = file.left(s+1);
-    if(file.mid(dir.length(), Option::moc_mod.length()) == Option::moc_mod)
+    if(file.mid(dir.length(), Option::h_moc_mod.length()) == Option::h_moc_mod)
 	return FALSE;
 
     QString where;
@@ -435,7 +437,7 @@ ProjectGenerator::addFile(QString file)
 
 
 QString
-ProjectGenerator::getWritableVar(const QString &v, bool /*fixPath*/)
+ProjectGenerator::getWritableVar(const QString &v, bool fixPath)
 {
     QStringList &vals = project->variables()[v];
     if(vals.isEmpty())
@@ -455,10 +457,14 @@ ProjectGenerator::getWritableVar(const QString &v, bool /*fixPath*/)
 	    spaces += " ";
 	join = vals.join(" \\\n" + spaces);
     } 
+#if 0
     // ### Commented out for now so that project generation works.
-    // Sam: can you look at why this was needed?
-    /*    if(fixPath)
-	join = join.replace("\\", "/");*/
+    // Sam: it had to do with trailing \'s (ie considered continuation lines)
+    if(fixPath)
+	join = join.replace("\\", "/");
+#else
+    Q_UNUSED(fixPath);
+#endif
     return ret + join + "\n";
 }
 
