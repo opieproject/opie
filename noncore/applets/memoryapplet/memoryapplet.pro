@@ -19,6 +19,6 @@ DESTDIR     = $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += ../$(OPIEDIR)/include
 VERSION     = 1.0.0
-LIBS        += -lqpe -lopie
+LIBS        += -lqpe -lopieui2
 
 include ( $(OPIEDIR)/include.pro )

@@ -22,9 +22,11 @@
 
 #include <qframe.h>
 
+#include <opie2/otabwidget.h>
+
 class MemoryInfo;
 class Swapfile;
-class OTabWidget;
+using Opie::OTabWidget;
 
 class MemoryStatus : public QFrame
 {
@@ -35,12 +37,12 @@ public:
 
     QSize sizeHint() const;
     MemoryInfo* mi;
-	Swapfile* sf;
+    Swapfile* sf;
 
-	int percent();
+    int percent();
 
 private:
-	OTabWidget *tab;
+    OTabWidget *tab;
 };
 
 #endif

@@ -26,7 +26,6 @@
 #include <qdrawutil.h>
 #include <qlabel.h>
 
-#include <opie/otabwidget.h>
 #include <qlayout.h>
 
 MemoryStatus::MemoryStatus(QWidget *parent, WFlags f )
@@ -41,12 +40,12 @@ MemoryStatus::MemoryStatus(QWidget *parent, WFlags f )
     tab->addTab( mi = new MemoryInfo( tab ), "memory/memorytabicon", tr("Memory") );
     tab->addTab( sf = new Swapfile( tab ), "memory/storagetabicon", tr("Swapfile") );
 
-	QLabel* about = new QLabel(tr("<center><b>Memory Monitor Plugin</b><br>"
+    QLabel* about = new QLabel(tr("<center><b>Memory Monitor Plugin</b><br>"
         "Copyright (C) 2003 Anton Maslovsky<br>"
         "&lt;<a href=\"mailto:my-zaurus@narod.ru\">my-zaurus@narod.ru</a>&gt;<br>"
         "<a href=\"http://my-zaurus.narod.ru\">http://my-zaurus.narod.ru</a><br>"
-		"Based on source code from:<br> qswap (udoseidel@gmx.de) <br> Battery Applet (trolltech.com) <br> SysInfo (OPIE)<br><br>"
-		"This program is licensed under GNU GPL.</center>"), tab);
+        "Based on source code from:<br> qswap (udoseidel@gmx.de) <br> Battery Applet (trolltech.com) <br> SysInfo (OPIE)<br><br>"
+        "This program is licensed under GNU GPL.</center>"), tab);
 
     tab->addTab( about, "memory/info", tr("About") );
 
@@ -55,25 +54,25 @@ MemoryStatus::MemoryStatus(QWidget *parent, WFlags f )
 
 int MemoryStatus::percent()
 {
-	if (mi == 0)
-		return 100;
+    if (mi == 0)
+        return 100;
 
-	int total = mi->total;
-	if (mi->swaptotal > 0)
-		total += mi->swaptotal;
+    int total = mi->total;
+    if (mi->swaptotal > 0)
+        total += mi->swaptotal;
 
-	int used = mi->realUsed;
-	if (mi->swapused > 0)
-		total += mi->swapused;
+    int used = mi->realUsed;
+    if (mi->swapused > 0)
+        total += mi->swapused;
 
-	return ((total - used) * 100)/total;
+    return ((total - used) * 100)/total;
 }
 
 QSize MemoryStatus::sizeHint() const
 {
-	QSize s = tab->size();
-	s.setWidth(200);
-	s.setHeight((mi->swaptotal > 0) ? 220 : 200);
+    QSize s = tab->size();
+    s.setWidth(200);
+    s.setHeight((mi->swaptotal > 0) ? 220 : 200);
     return s;
 }
 
