@@ -27,6 +27,7 @@
 #include <qtopia/qpeapplication.h>
 #include <qtopia/global.h>
 #include <qtopia/version.h>
+#include <qtopia/config.h>
 
 #include <qdir.h>
 #include <qfile.h>
@@ -80,6 +81,7 @@ QCopBridge::QCopBridge( Q_UINT16 port, QObject *parent,
     }
     sendSync = FALSE;
     openConnections.setAutoDelete( TRUE );
+    authorizeConnections();
 }
 
 QCopBridge::~QCopBridge()
@@ -91,6 +93,9 @@ QCopBridge::~QCopBridge()
 
 void QCopBridge::authorizeConnections()
 {
+    Config cfg("Security");
+    cfg.setGroup("SyncMode");
+    m_mode = Mode(cfg.readNumEntry("Mode", Sharp ));
     QListIterator<QCopBridgePI> it(openConnections);
     while ( it.current() ) {
 	if ( !it.current()->verifyAuthorised() ) {
@@ -152,12 +157,98 @@ void QCopBridge::desktopMessage( const QCString &command, const QByteArray &data
 	startTimer( 20000 );
     }
 
+    if ( m_mode & Qtopia1_7 ) {
+        // send the command to all open connections
+        QCopBridgePI *pi;
+        for ( pi = openConnections.first(); pi != 0; pi = openConnections.next() ) {
+            pi->sendDesktopMessage( command, data );
+        }
+    }
+    if ( m_mode & Sharp )
+        sendDesktopMessageOld( command, data );
+}
+
+#ifndef OPIE_NO_OLD_SYNC_CODE
+/*
+ * Old compat mode
+ */
+void QCopBridge::sendDesktopMessageOld( const QCString& command, const QByteArray& args) {
+    command.stripWhiteSpace();
+
+    int paren = command.find( "(" );
+    if ( paren <= 0 ) {
+	qDebug("DesktopMessage: bad qcop syntax");
+	return;
+    }
+
+    QString params = command.mid( paren + 1 );
+    if ( params[params.length()-1] != ')' ) {
+	qDebug("DesktopMessage: bad qcop syntax");
+	return;
+    }
+
+    params.truncate( params.length()-1 );
+
+    QStringList paramList = QStringList::split( ",", params );
+    QString data;
+    if ( paramList.count() ) {
+	QDataStream stream( args, IO_ReadOnly );
+	for ( QStringList::Iterator it = paramList.begin(); it != paramList.end(); ++it ) {
+	    QString str;
+	    if ( *it == "QString" ) {
+		stream >> str;
+	    } else if ( *it == "QCString" ) {
+		QCString cstr;
+		stream >> cstr;
+		str = QString::fromLocal8Bit( cstr );
+	    } else if ( *it == "int" ) {
+		int i;
+		stream >> i;
+		str = QString::number( i );
+	    } else if ( *it == "bool" ) {
+		int i;
+		stream >> i;
+		str = QString::number( i );
+	    } else {
+		qDebug(" cannot route the argument type %s throught the qcop bridge", (*it).latin1() );
+		return;
+	    }
+	    QString estr;
+	    for (int i=0; i<(int)str.length(); i++) {
+		QChar ch = str[i];
+		if ( ch.row() )
+		    goto quick;
+		switch (ch.cell()) {
+		    case '&':
+			estr.append( "&amp;" );
+			break;
+		    case ' ':
+			estr.append( "&0x20;" );
+			break;
+		    case '\n':
+			estr.append( "&0x0d;" );
+			break;
+		    case '\r':
+			estr.append( "&0x0a;" );
+			break;
+		    default: quick:
+			estr.append(ch);
+		}
+	    }
+	    data += " " + estr;
+	}
+    }
+    QString sendCommand = QString(command.data()) + data;
+
+
     // send the command to all open connections
     QCopBridgePI *pi;
-    for ( pi = openConnections.first(); pi != 0; pi = openConnections.next() ) {
-	pi->sendDesktopMessage( command, data );
-    }
+    for ( pi = openConnections.first(); pi != 0; pi = openConnections.next() )
+        pi->sendDesktopMessage( sendCommand );
+
 }
+#endif
+
 
 void QCopBridge::timerEvent( QTimerEvent * )
 {
@@ -229,6 +320,7 @@ void QCopBridgePI::sendDesktopMessage( const QCString &msg, const QByteArray& da
 {
     if ( !isOpen() ) // eg. Forbidden
 	return;
+
     const char hdr[]="CALLB QPE/Desktop ";
     writeBlock(hdr,sizeof(hdr)-1);
     writeBlock(msg,msg.length());
@@ -236,6 +328,7 @@ void QCopBridgePI::sendDesktopMessage( const QCString &msg, const QByteArray& da
     QByteArray b64 = Opie::Global::encodeBase64(data);
     writeBlock(b64.data(),b64.size());
     writeBlock("\r\n",2);
+
 }
 
 
