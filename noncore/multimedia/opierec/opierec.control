@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/multimedia
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Description: audio sampling recorder
  A simple audio recording/playing application.
 Version: $QPE_VERSION$EXTRAVERSION

@@ -21,7 +21,9 @@ int main(int argc, char* argv[]) {
 
 
 #else
-#include <opie/oapplicationfactory.h>
+
+#include <opie2/oapplicationfactory.h>
+
 OPIE_EXPORT_APP( OApplicationFactory<QtRec> )
 
 #endif

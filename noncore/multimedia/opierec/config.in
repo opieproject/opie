@@ -1,4 +1,4 @@
   config OPIEREC
     boolean "opie-rec (simple audio recording/playing app)"
     default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) 
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
