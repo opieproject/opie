@@ -10,6 +10,7 @@
 
 using namespace Opie;
 
+using namespace Opie::Core;
 struct predef_qcop {
 	const char *m_text;
 	const char *m_pixmap;

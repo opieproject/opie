@@ -1,7 +1,7 @@
 #ifndef __REMAPDLG_H__
 #define __REMAPDLG_H__
 
-#include <opie/odevicebutton.h>
+#include <opie2/odevicebutton.h>
 
 #include "remapdlgbase.h"
 
@@ -12,10 +12,10 @@ class RemapDlg : public RemapDlgBase {
     Q_OBJECT
 
 public:
-    RemapDlg ( const Opie::ODeviceButton *b, bool hold, QWidget* parent = 0, const char* name = 0 );
+    RemapDlg ( const Opie::Core::ODeviceButton *b, bool hold, QWidget* parent = 0, const char* name = 0 );
     ~RemapDlg ( );
 
-	Opie::OQCopMessage message ( );
+	Opie::Core::OQCopMessage message ( );
 
 public slots:
 	virtual void itemChanged ( QListViewItem * );
@@ -25,8 +25,8 @@ private slots:
 	void delayedInit ( );
 
 private:
-	Opie::OQCopMessage m_msg;
-	Opie::OQCopMessage m_msg_preset;
+	Opie::Core::OQCopMessage m_msg;
+	Opie::Core::OQCopMessage m_msg_preset;
 	
 	QListViewItem *m_current;
 	

@@ -5,8 +5,8 @@
 #include "remapdlg.h"
 #include "buttonutils.h"
 
-using namespace Opie;
 
+using namespace Opie::Core;
 class NoSortItem : public QListViewItem {
 public:
   NoSortItem ( QListView *lv, uint pos, const QString &str, const QCString &s1 = 0, const QCString &s2 = 0 )
@@ -42,7 +42,7 @@ private:
 };
 
 
-RemapDlg::RemapDlg ( const Opie::ODeviceButton *b, bool hold, QWidget *parent, const char *name )
+RemapDlg::RemapDlg ( const Opie::Core::ODeviceButton *b, bool hold, QWidget *parent, const char *name )
   : RemapDlgBase ( parent, name, true, WStyle_ContextHelp )
 {
   setCaption ( tr( "%1 %2", "(hold|press) buttoname" ). arg( hold ? tr( "Held" ) : tr( "Pressed" )). arg ( b-> userText ( )));

@@ -30,13 +30,13 @@
 #include <qtimer.h>
 
 
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 #include "buttonsettings.h"
 #include "buttonutils.h"
 #include "remapdlg.h"
 
-using namespace Opie;
+using namespace Opie::Core;
 
 struct buttoninfo {
 	const ODeviceButton *m_button;

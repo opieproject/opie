@@ -13,7 +13,7 @@ INTERFACES   = remapdlgbase.ui
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe -lopie
+LIBS        += -lqpe -lopiecore2
 TARGET	     = buttonsettings
 
 include ( $(OPIEDIR)/include.pro )

@@ -32,9 +32,9 @@
 #include "tabconfig.h"
 
 class QButtonGroup;
-class OFontSelector;
+namespace Opie {namespace Ui {class OFontSelector;}}
 class SampleView;
-class OColorButton;
+namespace Opie {class OColorButton;}
 class QPushButton;
 class QCheckBox;
 
@@ -66,9 +66,9 @@ private:
 private:
 	SampleView *m_sample;
 	QButtonGroup *m_iconsize;
-	OFontSelector *m_fontselect;
-	OColorButton *m_solidcolor;
-	OColorButton *m_iconcolor;
+	Opie::Ui::OFontSelector *m_fontselect;
+	Opie::OColorButton *m_solidcolor;
+	Opie::OColorButton *m_iconcolor;
 	QPushButton *m_imagebrowse;
 	QString m_bgimage;	
 	QButtonGroup *m_bgtype;

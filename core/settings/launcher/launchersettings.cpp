@@ -28,7 +28,7 @@
 
 #include <qlayout.h>
 
-#include <opie/otabwidget.h>
+#include <opie2/otabwidget.h>
 
 #include "launchersettings.h"
 #include "tabssettings.h"
@@ -37,6 +37,7 @@
 #include "inputmethodsettings.h"
 #include "doctabsettings.h"
 
+using namespace Opie::Ui;
 LauncherSettings::LauncherSettings (QWidget*,const char*, WFlags) 
     : QDialog ( 0, "LauncherSettings", false, WStyle_ContextHelp )
 {

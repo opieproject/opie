@@ -28,7 +28,7 @@
 #ifndef __BUTTON_UTILS_H__
 #define __BUTTON_UTILS_H__
 
-#include <opie/odevicebutton.h>
+#include <opie2/odevicebutton.h>
 
 class AppLnkSet;
 class QListViewItem;
@@ -51,7 +51,7 @@ public:
 
 	static ButtonUtils *inst ( );
 	
-	qCopInfo messageToInfo ( const Opie::OQCopMessage & );
+	qCopInfo messageToInfo ( const Opie::Core::OQCopMessage & );
 
 	void insertActions ( QListViewItem *here );
 	void insertAppLnks ( QListViewItem *here );

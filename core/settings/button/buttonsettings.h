@@ -30,11 +30,10 @@
 
 #include <qdialog.h>
 #include <qlist.h>
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 class QTimer;
 
-using namespace Opie;
 
 class buttoninfo;
 
@@ -61,7 +60,7 @@ private:
 	buttoninfo *buttonInfoForKeycode ( ushort key );
 	
 	void edit ( buttoninfo *bi, bool hold );
-	QString qcopToString ( const OQCopMessage &c );
+	QString qcopToString ( const Opie::Core::OQCopMessage &c );
 
 private:	
 	QTimer *m_timer;

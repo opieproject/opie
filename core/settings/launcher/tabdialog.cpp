@@ -38,14 +38,15 @@
 #include <qwhatsthis.h>
 #include <qcheckbox.h>
 
-#include <opie/ofontselector.h>
-#include <opie/otabwidget.h>
-#include <opie/ocolorbutton.h>
-#include <opie/ofiledialog.h>
+#include <opie2/ofontselector.h>
+#include <opie2/otabwidget.h>
+#include <opie2/ocolorbutton.h>
+#include <opie2/ofiledialog.h>
 
 #include "tabdialog.h"
 
 
+using namespace Opie::Ui;
 class SampleItem : public QIconViewItem {
 public:
 	SampleItem ( QIconView *v, const QString &text, const QPixmap &pix ) : QIconViewItem ( v, text )
@@ -353,7 +354,7 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
     hb-> addWidget ( rb );
 	hb-> addSpacing ( 10 );
 
-	m_solidcolor = new OColorButton ( tab, QColor ( m_tc. m_bg_color ) );
+	m_solidcolor = new Opie::OColorButton ( tab, QColor ( m_tc. m_bg_color ) );
 	connect ( m_solidcolor, SIGNAL( colorSelected(const QColor&)), this, SLOT( bgColorClicked(const QColor&)));
 	hb-> addWidget ( m_solidcolor );
 	hb-> addStretch ( 10 );
@@ -419,7 +420,7 @@ QWidget *TabDialog::createIconTab ( QWidget *parent )
 	label = new QLabel ( tr( "Color:" ), tab );
 	gridLayout-> addWidget ( label, 3, 0 );
 
-	m_iconcolor = new OColorButton ( tab, QColor ( m_tc. m_text_color ) );
+	m_iconcolor = new Opie::OColorButton ( tab, QColor ( m_tc. m_text_color ) );
 	connect ( m_iconcolor, SIGNAL( colorSelected(const QColor&)), this, SLOT( iconColorClicked(const QColor&)));
 	gridLayout-> addWidget ( m_iconcolor, 3, 1, AlignLeft );
 

@@ -35,7 +35,7 @@
 #include <qslider.h>
 #include <qspinbox.h>
 
-using namespace Opie;
+using namespace Opie::Core;
 
 Sensor::Sensor ( QStringList &params, QWidget *parent, const char *name )
 	: SensorBase ( parent, name, true, WStyle_ContextHelp ), m_params ( params )

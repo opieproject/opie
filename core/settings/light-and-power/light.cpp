@@ -48,7 +48,7 @@
 
 
 
-using namespace Opie;
+using namespace Opie::Core;
 
 LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	: LightSettingsBase( parent, name, false, WStyle_ContextHelp )

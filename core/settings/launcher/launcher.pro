@@ -19,7 +19,7 @@ SOURCES      = main.cpp \
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe -lopie
+LIBS        += -lqpe -lopiecore2 -lopieui2 -lqtaux2
 TARGET       = launchersettings
 
 
