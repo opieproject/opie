@@ -385,14 +385,16 @@ void Wellenreiter::startClicked()
     iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface )); // fails if network is not wireless!
 
     // bring device UP
-    iface->setUp( true );
-    if ( !iface->isUp() )
+    if ( cardtype != DEVTYPE_FILE )
     {
-        QMessageBox::warning( this, "Wellenreiter II",
-                            tr( "Can't bring interface '%1' up:\n" ).arg( iface->name() ) + strerror( errno ) );
-        return;
+        iface->setUp( true );
+        if ( !iface->isUp() )
+        {
+            QMessageBox::warning( this, "Wellenreiter II",
+                                tr( "Can't bring interface '%1' up:\n" ).arg( iface->name() ) + strerror( errno ) );
+            return;
+        }
     }
-
     // set monitor mode
     bool usePrism = configwindow->usePrismHeader();
 
@@ -454,8 +456,8 @@ void Wellenreiter::startClicked()
 
     if ( !pcap->isOpen() )
     {
-        QMessageBox::warning( this, "Wellenreiter II",
-                              tr( "Can't open packet capturer for '%1':\n" ).arg( iface->name() ) + QString(strerror( errno ) ));
+        QMessageBox::warning( this, "Wellenreiter II", tr( "Can't open packet capturer for\n'%1':\n" ).arg(
+                              cardtype == DEVTYPE_FILE ? (const char*) interface : iface->name() ) + QString(strerror( errno ) ));
         return;
     }
 
