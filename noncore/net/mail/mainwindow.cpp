@@ -119,10 +119,18 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
 
 
     slotAdjustLayout();
-
-    connect( mailView, SIGNAL( clicked( QListViewItem * ) ),this,
-             SLOT( displayMail( QListViewItem * ) ) );
-
+    
+    QPEApplication::setStylusOperation( mailView->viewport(),QPEApplication::RightOnHold);
+    
+    connect( mailView, SIGNAL( mouseButtonClicked(int, QListViewItem *,const QPoint&,int  ) ),this,
+             SLOT( mailLeftClicked( int, QListViewItem *,const QPoint&,int  ) ) );     
+    
+    connect( mailView, SIGNAL( mouseButtonPressed(int, QListViewItem *,const QPoint&,int  ) ),this,
+             SLOT( mailHold( int, QListViewItem *,const QPoint&,int  ) ) );         
+#if 0
+    connect( mailView, SIGNAL( rightButtonClicked( QListViewItem *,const QPoint&,int ) ),this,
+            SLOT( mailHold(QListViewItem *,const QPoint&,int) ));
+#endif
     connect(folderView, SIGNAL(refreshMailview(QList<RecMail>*)),this,SLOT(refreshMailView(QList<RecMail>*)));
 
    QTimer::singleShot( 1000, this, SLOT( slotAdjustColumns() ) );
@@ -183,13 +191,20 @@ void MainWindow::refreshMailView(QList<RecMail>*list)
         item->showEntry();
     }
 }
-void MainWindow::displayMail(QListViewItem*item)
+void MainWindow::mailLeftClicked(int button, QListViewItem *item,const QPoint&,int )
 {
+    /* just LEFT button - or tap with stylus on pda */
+    if (button!=1) return;
+    if (!item) return;
+    displayMail();
+}
 
+void MainWindow::displayMail()
+{
+    QListViewItem*item = mailView->currentItem();
     if (!item) return;
     RecMail mail = ((MailListViewItem*)item)->data();
     RecBody body = folderView->fetchBody(mail);
-
     ViewMail readMail( this );
     readMail.setBody( body );
     readMail.setMail( mail );
@@ -213,7 +228,21 @@ void MainWindow::slotDeleteMail()
     }
 }
 
-
+void MainWindow::mailHold(int button, QListViewItem *item,const QPoint&,int  )
+{
+    /* just the RIGHT button - or hold on pda */
+    if (button!=2) {return;}
+    qDebug("Event right/hold");
+    if (!item) return;
+    QPopupMenu *m = new QPopupMenu(0);
+    if (m) {
+        m->insertItem(tr("Read this mail"),this,SLOT(displayMail()));
+        m->insertItem(tr("Delete this mail"),this,SLOT(slotDeleteMail()));
+        m->setFocus();
+        m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
+        delete m;
+    }
+}
 
 MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * item )
         :QListViewItem(parent,item),mail_data()

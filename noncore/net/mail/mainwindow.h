@@ -26,10 +26,12 @@ public slots:
 protected slots:
     virtual void slotShowFolders( bool show );
     virtual void refreshMailView(QList<RecMail>*);
-    virtual void displayMail(QListViewItem*);
+    virtual void displayMail();
     virtual void slotDeleteMail();
-    void slotAdjustLayout();
-    void slotEditSettings();
+    virtual void mailHold(int, QListViewItem *,const QPoint&,int);
+    virtual void slotAdjustLayout();
+    virtual void slotEditSettings();
+    virtual void mailLeftClicked( int, QListViewItem *,const QPoint&,int  );
     
 protected:
     QToolBar *toolBar;
