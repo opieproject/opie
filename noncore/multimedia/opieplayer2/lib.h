@@ -183,6 +183,11 @@ namespace XINE {
     private:
         void initialize();
 
+        void assertInitialized() const;
+
+        mutable ThreadUtil::Mutex m_initGuard;
+        bool m_initialized : 1;
+
         int m_bytes_per_pixel;
         bool m_video:1;
         XineVideoWidget *m_wid;
