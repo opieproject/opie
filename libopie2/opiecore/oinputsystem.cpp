@@ -30,6 +30,7 @@
 using namespace Opie::Core;
 
 /* QT */
+#include <qdir.h>
 #include <qfile.h>
 
 /* STD */
@@ -37,6 +38,7 @@ using namespace Opie::Core;
 #include <string.h>
 #include <sys/fcntl.h>
 #include <sys/ioctl.h>
+#include <unistd.h>
 
 #define     BUFSIZE 256
 #define     BIT_MASK( name, numbits )                                        \
@@ -61,11 +63,22 @@ OInputSystem::OInputSystem() : QObject()
 void OInputSystem::synchronize()
 {
     qDebug( "OInputSystem::synchronize()" );
-    if ( QFile::exists( "/dev/input/event0" ) ) _devices.insert( "0", new OInputDevice( this, "/dev/input/event0" ) );
-    if ( QFile::exists( "/dev/input/event1" ) ) _devices.insert( "1", new OInputDevice( this, "/dev/input/event1" ) );
-    if ( QFile::exists( "/dev/input/event2" ) ) _devices.insert( "2", new OInputDevice( this, "/dev/input/event2" ) );
-    if ( QFile::exists( "/dev/input/event3" ) ) _devices.insert( "3", new OInputDevice( this, "/dev/input/event3" ) );
+    QDir devInput( "/dev/input/" );
+    if ( devInput.exists() )
+    {
+        QStringList devInputFiles = devInput.entryList( QDir::System, QDir::Name );
+        for ( QStringList::Iterator it = devInputFiles.begin(); it != devInputFiles.end(); ++it )
+        {
+            QString absPath = devInput.absFilePath( *it );
+            bool isValid = OInputDevice::isValid( absPath );
+            qDebug( "OInputSystem::synchronize() - checking if '%s' is a valid input system node... '%s'",
+            (const char*) absPath, isValid ? "yes" : "no" );
+            if ( isValid ) _devices.insert( *it, new OInputDevice( this, absPath ) );
+        }
+    }
     qDebug( "OInputSystem::synchronize() done" );
+    if ( !_devices.count() )
+    qWarning( "OInputSystem::no devices found" );
 }
 
 
@@ -106,7 +119,7 @@ OInputSystem::DeviceIterator OInputSystem::iterator() const
 OInputDevice::OInputDevice( QObject* parent, const char* name ) : QObject( parent, name )
 {
     qDebug( "OInputDevice::OInputDevice( '%s' )", name );
-    
+
     _fd = ::open( name, O_RDONLY );
     if ( _fd == -1 )
     {
@@ -148,7 +161,7 @@ QString OInputDevice::uniq() const
 bool OInputDevice::hasFeature( Feature bit ) const
 {
     BIT_MASK( features, EV_MAX );
-            
+
     if( ioctl( _fd, EVIOCGBIT( 0, EV_MAX ), features) < 0 )
     {
         perror( "EVIOCGBIT" );
@@ -191,7 +204,18 @@ QString OInputDevice::globalKeyMask() const
             if ( BIT_TEST( keys, i ) ) keymask.append( QString().sprintf( "%0d, ", i ) );
         }
         return keymask;
-        
+
     }
+}
+
+
+bool OInputDevice::isValid( const QString& path )
+{
+    char buf[BUFSIZE] = "<unknown>";
+    int fd = ::open( (const char*) path, O_RDONLY );
+    if ( fd < 0 ) return false;
+    int res = ::ioctl( fd, EVIOCGNAME(sizeof buf), buf );
+    ::close( fd );
+    return res >= 0;
 }
 

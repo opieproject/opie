@@ -77,25 +77,25 @@ class OInputSystem : public QObject
     void synchronize();
     /**
      * @internal destructor
-     */    
+     */
      ~OInputSystem();
- 
+
  protected:
     OInputSystem();
-    
+
     static OInputSystem* _instance;
     DeviceMap _devices;
 };
 
 
 class OInputDevice : public QObject
-{    
+{
   public:
     OInputDevice( QObject* parent, const char* name = 0 );
     ~OInputDevice();
 
-    #include "oinputsystemenums.h"    
-    
+    #include "oinputsystemenums.h"
+
   public:
     /**
      * @returns the identity string of this input device
@@ -123,7 +123,12 @@ class OInputDevice : public QObject
      * @returns a string containing a printable form of the global keymask
      */
     QString globalKeyMask() const;
-    
+    /**
+     * @internal
+     * @returns whether a certain @a path corresponds to an input device
+     */
+    static bool isValid( const QString& path );
+
   private:
     int _fd;
     input_id _id;
