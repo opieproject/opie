@@ -51,6 +51,7 @@
 
 #include "konsole.h"
 #include "keytrans.h"
+#include "commandeditdialog.h"
 
 class EKNumTabBar : public QTabBar {
 public:
@@ -175,6 +176,26 @@ Konsole::Konsole(const char* name, const char* _pgm, QStrList & _args, int)
     init(_pgm,_args);
 }
 
+void Konsole::initCommandList()
+{
+//    qDebug("Konsole::initCommandList");
+    Config cfg("Konsole");
+    cfg.setGroup("Commands");
+    commonCombo->setInsertionPolicy(QComboBox::AtCurrent);
+    commonCombo->clear();
+    if (cfg.readEntry("Commands Set","FALSE") == "FALSE") {
+        for (int i = 0; commonCmds[i] != NULL; i++) {
+            commonCombo->insertItem(commonCmds[i],i);
+        }
+    } else {
+        for (int i = 0; i < 100; i++) {
+            if (!(cfg.readEntry( QString::number(i),"")).isEmpty())
+                commonCombo->insertItem((cfg.readEntry( QString::number(i),"")));
+        }
+    }
+
+}
+
 void Konsole::init(const char* _pgm, QStrList & _args)
 {
   b_scroll = TRUE; // histon;
@@ -225,14 +246,17 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   configMenu = new QPopupMenu( this);
   colorMenu = new QPopupMenu( this);
   scrollMenu = new QPopupMenu( this);
+  editCommandListMenu = new QPopupMenu( this);  
+  
+  configMenu->insertItem("Command List",editCommandListMenu);
   
   bool listHidden;
   cfg.setGroup("Menubar");
   if( cfg.readEntry("Hidden","FALSE") == "TRUE")  {
-      configMenu->insertItem("Show command list");
+      editCommandListMenu->insertItem("Show command list");
       listHidden=TRUE;
   } else {
-      configMenu->insertItem("Hide command list");
+      editCommandListMenu->insertItem("Hide command list");
       listHidden=FALSE;
   }
 
@@ -266,7 +290,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   connect( configMenu, SIGNAL( activated(int) ), this, SLOT( configMenuSelected(int) ));
   connect( colorMenu, SIGNAL( activated(int) ), this, SLOT( colorMenuSelected(int) ));
   connect( scrollMenu, SIGNAL(activated(int)),this,SLOT(scrollMenuSelected(int)));
-
+  connect(editCommandListMenu,SIGNAL(activated(int)),this,SLOT(editCommandListMenuSelected(int)));
   menuBar->insertItem( tr("Font"), fontList );
   menuBar->insertItem( tr("Options"), configMenu );
 
@@ -301,21 +325,24 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
   commonCombo = new QComboBox( secondToolBar );
   commonCombo->setMaximumWidth(236);
-  configMenu->insertItem( "Edit Command List");
+
+  editCommandListMenu->insertItem( "Quick Edit");
   if( listHidden) {
       secondToolBar->hide();
-      configMenu->setItemEnabled(-20 ,FALSE);
+      editCommandListMenu->setItemEnabled(-22 ,FALSE);
   }
+  editCommandListMenu->insertItem( "Edit");
 
   cfg.setGroup("Commands");
   commonCombo->setInsertionPolicy(QComboBox::AtCurrent);
-
-  for (int i = 0; commonCmds[i] != NULL; i++) {
-      commonCombo->insertItem( commonCmds[i], i );
-      tmp = cfg.readEntry( QString::number(i),"");
-      if(tmp != "")
-          commonCombo->changeItem( tmp,i );
-  }
+  
+  initCommandList();
+//   for (int i = 0; commonCmds[i] != NULL; i++) {
+//        commonCombo->insertItem( commonCmds[i], i );
+//        tmp = cfg.readEntry( QString::number(i),"");
+//        if(tmp != "")
+//            commonCombo->changeItem( tmp,i );
+//    }
 
   connect( commonCombo, SIGNAL( activated(int) ), this, SLOT( enterCommand(int) ));
 
@@ -586,8 +613,8 @@ void Konsole::switchSession(QWidget* w) {
 /// -------------------------------   some new stuff by L.J. Potter
 void Konsole::colorMenuSelected(int iD)
 { // this is NOT pretty, elegant or anything else besides functional
-//        QString temp;
-//        qDebug( temp.sprintf("%d", iD));
+//      QString temp;
+//     qDebug( temp.sprintf("colormenu %d", iD));
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Colors");
@@ -598,88 +625,88 @@ void Konsole::colorMenuSelected(int iD)
     const ColorEntry * defaultCt=te->getdefaultColorTable();
       /////////// fore back
     int i;
-    if(iD==-8) { // default default
+    if(iD==-9) { // default default
         for (i = 0; i < TABLE_COLORS; i++)  {
             m_table[i].color = defaultCt[i].color;
             if(i==1 || i == 11)
                 m_table[i].transparent=1;
-            cfg.writeEntry("Schema","8");
-            colorMenu->setItemChecked(-8,TRUE);
+            cfg.writeEntry("Schema","98");
+            colorMenu->setItemChecked(-9,TRUE);
         }
     } else {
-        if(iD==-5) { // green black
+        if(iD==-6) { // green black
             foreground.setRgb(0x18,255,0x18);
             background.setRgb(0x00,0x00,0x00);
-            cfg.writeEntry("Schema","5");
-            colorMenu->setItemChecked(-5,TRUE);
-        }
-        if(iD==-6) { // black white
-            foreground.setRgb(0x00,0x00,0x00);
-            background.setRgb(0xFF,0xFF,0xFF);
             cfg.writeEntry("Schema","6");
             colorMenu->setItemChecked(-6,TRUE);
         }
-        if(iD==-7) { // white black
-            foreground.setRgb(0xFF,0xFF,0xFF);
-            background.setRgb(0x00,0x00,0x00);
+        if(iD==-7) { // black white
+            foreground.setRgb(0x00,0x00,0x00);
+            background.setRgb(0xFF,0xFF,0xFF);
             cfg.writeEntry("Schema","7");
             colorMenu->setItemChecked(-7,TRUE);
         }
-        if(iD==-9) {// Black, Red
+        if(iD==-8) { // white black
+            foreground.setRgb(0xFF,0xFF,0xFF);
+            background.setRgb(0x00,0x00,0x00);
+            cfg.writeEntry("Schema","8");
+            colorMenu->setItemChecked(-8,TRUE);
+        }
+        if(iD==-10) {// Black, Red
             foreground.setRgb(0x00,0x00,0x00);
             background.setRgb(0xB2,0x18,0x18);
-            cfg.writeEntry("Schema","9");
-            colorMenu->setItemChecked(-9,TRUE);
-        }
-        if(iD==-10) {// Red, Black
-            foreground.setRgb(230,31,31); //0xB2,0x18,0x18
-            background.setRgb(0x00,0x00,0x00);
             cfg.writeEntry("Schema","10");
             colorMenu->setItemChecked(-10,TRUE);
         }
-        if(iD==-11) {// Green, Yellow - is ugly
+        if(iD==-11) {// Red, Black
+            foreground.setRgb(230,31,31); //0xB2,0x18,0x18
+            background.setRgb(0x00,0x00,0x00);
+            cfg.writeEntry("Schema","11");
+            colorMenu->setItemChecked(-11,TRUE);
+        }
+        if(iD==-12) {// Green, Yellow - is ugly
 //            foreground.setRgb(0x18,0xB2,0x18);
             foreground.setRgb(36,139,10);
 //            background.setRgb(0xB2,0x68,0x18);
             background.setRgb(255,255,0);
-            cfg.writeEntry("Schema","11");
-            colorMenu->setItemChecked(-11,TRUE);
-        }
-        if(iD==-12) {// Blue,  Magenta
-            foreground.setRgb(0x18,0xB2,0xB2);
-            background.setRgb(0x18,0x18,0xB2);
             cfg.writeEntry("Schema","12");
             colorMenu->setItemChecked(-12,TRUE);
         }
-        if(iD==-13) {// Magenta, Blue
-            foreground.setRgb(0x18,0x18,0xB2);
-            background.setRgb(0x18,0xB2,0xB2);
+        if(iD==-13) {// Blue,  Magenta
+            foreground.setRgb(0x18,0xB2,0xB2);
+            background.setRgb(0x18,0x18,0xB2);
             cfg.writeEntry("Schema","13");
             colorMenu->setItemChecked(-13,TRUE);
         }
-        if(iD==-14) {// Cyan,  White
-            foreground.setRgb(0x18,0xB2,0xB2);
-            background.setRgb(0xFF,0xFF,0xFF);
+        if(iD==-14) {// Magenta, Blue
+            foreground.setRgb(0x18,0x18,0xB2);
+            background.setRgb(0x18,0xB2,0xB2);
             cfg.writeEntry("Schema","14");
             colorMenu->setItemChecked(-14,TRUE);
         }
-        if(iD==-15) {// White, Cyan
-            background.setRgb(0x18,0xB2,0xB2);
-            foreground.setRgb(0xFF,0xFF,0xFF);
+        if(iD==-15) {// Cyan,  White
+            foreground.setRgb(0x18,0xB2,0xB2);
+            background.setRgb(0xFF,0xFF,0xFF);
             cfg.writeEntry("Schema","15");
             colorMenu->setItemChecked(-15,TRUE);
         }
-        if(iD==-16) {// Black, Blue
-            background.setRgb(0x00,0x00,0x00);
-            foreground.setRgb(0x18,0xB2,0xB2);
+        if(iD==-16) {// White, Cyan
+            background.setRgb(0x18,0xB2,0xB2);
+            foreground.setRgb(0xFF,0xFF,0xFF);
             cfg.writeEntry("Schema","16");
             colorMenu->setItemChecked(-16,TRUE);
         }
-        if(iD==-17) {// Black, Gold
+        if(iD==-17) {// Black, Blue
             background.setRgb(0x00,0x00,0x00);
-            foreground.setRgb(255,215,0);
+            foreground.setRgb(0x18,0xB2,0xB2);
             cfg.writeEntry("Schema","17");
             colorMenu->setItemChecked(-17,TRUE);
+        }
+        if(iD==-18) {// Black, Gold
+            background.setRgb(0x00,0x00,0x00);
+            foreground.setRgb(255,215,0);
+            cfg.writeEntry("Schema","18");
+            colorMenu->setItemChecked(-18,TRUE);
         }
 
         for (i = 0; i < TABLE_COLORS; i++)  {
@@ -700,33 +727,33 @@ void Konsole::colorMenuSelected(int iD)
 
 void Konsole::configMenuSelected(int iD)
 {
-    QString temp;
-    qDebug( temp.sprintf("%d",iD));
+      QString temp;
+      qDebug( temp.sprintf("configmenu %d",iD));
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Menubar");
-    if( iD  == -2) {
-        if(!secondToolBar->isHidden()) {
-            secondToolBar->hide();
-            configMenu->changeItem( iD,"Show Command List");
-            cfg.writeEntry("Hidden","TRUE");
-            configMenu->setItemEnabled(-20 ,FALSE);
-        } else {
-            secondToolBar->show();
-            configMenu->changeItem( iD,"Hide Command List");
-            cfg.writeEntry("Hidden","FALSE");
-            configMenu->setItemEnabled(-20 ,TRUE);
+//      if( iD  == -2) {
+//          if(!secondToolBar->isHidden()) {
+//              secondToolBar->hide();
+//              configMenu->changeItem( iD,"Show Command List");
+//              cfg.writeEntry("Hidden","TRUE");
+//              configMenu->setItemEnabled(-20 ,FALSE);
+//          } else {
+//              secondToolBar->show();
+//              configMenu->changeItem( iD,"Hide Command List");
+//              cfg.writeEntry("Hidden","FALSE");
+//              configMenu->setItemEnabled(-20 ,TRUE);
 
-            if(cfg.readEntry("EditEnabled","FALSE")=="TRUE") {
-                configMenu->setItemChecked(-20,TRUE);
-                commonCombo->setEditable( TRUE );
-            } else {
-                configMenu->setItemChecked(-20,FALSE);
-                commonCombo->setEditable( FALSE );
-            }
-        }
-    }
-    if( iD  == -3) {
+//              if(cfg.readEntry("EditEnabled","FALSE")=="TRUE") {
+//                  configMenu->setItemChecked(-20,TRUE);
+//                  commonCombo->setEditable( TRUE );
+//              } else {
+//                  configMenu->setItemChecked(-20,FALSE);
+//                  commonCombo->setEditable( FALSE );
+//              }
+//          }
+//      }
+    if( iD  == -4) {
         cfg.setGroup("Tabs");
         QString tmp=cfg.readEntry("Position","Top");
 
@@ -740,22 +767,22 @@ void Konsole::configMenuSelected(int iD)
             cfg.writeEntry("Position","Top");
         }
     }
-    if( iD  == -20) {
-        cfg.setGroup("Commands");
-//        qDebug("enableCommandEdit");
-        if( !configMenu->isItemChecked(iD) ) {
-            commonCombo->setEditable( TRUE );
-            configMenu->setItemChecked(iD,TRUE);
-            commonCombo->setCurrentItem(0);
-            cfg.writeEntry("EditEnabled","TRUE");
-        } else {
-            commonCombo->setEditable( FALSE );
-            configMenu->setItemChecked(iD,FALSE);
-            cfg.writeEntry("EditEnabled","FALSE");
-            commonCombo->setFocusPolicy(QWidget::NoFocus);
-            te->setFocus();
-        }
-    }
+//      if( iD  == -20) {
+//          cfg.setGroup("Commands");
+//  //        qDebug("enableCommandEdit");
+//          if( !configMenu->isItemChecked(iD) ) {
+//              commonCombo->setEditable( TRUE );
+//              configMenu->setItemChecked(iD,TRUE);
+//              commonCombo->setCurrentItem(0);
+//              cfg.writeEntry("EditEnabled","TRUE");
+//          } else {
+//              commonCombo->setEditable( FALSE );
+//              configMenu->setItemChecked(iD,FALSE);
+//              cfg.writeEntry("EditEnabled","FALSE");
+//              commonCombo->setFocusPolicy(QWidget::NoFocus);
+//              te->setFocus();
+//          }
+//      }
 }
 
 void Konsole::changeCommand(const QString &text, int c)
@@ -779,22 +806,77 @@ void Konsole::setColor()
 
 void Konsole::scrollMenuSelected(int index)
 {
+//      QString temp;
+//      qDebug( temp.sprintf("scrollbar menu %d",index));
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Scrollbar");
     switch( index){
-    case -21:
+    case -24:
         te->setScrollbarLocation(0);
         cfg.writeEntry("Position",0);
         break;
-    case -22:
+    case -25:
         te->setScrollbarLocation(1);
         cfg.writeEntry("Position",1);
         break;
-    case -23:
+    case -26:
         te->setScrollbarLocation(2);
         cfg.writeEntry("Position",2);
         break;
     };
    
+}
+
+void Konsole::editCommandListMenuSelected(int iD)
+{
+//      QString temp;
+//      qDebug( temp.sprintf("edit command list %d",iD));
+    TEWidget* te = getTe();
+    Config cfg("Konsole");
+    cfg.setGroup("Menubar");
+    if( iD  == -3) {
+        if(!secondToolBar->isHidden()) {
+            secondToolBar->hide();
+            configMenu->changeItem( iD,"Show Command List");
+            cfg.writeEntry("Hidden","TRUE");
+            configMenu->setItemEnabled(-22 ,FALSE);
+        } else {
+            secondToolBar->show();
+            configMenu->changeItem( iD,"Hide Command List");
+            cfg.writeEntry("Hidden","FALSE");
+            configMenu->setItemEnabled(-22 ,TRUE);
+
+            if(cfg.readEntry("EditEnabled","FALSE")=="TRUE") {
+                configMenu->setItemChecked(-22,TRUE);
+                commonCombo->setEditable( TRUE );
+            } else {
+                configMenu->setItemChecked(-22,FALSE);
+                commonCombo->setEditable( FALSE );
+            }
+        }
+    }
+    if( iD  == -22) {
+        cfg.setGroup("Commands");
+//        qDebug("enableCommandEdit");
+        if( !configMenu->isItemChecked(iD) ) {
+            commonCombo->setEditable( TRUE );
+            configMenu->setItemChecked(iD,TRUE);
+            commonCombo->setCurrentItem(0);
+            cfg.writeEntry("EditEnabled","TRUE");
+        } else {
+            commonCombo->setEditable( FALSE );
+            configMenu->setItemChecked(iD,FALSE);
+            cfg.writeEntry("EditEnabled","FALSE");
+            commonCombo->setFocusPolicy(QWidget::NoFocus);
+            te->setFocus();
+        }
+    }
+    if(iD == -23) {
+    // "edit commands"
+    CommandEditDialog *m = new CommandEditDialog(this);
+    connect(m,SIGNAL(commandsEdited()),this,SLOT(initCommandList()));
+    m->showMaximized();
+    }
+
 }

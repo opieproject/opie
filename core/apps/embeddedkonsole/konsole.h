@@ -70,7 +70,9 @@ private slots:
   void switchSession(QWidget *);
   void newSession();
   void changeCommand(const QString &, int);
+  void initCommandList();
   void scrollMenuSelected(int);
+  void editCommandListMenuSelected(int);
 private:
   void init(const char* _pgm, QStrList & _args);
   void initSession(const char* _pgm, QStrList & _args);
@@ -79,7 +81,8 @@ private:
   void setHistory(bool);
   QSize calcSize(int columns, int lines);
   TEWidget* getTe();
-
+  QStringList commands;
+  
 private:
   class VTFont 
   {
@@ -112,7 +115,7 @@ private:
   QCString se_pgm;
   QStrList se_args;
 
-  QPopupMenu* fontList,*configMenu,*colorMenu,*scrollMenu;
+  QPopupMenu *fontList,*configMenu,*colorMenu,*scrollMenu,*editCommandListMenu;
   QComboBox *commonCombo;
     // history scrolling I think
   bool        b_scroll;
