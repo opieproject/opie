@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -22,6 +22,13 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <time.h>
+#include <shadow.h>
+
+extern "C" {
+#include <uuid/uuid.h>
+#define UUID_H_INCLUDED
+}
 
 #if defined(_OS_LINUX_)
 #include <shadow.h>
@@ -37,15 +44,21 @@
 #include <qregexp.h>
 //#include <qpe/qcopchannel_qws.h>
 #include <qpe/process.h>
+#include <qpe/global.h>
 #include <qpe/config.h>
+#include <qpe/contact.h>
+#include <qpe/quuid.h>
+#include <qpe/version.h>
+#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
+#endif
 
 #include "transferserver.h"
 #include "qprocess.h"
 
 const int block_size = 51200;
 
-TransferServer::TransferServer( Q_UINT16 port, QObject *parent,
+TransferServer::TransferServer( Q_UINT16 port, QObject *parent ,
         const char* name )
     : QServerSocket( port, 1, parent, name )
 {
@@ -63,25 +76,131 @@ void TransferServer::newConnection( int socket )
     (void) new ServerPI( socket, this );
 }
 
-bool accessAuthorized(QHostAddress peeraddress)
+QString SyncAuthentication::serverId()
 {
     Config cfg("Security");
     cfg.setGroup("Sync");
-    uint auth_peer = cfg.readNumEntry("auth_peer",0xc0a80100);
-    uint auth_peer_bits = cfg.readNumEntry("auth_peer_bits",24);
-    bool ok = (peeraddress.ip4Addr() & (((1<<auth_peer_bits)-1)<<(32-auth_peer_bits)))
-		    == auth_peer;
-    /* Allows denial-of-service attack.
-    if ( !ok ) {
-	QMessageBox::warning(0,tr("Security"),
-	    tr("<p>An attempt to access this device from %1 has been denied.")
-		.arg(peeraddress.toString()));
+    QString r=cfg.readEntry("serverid");
+    if ( r.isEmpty() ) {
+	uuid_t uuid;
+	uuid_generate( uuid );
+	cfg.writeEntry("serverid",(r = QUuid( uuid ).toString()));
     }
-    */
-    return ok;
+    return r;
 }
 
-ServerPI::ServerPI( int socket, QObject *parent, const char* name )
+QString SyncAuthentication::ownerName()
+{
+    QString vfilename = Global::applicationFileName("addressbook",
+                "businesscard.vcf");
+    if (QFile::exists(vfilename)) {
+	Contact c;
+	c = Contact::readVCard( vfilename )[0];
+	return c.fullName();
+    }
+
+    return "";
+}
+
+QString SyncAuthentication::loginName()
+{
+    struct passwd *pw;
+    pw = getpwuid( geteuid() );
+    return QString::fromLocal8Bit( pw->pw_name );
+}
+
+int SyncAuthentication::isAuthorized(QHostAddress peeraddress)
+{
+    Config cfg("Security");
+    cfg.setGroup("Sync");
+    QString allowedstr = cfg.readEntry("auth_peer","192.168.1.0");
+    QHostAddress allowed;
+    allowed.setAddress(allowedstr);
+    uint auth_peer = allowed.ip4Addr();
+    uint auth_peer_bits = cfg.readNumEntry("auth_peer_bits",24);
+    uint mask = auth_peer_bits >= 32 // shifting by 32 is not defined
+	? 0xffffffff : (((1<<auth_peer_bits)-1)<<(32-auth_peer_bits));
+    return (peeraddress.ip4Addr() & mask) == auth_peer;
+}
+
+bool SyncAuthentication::checkUser( const QString& user )
+{
+    if ( user.isEmpty() ) return FALSE;
+    QString euser = loginName();
+    return user == euser;
+}
+
+bool SyncAuthentication::checkPassword( const QString& password )
+{
+#ifdef ALLOW_UNIX_USER_FTP
+    // First, check system password...
+
+    struct passwd *pw = 0;
+    struct spwd *spw = 0;
+
+    pw = getpwuid( geteuid() );
+    spw = getspnam( pw->pw_name );
+
+    QString cpwd = QString::fromLocal8Bit( pw->pw_passwd );
+    if ( cpwd == "x" && spw )
+	cpwd = QString::fromLocal8Bit( spw->sp_pwdp );
+
+    // Note: some systems use more than crypt for passwords.
+    QString cpassword = QString::fromLocal8Bit( crypt( password.local8Bit(), cpwd.local8Bit() ) );
+    if ( cpwd == cpassword )
+	return TRUE;
+#endif
+
+    static int lastdenial=0;
+    static int denials=0;
+    int now = time(0);
+
+    // Detect old Qtopia Desktop (no password)
+    if ( password.isEmpty() ) {
+	if ( denials < 1 || now > lastdenial+600 ) {
+	    QMessageBox::warning( 0,tr("Sync Connection"),
+		tr("<p>An unauthorized system is requesting access to this device."
+		    "<p>If you are using a version of Qtopia Desktop older than 1.5.1, "
+		    "please upgrade."),
+		tr("Deny") );
+	    denials++;
+	    lastdenial=now;
+	}
+	return FALSE;
+    }
+
+    // Second, check sync password...
+    if ( password.left(6) == "Qtopia" ) {
+	QString cpassword = QString::fromLocal8Bit( crypt( password.mid(8).local8Bit(), "qp" ) );
+	Config cfg("Security");
+	cfg.setGroup("Sync");
+	QString pwds = cfg.readEntry("Passwords");
+	if ( QStringList::split(QChar(' '),pwds).contains(cpassword) )
+	    return TRUE;
+
+	// Unrecognized system. Be careful...
+
+	if ( (denials > 2 && now < lastdenial+600)
+	    || QMessageBox::warning(0,tr("Sync Connection"),
+		tr("<p>An unrecognized system is requesting access to this device."
+		    "<p>If you have just initiated a Sync for the first time, this is normal."),
+		tr("Allow"),tr("Deny"))==1 )
+	{
+	    denials++;
+	    lastdenial=now;
+	    return FALSE;
+	} else {
+	    denials=0;
+	    cfg.writeEntry("Passwords",pwds+" "+cpassword);
+	    return TRUE;
+	}
+    }
+
+    return FALSE;
+}
+
+
+ServerPI::ServerPI( int socket, QObject *parent , const char* name  )
     : QSocket( parent, name ) , dtp( 0 ), serversocket( 0 ), waitsocket( 0 )
 {
     state = Connected;
@@ -92,7 +211,7 @@ ServerPI::ServerPI( int socket, QObject *parent, const char* name )
     peeraddress = peerAddress();
 
 #ifndef INSECURE
-    if ( !accessAuthorized(peeraddress) ) {
+    if ( !SyncAuthentication::isAuthorized(peeraddress) ) {
 	state = Forbidden;
 	startTimer( 0 );
     } else
@@ -105,7 +224,7 @@ ServerPI::ServerPI( int socket, QObject *parent, const char* name )
 	for( int i = 0; i < 4; i++ )
 	    wait[i] = FALSE;
 
-	send( "220 Qtopia transfer service ready!" );
+	send( "220 Qtopia " QPE_VERSION " FTP Server" );
 	state = Wait_USER;
 
 	dtp = new ServerDTP( this );
@@ -149,37 +268,6 @@ void ServerPI::read()
 {
     while ( canReadLine() )
 	process( readLine().stripWhiteSpace() );
-}
-
-bool ServerPI::checkUser( const QString& user )
-{
-    if ( user.isEmpty() ) return FALSE;
-
-    struct passwd *pw;
-    pw = getpwuid( geteuid() );
-    QString euser = QString::fromLocal8Bit( pw->pw_name );
-    return user == euser;
-}
-
-bool ServerPI::checkPassword( const QString& /* password */ )
-{
-    // ### HACK for testing on local host
-    return true;
-
-    /*
-    struct passwd *pw = 0;
-    struct spwd *spw = 0;
-
-    pw = getpwuid( geteuid() );
-    spw = getspnam( pw->pw_name );
-
-    QString cpwd = QString::fromLocal8Bit( pw->pw_passwd );
-    if ( cpwd == "x" && spw )
-	cpwd = QString::fromLocal8Bit( spw->sp_pwdp );
-
-    QString cpassword = QString::fromLocal8Bit( crypt( password.local8Bit(), cpwd.local8Bit() ) );
-    return cpwd == cpassword;
-*/
 }
 
 bool ServerPI::checkReadFile( const QString& file )
@@ -254,7 +342,7 @@ void ServerPI::process( const QString& message )
     // waiting for user name
     if ( Wait_USER == state ) {
 
-	if ( cmd != "USER" || msg.count() < 2 || !checkUser( arg ) ) {
+	if ( cmd != "USER" || msg.count() < 2 || !SyncAuthentication::checkUser( arg ) ) {
 	    send( "530 Please login with USER and PASS" );
 	    return;
 	}
@@ -266,8 +354,7 @@ void ServerPI::process( const QString& message )
     // waiting for password
     if ( Wait_PASS == state ) {
 
-	if ( cmd != "PASS" || !checkPassword( arg ) ) {
-	//if ( cmd != "PASS" || msg.count() < 2 || !checkPassword( arg ) ) {
+	if ( cmd != "PASS" || !SyncAuthentication::checkPassword( arg ) ) {
 	    send( "530 Please login with USER and PASS" );
 	    return;
 	}
@@ -454,10 +541,13 @@ void ServerPI::process( const QString& message )
 	    send( "500 Syntax error, command unrecognized" );
 	else {
 	    QFile file( absFilePath( args ) ) ;
-	    if ( file.remove() )
+	    if ( file.remove() ) {
 		send( "250 Requested file action okay, completed" );
-	    else
+		QCopEnvelope e("QPE/System", "linkChanged(QString)" );
+		e << file.name();
+	    } else {
 		send( "550 Requested action not taken" );
+	    }
 	}
     }
 
@@ -634,9 +724,16 @@ bool ServerPI::parsePort( const QString& pp )
 
 void ServerPI::dtpCompleted()
 {
-    dtp->close();
-    waitsocket = 0;
     send( "226 Closing data connection, file transfer successful" );
+    if ( dtp->dtpMode() == ServerDTP::RetrieveFile ) {
+	QString fn = dtp->fileName();
+	if ( fn.right(8)==".desktop" && fn.find("/Documents/")>=0 ) {
+	    QCopEnvelope e("QPE/System", "linkChanged(QString)" );
+	    e << fn;
+	}
+    }
+    waitsocket = 0;
+    dtp->close();
 }
 
 void ServerPI::dtpFailed()
@@ -852,7 +949,7 @@ void ServerPI::timerEvent( QTimerEvent * )
 }
 
 
-ServerDTP::ServerDTP( QObject *parent, const char* name )
+ServerDTP::ServerDTP( QObject *parent = 0, const char* name = 0)
   : QSocket( parent, name ), mode( Idle ), createTargzProc( 0 ),
 retrieveTargzProc( 0 ), gzipProc( 0 )
 {
@@ -891,8 +988,10 @@ ServerDTP::~ServerDTP()
 void ServerDTP::extractTarDone()
 {
     qDebug("extract done");
+#ifndef QT_NO_COP
     QCopEnvelope e( "QPE/Desktop", "restoreDone(QString)" );
     e << file.name();
+#endif
 }
 
 void ServerDTP::connected()

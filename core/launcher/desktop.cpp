@@ -566,8 +566,8 @@ void Desktop::execAutoStart() {
     if ( suspendTime.secsTo(now) >= (delay*60) ) {
         QCopEnvelope e("QPE/System", "execute(QString)");
         e << QString(appName);
-    } else {
-    }
+    } //else {
+    //}
 }
 
 #if defined(QPE_HAVE_TOGGLELIGHT)

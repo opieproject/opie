@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -36,6 +36,20 @@ public:
     void newConnection( int socket );
 };
 
+class SyncAuthentication : QObject
+{
+    Q_OBJECT
+
+public:
+    static int isAuthorized(QHostAddress peeraddress);
+    static bool checkPassword(const QString& pw);
+    static bool checkUser(const QString& user);
+
+    static QString serverId();
+    static QString loginName();
+    static QString ownerName();
+};
+
 
 class ServerDTP : public QSocket
 {
@@ -65,6 +79,7 @@ public:
 
     Mode dtpMode() { return mode; }
     QByteArray buffer() { return buf.buffer(); }
+    QString fileName() const { return file.name(); }
 
     void setSocket( int socket );
 
@@ -131,8 +146,6 @@ protected slots:
     void newConnection( int socket );
 
 protected:
-    bool checkUser( const QString& user );
-    bool checkPassword( const QString& pw );
     bool checkReadFile( const QString& file );
     bool checkWriteFile( const QString& file );
     bool parsePort( const QString& pw );
@@ -164,5 +177,3 @@ private:
     QString lastCommand;
     int waitsocket;
 };
-
-bool accessAuthorized(QHostAddress peeraddress);

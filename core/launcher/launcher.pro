@@ -99,7 +99,7 @@ DEPENDPATH	+= $(OPIEDIR)/core/apps/calibrate
 INCLUDEPATH += $(OPIEDIR)/rsync
 DEPENDPATH	+= $(OPIEDIR)/rsync
 TARGET		= qpe
-LIBS		+= -lqpe -lcrypt -lopie
+LIBS		+= -lqpe -lcrypt -lopie -luuid
 
 TRANSLATIONS = ../../i18n/de/qpe.ts \
 	 ../../i18n/en/qpe.ts \
