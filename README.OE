@@ -17,11 +17,9 @@ j) copy the binaries over or mount your build tree via NFS
    and export LD_LIBRARY_PATH=<path/to/oe/staging/libdir>:<path/to/opie/libdir>
    and export PATH=<path/to/oe/staging/bindir>:<path/to/opie/bindir>
 
-Note1: It's pretty ad-hoc but it seems to work :)
-Note2: Send feedback to opie-devel@handhelds.org
+k) run qpe and enjoy a great cross development environment
 
-Bugs: make always builds all targets, due to some wrong dependency calculation.
-      If you find out how to fix that, please advise.
+Note: Send feedback to opie-devel@handhelds.org
 
 Cheers,
 
