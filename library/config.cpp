@@ -69,172 +69,152 @@ public:
 #ifndef Q_OS_WIN32
 
 //#define DEBUG_CONFIG_CACHE
-
-const int CONFIG_CACHE_SIZE = 8192;
-const int CONFIG_CACHE_TIMEOUT = 1000;
-
 class ConfigData
 {
 public:
-    ConfigData(const ConfigData& o) :
-        cfg(o.cfg),
-        priv(o.priv ? new ConfigPrivate(*o.priv) : 0),
-        mtime(o.mtime),
-        size(o.size),
-        used(o.used)
-    { }
-
-    ConfigData& operator=(const ConfigData& o)
-    {
-        cfg = o.cfg;
-        delete priv;
-        priv = o.priv ? new ConfigPrivate(*o.priv) : 0;
-        mtime = o.mtime;
-        size = o.size;
-        used = o.used;
-        return *this;
-    }
-
-    ConfigData() : priv(0) {}
-    ~ConfigData() { delete priv; }
+    ConfigData() {}
+    ConfigData( const ConfigGroupMap& cf, const ConfigPrivate& pri,
+                struct stat sbuf )
+        : cfg( cf ), priv( pri ), mtime( sbuf.st_mtime ),
+          size( sbuf.st_size )
+        {
+            gettimeofday(&used, 0 );
+        }
 
     ConfigGroupMap cfg;
-    ConfigPrivate *priv; // Owned by this object
+    ConfigPrivate priv; // Owned by this object
     time_t mtime;
     unsigned int size;
     struct timeval used;
 };
 
-class ConfigCache : public QObject
-{
+
+class ConfigCache : public QObject {
 public:
-    ConfigCache();
+    static ConfigCache* instance();
 
-    void insert(const QString &filename, const ConfigGroupMap &cfg, const ConfigPrivate* priv);
-    bool find(const QString &filename, ConfigGroupMap &cfg, ConfigPrivate*& priv);
-    void remove(const QString &filename);
-
+    void insert( const QString& fileName, const ConfigGroupMap& cfg,
+                 const ConfigPrivate *priv );
+    bool find(const QString& fileName, ConfigGroupMap& cfg,
+              ConfigPrivate** priv );
 protected:
-    void timerEvent(QTimerEvent *);
+    void timerEvent( QTimerEvent* );
 
 private:
+    ConfigCache();
+    void remove( const QString& fileName );
     void removeLru();
 
-    QMap<QString, ConfigData> configData;
-    unsigned int totalsize;
-    int tid;
+private:
+    QMap<QString, ConfigData> m_cached;
+    unsigned int m_totalSize;
+    int m_tid;
+private:
+    static ConfigCache* m_inst;
+    static const unsigned int CONFIG_CACHE_SIZE = 8192;
+    static const unsigned int CONFIG_CACHE_TIMEOUT = 1000;
 };
 
-ConfigCache::ConfigCache() : QObject(), totalsize(0), tid(0)
-{
+ConfigCache* ConfigCache::m_inst = 0;
+/*
+ * get destroyed when qApp gets destroyed
+ */
+ConfigCache::ConfigCache() : QObject( qApp ), m_totalSize( 0 ), m_tid( 0 ) {}
+ConfigCache* ConfigCache::instance() {
+    if ( !m_inst )
+        m_inst = new ConfigCache();
+
+    return m_inst;
 }
 
-void ConfigCache::insert(const QString &filename, const ConfigGroupMap &cfg, const ConfigPrivate* priv)
-{
-    // use stat() rather than QFileInfo for speed.
-    struct stat sbuf;
-    stat(filename.local8Bit().data(), &sbuf);
+void ConfigCache::remove( const QString& fileName ) {
+    QMap<QString, ConfigData>::Iterator it = m_cached.find( fileName );
 
-    if (sbuf.st_size < CONFIG_CACHE_SIZE/2) {
-        ConfigData data;
-        data.cfg = cfg;
-        data.priv = priv ? new ConfigPrivate(*priv) : 0;
-        data.mtime = sbuf.st_mtime;
-        data.size = sbuf.st_size;
-        gettimeofday(&data.used, 0);
+    if ( it == m_cached.end() )
+        return;
 
-        remove(filename);
-        configData.insert(filename, data);
-
-        totalsize += data.size;
-#ifdef DEBUG_CONFIG_CACHE
-        qDebug("++++++ insert %s", filename.latin1());
-#endif
-    }
-
-    if (totalsize > (uint)CONFIG_CACHE_SIZE) {
-        // We'll delay deleting anything until later.
-        // This lets us grow quite large during some operations,
-        // but we'll be reduced to a decent size later.
-        // This works well with the main use case - app startup.
-        if (!tid)
-            tid = startTimer(CONFIG_CACHE_TIMEOUT);
-    }
+    m_totalSize -= (*it).size;
+    m_cached.remove( it );
 }
 
-bool ConfigCache::find(const QString &filename, ConfigGroupMap &cfg, ConfigPrivate*& priv)
-{
-    QMap<QString, ConfigData>::Iterator it = configData.find(filename);
-    if (it != configData.end()) {
-        ConfigData data = *it;
-        // use stat() rather than QFileInfo for speed.
-        struct stat sbuf;
-        stat(filename.local8Bit().data(), &sbuf);
-
-        if (data.mtime == sbuf.st_mtime && (int)data.size == sbuf.st_size) {
-            cfg = data.cfg;
-            delete priv;
-            priv = data.priv ? new ConfigPrivate(*data.priv) : 0;
-            gettimeofday(&data.used, 0);
-#ifdef DEBUG_CONFIG_CACHE
-            qDebug("******* Cache hit: %s", filename.latin1());
-#endif
-            return TRUE;
-        }
-    }
-
-#ifdef DEBUG_CONFIG_CACHE
-    qDebug("------- Cache miss: %s", filename.latin1());
-#endif
-
-    return FALSE;
-}
-
-void ConfigCache::remove(const QString &filename)
-{
-    QMap<QString, ConfigData>::Iterator it = configData.find(filename);
-    if (it != configData.end()) {
-        totalsize -= (*it).size;
-        configData.remove(it);
-    }
-}
-
-void ConfigCache::timerEvent(QTimerEvent *)
-{
-#ifdef DEBUG_CONFIG_CACHE
-    qDebug( "cache size: %d", totalsize);
-#endif
-    while (totalsize > (uint)CONFIG_CACHE_SIZE)
-        removeLru();
-    killTimer(tid);
-    tid = 0;
-}
-
-void ConfigCache::removeLru()
-{
-    QMap<QString, ConfigData>::Iterator it = configData.begin();
+void ConfigCache::removeLru() {
+    QMap<QString, ConfigData>::Iterator it  = m_cached.begin();
     QMap<QString, ConfigData>::Iterator lru = it;
     ++it;
-    for (; it != configData.end(); ++it) {
+    for (; it != m_cached.end(); ++it)
         if ((*it).used.tv_sec < (*lru).used.tv_sec ||
             ((*it).used.tv_sec == (*lru).used.tv_sec &&
              (*it).used.tv_usec < (*lru).used.tv_usec))
             lru = it;
-    }
 
-#ifdef DEBUG_CONFIG_CACHE
-    qDebug("Cache full, removing: %s", lru.key().latin1());
-#endif
-    totalsize -= (*lru).size;
-    configData.remove(lru);
+    qWarning( "Removing item" );
+    m_totalSize -= (*lru).size;
+    m_cached.remove(lru);
 }
 
-static ConfigCache *qpe_configCache = 0;
+void ConfigCache::timerEvent( QTimerEvent* ) {
+    while ( m_totalSize > CONFIG_CACHE_SIZE )
+        removeLru();
 
-#endif /* Q_OS_WIN32 */
+    killTimer(m_tid);
+    m_tid = 0;
+}
+
+void ConfigCache::insert( const QString& fileName, const ConfigGroupMap& cfg,
+                          const ConfigPrivate* _priv ) {
 
 
-// ==========================================================================
+    struct stat sbuf;
+    ::stat( QFile::encodeName(fileName), &sbuf );
+    if ( static_cast<unsigned int>(sbuf.st_size) >= CONFIG_CACHE_SIZE>>1)
+        return;
+
+    /*
+     * remove the old version and use the new one
+     */
+    ConfigPrivate priv = _priv ? *_priv : ConfigPrivate();
+    ConfigData data( cfg, priv, sbuf );
+    m_totalSize += data.size;
+
+    remove( fileName );
+    m_cached.insert( fileName, data );
+
+    /*
+     * we've overcommited allocation, let us clean up
+     * soon
+     */
+    if ( m_totalSize >= CONFIG_CACHE_SIZE )
+        if ( !m_tid )
+            m_tid = startTimer(CONFIG_CACHE_TIMEOUT);
+}
+
+bool ConfigCache::find( const QString& fileName, ConfigGroupMap& cfg,
+                        ConfigPrivate **ppriv ) {
+    QMap<QString, ConfigData>::Iterator it = m_cached.find(fileName);
+    if (it != m_cached.end()) {
+        ConfigData &data = *it;
+        struct stat sbuf;
+        ::stat(QFile::encodeName( fileName ), &sbuf);
+
+        if (data.mtime == sbuf.st_mtime && (int)data.size == sbuf.st_size) {
+            cfg = data.cfg;
+
+            /*
+             * null pointer
+             */
+            if ( *ppriv == 0 )
+                *ppriv = new ConfigPrivate( data.priv );
+            **ppriv = data.priv;
+            gettimeofday(&data.used, 0);
+
+            return true;
+        }
+    }
+
+    return false;
+}
+
+#endif
 
 
 /*!
@@ -243,14 +223,14 @@ static ConfigCache *qpe_configCache = 0;
 QString Config::configFilename(const QString& name, Domain d)
 {
     switch (d) {
-	case File:
-	    return name;
-	case User: {
-	    QDir dir = (QString(getenv("HOME")) + "/Settings");
-	    if ( !dir.exists() )
-		mkdir(dir.path().local8Bit(),0700);
-	    return dir.path() + "/" + name + ".conf";
-	}
+    case File:
+        return name;
+    case User: {
+        QDir dir = (QString(getenv("HOME")) + "/Settings");
+        if ( !dir.exists() )
+            mkdir(dir.path().local8Bit(),0700);
+        return dir.path() + "/" + name + ".conf";
+    }
     }
     return name;
 }
@@ -695,6 +675,8 @@ void Config::clearGroup()
 */
 void Config::write( const QString &fn )
 {
+    QString oldGroup = git.key();
+
     QString strNewFile;
     if ( !fn.isEmpty() )
 	filename = fn;
@@ -739,8 +721,8 @@ void Config::write( const QString &fn )
     }
 
 #ifndef Q_OS_WIN32
-    if (qpe_configCache)
-        qpe_configCache->insert(filename, groups, d);
+    ConfigCache::instance()->insert( filename, groups, d );
+    setGroup( oldGroup );
 #endif
     changed = FALSE;
 }
@@ -781,10 +763,8 @@ void Config::read()
     }
 
 #ifndef Q_OS_WIN32
-    if (!qpe_configCache)
-        qpe_configCache = new ConfigCache;
 
-    if (qpe_configCache->find(readFilename, groups, d)) {
+    if (ConfigCache::instance()->find(readFilename, groups, &d)) {
         if ( d && d->multilang ) {
             QStringList l = Global::languageList();
             lang = l[0];
@@ -812,7 +792,7 @@ void Config::read()
     f.close();
 
 #ifndef Q_OS_WIN32
-    qpe_configCache->insert(readFilename, groups, d);
+    ConfigCache::instance()->insert(readFilename, groups, d);
 #endif
 }
 
