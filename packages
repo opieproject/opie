@@ -115,6 +115,7 @@ CONFIG_OPIE-READER	noncore/apps/opie-reader	opie-reader.pro
 CONFIG_OPIE-SH	noncore/tools/opie-sh	opie-sh.pro
 CONFIG_OPIE-SHEET	noncore/apps/opie-sheet	opie-sheet.pro
 CONFIG_OPIEFTP	noncore/net/opieftp	opieftp.pro
+CONFIG_FTPLIB	noncore/net/ftplib	ftplib.pro
 CONFIG_OPIEIRC	noncore/net/opieirc	opieirc.pro
 CONFIG_OPIEPLAYER	core/multimedia/opieplayer	opieplayer.pro
 CONFIG_OXYGEN	noncore/apps/oxygen	oxygen.pro
