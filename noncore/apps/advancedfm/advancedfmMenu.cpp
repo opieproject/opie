@@ -800,7 +800,8 @@ void AdvancedFm::doRename(QListView * view) {
     QRect r = view->itemRect( view->currentItem( ));
     r = QRect( view->viewportToContents( r.topLeft() ), r.size() );
     r.setX( view->contentsX() );
-    if ( r.width() > view->visibleWidth() )
+
+		if ( r.width() > view->visibleWidth() )
         r.setWidth( view->visibleWidth() );
 
     renameBox = new QLineEdit( view->viewport(), "qt_renamebox" );
@@ -810,39 +811,42 @@ void AdvancedFm::doRename(QListView * view) {
 
     renameBox->selectAll();
     renameBox->installEventFilter( this );
+
     view->addChild( renameBox, r.x(), r.y() );
-    renameBox->resize( r.size() );
-    view->viewport()->setFocusProxy( renameBox );
-    renameBox->setFocus();
+
+		renameBox->resize( r.size() );
+
+		view->viewport()->setFocusProxy( renameBox );
+
+		renameBox->setFocus();
     renameBox->show();
 }
 
 
 void AdvancedFm::renameIt() {
-   if( !CurrentView()->currentItem()) return;
-   QListView *thisView = CurrentView();
+		if( !CurrentView()->currentItem()) return;
+
+		QListView *thisView = CurrentView();
     oldName = thisView->currentItem()->text(0);
     doRename( thisView );
-			rePopulate();
 }
 
 void AdvancedFm::okRename() {
    if( !CurrentView()->currentItem()) return;
+
    QString newName = renameBox->text();
-   cancelRename();
-   QListView * view = CurrentView();
+	 cancelRename();
+	 QListView * view = CurrentView();
    QString path =  CurrentDir()->canonicalPath() + "/";
    oldName = path + oldName;
    newName = path + newName;
-
    if( rename( oldName.latin1(), newName.latin1())== -1)
       QMessageBox::message(tr("Note"),tr("Could not rename"));
    else
       oldName = "";
-
    view->takeItem( view->currentItem() );
    delete view->currentItem();
-			rePopulate();
+	 rePopulate();
 }
 
 void AdvancedFm::openSearch() {
