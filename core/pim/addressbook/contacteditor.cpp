@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2002 Michael R. Crawford <mike@tuxnami.org>
+ * Copyright (C) 2002 by Stefan Eilers (eilers.stefan@epost.de)
  *
  * This file is an add-on for the OPIE Palmtop Environment
  *
@@ -1108,20 +1109,6 @@ void ContactEditor::loadFields() {
 		if ( *it == "Children" )
 			(*lit)->setText( tr( "Children" ) );
 	}
-	// Set DatePicker
-	qWarning ("**Info: %s", ent.birthday().latin1() );
-	if ( !ent.birthday().isEmpty() ){
-		birthdayButton->setText( ent.birthday() );
-		birthdayPicker->setDate( TimeConversion::fromString ( ent.birthday() ) );
-	} else
-		birthdayButton->setText( tr ("Unknown") );
-		
-	qWarning ("**Info: %s", ent.anniversary().latin1() );
-	if ( !ent.anniversary().isEmpty() ){
-		anniversaryButton->setText( ent.anniversary() );
-		anniversaryPicker->setDate( TimeConversion::fromString ( ent.birthday() ) );
-	} else
-		anniversaryButton->setText( tr ("Unknown") );
 
 }
 
@@ -1601,7 +1588,20 @@ void ContactEditor::setEntry( const OContact &entry ) {
 
 	slotAddressTypeChange( cmbAddress->currentItem() );
 
-	loadFields();
+	// loadFields(); :SX
+
+	// Set DatePicker
+	if ( !ent.birthday().isNull() ){
+		birthdayButton->setText( TimeString::numberDateString( ent.birthday() ) );
+		birthdayPicker->setDate( ent.birthday() );
+	} else
+		birthdayButton->setText( tr ("Unknown") );
+		
+	if ( !ent.anniversary().isNull() ){
+		anniversaryButton->setText( TimeString::numberDateString( ent.anniversary() ) );
+		anniversaryPicker->setDate( ent.anniversary() );
+	} else
+		anniversaryButton->setText( tr ("Unknown") );
 
 }
 
@@ -1891,7 +1891,7 @@ void ContactEditor::slotAnniversaryDateChanged( int year, int month, int day)
     date.setYMD( year, month, day );
     QString dateString = TimeString::numberDateString( date );
     anniversaryButton->setText( dateString );
-    ent.setAnniversary ( dateString );
+    ent.setAnniversary ( date );
 }
 
 void ContactEditor::slotBirthdayDateChanged( int year, int month, int day)
@@ -1900,5 +1900,5 @@ void ContactEditor::slotBirthdayDateChanged( int year, int month, int day)
     date.setYMD( year, month, day );
     QString dateString = TimeString::numberDateString( date );
     birthdayButton->setText( dateString );
-    ent.setBirthday ( dateString );
+    ent.setBirthday ( date );
 }

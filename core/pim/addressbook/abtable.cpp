@@ -24,6 +24,7 @@
 #include <qpe/config.h>
 #include <qpe/stringutil.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/timestring.h>
 
 #include <opie/orecordlist.h>
 
@@ -450,10 +451,10 @@ QString AbTable::findContactContact( const OContact &entry, int /* row */ )
 			value = entry.gender();
 			break;
 		case Qtopia::Birthday:
-			value = entry.birthday();
+			value = TimeString::numberDateString( entry.birthday() );
 			break;
 		case Qtopia::Anniversary:
-			value = entry.anniversary();
+			value = TimeString::numberDateString( entry.anniversary() );
 			break;
 		case Qtopia::Nickname:
 			value = entry.nickname();
