@@ -1,0 +1,4 @@
+  config QSS
+    boolean "A Sound Server for Qt 2.3.x where x >= 10 (qss)"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) 

@@ -182,6 +182,7 @@ CONFIG_QASHMONEY	noncore/unsupported/qashmoney	qashmoney.pro
 CONFIG_QASTEROIDS	noncore/games/qasteroids	qasteroids.pro
 CONFIG_QCOP	core/apps/qcop	qcop.pro
 CONFIG_QPDF	noncore/unsupported/qpdf	qpdf.pro
+CONFIG_QSS	core/apps/qss	qss.pro
 CONFIG_QUICKLAUNCHER core/tools/quicklauncher quicklauncher.pro
 CONFIG_QWS	core/qws	qws.pro
 CONFIG_REMOTE	noncore/tools/remote	remote.pro

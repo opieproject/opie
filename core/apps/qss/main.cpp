@@ -16,16 +16,6 @@
 ** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
 ** See the GNU General Public License for more details.
 **
-** In addition, as a special exception Trolltech gives permission to link
-** the code of this program with Qtopia applications copyrighted, developed
-** and distributed by Trolltech under the terms of the Qtopia Personal Use
-** License Agreement. You must comply with the GNU General Public License
-** in all respects for all of the code used other than the applications
-** licensed under the Qtopia Personal Use License Agreement. If you modify
-** this file, you may extend this exception to your version of the file,
-** but you are not obligated to do so. If you do not wish to do so, delete
-** this exception statement from your version.
-** 
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
 ** Contact info@trolltech.com if any conditions of this licensing are
@@ -39,7 +29,6 @@
 #include <sys/resource.h>
 #include <unistd.h>
 
-#ifndef SINGLE_EXEC
 int main(int argc, char **argv) 
 {
     QApplication a(argc, argv);
@@ -52,4 +41,3 @@ int main(int argc, char **argv)
     // hook up some quit mech.
     return a.exec();
 }
-#endif

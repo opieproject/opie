@@ -1,10 +1,10 @@
-CONFIG		+= qtopiaapp
-CONFIG		-= buildQuicklaunch
+CONFIG		+= release
 SOURCES		= main.cpp
 
 TARGET		= qss
-TRANSLATABLES   = $$SOURCES
+DESTDIR         = $(OPIEDIR)/bin
 
-PACKAGE_DESCRIPTION=QWS Sound Server
+INCLUDEPATH    += $(OPIEDIR)/include
+DEPENDSPATH    += $(OPIEDIR)/include
 
-TRANSLATIONS=
+include( $(OPIEDIR)/include.pro )

@@ -1,0 +1,6 @@
+.moc
+.ui
+*.moc
+moc_*
+Makefile
+qss
