@@ -2,7 +2,8 @@
 #define OPIE_META_FACTORY_H
 
 /**
- * meta factory is our factory servie
+ * The MetaFactory is used to keep track of all IOLayers, FileTransferLayers and ConfigWidgets
+ * and to instantiate these implementations on demand
  */
 
 #include <qwidget.h>
@@ -19,6 +20,7 @@ public:
     typedef QWidget* (*configWidget)(QWidget* parent);
     typedef IOLayer* (*iolayer)(const Config& );
     typedef FileTransferLayer* (*filelayer)(IOLayer*);
+    
     MetaFactory();
     ~MetaFactory();
 
@@ -31,15 +33,10 @@ public:
     QStringList ioLayers()const;
     QStringList configWidgets()const;
     QStringList fileTransferLayers()const;
-
-
 private:
     QMap<QString, configWidget> m_confFact;
     QMap<QString, iolayer> m_layerFact;
     QMap<QString, filelayer> m_fileFact;
-
-
-
 };
 
 

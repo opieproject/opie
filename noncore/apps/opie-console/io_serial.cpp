@@ -118,6 +118,10 @@ bool IOSerial::open() {
 void IOSerial::reload(const Config &config) {
     m_device = config.readEntry("Device", SERIAL_DEFAULT_DEVICE);
     m_baud = config.readNumEntry("Baud", SERIAL_DEFAULT_BAUD);
+    m_parity = config.readNumEntry("Parity", SERIAL_DEFAULT_PARITY);
+    m_dbits = config.readNumEntry("DataBits", SERIAL_DEFAULT_DBITS);
+    m_sbits = config.readNumEntry("StopBits", SERIAL_DEFAULT_SBITS);
+    m_flow = config.readNumEntry("Flow", SERIAL_DEFAULT_FLOW);
 }
 
 int IOSerial::getBaud(int baud) const {

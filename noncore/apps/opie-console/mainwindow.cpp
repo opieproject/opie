@@ -8,15 +8,12 @@
 #include "metafactory.h"
 #include "mainwindow.h"
 
-MainWindow::MainWindow()
-{
-    qWarning("c'tor");
+MainWindow::MainWindow() {
     m_factory = new MetaFactory();
     m_sessions.setAutoDelete( TRUE );
-    m_curSession = 0l;
+    m_curSession = -1;
 
     initUI();
-
 }
 void MainWindow::initUI() {
     setToolBarsMovable( FALSE  );
@@ -51,12 +48,15 @@ void MainWindow::initUI() {
 MainWindow::~MainWindow() {
     delete m_factory;
 }
+
 MetaFactory* MainWindow::factory() {
     return m_factory;
 }
+
 Session* MainWindow::currentSession() {
     return m_curSession;
 }
+
 QList<Session> MainWindow::sessions() {
     return m_sessions;
 }

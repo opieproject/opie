@@ -15,6 +15,7 @@ class QToolBar;
 class QMenuBar;
 class QAction;
 class MetaFactory;
+
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
@@ -37,7 +38,9 @@ public:
      * the session list
      */
     QList<Session> sessions();
-
+protected slots:
+    void slotNew();
+    void slotConnect();
 private:
     void initUI();
     /**
