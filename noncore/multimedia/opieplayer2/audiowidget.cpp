@@ -301,25 +301,26 @@ void AudioWidget::setLength( long max ) {
 
 
 void AudioWidget::setView( char view ) {
-        slider.show();
 
 // this isnt working for some reason
 
-//     if ( mediaPlayerState->streaming() ) {
-//         qDebug("<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>");
-//         if( !slider.isHidden()) slider.hide();
-//         disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-//         disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-//     } else {
+    if ( mediaPlayerState->streaming() ) {
+        qDebug("<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>");
+        if( !slider.isHidden()) {
+            slider.hide();
+        }
+        disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+        disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+    } else {
         // this stops the slider from being moved, thus
         // does not stop stream when it reaches the end
-        //    slider.show();
+        slider.show();
         connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-//    }
+    }
 
     if ( view == 'a' ) {
-        startTimer( 150 );
+        // startTimer( 150 );
         showMaximized();
     } else {
         killTimers();
