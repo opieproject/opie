@@ -37,7 +37,9 @@
 #include <qpe/qpetoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
 //#include <qpe/finddialog.h>
+
 #include <opie/ofileselector.h>
+#include <opie/ofiledialog.h>
 
 #include <qstringlist.h>
 #include <qaction.h>
@@ -499,10 +501,12 @@ void TextEdit::fileNew()
 
 void TextEdit::fileOpen()
 {
-     OFileSelector *fileSelector;
-     fileSelector = new OFileSelector( this, 1,1,"/","", "text/*");
-    fileSelector->showMaximized();
-
+    // OFileSelector *fileSelector;
+    // fileSelector = new OFileSelector( this, 1,1,"/","", "text/*");
+    //fileSelector->showMaximized();
+    QString str = OFileDialog::getOpenFileName(1,"/","", QStringList() , this );
+    if(!str.isEmpty() )
+        openFile( str );
 //     browseForFiles = new fileBrowser(this,tr("Open File"),TRUE,0, "text/*"); //
 //     browseForFiles->setFileView( viewSelection );
 //     browseForFiles->showMaximized();
@@ -521,7 +525,7 @@ void TextEdit::fileOpen()
 //             if( fileName != "Unnamed" || fileName != "Empty Text"  ) {
 //                 currentFileName = fileName;
 //                 qDebug("please open "+currentFileName);
-//                 openFile(fileName );
+//                 openFile(str );
 //             }
 //         }
 //         viewSelection = browseForFiles->SelectionCombo->currentItem();
