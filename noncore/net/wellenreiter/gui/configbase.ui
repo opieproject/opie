@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>220</width>
+            <width>212</width>
             <height>267</height>
         </rect>
     </property>
@@ -103,48 +103,6 @@
                 </property>
                 <widget row="0"  column="0" >
                     <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>&lt;select&gt;</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>eth0</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>eth1</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>wlan0</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>wlan1</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>wifi0</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>wifi1</string>
-                        </property>
-                    </item>
                     <property stdset="1">
                         <name>name</name>
                         <cstring>interfaceName</cstring>
@@ -419,6 +377,10 @@
                     <property stdset="1">
                         <name>name</name>
                         <cstring>beepOnFound</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>false</bool>
                     </property>
                     <property stdset="1">
                         <name>text</name>

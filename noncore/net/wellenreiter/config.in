@@ -1,4 +1,6 @@
   config WELLENREITER
     boolean "wellenreiter (wireless LAN monitor)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBOPIE2CORE && LIBOPIE2NET && LIBOPIE2UI
+    comment "wellenreiter needs libqpe, libopie1 and libopie2 (core+net+ui)"
+    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBOPIE2CORE && LIBOPIE2NET && LIBOPIE2UI)

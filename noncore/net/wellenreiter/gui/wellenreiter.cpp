@@ -21,19 +21,16 @@
 #include <qspinbox.h>
 #include <qsocketnotifier.h>
 
-// Qtopia
-
-#ifdef QWS
-#include <qpe/qpeapplication.h>
-#include <qpe/global.h>
-#endif
-
 // Opie
 
 #ifdef QWS
 #include <opie/odevice.h>
 using namespace Opie;
 #endif
+
+#include <opie2/oapplication.h>
+#include <opie2/onetwork.h>
+#include <opie2/opcap.h>
 
 // Standard
 
@@ -42,9 +39,7 @@ using namespace Opie;
 #include <unistd.h>
 #include <string.h>
 #include <sys/types.h>
-#include <sys/socket.h>
 #include <stdlib.h>
-#include <fcntl.h>
 
 // Local
 
@@ -56,14 +51,9 @@ using namespace Opie;
 
 #include "manufacturers.h"
 
-#include <daemon/source/config.hh>
-#include <libwellenreiter/source/wl_types.hh>
-#include <libwellenreiter/source/wl_sock.hh>
-#include <libwellenreiter/source/wl_proto.hh>
-
 Wellenreiter::Wellenreiter( QWidget* parent )
     : WellenreiterBase( parent, 0, 0 ),
-      daemonRunning( false ), manufacturerdb( 0 ), configwindow( 0 )
+      sniffing( false ), iface( 0 ), manufacturerdb( 0 ), configwindow( 0 )
 {
 
     //
@@ -91,30 +81,13 @@ Wellenreiter::Wellenreiter( QWidget* parent )
     logwindow->log( sys );
     #endif
 
-    //
-    // setup socket for daemon communication, register socket notifier
-    //
-
-    // struct sockaddr_in sockaddr;
-    daemon_fd = wl_setupsock( GUIADDR, GUIPORT, sockaddr );
-    if ( daemon_fd == -1 )
-    {
-        logwindow->log( "(E) Couldn't get file descriptor for commsocket." );
-    }
-    else
-    {
-        int flags;
-        flags = fcntl( daemon_fd, F_GETFL, 0 );
-        fcntl( daemon_fd, F_SETFL, flags | O_NONBLOCK );
-        QSocketNotifier *sn  = new QSocketNotifier( daemon_fd, QSocketNotifier::Read, this );
-        connect( sn, SIGNAL( activated( int ) ), this, SLOT( dataReceived() ) );
-    }
-
     // setup GUI
     netview->setColumnWidthMode( 1, QListView::Manual );
 
     if ( manufacturerdb )
         netview->setManufacturerDB( manufacturerdb );
+
+    pcap = new OPacketCapturer();
 
 }
 
@@ -123,14 +96,7 @@ Wellenreiter::~Wellenreiter()
     // no need to delete child widgets, Qt does it all for us
 
     delete manufacturerdb;
-
-    if ( daemon_fd != -1 )
-    {
-        qDebug( "closing comm socket" );
-        ::shutdown( daemon_fd, 0 );
-        ::close( daemon_fd );
-        qDebug( "comm socket closed." );
-    }
+    delete pcap;
 }
 
 void Wellenreiter::setConfigWindow( WellenreiterConfigWindow* cw )
@@ -138,145 +104,125 @@ void Wellenreiter::setConfigWindow( WellenreiterConfigWindow* cw )
     configwindow = cw;
 }
 
-void Wellenreiter::handleMessage()
-{
-    // FIXME: receive message and handle it
-
-    qDebug( "received message from daemon." );
-
-    /*char buffer[10000];
-    memset( &buffer, 0, sizeof( buffer ) );*/
-    
-    char buffer[WL_SOCKBUF];
-
-    // int result = #wl_recv( &daemon_fd, (char*) &buffer, sizeof(buffer) );
-    
-    /*
-    
-    struct sockaddr from;
-    socklen_t len;
-    
-    int result = recvfrom( daemon_fd, &buffer, 8192, MSG_WAITALL, &from, &len );
-    qDebug( "received %d from recv [%d bytes]", result, len );
-    
-    */
-    
-    int result = wl_recv( &daemon_fd, sockaddr, (char*) &buffer, WL_SOCKBUF );
-
-    if ( result == -1 )
-    {
-        qDebug( "Warning: %s", strerror( errno ) );
-        return;
-    }
-
-    int command = buffer[1] - 48;
-
-/*
-typedef struct {
-  int net_type;     1 = Accesspoint ; 2 = Ad-Hoc
-  int ssid_len;     Length of SSID
-  int channel;      Channel
-  int wep;          1 = WEP enabled ; 0 = disabled
-  char mac[64];     MAC address of Accesspoint
-  char bssid[128];  BSSID of Accesspoint
-} wl_network_t;
-*/
-
-    qDebug( "Recv result: %d", ( result ) );
-    qDebug( "Sniffer sent: '%s'", (const char*) buffer );
-    hexwindow->log( (const char*) &buffer );
-
-    if ( command == NETFOUND )  /* new network found */
-    {
-        qDebug( "Sniffer said: new network found." );
-        wl_network_t n;
-        get_network_found( &n, (char*) &buffer );
-        
-        qDebug( "Sniffer said: net_type is %d.", n.net_type );
-        qDebug( "Sniffer said: MAC is %s", (const char*) &n.mac );
-
-        //n.bssid[n.ssid_len] = "\0";
-
-        QString type;
-        
-        if ( n.net_type == 1 )
-            type = "managed";
-        else
-            type = "adhoc";
-
-        netview->addNewItem( type, n.bssid, QString( (const char*) &n.mac ), n.wep, n.channel, 0 );
-
-    }
-
-    else
-
-    {
-        qDebug( "unknown sniffer command." );
-    }
-
-}
-
-void Wellenreiter::dataReceived()
+void Wellenreiter::receivePacket(OPacket* p)
 {
     logwindow->log( "(d) Received data from daemon" );
-    handleMessage();
+    //TODO
+
+    // check if we received a beacon frame
+    // static_cast is justified here
+    OWaveLanManagementPacket* beacon = static_cast<OWaveLanManagementPacket*>( p->child( "802.11 Management" ) );
+    if ( !beacon ) return;
+    QString type;
+
+    //FIXME: Can stations in ESS mode can be distinguished from APs?
+    //FIXME: Apparently yes, but not by listening to beacons, because
+    //FIXME: they simply don't send beacons in infrastructure mode.
+    //FIXME: so we also have to listen to data packets
+
+    if ( beacon->canIBSS() )
+        type = "adhoc";
+    else
+        type = "managed";
+
+    OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
+    QString essid = ssid ? ssid->ID() : "<unknown>";
+    OWaveLanManagementDS* ds = static_cast<OWaveLanManagementDS*>( p->child( "802.11 DS" ) );
+    int channel = ds ? ds->channel() : -1;
+
+    OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
+    netView()->addNewItem( type, essid, header->macAddress2().toString(), header->usesWep(), channel, 0 );
 }
 
 void Wellenreiter::startStopClicked()
 {
-    if ( daemonRunning )
+    if ( sniffing )
     {
-        daemonRunning = false;
+        disconnect( SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
 
-        logwindow->log( "(i) Daemon has been stopped." );
-        setCaption( tr( "Wellenreiter/Opie" ) );
+        iface->setChannelHopping(); // stop hopping channels
+        pcap->close();
+        sniffing = false;
+        oApp->setTitle();
 
-        // Stop daemon - ugly for now... later better
-
-        system( "killall wellenreiterd" );
-
-        // get configuration from config window
-
+        // get interface name from config window
         const QString& interface = configwindow->interfaceName->currentText();
+        ONetwork* net = ONetwork::instance();
+        iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface ));
 
-        // reset the interface trying to get it into a usable state again
+        // switch off monitor mode
+        iface->setMonitorMode( false );
+        // switch off promisc flag
+        iface->setPromiscuousMode( false );
+
+        //TODO: Display "please wait..." (use owait?)
+
+        /*
 
         QString cmdline;
-        cmdline.sprintf( "iwpriv %s monitor 0; ifdown %s; ifup %s", (const char*) interface, (const char*) interface, (const char*) interface );
-        system( cmdline );
+        cmdline.sprintf( "ifdown %s; sleep 1; ifup %s", (const char*) interface, (const char*) interface, (const char*) interface );
+        system( cmdline ); //FIXME: Use OProcess
+
+        */
 
         // message the user
 
-        QMessageBox::information( this, "Wellenreiter/Opie", "Your wireless card\nshould now be usable again." );
+        //QMessageBox::information( this, "Wellenreiter II", "Your wireless card\nshould now be usable again." );
     }
 
     else
     {
-
         // get configuration from config window
 
         const QString& interface = configwindow->interfaceName->currentText();
         const int cardtype = configwindow->daemonDeviceType();
         const int interval = configwindow->daemonHopInterval();
 
-        if ( ( interface == "<select>" ) || ( cardtype == 0 ) )
+        if ( ( interface == "" ) || ( cardtype == 0 ) )
         {
-            QMessageBox::information( this, "Wellenreiter/Opie", "Your device is not\nptoperly configured. Please reconfigure!" );
+            QMessageBox::information( this, "Wellenreiter II", "Your device is not\nproperly configured. Please reconfigure!" );
             return;
         }
 
-        // start wellenreiterd
+        // configure device
 
-        QString cmdline;
-        cmdline.sprintf( "wellenreiterd %s %d &", (const char*) interface, cardtype );
+        ONetwork* net = ONetwork::instance();
+        iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface ));
 
-        qDebug( "about to execute '%s' ...", (const char*) cmdline );
-        system( cmdline );
-        qDebug( "done!" );
+        // set monitor mode
+
+        switch ( cardtype )
+        {
+            case 1: iface->setMonitoring( new OCiscoMonitoringInterface( iface ) ); break;
+            case 2: iface->setMonitoring( new OWlanNGMonitoringInterface( iface ) ); break;
+            case 3: iface->setMonitoring( new OHostAPMonitoringInterface( iface ) ); break;
+            case 4: iface->setMonitoring( new OOrinocoMonitoringInterface( iface ) ); break;
+            default: assert( 0 ); // shouldn't happen
+        }
+
+        iface->setMonitorMode( true );
+
+        // open pcap and start sniffing
+        pcap->open( interface );
+
+        if ( !pcap->isOpen() )
+        {
+            QMessageBox::warning( this, "Wellenreiter II", "Can't open packet capturer:\n" + QString(strerror( errno ) ));
+            return;
+        }
+
+        // set capturer to non-blocking mode
+        pcap->setBlocking( false );
+
+        // start channel hopper
+        iface->setChannelHopping( 1000 ); //use interval from config window
+
+        // connect
+        connect( pcap, SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
 
         logwindow->log( "(i) Daemon has been started." );
-        daemonRunning = true;
-        setCaption( tr( "Scanning ..." ) );
+        oApp->setTitle( "Scanning ..." );
+        sniffing = true;
 
     }
 }

@@ -16,7 +16,7 @@
 #ifndef SCANLIST_H
 #define SCANLIST_H
 
-#include <cornucopia/olistview.h>
+#include <opie2/olistview.h>
 
 #include <qtextstream.h>
 

@@ -11,8 +11,6 @@ HEADERS         = wellenreiterbase.h \
                   logwindow.h \
                   hexwindow.h \
                   configwindow.h \
-                  wlan.h \
-                  cardconfig.h \
                   manufacturers.h
 
 SOURCES         = main.cpp \
@@ -23,13 +21,11 @@ SOURCES         = main.cpp \
                   logwindow.cpp \
                   hexwindow.cpp \
                   configwindow.cpp \
-                  wlan.cpp \
-                  cardconfig.cpp \
                   manufacturers.cpp
 
-INCLUDEPATH     += $(OPIEDIR)/include ../
-DEPENDPATH      += $(OPIEDIR)/include ../
-LIBS            += -L. -lwellenreiter -lcornucopia
+INCLUDEPATH     += $(OPIEDIR)/include
+DEPENDPATH      += $(OPIEDIR)/include
+LIBS            += -L. -lwellenreiter -lopiecore2 -lopieui2 -lopienet2
 INTERFACES      = configbase.ui
 TARGET          = wellenreiter
 

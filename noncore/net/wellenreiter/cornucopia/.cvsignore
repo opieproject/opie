@@ -1,8 +1,0 @@
-*.o
-*~
-Makefile*
-moc_*
-wellenreitertemplate.cpp
-wellenreitertemplate.h
-configbase.h
-configbase.cpp

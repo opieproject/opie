@@ -23,23 +23,11 @@
 using namespace Opie;
 #endif
 
-// ugly... not here!
-
-#include <assert.h>
-#include <errno.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <daemon/source/config.hh>
-#include <libwellenreiter/source/wl_types.hh>
-#include <libwellenreiter/source/wl_sock.hh>
-#include <libwellenreiter/source/wl_proto.hh>
-
 class QTimerEvent;
 class QPixmap;
+class OPacket;
+class OPacketCapturer;
+class OWirelessNetworkInterface;
 class ManufacturerDB;
 class WellenreiterConfigWindow;
 
@@ -53,25 +41,22 @@ class Wellenreiter : public WellenreiterBase {
     void setConfigWindow( WellenreiterConfigWindow* cw );
     MScanListView* netView() const { return netview; };
     MLogWindow* logWindow() const { return logwindow; };
-    bool isDaemonRunning() const { return daemonRunning; };
-
-  protected:
-    bool daemonRunning;
+    bool isDaemonRunning() const { return sniffing; };
 
   public slots:
-    void dataReceived();
+    void receivePacket(OPacket*);
     void startStopClicked();
 
   private:
-    int daemon_fd;                  // socket filedescriptor for udp communication socket
     #ifdef QWS
     OSystem _system;                // Opie Operating System identifier
     #endif
-    void handleMessage();
 
+    bool sniffing;
+    OWirelessNetworkInterface* iface;
+    OPacketCapturer* pcap;
     ManufacturerDB* manufacturerdb;
     WellenreiterConfigWindow* configwindow;
-    struct sockaddr_in sockaddr;
 
     //void readConfig();
     //void writeConfig();

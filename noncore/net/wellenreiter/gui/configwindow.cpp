@@ -13,12 +13,18 @@
 **
 **********************************************************************/
 
+/* LOCAL */
 #include "configwindow.h"
+
+/* QT */
 #include <qmap.h>
 #include <qcombobox.h>
 #include <qpushbutton.h>
 #include <qspinbox.h>
 #include <qlayout.h>
+
+/* OPIE */
+#include <opie2/onetwork.h>
 
 WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char * name, WFlags f )
            :WellenreiterConfigBase( parent, name, true, f )
@@ -28,6 +34,16 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
     _devicetype[ "hostap" ] = 3;
     _devicetype[ "orinoco" ] = 4;
     _devicetype[ "<manual>" ] = 5;
+
+    // gather possible interface names from ONetwork
+    ONetwork* net = ONetwork::instance();
+    ONetwork::InterfaceIterator it = net->iterator();
+    while ( it.current() )
+    {
+        if ( it.current()->isWireless() )
+            interfaceName->insertItem( it.current()->name() );
+        ++it;
+    }
 
     #ifdef Q_WS_X11 // We're on X11: adding an Ok-Button for the Dialog here
     QPushButton* okButton = new QPushButton( "ok", this );

@@ -1,5 +1,5 @@
 TEMPLATE        = subdirs
-unix:SUBDIRS    = cornucopia libwellenreiter daemon gui
+unix:SUBDIRS    = gui
 
 
 !contains( platform, x11 ) {
