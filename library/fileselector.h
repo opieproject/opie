@@ -54,6 +54,8 @@ public:
     ~FileSelector();
     void setNewVisible( bool b );
     void setCloseVisible( bool b );
+    void setTypeComboVisible( bool b = TRUE );
+    void setCategorySelectVisible( bool b = TRUE );
     void reread();
     int fileCount();
     DocLnk selectedDocument() const

@@ -320,6 +320,7 @@ FileSelector::FileSelector( const QString &f, QWidget *parent, const char *name,
 	     this, SLOT( fileClicked( QListViewItem * ) ) );
 
     QHBox *hb = new QHBox( this );
+
     d->typeCombo = new TypeCombo( hb );
     connect( d->typeCombo, SIGNAL(selected(const QString&)),
 	    this, SLOT(typeSelected(const QString&)) );
@@ -493,6 +494,25 @@ void FileSelector::setCloseVisible( bool b )
 	d->toolbar->show();
     else
 	d->toolbar->hide();
+}
+
+/*!
+
+*/
+void FileSelector::setTypeComboVisible( bool b ) {
+    if ( b )
+        d->typeCombo->show();
+    else
+        d->typeCombo->hide();
+}
+/*!
+
+*/
+void FileSelector::setCategorySelectVisible( bool b ) {
+    if ( b )
+        d->catSelect->show();
+    else
+        d->catSelect->hide();
 }
 
 /*!
