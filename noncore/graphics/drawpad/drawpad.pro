@@ -19,7 +19,8 @@ SOURCES		= main.cpp \
 		  linedrawmode.cpp \
 		  pointdrawmode.cpp \
 		  rectangledrawmode.cpp
-INCLUDEPATH	+= $(OPIEDIR)/include
+INCLUDEPATH	+= $(OPIEDIR)/include \
+                   $(QTDIR)/src/3rdparty/zlib
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS		+= -lqpe
 DESTDIR		= $(OPIEDIR)/bin
