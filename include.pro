@@ -1,3 +1,5 @@
+# make install
+
 # base opie install path
 outdir = /opt/QtPalmtop
 
@@ -30,3 +32,13 @@ INSTALLS += data
 sounds.path = $$outdir/sounds/$$TARGET
 sounds.files = sounds/*
 INSTALLS += sounds
+
+# new targets
+
+lupdate.target = lupdate
+lupdate.commands = lupdate -noobselete $(DIST)
+
+lrelease.target = lrelease
+lrelease.commands = lrelease $(DIST)
+
+QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease
