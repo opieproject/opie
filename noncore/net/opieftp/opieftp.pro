@@ -6,6 +6,6 @@ TARGET    = opieftp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe -lftplib 
-DESTDIR=$(QPEDIR)/bin
+DESTDIR = $(OPIEDIR)/bin
 
 include ( $(OPIEDIR)/include.pro )
