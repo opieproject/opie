@@ -1,7 +1,7 @@
-Files: plugins/codecs/libwavplugin.so.1.0.0 plugins/codecs/libwavplugin.so.1.0 plugins/codecs/libwavplugin.so.1 plugins/codecs/libwavplugin.so
+Files: plugins/codecs/libwavplugin*
 Priority: optional
 Section: opie/plugins
-Maintainer: John Ryland <jryland@trolltech.com>
+Maintainer: Lorn Potter <llornkcor@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
