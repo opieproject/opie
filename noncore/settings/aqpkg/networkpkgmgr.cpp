@@ -302,7 +302,7 @@ void NetworkPackageManager :: serverSelected( int )
     if ( serverName == LOCAL_SERVER )
     {
         upgrade->setEnabled( false );
-        download->setText( "Install Remote" );
+        download->setText( "Download" );
         download->setEnabled( true );
     }
     else if ( serverName == LOCAL_IPKGS )
