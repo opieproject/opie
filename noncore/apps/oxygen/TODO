@@ -14,3 +14,6 @@ big things:
 
 wishes:
 * add radio active decay 
+* let the use choose the units
+	i.e.  pm <-> \AA; J <-> eV <-> Hartree; K <-> °C
+* add aditional attributes: oxidation numbers, different radii
