@@ -571,12 +571,12 @@ QString OContact::toRichText() const
     if ( !str.isEmpty() )
 	text += "<b>" + QObject::tr("Spouse: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
-    if ( !birthday().isNull() ){
+    if ( !birthday().isValid() ){
 	    str = TimeString::numberDateString( birthday() );
 	    text += "<b>" + QObject::tr("Birthday: ") + "</b>"
 		    + Qtopia::escapeString(str) + "<br>";
     }
-    if ( !anniversary().isNull() ){
+    if ( !anniversary().isValid() ){
 	    str = TimeString::numberDateString( anniversary() );
 	    text += "<b>" + QObject::tr("Anniversary: ") + "</b>"
 		    + Qtopia::escapeString(str) + "<br>";
@@ -1123,8 +1123,16 @@ static VObject *createVObject( const OContact &c )
     safeAddPropValue( vcard, VCNoteProp, c.notes() );
 
     // Exporting Birthday regarding RFC 2425 (5.8.4)
-    if ( !c.birthday().isNull() ){
-	    QString birthd_rfc2425 = c.birthday().year() + QString( "-" ) + c.birthday().month() + QString( "-" ) + c.birthday().day();
+    if ( !c.birthday().isValid() ){
+	    QString birthd_rfc2425 = QString("%1-%2-%3")
+		    .arg( c.birthday().year() ) 
+		    .arg( c.birthday().month(), 2 )
+		    .arg( c.birthday().day(), 2 );
+	    // Now replace spaces with "0"...
+	    int pos = 0;
+	    while ( ( pos = birthd_rfc2425.find (' ')  ) > 0 )
+		    birthd_rfc2425.replace( pos, 1, "0" );
+		    
 	    qWarning("Exporting birthday as: %s", birthd_rfc2425.latin1());
 	    safeAddPropValue( vcard, VCBirthDateProp, birthd_rfc2425.latin1() );
     }
@@ -1158,15 +1166,20 @@ static QDate convVCardDateToDate( const QString& datestr )
 {
 	int monthPos = datestr.find('-');
 	int dayPos = datestr.find('-', monthPos+1 );
+	int sep_ignore = 1;
 	if ( monthPos == -1 || dayPos == -1 ) {
 		qDebug("fromString didn't find - in str = %s; mpos = %d ypos = %d", datestr.latin1(), monthPos, dayPos );
-		return QDate();
+		// Ok.. Outlook is violating ISO 8601, therefore we will try to read their format ( YYYYMMDD )
+		monthPos   = 4;
+		dayPos     = 6;
+		sep_ignore = 0;
+		qDebug("Try with follwing positions str = %s; mpos = %d ypos = %d", datestr.latin1(), monthPos, dayPos );
 	}
 	int y = datestr.left( monthPos ).toInt();
-	int m = datestr.mid( monthPos+1, dayPos - monthPos - 1 ).toInt();
-	int d = datestr.mid( dayPos+1 ).toInt();
-	QDate date ( y,m,d );
+	int m = datestr.mid( monthPos + sep_ignore, dayPos - monthPos - sep_ignore ).toInt();
+	int d = datestr.mid( dayPos + sep_ignore ).toInt();
 	qDebug("TimeConversion::fromString ymd = %s => %d %d %d; mpos = %d ypos = %d", datestr.latin1(), y, m, d, monthPos, dayPos);
+	QDate date ( y,m,d );
 	return date;
 }
 
