@@ -10,6 +10,7 @@
 #include <qpixmap.h>
 #include <qpushbutton.h>
 #include <qvbox.h>
+#include <qwhatsthis.h>
 
 
 #include <qpe/config.h>
@@ -22,9 +23,9 @@
 using namespace MediumMountSetting;
 
 MediumMountWidget::MediumMountWidget(const QString &path,
-				     const QPixmap &pix,
-				     QWidget *parent,
-				     const char *name )
+             const QPixmap &pix,
+             QWidget *parent,
+             const char *name )
   : QWidget( parent, name )
 {
   if(parent == 0){
@@ -54,10 +55,11 @@ void MediumMountWidget::initGUI()
   m_label = new QLabel(m_infoBox );
   m_desc = new QLabel(m_infoBox );
   m_desc->setTextFormat( Qt::RichText );
-  m_desc->setText("Configure this medium. The changes will"
-		  " go into effect when the application get's"
-		  " closed. To update the Document Tab you need"
-		  " to removeand insert this medium." );
+  QWhatsThis::add( this, tr("Configure this medium. The changes will"
+      " go into effect when the application get's"
+      " closed. To update the Document Tab you need"
+                            " to removeand insert this medium."));
+  m_desc->setText("" );
   m_box->addWidget( m_infoBox ); // add the widget to the layout
 
 
@@ -69,8 +71,8 @@ void MediumMountWidget::initGUI()
 
 
   QSpacerItem *item2 = new QSpacerItem(5, 8,
-				       QSizePolicy::Fixed,
-				       QSizePolicy::Fixed);
+               QSizePolicy::Fixed,
+               QSizePolicy::Fixed);
   m_box->addItem( item2 );
 
   m_audio = new QCheckBox( tr("Audio"), m_group );
@@ -80,7 +82,7 @@ void MediumMountWidget::initGUI()
   m_video = new QCheckBox( tr("Video"), m_group );
 
   QSpacerItem *iti1b = new QSpacerItem(2, 10, QSizePolicy::Fixed, 
-				       QSizePolicy::Fixed );
+               QSizePolicy::Fixed );
   m_checks->addItem( iti1b, 0, 0 );
 
   m_checks->addWidget(m_audio, 1, 0 );
@@ -95,7 +97,7 @@ void MediumMountWidget::initGUI()
   m_checks->setColStretch(1, -2 );
 
   connect(m_all, SIGNAL(stateChanged(int) ), 
-	  this, SLOT(slotStateChanged() ) );
+    this, SLOT(slotStateChanged() ) );
 
   m_box->addWidget( m_group );
 
@@ -117,8 +119,8 @@ void MediumMountWidget::initGUI()
   m_box->addWidget( m_always );
 
   QSpacerItem *item = new QSpacerItem(5, 50,
-				      QSizePolicy::Fixed,
-				      QSizePolicy::Expanding );
+              QSizePolicy::Fixed,
+              QSizePolicy::Expanding );
   m_box->addItem(item );
 }
 
