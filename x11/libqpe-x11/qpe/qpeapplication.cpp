@@ -736,7 +736,7 @@ int QPEApplication::x11ClientMessage(QWidget* w, XEvent* event, bool b ) {
                 /*
                  * call it directly or via QTimer::singleShot?
                  */
-                QTimer::singleShot(0, dia, SLOT(reject() ) );
+                QTimer::singleShot(0, dia, SLOT(accept() ) );
                  return 0;
             }
 
