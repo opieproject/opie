@@ -45,6 +45,8 @@ class Transaction
     public slots:
 
       void displayTransactions ( QListView *, int, bool, const char *, QDate );
+      char ** selectAllTransactions ( QDate fromdate, bool children, const char *limit, int id );
+      char ** selectNonClearedTransactions ( QDate fromdate, bool children, const char *limit, int id );
       QString getPayee ( int );
       QString getTransactionDescription ( int );
       QString getNumber ( int );
@@ -62,6 +64,7 @@ class Transaction
     private:
 
       sqlite *tdb;
+      int rows, columns;
   };
 
 #endif

@@ -69,6 +69,7 @@ class BudgetDisplay : public QWidget
       void editLineItem ();
       void constructBudgetWindow ();
       void constructLineItemWindow ();
+      void saveSortingPreference ( int column );
 
     private:
       QStringList *names;

@@ -4,6 +4,7 @@
 #include <qlistview.h>
 #include <qstring.h>
 #include <sqlite.h>
+#include <qdatetime.h>
 
 #include "preferences.h"
 
@@ -29,7 +30,7 @@ class Transfer
       int getNumberOfTransfers ();
       int getNumberOfTransfers ( int accountid );
 
-      void displayTransfers ( QListView *listview, int accountid, bool children );
+      void displayTransfers ( QListView *listview, int accountid, bool children, QDate displaydate );
       int getCleared ( int id );
       void setCleared ( int id, int cleared );
       int getFromAccountID ( int id );

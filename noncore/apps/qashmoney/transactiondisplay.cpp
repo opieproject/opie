@@ -67,6 +67,7 @@ TransactionDisplay::TransactionDisplay ( QWidget* parent ) : QWidget ( parent )
     listview->setShowSortIndicator ( TRUE );
     listview->header()->setTracking ( FALSE );
     connect ( listview->header(), SIGNAL ( sizeChange ( int, int, int ) ), this, SLOT ( saveColumnSize ( int, int, int ) ) );
+    connect ( listview->header(), SIGNAL ( clicked ( int ) ), this, SLOT ( saveSortingPreference ( int ) ) );
 
     layout = new QVBoxLayout ( this, 2, 2 );
     layout->addWidget ( firstline );
@@ -133,7 +134,7 @@ void TransactionDisplay::addTransaction ()
 
         // redisplay transfers
         if ( transfer->getNumberOfTransfers() > 0 )
-          transfer->displayTransfers ( listview, accountid, children );
+          transfer->displayTransfers ( listview, accountid, children, displaydate );
 
         // add the transaction amount to the account it's associated with
 	// and update its parent account balance if necessary
@@ -372,7 +373,7 @@ void TransactionDisplay::updateAndDisplay ( int id )
 
     // redisplay transfers
     if ( transfer->getNumberOfTransfers() > 0 )
-      transfer->displayTransfers ( listview, accountid, children );
+      transfer->displayTransfers ( listview, accountid, children, displaydate );
 
     // add the transaction amount to the account it's associated with
     // and update its parent account balance if necessary
@@ -416,7 +417,7 @@ void TransactionDisplay::deleteTransaction ()
           transaction->displayTransactions ( listview, accountid, children, displaytext, displaydate );
 
         if ( transfer->getNumberOfTransfers() > 0 )
-          transfer->displayTransfers ( listview, accountid, children );
+          transfer->displayTransfers ( listview, accountid, children, displaydate );
 
         // if we are viewing different child accounts through the parent account
         // ie if there are five columns and the parentid is -1
@@ -448,7 +449,7 @@ void TransactionDisplay::deleteTransaction ()
           transaction->displayTransactions ( listview, accountid, children, displaytext, displaydate );
 
         if ( transfer->getNumberOfTransfers() > 0 )
-          transfer->displayTransfers ( listview, accountid, children );
+          transfer->displayTransfers ( listview, accountid, children, displaydate );
 
         // for the from account
         account->updateAccountBalance ( fromaccountid );
@@ -501,7 +502,7 @@ void TransactionDisplay::toggleTransaction ()
       transaction->displayTransactions ( listview, accountid, children, displaytext, displaydate );
 
     if ( transfer->getNumberOfTransfers() != 0 )
-      transfer->displayTransfers ( listview, accountid, children );
+      transfer->displayTransfers ( listview, accountid, children, displaydate );
   }
 
 void TransactionDisplay::redisplayAccountBalance ()
@@ -551,6 +552,11 @@ void TransactionDisplay::saveColumnSize ( int column, int oldsize, int newsize )
       preferences->changeColumnPreference ( 9, newsize );
   }
 
+void TransactionDisplay::saveSortingPreference ( int column )
+  {
+    preferences->changeSortingPreference ( 2, column );
+  }
+
 void TransactionDisplay::limitDisplay ( const QString &text )
   {
     listview->clear ();
@@ -561,7 +567,7 @@ void TransactionDisplay::limitDisplay ( const QString &text )
       transaction->displayTransactions ( listview, accountid, children, displaytext, displaydate );
 
     if ( displaytext.length() == 1 || preferences->getPreference ( 6 ) == 1 )
-      transfer->displayTransfers ( listview, accountid, children );
+      transfer->displayTransfers ( listview, accountid, children, displaydate );
   }
 
 int TransactionDisplay::getIDColumn ()
@@ -619,5 +625,5 @@ void TransactionDisplay::setTransactionDisplayDate ()
           }
       }
     else
-      displaydate = QDate ( 1, 1, 1000 );
+      displaydate = QDate ( 1900, 1, 1 );
   }

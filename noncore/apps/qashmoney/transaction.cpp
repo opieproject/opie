@@ -155,36 +155,112 @@ int Transaction::getYear ( int id )
     return yearstring.toInt();
   }
 
+char ** Transaction::selectAllTransactions ( QDate fromdate, bool children, const char *limit, int id )
+  {
+    // initialize variables
+    char **results;
+    int showcleared = preferences->getPreference ( 3 );
+    QDate today = QDate::currentDate();
+    int fromyear = fromdate.year();
+    int toyear = today.year();
+    int frommonth = fromdate.month();
+    int tomonth = today.month();
+    int fromday = fromdate.day();
+
+    // construct the first part of the string
+    QString query = "select day, month, year, payee, amount, transid, accountid from transactions where";
+
+    if ( frommonth == tomonth && fromyear == toyear ) // our dates cross neither a month nor a year
+      {
+        query.append ( " year = " );
+        query.append ( QString::number ( toyear ) );
+        query.append ( " and month = " );
+        query.append ( QString::number ( tomonth ) );
+        query.append ( " and day >= " );
+        query.append ( QString::number ( fromday ) );
+        query.append ( " and" );
+      }
+    else if ( frommonth != tomonth && fromyear == toyear ) // our dates cross a month within the same year
+      {
+        query.append ( " year = " );
+        query.append ( QString::number ( toyear ) );
+        query.append ( " and ( ( month <= " );
+        query.append ( QString::number ( tomonth ) );
+        query.append ( " and month > " );
+        query.append ( QString::number ( frommonth ) );
+        query.append ( " ) or ( month = " );
+        query.append ( QString::number ( frommonth ) );
+        query.append ( " and day >= " );
+        query.append ( QString::number ( fromday ) );
+        query.append ( " ) ) and " );
+      }
+    else if ( fromyear != toyear && fromyear != 1900 ) // here we are showing transactions from an entire year
+      {
+        // divide this taks into two parts - get the transactions from the prior and then the current year
+        // current year part
+        int tmpfrommonth = 1; // set temporary from months and days to Jan. 1
+        int tmpfromday = 1;
+        query.append ( " ( year >= " );
+        query.append ( QString::number ( fromyear ) );
+        query.append ( " and ( month <= " );
+        query.append ( QString::number ( tomonth ) );
+        query.append ( " and month > " );
+        query.append ( QString::number ( tmpfrommonth ) );
+        query.append ( " ) or ( month = " );
+        query.append ( QString::number ( tmpfrommonth ) );
+        query.append ( " and day >= " );
+        query.append ( QString::number ( tmpfromday ) );
+        query.append ( " ) ) or" );
+
+        // prior year part
+        int tmptomonth = 12;
+        query.append ( " ( year = " );
+        query.append ( QString::number ( fromyear ) );
+        query.append ( " and ( ( month <= " );
+        query.append ( QString::number ( tmptomonth ) );
+        query.append ( " and month > " );
+        query.append ( QString::number ( frommonth ) );
+        query.append ( " ) or ( month = " );
+        query.append ( QString::number ( frommonth ) );
+        query.append ( " and day >= " );
+        query.append ( QString::number ( fromday ) );
+        query.append ( " ) ) ) and " );
+      }
+
+    if ( account->getParentAccountID ( id ) == -1 && children == TRUE )
+      query.append ( " parentid = %i and payee like '%q';" );
+    else
+      query.append ( " accountid = %i and payee like '%q';" );
+
+    sqlite_get_table_printf ( tdb, query, &results, &rows, &columns, NULL, id, limit );
+    return results;
+  }
+
+char ** Transaction::selectNonClearedTransactions ( QDate fromdate, bool children, const char *limit, int id )
+  {
+    char **results;
+    if ( account->getParentAccountID ( id ) == -1 && children == TRUE )
+     sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where cleared = 0 and parentid = %i and payee like '%q';", &results, &rows, &columns, NULL, id, limit );
+    else
+      sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where cleared = 0 and accountid = %i and payee like '%q';", &results, &rows, &columns, NULL, id, limit );
+    return results;
+  }
+
 void Transaction::displayTransactions ( QListView *listview, int id, bool children, const char *limit, QDate displaydate )
   {
     int showcleared = preferences->getPreference ( 3 );
-    int year = ( displaydate.year() ) - 1;
 
-    // select the transactions to display
-    // two different statements are used based on
-    // whether we are showing cleared transactions
     char **results;
-    int rows, columns;
     if ( showcleared == 0 )
-      {
-        if ( account->getParentAccountID ( id ) == -1 && children == TRUE )
-          sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where cleared = 0 and year >= %i parentid = %i and payee like '%q';", &results, &rows, &columns, NULL, year, id, limit );
-        else
-          sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where cleared = 0 year >= %i accountid = %i and payee like '%q';", &results, &rows, &columns, NULL, year, id, limit );
-      }
+      results = selectNonClearedTransactions ( displaydate, children, limit, id );
     else
-      {
-      if ( account->getParentAccountID ( id ) == -1 && children == TRUE )
-          sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where year >= %i and parentid = %i and payee like '%q';", &results, &rows, &columns, NULL, year, id, limit );
-      else
-        sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where accountid = %i and payee like '%q';", &results, &rows, &columns, NULL, id, limit );
-      }
+      results = selectAllTransactions ( displaydate, children, limit, id );
 
     // iterate through the result list and display each item
     int counter = 7;
     while ( counter < ( ( rows + 1 ) * columns ) )
       {
-        QDate displaydate ( atoi ( results [ counter + 2 ] ), atoi ( results [ counter + 1 ] ), atoi ( results [ counter ] ) );
+        //QDate testdate ( atoi ( results [ counter + 2 ] ), atoi ( results [ counter + 1 ] ), atoi ( results [ counter ] ) );
         QString date = preferences->getDate ( atoi ( results [ counter + 2 ] ), atoi ( results [ counter + 1 ] ), atoi ( results [ counter ] ) );
 
 	// construct transaction name, amount, id
@@ -195,21 +271,21 @@ void Transaction::displayTransactions ( QListView *listview, int id, bool childr
         //determine the account name of the child accounts that we're displaying
         QString accountname = account->getAccountName ( atoi ( results [ counter + 6 ] ) );
 
-	// fill in values
+        // fill in values
         if ( account->getParentAccountID ( id ) != -1 ) // use these constructors if we're showing a child account
           {
 	    if ( showcleared == 1 && getCleared ( transferid.toInt() ) == 1 )
-	      ColorListItem *item = new ColorListItem ( listview, date, payee, amount, transferid);
+	     ColorListItem *item = new ColorListItem ( listview, date, payee, amount, transferid );
 	    else
 	      QListViewItem *item = new QListViewItem ( listview, date, payee, amount, transferid );
           }
-       else
-         {
+        else
+          {
 	    if ( showcleared == 1 && getCleared ( transferid.toInt() ) == 1 )
 	      ColorListItem *item = new ColorListItem ( listview, date, payee, amount, transferid, accountname );
 	    else
 	      QListViewItem *item = new QListViewItem ( listview, date, payee, amount, transferid, accountname );
-         }
+          }
 
 	// advance counter
 	counter = counter + 7;

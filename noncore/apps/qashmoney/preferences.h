@@ -12,10 +12,12 @@ class Preferences
 
       void addPreferences ();
       void initializeColumnPreferences ();
+      void initializeSortingPreferences ();
 
       // Returns a preference value for the given preferences ID
       int getPreference ( int );
       int getColumnPreference ( int id );
+      void getSortingPreference ( int id, int *column, int *direction );
 
       // Convenience for getting date separator with one function
       // call.  Takes the preference id as its argument
@@ -24,6 +26,7 @@ class Preferences
       //  Changes a preference for the given ID
       void changePreference ( int , int );
       void changeColumnPreference ( int id, int width );
+      void changeSortingPreference ( int id, int column );
 
       // The primary database that stores all our data
       sqlite *db;

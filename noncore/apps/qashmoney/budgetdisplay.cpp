@@ -82,6 +82,13 @@ BudgetDisplay::BudgetDisplay ( QWidget *parent ) : QWidget ( parent )
 
     listview->header()->setTracking ( FALSE );
     connect ( listview->header(), SIGNAL ( sizeChange ( int, int, int ) ), this, SLOT ( saveColumnSize ( int, int, int ) ) );
+    connect ( listview->header(), SIGNAL ( clicked ( int ) ), this, SLOT ( saveSortingPreference ( int ) ) );
+
+    // pull the column sorting preference from the preferences table, and configure the listview accordingly
+    int column = 0;
+    int direction = 0;
+    preferences->getSortingPreference ( 3, &column, &direction );
+    listview->setSorting ( column, direction );
 
     displayBudgetNames();
 
@@ -116,6 +123,11 @@ void BudgetDisplay::saveColumnSize ( int column, int oldsize, int newsize )
           preferences->changeColumnPreference ( 15, newsize );
           break;
       }
+  }
+
+void BudgetDisplay::saveSortingPreference ( int column )
+  {
+    preferences->changeSortingPreference ( 3, column );
   }
 
 int BudgetDisplay::getIDColumn ()

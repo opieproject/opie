@@ -65,7 +65,7 @@ int Transfer::getNumberOfTransfers ( int accountid )
     return transfers;
   }
 
-void Transfer::displayTransfers ( QListView *listview, int accountid, bool children )
+void Transfer::displayTransfers ( QListView *listview, int accountid, bool children, QDate displaydate )
   {
     int showcleared = preferences->getPreference ( 3 );
 
@@ -100,6 +100,7 @@ void Transfer::displayTransfers ( QListView *listview, int accountid, bool child
 	QString yearstring = results [ counter + 2 ];
 	int year = yearstring.toInt ();
 	QString date = preferences->getDate ( year, month, day );
+        QDate testdate ( year, month, day );
 
         //construct the amount and id strings
         QString amount = results [ counter + 3 ];
@@ -112,22 +113,24 @@ void Transfer::displayTransfers ( QListView *listview, int accountid, bool child
 
         QString toaccount = account->getAccountName ( atol ( results [ counter + 6 ] ) );
 
-        // display this transfer
-        if ( account->getParentAccountID ( accountid ) == -1 )
+        if ( testdate >= displaydate || showcleared == 0 )
           {
-            if ( showcleared == 1 && getCleared ( id.toInt() ) == 1 )
-              ColorListItem *item = new ColorListItem ( listview, date, transactionname, amount, id, toaccount );
+            // display this transfer
+            if ( account->getParentAccountID ( accountid ) == -1 )
+              {
+                if ( showcleared == 1 && getCleared ( id.toInt() ) == 1 )
+                  ColorListItem *item = new ColorListItem ( listview, date, transactionname, amount, id, toaccount );
+                else
+                  QListViewItem *item = new QListViewItem ( listview, date, transactionname, amount, id, toaccount );
+              }
             else
-              QListViewItem *item = new QListViewItem ( listview, date, transactionname, amount, id, toaccount );
+              {
+                if ( showcleared == 1 && getCleared ( id.toInt() ) == 1 )
+                  ColorListItem *item = new ColorListItem ( listview, date, transactionname, amount, id );
+                else
+                  QListViewItem *item = new QListViewItem ( listview, date, transactionname, amount, id );
+              }
           }
-        else
-          {
-            if ( showcleared == 1 && getCleared ( id.toInt() ) == 1 )
-              ColorListItem *item = new ColorListItem ( listview, date, transactionname, amount, id );
-            else
-              QListViewItem *item = new QListViewItem ( listview, date, transactionname, amount, id );
-          }
-
         counter = counter + 7;
       }
 
@@ -163,6 +166,7 @@ void Transfer::displayTransfers ( QListView *listview, int accountid, bool child
 	QString yearstring = toresults [ counter + 2 ];
 	int year = yearstring.toInt ();
 	QString date = preferences->getDate ( year, month, day );
+        QDate testdate ( year, month, day );
 
         //construct the amount and id strings
         QString amount = toresults [ counter + 3 ];
@@ -176,20 +180,23 @@ void Transfer::displayTransfers ( QListView *listview, int accountid, bool child
 
         QString fromaccount = account->getAccountName ( atol ( toresults [ counter + 5 ] ) );
 
-        // display this transfer
-        if ( account->getParentAccountID ( accountid ) == -1 )
-          {
-            if ( showcleared == 1 && getCleared ( id.toInt() ) == 1 )
-              ColorListItem *item = new ColorListItem ( listview, date, transactionname, amount, id, fromaccount );
+         if ( testdate >= displaydate || showcleared == 0 )
+           {
+             // display this transfer
+             if ( account->getParentAccountID ( accountid ) == -1 )
+              {
+                if ( showcleared == 1 && getCleared ( id.toInt() ) == 1 )
+                  ColorListItem *item = new ColorListItem ( listview, date, transactionname, amount, id, fromaccount );
+                else
+                  QListViewItem *item = new QListViewItem ( listview, date, transactionname, amount, id, fromaccount );
+              }
             else
-              QListViewItem *item = new QListViewItem ( listview, date, transactionname, amount, id, fromaccount );
-          }
-        else
-          {
-            if ( showcleared == 1 && getCleared ( id.toInt() ) == 1 )
-              ColorListItem *item = new ColorListItem ( listview, date, transactionname, amount, id );
-            else
-              QListViewItem *item = new QListViewItem ( listview, date, transactionname, amount, id );
+              {
+                if ( showcleared == 1 && getCleared ( id.toInt() ) == 1 )
+                  ColorListItem *item = new ColorListItem ( listview, date, transactionname, amount, id );
+                else
+                  QListViewItem *item = new QListViewItem ( listview, date, transactionname, amount, id );
+              }
           }
 
         counter = counter + 7;

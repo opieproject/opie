@@ -2,13 +2,10 @@ QashMoney - Budget Software for the Sharp Zaurus
 
 README
 
-Welcome to the latest version of QashMoney!  This app is designed to make your
-budgeting fast, inuitive and easy.
-
 This file lists all the important files in the qashmoney CVS directory and how
 to make the IPK file that goes on the Zaurus.  When you checkout the
-qashmoney module from CVS, it will create a directory on your hard drive called
-qashmoney.  These instructions assume you are in the directory.
+qashmoney-source module from CVS, it will create a directory on your hard drive called
+qashmoney-source.  These instructions assume you are in this directory.
 
 The first thing you need to do is have all the necessary cross-compile software
 and Qtopia installed on your system.  I assume you have already done this since
@@ -23,14 +20,11 @@ QashMoney.  Go to:
 
 http://www.sqlite.org
 
-to download this progam.  The SQLite library has already been compiled for the
-IPK and is in the 'install' directory.  So there is no need to compile SQLite
-for ARM but you can if you want.  There are instructions for that on the
-website.
+to download this progam.
 
 After that, set the correct environment variables for the package you
-are developing.Two scripts in the qashmoney are used for that purpose: x86.sh
-andarm.shIf you are buidling for x86 type:
+are developing. Two scripts in the qashmoney-source directory are used for that purpose: x86.sh
+and arm.sh.  If you are building for x86 type:
 
 source x86.sh
 
@@ -63,24 +57,7 @@ qvfb &
 and QashMoney should appear in the frambuffer.  You can use and test qashmoney
 here as you would on the Zaurus.
 
-If you compile the binary file for the Zaurus, another script in this directory
-will come in handy.  To automagically make the IPK file, type:
-
-su
-./make_ipk
-
-You need to be the root user to set the ownership of the binary and other
-files correctly.  The IPK file will appear in the qashmoney directory.  Now put
-this file onto the Zaurus and install!
-
-Two other scripts in the directory may be of use.  The make_x86 script cleans
-the directory and makes the x86 qashmoney binary automatically.  The make_arm
-scripts makes the ARM binary.  So you should really only have to type three
-commands the make the IPK file:
-
-./make_arm
-su
-./make_ipk
+If you want to compile the app and make the IPK file, check out the qashmoney-build module and see the README file in that module.
 
 I hope the program can be useful.  If you have any questions or comments, please
 contact me at qashmoneyman@attbi.com

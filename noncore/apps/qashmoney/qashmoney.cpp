@@ -14,8 +14,9 @@ Memory *memory = new Memory ();
 
 QashMoney::QashMoney () : QWidget ()
   {
-    preferences->addPreferences();
+    preferences->addPreferences ();
     preferences->initializeColumnPreferences ();
+    preferences->initializeSortingPreferences ();
 
     // set the text in the upper part of the frame
     setCaption ( tr ( "QashMoney" ) );
@@ -153,7 +154,7 @@ void QashMoney::changeTabDisplay ()
           transaction->displayTransactions ( transactiondisplay->listview, accountid, children, displaytext, newdate );
 
         // display transfers
-        transfer->displayTransfers ( transactiondisplay->listview, accountid, children );
+        transfer->displayTransfers ( transactiondisplay->listview, accountid, children, newdate );
 
         // open a new preferences object and resize the transaction display columns
         // each column will have a different size based on whether we are looking at a child
@@ -178,6 +179,12 @@ void QashMoney::changeTabDisplay ()
             transactiondisplay->listview->setColumnWidth ( 4, preferences->getColumnPreference ( 9 ) ); // transaction account width
             transactiondisplay->listview->setColumnWidthMode ( 4, QListView::Manual );
           }
+	
+	// pull the column sorting preference from the preferences table, and configure the listview accordingly
+	int column = 0;
+	int direction = 0;
+	preferences->getSortingPreference ( 2, &column, &direction );
+	transactiondisplay->listview->setSorting ( column, direction );
 
         // show the window
         transactiondisplay->show();
@@ -196,6 +203,12 @@ void QashMoney::changeTabDisplay ()
         // resize the account display columns
         accountdisplay->listview->setColumnWidth ( 0, preferences->getColumnPreference ( 1 ) );
         accountdisplay->listview->setColumnWidth ( 1, preferences->getColumnPreference ( 2 ) );
+
+	// set sorting preference on account display columns
+	int column = 0;
+	int direction = 0;
+	preferences->getSortingPreference ( 1, &column, &direction );
+	accountdisplay->listview->setSorting ( column, direction );
 
         // display the accounts
         if ( account->getNumberOfAccounts() != 0 )
@@ -262,7 +275,7 @@ void QashMoney::displayDatePreferencesDialog ()
           transaction->displayTransactions ( transactiondisplay->listview, accountid, children, displaytext, newdate );
 
         if ( transfer->getNumberOfTransfers() != 0 )
-          transfer->displayTransfers ( transactiondisplay->listview, accountid, children );
+          transfer->displayTransfers ( transactiondisplay->listview, accountid, children, newdate );
       }
     else if ( accountdisplay->isVisible() )
       {
@@ -300,7 +313,7 @@ void QashMoney::displayTransactionPreferencesDialog ()
           transaction->displayTransactions ( transactiondisplay->listview, accountid, children, displaytext, newdate );
 
         if ( transfer->getNumberOfTransfers() != 0 )
-          transfer->displayTransfers ( transactiondisplay->listview, accountid, children );
+          transfer->displayTransfers ( transactiondisplay->listview, accountid, children, newdate );
       }
     else
       {
@@ -385,6 +398,6 @@ void QashMoney::setTransactionDisplayDate ()
           }
       }
     else
-      newdate = QDate ( 1, 1, 1000 );
+      newdate = QDate ( 1900, 1, 1 );
   }
 

@@ -97,7 +97,7 @@ int TransferDialog::getMonth ()
 
 int TransferDialog::getYear ()
   {
-    return day;
+    return year;
   }
 
 void TransferDialog::showCalculator ()

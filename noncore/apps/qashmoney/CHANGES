@@ -2,6 +2,14 @@ QashMoney - Budget Software for the Sharp Zaurus
 
 CHANGES
 
+0.76 - 5/21/03
+
+	Updated postinst file so app will install on new Sharp ROM 3.1
+        Improved algorithm for selecting cleared transaction
+        Fixed budget display bug
+
+----------------------------------------------------------------------------------
+
 11/1/02 - Initial release of 0.2 version.  Considered stable beta version.
 11/16/02 - Release of version 0.3.  This is a stable version adding function to
  transfer money between accounts.  Several bugs fixes and speed enhancements

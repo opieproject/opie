@@ -22,9 +22,8 @@ Account::~Account ()
 void Account::addAccount ( QString name, int parentid, float balance, int type, QString description, float creditlimit,
 					int statementyear, int statementmonth, int statementday, float statementbalance, const char *currency  )
   {
-    int r = sqlite_exec_printf ( adb, "insert into accounts2 values ( '%q', %i, %.2f, %i, '%q', %.2f, %i, %i, %i, %.2f, '%q', 0, 0, 0, 0, 0, NULL );", 0, 0, 0,
+    sqlite_exec_printf ( adb, "insert into accounts2 values ( '%q', %i, %.2f, %i, '%q', %.2f, %i, %i, %i, %.2f, '%q', 0, 0, 0, 0, 0, NULL );", 0, 0, 0,
       (const char *) name, parentid, balance, type, (const char *) description, creditlimit, statementyear, statementmonth, statementday, statementbalance, currency );
-    cout << "Results = " << r << endl;
   }
 
 void Account::updateAccount ( QString name, QString description, QString currencycode, int accountid )
@@ -225,6 +224,12 @@ void Account::displayAccounts ( QListView *listview )
         listview->setColumnWidthMode ( 2, QListView::Manual );
         listview->setColumnWidthMode ( 3, QListView::Manual );
       }
+
+    // Now reset the column sorting to user preference
+    int column = 0;
+    int direction = 0;
+    preferences->getSortingPreference ( 1, &column, &direction );
+    listview->setSorting ( column, direction );
   }
 
 int Account::displayParentAccountNames ( QComboBox *combobox, QString indexstring )

@@ -1,6 +1,7 @@
 #include "budget.h"
 #include "transaction.h"
 #include <stdlib.h>
+#include <iostream.h>
 
 extern Transaction *transaction;
 
@@ -62,7 +63,7 @@ QStringList* Budget::getBudgetNames ()
     QStringList *names = new QStringList ();
     char **results;
     int rows, counter;
-    sqlite_get_table ( bdb, "select name from budgets order by name asc;", &results, &rows, NULL, NULL );
+    sqlite_get_table ( bdb, "select name from budgets;", &results, &rows, NULL, NULL );
     names->append ( "None" );
     for ( counter = 0; counter < rows; counter++ )
       names->append ( results [ counter+1 ] );

@@ -50,6 +50,7 @@ class TransactionDisplay : public QWidget
     void showCalculator ();
     void showCalendar ();
     void setTransactionDisplayDate ();
+    void saveSortingPreference ( int column );
 
   private:
     int accountid, fromaccount, fromparent, toaccount, toparent, day, month, year, transferid;

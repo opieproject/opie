@@ -1,6 +1,7 @@
 #include <qdatetime.h>
 #include <qmessagebox.h>
 #include <qheader.h>
+#include <iostream.h>
 
 #include "accountdisplay.h"
 #include "newaccount.h"
@@ -45,10 +46,11 @@ AccountDisplay::AccountDisplay ( QWidget *parent ) : QWidget ( parent )
     listview->setMultiSelection ( FALSE );
     connect ( listview, SIGNAL ( expanded ( QListViewItem * ) ), this, SLOT ( setAccountExpanded ( QListViewItem * ) ) );
     connect ( listview, SIGNAL ( collapsed ( QListViewItem * ) ), this, SLOT ( setAccountCollapsed ( QListViewItem * ) ) );
-
+    
     listview->header()->setTracking ( FALSE );
     connect ( listview->header(), SIGNAL ( sizeChange ( int, int, int ) ), this, SLOT ( saveColumnSize ( int, int, int ) ) );
-
+    connect ( listview->header(), SIGNAL ( clicked ( int ) ), this, SLOT ( saveSortingPreference ( int ) ) );
+    
     layout = new QVBoxLayout ( this, 2, 5 );
     layout->addWidget ( firstline );
     layout->addWidget ( listview );
@@ -268,14 +270,12 @@ void AccountDisplay::getTransferAccounts ( QListViewItem * item )
             // set the cleared integer if the checkbox is checked
             if ( td->clearedcheckbox->isChecked() == TRUE )
               cleared = 1;
-
+            cout << "Year from transferdialog = " << td->getYear() << endl;
             // add the transfer with a new date if its been edited or use the default date
             if ( td->getDateEdited () == TRUE )
-              transfer->addTransfer ( firstaccountid, account->getParentAccountID ( firstaccountid ), secondaccountid,
-              account->getParentAccountID ( secondaccountid ), td->getDay(), td->getMonth(), td->getYear(), td->amount->text().toFloat(), cleared );
+              transfer->addTransfer ( firstaccountid, account->getParentAccountID ( firstaccountid ), secondaccountid, account->getParentAccountID ( secondaccountid ), td->getDay(), td->getMonth(), td->getYear(), td->amount->text().toFloat(), cleared );
             else
-              transfer->addTransfer ( firstaccountid, account->getParentAccountID ( firstaccountid ), secondaccountid,
-                account->getParentAccountID ( secondaccountid ), defaultday, defaultmonth, defaultyear, td->amount->text().toFloat(), cleared );
+              transfer->addTransfer ( firstaccountid, account->getParentAccountID ( firstaccountid ), secondaccountid, account->getParentAccountID ( secondaccountid ), defaultday, defaultmonth, defaultyear, td->amount->text().toFloat(), cleared );
 
             // update account balances of both accounts and parents if necessary
             account->updateAccountBalance ( firstaccountid );
@@ -345,6 +345,11 @@ void AccountDisplay::saveColumnSize ( int column, int oldsize, int newsize )
           break;
       }
 
+  }
+
+void AccountDisplay::saveSortingPreference ( int column )
+  {
+    preferences->changeSortingPreference ( 1, column );
   }
 
 int AccountDisplay::getIDColumn ()

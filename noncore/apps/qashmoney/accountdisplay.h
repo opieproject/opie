@@ -42,6 +42,7 @@ class AccountDisplay : public QWidget
       void saveColumnSize ( int column, int oldsize, int newsize );
       void setAccountExpanded ( QListViewItem *item );
       void setAccountCollapsed ( QListViewItem *item );
+      void saveSortingPreference ( int column );
 
     private:
       int type, firstaccountid, secondaccountid, cleared;

@@ -1,7 +1,8 @@
 Package: qashmoney
+Files: bin/qashmoney pics/qashmony/* pics/qashmony/flags/* apps/Applications/qashmoney.desktop
 Priority: optional
-Version: 0.75
+Version: 0.76
 Architecture: arm
-Maintainer: Allen Forsythe qashmoneyman@attbi.com
+Maintainer: Allen Forsythe allen@qashmoney.org
 Section: Applications
 Description: QashMoney provides an intuitive and fast way to keep track of your accounts and budgets.
