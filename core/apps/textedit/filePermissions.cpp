@@ -13,15 +13,11 @@
 ****************************************************************************/
 #include "filePermissions.h"
 
-#include <qfile.h>
 #include <qfileinfo.h>
 
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlineedit.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
 #include <qmessagebox.h>
 
 #include <unistd.h>

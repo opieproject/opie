@@ -413,7 +413,7 @@ ERROR:
 KeyTrans* KeyTrans::defaultKeyTrans()
 {
   QCString txt =
-#include "default.keytab.h"
+  #include "default.keytab.h"
   ;
   QBuffer buf(txt);
   return fromDevice("[buildin]",buf);
@@ -697,7 +697,6 @@ void test()
   // Opening sequence
 
   QCString txt =
-#include "default.keytab.h"
   ;
   QBuffer buf(txt);
   if (0) TestTokenizer(buf);

@@ -52,21 +52,12 @@
 #include "session.h"
 #include <qpe/config.h>
 
-#include <qpe/resource.h>
-#include <qpe/sound.h>
 
 #if !(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
 #endif
 
-#include <qcursor.h>
-#include <qregexp.h>
-#include <qpainter.h>
 #include <qclipboard.h>
-#include <qstyle.h>
-#include <qfile.h>
-#include <qdragobject.h>
-#include <qnamespace.h>
 
 #include <stdio.h>
 #include <stdlib.h>

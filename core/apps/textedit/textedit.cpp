@@ -19,36 +19,18 @@
 #include <opie2/ofiledialog.h>
 #include <opie2/ofontselector.h>
 
-#include <qpe/fontdatabase.h>
-#include <qpe/global.h>
-#include <qpe/fileselector.h>
-#include <qpe/applnk.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 #include <qmenubar.h>
 #include <qtoolbar.h>
-#include <qpe/qcopenvelope_qws.h>
 
-#include <qpoint.h>
 #include <qtextstream.h>
-#include <qdatetime.h>
 #include <qclipboard.h>
-#include <qstringlist.h>
 #include <qaction.h>
-#include <qcolordialog.h>
-#include <qfileinfo.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
-#include <qobjectlist.h>
-#include <qpopupmenu.h>
-#include <qspinbox.h>
-#include <qtoolbutton.h>
-#include <qwidgetstack.h>
-#include <qcheckbox.h>
-#include <qcombo.h>
 #include <qlayout.h>
-#include <qapplication.h>
 #include <qtimer.h>
 #include <qdir.h>
 #include <unistd.h>

@@ -21,8 +21,6 @@
 #include <qpe/qcopenvelope_qws.h>
 
 #include <qapplication.h>
-#include <qstringlist.h>
-#include <qdatastream.h>
 #include <qtimer.h>
 
 #include <stdlib.h>

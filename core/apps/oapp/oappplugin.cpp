@@ -1,8 +1,5 @@
-#include "oappinterface.h"
 #include "oappplugin.h"
-#include <qlist.h>
 #include <qwidget.h>
-#include <qpe/quuid.h>
 
 OAppPlugin::OAppPlugin(OAppPos pos)
 {

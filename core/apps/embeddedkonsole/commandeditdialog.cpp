@@ -2,20 +2,12 @@
 
 #include "commandeditdialog.h"
 #include "playlistselection.h"
-#include <qstring.h>
 #include <qpe/config.h>
-#include <qtoolbar.h>
-#include <qwidget.h>
-#include <qmenubar.h>
 #include <qpe/resource.h>
-#include <qlist.h>
 #include <qtoolbutton.h>
-#include <qvbox.h>
-#include <qlistview.h>
 #include <qlineedit.h>
 #include <qheader.h>
 #include <qlabel.h>
-#include <qmessagebox.h>
 #include "smallcommandeditdialogbase.h"
 
 CommandEditDialog::CommandEditDialog(QWidget *parent, const char* name, WFlags fl )

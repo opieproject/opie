@@ -1,6 +1,5 @@
 #include <qdir.h>
 
-#include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qlibrary.h>
 #include <oappinterface.h>

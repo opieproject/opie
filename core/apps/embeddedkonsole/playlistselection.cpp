@@ -17,14 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qpe/applnk.h>
-#include <qpe/resource.h>
-#include <qpainter.h>
-#include <qimage.h>
 #include <qheader.h>
-#include <qlistview.h>
-#include <qlist.h>
-#include <qpixmap.h>
 
 #include "playlistselection.h"
 

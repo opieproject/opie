@@ -1,7 +1,5 @@
 #include <qfile.h>
-#include <qstring.h>
 #include <qdragobject.h>
-#include <qregexp.h>
 
 /* need to get Global::helpPath() */
 #define QTOPIA_INTERNAL_LANGLIST

@@ -33,33 +33,13 @@
 
 #include <qpe/resource.h>
 
-#include <qdir.h>
-#include <qevent.h>
-#include <qdragobject.h>
-#include <qobjectlist.h>
-#include <qtoolbutton.h>
-#include <qtoolbar.h>
-#include <qpushbutton.h>
-#include <qfontdialog.h>
-#include <qglobal.h>
-#include <qpainter.h>
 #include <qmenubar.h>
-#include <qmessagebox.h>
-#include <qaction.h>
-#include <qapplication.h>
-#include <qfontmetrics.h>
-#include <qcombobox.h>
-#include <qevent.h>
-#include <qtabwidget.h>
 #include <qtabbar.h>
 #include <qpe/config.h>
-#include <qstringlist.h>
-#include <qpalette.h>
 #include <qfontdatabase.h>
 #include <qfile.h>
 #include <qspinbox.h>
 #include <qlayout.h>
-#include <qvbox.h>
 
 #include <sys/wait.h>
 #include <stdio.h>
@@ -67,7 +47,6 @@
 #include <assert.h>
 
 #include "konsole.h"
-#include "keytrans.h"
 #include "commandeditdialog.h"
 
 class EKNumTabBar : public QTabBar

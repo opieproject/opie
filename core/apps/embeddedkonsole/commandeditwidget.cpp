@@ -29,12 +29,8 @@
 */
 #include "commandeditwidget.h"
 
-#include <qpushbutton.h>
 #include "playlistselection.h"
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
 
 /* 
  *  Constructs a Form1 which is a child of 'parent', with the 

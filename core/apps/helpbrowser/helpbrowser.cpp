@@ -24,33 +24,11 @@
 
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
-#include <qpe/mimetype.h>
-#include <qpe/applnk.h>
-#include <qpe/global.h>
 
-#include <qstatusbar.h>
-#include <qdragobject.h>
-#include <qpixmap.h>
-#include <qpopupmenu.h>
 #include <qmenubar.h>
 #include <qtoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qtoolbutton.h>
-#include <qiconset.h>
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qstylesheet.h>
-#include <qmessagebox.h>
-#include <qfiledialog.h>
-#include <qevent.h>
-#include <qlineedit.h>
-#include <qobjectlist.h>
 #include <qfileinfo.h>
-#include <qfile.h>
-#include <qdatastream.h>
-#include <qprinter.h>
-#include <qsimplerichtext.h>
-#include <qpaintdevicemetrics.h>
 #include <qaction.h>
 
 #include <cctype>
