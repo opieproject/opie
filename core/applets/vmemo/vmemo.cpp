@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.10 2002-02-15 21:10:04 jeremy Exp $
+ * $Id: vmemo.cpp,v 1.11 2002-02-16 03:38:51 jeremy Exp $
  */
 
 #include <sys/utsname.h>
@@ -399,5 +399,5 @@ void VMemo::record(void)
   qWarning("VMemo::record() -> playing done recording sound");
   QSound::play(Resource::findSound("vmemoe"));
   qWarning("VMemo::record() -> terminating");
-  QMessageBox::information(0, "VMemo", "Recording Done", 1);
+  //QMessageBox::information(0, "VMemo", "Recording Done", 1);
 }
