@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Business</source>
-        <translation>Proffessionel</translation>
+        <translation>Professionel</translation>
     </message>
     <message>
         <source>Personal</source>
