@@ -21,6 +21,7 @@
 #include <qregexp.h>
 #include <qtextstream.h>
 #include <qtextview.h>
+#include <qpe/storage.h>
 
 #include <errno.h>
 #include <stdlib.h>
@@ -71,9 +72,15 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
 
 //todo make less static here and use Storage class to get infos
   if(totalLocations == 0){
-    backupLocations.insert("Documents", "/root/Documents");
-    backupLocations.insert("CF", "/mnt/cf");
-    backupLocations.insert("SD", "/mnt/card");
+    QString home = QDir::homeDirPath();
+    home += "/Documents";
+    backupLocations.insert("Documents", home);
+    if (StorageInfo::hasCf()) {
+      backupLocations.insert("CF", "/mnt/cf");
+    }
+    if (StorageInfo::hasSd || StorageInfo::hasMmc) {
+      backupLocations.insert("SD", "/mnt/card");
+    }
   }
   else{
     for(int i = 0; i < totalLocations; i++){
