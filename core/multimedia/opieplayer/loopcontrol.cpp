@@ -380,8 +380,12 @@ bool LoopControl::init( const QString& filename ) {
     if ( hasAudioChannel ) {
   int astream = 0;
 
-  channels = mediaPlayerState->curDecoder()->audioChannels( astream );
-  qDebug( "LC- channels = %d", channels );
+    if ( mediaPlayerState->curDecoder()->pluginName() == QString("LibMpeg3Plugin") )
+        channels = 2; //dont akx me why, but it needs this hack
+    else
+        channels = mediaPlayerState->curDecoder()->audioChannels( astream );
+
+    qDebug( "LC- channels = %d", channels );
   
   if ( !total_audio_samples )
       total_audio_samples = mediaPlayerState->curDecoder()->audioSamples( astream );
