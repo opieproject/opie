@@ -6,6 +6,7 @@
    - Attendees
    
 - OFileSelector
+   - fix the weird view change bug delete m_pseudoLayout crash
    - DocLnk when not in Document Mode ( and vice versa )
    - MultipleDocuments
    - TreeView have a own OFileSelectorItem for this

@@ -596,8 +596,8 @@ void OFileSelector::slotViewCheck(const QString &view ){
       delete m_location;
       delete m_up;
       delete m_pseudo;
-      if(m_pseudoLayout!=0 )
-	delete m_pseudoLayout;
+      //if(m_pseudoLayout!=0 )
+//	delete m_pseudoLayout;
     }
     m_View = 0;
     m_boxToolbar = 0;
@@ -675,9 +675,9 @@ void OFileSelector::initializeListView()
   delete m_docButton;
   delete m_location;
   delete m_up;
-  delete m_pseudo;
-  if(m_pseudoLayout!=0 ) // why did you overload malloc
-    delete m_pseudoLayout;
+  //delete m_pseudo;
+  //if(m_pseudoLayout!=0 ) // why did you overload malloc
+    //delete m_pseudoLayout;
   m_boxToolbar = 0;
   m_homeButton = 0;
   m_docButton = 0;
