@@ -400,63 +400,76 @@ void ScreenshotControl::savePixmap()
 
 void ScreenshotControl::performGrab()
 {
-  snapshot = QPixmap::grabWindow( QPEApplication::desktop()->winId(), 0, 0, QApplication::desktop()->width(),  QApplication::desktop()->height() );
+		snapshot = QPixmap::grabWindow( QPEApplication::desktop()->winId(), 0, 0, QApplication::desktop()->width(),  QApplication::desktop()->height() );
 
-  if (buttonPushed == 1) {
-    qDebug("grabbing screen");
-    grabTimer->stop();
-    show();
-    qApp->processEvents();
-    savePixmap();
-  }
-  else {
-    grabTimer->stop();
+		if (buttonPushed == 1) {
+				qDebug("grabbing screen");
+				grabTimer->stop();
+				show();
+				qApp->processEvents();
+				savePixmap();
+		} else {
+				grabTimer->stop();
 
-    struct sockaddr_in raddr;
-    struct hostent *rhost_info;
-    int sock = -1;
-    bool ok = false;
+				struct sockaddr_in raddr;
+				struct hostent *rhost_info;
+				int sock = -1;
+				bool ok = false;
 
-    if (( rhost_info = (struct hostent *) ::gethostbyname ((char *) SCAP_hostname )) != 0 ) {
-      ::memset ( &raddr, 0, sizeof (struct sockaddr_in));
-      ::memcpy ( &raddr. sin_addr, rhost_info-> h_addr, rhost_info-> h_length );
-      raddr. sin_family = rhost_info-> h_addrtype;
-      raddr. sin_port = htons ( SCAP_port );
+				if (( rhost_info = (struct hostent *) ::gethostbyname ((char *) SCAP_hostname )) != 0 ) {
+						::memset ( &raddr, 0, sizeof (struct sockaddr_in));
+						::memcpy ( &raddr. sin_addr, rhost_info-> h_addr, rhost_info-> h_length );
+						raddr. sin_family = rhost_info-> h_addrtype;
+						raddr. sin_port = htons ( SCAP_port );
 
-      if (( sock = ::socket ( AF_INET, SOCK_STREAM, 0 )) >= 0 )
-      {
-        if ( ::connect ( sock, (struct sockaddr *) & raddr, sizeof (struct sockaddr)) >= 0 ) {
-          QString header;
+						if (( sock = ::socket ( AF_INET, SOCK_STREAM, 0 )) >= 0 ) {
+								if ( ::connect ( sock, (struct sockaddr *) & raddr, sizeof (struct sockaddr)) >= 0 ) {
 
-          QPixmap pix = ( snapshot.width() > snapshot.height() ) ? snapshot : snapshot.xForm( QWMatrix().rotate(90) );
-          QImage img = pix.convertToImage().convertDepth( 16 ); // could make that also depth independent, if hh.org/scap can handle it
+										QString header;
 
-          header = "POST /scap/capture.cgi?%1+%2 HTTP/1.1\n"  // 1: model / 2: user
-                   "Content-length: %3\n"                     // 3: content length
-                   "Content-Type: image/gif\n"
-                   "Host: %4\n"                               // 4: scap host
-                   "\n";
+										QPixmap pix;
+										QString displayEnv = getenv("QWS_DISPLAY");
+										qDebug(displayEnv);
 
-          header = header.arg( "" ).arg( ::getenv ( "USER" ) ).arg( img.numBytes() ).arg( SCAP_hostname );
+										QString SCAP_model="";
+#warning FIXME: model string should be filled with actual device model
+												if( snapshot.width() > 320)
+														SCAP_model ="Corgi";
+										
+										if(displayEnv == "QVFb:0")  {//set this if you plan on using this app in qvfb!!
+ 												pix = snapshot.xForm(QWMatrix().rotate(90));
+										} else
+												pix = ( snapshot.width() > snapshot.height() ) ? snapshot : snapshot.xForm( QWMatrix().rotate(90) ); 
+									
+										QImage img = pix.convertToImage().convertDepth( 16 ); // could make that also depth independent, if hh.org/scap can handle it
 
-          if ( !pix.isNull() )
-          {
-            const char *ascii = header.latin1( );
-            uint ascii_len = ::strlen( ascii );
-            ::write ( sock, ascii, ascii_len );
-            ::write ( sock, img.bits(), img.numBytes() );
+										header = "POST /scap/capture.cgi?%1+%2 HTTP/1.1\n"  // 1: model / 2: user
+												"Content-length: %3\n"                     // 3: content length
+												"Content-Type: image/png\n"
+												"Host: %4\n"                               // 4: scap host
+												"\n";
 
-            ok = true;
-          }
-        }
-        ::close ( sock );
-      }
-    }
-    if ( ok )
-      QMessageBox::information( 0, tr( "Success" ), QString( "<p>%1</p>" ).arg ( tr( "Screenshot was uploaded to %1" )).arg( SCAP_hostname ));
-    else
-      QMessageBox::warning( 0, tr( "Error" ), QString( "<p>%1</p>" ).arg( tr( "Connection to %1 failed." )).arg( SCAP_hostname ));
-  }
+		 
+										header = header.arg( SCAP_model).arg( ::getenv( "USER" ) ).arg( img.numBytes() ).arg( SCAP_hostname );
+										qDebug(header);
+					
+										if ( !pix.isNull() )  {
+												const char *ascii = header.latin1( );
+												uint ascii_len = ::strlen( ascii );
+												::write ( sock, ascii, ascii_len );
+												::write ( sock, img.bits(), img.numBytes() );
+
+												ok = true;
+										}
+								}
+								::close ( sock );
+						}
+				}
+				if ( ok )
+						QMessageBox::information( 0, tr( "Success" ), QString( "<p>%1</p>" ).arg ( tr( "Screenshot was uploaded to %1" )).arg( SCAP_hostname ));
+				else
+						QMessageBox::warning( 0, tr( "Error" ), QString( "<p>%1</p>" ).arg( tr( "Connection to %1 failed." )).arg( SCAP_hostname ));
+		}
 
 }
 
