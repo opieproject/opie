@@ -86,12 +86,12 @@ Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
         ts << "misc.memcpy_method:glibc\n";
         ts << "# uncomment if you experience double speed audio \n #audio.oss_sync_method:softsync\n";
         ts << "codec.ffmpeg_pp_quality:3\n";
-        ts << "audio.num_buffers:100\n";
+        ts << "audio.num_buffers:50\n";
         ts << "audio.size_buffers:4160\n";
         ts << "video.num_buffers:20\n";
         ts << "video.size_buffers:4096\n";
         ts << "audio.out_num_audio_buf:16\n";
-        ts << "audio.out_size_audio_buf:4096\n";
+        ts << "audio.out_size_audio_buf:8096\n";
         ts << "audio.out_size_zero_buf:1024\n";
         ts << "audio.passthrough_offset:0\n";
         f.close();
