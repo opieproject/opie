@@ -232,6 +232,7 @@ namespace OpieTooth {
 
             RemoteDevice *dev = it.current();
             deviceItem = new QListViewItem( ListView2 , dev->name() );
+            deviceItem->setExpandable ( true );
 
             if ( deviceActive( dev ) ) {
                 deviceItem->setPixmap( 1 , onPix );
@@ -321,12 +322,19 @@ namespace OpieTooth {
     void BlueBase::addConnectedDevices() {
 
 
+        //mac address
+
     }
 
     /**
      * Find out if a device can  currently be reached
      */
     bool BlueBase::deviceActive( RemoteDevice *device ) {
+
+        // search by mac
+        //
+       localDevice->isAvailable( device->mac() );
+
         return true;
     }
 
