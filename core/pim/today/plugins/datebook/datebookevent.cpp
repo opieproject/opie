@@ -20,6 +20,10 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 
+#include <opie/odevice.h>
+
+using namespace Opie;
+
 DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 			     QWidget* parent,
 			     bool show_location,
@@ -62,10 +66,8 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
     if ( show_notes ) {
         msg += "<br> <i>note</i>:" +( (ev).notes() ).mid( 0, maxCharClip );
     }
-
     setText( msg );
     connect( this, SIGNAL( clicked() ), this, SLOT( editMe() ) );
-    //  setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
 }
 
 
@@ -75,7 +77,6 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
  * @return formatted to am/pm is system is set to it
  */
 QString DateBookEvent::ampmTime( QTime tm ) {
-
     QString s;
     if( ampm ) {
         int hour = tm.hour();
@@ -92,7 +93,6 @@ QString DateBookEvent::ampmTime( QTime tm ) {
         s.sprintf( "%2d:%02d", tm.hour(), tm.minute() );
         return s;
     }
-
 }
 
 
@@ -100,23 +100,17 @@ QString DateBookEvent::ampmTime( QTime tm ) {
  * starts the edit dialog as known from datebook
  */
 void DateBookEvent::editEventSlot( const Event &e ) {
-  startDatebook();
 
-  while( !QCopChannel::isRegistered( "QPE/Datebook" ) ) qApp->processEvents();
-  QCopEnvelope env( "QPE/Datebook", "editEvent(int)" );
-  env << e.uid();
+    if ( ODevice::inst()->system() == System_Zaurus ) {
+        QCopEnvelope env( "QPE/Application/datebook", "raise()" );
+    } else {
+        QCopEnvelope env( "QPE/Datebook", "editEvent(int)" );
+        env << e.uid();
+    }
 }
 
-
-/**
- * launches datebook
- */
-void DateBookEvent::startDatebook() {
-    QCopEnvelope e( "QPE/System", "execute(QString)" );
-    e << QString( "datebook" );
-}
 
 void DateBookEvent::editMe() {
-  emit editEvent( event.event() );
+    emit editEvent( event.event() );
 }
 

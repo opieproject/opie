@@ -1,6 +1,8 @@
 0.5.2
 
 * refresh settings
+* only launch datebook config when clicked on a date ( opie only )
+* less qcop trouble on sharps retail rom 
 
 0.5.1
 

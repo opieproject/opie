@@ -1,7 +1,6 @@
 TEMPLATE = lib
 CONFIG -= moc
-CONFIG += qt debug
-
+CONFIG += qt release
 # Input
 HEADERS = datebookplugin.h datebookpluginimpl.h datebookpluginconfig.h \
 	datebookevent.h datebookpluginwidget.h
@@ -13,7 +12,7 @@ INCLUDEPATH     += $(OPIEDIR)/include \
 DEPENDPATH      += $(OPIEDIR)/include \
 		../ ../library
 
-LIBS+= -lqpe -lopie
+LIBS+= -lqpe -lopie 
 
 DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todaydatebookplugin

@@ -39,7 +39,6 @@ private slots:
     void editEventSlot(const Event &e);
     void editMe();
 private:
-    void startDatebook();
     DateBookDB *db;
     QString ampmTime(QTime);
     const EffectiveEvent event;
