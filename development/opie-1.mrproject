@@ -9,9 +9,9 @@
   </phases>
   <calendars>
     <day-types>
-      <day-type id="0" name="Working" description="A default working day"/>
-      <day-type id="1" name="Nonworking" description="A default non working day"/>
-      <day-type id="2" name="Use base" description="Use day from base calendar"/>
+      <day-type id="0" name="Arbeitstag" description="Ein Vorgabe-Arbeitstag"/>
+      <day-type id="1" name="Kein Arbeitstag" description="Ein Vorgabetag, an dem nicht gearbeitet wird"/>
+      <day-type id="2" name="Basis verwenden" description="Tag aus dem Basis-Kalender verwenden"/>
     </day-types>
     <calendar id="1" name="Default">
       <default-week mon="0" tue="0" wed="0" thu="0" fri="0" sat="1" sun="1"/>
@@ -40,73 +40,79 @@
       </task>
       <task id="13" name="Crashes and Odd Behaviour" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
         <task id="14" name="OPIE FTP crashes on startup" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="15" name="PDF Viewer crashes on all of my pdfs" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="16" name="opie-writer with multiple pages new KDE backport?" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="17" name="uBrowser and www.heise.de end in endless loop" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="18" name="Datebook in Weekview and WeekLst The by week navigation ( &lt; &gt; ) and (&lt;&lt; &gt;&gt; ) show odd behaviour ( &gt; ) is not working" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="19" name="Datebook ConfigDialog has wrong layout" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="20" name="NetSytsemtime ErrorDialog too small for one line text use &lt;qt&gt;" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="21" name="NetSytsemtime does default to 24h but opie to AM/PM fix it" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="22" name="Formatter has problem with UI and different langs" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="23" name="Networksettings is missing a PPP Module" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="24" name="Networksettings is not in my FEED" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="25" name="Security and Layout on translations" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="26" name="Usermanager floatable toolbar fix it" note="" work="278100" start="20030518T000000Z" end="20030521T051500Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="27" name="Todolist on ARM is crahing on Delete All Completed" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="15" name="OPIE FTP has layout issues with translation. menubar too big and covering the tabwidget" note="" work="28800" start="20030518T000000Z" end="20030518T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="16" name="PDF Viewer crashes on all of my pdfs" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="17" name="opie-writer with multiple pages new KDE backport?" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="18" name="uBrowser and www.heise.de end in endless loop" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="19" name="Datebook in Weekview and WeekLst The by week navigation ( &lt; &gt; ) and (&lt;&lt; &gt;&gt; ) show odd behaviour ( &gt; ) is not working" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="20" name="Datebook ConfigDialog has wrong layout" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="21" name="NetSytsemtime ErrorDialog too small for one line text use &lt;qt&gt;" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="22" name="NetSytsemtime does default to 24h but opie to AM/PM fix it" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="23" name="Formatter has problem with UI and different langs" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="24" name="Networksettings is missing a PPP Module" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="25" name="Networksettings is not in my FEED" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="26" name="Security and Layout on translations" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="27" name="Usermanager floatable toolbar fix it" note="" work="278100" start="20030518T000000Z" end="20030521T051500Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="28" name="Todolist on ARM is crahing on Delete All Completed" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="29" name="Todolist odditites with Recurrence star date and handling of alarms" note="" work="28800" start="20030518T000000Z" end="20030518T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
       </task>
-      <task id="28" name="improve i18n/docu" note="" work="1728000" start="20030518T000000Z" end="20030607T000000Z" percent-complete="0" type="normal" scheduling="fixed-work">
-        <task id="29" name="use i18n/xx with every app" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="30" name="check if the coreapps work in !en-langages" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="31" name="translate the .desktop-files" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="32" name="update/write documentation" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="33" name="opie-console is missing German translation" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="34" name="OPIE IRC refuses to be translated? namespaces?" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="35" name="OPIE sheet refuses to be translated as well" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="36" name="TinyKATE misses translation? possible at all?" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="37" name="VNC German translation and consistency Bookmarkname vs. Lesezeichen" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="38" name="opie-writer ts doable?" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="39" name="Asteroids +Translation Message does not fit screen" note="" work="278100" start="20030518T000000Z" end="20030521T051500Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="40" name="Launcher/QPE not everything is translated" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="41" name="backgammon TS" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="42" name="KBounce Pause and ABout dialog not translated translatable?" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="43" name="Datebook Recurrence Dialog not fully translated or translatable" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="44" name="SF Cave TS" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="45" name="buzzword translation of the buzzwords?" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="46" name="Backup and Restore .desktop  + TS" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="47" name="Quit Application has Layout issues with Translation set the label to richtext" note="" work="280800" start="20030518T000000Z" end="20030521T060000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="48" name="OPIE PLayerI PlayListWidget refuses to be translated" note="" work="274500" start="20030518T000000Z" end="20030521T041500Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="49" name="Usermanager missing TS possible?" note="" work="280800" start="20030518T000000Z" end="20030521T060000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-        <task id="50" name="Caption of wordgame says sample.. fix it" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      <task id="30" name="improve i18n/docu" note="" work="1728000" start="20030518T000000Z" end="20030607T000000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+        <task id="31" name="use i18n/xx with every app" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="32" name="check if the coreapps work in !en-langages" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="33" name="translate the .desktop-files" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="34" name="update/write documentation" note="" work="864000" start="20030518T000000Z" end="20030528T000000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="35" name="opie-console is missing German translation" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="36" name="OPIE IRC refuses to be translated? namespaces?" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="37" name="OPIE sheet refuses to be translated as well" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="38" name="TinyKATE misses translation? possible at all?" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="39" name="VNC German translation and consistency Bookmarkname vs. Lesezeichen" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="40" name="opie-writer ts doable?" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="41" name="Asteroids +Translation Message does not fit screen" note="" work="278100" start="20030518T000000Z" end="20030521T051500Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="42" name="Launcher/QPE not everything is translated" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="43" name="backgammon TS" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="44" name="KBounce Pause and ABout dialog not translated translatable?" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="45" name="Datebook Recurrence Dialog not fully translated or translatable" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="46" name="SF Cave TS" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="47" name="buzzword translation of the buzzwords?" note="" work="284400" start="20030518T000000Z" end="20030521T070000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="48" name="Backup and Restore .desktop  + TS" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="49" name="Quit Application has Layout issues with Translation set the label to richtext" note="" work="280800" start="20030518T000000Z" end="20030521T060000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="50" name="OPIE PLayerI PlayListWidget refuses to be translated" note="" work="274500" start="20030518T000000Z" end="20030521T041500Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="51" name="Usermanager missing TS possible?" note="" work="280800" start="20030518T000000Z" end="20030521T060000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+        <task id="52" name="Caption of wordgame says sample.. fix it" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
       </task>
-      <task id="51" name="DOCU bugs" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
-        <task id="52" name="OSEARCH link to settings is wrong" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      <task id="53" name="DOCU bugs" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+        <task id="54" name="OSEARCH link to settings is wrong" note="" work="288000" start="20030518T000000Z" end="20030521T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
       </task>
     </task>
-    <task id="53" name="OPIE beta1" note="" work="288000" start="20030601T000000Z" end="20030604T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+    <task id="55" name="Packaging bugs" note="" work="28800" start="20030518T000000Z" end="20030518T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+      <task id="56" name="task-opie-pim is missing osearch" note="" work="28800" start="20030518T000000Z" end="20030518T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      <task id="57" name="task-opie-settings: remove tabmanager which is not part of the release" note="" work="28800" start="20030518T000000Z" end="20030518T080000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+    </task>
+    <task id="58" name="OPIE beta1" note="" work="288000" start="20030601T000000Z" end="20030604T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
       <constraint type="start-no-earlier-than" time="20030601T000000Z"/>
     </task>
-    <task id="54" name="OPIE beta 2" note="" work="266400" start="20030614T000000Z" end="20030617T020000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+    <task id="59" name="OPIE beta 2" note="" work="266400" start="20030614T000000Z" end="20030617T020000Z" percent-complete="0" type="normal" scheduling="fixed-work">
       <predecessors>
-        <predecessor id="1" predecessor-id="53" type="FS"/>
+        <predecessor id="1" predecessor-id="58" type="FS"/>
       </predecessors>
-      <task id="55" name="decide which lang. will be released" note="" work="288000" start="20030614T000000Z" end="20030617T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+      <task id="60" name="decide which lang. will be released" note="" work="288000" start="20030614T000000Z" end="20030617T080000Z" percent-complete="0" type="normal" scheduling="fixed-work">
         <constraint type="start-no-earlier-than" time="20030614T000000Z"/>
       </task>
     </task>
-    <task id="56" name="OPIE rc1" note="" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work">
+    <task id="61" name="OPIE rc1" note="" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work">
       <predecessors>
-        <predecessor id="1" predecessor-id="28" type="FS"/>
+        <predecessor id="1" predecessor-id="30" type="FS"/>
         <predecessor id="1" predecessor-id="1" type="FS"/>
-        <predecessor id="1" predecessor-id="55" type="FS"/>
-        <predecessor id="1" predecessor-id="54" type="FS"/>
+        <predecessor id="1" predecessor-id="60" type="FS"/>
+        <predecessor id="1" predecessor-id="59" type="FS"/>
       </predecessors>
-      <task id="57" name="test final images" note="" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-      <task id="58" name="write Announcement" note="Sonntag, 18.05.2003, 16:14&#10;" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
-      <task id="59" name="update Webpages" note="" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      <task id="62" name="test final images" note="" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      <task id="63" name="write Announcement" note="Sonntag, 18.05.2003, 16:14&#10;" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
+      <task id="64" name="update Webpages" note="" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
     </task>
-    <task id="60" name="OPIE 1.0" note="" work="0" start="20030704T170000Z" end="20030704T170000Z" percent-complete="0" type="milestone" scheduling="fixed-work">
+    <task id="65" name="OPIE 1.0" note="" work="0" start="20030704T170000Z" end="20030704T170000Z" percent-complete="0" type="milestone" scheduling="fixed-work">
       <predecessors>
-        <predecessor id="1" predecessor-id="56" type="FS"/>
+        <predecessor id="1" predecessor-id="61" type="FS"/>
       </predecessors>
     </task>
   </tasks>
@@ -132,12 +138,14 @@
     </resource>
   </resources>
   <allocations>
-    <allocation task-id="28" resource-id="1" units="100"/>
-    <allocation task-id="29" resource-id="1" units="100"/>
     <allocation task-id="31" resource-id="1" units="100"/>
+    <allocation task-id="33" resource-id="1" units="100"/>
     <allocation task-id="30" resource-id="1" units="100"/>
+    <allocation task-id="32" resource-id="1" units="100"/>
+    <allocation task-id="4" resource-id="2" units="100"/>
+    <allocation task-id="30" resource-id="2" units="100"/>
+    <allocation task-id="29" resource-id="2" units="100"/>
     <allocation task-id="6" resource-id="2" units="100"/>
-    <allocation task-id="28" resource-id="2" units="100"/>
     <allocation task-id="7" resource-id="3" units="100"/>
   </allocations>
 </project>
