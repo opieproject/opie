@@ -25,7 +25,7 @@
 #include <qregexp.h>
 #include <qstylesheet.h>
 
-AbLabel::AbLabel( QWidget *parent, const char *name ): 
+AbLabel::AbLabel( QWidget *parent, const char *name ):
 	QTextView( parent, name ),
 	m_empty( false )
 {
@@ -70,7 +70,7 @@ OContact AbLabel::currentEntry()
 
 bool AbLabel::selectContact( int UID )
 {
-	
+
 	for ( m_itCurContact = m_viewList.begin(); m_itCurContact != m_viewList.end(); ++m_itCurContact){
 		if ( (*m_itCurContact).uid() == UID )
 			break;
@@ -108,7 +108,7 @@ void AbLabel::keyPressEvent( QKeyEvent *e )
 				sync();
 			else
 				m_itCurContact = m_viewList.end();
-			
+
 			break;
 		case Qt::Key_Down:
 			qWarning( "DOWN..");
@@ -118,6 +118,12 @@ void AbLabel::keyPressEvent( QKeyEvent *e )
 			else
 				m_itCurContact = m_viewList.begin();
 			break;
+                case Qt::Key_Return: // fall through
+                case Qt::Key_Space: // fall through
+                case Qt::Key_Enter: // we want to switch back
+                        emit signalOkPressed();
+                        break;
+                default: break;
 		}
 	}
 

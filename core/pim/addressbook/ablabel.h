@@ -33,10 +33,10 @@ public:
     AbLabel( QWidget *parent, const char *name = 0 );
     ~AbLabel();
 
-    // Set the contacts 
+    // Set the contacts
     void setContacts( const OContactAccess::List& viewList );
 
-    // Selects a contact 
+    // Selects a contact
     bool selectContact( int UID );
 
     // Get the UID of the current selected Entry
@@ -47,11 +47,11 @@ public:
 
 signals:
     void signalOkPressed();
-    
+
 protected:
     void sync();
     void keyPressEvent( QKeyEvent * );
-    
+
 private:
     OContactAccess::List m_viewList;
     OContactAccess::List::Iterator m_itCurContact;
