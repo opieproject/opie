@@ -1,6 +1,6 @@
 #include "testwidget.h"
 
-#include "okeyconfigwidget.h"
+#include <opie2/okeyconfigwidget.h>
 
 #include <opie2/oapplicationfactory.h>
 #include <opie2/otabwidget.h>
@@ -52,6 +52,8 @@ MainWindow::MainWindow( QWidget* parent, const char* name, WFlags fl )
 
 void MainWindow::slotClicked() {
     QDialog diag( this, "name", true );
+    diag.setCaption( tr( "Manage Keys" ) );
+
     QHBoxLayout *lay = new QHBoxLayout( &diag );
     Opie::Ui::OKeyConfigWidget *wid = new Opie::Ui::OKeyConfigWidget( &diag, "key config" );
     wid->setChangeMode( Opie::Ui::OKeyConfigWidget::Queue );
