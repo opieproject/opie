@@ -104,6 +104,10 @@ Trozdem beenden?</translation>
         <source>Continue</source>
         <translation>Weiter</translation>
     </message>
+    <message>
+        <source>Duplicate Event</source>
+        <translation>Termin duplizieren</translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -188,6 +192,18 @@ Trozdem beenden?</translation>
     <message>
         <source>This is an all day event.</source>
         <translation>Dieser Eintrag ist ganztägig.</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Zeit</translation>
+    </message>
+    <message>
+        <source> - </source>
+        <translation>-</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation>Duplizieren</translation>
     </message>
 </context>
 <context>

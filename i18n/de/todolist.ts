@@ -93,11 +93,11 @@
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation>Anueigen der erledigten Aufgabe</translation>
+        <translation>Anzeigen der erledigten Aufgabe</translation>
     </message>
     <message>
         <source>Show only over-due tasks</source>
-        <translation>Anzeige erledigter Aufgaben</translation>
+        <translation>Nur Anzeige überfäliger Aufgaben</translation>
     </message>
     <message>
         <source>Show task deadlines</source>
