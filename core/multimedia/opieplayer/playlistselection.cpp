@@ -63,7 +63,8 @@ PlayListSelection::PlayListSelection( QWidget *parent, const char *name )
 //      setAllColumnsShowFocus( TRUE );
      addColumn( tr( "Playlist Selection" ) );
     header()->hide();
-    setSorting( -1, FALSE );
+//    setSorting( -1, FALSE );
+  // FIXME
 }
 
 
@@ -104,11 +105,11 @@ const DocLnk *PlayListSelection::current() {
 
 void PlayListSelection::addToSelection( const DocLnk &lnk ) {
     PlayListSelectionItem *item = new PlayListSelectionItem( this, new DocLnk( lnk ) );
-    QListViewItem *current = selectedItem();
-    if ( current )
-        item->moveItem( current );
+     QListViewItem *current = selectedItem();
+     if ( current )
+    item->moveItem( current );
     setSelected( item, TRUE );
-    ensureItemVisible( selectedItem() );
+    ensureItemVisible( item);
 }
 
 

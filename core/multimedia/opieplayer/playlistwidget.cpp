@@ -259,6 +259,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     audioView->setMultiSelection( TRUE );
     audioView->setSelectionMode( QListView::Extended);
+    audioView->setSorting( 3, TRUE );
     
     tabWidget->insertTab(aTab,tr("Audio"));
 
@@ -300,6 +301,8 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     connect( d->selectedFiles, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( playlistViewPressed(int, QListViewItem *, const QPoint&, int)) );
 
+
+///audioView
     connect( audioView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
     
@@ -307,12 +310,16 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
              this,SLOT( playIt( QListViewItem *)) );
     connect( audioView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
 
+
+//videoView
     connect( videoView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
     connect( videoView, SIGNAL( returnPressed( QListViewItem *)),
              this,SLOT( playIt( QListViewItem *)) );
     connect( videoView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
 
+
+//playlists
     connect( playLists, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( loadList( const DocLnk & ) ) );
 
 
@@ -807,11 +814,12 @@ void PlayListWidget::btnPlay(bool b) {
       case 1:
       {
           qDebug("2");
+//          d->selectedFiles->unSelect();
           addToSelection( audioView->currentItem() );
-          mediaPlayerState->setPlaying(b);
-          d->selectedFiles->removeSelected( );
-          tabWidget->setCurrentPage(1);
-          d->selectedFiles->unSelect();
+          mediaPlayerState->setPlaying(true);
+            d->selectedFiles->removeSelected( );
+            d->selectedFiles->unSelect();
+           tabWidget->setCurrentPage(1);
           insanityBool=FALSE;         
       }//          audioView->clearSelection();
       break;
@@ -820,11 +828,11 @@ void PlayListWidget::btnPlay(bool b) {
           qDebug("3");
           
           addToSelection( videoView->currentItem() );
-          mediaPlayerState->setPlaying(b);
-          qApp->processEvents();
+          mediaPlayerState->setPlaying(true);
+//          qApp->processEvents();
           d->selectedFiles->removeSelected( );
-          tabWidget->setCurrentPage(2);
           d->selectedFiles->unSelect();
+          tabWidget->setCurrentPage(2);
           insanityBool=FALSE;
       }//          videoView->clearSelection();
       break;
