@@ -1,14 +1,17 @@
 #ifndef VIEWMAIL_H
 #define VIEWMAIL_H
 
+#include "viewmailbase.h"
+#include <libmailwrapper/mailtypes.h>
+
+#include <opie2/odialog.h>
+
 #include <qlistview.h>
 #include <qmap.h>
 #include <qstringlist.h>
 #include <qvaluelist.h>
 
-#include "viewmailbase.h"
-#include <libmailwrapper/mailtypes.h>
-
+namespace Opie { namespace MM { class OImageScrollView; } }
 
 class AttachItem : public QListViewItem
 {
@@ -67,6 +70,17 @@ private:
     QMap <int,QString>  m_mail;
     // 0 to 1 cc 2 bcc
     QMap <int,QStringList> m_mail2;
+};
+
+class MailImageDlg:public Opie::Ui::ODialog
+{
+    Q_OBJECT
+public:
+    MailImageDlg(const QString&,QWidget *parent = 0, const char *name = 0, bool modal = true, WFlags f = 0);
+    ~MailImageDlg();
+    void setName(const QString&);
+protected:
+    Opie::MM::OImageScrollView*m_imageview;
 };
 
 #endif

@@ -1,13 +1,14 @@
 #include "composemail.h"
 #include "viewmail.h"
 
-/* OPIE */
 #include <libmailwrapper/settings.h>
 #include <libmailwrapper/abstractmail.h>
 #include <libmailwrapper/mailtypes.h>
 
+/* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/ofiledialog.h>
+#include <opie2/oimagescrollview.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 
@@ -18,6 +19,7 @@
 #include <qaction.h>
 #include <qpopupmenu.h>
 #include <qfile.h>
+#include <qlayout.h>
 
 using namespace Opie::Ui;
 using namespace Opie::Core;
@@ -213,6 +215,9 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
     {
         menu->insertItem( tr( "Show Text" ), 1 );
     }
+    if (item->text(0).left(6)=="image/") {
+        menu->insertItem(tr("Display image preview"),2);
+    }
     menu->insertItem( tr( "Save Attachment" ),  0 );
     menu->insertSeparator(1);
 
@@ -242,6 +247,23 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
         }
         break ;
 
+    case 2: 
+        {
+            QString tmpfile = "/tmp/opiemail-image";
+            encodedString*content = m_recMail->Wrapper()->fetchDecodedPart( m_recMail, m_body->Parts()[ ( ( AttachItem* )item )->Partnumber() ] );
+            if (content) {
+                QFile output(tmpfile);
+                output.open(IO_WriteOnly);
+                output.writeBlock(content->Content(),content->Length());
+                output.close();
+                delete content;
+                MailImageDlg iview("");
+                iview.setName(tmpfile);
+                QPEApplication::execDialog(&iview);
+                output.remove();
+            }
+        }
+        break;
     case 1:
         if (  ( ( AttachItem* )item )->Partnumber() == -1 )
         {
@@ -477,4 +499,23 @@ void ViewMail::slotDeleteMail( )
         hide();
         deleted = true;
     }
+}
+
+MailImageDlg::MailImageDlg(const QString&fname,QWidget *parent, const char *name, bool modal, WFlags f)
+    : Opie::Ui::ODialog(parent,name,modal,f)
+{
+    QVBoxLayout*dlglayout = new QVBoxLayout(this);
+    dlglayout->setSpacing(2);
+    dlglayout->setMargin(1);
+    m_imageview = new Opie::MM::OImageScrollView(this);
+    dlglayout->addWidget(m_imageview);
+}
+
+MailImageDlg::~MailImageDlg()
+{
+}
+
+void MailImageDlg::setName(const QString&fname)
+{
+    m_imageview->setImage(fname);
 }
