@@ -47,7 +47,7 @@ protected:
     bool rotate_to_fit;
     bool first_resize_done;
     Rotation last_rot;
-
+    QString m_lastName;
     void rescaleImage(int w, int h);
 
     void rotate_into_data(Rotation r);

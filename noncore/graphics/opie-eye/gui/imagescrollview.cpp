@@ -9,29 +9,32 @@ using namespace Opie::Core;
 
 ImageScrollView::ImageScrollView( QWidget* parent, const char* name,  WFlags f )
     :QScrollView(parent,name,f|Qt::WRepaintNoErase ),_image_data(),_original_data(),scale_to_fit(true),
-     rotate_to_fit(true),first_resize_done(false)
+     rotate_to_fit(true),first_resize_done(false),m_lastName("")
 {
     init();
+    qDebug("constructor done");
 }
 
 ImageScrollView::ImageScrollView (const QImage&img, QWidget * parent, const char * name, WFlags f,bool always_scale,bool rfit)
     :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(),_original_data(img),scale_to_fit(always_scale),
-    rotate_to_fit(rfit),first_resize_done(false)
+    rotate_to_fit(rfit),first_resize_done(false),m_lastName("")
 {
     init();
 }
 
 ImageScrollView::ImageScrollView (const QString&img, QWidget * parent, const char * name, WFlags f,bool always_scale,bool rfit)
-    :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(),_original_data(img),scale_to_fit(always_scale),
-    rotate_to_fit(rfit),first_resize_done(false)
+    :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(),_original_data(),scale_to_fit(always_scale),
+    rotate_to_fit(rfit),first_resize_done(false),m_lastName("")
 {
     init();
+    setImage(img);
 }
 
 void ImageScrollView::setImage(const QImage&img)
 {
     _image_data = QImage();
     _original_data=img;
+    m_lastName = "";
     if (first_resize_done) {
         generateImage();
     }
@@ -39,6 +42,8 @@ void ImageScrollView::setImage(const QImage&img)
 
 void ImageScrollView::setImage( const QString& path ) {
     odebug << "load new image " << oendl;
+    if (m_lastName == path) return;
+    m_lastName = path;
     _original_data.load(path);
     _image_data = QImage();
     if (first_resize_done) {
