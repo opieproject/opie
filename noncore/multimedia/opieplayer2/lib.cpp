@@ -87,29 +87,6 @@ Lib::Lib(XineVideoWidget* widget) {
     // allocate oss for sound
     // and fb for framebuffer
     m_audioOutput= xine_load_audio_output_plugin( m_config, "oss") ;
-    if (m_audioOutput == NULL )
-        printf("Failure\n");
-    else
-        printf("Success\n");
-
-
-    // test code
-/*    m_videoOutput = xine_load_video_output_plugin(m_config, "fb",
-                                                  VISUAL_TYPE_FB,
-                                                  0 );
-*/
-
-    char** files = xine_list_video_output_plugins(3);
-    char* out;
-    int i = 0;
-    while ( ( out = files[i] ) != 0 ) {
-        printf("Video %s\n", out );
-        i++;
-    }
-//    m_xine = xine_init( m_videoOutput,
-//                      m_audioOutput,
-//                      m_config );
-    // test loading
     m_videoOutput = ::init_video_out_plugin( m_config, NULL );
     if (m_wid != 0 ) {
         printf("!0\n" );

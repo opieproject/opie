@@ -1,7 +1,6 @@
 TEMPLATE  = app
-CONFIG    = qt warn_on release
-#CONFIG         = qt warn_on debug
-#release
+#CONFIG    = qt warn_on release
+CONFIG         = qt warn_on debug
 DESTDIR   = $(OPIEDIR)/bin
 HEADERS   = playlistselection.h mediaplayerstate.h xinecontrol.h mediadetect.h\
         videowidget.h audiowidget.h playlistwidget.h mediaplayer.h inputDialog.h \

@@ -93,7 +93,6 @@ void MediaPlayer::setPlaying( bool play ) {
 
     xineControl->play( currentFile->file() );
 
-    xineControl->length();
     long seconds =  mediaPlayerState->length();//
     QString time; time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
     qDebug(time);

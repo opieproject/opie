@@ -36,6 +36,7 @@ void MediaPlayerState::readConfig( Config& cfg ) {
     usePlaylist = cfg.readBoolEntry( "UsePlayList" );
     usePlaylist = TRUE;
     isPlaying = FALSE;
+    isStreaming = FALSE;
     isPaused = FALSE;
     curPosition = 0;
     curLength = 0;

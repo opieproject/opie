@@ -133,18 +133,18 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
   QPopupMenu *pmPlayList = new QPopupMenu( this );
   menu->insertItem( tr( "File" ), pmPlayList );
-  new MenuItem( pmPlayList, tr( "Clear List" ), this, SLOT( clearList() ) );
-  new MenuItem( pmPlayList, tr( "Add all audio files" ), this, SLOT( addAllMusicToList() ) );
-  new MenuItem( pmPlayList, tr( "Add all video files" ), this, SLOT( addAllVideoToList() ) );
-  new MenuItem( pmPlayList, tr( "Add all files" ), this, SLOT( addAllToList() ) );
+  (void)new MenuItem( pmPlayList, tr( "Clear List" ), this, SLOT( clearList() ) );
+  (void)new MenuItem( pmPlayList, tr( "Add all audio files" ), this, SLOT( addAllMusicToList() ) );
+  (void)new MenuItem( pmPlayList, tr( "Add all video files" ), this, SLOT( addAllVideoToList() ) );
+  (void)new MenuItem( pmPlayList, tr( "Add all files" ), this, SLOT( addAllToList() ) );
   pmPlayList->insertSeparator(-1);
-  new MenuItem( pmPlayList, tr( "Save PlayList" ), this, SLOT( saveList() ) );
-  new MenuItem( pmPlayList, tr( "Export playlist to m3u" ), this, SLOT(writem3u() ) );
+  (void)new MenuItem( pmPlayList, tr( "Save PlayList" ), this, SLOT( saveList() ) );
+  (void)new MenuItem( pmPlayList, tr( "Export playlist to m3u" ), this, SLOT(writem3u() ) );
   pmPlayList->insertSeparator(-1);
-  new MenuItem( pmPlayList, tr( "Open File or URL" ), this,SLOT( openFile() ) );
+  (void)new MenuItem( pmPlayList, tr( "Open File or URL" ), this,SLOT( openFile() ) );
   pmPlayList->insertSeparator(-1);
-  new MenuItem( pmPlayList, tr( "Rescan for Audio Files" ), this,SLOT( scanForAudio() ) );
-  new MenuItem( pmPlayList, tr( "Rescan for Video Files" ), this,SLOT( scanForVideo() ) );
+  (void)new MenuItem( pmPlayList, tr( "Rescan for Audio Files" ), this,SLOT( scanForAudio() ) );
+  (void)new MenuItem( pmPlayList, tr( "Rescan for Video Files" ), this,SLOT( scanForVideo() ) );
 
 
   pmView = new QPopupMenu( this );
@@ -197,9 +197,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
   QPEApplication::setStylusOperation( d->selectedFiles->viewport(),QPEApplication::RightOnHold);
 
   QVBox *stretch1 = new QVBox( vbox1 ); stretch1->setBackgroundMode( PaletteButton ); // add stretch
-  new ToolButton( vbox1, tr( "Move Up" ),   "opieplayer2/up",   d->selectedFiles, SLOT(moveSelectedUp()) );
-  new ToolButton( vbox1, tr( "Remove" ),    "opieplayer2/cut",  d->selectedFiles, SLOT(removeSelected()) );
-  new ToolButton( vbox1, tr( "Move Down" ), "opieplayer2/down", d->selectedFiles, SLOT(moveSelectedDown()) );
+  (void)new ToolButton( vbox1, tr( "Move Up" ),   "opieplayer2/up",   d->selectedFiles, SLOT(moveSelectedUp()) );
+  (void)new ToolButton( vbox1, tr( "Remove" ),    "opieplayer2/cut",  d->selectedFiles, SLOT(removeSelected()) );
+  (void)new ToolButton( vbox1, tr( "Move Down" ), "opieplayer2/down", d->selectedFiles, SLOT(moveSelectedDown()) );
   QVBox *stretch2 = new QVBox( vbox1 ); stretch2->setBackgroundMode( PaletteButton ); // add stretch
 
 
