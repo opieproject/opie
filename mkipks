@@ -57,6 +57,8 @@ do
 	IMAGEDIR=$1
 	DATADIR=$IMAGEDIR
 	mkdir -p $IMAGEDIR
+    ;; -classic)
+        CLASSIC=1
     ;; -rpm)
 	if [ "$OPIEDIR" != "/opt/Qtopia" ]
 	then
@@ -78,6 +80,11 @@ do
     shift
 done
 
+if [ -n "$CLASSIC" ]
+then
+    DATADIR=$TDIR/data
+    CTRLDIR=$TDIR/control
+fi
 
 if [ -z "$FILES" ]
 then
@@ -200,7 +207,11 @@ do
 	    if [ ! -z "$size" ]; then
 	    echo "Installed-Size: $size" >>$CTRLDIR/control
 	    else
+		    if [ -z "$SIZEWARNED" ]
+		    then
 	    echo "Warning, no mkfs.jffs2 found, unable to set Installed-Size."
+	    SIZEWARNED=1
+		    fi
 	    fi
 	    echo "Architecture: $ARCH" >>$CTRLDIR/control 
 	    echo "Filename: ./$package.ipk" >>$CTRLDIR/control
@@ -209,7 +220,7 @@ do
 	    [ ! -z "$provides" ] && echo "Provides: $provides" >>$CTRLDIR/control
 	    [ ! -z "$conflicts" ] && echo "Conflicts: $conflicts" >>$CTRLDIR/control
 	    egrep -v "^(Files|Version|Depends|Provides|Conflicts|Architecture):" >>$CTRLDIR/control $i
-#	    echo "$DEB_VERSION" >$TDIR/debian-binary
+	    [ -n "$CLASSIC" ] && echo "$DEB_VERSION" >$TDIR/debian-binary
 	    base=${i%.control}
 	    scripts="preinst postinst prerm postrm"
 	    for pf in $scripts
@@ -219,7 +230,22 @@ do
 		    cp ${base}.$pf $CTRLDIR/$pf
 		fi
 	    done
-	    $OPIEDIR/scripts/ipkg-build -o root -g root $TDIR
+	    if [ -z "$CLASSIC" ]
+	    then
+		$OPIEDIR/scripts/ipkg-build -o root -g root $TDIR
+	    else
+	    	if [ "`id -u`" != "0" ]
+		then
+		    if [ -z "$ROOTWARNED" ]
+		    then
+		        echo Warning. You are not root. Please become root or use fakeroot.
+		        ROOTWARNED=1
+		    fi
+		fi
+		( cd $DATADIR && tar -czf $TDIR/data.tar.gz * )
+		( cd $CTRLDIR && tar -czf $TDIR/control.tar.gz * )
+		( cd $TDIR && tar -czf $OPIEDIR/$package.ipk ./control.tar.gz ./data.tar.gz ./debian-binary )
+	    fi
 	    RESULT=$package.ipk
 	    if [ -n "$VERB" ]
 	    then
