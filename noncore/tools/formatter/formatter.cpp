@@ -475,6 +475,9 @@ bool FormatterApp::doFsck() {
     QString selectedDevice;
 #if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX) 
     selectedDevice = deviceComboBox->currentText();
+
+    QString umountS = "umount -v "+selectedDevice+" 2>&1";
+    QString remountS = "mount -v "+selectedDevice+" 2>&1";
 #else
       // for testing
 //    currentText  = diskDevice  = "/dev/fd0";
