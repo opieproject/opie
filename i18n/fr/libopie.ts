@@ -64,15 +64,15 @@
     </message>
     <message>
         <source>Action Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton Action</translation>
     </message>
     <message>
         <source>OK Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton OK</translation>
     </message>
     <message>
         <source>End Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton Fin</translation>
     </message>
 </context>
 <context>
@@ -424,7 +424,7 @@ et </translation>
     </message>
     <message>
         <source>OTimePickerDialogBase</source>
-        <translation type="unfinished"></translation>
+        <translation>OTimePickerDialogBase</translation>
     </message>
 </context>
 <context>
@@ -511,7 +511,7 @@ et </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation>Radiomessage : </translation>
+        <translation>Alphapage (bur.):</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
@@ -531,11 +531,11 @@ et </translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation>Mobile (perso):</translation>
+        <translation>Mobile (perso.):</translation>
     </message>
     <message>
         <source>All Emails: </source>
-        <translation>E-Mail(s) : </translation>
+        <translation>E-mail(s) : </translation>
     </message>
     <message>
         <source>Profession: </source>
@@ -563,7 +563,7 @@ et </translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation>Epou(x|se) : </translation>
+        <translation>Epoux(se) : </translation>
     </message>
     <message>
         <source>Birthday: </source>
@@ -571,7 +571,7 @@ et </translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation>Autre Anniversaire : </translation>
+        <translation>Anniversaire : </translation>
     </message>
     <message>
         <source>Children: </source>
@@ -657,187 +657,187 @@ plusieurs jours</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Description : </translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;b&gt;Adresse (bur.): &lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;b&gt;Adresse (dom.): &lt;/b&gt;</translation>
     </message>
     <message>
         <source>User Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id Utilisateur</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Catégories</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Prénom</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished"></translation>
+        <translation>2nd Prénom</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Suffixe</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Classer sous</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonction</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation type="unfinished"></translation>
+        <translation>Département</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation type="unfinished"></translation>
+        <translation>Société</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Téléphone (bur.)</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax (bur.)</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Mobile (bur.)</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>E-mail (défaut)</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation type="unfinished"></translation>
+        <translation>E-mails</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Téléphone (dom.)</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax (dom.)</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Mobile (perso.)</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse (bur.)</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="unfinished"></translation>
+        <translation>Ville (bur.)</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="unfinished"></translation>
+        <translation>Département (bur.)</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Code Postal (bur.)</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Pays (bur.)</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="unfinished"></translation>
+        <translation>Alphapage (bur.)</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
+        <translation>Page Web (bur.)</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Bureau</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>Profession</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>Assistant(e)</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Responsable</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse (dom.)</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="unfinished"></translation>
+        <translation>Ville (dom.)</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="unfinished"></translation>
+        <translation>Département (dom.)</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Code Postal (dom.)</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Pays (dom.)</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Page Web (perso.)</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Epoux(se)</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Sexe</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Date de naissance</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Anniversaire</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Surnom</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Enfant</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notes</translation>
     </message>
 </context>
 <context>

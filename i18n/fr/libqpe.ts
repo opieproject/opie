@@ -533,7 +533,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation>Tél (bur.): </translation>
+        <translation>Téléphone (bur.): </translation>
     </message>
     <message>
         <source>Business Fax: </source>
@@ -573,7 +573,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation>Epou(x|se): </translation>
+        <translation>Epoux(se) : </translation>
     </message>
     <message>
         <source>Birthday: </source>
@@ -625,7 +625,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation>Tél (bur.)</translation>
+        <translation>Téléphone (bur.)</translation>
     </message>
     <message>
         <source>Business Fax</source>
@@ -657,7 +657,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Rue (bur.)</translation>
+        <translation>Adresse (bur.)</translation>
     </message>
     <message>
         <source>Business City</source>
@@ -665,7 +665,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Région (bur.)</translation>
+        <translation>Département (bur.)</translation>
     </message>
     <message>
         <source>Business Zip</source>
@@ -725,7 +725,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Epou(x|se)</translation>
+        <translation>Epoux(se)</translation>
     </message>
     <message>
         <source>Gender</source>

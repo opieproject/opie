@@ -394,7 +394,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Titre</translation>
+        <translation>Fonction</translation>
     </message>
     <message>
         <source>City</source>
