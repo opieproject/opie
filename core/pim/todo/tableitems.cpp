@@ -155,7 +155,7 @@ void DueTextItem::setToDoEvent( const OTodo& ev ) {
     if( ev.hasDueDate() ){
         QDate today = QDate::currentDate();
         m_off = today.daysTo(ev.dueDate() );
-        setText( QString::number(m_off)  + " day(s) " );
+        setText( tr( "%1 day(s)" ).arg( QString::number(m_off) ) );
     }else{
         setText("n.d." );
         m_off = 0;
