@@ -798,12 +798,17 @@ void AdvancedFm::localDelete()
         if( myFile.find(" -> ",0,TRUE) != -1)
             myFile = myFile.left( myFile.find(" -> ",0,TRUE));
                     
-        QString f = currentDir.canonicalPath()+"/"+myFile;
+        QString f = currentDir.canonicalPath();
+        if(f.right(1).find("/",0,TRUE) == -1)
+            f+="/";
+        f+=myFile;
         if(QDir(f).exists() && !QFileInfo(f).isSymLink() ) {
-            switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+f+" ?"
+            switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+f+
+                                          "\nand all it's contents ?"
                                           ,tr("Yes"),tr("No"),0,0,1) ) {
               case 0: {
-                  QString cmd="rmdir -rf "+f;
+                  f=f.left(f.length()-1);
+                  QString cmd="rm -rf "+f;
                   system( cmd.latin1());
                   populateLocalView();
               }
@@ -842,12 +847,17 @@ void AdvancedFm::remoteDelete()
         myFile = (*it);
         if(myFile.find(" -> ",0,TRUE) != -1)
             myFile = myFile.left(myFile.find(" -> ",0,TRUE));
-        QString f = currentRemoteDir.canonicalPath()+"/"+myFile;
+        QString f = currentDir.canonicalPath();
+         if(f.right(1).find("/",0,TRUE) == -1)
+             f+="/";
+        f+=myFile;
         if(QDir(f).exists() && !QFileInfo(f).isSymLink()  ) {
-            switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+f+" ?",
+            switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+f+
+                                          "\nand all it's contents ?",
                                           tr("Yes"),tr("No"),0,0,1) ) {
               case 0: {
-                  QString cmd="rmdir -rf "+f;
+                  f=f.left(f.length()-1);
+                  QString cmd="rm -rf "+f;
                   system( cmd.latin1());
                   populateRemoteView();
               }
