@@ -34,10 +34,11 @@ public:
     virtual int rtti() { return Searchgroup;}
 
 protected:
-	QRegExp _search;
 	virtual void load() = 0;
 	virtual int search() = 0;
 	virtual void insertItem( void* ) = 0;
+	QRegExp _search;
+	QRegExp _lastSearch;
 	QString _name;
 	bool loaded;
 	int _resultCount;

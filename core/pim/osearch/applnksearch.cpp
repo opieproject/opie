@@ -47,7 +47,9 @@ int AppLnkSearch::search()
 		    || (_search.match(app->comment()) != -1)
 		    || (_search.match(app->exec()) != -1) ) {
 			insertItem( app );
-		}
+		}else
+		if (searchFile( app ))
+			insertItem( app );
 		qApp->processEvents( 100 );
 	}
 	return _resultCount;

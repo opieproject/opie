@@ -10,15 +10,15 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
-#include "searchgroup.h"
 
+#include <qobject.h>
 #include <qregexp.h>
 #include <qapplication.h>
 #include <opie/owait.h>
 
 #include "olistviewitem.h"
+#include "searchgroup.h"
 
-//#define NEW_OWAIT
 #ifndef NEW_OWAIT
 static OWait *wait = 0;
 #endif
@@ -39,7 +39,7 @@ SearchGroup::~SearchGroup()
 void SearchGroup::expand()
 {
 	//expanded = true;
-	clearList();
+	if (_lastSearch != _search) clearList();
 	if (_search.isEmpty()) return;
 	OListViewItem *dummy = new OListViewItem( this, "searching...");
 	setOpen( true );
@@ -69,24 +69,23 @@ void SearchGroup::setSearch(QRegExp re)
 
 int SearchGroup::realSearch()
 {
+	if (_lastSearch == _search) return _resultCount;
 #ifndef NEW_OWAIT
-	qDebug("NOT using NEW_OWAIT");
 	if (!wait) wait = new OWait( qApp->mainWidget(), "osearch" );
 	wait->show();
 	qApp->processEvents();
 #else
-	qDebug("using NEW_OWAIT");
-	OWait::start( "osearch" );
+	qDebug("********** NEW_OWAIT *************");
+	OWait( "searching" );
 #endif
 	if (!loaded) load();
 	_resultCount = 0;
 	_resultCount = search();
+	_lastSearch = _search;
 	setText(0, _name + " - " + _search.pattern() + " (" + QString::number( _resultCount ) + ")");
 
 #ifndef NEW_OWAIT
 	wait->hide();
-#else
-	OWait::stop();
 #endif
 	return _resultCount;
 }

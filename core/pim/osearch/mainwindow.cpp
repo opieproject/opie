@@ -20,6 +20,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/global.h>
+#include <opie/owait.h>
 #include <qaction.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
@@ -211,7 +212,6 @@ void MainWindow::stopTimer(QListViewItem*)
 
 void MainWindow::showPopup()
 {
-	qDebug("showPopup");
 	popupTimer->stop();
         if (!_currentItem) return;
 	QPopupMenu *pop = _currentItem->popupMenu();
@@ -227,12 +227,15 @@ void MainWindow::setSearch( const QString &key )
 
 void MainWindow::searchStringChanged()
 {
+#ifdef NEW_OWAIT
+	OWait("setting search string");
+#endif
 	searchTimer->stop();
 	QString ss = _searchString;
 	//ss = Global::stringQuote( _searchString );
 //	if (actionWholeWordsOnly->isOn())
 //		ss = "\\s"+_searchString+"\\s";
-	qDebug(" set searchString >%s<",ss.latin1());
+//	qDebug(" set searchString >%s<",ss.latin1());
 	QRegExp re( ss );
 	re.setCaseSensitive( actionCaseSensitiv->isOn() );
 	re.setWildcard( actionWildcards->isOn() );
@@ -242,6 +245,9 @@ void MainWindow::searchStringChanged()
 
 void MainWindow::searchAll()
 {
+#ifdef NEW_OWAIT
+	OWait("searching...");
+#endif
 	for (SearchGroup *s = searches.first(); s != 0; s = searches.next() ){
 		s->doSearch();
 		//resultsList->repaint();
