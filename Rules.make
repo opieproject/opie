@@ -90,7 +90,7 @@ $(TOPDIR)/library/custom.h : $(TOPDIR)/.config
 		ln -sf $(patsubst "%",%,$(CONFIG_CUSTOMFILE)) $@)
 	@touch $@
 
-$(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/mconf $(TOPDIR)/scripts/kconfig/conf $(TOPDIR)/scripts/kconfig/qconf $(TOPDIR)/scripts/kconfig/libkconfig.so $(TOPDIR)/scripts/kconfig/gconf:
+$(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/mconf $(TOPDIR)/scripts/kconfig/conf $(TOPDIR)/scripts/kconfig/qconf $(TOPDIR)/scripts/kconfig/libkconfig.so $(TOPDIR)/scripts/kconfig/gconf $(TOPDIR)/qmake/qmake:
 	@$(call descend,$(shell dirname $@),$(shell basename $@))
 
 menuconfig: $(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/mconf ./config.in
