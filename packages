@@ -29,6 +29,7 @@ CONFIG_DECO_FLAT	noncore/decorations/flat	flat.pro
 CONFIG_DECO_LIQUID	noncore/decorations/liquid	liquid.pro
 CONFIG_DECO_POLISHED	noncore/decorations/polished	polished.pro
 CONFIG_DICTIONARY	noncore/apps/dictionary	dictionary.pro
+CONFIG_DOCTAB	noncore/settings/doctab	doctab.pro
 CONFIG_DRAWPAD	noncore/graphics/drawpad	drawpad.pro
 CONFIG_DVORAK	inputmethods/dvorak	dvorak.pro
 CONFIG_EMBEDDEDKONSOLE	core/apps/embeddedkonsole	embeddedkonsole.pro
