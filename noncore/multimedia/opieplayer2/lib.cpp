@@ -137,7 +137,7 @@ void Lib::initialize()
 }
 
 Lib::~Lib() {
-    assert( isRunning() == false )
+    assert( isRunning() == false );
     assert( m_initialized );
 
 //    free( m_config );
