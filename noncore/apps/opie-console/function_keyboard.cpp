@@ -100,7 +100,7 @@ void FunctionKeyboard::mousePressEvent(QMouseEvent *e) {
     FKey k = keys["r" + QString::number(pressedRow) + "c" + QString::number(pressedCol)];
     //QWSServer::sendKeyEvent(k.getU(), k.getQ(), 0, 1, 0);
     //qwsServer->sendKeyEvent(k.getU(), k.getQ(), 0, 1, 0);
-    qwsServer->sendKeyEvent(0x41, 0, 0, 1, 0);
+    //qwsServer->sendKeyEvent(0x41, 0, 0, 1, 0);
 }
 
 void FunctionKeyboard::mouseReleaseEvent(QMouseEvent *) {
