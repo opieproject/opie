@@ -50,10 +50,13 @@ protected slots:
     virtual void calibrateSensor ( );
     virtual void calibrateSensorAC ( );
     void setBacklight ( int );
+    void setContrast ( int );
     void resetBacklight ( );
 
 private:
-    int m_res;
+    int m_bres;
+    int m_cres;
+    int m_havecontrast;
     QTimer *m_resettimer;
     QStringList m_sensordata;
     QStringList m_sensordata_ac;

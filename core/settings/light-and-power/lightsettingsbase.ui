@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>363</width>
+            <width>355</width>
             <height>532</height>
         </rect>
     </property>
@@ -276,7 +276,7 @@
                         <class>QGroupBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>GroupBox9</cstring>
+                            <cstring>GroupLight</cstring>
                         </property>
                         <property stdset="1">
                             <name>title</name>
@@ -291,11 +291,11 @@
                         <vbox>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>5</number>
+                                <number>11</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
-                                <number>3</number>
+                                <number>6</number>
                             </property>
                             <widget>
                                 <class>QSlider</class>
@@ -334,6 +334,45 @@
                                 <property>
                                     <name>whatsThis</name>
                                     <string>set a fix value for backlight</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QSlider</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>contrast</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>255</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineStep</name>
+                                    <number>1</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>pageStep</name>
+                                    <number>16</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>tracking</name>
+                                    <bool>true</bool>
+                                </property>
+                                <property stdset="1">
+                                    <name>orientation</name>
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>tickmarks</name>
+                                    <enum>Right</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>tickInterval</name>
+                                    <number>32</number>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>set a fix value for contrast</string>
                                 </property>
                             </widget>
                             <widget>
@@ -556,7 +595,7 @@
                                 <class>QSpinBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>interval_lightoff_ac_3</cstring>
+                                    <cstring>interval_lightoff_ac</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>suffix</name>
@@ -605,7 +644,7 @@
                                 <class>QSpinBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>interval_suspend_ac_3</cstring>
+                                    <cstring>interval_suspend_ac</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>suffix</name>
@@ -654,7 +693,7 @@
                                 <class>QSpinBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>interval_dim_ac_3</cstring>
+                                    <cstring>interval_dim_ac</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>suffix</name>
@@ -703,7 +742,7 @@
                                 <class>QCheckBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>LcdOffOnly_2_3</cstring>
+                                    <cstring>LcdOffOnly_ac</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>sizePolicy</name>
@@ -738,17 +777,60 @@
                         <vbox>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>5</number>
+                                <number>11</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
-                                <number>3</number>
+                                <number>6</number>
                             </property>
                             <widget>
                                 <class>QSlider</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>brightness_ac_3</cstring>
+                                    <cstring>brightness_ac</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>maxValue</name>
+                                    <number>255</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>lineStep</name>
+                                    <number>16</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>pageStep</name>
+                                    <number>16</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>value</name>
+                                    <number>255</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>tracking</name>
+                                    <bool>true</bool>
+                                </property>
+                                <property stdset="1">
+                                    <name>orientation</name>
+                                    <enum>Horizontal</enum>
+                                </property>
+                                <property stdset="1">
+                                    <name>tickmarks</name>
+                                    <enum>Right</enum>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>set a fix value for backlight</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QSlider</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>contrast_ac</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>minValue</name>
@@ -902,7 +984,7 @@
                                         <class>QCheckBox</class>
                                         <property stdset="1">
                                             <name>name</name>
-                                            <cstring>auto_brightness_ac_3</cstring>
+                                            <cstring>auto_brightness_ac</cstring>
                                         </property>
                                         <property stdset="1">
                                             <name>text</name>
@@ -917,7 +999,7 @@
                                         <class>QPushButton</class>
                                         <property stdset="1">
                                             <name>name</name>
-                                            <cstring>CalibrateLightSensorAC</cstring>
+                                            <cstring>CalibrateLightSensor_ac</cstring>
                                         </property>
                                         <property stdset="1">
                                             <name>text</name>
@@ -1192,11 +1274,11 @@
 <images>
     <image>
         <name>image0</name>
-        <data format="XPM.GZ" length="1265">789c55d34b4fe2601487f13d9fa2811d9960cba5854c66a1584511046f209359f46d8b50b9df1427f3dda7cf31e2e13c2efebf77a118e349deea775a56fe24b3de049b716885a36065e5a3ed74bafffde7d7df4cd671adf4cb2d5b4ef647265bb042ab3d9fc5ec92daaeda35b5ab6adfaa9d533b56db537baaf650ed96da1db5efd53e55fb51ed2bb5376a3fa87da9f656ed62ba733543b002038f605928079f851141471813b485438203686c827d183a049f842ec1b5302038161a82d74239d880914d30103a0467c222c10f6185e099d023b813560946c21ac10ba121d8168604f74239d813c604cf616c13f4850ec177619160222c1334c20ac150e8126c0a3d8237c22ac13b618d6057287f24b8121a824b6148b02e94df014e847270048736c137a14370212c119c0bcb045f851ec117a121f907e4728109a358e6d7db307c496f34566f71f22a37997ebfcde68bc57cb15c99f5e6eb6dbb7b4bef7dbfdf7f9c1edeceea93ba39f77dffe2f076d9484c92186392ddd5e1fb5d376f3eaff1fd335ad152ae7dab3e5fa73b4aefaea53ff37d779e5ef341bf3dca87f68fde0a4f3ddfeff58f7edfc2f3c0769ce2f15ba93c1854dce3b78257ad0d3f57f6dfcfcc7f522034e9</data>
+        <data format="XPM.GZ" length="680">789c5dd04d6ac3301005e0bd4f21ec5d280931b1c0941ca1a5cb42e962a4194956e2d8f9e9a294debd9e9168ec3cbcd0f72ca1b1372bf5fef6a2569be27a835b67950d70512bfceafbef8fcffd4f516eb59a9e7aabb6e55351ae9555afc389787d9ed6556bdbb6b5cc2b1376d0c08e79115a0090b74326258e4cb333b591cd27a66d6c6d1b669fa9134988162c328f99945831b1c11a65f32153271a2121a0cc1c3329b16392a69a3413327562101201c9669f4989c874dad54e36bb4c9d6885ce8173f2df24158049abff0eec14a479371de1f859573944873e00dd3b8353ba18e3e1de1dbcf7d04d31b3b39033eb8e1052aad9bdc64be262bec0b784e5cc81c78387efe0ae5b767decba785a76c3380cc379d9ad2fe3787df82fb394bfcfc51f5517a686</data>
     </image>
     <image>
         <name>image1</name>
-        <data format="XPM.GZ" length="2211">789c75d5594fdb401007f0773e45c4bca1eadfc4b755f581fba6d0420b547db077d7248424908310aa7ef7ae6736ee9683c1917ed9b13d9e592b1fd75a97a7c7adb58f2b936931eda996ea16e3d69a9e0d068b9fbf3eff5e59ed24adfabf1db582d50f2bab67d3966a9d8c86a6066df9d8f371e8e3c0c7be8f231fca03c887f131f091fb17e8fad07edad847e5a7f5fc95637f65e8af843e36fcb4898fff6afbeee3c4c7a67f4e0dca4b1b8abd5bbb48eb606fb3f98fbd60ebc214157b836d0a53f28468ddb9727e665765bb0cd93bb5ad6cb09f6aeb5c2589664fd95a9569ccc5ded536460751c98e6a57818ec3845d386771c4ced8a12e42cea7b9d84459c6eb9a1de92a95e79b89ed7aceeb5c7f15ebbccdfdc00f6715707d982c1d49fd8f6293e46c6cb11313c41d76c94e4d9e73bfa09c8b829f8fc0ce4c184b7fc6ce59c6c617766ee250fa113827622a9dd398e7831b6795733f68c4b6e3c9a47f47ecd2a41d9e0f86ce4aee4777ce2693cdd217575129f3b965ab2ac8a59e0bb6362a907ae4feba0a32b1710e3399d7837324cf8f986daa3891fea5ce4922f5edb3ab2ae8c8f9078d797e386c2cf3fde61cba799d3b47813ccfded2a1e45f3ac7915cffbab15cbfdd58f2af1acb7e796e2cfbe56b639977c73971e7274b27b25f17cea9ec77a2c652ef9373964aff8ba533e9d76963b9fed9d2b9bc7f95732eef37769d8b5cfab3dd58eadd59ba90eb3f2e2def33668da5fe7963e9dfb4b1bc5f7de752d6e9c15929ee1fdd3796fdfbcfb25f478da51f3d676de47eb7cec6b9db38935f8c658050a0848286f9f7ad9f830a37e8a267e3167ddcbdcec100438c706f0ff97cc0f855ce0453ccf088b9fd7cc202cf58c7869f834d6c611b3bd8b5c71ef67180431ce1f8bf9c137cc129ceecf115df70ce71f122e73b7ee01257b8461b1d8e3602842fea891023f12245f6aae69c4044850ba292d4ebfe902643958b1beabed543ead12df5edb3cfa94f77347833674823bab7fdbba7071ad3e4ad1c9b35a5193dda98d3d3dbf3b2390b7aa675dab0b1f96ece166dd38e8d5dda7b2fc766edd3011dd291ffddea9f4f2b7f01e4bc2999</data>
+        <data format="XPM.GZ" length="1220">789c5dd35f53e2301000f0773e4507de981ba4a5443a37f7a028fe41101514bcb987344d0515a8b4a0e0dc77bfee6e36d0dbe121bf4d48361b38aa3ae341cfa91e95d24c6633e5a8a95c39d5683d9f6f7ffff9f55d2abbc2c93fcd63c72dff28956b8e72facb8586f1733eae042a080205f480d2974de903eb4825a5c4d927434d9c30435c3c26861ed105863ef31118692584043e18cae306700ad43af27c9cbd00c622120d2cf8c350d65bc02b66230056984d0f786ea83d9c7d67fab89562d2b92ba2f6e8bb4343d10a81236680579086927a1532a957d7c898b7fa32146e1db865d28d7acc26def7de50b6b0aa3b4b2ce3cc507bb8d58c498b0796b8386252cd1b62ec51199f96d8c95326f5aacfa49d6f99b455db50d0e235935ea1c3a43e279678c14ba6c0e62c99f40a5d4bbcc21b931afbc20c23e0c250d2e21b26d5bcb3c4d913265d21b5c417cc9874d09c49bfd857c358e1b931530ba0b6c4ff510da3224345239b8b74bee6657a989bbd62bc1de4dee7108b65f2b1cfadd22ccdd69bcde7d73eb7dd9dec92d376bb7db6cf9d77924e02b1dde72e2e4d5c1d9c7bddbdc9a3db2bd4d74ff3e8176bbe856206c5dc1d947c5fcc3d0c47a3e16331f7349e4c26cfc55cadeebade7f7d3988f2df9fa57f7da120b4</data>
     </image>
 </images>
 <connections>
@@ -1207,7 +1289,7 @@
         <slot>calibrateSensor()</slot>
     </connection>
     <connection>
-        <sender>CalibrateLightSensorAC</sender>
+        <sender>CalibrateLightSensor_ac</sender>
         <signal>clicked()</signal>
         <receiver>LightSettingsBase</receiver>
         <slot>calibrateSensorAC()</slot>
@@ -1224,13 +1306,13 @@
     <tabstop>auto_brightness</tabstop>
     <tabstop>CalibrateLightSensor</tabstop>
     <tabstop>tabs</tabstop>
-    <tabstop>interval_lightoff_ac_3</tabstop>
-    <tabstop>interval_suspend_ac_3</tabstop>
-    <tabstop>interval_dim_ac_3</tabstop>
-    <tabstop>LcdOffOnly_2_3</tabstop>
-    <tabstop>brightness_ac_3</tabstop>
-    <tabstop>auto_brightness_ac_3</tabstop>
-    <tabstop>CalibrateLightSensorAC</tabstop>
+    <tabstop>interval_lightoff_ac</tabstop>
+    <tabstop>interval_suspend_ac</tabstop>
+    <tabstop>interval_dim_ac</tabstop>
+    <tabstop>LcdOffOnly_ac</tabstop>
+    <tabstop>brightness_ac</tabstop>
+    <tabstop>auto_brightness_ac</tabstop>
+    <tabstop>CalibrateLightSensor_ac</tabstop>
     <tabstop>lowSpinBox</tabstop>
     <tabstop>warnintervalBox</tabstop>
     <tabstop>criticalSpinBox</tabstop>
