@@ -197,7 +197,7 @@ PlayListWidgetGui::PlayListWidgetGui( QWidget* parent, const char* name, WFlags 
     Llayout->setSpacing( 2 );
     Llayout->setMargin( 2 );
 
-    playLists = new FileSelector( "playlist/plain", LTab, "fileselector" , FALSE, FALSE ); //buggy
+    playLists = new FileSelector( "playlist/plain;audio/x-mpegurl", LTab, "fileselector" , FALSE, FALSE );
     Llayout->addMultiCellWidget( playLists, 0, 0, 0, 1 );
 
     tabWidget->insertTab( LTab, tr( "Lists" ) );
