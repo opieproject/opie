@@ -109,7 +109,6 @@ bool WLANImp::writeConfig()
     config->writeEntry( "dot11WEPDefaultKey1", keyLineEdit1->text() );
     config->writeEntry( "dot11WEPDefaultKey2", keyLineEdit2->text() );
     config->writeEntry( "dot11WEPDefaultKey3", keyLineEdit3->text() );
-    return true;
     return writeWirelessOpts( );
 }
 
