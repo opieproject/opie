@@ -18,6 +18,7 @@
 **
 **********************************************************************/
 
+#define QPE_NEED_CALIBRATION
 #define QPE_HAVE_TOGGLELIGHT
 #define QPE_STARTMENU
 

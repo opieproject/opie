@@ -102,57 +102,31 @@ QCopEnvelope::~QCopEnvelope()
 	QFile qcopfile(qcopfn);
 
 	if ( qcopfile.open(IO_WriteOnly | IO_Append) ) {
+#ifndef Q_OS_WIN32
 	    if(flock(qcopfile.handle(), LOCK_EX)) {
-		/* some error occured */
+		/* some error occurred */
 		qWarning(QString("Failed to obtain file lock on %1 (%2)")
 			.arg(qcopfn).arg( errno ));
 	    }
-	    /* file locked, but might be stale (e.g. program for whatever
-	       reason did not start).  I modified more than 1 minute ago,
-	       truncate the file */
-	    struct stat buf;
-	    time_t t;
-	    if (!fstat(qcopfile.handle(), &buf) &&  (time(&t) != (time_t)-1) ) {
-		// success on fstat, lets compare times
-		if (buf.st_ctime + 60 < t) {
-		    qWarning("stale file " + qcopfn + " found.  Truncating");
-		    ftruncate(qcopfile.handle(), 0);
-		    qcopfile.reset();
-		}
+#endif
+	    {
+		QDataStream ds(&qcopfile);
+		ds << ch << msg << data;
+		qcopfile.flush();
+#ifndef Q_OS_WIN32
+		flock(qcopfile.handle(), LOCK_UN);
+#endif
+		qcopfile.close();
 	    }
 
-	    if ( !QCopChannel::isRegistered(ch) ) {
-		int fsize = qcopfile.size();
-		{
-		    QDataStream ds(&qcopfile);
-		    ds << ch << msg << data;
-		    flock(qcopfile.handle(), LOCK_UN);
-		    qcopfile.close();
-		}
-
-		if (fsize == 0) {
-		    QString cmd = ch.mid(pref);
-		    Global::execute(cmd);
-		}
-
-		char c;
-		for (int i=0; (c=msg[i]); i++) {
-		    if ( c == ' ' ) {
-			// Return-value required
-			// ###### wait for it
-			break;
-		    } else if ( c == '(' ) {
-			// No return value
-			break;
-		    }
-		}
-		goto end;
-	    } // endif isRegisterd
-	    flock(qcopfile.handle(), LOCK_UN);
-	    qcopfile.close();
-	    qcopfile.remove();
+	    QByteArray b;
+	    QDataStream stream(b, IO_WriteOnly);
+	    stream << QString(ch.mid(pref));
+	    QCopChannel::send("QPE/Server", "processQCop(QString)", b);
+	    delete device();
+	    return;
 	} else {
-	    qWarning(QString("Failed to obtain file lock on %1")
+	    qWarning(QString("Failed to open file %1")
 			.arg(qcopfn));
 	} // endif open
     }
@@ -160,13 +134,13 @@ QCopEnvelope::~QCopEnvelope()
       // If this is a message that should go along the SOAP channel, we move the
       // endpoint URL to the data section.
       QString endpoint = ch.mid(9);
-      
+
       ch = "QPE/SOAP";
       // Since byte arrays are explicitly shared, this is appended to the data variable..
       *this << endpoint;
     }
+
     QCopChannel::send(ch,msg,data);
-end:
     delete device();
 }
 

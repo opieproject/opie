@@ -82,6 +82,10 @@ public:
     void showMainDocumentWidget( QWidget*, bool nomax=FALSE );
     static void showDialog( QDialog*, bool nomax=FALSE );
     static int execDialog( QDialog*, bool nomax=FALSE );
+    /* Merge setTempScreenSaverMode */
+#ifdef QTOPIA_INTERNAL_INITAPP
+    void initApp( int argv, char **argv );
+#endif
 
     static void setKeepRunning();
     bool keepRunning() const;
@@ -101,6 +105,7 @@ signals:
     void dateFormatChanged( DateFormat );
     void flush();
     void reload();
+    /* linkChanged signal */
 
 private slots:
     void systemMessage( const QCString &msg, const QByteArray &data );
@@ -126,6 +131,7 @@ private:
     void installTranslation( const QString& baseName );
 #endif
     void mapToDefaultAction( QWSKeyEvent *ke, int defKey );
+    void processQCopFile();
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     QCopChannel *sysChannel;
