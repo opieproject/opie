@@ -236,6 +236,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     edited=FALSE;
     edited1=FALSE;
     setToolBarsMovable( FALSE );
+    connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     setIcon( Resource::loadPixmap( "TextEditor" ) );
 
@@ -407,10 +408,9 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     viewSelection = cfg.readNumEntry( "FileView", 0 );
 }
 
-TextEdit::~TextEdit()
+void TextEdit::cleanUp()
 {
 //    save();
-
     Config cfg("TextEdit");
     cfg.setGroup("View");
     QFont f = editor->font();
@@ -418,7 +418,12 @@ TextEdit::~TextEdit()
     cfg.writeEntry("Bold",f.bold());
     cfg.writeEntry("Italic",f.italic());
     cfg.writeEntry("Wrap",editor->wordWrap() == QMultiLineEdit::WidgetWidth);
-   cfg.writeEntry( "FileView", viewSelection );
+    cfg.writeEntry( "FileView", viewSelection );
+
+}
+
+TextEdit::~TextEdit()
+{
 }
 
 void TextEdit::zoomIn()

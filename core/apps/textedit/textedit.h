@@ -71,6 +71,7 @@ private slots:
     void changeStartConfig(bool);
     bool save();
     bool saveAs();
+    void cleanUp();
 
 
     void editCut();
@@ -111,7 +112,7 @@ private:
     DocLnk *doc;
     bool searchVisible;
     bool bFromDocView;
-	 int  viewSelection;
+   int  viewSelection;
     QAction *zin, *zout;
     QString currentFileName;
 };
