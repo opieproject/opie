@@ -32,7 +32,7 @@
 #include <qstring.h>
 #include <qwidget.h>
 
-namespace Opie {namespace Core {class Opie::Core::OProcess;}}
+namespace Opie {namespace Core {class OProcess;}}
 class QLabel;
 class QTimer;
 
