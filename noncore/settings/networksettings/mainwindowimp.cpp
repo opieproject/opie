@@ -83,6 +83,13 @@ MainWindowImp::~MainWindowImp(){
   cfg.setGroup("General");
   cfg.writeEntry("Profiles", profiles.join(" "));
   
+  // Delete all interfaces that don't have owners.
+  QMap<Interface*, QListViewItem*>::Iterator iIt;
+  for( iIt = items.begin(); iIt != items.end(); ++iIt ){
+    if(iIt.key()->getModuleOwner() == NULL)
+      delete iIt.key();
+  }
+
   // Delete Modules and Libraries
   QMap<Module*, QLibrary*>::Iterator it;
   for( it = libraries.begin(); it != libraries.end(); ++it ){

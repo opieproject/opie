@@ -1,8 +1,6 @@
 #include "wlanmodule.h"
-#include <qpe/config.h>
 #include "wlanimp.h"
 #include "info.h"
-
 
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -63,7 +61,7 @@ bool WLANModule::isOwner(Interface *i){
  * @return QWidget* pointer to the tab widget in this modules configure.
  */ 
 QWidget *WLANModule::configure(Interface *i, QTabWidget **tabWidget){
-  WLANImp *wlanconfig = new WLANImp( );
+  WLANImp *wlanconfig = new WLANImp(0, "WlanConfig");
   (*tabWidget) = wlanconfig->tabWidget;
   return wlanconfig;
 }
@@ -74,6 +72,7 @@ QWidget *WLANModule::configure(Interface *i, QTabWidget **tabWidget){
  * @return QWidget* pointer to the tab widget in this modules info.
  */ 
 QWidget *WLANModule::information(Interface *i, QTabWidget **tabWidget){
+  return NULL;
   WlanInfo *info = new WlanInfo(0, "wireless info");
   (*tabWidget) = info->tabWidget;
  
