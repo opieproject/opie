@@ -52,7 +52,7 @@ SOURCES		+= \
 	whole.c \
 	qrsync.cpp
 
-INCLUDEPATH += $(OPIEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include .
 
 LIBS        += -lopiecore2
 TARGET       = qrsync
