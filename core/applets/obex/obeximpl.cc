@@ -59,15 +59,16 @@ void ObexImpl::slotMessage( const QCString& msg, const QByteArray&data ) {
       m_obex->receive();
 
   } else if (msg =="done(QString)") {
-      QString filename;
-      stream >> filename;
-      m_sendgui->lblPath->setText(tr("Done transfering " + filename));
+      QString text;
+      stream >> text;
+      m_sendgui->lblPath->setText(tr("Done transfering " + text));
 
   }
 }
 
 void ObexImpl::slotCancelSend() {
     // cancel sync process too
+    //m_obex->cancel(); // not ready yet
     m_sendgui->hide();
 }
 
