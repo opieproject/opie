@@ -20,12 +20,14 @@
 	Fixed Bugs
 	----------
 	* #501  - Pickboard is able to show 'Umlaute' (TT,zecke)
+	* #608  - Make Opie usable for left handed users (zecke)
 	* #957  - Import of VCards/VTodos/VEvents with BASE64 encoding (ljp,zecke)
 	* #1245 - Opie-Go 'paused' (zecke)
 	* #1358 - DocTab didn't show any MimeTypes (was fixed earlier) (zecke)
 	* #1380 - QDateBookAccess::remove() doesn't remove entries (eilers, zecke)
 	* #1395 - Build VNC Backend with gcc3.4
 	* #1440 - The icon of opie-mobilemsg is missing (CoreDump)
+	* #1426 - Add missing opie-bartender Icon (CoreDump)
 	* #1445 - Opie-Sheet Has No Icon (CoreDump)
 	* #1448 - Brightness Applet added (mickeyl)
 	* #1450 - ZSame didn't clear the bonus item after winning a game (zecke)
