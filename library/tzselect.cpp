@@ -29,6 +29,8 @@
 #include <stdlib.h>
 
 #include <qcopchannel_qws.h>
+#include <qpe/qpeapplication.h>
+#include <qmessagebox.h>
 
 class TimeZoneSelectorPrivate
 {
@@ -244,8 +246,12 @@ void TimeZoneSelector::slotTzActive( int )
 
 void TimeZoneSelector::slotExecute( void )
 {
-    // execute the world time application...
+  // execute the world time application...  
+  if (QFile::exists(QPEApplication::qpeDir()+"bin/citytime"))
     Global::execute( "citytime" );
+  else
+    QMessageBox::warning(this,tr("citytime executable not found"),
+			 tr("In order to choose the time zones,\nplease install citytime."));
 }
 
 QStringList timezoneDefaults( void )
