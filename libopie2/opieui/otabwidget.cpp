@@ -350,7 +350,7 @@ void OTabWidget::selectTab( OTabInfo *tab )
         }
         tabBar->tab( tab->id() )->setText( tab->label() );
         tabBar->setCurrentTab( tab->id() );
-        setUpLayout();
+//        setUpLayout();
         tabBar->update();
     }
     else
