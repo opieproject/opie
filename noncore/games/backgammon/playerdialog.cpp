@@ -2,6 +2,8 @@
 
 #include <qgroupbox.h>
 
+#include <qpe/qpeapplication.h>
+
 PlayerDialog::PlayerDialog(QWidget* parent,const char* name,bool modal,WFlags f)
         :QDialog(parent,name,modal,f)
 {
@@ -31,7 +33,7 @@ PlayerDialog::PlayerDialog(QWidget* parent,const char* name,bool modal,WFlags f)
     auto_button2->setGeometry(110,20,100,20);
     button2_state(auto2);
 
-    showMaximized();
+    QPEApplication::showDialog( this );
 }
 
 PlayerDialog::~PlayerDialog()

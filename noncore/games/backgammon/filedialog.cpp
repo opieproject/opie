@@ -22,7 +22,8 @@ FileDialog::FileDialog(QWidget* parent,QString header,QString extension,const ch
     file_name="user";
     fileinput=new QLineEdit(file_name,this);
     fileinput->setGeometry(1,220,235,20);
-    showMaximized();
+
+    QPEApplication::showDialog( this );
 }
 
 FileDialog::~FileDialog()

@@ -63,7 +63,7 @@ void TicTacButton::drawButtonLabel( QPainter *p )
 TicTacGameBoard::TicTacGameBoard( int n, QWidget *parent, const char *name )
         : QWidget( parent, name )
 {
-    showMaximized();
+    QPEApplication::showWidget( this );
     st = Init;          // initial state
     nBoard = n;
     n *= n;         // make square
@@ -333,7 +333,7 @@ TicTacToe::TicTacToe( QWidget *parent, const char *name, WFlags fl )
     l->addLayout( b );
     b->addWidget( newGame );
     b->addWidget( quit );
-    showMaximized();
+    QPEApplication::showWidget( this );
     newState();
 }
 

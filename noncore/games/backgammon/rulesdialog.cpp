@@ -3,6 +3,8 @@
 #include <qgroupbox.h>
 #include <qlabel.h>
 
+#include <qpe/qpeapplication.h>
+
 RulesDialog::RulesDialog(QWidget* parent,const char* name,bool modal,WFlags f)
   : QDialog(parent,name,modal,f)
 {
@@ -32,7 +34,7 @@ RulesDialog::RulesDialog(QWidget* parent,const char* name,bool modal,WFlags f)
     QLabel* nice_dice_help=new QLabel("allow to rescue pieces with dice\nvalues graeter than the distance\nto the players endzone.",nice_dice_box);
     nice_dice_help->setGeometry(10,40,200,60);
     
-    showMaximized();
+    QPEApplication::showDialog( this );
 }
 
 

@@ -20,6 +20,8 @@
 #include <qstring.h>
 #include <qtextview.h>
 
+#include <qpe/qpeapplication.h>
+
 #include "helpwindow.h"
 
 
@@ -71,7 +73,7 @@ HelpWindow::HelpWindow( QWidget *parent, const char *name, bool modal, WFlags fl
     layout->insertWidget( -1, view );
     layout->insertSpacing( -1, 5 );
 
-    showMaximized();
+    QPEApplication::showDialog( this );
 }
 
 HelpWindow::~HelpWindow()

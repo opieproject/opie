@@ -17,6 +17,7 @@
 #include <qpe/config.h>
 #include <qlayout.h>
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 
 #include <qstring.h>
 #include <qhbox.h>
@@ -169,7 +170,7 @@ OHighscoreDialog::OHighscoreDialog(OHighscore *highscore, QWidget *parent, const
 	createHighscoreListView();
 	
 	vbox_layout->addWidget( list );
-	showMaximized();
+	QPEApplication::showDialog( this );
 }
 
 void OHighscoreDialog::createHighscoreListView()

@@ -59,7 +59,7 @@ ThemeDialog::ThemeDialog(QWidget* parent,const char* name,bool modal,WFlags f)
     boxtable->setGeometry(40,225,195,20);
     fillBox("table",boxtable);
 
-    showMaximized();
+    QPEApplication::showDialog( this );
 }
 
 ThemeDialog::~ThemeDialog()

@@ -2,6 +2,7 @@
 
 #include <qgroupbox.h>
 
+#include <qpe/qpeapplication.h>
 
 AI_Dialog::AI_Dialog(QWidget* parent,const char* name,bool modal,WFlags f)
   : QDialog(parent,name,modal,f)
@@ -28,7 +29,7 @@ AI_Dialog::AI_Dialog(QWidget* parent,const char* name,bool modal,WFlags f)
     eliminatehelp->setGeometry(140,40,20,20);
     connect(eliminatehelp,SIGNAL(pressed()),this,SLOT(eliminatehelp_pressed()));
     connect(eliminatehelp,SIGNAL(released()),this,SLOT(eliminatehelp_released()));
-    
+
     QLabel* expose_label=new QLabel(tr( "<b>Expose</b>" ),settings);
     expose_label->setGeometry(50,60,50,20);
     expose=new QSpinBox(0,6,1,settings);
@@ -37,7 +38,7 @@ AI_Dialog::AI_Dialog(QWidget* parent,const char* name,bool modal,WFlags f)
     exposeehelp->setGeometry(140,60,20,20);
     connect(exposeehelp,SIGNAL(pressed()),this,SLOT(exposehelp_pressed()));
     connect(exposeehelp,SIGNAL(released()),this,SLOT(exposehelp_released()));
-    
+
     QLabel* protect_label=new QLabel(tr( "<b>Protect</b>" ),settings);
     protect_label->setGeometry(50,80,50,20);
     protect=new QSpinBox(0,6,1,settings);
@@ -46,7 +47,7 @@ AI_Dialog::AI_Dialog(QWidget* parent,const char* name,bool modal,WFlags f)
     protecthelp->setGeometry(140,80,20,20);
     connect(protecthelp,SIGNAL(pressed()),this,SLOT(protecthelp_pressed()));
     connect(protecthelp,SIGNAL(released()),this,SLOT(protecthelp_released()));
-    
+
     QLabel* safe_label=new QLabel(tr( "<b>Safe</b>" ),settings);
     safe_label->setGeometry(50,100,50,20);
     safe=new QSpinBox(0,6,1,settings);
@@ -55,7 +56,7 @@ AI_Dialog::AI_Dialog(QWidget* parent,const char* name,bool modal,WFlags f)
     safeehelp->setGeometry(140,100,20,20);
     connect(safeehelp,SIGNAL(pressed()),this,SLOT(safehelp_pressed()));
     connect(safeehelp,SIGNAL(released()),this,SLOT(safehelp_released()));
-    
+
     QLabel* empty_label=new QLabel(tr( "<b>Empty</b>" ),settings);
     empty_label->setGeometry(50,120,50,20);
     empty=new QSpinBox(0,6,1,settings);
@@ -64,7 +65,7 @@ AI_Dialog::AI_Dialog(QWidget* parent,const char* name,bool modal,WFlags f)
     emptyhelp->setGeometry(140,120,20,20);
     connect(emptyhelp,SIGNAL(pressed()),this,SLOT(emptyhelp_pressed()));
     connect(emptyhelp,SIGNAL(released()),this,SLOT(emptyhelp_released()));
-    
+
     defaultvalues=new QPushButton(tr( "Default Values" ),settings);
     defaultvalues->setGeometry(60,140,90,20);
     connect(defaultvalues,SIGNAL(clicked()),this,SLOT(setDefaultValues()));
@@ -74,9 +75,9 @@ AI_Dialog::AI_Dialog(QWidget* parent,const char* name,bool modal,WFlags f)
 
     help=new QLabel(helpbox);
     help->setGeometry(10,15,200,65);
-    
+
     setHelpText();
-    showMaximized();
+    QPEApplication::showDialog( this );
 }
 
 
