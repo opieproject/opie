@@ -149,6 +149,8 @@ void OLedBox::drawLed ( QPixmap *pix, const QColor &col )  // paint a ROUND SUNK
 	QBrush brush;
 	QPen pen;
 
+	pix-> fill ( black );
+
 	// First of all we want to know what area should be updated
 	// Initialize coordinates, width, and height of the LED
 	int width = pix-> width ( );
@@ -219,7 +221,10 @@ void OLedBox::drawLed ( QPixmap *pix, const QColor &col )  // paint a ROUND SUNK
 
 #ifdef _QTE_IS_TOO_DUMB_TO_DRAW_AN_ARC
 	paint. drawPixmap ( 0, 0, *s_border_pix );
-
+	paint. end ( );
+	
+	pix-> setMask ( pix-> createHeuristicMask ( ));
+	
 #else
 	pen.setWidth( 3 );
 	brush.setStyle( QBrush::NoBrush );              // Switch off the brush
@@ -253,7 +258,6 @@ void OLedBox::drawLed ( QPixmap *pix, const QColor &col )  // paint a ROUND SUNK
 				shadow_color = 100;
 		} // end if ( angle < 2320 )
 	}   // end for ( angle = 720; angle < 6480; angle += 160 )
-#endif
 	paint.end();
 	//
 	// painting done
@@ -264,7 +268,8 @@ void OLedBox::drawLed ( QPixmap *pix, const QColor &col )  // paint a ROUND SUNK
 	mp. setBrush ( Qt::color1 );
 	mp. drawEllipse ( 0, 0, width + 2, width + 2 );
 	mp. end ( );
-
+	
 	pix-> setMask ( mask );
+#endif
 }
 
