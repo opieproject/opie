@@ -45,6 +45,7 @@ public:
 private:
     QString sizeString( unsigned int size );
     QFileInfo fileInfo;
+  QPixmap FileItem::drawThumbnail(const QFileInfo &file);
 };
 
 
@@ -54,19 +55,22 @@ class FileView : public QListView
 
 public:
     FileView( const QString & dir, QWidget * parent = 0,
-			  const char * name = 0, 
-			  bool hidden = FALSE,
-			  bool symlinks = FALSE );
+        const char * name = 0, 
+        bool hidden = FALSE,
+        bool symlinks = FALSE,
+        bool thumbnails = FALSE );
 
     void    setDir( const QString & dir );
     QString cd(){ return currentDir; }
     QStringList history() const { return dirHistory; }
     bool showingHidden;
 
-	void setShowHidden(bool hidden);
-	void setShowSymlinks(bool symlinks);
-	void setMenuKeepsOpen(bool keepOpen);
-	
+  void setShowHidden(bool hidden);
+  void setShowSymlinks(bool symlinks);
+  void setShowThumbnails(bool thumbnails);
+  bool getShowThumbnails () const { return showThumbnails; }
+  void setMenuKeepsOpen(bool keepOpen);
+  
 public slots:
     void updateDir();
     void parentDir();
@@ -96,7 +100,6 @@ protected slots:
     void addToDocuments();
     void run();
     void endRenaming();
-
 private:
     QString     currentDir;
     QStringList dirHistory, flist;
@@ -104,9 +107,10 @@ private:
     InlineEdit * le;
     FileItem   * itemToRename;
     bool         selected;
-    bool		showHidden;
-    bool		showSymlinks;
-	bool menuKeepsOpen;	
+    bool    showHidden;
+    bool    showSymlinks;
+  bool    showThumbnails;
+  bool menuKeepsOpen; 
 
     bool copyFile( const QString & dest, const QString & src );
 
@@ -146,10 +150,13 @@ private slots:
     void sortSize();
     void sortType();
     void updateSorting();
-	void updateShowHidden();
-	void updateShowSymlinks();
+    void updateShowHidden();
+    void updateShowSymlinks();
+    void updateShowThumbnails();
     void updateDirMenu();
     void dirSelected( int id );
+    void cleanUp();
+    
 };
 
 #endif

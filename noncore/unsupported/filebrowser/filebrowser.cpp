@@ -18,6 +18,7 @@
 **
 **********************************************************************/
 
+
 #include "inlineedit.h"
 #include "filebrowser.h"
 #include "filePermissions.h"
@@ -43,10 +44,12 @@
 #include <qmultilineedit.h>
 #include <qfont.h>
 #include <qpainter.h>
+#include <qprogressbar.h>
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <qpe/qpeapplication.h>
 
 //
 //  FileItem
@@ -83,10 +86,13 @@ FileItem::FileItem( QListView * parent, const QFileInfo & fi )
   pm = Resource::loadPixmap( "locked" );
     else if( isLib() )
   pm = Resource::loadPixmap( "library" );
-    else
+    else if( ((FileView* )parent)->getShowThumbnails() && mt.id().contains(QRegExp("^image/", FALSE, FALSE)) )
+      pm = drawThumbnail(fi);
+  else
   pm = mt.pixmap();
     if ( pm.isNull() )
   pm = Resource::loadPixmap("UnknownDocument-14");
+
    if( fi.isSymLink() ){
     // overlay link image
     QPixmap lnk = Resource::loadPixmap( "filebrowser/symlink" );
@@ -172,18 +178,70 @@ bool FileItem::rename( const QString & name )
     return TRUE;
 }
 
+QPixmap FileItem::drawThumbnail(const QFileInfo &file) {
+
+  /*
+   * this thing is sloooooow, and it also doesn't load 
+   * dynamicly (like a web browser). if anyone knows how to 
+   * do that, please do!
+   */
+  QString cacheDir = "/tmp/filebrowserThumbnailCache";
+  QFileInfo cachedFile (cacheDir + file.filePath());
+
+  if (cachedFile.exists() && cachedFile.lastModified() == file.lastModified()) {
+
+    QPixmap cachedImage (cachedFile.filePath());
+    return cachedImage;
+  }
+  else {
+
+    QImage image (file.filePath());
+
+    // if inside of cache dir, don't render thumbnails! recursive error!
+    if (image.isNull() || file.filePath().contains(QRegExp("^" + cacheDir))) { 
+      DocLnk doc (file.filePath());
+      return doc.pixmap(); 
+    }
+    Config cfg("Filebrowser");
+    cfg.setGroup("View");
+    int size;
+    size =cfg.readNumEntry("ThumbSize", 72);
+    QPixmap thumb (size, size);
+
+    double scale = (double)image.height() / (double)image.width();
+    int newHeight = int(size * scale);
+    thumb.convertFromImage (image.smoothScale(size, newHeight));
+
+    if (!cachedFile.dir().exists()) {
+      QString cmd = "/bin/mkdir -p \"" + cachedFile.dirPath() +"\"";
+          system( (const char *) cmd );
+    }
+
+    if (thumb.save(cachedFile.filePath(), QPixmap::imageFormat(file.filePath()), 70)) {
+      // make thumbnail modify time the same as the image
+      QString cmd = "/bin/touch -r \"" + file.filePath() +"\" " +
+          "\"" + cachedFile.filePath() + "\"";
+          system( (const char *) cmd );
+
+    }
+
+    return thumb;
+  }
+}
+
 //
 //  FileView
 //
 FileView::FileView( const QString & dir, QWidget * parent,
           const char * name, 
-          bool hidden, bool symlinks )
+          bool hidden, bool symlinks, bool thumbnails )
     : QListView( parent, name ),
       menuTimer( this ),
       le( NULL ),
       itemToRename( NULL ),
       showHidden( hidden ),
-      showSymlinks( symlinks),
+      showSymlinks( symlinks ),
+      showThumbnails( thumbnails ),
     menuKeepsOpen( FALSE )
 {
     addColumn( "Name" );
@@ -253,25 +311,45 @@ void FileView::generateDir( const QString & dir )
 
      d.setSorting( QDir::Name | QDir::DirsFirst | QDir::IgnoreCase |  QDir::Reversed );
         
-
     const QFileInfoList * list = d.entryInfoList();
     QFileInfoListIterator it( *list );
     QFileInfo *fi;
 
+  QProgressBar *thumbProgress = 0;
+  if (showThumbnails) {
+
+    thumbProgress = new QProgressBar(it.count(), this);
+    thumbProgress->show();
+  }
+
     clear();
-    while( (fi = it.current()) ){
-        if( (fi->fileName() == ".") || (fi->fileName() == "..") ){
+
+  int fileCount = 1; // used in the thumbnail progress meter
+  while( (fi = it.current()) ){
+    if( (fi->fileName() == ".") || (fi->fileName() == "..") ){
       ++it;
       continue;
     }
-  if(!showSymlinks && fi->isSymLink()){
-    ++it;
-    continue;
-  }
-   (void) new FileItem( (QListView *) this, *fi );
-    ++it;
+    if(!showSymlinks && fi->isSymLink()){
+      ++it;
+      continue;
     }
+    // thumbnail progress
+    if (showThumbnails) {
+
+      thumbProgress->setProgress(fileCount);
+    }
+    (void) new FileItem( (QListView *) this, *fi );
+
+    ++it;
+    ++fileCount;
+  }
+
+  if (showThumbnails) { 
+    thumbProgress->close();
+  }
     emit dirChanged();
+
 }
 
 void FileView::rename()
@@ -445,6 +523,25 @@ bool FileView::copyFile( const QString & dest, const QString & src )
 void FileView::cut()
 {
     int err;
+    // ##### a better inmplementation might be to rename the CUT file
+    // ##### to ".QPE-FILEBROWSER-MOVING" rather than copying it.
+    QString cmd, dest, basename, cd = "/tmp/qpemoving";
+  QStringList newflist;
+  newflist.clear();
+  
+  cmd = "rm -rf " + cd;
+  system ( (const char *) cmd );
+  cmd = "mkdir " + cd;
+  system( (const char *) cmd );
+
+// get the names of the files to cut
+    FileItem * item;
+ 
+    if((item = (FileItem *) firstChild()) == 0) return;
+ 
+    flist.clear();
+    while( item ){
+        if( ite
     // ##### a better inmplementation might be to rename the CUT file
     // ##### to ".QPE-FILEBROWSER-MOVING" rather than copying it.
     QString cmd, dest, basename, cd = "/tmp/qpemoving";
@@ -713,6 +810,11 @@ void FileView::setShowSymlinks(bool symlinks)
   showSymlinks=symlinks;
 }
 
+void FileView::setShowThumbnails(bool thumbnails)
+{
+  showThumbnails=thumbnails;
+}
+
 void FileView::setMenuKeepsOpen(bool keepOpen)
 {
   menuKeepsOpen=keepOpen; 
@@ -736,17 +838,20 @@ void FileBrowser::init(const QString & dir)
 {
     setCaption( tr("File Manager") );
     setIcon( Resource::loadPixmap( "filebrowser_icon" ) );
+    connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
+
 
   Config cfg("Filebrowser");
   cfg.setGroup("View");
   bool showHidden=(cfg.readEntry("Hidden","FALSE") == "TRUE");
   bool showSymlinks=(cfg.readEntry("Symlinks","FALSE") == "TRUE");
+  bool showThumbnails=(cfg.readEntry("Thumbnails","FALSE") == "TRUE");
 
   cfg.setGroup("Menu"); 
   bool menuKeepsOpen=(cfg.readEntry("KeepOpen", "FALSE") == "TRUE");
   
 
-    fileView = new FileView( dir, this, 0, showHidden, showSymlinks );
+    fileView = new FileView( dir, this, 0, showHidden, showSymlinks, showThumbnails );
     fileView->setAllColumnsShowFocus( TRUE );
   fileView->setMenuKeepsOpen(menuKeepsOpen);
   
@@ -776,8 +881,10 @@ void FileBrowser::init(const QString & dir)
     viewMenu = new QPopupMenu( this);  
   viewMenu->insertItem( tr( "Hidden"), this, SLOT( updateShowHidden() ) );
   viewMenu->insertItem( tr( "Symlinks"), this, SLOT( updateShowSymlinks() ) );
+  viewMenu->insertItem( tr( "Thumbnails"), this, SLOT( updateShowThumbnails() ) );
     viewMenu->setItemChecked( viewMenu->idAt( 0 ), showHidden );
     viewMenu->setItemChecked( viewMenu->idAt( 1 ), showSymlinks );
+    viewMenu->setItemChecked( viewMenu->idAt( 2 ), showThumbnails );
 
   menuBar->insertItem( tr("View"), viewMenu );
     
@@ -930,7 +1037,6 @@ void FileView::chPerm() {
     FileItem * i;
     QStringList fl;
     QString cmd;
-    int err;
 
     if((i = (FileItem *) firstChild()) == 0) return;
 
@@ -981,4 +1087,43 @@ void FileBrowser::updateShowSymlinks()
     cfg.writeEntry("Symlinks",valShowSymlinks?"TRUE":"FALSE");
 
   fileView->updateDir();
+}
+
+void FileBrowser::updateShowThumbnails()
+{
+  bool valShowThumbnails=viewMenu->isItemChecked( viewMenu->idAt( 2 ) );
+  valShowThumbnails=!valShowThumbnails;
+    viewMenu->setItemChecked( viewMenu->idAt( 2 ), valShowThumbnails );
+  fileView->setShowThumbnails(valShowThumbnails);
+
+    Config cfg("Filebrowser");
+    cfg.setGroup("View");
+    cfg.writeEntry("Thumbnails",valShowThumbnails?"TRUE":"FALSE");
+
+  fileView->updateDir();
+}
+
+void FileBrowser::cleanUp() {
+  QString cmdr = "rm -rf /tmp/filebrowserThumbnailCache";
+//  qDebug("exit");  
+  system(cmdr.latin1());
+}
+
+{
+  bool valShowThumbnails=viewMenu->isItemChecked( viewMenu->idAt( 2 ) );
+  valShowThumbnails=!valShowThumbnails;
+    viewMenu->setItemChecked( viewMenu->idAt( 2 ), valShowThumbnails );
+  fileView->setShowThumbnails(valShowThumbnails);
+
+    Config cfg("Filebrowser");
+    cfg.setGroup("View");
+    cfg.writeEntry("Thumbnails",valShowThumbnails?"TRUE":"FALSE");
+
+  fileView->updateDir();
+}
+
+void FileBrowser::cleanUp() {
+  QString cmdr = "rm -rf /tmp/filebrowserThumbnailCache";
+//  qDebug("exit");  
+  system(cmdr.latin1());
 }
