@@ -9,7 +9,8 @@ HEADERS     = oapplication.h            \
               oprocess.h                \
               oprocctrl.h               \
               osmartpointer.h           \
-              ostorageinfo.h            
+              ostorageinfo.h            \
+	      xmltree.h
 
 SOURCES     = oapplication.cpp          \
               oconfig.cpp               \
@@ -18,7 +19,8 @@ SOURCES     = oapplication.cpp          \
               oglobalsettings.cpp       \
               oprocess.cpp              \
               oprocctrl.cpp             \
-              ostorageinfo.cpp          
+              ostorageinfo.cpp          \
+	      xmltree.cpp
 
 include ( device/device.pro )
 

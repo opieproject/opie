@@ -25,7 +25,7 @@
 
 #include <assert.h>
 
-using namespace Opie::Pim::Private;
+using namespace Opie::Core;
 
 XMLElement::XMLElement()
     : m_parent( 0 ), m_next( 0 ), m_prev( 0 ), m_first( 0 ), m_last( 0 )

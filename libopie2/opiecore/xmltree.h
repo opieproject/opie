@@ -26,8 +26,7 @@
 #include <qtextstream.h>
 
 namespace Opie {
-namespace Pim  {
-namespace Private{
+namespace Core  {
 
 /**
  *  A small xml lib written by Simon Hausmann.
@@ -115,7 +114,6 @@ private:
     Private* d;
 };
 
-}
 }
 } // namespace Opie
 
