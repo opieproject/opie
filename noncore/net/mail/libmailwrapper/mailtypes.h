@@ -108,7 +108,7 @@ class RecBody
 {
 protected:
     QString m_BodyText;
-    QList<RecPart> m_PartsList;
+    QValueList<RecPart> m_PartsList;
     RecPart m_description;
 
 public:
@@ -120,8 +120,8 @@ public:
     void setDescription(const RecPart&des);
     const RecPart& Description()const;
     
-    void setParts(const QList<RecPart>&parts);
-    const QList<RecPart>& Parts()const;
+    void setParts(const QValueList<RecPart>&parts);
+    const QValueList<RecPart>& Parts()const;
     void addPart(const RecPart&part);
 };
 

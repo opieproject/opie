@@ -166,7 +166,7 @@ const QValueList<int>& RecPart::Positionlist()const
 RecBody::RecBody()
     : m_BodyText(),m_PartsList(),m_description()
 {
-    m_PartsList.setAutoDelete(true);
+    m_PartsList.clear();
 }
 
 RecBody::~RecBody()
@@ -183,21 +183,20 @@ const QString& RecBody::Bodytext()const
     return m_BodyText;
 }
 
-void RecBody::setParts(const QList<RecPart>&parts)
+void RecBody::setParts(const QValueList<RecPart>&parts)
 {
+    m_PartsList.clear();
     m_PartsList = parts;
-    m_PartsList.setAutoDelete(true);
 }
 
-const QList<RecPart>& RecBody::Parts()const
+const QValueList<RecPart>& RecBody::Parts()const
 {
     return m_PartsList;
 }
 
 void RecBody::addPart(const RecPart& part)
 {
-    RecPart*p = new RecPart(part);
-    m_PartsList.append(p);
+    m_PartsList.append(part);
 }
 
 void RecBody::setDescription(const RecPart&des)
