@@ -37,7 +37,7 @@ ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(pa
 	list = new QListView( hbox );
 	list->addColumn( tr( "Searchmethod" ) );
 	loadSearchMethodNames();
-	
+
 	QVBox *vbox = new QVBox( hbox );
 	new_button = new QPushButton( tr( "New" ) , vbox );
 	change_button = new QPushButton( tr( "Change" ) , vbox );
@@ -45,12 +45,12 @@ ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(pa
 	connect( new_button, SIGNAL( clicked() ), this, SLOT( slotNewMethod() ) );
 	connect( change_button, SIGNAL( clicked() ), this, SLOT( slotChangeMethod() ));
 	connect( delete_button, SIGNAL( clicked() ), this, SLOT( slotDeleteMethod() ));
-	
+
 	vbox_layout_searchtab->addWidget( hbox );
 
 	vbox_layout->addWidget( search_tab );
 
-	QPEApplication::execDialog( this );
+ 	QPEApplication::showDialog( this );
 }
 
 void ConfigDlg::slotNewMethod()
@@ -86,7 +86,7 @@ void ConfigDlg::slotDeleteMethod()
 		cfg.setGroup( "Method_"+list->selectedItem()->text(0) );
 		cfg.clearGroup();
 		//FIXME: this only removes the entries but not the group itself
-		
+
 		list->takeItem( list->selectedItem() );
 	}
 }
@@ -97,8 +97,11 @@ void ConfigDlg::loadSearchMethodNames()
 	QStringList groupListCfg = cfg.groupList().grep( "Method_" );
 	for ( QStringList::Iterator it = groupListCfg.begin() ; it != groupListCfg.end() ; ++it )
 	{
-		QListViewItem *item = new QListViewItem( list );
 		cfg.setGroup( *it );
-		item->setText( 0 , cfg.readEntry( "Name" ) );
+		QString name = cfg.readEntry( "Name" );
+		if ( name != QString::null ) {
+			QListViewItem *item = new QListViewItem( list );
+			item->setText( 0 , name );
+		}
 	}
 }

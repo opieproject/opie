@@ -66,8 +66,6 @@ SearchMethodDlg::SearchMethodDlg(QWidget *parent, const char *name, bool modal, 
 
 	vbox_layout->addWidget( vbox );
 
-	QPEApplication::execDialog ( this );
-
 	if( !itemname )
 		setCaption( tr( "New Searchmethod" ) );
 	else
@@ -76,6 +74,8 @@ SearchMethodDlg::SearchMethodDlg(QWidget *parent, const char *name, bool modal, 
 		itemName = itemname;
 		setupEntries(itemname);
 	}
+
+ 	QPEApplication::showDialog ( this );
 }
 
 void SearchMethodDlg::setupEntries( QString item )
