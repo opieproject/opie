@@ -64,3 +64,6 @@ void TodoView::complete( int uid ) {
 void TodoView::complete( const OTodo& ev ) {
     m_main->slotComplete( ev );
 }
+void TodoView::removeQuery( int uid ) {
+    m_main->slotDelete( uid );
+}

@@ -111,6 +111,8 @@ namespace Todo {
         void update(int uid, const SmallTodo& to );
         void update(int uid, const OTodo& ev);
         void remove( int uid );
+        /* will ask the user if the item should be deleted */
+        void removeQuery(int uid );
         void complete( int uid );
         void complete( const OTodo& ev );
     private:

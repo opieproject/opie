@@ -167,6 +167,7 @@ private slots:
         void slotDuplicate();
 
         void slotDelete();
+        void slotDelete(int uid );
         void slotDeleteAll();
         void slotDeleteCompleted();
 

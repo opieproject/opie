@@ -462,9 +462,24 @@ void MainWindow::slotDelete() {
     if (!QPEMessageBox::confirmDelete(this, QWidget::tr("Todo"), strName ) )
         return;
 
-    handleAlarms( OTodo(), m_todoMgr.event( currentView()->current() ) );
+    handleAlarms( m_todoMgr.event( currentView()->current() ), OTodo() );
     m_todoMgr.remove( currentView()->current() );
     currentView()->removeEvent( currentView()->current() );
+    raiseCurrentView();
+}
+void MainWindow::slotDelete(int uid ) {
+    if(m_syncing) {
+	QMessageBox::warning(this, QWidget::tr("Todo"),
+			     QWidget::tr("Can not edit data, currently syncing"));
+	return;
+    }
+    OTodo to = m_todoMgr.event(uid);
+    if (!QPEMessageBox::confirmDelete(this, QWidget::tr("Todo"), to.toShortText() ) )
+        return;
+
+    handleAlarms(to, OTodo() );
+    m_todoMgr.remove( to.uid() );
+    currentView()->removeEvent( to.uid() );
     raiseCurrentView();
 }
 void MainWindow::slotDeleteAll() {

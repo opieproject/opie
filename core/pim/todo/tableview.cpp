@@ -27,6 +27,7 @@
 */
 #include <stdlib.h>
 #include <cmath>
+#include <cctype>
 
 #include <qcombobox.h>
 #include <qlineedit.h>
@@ -545,6 +546,11 @@ void TableView::contentsMouseMoveEvent( QMouseEvent* e ) {
 void TableView::keyPressEvent( QKeyEvent* event) {
     int row = currentRow();
     int col = currentColumn();
+
+    char key = ::toupper( event->ascii() );
+    /* let QTable also handle the d later */
+    if ( key == 'D' )
+        removeQuery( sorted().uidAt( row ) );
 
 
     switch( event->key() ) {
