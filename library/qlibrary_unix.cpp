@@ -161,7 +161,7 @@ bool QLibraryPrivate::freeLibrary()
 	}
 #if defined(QT_DEBUG) || defined(QT_DEBUG_COMPONENT)
     else {
-	    qWarning( "Error in NSUnLinkModule(): %d", ret );
+	    qWarning( "Error in NSUnLinkModule()" );
     }
 #endif
     return pHnd == 0;
