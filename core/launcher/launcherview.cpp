@@ -686,7 +686,7 @@ LauncherView::LauncherView( QWidget* parent, const char* name, WFlags fl )
     icons->setMargin( 0 );
     icons->setSelectionMode( QIconView::NoSelection );
     icons->setBackgroundMode( PaletteBase );
-    icons->setResizeMode( QIconView::Fixed );
+    icons->setResizeMode( QIconView::Adjust );
     vmode = (ViewMode)-1;
     setViewMode( Icon );
 
