@@ -468,6 +468,34 @@ Free some memory and try again.</source>
         <translation>AM</translation>
     </message>
     <message>
+        <source>Mon</source>
+        <translation>一</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation>二</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation>三</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation>四</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation>五</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation>六</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation>日</translation>
+    </message>
+    <message>
         <source>Are you sure you want to delete
  %1?</source>
         <translation>您確定要刪除
@@ -744,34 +772,6 @@ Free some memory and try again.</source>
     <message>
         <source>New Document</source>
         <translation>新增文件</translation>
-    </message>
-    <message>
-        <source>Mon</source>
-        <translation type="unfinished">一</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation type="unfinished">二</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation type="unfinished">三</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation type="unfinished">四</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation type="unfinished">五</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation type="unfinished">六</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation type="unfinished">日</translation>
     </message>
 </context>
 <context>
