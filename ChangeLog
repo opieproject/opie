@@ -1,4 +1,4 @@
-2005-??-??	Opie 1.2.0
+2005-03-20	Opie 1.2.0-pre
 
 	New Features
 	------------
@@ -12,6 +12,7 @@
 	Fixed Bugs
 	----------
 	* #1236 - VCards contained empty home and work address entries causing Palms to crash (eilers)
+    * #1412 - Launcher Settings - fixed default settings for background in Edit tab dialog (drw)
 	* #1472 - Opie textedit now check for unsaved changes on ESC key (ljp)
 	* #1474 - Implement GUI for Scrollbars on the Left in Appearance (zecke)
 	* #1482 - Fix double '/' in paths (zecke)
@@ -33,7 +34,6 @@
 	* n.a.  - PackageManager - fixed where last package in status file was not shown as installed when it should be (drw)
 	* n.a.  - PackageManager - fixed bug where lists_dir was not being honored at startup (drw)
 	* n.a.  - PackageManager - provided default value for lists_dir when none is entered in configuration dialog (drw)
-	* n.a.  - Launcher Settings - fixed default settings for background in Edit tab dialog (drw)
 	* n.a.  - OTabWidget - fixed scroll buttons, fix display position of tabs (drw)
 	* n.a.  - AddressBook - fixed sorting by 'File As' name (drw)
 	* n.a.  - AddressBook - fixed category handling for 'All' and 'Unfiled' (eilers)
