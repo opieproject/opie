@@ -14,6 +14,7 @@ POP3viewItem::POP3viewItem( POP3account *a, QListView *parent )
     wrapper = AbstractMail::getWrapper( account );
     setPixmap( 0, PIXMAP_POP3FOLDER );
     setText( 0, account->getAccountName() );
+    setOpen( true );
 }
 
 POP3viewItem::~POP3viewItem()
