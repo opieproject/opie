@@ -1,0 +1,41 @@
+# Use this script to make the IPK file for distribution
+# It assumes you are the root user.  Ipkg likes to have all
+# its files owned by root and this script does that.
+# Change the user name from "allen" to your user name
+# If you want to use this script
+
+# Set the environment variables for the arm environment
+echo "Setting environment variables..."
+source arm.sh
+
+# Remove any exisitng IPK files
+echo "Removing exisiting IPK files..."
+rm -rf *.ipk
+
+# Strip the binary file
+echo "Stripping the binary file..."
+arm-linux-strip qashmoney
+
+# Move the file to the right location
+echo "Moving the binary file..."
+mv qashmoney install/opt/QtPalmtop/bin &&
+
+# Change ownership of all the files
+echo "Changing ownership of all files..."
+chown -R root install
+chgrp -R root install
+chmod -R 0777 install
+
+# Make the IPK
+echo "Making the IPK file..."
+./ipkg-build install
+
+# Remove the binary from the bin directory so we can make the tarball
+echo "Removing qashmoney binary file..."
+rm -rf install/opt/QtPalmtop/bin/qashmoney
+
+# Restore ownership of all files
+echo "Restoring ownership of all files..."
+chown -R allen install
+chgrp -R allen install
+chmod -R 0777 install
