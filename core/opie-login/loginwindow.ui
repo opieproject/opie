@@ -405,6 +405,12 @@
         <receiver>LoginWindow</receiver>
         <slot>login()</slot>
     </connection>
+    <connection>
+        <sender>m_user</sender>
+        <signal>activated(int)</signal>
+        <receiver>m_password</receiver>
+        <slot>setFocus()</slot>
+    </connection>
     <slot access="public">login()</slot>
     <slot access="public">suspend()</slot>
     <slot access="public">toggleEchoMode(bool)</slot>

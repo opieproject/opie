@@ -9,7 +9,9 @@
 #include <qlabel.h>
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
+#include <qimage.h>
 
+#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
 #include <opie/odevice.h>
@@ -87,6 +89,7 @@ void LoginWindowImpl::toggleEchoMode ( bool t )
 {
 	m_password-> setEchoMode ( t ? QLineEdit::Normal : QLineEdit::Password );
 }
+
 
 QStringList LoginWindowImpl::getAllUsers ( )
 {
@@ -300,6 +303,19 @@ void LoginWindowImpl::login ( )
 
 	if ( ok ) {
 		if ( changeIdentity ( user )) {
+			// Draw a big wait icon, the image can be altered in later revisions
+			QWidget *d = QApplication::desktop ( );
+			m_input-> hideInputMethod ( );
+
+			QImage img = Resource::loadImage( "launcher/new_wait" );
+			QPixmap pix;
+			pix. convertFromImage ( img );
+			QLabel *w = new QLabel ( 0, "wait hack!", WStyle_Customize | WStyle_NoBorder | WStyle_Tool );
+			w-> setPixmap ( pix );
+			w-> setAlignment ( AlignCenter );
+			w-> showMaximized ( );
+			qApp-> processEvents ( );
+
 			char *opie = ::getenv ( "OPIEDIR" );
 			char *arg = new char [::strlen ( opie ) + 8 + 1];
 
@@ -308,6 +324,9 @@ void LoginWindowImpl::login ( )
 
 			// start qpe via a login shell
 			::execl ( "/bin/sh", "-sh", "-c", arg, 0 );
+
+			w-> hide ( );
+			delete w;
 
 			QMessageBox::critical ( this, tr( "Failure" ), tr( "Could not start OPIE\n(%1)." ). arg ( arg ));
 			delete [] arg;
