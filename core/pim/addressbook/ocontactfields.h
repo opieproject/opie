@@ -12,14 +12,13 @@ class QStringList;
 class OContactFields{
 
  public:
-    OContactFields( const OContact& );
+    OContactFields();
     ~OContactFields();
     void setFieldOrder( int, int );
     int getFieldOrder( int );
-    void saveToRecord();
+    void saveToRecord( OContact& );
 
  private:
-    OContact contact;
     QString fieldOrder;
 
  public:

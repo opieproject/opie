@@ -283,25 +283,21 @@ QMap<QString, int> OContactFields::trFieldsToId()
 	return ret_map;
 }
 
-OContactFields::OContactFields( const OContact &co){
+OContactFields::OContactFields(): 
+	fieldOrder("1234")
+{
   qDebug("ocontactfields c'tor");
-  contact = co;
   qDebug("get custom field");
-  fieldOrder = "1234";
-  qDebug("fieldOrder >%s<",fieldOrder.latin1());
-  fieldOrder = contact.customField( CONTACT_FIELD_ODER_NAME );
- qDebug("fieldOrder >%s<",fieldOrder.latin1());
- //  if (fieldOrder.isEmpty()) fieldOrder = "1234";
+  // if (fieldOrder.isEmpty()) fieldOrder = "1234";
 }
 
 OContactFields::~OContactFields(){
-  saveToRecord();
 }
 
 
-void OContactFields::saveToRecord(){
+void OContactFields::saveToRecord( OContact& cnt ){
   qDebug("ocontactfields saveToRecord");
-  contact.setCustomField( CONTACT_FIELD_ODER_NAME, fieldOrder );
+  cnt.setCustomField( CONTACT_FIELD_ODER_NAME, fieldOrder );
 }
 
 void OContactFields::setFieldOrder( int pos, int index ){

@@ -579,7 +579,7 @@ void ContactEditor::init() {
 	cmbChooserField3->insertStringList( trlChooserNames );
 	cmbChooserField4->insertStringList( trlChooserNames );
 
-	qDebug("fieldoder %i %i %i",contactfields->getFieldOrder(0),contactfields->getFieldOrder(1), contactfields->getFieldOrder(2) );
+	// qDebug("fieldoder %i %i %i",contactfields->getFieldOrder(0),contactfields->getFieldOrder(1), contactfields->getFieldOrder(2) );
 //	cmbChooserField1->setCurrentItem( contactfields->getFieldOrder(0) );
 //	cmbChooserField2->setCurrentItem( contactfields->getFieldOrder(1) );
 //	cmbChooserField3->setCurrentItem( contactfields->getFieldOrder(2) );
@@ -1123,8 +1123,9 @@ void ContactEditor::setEntry( const OContact &entry ) {
 
 
 	qDebug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-	delete contactfields;
-	contactfields = new OContactFields( entry );
+	if ( contactfields )
+		delete contactfields;
+	contactfields = new OContactFields();
 	qDebug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
 	emails = QStringList(ent.emailList());
