@@ -53,6 +53,7 @@ Package::Package( QStringList pack, PackageManagerSettings *s , QObject *parent,
 }
 
 Package::Package( QString n, PackageManagerSettings *s, QObject *parent, const char *name )
+	: QObject(parent,name)
 {	
   init(s);
  	if ( !QFile::exists( n ) )
@@ -67,6 +68,7 @@ Package::Package( QString n, PackageManagerSettings *s, QObject *parent, const c
 }
 
 Package::Package( Package *pi, QObject *parent, const char *name )
+	: QObject(parent,name)
 {
   init(pi->settings);
   copyValues( pi );

@@ -8,8 +8,9 @@ int debugLevel;
 
 int main( int argc, char ** argv )
 {
+	setpgid(0,0);
   printf("This is oipkg\n");
-  printf("$Id: main.cpp,v 1.12 2002-06-21 09:01:39 tille Exp $\n");
+  printf("$Id: main.cpp,v 1.13 2002-06-28 17:01:13 tille Exp $\n");
   debugLevel = 2;
   if (argc > 1)
   {
