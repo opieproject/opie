@@ -390,6 +390,7 @@ QList<Session> MainWindow::sessions() {
 void MainWindow::slotNew() {
     ProfileEditorDialog dlg(factory() );
     dlg.showMaximized();
+    dlg.setCaption( tr("New Connection") );
     int ret = dlg.exec();
 
     if ( ret == QDialog::Accepted ) {

@@ -38,6 +38,7 @@ ModemConfigWidget::ModemConfigWidget( const QString& name, QWidget* parent,
     QHBox *buttonBox = new QHBox( this );
     QPushButton *atButton = new QPushButton( buttonBox );
     atButton->setText( tr( "AT commands" ) );
+    // disabled for now
     atButton->hide();
     connect( atButton, SIGNAL( clicked() ), this, SLOT( slotAT() ) );
 
