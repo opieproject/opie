@@ -54,16 +54,16 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
 
     // temporary quick and dirty fix for the "sticky keyboard bug"
     // on ipaq.
-    struct utsname name;
-    if (uname(&name) != -1)
-      {
-	QString release=name.release;
-	qWarning("System release: %s\n", name.release);
-	if(release.find("embedix",0,TRUE) !=-1)
-	  {
-	    connect( repeatTimer, SIGNAL(timeout()), this, SLOT(repeat()) );
-	  }
-      }
+//    struct utsname name;
+//    if (uname(&name) != -1)
+    //    {
+//	QString release=name.release;
+//	qWarning("System release: %s\n", name.release);
+//	if(release.find("embedix",0,TRUE) !=-1)
+//	  {
+    connect( repeatTimer, SIGNAL(timeout()), this, SLOT(repeat()) );
+//	  }
+    //     }
 }
 
 void Keyboard::resizeEvent(QResizeEvent*)
@@ -119,18 +119,18 @@ void  KeyboardConfig::generateText(const QString &s)
 
 /*
   Format: length, code, length, code, ..., 0
-  
+
   length is measured in half the width of a standard key.
   If code < 0x80 we have length/2 consecutive standard keys,
   starting with scancode code.
-  
+
   Special keys are hardcoded, one at a time, with length of key
   and code >= 0x80, these are NOT standard PC scancodes, but are looked
   up in specialM[]. (The special keys are not keymappable.)
-  
+
  */
 
-static const uchar * const keyboard_opti[5] = { 
+static const uchar * const keyboard_opti[5] = {
     (const uchar *const) "\001\223\003\240\002\20\002\41\002\26\002\62\002\56\002\45\002\54\003\200\001\223\002\226\002\235\002\234\002\236",
     (const uchar *const) "\001\223\003\201\004\207\002\30\002\24\002\43\004\207\003\203\001\223\006\002\002\065",
     (const uchar *const) "\001\223\003\202\002\60\002\37\002\23\002\22\002\36\002\21\002\55\003\203\001\223\006\005\002\055",
@@ -152,14 +152,14 @@ static const uchar * const keyboard_standard[5] = {
     //TAB + qwerty..  + backslash //+ DEL + END + PGDN
 
     (const uchar *const)"\004\202\002a\002s\002d\002f\002g\002h\002j\002k\002l\002;\002'\004\203",
-    //CAPS + asdf.. + RETURN 
+    //CAPS + asdf.. + RETURN
 
     (const uchar *const)"\005\204\002z\002x\002c\002v\002b\002n\002m\002,\002.\002/\005\204\002\223\002\223\002\211",
     //SHIFT + zxcv... //+ UP
 
-    (const uchar *const)"\003\205\003\206\022\207\003\206\003\205\002\223\002\212\002\213\002\214" 
+    (const uchar *const)"\003\205\003\206\022\207\003\206\003\205\002\223\002\212\002\213\002\214"
     //CTRL + ALT + SPACE //+ LEFT + DOWN + RIGHT
-    
+
 };
 
 
@@ -394,7 +394,7 @@ static const char * const escape_xpm[]={
 "........."};
 
 
-enum { BSCode = 0x80, TabCode, CapsCode, RetCode, 
+enum { BSCode = 0x80, TabCode, CapsCode, RetCode,
        ShiftCode, CtrlCode, AltCode, SpaceCode, BackSlash,
        UpCode, LeftCode, DownCode, RightCode, Blank, Expand,
        Opti, ResetDict,
@@ -435,7 +435,7 @@ static const SpecialMap specialM[] = {
     {	Expand,			0,	"->",    expand_xpm },
     {	Opti,			0,	"#",     NULL },
     {	ResetDict,		0,	"R",     NULL },
-   
+
     // number pad stuff
     {	Divide,			0,	"/",     NULL },
     {	Multiply,		0,	"*",     NULL },
@@ -455,7 +455,7 @@ static int keycode( int i2, int j, const uchar **keyboard )
 {
     if ( j <0 || j >= 5 )
 	return 0;
-    
+
     const uchar *row = keyboard[j];
 
     while ( *row && *row <= i2 ) {
@@ -464,14 +464,14 @@ static int keycode( int i2, int j, const uchar **keyboard )
     }
 
     if ( !*row ) return 0;
-    
+
     int k;
     if ( row[1] >= 0x80 ) {
 	k = row[1];
     } else {
 	k = row[1]+i2/2;
     }
-    
+
     return k;
 }
 
@@ -479,7 +479,7 @@ static int keycode( int i2, int j, const uchar **keyboard )
 /*
   return scancode and width of first key in row \a j if \a j >= 0,
   or next key on current row if \a j < 0.
-  
+
 */
 
 int Keyboard::getKey( int &w, int j ) {
@@ -487,7 +487,7 @@ int Keyboard::getKey( int &w, int j ) {
     static int key_i = 0;
     static int scancode = 0;
     static int half = 0;
-    
+
     if ( j >= 0 && j < 5 ) {
 	if (useOptiKeys)
     	    row = keyboard_opti[j];
@@ -497,7 +497,7 @@ int Keyboard::getKey( int &w, int j ) {
     }
 
     if ( !row || !*row ) {
-	return 0;    
+	return 0;
     } else if ( row[1] >= 0x80 ) {
 	scancode = row[1];
 	w = (row[0] * w + (half++&1)) / 2;
@@ -512,7 +512,7 @@ int Keyboard::getKey( int &w, int j ) {
 	row += 2;
     return scancode++;
 }
-    
+
 
 void Keyboard::paintEvent(QPaintEvent* e)
 {
@@ -540,7 +540,7 @@ void Keyboard::drawKeyboard( QPainter &p, int key )
     QColor textcolor = QColor(0,0,0); // cg.text();
 
     int margin = threeD ? 1 : 0;
-    
+
 //    p.fillRect( 0, , kw-1, keyHeight-2, keycolor_pressed );
 
     for ( int j = 0; j < 5; j++ ) {
@@ -554,12 +554,12 @@ void Keyboard::drawKeyboard( QPainter &p, int key )
 		bool pressed = (k == pressedKey);
 		bool blank = (k == 0223);
 		const char * const * xpm = NULL;
-		
+
 		if ( k >= 0x80 ) {
 		    s = specialM[k - 0x80].label;
 
 		    xpm = specialM[k - 0x80].xpm;
-			
+
 		    if ( k == ShiftCode ) {
 			pressed = shift;
 		    } else if ( k == CapsCode ) {
@@ -568,11 +568,11 @@ void Keyboard::drawKeyboard( QPainter &p, int key )
 			pressed = ctrl;
 		    } else if ( k == AltCode ) {
 			pressed = alt;
-		    } 
+		    }
 		} else {
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
 /*
-		    s = QChar( shift^lock ? QWSServer::keyMap()[k].shift_unicode : 
+		    s = QChar( shift^lock ? QWSServer::keyMap()[k].shift_unicode :
 			       QWSServer::keyMap()[k].unicode);
 */
 		    // ### Fixme, bad code, needs improving, whole thing needs to
@@ -621,7 +621,7 @@ void Keyboard::drawKeyboard( QPainter &p, int key )
     			p.setPen(textcolor);
 			p.drawText( x - 1, y, kw, keyHeight-2, AlignCenter, s );
 		    }
-	    
+
 		    if ( threeD ) {
 			p.setPen(keycolor_hi);
 			p.drawLine( x, y, x+kw-1, y );
@@ -630,7 +630,7 @@ void Keyboard::drawKeyboard( QPainter &p, int key )
 		    // bottom
 		    p.setPen(keycolor_lo);
 		    p.drawLine( x, y+keyHeight-1, x+kw-1, y+keyHeight-1 );
-	    
+
 		} else {
 		    p.fillRect( x, y, kw, keyHeight, cg.background() );
 		}
@@ -689,7 +689,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 		    u = QWSServer::keyMap()[k].ctrl_unicode;
 		else if ( shift^lock )
 		    u = QWSServer::keyMap()[k].shift_unicode;
-		else 
+		else
 		    u = QWSServer::keyMap()[k].unicode;
 	}
 */
@@ -775,7 +775,7 @@ void Keyboard::timerEvent(QTimerEvent* e)
 
 void Keyboard::repeat()
 {
-  
+
   repeatTimer->start( 200 );
   emit key( unicode, qkeycode, modifiers, true, true );
 }
@@ -798,7 +798,7 @@ QSize Keyboard::sizeHint() const
 
     if (useOptiKeys)
     	keyHeight += 1;
-    
+
     return QSize( 320, keyHeight * 5 + picks->sizeHint().height() + 1 );
 }
 
