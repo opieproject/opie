@@ -68,6 +68,8 @@ public:
       qWarning("ToDoDB::load tagName(): %s", root->tagName().latin1()  );
 	//if( root->tagName() == QString::fromLatin1("Tasks" ) ){// Start
       XMLElement *element = root->firstChild();
+      if (element == 0 )
+          return m_todos;
       element = element->firstChild();
       while( element ){
 	if( element->tagName() != QString::fromLatin1("Task") ){
