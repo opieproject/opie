@@ -1,8 +1,8 @@
 /**
  * $Author: benmeyer $
- * $Date: 2003-01-13 19:10:24 $
- * $Id: interface.cpp,v 1.9 2003-01-13 19:10:24 benmeyer Exp $
- * $File$
+ * $Date: 2003-01-13 19:10:37 $
+ * $Id: interface.cpp,v 1.10 2003-01-13 19:10:37 benmeyer Exp $
+ * $Name:  $
  */ 
 
 #include "interface.h"
