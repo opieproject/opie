@@ -1,5 +1,5 @@
 Package: opie-mail
-Files: plugins/application/libopiemail.so* bin/opiemail apps/1Pim/mail.desktop pics/mail/*.png
+Files: plugins/application/libopiemail.so* bin/opiemail apps/1Pim/opiemail.desktop pics/mail/*.png
 Priority: optional
 Section: opie/pim
 Maintainer: Rajko Albrecht <alwin@handhelds.org>, Juergen Graf <jgf@handhelds.org>, Maximilian Reiﬂ <harlekin@handhelds.org>
