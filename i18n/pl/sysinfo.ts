@@ -237,7 +237,7 @@ Kliknij i przytrzymaj na procesie by zobaczyc dodatkowe informacje o nim lub by 
     </message>
     <message>
         <source>Version</source>
-        <translation>Versja</translation>
+        <translation>Wersja</translation>
     </message>
     <message>
         <source>Modules</source>
@@ -272,7 +272,7 @@ Kliknij i przytrzymaj na procesie by zobaczyc dodatkowe informacje o nim lub by 
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation type="unfinished">&lt;p&gt;Sprzedawca:</translation>
+        <translation>&lt;p&gt;Sprzedawca:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
