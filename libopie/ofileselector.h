@@ -78,7 +78,7 @@ class OFileSelectorItem : public QListViewItem {
     dir = isDir;
     mLocked = isLocked;
   }
-  bool locked() const{
+  bool isLocked() const{
     return mLocked;
   }
   QString directory()const{
@@ -148,7 +148,7 @@ class OFileSelector : public QWidget {
 
   bool showFiles()const { return m_files; };
   void setShowFiles(bool );
-
+  bool cd(const QString &path );
 
 
   int mode()const { return m_mode;  };
@@ -156,7 +156,7 @@ class OFileSelector : public QWidget {
   void setSelector( int );
   
 
-  void setPopupMenu( const QPopupMenu * );
+  void setPopupMenu( QPopupMenu * );
 
   void updateLay();
 
@@ -191,7 +191,11 @@ class OFileSelector : public QWidget {
  protected:
   void init();
   void updateMimes();
-  int m_mode, m_selector;
+  
+ protected:
+
+ private:
+int m_mode, m_selector;
   QComboBox *m_location, *m_mimeCheck, *m_viewCheck;
   QPushButton *m_homeButton, *m_docButton, *m_hideButton, *m_ok, *m_cancel;
   QPushButton  *m_reread, *m_up;
@@ -212,6 +216,8 @@ class OFileSelector : public QWidget {
   QHBoxLayout *m_boxName;
   QHBoxLayout *m_boxView;
 
+  QPopupMenu *m_custom;
+
   QLineEdit *m_edit;
   QLabel *m_fnLabel;
   bool m_shTool:1;
@@ -225,13 +231,10 @@ class OFileSelector : public QWidget {
   bool m_dir:1;
   bool m_files:1;
 
- protected:
-
- private:
   // implementation todo
   virtual void addFile(const QString &mime, QFileInfo *info, bool symlink = FALSE );
   virtual void addDir( const QString &mime, QFileInfo *info , bool symlink = FALSE );
-  virtual void addSymlink(const QString &mime, QFileInfo *info, bool broken = FALSE ){};
+  virtual void addSymlink(const QString &, QFileInfo *, bool = FALSE ){};
   void delItems();
   void initializeName();
   void initializeYes();
@@ -243,7 +246,25 @@ class OFileSelector : public QWidget {
   class OFileSelectorPrivate;
   OFileSelectorPrivate *d;
   static QMap<QString,QPixmap> *m_pixmaps;
+ 
+private slots:
+   void slotFileSelected(const QString & ); // not really meant to be a slot
+   void slotFileBridgeSelected( const DocLnk & );
+   virtual void slotSelectionChanged();
+   virtual void slotCurrentChanged(QListViewItem* );
+   virtual void slotClicked( int, QListViewItem *item, const QPoint &, int);
+   virtual void slotRightButton(int, QListViewItem *, const QPoint &, int );
+   virtual void slotContextMenu( QListViewItem *item);
+   // listview crap see above
+   // PopupMenu crap
+   virtual void slotChangedDir();
+   virtual void slotOpen();
+   virtual void slotRescan();
+   virtual void slotRename();
+   virtual void slotDelete();
+
 };
 
 
 #endif
+

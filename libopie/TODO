@@ -1,0 +1,17 @@
+- xmltree done
+
+- tododb
+   - set Alarms
+   - multiple categories
+   - Attendees
+   
+- OFileSelector
+   - DocLnk when not in Document Mode
+   - TreeView have a own OFileSelectorItem for this
+   - IconView add a QIconView to the widgetstack
+   - Move OFileSelectorItem to it's own files
+   - add functions to access the member variables
+   - debug
+   
+- Clickable labels?
+   Harlekin you wanted them in the libs?

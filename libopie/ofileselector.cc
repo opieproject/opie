@@ -39,6 +39,9 @@
 #include <qheader.h>
 #include <qdir.h>
 #include <qpainter.h>
+#include <qaction.h>
+#include <qpopupmenu.h>
+#include <qcursor.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/fileselector.h>
@@ -46,6 +49,10 @@
 #include <qpe/global.h>
 #include <qpe/mimetype.h>
 #include <qpe/resource.h>
+
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/stat.h>
 
 #include "ofileselector.h"
 
@@ -111,6 +118,7 @@ OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString
 
   m_dir = true;
   m_files = true;
+  m_custom = 0;
 
   if(m_pixmaps == 0 ) // init the pixmaps
     initPics();
@@ -178,6 +186,7 @@ void OFileSelector::init()
     m_stack->addWidget(m_select, NORMAL );
     m_lay->addWidget(m_stack );
     m_stack->raiseWidget(NORMAL );
+    connect(m_select, SIGNAL(fileSelected( const DocLnk &) ), this, SLOT(slotFileBridgeSelected(const DocLnk &) ) );
   }else {
     initializeListView();
   }
@@ -277,10 +286,10 @@ void OFileSelector::setShowFiles(bool files ){
   m_files = files;
   reparse();
 }
-void OFileSelector::setPopupMenu(const QPopupMenu * )
+void OFileSelector::setPopupMenu(QPopupMenu *pop )
 {
   //delete oldpopup;
-
+  m_custom = pop;
 }
 bool OFileSelector::setPermission( ) const
 {
@@ -557,7 +566,7 @@ void OFileSelector::slotViewCheck(const QString &view ){
     updateMimes();
     m_mimeCheck->insertStringList( m_mimetypes );
     m_stack->raiseWidget( NORMAL );
-    
+    connect(m_select, SIGNAL(fileSelected( const DocLnk &) ), this, SLOT(slotFileBridgeSelected(const DocLnk &) ) );    
 
   }else if(view == QString::fromLatin1("Files") ){
     // remove from the stack
@@ -619,6 +628,13 @@ void OFileSelector::initializeListView()
   QHeader *header = m_View->header();
   header->hide();
   m_View->setSorting(1 );
+  // connect now
+  connect(m_View, SIGNAL(selectionChanged() ), this, SLOT(slotSelectionChanged() ) );
+  connect(m_View, SIGNAL(currentChanged(QListViewItem *) ), this, SLOT(slotCurrentChanged(QListViewItem * ) ) );
+  connect(m_View, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint &, int) ), 
+	  this, SLOT(slotClicked( int, QListViewItem *, const QPoint &, int) ) );
+  connect(m_View, SIGNAL(mouseButtonPressed(int, QListViewItem *, const QPoint &, int )), 
+	  this, SLOT(slotRightButton(int, QListViewItem *, const QPoint &, int  ) ) );
 };
 /* If a item is locked  depends on the mode
    if we're in OPEN !isReadable is locked
@@ -676,7 +692,7 @@ void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink  )
     return;
   //if( showDirs )
   {
-    bool locked;
+    bool locked=false;
     QString name;
     QPixmap pix;
     if( ( m_mode == OPEN && !info->isReadable() ) || ( m_mode == SAVE && !info->isWritable()  ) ){
@@ -712,6 +728,173 @@ void OFileSelector::setShowDirs(bool dir )
   m_dir = dir;
   reparse();
 }
+
+void OFileSelector::slotFileSelected(const QString &string )
+{
+  if(m_shLne )
+    m_edit->setText( string );
+
+  emit fileSelected( string );
+  // do AppLnk stuff
+} 
+void OFileSelector::slotFileBridgeSelected( const DocLnk &lnk )
+{
+  slotFileSelected(lnk.name() );
+  emit fileSelected( lnk );
+}
+void OFileSelector::slotSelectionChanged() // get the current items
+  // fixme
+{
+  qWarning("selection changed" );
+}
+void OFileSelector::slotCurrentChanged(QListViewItem *item )
+{
+  qWarning("current changed" );
+  if( item == 0 )
+    return;
+
+  if( m_selector == EXTENDED || m_selector == EXTENDED_ALL ){
+    OFileSelectorItem *sel = (OFileSelectorItem*)item;
+    if(!sel->isDir() ){
+      qWarning("is not dir" );
+      if(m_shLne ){
+	m_edit->setText(sel->text(1) );
+	qWarning("setTexy" );
+      }
+    }
+  }else {
+    qWarning("mode not extended" );
+  }
+}
+// either select or change dir
+void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &point, int )
+{
+  if( item == 0 )
+    return;
+
+  if( button != Qt::LeftButton )
+    return; 
+
+ qWarning("clicked" );
+  if(m_selector == EXTENDED || m_selector == EXTENDED_ALL ){
+    qWarning("inside" );
+    OFileSelectorItem *sel = (OFileSelectorItem*)item;
+    if(!sel->isLocked() ){ // not locked either changedir or open
+      QStringList str = QStringList::split("->", sel->text(1) );
+      if(sel->isDir() ){
+	cd( sel->directory() + "/" + str[0] );     
+      }else{
+	qWarning("file" );
+	if(m_shLne )
+	  m_edit->setText(str[0] );
+	emit fileSelected(str[0] );
+	// emit DocLnk need to do it
+      }
+    }else{
+      qWarning( "locked" );
+    }
+  };
+}
+void OFileSelector::slotRightButton(int button, QListViewItem *item, const QPoint &, int )
+{
+  if( button != Qt::RightButton )
+    return; 
+  qWarning("right button" );
+  slotContextMenu(item);
+}
+void OFileSelector::slotContextMenu(QListViewItem *item)
+{
+  qWarning("context menu" );
+  if( m_custom !=0){
+    m_custom->exec();
+  }else{
+    QPopupMenu menu;
+    QAction act;
+    OFileSelectorItem *sel = (OFileSelectorItem*)item;
+    if(sel->isDir() ){
+      act.setText( tr("Change Directory") );
+      act.addTo(&menu );
+      connect(&act, SIGNAL(activated() ),
+	      this, SLOT(slotChangedDir() ) );
+    }else{
+      act.setText( tr("Open file" )  );
+      act.addTo( &menu );
+      connect(&act, SIGNAL(activated() ),
+	      this, SLOT(slotOpen() ) );
+    }
+    QAction rescan;
+    rescan.setText( tr("Rescan")  );
+    rescan.addTo( &menu );
+    connect(&act, SIGNAL(activated() ),
+	    this, SLOT(slotRescan() ) );
+
+    QAction rename;
+    rename.setText( tr("Rename") );
+    rename.addTo( &menu );
+    connect(&act, SIGNAL(activated() ),
+	    this, SLOT(slotRename() ) );
+
+    menu.insertSeparator();
+    QAction delItem;
+    delItem.setText( tr("Delete")  );
+    delItem.addTo(&menu );
+    connect(&act, SIGNAL(activated() ),
+	    this, SLOT(slotDelete() ) );
+
+    menu.exec(QCursor::pos() );
+  }
+}
+bool OFileSelector::cd(const QString &str )
+{
+  qWarning(" dir %s", str.latin1() );
+  QDir dir( str);
+  if(dir.exists() ){
+    m_currentDir = str;
+    reparse();
+    return true;
+  }
+  return false;
+}
+
+void OFileSelector::slotChangedDir()
+{
+  OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
+  if(sel->isDir() ){
+    QStringList str = QStringList::split("->", sel->text(1) );
+    cd( sel->directory() + "/" + str[0] );
+  }
+}
+void OFileSelector::slotOpen()
+{
+  OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
+  if(!sel->isDir() ){
+    QStringList str = QStringList::split("->", sel->text(1) );
+    slotFileSelected( str[0] );
+  }
+}
+void OFileSelector::slotRescan()
+{
+  reparse();
+}
+void OFileSelector::slotRename()
+{
+  // rename inline
+}
+void OFileSelector::slotDelete()
+{
+  qWarning("delete slot" );
+  OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
+  QStringList list = QStringList::split("->", sel->text(1) );
+  if( sel->isDir() ){
+    QString str = QString::fromLatin1("rm -rf ") + list[0];
+    ::system(str.utf8().data() );
+  }else{
+    QFile::remove( list[0] );
+  }
+  m_View->takeItem( sel );
+  delete sel;
+}
+
 
 
 
