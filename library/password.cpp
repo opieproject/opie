@@ -27,7 +27,7 @@
 #include <qstring.h>
 #include <qapplication.h>
 #include <qfile.h>
-#include <qwindowsystem_qws.h>
+//#include <qwindowsystem_qws.h>
 
 #include <qdialog.h>
 
@@ -285,6 +285,25 @@ QString Password::getPassword( const QString& prompt )
 
 
 /*!
+  Return if a prompt for the user's passcode is needed.
+
+  If \a at_poweron is TRUE, the dialog is only used if the user's
+  preference request it at poweron
+  
+  Opie extension to speed up suspend/resume.
+*/
+
+bool Password::needToAuthenticate(bool at_poweron)
+{
+    Config cfg("Security");
+    cfg.setGroup("Passcode");
+    QString passcode = cfg.readEntry("passcode");
+    
+    return ( !passcode.isEmpty()
+	    && (!at_poweron || cfg.readNumEntry("passcode_poweron",0)) );
+}
+
+/*!
   Prompt, fullscreen, for the user's passcode until they get it right.
 
   If \a at_poweron is TRUE, the dialog is only used if the user's
@@ -324,7 +343,8 @@ void Password::authenticate(bool at_poweron)
 	}
     } else if ( at_poweron ) {
 	// refresh screen   #### should probably be in caller
-	// Not needed (we took away the screen blacking)
+	// Not needed (we took away the screen blacking) TT
+	// Not needed (we have intelligent screen blacking) sandman
 	//if ( qwsServer )
 	    //qwsServer->refresh();
     }

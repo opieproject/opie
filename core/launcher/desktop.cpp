@@ -181,7 +181,7 @@ public:
       m_lcd_status = true;
     }
 
-    setBacklight ( -3 );
+    setBacklight ( -1 );
   }
   bool save( int level )
   {
@@ -332,12 +332,14 @@ void DesktopApplication::switchLCD ( bool on )
     DesktopApplication *dapp = (DesktopApplication *) qApp;
 
     if ( dapp-> m_screensaver ) {
-      if ( on )
-      dapp-> m_screensaver-> restore ( ); //setBacklight ( on ? -3 : -1 );
-    else
-      dapp-> m_screensaver-> save ( 1 );
-    
-  }
+      if ( on ) {
+        dapp-> m_screensaver-> setDisplayState ( true ); 
+        dapp-> m_screensaver-> setBacklight ( -3 );
+      }
+      else {
+        dapp-> m_screensaver-> setDisplayState ( false );
+      }
+    }
   }
 }
 
@@ -862,7 +864,7 @@ void Desktop::togglePower()
   qDebug ( "togglePower (locked == %d)", excllock ? 1 : 0 );
 
   if ( excllock )
-    return ;
+    return;
 
   excllock = true;
 
@@ -870,17 +872,27 @@ void Desktop::togglePower()
   loggedin = 0;
   suspendTime = QDateTime::currentDateTime();
 
-  ODevice::inst ( ) -> suspend ( );
+#ifdef QWS
+  if ( Password::needToAuthenticate ( true ) && qt_screen ) {
+    // Should use a big black window instead.
+    // But this would not show up fast enough
+    QGfx *g = qt_screen-> screenGfx ( );
+    g-> fillRect ( 0, 0, qt_screen-> width ( ), qt_screen-> height ( ));
+    delete g;
+  }
+#endif
 
-  QWSServer::screenSaverActivate ( false );
+  ODevice::inst ( )-> suspend ( );
+
   DesktopApplication::switchLCD ( true ); // force LCD on without slow qcop call
+  QWSServer::screenSaverActivate ( false );
 
   {
     QCopEnvelope( "QPE/Card", "mtabChanged()" ); // might have changed while asleep
   }
 
   if ( wasloggedin )
-    login( TRUE );
+    login ( true );
 
   execAutoStart();
   //qcopBridge->closeOpenConnections();

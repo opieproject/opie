@@ -25,6 +25,7 @@
 class Password
 { 
 public:
+	static bool needToAuthenticate(bool atpoweron=FALSE); // Opie extension to speed up suspend/resume (sandman)
     static void authenticate(bool atpoweron=FALSE);
     static QString getPassword( const QString& prompt );
 };
