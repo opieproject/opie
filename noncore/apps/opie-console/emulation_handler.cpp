@@ -68,7 +68,7 @@ void EmulationHandler::setColor( const QColor& fore, const QColor& back ) {
             table[i].color = defaultCt[i].color;
         }
     }
-//    m_teWid->setColorTable(table );
+    m_teWid->setColorTable(table );
     m_teWid->update();
 }
 QFont EmulationHandler::font( int id ) {
@@ -101,11 +101,11 @@ QColor EmulationHandler::foreColor(int col) {
     case Profile::White:
         qWarning("Foreground black");
         /* color is black */
-        co = Qt::black;
+        co = Qt::white;
         break;
     case Profile::Black:
         qWarning("Foreground white");
-        co = Qt::white;
+        co = Qt::black;
         break;
     }
 
@@ -119,11 +119,11 @@ QColor EmulationHandler::backColor(int col ) {
     case Profile::White:
         qWarning("Background white");
         /* color is white */
-        co = Qt::white;
+        co = Qt::black;
         break;
     case Profile::Black:
         qWarning("Background black");
-        co = Qt::black;
+        co = Qt::white;
         break;
     }
 
