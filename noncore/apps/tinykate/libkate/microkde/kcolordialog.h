@@ -2,9 +2,11 @@
 #define MINIKDE_KCOLORDIALOG_H
 
 #include <qcolor.h>
+#include <opie/colordialog.h>
 
-class KColorDialog
+class KColorDialog : OColorDialog
 {
+    Q_OBJECT
   public:
     enum { Accepted };
   
