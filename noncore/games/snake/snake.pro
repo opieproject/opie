@@ -4,7 +4,7 @@ SOURCES		= snake.cpp target.cpp obstacle.cpp interface.cpp main.cpp
 TARGET		= snake
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopiecore2
 
 
 include ( $(OPIEDIR)/include.pro )
