@@ -364,7 +364,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
     // Back accent character support
 
-    //if (unicode == 0x60) { // the keys from 2c6 ~ 2cf should be used instead of the ascii one
+    // the keys from 2c6 ~ 2cf should be used instead of the ascii one
     if (unicode == 0x2cb) {
 
         unicode = 0;
@@ -382,7 +382,6 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
     // Accent character support
 
-    //if (unicode == 0xb4) {
     if (unicode == 0x2ca) {
 
         unicode = 0;
@@ -525,8 +524,8 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             if (lock) { *lock = 0; lock = 0; }
             if (circumflex) { *circumflex = 0; circumflex = 0; }
             if (diaeresis) { *diaeresis = 0; diaeresis = 0; }
-	       if (baccent) { *baccent = 0; baccent = 0; }
-	       if (accent) { *accent = 0; accent = 0; }
+	        if (baccent) { *baccent = 0; baccent = 0; }
+	        if (accent) { *accent = 0; accent = 0; }
 
             // dont need to emit this key... acts same as alt
             qkeycode = 0;
@@ -625,7 +624,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
             if (shift) { *shift = 0; shift = 0; }
             if (meta) { *meta = 0; meta = 0; }
-		  if (accent) { *accent = 0; accent = 0; }
+		    if (accent) { *accent = 0; accent = 0; }
 
             qkeycode = 0;
         
@@ -647,7 +646,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
             if (shift) { *shift = 0; shift = 0; }
             if (meta) { *meta = 0; meta = 0; }
-		  if (baccent) { *baccent = 0; }
+		    if (baccent) { *baccent = 0; }
 
             qkeycode = 0;
         }
@@ -663,7 +662,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                 unicode = keys->circumflex(keys->shift(unicode));
             else if (diaeresis && keys->diaeresis(keys->shift(unicode)))
                 unicode = keys->diaeresis(keys->shift(unicode));
-	    else if (baccent && keys->baccent(keys->shift(unicode)))
+	        else if (baccent && keys->baccent(keys->shift(unicode)))
                 unicode = keys->baccent(keys->shift(unicode));
             else if (accent && keys->accent(keys->shift(unicode)))
                 unicode = keys->accent(keys->shift(unicode));
@@ -772,6 +771,13 @@ void Keyboard::mouseReleaseEvent(QMouseEvent*)
 
         *ctrl = 0;
         ctrl = 0;
+        repaint(FALSE);
+
+    }
+    if (alt && alt != 0) {
+
+        *alt = 0;
+        alt = 0;
         repaint(FALSE);
 
     }
