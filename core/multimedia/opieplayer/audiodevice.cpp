@@ -35,11 +35,6 @@
 #include "qpe/qcopenvelope_qws.h"
 #endif
 
-// #ifdef Q_WS_WIN
-// #include <windows.h>
-// #include <mmsystem.h>
-// #include <mmreg.h>
-// #endif
 #if defined(Q_WS_X11) || defined(Q_WS_QWS)
 #include <fcntl.h>
 #include <sys/ioctl.h>
@@ -50,11 +45,6 @@
 #include <unistd.h>
 #endif
 
-// #if defined(Q_OS_WIN32)
-// static const int expectedBytesPerMilliSecond = 2 * 2 * 44000 / 1000;
-// static const int timerResolutionMilliSeconds = 30;
-// static const int sound_fragment_bytes = timerResolutionMilliSeconds * expectedBytesPerMilliSecond;
-// #else
 # if defined(QT_QWS_IPAQ)
 static const int sound_fragment_shift = 14;
 # else
@@ -101,23 +91,6 @@ unsigned int AudioDevicePrivate::rightVolume = 0;
 void AudioDevice::getVolume( unsigned int& leftVolume, unsigned int& rightVolume, bool &muted ) {
     muted = AudioDevicePrivate::muted;
     unsigned int volume;
-// #ifdef Q_OS_WIN32
-//     HWAVEOUT handle;
-//     WAVEFORMATEX formatData;
-//     formatData.cbSize = sizeof(WAVEFORMATEX);
-//     formatData.wFormatTag = WAVE_FORMAT_PCM;
-//     formatData.nAvgBytesPerSec = 4 * 44000;
-//     formatData.nBlockAlign = 4;
-//     formatData.nChannels = 2;
-//     formatData.nSamplesPerSec = 44000;
-//     formatData.wBitsPerSample = 16;
-//     waveOutOpen(&handle, WAVE_MAPPER, &formatData, 0L, 0L, CALLBACK_NULL);
-//     if ( waveOutGetVolume( handle, (LPDWORD)&volume ) )
-// //  qDebug( "get volume of audio device failed" );
-//        waveOutClose( handle );
-//     leftVolume = volume & 0xFFFF;
-//     rightVolume = volume >> 16;
-// #else
     int mixerHandle = open( "/dev/mixer", O_RDWR );
     if ( mixerHandle >= 0 ) {
         if(ioctl( mixerHandle, MIXER_READ(0), &volume )==-1)
@@ -127,7 +100,6 @@ void AudioDevice::getVolume( unsigned int& leftVolume, unsigned int& rightVolume
         perror("open(\"/dev/mixer\")");
     leftVolume  = ((volume & 0x00FF) << 16) / 101;
     rightVolume = ((volume & 0xFF00) <<  8) / 101;
-//#endif
 }
 
 
@@ -142,22 +114,6 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
         leftVolume  = ( (int) leftVolume < 0 ) ? 0 : ((  leftVolume > 0xFFFF ) ? 0xFFFF :  leftVolume );
         rightVolume = ( (int)rightVolume < 0 ) ? 0 : (( rightVolume > 0xFFFF ) ? 0xFFFF : rightVolume );
     }
-// #ifdef Q_OS_WIN32
-//     HWAVEOUT handle;
-//     WAVEFORMATEX formatData;
-//     formatData.cbSize = sizeof(WAVEFORMATEX);
-//     formatData.wFormatTag = WAVE_FORMAT_PCM;
-//     formatData.nAvgBytesPerSec = 4 * 44000;
-//     formatData.nBlockAlign = 4;
-//     formatData.nChannels = 2;
-//     formatData.nSamplesPerSec = 44000;
-//     formatData.wBitsPerSample = 16;
-//     waveOutOpen(&handle, WAVE_MAPPER, &formatData, 0L, 0L, CALLBACK_NULL);
-//     unsigned int volume = (rightVolume << 16) | leftVolume;
-//     if ( waveOutSetVolume( handle, volume ) )
-// //  qDebug( "set volume of audio device failed" );
-//        waveOutClose( handle );
-// #else
       // Volume can be from 0 to 100 which is 101 distinct values
     unsigned int rV = (rightVolume * 101) >> 16;
 
@@ -187,7 +143,6 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
     QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << muted; 
 #endif
 }
-
 
 
 
@@ -266,15 +221,11 @@ AudioDevice::~AudioDevice() {
     qDebug("destryo audiodevice");
     QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE;
     
-// #ifdef Q_OS_WIN32
-//     waveOutClose( (HWAVEOUT)d->handle );
-// #else
 # ifndef KEEP_DEVICE_OPEN 
     close( d->handle );     // Now it should be safe to shut the handle
 # endif
     delete d->unwrittenBuffer;
     delete d;
-//#endif
    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE;
     
 }
@@ -288,20 +239,6 @@ void AudioDevice::volumeChanged( bool muted )
 
 void AudioDevice::write( char *buffer, unsigned int length )
 {
-// #ifdef Q_OS_WIN32
-//     // returns immediately and (to be implemented) emits completedIO() when finished writing
-//     WAVEHDR *lpWaveHdr = (WAVEHDR *)malloc( sizeof(WAVEHDR) );
-//     // maybe the buffer should be copied so that this fool proof, but its a performance hit
-//     lpWaveHdr->lpData = buffer;
-//     lpWaveHdr->dwBufferLength = length;
-//     lpWaveHdr->dwFlags = 0L;
-//     lpWaveHdr->dwLoops = 0L;
-//     waveOutPrepareHeader( (HWAVEOUT)d->handle, lpWaveHdr, sizeof(WAVEHDR) );
-//     // waveOutWrite returns immediately. the data is sent in the background. 
-//     if ( waveOutWrite( (HWAVEOUT)d->handle, lpWaveHdr, sizeof(WAVEHDR) ) )
-//   qDebug( "failed to write block to audio device" );
-//     // emit completedIO();
-// #else
     int t = ::write( d->handle, buffer, length );
     if ( t<0 ) t = 0;
     if ( t != (int)length) {
@@ -338,9 +275,6 @@ unsigned int AudioDevice::bufferSize() const
 
 unsigned int AudioDevice::canWrite() const
 {
-// #ifdef Q_OS_WIN32
-//     return bufferSize(); // Any better?
-// #else
     audio_buf_info info;
     if ( d->can_GETOSPACE && ioctl(d->handle,SNDCTL_DSP_GETOSPACE,&info) ) {
         d->can_GETOSPACE = FALSE;
@@ -365,25 +299,15 @@ unsigned int AudioDevice::canWrite() const
         else
             return d->bufferSize;
     }
-//#endif
 }
 
 
 int AudioDevice::bytesWritten() {
-// #ifdef Q_OS_WIN32
-//     MMTIME pmmt = { TIME_BYTES, 0 };
-//     if ( ( waveOutGetPosition( (HWAVEOUT)d->handle, &pmmt, sizeof(MMTIME) ) != MMSYSERR_NOERROR ) || ( pmmt.wType != TIME_BYTES ) ) {
-//         qDebug( "failed to get audio device position" );
-//         return -1;
-//     }
-//     return pmmt.u.cb;
-// #else
     int buffered = 0;
     if ( ioctl( d->handle, SNDCTL_DSP_GETODELAY, &buffered ) ) {
         qDebug( "failed to get audio device position" );
         return -1;
     }
     return buffered;
-//#endif
 }
 

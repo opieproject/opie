@@ -33,6 +33,7 @@ Q_OBJECT
 public:
     MediaPlayerState( QObject *parent, const char *name );
     ~MediaPlayerState();
+    bool isPaused;
 
     bool isStreaming;    
     bool fullscreen()    { return isFullscreen; }
@@ -101,7 +102,6 @@ private:
     bool isLooping;
     bool isShuffled;
     bool usePlaylist;
-    bool isPaused;
     bool isPlaying;
     long curPosition;
     long curLength;

@@ -36,15 +36,16 @@
 class QPixmap;
 
 enum AudioButtons {
-    AudioPlay,
+    AudioPlay=0,
     AudioStop,
-    AudioPause,
     AudioNext,
     AudioPrevious,
     AudioVolumeUp,
     AudioVolumeDown,
     AudioLoop,
-    AudioPlayList
+    AudioPlayList,
+    AudioForward,
+    AudioBack
 };
 
 
@@ -61,7 +62,7 @@ public slots:
     void updateSlider( long, long );
     void sliderPressed( );
     void sliderReleased( );
-    void setPaused( bool b)  { setToggleButton( AudioPause, b ); }
+//    void setPaused( bool b)  { setToggleButton( AudioPause, b ); }
     void setLooping( bool b) { setToggleButton( AudioLoop, b ); }
     void setPlaying( bool b) { setToggleButton( AudioPlay, b ); }
     void setPosition( long );
@@ -74,6 +75,10 @@ signals:
     void moreReleased();
     void lessReleased();
     void sliderMoved(long);
+    void forwardClicked();
+    void backClicked();
+    void forwardReleased();
+    void backReleased();
 
 protected:
     void doBlank();
