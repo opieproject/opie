@@ -73,6 +73,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 	           SLOT( valueChanged(const QString&) ) );
 
  	setCurrent(0);
+  editor->layoutType(EditWidget::File);
 }
 
 void MainWindow::makeMenu()

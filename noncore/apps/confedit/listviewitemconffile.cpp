@@ -90,10 +90,9 @@ void ListViewItemConfFile::remove()
 
 void ListViewItemConfFile::revert()
 {
-	if (_changed)
+	if (!_changed)
  	{
-    parseFile();
-  }else{
+  	// read the backup file
 	 	QFile conf(confFileInfo->absFilePath());
   	QFile back(backupFileName());
 
@@ -106,6 +105,8 @@ void ListViewItemConfFile::revert()
   	conf.close();
 	  back.close();
   }
+  parseFile();
+  expand();
 }
 
 void ListViewItemConfFile::save()
@@ -147,5 +148,13 @@ QString ListViewItemConfFile::backupFileName()
 
 void ListViewItemConfFile::expand()
 {
+	QListViewItem *subItem = firstChild();
+	QListViewItem *toDel;
+ 	while(subItem)
+  {
+  	toDel = subItem;
+   	subItem = subItem->nextSibling();
+   	delete toDel;
+  }
 	parseFile();
 }
