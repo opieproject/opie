@@ -42,6 +42,8 @@
 #include <qgfx_qws.h>
 #include <qdirectpainter_qws.h>
 
+#include <assert.h>
+
 #include "xinevideowidget.h"
 #include "frame.h"
 #include "lib.h"
@@ -219,8 +221,19 @@ int Lib::error() {
     return xine_get_error( m_stream );
 };
 
+void Lib::receiveMessage( ThreadUtil::ChannelMessage *msg, SendType sendType )
+{
+    assert( sendType == ThreadUtil::Channel::OneWay );
+    handleXineEvent( msg->type() );
+    delete msg;
+}
+
 void Lib::handleXineEvent( const xine_event_t* t ) {
-    if ( t->type == XINE_EVENT_UI_PLAYBACK_FINISHED ) {
+    send( new ThreadUtil::ChannelMessage( t->type ), OneWay );
+}
+
+void Lib::handleXineEvent( int type ) {
+    if ( type == XINE_EVENT_UI_PLAYBACK_FINISHED ) {
         emit stopped();
     }
 }

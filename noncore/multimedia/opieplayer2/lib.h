@@ -41,6 +41,8 @@
 #include <xine.h>
 //#include "xine.h"
 
+#include "threadutil.h"
+
 class XineVideoWidget;
 
 namespace XINE {
@@ -53,7 +55,7 @@ namespace XINE {
      * stooping, seeking.
      */
     class Frame;
-    class Lib : public QObject {
+    class Lib : public ThreadUtil::Channel {
         Q_OBJECT
     public:
         Lib(XineVideoWidget* = 0);
@@ -176,6 +178,9 @@ namespace XINE {
 
         void stopped();
 
+    protected:
+        virtual void receiveMessage( ThreadUtil::ChannelMessage *msg, SendType sendType );
+
     private:
         int m_bytes_per_pixel;
         int m_length,  m_pos,  m_time;
@@ -190,6 +195,7 @@ namespace XINE {
 	xine_event_queue_t *m_queue;
 
         void handleXineEvent( const xine_event_t* t );
+        void handleXineEvent( int type );
         void drawFrame( uint8_t* frame, int width, int height, int bytes );
         // C -> C++ bridge for the event system
         static void xine_event_handler( void* user_data, const xine_event_t* t);
