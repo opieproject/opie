@@ -523,6 +523,7 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	  if( medium.check() ){
 	    if( medium.exec()  ){ //ok
 	      // speicher
+	      cfg.writeEntry("timestamp", newStamp );
 	    }
 	  }else{
 	    // do something different see what we need to do

@@ -131,6 +131,8 @@ private:
     bool in_lnk_props;
     bool got_lnk_change;
     QString lnk_change;
+    QString m_timeStamp;
 };
 
 #endif // LAUNCHERVIEW_H
+
