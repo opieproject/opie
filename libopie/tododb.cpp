@@ -8,7 +8,7 @@
 //#include <opie/tododb.h>
 #include <opie/xmltree.h>
 #include <opie/todoresource.h>
-
+#include "todoxmlresource.h"
 using namespace Opie;
 
 // Implement the iterator
@@ -116,7 +116,7 @@ ToDoDB::ToDoDB( ToDoResource *res ){
      */
     if( res == 0 ) {
         QString file = Global::applicationFileName("todolist","todolist.xml");
-	//res = new FileToDoResource(file, QString::fromLatin1("Default");
+	res = new ToDoXMLResource(QString::fromLatin1("Default"),file );
     }
     m_res = res;
 }
@@ -280,6 +280,10 @@ void ToDoDB::delEventAlarm( const ToDoEvent& event )
     AlarmServer::deleteAlarm( schedule ,
                               "QPE/Application/todolist",
                               "alarm(QDateTime,int)", event.uid() );
+}
+ToDoDB::Iterator ToDoDB::queryByExample( const ToDoEvent& query,
+                                         int qu ) {
+    //m_res->queryByExample( query,  qu );
 }
 void ToDoDB::copMessage( const QCString&, const QByteArray& ) {
 

@@ -20,17 +20,19 @@ public:
     enum Size { BoxSize = 10 };
     OCheckItem( QTable *t, const QString &sortkey );
 
-    void setChecked( bool b );
-    void toggle();
+    virtual void setChecked( bool b );
+    virtual void toggle();
     bool isChecked() const;
     void setKey( const QString &key ) { m_sortKey = key; }
-    QString key() const;
+    virtual QString key() const;
 
     void paint( QPainter *p, const QColorGroup &cg, const QRect &cr, bool selected );
 
     //static const int BoxSize = 10;
 
 private:
+    class OCheckItemPrivate;
+    OCheckItemPrivate *d;
     bool m_checked: 1;
     QString m_sortKey;
 

@@ -462,6 +462,8 @@ int ToDoEvent::uid()const {
     return data->uid;
 }
 void ToDoEvent::setUid( int id ) {
+    if ( id == -1 )
+        id = m_gen.generate();
     m_gen.store(id );
     changeOrModify();
     data->uid = id;

@@ -220,6 +220,7 @@ public:
     void setExtra( const QString&,  const QString& );
     bool isOverdue();
 
+
     bool match( const QRegExp &r )const;
 
     void setUid(int id);

@@ -10,6 +10,7 @@
 namespace Opie {
 
     class ToDoResource;
+
     class ToDoDB : public QObject
     {
         Q_OBJECT
@@ -159,7 +160,7 @@ namespace Opie {
          * "Query by Example"
          */
         Iterator queryByExample( const ToDoEvent& query,
-                                 int query = WildCards );
+                                 int quer = WildCards );
 
 
     signals:
