@@ -72,8 +72,6 @@ using namespace XINE;
 
 Lib::Lib( XineVideoWidget* widget ) 
 {
-    ThreadUtil::AutoLock lock( m_initGuard );
-    m_initialized = false;
     m_video = false;
     m_wid = widget;
     printf("Lib");
@@ -89,19 +87,8 @@ Lib::Lib( XineVideoWidget* widget )
         f.close();
     }
 
-    start();
-}
-
-void Lib::run()
-{
-    initialize();
-}
-
-void Lib::initialize()
-{
     m_xine =  xine_new( );
 
-    QString configPath = QDir::homeDirPath() + "/Settings/opiexine.cf";
     xine_config_load( m_xine, QFile::encodeName( configPath ) );
 
     xine_init( m_xine );
@@ -130,18 +117,9 @@ void Lib::initialize()
     m_queue = xine_event_new_queue (m_stream);
 
     xine_event_create_listener_thread (m_queue, xine_event_handler, this);
-
-    ThreadUtil::AutoLock lock( m_initGuard );
-    m_initialized = true;
-
-    send( new ThreadUtil::ChannelMessage( InitializationMessageType ), OneWay );
 }
 
 Lib::~Lib() {
-    ThreadUtil::AutoLock lock( m_initGuard );
-
-    assert( m_initialized );
-
 //    free( m_config );
 
     xine_close( m_stream );
@@ -154,17 +132,6 @@ Lib::~Lib() {
     /* FIXME either free or delete but valgrind bitches against both */
     //free( m_videoOutput );
     //delete m_audioOutput;
-}
-
-void Lib::assertInitialized() const
-{
-    ThreadUtil::AutoLock lock( m_initGuard );
-
-    if ( m_initialized )
-        return;
-
-    qDebug( "LibXine: xine function called while not being initialized, yet! Fix the caller!" );
-    assert( m_initialized );
 }
 
 void Lib::resize ( const QSize &s ) {
@@ -193,8 +160,6 @@ int Lib::subVersion() {
 }
 
 int Lib::play( const QString& fileName, int startPos, int start_time ) {
-    assertInitialized();
-
     QString str = fileName.stripWhiteSpace();
     if ( !xine_open( m_stream, QFile::encodeName(str.utf8() ).data() ) ) {
         return 0;
@@ -203,69 +168,49 @@ int Lib::play( const QString& fileName, int startPos, int start_time ) {
 }
 
 void Lib::stop() {
-    assertInitialized();
-
     qDebug("<<<<<<<< STOP IN LIB TRIGGERED >>>>>>>");
     xine_stop( m_stream );
 }
 
 void Lib::pause( bool toggle ) {
-    assertInitialized();
-
     xine_set_param( m_stream, XINE_PARAM_SPEED, toggle ? XINE_SPEED_PAUSE : XINE_SPEED_NORMAL );
 }
 
 int Lib::speed() const {
-    assertInitialized();
-
     return  xine_get_param ( m_stream, XINE_PARAM_SPEED );
 }
 
 void Lib::setSpeed( int speed ) {
-    assertInitialized();
-
     xine_set_param ( m_stream, XINE_PARAM_SPEED, speed );
 }
 
 int Lib::status() const {
-    assertInitialized();
-
     return xine_get_status( m_stream );
 }
 
 int Lib::currentPosition() const {
-    assertInitialized();
-
     int pos, time, length;
     xine_get_pos_length( m_stream, &pos, &time, &length );
     return pos;
 }
 
 int Lib::currentTime() const {
-    assertInitialized();
-
     int pos, time, length;
     xine_get_pos_length( m_stream, &pos, &time, &length );
     return time/1000;
 }
 
 int Lib::length() const {
-    assertInitialized();
-
       int pos, time, length;
       xine_get_pos_length( m_stream, &pos, &time, &length );
       return length/1000;
 }
 
 bool Lib::isSeekable() const {
-    assertInitialized();
-
     return xine_get_stream_info( m_stream, XINE_STREAM_INFO_SEEKABLE );
 }
 
 void Lib::seekTo( int time ) {
-    assertInitialized();
-
     //xine_trick_mode ( m_stream, XINE_TRICK_MODE_SEEK_TO_TIME, time ); NOT IMPLEMENTED YET IN XINE :_(
     // since its now milliseconds we need *1000
     xine_play( m_stream, 0, time*1000 );
@@ -273,45 +218,30 @@ void Lib::seekTo( int time ) {
 
 
 Frame Lib::currentFrame() const {
-    assertInitialized();
-
     Frame frame;
     return frame;
 };
 
 QString Lib::metaInfo( int number) const {
-    assertInitialized();
-
     return xine_get_meta_info( m_stream, number );
 }
 
 int Lib::error() const {
-    assertInitialized();
-
     return xine_get_error( m_stream );
 };
 
 void Lib::receiveMessage( ThreadUtil::ChannelMessage *msg, SendType sendType )
 {
     assert( sendType == ThreadUtil::Channel::OneWay );
-    switch ( msg->type() ) {
-        case XineMessageType:
-            handleXineEvent( static_cast<XineMessage *>( msg )->xineEvent );
-            break;
-        case InitializationMessageType:
-            emit initialized();
-            break;
-    }
+    handleXineEvent( msg->type() );
     delete msg;
 }
 
 void Lib::handleXineEvent( const xine_event_t* t ) {
-    send( new XineMessage( t->type ), OneWay );
+    send( new ThreadUtil::ChannelMessage( t->type ), OneWay );
 }
 
 void Lib::handleXineEvent( int type ) {
-    assertInitialized();
-
     if ( type == XINE_EVENT_UI_PLAYBACK_FINISHED ) {
         emit stopped();
     }
@@ -319,53 +249,37 @@ void Lib::handleXineEvent( int type ) {
 
 
 void Lib::setShowVideo( bool video ) {
-    assertInitialized();
-
     m_video = video;
     ::null_set_show_video( m_videoOutput, video );
 }
 
 bool Lib::isShowingVideo() const {
-    assertInitialized();
-
     return ::null_is_showing_video( m_videoOutput );
 }
 
 bool Lib::hasVideo() const {
-    assertInitialized();
-
     return  xine_get_stream_info( m_stream, 18 );
 }
 
 void Lib::showVideoFullScreen( bool fullScreen ) {
-    assertInitialized();
-
     ::null_set_fullscreen( m_videoOutput, fullScreen );
 }
 
 bool Lib::isVideoFullScreen() const {
-    assertInitialized();
-
     return ::null_is_fullscreen( m_videoOutput );
 }
 
 void Lib::setScaling( bool scale ) {
-    assertInitialized();
-
     ::null_set_scaling( m_videoOutput, scale );
 }
 
 void Lib::setGamma( int value ) {
-    assertInitialized();
-
   //qDebug( QString( "%1").arg(value)  );
   /* int gammaValue = ( 100 + value ); */
   ::null_set_videoGamma( m_videoOutput, value );
 }
 
 bool Lib::isScaling() const {
-    assertInitialized();
-
     return ::null_is_scaling( m_videoOutput );
 }
 
@@ -379,8 +293,6 @@ void Lib::xine_display_frame( void* user_data, uint8_t *frame,
 }
 
 void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
-    assertInitialized();
-
     if ( !m_video ) {
         qWarning("not showing video now");
         return;

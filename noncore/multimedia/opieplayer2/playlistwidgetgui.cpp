@@ -203,26 +203,4 @@ void PlayListWidgetGui::setActiveWindow()  {
     mediaPlayerState.setDisplayType( origDisplayType ); // now switch back
 }
 
-PlayButton::PlayButton( MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name,
-                        const QString &icon, QObject *handler, const QString &slot, bool t )
-    : ToolButton( parent, name, icon, handler, slot, t ), mediaPlayerState( _mediaPlayerState ),
-      m_lastEnableStatus( true )
-{
-    connect( &mediaPlayerState, SIGNAL( initialized() ),
-             this, SLOT( checkInitializationStatus() ) );
-}
-
-void PlayButton::setEnabled( bool enable )
-{
-    m_lastEnableStatus = enable;
-
-    enable &= mediaPlayerState.isInitialized();
-
-    ToolButton::setEnabled( enable );
-}
-
-void PlayButton::checkInitializationStatus()
-{
-    setEnabled( m_lastEnableStatus );
-}
 

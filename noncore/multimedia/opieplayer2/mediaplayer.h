@@ -54,7 +54,6 @@ public:
     ~MediaPlayer();
 
 public slots:
-    void recreateAudioAndVideoWidgets();
     void reloadSkins();
 
 private slots:
@@ -72,17 +71,24 @@ private slots:
 protected:
     void timerEvent( QTimerEvent *e );
     void keyReleaseEvent( QKeyEvent *e);
+
 private:
+    AudioWidget *audioUI() const;
+    VideoWidget *videoUI() const;
+    XineControl *xineControl() const;
 
     bool isBlanked, l, r;
     int fd, fl;
     int     volumeDirection;
-    XineControl *xineControl;
     VolumeControl *volControl;
     MediaPlayerState &mediaPlayerState;
     PlayListWidget &playList;
-    AudioWidget *audioUI;
-    VideoWidget *videoUI;
+
+    void recreateAudioAndVideoWidgets() const;
+
+    mutable XineControl *m_xineControl;
+    mutable AudioWidget *m_audioUI;
+    mutable VideoWidget *m_videoUI;
 };
 
 

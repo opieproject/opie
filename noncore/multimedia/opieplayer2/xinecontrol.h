@@ -100,10 +100,6 @@ public slots:
      */
     void setGamma( int );
 
-
-private slots:
-    void xineInitialized();
-
 private:
     XINE::Lib *libXine;
     long m_currentTime;
@@ -118,8 +114,6 @@ private:
 
 signals:
     void positionChanged( long );
-
-    void initialized();
 };
 
 

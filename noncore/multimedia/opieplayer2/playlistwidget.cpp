@@ -65,7 +65,7 @@ PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* par
     d->tbRemoveFromList = new ToolButton( bar, tr( "Remove from Playlist" ),
                                           "opieplayer2/remove_from_playlist",
                                           this , SLOT(removeSelected() ) );
-    d->tbPlay    = new PlayButton( mediaPlayerState, bar, tr( "Play" ), "opieplayer2/play",
+    d->tbPlay    = new ToolButton( bar, tr( "Play" ), "opieplayer2/play",
                                    this , SLOT( btnPlay( bool) ), TRUE );
     d->tbShuffle = new ToolButton( bar, tr( "Randomize" ),"opieplayer2/shuffle",
                                    &mediaPlayerState, SLOT( setShuffled( bool ) ), TRUE );

@@ -31,10 +31,9 @@
 MediaPlayer::MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), mediaPlayerState( _mediaPlayerState ), playList( _playList ) {
 
-    audioUI = 0;
-    videoUI = 0;
-    xineControl = 0;
-    recreateAudioAndVideoWidgets();
+    m_audioUI = 0;
+    m_videoUI = 0;
+    m_xineControl = 0;
 
     fd=-1;fl=-1;
     playList.setCaption( tr( "OpiePlayer: Initializating" ) );
@@ -60,9 +59,9 @@ MediaPlayer::MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPla
 }
 
 MediaPlayer::~MediaPlayer() {
-    delete xineControl;
-    delete audioUI;
-    delete videoUI;
+    delete m_xineControl;
+    delete m_audioUI;
+    delete m_videoUI;
     delete volControl;
 }
 
@@ -103,26 +102,26 @@ void MediaPlayer::setPlaying( bool play ) {
 
     PlayListWidget::Entry playListEntry = playList.currentEntry();
     fileName = playListEntry.name;
-    xineControl->play( playListEntry.file );
+    xineControl()->play( playListEntry.file );
 
     long seconds = mediaPlayerState.length();
     time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
 
     if( fileName.left(4) == "http" ) {
         fileName = QFileInfo( fileName ).baseName();
-       if ( xineControl->getMetaInfo().isEmpty() ) {
+       if ( xineControl()->getMetaInfo().isEmpty() ) {
            tickerText = tr( " File: " ) + fileName;
        } else {
-           tickerText = xineControl->getMetaInfo();
+           tickerText = xineControl()->getMetaInfo();
        }
     } else {
-        if ( xineControl->getMetaInfo().isEmpty() ) {
+        if ( xineControl()->getMetaInfo().isEmpty() ) {
             tickerText = tr( " File: " ) + fileName + tr( ", Length: " ) + time + "  ";
         } else {
-            tickerText = xineControl->getMetaInfo() + " Length: " + time + "  ";
+            tickerText = xineControl()->getMetaInfo() + " Length: " + time + "  ";
         }
     }
-    audioUI->setTickerText( tickerText );
+    audioUI()->setTickerText( tickerText );
 }
 
 
@@ -189,14 +188,14 @@ void MediaPlayer::stopChangingVolume() {
     onScreenDisplayVolume = 0;
     int w=0;
     int h=0;
-    if( !xineControl->hasVideo() ) {
-        w = audioUI->width();
-        h = audioUI->height();
-        audioUI->repaint( ( w - 200 ) / 2, h - yoff, 200 + 9, 70, FALSE );
+    if( !xineControl()->hasVideo() ) {
+        w = audioUI()->width();
+        h = audioUI()->height();
+        audioUI()->repaint( ( w - 200 ) / 2, h - yoff, 200 + 9, 70, FALSE );
     } else {
-        w = videoUI->width();
-        h = videoUI->height();
-        videoUI->repaint( ( w - 200 ) / 2, h - yoff, 200 + 9, 70, FALSE );
+        w = videoUI()->width();
+        h = videoUI()->height();
+        videoUI()->repaint( ( w - 200 ) / 2, h - yoff, 200 + 9, 70, FALSE );
     }
 }
 
@@ -220,18 +219,18 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
     }
 
     int w=0; int h=0;
-    if( !xineControl->hasVideo() ) {
-        w = audioUI->width();
-        h = audioUI->height();
+    if( !xineControl()->hasVideo() ) {
+        w = audioUI()->width();
+        h = audioUI()->height();
 
         if ( drawnOnScreenDisplay ) {
             if ( onScreenDisplayVolume > v ) {
-                audioUI->repaint( ( w - 200 ) / 2 + v * 20 + 0, h - yoff + 40, ( onScreenDisplayVolume - v ) * 20 + 9, 30, FALSE );
+                audioUI()->repaint( ( w - 200 ) / 2 + v * 20 + 0, h - yoff + 40, ( onScreenDisplayVolume - v ) * 20 + 9, 30, FALSE );
             }
         }
         drawnOnScreenDisplay = TRUE;
         onScreenDisplayVolume = v;
-        QPainter p( audioUI );
+        QPainter p( audioUI() );
         p.setPen( QColor( 0x10, 0xD0, 0x10 ) );
         p.setBrush( QColor( 0x10, 0xD0, 0x10 ) );
 
@@ -249,17 +248,17 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
             }
         }
     } else {
-        w = videoUI->width();
-        h = videoUI->height();
+        w = videoUI()->width();
+        h = videoUI()->height();
 
         if ( drawnOnScreenDisplay ) {
             if ( onScreenDisplayVolume > v ) {
-                videoUI->repaint( (w - 200) / 2 + v * 20 + 0, h - yoff + 40, ( onScreenDisplayVolume - v ) * 20 + 9, 30, FALSE );
+                videoUI()->repaint( (w - 200) / 2 + v * 20 + 0, h - yoff + 40, ( onScreenDisplayVolume - v ) * 20 + 9, 30, FALSE );
             }
         }
         drawnOnScreenDisplay = TRUE;
         onScreenDisplayVolume = v;
-        QPainter p( videoUI );
+        QPainter p( videoUI() );
         p.setPen( QColor( 0x10, 0xD0, 0x10 ) );
         p.setBrush( QColor( 0x10, 0xD0, 0x10 ) );
 
@@ -346,32 +345,51 @@ void MediaPlayer::cleanUp() {// this happens on closing
 //     QPEApplication::ungrabKeyboard();
 }
 
-void MediaPlayer::recreateAudioAndVideoWidgets()
+void MediaPlayer::recreateAudioAndVideoWidgets() const
 {
-    delete xineControl;
-    delete audioUI;
-    delete videoUI;
-    audioUI = new AudioWidget( playList, mediaPlayerState, 0, "audioUI" );
-    videoUI = new VideoWidget( playList, mediaPlayerState, 0, "videoUI" );
+    delete m_xineControl;
+    delete m_audioUI;
+    delete m_videoUI;
+    m_audioUI = new AudioWidget( playList, mediaPlayerState, 0, "audioUI" );
+    m_videoUI = new VideoWidget( playList, mediaPlayerState, 0, "videoUI" );
 
-    connect( audioUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
-    connect( audioUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
-    connect( audioUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
-    connect( audioUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
+    connect( m_audioUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
+    connect( m_audioUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
+    connect( m_audioUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
+    connect( m_audioUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
 
-    connect( videoUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
-    connect( videoUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
-    connect( videoUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
-    connect( videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
+    connect( m_videoUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
+    connect( m_videoUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
+    connect( m_videoUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
+    connect( m_videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
 
-    xineControl = new XineControl( videoUI->vidWidget(), mediaPlayerState );
-    connect( xineControl, SIGNAL( initialized() ),
-             &mediaPlayerState, SLOT( setBackendInitialized() ) );
+    m_xineControl = new XineControl( m_videoUI->vidWidget(), mediaPlayerState );
+}
+
+AudioWidget *MediaPlayer::audioUI() const
+{
+    if ( !m_audioUI )
+        recreateAudioAndVideoWidgets();
+    return m_audioUI;
+}
+
+VideoWidget *MediaPlayer::videoUI() const
+{
+    if ( !m_videoUI )
+        recreateAudioAndVideoWidgets();
+    return m_videoUI;
+}
+
+XineControl *MediaPlayer::xineControl() const
+{
+    if ( !m_xineControl )
+        recreateAudioAndVideoWidgets();
+    return m_xineControl;
 }
 
 void MediaPlayer::reloadSkins()
 {
-    audioUI->loadSkin();
-    videoUI->loadSkin();
+    audioUI()->loadSkin();
+    videoUI()->loadSkin();
 }
 

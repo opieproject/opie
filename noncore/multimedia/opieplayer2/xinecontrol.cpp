@@ -55,7 +55,7 @@ XineControl::XineControl( XineVideoWidget *xineWidget,
     connect( &mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
     connect( &mediaPlayerState,  SIGNAL( videoGammaChanged( int ) ), this,  SLOT( setGamma( int ) ) );
     connect( libXine, SIGNAL( stopped() ), this, SLOT( nextMedia() ) );
-    connect( libXine, SIGNAL( initialized() ), this, SLOT( xineInitialized() ) );
+    connect( xineVideoWidget, SIGNAL( videoResized( const QSize & ) ), this, SLOT( videoResized ( const QSize & ) ) );
 
     disabledSuspendScreenSaver = FALSE;
 }
@@ -124,14 +124,6 @@ void XineControl::nextMedia() {
 
 void XineControl::setGamma( int value ) {
     libXine->setGamma( value );
-}
-
-void XineControl::xineInitialized()
-{
-    connect( xineVideoWidget, SIGNAL( videoResized( const QSize & ) ), this, SLOT( videoResized ( const QSize & ) ) );
-    libXine->resize( xineVideoWidget->videoSize() );
-
-    emit initialized();
 }
 
 void XineControl::stop( bool isSet ) {
