@@ -459,7 +459,7 @@ void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const 
         mail->setMsgsize(msg->msg_size);
         mail->setFlags(mFlags);
         mail->setMbox(mailbox);
-        mail->setNumber(i+1);
+        mail->setNumber(msg->msg_index);
         if (single_fields.fld_subject)
             mail->setSubject( convert_String(single_fields.fld_subject->sbj_value));
         if (single_fields.fld_from)
