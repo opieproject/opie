@@ -44,6 +44,7 @@ signals:
     void sig_thumbInfo( const QString&, const QString& );
     void sig_fullInfo( const QString&, const QString& );
     void sig_thumbNail( const QString&, const QPixmap& );
+    void sig_reloadDir();
 
 protected:
     virtual ~PDirLister();

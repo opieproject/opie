@@ -12,12 +12,14 @@
 
 class PInterfaceInfo;
 class PDirLister;
+class QWidget;
 
 struct PDirView {
     PDirView(  const Config& );
     virtual ~PDirView();
     virtual PInterfaceInfo* interfaceInfo()const = 0;
     virtual PDirLister* dirLister()const = 0;
+    virtual QWidget* widget(QWidget*)=0;
 };
 
 typedef PDirView* (*phunkViewCreateFunc )(const Config& );

@@ -97,6 +97,8 @@ private:
     int m_mode;
     bool m_internalReset:1;
     int m_iconsize;
+    QHBox*m_hbox;
+    QWidget*m_customWidget;
 };
 
 #endif

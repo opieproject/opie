@@ -17,7 +17,7 @@ struct DCIM_DirView : public PDirView {
 
     PInterfaceInfo* interfaceInfo()const;
     PDirLister    * dirLister    ()const;
-
+    virtual QWidget* widget(QWidget*);
 private:
     mutable PDirLister     *m_lister;
     mutable PInterfaceInfo *m_info  ;

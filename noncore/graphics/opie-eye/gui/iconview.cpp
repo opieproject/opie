@@ -195,12 +195,13 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     m_mode = 0;
     m_iconsize = 32;
     m_internalReset = false;
+    m_customWidget = 0;
 
-    QHBox *hbox = new QHBox( this );
-    QLabel* lbl = new QLabel( hbox );
+    m_hbox = new QHBox( this );
+    QLabel* lbl = new QLabel( m_hbox );
     lbl->setText(  tr("View as" ) );
 
-    m_views = new QComboBox( hbox, "View As" );
+    m_views = new QComboBox( m_hbox, "View As" );
 
     m_view= new QIconView( this );
     connect(m_view, SIGNAL(clicked(QIconViewItem*) ),
@@ -449,8 +450,14 @@ void PIconView::slotViewChanged( int i) {
         return;
     }
 
+    if (m_customWidget) {
+        delete m_customWidget;
+        m_customWidget = 0;
+    }
     PDirView* cur = currentView();
-    if (cur) delete cur;
+    if (cur) {
+        delete cur;
+    }
     QString str = m_views->text(i);
     ViewMap* map = viewMap();
     if (!map) {
@@ -468,6 +475,11 @@ void PIconView::slotViewChanged( int i) {
     m_cfg->write();
     cur = (*(*map)[str])(*m_cfg);
     setCurrentView( cur );
+    m_customWidget = cur->widget(m_hbox);
+    if (m_customWidget) {
+        odebug << "Got a widget" << oendl;
+        m_customWidget->show();
+    }
 
     /* connect to the signals of the lister */
     PDirLister* lis = cur->dirLister();
@@ -479,7 +491,7 @@ void PIconView::slotViewChanged( int i) {
             this, SLOT(slotStart()));
     connect(lis, SIGNAL(sig_end()) ,
             this, SLOT(slotEnd()) );
-
+    connect(lis,SIGNAL(sig_reloadDir()),this,SLOT(slotReloadDir()));
 
     /*  reload now with default Path
      * but only if it isn't a reset like from setupdlg

@@ -14,6 +14,7 @@ struct Dir_DirView : public PDirView {
 
     PInterfaceInfo* interfaceInfo()const;
     PDirLister* dirLister()const;
+    virtual QWidget* widget(QWidget*);
 private:
     bool m_cfg : 1;
     bool m_recursive:1;

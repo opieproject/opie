@@ -26,3 +26,8 @@ PDirLister* DCIM_DirView::dirLister()const {
 
     return m_lister;
 }
+
+QWidget* DCIM_DirView::widget(QWidget*)
+{
+    return 0L;
+}

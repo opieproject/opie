@@ -31,3 +31,8 @@ PDirLister* Dir_DirView::dirLister()const{
     }
     return m_lister;
 }
+
+QWidget* Dir_DirView::widget(QWidget*)
+{
+    return 0L;
+}

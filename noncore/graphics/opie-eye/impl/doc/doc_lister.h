@@ -11,6 +11,8 @@
 #include <qmap.h>
 
 class Config;
+class AppLnk;
+
 class Doc_DirLister : public PDirLister {
     Q_OBJECT
 public:
@@ -30,13 +32,18 @@ public:
     void fullImageInfo( const QString& );
     virtual QString nameToFname(const QString&name)const;
     QString dirUp( const QString& )const;
+    QWidget* widget(QWidget*parent);
 
 private:
     QMap<QString,QString> m_namemap,m_filemap;
+    int m_catFilter;
+    bool matchCat(const AppLnk* app);
+
 protected slots:
     virtual void slotFullInfo(const QString&, const QString&);
     virtual void slotThumbInfo(const QString&, const QString&);
     virtual void slotThumbNail(const QString&, const QPixmap&);
+    virtual void showCategory(int);
 };
 
 #endif

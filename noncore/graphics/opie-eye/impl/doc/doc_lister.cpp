@@ -12,6 +12,9 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
 
+#include <qtopia/private/categories.h>
+#include <qtopia/categoryselect.h>
+
 using namespace Opie::Core;
 
 /* QT */
@@ -22,6 +25,7 @@ Doc_DirLister::Doc_DirLister()
     : PDirLister( "doc_dir_lister" )
 {
     /* connect the signals */
+    m_catFilter = 0;
     SlaveMaster* master = SlaveMaster::self();
     connect( master, SIGNAL(sig_start()), this, SIGNAL(sig_start()) );
     connect( master, SIGNAL(sig_end()),   this, SIGNAL(sig_end()) );
@@ -40,6 +44,15 @@ QString Doc_DirLister::defaultPath()const {
     return QString::null;
 }
 
+bool Doc_DirLister::matchCat(const AppLnk* app)
+{
+    if (!app) return false;
+    if (m_catFilter==0 || app->categories().contains(m_catFilter) || m_catFilter == -1 && app->categories().count() == 0 ) {
+        return true;
+    }
+    return false;
+}
+
 QString Doc_DirLister::setStartPath(const QString&) {
     static const QString Mtype_str("image/jpeg;image/gif;image/bmp;image/png");
     if (m_namemap.isEmpty()) {
@@ -47,7 +60,8 @@ QString Doc_DirLister::setStartPath(const QString&) {
         Global::findDocuments(&ds,Mtype_str);
         QListIterator<DocLnk> dit(ds.children());
         for( ; dit.current(); ++dit) {
-//            if (! (*dit)->isValid()) continue;
+            if (! (*dit)->isValid()) continue;
+            if (!matchCat((*dit))) continue;
             m_namemap[(*dit)->name()]=(*dit)->file();
             m_filemap[(*dit)->file()]=(*dit)->name();
         }
@@ -146,4 +160,29 @@ QString Doc_DirLister::nameToFname(const QString&name)const
 
 QString Doc_DirLister::dirUp( const QString& p ) const{
     return p;
+}
+
+QWidget* Doc_DirLister::widget(QWidget*parent)
+{
+    CategorySelect * catmb = new CategorySelect(parent);
+    Categories cats( 0 );
+    cats.load( categoryFileName() );
+    QArray<int> vl( 0 );
+    catmb->setCategories( vl, "Document View", // No tr
+        "Document View" );
+    catmb->setRemoveCategoryEdit( TRUE );
+    catmb->setAllCategories( TRUE );
+    connect(catmb, SIGNAL(signalSelected(int)), this, SLOT(showCategory(int)));
+    catmb->setCurrentCategory(-2);
+    return catmb;
+}
+
+void Doc_DirLister::showCategory(int which)
+{
+    Categories cat;
+    cat.load( categoryFileName() );
+    m_catFilter = which==-2?0:which;
+    m_namemap.clear();
+    setStartPath("");
+    emit sig_reloadDir();
 }

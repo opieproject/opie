@@ -7,6 +7,7 @@
 
 #include <iface/dirview.h>
 
+class Doc_DirLister;
 
 struct Doc_DirView : public PDirView {
     Doc_DirView(  const Config& );
@@ -14,9 +15,10 @@ struct Doc_DirView : public PDirView {
 
     PInterfaceInfo* interfaceInfo()const;
     PDirLister* dirLister()const;
+    QWidget* widget(QWidget*parent);
 private:
     bool m_cfg : 1;
-    mutable PDirLister* m_lister;
+    mutable Doc_DirLister* m_lister;
     mutable PInterfaceInfo *m_info;
 };
 

@@ -26,3 +26,10 @@ PDirLister* Doc_DirView::dirLister()const{
         m_lister = new Doc_DirLister();
     return m_lister;
 }
+
+QWidget* Doc_DirView::widget(QWidget*parent)
+{
+    if (!m_lister)
+        dirLister();
+    return m_lister->widget(parent);
+}
