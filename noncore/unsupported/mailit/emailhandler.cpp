@@ -39,6 +39,8 @@ Enclosure* EnclosureList::dupl(Enclosure *in)
 
 EmailHandler::EmailHandler()
 {
+	qDebug("EMailHandler::EmailHandler");
+
   smtpClient = new SmtpClient();
   popClient = new PopClient();
   
@@ -115,6 +117,7 @@ void EmailHandler::getMailHeaders()
   
   headers = TRUE;
   popClient->headersOnly(headers, mailAccount.syncLimit);  //less than requested syncLimit, download all
+  qDebug("Initiating connection");
   popClient->newConnection(mailAccount.popServer, 110);
 }
 
@@ -626,3 +629,4 @@ void EmailHandler::cancel()
   popClient->errorHandling(ErrCancel);
   smtpClient->errorHandling(ErrCancel);
 }
+

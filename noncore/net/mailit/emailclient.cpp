@@ -19,6 +19,7 @@
 **********************************************************************/
 #include <qapplication.h>
 #include <qmessagebox.h>
+#include <qvbox.h>
 #include <qfile.h>
 #include <qcheckbox.h>
 #include <qmenubar.h>
@@ -26,6 +27,7 @@
 #include <qwhatsthis.h>
 #include <qpe/resource.h>
 #include "emailclient.h"
+#include "writemail.h"
 
 QCollection::Item AccountList::newItem(QCollection::Item d)
 {
@@ -40,7 +42,7 @@ MailAccount* AccountList::dupl(MailAccount *in)
 
 EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
   : QMainWindow( parent, name, fl )
-{
+{ 
   emailHandler = new EmailHandler();
   addressList = new AddressList();
   
@@ -52,6 +54,8 @@ EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
   allAccounts = FALSE;
   
   init();
+  
+ 
   
   connect(emailHandler, SIGNAL(mailSent()), this, SLOT(mailSent()) );
   
@@ -65,8 +69,7 @@ EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
   
   connect(inboxView, SIGNAL(pressed(QListViewItem *)), this, SLOT(inboxItemPressed()) );
   connect(inboxView, SIGNAL(clicked(QListViewItem *)), this, SLOT(inboxItemReleased()) );
-  
-  
+
   connect(emailHandler, SIGNAL(mailArrived(const Email &, bool)), this,
       SLOT(mailArrived(const Email &, bool)) );
   connect(emailHandler, SIGNAL(mailTransfered(int)), this,
@@ -84,6 +87,11 @@ EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
   lineShift = "\r\n";
   
   mailboxView->setCurrentTab(0);  //ensure that inbox has focus
+  
+  /*channel = new QCopChannel( "QPE/Application/mailit", this );
+  connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+        this, SLOT(receive(const QCString&, const QByteArray&)) );*/
+
 }
 
 
@@ -104,29 +112,8 @@ EmailClient::~EmailClient()
 
 void EmailClient::init()
 {
-  statusBar = new QStatusBar(this);
-  statusBar->setSizeGripEnabled(FALSE);
-  
-  status1Label = new QLabel( tr("Idle"), statusBar);
-  status2Label = new QLabel("", statusBar);
-  connect(emailHandler, SIGNAL(updatePopStatus(const QString &)),
-    status2Label, SLOT(setText(const QString &)) );
-  connect(emailHandler, SIGNAL(updateSmtpStatus(const QString &)),
-    status2Label, SLOT(setText(const QString &)) );
-  
-  progressBar = new QProgressBar(statusBar);
-
-  connect(emailHandler, SIGNAL(mailboxSize(int)),
-    this, SLOT(setTotalSize(int)) );
-  connect(emailHandler, SIGNAL(currentMailSize(int)),
-    this, SLOT(setMailSize(int)) );
-  connect(emailHandler, SIGNAL(downloadedSize(int)),
-    this, SLOT(setDownloadedSize(int)) );
-
-  statusBar->addWidget(status1Label);
-  statusBar->addWidget(progressBar);
-  statusBar->addWidget(status2Label);
-  
+  initStatusBar(this);
+   
   setToolBarsMovable(FALSE);
   
   bar = new QToolBar(this);
@@ -194,8 +181,11 @@ void EmailClient::init()
   inboxView->addColumn( tr( "Date" ) );
   inboxView->setMinimumSize( QSize( 0, 0 ) );
   inboxView->setAllColumnsShowFocus(TRUE);
-  QWhatsThis::add(inboxView,QWidget::tr("This is the inbox view.\n It keeps the fetched mail which can be viewed by double clicking the entry.\n"
-  "					A blue attachment icon shows whether this mail has attachments."));
+  QWhatsThis::add(inboxView,QWidget::tr("This is the inbox view.\n"
+  "It keeps the fetched mail which can be \n"
+  "viewed by double clicking the entry.\n"
+  "blue attachment icon shows whether this \n"
+  "mailhas attachments.\n"));
 
   grid_2->addWidget( inboxView, 2, 0 );
   mailboxView->addTab( widget, "mailit/inbox", tr( "Inbox" ) );
@@ -210,12 +200,41 @@ void EmailClient::init()
   outboxView->addColumn( tr( "Subject" ) );
   outboxView->setAllColumnsShowFocus(TRUE);
 
-  QWhatsThis::add(outboxView,QWidget::tr("This is the oubox view.\n It keeps the queued mails to send which can be reviewed by double clicking the entry."));
+  QWhatsThis::add(outboxView,QWidget::tr("This is the outbox view.\n"
+  "It keeps the queued mails to send which can be \n"
+  "reviewed by double clicking the entry."));
   grid_3->addWidget( outboxView, 0, 0 );
   mailboxView->addTab( widget_2,"mailit/outbox", tr( "Outbox" ) );
   
   setCentralWidget(mailboxView);
   
+}
+
+void EmailClient::initStatusBar(QWidget* parent)
+{
+  statusBar = new QStatusBar(parent);
+  statusBar->setSizeGripEnabled(FALSE);
+  
+  status1Label = new QLabel( tr("Idle"), statusBar);
+  status2Label = new QLabel("", statusBar);
+  connect(emailHandler, SIGNAL(updatePopStatus(const QString &)),
+    status2Label, SLOT(setText(const QString &)) );
+  connect(emailHandler, SIGNAL(updateSmtpStatus(const QString &)),
+    status2Label, SLOT(setText(const QString &)) );
+  
+  progressBar = new QProgressBar(statusBar);
+
+  connect(emailHandler, SIGNAL(mailboxSize(int)),
+    this, SLOT(setTotalSize(int)) );
+  connect(emailHandler, SIGNAL(currentMailSize(int)),
+    this, SLOT(setMailSize(int)) );
+  connect(emailHandler, SIGNAL(downloadedSize(int)),
+    this, SLOT(setDownloadedSize(int)) );
+
+  statusBar->addWidget(status1Label);
+  statusBar->addWidget(progressBar);
+  statusBar->addWidget(status2Label);
+
 }
 
 void EmailClient::compose()
@@ -319,7 +338,7 @@ void EmailClient::getNewMail() {
   progressBar->reset();
     
   //get any previous mails not downloaded and add to queue
-  mailDownloadList.clear();
+  /*mailDownloadList.clear();
   Email *mailPtr;
   item = (EmailListItem *) inboxView->firstChild();
   while (item != NULL) {
@@ -328,7 +347,7 @@ void EmailClient::getNewMail() {
       mailDownloadList.sizeInsert(mailPtr->serverId, mailPtr->size);
     }
     item = (EmailListItem *) item->nextSibling();
-  }
+  }*/
   
   emailHandler->getMailHeaders();
   
@@ -338,7 +357,7 @@ void EmailClient::getAllNewMail()
 {
   allAccounts = TRUE;
   currentAccount = accountList.first();
-  getNewMail();
+  getNewMail();  
 }
 
 void EmailClient::mailArrived(const Email &mail, bool fromDisk)
@@ -348,9 +367,10 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
   int thisMailId;
   emailHandler->parse(mail.rawMail, lineShift, &newMail);
   mailconf->setGroup(newMail.id);
-    
+  
   if (fromDisk) 
   {
+    
     newMail.downloaded = mailconf->readBoolEntry("downloaded");
     newMail.size = mailconf->readNumEntry("size");
     newMail.serverId = mailconf->readNumEntry("serverid");
@@ -358,6 +378,7 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
   } 
   else 
   {  //mail arrived from server
+  
     newMail.serverId = mail.serverId;
     newMail.size = mail.size;
     newMail.downloaded = mail.downloaded;
@@ -918,7 +939,7 @@ void EmailClient::inboxItemReleased()
   //	killTimer(timerID);
 }
 
-void EmailClient::timerEvent(QTimerEvent *e)
+/*void EmailClient::timerEvent(QTimerEvent *e)
 {
   /*killTimer(timerID);
   
@@ -935,8 +956,8 @@ void EmailClient::timerEvent(QTimerEvent *e)
   action->exec(QCursor::pos());
   
   if (action) delete action;
-  */  
-}
+   
+}*/
 
 Email* EmailClient::getCurrentMail()
 {
@@ -953,8 +974,6 @@ void EmailClient::download(Email* mail)
 	
 	tempMailDownloadList.clear();
 	tempMailDownloadList.sizeInsert(mail->serverId, mail->size);
-	if (accountList.count()>0)
-		qDebug("Accounts present");
 	
 	acc=accountList.at(mail->fromAccountId-1);
 	if (acc)
@@ -965,4 +984,49 @@ void EmailClient::download(Email* mail)
 	else 
 		QMessageBox::warning(qApp->activeWindow(),
       		tr("No account associated"), tr("There is no active account \nassociated to this mail\n it can not be downloaded"), "Abort\n");
+}
+
+void EmailClient::receive(const QCString& msg, const QByteArray& data)
+{
+	/*if (msg=="getMail()")
+	{
+		/*QDialog qd(qApp->activeWindow(),"Getting mail",true);
+		QVBoxLayout *vbProg = new QVBoxLayout( &qd );
+	
+		initStatusBar(&qd);
+		
+		if (statusBar==0)
+		{
+			qDebug("No Bar ...");
+			//statusBar=new ProgressBar(&qd);
+		}
+		statusBar->show();
+		vbProg->addWidget(statusBar);
+		qd.showMaximized();
+		qd.show();
+		emit getAllNewMail();
+		//qd.exec();
+	}
+	else if (msg=="compose()")
+	{	
+		QDialog qd(qApp->activeWindow(),"Getting mail",true);
+		
+		WriteMail wm(&qd,"write new mail");
+		QVBoxLayout vbProg( &qd );
+		
+		wm.showMaximized();
+		vbProg.addWidget(&wm);
+		
+		qd.showMaximized();
+		
+		emit composeRequested();
+		qd.exec();
+		
+		QMessageBox::warning(qApp->activeWindow(),tr("Info"), tr("Info"), "OK\n");
+	}
+		
+	else if (msg=="dialog()")
+	{
+	    QMessageBox::warning(qApp->activeWindow(),tr("Info"), tr("Info"), "OK\n");
+	}*/
 }

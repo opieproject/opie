@@ -28,6 +28,7 @@
 #include <qfile.h>
 #include <qstringlist.h>
 #include <qcollection.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include "smtpclient.h"
 #include "popclient.h"

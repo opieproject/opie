@@ -19,8 +19,10 @@
 **********************************************************************/
 #include "readmail.h"
 #include <qimage.h>
+#include <qwhatsthis.h>
 #include <qmime.h>
 #include <qaction.h>
+#include <qpopupmenu.h>
 #include <qpe/resource.h>
 
 ReadMail::ReadMail( QWidget* parent,  const char* name, WFlags fl )
@@ -42,6 +44,8 @@ void ReadMail::init()
 {
 	setToolBarsMovable(FALSE);
 	
+	QPopupMenu* mailaction=new QPopupMenu(this);
+	
 	bar = new QToolBar(this);
 	bar->setHorizontalStretchable( TRUE );
 
@@ -55,17 +59,11 @@ void ReadMail::init()
 
 	bar = new QToolBar(this);
 	
-    	//reply dependant on viewing inbox
-	replyButton = new QAction( tr( "Reply" ), Resource::loadPixmap( "mailit/reply" ),
-		QString::null, 0, this, 0 );
-	connect(replyButton, SIGNAL(activated()), this, SLOT(reply()) );
-  	replyButton->setWhatsThis(tr("Click here to reply to the selected mail"));
-		
-	forwardButton = new QAction( tr( "Forward" ), Resource::loadPixmap( "mailit/forward" ),
-	QString::null, 0, this, 0 );
-	connect(forwardButton, SIGNAL(activated()), this, SLOT(forward()) );
-	forwardButton->setWhatsThis(tr("Click here to forward the selected mail"));
+	downloadButton = new QAction( tr( "Download" ), Resource::loadPixmap( "mailit/download" ),QString::null, 0, this, 0 );
+	connect(downloadButton, SIGNAL(activated()), this, SLOT(download()) );
+  	downloadButton->setWhatsThis(tr("Click here to download the selected mail"));
 	
+		
 	previousButton = new QAction( tr( "Previous" ), Resource::loadPixmap( "back" ), QString::null, 0, this, 0 );
 	connect( previousButton, SIGNAL( activated() ), this, SLOT( previous() ) );
 	previousButton->addTo(bar);
@@ -94,6 +92,23 @@ void ReadMail::init()
 	"<LI><B>Plain</B> shows the mail as standard plain text</LI>"
 	"Click here to switch between those view modes" ));
 
+    	//reply dependant on viewing inbox
+	replyButton = new QToolButton(Resource::loadPixmap("mailit/reply"),tr("reply"),tr("reply to mail"), this,SLOT(reply()),bar);
+        QWhatsThis::add(replyButton,tr("Click here to reply to the selected mail\nPress and hold for more options."));
+	replyButton->setPopup(mailaction);
+		
+	replyAllButton = new QAction( tr( "Reply all" ), Resource::loadPixmap( "mailit/reply" ),QString::null, 0, this, 0 );
+	connect(replyAllButton, SIGNAL(activated()), this, SLOT(replyAll()));
+	replyAllButton->setWhatsThis(tr("Click here to reply to the selected mail to CC: addresses also"));
+	replyAllButton->addTo(mailaction);	
+	
+	forwardButton = new QAction( tr( "Forward" ), Resource::loadPixmap( "mailit/forward" ),
+	QString::null, 0, this, 0 );
+	connect(forwardButton, SIGNAL(activated()), this, SLOT(forward()));
+	forwardButton->setWhatsThis(tr("Click here to forward the selected mail"));
+	forwardButton->addTo(mailaction);
+	
+	
 	deleteButton = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ), QString::null, 0, this, 0 );
 	connect( deleteButton, SIGNAL( activated() ), this, SLOT( deleteItem() ) );
 	deleteButton->addTo(bar);
@@ -119,19 +134,26 @@ void ReadMail::updateView()
 	mail->read = TRUE;			//mark as read
 	inbox = mail->received;
 	
-	replyButton->removeFrom(mailMenu);
-	replyButton->removeFrom(bar);
+	replyButton->setEnabled(false);
+	/*replyButton->removeFrom(bar);
 	forwardButton->removeFrom(mailMenu);
-	forwardButton->removeFrom(bar);
+	forwardButton->removeFrom(bar);*/
+	downloadButton->removeFrom(bar);
 	
+	//downloadButton->setEnabled(!mail->downloaded);
+	
+		
 	if (inbox == TRUE) {
-		replyButton->addTo(bar);
-		replyButton->addTo(mailMenu);
+		replyButton->setEnabled(true);
+		/*replyButton->addTo(mailMenu);
 		forwardButton->addTo(bar);
-		forwardButton->addTo(mailMenu);
+		forwardButton->addTo(mailMenu);*/
 
 				
 		if (!mail->downloaded) {
+			
+			downloadButton->addTo(bar);
+			
 			//report currently viewed mail so that it will be
 			//placed first in the queue of new mails to download
 			emit viewingMail(mail);
@@ -357,11 +379,21 @@ void ReadMail::viewAttachments()
 
 void ReadMail::reply()
 {
+	emit replyRequested(*mail, (bool&)FALSE);
+}
+
+void ReadMail::replyAll()
+{
 	emit replyRequested(*mail, (bool&)TRUE);
 }
 
 void ReadMail::forward()
 {
 	emit forwardRequested(*mail);
+}
+
+void ReadMail::download()
+{
+	emit download(mail);
 }
 

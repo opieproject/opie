@@ -61,6 +61,9 @@ MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags fl)
   
   connect(emailClient, SIGNAL(newCaption(const QString &)),
     this, SLOT(updateCaption(const QString &)) );
+    
+  connect(readMail, SIGNAL(download(Email *)), emailClient, SLOT(download(Email*)) );
+  
   viewingMail = FALSE;  
 }
 

@@ -41,6 +41,7 @@
 #include <qdir.h>
 #include <stdlib.h>
 #include <opie/otabwidget.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <qtimer.h>
 
 #include "emailhandler.h"
@@ -70,10 +71,9 @@ public:
   EmailClient( QWidget* parent, const char* name, WFlags fl = 0 );
   ~EmailClient();
   AddressList* getAdrListRef();
-  void download(Email*);
 
 protected:
-  void timerEvent(QTimerEvent*);
+  //void timerEvent(QTimerEvent*);
   
 signals:
   void composeRequested();
@@ -116,13 +116,18 @@ public slots:
   void setMailSize(int);
   void setDownloadedSize(int);
   void moveMailFront(Email *mailPtr);
+  void download(Email*);
 /*  void reply();
   void replyAll();
   void forward();
   void remove();*/
 
+private slots:
+  void receive(const QCString&, const QByteArray&);
+  
 private:
   void init();
+  void initStatusBar(QWidget*);
   void readMail();
   QString getPath(bool enclosurePath);
   void readSettings();
@@ -145,6 +150,8 @@ private:
   bool sending, receiving, previewingMail, allAccounts;
   QString lineShift;
   MailAccount account, *currentAccount;
+  
+  QCopChannel* channel;
   
   QToolBar *bar;
   QProgressBar *progressBar;

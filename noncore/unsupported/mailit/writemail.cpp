@@ -22,8 +22,7 @@
 #include "writemail.h"
 #include <qpe/resource.h>
 
-WriteMail::WriteMail( QWidget* parent,  const char* name, WFlags fl )
-	: QMainWindow( parent, name, fl )
+WriteMail::WriteMail( QWidget* parent,  const char* name, WFlags fl ):QMainWindow( parent, name, fl )
 {
 	showingAddressList = FALSE;
 	init();
@@ -259,7 +258,7 @@ void WriteMail::reply(Email replyMail, bool replyAll)
 	toInput->setText(mail.fromMail);
 	
 	if (replyAll)
-	{
+	{	
 		for (QStringList::Iterator it = mail.carbonCopies.begin();it != mail.carbonCopies.end(); ++it) 
 		{
 			ccRecipients.append(*it);
@@ -268,11 +267,17 @@ void WriteMail::reply(Email replyMail, bool replyAll)
 		ccRecipients.truncate(ccRecipients.length()-1);		//no ; at the end
 		ccInput->setText(ccRecipients);
 	}
-		
-	addRecipients(replyAll);
+	else ccInput->clear();
 	
 	subjectInput->setText(tr("Re: ") + mail.subject);
 	
+	QString citation=mail.fromMail;
+	citation.append(tr(" wrote on "));
+	citation.append(mail.date);
+	citation.append(":\n");
+	
+
+	//mail.body.insert(0,tr("On"));
 	pos = 0;
 	mail.body.insert(pos, ">");
 	while (pos != -1) {
@@ -280,7 +285,7 @@ void WriteMail::reply(Email replyMail, bool replyAll)
 		if (pos != -1)
 			mail.body.insert(++pos, ">>");
 	}
-	
+	mail.body.insert(0,citation);	
 	emailInput->setText(mail.body);
 }
 
@@ -308,9 +313,16 @@ bool WriteMail::getRecipients(bool ccField)
 	QString str, temp;
 	int pos = 0;
 	
-	mail.recipients.clear();
-	
-	ccField ? temp = ccInput->text() : temp=toInput->text() ;
+	if (ccField)
+	{
+		mail.carbonCopies.clear();
+	 	temp = ccInput->text();
+	} 
+	else 
+	{
+		mail.recipients.clear(); 
+		temp=toInput->text() ;
+	}
 	
 	while ( (pos = temp.find(';')) != -1) {
 		str = temp.left(pos).stripWhiteSpace();
@@ -318,13 +330,13 @@ bool WriteMail::getRecipients(bool ccField)
 		if ( str.find('@') == -1)
 			return false;
 		ccField ? mail.carbonCopies.append(str) : mail.recipients.append(str);
-		addressList->addContact(str, "");
+		//addressList->addContact(str, "");
 	}
 	temp = temp.stripWhiteSpace();
 	if ( temp.find('@') == -1)
 		return false;
 	ccField ? mail.carbonCopies.append(temp) : mail.recipients.append(temp);
-	addressList->addContact(temp, "");
+	//addressList->addContact(temp, "");
 	
 	return TRUE;
 }
@@ -383,6 +395,7 @@ void WriteMail::setRecipient(const QString &recipient)
 void WriteMail::newMail()
 {
 	toInput->clear();
+	ccInput->clear();
 	subjectInput->clear();
 	emailInput->clear();
 	setAddressList(addressList);

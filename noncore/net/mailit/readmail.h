@@ -28,6 +28,7 @@
 #include <qlistview.h>
 #include <qlayout.h>
 #include <qtextview.h>
+#include <qtoolbutton.h>
 
 #include "emailhandler.h"
 #include "emaillistitem.h"
@@ -50,6 +51,7 @@ signals:
 	void forwardRequested(Email&);
 	void removeItem(EmailListItem *, bool &);
 	void viewingMail(Email *);
+	void download (Email*);
 
 public slots:
 	void close();
@@ -59,7 +61,9 @@ public slots:
 	void shiftText();
 	void viewAttachments();
 	void reply();
+	void replyAll();
 	void forward();
+	void download();
 	
 private:
 	void init();
@@ -82,8 +86,10 @@ private:
 	QTextView *emailView;
 	QAction *attachmentButton;
 	QAction *previousButton;
-	QAction *replyButton;
+	QToolButton *replyButton;
 	QAction *forwardButton;
+	QAction *replyAllButton;
+	QAction *downloadButton;
 };
 
 #endif // READMAIL_H

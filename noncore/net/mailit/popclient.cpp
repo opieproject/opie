@@ -29,6 +29,7 @@ extern "C" {
 
 PopClient::PopClient()
 {
+  
   socket = new QSocket(this, "popClient");
   connect(socket, SIGNAL(error(int)), this, SLOT(errorHandling(int)));
   connect(socket, SIGNAL(connected()), this, SLOT(connectionEstablished()));
@@ -117,6 +118,7 @@ void PopClient::incomingData()
   char md5Digest[16];
 //  if ( !socket->canReadLine() )
 //    return;
+
   
   response = socket->readLine();
   
@@ -151,19 +153,20 @@ void PopClient::incomingData()
           status = Pass;
        }
           
-          break;
+        break;
         }
     
     case Pass:  {
           *stream << "PASS " << popPassword << "\r\n";
-          status = Stat;
+	  status = Stat;
+	  
           break;
         }
     //ask for number of messages
     case Stat:  {
           if (response[0] == '+') {
             *stream << "STAT" << "\r\n";
-            status = Mcnt;
+            status = Mcnt;	    
           } else errorHandling(ErrLoginFailed);
             break;
           }
@@ -179,8 +182,8 @@ void PopClient::incomingData()
               
             if (synchronize) {
               //messages deleted from server, reload all
-              if (newMessages < lastSync)
-                lastSync = 0;
+              	if (newMessages < lastSync)
+                	lastSync = 0;
                 messageCount = 1;
               }
               
@@ -273,7 +276,6 @@ void PopClient::incomingData()
             if (x == -1) {
               break;
             } else {  //message reach entire size
-              
 	      if ( (selected)||(mailSize <= headerLimit)) //mail size limit is not used if late download is active
 	      {
 	    	emit newMessage(message, messageCount-1, mailSize, TRUE);
