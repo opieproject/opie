@@ -60,15 +60,12 @@ void MediaWidget::paintEvent( QPaintEvent *pe )
         QPainter p( &pix );
         p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
         p.drawTiledPixmap( pe->rect(), backgroundPixmap, pe->rect().topLeft() );
-        for ( unsigned int i = 0; i < buttons.count(); i++ ) {
-            paintButton( p, buttons[ i ] );
-        }
+        paintAllButtons( p );
         QPainter p2( this );
         p2.drawPixmap( pe->rect().topLeft(), pix );
     } else {
         QPainter p( this );
-        for ( unsigned int i = 0; i < buttons.count(); i++ )
-            paintButton( p, buttons[ i ] );
+        paintAllButtons( p );
     }
 }
 
@@ -94,6 +91,13 @@ bool MediaWidget::isOverButton( const QPoint &position, int buttonId ) const
              position.x() < buttonMask.width() && 
              position.y() < buttonMask.height() && 
              buttonMask.pixelIndex( position.x(), position.y() ) == buttonId + 1 );
+}
+
+void MediaWidget::paintAllButtons( QPainter &p )
+{
+    for ( ButtonMap::ConstIterator it = buttons.begin();
+          it != buttons.end(); ++it )
+        paintButton( *it );
 }
 
 void MediaWidget::paintButton( const Button &button )
