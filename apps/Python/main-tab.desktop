@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=main-tab.py
+Icon=pyquicklaunch/logo
+Type=Example
+Name=TabWidget Example
+Comment=An Example Program

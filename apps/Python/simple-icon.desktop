@@ -1,0 +1,8 @@
+[Desktop Entry]
+Exec=simple-icon.py
+Icon=pyquicklaunch/logo
+Type=Example
+Name=IconExample
+Comment=An Example Program
+Name[pt]=Exemplo
+Comment[pt]=Um programa de exemplo
