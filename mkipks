@@ -8,8 +8,9 @@ mkdir -p etc/rc2.d
 rm -f etc/rc2.d/S98opie
 ln -s ../init.d/opie etc/rc2.d/S98opie
 
-rm -f etc/rc2.d/S01bootsplash
-ln -s ../init.d/opie etc/rc2.d/S01bootsplash
+mkdir -p etc/rcS.d
+rm -f etc/rcS.d/S01bootsplash
+ln -s ../init.d/opie etc/rcS.d/S01bootsplash
 
 rm -f ipaq/etc/rc2.d/S96opieatd
 ln -s ../init.d/opieatd ipaq/etc/rc2.d/S96opieatd
