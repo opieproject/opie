@@ -63,7 +63,7 @@ class OConfig : public OpieConfig
      * @returns the name of the current group.
      * The current group is used for searching keys and accessing entries.
      */
-    const QString& group() { return group(); };
+    const QString& group() { return OpieConfig::group(); };
     /**
      * @returns a @ref QColor entry or a @a default value if the key is not found.
      */
@@ -101,7 +101,7 @@ class OConfig : public OpieConfig
  * in one block.
  *
  * @author Matthias Kalle Dalheimer <Kalle@kde.org>
- * @version $Id: oconfig.h,v 1.3 2003-09-02 15:38:08 tille Exp $
+ * @version $Id: oconfig.h,v 1.4 2003-09-25 18:11:23 mickeyl Exp $
  * @see OConfig
  */
 
