@@ -588,11 +588,12 @@ void MainWindow::slotTransfer()
 {
     if ( currentSession() ) {
 	Session *mysession = currentSession();
-	TransferDialog dlg(mysession->widgetStack(), this);
+	TransferDialog dlg(/*mysession->widgetStack()*/this, this);
 	mysession->setTransferDialog(&dlg);
-	dlg.show();
+	//dlg.reparent(mysession->widgetStack(), QPoint(0, 0));
 	//dlg.showMaximized();
-	//currentSession()->widgetStack()->add(dlg);
+	currentSession()->widgetStack()->addWidget(&dlg, -1);
+	dlg.show();
 	//dlg.exec();
 	while(dlg.isRunning()) qApp->processEvents();
 	mysession->setTransferDialog(0l);
