@@ -120,7 +120,7 @@ void Passwd::splitGroupEntry(QString &groupString) {
 	gr_name=(*it++);
 	it++;
 	gr_gid=(*it++).toInt();
-	gr_mem=QStringList::split(" ",(*it++));
+	gr_mem=QStringList::split(",",(*it++));
 }
 
 // Find a user in the passwdStringList. Return true if found and also fill the pw_* variables.
@@ -239,9 +239,10 @@ bool Passwd::updateGroup(int gid) {
 	for(QStringList::Iterator it=groupStringList.begin(); it!=groupStringList.end(); ++it) {
 		if(groupRegExp.find((*it),0)!=-1) {
 			*it=QString(gr_name+":*:"+QString::number(gr_gid)+":");
-			for(QStringList::Iterator member=gr_mem.begin(); member!=gr_mem.end(); ++member) {
+			for(QStringList::Iterator member=gr_mem.begin(); member!=gr_mem.end();) {
 				*it+=*member;
-				*it+=" ";
+				++member;
+				if(member!=gr_mem.end()) *it+=",";
 			}
 			return true;
 		}
@@ -275,7 +276,9 @@ bool Passwd::delGroup(int gid) {
 // Add a user as a member to a group in groupStringList.
 bool Passwd::addGroupMember(QString groupname, QString member) {
 	if(!(findGroup(groupname))) return false;
-	gr_mem << member;
+	QRegExp memberRegExp(QString("^%1$").arg(member));
+	QStringList templist=gr_mem.grep(memberRegExp);
+	if(templist.isEmpty()) gr_mem << member;
 	if(!(updateGroup(gr_gid))) return false;
 	return true;
 }

@@ -333,11 +333,26 @@ bool UserDialog::editUser(const char *username) {
 		edituserDialog->groupComboBox->insertItem("<Undefined group>",0);
 		edituserDialog->groupComboBox->setCurrentItem(0);
 	}
+
 	// Select the groups in the listview, to which the user belongs.
 	QCheckListItem *temp;
-	QRegExp userRegExp(QString("[:\\s]%1\\s").arg(username));
+	// BAH!!! QRegExp in qt2 sucks... or maybe I do... can't figure out how to check for EITHER end of input ($) OR a comma, so here we do two different QRegExps instead.
+	QRegExp userRegExp(QString("[:,]%1$").arg(username));	// The end of line variant.
 	QStringList tempList=accounts->groupStringList.grep(userRegExp);	// Find all entries in the group database, that the user is a member of.
 	for(QStringList::Iterator it=tempList.begin(); it!=tempList.end(); ++it) {	// Iterate over all of them.
+		qWarning(*it);
+		QListViewItemIterator lvit( edituserDialog->groupsListView );	// Compare to all groups.
+		for ( ; lvit.current(); ++lvit ) {
+			if(lvit.current()->text(0)==(*it).left((*it).find(":"))) {
+				temp=(QCheckListItem*)lvit.current();
+				temp->setOn(true);	// If we find a line with that groupname, select it.;
+			}
+		}
+	}
+	userRegExp=QRegExp(QString("[:,]%1,").arg(username));	// And the other one. (not end of line.)
+	tempList=accounts->groupStringList.grep(userRegExp);	// Find all entries in the group database, that the user is a member of.
+	for(QStringList::Iterator it=tempList.begin(); it!=tempList.end(); ++it) {	// Iterate over all of them.
+		qWarning(*it);
 		QListViewItemIterator lvit( edituserDialog->groupsListView );	// Compare to all groups.
 		for ( ; lvit.current(); ++lvit ) {
 			if(lvit.current()->text(0)==(*it).left((*it).find(":"))) {
