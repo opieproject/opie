@@ -1,20 +1,18 @@
 ## targets ##
 
 $(TOPDIR)/config.in :
-	@-rm -f $@
-	@for cfg in `find $(TOPDIR) -name config.in`; do \
-		echo 'include $$cfg' >> $(TOPDIR)/config.in; \
-	done;
 
-$(TOPDIR)/.depends :
+$(TOPDIR)/.depends : $(TOPDIR)/config.in
 	@cat $(TOPDIR)/packages | \
-		awk '{print \
+		awk '/^#/ { next }; {print \
 			".PHONY : " $$2 "\n" \
 			"subdir-$$(" $$1 ") += " $$2 "\n\n" \
 			$$2 "/Makefile : " $$2 "/" $$3 " $$(TOPDIR)/qmake/qmake\n\t" \
 			"$$(call makefilegen,$$@)\n\n" \
 			$$2 " : " $$2 "/Makefile\n\t$$(call descend,$$@)\n"}'\
 			> $(TOPDIR)/.depends
+	@cat $(TOPDIR)/packages | \
+		$(TOPDIR)/scripts/deps.pl >> $(TOPDIR)/.depends
 
 $(TOPDIR)/qmake/qmake :
 	$(call descend,$(TOPDIR)/qmake)
