@@ -450,10 +450,8 @@ void FirstUse::paintEvent( QPaintEvent * )
 
 void FirstUse::loadPixmaps()
 {
-    /* create background, tr so can change image with language.
-       images will likely contain text. */
-    splash.convertFromImage( Resource::loadImage(tr("FirstUseBackground"))
-	    .smoothScale( width(), height() ) );
+    splash.convertFromImage( Resource::loadImage("launcher/firstuse")
+                             .smoothScale( width(), height() ) );
 
     setBackgroundPixmap(splash);
 }
