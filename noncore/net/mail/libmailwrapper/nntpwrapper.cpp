@@ -7,8 +7,6 @@
 #include <stdlib.h>
 
 #include <libetpan/libetpan.h>
-#include <libetpan/nntpdriver.h>
-
 
 
 #define HARD_MSG_SIZE_LIMIT 5242880
@@ -192,34 +190,28 @@ void NNTPwrapper::logout()
 
 QList<Folder>* NNTPwrapper::listFolders() {
 
-
-
-
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
+
+//    folders->append(inb);
+    return folders;
+}
+
+  clist *  NNTPwrapper::listAllNewsgroups() {
+ login();
     clist *result = 0;
     clistcell *current;
     newsnntp_group_description *list;
-
-  login();
   if ( m_nntp )   {
   mailsession * session = m_nntp->sto_session;
  newsnntp * news =  ( (  nntp_session_state_data * )session->sess_data )->nntp_session;
    int err = newsnntp_list_newsgroups(news, NULL, &result);
 
    if ( err == NEWSNNTP_NO_ERROR ) {
-        current = result->first;
-        for ( current=clist_begin(result);current!=NULL;current=clist_next(current)) {
-               list = (  newsnntp_group_description* ) current->data;
-               qDebug(  list->grp_name );
-       }
-//    Folder*inb=new Folder("INBOX","/");
+        return result;
    }
  }
-//    folders->append(inb);
-    return folders;
 }
-
 
 void NNTPwrapper::answeredMail(const RecMail&) {}
 

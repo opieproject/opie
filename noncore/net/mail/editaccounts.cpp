@@ -8,6 +8,10 @@
 /* QT */
 #include <qt.h>
 
+#include <libmailwrapper/nntpwrapper.h>
+
+#include <libetpan/nntpdriver.h>
+
 AccountListItem::AccountListItem( QListView *parent, Account *a)
         : QListViewItem( parent )
 {
@@ -488,10 +492,30 @@ NNTPconfig::NNTPconfig( NNTPaccount *account, QWidget *parent, const char *name,
 
     connect( loginBox, SIGNAL( toggled(bool) ), userLine, SLOT( setEnabled(bool) ) );
     connect( loginBox, SIGNAL( toggled(bool) ), passLine, SLOT( setEnabled(bool) ) );
-
+    connect( GetNGButton,  SIGNAL( clicked() ), this, SLOT( slotGetNG() ) );
     fillValues();
 
     connect( sslBox, SIGNAL( toggled(bool) ), SLOT( slotSSL(bool) ) );
+}
+
+void NNTPconfig::slotGetNG() {
+    save();
+    data->save();
+    NNTPwrapper* tmp = new NNTPwrapper( data );
+    clist* list =  tmp->listAllNewsgroups();
+
+    clistcell *current;
+    newsnntp_group_description *group;
+
+   // FIXME - test if not empty
+    current = list->first;
+     for ( current=clist_begin(list);current!=NULL;current=clist_next(current) ) {
+               group = (  newsnntp_group_description* ) current->data;
+              qDebug(  group->grp_name );
+
+	QCheckListItem *item;
+    	item = new QCheckListItem( ListViewGroups, ( QString )group->grp_name, QCheckListItem::CheckBox );
+       }
 }
 
 void NNTPconfig::slotSSL( bool enabled )
@@ -517,7 +541,7 @@ void NNTPconfig::fillValues()
     passLine->setText( data->getPassword() );
 }
 
-void NNTPconfig::accept()
+void NNTPconfig::save()
 {
     data->setAccountName( accountLine->text() );
     data->setServer( serverLine->text() );
@@ -527,6 +551,17 @@ void NNTPconfig::accept()
     data->setUser( userLine->text() );
     data->setPassword( passLine->text() );
 
+   QListViewItemIterator list_it( ListViewGroups );
+   for ( ; list_it.current(); ++list_it ) {
+       if ( list_it.current()->isSelected() ) {
+          qDebug( list_it.current()->text(0) );
+      }
+  }
+}
+
+void NNTPconfig::accept()
+{
+    save();
     QDialog::accept();
 }
 

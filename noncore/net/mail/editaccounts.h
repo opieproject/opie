@@ -10,6 +10,8 @@
 #include "pop3configui.h"
 #include "smtpconfigui.h"
 #include "nntpconfigui.h"
+
+#include <libetpan/clist.h>
 #include <libmailwrapper/settings.h>
 
 
@@ -81,7 +83,7 @@ public slots:
 protected slots:
     void slotConnectionToggle( int index );
     void accept();
-
+ 
 private:
     IMAPaccount *data;
 
@@ -138,9 +140,12 @@ public slots:
 protected slots:
     void slotSSL( bool enabled );
     void accept();
+    void slotGetNG();
 
 private:
+    void save();
     NNTPaccount *data;
+    clist* list;
 
 };
 
