@@ -6,6 +6,6 @@ Maintainer: ljp <lpotter@trolltech.com>
 Source: opie.handhelds.org
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: ftplib, libopie
+Depends: ftplib, libopiecore2, libopieui2
 Description: Etext read for the Project Gutenberg.
 
