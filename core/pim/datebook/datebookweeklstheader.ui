@@ -22,10 +22,6 @@
             <vsizetype>0</vsizetype>
         </sizepolicy>
     </property>
-    <property stdset="1">
-        <name>caption</name>
-        <string>Form2</string>
-    </property>
     <property>
         <name>layoutMargin</name>
     </property>
