@@ -70,7 +70,7 @@ void ContactItem::setIcon()
 	case Qtopia::Suffix:
 	case Qtopia::Nickname:
  	case Qtopia::FileAs:
-		icon = Resource::loadPixmap( "osearch/identity" );
+		icon = Resource::loadPixmap( "addressbook/identity" );
  		break;
  	case Qtopia::HomeStreet:
  	case Qtopia::HomeCity:
