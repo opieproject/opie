@@ -1,5 +1,4 @@
 #include <qlistview.h>
-#include <qlabel.h>
 #include <qcombobox.h>
 #include <qtimer.h>
 

@@ -29,7 +29,6 @@
 #include <qlabel.h>
 #include <qtimer.h>
 
-#include <qpe/qpeapplication.h>
 
 #include <opie/odevice.h>
 
