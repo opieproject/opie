@@ -60,8 +60,6 @@ public:
     void setIOLayer( IOLayer*  );
     void setName( const QString& );
 
-    bool isConnected();
-
 private:
     QString m_name;
     QWidgetStack* m_widget;

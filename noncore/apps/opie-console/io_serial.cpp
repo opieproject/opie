@@ -8,6 +8,7 @@ IOSerial::IOSerial(const Profile &config) : IOLayer(config) {
     m_read = 0l;
     m_error = 0l;
     m_fd = 0;
+    m_connected = false;
     reload(config);
 }
 
@@ -32,7 +33,9 @@ void IOSerial::close() {
         delete m_error;
         ::close(m_fd);
         m_fd = 0;
+        m_connected = false;
     } else {
+        m_connected = false;
         emit error(Refuse, tr("Not connected"));
     }
 }
@@ -111,6 +114,7 @@ bool IOSerial::open() {
         m_error = new QSocketNotifier(m_fd, QSocketNotifier::Exception, this);
         connect(m_read, SIGNAL(activated(int)), this, SLOT(dataArrived()));
         connect(m_error, SIGNAL(activated(int)), this, SLOT(errorOccured()));
+        m_connected = false;
         return TRUE;
     } else {
         emit error(Refuse, tr("Device is already connected"));
@@ -193,4 +197,8 @@ QBitArray IOSerial::supports()const {
     ar[1] = 1;
 
     return ar;
+}
+
+bool IOSerial::isConnected() {
+    return m_connected;
 }

@@ -50,7 +50,7 @@ extern "C" {
         return new IOModem( prof );
     }
     IOLayer* newConsole( const Profile& prof ) {
-        return new MyPty(prof );
+        return new MyPty( prof );
     }
 
     // Connection Widgets

@@ -51,8 +51,6 @@ void Session::connect() {
     if ( !m_layer || !m_emu )
         return;
 
-    m_connected = true;
-
     QObject::connect(m_layer, SIGNAL(received(const QByteArray&) ),
             m_emu, SLOT(recv(const QByteArray&) ) );
     QObject::connect(m_emu, SIGNAL(send(const QByteArray&) ),
@@ -63,8 +61,6 @@ void Session::disconnect() {
 
     if ( !m_layer || !m_emu )
         return;
-
-    m_connected = false;
 
     QObject::disconnect(m_layer, SIGNAL(received(const QByteArray&) ),
             m_emu, SLOT(recv(const QByteArray&) ) );
@@ -100,6 +96,3 @@ void Session::setEmulationWidget( WidgetLayer* lay ) {
 }
 */
 
-bool Session::isConnected() {
-    return  m_connected;
-}

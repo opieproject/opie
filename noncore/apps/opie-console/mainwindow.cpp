@@ -205,7 +205,7 @@ void MainWindow::initUI() {
     m_keyBar->hide();
 
     m_kb = new FunctionKeyboard(m_keyBar);
-    connect(m_kb, SIGNAL(keyPressed(ushort, ushort, bool, bool, bool)), 
+    connect(m_kb, SIGNAL(keyPressed(ushort, ushort, bool, bool, bool)),
             this, SLOT(slotKeyReceived(ushort, ushort, bool, bool, bool)));
 
 
@@ -439,8 +439,8 @@ void MainWindow::slotSessionChanged( Session* ses ) {
     qWarning("changed!");
     if ( ses ) {
         m_curSession = ses;
-
-        if ( m_curSession->isConnected() ) {
+        qDebug(QString("is connected : %1").arg(  m_curSession->layer()->isConnected() ) );
+        if ( m_curSession->layer()->isConnected() ) {
             m_connect->setEnabled( false );
             m_disconnect->setEnabled( true );
         } else {
@@ -489,6 +489,6 @@ void MainWindow::slotKeyReceived(ushort u, ushort q, bool, bool, bool) {
 
         ke.ignore();
         // where should i send this event? doesnt work sending it here
-        QApplication::sendEvent((QObject *)m_curSession->widgetStack(), &ke); 
+        QApplication::sendEvent((QObject *)m_curSession->widgetStack(), &ke);
     }
 }

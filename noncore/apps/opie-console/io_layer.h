@@ -79,6 +79,8 @@ public:
      */
     virtual QBitArray supports()const = 0;
 
+    virtual bool isConnected() = 0;
+
 signals:
     /**
      * received input as QCString

@@ -38,6 +38,7 @@ public:
     int rawIO()const;
     void closeRawIO(int fd );
     QBitArray supports()const;
+    bool isConnected();
 /*signals:
     void received(const QByteArray &);
     void error(int, const QString &);
@@ -62,6 +63,8 @@ protected:
     int              m_sbits;
     int              m_flow;
     int              m_fd;
+    bool             m_connected;
+
 };
 
 #endif /* OPIE_IO_SERIAL */

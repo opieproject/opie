@@ -56,7 +56,7 @@ public:
     void reload( const Profile& );
     void setSize(int lines, int columns);
     void error();
-
+    bool isConnected() { return true; };
   signals:
 
     /*!
