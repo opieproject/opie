@@ -693,7 +693,7 @@ bool TextEdit::save()
     QString file = doc->file();
     QString name= doc->name();
     QString rt = editor->text();
-    currentFileName= file ;
+    currentFileName= name ;
     qDebug("saveFile "+currentFileName);
 
     doc->setName( name);
