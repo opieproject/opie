@@ -1,0 +1,10 @@
+TEMPLATE	= app
+#CONFIG		= qt warn_on debug
+CONFIG		= qt warn_on release
+HEADERS		= backuprestore.h
+SOURCES		= main.cpp backuprestore.cpp
+INCLUDEPATH	+= $(QPEDIR)/include
+DEPENDPATH	+= $(QPEDIR)/include
+LIBS            += -lqpe
+INTERFACES	= backuprestorebase.ui
+TARGET		= backupandrestore
