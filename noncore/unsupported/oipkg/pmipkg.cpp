@@ -45,7 +45,7 @@ PmIpkg::PmIpkg( PackageManagerSettings* s, QWidget* p,  const char * name, WFlag
 
   Config cfg( "oipkg", Config::User );
   cfg.setGroup( "ipkg" );
-  ipkg_cmd = cfg.readEntry( "cmd", "ipkg" );
+  ipkg_cmd = cfg.readEntry( "cmd", "ipkg" )+" ";
 }
 
 PmIpkg::~PmIpkg()
