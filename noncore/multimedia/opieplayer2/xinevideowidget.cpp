@@ -36,6 +36,7 @@
 #include <qpainter.h>
 #include <qgfx_qws.h>
 #include <qdirectpainter_qws.h>
+#include <qgfx_qws.h>
 #include <qsize.h>
 
 #include <qpe/resource.h>
@@ -55,10 +56,6 @@ static inline void memcpy_step ( void *dst, void *src, size_t len, size_t step )
 {
 	len >>= 1;
 	while ( len-- ) {
-//		*((char *) dst ) = *((char *) src + 1);
-//		*((char *) dst + 1) = *((char *) src );
-//		((char *) dst ) += 2;
-
 		*((short int *) dst )++ = *((short int *) src );
 		((char *) src ) += step;
 	}
@@ -73,10 +70,6 @@ static inline void memcpy_step_rev ( void *dst, void *src, size_t len, size_t st
 	while ( len-- ) {
 		((char *) src ) -= step;
 		*((short int *) dst )++ = *((short int *) src );
-
-//		*((char *) dst ) = *((char *) src + 1);
-//		*((char *) dst + 1) = *((char *) src );
-//		((char *) dst ) += 2;
 	}
 }
 
@@ -109,12 +102,12 @@ void XineVideoWidget::clear ( )
 
 void XineVideoWidget::paintEvent ( QPaintEvent * )
 {
-	qWarning( "painting <<<" );
+	//qWarning( "painting <<<" );
 	if ( m_buff == 0 ) {
 		QPainter p ( this );
 		p. fillRect ( rect ( ), black );
 		p. drawImage ( 0, 0, *m_image );
-		qWarning ( "logo\n" );
+		//qWarning ( "logo\n" );
 	}
 	else {
 //		qWarning ( "paintevent\n" );
@@ -129,109 +122,79 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 			uchar *fb = dp. frameBuffer ( );
 			uchar *frame = m_buff;  // rot == 0 ? m_buff : m_buff + ( m_thisframe. height ( ) - 1 ) * m_bytes_per_line_frame;
 			
-			QRect framerect = QRect ( mapToGlobal ( m_thisframe. topLeft ( )), m_thisframe. size ( ));
-
+			QRect framerect = qt_screen-> mapToDevice ( QRect ( mapToGlobal ( m_thisframe. topLeft ( )), m_thisframe. size ( )), QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
+			
 			qt_bug_workaround_clip_rects. resize ( dp. numRects ( ));
 
 			for ( int i = dp. numRects ( ) - 1; i >= 0; i-- ) {
 				const QRect &clip = dp. rect ( i );
 								
-				qt_bug_workaround_clip_rects [i] = clip;
+				qt_bug_workaround_clip_rects [i] = qt_screen-> mapFromDevice ( clip, QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
 				
-				if ( rot == 0 || rot == 180 ) {			
-					uchar *dst = fb + ( clip. x ( ) * m_bytes_per_pixel ) + ( clip. y ( ) * m_bytes_per_line_fb ); 
-					uchar *src = frame + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame );
+				uchar *dst = fb + ( clip. x ( ) * m_bytes_per_pixel ) + ( clip. y ( ) * m_bytes_per_line_fb ); 
+				uchar *src = frame;
+				
+				switch ( rot ) {
+					case 0: src += ( (( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame ) ); break;
+					case 1: src += ( (( clip. y ( ) - framerect. y ( )) * m_bytes_per_pixel ) + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_line_frame ) + (( framerect. height ( ) - 1 ) * m_bytes_per_pixel ) ); break;
+					case 2: src += ( (( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame ) + (( framerect. height ( ) - 1 ) * m_bytes_per_line_frame ) ); break;
+					case 3: src += ( (( clip. y ( ) - framerect. y ( )) * m_bytes_per_pixel ) + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_line_frame ) ); break;
+				}
+
+				uint leftfill = 0;
+				uint framefill = 0;
+				uint rightfill = 0;
+				uint clipwidth = clip. width ( ) * m_bytes_per_pixel;
+				
+				if ( clip. left ( ) < framerect. left ( ))
+					leftfill = (( framerect. left ( ) - clip. left ( )) * m_bytes_per_pixel ) <? clipwidth;
+				if ( clip. right ( ) > framerect. right ( ))
+					rightfill = (( clip. right ( ) - framerect. right ( )) * m_bytes_per_pixel ) <? clipwidth;
+				
+				framefill = clipwidth - ( leftfill + rightfill );
+
+				for ( int y = clip. top ( ); y <= clip. bottom ( ); y++ ) {
+					if (( y < framerect. top ( )) || ( y > framerect. bottom ( ))) {
+						memset ( dst, 0, clipwidth );
+					}
+					else {
+						if ( leftfill )
+							memset ( dst, 0, leftfill );
+							
+						if ( framefill ) {
+							switch ( rot ) {
+								case 0: memcpy ( dst + leftfill, src, framefill );                                  break;
+								case 1: memcpy_step ( dst + leftfill, src, framefill, m_bytes_per_line_frame );     break;
+								case 2: memcpy_rev ( dst + leftfill, src, framefill );                              break;
+								case 3: memcpy_step_rev ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
+							}
+						}	
+						if ( rightfill )
+							memset ( dst + leftfill + framefill, 0, rightfill );
+					}
 					
-					if ( rot == 180 )
-						src += (( framerect. height ( ) - 1 ) * m_bytes_per_line_frame );
-										
-					uint leftfill = 0;
-					uint framefill = 0;
-					uint rightfill = 0;
-					uint clipwidth = clip. width ( ) * m_bytes_per_pixel;
+					dst += m_bytes_per_line_fb;
 					
-					if ( clip. left ( ) < framerect. left ( ))
-						leftfill = (( framerect. left ( ) - clip. left ( )) * m_bytes_per_pixel ) <? clipwidth;
-					if ( clip. right ( ) > framerect. right ( ))
-						rightfill = (( clip. right ( ) - framerect. right ( )) * m_bytes_per_pixel ) <? clipwidth;
-					
-					framefill = clipwidth - ( leftfill + rightfill );
-					
-					for ( int y = clip. top ( ); y <= clip. bottom ( ); y++ ) {
-						if (( y < framerect. top ( )) || ( y > framerect. bottom ( ))) {
-							memset ( dst, 0, clipwidth );
-						}
-						else {
-							if ( leftfill )
-								memset ( dst, 0, leftfill );
-								
-							if ( framefill ) {
-								if ( rot == 0 )
-									memcpy ( dst + leftfill, src, framefill ); 	
-								else
-									memcpy_rev ( dst + leftfill, src, framefill );
-							}	
-							if ( rightfill )
-								memset ( dst + leftfill + framefill, 0, rightfill );
-						}
-						
-						dst += m_bytes_per_line_fb;
-						src += ( rot == 0 ? m_bytes_per_line_frame : -m_bytes_per_line_frame );
+					switch ( rot ) {
+						case 0: src += m_bytes_per_line_frame; break;
+						case 1: src -= m_bytes_per_pixel;      break;
+						case 2: src -= m_bytes_per_line_frame; break;
+						case 3: src += m_bytes_per_pixel;      break;
 					}
 				}
-				else { // rot == 90 || rot == 270
-					uchar *dst = fb + ( clip. y ( ) * m_bytes_per_pixel ) + ( clip. x ( ) * m_bytes_per_line_fb ); 
-					uchar *src = frame + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame );
-					
-					if ( rot == 270 )
-						src += (( framerect. height ( ) - 1 ) * m_bytes_per_pixel );
-										
-					uint leftfill = 0;
-					uint framefill = 0;
-					uint rightfill = 0;
-					uint clipwidth = clip. height ( ) * m_bytes_per_pixel;
-					
-					if ( clip. bottom ( ) > framerect. bottom ( ))
-						leftfill = (( clip. bottom ( ) - framerect. bottom ( )) * m_bytes_per_pixel ) <? clipwidth;
-					if ( clip. top ( ) < framerect. top ( ))
-						rightfill = (( framerect. top ( ) - framerect. top ( )) * m_bytes_per_pixel ) <? clipwidth;
-					
-					framefill = clipwidth - ( leftfill + rightfill );
-					
-					for ( int y = clip. left ( ); y <= clip. right ( ); y++ ) {
-						if (( y < framerect. left ( )) || ( y > framerect. right ( ))) {
-							memset ( dst, 0, clipwidth );
-						}
-						else {
-							if ( leftfill )
-								memset ( dst, 0, leftfill );
-								
-							if ( framefill ) {
-								if ( rot == 90 )
-									memcpy_step_rev ( dst + leftfill, src, framefill, m_bytes_per_line_frame );
-								else
-									memcpy_step ( dst + leftfill, src, framefill, m_bytes_per_line_frame );
-							}	
-							if ( rightfill )
-								memset ( dst + leftfill + framefill, 0, rightfill );
-						}
-						
-						dst += m_bytes_per_line_fb;
-						src += ( rot == 270 ? -m_bytes_per_pixel : m_bytes_per_pixel );
-					}					
-				}
 			}
-		}		
+		}
+		//qWarning ( " ||| painting |||" );		
  		{
 			// QVFB hack by MArtin Jones
 			QPainter p ( this );
-			
+
 			for ( int i = qt_bug_workaround_clip_rects. size ( ) - 1; i >= 0; i-- ) {  
 				p. fillRect ( QRect ( mapFromGlobal ( qt_bug_workaround_clip_rects [i]. topLeft ( )), qt_bug_workaround_clip_rects [i]. size ( )), QBrush ( NoBrush ) );
 			}
 		}
 	}
-	qWarning( "painting >>>" );
+	//qWarning( "painting >>>" );
 }
 
 int XineVideoWidget::height ( ) const
