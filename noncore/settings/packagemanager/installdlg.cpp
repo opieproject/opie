@@ -54,12 +54,12 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
                         OPackage::Command command1, const QStringList &packages1,
                         OPackage::Command command2, const QStringList &packages2,
                         OPackage::Command command3, const QStringList &packages3 )
-    : QWidget( 0x0 )
+    : QWidget( 0l )
     , m_packman( pm )
     , m_installFound( false )
     , m_numCommands( 0 )
     , m_currCommand( 0 )
-    , m_destItem( 0x0 )
+    , m_destItem( 0l )
 {
     // Save command/package list information
     if ( command1 != OPackage::NotDefined )
@@ -116,8 +116,8 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
     }
     else
     {
-        m_destination = 0x0;
-        m_availSpace = 0x0;
+        m_destination = 0l;
+        m_availSpace = 0l;
     }
 
     QGroupBox *groupBox = new QGroupBox( 0, Qt::Vertical, tr( "Output" ), this );
@@ -254,12 +254,9 @@ void InstallDlg::slotBtnStart()
         m_packman->executeCommand( m_command[ m_currCommand ], m_packages[ m_currCommand ], dest,
                                    this, SLOT(slotOutput(char*)), true );
                                    
-        // Link/Unlink application if the package was removed from or installed to a destination
-        // other than root
-        if ( ( m_command[ m_currCommand ] == OPackage::Install && dest != "root" ) ||
-             ( m_command[ m_currCommand ] == OPackage::Remove ) )
+        if ( m_command[ m_currCommand ] == OPackage::Remove )
         {
-            //m_packman->findPackage( m_packages[ m_currCommand ]->destination() != "root"*/ ) 
+            // Unlink application if the package was removed
             
             // Loop through all package names in the command group
             for ( QStringList::Iterator it = m_packages[ m_currCommand ].begin();
@@ -274,12 +271,8 @@ void InstallDlg::slotBtnStart()
                     continue;
                     
                 // Display feedback to user
-                if ( m_command[ m_currCommand ] == OPackage::Install )
-                    m_output->append( tr( QString( "Running ipkg-link to link package '%1'." )
-                                            .arg( currPackage->name() ) ) );
-                else
-                    m_output->append( tr( QString( "Running ipkg-link to remove links for package '%1'." )
-                                            .arg( currPackage->name() ) ) );
+                m_output->append( tr( QString( "Running ipkg-link to remove links for package '%1'." )
+                                        .arg( currPackage->name() ) ) );
                 m_output->setCursorPosition( m_output->numLines(), 0 );
                 
                 // Execute ipkg-link
@@ -290,17 +283,40 @@ void InstallDlg::slotBtnStart()
                 if ( !process.start( Opie::Core::OProcess::Block,
                                     Opie::Core::OProcess::NoCommunication ) )
                 {
-                    slotProcessDone( 0x0 );
+                    slotProcessDone( 0l );
                     m_output->append( tr( "Unable to run ipkg-link." ) );
                     m_output->setCursorPosition( m_output->numLines(), 0 );
                     return;
                 }
             }
-                           
+        }
+        else if ( m_command[ m_currCommand ] == OPackage::Install && dest != "root" )
+        {
+            // Link applications in the destination directory
+            
+            m_output->append( tr( "Running ipkg-link to link packages in '%1'." ).arg( dest ) );
+            m_output->setCursorPosition( m_output->numLines(), 0 );
+
+            QString destPath;
+            OConfItem *destItem = m_packman->findConfItem( OConfItem::Destination, dest );
+
+            // Execute ipkg-link
+            process.clearArguments();
+            process << "ipkg-link"
+                    << "mount"
+                    << destItem->value();
+            if ( !process.start( Opie::Core::OProcess::Block,
+                                 Opie::Core::OProcess::NoCommunication ) )
+            {
+                slotProcessDone( 0l );
+                m_output->append( tr( "Unable to run ipkg-link." ) );
+                m_output->setCursorPosition( m_output->numLines(), 0 );
+                return;
+            }
         }
     }
     
-    slotProcessDone( 0x0 );
+    slotProcessDone( 0l );
 }
 
 void InstallDlg::slotProcessDone( Opie::Core::OProcess *proc )

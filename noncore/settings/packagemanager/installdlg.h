@@ -55,7 +55,7 @@ class InstallDlg : public QWidget
     Q_OBJECT
 
 public:
-    InstallDlg( QWidget *parent = 0x0, OPackageManager *pm = 0x0,
+    InstallDlg( QWidget *parent = 0l, OPackageManager *pm = 0l,
                 const QString &caption = QString::null,
                 OPackage::Command command1 = OPackage::NotDefined,
                 const QStringList &packages1 = QStringList(),
