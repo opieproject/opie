@@ -35,19 +35,19 @@ void Manager::setDevice( const QString& dev ){
 void Manager::setDevice( Device* dev ){
 
 }
-void Manager::isConnected( const QString& device ){
+void Manager::isAvailable( const QString& device ){
     OProcess* l2ping = new OProcess();
     l2ping->setName( device.latin1() );
     *l2ping << "l2ping" << "-c1" << device;
     connect(l2ping, SIGNAL(processExited(OProcess* ) ),
             this, SLOT(slotProcessExited(OProcess*) ) );
     if (!l2ping->start() ) {
-        emit connected( device,  false );
+        emit available( device,  false );
         delete l2ping;
     }
 
 }
-void Manager::isConnected( Device* dev ){
+void Manager::isAvailable( Device* dev ){
 
 
 }
@@ -127,7 +127,7 @@ void Manager::slotProcessExited(OProcess* proc ) {
         conn = true;
 
     QString name = QString::fromLatin1(proc->name() );
-    emit connected( name, conn );
+    emit available( name, conn );
     delete proc;
 }
 void Manager::slotSDPOut(OProcess* proc, char* ch, int len)

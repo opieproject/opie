@@ -53,11 +53,11 @@ Q_OBJECT
      * for Remote devices it will ping and see.
      * @param either mac or hciX
      */
-    void isConnected(const QString& device= QString::null );
+    void isAvailable(const QString& device= QString::null );
     /**
      * same as above
      */
-    void isConnected(Device *dev );
+    void isAvailable(Device *dev );
 
     /** this searchs for devices reachable from the
      *  currently managed device
@@ -105,7 +105,7 @@ Q_OBJECT
   signals:
     // device either mac or dev name
     // the first device is the device which you access
-    void connected( const QString& device, bool connected );
+    void available( const QString& device, bool connected );
     void addedService(  const QString& service, bool added );
     void removedService( const QString& service, bool removed );
     void foundServices( const QString& device, Services::ValueList );
