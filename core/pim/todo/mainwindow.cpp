@@ -799,6 +799,7 @@ int MainWindow::create() {
 			     QWidget::tr("Can not edit data, currently syncing"));
 	return uid;
     }
+    m_todoMgr.load();
 
 
     OTodo todo = currentEditor()->newTodo( currentCatId(),
@@ -833,6 +834,8 @@ bool MainWindow::remove( int uid ) {
 void MainWindow::beam( int uid) {
     if( uid == 0 ) return;
     ::unlink( beamfile );
+    m_todoMgr.load();
+
     OTodo todo = event( uid );
     OTodoAccessVCal* cal = new OTodoAccessVCal(QString::fromLatin1(beamfile) );
     OTodoAccess acc( cal );
@@ -845,13 +848,17 @@ void MainWindow::beam( int uid) {
     ir->send(beamfile, todo.summary(), "text/x-vCalendar" );
 }
 void MainWindow::show( int uid ) {
+    m_todoMgr.load(); // might not be loaded yet
     slotShow( uid );
+    QPEApplication::setKeepRunning();
 }
 void MainWindow::edit( int uid ) {
+    m_todoMgr.load();
     slotEdit( uid );
 }
 void MainWindow::add( const OPimRecord& rec) {
     if ( rec.rtti() != OTodo::rtti() ) return;
+    m_todoMgr.load(); // might not be loaded
 
     const OTodo& todo = static_cast<const OTodo&>(rec);
 
