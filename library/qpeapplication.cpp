@@ -1314,7 +1314,7 @@ void QPEApplication::reset() {
     applyStyle();
 }
 
-#if (QT_VERSION < 238) & Q_OS_MACX
+#if (QT_VERSION < 238) && Q_OS_MACX
 bool qt_left_hand_scrollbars = false;
 #else
 #ifdef Q_OS_MACX
