@@ -30,8 +30,6 @@ Bugs but not in addressbook:
 
 Urgent:
 --------
-- Implement Button Pics
-
 ContactEditor:
 - Contact-Editor is temporarely reenabled. Wait for replacement.
 - Redesign of Contacteditor
@@ -46,7 +44,6 @@ Important:
 - Implement a picker/combo for the default email.
 - After search (Started with Return): KeyFocus should be on Tabelle
 
-- Add a dialog to accept and optionally edit  received contacts by IRDA. 
 - "What's this" should be added (Deleyed after Feature Freeze)
 
 Less important:
@@ -108,3 +105,5 @@ Fixed:
 - OK-Key does not switch from Detailview (ablable) to Listview
 - Receiving of beams should open a dialog
 - Fix start of opie-mail
+- Implement Button Pics
+- Add a dialog to accept and optionally edit  received contacts by IRDA. 

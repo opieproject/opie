@@ -1,4 +1,4 @@
-Files: bin/addressbook apps/1Pim/addressbook.desktop
+Files: bin/addressbook apps/1Pim/addressbook.desktop pics/addressbook/*.png
 Priority: optional
 Section: opie/applications
 Conflicts: qpe-tkcaddressbook

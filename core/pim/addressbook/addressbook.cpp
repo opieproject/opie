@@ -104,7 +104,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	
 	
 	// View Icons
-	m_tableViewButton  = new QAction( tr( "List" ), Resource::loadPixmap( "datebook/weeklst" ),  
+	m_tableViewButton  = new QAction( tr( "List" ), Resource::loadPixmap( "addressbook/weeklst" ),  
 					  QString::null, 0, this, 0 );
 	connect( m_tableViewButton, SIGNAL( activated() ), this, SLOT( slotListView() ) );
 	m_tableViewButton->setToggleAction( true );
@@ -175,7 +175,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	connect( a, SIGNAL( activated() ), this, SLOT( slotFindClose() ) );
 	a->addTo( searchBar );
 
-	a = new QAction( tr( "Write Mail To" ), Resource::loadPixmap( "mail/sendmail" ),
+	a = new QAction( tr( "Write Mail To" ), Resource::loadPixmap( "addressbook/sendmail" ),
 			 QString::null, 0, this, 0 );
 	//a->setEnabled( FALSE ); we got support for it now :) zecke
 	actionMail = a;
