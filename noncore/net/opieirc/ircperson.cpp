@@ -12,12 +12,12 @@ IRCPerson::IRCPerson(const IRCPerson &person) {
     m_host = person.m_host;
 }
 
-IRCPerson::IRCPerson(QString mask) {
+IRCPerson::IRCPerson(const QString &mask) {
     IRCPerson();
     fromMask(mask);
 }
 
-void IRCPerson::fromMask(QString mask) {
+void IRCPerson::fromMask(const QString &mask) {
     int sep1 = mask.find("!");
     int sep2 = mask.find("@");
     
@@ -30,15 +30,15 @@ QString IRCPerson::toMask() {
     return m_nick + "!" + m_user + "@" + m_host; 
 }
 
-void IRCPerson::setNick(QString nick) {
+void IRCPerson::setNick(const QString &nick) {
     m_nick = nick;
 }
 
-void IRCPerson::setUser(QString user) {
+void IRCPerson::setUser(const QString &user) {
     m_user = user;
 }
 
-void IRCPerson::setHost(QString host) {
+void IRCPerson::setHost(const QString &host) {
     m_host = host;
 }
  // -- GETTER FUNCS --

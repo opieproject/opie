@@ -32,14 +32,14 @@ class IRCPerson {
 public:
     IRCPerson();
     /* Create an IRCPerson from an IRC style description (nick!user@host) */
-    IRCPerson(QString mask);
+    IRCPerson(const QString &mask);
     /* Copy constructor */
     IRCPerson(const IRCPerson &person);
 
-    void fromMask(QString mask);
-    void setNick(QString name);
-    void setUser(QString user);
-    void setHost(QString host);
+    void fromMask(const QString &mask);
+    void setNick(const QString &name);
+    void setUser(const QString &user);
+    void setHost(const QString &host);
     QString toMask();
     QString nick();
     QString user();
