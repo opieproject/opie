@@ -49,7 +49,7 @@ SSHKeysApp::SSHKeysApp( QWidget* parent,  const char* name, WFlags fl )
 	connect(&addprocess, SIGNAL(receivedStdout(OProcess*,char*,int)),
 		this, SLOT(log_sshadd_output(OProcess*,char*,int)));
 	connect(&addprocess, SIGNAL(receivedStderr(OProcess*,char*,int)),
-		this, SLOT(log_sshadd_output(OProcess*,char*,int)));
+		this, SLOT(log_sshadd_stderr(OProcess*,char*,int)));
 	connect(&addprocess, SIGNAL(processExited(OProcess*)),
 		this, SLOT(ssh_add_exited(OProcess*)));
 
@@ -90,7 +90,7 @@ void SSHKeysApp::doRefreshListButton()
 	connect(&sshadd_process, SIGNAL(receivedStdout(OProcess*,char*,int)),
 		this, SLOT(get_list_keys_output(OProcess*,char*,int)));
 	connect(&sshadd_process, SIGNAL(receivedStderr(OProcess*,char*,int)),
-		this, SLOT(log_sshadd_output(OProcess*,char*,int)));
+		this, SLOT(log_sshadd_stderr(OProcess*,char*,int)));
 
 	keystate = KeySize;
 	incoming_keyname="";
@@ -104,6 +104,7 @@ void SSHKeysApp::doRefreshListButton()
 		log_text(tr("Error running ssh-add"));
 		return;
 	}
+	flush_sshadd_output();
 	if (sshadd_process.exitStatus() == 2) {
 		setEnabled(FALSE);
 	}
@@ -177,12 +178,49 @@ void SSHKeysApp::get_list_keys_output(OProcess *proc, char *buffer, int buflen)
 	}
 }
 
+void SSHKeysApp::flush_sshadd_output(void)
+{
+	if (pending_stdout.length()) {
+		log_text(pending_stdout.ascii());
+	}
+	pending_stdout = "";
+
+	if (pending_stderr.length()) {
+		log_text(pending_stderr.ascii());
+	}
+	pending_stderr = "";
+}
+
 void SSHKeysApp::log_sshadd_output(OProcess *proc, char *buffer, int buflen)
 {
-	(void)proc;
-	(void)buflen;
+	(void) proc;
 
-	log_text(buffer);
+	while (buflen) {
+		if (*buffer == '\n') {
+			log_text(pending_stdout);
+			pending_stdout = "";
+		} else {
+			pending_stdout += *buffer;
+		}
+		buffer++;
+		buflen--;
+	}
+}
+
+void SSHKeysApp::log_sshadd_stderr(OProcess *proc, char *buffer, int buflen)
+{
+	(void) proc;
+
+	while (buflen) {
+		if (*buffer == '\n') {
+			log_text(pending_stderr);
+			pending_stderr = "";
+		} else {
+			pending_stderr += *buffer;
+		}
+		buffer++;
+		buflen--;
+	}
 }
 
 void SSHKeysApp::ssh_add_exited(OProcess *proc)
@@ -216,10 +254,10 @@ void SSHKeysApp::doAddButton()
 
 	if (KeyFileName->currentText().length()) {
 		addprocess << "ssh-add" << "--" << KeyFileName->currentText();
-		log_text(QString(tr("Running ssh-add -- ")) + KeyFileName->currentText());
+//		log_text(QString(tr("Running ssh-add -- ")) + KeyFileName->currentText());
 	} else {
 		addprocess << "ssh-add";
-		log_text(tr("Running ssh-add"));
+//		log_text(tr("Running ssh-add"));
 	}
 	bool ret = addprocess.start(OProcess::NotifyOnExit, OProcess::AllOutput);
 	if (!ret) {
@@ -227,6 +265,7 @@ void SSHKeysApp::doAddButton()
 		doRefreshListButton();
 		setEnabled(TRUE);
 	}
+	flush_sshadd_output();
 }
 
 void SSHKeysApp::log_text(const char *text)
@@ -242,13 +281,14 @@ void SSHKeysApp::doRemoveAllButton()
 	connect(&sshadd_process, SIGNAL(receivedStdout(OProcess*,char*,int)),
 		this, SLOT(log_sshadd_output(OProcess*,char*,int)));
 	connect(&sshadd_process, SIGNAL(receivedStderr(OProcess*,char*,int)),
-		this, SLOT(log_sshadd_output(OProcess*,char*,int)));
+		this, SLOT(log_sshadd_stderr(OProcess*,char*,int)));
 
-	log_text(tr("Running ssh-add -D"));
+//	log_text(tr("Running ssh-add -D"));
 	sshadd_process << "ssh-add" << "-D";
 	bool ret = sshadd_process.start(OProcess::Block, OProcess::AllOutput);
 	if (!ret) {
 		log_text(tr("Error running ssh-add"));
 	}
+	flush_sshadd_output();
 	doRefreshListButton();
 }
