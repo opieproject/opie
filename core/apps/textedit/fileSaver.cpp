@@ -30,7 +30,7 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
-  setName( "fileSaver" );
+  setName( tr("fileSaver"));
     resize( 240, 280 );
     setCaption(tr( name ) );
     QFileInfo fi(currentFileName);
@@ -63,7 +63,7 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
     ListView->setSorting( 2, FALSE);
     ListView->addColumn( tr( "Size" ) );
     ListView->setColumnWidth(1,-1);
-    ListView->addColumn( "Date",-1);
+    ListView->addColumn( tr("Date"),-1);
 
     ListView->setColumnWidthMode(0,QListView::Manual);
     ListView->setColumnAlignment(1,QListView::AlignRight);
@@ -79,7 +79,7 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
     fileEdit->setText( tmpFileName);
 
     filePermCheck = new QCheckBox( this, "SetFilePerms" );
-    filePermCheck->setText("set file permissions");
+    filePermCheck->setText(tr("set file permissions"));
     filePermCheck->setGeometry(10, 178, 150,17);
       // signals and slots connections
     connect( ListView, SIGNAL(doubleClicked( QListViewItem*)), SLOT(listDoubleClicked(QListViewItem *)) );

@@ -35,7 +35,7 @@ FontDialog::FontDialog( QWidget * parent,  const char* name , bool modal, WFlags
         :QDialog /*QWidget*/( parent, name , modal, fl )
 {
     if ( !name )
-        setName( "FontDialog" );
+        setName( tr("FontDialog") );
     setCaption( tr( "Font Dialog" ) );
     FontTextLabel4 = new QLabel( this, "TextLabel4" );
     FontTextLabel4->setGeometry( QRect(  145, 100, 30, 19  /*192, 0, 43, 19*/ ) );

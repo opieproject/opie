@@ -35,8 +35,8 @@ filePermissions::filePermissions( QWidget* parent,  const char* name, bool modal
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
-  setName( "filePermissions" );
-    qDebug("FilePermissions "+fileName);
+  setName( tr("filePermissions") );
+//    qDebug("FilePermissions "+fileName);
     resize( 236, 210 ); 
     setMaximumSize( QSize( 236, 210 ) );
     setCaption( tr( "Set File Permissions" ) );
@@ -248,25 +248,25 @@ void filePermissions::accept() {
     pwd = getpwnam(OwnerLineEdit->text().latin1() );
     if(pwd == NULL) {
         perror("getpwnam");
-        QMessageBox::warning(this,"Warning","Error- no user");
+        QMessageBox::warning(this,tr("Warning"),tr("Error- no user"));
         return;
     } else {
         grp = getgrnam(GroupLineEdit->text().latin1());
         if(grp==NULL) {
         perror("getgrnam");
-        QMessageBox::warning(this,"Warning","Error- no  group");
+        QMessageBox::warning(this,tr("Warning"),tr("Error- no  group"));
         return;
         }
         if( chown( file.latin1(),  pwd->pw_uid, grp->gr_gid) <0) {
         perror("chown");
-        QMessageBox::warning(this,"Warning","Error setting ownership or group");
+        QMessageBox::warning(this,tr("Warning"),tr("Error setting ownership or group"));
         return;
         }
         bool ok;
         uint moder = modeStr.toUInt(&ok,8);
         if( chmod( file.latin1(), moder) < 0) {
             perror("chmod");
-            QMessageBox::warning(this,"Warning","Error setting mode");
+            QMessageBox::warning(this,tr("Warning"),tr("Error setting mode"));
             return;
         }
     }

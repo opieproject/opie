@@ -335,7 +335,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     wa->addTo( font );
 
     font->insertSeparator();
-    font->insertItem("Font", this, SLOT(changeFont()) );
+    font->insertItem(tr("Font"), this, SLOT(changeFont()) );
 
     font->insertSeparator();
     nStart = new QAction( tr("Start with new file"), QString::null, 0, this, 0 );
@@ -493,7 +493,7 @@ void TextEdit::fileNew()
 
 void TextEdit::fileOpen()
 {
-    browseForFiles=new fileBrowser(this,"Open File",TRUE,0, "text/*"); //
+    browseForFiles=new fileBrowser(this,tr("Open File"),TRUE,0, "text/*"); //
     browseForFiles->setFileView( viewSelection );
     browseForFiles->showMaximized();
     if( browseForFiles->exec() != -1 ) {
@@ -534,7 +534,7 @@ void TextEdit::doSearchBar()
 #if 0
 void TextEdit::slotFind()
 {
-    FindDialog frmFind( "Text Editor", this );
+    FindDialog frmFind( tr("Text Editor"), this );
     connect( &frmFind, SIGNAL(signalFindClicked(const QString &, bool, bool, int)),
        editor, SLOT(slotDoFind( const QString&,bool,bool)));
 
@@ -747,7 +747,7 @@ bool TextEdit::saveAs()
     QString rt = editor->text();
     qDebug(currentFileName);
     
-    if( currentFileName.isEmpty() || currentFileName == "Unnamed") {
+    if( currentFileName.isEmpty() || currentFileName == tr("Unnamed")) {
         qDebug("do silly TT filename thing");
         if ( doc->name().isEmpty() ) {
             QString pt = rt.simplifyWhiteSpace();
@@ -763,14 +763,14 @@ bool TextEdit::saveAs()
             if ( docname.length() > 40 )
                 docname = docname.left(40);
             if ( docname.isEmpty() )
-                docname = "Unnamed";
+                docname = tr("Unnamed");
             doc->setName(docname);
             currentFileName=docname;
         }
     }
 
     
-    fileSaveDlg=new fileSaver(this,"Save File As?",TRUE, 0, currentFileName);
+    fileSaveDlg=new fileSaver(this,tr("Save File As?"),TRUE, 0, currentFileName);
     qDebug("wanna save filename "+currentFileName);
     fileSaveDlg->exec();
     if( fileSaveDlg->result() == 1 ) {
@@ -797,7 +797,7 @@ bool TextEdit::saveAs()
             }
             if( fileSaveDlg->filePermCheck->isChecked() ) {
                 filePermissions *filePerm;
-                filePerm = new filePermissions(this, "Permissions",true,0,(const QString &)fileNm);
+                filePerm = new filePermissions(this, tr("Permissions"),true,0,(const QString &)fileNm);
                 filePerm->exec();
 
                 if( filePerm)
@@ -888,7 +888,7 @@ void TextEdit::changeFont() {
     defaultFont = fdb.font(family,style,i_size,charSet);
 
     FontDialog *fontDlg;
-    fontDlg=new FontDialog(this,"FontDialog",TRUE);
+    fontDlg=new FontDialog(this,tr("FontDialog"),TRUE);
 
     fontDlg->exec();
 
@@ -900,7 +900,7 @@ void TextEdit::changeFont() {
 
 void TextEdit::editDelete()
 {
-    switch ( QMessageBox::warning(this,"Text Editor","Do you really want\nto delete the current file\nfrom the disk?\nThis is irreversable!!","Yes","No",0,0,1) ) {
+    switch ( QMessageBox::warning(this,tr("Text Editor"),tr("Do you really want\nto delete the current file\nfrom the disk?\nThis is irreversable!!"),tr("Yes"),tr("No"),0,0,1) ) {
       case 0:
           if(doc) {
               doc->removeFiles();
