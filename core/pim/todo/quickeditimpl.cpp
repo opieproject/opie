@@ -1,4 +1,7 @@
+#include <qaction.h>
 #include <qlineedit.h>
+
+#include <qpe/resource.h>
 
 #include <opie/oclickablelabel.h>
 
@@ -6,32 +9,38 @@
 #include "quickeditimpl.h"
 
 
-QuickEditImpl::QuickEditImpl( Todo::MainWindow* win, QWidget* arent )
-    : QHBox(arent), Todo::QuickEdit(win) {
-    m_lbl = new OClickableLabel(this );
-    m_lbl->setMinimumWidth(12);
+QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
+    : QPEToolBar( (QMainWindow *)parent ), Todo::QuickEdit( (Todo::MainWindow *)parent ) {
+    setHorizontalStretchable( TRUE );
+
+	// TODO - come up with icons and replace text priority values
+    m_lbl = new OClickableLabel( this );
+    m_lbl->setMinimumWidth(15);
     m_lbl->setText("3");
+    connect(m_lbl, SIGNAL(clicked() ), this, SLOT(slotPrio()) );
 
-    m_edit = new QLineEdit(this );
+    m_edit = new QLineEdit( this );
+    setStretchableWidget( m_edit );
 
-    m_enter = new OClickableLabel(this);
-    m_enter->setText("Enter");
+    QAction *a = new QAction( tr( "More" ), Resource::loadPixmap( "todo/more" ), QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( slotMore() ) );
+    a->addTo( this );
 
-    m_more  = new OClickableLabel(this);
-    m_more->setText("More");
+    a = new QAction( tr( "Enter" ), Resource::loadPixmap( "enter" ), QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( slotEnter() ) );
+    a->addTo( this );
 
+    a = new QAction( tr( "Cancel" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( slotCancel() ) );
+    a->addTo( this );
 
-    // connect
-    connect(m_lbl, SIGNAL(clicked() ),
-            this, SLOT(slotPrio()) );
-    connect(m_enter, SIGNAL(clicked() ),
-            this, SLOT(slotEnter() ) );
-    connect(m_more, SIGNAL(clicked() ),
-            this, SLOT(slotMore() ) );
-
+    m_visible = visible;
+    if ( !m_visible ) {
+        hide();
+    }
+    
     m_menu = 0l;
     reinit();
-    setMaximumHeight( m_edit->sizeHint().height() );
 }
 QuickEditImpl::~QuickEditImpl() {
 
@@ -42,9 +51,6 @@ OTodo QuickEditImpl::todo()const {
 QWidget* QuickEditImpl::widget() {
     return this;
 }
-QSize QuickEditImpl::sizeHint()const{
-    return m_edit->sizeHint();
-}
 void QuickEditImpl::slotEnter() {
     OTodo todo;
 
@@ -53,8 +59,8 @@ void QuickEditImpl::slotEnter() {
         todo.setUid(1 ); // new uid
         todo.setPriority( m_lbl->text().toInt() );
         todo.setSummary( m_edit->text() );
-        if ( mainWindow()->currentCatId() != 0 )
-            todo.setCategories( mainWindow()->currentCatId() );
+        if ( ((Todo::MainWindow *)parent())->currentCatId() != 0 )
+            todo.setCategories( ((Todo::MainWindow *)parent())->currentCatId() );
 
         m_todo = todo;
        commit();
@@ -81,6 +87,10 @@ void QuickEditImpl::slotPrio() {
     }
 }
 void QuickEditImpl::slotMore() {
+    // TODO - implement
+}
+void QuickEditImpl::slotCancel() {
+    reinit();
 }
 void QuickEditImpl::reinit() {
     m_state = 1;

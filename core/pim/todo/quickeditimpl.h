@@ -1,25 +1,25 @@
 #ifndef OPIE_QUICK_EDIT_IMPL_H
 #define OPIE_QUICK_EDIT_IMPL_H
 
-#include <qhbox.h>
+#include <qpe/qpetoolbar.h>
 
 #include "quickedit.h"
 
 class QLineEdit;
 class QLabel;
 
-class QuickEditImpl : public QHBox, public Todo::QuickEdit {
+class QuickEditImpl : public QPEToolBar, public Todo::QuickEdit {
     Q_OBJECT
 public:
-    QuickEditImpl( Todo::MainWindow* win ,  QWidget* parent);
+    QuickEditImpl( QWidget* parent,  bool visible);
     ~QuickEditImpl();
     OTodo todo()const;
     QWidget* widget();
-    QSize sizeHint()const;
 private slots:
     void slotEnter();
     void slotPrio();
     void slotMore();
+    void slotCancel();
 private:
     void reinit();
     int m_state;
@@ -29,6 +29,7 @@ private:
     QLabel* m_more;
     QPopupMenu* m_menu;
     OTodo m_todo;
+    bool m_visible;
 };
 
 #endif

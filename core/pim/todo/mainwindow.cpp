@@ -27,6 +27,7 @@
 */
 
 #include <unistd.h>
+#include <stdio.h>
 
 #include <qmenubar.h>
 #include <qmessagebox.h>
@@ -43,6 +44,7 @@
 #include <qpe/ir.h>
 #include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
+#include <qpe/qpetoolbar.h>
 
 #include <opie/orecur.h>
 #include <opie/otodoaccessvcal.h>
@@ -85,6 +87,11 @@ void MainWindow::initTemplate() {
     m_curTempEd = new TemplateEditor( this, templateManager() );
 }
 void MainWindow::initActions() {
+    
+    // Data menu
+    m_edit->insertItem(tr("New from template"), m_template,
+                       -1, 0 );
+    
     QAction* a = new QAction( tr("New Task" ), Resource::loadPixmap( "new" ),
                               QString::null, 0, this, 0 );
     connect(a, SIGNAL( activated() ),
@@ -148,28 +155,38 @@ void MainWindow::initActions() {
 	a->addTo( m_tool );
     }
 
+    // Options menu
     a = new QAction( tr("Find"), Resource::loadIconSet( "mag" ),
                      QString::null, 0, this, 0 );
-    connect(a, SIGNAL( activated() ),
-            this, SLOT( slotFind() ) );
+    connect(a, SIGNAL( activated() ), this, SLOT( slotFind() ) );
     a->addTo( m_options );
     m_findAction = a;
 
     m_options->insertSeparator();
 
-    m_completedAction = new QAction( QString::null, tr("Completed tasks"),
+    m_completedAction = new QAction( QString::null, tr("Show completed tasks"),
                                      0, this, 0, TRUE );
     m_completedAction->addTo( m_options );
     m_completedAction->setOn( showCompleted() );
-    connect(m_completedAction, SIGNAL( toggled(bool) ),
-            this, SLOT(slotShowCompleted(bool) ) );
+    connect(m_completedAction, SIGNAL( toggled(bool) ), this, SLOT(slotShowCompleted(bool) ) );
 
-    m_showDeadLineAction = new QAction( QString::null, tr("Show Deadline"),
+    a = new QAction( QString::null, tr("Show only over-due tasks"),
+                     0, this, 0, TRUE );
+    a->addTo( m_options );
+    a->setOn( showOverDue() );
+    connect(a, SIGNAL(toggled(bool)), this, SLOT(slotShowDue(bool) ) );
+
+    m_showDeadLineAction = new QAction( QString::null, tr("Show task deadlines"),
                                         0, this, 0, TRUE );
     m_showDeadLineAction->addTo( m_options );
     m_showDeadLineAction->setOn( showDeadline() );
-    connect(m_showDeadLineAction, SIGNAL(toggled(bool) ),
-            this, SLOT( slotShowDeadLine( bool ) ) );
+    connect(m_showDeadLineAction, SIGNAL(toggled(bool) ), this, SLOT( slotShowDeadLine( bool ) ) );
+
+    m_showQuickTaskAction = new QAction( QString::null, tr("Show quick task bar"),
+                                     0, this, 0, TRUE );
+    m_showQuickTaskAction->addTo( m_options );
+    m_showQuickTaskAction->setOn( showQuickTask() );
+    connect(m_showQuickTaskAction, SIGNAL( toggled(bool) ), this, SLOT(slotShowQuickTask(bool) ) );
 
     m_options->insertSeparator();
 
@@ -177,17 +194,9 @@ void MainWindow::initActions() {
     m_bar->insertItem( tr("Category"),  m_catMenu );
     m_bar->insertItem( tr("Options"), m_options );
 
-    /* initialize the view menu */
-    a = new QAction( QString::null, tr("Show only over due"),
-                     0, this, 0, TRUE );
-    a->addTo( m_options );
-    a->setOn( showOverDue() );
-    connect(a, SIGNAL(toggled(bool)),
-            this, SLOT(slotShowDue(bool) ) );
-
-    /* templates */
-    m_edit->insertItem(tr("New from template"), m_template,
-                       -1, 0 );
+    m_curQuick = new QuickEditImpl( this, m_quicktask );
+    addToolBar( (QPEToolBar *)m_curQuick->widget(), tr( "QuickEdit" ), QMainWindow::Top, TRUE );
+    m_curQuick->signal()->connect( this, SLOT(slotQuickEntered() ) );
 
 }
 /* m_curCat from Config */
@@ -197,22 +206,18 @@ void MainWindow::initConfig() {
     m_completed =  config.readBoolEntry( "ShowComplete", TRUE );
     m_curCat = config.readEntry( "Category",    QString::null );
     m_deadline =  config.readBoolEntry( "ShowDeadLine", TRUE);
-    m_overdue = config.readBoolEntry("ShowOverDue", TRUE );
+    m_overdue = config.readBoolEntry("ShowOverDue", FALSE );
+    m_quicktask = config.readBoolEntry("ShowQuickTask", TRUE);
 }
 void MainWindow::initUI() {
     m_mainBox = new QVBox(this, "main box ");
-    m_curQuick = new QuickEditImpl(this, m_mainBox );
-    m_curQuick->signal()->connect( this, SLOT(slotQuickEntered() ) );
-    m_quickEdit.append( m_curQuick );
-
-
 
     m_stack = new QWidgetStack(m_mainBox,  "main stack");
     setCentralWidget( m_mainBox );
 
     setToolBarsMovable( FALSE );
 
-    m_tool = new QToolBar( this );
+    m_tool = new QPEToolBar( this );
     m_tool->setHorizontalStretchable( TRUE );
 
     m_bar = new QMenuBar( m_tool );
@@ -371,7 +376,8 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
         config.writeEntry( "Category", currentCategory() );
         config.writeEntry( "ShowDeadLine", showDeadline());
         config.writeEntry( "ShowOverDue", showOverDue() );
-        /* svae templates */
+        config.writeEntry( "ShowQuickTask", showQuickTask() );
+        /* save templates */
         templateManager()->save();
         e->accept();
     }
@@ -515,6 +521,13 @@ void MainWindow::slotShowCompleted( bool show) {
     m_completed = show;
     currentView()->setShowCompleted( m_completed );
 }
+void MainWindow::slotShowQuickTask( bool show ) {
+    m_quicktask = show;
+    if ( m_quicktask )
+        m_curQuick->widget()->show();
+    else
+        m_curQuick->widget()->hide();
+}
 bool MainWindow::showOverDue()const {
     return m_overdue;
 }
@@ -590,6 +603,9 @@ bool MainWindow::showCompleted()const {
 }
 bool MainWindow::showDeadline()const {
     return m_deadline;
+}
+bool MainWindow::showQuickTask()const {
+    return m_quicktask;
 }
 QString MainWindow::currentCategory()const {
     return m_curCat;

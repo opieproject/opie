@@ -47,6 +47,7 @@ class QAction;
 class QWidgetStack;
 class Ir;
 class QVBox;
+class QLineEdit;
 
 namespace Todo {
     typedef TodoView View;
@@ -82,6 +83,7 @@ namespace Todo {
         bool showCompleted()const;
         bool showDeadline()const;
         bool showOverDue()const;
+        bool showQuickTask()const;
         QString currentCategory()const;
         int currentCatId();
         TemplateManager* templateManager();
@@ -131,6 +133,7 @@ private slots:
             *m_deleteCompleteAction,
             *m_duplicateAction,
             *m_showOverDueAction,
+            *m_showQuickTaskAction,
             *m_effectiveAction;
         QWidgetStack *m_stack;
         QPopupMenu* m_catMenu,
@@ -149,10 +152,10 @@ private slots:
         bool m_deadline:1;
         bool m_completed:1;
         bool m_overdue:1;
+        bool m_quicktask:1;
         TodoManager m_todoMgr;
         QString m_curCat;
         QList<ViewBase> m_views;
-        QList<QuickEditBase> m_quickEdit;
         uint m_counter;
         TemplateManager* m_tempManager;
 
@@ -178,6 +181,7 @@ private slots:
 
         void slotShowDeadLine( bool );
         void slotShowCompleted( bool );
+        void slotShowQuickTask( bool );
 
         void setDocument( const QString& );
 
