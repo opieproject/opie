@@ -19,7 +19,7 @@
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
-        <translation>Répertoire</translation>
+        <translation>Contacts</translation>
     </message>
     <message>
         <source>Contact</source>

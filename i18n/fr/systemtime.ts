@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>Continue?</source>
-        <translation>Continuer?</translation>
+        <translation>Continuer ?</translation>
     </message>
     <message>
         <source>Running:
@@ -482,7 +482,7 @@ de l&apos;heure</translation>
     </message>
     <message>
         <source>minutes between prediction updates</source>
-        <translation>minutes entre 2 mise à jour
+        <translation>minutes entre 2 mise-à-jour
 de prévision</translation>
     </message>
     <message>

@@ -557,7 +557,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation>Responsable :</translation>
+        <translation>Responsable : </translation>
     </message>
     <message>
         <source>Male</source>

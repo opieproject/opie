@@ -466,7 +466,7 @@ and </source>
     </message>
     <message>
         <source>Default Email: </source>
-        <translation>E-Mail par Défaut :</translation>
+        <translation>E-Mail par Défaut : </translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
@@ -530,7 +530,7 @@ and </source>
     </message>
     <message>
         <source>Manager: </source>
-        <translation>Responsable :</translation>
+        <translation>Responsable : </translation>
     </message>
     <message>
         <source>Male</source>
@@ -558,7 +558,7 @@ and </source>
     </message>
     <message>
         <source>Children: </source>
-        <translation>Enfant(s) :</translation>
+        <translation>Enfant(s) : </translation>
     </message>
     <message>
         <source>Nickname: </source>

@@ -230,7 +230,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
-        <translation>Dessin -Page %1/%2</translation>
+        <translation>Dessin - Page %1/%2</translation>
     </message>
 </context>
 <context>
@@ -319,7 +319,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>Général</translation>
+        <translation>Générale</translation>
     </message>
     <message>
         <source>Title:</source>
@@ -342,7 +342,7 @@ toutes les pages ?</translation>
     <name>PageInformationDialog</name>
     <message>
         <source>Page Information</source>
-        <translation>Informations sur la Page</translation>
+        <translation>Informations Page</translation>
     </message>
     <message>
         <source>General</source>

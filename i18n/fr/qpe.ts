@@ -133,7 +133,7 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
-        <translation>Un &lt;b&gt;média de stockage&lt;/b&gt; a été inséré. Doit-il être parcouri à la recherche de fichiers?</translation>
+        <translation>Un &lt;b&gt;média de stockage&lt;/b&gt; a été inséré. Doit-il être parcouru à la recherche de fichiers?</translation>
     </message>
     <message>
         <source>Which media files</source>

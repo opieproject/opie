@@ -163,7 +163,7 @@ sous ce compte, essayez plus tard.</translation>
     <name>KVNCConnDlgBase</name>
     <message>
         <source>VNC Viewer Connection</source>
-        <translation>Connexion VNC Viewer</translation>
+        <translation>Connexion VNC</translation>
     </message>
     <message>
         <source>Server</source>
