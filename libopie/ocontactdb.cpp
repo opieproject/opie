@@ -17,11 +17,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.20 2002-09-13 11:16:21 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.21 2002-09-13 11:32:59 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.20  2002-09-13 11:16:21  eilers
+ * Revision 1.1.2.21  2002-09-13 11:32:59  eilers
+ * Sorry for that..!
+ *
+ * Revision 1.1.2.20  2002/09/13 11:16:21  eilers
  * added prefix increment/decrement
  *
  * Revision 1.1.2.19  2002/09/12 17:01:52  eilers
@@ -149,9 +152,9 @@ OContactDB::Iterator& OContactDB::Iterator::operator++ ()
 	return *this;
 }
 
-Iterator OContactDB::Iterator::operator++ ( int )
+OContactDB::Iterator OContactDB::Iterator::operator++ ( int )
 {  // postfix
-	iterator temp = *this;
+	Iterator temp = *this;
 
 	++*this;
 
@@ -170,9 +173,9 @@ OContactDB::Iterator& OContactDB::Iterator::operator-- ()
 	return *this;
 }
 
-Iterator OContactDB::Iterator::operator-- ( int )
+OContactDB::Iterator OContactDB::Iterator::operator-- ( int )
 {  // postfix
-	iterator temp = *this;
+	Iterator temp = *this;
 
 	--*this;
 
