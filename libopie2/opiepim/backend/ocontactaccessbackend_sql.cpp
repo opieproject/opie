@@ -601,7 +601,7 @@ QArray<int> OPimContactAccessBackend_SQL::queryByExample ( const OPimContact &qu
 
 QArray<int> OPimContactAccessBackend_SQL::matchRegexp( const QRegExp &r ) const
 {
-#if 1
+#if 0
 	QArray<int> nix(0);
 	return nix;
 
@@ -614,7 +614,7 @@ QArray<int> OPimContactAccessBackend_SQL::matchRegexp( const QRegExp &r ) const
 	for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
 		if ( !searchlist.isEmpty() )
 			searchlist += " OR ";
-		searchlist += "\"" + *it + "\" rlike(\"" + r.pattern() + "\") ";
+		searchlist += " rlike(\""+ r.pattern() + "\",\"" + *it + "\") ";
 	}
 		
 	qu = qu + searchlist + ")";

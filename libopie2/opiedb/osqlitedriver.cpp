@@ -88,7 +88,6 @@ void OSQLiteDriver::setOptions( const QStringList& ) {
  */
 int sqliteRlikeCompare(const char *zPattern, const char *zString, sqregex *reg){
 	int res;
-
 	if (reg->regex_raw == NULL || (strcmp (zPattern, reg->regex_raw) != 0)){
 		if (reg->regex_raw != NULL) {
 		    free(reg->regex_raw);
@@ -109,13 +108,13 @@ int sqliteRlikeCompare(const char *zPattern, const char *zString, sqregex *reg){
 }
 
 void rlikeFunc(sqlite_func *context, int arg, const char **argv){
-	if( argv[0]==0 || argv[1]==0 || argv[2]==0){
+	if( argv[0]==0 || argv[1]==0 ){
 		printf("One of arguments Null!!\n");
 		return;
 	}
 		sqlite_set_result_int(context,
 		sqliteRlikeCompare((const char*)argv[0],
-	(const char*)argv[1], (sqregex*)argv[2]));
+	(const char*)argv[1], (sqregex *)sqlite_user_data(context) ));
 }
 
 /*
@@ -124,7 +123,8 @@ void rlikeFunc(sqlite_func *context, int arg, const char **argv){
  */
 bool OSQLiteDriver::open() {
     char *error;
-    qDebug("OSQLiteDriver::open: about to open");
+	
+ qDebug("OSQLiteDriver::open: about to open");
     m_sqlite = sqlite_open(m_url.local8Bit(),
                            0,
                            &error );
@@ -136,7 +136,11 @@ bool OSQLiteDriver::open() {
         free( error );
         return false;
     }
-    sqlite_create_function(m_sqlite,"rlike",3,rlikeFunc,&sqreg);
+    if (sqlite_create_function(m_sqlite,"rlike",2,rlikeFunc,&sqreg) != 0)
+	    odebug << "Unable to create user defined function!" << oendl;
+    if (sqlite_function_type(m_sqlite,"rlike",SQLITE_NUMERIC) != 0)
+	    odebug << "Unable to set rlike function result type!" << oendl;
+    sqreg.regex_raw = NULL;
     return true;
 }
 
@@ -149,7 +153,8 @@ bool OSQLiteDriver::close() {
     if (m_sqlite )
         sqlite_close( m_sqlite ), m_sqlite=0l;
 	if (sqreg.regex_raw != NULL){
-    	    free(sqreg.regex_raw);
+	    odebug << "Freeing regex on close" << oendl;
+	    free(sqreg.regex_raw);
 	    sqreg.regex_raw=NULL;
 	    regfree(&sqreg.regex_c);
 	}
@@ -169,7 +174,7 @@ OSQLResult OSQLiteDriver::query( OSQLQuery* qu) {
     char *err;
     /* SQLITE_OK 0 if return code > 0 == failure */
     if ( sqlite_exec(m_sqlite, qu->query(),&call_back, &query, &err)  > 0 ) {
-        qWarning("OSQLiteDriver::query: Error while executing");
+        qWarning("OSQLiteDriver::query: Error while executing %s",err);
         free(err );
         // FixMe Errors
     }
