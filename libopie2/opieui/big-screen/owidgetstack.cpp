@@ -309,7 +309,7 @@ void OWidgetStack::hideWidget( QWidget* wid) {
 }
 
 
-bool OWidgetStack::eventFilter( QObject* obj, QEvent* e) {
+bool OWidgetStack::eventFilter( QObject*, QEvent* e) {
     if ( e->type() == QEvent::Resize && !m_forced ) {
         QResizeEvent *res = static_cast<QResizeEvent*>( e );
         QSize size = res->size();
@@ -388,6 +388,8 @@ void OWidgetStack::switchStack() {
 
     m_mode = SmallScreen;
     m_stack = new QWidgetStack(this);
+    m_stack->setGeometry( frameRect() );
+    m_stack->show();
 
     connect(m_stack, SIGNAL(aboutToShow(QWidget*) ),
             this, SIGNAL(aboutToShow(QWidget*) ) );
@@ -401,6 +403,9 @@ void OWidgetStack::switchStack() {
     QMap<int, QWidget*>::Iterator it = m_list.begin();
     for ( ; it != m_list.end(); ++it )
         m_stack->addWidget( it.data(), it.key() );
+
+    if ( m_mWidget )
+        m_stack->raiseWidget( m_mWidget );
 
 
 }
