@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: dateentry.ui,v 1.3 2002-03-26 19:05:31 hakan Exp $
+** $Id: dateentry.ui,v 1.4 2002-03-27 10:37:17 hakan Exp $
 **
 *********************************************************************</comment>
 <widget>
@@ -39,12 +39,6 @@
     <property stdset="1">
         <name>caption</name>
         <string>New Event</string>
-    </property>
-    <property>
-        <name>layoutMargin</name>
-    </property>
-    <property>
-        <name>layoutSpacing</name>
     </property>
     <grid>
         <property stdset="1">
@@ -153,7 +147,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Description:</string>
+                <string>Description</string>
             </property>
         </widget>
         <widget row="1"  column="1"  rowspan="1"  colspan="3" >
@@ -207,7 +201,7 @@
                 <cstring>comboCategory</cstring>
             </property>
         </widget>
-        <widget row="3"  column="0" >
+        <widget row="3"  column="0" rowspan="2">
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -215,7 +209,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Start</string>
+                <string>Start - End</string>
             </property>
         </widget>
         <widget row="3"  column="1" >
@@ -228,12 +222,47 @@
                 <name>text</name>
                 <string>Jan 02 00</string>
             </property>
+            <property stdset="1">
+                <name>minimumSize</name>
+                <size>
+                    <width>70</width>
+                    <height>0</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>70</width>
+                    <height>32767</height>
+                </size>
+            </property>
         </widget>
-        <widget row="3"  column="2"  rowspan="1"  colspan="2" >
+        <widget row="4"  column="1"  rowspan="1"  colspan="1" >
             <class>QLineEdit</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>comboStart</cstring>
+            </property>
+            <property stdset="1">
+                <name>minimumSize</name>
+                <size>
+                    <width>70</width>
+                    <height>0</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>70</width>
+                    <height>32767</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>alignment</name>
+                <set>AlignHCenter</set>
+            </property>
+            <property>
+                <name>hAlign</name>
             </property>
         </widget>
 	<widget row="5"  column="1" colspan="3">
@@ -243,7 +272,7 @@
                 <cstring>timePickerStart</cstring>
             </property>
  	</widget>
-        <widget row="4"  column="1" >
+        <widget row="3"  column="2" colspan="2">
             <class>QPushButton</class>
             <property stdset="1">
                 <name>name</name>
@@ -253,15 +282,50 @@
                 <name>text</name>
                 <string>Jan 02 00</string>
             </property>
+            <property stdset="1">
+                <name>minimumSize</name>
+                <size>
+                    <width>70</width>
+                    <height>0</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>70</width>
+                    <height>32767</height>
+                </size>
+            </property>
         </widget>
-        <widget row="4"  column="2"  rowspan="1"  colspan="2" >
+        <widget row="4"  column="2" colspan="2">
             <class>QLineEdit</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>comboEnd</cstring>
             </property>
+            <property stdset="1">
+                <name>minimumSize</name>
+                <size>
+                    <width>70</width>
+                    <height>0</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>maximumSize</name>
+                <size>
+                    <width>70</width>
+                    <height>32767</height>
+                </size>
+            </property>
+            <property stdset="1">
+                <name>alignment</name>
+                <set>AlignHCenter</set>
+            </property>
+            <property>
+                <name>hAlign</name>
+            </property>
         </widget>
-        <widget row="4"  column="0" >
+        <widget row="5"  column="0" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -269,7 +333,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>End</string>
+                <string>Start time</string>
             </property>
         </widget>
         <widget row="6"  column="0" >
@@ -291,7 +355,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Time zone:</string>
+                <string>Time zone</string>
             </property>
         </widget>
         <widget row="7"  column="1"  rowspan="1"  colspan="3" >
