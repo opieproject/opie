@@ -32,7 +32,7 @@ class MainWindow : public QMainWindow
 public:
   MainWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
   ~MainWindow();
-
+  static QString appName() { return QString::fromLatin1("confedit"); }
 
 public slots:
   void setCurrent(QListViewItem*);

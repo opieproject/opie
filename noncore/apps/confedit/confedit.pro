@@ -1,10 +1,7 @@
-DESTDIR		= $(OPIEDIR)/bin
-TEMPLATE	= app
-#CONFIG		= qt warn_on release
-CONFIG		= qt warn_on debug
+CONFIG		= qt warn_on release quick-app
 HEADERS		= mainwindow.h listviewconfdir.h listviewitemconffile.h listviewitemconfigentry.h editwidget.h listviewitemconf.h
 SOURCES		= main.cpp mainwindow.cpp listviewconfdir.cpp listviewitemconffile.cpp listviewitemconfigentry.cpp editwidget.cpp listviewitemconf.cpp
-INCLUDEPATH += $(OPIEDIR)/include
+INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/ioclude
 INTERFACES	= 
 LIBS            += -lopiecore2 -lopieui2
