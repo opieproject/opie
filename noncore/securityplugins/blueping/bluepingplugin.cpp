@@ -17,15 +17,17 @@ using Opie::Security::MultiauthConfigWidget;
 
 
 /// standard c'tor
-BluepingPlugin::BluepingPlugin() : MultiauthPluginObject(), m_ping(0), m_bluepingW(0) {
-    bluetoothAlreadyRestarted = false;
+BluepingPlugin::BluepingPlugin() : MultiauthPluginObject(), m_ping(0), m_bluepingW(0), bluetoothWasOff(false) {
 }
 
-/// cleans m_ping if we need to
+/// cleans m_ping and m_bluepingW if we need to
 BluepingPlugin::~BluepingPlugin() {
-    delete m_ping;
+    odebug << "closing Blueping plugin..." << oendl;
+    if (m_ping != 0)
+        delete m_ping;
     if (m_bluepingW != 0)
         delete m_bluepingW;
+    killBluetoothIfNecessary();
 }
 
 /// Simply return its name (Blueping plugin)
@@ -39,11 +41,27 @@ MultiauthConfigWidget * BluepingPlugin::configWidget(QWidget * parent) {
         m_bluepingW = new BluepingConfigWidget(parent, "Blueping configuration widget");
     return m_bluepingW;
 }
+
 QString BluepingPlugin::pixmapNameWidget() const {
     return "security/bluepingplugin";
 }
+
 QString BluepingPlugin::pixmapNameConfig() const {
     return "security/bluepingplugin";
+}
+
+/// If Bluetooth was off before the plugin ran, we switch it off again
+void BluepingPlugin::killBluetoothIfNecessary() {
+    if (bluetoothWasOff) {
+        OProcess killB;
+        killB << "killall" << "hciattach";
+        odebug << "killing Bluetooth... (since it was up only for Blueping)" << oendl;
+        if ( !killB.start(OProcess::Block) ) {
+            oerr << "could not kill bluetooth" << oendl;
+        }
+    } else {
+        odebug << "keeping Bluetooth on" << oendl;
+    }
 }
 
 /// Emit the MultiauthPluginObject::Success emitCode
@@ -81,18 +99,18 @@ void BluepingPlugin::ping() {
 }
 
 /// Deals with m_ping result
-    void BluepingPlugin::pingFinished(OProcess * ping) {
-        if ( ping->normalExit() && (ping->exitStatus() == 0) )
-        {
-            odebug << "Successful Bluetooth ping!" << oendl;
-            success();
-        }
-        else
-        {
-            odebug << "Failed Bluetooth ping..." << oendl;
-            failure();
-        }
+void BluepingPlugin::pingFinished(OProcess * ping) {
+    if ( ping->normalExit() && (ping->exitStatus() == 0) )
+    {
+        odebug << "Successful Bluetooth ping!" << oendl;
+        success();
     }
+    else
+    {
+        odebug << "Failed Bluetooth ping... (normalExit: " << ping->normalExit() << ", exitStatus: " << ping->exitStatus() << ")" << oendl;
+        failure();
+    }
+}
 
 /// Make one authentication attempt with this plugin
 /**
@@ -136,17 +154,20 @@ int BluepingPlugin::authenticate() {
         // connect the signal emitting functions to the bluepingDialog done(int) finishing function
         QObject::connect(this, SIGNAL(emitCode(int)), &bluepingDialog, SLOT(done(int)));
 
-        // we can uncomment the following when testing
-        //bluetoothAlreadyRestarted = true;
-        if (!bluetoothAlreadyRestarted)
+
+        
+        /* let's start Bluetooth if it's not running
+         */
+        OProcess checkB;
+        checkB << "pidof" << "hciattach";
+        odebug << "checking if Bluetooth is running..." << oendl;
+        // now we start bluetooth *only* if the previous command works, exits normally, and
+        // it returns a non-null exit code (which means hciattach is not running)
+        if ( checkB.start(OProcess::Block) && checkB.normalExit() && (checkB.exitStatus() != 0) )
         {
-            // we have just started or resumed the device, so Bluetooth has to be (re)started
-            OProcess killB;
-            killB << "killall" << "hciattach";
-            odebug << "killing Bluetooth..." << oendl;
-            if ( !killB.start(OProcess::Block) ) {
-                oerr << "could not kill bluetooth" << oendl;
-            }
+            // remember to switch off Bluetooth once we're finished...
+            bluetoothWasOff = true;
+            odebug << "Bluetooth is not running, we must start it now" << oendl;
 
             OProcess startB;
             switch ( ODevice::inst()->model() ) {
@@ -164,29 +185,30 @@ int BluepingPlugin::authenticate() {
             } // end switch on device models
 
             if ( !startB.start(OProcess::Block) ) {
-                oerr << "could not (re)start bluetooth" << oendl;
+                oerr << "could not start Bluetooth" << oendl;
                 return MultiauthPluginObject::Skip;
             }
             else
             {
-                if ( startB.normalExit() && (startB.exitStatus() == 0) )
+                if ( (startB.normalExit()) && (startB.exitStatus() == 0) )
                 {
-                    odebug << "hciattach exited normally."<< oendl;
-                    bluetoothAlreadyRestarted = true;
+                    odebug << "hciattach exited normally, Bluetooth is probably on now, let's wait 500 ms and ping" << oendl;
                     // 500 ms timer, so l2ping won't try to find a route before bluetooth has \em really started
                     QTimer::singleShot( 500, this, SLOT(ping()) );
                 }
                 else
                 {
-                    owarn << "hciattach exited anormally (error code: " << startB.exitStatus() << ")" << oendl;
-                } // end if startBluetooth exit status == 0
+                    owarn << "hciattach exited anormally (normalExit: " << startB.normalExit() << ", exit status: " << startB.exitStatus() << ")" << oendl;
+                    return MultiauthPluginObject::Skip;
+                } // end if startB exited normaly
             } // end if startBluetooth started
         }
         else
         {
             // we don't need to wait, since bluetooth has been started long enough ago
+            odebug << "Bluetooth is already running, we can try to ping now" << oendl;
             ping();
-        } // end if bluetooth not restarted
+        } // end if Bluetooth was off
 
 
         // start the dialog event loop, while the ping is starting (or will start soon) in the background

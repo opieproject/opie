@@ -73,11 +73,12 @@ class BluepingPlugin : public QObject, public Opie::Security::MultiauthPluginObj
         void pingFinished(Opie::Core::OProcess * ping);
         
      private:
-        Opie::Core::OProcess *m_ping;
+        void killBluetoothIfNecessary();
+        Opie::Core::OProcess * m_ping;
+        Config * m_config;
         BluepingConfigWidget * m_bluepingW;
-        bool bluetoothAlreadyRestarted;
+        bool bluetoothWasOff;
         QString macToPing;
-
 };
 
 #endif
