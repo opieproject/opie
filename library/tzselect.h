@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -25,6 +25,7 @@
 #include <qstringlist.h>
 
 class QToolButton;
+class TimeZoneSelector;
 
 // a function to load defaults in case there is no file
 QStringList timezoneDefaults( void );
@@ -40,6 +41,7 @@ public:
     void setCurrZone( const QString& id );
 
 protected:
+    friend class TimeZoneSelector;
     void keyPressEvent( QKeyEvent *e );
     void mousePressEvent(QMouseEvent*e);
     void updateZones();
@@ -59,6 +61,14 @@ class TimeZoneSelector : public QHBox
 public:
     TimeZoneSelector( QWidget* parent = 0, const char* name=0 );
     ~TimeZoneSelector();
+
+#ifdef QTOPIA_INTERNAL_TZSELECT_INC_LOCAL
+    // badly named.. not to be used outside of qtopia (not forward compatable)
+    // basically allows the "No Timezone" or "None" option.
+    void setLocalIncluded(bool);
+    bool localIncluded() const;
+#endif
+
     
     QString currentZone() const;
     void setCurrentZone( const QString& id );

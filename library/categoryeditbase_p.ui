@@ -30,7 +30,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>201</width>
+            <width>197</width>
             <height>287</height>
         </rect>
     </property>
@@ -105,6 +105,10 @@
                 <name>name</name>
                 <cstring>lvView</cstring>
             </property>
+            <property>
+                <name>whatsThis</name>
+                <string>Check the categories this document belongs to.</string>
+            </property>
         </widget>
         <widget>
             <class>QLayoutWidget</class>
@@ -127,6 +131,10 @@
                         <name>name</name>
                         <cstring>txtCat</cstring>
                     </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Enter a new category here.  Press &lt;b&gt;Add&lt;/b&gt; to add it to the list.</string>
+                    </property>
                 </widget>
                 <widget>
                     <class>QToolButton</class>
@@ -141,6 +149,10 @@
                     <property stdset="1">
                         <name>text</name>
                         <string>Add</string>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Enter a new category to the left and press to add it to the list.</string>
                     </property>
                 </widget>
                 <widget>
@@ -161,6 +173,10 @@
                         <name>pixmap</name>
                         <pixmap>image0</pixmap>
                     </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Press to delete the highlighted category.</string>
+                    </property>
                 </widget>
                 <widget>
                     <class>QCheckBox</class>
@@ -171,6 +187,10 @@
                     <property stdset="1">
                         <name>text</name>
                         <string>Global</string>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Check to make this property available to all applications.</string>
                     </property>
                 </widget>
             </hbox>

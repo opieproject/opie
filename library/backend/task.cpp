@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,24 +18,123 @@
 **
 **********************************************************************/
 
-#include <qpe/task.h>
+#include "task.h"
+#include "recordfields.h"
+#include "vobject_p.h"
+#include "qfiledirect_p.h"
+
+#include <qtopia/timeconversion.h>
+
 #include <qregexp.h>
 #include <qstring.h>
-#include <qpe/recordfields.h>
-#include "vobject_p.h"
-#include "timeconversion.h"
-#include "qfiledirect_p.h"
 
 #include <stdio.h>
 
 using namespace Qtopia;
 UidGen Task::sUidGen( UidGen::Qtopia );
 
+/*!
+  \class Task
+  \brief The Task class holds the data of a todo entry.
+
+  This data includes the priority of the task, a description, an optional due
+  date, and whether the task is completed or not.
+
+  \ingroup qtopiaemb
+  \ingroup qtopiadesktop
+*/
+
+/*!
+  Creates a new, empty task.
+*/
 Task::Task() : Record(), mDue( FALSE ),
 mDueDate( QDate::currentDate() ),
 mCompleted( FALSE ), mPriority( 3 ), mDesc()
 {
 }
+
+/*!
+  \fn void Task::setPriority( int priority )
+
+  Sets the priority of the task to \a priority.
+*/
+
+/*!
+  \fn int Task::priority() const
+
+  Returns the priority of the task.
+*/
+
+/*!
+  \fn void Task::setDescription( const QString &description )
+
+  Sets the description of the task to \a description.
+ */
+
+/*!
+  \fn const QString &Task::description() const
+
+  Returns the description of the task.
+ */
+
+/*!
+  \fn void Task::setDueDate( const QDate &date, bool hasDue )
+
+  \internal
+  If \a hasDue is TRUE sets the due date of the task to \a date.
+  Otherwise clears the due date of the task.
+*/
+
+/*!
+  \fn void Task::setDueDate( const QDate &date )
+
+  Sets the due date of the task to \a date.
+*/
+
+/*!
+  \fn void Task::clearDueDate( )
+
+  Clears the due date of the task.
+*/
+
+/*!
+  \fn void Task::setCompleted( bool b )
+
+  If \a b is TRUE marks the task as completed.  Otherwise marks the task as
+  uncompleted.
+*/
+
+/*!
+  \fn bool Task::isCompleted() const
+
+  Returns TRUE if the task is completed.  Otherwise returns FALSE.
+*/
+
+/*!
+  \fn const QDate &Task::dueDate() const
+
+  Returns the due date of the task.
+ */
+
+/*!
+  \fn bool Task::hasDueDate() const
+
+  Returns TRUE if there is a due date set for the task.  Otherwise returns
+  FALSE.
+*/
+
+/*!
+  \fn void Task::setHasDueDate( bool b )
+
+  \internal
+  Just don't ask.  I really can't justify the function.
+*/
+
+
+/*!
+  \internal
+  Creates a new task.  The properties of the task are set from \a m.
+*/
 
 Task::Task( const QMap<int, QString> &m ) : Record(), mDue( FALSE ),
 mDueDate( QDate::currentDate() ), mCompleted( FALSE ), mPriority( 3 ), mDesc()
@@ -51,23 +150,35 @@ mDueDate( QDate::currentDate() ), mCompleted( FALSE ), mPriority( 3 ), mDesc()
 	case Priority: setPriority( (*it).toInt() ); break;
 	case Date: mDueDate = TimeConversion::fromString( (*it) ); break;
 	case TaskUid: setUid( (*it).toInt() ); break;
-	default: break;
+	case TaskRid:
+	case TaskRinfo:
+			break;
 	}
 }
 
+/*!
+  Destroys a task.
+*/
 Task::~Task()
 {
 }
 
+/*!
+  \internal
+  Returns the task as a map of field ids to property values.
+*/
 QMap<int, QString> Task::toMap() const
 {
     QMap<int, QString> m;
     m.insert( HasDate, hasDueDate() ? "1" : "0" );
     m.insert( Completed, isCompleted() ? "1" : "0" );
-    m.insert( TaskCategory, idsToString( categories() ) );
-    m.insert( TaskDescription, description() );
+    if ( categories().count() )
+	m.insert( TaskCategory, idsToString( categories() ) );
+    if ( !description().isEmpty() )
+	m.insert( TaskDescription, description() );
     m.insert( Priority, QString::number( priority() ) );
-    m.insert( Date, TimeConversion::toString( dueDate() ) );
+    if ( hasDueDate() )
+	m.insert( Date, TimeConversion::toString( dueDate() ) );
     m.insert( TaskUid, QString::number(uid()) );
 
     //qDebug("Task::toMap");
@@ -75,6 +186,10 @@ QMap<int, QString> Task::toMap() const
     return m;
 }
 
+/*!
+  \internal
+  Appends the task information to \a buf.
+*/
 void Task::save( QString& buf ) const
 {
     buf += " Completed=\"";
@@ -117,20 +232,27 @@ void Task::save( QString& buf ) const
     buf += "\"";
 }
 
-bool Task::match ( const QRegExp &r ) const
+/*!
+  Returns TRUE if the task matches the regular expressions \a regexp.
+  Otherwise returns FALSE.
+*/
+bool Task::match ( const QRegExp &regexp ) const
 {
     // match on priority, description on due date...
     bool match;
     match = false;
-    if ( QString::number( mPriority ).find( r ) > -1 )
+    if ( QString::number( mPriority ).find( regexp ) > -1 )
 	match = true;
-    else if ( mDue && mDueDate.toString().find( r ) > -1 )
+    else if ( mDue && mDueDate.toString().find( regexp ) > -1 )
 	match = true;
-    else if ( mDesc.find( r ) > -1 )
+    else if ( mDesc.find( regexp ) > -1 )
 	match = true;
     return match;
 }
 
+/*!
+  \internal
+*/
 static inline VObject *safeAddPropValue( VObject *o, const char *prop, const QString &value )
 {
     VObject *ret = 0;
@@ -139,6 +261,9 @@ static inline VObject *safeAddPropValue( VObject *o, const char *prop, const QSt
     return ret;
 }
 
+/*!
+  \internal
+*/
 static inline VObject *safeAddProp( VObject *o, const char *prop)
 {
     VObject *ret = 0;
@@ -148,6 +273,9 @@ static inline VObject *safeAddProp( VObject *o, const char *prop)
 }
 
 
+/*!
+  \internal
+*/
 static VObject *createVObject( const Task &t )
 {
     VObject *vcal = newVObject( VCCalProp );
@@ -164,7 +292,9 @@ static VObject *createVObject( const Task &t )
     return vcal;
 }
 
-
+/*!
+  \internal
+*/
 static Task parseVObject( VObject *obj )
 {
     Task t;
@@ -207,7 +337,9 @@ static Task parseVObject( VObject *obj )
 }
 
 
-
+/*!
+  Writes the list of \a tasks as a set of VCards to the file \a filename.
+*/
 void Task::writeVCalendar( const QString &filename, const QValueList<Task> &tasks)
 {
   QFileDirect f( filename.utf8().data() );
@@ -226,6 +358,9 @@ void Task::writeVCalendar( const QString &filename, const QValueList<Task> &task
     cleanStrTbl();
 }
 
+/*!
+  Writes \a task as a VCard to the file \a filename.
+*/
 void Task::writeVCalendar( const QString &filename, const Task &task)
 {
   QFileDirect f( filename.utf8().data() );
@@ -241,7 +376,9 @@ void Task::writeVCalendar( const QString &filename, const Task &task)
   cleanStrTbl();
 }
 
-
+/*!
+  Returns the set of tasks read as VCards from the file \a filename.
+*/
 QValueList<Task> Task::readVCalendar( const QString &filename )
 {
     VObject *obj = Parse_MIME_FromFileName( (char *)filename.utf8().data() );

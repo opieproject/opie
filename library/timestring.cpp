@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -117,36 +117,34 @@ QString DateFormat::numberDate(const QDate &d, int v) const
 {
     QString buf = "";
 
-    int pad = 0;
-    if (v & padNumber)
-	pad = 2;
+    int pad = 2;
 
     // for each part of the order
     for (int i = 0; i < 3; i++) {
 	// switch on the relavent 3 bits.
 	switch((_shortOrder >> (i * 3)) & 0x0007) { 
 	    case 0x0001:
-		buf += QString("%1").arg(d.day(), pad);
+	      if (pad==2) buf += QString().sprintf("%02d",d.day());
+	      else buf += QString().sprintf("%d",d.day());
 		break;
 	    case 0x0002:
-		buf += QString("%1").arg(d.month(), pad);
+	      if (i==0) { // no padding with only MM/DD/YY format
+		pad=0;
+	      }
+	      if (pad==2) buf += QString().sprintf("%02d",d.month());
+	      else buf += QString().sprintf("%d",d.month());
 		break;
 	    case 0x0004:
 		{
 		    int year = d.year();
 		    if (!(v & longNumber))
 			year = year % 100;
-
-		    if (year < 10)
-			buf += "0";
-
-		    buf += QString::number(year);
-
+		    buf += QString().sprintf("%02d",year);
 		}
 		break;
 	}
 	if (i < 2)
-	    buf = _shortSeparator;
+	    buf += _shortSeparator;
     }
     return buf;
 }
@@ -161,24 +159,22 @@ QString DateFormat::wordDate(const QDate &d, int v) const
 	    weekDay = weekDay.left(3);
 	}
 	buf += weekDay;
-	if (_longOrder & 0x0007 == 0x0002)
+	if ((_longOrder & 0x0007) == 0x0002)
 	    buf += ' ';
 	else 
 	    buf += ", ";
     }
 
-    int pad = 0;
-    if (v & padNumber)
-	pad = 2;
-
     for (int i = 0; i < 3; i++) {
 	// switch on the relavent 3 bits.
 	switch((_longOrder >> (i * 3)) & 0x0007) { 
 	    case 0x0001:
-		buf += QString("%1").arg(d.day(), pad);
-		if (i < 2) { 
-		    if ((_shortOrder << ((i+1) * 3)) & 0x0007)
-			buf += ", ";
+	      if (i==1) {
+		buf += QString().sprintf("%02d, ",d.day());
+	      } else {
+		buf += QString().sprintf("%2d",d.day());
+		if (separator()=='.') // 2002/1/11 
+		  buf += ". ";
 		    else 
 			buf += " ";
 		}
@@ -355,6 +351,15 @@ QString TimeString::timeString( const QTime &t, bool ampm)
 QString TimeString::shortTime( bool ampm )
 {
     return shortTime(ampm,FALSE);
+}
+
+QString TimeString::numberDateString( const QDate &d, DateFormat dtf )
+{
+  return dtf.numberDate(d);
+}
+QString TimeString::longNumberDateString( const QDate &d, DateFormat dtf )
+{
+  return dtf.numberDate(d,DateFormat::longNumber);
 }
 
 #include "timestring.moc"

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -114,7 +114,12 @@ public:
     static QString shortTime( bool ampm, bool seconds );
     static QString shortTime( bool ampm = false );
 
-
+    static QString numberDateString( const QDate &d, DateFormat );
+    static QString numberDateString( const QDate &d )
+    { return numberDateString( d, currentDateFormat() ); }
+    static QString longNumberDateString( const QDate &d, DateFormat );
+    static QString longNumberDateString( const QDate &d )
+    { return longNumberDateString( d, currentDateFormat() ); }
 
     static QString shortDate( const QDate &, DateFormat );
     static QString dateString( const QDate &, DateFormat  );
@@ -127,5 +132,5 @@ private:
     
 
 };
-#endif
 
+#endif

@@ -1,16 +1,15 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free
-** Software Foundation and appearing in the file LICENSE.GPL included
-** in the packaging of this file.
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
 **
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING
-** THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A
-** PARTICULAR PURPOSE.
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
@@ -18,11 +17,23 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include "palmtoprecord.h"
-#include "stringutil.h"
+#include <qtopia/private/palmtoprecord.h>
+#include <qtopia/stringutil.h>
 #include <qstringlist.h>
 
+/*! \class Qtopia::PalmtopRecord palmtoprecord.h
+  \brief The Qtopia::PalmtopRecord class is the base class for all PIM records.
+
+  Provides unique id and category support for all PIM records.
+
+  \ingroup qtopiaemb
+  \ingroup qtopiadesktop
+*/
+
+
 namespace Qtopia {
+
+
 
 Record &Record::operator=( const Record &c )
 {
@@ -41,8 +52,11 @@ void Record::setCategories( int single )
 }
 
 // convenience methods provided for loading and saving to xml
-QString Record::idsToString( const QArray<int> &cats )
+QString Record::idsToString( const QArray<int> &catsUnsorted )
 {
+    QArray<int> cats = catsUnsorted;
+    cats.sort();
+
     QString str;
     for ( uint i = 0; i < cats.size(); i++ )
 	if ( i == 0 )
@@ -84,13 +98,13 @@ QString Record::customField( const QString &key) const
  */
 void Record::setCustomField( const QString &key, const QString &value)
 {
-    qWarning("setting custom " + key + " to " + value);
+//     qWarning("setting custom " + key + " to " + value);
     if (customMap.contains(key))
 	customMap.replace(key, value);
     else
 	customMap.insert(key, value);
 
-    qWarning(QString("custom size %1").arg(customMap.count()));
+//     qWarning(QString("custom size %1").arg(customMap.count()));
 }
 
 /*!
@@ -107,7 +121,7 @@ QString Record::customToXml() const
     QString buf(" ");
     for ( QMap<QString, QString>::ConstIterator cit = customMap.begin();
 	    cit != customMap.end(); ++cit) {
-	qWarning(".ITEM.");
+// 	qWarning(".ITEM.");
 	buf += cit.key();
 	buf += "=\"";
 	buf += escapeString(cit.data());

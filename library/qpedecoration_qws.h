@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -21,10 +21,12 @@
 #define QPE_DECORATION_QWS_H__
 
 
+#ifdef QWS
 #include <qwsdefaultdecoration_qws.h>
 #include <qimage.h>
 #include <qdatetime.h>
 #include <qguardedptr.h>
+#include "windowdecorationinterface.h"
 
 
 #ifndef QT_NO_QWS_QPE_WM_STYLE
@@ -36,6 +38,7 @@ class QPEDecoration : public QWSDefaultDecoration
 {
 public:
     QPEDecoration();
+    QPEDecoration( const QString &plugin );
     virtual ~QPEDecoration();
 
     virtual QRegion region(const QWidget *, const QRect &rect, Region);
@@ -50,14 +53,15 @@ public:
     void buttonClicked( QPERegion r );
     
 protected:
-    void fillTitle( QPainter *p, const QWidget *w, int x, int y, int w, int h );
-//    virtual int getTitleWidth(const QWidget *);
     virtual int getTitleHeight(const QWidget *);
     virtual const char **menuPixmap();
     virtual const char **closePixmap();
     virtual const char **minimizePixmap();
     virtual const char **maximizePixmap();
     virtual const char **normalizePixmap();
+
+private:
+    void windowData( const QWidget *w, WindowDecorationInterface::WindowData &wd ) const;
 
 protected:
     QImage imageOk;
@@ -77,11 +81,14 @@ public:
     QPEManager( QPEDecoration *d, QObject *parent=0 );
 
     void updateActive();
+    const QWidget *activeWidget() const { return (const QWidget *)active; }
+    const QWidget *whatsThisWidget() const { return (const QWidget *)whatsThis; }
 
 protected:
     int pointInQpeRegion( QWidget *w, const QPoint &p );
     virtual bool eventFilter( QObject *, QEvent * );
     void drawButton( QWidget *w, QPEDecoration::QPERegion r, int state );
+    void drawTitle( QWidget *w );
 
 protected slots:
     void whatsThisTimeout();
@@ -92,6 +99,8 @@ protected:
     int helpState;
     QTime pressTime;
     QTimer *wtTimer;
+    bool inWhatsThis;
+    QGuardedPtr<QWidget> whatsThis;
 };
 
 
@@ -99,3 +108,4 @@ protected:
 
 
 #endif // QPE_DECORATION_QWS_H__
+#endif // QWS

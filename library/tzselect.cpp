@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,6 +18,8 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_TZSELECT_INC_LOCAL
+
 #include "tzselect.h"
 #include "resource.h"
 #include "global.h"
@@ -30,16 +32,29 @@
 #include <qcopchannel_qws.h>
 #endif
 
+class TimeZoneSelectorPrivate
+{
+public:
+    TimeZoneSelectorPrivate() : includeLocal(FALSE) {}
+    bool includeLocal;
+};
+
 TZCombo::TZCombo( QWidget *p, const char* n )
     : QComboBox( p, n )
 {
     updateZones();
     // check to see if TZ is set, if it is set the current item to that
     QString tz = getenv("TZ");
+    if (parent()->inherits("TimeZoneSelector")) {
+	if ( ((TimeZoneSelector *)parent())->localIncluded() ) {
+	    // overide to the 'local' type.
+	    tz = "None";
+	}
+    }
     if ( !tz.isNull() ) {
 	int n = 0,
             index = 0;
-        for ( QStringList::Iterator it=identifiers.begin(); 
+        for ( QStringList::Iterator it=identifiers.begin();
 	      it!=identifiers.end(); ++it) {
 	    if ( *it == tz )
 		index = n;
@@ -76,43 +91,63 @@ void TZCombo::updateZones()
     int curix=0;
     QString tz = getenv("TZ");
     bool tzFound = FALSE;
-    Config cfg("CityTime");
+    Config cfg("WorldTime");
     cfg.setGroup("TimeZones");
-    int i=0;
-    for ( ; 1; i++ ) {
-	QString zn = cfg.readEntry("Zone"+QString::number(i), QString::null);
+    int listIndex = 0;
+    if (parent()->inherits("TimeZoneSelector")) {
+	if ( ((TimeZoneSelector *)parent())->localIncluded() ) {
+	    // overide to the 'local' type.
+	    identifiers.append( "None" );
+	    insertItem( tr("None") );
+	    if ( cur == tr("None"))
+		curix = 0;
+	    listIndex++;
+	}
+    }
+    int cfgIndex = 0;
+    while (1) {
+	QString zn = cfg.readEntry("Zone"+QString::number(cfgIndex), QString::null);
 	if ( zn.isNull() )
 	    break;
 	if ( zn == tz )
 	    tzFound = TRUE;
-	QString nm = cfg.readEntry("ZoneName"+QString::number(i));
+	QString nm = cfg.readEntry("ZoneName"+QString::number(cfgIndex));
 	identifiers.append(zn);
 	insertItem(nm);
 	if ( nm == cur )
-	    curix = i;
+	    curix = listIndex;
+	++cfgIndex;
+	++listIndex;
     }
-    if ( !tzFound && !tz.isEmpty()) {
-	int i =  tz.find( '/' );
-	QString nm = tz.mid( i+1 );
-	identifiers.append(tz);
-	insertItem(nm);
-	if ( nm == cur )
-	    curix = i;
-	++i;
+    if ( !listIndex ) {
+        QStringList list = timezoneDefaults();
+        for ( QStringList::Iterator it = list.begin(); it!=list.end(); ++it ) {
+	    QString zn = *it;
+	    QString nm = *++it;
+	    if ( zn == tz )
+		tzFound = TRUE;
+	    if ( nm == cur )
+		curix = listIndex;
+            identifiers.append(zn);
+            insertItem(nm);
+	    ++listIndex;
+        }
     }
     for (QStringList::Iterator it=extras.begin(); it!=extras.end(); ++it) {
 	insertItem(*it);
 	identifiers.append(*it);
 	if ( *it == cur )
-	    curix = i;
-	++i;
+	    curix = listIndex;
+	++listIndex;
     }
-    if ( !i ) {
-        QStringList list = timezoneDefaults();
-        for ( QStringList::Iterator it = list.begin(); it!=list.end(); ++it ) {
-            identifiers.append(*it); ++it;
-            insertItem(*it);
-        }
+    if ( !tzFound && !tz.isEmpty()) {
+	int i =  tz.find( '/' );
+	QString nm = tz.mid( i+1 ).replace(QRegExp("_"), " ");
+	identifiers.append(tz);
+	insertItem(nm);
+	if ( nm == cur )
+	    curix = listIndex;
+	++listIndex;
     }
     setCurrentItem(curix);
 }
@@ -164,12 +199,12 @@ void TZCombo::handleSystemChannel(const QCString&msg, const QByteArray&)
 TimeZoneSelector::TimeZoneSelector(QWidget* p, const char* n) :
     QHBox(p,n)
 {
+    d = new TimeZoneSelectorPrivate();
     // build the combobox before we do any updates...
     cmbTz = new TZCombo( this, "timezone combo" );
 
     cmdTz = new QToolButton( this, "timezone button" );
-    QPixmap pixGlobe = Resource::loadPixmap( "citytime_icon" );
-    cmdTz->setPixmap( pixGlobe );
+    cmdTz->setIconSet( Resource::loadIconSet( "citytime_icon" ) );
     cmdTz->setMaximumSize( cmdTz->sizeHint() );
 
     // set up a connection to catch a newly selected item and throw our
@@ -182,6 +217,17 @@ TimeZoneSelector::TimeZoneSelector(QWidget* p, const char* n) :
 
 TimeZoneSelector::~TimeZoneSelector()
 {
+}
+
+void TimeZoneSelector::setLocalIncluded(bool b)
+{
+    d->includeLocal = b;
+    cmbTz->updateZones();
+}
+
+bool TimeZoneSelector::localIncluded() const
+{
+    return d->includeLocal;
 }
 
 
@@ -202,8 +248,8 @@ void TimeZoneSelector::slotTzActive( int )
 
 void TimeZoneSelector::slotExecute( void )
 {
-    // execute the city time application...
-    Global::execute( "citytime" );
+    // execute the world time application...
+    Global::execute( "worldtime" );
 }
 
 QStringList timezoneDefaults( void )

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -247,19 +247,23 @@ bool QPEMenuToolFocusManager::eventFilter( QObject *object, QEvent *event )
 	}
     } else if ( event->type() == QEvent::ChildInserted ) {
 	QChildEvent *ce = (QChildEvent *)event;
-	if ( ce->child()->inherits( "QMenuBar" ) ) {
-	    addWidget( (QWidget *)ce->child() );
-	    ce->child()->installEventFilter( this );
-	} else if ( object->inherits( "QToolBar" ) && ce->child()->isWidgetType() ) {
-	    addWidget( (QWidget *)ce->child() );
+	if ( ce->child()->isWidgetType() ) {
+	    if ( ce->child()->inherits( "QMenuBar" ) ) {
+		addWidget( (QWidget *)ce->child() );
+		ce->child()->installEventFilter( this );
+	    } else if ( object->inherits( "QToolBar" ) ) {
+		addWidget( (QWidget *)ce->child() );
+	    }
 	}
     } else if ( event->type() == QEvent::ChildRemoved ) {
 	QChildEvent *ce = (QChildEvent *)event;
-	if ( ce->child()->inherits( "QMenuBar" ) ) {
-	    removeWidget( (QWidget *)ce->child() );
-	    ce->child()->removeEventFilter( this );
-	} else if ( object->inherits( "QToolBar" ) && ce->child()->isWidgetType() ) {
-	    removeWidget( (QWidget *)ce->child() );
+	if ( ce->child()->isWidgetType() ) {
+	    if ( ce->child()->inherits( "QMenuBar" ) ) {
+		removeWidget( (QWidget *)ce->child() );
+		ce->child()->removeEventFilter( this );
+	    } else if ( object->inherits( "QToolBar" ) ) {
+		removeWidget( (QWidget *)ce->child() );
+	    }
 	}
     }
 
@@ -279,7 +283,6 @@ void QPEMenuToolFocusManager::deactivate()
 
   This class is obsolete.  Use QMenuBar instead.
 
-  \sa QMenuBar
 */
 
 /*!
@@ -306,19 +309,17 @@ void QPEMenuBar::keyPressEvent( QKeyEvent *e )
     QMenuBar::keyPressEvent( e );
 }
 
-
-void QPEMenuBar::activateItem( int index )
-{
+/*!
+  \internal
+*/
+void QPEMenuBar::activateItem( int index ) {
     activateItemAt( index );
 }
-
-void QPEMenuBar::goodbye()
-{
+void QPEMenuBar::goodbye() {
     activateItemAt(-1);
-    for ( unsigned int i = 0; i < count(); i++ ) {
-        QMenuItem *mi = findItem( idAt(i) );
-        if ( mi->popup() ) {
+    for ( uint i = 0; i < count(); i++ ) {
+        QMenuItem* mi = findItem( idAt(i) );
+        if (mi->popup() )
             mi->popup()->hide();
-        }
     }
 }

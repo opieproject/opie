@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -22,6 +22,7 @@
 #define TASKBARAPPLETINTERFACE_H
 
 #include <qpe/qcom.h>
+#include <qpixmap.h>
 
 #ifndef QT_NO_COMPONENT
 // {6CA34D0B-C637-4865-A667-7D4CD8A70407}
@@ -36,6 +37,17 @@ struct TaskbarAppletInterface : public QUnknownInterface
 {
     virtual QWidget *applet( QWidget *parent ) = 0;
     virtual int position() const = 0;
+};
+
+// {7505E192-4977-465A-B72F-0A8DD491CF43} 
+#ifndef IID_TaskbarNamedApplet
+#define IID_TaskbarNamedApplet QUuid( 0x7505e192, 0x4977, 0x465a, 0xb7, 0x2f, 0x0a, 0x8d, 0xd4, 0x91, 0xcf, 0x43)
+#endif
+
+struct TaskbarNamedAppletInterface : public TaskbarAppletInterface
+{
+    virtual QString name() const = 0;
+    virtual QPixmap icon() const = 0;
 };
 
 #endif

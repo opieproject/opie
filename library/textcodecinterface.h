@@ -17,30 +17,28 @@
 ** not clear to you.
 **
 **********************************************************************/
+#ifndef TEXTCODECINTERFACE_H
+#define TEXTCODECINTERFACE_H
 
-#define protected public
-#include <qdialog.h>
-#undef protected
+#include <qstringlist.h>
+#include <qpe/qcom.h>
 
-#include "qpedialog.h"
-#include "qpeapplication.h"
+class QTextCodec;
 
-QPEDialogListener::QPEDialogListener(QDialog *di ) : QObject(di)
+#ifndef QT_NO_COMPONENT
+#ifndef IID_QtopiaTextCodec
+#define IID_QtopiaTextCodec QUuid( 0x3ee02ba3, 0x57dc, 0x9b1e, 0x40, 0xf4, 0xda, 0xdf, 0x21, 0x89, 0xb6, 0xb4)
+#endif
+#endif
+
+struct TextCodecInterface : public QUnknownInterface
 {
-    dialog = di;
-    connect(qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
-	    this, SLOT(appMessage(const QCString&, const QByteArray&)) );
-}
+public:
+    virtual QStringList names() const = 0;
+    virtual QTextCodec *createForName( const QString &name ) = 0;
+    
+    virtual QValueList<int> mibEnums() const = 0;
+    virtual QTextCodec *createForMib( int mib ) = 0;
+};
 
-QPEDialogListener::~QPEDialogListener() {}
-
-void QPEDialogListener::appMessage( const QCString &msg, const QByteArray & )
-{
-    if (!dialog) 
-	return;
-    if (msg == "accept()") {
-	dialog->accept();
-    } else if (msg == "reject()") {
-	dialog->reject();
-    }
-}
+#endif

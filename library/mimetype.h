@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,8 +20,9 @@
 #ifndef MIMETYPE_H
 #define MIMETYPE_H
 
-#include <qstring.h>
+#include <qstringlist.h>
 #include <qpixmap.h>
+#include <qlist.h>
 
 class AppLnk;
 class DocLnk;
@@ -43,6 +44,8 @@ public:
 // DON'T define this yourself!
 #ifdef QTOPIA_INTERNAL_MIMEEXT
     QString extension() const;
+    QStringList extensions() const;
+    QList<AppLnk> applications() const;
 #endif
 
     const AppLnk* application() const;
@@ -59,9 +62,9 @@ private:
     static void loadExtensions();
     static void loadExtensions(const QString&);
     void init( const QString& ext_or_id );
-    class Dict;
-    static Dict* d;
-    static Dict& dict();
+    class Private;
+    static Private* d;
+    static Private& data();
     static MimeTypeData* data(const QString& id);
     QString i;
 };

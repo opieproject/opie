@@ -74,6 +74,8 @@ which accompanied this distribution.
 
 */
 
+// No tr() anywhere in this file
+
 
 #ifndef __VOBJECT_H__
 #define __VOBJECT_H__ 1
@@ -142,7 +144,7 @@ For example:
 #define VCCategoriesProp		"CATEGORIES"
 #define VCCellularProp			"CELL"
 #define VCCGMProp				"CGM"
-#define VCCharSetProp			"CS"
+#define VCCharSetProp			"CHARSET"
 #define VCCIDProp				"CID"
 #define VCCISProp				"CIS"
 #define VCCityProp				"L"

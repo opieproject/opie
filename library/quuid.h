@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -90,6 +90,16 @@ struct Q_EXPORT QUuid
 	return !( *this == orig );
     }
 
+    inline bool operator<(const QUuid &orig) const
+    {
+	return ( memcmp(this, &orig, sizeof(QUuid)) < 0);
+    }
+    
+    inline bool operator>(const QUuid &orig) const
+    {
+	return ( memcmp(this, &orig, sizeof(QUuid) ) > 0);
+    }
+    
 #if defined(Q_OS_WIN32)
     // On Windows we have a type GUID that is used by the platform API, so we
     // provide convenience operators to cast from and to this type.
@@ -119,11 +129,22 @@ struct Q_EXPORT QUuid
     {
 	return !( *this == guid );
     }
+    
+    inline bool operator<(const QUuid &orig) const
+    {
+	return ( memcmp(this, &orig, sizeof(QUuid) ) < 0);
+    }
+    
+    inline bool operator>(const QUuid &orig) const
+    {
+	return ( memcmp(this, &orig, sizeof(QUuid) ) > 0);
+    }
+    
 #endif
 #if defined (Q_WS_QWS)
     QUuid( uuid_t uuid ) 
     {
-	memcpy( this, &uuid, sizeof(uuid_t) );
+	memcpy( this, uuid, sizeof(uuid_t) );
     }
 
     QUuid &operator=(const uuid_t &orig )

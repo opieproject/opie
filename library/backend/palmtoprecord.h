@@ -1,16 +1,15 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free
-** Software Foundation and appearing in the file LICENSE.GPL included
-** in the packaging of this file.
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
 **
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING
-** THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A
-** PARTICULAR PURPOSE.
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
@@ -18,10 +17,8 @@
 ** not clear to you.
 **
 **********************************************************************/
-
 #ifndef QTPALMTOP_RECORD_H
 #define QTPALMTOP_RECORD_H
-
 #include <qglobal.h>
 #include "qpcglobal.h"
 #include "palmtopuidgen.h"
@@ -30,7 +27,7 @@
 
 #if defined(QPC_TEMPLATEDLL)
 // MOC_SKIP_BEGIN
-template class QPC_EXPORT QMap<QString, QString>;
+QPC_TEMPLATEEXTERN template class QPC_EXPORT QMap<QString, QString>;
 // MOC_SKIP_END
 #endif
 
@@ -49,9 +46,16 @@ public:
 
     virtual bool match( const QRegExp & ) const { return FALSE; }
 
-    void setCategories( const QArray<int> &v ) { mCats = v; }
+    void setCategories( const QArray<int> &v ) { mCats = v; mCats.sort(); }
     void setCategories( int single );
     const QArray<int> &categories() const { return mCats; }
+
+    void reassignCategoryId( int oldId, int newId )
+    {
+	int index = mCats.find( oldId );
+	if ( index >= 0 )
+	    mCats[index] = newId;
+    }
 
     int uid() const { return mUid; };
     virtual void setUid( int i ) { mUid = i; uidGen().store( mUid ); }
@@ -77,18 +81,15 @@ public:
 
 protected:
     virtual UidGen &uidGen() = 0;
-
     virtual QString customToXml() const;
-
 private:
     int mUid;
     QArray<int> mCats;
-
     QMap<QString, QString> customMap;
-
     RecordPrivate *d;
 };
 
 }
 
 #endif
+

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,8 +20,8 @@
 #ifndef __TASK_H__
 #define __TASK_H__
 
-#include <qpe/palmtoprecord.h>
-#include <qpe/stringutil.h>
+#include <qtopia/private/palmtoprecord.h>
+#include <qtopia/stringutil.h>
 
 #include <qvaluelist.h>
 #include <qdatetime.h>
@@ -40,6 +40,8 @@ public:
     static void writeVCalendar( const QString &filename, const Task &task);
     static QValueList<Task> readVCalendar( const QString &filename );
 
+    enum PriorityValue { VeryHigh=1, High, Normal, Low, VeryLow };
+
     void setPriority( int priority ) { mPriority = priority; }
     int priority() const { return mPriority; }
 
@@ -51,10 +53,16 @@ public:
     { mDesc = Qtopia::simplifyMultiLineSpace(description); }
     const QString &description() const { return mDesc; }
 
+    // Use THESE functions
+    void setDueDate( const QDate &date);
+    void clearDueDate();
+   
+    // Instead of these functions.
     void setDueDate( const QDate& date, bool hasDue ) { mDueDate = date; mDue = hasDue; }
+    void setHasDueDate( bool b ) { mDue = b; }
+
     const QDate &dueDate() const { return mDueDate; }
     bool hasDueDate() const { return mDue; }
-    void setHasDueDate( bool b ) { mDue = b; }
     
     void setCompleted( bool b ) { mCompleted = b; }
     bool isCompleted() const { return mCompleted; }
@@ -78,4 +86,7 @@ private:
     //
 };
 
+// MUST be inline.  (forwards compatability).
+inline void Task::setDueDate( const QDate &date) { setDueDate(date, date.isValid()); }
+inline void Task::clearDueDate() { setHasDueDate( FALSE ); }
 #endif

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -45,34 +45,11 @@ public:
 // Inline for compatibility with SHARP ROMs
 inline QIconSet Resource::loadIconSet( const QString &pix ) 
 {
-    QImage img = loadImage( pix );
-    QPixmap pm;
-    pm.convertFromImage( img );
-    QIconSet is( pm );
-    QIconSet::Size size = pm.width() <= 22 ? QIconSet::Small : QIconSet::Large;
-
     QPixmap dpm = loadPixmap( pix + "_disabled" );
-
-#ifndef QT_NO_DEPTH_32	// have alpha-blended pixmaps
-    if ( dpm.isNull() ) {
-	QImage dimg( img.width(), img.height(), 32 );
-	for ( int y = 0; y < img.height(); y++ ) {
-	    for ( int x = 0; x < img.width(); x++ ) {
-		QRgb p = img.pixel( x, y );
-		uint a = (p & 0xff000000) / 3;
-		p = (p & 0x00ffffff) | (a & 0xff000000);
-		dimg.setPixel( x, y, p );
-	    }
-	}
-
-	dimg.setAlphaBuffer( TRUE );
-	dpm.convertFromImage( dimg );
-    }
-#endif
-
+    QPixmap pm = loadPixmap( pix );
+    QIconSet is( pm );
     if ( !dpm.isNull() )
-	is.setPixmap( dpm, size, QIconSet::Disabled );
-
+	is.setPixmap( dpm, pm.width() <= 22 ? QIconSet::Small : QIconSet::Large, QIconSet::Disabled );
     return is;
 }
 

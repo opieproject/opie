@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>297</width>
+            <width>289</width>
             <height>449</height>
         </rect>
     </property>
@@ -156,6 +156,10 @@
                             <vsizetype>0</vsizetype>
                         </sizepolicy>
                     </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>The media the document resides on.</string>
+                    </property>
                 </widget>
                 <widget row="0"  column="1" >
                     <class>QLineEdit</class>
@@ -173,6 +177,10 @@
                     <property stdset="1">
                         <name>text</name>
                         <string></string>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>The name of this document.</string>
                     </property>
                 </widget>
                 <widget row="0"  column="0" >
@@ -256,6 +264,10 @@
                     <property>
                         <name>layoutSpacing</name>
                     </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Preload this application so that it is available instantly.</string>
+                    </property>
                 </widget>
             </grid>
         </widget>
@@ -327,24 +339,11 @@
                         <name>autoDefault</name>
                         <bool>false</bool>
                     </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Delete this document.</string>
+                    </property>
                 </widget>
-	
-    		<widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>delicon</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Del Icon</string>
-                    </property>
-                    <property stdset="1">
-                        <name>autoDefault</name>
-                        <bool>false</bool>
-                    </property>
-                </widget>	
-
                 <widget>
                     <class>QPushButton</class>
                     <property stdset="1">
@@ -358,6 +357,10 @@
                     <property stdset="1">
                         <name>autoDefault</name>
                         <bool>false</bool>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Make a copy of this document.</string>
                     </property>
                 </widget>
                 <widget>
@@ -377,6 +380,10 @@
                     <property stdset="1">
                         <name>autoDefault</name>
                         <bool>false</bool>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Beam this document to another device.</string>
                     </property>
                 </widget>
             </hbox>

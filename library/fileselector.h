@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -50,13 +50,37 @@ class FileSelector : public QVBox
     Q_OBJECT
 
 public:
-    FileSelector( const QString &mimefilter, QWidget *parent, const char *name, bool newVisible = TRUE, bool closeVisible = TRUE );
+    FileSelector( const QString &mimefilter, QWidget *parent, const char *name=0, bool newVisible = TRUE, bool closeVisible = TRUE );
     ~FileSelector();
     void setNewVisible( bool b );
     void setCloseVisible( bool b );
     void reread();
     int fileCount();
-    const DocLnk *selected();
+    DocLnk selectedDocument() const
+    {
+	const DocLnk* rp = ((FileSelector*)this)->selected();
+	if (!rp) {
+	    DocLnk r;
+	    return r;
+	}
+	DocLnk r(*rp);
+	delete rp;
+	return r;
+    }
+
+    QValueList<DocLnk> fileList() const
+    {
+	((FileSelector*)this)->fileCount(); // ensure all loaded when this is extended
+
+	QValueList<DocLnk> list;
+	FileSelectorItem *item = (FileSelectorItem *)((QListView*)view)->firstChild();
+	while (item) {
+	    list.append(item->file());
+	    item = (FileSelectorItem *)item->nextSibling();
+	}
+
+	return list;
+    }
 
 signals:
     void fileSelected( const DocLnk & );
@@ -69,8 +93,16 @@ private slots:
     // pressed to get 'right down'
     void filePressed( int, QListViewItem *, const QPoint &, int );
     void fileClicked( QListViewItem *);
+    void typeSelected( const QString &type );
+    void catSelected( int );
+    void cardMessage( const QCString &, const QByteArray &);
 
 private:
+    void updateView();
+    void updateWhatsThis();
+
+private:
+    const DocLnk *selected(); // use selectedDocument()
     FileSelectorView *view;
     QString filter;
     QToolButton *buttonNew, *buttonClose;

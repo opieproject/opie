@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -22,6 +22,7 @@
 
 
 #include <qapplication.h>
+#include <qdialog.h>
 #if defined(_WS_QWS_) && !defined(Q_WS_QWS)
 #define Q_WS_QWS
 #endif
@@ -61,22 +62,26 @@ public:
 	AlwaysOff,
 	AlwaysOn
     };
-    
+
     enum screenSaverHint {
 	Disable = 0,
 	DisableLightOff = 1,
 	DisableSuspend = 2,
 	Enable = 100
     };
-    
+
     static void setInputMethodHint( QWidget *, InputMethodHint );
     static InputMethodHint inputMethodHint( QWidget * );
 
     void showMainWidget( QWidget*, bool nomax=FALSE );
     void showMainDocumentWidget( QWidget*, bool nomax=FALSE );
+    static void showDialog( QDialog*, bool nomax=FALSE );
+    static int execDialog( QDialog*, bool nomax=FALSE );
 
     static void setKeepRunning();
     bool keepRunning() const;
+
+    bool keyboardGrabbed() const;
 
     int exec();
 
@@ -84,14 +89,14 @@ signals:
     void clientMoused();
     void timeChanged();
     void clockChanged( bool pm );
+    void micChanged( bool muted );
     void volumeChanged( bool muted );
-	void micChanged( bool muted );
     void appMessage( const QCString& msg, const QByteArray& data);
     void weekChanged( bool startOnMonday );
     void dateFormatChanged( DateFormat );
     void flush();
     void reload();
-    
+
 private slots:
     void systemMessage( const QCString &msg, const QByteArray &data );
     void pidMessage( const QCString &msg, const QByteArray &data );
@@ -106,7 +111,6 @@ protected:
     virtual void shutdown();
     bool eventFilter( QObject *, QEvent * );
     void timerEvent( QTimerEvent * );
-    bool keyboardGrabbed() const;
     bool raiseAppropriateWindow();
     virtual void tryQuit();
 
@@ -124,6 +128,28 @@ private:
 
 
 };
+
+inline void QPEApplication::showDialog( QDialog* d, bool nomax )
+{
+    QSize sh = d->sizeHint();
+    int w = QMAX(sh.width(),d->width());
+    int h = QMAX(sh.height(),d->height());
+    if ( !nomax
+	&& ( w > qApp->desktop()->width()*3/4
+	    || h > qApp->desktop()->height()*3/4 ) )
+    {
+	d->showMaximized();
+    } else {
+	d->resize(w,h);
+	d->show();
+    }
+}
+
+inline int QPEApplication::execDialog( QDialog* d, bool nomax )
+{
+    showDialog(d,nomax);
+    return d->exec();
+}
 
 
 #endif

@@ -36,12 +36,12 @@ HEADERS	=   calendar.h \
 	    power.h \
 	    storage.h \
 	    qpemessagebox.h \
-	backend/timeconversion.h \
+	    timeconversion.h \
 	    qpedebug.h \
 	    qpemenubar.h \
 	    qpetoolbar.h \
 	    backend/categories.h \
-	    backend/stringutil.h \
+	    stringutil.h \
 	    backend/palmtoprecord.h \
             backend/task.h \
 	    backend/event.h \
@@ -54,7 +54,10 @@ HEADERS	=   calendar.h \
 	backend/vobject_p.h \
 	findwidget_p.h \
 	finddialog.h \
-	lnkproperties.h
+	lnkproperties.h \
+	windowdecorationinterface.h \
+	textcodecinterface.h \
+	imagecodecinterface.h
 SOURCES	=   calendar.cpp \
 	    global.cpp \
 	    xmlreader.cpp \

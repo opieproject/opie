@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>245</width>
-            <height>183</height>
+            <width>246</width>
+            <height>203</height>
         </rect>
     </property>
     <property stdset="1">
@@ -35,11 +35,11 @@
     <vbox>
         <property stdset="1">
             <name>margin</name>
-            <number>0</number>
+            <number>6</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>0</number>
+            <number>4</number>
         </property>
         <widget>
             <class>QLayoutWidget</class>
@@ -90,7 +90,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&amp;Find</string>
+                        <string>Find</string>
                     </property>
                     <property stdset="1">
                         <name>default</name>
@@ -228,6 +228,14 @@
             <property stdset="1">
                 <name>name</name>
                 <cstring>lblStatus</cstring>
+            </property>
+            <property stdset="1">
+                <name>frameShape</name>
+                <enum>Panel</enum>
+            </property>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>Sunken</enum>
             </property>
             <property stdset="1">
                 <name>text</name>

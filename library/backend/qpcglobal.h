@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** Licensees holding valid Qtopia Developer license may use this
 ** file in accordance with the Qtopia Developer License Agreement
@@ -22,8 +22,9 @@
 #ifndef QPC_GLOBAL_H
 #define QPC_GLOBAL_H
 
-#if ( defined(Q_OS_WIN32) || defined(Q_OS_WIN64) ) && defined(PALMTOPCENTER)
 #include <qglobal.h>
+
+#if ( defined(Q_OS_WIN32) || defined(Q_OS_WIN64) ) && defined(PALMTOPCENTER)
 // #  if defined(QT_NODLL)
 //#    undef QPC_MAKEDLL
 //#    undef QPC_DLL
@@ -32,10 +33,12 @@
 #      undef QPC_DLL
 #    endif
 #    define QPC_EXPORT  __declspec(dllexport)
+#    define QPC_TEMPLATEEXTERN
 #    define QPC_TEMPLATEDLL
 #    undef  QPC_DISABLE_COPY	/* avoid unresolved externals */
 #  elif defined(QPC_DLL)		/* use a Qt DLL library */
 #    define QPC_EXPORT  __declspec(dllimport)
+#    define QPC_TEMPLATEEXTERN extern
 #    define QPC_TEMPLATEDLL
 #    undef  QPC_DISABLE_COPY	/* avoid unresolved externals */
 #  endif

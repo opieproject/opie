@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -36,6 +36,7 @@
 class QWidget;
 class QPixmap;
 class QObject;
+class QWSInputMethod;
 
 struct InputMethodInterface : public QUnknownInterface
 {
@@ -45,5 +46,19 @@ struct InputMethodInterface : public QUnknownInterface
     virtual QString name() = 0;
     virtual void onKeyPress( QObject *receiver, const char *slot ) = 0;
 };
+
+// {70F0991C-8282-4625-A279-BD9D7D959FF6} 
+#ifndef IID_ExtInputMethod
+#define IID_ExtInputMethod QUuid( 0x70f0991c, 0x8282, 0x4625, 0xa2, 0x79, 0xbd, 0x9d, 0x7d, 0x95, 0x9f, 0xf6)
+#endif
+
+struct ExtInputMethodInterface : public QUnknownInterface
+{
+    virtual QWSInputMethod *inputMethod() = 0;
+    virtual QPixmap *icon() = 0;
+    virtual QString name() = 0;
+    virtual QWidget *widget( QWidget *parent, Qt::WFlags f )= 0;
+};
+
 
 #endif

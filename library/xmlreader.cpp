@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,6 +18,12 @@
 **
 **********************************************************************/
 #include "xmlreader.h"
+
+/*! \class Node xmlreader.h
+  \brief A single element in an XML structure defined by XmlHandler
+
+  \ingroup qtopiaemb
+ */
 
 Node::Node()
     : parent( 0 ), prev( 0 ),
@@ -77,6 +83,15 @@ QString Node::subData(const QString& tag) const
     }
     return QString::null;
 }
+
+/*! \class XmlHandler xmlreader.h
+  \brief XML document structure holder
+
+  This class provides a Node structure that developers can read their
+  xml data into.
+
+  \ingroup qtopiaemb
+*/
 
 XmlHandler::XmlHandler()
     : node( 0 ), tree( 0 )

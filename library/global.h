@@ -1,8 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2002 Holger 'zecke' Freyther <freyther@kde.org>
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -46,8 +45,6 @@ public:
     static void createDocDir();
 
     static void findDocuments(DocLnkSet* folder, const QString &mimefilter=QString::null);
-    // we don't need a mimefilter. Same as above but this is fast as light speed or not ;)
-    //static void findNewDocuments( DocLnkSet* folder ); 
 
     static QString applicationFileName(const QString& appname, const QString& filename);
 
@@ -59,7 +56,6 @@ public:
     };
     static void setBuiltinCommands( Command* );
 
-    static void invoke( const QString &exec);
     static void execute( const QString &exec, const QString &document=QString::null );
     static void setDocument( QWidget* receiver, const QString& document );
     static bool terminateBuiltin( const QString& );
@@ -86,6 +82,7 @@ public:
 #endif
 
 private:
+    static void invoke( const QString &exec);
     static Command* builtin;
     static QGuardedPtr<QWidget> *running;
 };

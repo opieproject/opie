@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -32,6 +32,7 @@ FindDialog::FindDialog( const QString &appName, QWidget *parent,
                         const char *name, bool modal )
     : QDialog( parent, name, modal )
 {
+    setCaption( tr("Find") );
     QVBoxLayout *vb;
     vb = new QVBoxLayout( this );
     fw = new FindWidget( appName, this, "Find Widget" );

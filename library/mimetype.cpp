@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -23,51 +23,109 @@
 #include "applnk.h"
 #include "resource.h"
 #include "qpeapplication.h"
+#include "config.h"
+
 #include <qfile.h>
 #include <qdict.h>
 #include <qregexp.h>
 #include <qstringlist.h>
 #include <qtextstream.h>
 #include <qmap.h>
- 
+
+
+static void cleanupMime()
+{
+    MimeType::clear();
+}
+
 class MimeTypeData {
 public:
-    MimeTypeData(const QString& i, const AppLnk& lnk, const QString& icon ) :
-	id(i),
-	desc(lnk.name()+" document"),
-	app(lnk)
+    MimeTypeData(const QString& i) :
+	id(i)
     {
-	if ( icon.isEmpty() ) {
-	    regIcon = lnk.pixmap();
-	    bigIcon = lnk.bigPixmap();
-	} else {
-	    QImage unscaledIcon = Resource::loadImage( icon );
-	    regIcon.convertFromImage( unscaledIcon.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-	    bigIcon.convertFromImage( unscaledIcon.smoothScale( AppLnk::bigIconSize(), AppLnk::bigIconSize() ) );
-	}
+	apps.setAutoDelete(TRUE);
     }
     QString id;
     QString extension;
+    QList<AppLnk> apps;
+
+    QString description()
+    {
+	if ( desc.isEmpty() )
+	    desc = QPEApplication::tr("%1 document").arg(apps.first()->name());
+	return desc;
+    }
+
+    QPixmap regIcon()
+    {
+	if ( regicon.isNull() )
+	    loadPixmaps();
+	return regicon;
+    }
+
+    QPixmap bigIcon()
+    {
+	if ( bigicon.isNull() )
+	    loadPixmaps();
+	return bigicon;
+    }
+
+private:
+    void loadPixmaps()
+    {
+	if ( apps.count() ) {
+	    QString icon;
+	    for (AppLnk* lnk = apps.first(); icon.isNull() && lnk; lnk=apps.next()) {
+		QStringList icons = lnk->mimeTypeIcons();
+		if ( icons.count() ) {
+		    QStringList types = lnk->mimeTypes();
+		    for (QStringList::ConstIterator t=types.begin(),i=icons.begin(); t!=types.end() && i!=icons.end(); ++i,++t) {
+			if ( *t == id ) {
+			    icon = *i;
+			    break;
+			}
+		    }
+		}
+	    }
+	    if ( icon.isNull() ) {
+		AppLnk* lnk = apps.first();
+		regicon = lnk->pixmap();
+		bigicon = lnk->bigPixmap();
+	    } else {
+		QImage unscaledIcon = Resource::loadImage( icon );
+		regicon.convertFromImage( unscaledIcon.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+		bigicon.convertFromImage( unscaledIcon.smoothScale( AppLnk::bigIconSize(), AppLnk::bigIconSize() ) );
+	    }
+	}
+    }
+
+    QPixmap regicon;
+    QPixmap bigicon;
     QString desc;
-    QPixmap regIcon;
-    QPixmap bigIcon;
-    AppLnk app;
 };
 
-class MimeType::Dict : public QDict<MimeTypeData> {
+class MimeType::Private : public QDict<MimeTypeData> {
 public:
-    Dict() {}
+    Private() {}
+    ~Private() {}
+
+    // ...
 };
 
-MimeType::Dict* MimeType::d=0;
+MimeType::Private* MimeType::d=0;
 static QMap<QString,QString> *typeFor = 0;
-static QMap<QString,QString> *extFor = 0;
+static QMap<QString,QStringList> *extFor = 0;
 
-MimeType::Dict& MimeType::dict()
+MimeType::Private& MimeType::data()
 {
     if ( !d ) {
-	d = new Dict;
+	d = new Private;
 	d->setAutoDelete(TRUE);
+	static bool setCleanup = FALSE;
+	if ( !setCleanup ) {
+	    qAddPostRoutine( cleanupMime );
+	    setCleanup = TRUE;
+	}
     }
     return *d;
 }
@@ -90,16 +148,21 @@ QString MimeType::id() const
 QString MimeType::description() const
 {
     MimeTypeData* d = data(i);
-    return d ? d->desc : QString::null;
+    return d ? d->description() : QString::null;
 }
 
 QPixmap MimeType::pixmap() const
 {
     MimeTypeData* d = data(i);
-    return d ? d->regIcon : QPixmap();
+    return d ? d->regIcon() : QPixmap();
 }
 
 QString MimeType::extension() const
+{
+    return extensions().first();
+}
+
+QStringList MimeType::extensions() const
 {
     loadExtensions();
     return *(*extFor).find(i);
@@ -108,23 +171,45 @@ QString MimeType::extension() const
 QPixmap MimeType::bigPixmap() const
 {
     MimeTypeData* d = data(i);
-    return d ? d->bigIcon : QPixmap();
+    return d ? d->bigIcon() : QPixmap();
 }
 
 const AppLnk* MimeType::application() const
 {
     MimeTypeData* d = data(i);
-    return d ? &d->app : 0;
+    return d ? d->apps.first() : 0;
+}
+
+static QString serviceBinding(const QString& service)
+{
+    // Copied from qtopiaservices
+    QString svrc = service;
+    for (int i=0; i<(int)svrc.length(); i++)
+        if ( svrc[i]=='/' ) svrc[i] = '-';
+    return "Service-"+svrc;
 }
 
 void MimeType::registerApp( const AppLnk& lnk )
 {
     QStringList list = lnk.mimeTypes();
-    QStringList icons = lnk.mimeTypeIcons();
-    QStringList::ConstIterator icon = icons.begin();
-    for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it, ++icon) {
-	MimeTypeData *item = new MimeTypeData( *it, lnk, *icon );
-        dict().replace( *it, item );
+    for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it) {
+	MimeTypeData* cur = data()[*it];
+	AppLnk* l = new AppLnk(lnk);
+	if ( !cur ) {
+	    cur = new MimeTypeData( *it );
+	    data().insert( *it, cur );
+	    cur->apps.append(l);
+	} else if ( cur->apps.count() ) {
+	    Config binding(serviceBinding("Open/"+*it));
+	    binding.setGroup("Service");
+	    QString def = binding.readEntry("default");
+	    if ( l->exec() == def )
+		cur->apps.prepend(l);
+	    else
+		cur->apps.append(l);
+	} else {
+	    cur->apps.append(l);
+	}
     }
 }
 
@@ -137,7 +222,7 @@ void MimeType::clear()
 void MimeType::loadExtensions()
 {
     if ( !typeFor ) {
-	extFor = new QMap<QString,QString>;
+	extFor = new QMap<QString,QStringList>;
 	typeFor = new QMap<QString,QString>;
 	loadExtensions("/etc/mime.types");
 	loadExtensions(QPEApplication::qpeDir()+"etc/mime.types");
@@ -155,13 +240,19 @@ void MimeType::loadExtensions(const QString& filename)
 	    QStringList::ConstIterator it = tokens.begin();
 	    if ( it != tokens.end() ) {
 		QString id = *it; ++it;
+		// new override old (though left overrides right)
+		QStringList exts = (*extFor)[id];
+		QStringList newexts;
 		if ( it != tokens.end() ) {
-		    (*extFor)[id] = *it;
+		    exts.remove(*it);
+		    if ( !newexts.contains(*it) )
+			newexts.append(*it);
 		    while (it != tokens.end()) {
 			(*typeFor)[*it] = id;
 			++it;
 		    }
 		}
+		(*extFor)[id] = newexts + exts;
 	    }
 	}
     }
@@ -188,11 +279,11 @@ void MimeType::init( const QString& ext_or_id )
 
 MimeTypeData* MimeType::data(const QString& id)
 {
-    MimeTypeData* d = dict()[id];
+    MimeTypeData* d = data()[id];
     if ( !d ) {
 	int s = id.find('/');
 	QString idw = id.left(s)+"/*";
-	d = dict()[idw];
+	d = data()[idw];
     }
     return d;
 }

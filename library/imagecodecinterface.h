@@ -17,30 +17,23 @@
 ** not clear to you.
 **
 **********************************************************************/
+#ifndef IMAGECODECINTERFACE_H
+#define IMAGECODECINTERFACE_H
 
-#define protected public
-#include <qdialog.h>
-#undef protected
+#include <qstringlist.h>
+#include <qpe/qcom.h>
 
-#include "qpedialog.h"
-#include "qpeapplication.h"
+#ifndef QT_NO_COMPONENT
+#ifndef IID_QtopiaImageCodec
+#define IID_QtopiaImageCodec QUuid(0x09bf6906, 0x1549, 0xbb4a, 0x18, 0xba, 0xb9, 0xe7, 0x0a, 0x6e, 0x4d, 0x1e)
+#endif
+#endif
 
-QPEDialogListener::QPEDialogListener(QDialog *di ) : QObject(di)
+struct ImageCodecInterface : public QUnknownInterface
 {
-    dialog = di;
-    connect(qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
-	    this, SLOT(appMessage(const QCString&, const QByteArray&)) );
-}
+public:
+    virtual QStringList keys() const = 0;
+    virtual bool installIOHandler( const QString &format ) = 0;
+};
 
-QPEDialogListener::~QPEDialogListener() {}
-
-void QPEDialogListener::appMessage( const QCString &msg, const QByteArray & )
-{
-    if (!dialog) 
-	return;
-    if (msg == "accept()") {
-	dialog->accept();
-    } else if (msg == "reject()") {
-	dialog->reject();
-    }
-}
+#endif

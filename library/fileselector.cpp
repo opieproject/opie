@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -30,11 +30,16 @@
 #include "applnk.h"
 #include "storage.h"
 #include "qpemenubar.h"
+#ifdef QWS
 #include "qcopchannel_qws.h"
+#endif
 #include "lnkproperties.h"
 #include "applnk.h"
 #include "qpeapplication.h"
 #include "categorymenu.h"
+#include "categoryselect.h"
+#include "mimetype.h"
+#include "categories.h"
 
 #include <stdlib.h>
 
@@ -45,7 +50,114 @@
 #include <qpushbutton.h>
 #include <qheader.h>
 #include <qtooltip.h>
+#include <qwhatsthis.h>
 
+class TypeCombo : public QComboBox
+{
+    Q_OBJECT
+public:
+    TypeCombo( QWidget *parent, const char *name=0 )
+	: QComboBox( parent, name )
+    {
+	connect( this, SIGNAL(activated(int)), this, SLOT(selectType(int)) );
+    }
+
+    void reread( DocLnkSet &files, const QString &filter );
+
+signals:
+    void selected( const QString & );
+
+protected slots:
+    void selectType( int idx ) {
+	emit selected( typelist[idx] );
+    }
+
+protected:
+    QStringList typelist;
+    QString prev;
+};
+
+void TypeCombo::reread( DocLnkSet &files, const QString &filter )
+{
+    typelist.clear();
+    QStringList filters = QStringList::split( ';', filter );
+    int pos = filter.find( '/' );
+    //### do for each filter
+    if ( filters.count() == 1 && pos >= 0 && filter[pos+1] != '*' ) {
+	typelist.append( filter );
+	clear();
+	QString minor = filter.mid( pos+1 );
+	minor[0] = minor[0].upper();
+	insertItem( tr("%1 files").arg(minor) );
+	setCurrentItem(0);
+	setEnabled( FALSE );
+	return;
+    }
+
+    QListIterator<DocLnk> dit( files.children() );
+    for ( ; dit.current(); ++dit ) {
+	if ( !typelist.contains( (*dit)->type() ) )
+	    typelist.append(  (*dit)->type() );
+    }
+
+    QStringList types;
+    QStringList::ConstIterator it;
+    for (it = typelist.begin(); it!=typelist.end(); ++it) {
+	QString t = *it;
+	if ( t.left(12) == "application/" ) {
+	    MimeType mt(t);
+	    const AppLnk* app = mt.application();
+	    if ( app )
+		t = app->name();
+	    else
+		t = t.mid(12);
+	} else {
+	    QString major, minor;
+	    int pos = t.find( '/' );
+	    if ( pos >= 0 ) {
+		major = t.left( pos );
+		minor = t.mid( pos+1 );
+	    }
+	    if ( minor.find( "x-" ) == 0 )
+		minor = minor.mid( 2 );
+	    minor[0] = minor[0].upper();
+	    major[0] = major[0].upper();
+	    if ( filters.count() > 1 )
+		t = tr("%1 %2", "minor mimetype / major mimetype").arg(minor).arg(major);
+	    else
+		t = minor;
+	}
+	types += tr("%1 files").arg(t);
+    }
+    for (it = filters.begin(); it!=filters.end(); ++it) {
+	typelist.append( *it );
+	int pos = (*it).find( '/' );
+	if ( pos >= 0 ) {
+	    QString maj = (*it).left( pos );
+	    maj[0] = maj[0].upper();
+	    types << tr("All %1 files").arg(maj);
+	}
+    }
+    if ( filters.count() > 1 ) {
+	typelist.append( filter );
+	types << tr("All files");
+    }
+    prev = currentText();
+    clear();
+    insertStringList(types);
+    for (int i=0; i<count(); i++) {
+	if ( text(i) == prev ) {
+	    setCurrentItem(i);
+	    break;
+	}
+    }
+    if ( prev.isNull() )
+	setCurrentItem(count()-1);
+    setEnabled( TRUE );
+}
+
+
+//===========================================================================
 
 FileSelectorItem::FileSelectorItem( QListView *parent, const DocLnk &f )
     : QListViewItem( parent ), fl( f )
@@ -58,78 +170,16 @@ FileSelectorItem::~FileSelectorItem()
 {
 }
 
-class FileSelectorViewPrivate
+FileSelectorView::FileSelectorView( QWidget *parent, const char *name )
+    : QListView( parent, name )
 {
-public:
-    CategoryMenu *cm;
-    bool m_noItems:1;
-};
-
-FileSelectorView::FileSelectorView( const QString &f, QWidget *parent, const char *name )
-    : QListView( parent, name ), filter( f ), count( 0 )
-{
-    d = new FileSelectorViewPrivate();
-    d->cm = 0;
-    d->m_noItems = false;
     setAllColumnsShowFocus( TRUE );
     addColumn( tr( "Name" ) );
     header()->hide();
-
-    fileManager = new FileManager;
-    reread();
-    QCopChannel *channel = new QCopChannel( "QPE/Card", this );
-    connect( channel, SIGNAL(received(const QCString &, const QByteArray &)),
-	     this, SLOT(cardMessage( const QCString &, const QByteArray &)) );
 }
 
 FileSelectorView::~FileSelectorView()
 {
-}
-
-void FileSelectorView::reread()
-{
-    QString oldFile;
-    FileSelectorItem *item;
-    if( !d->m_noItems ) { // there are items
-      item = (FileSelectorItem *)selectedItem();
-      if ( item )
-	  oldFile = item->file().file();
-    }
-    clear();
-    DocLnkSet files;
-    Global::findDocuments(&files, filter);
-    count = files.children().count();
-    if(count == 0 ){ // No Documents
-      d->m_noItems = true;
-      QListViewItem *it = new QListViewItem(this, tr("There are no files in this directory." ), "empty" );
-      it->setSelectable(FALSE );
-      return;
-    }
-    QListIterator<DocLnk> dit( files.children() );
-    for ( ; dit.current(); ++dit ) {
-	if (d->cm)
-	    if (!d->cm->isSelected((**dit).categories()))
-		continue;
-        item = new FileSelectorItem( this, **dit );
-	if ( item->file().file() == oldFile )
-	    setCurrentItem( item );
-    }
-    if ( !selectedItem() )
-	setCurrentItem( firstChild() );
-}
-
-void FileSelectorView::setCategoryFilter(CategoryMenu *cm)
-{
-    d->cm = cm;
-    connect(cm, SIGNAL(categoryChange()), this, SLOT(categoryChanged()) );
-}
-
-void FileSelectorView::categoryChanged() { reread(); }
-
-void FileSelectorView::cardMessage( const QCString &msg, const QByteArray &)
-{
-    if ( msg == "mtabChanged()" )
-	reread();
 }
 
 void FileSelectorView::keyPressEvent( QKeyEvent *e )
@@ -143,29 +193,92 @@ void FileSelectorView::keyPressEvent( QKeyEvent *e )
 	QListView::keyPressEvent(e);
 }
 
+class NewDocItem : public FileSelectorItem
+{
+public:
+    NewDocItem( QListView *parent, const DocLnk &f )
+	: FileSelectorItem( parent, f ) {
+	setText( 0, QObject::tr("New Document") );
+	QImage img( Resource::loadImage( "new" ) );
+	QPixmap pm;
+	pm = img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
+	setPixmap( 0, pm );
+    }
+    QString key ( int, bool ) const {
+	return QString("\n");
+    }
+
+    void paintCell( QPainter *p, const QColorGroup &cg, int column, int width, int alignment ) {
+	QFont oldFont = p->font();
+	QFont newFont = p->font();
+	newFont.setWeight( QFont::Bold );
+	p->setFont( newFont );
+	FileSelectorItem::paintCell( p, cg, column, width, alignment );
+	p->setFont( oldFont );
+    }
+
+    int width( const QFontMetrics &fm, const QListView *v, int c ) const {
+	return FileSelectorItem::width( fm, v, c )*4/3; // allow for bold font
+    }
+};
+
+//===========================================================================
+
 class FileSelectorPrivate
 {
 public:
-    CategoryMenu *cm;
-    QMenuBar *mb;
+    TypeCombo *typeCombo;
+    CategorySelect *catSelect;
+    QValueList<QRegExp> mimeFilters;
+    int catId;
+    bool showNew;
+    NewDocItem *newDocItem;
+    DocLnkSet files;
+    QHBox *toolbar;
 };
 
 /*!
   \class FileSelector fileselector.h
   \brief The FileSelector widget allows the user to select DocLnk objects.
+
+  This class presents a file selection dialog to the user. This widget
+  is usually the first widget seen in a \link docwidget.html
+  document-oriented application\endlink. The developer will most often
+  create this widget in combination with a <a
+  href="../qt/qwidgetstack.html"> QWidgetStack</a> and the appropriate
+  editor and/or viewer widget for their application. This widget
+  should be shown first and the user can the select which document
+  they wish to operate on. Please refer to the implementation of
+  texteditor for an example of how to tie these classes together.
+
+  Use setNewVisible() depending on whether the application can be used
+  to create new files or not. Use setCloseVisible() depending on
+  whether the user may leave the dialog without creating or selecting
+  a document or not. The number of files in the view is available from
+  fileCount(). To force the view to be updated call reread().
+
+  If the user presses the 'New Document' button the newSelected()
+  signal is emitted. If the user selects an existing file the
+  fileSelected() signal is emitted. The selected file's \link
+  doclnk.html DocLnk\endlink is available from the selected()
+  function. If the file selector is no longer necessary the closeMe()
+  signal is emitted.
+
+  \ingroup qtopiaemb
+  \sa FileManager
 */
 
 /*!
   Constructs a FileSelector with mime filter \a f.
   The standard Qt \a parent and \a name parameters are passed to the
-  parent.
+  parent widget.
 
-  If \a newVisible is TRUE, the widget has an button allowing the user
-  the create "new" documents - editor applications will have this while
-  viewer applications will not.
+  If \a newVisible is TRUE, the widget has a button to allow the user
+  the create "new" documents; this is useful for applications that can
+  create and edit documents but not suitable for applications that
+  only provide viewing.
 
-  If \a closeVisible is TRUE, the widget has an button allowinf the user
-  to select "no document".
+  \a closeVisible is deprecated
 
   \sa DocLnkSet::DocLnkSet()
 */
@@ -174,30 +287,21 @@ FileSelector::FileSelector( const QString &f, QWidget *parent, const char *name,
 {
     setMargin( 0 );
     setSpacing( 0 );
-    QHBox *top = new QHBox( this );
-    top->setBackgroundMode( PaletteButton );	// same colour as toolbars
-    top->setSpacing( 0 );
-
-    QWidget *spacer = new QWidget( top );
-    spacer->setBackgroundMode( PaletteButton );
 
     d = new FileSelectorPrivate();
-    d->mb = new QMenuBar(spacer);
-    d->cm = new CategoryMenu("Document View", this);
-    QPEMenuToolFocusManager::manager()->addWidget( d->mb );
-    d->mb->insertItem(tr("View"), d->cm);
+    d->newDocItem = 0;
+    d->showNew = newVisible;
+    d->catId = -2; // All files
 
+    d->toolbar = new QHBox( this );
+    d->toolbar->setBackgroundMode( PaletteButton );   // same colour as toolbars
+    d->toolbar->setSpacing( 0 );
+    d->toolbar->hide();
 
-    QToolButton *tb = new QToolButton( top );
-    tb->setPixmap( Resource::loadPixmap( "new" ) );
-    connect( tb, SIGNAL( clicked() ), this, SLOT( createNew() ) );
-    buttonNew = tb;
-    tb->setFixedSize( 18, 20 ); // tb->sizeHint() );
-    tb->setAutoRaise( TRUE );
-    QToolTip::add( tb, tr( "Create a new Document" ) );
-    QPEMenuToolFocusManager::manager()->addWidget( tb );
+    QWidget *spacer = new QWidget( d->toolbar );
+    spacer->setBackgroundMode( PaletteButton );
 
-    tb = new QToolButton( top );
+    QToolButton *tb = new QToolButton( d->toolbar );
     tb->setPixmap( Resource::loadPixmap( "close" ) );
     connect( tb, SIGNAL( clicked() ), this, SIGNAL( closeMe() ) );
     buttonClose = tb;
@@ -206,8 +310,7 @@ FileSelector::FileSelector( const QString &f, QWidget *parent, const char *name,
     QToolTip::add( tb, tr( "Close the File Selector" ) );
     QPEMenuToolFocusManager::manager()->addWidget( tb );
 
-    view = new FileSelectorView( filter, this, "fileview" );
-    view->setCategoryFilter(d->cm);
+    view = new FileSelectorView( this, "fileview" );
     QPEApplication::setStylusOperation( view->viewport(), QPEApplication::RightOnHold );
     connect( view, SIGNAL( mouseButtonClicked( int, QListViewItem *, const QPoint &, int ) ),
 	     this, SLOT( fileClicked( int, QListViewItem *, const QPoint &, int ) ) );
@@ -216,8 +319,30 @@ FileSelector::FileSelector( const QString &f, QWidget *parent, const char *name,
     connect( view, SIGNAL( returnPressed( QListViewItem * ) ),
 	     this, SLOT( fileClicked( QListViewItem * ) ) );
 
-    setNewVisible( newVisible );
+    QHBox *hb = new QHBox( this );
+    d->typeCombo = new TypeCombo( hb );
+    connect( d->typeCombo, SIGNAL(selected(const QString&)),
+	    this, SLOT(typeSelected(const QString&)) );
+    QWhatsThis::add( d->typeCombo, tr("Show documents of this type") );
+
+    Categories c;
+    c.load(categoryFileName());
+    QArray<int> vl( 0 );
+    d->catSelect = new CategorySelect( hb );
+    d->catSelect->setRemoveCategoryEdit( TRUE );
+    d->catSelect->setCategories( vl, "Document View", tr("Document View") );
+    d->catSelect->setAllCategories( TRUE );
+    connect( d->catSelect, SIGNAL(signalSelected(int)), this, SLOT(catSelected(int)) );
+    QWhatsThis::add( d->catSelect, tr("Show documents in this category") );
+
     setCloseVisible( closeVisible );
+
+    QCopChannel *channel = new QCopChannel( "QPE/Card", this );
+    connect( channel, SIGNAL(received(const QCString &, const QByteArray &)),
+	    this, SLOT(cardMessage( const QCString &, const QByteArray &)) );
+
+    reread();
+    updateWhatsThis();
 }
 
 /*!
@@ -225,21 +350,22 @@ FileSelector::FileSelector( const QString &f, QWidget *parent, const char *name,
 */
 FileSelector::~FileSelector()
 {
-
+    delete d;
 }
 
 /*!
-  Returns the number of files in the view. If this is zero, and editor
-  application might avoid using the selector and immediately start with
+  Returns the number of files in the view. If this is zero, an editor
+  application might bypass the selector and immediately start with
   a "new" document.
 */
 int FileSelector::fileCount()
 {
-    return view->fileCount();
+    return d->files.children().count();;
 }
 
 /*!
-  Causes the file selector to act as if the "new" button was chosen.
+  Calling this function is the programmatic equivalent of the user
+  pressing the "new" button.
 
   \sa newSelected(), closeMe()
 */
@@ -254,9 +380,6 @@ void FileSelector::fileClicked( int button, QListViewItem *i, const QPoint &, in
 {
     if ( !i )
 	return;
-    if(i->text(1) == QString::fromLatin1("empty" ) )
-      return; 
-
     if ( button == Qt::LeftButton ) {
 	fileClicked( i );
     }
@@ -264,17 +387,13 @@ void FileSelector::fileClicked( int button, QListViewItem *i, const QPoint &, in
 
 void FileSelector::filePressed( int button, QListViewItem *i, const QPoint &, int )
 {
-    if ( !i )
+    if ( !i || i == d->newDocItem )
 	return;
-    if(i->text(1) == QString::fromLatin1("empty" ) )
-      return; 
-
     if ( button == Qt::RightButton ) {
 	DocLnk l = ((FileSelectorItem *)i)->file();
 	LnkProperties prop( &l );
 	prop.showMaximized();
 	prop.exec();
-	d->cm->reload();
 	reread();
     }
 }
@@ -283,18 +402,44 @@ void FileSelector::fileClicked( QListViewItem *i )
 {
     if ( !i )
 	return;
-    emit fileSelected( ( (FileSelectorItem*)i )->file() );
-    emit closeMe();
+    if ( i == d->newDocItem ) {
+	createNew();
+    } else {
+	emit fileSelected( ( (FileSelectorItem*)i )->file() );
+	emit closeMe();
+    }
 }
 
+void FileSelector::typeSelected( const QString &type )
+{
+    d->mimeFilters.clear();
+    QStringList subFilter = QStringList::split(";", type);
+    for( QStringList::Iterator it = subFilter.begin(); it != subFilter.end(); ++it )
+	d->mimeFilters.append( QRegExp(*it, FALSE, TRUE) );
+    updateView();
+}
+
+void FileSelector::catSelected( int c )
+{
+    d->catId = c;
+    updateView();
+}
+
+void FileSelector::cardMessage( const QCString &msg, const QByteArray &)
+{
+    if ( msg == "mtabChanged()" )
+	reread();
+}
+
+
 /*!
-  Returns the selected DocLnk. The caller is responsible for deleting
-  the returned value.
+  Returns the selected \link doclnk.html DocLnk\endlink. The caller is
+  responsible for deleting the returned value.
 */
 const DocLnk *FileSelector::selected()
 {
     FileSelectorItem *item = (FileSelectorItem *)view->selectedItem();
-    if ( item )
+    if ( item && item != d->newDocItem )
 	return new DocLnk( item->file() );
     return NULL;
 }
@@ -302,16 +447,16 @@ const DocLnk *FileSelector::selected()
 /*!
   \fn void FileSelector::fileSelected( const DocLnk &f )
 
-  This signal is emitted when the user selects a file.
-  \a f is the file.
+  This signal is emitted when the user selects a document.
+  \a f is the document.
 */
 
 /*!
   \fn void FileSelector::newSelected( const DocLnk &f )
 
-  This signal is emitted when the user selects "new" file.
-  \a f is a DocLnk for the file. You will need to set the type
-  of the value after copying it.
+  This signal is emitted when the user selects a "new" document.
+  \a f is a DocLnk for the document. You will need to set the type
+  of the document after copying it.
 */
 
 /*!
@@ -322,32 +467,97 @@ const DocLnk *FileSelector::selected()
 
 
 /*!
-  Sets whether a "new document" button is visible, according to \a b.
+  If \a b is TRUE a "new document" entry is visible; if \a b is FALSE
+  this entry is not visible and the user is unable to create new
+  documents from the dialog.
 */
 void FileSelector::setNewVisible( bool b )
 {
-    if ( b )
-	buttonNew->show();
-    else
-	buttonNew->hide();
+    if ( d->showNew != b ) {
+	d->showNew = b;
+	updateView();
+	updateWhatsThis();
+    }
 }
 
 /*!
-  Sets whether a "no document" button is visible, according to \a b.
+  If \a b is TRUE a "close" or "no document" button is visible; if \a
+  b is FALSE this button is not visible and the user is unable to
+  leave the dialog without creating or selecting a document.
+
+  This function is deprecated.
 */
 void FileSelector::setCloseVisible( bool b )
 {
-    if ( b )
-	buttonClose->show();
+    if (  b )
+	d->toolbar->show();
     else
-	buttonClose->hide();
+	d->toolbar->hide();
 }
 
 /*!
-  Rereads the list of files.
+  Rereads the list of documents.
 */
 void FileSelector::reread()
 {
-    view->reread();
+    d->files.clear();
+    Global::findDocuments(&d->files, filter);
+    d->typeCombo->reread( d->files, filter );
+    updateView();
 }
+
+void FileSelector::updateView()
+{
+    FileSelectorItem *item = (FileSelectorItem *)view->selectedItem();
+    if ( item == d->newDocItem )
+	item = 0;
+    QString oldFile;
+    if ( item )
+	oldFile = item->file().file();
+    view->clear();
+    QListIterator<DocLnk> dit( d->files.children() );
+    for ( ; dit.current(); ++dit ) {
+	bool mimeMatch = FALSE;
+	if ( d->mimeFilters.count() ) {
+	    QValueList<QRegExp>::Iterator it;
+	    for ( it = d->mimeFilters.begin(); it != d->mimeFilters.end(); ++it ) {
+		if ( (*it).match((*dit)->type()) >= 0 ) {
+		    mimeMatch = TRUE;
+		    break;
+		}
+	    }
+	} else {
+	    mimeMatch = TRUE;
+	}
+	if ( mimeMatch &&
+		(d->catId == -2 || (*dit)->categories().contains(d->catId) ||
+		 (d->catId == -1 && (*dit)->categories().isEmpty())) ) {
+	    item = new FileSelectorItem( view, **dit );
+	    if ( item->file().file() == oldFile )
+		view->setCurrentItem( item );
+	}
+    }
+
+    if ( d->showNew )
+	d->newDocItem = new NewDocItem( view, DocLnk() );
+    else
+	d->newDocItem = 0;
+
+    if ( !view->selectedItem() || view->childCount() == 1 ) {
+	view->setCurrentItem( view->firstChild() );
+	view->setSelected( view->firstChild(), TRUE );
+    }
+}
+
+void FileSelector::updateWhatsThis()
+{
+    QWhatsThis::remove( this );
+    QString text = tr("Click to select a document from the list");
+    if ( d->showNew )
+	text += tr(", or select <b>New Document</b> to create a new document.");
+    text += tr("<br><br>Click and hold for document properties.");
+    QWhatsThis::add( this, text );
+}
+
+#include "fileselector.moc"
 

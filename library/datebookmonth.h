@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,7 +20,7 @@
 #ifndef DATEBOOKMONTH
 #define DATEBOOKMONTH
 
-#include <qpe/event.h>
+#include <qtopia/private/event.h>
 
 #include <qvbox.h>
 #include <qhbox.h>
@@ -186,6 +186,8 @@ class DateButton : public QPushButton
 public:
     DateButton( bool longDate, QWidget *parent, const char * name = 0 );
     QDate date() const { return currDate; }
+
+    bool customWhatsThis() const;
 
 signals:
     void dateSelected( int year, int month, int day );

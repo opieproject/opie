@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,9 +20,9 @@
 
 #include "event.h"
 #include "qfiledirect_p.h"
-#include <qpe/timeconversion.h>
-#include <qpe/stringutil.h>
-#include <qpe/recordfields.h>
+#include <qtopia/timeconversion.h>
+#include <qtopia/stringutil.h>
+#include <qtopia/private/recordfields.h>
 #include <qbuffer.h>
 #include <time.h>
 #include "vobject_p.h"
@@ -71,6 +71,255 @@ static void write( QString& buf, const Event::RepeatPattern &r )
 
 Qtopia::UidGen Event::sUidGen( Qtopia::UidGen::Qtopia );
 
+/*!
+  \class Event event.h
+  \brief The Event class holds the data of a calendar event.
+
+  This data includes descriptive data of the event and schedualing information.
+
+  \ingroup qtopiaemb
+  \ingroup qtopiadesktop
+*/
+
+/*!
+  \class Event::RepeatPattern
+  \class The Event::RepeatPattern class is internal.
+  \internal
+*/
+
+/*!
+  \enum Event::Days
+  \internal
+*/
+
+/*!
+  \enum Event::Type
+  \internal
+*/
+
+/*!
+  \enum Event::SoundTypeChoice
+
+  This enum type defines what kind of sound is made when an alarm occurs
+  for an event.  The currently defined types are:
+
+  <ul>
+  <li>\c Silent - No sound is produced.
+  <li>\c Loud - A loud sound is produced.
+  </ul>
+*/
+
+/*!
+  \fn bool Event::operator<( const Event & ) const
+  \internal
+*/
+
+/*!
+  \fn bool Event::operator<=( const Event & ) const
+  \internal
+*/
+
+/*!
+  \fn bool Event::operator!=( const Event & ) const
+  \internal
+*/
+
+/*!
+  \fn bool Event::operator>( const Event & ) const
+  \internal
+*/
+
+/*!
+  \fn bool Event::operator>=( const Event & ) const
+  \internal
+*/
+
+/*!
+  \enum Event::RepeatType
+
+  This enum defines how a event will repeat, if at all.
+
+  <ul>
+  <li>\c NoRepeat - Event does not repeat.
+  <li>\c Daily - Event occurs every n days.
+  <li>\c Weekly - Event occurs every n weeks.
+  <li>\c MonthlyDay - Event occurs every n months.  Event will always occur in
+  the same week and same day of week as the first event.
+  <li>\c MonthlyDate - Event occurs every n months.  Event will always occur
+  on the same day of the month as the first event.
+  <li>\c Yearly - Event occurs every n years.
+  </ul>
+*/
+
+/*!
+  \fn bool Event::isAllDay() const
+
+  Returns TRUE if the event is an all day event.  Otherwise returns FALSE.
+*/
+
+/*!
+  \fn void Event::setAllDay(bool allday)
+
+  If \a allday is TRUE, will set the event to be an all day event.
+  Otherwise sets the event to not be an all day event.
+
+  \warning This function may affect the start and end times of the event.
+*/
+
+/*!
+  \fn QDateTime Event::start() const
+
+  Returns the start date and time of the first occurance of the event.
+*/
+
+/*!
+  \fn QDateTime Event::end() const
+
+  Returns the end date and time of the first occurance of the event.
+*/
+
+/*!
+  \fn time_t Event::startTime() const
+  \internal
+*/
+
+/*!
+  \fn time_t Event::endTime() const
+  \internal
+*/
+
+/*!
+  \fn void Event::setAlarm(int delay, SoundTypeChoice s)
+
+  Sets the alarm delay of the event to \a delay and the sound type of the
+  alarm to \a s.
+*/
+
+/*!
+  \fn void Event::clearAlarm()
+
+  Clears the alarm for the event.
+*/
+
+/*!
+  \fn int Event::alarmDelay() const
+
+  Returns the delay in minutes between the alarm for an event and the
+  start of the event.
+*/
+
+/*!
+  \fn Event::RepeatType Event::repeatType() const
+
+  Returns the repeat pattern type for the event.
+
+  \sa frequency()
+*/
+
+/*!
+  \fn int Event::weekOffset() const
+
+  Returns the number of weeks from the start of the month that this event
+  occurs.
+*/
+
+/*!
+  \fn QDate Event::repeatTill() const
+
+  Returns the date that the event will continue to repeat until.  If the event
+  repeats forever the value returned is undefined.
+
+  \sa repeatForever()
+*/
+
+/*!
+  \fn bool Event::repeatForever() const
+
+  Returns FALSE if there is a date set for the event to continue until.
+  Otherwise returns TRUE.
+*/
+
+/*!
+  \fn bool Event::doRepeat() const
+  \internal
+*/
+
+/*!
+  \fn bool Event::repeatOnWeekDay(int day) const
+
+  Returns TRUE if the event has a RepeatType of Weekly and is set to occur on
+  \a day each week.  Otherwise returns FALSE.
+
+  \sa QDate::dayName()
+*/
+
+/*!
+  \fn void Event::setRepeatOnWeekDay(int day, bool enable)
+
+  If \a enable is TRUE then sets the event to occur on \a day each week.
+  Otherwise sets the event not to occur on \a day.
+
+  \warning this function is only relavent for a event with RepeatType of
+  Weekly.
+
+  \sa QDate::dayName()
+*/
+
+/*!
+  \fn int Event::frequency() const
+
+  Returns how often the event repeats.
+
+  \sa repeatType()
+*/
+
+/*!
+  \fn void Event::setRepeatType(RepeatType t)
+
+  Sets the repeat pattern type of the event to \a t.
+
+  \sa setFrequency()
+*/
+
+/*!
+  \fn void Event::setFrequency(int n)
+
+  Sets how often the event occurs with in its repeat pattern.
+
+  \sa setRepeatType()
+*/
+
+/*!
+  \fn void Event::setRepeatTill(const QDate &d)
+
+  Sets the event to repeat until \a d.
+*/
+
+/*!
+  \fn void Event::setRepeatForever(bool enable)
+
+  If \a enable is TRUE, sets the event to repeat forever.  Otherwise
+  sets the event to stop repeating at some date.
+
+  \warning This function may affect the specific date the event will repeat
+  till.
+*/
+
+/*!
+  \fn bool Event::match(const QRegExp &r) const
+
+  Returns TRUE if the event matches the regular expression \a r.
+  Otherwise returns FALSE.
+*/
+
+/*!
+  \fn char Event::day(int)
+  \internal
+*/
+
+/*!
+  Creates a new, empty event.
+*/
 Event::Event() : Record()
 {
     startUTC = endUTC = time( 0 );
@@ -83,6 +332,9 @@ Event::Event() : Record()
     pattern.frequency = -1;
 }
 
+/*!
+  \internal
+*/
 Event::Event( const QMap<int, QString> &map )
 {
     setDescription( map[DatebookDescription] );
@@ -106,10 +358,16 @@ Event::Event( const QMap<int, QString> &map )
     setUid( map[ DatebookUid ].toInt() );
 }
 
+/*!
+  Destroys an event.
+*/
 Event::~Event()
 {
 }
 
+/*!
+  \internal
+*/
 int Event::week( const QDate& date )
 {
     // Calculates the week this date is in within that
@@ -124,6 +382,9 @@ int Event::week( const QDate& date )
     return week;
 }
 
+/*!
+  \internal
+*/
 int Event::occurrence( const QDate& date )
 {
     // calculates the number of occurrances of this day of the
@@ -131,6 +392,9 @@ int Event::occurrence( const QDate& date )
     return ( date.day() - 1 ) / 7 + 1;
 }
 
+/*!
+  \internal
+*/
 int Event::dayOfWeek( char day )
 {
     int dayOfWeek = 1;
@@ -142,20 +406,33 @@ int Event::dayOfWeek( char day )
     return dayOfWeek;
 }
 
+/*!
+  \internal
+*/
 int Event::monthDiff( const QDate& first, const QDate& second )
 {
     return ( second.year() - first.year() ) * 12 +
 	second.month() - first.month();
 }
 
+/*!
+  \internal
+*/
 QMap<int, QString> Event::toMap() const
 {
     QMap<int, QString> m;
-    m.insert( DatebookDescription, description() );
-    m.insert ( Location, location() );
-    m.insert ( DatebookCategory, idsToString( categories() ) );
-    m.insert ( TimeZone, timeZone() );
-    m.insert ( Note, notes() );
+
+    if ( !description().isEmpty() )
+	m.insert( DatebookDescription, description() );
+    if ( !location().isEmpty() )	
+	m.insert ( Location, location() );
+    if ( categories().count() )
+	m.insert ( DatebookCategory, idsToString( categories() ) );
+    if ( !timeZone().isEmpty() )
+	m.insert ( TimeZone, timeZone() );
+    if ( !notes().isEmpty() )
+	m.insert ( Note, notes() );
+
     m.insert ( StartDateTime, QString::number( TimeConversion::toUTC( start() ) ) );
     m.insert ( EndDateTime, QString::number( TimeConversion::toUTC( end() ) ) );
     m.insert ( DatebookType, QString::number( (int)type() ) );
@@ -174,16 +451,25 @@ QMap<int, QString> Event::toMap() const
     return m;
 }
 
+/*!
+  \internal
+*/
 void Event::setRepeat( const RepeatPattern &p )
 {
     setRepeat( p.type != NoRepeat, p );
 }
 
+/*!
+  Sets the description of the event to \a s.
+*/
 void Event::setDescription( const QString &s )
 {
     descript = s;
 }
 
+/*!
+  Sets the location of the event to \a s.
+*/
 void Event::setLocation( const QString &s )
 {
     locat = s;
@@ -194,36 +480,59 @@ void Event::setLocation( const QString &s )
 //     categ = s;
 // }
 
+/*!
+  \internal
+*/
 void Event::setType( Type t )
 {
     typ = t;
 }
 
+/*!
+  Sets the start date and time of the first or only occurance of this event
+  to the date and time \a d. \a d should be in local time.
+*/
 void Event::setStart( const QDateTime &d )
 {
     startUTC = TimeConversion::toUTC( d );
 }
 
+/*!
+  \internal
+*/
 void Event::setStart( time_t time )
 {
     startUTC = time;
 }
 
+/*!
+  Sets the end date and time of the first or only occurance of this event
+  to the date and time \a d.  \a d should be in local time.
+*/
 void Event::setEnd( const QDateTime &d )
 {
     endUTC = TimeConversion::toUTC( d );
 }
 
+/*!
+  \internal
+*/
 void Event::setEnd( time_t time )
 {
     endUTC = time;
 }
 
+/*!
+  \internal
+*/
 void Event::setTimeZone( const QString &z )
 {
     tz = z;
 }
 
+/*!
+  \internal
+*/
 void Event::setAlarm( bool b, int minutes, SoundTypeChoice s )
 {
     hAlarm = b;
@@ -231,22 +540,34 @@ void Event::setAlarm( bool b, int minutes, SoundTypeChoice s )
     aSound = s;
 }
 
+/*!
+  \internal
+*/
 void Event::setRepeat( bool b, const RepeatPattern &p )
 {
     hRepeat = b;
     pattern = p;
 }
 
+/*!
+  Sets the notes for the event to \a n.
+*/
 void Event::setNotes( const QString &n )
 {
     note = n;
 }
 
+/*!
+  Returns the description of the event.
+*/
 const QString &Event::description() const
 {
     return descript;
 }
 
+/*!
+  Returns the location of the event.
+*/
 const QString &Event::location() const
 {
     return locat;
@@ -257,11 +578,17 @@ const QString &Event::location() const
 //     return categ;
 // }
 
+/*!
+  \internal
+*/
 Event::Type Event::type() const
 {
     return typ;
 }
 
+/*!
+  \internal
+*/
 QDateTime Event::start( bool actual ) const
 {
     QDateTime dt = (startUTC > 0) ? TimeConversion::fromUTC( startUTC ) : QDateTime::currentDateTime();
@@ -274,6 +601,9 @@ QDateTime Event::start( bool actual ) const
     return dt;
 }
 
+/*!
+  \internal
+*/
 QDateTime Event::end( bool actual ) const
 {
     QDateTime dt = (endUTC > 0) ? TimeConversion::fromUTC( endUTC ) : QDateTime::currentDateTime();
@@ -286,48 +616,77 @@ QDateTime Event::end( bool actual ) const
     return dt;
 }
 
+/*!
+  \internal
+*/
 const QString &Event::timeZone() const
 {
     return tz;
 }
 
+/*!
+  \internal
+*/
 bool Event::hasAlarm() const
 {
     return hAlarm;
 }
 
+/*!
+  \internal
+*/
 int Event::alarmTime() const
 {
     return aMinutes;
 }
 
+/*!
+  Returns the sound type for the alarm of this event.
+*/
 Event::SoundTypeChoice Event::alarmSound() const
 {
     return aSound;
 }
 
+/*!
+  \internal
+*/
 bool Event::hasRepeat() const
 {
     return doRepeat();
 }
 
+/*!
+  \internal
+*/
 const Event::RepeatPattern &Event::repeatPattern() const
 {
     return pattern;
 }
 
+/*!
+  \internal
+*/
 Event::RepeatPattern &Event::repeatPattern()
 {
     return pattern;
 }
 
+/*!
+  Returns the notes for the event.
+*/
 const QString &Event::notes() const
 {
     return note;
 }
 
+/*!
+  \internal
+*/
 bool Event::operator==( const Event &e ) const
 {
+    if ( uid() && e.uid() == uid() )
+	return TRUE;
     return ( e.descript == descript &&
 	     e.locat == locat &&
 	     e.categ == categ &&
@@ -343,6 +702,10 @@ bool Event::operator==( const Event &e ) const
 	     e.note == note );
 }
 
+/*!
+  \internal
+  Appends the contact information to \a buf.
+*/
 void Event::save( QString& buf )
 {
     buf += " description=\"" + Qtopia::escapeString(descript) + "\"";
@@ -378,6 +741,9 @@ void Event::save( QString& buf )
     buf += customToXml();
 }
 
+/*!
+  \internal
+*/
 bool Event::RepeatPattern::operator==( const Event::RepeatPattern &right ) const
 {
     // *sigh*
@@ -390,6 +756,28 @@ bool Event::RepeatPattern::operator==( const Event::RepeatPattern &right ) const
 	     && createTime == right.createTime );
 }
 
+/*!
+  \class EffectiveEvent
+  \brief The EffectiveEvent class the data for a single occurance of an event.
+
+  This class describes the event for a single occurance of it.  For example if
+  an Event occurs every week, the effective event might represent the third
+  occurance of this Event.
+
+  \ingroup qtopiaemb
+  \ingroup qtopiadesktop
+  \warning This class will be phased out in Qtopia 3.x
+*/
+
+/*!
+  \enum EffectiveEvent::Position
+  \internal
+*/
+
+/*!
+  \fn EffectiveEvent &EffectiveEvent::operator=(const EffectiveEvent &)
+  \internal
+*/
 
 class EffectiveEventPrivate
 {
@@ -400,7 +788,9 @@ public:
     QDate endDate;
 };
 
-
+/*!
+  \internal
+*/
 EffectiveEvent::EffectiveEvent()
 {
     mDate = QDate::currentDate();
@@ -408,6 +798,9 @@ EffectiveEvent::EffectiveEvent()
     d = 0;
 }
 
+/*!
+  \internal
+*/
 EffectiveEvent::EffectiveEvent( const Event &e, const QDate &date, Position pos )
 {
     mEvent = e;
@@ -424,11 +817,17 @@ EffectiveEvent::EffectiveEvent( const Event &e, const QDate &date, Position pos 
     d = 0;
 }
 
+/*!
+  \internal
+*/
 EffectiveEvent::~EffectiveEvent()
 {
     delete d;
 }
 
+/*!
+  \internal
+*/
 EffectiveEvent::EffectiveEvent( const EffectiveEvent &e )
 {
     d = 0;
@@ -461,67 +860,106 @@ EffectiveEvent& EffectiveEvent::operator=( const EffectiveEvent & e )
 //     return mEvent.category();
 // }
 
+/*!
+  Returns the description of the event for this effective event.
+*/
 const QString &EffectiveEvent::description( ) const
 {
     return mEvent.description();
 }
 
+/*!
+\internal
+*/
 const QString &EffectiveEvent::location( ) const
 {
     return mEvent.location();
 }
 
+/*!
+\internal
+*/
 const QString &EffectiveEvent::notes() const
 {
     return mEvent.notes();
 }
 
+/*!
+  Returns the event associated with this effective event.
+*/
 const Event &EffectiveEvent::event() const
 {
     return mEvent;
 }
 
+/*!
+  \internal
+*/
 const QTime &EffectiveEvent::end() const
 {
     return mEnd;
 }
 
+/*!
+  \internal
+*/
 const QTime &EffectiveEvent::start() const
 {
     return mStart;
 }
 
+/*!
+  Returns the date the effective event occurs on.
+*/
 const QDate &EffectiveEvent::date() const
 {
     return mDate;
 }
 
+/*!
+  \internal
+*/
 int EffectiveEvent::length() const
 {
     return (mEnd.hour() * 60 - mStart.hour() * 60)
 	   + QABS(mStart.minute() - mEnd.minute() );
 }
 
+/*!
+  \internal
+*/
 void EffectiveEvent::setDate( const QDate &dt )
 {
     mDate = dt;
 }
 
+/*!
+  \internal
+*/
 void EffectiveEvent::setStart( const QTime &start )
 {
     mStart = start;
 }
 
+/*!
+  \internal
+*/
 void EffectiveEvent::setEnd( const QTime &end )
 {
     mEnd = end;
 }
 
+/*!
+  \internal
+*/
 void EffectiveEvent::setEvent( Event e )
 {
     mEvent = e;
 }
 
+/*!
+  \internal
+*/
 bool EffectiveEvent::operator<( const EffectiveEvent &e ) const
 {
     if ( mDate < e.date() )
@@ -532,11 +970,17 @@ bool EffectiveEvent::operator<( const EffectiveEvent &e ) const
 	return FALSE;
 }
 
+/*!
+  \internal
+*/
 bool EffectiveEvent::operator<=( const EffectiveEvent &e ) const
 {
     return (mDate <= e.date() );
 }
 
+/*!
+  \internal
+*/
 bool EffectiveEvent::operator==( const EffectiveEvent &e ) const
 {
     return ( mDate == e.date()
@@ -545,21 +989,33 @@ bool EffectiveEvent::operator==( const EffectiveEvent &e ) const
 	     && mEvent == e.event() );
 }
 
+/*!
+  \internal
+*/
 bool EffectiveEvent::operator!=( const EffectiveEvent &e ) const
 {
     return !(*this == e);
 }
 
+/*!
+  \internal
+*/
 bool EffectiveEvent::operator>( const EffectiveEvent &e ) const
 {
     return !(*this <= e );
 }
 
+/*!
+  \internal
+*/
 bool EffectiveEvent::operator>=(const EffectiveEvent &e) const
 {
     return !(*this < e);
 }
 
+/*!
+  \internal
+*/
 void EffectiveEvent::setEffectiveDates( const QDate &from, const QDate &to )
 {
     if ( !from.isValid() ) {
@@ -573,6 +1029,9 @@ void EffectiveEvent::setEffectiveDates( const QDate &from, const QDate &to )
     d->endDate = to;
 }
 
+/*!
+  \internal
+*/
 QDate EffectiveEvent::startDate() const
 {
     if ( d )
@@ -583,6 +1042,9 @@ QDate EffectiveEvent::startDate() const
 	return mEvent.start().date();
 }
 
+/*!
+  \internal
+*/
 QDate EffectiveEvent::endDate() const
 {
     if ( d )
@@ -593,6 +1055,9 @@ QDate EffectiveEvent::endDate() const
 	return mEvent.end().date();
 }
 
+/*!
+  \internal
+*/
 int EffectiveEvent::size() const
 {
     return ( mEnd.hour() - mStart.hour() ) * 3600
@@ -740,14 +1205,22 @@ static Event parseVObject( VObject *obj )
 }
 
 
-
+/*!
+    Writes the list of \a events as a set of VCards to the file \a filename.
+*/
 void Event::writeVCalendar( const QString &filename, const QValueList<Event> &events)
 {
+
 	QFileDirect f( filename.utf8().data() );
+
 	if ( !f.open( IO_WriteOnly ) ) {
+
 		qWarning("Unable to open vcard write");
+
 		return;
+
 	}
+
 
     QValueList<Event>::ConstIterator it;
     for( it = events.begin(); it != events.end(); ++it ) {
@@ -756,16 +1229,26 @@ void Event::writeVCalendar( const QString &filename, const QValueList<Event> &ev
 	cleanVObject( obj );
     }
 
+
     cleanStrTbl();
 }
 
+/*!
+    Writes \a event as a VCard to the file \a filename.
+*/
 void Event::writeVCalendar( const QString &filename, const Event &event)
 {
+
 	QFileDirect f( filename.utf8().data() );
+
 	if ( !f.open( IO_WriteOnly ) ) {
+
 		qWarning("Unable to open vcard write");
+
 		return;
+
 	}
+
 
     VObject *obj = createVObject( event );
 	writeVObject( f.directHandle() , obj );
@@ -774,7 +1257,9 @@ void Event::writeVCalendar( const QString &filename, const Event &event)
 	cleanStrTbl();
 }
 
-
+/*!
+    Returns the set of events read as VCards from the file \a filename.
+*/
 QValueList<Event> Event::readVCalendar( const QString &filename )
 {
     VObject *obj = Parse_MIME_FromFileName( (char *)filename.utf8().data() );

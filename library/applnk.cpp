@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -19,13 +19,17 @@
 **********************************************************************/
 
 #define QTOPIA_INTERNAL_MIMEEXT
+#define QTOPIA_INTERNAL_PRELOADACCESS
+#define QTOPIA_INTERNAL_APPLNKASSIGN
 
 #include "applnk.h"
 
 #include <qpe/qpeapplication.h>
 #include <qpe/categories.h>
 #include <qpe/categoryselect.h>
+#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
+#endif
 #include <qpe/global.h>
 #include <qpe/mimetype.h>
 #include <qpe/config.h>
@@ -50,7 +54,7 @@ static int bigSize = 32;
 static QString safeFileName(const QString& n)
 {
     QString safename=n;
-    safename.replace(QRegExp("[^0-9A-Za-z.]"),"_"); // Njaard says this is broken
+    safename.replace(QRegExp("[^0-9A-Za-z.]"),"_");
     safename.replace(QRegExp("^[^A-Za-z]*"),"");
     if ( safename.isEmpty() )
 	safename = "_";
@@ -71,20 +75,153 @@ static bool prepareDirectories(const QString& lf)
 class AppLnkPrivate
 {
 public:
-    QArray<int> mCat;
+    /* the size of the Pixmap */
+    enum Size {Normal = 0, Big };
+    AppLnkPrivate() {
+        /* we want one normal and one big item */
+        mPixmaps = QArray<QPixmap>(2);
+    }
+
+    QStringList mCatList; // always correct
+    QArray<int> mCat; // cached value; correct if not empty
+    QArray<QPixmap> mPixmaps;
+
+    void updateCatListFromArray()
+    {
+	Categories cat( 0 );
+	cat.load( categoryFileName() );
+	mCatList = cat.labels("Document View",mCat);
+    }
+
+    void setCatArrayDirty()
+    {
+	mCat.resize(0);
+    }
+
+    void ensureCatArray()
+    {
+	if ( mCat.count() > 0 || mCatList.count()==0 )
+	    return;
+
+	Categories cat( 0 );
+	cat.load( categoryFileName() );
+	mCat.resize( mCatList.count() );
+	int i;
+	QStringList::ConstIterator it;
+	for ( i = 0, it = mCatList.begin(); it != mCatList.end();
+	      ++it, i++ ) {
+
+	    bool number;
+	    int id = (*it).toInt( &number );
+	    if ( !number ) {
+		id = cat.id( "Document View", *it );
+		if ( id == 0 )
+		    id = cat.addCategory( "Document View", *it );
+	    }
+	    mCat[i] = id;
+	}
+    }
 };
 
 /*!
   \class AppLnk applnk.h
   \brief The AppLnk class represents an application available on the system.
 
-  Information about applications are stored in Qtopia as ".desktop" files.
-  When read, these files are stored as AppLnk objects.
+    Every Qtopia application \e app has a corresponding \e app.desktop
+    file. When one of these files is read its data is stored as an
+    AppLnk object.
+
+    The AppLnk class introduces some Qtopia-specific concepts, and
+    provides a variety of functions, as described in the following
+    sections.
+    \tableofcontents
+
+    \target Types
+    \section1 Types
+
+    Every AppLnk object has a \e type. For applications, games and
+    settings the type is \c Application; for documents the
+    type is the document's MIME type.
+
+    \target files-and-links
+    \section1 Files and Links
+
+    When you create an AppLnk (or more likely, a \link doclnk.html
+    DocLnk\endlink), you don't deal directly with filenames in the
+    filesystem. Instead you do this:
+    \code
+    DocLnk d;
+    d.setType("text/plain");
+    d.setName("My Nicely Named Document / Whatever"); // Yes, "/" is legal.
+    \endcode
+    At this point, the file() and linkFile() are unknown. Normally
+    this is uninteresting, and the names become automatically known,
+    and more importantly, becomes reserved, when you ask what they are:
+
+    \code
+    QString fn = d.file();
+    \endcode
+    This invents a filename, and creates the file on disk (an empty
+    reservation file) to prevent the name being used by another
+    application.
+
+    In some circumstances, you don't want to create the file if it
+    doesn't already exist (e.g. in the Document tab, some of the \link
+    doclnk.html DocLnk\endlink objects represented by icons are
+    DocLnk's created just for that view - they don't have
+    corresponding \c .desktop files. To avoid littering empty
+    reservation files around, we check in a few places to see whether
+    the file really needs to exist).
+
+    \section1 Functionality
+
+    AppLnk objects are created by calling the constructor with the
+    name of a \e .desktop file. The object can be checked for validity
+    using isValid().
+
+    The following functions are used to set or retrieve information
+    about the application:
+    \table
+    \header \i Get Function \i Set Function \i Short Description
+    \row \i \l name()	    \i \l setName()    \i application's name
+    \row \i \l pixmap()     \i \e none	    \i application's icon
+    \row \i \l bigPixmap()  \i \e none	    \i application's large icon
+    \row \i \e none	    \i setIcon()    \i sets the icon's filename
+    \row \i \l type() 	    \i \l setType()    \i see \link #Types Types\endlink above
+    \row \i \l rotation()   \i \e none	    \i 0, 90, 180 or 270 degrees
+    \row \i \l comment()    \i \l setComment() \i text for the Details dialog
+    \row \i \l exec()	    \i \l setExec()    \i executable's filename
+    \row \i \l file()	    \i \e none	    \i document's filename
+    \row \i \l linkFile()   \i \l setLinkFile()	\i \e .desktop filename
+    \row \i \l mimeTypes()  \i \e none	    \i the mime types the application can view or edit
+    \row \i \l categories() \i \l setCategories()	\i \e{see the function descriptions}
+    \row \i \l fileKnown()  \i \e none	    \i see \link
+#files-and-links Files and Links\endlink above
+    \row \i \l linkFileKnown() \i \e none	    \i see \link
+#files-and-links Files and Links\endlink above
+    \row \i \l property()   \i \l setProperty()	\i any AppLnk property
+    can be retrieved or set (if writeable) using these
+    \endtable
+
+    To save an AppLnk to disk use writeLink(). To execute the
+    application that the AppLnk object refers to, use execute().
+
+    AppLnk's can be deleted from disk using removeLinkFile(). To
+    remove both the link and the application's executable use
+    removeFiles().
+
+    Icon sizes can be globally changed (but only for AppLnk objects
+    created after the calls) with setSmallIconSize() and
+    setBigIconSize().
+
+    \ingroup qtopiaemb
 */
 
 /*!
   Sets the size used for small icons to \a small pixels.
   Only affects AppLnk objects created after the call.
+
+  \sa smallIconSize() setIcon()
 */
 void AppLnk::setSmallIconSize(int small)
 {
@@ -93,6 +230,8 @@ void AppLnk::setSmallIconSize(int small)
 
 /*!
   Returns the size used for small icons.
+
+  \sa setSmallIconSize() setIcon()
 */
 int AppLnk::smallIconSize()
 {
@@ -103,6 +242,8 @@ int AppLnk::smallIconSize()
 /*!
   Sets the size used for large icons to \a big pixels.
   Only affects AppLnk objects created after the call.
+
+  \sa bigIconSize() setIcon()
 */
 void AppLnk::setBigIconSize(int big)
 {
@@ -111,6 +252,8 @@ void AppLnk::setBigIconSize(int big)
 
 /*!
   Returns the size used for large icons.
+
+  \sa setBigIconSize() setIcon()
 */
 int AppLnk::bigIconSize()
 {
@@ -121,23 +264,33 @@ int AppLnk::bigIconSize()
 /*!
   \fn QString AppLnk::name() const
 
-  Returns the Name property.
+  Returns the Name property. This is the user-visible name for the
+  document or application, not the filename.
+
+    See \link #files-and-links Files and Links\endlink.
+
+  \sa setName()
 */
 /*!
     \fn QString AppLnk::exec() const
 
-  Returns the Exec property. This is the executable program associated
-  with the AppLnk.
+  Returns the Exec property. This is the name of the executable
+  program associated with the AppLnk.
+
+  \sa setExec()
 */
 /*!
     \fn QString AppLnk::rotation() const
 
-  Returns the Rotation property.
+  Returns the Rotation property. The value is 0, 90, 180 or 270
+  degrees.
 */
 /*!
     \fn QString AppLnk::comment() const
 
   Returns the Comment property.
+
+  \sa setComment()
 */
 /*!
     \fn QStringList AppLnk::mimeTypes() const
@@ -149,10 +302,15 @@ int AppLnk::bigIconSize()
     \fn const QArray<int>& AppLnk::categories() const
 
   Returns the Categories property.
+
+  See the CategoryWidget for more details.
+
+  \sa setCategories()
 */
 
 const QArray<int>& AppLnk::categories() const
 {
+    d->ensureCatArray();
     return d->mCat;
 }
 
@@ -162,12 +320,14 @@ const QArray<int>& AppLnk::categories() const
   Returns the id of the AppLnk. If the AppLnk is not in an AppLnkSet,
   this value is 0, otherwise it is a value that is unique for the
   duration of the current process.
+
+  \sa AppLnkSet::find()
 */
 
 /*!
   \fn bool AppLnk::isValid() const
 
-  Returns whether this AppLnk is valid.
+  Returns TRUE if this AppLnk is valid; otherwise returns FALSE.
 */
 
 /*!
@@ -182,7 +342,9 @@ AppLnk::AppLnk()
 }
 
 /*!
-  Loads \a file as an AppLnk.
+  Loads \a file (e.g. \e app.desktop) as an AppLnk.
+
+  \sa writeLink()
 */
 AppLnk::AppLnk( const QString &file )
 {
@@ -200,89 +362,150 @@ AppLnk::AppLnk( const QString &file )
 	    mIconFile = config.readEntry( "Icon", QString::null );
 	    mRotation = config.readEntry( "Rotation", "" );
 	    mComment = config.readEntry( "Comment", QString::null );
+	    // MIME types are case-insensitive.
 	    mMimeTypes = config.readListEntry( "MimeType", ';' );
+	    for (QStringList::Iterator it=mMimeTypes.begin(); it!=mMimeTypes.end(); ++it)
+		*it = (*it).lower();
 	    mMimeTypeIcons = config.readListEntry( "MimeTypeIcons", ';' );
 	    mLinkFile = file;
 	    mFile = config.readEntry("File", QString::null);
-	    sl = config.readListEntry("Categories", ';');
+	    if ( mFile[0] != '/' ) {
+		int slash = file.findRev('/');
+		if ( slash >= 0 ) {
+		    mFile = file.left(slash) + '/' + mFile;
+		}
+	    }
+	    d->mCatList = config.readListEntry("Categories", ';');
+	    if ( d->mCatList[0].toInt() < -1 ) {
+		// numeric cats in file! convert to text
+		Categories cat( 0 );
+		cat.load( categoryFileName() );
+		d->mCat.resize( d->mCatList.count() );
+		int i;
+		QStringList::ConstIterator it;
+		for ( i = 0, it = d->mCatList.begin(); it != d->mCatList.end();
+		      ++it, i++ ) {
+		    bool number;
+		    int id = (*it).toInt( &number );
+		    if ( !number ) {
+			// convert from text
+			id = cat.id( "Document View", *it );
+			if ( id == 0 )
+			    id = cat.addCategory( "Document View", *it );
+		    }
+		    d->mCat[i] = id;
+		}
+		d->updateCatListFromArray();
+	    }
 	}
-    }
-    // let's try our darndest to create categories...
-    Categories cat( 0 );
-    cat.load( categoryFileName() );
-    d->mCat.resize( sl.count() );
-    int i;
-    QStringList::Iterator it;
-    for ( i = 0, it = sl.begin(); it != sl.end();
-	  ++it, i++ ) {
-
-	bool number;
-	int id = (*it).toInt( &number );
-	if ( !number ) {
-	    // convert from old school...
-	    id = cat.id( "Document Viewer", *it );
-	    if ( id == 0 )
-		id = cat.addCategory( "Document Viewer", *it );
-	}
-	d->mCat[i] = id;
     }
     mId = 0;
 }
 
-/*!
-  Returns a small pixmap associated with the application.
-*/
-const QPixmap& AppLnk::pixmap() const
+AppLnk& AppLnk::operator=(const AppLnk &copy)
 {
-    if ( mPixmap.isNull() ) {
+    if ( mId )
+	qWarning("Deleting AppLnk that is in an AppLnkSet");
+    if ( d )
+	delete d;
+
+
+    mName = copy.mName;
+
+    /* remove for Qtopia 3.0 -zecke */
+    mPixmap = copy.mPixmap;
+    mBigPixmap = copy.mBigPixmap;
+
+    mExec = copy.mExec;
+    mType = copy.mType;
+    mRotation = copy.mRotation;
+    mComment = copy.mComment;
+    mFile = copy.mFile;
+    mLinkFile = copy.mLinkFile;
+    mIconFile = copy.mIconFile;
+    mMimeTypes = copy.mMimeTypes;
+    mMimeTypeIcons = copy.mMimeTypeIcons;
+    mId = 0;
+    d = new AppLnkPrivate();
+    d->mCat = copy.d->mCat;
+    d->mCatList = copy.d->mCatList;
+    d->mPixmaps = copy.d->mPixmaps;
+
+    return *this;
+}
+/*!
+  protected internally to share code
+  should I document that at all?
+  I don't know the TT style for that
+*/
+const QPixmap& AppLnk::pixmap( int pos, int size ) const {
+    if ( d->mPixmaps[pos].isNull() ) {
 	AppLnk* that = (AppLnk*)this;
 	if ( mIconFile.isEmpty() ) {
 	    MimeType mt(type());
-	    that->mPixmap = mt.pixmap();
-	    if ( that->mPixmap.isNull() )
-		that->mPixmap = Resource::loadPixmap("UnknownDocument-14");
-	    return that->mPixmap;
+	    that->d->mPixmaps[pos] = mt.pixmap();
+	    if ( that->d->mPixmaps[pos].isNull() )
+		that->d->mPixmaps[pos].convertFromImage(
+		    Resource::loadImage("UnknownDocument")
+			.smoothScale( size, size ) );
+	    return that->d->mPixmaps[pos];
 	}
 	QImage unscaledIcon = Resource::loadImage( that->mIconFile );
-	that->mPixmap.convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
-	that->mBigPixmap.convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
-	return that->mPixmap;
+	if ( unscaledIcon.isNull() ) {
+	    qDebug( "Cannot find icon: %s", that->mIconFile.latin1() );
+	    that->d->mPixmaps[pos].convertFromImage(
+		    Resource::loadImage("UnknownDocument")
+			.smoothScale( size, size ) );
+	} else {
+	    that->d->mPixmaps[0].convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
+	    that->d->mPixmaps[1].convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
+	}
+	return that->d->mPixmaps[0];
     }
     return mPixmap;
 }
 
 /*!
+  Returns a small pixmap associated with the application.
+
+  \sa bigPixmap() setIcon()
+*/
+const QPixmap& AppLnk::pixmap() const
+{
+    if ( d->mPixmaps[0].isNull() ) {
+        return pixmap(AppLnkPrivate::Normal, smallSize );
+    }
+    return d->mPixmaps[0];
+}
+
+/*!
   Returns a large pixmap associated with the application.
+
+  \sa pixmap() setIcon()
 */
 const QPixmap& AppLnk::bigPixmap() const
 {
-    if ( mBigPixmap.isNull() ) {
-	AppLnk* that = (AppLnk*)this;
-	if ( mIconFile.isEmpty() ) {
-	    MimeType mt(type());
-	    that->mBigPixmap = mt.bigPixmap();
-	    if ( that->mBigPixmap.isNull() )
-		that->mBigPixmap = Resource::loadPixmap("UnknownDocument");
-	    return that->mBigPixmap;
-	}
-	QImage unscaledIcon = Resource::loadImage( that->mIconFile );
-	that->mPixmap.convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
-	that->mBigPixmap.convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
-	return that->mBigPixmap;
+    if ( d->mPixmaps[1].isNull() ) {
+        return pixmap( AppLnkPrivate::Big, bigSize );
     }
     return mBigPixmap;
 }
 
 /*!
-  Returns the type of the application.
+  Returns the type of the AppLnk. For applications, games and
+  settings the type is \c Application; for documents the type is the
+  document's MIME type.
 */
 QString AppLnk::type() const
 {
     if ( mType.isNull() ) {
 	AppLnk* that = (AppLnk*)this;
-	MimeType mt(file());
-	that->mType = mt.id();
-	return that->mType;
+	QString f = file();
+	if ( !f.isNull() ) {
+	    MimeType mt(f);
+	    that->mType = mt.id();
+	    return that->mType;
+	}
     }
     return mType;
 }
@@ -290,12 +513,12 @@ QString AppLnk::type() const
 /*!
   Returns the file associated with the AppLnk.
 
-  \sa exec()
+  \sa exec() name()
 */
 QString AppLnk::file() const
 {
     if ( mFile.isNull() ) {
-	AppLnk* that = (AppLnk*)this; // copy?
+	AppLnk* that = (AppLnk*)this;
 	QString ext = MimeType(mType).extension();
 	if ( !ext.isEmpty() )
 	    ext = "." + ext;
@@ -306,32 +529,35 @@ QString AppLnk::file() const
 	} else if ( mType.contains('/') ) {
 	    that->mFile =
 		QString(getenv("HOME"))+"/Documents/"+mType+"/"+safeFileName(that->mName);
-	    if ( QFile::exists(that->mFile+ext) || QFile::exists(that->mFile+".desktop") ) { // a .desktop with the same name exists
+            /*
+             * A file with the same name or a .desktop file already exists
+             */
+	    if ( QFile::exists(that->mFile+ext) || QFile::exists(that->mFile+".desktop") ) {
 		int n=1;
-		qWarning("AppLnk::file() n=1 %s", that->mFile.latin1() );
 		QString nn;
 		while (QFile::exists((nn=(that->mFile+"_"+QString::number(n)))+ext)
 			|| QFile::exists(nn+".desktop"))
 		    n++;
 		that->mFile = nn;
-		qWarning("AppLnl::file() now mFile is %s", that->mFile.latin1() );
 	    }
 	    that->mLinkFile = that->mFile+".desktop";
 	    that->mFile += ext;
 	}
 	prepareDirectories(that->mFile);
-	QFile f(that->mFile);
-	if ( !f.open(IO_WriteOnly) )
-	    that->mFile = QString::null;
-	return that->mFile;
+	if ( !that->mFile.isEmpty() ) {
+	    QFile f(that->mFile);
+	    if ( !f.open(IO_WriteOnly) )
+		that->mFile = QString::null;
+	    return that->mFile;
+	}
     }
     return mFile;
 }
 
 /*!
-  Returns the desktop file coresponding to this AppLnk.
+  Returns the desktop file corresponding to this AppLnk.
 
-  \sa file(), exec()
+  \sa file() exec() name()
 */
 QString AppLnk::linkFile() const
 {
@@ -340,29 +566,34 @@ QString AppLnk::linkFile() const
 	if ( type().contains('/') ) {
 	    StorageInfo storage;
 	    const FileSystem *fs = storage.fileSystemOf( that->mFile );
-	    if ( fs && ( fs->isRemovable() || fs->disk() == "/dev/mtdblock6" || fs->disk() == "tmpfs" ) ) {
+            /* tmpfs + and ramfs are available too but not removable
+             * either we fix storage or add this
+             */
+	    if ( fs && ( fs->isRemovable() || fs->disk() == "/dev/mtdblock6" || fs->disk() == "tmpfs") ) {
 		that->mLinkFile = fs->path();
 	    } else
 		that->mLinkFile = getenv( "HOME" );
 	    that->mLinkFile += "/Documents/"+type()+"/"+safeFileName(that->mName);
-	    if ( QFile::exists(that->mLinkFile+".desktop") ) { // ok the file exists lets check if we point to the same file
-		int n=1;
-		QString nn;
-		AppLnk lnk( that->mLinkFile+".desktop" );
-		if(that->file() != lnk.file() ){
-		  qWarning("AppLnk::linkFile exists %s", that->mLinkFile.latin1() );
-		  while (QFile::exists((nn=that->mLinkFile+"_"+QString::number(n))+".desktop")){
-		    n++;
-		    AppLnk lnk(nn ); // just to be sure
-		    if(lnk.file() ==that->file() ){
-		      break;
-		    }
-		  }
-		  that->mLinkFile = nn;
-		}
+
+            /* the desktop file exists make sure we don't point to the same file */
+	    if ( QFile::exists(that->mLinkFile+".desktop") ) {
+                AppLnk lnk( that->mLinkFile + ".desktop" );
+
+                /* the linked is different */
+                if(that->file() != lnk.file() ) {
+                    int n = 1;
+                    QString nn;
+                    while (QFile::exists((nn=that->mLinkFile+"_"+QString::number(n))+".desktop")) {
+                        n++;
+                        /* just to be sure */
+                        AppLnk lnk(nn );
+                        if (lnk.file() == that->file() )
+                            break;
+                    }
+                    that->mLinkFile = nn;
+                }
 	    }
 	    that->mLinkFile += ".desktop";
-	    qWarning("AppLnk::linkFile is %s", that->mLinkFile.latin1() );
 	    storeLink();
 	}
 	return that->mLinkFile;
@@ -390,13 +621,15 @@ AppLnk::AppLnk( const AppLnk &copy )
     mId = 0;
     d = new AppLnkPrivate();
     d->mCat = copy.d->mCat;
+    d->mCatList = copy.d->mCatList;
+    d->mPixmaps = copy.d->mPixmaps;
 }
 
 /*!
-  Destroys the AppLnk. Note that if the AppLnk is current a member of
-  an AppLnkSet, this will produce a run-time warning.
+  Destroys the AppLnk. Note that if the AppLnk is currently a member
+  of an AppLnkSet, this will produce a run-time warning.
 
-  \sa AppLnkSet::add(), AppLnkSet::remove()
+  \sa AppLnkSet::add() AppLnkSet::remove()
 */
 AppLnk::~AppLnk()
 {
@@ -407,7 +640,10 @@ AppLnk::~AppLnk()
 }
 
 /*!
+  \overload
   Executes the application associated with this AppLnk.
+
+  \sa exec()
 */
 void AppLnk::execute() const
 {
@@ -417,6 +653,8 @@ void AppLnk::execute() const
 /*!
   Executes the application associated with this AppLnk, with
   \a args as arguments.
+
+  \sa exec()
 */
 void AppLnk::execute(const QStringList& args) const
 {
@@ -437,7 +675,7 @@ void AppLnk::execute(const QStringList& args) const
 /*!
   Invokes the application associated with this AppLnk, with
   \a args as arguments. Rotation is not taken into account by
-  this function, you should not call it directly.
+  this function, so you should not call it directly.
 
   \sa execute()
 */
@@ -449,7 +687,7 @@ void AppLnk::invoke(const QStringList& args) const
 /*!
   Sets the Exec property to \a exec.
 
-  \sa exec()
+  \sa exec() name()
 */
 void AppLnk::setExec( const QString& exec )
 {
@@ -469,7 +707,7 @@ void AppLnk::setName( const QString& docname )
 /*!
   Sets the File property to \a filename.
 
-  \sa file()
+  \sa file() name()
 */
 void AppLnk::setFile( const QString& filename )
 {
@@ -489,6 +727,9 @@ void AppLnk::setLinkFile( const QString& filename )
 /*!
   Sets the Comment property to \a comment.
 
+  This text is displayed in the 'Details Dialog', for example if the
+  user uses the 'press-and-hold' gesture.
+
   \sa comment()
 */
 void AppLnk::setComment( const QString& comment )
@@ -499,6 +740,10 @@ void AppLnk::setComment( const QString& comment )
 /*!
   Sets the Type property to \a type.
 
+  For applications, games and settings the type should be \c
+  Application; for documents the type should be the document's MIME
+  type.
+
   \sa type()
 */
 void AppLnk::setType( const QString& type )
@@ -507,26 +752,38 @@ void AppLnk::setType( const QString& type )
 }
 
 /*!
-  Sets the Icon property to \a iconname.
+  \fn QString AppLnk::icon() const
 
-  \sa pixmap(), bigPixmap()
+  Returns the Icon property.
+
+  \sa setIcon()
+*/
+
+/*!
+  Sets the Icon property to \a iconname. This is the filename from
+  which the pixmap() and bigPixmap() are obtained.
+
+  \sa icon() setSmallIconSize() setBigIconSize()
 */
 void AppLnk::setIcon( const QString& iconname )
 {
     mIconFile = iconname;
     QImage unscaledIcon = Resource::loadImage( mIconFile );
-    mPixmap.convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
-    mBigPixmap.convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
+    d->mPixmaps[0].convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
+    d->mPixmaps[1].convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
 }
 
 /*!
   Sets the Categories property to \a c.
+
+  See the CategoryWidget for more details.
 
   \sa categories()
 */
 void AppLnk::setCategories( const QArray<int>& c )
 {
     d->mCat = c;
+    d->updateCatListFromArray();
 }
 
 /*!
@@ -536,8 +793,11 @@ void AppLnk::setCategories( const QArray<int>& c )
 */
 
 /*!
-  Attempts to ensure that the link file for this AppLnk exists, including
-  creating any required directories. Returns TRUE if successful.
+  Attempts to ensure that the link file for this AppLnk exists,
+  including creating any required directories. Returns TRUE if
+  successful; otherwise returns FALSE.
+
+  You should not need to use this function.
 */
 bool AppLnk::ensureLinkExists() const
 {
@@ -546,10 +806,11 @@ bool AppLnk::ensureLinkExists() const
 }
 
 /*!
-  Commits the AppLnk to disk. Returns whether the operation succeeded.
+  Commits the AppLnk to disk. Returns TRUE if the operation succeeded;
+  otherwise returns FALSE.
 
-  The "linkChanged(QString)" message is sent to the
-  "QPE/System" QCop channel as a result.
+  In addition, the "linkChanged(QString)" message is sent to the
+  "QPE/System" \link qcop.html QCop\endlink channel.
 */
 bool AppLnk::writeLink() const
 {
@@ -561,6 +822,9 @@ bool AppLnk::writeLink() const
     return TRUE;
 }
 
+/*!
+  \internal
+*/
 void AppLnk::storeLink() const
 {
     Config config( mLinkFile, Config::File );
@@ -569,21 +833,29 @@ void AppLnk::storeLink() const
     if ( !mIconFile.isNull() ) config.writeEntry("Icon",mIconFile);
     config.writeEntry("Type",type());
     if ( !mComment.isNull() ) config.writeEntry("Comment",mComment);
-    config.writeEntry("File",file());
-    // write out the id...
-    int i;
-    QStringList sl;
-    for ( i = 0; i < int(d->mCat.count()); i++ ) {
-	sl.append( QString::number( d->mCat[i] ) );
-    }
-    config.writeEntry( "Categories", sl, ';' );
+    QString f = file();
+    int i = 0;
+    while ( i < (int)f.length() && i < (int)mLinkFile.length() && f[i] == mLinkFile[i] )
+	i++;
+    while ( i && f[i] != '/' )
+	i--;
+    // simple case where in the same directory
+    if ( mLinkFile.find( '/', i + 1 ) < 0 )
+	f = f.mid(i+1);
+    // ### could do relative ie ../../otherDocs/file.doc
+    config.writeEntry("File",f);
+    config.writeEntry( "Categories", d->mCatList, ';' );
 
+#ifndef QT_NO_COP
     QCopEnvelope e("QPE/System", "linkChanged(QString)");
     e << mLinkFile;
+#endif
 }
 
 /*!
   Sets the property named \a key to \a value.
+
+  \sa property()
 */
 void AppLnk::setProperty(const QString& key, const QString& value)
 {
@@ -595,6 +867,8 @@ void AppLnk::setProperty(const QString& key, const QString& value)
 
 /*!
   Returns the property named \a key.
+
+  \sa setProperty()
 */
 QString AppLnk::property(const QString& key) const
 {
@@ -604,7 +878,6 @@ QString AppLnk::property(const QString& key) const
     Config cfg(lf, Config::File);
     return cfg.readEntry(key);
 }
-
 
 bool AppLnk::isPreloaded() const {
   // Preload information is stored in the Launcher config in v1.5.
@@ -630,18 +903,22 @@ void AppLnk::setPreloaded(bool yesNo) {
 
 
 /*!
-  Deletes both the linkFile() and file() associated with this AppLnk.
+  Deletes both the linkFile() and the file() associated with this AppLnk.
+
+  \sa removeLinkFile()
 */
 void AppLnk::removeFiles()
 {
     bool valid = isValid();
     if ( !valid || !linkFileKnown() || QFile::remove(linkFile()) ) {
 	if ( QFile::remove(file()) ) {
+#ifndef QT_NO_COP
 	    QCopEnvelope e("QPE/System", "linkChanged(QString)");
 	    if ( linkFileKnown() )
 		e << linkFile();
 	    else
 		e << file();
+#endif
 	} else if ( valid ) {
 	    // restore link
 	    writeLink();
@@ -650,13 +927,17 @@ void AppLnk::removeFiles()
 }
 
 /*!
-  Delete the linkFile(), leaving any file() untouched.
+  Deletes the linkFile(), leaving any file() untouched.
+
+    \sa removeFiles()
 */
 void AppLnk::removeLinkFile()
 {
     if ( isValid() && linkFileKnown() && QFile::remove(linkFile()) ) {
+#ifndef QT_NO_COP
 	QCopEnvelope e("QPE/System", "linkChanged(QString)");
 	e << linkFile();
+#endif
     }
 }
 
@@ -682,7 +963,10 @@ public:
 /*!
   \fn QStringList AppLnkSet::types() const
 
-  Returns the list of types in the set.
+  Returns the list of \link applnk.html#Types types\endlink in the set.
+
+    For applications, games and settings the type is \c Application;
+    for documents the type is the document's MIME type.
 
   \sa AppLnk::type(), typeName(), typePixmap(), typeBigPixmap()
 */
@@ -703,11 +987,14 @@ AppLnkSet::AppLnkSet() :
 
 /*!
   Constructs an AppLnkSet that contains AppLnk objects representing
-  all the files in a \a directory (recursively).
+  all the files in the given \a directory (and any subdirectories
+  recursively).
 
-  The directories may contain ".directory" files which overrides
-  any AppLnk::type() value of AppLnk objects found in the directory.
+  \omit
+  The directories may contain ".directory" files which override
+  any AppLnk::type() values for AppLnk objects found in the directory.
   This allows simple localization of application types.
+  \endomit
 */
 AppLnkSet::AppLnkSet( const QString &directory ) :
     d(new AppLnkSetPrivate)
@@ -718,8 +1005,8 @@ AppLnkSet::AppLnkSet( const QString &directory ) :
 }
 
 /*!
-  Detaches all AppLnk objects from the set. The set become empty
-  and the call becomes responsible for deleting the AppLnk objects.
+  Detaches all AppLnk objects from the set. The set become empty and
+  the caller becomes responsible for deleting the AppLnk objects.
 */
 void AppLnkSet::detachChildren()
 {
@@ -733,7 +1020,7 @@ void AppLnkSet::detachChildren()
 }
 
 /*!
-  Destroys the set, deleting all AppLnk objects it contains.
+  Destroys the set, deleting all the AppLnk objects it contains.
 
   \sa detachChildren()
 */
@@ -811,7 +1098,8 @@ void AppLnkSet::findChildren(const QString &dr, const QString& typ, const QStrin
 }
 
 /*!
-  Adds \a f to the set. The set takes over responsibility for deleting \a f.
+  Adds AppLnk \a f to the set. The set takes responsibility for
+  deleting \a f.
 
   \sa remove()
 */
@@ -827,8 +1115,9 @@ void AppLnkSet::add( AppLnk *f )
 }
 
 /*!
-  Removes \a f to the set, returning whether \a f was in the set.
-  The caller becomes responsible for deleting \a f.
+  Removes AppLnk \a f to the set. The caller becomes responsible for
+  deleting \a f. Returns TRUE if \a f was in the set; otherwise
+  returns FALSE.
 
   \sa add()
 */
@@ -841,8 +1130,12 @@ bool AppLnkSet::remove( AppLnk *f )
     return FALSE;
 }
 
+
 /*!
   Returns the localized name for type \a t.
+
+    For applications, games and settings the type is \c Application;
+    for documents the type is the document's MIME type.
 */
 QString AppLnkSet::typeName( const QString& t ) const
 {
@@ -852,6 +1145,9 @@ QString AppLnkSet::typeName( const QString& t ) const
 
 /*!
   Returns the small pixmap associated with type \a t.
+
+    For applications, games and settings the type is \c Application;
+    for documents the type is the document's MIME type.
 */
 QPixmap AppLnkSet::typePixmap( const QString& t ) const
 {
@@ -861,6 +1157,9 @@ QPixmap AppLnkSet::typePixmap( const QString& t ) const
 
 /*!
   Returns the large pixmap associated with type \a t.
+
+    For applications, games and settings the type is \c Application;
+    for documents the type is the document's MIME type.
 */
 QPixmap AppLnkSet::typeBigPixmap( const QString& t ) const
 {
@@ -921,13 +1220,16 @@ DocLnkSet::DocLnkSet()
 }
 
 /*!
-  Constructs an DocLnkSet that contains DocLnk objects representing
-  all the files in a \a directory (recursively).
+  Constructs a DocLnkSet that contains DocLnk objects representing all
+  the files in the \a directory (and any subdirectories, recursively).
 
   If \a mimefilter is not null,
   only documents with a MIME type matching \a mimefilter are selected.
   The value may contain multiple wild-card patterns separated by ";",
-  such as "*o/mpeg;audio/x-wav".
+  such as \c{*o/mpeg;audio/x-wav}.
+
+  See also \link applnk.html#files-and-links Files and Links\endlink.
+
 */
 DocLnkSet::DocLnkSet( const QString &directory, const QString& mimefilter ) :
     AppLnkSet()
@@ -996,14 +1298,22 @@ void DocLnkSet::findChildren(const QString &dr, const QValueList<QRegExp> &mimeF
 
     QDir dir( dr );
 
+    /* Opie got a different approach
+     * I guess it's geek vs. consumer
+     * in this case to be discussed
+     */
+    if ( dir.exists( ".Qtopia-ignore" ) )
+	return;
+
     const QFileInfoList *list = dir.entryInfoList();
     if ( list ) {
 	QFileInfo* fi;
 	for ( QFileInfoListIterator it(*list); (fi=*it); ++it ) {
 	    QString bn = fi->fileName();
-	    if ( bn[0] != '.' && bn != "CVS" ) {
-		if ( fi->isDir() ) {
-		    findChildren(fi->filePath(), mimeFilters, reference, depth);
+	    if ( bn[0] != '.' ) {
+		if ( fi->isDir()  ) {
+		    if ( bn != "CVS" && bn != "Qtopia" && bn != "QtPalmtop" )
+			findChildren(fi->filePath(), mimeFilters, reference, depth);
 		} else {
 		    if ( fi->extension(FALSE) == "desktop" ) {
 			DocLnk* dl = new DocLnk( fi->filePath() );
@@ -1058,8 +1368,9 @@ DocLnk::DocLnk( const QString &file ) :
 
 /*!
   Constructs a DocLnk from a valid .desktop \a file or a new .desktop
-  \a file for other files. If \a may_be_desktopfile is TRUE, then \a file
-  is first attempted to be read as a .desktop file.
+  \a file for other files. If \a may_be_desktopfile is TRUE, then an
+  attempt is made to read \a file as a .desktop file; if that fails it
+  is read as a normal file.
 */
 DocLnk::DocLnk( const QString &file, bool may_be_desktopfile ) :
     AppLnk(may_be_desktopfile ? file : QString::null)
@@ -1088,8 +1399,8 @@ void DocLnk::init(const QString &file)
 	}
     } else if ( QFile::exists(file) ) {
 	QString n = file;
-	n.replace(QRegExp("\\..*"),"");
 	n.replace(QRegExp(".*/"),"");
+	n.replace(QRegExp("\\..*"),"");
 	setName( n );
 	setFile( file );
     }
@@ -1106,7 +1417,7 @@ DocLnk::DocLnk()
 }
 
 /*!
-  Destroys the DocLnk. As with AppLnk objects, a run-time error
+  Destroys the DocLnk. Just like AppLnk objects, a run-time error
   occurs if the DocLnk is a member of a DocLnkSet (or AppLnkSet).
 */
 DocLnk::~DocLnk()
@@ -1142,4 +1453,5 @@ void DocLnk::invoke(const QStringList& args) const
 	app->execute(a);
     }
 }
+
 

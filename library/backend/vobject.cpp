@@ -1005,20 +1005,95 @@ static int writeBase64(OFile *fp, unsigned char *s, long len)
     return 1;
 }
 
-static void writeQPString(OFile *fp, const char *s)
+static const char *replaceChar(unsigned char c) 
 {
-    const char *p = s;
-    while (*p) {
-	if (*p == '\n') {
-	    if (p[1]) appendsOFile(fp,"=0A=");
-	    }
-	appendcOFile(fp,*p);
-	p++;
-	}
+    if (c == '\n') {
+	return "=0A=\n";
+    } else if (
+	    (c >= 'A' && c <= 'Z') 
+	    ||
+	    (c >= 'a' && c <= 'z') 
+	    ||
+	    (c >= '0' && c <= '9') 
+	    ||
+	    (c >= '\'' && c <= ')') 
+	    ||
+	    (c >= '+' && c <= '-') 
+	    ||
+	    (c == '/')
+	    ||
+	    (c == '?') 
+	    ||
+	    (c == ' ')) 
+    { 
+	return 0;
+    }
+
+    static char trans[4];
+    trans[0] = '=';
+    trans[3] = '\0';
+    int rem = c % 16;
+    int div = c / 16;
+
+    if (div < 10)
+	trans[1] = '0' + div;
+    else
+	trans[1] = 'A' + (div - 10);
+
+    if (rem < 10)
+	trans[2] = '0' + rem;
+    else
+	trans[2] = 'A' + (rem - 10);
+
+    return trans;
 }
 
+static void writeQPString(OFile *fp, const char *s)
+{
+    /*
+	only A-Z, 0-9 and 
+       "'"  (ASCII code 39)
+       "("  (ASCII code 40)
+       ")"  (ASCII code 41)
+       "+"  (ASCII code 43)
+       ","  (ASCII code 44)
+       "-"  (ASCII code 45)
+       "/"  (ASCII code 47)
+       "?"  (ASCII code 63)
+       
+       should remain un-encoded.
+       '=' needs to be encoded as it is the escape character.
+       ';' needs to be as it is a field separator.
 
+     */
+    const char *p = s;
+    while (*p) {
+	const char *rep = replaceChar(*p);
+	if (rep)
+	    appendsOFile(fp, rep);
+	else
+	    appendcOFile(fp, *p);
+	p++;
+    }
+}
 
+static bool includesUnprintable(VObject *o)
+{
+    if (o) {
+	if (VALUE_TYPE(o) == VCVT_STRINGZ) {
+	    const char *p = STRINGZ_VALUE_OF(o);
+	    if (p) {
+		while (*p) {
+		    if (replaceChar(*p))
+			return TRUE;
+		    p++;
+		}
+	    }
+	}
+    }
+    return FALSE;
+}
+	    
 static void writeVObject_(OFile *fp, VObject *o);
 
 static void writeValue(OFile *fp, VObject *o, unsigned long size)
@@ -1059,6 +1134,10 @@ static void writeAttrValue(OFile *fp, VObject *o)
 	struct PreDefProp *pi;
 	pi = lookupPropInfo(NAME_OF(o));
 	if (pi && ((pi->flags & PD_INTERNAL) != 0)) return;
+	if ( includesUnprintable(o) ) {
+	    appendsOFile(fp, ";" VCEncodingProp "=" VCQuotedPrintableProp);
+	    appendsOFile(fp, ";" VCCharSetProp "=" "UTF-8");
+	}
 	appendcOFile(fp,';');
 	appendsOFile(fp,NAME_OF(o));
 	}
@@ -1122,23 +1201,40 @@ static void writeProp(OFile *fp, VObject *o)
 	    int i = 0, n = 0;
 	    const char** fields = fields_;
 	    /* output prop as fields */
+	    bool printable = TRUE;
+	    while (*fields && printable) {
+		VObject *t = isAPropertyOf(o,*fields);
+		if (includesUnprintable(t))
+		    printable = FALSE;
+		fields++;
+	    }
+	    fields = fields_;
+	    if (!printable) {
+		appendsOFile(fp, ";" VCEncodingProp "=" VCQuotedPrintableProp);
+		appendsOFile(fp, ";" VCCharSetProp "=" "UTF-8");
+	    }
 	    appendcOFile(fp,':');
 	    while (*fields) {
 		VObject *t = isAPropertyOf(o,*fields);
 		i++;
 		if (t) n = i;
 		fields++;
-		}
+	    }
 	    fields = fields_;
 	    for (i=0;i<n;i++) {
 		writeValue(fp,isAPropertyOf(o,*fields),0);
 		fields++;
 		if (i<(n-1)) appendcOFile(fp,';');
-		}
+	    }
 	    }
 	}
+
 	
     if (VALUE_TYPE(o)) {
+	    if ( includesUnprintable(o) ) {
+	    appendsOFile(fp, ";" VCEncodingProp "=" VCQuotedPrintableProp);
+	    appendsOFile(fp, ";" VCCharSetProp "=" "UTF-8");
+	}
 	unsigned long size = 0;
         VObject *p = isAPropertyOf(o,VCDataSizeProp);
 	if (p) size = LONG_VALUE_OF(p);

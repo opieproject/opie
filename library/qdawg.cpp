@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -196,7 +196,7 @@ bool TrieList::equal(TrieList& l)
 {
     if ( count() != l.count() )
 	return FALSE;
-    sort(); l.sort(); 
+    sort(); l.sort();
     ConstIterator it2 = begin();
     ConstIterator it = l.begin();
     for( ; it != l.end(); ++it, ++it2 )
@@ -400,17 +400,65 @@ private:
     QDawg::Node *node;
 };
 
+/*!
+  \class QDawg qdawg.h
+  \brief The QDawg class provides an implementation of a Directed Acyclic Word Graph.
 
+  A DAWG provides very fast look-up of words in a word list.
+
+  The word list is created using readFile(), read() or
+  createFromWords(). A list of all the DAWG's words is returned by
+  allWords(), and the total number of words is returned by
+  countWords(). Use contains() to see if a particular word is in the
+  DAWG. The root \link qdawg-node.html node\endlink is returned by root().
+
+  A global DAWG is maintained for the current locale. See the
+  \l Global class for details.
+
+  The structure of a DAWG is a graph of \link qdawg-node.html
+  Nodes\endlink. There are no cycles in the graph (since there are no
+  inifinitely repeating words). Each \link qdawg-node.html
+  Node\endlink is a member of a list of \link qdawg-node.html
+  Nodes\endlink called a child list. Each \link qdawg-node.html
+  Node\endlink in the child list has a \e letter, an \e isWord flag,
+  at most one \e jump arc, and at most one arc to the next child in
+  the list.
+
+  If you traverse the \link qdawg-node.html Nodes\endlink in a DAWG,
+  starting from the root(), and you concatenate all the letters from
+  the single child in each child list that you visit, at every \link
+  qdawg-node.html Node\endlink which has the isWord flag set your
+  concatenation will be a word in the list represented by the DAWG.
+
+  For example, the DAWG below represents the word list:
+  ban, band, can, cane, cans, pan, pane, pans.
+
+  This structuring not only provides O(1) lookup of words in the word list,
+  but also produces a smaller storage file than a plain text file word list.
+
+  \img qdawg.png
+*/
+
+/*!
+    Constructs a new empty DAWG.
+*/
 QDawg::QDawg()
 {
     d = 0;
 }
 
+/*!
+    Deletes the DAWG.
+*/
 QDawg::~QDawg()
 {
     delete d;
 }
 
+/*!
+  \overload
+  Replaces all the DAWG's words with words read from \a dev.
+*/
 bool QDawg::createFromWords(QIODevice* dev)
 {
     delete d;
@@ -429,6 +477,9 @@ bool QDawg::createFromWords(QIODevice* dev)
     return TRUE;
 }
 
+/*!
+  Replaces all the DAWG's words with the words in the \a list.
+*/
 void QDawg::createFromWords(const QStringList& list)
 {
     delete d;
@@ -444,6 +495,9 @@ void QDawg::createFromWords(const QStringList& list)
     }
 }
 
+/*!
+  Returns a list of all the words in the DAWG.
+*/
 QStringList QDawg::allWords() const
 {
     QStringList result;
@@ -452,6 +506,12 @@ QStringList QDawg::allWords() const
 }
 
 
+/*!
+  Replaces the DAWG with the DAWG in \a filename.
+  The file is memory-mapped.
+
+  \sa write()
+*/
 bool QDawg::readFile(const QString& filename)
 {
     delete d;
@@ -472,6 +532,12 @@ bool QDawg::readFile(const QString& filename)
     return d;
 }
 
+/*!
+  Replaces the DAWG with the DAWG in \a dev.
+  The file is memory-mapped.
+
+  \sa write()
+*/
 bool QDawg::read(QIODevice* dev)
 {
     delete d;
@@ -483,28 +549,79 @@ bool QDawg::read(QIODevice* dev)
     return FALSE;
 }
 
+/*!
+  Writes the DAWG to \a dev, in a custom QDAWG format.
+*/
 bool QDawg::write(QIODevice* dev) const
 {
     return d ? d->write(dev) : TRUE;
 }
 
+/*!
+  Returns the number of words in the DAWG.
+*/
 int QDawg::countWords() const
 {
     return d ? d->countWords() : 0;
 }
 
+/*!
+  Returns the root \link qdawg-node.html Node\endlink of the DAWG.
+*/
 const QDawg::Node* QDawg::root() const
 {
     return d ? d->root() : 0;
 }
 
+/*!
+  Returns TRUE if the DAWG contains the word \a s; otherwise returns
+  FALSE.
+*/
 bool QDawg::contains(const QString& s) const
 {
     return d ? d->contains(s) : FALSE;
 }
 
+/*!
+  \internal
+
+  For debugging: prints out the DAWG contents.
+*/
 void QDawg::dump() const
 {
     if ( d ) d->dump();
 }
 
+/*!
+  \class QDawg::Node qdawg.h
+  \brief The QDawg::Node class represents one node of a QDawg.
+*/
+
+/*!
+  \fn QChar QDawg::Node::letter() const
+
+  Returns this Node's letter.
+*/
+/*!
+  \fn bool QDawg::Node::isWord() const
+
+  Returns TRUE if this Node is the end of a word; otherwise returns
+  FALSE.
+*/
+/*!
+  \fn bool QDawg::Node::isLast() const
+
+  Returns TRUE if this Node is the last in the child list; otherwise
+  returns FALSE.
+*/
+/*!
+  \fn const Node* QDawg::Node::next() const
+
+  Returns the next child Node in the child list or 0 if the current
+  Node isLast().
+*/
+/*!
+  \fn const Node* QDawg::Node::jump() const
+
+  Returns the node connected to this Node.
+*/
