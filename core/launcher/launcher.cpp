@@ -800,7 +800,7 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	  // we need to scan the list now. Hopefully the cache will be there
 	  // read the mimetypes from the config and search for documents
  	  QStringList mimetypes = configToMime( &cfg);
-                  qApp->processEvents();
+          //qApp->processEvents();
                   Global::statusMessage( tr( "Searching documents" ) );
   	  tmp = new DocLnkSet( (*it)->path(), mimetypes.join(";")  );
 	  docsFolder->appendFrom( *tmp );
@@ -817,7 +817,7 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	      cfg.writeEntry("timestamp", newStamp );
 	      cfg.write();
 
-              qApp->processEvents();
+              //qApp->processEvents();
               tmp = new DocLnkSet( (*it)->path(), medium.mimeTypes().join(";" ) );
       	      docsFolder->appendFrom( *tmp );
 	      delete tmp;
@@ -830,7 +830,7 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	    bool check = cfg.readBoolEntry("autocheck", true );
 	    if( check ){ // find the documents
 
-                      qApp->processEvents();
+                //qApp->processEvents();
                       Global::statusMessage( tr( "Searching documents" ) );
                       tmp = new DocLnkSet( (*it)->path(), configToMime(&cfg ).join(";") );
 	      docsFolder->appendFrom( *tmp );
