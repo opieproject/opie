@@ -54,3 +54,7 @@ QString MailPlugin::appName() const {
 }
 
 
+bool MailPlugin::excludeFromRefresh() const {
+    return false;
+}
+

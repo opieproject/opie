@@ -1,3 +1,8 @@
+0.6
+
+* longer refresh intervals possible
+* plugins can decide now if they want to take part in refresh cycles
+
 0.5.2
 
 * refresh settings

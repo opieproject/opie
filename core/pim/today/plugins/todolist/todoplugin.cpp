@@ -56,3 +56,6 @@ QString TodolistPlugin::appName() const {
 }
 
 
+bool TodolistPlugin::excludeFromRefresh() const {
+    return false;
+}

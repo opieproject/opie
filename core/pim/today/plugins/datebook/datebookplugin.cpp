@@ -57,3 +57,6 @@ QString DatebookPlugin::appName()  const {
     return "datebook";
 }
 
+bool DatebookPlugin::excludeFromRefresh() const {
+    return false;
+}

@@ -3,7 +3,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Maximilian Reiﬂ <harlekin@handhelds.org>
 Architecture: arm
-Version: 0.5.2-$SUB_VERSION
+Version: 0.6-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION)
 License: GPL
 Description: today screen

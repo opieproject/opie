@@ -104,8 +104,10 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     refreshLabel->setText( tr( "Refresh" ) );
     QWhatsThis::add( refreshLabel, tr( "How often should Today refresh itself" ) );
     SpinRefresh = new QSpinBox( hbox_refresh );
-    SpinRefresh->setMinValue( 2 );
-    SpinRefresh->setSuffix( tr( " seconds" ) );
+    SpinRefresh->setMinValue( 0 );
+    SpinRefresh->setSuffix( tr( " sec" ) );
+    SpinRefresh->setMaxValue ( 7200 );
+    SpinRefresh->setSpecialValueText ( tr("never") );
     QWhatsThis::add(  SpinRefresh, tr( "How often should Today refresh itself" ) );
 
     tab3Layout->addWidget( hbox_auto );

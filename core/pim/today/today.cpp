@@ -45,6 +45,7 @@ struct TodayPlugin {
     QWidget *guiBox;
     QString name;
     bool active;
+    bool excludeRefresh;
     int pos;
 };
 
@@ -76,17 +77,22 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
  * Qcop receive method.
  */
 void Today::channelReceived( const QCString &msg, const QByteArray & data ) {
-  QDataStream stream( data, IO_ReadOnly );
-  if ( msg == "message(QString)" ) {
-      QString message;
-      stream >> message;
-      setOwnerField( message );
-  }
+    QDataStream stream( data, IO_ReadOnly );
+    if ( msg == "message(QString)" ) {
+        QString message;
+        stream >> message;
+        setOwnerField( message );
+    }
 }
 
 void Today::setRefreshTimer( int interval ) {
 
-    if ( m_refreshTimerEnabled ) {
+
+    disconnect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
+
+    // 0 is "never" case
+    if ( !interval == 0 ) {
+        connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
         m_refreshTimer->changeInterval( interval );
     }
 }
@@ -98,12 +104,12 @@ void Today::setRefreshTimer( int interval ) {
 void Today::setOwnerField() {
     QString file = Global::applicationFileName( "addressbook", "businesscard.vcf" );
     if ( QFile::exists( file ) ) {
-    Contact cont = Contact::readVCard( file )[0];
-    QString returnString = cont.fullName();
-    OwnerField->setText( "<b>" + tr ( "Owned by " ) + returnString + "</b>" );
-  } else {
-    OwnerField->setText( "<b>" + tr ( "Please fill out the business card" ) + " </b>" );
-  }
+        Contact cont = Contact::readVCard( file )[0];
+        QString returnString = cont.fullName();
+        OwnerField->setText( "<b>" + tr ( "Owned by " ) + returnString + "</b>" );
+    } else {
+        OwnerField->setText( "<b>" + tr ( "Please fill out the business card" ) + " </b>" );
+    }
 }
 
 /**
@@ -129,8 +135,7 @@ void Today::init() {
 
     cfg.setGroup( "General" );
     m_iconSize = cfg.readNumEntry( "IconSize", 18 );
-    m_refreshTimer->changeInterval( cfg.readNumEntry( "checkinterval", 15000 ) );
-
+    setRefreshTimer(  cfg.readNumEntry( "checkinterval", 15000 ) );
 }
 
 
@@ -139,12 +144,23 @@ void Today::init() {
  */
 void Today::loadPlugins() {
 
+    // extra list for plugins that exclude themself from periodic refresh
+    QMap<QString, TodayPlugin> pluginListRefreshExclude;
+
     QValueList<TodayPlugin>::Iterator tit;
-    for ( tit = pluginList.begin(); tit != pluginList.end(); ++tit ) {
-	(*tit).library->unload();
-	delete (*tit).library;
+    if ( !pluginList.isEmpty() ) {
+        for ( tit = pluginList.begin(); tit != pluginList.end(); ++tit ) {
+            if ( (*tit).excludeRefresh ) {
+                pluginListRefreshExclude.insert( (*tit).name , (*tit) );
+                qDebug( "Found an plug that does not want refresh feature" );
+            } else {
+                (*tit).library->unload();
+                delete (*tit).library;
+            }
+        }
+        pluginList.clear();
     }
-    pluginList.clear();
+
 
     QString path = QPEApplication::qpeDir() + "/plugins/today";
     QDir dir( path, "lib*.so" );
@@ -162,50 +178,60 @@ void Today::loadPlugins() {
         if ( lib->queryInterface( IID_TodayPluginInterface, (QUnknownInterface**)&iface ) == QS_OK ) {
 	    qDebug( "loading: %s", QString( path + "/" + *it ).latin1() );
             qDebug( QString(*it) );
-            TodayPlugin plugin;
-            plugin.library = lib;
-            plugin.iface = iface;
-            plugin.name = QString(*it);
 
-            // find out if plugins should be shown
-            if ( m_excludeApplets.grep( *it ).isEmpty() ) {
-                plugin.active = true;
+            // If plugin is exludes from refresh, get it in the list again here.
+
+            if ( pluginListRefreshExclude.contains( (*it) ) ) {
+                tempList.insert( pluginListRefreshExclude[(*it)].name, pluginListRefreshExclude[(*it)] );
+                qDebug( "TEST2 " +  pluginListRefreshExclude[(*it)].name );
             } else {
-                plugin.active = false;
-            }
-            plugin.guiPart = plugin.iface->guiPart();
 
-            // package the whole thing into a qwidget so it can be shown and hidden
-            plugin.guiBox = new QWidget( this );
-            QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
-            QPixmap plugPix;
-            plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
-            OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
-            plugIcon->setPixmap( plugPix );
-            QWhatsThis::add( plugIcon, tr("Click here to launch the associated app") );
-            plugIcon->setName( plugin.guiPart->appName() );
-            connect( plugIcon, SIGNAL( clicked() ), this, SLOT( startApplication() ) );
-            // a scrollview for each plugin
-            QScrollView* sv = new QScrollView( plugin.guiBox );
-            QWidget *plugWidget = plugin.guiPart->widget( sv->viewport() );
-            // not sure if that is good .-)
-            sv->setMinimumHeight( 10 );
-            sv->setResizePolicy( QScrollView::AutoOneFit );
-            sv->setHScrollBarMode( QScrollView::AlwaysOff );
-            sv->setFrameShape( QFrame::NoFrame );
-            sv->addChild( plugWidget );
-            // make sure the icon is on the top alligned
-            boxLayout->addWidget( plugIcon, 0, AlignTop );
-            boxLayout->addWidget( sv, 0, AlignTop );
-            boxLayout->setStretchFactor( plugIcon, 1 );
-            boxLayout->setStretchFactor( sv, 9 );
-            // "prebuffer" it in one more list, to get the sorting done
-            tempList.insert( plugin.name, plugin );
+                TodayPlugin plugin;
+                plugin.library = lib;
+                plugin.iface = iface;
+                plugin.name = QString(*it);
 
-            // on first start the list is off course empty
-            if ( m_allApplets.isEmpty() ) {
-                layout->addWidget( plugin.guiBox );
-                pluginList.append( plugin );
+                // find out if plugins should be shown
+                if ( m_excludeApplets.grep( *it ).isEmpty() ) {
+                    plugin.active = true;
+                } else {
+                    plugin.active = false;
+                }
+                plugin.guiPart = plugin.iface->guiPart();
+                plugin.excludeRefresh = plugin.guiPart->excludeFromRefresh();
+
+                // package the whole thing into a qwidget so it can be shown and hidden
+                plugin.guiBox = new QWidget( this );
+                QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
+                QPixmap plugPix;
+                plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
+                OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
+                plugIcon->setPixmap( plugPix );
+                QWhatsThis::add( plugIcon, tr("Click here to launch the associated app") );
+                plugIcon->setName( plugin.guiPart->appName() );
+                connect( plugIcon, SIGNAL( clicked() ), this, SLOT( startApplication() ) );
+                // a scrollview for each plugin
+                QScrollView* sv = new QScrollView( plugin.guiBox );
+                QWidget *plugWidget = plugin.guiPart->widget( sv->viewport() );
+                // not sure if that is good .-)
+                sv->setMinimumHeight( 10 );
+                sv->setResizePolicy( QScrollView::AutoOneFit );
+                sv->setHScrollBarMode( QScrollView::AlwaysOff );
+                sv->setFrameShape( QFrame::NoFrame );
+                sv->addChild( plugWidget );
+                // make sure the icon is on the top alligned
+                boxLayout->addWidget( plugIcon, 0, AlignTop );
+                boxLayout->addWidget( sv, 0, AlignTop );
+                boxLayout->setStretchFactor( plugIcon, 1 );
+                boxLayout->setStretchFactor( sv, 9 );
+                // "prebuffer" it in one more list, to get the sorting done
+                tempList.insert( plugin.name, plugin );
+
+                // on first start the list is off course empty
+                if ( m_allApplets.isEmpty() ) {
+                    layout->addWidget( plugin.guiBox );
+                    pluginList.append( plugin );
+                }
             }
         } else {
             qDebug( "could not recognize %s", QString( path + "/" + *it ).latin1() );
@@ -216,6 +242,7 @@ void Today::loadPlugins() {
     if ( !m_allApplets.isEmpty() ) {
         TodayPlugin tempPlugin;
         QStringList::Iterator stringit;
+
         for( stringit = m_allApplets.begin(); stringit !=  m_allApplets.end(); ++stringit ) {
             tempPlugin = ( tempList.find( *stringit ) ).data();
             if ( !( (tempPlugin.name).isEmpty() ) ) {
@@ -268,9 +295,12 @@ void Today::draw() {
  */
 void Today::startConfig() {
 
+    // disconnect timer to prevent problems while being on config dialog
+    disconnect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
+
     TodayConfig conf( this, "dialog", true );
 
-     TodayPlugin plugin;
+    TodayPlugin plugin;
     QList<TodayConfigWidget> configWidgetList;
 
     for ( int i = pluginList.count() - 1  ; i >= 0; i-- ) {
@@ -296,6 +326,9 @@ void Today::startConfig() {
             confWidget->writeConfig();
         }
         refresh();
+    } else {
+        // since refresh is not called in that case , reconnect the signal
+        connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
     }
 }
 
