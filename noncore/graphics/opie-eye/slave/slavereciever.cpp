@@ -41,7 +41,7 @@ QDataStream &operator<<( QDataStream& s, const PixmapInfo& inf) {
  */
 QDataStream &operator>>( QDataStream& s, PixmapInfo& inf ) {
     s >> inf.file >> inf.width >> inf.height;
-    owarn << "Recieved " << inf.file.latin1() << " " << inf.width << " " << inf.height << "" << oendl; 
+    owarn << "Recieved " << inf.file.latin1() << " " << inf.width << " " << inf.height << "" << oendl;
     return s;
 }
 QDataStream &operator<<( QDataStream& s, const ImageInfo& i) {
@@ -86,7 +86,7 @@ SlaveReciever::~SlaveReciever() {
 }
 
 void SlaveReciever::recieveAnswer( const QCString& string, const QByteArray& ar) {
-    owarn << "String is " << string.data() << "" << oendl; 
+    owarn << "String is " << string.data() << "" << oendl;
     QDataStream stream(ar, IO_ReadOnly );
     QStringList lst;
     static ImageInfo  inf;
@@ -94,12 +94,14 @@ void SlaveReciever::recieveAnswer( const QCString& string, const QByteArray& ar)
 
     if ( string == "thumbInfo(QString)" ) {
         stream >> inf.file;
+        inf.kind = false;
         m_inList.append(inf);
     }else if ( string == "thumbInfos(QStringList)" ) {
         stream >> lst;
         for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
-            owarn << "Adding thumbinfo for file "+ *it << oendl; 
+            owarn << "Adding thumbinfo for file "+ *it << oendl;
             inf.file = (*it);
+            inf.kind = false;
             m_inList.append(inf);
         }
     }else if ( string == "fullInfo(QString)" ) {
@@ -109,7 +111,7 @@ void SlaveReciever::recieveAnswer( const QCString& string, const QByteArray& ar)
     }else if ( string == "fullInfos(QStringList)" ) {
         stream >> lst;
         for(QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
-            owarn << "Adding fullInfo for"+ *it << oendl; 
+            owarn << "Adding fullInfo for"+ *it << oendl;
             inf.file = (*it);
             inf.kind = true;
             m_inList.append(inf);
@@ -121,7 +123,7 @@ void SlaveReciever::recieveAnswer( const QCString& string, const QByteArray& ar)
         PixmapList list;
         stream >> list;
         for(PixmapList::Iterator it = list.begin(); it != list.end(); ++it ) {
-            owarn << "Got " << (*it).width << " " << (*it).height << " " + (*it).file << oendl; 
+            owarn << "Got " << (*it).width << " " << (*it).height << " " + (*it).file << oendl;
             m_inPix.append(*it);
         }
     }else if ( string == "refUp()" ) {
@@ -210,7 +212,7 @@ void SlaveReciever::slotSend() {
 
     m_out->stop();
 
-    owarn << "Sending " << outPix().count() << " " << outInf().count() << "" << oendl; 
+    owarn << "Sending " << outPix().count() << " " << outInf().count() << "" << oendl;
     /* queue it and send */
     /* if this ever gets a service introduce request queues
      * so we can differinatate between different clients
@@ -219,14 +221,14 @@ void SlaveReciever::slotSend() {
         QCopEnvelope answer("QPE/opie-eye", "pixmapsHandled(PixmapList)" );
         answer << outPix();
         for ( PixmapList::Iterator it = m_outPix.begin();it!=m_outPix.end();++it ) {
-            owarn << "Sending out " << (*it).file.latin1() << " " << (*it).width << " " << (*it).height << "" << oendl; 
+            owarn << "Sending out " << (*it).file.latin1() << " " << (*it).width << " " << (*it).height << "" << oendl;
         }
     }
     if ( !m_outList.isEmpty() ) {
         QCopEnvelope answer("QPE/opie-eye", "pixmapsHandled(StringList)" );
         answer << outInf();
         for ( StringList::Iterator it = m_outList.begin();it!=m_outList.end();++it ) {
-            owarn << "Sending out2 " + (*it).file << oendl; 
+            owarn << "Sending out2 " + (*it).file << oendl;
         }
     }
 
