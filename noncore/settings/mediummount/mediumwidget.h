@@ -35,6 +35,7 @@ namespace MediumMountSetting {
     void slotAdd();
     void slotRemove();
     void slotStateChanged();
+    void slotScanAllChanged(int);
 
   private:
     void readConfig();
@@ -67,6 +68,7 @@ namespace MediumMountSetting {
     QCheckBox *m_text;
     QCheckBox *m_video;
 
+    QCheckBox *m_scan_all_check;
     QCheckBox *m_always;
     //QCheckBox *m_yesNo;
 

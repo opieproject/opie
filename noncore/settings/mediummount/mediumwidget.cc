@@ -126,7 +126,11 @@ void MediumMountWidget::initGUI()
     this, SLOT(slotRemove() ) );
 
   m_box->addWidget(m_hboxAdd );
-  
+  m_scan_all_check = new QCheckBox( tr("Scan whole media"), this );
+  connect(m_scan_all_check,SIGNAL(stateChanged(int)),this,SLOT(slotScanAllChanged(int)));
+ 
+  m_box->addWidget(m_scan_all_check);
+
   m_always = new QCheckBox( tr("Always check this medium"), this );
 
   m_box->addWidget( m_always );
@@ -169,6 +173,7 @@ void MediumMountWidget::readConfig( )
   QStringList entries = m_config->readListEntry("subdirs",':');
   m_subList->clear();
   m_subList->insertStringList(entries);
+  m_scan_all_check->setChecked(m_config->readBoolEntry("wholemedia",true));
 }
 
 void MediumMountWidget::writeConfig()
@@ -192,13 +197,17 @@ void MediumMountWidget::writeConfig()
       ctext = m_subList->text(i);
       if (ctext.isEmpty())
           continue;
-      if (ctext.startsWith("/")&&ctext.length()>1) {
+      if (ctext.startsWith("/")) {
           ctext = ctext.right(ctext.length()-1);
       }
-      entries.append(ctext);
+      if (!ctext.isEmpty()) {
+          entries.append(ctext);
+      }
   }
   m_config->writeEntry("subdirs",entries,':');
+  m_config->writeEntry("wholemedia",m_scan_all_check->isChecked());
 }
+
 MediumMountWidget::~MediumMountWidget()
 {
   delete m_config;
@@ -230,4 +239,12 @@ void MediumMountWidget::slotStateChanged()
   m_video->setEnabled( state );
   m_image->setEnabled( state );
 
+}
+
+void MediumMountWidget::slotScanAllChanged(int)
+{
+    bool state = !(m_scan_all_check->isChecked());
+    m_add->setEnabled(state);
+    m_del->setEnabled(state);
+    m_subList->setEnabled(state);
 }
