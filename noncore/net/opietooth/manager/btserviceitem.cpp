@@ -13,7 +13,7 @@ BTServiceItem::~BTServiceItem() {
 
 }
 QString BTServiceItem::type() const {
-    return QString::fromLatin1("Service");
+    return QString::fromLatin1("service");
 }
 int BTServiceItem::typeId() const {
     return Service;

@@ -13,6 +13,7 @@
 
 #include "btserviceitem.h"
 #include "btdeviceitem.h"
+#include "popuphelper.h"
 
 #include "bticonloader.h"
 
@@ -53,6 +54,7 @@ namespace OpieTooth {
 	QString status()const;
 	void initGui();
         void setInfo();
+        PopupHelper m_popHelper;
         Manager *m_localDevice;
         QMap<QString,BTDeviceItem*> m_deviceList;
 
