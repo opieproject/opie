@@ -101,8 +101,17 @@ void ProcessInfo::updateData()
     char state;
     char comm[64];
 
+    QString selectedpid;
+    QListViewItem *curritem = ProcessView->currentItem();
+    if ( curritem )
+    {
+        selectedpid = curritem->text( 0 );
+    }
+    
     ProcessView->clear();
 
+    QListViewItem *newitem;
+    QListViewItem *selecteditem = 0x0;
     QDir *procdir = new QDir("/proc", 0, QDir::Name, QDir::Dirs);
     QFileInfoList *proclist = new QFileInfoList(*(procdir->entryInfoList()));
     if ( proclist )
@@ -132,10 +141,15 @@ void ProcessInfo::updateData()
                     processtime = processtime.rightJustify( 9, ' ' );
                     fclose( procfile );
 
-                    ( void ) new QListViewItem( ProcessView, processnum, processcmd, processstatus, processtime );
+                    newitem = new QListViewItem( ProcessView, processnum, processcmd, processstatus, processtime );
+                    if ( processnum == selectedpid )
+                    {
+                        selecteditem = newitem;
+                    }
                 }
             }
         }
+        ProcessView->setCurrentItem( selecteditem );
     }
 
     delete proclist;

@@ -96,12 +96,21 @@ void ModulesInfo::updateData()
     char usage[200];
     int modsize, usecount;
 
+    QString selectedmod;
+    QListViewItem *curritem = ModulesView->currentItem();
+    if ( curritem )
+    {
+        selectedmod = curritem->text( 0 );
+    }
+    
     ModulesView->clear();
 
     FILE *procfile = fopen( ( QString ) ( "/proc/modules"), "r");
 
     if ( procfile )
     {
+        QListViewItem *newitem;
+        QListViewItem *selecteditem = 0x0;
         while ( true ) {
             int success = fscanf( procfile, "%s%d%d%[^\n]", modname, &modsize, &usecount, usage );
 
@@ -113,8 +122,13 @@ void ModulesInfo::updateData()
             QString qusecount = QString::number( usecount ).rightJustify( 2, ' ' );
             QString qusage = QString( usage );
 
-            ( void ) new QListViewItem( ModulesView, qmodname, qmodsize, qusecount, qusage );
+            newitem = new QListViewItem( ModulesView, qmodname, qmodsize, qusecount, qusage );
+            if ( qmodname == selectedmod )
+            {
+                selecteditem = newitem;
+            }
         }
+        ModulesView->setCurrentItem( selecteditem );
 
         fclose( procfile );
     }
