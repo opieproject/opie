@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.10 2002-12-11 14:57:54 mickeyl Exp $
+ * $Id: daemon.cc,v 1.11 2002-12-16 17:59:21 mjm Exp $
  */
 
 #include "config.hh"
@@ -10,8 +10,8 @@
 /* Main function of wellenreiterd */
 int main(int argc, char **argv)
 {
-  int sock, maxfd, retval;
-  char buffer[128];
+  int sock, maxfd, retval, card_type;
+  char buffer[128], sniffer_device[5];
   struct pcap_pkthdr header;
   pcap_t *handletopcap;
   const unsigned char *packet;
@@ -19,8 +19,21 @@ int main(int argc, char **argv)
   fd_set rset;
 
   fprintf(stderr, "wellenreiterd %s\n\n", VERSION);
+  fprintf(stderr, "(c) 2002 by M-M-M\n\n");
 
-  if(!card_into_monitormode(&handletopcap, SNIFFER_DEVICE, CARD_TYPE))
+  if(argc < 3)
+    usage();
+
+  /* Set sniffer device */
+  memset(sniffer_device, 0, sizeof(sniffer_device));
+  strncpy(sniffer_device, (char *)argv[1], sizeof(sniffer_device) - 1);
+
+  /* Set card type */
+  card_type = atoi(argv[2]);
+  if(card_type < 1 || card_type > 3)
+    usage();
+
+  if(!card_into_monitormode(&handletopcap, sniffer_device, card_type))
   {
     wl_logerr("Cannot set card into mon mode, aborting");
     exit(-1);
@@ -28,7 +41,7 @@ int main(int argc, char **argv)
   wl_loginfo("Set card into monitor mode");
 
   /////// following line will be moved to lib as soon as possible ////////////
-    if((handletopcap = pcap_open_live(SNIFFER_DEVICE, BUFSIZ, 1, 0, NULL)) == NULL)
+    if((handletopcap = pcap_open_live(sniffer_device, BUFSIZ, 1, 0, NULL)) == NULL)
     {
       wl_logerr("pcap_open_live() failed: %s", strerror(errno));
       exit(-1);
@@ -42,11 +55,11 @@ int main(int argc, char **argv)
     retval = pcap_datalink(handletopcap);
     if (retval != DLT_IEEE802_11) /* Rawmode is IEEE802_11 */
       {
-	wl_loginfo("Interface %s does not work in the correct 802.11 raw mode", SNIFFER_DEVICE);
+	wl_loginfo("Interface %s does not work in the correct 802.11 raw mode", sniffer_device);
 	pcap_close(handletopcap);
 	return 0;
       }
-    wl_loginfo("Your successfully listen on %s in 802.11 raw mode", SNIFFER_DEVICE);
+    wl_loginfo("Your successfully listen on %s in 802.11 raw mode", sniffer_device);
     ////////////////////////////////////////
  
   /* Setup socket for incoming commands */
@@ -116,4 +129,14 @@ int main(int argc, char **argv)
 
   close(sock);
   exit(0);
+}
+
+void usage(void)
+{
+  fprintf(stderr, "Usage: wellenreiter <device> <cardtype>\n"      \
+	  "\t<device>   = Wirelessdevice (e.g. wlan0)\n" \
+	  "\t<cardtype> = Cardtype:\t Cisco\t= 1\n"       \
+	  "\t\t\t\tNG\t= 2\n"                             \
+          "\t\t\t\tHOSTAP\t= 3\n");
+  exit(-1);
 }
