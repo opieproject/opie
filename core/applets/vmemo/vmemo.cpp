@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.36 2002-06-23 17:17:08 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.37 2002-06-23 18:53:51 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -233,8 +233,8 @@ VMemo::VMemo( QWidget *parent, const char *_name )
       e << QString("QPE/VMemo");
       e << QString("toggleRecord()");
     }
-    //         if( vmCfg.readNumEntry("hideIcon",0) == 1 || toggleKey > 0)
-    //             hide();
+    if( vmCfg.readNumEntry("hideIcon",0) == 1 || toggleKey > 0)
+      hide();
   }
 }
 
@@ -363,6 +363,7 @@ void VMemo::stopRecording() {
   recording = FALSE;
   if(useAlerts)
     if( msgLabel) delete msgLabel;
+  t_timer->stop();
 }
 
 int VMemo::openDSP()
@@ -456,8 +457,11 @@ void VMemo::record(void)
   QString msg;
   msg.sprintf("Recording format %d", format);
   qDebug(msg);
+  Config config("Vmemo");
+  config.setGroup("Record");
+  int sRate=config.readNumEntry("SizeLimit", 30);
 
-  t_timer->start( 30 * 1000+1000, TRUE);
+  t_timer->start( sRate * 1000+1000, TRUE);
 
   if(systemZaurus) {
 
@@ -472,7 +476,7 @@ void VMemo::record(void)
       while(recording)   {
 
         result = read(dsp, sound, 512); // 8192
-        int j=0;
+        //        int j=0;
 
         for (int i = 0; i < result; i++) { //since Z is mono do normally
           monoBuffer[i] = sound[i];
@@ -498,7 +502,7 @@ void VMemo::record(void)
       unsigned short sound[512], monoBuffer[512];
       while(recording)   {
         result = read(dsp, sound, 512); // 8192
-        int j=0;
+        //        int j=0;
 
         //        if(systemZaurus) {
 
@@ -527,7 +531,7 @@ void VMemo::record(void)
     msg.sprintf("Recording format other");
     qDebug(msg);
 
-    signed short sound[512], monoBuffer[512];
+    signed short sound[512];//, monoBuffer[512];
 
     while(recording)  {
 
