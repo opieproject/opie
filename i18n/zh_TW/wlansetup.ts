@@ -3,11 +3,11 @@
     <name>WLAN</name>
     <message>
         <source>Wireless LAN Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>無線區域網路設定</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>設定</translation>
     </message>
     <message>
         <source>ESS ID</source>
@@ -87,7 +87,7 @@
     </message>
     <message>
         <source>Enable Wep</source>
-        <translation type="unfinished"></translation>
+        <translation>啟動Wep</translation>
     </message>
 </context>
 </TS>

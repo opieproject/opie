@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Calendar</source>
-        <translation>計算機</translation>
+        <translation>行事曆</translation>
     </message>
 </context>
 </TS>
