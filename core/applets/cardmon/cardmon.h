@@ -22,7 +22,6 @@
 #include <qwidget.h>
 #include <qpixmap.h>
 #include <qpopupmenu.h>
-#include <qtimer.h>
 
 class CardMonitor : public QWidget {
     Q_OBJECT
@@ -34,24 +33,26 @@ public:
 
 private slots:
     void cardMessage( const QCString &msg, const QByteArray & );
-    void popUpTimeout();
+    void popupTimeout();
 
 protected:
     void paintEvent( QPaintEvent* );
     void mousePressEvent( QMouseEvent * );
 private:
     QPixmap pm;
-    QPopupMenu *popUpMenu;
-    QTimer *popUpMenuTimer;
     // pcmcia socket 0
     bool cardInPcmcia0;
     QString cardInPcmcia0Name;
+    QString cardInPcmcia0Type;
     // pcmcia socket 1
     bool cardInPcmcia1;
     QString cardInPcmcia1Name;
+    QString cardInPcmcia1Type;
     bool cardInSd;
     void iconShow();
-    void popUp(QString message);
+    QPopupMenu *popupMenu;
+    void popup(QString message, QString icon="");
+    QString getIconName(QString type);
 };
 
 #endif

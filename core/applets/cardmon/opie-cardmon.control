@@ -1,4 +1,4 @@
-Files: plugins/applets/libcardmonapplet.so* pics/cardmon/pcmcia.png
+Files: plugins/applets/libcardmonapplet.so* pics/cardmon/*.png
 Priority: optional
 Section: opie/taskbar
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
