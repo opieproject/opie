@@ -113,7 +113,6 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
                 }
             }
         }
-
     }
 
     for ( int i = 0; i < 7; i++ ) {
@@ -128,32 +127,26 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     slider->setMaxValue( 1 );
     slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
     slider->setFocusPolicy( QWidget::NoFocus );
-    slider->setGeometry( QRect( 7, 250, 220, 20 ) );
+
+    resizeEvent( NULL );
 
     connect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
     connect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
-
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
-    connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-    connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
     connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
-
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
 
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
-
-      ////////////////////////// FIXME
     setFullscreen( mediaPlayerState->fullscreen() );
     setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
-    qDebug("finished videowidget");
 }
 
 
 VideoWidget::~VideoWidget() {
-    mediaPlayerState->setPlaying( FALSE );
+
     for ( int i = 0; i < 7; i++ ) {
         delete buttonPixUp[i];
         delete buttonPixDown[i];
@@ -166,7 +159,7 @@ VideoWidget::~VideoWidget() {
     for ( int i = 0; i < 7; i++ ) {
         delete masks[i];
     }
-    
+
 }
 
 QPixmap *combineVImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
@@ -190,15 +183,14 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
           //videoFrame->height();
     int Vw = 220;
       //videoFrame->width();
-//    songInfo.setGeometry( QRect( 2, 10, w - 4, 20 ) );
 
-    slider->setFixedWidth( w - 110 );
+
+    slider->setFixedWidth( w - 20 );
     slider->setGeometry( QRect( 15, h - 30, w - 90, 20 ) );
     slider->setBackgroundOrigin( QWidget::ParentOrigin );
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setBackgroundPixmap( *pixBg );
 
-//    time.setGeometry( QRect( w - 85, h - 30, 70, 20 ) );
     xoff = 0;// ( imgUp->width() ) / 2;
     yoff = 180;//(( Vh  - imgUp->height() ) / 2) - 10;
     QPoint p( xoff, yoff );
@@ -245,6 +237,22 @@ void VideoWidget::setLength( long max ) {
 }
 
 void VideoWidget::setView( char view ) {
+
+    if ( mediaPlayerState->streaming() ) {
+        qDebug("<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>");
+        if( !slider->isHidden()) {
+            slider->hide();
+        }
+        disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+        disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+    } else {
+        // this stops the slider from being moved, thus
+        // does not stop stream when it reaches the end
+        slider->show();
+        connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+        connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+    }
+
     if ( view == 'v' ) {
         makeVisible();
     } else {
@@ -286,84 +294,77 @@ void VideoWidget::toggleButton( int i ) {
 
 void VideoWidget::paintButton( QPainter *p, int i ) {
 
-    if ( videoButtons[i].isDown )
+    if ( videoButtons[i].isDown ) {
         p->drawPixmap( xoff, yoff, *buttonPixDown[i] );
-    else
+    } else {
         p->drawPixmap( xoff, yoff, *buttonPixUp[i] );
+    }
 }
 
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( int i = 0; i < numVButtons; i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
-              // The test to see if the mouse click is inside the button or not
+            // The test to see if the mouse click is inside the button or not
             int x = event->pos().x() - xoff;
             int y = event->pos().y() - yoff;
 
             bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask->width()
-                                && y < imgButtonMask->height() && imgButtonMask->pixelIndex( x, y ) == i + 1 );
-            if ( isOnButton != videoButtons[i].isHeld ) {
-                videoButtons[i].isHeld = isOnButton;
-                toggleButton(i);
-            }
-            
-//            qDebug("mouseMove event switch1 %d", i);
-            if( isOnButton)
-                switch (i) {
-                  case VideoStop:{
-                      setToggleButton( i, FALSE );
-                      mediaPlayerState->setStop(TRUE);
-                      mediaPlayerState->setPlaying(FALSE);
-                      return;
-                  }
-                  case VideoPlay: {
+                                && y < imgButtonMask->height()
+                                && imgButtonMask->pixelIndex( x, y ) == i + 1 );
 
-                      if( mediaPlayerState->isPaused) {
-                          setToggleButton( i, FALSE );
-                          mediaPlayerState->setPaused( FALSE);
-                          return;
-                      }
-                      else if( mediaPlayerState->isPlaying) {
-                          setToggleButton( i, TRUE );
-                          mediaPlayerState->setPaused( TRUE);
-                          return;
-                      }
-                      else {
-                          setToggleButton( i, FALSE );
-                          mediaPlayerState->setPlaying( videoButtons[i].isDown );
-                          return;
-                      }
-                  }
-                  case VideoNext:    qDebug("next");   mediaPlayerState->setNext(); return;
-                  case VideoPrevious:   qDebug("previous"); mediaPlayerState->setPrev(); return;
-                  case VideoVolUp:    return;
-                  case VideoVolDown:    return;
-                  case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
-                       
-                };
-            
+            if ( isOnButton && !videoButtons[i].isHeld ) {
+                videoButtons[i].isHeld = TRUE;
+                toggleButton(i);
+
+                switch (i) {
+                case VideoVolUp:
+                    qDebug("more clicked");
+                    emit moreClicked();
+                    return;
+                case VideoVolDown:
+                    qDebug("less clicked");
+                    emit lessClicked();
+                    return;
+                }
+            } else if ( !isOnButton && videoButtons[i].isHeld ) {
+                        videoButtons[i].isHeld = FALSE;
+                        toggleButton(i);
+            }
         } else {
+
             if ( videoButtons[i].isHeld ) {
                 videoButtons[i].isHeld = FALSE;
                 if ( !videoButtons[i].isToggle ) {
                     setToggleButton( i, FALSE );
+                    qDebug("button toggled3  %d",i);
                 }
-//                 qDebug("mouseMove event switch2 %d %d", i, VideoPlay);
-                switch (i) {
-                  case VideoPlay:     {
-                      if( mediaPlayerState->isPaused) {
-                          mediaPlayerState->setPaused( FALSE); return; }
-                      else if( mediaPlayerState->isPlaying) {
-                          mediaPlayerState->setPaused( TRUE); return; }
-                      else
-                          mediaPlayerState->setPlaying( TRUE /*videoButtons[i].isDown*/ ); return;
-                  }
-                  case VideoStop:       mediaPlayerState->setPlaying(FALSE); return;
+
+                switch(i) {
+
+                case VideoPlay: {
+                    if( mediaPlayerState->isPaused ) {
+                        qDebug("play again clicked");
+                        setToggleButton( i, FALSE );
+                        mediaPlayerState->setPaused( FALSE );
+                        return;
+                    } else if( !mediaPlayerState->isPaused ) {
+                        qDebug("pause now clicked");
+                        setToggleButton( i, TRUE );
+                        mediaPlayerState->setPaused( TRUE );
+                        return;
+                    } else {
+                        //  setToggleButton( i, TRUE );
+                        // mediaPlayerState->setPlaying( videoButtons[i].isDown );
+                    }
+                }
+
+                case VideoStop:       mediaPlayerState->setPlaying( FALSE ); return;
 //                  case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
-                  case VideoNext:       mediaPlayerState->setNext(); return;
-                  case VideoPrevious:   mediaPlayerState->setPrev(); return;
-                  case VideoVolUp:    return;
-                  case VideoVolDown:    return;
-                  case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
+                case VideoNext:       mediaPlayerState->setNext(); return;
+                case VideoPrevious:   mediaPlayerState->setPrev(); return;
+                case VideoVolUp:      emit moreReleased(); return;
+                case VideoVolDown:    emit lessReleased(); return;
+                case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
                 }
             }
         }
@@ -383,6 +384,11 @@ void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
     }
 }
 
+void VideoWidget::showEvent( QShowEvent* ) {
+    QMouseEvent event( QEvent::MouseMove, QPoint( 0, 0 ), 0, 0 );
+    mouseMoveEvent( &event );
+}
+
 
 void VideoWidget::makeVisible() {
   if ( mediaPlayerState->fullscreen() ) {
@@ -390,9 +396,9 @@ void VideoWidget::makeVisible() {
     showFullScreen();
     resize( qApp->desktop()->size() );
     slider->hide();
-  videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
+    videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
   } else {
-    showNormal();
+      showNormal();
     showMaximized();
     slider->show();
     videoFrame->setGeometry( QRect( 10, 20, 220, 160  ) );
@@ -405,23 +411,24 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
     QPainter p( this );
 
     if ( mediaPlayerState->fullscreen() ) {
-          // Clear the background
+        // Clear the background
         p.setBrush( QBrush( Qt::black ) );
-//      videoFrame->setGeometry( QRect( 0, 0 , 240 ,320  ) );
+        //      videoFrame->setGeometry( QRect( 0, 0 , 240 ,320  ) );
 
     } else {
 
-          //     videoFrame->setGeometry( QRect( 0, 15 , 240 ,170  ) );
-          // draw the buttons
+        //     videoFrame->setGeometry( QRect( 0, 15 , 240 ,170  ) );
+        // draw the buttons
 
         if ( !pe->erased() ) {
-              // Combine with background and double buffer
+            // Combine with background and double buffer
             QPixmap pix( pe->rect().size() );
             QPainter p( &pix );
             p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
             p.drawTiledPixmap( pe->rect(), *pixBg, pe->rect().topLeft() );
-            for ( int i = 0; i < numVButtons; i++ )
+            for ( int i = 0; i < numVButtons; i++ ) {
                 paintButton( &p, i );
+            }
             QPainter p2( this );
             p2.drawPixmap( pe->rect().topLeft(), pix );
         } else {
@@ -429,11 +436,11 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
             for ( int i = 0; i < numVButtons; i++ )
                 paintButton( &p, i );
         }
-//          for ( int i = 0; i < numButtons; i++ ) {
-//              paintButton( &p, i );
-//          }
-          // draw the slider
-         slider->repaint( TRUE );
+        //          for ( int i = 0; i < numButtons; i++ ) {
+        //              paintButton( &p, i );
+        //          }
+        // draw the slider
+        slider->repaint( TRUE );
       }
 }
 
@@ -443,19 +450,6 @@ void VideoWidget::closeEvent( QCloseEvent* ) {
 }
 
 
-bool VideoWidget::playVideo() {
-    bool result = FALSE;
-
-    int stream = 0;
-
-    int sw = 240;
-    int sh = 320;
-    int dd = QPixmap::defaultDepth();
-    int w = height();
-    int h = width();
-
-    return true;
-}
 
 void VideoWidget::keyReleaseEvent( QKeyEvent *e) {
     switch ( e->key() ) {

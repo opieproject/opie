@@ -41,7 +41,7 @@ class QPixmap;
 class QSlider;
 
 enum VideoButtons {
-    VideoStop,
+    VideoStop = 0,
     VideoPlay,
 //    VideoPause,
     VideoPrevious,
@@ -57,7 +57,7 @@ public:
     VideoWidget( QWidget* parent=0, const char* name=0, WFlags f=0 );
     ~VideoWidget();
 
-    bool playVideo();
+
     XineVideoWidget* vidWidget();
 public slots:
     void updateSlider( long, long );
@@ -72,13 +72,18 @@ public slots:
     void setView( char );
 
 signals:
+    void moreClicked();
+    void lessClicked();
+    void moreReleased();
+    void lessReleased();
     void sliderMoved( long );
-  void videoResized ( const QSize &s );
+    void videoResized ( const QSize &s );
 
 protected:
-    QString skin;
+
     void resizeEvent( QResizeEvent * );
     void paintEvent( QPaintEvent *pe );
+    void showEvent( QShowEvent *se );
     void mouseMoveEvent( QMouseEvent *event );
     void mousePressEvent( QMouseEvent *event );
     void mouseReleaseEvent( QMouseEvent *event );
@@ -94,9 +99,10 @@ private:
     QBitmap *masks[7];
     QPixmap *buttonPixUp[7];
     QPixmap *buttonPixDown[7];
+    QString skin;
 //    QPixmap *pixmaps[4];
     int xoff, yoff;
-  
+
 
     void paintButton( QPainter *p, int i );
     void toggleButton( int );
