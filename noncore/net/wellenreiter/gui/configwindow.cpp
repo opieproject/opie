@@ -60,8 +60,8 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
         {
             modules >> line;
             if ( line.contains( "cisco" ) ) devicetype = 1;
-            else if ( line.contains( "wlan" ) ) devicetype = 2;
             else if ( line.contains( "hostap" ) ) devicetype = 3;
+            else if ( line.contains( "prism" ) ) devicetype = 2;
             else if ( line.contains( "orinoco" ) ) devicetype = 4;
         }
         if ( devicetype )
