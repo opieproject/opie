@@ -66,7 +66,7 @@ public:
   }
 
 public:
-    void addTrigger( bool multi = False )
+    void addTrigger( bool multi = false )
     {
         QString filename = OFileDialog::getOpenFileName( OFileSelector::ExtendedAll );
         if ( !filename.isEmpty() )
@@ -82,11 +82,11 @@ public:
         {
             odebug << "cancelled." << oendl;
         }
-    {
+    }
 
 public slots:
 
-    void addSingle() { addTrigger(); }
+    void addSingle() { addTrigger(); };
     void addMulti() { addTrigger( true ); };
 
     void delTrigger()
