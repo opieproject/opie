@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: helpwindow.cpp,v 1.3 2005-02-19 17:24:39 zecke Exp $
+** $Id: helpwindow.cpp,v 1.4 2005-02-19 17:26:15 zecke Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -11,6 +11,9 @@
 *****************************************************************************/
 
 #include "helpwindow.h"
+
+#include <qpe/global.h>
+
 #include <qstatusbar.h>
 
 #include <qmenubar.h>
@@ -27,7 +30,7 @@
 HelpWindow::HelpWindow( const QString& home_, const QString&, QWidget* parent, const char *name )
     : QMainWindow( parent, name, WDestructiveClose ), pathCombo( 0 ), selectedURL()
 {
-   QString local_library = (QDir::homeDirPath ()) +"/Applications/gutenbrowser/";
+   QString local_library = Global::applicationFileName("gutenbrowser", QString::null);
 //        readHistory();
 //        readBookmarks();
 
