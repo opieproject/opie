@@ -43,14 +43,15 @@ void MainWindow::initUI() {
 
     /* add a toolbar for icons */
     m_icons = new QToolBar(this);
-    m_icons->setHorizontalStretchable( TRUE );
 
     /*
      * new Action for new sessions
      */
-    QAction* a = new QAction();
-    a->setText( tr("New Connection") );
+    QAction* a = new QAction(tr("New Connection"),
+                             Resource::loadPixmap( "new" ), 
+                             QString::null, 0, this, 0);
     a->addTo( m_console );
+    a->addTo( m_icons );
     connect(a, SIGNAL(activated() ),
             this, SLOT(slotNew() ) );
 
@@ -96,16 +97,18 @@ void MainWindow::initUI() {
     /*
      * the settings action
      */
-    m_setProfiles = new QAction();
-    m_setProfiles->setText( tr("Configure Profiles") );
+    m_setProfiles = new QAction(tr("Configure Profiles"),
+                             Resource::loadPixmap( "SettingsIcon" ), 
+                             QString::null, 0, this, 0);
     m_setProfiles->addTo( m_settings );
+    m_setProfiles->addTo( m_icons );
     connect( m_setProfiles, SIGNAL(activated() ),
              this, SLOT(slotConfigure() ) );
 
     /*
      * action that open/closes the keyboard
      */
-    m_openKeys = new QAction ("Keyboard...", 
+    m_openKeys = new QAction (tr("Open Keyboard..."), 
                              Resource::loadPixmap( "down" ), 
                              QString::null, 0, this, 0);
 
