@@ -127,6 +127,8 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     m_view= new QIconView( this );
     connect(m_view, SIGNAL(clicked(QIconViewItem*) ),
             this, SLOT(slotClicked(QIconViewItem*)) );
+    connect(m_view, SIGNAL(returnPressed(QIconViewItem*)),
+            this, SLOT(slotClicked(QIconViewItem*)) );
 
     m_view->setArrangement( QIconView::LeftToRight );
     m_view->setItemTextPos( QIconView::Right );
@@ -411,7 +413,6 @@ void PIconView::slotBeam() {
     connect( ir, SIGNAL(done(Ir*)),
              this, SLOT(slotBeamDone(Ir*)));
     ir->send(pa, tr( "Image" ) );
-
 }
 
 /*
