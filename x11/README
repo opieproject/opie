@@ -1,0 +1,37 @@
+We try hard to get Opie compiled with  Qt2/X11
+
+While directly drawing into the framebuffer is fast
+and takes less memory compared to Qt2/X11
+sometimes you may want  to use X11 cause you need
+some feature of the X protocol or you think it's just
+cute.
+
+We try hard to not break Opies normal compilation and to avoid
+#ifdefs at all cost
+
+Things that are different on X11 with Qt2/X11
+- No fonthandling
+- No Windowdecoration
+- No IPC
+- No keyhandling
+- No powerhandling
+
+are built in
+
+We will ignore fontloading for now cause it belongs to X11.
+The same applies to keyhandling
+X11 is taking care of APM if not it's the kernel...
+
+Ok so we need to replace IPC and do empty stubs for the other things
+
+IPC: Our X11 IPC system is called OCOP and we've an almost sc QCopChannel
+implementation. QCopEnvelope should work out of the box.
+We do some symlinks to built opie out of the box.
+
+How to build Opie/x11 currently it's quite hard to but I'll make it more easy
+soon
+
+
+regards Holger
+
+   10-15-2002

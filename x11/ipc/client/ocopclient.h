@@ -37,9 +37,12 @@ public:
      */
     void addChannel( const QCString& channel );
     void delChannel( const QCString& channel );
+
+    /* make it singleton? */
+    //static OCOPClient* self();
 /* no direct signals due the design */
 signals:
-    void called(const QCString&, const QCString&, const QByteArray );
+    void called(const QCString&, const QCString&, const QByteArray& );
 private slots:
     void init(const QCString& pa);
     void newData();
