@@ -152,7 +152,6 @@ void DesktopPowerAlerter::hideEvent( QHideEvent *e )
   currentPriority = INT_MAX;
 }
 
-
 class QPEScreenSaver : public QWSScreenSaver
 {
 private:
@@ -324,7 +323,6 @@ private:
   int m_backlight_bright;
   bool m_backlight_forcedoff;
 };
-
 
 void DesktopApplication::switchLCD ( bool on )
 {
@@ -642,7 +640,7 @@ Desktop::Desktop() :
   connect( qApp, SIGNAL( volumeChanged( bool ) ), this, SLOT( rereadVolumes() ) );
 
   qApp->installEventFilter( this );
-  
+
   qApp-> setMainWidget ( launcher );
 }
 
@@ -709,23 +707,27 @@ void Desktop::checkMemory()
 
 static bool isVisibleWindow( int wid )
 {
+#ifdef QWS
   const QList<QWSWindow> &list = qwsServer->clientWindows();
   QWSWindow* w;
   for ( QListIterator<QWSWindow> it( list ); ( w = it.current() ); ++it ) {
     if ( w->winId() == wid )
       return !w->isFullyObscured();
   }
+#endif
   return FALSE;
 }
 
 static bool hasVisibleWindow( const QString& clientname )
 {
+#ifdef QWS
   const QList<QWSWindow> &list = qwsServer->clientWindows();
   QWSWindow* w;
   for ( QListIterator<QWSWindow> it( list ); ( w = it.current() ); ++it ) {
     if ( w->client() ->identity() == clientname && !w->isFullyObscured() )
       return TRUE;
   }
+#endif
   return FALSE;
 }
 
@@ -745,7 +747,7 @@ void Desktop::raiseLauncher()
 }
 
 void Desktop::home ( )
-{ 
+{
     if ( isVisibleWindow( launcher->winId() ) )
       launcher->nextView();
     else

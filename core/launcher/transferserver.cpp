@@ -56,9 +56,7 @@ extern "C" {
 #include <qpe/contact.h>
 #include <qpe/quuid.h>
 #include <qpe/version.h>
-#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
-#endif
 
 #include "transferserver.h"
 #include "qprocess.h"

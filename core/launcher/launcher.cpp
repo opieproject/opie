@@ -22,9 +22,7 @@
 //      have this class.
 #define QTOPIA_INTERNAL_FSLP
 
-#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
-#endif
 #include <qpe/resource.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>

@@ -32,6 +32,7 @@
 #include <opie/odevice.h>
 
 #include <qfile.h>
+#include <qimage.h>
 #include <qwindowsystem_qws.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/alarmserver.h>
@@ -53,7 +54,7 @@ void initEnvironment()
   config.setGroup( "Location" );
   QString tz = config.readEntry( "Timezone", getenv("TZ") );
 
-  // if not timezone set, pick New York 
+  // if not timezone set, pick New York
   if (tz.isNull())
       tz = "America/New_York";
 
@@ -129,7 +130,7 @@ static const char *pidfile_path = "/var/run/opie.pid";
 void create_pidfile ( )
 {
 	FILE *f;
-	
+
 	if (( f = ::fopen ( pidfile_path, "w" ))) {
 		::fprintf ( f, "%d", getpid ( ));
 		::fclose ( f );
@@ -156,7 +157,7 @@ int main( int argc, char ** argv )
 
 	::setsid ( );
 	::setpgid ( 0, 0 );
-	
+
 	::atexit ( remove_pidfile );
 	create_pidfile ( );
 

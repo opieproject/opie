@@ -21,9 +21,7 @@
 #include "qcopbridge.h"
 #include "transferserver.h"
 
-#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
-#endif
 #include <qpe/qpeapplication.h>
 #include <qpe/version.h>
 

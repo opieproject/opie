@@ -44,8 +44,10 @@ RunningAppBar::RunningAppBar(QWidget* parent)
 
     m_AppLnkSet = new AppLnkSet( QPEApplication::qpeDir() + "apps" );
 
+#ifdef QWS
     connect(qwsServer, SIGNAL(newChannel(const QString&)), this, SLOT(newQcopChannel(const QString&)));
     connect(qwsServer, SIGNAL(removedChannel(const QString&)), this, SLOT(removedQcopChannel(const QString&)));
+#endif
     QCopChannel* channel = new QCopChannel( "QPE/System", this );
     connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
 	     this, SLOT(received(const QCString&, const QByteArray&)) );
