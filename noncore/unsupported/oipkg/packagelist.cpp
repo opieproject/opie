@@ -44,7 +44,8 @@ void PackageList::insertPackage( Package* pack )
   if ( p )
     {
       if ( (p->version() == pack->version())
-      		&& (p->dest() == pack->dest()) )
+//      		&& (p->dest() == pack->dest())
+        	)
       {
 	      p->copyValues( pack );
   	    delete pack;
