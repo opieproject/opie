@@ -2,7 +2,7 @@
  * GPLv2 zecke@handhelds.org
  * No WArranty...
  */
-
+#include <stdlib.h>
 #include <qpopupmenu.h>
 #include <qtoolbar.h>
 
@@ -37,6 +37,14 @@ PFileSystem::~PFileSystem() {
 void PFileSystem::changed() {
     m_pop->clear();
     m_dev.clear();
+
+    /* home dir, too */
+    QString f = getenv( "HOME" );
+    if (!f.isEmpty()) {
+        m_dev.insert("Home directory",f);
+        m_pop->insertItem("Home directory");
+    }
+
     const QList<FileSystem> &fs = m_storage->fileSystems();
     QListIterator<FileSystem> it(fs );
     for ( ; it.current(); ++it ) {
