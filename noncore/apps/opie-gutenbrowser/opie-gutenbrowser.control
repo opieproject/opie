@@ -1,0 +1,11 @@
+Package: opie-gutenbrowser
+Files: bin/gutenbrowser apps/Applications/gutenbrowser.desktop etc/gutenbrowser/* pics/gutenbrowser/*
+Priority: optional
+Section: opie
+Maintainer: ljp <lpotter@trolltech.com>
+Source: opie.handhelds.org
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: ftplib, libopie
+Description: Etext read for the Project Gutenberg.
+

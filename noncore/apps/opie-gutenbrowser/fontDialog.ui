@@ -1,0 +1,201 @@
+<!DOCTYPE UI><UI>
+<class>FontDialog</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>FontDialog</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>232</width>
+            <height>320</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>maximumSize</name>
+        <size>
+            <width>240</width>
+            <height>320</height>
+        </size>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Font Dialog</string>
+    </property>
+    <widget>
+        <class>QGroupBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>GroupBox2</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>120</x>
+                <y>5</y>
+                <width>110</width>
+                <height>90</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>title</name>
+            <string>Font Style</string>
+        </property>
+        <widget>
+            <class>QListBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>styleListBox</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>5</x>
+                    <y>20</y>
+                    <width>100</width>
+                    <height>61</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+        </widget>
+    </widget>
+    <widget>
+        <class>QGroupBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>FamilyGroup</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>5</x>
+                <y>5</y>
+                <width>115</width>
+                <height>135</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>title</name>
+            <string>Font</string>
+        </property>
+        <widget>
+            <class>QListBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>New Item</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>familyListBox</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>5</x>
+                    <y>20</y>
+                    <width>100</width>
+                    <height>105</height>
+                </rect>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>0</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+        </widget>
+    </widget>
+    <widget>
+        <class>QLabel</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>TextLabel4</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>145</x>
+                <y>100</y>
+                <width>30</width>
+                <height>19</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Size</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QListBox</class>
+        <item>
+            <property>
+                <name>text</name>
+                <string>1</string>
+            </property>
+        </item>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>sizeListBox</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>180</x>
+                <y>100</y>
+                <width>40</width>
+                <height>60</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>sizePolicy</name>
+            <sizepolicy>
+                <hsizetype>0</hsizetype>
+                <vsizetype>0</vsizetype>
+            </sizepolicy>
+        </property>
+    </widget>
+    <widget>
+        <class>QMultiLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>MultiLineEdit1</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>5</x>
+                <y>165</y>
+                <width>222</width>
+                <height>45</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>wordWrap</name>
+            <enum>WidgetWidth</enum>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>The Quick Brown Fox Jumps Over The Lazy Dog</string>
+        </property>
+    </widget>
+</widget>
+</UI>

@@ -1,0 +1,100 @@
+<!DOCTYPE UI><UI>
+<class>Edit_Title</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>Edit_Title</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>21</x>
+            <y>8</y>
+            <width>240</width>
+            <height>110</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>maximumSize</name>
+        <size>
+            <width>240</width>
+            <height>110</height>
+        </size>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Edit Title</string>
+    </property>
+    <widget>
+        <class>QLineEdit</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>LineEdit1</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>0</x>
+                <y>22</y>
+                <width>230</width>
+                <height>22</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>PushButton_Cancel</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>120</x>
+                <y>80</y>
+                <width>50</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Cancel</string>
+        </property>
+    </widget>
+    <widget>
+        <class>QPushButton</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>PushButton_Apply</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>180</x>
+                <y>80</y>
+                <width>50</width>
+                <height>20</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>text</name>
+            <string>Apply</string>
+        </property>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>PushButton_Cancel</sender>
+        <signal>released()</signal>
+        <receiver>PushButton_Cancel</receiver>
+        <slot>onCancel()</slot>
+    </connection>
+    <connection>
+        <sender>PushButton_Apply</sender>
+        <signal>released()</signal>
+        <receiver>PushButton_Apply</receiver>
+        <slot>onApply()</slot>
+    </connection>
+</connections>
+</UI>

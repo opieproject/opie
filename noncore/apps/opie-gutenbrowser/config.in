@@ -1,0 +1,4 @@
+  config OPIE-GUTENBROWSER
+    boolean "gutenbrowser - Gutenberg Project etext reader and selector"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && FTPLIB
