@@ -47,7 +47,7 @@
     depends LIBXINE_DEP
 
   config LIBIPK_DEP
-    boolean "Have libipkg >= 0.99.109"
+    boolean "Have libipkg >= 0.99.120"
     default "n"
 
   config LIBIPK_LIB_DIR
