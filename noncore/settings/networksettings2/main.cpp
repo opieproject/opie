@@ -88,7 +88,7 @@ int main( int argc, char * argv[] ) {
               if( NS.canStart( argv[1] ) ) {
                 QString S;
                 S.sprintf( QPEApplication::qpeDir()+
-                           "/bin/networksettings2" );
+                           "bin/networksettings2" );
                 char * MyArgv[4];
                 MyArgv[0] = "networksettings2";
                 MyArgv[1] = "--prompt";
