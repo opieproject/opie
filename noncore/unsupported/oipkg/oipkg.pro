@@ -5,6 +5,7 @@ CONFIG		= qt warn_on debug
 HEADERS		= mainwindow.h \
 		pksettings.h \
 		pmipkg.h \
+		packagelistdoclnk.h \
 		utils.h \
 		packagelistitem.h \
 		packagelistremote.h \
@@ -15,6 +16,7 @@ HEADERS		= mainwindow.h \
 SOURCES		= main.cpp \
 		mainwindow.cpp \
 		utils.cpp \
+		packagelistdoclnk.cpp \
 		packagelistview.cpp \
 		packagelistremote.cpp \
 		packagelistlocal.cpp \

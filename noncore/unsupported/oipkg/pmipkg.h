@@ -39,13 +39,13 @@ public slots:
   void removeLinks( const QString &dest );
 
 private:
-	int sizecount;
+//	int sizecount;
   PackageManagerSettings* settings;
   RunWindow *runwindow;
   QDialog *installDialog;
   QList<Package> to_remove;
   QList<Package> to_install;
-  bool runwindowopen;
+//  bool runwindowopen;
   QString fileNameToInstall;
   QCheckBox *_force_reinstall;
   QCheckBox *_force_remove;

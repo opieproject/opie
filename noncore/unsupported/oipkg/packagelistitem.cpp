@@ -32,6 +32,7 @@ void PackageListItem::init( Package *pi, PackageManagerSettings *s)
 	item = new QCheckListItem( this, QObject::tr("Size: ")+pi->size() );
 	destItem = new QCheckListItem( this, "" );
 	linkItem = new QCheckListItem( this, "" );
+	statusItem = new QCheckListItem( this, "" );
  	QCheckListItem *otherItem = new QCheckListItem( this, QObject::tr("other") );
 	item = new QCheckListItem( otherItem, QObject::tr("Description: ")+pi->desc() );
   QDict<QString> *fields = pi->getFields();
@@ -129,12 +130,15 @@ void PackageListItem::setOn( bool b )
 
 void PackageListItem::displayDetails()
 {
-	QString sod = " ("+package->sizeUnits();
+	QString sod;
+ 	sod += package->sizeUnits().isEmpty()?QString(""):QString(package->sizeUnits());
+ 	//sod += QString(package->dest().isEmpty()?"":QObject::tr(" on ")+package->dest());
  	sod += package->dest().isEmpty()?QString(""):QString(QObject::tr(" on ")+package->dest());
-  sod += ")";
+  sod = sod.isEmpty()?QString(""):QString(" ("+sod+")");
   setText(0, package->name()+sod );
 	nameItem->setText( 0, QObject::tr("Name: ")+package->name());
 	linkItem->setText( 0, QObject::tr("Link: ")+QString(package->link()?QObject::tr("Yes"):QObject::tr("No")) );
   destItem->setText( 0, QObject::tr("Destination: ")+package->dest() );
+  statusItem->setText( 0, QObject::tr("Status: ")+package->status() );
   repaint();
 }

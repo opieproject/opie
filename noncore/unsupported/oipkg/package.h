@@ -50,6 +50,7 @@ class Package //: public QObject
   void instalFromFile(bool iff=true);
   void setName(QString);
   QDict<QString>* getFields();
+  QString status();
 public slots:
   void toggleProcess();
 

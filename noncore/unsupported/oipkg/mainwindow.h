@@ -9,6 +9,7 @@
 #include "packagelist.h"
 #include "packagelistremote.h"
 #include "packagelistlocal.h"
+#include "packagelistdoclnk.h"
 #include "pmipkg.h"
 #include "pksettings.h"
 #include "packagelistview.h"
@@ -68,11 +69,10 @@ private:
 
   PmIpkg* ipkg;
   PackageManagerSettings *settings;
-  PackageListLocal packageList;
+  PackageListLocal packageListServers;
   PackageListRemote packageListSearch;
+  PackageListDocLnk packageListDocLnk;
   PackageListView *listViewPackages;
-//  QCheckListItem* rootSearch;
-//  QCheckListItem* rootLocal;
   QAction *runAction;
   QAction *updateAction;
   QAction *findAction;

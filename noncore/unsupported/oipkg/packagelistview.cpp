@@ -128,5 +128,6 @@ void PackageListView::display()
 void PackageListView::addList( QString n, PackageList* pl)
 {
 	PackageLists.insert(n, pl);
- 	rootItems.insert(n, new QCheckListItem(this,n));
+ 	QCheckListItem *item = new QCheckListItem(this,n);
+ 	rootItems.insert(n, item);
 }

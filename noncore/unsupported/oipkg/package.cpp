@@ -48,7 +48,6 @@ Package::Package( QString n, PackageManagerSettings *s )
 	  _name = QString( n );
   }else{
    	parseIpkgFile( n );
-    _toProcess = true;
     _useFileName = true;
     _fileName = QString( n );
   }
@@ -365,4 +364,9 @@ void Package::setName(QString n)
 QDict<QString>* Package::getFields()
 {
 	return &_values;	
+}
+
+QString Package::status()
+{
+	return _status;
 }

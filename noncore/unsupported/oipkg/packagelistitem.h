@@ -32,6 +32,7 @@ private:
 	QCheckListItem *nameItem;
 	QCheckListItem *destItem;
 	QCheckListItem *linkItem;
+	QCheckListItem *statusItem;
   PackageManagerSettings *settings;
   Package *package;
 };

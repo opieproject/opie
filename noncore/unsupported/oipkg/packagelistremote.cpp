@@ -22,6 +22,12 @@ PackageListRemote::~PackageListRemote()
 
 void PackageListRemote::query(QString s)
 {
+	searchString = s;	
+}
+
+void PackageListRemote::update()
+{
+	pvDebug(2,"PackageListRemote::update");	
  	int r=0;
   QString cmd = "wget";
   QString redirect = "/tmp/oipkg.query";
@@ -32,16 +38,10 @@ void PackageListRemote::query(QString s)
 	QString server="http://ipkgfind.handhelds.org/"; 	
   cmd += " \""+server+"/packages.phtml";
   cmd += "?format=pda&searchtype=package&section=";
-  cmd += "&query="+s;           	
+  cmd += "&query="+searchString;           	
   cmd += "\"";
 
   pvDebug(2,"search :"+cmd);
   r = system(cmd.latin1());
   readFileEntries( redirect );
- 	
-}
-
-void PackageListRemote::update()
-{
-	pvDebug(2,"PackageListRemote::update\ndoing nothing ");	
 }

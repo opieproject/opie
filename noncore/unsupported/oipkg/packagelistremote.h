@@ -14,6 +14,8 @@ public:
   void query(QString);
 public slots:
   void update();
+private:
+	QString searchString;
 };
 
 #endif

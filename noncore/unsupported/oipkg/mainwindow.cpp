@@ -38,16 +38,19 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   settings = new PackageManagerSettings(this,0,TRUE);
   listViewPackages =  new PackageListView( this,"listViewPackages",settings );
   setCentralWidget( listViewPackages );
-  listViewPackages->addList( tr("local"), &packageList );
+  listViewPackages->addList( tr("feeds"), &packageListServers );
   listViewPackages->addList( tr("ipkgfind"), &packageListSearch );
+  listViewPackages->addList( tr("documents"), &packageListDocLnk );
 //	wait = new QMessageBox(tr("oipkg"),tr("Please wait")//,QMessageBox::Information,QMessageBox::NoButton,QMessageBox::NoButton,QMessageBox::NoButton);
 //	wait = new QMessageBox(this);
 // 	wait->setText(tr("Please wait"));
   ipkg = new PmIpkg( settings, this );
 //  settings->setIpkg( ipkg );
-  packageList.setSettings( settings );
+  packageListServers.setSettings( settings );
   packageListSearch.setSettings( settings );
-  packageList.update();
+  packageListDocLnk.setSettings( settings );
+  packageListServers.update();
+  packageListDocLnk.update();
   makeMenu();	
   makeChannel();
   //opie is hardcoded default ;)
@@ -244,9 +247,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::runIpkg()
 {
-  packageList.allPackages();
+  packageListServers.allPackages();
   ipkg->loadList( packageListSearch );
-  ipkg->commit( packageList );
+  ipkg->loadList( packageListDocLnk );
+  ipkg->commit( packageListServers );
   // ##### If we looked in the list of files, we could send out accurate
   // ##### messages. But we don't bother yet, and just do an "all".
   QCopEnvelope e("QPE/System", "linkChanged(QString)");
@@ -261,9 +265,13 @@ void MainWindow::updateList()
 	QTimer *t = new QTimer( this );
   connect( t, SIGNAL(timeout()), SLOT( rotateUpdateIcon() ) );
   t->start( 0, false );
-	packageList.clear();
+	packageListServers.clear();
+	packageListSearch.clear();
+  packageListDocLnk.clear();
   ipkg->update();
-  packageList.update();
+  packageListServers.update();
+  packageListSearch.update();
+  packageListDocLnk.update();
   t->stop();
 //	wait->hide();  	
 }
@@ -273,7 +281,7 @@ void MainWindow::filterList()
 //	wait->show();
  	QString f = "";
   if ( findAction->isOn() ) f = findEdit->text();
-  packageList.filterPackages( f );
+  packageListServers.filterPackages( f );
 //	wait->hide();
 }
 
@@ -282,25 +290,6 @@ void MainWindow::displayList()
 //	wait->hide();
 	filterList();
   listViewPackages->display();
-////  if (!rootLocal)
-////  {
-//	QCheckListItem *rootLocal = new QCheckListItem(listViewPackages,tr("local"));
-//	QCheckListItem *rootSearch = new QCheckListItem(listViewPackages,tr("ipkgfind"));
-////  }
-//  listViewPackages->clear();
-//  Package *pack = packageList.first();
-//  PackageListItem *item;
-//  while( pack )
-//  {
-//	 	item = new PackageListItem( rootLocal, pack, settings );				
-//    pack = packageList.next();
-//  }	
-//  pack = packageListSearch.first();
-//  while( pack )
-//  {
-//	 	item = new PackageListItem( rootSearch, pack, settings );				
-//    pack = packageListSearch.next();
-//  }	
 }
 
 void MainWindow::sectionChanged()
@@ -310,7 +299,7 @@ void MainWindow::sectionChanged()
   disconnect( subsection, SIGNAL(activated(int) ),
 	      this, SLOT( subSectionChanged() ) );
   subsection->clear();
-  packageList.setSection( section->currentText() );
+  packageListServers.setSection( section->currentText() );
   setSubSections();
   connect( section, SIGNAL( activated(int) ),
 	   this, SLOT( sectionChanged() ) );
@@ -325,7 +314,7 @@ void MainWindow::subSectionChanged()
 	      this, SLOT( sectionChanged() ) );
   disconnect( subsection, SIGNAL(activated(int) ),
 	      this, SLOT( subSectionChanged() ) );
-  packageList.setSubSection( subsection->currentText() );
+  packageListServers.setSubSection( subsection->currentText() );
   connect( section, SIGNAL( activated(int) ),
 	   this, SLOT( sectionChanged() ) );
   connect( subsection, SIGNAL(activated(int) ),
@@ -336,13 +325,13 @@ void MainWindow::subSectionChanged()
 void MainWindow::setSections()
 {
   section->clear();
-  section->insertStringList( packageList.getSections() );
+  section->insertStringList( packageListServers.getSections() );
 }
 
 void MainWindow::setSubSections()
 {
   subsection->clear();
-  subsection->insertStringList( packageList.getSubSections() );
+  subsection->insertStringList( packageListServers.getSubSections() );
 }
 
 

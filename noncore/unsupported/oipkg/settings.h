@@ -21,7 +21,9 @@ public:
   QStringList getActiveServers();
   QStringList getDestinationUrls();
 
-public slots:
+public slots:                                                                                                                                                                                             /** No descriptions */
+  void createLinks();
+  void removeLinks();
 	void writeInstallationSettings();
   void readInstallationSettings();
   void writeCurrentInstallationSetting();
@@ -61,7 +63,4 @@ private:
 };
 
 #endif
-                                                                                                                                                                                                  /** No descriptions */
-  void createLinks();
-  /** No descriptions */
-  void removeLinks();
+
