@@ -112,28 +112,37 @@ OFontSelector::~OFontSelector ( )
 {
 }
 
-bool OFontSelector::setSelectedFont ( const QString &family, const QString &styleStr, int size, const QString & /*charset*/ )
+bool OFontSelector::setSelectedFont ( const QString &familyStr, const QString &styleStr, int sizeVal, const QString & /*charset*/ )
 {
-	if ( size <= 0 )
-		size = 10;
-	QString familyStr = family. isEmpty ( ) ? QString ( "Helvetica" ) : family;
-	QString sizeStr = QString::number ( size );
+	QString sizeStr = QString::number ( sizeVal );
 
-    m_font_family_list-> setCurrentItem ( m_font_family_list-> findItem ( familyStr ));
-    if ( m_font_family_list-> currentItem ( ) < 0 )
-    	 m_font_family_list-> setCurrentItem ( 0 );
-    
-    fontFamilyClicked ( m_font_family_list-> currentItem ( ));
+	QListBoxItem *family = m_font_family_list-> findItem ( familyStr );
+	if ( !family )
+		family = m_font_family_list-> findItem ( "Helvetica" );
+	if ( !family )
+		family = m_font_family_list-> firstItem ( );
+   	 m_font_family_list-> setCurrentItem ( family );    
+    fontFamilyClicked ( m_font_family_list-> index ( family ));
 
-	m_font_style_list-> setCurrentItem ( findItemCB ( m_font_style_list, styleStr ));
-	fontStyleClicked ( m_font_style_list-> currentItem ( ));
+	int style = findItemCB ( m_font_style_list, styleStr );
+	if ( style < 0 )
+		style = findItemCB ( m_font_style_list, "Regular" );
+	if ( style < 0 && m_font_style_list-> count ( ) > 0 )
+		style = 0;
+	m_font_style_list-> setCurrentItem ( style );
+	fontStyleClicked ( style );
 
-	m_font_size_list-> setCurrentItem ( findItemCB ( m_font_size_list, sizeStr ));
-	fontSizeClicked ( m_font_size_list-> currentItem ( ));
+	int size = findItemCB ( m_font_size_list, sizeStr );
+	if ( size < 0 )
+		size = findItemCB ( m_font_size_list, "10" );
+	if ( size < 0 && m_font_size_list-> count ( ) > 0 )
+		size = 0;
+	m_font_size_list-> setCurrentItem ( size );
+	fontSizeClicked ( size );
 	
-	return (( m_font_family_list-> currentItem ( ) >= 0 ) &&
-	        ( m_font_style_list-> currentItem ( ) >= 0 ) &&
-	        ( m_font_size_list-> currentItem ( ) >= 0 ));
+	return (( family ) &&
+	        ( style >= 0 ) &&
+	        ( size >= 0 ));
 }
 
 bool OFontSelector::selectedFont ( QString &family, QString &style, int &size )
@@ -259,6 +268,12 @@ void OFontSelector::fontSizeClicked ( int /*index*/ )
 
 void OFontSelector::changeFont ( )
 {
+	emit fontSelected ( selectedFont ( ));
+}
+
+
+QFont OFontSelector::selectedFont ( )
+{
     int ffa = m_font_family_list-> currentItem ( );
     int fst = m_font_style_list-> currentItem ( ); 
     int fsi = m_font_size_list-> currentItem ( );
@@ -266,11 +281,13 @@ void OFontSelector::changeFont ( )
     FontListItem *fli = (FontListItem *) m_font_family_list-> item ( ffa );
     
     if ( fli ) {
-		emit fontSelected ( m_fdb. font ( fli-> family ( ), \
-		                    fst >= 0 ? fli-> styles ( ) [fst] : QString::null, \
-		                    fsi >= 0 ? fli-> sizes ( ) [fsi] : 10, \
-		                    m_fdb. charSets ( fli-> family ( )) [0] ));
+		return m_fdb. font ( fli-> family ( ), \
+		                     fst >= 0 ? fli-> styles ( ) [fst] : QString::null, \
+		                     fsi >= 0 ? fli-> sizes ( ) [fsi] : 10, \
+		                     m_fdb. charSets ( fli-> family ( )) [0] );
 	}
+	else
+		return QFont ( );
 }
 
 
