@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.13 2003-02-07 17:18:03 max Exp $
+ * $Id: cardmode.cc,v 1.14 2003-02-09 20:50:34 max Exp $
  */
 
 #include "cardmode.hh"
@@ -46,7 +46,7 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
   else if (cardtype == CARD_TYPE_NG)
   {
       char wlanngcmd[62];
-      snprintf(wlanngcmd, sizeof(wlanngcmd) - 1, "%s %s lnxreq_wlansniff channel=1 enable=true", WLANCTL_PATH, device);
+      snprintf(wlanngcmd, sizeof(wlanngcmd) - 1, "$(which wlanctl-ng) %s lnxreq_wlansniff channel=%d enable=true", device, 1);
       if (system(wlanngcmd) != 0)
       {
 	  wl_logerr("Could not set %s in raw mode, check cardtype", device);
@@ -57,25 +57,23 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
   {
       wl_logerr("Got a host-ap card, nothing is implemented now");
      char hostapcmd[250];
-     snprintf(hostapcmd, sizeof(hostapcmd) -1, "%s %s monitor 2", IWPRIV_PATH, device);
+     snprintf(hostapcmd, sizeof(hostapcmd) -1, "$(which iwpriv) %s monitor 2 %d", device,1);
      if (system(hostapcmd) !=0)
      {
  	wl_logerr("Could not set %s in raw mode, check cardtype", device);
 	return 0;
      }
   }
-  else if (cardtype == CARD_TYPE_ORINOCCO)
+  else if (cardtype == CARD_TYPE_ORINOCCO || cardtype == CARD_TYPE_HOSTAP)
   {
-     char lucentcmd[62];
-     snprintf(lucentcmd, sizeof(lucentcmd) - 1, "$(which iwpriv) %s monitor 2 %d", device, 1);
-      if (system(lucentcmd) != 0)
-      {
-	  wl_logerr("Could not set %s in raw mode, check cardtype", device);
-	  return 0;
+	 if (!card_set_channel (device, 1, CARD_TYPE_ORINOCCO))
+	 {
+  	  wl_logerr("Could not set %s in raw mode, check cardtype", device);
+  	  return 0;
       }
       else
       {
-	  wl_loginfo("Successfully set %s into raw mode",device);
+	    wl_loginfo("Successfully set %s into raw mode",device);
       }
   }
 
@@ -166,26 +164,46 @@ int card_set_channel (const char *device, int channel, int cardtype)
     	return 1;
     }
     /* If it is a lucent orinocco card */ 
-    else if (cardtype == CARD_TYPE_ORINOCCO)
+    else if (cardtype == CARD_TYPE_ORINOCCO || cardtype == CARD_TYPE_HOSTAP)
     {
-	char lucentreset[63];
-        char lucentcmd[62];
-	snprintf(lucentreset, sizeof(lucentreset) -1,"$(which iwpriv) %s force_reset", device);
-        if (system(lucentreset) != 0)
-        {
-	  wl_logerr("Could not reset the card %s",device);
-	  return 0;
-	}
-        snprintf(lucentcmd, sizeof(lucentcmd) - 1, "$(which iwpriv) %s monitor 2 %d", device, channel);
-        if (system(lucentcmd) != 0)
-      {
-          wl_logerr("Could not set %s in raw mode, check cardtype", device);
-          return 0;
-      }
-      wl_loginfo("Channel %d set on interface %s",channel,device);
-      return 1;
+    	int fd;
+   	//Wireless tools structure for the iocalls
+   	struct iwreq ireq;  
+   	int *ptr;
+	   /* Socket needed to use the iocall to */
+	   fd = socket(AF_INET, SOCK_STREAM, 0);
+	   if ( fd == -1 ) {
+ 	     return -1;
+ 	  }
+	   ptr = (int *) ireq.u.name;
+	   // This is the monitor mode for 802.11 non-prism header
+	   ptr[0] = 2;
+	   ptr[1] = channel;
+	   strcpy(ireq.ifr_ifrn.ifrn_name, device);
+	   if (ioctl( fd, SIOCIWFIRSTPRIV + 0x8, &ireq)==0)
+	   {
+		  /* All was fine... */
+		  // close(fd);
+  		wl_loginfo("Set channel %d on interface %s",channel, device);
+	       return 1;
+	   }
+	   else
+	   {   /* iocall does not work */
+			wl_logerr("Could not set channel %d on %s, check cardtype",channel, device);
+			return 0;
+	   }
     }
-   
+    else if (cardtype == CARD_TYPE_NG)
+	{
+		char wlanngcmd[62];
+		snprintf(wlanngcmd, sizeof(wlanngcmd) - 1, "$(which wlanctl-ng) %s lnxreq_wlansniff channel=%d enable=true", device, channel);
+		if (system(wlanngcmd) != 0)
+		{
+			wl_logerr("Could not set channel %d on %s, check cardtype",channel, device);
+			return 0;
+		}
+
+	}
     /* For undefined situations */
 	return 0;
 }

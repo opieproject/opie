@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.14 2003-02-07 10:28:23 max Exp $ */
+/* $Id: cardmode.hh,v 1.15 2003-02-09 20:50:34 max Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -13,6 +13,12 @@
 #include <arpa/inet.h>
 #include <sys/ioctl.h>
 #include <linux/if.h>
+#include <linux/wireless.h>
+
+#ifndef SIOCIWFIRSTPRIV
+#define SIOCIWFIRSTPRIV SIOCDEVPRIVATE
+#endif
+
 
 extern "C"
 {
@@ -31,9 +37,6 @@ extern "C"
 /* only for now, until we have the daemon running */
 /*the config file should provide these information */
 #define   CARD_TYPE              CARD_TYPE_HOSTAP
-#define   SBIN_PATH	         "/sbin/ifconfig %s promisc up"
-#define   WLANCTL_PATH           "/sbin/wlanctl-ng"
-#define   IWPRIV_PATH		 "/sbin/iwpriv"
 
 /* Prototypes */
 int card_check_rfmon_datalink (char *device);
