@@ -55,7 +55,7 @@ private:
     QString nextFileName(bool &isDir)const;
     QString prevFileName(bool &isDir)const;
     void loadViews();
-    void calculateGrid();
+    void calculateGrid(QResizeEvent*e = 0);
 
 private slots:
     void slotDirUp();
@@ -96,6 +96,7 @@ private:
     bool m_updatet : 1;
     int m_mode;
     bool m_internalReset:1;
+    int m_iconsize;
 };
 
 #endif

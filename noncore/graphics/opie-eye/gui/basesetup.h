@@ -30,6 +30,9 @@ protected:
     QLabel * m_SlidetimeLabel;
     QCheckBox *m_SaveStateAuto;
     QSpacerItem *spacer1;
+    QGridLayout * m_IconsizeLayout;
+    QSpinBox * m_Iconsize;
+    QLabel * m_IconsizeLabel;
 };
 
 #endif

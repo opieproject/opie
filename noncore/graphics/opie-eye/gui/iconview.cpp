@@ -41,10 +41,11 @@ using Opie::Core::OKeyConfigItem;
 namespace {
     static QPixmap* _dirPix = 0;
     static QPixmap* _unkPix = 0;
+    static QPixmap* _cpyPix = 0;
     static QPixmap* _emptyPix = 0;
     class IconViewItem : public QIconViewItem {
     public:
-        IconViewItem( QIconView*, const QString& path, const QString& name, bool isDir = false);
+        IconViewItem( QIconView*, const QString& path, const QString& name,int a_iconsize, bool isDir = false);
         QPixmap* pixmap()const;
         QString path()const { return m_path; }
         bool isDir()const { return m_isDir; }
@@ -58,6 +59,8 @@ namespace {
 
     protected:
         mutable QPixmap* m_pix;
+        int m_iconsize;
+        void check_pix()const;
 
     private:
         QString m_path;
@@ -68,12 +71,12 @@ namespace {
         bool m_Pixset:1;
     };
     class TextViewItem : public IconViewItem {
-        TextViewItem( QIconView*, const QString& path, const QString& name, bool isDir = false );
+        TextViewItem( QIconView*, const QString& path, const QString& name, int a_iconsize , bool isDir = false);
         QPixmap *pixmap()const;
         void setText( const QString& );
     };
     class ThumbViewItem : public IconViewItem {
-        ThumbViewItem( QIconView*, const QString& path, const QString& name, bool isDir = false );
+        ThumbViewItem( QIconView*, const QString& path, const QString& name, int a_iconsize, bool isDir = false );
         QPixmap *pixmap()const;
         void setText( const QString& );
     };
@@ -87,14 +90,55 @@ namespace {
     static QMap<QString, IconViewItem*> g_stringPix;
 
     IconViewItem::IconViewItem( QIconView* view,const QString& path,
-                                const QString& name, bool isDir )
+                                const QString& name, int a_iconsize, bool isDir)
         : QIconViewItem( view, name ), m_path( path ), m_isDir( isDir ),
           m_noInfo( false ),m_textOnly(false),m_Pixset(false)
     {
-        if ( isDir && !_dirPix )
-            _dirPix = new QPixmap( Resource::loadPixmap("advancedfm/FileBrowser"));
-        else if ( !isDir && !_unkPix )
-            _unkPix = new QPixmap( Resource::loadPixmap( "UnknownDocument" ) );
+        m_iconsize = a_iconsize;
+        if ( isDir ) {
+            if (_dirPix && _dirPix->width()!=m_iconsize) {
+                delete _dirPix;
+                _dirPix = 0;
+            }
+            if (!_dirPix ) {
+                _dirPix = new QPixmap( Resource::loadPixmap("advancedfm/FileBrowser"));
+            }
+        } else {
+            if (!_unkPix ) {
+                _unkPix = new QPixmap( Resource::loadPixmap( "UnknownDocument" ) );
+            }
+        }
+        check_pix();
+    }
+
+    inline void IconViewItem::check_pix()const
+    {
+        if (_cpyPix && _cpyPix->width()!=m_iconsize) {
+            delete _cpyPix;
+            _cpyPix = 0;
+        }
+        if (_dirPix && _dirPix->width()>m_iconsize) {
+            QPixmap*Pix = new QPixmap(*_dirPix);
+            Pix->resize(m_iconsize,m_iconsize);
+            delete _dirPix;
+            _dirPix = Pix;
+        }
+        if (!_cpyPix && _unkPix) {
+            if (_unkPix->width()>=m_iconsize) {
+                _cpyPix = new QPixmap(*_unkPix);
+                if (_unkPix->width()>m_iconsize)
+                    _cpyPix->resize(m_iconsize,m_iconsize);
+            } else {
+                _cpyPix = new QPixmap(m_iconsize,m_iconsize);
+                _cpyPix->fill();
+                QPainter pa(_cpyPix);
+                int offset = (m_iconsize-_unkPix->width())/2;
+                int offy = (m_iconsize-_unkPix->height())/2;
+                if (offy<0) offy=0;
+                pa.drawPixmap(offset,offy,*_unkPix);
+                pa.end();
+            }
+        }
     }
 
     inline void IconViewItem::setPixmap( const QPixmap & , bool, bool )
@@ -121,16 +165,17 @@ namespace {
             return _dirPix;
         else{
             if (!m_noInfo && !g_stringInf.contains( m_path ) ) {
-                currentView()->dirLister()->imageInfo( m_path );
                 g_stringInf.insert( m_path, const_cast<IconViewItem*>(this));
+                currentView()->dirLister()->imageInfo( m_path );
             }
 
-            m_pix = PPixmapCache::self()->cachedImage( m_path, 64, 64 );
+            m_pix = PPixmapCache::self()->cachedImage( m_path, m_iconsize, m_iconsize );
             if (!m_pix && !g_stringPix.contains( m_path )) {
-                currentView()->dirLister()->thumbNail( m_path, 64, 64 );
+                check_pix();
                 g_stringPix.insert( m_path, const_cast<IconViewItem*>(this));
+                currentView()->dirLister()->thumbNail( m_path, m_iconsize, m_iconsize);
             }
-            return m_pix ? m_pix : _unkPix;
+            return m_pix ? m_pix : _cpyPix;
         }
     }
     inline void IconViewItem::setText( const QString& str ) {
@@ -153,6 +198,7 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     }
     m_path = QDir::homeDirPath();
     m_mode = 0;
+    m_iconsize = 32;
     m_internalReset = false;
 
     QHBox *hbox = new QHBox( this );
@@ -175,6 +221,14 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     if (m_mode < 1 || m_mode>3) m_mode = 1;
 
     m_view->setItemTextPos( QIconView::Right );
+    if (m_mode >1) {
+        m_view->setResizeMode(QIconView::Adjust);
+    } else {
+        m_view->setResizeMode(QIconView::Fixed);
+    }
+    m_iconsize = m_cfg->readNumEntry("iconsize", 32);
+    if (m_iconsize<12)m_iconsize = 12;
+    if (m_iconsize>64)m_iconsize = 64;
 
     calculateGrid();
 
@@ -280,16 +334,16 @@ void PIconView::slotChangeDir(const QString& path) {
     m_view->viewport()->setUpdatesEnabled( false );
     m_view->clear();
 
+    // Also invalidate the cache. We can't cancel the operations anyway
+    g_stringPix.clear();
+    g_stringInf.clear();
+
     /*
      * add files and folders
      */
     addFolders( lister->folders() );
     addFiles( lister->files() );
     m_view->viewport()->setUpdatesEnabled( true );
-
-    // Also invalidate the cache. We can't cancel the operations anyway
-    g_stringPix.clear();
-    g_stringInf.clear();
 
     // looks ugly
     static_cast<QMainWindow*>(parent())->setCaption( QObject::tr("%1 - O View", "Name of the dir").arg( m_path ) );
@@ -365,6 +419,16 @@ void PIconView::loadViews() {
 
 void PIconView::resetView() {
     m_internalReset = true;
+    // Also invalidate the cache. We can't cancel the operations anyway
+    g_stringPix.clear();
+    g_stringInf.clear();
+    if (m_mode>1) {
+        m_iconsize = m_cfg->readNumEntry("iconsize", 32);
+        if (m_iconsize<12)m_iconsize = 12;
+        if (m_iconsize>64)m_iconsize = 64;
+    } else {
+        m_iconsize = 64;
+    }
     slotViewChanged(m_views->currentItem());
     m_internalReset = false;
 }
@@ -413,8 +477,9 @@ void PIconView::slotViewChanged( int i) {
     /*  reload now with default Path
      * but only if it isn't a reset like from setupdlg
      */
-    if (!m_internalReset)
+    if (!m_internalReset) {
         m_path = lis->defaultPath();
+    }
     QTimer::singleShot( 0,  this, SLOT(slotReloadDir()));
 }
 
@@ -432,7 +497,7 @@ void PIconView::addFolders(  const QStringList& lst) {
     IconViewItem * _iv;
 
     for(it=lst.begin(); it != lst.end(); ++it ) {
-        _iv = new IconViewItem( m_view, m_path+"/"+(*it), (*it), true );
+        _iv = new IconViewItem( m_view, m_path+"/"+(*it), (*it),m_iconsize, true );
         if (m_mode==3) _iv->setTextOnly(true);
     }
 }
@@ -446,8 +511,8 @@ void PIconView::addFiles(  const QStringList& lst) {
         pre = m_path+"/";
     }
     for (it=lst.begin(); it!= lst.end(); ++it ) {
-         m_pix = PPixmapCache::self()->cachedImage( pre+(*it), 64, 64 );
-        _iv = new IconViewItem( m_view, pre+(*it), (*it) );
+         m_pix = PPixmapCache::self()->cachedImage( pre+(*it), m_iconsize, m_iconsize );
+        _iv = new IconViewItem( m_view, pre+(*it), (*it),m_iconsize );
         if (m_mode==3) {
             _iv->setTextOnly(true);
             _iv->setPixmap(QPixmap());
@@ -524,12 +589,27 @@ void PIconView::slotThumbNail(const QString& _path, const QPixmap &pix) {
         m_updatet = true;
 
     if (pix.width()>0) {
-        PPixmapCache::self()->insertImage( _path, pix, 64, 64 );
-        item->setPixmap(pix,true);
+        if (pix.width()<m_iconsize) {
+            QPixmap p(m_iconsize,m_iconsize);
+            p.fill();
+            QPainter pa(&p);
+            int offset = (m_iconsize-pix.width())/2;
+            int offy = (m_iconsize-pix.height())/2;
+            if (offy<0) offy=0;
+            pa.drawPixmap(offset,offy,pix);
+            pa.end();
+            PPixmapCache::self()->insertImage( _path, p, m_iconsize, m_iconsize );
+            item->setPixmap(p,true);
+        } else {
+            PPixmapCache::self()->insertImage( _path, pix, m_iconsize, m_iconsize );
+            item->setPixmap(pix,true);
+        }
+
     } else {
-        PPixmapCache::self()->insertImage( _path, Resource::loadPixmap( "UnknownDocument" ), 64, 64 );
+        PPixmapCache::self()->insertImage( _path, Resource::loadPixmap( "UnknownDocument" ), m_iconsize, m_iconsize );
     }
     g_stringPix.remove( _path );
+    m_view->arrangeItemsInGrid(true);
 }
 
 
@@ -691,7 +771,7 @@ void PIconView::slotStartSlide() {
     } else {
         slotShowImage( name );
     }
-    int t = m_cfg->readNumEntry("base_slideshowtimeout", 2);
+    int t = m_cfg->readNumEntry("slideshowtimeout", 2);
     emit sig_startslide(t);
 }
 
@@ -710,26 +790,46 @@ void PIconView::slotImageInfo( const QString& name) {
 
 
 void PIconView::slotChangeMode( int mode ) {
-    if ( mode >= 1 && mode <= 3 )
+    if ( mode >= 1 && mode <= 3 ) {
         m_mode = mode;
+        m_cfg->writeEntry("ListViewMode", m_mode);
+        /* performance! */
+        m_view->clear();
+        if (m_mode >1) {
+            m_view->setResizeMode(QIconView::Adjust);
+        } else {
+            m_view->setResizeMode(QIconView::Fixed);
+        }
+        if (m_mode==1) {
+            m_iconsize = 64;
+        } else {
+            m_iconsize = m_cfg->readNumEntry("iconsize", 32);
+            if (m_iconsize<12)m_iconsize = 12;
+            if (m_iconsize>64)m_iconsize = 64;
+        }
 
-    m_cfg->writeEntry("ListViewMode", m_mode);
-    /* performance! */
-    m_view->clear();
-    calculateGrid();
-    slotReloadDir();
+        calculateGrid();
+        slotReloadDir();
+    }
 }
 
 
 void PIconView::resizeEvent( QResizeEvent* re ) {
+    calculateGrid(re);
     QVBox::resizeEvent( re );
-    calculateGrid();
+    //calculateGrid();
 }
 
 
-void PIconView::calculateGrid() {
-    int dw = QApplication::desktop()->width();
-    int viewerWidth = dw-style().scrollBarExtent().width();
+void PIconView::calculateGrid(QResizeEvent* re)
+{
+    int viewerWidth;
+    if (re) {
+        viewerWidth=re->size().width();
+    } else {
+        int dw = QApplication::desktop()->width();
+        viewerWidth = dw-style().scrollBarExtent().width();
+    }
 
     QIconView::ItemTextPos pos;
     switch( m_mode ) {
@@ -745,8 +845,8 @@ void PIconView::calculateGrid() {
     m_view->setItemTextPos( pos );
     switch (m_mode) {
         case 2:
-            m_view->setGridX(50);
-            m_view->setGridY(20);
+            m_view->setGridX(m_iconsize);
+            m_view->setGridY(-1);
             PPixmapCache::self()->setMaxImages(40);
             break;
         case 3:
@@ -761,4 +861,5 @@ void PIconView::calculateGrid() {
             PPixmapCache::self()->setMaxImages(20);
             break;
     }
+    m_view->setSpacing(10);
 }

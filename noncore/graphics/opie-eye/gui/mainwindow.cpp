@@ -204,12 +204,12 @@ void PMainWindow::slotConfig() {
 
 
     if ( act ) {
-        m_view->resetView();
         keyWid->save();
         m_disp->manager()->save();
         m_info->manager()->save();
         m_view->manager()->save();
         bSetup->save_values();
+        m_view->resetView();
         readConfig();
     }
     delete keyWid;
@@ -692,5 +692,5 @@ void PMainWindow::listviewselected(QAction*which)
 
 void PMainWindow::readConfig()
 {
-    autoSave =m_cfg->readBoolEntry("base_savestatus",true);
+    autoSave =m_cfg->readBoolEntry("savestatus",true);
 }
