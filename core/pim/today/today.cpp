@@ -26,6 +26,7 @@
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h> 
 #include <qpe/qprocess.h>
+#include <qpe/resource.h>
 
 #include <qdir.h>
 #include <qfile.h>
@@ -36,6 +37,7 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 #include <qtimer.h>
+#include <qpixmap.h>
 
 //#include <iostream.h>
 //#include <unistd.h>
@@ -58,12 +60,7 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
   QObject::connect( (QObject*)PushButton1, SIGNAL( clicked() ), this, SLOT(startConfig() ) );
   QObject::connect( (QObject*)TodoButton, SIGNAL( clicked() ), this, SLOT(startTodo() ) );
   QObject::connect( (QObject*)DatesButton, SIGNAL( clicked() ), this, SLOT(startDatebook() ) );
-  QObject::connect( (QObject*)DatesButton, SIGNAL( clicked() ), this, SLOT(startMail() ) );
-
-  QDate date = QDate::currentDate();
-  QString time = (date.toString());
-  TextLabel1->setText(time);
-  db = new DateBookDB;
+  QObject::connect( (QObject*)MailButton, SIGNAL( clicked() ), this, SLOT(startMail() ) );
  
   draw();
 }
@@ -76,12 +73,18 @@ void Today::draw()
   getMail();
   getTodo(); 
   // how often refresh
-  QTimer::singleShot( 30*1000, this, SLOT(draw()) );
+  QTimer::singleShot( 5*1000, this, SLOT(draw()) );
 
 }
 
 void Today::init()
 {
+  QDate date = QDate::currentDate();
+  QString time = (date.toString());
+  
+  TextLabel1->setText("<qt><font color=white>" +time + "<font></qt>");
+  db = new DateBookDB;
+  
   // read config
   Config cfg("today");
   cfg.setGroup("BaseConfig"); 
@@ -147,6 +150,7 @@ void Today::startConfig()
 }
 
 
+
 /*
  *  Get all events that are in the datebook xml file for today
  */
@@ -158,7 +162,7 @@ void Today::getDates()
 
   Config config( "qpe" );
   // if 24 h format
-  //  bool ampm = config.readBoolEntry( "AMPM", TRUE );
+  //bool ampm = config.readBoolEntry( "AMPM", TRUE );
   
   int count=0;
   
@@ -180,20 +184,24 @@ void Today::getDates()
 	  // decide if to get all day or only later appointments
 	  if (!ONLY_LATER)
 	    {
-	       msg += "<B>" + (*it).description() + "</B>";
-	       // include location or not
-	       if (SHOW_LOCATION == 1) 
-		 {
+	      msg += "<B>" + (*it).description() + "</B>";
+	      if ( (*it).event().hasAlarm() )
+		{
+		  msg += " <b>[with alarm]</b>";
+		}
+	      // include location or not
+	      if (SHOW_LOCATION == 1) 
+		{
 		  msg+= "<BR>" + (*it).location();
-		 }
-	       msg += "<BR>"
-		 // start time of event
-		 + TimeString::timeString(QTime((*it).event().start().time()) )
-		 // end time of event
-		 + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) )
-		 + "<BR>";
-	       // include possible note or not
-	       if (SHOW_NOTES == 1)
+		}
+	      msg += "<BR>"
+		// start time of event
+		+ TimeString::timeString(QTime((*it).event().start().time()) )
+		// end time of event
+		+ "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) )
+		+ "<BR>";
+	      // include possible note or not
+	      if (SHOW_NOTES == 1)
 		{
 		  msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
 		}
@@ -201,6 +209,10 @@ void Today::getDates()
 	  else if ((time.toString() <= TimeString::dateString((*it).event().end())) )
 	    {
 	      msg += "<B>" + (*it).description() + "</B>";
+	      if ( (*it).event().hasAlarm() )
+		{
+		  msg += " <b>[with alarm]</b>";
+		}
 	      // include location or not
 	      if (SHOW_LOCATION == 1) 
 		{
@@ -230,7 +242,6 @@ void Today::getDates()
 
 /*
  * Parse in the todolist.xml
- * 
  */
 QList<TodoItem> Today::loadTodo(const char *filename)
 {
@@ -262,7 +273,8 @@ QList<TodoItem> Today::loadTodo(const char *filename)
 	  completed = -1;
 	  while((attlist) && (attlist[j]))
  	    {
-	      if(!attlist[i]->name) continue;
+	      // SEGFAULT HERE WITH MORE THAN 7 ENTRIES
+	      if(!attlist[j]->name) continue;
 	      if(!strcmp(attlist[j]->name, "Description"))
 		{
 		  description = attlist[j]->value;

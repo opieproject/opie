@@ -27,7 +27,8 @@
 #include <qwhatsthis.h>
 #include <qimage.h>
 #include <qpixmap.h>
-//#include <qscrollview.h>
+#include <qscrollview.h>
+#include <qvbox.h>
 
 #include <qpe/resource.h>
 
@@ -50,22 +51,22 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   QPixmap mail = Resource::loadPixmap( "today/mail" );
   
   
-QPalette pal2;
- QColorGroup cg;
- cg.setColor( QColorGroup::Text, white );
- cg.setBrush( QColorGroup::Background, QBrush( QColor( 238, 238, 230), logo ) );
- pal2.setActive( cg );
-
-
-QPalette pal = this->palette();
-QColor col = pal.color(QPalette::Active, QColorGroup::Background);
-pal.setColor(QPalette::Active, QColorGroup::Button, col);
-this->setPalette(pal);
+  QPalette pal2;
+  QColorGroup cg;
+  cg.setColor( QColorGroup::Text, white );
+  cg.setBrush( QColorGroup::Background, QBrush( QColor( 238, 238, 230), logo ) );
+  pal2.setActive( cg );
+  
+  
+  QPalette pal = this->palette();
+  QColor col = pal.color(QPalette::Active, QColorGroup::Background);
+  pal.setColor(QPalette::Active, QColorGroup::Button, col);
+  this->setPalette(pal);
 
   QVBoxLayout * layout = new QVBoxLayout(this);
   
-
   Frame4 = new QFrame( this, "Frame4" );
+  Frame4->setPalette( pal );
   Frame4->setFrameShape( QScrollView::StyledPanel );
   Frame4->setFrameShadow( QScrollView::Sunken );
   Frame4->setBackgroundOrigin( QScrollView::ParentOrigin );
@@ -102,7 +103,7 @@ this->setPalette(pal);
   TextLabel1_font.setBold( TRUE );
   TextLabel1->setFont( TextLabel1_font ); 
   TextLabel1->setBackgroundOrigin( QLabel::ParentOrigin );
-  TextLabel1->setTextFormat( QLabel::AutoText );
+  TextLabel1->setTextFormat( RichText );
    
   // todo
   Frame15 = new QFrame( this, "Frame15" );
@@ -111,9 +112,7 @@ this->setPalette(pal);
   
   TodoButton = new QPushButton (Frame15, "TodoButton" );
   TodoButton->setGeometry( QRect( 2, 4, 36, 32 ) );
-  //TodoButton->setBackgroundMode(NoBackground);
   TodoButton->setPalette( pal );
-  //TodoButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
   TodoButton->setPixmap( todo  );
   TodoButton->setFlat( TRUE );
 
@@ -125,7 +124,6 @@ this->setPalette(pal);
 
   PushButton1 = new QPushButton (Frame15, "PushButton1" );
   PushButton1->setGeometry( QRect( 216, 68, 25, 21 ) ); 
-  //PushButton1->setBackgroundOrigin( QPushButton::WidgetOrigin );
   PushButton1->setPixmap( config  );
   PushButton1->setPalette( pal );
   PushButton1->setAutoDefault( TRUE );
@@ -135,34 +133,28 @@ this->setPalette(pal);
   MailFrame = new QFrame( this ,"MailFrame" );
   MailFrame->setFrameShape( QScrollView::StyledPanel );
   MailFrame->setFrameShadow( QScrollView::Sunken );
-  //MailFrame->setBackgroundOrigin( QScrollView::ParentOrigin );
-
+  
   MailButton = new QPushButton (MailFrame, "MailButton" );
-  MailButton->setGeometry( QRect( 2, 10, 36, 19 ) );
-  //MailButton->setBackgroundOrigin( QPushButton::WidgetOrigin );
+  MailButton->setGeometry( QRect( 2, 3, 36, 19 ) );
   MailButton->setPalette( pal );
   MailButton->setPixmap( mail  );
   MailButton->setFlat( TRUE );
 
   MailField = new QLabel( MailFrame, "DatesField" );
-  MailField->setGeometry( QRect( 40, 10, 203, 120 ) ); 
+  MailField->setGeometry( QRect( 40, 4, 203, 120 ) ); 
   MailField->setText( tr( "Opiemail not installed" ) );
   MailField->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
-  MailField->setMaximumHeight(15);
-  MailField->setMinimumHeight(10);
-
-
-  
+  MailField->setMaximumHeight(40);
+  MailField->setMinimumHeight(30);
 
   layout->addWidget(Frame);
   layout->addWidget(Frame4);
   layout->addWidget(MailFrame);
   layout->addWidget(Frame15);
-  //layout->addWidget(split);
 
-  layout->setStretchFactor(Frame4,4);
+  layout->setStretchFactor(Frame4,5);
   layout->setStretchFactor(MailFrame,1);
-  layout->setStretchFactor(Frame15,3);
+  layout->setStretchFactor(Frame15,4);
 }
 
 /*  
@@ -170,6 +162,5 @@ this->setPalette(pal);
  */
 TodayBase::~TodayBase()
 {
-
 }
 

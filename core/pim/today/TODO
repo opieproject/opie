@@ -2,11 +2,13 @@ TODO for today:
 
 * start the app on  "resume"
 
-* autoupdate
+* show alarm icons on alarm events
+
+* problems with updating
+
+* add am/pm mode instead of 24 h, take system default
 
 * fix 23 pm bug		 (done??)
-
-* add mail support
 
 * scrollbar?
 

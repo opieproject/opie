@@ -29,6 +29,7 @@ public:
     TodayBase( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~TodayBase();
 
+    //QScrollView* Frame4;
     QFrame* Frame4;
     QPushButton* DatesButton;
     QLabel* DatesField;

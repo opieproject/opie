@@ -1,3 +1,12 @@
+0.2.5
+
+* some other minor fixes regarding autoupdate
+* fixed segfault with todolist > 7 entries
+* fixed the "ugly grey border around buttons" issue
+* fixed the "empty calendar field" "bug"
+* shown only later appointments as option
+
+
 0.2.4
 
 * added support for email 
