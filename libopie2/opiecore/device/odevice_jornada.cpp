@@ -175,9 +175,9 @@ bool Jornada::setDisplayBrightness( int bright )
 
     int value = 255 - bright;
     if ( !bright )
-    	cmdline = QString().sprintf( "echo 0 > /sys/class/backlight/sa1100fb/power");
+    	cmdline = QString().sprintf( "echo 4 > /sys/class/backlight/sa1100fb/power");
     else
-    	cmdline = QString().sprintf( "echo 1 > /sys/class/backlight/sa1100fb/power; echo %d > /sys/class/backlight/sa1100fb/brightness", value );
+    	cmdline = QString().sprintf( "echo 0 > /sys/class/backlight/sa1100fb/power; echo %d > /sys/class/backlight/sa1100fb/brightness", value );
     
     res = ( ::system( (const char*) cmdline ) == 0 );
     
@@ -210,7 +210,7 @@ bool Jornada::setDisplayStatus ( bool on )
 {
     bool res = false;
  
-    QString cmdline = QString().sprintf( "echo %d > /sys/class/lcd/sa1100fb/power; echo %d > /sys/class/backlight/sa1100fb/power", on ? "1" : "0", on ? "1" : "0" );
+    QString cmdline = QString().sprintf( "echo %d > /sys/class/lcd/sa1100fb/power; echo %d > /sys/class/backlight/sa1100fb/power", on ? "0" : "4", on? "0" : "4" );
 
     res = ( ::system( (const char*) cmdline ) == 0 );
 
