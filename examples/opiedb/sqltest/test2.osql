@@ -1,0 +1,5 @@
+Name = Test2
+Vendor = Schaf
+License = SPL
+Preference = 15
+Default = 0

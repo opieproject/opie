@@ -1,0 +1,12 @@
+  source examples/applet/config.in
+  source examples/inputmethod/config.in
+  source examples/main-tab/config.in
+  source examples/menuapplet/config.in
+  source examples/networksettings/config.in
+  source examples/python/config.in
+  source examples/simple/config.in
+  source examples/simple-icon/config.in
+  source examples/simple-main/config.in
+  source examples/simple-pim/config.in
+  source examples/todayplugin/config.in
+

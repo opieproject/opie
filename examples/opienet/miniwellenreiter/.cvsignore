@@ -1,0 +1,8 @@
+miniwellenreiter
+Makefile*
+obj
+moc*
+*moc
+*.o
+~*
+
