@@ -314,13 +314,25 @@ void OContactFields::setFieldOrder( int pos, int index ){
 
 int OContactFields::getFieldOrder( int pos ){
   qDebug("ocontactfields getFieldOrder");
-  if(fieldOrder.isEmpty()) qDebug("PANIC fieldOrder empty");
-  else qDebug("fieldOrder ok");
+
+  if( fieldOrder.isEmpty() ) 
+	  qDebug("PANIC fieldOrder empty");
+  else 
+	  qDebug("fieldOrder ok");
+
   qDebug("fieldOrder >%s<",fieldOrder.latin1());
   bool *ok;
-  int ret = QString( fieldOrder[pos] ).toInt(ok, 10);
+  int ret = 0; 
+
+  QString posstr ( fieldOrder[pos] );
+  qWarning ("String: %s ", posstr.latin1() );
+  if ( !posstr.isEmpty() )
+	  ret = QString( posstr ).toInt(ok, 10);
+  else
+	  *ok = false;
+
   qDebug("pos %i -> %i",pos,ret);
-  if (!ok) ret = pos;
+  if ( !*ok ) ret = pos;
   qDebug("returning >%i<",ret);
   return ret;
 }
