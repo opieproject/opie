@@ -3,15 +3,15 @@
     <name>AppsKeyApp</name>
     <message>
         <source>Set Application Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwendungstasten festlegen</translation>
     </message>
     <message>
         <source>Calender</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalender</translation>
     </message>
     <message>
         <source>Address Book</source>
-        <translation type="unfinished"></translation>
+        <translation>Addressbuch</translation>
     </message>
     <message>
         <source>Home</source>

@@ -3,19 +3,19 @@
     <name>Clock</name>
     <message>
         <source>Snooze</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlummern</translation>
     </message>
     <message>
         <source>Clock</source>
-        <translation type="unfinished"></translation>
+        <translation>Uhr</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoppuhr</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -23,71 +23,72 @@
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm einstellen</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Stop</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm ist An</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm ist Aus</translation>
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmzeit und -datum setzten.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Uhr: Ein Alarm wurde verpasst.</translation>
     </message>
 </context>
 <context>
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmzeit einstellen</translation>
     </message>
     <message>
         <source>Hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Stunde</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Minute</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlummerdauer
+(Minuten)</translation>
     </message>
     <message>
         <source>mp3 alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>MP3-Alarm</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
 </context>
 </TS>

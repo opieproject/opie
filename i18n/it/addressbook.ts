@@ -591,7 +591,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Costa Rica</source>
-        <translation></translation>
+        <translation>Costa Rica</translation>
     </message>
     <message>
         <source>Cote d&apos;Ivoire</source>

@@ -3,7 +3,7 @@
     <name>QTetrix</name>
     <message>
         <source>QTetrix</source>
-        <translation>Tetris</translation>
+        <translation>QTetrix</translation>
     </message>
     <message>
         <source>Next</source>
