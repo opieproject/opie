@@ -63,6 +63,11 @@ LnkProperties::LnkProperties( AppLnk* l, QWidget* parent )
     d = new LnkPropertiesBase( this );
     vbox->add( d );
 
+    // hide custom rotation feature for now, need a new implementation to fit quicklauch
+    // is confusing for the user and doubtable usefull since life rotation
+    d->rotate->hide();
+    d->rotateButtons->hide();
+
     d->docname->setText(l->name());
     QString inf;
     if ( l->type().isEmpty() ) {
@@ -114,8 +119,8 @@ LnkProperties::LnkProperties( AppLnk* l, QWidget* parent )
 	if ( l->property("CanFastload") == "0" )
 	    d->preload->hide();
 	if ( !l->property("Rotation"). isEmpty ()) {
-	    d->rotate->setChecked ( true );
-	    d->rotateButtons->setButton((l->rotation().toInt()%360)/90);
+            //    d->rotate->setChecked ( true );
+//	    d->rotateButtons->setButton((l->rotation().toInt()%360)/90);
 	}
 	else {
 	    d->rotateButtons->setEnabled(false);
@@ -130,6 +135,7 @@ LnkProperties::LnkProperties( AppLnk* l, QWidget* parent )
 
 	currentLocation = 0; // apps not movable (yet)
     }
+
 }
 
 LnkProperties::~LnkProperties()
@@ -168,10 +174,10 @@ void LnkProperties::setupLocations()
 		 (*it)->disk() == "/dev/mtdblock1" ||
 		 (*it)->disk() == "/dev/mtdblock/1" ||
 		 (*it)->disk().left(13) == "/dev/mtdblock" ||
-		 (*it)->disk() == "/dev/mtdblock6" || 
+		 (*it)->disk() == "/dev/mtdblock6" ||
 		 (*it)->disk() == "tmpfs" ) {
 		d->locationCombo->insertItem( (*it)->name(), index );
-		locations.append( ( ((*it)->isRemovable() || 
+		locations.append( ( ((*it)->isRemovable() ||
 				    (*it)->disk() == "/dev/mtdblock6" ||
 				    (*it)->disk() == "tmpfs" )
 				    ? (*it)->path() : homeDir) );
@@ -275,7 +281,7 @@ void LnkProperties::done(int ok)
     if ( ok ) {
 	bool changed=FALSE;
 	bool reloadMime=FALSE;
-	
+
 	if ( lnk->name() != d->docname->text() ) {
 	    lnk->setName(d->docname->text());
 	    changed=TRUE;
@@ -289,7 +295,7 @@ void LnkProperties::done(int ok)
 	}
 	if ( !d->rotate->isHidden()) {
 	    QString newrot;
-	
+
 	    if ( d->rotate->isChecked() ) {
 		int rot=0;
 		for(; rot<4; rot++) {
@@ -309,7 +315,7 @@ void LnkProperties::done(int ok)
 	} else if ( changed ) {
 	    lnk->writeLink();
 	}
-	
+
 	if ( !d->preload->isHidden() ) {
 	    Config cfg("Launcher");
 	    cfg.setGroup("Preload");
