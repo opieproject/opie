@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags fl)
 	connect(stop, SIGNAL(activated()), mailView, SLOT(stop()));
 
 	connect(compose, SIGNAL(activated()), SLOT(slotCompose()));
+	connect(sendQueue, SIGNAL(activated()), SLOT(slotSendQueued()));
 	connect(findmails, SIGNAL(activated()), SLOT(slotSearch()));
 	connect(configure, SIGNAL(activated()), SLOT(slotConfigure()));
 }
@@ -39,6 +40,15 @@ void MainWindow::slotCompose()
 	Composer composer(this, 0, true);
 	composer.showMaximized();
 	composer.exec();
+}
+
+void MainWindow::slotSendQueued()
+{
+	Composer composer(this, 0, true, true);
+// 	composer.sendQueue();
+	composer.showMaximized();
+	composer.exec();
+//	composer.close();
 }
 
 void MainWindow::slotSearch()

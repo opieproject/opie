@@ -41,7 +41,7 @@ protected:
 	QPEToolBar *toolbar, *attachToolbar;
 	QComboBox *fromBox, *from, *receiversBox, *subjectBox, *priority;
 	QLineEdit *replyto, *to, *cc, *bcc, *subject;
-	QAction *sendmail, *attachfile, *addressbook, *abort, *addattach, *delattach;
+	QAction *sendmail, *queuemail, *attachfile, *addressbook, *abort, *addattach, *delattach;
 	QLabel *fromLabel, *status;
 
 protected slots:

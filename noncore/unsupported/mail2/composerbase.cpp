@@ -26,6 +26,9 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	sendmail = new QAction(tr("Send the mail"), QIconSet(Resource::loadPixmap("mail/sendmail")), 0, 0, this);
 	sendmail->addTo(toolbar);
 
+	queuemail = new QAction(tr("Queue the mail"), QIconSet(Resource::loadPixmap("mail/sendall")), 0, 0, this);
+	queuemail->addTo(toolbar);
+
 	attachfile = new QAction(tr("Attach a file"), QIconSet(Resource::loadPixmap("mail/attach")), 0, 0, this, 0, true);
 	attachfile->addTo(toolbar);
 	connect(attachfile, SIGNAL(toggled(bool)), SLOT(slotAttachfileChanged(bool)));

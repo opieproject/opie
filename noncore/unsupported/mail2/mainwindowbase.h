@@ -27,7 +27,7 @@ protected:
 	FolderWidget *folderView;
 	QPEToolBar *toolbar;
 	MailTable *mailView;
-	QAction *compose, *folders, *findmails, *configure, *stop;
+	QAction *compose, *sendQueue, *folders, *findmails, *configure, *stop;
 	QLabel *statusLabel;
 
 };

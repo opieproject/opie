@@ -26,6 +26,9 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	compose = new QAction(tr("Compose new mail"), QIconSet(Resource::loadPixmap("mail/newmail")), 0, 0, this);
 	compose->addTo(toolbar);
 
+ 	sendQueue = new QAction(tr("Send queued mails"), QIconSet(Resource::loadPixmap("mail/sendqueue")), 0, 0, this);
+  sendQueue->addTo(toolbar);
+
 	folders = new QAction(tr("Show/hide folders"), QIconSet(Resource::loadPixmap("mail/folder")), 0, 0, this, 0, true);
 	folders->addTo(toolbar);
 	connect(folders, SIGNAL(toggled(bool)), SLOT(slotFoldersToggled(bool)));

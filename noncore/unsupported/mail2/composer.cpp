@@ -9,6 +9,7 @@
 #include <qapplication.h>
 
 #include <qpe/resource.h>
+#include <qpe/config.h>
 
 #include "addresspicker.h"
 #include "listviewplus.h"
@@ -25,13 +26,15 @@ AttachViewItem::AttachViewItem(QListView *parent, Attachment &attachment)
 	setText(1, _attachment.description());
 }
 
-Composer::Composer(QWidget *parent, const char *name, WFlags fl)
+Composer::Composer(QWidget *parent, const char *name, WFlags fl, bool sendQueue)
 	: ComposerBase(parent, name, fl), _inLoop(false)
 {
+	_sendQueued = sendQueue;
 	abort->setEnabled(false);
 	to->setFocus();
 
 	connect(sendmail, SIGNAL(activated()), SLOT(slotSendMail()));
+	connect(queuemail, SIGNAL(activated()), SLOT(slotQueueMail()));
 	connect(addressbook, SIGNAL(activated()), SLOT(slotOpenAddressPicker()));
 	connect(addattach, SIGNAL(activated()), SLOT(slotAddAttach()));
 	connect(delattach, SIGNAL(activated()), SLOT(slotDelAttach()));
@@ -42,6 +45,7 @@ Composer::Composer(QWidget *parent, const char *name, WFlags fl)
 
 	QTimer::singleShot(0, this, SLOT(slotFillStuff()));
 	QTimer::singleShot(0, this, SLOT(slotResizing()));
+
 }
 
 Composer::~Composer()
@@ -90,6 +94,11 @@ void Composer::slotResizing()
 {
 	from->setMaximumWidth(width() - fromBox->width());
 	from->resize(width() - fromBox->width(), y());
+ 	if (_sendQueued)
+  {
+   	slotSendQueued();
+    close();
+  }
 }
 
 void Composer::slotPopupHandler(int itemid)
@@ -154,6 +163,144 @@ void Composer::slotSendMail()
 	connect(handler, SIGNAL(finished()), SLOT(slotSendFinished()));
 	connect(handler, SIGNAL(error(const QString &)), SLOT(slotSendError(const QString &)));
 	connect(handler, SIGNAL(status(const QString &)), status, SLOT(setText(const QString &)));
+}
+
+void Composer::slotSendQueued()
+{
+
+	qDebug("Sending queued messages");
+	Config cfg( "mailqueue", Config::User );
+	cfg.setGroup( "Settings" );
+	int count = cfg.readNumEntry( "count", 0 );
+ 	// tille: should not be here
+  // but no error checking for the moment
+	cfg.writeEntry( "count", 0 );
+	
+	
+ 	qDebug("%i messages to send", count);
+  QString str;
+	for (int i=1;i<=count;i++)
+	  {
+     	qDebug("sending message %i",i);
+	    cfg.setGroup( "Mail_" + QString::number(i) );
+	    SendMail smail;
+     	str = cfg.readEntry("from");
+      qDebug("setFrom %s",str.latin1());
+	    smail.setFrom( str );
+     	str = cfg.readEntry("reply");
+      qDebug("setReplyTo %s",str.latin1());
+	    smail.setReplyTo( str );
+	    QString toAdr = cfg.readEntry("to");
+      qDebug("to %s",toAdr.latin1());
+	    smail.setTo( toAdr ); //to->text());
+     	str = cfg.readEntry("cc");
+      qDebug("setCc %s",str.latin1());
+	    smail.setCc( str ); //cc->text());
+	    smail.setBcc( cfg.readEntry("bcc") ); //bcc->text());
+     	str = cfg.readEntry("subject");
+      qDebug("setSubject %s",str.latin1());
+	    smail.setSubject( str ); //subject->text());
+     	str = cfg.readEntryCrypt("message");
+      qDebug("setMessage %s",str.latin1());
+	    smail.setMessage( str ); //message->text());
+	    smail.setNeedsMime( cfg.readBoolEntry("mime") ); //attachView->childCount() == 0 ? false : true);
+	
+     	qDebug("setting account [%i]",cfg.readNumEntry("account"));
+     	Account accnt = accountsLoaded[ cfg.readNumEntry("account") ];
+	    smail.setAccount( accnt ); //accountsLoaded[from->currentItem()]);
+
+
+	    int prio = cfg.readNumEntry( "priority" );
+     	qDebug("setting priority %i",prio);
+	    if (prio == POPUP_PRIO_LOW) {
+	      smail.setPriority("Low");	// No i18n on purpose
+	    } else if (prio == POPUP_PRIO_NORMAL) {
+	      smail.setPriority("Normal");	// No i18n on purpose
+	    } else if (prio == POPUP_PRIO_HIGH) {
+	      smail.setPriority("High");	// No i18n on purpose
+	    }
+
+	    QValueList<Attachment> attachments;
+	    Attachment a;
+	    QString an;
+
+	    int ac = cfg.readNumEntry( "attachments", 0 );
+			qDebug("%i Attachments",ac);
+	    for (int j = 0; i < ac; ac++) {
+	      an = "Attachment_" + QString::number( j );
+       	qDebug(an.latin1());
+	      a.setFileName(cfg.readEntry( an + "fileName" ));
+	      a.setNewName(cfg.readEntry( an + "newName" ));
+	      a.setDescription(cfg.readEntry( an + "description" ));
+	      a.setDocLnk( DocLnk( cfg.readEntry( an + "docLnk" )) );
+	      attachments.append( a ); 
+	    }
+
+	    smail.setAttachments(attachments);
+
+     	qDebug("putting mail together");
+
+	    QString header, message;
+	    MailFactory::genMail(header, message, smail, this);
+	    if (header.isNull() || message.isNull()) continue;//return;	// Aborted.
+
+	   // abort->setEnabled(true);
+
+     	qDebug("Sending to %s",toAdr.latin1());
+	    SmtpHandler *handler = new SmtpHandler(header, message, accnt ,toAdr);
+     	
+    	connect(handler, SIGNAL(finished()), SLOT(slotSendFinished()));
+  	  connect(handler, SIGNAL(error(const QString &)), SLOT(slotSendError(const QString &)));
+	    connect(handler, SIGNAL(status(const QString &)), status, SLOT(setText(const QString &)));
+
+     	qDebug("remove mail %i", i);
+      cfg.clearGroup();
+      cfg.removeEntry( "Mail_" + QString::number(i) );
+   	}
+}
+
+void Composer::slotQueueMail()
+{
+	if (to->text().find(QRegExp(".*\\@.*\\..*")) == -1) {
+		QMessageBox::information(this, tr("Error"), tr("<p>You have to specify a recipient.<br>(eg: foo@bar.org)</p>"), tr("Ok"));
+		return;
+	}
+
+ 	Config cfg( "mailqueue", Config::User );
+
+	cfg.setGroup( "Settings" );
+	int count = cfg.readNumEntry( "count", 0 );
+ 	count++;
+	cfg.writeEntry( "count", count );
+ 	qDebug("queueing mail %i",count);
+
+	cfg.setGroup( "Mail_" + QString::number( count ));
+	cfg.writeEntry( "from", from->currentText() );
+	cfg.writeEntry( "reply", replyto->text());
+	cfg.writeEntry( "to", to->text());
+	cfg.writeEntry( "cc", cc->text());
+	cfg.writeEntry( "bcc", bcc->text());
+	cfg.writeEntry( "subject", subject->text());
+	cfg.writeEntryCrypt( "message", message->text());
+	cfg.writeEntry( "mime", attachView->childCount() == 0 );
+	cfg.writeEntry( "account", from->currentItem());
+	cfg.writeEntry( "priority", priority->currentItem() );
+	cfg.writeEntry( "attachments", attachView->childCount() );
+
+	Attachment a;
+	QListViewItem *item;
+	QString an;
+	int i = 0;
+	for (item = attachView->firstChild(); item != 0; item = item->itemBelow()) {
+		a = ((AttachViewItem *)item)->attachment();
+		an = "Attachment_" + QString::number( i++ );
+		cfg.writeEntry( an + "fileName", a.fileName() );
+		cfg.writeEntry( an + "newName", a.newName() );
+		cfg.writeEntry( an + "description", a.description() );
+		cfg.writeEntry( an + "docLnk", a.docLnk().file() );	
+	}
+
+ //	cfg.close();
 }
 
 void Composer::slotSendError(const QString &error)
@@ -241,4 +388,3 @@ void Composer::slotDelAttach()
 	if (attachView->currentItem() == NULL) return;
 	attachView->takeItem(attachView->currentItem());
 }
-

@@ -25,7 +25,7 @@ class Composer : public ComposerBase
 	Q_OBJECT
 
 public:
-	Composer(QWidget *parent = 0, const char *name = 0, WFlags fl = Qt::WType_Modal);
+	Composer(QWidget *parent = 0, const char *name = 0, WFlags fl = Qt::WType_Modal, bool sendQueue = false);
 	~Composer();
 
 	void hide();
@@ -33,9 +33,13 @@ public:
 
 	void setSendMail(SendMail &sendMail);
 
+public slots:
+	void slotSendQueued();
+
 protected slots:
 	void slotPopupHandler(int itemid);
 	void slotSendMail();
+	void slotQueueMail();
 	void slotSendError(const QString &);
 	void slotSendFinished();
 	void slotResizing();
@@ -49,6 +53,7 @@ protected:
 	QValueList<Account> accountsLoaded;
 
 private:
+	bool _sendQueued;
 	bool _inLoop;
 	QString _inReplyTo;
 

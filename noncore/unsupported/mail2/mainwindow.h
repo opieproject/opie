@@ -15,6 +15,7 @@ public:
 
 protected slots:
 	void slotCompose();
+ 	void slotSendQueued();
 	void slotSearch();
 	void slotConfigure();
 	void mailClicked(IMAPResponseFETCH mail, IMAPHandler *handler);
