@@ -26,7 +26,7 @@
 #include "ImageFileSelector.h"
 #include "settingsdialog.h"
 
-           
+
 #include <opie/ofiledialog.h>
 
 #include <qpe/qpeapplication.h>
@@ -75,11 +75,11 @@ ControlsDialog::ControlsDialog(const QString &caption,QImage image,int *brightne
     pm.convertFromImage(img);
     pixmap->setPixmap(pm);
     pixmap->setMinimumSize(pm.width(),pm.height());
-    gl->addMultiCellWidget(pixmap,0,0,0,2,AlignCenter); 
+    gl->addMultiCellWidget(pixmap,0,0,0,2,AlignCenter);
     QLabel *l=new QLabel(tr("Brightness")+":",this);
-    gl->addWidget(l,1,0,AlignLeft);       
-    spb=new QSpinBox(-100,100,2,this); 
-    gl->addWidget(spb,1,1,AlignRight); 
+    gl->addWidget(l,1,0,AlignLeft);
+    spb=new QSpinBox(-100,100,2,this);
+    gl->addWidget(spb,1,1,AlignRight);
 
     spb->setValue(0);
 
@@ -102,7 +102,7 @@ void ControlsDialog::bValueChanged(int value)
 
 void ControlsDialog::accept()
 {
-    *b=spb->value();    
+    *b=spb->value();
     done(1);
 }
 
@@ -118,7 +118,9 @@ InfoDialog::InfoDialog(const QString &caption, const QStringList text,QWidget *p
         setPalette(parent->palette());
     }
 
-    const char *labels[]={"File Name","Format","File Size","Size","Colors","Alpha"};
+
+
+    QString labels[]={ tr("File Name"),tr("Format"),tr("File Size"),tr("Size"),tr("Colors"),tr("Alpha") };
 
     setMinimumSize(180,80);
     int num=ImageViewer::LAST+1;
@@ -133,18 +135,18 @@ InfoDialog::InfoDialog(const QString &caption, const QStringList text,QWidget *p
         {
             QFrame *frm=new QFrame(this);
             frm->setFrameStyle(QFrame::HLine|QFrame::Sunken);
-            gl->addMultiCellWidget(frm,i,i,0,1);            
+            gl->addMultiCellWidget(frm,i,i,0,1);
         }
         else
         {
-            l=new QLabel(tr(labels[count])+":",this);
-            gl->addWidget(l,i,0,AlignLeft);        
+            l=new QLabel( tr(  labels[count]  )+":",this);
+            gl->addWidget(l,i,0,AlignLeft);
             l=new QLabel(text[count],this);
             gl->addWidget(l,i,1,AlignRight);
             count++;
         }
 
-    } 
+    }
 
 }
 
@@ -153,7 +155,7 @@ void InfoDialog::displayInfo(const QString &caption, const QStringList text, QWi
     InfoDialog *dlg=new InfoDialog(caption,text,parent);
     dlg->exec();
     delete dlg;
-} 
+}
 
 //===========================================================================
 
@@ -241,11 +243,11 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
                             this, SLOT(openFile()), 0);
 
     viewMenuFile = new QPopupMenu( this );
-    //menubarFile->insertItem( tr("View"), viewMenu );    
+    //menubarFile->insertItem( tr("View"), viewMenu );
     viewMenuFile->insertItem( tr("Thumbnail View"),
                               this, SLOT(switchThumbView()), 0, SHOW_THUMBNAILS );
-    
-    viewMenuFile->setItemChecked ( SHOW_THUMBNAILS, showThumbView ); 
+
+    viewMenuFile->setItemChecked ( SHOW_THUMBNAILS, showThumbView );
 
 
 
@@ -269,14 +271,14 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
 
 
     fileMenuView = new QPopupMenu( this );
-    //menubarView->insertItem( tr("File"),fileMenu );    
+    //menubarView->insertItem( tr("File"),fileMenu );
     fileMenuView->insertItem( tr("Image Info ..."),this, SLOT(displayInfoDialog()),0 );
-    fileMenuView->insertSeparator();    
+    fileMenuView->insertSeparator();
 
     viewMenuView = new QPopupMenu(this );
-    viewMenuView->setCheckable ( true ); 
+    viewMenuView->setCheckable ( true );
 
-    //menubarView->insertItem( tr("View"),viewMenu ); 
+    //menubarView->insertItem( tr("View"),viewMenu );
     viewMenuView->insertItem(tr("Horizontal flip"), this, SLOT(hFlip()), 0);
     viewMenuView->insertItem(tr("Vertical flip"), this, SLOT(vFlip()), 0);
 
@@ -285,7 +287,7 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     setCentralWidget( stack );
 
 
-    imagePanel = new ImagePane( stack );    
+    imagePanel = new ImagePane( stack );
     connect(imagePanel, SIGNAL(clicked()), this, SLOT(normalView()));
 
 
@@ -297,10 +299,10 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
 
     qDebug("cv = %d",cv);
 
-    fileSelector = new ImageFileSelector( cv,stack, "fs");    
-   
+    fileSelector = new ImageFileSelector( cv,stack, "fs");
+
     //switchThumbView();
-    
+
 
     //fileSelector = new ImageFileSelector("image/*", stack, "fs");
     //fileSelector->setNewVisible(FALSE);
@@ -319,7 +321,7 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     a = new QAction( tr( "Open ..." ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( open() ) );
     a->addTo( fileMenuView);
-    a->addTo( iconToolBar );    
+    a->addTo( iconToolBar );
 
 
     a = new QAction( tr( "Rotate 90"), Resource::loadPixmap( "rotate90" ), QString::null, 0, this, 0);
@@ -351,7 +353,7 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     sss->addTo( iconToolBar );
     sss->addTo( viewMenuView );
 
-    sss->setOn(isSized);    
+    sss->setOn(isSized);
     viewMenuView->insertSeparator();
 
 
@@ -382,16 +384,16 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
 
     switchToFileSelector();
 
-    setMouseTracking( TRUE ); 
+    setMouseTracking( TRUE );
 
-    
+
 }
 
 ImageViewer::~ImageViewer()
 {
     Config cfg("Image Viewer");
     cfg.setGroup("Image Viewer");
-    
+
     cfg.writeEntry("ShowThumbnails",(int)showThumbView);
     cfg.writeEntry("SizeToScreen",(int)isSized);
 
@@ -463,7 +465,7 @@ void ImageViewer::switchThumbView()
     showThumbView=!showThumbView;
     viewMenuFile->setItemChecked ( SHOW_THUMBNAILS, showThumbView );
     fileSelector->switchView();
-    
+
 }
 
 void ImageViewer::switchToFileSelector()
@@ -497,7 +499,7 @@ void ImageViewer::switchToImageView()
 void ImageViewer::setDocument(const QString& fileref)
 {
     delayLoad = fileref;
-    switchToImageView();    
+    switchToImageView();
     QTimer::singleShot( 0, this, SLOT(doDelayedLoad()) );
 }
 
@@ -532,7 +534,7 @@ void ImageViewer::openFile() {
     QStringList image;
     image << "image/*";
     types.insert("Images",  image);
-    
+
     QString str = OFileDialog::getOpenFileName( 1,QPEApplication::documentDir(),"", types, 0 );
     DocLnk link(str);
 //    if ( link.isValid() )
@@ -550,7 +552,7 @@ void ImageViewer::openFile( const DocLnk &link )
     if (slideTimer->isActive()) {
         slideTimer->start(slideDelay * 1000, FALSE);
     }
-    
+
 }
 
 void ImageViewer::open()
@@ -560,7 +562,7 @@ void ImageViewer::open()
 
 void ImageViewer::closeFileSelector()
 {
-    switchToImageView();    
+    switchToImageView();
 }
 
 void ImageViewer::updateCaption( QString name )
@@ -582,7 +584,7 @@ void ImageViewer::loadImage( const char *fileName )
         QApplication::setOverrideCursor( waitCursor ); // this might take time
         //imagePanel->statusLabel()->setText( tr("Loading image...") );
         qApp->processEvents();
-        bool ok = image.load(filename, 0); 
+        bool ok = image.load(filename, 0);
         if ( ok ) {
             ok = reconvertImage();
             updateImageInfo(filename);
@@ -597,16 +599,16 @@ void ImageViewer::loadImage( const char *fileName )
 //    fastLoad ? ", Fast" : "",
 //    fastLoad ? QMAX(imagewidth/maxsize, imageheight/maxsize) : 1);
 
-  
+
 //    matrix.reset();
     rotated90 = FALSE;
 
     if (rotateOnLoad) {
         rotated90 = TRUE;
-        rot90();      
+        rot90();
 //        matrix.rotate( -90.0 );
     }
-    
+
     switchToImageView();
     updateImage();
 
@@ -625,10 +627,10 @@ bool ImageViewer::loadSelected()
                 updateCaption( link->name() );
                 filename = link->file();
                 qApp->processEvents();
-                ok = image.load(filename, 0);                    
+                ok = image.load(filename, 0);
                 if ( ok )
                 {
-                    updateImageInfo(filename);                    
+                    updateImageInfo(filename);
                     ok = reconvertImage();
                 }
                 if ( !ok )
@@ -727,7 +729,7 @@ void ImageViewer::resizeEvent( QResizeEvent * )
 void ImageViewer::hFlip()
 {
 //    matrix.scale( -1.0, 1.0 );
-    
+
     setImage(image.mirror(TRUE,FALSE));
 }
 
@@ -807,7 +809,7 @@ void ImageViewer::normalView()
 
         isFullScreen = FALSE;
         stack->addWidget( imagePanel, 1 );
-        switchToImageView();                
+        switchToImageView();
         if ( isSized )
             scale();
 
@@ -842,7 +844,7 @@ void ImageViewer::setImage(const QImage& newimage)
 {
     image = newimage;
     reconvertImage();
-    updateImage();    
+    updateImage();
 }
 
 void ImageViewer::updateImageInfo(QString &filePath)
@@ -855,7 +857,7 @@ void ImageViewer::updateImageInfo(QString &filePath)
 
     imageInfo[FORMAT]=QImage::imageFormat (filePath );
     QFileInfo fi(filePath);
-    imageInfo[PATH]=fi.fileName(); 
+    imageInfo[PATH]=fi.fileName();
     imageInfo[FILE_SIZE]=QString::number(fi.size())+" (bytes)";
     QString message("%1x%2");
     imageInfo[SIZE]=QString("%1x%2");
