@@ -53,7 +53,6 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
   Frame->setFrameShape( QFrame::StyledPanel );
   Frame->setFrameShadow( QFrame::Raised );
   Frame->setLineWidth( 0 );
-  Frame->setMaximumHeight( 50 );
 
   QHBoxLayout *frameLayout = new QHBoxLayout( Frame );
   QVBox *box1 = new QVBox( Frame );

@@ -370,11 +370,13 @@ void Today::refresh() {
 
     QValueList<TodayPlugin>::Iterator it;
     for ( it = pluginList.begin(); it != pluginList.end(); ++it ) {
-      if ( !(*it).excludeRefresh ) {
-	(*it).guiPart->refresh();
-	qDebug( "refresh" );
-      }
+        if ( !(*it).excludeRefresh ) {
+            (*it).guiPart->refresh();
+            layout->addWidget( (*it).guiBox );
+            qDebug( "refresh" );
+        }
     }
+    layout->addStretch(0);
 }
 
 void Today::startApplication() {
