@@ -4,17 +4,18 @@
 	------------
 	* Added four themes courtesy Robert Griebl (http://www.softforge.de/zstyle)
 	* Added Conversion tool for pim-data (eilers)
-	* Modifcation of the PIM API for providing generic use of OPimRecords. (eilers)
+	* Modified the PIM API for providing generic use of OPimRecords (eilers)
     
 	BugFixes
 	--------
 	* #1068 - Country Drop Down Box Off Screen
-	* #1294 - opie does not know about British Summer Time
+	* #1294 - Opie does not know about British Summer Time
 	* #1314 - Drawpad initialization (mickeyl)
 	* #1317 - Packagemanager crashes on hold-down or install (chicken)
+	* #1321 - Batteryapplet graphic glitch (harlekin)
 	* #1324 - ZSafe not starting up (mickeyl)
-	* #1327 - opie-mail ipk does not depend on libopiedb2 (chicken)
-	* #1345 - opie-networksettingsplugin-wlan: Missing dependency for libpcap0 (mickeyl)
+	* #1327 - Opie-mail ipk does not depend on libopiedb2 (chicken)
+	* #1345 - Networksettingsplugin wlan plugin dependency on libpcap0 (mickeyl)
 	* #1348 - Datebook dependency on libopiedb2 (chicken)
 
 2004-25-04	The Opie Team <opie@handhelds.org>
