@@ -1,0 +1,68 @@
+
+==================================================================
+March 2003 - Initial checkin into the Opie CVS:
+==================================================================
+
+So, this is what I have been working on over the last months.
+It's a part of what I think could migrate into our next generation
+opielibs.
+Of course this won't happen after we released Opie 1.0 and switched
+to Qt3-Embedded and gcc 3.
+
+Right now, there is content only in opiecore, opienet and opieui.
+A good part of code has been adapted from the kdelibs, which overall
+are pretty good however in details of heterogenous quality. I'm also
+not sure if all I ported should be kept, e.g. the pixmapeffect stuff
+seems unnecesary to me. However, we should not forget that Opie will
+make its debut on more powerful devices with greater display
+resolution, e.g. the Sharp C700, so we shouldn't limit ourselves in
+what should go into the libraries.
+
+Generally spoken, a lot of things are still very rough and messy,
+but I will keep improving this. Some details about what is usable
+and what is not follows:
+(everything compiles of course, otherwise I wouldn't have checked in :-)
+
+[-----------]
+[ opiecore ]
+[-----------]
+oapplication, oconfig, oglobal seem to be usable yet, oglobalsettings
+is still very messy and should be revised. A lot more thinking about how
+we should keep opie preferences, especially when moving to multi-user, has to be made.
+This will affect what goes into oglobalsettings and what configuration data
+format we will use. If we switch to Qt3 we will have to decide if we stay
+with OConfig deriving from Config or rewrite it using QSettings.
+
+[-----------]
+[  opiedb  ]
+[-----------]
+There is nothing here yet. The sqlite stuff should be here.
+
+[-----------]
+[ opienet ]
+[-----------]
+onetwork*, omonitoring* and the opacket stuff are pretty usable and not
+very far from being complete. documentation for these will come...
+Over the next days, opie-wellenreiter, opie-wirelessapplet and the
+forthcoming new opie-networkapplet will be using the
+new network classes.
+I think all the other network libraries spread throught opie, e.g.
+libbend, libmail, ftplib should be revised and become part of
+opienet eventually.
+
+[-----------]
+[ opiepim ]
+[-----------]
+Nothing here yet. The stuff currently in libopie/pim should be here.
+
+[-----------]
+[ opieui ]
+[-----------]
+Pretty messy yet, but some things are usable. Unfortunately, the UI
+stuff is very hard to backport to Qt2, so some things only work
+if compiled against Qt3, especially all the popupcompletion stuff.
+OListView however works nice and is currently used in opie-wellenreiter.
+
+==================================================================
+October 2002 - Started work on cornucopia aka opielib2
+==================================================================

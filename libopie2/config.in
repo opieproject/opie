@@ -1,0 +1,10 @@
+menu "libopie2"
+  source libopie2/opiecore/config.in
+  source libopie2/opiedb/config.in
+  source libopie2/opienet/config.in
+  source libopie2/opiepim/config.in
+  source libopie2/opieui/config.in
+  comment ""
+  source libopie2/examples/config.in
+endmenu
+

@@ -1,0 +1,10 @@
+Files: $OPIEDIR/lib/libopiecore2.so.1.8.1 $OPIEDIR/lib/libopiecore2.so.1.8 $OPIEDIR/lib/libopiecore2.so.1 $OPIEDIR/lib/libopienet2.so.1.8.1 $OPIEDIR/lib/libopienet2.so.1.8 $OPIEDIR/lib/libopienet2.so.1 $OPIEDIR/lib/libopieui2.so.1.8.1 $OPIEDIR/lib/libopieui2.so.1.8 $OPIEDIR/lib/libopieui2.so.1
+Priority: optional
+Section: opie/system
+Maintainer: Opie Team <opie@handhelds.org>
+Architecture: arm
+Version: 1.8.1
+Depends: libqpe1
+Provides: libopie2
+Replaces: libopie2
+Description: Opie library 2.0

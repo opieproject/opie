@@ -1,0 +1,6 @@
+ [done] * import current status of opiecore, opienet and opieui
+        * add contents of libopie1 to libopie2 and functionally split it
+        * make libopie2 a drop-in-replacement for libopie1
+        * add doxygen documentation to all classes
+        * backport qt3-only stuff (?)
+
