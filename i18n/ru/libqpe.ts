@@ -285,7 +285,7 @@ editing categories.</source>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Комментарии:</translation>
+        <translation>Описание:</translation>
     </message>
     <message>
         <source>Type:</source>
