@@ -1,6 +1,6 @@
 TEMPLATE = lib
 #CONFIG -= moc
-CONFIG += qt debug
+CONFIG += qt release
 
 # Input
 HEADERS = fortuneplugin.h fortunepluginimpl.h \

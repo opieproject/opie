@@ -1,6 +1,6 @@
 TEMPLATE = lib
 #CONFIG -= moc
-CONFIG += qt debug
+CONFIG += qt release
 
 HEADERS = weatherplugin.h       \
           weatherpluginimpl.h   \
