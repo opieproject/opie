@@ -7,7 +7,7 @@
 #include <qdialog.h>
 
 #include <opie/oclickablelabel.h>
-#include <opie/otimepickerbase.h>
+#include "otimepickerbase.h"
 
 class OTimePicker: public QWidget {
   Q_OBJECT
