@@ -20,6 +20,7 @@
 #include <qpopupmenu.h>
 #include <qfile.h>
 #include <qlayout.h>
+#include <qstylesheet.h>
 
 using namespace Opie::Ui;
 using namespace Opie::Core;
@@ -296,6 +297,7 @@ void ViewMail::setMail(const RecMailP&mail )
     m_mail2[1] = mail->CC();
     m_mail2[2] = mail->Bcc();
 
+    setCaption(tr("E-Mail by %1").arg( m_mail[0] ) );
     setText();
 }
 
@@ -329,10 +331,10 @@ void ViewMail::readConfig()
 
 void ViewMail::setText()
 {
-
     QString toString;
     QString ccString;
     QString bccString;
+    QString mailHtml;
 
     for ( QStringList::Iterator it = ( m_mail2[0] ).begin(); it != ( m_mail2[0] ).end(); ++it )
     {
@@ -346,26 +348,20 @@ void ViewMail::setText()
     {
         bccString += (*it);
     }
-
-    setCaption( caption().arg( m_mail[0] ) );
-
-    m_mailHtml = "<html><body>"
+    browser->setTextFormat(Qt::RichText);
+    mailHtml = "<html><body>"
                  "<table width=\"100%\" border=\"0\"><tr bgcolor=\"#FFDD76\"><td>"
-                 "<div align=left><b>" + deHtml( m_mail[1] ) + "</b></div>"
+                 "<div align=left><b>" + deHtml(m_mail[1]) + "</b></div>"
                  "</td></tr><tr bgcolor=\"#EEEEE6\"><td>"
                  "<b>" + tr( "From" ) + ": </b><font color=#6C86C0>" + deHtml( m_mail[0] ) + "</font><br>"
                  "<b>" + tr(  "To" ) + ": </b><font color=#6C86C0>" + deHtml( toString ) + "</font><br><b>" +
                  tr( "Cc" ) + ": </b>" + deHtml( ccString ) + "<br>"
                  "<b>" + tr( "Date" ) + ": </b> " +  m_mail[3] +
-                 "</td></tr></table><font face=fixed>";
-
-    if ( !m_showHtml )
-    {
-        browser->setText( QString( m_mailHtml) + deHtml( m_mail[2] ) + "</font></html>" );
-    }
-    else
-    {
-        browser->setText( QString( m_mailHtml) + m_mail[2] + "</font></html>" );
+                 "</td></tr></table>";
+    if ( !m_showHtml ) {
+        browser->setText( mailHtml+"<font face=fixed>" + QStyleSheet::convertFromPlainText(m_mail[2]) + "</font></body></html>" );
+    } else {
+        browser->setText(mailHtml+m_mail[2].simplifyWhiteSpace()+"</html>");
     }
     // remove later in favor of a real handling
     m_gotBody = true;
@@ -403,9 +399,9 @@ void ViewMail::exec()
 
 }
 
-QString ViewMail::deHtml(const QString &string)
+QString ViewMail::deHtml(const QString &aString)
 {
-    QString string_ = string;
+    QString string_ = aString;
     string_.replace(QRegExp("&"), "&amp;");
     string_.replace(QRegExp("<"), "&lt;");
     string_.replace(QRegExp(">"), "&gt;");

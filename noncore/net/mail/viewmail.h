@@ -52,6 +52,7 @@ protected slots:
     void slotReply();
     void slotForward();
     void setText();
+    void setHeader();
     void slotItemClicked( QListViewItem * item , const QPoint & point, int c );
     void slotDeleteMail( );
     void slotShowHtml( bool );
