@@ -26,6 +26,8 @@
 
 #include <opie/odevicebutton.h>
 
+enum Transformation { None, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws.cpp */
+
 class ODeviceData;
 
 namespace Opie {
@@ -48,6 +50,9 @@ enum OModel {
 
 	Model_Zaurus_SL5000 = ( Model_Zaurus | 0x000001 ),
 	Model_Zaurus_SL5500 = ( Model_Zaurus | 0x000002 ),
+	Model_Zaurus_SLA300 = ( Model_Zaurus | 0x000003 ),
+	Model_Zaurus_SLB600 = ( Model_Zaurus | 0x000004 ),
+	Model_Zaurus_SLC700 = ( Model_Zaurus | 0x000005 ),
 };
 
 enum OVendor {	
@@ -89,7 +94,6 @@ enum OHardKey {
 	HardKey_Backlight = Qt::Key_F35,
 };
 
-
 class ODevice : public QObject {
 	Q_OBJECT
 	
@@ -107,8 +111,6 @@ public:
 
 	static ODevice *inst ( );
 
-
-
 // information
 
 	QString modelString ( ) const; 
@@ -122,6 +124,8 @@ public:
 	OSystem system ( ) const;
 
 	QString systemVersionString ( ) const;
+
+	Transformation rotation ( ) const;
 
 // system	
 

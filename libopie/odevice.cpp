@@ -65,6 +65,8 @@ public:
 	OSystem m_system;
 	
 	QString m_sysverstr;
+
+	Transformation m_rotation;
 	
 	QValueList <ODeviceButton> m_buttons;
 	uint                       m_holdtime;
@@ -249,6 +251,7 @@ ODevice::ODevice ( )
 	d-> m_systemstr = "Unknown";
 	d-> m_system = System_Unknown;
 	d-> m_sysverstr = "0.0";
+	d-> m_rotation = None;
 	
 	d-> m_holdtime = 1000; // 1000ms
 	
@@ -398,6 +401,11 @@ OSystem ODevice::system ( ) const
 QString ODevice::systemVersionString ( ) const
 {
 	return d-> m_sysverstr;
+}
+
+Transformation ODevice::rotation ( ) const
+{
+	return d-> m_rotation;
 }
 
 void ODevice::alarmSound ( )
@@ -587,6 +595,19 @@ void iPAQ::init ( )
 		f. close ( );
 	}
 
+	switch ( d-> m_model ) {
+		case Model_iPAQ_H31xx:
+		case Model_iPAQ_H38xx:
+			d-> m_rotation = Rot90;
+			break;
+		case Model_iPAQ_H36xx:
+		case Model_iPAQ_H37xx:
+		case Model_iPAQ_H39xx:
+		default:
+			d-> m_rotation = Rot270;
+			break;
+	}
+
 	f. setName ( "/etc/familiar-version" );
 	if ( f. open ( IO_ReadOnly )) { 
 		d-> m_systemstr = "Familiar";
@@ -639,7 +660,6 @@ typedef struct {
 
 #define LED_ON    OD_IOW( 'f', 5, LED_IN )
 #define FLITE_ON  OD_IOW( 'f', 7, FLITE_IN )
-
 
 
 QValueList <OLed> iPAQ::ledList ( ) const
@@ -937,17 +957,36 @@ void Zaurus::init ( )
 		QTextStream ts ( &f );
 		QString model = ts. readLine ( );
 		f. close ( );
-		if ( model == "SL-5000D" ) {
-			d-> m_model = Model_Zaurus_SL5000;
-			d-> m_modelstr = "Zaurus SL-5000D";
-		} else if ( model == "SL-5500" ) {
+
+		d-> m_modelstr = QString("Zaurus ") + model;
+		if ( model == "SL-5500" )
 			d-> m_model = Model_Zaurus_SL5500;
-			d-> m_modelstr = "Zaurus SL-5500";
-		}
+		else if ( model == "SL-C700" )
+			d-> m_model = Model_Zaurus_SLC700;
+		else if ( model == "SL-A300" )
+			d-> m_model = Model_Zaurus_SLA300;
+		else if ( model == "SL-B600" || model == "SL-5600" )
+			d-> m_model = Model_Zaurus_SLB600;
+		else
+			d-> m_model = Model_Zaurus_SL5000;
 	}
 	else {
 		d-> m_model = Model_Zaurus_SL5000;
-		d-> m_modelstr = "Zaurus SL-5000D (unverified)";
+		d-> m_modelstr = "Zaurus (model unknown)";
+	}
+
+	switch ( d-> m_model ) {
+		case Model_Zaurus_SLC700:
+			/* note for C700, we must check the display rotation
+			 * sensor to set an appropriate value
+			 */
+		case Model_Zaurus_SLA300:
+		case Model_Zaurus_SLB600:
+		case Model_Zaurus_SL5500:
+		case Model_Zaurus_SL5000:
+		default:
+			d-> m_rotation = Rot270;
+			break;
 	}
 
 	for ( uint i = 0; i < ( sizeof( z_buttons ) / sizeof( z_button )); i++ ) {
