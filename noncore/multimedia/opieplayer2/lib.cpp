@@ -132,12 +132,6 @@ void Lib::resize ( const QSize &s ) {
     }
 }
 
-QCString Lib::version() {
-    //   QCString str( xine_get_str_version() );
-    // return str;
-    return "test";
-}
-
 int Lib::majorVersion() {
      int major, minor, sub;
      xine_get_version ( &major, &minor, &sub );

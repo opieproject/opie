@@ -60,7 +60,6 @@ namespace XINE {
     public:
         Lib(XineVideoWidget* = 0);
         ~Lib();
-        QCString version();
         static int majorVersion();
         static int minorVersion();
         static int subVersion();
