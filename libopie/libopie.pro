@@ -40,6 +40,7 @@ HEADERS   = ofontmenu.h \
     pim/otimezone.h \
     pim/odatebookaccess.h \
     pim/odatebookaccessbackend.h \
+    pim/odatebookaccessbackend_xml.h \
     orecurrancewidget.h \
     oticker.h 
 #    pim/otodoaccesssql.h \
@@ -79,6 +80,7 @@ SOURCES   = ofontmenu.cc  \
        pim/otimezone.cpp \
        pim/odatebookaccess.cpp \
        pim/odatebookaccessbackend.cpp \
+       pim/odatebookaccessbackend_xml.cpp \
        orecurrancewidget.cpp \
        oticker.cpp
 #             pim/otodoaccesssql.cpp \

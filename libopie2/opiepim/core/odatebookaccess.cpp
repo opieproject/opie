@@ -8,6 +8,7 @@ ODateBookAccess::ODateBookAccess( ODateBookAccessBackend* back, enum Access ac )
         back = OBackendFactory<ODateBookAccessBackend>::Default("datebook", QString::null );
 
     m_backEnd = back;
+    setBackEnd( m_backEnd );
 }
 ODateBookAccess::~ODateBookAccess() {
 }
@@ -29,9 +30,9 @@ ODateBookAccess::List ODateBookAccess::nonRepeats()const {
     List lis( ints, this );
     return lis;
 }
-OEffectiveEvent::ValueList ODateBookAccess::effecticeEvents( const QDate& from, const QDate& to ) {
+OEffectiveEvent::ValueList ODateBookAccess::effectiveEvents( const QDate& from, const QDate& to ) {
     return m_backEnd->effecticeEvents( from, to );
 }
-OEffectiveEvent::ValueList ODateBookAccess::effecticeEvents( const QDateTime& start ) {
+OEffectiveEvent::ValueList ODateBookAccess::effectiveEvents( const QDateTime& start ) {
     return m_backEnd->effecticeEvents( start );
 }

@@ -10,13 +10,23 @@
  *      either version 2 of the License, or (at your option) any later
  *      version.
  * =====================================================================
- * ToDo: Use plugins 
+ * ToDo: Use plugins
  * =====================================================================
- * Version: $Id: obackendfactory.h,v 1.4 2002-10-14 15:55:18 eilers Exp $
+ * Version: $Id: obackendfactory.h,v 1.5 2003-02-21 23:31:52 zecke Exp $
  * =====================================================================
  * History:
  * $Log: obackendfactory.h,v $
- * Revision 1.4  2002-10-14 15:55:18  eilers
+ * Revision 1.5  2003-02-21 23:31:52  zecke
+ * Add XML datebookresource
+ * -clean up todoaccessxml header
+ * -implement some more stuff in the oeven tester
+ * -extend DefaultFactory to not crash and to use datebook
+ *
+ * -reading of OEvents is working nicely.. saving will be added
+ *  tomorrow
+ *  -fix spelling in ODateBookAcces
+ *
+ * Revision 1.4  2002/10/14 15:55:18  eilers
  * Redeactivate SQL.. ;)
  *
  * Revision 1.3  2002/10/10 17:08:58  zecke
@@ -47,6 +57,7 @@
 
 #include "otodoaccessxml.h"
 #include "ocontactaccessbackend_xml.h"
+#include "odatebookaccessbackend_xml.h"
 
 #ifdef __USE_SQL
 #include "otodoaccesssql.h"
@@ -64,9 +75,9 @@ class OBackendFactory
 		CONTACT,
 		DATE
 	};
-	
+
 	static T* Default( const QString backendName, const QString& appName ){
-	
+
 		// __asm__("int3");
 
 		Config config( "pimaccess" );
@@ -78,34 +89,40 @@ class OBackendFactory
 
 		dict.insert( "todo", new int (TODO) );
 		dict.insert( "contact", new int (CONTACT) );
+                dict.insert( "datebook", new int(DATE) );
 
 		qWarning ("TODO is: %d", TODO);
 		qWarning ("CONTACT is: %d", CONTACT);
-	
-		switch ( *dict.take( backendName ) ){
+
+                int *find = dict[ backendName ];
+                if (!find ) return 0;
+
+		switch ( *find ){
 		case TODO:
 #ifdef __USE_SQL
-			if ( backend == "sql" ) 
+			if ( backend == "sql" )
 				return (T*) new OTodoAccessBackendSQL("");
 #else
-			if ( backend == "sql" ) 
+			if ( backend == "sql" )
 				qWarning ("OBackendFactory:: sql Backend not implemented! Using XML instead!");
 #endif
 
 			return (T*) new OTodoAccessXML( appName );
 		case CONTACT:
-			if ( backend == "sql" ) 
+			if ( backend == "sql" )
 				qWarning ("OBackendFactory:: sql Backend not implemented! Using XML instead!");
 
 			return (T*) new OContactAccessBackend_XML( appName );
 		case DATE:
-			qWarning ("OBackendFactory:: DATE-Backend not implemented!");
-			return NULL;
+			if ( backend == "sql" )
+                            qWarning("OBackendFactory:: sql Backend not implemented! Using XML instead!");
+
+			return (T*) new ODateBookAccessBackend_XML( appName );
 		default:
 			return NULL;
 		}
-	
-	
+
+
 	}
 };
 

@@ -187,6 +187,11 @@ bool OEvent::isMultipleDay()const {
 bool OEvent::isAllDay()const {
     return data->isAllDay;
 }
+void OEvent::setAllDay( bool allDay ) {
+    changeOrModify();
+    data->isAllDay = allDay;
+    if (allDay ) data->timezone = "UTC";
+}
 void OEvent::setTimeZone( const QString& tz ) {
     changeOrModify();
     data->timezone = tz;

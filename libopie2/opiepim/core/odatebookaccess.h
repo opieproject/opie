@@ -20,8 +20,8 @@ public:
     /** return non repeating events */
     List nonRepeats()const;
 
-    OEffectiveEvent::ValueList effecticeEvents( const QDate& from, const QDate& to );
-    OEffectiveEvent::ValueList effecticeEvents( const QDateTime& start );
+    OEffectiveEvent::ValueList effectiveEvents( const QDate& from, const QDate& to );
+    OEffectiveEvent::ValueList effectiveEvents( const QDateTime& start );
 
 private:
     ODateBookAccessBackend* m_backEnd;

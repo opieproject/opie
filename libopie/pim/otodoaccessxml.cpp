@@ -15,8 +15,6 @@
 #include <qpe/stringutil.h>
 #include <qpe/timeconversion.h>
 
-#include <opie/xmltree.h>
-
 #include "otodoaccessxml.h"
 
 OTodoAccessXML::OTodoAccessXML( const QString& appName,

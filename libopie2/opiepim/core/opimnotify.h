@@ -72,7 +72,7 @@ private:
  */
 class OPimAlarm : public OPimNotify {
 public:
-    enum Sound{Loud=0, Silent, Custom };
+    enum Sound{Loud=1, Silent=0, Custom=2 };
     OPimAlarm( int sound = Silent, const QDateTime& start = QDateTime(), int duration = 0, int parent = 0 );
     OPimAlarm( const OPimAlarm& );
     ~OPimAlarm();
