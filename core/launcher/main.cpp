@@ -49,29 +49,32 @@
 
 using namespace Opie;
 
-void initEnvironment()
+void initEnvironment( )
 {
-  Config config("locale");
-  config.setGroup( "Location" );
-  QString tz = config.readEntry( "Timezone", getenv("TZ") );
+    Config config("locale");
+    config.setGroup( "Location" );
+    QString tz = config.readEntry( "Timezone", getenv("TZ") );
 
-  // if not timezone set, pick New York
-  if (tz.isNull())
-      tz = "America/New_York";
+    // if not timezone set, pick New York
+    if (tz.isNull())
+        tz = "America/New_York";
 
-  setenv( "TZ", tz, 1 );
-  config.writeEntry( "Timezone", tz);
+    setenv( "TZ", tz, 1 );
+    config.writeEntry( "Timezone", tz);
 
-  config.setGroup( "Language" );
-  QString lang = config.readEntry( "Language", getenv("LANG") );
-  if ( !lang.isNull() )
-    setenv( "LANG", lang, 1 );
+    config.setGroup( "Language" );
+    QString lang = config.readEntry( "Language", getenv("LANG") );
+    if ( !lang.isNull() )
+        setenv( "LANG", lang, 1 );
+
 }
 
 
 int initApplication( int argc, char ** argv )
 {
-    initEnvironment();
+    struct ODevice *odev = ODevice::inst();
+
+    initEnvironment( );
 
 #if !defined(QT_QWS_CASSIOPEIA) && !defined(QT_QWS_IPAQ) && !defined(QT_QWS_EBX)
     setenv( "QWS_SIZE", "240x320", 0 );
@@ -81,12 +84,25 @@ int initApplication( int argc, char ** argv )
     QWSServer::setDesktopBackground( QImage() );
     DesktopApplication a( argc, argv, QApplication::GuiServer );
 
-	ODevice::inst ( )-> setSoftSuspend ( true );
+    int rot;
+    switch ( odev-> rotation( ) ) {
+        case None:
+            rot = 0;
+        case Rot90:
+            rot = 90;
+        case Rot180:
+            rot = 180;
+        case Rot270:
+            rot = 270;
+    }
+    a.setDefaultRotation( rot );
+  
+    odev-> setSoftSuspend ( true );
 
-	{ // init backlight
-	    QCopEnvelope e("QPE/System", "setBacklight(int)" );
-   	 e << -3; // Forced on
-	}
+    { // init backlight
+        QCopEnvelope e("QPE/System", "setBacklight(int)" );
+        e << -3; // Forced on
+    }
 
     AlarmServer::initialize();
 
@@ -104,27 +120,27 @@ int initApplication( int argc, char ** argv )
 
 #if defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
     if ( !QFile::exists( "/etc/pointercal" ) ) {
-	// Make sure calibration widget starts on top.
-	Calibrate *cal = new Calibrate;
-	cal->exec();
-	delete cal;
+    // Make sure calibration widget starts on top.
+    Calibrate *cal = new Calibrate;
+    cal->exec();
+    delete cal;
     }
 #endif
 
     d->show();
 
-	if ( QDate::currentDate ( ). year ( ) < 2000 ) {
-		if ( QMessageBox::information ( 0, DesktopApplication::tr( "Information" ), DesktopApplication::tr( "<p>The system date doesn't seem to be valid.\n(%1)</p><p>Do you want to correct the clock ?</p>" ). arg( TimeString::dateString ( QDate::currentDate ( ))), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
-			QCopEnvelope e ( "QPE/Application/systemtime", "setDocument(QString)" );
-			e << QString ( );		                              
-		}
-	}
+    if ( QDate::currentDate ( ). year ( ) < 2000 ) {
+        if ( QMessageBox::information ( 0, DesktopApplication::tr( "Information" ), DesktopApplication::tr( "<p>The system date doesn't seem to be valid.\n(%1)</p><p>Do you want to correct the clock ?</p>" ). arg( TimeString::dateString ( QDate::currentDate ( ))), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
+            QCopEnvelope e ( "QPE/Application/systemtime", "setDocument(QString)" );
+            e << QString ( );		                              
+        }
+    }
 
     int rv =  a.exec();
 
     delete d;
 
-	ODevice::inst ( )-> setSoftSuspend ( false );
+    odev-> setSoftSuspend ( false );
 
     return rv;
 }
@@ -133,37 +149,37 @@ static const char *pidfile_path = "/var/run/opie.pid";
 
 void create_pidfile ( )
 {
-	FILE *f;
+    FILE *f;
 
-	if (( f = ::fopen ( pidfile_path, "w" ))) {
-		::fprintf ( f, "%d", getpid ( ));
-		::fclose ( f );
-	}
+    if (( f = ::fopen ( pidfile_path, "w" ))) {
+        ::fprintf ( f, "%d", getpid ( ));
+        ::fclose ( f );
+    }
 }
 
 void remove_pidfile ( )
 {
-	::unlink ( pidfile_path );
+    ::unlink ( pidfile_path );
 }
 
 void handle_sigterm ( int /* sig */ )
 {
-	if ( qApp )
-		qApp-> quit ( );
+    if ( qApp )
+        qApp-> quit ( );
 }
 
 int main( int argc, char ** argv )
 {
     ::signal ( SIGCHLD, SIG_IGN );
 
-	::signal ( SIGTERM, handle_sigterm );
-	::signal ( SIGINT, handle_sigterm );
+    ::signal ( SIGTERM, handle_sigterm );
+    ::signal ( SIGINT, handle_sigterm );
 
-	::setsid ( );
-	::setpgid ( 0, 0 );
+    ::setsid ( );
+    ::setpgid ( 0, 0 );
 
-	::atexit ( remove_pidfile );
-	create_pidfile ( );
+    ::atexit ( remove_pidfile );
+    create_pidfile ( );
 
     int retVal = initApplication ( argc, argv );
 

@@ -1,6 +1,7 @@
 #!/bin/sh
 
 [ -z "$QTE_VERSION" ] && QTE_VERSION=2.3.4
+[ -z "$QTE_BASEVERSION" ] && QTE_BASEVERSION=2.3.4
 [ -z "$QTE_REVISION" ] && QTE_REVISION=3
 DEB_VERSION=2.0
 
