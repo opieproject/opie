@@ -10,13 +10,14 @@ signals:
 	
 public:
   WLANModule();
-  
+  ~WLANModule();
+
   virtual void setProfile(QString newProfile);
   virtual bool isOwner(Interface *);
   virtual QWidget *configure(Interface *i, QTabWidget **tabWidget);
   virtual QWidget *information(Interface *i, QTabWidget **tabWidget);
   virtual QList<Interface> getInterfaces();
-  virtual void possibleNewInterfaces(QMap<QString, QString> &list){};
+  virtual void possibleNewInterfaces(QMap<QString, QString> &){};
   virtual Interface *addNewInterface(QString name);
   virtual bool remove(Interface* i);
   virtual QString getPixmapName(Interface* i);
