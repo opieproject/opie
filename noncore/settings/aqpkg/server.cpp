@@ -259,6 +259,12 @@ void Server :: buildLocalPackages( Server *local )
             curr->setLocalPackage( p );
             if ( p )
             {
+                // Replace local version
+                QList<Package> *locallist = &local->getPackageList();
+                int pos = locallist->at();
+                locallist->remove( p );
+                locallist->insert( pos, curr );
+                
                 // Set some default stuff like size and things
                 if ( p->getInstalledVersion() == curr->getVersion() )
                 {
