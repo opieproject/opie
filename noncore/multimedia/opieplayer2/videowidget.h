@@ -108,7 +108,6 @@ private:
 
     QString backgroundPix;
     QSlider *slider;
-    QPixmap *pixmaps[3];
     QImage *currentFrame;
     int scaledWidth;
     int scaledHeight;
