@@ -169,7 +169,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
         this, SLOT(receive(const QCString&,const QByteArray&)) );
 
-    setIcon( Resource::loadPixmap( "TextEditor" ) );
+    setIcon( Resource::loadPixmap( "textedit/TextEditor" ) );
 
     QToolBar *bar = new QToolBar( this );
     bar->setHorizontalStretchable( true );
