@@ -17,6 +17,7 @@
 #include "drawpadcanvas.h"
 #include "page.h"
 
+#include <qimage.h>
 #include <qpainter.h>
 
 PointTool::PointTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
@@ -48,14 +49,12 @@ void PointTool::mouseReleaseEvent(QMouseEvent* e)
 void PointTool::mouseMoveEvent(QMouseEvent* e)
 {
     if (m_mousePressed) {
-        QPainter painter;
-        painter.begin(m_pDrawPadCanvas->currentPage());
-        painter.setPen(m_pDrawPad->pen());
         m_polyline[2] = m_polyline[1];
         m_polyline[1] = m_polyline[0];
         m_polyline[0] = e->pos();
-        painter.drawPolyline(m_polyline);
-        painter.end();
+
+        QPainter painter;
+        painter.begin(m_pDrawPadCanvas->currentPage());
 
         QRect r = m_polyline.boundingRect();
         r = r.normalize();
@@ -63,6 +62,37 @@ void PointTool::mouseMoveEvent(QMouseEvent* e)
         r.setTop(r.top() - m_pDrawPad->pen().width());
         r.setRight(r.right() + m_pDrawPad->pen().width());
         r.setBottom(r.bottom() + m_pDrawPad->pen().width());
+
+        QPixmap areaPixmap(r.width(), r.height());
+        bitBlt(&areaPixmap, QPoint(0, 0), painter.device(), r);
+
+        QImage areaImage = areaPixmap.convertToImage();
+        QImage bigAreaImage = areaImage.smoothScale(areaImage.width() * 3, areaImage.height() * 3);
+
+        QPixmap bigAreaPixmap;
+        bigAreaPixmap.convertFromImage(bigAreaImage);
+
+        QPen bigAreaPen = m_pDrawPad->pen();
+        bigAreaPen.setWidth(bigAreaPen.width() * 3);
+
+        QPainter bigAreaPainter;
+        bigAreaPainter.begin(&bigAreaPixmap);
+        bigAreaPainter.setPen(bigAreaPen);
+
+	QPointArray bigAreaPolyline(3);
+	bigAreaPolyline.setPoint(0, (m_polyline[0].x() - r.x()) * 3 + 1, (m_polyline[0].y() - r.y()) * 3 + 1);
+	bigAreaPolyline.setPoint(1, (m_polyline[1].x() - r.x()) * 3 + 1, (m_polyline[1].y() - r.y()) * 3 + 1);
+	bigAreaPolyline.setPoint(2, (m_polyline[2].x() - r.x()) * 3 + 1, (m_polyline[2].y() - r.y()) * 3 + 1);
+
+        bigAreaPainter.drawPolyline(bigAreaPolyline);
+        bigAreaPainter.end();
+
+        bigAreaImage = bigAreaPixmap.convertToImage();
+        areaImage = bigAreaImage.smoothScale(bigAreaImage.width() / 3, bigAreaImage.height() / 3);
+        areaPixmap.convertFromImage(areaImage);
+
+        painter.drawPixmap(r.x(), r.y(), areaPixmap);
+        painter.end();
 
         QRect viewportRect(m_pDrawPadCanvas->contentsToViewport(r.topLeft()),
                            m_pDrawPadCanvas->contentsToViewport(r.bottomRight()));
