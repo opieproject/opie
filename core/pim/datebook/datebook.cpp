@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.39 2005-03-17 14:01:23 alwin Exp $
+** $Id: datebook.cpp,v 1.40 2005-03-17 23:54:29 alwin Exp $
 **
 **********************************************************************/
 
@@ -32,6 +32,8 @@
 #include <opie2/odebug.h>
 #include <opie2/oholidaypluginif.h>
 #include <opie2/oholidayplugin.h>
+#include <opie2/opluginloader.h>
+#include <opie2/todayplugininterface.h>
 
 #include <qpe/datebookmonth.h>
 #include <qpe/qpeapplication.h>
@@ -1085,16 +1087,20 @@ Event DateBookDBHack::eventByUID(int uid) {
 DateBookHoliday::DateBookHoliday()
 {
     _pluginlist.clear();
+    m_pluginLoader = new Opie::Core::OPluginLoader("holidays",false);
+    m_pluginLoader->setAutoDelete(true);
     init();
 }
 
 DateBookHoliday::~DateBookHoliday()
 {
     deinit();
+    delete m_pluginLoader;
 }
 
 void DateBookHoliday::deinit()
 {
+/*
     QValueList<HPlugin*>::Iterator it;
     for (it=_pluginlist.begin();it!=_pluginlist.end();++it) {
         HPlugin*_pl = *it;
@@ -1105,11 +1111,37 @@ void DateBookHoliday::deinit()
         delete _pl;
     }
     _pluginlist.clear();
+*/
 }
+
+#if 0
+void debugLst( const Opie::Core::OPluginItem::List& lst ) {
+    for ( Opie::Core::OPluginItem::List::ConstIterator it = lst.begin(); it != lst.end(); ++it )
+        odebug << "Name " << (*it).name() << " " << (*it).path() << " " << (*it).position() << oendl;
+}
+#endif
 
 void DateBookHoliday::init()
 {
+#if 0
     deinit();
+#endif
+    Opie::Core::OPluginItem::List  lst = m_pluginLoader->allAvailable( false );
+//    debugLst( lst );
+    for( Opie::Core::OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ){
+        Opie::Datebook::HolidayPluginIf*hif = m_pluginLoader->load<Opie::Datebook::HolidayPluginIf>(*it,IID_HOLIDAY_PLUGIN);
+        if (hif) {
+            Opie::Datebook::HolidayPlugin*pl = hif->plugin();
+            if (pl) {
+                HPlugin*_pl=new HPlugin;
+                _pl->_plugin = pl;
+                odebug << "Found holiday " << pl->description()<<oendl;
+                _pluginlist.append(_pl);
+                //_pl->_if = hif;
+            }
+        }
+    }
+#if 0
     QString path = QPEApplication::qpeDir() + "plugins/datebook/holiday";
     QDir dir( path, "lib*.so" );
     QStringList list = dir.entryList();
@@ -1132,6 +1164,7 @@ void DateBookHoliday::init()
             delete lib;
         }
     }
+#endif
 }
 
 QStringList DateBookHoliday::holidaylist(const QDate&aDate)

@@ -11,6 +11,9 @@ namespace Datebook {
     class HolidayPlugin;
     class HolidayPluginIf;
 }
+namespace Core {
+    class OPluginLoader;
+}
 }
 
 class QLibrary;
@@ -38,10 +41,11 @@ protected:
 
     struct HPlugin {
         Opie::Datebook::HolidayPlugin*_plugin;
-        QLibrary*_lib;
-        Opie::Datebook::HolidayPluginIf*_if;
+        //QLibrary*_lib;
+        //Opie::Datebook::HolidayPluginIf*_if;
     };
     QValueList<HPlugin*>_pluginlist;
+    Opie::Core::OPluginLoader*m_pluginLoader;
 };
 
 class DateBookDBHoliday:virtual public DateBookDBHack {
