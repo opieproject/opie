@@ -249,11 +249,10 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
       break;
   }
 
-  if ( !ODevice::inst ( )-> series ( ) == Model_iPAQ ) {
+  if ( !ODevice::inst()->modelString().contains( "Model_iPAQ" )) {
     has_bass = false;
     has_treble = false;
   }
-
 
   setFrameStyle ( QFrame::PopupPanel | QFrame::Raised );
 
