@@ -1,6 +1,4 @@
-TEMPLATE        = app
-CONFIG          += qt warn_on release
-DESTDIR         = $(OPIEDIR)/bin
+CONFIG          += qt warn_on release quick-app
 HEADERS		= d3des.h \
 		  krfbbuffer.h \
 		  krfbcanvas.h \
@@ -27,10 +25,12 @@ SOURCES		= d3des.c \
 		  main.cpp
 INTERFACES	= kvncconndlgbase.ui \
 						kvncbookmarkdlgbase.ui
-TARGET          = keypebble
+
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
+
+TARGET		= keypebble
 
 TRANSLATIONS = ../../../i18n/de/keypebble.ts \
 	 ../../../i18n/nl/keypebble.ts \

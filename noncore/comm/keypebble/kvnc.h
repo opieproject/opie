@@ -17,14 +17,14 @@ class QToolBar;
  * Top level window for Keystone.
  *
  * @author Richard Moore, rich@kde.org
- * @version $Id: kvnc.h,v 1.4 2002-11-17 18:30:27 treke Exp $
+ * @version $Id: kvnc.h,v 1.5 2003-10-27 19:06:54 mickeyl Exp $
  */
 class KVNC : public QMainWindow
 {
   Q_OBJECT
-public: 
-  KVNC( const char *name = 0 );
-  ~KVNC(); 
+public:
+  KVNC( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
+  ~KVNC();
 
 public slots:
   void newConnection();
@@ -34,6 +34,7 @@ public slots:
   void openConnection(void);
   void toggleFullScreen();
   void closeConnection();
+  static QString appName() { return QString::fromLatin1("keypebble"); }
 
 protected:
   void setupActions();

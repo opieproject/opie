@@ -334,7 +334,7 @@ void KRFBDecoder::sendAllowedEncodings()
   con->write( &SetEncodingsId, 1 );
   con->write( padding, 1 );
 
-  static CARD16 noEncodings = con->options()->encodings();
+  CARD16 noEncodings = con->options()->encodings();
   noEncodings = Swap16IfLE( noEncodings );
   con->write( &noEncodings, 2 );
 
@@ -559,8 +559,11 @@ void KRFBDecoder::gotRawRectChunk()
       connect( con, SIGNAL( gotEnoughData() ), SLOT( gotRectHeader() ) );
       con->waitForData( RectHeaderLength );
     }
-    else
+    else {
+      // we are now ready for the next update - no need to wait for the timer
       currentState = Idle;
+      sendUpdateRequest (1);
+    }
   }
 }
 
