@@ -3,7 +3,7 @@
     <name>QPdfDlg</name>
     <message>
         <source>QPdf</source>
-        <translation>QPdf</translation>
+        <translation>PDF Viser</translation>
     </message>
     <message>
         <source>Zoom</source>

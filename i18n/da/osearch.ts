@@ -3,105 +3,105 @@
     <name>MainWindow</name>
     <message>
         <source>OSearch</source>
-        <translation type="unfinished"></translation>
+        <translation>Søg</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Søg</translation>
     </message>
     <message>
         <source>Search all</source>
-        <translation type="unfinished"></translation>
+        <translation>Søg i alle</translation>
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation type="unfinished"></translation>
+        <translation>Versalfølsom</translation>
     </message>
     <message>
         <source>Use wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Brug jokertegn</translation>
     </message>
     <message>
         <source>The details of the current result</source>
-        <translation type="unfinished"></translation>
+        <translation>Detaljer om søgeresultatet</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Indstillinger</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Valg</translation>
     </message>
     <message>
         <source>Enter your search terms here</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriv dine søgeord her</translation>
     </message>
     <message>
         <source>Applications</source>
-        <translation type="unfinished"></translation>
+        <translation>Programmer</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumenter</translation>
     </message>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Opgaveliste</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalender</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakter</translation>
     </message>
 </context>
 <context>
     <name>OListView</name>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultater</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>show</source>
-        <translation type="unfinished"></translation>
+        <translation>vis</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>rediger</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>kør</translation>
     </message>
     <message>
         <source>open in filemanager</source>
-        <translation type="unfinished"></translation>
+        <translation>åbn i filhåndtering</translation>
     </message>
     <message>
         <source>open with </source>
-        <translation type="unfinished"></translation>
+        <translation>åbn med</translation>
     </message>
     <message>
         <source>show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>vis udførte opgaver</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation type="unfinished"></translation>
+        <translation>vis hændelser i fortiden</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation type="unfinished"></translation>
+        <translation>søg i datoer</translation>
     </message>
     <message>
         <source>File: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fil:</translation>
     </message>
     <message>
         <source>Link: </source>
@@ -113,11 +113,11 @@
     </message>
     <message>
         <source>search content</source>
-        <translation type="unfinished"></translation>
+        <translation>søg indhold</translation>
     </message>
     <message>
         <source>searching %1</source>
-        <translation type="unfinished"></translation>
+        <translation>søger %1</translation>
     </message>
 </context>
 </TS>
