@@ -66,11 +66,6 @@ ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(pa
 	showMaximized();
 }
 
-void ConfigDlg::writeEntries()
-{
-	//XXX wozu gibt es diese Methode?
-}
-		
 void ConfigDlg::slotNewMethod()
 {
 	SearchMethodDlg dlg( this, "SearchMethodDlg", true );

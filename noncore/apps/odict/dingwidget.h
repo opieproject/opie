@@ -26,7 +26,7 @@ class DingWidget
 		void setCaseSensitive( bool );
 		void setCompleteWord( bool );
 		void loadDict( QString );
-		QString loadedDict();
+		QString loadedDict() const;
 		void setQueryWord( QString );
 		void setDict( QString );
 		void loadValues();
@@ -34,12 +34,12 @@ class DingWidget
 		QString lang1_name,
 				lang2_name;
 
+		bool isCaseSensitive;
 	private:
 		BroswerContent parseInfo();
 
 		BroswerContent s_strings;
 		bool isCompleteWord;
-		bool isCaseSensitive;
 
 		QString dictName;
 		

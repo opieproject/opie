@@ -36,7 +36,7 @@ class ODict : public QMainWindow
 		DingWidget *ding;
 
 	private:
-		QPopupMenu *help, *settings, *parameter, *error_tol_menu;
+		QPopupMenu *help, *settings, *parameter;
 		QMenuBar *menu;
 		QHBox *hbox;
 		QLineEdit *query_le;
@@ -49,7 +49,6 @@ class ODict : public QMainWindow
 		
 		void setupMenus();
 
-		int errorTol;
 		bool casesens, completewords, regexp;
 		
 		void loadConfig();
@@ -58,10 +57,13 @@ class ODict : public QMainWindow
 		QString activated_name;
 		QLabel  *bottom_name,
 				*top_name;
+
+		QString top_name_content, bottom_name_content;
+
+		void lookupLanguageNames( QString );
 	
 	private slots:
 		void slotStartQuery();
-		void slotSetErrorcount( int );
 		void slotSettings();
 		void slotSetParameter( int );
 		void slotMethodChanged( const QString& );

@@ -91,7 +91,7 @@ void SearchMethodDlg::setupEntries( QString item )
 
 void SearchMethodDlg::slotBrowse()
 {
-        itemName=OFileDialog::getOpenFileName( OFileSelector::EXTENDED,QDir::homeDirPath());
+	itemName=OFileDialog::getOpenFileName( OFileSelector::EXTENDED,QDir::homeDirPath());
 	dictFileLE->setText( itemName );
 }
 

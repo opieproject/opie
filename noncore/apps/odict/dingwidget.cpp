@@ -18,17 +18,10 @@
 
 #include <qfile.h>
 #include <qpe/config.h>
-#include <qhbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qlineedit.h>
-#include <qmainwindow.h>
 #include <qstring.h>
 #include <qtextstream.h>
 #include <qstringlist.h>
 #include <qregexp.h>
-#include <qtextbrowser.h>
-//#include <stdlib.h> // for getenv
 
 DingWidget::DingWidget( )
 {
@@ -39,11 +32,16 @@ DingWidget::DingWidget( )
 
 void DingWidget::loadDict( QString name )
 {
+	qDebug( "bin in DingWidget::loadDict(). name ist:" );
+	qDebug( name );
+	
 	dictName = name;
 	Config cfg(  "odict" );
-	if ( !methodname ) return;
+	if ( !methodname ) { return; }
 	cfg.setGroup( "Method_" + methodname );
 	QFile file( cfg.readEntry( "file" )  );
+
+	qDebug( cfg.readEntry( "file" ) );
 	
 	if(  file.open(  IO_ReadOnly ) )
 	{
@@ -55,9 +53,10 @@ void DingWidget::loadDict( QString name )
 		file.close();
 	}
 	loadValues();
+
 }
 
-QString DingWidget::loadedDict()
+QString DingWidget::loadedDict() const
 { 
 	return dictName;
 }
@@ -102,6 +101,8 @@ BroswerContent DingWidget::setText( QString word )
 
 BroswerContent DingWidget::parseInfo()
 {
+	qDebug( "bin in DingWidget::parseInfo()" );
+
 	if ( isCompleteWord ) 
 		queryword = " " + queryword + " ";
 	QStringList search = lines.grep( queryword , isCaseSensitive );

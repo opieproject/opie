@@ -53,9 +53,12 @@ ODict::ODict() : QMainWindow()
 	connect( query_co , SIGNAL( activated(const QString&) ), this, SLOT( slotMethodChanged(const QString&) ) );
 	ok_button = new QPushButton( tr( "&Ok" ), hbox );
 	connect( ok_button, SIGNAL( released() ), this, SLOT( slotStartQuery() ) );
+	
 	top_name = new QLabel( vbox );
+	top_name->setAlignment( AlignHCenter );
 	browser_top = new QTextBrowser( vbox );
 	bottom_name = new QLabel( vbox );
+	bottom_name->setAlignment( AlignHCenter );
 	browser_bottom = new QTextBrowser( vbox );
 
 	ding = new DingWidget();
@@ -67,37 +70,75 @@ ODict::ODict() : QMainWindow()
 
 void ODict::loadConfig()
 {
+	/*
+	 * the name of the last used dictionary
+	 */
+	QString lastname;
+	
 	Config cfg ( "odict" );
 	cfg.setGroup( "generalsettings" );
-	errorTol = cfg.readEntry( "errtol" ).toInt();
 	casesens = cfg.readEntry( "casesens" ).toInt();
 	regexp = cfg.readEntry( "regexp" ).toInt();
 	completewords = cfg.readEntry( "completewords" ).toInt();
 
+	QString lastDict = cfg.readEntry( "lastdict" );
+	int i = 0, e = 0;
+	
 	QStringList groupListCfg = cfg.groupList().grep( "Method_" );
 	query_co->clear();
 	for ( QStringList::Iterator it = groupListCfg.begin() ; it != groupListCfg.end() ; ++it )
 	{
+		QString name;
 		cfg.setGroup( *it );
-		query_co->insertItem( cfg.readEntry( "Name" ) );
+		name = cfg.readEntry( "Name" );
+		query_co->insertItem( name );
+
+		/*
+		 * this check is to look up what dictionary has been used the
+		 * last time
+		 */
+		if ( lastDict == name )
+		{
+			e = i;
+			lastname = name;
+		}
+		i++;
 	}
-//XXX	slotMethodChanged( "1" );           //FIXME: this line should not contain a integer
+	/*
+	 * now set the two names of the dictionary and the correct QComboBox-Entry
+	 */
+
+	lookupLanguageNames( lastname );
+
+	query_co->setCurrentItem( e );
+	top_name->setText( top_name_content );
+	bottom_name->setText( bottom_name_content );
 }
 
+void ODict::lookupLanguageNames( QString dictname )
+{
+	Config cfg ( "odict" );
+	cfg.setGroup( "Method_"+dictname );
+	top_name_content = cfg.readEntry( "Lang1" ); 
+	bottom_name_content = cfg.readEntry( "Lang2" ); 
+}
 
 void ODict::saveConfig()
 {
 	Config cfg ( "odict" );
 	cfg.setGroup( "generalsettings" );
-	cfg.writeEntry( "errtol" , errorTol );
 	cfg.writeEntry( "casesens" , casesens );
 	cfg.writeEntry( "regexp" , regexp );
 	cfg.writeEntry( "completewords" , completewords );
+	cfg.writeEntry( "lastdict" , query_co->currentText() );
 }
 
 void ODict::slotStartQuery()
 {
-	if ( !query_le->text( ).isEmpty() )
+	qDebug( "bin in slotStartQuery()" );
+	
+	QString querystring = query_le->text();
+	if ( !querystring.isEmpty() )
 	{
 		/*
 		 * if the user has not yet defined a dictionary
@@ -111,7 +152,6 @@ void ODict::slotStartQuery()
 						0,      // Define a dict choosen
 						1 ) )   // Cancel choosen
 			{ 
-
 				case 0:
 					slotSettings();
 					break;
@@ -123,37 +163,34 @@ void ODict::slotStartQuery()
 		/*
 		 * ok, the user has defined a dict
 		 */
-		QString querystring = query_le->text();
 		ding->setCaseSensitive( casesens ); 
 		ding->setCompleteWord( completewords ); 
-		ding->setDict( activated_name );
-		top_name->setText(  ding->lang1_name );
-		bottom_name->setText( ding->lang2_name );
 
-		if ( activated_name != ding->loadedDict() )
+		qDebug( "activated_name ist:" );
+		qDebug( activated_name );
+		
+		ding->setDict( activated_name );
+
+//X 		if ( activated_name != ding->loadedDict() )
 			ding->loadDict(activated_name);
 
 		BroswerContent test = ding->setText( querystring );
+
+		qDebug( querystring );
+		if ( ding->isCaseSensitive )
+			qDebug( "ist CS");
+		else qDebug( "kein CS" );
 
 		browser_top->setText( test.top );
 		browser_bottom->setText( test.bottom );
 	}
 }
 
-
-void ODict::slotSetErrorcount( int count )
-{
-	errorTol = count;
-}
-
 void ODict::slotSettings()
 {
 	ConfigDlg dlg( this, "Config" , true);
 	if ( dlg.exec() == QDialog::Accepted )
-	{
-		dlg.writeEntries();
-		loadConfig();
-	}
+		saveConfig();
 }
 
 void ODict::slotSetParameter( int count )
@@ -180,20 +217,24 @@ void ODict::slotSetParameter( int count )
 		else
 			regexp = true;
 	}
- 	else qWarning( "ERROR" );
+	saveConfig();
 }
 
 void ODict::slotMethodChanged( const QString& methodnumber )
 {
 	activated_name =  methodnumber;
 	
-	if ( activated_name != ding->loadedDict() )
-		ding->loadDict(activated_name);
+	qDebug( "activated_name in slotMethodChanged() ist:" );
+	qDebug( activated_name );
 	
-	top_name->setText(  ding->lang1_name );
-	top_name->setAlignment( AlignHCenter );
-	bottom_name->setText( ding->lang2_name );
-	bottom_name->setAlignment( AlignHCenter );
+//X 	if ( activated_name != ding->loadedDict() )
+	{
+		ding->loadDict(activated_name);
+		
+		lookupLanguageNames( activated_name );
+		top_name->setText( top_name_content );
+		bottom_name->setText( bottom_name_content );
+	}
 }
 
 void ODict::setupMenus()
@@ -212,17 +253,6 @@ void ODict::setupMenus()
 	parameter->insertItem( tr( "Only &complete Words" ), 1 , 1) ;
 	parameter->insertItem( tr( "Allow &reg. expressions" ), 2 );
 	parameter->insertSeparator();
-		error_tol_menu = new QPopupMenu( menu );	
-	    error_tol_menu->setCheckable(  TRUE );
-	    connect(  error_tol_menu, SIGNAL( activated( int ) ), this, SLOT( slotSetErrorcount( int ) ) );
-		  
-		error_tol_menu->insertItem( tr( "0 Errors" ), 0 );
-		error_tol_menu->insertItem( tr( "1 Errors" ), 1 );
-		error_tol_menu->insertItem( tr( "2 Errors" ), 2 );
-		error_tol_menu->insertItem( tr( "3 Errors" ), 3 );
-		error_tol_menu->insertItem( tr( "4 Errors" ), 4 );
-		error_tol_menu->insertItem( tr( "Until Hit" ), 5 );
-	parameter->insertItem( tr( "&Error tolerance" ), error_tol_menu );
 	
 	menu->insertItem( tr( "Settings" ) , settings );
 	menu->insertItem( tr( "Parameter" ) , parameter );

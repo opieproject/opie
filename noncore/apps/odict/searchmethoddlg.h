@@ -17,7 +17,6 @@ class QString;
 
 #include <qdialog.h>
 
-
 class SearchMethodDlg : public QDialog
 {
 	Q_OBJECT
