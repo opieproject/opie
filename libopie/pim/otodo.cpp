@@ -161,7 +161,7 @@ void OTodo::setHasAlarmDateTime( bool hasAlarmDateTime )
 }
 void OTodo::setDescription(const QString &desc )
 {
-    qWarning( "desc " + desc );
+//    qWarning( "desc " + desc );
     changeOrModify();
     data->desc = Qtopia::simplifyMultiLineSpace(desc );
 }
@@ -318,7 +318,7 @@ void OTodo::deref() {
 }
 OTodo &OTodo::operator=(const OTodo &item )
 {
-//    OPimRecord::operator=( item );
+    OPimRecord::operator=( item );
     //qWarning("operator= ref ");
     item.data->ref();
     deref();

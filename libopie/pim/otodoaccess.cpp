@@ -15,7 +15,7 @@ OTodoAccess::OTodoAccess( OTodoAccessBackend* end )
     setBackEnd( m_todoBackEnd );
 }
 OTodoAccess::~OTodoAccess() {
-    qWarning("~OTodoAccess");
+//    qWarning("~OTodoAccess");
 }
 void OTodoAccess::mergeWith( const QValueList<OTodo>& list ) {
     QValueList<OTodo>::ConstIterator it;
@@ -63,7 +63,7 @@ void OTodoAccess::delAlarm( int uid) {
     // If not: I have to rethink how to remove already
     // scheduled events... (se)
     //  it should be fine -zecke
-    qWarning("Removing alarm for event with uid %d", uid );
+//    qWarning("Removing alarm for event with uid %d", uid );
     AlarmServer::deleteAlarm( schedule ,
                               "QPE/Application/todolist",
                               "alarm(QDateTime,int)", uid );

@@ -71,6 +71,8 @@ public:
     /**
      * c'tor
      */
+    ORecordList () {
+    }
     ORecordList( const QArray<int>& ids,
                  const Base* );
     ~ORecordList();

@@ -21,7 +21,7 @@ OTodoAccessXML::~OTodoAccessXML() {
 
 }
 bool OTodoAccessXML::load() {
-    m_opened = false;
+    m_opened = true;
     m_changed = false;
     /* initialize dict */
     /*
@@ -69,21 +69,23 @@ bool OTodoAccessXML::load() {
             element = element->nextChild();
         }
     }else {
-        qWarning("could not parse");
+//        qWarning("could not parse");
         return false;;
     }
     delete root;
 
-    m_opened = true;
-    qWarning("Access %d" + m_events.count() );
+//    qWarning("Access %d" + m_events.count() );
     return true;
 }
 bool OTodoAccessXML::reload() {
     return load();
 }
 bool OTodoAccessXML::save() {
-    if (!m_opened || !m_changed )
+//    qWarning("saving");
+    if (!m_opened || !m_changed ) {
+//        qWarning("not saving");
         return true;
+    }
     QString strNewFile = m_file + ".new";
     QFile f( strNewFile );
     if (!f.open( IO_WriteOnly|IO_Raw ) )
@@ -122,7 +124,7 @@ bool OTodoAccessXML::save() {
     f.close();
 
     if( ::rename( strNewFile.latin1(),  m_file.latin1() ) < 0 ) {
-        qWarning("error renaming");
+//        qWarning("error renaming");
         QFile::remove( strNewFile );
     }
 
@@ -160,6 +162,7 @@ void OTodoAccessXML::clear() {
     m_events.clear();
 }
 bool OTodoAccessXML::add( const OTodo& todo ) {
+//    qWarning("add");
     m_changed = true;
     m_events.insert( todo.uid(), todo );
 
@@ -217,7 +220,7 @@ QArray<int> OTodoAccessXML::overDue() {
 
 /* private */
 OTodo OTodoAccessXML::todo( QAsciiDict<int>* dict, Opie::XMLElement* element)const {
-    qWarning("parse to do from XMLElement" );
+//    qWarning("parse to do from XMLElement" );
     OTodo ev;
     QMap<QString, QString> attributes = element->attributes();
     QMap<QString, QString>::Iterator it;
@@ -228,7 +231,7 @@ OTodo OTodoAccessXML::todo( QAsciiDict<int>* dict, Opie::XMLElement* element)con
     for ( it = attributes.begin(); it != attributes.end(); ++it ) {
         find = (*dict)[ it.key() ];
         if (!find ) {
-            qWarning("Unknown option" + it.key() );
+//            qWarning("Unknown option" + it.key() );
             ev.setCustomField( it.key(), it.data() );
             continue;
         }
@@ -320,6 +323,7 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
         str += "DateMonth=\"" + QString::number( ev.dueDate().month() ) + "\" ";
         str += "DateDay=\"" + QString::number( ev.dueDate().day() ) + "\" ";
     }
+//    qWarning( "Uid %d",  ev.uid() );
     str += "Uid=\"" + QString::number( ev.uid() ) + "\" ";
 
 // append the extra options
