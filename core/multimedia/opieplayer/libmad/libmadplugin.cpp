@@ -310,7 +310,7 @@ int LibMadPlugin::http_open(const QString& path ) {
     int tcp_sock;
     char http_request[PATH_MAX];
     char filename[PATH_MAX];
-    char c;
+    //char c;
     char *arg =strdup(path.latin1());
 
     /* Check for URL syntax */
@@ -372,7 +372,6 @@ int LibMadPlugin::http_open(const QString& path ) {
     QString bitrate;
     QString url;
     QString message = tr("Info: ");
-
     do {
 
         int len;
@@ -380,26 +379,24 @@ int LibMadPlugin::http_open(const QString& path ) {
         len = http_read_line(tcp_sock, http_request, sizeof(http_request));
 
         if (len == -1) {
-            fprintf(stderr, "http_open: %s\n", strerror(errno));
+            qDebug( "http_open: "+ QString(strerror(errno)) +"\n");
             return 0;
         }
 
-        if (strncmp(http_request, "Location:", 9) == 0) {
+        if (QString(http_request).left(9) == "Location:") {
             /* redirect */
             std::close(tcp_sock);
-
             http_request[strlen(http_request) - 1] = '\0';
-
             return http_open(&http_request[10]);
         }
 
-        if (strncmp(http_request, "ICY ", 4) == 0) {
-            /* This is icecast streaming */
+        if (QString(http_request).left(4) == "ICY ") {
+            /* This is shoutcast/icecast streaming */
             if (strncmp(http_request + 4, "200 ", 4)) {
-                fprintf(stderr, "http_open: %s\n", http_request);
+                qDebug("http_open: " + QString(http_request) + "\n");
                 return 0;
             }
-        } else if (strncmp(http_request, "icy-", 4) == 0) {
+        } else if (QString(http_request).left(4) == "icy-") {
             /* we can have: icy-noticeX, icy-name, icy-genre, icy-url, icy-pub, icy-metaint, icy-br */
             if ( QString( http_request ).left( 8 ) == "icy-name" ) {
                 name = tr("Name: ") + QString(http_request).mid(9, (QString(http_request).length())- 9 );
