@@ -1,0 +1,10 @@
+Files: bin/stowctrl.sh apps/Opie-SH/stowctrl.desktop pics/opie-sh-scripts/stowctrl.png
+Installed-Size:  0 
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION), opie-sh
+Priority: optional
+Section: opie/settings
+Maintainer: spiralman <spiralman@softhome.net
+Architecture: arm
+License: GPL
+Description: frontend to start/stop Stowaway keyboard

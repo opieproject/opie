@@ -11,3 +11,4 @@ clean:
 	rm ../../../../bin/rsyncme.sh
 	rm ../../../../bin/service_manager.sh
 	rm ../../../../bin/usbnetctrl.sh
+	rm ../../../../bin/stowctrl.sh
