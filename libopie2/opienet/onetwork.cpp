@@ -240,7 +240,7 @@ OMacAddress ONetworkInterface::macAddress() const
 void ONetworkInterface::setMonitoring( OMonitoringInterface* m )
 {
     _mon = m;
-    qDebug( "ONetwork::setMonitoring(): Installed monitoring interface '%s'", (const char*) m->name() );
+    qDebug( "ONetwork::setMonitoring(): Installed monitoring driver '%s' on interface '%s'", (const char*) m->name(), (const char*) _name );
 }
 
 
@@ -291,9 +291,26 @@ bool ONetworkInterface::isWireless() const
 
 OChannelHopper::OChannelHopper( OWirelessNetworkInterface* iface )
                :QObject( 0, "Mickey's funky hopper" ),
-               _iface( iface ), _interval( 0 ), _channel( 1 ), _tid( 0 ),
-               _maxChannel( iface->channels()+1 )
+               _iface( iface ), _interval( 0 ), _tid( 0 )
 {
+    int _maxChannel = iface->channels()+1;
+    // generate fancy hopping sequence honoring the device capabilities
+    if ( _maxChannel >=  1 ) _channels.append(  1 );
+    if ( _maxChannel >=  7 ) _channels.append(  7 );
+    if ( _maxChannel >= 13 ) _channels.append( 13 );
+    if ( _maxChannel >=  2 ) _channels.append(  2 );
+    if ( _maxChannel >=  8 ) _channels.append(  8 );
+    if ( _maxChannel >=  3 ) _channels.append(  3 );
+    if ( _maxChannel >= 14 ) _channels.append( 14 );
+    if ( _maxChannel >=  9 ) _channels.append(  9 );
+    if ( _maxChannel >=  4 ) _channels.append(  4 );
+    if ( _maxChannel >= 10 ) _channels.append( 10 );
+    if ( _maxChannel >=  5 ) _channels.append(  5 );
+    if ( _maxChannel >= 11 ) _channels.append( 11 );
+    if ( _maxChannel >=  6 ) _channels.append(  6 );
+    if ( _maxChannel >= 12 ) _channels.append( 12 );
+    _channel = _channels.begin();
+
 }
 
 
@@ -310,16 +327,16 @@ bool OChannelHopper::isActive() const
 
 int OChannelHopper::channel() const
 {
-    return _channel;
+    return *_channel;
 }
 
 
 void OChannelHopper::timerEvent( QTimerEvent* )
 {
-    if ( !--_channel ) _channel = _maxChannel;
-    _iface->setChannel( _channel );
+    _iface->setChannel( *_channel );
     qDebug( "OChannelHopper::timerEvent(): set channel %d on interface '%s'",
-            _channel, (const char*) _iface->name() );
+            *_channel, (const char*) _iface->name() );
+    if ( ++_channel == _channels.end() ) _channel = _channels.begin();
 }
 
 
@@ -381,15 +398,21 @@ void OWirelessNetworkInterface::init()
     iwrangestruct range;
     //ML: work around an ugly HostAP bug, which needs
     //ML: extra space or will complain with "invalid argument length"... :-(
-    char __extraBufferForBuggyDrivers[sizeof range];
+    //ML: But don't allocate too much or prism2_usb will segfault *sigh*
+    char __extraBufferForBuggyDrivers[20];
+
+    qDebug( "sizeof(iwrangestruct)=%d, sizeof range=%d, sizeof range*2=%d", sizeof(iwrangestruct), sizeof range, (sizeof range)*2 );
+
     _iwr.u.data.pointer = (char*) &range;
-    _iwr.u.data.length = (sizeof range) * 2;
+    _iwr.u.data.length =  sizeof(iwrangestruct)+20;
     _iwr.u.data.flags = 0;
     if ( !wioctl( SIOCGIWRANGE ) )
     {
         qDebug( "OWirelessNetworkInterface::init(): SIOCGIWRANGE failed (%s)", strerror( errno ) );
         return;
     }
+
+    qDebug( "OWirelessNetworkInterface::init(): Interface %s reported to have %d channels.", (const char*) _name, range.num_frequency );
 
     for ( int i = 0; i < range.num_frequency; ++i )
     {

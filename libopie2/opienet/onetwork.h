@@ -36,6 +36,7 @@
 
 /* QT */
 
+#include <qvaluelist.h>
 #include <qdict.h>
 #include <qmap.h>
 #include <qobject.h>
@@ -162,9 +163,10 @@ class OChannelHopper : public QObject
   private:
     OWirelessNetworkInterface* _iface;
     int _interval;
-    int _channel;
     int _tid;
-    int _maxChannel;
+    QValueList<int> _channels;
+    QValueList<int>::Iterator _channel;
+
 };
 
 
