@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.14 2002-03-20 02:23:27 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.15 2002-03-25 19:33:54 simon Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -133,8 +133,8 @@ static char * vmemo_xpm[] = {
 " h0,!_;2@     ",
 "  )))))       "};
 
-VMemo::VMemo( QWidget *parent, const char *name )
-    : QWidget( parent, name )
+VMemo::VMemo( QWidget *parent, const char *_name )
+    : QWidget( parent, _name )
 {
   setFixedHeight( 18 );
   setFixedWidth( 14 );
