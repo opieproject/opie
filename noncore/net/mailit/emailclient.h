@@ -32,6 +32,7 @@
 #include <qaction.h>
 #include <qlayout.h>
 #include <qtooltip.h>
+#include <qtoolbutton.h>
 #include <qimage.h>
 #include <qpixmap.h>
 #include <qstringlist.h>
@@ -40,6 +41,7 @@
 #include <qdir.h>
 #include <stdlib.h>
 #include <opie/otabwidget.h>
+#include <qtimer.h>
 
 #include "emailhandler.h"
 #include "emaillistitem.h"
@@ -69,12 +71,22 @@ public:
   ~EmailClient();
   AddressList* getAdrListRef();
 
+protected:
+  void timerEvent(QTimerEvent*);
+  
 signals:
   void composeRequested();
   void viewEmail(QListView *, Email *);
   void mailUpdated(Email *);
   void newCaption(const QString &);
-
+  void replyRequested(Email&, bool&);
+  void forwardRequested(Email&);
+  void removeItem(EmailListItem*, bool&);
+  /*void reply(Email&);
+  void replyAll(Email&);
+  void remove(Email&);
+  void forward(Email&);*/
+  
 public slots:
   void compose();
   void cancel();
@@ -82,12 +94,15 @@ public slots:
   void setMailAccount();
   void sendQuedMail();
   void mailSent();
+  void deleteItem();
   void getNewMail();
   void getAllNewMail();
   void smtpError(int code);
   void popError(int code);
   void inboxItemSelected();
   void outboxItemSelected();
+  void inboxItemPressed();
+  void inboxItemReleased();  
   void mailArrived(const Email &mail, bool fromDisk);
   void allMailArrived(int);
   void saveMail(QString fileName, QListView *view);
@@ -100,6 +115,10 @@ public slots:
   void setMailSize(int);
   void setDownloadedSize(int);
   void moveMailFront(Email *mailPtr);
+/*  void reply();
+  void replyAll();
+  void forward();
+  void remove();*/
 
 private:
   void init();
@@ -107,8 +126,8 @@ private:
   QString getPath(bool enclosurePath);
   void readSettings();
   void saveSettings();
-    
-private:
+  Email* getCurrentMail();
+  int timerID;
   Config *mailconf;
   int newAccountId, idCount, mailIdCount;
   int accountIdCount;
@@ -128,15 +147,18 @@ private:
   QProgressBar *progressBar;
   QStatusBar *statusBar;
   QLabel *status1Label, *status2Label;
-  QAction *getMailButton;
+  QToolButton *getMailButton;
   QAction *sendMailButton;
   QAction *composeButton;
   QAction *cancelButton;
-
+  QAction *deleteButton;
+  //QToolButton *setAccountButton;
+  
   QMenuBar *mb;
   QPopupMenu *selectAccountMenu;
   QPopupMenu *editAccountMenu;
   QPopupMenu *deleteAccountMenu;
+  QPopupMenu *setAccountMenu;
 
   OTabWidget* mailboxView;
   QListView* inboxView;

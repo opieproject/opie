@@ -200,13 +200,19 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
   }
   
   //@@@ToDo: Rewrite the parser as To: stops at the first occurence- which is Delivered-To:
-  if (pos = p.find("TO",':', pos, TRUE) != -1)
+  if ((pos = p.find("TO",':', 0, TRUE)) != -1)
   {
     	pos++;
     	mail->recipients.append (p.getString(&pos, 'z', TRUE) );
   }
  
-  
+  //@@@ToDo: Rewrite the parser as To: stops at the first occurence- which is Delivered-To:
+  if ((pos = p.find("CC",':', 0, TRUE)) != -1)
+  {
+    	pos++;
+    	mail->carbonCopies.append (p.getString(&pos, 'z', TRUE) );
+  }
+ 
   
   if ((pos = p.find("SUBJECT",':', 0, TRUE)) != -1) {
     pos++;
@@ -434,6 +440,13 @@ int EmailHandler::encodeMime(Email *mail)
         for (QStringList::Iterator it = mail->recipients.begin(); it != mail->recipients.end(); ++it ) {
     newBody += *it + " ";
   }
+  
+   newBody += "\r\nCC: ";
+   
+   for (QStringList::Iterator it = mail->carbonCopies.begin(); it != mail->carbonCopies.end(); ++it ) {
+    newBody += *it + " ";
+  }
+  
   newBody += "\r\nSubject: " + mail->subject + "\r\n";
   
   if (mail->files.count() == 0) {         //just a simple mail

@@ -59,8 +59,12 @@ EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
   connect(emailHandler, SIGNAL(popError(int)), this,
       SLOT(popError(int)) );
   
-  connect(inboxView, SIGNAL(clicked(QListViewItem *)), this, SLOT(inboxItemSelected()) );
-  connect(outboxView, SIGNAL(clicked(QListViewItem *)), this, SLOT(outboxItemSelected()) );
+  connect(inboxView, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(inboxItemSelected()) );
+  connect(outboxView, SIGNAL(doubleClicked(QListViewItem *)), this, SLOT(outboxItemSelected()) );
+  
+  connect(inboxView, SIGNAL(pressed(QListViewItem *)), this, SLOT(inboxItemPressed()) );
+  connect(inboxView, SIGNAL(clicked(QListViewItem *)), this, SLOT(inboxItemReleased()) );
+  
   
   connect(emailHandler, SIGNAL(mailArrived(const Email &, bool)), this,
       SLOT(mailArrived(const Email &, bool)) );
@@ -143,10 +147,26 @@ void EmailClient::init()
 
   bar = new QToolBar(this);
 
-  getMailButton = new QAction(tr("Get all mail"), Resource::loadPixmap("mailit/getmail"), QString::null, 0, this, 0);
+  getMailButton = new QToolButton(Resource::loadPixmap("mailit/getmail"),tr("getMail"),tr("select account"), this,SLOT(getAllNewMail()),bar);
+  //connect(setAccountlButton, SIGNAL(activated()), this, SLOT(setCurrentAccount()) );
+ // setAccountButton->addTo(bar);
+  //setAccountButton->addTo(mail);
+  
+  /*idCount = 0;
+  
+  for (MailAccount* accountPtr = accountList.first(); accountPtr != 0;
+      accountPtr = accountList.next()) {
+    
+    selectAccountMenu->insertItem(accountPtr->accountName,this, SLOT(selectAccount(int)), 0, idCount);
+    idCount++;
+  }*/
+  getMailButton->setPopup(selectAccountMenu);
+    
+  
+  /*getMailButton = new QAction(tr("Get all mail"), Resource::loadPixmap("mailit/getmail"), QString::null, 0, this, 0);
   connect(getMailButton, SIGNAL(activated()), this, SLOT(getAllNewMail()) );
-  getMailButton->addTo(bar);
-  getMailButton->addTo(mail);
+  getMailButton->addTo(bar);*/
+  //getMailButton->addTo(mail);
   
   sendMailButton = new QAction(tr("Send mail"), Resource::loadPixmap("mailit/sendqueue"), QString::null, 0, this, 0);
   connect(sendMailButton, SIGNAL(activated()), this, SLOT(sendQuedMail()) );
@@ -163,6 +183,10 @@ void EmailClient::init()
   cancelButton->addTo(mail);
   cancelButton->addTo(bar);
   cancelButton->setEnabled(FALSE);
+  
+  deleteButton = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ), QString::null, 0, this, 0 );
+  connect( deleteButton, SIGNAL( activated() ), this, SLOT( deleteItem() ) );
+  deleteButton->addTo(bar);
   
   mailboxView = new OTabWidget( this, "mailboxView" );
 
@@ -195,6 +219,8 @@ void EmailClient::init()
   mailboxView->addTab( widget_2,"mailit/outbox", tr( "Outbox" ) );
   
   setCentralWidget(mailboxView);
+  
+  mailboxView->setCurrentTab(0);
 }
 
 void EmailClient::compose()
@@ -231,6 +257,8 @@ void EmailClient::enqueMail(const Email &mail)
   addMail.fromMail = currentAccount->emailAddress;
   addMail.rawMail.prepend("From: " + addMail.from + "<" + addMail.fromMail + ">\n");
   item = new EmailListItem(outboxView, addMail, false);
+  
+  mailboxView->setCurrentTab(1);
   
 }
 
@@ -296,7 +324,7 @@ void EmailClient::getNewMail() {
   progressBar->reset();
     
   //get any previous mails not downloaded and add to queue
-  mailDownloadList.clear();
+/*  mailDownloadList.clear();
   Email *mailPtr;
   item = (EmailListItem *) inboxView->firstChild();
   while (item != NULL) {
@@ -305,7 +333,7 @@ void EmailClient::getNewMail() {
       mailDownloadList.sizeInsert(mailPtr->serverId, mailPtr->size);
     }
     item = (EmailListItem *) item->nextSibling();
-  }
+  }*/
   
   emailHandler->getMailHeaders();
 }
@@ -415,6 +443,8 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
       mailDownloadList.sizeInsert(newMail.serverId, newMail.size);
   }
   
+  mailboxView->setCurrentTab(0);
+  
 }
 
 void EmailClient::allMailArrived(int count)
@@ -444,6 +474,8 @@ void EmailClient::allMailArrived(int count)
   progressBar->reset();
 
   emailHandler->getMailByList(&mailDownloadList);
+  
+  mailboxView->setCurrentTab(0);
 }
 
 void EmailClient::moveMailFront(Email *mailPtr)
@@ -509,6 +541,8 @@ void EmailClient::popError(int code)
 
 void EmailClient::inboxItemSelected()
 {
+  killTimer(timerID);
+  
   item = (EmailListItem*) inboxView->selectedItem();
   if (item != NULL) {
     emit viewEmail(inboxView, item->getMail());
@@ -517,6 +551,8 @@ void EmailClient::inboxItemSelected()
 
 void EmailClient::outboxItemSelected()
 {
+  killTimer(timerID);
+  
   item = (EmailListItem*) outboxView->selectedItem();
   if (item != NULL) {
     emit viewEmail(outboxView, item->getMail());
@@ -692,6 +728,7 @@ void EmailClient::readSettings()
 
 void EmailClient::saveSettings()
 {
+
   QString temp;
   QFile f( getPath(FALSE) + "settings.txt");
   MailAccount *accountPtr;
@@ -701,7 +738,7 @@ void EmailClient::saveSettings()
     return;
   }
   QTextStream t(&f);
-  t << "#Settings for QPE Mailit program\n";
+  t << "#Settings for OPIE Mailit program\n";
   
   for (accountPtr = accountList.first(); accountPtr != 0;
       accountPtr = accountList.next()) {
@@ -811,7 +848,7 @@ void EmailClient::updateAccounts()
     
     editAccountMenu->insertItem(accountPtr->accountName,
       this, SLOT(editAccount(int)), 0, idCount);
-    selectAccountMenu->insertItem(accountPtr->accountName,
+     selectAccountMenu->insertItem(accountPtr->accountName,
       this, SLOT(selectAccount(int)), 0, idCount);
     deleteAccountMenu->insertItem(accountPtr->accountName,
       this, SLOT(deleteAccount(int)), 0, idCount);
@@ -824,7 +861,8 @@ void EmailClient::deleteMail(EmailListItem *mailItem, bool &inbox)
   Email *mPtr;
   Enclosure *ePtr;
   
-  if (inbox) {
+  if (inbox) 
+  {
     mPtr = mailItem->getMail();
     
     //if mail is in queue for download, remove it from
@@ -844,7 +882,9 @@ void EmailClient::deleteMail(EmailListItem *mailItem, bool &inbox)
       }
     }
     inboxView->takeItem(mailItem);
-  } else {
+  } 
+  else 
+  {
     outboxView->takeItem(mailItem);
   }
 }
@@ -870,3 +910,95 @@ void EmailClient::setDownloadedSize(int size)
           progressBar->setProgress(total);
         }
 }
+
+void EmailClient::deleteItem()
+{
+	bool inbox=mailboxView->currentTab()==0;
+	
+	EmailListItem* eli;
+	
+	inbox ? eli=(EmailListItem*)inboxView->selectedItem():eli=(EmailListItem*)outboxView->selectedItem();
+	
+	if (eli)
+		deleteMail(eli,(bool&)inbox);
+}
+
+void EmailClient::inboxItemPressed()
+{
+//	timerID=startTimer(500);
+}
+
+void EmailClient::inboxItemReleased()
+{
+  //	killTimer(timerID);
+}
+
+void EmailClient::timerEvent(QTimerEvent *e)
+{
+  /*killTimer(timerID);
+  
+  
+  QPopupMenu *action = new QPopupMenu(this);
+  
+  int reply=0;
+  
+  action->insertItem(tr( "Reply To" ),this,SLOT(reply()));
+  action->insertItem( tr( "Reply All" ),this,SLOT(replyAll()));
+  action->insertItem( tr( "Forward" ), this,SLOT(forward()));
+  action->insertItem( tr( "Remove Mail" ), this,SLOT(remove()));
+ 
+  action->exec(QCursor::pos());
+  
+  if (action) delete action;
+  */  
+}
+
+Email* EmailClient::getCurrentMail()
+{
+	EmailListItem *eli=(EmailListItem* ) (inboxView->selectedItem());
+	if (eli!=NULL)
+		return eli->getMail();
+	else
+		return NULL;
+}
+  
+/*
+void EmailClient::reply()
+{
+  Email* mail=getCurrentMail();
+  
+  if (mail!=NULL)
+  {
+	emit reply(*mail);
+  }
+}
+			
+void EmailClient::replyAll()
+{
+  Email* mail=getCurrentMail();
+  
+  if (mail!=NULL)
+  {
+	emit replyAll(*mail);
+  }
+}
+
+void EmailClient::forward()
+{
+  Email* mail=getCurrentMail();
+  
+  if (mail!=NULL)
+  {
+	emit reply(*mail);
+  }
+}
+
+void EmailClient::remove()
+{
+  Email* mail=getCurrentMail();
+  
+  if (mail!=NULL)
+  {
+	emit remove(*mail);
+  }
+}*/

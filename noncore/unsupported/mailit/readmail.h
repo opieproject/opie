@@ -46,7 +46,8 @@ public:
 
 signals:
 	void cancelView();
-	void replyRequested(Email &);
+	void replyRequested(Email &, bool &);
+	void forwardRequested(Email&);
 	void removeItem(EmailListItem *, bool &);
 	void viewingMail(Email *);
 
@@ -58,6 +59,7 @@ public slots:
 	void shiftText();
 	void viewAttatchments();
 	void reply();
+	void forward();
 	
 private:
 	void init();
@@ -81,6 +83,7 @@ private:
 	QAction *attatchmentsButton;
 	QAction *previousButton;
 	QAction *replyButton;
+	QAction *forwardButton;
 };
 
 #endif // READMAIL_H

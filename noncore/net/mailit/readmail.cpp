@@ -59,7 +59,11 @@ void ReadMail::init()
 	replyButton = new QAction( tr( "Reply" ), Resource::loadPixmap( "mailit/reply" ),
 		QString::null, 0, this, 0 );
 	connect(replyButton, SIGNAL(activated()), this, SLOT(reply()) );
-
+	
+	forwardButton = new QAction( tr( "Forward" ), Resource::loadPixmap( "mailit/forward" ),
+	QString::null, 0, this, 0 );
+	connect(forwardButton, SIGNAL(activated()), this, SLOT(forward()) );
+	
 	previousButton = new QAction( tr( "Previous" ), Resource::loadPixmap( "back" ), QString::null, 0, this, 0 );
 	connect( previousButton, SIGNAL( activated() ), this, SLOT( previous() ) );
 	previousButton->addTo(bar);
@@ -107,11 +111,16 @@ void ReadMail::updateView()
 	
 	replyButton->removeFrom(mailMenu);
 	replyButton->removeFrom(bar);
+	forwardButton->removeFrom(mailMenu);
+	forwardButton->removeFrom(bar);
 	
 	if (inbox == TRUE) {
 		replyButton->addTo(bar);
 		replyButton->addTo(mailMenu);
-		
+		forwardButton->addTo(bar);
+		forwardButton->addTo(mailMenu);
+
+				
 		if (!mail->downloaded) {
 			//report currently viewed mail so that it will be
 			//placed first in the queue of new mails to download
@@ -145,6 +154,13 @@ void ReadMail::updateView()
 	        	it != mail->recipients.end(); ++it ) {
 			text += *it + " ";
 		}
+
+		text +="<br><b>CC: </b>";
+	        for (QStringList::Iterator it = mail->carbonCopies.begin();
+	        	it != mail->carbonCopies.end(); ++it ) {
+			text += *it + " ";
+		}
+		
 		text += "<br>"  + mail->date;
 	
 		if (mail->files.count() > 0) {
@@ -202,6 +218,14 @@ void ReadMail::updateView()
 	        	it != mail->recipients.end(); ++it ) {
 			text += *it + " ";
 		}
+		
+		text += "\nCC: ";
+	        for (QStringList::Iterator it = mail->carbonCopies.begin();
+	        	it != mail->carbonCopies.end(); ++it ) {
+			text += *it + " ";
+		}
+
+				
 		text += "\nDate: " + mail->date + "\n";
 		if (mail->files.count() > 0) {
 			text += "Attatchments: ";
@@ -323,5 +347,11 @@ void ReadMail::viewAttatchments()
 
 void ReadMail::reply()
 {
-	emit replyRequested(*mail);
+	emit replyRequested(*mail, (bool&)TRUE);
 }
+
+void ReadMail::forward()
+{
+	emit forwardRequested(*mail);
+}
+

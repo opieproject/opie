@@ -47,8 +47,11 @@ MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags fl)
       SLOT(enqueMail(const Email &)) );
   
   connect(readMail, SIGNAL(cancelView()), this, SLOT(showEmailClient()) );
-  connect(readMail, SIGNAL(replyRequested(Email &)), this,
-    SLOT(composeReply(Email &)) );
+  connect(readMail, SIGNAL(replyRequested(Email &, bool&)), this,
+    SLOT(composeReply(Email &, bool&)) );
+  connect(readMail, SIGNAL(forwardRequested(Email &)), this,
+    SLOT(composeForward(Email &)) );
+
   connect(readMail, SIGNAL(removeItem(EmailListItem *, bool &)), emailClient,
     SLOT(deleteMail(EmailListItem *, bool &)) );
   connect(readMail, SIGNAL(viewingMail(Email *)), emailClient,
@@ -83,11 +86,18 @@ void MailItWindow::compose()
   setCaption( tr( "Write mail"  ) );
 }
 
-void MailItWindow::composeReply(Email &mail)
+void MailItWindow::composeReply(Email &mail, bool& replyAll)
 {
   compose();
-  writeMail->reply(mail);
+  writeMail->reply(mail,replyAll) ;
 }
+
+void MailItWindow::composeForward(Email &mail)
+{
+  compose();
+  writeMail->forward(mail) ;
+}
+
 
 void MailItWindow::showEmailClient()
 {
@@ -131,3 +141,25 @@ void MailItWindow::setDocument(const QString &_address)
     writeMail->setRecipient(address);
 }
 
+/*void MailItWindow::reply(Email& mail)
+{
+	qDebug("####EmailClient: 0 reached");
+	composeReply(mail,(bool&)FALSE);
+}
+
+void MailItWindow::replyAll(Email& mail)
+{
+	qDebug("####EmailClient: 1 reached");
+	composeReply(mail,(bool&)TRUE);
+}
+
+void MailItWindow::forward(Email& mail)
+{
+	qDebug("####EmailClient: 2 reached");
+}
+
+void MailItWindow::remove(Email&)
+{
+	qDebug("####EmailClient: 3 reached");
+	//emit removeItem(eli,(bool&)TRUE);
+} */

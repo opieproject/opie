@@ -43,13 +43,15 @@ class WriteMail : public QMainWindow
 public:
 	WriteMail( QWidget* parent, const char* name, WFlags fl = 0 );
 	~WriteMail();
-	void reply(Email replyMail);
+	void reply(Email replyMail, bool replyAll);
  	void setRecipient(const QString &recipient);
  	void setAddressList(AddressList *list);
+	void forward(Email forwMail);
 
 signals:
 	void sendMailRequested(const Email &mail);
 	void cancelMail();
+
 	
 public slots:
 	void getAddress();
@@ -58,10 +60,12 @@ public slots:
 	void newMail();
 	void accept();
 	void reject();
+	void changeRecipients(int);
 
 private:
- 	bool getRecipients();
+ 	bool getRecipients(bool);
 	void init();
+	void addRecipients(bool);
 	
 	Email mail;
 	AddAtt *addAtt;
@@ -83,6 +87,7 @@ private:
 	QComboBox* recipientsBox;
 	QLineEdit *subjectInput;
 	QLineEdit *toInput;
+	QLineEdit *ccInput;
 	QToolButton* addressButton;
 	QMultiLineEdit* emailInput;
 	QGridLayout* grid;

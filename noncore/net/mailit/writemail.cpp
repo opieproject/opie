@@ -83,9 +83,11 @@ void WriteMail::init()
 
 	recipientsBox = new QComboBox( FALSE, widget, "toLabel" );
 	recipientsBox->insertItem( tr( "To:"  ) );
-	recipientsBox->insertItem( tr( "CC:"  ) );
+	recipientsBox->insertItem( tr( "CC:"  ) );	
 	recipientsBox->setCurrentItem(0);
 	grid->addWidget( recipientsBox, 0, 0 );
+	connect(recipientsBox,SIGNAL(activated(int)),this, SLOT(changeRecipients(int)));
+	
 	
 	subjetLabel = new QLabel( widget, "subjetLabel" );
 	subjetLabel->setText( tr( "Subject:"  ) );
@@ -102,6 +104,11 @@ void WriteMail::init()
 	toInput = new QLineEdit( widget, "toInput" );
 	grid->addWidget( toInput, 0, 1 );
 
+	ccInput = new QLineEdit( widget, "ccInput" );
+	ccInput->hide();
+	grid->addWidget( ccInput, 0, 1 );
+
+	
 	addressButton = new QToolButton( widget, "addressButton" );
 	addressButton->setPixmap( Resource::loadPixmap("AddressBook") );
 	addressButton->setToggleButton(TRUE);
@@ -139,19 +146,31 @@ void WriteMail::accept()
 	QStringList attatchedFiles, attatchmentsType;
 	int idCount = 0;
 	
-	if (toInput->text() == "") {
-	 	QMessageBox::warning(this,"No recipient", "Send mail to whom?", "OK\n");
+	if (toInput->text() == "") 
+	{
+	 	QMessageBox::warning(this,tr("No recipient"), tr("Send mail to whom?"), tr("OK\n"));
 		return;
 	}
-	if (! getRecipients() ) {
-	 	QMessageBox::warning(this,"Incorrect recipient separator",
-	 			"Recipients must be separated by ;\nand be valid emailaddresses", "OK\n");
+	
+	if (! getRecipients(false) ) 
+	{
+	 	QMessageBox::warning(this,tr("Incorrect recipient separator"),
+	 			tr("Recipients must be separated by ;\nand be valid emailaddresses"), tr("OK\n"));
 		return;
 	}
+	
+	if ((ccInput->text()!="") && (! getRecipients(true) )) 
+	{
+	 	QMessageBox::warning(this,tr("Incorrect carbon copy separator"),
+	 			tr("CC Recipients must be separated by ;\nand be valid emailaddresses"), tr("OK\n"));
+		return;
+	}
+	
 	mail.subject = subjectInput->text();
 	mail.body = emailInput->text();
 	mail.sent = false;
 	mail.received = false;
+	
 	mail.rawMail = "To: ";
 	
 	for (QStringList::Iterator it = mail.recipients.begin();
@@ -160,7 +179,18 @@ void WriteMail::accept()
 		mail.rawMail += (*it);
 		mail.rawMail += ",\n";
 	}
+	
 	mail.rawMail.truncate(mail.rawMail.length()-2);
+		
+	mail.rawMail += "\nCC: ";
+	
+	for (QStringList::Iterator it = mail.carbonCopies.begin();
+		it != mail.carbonCopies.end(); ++it) {
+		
+		mail.rawMail += (*it);
+		mail.rawMail += ",\n";
+	}
+
 	mail.rawMail += mail.from;
 	mail.rawMail += "\nSubject: ";
 	mail.rawMail += mail.subject;
@@ -211,7 +241,7 @@ void WriteMail::attatchFile()
 	addAtt->showMaximized();
 }
 
-void WriteMail::reply(Email replyMail)
+void WriteMail::reply(Email replyMail, bool replyAll)
 {
 	int pos;
 	
@@ -219,7 +249,11 @@ void WriteMail::reply(Email replyMail)
 	mail.files.clear();
 	
 	toInput->setText(mail.fromMail);
-	subjectInput->setText("Re: " + mail.subject);
+	//replyAll ? ccInput->setText(mail.c)
+	
+	addRecipients(replyAll);
+	
+	subjectInput->setText(tr("Re: ") + mail.subject);
 	
 	pos = 0;
 	mail.body.insert(pos, ">>");
@@ -232,37 +266,63 @@ void WriteMail::reply(Email replyMail)
 	emailInput->setText(mail.body);
 }
 
-bool WriteMail::getRecipients()
+void WriteMail::forward(Email forwMail)
+{
+	int pos=0;
+	
+	QString fwdBody=tr("======forwarded message from ");
+	fwdBody.append(forwMail.fromMail);
+	fwdBody.append(tr(" starts======\n\n"));
+	
+	mail=forwMail;
+	toInput->setText("");
+	ccInput->setText("");
+	subjectInput->setText(tr("FWD: ") + mail.subject);
+	
+	fwdBody+=mail.body;
+	fwdBody+=QString(tr("======end of forwarded message======\n\n"));
+	
+	emailInput->setText(fwdBody);
+}
+
+bool WriteMail::getRecipients(bool ccField)
 {
 	QString str, temp;
 	int pos = 0;
 	
 	mail.recipients.clear();
 	
-	temp = toInput->text();
+	ccField ? temp = ccInput->text() : temp=toInput->text() ;
+	
 	while ( (pos = temp.find(';')) != -1) {
 		str = temp.left(pos).stripWhiteSpace();
 		temp = temp.right(temp.length() - (pos + 1));
 		if ( str.find('@') == -1)
 			return false;
-		mail.recipients.append(str);
+		ccField ? mail.carbonCopies.append(str) : mail.recipients.append(str);
 		addressList->addContact(str, "");
 	}
 	temp = temp.stripWhiteSpace();
 	if ( temp.find('@') == -1)
 		return false;
-	mail.recipients.append(temp);
+	ccField ? mail.carbonCopies.append(temp) : mail.recipients.append(temp);
 	addressList->addContact(temp, "");
 	
 	return TRUE;
 }
-			
 
 void WriteMail::addRecipients()
+{
+	
+	addRecipients(false);
+}			
+
+void WriteMail::addRecipients(bool ccField)
 {
 	QString recipients = "";
 	
 	mail.recipients.clear();
+	
 	QListViewItem *item = addressView->firstChild();
 	while (item != NULL) {
 		if ( item->isSelected() ) {
@@ -274,13 +334,28 @@ void WriteMail::addRecipients()
 		}
 		item = item->nextSibling();
 	}
-	toInput->setText(recipients);
+	
+	ccField ? ccInput->setText(recipients):toInput->setText(recipients);
 	
 	addressView->hide();
 	okButton->hide();
 	emailInput->show();
 	addressButton->setOn(FALSE);
 	showingAddressList = !showingAddressList;
+}
+
+void WriteMail::changeRecipients(int selection)
+{
+	if (selection==0)
+	{
+		toInput->show();
+		ccInput->hide();
+	}
+	else if (selection==1)
+	{
+		toInput->hide();
+		ccInput->show();
+	}
 }
 
 void WriteMail::setRecipient(const QString &recipient)

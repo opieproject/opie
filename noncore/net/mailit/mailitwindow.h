@@ -36,15 +36,21 @@ public:
 	MailItWindow(QWidget *parent = 0, const char *name = 0, WFlags fl = 0);
 	~MailItWindow();
 
+signals:
 public slots:
 	void compose();
-	void composeReply(Email &);
+	void composeReply(Email &, bool&);
+	void composeForward(Email &);	
 	void showEmailClient();
 	void viewMail(QListView *, Email *mail);
 	void updateMailView(Email *mail);
 	void closeEvent(QCloseEvent *e);
 	void updateCaption(const QString &);
 	void setDocument(const QString &);
+	/*void reply(Email&);
+	void replyAll(Email&);
+	void forward(Email&);
+	void remove(Email&);*/
 	
 private:
 	EmailClient *emailClient;
