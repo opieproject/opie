@@ -66,7 +66,7 @@ protected:
     void keyReleaseEvent( QKeyEvent *e);
 private:
     bool isBlanked, l, r;
-    int fd;
+    int fd, fl;
     int     volumeDirection;
     const DocLnk  *currentFile;
     XineControl *xineControl;
