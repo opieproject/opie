@@ -1,4 +1,4 @@
-Files: $QTDIR/lib/libqte.so.$QTE_VERSION $QTDIR/lib/libqte.so.2.3 $QTDIR/lib/libqte.so.2
+Files: $QTDIR/lib/libqte.so.$QTE_BASEVERSION $QTDIR/lib/libqte.so.2.3 $QTDIR/lib/libqte.so.2
 Priority: required
 Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>

@@ -4,5 +4,5 @@ Section: opie/applications
 Maintainer: ljp <llornkcor@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: qt-embedded (>=$QTE_VERSION), opie-today
+Depends: libqt2-emb, opie-today
 Description: stockticker plugin for today
