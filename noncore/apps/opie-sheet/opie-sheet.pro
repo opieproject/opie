@@ -8,20 +8,20 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 TARGET		= sheetqt
 
-TRANSLATIONS = ../../../i18n/de/sheetqt.ts \
-	 ../../../i18n/da/sheetqt.ts \
-	 ../../../i18n/xx/sheetqt.ts \
-	 ../../../i18n/en/sheetqt.ts \
-	 ../../../i18n/es/sheetqt.ts \
-	 ../../../i18n/fr/sheetqt.ts \
-	 ../../../i18n/hu/sheetqt.ts \
-	 ../../../i18n/ja/sheetqt.ts \
-	 ../../../i18n/ko/sheetqt.ts \
-	 ../../../i18n/no/sheetqt.ts \
-	 ../../../i18n/pl/sheetqt.ts \
-	 ../../../i18n/pt/sheetqt.ts \
-	 ../../../i18n/pt_BR/sheetqt.ts \
-	 ../../../i18n/sl/sheetqt.ts \
-	 ../../../i18n/zh_CN/sheetqt.ts \
-	 ../../../i18n/zh_TW/sheetqt.ts \
-   	 ../../../i18n/it/sheetqt.ts
+TRANSLATIONS = ../../../i18n/de/opie-sheet.ts \
+	 ../../../i18n/da/opie-sheet.ts \
+	 ../../../i18n/xx/opie-sheet.ts \
+	 ../../../i18n/en/opie-sheet.ts \
+	 ../../../i18n/es/opie-sheet.ts \
+	 ../../../i18n/fr/opie-sheet.ts \
+	 ../../../i18n/hu/opie-sheet.ts \
+	 ../../../i18n/ja/opie-sheet.ts \
+	 ../../../i18n/ko/opie-sheet.ts \
+	 ../../../i18n/no/opie-sheet.ts \
+	 ../../../i18n/pl/opie-sheet.ts \
+	 ../../../i18n/pt/opie-sheet.ts \
+	 ../../../i18n/pt_BR/opie-sheet.ts \
+	 ../../../i18n/sl/opie-sheet.ts \
+	 ../../../i18n/zh_CN/opie-sheet.ts \
+	 ../../../i18n/zh_TW/opie-sheet.ts \
+   	 ../../../i18n/it/opie-sheet.ts
