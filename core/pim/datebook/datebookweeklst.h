@@ -25,16 +25,19 @@ public:
     void setDate(const QDate &d);
     
 public slots:
-    void nextWeek();
-    void prevWeek();
-    void pickDate();
-    void setDate(int y, int m, int d);
+	void nextWeek();
+	void prevWeek();
+	void nextMonth();
+	void prevMonth();
+	void pickDate();
+	void setDate(int y, int m, int d);
 signals:
-    void dateChanged(int y, int w);
-    void setDbl(bool on);
+	void dateChanged(int y, int w);
+	void setDbl(bool on);
 private:
-    QDate date;
-    bool onMonday;
+	QDate date;
+//	bool onMonday;
+	bool bStartOnMonday;
 };
 
 class DateBookWeekLstDayHdr: public DateBookWeekLstDayHdrBase
@@ -79,14 +82,14 @@ public:
 			WFlags fl = 0 );
     ~DateBookWeekLstView();
 signals:
-    void editEvent(const Event &e);
-    void showDate(int y, int m, int d);
-    void addEvent(const QDateTime &start, const QDateTime &stop,
-		  const QString &str, const QString &location);
+	void editEvent(const Event &e);
+	void showDate(int y, int m, int d);
+	void addEvent(const QDateTime &start, const QDateTime &stop,
+	const QString &str, const QString &location);
 private:
-    bool onMonday;
+	bool bStartOnMonday;
 protected slots:
-    void keyPressEvent(QKeyEvent *);
+	void keyPressEvent(QKeyEvent *);
 };
 
 class DateBookWeekLstDblView: public QWidget {
@@ -127,16 +130,16 @@ protected slots:
     void setDbl(bool on);
 
 signals:
-    void showDate(int y, int m, int d);
-    void addEvent(const QDateTime &start, const QDateTime &stop,
-		  const QString &str, const QString &location);
-    void editEvent(const Event &e);
+	void showDate(int y, int m, int d);
+	void addEvent(const QDateTime &start, const QDateTime &stop,
+	const QString &str, const QString &location);
+	void editEvent(const Event &e);
 
 private:
     DateBookDB *db;
     int startTime;
     bool ampm;
-    bool onMonday;
+    bool bStartOnMonday;
     bool dbl;
     int year, _week;
     DateBookWeekLstHeader *header;

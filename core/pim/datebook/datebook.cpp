@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.24 2003-05-04 00:08:28 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.25 2003-05-05 21:44:39 umopapisdn Exp $
 **
 **********************************************************************/
 
@@ -81,88 +81,91 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
       inSearch(FALSE),
       alarmCounter(0)
 {
-    bool needEvilHack= false; // if we need an Evil Hack
-    QTime t;
-    t.start();
-    db = new DateBookDBHack;
-    qDebug("loading db t=%d", t.elapsed() );
-    loadSettings();
-    setCaption( tr("Calendar") );
-    setIcon( Resource::loadPixmap( "datebook_icon" ) );
+	bool needEvilHack= false; // if we need an Evil Hack
+	QTime t;
+	t.start();
+	db = new DateBookDBHack;
+	qDebug("loading db t=%d", t.elapsed() );
+	loadSettings();
+	setCaption( tr("Calendar") );
+	setIcon( Resource::loadPixmap( "datebook_icon" ) );
 
-    setToolBarsMovable( FALSE );
+	setToolBarsMovable( FALSE );
 
-    views = new QWidgetStack( this );
-    setCentralWidget( views );
+	views = new QWidgetStack( this );
+	setCentralWidget( views );
 
-    dayView = 0;
-    weekView = 0;
-    weekLstView = 0;
-    monthView = 0;
+	dayView = 0;
+	weekView = 0;
+	weekLstView = 0;
+	monthView = 0;
 
-    QPEToolBar *bar = new QPEToolBar( this );
-    bar->setHorizontalStretchable( TRUE );
+//    QPEToolBar *bar = new QPEToolBar( this );
+//    bar->setHorizontalStretchable( TRUE );
 
-    QPEMenuBar *mb = new QPEMenuBar( bar );
-    mb->setMargin( 0 );
+//    QPEMenuBar *mb = new QPEMenuBar( bar );
+//    mb->setMargin( 0 );
 
-    QPEToolBar *sub_bar = new QPEToolBar(this);
+//    QPopupMenu *view = new QPopupMenu( this );
+//    mb->insertItem( tr( "View" ), view );
 
-    QPopupMenu *view = new QPopupMenu( this );
-    QPopupMenu *settings = new QPopupMenu( this );
+	QPEToolBar *sub_bar = new QPEToolBar(this);
+	sub_bar->setHorizontalStretchable(TRUE);
 
-    mb->insertItem( tr( "View" ), view );
-    mb->insertItem( tr( "Settings" ), settings );
+	QActionGroup *g = new QActionGroup( this );
+	g->setExclusive( TRUE );
 
-    QActionGroup *g = new QActionGroup( this );
-    g->setExclusive( TRUE );
+	QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( fileNew() ) );
+	a->addTo( sub_bar );
 
-    QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ),
-                              QString::null, 0, this, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( fileNew() ) );
-    a->addTo( sub_bar );
+	sub_bar->addSeparator();
 
-    a = new QAction( tr( "Today" ), Resource::loadPixmap( "datebook/to_day" ),  QString::null, 0, g, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( slotToday() ) );
-    a->addTo( sub_bar );
-    a->addTo( view );
+	a = new QAction( tr( "Today" ), Resource::loadPixmap( "datebook/to_day" ),  QString::null, 0, g, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( slotToday() ) );
+	a->addTo( sub_bar );
+//	a->addTo( view );
 
-    a = new QAction( tr( "Day" ), Resource::loadPixmap( "day" ), QString::null, 0, g, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( viewDay() ) );
-    a->addTo( sub_bar );
-    a->addTo( view );
-    a->setToggleAction( TRUE );
-    a->setOn( TRUE );
-    dayAction = a;
+	sub_bar->addSeparator();
 
-    a = new QAction( tr( "Week" ), Resource::loadPixmap( "week" ), QString::null, 0, g, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( viewWeek() ) );
-    a->addTo( sub_bar );
-    a->addTo( view );
-    a->setToggleAction( TRUE );
-    weekAction = a;
+	a = new QAction( tr( "Day" ), Resource::loadPixmap( "day" ), QString::null, 0, g, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( viewDay() ) );
+	a->addTo( sub_bar );
+//    a->addTo( view );
+	a->setToggleAction( TRUE );
+	a->setOn( TRUE );
+	dayAction = a;
 
-    a = new QAction( tr( "WeekLst" ), Resource::loadPixmap( "datebook/weeklst" ), QString::null, 0, g, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( viewWeekLst() ) );
-    a->addTo( sub_bar );
-    a->addTo( view );
-    a->setToggleAction( TRUE );
-    weekLstAction = a;
+	a = new QAction( tr( "Week" ), Resource::loadPixmap( "week" ), QString::null, 0, g, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( viewWeek() ) );
+	a->addTo( sub_bar );
+//    a->addTo( view );
+	a->setToggleAction( TRUE );
+	weekAction = a;
 
-    a = new QAction( tr( "Month" ), Resource::loadPixmap( "month" ), QString::null, 0, g, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( viewMonth() ) );
-    a->addTo( sub_bar );
-    a->addTo( view );
-    a->setToggleAction( TRUE );
-    monthAction = a;
+	a = new QAction( tr( "WeekLst" ), Resource::loadPixmap( "datebook/weeklst" ), QString::null, 0, g, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( viewWeekLst() ) );
+	a->addTo( sub_bar );
+//    a->addTo( view );
+	a->setToggleAction( TRUE );
+	weekLstAction = a;
 
-    a = new QAction( tr( "Find" ), Resource::loadPixmap( "mag" ), QString::null, 0, g, 0 );
-    connect( a, SIGNAL(activated()), this, SLOT(slotFind()) );
-    a->addTo( sub_bar );
+	a = new QAction( tr( "Month" ), Resource::loadPixmap( "month" ), QString::null, 0, g, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( viewMonth() ) );
+	a->addTo( sub_bar );
+//    a->addTo( view );
+	a->setToggleAction( TRUE );
+	monthAction = a;
 
-    a = new QAction( tr( "Edit..." ), QString::null, 0, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
-    a->addTo( settings );
+	sub_bar->addSeparator();
+
+	a = new QAction( tr( "Find" ), Resource::loadPixmap( "mag" ), QString::null, 0, this, 0 );
+	connect( a, SIGNAL(activated()), this, SLOT(slotFind()) );
+	a->addTo( sub_bar );
+
+	a = new QAction( tr( "Edit..." ), Resource::loadPixmap("SettingsIcon"), QString::null, 0, this, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
+	a->addTo( sub_bar );
 
 	if(defaultView==DAY) viewDay();
 	if(defaultView==WEEK) needEvilHack=true;	// viewWeek();
@@ -170,24 +173,24 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 	if(defaultView==MONTH) viewMonth();
 
 	connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(changeClock(bool)) );
-    connect( qApp, SIGNAL(weekChanged(bool)), this, SLOT(changeWeek(bool)) );
+	connect( qApp, SIGNAL(weekChanged(bool)), this, SLOT(changeWeek(bool)) );
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
-    connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)), this, SLOT(appMessage(const QCString&, const QByteArray&)) );
+	connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)), this, SLOT(appMessage(const QCString&, const QByteArray&)) );
 #endif
 
     // listen on QPE/System
 #if defined(Q_WS_QWS)
 #if !defined(QT_NO_COP)
-    QCopChannel *channel = new QCopChannel( "QPE/System", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
-    channel = new QCopChannel( "QPE/Datebook", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
-    qDebug("olle\n");
+	QCopChannel *channel = new QCopChannel( "QPE/System", this );
+	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
+	channel = new QCopChannel( "QPE/Datebook", this );
+	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
+	qDebug("olle\n");
 #endif
 #endif
 
-    qDebug("done t=%d", t.elapsed() );
+	qDebug("done t=%d", t.elapsed() );
 
     /*
      *  Here is a problem description:
@@ -373,30 +376,23 @@ void DateBook::view(int v, const QDate &d) {
 }
 
 void DateBook::viewDefault(const QDate &d) {
-/*
-  Config config("DateBook");
-  config.setGroup("Main");
-  int current=config.readNumEntry("defaultview", DAY);
-
-  view(current,d);
-*/
 	view(defaultView,d);
 }
 
 void DateBook::viewDay() {
-  view(DAY,currentDate());
+	view(DAY,currentDate());
 }
 
 void DateBook::viewWeek() {
-    view(WEEK,currentDate());
+	view(WEEK,currentDate());
 }
 
 void DateBook::viewWeekLst() {
-    view(WEEKLST,currentDate());
+	view(WEEKLST,currentDate());
 }
 
 void DateBook::viewMonth() {
-    view(MONTH,currentDate());
+	view(MONTH,currentDate());
 }
 
 void DateBook::insertEvent( const Event &e )
@@ -526,21 +522,14 @@ void DateBook::initDay()
 		dayView->setStartViewTime( startTime );
 		dayView->setJumpToCurTime( bJumpToCurTime );
 		dayView->setRowStyle( rowStyle );
-		connect( this, SIGNAL( newEvent() ),
-			dayView, SLOT( redraw() ) );
-		connect( dayView, SIGNAL( newEvent() ),
-			this, SLOT( fileNew() ) );
-		connect( dayView, SIGNAL( removeEvent( const Event & ) ),
-			this, SLOT( removeEvent( const Event & ) ) );
-		connect( dayView, SIGNAL( editEvent( const Event & ) ),
-			this, SLOT( editEvent( const Event & ) ) );
-		connect( dayView, SIGNAL( duplicateEvent( const Event & ) ),
-			this, SLOT( duplicateEvent( const Event & ) ) );
-		connect( dayView, SIGNAL( beamEvent( const Event & ) ),
-			this, SLOT( beamEvent( const Event & ) ) );
-		connect( dayView, SIGNAL(sigNewEvent(const QString &)),
-			this, SLOT(slotNewEventFromKey(const QString &)) );
-    }
+		connect( this, SIGNAL( newEvent() ), dayView, SLOT( redraw() ) );
+		connect( dayView, SIGNAL( newEvent() ), 	this, SLOT( fileNew() ) );
+		connect( dayView, SIGNAL( removeEvent( const Event & ) ), this, SLOT( removeEvent( const Event & ) ) );
+		connect( dayView, SIGNAL( editEvent( const Event & ) ), this, SLOT( editEvent( const Event & ) ) );
+		connect( dayView, SIGNAL( duplicateEvent( const Event & ) ), this, SLOT( duplicateEvent( const Event & ) ) );
+		connect( dayView, SIGNAL( beamEvent( const Event & ) ), this, SLOT( beamEvent( const Event & ) ) );
+		connect( dayView, SIGNAL(sigNewEvent(const QString &)), this, SLOT(slotNewEventFromKey(const QString &)) );
+	}
 }
 
 void DateBook::initWeek()
@@ -549,10 +538,8 @@ void DateBook::initWeek()
 		weekView = new DateBookWeek( ampm, onMonday, db, views, "week view" );
 		weekView->setStartViewTime( startTime );
 		views->addWidget( weekView, WEEK );
-		connect( weekView, SIGNAL( showDate( int, int, int ) ),
-			this, SLOT( showDay( int, int, int ) ) );
-		connect( this, SIGNAL( newEvent() ),
-			weekView, SLOT( redraw() ) );
+		connect( weekView, SIGNAL( showDate( int, int, int ) ), this, SLOT( showDay( int, int, int ) ) );
+		connect( this, SIGNAL( newEvent() ), weekView, SLOT( redraw() ) );
 	}
 
 	//But also get it right: the year that we display can be different
@@ -568,44 +555,32 @@ void DateBook::initWeek()
 		d = d.addDays( -1 );
 		calcWeek( d, totWeeks, yearNumber, onMonday );
 	}
-	if ( totWeeks != weekView->totalWeeks() )
-		weekView->setTotalWeeks( totWeeks );
 }
 
 void DateBook::initWeekLst() {
-  if ( !weekLstView ) {
-      weekLstView = new DateBookWeekLst( ampm, onMonday, db,
-					 views, "weeklst view" );
-      views->addWidget( weekLstView, WEEKLST );
+	if ( !weekLstView ) {
+		weekLstView = new DateBookWeekLst( ampm, onMonday, db, views, "weeklst view" );
+		views->addWidget( weekLstView, WEEKLST );
 
-      //weekLstView->setStartViewTime( startTime );
-      connect( weekLstView, SIGNAL( showDate( int, int, int ) ),
-	       this, SLOT( showDay( int, int, int ) ) );
-      connect( weekLstView, SIGNAL( addEvent( const QDateTime &,
-					      const QDateTime &,
-					      const QString & , const QString &) ),
-	       this, SLOT( slotNewEntry( const QDateTime &,
-					 const QDateTime &,
-					 const QString & , const QString &) ) );
-      connect( this, SIGNAL( newEvent() ),
-	       weekLstView, SLOT( redraw() ) );
-      connect( weekLstView, SIGNAL( editEvent( const Event & ) ),
-	       this, SLOT( editEvent( const Event & ) ) );
-  }
+		//weekLstView->setStartViewTime( startTime );
+		connect( weekLstView, SIGNAL( showDate( int, int, int ) ), this, SLOT( showDay( int, int, int ) ) );
+		connect( weekLstView, SIGNAL( addEvent( const QDateTime &, const QDateTime &, const QString & , const QString &) ),
+			this, SLOT( slotNewEntry( const QDateTime &, const QDateTime &, const QString & , const QString &) ) );
+		connect( this, SIGNAL( newEvent() ), weekLstView, SLOT( redraw() ) );
+		connect( weekLstView, SIGNAL( editEvent( const Event & ) ), this, SLOT( editEvent( const Event & ) ) );
+	}
 }
 
 
 void DateBook::initMonth()
 {
-    if ( !monthView ) {
-	monthView = new DateBookMonth( views, "month view", FALSE, db );
-	views->addWidget( monthView, MONTH );
-	connect( monthView, SIGNAL( dateClicked( int, int, int ) ),
-             this, SLOT( showDay( int, int, int ) ) );
-	connect( this, SIGNAL( newEvent() ),
-		 monthView, SLOT( redraw() ) );
-	qApp->processEvents();
-    }
+	if ( !monthView ) {
+		monthView = new DateBookMonth( views, "month view", FALSE, db );
+		views->addWidget( monthView, MONTH );
+		connect( monthView, SIGNAL( dateClicked( int, int, int ) ), this, SLOT( showDay( int, int, int ) ) );
+		connect( this, SIGNAL( newEvent() ), monthView, SLOT( redraw() ) );
+		qApp->processEvents();
+	}
 }
 
 void DateBook::loadSettings()
@@ -629,6 +604,7 @@ void DateBook::loadSettings()
 	QString tmpString=config.readEntry("defaultCategories");
 	QStringList tmpStringList=QStringList::split(",",tmpString);
 	defaultCategories.truncate(0);
+
 	for( QStringList::Iterator i=tmpStringList.begin(); i!=tmpStringList.end(); i++) {
 		defaultCategories.resize(defaultCategories.count()+1);
 		defaultCategories[defaultCategories.count()-1]=(*i).toInt();

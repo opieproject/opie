@@ -41,7 +41,42 @@
             <class>QToolButton</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>back</cstring>
+                <cstring>backmonth</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string></string>
+            </property>
+            <property stdset="1">
+                <name>pixmap</name>
+                <pixmap></pixmap>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>autoRepeat</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>autoRaise</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property>
+                <name>toolTip</name>
+                <string></string>
+            </property>
+        </widget>
+        <widget>
+            <class>QToolButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>backweek</cstring>
             </property>
             <property stdset="1">
                 <name>sizePolicy</name>
@@ -79,7 +114,7 @@
                 <string></string>
             </property>
         </widget>
-        <spacer>
+	<spacer>
             <property>
                 <name>name</name>
                 <cstring>Spacer1_3</cstring>
@@ -104,7 +139,7 @@
             <class>QToolButton</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>labelWeek</cstring>
+                <cstring>labelDate</cstring>
             </property>
             <property stdset="1">
                 <name>sizePolicy</name>
@@ -140,27 +175,6 @@
                 <string></string>
             </property>
         </widget>
-        <spacer>
-            <property>
-                <name>name</name>
-                <cstring>Spacer1</cstring>
-            </property>
-            <property stdset="1">
-                <name>orientation</name>
-                <enum>Horizontal</enum>
-            </property>
-            <property stdset="1">
-                <name>sizeType</name>
-                <enum>Expanding</enum>
-            </property>
-            <property>
-                <name>sizeHint</name>
-                <size>
-                    <width>20</width>
-                    <height>20</height>
-                </size>
-            </property>
-        </spacer>
         <widget>
             <class>QToolButton</class>
             <property stdset="1">
@@ -223,58 +237,10 @@
             </property>
         </spacer>
         <widget>
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>labelDate</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>3</hsizetype>
-                    <vsizetype>7</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>font</name>
-                <font>
-                    <bold>1</bold>
-                </font>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>00 Jan-00 Jan</string>
-            </property>
-            <property>
-                <name>hAlign</name>
-            </property>
-        </widget>
-        <spacer>
-            <property>
-                <name>name</name>
-                <cstring>Spacer1_2</cstring>
-            </property>
-            <property stdset="1">
-                <name>orientation</name>
-                <enum>Horizontal</enum>
-            </property>
-            <property stdset="1">
-                <name>sizeType</name>
-                <enum>Expanding</enum>
-            </property>
-            <property>
-                <name>sizeHint</name>
-                <size>
-                    <width>20</width>
-                    <height>20</height>
-                </size>
-            </property>
-        </spacer>
-        <widget>
             <class>QToolButton</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>forward</cstring>
+                <cstring>forwardweek</cstring>
             </property>
             <property stdset="1">
                 <name>sizePolicy</name>
@@ -298,6 +264,41 @@
             <property stdset="1">
                 <name>autoRaise</name>
                 <bool>true</bool>
+            </property>
+        </widget>
+        <widget>
+            <class>QToolButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>forwardmonth</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string></string>
+            </property>
+            <property stdset="1">
+                <name>pixmap</name>
+                <pixmap></pixmap>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property stdset="1">
+                <name>autoRepeat</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>autoRaise</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>toggleButton</name>
+                <bool>false</bool>
+            </property>
+            <property>
+                <name>toolTip</name>
+                <string></string>
             </property>
         </widget>
     </hbox>

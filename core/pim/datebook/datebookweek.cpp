@@ -353,38 +353,28 @@ DateBookWeek::DateBookWeek( bool ap, bool startOnMonday, DateBookDB *newDB,
       ampm( ap ),
       bStartOnMonday( startOnMonday )
 {
-    setFocusPolicy(StrongFocus);
-    QVBoxLayout *vb = new QVBoxLayout( this );
-    header = new DateBookWeekHeader( bStartOnMonday, this );
-    view = new DateBookWeekView( ampm, startOnMonday, this );
-    vb->addWidget( header );
-    vb->addWidget( view );
+	setFocusPolicy(StrongFocus);
+	QVBoxLayout *vb = new QVBoxLayout( this );
+	header = new DateBookWeekHeader( bStartOnMonday, this );
+	view = new DateBookWeekView( ampm, startOnMonday, this );
+	vb->addWidget( header );
+	vb->addWidget( view );
 
-    lblDesc = new QLabel( this, "event label" );
-    lblDesc->setFrameStyle( QFrame::Plain | QFrame::Box );
-    lblDesc->setBackgroundColor( yellow );
-    lblDesc->hide();
+	lblDesc = new QLabel( this, "event label" );
+	lblDesc->setFrameStyle( QFrame::Plain | QFrame::Box );
+	lblDesc->setBackgroundColor( yellow );
+	lblDesc->hide();
 
-    tHide = new QTimer( this );
+	tHide = new QTimer( this );
 
-    connect( view, SIGNAL( showDay( int ) ),
-             this, SLOT( showDay( int ) ) );
-    connect( view, SIGNAL(signalShowEvent(const EffectiveEvent&)),
-	     this, SLOT(slotShowEvent(const EffectiveEvent&)) );
-    connect( view, SIGNAL(signalHideEvent()),
-	     this, SLOT(slotHideEvent()) );
-    connect( header, SIGNAL( dateChanged( int, int ) ),
-             this, SLOT( dateChanged( int, int ) ) );
-    connect( tHide, SIGNAL( timeout() ),
-             lblDesc, SLOT( hide() ) );
-    connect( header->spinYear, SIGNAL(valueChanged(int)),
-	     this, SLOT(slotYearChanged(int)) );
-    connect( qApp, SIGNAL(weekChanged(bool)),
-	     this, SLOT(slotWeekChanged(bool)) );
-    connect( qApp, SIGNAL(clockChanged(bool)),
-	    this, SLOT(slotClockChanged(bool)));
-    setDate(QDate::currentDate());
-
+	connect( view, SIGNAL( showDay( int ) ), this, SLOT( showDay( int ) ) );
+	connect( view, SIGNAL(signalShowEvent(const EffectiveEvent&)), this, SLOT(slotShowEvent(const EffectiveEvent&)) );
+	connect( view, SIGNAL(signalHideEvent()), this, SLOT(slotHideEvent()) );
+	connect( header, SIGNAL( dateChanged( int, int ) ), this, SLOT( dateChanged( int, int ) ) );
+	connect( tHide, SIGNAL( timeout() ), lblDesc, SLOT( hide() ) );
+	connect( qApp, SIGNAL(weekChanged(bool)), this, SLOT(slotWeekChanged(bool)) );
+	connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(slotClockChanged(bool)));
+	setDate(QDate::currentDate());
 }
 
 void DateBookWeek::keyPressEvent(QKeyEvent *e)
@@ -409,78 +399,74 @@ void DateBookWeek::keyPressEvent(QKeyEvent *e)
 
 void DateBookWeek::showDay( int day )
 {
-    QDate d;
-    d = dateFromWeek( _week, year, bStartOnMonday );
-    day--;
-    d = d.addDays( day );
-    emit showDate( d.year(), d.month(), d.day() );
+	QDate d;
+	d = dateFromWeek( _week, year, bStartOnMonday );
+	day--;
+	d = d.addDays( day );
+	emit showDate( d.year(), d.month(), d.day() );
 }
 
 void DateBookWeek::setDate( int y, int m, int d )
 {
-    QDate date;
-    date.setYMD( y, m, d );
-    setDate(QDate(y, m, d));
+	setDate(QDate(y, m, d));
 }
 
 void DateBookWeek::setDate(QDate date)
 {
-    dow = date.dayOfWeek();
-    int w, y;
-    calcWeek( date, w, y, bStartOnMonday );
-    header->setDate( y, w );
+	dow = date.dayOfWeek();
+	int w, y;
+	calcWeek( date, w, y, bStartOnMonday );
+	header->setDate( date );
 }
 
 void DateBookWeek::dateChanged( int y, int w )
 {
-    year = y;
-    _week = w;
-    getEvents();
+	year = y;
+	_week = w;
+	getEvents();
 }
 
 QDate DateBookWeek::date() const
 {
-    QDate d;
-    d = dateFromWeek( _week - 1, year, bStartOnMonday );
-    if ( bStartOnMonday )
-	d = d.addDays( 7 + dow - 1 );
-    else {
-	if ( dow == 7 )
-	    d = d.addDays( dow );
-	else
-	    d = d.addDays( 7 + dow );
-    }
-    return d;
+	QDate d;
+	d = dateFromWeek( _week - 1, year, bStartOnMonday );
+	if ( bStartOnMonday )
+		d = d.addDays( 7 + dow - 1 );
+	else {
+		if ( dow == 7 )
+		d = d.addDays( dow );
+		else
+		d = d.addDays( 7 + dow );
+	}
+	return d;
 }
 
 void DateBookWeek::getEvents()
 {
-    QDate startWeek = weekDate();
+	QDate startWeek = weekDate();
 
-    QDate endWeek = startWeek.addDays( 6 );
-    QValueList<EffectiveEvent> eventList = db->getEffectiveEvents(startWeek,
-								  endWeek);
-    view->showEvents( eventList );
-    view->moveToHour( startTime );
+	QDate endWeek = startWeek.addDays( 6 );
+	QValueList<EffectiveEvent> eventList = db->getEffectiveEvents(startWeek, endWeek);
+	view->showEvents( eventList );
+	view->moveToHour( startTime );
 }
 
 void DateBookWeek::generateAllDayTooltext( QString& text ) {
-    text += "<b>" + tr("This is an all day event.") + "</b><br>";
+	text += "<b>" + tr("This is an all day event.") + "</b><br>";
 }
 
-void DateBookWeek::generateNormalTooltext( QString& str,
-                                           const EffectiveEvent &ev ) {
-    str += "<b>" + QObject::tr("Start") + "</b>: ";
-    str += TimeString::timeString( ev.event().start().time(), ampm, FALSE );
-    if( ev.startDate()!=ev.endDate() ) {
-        str += " <i>" + TimeString::longDateString( ev.startDate() )+"</i>";
-    }
-    str += "<br>";
-    str += "<b>" + QObject::tr("End") + "</b>: ";
-    str += TimeString::timeString( ev.event().end().time(), ampm, FALSE );
-    if( ev.startDate()!=ev.endDate() ) {
-        str += " <i>" + TimeString::longDateString( ev.endDate() ) + "</i>";
-    }
+void DateBookWeek::generateNormalTooltext( QString& str, const EffectiveEvent &ev ) {
+	str += "<b>" + QObject::tr("Start") + "</b>: ";
+	str += TimeString::timeString( ev.event().start().time(), ampm, FALSE );
+	if( ev.startDate()!=ev.endDate() ) {
+		str += " <i>" + TimeString::longDateString( ev.startDate() )+"</i>";
+	}
+	str += "<br>";
+	str += "<b>" + QObject::tr("End") + "</b>: ";
+	str += TimeString::timeString( ev.event().end().time(), ampm, FALSE );
+	if( ev.startDate()!=ev.endDate() ) {
+		str += " <i>" + TimeString::longDateString( ev.endDate() ) + "</i>";
+	}
 }
 
 void DateBookWeek::slotShowEvent( const EffectiveEvent &ev )
@@ -566,40 +552,27 @@ void DateBookWeek::redraw()
 
 void DateBookWeek::slotYearChanged( int y )
 {
-    int totWeek;
-    QDate d( y, 12, 31 );
-    int throwAway;
-    calcWeek( d, totWeek, throwAway, bStartOnMonday );
-    while ( totWeek == 1 ) {
-	d = d.addDays( -1 );
+	int totWeek;
+	QDate d( y, 12, 31 );
+	int throwAway;
 	calcWeek( d, totWeek, throwAway, bStartOnMonday );
-    }
-    if ( totWeek != totalWeeks() )
-	setTotalWeeks( totWeek );
-}
-
-
-void DateBookWeek::setTotalWeeks( int numWeeks )
-{
-    header->spinWeek->setMaxValue( numWeeks );
-}
-
-int DateBookWeek::totalWeeks() const
-{
-    return header->spinWeek->maxValue();
+	while ( totWeek == 1 ) {
+		d = d.addDays( -1 );
+		calcWeek( d, totWeek, throwAway, bStartOnMonday );
+	}
 }
 
 void DateBookWeek::slotWeekChanged( bool onMonday )
 {
-    bStartOnMonday = onMonday;
-    view->setStartOfWeek( bStartOnMonday );
-    header->setStartOfWeek( bStartOnMonday );
-    redraw();
+	bStartOnMonday = onMonday;
+	view->setStartOfWeek( bStartOnMonday );
+	header->setStartOfWeek( bStartOnMonday );
+	redraw();
 }
 
 void DateBookWeek::slotClockChanged( bool ap )
 {
-    ampm = ap;
+	ampm = ap;
 }
 
 // return the date at the beginning of the week...

@@ -109,8 +109,6 @@ public:
     void setStartViewTime( int startHere );
     int startViewTime() const;
     int week() const { return _week; };
-    void setTotalWeeks( int totalWeeks );
-    int totalWeeks() const;
     QDate weekDate() const;
 
 public slots:

@@ -32,33 +32,26 @@ public:
 			const char* name = 0, WFlags fl = 0 );
     ~DateBookWeekHeader();
 
-    void setDate( int y, int w );
-    void setStartOfWeek( bool onMonday );
+	void setDate(const QDate &d);
+	void setStartOfWeek( bool onMonday );
 
 signals:
-    void dateChanged( int y, int w );
+	void dateChanged( int y, int w );
 
 public slots:
 	void pickDate();
-	void yearChanged( int );
 	void nextMonth();
 	void prevMonth();
 	void nextWeek();
 	void prevWeek();
-	void weekChanged( int );
 	void setDate( int y, int m, int d);
 
 protected slots:
-    void keyPressEvent(QKeyEvent *e)
-    {
-	e->ignore();
-    }
+	void keyPressEvent(QKeyEvent *e) { e->ignore(); }
 
 private:
-    int year,
-	week;
-    bool bStartOnMonday;
-
+	QDate date;
+	bool bStartOnMonday;
 };
 
 QDate dateFromWeek( int week, int year, bool startOnMonday );

@@ -119,66 +119,6 @@
                 <string></string>
             </property>
         </widget>
-        <widget>
-            <class>QSpinBox</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>spinYear</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>0</hsizetype>
-                    <vsizetype>0</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>prefix</name>
-                <string>Y: </string>
-            </property>
-            <property stdset="1">
-                <name>maxValue</name>
-                <number>2037</number>
-            </property>
-            <property stdset="1">
-                <name>minValue</name>
-                <number>1970</number>
-            </property>
-            <property stdset="1">
-                <name>value</name>
-                <number>2002</number>
-            </property>
-        </widget>
-        <widget>
-            <class>QSpinBox</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>spinWeek</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>0</hsizetype>
-                    <vsizetype>0</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>prefix</name>
-                <string>W: </string>
-            </property>
-            <property stdset="1">
-                <name>maxValue</name>
-                <number>52</number>
-            </property>
-            <property stdset="1">
-                <name>minValue</name>
-                <number>1</number>
-            </property>
-            <property stdset="1">
-                <name>value</name>
-                <number>1</number>
-            </property>
-        </widget>
         <spacer>
             <property>
                 <name>name</name>
@@ -330,6 +270,6 @@
     <slot access="public">weekChanged( int )</slot>
     <slot access="public">nextMonth()</slot>
     <slot access="public">prevMonth()</slot>
-	<slot access="public">pickDate()</slot>
+    <slot access="public">pickDate()</slot>
 </connections>
 </UI>
