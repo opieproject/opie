@@ -35,6 +35,10 @@ IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
     { 4,   FUNC(parseNumerical004) },           // RPL_MYINFO
     { 5,   FUNC(parseNumerical005) },           // RPL_BOUNCE, RPL_PROTOCTL
     { 251, FUNC(parseNumericalStats) },         // RPL_LUSERCLIENT
+    { 252, FUNC(parseNumericalStats) },         // RPL_LUSEROP
+    { 265, FUNC(parseNumericalStats) },         // RPL_LOCALUSERS
+    { 266, FUNC(parseNumericalStats) },         // RPL_GLOBALUSERS
+    { 250, FUNC(parseNumericalStats) },         // RPL_STATSCONN
     { 254, FUNC(nullFunc)},                     // RPL_LUSERCHANNELS
     { 255, FUNC(parseNumericalStats) },         // RPL_LUSERNAME
     { 332, FUNC(parseNumericalTopic) },         // RPL_TOPIC
@@ -100,7 +104,7 @@ void IRCMessageParser::parseLiteralNotice(IRCMessage *message) {
 }
 
 void IRCMessageParser::parseLiteralJoin(IRCMessage *message) {
-    QString channelName = message->param(0);
+    QString channelName = message->param(0).lower();
     IRCPerson mask(message->prefix());
     IRCChannel *channel = m_session->getChannel(channelName);
     if (!channel) {
@@ -138,7 +142,7 @@ void IRCMessageParser::parseLiteralJoin(IRCMessage *message) {
 }
 
 void IRCMessageParser::parseLiteralPart(IRCMessage *message) {
-    QString channelName = message->param(0);
+    QString channelName = message->param(0).lower();
     IRCChannel *channel = m_session->getChannel(channelName);
     IRCPerson mask(message->prefix());
     if (channel) {
@@ -181,7 +185,7 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
         emit outputReady(output);
     } else if (message->param(0).at(0) == '#') {
         /* IRC Channel message detected, verify sender, channel and display it */
-        IRCChannel *channel = m_session->getChannel(message->param(0));
+        IRCChannel *channel = m_session->getChannel(message->param(0).lower());
         if (channel) {
             IRCPerson mask(message->prefix());
             IRCChannelPerson *person = channel->getPerson(mask.nick());
@@ -194,7 +198,7 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
                 emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown sender")));
             }
         } else {
-            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown channel ") + message->param(0)));
+            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown channel ") + message->param(0).lower()));
         }
     } else {
         emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received PRIVMSG of unknown type")));
@@ -247,7 +251,7 @@ void IRCMessageParser::parseLiteralQuit(IRCMessage *message) {
 
 void IRCMessageParser::parseLiteralTopic(IRCMessage *message) {
     IRCPerson mask(message->prefix());
-    IRCChannel *channel = m_session->getChannel(message->param(0));
+    IRCChannel *channel = m_session->getChannel(message->param(0).lower());
     if (channel) {
         IRCOutput output(OUTPUT_TOPIC, mask.nick() + tr(" changed topic to ") + "\"" + message->param(1) + "\"");
         output.addParam(channel);
@@ -277,7 +281,7 @@ void IRCMessageParser::parseCTCPAction(IRCMessage *message) {
     IRCPerson mask(message->prefix());
     QString dest = message->ctcpDestination();
     if (dest.startsWith("#")) {
-        IRCChannel *channel = m_session->getChannel(dest);
+        IRCChannel *channel = m_session->getChannel(dest.lower());
         if (channel) {
             IRCChannelPerson *person = channel->getPerson(mask.nick());
             if (person) {
@@ -312,7 +316,7 @@ void IRCMessageParser::parseLiteralMode(IRCMessage *message) {
     IRCPerson mask(message->prefix());
 
     if (message->param(0).startsWith("#")) {
-        IRCChannel *channel = m_session->getChannel(message->param(0));
+        IRCChannel *channel = m_session->getChannel(message->param(0).lower());
         if (channel) {
             QString temp, parameters = message->allParameters().right(message->allParameters().length() - channel->channelname().length() - 1);
             QTextIStream stream(&parameters);
@@ -383,7 +387,7 @@ void IRCMessageParser::parseLiteralMode(IRCMessage *message) {
 
 void IRCMessageParser::parseLiteralKick(IRCMessage *message) {
     IRCPerson mask(message->prefix());
-    IRCChannel *channel = m_session->getChannel(message->param(0));
+    IRCChannel *channel = m_session->getChannel(message->param(0).lower());
     if (channel) {
         IRCChannelPerson *person = channel->getPerson(message->param(1));
         if (person) {
@@ -434,7 +438,7 @@ void IRCMessageParser::parseNumericalStats(IRCMessage *message) {
 
 void IRCMessageParser::parseNumericalNames(IRCMessage *message) {
     /* Name list sent when joining a channel */
-    IRCChannel *channel = m_session->getChannel(message->param(2));
+    IRCChannel *channel = m_session->getChannel(message->param(2).lower());
     if (channel != 0) {
         QString people = message->param(3);
         QTextIStream stream(&people);
@@ -478,7 +482,7 @@ void IRCMessageParser::parseNumericalNames(IRCMessage *message) {
 
 void IRCMessageParser::parseNumericalEndOfNames(IRCMessage *message) {
     /* Done syncing to channel */
-    IRCChannel *channel = m_session->getChannel(message->param(1));
+    IRCChannel *channel = m_session->getChannel(message->param(1).lower());
     if (channel) {
         channel->setHasPeople(TRUE);
         /* Yes, we want the names before anything happens inside the GUI */
@@ -501,7 +505,7 @@ void IRCMessageParser::parseNumericalNoSuchNick(IRCMessage *) {
 }
 
 void IRCMessageParser::parseNumericalTopic(IRCMessage *message) {
-    IRCChannel *channel = m_session->getChannel(message->param(1));
+    IRCChannel *channel = m_session->getChannel(message->param(1).lower());
     if (channel) {
         IRCOutput output(OUTPUT_TOPIC, tr("Topic for channel " + channel->channelname() + " is \"" + message->param(2) + "\""));
         output.addParam(channel);
