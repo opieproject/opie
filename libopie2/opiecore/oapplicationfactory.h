@@ -223,7 +223,7 @@ struct OPrivate< Opie::Core::Typelist<Product, ProductListTail> > {
  * Make sure all your Widgets provide the appName() static method
  * otherwise you'll get a compiler error
  *
- * typedef Opie::MakeTypeList<MyWidget, MyDialog, MyMediaPlayer >::Result MyTypes;
+ * typedef Opie::Core::MakeTypelist<MyWidget, MyDialog, MyMediaPlayer >::Result MyTypes;
  * OPIE_EXPORT_APP( OApplicationFactory<MyTypes> )
  */
 

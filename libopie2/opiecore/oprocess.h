@@ -101,8 +101,8 @@ class OProcessPrivate;
  *
  **proc << "my_executable";
  **proc << "These" << "are" << "the" << "command" << "line" << "args";
- *QApplication::connect(proc, SIGNAL(processExited(Opie::Core::OProcess *)),
- *                      pointer_to_my_object, SLOT(my_objects_slot(Opie::Core::OProcess *)));
+ *QObject::connect(proc, SIGNAL(processExited(Opie::Core::OProcess *)),
+ *                 pointer_to_my_object, SLOT(my_objects_slot(Opie::Core::OProcess *)));
  *proc->start();
  *</pre>
  *
