@@ -41,7 +41,7 @@
 #include "utils.h"
 #include "global.h"
 
-InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *dataManager, const char *title = 0 )
+InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *dataManager, const char *title )
     : QWidget( 0, 0, 0 )
 {
     setCaption( title );
@@ -118,7 +118,7 @@ InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *d
     displayAvailableSpace( destination->currentText() );
 }
 
-InstallDlgImpl::InstallDlgImpl( Ipkg *ipkg, QString initialText, const char *title = 0 )
+InstallDlgImpl::InstallDlgImpl( Ipkg *ipkg, QString initialText, const char *title )
     : QWidget( 0, 0, 0 )
 {
     setCaption( title );
