@@ -10,12 +10,12 @@
         <translation>Type de fichier</translation>
     </message>
     <message>
-        <source>Attatch...</source>
-        <translation>Joindre ...</translation>
-    </message>
-    <message>
         <source>Remove</source>
         <translation>Enlever</translation>
+    </message>
+    <message>
+        <source>attach...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -92,10 +92,6 @@
         <translation>Supprimer un compte</translation>
     </message>
     <message>
-        <source>Get all mail</source>
-        <translation>Recevoir tous les messages</translation>
-    </message>
-    <message>
         <source>Send mail</source>
         <translation>Envoyer les messages</translation>
     </message>
@@ -140,6 +136,37 @@
         <translation>Vous devez d&apos;abord 
 créer un compte !</translation>
     </message>
+    <message>
+        <source>Main operation toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>getMail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to download mail via all available accounts.
+ Press and hold to select the desired account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Supprimer</translation>
+    </message>
+    <message>
+        <source>No account associated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no active account 
+associated to this mail
+ it can not be downloaded</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EmailHandler</name>
@@ -175,6 +202,20 @@ Mail has NOT been sent</source>
         <source>Examine mail</source>
         <translation>Lire un message</translation>
     </message>
+    <message>
+        <source>Central view area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail not downloaded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The mail you have clicked 
+has not been downloaded yet.
+ Would you like to do it now ?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PopClient</name>
@@ -191,10 +232,6 @@ Mail has NOT been sent</source>
         <translation>Réception en cours</translation>
     </message>
     <message>
-        <source>Previous message </source>
-        <translation>Message précédent</translation>
-    </message>
-    <message>
         <source>Completing message </source>
         <translation>Fin du transfert en cours</translation>
     </message>
@@ -209,6 +246,52 @@ Mail has NOT been sent</source>
     <message>
         <source>No new messages</source>
         <translation>Pas de nouveaux messages</translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
+    <message>
+        <source>This is the inbox view.
+ It keeps the fetched mail which can be viewed by double clicking the entry.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>A blue attachment icon shows whether this mail has attachments.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is the oubox view.
+ It keeps the queued mails to send which can be reviewed by double clicking the entry.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The mail subject should be entered here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recipients can be entered here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you would like to send copies of your mail they can be entered here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This button opens the address selector with all mail adresses from your OPIE addressbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter your mail text here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chose the recipients from this list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Queue your mail by clicking here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is an overview about all attachments in the mail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -245,6 +328,39 @@ Mail has NOT been sent</source>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
+    <message>
+        <source>Click here to reply to the selected mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to forward the selected mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read the previous mail in the list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read the next mail in the list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to add attachments to your mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The mail view has 2 modes:
+&lt;LI&gt;&lt;B&gt;RichText&lt;/B&gt; shows the mail as HTML with reach features (no standard line breaks)&lt;/LI&gt;&lt;LI&gt;&lt;B&gt;Plain&lt;/B&gt; shows the mail as standard plain text&lt;/LI&gt;Click here to switch between those view modes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to remove the selected mail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SmtpClient</name>
@@ -275,6 +391,10 @@ Mail has NOT been sent</source>
         <source>Install</source>
         <translation>Installer</translation>
     </message>
+    <message>
+        <source>Click here to install the attachment to your Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WriteMail</name>
@@ -285,10 +405,6 @@ Mail has NOT been sent</source>
     <message>
         <source>&amp;Add</source>
         <translation>&amp;Ajouter</translation>
-    </message>
-    <message>
-        <source>Attatchment</source>
-        <translation>Pièce jointe</translation>
     </message>
     <message>
         <source>Enque mail</source>
@@ -313,6 +429,78 @@ Mail has NOT been sent</source>
     <message>
         <source>...</source>
         <translation>...</translation>
+    </message>
+    <message>
+        <source>Attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to attach files to your mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This button puts your mail in the send queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to create a new mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No recipient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send mail to whom?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK
+</source>
+        <translation type="unfinished">OK
+</translation>
+    </message>
+    <message>
+        <source>Incorrect recipient separator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recipients must be separated by ;
+and be valid emailaddresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Incorrect carbon copy separator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CC Recipients must be separated by ;
+and be valid emailaddresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>======forwarded message from </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> starts======
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FWD: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>======end of forwarded message======
+
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
