@@ -1,0 +1,9 @@
+TEMPLATE	= app
+CONFIG		= qt warn_on release
+HEADERS		= buzzword.h 
+SOURCES		= buzzword.cpp main.cpp
+INCLUDEPATH	+= $(QPEDIR)/include
+DEPENDPATH	+= $(QPEDIR)/include
+DESTDIR     = $(OPIEDIR)/bin
+LIBS        += -lqpe
+TARGET		= buzzword 

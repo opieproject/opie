@@ -1,0 +1,10 @@
+Files: bin/buzzword apps/Games/buzzword.desktop pics/buzzword/buzzword.png share/buzzword/buzzwords
+Version: 1.1 
+Depends: opie-base ($QPE_VERSION)
+Priority: optional
+Section: opie/games
+Maintainer: Martin Imobersteg <imm@gmx.ch> 
+Architecture: arm
+License: GPL
+Description: BuzzWord 
+ A BuzzWord Bingo for Qtopia.
