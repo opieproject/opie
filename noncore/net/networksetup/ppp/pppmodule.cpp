@@ -1,4 +1,5 @@
 #include "pppmodule.h"
+#include "pppimp.h"
 #include "interfaceinformationimp.h"
 
 /**
@@ -38,8 +39,8 @@ QString PPPModule::getPixmapName(Interface* ){
  * @return bool true if i is owned by this module, false otherwise.
  */ 
 bool PPPModule::isOwner(Interface *i){
-  // Scan the ppp database
-  return false;
+  if(!i->getInterfaceName().upper().contains("PPP"))
+    return false;
   
   i->setHardwareName("PPP");
   list.append(i);
@@ -62,12 +63,10 @@ QWidget *PPPModule::configure(Interface *i){
  * @return QWidget* pointer to this modules info.
  */ 
 QWidget *PPPModule::information(Interface *i){
-  return NULL;
- 
-  //WlanInfoImp *info = new WlanInfoImp(0, i->getInterfaceName(), Qt::WDestructiveClose);
-  //InterfaceInformationImp *information = new InterfaceInformationImp(info->tabWidget, "InterfaceSetupImp", i);
-  //info->tabWidget->insertTab(information, "TCP/IP");
-  //return info;
+  // We don't have any advanced pppd information widget yet :-D
+  // TODO ^
+  InterfaceInformationImp *information = new InterfaceInformationImp(0, "InterfaceSetupImp", i);
+  return information;
 }
 
 /**
@@ -76,6 +75,7 @@ QWidget *PPPModule::information(Interface *i){
  * been called by isOwner()
  */
 QList<Interface> PPPModule::getInterfaces(){
+  // List all of the files in the peer directory
   return list;
 }
 
@@ -86,8 +86,11 @@ QList<Interface> PPPModule::getInterfaces(){
  * @return Interface* NULL if it was unable to be created.
  */ 
 Interface *PPPModule::addNewInterface(const QString &newInterface){
-  // We can't add a 802.11 interface, either the hardware will be there
-  // or it wont. 
+  // If the 
+  PPPConfigureImp imp(0, "PPPConfigImp");
+  if(imp.exec() == QDialog::Accepted ){
+
+  }
   return NULL; 
 }
 

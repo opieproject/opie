@@ -25,14 +25,14 @@ public:
   Interfaces(QString useInterfacesFile = "/etc/network/interfaces");
   QStringList getInterfaceList();
   
-  bool isAuto(const QString &interface);
+  bool isAuto(const QString &interface) const ;
   bool setAuto(const QString &interface, bool setAuto);
   
   bool removeInterface();
   bool addInterface(const QString &interface, const QString &family, const QString &method);
   bool copyInterface(const QString &oldInterface, const QString &newInterface);
   bool setInterface(QString interface);
-  bool isInterfaceSet();
+  bool isInterfaceSet() const ;
   QString getInterfaceName(bool &error);
   bool setInterfaceName(const QString &newName);
   QString getInterfaceFamily(bool &error);
@@ -57,11 +57,11 @@ public:
   
 private:
   bool setStanza(const QString &stanza, const QString &option, QStringList::Iterator &iterator);
+  bool removeStanza(QStringList::Iterator &stanza);
   bool setOption(const QStringList::Iterator &start, const QString &option, const QString &value);
+  bool removeAllOptions(const QStringList::Iterator &start);
   bool removeOption(const QStringList::Iterator &start, const QString &option, const QString &value);
   QString getOption(const QStringList::Iterator &start, const QString &option, bool &error);
-  bool removeStanza(QStringList::Iterator &stanza);
-  bool removeAllOptions(const QStringList::Iterator &start);
   
   QString interfacesFile;
   QStringList interfaces;

@@ -1,7 +1,5 @@
-AndyQ - Fixed a bug in wlanimp.cpp : accept method - put braces round key 
-        field if so that settings get saved if WEP is enabled
-
-CLEAN UP
+test WEP
+WEP key in file wireless.conf is not encrypted !, therefore it is very easy to get the key out of the zaurus..
 
 udchcp needs to output the dhcp information so interfaces can read it
 

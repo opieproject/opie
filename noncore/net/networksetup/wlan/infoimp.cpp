@@ -1,5 +1,6 @@
 #include "infoimp.h"
 #include "wextensions.h"
+
 #include <qtimer.h>
 #include <qprogressbar.h>
 #include <qlabel.h>
@@ -12,7 +13,7 @@ WlanInfoImp::WlanInfoImp( QWidget* parent, const char* name, WFlags fl): WlanInf
   WExtensions *wExtensions = new WExtensions(name);
   if(!wExtensions->doesHaveWirelessExtensions()){
     delete  wExtensions;
-    qDebug("No extension");
+    qDebug("WlanInfoImp::No wireless extension");
     return;
   }
   delete  wExtensions;

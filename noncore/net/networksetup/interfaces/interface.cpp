@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Interface::Interface(QObject * parent, const char * name, bool newSatus): QObject(parent, name), status(newSatus), attached(false), hardwareName("Unknown"), moduleOwner(NULL), macAddress(""), ip("0.0.0.0"), broadcast(""), subnetMask("0.0.0.0"), dhcp(false){
+Interface::Interface(QObject * parent, const char * name, bool newSatus): QObject(parent, name), hardwareName("Unknown"), moduleOwner(NULL), status(newSatus), attached(false), dhcp(false), macAddress(""), ip("0.0.0.0"), broadcast(""), subnetMask("0.0.0.0"){
   refresh();
 }
 

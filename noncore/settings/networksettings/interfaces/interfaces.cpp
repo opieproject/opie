@@ -71,7 +71,7 @@ QStringList Interfaces::getInterfaceList(){
  * @param interface interface to check to see if it is on or not.
  * @return true is interface is in auto
  */ 
-bool Interfaces::isAuto(const QString &interface){
+bool Interfaces::isAuto(const QString &interface) const {
   QStringList autoLines = interfaces.grep(QRegExp(AUTO));
   QStringList awi = autoLines.grep(QRegExp(interface));
   if(awi.count() > 1)
@@ -139,8 +139,8 @@ bool Interfaces::setInterface(QString interface){
  * A quick helper funtion to see if the current interface is set.
  * @return bool true if set, false otherwise.
  */ 
-bool Interfaces::isInterfaceSet(){
-  return (currentIface != interfaces.end());
+bool Interfaces::isInterfaceSet() const {
+  return (interfaces.end() != currentIface);
 }
 
 /**
