@@ -3,13 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
-
+#include <qfile.h>
 
 #include <qpe/qpeapplication.h>
 
 #include "mainwindow.h"
 
-//#define FSCKED_DISTRIBUTION 1
+#define FSCKED_DISTRIBUTION 1
 #ifdef FSCKED_DISTRIBUTION
 /*
  * The Zaurus rom
@@ -91,7 +91,7 @@ int main(int argc, char **argv) {
     QPEApplication app( argc, argv );
 
 #ifdef   FSCKED_DISTRIBUTION
-    owarn << "fscked" << oendl; 
+//     owarn << "fscked" << oendl;
     FixIt it;
     it.fixIt();
 #endif

@@ -39,7 +39,7 @@ public:
     void closeRawIO (int fd );
     virtual QBitArray supports() const;
     virtual bool isConnected();
-    
+
 /*signals:
     void received(const QByteArray &);
     void error(int, const QString &);

@@ -21,7 +21,9 @@ public:
                 Baud_57600,
                 Baud_38400,
                 Baud_19200,
-                Baud_9600 };
+                Baud_9600,
+		Baud_4800,
+		Baud_2400 };
     enum Data { Data_Five =5, Data_Six =6, Data_Seven=7, Data_Eight=8 };
     enum Stop { Stop_One =1, Stop_OnePointFive=15, Stop_Two=2 };
 

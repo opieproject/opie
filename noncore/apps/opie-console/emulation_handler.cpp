@@ -41,7 +41,9 @@ EmulationHandler::~EmulationHandler() {
 }
 
 void EmulationHandler::load( const Profile& prof) {
-    m_teWid->setVTFont( font( prof.readNumEntry("Font")  )  );
+
+//     m_teWid->setVTFont( font( prof.readNumEntry("Font")  )  );
+    m_teWid->setVTFont( QFont( prof.readEntry("Font"), prof.readNumEntry( "FontSize"  ), QFont::Normal  )  );
     int num = prof.readNumEntry("Color");
     setColor( foreColor(num), backColor(num) );
     m_teWid->setBackgroundColor(backColor(num) );
@@ -130,11 +132,11 @@ QColor EmulationHandler::foreColor(int col) {
         co = Qt::black;
         break;
     case Profile::Green:
-        owarn << "Foreground green" << oendl; 
+        owarn << "Foreground green" << oendl;
         co = Qt::green;
         break;
     case Profile::Orange:
-        owarn << "Foreground orange" << oendl; 
+        owarn << "Foreground orange" << oendl;
         co.setRgb( 231, 184, 98 );
         break;
     }
@@ -154,11 +156,11 @@ QColor EmulationHandler::backColor(int col ) {
         co = Qt::white;
         break;
     case Profile::Green:
-        owarn << "Background black" << oendl; 
+        owarn << "Background black" << oendl;
         co = Qt::black;
         break;
     case Profile::Orange:
-        owarn << "Background black" << oendl; 
+        owarn << "Background black" << oendl;
         co = Qt::black;
         break;
     }

@@ -24,7 +24,9 @@ namespace {
         id_baud_57600,
         id_baud_38400,
         id_baud_19200,
-        id_baud_9600
+        id_baud_9600,
+	id_baud_4800,
+	id_baud_2400
     };
 
     enum DataIds {
@@ -86,7 +88,8 @@ IOLayerBase::IOLayerBase( QWidget* par,  const char* name )
     m_speedBox->insertItem(tr("38400 baud"), id_baud_38400   );
     m_speedBox->insertItem(tr("19200 baud"), id_baud_19200   );
     m_speedBox->insertItem(tr("9600 baud"), id_baud_9600     );
-
+    m_speedBox->insertItem(tr("4800 baud"), id_baud_4800     );
+    m_speedBox->insertItem(tr("2400 baud"), id_baud_2400     );
 };
 IOLayerBase::~IOLayerBase() {
 
@@ -132,6 +135,12 @@ void IOLayerBase::setSpeed( Speed sp ) {
         break;
     case Baud_19200:
         index = id_baud_19200;
+        break;
+    case Baud_4800:
+        index = id_baud_4800;
+        break;
+    case Baud_2400:
+        index = id_baud_2400;
         break;
     default:
     case Baud_9600:
@@ -207,6 +216,12 @@ IOLayerBase::Speed IOLayerBase::speed()const{
         break;
     case id_baud_19200:
         return Baud_19200;
+        break;
+    case id_baud_4800:
+        return Baud_4800;
+        break;
+    case id_baud_2400:
+        return Baud_2400;
         break;
     default:
     case id_baud_9600:

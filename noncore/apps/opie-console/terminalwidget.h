@@ -3,6 +3,8 @@
 
 #include "profiledialogwidget.h"
 
+#include <opie2/ofontselector.h>
+
 class QComboBox;
 class QLabel;
 class QVBoxLayout;
@@ -12,6 +14,7 @@ class QRadioButton;
 class QCheckBox;
 class QHGroupBox;
 class QHBox;
+
 
 class TerminalWidget : public ProfileDialogTerminalWidget {
 
@@ -32,7 +35,7 @@ private:
 
     QComboBox* m_terminalBox, *m_colorCmb;
 
-    QButtonGroup* m_groupSize;
+    QHBox* m_groupSize;
 
     QRadioButton* m_sizeSmall, *m_sizeMedium,
         *m_sizeLarge;
@@ -43,6 +46,7 @@ private:
         *m_convOutbound, *m_optionEcho,
         *m_optionWrap;
 
+    Opie::Ui::OFontSelector *m_fontSelector;
 };
 
 #endif

@@ -110,6 +110,12 @@ void ModemConfigWidget::load( const Profile& prof ) {
     case 19200:
         m_base->setSpeed( IOLayerBase::Baud_19200 );
         break;
+    case 4800:
+        m_base->setSpeed( IOLayerBase::Baud_4800 );
+        break;
+    case 2400:
+        m_base->setSpeed( IOLayerBase::Baud_2400 );
+        break;
     case 9600:
     default:
         m_base->setSpeed( IOLayerBase::Baud_9600 );
@@ -138,7 +144,7 @@ void ModemConfigWidget::load( const Profile& prof ) {
 
     atConf->readConfig( prof );
     if ( prof.readEntry( "Device" ).isEmpty() ) {
-        owarn << "device empty!" << oendl; 
+        owarn << "device empty!" << oendl;
         return;
     }
     setCurrent( prof.readEntry( "Device" ), m_deviceCmb );
@@ -196,6 +202,12 @@ void ModemConfigWidget::save( Profile& prof ) {
         break;
     case IOLayerBase::Baud_9600:
         speed = 9600;
+        break;
+    case IOLayerBase::Baud_4800:
+        speed = 4800;
+        break;
+    case IOLayerBase::Baud_2400:
+        speed = 2400;
         break;
     }
 

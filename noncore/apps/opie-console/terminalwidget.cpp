@@ -2,6 +2,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+
 using namespace Opie::Core;
 
 /* QT */
@@ -12,6 +13,7 @@ using namespace Opie::Core;
 #include <qhgroupbox.h>
 #include <qhbuttongroup.h>
 #include <qlayout.h>
+#include <qhbox.h>
 
 namespace {
     enum TermIds {
@@ -44,14 +46,18 @@ TerminalWidget::TerminalWidget( const QString& name, QWidget* parent,
     m_colorLabel = new QLabel(tr("Color scheme"), this);
     m_colorCmb = new QComboBox(this );
 
-    m_groupSize = new QHButtonGroup(tr("Font size"), this );
-    m_sizeSmall = new QRadioButton(tr("small"),  m_groupSize );
-    m_sizeMedium = new QRadioButton(tr("medium"),  m_groupSize );
-    m_sizeLarge = new QRadioButton(tr("large"),  m_groupSize );
+//     m_groupSize = new QHButtonGroup(tr("Font size"), this );
+    m_groupSize = new QHBox( this );
+    m_fontSelector = new Opie::Ui::OFontSelector( false, m_groupSize );
+
+//      m_sizeSmall = new QRadioButton(tr("small"),  m_groupSize );
+//      m_sizeMedium = new QRadioButton(tr("medium"),  m_groupSize );
+//      m_sizeLarge = new QRadioButton(tr("large"),  m_groupSize );
 
     m_groupConv = new QHGroupBox( tr("Line-break conversions"), this );
     m_convInbound  = new QCheckBox( tr("Inbound"), m_groupConv );
     m_convOutbound = new QCheckBox( tr("Outbound"), m_groupConv );
+
 
     m_groupOptions = new QHGroupBox( tr("Options"), this );
     m_optionEcho = new QCheckBox( tr("Local echo"), m_groupOptions );
@@ -74,7 +80,7 @@ TerminalWidget::TerminalWidget( const QString& name, QWidget* parent,
     m_lroot->addStretch( 0 );
 
     // Fill in some options
-    owarn << "Options for terminal box" << oendl; 
+    owarn << "Options for terminal box" << oendl;
     m_terminalBox->insertItem( tr("VT 100"), 0 ); // /*, id_term_vt100*/ );
     m_terminalBox->insertItem( tr("VT 102"), 1 );  // /* , id_term_vt102 */);
     m_terminalBox->insertItem( tr("Linux Console"), 2 ); //, id_term_linux );
@@ -110,7 +116,7 @@ TerminalWidget::~TerminalWidget() {
 void TerminalWidget::load( const Profile& prof ) {
     int term = prof.readNumEntry("Terminal");
     int color = prof.readNumEntry("Color");
-    int fontsize = prof.readNumEntry("Font");
+//     int fontsize = prof.readNumEntry("Font");
     int opt_echo = prof.readNumEntry("Echo");
     int opt_wrap = prof.readNumEntry("Wrap");
     int opt_inbound = prof.readNumEntry("Inbound");
@@ -151,20 +157,23 @@ void TerminalWidget::load( const Profile& prof ) {
         break;
     };
 
-    switch( fontsize ) {
-    case Profile::Micro:
-        m_sizeSmall->setChecked(true );
-        break;
-    case Profile::Small:
-        m_sizeMedium->setChecked(true );
-        break;
-    case Profile::Medium:
-        m_sizeLarge->setChecked( true );
-        break;
-    default:
-        m_sizeMedium->setChecked(true );
-        break;
-    };
+
+    m_fontSelector->setSelectedFont( prof.readEntry( "Font"), prof.readEntry( "FontStyle"), prof.readNumEntry( "FontSize"  ), prof.readEntry( "FontCharset") );
+
+//     switch( fontsize ) {
+//     case Profile::Micro:
+//         m_sizeSmall->setChecked(true );
+//         break;
+//     case Profile::Small:
+//         m_sizeMedium->setChecked(true );
+//         break;
+//     case Profile::Medium:
+//         m_sizeLarge->setChecked( true );
+//         break;
+//     default:
+//         m_sizeMedium->setChecked(true );
+//         break;
+//     };
 
     if (opt_echo) m_optionEcho->setChecked( true );
     if (opt_wrap) m_optionWrap->setChecked( true );
@@ -211,13 +220,20 @@ void TerminalWidget::save( Profile& profile ) {
         break;
     };
 
-    if (m_sizeSmall->isChecked() ) {
-        profile.writeEntry("Font", Profile::Micro );
-    }else if (m_sizeMedium->isChecked() ) {
-        profile.writeEntry("Font", Profile::Small );
-    }else {
-        profile.writeEntry("Font", Profile::Medium );
-    }
+
+    profile.writeEntry( "FontSize", m_fontSelector->fontSize() );
+    profile.writeEntry( "FontStyle", m_fontSelector->fontStyle() );
+    profile.writeEntry( "FontCharset", m_fontSelector->fontCharSet() );
+    profile.writeEntry( "Font", m_fontSelector->fontFamily() );
+
+
+//     if (m_sizeSmall->isChecked() ) {
+//         profile.writeEntry("Font", Profile::Micro );
+//     }else if (m_sizeMedium->isChecked() ) {
+//         profile.writeEntry("Font", Profile::Small );
+//     }else {
+//         profile.writeEntry("Font", Profile::Medium );
+//     }
 
     profile.writeEntry("Echo", m_optionEcho->isChecked() );
     profile.writeEntry("Wrap", m_optionWrap->isChecked() );
