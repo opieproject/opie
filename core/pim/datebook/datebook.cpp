@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.31 2004-02-18 22:11:25 zecke Exp $
+** $Id: datebook.cpp,v 1.32 2004-02-18 23:19:17 zecke Exp $
 **
 **********************************************************************/
 
@@ -997,6 +997,8 @@ void DateBook::slotDoFind( const QString& txt, const QDate &dt,
 	inSearch = true;
     }
     static QDate searchDate = dt;
+    // if true at the end we will start at the begin again and afterwards
+    // we will emit string not found
     static bool wrapAround = true;
     bool candidtate;
     candidtate = false;
@@ -1004,6 +1006,13 @@ void DateBook::slotDoFind( const QString& txt, const QDate &dt,
     QValueList<Event> repeats = db->getRawRepeats();
 
     // find the candidate for the first repeat that matches...
+    // first check if there can ever be a match and then compute
+    // the next occurence from start. See if this event is  closer
+    // to the beginning (start. next < dtEnd) and not smaller then the last
+    // result. If we find a canditate we set the dtEnd to the time
+    // of the ocurrence and rev to this occurence.
+    // set wrap around to true because there might be more events coming
+    // and we're not at the end.
     QValueListConstIterator<Event> it;
     QDate start = dt;
     for ( it = repeats.begin(); it != repeats.end(); ++it ) {
@@ -1023,6 +1032,9 @@ void DateBook::slotDoFind( const QString& txt, const QDate &dt,
     }
 
     // now the for first non repeat...
+    // dtEnd is set by the previous iteration of repeatingEvents
+    // check if we find a closer item. Also set dtEnd to find even
+    // more close occurrence
     QValueList<Event> nonRepeats = db->getNonRepeatingEvents( dt, dtEnd.date() );
     qHeapSort( nonRepeats.begin(), nonRepeats.end() );
     for ( it = nonRepeats.begin(); it != nonRepeats.end(); ++it ) {
