@@ -11,6 +11,7 @@ class OpieMail : public MainWindow
 
 public:
     OpieMail( QWidget *parent = 0, const char *name = 0, WFlags flags = 0 );
+    virtual ~OpieMail();
     static QString appName() { return QString::fromLatin1("opiemail"); }
 
 public slots:

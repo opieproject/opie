@@ -131,6 +131,9 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     QTimer::singleShot( 1000, this, SLOT( slotAdjustColumns() ) );
 }
 
+MainWindow::~MainWindow()
+{
+}
 
 void MainWindow::slotAdjustLayout() {
 

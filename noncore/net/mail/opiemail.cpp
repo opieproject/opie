@@ -30,6 +30,11 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
 
 }
 
+OpieMail::~OpieMail()
+{
+    if (settings) delete settings;
+}
+
 void OpieMail::appMessage(const QCString &msg, const QByteArray &data)
 {
     // copied from old mail2
