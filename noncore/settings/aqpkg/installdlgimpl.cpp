@@ -183,7 +183,7 @@ void InstallDlgImpl :: init( bool displayextrainfo )
     layout->addWidget( btnInstall, 3, 0 );
     connect( btnInstall, SIGNAL( clicked() ), this, SLOT( installSelected() ) );
     
-    btnOptions = new QPushButton( Resource::loadPixmap( "aqpkg/config" ), tr( "Options" ), this );
+    btnOptions = new QPushButton( Resource::loadPixmap( "SettingsIcon" ), tr( "Options" ), this );
     layout->addWidget( btnOptions, 3, 1 );
     connect( btnOptions, SIGNAL( clicked() ), this, SLOT( optionsSelected() ) );
 }
@@ -230,6 +230,7 @@ void InstallDlgImpl :: installSelected()
 
     btnInstall->setText( tr( "Abort" ) );
     btnInstall->setIconSet( Resource::loadPixmap( "close" ) );
+
     if ( pIpkg )
     {
         output->setText( "" );

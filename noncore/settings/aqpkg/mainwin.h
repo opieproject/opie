@@ -43,6 +43,9 @@ public:
 	MainWindow();
 	~MainWindow();
 
+protected:
+    void closeEvent( QCloseEvent* e );
+
 private:
     DataManager *mgr;
 

@@ -55,9 +55,9 @@ protected:
 
 private:
     DataManager *dataMgr;
-	QList<InstallData> installList;
-	QList<InstallData> removeList;
-	QList<InstallData> updateList;
+    QList<InstallData> installList;
+    QList<InstallData> removeList;
+    QList<InstallData> updateList;
     int flags;
     Ipkg *pIpkg;
     bool upgradePackages;

@@ -340,6 +340,23 @@ void MainWindow :: displaySettings()
     }
     delete dlg;
 }
+
+void MainWindow :: closeEvent( QCloseEvent *e )
+{
+    // If install dialog is visible, return to main view, otherwise close app
+    QWidget *widget = stack->visibleWidget();
+
+    if ( widget != networkPkgWindow && widget != progressWindow )
+    {
+        if ( widget ) delete widget;
+        stack->raiseWidget( networkPkgWindow );
+        e->ignore();
+    }
+    else
+    {
+        e->accept();
+    }
+}
     
 void MainWindow :: displayFindBar()
 {
@@ -779,7 +796,8 @@ void MainWindow :: updateServer()
     InstallDlgImpl *dlg = new InstallDlgImpl( ipkg, tr( "Refreshing server package lists" ),
                                               tr( "Update lists" ) );
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
-    dlg->showMaximized();
+    stack->addWidget( dlg, 3 );
+    stack->raiseWidget( dlg );
     
 //  delete progDlg;
 }
@@ -808,7 +826,8 @@ void MainWindow :: upgradePackages()
         InstallDlgImpl *dlg = new InstallDlgImpl( ipkg, tr( "Upgrading installed packages" ),
                                                   tr ( "Upgrade" ) );
         connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
-        dlg->showMaximized();
+        stack->addWidget( dlg, 3 );
+        stack->raiseWidget( dlg );
     }
 }
 
@@ -949,7 +968,8 @@ void MainWindow :: downloadRemotePackage()
 
     InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Download" ) );
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
-    dlg->showMaximized();
+    stack->addWidget( dlg, 3 );
+    stack->raiseWidget( dlg );
 }
 
 
@@ -987,7 +1007,8 @@ void MainWindow :: applyChanges()
     // do the stuff
     InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Apply changes" ) );
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
-    dlg->showMaximized();
+    stack->addWidget( dlg, 3 );
+    stack->raiseWidget( dlg );
 }
 
 // decide what to do - either remove, upgrade or install
