@@ -3,7 +3,7 @@
     <name>Today</name>
     <message>
         <source>Owned by </source>
-        <translation>Īpašnieks</translation>
+        <translation>Īpašnieks </translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
