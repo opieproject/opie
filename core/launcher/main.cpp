@@ -29,12 +29,12 @@
 #include <qpe/custom.h>
 #endif
 
+#include <opie/odevice.h>
+
 #include <qfile.h>
 #include <qwindowsystem_qws.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/alarmserver.h>
-
-#include <opie/ohwinfo.h>
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -193,7 +193,7 @@ public:
 	{
 		bool doinst = false;
 	
-		m_model = OHwInfo::inst ( )-> model ( );
+		m_model = ODevice::inst ( )-> model ( );
 		m_power_timer = 0;
 		
 		switch ( m_model ) {
@@ -208,7 +208,7 @@ public:
 			QWSServer::setKeyboardFilter ( this );
 	}
 
-	virtual bool filter ( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat )
+	virtual bool filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat )
 	{
 		bool kill = false;
 	
@@ -267,9 +267,8 @@ public:
 	}
 
 private:
-	OHwModel m_model;
-	bool     m_power_press;
-	int      m_power_timer;
+	OModel  m_model;
+	int     m_power_timer;
 };
 
 

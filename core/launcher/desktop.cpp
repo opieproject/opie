@@ -43,6 +43,8 @@
 #include <qpe/custom.h>
 #endif
 
+#include <opie/odevice.h>
+
 #include <qgfx_qws.h>
 #include <qmainwindow.h>
 #include <qmessagebox.h>
@@ -267,7 +269,7 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
     if ( ke->simpleData.keycode == Key_CapsLock ) {
       if ( press ) emit capsLockStateToggle();
     }
-    if ( press )
+    if (( press && !autoRepeat ) || ( !press && autoRepeat ))
       qpedesktop->keyClick();
     } else {
     if ( e->type == QWSEvent::Mouse ) {
@@ -327,10 +329,6 @@ void DesktopApplication::sendCard()
 QPE_MEMALERTER_IMPL
 #endif
 
-#if defined(CUSTOM_SOUND_IMPL)
-CUSTOM_SOUND_IMPL
-#endif
-
 //===========================================================================
 
 Desktop::Desktop() :
@@ -339,10 +337,6 @@ Desktop::Desktop() :
     transferServer( 0 ),
     packageSlave( 0 )
 {
-#ifdef CUSTOM_SOUND_INIT
-    CUSTOM_SOUND_INIT;
-#endif
-
     qpedesktop = this;
 
 //    bg = new Info( this );
@@ -756,41 +750,35 @@ void Desktop::rereadVolumes()
 
 void Desktop::keyClick()
 {
-#ifdef CUSTOM_SOUND_KEYCLICK
-    if ( keyclick )
-  CUSTOM_SOUND_KEYCLICK;
-#endif
+	if ( keyclick )
+    	ODevice::inst ( )-> keySound ( );
 }
 
 void Desktop::screenClick()
 {
-#ifdef CUSTOM_SOUND_TOUCH
-    if ( touchclick )
-  CUSTOM_SOUND_TOUCH;
-#endif
+	if ( touchclick )
+    	ODevice::inst ( )-> touchSound ( );
 }
 
 void Desktop::soundAlarm()
 {
-#ifdef CUSTOM_SOUND_ALARM
-    if (qpedesktop->alarmsound)
-    CUSTOM_SOUND_ALARM;
-#endif
+	if ( qpedesktop-> alarmsound )
+		ODevice::inst ( )-> alarmSound ( );
 }
 
-bool Desktop::eventFilter( QObject *w, QEvent *ev )
+bool Desktop::eventFilter( QObject *, QEvent *ev )
 {
-    if ( ev->type() == QEvent::KeyPress ) {
-  QKeyEvent *ke = (QKeyEvent *)ev;
-  if ( ke->key() == Qt::Key_F11 ) { // menu key
-      QWidget *active = qApp->activeWindow();
-      if ( active && active->isPopup() ) {
-    active->close();
-      }
-      raiseMenu();
-      return TRUE;
-  }
-    }
-    return FALSE;
-}
+	if ( ev-> type ( ) == QEvent::KeyPress ) {
+		QKeyEvent *ke = (QKeyEvent *) ev;
+		if ( ke-> key ( ) == Qt::Key_F11 ) { // menu key
+			QWidget *active = qApp-> activeWindow ( );
+			
+			if ( active && active-> isPopup ( ))
+				active->close();
 
+			raiseMenu ( );
+			return true;
+		}
+	}
+	return false;
+}

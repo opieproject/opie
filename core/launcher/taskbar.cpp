@@ -37,6 +37,8 @@
 #include <qpe/custom.h>
 #endif
 
+#include <opie/odevice.h>
+
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qtimer.h>
@@ -253,29 +255,28 @@ void TaskBar::calcMaxWindowRect()
 
 void TaskBar::receive( const QCString &msg, const QByteArray &data )
 {
-    QDataStream stream( data, IO_ReadOnly );
-    if ( msg == "message(QString)" ) {
-        QString text;
-        stream >> text;
-        setStatusMessage( text );
-    } else if ( msg == "hideInputMethod()" ) {
-  inputMethods->hideInputMethod();
-    } else if ( msg == "showInputMethod()" ) {
-  inputMethods->showInputMethod();
-    } else if ( msg == "reloadInputMethods()" ) {
-  inputMethods->loadInputMethods();
-    } else if ( msg == "reloadApplets()" ) {
-  sysTray->loadApplets();
-    } else if ( msg == "soundAlarm()" ) {
-  Desktop::soundAlarm();
-    }
-#ifdef CUSTOM_LEDS
-    else if ( msg == "setLed(int,bool)" ) {
-  int led, status;
-  stream >> led >> status;
-  CUSTOM_LEDS( led, status );
-    }
-#endif
+	QDataStream stream( data, IO_ReadOnly );
+	if ( msg == "message(QString)" ) {
+		QString text;
+		stream >> text;
+		setStatusMessage( text );
+	} else if ( msg == "hideInputMethod()" ) {
+		inputMethods->hideInputMethod();
+	} else if ( msg == "showInputMethod()" ) {
+		inputMethods->showInputMethod();
+	} else if ( msg == "reloadInputMethods()" ) {
+		inputMethods->loadInputMethods();
+	} else if ( msg == "reloadApplets()" ) {
+		sysTray->loadApplets();
+	} else if ( msg == "soundAlarm()" ) {
+		Desktop::soundAlarm();
+	}
+	else if ( msg == "setLed(int,bool)" ) {
+		int led, status;
+		stream >> led >> status;
+		
+		ODevice::inst ( )-> setLed ( led, status ? OLED_BlinkSlow : OLED_Off );
+	}
 }
 
 QWidget *TaskBar::calibrate(bool)
