@@ -119,6 +119,7 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
 
     virtual Transformation rotation() const;
     virtual ODirection direction() const;
+    virtual bool suspend();
 
   protected:
     virtual void buzzer( int snd );
