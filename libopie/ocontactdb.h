@@ -13,11 +13,16 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.8 2002-07-13 17:19:20 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.9 2002-07-14 13:41:30 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.8  2002-07-13 17:19:20  eilers
+ * Revision 1.1.2.9  2002-07-14 13:41:30  eilers
+ * Some bugfixes,
+ * Added interface for searching contacts in database, using "query by example"
+ * like system
+ *
+ * Revision 1.1.2.8  2002/07/13 17:19:20  eilers
  * Added signal handling:
  * The database will be informed if it is changed externally and if flush() or
  * reload() signals sent. The application which is using the database may
@@ -124,6 +129,24 @@ class OContactBackend {
 	 */
 	virtual QValueList<Contact> allContacts() const = 0;
 
+	/** "Query by example" like search.
+	 * To find a special contact, just fill all known information into
+	 * a new contact-object and start query with this function.
+	 * All information will be connected by an "AND".
+	 * @param query The query form.
+	 * @return <i>true</i> if something was found.
+	 * @see nextFound()
+	 */
+	virtual bool queryByExample ( const Contact &query ) = 0;
+
+	/** Requests a contact which was selected by queryByExample().
+	 * Use this function to move through the list of selected contacts.
+	 * @return Pointer to next contact or <i>null</i> if list empty or no 
+	 * next element.
+	 * @see qeryByExample
+	 */
+	virtual const Contact *nextFound () = 0;
+
 	/** Add Contact to database.
 	 * @param newcontact The contact to add.
 	 * @return <i>true</i> if added successfully.
@@ -166,28 +189,46 @@ class OContactDB: public QObject
 	 * is used.
 	 * @param backend Pointer to an alternative Backend. If not set, we will use
 	 * the default backend.
-	 * @param autosync If <b>true</b> the database stores the current state 
+	 * @param handlesync If <b>true</b> the database stores the current state 
 	 * automatically if it receives the signals <i>flush()</i> and <i>reload()</i>
 	 * which are used before and after synchronisation. If the application wants 
 	 * to react itself, it should be disabled by setting it to <b>false</b>
 	 * @see OContactBackend 
 	 */
 	OContactDB (const QString appname, const QString filename = 0l,
-                    OContactBackend* backend = 0l, bool autosync = true);
+                    OContactBackend* backend = 0l, bool handlesync = true);
 	~OContactDB ();
 	
 	/** Returns all Contacts.
 	 * @return List of all contacts.
 	 */
-	QValueList<Contact> allContacts()const;
+	QValueList<Contact> allContacts() const;
 	
 	/** Finds a Contact by the uid.
 	 * @param foundContact The Contact found if returnvalue is <i>true</i>
 	 * @param uid The user ID of the contact
 	 * @return <i>true</i> if found, else <i>false</i>
 	 */
-	bool findContact(Contact &foundContact, int uid );
+	bool findContact( Contact &foundContact, int uid );
 	
+	/** "Query by example" like search.
+	 * To find a special contact, just fill all known information into
+	 * a new contact-object and start query with this function.
+	 * All information will be connected by an "AND".
+	 * @param query The query form.
+	 * @return <i>true</i> if something was found.
+	 * @see nextFound()
+	 */
+	bool queryByExample ( const Contact &query ); 
+
+	/** Requests a contact which was selected by queryByExample().
+	 * Use this function to move through the list of selected contacts.
+	 * @return Pointer to next contact or <i>null</i> if list empty or no 
+	 * next element.
+	 * @see qeryByExample
+	 */
+	const Contact *nextFound ();
+
 	/** Add Contact to database.
 	 * @param newcontact The contact to add.
 	 * @return <i>true</i> if added successfully.
@@ -224,12 +265,11 @@ class OContactDB: public QObject
 	 */
 	void reload();
 	
-	/** Save contacts database
-	 * @param autoreload <b>true:</b> The function <i>reload()</i> will be exectuted if the
-	 * external database was changed. Otherwise this operation is cancelled.
+	/** Save contacts database.
+	 * Save is more a "commit". After calling this function, all changes are public available.
 	 * @return true if successful
 	 */
-	bool save(bool autoreload = true);
+	bool save();
 
  signals:
 	/* Signal is emitted if the database was changed. Therefore
@@ -245,6 +285,7 @@ class OContactDB: public QObject
 	/*         OContactDBPrivate* d; */
         OContactBackend *m_backEnd;
         bool m_loading:1;
+	bool m_changed;
 
  private slots:
 	void copMessage( const QCString &msg, const QByteArray &data );

@@ -14,11 +14,16 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.7 2002-07-13 17:19:20 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.8 2002-07-14 13:41:30 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.7  2002-07-13 17:19:20  eilers
+ * Revision 1.1.2.8  2002-07-14 13:41:30  eilers
+ * Some bugfixes,
+ * Added interface for searching contacts in database, using "query by example"
+ * like system
+ *
+ * Revision 1.1.2.7  2002/07/13 17:19:20  eilers
  * Added signal handling:
  * The database will be informed if it is changed externally and if flush() or
  * reload() signals sent. The application which is using the database may
@@ -55,8 +60,9 @@
 #include <qdatetime.h>
 #include <qfile.h>
 #include <qregexp.h>
-#include <qpe/qcopenvelope_qws.h>
+#include <qlist.h> 
 
+#include <qpe/qcopenvelope_qws.h>
 #include <qpe/global.h>
 #include <opie/xmltree.h>
 
@@ -72,7 +78,9 @@ namespace {
 	/* the default xml implementation */
 	class DefaultBackend : public OContactBackend {
 	public:
-		DefaultBackend ( QString appname, QString filename = 0l ){
+		DefaultBackend ( QString appname, QString filename = 0l ):
+			m_queryValid (false)
+		{
 			m_appName = appname;
 
 			/* Set journalfile name ... */
@@ -146,6 +154,7 @@ namespace {
 		}
 		
 		bool load () {
+			m_queryValid = false;
 			m_contactList.clear();	
 
 			/* Load XML-File and journal if it exists */
@@ -191,6 +200,45 @@ namespace {
 			}
 
 			return ( false );
+		}
+		
+		bool queryByExample ( const Contact &query ){
+			m_currentQuery.setAutoDelete( false );
+			m_currentQuery.clear();
+
+			QValueListConstIterator<Contact> it;
+			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
+				/* Search all fields for same data. Store pointer to contact
+				 * if all matches 
+				 */
+				bool allcorrect = true;
+				for ( int i; i < Qtopia::rid; i++ ) {
+					/* Achtung abchecken:
+					 * Möglicherweise werden einige Felder im Contructor
+					 * von Contact nicht leer vorbelegt ! Das würde hier
+					 * zu falsche Suchanfragen führen !
+					 */
+					if ( !query.field(i).isEmpty() ){
+						if ( query.field(i) != (*it).field(i) )
+							allcorrect = false;
+					}
+				}
+				if ( allcorrect )
+					m_currentQuery.append( &(*it) );
+			}
+			
+			/* Move to the top of the list and set this query valid */
+			m_currentQuery.first();
+			m_queryValid = true;
+			return true;
+		}
+
+		const Contact *nextFound ()
+		{
+			if ( m_queryValid )
+				return ( m_currentQuery.next() );
+			else
+				return NULL;
 		}
 
 		bool addContact ( const Contact &newcontact )
@@ -239,6 +287,7 @@ namespace {
 		
 		void reload(){
 			/* Reload is the same as load in this implementation */
+			m_queryValid = false;
 			load();
 		}
 
@@ -457,13 +506,16 @@ namespace {
 		QString m_fileName;
 		QString m_appName;
 		QValueList<Contact> m_contactList;
+		QList<Contact> m_currentQuery;
+		bool m_queryValid;
 		QDateTime m_readtime;
 	};
 }
 
 
 OContactDB::OContactDB ( const QString appname, const QString filename,
-			 OContactBackend* end, bool autosync )
+			 OContactBackend* end, bool autosync ):
+	m_changed (false)
 {
         /* take care of the backend */
         if( end == 0 ) {
@@ -486,28 +538,35 @@ OContactDB::OContactDB ( const QString appname, const QString filename,
 }
 OContactDB::~OContactDB ()
 {
+	/* The user may forget to save the changed database, therefore try to
+	 * do it for him.. But this may fail if it was changed externally and
+	 * autoreload is false...
+	 */
+	save();
 	delete m_backEnd;
 }
 
-bool OContactDB::save ( bool autoreload )
+bool OContactDB::save ()
 {
 	/* If the database was changed externally, we could not save the
 	 * Data. This will remove added items which is unacceptable !
 	 * Therefore: Reload database and merge the data...
 	 */
-	if ( isChangedExternally() && !autoreload )
-		return false;
-	else
+	if ( isChangedExternally() )
 		reload();
 	
-        bool status = m_backEnd->save();
+	/* We just want to store data if we have something to store */
+	if ( m_changed ) {
+		bool status = m_backEnd->save();
+		if ( !status ) return false;
 	
-        if ( !status ) return false;
-	
-	/* Now tell everyone that new data is available. 
-	 */
-	QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
-	
+		/* Now tell everyone that new data is available. 
+		 */
+		QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
+
+		m_changed = false;
+	}
+
 	return true;
 }
 
@@ -527,18 +586,31 @@ QValueList<Contact> OContactDB::allContacts() const
 	return ( m_backEnd->allContacts() );
 }
 
+bool OContactDB::queryByExample ( const Contact &query )
+{
+	return ( m_backEnd->queryByExample ( query ) );
+}
+
+const Contact *OContactDB::nextFound ()
+{
+	return ( m_backEnd->nextFound () ); 
+}
+
 bool OContactDB::addContact ( const Contact &newcontact )
 {
+	m_changed = true;
 	return ( m_backEnd->addContact ( newcontact ) );
 }
 
 bool OContactDB::replaceContact (int uid, const Contact &contact)
 {
+	m_changed = true;
 	return ( m_backEnd->replaceContact ( uid, contact ) );
 }
 
 bool OContactDB::removeContact (int uid, const Contact &contact)
 {
+	m_changed = true;
 	return ( m_backEnd->removeContact ( uid, contact ) );
 }
 
@@ -554,7 +626,7 @@ void OContactDB::copMessage( const QCString &msg, const QByteArray & )
 		emit signalChanged ( this );
 	} else if ( msg == "flush()" ) {
 		qWarning ("OContactDB: Received flush()");
-		save ( true );
+		save ();
 	} else if ( msg == "reload()" ) {
 		qWarning ("OContactDB: Received reload()");
 		reload ();
