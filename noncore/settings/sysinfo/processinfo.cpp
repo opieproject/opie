@@ -161,10 +161,7 @@ void ProcessInfo::slotSendClicked()
 		QString sigstr = SignalCB->currentText();
 		sigstr.truncate(2);
 		int sigid = sigstr.toUInt();
-        if ( kill( currprocess->text( 0 ).stripWhiteSpace().toUInt(), sigid ) == 0 )
-        {
-            hide();
-        }
+        kill( currprocess->text( 0 ).stripWhiteSpace().toUInt(), sigid );
     }
 
 }
