@@ -1,3 +1,9 @@
+2004-01-23 Dan Williams <drw@handhelds.org>
+
+	* Added package download functionality
+	* Have Opie update links after install/removal so that apps
+	  will display properly in Launcher
+
 2004-01-20 Dan Williams <drw@handhelds.org>
 
 	* Released version 0.2.0

@@ -141,6 +141,8 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
                     break;
                 case OPackage::Upgrade : lineStr.append( tr( "upgrade" ) );
                     break;
+                case OPackage::Download : lineStr.append( tr( "download" ) );
+                    break;
                 default :
                     break;
             };

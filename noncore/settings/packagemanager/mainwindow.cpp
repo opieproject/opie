@@ -28,6 +28,7 @@
 */
 
 #include <qaction.h>
+#include <qdir.h>
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qmenubar.h>
@@ -37,6 +38,7 @@
 #include <qtoolbar.h>
 #include <qwhatsthis.h>
 
+#include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 
@@ -44,6 +46,7 @@
 #include "installdlg.h"
 #include "filterdlg.h"
 #include "promptdlg.h"
+#include "entrydlg.h"
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags fl )
     : QMainWindow( parent, name, fl || WStyle_ContextHelp )
@@ -162,7 +165,6 @@ void MainWindow::initUI()
     actionUpgrade->addTo( popup );
     actionUpgrade->addTo( &m_toolBar );
 
-/*
     QPixmap iconDownload = Resource::loadPixmap( "packagemanager/download" );
     QPixmap iconRemove = Resource::loadPixmap( "packagemanager/remove" );
     QAction *actionDownload = new QAction( tr( "Download" ), iconDownload, QString::null, 0, this, 0 );
@@ -170,7 +172,6 @@ void MainWindow::initUI()
     connect( actionDownload, SIGNAL(activated()), this, SLOT(slotDownload()) );
     actionDownload->addTo( popup );
     actionDownload->addTo( &m_toolBar );
-*/
 
     a = new QAction( tr( "Apply changes" ), Resource::loadPixmap( "packagemanager/apply" ), QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to install, remove or upgrade currently selected package(s)." ) );
@@ -370,7 +371,6 @@ void MainWindow::slotUpgrade()
     m_widgetStack.raiseWidget( dlg );
 }
 
-/*
 void MainWindow::slotDownload()
 {
     // Retrieve list of packages selected for download (if any)
@@ -386,7 +386,8 @@ void MainWindow::slotDownload()
 
     if ( workingPackages->isEmpty() )
     {
-        // No packages were selected, prompt for URL of package to download
+        QMessageBox::information( this, tr( "Nothing to do" ), tr( "No packages selected" ), tr( "OK" ) );
+        return;
     }
     else
     {
@@ -394,33 +395,29 @@ void MainWindow::slotDownload()
         m_config.setGroup( "settings" );
         QString workingDir = m_config.readEntry( "DownloadDir", "/tmp" );
 
-//        QString text = InputDialog::getText( tr( "Download to where" ), tr( "Enter path to download to" ), workingDir, &ok, this );
-//        if ( ok && !text.isEmpty() )
-//            workingDir = text;   // user entered something and pressed ok
-//        else
-//            return; // user entered nothing or pressed cancel
+        bool ok = false;
+        QString text = EntryDlg::getText( tr( "Download" ), tr( "Enter path to download package to:" ), workingDir, &ok, this );
+        if ( ok && !text.isEmpty() )
+            workingDir = text;   // user entered something and pressed ok
+        else
+            return; // user entered nothing or pressed cancel
 
-//        // Store download directory in config file
-//        m_config.writeEntry( "DownloadDir", workingDir );
+        // Store download directory in config file
+        m_config.writeEntry( "DownloadDir", workingDir );
 
         // Get starting directory
-//        char initDir[PATH_MAX];
-//        getcwd( initDir, PATH_MAX );
+        QDir::setCurrent( workingDir );
 
-        // Download packages
+        // Create package manager output widget
+        InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Download packages" ), false,
+                                        OPackage::Download, workingPackages );
+        connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseInstallDlg()) );
 
+        // Display widget
+        m_widgetStack.addWidget( dlg, 3 );
+        m_widgetStack.raiseWidget( dlg );
     }
-
-    // Create package manager output widget
-    InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Download packages" ), false,
-                                      OPackage::Download, workingPackages );
-    connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseInstallDlg()) );
-
-    // Display widget
-    m_widgetStack.addWidget( dlg, 3 );
-    m_widgetStack.raiseWidget( dlg );
 }
-*/
 
 void MainWindow::slotApply()
 {
@@ -526,6 +523,11 @@ void MainWindow::slotCloseInstallDlg()
 
     // Reload package list
     initPackageInfo();
+
+    // Update Opie launcher links
+    QCopEnvelope e("QPE/System", "linkChanged(QString)");
+    QString lf = QString::null;
+    e << lf;
 }
 
 void MainWindow::slotConfigure()

@@ -114,7 +114,7 @@ private slots:
     // Actions menu action slots
     void slotUpdate();
     void slotUpgrade();
-//    void slotDownload();
+    void slotDownload();
     void slotApply();
     void slotCloseInstallDlg();
     void slotConfigure();

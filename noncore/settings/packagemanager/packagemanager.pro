@@ -13,6 +13,7 @@ SOURCES      = opackage.cpp        \
                packageinfodlg.cpp  \
                filterdlg.cpp       \
                promptdlg.cpp       \
+               entrydlg.cpp        \
                main.cpp
 HEADERS      = opackage.h        \
                oconfitem.h       \
@@ -23,7 +24,8 @@ HEADERS      = opackage.h        \
                installdlg.h      \
                packageinfodlg.h  \
                filterdlg.h       \
-               promptdlg.h
+               promptdlg.h       \
+               entrydlg.h
 
 DEFINES     += IPKG_LIB
 DEFINES     += HAVE_MKDTEMP

@@ -327,8 +327,13 @@ bool OIpkg::executeCommand( OPackage::Command command, QStringList *parameters, 
                 }
             };
             break;
-        //case OPackage::Download : ;
-        //    break;
+        case OPackage::Download : {
+                for ( QStringList::Iterator it = parameters->begin(); it != parameters->end(); ++it )
+                {
+                    ipkg_packages_download( &m_ipkgArgs, (*it) );
+                }
+            };
+            break;
         default : break;
     };
 
