@@ -53,9 +53,9 @@ MScanListView::MScanListView( QWidget* parent, const char* name )
 
     addColumn( tr( "Net/Station" ) );
     setColumnAlignment( 0, AlignLeft || AlignVCenter );
-    addColumn( tr( "B" ) );
+    addColumn( tr( "#" ) );
     setColumnAlignment( 1, AlignCenter );
-    addColumn( tr( "AP" ) );
+    addColumn( tr( "MAC" ) );
     setColumnAlignment( 2, AlignCenter );
     addColumn( tr( "Chn" ) );
     setColumnAlignment( 3, AlignCenter );
@@ -148,12 +148,12 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     else
     {
         s.sprintf( "(i) new network: '%s'", (const char*) essid );
+        //TODO send s to logwindow
         network = new MScanListItem( this, "network", essid, QString::null, 0, 0, 0 );
     }
 
 
     // insert new station as child from network
-
     // no essid to reduce clutter, maybe later we have a nick or stationname to display!?
 
     qDebug( "inserting new station %s", (const char*) macaddr );
@@ -170,6 +170,7 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     {
         s.sprintf( "(i) new adhoc station in '%s' [%d]", (const char*) essid, channel );
     }
+    //TODO send s to logwindow
 
 }
 
@@ -198,6 +199,17 @@ void MScanListView::addIfNotExisting( MScanListItem* network, QString addr, cons
     MScanListItem* station = new MScanListItem( network, type, /* network->text( col_essid ) */ "", addr, false, -1, -1 );
     if ( _manufacturerdb )
     station->setManufacturer( _manufacturerdb->lookup( addr ) );
+
+    QString s;
+    if ( type == "station" )
+    {
+        s.sprintf( "(i) new station in '%s' [??]", (const char*) network->text( col_essid ) );
+    }
+    else
+    {
+        s.sprintf( "(i) new wireless station in '%s' [??]", (const char*) network->text( col_essid ) );
+    }
+    //TODO send s to logwindow
 }
 
 

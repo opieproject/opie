@@ -102,40 +102,40 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     QMenuBar* mb = menuBar();
 
     QPopupMenu* fileSave = new QPopupMenu( mb );
-    fileSave->insertItem( "&Session...", this, SLOT( fileSaveSession() ) );
-    fileSave->insertItem( "&Text Log...", this, SLOT( fileSaveLog() ) );
-    fileSave->insertItem( "&Hex Log...", this, SLOT( fileSaveHex() ) );
+    fileSave->insertItem( tr( "&Session..." ), this, SLOT( fileSaveSession() ) );
+    fileSave->insertItem( tr( "&Text Log..." ), this, SLOT( fileSaveLog() ) );
+    fileSave->insertItem( tr( "&Hex Log..." ), this, SLOT( fileSaveHex() ) );
 
     QPopupMenu* fileLoad = new QPopupMenu( mb );
-    fileLoad->insertItem( "&Session...", this, SLOT( fileLoadSession() ) );
+    fileLoad->insertItem( tr( "&Session..." ), this, SLOT( fileLoadSession() ) );
     //fileLoad->insertItem( "&Log", this, SLOT( fileLoadLog() ) );
 
     QPopupMenu* file = new QPopupMenu( mb );
-    file->insertItem( "&New", this, SLOT( fileNew() ) );
-    id = file->insertItem( "&Load", fileLoad );
-    file->insertItem( "&Save", fileSave );
+    file->insertItem( tr( "&New" ), this, SLOT( fileNew() ) );
+    id = file->insertItem( tr( "&Load" ), fileLoad );
+    file->insertItem( tr( "&Save" ), fileSave );
     file->insertSeparator();
-    file->insertItem( "&Exit", qApp, SLOT( quit() ) );
+    file->insertItem( tr( "&Exit" ), qApp, SLOT( quit() ) );
 
     QPopupMenu* view = new QPopupMenu( mb );
-    view->insertItem( "&Configure..." );
+    view->insertItem( tr( "&Configure..." ) );
 
     QPopupMenu* sniffer = new QPopupMenu( mb );
-    sniffer->insertItem( "&Configure...", this, SLOT( showConfigure() ) );
+    sniffer->insertItem( tr( "&Configure..." ), this, SLOT( showConfigure() ) );
     sniffer->insertSeparator();
-    startID = sniffer->insertItem( "&Start", mw, SLOT( startClicked() ) );
+    startID = sniffer->insertItem( tr( "&Start" ), mw, SLOT( startClicked() ) );
     sniffer->setItemEnabled( startID, false );
-    stopID = sniffer->insertItem( "Sto&p", mw, SLOT( stopClicked() ) );
+    stopID = sniffer->insertItem( tr( "Sto&p" ), mw, SLOT( stopClicked() ) );
     sniffer->setItemEnabled( stopID, false );
 
     QPopupMenu* demo = new QPopupMenu( mb );
-    demo->insertItem( "&Add something", this, SLOT( demoAddStations() ) );
+    demo->insertItem( tr( "&Add something" ), this, SLOT( demoAddStations() ) );
 
-    id = mb->insertItem( "&File", file );
-    id = mb->insertItem( "&View", view );
+    id = mb->insertItem( tr( "&File" ), file );
+    id = mb->insertItem( tr( "&View" ), view );
     mb->setItemEnabled( id, false );
-    id = mb->insertItem( "&Sniffer", sniffer );
-    id = mb->insertItem( "&Demo", demo );
+    id = mb->insertItem( tr( "&Sniffer" ), sniffer );
+    id = mb->insertItem( tr( "&Demo" ), demo );
     mb->setItemEnabled( id, true );
 
     #ifdef QWS
@@ -155,7 +155,7 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     // setup status bar (for now only on X11)
 
     #ifndef QWS
-    statusBar()->message( "Ready." );
+    statusBar()->message( tr( "Ready." ) );
     #endif
 
     connect( mw, SIGNAL( startedSniffing() ), this, SLOT( changedSniffingState() ) );
@@ -230,9 +230,9 @@ QString WellenreiterMainWindow::getFileName( bool save )
     map.insert( tr("All"), QStringList() );
     QStringList text;
     text << "text/*";
-    map.insert(tr("Text"), text );
+    map.insert( tr("Text"), text );
     text << "*";
-    map.insert(tr("All"), text );
+    map.insert( tr("All"), text );
 
     QString str;
     if ( save )
@@ -351,7 +351,8 @@ void WellenreiterMainWindow::closeEvent( QCloseEvent* e )
 {
     if ( mw->isDaemonRunning() )
     {
-        QMessageBox::warning( this, "Wellenreiter/Opie", "Sniffing in progress!\nPlease stop sniffing before closing." );
+        QMessageBox::warning( this, "Wellenreiter/Opie",
+                              tr( "Sniffing in progress!\nPlease stop sniffing before closing." ) );
         e->ignore();
     }
     else

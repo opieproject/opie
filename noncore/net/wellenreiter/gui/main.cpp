@@ -55,9 +55,9 @@ int main( int argc, char **argv )
     // root check
     if ( getuid() )
     {
-        qWarning( "Wellenreiter: trying to run as non-root!" );
-        result = QMessageBox::warning( w, " - Wellenreiter II -  (non-root)", "You have started Wellenreiter II\n"
-          "as non-root. You will have\nonly limited functionality.\nProceed anyway?",
+        qWarning( QObject::tr( "Wellenreiter: trying to run as non-root!" ) );
+        result = QMessageBox::warning( w, " - Wellenreiter II -  (non-root)", QObject::tr( "You have started Wellenreiter II\n"
+          "as non-root. You will have\nonly limited functionality.\nProceed anyway?" ),
           QMessageBox::Yes, QMessageBox::No );
         if ( result == QMessageBox::No ) return -1;
     }
@@ -83,8 +83,8 @@ int main( int argc, char **argv )
     if ( line.contains( "dhcp" ) )
     {
         qWarning( "Wellenreiter: found dhcp process #%d", (*it).toInt() );
-        result = QMessageBox::warning( w, " - Wellenreiter II -  (dhcp)", "You have a dhcp client running.\n"
-          "This can severly limit scanning!\nShould I kill it for you?",
+        result = QMessageBox::warning( w, " - Wellenreiter II -  (dhcp)", QObject::tr( "You have a dhcp client running.\n"
+          "This can severly limit scanning!\nShould I kill it for you?" ),
           QMessageBox::Yes, QMessageBox::No );
         if ( result == QMessageBox::Yes )
         {

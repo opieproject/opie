@@ -168,11 +168,15 @@ void Wellenreiter::receivePacket(OPacket* p)
         OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
         netView()->addNewItem( type, essid, header->macAddress2().toString(), beacon->canPrivacy(), channel, 0 );
 
-        // do we have a prism header?
-        OPrismHeaderPacket* prism = static_cast<OPrismHeaderPacket*>( p->child( "Prism" ) );
-        if ( ds && prism )
-            graphwindow->traffic( ds->channel(), prism->signalStrength() );
-
+        // update graph window
+        if ( ds )
+        {
+            OPrismHeaderPacket* prism = static_cast<OPrismHeaderPacket*>( p->child( "Prism" ) );
+            if ( prism )
+                graphwindow->traffic( ds->channel(), prism->signalStrength() );
+            else
+                graphwindow->traffic( ds->channel(), 95 );
+        }
         return;
     }
 
@@ -259,7 +263,8 @@ void Wellenreiter::stopClicked()
     ( (QMainWindow*) parent() )->setCaption( "Wellenreiter II" );
 
     // message the user
-    QMessageBox::information( this, "Wellenreiter II", "Your wireless card\nshould now be usable again." );
+    QMessageBox::information( this, "Wellenreiter II",
+                              tr( "Your wireless card\nshould now be usable again." ) );
 
     sniffing = false;
     emit( stoppedSniffing() );
@@ -280,7 +285,8 @@ void Wellenreiter::startClicked()
 
     if ( ( interface == "" ) || ( cardtype == 0 ) )
     {
-        QMessageBox::information( this, "Wellenreiter II", "Your device is not\nproperly configured. Please reconfigure!" );
+        QMessageBox::information( this, "Wellenreiter II",
+                                  tr( "Your device is not\nproperly configured. Please reconfigure!" ) );
         return;
     }
 
@@ -297,7 +303,7 @@ void Wellenreiter::startClicked()
         case DEVTYPE_WLAN_NG: iface->setMonitoring( new OWlanNGMonitoringInterface( iface ) ); break;
         case DEVTYPE_HOSTAP: iface->setMonitoring( new OHostAPMonitoringInterface( iface ) ); break;
         case DEVTYPE_ORINOCO: iface->setMonitoring( new OOrinocoMonitoringInterface( iface ) ); break;
-        case DEVTYPE_MANUAL: QMessageBox::information( this, "Wellenreiter II", "Bring your device into\nmonitor mode now." ); break;
+        case DEVTYPE_MANUAL: QMessageBox::information( this, "Wellenreiter II", tr( "Bring your device into\nmonitor mode now." ) ); break;
         case DEVTYPE_FILE: qDebug( "Wellenreiter: Capturing from file '%s'", (const char*) interface ); break;
         default: assert( 0 ); // shouldn't reach this
     }
@@ -309,7 +315,8 @@ void Wellenreiter::startClicked()
             iface->setMonitorMode( true );
         if ( !iface->monitorMode() )
         {
-            QMessageBox::warning( this, "Wellenreiter II", "Can't set device into monitor mode." );
+            QMessageBox::warning( this, "Wellenreiter II",
+                                  tr( "Can't set device into monitor mode." ) );
             return;
         }
     }
@@ -317,7 +324,7 @@ void Wellenreiter::startClicked()
     // open pcap and start sniffing
     if ( cardtype != DEVTYPE_FILE )
     {
-        if ( configwindow->writeCaptureFile->isEnabled() )
+        if ( configwindow->writeCaptureFile->isEnabled() ) //FIXME: bug!?
         {
             QString dumpname( configwindow->captureFileName->text() );
             dumpname.append( '-' );
@@ -337,7 +344,8 @@ void Wellenreiter::startClicked()
 
     if ( !pcap->isOpen() )
     {
-        QMessageBox::warning( this, "Wellenreiter II", "Can't open packet capturer:\n" + QString(strerror( errno ) ));
+        QMessageBox::warning( this, "Wellenreiter II",
+                              tr( "Can't open packet capturer:\n" ) + QString(strerror( errno ) ));
         return;
     }
 
@@ -367,7 +375,7 @@ void Wellenreiter::startClicked()
     else
     {
         assert( parent() );
-        ( (QMainWindow*) parent() )->setCaption( "Wellenreiter II - replaying capture file..." );
+        ( (QMainWindow*) parent() )->setCaption( tr( "Wellenreiter II - replaying capture file..." ) );
     }
 }
 

@@ -20,8 +20,8 @@ MStatWindow::MStatWindow( QWidget * parent, const char * name, WFlags f )
            :QVBox( parent, name, f )
 {
     table = new OListView( this );
-    table->addColumn( "Protocol" );
-    table->addColumn( "Count" );
+    table->addColumn( tr( "Protocol" ) );
+    table->addColumn( tr( "Count" ) );
     table->setItemMargin( 2 );
 };
 
