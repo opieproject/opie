@@ -12,6 +12,10 @@ IRCSession::IRCSession(IRCServer *server) {
 }
 
 IRCSession::~IRCSession() {
+    /* We want this to get deleted automatically */
+    m_channels.setAutoDelete(TRUE);
+    m_people.setAutoDelete(TRUE);
+        
     delete m_parser;
     delete m_connection;
 }

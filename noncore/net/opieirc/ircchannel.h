@@ -47,6 +47,7 @@ class IRCChannel : public QObject {
     Q_OBJECT
 public:
     IRCChannel(QString channelname);
+    ~IRCChannel();
    
     void addPerson(IRCChannelPerson *person);
     void removePerson(IRCChannelPerson *person);

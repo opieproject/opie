@@ -13,6 +13,13 @@ QString IRCOutput::message() {
     return m_message;
 }
 
+QString IRCOutput::htmlMessage() {
+    QString htmlMessage =m_message.replace(QRegExp("&"), "&amp;");
+    htmlMessage = htmlMessage.replace(QRegExp(">"), "&gt;");
+    htmlMessage = htmlMessage.replace(QRegExp("<"), "&lt;");
+    return htmlMessage;
+}
+
 void IRCOutput::addParam(void *data) {
     m_parameters.append(data);
 }

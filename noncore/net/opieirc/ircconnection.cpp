@@ -60,6 +60,14 @@ void IRCConnection::dataReady() {
     while(m_socket->canReadLine()) {
         IRCMessage message(m_socket->readLine());
         if (!m_loggedIn && message.isNumerical() && message.commandNumber() == 1) {
+            /* Now autojoin all channels specified inside the server profile */
+            QStringList channels = QStringList::split(QChar(','), m_server->channels());
+            for (QStringList::Iterator it = channels.begin(); it != channels.end(); ++it) {
+                QString channelName = (*it).stripWhiteSpace();
+                if (channelName.startsWith("#")) {
+                    sendLine("JOIN "+ channelName); 
+                }
+            }
             m_loggedIn = TRUE;
             emit outputReady(IRCOutput(OUTPUT_CLIENTMESSAGE, tr("Successfully logged in.")));
         }

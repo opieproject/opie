@@ -28,8 +28,10 @@
 
 class IRCServer {
 public:
+    /* Initialize to the default values */
     IRCServer();
 
+    /* Setters */
     void setName(QString name);
     void setHostname(QString hostname);
     void setPort(int port);
@@ -37,7 +39,9 @@ public:
     void setPassword(QString password);
     void setNick(QString nick);
     void setRealname(QString realname);
+    void setChannels(QString channels);
 
+    /* Getters */
     QString hostname();
     QString name();
     unsigned short int port();
@@ -45,6 +49,7 @@ public:
     QString password();
     QString nick();
     QString realname();
+    QString channels();
 protected:
     QString             m_hostname;
     QString             m_name;
@@ -53,6 +58,7 @@ protected:
     QString             m_password;
     QString             m_nick;
     QString             m_realname;
+    QString             m_channels;
 };
 
 #endif /* __IRCSERVER_H */

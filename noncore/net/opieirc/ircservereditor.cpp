@@ -4,7 +4,7 @@
 #include "ircservereditor.h"
 
 IRCServerEditor::IRCServerEditor(IRCServer server, QWidget* parent, const char* name, bool modal = FALSE, WFlags f) : QDialog(parent, name, modal, f) {
-    QGridLayout *layout = new QGridLayout(this, 6, 2, 5, 5);
+    QGridLayout *layout = new QGridLayout(this, 7, 2, 5, 5);
     QLabel *label = new QLabel(tr("Profile name :"), this);
     m_name = new QLineEdit(server.name(), this);
     layout->addWidget(label, 0, 0);
@@ -29,6 +29,10 @@ IRCServerEditor::IRCServerEditor(IRCServer server, QWidget* parent, const char* 
     m_password = new QLineEdit(server.password(), this);
     layout->addWidget(label, 5, 0);
     layout->addWidget(m_password, 5, 1);
+    label = new QLabel(tr("Channels :"), this);
+    m_channels = new QLineEdit(server.channels(), this);
+    layout->addWidget(label, 6, 0);
+    layout->addWidget(m_channels, 6, 1);
     showMaximized();
 }
 
@@ -44,8 +48,18 @@ void IRCServerEditor::accept() {
         QMessageBox::critical(this, tr("Error"), tr("Nickname required"));
     else if (m_realname->text().length()==0)
         QMessageBox::critical(this, tr("Error"), tr("Realname required"));
-    else
+    else {
+        /* Now verify whether the channel list has a valid format */
+        QStringList channels = QStringList::split(QChar(','), m_channels->text());
+        for (QStringList::Iterator it = channels.begin(); it != channels.end(); ++it) {
+            QString channelName = (*it).stripWhiteSpace();
+            if (!channelName.startsWith("#")) {
+                QMessageBox::critical(this, tr("Error"), tr("The channel list needs to contain a\ncomma separated list of channel\n names which start with '#'"));
+                return;
+            }
+        }
         QDialog::accept();
+    }
 }
 
 IRCServer IRCServerEditor::getServer() {
@@ -57,5 +71,6 @@ IRCServer IRCServerEditor::getServer() {
     server.setRealname(m_realname->text());
     server.setUsername(m_nickname->text());
     server.setPassword(m_password->text());
+    server.setChannels(m_channels->text());
     return server;
 }

@@ -4,6 +4,8 @@ IRCServer::IRCServer() {
     m_port = 6667;
 }
 
+/* Setter implementations */
+
 void IRCServer::setHostname(QString hostname) {
     m_hostname = hostname;
 }
@@ -32,6 +34,12 @@ void IRCServer::setRealname(QString realname) {
     m_realname = realname;
 }
 
+void IRCServer::setChannels(QString channels) {
+    m_channels = channels;
+}
+
+/* Getter implementations */
+
 QString IRCServer::hostname() {
     return m_hostname;
 }
@@ -58,5 +66,9 @@ QString IRCServer::nick() {
 
 QString IRCServer::realname() {
     return m_realname;
+}
+
+QString IRCServer::channels() {
+    return m_channels;
 }
 

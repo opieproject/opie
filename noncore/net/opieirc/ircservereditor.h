@@ -39,6 +39,7 @@ protected:
     QLineEdit *m_nickname;
     QLineEdit *m_password;
     QLineEdit *m_realname;
+    QLineEdit *m_channels;
 };
 
 #endif /* __IRCSERVEREDITOR_H */

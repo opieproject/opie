@@ -39,6 +39,9 @@ public:
     /* Start the server session */
     void doConnect();
     void removeChannelTab(IRCChannelTab *tab);
+
+    /* Execute a user command such as /join */
+    void executeCommand(IRCTab *tab, QString line);
 protected:
     void appendText(QString text);
     IRCChannelTab *getTabForChannel(IRCChannel *channel);

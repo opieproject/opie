@@ -38,11 +38,23 @@ IRCChannelTab::~IRCChannelTab() {
 }
 
 void IRCChannelTab::processCommand() {
-    if (m_field->text().length()>0) {
-        session()->sendMessage(m_channel, m_field->text());
-        appendText("&lt;<font color=\"#dd0000\">"+m_parentTab->server()->nick()+"</font>&gt; "+m_field->text()+"<br>");
-        m_field->clear();
+    QString text = m_field->text();
+    if (text.length()>0) {
+        if (session()->isSessionActive()) {
+            if (text.startsWith("/") && !text.startsWith("//")) {
+                /* Command mode */
+                m_parentTab->executeCommand(this, text);;
+            } else {
+                if (session()->isSessionActive()) {
+                    session()->sendMessage(m_channel, m_field->text());
+                    appendText("&lt;<font color=\"#dd0000\">"+m_parentTab->server()->nick()+"</font>&gt; "+m_field->text()+"<br>");
+                }
+            }
+        } else {
+            appendText("<font color=\"#ff0000\">"+tr("Disconnected")+"</font><br>");
+        }
     }
+    m_field->clear();
 }
 
 void IRCChannelTab::toggleList() {
@@ -65,7 +77,11 @@ IRCSession *IRCChannelTab::session() {
 }
 
 void IRCChannelTab::remove() {
-    session()->part(m_channel);
+    if (session()->isSessionActive()) {
+        session()->part(m_channel);
+    } else {
+        m_mainWindow->killTab(this);
+    }
 }
 
 IRCChannel *IRCChannelTab::channel() {

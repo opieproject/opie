@@ -59,6 +59,7 @@ IRCServerList::IRCServerList(QWidget* parent, const char *name, bool modal, WFla
                 server.setPassword(m_config->readEntry("Password"));
                 server.setNick(m_config->readEntry("Nick"));
                 server.setRealname(m_config->readEntry("Realname"));
+                server.setChannels(m_config->readEntry("Channels"));
                 m_list->insertItem(new IRCListBoxServer(server));
             }
         }
@@ -114,6 +115,7 @@ int IRCServerList::exec() {
         m_config->writeEntry("Password", server.password());
         m_config->writeEntry("Nick", server.nick());
         m_config->writeEntry("Realname", server.realname());
+        m_config->writeEntry("Channels", server.channels());
     }
     return returncode;
 }

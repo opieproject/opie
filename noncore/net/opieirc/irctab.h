@@ -37,6 +37,7 @@ public:
     IRCTab(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
     virtual QString title() = 0;
     virtual IRCSession *session() = 0;
+    virtual void appendText(QString text) = 0;
 public slots:
     virtual void remove() = 0;
 protected:

@@ -26,6 +26,7 @@ IRCCTCPMessageParserStruct IRCMessageParser::ctcpParserProcTable[] = {
     { "ACTION",  FUNC(parseCTCPAction) },
     { 0 , 0 }
 };
+
 /* Lookup table for numerical commands */
 IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = { 
     { 1,   FUNC(parseNumerical001) },           // RPL_WELCOME
@@ -228,11 +229,13 @@ void IRCMessageParser::parseLiteralQuit(IRCMessage *message) {
         for (;it.current(); ++it) { 
             IRCChannelPerson *chanperson = it.current()->getPerson(mask.nick());
             it.current()->removePerson(chanperson);
+            delete chanperson;
         }
         m_session->removePerson(person);
         IRCOutput output(OUTPUT_QUIT, mask.nick() + tr(" has quit ") + "(" + message->param(0) + ")");
         output.addParam(person);
         emit outputReady(output);
+        delete person;
     } else {
          emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Unknown person quit - desynchronized?")));
     }

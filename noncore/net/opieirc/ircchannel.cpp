@@ -6,6 +6,11 @@ IRCChannel::IRCChannel(QString channelname) {
     m_channelname = channelname;
 }
 
+IRCChannel::~IRCChannel() {
+    /* We want this to get deleted */
+    m_people.setAutoDelete(TRUE);
+}
+
 QString IRCChannel::channelname() {
     return m_channelname;
 }

@@ -24,6 +24,7 @@ IRCMessage::IRCMessage(QString line) {
         m_command = temp.upper();
         m_allParameters = line.right(line.length() - m_command.length() - 1);
     }
+    
     /* Create a list of all parameters */
     while(!(stream.atEnd())) {
         stream >> temp;
@@ -36,6 +37,8 @@ IRCMessage::IRCMessage(QString line) {
             m_parameters << temp;
         }
     }
+
+    
     m_commandNumber = m_command.toInt(&m_isNumerical);
     /* Is this a CTCP command */
     if ((m_command == "PRIVMSG" || m_command == "NOTICE") && m_trailing.length()>0 && m_trailing.left(1) == QChar(1)) {
