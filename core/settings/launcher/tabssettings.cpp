@@ -47,6 +47,8 @@
 #include <qmessagebox.h>
 
 
+#define GLOBALID 	"_launchersettings_global_dummy_"
+
 
 TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 	: QWidget ( parent, name )
@@ -61,31 +63,43 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 
 	QWhatsThis::add ( m_list, tr( "foobar" ));
 	
-	QPushButton *p;
-	p = new QPushButton ( tr( "New" ), this );
-	lay-> addWidget ( p, 1, 1 );
-	connect ( p, SIGNAL( clicked ( )), this, SLOT( newClicked ( )));
+	QPushButton *p1, *p2, *p3;
+	p1 = new QPushButton ( tr( "New" ), this );
+	lay-> addWidget ( p1, 1, 1 );
+	connect ( p1, SIGNAL( clicked ( )), this, SLOT( newClicked ( )));
 
-	p = new QPushButton ( tr( "Edit" ), this );
-	lay-> addWidget ( p, 2, 1 );
-	connect ( p, SIGNAL( clicked ( )), this, SLOT( editClicked ( )));
+	p2 = new QPushButton ( tr( "Edit" ), this );
+	lay-> addWidget ( p2, 2, 1 );
+	connect ( p2, SIGNAL( clicked ( )), this, SLOT( editClicked ( )));
 
-	p = new QPushButton ( tr( "Delete" ), this );
-	lay-> addWidget ( p, 3, 1 );
-	connect ( p, SIGNAL( clicked ( )), this, SLOT( deleteClicked ( )));
+	p3 = new QPushButton ( tr( "Delete" ), this );
+	lay-> addWidget ( p3, 3, 1 );
+	connect ( p3, SIGNAL( clicked ( )), this, SLOT( deleteClicked ( )));
 
 	lay-> setRowStretch ( 4, 10 );
 
 	m_busyblink = new QCheckBox ( tr( "Enable blinking busy indicator" ), this );
 	lay-> addMultiCellWidget ( m_busyblink, 5, 5, 0, 1 );       
 
+	p1-> setEnabled ( false );
+	p3-> setEnabled ( false );
+
 	init ( );
+	
+	QWhatsThis::add ( m_list, tr( "Select the Launcher Tab you want to edit or delete." ));
+	QWhatsThis::add ( p1, tr( "Adds a new Tab to the Launcher." ) + QString ( "<center><br><i>not yet implemented</i><br>Please use the tabmanager</center>." ));
+	QWhatsThis::add ( p2, tr( "Opens a new dialog to customize the select Tab." ));
+	QWhatsThis::add ( p3, tr( "Deletes a Tab from the Launcher." ) + QString ( "<center><br><i>not yet implemented</i><br>Please use the tabmanager</center>." ));
+	QWhatsThis::add ( m_busyblink, tr( "Activate this, if you want a blinking busy indicator for starting applications in the Launcher." ));
 }
 
 void TabsSettings::init ( )
 {
 	AppLnkSet rootFolder( MimeType::appsFolderName ( ));
 	QStringList types = rootFolder. types ( );
+
+	m_list-> insertItem ( tr( "All Tabs" ));
+	m_ids << GLOBALID;
 	
 	for ( QStringList::Iterator it = types. begin ( ); it != types. end ( ); ++it ) {
 		m_list-> insertItem ( rootFolder. typePixmap ( *it ), rootFolder. typeName ( *it ));
@@ -117,6 +131,8 @@ void TabsSettings::readTabSettings ( Config &cfg )
 		tc. m_changed = false;
 
 		cfg. setGroup ( grp. arg ( *it ));
+		if ( *it == GLOBALID )
+			cfg. clearGroup ( );
 
 		QString view = cfg. readEntry ( "View", "Icon" );
 		if ( view == "List" ) // No tr
@@ -143,8 +159,25 @@ void TabsSettings::readTabSettings ( Config &cfg )
 			tc. m_font_weight = 50;
 			tc. m_font_italic = false;
 		}
+		
 		m_tabs [*it] = tc;
 	}
+
+	// if all tabs have the same config, then initialize the GLOBALID tab to these values
+	
+	TabConfig *first = 0;
+	bool same = true;
+	
+	for ( QStringList::Iterator it = m_ids. begin ( ); it != m_ids. end ( ); ++it ) {
+		if ( *it == GLOBALID )
+			continue;
+		else if ( !first ) 
+			first = &m_tabs [*it];
+		else
+			same &= ( *first == m_tabs [*it] );
+	}
+	if ( same )
+		m_tabs [GLOBALID] = *first;
 }
 
 
@@ -158,9 +191,10 @@ void TabsSettings::accept ( )
 	for ( QStringList::Iterator it = m_ids. begin ( ); it != m_ids. end ( ); ++it ) {
 		TabConfig &tc = m_tabs [*it];
 
-		cfg. setGroup ( grp. arg ( *it ));
-		if ( !tc. m_changed )
+		if ( !tc. m_changed || ( *it == GLOBALID ))
 			continue;
+			
+		cfg. setGroup ( grp. arg ( *it ));
 		switch ( tc. m_view ) {
 			case TabConfig::Icon:
 				cfg.writeEntry ( "View", "Icon" );
@@ -246,6 +280,13 @@ void TabsSettings::editClicked ( )
 	if ( d-> exec ( ) == QDialog::Accepted ) {
 		tc. m_changed = true;
 		m_tabs [m_ids [ind]] = tc;
+		
+		if ( m_ids [ind] == GLOBALID ) {
+			for ( QStringList::Iterator it = m_ids. begin ( ); it != m_ids. end ( ); ++it ) {
+				if ( *it != GLOBALID )
+					m_tabs [*it] = tc;
+			}	
+		}
 	}
 	
 	delete d;

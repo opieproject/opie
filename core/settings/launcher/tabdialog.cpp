@@ -38,6 +38,7 @@
 #include <qradiobutton.h>
 #include <qbuttongroup.h>
 #include <qpushbutton.h>
+#include <qwhatsthis.h>
 
 #include <opie/ofontselector.h>
 #include <opie/otabwidget.h>
@@ -262,7 +263,7 @@ private:
 
 
 TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig &tc, QWidget *parent, const char *name, bool modal, WFlags fl ) 
-	: QDialog ( parent, name, modal, fl ), m_tc ( tc )
+	: QDialog ( parent, name, modal, fl | WStyle_ContextHelp ), m_tc ( tc )
 {
 	setCaption ( tr( "Edit Tab" ));
 	
@@ -298,6 +299,8 @@ TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig
 	bgTypeClicked ( tc. m_bg_type );
 	m_fontselect-> setSelectedFont ( QFont ( tc. m_font_family, tc. m_font_size, tc. m_font_weight, tc. m_font_italic ));
 	fontClicked ( m_fontselect-> selectedFont ( ));
+
+	QWhatsThis::add ( sample, tr( "This is a rough preview of what the currently selected Tab will look like." ));
 }
 
 

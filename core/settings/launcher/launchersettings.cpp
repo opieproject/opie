@@ -36,7 +36,7 @@
 #include "taskbarsettings.h"
 
 
-LauncherSettings::LauncherSettings ( ) : QDialog ( 0, "LauncherSettings", false )
+LauncherSettings::LauncherSettings ( ) : QDialog ( 0, "LauncherSettings", false, WStyle_ContextHelp )
 {
 	setCaption ( tr( "Launcher Settings" ));
 

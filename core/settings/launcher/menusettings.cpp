@@ -64,8 +64,8 @@ MenuSettings::MenuSettings ( QWidget *parent, const char *name )
 	m_menutabs = new QCheckBox ( tr( "Show Launcher tabs in O-Menu" ), this );
 	lay-> addWidget ( m_menutabs );
 
-	QWhatsThis::add ( m_list, tr( "Check the applets that you want displayed in the O-Menu." ));
-	QWhatsThis::add ( m_menutabs, tr( "Adds the contents of the Launcher as menus in the O-Menu." ));
+	QWhatsThis::add ( m_list, tr( "Check the applets that you want to have included in the O-Menu." ));
+	QWhatsThis::add ( m_menutabs, tr( "Adds the contents of the Launcher Tabs as menus in the O-Menu." ));
 
 	connect ( m_list, SIGNAL( clicked ( QListViewItem * )), this, SLOT( appletChanged ( )));
 
