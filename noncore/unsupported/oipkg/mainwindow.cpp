@@ -43,7 +43,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   setCentralWidget( listViewPackages );
   listViewPackages->addList( tr("feeds"), &packageListServers );
   listViewPackages->addList( tr("ipkgfind"), &packageListSearch );
-//listViewPackages->addList( tr("documents"), &packageListDocLnk );
+listViewPackages->addList( tr("documents"), &packageListDocLnk );
   ipkg = new PmIpkg( settings, this );
   packageListServers.setSettings( settings );
   packageListSearch.setSettings( settings );
@@ -52,7 +52,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   packageListServers.update();
 	pvDebug(9,"packageListDocLnk.update");
  	pvDebug(0,"no UPDATE of DocLnk");
-//  packageListDocLnk.update();
+  packageListDocLnk.update();
 	pvDebug(9,"makeMenu");
   makeMenu();	
   makeChannel();
@@ -292,7 +292,7 @@ void MainWindow::runIpkg()
 {
   packageListServers.allPackages();
   ipkg->loadList( &packageListSearch );
-//ipkg->loadList( &packageListDocLnk );
+	ipkg->loadList( &packageListDocLnk );
   ipkg->loadList( &packageListServers );
   ipkg->commit();
   ipkg->clearLists();
@@ -309,11 +309,11 @@ void MainWindow::updateList()
 	packageListServers.clear();
 	packageListSearch.clear();
 
-//  packageListDocLnk.clear();
+  packageListDocLnk.clear();
   ipkg->update();
   packageListServers.update();
   packageListSearch.update();
-//  packageListDocLnk.update();
+  packageListDocLnk.update();
 }
 
 void MainWindow::filterList()
