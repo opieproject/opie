@@ -360,7 +360,7 @@ void StartMenu::loadApplets()
 	    	applet-> id = launchMenu-> insertItem ( applet-> iface-> icon ( ), applet-> iface-> text ( ) );
         applets.insert ( applet-> id, new MenuApplet(*applet));
     }
-    delete xapplets;
+    delete [] xapplets;
     
     if ( sepId && ( launchMenu-> idAt ( launchMenu-> count ( ) - 1 ) == sepId )) { // no applets
     	launchMenu-> removeItem ( sepId );

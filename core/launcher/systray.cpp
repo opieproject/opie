@@ -128,7 +128,7 @@ void SysTray::addApplets()
 	applet->applet = applet->iface->applet( this );
 	appletList.append(*applet);
     }
-    delete applets;
+    delete [] applets;
 #else
     TaskbarApplet applet;
     applet.iface = new ClockAppletImpl();
