@@ -132,7 +132,15 @@ QString Package::installName()
 
 bool Package::installed()
 {
-  if (_status.contains("installed")) return true;
+  if (_status.contains("installed"))
+  {
+   	 if (_status.contains("not-installed"))
+     {
+       _toProcess = true;
+       return false;
+     }
+     else return true;
+  }
   else
 	if (_versions)
   {

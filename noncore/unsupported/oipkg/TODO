@@ -1,3 +1,4 @@
+* check for networt before installing from network
 * Settings Class
 * parse "to install" and "to remove" from status
 * install local file dialog
