@@ -85,8 +85,12 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
                                 0, 0, this );
     editAccounts->addTo( settingsMenu );
 
-    QWidget *view = new QWidget( this );
-    setCentralWidget( view );
+    //setCentralWidget( view );
+
+    QVBox* wrapperBox = new QVBox( this );
+    setCentralWidget( wrapperBox );
+
+    QWidget *view = new QWidget( wrapperBox );
 
     layout = new QBoxLayout ( view, QBoxLayout::LeftToRight );
 
@@ -94,7 +98,6 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     folderView->header()->hide();
     folderView->setRootIsDecorated( true );
     folderView->addColumn( tr( "Mailbox" ) );
-    //folderView->hide();
 
     layout->addWidget( folderView );
 
@@ -107,10 +110,10 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     mailView->setAllColumnsShowFocus(true);
     mailView->setSorting(-1);
 
-    statusWidget = new StatusWidget( view );
+    statusWidget = new StatusWidget( wrapperBox );
+    statusWidget->hide();
 
     layout->addWidget( mailView );
-    layout->addWidget( statusWidget );
     layout->setStretchFactor( folderView, 1 );
     layout->setStretchFactor( mailView, 2 );
 
