@@ -164,6 +164,7 @@ bool OTodoAccessXML::load() {
     return true;
 }
 bool OTodoAccessXML::reload() {
+    m_events.clear();
     return load();
 }
 bool OTodoAccessXML::save() {
