@@ -25,6 +25,7 @@ Obex::~Obex() {
 }
 void Obex::receive()  {
     m_receive = true;
+    m_outp = QString::null;
     qWarning("Receive" );
     m_rec = new OProcess();
     *m_rec << "irobex_palm3";
@@ -148,9 +149,17 @@ QString Obex::parseOut(     ){
   QStringList::Iterator it;
   for (it = list.begin(); it != list.end(); ++it ) {
     if ( (*it).startsWith("Wrote"  ) ) {
-      QStringList pathes = QStringList::split(' ', (*it) );
-      path = pathes[1];
-      qWarning("path %s", path.latin1() );
+        int pos = (*it).findRev('(' );
+        if ( pos > 0 ) {
+            qWarning( "%d %s", pos,  (*it).mid(6 ).latin1() ) ;
+            qWarning("%d %d",  (*it).length(),  (*it).length()-pos );
+
+            path = (*it).remove( pos, (*it).length() - pos );
+            qWarning("%s",  path.latin1() );
+            path = path.mid(6 );
+            path = path.stripWhiteSpace();
+            qWarning("path %s", path.latin1() );
+        }
     }
   }
   return path;
