@@ -74,6 +74,8 @@ InputMethods::InputMethods( QWidget *parent ) :
 {
     method = NULL;
 
+	setBackgroundMode ( PaletteBackground );
+
     QHBoxLayout *hbox = new QHBoxLayout( this );
 
     kbdButton = new QToolButton( this );

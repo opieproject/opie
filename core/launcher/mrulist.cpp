@@ -40,7 +40,7 @@ QList<AppLnk>	*MRUList::task = NULL;
 MRUList::MRUList( QWidget *parent )
        : QFrame( parent ), selected(-1), oldsel(-1)
 {
-    setBackgroundMode( PaletteButton );
+    setBackgroundMode( PaletteBackground );
     if (!MRUListWidgets)
 	MRUListWidgets = new QList<MRUList>;
     if (!task)
@@ -203,7 +203,8 @@ void MRUList::paintEvent( QPaintEvent * )
     int y = (height() - 14) / 2;
     int i = 0;
 
-    p.fillRect( 0, 0, width(), height(), colorGroup().background() );
+//    p.fillRect( 0, 0, width(), height(), colorGroup().background() );
+	erase ( );
 
     if ( task ) {
 	QListIterator<AppLnk> it( *task );
