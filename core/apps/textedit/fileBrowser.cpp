@@ -53,27 +53,27 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
 
 //    getMimeTypes();
 
-    mimeType =  mimeFilter;
-    MimeType mt( mimeType);
+//     mimeType =  mimeFilter;
+//     MimeType mt( mimeType);
 
-    if( mt.extension().isEmpty()) {
+//     if( mt.extension().isEmpty()) {
 
-        QStringList filterList;
-        filterList=QStringList::split(";",mimeFilter,FALSE);
+//         QStringList filterList;
+//         filterList=QStringList::split(";",mimeFilter,FALSE);
 
-        for ( QStringList::Iterator it = filterList.begin(); it != filterList.end(); ++it ) {
-            printf( "%s \n", (*it).latin1() );
-        }
+//         for ( QStringList::Iterator it = filterList.begin(); it != filterList.end(); ++it ) {
+//             printf( "%s \n", (*it).latin1() );
+//         }
 
-        filterStr = mimeFilter.right(mimeFilter.length() - mimeFilter.find("/",0,TRUE) - 1);// "*";
+//         filterStr = mimeFilter.right(mimeFilter.length() - mimeFilter.find("/",0,TRUE) - 1);// "*";
     
-        qDebug(filterStr);
-    } else {
+//         qDebug(filterStr);
+//     } else {
         filterStr = "*."+ mt.extension();
 //      qDebug("description "+mt.description());
 //      qDebug( "id "+mt.id());
 //      qDebug("extension "+mt.extension());
-    }
+//    }
 //      channel = new QCopChannel( "QPE/fileDialog", this );
 //      connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
 //         this, SLOT(receive(const QCString&, const QByteArray&)) );
