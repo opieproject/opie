@@ -4,7 +4,7 @@ Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-oipkg, opie-base, task-opie-pim, opie-multikey, opie-handwriting, opie-batteryapplet-ipaq, opie-clockapplet, opie-volumeapplet, opie-opiealarm, opie-clipboardapplet, opie-advancedfm, opie-calculator, opie-citytime, opie-clock, opie-embeddedkonsole, opie-handwriting, opie-irdaappalet, opie-launcher-settings, opie-light-and-power, opie-appearance, opie-login, opie-opiealarm, opie-qpdf, opie-showimg, opie-solitaire, opie-sysinfo, opie-textedit, opie-systemtime, opie-cardmon, opie-backup, opie-networksetup
+Depends: opie-oipkg, opie-base, task-opie-pim, opie-multikey, opie-handwriting, opie-batteryapplet-ipaq, opie-clockapplet, opie-volumeapplet, opie-opiealarm, opie-clipboardapplet, opie-advancedfm, opie-calculator, opie-citytime, opie-clock, opie-embeddedkonsole, opie-handwriting, opie-irdaapplet, opie-launcher-settings, opie-light-and-power, opie-appearance, opie-login, opie-opiealarm, opie-qpdf, opie-showimg, opie-solitaire, opie-sysinfo, opie-textedit, opie-systemtime, opie-cardmon, opie-backup, opie-networksetup
 Description: Bootstrap Opie environment
  A complete GUI environment for handhelds.
  You will probably want to install one of the opie-i18n-* packages.
