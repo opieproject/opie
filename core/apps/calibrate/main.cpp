@@ -23,20 +23,24 @@
 #include <qfile.h>
 #include <qpe/qpeapplication.h>
 
+#ifdef QWS
+#include <qwindowsystem_qws.h>
+#endif
+
 int main( int argc, char ** argv )
 {
     QPEApplication a( argc, argv );
     int retval = 0;
 
-#if defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
-    if ( !QFile::exists( "/etc/pointercal" ) ) {
+#ifdef QWS
+    if ( QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
+#endif
 	// Make sure calibration widget starts on top.
-	Calibrate *cal = new Calibrate;
-        a.setMainWidget(cal);
-	a.showMainWidget(cal);
-	retval = a.exec();
-	delete cal;
+	Calibrate cal;
+        a.setMainWidget(&cal);
+	a.showMainWidget(&cal);
+	return a.exec();
+#ifdef QWS
     }
 #endif
-    return retval;
 }

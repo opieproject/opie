@@ -17,7 +17,6 @@ HEADERS		= background.h \
 		  shutdownimpl.h \
 		  launcher.h \
 		  launcherview.h \
-		  ../../core/apps/calibrate/calibrate.h \
 		  startmenu.h \
 		  transferserver.h \
 		  qcopbridge.h \
@@ -58,7 +57,6 @@ SOURCES		= background.cpp \
 		  shutdownimpl.cpp \
 		  launcher.cpp \
 		  launcherview.cpp \
-		  ../../core/apps/calibrate/calibrate.cpp \
 		  transferserver.cpp \
 		  packageslave.cpp \
 		irserver.cpp \
@@ -94,8 +92,6 @@ SOURCES		= background.cpp \
 INTERFACES	= syncdialog.ui
 INCLUDEPATH += ../../include
 DEPENDPATH	+= ../../include .
-INCLUDEPATH += ../../core/apps/calibrate
-DEPENDPATH	+= ../../core/apps/calibrate
 INCLUDEPATH += ../../rsync
 DEPENDPATH	+= ../../rsync
 TARGET		= qpe
