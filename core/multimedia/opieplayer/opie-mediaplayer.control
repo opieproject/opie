@@ -1,0 +1,9 @@
+Files: bin/opieplayer pics/opieplayer apps/Applications/opieplayer.desktop plugins/codecs/libmpeg3plugin.so plugins/codecs/libmpeg3plugin.so.1 plugins/codecs/libmpeg3plugin.so.1.0 plugins/codecs/libmpeg3plugin.so.1.0.0
+Priority: optional
+Section: opie/applications
+Maintainer: L.J.Potter <ljp@llornkcor.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: The Opie media player
+ The mediaplayer for Opie. It plays mp3, mpeg, and wav.
