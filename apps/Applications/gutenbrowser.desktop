@@ -3,4 +3,4 @@ Exec=gutenbrowser
 Icon=gutenbrowser/Gutenbrowser
 Type=Application
 Name=Gutenbrowser
-MimeType=text/*.gtn
+MimeType=text/*.gtn;guten/plain
