@@ -10,10 +10,9 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
-#include <qpe/qpeapplication.h>
 
 #include "formatter.h"
 
-#include <opie/oapplicationfactory.h>
+#include <opie2/oapplicationfactory.h>
 
 OPIE_EXPORT_APP( OApplicationFactory<FormatterApp> )
