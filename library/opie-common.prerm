@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ "$1" == "upgrade" ] && exit 1
+
+rm -f /home/QtPalmtop
