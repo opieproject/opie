@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.4 2002-02-15 02:19:03 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.5 2002-02-15 02:36:29 llornkcor Exp $
  */
 
 #include <sys/utsname.h>
@@ -242,7 +242,7 @@ int VMemo::openDSP()
   Config cfg("Sound");
   cfg.setGroup("Record");
 
-  speed = cfg.readNumEntry("SampleRate", 11025);
+  speed = cfg.readNumEntry("SampleRate", 22050);
   channels = cfg.readNumEntry("Stereo", 1) ? 2 : 1; // 1 = stereo(2), 0 = mono(1)
   if (cfg.readNumEntry("SixteenBit", 1)==1)
   {
