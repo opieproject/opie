@@ -49,6 +49,7 @@ enum OModel {
 	Model_iPAQ_H37xx    = ( Model_iPAQ | 0x000004 ),
 	Model_iPAQ_H38xx    = ( Model_iPAQ | 0x000008 ),
 	Model_iPAQ_H39xx    = ( Model_iPAQ | 0x000010 ),
+	Model_iPAQ_H5xxx    = ( Model_iPAQ | 0x000011 ),
 
 	Model_Zaurus        = ( 2 << 24 ),
 
