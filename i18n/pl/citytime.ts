@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>&lt;location 5&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;location 5&gt;</translation>
     </message>
     <message>
         <source>&lt;location 2&gt;</source>

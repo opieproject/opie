@@ -176,6 +176,10 @@
         <source>New version, old version installed</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>documents</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PackageListView</name>

@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>KJumpX</source>
-        <translation>KJumpX</translation>
+        <translation type="obsolete">KJumpX</translation>
     </message>
 </context>
 </TS>

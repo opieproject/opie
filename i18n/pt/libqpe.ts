@@ -500,7 +500,7 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation type="unfinished"></translation>
+        <translation>Esposa:</translation>
     </message>
     <message>
         <source>Birthday: </source>
@@ -652,7 +652,7 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Esposa</translation>
     </message>
     <message>
         <source>Gender</source>
