@@ -48,6 +48,8 @@ SSHKeysApp::SSHKeysApp( QWidget* parent,  const char* name, WFlags fl )
 
 	connect(&addprocess, SIGNAL(receivedStdout(OProcess*,char*,int)),
 		this, SLOT(log_sshadd_output(OProcess*,char*,int)));
+	connect(&addprocess, SIGNAL(receivedStderr(OProcess*,char*,int)),
+		this, SLOT(log_sshadd_output(OProcess*,char*,int)));
 	connect(&addprocess, SIGNAL(processExited(OProcess*)),
 		this, SLOT(ssh_add_exited(OProcess*)));
 
@@ -87,6 +89,8 @@ void SSHKeysApp::doRefreshListButton()
 		
 	connect(&sshadd_process, SIGNAL(receivedStdout(OProcess*,char*,int)),
 		this, SLOT(get_list_keys_output(OProcess*,char*,int)));
+	connect(&sshadd_process, SIGNAL(receivedStderr(OProcess*,char*,int)),
+		this, SLOT(log_sshadd_output(OProcess*,char*,int)));
 
 	keystate = KeySize;
 	incoming_keyname="";
@@ -101,7 +105,6 @@ void SSHKeysApp::doRefreshListButton()
 		return;
 	}
 	if (sshadd_process.exitStatus() == 2) {
-		log_text(tr("Connection to ssh-agent failed"));
 		setEnabled(FALSE);
 	}
 }
@@ -188,9 +191,8 @@ void SSHKeysApp::ssh_add_exited(OProcess *proc)
 
 	doRefreshListButton();
 	setEnabled(TRUE);
-	if (proc->exitStatus()) {
-		
-		log_text(QString(tr("ssh-add failed")));
+	if (proc->exitStatus() == 2) {
+		setEnabled(FALSE);
 	}
 }
 
@@ -238,6 +240,8 @@ void SSHKeysApp::doRemoveAllButton()
 	OProcess sshadd_process;
 
 	connect(&sshadd_process, SIGNAL(receivedStdout(OProcess*,char*,int)),
+		this, SLOT(log_sshadd_output(OProcess*,char*,int)));
+	connect(&sshadd_process, SIGNAL(receivedStderr(OProcess*,char*,int)),
 		this, SLOT(log_sshadd_output(OProcess*,char*,int)));
 
 	log_text(tr("Running ssh-add -D"));
