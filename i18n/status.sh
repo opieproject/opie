@@ -1,15 +1,18 @@
 #!/bin/sh
 lang=`basename ${1} 2>/dev/null | tr -d '/'`
+[ "x${2}x" = "xunfinishedx" ] && unfinishedonly=y
 
 if [ "x${lang}x" = "xx" ]; then
-	echo "Usage: `basename ${0}` XX"
-	echo "       with XX as a languagecode or \"all\" for all languagecodes."
+	echo "Usage: `basename ${0}` <XX> [unfinished]"
+	echo "       with <XX> as a languagecode or \"all\" for all languagecodes."
+	echo "       If you specify 'unfinished' after the languagecode,"
+	echo "       only ts-files with unfinished strings will be shown."
 	exit 1
 else
 	case "${lang}" in
 	"all")
 		clear
-		printf "\ni18n Statistics for ALL languagecode\n"
+		printf "\ni18n Statistics for ALL languagecodes\n"
 		lang="."
 		;;
 	"unmaintained"|"xx"|"en")
@@ -18,7 +21,7 @@ else
 		;;
 	*)
 		if [ ! -d "${lang}" ]; then
-			echo "Specified languagecode not avaiable."
+			echo "Specified languagecode not available."
 			exit 1
 		fi
 		clear
@@ -32,7 +35,9 @@ else
 			strs=`grep -c 'translation' ${file}`
 			unfi=`grep -c 'type=\"unfinished\"' ${file}`
 			obso=`grep -c 'type=\"obsolete\"' ${file}`
-			printf "%3s %3s %3s %s\n" "${strs}" "${unfi}" "${obso}" "${file}"
+			if [ ${unfi} -gt 0 -o "x${unfinishedonly}x" = "xx" ]; then
+				printf "%3s %3s %3s %s\n" "${strs}" "${unfi}" "${obso}" "${file}"
+			fi
 		done
 		;;
 	esac
