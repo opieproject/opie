@@ -106,11 +106,11 @@
     </message>
     <message>
         <source>Received a CTCP PING from </source>
-        <translation>CTCP PING erhalten von</translation>
+        <translation>CTCP PING erhalten von </translation>
     </message>
     <message>
         <source>Received a CTCP VERSION from </source>
-        <translation>CTCP VERSION erhalten von</translation>
+        <translation>CTCP VERSION erhalten von </translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
