@@ -157,7 +157,8 @@ bool Ipkg :: runIpkg( )
 
     delete dependantPackages;
     
-    emit outputText( QString( "Finished - status=" ) + (ret ? "success" : "failure") );
+//    emit outputText( QString( "Finished - status=" ) + (ret ? "success" : "failure") );
+    emit outputText( "Finished" );
     emit outputText( "" );
     return ret;
 }
