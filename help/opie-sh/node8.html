@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-1 (1.68)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>Buttons</TITLE>
+<META NAME="description" CONTENT="Buttons">
+<META NAME="keywords" CONTENT="opie-sh-howto">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="opie-sh-howto.css">
+
+<LINK REL="next" HREF="node9.html">
+<LINK REL="previous" HREF="node7.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node9.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html134"
+  HREF="node9.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/local/share/lib/latex2html/icons/next.gif"></A> 
+<A NAME="tex2html130"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/local/share/lib/latex2html/icons/up.gif"></A> 
+<A NAME="tex2html124"
+  HREF="node7.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/local/share/lib/latex2html/icons/prev.gif"></A> 
+<A NAME="tex2html132"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/local/share/lib/latex2html/icons/contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html135"
+  HREF="node9.html">Icons</A>
+<B> Up:</B> <A NAME="tex2html131"
+  HREF="node6.html">Usage</A>
+<B> Previous:</B> <A NAME="tex2html125"
+  HREF="node7.html">General</A>
+ &nbsp <B>  <A NAME="tex2html133"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00031200000000000000">
+Buttons</A>
+</H3>
+You can specify up to three buttons to appear on the bottom of the dialog.  If you do not specify any buttons, there will be a single ``Ok'' button for the user to press.  To specify the text of a button, use ``-n'', where n is the number of the button whose text you want to specify, starting with 0, and ending at 2.  If you do not specify the text of a button, it will not be displayed.  The number of the button the user presses is the return code of the program (if the user presses either of the built-in buttons on the top of the dialog, you will get a return code of -1).  For example, the following will display a message box with two buttons, ``Ok'' and ``Cancel''.  If the user presses ``Ok'', the return code is 0, if they press ``Cancel'', it is 1:
+
+<P>
+<PRE>
+opie-sh -m -0 "Ok" -1 "Cancel"
+</PRE>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2002-05-15
+</ADDRESS>
+</BODY>
+</HTML>

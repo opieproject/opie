@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-1 (1.68)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>File input</TITLE>
+<META NAME="description" CONTENT="File input">
+<META NAME="keywords" CONTENT="opie-sh-howto">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="opie-sh-howto.css">
+
+<LINK REL="previous" HREF="node16.html">
+<LINK REL="up" HREF="node15.html">
+<LINK REL="next" HREF="node18.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html245"
+  HREF="node18.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/local/share/lib/latex2html/icons/next.gif"></A> 
+<A NAME="tex2html241"
+  HREF="node15.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/local/share/lib/latex2html/icons/up.gif"></A> 
+<A NAME="tex2html237"
+  HREF="node16.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/local/share/lib/latex2html/icons/prev.gif"></A> 
+<A NAME="tex2html243"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/local/share/lib/latex2html/icons/contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html246"
+  HREF="node18.html">List box input</A>
+<B> Up:</B> <A NAME="tex2html242"
+  HREF="node15.html">List input</A>
+<B> Previous:</B> <A NAME="tex2html238"
+  HREF="node16.html">Special flags</A>
+ &nbsp <B>  <A NAME="tex2html244"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00053200000000000000">
+File input</A>
+</H3>
+The list input dialog requires that you give it a file input, with the ``-F'' flag.  If you do not specify a file, it will use standard input (note: if you specify ``-F'' without a filename, which isnt necessary, it must be the last argument.  This will be fixed shortly).  The format of this file is one entry per line, blank lines should be ignored.  Using stdin is just like using stdin for the file viewer.
+
+<P>
+Example input file:
+<PRE>
+item1
+item2
+item3
+item4
+</PRE>
+
+<P>
+Example command line:
+<PRE>
+opie-sh -i -l -L "Label" -t "Title" -F filename
+</PRE>
+
+<P>
+<BR><HR>
+<ADDRESS>
+
+2002-05-15
+</ADDRESS>
+</BODY>
+</HTML>

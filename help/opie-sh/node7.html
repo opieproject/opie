@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with LaTeX2HTML 2002-1 (1.68)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>General</TITLE>
+<META NAME="description" CONTENT="General">
+<META NAME="keywords" CONTENT="opie-sh-howto">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="LaTeX2HTML v2002-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="opie-sh-howto.css">
+
+<LINK REL="next" HREF="node8.html">
+<LINK REL="previous" HREF="node6.html">
+<LINK REL="up" HREF="node6.html">
+<LINK REL="next" HREF="node8.html">
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<A NAME="tex2html122"
+  HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/local/share/lib/latex2html/icons/next.gif"></A> 
+<A NAME="tex2html118"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/local/share/lib/latex2html/icons/up.gif"></A> 
+<A NAME="tex2html112"
+  HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/local/share/lib/latex2html/icons/prev.gif"></A> 
+<A NAME="tex2html120"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/local/share/lib/latex2html/icons/contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html123"
+  HREF="node8.html">Buttons</A>
+<B> Up:</B> <A NAME="tex2html119"
+  HREF="node6.html">Usage</A>
+<B> Previous:</B> <A NAME="tex2html113"
+  HREF="node6.html">Usage</A>
+ &nbsp <B>  <A NAME="tex2html121"
+  HREF="node1.html">Contents</A></B> 
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+
+<H3><A NAME="SECTION00031100000000000000">
+General</A>
+</H3>
+These flags modify what the message box looks like in general.
+
+<P>
+The message is what tells the user what is going on, or asks them a question, it is specified with the ``-M'' flag, and there is no default.  The message text can be formated with html tags, or as plain text.  It is the most important part of the message dialog, so dont forget it.  Examples:
+
+<P>
+<PRE>
+opie-sh -m -M "Here is a simple message"
+
+opie-sh -m -M "Here is a &lt;br&gt;multiline message"
+</PRE>
+
+<P>
+The title is what is displayed in the dialog box's title bar, and is specified with the ``-t'' flag.  It can be a shortened version of the message, or the name of the program, and should only be a word or two.  For example: ``Warning'' or ``Example App''.  Example:
+
+<P>
+<PRE>
+opie-sh -m -t "Title"
+</PRE>
+
+<P>
+The ``-g'' flag is used to disable the ``fullscreen'' feature.  It can be used if you dont want the dialog to cover up what else is running (for instance, if you are running the script from another, regular opie application), or if you are running the app with its own background (see the tips section).  Without it, the dialog will have another fullscreen window drawn underneath it, with the same title as the dialog.  Example:
+
+<P>
+<PRE>
+opie-sh -m -g
+</PRE>
+
+<P>
+<HR>
+<!--Navigation Panel-->
+<A NAME="tex2html122"
+  HREF="node8.html">
+<IMG WIDTH="37" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next"
+ SRC="file:/usr/local/share/lib/latex2html/icons/next.gif"></A> 
+<A NAME="tex2html118"
+  HREF="node6.html">
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up"
+ SRC="file:/usr/local/share/lib/latex2html/icons/up.gif"></A> 
+<A NAME="tex2html112"
+  HREF="node6.html">
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous"
+ SRC="file:/usr/local/share/lib/latex2html/icons/prev.gif"></A> 
+<A NAME="tex2html120"
+  HREF="node1.html">
+<IMG WIDTH="65" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="contents"
+ SRC="file:/usr/local/share/lib/latex2html/icons/contents.gif"></A>  
+<BR>
+<B> Next:</B> <A NAME="tex2html123"
+  HREF="node8.html">Buttons</A>
+<B> Up:</B> <A NAME="tex2html119"
+  HREF="node6.html">Usage</A>
+<B> Previous:</B> <A NAME="tex2html113"
+  HREF="node6.html">Usage</A>
+ &nbsp <B>  <A NAME="tex2html121"
+  HREF="node1.html">Contents</A></B> 
+<!--End of Navigation Panel-->
+<ADDRESS>
+
+2002-05-15
+</ADDRESS>
+</BODY>
+</HTML>
