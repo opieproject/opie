@@ -940,6 +940,6 @@ int OProcess::processPID( const QString& process )
     else
     {
         //qDebug( "process '%s' not found", (const char*) process );
-        return -1;
+        return 0;
     }
 }
