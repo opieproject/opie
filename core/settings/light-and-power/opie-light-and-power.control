@@ -1,9 +1,0 @@
-Files: bin/light-and-power apps/Settings/Light.desktop
-Priority: optional
-Section: opie/settings
-Maintainer: Warwick Allison <warwick@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Light and Power settings dialog
- For the Opie environment.
