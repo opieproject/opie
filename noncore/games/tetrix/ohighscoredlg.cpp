@@ -51,20 +51,20 @@ void OHighscore::getList()
 
 	for ( int i = 1 ; i < 11 ; i++ )
 	{
-		cfg.setGroup( QString::number( i ) );
-		int temp = cfg.readNumEntry( "Points" );
- 		
-		t_playerData *pPlayerData = new t_playerData;
-		pPlayerData->sName = cfg.readEntry( "Name" );
-		pPlayerData->points = temp;
+		if ( cfg.hasGroup( QString::number( i ) ) )
+		{
+			cfg.setGroup( QString::number( i ) );
+			int temp = cfg.readNumEntry( "Points" );
 
-		playerData.push_back( pPlayerData );
+			t_playerData *pPlayerData = new t_playerData;
+			pPlayerData->sName = cfg.readEntry( "Name" );
+			pPlayerData->points = temp;
 
-//X 		qDebug( QString::number( i ) );
-//X 		qDebug( pPlayerData->sName );
-//X 		qDebug( QString::number( pPlayerData->points ) );
-		
-		if ( (temp < lowest) ) lowest = temp;
+			playerData.push_back( pPlayerData );
+
+			if ( (temp < lowest) ) lowest = temp;
+		}
+		else qDebug( "Grupper gibts überhaupt nicht" );
 	}
 	//lowest contains the lowest value in the highscore
 }
@@ -136,9 +136,9 @@ OHighscoreDialog::OHighscoreDialog(OHighscore *highscore, QWidget *parent, const
 	vbox_layout = new QVBoxLayout( this, 4 , 4 );
 	list = new QListView( this );
 	list->setSorting( -1 );
-	list->addColumn( "Position" );
-	list->addColumn( "Name" );
-	list->addColumn( "Zahl" );
+	list->addColumn( tr( "Position" ));
+	list->addColumn( tr( "Name" ));
+	list->addColumn( tr( "Points" ));
 
 	createHighscoreListView();
 	
@@ -148,16 +148,16 @@ OHighscoreDialog::OHighscoreDialog(OHighscore *highscore, QWidget *parent, const
 
 void OHighscoreDialog::createHighscoreListView()
 {
-	int pos = 1;
-	std::list<t_playerData*>::iterator iListe = hs_->playerData.begin();
+	int pos = 10;
+	std::list<t_playerData*>::reverse_iterator iListe = hs_->playerData.rbegin();
 	
-	for ( ; iListe != hs_->playerData.end() ; iListe++ )
+	for ( ; iListe != hs_->playerData.rend() ; ++iListe )
 	{
-		QListViewItem *item = new QListViewItem(  list );
+		QListViewItem *item = new QListViewItem( list );
 		item->setText(  0 , QString::number( pos ) );                   //number
 		item->setText(  1 , ( *iListe )->sName );                       //name
 		item->setText(  2 , QString::number( ( *iListe )->points ) );   //points
-		pos++;
+		pos--;
 	}
 }
 
