@@ -759,7 +759,7 @@ void PlayListWidget::playIt( QListViewItem *) {
 //   d->setDocumentUsed = FALSE;
 //  mediaPlayerState->curPosition =0;
     qDebug("playIt");
-    mediaPlayerState->setPlaying(FALSE);
+    //    mediaPlayerState->setPlaying(FALSE);
     mediaPlayerState->setPlaying(TRUE);
     d->selectedFiles->unSelect();
 }
@@ -782,7 +782,8 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
     lnk.setFile( filename ); //sets file name
     d->selectedFiles->addToSelection(  lnk);
  
-    writeCurrentM3u();          
+   if(tabWidget->currentPageIndex() == 0)
+      writeCurrentM3u();          
 //    tabWidget->setCurrentPage(0);
         
   }
@@ -831,7 +832,7 @@ void PlayListWidget::tabChanged(QWidget *) {
 }
 
 void PlayListWidget::btnPlay(bool b) {
-    qDebug("<<<<<<<<<<<<<<<BtnPlay");
+    qDebug("<<<<<<<<<<<<<<<BtnPlay %d", b);
 //    mediaPlayerState->setPlaying(b);
     switch ( tabWidget->currentPageIndex()) {
       case 0:
@@ -852,7 +853,7 @@ void PlayListWidget::btnPlay(bool b) {
           qDebug("2");
 //          d->selectedFiles->unSelect();
           addToSelection( audioView->currentItem() );
-          mediaPlayerState->setPlaying(true);
+          mediaPlayerState->setPlaying( b);
             d->selectedFiles->removeSelected( );
             d->selectedFiles->unSelect();
            tabWidget->setCurrentPage(1);
@@ -864,7 +865,7 @@ void PlayListWidget::btnPlay(bool b) {
           qDebug("3");
           
           addToSelection( videoView->currentItem() );
-          mediaPlayerState->setPlaying(true);
+          mediaPlayerState->setPlaying( b);
 //          qApp->processEvents();
           d->selectedFiles->removeSelected( );
           d->selectedFiles->unSelect();

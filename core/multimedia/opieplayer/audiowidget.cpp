@@ -17,9 +17,16 @@
 ** not clear to you.
 **
 **********************************************************************/
+#include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
+#include <qwidget.h>
+#include <qpixmap.h>
+#include <qbutton.h>
+#include <qpainter.h>
+#include <qframe.h>
+#include <qlayout.h>
 #include <qdir.h>
 #include "audiowidget.h"
 #include "mediaplayerstate.h"
@@ -158,17 +165,18 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
 
 AudioWidget::~AudioWidget() {
+   //       setPlaying( false);
     
     for ( int i = 0; i < 10; i++ ) {
-        delete buttonPixUp[i];
-        delete buttonPixDown[i];
+        if(buttonPixUp[i]) delete buttonPixUp[i];
+        if(buttonPixDown[i]) delete buttonPixDown[i];
     }
-    delete pixBg;
-    delete imgUp;
-    delete imgDn;
-    delete imgButtonMask;
+    if(pixBg) delete pixBg;
+    if(imgUp) delete imgUp;
+    if(imgDn) delete imgDn;
+    if(imgButtonMask) delete imgButtonMask;
     for ( int i = 0; i < 10; i++ ) {
-        delete masks[i];
+        if(masks[i]) delete masks[i];
     }
 }
 
