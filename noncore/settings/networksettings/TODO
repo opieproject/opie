@@ -9,8 +9,6 @@ Types:
 -Bluetooth
 -IPChains?
 
-When entering the wep keys, I think we should be able to see what we are typing, but not to show the keys when the field is not in focus.   Otherwise, it's real hard to know if you typed the right wep key, and you have to look in the actual wireless.opts file to really know if you did it right.
-
 When Zaurus is in cradle, USB interface is connected and reported as UP by the Network Setting application, clicking on Information button does not popup a window. It used to work before, but now it's broken in the latest feed...
 
 -Z hangs on PCMCIA-eject of Symbol 802.11b card (card seems to be in an odd
