@@ -28,6 +28,7 @@
 
 #ifdef QWS
 #include <opie/odevice.h>
+#include <qpe/qcopenvelope_qws.h>
 using namespace Opie;
 #endif
 
@@ -81,6 +82,8 @@ Wellenreiter::Wellenreiter( QWidget* parent )
     #endif
 
     netview->setColumnWidthMode( 1, QListView::Manual );
+    connect( netview, SIGNAL( joinNetwork(const QString&,const QString&,int,const QString&) ),
+             this, SLOT( joinNetwork(const QString&,const QString&,int,const QString&) ) );
     pcap = new OPacketCapturer();
 }
 
@@ -486,5 +489,20 @@ void Wellenreiter::doAction( const QString& action, const QString& protocol, OPa
     else if ( action == "MessageBox" )
         QMessageBox::information ( this, "Notification!",
         QString().sprintf( "Got packet with protocol '%s'", (const char*) protocol ) );
+}
+
+void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int channel, const QString& macaddr)
+{
+    qDebug( "joinNetwork() - %s, %s, %d, %s",
+        (const char*) type,
+        (const char*) essid,
+        channel,
+        (const char*) macaddr );
+
+    // TODO: Stop scanning here
+
+    QCopEnvelope msg( "QPE/Application/networksettings", "wlan(QString,QString,QString)" );
+    msg << "test" << "test" << "test";
+
 }
 

@@ -59,6 +59,8 @@ class Wellenreiter : public WellenreiterBase {
     void startClicked();
     void stopClicked();
 
+    void joinNetwork(const QString&,const QString&,int,const QString&);
+
   signals:
     void startedSniffing();
     void stoppedSniffing();

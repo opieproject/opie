@@ -20,8 +20,10 @@
 #include <assert.h>
 #include <qdatetime.h>
 #include <qtextstream.h>
+#include <qpopupmenu.h>
 
 #ifdef QWS
+#include <qpe/qpeapplication.h>
 #include <opie/odevice.h>
 using namespace Opie;
 #endif
@@ -74,6 +76,14 @@ MScanListView::MScanListView( QWidget* parent, const char* name )
     setColumnAlignment( col_lastseen, AlignCenter );
     setRootIsDecorated( true );
     setAllColumnsShowFocus( true );
+
+    connect( this, SIGNAL( rightButtonClicked(QListViewItem*,const QPoint&,int) ),
+             this, SLOT( contextMenuRequested(QListViewItem*,const QPoint&,int) ) );
+
+    #ifdef QWS
+    QPEApplication::setStylusOperation( viewport(), QPEApplication::RightOnHold );
+    #endif
+
 };
 
 
@@ -317,6 +327,27 @@ void MScanListView::identify( const OMacAddress& macaddr, const QString& ip )
 }
 
 
+void MScanListView::contextMenuRequested( QListViewItem* item, const QPoint&, int col )
+{
+    if ( !item ) return;
+
+    MScanListItem* itm = static_cast<MScanListItem*>( item );
+
+    qDebug( "contextMenuRequested on item '%s' (%s) in column: '%d'",
+            (const char*) itm->text(0), (const char*) itm->type, col );
+
+    if ( itm->type == "adhoc" || itm->type == "managed" )
+    {
+        QString entry = QString().sprintf( "&Join %s Net '%s'...", (const char*) itm->type, (const char*) itm->essid() );
+
+        QPopupMenu m( this );
+        m.insertItem( entry, 37773, 0 );
+        int result = m.exec( QCursor::pos() );
+        if ( result == 37773 )
+            emit joinNetwork( itm->type, itm->essid(), itm->channel(), itm->macaddr() );
+    }
+}
+
 //============================================================
 // MScanListItem
 //============================================================
@@ -343,6 +374,14 @@ MScanListItem::MScanListItem( QListViewItem* parent, QString type, QString essid
     qDebug( "creating scanlist item" );
     #endif
     decorateItem( type, essid, macaddr, wep, channel, signal );
+}
+
+const QString& MScanListItem::essid() const
+{
+    if ( type == "network" )
+        return _essid;
+    else
+        return ( (MScanListItem*) parent() )->essid();
 }
 
 OListViewItem* MScanListItem::childFactory()

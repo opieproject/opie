@@ -47,6 +47,12 @@ class MScanListView: public OListView
 
     void identify( const OMacAddress&, const QString& ipaddr );
 
+    void contextMenuRequested( QListViewItem* item, const QPoint&, int );
+
+  signals:
+    void rightButtonClicked(QListViewItem*,const QPoint&,int);
+    void joinNetwork( const QString&, const QString&, int, const QString& );
+
   protected:
     void addIfNotExisting( MScanListItem* parent, const OMacAddress& addr, const QString& type = "station" );
 
@@ -82,7 +88,7 @@ class MScanListItem: public OListViewItem
 
   public:
     //const QString& type() { return _type; };
-    const QString& essid() { return _essid; };
+    const QString& essid() const;
     const QString& macaddr() { return _macaddr; };
     bool wep() { return _wep; };
     int channel() { return _channel; };
