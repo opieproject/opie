@@ -52,7 +52,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     }
 
     QString palmtopVersionString;
-    palmtopVersionString = tr( "<b>Qtopia</b><p>Version: " ) + QPE_VERSION + "<p>";
+    palmtopVersionString = tr( "<b>Opie</b><p>Version: " ) + QPE_VERSION + "<p>";
 #ifdef QPE_VENDOR
     QString builder = QPE_VENDOR;
 #else
