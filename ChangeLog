@@ -4,6 +4,8 @@
 	------------
 	* PackageManager supports installation of local ipkg files (drw)
 	* PackageManager supports linking of applications to root (drw)
+	* Add a syslog information tab to sysinfo (mickeyl)
+	* Add new, more consistent, PIM icons + a GIMP teplate (ar)
 
 	Fixed Bugs
 	----------
