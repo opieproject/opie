@@ -32,7 +32,7 @@
 #include <qsound.h>
 #include <qtimer.h>
 
-#include <opie/oclickablelabel.h>
+#include <opie2/oclickablelabel.h>
 
 #include <qlcdnumber.h>
 #include <qslider.h>
@@ -145,7 +145,7 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
 
   alarmBtn->setText( tr( "Set Alarm" ) );
 
-  OClickableLabel *click = new OClickableLabel( controls, "label" );
+  Opie::OClickableLabel *click = new Opie::OClickableLabel( controls, "label" );
   click->setText( tr( "Set date and time." ) );
   gl->addMultiCellWidget( click, 3, 3, 0, 2, AlignHCenter );
   connect( click, SIGNAL( clicked() ), this, SLOT( slotAdjustTime() ) );
