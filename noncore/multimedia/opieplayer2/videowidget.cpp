@@ -59,9 +59,18 @@ namespace
 const int xo = 2; // movable x offset
 const int yo = 0; // movable y offset
 
-const char * const skinV_mask_file_names[7] = {
-"play","stop","fwd","back","up","down","full"
+const MediaWidget::SkinButtonInfo skinInfo[] =
+{
+    { MediaWidget::Play, "play", MediaWidget::ToggleButton },
+    { MediaWidget::Stop, "stop", MediaWidget::NormalButton },
+    { MediaWidget::Next, "fwd", MediaWidget::NormalButton },
+    { MediaWidget::Previous, "back", MediaWidget::NormalButton },
+    { MediaWidget::VolumeUp, "up", MediaWidget::NormalButton },
+    { MediaWidget::VolumeDown, "down", MediaWidget::NormalButton },
+    { MediaWidget::FullScreen, "full", MediaWidget::ToggleButton }
 };
+
+const uint buttonCount = sizeof( skinInfo ) / sizeof( skinInfo[ 0 ] );
 
 }
 
@@ -70,17 +79,6 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 {
     setCaption( tr("OpiePlayer - Video") );
 
-    Button defaultButton; 
-    Button toggleButton = defaultButton;
-    toggleButton.type = ToggleButton;
-
-    buttons.push_back( toggleButton ); // play
-    buttons.push_back( toggleButton ); // stop
-    buttons.push_back( toggleButton ); // next
-    buttons.push_back( toggleButton ); // previous
-    buttons.push_back( toggleButton ); // volUp
-    buttons.push_back( toggleButton ); // volDown
-    buttons.push_back( toggleButton ); // fullscreen
 
     videoFrame = new XineVideoWidget ( this, "Video frame" );
 
@@ -99,24 +97,26 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     buttonMask = QImage( imgUp.width(), imgUp.height(), 8, 255 );
     buttonMask.fill( 0 );
 
-    uint i = 0;
-    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it, ++i ) {
-        Button &button = *it;
+    for ( uint i = 0; i < buttonCount; i++ ) {
+        Button button;
+        button.command = skinInfo[ i ].command;
+        button.type = skinInfo[ i ].type;
 
-        QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath + "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
-        button.mask = QBitmap( filename );
+        QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skinV_mask_" + skinInfo[i].fileName + ".png" );
+        button.mask =QBitmap( filename );
 
         if ( !button.mask.isNull() ) {
             QImage imgMask = button.mask.convertToImage();
             uchar **dest = buttonMask.jumpTable();
             for ( int y = 0; y < imgUp.height(); y++ ) {
                 uchar *line = dest[y];
-                for ( int x = 0; x < imgUp.width(); x++ ) {
+                for ( int x = 0; x < imgUp.width(); x++ )
                     if ( !qRed( imgMask.pixel( x, y ) ) )
                         line[x] = i + 1;
-                }
             }
         }
+
+        buttons.push_back( button );
     }
 
     setBackgroundPixmap( backgroundPixmap );

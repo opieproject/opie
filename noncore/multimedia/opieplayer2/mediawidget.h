@@ -35,7 +35,7 @@ class MediaWidget : public QWidget
 {
     Q_OBJECT
 public:
-    enum Command { Play = 0, Stop, Next, Previous, VolumeUp, VolumeDown, Loop, PlayList, Forward, Back, Undefined };
+    enum Command { Play = 0, Stop, Next, Previous, VolumeUp, VolumeDown, Loop, PlayList, Forward, Back, FullScreen, Undefined };
     enum ButtonType { NormalButton, ToggleButton };
 
     struct Button
