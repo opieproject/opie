@@ -28,6 +28,7 @@ class IRCChannelList : public QListBox {
 public:
     IRCChannelList(IRCChannel *channel, QWidget *parent = 0, const char *name = 0, WFlags f = 0);
     void update();
+    void adjustNicks();
     bool hasPerson(QString nick);
     bool removePerson(QString nick);
 protected:

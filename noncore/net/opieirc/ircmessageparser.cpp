@@ -29,33 +29,36 @@ IRCCTCPMessageParserStruct IRCMessageParser::ctcpParserProcTable[] = {
 
 /* Lookup table for numerical commands */
 IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
-    { 1,   FUNC(parseNumerical001) },           // RPL_WELCOME
-    { 2,   FUNC(parseNumerical002) },           // RPL_YOURHOST
-    { 3,   FUNC(parseNumerical003) },           // RPL_CREATED
-    { 4,   FUNC(parseNumerical004) },           // RPL_MYINFO
-    { 5,   FUNC(parseNumerical005) },           // RPL_BOUNCE, RPL_PROTOCTL
-    { 251, FUNC(parseNumericalStats) },         // RPL_LUSERCLIENT
-    { 252, FUNC(parseNumericalStats) },         // RPL_LUSEROP
-    { 265, FUNC(parseNumericalStats) },         // RPL_LOCALUSERS
-    { 266, FUNC(parseNumericalStats) },         // RPL_GLOBALUSERS
-    { 250, FUNC(parseNumericalStats) },         // RPL_STATSCONN
-    { 254, FUNC(nullFunc)},                     // RPL_LUSERCHANNELS
-    { 255, FUNC(parseNumericalStats) },         // RPL_LUSERNAME
+    { 1,   FUNC(parseNumericalSecondParam) },   // RPL_WELCOME
+    { 2,   FUNC(parseNumericalSecondParam) },   // RPL_YOURHOST
+    { 3,   FUNC(parseNumericalSecondParam) },   // RPL_CREATED
+    { 4,   FUNC(parseNumericalAllParams) },     // RPL_MYINFO
+    { 5,   FUNC(parseNumericalSecondParam) },   // RPL_BOUNCE, RPL_PROTOCTL
+    { 250, FUNC(parseNumericalAllParams) },     // RPL_STATSCONN
+    { 251, FUNC(parseNumericalSecondParam) },   // RPL_LUSERCLIENT
+    { 252, FUNC(parseNumericalAllParams) },     // RPL_LUSEROP
+    { 253, FUNC(parseNumericalAllParams) },     // RPL_LUSERUNKNOWN
+    { 254, FUNC(parseNumericalAllParams) },     // RPL_LUSERCHANNELS
+    { 255, FUNC(parseNumericalSecondParam) },   // RPL_LUSERME
+    { 265, FUNC(parseNumericalAllParams) },     // RPL_LOCALUSERS
+    { 266, FUNC(parseNumericalAllParams) },     // RPL_GLOBALUSERS
     { 332, FUNC(parseNumericalTopic) },         // RPL_TOPIC
     { 333, FUNC(parseNumericalTopicWhoTime) },  // RPL_TOPICWHOTIME
     { 353, FUNC(parseNumericalNames) },         // RPL_NAMREPLY
     { 366, FUNC(parseNumericalEndOfNames) },    // RPL_ENDOFNAMES
-    { 375, FUNC(parseNumericalStats) },         // RPL_MOTDSTART
-    { 372, FUNC(parseNumericalStats) },         // RPL_MOTD
-    { 376, FUNC(parseNumericalStats) },         // RPL_ENDOFMOTD
-    { 377, FUNC(parseNumericalStats) },         // RPL_MOTD2
-    { 378, FUNC(parseNumericalStats) },         // RPL_MOTD3
+    { 372, FUNC(parseNumericalSecondParam) },   // RPL_MOTD
+    { 375, FUNC(parseNumericalSecondParam) },   // RPL_MOTDSTART
+    { 376, FUNC(parseNumericalSecondParam) },   // RPL_ENDOFMOTD
+    { 377, FUNC(parseNumericalSecondParam) },   // RPL_MOTD2
+    { 378, FUNC(parseNumericalSecondParam) },   // RPL_MOTD3
     { 401, FUNC(parseNumericalNoSuchNick) },    // ERR_NOSUCHNICK
     { 406, FUNC(parseNumericalNoSuchNick) },    // ERR_WASNOSUCHNICK
-    { 412, FUNC(parseNumericalStats) },         // ERR_NOTEXTTOSEND
+    { 412, FUNC(parseNumericalSecondParam) },   // ERR_NOTEXTTOSEND
+    { 422, FUNC(parseNumericalSecondParam) },   // ERR_NOMOTD
     { 433, FUNC(parseNumericalNicknameInUse) }, // ERR_NICKNAMEINUSE
     { 0,   0 }
 };
+
 
 IRCMessageParser::IRCMessageParser(IRCSession *session) {
     m_session = session;
@@ -460,29 +463,13 @@ void IRCMessageParser::parseLiteralKick(IRCMessage *message) {
     }
 }
 
-void IRCMessageParser::parseNumerical001(IRCMessage *message) {
-    /* Welcome to IRC message, display */
+
+void IRCMessageParser::parseNumericalSecondParam(IRCMessage *message) {
     emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, message->param(1)));
 }
 
-void IRCMessageParser::parseNumerical002(IRCMessage *message) {
-    emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, message->param(1)));
-}
-
-void IRCMessageParser::parseNumerical003(IRCMessage *message) {
-    emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, message->param(1)));
-}
-
-void IRCMessageParser::parseNumerical004(IRCMessage *message) {
+void IRCMessageParser::parseNumericalAllParams(IRCMessage *message) {
     emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, message->allParameters()));
-}
-
-void IRCMessageParser::parseNumerical005(IRCMessage *message) {
-    emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, message->allParameters()));
-}
-
-void IRCMessageParser::parseNumericalStats(IRCMessage *message) {
-    emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, message->param(1)));
 }
 
 void IRCMessageParser::parseNumericalNames(IRCMessage *message) {
@@ -568,3 +555,5 @@ void IRCMessageParser::parseNumericalTopic(IRCMessage *message) {
 
 void IRCMessageParser::parseNumericalTopicWhoTime(IRCMessage *) {
 }
+
+    

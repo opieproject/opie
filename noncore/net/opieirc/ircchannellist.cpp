@@ -14,16 +14,17 @@ void IRCChannelList::update() {
     for (; it.current(); ++it) {
         IRCChannelPerson *person = it.current();
         if (person->flags & PERSON_FLAG_OP) {
-            insertItem(op, person->person->nick());
+            insertItem(op, "1" + person->person->nick());
         } else if (person->flags & PERSON_FLAG_HALFOP) {
-            insertItem(op, person->person->nick());
+            insertItem(op, "2" + person->person->nick());
         } else if (person->flags & PERSON_FLAG_VOICE) {
-            insertItem(voice, person->person->nick());
+            insertItem(voice, "3" + person->person->nick());
         } else {
-            insertItem(person->person->nick());
+            insertItem("4" + person->person->nick());
         }
     }
     sort();
+    adjustNicks();
 }
 
 
@@ -45,3 +46,20 @@ bool IRCChannelList::removePerson(QString nick) {
     return FALSE;
 }
 
+void IRCChannelList::adjustNicks() {
+    QString txt;
+    QPixmap pm;
+
+    for(unsigned int i=0; i<count(); i++) {
+        txt = text(i).remove(0,1);
+        if(pixmap(i)) {
+            pm = *pixmap(i);
+            removeItem(i);
+            insertItem(pm, txt, i);
+        }
+        else {
+            removeItem(i);
+            insertItem(txt,i);
+        }
+    }
+}
