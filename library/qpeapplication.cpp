@@ -97,7 +97,11 @@
 #endif
 #include "qt_override_p.h"
 
+#include <qpe/rohfeedback.h>
+
+
 static bool useBigPixmaps = 0;
+
 
 class HackWidget : public QWidget
 {
@@ -126,6 +130,7 @@ public:
         fontSize = cfg.readNumEntry( "FontSize", 10 );
         smallIconSize = cfg.readNumEntry( "SmallIconSize", 14 );
         bigIconSize = cfg.readNumEntry( "BigIconSize", 32 );
+        RoH = 0;
     }
 
     int presstimer;
@@ -492,6 +497,8 @@ static void qpe_show_dialog( QDialog* d, bool nomax )
             }
         }
     }
+
+    Opie::Internal::RoHFeedback * RoH;
 };
 
 class ResourceMimeFactory : public QMimeSourceFactory
@@ -1205,7 +1212,7 @@ QPEApplication::~QPEApplication()
     delete sysChannel;
     delete pidChannel;
 #endif
-
+    delete d->RoH;
     delete d;
 }
 
@@ -2023,16 +2030,30 @@ bool QPEApplication::eventFilter( QObject *o, QEvent *e )
                 switch ( me->type() ) {
                     case QEvent::MouseButtonPress:
                         if ( me->button() == LeftButton ) {
-                                                    if (!d->presstimer )
-                                                        d->presstimer = startTimer(500); // #### pref.
                             d->presswidget = (QWidget*)o;
                             d->presspos = me->pos();
                             d->rightpressed = FALSE;
+                            // just for the time being
+                            static int pref = 500;
+#ifdef WITHROHFEEDBACK
+                            if( ! d->RoH )
+                              d->RoH = new Opie::Internal::RoHFeedback;
+
+                            d->RoH->init( me->globalPos(), d->presswidget );
+                            pref = d->RoH->delay();
+#endif
+                            if (!d->presstimer )
+                                d->presstimer = startTimer( pref ); // #### pref.
+
                         }
                         break;
                     case QEvent::MouseMove:
                         if (d->presstimer && (me->pos() - d->presspos).manhattanLength() > 8) {
                             killTimer(d->presstimer);
+#ifdef WITHROHFEEDBACK
+                            if( d->RoH )
+                              d->RoH->stop( );
+#endif
                             d->presstimer = 0;
                         }
                         break;
@@ -2040,6 +2061,10 @@ bool QPEApplication::eventFilter( QObject *o, QEvent *e )
                         if ( me->button() == LeftButton ) {
                             if ( d->presstimer ) {
                                 killTimer(d->presstimer);
+#ifdef WITHROHFEEDBACK
+                                if( d->RoH )
+                                  d->RoH->stop( );
+#endif
                                 d->presstimer = 0;
                             }
                             if ( d->rightpressed && d->presswidget ) {
@@ -2093,6 +2118,7 @@ void QPEApplication::timerEvent( QTimerEvent *e )
         killTimer( d->presstimer );
         d->presstimer = 0;
         d->rightpressed = TRUE;
+        d->RoH->stop();
     }
 }
 
