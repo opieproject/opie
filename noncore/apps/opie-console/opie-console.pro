@@ -58,7 +58,7 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp \
 	       btconfigwidget.cpp modemconfigwidget.cpp \ 
 	       atconfigdialog.cpp dialdialog.cpp \
 	       emulation_widget.cpp default.cpp  procctl.cpp \
-           function_keyboard.h
+           function_keyboard.cpp
 
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
