@@ -118,7 +118,6 @@ void HelpBrowser::init( const QString& _home )
 
 void HelpBrowser::appMessage(const QCString& msg, const QByteArray& data)
 {
-    odebug << "reached appMessage" << oendl;
     if ( msg == "showFile(QString)" ) {
     QDataStream ds(data,IO_ReadOnly);
     QString fn;

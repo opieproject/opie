@@ -83,11 +83,18 @@ QString MagicTextBrowser::generateQpe(const QString& name) const {
     for (QListIterator<AppLnk> it(lnkset.children()); (lnk=it.current()); ++it) {
         QString name = lnk->name();
         QString icon = lnk->icon();
-        QString helpFile = lnk->exec()+".html";
+	QString exec = lnk->exec();
+        QString helpFile = exec+".html";
         QStringList helpPath = Global::helpPath();
         bool helpExists = FALSE;
-        for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !helpExists; ++it)
+        for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !helpExists; ++it) {
             helpExists = QFile::exists( *it + "/" + helpFile );
+	    
+	    if( !helpExists && QFile::exists( *it + "/" + exec + "/" + helpFile ) ) {
+		helpFile = exec + "/" + helpFile;
+		helpExists = true;
+	    }
+        }
 
         if ( helpExists ) {
             r += "<h3><a href="+helpFile+"><img src="+icon+">"+name+"</a></h3>\n";
