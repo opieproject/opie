@@ -80,56 +80,61 @@ void MediaPlayer::play() {
 
 
 void MediaPlayer::setPlaying( bool play ) {
+    qDebug("MediaPlayer setPlaying");
     if ( !play ) {
-  mediaPlayerState->setPaused( FALSE );
-  loopControl->stop( FALSE );
-  return;
+        mediaPlayerState->setPaused( FALSE );
+        loopControl->stop( FALSE );
+        return;
     }
 
     if ( mediaPlayerState->paused() ) {
-  mediaPlayerState->setPaused( FALSE );
-  return;
+        mediaPlayerState->setPaused( FALSE );
+        return;
     }
-
+    qDebug("about to ctrash");
     const DocLnk *playListCurrent = playList->current();
+    
     if ( playListCurrent != NULL ) {
-  loopControl->stop( TRUE );
-  currentFile = playListCurrent;
+        loopControl->stop( TRUE );
+        currentFile = playListCurrent;
     }
     if ( currentFile == NULL ) {
-  QMessageBox::critical( 0, tr( "No file"), tr( "Error: There is no file selected" ) );
-  mediaPlayerState->setPlaying( FALSE );
-  return;
+        QMessageBox::critical( 0, tr( "No file"), tr( "Error: There is no file selected" ) );
+        mediaPlayerState->setPlaying( FALSE );
+        return;
     }
 
     if ( ((currentFile->file()).left(4) != "http") && !QFile::exists( currentFile->file() ) ) {
-  QMessageBox::critical( 0, tr( "File not found"), tr( "The following file was not found: <i>" ) + currentFile->file() + "</i>" );
-  mediaPlayerState->setPlaying( FALSE );
-  return;
+        QMessageBox::critical( 0, tr( "File not found"),
+                               tr( "The following file was not found: <i>" ) + currentFile->file() + "</i>" );
+        mediaPlayerState->setPlaying( FALSE );
+        return;
     }
 
     if ( !mediaPlayerState->newDecoder( currentFile->file() ) ) {
-  QMessageBox::critical( 0, tr( "No decoder found"), tr( "Sorry, no appropriate decoders found for this file: <i>" ) + currentFile->file() + "</i>" );
-  mediaPlayerState->setPlaying( FALSE );
-  return;
+        QMessageBox::critical( 0, tr( "No decoder found"),
+                               tr( "Sorry, no appropriate decoders found for this file: <i>" ) + currentFile->file() + "</i>" );
+        mediaPlayerState->setPlaying( FALSE );
+        return;
     }
 
     if ( !loopControl->init( currentFile->file() ) ) {
-  QMessageBox::critical( 0, tr( "Error opening file"), tr( "Sorry, an error occured trying to play the file: <i>" ) + currentFile->file() + "</i>" );
-  mediaPlayerState->setPlaying( FALSE );
-  return;
+        QMessageBox::critical( 0, tr( "Error opening file"),
+                               tr( "Sorry, an error occured trying to play the file: <i>" ) + currentFile->file() + "</i>" );
+        mediaPlayerState->setPlaying( FALSE );
+        return;
     }
     long seconds = loopControl->totalPlaytime();
     QString time; time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
     QString tickerText;
     if( currentFile->file().left(4) == "http" )
-     tickerText= tr( " File: " ) + currentFile->name();
+        tickerText= tr( " File: " ) + currentFile->name();
     else
-    tickerText = tr( " File: " ) + currentFile->name() + tr(", Length: ") + time;
+        tickerText = tr( " File: " ) + currentFile->name() + tr(", Length: ") + time;
 
     QString fileInfo = mediaPlayerState->curDecoder()->fileInfo();
     if ( !fileInfo.isEmpty() )
-  tickerText += ", " + fileInfo;
+        tickerText += ", " + fileInfo;
     audioUI->setTickerText( tickerText + "." );
 
     loopControl->play();

@@ -31,76 +31,117 @@
 #include "audiowidget.h"
 #include "mediaplayerstate.h"
 
+#include <stdlib.h>
+#include <stdio.h>
+
 extern MediaPlayerState *mediaPlayerState;
 
 
 static const int xo = -2; // movable x offset
 static const int yo = 22; // movable y offset
 
-
 struct MediaButton {
-    int  xPos, yPos;
-    int  color;
-    bool isToggle, isBig, isHeld, isDown;
+   bool isToggle, isHeld, isDown;
 };
 
-
-// Layout information for the audioButtons (and if it is a toggle button or not)
+//Layout information for the audioButtons (and if it is a toggle button or not)
 MediaButton audioButtons[] = {
-    { 3*30-15+xo, 3*30-13+yo, 0,  TRUE,  TRUE, FALSE, FALSE }, // play
-    {    1*30+xo,    5*30+yo, 2, FALSE, FALSE, FALSE, FALSE }, // stop
-    {    5*30+xo,    5*30+yo, 2,  TRUE, FALSE, FALSE, FALSE }, // pause
-    {  6*30-5+xo,    3*30+yo, 1, FALSE, FALSE, FALSE, FALSE }, // next
-    {  0*30+5+xo,    3*30+yo, 1, FALSE, FALSE, FALSE, FALSE }, // previous
-    {    3*30+xo,  0*30+5+yo, 3, FALSE, FALSE, FALSE, FALSE }, // volume up
-    {    3*30+xo,  6*30-5+yo, 3, FALSE, FALSE, FALSE, FALSE }, // volume down
-    {    5*30+xo,    1*30+yo, 0,  TRUE, FALSE, FALSE, FALSE }, // repeat/loop
-    {    1*30+xo,    1*30+yo, 0, FALSE, FALSE, FALSE, FALSE }  // playlist
+   { TRUE,  FALSE, FALSE }, // play
+   { FALSE, FALSE, FALSE }, // stop
+   { TRUE,  FALSE, FALSE }, // pause
+   { FALSE, FALSE, FALSE }, // next
+   { FALSE, FALSE, FALSE }, // previous
+   { FALSE, FALSE, FALSE }, // volume up
+   { FALSE, FALSE, FALSE }, // volume down
+   { TRUE,  FALSE, FALSE }, // repeat/loop
+   { FALSE, FALSE, FALSE }, // playlist
+   { FALSE, FALSE, FALSE }, // forward
+   { FALSE, FALSE, FALSE }  // back 
 };
 
+const char *skin_mask_file_names[11] = {
+   "play", "stop", "pause", "next", "prev", "up",
+   "down", "loop", "playlist", "forward", "back"
+};
+
+
+static void changeTextColor( QWidget *w ) {
+   QPalette p = w->palette();
+   p.setBrush( QColorGroup::Background, QColor( 167, 212, 167 ) );
+   p.setBrush( QColorGroup::Base, QColor( 167, 212, 167 ) );
+   w->setPalette( p );
+}
 
 static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 
-
 AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
-    QWidget( parent, name, f )
+    QWidget( parent, name, f ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this )
 {
     setCaption( tr("OpiePlayer") );
+    qDebug("<<<<<audioWidget");
+    
     Config cfg("OpiePlayer");
     cfg.setGroup("AudioWidget");
-//     QGridLayout *layout = new QGridLayout( this );
-//     layout->setSpacing( 2);
-//     layout->setMargin( 2);
-    QString backgroundPix, buttonsAllPix, buttonsBigPix, controlsPix, animatedPix;
-    backgroundPix=cfg.readEntry( " backgroundPix", "opieplayer/metalFinish");
-    buttonsAllPix=cfg.readEntry( "buttonsAllPix","opieplayer/mediaButtonsAll");
-    buttonsBigPix=cfg.readEntry( "buttonsBigPix","opieplayer/mediaButtonsBig");
-    controlsPix=cfg.readEntry( "controlsPix","opieplayer/mediaControls");
-//    animatedPix=cfg.readEntry( "animatedPix", "opieplayer/animatedButton");
+    skin = cfg.readEntry("Skin","default");
+      //skin = "scaleTest";
+// color of background, frame, degree of transparency
 
-    setBackgroundPixmap( Resource::loadPixmap( backgroundPix) );
-    pixmaps[0] = new QPixmap( Resource::loadPixmap( buttonsAllPix ) );
-    pixmaps[1] = new QPixmap( Resource::loadPixmap( buttonsBigPix ) );
-    pixmaps[2] = new QPixmap( Resource::loadPixmap( controlsPix ) );
-//    pixmaps[3] = new QPixmap( Resource::loadPixmap( animatedPix) );
+    QString skinPath = "opieplayer2/skins/" + skin;
+    pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
+    imgUp = new QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
+    imgDn = new QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
 
-    songInfo = new Ticker( this );
-    songInfo->setFocusPolicy( QWidget::NoFocus );
-    songInfo->setGeometry( QRect( 7, 3, 220, 20 ) );
-//    layout->addMultiCellWidget( songInfo, 0, 0, 0, 2 );
- 
-    slider = new QSlider( Qt::Horizontal, this );
-    slider->setFixedWidth( 220 );
-    slider->setFixedHeight( 20 );
-    slider->setMinValue( 0 );
-    slider->setMaxValue( 1 );
-    slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
-    slider->setFocusPolicy( QWidget::NoFocus );
-    slider->setGeometry( QRect( 7, 262, 220, 20 ) );
-      //  layout->addMultiCellWidget( slider, 4, 4, 0, 2 );
+    imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
+    imgButtonMask->fill( 0 );
 
-    connect( slider,           SIGNAL( sliderPressed() ),      this, SLOT( sliderPressed() ) );
-    connect( slider,           SIGNAL( sliderReleased() ),     this, SLOT( sliderReleased() ) );
+    for ( int i = 0; i < 11; i++ ) {
+        QString filename = QString(getenv("OPIEDIR")) + "/pics/" + skinPath + "/skin_mask_" + skin_mask_file_names[i] + ".png";
+        masks[i] = new QBitmap( filename );
+
+        if ( !masks[i]->isNull() ) {
+            QImage imgMask = masks[i]->convertToImage();
+            uchar **dest = imgButtonMask->jumpTable();
+            for ( int y = 0; y < imgUp->height(); y++ ) {
+                uchar *line = dest[y];
+                for ( int x = 0; x < imgUp->width(); x++ ) 
+                    if ( !qRed( imgMask.pixel( x, y ) ) ) 
+                        line[x] = i + 1;
+            }
+        }
+
+    }
+
+    for ( int i = 0; i < 11; i++ ) {
+        buttonPixUp[i] = NULL;
+        buttonPixDown[i] = NULL;
+    }
+
+    setBackgroundPixmap( *pixBg );
+
+    songInfo.setFocusPolicy( QWidget::NoFocus );
+    
+    changeTextColor( &songInfo );
+    songInfo.setBackgroundColor( QColor( 167, 212, 167 ));
+    songInfo.setFrameStyle( QFrame::NoFrame);
+//    songInfo.setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
+      //NoFrame
+//    songInfo.setForegroundColor(Qt::white);
+    
+    slider.setFixedHeight( 20 );
+    slider.setMinValue( 0 );
+    slider.setMaxValue( 1 );
+    slider.setFocusPolicy( QWidget::NoFocus );
+    slider.setBackgroundPixmap( *pixBg );
+
+    time.setFocusPolicy( QWidget::NoFocus );
+    time.setAlignment( Qt::AlignCenter );
+    time.setFrame(FALSE);
+    changeTextColor( &time );
+
+    resizeEvent( NULL );
+
+    connect( &slider,           SIGNAL( sliderPressed() ),      this, SLOT( sliderPressed() ) );
+    connect( &slider,           SIGNAL( sliderReleased() ),     this, SLOT( sliderReleased() ) );
 
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
     connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
@@ -114,19 +155,76 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     setLooping( mediaPlayerState->fullscreen() );
     setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
-        
+
 }
 
 
 AudioWidget::~AudioWidget() {
-    mediaPlayerState->isStreaming = FALSE;
-    for ( int i = 0; i < 3; i++ )
-  delete pixmaps[i];
+    
+    for ( int i = 0; i < 11; i++ ) {
+        delete buttonPixUp[i];
+        delete buttonPixDown[i];
+    }
+    delete pixBg;
+    delete imgUp;
+    delete imgDn;
+    delete imgButtonMask;
+    for ( int i = 0; i < 11; i++ ) {
+        delete masks[i];
+    }
+}
+
+
+QPixmap *combineImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
+    QPixmap pix( img.width(), img.height() );
+    QPainter p( &pix );
+    p.drawTiledPixmap( pix.rect(), bg, offset );
+    p.drawImage( 0, 0, img );
+    return new QPixmap( pix );
+}
+
+
+QPixmap *maskPixToMask( QPixmap pix, QBitmap mask )
+{
+    QPixmap *pixmap = new QPixmap( pix );
+    pixmap->setMask( mask );
+    return pixmap;
+}
+
+
+
+void AudioWidget::resizeEvent( QResizeEvent * ) {
+    int h = height();
+    int w = width();
+
+    songInfo.setGeometry( QRect( 2, 10, w - 4, 20 ) );
+    slider.setFixedWidth( w - 110 );
+    slider.setGeometry( QRect( 15, h - 30, w - 90, 20 ) );
+    slider.setBackgroundOrigin( QWidget::ParentOrigin );
+    time.setGeometry( QRect( w - 85, h - 30, 70, 20 ) );
+
+    xoff = ( w - imgUp->width() ) / 2;
+    yoff = (( h - imgUp->height() ) / 2) - 10;
+    QPoint p( xoff, yoff );
+
+    QPixmap *pixUp = combineImageWithBackground( *imgUp, *pixBg, p );
+    QPixmap *pixDn = combineImageWithBackground( *imgDn, *pixBg, p );
+
+    for ( int i = 0; i < 11; i++ ) {
+        if ( !masks[i]->isNull() ) {
+            delete buttonPixUp[i];
+            delete buttonPixDown[i];
+            buttonPixUp[i] = maskPixToMask( *pixUp, *masks[i] );
+            buttonPixDown[i] = maskPixToMask( *pixDn, *masks[i] );
+        }
+    }
+
+    delete pixUp;
+    delete pixDn;
 }
 
 
 static bool audioSliderBeingMoved = FALSE;
-
 
 void AudioWidget::sliderPressed() {
     audioSliderBeingMoved = TRUE;
@@ -135,16 +233,17 @@ void AudioWidget::sliderPressed() {
 
 void AudioWidget::sliderReleased() {
     audioSliderBeingMoved = FALSE;
-    if ( slider->width() == 0 )
+    if ( slider.width() == 0 )
   return;
-    long val = long((double)slider->value() * mediaPlayerState->length() / slider->width());
+    long val = long((double)slider.value() * mediaPlayerState->length() / slider.width());
     mediaPlayerState->setPosition( val );
 }
 
 
 void AudioWidget::setPosition( long i ) {
 //    qDebug("set position %d",i);
-    updateSlider( i, mediaPlayerState->length() );
+    long length = mediaPlayerState->length();
+    updateSlider( i, length );
 }
 
 
@@ -154,14 +253,15 @@ void AudioWidget::setLength( long max ) {
 
 
 void AudioWidget::setView( char view ) {
+
     if (mediaPlayerState->isStreaming) {
-        if( !slider->isHidden()) slider->hide();
+        if( !slider.isHidden()) slider.hide();
         disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
     } else {
 // this stops the slider from being moved, thus
           // does not stop stream when it reaches the end
- slider->show();
+        slider.show();
         connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
     }
@@ -177,18 +277,27 @@ void AudioWidget::setView( char view ) {
 }
 
 
+static QString timeAsString( long length ) {
+    length /= 44100;
+    int minutes = length / 60;
+    int seconds = length % 60;
+    return QString("%1:%2%3").arg( minutes ).arg( seconds / 10 ).arg( seconds % 10 );
+}
+
 void AudioWidget::updateSlider( long i, long max ) {
+    time.setText( timeAsString( i ) + " / " + timeAsString( max ) );
+    
     if ( max == 0 )
   return;
     // Will flicker too much if we don't do this
     // Scale to something reasonable
-    int width = slider->width();
+    int width = slider.width();
     int val = int((double)i * width / max);
     if ( !audioSliderBeingMoved ) {
-  if ( slider->value() != val )
-      slider->setValue( val );
-  if ( slider->maxValue() != width )
-      slider->setMaxValue( width );
+  if ( slider.value() != val )
+      slider.setValue( val );
+  if ( slider.maxValue() != width )
+      slider.setMaxValue( width );
     }
 }
 
@@ -207,63 +316,64 @@ void AudioWidget::toggleButton( int i ) {
 
 
 void AudioWidget::paintButton( QPainter *p, int i ) {
-    int x = audioButtons[i].xPos;
-    int y = audioButtons[i].yPos;
-    int offset = 22 + 14 * audioButtons[i].isBig + audioButtons[i].isDown;
-    int buttonSize = 64 + audioButtons[i].isBig * (90 - 64);
-    p->drawPixmap( x, y, *pixmaps[audioButtons[i].isBig], buttonSize * (audioButtons[i].isDown + 2 * audioButtons[i].color), 0, buttonSize, buttonSize );
-    p->drawPixmap( x + offset, y + offset, *pixmaps[2], 18 * i, 0, 18, 18 );
+    if ( audioButtons[i].isDown )
+        p->drawPixmap( xoff, yoff, *buttonPixDown[i] );
+    else
+        p->drawPixmap( xoff, yoff, *buttonPixUp[i] );
 }
 
 
 void AudioWidget::timerEvent( QTimerEvent * ) {
+/*
+    int x = audioButtons[AudioPlay].xPos;
+ int y = audioButtons[AudioPlay].yPos;
+ QPainter p( this );
+ // Optimize to only draw the little bit of the changing images which is different
+ p.drawPixmap( x + 14, y +  8, *pixmaps[3], 32 * frame, 0, 32, 32 );
+ p.drawPixmap( x + 37, y + 37, *pixmaps[2], 18 * AudioPlay, 0, 6, 3 );
+*/
+/*
     static int frame = 0;
     if ( !mediaPlayerState->paused() && audioButtons[ AudioPlay ].isDown ) {
   frame = frame >= 7 ? 0 : frame + 1;
-//   int x = audioButtons[AudioPlay].xPos;
-//   int y = audioButtons[AudioPlay].yPos;
-//   QPainter p( this );
-//   // Optimize to only draw the little bit of the changing images which is different
-//   p.drawPixmap( x + 14, y +  8, *pixmaps[3], 32 * frame, 0, 32, 32 );
-//   p.drawPixmap( x + 37, y + 37, *pixmaps[2], 18 * AudioPlay, 0, 6, 3 );
     }
+    */
 }
 
 
 void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( int i = 0; i < numButtons; i++ ) {
-        int size = audioButtons[i].isBig;
-        int x = audioButtons[i].xPos;
-        int y = audioButtons[i].yPos;
         if ( event->state() == QMouseEvent::LeftButton ) {
-              // The test to see if the mouse click is inside the circular button or not
-              // (compared with the radius squared to avoid a square-root of our distance)
-            int radius = 32 + 13 * size;
-            QPoint center = QPoint( x + radius, y + radius );
-            QPoint dXY = center - event->pos();
-            int dist = dXY.x() * dXY.x() + dXY.y() * dXY.y();
-            bool isOnButton = dist <= (radius * radius);
-//      QRect r( x, y, 64 + 22*size, 64 + 22*size );
-//      bool isOnButton = r.contains( event->pos() ); // Rectangular Button code
+
+              // The test to see if the mouse click is inside the button or not
+            int x = event->pos().x() - xoff;
+            int y = event->pos().y() - yoff;
+
+            bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask->width()
+                                && y < imgButtonMask->height() && imgButtonMask->pixelIndex( x, y ) == i + 1 );
+
+            if ( isOnButton && i == AudioVolumeUp ) 
+                qDebug("on up");
+
             if ( isOnButton && !audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = TRUE;
                 toggleButton(i);
-                qDebug("button toggled1  %d",i);
                 switch (i) {
-                  case AudioVolumeUp:   emit moreClicked(); return;
+                  case AudioVolumeUp:   
+                      qDebug("more clicked");
+                      emit moreClicked(); 
+                      return;
                   case AudioVolumeDown: emit lessClicked(); return;
                 }
             } else if ( !isOnButton && audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = FALSE;
                 toggleButton(i);
-                qDebug("button toggled2  %d",i);
             }
         } else {
             if ( audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = FALSE;
                 if ( !audioButtons[i].isToggle )
                     setToggleButton( i, FALSE );
-                qDebug("button toggled3  %d",i);
                 switch (i) {
                   case AudioPlay:       mediaPlayerState->setPlaying(audioButtons[i].isDown); return;
                   case AudioStop:       mediaPlayerState->setPlaying(FALSE); return;
@@ -279,6 +389,7 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
         }
     }
 }
+
 
 
 void AudioWidget::mousePressEvent( QMouseEvent *event ) {
@@ -302,10 +413,22 @@ void AudioWidget::closeEvent( QCloseEvent* ) {
 }
 
 
-void AudioWidget::paintEvent( QPaintEvent * ) {
-    QPainter p( this );
-    for ( int i = 0; i < numButtons; i++ )
-  paintButton( &p, i );
+void AudioWidget::paintEvent( QPaintEvent * pe) {
+    if ( !pe->erased() ) {
+          // Combine with background and double buffer
+        QPixmap pix( pe->rect().size() );
+        QPainter p( &pix );
+        p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
+        p.drawTiledPixmap( pe->rect(), *pixBg, pe->rect().topLeft() );
+        for ( int i = 0; i < numButtons; i++ )
+            paintButton( &p, i );
+        QPainter p2( this );
+        p2.drawPixmap( pe->rect().topLeft(), pix );
+    } else {
+        QPainter p( this );
+        for ( int i = 0; i < numButtons; i++ )
+            paintButton( &p, i );
+    }
 }
 
 void AudioWidget::keyReleaseEvent( QKeyEvent *e)
@@ -327,6 +450,7 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e)
       case Key_F13: //mail
           break;
       case Key_Space: {
+
           if(mediaPlayerState->playing()) {
 //                toggleButton(1);
               mediaPlayerState->setPlaying(FALSE);
@@ -338,24 +462,24 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e)
           }
       }
           break;
-      case Key_Down:
+      case Key_Down: //volume
             toggleButton(6);
           emit lessClicked();
           emit lessReleased();
           toggleButton(6);
           break;
-      case Key_Up:
+      case Key_Up:   //volume
            toggleButton(5);
            emit moreClicked();
            emit moreReleased();
            toggleButton(5);
            break;
-      case Key_Right:
+      case Key_Right:   //next in playlist
 //            toggleButton(3);
           mediaPlayerState->setNext();
 //            toggleButton(3);
           break;
-      case Key_Left:
+      case Key_Left:    // previous in playlist
 //            toggleButton(4);
           mediaPlayerState->setPrev();
 //            toggleButton(4);

@@ -26,6 +26,7 @@
 #include <qpe/fileselector.h>
 #include <qpushbutton.h>
 
+#include "om3u.h"
 /* #include <qtimer.h> */
 
 
@@ -50,7 +51,7 @@ public:
     QLabel *libString;
     bool fromSetDocument;
     bool insanityBool;
-    QString setDocFileRef;
+    QString setDocFileRef, currentPlayList;
     // retrieve the current playlist entry (media file link)
     const DocLnk *current();
     void useSelectedDocument();
@@ -85,7 +86,9 @@ private:
     void populateAudioView();
     void populateVideoView();
 private slots:
+
     void writem3u();
+    void writeCurrentM3u();
     void scanForAudio();
     void scanForVideo(); 
     void openFile();

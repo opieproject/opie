@@ -1,4 +1,4 @@
-Files: bin/opieplayer pics/opieplayer apps/Applications/opieplayer.desktop
+Files: bin/opieplayer pics/opieplayer apps/Applications/opieplayer.desktop pics/opieplayer2/skins/default
 Priority: optional
 Section: opie/applications
 Maintainer: L.J.Potter <ljp@llornkcor.com>

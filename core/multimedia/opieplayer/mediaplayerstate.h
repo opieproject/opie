@@ -57,7 +57,9 @@ public slots:
     void setShuffled( bool b )   { if ( isShuffled   == b ) return; isShuffled = b;   emit shuffledToggled(b); }
     void setPlaylist( bool b )   { if ( usePlaylist  == b ) return; usePlaylist = b;  emit playlistToggled(b); }
     void setPaused( bool b )   { if ( isPaused     == b ) return; isPaused = b;     emit pausedToggled(b); }
-    void setPlaying( bool b )  { if ( isPlaying    == b ) return; isPlaying = b;    emit playingToggled(b); }
+
+    void setPlaying( bool b )  { if ( isPlaying == b )  return; isPlaying = b; emit playingToggled(b); }
+    
     void setPosition( long p )   { if ( curPosition  == p ) return; curPosition = p;  emit positionChanged(p); }
     void updatePosition( long p ){ if ( curPosition  == p ) return; curPosition = p;  emit positionUpdated(p); }
     void setLength( long l )   { if ( curLength    == l ) return; curLength = l;    emit lengthChanged(l); }
