@@ -249,5 +249,6 @@ void Sound::soundAlarm()
   \ingroup qtopiaemb
 */
 
-
+#ifndef QT_NO_SOUND
 #include "sound.moc"
+#endif
