@@ -1,0 +1,387 @@
+<!DOCTYPE UI><UI>
+<class>OTScanGUI</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>Form3</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>333</width>
+            <height>580</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Scanning</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>0</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>3</number>
+        </property>
+        <widget>
+            <class>QListView</class>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Attribute</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>true</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>true</bool>
+                </property>
+            </column>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Value</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>true</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>true</bool>
+                </property>
+            </column>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>DetectedPeers_LV</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>allColumnsShowFocus</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>rootIsDecorated</name>
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout16</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>3</number>
+                </property>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Cleanup_But</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Cleanup</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer1</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Detect_But</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Scan</string>
+                    </property>
+                    <property stdset="1">
+                        <name>toggleButton</name>
+                        <bool>true</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>autoResize</name>
+                        <bool>true</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>toggleButton</name>
+                        <bool>true</bool>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget>
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Peer_GB</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>GroupBox1</string>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <grid>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>3</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>3</number>
+                </property>
+                <widget row="2"  column="0"  rowspan="1"  colspan="2" >
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout4</cstring>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <widget>
+                            <class>QFrame</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>State_Frm</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>sizePolicy</name>
+                                <sizepolicy>
+                                    <hsizetype>7</hsizetype>
+                                    <vsizetype>5</vsizetype>
+                                </sizepolicy>
+                            </property>
+                            <property stdset="1">
+                                <name>frameShape</name>
+                                <enum>NoFrame</enum>
+                            </property>
+                            <property stdset="1">
+                                <name>frameShadow</name>
+                                <enum>Raised</enum>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>RefreshServices_But</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Services</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>RefreshState_But</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>State</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget row="0"  column="1" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Address_LBL</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>Panel</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShadow</name>
+                        <enum>Plain</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>lineWidth</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string></string>
+                    </property>
+                    <property stdset="1">
+                        <name>indent</name>
+                        <number>1</number>
+                    </property>
+                </widget>
+                <widget row="0"  column="0" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel1</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Address</string>
+                    </property>
+                </widget>
+                <widget row="1"  column="0" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Signal strength</string>
+                    </property>
+                </widget>
+                <widget row="1"  column="1" >
+                    <class>QProgressBar</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Strength_PB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>centerIndicator</name>
+                        <bool>true</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>indicatorFollowsStyle</name>
+                        <bool>false</bool>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+    </vbox>
+</widget>
+<connections>
+    <connection>
+        <sender>RefreshServices_But</sender>
+        <signal>clicked()</signal>
+        <receiver>Form3</receiver>
+        <slot>SLOT_RefreshServices()</slot>
+    </connection>
+    <connection>
+        <sender>Detect_But</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>Form3</receiver>
+        <slot>SLOT_DoScan( bool )</slot>
+    </connection>
+    <connection>
+        <sender>Cleanup_But</sender>
+        <signal>clicked()</signal>
+        <receiver>Form3</receiver>
+        <slot>SLOT_CleanupOld()</slot>
+    </connection>
+    <connection>
+        <sender>RefreshState_But</sender>
+        <signal>clicked()</signal>
+        <receiver>Form3</receiver>
+        <slot>SLOT_RefreshState()</slot>
+    </connection>
+    <connection>
+        <sender>DetectedPeers_LV</sender>
+        <signal>clicked(QListViewItem*)</signal>
+        <receiver>Form3</receiver>
+        <slot>SLOT_Show(QListViewItem *)</slot>
+    </connection>
+    <connection>
+        <sender>DetectedPeers_LV</sender>
+        <signal>currentChanged(QListViewItem*)</signal>
+        <receiver>Form3</receiver>
+        <slot>SLOT_Show(QListViewItem *)</slot>
+    </connection>
+    <connection>
+        <sender>DetectedPeers_LV</sender>
+        <signal>doubleClicked(QListViewItem*)</signal>
+        <receiver>Form3</receiver>
+        <slot>SLOT_Selected(QListViewItem*)</slot>
+    </connection>
+    <slot access="public">SLOT_CleanupOld()</slot>
+    <slot access="public">SLOT_DoScan( bool )</slot>
+    <slot access="public">SLOT_RefreshServices()</slot>
+    <slot access="public">SLOT_RefreshState()</slot>
+    <slot access="public">SLOT_Selected(QListViewItem*)</slot>
+    <slot access="public">SLOT_Show(QListViewItem *)</slot>
+</connections>
+</UI>

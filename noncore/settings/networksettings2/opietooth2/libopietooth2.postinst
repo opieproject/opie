@@ -1,0 +1,10 @@
+#!/bin/sh
+
+QTPB=/opt/QtPalmtop/bin
+
+[ ! -L ${QTPB}/networksettings2-opietooth ] && ln -sf ${QTPB}/networksettings2 ${QTPB}/networksettings2-opietooth
+
+# qcop QPE/Taskbar "linkChanged(opietooth)"
+qcop QPE/Taskbar "reloadApps()"
+
+exit 0

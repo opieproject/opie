@@ -1,0 +1,9 @@
+Package: libopietooth2
+Files: lib/libopietooth2.so.* apps/Settings/opietooth-manager.desktop pics/opietooth/*.png pics/opietooth/icons/*.png
+Priority: optional
+Section: opie/system
+Maintainer: wim delvaux <wim.delvaux@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION$EXTRAVERSION
+Depends: task-opie-minimal, libbluetooth1, opie-bluepin | opie-multiauth-bluepingplugin, bluez-utils-nodbus 
+Description: Opie bluetooth support library version 2

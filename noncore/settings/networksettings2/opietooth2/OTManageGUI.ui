@@ -1,0 +1,198 @@
+<!DOCTYPE UI><UI>
+<class>OTManageGUI</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>OTManageGUI</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>203</width>
+            <height>390</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Manage local  devices</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>0</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>3</number>
+        </property>
+        <widget>
+            <class>QListView</class>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Device</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>true</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>true</bool>
+                </property>
+            </column>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>New Column</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>true</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>true</bool>
+                </property>
+            </column>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>AllDrivers_LV</cstring>
+            </property>
+            <property stdset="1">
+                <name>allColumnsShowFocus</name>
+                <bool>true</bool>
+            </property>
+            <property stdset="1">
+                <name>rootIsDecorated</name>
+                <bool>true</bool>
+            </property>
+        </widget>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout11</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>DriverIsUp_CB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Is Up</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel3</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Auto refresh</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QSpinBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>RefreshTimer_SB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>maximumSize</name>
+                        <size>
+                            <width>60</width>
+                            <height>32767</height>
+                        </size>
+                    </property>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>suffix</name>
+                        <string>s</string>
+                    </property>
+                    <property stdset="1">
+                        <name>specialValueText</name>
+                        <string>Default</string>
+                    </property>
+                    <property stdset="1">
+                        <name>buttonSymbols</name>
+                        <enum>PlusMinus</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>maxValue</name>
+                        <number>10</number>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </vbox>
+</widget>
+<connections>
+    <connection>
+        <sender>DriverIsUp_CB</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>OTManageGUI</receiver>
+        <slot>SLOT_UpDriver( bool)</slot>
+    </connection>
+    <connection>
+        <sender>RefreshTimer_SB</sender>
+        <signal>valueChanged(int)</signal>
+        <receiver>OTManageGUI</receiver>
+        <slot>SLOT_SetRefreshTimer( int )</slot>
+    </connection>
+    <connection>
+        <sender>AllDrivers_LV</sender>
+        <signal>currentChanged(QListViewItem*)</signal>
+        <receiver>OTManageGUI</receiver>
+        <slot>SLOT_ShowDriver( QListViewItem *)</slot>
+    </connection>
+    <connection>
+        <sender>AllDrivers_LV</sender>
+        <signal>clicked(QListViewItem*)</signal>
+        <receiver>OTManageGUI</receiver>
+        <slot>SLOT_ShowDriver( QListViewItem *)</slot>
+    </connection>
+    <slot access="public">SLOT_SetRefreshTimer( int )</slot>
+    <slot access="public">SLOT_ShowDriver( QListViewItem *)</slot>
+    <slot access="public">SLOT_UpDriver( bool)</slot>
+</connections>
+</UI>

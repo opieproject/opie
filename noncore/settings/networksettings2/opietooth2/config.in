@@ -1,0 +1,5 @@
+config NS2OPIETOOTH
+  boolean "opie-networksettings2 bluetooth library"
+  default "y"
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE 
+
