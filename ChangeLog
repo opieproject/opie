@@ -3,6 +3,7 @@
 	Fixed Bugs
 	----------
 	* #1613 - AdvancedFM - scale toolbar icons appropriately (drw)
+	* n.a.  - PackageManager - fix bug where messages show up multiple times in install dialog (drw)
 
 2005-03-20	Opie 1.2.0-rc1
 
