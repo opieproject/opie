@@ -19,17 +19,18 @@ using namespace Opie;
 BatteryStatus::BatteryStatus( const PowerStatus *p, QWidget *parent )
   : QWidget( parent, 0, WDestructiveClose), ps(p), bat2(false) {
   setCaption( tr("Battery status") );
+  setMinimumSize( 150, 200 );
+
   QPushButton *pb = new QPushButton( tr("Close"), this );
   QVBoxLayout *layout = new QVBoxLayout ( this );
 
   jackPercent = 0;
 
-  pb->setMaximumHeight(40);
-  pb->setMaximumWidth( 120 );
+  pb->setMaximumSize( 120, 40 );
 
   pb->show();
 
-  layout->addStretch( 0 );
+  layout->addStretch();
   layout->addWidget( pb );
 
   if ( ODevice::inst ( )-> series ( ) == Model_iPAQ ) {
@@ -64,31 +65,31 @@ bool BatteryStatus::getProcApmStatusIpaq() {
     for(QStringList::Iterator line=list.begin(); line!=list.end(); line++) {
       // not nice, need a rewrite later
       if( (*line).startsWith(" Percentage") ){
-    	if (bat2 == true) {
-	  perc2 = (*line).mid(((*line).find('('))+1,(*line).find(')')-(*line).find('(')-2);
-	} else {
-	  perc1 = (*line).mid(((*line).find('('))+1,(*line).find(')')-(*line).find('(')-2);
-	}
+        if (bat2 == true) {
+      perc2 = (*line).mid(((*line).find('('))+1,(*line).find(')')-(*line).find('(')-2);
+    } else {
+      perc1 = (*line).mid(((*line).find('('))+1,(*line).find(')')-(*line).find('(')-2);
+    }
       }else if( (*line).startsWith(" Life") ){
-	if (bat2 == true) {
-	  sec2 = (*line).mid(((*line).find(':')+2), 5 );
-	} else {
-	  sec1 = (*line).mid(((*line).find(':')+2), 5 );
-	}
+    if (bat2 == true) {
+      sec2 = (*line).mid(((*line).find(':')+2), 5 );
+    } else {
+      sec1 = (*line).mid(((*line).find(':')+2), 5 );
+    }
       }else if( (*line).startsWith("Battery #1") ){
-	bat2 = true;
+    bat2 = true;
       }else if( (*line).startsWith(" Status") ){
-	if (bat2 == true) {
-	  jackStatus = (*line).mid((*line).find('(')+1., (*line).find(')')-(*line).find('(')-1);
+    if (bat2 == true) {
+      jackStatus = (*line).mid((*line).find('(')+1, (*line).find(')')-(*line).find('(')-1);
         } else {
-	  ipaqStatus = (*line).mid((*line).find('(')+1., (*line).find(')')-(*line).find('(')-1);
-	}
+      ipaqStatus = (*line).mid((*line).find('(')+1, (*line).find(')')-(*line).find('(')-1);
+    }
       }else if( (*line).startsWith(" Chemistry") ) {
-	if (bat2 == true) {
-	  jackChem = (*line).mid((*line).find('('), (*line).find(')')-(*line).find('(')+1);
-	} else {
-	  ipaqChem = (*line).mid((*line).find('('), (*line).find(')')-(*line).find('(')+1);
-	}
+    if (bat2 == true) {
+      jackChem = (*line).mid((*line).find('('), (*line).find(')')-(*line).find('(')+1);
+    } else {
+      ipaqChem = (*line).mid((*line).find('('), (*line).find(')')-(*line).find('(')+1);
+    }
       }
     }
   } else {
@@ -130,7 +131,7 @@ void BatteryStatus::drawSegment( QPainter *p, const QRect &r, const QColor &topg
   botgrad.hsv( &h2, &s2, &v2 );
   for ( int j = 0; j < hy-2; j++ ) {
     p->setPen( QColor( h1 + ((h2-h1)*j)/(ng-1), s1 + ((s2-s1)*j)/(ng-1),
-		       v1 + ((v2-v1)*j)/(ng-1),  QColor::Hsv ) );
+               v1 + ((v2-v1)*j)/(ng-1),  QColor::Hsv ) );
     p->drawLine( r.x(), r.top()+hy-2-j, r.x()+r.width(), r.top()+hy-2-j );
   }
   for ( int j = 0; j < hh; j++ ) {
@@ -139,25 +140,21 @@ void BatteryStatus::drawSegment( QPainter *p, const QRect &r, const QColor &topg
     }
   for ( int j = 0; j < ng-hy-hh; j++ ) {
     p->setPen( QColor( h1 + ((h2-h1)*j)/(ng-1), s1 + ((s2-s1)*j)/(ng-1),
-		       v1 + ((v2-v1)*j)/(ng-1),  QColor::Hsv ) );
+               v1 + ((v2-v1)*j)/(ng-1),  QColor::Hsv ) );
     p->drawLine( r.x(), r.top()+hy+hh-2+j, r.x()+r.width(), r.top()+hy+hh-2+j );
   }
 }
 
 void BatteryStatus::paintEvent( QPaintEvent * ) {
 
-
-    int screenWidth = qApp->desktop()->width();
-    int screenHeight = qApp->desktop()->height();
-
   QPainter p(this);
   QString text;
   if ( ps->batteryStatus() == PowerStatus::Charging ) {
-	if (bat2) {
-	  text = tr("Charging both devices");
-	} else {
-	  text = tr("Charging");
-	}
+    if (bat2) {
+      text = tr("Charging both devices");
+    } else {
+      text = tr("Charging");
+    }
   } else if ( ps->batteryPercentAccurate() ) {
     text.sprintf( tr("Percentage battery remaining") + ": %i%%", percent );
   } else {
@@ -190,7 +187,7 @@ void BatteryStatus::paintEvent( QPaintEvent * ) {
 
   if ( ps->batteryTimeRemaining() >= 0 ) {
     text.sprintf( tr("Battery time remaining") + ": %im %02is",
-		  ps->batteryTimeRemaining() / 60, ps->batteryTimeRemaining() % 60 );
+          ps->batteryTimeRemaining() / 60, ps->batteryTimeRemaining() % 60 );
     p.drawText( 10, 130, text );
   }
 
@@ -213,9 +210,9 @@ void BatteryStatus::paintEvent( QPaintEvent * ) {
   if ( percent < 0 )
     return;
 
-  int rightEnd1 = screenWidth - 47;
-  int rightEnd2 = screenWidth - 35;
-  int percent2 = ( percent / 100.0 ) * rightEnd1 ;
+  int rightEnd1 = width() - 47;
+  int rightEnd2 = width() - 35;
+  int percent2 = ( percent / 100 ) * rightEnd1 ;
   p.setPen( black );
   qDrawShadePanel( &p,   9, 30, rightEnd1 , 39, colorGroup(), TRUE, 1, NULL);
   qDrawShadePanel( &p, rightEnd2, 37,  12, 24, colorGroup(), TRUE, 1, NULL);
@@ -240,7 +237,7 @@ void BatteryStatus::paintEvent( QPaintEvent * ) {
           jacketMsg = tr("No jacket with battery inserted");
       }
 
-      int jackPerc =  ( jackPercent / 100.0 ) * ( screenWidth - 47 ) ;
+      int jackPerc =  ( jackPercent / 100 ) * ( width() - 47 ) ;
 
       qDrawShadePanel( &p,   9, 160, rightEnd1, 39, colorGroup(), TRUE, 1, NULL);
       qDrawShadePanel( &p, rightEnd2, 167,  12, 24, colorGroup(), TRUE, 1, NULL);

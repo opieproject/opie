@@ -70,7 +70,7 @@ void BatteryMeter::mousePressEvent( QMouseEvent* e )
     QWidget::mousePressEvent( e );
 }
 
-void BatteryMeter::mouseReleaseEvent( QMouseEvent* e)
+void BatteryMeter::mouseReleaseEvent( QMouseEvent* /*e*/ )
 {
     if ( batteryView && batteryView->isVisible() ) {
         delete (QWidget *) batteryView;
@@ -110,11 +110,11 @@ void BatteryMeter::chargeTimeout()
 {
     percent += 20;
     if ( percent > 100 )
-	percent = 0;
+    percent = 0;
 
     repaint(FALSE);
     if ( batteryView )
-	batteryView->updatePercent( percent );
+    batteryView->updatePercent( percent );
 }
 
 void BatteryMeter::paintEvent( QPaintEvent* )
@@ -154,7 +154,7 @@ void BatteryMeter::paintEvent( QPaintEvent* )
     p.drawRect(x1,1,w,height()-1);      // corpus
     p.setBrush(color);
 
-    int extra = ((percent * h) % 100)/(100/4);
+    //int extra = ((percent * h) % 100)/(100/4);
 
     int middle = w/2;
     for ( int i = 0; i < middle; i++ )
