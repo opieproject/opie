@@ -4,7 +4,6 @@ CONFIG		= qt warn_on debug
 DESTDIR		= $(OPIEDIR)/bin
 HEADERS	= addressbook.h \
                   contacteditor.h \
-                  ocontactfields.h \
 		  ablabel.h \
 		  abtable.h \
 		  picker.h \
@@ -15,7 +14,6 @@ HEADERS	= addressbook.h \
 SOURCES	= main.cpp \
 		  addressbook.cpp \
 		  contacteditor.cpp \
-                  ocontactfields.cpp \
 		  ablabel.cpp \
 		  abtable.cpp \
 		  picker.cpp \

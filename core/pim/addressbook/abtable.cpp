@@ -483,8 +483,8 @@ void QTable::paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch )
 
 void AbTable::fitColumns()
 {
-	//	qWarning( "void AbTable::fitColumns()" );
-	int contentsWidth = visibleWidth() / 2; // :SX Why too low
+	qWarning( "void AbTable::fitColumns()" );
+	int contentsWidth = visibleWidth() / 2; 
 	// Fix to better value
 	// contentsWidth = 130; 
 

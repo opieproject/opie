@@ -53,7 +53,8 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 {
 	qWarning("AbView::c'tor");
 	// Load default database and handle syncing myself.. !
-	m_contactdb = new OContactAccess ( "addressbook", 0l, 0l, false ),
+	m_contactdb = new OContactAccess ( "addressbook", 0l, 0l, false );
+	m_contactdb -> setReadAhead( 16 ); // Use ReadAhead-Cache if available
 	mCat.load( categoryFileName() );
 
 	// Create Layout and put WidgetStack into it.

@@ -1,5 +1,4 @@
 #include "configdlg.h"
-#include "ocontactfields.h"
 
 #include <qcheckbox.h>
 #include <qradiobutton.h>
@@ -10,6 +9,7 @@
 #include <qpe/resource.h>
 
 #include <opie/ocontact.h>
+#include "opie/ocontactfields.h"
 
 ConfigDlg::ConfigDlg( QWidget *parent, const char *name):
 	ConfigDlg_Base(parent, name, true )

@@ -22,6 +22,7 @@
 #define CONTACTEDITOR_H
 
 #include <opie/ocontact.h>
+#include <opie/ocontactfields.h>
 
 #include <qpe/datebookmonth.h>
 
@@ -30,8 +31,6 @@
 #include <qmap.h>
 #include <qstringlist.h>
 #include <qwidgetstack.h> 
-
-#include "ocontactfields.h"
 
 const int NAME_LF  = 0;
 const int NAME_LFM = 1;

@@ -21,7 +21,6 @@
 
 #include "contacteditor.h"
 #include "addresspicker.h"
-#include "ocontactfields.h"
 
 #include <qpe/categoryselect.h>
 #include <qpe/qpeapplication.h>
