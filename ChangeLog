@@ -2,7 +2,10 @@
 
 	New Features
 	------------
-	* Ported opie-mediaplayer2 to recent libxine (brad,zecke)
+	* OpiePlayer2 gains adding of Directories to the playlist (zecke)
+	* OpiePlayer2 handles error better (zecke)
+	* OpiePlayer2 gives Progress when streaming (zecke)
+	* OpiePlayer2 ported to use libxine 1.0.0-rc6-a (brad,zecke)
 	* Ported brightnessapplet from Qtopia 1.7 (mickeyl)
 	* Opie Eye got a Digital Camera File Backend (alwin,zecke)
 	* Support for Tuxpad 1 of Tradesquare.NL (mickeyl,zecke)
