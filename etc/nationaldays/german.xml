@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nationaldays>
+<description value="German holidays"/>
+<entries>
+<entry name="Maifeiertag" date="05-01"/>
+<entry name="Tag der dt. Einheit" date="10-3"/>
+</entries>
+</nationaldays>

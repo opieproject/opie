@@ -35,6 +35,7 @@ CONFIG_DATEBOOK	core/pim/datebook	datebook.pro
 CONFIG_DATEBOOK_BIRTHDAYS_HOLIDAY core/pim/datebook/holiday/birthday birthdays.pro
 CONFIG_DATEBOOK_CHRISTIAN_HOLIDAY core/pim/datebook/holiday/christian christian-holidays.pro
 CONFIG_DATEBOOK_DUMMY_HOLIDAY core/pim/datebook/holiday/dummy dummy.pro
+CONFIG_DATEBOOK_NATIONAL_HOLIDAY core/pim/datebook/holiday/national national-holidays.pro
 CONFIG_DECO_FLAT	noncore/decorations/flat	flat.pro
 CONFIG_DECO_LIQUID	noncore/decorations/liquid	liquid.pro
 CONFIG_DECO_POLISHED	noncore/decorations/polished	polished.pro
