@@ -101,25 +101,4 @@ DEPENDPATH	+= ../../rsync
 TARGET		= qpe
 LIBS		+= -lqpe -lcrypt -lopie 
 
-TRANSLATIONS = ../../i18n/de/qpe.ts \
-	 ../../i18n/nl/qpe.ts \
-	 ../../i18n/xx/qpe.ts \
-	 ../../i18n/en/qpe.ts \
-	 ../../i18n/es/qpe.ts \
-	 ../../i18n/fr/qpe.ts \
-	 ../../i18n/hu/qpe.ts \
-	 ../../i18n/ja/qpe.ts \
-	 ../../i18n/ko/qpe.ts \
-	 ../../i18n/no/qpe.ts \
-	 ../../i18n/pl/qpe.ts \
-	 ../../i18n/pt/qpe.ts \
-	 ../../i18n/pt_BR/qpe.ts \
-	 ../../i18n/sl/qpe.ts \
-	 ../../i18n/zh_CN/qpe.ts \
-	 ../../i18n/it/qpe.ts \
-	 ../../i18n/zh_TW/qpe.ts \
-	 ../../i18n/da/qpe.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

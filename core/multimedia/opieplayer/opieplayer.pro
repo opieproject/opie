@@ -18,24 +18,4 @@ LIBS            += -lqpe -lpthread -lopie
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 
-TRANSLATIONS = ../../../i18n/de/opieplayer.ts \
-	 ../../../i18n/nl/opieplayer.ts \
-        ../../../i18n/da/opieplayer.ts \
-        ../../../i18n/xx/opieplayer.ts \
-        ../../../i18n/en/opieplayer.ts \
-        ../../../i18n/es/opieplayer.ts \
-        ../../../i18n/fr/opieplayer.ts \
-        ../../../i18n/hu/opieplayer.ts \
-        ../../../i18n/ja/opieplayer.ts \
-        ../../../i18n/ko/opieplayer.ts \
-        ../../../i18n/no/opieplayer.ts \
-        ../../../i18n/pl/opieplayer.ts \
-        ../../../i18n/pt/opieplayer.ts \
-        ../../../i18n/pt_BR/opieplayer.ts \
-        ../../../i18n/sl/opieplayer.ts \
-        ../../../i18n/zh_CN/opieplayer.ts \
-        ../../../i18n/zh_TW/opieplayer.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

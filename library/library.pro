@@ -128,24 +128,4 @@ TARGET		= qpe
 DESTDIR		= $(OPIEDIR)/lib$(PROJMAK)
 VERSION		= 1.5.0.1
 
-TRANSLATIONS = ../i18n/de/libqpe.ts \
-	 ../i18n/nl/libqpe.ts \
-	 ../i18n/xx/libqpe.ts \
-	 ../i18n/en/libqpe.ts \
-	 ../i18n/es/libqpe.ts \
-	 ../i18n/fr/libqpe.ts \
-	 ../i18n/hu/libqpe.ts \
-	 ../i18n/ja/libqpe.ts \
-	 ../i18n/ko/libqpe.ts \
-	 ../i18n/no/libqpe.ts \
-	 ../i18n/pl/libqpe.ts \
-	 ../i18n/pt/libqpe.ts \
-	 ../i18n/pt_BR/libqpe.ts \
-	 ../i18n/sl/libqpe.ts \
-	 ../i18n/zh_CN/libqpe.ts \
-	 ../i18n/it/libqpe.ts \
-	 ../i18n/zh_TW/libqpe.ts \
-	 ../i18n/da/libqpe.ts
-
-
 include ( $(OPIEDIR)/include.pro )

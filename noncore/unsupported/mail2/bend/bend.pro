@@ -9,24 +9,4 @@ LIBS		+=	-lcoremail -lqpe
 TARGET		=	bend
 DESTDIR		+=	$(OPIEDIR)/plugins/applets/
 
-TRANSLATIONS = ../../../i18n/de/libbend.ts \
-	 ../../../i18n/nl/libbend.ts \
-	 ../../../i18n/da/libbend.ts \
-	 ../../../i18n/xx/libbend.ts \
-	 ../../../i18n/en/libbend.ts \
-	 ../../../i18n/es/libbend.ts \
-	 ../../../i18n/fr/libbend.ts \
-	 ../../../i18n/hu/libbend.ts \
-	 ../../../i18n/ja/libbend.ts \
-	 ../../../i18n/ko/libbend.ts \
-	 ../../../i18n/no/libbend.ts \
-	 ../../../i18n/pl/libbend.ts \
-	 ../../../i18n/pt/libbend.ts \
-	 ../../../i18n/pt_BR/libbend.ts \
-	 ../../../i18n/sl/libbend.ts \
-	 ../../../i18n/zh_CN/libbend.ts \
-	 ../../../i18n/zh_TW/libbend.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

@@ -35,24 +35,4 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH     += $(OPIEDIR)/include
 LIBS	       += -lqpe
 
-TRANSLATIONS = ../../../i18n/de/tableviewer.ts \
-	 ../../../i18n/nl/tableviewer.ts \
-	 ../../../i18n/da/tableviewer.ts \
-	 ../../../i18n/xx/tableviewer.ts \
-	 ../../../i18n/en/tableviewer.ts \
-	 ../../../i18n/es/tableviewer.ts \
-	 ../../../i18n/fr/tableviewer.ts \
-	 ../../../i18n/hu/tableviewer.ts \
-	 ../../../i18n/ja/tableviewer.ts \
-	 ../../../i18n/ko/tableviewer.ts \
-	 ../../../i18n/no/tableviewer.ts \
-	 ../../../i18n/pl/tableviewer.ts \
-	 ../../../i18n/pt/tableviewer.ts \
-	 ../../../i18n/pt_BR/tableviewer.ts \
-	 ../../../i18n/sl/tableviewer.ts \
-	 ../../../i18n/zh_CN/tableviewer.ts \
-	 ../../../i18n/zh_TW/tableviewer.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

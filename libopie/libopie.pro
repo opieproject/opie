@@ -98,24 +98,4 @@ LIBS += -lqpe
 INTERFACES      = otimepickerbase.ui orecurrancebase.ui
 TARGET          = opie
 
-TRANSLATIONS = ../i18n/de/libopie.ts \
-	 ../i18n/nl/libopie.ts \
-	 ../i18n/xx/libopie.ts \
-   ../i18n/en/libopie.ts \
-   ../i18n/es/libopie.ts \
-   ../i18n/fr/libopie.ts \
-   ../i18n/hu/libopie.ts \
-   ../i18n/ja/libopie.ts \
-   ../i18n/ko/libopie.ts \
-   ../i18n/no/libopie.ts \
-   ../i18n/pl/libopie.ts \
-   ../i18n/pt/libopie.ts \
-   ../i18n/pt_BR/libopie.ts \
-   ../i18n/sl/libopie.ts \
-   ../i18n/zh_CN/libopie.ts \
-   ../i18n/zh_TW/libopie.ts \
-   ../i18n/da/libopie.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

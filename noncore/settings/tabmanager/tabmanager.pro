@@ -9,24 +9,4 @@ INTERFACES	= app.ui wait.ui
 TARGET		= tabmanager
 DESTDIR 	= $(OPIEDIR)/bin
 
-TRANSLATIONS =	../../../i18n/de/tabmanager.ts \
-	 ../../../i18n/nl/tabmanager.ts \
-	 ../../../i18n/da/tabmanager.ts \
-	 ../../../i18n/xx/tabmanager.ts \
-		../../../i18n/en/tabmanager.ts \
-		../../../i18n/es/tabmanager.ts \
-		../../../i18n/fr/tabmanager.ts \
-		../../../i18n/hu/tabmanager.ts \
-		../../../i18n/ja/tabmanager.ts \
-		../../../i18n/ko/tabmanager.ts \
-		../../../i18n/no/tabmanager.ts \
-		../../../i18n/pl/tabmanager.ts \
-		../../../i18n/pt/tabmanager.ts \
-		../../../i18n/pt_BR/tabmanager.ts \
-		../../../i18n/sl/tabmanager.ts \
-		../../../i18n/zh_CN/tabmanager.ts \
-		../../../i18n/zh_TW/tabmanager.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )
