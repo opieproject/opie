@@ -56,9 +56,8 @@ namespace Todo {
 
         void updateList();
         /** returns the iterator sorted if set sorted*/
-        OTodoAccess::List::Iterator begin();
-        OTodoAccess::List::Iterator end();
-        OTodoAccess::List& list();
+        OTodoAccess::List list()const;
+        OTodoAccess::List sorted( bool asc, int so, int f,  int cat );
 
         OTodoAccess::List::Iterator overDue();
         OTodoAccess::List::Iterator fromTo( const QDate& start,

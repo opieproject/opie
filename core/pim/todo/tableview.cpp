@@ -90,7 +90,7 @@ TableView::TableView( MainWindow* window, QWidget* wid )
  */
 void TableView::newDay() {
     clear();
-    setTodos( begin(),end() );
+    updateView();
 }
 TableView::~TableView() {
 
@@ -138,11 +138,13 @@ QString TableView::currentRepresentation() {
 /* show overdue */
 void TableView::showOverDue( bool ) {
     clear();
-    setTodos( begin(), end() );
+    updateView();
 }
 
-void TableView::setTodos( OTodoAccess::List::Iterator it,
-                          OTodoAccess::List::Iterator end ) {
+void TableView::updateView( ) {
+    OTodoAccess::List::Iterator it, end;
+    it = list().begin();
+    end = list().end();
     qWarning("setTodos");
     QTime time;
     time.start();
@@ -233,11 +235,11 @@ void TableView::replaceEvent( const OTodo& ev) {
  */
 void TableView::removeEvent( int ) {
     clear();
-    setTodos( begin(), end() );
+    updateView();
 }
 void TableView::setShowCompleted( bool b) {
     qWarning("Show Completed %d" + b );
-    setTodos( begin(), end() );
+    updateView();
 }
 void TableView::setShowDeadline( bool b) {
     qWarning("Show DeadLine %d" + b );
@@ -248,7 +250,7 @@ void TableView::setShowDeadline( bool b) {
 }
 void TableView::setShowCategory( const QString& ) {
     qWarning("setShowCategory");
-    setTodos( begin(), end() );
+    updateView();
 }
 void TableView::clear() {
     m_cache.clear();

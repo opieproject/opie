@@ -54,8 +54,7 @@ namespace Todo {
         QString currentRepresentation();
 
         void showOverDue( bool );
-        void setTodos( OTodoAccess::List::Iterator it,
-                       OTodoAccess::List::Iterator end );
+        void updateView();
         void setTodo( int uid, const OTodo& );
         void addEvent( const OTodo& event );
         void replaceEvent( const OTodo& );

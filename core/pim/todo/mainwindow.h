@@ -70,9 +70,9 @@ namespace Todo {
 
 
         void updateList();
-        OTodoAccess::List::Iterator begin();
-        OTodoAccess::List::Iterator  end();
-//        OTodoAccess::List::Iterator &iterator();
+        OTodoAccess::List list()const;
+        OTodoAccess::List sorted( bool asc, int sortOrder );
+        OTodoAccess::List sorted( bool asc, int sortOrder, int addFilter );
 
         OTodo event(int uid );
 

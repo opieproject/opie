@@ -8,6 +8,8 @@ TodoView::TodoView( MainWindow* win )
     : m_main( win )
 {
     hack = new InternQtHack;
+    m_asc = false;
+    m_sortOrder = -1;
 }
 TodoView::~TodoView() {
     delete hack;
@@ -48,12 +50,25 @@ MainWindow* TodoView::todoWindow() {
 }
 
 OTodo TodoView::event(int uid ) { return m_main->event( uid ); }
-OTodoAccess::List::Iterator TodoView::begin() {
-    m_main->updateList();
-    return m_main->begin();
+OTodoAccess::List TodoView::list(){
+    todoWindow()->updateList();
+    return todoWindow()->list();
 }
-OTodoAccess::List::Iterator TodoView::end() { return m_main->end(); }
-
+OTodoAccess::List TodoView::sorted(){
+    return m_sort;
+}
+void TodoView::sort() {
+    m_sort = todoWindow()->sorted(m_asc,m_sortOrder );
+}
+void TodoView::sort(int sort) {
+    m_sort = todoWindow()->sorted(m_asc, m_sortOrder, sort );
+}
+void TodoView::setSortOrder( int order ) {
+    m_sortOrder = order;
+}
+void TodoView::setAscending( bool b ) {
+    m_asc = b;
+}
 void TodoView::update(int uid, const SmallTodo& to ) {
     //m_main->slotUpate1( uid, to );
 }

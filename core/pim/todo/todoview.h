@@ -89,8 +89,11 @@ namespace Todo {
         virtual int current() = 0;
         virtual QString currentRepresentation() = 0;
         virtual void showOverDue( bool ) = 0;
-        virtual void setTodos( OTodoAccess::List::Iterator it,
-                               OTodoAccess::List::Iterator end ) = 0;
+
+        /*
+         * update the view
+         */
+        virtual void updateView() = 0;
 
         virtual void addEvent( const OTodo& ) = 0;
         virtual void replaceEvent( const OTodo& ) = 0;
@@ -153,8 +156,12 @@ namespace Todo {
     protected:
         MainWindow* todoWindow();
         OTodo event(int uid );
-        OTodoAccess::List::Iterator begin();
-        OTodoAccess::List::Iterator end();
+        OTodoAccess::List list();
+        OTodoAccess::List sorted();
+        void sort();
+        void sort(int sort );
+        void setSortOrder( int order );
+        void setAscending( bool );
 
         /*
           These things needs to be implemented
@@ -172,6 +179,9 @@ namespace Todo {
     private:
         InternQtHack* hack;
         MainWindow *m_main;
+        OTodoAccess::List m_sort;
+        bool m_asc : 1;
+        int m_sortOrder;
     };
 };
 

@@ -49,15 +49,14 @@ OTodo TodoManager::event(int uid ) {
 void TodoManager::updateList() {
     m_list = m_db->allRecords();
 }
-OTodoAccess::List::Iterator TodoManager::begin() {
-    m_it = m_list.begin();
-    return m_it;
+OTodoAccess::List TodoManager::list() const{
+    return m_list;
 }
-OTodoAccess::List::Iterator TodoManager::end() {
-    return m_list.end();
+OTodoAccess::List TodoManager::sorted( bool asc, int so, int f, int cat ) {
+    return m_db->sorted( asc, so, f, cat );
 }
 OTodoAccess::List::Iterator TodoManager::overDue() {
-    int filter = 2 & 1;
+    int filter = 2 | 1;
     m_list = m_db->sorted(m_asc, m_sortOrder, filter,  m_ca );
     m_it = m_list.begin();
     return m_it;

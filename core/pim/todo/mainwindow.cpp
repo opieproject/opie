@@ -225,8 +225,6 @@ void MainWindow::initViews() {
     m_views.append( tableView );
     m_curView = tableView;
     connectBase( tableView );
-// tableView->setTodos( begin(), end() ); we call populateCategories
-
     /* add QString type + QString configname to
      * the View menu
      * and subdirs for multiple views
@@ -276,11 +274,29 @@ QPopupMenu* MainWindow::view() {
 QToolBar* MainWindow::toolbar() {
     return m_tool;
 }
-OTodoAccess::List::Iterator MainWindow::begin() {
-    return m_todoMgr.begin();
+OTodoAccess::List MainWindow::list()const {
+    return m_todoMgr.list();
 }
-OTodoAccess::List::Iterator MainWindow::end() {
-    return m_todoMgr.end();
+OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
+    int cat = 0;
+    if ( m_curCat == tr("All Categories") )
+        cat = currentCatId();
+
+    int filter = 1;
+
+    if (!m_completed )
+        filter |= 4;
+    if (m_overdue)
+        filter |= 2;
+
+    return m_todoMgr.sorted( asc, sortOrder, filter, cat );
+}
+OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter) {
+    int cat = 0;
+    if ( m_curCat == tr("All Categories") )
+        cat = currentCatId();
+
+    return m_todoMgr.sorted(asc, sortOrder, addFilter,  cat );
 }
 OTodo MainWindow::event( int uid ) {
     return m_todoMgr.event( uid );
@@ -299,7 +315,7 @@ TodoShow* MainWindow::currentShow() {
 }
 void MainWindow::slotReload() {
     m_todoMgr.reload();
-    currentView()->setTodos( begin(), end() );
+    currentView()->updateView( );
     raiseCurrentView();
 }
 void MainWindow::closeEvent( QCloseEvent* e ) {
@@ -466,7 +482,7 @@ void MainWindow::slotDeleteCompleted() {
         return;
 
     m_todoMgr.remove( currentView()->completed() );
-    currentView()->setTodos( begin(), end() );
+    currentView()->updateView( );
 }
 void MainWindow::slotFind() {
 
