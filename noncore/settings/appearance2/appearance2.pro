@@ -6,7 +6,7 @@ SOURCES   = appearance.cpp editScheme.cpp main.cpp sample.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += ../$(OPIEDIR)/include
 LIBS            += -lqpe -lopie
-TARGET    = appearance2
+TARGET    = appearance
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 
