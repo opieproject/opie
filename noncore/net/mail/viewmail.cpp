@@ -128,7 +128,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
     QPopupMenu *menu = new QPopupMenu();
   int ret=0;
 
-  if ( item->text( 0 ).left( 5 ) == "text/" )  {
+  if ( item->text( 0 ).left( 5 ) == "text/" || item->text(0)=="message/rfc822" )  {
      menu->insertItem( tr( "Show Text" ), 1 );
   }
   menu->insertItem( tr( "Save Attachment" ),  0 );
