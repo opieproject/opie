@@ -1,5 +1,9 @@
 #include "opimnotifymanager.h"
 
+#include "oconversion.h"
+
+#include <qstringlist.h>
+
 OPimNotifyManager::OPimNotifyManager( const Reminders& rem,  const Alarms& al)
     : m_rem( rem ), m_al( al )
 {}
@@ -67,8 +71,76 @@ void OPimNotifyManager::registerNotify( const OPimNotify& ) {
 void OPimNotifyManager::deregister( const OPimNotify& ) {
 
 }
+
 bool OPimNotifyManager::isEmpty()const {
     qWarning("is Empty called on OPimNotifyManager %d %d", m_rem.count(), m_al.count() );
     if ( m_rem.isEmpty() && m_al.isEmpty() ) return true;
     else return false;
+}
+
+// Taken from otodoaccessxml..
+QString OPimNotifyManager::alarmsToString() const
+{
+	QString str;
+
+	OPimNotifyManager::Alarms alarms = m_al;
+	if ( !alarms.isEmpty() ) {
+		QStringList als;
+		OPimNotifyManager::Alarms::Iterator it = alarms.begin();
+		for ( ; it != alarms.end(); ++it ) {
+			/* only if time is valid */
+			if ( (*it).dateTime().isValid() ) {
+				als << OConversion::dateTimeToString( (*it).dateTime() )
+					+ ":" + QString::number( (*it).duration() )
+					+ ":" + QString::number( (*it).sound() )
+					+ ":";
+			}
+		}
+		// now write the list
+		qWarning("als: %s", als.join("____________").latin1() );
+		str = als.join(";");
+	}
+
+	return str;
+}
+QString OPimNotifyManager::remindersToString() const
+{
+	QString str;
+
+	OPimNotifyManager::Reminders reminders = m_rem;
+	if (!reminders.isEmpty() ) {
+		OPimNotifyManager::Reminders::Iterator it = reminders.begin();
+		QStringList records;
+		for ( ; it != reminders.end(); ++it ) {
+			records << QString::number( (*it).recordUid() );
+		}
+		str = records.join(";");
+	}
+
+	return str;
+}
+
+void OPimNotifyManager::alarmsFromString( const QString& str )
+{
+        QStringList als = QStringList::split(";", str );
+        for (QStringList::Iterator it = als.begin(); it != als.end(); ++it ) {
+		QStringList alarm = QStringList::split(":", (*it), TRUE ); // allow empty
+		qWarning("alarm: %s", alarm.join("___").latin1() );
+		qWarning("alarm[0]: %s %s", alarm[0].latin1(), 
+			 OConversion::dateTimeFromString( alarm[0] ).toString().latin1() );
+		OPimAlarm al( alarm[2].toInt(), OConversion::dateTimeFromString( alarm[0] ), 
+			      alarm[1].toInt() );
+		add( al );
+        }
+}
+
+void OPimNotifyManager::remindersFromString( const QString& str )
+{
+
+        QStringList rems = QStringList::split(";", str );
+        for (QStringList::Iterator it = rems.begin(); it != rems.end(); ++it ) {
+		OPimReminder rem( (*it).toInt() );
+		add( rem );
+        }
+	
 }

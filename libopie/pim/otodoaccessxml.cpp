@@ -568,7 +568,7 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
 
     /*
      * save reminders and notifiers!
-     * DATE_TIME:DURATION:SOUND:NOT_USED_YET;OTHER_DATE_TIME:OTHER:DURATION:SOUND:....
+     * DATE_TIME:DURATION:SOUND:NOT_USED_YET;OTHER_DATE_TIME:OTHER_DURATION:SOUND:....
      */
     if ( ev.hasNotifiers() ) {
         OPimNotifyManager manager = ev.notifiers();

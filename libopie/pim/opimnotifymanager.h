@@ -39,8 +39,30 @@ public:
      */
     void deregister( const OPimNotify& );
 
-
     bool isEmpty()const;
+
+    /** 
+     * Return all alarms as string
+     */
+    QString alarmsToString() const;
+    /** 
+     * Return all notifiers as string
+     */
+    QString remindersToString() const;
+
+    /**
+     * Convert string to alarms 
+     * @param str String created by alarmsToString()
+     */
+    void alarmsFromString( const QString& str );
+
+    /**
+     * Convert string to reminders
+     * @param str String created by remindersToString()
+     */
+    void remindersFromString( const QString& str );
+
+
 
 private:
     Reminders m_rem;

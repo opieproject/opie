@@ -43,6 +43,13 @@ class OContactFields{
     bool changedFieldOrder;
 
  public:
+    static QStringList personalfields( bool sorted = true, bool translated = false );
+    static QStringList phonefields( bool sorted = true, bool translated = false );
+    static QStringList detailsfields( bool sorted = true, bool translated = false );
+    static QStringList fields( bool sorted = true, bool translated = false );
+    
+    static QStringList trpersonalfields( bool sorted = true );
+    static QStringList untrpersonalfields( bool sorted = true );
     static QStringList trphonefields( bool sorted = true );
     static QStringList untrphonefields( bool sorted = true );
     static QStringList trdetailsfields( bool sorted = true );

@@ -44,7 +44,7 @@ private:
     inline OTodo todo( OSQLResultItem& )const;
     inline QArray<int> uids( const OSQLResult& )const;
     OTodo todo( int uid )const;
-    QBitArray sup();
+    QBitArray sup() const;
 
     QAsciiDict<int> m_dict;
     OSQLDriver* m_driver;

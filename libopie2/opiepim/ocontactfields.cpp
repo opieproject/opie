@@ -11,12 +11,50 @@
 
 /*!
   \internal
-  Returns a  list of details field names for a contact.
+  Returns a list of personal field names for a contact.
 */
-QStringList OContactFields::untrdetailsfields( bool sorted )
+QStringList OContactFields::personalfields( bool sorted, bool translated )
 {
     QStringList list;
-    QMap<int, QString> mapIdToStr = idToUntrFields();
+    QMap<int, QString> mapIdToStr;
+    if ( translated )
+	    mapIdToStr = idToTrFields();
+    else
+	    mapIdToStr = idToUntrFields();
+
+    list.append( mapIdToStr[ Qtopia::AddressUid ] );
+    list.append( mapIdToStr[ Qtopia::AddressCategory ] );
+
+    list.append( mapIdToStr[ Qtopia::Title ] );
+    list.append( mapIdToStr[ Qtopia::FirstName ] );
+    list.append( mapIdToStr[ Qtopia::MiddleName ] );
+    list.append( mapIdToStr[ Qtopia::LastName ] );
+    list.append( mapIdToStr[ Qtopia::Suffix ] );
+    list.append( mapIdToStr[ Qtopia::FileAs ] );
+
+    list.append( mapIdToStr[ Qtopia::JobTitle ] );
+    list.append( mapIdToStr[ Qtopia::Department ] );
+    list.append( mapIdToStr[ Qtopia::Company ] );
+
+    list.append( mapIdToStr[ Qtopia::Notes ] );
+    list.append( mapIdToStr[ Qtopia::Groups ] );
+
+    if (sorted) list.sort();
+    return list;
+}
+
+/*!
+  \internal
+  Returns a list of details field names for a contact.
+*/
+QStringList OContactFields::detailsfields( bool sorted, bool translated )
+{
+    QStringList list;
+    QMap<int, QString> mapIdToStr;
+    if ( translated )
+	    mapIdToStr = idToTrFields();
+    else
+	    mapIdToStr = idToUntrFields();
 
     list.append( mapIdToStr[ Qtopia::Office ] );
     list.append( mapIdToStr[ Qtopia::Profession ] );
@@ -36,38 +74,16 @@ QStringList OContactFields::untrdetailsfields( bool sorted )
 
 /*!
   \internal
-  Returns a translated list of details field names for a contact.
+  Returns a list of phone field names for a contact.
 */
-QStringList OContactFields::trdetailsfields( bool sorted )
+QStringList OContactFields::phonefields( bool sorted, bool translated )
 {
     QStringList list;
-    QMap<int, QString> mapIdToStr = idToTrFields();
-
-    list.append( mapIdToStr[Qtopia::Office] );
-    list.append( mapIdToStr[Qtopia::Profession] );
-    list.append( mapIdToStr[Qtopia::Assistant] );
-    list.append( mapIdToStr[Qtopia::Manager] );
-
-    list.append( mapIdToStr[Qtopia::Spouse] );
-    list.append( mapIdToStr[Qtopia::Gender] );
-    list.append( mapIdToStr[Qtopia::Birthday] );
-    list.append( mapIdToStr[Qtopia::Anniversary] );
-    list.append( mapIdToStr[Qtopia::Nickname] );
-    list.append( mapIdToStr[Qtopia::Children] );
-
-    if (sorted) list.sort();
-    return list;
-}
-
-
-/*!
-  \internal
-  Returns a translated list of phone field names for a contact.
-*/
-QStringList OContactFields::trphonefields( bool sorted )
-{
-    QStringList list;
-    QMap<int, QString> mapIdToStr = idToTrFields();
+    QMap<int, QString> mapIdToStr;
+    if ( translated )
+	    mapIdToStr = idToTrFields();
+    else
+	    mapIdToStr = idToUntrFields();
 
     list.append( mapIdToStr[Qtopia::BusinessPhone] );
     list.append( mapIdToStr[Qtopia::BusinessFax] );
@@ -89,58 +105,22 @@ QStringList OContactFields::trphonefields( bool sorted )
     return list;
 }
 
-
 /*!
   \internal
-  Returns a list of phone field names for a contact.
+  Returns a list of field names for a contact.
 */
-QStringList OContactFields::untrphonefields( bool sorted )
+QStringList OContactFields::fields( bool sorted, bool translated )
 {
     QStringList list;
-    QMap<int, QString> mapIdToStr = idToUntrFields();
+    QMap<int, QString> mapIdToStr;
+    if ( translated )
+	    mapIdToStr = idToTrFields();
+    else
+	    mapIdToStr = idToUntrFields();
 
-    list.append( mapIdToStr[ Qtopia::BusinessPhone ] );
-    list.append( mapIdToStr[ Qtopia::BusinessFax ] );
-    list.append( mapIdToStr[ Qtopia::BusinessMobile ] );
-    list.append( mapIdToStr[ Qtopia::BusinessPager ] );
-    list.append( mapIdToStr[ Qtopia::BusinessWebPage ] );
+    list += personalfields( sorted, translated );
 
-    list.append( mapIdToStr[ Qtopia::DefaultEmail ] );
-    list.append( mapIdToStr[ Qtopia::Emails ] );
-
-    list.append( mapIdToStr[ Qtopia::HomePhone ] );
-    list.append( mapIdToStr[ Qtopia::HomeFax ] );
-    list.append( mapIdToStr[ Qtopia::HomeMobile ] );
-    //list.append( mapIdToStr[Qtopia::HomePager] );
-    list.append( mapIdToStr[Qtopia::HomeWebPage] );
-
-    if (sorted) list.sort();
-
-    return list;
-}
-
-
-/*!
-  \internal
-  Returns a translated list of field names for a contact.
-*/
-QStringList OContactFields::trfields( bool sorted )
-{
-    QStringList list;
-    QMap<int, QString> mapIdToStr = idToTrFields();
-
-    list.append( mapIdToStr[Qtopia::Title]);
-    list.append( mapIdToStr[Qtopia::FirstName] );
-    list.append( mapIdToStr[Qtopia::MiddleName] );
-    list.append( mapIdToStr[Qtopia::LastName] );
-    list.append( mapIdToStr[Qtopia::Suffix] );
-    list.append( mapIdToStr[Qtopia::FileAs] );
-
-    list.append( mapIdToStr[Qtopia::JobTitle] );
-    list.append( mapIdToStr[Qtopia::Department] );
-    list.append( mapIdToStr[Qtopia::Company] );
-
-    list += trphonefields( sorted );
+    list += phonefields( sorted, translated );
 
     list.append( mapIdToStr[Qtopia::BusinessStreet] );
     list.append( mapIdToStr[Qtopia::BusinessCity] );
@@ -154,14 +134,80 @@ QStringList OContactFields::trfields( bool sorted )
     list.append( mapIdToStr[Qtopia::HomeZip] );
     list.append( mapIdToStr[Qtopia::HomeCountry] );
 
-    list += trdetailsfields( sorted );
-
-    list.append( mapIdToStr[Qtopia::Notes] );
-    list.append( mapIdToStr[Qtopia::Groups] );
+    list += detailsfields( sorted, translated );
 
     if (sorted) list.sort();
 
     return list;
+}
+
+
+/*!
+  \internal
+  Returns an untranslated list of personal field names for a contact.
+*/
+QStringList OContactFields::untrpersonalfields( bool sorted )
+{
+	return personalfields( sorted, false );
+}
+
+
+/*!
+  \internal
+  Returns a translated list of personal field names for a contact.
+*/
+QStringList OContactFields::trpersonalfields( bool sorted )
+{
+	return personalfields( sorted, true );
+}
+
+
+/*!
+  \internal
+  Returns an untranslated list of details field names for a contact.
+*/
+QStringList OContactFields::untrdetailsfields( bool sorted )
+{
+	return detailsfields( sorted, false );
+}
+
+
+/*!
+  \internal
+  Returns a translated list of details field names for a contact.
+*/
+QStringList OContactFields::trdetailsfields( bool sorted )
+{
+	return detailsfields( sorted, true );
+}
+
+
+/*!
+  \internal
+  Returns a translated list of phone field names for a contact.
+*/
+QStringList OContactFields::trphonefields( bool sorted )
+{
+	return phonefields( sorted, true );
+}
+
+/*!
+  \internal
+  Returns an untranslated list of phone field names for a contact.
+*/
+QStringList OContactFields::untrphonefields( bool sorted )
+{
+	return phonefields( sorted, false );
+}
+
+
+/*!
+  \internal
+  Returns a translated list of field names for a contact.
+*/
+QStringList OContactFields::trfields( bool sorted )
+{
+	return fields( sorted, true );
 }
 
 /*!
@@ -170,46 +216,9 @@ QStringList OContactFields::trfields( bool sorted )
 */
 QStringList OContactFields::untrfields( bool sorted )
 {
-    QStringList list;
-    QMap<int, QString> mapIdToStr = idToUntrFields();
-
-    list.append( mapIdToStr[ Qtopia::AddressUid ] );
-    list.append( mapIdToStr[ Qtopia::AddressCategory ] );
-
-    list.append( mapIdToStr[ Qtopia::Title ] );
-    list.append( mapIdToStr[ Qtopia::FirstName ] );
-    list.append( mapIdToStr[ Qtopia::MiddleName ] );
-    list.append( mapIdToStr[ Qtopia::LastName ] );
-    list.append( mapIdToStr[ Qtopia::Suffix ] );
-    list.append( mapIdToStr[ Qtopia::FileAs ] );
-
-    list.append( mapIdToStr[ Qtopia::JobTitle ] );
-    list.append( mapIdToStr[ Qtopia::Department ] );
-    list.append( mapIdToStr[ Qtopia::Company ] );
-
-    list += untrphonefields( sorted );
-
-    list.append( mapIdToStr[ Qtopia::BusinessStreet ] );
-    list.append( mapIdToStr[ Qtopia::BusinessCity ] );
-    list.append( mapIdToStr[ Qtopia::BusinessState ] );
-    list.append( mapIdToStr[ Qtopia::BusinessZip ] );
-    list.append( mapIdToStr[ Qtopia::BusinessCountry ] );
-
-    list.append( mapIdToStr[ Qtopia::HomeStreet ] );
-    list.append( mapIdToStr[ Qtopia::HomeCity ] );
-    list.append( mapIdToStr[ Qtopia::HomeState ] );
-    list.append( mapIdToStr[ Qtopia::HomeZip ] );
-    list.append( mapIdToStr[ Qtopia::HomeCountry ] );
-
-    list += untrdetailsfields( sorted );
-
-    list.append( mapIdToStr[ Qtopia::Notes ] );
-    list.append( mapIdToStr[ Qtopia::Groups ] );
-
-    if (sorted) list.sort();
-
-    return list;
+    return fields( sorted, false );
 }
+
 QMap<int, QString> OContactFields::idToTrFields()
 {
 	QMap<int, QString> ret_map;
@@ -329,7 +338,7 @@ QMap<int, QString> OContactFields::idToUntrFields()
 
 	//personal
 	ret_map.insert( Qtopia::Spouse, "Spouse" );
-	ret_map.insert( Qtopia::Gender, "Gender" );
+ 	ret_map.insert( Qtopia::Gender, "Gender" );
 	ret_map.insert( Qtopia::Birthday, "Birthday" );
 	ret_map.insert( Qtopia::Anniversary, "Anniversary" );
 	ret_map.insert( Qtopia::Nickname, "Nickname" );
@@ -356,6 +365,8 @@ QMap<QString, int> OContactFields::trFieldsToId()
 
 	return ret_map;
 }
+
+/* ======================================================================= */
 
 QMap<QString, int> OContactFields::untrFieldsToId()
 {

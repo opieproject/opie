@@ -9,6 +9,9 @@
 #include <opie2/osqlquery.h>
 
 #include "otodoaccesssql.h"
+#include "opimstate.h"
+#include "opimnotifymanager.h"
+#include "orecur.h"
 
 /*
  * first some query
@@ -120,7 +123,8 @@ namespace {
         QString qu;
         qu += "create table todolist( uid PRIMARY KEY, categories, completed, ";
         qu += "description, summary, priority, DueDate, progress ,  state, ";
-	qu += "Recurrence, notifiers, maintainer, startdate, completeddate)";
+	qu += "Recurrence, reminders, alarms, maintainer, startdate, completeddate);";
+	qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
         return qu;
     }
 
@@ -181,14 +185,23 @@ namespace {
 		+       QString::number(month)
 		+       "-" + QString::number( day )              + "'" + ","
 		+       QString::number( m_todo.progress() )            + ","
-		+ "''"                                                  + "," // state (conversion needed)
-// 		+       QString::number( m_todo.state() )               + ","
-		+ "''"                                                  + "," // Recurrence (conversion needed)
-		+ "''"                                                  + "," // Notifiers (conversion needed)
-		+ "''"                                                  + "," // Maintainers (conversion needed)
+ 		+       QString::number( m_todo.state().state() )       + ","
+		+ "'" + m_todo.recurrence().toString()            + "'"+ ",";
+	
+	if ( m_todo.hasNotifiers() ) {
+		OPimNotifyManager manager = m_todo.notifiers();
+		qu += "'" + manager.remindersToString()           + "'" + ","		
+			+ "'" + manager.alarmsToString()          + "'" + ",";
+	}
+	else{
+		qu += QString( "''" )                                   + ","
+			+ "''"                                          + ",";
+	}
+
+	qu +=   QString( "''" )                             + QString( "," ) // Maintainers (cur. not supported !)
 		+ "'" + QString::number(sYear) + "-" 
-		      + QString::number(sMonth)
-		+       "-" + QString::number(sDay)               + "'" + ","
+		+ QString::number(sMonth)
+		+ "-" + QString::number(sDay)                     + "'" + ","
 		+ "'" + QString::number(eYear) + "-"
 		+       QString::number(eMonth)
 		+       "-"+QString::number(eDay)                 + "'"
@@ -530,6 +543,17 @@ OTodo OTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
 	    to.setStartDate( startDate );
     if ( hasCompletedDate )
 	    to.setCompletedDate( completedDate );
+    
+    OPimNotifyManager& manager = to.notifiers();
+    manager.alarmsFromString( item.data("alarms") );
+    manager.remindersFromString( item.data("reminders") );
+
+    OPimState pimState;
+    pimState.setState( QString( item.data("state") ).toInt() );
+    to.setState( pimState );
+
+    // Recurrence not supported yet
+    // to.setRecurrence( 
 
     return to;
 }
@@ -621,18 +645,10 @@ QArray<int> OTodoAccessBackendSQL::matchRegexp(  const QRegExp &r ) const
 }
 QBitArray OTodoAccessBackendSQL::supports()const {
 
-	QBitArray ar( OTodo::CompletedDate + 1 );
-	ar.fill( true );
-	ar[OTodo::CrossReference] = false;
-	ar[OTodo::State ] = false;
-	ar[OTodo::Reminders] = false;
-	ar[OTodo::Notifiers] = false;
-	ar[OTodo::Maintainer] = false;
-
-	return ar;
+	return sup();
 }
 
-QBitArray OTodoAccessBackendSQL::sup() {
+QBitArray OTodoAccessBackendSQL::sup() const{
 
 	QBitArray ar( OTodo::CompletedDate + 1 );
 	ar.fill( true );
