@@ -7,7 +7,7 @@
 class OFloatBar : public QToolBar
 {
     Q_OBJECT
-	virtual void hideEvent(QHideEvent* e)
+	    virtual void hideEvent(QHideEvent* /* e */)
 	{
 	    /*if (e->spontaneous())*/ emit OnHide();
 	}

@@ -7,15 +7,18 @@ HEADERS	= addressbook.h \
 		  abtable.h \
 		  addresssettings.h \
 		  picker.h \
-                  ofloatbar.h
+                  ofloatbar.h \
+                  configdlg.h
 SOURCES	= main.cpp \
 		  addressbook.cpp \
 		  contacteditor.cpp \
 		  ablabel.cpp \
 		  abtable.cpp \
 		  addresssettings.cpp \
-		  picker.cpp
-INTERFACES	= addresssettingsbase.ui
+		  picker.cpp \
+                  configdlg.cpp
+
+INTERFACES	= addresssettingsbase.ui configdlg_base.ui
 TARGET		= addressbook
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include

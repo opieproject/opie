@@ -89,6 +89,8 @@ private slots:
 	void slotFind();
 	void slotFindNext();
 
+	void slotConfig();
+
 private:
 	void initFields();  // inititialize our fields...
 	AbLabel *abView();
@@ -106,8 +108,12 @@ private:
 	AbTable *abList;
 	QWidget *listContainer;
 
+	// Searching stuff
 	OFloatBar* searchBar;
 	QLineEdit* searchEdit;
+	bool useRegExp;
+	bool DoSignalWrapAround;
+	bool caseSensitive;
 
 	QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, *actionPersonal, *actionMail;
 

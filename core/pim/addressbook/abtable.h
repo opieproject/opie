@@ -74,7 +74,7 @@ public:
 
     void deleteCurrentEntry();
     void clear();
-    void clearFindRow() { currFindRow = -2; }
+    void clearFindRow() { currFindRow = -1; }
     void loadFields();
     void refresh();
     bool save();

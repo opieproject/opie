@@ -33,10 +33,6 @@
 #include <qpe/config.h>
 #include <opie/ocontact.h>
 
-#ifndef MAKE_FOR_SHARP_ROM
-#include <qpe/finddialog.h>
-#endif
-
 #include <qpe/global.h>
 #include <qpe/resource.h>
 #include <qpe/ir.h>
@@ -67,6 +63,7 @@
 #include <qdatetime.h>
 
 #include "picker.h"
+#include "configdlg.h"
 
 static QString addressbookPersonalVCardName()
 {
@@ -80,6 +77,9 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 				      WFlags f )
 	: QMainWindow( parent, name, f ),
 	  abEditor(0),
+	  useRegExp(false),
+	  DoSignalWrapAround(false),
+	  caseSensitive(false),
 	  bAbEditFirstTime(TRUE),
 	  syncing(FALSE)
 {
@@ -208,7 +208,11 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	connect( a, SIGNAL( activated() ), this , SLOT( slotSave() ) );
 	a->addTo( edit );
 #endif
-	
+	a = new QAction( tr( "Config" ), Resource::loadPixmap( "today/config" ), QString::null,
+			 0, this, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( slotConfig() ) );
+	a->addTo( edit );
+
 	// Create Views
 	listContainer = new QWidget( this );
 	
@@ -254,8 +258,33 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	//    qDebug("adressbook contrsuction: t=%d", t.elapsed() );
 
 	abList->setCurrentCell( 0, 0 );
+
+	// Read Config settings
+	Config cfg("AddressBook");
+	cfg.setGroup("Search");
+	useRegExp = cfg.readBoolEntry( "useRegExp" );
+	caseSensitive = cfg.readBoolEntry( "caseSensitive" );
+	DoSignalWrapAround = cfg.readBoolEntry( "signalWrapAround" );
 	
 	isLoading = false;
+}
+
+
+void AddressbookWindow::slotConfig()
+{
+	ConfigDlg* dlg = new ConfigDlg( this, "Config" );
+	dlg -> setUseRegExp ( useRegExp );
+	dlg -> setBeCaseSensitive( caseSensitive );
+	dlg -> setSignalWrapAround( DoSignalWrapAround );
+	dlg -> showMaximized();
+	if ( dlg -> exec() ) {
+		qWarning ("Config Dialog accepted !");
+		useRegExp = dlg -> useRegExp();
+		caseSensitive = dlg -> beCaseSensitive();
+		DoSignalWrapAround = dlg -> signalWrapAround();
+	}
+
+	delete dlg;
 }
 
 
@@ -340,6 +369,11 @@ AddressbookWindow::~AddressbookWindow()
 	Config cfg("AddressBook");
 	cfg.setGroup("Font");
 	cfg.writeEntry("fontSize", startFontSize);
+
+	cfg.setGroup("Search");
+	cfg.writeEntry("useRegExp", useRegExp);
+	cfg.writeEntry("caseSensitive", caseSensitive);
+	cfg.writeEntry("signalWrapAround", DoSignalWrapAround);
 }
 
 void AddressbookWindow::slotUpdateToolbar()
@@ -894,34 +928,35 @@ AbLabel *AddressbookWindow::abView()
 void AddressbookWindow::slotFindOpen()
 {
 	searchBar->show();
+	searchEdit->setFocus();
 }
 void AddressbookWindow::slotFindClose()
 {
 	searchBar->hide();
+	abList->setFocus();
 }
 void AddressbookWindow::slotFindNext()
 {
-}
-
-void AddressbookWindow::slotFind()
-{
 	if ( centralWidget() == abView() )
 		showList();
-	
-// 	FindDialog frmFind( "Contacts", this );
+
+	// Maybe we should react on Wraparound and notfound ?
 // 	QObject::connect( abList, SIGNAL(signalNotFound()), &frmFind, SLOT(slotNotFound()) );
 // 	QObject::connect( abList, SIGNAL(signalWrapAround()), &frmFind, SLOT(slotWrapAround()) );
-// 	frmFind.exec();
 
-	// QStringList categories = abList->categories();
-	// abList->setShowCategory( book, cat );
 	abList->slotDoFind( searchEdit->text(), false, false);
 	
 	
 	if ( abList->numSelections() )
 		abList->clearSelection();
+
+}
+
+void AddressbookWindow::slotFind()
+{
 	
 	abList->clearFindRow();
+	slotFindNext();
 }
 
 void AddressbookWindow::slotSetCategory( int c )
@@ -932,15 +967,9 @@ void AddressbookWindow::slotSetCategory( int c )
 	if ( c <= 0 )
 		return;
 	
-	// Checkmark Book Menu Item Selected 
-	if ( c < 6 )
-		for ( unsigned int i = 1; i < 6; i++ )
-			catMenu->setItemChecked( i, c == (int)i );
-	
-	// Checkmark Category Menu Item Selected 
-	else
-		for ( unsigned int i = 6; i < catMenu->count(); i++ )
-			catMenu->setItemChecked( i, c == (int)i );
+	// Set checkItem for selected one
+	for ( unsigned int i = 1; i < catMenu->count(); i++ )
+		catMenu->setItemChecked( i, c == (int)i );
 	
 	for ( unsigned int i = 1; i < catMenu->count(); i++ ) {
 		if (catMenu->isItemChecked( i )) {

@@ -20,7 +20,9 @@ Less important:
   qpdf has.
 -  The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
-
+- Use advanced database functions in abtable to decrease
+  memory footprint and to make everything more easy !
+	(abtable should store Iterator for selected Category)
 
 Should be Fixed (not absolute sure, need validation):
 - "Nonenglish" translation bug has to be fixed.

@@ -128,7 +128,7 @@ AbTable::AbTable( const QValueList<int> *order, QWidget *parent, const char *nam
 		 lastSortCol( -1 ),
 		 asc( TRUE ),
 		 intFields( order ),
-		 currFindRow( -2 ),
+		 currFindRow( -1 ),
 		 mCat( 0 ),
 		 m_contactdb ("addressbook", 0l, 0l, false) // Handle syncing myself.. !
 {
@@ -638,15 +638,19 @@ void AbTable::slotDoFind( const QString &findString, bool caseSensitive,
                           bool backwards, QString cat /* int category */ )
 {
 	int category = 0;
+
+	// Use the current Category if nothing else selected
 	if ( cat.isEmpty() )
-		category = -2; // mCat.id("Contacts", "All");
-	else
+		category = mCat.id( "Contacts", showCat );
+	else{
 		category = mCat.id("Contacts", cat );
+	}
 
 	qWarning ("Found in Category %d", category);
 
 	if ( currFindRow < -1 )
-		currFindRow = currentRow() - 1;
+		currFindRow = - 1;
+
 	clearSelection( TRUE );
 	int rows, row;
 	AbTableItem *ati;
@@ -659,14 +663,12 @@ void AbTable::slotDoFind( const QString &findString, bool caseSensitive,
 		for ( row = currFindRow + 1; row < rows; row++ ) {
 			ati = static_cast<AbTableItem*>( item(row, 0) );
 			if ( contactCompare( contactList[ati], r, category ) )
-				//if ( contactCompare( contactList[row], r, category ) )
 				break;
 		}
 	} else {
 		for ( row = currFindRow - 1; row > -1; row-- ) {
 			ati = static_cast<AbTableItem*>( item(row, 0) );
 			if ( contactCompare( contactList[ati], r, category ) )
-				//if ( contactCompare( contactList[row], r, category ) )
 				break;
 		}
 	}
@@ -688,7 +690,7 @@ void AbTable::slotDoFind( const QString &findString, bool caseSensitive,
 		foundSelection.init( currFindRow, 0 );
 		foundSelection.expandTo( currFindRow, numCols() - 1 );
 		addSelection( foundSelection );
-		setCurrentCell( currFindRow, numCols() - 1 );
+		setCurrentCell( currFindRow, 0 /* numCols() - 1 */ );
 		wrapAround = true;
 	}
 }
@@ -700,7 +702,7 @@ static bool contactCompare( const OContact &cnt, const QRegExp &r, int category 
 	cats = cnt.categories();
 	
 	returnMe = false;
-	if ( (category == -1 && cats.count() == 0) || category == -2 )
+	if ( (cats.count() == 0) || (category == 0) )
 		returnMe = cnt.match( r );
 	else {
 		int i;
