@@ -102,9 +102,10 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     connect(mic, SIGNAL(valueChanged(int)), this, SLOT(setMic(int)));
     connect(qApp, SIGNAL( volumeChanged(bool) ), this, SLOT( volumeChanged(bool) ) );
     connect(qApp, SIGNAL( micChanged(bool) ), this, SLOT ( micChanged(bool) ) );
+
     connect( LocationComboBox,SIGNAL(activated(const QString &)),this,SLOT( setLocation(const QString &)));
-    connect( keyComboBox,SIGNAL(activated(const QString &)),this,SLOT(setKeyButton(const QString &)));
-    connect( timeLimitComboBox,SIGNAL(activated( const QString &)),this,SLOT(setSizeLimitButton(const QString &)));
+    connect( keyComboBox,SIGNAL(activated(const QString &)),this,SLOT( setKeyButton(const QString &)));
+    connect( timeLimitComboBox,SIGNAL(activated( const QString &)),this,SLOT( setSizeLimitButton(const QString &)));
 //     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 }
 
@@ -256,6 +257,12 @@ void SoundSettings::setKeyButton(const QString &name) {
     cfg.setGroup("Defaults");
     cfg.writeEntry( "toggleKey", keyComboBox->currentItem()  );
     keyReset = TRUE;
+    if(keyComboBox->currentItem() == 1)
+        cfg.writeEntry( "hideIcon", 0 );
+    else
+        cfg.writeEntry( "hideIcon", 1);
+
+        
     cfg.write();
 }
 
