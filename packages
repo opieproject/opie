@@ -44,7 +44,7 @@ CONFIG_GSMTOOL	noncore/comm/gsmtool	gsmtool.pro
 CONFIG_HANDWRITING	inputmethods/handwriting	handwriting.pro
 CONFIG_HELPBROWSER	core/apps/helpbrowser	helpbrowser.pro
 CONFIG_HOMEAPPLET	core/applets/homeapplet	homeapplet.pro
-CONFIG_INTERFACES	noncore/net/networksettings/interfaces	interfaces.pro
+CONFIG_INTERFACES	noncore/settings/networksettings/interfaces	interfaces.pro
 CONFIG_IRDAAPPLET	core/applets/irdaapplet	irdaapplet.pro
 CONFIG_JUMPX	inputmethods/jumpx	jumpx.pro
 CONFIG_KBILL	noncore/games/kbill	kbill.pro
@@ -87,7 +87,7 @@ CONFIG_MOBILEMSG	noncore/comm/mobilemsg	mobilemsg.pro
 CONFIG_MODPLUG	core/multimedia/opieplayer/modplug	modplug.pro
 CONFIG_MULTIKEY	inputmethods/multikey	multikey.pro
 CONFIG_NETSYSTEMTIME	noncore/settings/netsystemtime	netsystemtime.pro
-CONFIG_NETWORKSETUP	noncore/net/networksettings	networksettings.pro
+CONFIG_NETWORKSETUP	noncore/settings/networksettings	networksettings.pro
 CONFIG_NETWORKAPPLET	noncore/applets/networkapplet	networkapplet.pro
 CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
 CONFIG_OBEX	core/applets/obex2	obex.pro
@@ -165,5 +165,5 @@ CONFIG_VOLUMEAPPLET	core/applets/volumeapplet	volumeapplet.pro
 CONFIG_WAVPLUGIN	core/multimedia/opieplayer/wavplugin	wavplugin.pro
 CONFIG_WELLENREITER	noncore/net/wellenreiter	wellenreiter.pro
 CONFIG_WIRELESSAPPLET	noncore/applets/wirelessapplet	wirelessapplet.pro
-CONFIG_WLAN	noncore/net/networksettings/wlan	wlan.pro
+CONFIG_WLAN	noncore/settings/networksettings/wlan	wlan.pro
 CONFIG_WORDGAME	noncore/games/wordgame	wordgame.pro
