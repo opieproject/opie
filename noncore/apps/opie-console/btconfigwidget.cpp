@@ -172,7 +172,7 @@ void BTConfigWidget::save( Profile& prof ) {
     case IOLayerBase::Baud_2400:
         speed = 2400;
         break;
-    case IOLayerBase::Baud_1200;
+    case IOLayerBase::Baud_1200:
     	speed = 1200;
     	break;
     default:
