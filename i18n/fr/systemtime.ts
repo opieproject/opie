@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>FormatTabWidget</name>
     <message>
@@ -106,11 +107,11 @@ ntpdate</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez demandé un délai de %1 minutes; mais seulement %2 minutes se sont écoulées.&lt;br&gt; Continuer?</translation>
     </message>
     <message>
         <source>%1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 secondes</translation>
     </message>
 </context>
 <context>
@@ -191,11 +192,11 @@ ntpdate</translation>
     </message>
     <message>
         <source>minutes between time updates</source>
-        <translation>minutes entre 2 synchronisation de l&apos;heure</translation>
+        <translation>min. entre 2 synchro. de l&apos;heure</translation>
     </message>
     <message>
         <source>minutes between prediction updates</source>
-        <translation>minutes entre 2 mise à jour de prévision</translation>
+        <translation>min. entre 2 synchr. de la prévision</translation>
     </message>
     <message>
         <source>Display time server information</source>
