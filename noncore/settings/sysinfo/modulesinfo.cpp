@@ -154,7 +154,7 @@ void ModulesInfo::viewModules( QListViewItem *modules )
 	QString capstr = "Module: ";
 	capstr.append( modname );
     ModulesDtl->setCaption( capstr );
-    QString command = "/sbin/modinfo -nad ";
+    QString command = "/sbin/modinfo ";
 	command.append( modname );
     FILE* modinfo = popen( command, "r" );
     
