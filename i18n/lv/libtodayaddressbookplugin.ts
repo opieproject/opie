@@ -3,80 +3,81 @@
     <name>AddressBookPluginConfig</name>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Lai aktivizētu uzstādījumus: Pārstartējiet aplikāciju !</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut/Aizliegt Skatus</translation>
     </message>
     <message>
         <source>Show &amp;Birthdays</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt &amp;Dzimšanas dienas</translation>
     </message>
     <message>
         <source>Show &amp;Anniveraries</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt &amp;Vārdadienas</translation>
     </message>
     <message>
         <source>The next birthdays will just be shown, if enabled!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja ieslēgsiet tiks rādītas nākamās dzimšanasdienas!</translation>
     </message>
     <message>
         <source>The next anniversaries will just be shown, if enabled !</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja ieslēgsiet tiks rādītas nākamās vārdadienas!</translation>
     </message>
     <message>
         <source>Max Lines: </source>
-        <translation type="unfinished"></translation>
+        <translation>Maks. Rindas:</translation>
     </message>
     <message>
         <source>Set the maximum number of lines that should be shown for each anniversaries/birthdays</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādiet maksimālo rindu skaitu ko rādīt katrai svinamdienai</translation>
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation type="unfinished"></translation>
+        <translation>Klip līnija pēc X simbola:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="unfinished"></translation>
+        <translation>Pēc cik simboliem uzdevuma info ir jāapgriež</translation>
     </message>
     <message>
         <source>Days look ahead: </source>
-        <translation type="unfinished"></translation>
+        <translation>Dienas uz priekšu:</translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Cik dienas uz priekšu ir jāpārskata</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādīt Virsraksta Krāsu:</translation>
     </message>
     <message>
         <source>Colors for the headlines !</source>
-        <translation type="unfinished"></translation>
+        <translation>Krāsas virsrakstiem !</translation>
     </message>
     <message>
         <source>Set Entry Color: </source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādiet Ievada Krāsu:</translation>
     </message>
     <message>
         <source>This color will be used for shown birthdays/anniversaries !</source>
-        <translation type="unfinished"></translation>
+        <translation>Šī krāsa tiks lietota lai parādītu svinamdienas !</translation>
     </message>
     <message>
         <source>Set Urgent
 Color if below </source>
-        <translation type="unfinished"></translation>
+        <translation>Svarīgi
+Krāsa ja zemāk</translation>
     </message>
     <message>
         <source> days: </source>
-        <translation type="unfinished"></translation>
+        <translation>dienas:</translation>
     </message>
     <message>
         <source>This urgent color will be used if we are close to the event !</source>
-        <translation type="unfinished"></translation>
+        <translation>Šī svarīgi krāsa tiks lietota ja tā ir tuvu notikumam !</translation>
     </message>
     <message>
         <source>The urgent color will be used if the birthday/anniversary is closer than given days !</source>

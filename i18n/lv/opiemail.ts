@@ -76,31 +76,31 @@
     </message>
     <message>
         <source>Sending mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Nosūta pastu</translation>
     </message>
     <message>
         <source>No Receiver spezified</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav norādīts saņēmējs</translation>
     </message>
     <message>
         <source>Store message</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt ziņu</translation>
     </message>
     <message>
         <source>Store message into drafts?</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt ziņu melnrakstos?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Jā</translation>
+        <translation>Jā</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Nē</translation>
+        <translation>Nē</translation>
     </message>
     <message>
         <source>&lt;center&gt;Attachments will not be stored in &quot;Draft&quot; folder&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Piesaistne netiks saglabāt &quot;Melnraksti&quot; mapē&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
@@ -276,11 +276,11 @@
     </message>
     <message>
         <source>ssh $SERVER exec</source>
-        <translation type="unfinished"></translation>
+        <translation>ssh $SERVER exec</translation>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished">Lietot secure sockets:</translation>
+        <translation>Lietot secure sockets:</translation>
     </message>
 </context>
 <context>
@@ -342,40 +342,42 @@
     <name>NNTPGroupsDlg</name>
     <message>
         <source>Subscribed newsgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Abonētās intreškopas</translation>
     </message>
 </context>
 <context>
     <name>NNTPGroupsUI</name>
     <message>
         <source>newsgroupslist</source>
-        <translation type="unfinished"></translation>
+        <translation>intreškopu saraksts</translation>
     </message>
     <message>
         <source>Newsgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Intreškopas</translation>
     </message>
     <message>
         <source>List of groups from the server. On start, only subscribed groups are listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Saraksts ar kopām no servera. Sākumā tiek parādītas tikai abonētās.</translation>
     </message>
     <message>
         <source>Groupfilter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopufiltrs:</translation>
     </message>
     <message>
         <source>Enter a filter string here.
 Then hit &quot;get newsgroup list&quot; again and only groups starting 
 with that filter will be listet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šeit ievadiet atlases kritēriju.
+Tad vēlreiz nospiediet &quot;saņemt intreškopu sarakstu&quot; un tiks parādītas
+tika kopas ar šo filtru.</translation>
     </message>
     <message>
         <source>Get newsgroup list from server</source>
-        <translation type="unfinished"></translation>
+        <translation>Saņemt intreškopu sarakstu no servera</translation>
     </message>
     <message>
         <source>Retrieve the list of groups from server</source>
-        <translation type="unfinished"></translation>
+        <translation>Saņemt no servera  intreškopu sarakstu</translation>
     </message>
 </context>
 <context>
@@ -418,15 +420,15 @@ with that filter will be listet.</source>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopas</translation>
     </message>
     <message>
         <source>Newsgroup</source>
-        <translation type="unfinished"></translation>
+        <translation>Intreškopa</translation>
     </message>
     <message>
         <source>Get newsgroup list from server</source>
-        <translation type="unfinished"></translation>
+        <translation>Saņemt intreškopu sarakstu no servera</translation>
     </message>
 </context>
 <context>
@@ -484,15 +486,15 @@ with that filter will be listet.</source>
     </message>
     <message>
         <source>Define a smtp account first</source>
-        <translation type="unfinished"></translation>
+        <translation>Vispirms jādefinē smtp </translation>
     </message>
     <message>
         <source>Read this posting</source>
-        <translation type="unfinished"></translation>
+        <translation>Izlasiet šo apziņojumu</translation>
     </message>
     <message>
         <source>Edit this mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot šo pastu</translation>
     </message>
 </context>
 <context>
@@ -582,11 +584,11 @@ with that filter will be listet.</source>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished">Lietot secure sockets:</translation>
+        <translation>Lietot secure sockets:</translation>
     </message>
     <message>
         <source>ssh $SERVER exec</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -722,7 +724,7 @@ with that filter will be listet.</source>
     </message>
     <message>
         <source>Display image preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt attēla pirmsskatu</translation>
     </message>
 </context>
 <context>
@@ -772,7 +774,7 @@ with that filter will be listet.</source>
     <name>selectsmtp</name>
     <message>
         <source>Select SMTP Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties SMTP Kontu</translation>
     </message>
 </context>
 <context>
