@@ -67,6 +67,7 @@ MainWindow::MainWindow( QWidget* parent,
     initShow();
     initTemplate();
 
+    populateTemplates();
     raiseCurrentView();
 }
 void MainWindow::initTemplate() {
@@ -238,7 +239,7 @@ void MainWindow::initShow() {
     m_stack->addWidget( m_curShow->widget() , m_counter++ );
 }
 MainWindow::~MainWindow() {
-
+    delete templateManager();
 }
 void MainWindow::connectBase( ViewBase* base) {
     base->connectShow( this, SLOT(slotShow(int) ) );
@@ -316,6 +317,7 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
     }
     bool quit = false;
     if ( m_todoMgr.saveAll() ){
+        qWarning("saved");
         quit = true;
     }else {
 	if ( QMessageBox::critical( this, tr("Out of space"),
@@ -341,6 +343,17 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
         config.writeEntry( "Category", currentCategory() );
         config.writeEntry( "ShowDeadLine", showDeadline());
         config.writeEntry( "ShowOverDue", showOverDue() );
+        /* svae templates */
+        templateManager()->save();
+        e->accept();
+    }
+}
+void MainWindow::populateTemplates() {
+    m_template->clear();
+    QStringList list = templateManager()->templates();
+    QStringList::Iterator it;
+    for ( it = list.begin(); it != list.end(); ++it ) {
+        m_template->insertItem( (*it) );
     }
 }
 /*

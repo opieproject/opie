@@ -82,6 +82,8 @@ namespace Todo {
         TemplateManager* templateManager();
 
         void updateTodo( const ToDoEvent& );
+        void populateTemplates();
+        Editor* currentEditor();
 private slots:
         void slotReload();
         void slotFlush();
@@ -102,7 +104,6 @@ private slots:
         void raiseCurrentView();
         ViewBase* currentView();
         ViewBase* m_curView;
-        Editor* currentEditor();
         Editor* m_curEdit;
         TodoShow* currentShow();
         TodoShow* m_curShow;

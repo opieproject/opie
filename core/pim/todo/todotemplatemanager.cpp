@@ -26,7 +26,11 @@ void TemplateManager::load() {
     for ( ; it != todoDB.end(); ++it ) {
         ToDoEvent ev = (*it);
         conf.setGroup( QString::number( ev.uid() ) );
-        m_templates.insert( conf.readEntry("name", QString::null),
+        QString str = conf.readEntry("Name", QString::null );
+        if (str.isEmpty() )
+            continue;
+
+        m_templates.insert( str,
                             ev );
     }
 }
@@ -40,8 +44,9 @@ void TemplateManager::save() {
 
     QMap<QString, ToDoEvent>::Iterator it;
     for ( it = m_templates.begin(); it != m_templates.end(); ++it ) {
-        ToDoEvent ev = (*it);
+        ToDoEvent ev = it.data();
         conf.setGroup( QString::number( ev.uid() ) );
+        qWarning("Name" + it.key() );
         conf.writeEntry("Name", it.key() );
         db.addEvent( ev );
     }
@@ -49,6 +54,7 @@ void TemplateManager::save() {
 }
 void TemplateManager::addEvent( const QString& str,
                                 const ToDoEvent& ev) {
+    qWarning("AddEvent"+  str );
     m_templates.replace( str,  ev );
 }
 void TemplateManager::removeEvent( const QString& str ) {
