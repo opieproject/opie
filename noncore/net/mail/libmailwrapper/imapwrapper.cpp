@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <libetpan/libetpan.h>
 #include <qpe/global.h>
+#include <opie2/oapplication.h>
 
 #include "imapwrapper.h"
 #include "mailtypes.h"
@@ -39,6 +40,7 @@ int IMAPwrapper::selectMbox(const QString&mbox)
 
 void IMAPwrapper::imap_progress( size_t current, size_t maximum )
 {
+    qApp->processEvents();
     qDebug( "IMAP: %i of %i", current, maximum );
 }
 

@@ -176,6 +176,10 @@ void NNTPwrapper::login()
         mailstorage_free(m_nntp);
         m_nntp = 0;
 
+    } else {
+        mailsession * session = m_nntp->sto_session;
+        newsnntp * news =  ( (  nntp_session_state_data * )session->sess_data )->nntp_session;
+        news->nntp_progr_fun = &nntp_progress;
     }
 
 }

@@ -166,6 +166,12 @@ void POP3wrapper::login()
         Global::statusMessage(tr("Error initializing folder"));
         mailstorage_free(m_pop3);
         m_pop3 = 0;
+    } else {
+        mailsession * session = m_pop3->sto_session;
+        mailpop3 * mail =  ( (  pop3_session_state_data * )session->sess_data )->pop3_session;
+        if (mail) {
+            mail->pop3_progr_fun = &pop3_progress;
+        }
     }
 }
 
