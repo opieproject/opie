@@ -539,7 +539,7 @@ void TextEdit::fileOpen() {
     map.insert(tr("Text"), text );
     text << "*";
     map.insert(tr("All"), text );
-    QString str = OFileDialog::getOpenFileName( 2,"/", QString::null, map);
+    QString str = OFileDialog::getOpenFileName( 2, QPEApplication::documentDir(), QString::null, map);
     if(!str.isEmpty() )
         openFile( str );
     
@@ -814,7 +814,7 @@ bool TextEdit::saveAs() {
     text << "*";
     map.insert(tr("All"), text );
 
-    QString str = OFileDialog::getSaveFileName( 2,"/", QString::null, map);
+    QString str = OFileDialog::getSaveFileName( 2,QPEApplication::documentDir(), QString::null, map);
 
     if(!str.isEmpty() ) {
         QString fileNm=str;
