@@ -429,10 +429,18 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 	rotLay-> addWidget ( m_rotdir_ccw, 0 );
 	rotLay-> addWidget ( m_rotdir_flip, 0 );
 
-	int rot = cfg. readNumEntry ( "rotatedir", 0 );
-	m_rotdir_cw-> setChecked ( rot == 0 );
-	m_rotdir_ccw-> setChecked ( rot == 1 );
-	m_rotdir_flip-> setChecked ( rot == 2 );
+	int rotDirection = cfg.readNumEntry( "rotatedir" );
+	ODirection rot = CW;
+
+	if (rotDirection == -1) {
+		rot = ODevice::inst ( )-> direction ( );
+	} else {
+		rot = (ODirection)rotDirection;
+	}
+
+	m_rotdir_cw-> setChecked ( rot == CW );
+	m_rotdir_ccw-> setChecked ( rot == CCW );
+	m_rotdir_flip-> setChecked ( rot == Flip );
 
 	return tab;
 }
@@ -526,16 +534,15 @@ void Appearance::accept ( )
 			item-> save ( config );
     }
 
-	bool is_rotdir_ccw = m_rotdir_ccw-> isChecked ( );
-	int rotval;
+	ODirection rot;
 	if (m_rotdir_ccw-> isChecked ( )) {
-		rotval = 1;
+		rot = CCW;
 	} else if (m_rotdir_cw-> isChecked ( )) {
-		rotval = 0;
+		rot = CW;
 	} else {
-		rotval = 2;
+		rot = Flip;
 	}
-	config. writeEntry ( "rotatedir", rotval );
+	config. writeEntry ( "rotatedir", (int)rot );
 
 	m_except-> setFocus ( ); // if the focus was on the embedded line-edit, we have to move it away first, so the contents are updated
 

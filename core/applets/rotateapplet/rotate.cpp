@@ -35,7 +35,11 @@
 #include <qiconset.h>
 #include <qpopupmenu.h>
 
+#include <opie/odevice.h>
+
 #include "rotate.h"
+
+using namespace Opie;
 
 
 RotateApplet::RotateApplet ( )
@@ -113,14 +117,19 @@ void RotateApplet::activated ( )
 {
 
     int defaultRotation = QPEApplication::defaultRotation();
-
-    int newRotation;
+    int newRotation = defaultRotation;
 
     Config cfg( "qpe" );
     cfg.setGroup( "Appearance" );
 
-    // 0 -> 90° clockwise, 1 -> 90° counterclockwise
-    int rotDirection = cfg.readNumEntry( "rotatedir", 0 );
+    int rotDirection = cfg.readNumEntry( "rotatedir" );
+    ODirection rot = CW;
+
+    if (rotDirection == -1) {
+    	rot = ODevice::inst ( )-> direction ( );
+    } else {
+	rot = (ODirection)rotDirection;
+    }
 
     // hide inputs methods before rotation
     QCopEnvelope en( "QPE/TaskBar", "hideInputMethod()" );
@@ -130,11 +139,11 @@ void RotateApplet::activated ( )
 	// regardless of rotation direction
         newRotation = defaultRotation;
     } else {
-        if ( rotDirection == 1 )  {
+        if ( rot == CCW )  {
             newRotation = ( defaultRotation + 90 ) % 360;
-        } else if ( rotDirection == 0 ) {
+        } else if ( rot == CW ) {
             newRotation = ( defaultRotation + 270 ) % 360;
-        } else {
+        } else if ( rot == Flip ) {
             newRotation = ( defaultRotation + 180 ) % 360;
 	}
     }
@@ -163,5 +172,3 @@ Q_EXPORT_INTERFACE( )
 {
 	Q_CREATE_INSTANCE( RotateApplet )
 }
-
-
