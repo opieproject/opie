@@ -1,9 +1,10 @@
 Package: zkbapplet
-Files: plugins/applets/libzkbapplet.so* pics/zkb-disabled.png share/zkb/*.xml
+Files: plugins/applets/libzkbapplet.so* pics/zkb-disabled.png share/zkb/*.xml bin/keyz-cfg apps/Settings/keyz-cfg.desktop pics/keyz-cfg.png share/zkb/zkb.xml.sample
 Priority: optional
 Section: opie/applets
 Maintainer: Rajko Albrecht <alwin@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal, keyz-cfg
-Description: ZKB Applet
+Description: ZKB Applet and configuration program
+Obsoletes: keyz-cfg
 Version: 0.6.0$EXTRAVERSION
