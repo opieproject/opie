@@ -263,9 +263,9 @@ void CategoryTabWidget::setTabAppearance( const QString &id, Config &cfg )
     QString view = cfg.readEntry( "View", "Icon" );
     if ( view == "List" ) // No tr
 	v->setViewMode( LauncherView::List );
-    QString bgType = cfg.readEntry( "BackgroundType", "Ruled" );
+    QString bgType = cfg.readEntry( "BackgroundType", "Image" );
     if ( bgType == "Image" ) { // No tr
-	QString pm = cfg.readEntry( "BackgroundImage", "wallpaper/marble" );
+	QString pm = cfg.readEntry( "BackgroundImage", "launcher/opie-background" );
 	v->setBackgroundType( LauncherView::Image, pm );
     } else if ( bgType == "SolidColor" ) {
 	QString c = cfg.readEntry( "BackgroundColor" );
