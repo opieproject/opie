@@ -223,7 +223,7 @@ const QByteArray HttpFactory::processResponse( int sockfd, bool &isText ) const
 			{
 				isText = true;
 				printf( "HttpFactory::processResponse: content type text\n" );
-				if( currentLine.contains( "html", false ) )
+				if( currentLine.contains( "html", false ) >= 1)
 				{
 					browser->setTextFormat(Qt::RichText);
 					printf( "HttpFactory::processResponse: content type html\n" );
@@ -241,6 +241,12 @@ const QByteArray HttpFactory::processResponse( int sockfd, bool &isText ) const
 				currentLine.remove( 0, 16 );
 				dataLength = currentLine.toInt();
 				printf( "HttpFactory::processResponse: content length: %d\n", dataLength );
+			}
+			
+			if( currentLine.contains( "404", false ) >= 1 )
+			{
+				printf( "HttpFactory::processResponse: 404 error\n" );
+				return 0;
 			}
 			
 			currentLine = "";
