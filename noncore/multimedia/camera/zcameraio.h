@@ -33,7 +33,8 @@ class ZCameraIO : public QObject
         IMAGE = 0, STATUS = 1,
         FASTER = 0, BETTER = 2,
         XNOFLIP = 0, XFLIP = 4,
-        YNOFLIP = 0, YFLIP = 8
+        YNOFLIP = 0, YFLIP = 8,
+        AUTOMATICFLIP = -1
     };
 
     // low level interface
@@ -41,19 +42,21 @@ class ZCameraIO : public QObject
     bool setCaptureFrame( int w, int h, int zoom = 256, bool rot = true );
     bool setZoom( int zoom = 0 );
     void setReadMode( int = IMAGE | XFLIP | YFLIP );
+    void setFlip( int flip );
 
     bool isShutterPressed(); // not const, because it calls clearShutterLatch
     bool isAvailable() const;
     bool isCapturing() const;
     bool isFinderReversed() const;
 
-    bool snapshot( unsigned char* );
-    bool snapshot( QImage* );
+    bool snapshot( QImage* image );
+    bool snapshot( unsigned char* buf );
 
     // high level interface
     bool isOpen() const;
     static ZCameraIO* instance();
     void captureFrame( int w, int h, int zoom, QImage* image );
+    void captureFrame( int w, int h, int zoom, unsigned char* buf );
 
   protected:
     ZCameraIO();
@@ -68,10 +71,12 @@ class ZCameraIO : public QObject
   private:
     int _driver;
     char _status[4];
+    bool _pressed;
     static ZCameraIO* _instance;
     int _height;
     int _width;
     int _zoom;
+    int _flip;
     bool _rot;
     int _readlen;
 

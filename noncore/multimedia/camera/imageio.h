@@ -13,38 +13,14 @@
 **
 **********************************************************************/
 
-#ifndef PREVIEWWIDGET_H
-#define PREVIEWWIDGET_H
+#ifndef IMAGEIO_H
+#define IMAGEIO_H
 
-#include <qlabel.h>
-#include <qimage.h>
-#include <qpixmap.h>
+#include <qstring.h>
 
-class QTimerEvent;
-class QResizeEvent;
+class QImage;
 
-class PreviewWidget: public QLabel
-{
-  Q_OBJECT
-
-  public:
-    PreviewWidget( QWidget * parent = 0, const char * name = 0, WFlags f = 0 );
-    virtual ~PreviewWidget();
-
-    void setRefreshingRate( int ms );
-    void refresh();
-
-  protected:
-    virtual void timerEvent( QTimerEvent* );
-    virtual void resizeEvent( QResizeEvent* );
-    virtual void mousePressEvent( QMouseEvent* );
-
-  signals:
-    void contextMenuRequested();
-
-  private:
-    QPixmap p;
-    QImage i;
-};
+void bufferToImage( int _width, int height, unsigned char* bp, QImage* image );
+void imageToFile( QImage* i, const QString& name, const QString& format, int quality );
 
 #endif

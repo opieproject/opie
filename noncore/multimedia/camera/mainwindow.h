@@ -20,10 +20,12 @@
 #include <qdatetime.h>
 #include <qimage.h>
 #include <qpixmap.h>
+#include <qdatetime.h>
 
 class QAction;
 class QActionGroup;
 class QIconSet;
+class QTimerEvent;
 class QToolButton;
 class QLabel;
 class MainWindowBase;
@@ -45,11 +47,20 @@ class CameraMainWindow: public QMainWindow
     void resoMenuItemClicked( QAction* );
     void qualityMenuItemClicked( QAction* );
     void zoomMenuItemClicked( QAction* );
+    void flipMenuItemClicked( QAction* );
     void outputMenuItemClicked( QAction* );
     void shutterClicked();
 
+    void updateCaption();
+
   protected:
     void init();
+    void startVideoCapture();
+    void stopVideoCapture();
+    void postProcessVideo();
+    void performCapture( const QString& );
+
+    virtual void timerEvent( QTimerEvent* );
 
   private:
     PreviewWidget* preview;
@@ -59,15 +70,23 @@ class CameraMainWindow: public QMainWindow
     QActionGroup* resog;
     QActionGroup* qualityg;
     QActionGroup* zoomg;
+    QActionGroup* flipg;
     QActionGroup* outputg;
 
+    QString flip;
     int quality;
     int zoom;
     int captureX;
     int captureY;
     QString captureFormat;
 
+    bool _capturing;
     int _pics;
+
+    QTime _time;
+    int _videopics;
+    int _capturefd;
+    unsigned char* _capturebuf;
 };
 
 #endif

@@ -44,7 +44,9 @@ ZCameraIO* ZCameraIO::instance()
 
 
 ZCameraIO::ZCameraIO()
-          :_height( 0 ), _width( 0 ), _zoom( 0 ), _rot( 0 ), _readlen( 0 )
+          : _pressed( false ), _height( 0 ), _width( 0 ), _zoom( 0 ),
+           _flip( -1 ), _rot( 0 ), _readlen( 0 )
+
 {
     _driver = ::open( SHARPZDC, O_RDWR );
     if ( _driver == -1 )
@@ -84,18 +86,24 @@ bool ZCameraIO::isOpen() const
 
 bool ZCameraIO::isShutterPressed()
 {
-    if ( _timer->elapsed() < 1000 ) //TODO: make this customizable?
-    {
-        clearShutterLatch();
-        return false;
-    }
     if ( _status[0] == 'S' )
     {
-        _timer->restart();
-        clearShutterLatch();
-        return true;
+        if ( !_pressed )    // wasn't pressed before, but is now!
+        {
+            _pressed = true;
+            _timer->start();
+            return true;
+        }
+
+        if ( _timer->elapsed() > 2000 ) // the press is pretty old now
+        {
+            clearShutterLatch();
+            _status[0] = 's';
+            _pressed = false;
+        }
     }
-    else return false;
+
+    return false;
 }
 
 
@@ -149,8 +157,17 @@ void ZCameraIO::setReadMode( int mode )
     if ( mode & STATUS ) // STATUS bit is set
     {
         read( _status, 4 );
-        if ( isShutterPressed() ) emit shutterClicked();
+        if ( isShutterPressed() )
+        {
+            emit shutterClicked();
+        }
     }
+}
+
+
+void ZCameraIO::setFlip( int flip )
+{
+    _flip = flip;
 }
 
 
@@ -198,14 +215,24 @@ bool ZCameraIO::snapshot( QImage* image )
     odebug << "finder reversed = " << isFinderReversed() << oendl;
     odebug << "rotation = " << _rot << oendl;
 
-    if ( _rot ) // Portrait
+    int readmode;
+    if ( _flip == -1 ) // AUTO
     {
-        setReadMode( IMAGE | isFinderReversed() ? XFLIP | YFLIP : 0 );
+        if ( _rot ) // Portrait
+        {
+            readmode = IMAGE | isFinderReversed() ? XFLIP | YFLIP : 0;
+        }
+        else // Landscape
+        {
+            readmode = IMAGE | XFLIP | YFLIP;
+        }
     }
-    else // Landscape
+    else // OVERRIDE
     {
-        setReadMode( IMAGE | XFLIP | YFLIP ); //isFinderReversed() ? 0 : XFLIP );
+        readmode = IMAGE | _flip;
     }
+
+    setReadMode( readmode );
 
     char buf[_readlen];
     char* bp = buf;
@@ -234,18 +261,31 @@ bool ZCameraIO::snapshot( QImage* image )
 
 bool ZCameraIO::snapshot( unsigned char* buf )
 {
-    setReadMode( IMAGE | XFLIP | YFLIP );
+    setReadMode( STATUS );
 
+    odebug << "finder reversed = " << isFinderReversed() << oendl;
+    odebug << "rotation = " << _rot << oendl;
+
+    int readmode;
+    if ( _flip == -1 ) // AUTO
+    {
+        if ( _rot ) // Portrait
+        {
+            readmode = IMAGE | isFinderReversed() ? XFLIP | YFLIP : 0;
+        }
+        else // Landscape
+        {
+            readmode = IMAGE | XFLIP | YFLIP;
+        }
+    }
+    else // OVERRIDE
+    {
+        readmode = IMAGE | _flip;
+    }
+
+    setReadMode( readmode );
     read( (char*) buf, _readlen );
 
-    /* //TESTCODE
-    int fd = open( "/tmp/cam", O_RDONLY );
-    if ( ::read( fd, (char*) buf, 76800 ) != 76800 )
-        owarn << "Couldn't read image from /dev/sharp_zdc" << oendl;
-    // TESTCODE */
-
-
-    return true;
 }
 
 
@@ -261,4 +301,18 @@ void ZCameraIO::captureFrame( int w, int h, int zoom, QImage* image )
     setCaptureFrame( pw, ph, _zoom, _rot );
 }
 
+
+void ZCameraIO::captureFrame( int w, int h, int zoom, unsigned char* buf )
+{
+    //FIXME: this is too slow
+    int pw = _width;
+    int ph = _height;
+    if ( _rot )
+        setCaptureFrame( h, w, zoom*256, true );
+    else
+        setCaptureFrame( w, h, zoom*256, false );
+
+    snapshot( buf );
+    setCaptureFrame( pw, ph, _zoom, _rot );
+}
 

@@ -16,6 +16,7 @@
 #include "mainwindow.h"
 #include "previewwidget.h"
 #include "zcameraio.h"
+#include "imageio.h"
 
 #include <qapplication.h>
 #include <qaction.h>
@@ -27,8 +28,10 @@
 #include <qimage.h>
 #include <qlabel.h>
 #include <qpopupmenu.h>
+#include <qprogressbar.h>
 #include <qpushbutton.h>
 #include <qmessagebox.h>
+#include <qlayout.h>
 #include <qdirectpainter_qws.h>
 #include <qpe/global.h>
 #include <qpe/resource.h>
@@ -36,13 +39,20 @@
 #include <opie/ofiledialog.h>
 #include <opie/odevice.h>
 using namespace Opie;
-
 #include <opie2/odebug.h>
 
 #include <assert.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
+#include <errno.h>
+#include <unistd.h>
+
+#define CAPTUREFILE "/tmp/capture.dat"
 
 CameraMainWindow::CameraMainWindow( QWidget * parent, const char * name, WFlags f )
-           :QMainWindow( parent, name, f ), _pics( 0 )
+           :QMainWindow( parent, name, f ), _capturing( false ), _pics( 0 )
 {
     #ifdef QT_NO_DEBUG
     if ( !ZCameraIO::instance()->isOpen() )
@@ -78,6 +88,9 @@ CameraMainWindow::CameraMainWindow( QWidget * parent, const char * name, WFlags 
     connect( preview, SIGNAL( contextMenuRequested() ), this, SLOT( showContextMenu() ) );
 
     connect( ZCameraIO::instance(), SIGNAL( shutterClicked() ), this, SLOT( shutterClicked() ) );
+
+    updateCaption();
+
 };
 
 
@@ -89,6 +102,7 @@ CameraMainWindow::~CameraMainWindow()
 void CameraMainWindow::init()
 {
     // TODO: Save this stuff in config
+    flip = 'A'; // auto
     quality = 50;
     zoom = 1;
     captureX = 640;
@@ -121,16 +135,27 @@ void CameraMainWindow::init()
     ( new QAction( "x 1", 0, 0, zoomg, 0, true ) )->setOn( true );
     new QAction( "x 2", 0, 0, zoomg, 0, true );
 
+    flipg = new QActionGroup( 0, "flip", true );
+    flipg->setToggleAction( true );
+    ( new QAction( "Auto (recommended)", 0, 0, flipg, 0, true ) )->setOn( true );
+    new QAction( "0 (always off)", 0, 0, flipg, 0, true );
+    new QAction( "X (always horizontal)", 0, 0, flipg, 0, true );
+    new QAction( "Y (always vertical)", 0, 0, flipg, 0, true );
+    new QAction( "* (always both)", 0, 0, flipg, 0, true );
+
     outputg = new QActionGroup( 0, "output", true );
     outputg->setToggleAction( true );
     ( new QAction( "JPEG", 0, 0, outputg, 0, true ) )->setOn( true );
     new QAction( "PNG", 0, 0, outputg, 0, true );
     new QAction( "BMP", 0, 0, outputg, 0, true );
+    new QAction( "AVI", 0, 0, outputg, 0, true );
 
     connect( resog, SIGNAL( selected(QAction*) ), this, SLOT( resoMenuItemClicked(QAction*) ) );
     connect( qualityg, SIGNAL( selected(QAction*) ), this, SLOT( qualityMenuItemClicked(QAction*) ) );
     connect( zoomg, SIGNAL( selected(QAction*) ), this, SLOT( zoomMenuItemClicked(QAction*) ) );
+    connect( flipg, SIGNAL( selected(QAction*) ), this, SLOT( flipMenuItemClicked(QAction*) ) );
     connect( outputg, SIGNAL( selected(QAction*) ), this, SLOT( outputMenuItemClicked(QAction*) ) );
+
 }
 
 
@@ -169,6 +194,7 @@ void CameraMainWindow::changeZoom( int zoom )
     ZCameraIO::instance()->setCaptureFrame( 240, 160, z );
 }
 
+
 void CameraMainWindow::showContextMenu()
 {
     QPopupMenu reso;
@@ -178,6 +204,10 @@ void CameraMainWindow::showContextMenu()
     QPopupMenu quality;
     quality.setCheckable( true );
     qualityg->addTo( &quality );
+
+    QPopupMenu flip;
+    flip.setCheckable( true );
+    flipg->addTo( &flip );
 
     QPopupMenu zoom;
     zoom.setCheckable( true );
@@ -190,6 +220,7 @@ void CameraMainWindow::showContextMenu()
     QPopupMenu m( this );
     m.insertItem( "&Resolution", &reso );
     m.insertItem( "&Zoom", &zoom );
+    m.insertItem( "&Flip", &flip );
     m.insertItem( "&Quality", &quality );
     m.insertItem( "&Output As", &output );
     m.exec( QCursor::pos() );
@@ -201,6 +232,7 @@ void CameraMainWindow::resoMenuItemClicked( QAction* a )
     captureX = a->text().left(3).toInt();
     captureY = a->text().right(3).toInt();
     odebug << "Capture Resolution now: " << captureX << ", " << captureY << oendl;
+    updateCaption();
 }
 
 
@@ -208,14 +240,35 @@ void CameraMainWindow::qualityMenuItemClicked( QAction* a )
 {
     quality = a->text().left(3).toInt();
     odebug << "Quality now: " << quality << oendl;
+    updateCaption();
 }
 
 
 void CameraMainWindow::zoomMenuItemClicked( QAction* a )
 {
-    zoom = QString( a->text()[2] ).toInt();
+    zoom = QString( a->text().at(2) ).toInt();
     odebug << "Zoom now: " << zoom << oendl;
     ZCameraIO::instance()->setZoom( zoom );
+    updateCaption();
+}
+
+
+void CameraMainWindow::flipMenuItemClicked( QAction* a )
+{
+    flip = QString( a->text().at(0) );
+    odebug << "Flip now: " << flip << oendl;
+    if ( flip == "A" )
+        ZCameraIO::instance()->setFlip( ZCameraIO::AUTOMATICFLIP );
+    else if ( flip == "0" )
+        ZCameraIO::instance()->setFlip( ZCameraIO::XNOFLIP | ZCameraIO::YNOFLIP );
+    else if ( flip == "X" )
+        ZCameraIO::instance()->setFlip( ZCameraIO::XFLIP );
+    else if ( flip == "Y" )
+        ZCameraIO::instance()->setFlip( ZCameraIO::YFLIP );
+    else if ( flip == "*" )
+        ZCameraIO::instance()->setFlip( ZCameraIO::XFLIP | ZCameraIO::YFLIP );
+
+    updateCaption();
 }
 
 
@@ -223,22 +276,37 @@ void CameraMainWindow::outputMenuItemClicked( QAction* a )
 {
     captureFormat = a->text();
     odebug << "Output format now: " << captureFormat << oendl;
+    updateCaption();
 }
 
 
 void CameraMainWindow::shutterClicked()
 {
-    Global::statusMessage( "CAPTURING..." );
-    qApp->processEvents();
+    if ( captureFormat != "AVI" ) // capture one photo per shutterClick
+    {
+        Global::statusMessage( "CAPTURING..." );
+        qApp->processEvents();
 
-    odebug << "Shutter has been pressed" << oendl;
-    ODevice::inst()->touchSound();
+        odebug << "Shutter has been pressed" << oendl;
+        ODevice::inst()->touchSound();
+
+        performCapture( captureFormat );
+    }
+    else // capture video! start with one shutter click and stop with the next
+    {
+        !_capturing ? startVideoCapture() : stopVideoCapture();
+    }
+}
+
+
+void CameraMainWindow::performCapture( const QString& format )
+{
     QString name;
     name.sprintf( "/tmp/image-%d_%d_%d_q%d.%s", _pics++, captureX, captureY, quality, (const char*) captureFormat.lower() );
     QImage i;
     ZCameraIO::instance()->captureFrame( captureX, captureY, zoom, &i );
     QImage im = i.convertDepth( 32 );
-    bool result = im.save( name, captureFormat, quality );
+    bool result = im.save( name, format, quality );
     if ( !result )
     {
         oerr << "imageio-Problem while writing." << oendl;
@@ -250,4 +318,118 @@ void CameraMainWindow::shutterClicked()
         Global::statusMessage( "Ok." );
     }
 }
+
+
+void CameraMainWindow::startVideoCapture()
+{
+    //ODevice::inst()->touchSound();
+    ODevice::inst()->setLedState( Led_Mail, Led_BlinkSlow );
+
+    _capturefd = ::open( CAPTUREFILE, O_WRONLY | O_CREAT );
+    if ( _capturefd == -1 )
+    {
+        owarn << "can't open capture file: " << strerror(errno) << oendl;
+        return;
+    }
+
+    _capturebuf = new unsigned char[captureX*captureY*2];
+    _capturing = true;
+    _videopics = 0;
+    updateCaption();
+    _time.start();
+    preview->setRefreshingRate( 1000 );
+    startTimer( 100 ); // too fast but that is ok
+}
+
+
+void CameraMainWindow::timerEvent( QTimerEvent* )
+{
+    if ( !_capturing )
+    {
+        owarn << "timer event in CameraMainWindow without capturing video ?" << oendl;
+        return;
+    }
+
+    ZCameraIO::instance()->captureFrame( captureX, captureY, zoom, _capturebuf );
+    _videopics++;
+    ::write( _capturefd, _capturebuf, captureX*captureY*2 );
+    setCaption( QString().sprintf( "Capturing %dx%d @ %.2f fps %d",
+        captureX, captureY, 1000.0 / (_time.elapsed()/_videopics), _videopics ) );
+}
+
+
+void CameraMainWindow::stopVideoCapture()
+{
+    killTimers();
+    //ODevice::inst()->touchSound();
+    ODevice::inst()->setLedState( Led_Mail, Led_Off );
+    _capturing = false;
+    updateCaption();
+    ::close( _capturefd );
+
+    //postProcessVideo();
+
+    #ifndef QT_NO_DEBUG
+    preview->setRefreshingRate( 1500 );
+    #else
+    preview->setRefreshingRate( 200 );
+    #endif
+
+    //delete[] _capturebuf; //FIXME: close memory leak
+}
+
+void CameraMainWindow::postProcessVideo()
+{
+    preview->setRefreshingRate( 0 );
+
+    /*
+
+    QDialog* fr = new QDialog( this, "splash" ); //, false, QWidget::WStyle_NoBorder | QWidget::WStyle_Customize );
+    fr->setCaption( "Please wait..." );
+    QVBoxLayout* box = new QVBoxLayout( fr, 2, 2 );
+    QProgressBar* bar = new QProgressBar( fr );
+    bar->setCenterIndicator( true );
+    bar->setTotalSteps( _videopics-1 );
+    QLabel* label = new QLabel( "Post processing frame bla/bla", fr );
+    box->addWidget( bar );
+    box->addWidget( label );
+    fr->show();
+    qApp->processEvents();
+
+    for ( int i = 0; i < _videopics; ++i )
+    {
+        label->setText( QString().sprintf( "Post processing frame %d / %d", i+1, _videopics ) );
+        bar->setProgress( i );
+        qApp->processEvents();
+    }
+
+    */
+
+    int infd = ::open( CAPTUREFILE, O_RDONLY );
+    if ( infd == -1 )
+    {
+        owarn << "couldn't open capture file: " << strerror(errno) << oendl;
+        return;
+    }
+
+    int outfd = ::open( "/tmp/output.avi", O_WRONLY );
+    if ( outfd == -1 )
+    {
+        owarn << "couldn't open output file: " << strerror(errno) << oendl;
+        return;
+    }
+
+
+
+
+}
+
+void CameraMainWindow::updateCaption()
+{
+    if ( !_capturing )
+        setCaption( QString().sprintf( "Opie-Camera: %dx%d %s q%d z%d (%s)", captureX, captureY, (const char*) captureFormat.lower(), quality, zoom, (const char*) flip ) );
+    else
+        setCaption( "Opie-Camera: => CAPTURING <=" );
+}
+
 

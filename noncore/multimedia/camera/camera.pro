@@ -4,11 +4,13 @@ DESTDIR         = $(OPIEDIR)/bin
 TEMPLATE        = app
 CONFIG          = qt warn_on debug
 
-HEADERS         = zcameraio.h \
+HEADERS         = imageio.h \
+                  zcameraio.h \
                   previewwidget.h \
                   mainwindow.h
 
-SOURCES         = zcameraio.cpp \
+SOURCES         = imageio.cpp \
+                  zcameraio.cpp \
                   previewwidget.cpp \
                   mainwindow.cpp \
                   main.cpp

@@ -72,3 +72,17 @@ void PreviewWidget::mousePressEvent( QMouseEvent* )
     emit contextMenuRequested();
 }
 
+
+void PreviewWidget::setRefreshingRate( int ms )
+{
+    killTimers();
+    if ( ms )
+        startTimer( ms );
+}
+
+
+void PreviewWidget::refresh()
+{
+    QTimerEvent t( 10 ); // event id is meaningless in this case
+    timerEvent( &t );
+}
