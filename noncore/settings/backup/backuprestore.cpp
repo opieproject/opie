@@ -280,11 +280,18 @@ void BackupAndRestore::backup()
 
 void BackupAndRestore::backupRootFs()
 {
-//#define MDEBUG
-#ifndef MDEBUG
-    QMessageBox::critical( this, "Opie-Backup", "<qt>This feature is not yet implemented.</qt>", "Bummer!" );
-    return;
-#endif
+    if ( ( ODevice::inst()->model() != Model_Zaurus_SL5000 ) && ( ODevice::inst()->model() != Model_Zaurus_SL5500 ) )
+    {
+        QMessageBox::critical( this, "Not yet implemented!", "<qt>Sorry, support for this model is not yet done.</qt>", "Ok" );
+        return;
+    }
+
+    if ( !QFile::exists( "/usr/bin/mkfs.jffs2" ) && !QFile::exists( "/usr/sbin/mkfs.jffs2" ) )
+    {
+        QMessageBox::critical( this, "Can't find utility!", "<qt>Can't find mkfs.jffs2 - Install mtd-utils.</qt>", "Ok" );
+        return;
+    }
+
     // call 'mount' and parse its output to gather the device on which the root partition is mounted
     FILE* mountp = popen( "mount", "r" );
     QString device;
@@ -300,19 +307,17 @@ void BackupAndRestore::backupRootFs()
             mounto >> device >> on >> mountpoint >> type >> filesystem >> options;
             if ( mountpoint == "/" ) break;
         }
-        odebug << device << " is formatted w/ " << filesystem << " and mounted on " << mountpoint << oendl;
+        odebug << device << " is formatted w/ '" << filesystem << "' and mounted on '" << mountpoint << "'" << oendl;
 
-        if ( !mountpoint.startsWith( "/dev/mtdblock" ) )
+        if ( !device.startsWith( "/dev/mtdblock" ) )
         {
-            QMessageBox::critical( this, "Can't backup!", QString( "<qt>unsupported rootfs %1 - needs to be /dev/mtdblockN</qt>").arg( device ), "Ok" );
-#ifndef MDEBUG
+            QMessageBox::critical( this, "Can't backup!", QString( "<qt>unsupported root device '%1' - needs to be /dev/mtdblockN</qt>").arg( device ), "Ok" );
             return;
-#endif
         }
     } // at this point, the QTextStream has been destroy and we can close the FILE*
     pclose( mountp );
 
-#ifndef MDEBUG
+#if 1
     int rootmtd = device.right( 1 ).toInt();
 #else
     int rootmtd = 0;
@@ -324,6 +329,7 @@ void BackupAndRestore::backupRootFs()
     if ( !procmtdf.open( IO_ReadOnly ) )
     {
         QMessageBox::critical( this, "Can't backup!", "<qt>Can't open /proc/mtd</qt>", "Ok" );
+        return;
     }
 
     QTextStream procmtd( &procmtdf );
@@ -356,15 +362,28 @@ void BackupAndRestore::backupRootFs()
     outputFile += "/initrd.bin-" + dateString;
 
     // call mkfs.jffs2 to create the backup
-    QString cmdline = QString( "mkfs.jffs2 --root=/ %1 --little-endian %2 %3 -n" ).arg( outputFile ).arg( pad ).arg( eraseblock );
+    QString cmdline = QString( "mkfs.jffs2 --faketime --root=/ %1 --little-endian %2 %3 -n" ).arg( outputFile ).arg( pad ).arg( eraseblock );
+    cmdline.append( " --ignore=/tmp --ignore=/mnt --ignore=/var --ignore=/proc" );
     owarn << "Calling '" << cmdline << "'" << oendl;
 
-#ifndef MDEBUG
-    ::system( cmdline );
-#endif
+    OWait *owait = new OWait();
+    Global::statusMessage( tr( "Backing up..." ) );
+    owait->show();
+    qApp->processEvents();
+
+    int r = ::system( cmdline );
+
+    owait->hide();
+    delete owait;
+
+    if ( r != 0 )
+    {
+        perror("Error: ");
+        QString errorMsg = QString( tr( "<qt>%1</qt>" ).arg( strerror( errno ) ) );
+        QMessageBox::critical(this, tr( "Backup Failed!" ), errorMsg, QString( tr( "Ok" ) ) );
+    }
 
     // FIXME: Add image postprocessing for C7x0 and C8x0, for Beagle, for SIMpad
-
 }
 
 void BackupAndRestore::backupUserData()
