@@ -4,6 +4,6 @@ Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION)
 Description: Text Editor
  The text editor for the Opie environment.
