@@ -117,7 +117,12 @@ void MediaPlayer::setPlaying( bool play ) {
     }
     long seconds = loopControl->totalPlaytime();
     QString time; time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
-    QString tickerText = tr( " File: " ) + currentFile->name() + tr(", Length: ") + time;
+    QString tickerText;
+    if( currentFile->file().left(4) == "http" )
+     tickerText= tr( " File: " ) + currentFile->name();
+    else
+    tickerText = tr( " File: " ) + currentFile->name() + tr(", Length: ") + time;
+
     QString fileInfo = mediaPlayerState->curDecoder()->fileInfo();
     if ( !fileInfo.isEmpty() )
   tickerText += ", " + fileInfo;
