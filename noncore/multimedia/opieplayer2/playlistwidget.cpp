@@ -594,6 +594,8 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
 
 void PlayListWidget::tabChanged(QWidget *) {
 
+    d->tbPlay->setEnabled( true );
+
     switch ( currentTab() ) {
     case CurrentPlayList:
     {
@@ -634,6 +636,8 @@ void PlayListWidget::tabChanged(QWidget *) {
         }
         playLists->reread();
         d->tbAddToList->setEnabled(FALSE);
+
+        d->tbPlay->setEnabled( false );
     }
     break;
     };
