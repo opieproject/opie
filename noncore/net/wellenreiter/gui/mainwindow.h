@@ -13,31 +13,31 @@
 **
 **********************************************************************/
 
-#include "mainwindow.h"
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#ifdef QWS
-#include <qpe/qpeapplication.h>
-#else
-#include <qapplication.h>
-#endif
+#include <qmainwindow.h>
 
-int main( int argc, char **argv )
+class Wellenreiter;
+class QIconSet;
+
+class WellenreiterMainWindow: public QMainWindow
 {
-#ifdef QWS
-    QPEApplication a( argc, argv );
-#else
-    QApplication a( argc, argv );
+
+  public:
+    WellenreiterMainWindow( QWidget * parent = 0, const char * name = "mainwindow", WFlags f = 0 );
+    ~WellenreiterMainWindow();
+
+  protected:
+    Wellenreiter* mw;
+
+    const QIconSet* searchIconSet;
+    const QIconSet* infoIconSet;
+    const QIconSet* settingsIconSet;
+    const QIconSet* cancelIconSet;
+
+
+};
+
 #endif
 
-    WellenreiterMainWindow w;
-
-    w.setCaption( "Wellenreiter/Opie" );
-#ifdef QWS
-    a.showMainWidget(&w);
-#else
-    a.setMainWidget(&w);
-    w.show();
-#endif
-
-    return a.exec();
-}
