@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=A Media Player
 Exec=opieplayer2
-Icon=opieplayer/MPEGPlayer
+Icon=opieplayer2/MPEGPlayer
 Type=Application
 MimeType=audio/mpeg;audio/x-wav;audio/x-mpegurl;audio/x-ogg;video/x-ms-asf;video/quicktime;video/mpeg;video/x-msvideo;playlist/plain;
 MimeTypeIcons=SoundPlayer;MPEGPlayer;Sound;Sound;mpegplayer/playlist2
