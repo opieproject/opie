@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.15 2002-12-22 19:02:29 sandman Exp $
+** $Id: datebook.cpp,v 1.16 2003-03-23 22:48:20 umopapisdn Exp $
 **
 **********************************************************************/
 
@@ -808,7 +808,12 @@ void DateBook::slotNewEventFromKey( const QString &str )
 	start = end = d;
 	start.setTime( QTime( 10, 0 ) );
 	end.setTime( QTime( 12, 0 ) );
-    }
+    } else if ( views->visibleWidget() == weekLstView ) {
+	QDate d = weekLstView->date();
+	start = end = d;
+	start.setTime( QTime( 10, 0 ) );
+	end.setTime( QTime( 12, 0 ) );
+	}
     slotNewEntry(start, end, str);
 }
 void DateBook::slotNewEntry(const QDateTime &start, const QDateTime &end, const QString &str) {
