@@ -254,8 +254,11 @@ bool FileManager::renameFile( const QString & src, const QString & dest )
 {
     if( rename( QFile::encodeName( src ), QFile::encodeName( dest ) ) == -1);
     {
-        qWarning( "problem renaming file %s to %s, errno: %d", src.latin1(), dest.latin1(), errno );
-        return false;
+        if ( errno != 2 && errno != 11 ) //ignore ENOENT and EAGAIN - bug in system?
+        {
+            qWarning( "problem renaming file %s to %s, errno: %d", src.latin1(), dest.latin1(), errno );
+            return false;
+        }
     }
     return true;
 }
@@ -311,16 +314,15 @@ bool FileManager::exists( const DocLnk &f )
 }
 
 /*!
-  Ensures that the path \a fn exists, by creating required directories.
+  Ensures that the path \a fileName exists, by creating required directories.
   Returns TRUE if successful.
 */
-bool FileManager::ensurePathExists( const QString &fn )
+bool FileManager::ensurePathExists( const QString &fileName )
 {
-    QFileInfo fi(fn);
-    fi.setFile( fi.dirPath(TRUE) );
-    if ( !fi.exists() )
+    QDir directory = QFileInfo( fileName ).dir();
+    if ( !directory.exists() )
     {
-        if ( system( ("mkdir -p " + QFile::encodeName( fi.filePath() ) ) ) )
+        if ( !directory.mkdir( directory.absPath() ) )
             return FALSE;
     }
     return TRUE;
