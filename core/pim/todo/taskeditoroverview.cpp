@@ -1,38 +1,41 @@
 /*
-               =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 <>
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+ Â  Â  Â  Â  Â  Â  Â  Â              This file is part of the Opie Project
+
+                             Copyright (C) Opie Team <opie-devel@handhelds.org>
+              =.
+            .=l.
+Â  Â  Â  Â  Â  Â .>+-=
+Â _;:, Â  Â  .> Â  Â :=|.         This program is free software; you can
+.> <`_, Â  > Â . Â  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.-- Â  :           the terms of the GNU Library General Public
+.="- .-=="i, Â  Â  .._         License as published by the Free Software
+Â - . Â  .-<_> Â  Â  .<>         Foundation; either version 2 of the License,
+Â  Â  Â ._= =} Â  Â  Â  :          or (at your option) any later version.
+Â  Â  .%`+i> Â  Â  Â  _;_.
+Â  Â  .i_,=:_. Â  Â  Â -<s.       This program is distributed in the hope that
+Â  Â  Â + Â . Â -:. Â  Â  Â  =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : .. Â  Â .:, Â  Â  . . .    without even the implied warranty of
+Â  Â  =_ Â  Â  Â  Â + Â  Â  =;=|`    MERCHANTABILITY or FITNESS FOR A
+Â  _.=:. Â  Â  Â  : Â  Â :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.= Â  Â  Â  = Â  Â  Â  ;      Library General Public License for more
+++= Â  -. Â  Â  .` Â  Â  .:       details.
+: Â  Â  = Â ...= . :.=-
+Â -. Â  .:....=;==+<;          You should have received a copy of the GNU
+Â  -_. . . Â  )=. Â =           Library General Public License along with
+Â  Â  -- Â  Â  Â  Â :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
-
 */
 
 #include "taskeditoroverview.h"
 
 //#include <opie2/opimrecurrence.h>
 
+#include <opie2/oresource.h>
+
 #include <qpe/categoryselect.h>
 #include <qpe/datebookmonth.h>
-#include <qpe/resource.h>
 
 #include <qcheckbox.h>
 #include <qlabel.h>
@@ -50,7 +53,7 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     for ( unsigned int i = 1; i < 6; i++ ) {
         namestr = "todo/priority";
         namestr.append( QString::number( i ) );
-        m_pic_priority[ i - 1 ] = Resource::loadPixmap( namestr );
+        m_pic_priority[ i - 1 ] = Opie::Core::OResource::loadPixmap( namestr );
     }
 
     QVBoxLayout *vb = new QVBoxLayout( this );

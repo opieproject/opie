@@ -1,38 +1,40 @@
 /*
-               =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 <>
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+ Â  Â  Â  Â  Â  Â  Â  Â              This file is part of the Opie Project
+
+                             Copyright (C) Opie Team <opie-devel@handhelds.org>
+              =.
+            .=l.
+Â  Â  Â  Â  Â  Â .>+-=
+Â _;:, Â  Â  .> Â  Â :=|.         This program is free software; you can
+.> <`_, Â  > Â . Â  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.-- Â  :           the terms of the GNU Library General Public
+.="- .-=="i, Â  Â  .._         License as published by the Free Software
+Â - . Â  .-<_> Â  Â  .<>         Foundation; either version 2 of the License,
+Â  Â  Â ._= =} Â  Â  Â  :          or (at your option) any later version.
+Â  Â  .%`+i> Â  Â  Â  _;_.
+Â  Â  .i_,=:_. Â  Â  Â -<s.       This program is distributed in the hope that
+Â  Â  Â + Â . Â -:. Â  Â  Â  =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : .. Â  Â .:, Â  Â  . . .    without even the implied warranty of
+Â  Â  =_ Â  Â  Â  Â + Â  Â  =;=|`    MERCHANTABILITY or FITNESS FOR A
+Â  _.=:. Â  Â  Â  : Â  Â :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.= Â  Â  Â  = Â  Â  Â  ;      Library General Public License for more
+++= Â  -. Â  Â  .` Â  Â  .:       details.
+: Â  Â  = Â ...= . :.=-
+Â -. Â  .:....=;==+<;          You should have received a copy of the GNU
+Â  -_. . . Â  )=. Â =           Library General Public License along with
+Â  Â  -- Â  Â  Â  Â :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
-
 */
 
 #include "taskeditoralarms.h"
 
 #include <opie2/opimnotifymanager.h>
+#include <opie2/oresource.h>
 #include <opie2/otimepicker.h>
 
 #include <qpe/datebookmonth.h>
-#include <qpe/resource.h>
 
 #include <qlistview.h>
 #include <qlayout.h>
@@ -85,19 +87,22 @@ TaskEditorAlarms::TaskEditorAlarms( QWidget* parent,  int, const char* name, WFl
 
     layout->addMultiCellWidget( lstAlarms, 0, 0, 0, 2 );
 
-    QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), this );
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                                        tr( "New" ), this );
     //QWhatsThis::add( btn, tr( "Click here to add a new transaction." ) );
     connect( btn, SIGNAL( clicked() ), this, SLOT( slotNew() ) );
     layout->addWidget( btn, 1, 0 );
 /* use when we've reminders too */
 #if 0
-    btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Edit" ), this );
+    btn = new QPushButton( Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ),
+                           tr( "Edit" ), this );
     //QWhatsThis::add( btn, tr( "Select a transaction and then click here to edit it." ) );
     connect( btn, SIGNAL( clicked() ), this, SLOT( slotEdit() ) );
     layout->addWidget( btn, 1, 1 );
 #endif
 
-    btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), this );
+    btn = new QPushButton( Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ),
+                           tr( "Delete" ), this );
     //QWhatsThis::add( btn, tr( "Select a checkbook and then click here to delete it." ) );
     connect( btn, SIGNAL( clicked() ), this, SLOT( slotDelete() ) );
     layout->addWidget( btn, 1, 2 );

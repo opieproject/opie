@@ -1,40 +1,43 @@
 /*
-       =.            This file is part of the OPIE Project
-      .=l.            Copyright (c)  2002 <zecke>
-     .>+-=
-_;:,   .>  :=|.         This program is free software; you can
-.> <`_,  > .  <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--  :           the terms of the GNU General Public
-.="- .-=="i,   .._         License as published by the Free Software
-- .  .-<_>   .<>         Foundation; either version 2 of the License,
-  ._= =}    :          or (at your option) any later version.
-  .%`+i>    _;_.
-  .i_,=:_.   -<s.       This program is distributed in the hope that
-  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
-  : ..  .:,   . . .    without even the implied warranty of
-  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
- _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=    =    ;      Library General Public License for more
-++=  -.   .`   .:       details.
-:   = ...= . :.=-
--.  .:....=;==+<;          You should have received a copy of the GNU
- -_. . .  )=. =           Library General Public License along with
-  --    :-=`           this library; see the file COPYING.LIB.
+                             This file is part of the Opie Project
+
+                             Copyright (C) Opie Team <opie-devel@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+:     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
-
 */
+
 #include <stdlib.h>
 #include <cmath>
 #include <cctype>
 
 #include <opie2/odebug.h>
 #include <opie2/opimrecurrence.h>
+#include <opie2/oresource.h>
 
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 
 #include <qcombobox.h>
 #include <qlineedit.h>
@@ -90,12 +93,12 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     // Load icons
     // TODO - probably should be done globally somewhere else,
     //        see also quickeditimpl.cpp/h, taskeditoroverview.cpp/h
-    m_pic_completed = Resource::loadPixmap( "todo/completed" );
+    m_pic_completed = Opie::Core::OResource::loadPixmap( "todo/completed" );
     QString namestr;
     for ( unsigned int i = 1; i < 6; i++ ) {
         namestr = "todo/priority";
         namestr.append( QString::number( i ) );
-        m_pic_priority[ i - 1 ] = Resource::loadPixmap( namestr );
+        m_pic_priority[ i - 1 ] = Opie::Core::OResource::loadPixmap( namestr );
     }
 
     setUpdatesEnabled( false );
@@ -270,7 +273,7 @@ void TableView::setShowDeadline( bool b ) {
 void TableView::setShowCategory( const QString& str) {
     if ( str != m_oleCat || m_first )
         updateView();
-    
+
     m_oleCat = str;
     m_first = false;
 }
