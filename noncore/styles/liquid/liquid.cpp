@@ -843,7 +843,9 @@ void LiquidStyle::polish(QWidget *w)
     }
     if(w->inherits("QPopupMenu"))
         w->setBackgroundMode(QWidget::NoBackground);
-    else if(w-> testWFlags(Qt::WType_Popup) && !w->inherits("QListBox")) {
+    else if(w-> testWFlags(Qt::WType_Popup) && 
+            !w->inherits("QListBox") && 
+            ( qstrcmp ( w-> name(), "automatic what's this? widget" ) != 0 )) {
     	w->installEventFilter(menuHandler);
     }
     
@@ -944,7 +946,9 @@ void LiquidStyle::unPolish(QWidget *w)
 
     if(w->inherits("QPopupMenu"))
         w->setBackgroundMode(QWidget::PaletteButton);
-    else if(w-> testWFlags(Qt::WType_Popup) && !w->inherits("QListBox")) {
+    else if(w-> testWFlags(Qt::WType_Popup) && 
+            !w->inherits("QListBox") &&
+            ( qstrcmp ( w-> name(), "automatic what's this? widget" ) != 0 )) {
     	w->removeEventFilter(menuHandler);
     }
 
