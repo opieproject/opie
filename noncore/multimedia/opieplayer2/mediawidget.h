@@ -28,13 +28,16 @@ class MediaWidget : public QWidget
 {
     Q_OBJECT
 public:
-    MediaWidget( QWidget *parent = 0, const char *name = 0 );
+    MediaWidget( MediaPlayerState &_mediaPlayerState, QWidget *parent = 0, const char *name = 0 );
     virtual ~MediaWidget();
 
 public slots:
     virtual void setDisplayType( MediaPlayerState::DisplayType displayType ) = 0;
     virtual void setLength( long length ) = 0;
     virtual void setPlaying( bool playing ) = 0;
+
+protected:
+    MediaPlayerState &mediaPlayerState;
 };
 
 #endif // MEDIAWIDGET_H

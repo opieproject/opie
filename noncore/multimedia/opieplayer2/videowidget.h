@@ -56,7 +56,7 @@ enum VideoButtons {
 class VideoWidget : public MediaWidget {
     Q_OBJECT
 public:
-    VideoWidget( QWidget* parent=0, const char* name=0 );
+    VideoWidget( MediaPlayerState &mediaPlayerState, QWidget* parent=0, const char* name=0 );
     ~VideoWidget();
 
 

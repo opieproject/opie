@@ -22,14 +22,14 @@
 
 extern MediaPlayerState *mediaPlayerState;
 
-MediaWidget::MediaWidget( QWidget *parent, const char *name )
-    : QWidget( parent, name )
+MediaWidget::MediaWidget( MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name )
+    : QWidget( parent, name ), mediaPlayerState( _mediaPlayerState )
 {
-    connect( mediaPlayerState, SIGNAL( displayTypeChanged( MediaPlayerState::DisplayType ) ),
+    connect( &mediaPlayerState, SIGNAL( displayTypeChanged( MediaPlayerState::DisplayType ) ),
              this, SLOT( setDisplayType( MediaPlayerState::DisplayType ) ) );
-    connect( mediaPlayerState, SIGNAL( lengthChanged( long ) ),
+    connect( &mediaPlayerState, SIGNAL( lengthChanged( long ) ),
              this, SLOT( setLength( long ) ) );
-    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ),
+    connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ),
              this, SLOT( setPlaying( bool ) ) );
 }
 

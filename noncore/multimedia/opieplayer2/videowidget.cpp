@@ -53,7 +53,6 @@
 #endif
 
 
-extern MediaPlayerState *mediaPlayerState;
 extern PlayListWidget *playList;
 
 
@@ -82,8 +81,8 @@ const char *skinV_mask_file_names[7] = {
 static const int numVButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 
 
-VideoWidget::VideoWidget(QWidget* parent, const char* name) :
-MediaWidget( parent, name ), scaledWidth( 0 ), scaledHeight( 0 ) {
+VideoWidget::VideoWidget(MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name) :
+MediaWidget( mediaPlayerState, parent, name ), scaledWidth( 0 ), scaledHeight( 0 ) {
 
 
     setCaption( tr("OpiePlayer - Video") );
@@ -137,10 +136,10 @@ MediaWidget( parent, name ), scaledWidth( 0 ), scaledHeight( 0 ) {
 
     resizeEvent( NULL );
 
-    setLength( mediaPlayerState->length() );
-    setPosition( mediaPlayerState->position() );
-    setFullscreen( mediaPlayerState->isFullscreen() );
-    setPlaying( mediaPlayerState->isPlaying() );
+    setLength( mediaPlayerState.length() );
+    setPosition( mediaPlayerState.position() );
+    setFullscreen( mediaPlayerState.isFullscreen() );
+    setPlaying( mediaPlayerState.isPlaying() );
 }
 
 
@@ -221,17 +220,17 @@ void VideoWidget::sliderReleased() {
     if ( slider->width() == 0 ) {
         return;
     }
-    long val = long((double)slider->value() * mediaPlayerState->length() / slider->width());
-    mediaPlayerState->setPosition( val );
+    long val = long((double)slider->value() * mediaPlayerState.length() / slider->width());
+    mediaPlayerState.setPosition( val );
 }
 
 void VideoWidget::setPosition( long i ) {
-    updateSlider( i, mediaPlayerState->length() );
+    updateSlider( i, mediaPlayerState.length() );
 }
 
 
 void VideoWidget::setLength( long max ) {
-    updateSlider( mediaPlayerState->position(), max );
+    updateSlider( mediaPlayerState.position(), max );
 }
 
 void VideoWidget::setDisplayType( MediaPlayerState::DisplayType displayType )
@@ -254,7 +253,7 @@ void VideoWidget::updateSlider( long i, long max ) {
     }
     int width = slider->width();
     int val = int((double)i * width / max);
-    if ( !mediaPlayerState->isFullscreen() && !videoSliderBeingMoved ) {
+    if ( !mediaPlayerState.isFullscreen() && !videoSliderBeingMoved ) {
         if ( slider->value() != val ) {
             slider->setValue( val );
         }
@@ -323,25 +322,25 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 switch(i) {
 
                 case VideoPlay: {
-                    if( mediaPlayerState->isPaused() ) {
+                    if( mediaPlayerState.isPaused() ) {
                         setToggleButton( i, FALSE );
-                        mediaPlayerState->setPaused( FALSE );
+                        mediaPlayerState.setPaused( FALSE );
                         return;
-                    } else if( !mediaPlayerState->isPaused() ) {
+                    } else if( !mediaPlayerState.isPaused() ) {
                         setToggleButton( i, TRUE );
-                        mediaPlayerState->setPaused( TRUE );
+                        mediaPlayerState.setPaused( TRUE );
                         return;
                     } else {
                         return;
                     }
                 }
 
-                case VideoStop:       mediaPlayerState->setPlaying( FALSE ); return;
-		case VideoNext:       if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState->setNext(); return;
-		case VideoPrevious:   if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState->setPrev(); return;
+                case VideoStop:       mediaPlayerState.setPlaying( FALSE ); return;
+		case VideoNext:       if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setNext(); return;
+		case VideoPrevious:   if( playList->currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setPrev(); return;
                 case VideoVolUp:      emit moreReleased(); return;
                 case VideoVolDown:    emit lessReleased(); return;
-                case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
+                case VideoFullscreen: mediaPlayerState.setFullscreen( TRUE ); makeVisible(); return;
                 }
             }
         }
@@ -353,8 +352,8 @@ void VideoWidget::mousePressEvent( QMouseEvent *event ) {
 }
 
 void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
-    if ( mediaPlayerState->isFullscreen() ) {
-        mediaPlayerState->setFullscreen( FALSE );
+    if ( mediaPlayerState.isFullscreen() ) {
+        mediaPlayerState.setFullscreen( FALSE );
         makeVisible();
     }
     mouseMoveEvent( event );
@@ -367,20 +366,20 @@ void VideoWidget::showEvent( QShowEvent* ) {
 
 
  void VideoWidget::backToNormal() {
-     mediaPlayerState->setFullscreen( FALSE );
+     mediaPlayerState.setFullscreen( FALSE );
      makeVisible();
  }
 
 void VideoWidget::makeVisible() {
-    if ( mediaPlayerState->isFullscreen() ) {
+    if ( mediaPlayerState.isFullscreen() ) {
         setBackgroundMode( QWidget::NoBackground );
         showFullScreen();
         resize( qApp->desktop()->size() );
         videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
 
         slider->hide();
-        disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-        disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+        disconnect( &mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+        disconnect( &mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
         disconnect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
         disconnect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
 
@@ -399,18 +398,18 @@ void VideoWidget::makeVisible() {
             videoFrame->setGeometry( QRect( 0, 30, 240, 170  ) );
         }
 
-        if ( !mediaPlayerState->isSeekable()  ) {
+        if ( !mediaPlayerState.isSeekable()  ) {
             if( !slider->isHidden()) {
                 slider->hide();
             }
-            disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-            disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+            disconnect( &mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+            disconnect( &mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
             disconnect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
             disconnect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
         } else {
             slider->show();
-            connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-            connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+            connect( &mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+            connect( &mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
             connect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
             connect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
         }
@@ -423,7 +422,7 @@ void VideoWidget::makeVisible() {
 void VideoWidget::paintEvent( QPaintEvent * pe) {
     QPainter p( this );
 
-    if ( mediaPlayerState->isFullscreen() ) {
+    if ( mediaPlayerState.isFullscreen() ) {
         // Clear the background
         p.setBrush( QBrush( Qt::black ) );
     } else {
@@ -449,7 +448,7 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
 
 
 void VideoWidget::closeEvent( QCloseEvent* ) {
-    mediaPlayerState->setList();
+    mediaPlayerState.setList();
 }
 
 
@@ -470,10 +469,10 @@ void VideoWidget::keyReleaseEvent( QKeyEvent *e) {
       case Key_F13: //mail
           break;
       case Key_Space: {
-          if(mediaPlayerState->isPlaying()) {
-              mediaPlayerState->setPlaying(FALSE);
+          if(mediaPlayerState.isPlaying()) {
+              mediaPlayerState.setPlaying(FALSE);
           } else {
-              mediaPlayerState->setPlaying(TRUE);
+              mediaPlayerState.setPlaying(TRUE);
           }
       }
           break;
@@ -490,10 +489,10 @@ void VideoWidget::keyReleaseEvent( QKeyEvent *e) {
 //             toggleButton(5);
            break;
       case Key_Right:
-          mediaPlayerState->setNext();
+          mediaPlayerState.setNext();
           break;
       case Key_Left:
-          mediaPlayerState->setPrev();
+          mediaPlayerState.setPrev();
           break;
       case Key_Escape:
           break;

@@ -19,9 +19,9 @@ int main(int argc, char **argv) {
     PlayListWidget pl( st, 0, "playList" );
     playList = &pl;
     pl.showMaximized();
-    AudioWidget aw( 0, "audioUI" );
+    AudioWidget aw( st, 0, "audioUI" );
     audioUI = &aw;
-    VideoWidget vw( 0, "videoUI" );
+    VideoWidget vw( st, 0, "videoUI" );
     videoUI = &vw;
     a.processEvents();
     MediaPlayer mp( st, 0, "mediaPlayer" );

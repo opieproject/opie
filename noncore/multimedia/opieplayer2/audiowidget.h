@@ -68,7 +68,7 @@ enum AudioButtons {
 class AudioWidget : public MediaWidget {
     Q_OBJECT
 public:
-    AudioWidget( QWidget* parent=0, const char* name=0 );
+    AudioWidget( MediaPlayerState &mediaPlayerState, QWidget* parent=0, const char* name=0 );
     ~AudioWidget();
     void setTickerText( const QString &text ) { songInfo.setText( text ); }
 public slots:
