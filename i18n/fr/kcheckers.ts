@@ -104,7 +104,7 @@
     </message>
     <message>
         <source>&amp;Skill</source>
-        <translation>&amp;Niveau de jeu</translation>
+        <translation>&amp;Niveau</translation>
     </message>
     <message>
         <source>&amp;Options</source>
