@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.10 2003-02-07 03:23:16 max Exp $
+ * $Id: cardmode.cc,v 1.11 2003-02-07 03:34:48 max Exp $
  */
 
 #include "cardmode.hh"
@@ -85,6 +85,7 @@ int card_check_rfmon_datalink (char *device)
   pcap_t *phandle;
   phandle = pcap_open_live(device, 65,0,0,NULL);
   datalinktype = pcap_datalink (phandle);
+  pcap_close(phandle);
 
   if (datalinktype != DLT_IEEE802_11) /* Rawmode is IEEE802_11 */
     {

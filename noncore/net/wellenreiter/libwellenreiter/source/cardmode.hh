@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.12 2003-02-07 03:23:16 max Exp $ */
+/* $Id: cardmode.hh,v 1.13 2003-02-07 03:34:48 max Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -13,7 +13,6 @@
 #include <arpa/inet.h>
 #include <sys/ioctl.h>
 #include <linux/if.h>
-
 
 extern "C"
 {
