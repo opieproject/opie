@@ -87,7 +87,7 @@
     </message>
     <message>
         <source>Blue:</source>
-        <translation>Bleue :</translation>
+        <translation>Bleu :</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
@@ -208,7 +208,7 @@
     </message>
     <message>
         <source>Every:</source>
-        <translation>Tous les :</translation>
+        <translation>Chaque : </translation>
     </message>
     <message>
         <source>Frequency</source>
@@ -256,7 +256,7 @@
     </message>
     <message>
         <source>Every</source>
-        <translation>Tous</translation>
+        <translation>Chaque </translation>
     </message>
     <message>
         <source>Var1</source>
@@ -311,20 +311,21 @@
     </message>
     <message>
         <source> and </source>
-        <translation>et</translation>
+        <translation> et </translation>
     </message>
     <message>
         <source>,
 and </source>
-        <translation>, et</translation>
+        <translation>,
+et </translation>
     </message>
     <message>
         <source>, and </source>
-        <translation>, et</translation>
+        <translation>, et </translation>
     </message>
     <message>
         <source>on </source>
-        <translation>activé</translation>
+        <translation>Les </translation>
     </message>
     <message>
         <source>No Repeat</source>
@@ -392,7 +393,7 @@ and </source>
     </message>
     <message>
         <source>Every</source>
-        <translation>Tous</translation>
+        <translation>Chaque </translation>
     </message>
 </context>
 <context>
@@ -407,7 +408,7 @@ and </source>
     </message>
     <message>
         <source>Pick Time:</source>
-        <translation>Choisir l&apos;Heure :</translation>
+        <translation>Choisir Heure :</translation>
     </message>
 </context>
 <context>
@@ -592,7 +593,7 @@ plusieurs jours</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation>Tous</translation>
+        <translation>Chaque </translation>
     </message>
     <message>
         <source>%1 %2 every </source>
@@ -604,7 +605,7 @@ plusieurs jours</translation>
     </message>
     <message>
         <source>The %1 %2 of every</source>
-        <translation>Le %1 %2 tous les</translation>
+        <translation>Le %2 %1 chaque </translation>
     </message>
     <message>
         <source>Every </source>
@@ -643,19 +644,19 @@ plusieurs jours</translation>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation>er</translation>
+        <translation> </translation>
     </message>
     <message>
         <source>nd</source>
-        <translation></translation>
+        <translation> </translation>
     </message>
     <message>
         <source>rd</source>
-        <translation></translation>
+        <translation> </translation>
     </message>
     <message>
         <source>th</source>
-        <translation></translation>
+        <translation> </translation>
     </message>
 </context>
 </TS>

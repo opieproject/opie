@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>silent</source>
-        <translation>Silencieuse</translation>
+        <translation>Muette</translation>
     </message>
     <message>
         <source>loud</source>
@@ -105,7 +105,7 @@
     </message>
     <message>
         <source>Delete completed</source>
-        <translation>Suppression Terminé</translation>
+        <translation>Supprimer Tâches Terminées</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>Data</source>
-        <translation>Donnée</translation>
+        <translation>Tâches</translation>
     </message>
     <message>
         <source>Category</source>
@@ -181,12 +181,12 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation>&quot;Tâche&quot; n&apos;a pas pu
-enregistrer vos changements.
-Libérez de l&apos;espace
-et réessayez.
+        <translation>L&apos;application n&apos;a pas pu
+enregistrer vos modifications.
+Libérez de l&apos;espace et
+réessayez.
 
-Quitter?</translation>
+Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>Todo</source>
@@ -198,11 +198,11 @@ Quitter?</translation>
     </message>
     <message>
         <source>all tasks?</source>
-        <translation>toutes les tâches ?</translation>
+        <translation> toutes les tâches ?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
-        <translation>toutes les tâches effectuées ?</translation>
+        <translation> toutes les tâches effectuées ?</translation>
     </message>
     <message>
         <source>Unfiled</source>
