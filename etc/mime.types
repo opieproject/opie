@@ -136,6 +136,7 @@ video/gl      gl
 video/mpeg      mpeg mp2 mpe mpg
 video/quicktime     mov qt
 video/x-msvideo     avi
+video/x-ogm         ogm
 video/x-sgi-movie   movie
 x-conference/x-cooltalk   ice
 x-world/x-vrml      wrl vrml
