@@ -12,7 +12,8 @@
 <section>
 	<title>Preferences</title>
 	<para>
-		test blah blah
+		In order to translate for OPIE you need an editor to edit the translationfile
+		and preferably access to cvs.
 	</para>
 </section>
 </chapter>
