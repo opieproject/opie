@@ -70,6 +70,7 @@ private:
 
 private slots:
     void slotCopyFormatSelected();
+    void slotSelectSwordPath();
 };
 
 #endif

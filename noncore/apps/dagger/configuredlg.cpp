@@ -17,8 +17,13 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 
 #include "configuredlg.h"
 
+#include <opie2/ofiledialog.h>
+
+#include <qpe/resource.h>
+
 #include <qlabel.h>
 #include <qlayout.h>
+#include <qpushbutton.h>
 #include <qvbuttongroup.h>
 #include <qwhatsthis.h>
 
@@ -45,7 +50,13 @@ ConfigureDlg::ConfigureDlg( QWidget *parent, const QString &swordPath, bool alwa
     grid->addMultiCellWidget( label, 0, 0, 0, 1 );
     m_swordPath = new QLineEdit( swordPath, widget );
     QWhatsThis::add( m_swordPath, tr( "Enter the path where the Sword texts (Bibles, commentaries, etc.) can be found.  This path should contain either the 'mods.conf' file or 'mods.d' sub-directory." ) );
-    grid->addMultiCellWidget( m_swordPath, 1, 1, 0, 1 );
+    grid->addWidget( m_swordPath, 1, 0 );
+    QPushButton *btn = new QPushButton( Resource::loadPixmap( "folder" ), QString::null, widget );
+    btn->setMaximumWidth( btn->height() );
+    QWhatsThis::add( btn, tr( "Tap here to select the path where the Sword texts (Bibles, commentaries, etc.) can be found.  This path should contain either the 'mods.conf' file or 'mods.d' sub-directory." ) );
+    connect( btn, SIGNAL(clicked()), this, SLOT(slotSelectSwordPath()) );
+    grid->addWidget( btn, 1, 1 );
+    
     label = new QLabel( tr( "(Note: Dagger must be restarted for this option to take affect.)" ), widget );
     label->setAlignment( Qt::AlignHCenter | Qt::AlignTop | Qt::WordBreak );
     QWhatsThis::add( label, tr( "Enter the path where the Sword modules (Bible texts, commentaries, etc.) can be found.  This path should contain either the 'mods.conf' file or 'mods.d' sub-directory." ) );
@@ -147,4 +158,12 @@ void ConfigureDlg::slotCopyFormatSelected()
         m_copyExample->setText( verse );
     else if ( option == m_copyKey && m_copyKey->isChecked() )
         m_copyExample->setText( key );
+}
+
+void ConfigureDlg::slotSelectSwordPath()
+{
+    QString path = Opie::Ui::OFileDialog::getDirectory( 0, m_swordPath->text() );
+    if ( path.at( path.length() - 1 ) == '/' )
+        path.truncate( path.length() - 1 );
+    m_swordPath->setText( path );
 }
