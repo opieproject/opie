@@ -72,9 +72,7 @@ public:
 
     bool executeCommand( OPackage::Command command = OPackage::NotDefined, QStringList *parameters = 0x0,
                          const QString &destination = QString::null, const QObject *receiver = 0x0,
-                         const char *slotOutput = 0x0, const char *slotErrors = 0x0,
-                         const char *slotFinished = 0x0, bool rawOutput = true );
-    void abortCommand();
+                         const char *slotOutput = 0x0, bool rawOutput = true );
 
 private:
     Config         *m_config;     // Pointer to application configuration file

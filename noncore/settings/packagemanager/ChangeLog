@@ -1,4 +1,9 @@
-2004-01-nn Dan Williams <drw@handhelds.org>
+2004-01-20 Dan Williams <drw@handhelds.org>
+
+	* Released version 0.2.0
+	* Converted to use libipkg in place of spawning ipkg process
+
+2004-01-13 Dan Williams <drw@handhelds.org>
 
 	* Released version 0.1.0
 	* Initial check-in of new package management client to eventually replace AQPkg

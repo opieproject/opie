@@ -31,29 +31,48 @@
 
 #include "oipkg.h"
 
-#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include <qdir.h>
 #include <qfile.h>
+#include <qmessagebox.h>
 #include <qtextstream.h>
 
-#include <opie/oprocess.h>
-
-const QString IPKG_EXEC        = "ipkg";                // Fully-qualified name of Ipkg executable
 const QString IPKG_CONF        = "/etc/ipkg.conf";      // Fully-qualified name of Ipkg primary configuration file
 const QString IPKG_CONF_DIR    = "/etc/ipkg";           // Directory of secondary Ipkg configuration files
 const QString IPKG_PKG_PATH    = "/usr/lib/ipkg/lists"; // Directory containing server package lists
 const QString IPKG_STATUS_PATH = "usr/lib/ipkg/status"; // Destination status file location
 
+OIpkg *oipkg;
+
+int fIpkgMessage( ipkg_conf_t */*conf*/, message_level_t /*level*/, char *msg )
+{
+    oipkg->ipkgOutput( msg );
+    return 0;
+}
+
+char* fIpkgResponse( char */*question*/ )
+{
+    return 0x0;
+}
+
 OIpkg::OIpkg( Config *config, QObject *parent, const char *name )
     : QObject( parent, name )
     , m_config( config )
-    , m_ipkgExec( IPKG_EXEC ) // TODO - find executable?
     , m_confInfo( NULL )
     , m_ipkgExecOptions( 0 )
     , m_ipkgExecVerbosity( 1 )
-    , m_ipkgProcess( NULL )
 {
+    oipkg = this;
+
+    // Initialize libipkg
+    if ( ipkg_init( &fIpkgMessage, &fIpkgResponse, &m_ipkgArgs ) )
+        QMessageBox::critical( 0, tr( "OIpkg" ), tr( "Error initialing libipkg" ) );
+
+    // Default ipkg run-time arguments
+    m_ipkgArgs.noaction = false;
+    m_ipkgArgs.force_defaults = true;
 }
 
 OIpkg::~OIpkg()
@@ -62,9 +81,9 @@ OIpkg::~OIpkg()
     if ( m_confInfo )
         m_confInfo->setAutoDelete( true );
 
-    // Terminate any running ipkg processes
-    if ( m_ipkgProcess )
-        delete m_ipkgProcess;
+    // Free up libipkg resources
+    if ( ipkg_deinit( &m_ipkgArgs ) )
+        QMessageBox::critical( 0, tr( "OIpkg" ), tr( "Error freeing libipkg" ) );
 }
 
 OConfItemList *OIpkg::configItems()
@@ -254,136 +273,71 @@ OPackageList *OIpkg::installedPackages( const QString &destName, const QString &
 }
 
 bool OIpkg::executeCommand( OPackage::Command command, QStringList *parameters, const QString &destination,
-                            const QObject *receiver, const char *slotOutput, const char *slotErrors,
-                            const char *slotFinished, bool rawOutput )
+                            const QObject *receiver, const char *slotOutput, bool rawOutput )
 {
     if ( command == OPackage::NotDefined )
         return false;
 
-    // Set up command line for execution
-    QStringList cmdLine;
-    cmdLine.append( IPKG_EXEC );
-
-    QString verbosity( "-V" );
-    verbosity.append( QString::number( m_ipkgExecVerbosity ) );
-    cmdLine.append( verbosity );
-
-    // Determine Ipkg execution options
-    if ( command == OPackage::Install && destination != QString::null )
+    // Set ipkg run-time options/arguments
+    m_ipkgArgs.force_depends = ( m_ipkgExecOptions & FORCE_DEPENDS );
+    m_ipkgArgs.force_reinstall = ( m_ipkgExecOptions & FORCE_REINSTALL );
+    // TODO m_ipkgArgs.force_remove = ( m_ipkgExecOptions & FORCE_REMOVE );
+    m_ipkgArgs.force_overwrite = ( m_ipkgExecOptions & FORCE_OVERWRITE );
+    m_ipkgArgs.verbosity = m_ipkgExecVerbosity;
+    if ( m_ipkgArgs.dest )
+        free( m_ipkgArgs.dest );
+    if ( !destination.isNull() )
     {
-        // TODO - Set destination for installs
-        cmdLine.append( "-dest" );
-        cmdLine.append( destination );
+        int len = destination.length() + 1;
+        m_ipkgArgs.dest = (char *)malloc( len );
+        strncpy( m_ipkgArgs.dest, destination, destination.length() );
+        m_ipkgArgs.dest[ len - 1 ] = '\0';
+    }
+    else
+        m_ipkgArgs.dest = 0x0;
+
+    // Connect output signal to widget
+    if ( rawOutput )
+    {
+        if ( slotOutput )
+            connect( this, SIGNAL(execOutput(char *)), receiver, slotOutput );
+    }
+    else
+    {
+        // TODO - connect to local slot and parse output before emitting execOutput
     }
 
-    if ( command != OPackage::Update && command != OPackage::Download )
-    {
-        if ( m_ipkgExecOptions & FORCE_DEPENDS )
-            cmdLine.append( "-force-depends" );
-        if ( m_ipkgExecOptions & FORCE_REINSTALL  )
-            cmdLine.append( "-force-reinstall" );
-        if ( m_ipkgExecOptions & FORCE_REMOVE )
-            cmdLine.append( "-force-removal-of-essential-packages" );
-        if ( m_ipkgExecOptions & FORCE_OVERWRITE )
-            cmdLine.append( "-force-overwrite" );
-        if ( m_ipkgExecVerbosity == 3 )
-            cmdLine.append( "-verbose_wget" );
-
-        // TODO
-        // Handle make links
-        // Rules - If make links is switched on, create links to root
-        // if destDir is NOT /
-        /*
-        if ( m_ipkgExecOptions & MAKE_LINKS )
-        {
-            // If destDir == / turn off make links as package is being insalled
-            // to root already.
-            if ( destDir == "/" )
-                m_ipkgExecOptions ^= MAKE_LINKS;
-        }
-        */
-    }
-
-    QString cmd;
     switch( command )
     {
-        case OPackage::Install: cmd = "install";
+        case OPackage::Update : ipkg_lists_update( &m_ipkgArgs );
             break;
-        case OPackage::Remove: cmd = "remove";
+        case OPackage::Upgrade : ipkg_packages_upgrade( &m_ipkgArgs );
             break;
-        case OPackage::Update: cmd = "update";
+        case OPackage::Install : {
+                for ( QStringList::Iterator it = parameters->begin(); it != parameters->end(); ++it )
+                {
+                    ipkg_packages_install( &m_ipkgArgs, (*it) );
+                }
+            };
             break;
-        case OPackage::Upgrade: cmd = "upgrade";
+        case OPackage::Remove : {
+                for ( QStringList::Iterator it = parameters->begin(); it != parameters->end(); ++it )
+                {
+                    ipkg_packages_remove( &m_ipkgArgs, (*it), true );
+                }
+            };
             break;
-        case OPackage::Download: cmd = "download";
-            break;
-        case OPackage::Info: cmd = "info";
-            break;
-        case OPackage::Files: cmd = "files";
-            break;
-        //case OPackage::Version: cmd = "" );
+        //case OPackage::Download : ;
         //    break;
-        default:
-            break;
+        default : break;
     };
-    cmdLine.append( cmd );
 
-    // TODO
-    // If we are removing, reinstalling or upgrading packages and make links option is selected
-    // create the links
-/*
-    if ( command == Remove || command == Upgrade )
-    {
-        createLinks = false;
-        if ( flags & MAKE_LINKS )
-        {
-            emit outputText( tr( "Removing symbolic links...\n" ) );
-            linkPackage( Utils::getPackageNameFromIpkFilename( package ), destination, destDir );
-            emit outputText( QString( " " ) );
-        }
-    }
-*/
-    // Append package list (if any) to end of command line
-    if ( parameters && !parameters->isEmpty() )
-    {
-        for ( QStringList::Iterator it = parameters->begin(); it != parameters->end(); ++it )
-        {
-            cmdLine.append( *it );
-        }
-    }
-
-    // Create OProcess
-    if ( m_ipkgProcess )
-        delete m_ipkgProcess;
-    m_ipkgProcess = new OProcess( cmdLine, this );
-
-    // Connect signals (if any)
-    if ( receiver )
-    {
-        if ( rawOutput )
-        {
-            if ( slotOutput )
-                connect( m_ipkgProcess, SIGNAL(receivedStdout(OProcess*,char*,int)), receiver, slotOutput );
-            if ( slotErrors )
-                connect( m_ipkgProcess, SIGNAL(receivedStderr(OProcess*,char*,int)), receiver, slotErrors );
-            if ( slotFinished )
-                connect( m_ipkgProcess, SIGNAL(processExited(OProcess*)), receiver, slotFinished );
-        }
-        else // !rawOutput
-        {
-            // TODO - how should it handle partial lines? (i.e. "Installing opi", "e-aqpkg...")
-        }
-    }
-
-    // Run process
-printf( "Running: \'%s\'\n", cmdLine.join( " " ).latin1() );
-    return m_ipkgProcess->start( OProcess::NotifyOnExit, OProcess::All );
+    return true;
 }
 
-void OIpkg::abortCommand()
+void OIpkg::ipkgOutput( char *msg )
 {
-    if ( m_ipkgProcess )
-        delete m_ipkgProcess;
+    emit execOutput( msg );
 }
 
 void OIpkg::loadConfiguration()

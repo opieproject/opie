@@ -78,9 +78,7 @@ private slots:
     void slotBtnOptions();
 
     // Execution slots
-    void slotOutput( OProcess *process, char *buffer, int buffLen );
-    void slotErrors( OProcess *process, char *buffer, int buffLen );
-    void slotFinished( OProcess *process );
+    void slotOutput( char *msg );
 
 signals:
     void closeInstallDlg();

@@ -32,6 +32,10 @@
 #ifndef OIPKG_H
 #define OIPKG_H
 
+extern "C" {
+#include <libipkg.h>
+};
+
 #include <qobject.h>
 
 #include <qpe/config.h>
@@ -46,7 +50,6 @@
 #define FORCE_OVERWRITE                         0x0008
 
 class OConfItemList;
-class OProcess;
 
 class OIpkg : public QObject
 {
@@ -76,25 +79,23 @@ public:
 
     bool executeCommand( OPackage::Command command = OPackage::NotDefined, QStringList *parameters = 0x0,
                          const QString &destination = QString::null, const QObject *receiver = 0x0,
-                         const char *slotOutput = 0x0, const char *slotErrors = 0x0,
-                         const char *slotFinished = 0x0, bool rawOutput = true );
+                         const char *slotOutput = 0x0, bool rawOutput = true );
     void abortCommand();
+
+    void ipkgOutput( char *msg );
 
 private:
     Config        *m_config;            // Pointer to application configuration file
-    QString        m_ipkgExec;          // Fully qualified path/filename of ipkg binary
+    args_t         m_ipkgArgs;          // libipkg configuration arguments
     OConfItemList *m_confInfo;          // Contains info from all Ipkg configuration files
     int            m_ipkgExecOptions;   // Bit-mapped flags for Ipkg execution options
     int            m_ipkgExecVerbosity; // Ipkg execution verbosity level
-    OProcess      *m_ipkgProcess;       // Pointer to process which Ipkg will run in
 
     void           loadConfiguration();
     OConfItemList *filterConfItems( OConfItem::Type typefilter = OConfItem::NotDefined );
 
 signals:
-    void execOutput( OProcess *process, char *buffer, int length );
-    void execErrors( OProcess *process, char *buffer, int length );
-    void execFinished( OProcess *process, char *buffer, int length );
+    void execOutput( char *msg );
 };
 
 #endif

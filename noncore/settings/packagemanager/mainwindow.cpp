@@ -162,8 +162,7 @@ void MainWindow::initUI()
     actionUpgrade->addTo( popup );
     actionUpgrade->addTo( &m_toolBar );
 
-    // Ipkg implementation does not seem to work currently? (not working in aqpkg either)
-    /*
+/*
     QPixmap iconDownload = Resource::loadPixmap( "packagemanager/download" );
     QPixmap iconRemove = Resource::loadPixmap( "packagemanager/remove" );
     QAction *actionDownload = new QAction( tr( "Download" ), iconDownload, QString::null, 0, this, 0 );
@@ -171,7 +170,7 @@ void MainWindow::initUI()
     connect( actionDownload, SIGNAL(activated()), this, SLOT(slotDownload()) );
     actionDownload->addTo( popup );
     actionDownload->addTo( &m_toolBar );
-    */
+*/
 
     a = new QAction( tr( "Apply changes" ), Resource::loadPixmap( "packagemanager/apply" ), QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to install, remove or upgrade currently selected package(s)." ) );
@@ -371,7 +370,6 @@ void MainWindow::slotUpgrade()
     m_widgetStack.raiseWidget( dlg );
 }
 
-    // Ipkg implementation does not seem to work currently? (not working in aqpkg either)
 /*
 void MainWindow::slotDownload()
 {

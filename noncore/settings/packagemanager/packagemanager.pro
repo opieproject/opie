@@ -1,4 +1,7 @@
 CONFIG       = qt warn_on release quick-app
+//TEMPLATE     = app
+//CONFIG      += qte warn_on debug
+//DESTDIR      = $(OPIEDIR)/bin
 
 SOURCES      = opackage.cpp        \
                oconfitem.cpp       \
@@ -22,10 +25,12 @@ HEADERS      = opackage.h        \
                filterdlg.h       \
                promptdlg.h
 
+DEFINES     += IPKG_LIB
+DEFINES     += HAVE_MKDTEMP
 TARGET       = packagemanager
-INCLUDEPATH += $(OPIEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include $(IPKGDIR)
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe -lopie
+LIBS        += -lqpe -lopie -lipkg
 
 include ( $(OPIEDIR)/include.pro )
 

@@ -206,8 +206,7 @@ void InstallDlg::slotBtnStart()
     QString btnText = m_btnStart->text();
     if ( btnText == tr( "Abort" ) )
     {
-        // Stop execution of current command and prevent any others from executing
-        m_packman->abortCommand();
+        // Prevent unexecuted commands from executing
         m_currCommand = 999;
 
         // Allow user to close dialog
@@ -222,17 +221,37 @@ void InstallDlg::slotBtnStart()
         return;
     }
 
-    // Start was clicked, execute first command
+    // Start was clicked, start executing
     m_btnOptions->setEnabled( false );
-    m_btnStart->setText( tr( "Abort" ) );
-    m_btnStart->setIconSet( Resource::loadPixmap( "close" ) );
+    if ( m_numCommands > 1 )
+    {
+        m_btnStart->setText( tr( "Abort" ) );
+        m_btnStart->setIconSet( Resource::loadPixmap( "close" ) );
+    }
+    else
+    {
+        m_btnStart->setEnabled( false );
+    }
 
     QString dest;
     if ( m_destination )
         dest = m_destination->currentText();
-    m_packman->executeCommand( m_command[ 0 ], m_packages[ 0 ], dest, this,
-                               SLOT(slotOutput(OProcess*,char*,int)), SLOT(slotErrors(OProcess*,char*,int)),
-                               SLOT(slotFinished(OProcess*)), true );
+
+    for ( m_currCommand = 0; m_currCommand < m_numCommands; m_currCommand++ )
+    {
+        // Execute next command
+        m_packman->executeCommand( m_command[ m_currCommand ], m_packages[ m_currCommand ], dest,
+                                   this, SLOT(slotOutput(char*)), true );
+    }
+
+    // All commands executed, allow user to close dialog
+    m_btnStart->setEnabled( true );
+    m_btnStart->setText( tr( "Close" ) );
+    m_btnStart->setIconSet( Resource::loadPixmap( "enter" ) );
+
+    m_btnOptions->setEnabled( true );
+    m_btnOptions->setText( tr( "Save output" ) );
+    m_btnOptions->setIconSet( Resource::loadPixmap( "save" ) );
 }
 
 void InstallDlg::slotBtnOptions()
@@ -267,43 +286,14 @@ void InstallDlg::slotBtnOptions()
     }
 }
 
-void InstallDlg::slotOutput( OProcess */*process*/, char *buffer, int buffLen )
+void InstallDlg::slotOutput( char *msg )
 {
-    QString lineStr = buffer;
-    if ( lineStr[buffLen-1] == '\n' )
-        lineStr.truncate( buffLen - 1 );
+    // Allow processing of other events
+    qApp->processEvents();
+
+    QString lineStr = msg;
+    if ( lineStr[lineStr.length()-1] == '\n' )
+        lineStr.truncate( lineStr.length() - 1 );
     m_output->append( lineStr );
     m_output->setCursorPosition( m_output->numLines(), 0 );
-}
-
-void InstallDlg::slotErrors( OProcess */*process*/, char *buffer, int buffLen )
-{
-    QString lineStr = buffer;
-    if ( lineStr[buffLen-1] == '\n' )
-        lineStr.truncate( buffLen - 1 );
-    m_output->append( lineStr );
-    m_output->setCursorPosition( m_output->numLines(), 0 );
-}
-
-void InstallDlg::slotFinished( OProcess */*process*/ )
-{
-    ++m_currCommand;
-    if ( m_currCommand < m_numCommands )
-    {
-        // More commands left, execute next one
-        m_packman->executeCommand( m_command[ m_currCommand ], m_packages[ m_currCommand ], m_destination->currentText(),
-                                   this, SLOT(slotOutput(OProcess*,char*,int)),
-                                   SLOT(slotErrors(OProcess*,char*,int)),
-                                   SLOT(slotFinished(OProcess*)), true );
-    }
-    else
-    {
-        // All commands executed, allow user to close dialog
-        m_btnStart->setText( tr( "Close" ) );
-        m_btnStart->setIconSet( Resource::loadPixmap( "enter" ) );
-
-        m_btnOptions->setEnabled( true );
-        m_btnOptions->setText( tr( "Save output" ) );
-        m_btnOptions->setIconSet( Resource::loadPixmap( "save" ) );
-    }
 }

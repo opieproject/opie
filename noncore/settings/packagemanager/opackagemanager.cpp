@@ -317,14 +317,7 @@ void OPackageManager::saveSettings()
 
 bool OPackageManager::executeCommand( OPackage::Command command, QStringList *packages,
                                       const QString &destination, const QObject *receiver,
-                                      const char *slotOutput,  const char *slotErrors,
-                                      const char *slotFinished, bool rawOutput )
+                                      const char *slotOutput, bool rawOutput )
 {
-    return m_ipkg.executeCommand( command, packages, destination, receiver, slotOutput, slotErrors,
-                                  slotFinished, rawOutput );
-}
-
-void OPackageManager::abortCommand()
-{
-    m_ipkg.abortCommand();
+    return m_ipkg.executeCommand( command, packages, destination, receiver, slotOutput, rawOutput );
 }
