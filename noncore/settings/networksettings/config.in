@@ -3,7 +3,8 @@ menu "networksetup"
   config INTERFACES
     boolean "networksetup"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends LIBQPE && LIBOPIE && WLAN && INTERFACES
+
   source noncore/net/networksetup/wlan/config.in
   source noncore/net/networksetup/interfaces/config.in
 endmenu
