@@ -1,10 +1,10 @@
-Package: opieplayer1-libtremorplugin
+Package: opie-libtremorplugin
 Files: plugins/codecs/libtremorplugin.so.1.0.0 plugins/codecs/libtremorplugin.so.1.0 plugins/codecs/libtremorplugin.so.1 plugins/codecs/libtremorplugin.so
 Priority: optional
 Section: opie/plugins
 Maintainer: L.J. Potter <llornkcor@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libtremor
 Description: Ogg file plugin using tremor
  Plugin to play ogg files with the mediaplayer in the Opie environment.
