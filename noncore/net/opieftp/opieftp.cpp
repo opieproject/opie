@@ -14,7 +14,7 @@
 #include "opieftp.h"
 
 extern "C" {
-#include "../ftplib/ftplib.h"
+#include <ftplib.h>
 }
 
 #include "inputDialog.h"

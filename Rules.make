@@ -172,6 +172,7 @@ endif
 	# auxilliary libraries
 	( cd include/opie2 && ln -sf ../../libqtaux/*.h .; )
 	( cd include/sl && ln -sf ../../libslcompat/*.h .; )
+	( cd include/ && ln -sf ../noncore/net/ftplib/*.h .; )
 	# all
 ifeq ($(CONFIG_LIBOPIE),y)
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \

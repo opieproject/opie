@@ -11,10 +11,10 @@
 // // half-assed attempt at providing a network dialog.
 // /* Created: Sun Aug 27 15:24:52 2000*/
 #include <unistd.h>
-extern "C" {
-#include "../../net/ftplib/ftplib.h"
-}
 
+extern "C" {
+#include <ftplib.h>
+}
 
 #include "NetworkDialog.h"
 #include "gutenbrowser.h"
