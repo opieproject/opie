@@ -72,7 +72,7 @@ namespace Todo {
     private:
         /* reimplented for internal reasons */
         void viewportPaintEvent( QPaintEvent* );
-        inline void insertTodo( const OTodo& );
+        inline void insertTodo( const OTodo&, int row );
         CheckItem* checkItem( int row );
         DueTextItem* dueItem( int row );
         QTimer *m_menuTimer;
@@ -88,9 +88,7 @@ private slots:
         void slotValueChanged(int, int);
         void slotCurrentChanged(int, int );
     };
-    inline void TableView::insertTodo( const OTodo& event ) {
-        int row = numRows();
-        setNumRows( row + 1 );
+    inline void TableView::insertTodo( const OTodo& event, int row ) {
 
 
         QString sortKey =  (char) ( (event.isCompleted() ? 'a' : 'A' )

@@ -156,6 +156,8 @@ void TableView::setTodos( OTodoAccess::List::Iterator it,
     int id = todoWindow()->currentCatId();
     QTime t;
     t.start();
+    setNumRows( it.count() );
+    uint i = 0;
     for (; it != end; ++it ) {
         OTodo todo = (*it);
         /* test if the categories match */
@@ -172,9 +174,10 @@ void TableView::setTodos( OTodoAccess::List::Iterator it,
             continue;
         }
         /* now it's fine to add it */
-        insertTodo(  todo );
-
+        insertTodo(  todo, i );
+	i++;
     }
+    setNumRows( i );
     int elc = time.elapsed();
     qWarning("Adding took %d", elc/1000 );
     setUpdatesEnabled( true );
@@ -210,7 +213,9 @@ void TableView::setTodo( int uid, const OTodo& ev ) {
     }
 }
 void TableView::addEvent( const OTodo& ev) {
-    insertTodo( ev );
+    int row= numRows();
+    setNumRows( row + 1 );
+    insertTodo( ev, row );
 }
 /*
  * find the event
