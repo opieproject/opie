@@ -2,7 +2,7 @@ CONFIG_ADDRESSBOOK	core/pim/addressbook	addressbook.pro
 CONFIG_ADVANCEDFM	noncore/apps/advancedfm	advancedfm.pro
 CONFIG_APPEARANCE2	noncore/settings/appearance2	appearance2.pro
 CONFIG_APPSKEY	noncore/settings/appskey	appskey.pro
-CONFIG_AQPKG	noncore/apps/aqpkg	aqpkg.pro
+CONFIG_AQPKG	noncore/settings/aqpkg	aqpkg.pro
 CONFIG_BACKGAMMON	noncore/games/backgammon backgammon.pro
 CONFIG_BACKUP	noncore/settings/backup	backup.pro
 CONFIG_BATTERYAPPLET	core/applets/batteryapplet	batteryapplet.pro
@@ -35,7 +35,7 @@ CONFIG_DVORAK	inputmethods/dvorak	dvorak.pro
 CONFIG_EMBEDDEDKONSOLE	core/apps/embeddedkonsole	embeddedkonsole.pro
 CONFIG_EUROCONV		noncore/tools/euroconv/ euroconv.pro
 CONFIG_FIFTEEN	noncore/games/fifteen	fifteen.pro
-CONFIG_FILEBROWSER	core/apps/filebrowser	filebrowser.pro
+CONFIG_FILEBROWSER	noncore/unmaintained/filebrowser	filebrowser.pro
 CONFIG_FLAT	noncore/styles/flat	flat.pro
 CONFIG_FORMATTER	noncore/tools/formatter	formatter.pro
 CONFIG_FREETYPE	freetype	freetype.pro
@@ -114,7 +114,7 @@ CONFIG_PARASHOOT	noncore/games/parashoot	parashoot.pro
 CONFIG_PICKBOARD	inputmethods/pickboard	pickboard.pro
 CONFIG_QASTEROIDS	noncore/games/qasteroids	qasteroids.pro
 CONFIG_QCOP	core/apps/qcop	qcop.pro
-CONFIG_QPDF	noncore/graphics/qpdf	qpdf.pro
+CONFIG_QPDF	noncore/unmaintained/qpdf	qpdf.pro
 CONFIG_QUICKEXEC	quickexec	quickexec.pro
 CONFIG_QWS	core/qws	qws.pro
 CONFIG_REMOTE	noncore/tools/remote	remote.pro
@@ -135,7 +135,7 @@ CONFIG_SOLITAIRE	noncore/games/solitaire	solitaire.pro
 CONFIG_SOUND	noncore/settings/sound	sound.pro
 CONFIG_SSHKEYS	noncore/settings/sshkeys	sshkeys.pro
 CONFIG_SUSPENDAPPLET	core/applets/suspendapplet	suspendapplet.pro
-CONFIG_SYSINFO	noncore/apps/sysinfo	sysinfo.pro
+CONFIG_SYSINFO	noncore/settings/sysinfo	sysinfo.pro
 CONFIG_TABLEVIEWER	noncore/apps/tableviewer	tableviewer.pro
 CONFIG_TABMANAGER	noncore/settings/tabmanager	tabmanager.pro
 CONFIG_TEST	noncore/apps/opie-console/test	test.pro
