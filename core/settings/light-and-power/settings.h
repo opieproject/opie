@@ -37,6 +37,8 @@ public:
 protected:
     void accept();
     void reject();
+    
+    void done ( int r );
 
 private slots:
     void applyBrightness();

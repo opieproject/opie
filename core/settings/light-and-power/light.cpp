@@ -133,3 +133,8 @@ void LightSettings::applyBrightness()
 }
 
 
+void LightSettings::done(int r)
+{
+	QDialog::done(r);
+	close ( );
+}
