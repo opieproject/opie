@@ -21,7 +21,7 @@
 #define Addressbook_H
 
 // Remove this for OPIE releae 1.0 !
-#define __DEBUG_RELEASE
+// #define __DEBUG_RELEASE
 
 #include <qmainwindow.h>
 #include <qvaluelist.h>
@@ -65,11 +65,12 @@ public slots:
 	void appMessage(const QCString &, const QByteArray &);
 	void setDocument( const QString & );
 #ifdef __DEBUG_RELEASE
-	void slotSave();
+	// void slotSave();
 #endif
 
 private slots:
 	void importvCard();
+	void exportvCard();
 	void slotListNew();
 /* 	void slotListView(); */
 	void slotListDelete();

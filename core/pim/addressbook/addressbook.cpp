@@ -209,6 +209,12 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	connect( a, SIGNAL( activated() ), this, SLOT( importvCard() ) );
 	a->addTo( edit );
 
+	a = new QAction( tr("Export vCard"), Resource::loadPixmap( "addressbook/fileexport"), QString::null,
+								   0, this, 0);
+	actionPersonal = a;
+	connect( a, SIGNAL( activated() ), this, SLOT( exportvCard() ) );
+	a->addTo( edit );
+
 	edit->insertSeparator();
 
 	a = new QAction( tr("My Personal Details"), Resource::loadPixmap( "addressbook/identity" ),
@@ -330,6 +336,30 @@ void AddressbookWindow::importvCard() {
 		setDocument((const QString&) str );
 	}
 
+}
+void AddressbookWindow::exportvCard()
+{
+	qWarning(" void AddressbookWindow::exportvCard()");
+        QString filename = OFileDialog::getSaveFileName( 1,"/home/"); //,"", "*", this );
+        if( !filename.isEmpty() &&  ( filename[filename.length()-1] != '/' ) ){
+		qWarning(" Save to file %s, (%d)", filename.latin1(), filename.length()-1 );
+		OContact curCont = m_abView->currentEntry();
+		if ( !curCont.isEmpty() ){
+			OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null,
+												filename );
+			OContactAccess* access = new OContactAccess ( "addressbook_exp", QString::null , vcard_backend, true );
+			if ( access ){
+				access->add( curCont );
+				access->save();
+			}
+			delete access;
+		}else
+			QMessageBox::critical( 0, "Export VCard",
+                           QString( tr( "You have to select a contact !") ) );
+
+	}else
+		QMessageBox::critical( 0, "Export VCard",
+				       QString( tr( "You have to set a filename !") ) );
 }
 
 void AddressbookWindow::setDocument( const QString &filename )

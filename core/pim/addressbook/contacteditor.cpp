@@ -1256,7 +1256,9 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	
 	initializing = true;
 	
+	// Cleanup and activate the general Page ..
 	cleanupFields();
+	tabMain->setCurrentPage( 0 );
 	
 	ent = entry;
 	
