@@ -1,7 +1,6 @@
-
 /*
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
+             .=l.            Copyright (c)  2003 Michael Lauer <mickeyl@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This file is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or modify it under
@@ -26,51 +25,33 @@
 
 */
 
-#include <qlayout.h>
-#include <qapplication.h>
+#ifndef __IMETHOD_SETTINGS_H__
+#define __IMETHOD_SETTINGS_H__
 
-#include <opie/otabwidget.h>
+#include <qwidget.h>
 
-#include "launchersettings.h"
-#include "tabssettings.h"
-#include "menusettings.h"
-#include "taskbarsettings.h"
-#include "inputmethodsettings.h"
+class QCheckBox;
+class QSpinBox;
 
-LauncherSettings::LauncherSettings ( ) : QDialog ( 0, "LauncherSettings", false, WStyle_ContextHelp )
+class InputMethodSettings : public QWidget
 {
-	setCaption ( tr( "Launcher Settings" ));
+    Q_OBJECT
 
-	QVBoxLayout *lay = new QVBoxLayout ( this, 4, 4 );
+  public:
+    InputMethodSettings ( QWidget *parent = 0, const char *name = 0 );
 
-	OTabWidget *tw = new OTabWidget ( this, "otab" );
-	lay-> addWidget ( tw );
+    void accept ( );
 
-	m_tabs = new TabsSettings ( tw );
-	m_taskbar = new TaskbarSettings ( tw );
-	m_menu = new MenuSettings ( tw );
-	m_imethods = new InputMethodSettings ( tw );
+  protected slots:
+    void appletChanged ( );
 
-	tw-> addTab ( m_taskbar, "wait", tr( "Taskbar" ));
-	tw-> addTab ( m_menu, "go", tr( "O-Menu" ));
-	tw-> addTab ( m_tabs, "launchersettings/tabstab.png", tr( "Tabs" ));
-	tw-> addTab ( m_imethods, "launchersettings/inputmethod.png", tr( "InputMethods" ));
+  protected:
+    void init ( );
 
-	tw-> setCurrentTab ( m_taskbar );
-}
+  private:
+    QCheckBox* _resize;
+    QCheckBox* _float;
+    QSpinBox* _size;
+};
 
-void LauncherSettings::accept ( )
-{
-	m_taskbar-> accept ( );
-	m_menu-> accept ( );
-	m_tabs-> accept ( );
-	m_imethods-> accept ( );
-
-	QDialog::accept ( );
-}
-
-void LauncherSettings::done ( int r )
-{
-	QDialog::done ( r );
-	close ( );
-}
+#endif

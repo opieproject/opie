@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,10 +18,12 @@
 **
 **********************************************************************/
 
-#ifndef __TASKBAR_H__
-#define __TASKBAR_H__
+#ifndef TASKBAR_H
+#define TASKBAR_H
 
 #include <qhbox.h>
+#include "serverinterface.h"
+#include "startmenu.h"
 
 class QLabel;
 class QTimer;
@@ -32,8 +34,8 @@ class RunningAppBar;
 class QWidgetStack;
 class QTimer;
 class QLabel;
-class StartMenu;
 class LockKeyState;
+class AppLnkSet;
 
 class TaskBar : public QHBox {
     Q_OBJECT
@@ -41,32 +43,33 @@ public:
     TaskBar();
     ~TaskBar();
 
-    static QWidget *calibrate( bool );
+    void launchStartMenu() { if (sm) sm->launch(); }
+    void refreshStartMenu() { if (sm) sm->refreshMenu(); }
+    void setApplicationState( const QString &name, ServerInterface::ApplicationState state );
 
-    bool recoverMemory();
+signals:
+    void tabSelected(const QString&);
 
-    StartMenu *startMenu() const { return sm; }
 public slots:
     void startWait();
     void stopWait(const QString&);
     void stopWait();
+
     void clearStatusBar();
     void toggleNumLockState();
     void toggleCapsLockState();
     void toggleSymbolInput();
+    void calcMaxWindowRect();
 
 protected:
     void resizeEvent( QResizeEvent * );
     void styleChange( QStyle & );
     void setStatusMessage( const QString &text );
-
-public slots:
-    void calcMaxWindowRect();
+    
 private slots:
     void receive( const QCString &msg, const QByteArray &data );
 
 private:
-
     QTimer *waitTimer;
     Wait *waitIcon;
     InputMethods *inputMethods;
@@ -77,7 +80,8 @@ private:
     QLabel *label;
     LockKeyState* lockState;
     StartMenu *sm;
+    bool resizeRunningApp;
 };
 
 
-#endif // __TASKBAR_H__
+#endif // TASKBAR_H

@@ -5,6 +5,7 @@ HEADERS      = launchersettings.h \
                tabssettings.h \
                taskbarsettings.h \
                menusettings.h \
+               inputmethodsettings.h \
                tabconfig.h \
                tabdialog.h
 
@@ -13,6 +14,7 @@ SOURCES      = main.cpp \
                tabssettings.cpp \
                taskbarsettings.cpp \
                menusettings.cpp \
+               inputmethodsettings.cpp \
                tabdialog.cpp
 
 INCLUDEPATH += $(OPIEDIR)/include

@@ -28,6 +28,7 @@
 #include "taskbar.h"
 #include "server.h"
 
+#include <qtopia/config.h>
 #include <qtopia/qpeapplication.h>
 #ifdef QWS
 #include <qtopia/qcopenvelope_qws.h>
@@ -172,6 +173,10 @@ TaskBar::~TaskBar()
 
 TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOnTop | WGroupLeader)
 {
+    Config cfg( "Launcher" );
+    cfg.setGroup( "InputMethods" );
+    resizeRunningApp = cfg.readBoolEntry( "Resize", true );
+
     sm = new StartMenu( this );
     connect( sm, SIGNAL(tabSelected(const QString&)), this,
 	    SIGNAL(tabSelected(const QString&)) );
@@ -291,26 +296,24 @@ void TaskBar::styleChange( QStyle &s )
 
 void TaskBar::calcMaxWindowRect()
 {
-    /*
-#ifdef Q_WS_QWS
-    QRect wr;
-    int displayWidth  = qApp->desktop()->width();
-    QRect ir = inputMethods->inputRect();
-    if ( ir.isValid() ) {
-	wr.setCoords( 0, 0, displayWidth-1, ir.top()-1 );
-    } else {
-	wr.setCoords( 0, 0, displayWidth-1, y()-1 );
+    if ( resizeRunningApp )
+    {
+    #if defined(Q_WS_QWS)
+        QRect wr;
+        int displayWidth  = qApp->desktop()->width();
+        QRect ir = inputMethods->inputRect();
+        if ( ir.isValid() ) {
+            wr.setCoords( 0, 0, displayWidth-1, ir.top()-1 );
+        } else {
+            wr.setCoords( 0, 0, displayWidth-1, y()-1 );
+        }
+        #if QT_VERSION < 0x030000
+        QWSServer::setMaxWindowRect( qt_screen->mapToDevice(wr,QSize(qt_screen->width(),qt_screen->height())) );
+        #else
+        QWSServer::setMaxWindowRect( wr );
+        #endif
+    #endif
     }
-
-#if QT_VERSION < 0x030000
-    QWSServer::setMaxWindowRect( qt_screen->mapToDevice(wr,
-	QSize(qt_screen->width(),qt_screen->height()))
-	);
-#else
-    QWSServer::setMaxWindowRect( wr );
-#endif
-#endif
-    */
 }
 
 void TaskBar::receive( const QCString &msg, const QByteArray &data )

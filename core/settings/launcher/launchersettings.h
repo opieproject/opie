@@ -33,6 +33,7 @@
 class TabsSettings;
 class TaskbarSettings;
 class MenuSettings;
+class InputMethodSettings;
 
 class LauncherSettings : public QDialog {
 	Q_OBJECT
@@ -47,6 +48,7 @@ private:
 	TabsSettings *m_tabs;
 	TaskbarSettings *m_taskbar;
 	MenuSettings *m_menu;
+	InputMethodSettings* m_imethods;
 };
 
 #endif

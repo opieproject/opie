@@ -103,6 +103,8 @@ private:
     InputMethod *imethod;
     QValueList<InputMethod> inputMethodList;
     QValueList<InputMethod> inputModifierList;
+    int inputWidgetStyle;
+    int inputWidgetWidth;
 };
 
 

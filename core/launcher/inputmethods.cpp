@@ -68,12 +68,6 @@ static const char * tri_xpm[]={
 ".........",
 "........."};
 
-static const int inputWidgetStyle = QWidget::WStyle_Customize |
-				    QWidget::WStyle_Tool |
-				    QWidget::WStyle_StaysOnTop |
-				    QWidget::WGroupLeader;
-
-
 int InputMethod::operator <(const InputMethod& o) const
 {
     return name() < o.name();
@@ -104,6 +98,12 @@ InputMethods::InputMethods( QWidget *parent ) :
     QWidget( parent, "InputMethods", WStyle_Tool | WStyle_Customize ),
     mkeyboard(0), imethod(0)
 {
+    Config cfg( "Launcher" );
+    cfg.setGroup( "InputMethods" );
+    inputWidgetStyle = QWidget::WStyle_Customize | QWidget::WStyle_StaysOnTop | QWidget::WGroupLeader;
+    inputWidgetStyle |= cfg.readBoolEntry( "Float", false ) ? QWidget::WStyle_DialogBorder : QWidget::WStyle_Tool;
+    inputWidgetWidth = cfg.readNumEntry( "Width", 100 );
+
     setBackgroundMode( PaletteBackground );
     QHBoxLayout *hbox = new QHBoxLayout( this );
 
@@ -537,7 +537,7 @@ void InputMethods::showKbd( bool on )
 	// HACK... Make the texteditor fit with all input methods
 	// Input methods should also never use more than about 40% of the screen
 	int height = QMIN( mkeyboard->widget->sizeHint().height(), 134 );
-	mkeyboard->widget->resize( qApp->desktop()->width(), height );
+	mkeyboard->widget->resize( qApp->desktop()->width() * (inputWidgetWidth*0.01), height );
 	mkeyboard->widget->move( 0, mapToGlobal( QPoint() ).y() - height );
 	mkeyboard->widget->show();
     } else {
