@@ -44,9 +44,9 @@
  * <pre>
  * QMap<QString, QStringList> mimeTypes;
  * QStringList types;
- * types << "text[slash]* ";
+ * types << "text@slash* ";
  * mimeTypes.insert( tr("Text"), types );
- * mimeTypes.insert( tr("All"), " * / * " ); // remove the spaces in the 2nd comment
+ * mimeTypes.insert( tr("All"), " *@slash* " ); // remove the spaces in the 2nd comment
  * QString fileName= OFileDialog::getOpenFileName( OFileSelector::EXTENDED_ALL,
  *                                                 "foo","bar", mimeTypes);
  * </pre>

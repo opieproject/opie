@@ -638,10 +638,10 @@ void OFileViewFileSystem::activate( const QString& str) {
  * <pre>
  *  QMap<QString, QStringList> mimeTypes;
  *  QStringList types;
- *  types << "text[slash]* ";
- *  types << "audio[slash]*";
+ *  types << "text@slash* ";
+ *  types << "audio@slash*";
  *  mimeTypes.insert( tr("Audio and Text"), types );
- *  mimeTypes.insert( tr("All"), "*[slash]*);
+ *  mimeTypes.insert( tr("All"), "*@slash*);
  *
  *  now you could create your fileselector
  * </pre>
