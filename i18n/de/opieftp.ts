@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Connect</source>
-        <translation>Berbinden</translation>
+        <translation>Verbinden</translation>
     </message>
     <message>
         <source>Disconnect</source>
@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>Upload</source>
-        <translation>Uploac</translation>
+        <translation>Upload</translation>
     </message>
     <message>
         <source>Make Directory</source>
@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Password</source>
-        <translation>PAsswort</translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <source>Remote server</source>
