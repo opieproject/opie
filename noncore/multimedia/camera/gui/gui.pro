@@ -11,9 +11,9 @@ SOURCES         = previewwidget.cpp \
 
 INCLUDEPATH     += $(OPIEDIR)/include ../lib
 DEPENDPATH      += $(OPIEDIR)/include ../lib
-LIBS            += -lopiecore2 -lopieui2 -lopiecam
+LIBS            += -lopiecore2 -lopieui2 -lcamera
 INTERFACES      =
-TARGET          = opiecam
+TARGET          = camera
 
 include ( $(OPIEDIR)/include.pro )
 

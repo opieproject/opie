@@ -1,10 +1,10 @@
 Package: opie-camera
-Files: lib/libopiecam.* bin/opiecam bin/capture pics/camera apps/Applications/camera.desktop
+Files: lib/libcamera.* bin/camera bin/capture pics/camera apps/Applications/camera.desktop
 Priority: optional
 Section: opie/multimedia
 Maintainer: Michael 'Mickey' Lauer <mickeyl@Vanille.de>
 Architecture: arm
 Version: 1.0.1
-Depends: libqpe1, libopiecore2
+Depends: libqpe1, libopiecore2, libopieui2
 Description: A Camera Application
  A Camera Application to use with the Sharp CE-AG06.

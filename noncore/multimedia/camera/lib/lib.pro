@@ -14,8 +14,8 @@ INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lopiecore2
 INTERFACES      =
-VERSION         = 1.0.0
-TARGET          = opiecam
+VERSION         = 1.0.1
+TARGET          = camera
 
 
 include ( $(OPIEDIR)/include.pro )
