@@ -3,22 +3,22 @@
     <name>LanguageSettings</name>
     <message>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Angļu</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>noklusētā</translation>
     </message>
 </context>
 <context>
     <name>LanguageSettingsBase</name>
     <message>
         <source>Language Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Valodas Uzstādījumi</translation>
     </message>
     <message>
         <source>Select language</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties valodu</translation>
     </message>
 </context>
 </TS>

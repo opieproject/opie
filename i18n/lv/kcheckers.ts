@@ -3,131 +3,131 @@
     <name>KCheckers</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jauna</translation>
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atlikt Gājienu</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Beigt</translation>
     </message>
     <message>
         <source>&amp;Beginner</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Iesācējs</translation>
     </message>
     <message>
         <source>&amp;Novice</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jauniņais</translation>
     </message>
     <message>
         <source>&amp;Average</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vidējas zināšanas</translation>
     </message>
     <message>
         <source>&amp;Good</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Labais</translation>
     </message>
     <message>
         <source>&amp;Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Eksperts</translation>
     </message>
     <message>
         <source>&amp;Master</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Meistars</translation>
     </message>
     <message>
         <source>&amp;Show Numeration</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rādīt Numerāciju</translation>
     </message>
     <message>
         <source>&amp;English Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Angļu noteikumi</translation>
     </message>
     <message>
         <source>&amp;Russian Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Krievu noteikumi</translation>
     </message>
     <message>
         <source>&amp;Green Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zaļš Laukums</translation>
     </message>
     <message>
         <source>&amp;Marble Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rozā Laukums</translation>
     </message>
     <message>
         <source>&amp;Wooden Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Koka Laukums</translation>
     </message>
     <message>
         <source>What&apos;s This</source>
-        <translation type="unfinished"></translation>
+        <translation>Kas Tas</translation>
     </message>
     <message>
         <source>&amp;Rules of Play</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spēles Noteikumi</translation>
     </message>
     <message>
         <source>&amp;About KCheckers</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Par KCheckers</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>Par &amp;Qt</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spēle</translation>
     </message>
     <message>
         <source>&amp;Skill</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Līmenis</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Opcijas</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Palīdzība</translation>
     </message>
     <message>
         <source> New Game </source>
-        <translation type="unfinished"></translation>
+        <translation>Jauna Spēle</translation>
     </message>
     <message>
         <source> Undo Move </source>
-        <translation type="unfinished"></translation>
+        <translation>Atlikt Gājienu</translation>
     </message>
     <message>
         <source> Rules of Play </source>
-        <translation type="unfinished"></translation>
+        <translation>Spēles Noteikumi</translation>
     </message>
     <message>
         <source>Go!</source>
-        <translation type="unfinished"></translation>
+        <translation>Aiziet!</translation>
     </message>
     <message>
         <source>Congratulation! You have won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Apsveicu! Jūs vinējāt!</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lūdzu uzgaidiet...</translation>
     </message>
     <message>
         <source>You have lost. Game over.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jūs zaudējāt. Spēle beigusies.</translation>
     </message>
     <message>
         <source>Incorrect course.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepareizs gājiens.</translation>
     </message>
     <message>
         <source>KCheckers</source>
-        <translation type="unfinished"></translation>
+        <translation>KCheckers</translation>
     </message>
 </context>
 </TS>

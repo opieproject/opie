@@ -3,43 +3,43 @@
     <name>NotesControl</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>Delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst?</translation>
     </message>
     <message>
         <source>Do you really want to&lt;BR&gt;&lt;B&gt; delete&lt;/B&gt; this note ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai tiešām vēlaties &lt;BR&gt;&lt;B&gt; dzēst&lt;/B&gt; šo piezīmi ?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Jā</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nē</translation>
     </message>
     <message>
         <source>Beam Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Noraidīt</translation>
     </message>
     <message>
         <source>Search For...</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt...</translation>
     </message>
     <message>
         <source>Toggle Maximized</source>
-        <translation type="unfinished"></translation>
+        <translation>Nomaksimizēt</translation>
     </message>
 </context>
 </TS>
