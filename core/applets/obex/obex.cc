@@ -96,23 +96,24 @@ void Obex::sendNow(){
 }
 
 void Obex::slotExited(OProcess* proc ){
-    if (proc == m_rec ) { // recieve process
-        recieved();
+    if (proc == m_rec ) { // receive process
+        received();
     }else if ( proc == m_send ) {
         sendEnd();
     }
 }
 void Obex::slotStdOut(OProcess* proc, char* buf, int len){
-    if ( proc == m_rec ) { // only recieve
+    if ( proc == m_rec ) { // only receive
         QCString cstring( buf,  len );
         m_outp.append( cstring.data() );
     }
 }
 
-void Obex::recieved() {
+void Obex::received() {
   if (m_rec->normalExit() ) {
       if ( m_rec->exitStatus() == 0 ) { // we got one
           QString filename = parseOut();
+          qWarning("ACHTUNG");
           emit receivedFile( filename );
       }
   }else{

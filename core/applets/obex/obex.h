@@ -75,7 +75,7 @@ private slots:
   private:
       void sendNow();
       QString parseOut();
-      void recieved();
+      void received();
       void sendEnd();
 
   };

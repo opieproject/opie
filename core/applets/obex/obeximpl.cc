@@ -28,11 +28,13 @@ ObexImpl::ObexImpl( )
   connect(m_obex, SIGNAL(receivedFile(const QString& ) ),
           this,  SLOT(slotReceivedFile(const QString& ) ) );
 }
+
 ObexImpl::~ObexImpl() {
   delete m_obex;
   delete m_chan;
   delete m_sendgui;
 }
+
 QRESULT ObexImpl::queryInterface( const QUuid &uuid, QUnknownInterface **iface ) {
   *iface = 0;
   if( uuid  ==  IID_QUnknown )
@@ -44,8 +46,8 @@ QRESULT ObexImpl::queryInterface( const QUuid &uuid, QUnknownInterface **iface )
   if(*iface )
     (*iface)->addRef();
   return QS_OK;
-
 }
+
 void ObexImpl::slotMessage( const QCString& msg, const QByteArray&data ) {
   QDataStream stream( data, IO_ReadOnly );
   qWarning("Message %s", msg.data() );
@@ -64,7 +66,7 @@ void ObexImpl::slotMessage( const QCString& msg, const QByteArray&data ) {
     connect( (QObject*)m_obex, SIGNAL( error(int) ),  this,
              SLOT( slotSent() ) );
   }else if(msg == "receive(int)" ) { // open a GUI
-      m_recvgui->showMaximized();
+      //m_recvgui->showMaximized();
       int receiveD = 0;
       stream >> receiveD;
       if ( receiveD == 1)
@@ -105,6 +107,7 @@ void ObexImpl::slotError( int errorCode) {
     qDebug("Error: " + errorString);
     m_sendgui->hide();
 }
+
 // Received a file via beam
 // check for mime  type and then either
 // add to App via setDocument
@@ -121,6 +124,11 @@ void ObexImpl::slotReceivedFile( const QString &fileName ) {
             exec = "datebook";
         }
     } // now prompt and then add it
+
+    m_recvgui->PixmapLabel->setPixmap(lnk.pixmap());
+    m_recvgui->TextLabel1_2->setText(lnk.name());
+    m_recvgui->showMaximized();
+
     QCString str= "QPE/Application/";
     str += exec.latin1();
     qWarning("channel %s", str.data() );

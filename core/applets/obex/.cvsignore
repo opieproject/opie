@@ -1,4 +1,5 @@
 Makefile
+Makefile.in
 moc*
 obexdlg.cpp
 obexdlg.h
