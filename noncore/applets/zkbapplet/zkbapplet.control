@@ -6,4 +6,4 @@ Maintainer: Rajko Albrecht <alwin@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal, keyz-cfg
 Description: ZKB Applet
-Version: 0.6.0-$EXTRAVERSION
+Version: 0.6.0$EXTRAVERSION
