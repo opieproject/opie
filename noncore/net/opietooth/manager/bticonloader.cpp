@@ -26,6 +26,7 @@ namespace OpieTooth {
         serviceIcons.insert( 4355 , "network_16"); //DialupNetworking
         serviceIcons.insert( 4360 , "phone_16"); // Headset
         serviceIcons.insert( 4370 , "audio_16");  //HeadsetAudioGateway
+        serviceIcons.insert( 4374 , "network_16"); // Network Access Point
         serviceIcons.insert( 4361 , "phone_16"); // CordlessTelephony
         serviceIcons.insert( 4362 , "audio_16"); // AudioSource
         serviceIcons.insert( 4363 , "audio_16"); // AudioSink

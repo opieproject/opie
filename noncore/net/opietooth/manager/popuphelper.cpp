@@ -1,6 +1,5 @@
 
 #include "stdpopups.h"
-
 #include "popuphelper.h"
 
 using namespace OpieTooth;
@@ -10,7 +9,6 @@ PopupHelper::PopupHelper() {
 }
 
 PopupHelper::~PopupHelper() {
-
 }
 
 void PopupHelper::insert( int id, popupFactory fact ) {
@@ -33,4 +31,5 @@ void PopupHelper::init() {
     insert( 4353, newRfcComPopup );
     insert( 4357, newObexPushPopup );
     insert( 4358, newObexPushPopup );
+    insert( 4374, newPanPopup );
 }

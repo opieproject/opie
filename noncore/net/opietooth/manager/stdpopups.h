@@ -13,6 +13,7 @@ extern "C" {
 
     QPopupMenu* newRfcComPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* );
     QPopupMenu* newObexPushPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* );
+    QPopupMenu* newPanPopup( const OpieTooth::Services&, OpieTooth::BTDeviceItem* );
 }
 
 #endif
