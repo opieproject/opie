@@ -168,13 +168,13 @@ void OTGateway::SLOT_ShowError( const QString & S ) {
 }
 
 void OTGateway::connectNotify( const char * S ) {
-      if( strcmp( S, "error(const QString&)" ) == 0 ) {
+      if( S && strcmp( S, "error(const QString&)" ) == 0 ) {
         ErrorConnectCount ++;
       }
 }
 
 void OTGateway::disconnectNotify( const char * S ) {
-      if( strcmp( S, "error(const QString&)" ) == 0 ) {
+      if( S && strcmp( S, "error(const QString&)" ) == 0 ) {
         ErrorConnectCount --;
       }
 }
