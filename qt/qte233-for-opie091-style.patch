@@ -1,0 +1,11 @@
+--- src.orig/widgets/qcommonstyle.cpp	Mon Mar 18 02:11:26 2002
++++ src/widgets/qcommonstyle.cpp	Fri Aug 30 04:28:27 2002
+@@ -562,7 +562,7 @@
+ 				    bool enabled, bool active )
+ {
+ #ifndef QT_NO_MENUBAR
+-#ifndef QT_NO_STYLE_SGI
++#if 1 // #ifndef QT_NO_STYLE_SGI
+     if (draw_menu_bar_impl != 0) {
+ 	QDrawMenuBarItemImpl impl = draw_menu_bar_impl;
+ 	(this->*impl)(p, x, y, w, h, mi, g, enabled, active);
