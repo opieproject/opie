@@ -6,7 +6,9 @@
 #include <qgroupbox.h>
 #include <qvbox.h>
 #include <qhgroupbox.h>
+#include <qhbuttongroup.h>
 #include <qlayout.h>
+#include <qhbox.h>
 
 #include "terminalwidget.h"
 
@@ -41,31 +43,28 @@ TerminalWidget::TerminalWidget( const QString& name, QWidget* parent,
     m_colorLabel = new QLabel(tr("Color scheme"), this);
     m_colorCmb = new QComboBox(this );
 
-    m_groupSize = new QButtonGroup(tr("Font size"), this );
-    m_sizeSmall = new QRadioButton(tr("small"), m_groupSize );
-    m_sizeMedium = new QRadioButton(tr("medium"), m_groupSize );
-    m_sizeLarge = new QRadioButton(tr("large"), m_groupSize );
+    m_groupSize = new QHButtonGroup(tr("Font size"), this );
+    m_sizeSmall = new QRadioButton(tr("small"),  m_groupSize );
+    m_sizeMedium = new QRadioButton(tr("medium"),  m_groupSize );
+    m_sizeLarge = new QRadioButton(tr("large"),  m_groupSize );
 
     m_groupConv = new QHGroupBox(tr("Line-break conversions"), this );
     m_convInbound  = new QCheckBox(tr("Inbound"), m_groupConv );
     m_convOutbound = new QCheckBox(tr("Outbound"), m_groupConv );
+    m_groupConv->hide();
 
     m_groupOptions = new QHGroupBox( tr("Options"), this );
     m_optionEcho = new QCheckBox(tr("Local echo"), m_groupOptions );
     m_optionWrap = new QCheckBox(tr("Line wrap"), m_groupOptions );
+    m_groupOptions->hide();
 
-    m_lroot = new QVBoxLayout(this, 2 );
+    m_lroot = new QVBoxLayout( this  );
     m_typeBox = new  QVBoxLayout( m_lroot );
-    m_hbox = new QHBoxLayout( m_groupSize, 2 );
     m_colorBox = new QVBoxLayout( m_lroot );
 
     // Layout
     m_typeBox->add(m_terminal );
     m_typeBox->add(m_terminalBox );
-
-    m_hbox->add(m_sizeSmall );
-    m_hbox->add(m_sizeMedium );
-    m_hbox->add(m_sizeLarge );
     m_lroot->add(m_groupSize );
 
     m_colorBox->add(  m_colorLabel );
@@ -73,6 +72,7 @@ TerminalWidget::TerminalWidget( const QString& name, QWidget* parent,
 
     m_lroot->add(m_groupConv );
     m_lroot->add(m_groupOptions );
+    m_lroot->addStretch( 0 );
 
     // Fill in some options
     qWarning("Options for terminal box");

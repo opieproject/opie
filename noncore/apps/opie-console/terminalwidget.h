@@ -11,9 +11,12 @@ class QButtonGroup;
 class QRadioButton;
 class QCheckBox;
 class QHGroupBox;
+class QHBox;
 
 class TerminalWidget : public ProfileDialogTerminalWidget {
+
     Q_OBJECT
+
 public:
     TerminalWidget(const QString& name, QWidget* wid,
                    const char* na ) ;
@@ -21,10 +24,9 @@ public:
 
     void load( const Profile& );
     void save( Profile& );
+
 private:
     QVBoxLayout* m_lroot,  *m_typeBox, *m_colorBox;
-
-    QHBoxLayout* m_hbox;
 
     QLabel* m_terminal,  *m_colorLabel;
 
