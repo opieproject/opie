@@ -729,10 +729,13 @@ void PlayListWidget::populateAudioView() {
         }
 
         QListViewItem * newItem;
-        if ( QFile( dit.current()->file()).exists()  ) {
-            // qDebug(dit.current()->name());
-            newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(),
-                                                   QString::number( QFile( dit.current()->file()).size() ), storage);
+        if ( QFile( dit.current()->file()).exists() || dit.current()->file().left(4) == "http" ) {
+            long size;
+            if( dit.current()->file().left(4) == "http" )
+                size=0;
+            else 
+                size = QFile( dit.current()->file() ).size();
+            newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(), QString::number(size ), storage);
             newItem->setPixmap( 0, Resource::loadPixmap( "opieplayer2/musicfile" ) );
         }
     }

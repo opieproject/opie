@@ -597,7 +597,7 @@ void LauncherView::internalPopulate( AppLnkSet *folder, const QString& typefilte
 
     while ( it.current() ) {
       // show only the icons for existing files
-      if (!QFile(it.current()->file()).exists() )
+      if (!QFile(it.current()->file()).exists() & it.current()->file().left(4) != "http")
   {
     //maybe insert some .desktop file deletion code later
     //maybe dir specific
