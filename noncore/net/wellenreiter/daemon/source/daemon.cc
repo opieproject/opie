@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.22 2003-02-09 20:50:56 max Exp $
+ * $Id: daemon.cc,v 1.23 2003-02-12 01:05:29 max Exp $
  */
 
 #include "config.hh"
@@ -166,11 +166,20 @@ void *
 channel_switcher(void *cardtypeptr)
 {
   wl_cardtype_t *cardtype;
+  int maxchan=0;
   int channel=1;
-
   /* Get card info struct */
   cardtype = (wl_cardtype_t *)cardtypeptr;
-
+  /* Get from the wireless extension the amount of available channels
+     this prevents a fail in switching on us cards */
+  maxchan = card_detect_channels(cardtype->iface);
+  
+  if (maxchan < MAXCHANNEL)
+  {
+  	#undef MAXCHANNEL
+  	#define MAXCHANNEL maxchan
+  }
+  
   while(1)
   {
 
