@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.6 2002-04-17 03:20:37 llornkcor Exp $
+** $Id: qpeapplication.cpp,v 1.7 2002-04-17 12:56:38 llornkcor Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -47,6 +47,9 @@
 #include <qdragobject.h>
 #include <qevent.h>
 #include <qtooltip.h>
+#include <qsignal.h>
+#include <linux/fb.h>
+
 #include <qsignal.h>
 #include "qpeapplication.h"
 #include "qpestyle.h"
@@ -89,11 +92,11 @@
 class QPEApplicationData {
 public:
     QPEApplicationData() : presstimer(0), presswidget(0), rightpressed(FALSE),
-	kbgrabber(0), kbregrab(FALSE), notbusysent(FALSE), preloaded(FALSE),
-	forceshow(FALSE), nomaximize(FALSE), qpe_main_widget(0),
-	keep_running(TRUE)
+  kbgrabber(0), kbregrab(FALSE), notbusysent(FALSE), preloaded(FALSE),
+  forceshow(FALSE), nomaximize(FALSE), qpe_main_widget(0),
+  keep_running(TRUE)
     {
-	qcopq.setAutoDelete(TRUE);
+  qcopq.setAutoDelete(TRUE);
     }
 
     int presstimer;
@@ -105,13 +108,13 @@ public:
     bool notbusysent;
     QString appName;
     struct QCopRec {
-	QCopRec(const QCString &ch, const QCString &msg,
+  QCopRec(const QCString &ch, const QCString &msg,
                                const QByteArray &d) :
-	    channel(ch), message(msg), data(d) { }
+      channel(ch), message(msg), data(d) { }
 
-	QCString channel;
-	QCString message;
-	QByteArray data;
+  QCString channel;
+  QCString message;
+  QByteArray data;
     };
     bool preloaded;
     bool forceshow;
@@ -123,14 +126,14 @@ public:
     void enqueueQCop(const QCString &ch, const QCString &msg,
                                const QByteArray &data)
     {
-	qcopq.append(new QCopRec(ch,msg,data));
+  qcopq.append(new QCopRec(ch,msg,data));
     }
     void sendQCopQ()
     {
-	QCopRec* r;
-	for (QListIterator<QCopRec> it(qcopq); (r=it.current()); ++it)
-	    QCopChannel::sendLocally(r->channel,r->message,r->data);
-	qcopq.clear();
+  QCopRec* r;
+  for (QListIterator<QCopRec> it(qcopq); (r=it.current()); ++it)
+      QCopChannel::sendLocally(r->channel,r->message,r->data);
+  qcopq.clear();
     }
 };
 
@@ -138,27 +141,27 @@ class ResourceMimeFactory : public QMimeSourceFactory {
 public:
     ResourceMimeFactory()
     {
-	setFilePath( Global::helpPath() );
-	setExtensionType("html","text/html;charset=UTF-8");
+  setFilePath( Global::helpPath() );
+  setExtensionType("html","text/html;charset=UTF-8");
     }
 
     const QMimeSource* data(const QString& abs_name) const
     {
-	const QMimeSource* r = QMimeSourceFactory::data(abs_name);
-	if ( !r ) {
-	    int sl = abs_name.length();
-	    do {
-		sl = abs_name.findRev('/',sl-1);
-		QString name = sl>=0 ? abs_name.mid(sl+1) : abs_name;
-		int dot = name.findRev('.');
-		if ( dot >= 0 )
-		    name = name.left(dot);
-		QImage img = Resource::loadImage(name);
-		if ( !img.isNull() )
-		    r = new QImageDrag(img);
-	    } while (!r && sl>0);
-	}
-	return r;
+  const QMimeSource* r = QMimeSourceFactory::data(abs_name);
+  if ( !r ) {
+      int sl = abs_name.length();
+      do {
+    sl = abs_name.findRev('/',sl-1);
+    QString name = sl>=0 ? abs_name.mid(sl+1) : abs_name;
+    int dot = name.findRev('.');
+    if ( dot >= 0 )
+        name = name.left(dot);
+    QImage img = Resource::loadImage(name);
+    if ( !img.isNull() )
+        r = new QImageDrag(img);
+      } while (!r && sl>0);
+  }
+  return r;
     }
 };
 
@@ -169,18 +172,18 @@ static void setVolume(int t=0, int percent=-1)
 {
   switch (t) {
   case 0: {
-	Config cfg("Sound");
-	cfg.setGroup("System");
-	if ( percent < 0 )
-	  percent = cfg.readNumEntry("Volume",50);
-	int fd = 0;
-	if ((fd = open("/dev/mixer", O_RDWR))>=0) {
-	  int vol = muted ? 0 : percent;
-	  // set both channels to same volume
-	  vol |= vol << 8;
-	  ioctl(fd, MIXER_WRITE(0), &vol);
-	  ::close(fd);
-	}
+  Config cfg("Sound");
+  cfg.setGroup("System");
+  if ( percent < 0 )
+    percent = cfg.readNumEntry("Volume",50);
+  int fd = 0;
+  if ((fd = open("/dev/mixer", O_RDWR))>=0) {
+    int vol = muted ? 0 : percent;
+    // set both channels to same volume
+    vol |= vol << 8;
+    ioctl(fd, MIXER_WRITE(0), &vol);
+    ::close(fd);
+  }
   } break;
   }
 }
@@ -189,17 +192,17 @@ static void setMic(int t=0, int percent=-1)
 {
   switch (t) {
   case 0: {
-	Config cfg("Sound");
-	cfg.setGroup("System");
-	if ( percent < 0 )
-	  percent = cfg.readNumEntry("Mic",50);
-	
-	int fd = 0;
-	int mic = micMuted ? 0 : percent;
-	if ((fd = open("/dev/mixer", O_RDWR))>=0) {
-	  ioctl(fd, MIXER_WRITE(SOUND_MIXER_MIC), &mic);
-	  ::close(fd);
-	}
+  Config cfg("Sound");
+  cfg.setGroup("System");
+  if ( percent < 0 )
+    percent = cfg.readNumEntry("Mic",50);
+  
+  int fd = 0;
+  int mic = micMuted ? 0 : percent;
+  if ((fd = open("/dev/mixer", O_RDWR))>=0) {
+    ioctl(fd, MIXER_WRITE(SOUND_MIXER_MIC), &mic);
+    ::close(fd);
+  }
   } break;
   }
 }
@@ -232,10 +235,10 @@ static int curbl=-1;
 static int backlight()
 {
     if ( curbl == -1 ) {
-	// Read from config
-	Config config( "qpe" );
-	config.setGroup( "Screensaver" );
-	curbl = config.readNumEntry("Brightness",255);
+  // Read from config
+  Config config( "qpe" );
+  config.setGroup( "Screensaver" );
+  curbl = config.readNumEntry("Brightness",255);
     }
     return curbl;
 }
@@ -243,67 +246,67 @@ static int backlight()
 static void setBacklight(int bright)
 {
     if ( bright == -3 ) {
-	// Forced on
-	forced_off = FALSE;
-	bright = -1;
+  // Forced on
+  forced_off = FALSE;
+  bright = -1;
     }
     if ( forced_off && bright != -2 )
-	return;
+  return;
     if ( bright == -2 ) {
-	// Toggle between off and on
-	bright = curbl ? 0 : -1;
-	forced_off = !bright;
+  // Toggle between off and on
+  bright = curbl ? 0 : -1;
+  forced_off = !bright;
     }
     if ( bright == -1 ) {
-	// Read from config
-	Config config( "qpe" );
-	config.setGroup( "Screensaver" );
-	bright = config.readNumEntry("Brightness",255);
+  // Read from config
+  Config config( "qpe" );
+  config.setGroup( "Screensaver" );
+  bright = config.readNumEntry("Brightness",255);
     }
 #if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
     if ( QFile::exists("/usr/bin/bl") ) {
-	QString cmd = "/usr/bin/bl 1 ";
-	cmd += bright<=0 ? "0 " : "1 ";
-	cmd += QString::number(bright);
-	system(cmd.latin1());
+  QString cmd = "/usr/bin/bl 1 ";
+  cmd += bright<=0 ? "0 " : "1 ";
+  cmd += QString::number(bright);
+  system(cmd.latin1());
 #if defined(QT_QWS_EBX)
     } else if ( QFile::exists("/dev/fl") ) {
 #define FL_IOCTL_STEP_CONTRAST    100
-	int fd = open("/dev/fl", O_WRONLY);
-	if (fd >= 0 ) {
-	    int steps = qpe_sysBrightnessSteps();
-	    int bl = ( bright * steps + 127 ) / 255;
-	    if ( bright && !bl ) bl = 1;
-	    bl = ioctl(fd, FL_IOCTL_STEP_CONTRAST, bl);
-	    close(fd);
-	}
+  int fd = open("/dev/fl", O_WRONLY);
+  if (fd >= 0 ) {
+      int steps = qpe_sysBrightnessSteps();
+      int bl = ( bright * steps + 127 ) / 255;
+      if ( bright && !bl ) bl = 1;
+      bl = ioctl(fd, FL_IOCTL_STEP_CONTRAST, bl);
+      close(fd);
+  }
     }
 #elif defined(QT_QWS_IPAQ)
     } else if ( QFile::exists("/dev/ts") || QFile::exists("/dev/h3600_ts") ) {
-	typedef struct {
-	    unsigned char mode;
-	    unsigned char pwr;
-	    unsigned char brightness;
-	} FLITE_IN;
+  typedef struct {
+      unsigned char mode;
+      unsigned char pwr;
+      unsigned char brightness;
+  } FLITE_IN;
 # ifndef FLITE_ON
 #  ifndef _LINUX_IOCTL_H
 #   include <linux/ioctl.h>
 #  endif
 #  define FLITE_ON                _IOW('f', 7, FLITE_IN)
 # endif
-	int fd;
-	if ( QFile::exists("/dev/ts") )
-	    fd = open("/dev/ts", O_WRONLY);
-	else
-	    fd = open("/dev/h3600_ts", O_WRONLY);
-	if (fd >= 0 ) {
-	    FLITE_IN bl;
-	    bl.mode = 1;
-	    bl.pwr = bright ? 1 : 0;
-	    bl.brightness = bright;
-	    ioctl(fd, FLITE_ON, &bl);
-	    close(fd);
-	}
+  int fd;
+  if ( QFile::exists("/dev/ts") )
+      fd = open("/dev/ts", O_WRONLY);
+  else
+      fd = open("/dev/h3600_ts", O_WRONLY);
+  if (fd >= 0 ) {
+      FLITE_IN bl;
+      bl.mode = 1;
+      bl.pwr = bright ? 1 : 0;
+      bl.brightness = bright;
+      ioctl(fd, FLITE_ON, &bl);
+      close(fd);
+  }
     }
 #endif
 #endif
@@ -343,62 +346,62 @@ public:
     }
     void restore()
     {
-	if (!LcdOn) // We must have turned it off
-		{
-		int fd;
-		fd=open("/dev/fb0",O_RDWR);
-		if (fd != -1) { ioctl(fd,FBIOBLANK,VESA_NO_BLANKING); close(fd); }
-		}
-	setBacklight(-1);
+  if (!LcdOn) // We must have turned it off
+    {
+    int fd;
+    fd=open("/dev/fb0",O_RDWR);
+    if (fd != -1) { ioctl(fd,FBIOBLANK,VESA_NO_BLANKING); close(fd); }
+    }
+  setBacklight(-1);
     }
     bool save(int level)
     {
-	int fd;
+  int fd;
 
-	switch ( level ) {
-	 case 0:
-	    if ( disable_suspend > 0 && dim_on ) {
-		if (backlight() > 1)
-		    setBacklight(1); // lowest non-off
-	    }
-	    return TRUE;
-	    break;
-	 case 1:
-	    if ( disable_suspend > 1 && lightoff_on ) {
-		setBacklight(0); // off
-	    }
-	    return TRUE;
-	    break;
-	 case 2:
-	     Config config( "qpe" );
-	     config.setGroup( "Screensaver" );	     
-	     if (config.readNumEntry("LcdOffOnly",0) != 0)  // We're only turning off the LCD
-		{
-	     	fd=open("/dev/fb0",O_RDWR);
-	     	if (fd != -1) { ioctl(fd,FBIOBLANK,VESA_POWERDOWN); close(fd); }
-		LcdOn = FALSE;
-		}		     
-	     else // We're going to suspend the whole machine
-		{
-	     	if ( disable_suspend > 2 && !powerOnline() && !networkOnline() ) {
-			QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
-			return TRUE; 
-			}
-		}
-	    break;
-	}
-	return FALSE;
+  switch ( level ) {
+   case 0:
+      if ( disable_suspend > 0 && dim_on ) {
+    if (backlight() > 1)
+        setBacklight(1); // lowest non-off
+      }
+      return TRUE;
+      break;
+   case 1:
+      if ( disable_suspend > 1 && lightoff_on ) {
+    setBacklight(0); // off
+      }
+      return TRUE;
+      break;
+   case 2:
+       Config config( "qpe" );
+       config.setGroup( "Screensaver" );       
+       if (config.readNumEntry("LcdOffOnly",0) != 0)  // We're only turning off the LCD
+    {
+        fd=open("/dev/fb0",O_RDWR);
+        if (fd != -1) { ioctl(fd,FBIOBLANK,VESA_POWERDOWN); close(fd); }
+    LcdOn = FALSE;
+    }        
+       else // We're going to suspend the whole machine
+    {
+        if ( disable_suspend > 2 && !powerOnline() && !networkOnline() ) {
+      QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
+      return TRUE; 
+      }
+    }
+      break;
+  }
+  return FALSE;
     }
 };
 
 static int ssi(int interval, Config &config, const QString &enable, const QString& value, int def)
 {
     if ( !enable.isEmpty() && config.readNumEntry(enable,0) == 0 )
-	return 0;
+  return 0;
 
     if ( interval < 0 ) {
-	// Restore screen blanking and power saving state
-	interval = config.readNumEntry( value, def );
+  // Restore screen blanking and power saving state
+  interval = config.readNumEntry( value, def );
     }
     return interval;
 }
@@ -422,9 +425,9 @@ static void setScreenSaverIntervals(int i1, int i2, int i3)
     dim_on = ( (i1 != 0) ? config.readNumEntry("Dim",1) : FALSE );
     lightoff_on = ( (i2 != 0 ) ? config.readNumEntry("LightOff",1) : FALSE );
     if ( !i1 && !i2 && !i3 )
-	QWSServer::setScreenSaverInterval(0);
+  QWSServer::setScreenSaverInterval(0);
     else
-	QWSServer::setScreenSaverIntervals(v);
+  QWSServer::setScreenSaverIntervals(v);
 }
 
 static void setScreenSaverInterval(int interval)
@@ -478,14 +481,14 @@ static void setScreenSaverInterval(int interval)
 \code
     void MyWidget::receive( const QCString& msg, const QByteArray& data )
     {
-	QDataStream stream( data, IO_ReadOnly );
-	if ( msg == "someMessage(int,int,int)" ) {
-	    int a,b,c;
-	    stream >> a >> b >> c;
-	    ...
-	} else if ( msg == "otherMessage(QString)" ) {
-	    ...
-	}
+  QDataStream stream( data, IO_ReadOnly );
+  if ( msg == "someMessage(int,int,int)" ) {
+      int a,b,c;
+      stream >> a >> b >> c;
+      ...
+  } else if ( msg == "otherMessage(QString)" ) {
+      ...
+  }
     }
 \endcode
 
@@ -501,9 +504,9 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
 {
     int dw = desktop()->width();
     if ( dw < 200 ) {
-	setFont( QFont( "helvetica", 8 ) );
-	AppLnk::setSmallIconSize(10);
-	AppLnk::setBigIconSize(28);
+  setFont( QFont( "helvetica", 8 ) );
+  AppLnk::setSmallIconSize(10);
+  AppLnk::setBigIconSize(28);
     }
 
     d = new QPEApplicationData;
@@ -517,12 +520,12 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
 
     QFile f(qcopfn);
     if ( f.open(IO_ReadOnly) ) {
-	flock(f.handle(), LOCK_EX);
+  flock(f.handle(), LOCK_EX);
     }
 
     sysChannel = new QCopChannel( "QPE/System", this );
     connect( sysChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-	     this, SLOT(systemMessage( const QCString &, const QByteArray &)) );
+       this, SLOT(systemMessage( const QCString &, const QByteArray &)) );
 
     QCString channel = QCString(argv[0]);
     channel.replace(QRegExp(".*/"),"");
@@ -530,36 +533,36 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
     channel = "QPE/Application/" + channel;
     pidChannel = new QCopChannel( channel, this);
     connect( pidChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-	    this, SLOT(pidMessage(const QCString &, const QByteArray &)));
+      this, SLOT(pidMessage(const QCString &, const QByteArray &)));
 
     if ( f.isOpen() ) {
-	d->keep_running = FALSE;
-	QDataStream ds(&f);
-	QCString channel, message;
-	QByteArray data;
-	while(!ds.atEnd()) {
-	    ds >> channel >> message >> data;
-	    d->enqueueQCop(channel,message,data);
-	}
+  d->keep_running = FALSE;
+  QDataStream ds(&f);
+  QCString channel, message;
+  QByteArray data;
+  while(!ds.atEnd()) {
+      ds >> channel >> message >> data;
+      d->enqueueQCop(channel,message,data);
+  }
 
-	flock(f.handle(), LOCK_UN);
-	f.close();
-	f.remove();
+  flock(f.handle(), LOCK_UN);
+  f.close();
+  f.remove();
     }
 
     for (int a=0; a<argc; a++) {
-	if ( qstrcmp(argv[a],"-preload")==0 ) {
-	    argv[a] = argv[a+1];
-	    a++;
-	    d->preloaded = TRUE;
-	    argc-=1;
-	} else if ( qstrcmp(argv[a],"-preload-show")==0 ) {
-	    argv[a] = argv[a+1];
-	    a++;
-	    d->preloaded = TRUE;
-	    d->forceshow = TRUE;
-	    argc-=1;
-	}
+  if ( qstrcmp(argv[a],"-preload")==0 ) {
+      argv[a] = argv[a+1];
+      a++;
+      d->preloaded = TRUE;
+      argc-=1;
+  } else if ( qstrcmp(argv[a],"-preload-show")==0 ) {
+      argv[a] = argv[a+1];
+      a++;
+      d->preloaded = TRUE;
+      d->forceshow = TRUE;
+      argc-=1;
+  }
     }
 
     /* overide stored arguments */
@@ -572,39 +575,39 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
 #ifndef QT_NO_TRANSLATION
     QStringList langs = Global::languageList();
     for (QStringList::ConstIterator it = langs.begin(); it!=langs.end(); ++it) {
-	QString lang = *it;
+  QString lang = *it;
 
-	QTranslator * trans;
-	QString tfn;
+  QTranslator * trans;
+  QString tfn;
 
-	trans = new QTranslator(this);
-	tfn = qpeDir()+"/i18n/"+lang+"/libqpe.qm";
-	if ( trans->load( tfn ))
-	    installTranslator( trans );
-	else
-	    delete trans;
+  trans = new QTranslator(this);
+  tfn = qpeDir()+"/i18n/"+lang+"/libqpe.qm";
+  if ( trans->load( tfn ))
+      installTranslator( trans );
+  else
+      delete trans;
 
-	trans = new QTranslator(this);
-	tfn = qpeDir()+"/i18n/"+lang+"/"+d->appName+".qm";
-	if ( trans->load( tfn ))
-	    installTranslator( trans );
-	else
-	    delete trans;
+  trans = new QTranslator(this);
+  tfn = qpeDir()+"/i18n/"+lang+"/"+d->appName+".qm";
+  if ( trans->load( tfn ))
+      installTranslator( trans );
+  else
+      delete trans;
 
-	//###language/font hack; should look it up somewhere
-	if ( lang == "ja" || lang == "zh_CN" || lang == "zh_TW" || lang == "ko" ) {
-	    QFont fn = FontManager::unicodeFont( FontManager::Proportional );
-	    setFont( fn );
-	}
+  //###language/font hack; should look it up somewhere
+  if ( lang == "ja" || lang == "zh_CN" || lang == "zh_TW" || lang == "ko" ) {
+      QFont fn = FontManager::unicodeFont( FontManager::Proportional );
+      setFont( fn );
+  }
     }
 #endif
 
     applyStyle();
 
     if ( type() == GuiServer ) {
-	setScreenSaverInterval(-1);
-	setVolume();
-	QWSServer::setScreenSaver(new QPEScreenSaver);
+  setScreenSaverInterval(-1);
+  setVolume();
+  QWSServer::setScreenSaver(new QPEScreenSaver);
     }
 
     installEventFilter( this );
@@ -621,7 +624,7 @@ static QPtrDict<void>* inputMethodDict=0;
 static void createInputMethodDict()
 {
     if ( !inputMethodDict )
-	inputMethodDict = new QPtrDict<void>;
+  inputMethodDict = new QPtrDict<void>;
 }
 
 /*!
@@ -633,7 +636,7 @@ static void createInputMethodDict()
 QPEApplication::InputMethodHint QPEApplication::inputMethodHint( QWidget* w )
 {
     if ( inputMethodDict && w )
-	return (InputMethodHint)(int)inputMethodDict->find(w);
+  return (InputMethodHint)(int)inputMethodDict->find(w);
     return Normal;
 }
 
@@ -655,9 +658,9 @@ void QPEApplication::setInputMethodHint( QWidget* w, InputMethodHint mode )
 {
     createInputMethodDict();
     if ( mode == Normal ) {
-	inputMethodDict->remove(w);
+  inputMethodDict->remove(w);
     } else {
-	inputMethodDict->insert(w,(void*)mode);
+  inputMethodDict->insert(w,(void*)mode);
     }
 }
 
@@ -674,12 +677,12 @@ void QPEApplication::mapToDefaultAction( QWSKeyEvent *ke, int key )
     // specialised actions for certain widgets. May want to
     // add more stuff here.
     if ( activePopupWidget() && activePopupWidget()->inherits( "QListBox" )
-	 && activePopupWidget()->parentWidget()
-	 && activePopupWidget()->parentWidget()->inherits( "QComboBox" ) )
-	key = Qt::Key_Return;
+   && activePopupWidget()->parentWidget()
+   && activePopupWidget()->parentWidget()->inherits( "QComboBox" ) )
+  key = Qt::Key_Return;
 
     if ( activePopupWidget() && activePopupWidget()->inherits( "QPopupMenu" ) )
-	key = Qt::Key_Return;
+  key = Qt::Key_Return;
 
     ke->simpleData.keycode = key;
 }
@@ -697,108 +700,108 @@ public:
 bool QPEApplication::qwsEventFilter( QWSEvent *e )
 {
     if ( !d->notbusysent && e->type == QWSEvent::Focus ) {
-	if ( qApp->type() != QApplication::GuiServer ) {
-	    QCopEnvelope e("QPE/System", "notBusy(QString)" );
-	    e << d->appName;
-	}
-	d->notbusysent=TRUE;
+  if ( qApp->type() != QApplication::GuiServer ) {
+      QCopEnvelope e("QPE/System", "notBusy(QString)" );
+      e << d->appName;
+  }
+  d->notbusysent=TRUE;
     }
     if ( type() == GuiServer ) {
-	switch ( e->type ) {
-	    case QWSEvent::Mouse:
-		if ( e->asMouse()->simpleData.state && !QWidget::find(e->window()) )
-		    emit clientMoused();
-	}
+  switch ( e->type ) {
+      case QWSEvent::Mouse:
+    if ( e->asMouse()->simpleData.state && !QWidget::find(e->window()) )
+        emit clientMoused();
+  }
     }
     if ( e->type == QWSEvent::Key ) {
-	if ( d->kbgrabber == 1 )
-	    return TRUE;
-	QWSKeyEvent *ke = (QWSKeyEvent *)e;
-	if ( ke->simpleData.keycode == Qt::Key_F33 ) {
-	    // Use special "OK" key to press "OK" on top level widgets
-	    QWidget *active = activeWindow();
-	    QWidget *popup = 0;
-	    if ( active && active->isPopup() ) {
-		popup = active;
-		active = active->parentWidget();
-	    }
-	    if ( active && (int)active->winId() == ke->simpleData.window &&
-		 !active->testWFlags( WStyle_Customize|WType_Popup|WType_Desktop )) {
-		if ( ke->simpleData.is_press ) {
-		    if ( popup )
-			popup->close();
-		    if ( active->inherits( "QDialog" ) ) {
-			HackDialog *d = (HackDialog *)active;
-			d->acceptIt();
-			return TRUE;
-		    } else if ( ((HackWidget *)active)->needsOk() ) {
-			QSignal s;
-			s.connect( active, SLOT( accept() ) );
-			s.activate();
-		    } else {
-			// do the same as with the select key: Map to the default action of the widget:
-			mapToDefaultAction( ke, Qt::Key_Return );
-		    }
-		}
-	    }
-	} else if ( ke->simpleData.keycode == Qt::Key_F30 ) {
-	    // Use special "select" key to do whatever default action a widget has
-	    mapToDefaultAction( ke, Qt::Key_Space );
-	} else if ( ke->simpleData.keycode == Qt::Key_Escape && 
-		    ke->simpleData.is_press ) {
-	    // Escape key closes app if focus on toplevel
-	    QWidget *active = activeWindow();
-	    if ( active && active->testWFlags( WType_TopLevel ) && 
-		 (int)active->winId() == ke->simpleData.window &&
-		 !active->testWFlags( WStyle_Dialog|WStyle_Customize|WType_Popup|WType_Desktop )) {
-		if ( active->inherits( "QDialog" ) ) {
-		    HackDialog *d = (HackDialog *)active;
-		    d->rejectIt();
-		    return TRUE;
-		} else if ( strcmp( argv()[0], "embeddedkonsole") != 0 ) {
-		    active->close();
-		}
-	    }
-	}
+  if ( d->kbgrabber == 1 )
+      return TRUE;
+  QWSKeyEvent *ke = (QWSKeyEvent *)e;
+  if ( ke->simpleData.keycode == Qt::Key_F33 ) {
+      // Use special "OK" key to press "OK" on top level widgets
+      QWidget *active = activeWindow();
+      QWidget *popup = 0;
+      if ( active && active->isPopup() ) {
+    popup = active;
+    active = active->parentWidget();
+      }
+      if ( active && (int)active->winId() == ke->simpleData.window &&
+     !active->testWFlags( WStyle_Customize|WType_Popup|WType_Desktop )) {
+    if ( ke->simpleData.is_press ) {
+        if ( popup )
+      popup->close();
+        if ( active->inherits( "QDialog" ) ) {
+      HackDialog *d = (HackDialog *)active;
+      d->acceptIt();
+      return TRUE;
+        } else if ( ((HackWidget *)active)->needsOk() ) {
+      QSignal s;
+      s.connect( active, SLOT( accept() ) );
+      s.activate();
+        } else {
+      // do the same as with the select key: Map to the default action of the widget:
+      mapToDefaultAction( ke, Qt::Key_Return );
+        }
+    }
+      }
+  } else if ( ke->simpleData.keycode == Qt::Key_F30 ) {
+      // Use special "select" key to do whatever default action a widget has
+      mapToDefaultAction( ke, Qt::Key_Space );
+  } else if ( ke->simpleData.keycode == Qt::Key_Escape && 
+        ke->simpleData.is_press ) {
+      // Escape key closes app if focus on toplevel
+      QWidget *active = activeWindow();
+      if ( active && active->testWFlags( WType_TopLevel ) && 
+     (int)active->winId() == ke->simpleData.window &&
+     !active->testWFlags( WStyle_Dialog|WStyle_Customize|WType_Popup|WType_Desktop )) {
+    if ( active->inherits( "QDialog" ) ) {
+        HackDialog *d = (HackDialog *)active;
+        d->rejectIt();
+        return TRUE;
+    } else if ( strcmp( argv()[0], "embeddedkonsole") != 0 ) {
+        active->close();
+    }
+      }
+  }
 
 #if QT_VERSION < 231
     // Filter out the F4/Launcher key from apps
     // ### The launcher key may not always be F4 on all devices
-	if ( ((QWSKeyEvent *)e)->simpleData.keycode == Qt::Key_F4 )
-	    return TRUE;
+  if ( ((QWSKeyEvent *)e)->simpleData.keycode == Qt::Key_F4 )
+      return TRUE;
 #endif
     }
     if ( e->type == QWSEvent::Focus ) {
-	QWSFocusEvent *fe = (QWSFocusEvent*)e;
-	QWidget* nfw = QWidget::find(e->window());
-	if ( !fe->simpleData.get_focus ) {
-	    QWidget *active = activeWindow();
-	    while ( active && active->isPopup() ) {
-		active->close();
-		active = activeWindow();
-	    }
-	    if ( !nfw && d->kbgrabber == 2 ) {
-		ungrabKeyboard();
-		d->kbregrab = TRUE; // want kb back when we're active
-	    }
-	} else {
-	    // make sure our modal widget is ALWAYS on top
-	    QWidget *topm = activeModalWidget();
-	    if ( topm ) {
-		topm->raise();
-	    }
-	    if ( d->kbregrab ) {
-		grabKeyboard();
-		d->kbregrab = FALSE;
-	    }
-	}
-	if ( fe->simpleData.get_focus && inputMethodDict ) {
-	    InputMethodHint m = inputMethodHint( QWidget::find(e->window()) );
-	    if ( m == AlwaysOff )
-		Global::hideInputMethod();
-	    if ( m == AlwaysOn )
-		Global::showInputMethod();
-	}
+  QWSFocusEvent *fe = (QWSFocusEvent*)e;
+  QWidget* nfw = QWidget::find(e->window());
+  if ( !fe->simpleData.get_focus ) {
+      QWidget *active = activeWindow();
+      while ( active && active->isPopup() ) {
+    active->close();
+    active = activeWindow();
+      }
+      if ( !nfw && d->kbgrabber == 2 ) {
+    ungrabKeyboard();
+    d->kbregrab = TRUE; // want kb back when we're active
+      }
+  } else {
+      // make sure our modal widget is ALWAYS on top
+      QWidget *topm = activeModalWidget();
+      if ( topm ) {
+    topm->raise();
+      }
+      if ( d->kbregrab ) {
+    grabKeyboard();
+    d->kbregrab = FALSE;
+      }
+  }
+  if ( fe->simpleData.get_focus && inputMethodDict ) {
+      InputMethodHint m = inputMethodHint( QWidget::find(e->window()) );
+      if ( m == AlwaysOff )
+    Global::hideInputMethod();
+      if ( m == AlwaysOn )
+    Global::showInputMethod();
+  }
     }
     return QApplication::qwsEventFilter( e );
 }
@@ -825,7 +828,7 @@ QString QPEApplication::qpeDir()
 {
     const char *base = getenv( "OPIEDIR" );
     if ( base )
-	return QString( base ) + "/";
+  return QString( base ) + "/";
 
     return QString( "../" );
 }
@@ -837,7 +840,7 @@ QString QPEApplication::documentDir()
 {
     const char *base = getenv( "HOME" );
     if ( base )
-	return QString( base ) + "/Documents/";
+  return QString( base ) + "/Documents/";
 
     return QString( "../Documents/" );
 }
@@ -850,16 +853,16 @@ static int deforient=-1;
 int QPEApplication::defaultRotation()
 {
     if ( deforient < 0 ) {
-	QString d = getenv("QWS_DISPLAY");
-	if ( d.contains("Rot90") ) {
-	    deforient = 90;
-	} else if ( d.contains("Rot180") ) {
-	    deforient = 180;
-	} else if ( d.contains("Rot270") ) {
-	    deforient = 270;
-	} else {
-	    deforient=0;
-	}
+  QString d = getenv("QWS_DISPLAY");
+  if ( d.contains("Rot90") ) {
+      deforient = 90;
+  } else if ( d.contains("Rot180") ) {
+      deforient = 180;
+  } else if ( d.contains("Rot270") ) {
+      deforient = 270;
+  } else {
+      deforient=0;
+  }
     }
     return deforient;
 }
@@ -870,10 +873,10 @@ int QPEApplication::defaultRotation()
 void QPEApplication::setDefaultRotation(int r)
 {
     if ( qApp->type() == GuiServer ) {
-	deforient = r;
-	setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(r).latin1(), 1);
+  deforient = r;
+  setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(r).latin1(), 1);
     } else {
-	QCopEnvelope("QPE/System", "setDefaultRotation(int)") << r;
+  QCopEnvelope("QPE/System", "setDefaultRotation(int)") << r;
     }
 }
 
@@ -906,7 +909,7 @@ void QPEApplication::applyStyle()
     pal.setColor( QColorGroup::Base, QColor(color) );
 
     pal.setColor( QPalette::Disabled, QColorGroup::Text,
-		  pal.color(QPalette::Active, QColorGroup::Background).dark() );
+      pal.color(QPalette::Active, QColorGroup::Background).dark() );
 
     setPalette( pal, TRUE );
 }
@@ -916,141 +919,141 @@ void QPEApplication::systemMessage( const QCString &msg, const QByteArray &data)
 #ifdef Q_WS_QWS
     QDataStream stream( data, IO_ReadOnly );
     if ( msg == "applyStyle()" ) {
-	  applyStyle();
+    applyStyle();
     } else if ( msg == "setScreenSaverInterval(int)" ) {
-	  if ( type() == GuiServer ) {
-	    int time;
-	    stream >> time;
-	    setScreenSaverInterval(time);
-	  }
+    if ( type() == GuiServer ) {
+      int time;
+      stream >> time;
+      setScreenSaverInterval(time);
+    }
     } else if ( msg == "setScreenSaverIntervals(int,int,int)" ) {
-	  if ( type() == GuiServer ) {
-	    int t1,t2,t3;
-	    stream >> t1 >> t2 >> t3;
-	    setScreenSaverIntervals(t1,t2,t3);
-	  }
+    if ( type() == GuiServer ) {
+      int t1,t2,t3;
+      stream >> t1 >> t2 >> t3;
+      setScreenSaverIntervals(t1,t2,t3);
+    }
     } else if ( msg == "setBacklight(int)" ) {
-	  if ( type() == GuiServer ) {
-	    int bright;
-	    stream >> bright;
-	    setBacklight(bright);
-	  }
+    if ( type() == GuiServer ) {
+      int bright;
+      stream >> bright;
+      setBacklight(bright);
+    }
     } else if ( msg == "setDefaultRotation(int)" ) {
-	  if ( type() == GuiServer ) {
-	    int r;
-	    stream >> r;
-	    setDefaultRotation(r);
-	  }
+    if ( type() == GuiServer ) {
+      int r;
+      stream >> r;
+      setDefaultRotation(r);
+    }
     } else if ( msg == "shutdown()" ) {
-	  if ( type() == GuiServer )
-	    shutdown();
+    if ( type() == GuiServer )
+      shutdown();
     } else if ( msg == "quit()" ) {
-	  if ( type() != GuiServer )
-	    tryQuit();
+    if ( type() != GuiServer )
+      tryQuit();
     } else if ( msg == "forceQuit()" ) {
-	  if ( type() != GuiServer )
-	    quit(); 
+    if ( type() != GuiServer )
+      quit(); 
     } else if ( msg == "restart()" ) {
-	  if ( type() == GuiServer )
-	    restart();
+    if ( type() == GuiServer )
+      restart();
     } else if ( msg == "grabKeyboard(QString)" ) {
-	  QString who;
-	  stream >> who;
-	  if ( who.isEmpty() )
-	    d->kbgrabber = 0;
-	  else if ( who != d->appName )
-	    d->kbgrabber = 1;
-	  else
-	    d->kbgrabber = 2;
+    QString who;
+    stream >> who;
+    if ( who.isEmpty() )
+      d->kbgrabber = 0;
+    else if ( who != d->appName )
+      d->kbgrabber = 1;
+    else
+      d->kbgrabber = 2;
     } else if ( msg == "language(QString)" ) {
-	  if ( type() == GuiServer ) {
-	    QString l;
-	    stream >> l;
-	    QString cl = getenv("LANG");
-	    if ( cl != l ) {
-		  if ( l.isNull() )
-		    unsetenv( "LANG" );
-		  else
-		    setenv( "LANG", l.latin1(), 1 );
-		  restart();
-	    }
-	  }
+    if ( type() == GuiServer ) {
+      QString l;
+      stream >> l;
+      QString cl = getenv("LANG");
+      if ( cl != l ) {
+      if ( l.isNull() )
+        unsetenv( "LANG" );
+      else
+        setenv( "LANG", l.latin1(), 1 );
+      restart();
+      }
+    }
     } else if ( msg == "timeChange(QString)" ) {
-	  QString t;
-	  stream >> t;
-	  if ( t.isNull() )
-	    unsetenv( "TZ" );
-	  else
-	    setenv( "TZ", t.latin1(), 1 );
-	  // emit the signal so everyone else knows...
-	  emit timeChanged();
+    QString t;
+    stream >> t;
+    if ( t.isNull() )
+      unsetenv( "TZ" );
+    else
+      setenv( "TZ", t.latin1(), 1 );
+    // emit the signal so everyone else knows...
+    emit timeChanged();
     } else if ( msg == "execute(QString)" ) {
-	  if ( type() == GuiServer ) {
-	    QString t;
-	    stream >> t;
-	    Global::execute( t );
-	  }
+    if ( type() == GuiServer ) {
+      QString t;
+      stream >> t;
+      Global::execute( t );
+    }
     } else if ( msg == "execute(QString,QString)" ) {
-	  if ( type() == GuiServer ) {
-	    QString t,d;
-	    stream >> t >> d;
-	    Global::execute( t, d );
-	  }
+    if ( type() == GuiServer ) {
+      QString t,d;
+      stream >> t >> d;
+      Global::execute( t, d );
+    }
     } else if ( msg == "addAlarm(QDateTime,QCString,QCString,int)" ) {
-	  if ( type() == GuiServer ) {
-	    QDateTime when;
-	    QCString channel, message;
-	    int data;
-	    stream >> when >> channel >> message >> data;
-	    AlarmServer::addAlarm( when, channel, message, data );
-	  }
+    if ( type() == GuiServer ) {
+      QDateTime when;
+      QCString channel, message;
+      int data;
+      stream >> when >> channel >> message >> data;
+      AlarmServer::addAlarm( when, channel, message, data );
+    }
     } else if ( msg == "deleteAlarm(QDateTime,QCString,QCString,int)" ) {
-	  if ( type() == GuiServer ) {
-	    QDateTime when;
-	    QCString channel, message;
-	    int data;
-	    stream >> when >> channel >> message >> data;
-	    AlarmServer::deleteAlarm( when, channel, message, data );
-	  }
+    if ( type() == GuiServer ) {
+      QDateTime when;
+      QCString channel, message;
+      int data;
+      stream >> when >> channel >> message >> data;
+      AlarmServer::deleteAlarm( when, channel, message, data );
+    }
     } else if ( msg == "clockChange(bool)" ) {
-	  int tmp;
-	  stream >> tmp;
-	  emit clockChanged( tmp );
+    int tmp;
+    stream >> tmp;
+    emit clockChanged( tmp );
     } else if ( msg == "weekChange(bool)" ) {
-	  int tmp;
-	  stream >> tmp;
-	  emit weekChanged( tmp );
+    int tmp;
+    stream >> tmp;
+    emit weekChanged( tmp );
     } else if ( msg == "setDateFormat(DateFormat)" ) {
-	  DateFormat tmp;
-	  stream >> tmp;
-	  emit dateFormatChanged( tmp );
+    DateFormat tmp;
+    stream >> tmp;
+    emit dateFormatChanged( tmp );
     } else if ( msg == "setVolume(int,int)" ) {
-	  int t,v;
-	  stream >> t >> v;
-	  setVolume(t,v);
-	  emit volumeChanged( muted );
+    int t,v;
+    stream >> t >> v;
+    setVolume(t,v);
+    emit volumeChanged( muted );
     } else if ( msg == "volumeChange(bool)" ) {
-	  stream >> muted;
-	  setVolume();
-	  emit volumeChanged( muted );
-	} else if ( msg == "setMic(int,int)") { // Added: 2002-02-08 by Jeremy Cowgar <jc@cowgar.com>
-	  int t,v;
-	  stream >> t >> v;
-	  setMic(t,v);
-	  emit micChanged( micMuted );
-	} else if ( msg == "micChange(bool)" ) { // Added: 2002-02-08 by Jeremy Cowgar <jc@cowgar.com>
-	  stream >> micMuted;
-	  setMic();
-	  emit micChanged( micMuted );
+    stream >> muted;
+    setVolume();
+    emit volumeChanged( muted );
+  } else if ( msg == "setMic(int,int)") { // Added: 2002-02-08 by Jeremy Cowgar <jc@cowgar.com>
+    int t,v;
+    stream >> t >> v;
+    setMic(t,v);
+    emit micChanged( micMuted );
+  } else if ( msg == "micChange(bool)" ) { // Added: 2002-02-08 by Jeremy Cowgar <jc@cowgar.com>
+    stream >> micMuted;
+    setMic();
+    emit micChanged( micMuted );
     } else if ( msg == "setScreenSaverMode(int)" ) {
-	  if ( type() == GuiServer ) {
-		int old = disable_suspend;
-		stream >> disable_suspend;
-		//qDebug("setScreenSaverMode(%d)", disable_suspend );
-		if ( disable_suspend > old )
-		  setScreenSaverInterval( -1 );
-	  }
-	}
+    if ( type() == GuiServer ) {
+    int old = disable_suspend;
+    stream >> disable_suspend;
+    //qDebug("setScreenSaverMode(%d)", disable_suspend );
+    if ( disable_suspend > old )
+      setScreenSaverInterval( -1 );
+    }
+  }
 #endif
 }
 
@@ -1065,23 +1068,23 @@ bool QPEApplication::raiseAppropriateWindow()
     QWidget *top = d->qpe_main_widget;
     if ( !top ) top =mainWidget();
     if ( top && d->keep_running ) {
-	if ( top->isVisible() )
-	    r = TRUE;
+  if ( top->isVisible() )
+      r = TRUE;
 #ifdef Q_WS_QWS
-	if ( !d->nomaximize )
-	    top->showMaximized();
-	else
+  if ( !d->nomaximize )
+      top->showMaximized();
+  else
 #endif
-	    top->show();
-	top->raise();
-	top->setActiveWindow();
+      top->show();
+  top->raise();
+  top->setActiveWindow();
     }
     QWidget *topm = activeModalWidget();
     if ( topm && topm != top ) {
-	topm->show();
-	topm->raise();
-	topm->setActiveWindow();
-	r = FALSE;
+  topm->show();
+  topm->raise();
+  topm->setActiveWindow();
+  r = FALSE;
     }
     return r;
 }
@@ -1091,46 +1094,46 @@ void QPEApplication::pidMessage( const QCString &msg, const QByteArray & data)
 #ifdef Q_WS_QWS
 
     if ( msg == "quit()" ) {
-	tryQuit();
+  tryQuit();
     } else if ( msg == "quitIfInvisible()" ) {
-	if ( d->qpe_main_widget && !d->qpe_main_widget->isVisible() )
-	    quit();
+  if ( d->qpe_main_widget && !d->qpe_main_widget->isVisible() )
+      quit();
     } else if ( msg == "close()" ) {
-	hideOrQuit();
+  hideOrQuit();
     } else if ( msg == "disablePreload()" ) {
-	d->preloaded = FALSE;
-	d->keep_running = TRUE;
-	/* so that quit will quit */
+  d->preloaded = FALSE;
+  d->keep_running = TRUE;
+  /* so that quit will quit */
     } else if ( msg == "enablePreload()" ) {
-	d->preloaded = TRUE;
-	d->keep_running = TRUE;
-	/* so next quit won't quit */
+  d->preloaded = TRUE;
+  d->keep_running = TRUE;
+  /* so next quit won't quit */
     } else if ( msg == "raise()" ) {
-	d->keep_running = TRUE;
-	d->notbusysent = FALSE;
-	raiseAppropriateWindow();
+  d->keep_running = TRUE;
+  d->notbusysent = FALSE;
+  raiseAppropriateWindow();
     } else if ( msg == "flush()" ) {
-	emit flush();
-	// we need to tell the desktop
-	QCopEnvelope e( "QPE/Desktop", "flushDone(QString)" );
-	e << d->appName;
+  emit flush();
+  // we need to tell the desktop
+  QCopEnvelope e( "QPE/Desktop", "flushDone(QString)" );
+  e << d->appName;
     } else if ( msg == "reload()" ) {
-	emit reload();
+  emit reload();
     } else if ( msg == "setDocument(QString)" ) {
-	d->keep_running = TRUE;
-	QDataStream stream( data, IO_ReadOnly );
-	QString doc;
-	stream >> doc;
-	QWidget *mw = mainWidget();
-	if ( !mw )
-	    mw = d->qpe_main_widget;
-	if ( mw )
-	    Global::setDocument( mw, doc );
+  d->keep_running = TRUE;
+  QDataStream stream( data, IO_ReadOnly );
+  QString doc;
+  stream >> doc;
+  QWidget *mw = mainWidget();
+  if ( !mw )
+      mw = d->qpe_main_widget;
+  if ( mw )
+      Global::setDocument( mw, doc );
     } else if ( msg == "nextView()" ) {
-	if ( raiseAppropriateWindow() )
-	    emit appMessage( msg, data);
+  if ( raiseAppropriateWindow() )
+      emit appMessage( msg, data);
     } else {
-	emit appMessage( msg, data);
+  emit appMessage( msg, data);
     }
 #endif
 }
@@ -1150,10 +1153,10 @@ static bool setWidgetCaptionFromAppName( QWidget* /*mw*/, const QString& /*appNa
 
     QList<AppLnk> appsList = apps.children();
     for ( QListIterator<AppLnk> it(appsList); it.current(); ++it ) {
-	if ( (*it)->exec() == appName ) {
-	    mw->setCaption( (*it)->name() );
-	    return TRUE;
-	}
+  if ( (*it)->exec() == appName ) {
+      mw->setCaption( (*it)->name() );
+      return TRUE;
+  }
     }
 */
     return FALSE;
@@ -1174,21 +1177,21 @@ void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
     d->qpe_main_widget = mw;
     d->sendQCopQ();
     if ( d->preloaded ) {
-	if(d->forceshow) {
+  if(d->forceshow) {
 #ifdef Q_WS_QWS
-	    if ( !nomaximize )
-		mw->showMaximized();
-	    else
+      if ( !nomaximize )
+    mw->showMaximized();
+      else
 #endif
-	    mw->show();
-	}
+      mw->show();
+  }
     } else if ( d->keep_running ) {
 #ifdef Q_WS_QWS
-	if ( !nomaximize )
-	    mw->showMaximized();
-	else
+  if ( !nomaximize )
+      mw->showMaximized();
+  else
 #endif
-	mw->show();
+  mw->show();
     }
 }
 
@@ -1208,26 +1211,26 @@ void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
     setWidgetCaptionFromAppName( mw, d->appName, qpeDir() + "apps" );
 
     if ( mw && argc() == 2 )
-	Global::setDocument( mw, QString::fromUtf8(argv()[1]) );
+  Global::setDocument( mw, QString::fromUtf8(argv()[1]) );
     d->nomaximize = nomaximize;
     d->qpe_main_widget = mw;
     d->sendQCopQ();
     if ( d->preloaded ) {
-	if(d->forceshow) {
+  if(d->forceshow) {
 #ifdef Q_WS_QWS
-	    if ( !nomaximize )
-		mw->showMaximized();
-	    else
+      if ( !nomaximize )
+    mw->showMaximized();
+      else
 #endif
-	    mw->show();
-	}
+      mw->show();
+  }
     } else if ( d->keep_running ) {
 #ifdef Q_WS_QWS
-	if ( !nomaximize )
-	    mw->showMaximized();
-	else
+  if ( !nomaximize )
+      mw->showMaximized();
+  else
 #endif
-	mw->show();
+  mw->show();
     }
 }
 
@@ -1244,8 +1247,8 @@ void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
 void QPEApplication::setKeepRunning()
 {
     if ( qApp && qApp->inherits( "QPEApplication" ) ) {
-	QPEApplication *qpeApp = (QPEApplication*)qApp;
-	qpeApp->d->keep_running = TRUE;
+  QPEApplication *qpeApp = (QPEApplication*)qApp;
+  qpeApp->d->keep_running = TRUE;
     }
 }
 
@@ -1267,32 +1270,32 @@ void QPEApplication::internalSetStyle( const QString &style )
 {
 #if QT_VERSION >= 300
     if ( style == "QPE" ) {
-	setStyle( new QPEStyle );
+  setStyle( new QPEStyle );
     } else {
-	QStyle *s = QStyleFactory::create(style);
-	if ( s ) setStyle(s);
+  QStyle *s = QStyleFactory::create(style);
+  if ( s ) setStyle(s);
     }
 #else
     if ( style == "Windows" ) {
-	setStyle( new QWindowsStyle );
+  setStyle( new QWindowsStyle );
     } else if ( style == "QPE" ) {
-	setStyle( new QPEStyle );
+  setStyle( new QPEStyle );
     } else if ( style == "Light" ) {
-	setStyle( new LightStyle );
+  setStyle( new LightStyle );
     }
 #ifndef QT_NO_STYLE_PLATINUM
     else if ( style == "Platinum" ) {
-	setStyle( new QPlatinumStyle );
+  setStyle( new QPlatinumStyle );
     }
 #endif
 #ifndef QT_NO_STYLE_MOTIF
     else if ( style == "Motif" ) {
-	setStyle( new QMotifStyle );
+  setStyle( new QMotifStyle );
     }
 #endif
 #ifndef QT_NO_STYLE_MOTIFPLUS
     else if ( style == "MotifPlus" ) {
-	setStyle( new QMotifPlusStyle );
+  setStyle( new QMotifPlusStyle );
     }
 #endif
 #endif
@@ -1304,17 +1307,17 @@ void QPEApplication::internalSetStyle( const QString &style )
 void QPEApplication::prepareForTermination(bool willrestart)
 {
     if ( willrestart ) {
-	// Draw a big wait icon, the image can be altered in later revisions
-//	QWidget *d = QApplication::desktop();
-	QImage img = Resource::loadImage( "launcher/new_wait" );
-	QPixmap pix;
-	pix.convertFromImage(img.smoothScale(1*img.width(), 1*img.height()));
-	QLabel *lblWait = new QLabel(0, "wait hack!", QWidget::WStyle_Customize |
-				  QWidget::WStyle_NoBorder | QWidget::WStyle_Tool );
-	lblWait->setPixmap( pix );
-	lblWait->setAlignment( QWidget::AlignCenter );
-	lblWait->show();
-	lblWait->showMaximized();
+  // Draw a big wait icon, the image can be altered in later revisions
+//  QWidget *d = QApplication::desktop();
+  QImage img = Resource::loadImage( "launcher/new_wait" );
+  QPixmap pix;
+  pix.convertFromImage(img.smoothScale(1*img.width(), 1*img.height()));
+  QLabel *lblWait = new QLabel(0, "wait hack!", QWidget::WStyle_Customize |
+          QWidget::WStyle_NoBorder | QWidget::WStyle_Tool );
+  lblWait->setPixmap( pix );
+  lblWait->setAlignment( QWidget::AlignCenter );
+  lblWait->show();
+  lblWait->showMaximized();
     }
 #ifndef SINGLE_APP
     { QCopEnvelope envelope("QPE/System", "forceQuit()"); }
@@ -1343,7 +1346,7 @@ static QPtrDict<void>* stylusDict=0;
 static void createDict()
 {
     if ( !stylusDict )
-	stylusDict = new QPtrDict<void>;
+  stylusDict = new QPtrDict<void>;
 }
 
 /*!
@@ -1354,7 +1357,7 @@ static void createDict()
 QPEApplication::StylusMode QPEApplication::stylusOperation( QWidget* w )
 {
     if ( stylusDict )
-	return (StylusMode)(int)stylusDict->find(w);
+  return (StylusMode)(int)stylusDict->find(w);
     return LeftOnly;
 }
 
@@ -1362,9 +1365,9 @@ QPEApplication::StylusMode QPEApplication::stylusOperation( QWidget* w )
     \enum QPEApplication::StylusMode
 
     \value LeftOnly the stylus only generates LeftButton
-			events (the default).
+      events (the default).
     \value RightOnHold the stylus generates RightButton events
-			if the user uses the press-and-hold gesture.
+      if the user uses the press-and-hold gesture.
 
     See setStylusOperation().
 */
@@ -1378,12 +1381,12 @@ void QPEApplication::setStylusOperation( QWidget* w, StylusMode mode )
 {
     createDict();
     if ( mode == LeftOnly ) {
-	stylusDict->remove(w);
-	w->removeEventFilter(qApp);
+  stylusDict->remove(w);
+  w->removeEventFilter(qApp);
     } else {
-	stylusDict->insert(w,(void*)mode);
-	connect(w,SIGNAL(destroyed()),qApp,SLOT(removeSenderFromStylusDict()));
-	w->installEventFilter(qApp);
+  stylusDict->insert(w,(void*)mode);
+  connect(w,SIGNAL(destroyed()),qApp,SLOT(removeSenderFromStylusDict()));
+  w->installEventFilter(qApp);
     }
 }
 
@@ -1394,56 +1397,56 @@ void QPEApplication::setStylusOperation( QWidget* w, StylusMode mode )
 bool QPEApplication::eventFilter( QObject *o, QEvent *e )
 {
     if ( stylusDict && e->type() >= QEvent::MouseButtonPress && e->type() <= QEvent::MouseMove ) {
-	QMouseEvent* me = (QMouseEvent*)e;
-	if ( me->button() == LeftButton ) {
-	    StylusMode mode = (StylusMode)(int)stylusDict->find(o);
-	    switch (mode) {
-	      case RightOnHold:
-		switch ( me->type() ) {
-		  case QEvent::MouseButtonPress:
-		    d->presstimer = startTimer(500); // #### pref.
-		    d->presswidget = (QWidget*)o;
-		    d->presspos = me->pos();
-		    d->rightpressed = FALSE;
-		    break;
-		  case QEvent::MouseButtonRelease:
-		    if ( d->presstimer ) {
-			killTimer(d->presstimer);
-			d->presstimer = 0;
-		    }
-		    if ( d->rightpressed && d->presswidget ) {
-			// Right released
-			postEvent( d->presswidget,
-			    new QMouseEvent( QEvent::MouseButtonRelease, me->pos(),
-				    RightButton, LeftButton+RightButton ) );
-			// Left released, off-widget
-			postEvent( d->presswidget,
-			    new QMouseEvent( QEvent::MouseMove, QPoint(-1,-1),
-				    LeftButton, LeftButton ) );
-			postEvent( d->presswidget,
-			    new QMouseEvent( QEvent::MouseButtonRelease, QPoint(-1,-1),
-				    LeftButton, LeftButton ) );
-			d->rightpressed = FALSE;
-			return TRUE; // don't send the real Left release
-		    }
-		    break;
-		  default:
-		    break;
-		}
-		break;
-	      default:
-		;
-	    }
-	}
+  QMouseEvent* me = (QMouseEvent*)e;
+  if ( me->button() == LeftButton ) {
+      StylusMode mode = (StylusMode)(int)stylusDict->find(o);
+      switch (mode) {
+        case RightOnHold:
+    switch ( me->type() ) {
+      case QEvent::MouseButtonPress:
+        d->presstimer = startTimer(500); // #### pref.
+        d->presswidget = (QWidget*)o;
+        d->presspos = me->pos();
+        d->rightpressed = FALSE;
+        break;
+      case QEvent::MouseButtonRelease:
+        if ( d->presstimer ) {
+      killTimer(d->presstimer);
+      d->presstimer = 0;
+        }
+        if ( d->rightpressed && d->presswidget ) {
+      // Right released
+      postEvent( d->presswidget,
+          new QMouseEvent( QEvent::MouseButtonRelease, me->pos(),
+            RightButton, LeftButton+RightButton ) );
+      // Left released, off-widget
+      postEvent( d->presswidget,
+          new QMouseEvent( QEvent::MouseMove, QPoint(-1,-1),
+            LeftButton, LeftButton ) );
+      postEvent( d->presswidget,
+          new QMouseEvent( QEvent::MouseButtonRelease, QPoint(-1,-1),
+            LeftButton, LeftButton ) );
+      d->rightpressed = FALSE;
+      return TRUE; // don't send the real Left release
+        }
+        break;
+      default:
+        break;
+    }
+    break;
+        default:
+    ;
+      }
+  }
     } else if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
-	QKeyEvent *ke = (QKeyEvent *)e;
-	if ( ke->key() == Key_Enter ) {
-	    if ( o->isA( "QRadioButton" ) || o->isA( "QCheckBox" ) ) {
-		postEvent( o, new QKeyEvent( e->type(), Key_Space, ' ',
-		    ke->state(), " ", ke->isAutoRepeat(), ke->count() ) );
-		return TRUE;
-	    }
-	}
+  QKeyEvent *ke = (QKeyEvent *)e;
+  if ( ke->key() == Key_Enter ) {
+      if ( o->isA( "QRadioButton" ) || o->isA( "QCheckBox" ) ) {
+    postEvent( o, new QKeyEvent( e->type(), Key_Space, ' ',
+        ke->state(), " ", ke->isAutoRepeat(), ke->count() ) );
+    return TRUE;
+      }
+  }
     }
 
     return FALSE;
@@ -1455,13 +1458,13 @@ bool QPEApplication::eventFilter( QObject *o, QEvent *e )
 void QPEApplication::timerEvent( QTimerEvent *e )
 {
     if ( e->timerId() == d->presstimer && d->presswidget ) {
-	// Right pressed
-	postEvent( d->presswidget,
-	    new QMouseEvent( QEvent::MouseButtonPress, d->presspos,
-			RightButton, LeftButton ) );
-	killTimer( d->presstimer );
-	d->presstimer = 0;
-	d->rightpressed = TRUE;
+  // Right pressed
+  postEvent( d->presswidget,
+      new QMouseEvent( QEvent::MouseButtonPress, d->presspos,
+      RightButton, LeftButton ) );
+  killTimer( d->presstimer );
+  d->presstimer = 0;
+  d->rightpressed = TRUE;
     }
 }
 
@@ -1469,7 +1472,7 @@ void QPEApplication::removeSenderFromStylusDict()
 {
     stylusDict->remove((void*)sender());
     if ( d->presswidget == sender() )
-	d->presswidget = 0;
+  d->presswidget = 0;
 }
 
 /*!
@@ -1489,10 +1492,10 @@ void QPEApplication::ungrabKeyboard()
 {
     QPEApplicationData* d = ((QPEApplication*)qApp)->d;
     if ( d->kbgrabber == 2 ) {
-	QCopEnvelope e("QPE/System", "grabKeyboard(QString)" );
-	e << QString::null;
-	d->kbregrab = FALSE;
-	d->kbgrabber = 0;
+  QCopEnvelope e("QPE/System", "grabKeyboard(QString)" );
+  e << QString::null;
+  d->kbregrab = FALSE;
+  d->kbgrabber = 0;
     }
 }
 
@@ -1507,11 +1510,11 @@ void QPEApplication::grabKeyboard()
 {
     QPEApplicationData* d = ((QPEApplication*)qApp)->d;
     if ( qApp->type() == QApplication::GuiServer )
-	d->kbgrabber = 0;
+  d->kbgrabber = 0;
     else {
-	QCopEnvelope e("QPE/System", "grabKeyboard(QString)" );
-	e << d->appName;
-	d->kbgrabber = 2; // me
+  QCopEnvelope e("QPE/System", "grabKeyboard(QString)" );
+  e << d->appName;
+  d->kbgrabber = 2; // me
     }
 }
 
@@ -1522,8 +1525,8 @@ int QPEApplication::exec()
 {
     d->sendQCopQ();
     if ( d->keep_running)
-	//|| d->qpe_main_widget && d->qpe_main_widget->isVisible() )
-	return QApplication::exec();
+  //|| d->qpe_main_widget && d->qpe_main_widget->isVisible() )
+  return QApplication::exec();
 
     {
     QCopEnvelope e("QPE/System", "closing(QString)" );
@@ -1541,7 +1544,7 @@ int QPEApplication::exec()
 void QPEApplication::tryQuit()
 {
     if ( activeModalWidget() || strcmp( argv()[0], "embeddedkonsole") == 0 )
-	return; // Inside modal loop or konsole. Too hard to save state.
+  return; // Inside modal loop or konsole. Too hard to save state.
     {
        QCopEnvelope e("QPE/System", "closing(QString)" );
        e << d->appName;
@@ -1566,9 +1569,9 @@ void QPEApplication::hideOrQuit()
     }
     processEvents();
     if ( d->preloaded && d->qpe_main_widget )
-	d->qpe_main_widget->hide();
+  d->qpe_main_widget->hide();
     else
-	quit();
+  quit();
 }
 
 #if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
@@ -1617,7 +1620,7 @@ extern QRect qt_maxWindowRect;
 void qt_setMaxWindowRect(const QRect& r)
 {
     qt_maxWindowRect = qt_screen->mapFromDevice(r,
-	qt_screen->mapToDevice(QSize(qt_screen->width(),qt_screen->height())));
+  qt_screen->mapToDevice(QSize(qt_screen->width(),qt_screen->height())));
     // Re-resize any maximized windows
     QWidgetList* l = QApplication::topLevelWidgets();
     if ( l ) {
