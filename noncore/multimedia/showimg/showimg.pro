@@ -1,9 +1,10 @@
 TEMPLATE        = app
 CONFIG          += qt warn_on release
 DESTDIR         = $(OPIEDIR)/bin
-HEADERS		= showimg.h
+HEADERS		= showimg.h ImageFileSelector.h
 SOURCES		= main.cpp \
-		  showimg.cpp
+		  showimg.cpp\
+		  ImageFileSelector.cpp
 TARGET          = showimg
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
