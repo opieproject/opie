@@ -83,6 +83,16 @@ int main( int argc, char** argv )
             << "\nUniq: " << dev->uniq()
             << features << "\n"
             << oendl;
+            
+        if ( dev->isHeld( OInputDevice::Key_LEFTSHIFT ) ) 
+            odebug << "Left Shift is being held." << oendl;
+        else odebug << "Left Shift is _not_ being held." << oendl;
+        
+        if ( dev->isHeld( OInputDevice::Button_LEFT ) ) 
+            odebug << "Left Mouse Button is being held." << oendl;
+        else odebug << "Left Mouse Button is _not_ being held." << oendl;
+        
+        odebug << "Global key mask: " << dev->globalKeyMask() << oendl;
     
         ++it;
     }
