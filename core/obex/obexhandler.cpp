@@ -52,11 +52,11 @@ void ObexHandler::irdaMessage( const QCString& msg, const QByteArray& data) {
     QDataStream stream( data, IO_ReadOnly );
     if ( msg == "send(QString,QString,QString)" ) {
         QString name,  desc;
-        stream >> name;
         stream >> desc;
+        stream >> name;
         m_wasRec = (m_receiver != 0 );
         doReceive( false );
-        doSend(desc, name);
+        doSend(name, desc);
     }else if (msg == "receive(int)") {
         int rec;
         stream >> rec;
