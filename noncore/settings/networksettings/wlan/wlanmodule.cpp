@@ -146,7 +146,9 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
         }
 
         if (ifa == 0){
-            qFatal("WLANModule Did not find %s",interface.latin1());
+            qDebug("WLANModule Did not find %s",interface.latin1());
+            qDebug("returning");
+            return;
         }
 
         if (count == 2){
