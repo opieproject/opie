@@ -1,0 +1,14 @@
+-Scale the Image to be 50% of the original one
+-Add pics/zsame
+-Add .pro file
+-Add .applnk file
+-UnComment kdDebug
+-New MainWidget
+-Remove HighScore and KNotify Events
+-Adjust to Stylus Interface
+
+--TODO:
+ -Recognize on the fly changes ( monitor Desktop Widget )
+ 
+ 
+ zecke@handhelds.org

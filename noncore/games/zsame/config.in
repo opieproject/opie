@@ -1,0 +1,4 @@
+  config ZSAME
+    boolean "opie-zsame (a SameGame clone)"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) 
