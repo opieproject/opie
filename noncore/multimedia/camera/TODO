@@ -1,2 +1,6 @@
 - ask before overwriting existing pictures
 - improve video performance by using a seperate thread
+- make command line capturing more sophisticated
+    - add -n <number_of_captures>, 0 for unlimited
+    - add -d <delay_in_seconds_between_captures>
+    - add commands like 'init', 'capture', 'exit' to give more control and to cope with the delay lightning problem

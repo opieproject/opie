@@ -10,7 +10,7 @@
 ----------------------------------------------------
 
 --------
- BUILD 
+ BUILD
 --------
 
 - fix building against X11 again
@@ -40,6 +40,10 @@
 
 - use ethtool IOCTLs (if present)
 
+- gather IPs out of data packets w/ toDS=1
+
+- enable host name lookups, when more than one interface is available
+
 ---------
    UI
 ---------
@@ -54,6 +58,8 @@
 
 - count/display number of wireless networks / APs since last start/stop
 
+- display ip host name lookups
+
 ---------
  FILES
 ---------
@@ -64,9 +70,9 @@
   new network - further beacons just blow up the capture file)
 
 - write wi-scan format like that:
-	# $Creator: Wellenreiter II Version 1.0.2
-	# $Format: wi-scan
-	# Latitude      Longitude       ( SSID )        Type    ( BSSID )       Time (GMT)      [ SNR Sig Noise ]
-	# $DateGMT: 2004-02-07
-	N 41.1008009    W 8.3893034     ( Porceven )    BBS     ( 00:a0:f8:41:91:63 )   22:32:39 (GMT)  [ 21 177 156 ]
+    # $Creator: Wellenreiter II Version 1.0.2
+    # $Format: wi-scan
+    # Latitude      Longitude       ( SSID )        Type    ( BSSID )       Time (GMT)      [ SNR Sig Noise ]
+    # $DateGMT: 2004-02-07
+    N 41.1008009    W 8.3893034     ( Porceven )    BBS     ( 00:a0:f8:41:91:63 )   22:32:39 (GMT)  [ 21 177 156 ]
 
