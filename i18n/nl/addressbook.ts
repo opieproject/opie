@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
-        <translation type="unfinished">Contacten - Mijn persoonlijke gegevens</translation>
+        <translation>Contacten - Mijn persoonlijke gegevens</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -121,11 +121,11 @@ Toch stoppen?</translation>
     </message>
     <message>
         <source>Cards</source>
-        <translation type="unfinished">Kaartjes</translation>
+        <translation>Kaartjes</translation>
     </message>
     <message>
         <source>Card</source>
-        <translation type="unfinished">Kaart</translation>
+        <translation>Kaart</translation>
     </message>
     <message>
         <source>Start Search</source>
@@ -133,7 +133,7 @@ Toch stoppen?</translation>
     </message>
     <message>
         <source>Right file type ?</source>
-        <translation type="unfinished">Juist file type?</translation>
+        <translation>Juist bestandstype?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
@@ -192,7 +192,7 @@ toevoegen voor %1?</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished">Mail</translation>
+        <translation>Mail</translation>
     </message>
     <message>
         <source>Prefer QT-Mail </source>
@@ -263,11 +263,11 @@ is provided free !</source>
     </message>
     <message>
         <source>Click on tab to select one</source>
-        <translation type="unfinished">Klik op tab om te selekteren</translation>
+        <translation>Klik op tab om te selecteren</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>
-        <translation type="unfinished">Opties voor de zoekstijl</translation>
+        <translation>Opties voor de zoekstijl</translation>
     </message>
     <message>
         <source>Search widget expects regular expressions if selected</source>
@@ -307,15 +307,15 @@ is provided free !</source>
     </message>
     <message>
         <source>List of all available attributes</source>
-        <translation type="unfinished">Lijst van alle mogelijke kenmerken</translation>
+        <translation>Lijst van alle mogelijke kenmerken</translation>
     </message>
     <message>
         <source>Add selected attribute from list below to the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg geselecteerd kenmerk toe van onderstaande lijst aan de bovenste lijst </translation>
     </message>
     <message>
         <source>Remove the selected attribute from the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder geselecteerd kenmerk uit de bovenste lijst</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
@@ -390,7 +390,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Home</source>
-        <translation>Priv√©</translation>
+        <translation>Privé</translation>
     </message>
     <message>
         <source>Address</source>
@@ -454,7 +454,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Albania</source>
-        <translation>Albani√´</translation>
+        <translation>Albanië</translation>
     </message>
     <message>
         <source>Algeria</source>
@@ -478,7 +478,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Argentina</source>
-        <translation>Argentini√´</translation>
+        <translation>Argentinië</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -486,7 +486,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Australia</source>
-        <translation>Australi√´</translation>
+        <translation>Australië</translation>
     </message>
     <message>
         <source>Austria</source>
@@ -498,7 +498,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Bahamas</source>
-        <translation>Bahama's</translation>
+        <translation>Bahama&apos;s</translation>
     </message>
     <message>
         <source>Bahrain</source>
@@ -506,11 +506,11 @@ is provided free !</source>
     </message>
     <message>
         <source>Bangladesh</source>
-        <translation type="unfinished">Bangladesh</translation>
+        <translation>Bangladesh</translation>
     </message>
     <message>
         <source>Barbados</source>
-        <translation type="unfinished">Barbados</translation>
+        <translation>Barbados</translation>
     </message>
     <message>
         <source>Belarus</source>
@@ -518,7 +518,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Belgium</source>
-        <translation type="unfinished">Belgi√´</translation>
+        <translation>België</translation>
     </message>
     <message>
         <source>Belize</source>
@@ -530,7 +530,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Bermuda</source>
-        <translation>Bermuda's</translation>
+        <translation>Bermuda&apos;s</translation>
     </message>
     <message>
         <source>Bhutan</source>
@@ -546,7 +546,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Brazil</source>
-        <translation>Brazili√´</translation>
+        <translation>Brazilië</translation>
     </message>
     <message>
         <source>Brunei Darussalam</source>
@@ -578,7 +578,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Chad</source>
-        <translation type="unfinished"></translation>
+        <translation>Chaad</translation>
     </message>
     <message>
         <source>Chile</source>
@@ -586,7 +586,7 @@ is provided free !</source>
     </message>
     <message>
         <source>China</source>
-        <translation type="unfinished">China</translation>
+        <translation>China</translation>
     </message>
     <message>
         <source>Christmas Island</source>
@@ -598,7 +598,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Comoros</source>
-        <translation type="unfinished"></translation>
+        <translation>Comoren</translation>
     </message>
     <message>
         <source>Congo</source>
@@ -606,7 +606,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Cook Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Cook Eiland</translation>
     </message>
     <message>
         <source>Costa Rica</source>
@@ -618,7 +618,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Croatia</source>
-        <translation>Kroati√´</translation>
+        <translation>Kroatië</translation>
     </message>
     <message>
         <source>Cuba</source>
@@ -626,7 +626,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Cyprus</source>
-        <translation type="unfinished"></translation>
+        <translation>Cyprus</translation>
     </message>
     <message>
         <source>Czech Republic</source>
@@ -662,11 +662,11 @@ is provided free !</source>
     </message>
     <message>
         <source>El Salvador</source>
-        <translation type="unfinished">El Salvador</translation>
+        <translation>El Salvador</translation>
     </message>
     <message>
         <source>Equatorial Guinea</source>
-        <translation type="unfinished"></translation>
+        <translation>Equatoriaal Guinee</translation>
     </message>
     <message>
         <source>Eritrea</source>
@@ -678,7 +678,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Ethiopia</source>
-        <translation>Ethiopi√´</translation>
+        <translation>Ethiopië</translation>
     </message>
     <message>
         <source>Falkland Islands</source>
@@ -702,7 +702,7 @@ is provided free !</source>
     </message>
     <message>
         <source>French Polynesia</source>
-        <translation>Frans Polynesi√´</translation>
+        <translation>Frans Polynesië</translation>
     </message>
     <message>
         <source>Gabon</source>
@@ -714,7 +714,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Georgia</source>
-        <translation>Greorgi√´</translation>
+        <translation>Greorgië</translation>
     </message>
     <message>
         <source>Gibraltar</source>
@@ -734,7 +734,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Guam</source>
-        <translation type="unfinished"></translation>
+        <translation>Guam</translation>
     </message>
     <message>
         <source>Guatemala</source>
@@ -750,7 +750,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Haiti</source>
-        <translation>Ha√Øti</translation>
+        <translation>Haïti</translation>
     </message>
     <message>
         <source>Holy See</source>
@@ -778,7 +778,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Indonesia</source>
-        <translation>Indonesi√´</translation>
+        <translation>Indonesië</translation>
     </message>
     <message>
         <source>Ireland</source>
@@ -786,15 +786,15 @@ is provided free !</source>
     </message>
     <message>
         <source>Israel</source>
-        <translation>Isra√´l</translation>
+        <translation>Israël</translation>
     </message>
     <message>
         <source>Italy</source>
-        <translation>Itali√´</translation>
+        <translation>Italië</translation>
     </message>
     <message>
         <source>Jordan</source>
-        <translation>Jordani√´</translation>
+        <translation>Jordanië</translation>
     </message>
     <message>
         <source>Kazakhstan</source>
@@ -822,7 +822,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Lesotho</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesotho</translation>
     </message>
     <message>
         <source>Liberia</source>
@@ -850,39 +850,39 @@ is provided free !</source>
     </message>
     <message>
         <source>Madagascar</source>
-        <translation type="unfinished"></translation>
+        <translation>Madagascar</translation>
     </message>
     <message>
         <source>Malawi</source>
-        <translation type="unfinished"></translation>
+        <translation>Malawi</translation>
     </message>
     <message>
         <source>Malaysia</source>
-        <translation type="unfinished"></translation>
+        <translation>Maleisië</translation>
     </message>
     <message>
         <source>Maldives</source>
-        <translation type="unfinished"></translation>
+        <translation>Malediven</translation>
     </message>
     <message>
         <source>Mali</source>
-        <translation type="unfinished"></translation>
+        <translation>Mali</translation>
     </message>
     <message>
         <source>Malta</source>
-        <translation type="unfinished"></translation>
+        <translation>Malta</translation>
     </message>
     <message>
         <source>Martinique</source>
-        <translation type="unfinished"></translation>
+        <translation>Martinique</translation>
     </message>
     <message>
         <source>Mauritania</source>
-        <translation type="unfinished"></translation>
+        <translation>Mauretanië</translation>
     </message>
     <message>
         <source>Mauritius</source>
-        <translation type="unfinished"></translation>
+        <translation>Mauritius</translation>
     </message>
     <message>
         <source>Mayotte</source>
@@ -890,75 +890,75 @@ is provided free !</source>
     </message>
     <message>
         <source>Mexico</source>
-        <translation type="unfinished"></translation>
+        <translation>Mexico</translation>
     </message>
     <message>
         <source>Micronesia</source>
-        <translation type="unfinished"></translation>
+        <translation>Micronesië</translation>
     </message>
     <message>
         <source>Moldova</source>
-        <translation type="unfinished"></translation>
+        <translation>Moldavië</translation>
     </message>
     <message>
         <source>Monaco</source>
-        <translation type="unfinished"></translation>
+        <translation>Monaco</translation>
     </message>
     <message>
         <source>Mongolia</source>
-        <translation type="unfinished"></translation>
+        <translation>Mongolië</translation>
     </message>
     <message>
         <source>Montserrat</source>
-        <translation type="unfinished"></translation>
+        <translation>Montserrat</translation>
     </message>
     <message>
         <source>Morocco</source>
-        <translation type="unfinished"></translation>
+        <translation>Marokko</translation>
     </message>
     <message>
         <source>Mozambique</source>
-        <translation type="unfinished"></translation>
+        <translation>Mozambique</translation>
     </message>
     <message>
         <source>Myanmar</source>
-        <translation type="unfinished"></translation>
+        <translation>Myanmar</translation>
     </message>
     <message>
         <source>Namibia</source>
-        <translation type="unfinished"></translation>
+        <translation>Namibië</translation>
     </message>
     <message>
         <source>Nauru</source>
-        <translation type="unfinished"></translation>
+        <translation>Nauru</translation>
     </message>
     <message>
         <source>Nepal</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepal</translation>
     </message>
     <message>
         <source>Netherlands</source>
-        <translation type="unfinished"></translation>
+        <translation>Nederland</translation>
     </message>
     <message>
         <source>New Caledonia</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw Caledonië</translation>
     </message>
     <message>
         <source>New Zealand</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nieuw Zeeland</translation>
     </message>
     <message>
         <source>Nicaragua</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicaragua</translation>
     </message>
     <message>
         <source>Niger</source>
-        <translation type="unfinished"></translation>
+        <translation>Niger</translation>
     </message>
     <message>
         <source>Nigeria</source>
-        <translation type="unfinished"></translation>
+        <translation>Nigerië</translation>
     </message>
     <message>
         <source>Niue</source>
@@ -966,11 +966,11 @@ is provided free !</source>
     </message>
     <message>
         <source>Oman</source>
-        <translation type="unfinished"></translation>
+        <translation>Oman</translation>
     </message>
     <message>
         <source>Pakistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakistan</translation>
     </message>
     <message>
         <source>Palau</source>
@@ -978,39 +978,39 @@ is provided free !</source>
     </message>
     <message>
         <source>Panama</source>
-        <translation type="unfinished"></translation>
+        <translation>Panama</translation>
     </message>
     <message>
         <source>Papua New Guinea</source>
-        <translation type="unfinished"></translation>
+        <translation>Papua Nieuw Guinea</translation>
     </message>
     <message>
         <source>Paraguay</source>
-        <translation type="unfinished"></translation>
+        <translation>Paraguay</translation>
     </message>
     <message>
         <source>Peru</source>
-        <translation type="unfinished"></translation>
+        <translation>Peru</translation>
     </message>
     <message>
         <source>Philippines</source>
-        <translation type="unfinished"></translation>
+        <translation>Fillipijnen</translation>
     </message>
     <message>
         <source>Poland</source>
-        <translation type="unfinished"></translation>
+        <translation>Polen</translation>
     </message>
     <message>
         <source>Portugal</source>
-        <translation type="unfinished"></translation>
+        <translation>Portugal</translation>
     </message>
     <message>
         <source>Puerto Rico</source>
-        <translation type="unfinished"></translation>
+        <translation>Puerto Rico</translation>
     </message>
     <message>
         <source>Qatar</source>
-        <translation type="unfinished"></translation>
+        <translation>Quatar</translation>
     </message>
     <message>
         <source>Reunion</source>
@@ -1018,15 +1018,15 @@ is provided free !</source>
     </message>
     <message>
         <source>Romania</source>
-        <translation type="unfinished"></translation>
+        <translation>Roemenië</translation>
     </message>
     <message>
         <source>Russia</source>
-        <translation type="unfinished"></translation>
+        <translation>Rusland</translation>
     </message>
     <message>
         <source>Rwanda</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruanda</translation>
     </message>
     <message>
         <source>Saint Lucia</source>
@@ -1038,83 +1038,83 @@ is provided free !</source>
     </message>
     <message>
         <source>San Marino</source>
-        <translation type="unfinished"></translation>
+        <translation>San Marino</translation>
     </message>
     <message>
         <source>Saudi Arabia</source>
-        <translation type="unfinished"></translation>
+        <translation>Saudi Arabië</translation>
     </message>
     <message>
         <source>Senegal</source>
-        <translation type="unfinished"></translation>
+        <translation>Senegal</translation>
     </message>
     <message>
         <source>Seychelles</source>
-        <translation type="unfinished"></translation>
+        <translation>Seychellen</translation>
     </message>
     <message>
         <source>Sierra Leone</source>
-        <translation type="unfinished"></translation>
+        <translation>Sierra Leone</translation>
     </message>
     <message>
         <source>Singapore</source>
-        <translation type="unfinished"></translation>
+        <translation>Singapore</translation>
     </message>
     <message>
         <source>Slovakia</source>
-        <translation type="unfinished"></translation>
+        <translation>Slowakijë</translation>
     </message>
     <message>
         <source>Slovenia</source>
-        <translation type="unfinished"></translation>
+        <translation>Slovenië</translation>
     </message>
     <message>
         <source>Solomon Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Solomon Eilanden</translation>
     </message>
     <message>
         <source>Somalia</source>
-        <translation type="unfinished"></translation>
+        <translation>Somalië</translation>
     </message>
     <message>
         <source>South Africa</source>
-        <translation type="unfinished"></translation>
+        <translation>Zuid-Afrika</translation>
     </message>
     <message>
         <source>Spain</source>
-        <translation type="unfinished"></translation>
+        <translation>Spanje</translation>
     </message>
     <message>
         <source>Sri Lanka</source>
-        <translation type="unfinished"></translation>
+        <translation>Sri Lanka</translation>
     </message>
     <message>
         <source>St. Helena</source>
-        <translation type="unfinished"></translation>
+        <translation>St. Helena</translation>
     </message>
     <message>
         <source>Sudan</source>
-        <translation type="unfinished"></translation>
+        <translation>Sudan</translation>
     </message>
     <message>
         <source>Suriname</source>
-        <translation type="unfinished"></translation>
+        <translation>Suriname</translation>
     </message>
     <message>
         <source>Swaziland</source>
-        <translation type="unfinished"></translation>
+        <translation>Swaziland</translation>
     </message>
     <message>
         <source>Sweden</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweden</translation>
     </message>
     <message>
         <source>Switzerland</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwitserland</translation>
     </message>
     <message>
         <source>Taiwan</source>
-        <translation type="unfinished"></translation>
+        <translation>Taiwan</translation>
     </message>
     <message>
         <source>Tajikistan</source>
@@ -1122,35 +1122,35 @@ is provided free !</source>
     </message>
     <message>
         <source>Tanzania</source>
-        <translation type="unfinished"></translation>
+        <translation>Tanzania</translation>
     </message>
     <message>
         <source>Thailand</source>
-        <translation type="unfinished"></translation>
+        <translation>Thailand</translation>
     </message>
     <message>
         <source>Togo</source>
-        <translation type="unfinished"></translation>
+        <translation>Togo</translation>
     </message>
     <message>
         <source>Tokelau</source>
-        <translation type="unfinished"></translation>
+        <translation>Tokelau</translation>
     </message>
     <message>
         <source>Tonga</source>
-        <translation type="unfinished"></translation>
+        <translation>Tonga</translation>
     </message>
     <message>
         <source>Tunisia</source>
-        <translation type="unfinished"></translation>
+        <translation>Tunesië</translation>
     </message>
     <message>
         <source>Turkey</source>
-        <translation type="unfinished"></translation>
+        <translation>Turkije</translation>
     </message>
     <message>
         <source>Turkmenistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Turkmenistan</translation>
     </message>
     <message>
         <source>Tuvalu</source>
@@ -1158,19 +1158,19 @@ is provided free !</source>
     </message>
     <message>
         <source>Uganda</source>
-        <translation type="unfinished"></translation>
+        <translation>Uganda</translation>
     </message>
     <message>
         <source>Ukraine</source>
-        <translation type="unfinished"></translation>
+        <translation>Oekraine</translation>
     </message>
     <message>
         <source>Uruguay</source>
-        <translation type="unfinished"></translation>
+        <translation>Uruguay</translation>
     </message>
     <message>
         <source>Uzbekistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Oezbekistan</translation>
     </message>
     <message>
         <source>Vanuatu</source>
@@ -1178,7 +1178,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Venezuela</source>
-        <translation type="unfinished"></translation>
+        <translation>Venezuela</translation>
     </message>
     <message>
         <source>Virgin Islands</source>
@@ -1186,47 +1186,47 @@ is provided free !</source>
     </message>
     <message>
         <source>Western Sahara</source>
-        <translation type="unfinished"></translation>
+        <translation>Westelijke Sahara</translation>
     </message>
     <message>
         <source>Yemen</source>
-        <translation type="unfinished"></translation>
+        <translation>Jemen</translation>
     </message>
     <message>
         <source>Yugoslavia</source>
-        <translation type="unfinished"></translation>
+        <translation>Joegoslavië</translation>
     </message>
     <message>
         <source>Zambia</source>
-        <translation type="unfinished"></translation>
+        <translation>Zambia</translation>
     </message>
     <message>
         <source>Zimbabwe</source>
-        <translation type="unfinished"></translation>
+        <translation>Zimbabwe</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Verjaardag</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Jaardag</translation>
     </message>
     <message>
         <source>Kuwait</source>
-        <translation type="unfinished"></translation>
+        <translation>Koeweit</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekend</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Afghanistan</source>
-        <translation type="unfinished"></translation>
+        <translation>Afghanistan</translation>
     </message>
     <message>
         <source>Antarctica</source>
@@ -1234,35 +1234,35 @@ is provided free !</source>
     </message>
     <message>
         <source>Armenia</source>
-        <translation type="unfinished"></translation>
+        <translation>Armenië</translation>
     </message>
     <message>
         <source>Bolivia</source>
-        <translation type="unfinished"></translation>
+        <translation>Bolivia</translation>
     </message>
     <message>
         <source>Cameroon</source>
-        <translation type="unfinished"></translation>
+        <translation>Kameroen</translation>
     </message>
     <message>
         <source>Ghana</source>
-        <translation type="unfinished"></translation>
+        <translation>Ghana</translation>
     </message>
     <message>
         <source>Guadeloupe</source>
-        <translation type="unfinished"></translation>
+        <translation>Guadeloupe</translation>
     </message>
     <message>
         <source>Guinea-Bissau</source>
-        <translation type="unfinished"></translation>
+        <translation>Guinee-Bissau</translation>
     </message>
     <message>
         <source>Jamaica</source>
-        <translation type="unfinished"></translation>
+        <translation>Jamaica</translation>
     </message>
     <message>
         <source>Kiribati</source>
-        <translation type="unfinished"></translation>
+        <translation>Kiribati</translation>
     </message>
     <message>
         <source>Kyrgyzstan</source>
@@ -1270,15 +1270,15 @@ is provided free !</source>
     </message>
     <message>
         <source>Palestinian Sovereign Areas</source>
-        <translation type="unfinished"></translation>
+        <translation>Palestijnse autonome gebieden</translation>
     </message>
     <message>
         <source>Pitcairn Islands</source>
-        <translation type="unfinished"></translation>
+        <translation>Pitcairn Eilanden</translation>
     </message>
     <message>
         <source>Vietnam</source>
-        <translation type="unfinished"></translation>
+        <translation>Vietnam</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
@@ -1321,7 +1321,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished">Mobiel werk</translation>
+        <translation>Mobiel werk</translation>
     </message>
     <message>
         <source>Default Email</source>
@@ -1333,15 +1333,15 @@ is provided free !</source>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished">Telefoon priv√©</translation>
+        <translation>Telefoon prive</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished">Fax priv√©</translation>
+        <translation>Fax prive</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Mobiel priv√©</translation>
+        <translation>Mobiel prive</translation>
     </message>
     <message>
         <source>Office</source>
@@ -1365,7 +1365,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished">Geslacht</translation>
+        <translation>Geslacht</translation>
     </message>
     <message>
         <source>Birthday</source>
@@ -1393,7 +1393,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished">Tussenvoegsel</translation>
+        <translation>Tussenvoegsel</translation>
     </message>
     <message>
         <source>Last Name</source>
@@ -1421,7 +1421,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished">Bedrijf adres</translation>
+        <translation>Bedrijf adres</translation>
     </message>
     <message>
         <source>Business City</source>
@@ -1449,27 +1449,27 @@ is provided free !</source>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Priv√© adres</translation>
+        <translation>Prive adres</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Priv√© woonplaats</translation>
+        <translation>Prive woonplaats</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Priv√© provincie</translation>
+        <translation>Prive provincie</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Priv√© postcode</translation>
+        <translation>Prive postcode</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Priv√© land</translation>
+        <translation>Prive land</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Priv√© website</translation>
+        <translation>Prive website</translation>
     </message>
     <message>
         <source>Notes</source>
