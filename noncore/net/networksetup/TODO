@@ -1,4 +1,9 @@
-Make sure the C code in wextensions is clean.
+CLEAN UP
+
+Fix Profiles
+
+Write dns script
+
 
 WLAN needs to be re-written to not use Config
 WHERE Is DHCP info stored???
