@@ -529,9 +529,6 @@ void ContactEditor::slotChooser3Change( const QString &textChanged ) {
 
 void ContactEditor::slotAddressChange( const QString &textChanged ) {
 
-	qDebug((*slBusinessAddress)[0]);
-	qDebug((*slHomeAddress)[0]);
-	qDebug(textChanged);
 	if ( cmbAddress->currentItem() == 0 ) {
 		(*slBusinessAddress)[0] = textChanged;
 	} else {
@@ -540,10 +537,6 @@ void ContactEditor::slotAddressChange( const QString &textChanged ) {
 }
 
 void ContactEditor::slotAddress2Change( const QString &textChanged ) {
-
-	qDebug((*slBusinessAddress)[1]);
-	qDebug((*slHomeAddress)[1]);
-	qDebug(textChanged);
 
 	if ( cmbAddress->currentItem() == 0 ) {
 		(*slBusinessAddress)[1] = textChanged;
@@ -554,9 +547,6 @@ void ContactEditor::slotAddress2Change( const QString &textChanged ) {
 
 void ContactEditor::slotPOBoxChange( const QString &textChanged ) {
 
-	qDebug((*slBusinessAddress)[2]);
-	qDebug((*slHomeAddress)[2]);
-	qDebug(textChanged);
 	if ( cmbAddress->currentItem() == 0 ) {
 		(*slBusinessAddress)[2] = textChanged;
 	} else {
@@ -566,9 +556,6 @@ void ContactEditor::slotPOBoxChange( const QString &textChanged ) {
 
 void ContactEditor::slotCityChange( const QString &textChanged ) {
 
-	qDebug((*slBusinessAddress)[3]);
-	qDebug((*slHomeAddress)[3]);
-	qDebug(textChanged);
 	if ( cmbAddress->currentItem() == 0 ) {
 		(*slBusinessAddress)[3] = textChanged;
 	} else {
@@ -579,9 +566,6 @@ void ContactEditor::slotCityChange( const QString &textChanged ) {
 void ContactEditor::slotStateChange( const QString &textChanged ) {
 
 	
-	qDebug((*slBusinessAddress)[4]);
-	qDebug((*slHomeAddress)[4]);
-	qDebug(textChanged);
 	if ( cmbAddress->currentItem() == 0 ) {
 		(*slBusinessAddress)[4] = textChanged;
 	} else {
@@ -591,9 +575,6 @@ void ContactEditor::slotStateChange( const QString &textChanged ) {
 
 void ContactEditor::slotZipChange( const QString &textChanged ) {
 
-	qDebug((*slBusinessAddress)[5]);
-	qDebug((*slHomeAddress)[5]);
-	qDebug(textChanged);
 	if ( cmbAddress->currentItem() == 0 ) {
 		(*slBusinessAddress)[5] = textChanged;
 	} else {
@@ -603,9 +584,6 @@ void ContactEditor::slotZipChange( const QString &textChanged ) {
 
 void ContactEditor::slotCountryChange( const QString &textChanged ) {
 
-	qDebug((*slBusinessAddress)[6]);
-	qDebug((*slHomeAddress)[6]);
-	qDebug(textChanged);
 	if ( cmbAddress->currentItem() == 0 ) {
 		(*slBusinessAddress)[6] = textChanged;
 	} else {
@@ -632,16 +610,6 @@ void ContactEditor::slotCmbChooser3Change( int index ) {
 }
 
 void ContactEditor::slotAddressTypeChange( int index ) {
-
-	qDebug((*slBusinessAddress)[0]);
-	qDebug((*slBusinessAddress)[1]);
-	qDebug((*slBusinessAddress)[2]);
-qDebug((*slBusinessAddress)[3]);
-qDebug((*slBusinessAddress)[4]);
-qDebug((*slBusinessAddress)[5]);
-qDebug((*slBusinessAddress)[6]);
-
-
 
 	if ( index == 0 ) {
 
@@ -1002,7 +970,7 @@ void ContactEditor::setEntry( const Contact &entry ) {
 */
 	if (hasCity) {
 		(*slHomeAddress)[3] = ent.homeCity();
-		(*slBusinessAddress)[3] = ent.homeCity();
+		(*slBusinessAddress)[3] = ent.businessCity();
 	}
 
 	if (hasState) {
