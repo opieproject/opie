@@ -29,7 +29,7 @@ class QPopupMenu;
 
 class TinyKate : public QMainWindow
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     TinyKate( QWidget *parent=0, const char *name=0, WFlags f = 0);
     ~TinyKate( );
@@ -38,7 +38,7 @@ public:
 
 public slots:
     void slotNew();
- void setDocument(const QString& fileref);
+    void setDocument(const QString& fileref);
 
 protected slots:
     void slotOpen();
