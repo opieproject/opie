@@ -2,7 +2,11 @@
 #define NETCONF_MODULE_H
 
 #include <qobject.h>
+#if QT_VERSION < 300
 #include <qlist.h>
+#else
+#include <qptrlist.h>
+#endif
 #include <qmap.h>
 #include "interface.h"
 

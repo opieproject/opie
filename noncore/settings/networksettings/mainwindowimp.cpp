@@ -12,25 +12,41 @@
 #include <qheader.h>
 #include <qlabel.h>
 
-#include <qmainwindow.h>
 #include <qmessagebox.h>
 
-#include <qpe/config.h>
-#include <qpe/qlibrary.h>
-#include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
+#ifdef QTE_VERSION 
+ #include <qpe/config.h>
+ #include <qpe/qlibrary.h>
+ #include <qpe/resource.h>
+ #include <qpe/qpeapplication.h>
+ #define QLibrary
+#else
+ #include <klibloader.h>
+ #define QLibrary KLibrary
+ #include <kconfig.h>
+ #define Config KConfig
+ #include <kapplication.h>
+ #include <kstandarddirs.h>
+ #include <kiconloader.h>
+ #define showMaximized show
+#endif
 
+#if QT_VERSION < 300
 #include <qlist.h>
+#else
+#include <qptrlist.h>
+#endif
 #include <qdir.h>
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qregexp.h>
 
 #include <net/if.h>
 #include <sys/ioctl.h>
 
 #define DEFAULT_SCHEME "/var/lib/pcmcia/scheme"
 
-MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name, true), advancedUserMode(false), scheme(DEFAULT_SCHEME){
+MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name), advancedUserMode(true), scheme(DEFAULT_SCHEME){
   connect(addConnectionButton, SIGNAL(clicked()), this, SLOT(addClicked()));
   connect(removeConnectionButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
   connect(informationConnectionButton, SIGNAL(clicked()), this, SLOT(informationClicked()));
@@ -42,7 +58,13 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
 
   connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));  
   // Load connections.
-  loadModules(QPEApplication::qpeDir() + "/plugins/networksettings");
+  // /usr/local/kde/lib/libinterfaces.la
+#ifdef QTE_VERSION 
+  loadModules(QPEApplication::kdeDir() + "/plugins/networksettings");
+#else
+  loader = KLibLoader::self();
+  loadModules(QString("/usr/")+KStandardDirs::kde_default("lib"));
+#endif
   getAllInterfaces();
   
   Interfaces i;
@@ -108,6 +130,7 @@ MainWindowImp::~MainWindowImp(){
       delete iIt.key();
   }
   
+#ifdef QTE_VERSION
   // Delete Modules and Libraries
   QMap<Module*, QLibrary*>::Iterator it;
   for( it = libraries.begin(); it != libraries.end(); ++it ){
@@ -116,6 +139,9 @@ MainWindowImp::~MainWindowImp(){
     // What fucking shit this is.
     //delete it.data();
   }
+#else
+  // klibloader automaticly deletes the libraries for us...
+#endif
 }
 
 /**
@@ -190,7 +216,9 @@ void MainWindowImp::getAllInterfaces(){
  *  and attempts to load them
  */ 
 void MainWindowImp::loadModules(const QString &path){
-  //qDebug(path.latin1());
+#ifdef DEBUG
+  qDebug("MainWindowImp::loadModules: %s", path.latin1());
+#endif
   QDir d(path);
   if(!d.exists())
     return;
@@ -201,7 +229,7 @@ void MainWindowImp::loadModules(const QString &path){
   QFileInfoListIterator it( *list );
   QFileInfo *fi;
   while ( (fi=it.current()) ) {
-    if(fi->fileName().contains(".so")){
+    if(fi->fileName().contains(".so") && fi->fileName().contains("networksettings_")){
       loadPlugin(path + "/" + fi->fileName());
     }
     ++it;
@@ -215,19 +243,25 @@ void MainWindowImp::loadModules(const QString &path){
  * @return pointer to the function with name resolveString or NULL
  */ 
 Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &resolveString){
-  //qDebug(QString("MainWindowImp::loadPlugin: %1").arg(pluginFileName).latin1());
+#ifdef DEBUG
+  qDebug("MainWindowImp::loadPlugin: %s", pluginFileName.latin1());
+#endif
+#ifdef QTE_VERSION 
   QLibrary *lib = new QLibrary(pluginFileName);
   void *functionPointer = lib->resolve(resolveString);
   if( !functionPointer ){
-    qDebug(QString("MainWindowImp: File: %1 is not a plugin, but though was.").arg(pluginFileName).latin1());
+#ifdef DEBUG
+  qDebug("MainWindowImp::loadPlugin: File: %s is not a plugin, but though was.", pluginFileName.latin1());
+#endif
     delete lib;
     return NULL;
   }
-  
   // Try to get an object.
   Module *object = ((Module* (*)()) functionPointer)();
   if(object == NULL){
+#ifdef DEBUG
     qDebug("MainWindowImp: Couldn't create object, but did load library!");
+#endif
     delete lib;
     return NULL;
   }
@@ -235,6 +269,30 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
   // Store for deletion later
   libraries.insert(object, lib);
   return object;
+
+#else
+  QLibrary *lib = loader->library(pluginFileName);
+  if( !lib || !lib->hasSymbol(resolveString) ){
+#ifdef DEBUG
+    qDebug(QString("MainWindowImp::loadPlugin: File: %1 is not a plugin, but though was.").arg(pluginFileName).latin1());
+#endif
+    return NULL;
+  }
+  // Try to get an object.
+  Module *object = ((Module* (*)()) lib->symbol(resolveString))();
+  if(object == NULL){
+#ifdef DEBUG
+    qDebug("MainWindowImp: Couldn't create object, but did load library!");
+#endif
+    return NULL;
+  }
+#ifdef DEBUG
+  qDebug("MainWindowImp::loadPlugin:: Found object, storing.");
+#endif
+  // Store for deletion later
+  libraries.insert(object, lib);
+  return object;
+#endif
 }
 
 /**
@@ -324,7 +382,7 @@ void MainWindowImp::configureClicked(){
     }
   }
   
-  InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(0, "InterfaceSetupImp", i, true, Qt::WDestructiveClose);
+  InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(this, "InterfaceSetupImp", i, true, Qt::WShowModal | Qt::WDestructiveClose | Qt::WType_Dialog);
   QString currentProfileText = currentProfileLabel->text();
   if(currentProfileText.upper() == "ALL");
     currentProfileText = "";
@@ -354,11 +412,14 @@ void MainWindowImp::informationClicked(){
     QWidget *moduleInformation = i->getModuleOwner()->information(i);
     if(moduleInformation != NULL){
       moduleInformation->showMaximized();
+#ifdef DEBUG
+      qDebug("MainWindowImp::informationClicked:: Module owner has created, we showed.");
+#endif
       return;
     }
-  }  
-  InterfaceInformationImp information(0, "InterfaceSetupImp", i);
-  information.showMaximized();
+  } 
+  InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WShowModal | Qt::WDestructiveClose | Qt::WType_Dialog);
+  information->showMaximized();
 }
 
 /**
@@ -389,8 +450,12 @@ void MainWindowImp::updateInterface(Interface *i){
     item = items[i];
  
   // Update the icons and information 
+#ifdef QTE_VERSION
   item->setPixmap(0, (Resource::loadPixmap(i->getStatus() ? "up": "down")));
- 
+#else
+  item->setPixmap(0, (SmallIcon(i->getStatus() ? "up": "down")));
+#endif
+  
   QString typeName = "lan";
   if(i->getHardwareName().contains("Local Loopback"))
     typeName = "lo";
@@ -407,7 +472,11 @@ void MainWindowImp::updateInterface(Interface *i){
   if(i->getModuleOwner() != NULL)
     typeName = i->getModuleOwner()->getPixmapName(i);
   
+#ifdef QTE_VERSION
   item->setPixmap(1, (Resource::loadPixmap(QString("networksettings/") + typeName)));
+#else
+  item->setPixmap(1, (SmallIcon(typeName)));
+#endif
   item->setText(2, i->getHardwareName());
   item->setText(3, QString("(%1)").arg(i->getInterfaceName()));
   item->setText(4, (i->getStatus()) ? i->getIp() : QString(""));

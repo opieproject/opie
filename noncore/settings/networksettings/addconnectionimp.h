@@ -3,7 +3,6 @@
 
 #include "addconnection.h"
 #include <qmap.h>
-#include <qlist.h>
 
 class QListViewItem;
 

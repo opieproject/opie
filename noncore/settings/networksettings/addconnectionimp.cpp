@@ -1,6 +1,10 @@
 #include "addconnectionimp.h"
 #include <qlistview.h>
+#if QT_VERSION < 300
 #include <qlist.h>
+#else
+#include <qptrlist.h>
+#endif
 #include <qlabel.h>
 #include <qheader.h>
 

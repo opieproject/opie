@@ -9,6 +9,14 @@ class Module;
 class Interface;
 class QLibrary;
 class KProcess;
+#ifdef QTE_VERSION 
+class QLibrary;
+#else
+class KLibrary;
+class KLibLoader;
+#define QLibrary KLibrary
+#endif
+
 
 class MainWindowImp : public MainWindow {
   Q_OBJECT
@@ -50,6 +58,9 @@ private:
 
   bool advancedUserMode;
   QString scheme;
+#ifndef QTE_VERSION
+  KLibLoader *loader;
+#endif
 };
 
 #endif
