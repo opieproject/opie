@@ -50,7 +50,7 @@ public slots:
 signals:
     void showDate(int y, int m, int d);
     void addEvent(const QDateTime &start, const QDateTime &stop,
-		  const QString &str);
+		  const QString &str, const QString &location);
 private:
     QDate date;
 };
@@ -82,7 +82,7 @@ signals:
     void editEvent(const Event &e);
     void showDate(int y, int m, int d);
     void addEvent(const QDateTime &start, const QDateTime &stop,
-		  const QString &str);
+		  const QString &str, const QString &location);
 private:
     bool onMonday;
 protected slots:
@@ -101,7 +101,7 @@ signals:
     void editEvent(const Event &e);
     void showDate(int y, int m, int d);
     void addEvent(const QDateTime &start, const QDateTime &stop,
-		  const QString &str);
+		  const QString &str, const QString &location);
 };
 
 class DateBookWeekLst : public QWidget 
@@ -129,7 +129,7 @@ protected slots:
 signals:
     void showDate(int y, int m, int d);
     void addEvent(const QDateTime &start, const QDateTime &stop, 
-		  const QString &str);
+		  const QString &str, const QString &location);
     void editEvent(const Event &e);
 
 private:
