@@ -243,15 +243,12 @@ OFileSelectorItem::OFileSelectorItem( QListView* view, const QPixmap& pixmap,
                                       const QString& path, const QString& date,
                                       const QString& size, const QString& dir,
                                       bool isLocked, bool isDir )
-        : QListViewItem( view )
+        : QListViewItem( view ), m_dir(dir), m_isDir(isDir), m_locked(isLocked)
 {
     setPixmap(0, pixmap );
     setText(1, path );
     setText(2, size );
     setText(3, date );
-    m_isDir = isDir;
-    m_dir = dir;
-    m_locked = isLocked;
 }
 
 OFileSelectorItem::~OFileSelectorItem()
@@ -281,6 +278,11 @@ QString OFileSelectorItem::path()const
 QString OFileSelectorItem::key( int id, bool )const
 {
     QString ke;
+    
+    /*
+     * id = 0 ||id == 1 : Sort By Name but Directories at Top
+     * id = 2           : Sort By Size: Prepend '0' to the key
+     */
     if( id == 0 || id == 1 )
     { // name
         if( m_isDir )
@@ -294,8 +296,9 @@ QString OFileSelectorItem::key( int id, bool )const
             ke.append( text(1) );
         }
         return ke;
-    }
-    else
+    }else if(id == 2) {
+	return text(2).rightJustify(20, '0');
+    }else
         return text( id );
 
 }

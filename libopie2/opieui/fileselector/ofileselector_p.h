@@ -137,9 +137,9 @@ public:
     QString key(int id, bool )const;
 
 private:
-    bool m_locked : 1;
-    bool m_isDir    : 1;
     QString m_dir;
+    bool m_isDir  : 1;
+    bool m_locked : 1;
 };
 
 class OFileViewFileListView : public QWidget
