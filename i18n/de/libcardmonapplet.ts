@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CardMonitor</name>
     <message>
@@ -31,11 +32,11 @@
     </message>
     <message>
         <source>New card: SD/MMC</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Karte: SD / MMC</translation>
     </message>
     <message>
         <source>Ejected: SD/MMC</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgeworfen: SD / MMC</translation>
     </message>
 </context>
 </TS>

@@ -211,11 +211,11 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>Auto Mute</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Stereo Channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo Kanäle</translation>
     </message>
 </context>
 </TS>

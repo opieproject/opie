@@ -100,7 +100,7 @@ Signal beendet: %1</translation>
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Willkommen zu OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</translation>
     </message>
 </context>
 </TS>

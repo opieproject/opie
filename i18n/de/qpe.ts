@@ -71,11 +71,12 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clicken Sie das Fadenkreuz genau 
+mittig um das Display zu kalibrieren.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Willkommen zu Opie</translation>
     </message>
 </context>
 <context>
@@ -203,51 +204,51 @@ accurately to calibrate your screen.</source>
     <name>MediumMountSetting::MediumMountWidget</name>
     <message>
         <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichermedium konfigurieren. Die Änderungen werden erst nach Beeden dieser Anwendung und Auswerfen der Karte aktiv.</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation type="unfinished"></translation>
+        <translation>Medientypen</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilder</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Limit search to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche begrenzen auf:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Scan whole media</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganzes Medium scannen</translation>
     </message>
     <message>
         <source>Always check this medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Medium immer überprüfen</translation>
     </message>
 </context>
 <context>

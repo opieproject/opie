@@ -378,10 +378,6 @@ shows the list of dirs and files</source>
 
 Zeigt die Liste der Verzeichnisse und Dateien</translation>
     </message>
-    <message>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ScQtFileEditDlg</name>
@@ -559,159 +555,159 @@ ZSafe wird sich jetzt beenden.</translation>
     </message>
     <message>
         <source>Do you want to delete?</source>
-        <translation type="unfinished">Wollen Sie wirklich löschen?</translation>
+        <translation>Wollen Sie wirklich löschen?</translation>
     </message>
     <message>
         <source>D&amp;on&apos;t Delete</source>
-        <translation type="unfinished">&amp;Nicht löschen</translation>
+        <translation>&amp;Nicht löschen</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation type="unfinished">Eintrag ändern</translation>
+        <translation>Eintrag ändern</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Benutzername</translation>
+        <translation>Benutzername</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Passwort</translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation type="unfinished">Neuer Eintrag</translation>
+        <translation>Neuer Eintrag</translation>
     </message>
     <message>
         <source>Entry name must be different
 from the category name.</source>
-        <translation type="unfinished">Die Namen der Einträge
+        <translation>Die Namen der Einträge
 müssen sich von der
 Kategorie unterscheiden.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Suchen</translation>
+        <translation>Suchen</translation>
     </message>
     <message>
         <source>Entry not found</source>
-        <translation type="unfinished">Eintrag nicht gefunden</translation>
+        <translation>Eintrag nicht gefunden</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Could not remove text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht löschen.</translation>
+        <translation>Konnte Textdatei nicht löschen.</translation>
     </message>
     <message>
         <source>Could not export to text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht exportieren.</translation>
+        <translation>Konnte Textdatei nicht exportieren.</translation>
     </message>
     <message>
         <source>Could not import text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht importieren.</translation>
+        <translation>Konnte Textdatei nicht importieren.</translation>
     </message>
     <message>
         <source>Enter Password</source>
-        <translation type="unfinished">Passwort eingeben</translation>
+        <translation>Passwort eingeben</translation>
     </message>
     <message>
         <source>Wrong password.
 
 ZSafe will now exit.</source>
-        <translation type="unfinished">Falsches Passwort
+        <translation>Falsches Passwort
 
 ZSafe wird sich jetzt beenden.</translation>
     </message>
     <message>
         <source>Wrong password.
 Enter again?</source>
-        <translation type="unfinished">Falsches Passwort.
+        <translation>Falsches Passwort.
 Neu eingeben?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;Ja</translation>
+        <translation>&amp;Ja</translation>
     </message>
     <message>
         <source>&amp;No.</source>
-        <translation type="unfinished">&amp;Nein.</translation>
+        <translation>&amp;Nein.</translation>
     </message>
     <message>
         <source>Empty document or
 wrong password.
 Continue?</source>
-        <translation type="unfinished">Leeres Dokument oder
+        <translation>Leeres Dokument oder
 falsches Passwort.
 Fortfahren?</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished">&amp;Nein</translation>
+        <translation>&amp;Nein</translation>
     </message>
     <message>
         <source>&amp;Yes.</source>
-        <translation type="unfinished">&amp;Ja.</translation>
+        <translation>&amp;Ja.</translation>
     </message>
     <message>
         <source>Password is empty.
 Please enter again.</source>
-        <translation type="unfinished">Das Passwort ist leer.
+        <translation>Das Passwort ist leer.
 Bitte nochmals eingeben.</translation>
     </message>
     <message>
         <source>Reenter Password</source>
-        <translation type="unfinished">Passwort nochmals eingeben</translation>
+        <translation>Passwort nochmals eingeben</translation>
     </message>
     <message>
         <source>Passwords must be identical.
 Please enter again.</source>
-        <translation type="unfinished">Die Passwörter müssen
+        <translation>Die Passwörter müssen
 gleich sein. Bitte nochmals
 Passwort eingeben.</translation>
     </message>
     <message>
         <source>Password file saved.</source>
-        <translation type="unfinished">Passwort-Datei gesichert.</translation>
+        <translation>Passwort-Datei gesichert.</translation>
     </message>
     <message>
         <source>Do you want to save
 before exiting?</source>
-        <translation type="unfinished">Wollen Sie vor dem Beenden
+        <translation>Wollen Sie vor dem Beenden
 die Daten speichern?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Sichern</translation>
+        <translation>&amp;Sichern</translation>
     </message>
     <message>
         <source>S&amp;ave with
 new
 password</source>
-        <translation type="unfinished">Mit neuem
+        <translation>Mit neuem
 &amp;Passwort
 sichern</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation type="unfinished">&amp;Nicht sichern</translation>
+        <translation>&amp;Nicht sichern</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Kategorie</translation>
+        <translation>Kategorie</translation>
     </message>
     <message>
         <source>Wait dialog</source>
-        <translation type="unfinished">Bitte warten</translation>
+        <translation>Bitte warten</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished">Suche nach Symbolen...</translation>
+        <translation>Suche nach Symbolen...</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="unfinished">Zaurus Passwort Manager&lt;br&gt;</translation>
+        <translation>Zaurus Passwort Manager&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.0.1ern&lt;br&gt;</source>
@@ -719,11 +715,11 @@ sichern</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="unfinished">von Carsten Schneider&lt;br&gt;</translation>
+        <translation>von Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="unfinished">Übersetzungen von Robert Ernst&lt;br&gt;</translation>
+        <translation>Übersetzungen von Robert Ernst&lt;br&gt;</translation>
     </message>
     <message>
         <source>&amp;New document</source>
@@ -739,15 +735,15 @@ sichern</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation type="unfinished">Erzeuge neue ZSafe Datei</translation>
+        <translation>Erzeuge neue ZSafe Datei</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
-        <translation type="unfinished">Öffne ZSafe Datei</translation>
+        <translation>Öffne ZSafe Datei</translation>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation type="unfinished">Speichere ZSafe Datei als..</translation>
+        <translation>Speichere ZSafe Datei als..</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.0&lt;br&gt;</source>
@@ -758,82 +754,90 @@ sichern</translation>
 .../Documents/application
 
 ZSafe will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen von
+../Documents/application
+
+ZSafe wird beendet.
+</translation>
     </message>
     <message>
         <source>Can&apos;t create directory
 ...//Documents/application/zsafe
 
 ZSafe will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen von
+..//Documents/application/zsafe
+
+ZSafe wird beendet.
+</translation>
     </message>
     <message>
         <source>New entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuer Eintrag</translation>
     </message>
     <message>
         <source>Edit category or entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie oder Eintrag bearbeiten</translation>
     </message>
     <message>
         <source>Delete category or entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie oder Eintrag löschen</translation>
     </message>
     <message>
         <source>Find entry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source></source>
-        <translation type="unfinished"></translation>
+        <translation>Eintrag finden</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <source>Remove text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Textdatei entfernen</translation>
     </message>
     <message>
         <source>No document defined.
 You have to create a new document</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Dokument angegeben.
+Sie müssen erst ein neues
+Dokument erstellen</translation>
     </message>
     <message>
         <source>Export text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Textdatei exportiren</translation>
     </message>
     <message>
         <source>Import text file</source>
-        <translation type="unfinished"></translation>
+        <translation>Textdatei importieren</translation>
     </message>
     <message>
         <source>Do you want to save </source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie speichern</translation>
     </message>
     <message>
         <source>
 before continuing?</source>
-        <translation type="unfinished"></translation>
+        <translation>vor dem Weitermachen?</translation>
     </message>
     <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nun müssen sie
+ein Passwort eingeben
+für das neue Dokument.</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation type="unfinished">ZSafe Version 2.1.2&lt;br&gt;</translation>
+        <translation>ZSafe Version 2.1.2&lt;br&gt;</translation>
     </message>
 </context>
 </TS>

@@ -305,7 +305,7 @@ Gerät erhalten.</translation>
     <name>SyncBase</name>
     <message>
         <source>SyncBase</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Sync</source>

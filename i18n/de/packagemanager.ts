@@ -22,43 +22,43 @@
     <name>FilterDlg</name>
     <message>
         <source>All</source>
-        <translation type="unfinished">Alle</translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Installiert</translation>
     </message>
     <message>
         <source>Not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht installiert</translation>
     </message>
     <message>
         <source>Updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisiert</translation>
     </message>
     <message>
         <source>Filter packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakete filtern</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie:</translation>
     </message>
     <message>
         <source>Names containing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Name enthält:</translation>
     </message>
     <message>
         <source>With the status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit Status:</translation>
     </message>
     <message>
         <source>Available from the following server:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verfügbar von folgendem Server:</translation>
     </message>
     <message>
         <source>Installed on device at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Installiert auf:</translation>
     </message>
 </context>
 <context>
@@ -76,76 +76,77 @@
     <name>InstallDlg</name>
     <message>
         <source>Destination</source>
-        <translation type="unfinished">Ziel</translation>
+        <translation>Ziel</translation>
     </message>
     <message>
         <source>Space Avail</source>
-        <translation type="unfinished">Verf. Speicher</translation>
+        <translation>Verf. Speicher</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished">Ausgabe</translation>
+        <translation>Ausgabe</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Starten</translation>
+        <translation>Starten</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Optionen</translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>Packages to </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pakete zum Installieren</translation>
     </message>
     <message>
         <source>install</source>
-        <translation type="unfinished"></translation>
+        <translation>Installieren</translation>
     </message>
     <message>
         <source>remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisieren</translation>
     </message>
     <message>
         <source>download</source>
-        <translation type="unfinished"></translation>
+        <translation>Download</translation>
     </message>
     <message>
         <source>Press the start button to begin.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte den Startknopf drücken um anzufangen.
+</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Unbekannt</translation>
+        <translation>Unbekannt</translation>
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished">%1 kB</translation>
+        <translation>%1 kB</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished">Abbruch</translation>
+        <translation>Abbruch</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Save output</source>
-        <translation type="unfinished">Ausgabe speichern</translation>
+        <translation>Ausgabe speichern</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Alle</translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Text</translation>
+        <translation>Text</translation>
     </message>
 </context>
 <context>
@@ -655,181 +656,181 @@ Click inside the box at the left to select a package.</source>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Click here to apply current filter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier clicken um den Filter anzuwenden.</translation>
     </message>
     <message>
         <source>Filter settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter Einstellungen</translation>
     </message>
     <message>
         <source>Click here to change the package filter criteria.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier clicken um den Filter zu ändern.</translation>
     </message>
     <message>
         <source>Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Paket Manager</translation>
     </message>
     <message>
         <source>Update package information</source>
-        <translation type="unfinished"></translation>
+        <translation>Paketinformationen aktualisieren</translation>
     </message>
     <message>
         <source>Upgrade installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Installierte Pakete aktualisieren</translation>
     </message>
     <message>
         <source>Enter path to download package to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zielpfad:</translation>
     </message>
     <message>
         <source>Download packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakete herunterladen</translation>
     </message>
     <message>
         <source>Remove or upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen oder Aktualisieren</translation>
     </message>
     <message>
         <source>Remove or reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen oder neu installieren</translation>
     </message>
     <message>
         <source>Reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu-Installation</translation>
     </message>
     <message>
         <source>Config updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration aktualisiert</translation>
     </message>
     <message>
         <source>The configuration has been updated.  Do you want to update server and package information now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Konfiguration wurde aktualisiert. Möchten Sie die Paketinformationen erneuern?</translation>
     </message>
 </context>
 <context>
     <name>OIpkg</name>
     <message>
         <source>OIpkg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Error initialing libipkg</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Initialisieren von libipkg</translation>
     </message>
     <message>
         <source>Error freeing libipkg</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim entladen von libipkg</translation>
     </message>
 </context>
 <context>
     <name>OIpkgConfigDlg</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Konfiguration</translation>
+        <translation>Konfiguration</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished">Server</translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished">Ziele</translation>
+        <translation>Ziele</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished">Proxys</translation>
+        <translation>Proxys</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Optionen</translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Neu</translation>
+        <translation>Neu</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished">Server</translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name: </translation>
+        <translation>Name: </translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished">Adresse:</translation>
+        <translation>Adresse:</translation>
     </message>
     <message>
         <source>Active Server</source>
-        <translation type="unfinished">Aktive Server</translation>
+        <translation>Aktiver Server</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Aktualisierung</translation>
+        <translation>Aktualisierung</translation>
     </message>
     <message>
         <source>HTTP Proxy</source>
-        <translation type="unfinished">HTTP Proxy</translation>
+        <translation>HTTP Proxy</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Aktiviert</translation>
+        <translation>Aktiviert</translation>
     </message>
     <message>
         <source>FTP Proxy</source>
-        <translation type="unfinished">FTP Proxy</translation>
+        <translation>FTP Proxy</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished">Benutzername:</translation>
+        <translation>Benutzername:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished">Passwort:</translation>
+        <translation>Passwort:</translation>
     </message>
     <message>
         <source>Force Depends</source>
-        <translation type="unfinished">--force.depends</translation>
+        <translation>--force.depends</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation type="unfinished">--force-reinstall</translation>
+        <translation>--force-reinstall</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation type="unfinished">--force-removal</translation>
+        <translation>--force-removal</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation type="unfinished">--force-overwrite</translation>
+        <translation>--force-overwrite</translation>
     </message>
     <message>
         <source>Information Level</source>
-        <translation type="unfinished">Informationslevel</translation>
+        <translation>Informationslevel</translation>
     </message>
     <message>
         <source>Errors only</source>
-        <translation type="unfinished">Nur Fehler</translation>
+        <translation>Nur Fehler</translation>
     </message>
     <message>
         <source>Normal messages</source>
-        <translation type="unfinished">Normale Meldungen</translation>
+        <translation>Normale Meldungen</translation>
     </message>
     <message>
         <source>Informative messages</source>
-        <translation type="unfinished">Informative Meldungen</translation>
+        <translation>Informative Meldungen</translation>
     </message>
     <message>
         <source>Troubleshooting output</source>
-        <translation type="unfinished">Ausgaben zur Fehlersuche</translation>
+        <translation>Ausgaben zur Fehlersuche</translation>
     </message>
 </context>
 <context>
@@ -837,31 +838,33 @@ Click inside the box at the left to select a package.</source>
     <message>
         <source>Reading available packages:
 <byte value="x9"/></source>
-        <translation type="unfinished"></translation>
+        <translation>Lese verfügbare Pakete:
+        </translation>
     </message>
     <message>
         <source>Reading installed packages:
 <byte value="x9"/></source>
-        <translation type="unfinished"></translation>
+        <translation>Lese installierte Pakete:
+        </translation>
     </message>
 </context>
 <context>
     <name>PackageInfoDlg</name>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Unable to retrieve package information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Paketinformationen nicht empfangen.</translation>
     </message>
     <message>
         <source>Retrieve file list</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiliste herunterladen</translation>
     </message>
     <message>
         <source>File list</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateiliste</translation>
     </message>
 </context>
 <context>
