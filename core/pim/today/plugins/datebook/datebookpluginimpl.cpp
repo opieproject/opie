@@ -22,6 +22,7 @@ DatebookPluginImpl::DatebookPluginImpl() {
 }
 
 DatebookPluginImpl::~DatebookPluginImpl() {
+    delete datebookPlugin;
 }
 
 TodayPluginObject* DatebookPluginImpl::guiPart() {

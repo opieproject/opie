@@ -39,8 +39,9 @@
 
 
 struct TodayPlugin {
+    TodayPlugin() : library( 0 ), iface( 0 ), guiPart( 0 ), guiBox( 0 ) {}
     QLibrary *library;
-    TodayPluginInterface *iface;
+    QInterfacePtr<TodayPluginInterface> iface;
     TodayPluginObject *guiPart;
     QWidget *guiBox;
     QString name;
@@ -161,7 +162,6 @@ void Today::loadPlugins() {
         pluginList.clear();
     }
 
-
     QString path = QPEApplication::qpeDir() + "/plugins/today";
     QDir dir( path, "lib*.so" );
 
@@ -171,8 +171,9 @@ void Today::loadPlugins() {
     QMap<QString, TodayPlugin> tempList;
 
     for ( it = list.begin(); it != list.end(); ++it ) {
-	TodayPluginInterface *iface = 0;
-	QLibrary *lib = new QLibrary( path + "/" + *it );
+//	TodayPluginInterface *iface = 0;
+        QInterfacePtr<TodayPluginInterface> iface;
+        QLibrary *lib = new QLibrary( path + "/" + *it );
 
 	qDebug( "querying: %s", QString( path + "/" + *it ).latin1() );
         if ( lib->queryInterface( IID_TodayPluginInterface, (QUnknownInterface**)&iface ) == QS_OK ) {
@@ -182,7 +183,6 @@ void Today::loadPlugins() {
             // If plugin is exludes from refresh, get it in the list again here.
 
             if ( pluginListRefreshExclude.contains( (*it) ) ) {
-
                 // if its not in allApplets list, add it to a layout
                 if ( !m_allApplets.contains( pluginListRefreshExclude[(*it)].name ) ) {
                     qDebug( "NUGASDA" );
@@ -243,7 +243,7 @@ void Today::loadPlugins() {
                 }
 
                 // if plugin is not yet in the list, add it to the layout too
-                if ( !m_allApplets.contains( plugin.name ) ) {
+                else if ( !m_allApplets.contains( plugin.name ) ) {
                     layout->addWidget( plugin.guiBox );
                     pluginList.append( plugin );
                 }
