@@ -14,7 +14,7 @@ Editor::~Editor() {
     delete m_self;
     m_self = 0;
 }
-OTodo Editor::newTodo( int cur,
+OPimTodo Editor::newTodo( int cur,
                            QWidget*) {
 
     OTaskEditor *e = self();
@@ -28,22 +28,22 @@ OTodo Editor::newTodo( int cur,
     }else
         m_accepted = false;
 
-    OTodo ev = e->todo();
+    OPimTodo ev = e->todo();
     qWarning("Todo uid");
     qWarning("Todo %s %d %d", ev.summary().latin1(), ev.progress(), ev.isCompleted() );
     ev.setUid(1);
 
     return ev;
 }
-OTodo Editor::edit( QWidget *,
-                        const OTodo& todo ) {
+OPimTodo Editor::edit( QWidget *,
+                        const OPimTodo& todo ) {
     OTaskEditor *e = self();
     e->init( todo );
     e->setCaption( QObject::tr( "Edit Task" ) );
 
     int ret = QPEApplication::execDialog( e );
 
-    OTodo ev = e->todo();
+    OPimTodo ev = e->todo();
     if ( ret == QDialog::Accepted )
         m_accepted = true;
     else

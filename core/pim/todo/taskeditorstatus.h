@@ -29,16 +29,19 @@
 #ifndef TASKEDITORSTATUS_H
 #define TASKEDITORSTATUS_H
 
+#include <opie2/opimtodo.h>
+
 #include <qdatetime.h>
 #include <qwidget.h>
 
 class DateBookMonth;
-class OTodo;
 class QCheckBox;
 class QComboBox;
 class QLabel;
 class QPushButton;
 class QToolButton;
+
+using namespace Opie;
 
 /**
  * This is the implementation of the Opie Task Editor Advanced tab
@@ -47,7 +50,7 @@ class QToolButton;
  *                 Description
  */
 class TaskEditorStatus : public QWidget
-{ 
+{
     Q_OBJECT
 
 public:
@@ -68,14 +71,14 @@ public:
 
     /*
      * I could have a struct which returns a QWidget*
-     * load and save to a OTodo
+     * load and save to a OPimTodo
      * and use multiple inheretence with all other widgets
      * and then simply iterate over the list of structs
      * this way I could easily have plugins for the whole editor....
      * but I do not do it -zecke
      */
-    void load( const OTodo & );
-    void save( OTodo & );
+    void load( const OPimTodo & );
+    void save( OPimTodo & );
 
 private:
     QDate          m_start;

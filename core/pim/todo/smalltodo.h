@@ -37,8 +37,8 @@
 namespace Todo {
     /**
      * SmallTodo holds everything necessary
-     * to represent a OTodo without holding
-     * everything from a OTodo
+     * to represent a OPimTodo without holding
+     * everything from a OPimTodo
      */
     class SmallTodo {
     public:

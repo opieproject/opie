@@ -29,11 +29,14 @@
 #ifndef TASKEDITORALARMS_H
 #define TASKEDITORALARMS_H
 
+#include <opie2/opimtodo.h>
+
 #include <qwidget.h>
 
 class QListView;
 class QListViewItem;
-class OTodo;
+
+using namespace Opie;
 
 class AlarmItem;
 class DateBookMonth;
@@ -48,8 +51,8 @@ public:
     };
     TaskEditorAlarms( QWidget* parent = 0, int type = Alarm,  const char* name = 0, WFlags fl = 0 );
     ~TaskEditorAlarms();
-    void load( const OTodo& );
-    void save( OTodo& );
+    void load( const OPimTodo& );
+    void save( OPimTodo& );
 private:
     QPopupMenu* popup( int column );
     void inlineSetDate( AlarmItem*, const QPoint& p );

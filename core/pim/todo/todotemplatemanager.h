@@ -1,11 +1,12 @@
 #ifndef OPIE_TODO_TEMPLATE_H
 #define OPIE_TODO_TEMPLATE_H
 
+#include <opie2/opimtodo.h>
+
 #include <qstring.h>
 #include <qmap.h>
 
-#include <opie/otodo.h>
-
+using namespace Opie;
 
 namespace Todo {
     class TemplateManager {
@@ -15,14 +16,14 @@ namespace Todo {
         void load();
         void save();
         QStringList templates()const;
-        OTodo templateEvent( const QString& templateName );
+        OPimTodo templateEvent( const QString& templateName );
 
         /* also replaces one */
-        void addEvent( const QString&, const OTodo& );
+        void addEvent( const QString&, const OPimTodo& );
         void removeEvent( const QString& );
     private:
         QString m_path;
-        QMap<QString, OTodo> m_templates;
+        QMap<QString, OPimTodo> m_templates;
 
 
 

@@ -10,7 +10,7 @@ namespace Todo {
         ~TextViewShow();
 
         QString type()const;
-        void slotShow( const OTodo& ev );
+        void slotShow( const OPimTodo& ev );
         QWidget* widget();
 
     protected:

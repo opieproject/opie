@@ -1,7 +1,5 @@
 #include <qlayout.h>
 
-#include <opie/orecurrancewidget.h>
-
 #include "taskeditoroverview.h"
 #include "taskeditorstatus.h"
 #include "taskeditoralarms.h"
@@ -13,7 +11,7 @@ OTaskEditor::OTaskEditor(int cur)
     init();
     init( cur );
 }
-OTaskEditor::OTaskEditor( const OTodo& to)
+OTaskEditor::OTaskEditor( const OPimTodo& to)
     : QDialog( 0, 0, TRUE, WStyle_ContextHelp ) {
     init();
     init( to );
@@ -22,18 +20,18 @@ OTaskEditor::~OTaskEditor() {
 
 }
 void OTaskEditor::init( int cur ) {
-    OTodo to;
+    OPimTodo to;
     to.setUid( 1 ); // generate a new uid
     if ( cur != 0 )
         to.setCategories( cur );
     load(to);
 }
-void OTaskEditor::init( const OTodo& to ) {
+void OTaskEditor::init( const OPimTodo& to ) {
     load( to );
 }
-OTodo OTaskEditor::todo()const{
+OPimTodo OTaskEditor::todo()const{
     qWarning("saving!");
-    OTodo to ( m_todo );
+    OPimTodo to ( m_todo );
     m_overView->save( to );
     m_stat->save( to );
     to.setRecurrence( m_rec->recurrence() );
@@ -41,12 +39,12 @@ OTodo OTaskEditor::todo()const{
 
     return to;
 }
-void OTaskEditor::load(const OTodo& to) {
+void OTaskEditor::load(const OPimTodo& to) {
     m_overView->load( to );
     m_stat->load( to );
     m_rec->setRecurrence( to.recurrence(), to.hasDueDate() ? to.dueDate() : QDate::currentDate() );
     m_alarm->load( to );
-    
+
     m_todo = to;
 }
 void OTaskEditor::init() {
@@ -75,7 +73,7 @@ void OTaskEditor::init() {
 //    lbl->setText( tr("X-Ref") );
 //    m_tab->addTab( lbl, "todo/xref", tr("X-Ref") );
 
-    m_rec = new ORecurranceWidget( true, QDate::currentDate(), this );
+    m_rec = new OPimRecurrenceWidget( true, QDate::currentDate(), this );
     m_tab->addTab( m_rec, "repeat", tr("Recurrence") );
 
 

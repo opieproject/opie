@@ -28,9 +28,8 @@
 
 #include "taskeditoralarms.h"
 
-#include <opie/otodo.h>
-#include <opie/opimnotifymanager.h>
-#include <opie/otimepicker.h>
+#include <opie2/opimnotifymanager.h>
+#include <opie2/otimepicker.h>
 
 #include <qpe/datebookmonth.h>
 #include <qpe/resource.h>
@@ -122,7 +121,7 @@ void TaskEditorAlarms::slotDelete(){
 
 }
 
-void TaskEditorAlarms::load( const OTodo& todo) {
+void TaskEditorAlarms::load( const OPimTodo& todo) {
     lstAlarms->clear();
     if (!todo.hasNotifiers() ) return;
 
@@ -136,7 +135,7 @@ void TaskEditorAlarms::load( const OTodo& todo) {
 
 
 }
-void TaskEditorAlarms::save( OTodo& todo ) {
+void TaskEditorAlarms::save( OPimTodo& todo ) {
     if (lstAlarms->childCount() <= 0 ) return;
 
     OPimNotifyManager::Alarms alarms;

@@ -31,9 +31,10 @@
 
 #include <qlist.h>
 
-#include <opie/otodoaccess.h>
-#include <opie/otodo.h>
-#include <opie/opimmainwindow.h>
+#include <opie2/otodoaccess.h>
+#include <opie2/opimtodo.h>
+#include <opie2/opimmainwindow.h>
+#include <opie2/owidgetstack.h>
 
 #include "smalltodo.h"
 #include "todoview.h"
@@ -44,10 +45,11 @@ class QPopupMenu;
 class QMenuBar;
 class QToolBar;
 class QAction;
-class OWidgetStack;
 class Ir;
 class QVBox;
 class QLineEdit;
+
+using namespace Opie;
 
 namespace Todo {
     typedef TodoView View;
@@ -69,7 +71,7 @@ namespace Todo {
                     const char* name = 0, WFlags fl = 0 );
         ~MainWindow();
 
-        /** return a context menu for an OTodo */
+        /** return a context menu for an OPimTodo */
         QPopupMenu* contextMenu(int uid, bool doesRecur = FALSE );
         QPopupMenu* options();
         QPopupMenu* edit();
@@ -77,11 +79,11 @@ namespace Todo {
 
 
         void updateList();
-        OTodoAccess::List list()const;
-        OTodoAccess::List sorted( bool asc, int sortOrder );
-        OTodoAccess::List sorted( bool asc, int sortOrder, int addFilter );
+        OPimTodoAccess::List list()const;
+        OPimTodoAccess::List sorted( bool asc, int sortOrder );
+        OPimTodoAccess::List sorted( bool asc, int sortOrder, int addFilter );
 
-        OTodo event(int uid );
+        OPimTodo event(int uid );
 
         bool isSyncing()const;
         bool showCompleted()const;
@@ -93,7 +95,7 @@ namespace Todo {
         TemplateManager* templateManager();
         QuickEditBase* quickEditor();
 
-        void updateTodo( const OTodo& );
+        void updateTodo( const OPimTodo& );
         void populateTemplates();
         Editor* currentEditor();
         void setReadAhead(uint count );
@@ -108,7 +110,7 @@ private slots:
 
     private:
         /* handle setting and removing alarms */
-        void handleAlarms( const OTodo& oldTodo, const OTodo& newTodo );
+        void handleAlarms( const OPimTodo& oldTodo, const OPimTodo& newTodo );
         void receiveFile( const QString& filename );
         void connectBase( ViewBase* );
         void initUI();
@@ -165,7 +167,7 @@ private slots:
         void slotEdit(int);
         void slotUpdate3( QWidget* );
         void slotComplete( int uid );
-        void slotComplete( const OTodo& ev );
+        void slotComplete( const OPimTodo& ev );
         void slotNewFromTemplate(int id );
         void slotNew();
         void slotDuplicate();

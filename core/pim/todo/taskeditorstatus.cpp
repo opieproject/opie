@@ -28,9 +28,8 @@
 
 #include "taskeditorstatus.h"
 
-#include <opie/otodo.h>
-#include <opie/opimmaintainer.h>
-#include <opie/opimstate.h>
+#include <opie2/opimmaintainer.h>
+#include <opie2/opimstate.h>
 
 #include <qpe/datebookmonth.h>
 
@@ -171,7 +170,7 @@ TaskEditorStatus::~TaskEditorStatus()
 {
 }
 
-void TaskEditorStatus::load( const OTodo &todo )
+void TaskEditorStatus::load( const OPimTodo &todo )
 {
     QDate date = QDate::currentDate();
     QString str = TimeString::longDateString( date );
@@ -223,7 +222,7 @@ void TaskEditorStatus::load( const OTodo &todo )
     // Maintainer - not implemented yet
 }
 
-void TaskEditorStatus::save( OTodo &todo )
+void TaskEditorStatus::save( OPimTodo &todo )
 {
     QDate inval;
 

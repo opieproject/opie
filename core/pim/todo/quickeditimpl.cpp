@@ -4,7 +4,7 @@
 
 #include <qpe/resource.h>
 
-#include <opie/oclickablelabel.h>
+#include <opie2/oclickablelabel.h>
 
 #include "mainwindow.h"
 #include "quickeditimpl.h"
@@ -62,14 +62,14 @@ QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
 QuickEditImpl::~QuickEditImpl() {
 
 }
-OTodo QuickEditImpl::todo()const {
+OPimTodo QuickEditImpl::todo()const {
     return m_todo;
 }
 QWidget* QuickEditImpl::widget() {
     return this;
 }
 void QuickEditImpl::slotEnter() {
-    OTodo todo;
+    OPimTodo todo;
 
 
     if (!m_edit->text().isEmpty() ) {

@@ -29,17 +29,19 @@
 #ifndef OPIE_TODO_MANAGER_H
 #define OPIE_TODO_MANAGER_H
 
+#include <opie2/opimtodo.h>
+#include <opie2/otodoaccess.h>
+
+#include <qpe/categories.h>
+
 #include <qarray.h>
 #include <qobject.h>
 #include <qstring.h>
 
-#include <qpe/categories.h>
-
-#include <opie/otodo.h>
-#include <opie/otodoaccess.h>
-
 #include "smalltodo.h"
 
+using Opie::OPimTodo;
+using Opie::OPimTodoAccess;
 
 namespace Todo {
     class TodoManager : public QObject{
@@ -52,17 +54,17 @@ namespace Todo {
 
         QStringList categories()/*const*/;
         int catId(const QString&);
-        OTodo event(int uid );
+        OPimTodo event(int uid );
 
         void updateList();
         /** returns the iterator sorted if set sorted*/
-        OTodoAccess::List list()const;
-        OTodoAccess::List sorted( bool asc, int so, int f,  int cat );
+        OPimTodoAccess::List list()const;
+        OPimTodoAccess::List sorted( bool asc, int so, int f,  int cat );
 
-        OTodoAccess::List::Iterator overDue();
-        OTodoAccess::List::Iterator fromTo( const QDate& start,
+        OPimTodoAccess::List::Iterator overDue();
+        OPimTodoAccess::List::Iterator fromTo( const QDate& start,
                                  const QDate& end );
-        OTodoAccess::List::Iterator query( const OTodo& ev, int query );
+        OPimTodoAccess::List::Iterator query( const OPimTodo& ev, int query );
 
         void setCategory( bool sort, int category = -1);
         void setShowOverDue(  bool show );
@@ -70,7 +72,7 @@ namespace Todo {
         void setSortASC( bool );
         void sort();
 
-        OTodoAccess* todoDB();
+        OPimTodoAccess* todoDB();
         bool saveAll();
 
 
@@ -79,9 +81,9 @@ namespace Todo {
         void updateCategories();
 
     public slots:
-        void add( const OTodo& );
+        void add( const OPimTodo& );
         void update( int uid,  const SmallTodo& );
-        void update( int uid, const OTodo& );
+        void update( int uid, const OPimTodo& );
         bool remove( int uid );
         void remove( const QArray<int>& );
 
@@ -94,10 +96,10 @@ namespace Todo {
         void save();
 
     private:
-        OTodoAccess* m_db;
-        OTodoAccess::List m_list;
-        OTodoAccess::List::Iterator m_it;
-        OTodoAccess::List m_sorted;
+        OPimTodoAccess* m_db;
+        OPimTodoAccess::List m_list;
+        OPimTodoAccess::List::Iterator m_it;
+        OPimTodoAccess::List m_sorted;
         Categories m_cat;
         int m_ca;
         /* sort cat */

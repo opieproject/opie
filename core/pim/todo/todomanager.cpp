@@ -42,46 +42,46 @@ TodoManager::TodoManager( QObject *obj )
 TodoManager::~TodoManager() {
     delete m_db;
 }
-OTodo TodoManager::event(int uid ) {
+OPimTodo TodoManager::event(int uid ) {
     return m_db->find( uid );
 }
 void TodoManager::updateList() {
     qWarning("update list");
     m_list = m_db->allRecords();
 }
-OTodoAccess::List TodoManager::list() const{
+OPimTodoAccess::List TodoManager::list() const{
     return m_list;
 }
-OTodoAccess::List TodoManager::sorted( bool asc, int so, int f, int cat ) {
+OPimTodoAccess::List TodoManager::sorted( bool asc, int so, int f, int cat ) {
     return m_db->sorted( asc, so, f, cat );
 }
-OTodoAccess::List::Iterator TodoManager::overDue() {
+OPimTodoAccess::List::Iterator TodoManager::overDue() {
     int filter = 2 | 1;
     m_list = m_db->sorted(m_asc, m_sortOrder, filter,  m_ca );
     m_it = m_list.begin();
     return m_it;
 }
-OTodoAccess::List::Iterator TodoManager::fromTo( const QDate& start,
+OPimTodoAccess::List::Iterator TodoManager::fromTo( const QDate& start,
                                       const QDate& end ) {
     m_list = m_db->effectiveToDos( start, end );
     m_it = m_list.begin();
     return m_it;
 }
-OTodoAccess::List::Iterator TodoManager::query( const OTodo& ev, int query ) {
+OPimTodoAccess::List::Iterator TodoManager::query( const OPimTodo& ev, int query ) {
     m_list = m_db->queryByExample( ev, query );
     m_it = m_list.begin();
     return m_it;
 }
-OTodoAccess* TodoManager::todoDB() {
+OPimTodoAccess* TodoManager::todoDB() {
     return m_db;
 }
-void TodoManager::add( const OTodo& ev ) {
+void TodoManager::add( const OPimTodo& ev ) {
     m_db->add( ev );
 }
 void TodoManager::update( int, const SmallTodo& ) {
 
 }
-void TodoManager::update( int, const OTodo& ev) {
+void TodoManager::update( int, const OPimTodo& ev) {
     m_db->replace( ev );
 }
 bool TodoManager::remove( int uid ) {
@@ -121,7 +121,7 @@ bool TodoManager::isLoaded()const {
 }
 void TodoManager::load() {
     if (!m_db) {
-        m_db = new OTodoAccess();
+        m_db = new OPimTodoAccess();
         m_db->load();
     }
 }

@@ -31,7 +31,9 @@
 #include <qstring.h>
 #include <qwidget.h>
 
-#include <opie/otodo.h>
+#include <opie2/opimtodo.h>
+
+using Opie::OPimTodo;
 
 namespace Todo {
     class MainWindow;
@@ -46,7 +48,7 @@ namespace Todo {
         TodoShow( MainWindow* win);
         virtual ~TodoShow();
         virtual QString type()const = 0;
-        virtual void slotShow( const OTodo& ev ) = 0;
+        virtual void slotShow( const OPimTodo& ev ) = 0;
         virtual QWidget* widget() = 0;
     protected:
         void escapeView();

@@ -3,20 +3,20 @@
 
 #include <qdialog.h>
 
-#include <opie/otodo.h>
-#include <opie/otabwidget.h>
+#include <opie2/opimtodo.h>
+#include <opie2/otabwidget.h>
+#include <opie2/opimrecurrencewidget.h>
 
 class TaskEditorOverView;
 class TaskEditorStatus;
 class TaskEditorAlarms;
-class ORecurranceWidget;
 class QMultiLineEdit;
 
 class OTaskEditor : public QDialog {
     Q_OBJECT
 public:
     OTaskEditor(int cur);
-    OTaskEditor( const OTodo& todo );
+    OTaskEditor( const OPimTodo& todo );
     ~OTaskEditor();
 
     /*
@@ -24,11 +24,11 @@ public:
      * power to 'preload' the dialog
      */
     void init( int cur );
-    void init( const OTodo& todo );
+    void init( const OPimTodo& todo );
 
-    OTodo todo()const;
+    OPimTodo todo()const;
 private:
-    void load( const OTodo& );
+    void load( const OPimTodo& );
     void init();
 
     OTabWidget         *m_tab;
@@ -36,8 +36,8 @@ private:
     TaskEditorStatus   *m_stat;
     TaskEditorAlarms   *m_alarm;
     TaskEditorAlarms   *m_remind;
-    ORecurranceWidget  *m_rec;
-    OTodo		m_todo;
+    OPimRecurrenceWidget  *m_rec;
+    OPimTodo		m_todo;
 };
 
 #endif

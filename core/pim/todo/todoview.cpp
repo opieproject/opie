@@ -19,14 +19,14 @@ MainWindow* TodoView::todoWindow() {
     return m_main;
 }
 
-OTodo TodoView::event(int uid ) {
+OPimTodo TodoView::event(int uid ) {
     return m_main->event( uid );
 }
-OTodoAccess::List TodoView::list(){
+OPimTodoAccess::List TodoView::list(){
     todoWindow()->updateList();
     return todoWindow()->list();
 }
-OTodoAccess::List TodoView::sorted()const{
+OPimTodoAccess::List TodoView::sorted()const{
     return m_sort;
 }
 void TodoView::sort() {
@@ -46,7 +46,7 @@ void TodoView::setAscending( bool b ) {
 void TodoView::update(int, const SmallTodo&  ) {
     //m_main->slotUpate1( uid, to );
 }
-void TodoView::update(int , const OTodo& ev ) {
+void TodoView::update(int , const OPimTodo& ev ) {
     m_main->updateTodo( ev );
 }
 void TodoView::showTodo( int uid ) {
@@ -61,7 +61,7 @@ void TodoView::remove( int uid ) {
 void TodoView::complete( int uid ) {
     m_main->slotComplete( uid );
 }
-void TodoView::complete( const OTodo& ev ) {
+void TodoView::complete( const OPimTodo& ev ) {
     m_main->slotComplete( ev );
 }
 void TodoView::removeQuery( int uid ) {

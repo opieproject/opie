@@ -15,28 +15,28 @@ namespace {
     public:
         TemplateListItem( QListView*,
                           const QString& name,
-                          const OTodo& );
+                          const OPimTodo& );
         ~TemplateListItem();
 
-        OTodo event()const;
+        OPimTodo event()const;
         QString text()const;
         void setText(const QString& str );
-        void setEvent( const OTodo& );
+        void setEvent( const OPimTodo& );
     private:
         QString m_name;
-        OTodo m_ev;
+        OPimTodo m_ev;
     };
 
     /* implementation */
     TemplateListItem::TemplateListItem( QListView* view,
                                         const QString& text,
-                                        const OTodo& ev )
+                                        const OPimTodo& ev )
         : QListViewItem( view ), m_name( text ), m_ev( ev )
     {
         QListViewItem::setText(0, m_name );
     }
     TemplateListItem::~TemplateListItem() {}
-    OTodo TemplateListItem::event() const {
+    OPimTodo TemplateListItem::event() const {
         return m_ev;
     }
     QString TemplateListItem::text()const {
@@ -46,7 +46,7 @@ namespace {
         QListViewItem::setText(0, str );
         m_name = str;
     }
-    void TemplateListItem::setEvent( const OTodo& ev) {
+    void TemplateListItem::setEvent( const OPimTodo& ev) {
         m_ev = ev;
     }
 }
@@ -72,7 +72,7 @@ TemplateDialogImpl::~TemplateDialogImpl() {
 }
 void TemplateDialogImpl::slotAdd() {
     QString str = QWidget::tr("New Template %1").arg( listView()->childCount() );
-    OTodo ev;
+    OPimTodo ev;
     m_man->addEvent(str, ev);
     new TemplateListItem( listView(), str, ev );
 }
@@ -92,7 +92,7 @@ void TemplateDialogImpl::slotEdit() {
         return;
 
     TemplateListItem* item = static_cast<TemplateListItem*>( listView()->currentItem() );
-    OTodo ev = m_win->currentEditor()->edit( m_win, item->event() );
+    OPimTodo ev = m_win->currentEditor()->edit( m_win, item->event() );
     if ( m_win->currentEditor()->accepted() ) {
         item->setEvent( ev );
         m_man->removeEvent( item->text() );

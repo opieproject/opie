@@ -28,7 +28,7 @@
 
 #include "taskeditoroverview.h"
 
-#include <opie/orecur.h>
+//#include <opie2/opimrecurrence.h>
 
 #include <qpe/categoryselect.h>
 #include <qpe/datebookmonth.h>
@@ -127,7 +127,7 @@ TaskEditorOverView::~TaskEditorOverView()
 {
 }
 
-void TaskEditorOverView::load( const OTodo& todo )
+void TaskEditorOverView::load( const OPimTodo& todo )
 {
     // Description
     cmbDesc->insertItem( todo.summary(), 0 );
@@ -148,7 +148,7 @@ void TaskEditorOverView::load( const OTodo& todo )
 
 }
 
-void TaskEditorOverView::save( OTodo &todo )
+void TaskEditorOverView::save( OPimTodo &todo )
 {
     // Description
     todo.setSummary( cmbDesc->currentText() );

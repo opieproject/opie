@@ -1,7 +1,7 @@
 #ifndef OPIE_TODO_EDIT_H
 #define OPIE_TODO_EDIT_H
 
-#include <opie/otodo.h>
+#include <opie2/opimtodo.h>
 
 namespace Todo {
     class Edit {
@@ -9,8 +9,8 @@ namespace Todo {
         Edit();
         virtual ~Edit();
 
-        ToDoEvent newEvent( const OTodo& ) = 0;
-        ToDoEvent editEvent( const OTodo& ) = 0;
+        ToDoEvent newEvent( const OPimTodo& ) = 0;
+        ToDoEvent editEvent( const OPimTodo& ) = 0;
     };
 };
 

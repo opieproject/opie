@@ -1,7 +1,7 @@
 #ifndef OPIE_TODO_EDITOR_H
 #define OPIE_TODO_EDITOR_H
 
-#include <opie/otodo.h>
+#include <opie2/opimtodo.h>
 
 
 class OTaskEditor;
@@ -11,10 +11,10 @@ namespace Todo {
         Editor();
         ~Editor();
 
-        OTodo newTodo( int currentCatId,
+        OPimTodo newTodo( int currentCatId,
                            QWidget* par );
-        OTodo edit( QWidget* par,
-                        const OTodo& ev = OTodo() );
+        OPimTodo edit( QWidget* par,
+                        const OPimTodo& ev = OPimTodo() );
 
 
         bool accepted()const;

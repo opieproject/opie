@@ -4,12 +4,14 @@
 #include <qsignal.h>
 #include <qwidget.h>
 
-#include <opie/otodo.h>
+#include <opie2/opimtodo.h>
+
+using Opie::OPimTodo;
 
 namespace Todo{
     class MainWindow;
     struct QuickEditBase {
-        virtual OTodo todo()const = 0l;
+        virtual OPimTodo todo()const = 0l;
         virtual QSignal* signal() = 0l;
         virtual QWidget* widget() = 0l;
     };
@@ -23,13 +25,13 @@ namespace Todo{
      */
     /**
      * Quick edit is meant to quickly enter
-     * OTodos in a fast way
+     * OPimTodos in a fast way
      */
     class QuickEdit : public QuickEditBase{
     public:
         QuickEdit(MainWindow* main );
         virtual ~QuickEdit();
-        //OTodo todo()const;
+        //OPimTodo todo()const;
         QSignal* signal();
         //QWidget* widget();
     protected:

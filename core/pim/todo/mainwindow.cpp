@@ -28,6 +28,20 @@
 
 #include <unistd.h>
 
+#include <opie2/opimrecurrence.h>
+#include <opie2/opimnotifymanager.h>
+#include <opie2/otodoaccessvcal.h>
+#include <opie2/oapplicationfactory.h>
+
+#include <qpe/applnk.h>
+#include <qpe/config.h>
+#include <qpe/ir.h>
+#include <qpe/resource.h>
+#include <qpe/qpemessagebox.h>
+#include <qpe/alarmserver.h>
+#include <qpe/timestring.h>
+#include <qpe/qpeapplication.h>
+
 #include <qmenubar.h>
 #include <qmessagebox.h>
 #include <qtoolbar.h>
@@ -40,22 +54,6 @@
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qwhatsthis.h>
-
-#include <qpe/applnk.h>
-#include <qpe/config.h>
-#include <qpe/ir.h>
-#include <qpe/resource.h>
-#include <qpe/qpemessagebox.h>
-#include <qpe/alarmserver.h>
-#include <qpe/timestring.h>
-#include <qpe/qpeapplication.h>
-
-#include <opie/orecur.h>
-#include <opie/opimnotifymanager.h>
-#include <opie/otodoaccessvcal.h>
-#include <opie/owidgetstack.h>
-
-#include <opie/oapplicationfactory.h>
 
 #include "quickeditimpl.h"
 #include "todotemplatemanager.h"
@@ -310,10 +308,10 @@ QPopupMenu* MainWindow::edit() {
 QToolBar* MainWindow::toolbar() {
     return m_tool;
 }
-OTodoAccess::List MainWindow::list()const {
+OPimTodoAccess::List MainWindow::list()const {
     return m_todoMgr.list();
 }
-OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
+OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
     int cat = 0;
     if ( m_curCat != QWidget::tr("All Categories") )
         cat = currentCatId();
@@ -331,7 +329,7 @@ OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
 
     return m_todoMgr.sorted( asc, sortOrder, filter, cat );
 }
-OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter) {
+OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter) {
     int cat = 0;
     if ( m_curCat != QWidget::tr("All Categories") )
         cat = currentCatId();
@@ -341,7 +339,7 @@ OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter) {
 
     return m_todoMgr.sorted(asc, sortOrder, addFilter,  cat );
 }
-OTodo MainWindow::event( int uid ) {
+OPimTodo MainWindow::event( int uid ) {
     return m_todoMgr.event( uid );
 }
 bool MainWindow::isSyncing()const {
@@ -433,14 +431,14 @@ void MainWindow::populateTemplates() {
 void MainWindow::slotNewFromTemplate( int id ) {
     QString name = m_template->text( id );
 
-    OTodo event = templateManager()->templateEvent( name );
+    OPimTodo event = templateManager()->templateEvent( name );
     event = currentEditor()->edit(this,
                                   event );
 
     if ( currentEditor()->accepted() ) {
         /* assign new todo */
         event.setUid( 1 );
-        handleAlarms( OTodo(), event );
+        handleAlarms( OPimTodo(), event );
         m_todoMgr.add( event );
         currentView()->addEvent( event );
 
@@ -457,7 +455,7 @@ void MainWindow::slotDuplicate() {
 							 QWidget::tr("Data can not be edited, currently syncing"));
         return;
     }
-    OTodo ev = m_todoMgr.event( currentView()->current() );
+    OPimTodo ev = m_todoMgr.event( currentView()->current() );
     /* let's generate a new uid */
     ev.setUid(1);
     m_todoMgr.add( ev );
@@ -478,7 +476,7 @@ void MainWindow::slotDelete() {
     if (!QPEMessageBox::confirmDelete(this, QWidget::tr("Todo"), strName ) )
         return;
 
-    handleAlarms( m_todoMgr.event( currentView()->current() ), OTodo() );
+    handleAlarms( m_todoMgr.event( currentView()->current() ), OPimTodo() );
     m_todoMgr.remove( currentView()->current() );
     currentView()->removeEvent( currentView()->current() );
     raiseCurrentView();
@@ -490,11 +488,11 @@ void MainWindow::slotDelete(int uid ) {
 							 QWidget::tr("Data can not be edited, currently syncing"));
 	return;
     }
-    OTodo to = m_todoMgr.event(uid);
+    OPimTodo to = m_todoMgr.event(uid);
     if (!QPEMessageBox::confirmDelete(this, QWidget::tr("Todo"), to.toShortText() ) )
         return;
 
-    handleAlarms(to, OTodo() );
+    handleAlarms(to, OPimTodo() );
     m_todoMgr.remove( to.uid() );
     currentView()->removeEvent( to.uid() );
     raiseCurrentView();
@@ -597,11 +595,11 @@ void MainWindow::beamDone( Ir* ir) {
     ::unlink( beamfile );
 }
 void MainWindow::receiveFile( const QString& filename ) {
-    OTodoAccessVCal* cal = new OTodoAccessVCal(filename );
+    OPimTodoAccessVCal* cal = new OPimTodoAccessVCal(filename );
 
-    OTodoAccess acc( cal );
+    OPimTodoAccess acc( cal );
     acc.load();
-    OTodoAccess::List list = acc.allRecords();
+    OPimTodoAccess::List list = acc.allRecords();
 
     if (list.count()){
 
@@ -610,7 +608,7 @@ void MainWindow::receiveFile( const QString& filename ) {
 	    if ( QMessageBox::information(this, QWidget::tr("New Tasks"),
 					  message, QMessageBox::Ok,
 					  QMessageBox::Cancel ) == QMessageBox::Ok ) {
-		    OTodoAccess::List::Iterator it;
+		    OPimTodoAccess::List::Iterator it;
 		    for ( it = list.begin(); it != list.end(); ++it )
 			    m_todoMgr.add( (*it) );
 
@@ -708,9 +706,9 @@ void MainWindow::slotEdit( int uid ) {
 	return;
     }
 
-    OTodo old_todo = m_todoMgr.event( uid );
+    OPimTodo old_todo = m_todoMgr.event( uid );
 
-    OTodo todo = currentEditor()->edit(this, old_todo );
+    OPimTodo todo = currentEditor()->edit(this, old_todo );
 
     /* if completed */
     if ( currentEditor()->accepted() ) {
@@ -728,7 +726,7 @@ void MainWindow::slotUpdate1( int uid, const SmallTodo& ev) {
     m_todoMgr.update( uid, ev );
 }
 */
-void MainWindow::updateTodo(  const OTodo& ev) {
+void MainWindow::updateTodo(  const OPimTodo& ev) {
     m_todoMgr.update( ev.uid() , ev );
 }
 /* The view changed it's configuration
@@ -746,7 +744,7 @@ void MainWindow::setReadAhead( uint count ) {
 }
 void MainWindow::slotQuickEntered() {
     qWarning("entered");
-    OTodo todo = quickEditor()->todo();
+    OPimTodo todo = quickEditor()->todo();
     if (todo.isEmpty() )
         return;
 
@@ -760,8 +758,8 @@ QuickEditBase* MainWindow::quickEditor() {
 void MainWindow::slotComplete( int uid ) {
     slotComplete( event(uid) );
 }
-void MainWindow::slotComplete( const OTodo& todo ) {
-    OTodo to = todo;
+void MainWindow::slotComplete( const OPimTodo& todo ) {
+    OPimTodo to = todo;
     to.setCompleted( !to.isCompleted() );
     to.setCompletedDate( QDate::currentDate() );
 
@@ -777,12 +775,12 @@ void MainWindow::slotComplete( const OTodo& todo ) {
      * -zecke
      */
     if ( to.hasRecurrence() && to.isCompleted() ) {
-        OTodo to2( to );
+        OPimTodo to2( to );
 
         /* the spinned off one won't recur anymore */
-        to.setRecurrence( ORecur() );
+        to.setRecurrence( OPimRecurrence() );
 
-        ORecur rec = to2.recurrence();
+        OPimRecurrence rec = to2.recurrence();
         rec.setStart( to.dueDate() );
         to2.setRecurrence( rec );
         /*
@@ -825,7 +823,7 @@ void MainWindow::slotComplete( const OTodo& todo ) {
                     als.append( al );
                 }
                 to2.notifiers().setAlarms( als );
-                handleAlarms( OTodo(), todo );
+                handleAlarms( OPimTodo(), todo );
             }
             to2.setCompletedDate( inval );
             to2.setCompleted( false );
@@ -855,13 +853,13 @@ int MainWindow::create() {
     m_todoMgr.load();
 
 
-    OTodo todo = currentEditor()->newTodo( currentCatId(),
+    OPimTodo todo = currentEditor()->newTodo( currentCatId(),
                                            this );
 
     if ( currentEditor()->accepted() ) {
 	//todo.assignUid();
         uid = todo.uid();
-        handleAlarms( OTodo(), todo );
+        handleAlarms( OPimTodo(), todo );
         m_todoMgr.add( todo );
         currentView()->addEvent( todo );
 
@@ -880,7 +878,7 @@ bool MainWindow::remove( int uid ) {
     if (m_syncing) return false;
 
     /* argh need to get the whole OEvent... to disable alarms -zecke */
-    handleAlarms( OTodo(), m_todoMgr.event( uid ) );
+    handleAlarms( OPimTodo(), m_todoMgr.event( uid ) );
 
     return m_todoMgr.remove( uid );
 }
@@ -890,9 +888,9 @@ void MainWindow::beam( int uid) {
     ::unlink( beamfile );
     m_todoMgr.load();
 
-    OTodo todo = event( uid );
-    OTodoAccessVCal* cal = new OTodoAccessVCal(QString::fromLatin1(beamfile) );
-    OTodoAccess acc( cal );
+    OPimTodo todo = event( uid );
+    OPimTodoAccessVCal* cal = new OPimTodoAccessVCal(QString::fromLatin1(beamfile) );
+    OPimTodoAccess acc( cal );
     acc.load();
     acc.add( todo );
     acc.save();
@@ -913,10 +911,10 @@ void MainWindow::edit( int uid ) {
     slotEdit( uid );
 }
 void MainWindow::add( const OPimRecord& rec) {
-    if ( rec.rtti() != OTodo::rtti() ) return;
+    if ( rec.rtti() != OPimTodo::rtti() ) return;
     m_todoMgr.load(); // might not be loaded
 
-    const OTodo& todo = static_cast<const OTodo&>(rec);
+    const OPimTodo& todo = static_cast<const OPimTodo&>(rec);
 
     m_todoMgr.add(todo );
     currentView()->addEvent( todo );
@@ -969,7 +967,7 @@ namespace {
     }
 }
 
-void MainWindow::handleAlarms( const OTodo& oldTodo, const OTodo& newTodo) {
+void MainWindow::handleAlarms( const OPimTodo& oldTodo, const OPimTodo& newTodo) {
     /*
      * if oldTodo is not empty and has notifiers we need to find the deleted ones
      */
@@ -997,7 +995,7 @@ void MainWindow::handleAlarms( const OTodo& oldTodo, const OTodo& newTodo) {
 void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
     m_todoMgr.load();
 
-    OTodo todo = m_todoMgr.event( uid );
+    OPimTodo todo = m_todoMgr.event( uid );
     if (!todo.hasNotifiers() ) return;
 
     /*

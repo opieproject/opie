@@ -34,10 +34,12 @@
 #include <qvaluelist.h>
 #include <qwidget.h>
 
-#include <opie/otodoaccess.h>
+#include <opie2/otodoaccess.h>
 
 #include "smalltodo.h"
 
+using Opie::OPimTodo;
+using Opie::OPimTodoAccess;
 
 namespace Todo {
     class MainWindow;
@@ -68,8 +70,8 @@ namespace Todo {
          */
         virtual void updateView() = 0;
 
-        virtual void addEvent( const OTodo& ) = 0;
-        virtual void replaceEvent( const OTodo& ) = 0;
+        virtual void addEvent( const OPimTodo& ) = 0;
+        virtual void replaceEvent( const OPimTodo& ) = 0;
         virtual void removeEvent( int uid ) = 0;
         virtual void setShowCompleted( bool ) = 0;
         virtual void setShowDeadline( bool ) = 0;
@@ -104,9 +106,9 @@ namespace Todo {
 
     protected:
         MainWindow* todoWindow();
-        OTodo event(int uid );
-        OTodoAccess::List list();
-        OTodoAccess::List sorted()const;
+        OPimTodo event(int uid );
+        OPimTodoAccess::List list();
+        OPimTodoAccess::List sorted()const;
         void sort();
         void sort(int sort );
         void setSortOrder( int order );
@@ -119,15 +121,15 @@ namespace Todo {
         void showTodo( int uid );
         void edit( int uid );
         void update(int uid, const SmallTodo& to );
-        void update(int uid, const OTodo& ev);
+        void update(int uid, const OPimTodo& ev);
         void remove( int uid );
         /* will ask the user if the item should be deleted */
         void removeQuery(int uid );
         void complete( int uid );
-        void complete( const OTodo& ev );
+        void complete( const OPimTodo& ev );
     private:
         MainWindow *m_main;
-        OTodoAccess::List m_sort;
+        OPimTodoAccess::List m_sort;
         bool m_asc : 1;
         int m_sortOrder;
     };

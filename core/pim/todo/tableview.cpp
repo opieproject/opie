@@ -37,7 +37,7 @@
 #include <qpe/config.h>
 #include <qpe/resource.h>
 
-#include <opie/orecur.h>
+#include <opie2/opimrecurrence.h>
 
 #include "mainwindow.h"
 //#include "tableitems.h"
@@ -184,7 +184,7 @@ int TableView::prev() {
 
 }
 QString TableView::currentRepresentation() {
-    OTodo to = sorted()[currentRow()];
+    OPimTodo to = sorted()[currentRow()];
     return to.summary().isEmpty() ? to.description().left(20) : to.summary() ;
 }
 /* show overdue */
@@ -204,7 +204,7 @@ void TableView::updateView( ) {
      */
     todoWindow()->setReadAhead( 4 );
     sort();
-    OTodoAccess::List::Iterator it, end;
+    OPimTodoAccess::List::Iterator it, end;
     it = sorted().begin();
     end = sorted().end();
 
@@ -227,13 +227,13 @@ void TableView::updateView( ) {
     m_enablePaint = true;
 //    int el = time.elapsed();
 }
-void TableView::setTodo( int, const OTodo&) {
+void TableView::setTodo( int, const OPimTodo&) {
     sort();
 
     /* repaint */
     repaint();
 }
-void TableView::addEvent( const OTodo&) {
+void TableView::addEvent( const OPimTodo&) {
 
     /* fix problems of not showing the 'Haken' */
     updateView();
@@ -242,7 +242,7 @@ void TableView::addEvent( const OTodo&) {
  * find the event
  * and then replace the complete row
  */
-void TableView::replaceEvent( const OTodo& ev) {
+void TableView::replaceEvent( const OPimTodo& ev) {
     addEvent( ev );
 }
 /*
@@ -388,7 +388,7 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
 
     p->save();
 
-    OTodo task = sorted()[row];
+    OPimTodo task = sorted()[row];
 
     // TODO - give user option for grid or bars?
 
@@ -497,7 +497,7 @@ void TableView::setCellContentFromEditor(int row, int col ) {
         QWidget* wid = cellWidget(row, 1 );
         if ( wid->inherits("QComboBox") ) {
             int pri = ((QComboBox*)wid)->currentItem() + 1;
-            OTodo todo = sorted()[row];
+            OPimTodo todo = sorted()[row];
             if ( todo.priority() != pri ) {
                 todo.setPriority( pri  );
                 TodoView::update( todo.uid(), todo );
@@ -508,7 +508,7 @@ void TableView::setCellContentFromEditor(int row, int col ) {
         QWidget* wid = cellWidget(row, 2);
         if ( wid->inherits("QLineEdit") ) {
             QString text = ((QLineEdit*)wid)->text();
-            OTodo todo = sorted()[row];
+            OPimTodo todo = sorted()[row];
             if ( todo.summary() != text ) {
                 todo.setSummary( text );
                 TodoView::update( todo.uid(), todo );

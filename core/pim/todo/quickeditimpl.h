@@ -15,7 +15,7 @@ class QuickEditImpl : public QToolBar, public Todo::QuickEdit {
 public:
     QuickEditImpl( QWidget* parent,  bool visible);
     ~QuickEditImpl();
-    OTodo todo()const;
+    OPimTodo todo()const;
     QWidget* widget();
 private slots:
     void slotEnter();
@@ -30,7 +30,7 @@ private:
     QLabel* m_enter;
     QLabel* m_more;
     QPopupMenu* m_menu;
-    OTodo m_todo;
+    OPimTodo m_todo;
     bool m_visible;
 
     QPixmap priority1;

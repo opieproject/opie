@@ -29,7 +29,7 @@
 #ifndef TASKEDITOROVERVIEW_H
 #define TASKEDITOROVERVIEW_H
 
-#include <opie/otodo.h>
+#include <opie2/opimtodo.h>
 
 #include <qpixmap.h>
 #include <qwidget.h>
@@ -39,8 +39,10 @@ class QCheckBox;
 class QComboBox;
 class QMultiLineEdit;
 
+using namespace Opie;
+
 class TaskEditorOverView : public QWidget
-{ 
+{
     Q_OBJECT
 
 public:
@@ -53,8 +55,8 @@ public:
     QCheckBox      *ckbRecurrence;
     QMultiLineEdit *mleNotes;
 
-    void load( const OTodo & );
-    void save( OTodo & );
+    void load( const OPimTodo & );
+    void save( OPimTodo & );
 
 signals:
     void recurranceEnabled( bool );

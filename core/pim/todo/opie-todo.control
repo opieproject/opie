@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/pim
 Maintainer: Holger 'zecke' Freyther <zecke@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal, libopie1, opie-pics
+Depends: task-opie-minimal, libopiecore2, libopieui2, libopiepim2, opie-pics
 Description: Todo list manager
  A Todo list manager for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION

@@ -11,7 +11,7 @@ TextViewShow::~TextViewShow() {
 QString TextViewShow::type()const {
     return QString::fromLatin1("TextViewShow");
 }
-void TextViewShow::slotShow( const OTodo& ev ) {
+void TextViewShow::slotShow( const OPimTodo& ev ) {
     setText( ev.toRichText() );
 }
 QWidget* TextViewShow::widget() {

@@ -56,9 +56,9 @@ namespace Todo {
         void clear();
         void showOverDue( bool );
         void updateView();
-        void setTodo( int uid, const OTodo& );
-        void addEvent( const OTodo& event );
-        void replaceEvent( const OTodo& );
+        void setTodo( int uid, const OPimTodo& );
+        void addEvent( const OPimTodo& event );
+        void replaceEvent( const OPimTodo& );
         void removeEvent( int uid );
         void setShowCompleted( bool );
         void setShowDeadline( bool );
@@ -72,7 +72,7 @@ namespace Todo {
          * we do our drawing ourselves
          * because we don't want to have
          * 40.000 QTableItems for 10.000
-         * OTodos where we only show 10 at a time!
+         * OPimTodos where we only show 10 at a time!
          */
         void paintCell(QPainter* p, int row, int col,  const QRect&, bool );
     private:
