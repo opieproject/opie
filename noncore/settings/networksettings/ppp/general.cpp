@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.4.2.5 2003-07-30 20:31:12 tille Exp $
+ * $Id: general.cpp,v 1.4.2.6 2003-07-31 11:09:00 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -84,10 +84,10 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   modemdevice->insertStringList( devs );
   tl->addWidget(modemdevice, 1, 1);
 
-  connect(modemdevice, SIGNAL(activated(int)),
-	  SLOT(setmodemdc(int)));
-  connect(modemdevice, SIGNAL(textChanged( const QString & ) ),
-          SLOT( setmodemdc( const QString &) ) );
+//   connect(modemdevice, SIGNAL(activated(int)),
+// 	  SLOT(setmodemdc(int)));
+//   connect(modemdevice, SIGNAL(textChanged( const QString & ) ),
+//           SLOT( setmodemdc( const QString &) ) );
 
   QString tmp = i18n("This specifies the serial port your modem is attached \n"
 		     "to. On Linux/x86, typically this is either /dev/ttyS0 \n"
@@ -110,8 +110,8 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   flowcontrol->insertItem(i18n("Software [XON/XOFF]"));
   flowcontrol->insertItem(i18n("None"));
   tl->addWidget(flowcontrol, 2, 1);
-  connect(flowcontrol, SIGNAL(activated(int)),
-	  SLOT(setflowcontrol(int)));
+//   connect(flowcontrol, SIGNAL(activated(int)),
+// 	  SLOT(setflowcontrol(int)));
 
   tmp = i18n("<p>Specifies how the serial port and modem\n"
 	     "communicate. You should not change this unless\n"
@@ -131,7 +131,7 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   enter->insertItem("LF");
   enter->insertItem("CR/LF");
   tl->addWidget(enter, 3, 1);
-  connect(enter, SIGNAL(activated(int)), SLOT(setenter(int)));
+//  connect(enter, SIGNAL(activated(int)), SLOT(setenter(int)));
   tmp = i18n("<p>Specifies how AT commands are sent to your\n"
 	     "modem. Most modems will work fine with the\n"
 	     "default <i>CR/LF</i>. If your modem does not react\n"
@@ -176,8 +176,8 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
     baud_c->insertItem(baudrates[k]);
 
   baud_c->setCurrentItem(3);
-  connect(baud_c, SIGNAL(activated(int)),
-	  this, SLOT(speed_selection(int)));
+//   connect(baud_c, SIGNAL(activated(int)),
+// 	  this, SLOT(speed_selection(int)));
   tl->addWidget(baud_c, 4, 1);
 
   tmp = i18n("Specifies the speed your modem and the serial\n"
@@ -201,8 +201,8 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   modemlockfile = new QCheckBox(i18n("&Use lock file"), this);
 
   modemlockfile->setChecked(_pppdata->modemLockFile());
-  connect(modemlockfile, SIGNAL(toggled(bool)),
-          SLOT(modemlockfilechanged(bool)));
+//   connect(modemlockfile, SIGNAL(toggled(bool)),
+//           SLOT(modemlockfilechanged(bool)));
   tl->addMultiCellWidget(modemlockfile, 6, 6, 0, 1);
   //  l12->addStretch(1);
   QWhatsThis::add(modemlockfile,
@@ -225,8 +225,8 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
 //  modemtimeout->setRange(1, 120, 1);
   modemtimeout->setSuffix(i18n(" sec"));
   modemtimeout->setValue( _pppdata->modemTimeout() );
-  connect(modemtimeout, SIGNAL(valueChanged(int)),
-	  SLOT(modemtimeoutchanged(int)));
+//   connect(modemtimeout, SIGNAL(valueChanged(int)),
+// 	  SLOT(modemtimeoutchanged(int)));
   timeoutLayout->addWidget(timeoutlabel);
   timeoutLayout->addWidget(modemtimeout);
   tl->addMultiCellLayout(timeoutLayout, 7, 7, 0, 1);
@@ -278,7 +278,7 @@ ModemWidget::~ModemWidget()
         if ( devs.contains( edited ) == 0 )  {
             devs << edited;
         }
-        setmodemdc( edited );
+        _pppdata->setModemDevice( edited );
     }
 
 
@@ -288,44 +288,50 @@ ModemWidget::~ModemWidget()
 
 }
 
-void ModemWidget::speed_selection(int) {
-  _pppdata->setSpeed(baud_c->text(baud_c->currentItem()));
-}
+// void ModemWidget::speed_selection(int) {
+//   _pppdata->setSpeed(baud_c->text(baud_c->currentItem()));
+// }
 
 
-void ModemWidget::setenter(int ) {
-  _pppdata->setEnter(enter->text(enter->currentItem()));
-}
+// void ModemWidget::setenter(int ) {
+//   _pppdata->setEnter(enter->text(enter->currentItem()));
+// }
 
 
-void ModemWidget::setmodemdc(int i) {
-  _pppdata->setModemDevice(modemdevice->text(i));
-}
+// void ModemWidget::setmodemdc(int i) {
+//   _pppdata->setModemDevice(modemdevice->text(i));
+// }
 
-void ModemWidget::setmodemdc( const QString &string )  {
-    _pppdata->setModemDevice( string );
-}
+// void ModemWidget::setmodemdc( const QString &string )  {
+//     _pppdata->setModemDevice( string );
+// }
 
-void ModemWidget::setflowcontrol(int i) {
-  _pppdata->setFlowcontrol(flowcontrol->text(i));
-}
-
-
-void ModemWidget::modemlockfilechanged(bool set) {
-  _pppdata->setModemLockFile(set);
-}
+// void ModemWidget::setflowcontrol(int i) {
+//   _pppdata->setFlowcontrol(flowcontrol->text(i));
+// }
 
 
-void ModemWidget::modemtimeoutchanged(int n) {
-  _pppdata->setModemTimeout(n);
-}
+// void ModemWidget::modemlockfilechanged(bool set) {
+//   _pppdata->setModemLockFile(set);
+// }
+
+
+// void ModemWidget::modemtimeoutchanged(int n) {
+//   _pppdata->setModemTimeout(n);
+// }
 
 
 
 void ModemWidget::save()
 {
     _pppdata->setDevname( modemname->text() );
-//FIXME
+    _pppdata->setModemDevice( modemdevice->currentText() );
+    _pppdata->setFlowcontrol(flowcontrol->currentText());
+    _pppdata->setFlowcontrol(flowcontrol->currentText());
+    _pppdata->setSpeed(baud_c->currentText());
+    _pppdata->setModemLockFile( modemlockfile->isChecked());
+    _pppdata->setModemTimeout( modemtimeout->value() );
+
 }
 
 ModemWidget2::ModemWidget2( PPPData *pd, InterfacePPP *ip, QWidget *parent,
@@ -337,7 +343,7 @@ ModemWidget2::ModemWidget2( PPPData *pd, InterfacePPP *ip, QWidget *parent,
 
   waitfordt = new QCheckBox(i18n("&Wait for dial tone before dialing"), this);
   waitfordt->setChecked(_pppdata->waitForDialTone());
-  connect(waitfordt, SIGNAL(toggled(bool)), SLOT(waitfordtchanged(bool)));
+//  connect(waitfordt, SIGNAL(toggled(bool)), SLOT(waitfordtchanged(bool)));
   l1->addWidget(waitfordt);
   QWhatsThis::add(waitfordt,
 		  i18n("<p>Normally the modem waits for a dial tone\n"
@@ -355,7 +361,7 @@ ModemWidget2::ModemWidget2( PPPData *pd, InterfacePPP *ip, QWidget *parent,
 //   busywait->setLabel(i18n("B&usy wait:"));
 //   busywait->setRange(0, 300, 5, true);
    busywait->setSuffix(i18n(" sec"));
-  connect(busywait, SIGNAL(valueChanged(int)), SLOT(busywaitchanged(int)));
+//  connect(busywait, SIGNAL(valueChanged(int)), SLOT(busywaitchanged(int)));
   waitLayout->addWidget(waitLabel);
   waitLayout->addWidget(busywait);
   l1->addLayout( waitLayout );
@@ -384,8 +390,8 @@ ModemWidget2::ModemWidget2( PPPData *pd, InterfacePPP *ip, QWidget *parent,
 
   l1->addLayout(hbl);
 
-  connect(volume, SIGNAL(valueChanged(int)),
-	  this, SLOT(volumeChanged(int)));
+//   connect(volume, SIGNAL(valueChanged(int)),
+// 	  this, SLOT(volumeChanged(int)));
   QString tmp = i18n("Most modems have a speaker which makes\n"
 	     "a lot of noise when dialing. Here you can\n"
 	     "either turn this completely off or select a\n"
@@ -476,27 +482,29 @@ void ModemWidget2::query_modem() {
 // }
 
 
-#if 0
-void ModemWidget2::use_cdline_toggled(bool on) {
-    _pppdata->setUseCDLine(on);
-}
-#endif
+// #if 0
+// void ModemWidget2::use_cdline_toggled(bool on) {
+//     _pppdata->setUseCDLine(on);
+// }
+// #endif
 
-void ModemWidget2::waitfordtchanged(bool b) {
-  _pppdata->setWaitForDialTone((int)b);
-}
+// void ModemWidget2::waitfordtchanged(bool b) {
+//   _pppdata->setWaitForDialTone((int)b);
+// }
 
-void ModemWidget2::busywaitchanged(int n) {
-  _pppdata->setbusyWait(n);
-}
+// void ModemWidget2::busywaitchanged(int n) {
+//   _pppdata->setbusyWait(n);
+// }
 
 
-void ModemWidget2::volumeChanged(int v) {
-  _pppdata->setVolume(v);
-}
+// void ModemWidget2::volumeChanged(int v) {
+//   _pppdata->setVolume(v);
+// }
 
 void ModemWidget2::save()
 {
-//FIXM
+    _pppdata->setWaitForDialTone(waitfordt->isChecked());
+    _pppdata->setbusyWait(busywait->value());
+    _pppdata->setVolume(volume->value());
 }
 

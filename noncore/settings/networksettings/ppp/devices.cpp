@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: devices.cpp,v 1.1.4.2 2003-07-30 21:50:17 harlekin Exp $
+ * $Id: devices.cpp,v 1.1.4.3 2003-07-31 11:09:00 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -199,17 +199,12 @@ int DevicesWidget::doTab(){
         result = dlg->exec();
         ok = true;
 
-        if(result != QDialog::Accepted) {
-
-            QMessageBox::warning(this,tr("Not implemented"),
-                                 tr("you're settings have been SAVED"));
-             }else{
+        if(result == QDialog::Accepted) {
 //FIXME: check for doublicate names
 //                 QMessageBox::critical(this, "error", tr( "You must enter a unique account name"));
 //                 ok = false;
                  modem1->save();
                  modem2->save();
-//            }
         }
     }
 

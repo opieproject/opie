@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.h,v 1.3.2.4 2003-07-30 20:31:12 tille Exp $
+ * $Id: general.h,v 1.3.2.5 2003-07-31 11:09:00 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -46,14 +46,14 @@ public:
 
   void save();
 
-private slots:
-  void 	setmodemdc(int);
- void        setmodemdc(const QString &);
-  void 	setflowcontrol(int);
-  void 	modemtimeoutchanged(int);
-  void 	modemlockfilechanged(bool);
-  void 	setenter(int);
-  void  speed_selection(int);
+/* private slots: */
+/*   void 	setmodemdc(int); */
+/*   void  setmodemdc(const QString &); */
+/*   void 	setflowcontrol(int); */
+/*   void 	modemtimeoutchanged(int); */
+/*   void 	modemlockfilechanged(bool); */
+/*   void 	setenter(int); */
+/*   void  speed_selection(int); */
 
 private:
   QComboBox 	*enter;
@@ -81,13 +81,13 @@ public:
   void save();
 
 private slots:
-  void  waitfordtchanged(bool);
-  void 	busywaitchanged(int);
+/*   void  waitfordtchanged(bool); */
+/*   void 	busywaitchanged(int); */
 //  void 	use_cdline_toggled(bool);
   void 	modemcmdsbutton();
   //  void 	terminal();
   void 	query_modem();
-  void  volumeChanged(int);
+  //  void  volumeChanged(int);
 
 private:
   QLabel 	*labeltmp;
