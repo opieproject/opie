@@ -46,6 +46,8 @@
 
 #include <opie/oticker.h>
 
+#include "mediaplayerstate.h"
+
 class QPixmap;
 
 namespace {
@@ -79,7 +81,7 @@ public slots:
     void setPosition( long );
     void setLength( long );
     void setSeekable( bool );
-    void setView( char );
+    void setMediaType( MediaPlayerState::MediaType mediaType );
 
 signals:
     void moreClicked();
