@@ -1,6 +1,6 @@
 /*
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2003 hOlgAr <zecke@handhelds.org>
+             .=l.            Copyright (c)  2003,2004,2005 Holger Hans Peter Freyther <zecke@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This library is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
@@ -310,7 +310,7 @@ void OWidgetStack::hideWidget( QWidget* wid) {
 
 
 bool OWidgetStack::eventFilter( QObject* obj, QEvent* e) {
-    if ( e->type() == QEvent::Resize ) {
+    if ( e->type() == QEvent::Resize && !m_forced ) {
         QResizeEvent *res = static_cast<QResizeEvent*>( e );
         QSize size = res->size();
         if ( size.width() >= mode_size )
