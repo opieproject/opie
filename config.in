@@ -41,6 +41,10 @@ config RELEASE
 config QUICK_LAUNCH
   boolean "Enable Quick Launch"
   default n
+  
+config OPIE_NO_OVERRIDE_QT
+  boolean "Build Opie against an unpatched version of Qt"
+  default n
 
 config SPECFILE
   string

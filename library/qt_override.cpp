@@ -22,12 +22,12 @@ struct color_fix_t {
 	QColorGroup::ColorRole m_get;
 };
 
-
+#ifndef OPIE_NO_OVERRIDE_QT
 
 static const color_fix_t apps_that_need_special_colors [] = {
 	{ "HancomMobileWord", "HTextEdit", 0, QColorGroup::Background, QColorGroup::Base },
 	{ "neocal", "Display", 0, QColorGroup::Background, QColorGroup::Base },
-	
+
 	{ 0, 0, 0, QColorGroup::Base, QColorGroup::Base }
 };
 
@@ -35,7 +35,7 @@ static const char * const apps_that_need_pointsizes_times_10 [] = {
 	"HancomMobileWord",
 	"hancomsheet",
 	"HancomPresenterViewer",
-	
+
 	0
 };
 
@@ -56,32 +56,35 @@ static void binaryNameFree ( )
 const char *Opie::binaryName ( )
 {
 	static const char *appname = 0;
-	
+
 	if ( !appname ) {
 		char dst [PATH_MAX + 1];
 		int l = ::readlink ( "/proc/self/exe", dst, PATH_MAX );
-			
-		if ( l <= 0 ) 
+
+		if ( l <= 0 )
 			l = 0;
-			
+
 		dst [l] = 0;
 		const char *b = ::strrchr ( dst, '/' );
 		appname = ::strdup ( b ? b + 1 : dst );
-		
+
 		::atexit ( binaryNameFree );
-	}	
+	}
 	return appname;
 }
 
+#else
+int Opie::force_appearance = 0;
+#endif
 
-// Fix for a toolchain incompatibility (binaries compiled with 
+// Fix for a toolchain incompatibility (binaries compiled with
 // old tcs using shared libs compiled with newer tcs)
 
 extern "C" {
 
 extern void __gmon_start__ ( ) __attribute__(( weak ));
 
-extern void __gmon_start__ ( ) 
+extern void __gmon_start__ ( )
 {
 }
 
@@ -89,11 +92,12 @@ extern void __gmon_start__ ( )
 
 
 // Fix for apps, that use QPainter::eraseRect() which doesn't work with styles
-// that set a background pixmap (it would be easier to fix eraseRect(), but 
+// that set a background pixmap (it would be easier to fix eraseRect(), but
 // TT made it an inline ...)
 
 void QPEApplication::polish ( QWidget *w )
 {
+#ifndef OPIE_NO_OVERRIDE_QT
 //	qDebug ( "QPEApplication::polish()" );
 
 	for ( const color_fix_t *ptr = apps_that_need_special_colors; ptr-> m_app; ptr++ ) {
@@ -105,10 +109,12 @@ void QPEApplication::polish ( QWidget *w )
 			w-> setPalette ( pal );
 		}
 	}
+#endif
 	QApplication::polish ( w );
 }
 
 
+#ifndef OPIE_NO_OVERRIDE_QT
 // Fix for the binary incompatibility that TT introduced in Qt/E 2.3.4 -- point sizes
 // were multiplied by 10 (which was incorrect)
 
@@ -120,8 +126,8 @@ QValueList <int> QFontDatabase::pointSizes ( QString const &family, QString cons
 
 	for ( const char * const *ptr = apps_that_need_pointsizes_times_10; *ptr; ptr++ ) {
 		if ( ::strcmp ( Opie::binaryName ( ), *ptr ) == 0 ) {
-			for ( QValueList <int>::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) 
-				*it *= 10;	
+			for ( QValueList <int>::Iterator it = sl. begin ( ); it != sl. end ( ); ++it )
+				*it *= 10;
 		}
 	}
 	return sl;
@@ -156,7 +162,7 @@ void QApplication::setFont ( const QFont &fnt, bool informWidgets, const char *c
 	if (!( Opie::force_appearance & Opie::Force_Font ))
 		QApplication::setFont_NonWeak ( fnt, informWidgets, className );
 }
-	
+
 
 void QApplication::qwsSetDecoration ( QWSDecoration *deco )
 {
@@ -167,5 +173,5 @@ void QApplication::qwsSetDecoration ( QWSDecoration *deco )
 	else
 		QApplication::qwsSetDecoration_NonWeak ( deco );
 }
-
+#endif
 #endif

@@ -1124,7 +1124,8 @@ void QPEApplication::applyStyle()
 	Config config( "qpe" );
 	config.setGroup( "Appearance" );
 
-    #if QT_VERSION > 233
+#if QT_VERSION > 233
+#if !defined(OPIE_NO_OVERRIDE_QT)
 	// don't block ourselves ...
 	Opie::force_appearance = 0;
 
@@ -1138,6 +1139,9 @@ void QPEApplication::applyStyle()
 			break;
 		}
 	}
+#else
+        int nostyle = 0;
+#endif
 
 	// Widget style
 	QString style = config.readEntry( "Style", "FlatStyle" );
@@ -1194,10 +1198,12 @@ void QPEApplication::applyStyle()
 
 	setFont ( QFont ( ff, fs ), true );
 
+#if !defined(OPIE_NO_OVERRIDE_QT)
 	// revert to global blocking policy ...
 	Opie::force_appearance = config. readBoolEntry ( "ForceStyle", false ) ? Opie::Force_All : Opie::Force_None;
 	Opie::force_appearance &= ~nostyle;
-    #endif
+#endif
+#endif
 }
 
 void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data )

@@ -118,6 +118,8 @@ SOURCES	=   calendar.cpp \
 	lnkproperties.cpp \
 	qt_override.cpp
 
+
+
 # Qt 3 compatibility
 HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h
 SOURCES += quuid.cpp qlibrary.cpp qlibrary_unix.cpp
@@ -149,3 +151,7 @@ TRANSLATIONS = ../i18n/de/libqpe.ts \
 
 
 include ( $(OPIEDIR)/include.pro )
+
+contains( CONFIG, no-override ){
+    DEFINES += OPIE_NO_OVERRIDE_QT
+}

@@ -29,6 +29,9 @@ else
 	echo CONFIG += quick-app-bin >> $@
 	echo \} >> $@
 endif	
+ifeq ($(CONFIG_OPIE_NO_OVERRIDE_QT),y)
+	echo CONFIG += no-override >> $@
+endif
 
 $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;) $(TOPDIR)/.config $(TOPDIR)/packages
 	@echo Generating dependency information...
