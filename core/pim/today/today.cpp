@@ -214,10 +214,8 @@ void Today::draw() {
 
     	if ( plugin.active ) {
             qDebug( plugin.name + " is ACTIVE " );
-            //        QHBoxLayout* plugLayout = new QHBoxLayout( this );
             plugin.guiBox->show();
         } else {
-            //     plugin.guiWidget->hide();
             qDebug( plugin.name + " is INACTIVE" );
             plugin.guiBox->hide();
         }
@@ -269,6 +267,7 @@ void Today::startConfig() {
         init();
 
         TodayPlugin plugin;
+        QValueList<TodayPlugin> plugList;
         for ( uint i = 0; i < pluginList.count(); i++ ) {
             plugin = pluginList[i];
 
@@ -277,10 +276,11 @@ void Today::startConfig() {
                 plugin.active = true;
             } else {
                 qDebug("CONFIG " + plugin.name + " INACTIVE");
-
                 plugin.active = false;
             }
+            plugList.append( plugin );
         }
+        pluginList = plugList;
 
         draw();
     }
@@ -308,8 +308,8 @@ void Today::editCard() {
  * launches an App
  */
 void Today::launchApp( QString appName ) {
-  QCopEnvelope e( "QPE/System", "execute(QString)" );
-  e << QString( appName );
+    QCopEnvelope e( "QPE/System", "execute(QString)" );
+    e << QString( appName );
 }
 
 Today::~Today() {
