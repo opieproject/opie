@@ -50,7 +50,7 @@ class QLabel;
 
 class ContactEditor : public QDialog {
 	Q_OBJECT
-	
+
 	public:
 		ContactEditor(	const Contact &entry,
 				const QValueList<int> *newOrderedValues,
@@ -78,7 +78,7 @@ class ContactEditor : public QDialog {
 		bool isEmpty();
 		void cleanupFields();
 		QString parseName( QString fullName, int type );
-		
+
 	private slots:
 		void slotChooser1Change( const QString &textChanged );
 		void slotChooser2Change( const QString &textChanged );
@@ -109,13 +109,13 @@ class ContactEditor : public QDialog {
 		QList<QLineEdit> listValue;
 		QList<QLabel> listName;
 		const QValueList<int> *orderedValues;
-		QStringList *slOrdered;
-		QStringList *slDynamicEntries;
+		QStringList slOrdered;
+		QStringList slDynamicEntries;
 
-		QStringList *slHomeAddress;
-		QStringList *slBusinessAddress;
-		QStringList *slChooserNames;
-		QStringList *slChooserValues;
+		QStringList slHomeAddress;
+		QStringList slBusinessAddress;
+		QStringList slChooserNames;
+		QStringList slChooserValues;
 
 		QMultiLineEdit *txtNote;
 		QLabel *lblNote;
@@ -143,7 +143,7 @@ class ContactEditor : public QDialog {
 		QComboBox *cmbChooserField4;
 		QComboBox *cmbFileAs;
 		CategorySelect *cmbCat;
-		
+
 		QScrollView *svAddress;
 		QLineEdit *txtAddress;
 		//QLineEdit *txtAddress2;

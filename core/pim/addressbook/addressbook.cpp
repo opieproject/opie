@@ -190,9 +190,9 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
     }
 
     listContainer = new QWidget( this );
-    
+
     QVBoxLayout *vb = new QVBoxLayout( listContainer );
-    
+
     abList = new AbTable( &orderedFields, listContainer, "table" );
     vb->addWidget(abList);
     abList->setHScrollBarMode( QScrollView::AlwaysOff );
@@ -233,7 +233,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
     defaultFont = new QFont( abList->font() );
 
     slotSetFont(startFontSize);
-		    
+
     mbList->insertItem( tr("Font"), fontMenu);
     setCentralWidget(listContainer);
 
@@ -247,7 +247,7 @@ void AddressbookWindow::slotSetFont( int size ) {
 	startFontSize = size;
 
 	QFont *currentFont;
-	
+
 	switch (size) {
 		case 0:
 			fontMenu->setItemChecked(0, true);
@@ -471,7 +471,7 @@ static void parseName( const QString& name, QString *first, QString *middle,
 	*first = rest.left( space );
 	*middle = rest.mid( space+1 );
     }
-	
+
 }
 
 
@@ -503,7 +503,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 				     this, "editor" );
 	    bAbEditFirstTime = FALSE;
 	} else {
-	    abEditor->setEntry( cnt );	
+	    abEditor->setEntry( cnt );
 	}
 	abView()->init( cnt );
 	editEntry( NewEntry );
@@ -794,7 +794,7 @@ void AddressbookWindow::initFields()
 	}
 	cfg.setGroup( "Font" );
 	startFontSize = cfg.readNumEntry( "fontSize", 1 );
-	
+
 
     } else {
 	QString str;
@@ -859,14 +859,14 @@ void AddressbookWindow::slotFind()
 #ifndef MAKE_FOR_SHARP_ROM
     if ( centralWidget() == abView() )
 	showList();
-    
+
     FindDialog frmFind( "Contacts", this );
     QObject::connect( &frmFind, SIGNAL(signalFindClicked(const QString &, bool, bool, int)), abList, SLOT(slotDoFind( const QString&,bool,bool,int)));
     QObject::connect( abList, SIGNAL(signalNotFound()), &frmFind, SLOT(slotNotFound()) );
     QObject::connect( abList, SIGNAL(signalWrapAround()), &frmFind, SLOT(slotWrapAround()) );
-    
+
     frmFind.exec();
-    
+
     if ( abList->numSelections() )
 	abList->clearSelection();
 
@@ -906,6 +906,7 @@ void AddressbookWindow::populateCategories()
     int id,
 	rememberId;
     id = 1;
+    rememberId = 0;
     catMenu->insertItem( tr( "All" ), id++ );
     QStringList categories = abList->categories();
     categories.append( tr( "Unfiled" ) );
