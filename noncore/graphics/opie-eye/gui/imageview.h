@@ -20,13 +20,15 @@ class ImageView:public Opie::MM::OImageScrollView
         ShowNext,
         ShowPrevious,
         Zoomer,
+        Autorotate,
+        Autoscale
     };
 
 public:
     ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name = 0, WFlags fl = 0 );
     virtual ~ImageView();
     Opie::Core::OKeyConfigManager* manager();
-    void setFullScreen(bool how){m_isFullScreen = how;}
+    void setFullScreen(bool how);
     bool fullScreen(){return m_isFullScreen;}
 
 signals:
@@ -36,6 +38,8 @@ signals:
     void toggleFullScreen();
     void hideMe();
     void toggleZoomer();
+    void toggleAutoscale();
+    void toggleAutorotate();
 
 protected:
     Opie::Core::OConfig * m_cfg;
@@ -46,5 +50,7 @@ protected:
 protected slots:
     virtual void slotShowImageInfo();
     virtual void keyReleaseEvent(QKeyEvent * e);
+    virtual void contentsMousePressEvent ( QMouseEvent * e);
 };
+
 #endif

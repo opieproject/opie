@@ -30,7 +30,7 @@
 #include <qdialog.h>
 #include <qmap.h>
 #include <qtimer.h>
-
+#include <qframe.h>
 
 
 
@@ -42,6 +42,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     setCaption( QObject::tr("Opie Eye Caramba" ) );
     m_cfg = new Opie::Core::OConfig("phunkview");
     m_cfg->setGroup("Zecke_view" );
+    tFrame = 0;
 //    qDebug( "Process-wide OApplication object @ %0x", oApp );
     /*
      * Initialize ToolBar and IconView
@@ -128,11 +129,11 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
 
     connect(rotateButton,SIGNAL(toggled(bool)),this,SLOT(slotRotateToggled(bool)));
 
-    btn = new QToolButton(bar);
-    btn->setIconSet( Resource::loadIconSet( "1to1" ) );
-    btn->setToggleButton(true);
-    btn->setOn(false);
-    connect(btn,SIGNAL(toggled(bool)),this,SLOT(slotScaleToggled(bool)));
+    scaleButton = new QToolButton(bar);
+    scaleButton->setIconSet( Resource::loadIconSet( "1to1" ) );
+    scaleButton->setToggleButton(true);
+    scaleButton->setOn(false);
+    connect(scaleButton,SIGNAL(toggled(bool)),this,SLOT(slotScaleToggled(bool)));
     autoScale = true;
 
     zoomButton = new QToolButton(bar);
@@ -145,6 +146,8 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
 
 PMainWindow::~PMainWindow() {
     odebug << "Shutting down" << oendl;
+    if (tFrame) delete tFrame;
+    odebug << "Shutting down done" << oendl;
 }
 
 void PMainWindow::slotToggleZoomer()
@@ -160,6 +163,21 @@ void PMainWindow::slotZoomerToggled(bool how)
     if (m_disp) {
         m_disp->setShowZoomer(zoomerOn);
     }
+}
+
+void PMainWindow::slotToggleAutorotate()
+{
+    if (!m_disp) return;
+    if (!rotateButton->isEnabled()) return;
+    bool cur = rotateButton->isOn();
+    rotateButton->setOn(!cur);
+}
+
+void PMainWindow::slotToggleAutoscale()
+{
+    if (!m_disp) return;
+    bool cur = scaleButton->isOn();
+    scaleButton->setOn(!cur);
 }
 
 void PMainWindow::slotRotateToggled(bool how)
@@ -295,6 +313,8 @@ void PMainWindow::initDisp() {
         connect(m_disp,SIGNAL(toggleFullScreen()),this,SLOT(slotToggleFullScreen()));
         connect(m_disp,SIGNAL(hideMe()),this,SLOT(raiseIconView()));
         connect(m_disp,SIGNAL(toggleZoomer()),this,SLOT(slotToggleZoomer()));
+        connect(m_disp,SIGNAL(toggleAutoscale()),this,SLOT(slotToggleAutoscale()));
+        connect(m_disp,SIGNAL(toggleAutorotate()),this,SLOT(slotToggleAutorotate()));
     }
 }
 
@@ -308,13 +328,22 @@ void PMainWindow::slotToggleFullScreen()
     if (current) {
         odebug << "full" << oendl;
         m_disp->setBackgroundColor(black);
-        m_disp->reparent(0,QPoint(0,0));
+        if (!tFrame) {
+            tFrame = new QWidget(0,0,WType_TopLevel|WStyle_NoBorder|WStyle_StaysOnTop);
+            tFrame->resize(qApp->desktop()->width(), qApp->desktop()->height());
+            tFrame->setMinimumSize(qApp->desktop()->width(), qApp->desktop()->height());
+        }
+        m_disp->reparent(tFrame,QPoint(0,0));
         m_disp->setVScrollBarMode(QScrollView::AlwaysOff);
         m_disp->setHScrollBarMode(QScrollView::AlwaysOff);
         m_disp->resize(qApp->desktop()->width(), qApp->desktop()->height());
-        m_disp->showFullScreen();
+        tFrame->showFullScreen();
     } else {
         odebug << "window" << oendl;
+        m_disp->reparent(0,QPoint(0,0));
+        m_disp->showNormal();
+        /* don't forget it! */
+        tFrame->hide();
         m_disp->setBackgroundColor(white);
         m_stack->addWidget(m_disp,ImageDisplay);
         m_disp->setVScrollBarMode(QScrollView::Auto);
@@ -335,6 +364,9 @@ void PMainWindow::slotToggleFullScreen()
  * ### FIXME and talk to alwin
  */
 void PMainWindow::slotShowInfo( const QString& inf ) {
+    if (m_disp && m_disp->fullScreen() && m_disp->isVisible()) {
+        return;
+    }
     if ( !m_info ) {
         initInfo();
     }
@@ -345,9 +377,6 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
         upButton->hide();
         fsButton->hide();
         viewModeButton->hide();
-    }
-    if (m_disp && m_disp->fullScreen() && m_disp->isVisible()) {
-        m_disp->hide();
     }
     m_stack->raiseWidget( ImageInfo );
 }
@@ -365,7 +394,8 @@ void PMainWindow::slotDisplay( const QString& inf ) {
         viewModeButton->hide();
     }
     if (m_disp->fullScreen()) {
-        m_disp->show();
+        tFrame->setActiveWindow();
+        tFrame->showFullScreen();
     } else {
         m_stack->raiseWidget( ImageDisplay );
     }
@@ -383,9 +413,14 @@ void PMainWindow::closeEvent( QCloseEvent* ev ) {
      */
     if ( m_stack->visibleWidget() == m_info ||
          m_stack->visibleWidget() == m_disp ) {
-        raiseIconView();
         ev->ignore();
+        raiseIconView();
         return;
+    }
+    if (m_disp && m_disp->fullScreen()) {
+        /* otherwise opie-eye crashes in bigscreen mode! */
+        m_disp->reparent(0,QPoint(0,0));
+        m_stack->addWidget(m_disp,ImageDisplay);
     }
     ev->accept();
     QTimer::singleShot(0, qApp, SLOT(closeAllWindows()));
@@ -400,7 +435,7 @@ void PMainWindow::raiseIconView() {
         viewModeButton->show();
     }
     if (m_disp && m_disp->fullScreen() && m_disp->isVisible()) {
-        m_disp->hide();
+        tFrame->hide();
     }
     m_stack->raiseWidget( IconView );
 }

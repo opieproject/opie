@@ -5,6 +5,8 @@
 #include <opie2/okeyconfigwidget.h>
 
 #include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
+#include <qpopupmenu.h>
 
 using namespace Opie::Core;
 
@@ -14,11 +16,13 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     m_viewManager = 0;
     m_cfg = cfg;
     m_isFullScreen = false;
+    QPEApplication::setStylusOperation(viewport(),QPEApplication::RightOnHold);
     initKeys();
 }
 
 ImageView::~ImageView()
 {
+    odebug << "Delete Imageview" << oendl;
     if (m_viewManager) {
         delete m_viewManager;
     }
@@ -48,14 +52,24 @@ void ImageView::initKeys()
 
     m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "image_view_keys",
                                                     lst, false,this, "image_view_keys" );
+
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("View Image Info"), "imageviewinfo",
                                                 Resource::loadPixmap("1to1"), ViewInfo,
                                                 Opie::Core::OKeyPair(Qt::Key_I,0),
                                                 this, SLOT(slotShowImageInfo())));
 
+    m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Toggle autorotate"), "imageautorotate",
+                                                Resource::loadPixmap("rotate"), Autorotate,
+                                                Opie::Core::OKeyPair(Qt::Key_R,0),
+                                                this, SIGNAL(toggleAutorotate())));
+    m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Toggle autoscale"), "imageautoscale",
+                                                Resource::loadPixmap("1to1"), Autoscale,
+                                                Opie::Core::OKeyPair(Qt::Key_S,0),
+                                                this, SIGNAL(toggleAutoscale())));
+
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Switch to next image"), "imageshownext",
                                                 Resource::loadPixmap("forward"), ShowNext,
-                                                Opie::Core::OKeyPair(Qt::Key_N,0),
+                                                Opie::Core::OKeyPair(Qt::Key_Return,0),
                                                 this, SIGNAL(dispNext())));
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Switch to previous image"), "imageshowprev",
                                                 Resource::loadPixmap("back"), ShowPrevious,
@@ -84,4 +98,34 @@ void ImageView::keyReleaseEvent(QKeyEvent * e)
 void ImageView::slotShowImageInfo()
 {
     emit dispImageInfo(m_lastName);
+}
+
+void ImageView::contentsMousePressEvent ( QMouseEvent * e)
+{
+    if (e->button()==1) {
+        return OImageScrollView::contentsMousePressEvent(e);
+    }
+    if (!fullScreen()) return;
+#if 0
+    // doesn't work right (repainting problems)
+    odebug << "Popup " << oendl;
+    QPopupMenu *m = new QPopupMenu(0);
+    if (!m) return;
+    m->insertItem(tr("Previous image"),ShowPrevious);
+    m->insertItem(tr("Next image"),ShowNext);
+    m->insertSeparator();
+    m->insertItem(tr("Toggle fullscreen"),FullScreen);
+    m->insertItem(tr("Toggle autoscale"),Autoscale);
+    m->insertItem(tr("Toggle autorotate"),Autorotate);
+    m->insertItem(tr("Toggle thumbnail"),Zoomer);
+    m->setFocus();
+    m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
+    delete m;
+    parentWidget()->showFullScreen();
+#endif
+}
+
+void ImageView::setFullScreen(bool how)
+{
+    m_isFullScreen = how;
 }
