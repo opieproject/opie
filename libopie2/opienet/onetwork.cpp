@@ -934,6 +934,7 @@ QString OWlanNGMonitoringInterface::name() const
 void OWlanNGMonitoringInterface::setChannel( int )
 {
     // wlan-ng devices automatically switch channels when in monitor mode
+    // NOTE: The above note no longer seems to be true for recent driver versions!
 }
 
 
