@@ -222,7 +222,7 @@ void OPluginItem::setName(  const QString& name ) {
  * @param name The path of the plugin
  */
 void OPluginItem::setPath( const QString& name ) {
-    m_name = name;
+    m_path = name;
 }
 
 /**
@@ -823,7 +823,7 @@ void OPluginManager::save() {
      */
     for ( OPluginItem::List::Iterator it = m_plugins.begin(); it != m_plugins.end(); ++it ) {
         OPluginItem item = *it;
-        QString path = QFileInfo(  item.path() ).filePath();
+        QString path = QFileInfo(  item.path() ).dirPath(true);
         if ( sorted ) {
             positions[path].append( item.name() );
             positions[path].append( QString::number( item.position() ) );
