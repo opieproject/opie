@@ -1,100 +1,125 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>Button</name>
+</context>
+<context>
+    <name>OColorDialog</name>
+</context>
+<context>
+    <name>OColorPopupMenu</name>
+</context>
+<context>
+    <name>OFileDialog</name>
+</context>
+<context>
+    <name>OFileSelector</name>
+</context>
+<context>
+    <name>OFileViewFileListView</name>
+</context>
+<context>
+    <name>OFontMenu</name>
+</context>
+<context>
+    <name>OFontSelector</name>
+</context>
+<context>
     <name>OPimRecurrenceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ponavljajoč dogodek
+</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Brez</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dan</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Teden</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mesec</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Leto</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vasak:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pogostost</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Konča na:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Brez končnega datuma</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ponovi na</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pon</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tor</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sre</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Čet</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pet</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sob</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ned</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vsak</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Spremenljivka1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Spremenljivka 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tedenskaspremenljivka</translation>
     </message>
 </context>
 <context>
     <name>OPimRecurrenceWidget</name>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Brez končnega datuma</translation>
     </message>
     <message>
         <source>days</source>
@@ -155,35 +180,35 @@ and </source>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ponovi na</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pon</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tor</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sre</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Čet</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pet</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sob</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ned</translation>
     </message>
     <message>
         <source>week(s)</source>
@@ -195,7 +220,7 @@ and </source>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dan</translation>
     </message>
     <message>
         <source>Date</source>
@@ -211,17 +236,203 @@ and </source>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vsak</translation>
+    </message>
+</context>
+<context>
+    <name>ORecurranceBase</name>
+    <message>
+        <source>Repeating Event </source>
+        <translation type="obsolete">Ponavljajoč dogodek
+</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="obsolete">Brez</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="obsolete">Dan</translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="obsolete">Teden</translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="obsolete">Mesec</translation>
+    </message>
+    <message>
+        <source>Year</source>
+        <translation type="obsolete">Leto</translation>
+    </message>
+    <message>
+        <source>Every:</source>
+        <translation type="obsolete">Vasak:</translation>
+    </message>
+    <message>
+        <source>Frequency</source>
+        <translation type="obsolete">Pogostost</translation>
+    </message>
+    <message>
+        <source>End On:</source>
+        <translation type="obsolete">Konča na:</translation>
+    </message>
+    <message>
+        <source>No End Date</source>
+        <translation type="obsolete">Brez končnega datuma</translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="obsolete">Ponovi na</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="obsolete">Pon</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="obsolete">Tor</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="obsolete">Sre</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="obsolete">Čet</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="obsolete">Pet</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="obsolete">Sob</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="obsolete">Ned</translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="obsolete">Vsak</translation>
+    </message>
+    <message>
+        <source>Var1</source>
+        <translation type="obsolete">Spremenljivka1</translation>
+    </message>
+    <message>
+        <source>Var 2</source>
+        <translation type="obsolete">Spremenljivka 2</translation>
+    </message>
+    <message>
+        <source>WeekVar</source>
+        <translation type="obsolete">Tedenskaspremenljivka</translation>
+    </message>
+</context>
+<context>
+    <name>ORecurranceWidget</name>
+    <message>
+        <source>No End Date</source>
+        <translation type="obsolete">Brez končnega datuma</translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="obsolete">Ponovi na</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="obsolete">Pon</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="obsolete">Tor</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="obsolete">Sre</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="obsolete">Čet</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="obsolete">Pet</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="obsolete">Sob</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="obsolete">Ned</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="obsolete">Dan</translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="obsolete">Vsak</translation>
+    </message>
+</context>
+<context>
+    <name>OTimePickerDialogBase</name>
+    <message>
+        <source>Time:</source>
+        <translation type="obsolete">Čas:</translation>
+    </message>
+    <message>
+        <source>:</source>
+        <translation type="obsolete">:</translation>
+    </message>
+    <message>
+        <source>Pick Time:</source>
+        <translation type="obsolete">Izberi čas:</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <source>Default Email: </source>
+        <source>Priority:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
+        <source>Very high</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deadline:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Email: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -246,10 +457,6 @@ and </source>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -317,11 +524,91 @@ and </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Category:</source>
+        <source>Notes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Notes:</source>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is an all day event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a multiple day event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="unfinished">Vsak</translation>
+    </message>
+    <message>
+        <source>%1 %2 every </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The %1 every </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The %1 %2 of every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Monday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wednesday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thursday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Friday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Saturday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sunday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -494,114 +781,6 @@ and </source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Priority:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Very high</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>High</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Low</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Very low</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Progress:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deadline:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Location:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is an all day event</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is a multiple day event</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Every</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>%1 %2 every </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The %1 every </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The %1 %2 of every</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Every </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Monday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tuesday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wednesday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thursday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Friday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Saturday</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sunday</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

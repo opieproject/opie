@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation>Ioniseringsenergi</translation>
+        <translation type="obsolete">Ioniseringsenergi</translation>
     </message>
     <message>
         <source>Density</source>
@@ -66,11 +66,11 @@
     </message>
     <message>
         <source>Boilingpoint</source>
-        <translation>Kogepunkt</translation>
+        <translation type="obsolete">Kogepunkt</translation>
     </message>
     <message>
         <source>Meltingpoint</source>
-        <translation>Smeltepunkt</translation>
+        <translation type="obsolete">Smeltepunkt</translation>
     </message>
     <message>
         <source>%1 pm</source>
@@ -83,6 +83,18 @@
     <message>
         <source>Weight</source>
         <translation>Masse</translation>
+    </message>
+    <message>
+        <source>Ionization Energy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boiling point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Melting point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation>游離能</translation>
+        <translation type="obsolete">游離能</translation>
     </message>
     <message>
         <source>Density</source>
@@ -54,11 +54,11 @@
     </message>
     <message>
         <source>Boilingpoint</source>
-        <translation>沸點</translation>
+        <translation type="obsolete">沸點</translation>
     </message>
     <message>
         <source>Meltingpoint</source>
-        <translation>熔點</translation>
+        <translation type="obsolete">熔點</translation>
     </message>
     <message>
         <source>%1 u</source>
@@ -82,6 +82,18 @@
     </message>
     <message>
         <source>Weight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ionization Energy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boiling point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Melting point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

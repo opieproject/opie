@@ -45,19 +45,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Density</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Boilingpoint</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Meltingpoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -82,6 +70,18 @@
     </message>
     <message>
         <source>Weight</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ionization Energy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boiling point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Melting point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

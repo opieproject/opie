@@ -69,19 +69,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Density</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Boilingpoint</source>
+        <source>Ionization Energy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Meltingpoint</source>
+        <source>Boiling point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Melting point</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

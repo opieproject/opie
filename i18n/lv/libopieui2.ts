@@ -1,5 +1,14 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>Button</name>
+</context>
+<context>
+    <name>OColorDialog</name>
+</context>
+<context>
+    <name>OColorPopupMenu</name>
+</context>
+<context>
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
@@ -13,6 +22,15 @@
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>OFileSelector</name>
+</context>
+<context>
+    <name>OFileViewFileListView</name>
+</context>
+<context>
+    <name>OFontMenu</name>
 </context>
 <context>
     <name>OFontSelector</name>
@@ -97,6 +115,12 @@
     </message>
 </context>
 <context>
+    <name>ORecurranceBase</name>
+</context>
+<context>
+    <name>ORecurranceWidget</name>
+</context>
+<context>
     <name>OTimePickerDialogBase</name>
     <message>
         <source>OTimePickerDialogBase</source>
@@ -144,10 +168,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Documents</source>
         <translation type="unfinished"></translation>
     </message>
@@ -159,5 +179,12 @@
         <source>All Files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
 </context>
 </TS>

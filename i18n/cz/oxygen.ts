@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation>Energie ionizace</translation>
+        <translation type="obsolete">Energie ionizace</translation>
     </message>
     <message>
         <source>Density</source>
@@ -78,11 +78,23 @@
     </message>
     <message>
         <source>Boilingpoint</source>
-        <translation>Bod varu</translation>
+        <translation type="obsolete">Bod varu</translation>
     </message>
     <message>
         <source>Meltingpoint</source>
-        <translation>Teplota tání</translation>
+        <translation type="obsolete">Teplota tání</translation>
+    </message>
+    <message>
+        <source>Ionization Energy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boiling point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Melting point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

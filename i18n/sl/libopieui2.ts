@@ -1,5 +1,14 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>Button</name>
+</context>
+<context>
+    <name>OColorDialog</name>
+</context>
+<context>
+    <name>OColorPopupMenu</name>
+</context>
+<context>
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
@@ -13,6 +22,15 @@
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>OFileSelector</name>
+</context>
+<context>
+    <name>OFileViewFileListView</name>
+</context>
+<context>
+    <name>OFontMenu</name>
 </context>
 <context>
     <name>OFontSelector</name>
@@ -97,21 +115,160 @@
     </message>
 </context>
 <context>
-    <name>OTimePickerDialogBase</name>
+    <name>ORecurranceBase</name>
     <message>
-        <source>OTimePickerDialogBase</source>
-        <translation type="unfinished"></translation>
+        <source>Repeating Event </source>
+        <translation type="obsolete">Ponavljajoč dogodek
+</translation>
     </message>
     <message>
+        <source>None</source>
+        <translation type="obsolete">Brez</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="obsolete">Dan</translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="obsolete">Teden</translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="obsolete">Mesec</translation>
+    </message>
+    <message>
+        <source>Year</source>
+        <translation type="obsolete">Leto</translation>
+    </message>
+    <message>
+        <source>Every:</source>
+        <translation type="obsolete">Vasak:</translation>
+    </message>
+    <message>
+        <source>Frequency</source>
+        <translation type="obsolete">Pogostost</translation>
+    </message>
+    <message>
+        <source>End On:</source>
+        <translation type="obsolete">Konča na:</translation>
+    </message>
+    <message>
+        <source>No End Date</source>
+        <translation type="obsolete">Brez končnega datuma</translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="obsolete">Ponovi na</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="obsolete">Pon</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="obsolete">Tor</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="obsolete">Sre</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="obsolete">Čet</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="obsolete">Pet</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="obsolete">Sob</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="obsolete">Ned</translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="obsolete">Vsak</translation>
+    </message>
+    <message>
+        <source>Var1</source>
+        <translation type="obsolete">Spremenljivka1</translation>
+    </message>
+    <message>
+        <source>Var 2</source>
+        <translation type="obsolete">Spremenljivka 2</translation>
+    </message>
+    <message>
+        <source>WeekVar</source>
+        <translation type="obsolete">Tedenskaspremenljivka</translation>
+    </message>
+</context>
+<context>
+    <name>ORecurranceWidget</name>
+    <message>
+        <source>No End Date</source>
+        <translation type="obsolete">Brez končnega datuma</translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="obsolete">Ponovi na</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="obsolete">Pon</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="obsolete">Tor</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="obsolete">Sre</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="obsolete">Čet</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="obsolete">Pet</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="obsolete">Sob</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="obsolete">Ned</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="obsolete">Dan</translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="obsolete">Vsak</translation>
+    </message>
+</context>
+<context>
+    <name>OTimePickerDialogBase</name>
+    <message>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas:</translation>
     </message>
     <message>
         <source>:</source>
-        <translation type="unfinished"></translation>
+        <translation>:</translation>
     </message>
     <message>
         <source>Pick Time:</source>
+        <translation>Izberi čas:</translation>
+    </message>
+    <message>
+        <source>OTimePickerDialogBase</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -144,10 +301,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>None</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Documents</source>
         <translation type="unfinished"></translation>
     </message>
@@ -159,5 +312,16 @@
         <source>All Files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Every</source>
+        <translation type="obsolete">Vsak</translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Brez</translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
 </context>
 </TS>

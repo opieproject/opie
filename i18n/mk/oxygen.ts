@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation>Енергија на јонизација</translation>
+        <translation type="obsolete">Енергија на јонизација</translation>
     </message>
     <message>
         <source>Density</source>
@@ -78,11 +78,23 @@
     </message>
     <message>
         <source>Boilingpoint</source>
-        <translation>Точка на ротација</translation>
+        <translation type="obsolete">Точка на ротација</translation>
     </message>
     <message>
         <source>Meltingpoint</source>
-        <translation>Точка на сретнување</translation>
+        <translation type="obsolete">Точка на сретнување</translation>
+    </message>
+    <message>
+        <source>Ionization Energy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boiling point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Melting point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

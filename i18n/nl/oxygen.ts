@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation>Ionisatieenergie</translation>
+        <translation type="obsolete">Ionisatieenergie</translation>
     </message>
     <message>
         <source>Density</source>
@@ -78,11 +78,23 @@
     </message>
     <message>
         <source>Boilingpoint</source>
-        <translation>Kookpunt</translation>
+        <translation type="obsolete">Kookpunt</translation>
     </message>
     <message>
         <source>Meltingpoint</source>
-        <translation>Smeltpunt</translation>
+        <translation type="obsolete">Smeltpunt</translation>
+    </message>
+    <message>
+        <source>Ionization Energy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boiling point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Melting point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

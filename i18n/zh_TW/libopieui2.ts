@@ -1,5 +1,14 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>Button</name>
+</context>
+<context>
+    <name>OColorDialog</name>
+</context>
+<context>
+    <name>OColorPopupMenu</name>
+</context>
+<context>
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
@@ -13,6 +22,15 @@
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>OFileSelector</name>
+</context>
+<context>
+    <name>OFileViewFileListView</name>
+</context>
+<context>
+    <name>OFontMenu</name>
 </context>
 <context>
     <name>OFontSelector</name>
@@ -97,21 +115,155 @@
     </message>
 </context>
 <context>
-    <name>OTimePickerDialogBase</name>
+    <name>ORecurranceBase</name>
     <message>
-        <source>OTimePickerDialogBase</source>
-        <translation type="unfinished"></translation>
+        <source>Repeating Event </source>
+        <translation type="obsolete">Repeating Event</translation>
     </message>
     <message>
+        <source>None</source>
+        <translation type="obsolete">無</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="obsolete">日</translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="obsolete">星期</translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="obsolete">月份</translation>
+    </message>
+    <message>
+        <source>Year</source>
+        <translation type="obsolete">年份</translation>
+    </message>
+    <message>
+        <source>Every:</source>
+        <translation type="obsolete">每:</translation>
+    </message>
+    <message>
+        <source>Frequency</source>
+        <translation type="obsolete">重復的</translation>
+    </message>
+    <message>
+        <source>End On:</source>
+        <translation type="obsolete">End On:</translation>
+    </message>
+    <message>
+        <source>No End Date</source>
+        <translation type="obsolete">No End Date</translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="obsolete">在某天重復</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="obsolete">星期一</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="obsolete">星期二</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="obsolete">星期三</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="obsolete">星期四</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="obsolete">星期五</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="obsolete">星期六</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="obsolete">星期日</translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="obsolete">每</translation>
+    </message>
+    <message>
+        <source>Var 2</source>
+        <translation type="obsolete">Var 2</translation>
+    </message>
+    <message>
+        <source>WeekVar</source>
+        <translation type="obsolete">WeekVar</translation>
+    </message>
+</context>
+<context>
+    <name>ORecurranceWidget</name>
+    <message>
+        <source>No End Date</source>
+        <translation type="obsolete">No End Date</translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="obsolete">在某天重復</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="obsolete">星期一</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="obsolete">星期二</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="obsolete">星期三</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="obsolete">星期四</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="obsolete">星期五</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="obsolete">星期六</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="obsolete">星期日</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="obsolete">日</translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="obsolete">每</translation>
+    </message>
+</context>
+<context>
+    <name>OTimePickerDialogBase</name>
+    <message>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Time:</translation>
     </message>
     <message>
         <source>:</source>
-        <translation type="unfinished"></translation>
+        <translation>:</translation>
     </message>
     <message>
         <source>Pick Time:</source>
+        <translation>Pick Time:</translation>
+    </message>
+    <message>
+        <source>OTimePickerDialogBase</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -144,8 +296,8 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>None</source>
-        <translation type="unfinished"></translation>
+        <source>Every</source>
+        <translation type="obsolete">每</translation>
     </message>
     <message>
         <source>Documents</source>
@@ -159,5 +311,12 @@
         <source>All Files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">無</translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
 </context>
 </TS>

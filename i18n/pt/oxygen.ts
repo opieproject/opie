@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation>Energia de Ionização</translation>
+        <translation type="obsolete">Energia de Ionização</translation>
     </message>
     <message>
         <source>Density</source>
@@ -54,11 +54,11 @@
     </message>
     <message>
         <source>Boilingpoint</source>
-        <translation>Ponto de Fervura</translation>
+        <translation type="obsolete">Ponto de Fervura</translation>
     </message>
     <message>
         <source>Meltingpoint</source>
-        <translation>Ponto de Derretimento</translation>
+        <translation type="obsolete">Ponto de Derretimento</translation>
     </message>
     <message>
         <source>%1 u</source>
@@ -83,6 +83,18 @@
     <message>
         <source>Weight</source>
         <translation>Peso</translation>
+    </message>
+    <message>
+        <source>Ionization Energy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Boiling point</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Melting point</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

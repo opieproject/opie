@@ -1,5 +1,14 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>Button</name>
+</context>
+<context>
+    <name>OColorDialog</name>
+</context>
+<context>
+    <name>OColorPopupMenu</name>
+</context>
+<context>
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
@@ -13,6 +22,15 @@
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>OFileSelector</name>
+</context>
+<context>
+    <name>OFileViewFileListView</name>
+</context>
+<context>
+    <name>OFontMenu</name>
 </context>
 <context>
     <name>OFontSelector</name>
@@ -97,21 +115,159 @@
     </message>
 </context>
 <context>
-    <name>OTimePickerDialogBase</name>
+    <name>ORecurranceBase</name>
     <message>
-        <source>OTimePickerDialogBase</source>
-        <translation type="unfinished"></translation>
+        <source>Repeating Event </source>
+        <translation type="obsolete">Ismétlődő esemény</translation>
     </message>
     <message>
+        <source>None</source>
+        <translation type="obsolete">Nincs</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="obsolete">Nap</translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="obsolete">Hét</translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="obsolete">Hónap</translation>
+    </message>
+    <message>
+        <source>Year</source>
+        <translation type="obsolete">Év</translation>
+    </message>
+    <message>
+        <source>Every:</source>
+        <translation type="obsolete">Minden:</translation>
+    </message>
+    <message>
+        <source>Frequency</source>
+        <translation type="obsolete">Gyakoriság</translation>
+    </message>
+    <message>
+        <source>End On:</source>
+        <translation type="obsolete">Vége:</translation>
+    </message>
+    <message>
+        <source>No End Date</source>
+        <translation type="obsolete">Nincs végső dátum</translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="obsolete">Ismétlés</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="obsolete">Hé</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="obsolete">Ke</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="obsolete">Sze</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="obsolete">Csü</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="obsolete">Pé</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="obsolete">Szo</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="obsolete">Va</translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="obsolete">Minden</translation>
+    </message>
+    <message>
+        <source>Var1</source>
+        <translation type="obsolete">Var1</translation>
+    </message>
+    <message>
+        <source>Var 2</source>
+        <translation type="obsolete">Var 2</translation>
+    </message>
+    <message>
+        <source>WeekVar</source>
+        <translation type="obsolete">HétVar</translation>
+    </message>
+</context>
+<context>
+    <name>ORecurranceWidget</name>
+    <message>
+        <source>No End Date</source>
+        <translation type="obsolete">Nincs végső dátum</translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="obsolete">Ismétlés</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="obsolete">Hé</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="obsolete">Ke</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="obsolete">Sze</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="obsolete">Csü</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="obsolete">Pé</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="obsolete">Szo</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="obsolete">Va</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="obsolete">Nap</translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="obsolete">Minden</translation>
+    </message>
+</context>
+<context>
+    <name>OTimePickerDialogBase</name>
+    <message>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Idő:</translation>
     </message>
     <message>
         <source>:</source>
-        <translation type="unfinished"></translation>
+        <translation>:</translation>
     </message>
     <message>
         <source>Pick Time:</source>
+        <translation>Válasszon időt:</translation>
+    </message>
+    <message>
+        <source>OTimePickerDialogBase</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -144,8 +300,8 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>None</source>
-        <translation type="unfinished"></translation>
+        <source>Every</source>
+        <translation type="obsolete">Minden</translation>
     </message>
     <message>
         <source>Documents</source>
@@ -159,5 +315,12 @@
         <source>All Files</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Nincs</translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
 </context>
 </TS>
