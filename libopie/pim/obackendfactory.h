@@ -12,11 +12,17 @@
  * =====================================================================
  * ToDo: Use plugins 
  * =====================================================================
- * Version: $Id: obackendfactory.h,v 1.1 2002-10-07 17:35:01 eilers Exp $
+ * Version: $Id: obackendfactory.h,v 1.2 2002-10-08 09:27:36 eilers Exp $
  * =====================================================================
  * History:
  * $Log: obackendfactory.h,v $
- * Revision 1.1  2002-10-07 17:35:01  eilers
+ * Revision 1.2  2002-10-08 09:27:36  eilers
+ * Fixed libopie.pro to include the new pim-API.
+ * The SQL-Stuff is currently deactivated. Otherwise everyone who wants to
+ * compile itself would need to install libsqlite, libopiesql...
+ * Therefore, the backend currently uses XML only..
+ *
+ * Revision 1.1  2002/10/07 17:35:01  eilers
  * added OBackendFactory for advanced backend access
  *
  *
@@ -31,8 +37,10 @@
 
 #include "otodoaccessxml.h"
 #include "ocontactaccessbackend_xml.h"
-#include "otodoaccesssql.h"
 
+#ifdef __USE_SQL
+#include "otodoaccesssql.h"
+#endif
 
 template<class T>
 class OBackendFactory
@@ -64,9 +72,14 @@ class OBackendFactory
 	
 		switch ( *dict.take( backendName ) ){
 		case TODO:
+#ifdef __USE_SQL
 			if ( backend == "sql" ) 
 				return (T*) new OTodoAccessBackendSQL("");
-			
+#else
+			if ( backend == "sql" ) 
+				qWarning ("OBackendFactory:: sql Backend not implemented! Using XML instead!");
+#endif
+
 			return (T*) new OTodoAccessXML( appName );
 		case CONTACT:
 			if ( backend == "sql" ) 

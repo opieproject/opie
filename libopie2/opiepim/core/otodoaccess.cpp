@@ -9,11 +9,12 @@
 OTodoAccess::OTodoAccess( OTodoAccessBackend* end )
     : QObject(), OPimAccessTemplate<OTodo>( end ),  m_todoBackEnd( end )
 {
-    if (end == 0l )
-        m_todoBackEnd = new OTodoAccessBackendSQL( QString::null);
+//     if (end == 0l )
+//         m_todoBackEnd = new OTodoAccessBackendSQL( QString::null);
 
-    //    if (end == 0l )
-    //      m_todoBackEnd = OBackendFactory<OTodoAccessBackend>::Default ("todo", QString::null);
+	// Zecke: Du musst hier noch für das XML-Backend einen Appnamen übergeben !
+        if (end == 0l )
+		m_todoBackEnd = OBackendFactory<OTodoAccessBackend>::Default ("todo", QString::null);
 
     setBackEnd( m_todoBackEnd );
 }

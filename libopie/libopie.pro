@@ -1,28 +1,54 @@
 TEMPLATE        = lib
 CONFIG          += qte warn_on release
-HEADERS   = ofontmenu.h ofileselector.h \
-    ofiledialog.h tododb.h \
-    todoevent.h todoresource.h \
+HEADERS   = ofontmenu.h \
+    ofiledialog.h ofileselector.h tododb.h \
+    ocheckitem.h todoevent.h todoresource.h \
     todovcalresource.h xmltree.h \
     colordialog.h colorpopupmenu.h \
     oclickablelabel.h oprocctrl.h \
     oprocess.h odevice.h \
     otimepicker.h otabwidget.h \
     otabbar.h otabinfo.h \
-    ofontselector.h ocolorbutton.h
-SOURCES   = ofontmenu.cc ofileselector.cc \
-	    ofiledialog.cc xmltree.cc \
-	    tododb.cpp todoevent.cpp \
+    ofontselector.h \
+    pim/opimrecord.h \
+    pim/otodo.h \
+    pim/orecordlist.h \
+    pim/opimaccesstemplate.h \
+    pim/opimaccessbackend.h \
+    pim/otodoaccess.h \
+    pim/otodacessbackend.h \
+    pim/ocontact.h \
+    pim/ocontactaccess.h \
+    pim/ocontactaccessbackend.h \
+    pim/ocontactaccessbackend_xml.h \
+    pim/obackendfactory.h
+#    pim/otodoaccesssql.h \
+    
+SOURCES   = ofontmenu.cc  \
+	    xmltree.cc \
+	    ofiledialog.cc ofileselector.cc \
+            ocheckitem.cpp tododb.cpp todoevent.cpp \
 	    todovcalresource.cpp  colordialog.cpp \
 	    colorpopupmenu.cpp oclickablelabel.cpp \
 	    oprocctrl.cpp oprocess.cpp \
 	    odevice.cpp otimepicker.cpp \
 	     otabwidget.cpp otabbar.cpp \
-	     ofontselector.cpp ocolorbutton.cpp
+             ofontselector.cpp \
+             pim/otodo.cpp \
+             pim/opimrecord.cpp \
+	     pim/otodoaccess.cpp \
+	     pim/otodoaccessbackend.cpp \
+             pim/otodoaccessxml.cpp \
+             pim/ocontact.cpp \
+             pim/ocontactaccess.cpp
+#             pim/otodoaccesssql.cpp \
+
 TARGET    = opie
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(QTDIR)/lib$(PROJMAK)
 #VERSION = 1.0.0
+
+# LIBS            += -lopiesql
 
 INTERFACES      = otimepickerbase.ui
 
