@@ -1,13 +1,15 @@
-<!DOCTYPE book PUBLIC "-OASIS//DTD DocBook V4.2//EN">
+<!DOCTYPE book PUBLIC "-OASIS//DTD DocBook V4.2//EN" [
+<!ENTITY arrow "-->">
+]>
 <book><title>Opie User Manual</title>
 <part><title>Getting Started</title>
 <chapter><title>What is Opie?</title>
 <para>
 Opie is a GUI (Graphical User Interface) for the Linux operating system (and
 might work on other OSes as well).  It was originally designed for handheld 
-computers (such as the Compaq/HP iPAQ and the Sharp Zaurus), but which could 
+computers (such as the Compaq/HP iPAQ and the Sharp Zaurus), but could
 probably function well in other environments requiring a light GUI, such as an 
-old laptop, or an internet kiosk.  It is bassed upon QT/Embedded from Trolltech,
+old laptop, or an internet kiosk.  It is based upon QT/Embedded from Trolltech,
 which is in turn a graphical environment designed for embedded applications,
 based upon the QT toolkit.
 </para>
@@ -30,9 +32,9 @@ not install X, as it is not necessary, and will only take up space).
 
 <note>
 <para>
-Note: If you had qpe/qtopia installed previously, \emph{completely} remove it,
-and remove the src line for it from your /etc/ipkg.conf file before attempting
-to install opie.
+If you had qpe/qtopia installed previously,
+<emphasis>completely</emphasis> remove it, and remove the src line for it from
+your /etc/ipkg.conf file before attempting to install opie.
 </para>
 </note>
 <para>
@@ -70,8 +72,6 @@ Opie should now be running (if you should have to reboot, which is rare, Opie
 will start automatically). From here, you can use either the "Software" 
 application in the Settings tab, or run ipkg from the command line to install 
 other Opie apps. Check out the various task-opie-* ipkgs to install various sets 
-
-
 of apps at once (you can always uninstall individual apps individually). You
 will probably want to install opie-embeddedkonsole first, so you have access to
 the command line in Opie. 
@@ -82,8 +82,6 @@ the command line in Opie.
 <para>
 To completely install Opie on the Zaurus, you will have to install OpenZaurus, 
 which includes Opie. However, individual Opie applications will work fine on the 
-
-
 default Zaurus rom. Do not install Opie's launcher on a default Zaurus ROM
 though.
 </para>
@@ -104,8 +102,6 @@ installed "applets".
 Getting around in Opie is very easy, you simply click your stylus on whatever 
 icon or button you want to click on.  The main difference between using the 
 stylus and using a mouse is that you cannot right click with a stylus, so things 
-
-
 that require a right click are kept to a minimum.  However, it is sometimes
 necessary to right click, and this is implemented with a "press and hold".
 Any time you want to do something that you think would require a right click on
@@ -117,9 +113,7 @@ click usually does on a desktop interface.
 
 <section><title>Launcher</title>
 <para>
-The Launcher behaves like the "desktop" on most PC GUIs.  When no applications 
-
-
+The Launcher behaves like the "desktop" on most PC GUIs.  When no applications
 are running or visible, you will have access to the Launcher.  You can also map
 a hardware key to bring the Launcher to the top without closing any of the
 running applications (this is similar to "minimising" all the applications
@@ -128,14 +122,10 @@ that are running).
 <para>
 Along the top of the Launcher you will see a list of tabs which function as
 categories for your applications.  You can click on the tab for the category you 
-
-
 want to view, and then click on the icon for the application that you wish to
 launch.  By default, there will be an Applications tab and a Settings tab (if 
 you install any games, they will appear in the Games tab).  When new 
 applications are installed, they will usually appear in one of these three tabs, 
-
-
 or in a tab of their own.  To add or delete tabs or to move applications between
 the tabs, you can use the Tab Manager application, or you can edit them by hand,
 by changing the directories in /opt/QtPalmtop/apps.
@@ -143,10 +133,8 @@ by changing the directories in /opt/QtPalmtop/apps.
 <para>
 There is also a tab to the far right called the "Documents" tab, which allows 
 you to quickly open your most often used documents.  You can click on a document 
-
-
 to open it up in the proper application.  For help on adding files to the
-Documents tab see \ref{docadd} on page \pageref{docadd}
+Documents tab see the <xref linkend="adddoc">.
 </para>
 </section>
 
@@ -186,8 +174,6 @@ the right side of the window title bar, in addition to the normal "x".  For
 dialogs, the "Ok" button will apply your changes and close the window, while 
 the "x" will cancel them before closing the window (for people used to most 
 desktop GUI's the "Ok" and "x" behave like the "Ok" and "Cancel" buttons 
-
-
 you would normally see in the bottom right of the dialog window).
 </para>
 <para>
@@ -210,8 +196,6 @@ Normally, simply running
 </informalexample>
 will upgrade Opie. However, if you currently have a version with the 1.5.0 
 version number, you will have to upgrade it differently, because Opie now uses a 
-
-
 different version number (the 1.5.0 was Qtopia's version number, we now use our
 own). To upgrade from one of these older versions, run: 
 <informalexample>
@@ -235,8 +219,9 @@ work for, etc.
 
 <section><title>Adding Contacts</title>
 <para>
-To Add a user, go to <GUImenu>Contact</GUImenu><GUIMenuItem>Add</GUIMenuItem>, 
-or click the add icon in the toolbar (looks like a blank piece of paper). 
+To Add a user, go to 
+<GUImenu>Contact</GUImenu>&arrow;<GUIMenuItem>Add</GUIMenuItem>,
+or click the add icon in the toolbar (looks like a blank piece of paper).
 First, you need to give the person a name. You can do this by either entering
 their name in the name field, or by pressing "Full Name...", which will open
 up a new dialog that lets you enter each part of their name individually. Three
@@ -268,37 +253,35 @@ edit their profile later), click the "x" to cancel, and not add the contact.
 <section><title>Editing Contacts</title>
 <para>
 To edit the contacts, select the person you want to edit, anc click the pencil 
-icon, or go to <GUIMenu>Contact</GUIMenu><GUIMenuItem>Edit</GUIMenuItem>, and it
-will open up the same dialog used to add a user, except their information that
-is already entered will already be filled in. To finalise the changes, click
-"Ok", or to cancel them, click "x". 
+icon, or go to <GUIMenu>Contact</GUIMenu>&arrow;<GUIMenuItem>Edit</GUIMenuItem>,
+and it will open up the same dialog used to add a user, except their information
+that is already entered will already be filled in. To finalise the changes,
+click "Ok", or to cancel them, click "x".
 </para>
 </section>
 
 <section><title>Deleting Contacts</title>
 <para>
 To delete a contact, select the person from the list of contacts, and click the 
-trash can icon, or go to Contact \begin{math}\rightarrow\end{math}Delete. A 
-dialog will pop up asking if you want to actually delete that contact, click yes 
-
-
-to delete it, no will cancel.
+trash can icon, or go to <GUIMenu>Contact</GUIMenu> 
+&arrow;<GUIMenuItem>Delete</GUIMenuItem>.  A dialog will pop up asking if you
+want to actually delete that contact, click yes to delete it, no will cancel.
 </para>
 </section>
 
 <section><title>Editing Contacts</title>
 <para>
 To find a specific person, click the find icon (green magnifying glass), or go 
-to <GUIMenu>Contact</GUIMenu><GUIMenuItem>Find</GUIMenuItem>. A dialog will pop
-up, and in the "Find what" input, enter the string you want to search for. You
-can also select if you want the search to be case sensative, and if you want it
-to search backwards from the currently selected user. The Category drop down
-menu lets you search only a specific category ("All" to search all of them).
-When you click "Find", it will start search for the string in all the fields
-in all the contacts. When it finds a match, it will highlight the user in the
-main view.  You can use this to search for (as an example) who a certain phone
-number belongs to, by entering the phone number in the "find what" field, and
-clicking "Find". 
+to <GUIMenu>Contact</GUIMenu>&arrow;<GUIMenuItem>Find</GUIMenuItem>. A dialog
+will pop up, and in the "Find what" input, enter the string you want to search
+for. You can also select if you want the search to be case sensative, and if you
+want it to search backwards from the currently selected user. The Category drop
+down menu lets you search only a specific category ("All" to search all of
+them).  When you click "Find", it will start search for the string in all the
+fields in all the contacts. When it finds a match, it will highlight the user in
+the main view.  You can use this to search for (as an example) who a certain
+phone number belongs to, by entering the phone number in the "find what" field,
+and clicking "Find".
 </para>
 </section>
 
@@ -347,8 +330,6 @@ The day view shows your day divided up into blocks representing each hour. At
 the top is the navigation bar, wher you will see a row of buttons, which 
 represent the days of the current week, and on the left and right sides of the 
 navigation bar are arrows, which allow you to move one day in that direction. If 
-
-
 you are on the last day of the week, pressing the arrow will bring you into the
 first day of the next week (or vice-versa if you are going backwards). There is
 also a button that lists the current day, which you can press to select a day to
@@ -358,8 +339,6 @@ view from a calendar dialog.
 In the main view, there is a collumn of buttons, each of which represents one 
 hour. If you select one, any new appointments will automatically default to 
 begining at that time and ending an hour later (which you can, of course, change 
-
-
 when you create the appointment).
 </para>
 <para>
@@ -375,8 +354,6 @@ installed to use this feature.
 The week view allows you to see your week divided up into columns, representing 
 each day of the week, and rows, representing each hour of the day. In the 
 navigation bar at the top, there are two scroll boxes, the one on the left shows 
-
-
 the current year, and the one to the right shows which week it is of that year.
 To the right of both of those is a label which shows the date range for the 
 currently selected week.
@@ -386,9 +363,7 @@ In the main view, you see the week divided up into rows and collumns
 representing the days of the week, and hours of the day. In each cell, you will 
 see a blue square which represents an appointment, which you can press to see 
 details of the appointment. If you press anywhere in the free space, you will go 
-
-
-to the day of the column that you clicked in. 
+to the day of the column that you clicked in.
 </para>
 </section>
 
@@ -398,14 +373,10 @@ The week list view shows you all the appointments that you have that week
 without graphically representing how long they are or showing the free time 
 between them. This is convinient if you need to see a list of all your 
 appointments, but do not need to see how your time is mapped out. The navigation 
-
-
 bar has an arrow button on either side, allowing you to move to the next or
 previous week, as well as a button which gives the current week number for that 
 year. Pressing the week number button will bring up a calendar dialog, which 
 allows you to select the week you are viewing. Selecting a day from the calendar 
-
-
 will bring you to the week that day is in. To the right of that is a button with
 a "2" in it. When this is depressed, the main view will show two weeks at a
 time, instead of one. The last item is a label which shows the range of dates 
@@ -417,25 +388,17 @@ the week. If you have an appointment on that day, the date will be red,
 otherwise it will be black (the current day is blue). Clicking on the date 
 itself will bring you to the day view for that day. Under each day is a list of 
 all the appointments for that day, as well as their start times. If you click on 
-
-
 an appointment, you will go to an edit dialog for that appointment, which lets
-you view its details. Next to each day heading is a "+" sign, clicking it will 
-
-
-create a new appointment for that day. 
+you view its details. Next to each day heading is a "+" sign, clicking it will
+create a new appointment for that day.
 </para>
 </section>
 
 <section><title>The Month View</title>
 <para>
 The month view looks like a normal monthly calendar, allowing you to see on what 
-
-
 days of the month you have appointments. In the navigation bar, there are two
 pairs of arrows. The pair with an arrow and a vertical line will take you to the 
-
-
 first or last month of the currently selected year, while the normal arrow
 buttons will take you to the next or previous month. There is a dropdown menu 
 which allows you to select the month, and a entry field which allows you to 
@@ -444,8 +407,6 @@ select the year (press the up or down arrows, or enter in your own year).
 <para>
 The main view is divided up into a grid, where the columns are the days of the 
 week, and the rows are the weeks (just like an ordinary calendar). The currently 
-
-
 selected day has a bold box drawn around it, and if the day has an appointment,
 there will be a small blue square in the bottom right corner of it (that square 
 will have a smaller white square if it is a recurring appointment). If the 
@@ -459,8 +420,6 @@ day.
 <section><title>Adding Appointments</title>
 <para>
 To add an appointment, click on the add appointment button in the toolbar at the 
-
-
 top of the window (an image of a blank page), and a dialog will open up,
 allowing you to enter information about the appointment (depending on the
 current view, and what you may have selected, there may be certain default
@@ -470,8 +429,6 @@ settings).
 At the top of the window is the description field, where you can enter in a 
 short description of the appointment, or select a common one from the dropdown 
 list. The location field allows you to do the same. The category dropdown allows 
-
-
 you to assign the appointment to a category, which you can use later to view
 only some of your appointments. The button labeled "..." to the right of that
 will open up a dialog where you can add, delete, or edit certain categories.
@@ -485,8 +442,6 @@ the hour. The first two rows are the hours, click whichever one you want. The
 third row of numbers are the minutes, in units of five. When you select the 
 minutes field for the start time, it will automatically set the minutes field 
 for the end time to the same thing, but you can change this by selecting the end 
-
-
 field and giving it its own minutes field. Because of this, it is fastest to set
 the start time first and then the end time. There is also an "all day"
 checkbox, which will make the appointment take up the entire day.
@@ -498,12 +453,8 @@ the City Time application. Refer to its documentation for changing the
 timezones. If you want to have an alarm go off, check the "alarm" checkbox, 
 and then set the number of minutes before the appointment that you want the
 alarm to sound. If you set the dropdown list next to that to "silent" you will 
-
-
 only be given a visual alarm, wheras if you set the alarm to "Loud", there
 will be an alarm sound as well. Note: opie-alarm must be installed for alarms to 
-
-
 work.
 </para>
 <para>
@@ -513,8 +464,6 @@ often the appointment repeats. Selecting one of these buttons will change the
 interface below, to represent the available options for that type of repetition 
 (selecting "None" will turn off repetition if you turned it on and no longer 
 want it). When you are done, click "ok" in the upper right to select that type 
-
-
 of repetition, or "x" to set it back to what it was (none if it is a new
 appointment).
 </para>
@@ -559,26 +508,27 @@ a certain time.
 
 <section><title>Adding Tasks</title>
 <para>
-Go to Data \begin{math}\rightarrow\end{math}New Task, or click on the new task 
-icon (blank page). The priority drop down menu lets you select the priority of 
-the task. The lower the number, the more important it is. The categories behave 
-in much the same way that they do in Calendar, you can select the category from 
-the drop down menu, or you can click the "..." button to add, delete, or edit 
-categories. To give the task a due date, check the "Due" checkbox, and then 
-click the button next to it (it should contain the current date). That will open 
-a calendar from which you can select the due date. The "Completed" check box
-is the same as the checkbox next to each item in the main view. The "Summary"
-field is for a short summary that will be visible in the main view, as well as
-in the Today application.  The down arrow next to it will copy the text in the
-"Summary" field into the large text field below it, which is used for a more
-detailed description of the task.  Click "ok" in the upper right to add the
-new task, or "x" to close the window without adding the new task.
+Go to <GUIMenu>Data</GUIMenu>&arrow;<GUIMenuItem>New Task<GUIMenuItem>, or click
+on the new task icon (blank page). The priority drop down menu lets you select
+the priority of the task. The lower the number, the more important it is. The
+categories behave in much the same way that they do in Calendar, you can select
+the category from the drop down menu, or you can click the "..." button to add,
+delete, or edit categories. To give the task a due date, check the "Due"
+checkbox, and then click the button next to it (it should contain the current
+date). That will open a calendar from which you can select the due date. The
+"Completed" check box is the same as the checkbox next to each item in the main
+view. The "Summary" field is for a short summary that will be visible in the
+main view, as well as in the Today application.  The down arrow next to it will
+copy the text in the "Summary" field into the large text field below it, which
+is used for a more detailed description of the task.  Click "ok" in the upper
+right to add the new task, or "x" to close the window without adding the new
+task.
 </para>
 </section>
 <section><title>Editing Tasks</title>
 <para>
 To edit a task, you can select it, and then go to 
-<GUIMenu>Data</GUIMenu><GUIMenuItem>Edit
+<GUIMenu>Data</GUIMenu>&arrow;<GUIMenuItem>Edit
 Task</GUIMenuItem>, or click the edit task icon (an image of a pencil). The same
 dialog should apear as if you were adding a task, but the information for that
 task should already be filled in. You can change any of it you want to, and then
@@ -590,7 +540,7 @@ the way it was.
 <section><title>Deleting Tasks</title>
 <para>
 To delete a task, first select it, and then either select 
-<GUIMenu>Data</GUIMenu>
+<GUIMenu>Data</GUIMenu>&arrow;
 <GUIMenuItem>Delete...</GUIMenuItem> or press the Delete icon (an image of
 a trash can). A dialog should pop up, asking if you want to delete the task,
 click yes to delete it, or no to cancel.
@@ -599,17 +549,16 @@ click yes to delete it, or no to cancel.
 <section><title>Finding Tasks</title>
 <para>
 To find a task, either go to 
-<GUIMenu>Options</GUIMenu><GUIMenuItem>Find</GUIMenuItem>
-, or
-click the find icon (an image of a green magnifying glass), and a dialog should
-pop up. Enter the text you want to search for in the description, and select the 
-category that you want it to search through (this will speed the search up, if
-you know what category it is in). You can also select "case sensative" which 
-makes the search pay attention to the case of what you type (so if you look for 
-"mow lawn", it won't find a task called "Mow lawn"). "Search Backwards" 
-will search backwards from the currently selected task. Click "Find" to 
-initiate the search, when it finds a task that matches the string, it will 
-select it. If you click Find again, it will find the next one in the list (or 
+<GUIMenu>Options</GUIMenu>&arrow;<GUIMenuItem>Find</GUIMenuItem>
+, or click the find icon (an image of a green magnifying glass), and a dialog
+should pop up. Enter the text you want to search for in the description, and
+select the category that you want it to search through (this will speed the
+search up, if you know what category it is in). You can also select "case
+sensative" which makes the search pay attention to the case of what you type (so
+if you look for "mow lawn", it won't find a task called "Mow lawn"). "Search
+Backwards" will search backwards from the currently selected task. Click "Find"
+to initiate the search, when it finds a task that matches the string, it will
+select it. If you click Find again, it will find the next one in the list (or
 the previous one, if "Search backwards" is selected).
 </para>
 </section>
@@ -627,7 +576,7 @@ you want to see the deadline.
 <para>
 To mark a task as completed without deleting it, you can either check the 
 checkbox next to it in the main view, or edit it, and check the "completed" 
-check box in the edit dialog. If <GUIMenu>Options</GUIMenu>
+check box in the edit dialog. If <GUIMenu>Options</GUIMenu>&arrow;
 <GUIMenuItem>Completed<GUIMenuItem> tasks is not checked, the task will
 disapear when you mark it completed. but do not worry, it is not gone forever, 
 just check Completed tasks in the options menu, and you can see and edit it 
@@ -715,7 +664,7 @@ is actually a text file).
 </para>
 </section>
 
-<section><title>Adding to "Documents"</title>
+<section id="adddoc"><title>Adding to "Documents"</title>
 <para>
 To add a file to your "Documents", press and hold the file, and select "Add
 to documents" from the menu. This will add the file to the documents tab, which 
@@ -751,8 +700,9 @@ EmbeddedKonsole is Opie's terminal emulator.  From here you can do pretty much
 anything (since Linux is actually a command line based OS by itself).  I will
 not go into much detail on using the linux command line, as that is covered in
 many other places (http://www.tldp.org is a good place to start, or read
-O'Reilly's \underline{Running Linux} for a comprehensive look at Linux for the
-beginner).  I will, however, give a quick overview of using a Linux shell.
+O'Reilly's <citation>Running Linux</citation> for a comprehensive look at Linux
+for the beginner).  I will, however, give a quick overview of using a Linux
+shell.
 </para>
 
 <section><title>Using Embedded Konsole</title>
@@ -792,7 +742,7 @@ The other icons are the same as typing (from left to right) enter, space, tab
 <para>
 The command list is a pulldown menu with a list of commonly used commands.  
 Selecting one will type the command into the terminal wherever the cursor is.  
-You can edit or hide this menu from <GUIMenu>Options</GUIMenu>
+You can edit or hide this menu from <GUIMenu>Options</GUIMenu>&arrow;
 <GUIMenuItem>Command List.</GUIMenuItem>
 </para>
 </section>
@@ -873,10 +823,10 @@ directory (usually /home/username or /root for the root user).
 <section><title>Moving Files</title>
 <para>
 To move files around, you need to use the "cp" (copy) and "mv" (move) 
-commands.  Both of these are run the same way: \verb+command originalfile 
-newfile+.  The only difference is that cp creates a new file without touching 
-the old one, while mv deletes the original file.  The two path names can be 
-either absolute or relative.  If you only specify a directory for the 
+commands.  Both of these are run the same way: <userinput>command originalfile
+newfile</userinput>.  The only difference is that cp creates a new file without
+touching the old one, while mv deletes the original file.  The two path names
+can be either absolute or relative.  If you only specify a directory for the
 destination, and no filename, it will use the filename for the original file.
 </para>
 </section>
@@ -920,7 +870,7 @@ install an ipkg package file that resides on the local filesystem.
 </para>
 <important>
 <para>
-Note: There is a bug in oipkg that prevents it from installing packages 
+There is a bug in oipkg that prevents it from installing packages 
 properly.  There is, however, a workaround for it.  Simply run oipkg from 
 Embedded Konsole to avoid the bug.
 </para>
@@ -928,7 +878,7 @@ Embedded Konsole to avoid the bug.
 
 <section><title>Installing Software</title>
 <para>
-To install software, first select "Opie" from the "Section" pulldown menu, 
+To install software, first select "Opie" from the "Section" pulldown menu,
 the press the "+" icon next to "Feeds" in the main view.  This will show all 
 the available Opie packages (you can change which packages to view by selecting 
 something else from the "Section" pulldown).  Installed packages are marked 
