@@ -6,4 +6,4 @@ Architecture: none
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Classic character set for the Handwriting inputmethod.
-Classic character set for the Handwriting inputmethod.
+ Classic character set for the Handwriting inputmethod.
