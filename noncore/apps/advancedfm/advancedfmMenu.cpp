@@ -490,6 +490,8 @@ void AdvancedFm::move() {
 							switch ( QMessageBox::warning(this,tr("File Exists!"),
 																						tr("<p>%1 already  exists. Ok to overwrite?</P>").arg(destFile),
 																						tr("Yes"),tr("No"),0,0,1)) {
+							case 0:
+								break;
 							case 1:
 								return;
 								break;
@@ -497,12 +499,12 @@ void AdvancedFm::move() {
 								return;
 								break;
 							};
+						}
 								if( !copyFile( curFile, destFile) )  {
 										QMessageBox::message(tr("Note"),tr("<p>Could not move %1</p>").arg(curFile));
 										return;
 								} else
 										QFile::remove(curFile);
-						}
 				}
 		}
 		rePopulate();
