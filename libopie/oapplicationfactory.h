@@ -230,6 +230,8 @@ struct OApplicationFactory< Opie::Typelist<Product, ProductListTail > >
 #define OPIE_EXPORT_APP( factory ) Q_EXPORT_INTERFACE() { Q_CREATE_INSTANCE( factory ) }
 #else
 
+#include <qpe/qpeapplication.h>
+
 #define OPIE_EXPORT_APP( Factory )                                      \
 int main( int argc,  char **argv ) {                                    \
     QPEApplication a(argc, argv );               \
