@@ -46,6 +46,7 @@ using namespace Opie::Core;
 
 /* STD */
 #include <assert.h>
+#include <unistd.h>
 
 typedef void (*display_xine_frame_t) (void *user_data, uint8_t* frame,
 				      int  width, int height,int bytes );
@@ -108,10 +109,10 @@ Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
 
 void Lib::run()
 {
-    odebug << "Lib::run() started" << oendl; 
+    odebug << "Lib::run() started" << oendl;
     initialize();
     m_initialized = true;
-    odebug << "Lib::run() finished" << oendl; 
+    odebug << "Lib::run() finished" << oendl;
 }
 
 void Lib::initialize()
@@ -146,7 +147,7 @@ void Lib::initialize()
 
     xine_event_create_listener_thread (m_queue, xine_event_handler, this);
 
-      ::null_preload_decoders( m_stream );
+    ::null_preload_decoders( m_stream );
 
     m_duringInitialization = false;
 }
@@ -217,7 +218,7 @@ int Lib::play( const QString& fileName, int startPos, int start_time ) {
 void Lib::stop() {
     assert( m_initialized );
 
-    odebug << "<<<<<<<< STOP IN LIB TRIGGERED >>>>>>>" << oendl; 
+    odebug << "<<<<<<<< STOP IN LIB TRIGGERED >>>>>>>" << oendl;
     xine_stop( m_stream );
 }
 
@@ -329,9 +330,9 @@ void Lib::ensureInitialized()
     if ( m_initialized )
         return;
 
-    odebug << "waiting for initialization thread to finish" << oendl; 
+    odebug << "waiting for initialization thread to finish" << oendl;
     wait();
-    odebug << "initialization thread finished!" << oendl; 
+    odebug << "initialization thread finished!" << oendl;
 }
 
 void Lib::setWidget( XineVideoWidget *widget )
@@ -424,7 +425,7 @@ void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
     assert( m_initialized );
 
     if ( !m_video ) {
-        owarn << "not showing video now" << oendl; 
+        owarn << "not showing video now" << oendl;
         return;
     }
 

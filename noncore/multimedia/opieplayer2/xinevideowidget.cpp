@@ -51,6 +51,7 @@
  */
 static inline void memcpy_rev ( void *_dst, void *_src, size_t len )
 {
+
     /*
      * move the source to the end
      */
