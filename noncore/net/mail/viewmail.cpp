@@ -184,6 +184,7 @@ ViewMail::ViewMail( QWidget *parent, const char *name, WFlags fl)
 	: ViewMailBase(parent, name, fl), _inLoop(false)
 {
 	m_gotBody = false;
+        deleted = false;
 
 	connect(reply, SIGNAL(activated()), SLOT(slotReply()));
 	connect(forward, SIGNAL(activated()), SLOT(slotForward()));
@@ -191,6 +192,7 @@ ViewMail::ViewMail( QWidget *parent, const char *name, WFlags fl)
 
 	attachments->setEnabled(m_gotBody);
         connect( attachments,  SIGNAL( clicked ( QListViewItem *, const QPoint & , int ) ), SLOT( slotItemClicked(  QListViewItem *,  const QPoint & , int ) ) );
+
 
 }
 
@@ -333,7 +335,7 @@ void ViewMail::slotForward()
 	composer.setMessage( ftext );
 	composer.showMaximized();
     if ( QDialog::Accepted==composer.exec()) {
-        
+
     }
 }
 
