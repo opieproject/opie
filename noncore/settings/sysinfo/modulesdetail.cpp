@@ -23,15 +23,17 @@
 
 #include <sys/types.h>
 #include <stdio.h>
+
 #include <qcombobox.h>
-#include <qpushbutton.h>
-#include <qtextview.h>
 #include <qlayout.h>
 #include <qlistview.h>
 #include <qmessagebox.h>
+#include <qpushbutton.h>
+#include <qtextview.h>
+#include <qwhatsthis.h>
 
 ModulesDetail::ModulesDetail( QWidget* parent,  const char* name, WFlags fl )
-    : QWidget( parent, name, fl )
+    : QWidget( parent, name, WStyle_ContextHelp )
 {
     modname = "";
 
@@ -43,11 +45,12 @@ ModulesDetail::ModulesDetail( QWidget* parent,  const char* name, WFlags fl )
     CommandCB->insertItem( "modprobe -r" );
     CommandCB->insertItem( "rmmod" );
     // I can't think of other useful commands yet. Anyone?
-
     layout->addWidget( CommandCB, 1, 0 );
+    QWhatsThis::add( CommandCB, tr( "Select a command here and then click the Send button to the right to send the command." ) );
 
     ModulesView = new QTextView( this, "ModulesView" );
     layout->addMultiCellWidget( ModulesView, 0, 0, 0, 1 );
+    QWhatsThis::add( ModulesView, tr( "This area shows detailed information about this module." ) );
 
     SendButton = new QPushButton( this, "SendButton" );
     SendButton->setMinimumSize( QSize( 50, 24 ) );
@@ -55,6 +58,7 @@ ModulesDetail::ModulesDetail( QWidget* parent,  const char* name, WFlags fl )
     SendButton->setText( tr( "Send" ) );
     connect( SendButton, SIGNAL( clicked() ), this, SLOT( slotSendClicked() ) );
     layout->addWidget( SendButton, 1, 1 );
+    QWhatsThis::add( SendButton, tr( "Click here to send the selected command to this module." ) );
 }
 
 ModulesDetail::~ModulesDetail()

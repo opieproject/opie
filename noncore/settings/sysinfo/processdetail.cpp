@@ -23,14 +23,15 @@
 #include <signal.h>
 
 #include <qcombobox.h>
-#include <qpushbutton.h>
-#include <qtextview.h>
 #include <qlayout.h>
 #include <qlistview.h>
 #include <qmessagebox.h>
+#include <qpushbutton.h>
+#include <qtextview.h>
+#include <qwhatsthis.h>
 
 ProcessDetail::ProcessDetail( QWidget* parent,  const char* name, WFlags fl )
-    : QWidget( parent, name, fl )
+    : QWidget( parent, name, WStyle_ContextHelp )
 {
     pid = 0;
 
@@ -50,9 +51,11 @@ ProcessDetail::ProcessDetail( QWidget* parent,  const char* name, WFlags fl )
     SignalCB->insertItem( "18: SIGCONT" );
     SignalCB->insertItem( "19: SIGSTOP" );
     layout->addWidget( SignalCB, 1, 0 );
+    QWhatsThis::add( SignalCB, tr( "Select a signal here and then click the Send button to the right to send to this process." ) );
 
     ProcessView = new QTextView( this, "ProcessView" );
     layout->addMultiCellWidget( ProcessView, 0, 0, 0, 1 );
+    QWhatsThis::add( ProcessView, tr( "This area shows detailed information about this process." ) );
 
     SendButton = new QPushButton( this, "SendButton" );
     SendButton->setMinimumSize( QSize( 50, 24 ) );
@@ -60,6 +63,7 @@ ProcessDetail::ProcessDetail( QWidget* parent,  const char* name, WFlags fl )
     SendButton->setText( tr( "Send" ) );
     connect( SendButton, SIGNAL( clicked() ), this, SLOT( slotSendClicked() ) );
     layout->addWidget( SendButton, 1, 1 );
+    QWhatsThis::add( SendButton, tr( "Click here to send the selected signal to this process." ) );
 }
 
 ProcessDetail::~ProcessDetail()

@@ -19,12 +19,13 @@
 
 #include <qpe/qpeapplication.h>
 
-#include <qheader.h>
-#include <qlistview.h>
-#include <qlayout.h>
-#include <qtimer.h>
-#include <qfile.h>
 #include <qdir.h>
+#include <qfile.h>
+#include <qheader.h>
+#include <qlayout.h>
+#include <qlistview.h>
+#include <qtimer.h>
+#include <qwhatsthis.h>
 
 #include "processinfo.h"
 
@@ -44,8 +45,8 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     QPEApplication::setStylusOperation( ProcessView->viewport(), QPEApplication::RightOnHold );
     connect( ProcessView, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
             this, SLOT( viewProcess( QListViewItem * ) ) );
-
     layout->addWidget( ProcessView );
+    QWhatsThis::add( ProcessView, tr( "This is a list of all the processes on this handheld device.\n\nClick and hold on a process to see additional information about the process, or to send a signal to it." ) );
 
     QTimer *t = new QTimer( this );
     connect( t, SIGNAL( timeout() ), this, SLOT( updateData() ) );

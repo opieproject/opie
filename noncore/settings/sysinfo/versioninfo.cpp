@@ -43,7 +43,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     setMinimumSize( 200, 150 );
 
     QVBoxLayout *vb = new QVBoxLayout( this, 4 );
-    
+
     QString kernelVersionString;
     QFile file( "/proc/version" );
     if ( file.open( IO_ReadOnly ) ) {
@@ -51,23 +51,30 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
   QString v;
   t >> v; t >> v; t >> v;
   v = v.left( 20 );
-  kernelVersionString = tr( "<b>Linux Kernel</b><p>Version: " ) + v + "<p>";
+  kernelVersionString = tr( "<b>Linux Kernel</b><p>Version: " );
+  kernelVersionString.append( v );
+  kernelVersionString.append( "<p>" );
   t >> v;
-  kernelVersionString += tr( "Compiled by: " ) + v;
+  kernelVersionString.append( tr( "Compiled by: " ) );
+  kernelVersionString.append( v );
   file.close();
     }
 
-    QString palmtopVersionString;
-    palmtopVersionString = tr( "<b>Opie</b><p>Version: " ) + QPE_VERSION + "<p>";
+    QString palmtopVersionString = tr( "<b>Opie</b><p>Version: " );
+    palmtopVersionString.append( QPE_VERSION );
+    palmtopVersionString.append( "<p>" );
 #ifdef QPE_VENDOR
     QString builder = QPE_VENDOR;
 #else
     QString builder = "Unknown";
-#endif    
-    palmtopVersionString += tr( "Compiled by: " ) + builder + "<p>";
-    palmtopVersionString += tr( "Built on: " ) + __DATE__;
+#endif
+    palmtopVersionString.append( tr( "Compiled by: " ) );
+    palmtopVersionString.append(  builder );
+    palmtopVersionString.append( "<p>" );
+    palmtopVersionString.append( tr( "Built on: " ) );
+    palmtopVersionString.append( __DATE__ );
 
-    
+
     QHBoxLayout *hb1 = new QHBoxLayout( vb );
     hb1->setSpacing( 2 );
 
@@ -96,7 +103,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     linuxLogo->setPixmap( logo2Pixmap );
     linuxLogo->setFixedSize( 60, 60 );
     hb2->addWidget( linuxLogo, 0, Qt::AlignTop + Qt::AlignLeft );
-    
+
     QLabel *kernelVersion = new QLabel( this );
     kernelVersion->setText( kernelVersionString );
     hb2->addWidget( kernelVersion, 1, Qt::AlignTop + Qt::AlignLeft );
@@ -114,11 +121,15 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     palmtopLogo3->setFixedSize( 60, 60 );
     hb3->addWidget( palmtopLogo3, 0, Qt::AlignTop + Qt::AlignLeft );
 
-//    QString systemString = tr( "<b>System</b><p>System: ") + ODevice::inst()->systemString()
-    QString systemString = "<b>"+ ODevice::inst()->systemString()+"</b>"
-        +tr("<p>Version: " ) + ODevice::inst()->systemVersionString()
-        +tr("<p>Model: ") + ODevice::inst()->modelString()
-        +tr("<p>Vendor: ") + ODevice::inst()->vendorString();
+    QString systemString = "<b>";
+    systemString.append( ODevice::inst()->systemString() );
+    systemString.append( "</b>" );
+    systemString.append( tr( "<p>Version: " ) );
+    systemString.append( ODevice::inst()->systemVersionString() );
+    systemString.append( tr( "<p>Model: " ) );
+    systemString.append( ODevice::inst()->modelString() );
+    systemString.append( tr( "<p>Vendor: " ) );
+    systemString.append( ODevice::inst()->vendorString() );
 
     QLabel *systemVersion = new QLabel( this );
     systemVersion->setText( systemString );

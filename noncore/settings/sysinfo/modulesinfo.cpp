@@ -21,11 +21,12 @@
 
 #include <qpe/qpeapplication.h>
 
-#include <qheader.h>
-#include <qlistview.h>
-#include <qlayout.h>
-#include <qtimer.h>
 #include <qfile.h>
+#include <qheader.h>
+#include <qlayout.h>
+#include <qlistview.h>
+#include <qtimer.h>
+#include <qwhatsthis.h>
 
 #include "modulesinfo.h"
 
@@ -45,8 +46,9 @@ ModulesInfo::ModulesInfo( QWidget* parent,  const char* name, WFlags fl )
     QPEApplication::setStylusOperation( ModulesView->viewport(), QPEApplication::RightOnHold );
     connect( ModulesView, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
             this, SLOT( viewModules( QListViewItem * ) ) );
-
     layout->addWidget( ModulesView );
+    QWhatsThis::add( ModulesView, tr( "This is a list of all the kernel modules currently loaded on this handheld device.\n\nClick and hold on a module to see additional information about the module, or to unload it." ) );
+
     QTimer *t = new QTimer( this );
     connect( t, SIGNAL( timeout() ), this, SLOT( updateData() ) );
     t->start( 5000 );
