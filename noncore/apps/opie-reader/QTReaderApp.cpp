@@ -79,7 +79,6 @@
 #include "CDrawBuffer.h"
 #include "Filedata.h"
 #include "opie.h"
-#include "useqpe.h"
 #include "names.h"
 #include "CEncoding_tables.h"
 #include "CloseDialog.h"

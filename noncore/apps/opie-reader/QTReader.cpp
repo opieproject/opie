@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: QTReader.cpp,v 1.9 2003-05-07 14:10:02 groucho Exp $
+** $Id: QTReader.cpp,v 1.10 2004-03-01 19:23:21 chicken Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -8,14 +8,8 @@
 **
 *****************************************************************************/
 
-#include "useqpe.h"
-#include <qpainter.h>
-#include <qimage.h>
-#include <qtimer.h>
-#include "config.h"
 #include "QTReader.h"
 #include "QTReaderApp.h"
-#include "CDrawBuffer.h"
 #ifdef USEQPE
 #include <qpe/qpeapplication.h>
 #endif
@@ -28,7 +22,6 @@
 #include <qpe/global.h>
 #include <qpe/qcopenvelope_qws.h>
 #endif
-#include <qfontdatabase.h>
 
 #ifdef _UNICODE
 const char *QTReader::fonts[] = { "unifont", "Courier", "Times", 0 };
@@ -448,8 +441,6 @@ void QTReader::focusOutEvent(QFocusEvent* e)
     }
 }
 
-#include <qapplication.h>
-#include <qdrawutil.h>
 #ifndef _WINDOWS
 #include <unistd.h>
 #endif

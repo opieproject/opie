@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "arith.h"
 #include "ppm.h"
 
 /****************************************************************************

@@ -14,14 +14,10 @@
 
 #include "mainwindow.h"
 
-#include <qpe/filemanager.h>
-#include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 
 #include <qmessagebox.h>
-#include <qfile.h>
-#include <qtranslator.h>
 #include <qradiobutton.h>
 
 #include "cellformat.h"

@@ -6,9 +6,6 @@
 #include <time.h>
 #include <sys/types.h>
 #include <strings.h>
-#include <qstring.h>
-#include <qlist.h>
-#include <qarray.h>
 #include "Excel.h"
 
 static xfrecord formatter[] = {

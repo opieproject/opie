@@ -1,5 +1,4 @@
 /* -*- mode: c; indent-tabs-mode: nil; -*- */
-#include "useqpe.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

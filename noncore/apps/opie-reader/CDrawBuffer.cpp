@@ -1,11 +1,7 @@
 #include "CDrawBuffer.h"
 #include "FontControl.h"
-#include <qfontmetrics.h>
 #include <qpainter.h>
-#include <qpixmap.h>
 #include <qimage.h>
-#include "useqpe.h"
-#include "opie.h"
 
 CDrawBuffer::~CDrawBuffer()
 {

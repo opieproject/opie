@@ -1,8 +1,6 @@
 #include "useqpe.h"
 #include <stdio.h>
 #include <string.h>
-#include <qmessagebox.h>
-#include <qpixmap.h>
 #ifdef USEQPE
 #include <qpe/qcopenvelope_qws.h>
 #endif /* USEQPE */
@@ -12,7 +10,6 @@
 #ifdef USEQPE
 #include <qpe/global.h>
 #endif /* USEQPE */
-#include <qclipboard.h>
 #ifndef USEQPE
 #include <qapplication.h>
 #else /* USEQPE */
@@ -545,7 +542,6 @@ CList<Bkmk>* CPlucker_base::getbkmklist()
     return NULL;
 }
 
-#include <qnamespace.h>
 
 QImage* CPlucker_base::expandimg(UInt16 tgt, bool border)
 {
@@ -680,7 +676,6 @@ unsigned short CPlucker_base::finduid(unsigned short urlid)
     return 0; // Not found!
 }
 
-#include <qnamespace.h>
 
 void CPlucker_base::setSaveData(unsigned char*& data, unsigned short& len, unsigned char* src, unsigned short srclen)
 {

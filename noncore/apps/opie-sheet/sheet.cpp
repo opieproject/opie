@@ -14,7 +14,6 @@
 
 #include "sheet.h"
 
-#include <qmainwindow.h>
 #include <qmessagebox.h>
 #include <math.h>
 #include <stdlib.h>

@@ -1,13 +1,9 @@
-#include "names.h"
 
 #define NEWLINEBREAK
 
 #include "BuffDoc.h"
 //#include <FL/fl_draw.h>
-#include "config.h"
-#include "CDrawBuffer.h"
 #include "plucker.h"
-#include "usenef.h"
 #ifdef USENEF
 #include "nef.h"
 #include "arrierego.h"

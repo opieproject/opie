@@ -1,6 +1,4 @@
 #include "version.h"
-#include "names.h"
-#include <qmessagebox.h>
 
 bool CheckVersion(int& major, int& bkmktype, char& minor)
 {

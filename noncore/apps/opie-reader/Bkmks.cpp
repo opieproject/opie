@@ -2,8 +2,6 @@
 
 #include "Bkmks.h"
 
-#include "StyleConsts.h"
-#include "Markups.h"
 #include "my_list.h"
 #include "version.h"
 #include "names.h"

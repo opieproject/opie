@@ -12,8 +12,6 @@ Extensive modification by Tim Wentford to allow it to work in rotated mode
 #include "QtrListView.h"
 #include <qlineedit.h>
 #include <qpushbutton.h>
-#include <qfile.h>
-#include <qmessagebox.h>
 #ifndef _WINDOWS
 #include <unistd.h>
 #endif
@@ -24,7 +22,6 @@ Extensive modification by Tim Wentford to allow it to work in rotated mode
 
 #include <qpe/qpeapplication.h>
 
-#include "opie.h"
 
 fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, bool modal, WFlags fl , const QString filter, const QString iPath )
     : QDialog( parent, name, true,

@@ -1,4 +1,3 @@
-#include "CDrawBuffer.h"
 #include "CFilter.h"
 
 unsigned short striphtml::skip_ws()

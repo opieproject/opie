@@ -1,5 +1,4 @@
 #include "CEncoding_tables.h"
-#include "config.h"
 
 static const unicodetable unicodevalues[] = {
     // from RFC 1489, ftp://ftp.isi.edu/in-notes/rfc1489.txt

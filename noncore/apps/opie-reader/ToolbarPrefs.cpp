@@ -6,20 +6,10 @@
 **
 ** WARNING! All changes made in this file will be lost!
 ****************************************************************************/
-#include "useqpe.h"
 #include "ToolbarPrefs.h"
 
-#include <qcheckbox.h>
-#include <qlabel.h>
-#include <qpushbutton.h>
-#include <qspinbox.h>
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qcombobox.h>
 #include <qbuttongroup.h>
-#include <qlineedit.h>
 #ifdef USEQPE
 #include <qpe/menubutton.h>
 #endif

@@ -1,8 +1,5 @@
-#include "useqpe.h"
 #include <stdio.h>
 #include <string.h>
-#include <qmessagebox.h>
-#include <qpixmap.h>
 #ifdef USEQPE
 #include <qpe/qcopenvelope_qws.h>
 #endif
@@ -15,10 +12,8 @@
 #else
 #include <qapplication.h>
 #endif
-#include <qclipboard.h>
 
 #include "plucker.h"
-#include "Aportis.h"
 #include "Palm2QImage.h"
 
 
