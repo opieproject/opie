@@ -1,3 +1,5 @@
+January 9, 2004 corrected the names of the resource icons in mainwindow.cpp.... So now they are loaded fine.
+
 January 8, 2004
 	- converted icons from xpm to png and moved them to $OPIEDIR/pics/opie-sheet
 	- modified mainwindow.cpp to load pixmaps with Resource::loadPixmap(resourcename) in contrast to the old QPixmap(nameofthe_xpm_included_in_the_opie-sheet_dir)
