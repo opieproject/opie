@@ -800,8 +800,7 @@ void AddressbookWindow::slotNotFound()
 {
 	qWarning("Got notfound signal !");
 	QMessageBox::information( this, tr( "Not Found" ),
-				  tr( "Unable to find a contact for this" ) + "\n"
-				  + tr( "search pattern !" ) );
+				  tr( "Unable to find a contact for this \n search pattern!" ) );
 
 	
 }
