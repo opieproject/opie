@@ -21,7 +21,6 @@
 
 #include <qwidget.h>
 #include <qcanvas.h>
-#include <qmemarray.h>
 
 class QTimer;
 class JezzField;
@@ -103,7 +102,6 @@ signals:
 private:
    friend class Ball;
    QPixmap m_tiles;
-   QMemArray<QPixmap> m_backTiles;
 
    void setPixmaps( QPixmap tiles );
    void emitBallCollisiton( Ball *ball, int x, int y, int tile )
