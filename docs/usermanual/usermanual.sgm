@@ -10,6 +10,7 @@
 <!ENTITY filemanager SYSTEM "filemanager.sgm">
 <!ENTITY embeddedkonsole SYSTEM "embeddedkonsole.sgm">
 <!ENTITY software SYSTEM "software.sgm">
+<!ENTITY today SYSTEM "today.sgm">
 ]>
 <book><title>Opie User Manual</title>
 <bookinfo><authorgroup><collab>
@@ -25,6 +26,7 @@
 &contacts;
 &calendar;
 &todo;
+&today;
 &filemanager;
 &embeddedkonsole;
 </part>
