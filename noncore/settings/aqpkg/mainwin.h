@@ -51,12 +51,12 @@ class QWidgetStack;
 
 class MainWindow :public  QMainWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
 
 	MainWindow( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
 	~MainWindow();
-	static QString appName() { return QString::fromLatin1( "AQPkg" ); };
+	static QString appName() { return QString::fromLatin1( "aqpkg" ); };
 
 protected:
     void closeEvent( QCloseEvent* e );

@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -1021,11 +1021,11 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
     {
         InstallData *newitem = new InstallData();
         newitem->option = "D";
-        
+
         // If local file, remove using package name, not filename
         if ( p->isPackageStoredLocally() )
             name = item->text();
-        
+
         if ( !p->isPackageStoredLocally() )
             newitem->packageName = p->getInstalledPackageName();
         else
@@ -1055,7 +1055,7 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
         {
             // Version available is older - remove only
             newitem->option = "D";
-           
+
             // If local file, remove using package name, not filename
             if ( p->isPackageStoredLocally() )
                 name = item->text();
@@ -1198,21 +1198,21 @@ QuestionDlg::QuestionDlg( const QString &caption, const QString &text, const QSt
 {
     setCaption( caption );
     resize( 175, 100 );
-    
+
     QGridLayout *layout = new QGridLayout( this );
-    
+
     QLabel *l = new QLabel( text, this );
     l->setAlignment( AlignCenter | WordBreak );
     layout->addMultiCellWidget( l, 0, 0, 0, 1 );
-    
+
     btn1 = new QPushButton( tr( "Remove" ), this );
     connect( btn1, SIGNAL(clicked()), this, SLOT(slotButtonPressed()) );
     layout->addWidget( btn1, 1, 0 );
-    
+
     btn2 = new QPushButton( secondbtn, this );
     connect( btn2, SIGNAL(clicked()), this, SLOT(slotButtonPressed()) );
     layout->addWidget( btn2, 1, 1 );
-    
+
     executing = FALSE;
 }
 
@@ -1225,7 +1225,7 @@ int QuestionDlg::exec()
         executing = TRUE;
         qApp->enter_loop();
     }
-    
+
     return buttonpressed;
 }
 
@@ -1237,6 +1237,6 @@ void QuestionDlg::slotButtonPressed()
         buttonpressed = 2;
     else
         buttonpressed = 0;
-        
+
     qApp->exit_loop();
 }
