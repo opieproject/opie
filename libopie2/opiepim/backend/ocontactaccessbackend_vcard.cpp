@@ -452,13 +452,19 @@ VObject* OPimContactAccessBackend_VCard::createVObject( const OPimContact &c )
     safeAddPropValue( name, VCNameSuffixesProp, c.suffix() );
 
     // home properties
-    VObject *home_adr= safeAddProp( vcard, VCAdrProp );
-    safeAddProp( home_adr, VCHomeProp );
-    safeAddPropValue( home_adr, VCStreetAddressProp, c.homeStreet() );
-    safeAddPropValue( home_adr, VCCityProp, c.homeCity() );
-    safeAddPropValue( home_adr, VCRegionProp, c.homeState() );
-    safeAddPropValue( home_adr, VCPostalCodeProp, c.homeZip() );
-    safeAddPropValue( home_adr, VCCountryNameProp, c.homeCountry() );
+    if ( !( c.homeStreet().isEmpty() 
+	   && c.homeCity().isEmpty() 
+	   && c.homeState().isEmpty() 
+	   && c.homeZip().isEmpty() 
+	   && c.homeCountry().isEmpty() ) ){
+	    VObject *home_adr= safeAddProp( vcard, VCAdrProp );
+	    safeAddProp( home_adr, VCHomeProp );
+	    safeAddPropValue( home_adr, VCStreetAddressProp, c.homeStreet() );
+	    safeAddPropValue( home_adr, VCCityProp, c.homeCity() );
+	    safeAddPropValue( home_adr, VCRegionProp, c.homeState() );
+	    safeAddPropValue( home_adr, VCPostalCodeProp, c.homeZip() );
+	    safeAddPropValue( home_adr, VCCountryNameProp, c.homeCountry() );
+    }
 
     VObject *home_phone = safeAddPropValue( vcard, VCTelephoneProp, c.homePhone() );
     safeAddProp( home_phone, VCHomeProp );
@@ -473,13 +479,19 @@ VObject* OPimContactAccessBackend_VCard::createVObject( const OPimContact &c )
     safeAddProp( url, VCHomeProp );
 
     // work properties
-    VObject *work_adr= safeAddProp( vcard, VCAdrProp );
-    safeAddProp( work_adr, VCWorkProp );
-    safeAddPropValue( work_adr, VCStreetAddressProp, c.businessStreet() );
-    safeAddPropValue( work_adr, VCCityProp, c.businessCity() );
-    safeAddPropValue( work_adr, VCRegionProp, c.businessState() );
-    safeAddPropValue( work_adr, VCPostalCodeProp, c.businessZip() );
-    safeAddPropValue( work_adr, VCCountryNameProp, c.businessCountry() );
+    if ( !( c.businessStreet().isEmpty() 
+	   && c.businessCity().isEmpty() 
+	   && c.businessState().isEmpty() 
+	   && c.businessZip().isEmpty() 
+	   && c.businessCountry().isEmpty() ) ){
+	    VObject *work_adr= safeAddProp( vcard, VCAdrProp );
+	    safeAddProp( work_adr, VCWorkProp );
+	    safeAddPropValue( work_adr, VCStreetAddressProp, c.businessStreet() );
+	    safeAddPropValue( work_adr, VCCityProp, c.businessCity() );
+	    safeAddPropValue( work_adr, VCRegionProp, c.businessState() );
+	    safeAddPropValue( work_adr, VCPostalCodeProp, c.businessZip() );
+	    safeAddPropValue( work_adr, VCCountryNameProp, c.businessCountry() );
+    }
 
     VObject *work_phone = safeAddPropValue( vcard, VCTelephoneProp, c.businessPhone() );
     safeAddProp( work_phone, VCWorkProp );
