@@ -1,14 +1,14 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.16 2003-02-11 00:29:37 max Exp $
+ * $Id: cardmode.cc,v 1.17 2003-02-12 01:03:29 max Exp $
  */
 
 #include "cardmode.hh"
 #include "wl_log.hh"
 
 /* main card into monitor function */
-int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
+int card_into_monitormode (pcap_t **orighandle, const char *device, int cardtype)
 {
   char CiscoRFMON[35] = "/proc/driver/aironet/";
   FILE *CISCO_CONFIG_FILE;
@@ -47,7 +47,6 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
   {
       char wlanngcmd[80];
       snprintf(wlanngcmd, sizeof(wlanngcmd) - 1, "$(which wlanctl-ng) %s lnxreq_wlansniff channel=%d enable=true", device, 1);
-      printf ("\n %s",wlanngcmd);  
       if (system(wlanngcmd) != 0)
       {
 	  wl_logerr("Could not set %s in raw mode, check cardtype", device);
@@ -56,16 +55,24 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
   }
   else if (cardtype == CARD_TYPE_HOSTAP)
   {
-      wl_logerr("Got a host-ap card, nothing is implemented now");
-     char hostapcmd[250];
-     snprintf(hostapcmd, sizeof(hostapcmd) -1, "$(which iwpriv) %s monitor 2 %d", device,1);
-     if (system(hostapcmd) !=0)
-     {
- 	wl_logerr("Could not set %s in raw mode, check cardtype", device);
-	return 0;
-     }
+	  int skfd;  	
+      skfd = socket(AF_INET, SOCK_STREAM, 0);
+	  struct iwreq wrq;
+	  wrq.u.mode = IW_MODE_MONITOR;
+
+	  if(iw_set_ext(skfd,device,SIOCSIWMODE,&wrq)<0)
+ 	 {
+  	  wl_logerr("Could not set hostap card %s to raw mode, check cardtype", device);
+  	  return 0;
+      }
+      else
+      {
+	    wl_loginfo("Successfully set hostap card %s into raw mode",device);
+	    return 1;
+      }
+    return 1;
   }
-  else if (cardtype == CARD_TYPE_ORINOCCO || cardtype == CARD_TYPE_HOSTAP)
+  else if (cardtype == CARD_TYPE_ORINOCCO )
   {
 	 if (!card_set_channel (device, 1, CARD_TYPE_ORINOCCO))
 	 {
@@ -92,7 +99,7 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
 }
 
 /* Check card is in the rfmon mode */
-int card_check_rfmon_datalink (char *device)
+int card_check_rfmon_datalink (const char *device)
 {
   int datalinktype=0;
   pcap_t *phandle;
@@ -138,7 +145,7 @@ int card_set_promisc_up (const char *device)
     
     /* Get the informations back from the interface to check if the flags are correct */
     strncpy(ifr.ifr_name, device,10);
-    ioctl(fd, SIOCGIFFLAGS, &ifr);
+    err = ioctl(fd, SIOCGIFFLAGS, &ifr);
     if (err < 0)
     {
         perror("Could not access the interface, ");
@@ -168,7 +175,7 @@ int card_set_channel (const char *device, int channel, int cardtype)
     	return 1;
     }
     /* If it is a lucent orinocco card */ 
-    else if (cardtype == CARD_TYPE_ORINOCCO || cardtype == CARD_TYPE_HOSTAP)
+    else if (cardtype == CARD_TYPE_ORINOCCO)
     {
     	int fd;
    	//Wireless tools structure for the iocalls
@@ -180,6 +187,7 @@ int card_set_channel (const char *device, int channel, int cardtype)
 	   if ( fd == -1 ) {
  	     return -1;
  	  }
+
 	   ptr = (int *) ireq.u.name;
 	   // This is the monitor mode for 802.11 non-prism header
 	   ptr[0] = 2;
@@ -200,7 +208,105 @@ int card_set_channel (const char *device, int channel, int cardtype)
 			return 0;
 	   }
     }
+	/* when it is an hostap card you need another iocall for channel switching */
+	    else if (cardtype == CARD_TYPE_HOSTAP)
+    {
+	  int skfd;  	
+      skfd = socket(AF_INET, SOCK_STREAM, 0);
+	  struct iwreq wrq;
+      iw_float2freq((double) channel, &wrq.u.freq);
+
+	  if(iw_set_ext(skfd,device,SIOCSIWFREQ,&wrq)<0)
+ 	 {
+  	  wl_logerr("Could not set hostap card %s to channel %d", device, channel);
+  	  return 0;
+      }
+      else
+      {
+	    wl_loginfo("Successfully set hostap card %s to channel %d", device, channel);
+	    return 1;
+      }
+	}
     /* For undefined situations */
 	return 0;
 }
+
+
+int card_detect_channels (char * device)
+{
+	int skfd;
+    skfd = socket(AF_INET, SOCK_STREAM, 0);
+    struct iw_range	range;
+    /* Get list of frequencies / channels */
+		printf ("\n hostap card get the frequencies");
+        /* Get list of frequencies / channels */
+        if(iw_get_range_info(skfd, device, &range) < 0)
+ 	   {   /* We are failsave if something went wrong, asume only 11 channels */
+ 	   	return 11;
+ 	   }
+ 	   else
+        {
+        	if(range.num_frequency > 0)
+			{
+				return range.num_frequency;
+			}
+			else
+			{   /* We are failsave asume only 11 channels */
+				return 11;
+			}
+		}
+
+} /* End of card_detect_channels */ 
+
+int iw_get_range_info(int skfd, const char * ifname,  iw_range * range)
+{
+  struct iwreq wrq2;
+  char   buffer[sizeof(iw_range) * 2];	/* Large enough */
+
+  /* Cleanup */
+  memset(buffer, 0, sizeof(buffer));
+  wrq2.u.data.pointer = (caddr_t) buffer;
+  wrq2.u.data.length = sizeof(buffer);
+  wrq2.u.data.flags = 0;
+
+  if(iw_get_ext(skfd, ifname, SIOCGIWRANGE, &wrq2) < 0)
+  {
+      wl_logerr("Could not get the range from the interface");
+  	return(-1);
+  }
+  else
+  {
+      /* Copy stuff at the right place, ignore extra */
+      memcpy((char *) range, buffer, sizeof(iw_range));
+      return 0;
+  }
+}
+
+/*------------------------------------------------------------------*/
+/*
+ * Convert our internal representation of frequencies to a floating point.
+ */  
+double iw_freq2float(iw_freq *  in)
+{
+  int           i;
+  double        res = (double) in->m;
+  for(i = 0; i < in->e; i++)
+    res *= 10;
+  return(res);
+}
+
+
+void iw_float2freq(double	in, iw_freq *	out)
+{
+  /* Version without libm : slower */
+  out->e = 0;
+  while(in > 1e9)
+    {
+      in /= 10;
+      out->e++;
+    }
+  out->m = (long) in;
+}
+
+
 
