@@ -19,20 +19,28 @@
 
 #define EXTENSION ".bck"
 
-BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name) : BackupAndRestoreBase(parent, name){
+BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
+        : BackupAndRestoreBase(parent, name){
   this->showMaximized();
   backupList->header()->hide();
   restoreList->header()->hide();
-  connect(backupButton, SIGNAL(clicked()), this, SLOT(backupPressed()));
-  connect(restoreButton, SIGNAL(clicked()), this, SLOT(restore()));
-  connect(backupList, SIGNAL(clicked( QListViewItem * )), this, SLOT(selectItem(QListViewItem*))); 
-  connect(restoreSource, SIGNAL(activated( int  )), this, SLOT(sourceDirChanged(int))); 
+  connect(backupButton, SIGNAL(clicked()),
+          this, SLOT(backupPressed()));
+  connect(restoreButton, SIGNAL(clicked()),
+          this, SLOT(restore()));
+  connect(backupList, SIGNAL(clicked( QListViewItem * )),
+          this, SLOT(selectItem(QListViewItem*))); 
+  connect(restoreSource, SIGNAL(activated( int  )),
+          this, SLOT(sourceDirChanged(int))); 
 
-  systemSettings = new QListViewItem(backupList, "System Settings", "", "/home/etc");
+  systemSettings = new QListViewItem(backupList, "System Settings", "",
+                                     "/etc");
   selectItem(systemSettings);
-  applicationSettings = new QListViewItem(backupList, "Application Settings", "", QDir::homeDirPath() + "/Settings/");
+  applicationSettings = new QListViewItem(backupList, "Application Settings", "",
+                                          QDir::homeDirPath() + "/Settings/");
   selectItem(applicationSettings);
-  documents= new QListViewItem(backupList, "Documents", "", QDir::homeDirPath() + "/Documents/");
+  documents= new QListViewItem(backupList, "Documents", "",
+                               QDir::homeDirPath() + "/Documents/");
   selectItem(documents);
   
   scanForApplicationSettings();
@@ -41,14 +49,16 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name) : BackupA
   config.setGroup("General");
   int totalLocations = config.readNumEntry("totalLocations",0);
   
+//todo make less static here and use Storage class to get infos
   if(totalLocations == 0){
-    backupLocations.insert("Documents", "/home/root/Documents");
+    backupLocations.insert("Documents", "/root/Documents");
     backupLocations.insert("CF", "/mnt/cf");
     backupLocations.insert("SD", "/mnt/card");
   }
   else{
     for(int i = 0; i < totalLocations; i++){
-      backupLocations.insert(config.readEntry(QString("backupLocationName_%1").arg(i)), config.readEntry(QString("backupLocation_%1").arg(i)));
+      backupLocations.insert(config.readEntry(QString("backupLocationName_%1").arg(i)),
+                             config.readEntry(QString("backupLocation_%1").arg(i)));
     }
   }
   QMap<QString, QString>::Iterator it;
@@ -68,7 +78,7 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name) : BackupA
 
   QList<QListViewItem> list;
   getAllItems(backupList->firstChild(), list);
-	
+  
   for(uint i = 0; i < list.count(); i++){
     QString text = list.at(i)->text(HEADER_NAME);
     for(uint i2 = 0;  i2 < dontBackupList.count(); i2++){
@@ -83,7 +93,7 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name) : BackupA
 BackupAndRestore::~BackupAndRestore(){
   QList<QListViewItem> list;
   getAllItems(backupList->firstChild(), list);
-	
+  
   Config config("BackupAndRestore");
   config.setGroup("DontBackup");
   config.clearGroup();
@@ -150,8 +160,9 @@ void BackupAndRestore::scanForApplicationSettings(){
 void BackupAndRestore::backupPressed(){
   QString backupFiles;
   if(getBackupFiles(backupFiles, NULL) == 0){
-    QMessageBox::critical(this, "Message", "No items selected.",QString("Ok") );
-    return;	  
+    QMessageBox::critical(this, "Message",
+                          "No items selected.",QString("Ok") );
+    return;   
   }
 
   QString outputFile = backupLocations[storeToLocation->currentText()];
@@ -171,7 +182,7 @@ void BackupAndRestore::backupPressed(){
   int r = system(QString("tar -c %1 | gzip --best > %2").arg(backupFiles).arg(outputFile).latin1());
   if(r != 0){
     QMessageBox::critical(this, "Message", "Backup Failed.",QString("Ok") );
-    return;	  
+    return;   
   }
   else{
     QMessageBox::critical(this, "Message", "Backup Successfull.",QString("Ok") );
@@ -196,11 +207,11 @@ int BackupAndRestore::getBackupFiles(QString &backupFiles, QListViewItem *parent
     if(currentItem->text(HEADER_BACKUP) == "B" ){
       if(currentItem->childCount() == 0 ){
         if(parent == NULL)
-	  backupFiles += currentItem->text(BACKUP_LOCATION);
-	else
+    backupFiles += currentItem->text(BACKUP_LOCATION);
+  else
           backupFiles += currentHome + currentItem->text(HEADER_NAME);
-	backupFiles += " ";
-	count++;
+  backupFiles += " ";
+  count++;
       }
       else{
         count += getBackupFiles(backupFiles, currentItem);
@@ -235,7 +246,7 @@ void BackupAndRestore::rescanFolder(QString directory){
     // If it is a dir and not .. or . then add it as a tab and go down.
     if(file->isDir()){
       if(file->fileName() != ".." && file->fileName() != ".") {
-	rescanFolder(directory + "/" + file->fileName());
+  rescanFolder(directory + "/" + file->fileName());
       }
     }
     else{
@@ -254,8 +265,9 @@ void BackupAndRestore::rescanFolder(QString directory){
 void BackupAndRestore::restore(){
   QListViewItem *restoreItem = restoreList->currentItem();
   if(!restoreItem){
-    QMessageBox::critical(this, "Message", "Please select something to restore.",QString("Ok") );
-    return;	  
+    QMessageBox::critical(this, "Message",
+                          "Please select something to restore.",QString("Ok") );
+    return;   
   }
   QString restoreFile = backupLocations[restoreSource->currentText()];
   
@@ -263,10 +275,12 @@ void BackupAndRestore::restore(){
   
   int r = system(QString("tar -C / -zxf %1").arg(restoreFile).latin1());
   if(r != 0){
-    QMessageBox::critical(this, "Message", "Restore Failed.",QString("Ok") );
+    QMessageBox::critical(this, "Message",
+                          "Restore Failed.",QString("Ok") );
   }
   else{
-    QMessageBox::critical(this, "Message", "Restore Successfull.",QString("Ok") );
+    QMessageBox::critical(this, "Message",
+                          "Restore Successfull.",QString("Ok") );
   }
 }
 
