@@ -116,6 +116,7 @@ private:
 private:
 //    fileSaver *fileSaveDlg;
 //    fileBrowser *browseForFiles;
+    bool fromSetDocument;
     QpeEditor* editor;
     QToolBar *menu, *editBar, *searchBar;
     QPopupMenu *advancedMenu;

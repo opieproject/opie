@@ -243,7 +243,8 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 {
     doc = 0;
     edited=false;
-    edited1=false;
+    fromSetDocument=false;
+
     setToolBarsMovable( false );
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
@@ -269,7 +270,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fileNew() ) );
-    a->addTo( bar );
+//    a->addTo( bar );
     a->addTo( file );
 
     a = new QAction( tr( "Open" ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
@@ -280,6 +281,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     a = new QAction( tr( "Save" ), QPixmap(( const char** ) filesave_xpm  ) , QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( save() ) );
     file->insertSeparator();
+    a->addTo( bar );
     a->addTo( file );
 
     a = new QAction( tr( "Save As" ), QPixmap(( const char** ) filesave_xpm  ) , QString::null, 0, this, 0 );
@@ -339,6 +341,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( nStart, SIGNAL( toggled(bool) ), this, SLOT( changeStartConfig(bool) ) );
     nStart->setToggleAction(true);
     nStart->addTo( advancedMenu );
+    nStart->setEnabled(false);
 
     nAdvanced = new QAction( tr("Prompt on Exit"), QString::null, 0, this, 0 );
     connect( nAdvanced, SIGNAL( toggled(bool) ), this, SLOT( doPrompt(bool) ) );
@@ -436,7 +439,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     if( qApp->argc() > 1) {
         currentFileName=qApp->argv()[1];
-//         qDebug("<<<<<<<<<<<<<<<<<<<<<<<< "+currentFileName+" %d",qApp->argc());
+        
         QFileInfo fi(currentFileName);
 
         if(fi.baseName().left(1) == "") {
@@ -445,16 +448,19 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
             openFile(currentFileName);
         }
     } else {
-//        qDebug("Do other thing");
-        if(startWithNew) {
+    edited1=false;
+        
+//        if(startWithNew ) {
             openDotFile("");
 //            fileNew();
-        } else {
-            fileOpen();
-        }
+//        }
+//        else {
+//             fileOpen();
+//         }
     }
 
     viewSelection = cfg.readNumEntry( "FileView", 0 );
+//    setCaption(tr("Text Editor"));
 }
 
 TextEdit::~TextEdit() {
@@ -695,7 +701,7 @@ void TextEdit::openFile( const QString &f ) {
     QString filer;
     QFileInfo fi( f);
 //    bFromDocView = true;
-    if(f.find(".desktop",0,true) != -1 && !openDesktop) {
+    if(f.find(".desktop",0,true) != -1 && !openDesktop ) {
         switch ( QMessageBox::warning(this,tr("Text Editor"),
                                       tr("Text Editor has detected<BR>you selected a <B>.desktop</B>
 file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
@@ -826,6 +832,8 @@ bool TextEdit::save() {
 /*!
   prompted save */
 bool TextEdit::saveAs() {
+    if(caption() == tr("Text Editor"))
+        return false;
     qDebug("saveAsFile " + currentFileName);
       // case of nothing to save... 
 //     if ( !doc && !currentFileName.isEmpty()) {
@@ -963,19 +971,19 @@ void TextEdit::setDocument(const QString& fileref) {
     if(fileref != "Unnamed") {
         currentFileName=fileref;
         qDebug("setDocument");
-        QFileInfo fi(currentFileName);
-        qDebug("basename:"+fi.baseName()+": current filenmame "+currentFileName);
-        if(fi.baseName().left(1) == "") {
-//        openDotFile(currentFileName);
-        } else {
-            qDebug("setDoc open");
-            bFromDocView = true;
-            openFile(fileref);
-            editor->setEdited(true);
-            edited1=false;
-            edited=true;
-
-//    doSearchBar();
+         QFileInfo fi(currentFileName);
+         qDebug("basename:"+fi.baseName()+": current filenmame "+currentFileName);
+         if(fi.baseName().left(1) == "") {
+ //        openDotFile(currentFileName);
+         } else {
+             qDebug("setDoc open");
+             bFromDocView = true;
+             openFile(fileref);
+             editor->setEdited(true);
+             edited1=false;
+             edited=true;
+               //   fromSetDocument=false;
+ //    doSearchBar();
         }
     }
     updateCaption( currentFileName);
@@ -997,7 +1005,11 @@ void TextEdit::changeFont() {
 }
 
 void TextEdit::editDelete() {
-    switch ( QMessageBox::warning(this,tr("Text Editor"),tr("Do you really want<BR>to <B>delete</B> the current file\nfrom the disk?<BR>This is <B>irreversable!!</B>"),tr("Yes"),tr("No"),0,0,1) ) {
+    switch ( QMessageBox::warning(this,tr("Text Editor"),
+                                  tr("Do you really want<BR>to <B>delete</B> "
+                                     "the current file\nfrom the disk?<BR>This is "
+                                     "<B>irreversable!!</B>"),
+                                  tr("Yes"),tr("No"),0,0,1) ) {
       case 0:
           if(doc) {
               doc->removeFiles();
@@ -1019,21 +1031,24 @@ void TextEdit::changeStartConfig( bool b ) {
     update();
 }
 
-void TextEdit::editorChanged() { 
-    if(editor->edited() && edited && !edited1) {
+void TextEdit::editorChanged() {
+//    qDebug("editor changed");
+    if( /*editor->edited() &&*/ /*edited && */!edited1) {
         setCaption( "*"+caption());
         edited1=true;
     }
     edited=true;
 }
 
-void TextEdit::receive(const QCString&msg, const QByteArray&) {
+void TextEdit::receive(const QCString&msg, const QByteArray &data) {
     qDebug("QCop "+msg);
   if ( msg == "setDocument(QString)" ) {
       qDebug("bugger all");
+          
   }
 
 }
+
 void TextEdit::doAbout() {
     QMessageBox::about(0,tr("Text Edit"),tr("Text Edit is copyright<BR>"
                          "2000 Trolltech AS, and<BR>"
