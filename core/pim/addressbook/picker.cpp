@@ -239,7 +239,7 @@ void LetterPicker::clear()
 
 void LetterPicker::newLetter( char letter )
 {
-	Opie::Core::owarn << "LetterClicked" << oendl;
+	owarn << "LetterClicked" << oendl;
 	emit letterClicked( letter );
 
 }

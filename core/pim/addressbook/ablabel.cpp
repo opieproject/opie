@@ -95,15 +95,15 @@ void AbLabel::keyPressEvent( QKeyEvent *e )
 	if ( !m_empty ){
 		switch( e->key() ) {
 		case Qt::Key_Left:
-			Opie::Core::owarn << "Left.." << oendl;
+			owarn << "Left.." << oendl;
 		case Qt::Key_Right:
-			Opie::Core::owarn << "Right.." << oendl;
+			owarn << "Right.." << oendl;
 		case Qt::Key_F33:
-			Opie::Core::owarn << "OK.." << oendl;
+			owarn << "OK.." << oendl;
 			emit signalOkPressed();
 			break;
 		case Qt::Key_Up:
-			Opie::Core::owarn << "Up.." << oendl;
+			owarn << "Up.." << oendl;
 			if ( ( visibleHeight() < contentsHeight() ) &&
 			     ( verticalScrollBar()->value() > verticalScrollBar()->minValue() ) )
 				scrollBy( 0, -(visibleHeight()-20) );
@@ -117,9 +117,9 @@ void AbLabel::keyPressEvent( QKeyEvent *e )
 
 			break;
 		case Qt::Key_Down:
-			Opie::Core::owarn << "Down.." << oendl;
-//			Opie::Core::owarn << "Visible: " << visibleHeight() << ", content: " << contentHeight() << oendl;
-//			Opie::Core::owarn << "Value: " << verticalScrollBar()->value()
+			owarn << "Down.." << oendl;
+//			owarn << "Visible: " << visibleHeight() << ", content: " << contentHeight() << oendl;
+//			owarn << "Value: " << verticalScrollBar()->value()
 //					<< ", barMaxValue: " << verticalScrollBar()->maxValue() << oendl;
 			if ( ( visibleHeight() < contentsHeight() ) &&
 			     ( verticalScrollBar()->value() < verticalScrollBar()->maxValue() ) )

@@ -43,7 +43,7 @@ ConfigDlg::ConfigDlg( QWidget *parent, const char *name):
 
 void ConfigDlg::slotItemUp()
 {
-	Opie::Core::owarn << "void ConfigDlg::slotItemUp()" << oendl;
+	owarn << "void ConfigDlg::slotItemUp()" << oendl;
 
 	int i = fieldListBox->currentItem();
 	if ( i > 0 ) {
@@ -57,7 +57,7 @@ void ConfigDlg::slotItemUp()
 
 void ConfigDlg::slotItemDown()
 {
-	Opie::Core::owarn << "void ConfigDlg::slotItemDown()" << oendl;
+	owarn << "void ConfigDlg::slotItemDown()" << oendl;
 
 	int i = fieldListBox->currentItem();
 	if ( i < (int)fieldListBox->count() - 1 ) {
@@ -70,19 +70,19 @@ void ConfigDlg::slotItemDown()
 
 void ConfigDlg::slotItemAdd()
 {
-	Opie::Core::owarn << "void ConfigDlg::slotItemAdd()" << oendl;
+	owarn << "void ConfigDlg::slotItemAdd()" << oendl;
 
 	int i = allFieldListBox->currentItem();
 	if ( i > 0 ) {
 		QString item = allFieldListBox->currentText();
-		Opie::Core::owarn << "Adding " << item << oendl;
+		owarn << "Adding " << item << oendl;
 		fieldListBox->insertItem( item );
 	}
 }
 
 void ConfigDlg::slotItemRemove()
 {
-	Opie::Core::owarn << "void ConfigDlg::slotItemRemove()" << oendl;
+	owarn << "void ConfigDlg::slotItemRemove()" << oendl;
 
 	int i = fieldListBox->currentItem();
 	if ( i > 0 ) {
