@@ -1,27 +1,27 @@
 
-CONFIG		+= qt warn on release quick-app
+CONFIG        += qt warn on release quick-app
 
 
-HEADERS	=	qcleanuphandler.h \
-		qcomplextext_p.h \
-		qrichtext_p.h \
-		qstylesheet.h \
-		qtextedit.h \
-		mainwindow.h
+HEADERS    =    qcleanuphandler.h \
+        qcomplextext_p.h \
+        qrichtext_p.h \
+        qstylesheet.h \
+        qtextedit.h \
+        mainwindow.h
 
-SOURCES	=	qcomplextext.cpp \
-		qstylesheet.cpp \
-		qrichtext_p.cpp \
-		qrichtext.cpp \
-		qtextedit.cpp \
-		main.cpp \
-		mainwindow.cpp
+SOURCES    =    qcomplextext.cpp \
+        qstylesheet.cpp \
+        qrichtext_p.cpp \
+        qrichtext.cpp \
+        qtextedit.cpp \
+        main.cpp \
+        mainwindow.cpp
 
-INCLUDEPATH	+= $(OPIEDIR)/include
-DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
+INCLUDEPATH    += $(OPIEDIR)/include
+DEPENDPATH    += $(OPIEDIR)/include
+LIBS            += -lqpe -lopiecore2
 
-TARGET		= opie-write
+TARGET        = opie-write
 
 
 include ( $(OPIEDIR)/include.pro )
