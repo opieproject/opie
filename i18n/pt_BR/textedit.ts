@@ -80,67 +80,67 @@
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished">Fonte</translation>
+        <translation>Fonte</translation>
     </message>
     <message>
         <source>.desktop File</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivo .desktop</translation>
     </message>
     <message>
         <source>Linked Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Documento Apontado</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tudo</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <source>Insert Time and Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Inserir Hora e Data</translation>
     </message>
     <message>
         <source>Advanced Features</source>
-        <translation type="unfinished"></translation>
+        <translation>Funções Avançadas</translation>
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation type="unfinished"></translation>
+        <translation>Perguntar ao Sair</translation>
     </message>
     <message>
         <source>Always open linked file</source>
-        <translation type="unfinished"></translation>
+        <translation>Sempre abrir arquivo apontado</translation>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permissões de Arquivo</translation>
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir Barra de Busca</translation>
     </message>
     <message>
         <source>Goto Line...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir para Linha...</translation>
     </message>
     <message>
         <source>Auto Save 5 min.</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva Automaticamente em 5 min.</translation>
     </message>
     <message>
         <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt;file.&lt;BR&gt;Open&lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
-        <translation type="unfinished"></translation>
+        <translation>O Editor de Texto detectou&lt;BR&gt;que você selecionou um arquivo &lt;B&gt;.desktop&lt;/B&gt;&lt;BR&gt;Abrir o arquivo &lt;B&gt;.desktop&lt;/B&gt; ou o arquivo &lt;B&gt;apontado&lt;/B&gt;?</translation>
     </message>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Texto</translation>
     </message>
     <message>
         <source>Write Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou ao Gravar</translation>
     </message>
     <message>
         <source>Unnamed</source>
@@ -148,55 +148,60 @@
     </message>
     <message>
         <source>Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permissões</translation>
     </message>
     <message>
         <source>Choose font</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha a fonte</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sim</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Não</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>O Editor de Texto é copyright&lt;BR&gt;2000 Trolltech AS, e&lt;BR&gt;2002 por &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;e é licenciado sob a GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Texto</translation>
     </message>
     <message>
         <source>Textedit detected
 you have unsaved changes
 Go ahead and save?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Texto detectou que
+você tem mudanças não salvas
+Ir em frente e salvar?
+</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Não Salva</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cancela</translation>
     </message>
     <message>
         <source>Not enough lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Não há linhas o suficiente</translation>
     </message>
     <message>
         <source>%1 - Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Editor de Texto</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Você realmente deseja&lt;BR&gt;
+&lt;B&gt;remover&lt;/B&gt; o arquivo atual
+do disco?&lt;BR&gt;Isto é &lt;B&gt;irreversível!&lt;/B&gt;</translation>
     </message>
 </context>
 <context>
@@ -243,27 +248,27 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro- sem usuário</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro- sem grupo</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ajustando dono ou grupo</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ajustando modo</translation>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permissões de Arquivo</translation>
     </message>
 </context>
 </TS>

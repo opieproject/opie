@@ -3,245 +3,245 @@
     <name>FileBrowser</name>
     <message>
         <source>File Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerenciador de Arquivo</translation>
     </message>
     <message>
         <source>Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Dir</translation>
     </message>
     <message>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordenar</translation>
     </message>
     <message>
         <source>by Name </source>
-        <translation type="unfinished"></translation>
+        <translation>por Nome</translation>
     </message>
     <message>
         <source>by Size </source>
-        <translation type="unfinished"></translation>
+        <translation>por Tamanho</translation>
     </message>
     <message>
         <source>by Date </source>
-        <translation type="unfinished"></translation>
+        <translation>por Data</translation>
     </message>
     <message>
         <source>by Type </source>
-        <translation type="unfinished"></translation>
+        <translation>por Tipo</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Ascendente</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Oculto</translation>
     </message>
     <message>
         <source>Symlinks</source>
-        <translation type="unfinished"></translation>
+        <translation>Link Simb</translation>
     </message>
     <message>
         <source>Thumbnails</source>
-        <translation type="unfinished"></translation>
+        <translation>Miniatura</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver</translation>
     </message>
     <message>
         <source>Previous dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Dir Anterior</translation>
     </message>
     <message>
         <source>Parent dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Dir acima</translation>
     </message>
     <message>
         <source>New folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova Pasta</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Colar</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
 </context>
 <context>
     <name>FileView</name>
     <message>
         <source>File Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerenciador de Arquivos</translation>
     </message>
     <message>
         <source>Can&apos;t show /dev/ directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>IMpossível exibir diretório /dev/.</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Rename file</source>
-        <translation type="unfinished"></translation>
+        <translation>Renomear arquivo</translation>
     </message>
     <message>
         <source>Rename failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou ao renomear!</translation>
     </message>
     <message>
         <source>Paste file</source>
-        <translation type="unfinished"></translation>
+        <translation>Colar arquivo</translation>
     </message>
     <message>
         <source>Paste failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou ao colar!</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cut file</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar arquivo</translation>
     </message>
     <message>
         <source>Cut failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou ao cortar!</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tem certeza?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sim</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Não</translation>
     </message>
     <message>
         <source>Delete failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou ao Remover!</translation>
     </message>
     <message>
         <source>New folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova Pasta</translation>
     </message>
     <message>
         <source>Folder creation failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou ao criar pasta!</translation>
     </message>
     <message>
         <source>Launch Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Lançar aplicação</translation>
     </message>
     <message>
         <source>Launch failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou ao lançar!</translation>
     </message>
     <message>
         <source>Add to Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicioanar à Documentos</translation>
     </message>
     <message>
         <source>Run</source>
-        <translation type="unfinished"></translation>
+        <translation>Executar</translation>
     </message>
     <message>
         <source>View as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver como texto</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Renomear</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Colar</translation>
     </message>
     <message>
         <source>Change Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Permissões</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar tudo</translation>
     </message>
     <message>
         <source>Deselect all</source>
-        <translation type="unfinished"></translation>
+        <translation>Deselecionar tudo</translation>
     </message>
     <message>
         <source>Change permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Permissões</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar Permissões de Arquivo</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar permissões de arquivo para:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>dono</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>grupo</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>outros</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Dono</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupo</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>ler</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>escrever</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>executar</translation>
     </message>
 </context>
 </TS>

@@ -149,7 +149,7 @@ longa que o intervalo entre repetições.</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation>Quinta</translation>
+        <translation>Silencioso</translation>
     </message>
 </context>
 <context>
@@ -233,7 +233,7 @@ longa que o intervalo entre repetições.</translation>
     <name>DateBookSettingsBase</name>
     <message>
         <source>Alarm Preset</source>
-        <translation>Alarme Padrão</translation>
+        <translation>Al. Padrão</translation>
     </message>
     <message>
         <source>Start viewing events</source>
@@ -245,7 +245,7 @@ longa que o intervalo entre repetições.</translation>
     </message>
     <message>
         <source>Start Time:</source>
-        <translation>Horário Inicial:</translation>
+        <translation>Hora Inicio:</translation>
     </message>
     <message>
         <source>Preferences</source>
@@ -370,7 +370,7 @@ longa que o intervalo entre repetições.</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="unfinished"></translation>
+        <translation>MTWTFSSM</translation>
     </message>
 </context>
 <context>
@@ -441,7 +441,7 @@ longa que o intervalo entre repetições.</translation>
     <name>DateEntryBase</name>
     <message>
         <source>Home</source>
-        <translation>Residência</translation>
+        <translation>Resid</translation>
     </message>
     <message>
         <source>Loud</source>
@@ -461,7 +461,7 @@ longa que o intervalo entre repetições.</translation>
     </message>
     <message>
         <source>No Repeat...</source>
-        <translation>Sem Repetição...</translation>
+        <translation>Não Repete...</translation>
     </message>
     <message>
         <source> minutes</source>
@@ -485,7 +485,7 @@ longa que o intervalo entre repetições.</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation>Silencioso</translation>
+        <translation>Silenc</translation>
     </message>
     <message>
         <source>Travel</source>
@@ -529,7 +529,7 @@ longa que o intervalo entre repetições.</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora Inicial</translation>
     </message>
 </context>
 <context>

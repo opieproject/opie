@@ -7,27 +7,27 @@
     </message>
     <message>
         <source>Disable IrDA</source>
-        <translation>Habilitar IrDA</translation>
+        <translation>Desabilitar IrDA</translation>
     </message>
     <message>
         <source>Enable IrDA</source>
-        <translation>Deshabilitar IrDA</translation>
+        <translation>Habilitar IrDA</translation>
     </message>
     <message>
         <source>Disable Discovery</source>
-        <translation>Habilitar Descoberta</translation>
+        <translation>Desabilitar Descoberta</translation>
     </message>
     <message>
         <source>Enable Discovery</source>
-        <translation>Deshabilitar Descoberta</translation>
+        <translation>Habilitar Descoberta</translation>
     </message>
     <message>
         <source>Disable Receive</source>
-        <translation>Habilitar Recepção</translation>
+        <translation>Desabilitar Recepção</translation>
     </message>
     <message>
         <source>Enable Receive</source>
-        <translation>Deshabilitar Recepção</translation>
+        <translation>Habilitar Recepção</translation>
     </message>
     <message>
         <source>Found:</source>

@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Full Name</source>
-        <translation>Nome Completo</translation>
+        <translation>Nome Comp</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -222,7 +222,7 @@ is provided free !</source>
         <translation>Aviso: QT-Mail somente é
 fornecido na ROM padrão
 da SHARP. Opie-Mail é
-forcnecido livremente !</translation>
+fornecido livremente !</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -258,11 +258,11 @@ forcnecido livremente !</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>P/ Cima</translation>
+        <translation>Sobe</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>P/ Baixo</translation>
+        <translation>Desce</translation>
     </message>
     <message>
         <source>Add</source>
@@ -385,7 +385,7 @@ forcnecido livremente !</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Título Profissional</translation>
+        <translation>Título Prof</translation>
     </message>
     <message>
         <source>City</source>
@@ -401,7 +401,7 @@ forcnecido livremente !</translation>
     </message>
     <message>
         <source>Full Name...</source>
-        <translation>Nome Completo</translation>
+        <translation>Nome Comp...</translation>
     </message>
     <message>
         <source>Organization</source>
@@ -1345,7 +1345,7 @@ forcnecido livremente !</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

@@ -4,7 +4,7 @@
     <name>InputMethods</name>
     <message>
         <source>Pickboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Pickboard</translation>
     </message>
 </context>
 </TS>

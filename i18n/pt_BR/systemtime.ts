@@ -4,104 +4,106 @@
     <name>FormatTabWidget</name>
     <message>
         <source>Time format</source>
-        <translation type="unfinished">Formato de hora</translation>
+        <translation>Formato de hora</translation>
     </message>
     <message>
         <source>hh:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>hh:mm</translation>
     </message>
     <message>
         <source>D/M hh:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>D/M hh:mm</translation>
     </message>
     <message>
         <source>M/D hh:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>M/D hh:mm</translation>
     </message>
     <message>
         <source>12/24 hour</source>
-        <translation type="unfinished">12/24 horas</translation>
+        <translation>12/24 horas</translation>
     </message>
     <message>
         <source>24 hour</source>
-        <translation type="unfinished">24 horas</translation>
+        <translation>24 horas</translation>
     </message>
     <message>
         <source>12 hour</source>
-        <translation type="unfinished">12 horas</translation>
+        <translation>12 horas</translation>
     </message>
     <message>
         <source>Date format</source>
-        <translation type="unfinished">Formato de data</translation>
+        <translation>Formato de data</translation>
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation type="unfinished">Semana começa no(a)</translation>
+        <translation>Semana começa no(a)</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished">Domingo</translation>
+        <translation>Domingo</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished">Segunda</translation>
+        <translation>Segunda</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>SystemTime</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora do Sistema</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Horário</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustes</translation>
     </message>
     <message>
         <source>Predict</source>
-        <translation type="unfinished"></translation>
+        <translation>Prediz</translation>
     </message>
     <message>
         <source>Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Continua ?</translation>
     </message>
     <message>
         <source>Running:
 ntpdate </source>
-        <translation type="unfinished"></translation>
+        <translation>Executando:
+ntpdate</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>Error while getting time from network.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro obtendo horário da rede.</translation>
     </message>
     <message>
         <source>Error while executing ntpdate</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro executando ntpdate</translation>
     </message>
     <message>
         <source>Time Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor de Tempo</translation>
     </message>
     <message>
         <source>Error while getting time from
  server: </source>
-        <translation type="unfinished"></translation>
+        <translation>Erro obtendo horário do
+servidor:</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
-        <translation type="unfinished"></translation>
+        <translation>Impossível conectar ao servidor</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
@@ -209,23 +211,23 @@ ntpdate </source>
     <name>TimeTabWidget</name>
     <message>
         <source>Hour</source>
-        <translation type="unfinished">Hora</translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished">Minuto</translation>
+        <translation>Minuto</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished">AM</translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished">PM</translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Data</translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Time zone</source>
