@@ -473,19 +473,19 @@ bool FormatterApp::doFsck() {
 
     Output *outDlg;
     QString selectedDevice;
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX) 
+// #if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX) 
     selectedDevice = deviceComboBox->currentText();
     QString mountPoint = mountPointLineEdit->text();
     QString umountS = "umount -v "+mountPoint+" 2>&1";
     QString remountS = "mount -v "+mountPoint+" 2>&1";
-#else
-      // for testing
-//    currentText  = diskDevice  = "/dev/fd0";
-    QString umountS = "umount -v /floppy 2>&1";
-    QString remountS = "mount -v /floppy 2>&1";
-    selectedDevice ="/dev/fd0";
+// #else
+//       // for testing
+// //    currentText  = diskDevice  = "/dev/fd0";
+//     QString umountS = "umount -v /floppy 2>&1";
+//     QString remountS = "mount -v /floppy 2>&1";
+//     selectedDevice ="/dev/fd0";
   
-#endif
+// #endif
 
     QString fsType = getFileSystemType((const QString &)selectedDevice);
     QString cmd;
@@ -518,7 +518,8 @@ bool FormatterApp::doFsck() {
         while ( fgets( line, sizeof line, fp)) {
             if( ((QString)line).find("busy",0,TRUE) != -1) {
                 qDebug("Could not find '" + umountS); 
-                QMessageBox::warning( this, tr("Formatter"), tr("Could not umount.\nDevice is busy!"), tr("&OK") );
+                QMessageBox::warning( this, tr("Formatter"),
+                                      tr("Could not umount.\nDevice is busy!"), tr("&OK") );
                 pclose(fp);             
                 return false;
             } else {
