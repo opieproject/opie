@@ -91,7 +91,7 @@ void TZCombo::updateZones()
     int curix=0;
     QString tz = getenv("TZ");
     bool tzFound = FALSE;
-    Config cfg("WorldTime");
+    Config cfg("CityTime");
     cfg.setGroup("TimeZones");
     int listIndex = 0;
     if (parent()->inherits("TimeZoneSelector")) {
