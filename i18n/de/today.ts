@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Please fill out the business card</source>
-        <translation>Bitte füller Sie die Visitenkarte aus</translation>
+        <translation>Bitte füllen Sie die Visitenkarte aus</translation>
     </message>
     <message>
         <source>No more  today</source>
