@@ -1,0 +1,64 @@
+Qt was not created for 240x320 and we adjust some default values to be more
+sane for the usage on handhelds
+
+
+
+
+diff -ur qt-2.3.7-old/src/widgets/qcommonstyle.cpp qt-2.3.7/src/widgets/qcommonstyle.cpp
+--- qt-2.3.7-old/src/widgets/qcommonstyle.cpp	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/src/widgets/qcommonstyle.cpp	2004-07-23 15:38:13.000000000 +0200
+@@ -566,7 +566,7 @@
+ 				    bool enabled, bool active )
+ {
+ #ifndef QT_NO_MENUBAR
+-#ifndef QT_NO_STYLE_SGI
++#if 1 // #ifndef QT_NO_STYLE_SGI
+     if (draw_menu_bar_impl != 0) {
+ 	QDrawMenuBarItemImpl impl = draw_menu_bar_impl;
+ 	(this->*impl)(p, x, y, w, h, mi, g, enabled, active);
+diff -ur qt-2.3.7-old/src/widgets/qlistview.cpp qt-2.3.7/src/widgets/qlistview.cpp
+--- qt-2.3.7-old/src/widgets/qlistview.cpp	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/src/widgets/qlistview.cpp	2004-07-23 15:38:13.000000000 +0200
+@@ -4968,9 +4968,9 @@
+ 	l = l->childItem ? l->childItem : l->siblingItem;
+ 
+     if ( l && l->height() )
+-	s.setHeight( s.height() + 10 * l->height() );
+-    else
+-	s.setHeight( s.height() + 140 );
++	s.setHeight( s.height() + 4 /*10*/ * l->height() );
++    else                      // ^v much too big for handhelds
++	s.setHeight( s.height() + 30 /*140*/ );
+ 
+     if ( s.width() > s.height() * 3 )
+ 	s.setHeight( s.width() / 3 );
+diff -ur qt-2.3.7-old/src/widgets/qtoolbutton.cpp qt-2.3.7/src/widgets/qtoolbutton.cpp
+--- qt-2.3.7-old/src/widgets/qtoolbutton.cpp	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/src/widgets/qtoolbutton.cpp	2004-07-23 15:38:13.000000000 +0200
+@@ -230,7 +230,7 @@
+ 	else
+ 	    QToolTip::add( this, textLabel );
+     }
+-#endif	
++#endif
+ }
+ 
+ 
+@@ -324,12 +324,12 @@
+ 	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Large, QIconSet::Normal);
+ 	w = pm.width();
+ 	h = pm.height();
+-	if ( w < 32 )
+-	    w = 32;
+-	if ( h < 32 )
+-	    h = 32;
++	if ( w < 24 )
++	    w = 24;
++	if ( h < 24 )
++	    h = 24;
+     } else {
+-	w = h = 16;
++	w = h = 14;
+ 	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Small, QIconSet::Normal);
+ 	w = pm.width();
+ 	h = pm.height();

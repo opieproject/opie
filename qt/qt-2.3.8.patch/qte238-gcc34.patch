@@ -1,6 +1,6 @@
-diff -ur qt-2.3.7_clean/include/qcstring.h qt-2.3.7/include/qcstring.h
---- qt-2.3.7_clean/include/qcstring.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/include/qcstring.h	2004-06-04 02:24:25.000000000 +0200
+diff -ur qt-2.3.8_clean/include/qcstring.h qt-2.3.8/include/qcstring.h
+--- qt-2.3.8_clean/include/qcstring.h	2004-06-04 02:17:53.000000000 +0200
++++ qt-2.3.8/include/qcstring.h	2004-06-04 02:24:25.000000000 +0200
 @@ -119,7 +119,7 @@
  //                   We want to keep source compatibility for 2.x
  // ### TODO for 4.0: completely remove these and the cstr* functions
@@ -10,9 +10,9 @@ diff -ur qt-2.3.7_clean/include/qcstring.h qt-2.3.7/include/qcstring.h
  
  #undef	strlen
  #define strlen qstrlen
-diff -ur qt-2.3.7_clean/include/qglobal.h qt-2.3.7/include/qglobal.h
---- qt-2.3.7_clean/include/qglobal.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/include/qglobal.h	2004-06-04 02:29:41.000000000 +0200
+diff -ur qt-2.3.8_clean/include/qglobal.h qt-2.3.8/include/qglobal.h
+--- qt-2.3.8_clean/include/qglobal.h	2004-06-04 02:17:53.000000000 +0200
++++ qt-2.3.8/include/qglobal.h	2004-06-04 02:29:41.000000000 +0200
 @@ -207,8 +207,16 @@
  #if __GNUC__ == 2 && __GNUC_MINOR__ == 96
  #define Q_FP_CCAST_BROKEN
@@ -30,9 +30,9 @@ diff -ur qt-2.3.7_clean/include/qglobal.h qt-2.3.7/include/qglobal.h
  #endif
  #elif defined(__xlC__)
  #define _CC_XLC_
-diff -ur qt-2.3.7_clean/include/qsortedlist.h qt-2.3.7/include/qsortedlist.h
---- qt-2.3.7_clean/include/qsortedlist.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/include/qsortedlist.h	2004-06-04 02:24:25.000000000 +0200
+diff -ur qt-2.3.8_clean/include/qsortedlist.h qt-2.3.8/include/qsortedlist.h
+--- qt-2.3.8_clean/include/qsortedlist.h	2004-06-04 02:17:53.000000000 +0200
++++ qt-2.3.8/include/qsortedlist.h	2004-06-04 02:24:25.000000000 +0200
 @@ -48,7 +48,7 @@
  public:
      QSortedList() {}
@@ -42,9 +42,9 @@ diff -ur qt-2.3.7_clean/include/qsortedlist.h qt-2.3.7/include/qsortedlist.h
      QSortedList<type> &operator=(const QSortedList<type> &l)
        { return (QSortedList<type>&)QList<type>::operator=(l); }
  
-diff -ur qt-2.3.7_clean/src/kernel/qgfxtransformed_qws.cpp qt-2.3.7/src/kernel/qgfxtransformed_qws.cpp
---- qt-2.3.7_clean/src/kernel/qgfxtransformed_qws.cpp	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/kernel/qgfxtransformed_qws.cpp	2004-06-04 02:24:25.000000000 +0200
+diff -ur qt-2.3.8_clean/src/kernel/qgfxtransformed_qws.cpp qt-2.3.8/src/kernel/qgfxtransformed_qws.cpp
+--- qt-2.3.8_clean/src/kernel/qgfxtransformed_qws.cpp	2004-06-04 02:17:53.000000000 +0200
++++ qt-2.3.8/src/kernel/qgfxtransformed_qws.cpp	2004-06-04 02:24:25.000000000 +0200
 @@ -671,11 +671,11 @@
      inline int tx( int x, int y ) {
  	switch ( qt_trans_screen->transformation() ) {
@@ -249,9 +249,9 @@ diff -ur qt-2.3.7_clean/src/kernel/qgfxtransformed_qws.cpp qt-2.3.7/src/kernel/q
      inDraw = FALSE;
  }
  
-diff -ur qt-2.3.7_clean/src/kernel/qgfxvfb_qws.cpp qt-2.3.7/src/kernel/qgfxvfb_qws.cpp
---- qt-2.3.7_clean/src/kernel/qgfxvfb_qws.cpp	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/kernel/qgfxvfb_qws.cpp	2004-06-04 02:24:25.000000000 +0200
+diff -ur qt-2.3.8_clean/src/kernel/qgfxvfb_qws.cpp qt-2.3.8/src/kernel/qgfxvfb_qws.cpp
+--- qt-2.3.8_clean/src/kernel/qgfxvfb_qws.cpp	2004-06-04 02:17:53.000000000 +0200
++++ qt-2.3.8/src/kernel/qgfxvfb_qws.cpp	2004-06-04 02:24:25.000000000 +0200
 @@ -31,7 +31,6 @@
  **********************************************************************/
  
@@ -371,9 +371,9 @@ diff -ur qt-2.3.7_clean/src/kernel/qgfxvfb_qws.cpp qt-2.3.7/src/kernel/qgfxvfb_q
      QGfxRaster<depth,type>::tiledBlt( x, y, w, h );
      QWSDisplay::ungrab();
  }
-diff -ur qt-2.3.7_clean/src/tools/qcstring.h qt-2.3.7/src/tools/qcstring.h
---- qt-2.3.7_clean/src/tools/qcstring.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/tools/qcstring.h	2004-06-04 02:24:25.000000000 +0200
+diff -ur qt-2.3.8_clean/src/tools/qcstring.h qt-2.3.8/src/tools/qcstring.h
+--- qt-2.3.8_clean/src/tools/qcstring.h	2004-06-04 02:17:53.000000000 +0200
++++ qt-2.3.8/src/tools/qcstring.h	2004-06-04 02:24:25.000000000 +0200
 @@ -119,7 +119,7 @@
  //                   We want to keep source compatibility for 2.x
  // ### TODO for 4.0: completely remove these and the cstr* functions
@@ -383,9 +383,9 @@ diff -ur qt-2.3.7_clean/src/tools/qcstring.h qt-2.3.7/src/tools/qcstring.h
  
  #undef	strlen
  #define strlen qstrlen
-diff -ur qt-2.3.7_clean/src/tools/qglobal.h qt-2.3.7/src/tools/qglobal.h
---- qt-2.3.7_clean/src/tools/qglobal.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/tools/qglobal.h	2004-06-04 02:29:41.000000000 +0200
+diff -ur qt-2.3.8_clean/src/tools/qglobal.h qt-2.3.8/src/tools/qglobal.h
+--- qt-2.3.8_clean/src/tools/qglobal.h	2004-06-04 02:17:53.000000000 +0200
++++ qt-2.3.8/src/tools/qglobal.h	2004-06-04 02:29:41.000000000 +0200
 @@ -207,8 +207,16 @@
  #if __GNUC__ == 2 && __GNUC_MINOR__ == 96
  #define Q_FP_CCAST_BROKEN
@@ -403,10 +403,10 @@ diff -ur qt-2.3.7_clean/src/tools/qglobal.h qt-2.3.7/src/tools/qglobal.h
  #endif
  #elif defined(__xlC__)
  #define _CC_XLC_
-Nur in qt-2.3.7/src/tools: qglobal.h~.
-diff -ur qt-2.3.7_clean/src/tools/qsortedlist.h qt-2.3.7/src/tools/qsortedlist.h
---- qt-2.3.7_clean/src/tools/qsortedlist.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/tools/qsortedlist.h	2004-06-04 02:24:25.000000000 +0200
+Nur in qt-2.3.8/src/tools: qglobal.h~.
+diff -ur qt-2.3.8_clean/src/tools/qsortedlist.h qt-2.3.8/src/tools/qsortedlist.h
+--- qt-2.3.8_clean/src/tools/qsortedlist.h	2004-06-04 02:17:53.000000000 +0200
++++ qt-2.3.8/src/tools/qsortedlist.h	2004-06-04 02:24:25.000000000 +0200
 @@ -48,7 +48,7 @@
  public:
      QSortedList() {}
@@ -416,9 +416,9 @@ diff -ur qt-2.3.7_clean/src/tools/qsortedlist.h qt-2.3.7/src/tools/qsortedlist.h
      QSortedList<type> &operator=(const QSortedList<type> &l)
        { return (QSortedList<type>&)QList<type>::operator=(l); }
  
-diff -ur qt-2.3.7_clean/src/tools/qstring.h qt-2.3.7/src/tools/qstring.h
---- qt-2.3.7_clean/src/tools/qstring.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/tools/qstring.h	2004-06-04 02:54:16.000000000 +0200
+diff -ur qt-2.3.8_clean/src/tools/qstring.h qt-2.3.8/src/tools/qstring.h
+--- qt-2.3.8_clean/src/tools/qstring.h	2004-06-04 02:17:53.000000000 +0200
++++ qt-2.3.8/src/tools/qstring.h	2004-06-04 02:54:16.000000000 +0200
 @@ -163,8 +163,16 @@
      bool isLetterOrNumber() const;
      bool isDigit() const;
@@ -437,4 +437,4 @@ diff -ur qt-2.3.7_clean/src/tools/qstring.h qt-2.3.7/src/tools/qstring.h
      uchar cell() const { return cl; }
      uchar row() const { return rw; }
  
-Nur in qt-2.3.7/src/tools: qstring.h~.
+Nur in qt-2.3.8/src/tools: qstring.h~.

@@ -1,0 +1,15 @@
+Not included in the ALL patch
+
+
+
+--- qt-2.3.8-old/src/kernel/qgfxraster_qws.cpp	2004-07-22 01:07:45.000000000 +0200
++++ qt-2.3.8/src/kernel/qgfxraster_qws.cpp	2004-07-23 19:10:03.000000000 +0200
+@@ -4400,7 +4400,7 @@
+     setAlphaType(IgnoreAlpha);
+     if ( w <= 0 || h <= 0 || !ncliprect ) return;
+     GFX_START(QRect(rx+xoffs, ry+yoffs, w+1, h+1))
+-#ifdef QWS_EXPERIMENTAL_FASTPATH
++#if 0 // def QWS_EXPERIMENTAL_FASTPATH    !! this is crashing HancomWord on OZ !!
+     // ### fix for 8bpp
+     // This seems to be reliable now, at least for 16bpp
+ 

@@ -1,0 +1,161 @@
+GCC3 requires libstdc++ for virtual all C++ application
+linking with gcc would trigger unresolved symbols like
+new, delete, pure_virtual etc.
+
+This is the safe one which works with gcc2 and gcc3. If you do
+not want the stdc++ dependency link with gcc and add -lsupc++ to the
+library dependency
+
+
+
+
+
+
+
+
+
+
+diff -ur qt-2.3.7-old/configs/linux-generic-g++-shared qt-2.3.7/configs/linux-generic-g++-shared
+--- qt-2.3.7-old/configs/linux-generic-g++-shared	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-generic-g++-shared	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= 
+ 
+diff -ur qt-2.3.7-old/configs/linux-generic-g++-shared-debug qt-2.3.7/configs/linux-generic-g++-shared-debug
+--- qt-2.3.7-old/configs/linux-generic-g++-shared-debug	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-generic-g++-shared-debug	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= 
+ 
+diff -ur qt-2.3.7-old/configs/linux-generic-g++-static qt-2.3.7/configs/linux-generic-g++-static
+--- qt-2.3.7-old/configs/linux-generic-g++-static	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-generic-g++-static	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= 
+ 
+diff -ur qt-2.3.7-old/configs/linux-generic-g++-static-debug qt-2.3.7/configs/linux-generic-g++-static-debug
+--- qt-2.3.7-old/configs/linux-generic-g++-static-debug	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-generic-g++-static-debug	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= 
+ 
+diff -ur qt-2.3.7-old/configs/linux-generic_rtti-g++-shared qt-2.3.7/configs/linux-generic_rtti-g++-shared
+--- qt-2.3.7-old/configs/linux-generic_rtti-g++-shared	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-generic_rtti-g++-shared	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= 
+ 
+diff -ur qt-2.3.7-old/configs/linux-generic_rtti-g++-shared-debug qt-2.3.7/configs/linux-generic_rtti-g++-shared-debug
+--- qt-2.3.7-old/configs/linux-generic_rtti-g++-shared-debug	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-generic_rtti-g++-shared-debug	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= 
+ 
+diff -ur qt-2.3.7-old/configs/linux-generic_rtti-g++-static qt-2.3.7/configs/linux-generic_rtti-g++-static
+--- qt-2.3.7-old/configs/linux-generic_rtti-g++-static	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-generic_rtti-g++-static	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= 
+ 
+diff -ur qt-2.3.7-old/configs/linux-generic_rtti-g++-static-debug qt-2.3.7/configs/linux-generic_rtti-g++-static-debug
+--- qt-2.3.7-old/configs/linux-generic_rtti-g++-static-debug	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-generic_rtti-g++-static-debug	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= 
+ 
+diff -ur qt-2.3.7-old/configs/linux-x86rtti-g++-shared qt-2.3.7/configs/linux-x86rtti-g++-shared
+--- qt-2.3.7-old/configs/linux-x86rtti-g++-shared	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-x86rtti-g++-shared	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= -lm
+ 
+diff -ur qt-2.3.7-old/configs/linux-x86rtti-g++-shared-debug qt-2.3.7/configs/linux-x86rtti-g++-shared-debug
+--- qt-2.3.7-old/configs/linux-x86rtti-g++-shared-debug	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-x86rtti-g++-shared-debug	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= -lm
+ 
+diff -ur qt-2.3.7-old/configs/linux-x86rtti-g++-static qt-2.3.7/configs/linux-x86rtti-g++-static
+--- qt-2.3.7-old/configs/linux-x86rtti-g++-static	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-x86rtti-g++-static	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= -lm
+ 
+diff -ur qt-2.3.7-old/configs/linux-x86rtti-g++-static-debug qt-2.3.7/configs/linux-x86rtti-g++-static-debug
+--- qt-2.3.7-old/configs/linux-x86rtti-g++-static-debug	2004-07-23 15:22:56.000000000 +0200
++++ qt-2.3.7/configs/linux-x86rtti-g++-static-debug	2004-07-23 15:23:12.000000000 +0200
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= -lm
+ 

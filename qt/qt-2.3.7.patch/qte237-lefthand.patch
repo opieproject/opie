@@ -1,3 +1,10 @@
+Backport of the LeftHand patch from Qt2.3.8
+
+Puts Scrollbar on the left for people using the right hand
+to hold the devices
+
+
+
 diff -u qt-2.3.7_orig/src/widgets/qscrollview.cpp qt-2.3.7/src/widgets/qscrollview.cpp
 --- qt-2.3.7_orig/src/widgets/qscrollview.cpp	2004-06-13 20:42:54.000000000 +0200
 +++ qt-2.3.7/src/widgets/qscrollview.cpp	2004-06-13 20:45:16.000000000 +0200
