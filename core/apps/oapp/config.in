@@ -1,0 +1,4 @@
+  config OAPP
+    boolean "OApp Plugin"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
