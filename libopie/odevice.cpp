@@ -657,10 +657,8 @@ bool iPAQ::setDisplayBrightness ( int bright )
 	bool res = false;
 	int fd;
 	
-	int maxbright = displayBrightnessResolution ( );
-	
-	if ( bright > maxbright )
-		bright = maxbright;
+	if ( bright > 255 )
+		bright = 255;
 	if ( bright < 0 )
 		bright = 0;
 
@@ -668,7 +666,7 @@ bool iPAQ::setDisplayBrightness ( int bright )
 		FLITE_IN bl;
 		bl. mode = 1;
 		bl. pwr = bright ? 1 : 0;
-		bl. brightness = bright;
+		bl. brightness = ( bright * ( displayBrightnessResolution ( ) - 1 ) + 127 ) / 255;
 		res = ( ::ioctl ( fd, FLITE_ON, &bl ) == 0 );
 		::close ( fd );
 	}
