@@ -1,5 +1,5 @@
 TEMPLATE    = app
-CONFIG      = qt warn_on
+CONFIG      = qt warn_on debug usepam
 
 HEADERS     = loginwindowimpl.h \
               loginapplication.h \
