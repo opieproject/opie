@@ -305,7 +305,7 @@ namespace {
 	    else
 		    return multi();
     }
-        
+
     QString FindQuery::multi()const {
 	    QString qu = "select * from addressbook where";
 	    for (uint i = 0; i < m_uids.count(); i++ ) {
@@ -320,7 +320,7 @@ namespace {
     QString FindQuery::single()const{
 	    QString qu = "select *";
 	    qu += " from addressbook where uid = " + QString::number(m_uid);
-	    
+
 	    // owarn << "find query: " << qu << "" << oendl;
 	    return qu;
     }
@@ -492,10 +492,10 @@ OPimContact OPimContactAccessBackend_SQL::find( int uid, const QArray<int>& quer
 
     QTime t;
     t.start();
-	
+
     uint numReadAhead = readAhead();
     QArray<int> searchList( numReadAhead );
- 
+
     uint size =0;
 
     // Build an array with all elements which should be requested and cached
@@ -624,6 +624,8 @@ QArray<int> OPimContactAccessBackend_SQL::queryByExample ( const OPimContact &qu
 
             }
         }
+
+        delete endDate;
     }
     // Skip trailing "AND"
 //  if ( isAnyFieldSelected )
@@ -825,7 +827,7 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
     t3.start();
     nonCustomMap = fillNonCustomMap( resItem );
     t3needed = t3.elapsed();
-    
+
 
     // odebug << "Adding UID: " << resItem.data( "uid" ) << "" << oendl;
     odebug << "RequestNonCustom needed: insg.:" << t.elapsed() << " ms, query: " << t2needed
@@ -834,13 +836,13 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
     return nonCustomMap;
 }
 
-/* Returns contact requested by uid and fills cache with contacts requested by uids in the cachelist */ 
+/* Returns contact requested by uid and fills cache with contacts requested by uids in the cachelist */
 OPimContact OPimContactAccessBackend_SQL::requestContactsAndCache( int uid, const QArray<int>& uidlist )const
 {
 	// We want to get all contacts with one query.
 	// We don't have to add the given uid to the uidlist, it is expected to be there already (see opimrecordlist.h).
 	// All contacts will be stored in the cache, afterwards the contact with the user id "uid" will be returned
-	// by using the cache..  
+	// by using the cache..
 	QArray<int> cachelist = uidlist;
 	OPimContact retContact;
 
@@ -871,12 +873,12 @@ OPimContact OPimContactAccessBackend_SQL::requestContactsAndCache( int uid, cons
 		resItem = res_noncustom.next();
 	} while ( ! res_noncustom.atEnd() ); //atEnd() is true if we are past(!) the list !!
 	t3needed = t3.elapsed();
-    
+
 
 	// odebug << "Adding UID: " << resItem.data( "uid" ) << "" << oendl;
 	odebug << "RequestContactsAndCache needed: insg.:" << t.elapsed() << " ms, query: " << t2needed
 	       << " ms, mapping: " << t3needed << " ms" << oendl;
-	
+
 	return retContact;
 }
 
