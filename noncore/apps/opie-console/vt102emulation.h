@@ -24,7 +24,7 @@
 #ifndef VT102EMU_H
 #define VT102EMU_H
 
-#include "widget.h"
+#include "widget_layer.h"
 #include "screen.h"
 #include "emulation_layer.h"
 #include <qtimer.h>

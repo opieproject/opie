@@ -24,7 +24,7 @@
 */
 
 #include "vt102emulation.h"
-#include "widget.h"
+#include "widget_layer.h"
 #include "screen.h"
 #include "keytrans.h"
 
