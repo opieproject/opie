@@ -94,7 +94,7 @@ extern void __gmon_start__ ( )
 
 void QPEApplication::polish ( QWidget *w )
 {
-	qDebug ( "QPEApplication::polish()" );
+//	qDebug ( "QPEApplication::polish()" );
 
 	for ( const color_fix_t *ptr = apps_that_need_special_colors; ptr-> m_app; ptr++ ) {
 		if (( ::strcmp ( Opie::binaryName ( ), ptr-> m_app ) == 0 ) &&
@@ -114,7 +114,7 @@ void QPEApplication::polish ( QWidget *w )
 
 QValueList <int> QFontDatabase::pointSizes ( QString const &family, QString const &style, QString const &charset )
 {
-	qDebug ( "QFontDatabase::pointSizes()" );
+//	qDebug ( "QFontDatabase::pointSizes()" );
 
 	QValueList <int> sl = pointSizes_NonWeak ( family, style, charset );
 
@@ -133,7 +133,7 @@ QValueList <int> QFontDatabase::pointSizes ( QString const &family, QString cons
 
 void QApplication::setStyle ( QStyle *style )
 {
-	qDebug ( "QApplication::setStyle()" );
+//	qDebug ( "QApplication::setStyle()" );
 
 	if ( Opie::force_appearance & Opie::Force_Style )
 		delete style;
@@ -143,7 +143,7 @@ void QApplication::setStyle ( QStyle *style )
 
 void QApplication::setPalette ( const QPalette &pal, bool informWidgets, const char *className )
 {
-	qDebug ( "QApplication::setPalette()" );
+//	qDebug ( "QApplication::setPalette()" );
 
 	if (!( Opie::force_appearance & Opie::Force_Style ))
 		QApplication::setPalette_NonWeak ( pal, informWidgets, className );
@@ -151,7 +151,7 @@ void QApplication::setPalette ( const QPalette &pal, bool informWidgets, const c
 
 void QApplication::setFont ( const QFont &fnt, bool informWidgets, const char *className )
 {
-	qDebug ( "QApplication::setFont()" );
+//	qDebug ( "QApplication::setFont()" );
 
 	if (!( Opie::force_appearance & Opie::Force_Font ))
 		QApplication::setFont_NonWeak ( fnt, informWidgets, className );
@@ -160,7 +160,7 @@ void QApplication::setFont ( const QFont &fnt, bool informWidgets, const char *c
 
 void QApplication::qwsSetDecoration ( QWSDecoration *deco )
 {
-	qDebug ( "QApplication::qwsSetDecoration()" );
+//	qDebug ( "QApplication::qwsSetDecoration()" );
 
 	if ( Opie::force_appearance & Opie::Force_Decoration )
 		delete deco;
