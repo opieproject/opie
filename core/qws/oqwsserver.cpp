@@ -29,7 +29,7 @@
 #include <qpe/custom.h>
 #endif
 
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 
 

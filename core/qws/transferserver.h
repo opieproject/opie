@@ -24,7 +24,8 @@
 #include <qbuffer.h>
 
 class QFileInfo;
-class OProcess;
+namespace Opie { namespace Core { class OProcess; } }
+
 class TransferServer : public QServerSocket
 {
     Q_OBJECT
@@ -92,11 +93,11 @@ private slots:
     void connected();
     void bytesWritten( int bytes );
     void readyRead();
-    void writeTargzBlock(OProcess *, char *, int);
+    void writeTargzBlock(Opie::Core::OProcess *, char *, int);
     void targzDone();
 
-    void gzipTarBlock(OProcess *, char *, int);
-    void tarExtractBlock(OProcess *, char *, int);
+    void gzipTarBlock(Opie::Core::OProcess *, char *, int);
+    void tarExtractBlock(Opie::Core::OProcess *, char *, int);
     void gunzipDone();
     void extractTarDone();
 
@@ -106,9 +107,9 @@ private:
     Mode mode;
     QFile file;
     QBuffer buf;
-    OProcess *createTargzProc;
-    OProcess *retrieveTargzProc;
-    OProcess *gzipProc;
+    Opie::Core::OProcess *createTargzProc;
+    Opie::Core::OProcess *retrieveTargzProc;
+    Opie::Core::OProcess *gzipProc;
 };
 
 class ServerSocket : public QServerSocket

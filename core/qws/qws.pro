@@ -14,7 +14,7 @@ SOURCES		= \
 
 INCLUDEPATH	+= $(OPIEDIR)/include 
 DEPENDPATH	+= $(OPIEDIR)/include .
-TARGET		= op-qws
-LIBS		+= -lqpe -lopie
+TARGET		= qws
+LIBS		+= -lqpe -lopiecore2 -lopieui2
 
 include ( $(OPIEDIR)/include.pro )

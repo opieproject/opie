@@ -23,7 +23,7 @@
 
 
 #include <qpe/qpeapplication.h>
-#include <opie/odevicebutton.h>
+#include <opie2/odevicebutton.h>
 
 #include <qwidget.h>
 #include <qdatetime.h>

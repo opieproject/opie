@@ -64,7 +64,8 @@ extern "C"
 #include <qpe/qcopenvelope_qws.h>
 
 #include "transferserver.h"
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
+using namespace Opie::Core;
 
 const int block_size = 51200;
 
@@ -1049,19 +1050,19 @@ ServerDTP::ServerDTP( QObject *parent, const char* name)
 	connect( this, SIGNAL( bytesWritten(int) ), SLOT( bytesWritten(int) ) );
 	connect( this, SIGNAL( readyRead() ), SLOT( readyRead() ) );
 
-	gzipProc = new OProcess( this, "gzipProc" );
+	gzipProc = new Opie::Core::OProcess( this, "gzipProc" );
 
-	createTargzProc = new OProcess( QString("tar"), this, "createTargzProc");
+	createTargzProc = new Opie::Core::OProcess( QString("tar"), this, "createTargzProc");
 	createTargzProc->setWorkingDirectory( QDir::rootDirPath() );
-	connect( createTargzProc, SIGNAL( processExited(OProcess*) ), SLOT( targzDone() ) );
+	connect( createTargzProc, SIGNAL( processExited(Opie::Core::OProcess*) ), SLOT( targzDone() ) );
 
 	QStringList args = "tar";
 	args += "-xv";
-	retrieveTargzProc = new OProcess( args, this, "retrieveTargzProc" );
+	retrieveTargzProc = new Opie::Core::OProcess( args, this, "retrieveTargzProc" );
 	retrieveTargzProc->setWorkingDirectory( QDir::rootDirPath() );
-	connect( retrieveTargzProc, SIGNAL( processExited(OProcess*) ),
+	connect( retrieveTargzProc, SIGNAL( processExited(Opie::Core::OProcess*) ),
 	         SIGNAL( completed() ) );
-	connect( retrieveTargzProc, SIGNAL( processExited(OProcess*) ),
+	connect( retrieveTargzProc, SIGNAL( processExited(Opie::Core::OProcess*) ),
 	         SLOT( extractTarDone() ) );
 }
 
@@ -1121,7 +1122,7 @@ void ServerDTP::connected()
 
 			bytes_written = 0;
 			qDebug("==>start send tar process");
-			if ( !createTargzProc->start(OProcess::NotifyOnExit, OProcess::Stdout) )
+			if ( !createTargzProc->start(Opie::Core::OProcess::NotifyOnExit, Opie::Core::OProcess::Stdout) )
 				qWarning("Error starting %s or %s",
 				         createTargzProc->args()[0].data(),
 				         gzipProc->args()[0].data());
@@ -1256,7 +1257,7 @@ void ServerDTP::readyRead()
 	}
 	else if ( RetrieveGzipFile == mode ) {
 		if ( !gzipProc->isRunning() )
-			gzipProc->start(OProcess::NotifyOnExit, (OProcess::Communication) ( OProcess::Stdin | OProcess::Stdout ));
+			gzipProc->start(Opie::Core::OProcess::NotifyOnExit, (Opie::Core::OProcess::Communication) ( Opie::Core::OProcess::Stdin | Opie::Core::OProcess::Stdout ));
 
 		QByteArray s;
 		s.resize( bytesAvailable() );
@@ -1273,7 +1274,7 @@ void ServerDTP::readyRead()
 	}
 }
 
-void ServerDTP::writeTargzBlock(OProcess *, char *buffer, int buflen)
+void ServerDTP::writeTargzBlock(Opie::Core::OProcess *, char *buffer, int buflen)
 {
 	writeBlock( buffer, buflen );
 	qDebug("writeTargzBlock %d", buflen);
@@ -1281,25 +1282,25 @@ void ServerDTP::writeTargzBlock(OProcess *, char *buffer, int buflen)
 		qDebug("tar and gzip done");
 		emit completed();
 		mode = Idle;
-		disconnect( gzipProc, SIGNAL( receivedStdout(OProcess*,char*,int) ),
-		            this, SLOT( writeTargzBlock(OProcess*,char*,int) ) );
+		disconnect( gzipProc, SIGNAL( receivedStdout(Opie::Core::OProcess*,char*,int) ),
+		            this, SLOT( writeTargzBlock(Opie::Core::OProcess*,char*,int) ) );
 	}
 }
 
 void ServerDTP::targzDone()
 {
 	//qDebug("targz done");
-	disconnect( createTargzProc, SIGNAL( receivedStdout(OProcess*,char*,int) ),
-	            this, SLOT( gzipTarBlock(OProcess*,char*,int) ) );
+	disconnect( createTargzProc, SIGNAL( receivedStdout(Opie::Core::OProcess*,char*,int) ),
+	            this, SLOT( gzipTarBlock(Opie::Core::OProcess*,char*,int) ) );
 	gzipProc->closeStdin();
 }
 
-void ServerDTP::gzipTarBlock(OProcess *, char *buffer, int buflen)
+void ServerDTP::gzipTarBlock(Opie::Core::OProcess *, char *buffer, int buflen)
 {
 	//qDebug("gzipTarBlock");
 	if ( !gzipProc->isRunning() ) {
 		//qDebug("auto start gzip proc");
-		gzipProc->start(OProcess::NotifyOnExit, (OProcess::Communication) ( OProcess::Stdin | OProcess::Stdout ));
+		gzipProc->start(Opie::Core::OProcess::NotifyOnExit, (Opie::Core::OProcess::Communication) ( Opie::Core::OProcess::Stdin | Opie::Core::OProcess::Stdout ));
 	}
 	gzipProc->writeStdin( buffer, buflen );
 }
@@ -1338,12 +1339,12 @@ void ServerDTP::sendGzipFile( const QString &fn,
 	createTargzProc->clearArguments( );
 	*createTargzProc << args;
 	connect( createTargzProc,
-	         SIGNAL( receivedStdout(OProcess*,char*,int) ), SLOT( gzipTarBlock(OProcess*,char*,int) ) );
+	         SIGNAL( receivedStdout(Opie::Core::OProcess*,char*,int) ), SLOT( gzipTarBlock(Opie::Core::OProcess*,char*,int) ) );
 
 	gzipProc->clearArguments( );
 	*gzipProc << "gzip";
-	connect( gzipProc, SIGNAL( receivedStdout(OProcess*,char*,int) ),
-	         SLOT( writeTargzBlock(OProcess*,char*,int) ) );
+	connect( gzipProc, SIGNAL( receivedStdout(Opie::Core::OProcess*,char*,int) ),
+	         SLOT( writeTargzBlock(Opie::Core::OProcess*,char*,int) ) );
 }
 
 void ServerDTP::gunzipDone()
@@ -1352,16 +1353,16 @@ void ServerDTP::gunzipDone()
 	disconnect( gzipProc, SIGNAL( processExited() ),
 	            this, SLOT( gunzipDone() ) );
 	retrieveTargzProc->closeStdin();
-	disconnect( gzipProc, SIGNAL( receivedStdout(OProcess*,char*,int) ),
-	            this, SLOT( tarExtractBlock(OProcess*,char*,int) ) );
+	disconnect( gzipProc, SIGNAL( receivedStdout(Opie::Core::OProcess*,char*,int) ),
+	            this, SLOT( tarExtractBlock(Opie::Core::OProcess*,char*,int) ) );
 }
 
-void ServerDTP::tarExtractBlock(OProcess *, char *buffer, int buflen)
+void ServerDTP::tarExtractBlock(Opie::Core::OProcess *, char *buffer, int buflen)
 {
 	qDebug("tarExtractBlock");
 	if ( !retrieveTargzProc->isRunning() ) {
 		qDebug("auto start ungzip proc");
-		if ( !retrieveTargzProc->start(OProcess::NotifyOnExit, OProcess::Stdin) )
+		if ( !retrieveTargzProc->start(Opie::Core::OProcess::NotifyOnExit, Opie::Core::OProcess::Stdin) )
 			qWarning(" failed to start tar -x process");
 	}
 	retrieveTargzProc->writeStdin( buffer, buflen );
