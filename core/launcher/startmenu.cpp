@@ -83,7 +83,7 @@ void StartMenu::loadOptions()
     useWidePopupMenu = FALSE;
     popupMenuSidePixmap = "go";
     startButtonIsFlat = TRUE;
-    startButtonPixmap = "start_button";
+    startButtonPixmap = "launcher/start_button";
 #endif
 }
 
