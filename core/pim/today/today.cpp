@@ -22,7 +22,6 @@
 #include <qpe/timestring.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
-//#include <qpe/qprocess.h>
 #include <qpe/resource.h>
 #include <qpe/contact.h>
 #include <qpe/global.h>
@@ -38,12 +37,10 @@
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qpixmap.h>
-//#include <qfileinfo.h>
 #include <qlayout.h>
 #include <qtl.h>
 
 
-//#include <iostream.h>
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -384,10 +381,15 @@ void Today::getTodo() {
   qBubbleSort(overDueList);
   for ( QValueList<ToDoEvent>::Iterator it=overDueList.begin();
 	it!=overDueList.end(); ++it ) {
-    if (!(*it).isCompleted() && ( ammount < MAX_LINES_TASK) ) {
-      tmpout += "<font color=#e00000><b>-" +((*it).description()).mid(0, MAX_CHAR_CLIP) + "</b></font><br>";
-      ammount++;
-    }
+      if (!(*it).isCompleted() && ( ammount < MAX_LINES_TASK) ) {
+          QString desc = (*it).summary();
+          if( desc.isEmpty() ) {
+              desc = (*it).description();
+          }
+          tmpout += "<font color=#e00000><b>-" + desc.mid(0, MAX_CHAR_CLIP) + "</b></font><br>";
+
+          ammount++;
+      }
   }
 
   // get total number of still open todos
@@ -395,15 +397,19 @@ void Today::getTodo() {
   qBubbleSort(openTodo);
   for ( QValueList<ToDoEvent>::Iterator it=openTodo.begin();
 	it!=openTodo.end(); ++it ) {
-    if (!(*it).isCompleted()){
-      count +=1;
-      // not the overdues, we allready got them, and not if we are
-      // over the maxlines
-      if (!(*it).isOverdue() && ( ammount < MAX_LINES_TASK) ) {
-	tmpout += "<b>-</b>" + ((*it).description()).mid(0, MAX_CHAR_CLIP) + "<br>";
-	ammount++;
+      if (!(*it).isCompleted()){
+          count +=1;
+          // not the overdues, we allready got them, and not if we are
+          // over the maxlines
+          if (!(*it).isOverdue() && ( ammount < MAX_LINES_TASK) ) {
+              QString desc = (*it).summary();
+              if( desc.isEmpty() ) {
+                  desc = (*it).description();
+              }
+              tmpout += "<b>-</b>" + desc.mid(0, MAX_CHAR_CLIP) + "<br>";
+              ammount++;
+          }
       }
-    }
   }
 
 
@@ -444,8 +450,8 @@ void Today::editCard() {
  * launches datebook
  */
 void Today::startDatebook() {
-  QCopEnvelope e("QPE/System", "execute(QString)");
-  e << QString("datebook");
+    QCopEnvelope e("QPE/System", "execute(QString)");
+    e << QString("datebook");
 }
 
 /*
