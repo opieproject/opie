@@ -70,7 +70,8 @@ void MailApplet::slotClicked() {
         device->setLedState( led, Led_Off );
     }
 
-    if (m_statusMail) m_statusMail->reset_status();
+    if (m_statusMail)
+        m_statusMail->reset_status();
 
     hide();
 }
@@ -101,9 +102,10 @@ void MailApplet::slotCheck() {
 
     folderStat stat;
     m_statusMail->check_current_stat( stat );
+    int newMailsOld = m_newMails;
     m_newMails = stat.message_unseen;
     qDebug( QString( "test %1" ).arg( m_newMails ) );
-    if ( m_newMails > 0 ) {
+    if ( m_newMails > 0 &&  newMailsOld != m_newMails  ) {
         ODevice *device = ODevice::inst();
         if ( isHidden() )
             show();
@@ -132,10 +134,12 @@ void MailApplet::slotCheck() {
             device->setLedState( led, Led_Off );
         }
 
-        Config cfg( "mail" );
-        cfg.setGroup( "Status" );
-        cfg.writeEntry( "newMails", m_newMails );
-        QCopEnvelope env( "QPE/Pim", "newMails(int)" );
-        env <<  m_newMails;
+        if ( newMailsOld != m_newMails ) {
+            Config cfg( "mail" );
+            cfg.setGroup( "Status" );
+            cfg.writeEntry( "newMails", m_newMails );
+            QCopEnvelope env( "QPE/Pim", "newMails(int)" );
+            env <<  m_newMails;
+        }
     }
 }
