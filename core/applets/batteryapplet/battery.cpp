@@ -62,7 +62,7 @@ void BatteryMeter::mousePressEvent( QMouseEvent* e )
         Config c( "qpe" );
         c.setGroup( "Battery" );
         c.writeEntry( "Style", style );
-        repaint();
+        repaint( true );
     }
     QWidget::mousePressEvent( e );
 }
@@ -97,7 +97,7 @@ void BatteryMeter::timerEvent( QTimerEvent * )
         if ( batteryView )
         batteryView->updatePercent( percent );
     }
-    repaint(FALSE);
+    repaint( style != 0 );
     if ( batteryView )
         batteryView->repaint();
     }
