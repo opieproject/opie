@@ -1,0 +1,8 @@
+auto lo
+
+#
+# The loopback interface
+#
+
+iface lo inet loopback
+
