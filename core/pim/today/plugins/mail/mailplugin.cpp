@@ -45,7 +45,7 @@ QString MailPlugin::pixmapNameConfig() const {
     return 0l;
 }
 
-QWidget* MailPlugin::configWidget( QWidget* wid ) {
+ConfigWidget* MailPlugin::configWidget( QWidget* wid ) {
     return 0l;
 }
 

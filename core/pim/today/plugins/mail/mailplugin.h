@@ -25,6 +25,7 @@
 #include <opie/oclickablelabel.h>
 
 #include "../../todayplugininterface.h"
+#include "../../configwidget.h"
 
 class MailPlugin : public TodayPluginObject {
 
@@ -37,7 +38,7 @@ public:
     QString pixmapNameWidget() const;
     QWidget* widget(QWidget *);
     QString pixmapNameConfig() const;
-    QWidget* configWidget(QWidget *);
+    ConfigWidget* configWidget(QWidget *);
     QString appName() const;
     virtual int minHeight()  const;
     virtual int maxHeight()  const;
