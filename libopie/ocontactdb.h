@@ -14,11 +14,14 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.4 2002-07-05 13:03:30 zecke Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.5 2002-07-06 16:06:52 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.4  2002-07-05 13:03:30  zecke
+ * Revision 1.1.2.5  2002-07-06 16:06:52  eilers
+ * Some bugfixes and cleanup of inconsistencies
+ *
+ * Revision 1.1.2.4  2002/07/05 13:03:30  zecke
  * Move the stuff responsible for loading and unloading
  * out of the ContactDB. This will make the switch to a real
  * database more easy.
@@ -81,6 +84,11 @@ public:
     virtual void updateJournal( const Contact &cnt,
                            Contact::journal_action action) = 0;
 
+    /**
+     * Removes journal-file
+     */
+    virtual void removeJournal() = 0;
+
 protected:
     friend class OContactDB;
     QString m_journal;
@@ -110,6 +118,8 @@ class OContactDB {
 
 	/**
 	 * Finds a Contact by the uid
+	 * @param The user ID of the contact
+	 * @return The contact for this user ID
 	 */
 	Contact find( int uid )const;
 
@@ -146,9 +156,9 @@ class OContactDB {
 	 * You should execute this function if the external xml-file
 	 * was changed to stay consistent.
 	 * This function will load the xml-file and afterwards
-	 * the journalfile. Therefore the database will be set consistent.
+	 * the journalfile and join them. Therefore the local database will be set consistent.
 	 */
-	void OContactDB::reload();
+	void reload();
 
 	/** Save contacts database
 	 * @param autoreload <b>true:</b> The function <i>reload()</i> will be exectuted if the
@@ -168,13 +178,12 @@ class OContactDB {
         bool m_loading:1;
 
 	/** Load contacts database.
-	 * Future: Bool for locking ...
-	 * @param Name of the file to load
 	 */
-	void load(const QString& filename);
+	void load(const QString& filename, bool isJournal);
 
 	void updateJournal( const Contact &cnt,
 			    Contact::journal_action action);
 
+	void removeJournal ();
 };
 #endif
