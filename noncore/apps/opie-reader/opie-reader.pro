@@ -81,7 +81,7 @@ SOURCES     = Aportis.cpp \
                   ztxt.cpp
 
 DESTDIR = $(OPIEDIR)/bin
-TARGET = reader
+TARGET = opie-reader
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
