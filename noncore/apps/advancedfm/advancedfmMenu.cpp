@@ -1095,7 +1095,7 @@ void AdvancedFm::localRename()
 void AdvancedFm::remoteRename()
 {
     oldName = Remote_View->currentItem()->text(0);
-    doRename(Local_View );
+    doRename(Remote_View );
     populateRemoteView();
 }
 
