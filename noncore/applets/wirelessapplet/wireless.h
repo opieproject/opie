@@ -31,10 +31,10 @@ class MGraph;
 class WirelessControl : public QFrame
 {
     Q_OBJECT
-public:
+  public:
     WirelessControl( WirelessApplet* icon, QWidget *parent=0, const char *name=0 );
     void show( bool );
-    
+
     void readConfig();
     void writeConfigEntry( const char* entry, int val );
 
@@ -42,12 +42,12 @@ public:
     QLabel* statusLabel;
     QLabel* updateLabel;
 
-public slots:
+  public slots:
     void updateDelayChange( int );
     void displayStyleChange( int );
     void advancedConfigClicked();
-        
-private:
+
+  private:
     WirelessApplet* applet;
 
     int displayStyle;
@@ -62,47 +62,48 @@ private:
 class WirelessApplet : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     WirelessApplet( QWidget *parent = 0, const char *name=0 );
     ~WirelessApplet();
+    static int position();
     WirelessControl* status;
-    
+
     virtual void timerEvent( QTimerEvent* );
     void updateDelayChange( int delay );
     void displayStyleChange( int style );
-    
+
     void updateDHCPConfig( bool, bool, bool, bool );
 
-private:
+  private:
     void mousePressEvent( QMouseEvent * );
     void paintEvent( QPaintEvent* );
     void checkInterface();
     void renewDHCP();
-    
+
     bool mustRepaint();
     void updatePopupWindow();
     const char** getQualityPixmap();
 
-private:
+  private:
     QPixmap snapshotPixmap;
     int visualStyle;
     int timer;
-    
+
     MWirelessNetwork* network;
     MNetworkInterface* interface;
-    
-private:
+
+  private:
     const char** oldpixmap;
     MWirelessNetworkInterface* oldiface;
     int oldqualityH;
     int oldsignalH;
-    int oldnoiseH;       
+    int oldnoiseH;
 
     QString oldESSID;
     QString oldAP;
     QString oldMODE;
     double oldFREQ;
-    
+
     bool rocESSID;
     bool rocFREQ;
     bool rocAP;
