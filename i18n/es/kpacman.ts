@@ -3,62 +3,62 @@
     <name>Keys</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Predeterminados</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Change Direction Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar teclas de dirección</translation>
     </message>
     <message>
         <source>Undefined key</source>
-        <translation type="unfinished"></translation>
+        <translation>Tecla indefinida</translation>
     </message>
 </context>
 <context>
     <name>Kpacman</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nuevo</translation>
     </message>
     <message>
         <source>&amp;Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pausa</translation>
     </message>
     <message>
         <source>&amp;Hall of fame</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hall de la fama</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Salir</translation>
     </message>
     <message>
         <source>&amp;Hide Mousecursor</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ocultar cursor</translation>
     </message>
     <message>
         <source>&amp;Select graphic scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar &amp;esquema gráfico</translation>
     </message>
     <message>
         <source>&amp;Pause in Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Pa&amp;rar en segundo plano</translation>
     </message>
     <message>
         <source>&amp;Continue in Foreground</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Continuar en primer plano</translation>
     </message>
     <message>
         <source>Change &amp;keys...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar &amp;teclas...</translation>
     </message>
     <message>
         <source>@PACKAGE@ - @VERSION@
@@ -75,20 +75,34 @@ The design was strongly influenced by the pacman
 I like to thank my girlfriend Elke Krueers for
 the last 10 years of her friendship.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>@PACKAGE@ - @VERSION@
+
+Joerg Thoennissen (joe@dsite.de)
+
+Juego de pacman para KDE
+
+Programa basado en el código de ksnake
+de Michel Filippi (mfilippi@sade.rhein-main.de).
+Diseño fuertemente influenciado por pacman
+(c) 1980 MIDWAY MFG.CO.
+
+Quiero agradecer a mi novia Elke Krueers sus
+últimos 10 años de amistad.
+</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ayuda</translation>
     </message>
     <message>
         <source>Configuration Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de configuración</translation>
     </message>
     <message>
         <source>There are no schemes defined,
 or no scheme is selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay esquemas definidos, o
+no seleccionó ningún esquema.</translation>
     </message>
 </context>
 <context>
@@ -98,113 +112,116 @@ or no scheme is selected.</source>
 
 The file &apos;@FONTNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>La fuente de bits no pudo construirse.
+
+El fichero &apos;@FONTNAME@&apos; no existe,
+o está en un formato desconocido.</translation>
     </message>
 </context>
 <context>
     <name>Referee</name>
     <message>
         <source>GAME  OVER</source>
-        <translation type="unfinished"></translation>
+        <translation>FIN DEL JUEGO</translation>
     </message>
     <message>
         <source>PLAYER ONE</source>
-        <translation type="unfinished"></translation>
+        <translation>JUGADOR 1</translation>
     </message>
     <message>
         <source>READY!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡PREPARADO!</translation>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>PAUSA</translation>
     </message>
     <message>
         <source>CHARACTER</source>
-        <translation type="unfinished"></translation>
+        <translation>CARACTER</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <source>NICKNAME</source>
-        <translation type="unfinished"></translation>
+        <translation>APODO</translation>
     </message>
     <message>
         <source>-SHADOW</source>
-        <translation type="unfinished"></translation>
+        <translation>-SOMBRA</translation>
     </message>
     <message>
         <source>&quot;BLINKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;INTERMITENTE&quot;</translation>
     </message>
     <message>
         <source>-SPEEDY</source>
-        <translation type="unfinished"></translation>
+        <translation>-RÁPIDO</translation>
     </message>
     <message>
         <source>&quot;PINKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;MEÑIQUE&quot;</translation>
     </message>
     <message>
         <source>-BASHFUL</source>
-        <translation type="unfinished"></translation>
+        <translation>-VERGONZOSO</translation>
     </message>
     <message>
         <source>&quot;INKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;TINTADO&quot;</translation>
     </message>
     <message>
         <source>-POKEY</source>
-        <translation type="unfinished"></translation>
+        <translation>-POKEY</translation>
     </message>
     <message>
         <source>&quot;CLYDE&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;CLYDE&quot;</translation>
     </message>
     <message>
         <source>QTOPIA PORT: CATALIN CLIMOV</source>
-        <translation type="unfinished"></translation>
+        <translation>QTOPIA PORT: CATALIN CLIMOV</translation>
     </message>
     <message>
         <source>PRESS CURSOR TO START</source>
-        <translation type="unfinished"></translation>
+        <translation>PULSE CURSOR PARA EMPEZAR</translation>
     </message>
 </context>
 <context>
     <name>Score</name>
     <message>
         <source>  1UP </source>
-        <translation type="unfinished"></translation>
+        <translation>1UP</translation>
     </message>
     <message>
         <source> HIGH SCORE </source>
-        <translation type="unfinished"></translation>
+        <translation>PUTUACIÓN MAX</translation>
     </message>
     <message>
         <source>  2UP </source>
-        <translation type="unfinished"></translation>
+        <translation>2UP</translation>
     </message>
     <message>
         <source>     CONGRATULATIONS      </source>
-        <translation type="unfinished"></translation>
+        <translation>    ENHORABUENA      </translation>
     </message>
     <message>
         <source>    YOU HAVE ARCHIEVED    </source>
-        <translation type="unfinished"></translation>
+        <translation>   HA CONSEGUIDO    </translation>
     </message>
     <message>
         <source>  A SCORE IN THE TOP 10.  </source>
-        <translation type="unfinished"></translation>
+        <translation> UNA BUENA PUNTUACIÓN.  </translation>
     </message>
     <message>
         <source>RNK   SCORE  NAME   DATE</source>
-        <translation type="unfinished"></translation>
+        <translation>CLAS   PUNTOS NOMBRE FECHA</translation>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>PAUSA</translation>
     </message>
     <message>
         <source>You&apos;re going to create the highscore-file
@@ -230,11 +247,7 @@ To use a different directory or filename for the highscores,specify them in the 
     </message>
     <message>
         <source>@YY@/@MM@/@DD@</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation>@YY@/@MM@/@DD@</translation>
     </message>
 </context>
 <context>
@@ -244,11 +257,14 @@ To use a different directory or filename for the highscores,specify them in the 
 
 The file &apos;@PIXMAPNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>La fuente de bits no pudo construirse.
+
+El fichero &apos;@PIXMAPNAME@&apos; no existe,
+o está en un formato desconocido.</translation>
     </message>
     <message>
         <source>Initialization Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al iniciar</translation>
     </message>
 </context>
 </TS>
