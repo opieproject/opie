@@ -142,9 +142,12 @@ void TableView::showOverDue( bool ) {
 }
 
 void TableView::updateView( ) {
+    setSortOrder( 0 );
+    setAscending( true );
+    sort();
     OTodoAccess::List::Iterator it, end;
-    it = list().begin();
-    end = list().end();
+    it = sorted().begin();
+    end = sorted().end();
     qWarning("setTodos");
     QTime time;
     time.start();

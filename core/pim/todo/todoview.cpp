@@ -59,6 +59,7 @@ OTodoAccess::List TodoView::sorted(){
 }
 void TodoView::sort() {
     m_sort = todoWindow()->sorted(m_asc,m_sortOrder );
+    qWarning("m_sort.count() = %d", m_sort.count() );
 }
 void TodoView::sort(int sort) {
     m_sort = todoWindow()->sorted(m_asc, m_sortOrder, sort );
