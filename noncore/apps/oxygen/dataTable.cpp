@@ -76,7 +76,7 @@ void OxydataWidget::setElement( int el )
 
 void OxydataWidget::setTable() const
 {
-    DataTable->setText( 0,0, tr( "Weight:" ) );
+    DataTable->setText( 0,0, tr( "Weight" ) );
     DataTable->setText( 1,0, tr( "Block" )) ;
     DataTable->setText( 2,0, tr( "Group" )) ;
     DataTable->setText( 3,0, tr( "Electronegativity" )) ;
