@@ -145,7 +145,7 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     setPosition( mediaPlayerState->position() );
 
       ////////////////////////// FIXME
-//    setFullscreen( mediaPlayerState->fullscreen() );
+    setFullscreen( mediaPlayerState->fullscreen() );
     setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
     qDebug("finished videowidget");
@@ -396,6 +396,7 @@ void VideoWidget::makeVisible() {
     showMaximized();
     slider->show();
     videoFrame->setGeometry( QRect( 10, 20, 220, 160  ) );
+    qApp->processEvents();
   }
 }
 
