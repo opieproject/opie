@@ -116,7 +116,7 @@ public:
     void applicationScanningProgress( int percent );
     void documentScanningProgress( int percent );
     bool requiresApplications() const { return TRUE; }
-    bool requiresDocuments() const { return TRUE; }
+    bool requiresDocuments() const;
     void showLoadingDocs();
     void showDocTab();
 
