@@ -46,9 +46,11 @@ extern "C"  // work around a bpf/pcap conflict in recent headers
 #include <time.h>
 
 /* QT */
+#include <qevent.h>
 #include <qhostaddress.h>
 #include <qobject.h>
 #include <qstring.h>
+#include <qmap.h>
 
 /* OPIE */
 #include <opie2/onetutils.h>
@@ -79,6 +81,8 @@ class OPacket : public QObject
     int caplen() const;
     int len() const;
     QString dump( int = 32 ) const;
+
+    void updateStats( QMap<QString,int>&, QObjectList* );
 
   private:
     const packetheaderstruct _hdr;  // pcap packet header
@@ -434,6 +438,8 @@ class OPacketCapturer : public QObject
     bool open( const QString& name );
     bool isOpen() const;
 
+    const QMap<QString,int>& statistics() const;
+
   signals:
     void receivedPacket( OPacket* );
 
@@ -446,6 +452,7 @@ class OPacketCapturer : public QObject
     pcap_t* _pch;           // pcap library handle
     QSocketNotifier* _sn;   // socket notifier for main loop
     mutable char _errbuf[PCAP_ERRBUF_SIZE];
+    QMap<QString, int> _stats; // statistics;
 };
 
 #endif // OPCAP_H

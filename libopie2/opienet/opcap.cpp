@@ -39,6 +39,7 @@
 
 #include <qapplication.h> // don't use oapplication here (will decrease reusability in other projects)
 #include <qsocketnotifier.h>
+#include <qobjectlist.h>
 
 /*======================================================================================
  * OPacket
@@ -87,6 +88,19 @@ int OPacket::caplen() const
 }
 
 
+void OPacket::updateStats( QMap<QString,int>& stats, QObjectList* l )
+{
+    if (!l) return;
+    QObject* o = l->first();
+    while ( o )
+    {
+        stats[o->name()]++;
+        updateStats( stats, const_cast<QObjectList*>( o->children() ) );
+        o = l->next();
+    }
+}
+
+
 QString OPacket::dump( int bpl ) const
 {
     static int index = 0;
@@ -127,11 +141,11 @@ QString OPacket::dump( int bpl ) const
 }
 
 
-
 int OPacket::len() const
 {
     return _hdr.len;
 }
+
 
 /*======================================================================================
  * OEthernetPacket
@@ -772,6 +786,13 @@ void OPacketCapturer::close()
         pcap_close( _pch );
         _open = false;
     }
+
+    qDebug( "OPacketCapturer::close() --- dumping capturing statistics..." );
+    qDebug( "--------------------------------------------------" );
+    for( QMap<QString,int>::Iterator it = _stats.begin(); it != _stats.end(); ++it )
+        qDebug( "%s : %d", (const char*) it.key(), it.data() );
+    qDebug( "--------------------------------------------------" );
+
 }
 
 
@@ -793,7 +814,6 @@ int OPacketCapturer::fileno() const
     }
 }
 
-
 OPacket* OPacketCapturer::next()
 {
     packetheaderstruct header;
@@ -803,11 +823,16 @@ OPacket* OPacketCapturer::next()
 
     if ( header.len )
     {
-        return new OPacket( dataLink(), header, pdata, 0 );
+        OPacket* p = new OPacket( dataLink(), header, pdata, 0 );
         // packets shouldn't be inserted in the QObject child-parent hierarchy,
         // because due to memory constraints they will be deleted as soon
         // as possible - that is right after they have been processed
         // by emit() [ see below ]
+
+        //TODO: make gathering statistics optional, because it takes time
+        p->updateStats( _stats, const_cast<QObjectList*>( p->children() ) );
+
+        return p;
     }
     else
     {
@@ -839,6 +864,7 @@ bool OPacketCapturer::open( const QString& name )
         qDebug( "OPacketCapturer::open(): libpcap opened successfully." );
         _pch = handle;
         _open = true;
+        _stats.clear();
 
         // in case we have an application object, create a socket notifier
         if ( qApp )
@@ -866,10 +892,16 @@ bool OPacketCapturer::isOpen() const
 
 void OPacketCapturer::readyToReceive()
 {
-    qDebug( "OPacketCapturer::readyToReceive(): about to emit 'receivePacket(...)'" );
+    qDebug( "OPacketCapturer::readyToReceive(): about to emit 'receivePacket(p)'" );
     OPacket* p = next();
     emit receivedPacket( p );
     // emit is synchronous - packet has been dealt with, now it's safe to delete
     delete p;
+}
+
+
+const QMap<QString,int>& OPacketCapturer::statistics() const
+{
+    return _stats;
 }
 
