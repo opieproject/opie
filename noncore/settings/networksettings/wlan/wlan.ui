@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>250</width>
+            <width>238</width>
             <height>286</height>
         </rect>
     </property>
@@ -179,7 +179,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>802.11 Ad-Hoc</string>
+                                    <string>Ad-Hoc</string>
                                 </property>
                             </widget>
                             <widget row="2"  column="1" >
@@ -199,6 +199,10 @@
                                 <property stdset="1">
                                     <name>minValue</name>
                                     <number>1</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>value</name>
+                                    <number>6</number>
                                 </property>
                             </widget>
                             <spacer row="2"  column="2" >
@@ -257,7 +261,7 @@
                     <name>title</name>
                     <string>Wep</string>
                 </attribute>
-                <grid>
+                <vbox>
                     <property stdset="1">
                         <name>margin</name>
                         <number>11</number>
@@ -266,7 +270,69 @@
                         <name>spacing</name>
                         <number>6</number>
                     </property>
-                    <widget row="2"  column="0"  rowspan="1"  colspan="2" >
+                    <widget>
+                        <class>QCheckBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>wepEnabled</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Enable Wep</string>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QButtonGroup</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>ButtonGroup43</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>enabled</name>
+                            <bool>false</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string>Authentication Type</string>
+                        </property>
+                        <hbox>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>11</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget>
+                                <class>QRadioButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>authOpen</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Open System</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>checked</name>
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QRadioButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>authShared</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Shared Key</string>
+                                </property>
+                            </widget>
+                        </hbox>
+                    </widget>
+                    <widget>
                         <class>QButtonGroup</class>
                         <property stdset="1">
                             <name>name</name>
@@ -367,109 +433,7 @@
                             </widget>
                         </grid>
                     </widget>
-                    <widget row="1"  column="0" >
-                        <class>QButtonGroup</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>ButtonGroup42</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>enabled</name>
-                            <bool>false</bool>
-                        </property>
-                        <property stdset="1">
-                            <name>title</name>
-                            <string>Key Length</string>
-                        </property>
-                        <vbox>
-                            <property stdset="1">
-                                <name>margin</name>
-                                <number>11</number>
-                            </property>
-                            <property stdset="1">
-                                <name>spacing</name>
-                                <number>6</number>
-                            </property>
-                            <widget>
-                                <class>QRadioButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>key40</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>40 Bits</string>
-                                </property>
-                                <property stdset="1">
-                                    <name>checked</name>
-                                    <bool>true</bool>
-                                </property>
-                            </widget>
-                            <widget>
-                                <class>QRadioButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>key128</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>128 Bits</string>
-                                </property>
-                            </widget>
-                        </vbox>
-                    </widget>
-                    <widget row="1"  column="1" >
-                        <class>QButtonGroup</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>ButtonGroup43</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>enabled</name>
-                            <bool>false</bool>
-                        </property>
-                        <property stdset="1">
-                            <name>title</name>
-                            <string>Authentication Type</string>
-                        </property>
-                        <vbox>
-                            <property stdset="1">
-                                <name>margin</name>
-                                <number>11</number>
-                            </property>
-                            <property stdset="1">
-                                <name>spacing</name>
-                                <number>6</number>
-                            </property>
-                            <widget>
-                                <class>QRadioButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>authOpen</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Open System</string>
-                                </property>
-                                <property stdset="1">
-                                    <name>checked</name>
-                                    <bool>true</bool>
-                                </property>
-                            </widget>
-                            <widget>
-                                <class>QRadioButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>authShared</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Shared Key</string>
-                                </property>
-                            </widget>
-                        </vbox>
-                    </widget>
-                    <spacer row="3"  column="1" >
+                    <spacer>
                         <property>
                             <name>name</name>
                             <cstring>Spacer30</cstring>
@@ -490,18 +454,7 @@
                             </size>
                         </property>
                     </spacer>
-                    <widget row="0"  column="0"  rowspan="1"  colspan="2" >
-                        <class>QCheckBox</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>wepEnabled</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Enable Wep</string>
-                        </property>
-                    </widget>
-                </grid>
+                </vbox>
             </widget>
         </widget>
     </vbox>
@@ -534,12 +487,6 @@
     <connection>
         <sender>wepEnabled</sender>
         <signal>toggled(bool)</signal>
-        <receiver>ButtonGroup42</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>wepEnabled</sender>
-        <signal>toggled(bool)</signal>
         <receiver>ButtonGroup43</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
@@ -556,8 +503,6 @@
     <tabstop>essSpecificLineEdit</tabstop>
     <tabstop>networkInfrastructure</tabstop>
     <tabstop>networkChannel</tabstop>
-    <tabstop>key40</tabstop>
-    <tabstop>key128</tabstop>
     <tabstop>authOpen</tabstop>
     <tabstop>authShared</tabstop>
     <tabstop>keyRadio0</tabstop>

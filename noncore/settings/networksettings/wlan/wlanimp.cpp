@@ -1,11 +1,6 @@
 #include "wlanimp.h"
+#include "interfacesetupimp.h"
 
-/* Config class */
-#include <qpe/config.h>
-/* Global namespace */
-#include <qpe/global.h>
-/* system() */
-#include <stdlib.h>
 #include <qfile.h>
 #include <qdir.h>
 #include <qtextstream.h>
@@ -14,234 +9,224 @@
 #include <qspinbox.h>
 #include <qradiobutton.h>
 #include <qcheckbox.h>
-#include <qregexp.h>
-#include <qpe/config.h>
 #include <qtabwidget.h>
-#include "interfacesetupimp.h"
 
-WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, WFlags fl):WLAN(parent, name, modal, fl){
-  config = new Config("wireless");
-  interfaceSetup = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i);//, Qt::WDestructiveClose);
-  //configure->setProfile(currentProfile);
+/* system() */
+#include <stdlib.h>
+
+#define WIRELESS_OPTS "/etc/pcmcia/wireless.opts"
+
+/**
+ * Constructor, read in the wireless.opts file for parsing later.
+ */ 
+WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, WFlags fl):WLAN(parent, name, modal, fl), currentProfile("*") {
+  interfaceSetup = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i);
   tabWidget->insertTab(interfaceSetup, "TCP/IP");
 
-  readConfig();
-
-}
-
-WLANImp::~WLANImp( ){
-  delete config;
-}
-
-void WLANImp::setProfile(QString &profile){
-  interfaceSetup->setProfile(profile);
-}
-
-void WLANImp::readConfig()
-{
-    qWarning( "WLANImp::readConfig() called." );
-    config->setGroup( "Properties" );
-    QString ssid = config->readEntry( "SSID", "any" );
-    if( ssid == "any" || ssid == "ANY" ){
-        essNon->setChecked( true );
-    } else {
-        essSpecific->setChecked( true );
-        essSpecificLineEdit->setText( ssid );
+  // Read in the config file.
+  QString wlanFile = WIRELESS_OPTS;
+  QFile file(wlanFile);
+  if (file.open(IO_ReadOnly)){
+    QTextStream stream( &file );
+    QString line = "";
+    while ( !stream.eof() ) {
+      line += stream.readLine();
+      line += "\n";
     }
-    QString mode = config->readEntry( "Mode", "Managed" );
-    if( mode == "adhoc" ) {
-        network802->setChecked( true );
-    } else {
-        networkInfrastructure->setChecked( true );
-    }
-    networkChannel->setValue( config->readNumEntry( "CHANNEL", 1 ) );
-//    config->readEntry( "RATE", "auto" );
-    config->readEntry( "dot11PrivacyInvoked" ) == "true" ? wepEnabled->setChecked( true ) : wepEnabled->setChecked( false );
-    config->readEntry( "AuthType", "opensystem" );
-    config->readEntry( "PRIV_KEY128", "false" ) == "false" ? key40->setChecked( true ) : key128->setChecked( true );
-    int defaultkey = config->readNumEntry( "dot11WEPDefaultKeyID", 0 );
-    switch( defaultkey ){
-    case 0:
-        keyRadio0->setChecked( true );
-	break;
-    case 1:
-        keyRadio1->setChecked( true );
-	break;
-    case 2:
-        keyRadio2->setChecked( true );
-	break;
-    case 3:
-        keyRadio3->setChecked( true );
-	break;
-    }
-    keyLineEdit0->setText(config->readEntry( "dot11WEPDefaultKey0" ));
-    keyLineEdit1->setText(config->readEntry( "dot11WEPDefaultKey1" ));
-    keyLineEdit2->setText(config->readEntry( "dot11WEPDefaultKey2" ));
-    keyLineEdit3->setText(config->readEntry( "dot11WEPDefaultKey3" ));
-    return;
-}
-
-bool WLANImp::writeConfig()
-{
-    qWarning( "WLANImp::writeConfig() called." );
-    config->setGroup( "Properties" );
-    if( essNon->isChecked() ) {
-        config->writeEntry( "SSID", "any" );
-    } else {
-        config->writeEntry( "SSID", essSpecificLineEdit->text() );
-    }
-    if( networkInfrastructure->isChecked() ){
-        config->writeEntry( "Mode", "Managed" );
-    } else if( network802->isChecked() ){
-        config->writeEntry( "Mode", "adhoc" );
-    }
-    config->writeEntry( "CHANNEL", networkChannel->value() );
-//    config->readEntry( "RATE", "auto" );
-    wepEnabled->isChecked() ? config->writeEntry( "dot11PrivacyInvoked", "true" ) : config->writeEntry( "dot11PrivacyInvoked", "false" );
-    authOpen->isChecked() ? config->writeEntry( "AuthType", "opensystem" ) : config->writeEntry( "AuthType", "sharedkey" );
-    key40->isChecked() ? config->writeEntry( "PRIV_KEY128", "false" ) : config->writeEntry( "PRIV_KEY128", "true" );
-    if( keyRadio0->isChecked() ){
-        config->writeEntry( "dot11WEPDefaultKeyID", 0 );
-    } else if( keyRadio1->isChecked() ){
-        config->writeEntry( "dot11WEPDefaultKeyID", 1 );
-    } else if( keyRadio2->isChecked() ){
-        config->writeEntry( "dot11WEPDefaultKeyID", 2 );
-    } else if( keyRadio3->isChecked() ){
-        config->writeEntry( "dot11WEPDefaultKeyID", 3 );
-    }
-    config->writeEntry( "dot11WEPDefaultKey0", keyLineEdit0->text() );
-    config->writeEntry( "dot11WEPDefaultKey1", keyLineEdit1->text() );
-    config->writeEntry( "dot11WEPDefaultKey2", keyLineEdit2->text() );
-    config->writeEntry( "dot11WEPDefaultKey3", keyLineEdit3->text() );
-    return writeWirelessOpts( );
+    file.close();
+    settingsFileText = QStringList::split("\n", line, true);
+    parseSettingFile();
+  }
+  else
+    qDebug(QString("WLANImp: Can't open file: %1 for reading.").arg(wlanFile).latin1());
 }
 
 /**
- */
-void WLANImp::accept()
-{
-  if ( writeConfig() ){
-    if(interfaceSetup->saveChanges())
-      QDialog::accept();
+ * Change the profile for both wireless settings and network settings.
+ */ 
+void WLANImp::setProfile(QString &profile){
+  interfaceSetup->setProfile(profile);
+  parseSettingFile();
+}
+
+/**
+ * Parses the settings file that was read in and gets any setting from it.
+ */ 
+void WLANImp::parseSettingFile(){
+  bool foundCase = false;
+  bool found = false;
+  for ( QStringList::Iterator it = settingsFileText.begin(); it != settingsFileText.end(); ++it ) {
+    QString line = (*it).simplifyWhiteSpace();
+    if(line.contains("case"))
+      foundCase = true;
+    // See if we found our scheme to write or the sceme couldn't be found
+    if((foundCase && line.contains("esac")) || 
+   (foundCase && line.left(currentProfile.length()+7) == currentProfile + ",*,*,*)" && line.at(0) != '#'))
+      found = true;
+
+    if(line.contains(";;"))
+      found = false;
+    if(found){
+      // write out scheme
+      if(line.contains("ESSID=")){
+        QString id = line.mid(line.find("ESSID=")+6, line.length());
+        if(id == "any"){
+          essNon->setChecked(true);
+          essSpecific->setChecked(false);
+        }else{ 
+          essSpecific->setChecked(true);
+	  essSpecificLineEdit->setText(id);
+          essNon->setChecked(false);
+	}
+      }
+      if(line.contains("MODE=")){
+        QString mode = line.mid(line.find("MODE=")+5, line.length());
+        if(mode == "Managed"){
+          network802->setChecked( false );
+	  networkInfrastructure->setChecked( true );
+	}
+	else{
+	  network802->setChecked( true );
+	  networkInfrastructure->setChecked( false );
+	}
+      }
+      if(line.contains("KEY=")){
+        line.at(0) != '#' ? wepEnabled->setChecked(true) : wepEnabled->setChecked(false);
+        int s = line.find("KEY=");
+	line = line.mid(s+4, line.length());
+        // Find first Key
+	s = line.find("[1]");
+	if(s != -1){
+	  keyLineEdit0->setText(line.mid(0, s));
+	  line = line.mid(s+3, line.length());
+	}
+        s = line.find("[2]");
+	if(s != -1){
+	  keyLineEdit1->setText(line.mid(0, s));
+	  line = line.mid(s+3, line.length());
+	}
+        s = line.find("[3]");
+	if(s != -1){
+	  keyLineEdit2->setText(line.mid(0, s));
+	  line = line.mid(s+3, line.length());
+	}
+        s = line.find("[4]");
+	if(s != -1){
+	  keyLineEdit3->setText(line.mid(0, s));
+	  line = line.mid(s+3, line.length());
+	}
+        if(line.contains("key [1]")) keyRadio0->setChecked(true);
+        if(line.contains("key [2]")) keyRadio1->setChecked(true);
+        if(line.contains("key [3]")) keyRadio2->setChecked(true);
+        if(line.contains("key [4]")) keyRadio3->setChecked(true);
+        if(line.contains("open")){
+	  authOpen->setChecked(true);
+	  authShared->setChecked(false);
+	}
+	else{
+	  authOpen->setChecked(false);
+	  authShared->setChecked(true);
+	}
+      }
+      if(line.contains("CHANNEL=")){
+        networkChannel->setValue(line.mid(line.find("CHANNEL=")+8, line.length()).toInt());
+      }
+    }
   }
 }
 
-bool WLANImp::writeWirelessOpts( QString scheme )
-{
-    qWarning( "WLANImp::writeWirelessOpts entered." );
-    QString prev = "/etc/pcmcia/wireless.opts";
-    QFile prevFile(prev);
-    if ( !prevFile.open( IO_ReadOnly ) )
-	return false;
+/**
+ * Saves settings to the wireless.opts file using the current profile
+ */ 
+void WLANImp::changeAndSaveSettingFile(){
+  QString wlanFile = WIRELESS_OPTS;
+  QFile::remove(wlanFile);
+  QFile file(wlanFile);
 
-    QString tmp = "/etc/pcmcia/wireless.opts-qpe-new";
-    QFile tmpFile(tmp);
-    if ( !tmpFile.open( IO_WriteOnly ) )
-	return false;
-
-    bool retval = true;
-    
-    QTextStream in( &prevFile );
-    QTextStream out( &tmpFile );
-
-    config->setGroup("Properties");
-    
-    QString line;
-    bool found=false;
-    bool done=false;
-    while ( !in.atEnd() ) {
-	QString line = in.readLine();
-	QString wline = line.simplifyWhiteSpace();
-	if ( !done ) {
-	    if ( found ) {
-		// skip existing entry for this scheme, and write our own.
-		if ( wline == ";;" ) {
-		    found = false;
-		    continue;
-		} else {
-		    continue;
-		}
-	    } else {
-		if ( wline.left(scheme.length()+7) == scheme + ",*,*,*)" ) {
-		    found=true;
-		    continue; // skip this line
-		} else if ( wline == "esac" || wline == "*,*,*,*)" ) {
-		    // end - add new entry
-		    // Not all fields have a GUI, but all are supported
-		    // in the letwork configuration files.
-		    static const char* txtfields[] = {
-			0
-		    };
-		    QString readmode = config->readEntry( "Mode", "Managed" );
-		    QString mode;
-		    if( readmode == "Managed" ){
-			mode = readmode;
-		    } else if( readmode == "adhoc" ){
-			mode = "Ad-Hoc";
-		    }
-		    QString key;
-		    if( wepEnabled->isChecked() ){
-			int defaultkey = config->readNumEntry( "dot11WEPDefaultKeyID", 0 );
-			switch( defaultkey ){
-			    case 0:
-				key += keyLineEdit0->text();
-				break;
-			    case 1:
-				key += keyLineEdit1->text();
-				break;
-			    case 2:
-				key += keyLineEdit2->text();
-				break;
-			    case 3:
-				key += keyLineEdit3->text();
-				break;
-			}
-		        if( config->readEntry( "AuthType", "opensystem" ) == "opensystem")
-			    key += " open";
-		    }
-		    out << scheme << ",*,*,*)" << "\n"
-			<< "    ESSID=" << Global::shellQuote( config->readEntry( "SSID", "any" ) ) << "\n"
-			<< "    MODE=" << mode << "\n"
-			<< "    KEY=" << Global::shellQuote( key ) << "\n"
-			<< "    RATE=" << "auto" << "\n"
-			;
-			if( mode != "Managed"  )
-				out << "    CHANNEL=" << config->readNumEntry( "CHANNEL", 1 ) << "\n";
-		    const char** f = txtfields;
-		    while (*f) {
-			out << "    " << *f << "=" << config->readEntry(*f,"") << "\n";
-			++f;
-		    }
-		    out << "    ;;\n";
-		    done = true;
-		}
-	    }
-	}
-	out << line << "\n";
+  if (!file.open(IO_ReadWrite)){
+    qDebug(QString("WLANImp::changeAndSaveSettingFile(): Can't open file: %1 for writing.").arg(wlanFile).latin1());
+    return;
+  }
+  
+  QTextStream stream( &file );
+  bool foundCase = false;
+  bool found = false;
+  bool output = true;
+  for ( QStringList::Iterator it = settingsFileText.begin(); it != settingsFileText.end(); ++it ) {
+    QString line = (*it).simplifyWhiteSpace();
+    if(line.contains("case"))
+      foundCase = true;
+    // See if we found our scheme to write or the sceme couldn't be found
+    if((foundCase && line.contains("esac") && !found) || 
+   (foundCase && line.left(currentProfile.length()+7) == currentProfile + ",*,*,*)" && line.at(0) != '#')){
+      // write out scheme
+      found = true;
+      output = false;
+      
+      if(!line.contains("esac"))
+        stream << line << "\n"; 
+      
+      stream << "\tESSID=" << (essNon->isChecked() == true ? QString("any") : essSpecificLineEdit->text()) << '\n';
+      stream << "\tMODE=" << (networkInfrastructure->isChecked() == true  ? "Managed" : "AdHoc") << '\n';
+      if(!wepEnabled->isChecked())
+        stream << "#";
+      stream << "\tKEY=";
+      stream << keyLineEdit0->text() << " [1]";
+      stream << keyLineEdit1->text() << " [2]";
+      stream << keyLineEdit2->text() << " [3]";
+      stream << keyLineEdit3->text() << " [4]";
+      stream << " key [";
+      if(keyRadio0->isChecked()) stream << "1]";
+      if(keyRadio1->isChecked()) stream << "2]";
+      if(keyRadio2->isChecked()) stream << "3]";
+      if(keyRadio3->isChecked()) stream << "4]";
+      if(authOpen->isChecked()) stream << " open";
+      stream << "\n"; 
+      stream << "\tCHANNEL=" << networkChannel->value() << "\n";
+      stream << "\tRATE=auto\n";
+      if(line.contains("esac"))
+        stream << line << "\n"; 
     }
-
-    prevFile.close();
-    tmpFile.close();
-    QString initpath;
-    //system("cardctl suspend");
-    if( QDir("/etc/rc.d/init.d").exists() ){
-	initpath = "/etc/rc.d/init.d";
-    } else if( QDir("/etc/init.d").exists() ){
-	initpath = "/etc/init.d";
-    }
-    if( initpath )
-	    system(QString("%1/pcmcia stop").arg(initpath));
-
-    if( system( "mv " + tmp + " " + prev ) )
-	retval = false;
-//#ifdef USE_SCHEMES
-//    if ( retval )
-//	SchemeChanger::changeScheme(scheme);
-//#endif
-
-    //system("cardctl resume");
-    if( initpath )
-	    system(QString("%1/pcmcia start").arg(initpath));
-
-    return retval;
+    if(line.contains(";;"))
+      output = true;
+    if(output)
+      stream << (*it) << '\n';
+  }
+  file.close();
 }
+
+/**
+ * Check to see if the current config is valid
+ * Save wireless.opts, save interfaces
+ */
+void WLANImp::accept(){
+  if(wepEnabled->isChecked()){
+    if(keyLineEdit0->text().isEmpty() && keyLineEdit1->text().isEmpty() && keyLineEdit2->text().isEmpty() && keyLineEdit3->text().isEmpty() )
+    QMessageBox::information(this, "", "Please enter a key for WEP.", QMessageBox::Ok);
+    return;
+  }	
+  
+  // Ok settings are good here, save
+  changeAndSaveSettingFile();
+  
+  // Try to save the interfaces settings.
+  if(!interfaceSetup->saveChanges())
+    return;
+  
+  // Restart the device now that the settings have changed
+  QString initpath;
+  if( QDir("/etc/rc.d/init.d").exists() )
+    initpath = "/etc/rc.d/init.d";
+  else if( QDir("/etc/init.d").exists() )
+    initpath = "/etc/init.d";
+  if( initpath )
+    system(QString("%1/pcmcia stop").arg(initpath));
+  if( initpath )
+    system(QString("%1/pcmcia start").arg(initpath));
+
+  // Close out the dialog
+  QDialog::accept();
+}
+
+// wlanimp.cpp
+
