@@ -17,11 +17,90 @@
 #include <qpe/qpeapplication.h>
 
 /* QT */
+#include <qmap.h>
+#include <qvaluelist.h>
 
 /* UNIX */
 #include <signal.h>
 
 using namespace Opie::Core;
+
+typedef QMapNode<QString,QString> tkeyvalues;
+typedef QValueList<tkeyvalues> tvaluelist;
+
+class ValueExplode
+{
+protected:
+    //! what was parsed last
+    tvaluelist m_LastParsed;
+    //! the delemiter to use
+    QString mDelemiter;
+    //! the inner delemiter
+    QString m2Delemiter;
+    //! the real split routine
+    void splitit();
+    //! the content
+    QString m_Command;
+    //! constructor
+    ValueExplode(){}
+public:
+    //! constructor
+    /*!
+     * \param aCommand the string to be splitted
+     * \param aDelemiter which sign will be the delemiter character
+     * \param a2Delemiter which sign will delemiter the key-value-pairs between other delemiters
+     */
+    ValueExplode(const QString&aCommand,const char aDelemiter = '&',const char a2Delemiter='=');
+    //! destructor
+    virtual ~ValueExplode();
+    //! assigen operator
+    /*!
+     * \return a list of substrings
+     */
+    operator const tvaluelist& (){return m_LastParsed;}
+};
+
+ValueExplode::~ValueExplode()
+{
+}
+
+ValueExplode::ValueExplode(const QString&aCommand,const char aDelemiter,const char a2Delemiter)
+    :m_LastParsed(),m_Command(aCommand)
+{
+    mDelemiter = aDelemiter;
+    m2Delemiter = a2Delemiter;
+    splitit();
+}
+
+void ValueExplode::splitit()
+{
+    QString iLine;
+    m_LastParsed.clear();
+    if (mDelemiter.isEmpty()||m2Delemiter.isEmpty()) {
+        m_LastParsed.append(tkeyvalues(m_Command,""));
+        return;
+    }
+    int pos,pos2,startpos;
+    startpos = 0;
+    iLine = m_Command;
+    while ( (pos = iLine.find(mDelemiter,startpos))!=-1) {
+        pos2 = iLine.find(m2Delemiter,startpos);
+        if (pos2==-1||pos2>pos) {
+            m_LastParsed.append(tkeyvalues(iLine.mid(startpos,pos-startpos),""));
+        } else {
+            m_LastParsed.append(tkeyvalues(iLine.mid(startpos,pos2-startpos),iLine.mid(pos2+1,pos-pos2-1)));
+        }
+        startpos = pos+1;
+    }
+    if (startpos<iLine.length()) {
+        pos2 = iLine.find(m2Delemiter,startpos);
+        if (pos2==-1) {
+            m_LastParsed.append(tkeyvalues(iLine.mid(startpos),""));
+        } else {
+            m_LastParsed.append(tkeyvalues(iLine.mid(startpos,pos2-startpos),iLine.mid(pos2+1)));
+        }
+    }
+}
 
 OpieMail::OpieMail( QWidget *parent, const char *name, WFlags  )
         : MainWindow( parent, name, WStyle_ContextHelp )
@@ -30,6 +109,12 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags  )
     settings = new Settings();
 
     folderView->populate( settings->getAccounts() );
+#if 1
+    tvaluelist s = ValueExplode("a=1&b=holladiewaldfee&c=3&d=&e=3450");
+    for (int i = 0; i < s.count();++i) {
+        odebug<<"Key: " << s[i].key << " Value: " << s[i].data << oendl;
+    }
+#endif
 }
 
 OpieMail::~OpieMail()
@@ -73,7 +158,7 @@ void OpieMail::setDocument(const QString& mail)
      * It looks like a mailto address, lets try it
      */
     if( mail.startsWith(QString::fromLatin1("mailto:")) )
-	slotwriteMail(QString::null, mail.mid(7));    
+        slotwriteMail(QString::null, mail.mid(7));
 }
 
 void OpieMail::slotwriteMail(const QString&name,const QString&email)
