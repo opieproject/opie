@@ -3,15 +3,15 @@
     <name>ClipboardApplet</name>
     <message>
         <source>Cut</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

@@ -3,19 +3,19 @@
     <name>MainView</name>
     <message>
         <source>Remote</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Learn</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

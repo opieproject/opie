@@ -3,106 +3,106 @@
     <name>ORecurranceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>None</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
     <name>OTimePickerDialogBase</name>
     <message>
         <source>Time:</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>:</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Pick Time:</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

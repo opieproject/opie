@@ -3,91 +3,91 @@
     <name>Clock</name>
     <message>
         <source>Snooze</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Clock</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Hour</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>mp3 alarm</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>All</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

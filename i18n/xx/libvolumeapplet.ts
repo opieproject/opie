@@ -3,19 +3,19 @@
     <name>VolumeControl</name>
     <message>
         <source>Enable Sounds for:</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Key Clicks</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Alarm Sound</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

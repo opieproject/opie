@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>Unicode</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

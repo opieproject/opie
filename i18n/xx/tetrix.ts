@@ -3,27 +3,27 @@
     <name>QTetrix</name>
     <message>
         <source>Tetrix</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Next</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Removed</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

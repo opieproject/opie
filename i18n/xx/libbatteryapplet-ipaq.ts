@@ -3,83 +3,83 @@
     <name>BatteryStatus</name>
     <message>
         <source>Battery status for Ipaq</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Charging both devices</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Charging</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Battery status: </source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Good</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Very Low</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Critical</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>On backup power</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Power on-line</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>External power disconnected</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Battery time remaining</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

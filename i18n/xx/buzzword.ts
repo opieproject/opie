@@ -3,19 +3,19 @@
     <name>BuzzWord</name>
     <message>
         <source>buZzword</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>&amp;New game</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>&lt;h1&gt;&lt;b&gt;BINGO !&lt;/b&gt;&lt;/h1&gt;</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

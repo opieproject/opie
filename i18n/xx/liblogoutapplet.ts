@@ -3,16 +3,16 @@
     <name>LogoutApplet</name>
     <message>
         <source>Logout shortcut</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Do you really want to
 end this session ?</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

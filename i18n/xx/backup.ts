@@ -3,50 +3,50 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Backup</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Applications</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Save To</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>&amp;Backup</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Select Source</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Column 1</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>&amp;Restore</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

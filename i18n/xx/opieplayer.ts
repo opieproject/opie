@@ -6,263 +6,263 @@
 your sound device.
 open(&quot;/dev/dsp&quot;)
 </source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>
 
 Closing player now.</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
     <name>AudioWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
     <name>MediaPlayer</name>
     <message>
         <source>No file</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Error: There is no file selected</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>File not found</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>The following file was not found: &lt;i&gt;</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>No decoder found</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Sorry, no appropriate decoders found for this file: &lt;i&gt;</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Error opening file</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Sorry, an error occured trying to play the file: &lt;i&gt;</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source> File: </source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>, Length: </source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Playlist Selection</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
     <name>PlayListWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Play Operations</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Add to Playlist</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Remove from Playlist</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Randomize</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Loop</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>File</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Clear List</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Add all audio files</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Add all video files</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Add all files</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Save PlayList</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Open File or URL</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Rescan for Audio Files</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Rescan for Video Files</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>View</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Skins</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Media</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Lists</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>There was a problem saving the playlist.
 Your playlist may be missing some entries
 the next time you start it.</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Invalid File</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>You really want to delete
 this playlist?</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>No</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Play Selected</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Open file or URL</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Save m3u Playlist </source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
     <name>VideoWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

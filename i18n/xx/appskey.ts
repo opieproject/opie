@@ -3,27 +3,27 @@
     <name>AppsKeyApp</name>
     <message>
         <source>Set Application Key</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Address Book</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Popup Menu</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>

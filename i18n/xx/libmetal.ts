@@ -3,7 +3,7 @@
     <name>Styles</name>
     <message>
         <source>Metal</source>
-        <translation> </translation>
+        <translation>FOO</translation>
     </message>
 </context>
 </TS>
