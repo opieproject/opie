@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.10 2003-01-02 14:27:12 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.11 2003-01-03 12:31:28 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.10  2003-01-02 14:27:12  eilers
+ * Revision 1.11  2003-01-03 12:31:28  eilers
+ * Bugfix for calculating data diffs..
+ *
+ * Revision 1.10  2003/01/02 14:27:12  eilers
  * Improved query by example: Search by date is possible.. First step
  * for a today plugin for birthdays..
  *
@@ -235,7 +238,7 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 			bool allcorrect = true;
 			for ( int i = 0; i < Qtopia::Groups; i++ ) {
 				// Birthday and anniversary are special nonstring fields and should
-				// be handled especially
+				// be handled specially
 				switch ( i ){
 				case Qtopia::Birthday:
 					queryDate = new QDate( query.birthday() );
@@ -247,25 +250,43 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 					}
 					
 					if ( queryDate->isValid() ){
-						if ( settings & OContactAccess::DateYear ){
-							if ( queryDate->year() != checkDate->year() )
-								allcorrect = false;
-						} 
-						if ( settings & OContactAccess::DateMonth ){
-							if ( queryDate->month() != checkDate->month() )
-								allcorrect = false;
-						} 
-						if ( settings & OContactAccess::DateDay ){
-							if ( queryDate->day() != checkDate->day() )
-								allcorrect = false;
-						} 
-						if ( settings & OContactAccess::DateDiff ) {
-							QDate current = QDate::currentDate();
-							if ( current.daysTo( *queryDate ) > 0 ){
-								if ( !( ( *checkDate >= current ) && 
-									( *checkDate <= *queryDate ) ) )
+						if(  checkDate->isValid() ){
+							if ( settings & OContactAccess::DateYear ){
+								if ( queryDate->year() != checkDate->year() )
 									allcorrect = false;
+							} 
+							if ( settings & OContactAccess::DateMonth ){
+								if ( queryDate->month() != checkDate->month() )
+									allcorrect = false;
+							} 
+							if ( settings & OContactAccess::DateDay ){
+								if ( queryDate->day() != checkDate->day() )
+									allcorrect = false;
+							} 
+							if ( settings & OContactAccess::DateDiff ) {
+								QDate current = QDate::currentDate();
+								// We have to equalize the year, otherwise
+								// the search will fail..
+								checkDate->setYMD( current.year(), checkDate->month(), checkDate->day() );
+								if ( *checkDate < current )
+									checkDate->setYMD( current.year()+1, 
+											   checkDate->month(), 
+											   checkDate->day() );
+								// qWarning("Checking if %s is between %s and %s ! ", 
+								//	 checkDate->toString().latin1(),
+								//	 current.toString().latin1(), 
+								//	 queryDate->toString().latin1() );
+								if ( current.daysTo( *queryDate ) > 0 ){
+									if ( !( ( *checkDate >= current ) && 
+										( *checkDate <= *queryDate ) ) ){
+										allcorrect = false;
+										//qWarning (" Nope!..");
+									}
+								}
 							}
+						} else{
+							// checkDate is invalid. Therfore this entry is always rejected
+							allcorrect = false;
 						}
 					}
 
