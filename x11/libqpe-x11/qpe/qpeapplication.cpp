@@ -755,7 +755,7 @@ int QPEApplication::x11ClientMessage(QWidget* w, XEvent* event, bool b ) {
 #define KeyPress XKeyPress
 #define KeyRelease XKeyRelease
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
+#if defined(OPIE_NEW_MALLOC)
 
 // The libraries with the skiff package (and possibly others) have
 // completely useless implementations of builtin new and delete that
