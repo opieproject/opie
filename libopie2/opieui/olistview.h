@@ -122,6 +122,12 @@ class OListView: public QListView
     virtual void serializeFrom( QDataStream& s );
 #endif
 
+protected slots:
+    /** 
+     * expand the current OListViewItem
+     */
+    void expand(QListViewItem*);    
+
   private:
     QColor m_alternateBackground;
     bool m_fullWidth;
@@ -219,6 +225,11 @@ class OListViewItem: public QListViewItem
     */
     virtual void serializeFrom( QDataStream& s );
     #endif
+
+    /**
+     * expand the the item
+     */
+    virtual void expand(){};
 
   private:
     bool m_known;

@@ -51,6 +51,7 @@ OListView::OListView( QWidget *parent, const char *name )
     m_alternateBackground = QColor( 238, 246, 255 );
     m_columnSeparator = QPen( QColor( 150, 160, 170 ), 0, DotLine );
     m_fullWidth = true;
+    connect( this, SIGNAL(expanded(QListViewItem*)), SLOT(expand(QListViewItem*)));
 }
 
 OListView::~OListView()
@@ -125,6 +126,11 @@ void OListView::setColumnSeparator( const QPen& p )
 {
     m_columnSeparator = p;
     repaint();
+}
+
+void OListView::expand(QListViewItem *item)
+{
+ 	((OListViewItem*)item)->expand();
 }
 
 OListViewItem* OListView::childFactory()
