@@ -20,7 +20,7 @@
 
 // Uncomment the below line to run on a Linux box rather than a Zaurus
 // box this allows you to change where root is, and where to load config files from
-#define X86
+// #define X86
 
 // Sets up location of ipkg.conf and root directory
 #ifdef QWS
