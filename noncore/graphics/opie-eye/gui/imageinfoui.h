@@ -29,7 +29,7 @@ class imageinfo : public QWidget
     };
 
 public:
-    imageinfo( QWidget* parent = 0, const char* name = 0,  WFlags fl =0);
+    imageinfo(Opie::Core::OConfig *cfg, QWidget* parent = 0, const char* name = 0,  WFlags fl =0);
     imageinfo(const QString&_path, QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     virtual ~imageinfo();
 

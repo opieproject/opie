@@ -195,7 +195,11 @@ void PMainWindow::slotConfig() {
     if ( act ) {
         m_view->resetView();
         keyWid->save();
+        m_disp->manager()->save();
+        m_info->manager()->save();
+        m_view->manager()->save();
     }
+    delete keyWid;
 }
 
 /*
@@ -210,7 +214,7 @@ void PMainWindow::initT( const char* name, T** ptr, int id) {
         (*ptr)->setDestructiveClose();
         m_stack->removeWidget( *ptr );
     }
-    *ptr = new T( m_stack, name );
+    *ptr = new T(m_cfg, m_stack, name );
     m_stack->addWidget( *ptr, id );
 
     connect(*ptr, SIGNAL(sig_return()),

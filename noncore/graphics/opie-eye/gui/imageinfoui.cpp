@@ -27,10 +27,11 @@ static const int THUMBSIZE = 128;
 
 using namespace Opie::Core;
 
-imageinfo::imageinfo(QWidget* parent, const char* name, WFlags fl )
+imageinfo::imageinfo(Opie::Core::OConfig *cfg,QWidget* parent, const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
     m_viewManager = 0;
+    m_cfg = cfg;
     init(name);
     initKeys();
 }
@@ -39,6 +40,7 @@ imageinfo::imageinfo(const QString&_path, QWidget* parent,  const char* name, WF
     : QWidget( parent, name, fl ),currentFile(_path)
 {
     m_viewManager = 0;
+    m_cfg = 0;
     init(name);
     initKeys();
     slotChangeName(_path);
@@ -55,8 +57,12 @@ Opie::Ui::OKeyConfigManager* imageinfo::manager()
 void imageinfo::initKeys()
 {
     odebug << "init imageinfo keys" << oendl;
-    m_cfg = new Opie::Core::OConfig("phunkview");
-    m_cfg->setGroup("Zecke_view" );
+#if 0
+    if (!m_cfg) {
+        m_cfg = new Opie::Core::OConfig("phunkview");
+        m_cfg->setGroup("imageinfo_keys" );
+    }
+#endif
     Opie::Ui::OKeyPair::List lst;
     lst.append( Opie::Ui::OKeyPair::upArrowKey() );
     lst.append( Opie::Ui::OKeyPair::downArrowKey() );
@@ -64,9 +70,9 @@ void imageinfo::initKeys()
     lst.append( Opie::Ui::OKeyPair::rightArrowKey() );
     lst.append( Opie::Ui::OKeyPair::returnKey() );
 
-    m_viewManager = new Opie::Ui::OKeyConfigManager(m_cfg, "Imageinfo-KeyBoard-Config",
+    m_viewManager = new Opie::Ui::OKeyConfigManager(m_cfg, "imageinfo_keys",
                                                     lst, false,this, "keyconfig name" );
-    m_viewManager->addKeyConfig( Opie::Ui::OKeyConfigItem(tr("View Full Image"), "view",
+    m_viewManager->addKeyConfig( Opie::Ui::OKeyConfigItem(tr("View Full Image"), "infoview",
                                                 Resource::loadPixmap("1to1"), ViewItem,
                                                 Opie::Ui::OKeyPair(Qt::Key_V, Qt::ShiftButton),
                                                 this, SLOT(slotShowImage())));
@@ -143,7 +149,6 @@ imageinfo::~imageinfo()
         QCopEnvelope( "QPE/Application/opie-eye_slave", "refDown()" );
     }
     if (m_viewManager) {
-        m_viewManager->save();
         delete m_viewManager;
     }
 }
@@ -154,8 +159,6 @@ void imageinfo::slot_fullInfo(const QString&_path, const QString&_t)
         qDebug(_t);
         QString t = _t;
         t.replace(QRegExp("\n"),"<br>");
-/*        t.replace(QRegeExp("<qt>","");
-        t.replace(QRegeExp("</qt>","");*/
         TextView1->setText(t);
     }
 }

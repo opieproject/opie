@@ -22,7 +22,7 @@ class ImageView:public ImageScrollView
     };
 
 public:
-    ImageView( QWidget* parent, const char* name = 0, WFlags fl = 0 );
+    ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name = 0, WFlags fl = 0 );
     virtual ~ImageView();
     Opie::Ui::OKeyConfigManager* manager();
 
