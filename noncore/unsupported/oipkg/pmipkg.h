@@ -53,7 +53,6 @@ public slots:
 	void getIpkgOutput(OProcess *proc, char *buffer, int buflen);
 
 private:
-	bool shellWarning;
 	OProcess *ipkgProcess;
   PackageManagerSettings* settings;
   RunWindow *runwindow;
