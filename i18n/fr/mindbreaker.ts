@@ -1,44 +1,45 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>MindBreaker</name>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau jeu</translation>
     </message>
     <message>
         <source>win avg: %1 turns (%2 games)</source>
-        <translation type="unfinished"></translation>
+        <translation>Moyenne: %1 tours (%2 jeux)</translation>
     </message>
 </context>
 <context>
     <name>MindBreakerBoard</name>
     <message>
         <source>Go%1p%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tour%1p%2</translation>
     </message>
     <message>
         <source>CurrentGo%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tour courant %1</translation>
     </message>
     <message>
         <source>Answer%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Réponse %1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Remettre les statistique à zéro</translation>
     </message>
     <message>
         <source>Reset the win ratio?</source>
-        <translation type="unfinished"></translation>
+        <translation>Réinitialiser la moyenne?</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
 </context>
 </TS>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>OTaskEditor</name>
     <message>
@@ -41,87 +42,87 @@
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation type="unfinished">Nouvelle à Partir d&apos;un Modèle</translation>
+        <translation>Nouvelle à Partir d&apos;un Modèle</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">Nouvelle Tâche</translation>
+        <translation>Nouvelle Tâche</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation type="unfinished">Cliquer ici pour créer une nouvelle tâche.</translation>
+        <translation>Cliquer ici pour créer une nouvelle tâche.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished">Editer la Tâche</translation>
+        <translation>Editer la Tâche</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation type="unfinished">Cliquer ici pour modifier la tâche courante.</translation>
+        <translation>Cliquer ici pour modifier la tâche courante.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished">Voir la Tâche</translation>
+        <translation>Voir la Tâche</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished">Effacer...</translation>
+        <translation>Effacer...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation type="unfinished">Cliquer  ici pour effacer la tâche courante.</translation>
+        <translation>Cliquer  ici pour effacer la tâche courante.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished">Effacer Tout...</translation>
+        <translation>Effacer Tout...</translation>
     </message>
     <message>
         <source>Delete completed</source>
-        <translation type="unfinished">Effacement Terminé</translation>
+        <translation>Effacement Terminé</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Transmettre</translation>
+        <translation>Transmettre</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished">Cliquer ici pour transmettre la tâche courante à un autre périphérique.</translation>
+        <translation>Cliquer ici pour transmettre la tâche courante à un autre périphérique.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Rechercher</translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished">Montrer les tâches terminées</translation>
+        <translation>Montrer les tâches terminées</translation>
     </message>
     <message>
         <source>Show only over-due tasks</source>
-        <translation type="unfinished">Montrer seulement les tâches échues</translation>
+        <translation>Montrer seulement les tâches échues</translation>
     </message>
     <message>
         <source>Show task deadlines</source>
-        <translation type="unfinished">Montrer les échéances</translation>
+        <translation>Montrer les échéances</translation>
     </message>
     <message>
         <source>Show quick task bar</source>
-        <translation type="unfinished">Montrer la barre d&apos;outils</translation>
+        <translation>Montrer la barre d&apos;outils</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished">Date</translation>
+        <translation>Donnée</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Catégorie</translation>
+        <translation>Catégorie</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Options</translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>QuickEdit</source>
-        <translation type="unfinished">Edition Rapide</translation>
+        <translation>Edition Rapide</translation>
     </message>
     <message>
         <source>This is a listing of all current tasks.
@@ -131,7 +132,7 @@ The list displays the following information:
 2. Priority - a graphical representation of task priority.  Double-click here to modify.
 3. Description - description of task.  Click here to select the task.
 4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation type="unfinished">Voici la liste de toutes les tâches en cours.
+        <translation>Voici la liste de toutes les tâches en cours.
 
 La liste affiche les informations suivantes:
 1. Terminé - Un marque verte indique une tâche terminée. Cliquer ici pour terminer un tâche.
@@ -140,11 +141,11 @@ La liste affiche les informations suivantes:
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished">Toutes les Catégories</translation>
+        <translation>Toutes les Catégories</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished">Plus de Mémoire Disponible</translation>
+        <translation>Plus de place disponible</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -153,7 +154,7 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation type="unfinished">Tâche n&apos;a pas pu
+        <translation>&quot;Tâche&quot; n&apos;a pas pu
 enregistrer vos changements.
 Libérez de l&apos;espace
 et réessayez.
@@ -162,59 +163,59 @@ Quitter?</translation>
     </message>
     <message>
         <source>Todo</source>
-        <translation type="unfinished">Tâche</translation>
+        <translation>Tâche</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished">Impossible d&apos;éditer les données, Synchronization en cours</translation>
+        <translation>Impossible d&apos;éditer les données, Synchronization en cours</translation>
     </message>
     <message>
         <source>all tasks?</source>
-        <translation type="unfinished">Toutes les Tâches?</translation>
+        <translation>Toutes les Tâches?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
-        <translation type="unfinished">Toutes les tâches effectuées?</translation>
+        <translation>Toutes les tâches effectuées?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Non classé</translation>
+        <translation>Non classé</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
-        <translation type="unfinished">&lt;P&gt;%1 Il y  une nouvelle tâches.&lt;p&gt; Voulez-vous l&apos;ajouter à votre liste?</translation>
+        <translation>&lt;P&gt;%1 Il y  une nouvelle tâches.&lt;p&gt; Voulez-vous l&apos;ajouter à votre liste?</translation>
     </message>
     <message>
         <source>New Tasks</source>
-        <translation type="unfinished">Nouvelles Tâches</translation>
+        <translation>Nouvelles Tâches</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Dupliquer</translation>
+        <translation>Dupliquer</translation>
     </message>
     <message>
         <source>C.</source>
-        <translation type="unfinished">C.</translation>
+        <translation>C.</translation>
     </message>
     <message>
         <source>Priority</source>
-        <translation type="unfinished">Priorité</translation>
+        <translation>Priorité</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Description</translation>
+        <translation>Description</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished">Echéance</translation>
+        <translation>Echéance</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation type="unfinished">Configurer les Modèles</translation>
+        <translation>Configurer les modèles</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished">Priorité:</translation>
+        <translation>Priorité:</translation>
     </message>
 </context>
 <context>
@@ -225,7 +226,7 @@ Quitter?</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Sans</translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>%1 day(s)</source>
