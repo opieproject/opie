@@ -49,8 +49,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     if ( !name )
         setName( "fileBrowser" );
     setCaption(tr( name ) );
-    filterStr=filter;
-
+    filterStr = filter;
 //      channel = new QCopChannel( "QPE/fileDialog", this );
 //      connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
 //         this, SLOT(receive(const QCString&, const QByteArray&)) );

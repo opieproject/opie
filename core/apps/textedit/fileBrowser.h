@@ -52,25 +52,26 @@ public:
     fileBrowser( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0);
     ~fileBrowser();
 
-    QPushButton *buttonOk, *buttonCancel, *homeButton, *docButton, *hideButton, *cdUpButton;
-    QListView* ListView;
-
-    QLabel *dirLabel;
-    QString selectedFileName, filterStr;
-    QDir currentDir;
+    QString selectedFileName, mimeType;
     QFile file;
-    QStringList fileList, dirPathStringList;
-    QListViewItem * item;
-    QComboBox *SelectionCombo, *dirPathCombo;
-    MenuButton *typemb;
-    QWidgetStack *FileStack;
-    FileSelector *fileSelector;
-    QString mimeType;
+    QStringList fileList;
+    QComboBox *SelectionCombo;
 public slots:
-        void setFileView( int );
+    void setFileView( int );
 
 private:
 //    QDict<void> mimes;
+    QPushButton *buttonOk, *buttonCancel, *homeButton, *docButton, *hideButton, *cdUpButton;
+    QListView* ListView;
+    QLabel *dirLabel;
+    QString filterStr;
+    QDir currentDir;
+    QStringList dirPathStringList;
+    QListViewItem * item;
+    QComboBox *dirPathCombo;
+    MenuButton *typemb;
+    QWidgetStack *FileStack;
+    FileSelector *fileSelector;
     QRegExp tf;
     QStringList getMimeTypes();
     void fillCombo( const QString&);
