@@ -16,7 +16,8 @@ APPLETS= core/applets/batteryapplet core/applets/batteryapplet-ipaq \
 	core/applets/screenshotapplet core/applets/clipboardapplet \
 	core/applets/cardmon core/applets/obex \
 	core/applets/vmemo noncore/net/netsetup/dialup \
-	noncore/net/netsetup/lan 
+	noncore/net/netsetup/lan  \
+	noncore/applets/wirelessapplet
 
 MAIL= noncore/mail/libmail noncore/mail/bend 
 
