@@ -44,17 +44,33 @@
 
 #include "oticker.h"
 
-OTicker::OTicker( QWidget* parent=0 ) : QFrame( parent ) {
-        setFrameStyle( NoFrame/*WinPanel | Sunken */);
+OTicker::OTicker( QWidget* parent=0 )
+        : QFrame( parent ) {
+
+//    setFrameStyle( NoFrame/*WinPanel | Sunken */);
+
+    Config cfg("qpe");
+    cfg.setGroup("Appearance");
+    backgroundcolor = QColor( cfg.readEntry( "Background", "#E5E1D5" ) );
+    foregroundcolor= Qt::black;
 }
 
 OTicker::~OTicker() {
 }
 
+void OTicker::setBackgroundColor(QColor backcolor) {
+    backgroundcolor = backcolor;
+}
+
+void OTicker::setForegroundColor(QColor backcolor) {
+    foregroundcolor = backcolor;
+}
+
+void OTicker::setFrame(int frameStyle) {
+    setFrameStyle( frameStyle/*WinPanel | Sunken */);
+}
+
 void OTicker::setText( const QString& text ) {
-    Config cfg("qpe");
-    cfg.setGroup("Appearance");
-    
     pos = 0; // reset it everytime the text is changed
     scrollText = text;
 
@@ -62,9 +78,9 @@ void OTicker::setText( const QString& text ) {
     QPixmap pm( pixelLen, contentsRect().height() );
 //    pm.fill( QColor( 167, 212, 167 ));
  
-    pm.fill( QColor( cfg.readEntry( "Background", "#E5E1D5" ) ));
+    pm.fill(backgroundcolor);
     QPainter pmp( &pm );
-    pmp.setPen( Qt::black );
+    pmp.setPen(foregroundcolor );
     pmp.drawText( 0, 0, pixelLen, contentsRect().height(), AlignVCenter, scrollText );
     pmp.end();
     scrollTextPixmap = pm;
@@ -88,7 +104,7 @@ void OTicker::drawContents( QPainter *p ) {
         p->drawPixmap( pos - pixelLen, contentsRect().y(), scrollTextPixmap );
 }
 
-void OTicker::mouseReleaseEvent( QMouseEvent * e) {
+void OTicker::mouseReleaseEvent( QMouseEvent * ) {
 //    qDebug("<<<<<<<>>>>>>>>>");
     emit mousePressed();
 }

@@ -9,6 +9,7 @@
 #include <qslider.h>
 #include <qframe.h>
 #include <qlineedit.h>
+#include <qcolor.h>
 
 class OTicker : public QFrame {
     Q_OBJECT
@@ -17,6 +18,9 @@ public:
     OTicker( QWidget* parent=0 );
     ~OTicker();
     void setText( const QString& text ) ;
+    void setBackgroundColor(QColor color);
+    void setForegroundColor(QColor color);
+    void setFrame(int);
 signals:
     void mousePressed();
 protected:
@@ -24,6 +28,7 @@ protected:
     void drawContents( QPainter *p );
     void mouseReleaseEvent ( QMouseEvent *);
 private:
+    QColor backgroundcolor, foregroundcolor;
     QString scrollText;
     QPixmap scrollTextPixmap;
     int pos;//, pixelLen;
