@@ -14,10 +14,10 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     : Opie::MM::OImageScrollView(parent,name,fl)
 {
     m_viewManager = 0;
-    m_focus_out = false;
-    block_next_focus = true;
+    focus_in_count = 0;
     m_cfg = cfg;
     m_isFullScreen = false;
+    m_ignore_next_in = false;
     QPEApplication::setStylusOperation(viewport(),QPEApplication::RightOnHold);
     initKeys();
 }
@@ -107,7 +107,6 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
     if (e->button()==1) {
         return OImageScrollView::contentsMousePressEvent(e);
     }
-//    if (!fullScreen()) return;
     odebug << "Popup " << oendl;
     QPopupMenu *m = new QPopupMenu(0);
     if (!m) return;
@@ -125,10 +124,6 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
     m->setFocus();
     m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
     delete m;
-    /* if we were fullScreen() and must overlap the taskbar again */
-    if (fullScreen() && old) {
-          enableFullscreen();
-    }
 }
 
 void ImageView::setFullScreen(bool how)
@@ -139,47 +134,35 @@ void ImageView::setFullScreen(bool how)
 void ImageView::focusInEvent(QFocusEvent *)
 {
       // Always do it here, no matter the size.
-    odebug << "Focus in" << oendl;
-}
-
-void ImageView::focusOutEvent(QFocusEvent *)
-{
-    odebug << "Focus out" << oendl;
+    odebug << "Focus in (view)" << oendl;
+    //if (fullScreen()) parentWidget()->showNormal();
+    if (m_ignore_next_in){m_ignore_next_in=false;return;}
+    if (fullScreen()) enableFullscreen();
 }
 
 void ImageView::enableFullscreen()
 {
       // This call is needed because showFullScreen won't work
       // correctly if the widget already considers itself to be fullscreen.
+      if (!fullScreen()) return;
+      if (m_ignore_next_in) {m_ignore_next_in = false;return;}
+
       setUpdatesEnabled(false);
-      odebug << "showNormal();" << oendl;
       parentWidget()->showNormal();
-      odebug << "showNormal(); done " << oendl;
       // This is needed because showNormal() forcefully changes the window
       // style to WSTyle_TopLevel.
-      odebug << " reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));" << oendl;
       parentWidget()->reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));
-      odebug << " reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0)); done" << oendl;
       // Enable fullscreen.
-      odebug << "showFullScreen();" << oendl;
+      /* this is the trick - I don't now why, but after a showFullScreen QTE toggles the focus
+       * so we must block it here! */
+      m_ignore_next_in = true;
       parentWidget()->showFullScreen();
-      odebug << "showFullScreen(); done" << oendl;
       setUpdatesEnabled(true);
-}
-
-void ImageWidget::show()
-{
-    QWidget::show();
-}
-
-void ImageWidget::hide()
-{
-    QWidget::hide();
 }
 
 ImageWidget::ImageWidget(QWidget * parent, const char * name, WFlags f)
     : QWidget(parent,name,f)
 {
-      // Make sure size is correct
-      setFixedSize(qApp->desktop()->size());
+    // Make sure size is correct
+    setFixedSize(qApp->desktop()->size());
 }

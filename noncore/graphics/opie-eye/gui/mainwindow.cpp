@@ -398,8 +398,7 @@ void PMainWindow::slotDisplay( const QString& inf ) {
         viewModeButton->hide();
     }
     if (m_disp->fullScreen()) {
-//        tFrame->showFullScreen();
-        m_disp->enableFullscreen();
+        tFrame->show();//FullScreen();
     } else {
         m_stack->raiseWidget( ImageDisplay );
     }

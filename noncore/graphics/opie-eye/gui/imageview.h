@@ -31,8 +31,8 @@ public:
     virtual ~ImageView();
     Opie::Core::OKeyConfigManager* manager();
     void setFullScreen(bool how);
-    virtual void enableFullscreen();
     bool fullScreen(){return m_isFullScreen;}
+    virtual void enableFullscreen();
 
 signals:
     void dispImageInfo(const QString&);
@@ -49,11 +49,10 @@ protected:
     Opie::Core::OKeyConfigManager*m_viewManager;
     void initKeys();
     bool m_isFullScreen:1;
-    bool m_focus_out:1;
-    bool block_next_focus:1;
-
+    bool m_ignore_next_in:1;
+    int focus_in_count;
     virtual void focusInEvent ( QFocusEvent * );
-    virtual void focusOutEvent ( QFocusEvent * );
+
 
 protected slots:
     virtual void slotShowImageInfo();
@@ -71,8 +70,6 @@ public:
 protected:
 
 public slots:
-    virtual void show();
-    virtual void hide();
 
 protected slots:
 };
