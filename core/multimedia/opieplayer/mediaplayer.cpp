@@ -80,7 +80,7 @@ void MediaPlayer::play() {
 
 
 void MediaPlayer::setPlaying( bool play ) {
-    qDebug("MediaPlayer setPlaying");
+   //    qDebug("MediaPlayer setPlaying %d", play);
     if ( !play ) {
         mediaPlayerState->setPaused( FALSE );
         loopControl->stop( FALSE );
@@ -91,7 +91,7 @@ void MediaPlayer::setPlaying( bool play ) {
         mediaPlayerState->setPaused( FALSE );
         return;
     }
-    qDebug("about to ctrash");
+    //    qDebug("about to ctrash");
     const DocLnk *playListCurrent = playList->current();
     
     if ( playListCurrent != NULL ) {
@@ -256,7 +256,7 @@ void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
       case Key_F11: //menu
           break;
       case Key_F12: //home
-          qDebug("Blank here");
+         //          qDebug("Blank here");
           break;
       case Key_F13: //mail
           break;

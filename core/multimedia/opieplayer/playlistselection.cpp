@@ -194,7 +194,7 @@ void PlayListSelection::writeCurrent( Config& cfg ) {
     QListViewItem *item = selectedItem();
     if ( item )
         cfg.writeEntry("current", item->text(0) );
-    qDebug(item->text(0));
+    //    qDebug(item->text(0));
 
 }
 

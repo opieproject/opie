@@ -86,7 +86,7 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     if(!QDir(QString(getenv("OPIEDIR")) +"/pics/"+skinPath).exists())
       skinPath = "opieplayer2/skins/default";
 
-   qDebug("skin path " + skinPath);
+    //   qDebug("skin path " + skinPath);
 
 //     QString skinPath = "opieplayer2/skins/" + skin;
 
@@ -101,7 +101,7 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
    {
       QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath +
                                   "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
-      qDebug("loading "+filename);
+      //      qDebug("loading "+filename);
       masks[i] = new QBitmap( filename );
 
       if ( !masks[i]->isNull() )
@@ -119,7 +119,7 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
          }
       }
    }
-   qDebug("finished loading first pics");
+   //   qDebug("finished loading first pics");
    for ( int i = 0; i < 7; i++ )
    {
       buttonPixUp[i] = NULL;
@@ -351,7 +351,7 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 switch(i) {
 
                 case VideoPlay: {
-                   qDebug("play");
+                   //                   qDebug("play");
                    if(  !mediaPlayerState->playing()) {
                       mediaPlayerState->setPlaying( true);
                       setToggleButton( i-1, false );
@@ -359,12 +359,12 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                       return;
                    }
                    if( mediaPlayerState->isPaused ) {
-                      qDebug("isPaused");
+                      //                      qDebug("isPaused");
                       setToggleButton( i, FALSE );
                       mediaPlayerState->setPaused( FALSE );
                         return;
                     } else if( !mediaPlayerState->isPaused ) {
-                       qDebug("is not paused");
+                       //                       qDebug("is not paused");
                         setToggleButton( i, TRUE );
                         mediaPlayerState->setPaused( TRUE );
                         return;
@@ -373,8 +373,8 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                     }
                 }
 
-                case VideoStop:   qDebug("stop");    mediaPlayerState->setPlaying( FALSE ); setToggleButton( i+1, true); setToggleButton( i, true ); return;
-                case VideoNext:        mediaPlayerState->setNext(); return;
+                case VideoStop:  mediaPlayerState->setPlaying( FALSE ); setToggleButton( i+1, true); setToggleButton( i, true ); return;
+                case VideoNext:  mediaPlayerState->setNext(); return;
                 case VideoPrevious:    mediaPlayerState->setPrev(); return;
                 case VideoVolUp:      emit moreReleased(); return;
                 case VideoVolDown:    emit lessReleased(); return;

@@ -127,7 +127,7 @@ MediaPlayerDecoder *MediaPlayerState::libMpeg3Decoder() {
 // }
 
 void MediaPlayerState::loadPlugins() {
-    qDebug("load plugins");
+   //    qDebug("load plugins");
 #ifndef QT_NO_COMPONENT
     QValueList<MediaPlayerPlugin>::Iterator mit;
     for ( mit = pluginList.begin(); mit != pluginList.end(); ++mit ) {
