@@ -1,0 +1,618 @@
+<keymap>
+
+<include file="common.xml"/>
+
+<state name="LShift-RShift" parent="common"/>
+<state name="LShift-RShift-Caps" parent="common"/>
+
+<state name="LShift">
+	<map keycode="4130" pressed="true">
+		<event keycode="4130" unicode="-1" modifiers="0" pressed="false" autorepeat="false"/>
+		<next-state name="LShift-RShift"/>
+	</map>
+</state>
+
+<state name="RShift">
+	<map keycode="69" pressed="true">
+		<event keycode="69" unicode="8364" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="79" pressed="true">
+		<event keycode="79" unicode="223" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="76" pressed="true">
+		<event keycode="76" unicode="252" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="77" pressed="true">
+		<event keycode="77" unicode="246" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="46" pressed="true">
+		<event keycode="46" unicode="228" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="69" pressed="false">
+		<event keycode="69" unicode="8364" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="79" pressed="false">
+		<event keycode="79" unicode="223" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="76" pressed="false">
+		<event keycode="76" unicode="252" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="77" pressed="false">
+		<event keycode="77" unicode="246" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="46" pressed="false">
+		<event keycode="46" unicode="228" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="4128" pressed="false">
+		<event keycode="4128" unicode="-1" modifiers="0" pressed="false" autorepeat="false"/>
+		<next-state name="LShift-RShift"/>
+	</map>
+</state>
+
+<state name="LShift-Caps">
+	<map keycode="4130" pressed="true">
+		<event keycode="4130" unicode="-1" modifiers="0" pressed="false" autorepeat="false"/>
+		<next-state name="LShift-RShift-Caps"/>
+	</map>
+</state>
+
+<state name="LShift-Num">
+	<map keycode="4128" pressed="false">
+		<event keycode="4128" unicode="-1" modifiers="0" pressed="false" autorepeat="false"/>
+		<next-state name="Num"/>
+	</map>
+
+	<map keycode="4165" pressed="true">
+		<event keycode="4165" unicode="-1" modifiers="16" pressed="true" autorepeat="false"/>
+		<next-state name="LShift-Fn-Num"/>
+	</map>
+</state>
+
+<state name="RShift-Caps">
+	<map keycode="69" pressed="true">
+		<event keycode="69" unicode="8364" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="79" pressed="true">
+		<event keycode="79" unicode="223" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="76" pressed="true">
+		<event keycode="76" unicode="220" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="77" pressed="true">
+		<event keycode="77" unicode="214" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="46" pressed="true">
+		<event keycode="46" unicode="196" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="69" pressed="false">
+		<event keycode="69" unicode="8364" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="79" pressed="false">
+		<event keycode="79" unicode="223" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="76" pressed="false">
+		<event keycode="76" unicode="220" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="77" pressed="false">
+		<event keycode="77" unicode="214" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="46" pressed="false">
+		<event keycode="46" unicode="196" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="4128" pressed="true">
+		<event keycode="4128" unicode="-1" modifiers="0" pressed="false" autorepeat="false"/>
+		<next-state name="LShift-RShift-Caps"/>
+	</map>
+</state>
+
+<state name="LShift-RShift">
+	<map keycode="69" pressed="true">
+		<event keycode="69" unicode="8364" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="79" pressed="true">
+		<event keycode="79" unicode="223" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="76" pressed="true">
+		<event keycode="76" unicode="220" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="77" pressed="true">
+		<event keycode="77" unicode="214" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="46" pressed="true">
+		<event keycode="46" unicode="196" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="69" pressed="false">
+		<event keycode="69" unicode="8364" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="79" pressed="false">
+		<event keycode="79" unicode="223" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="76" pressed="false">
+		<event keycode="76" unicode="220" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="77" pressed="false">
+		<event keycode="77" unicode="214" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="46" pressed="false">
+		<event keycode="46" unicode="196" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="4128" pressed="false">
+		<event keycode="4128" unicode="-1" modifiers="0" pressed="false" autorepeat="false"/>
+		<next-state name="RShift"/>
+	</map>
+
+	<map keycode="4130" pressed="false">
+		<event keycode="4130" unicode="-1" modifiers="0" pressed="false" autorepeat="false"/>
+		<next-state name="LShift"/>
+	</map>
+</state>
+
+<state name="LShift-RShift-Caps">
+	<map keycode="69" pressed="true">
+		<event keycode="69" unicode="8364" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="79" pressed="true">
+		<event keycode="79" unicode="223" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="76" pressed="true">
+		<event keycode="76" unicode="252" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="77" pressed="true">
+		<event keycode="77" unicode="246" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="46" pressed="true">
+		<event keycode="46" unicode="228" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+
+	<map keycode="69" pressed="false">
+		<event keycode="69" unicode="8364" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="79" pressed="false">
+		<event keycode="79" unicode="223" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="76" pressed="false">
+		<event keycode="76" unicode="252" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="77" pressed="false">
+		<event keycode="77" unicode="246" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="46" pressed="false">
+		<event keycode="46" unicode="228" modifiers="0" pressed="false" autorepeat="true"/>
+	</map>
+
+	<map keycode="4128" pressed="false">
+		<event keycode="4128" unicode="-1" modifiers="0" pressed="false" autorepeat="false"/>
+		<next-state name="RShift-Caps"/>
+	</map>
+
+	<map keycode="4130" pressed="false">
+		<event keycode="4130" unicode="-1" modifiers="0" pressed="false" autorepeat="false"/>
+		<next-state name="LShift-Caps"/>
+	</map>
+</state>
+
+<state name="Caps">
+	<map keycode="4130" pressed="true">
+		<event keycode="4130" unicode="-1" modifiers="0" pressed="false" autorepeat="false"/>
+		<next-state name="RShift-Caps"/>
+	</map>
+</state>	
+
+<state name="lower-case">
+	<map keycode="32" pressed="true">
+		<event keycode="32" unicode="32" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="39" pressed="true">
+		<event keycode="39" unicode="39" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="44" pressed="true">
+		<event keycode="44" unicode="44" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="46" pressed="true">
+		<event keycode="46" unicode="46" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="47" pressed="true">
+		<event keycode="47" unicode="47" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="65" pressed="true">
+		<event keycode="65" unicode="97" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="66" pressed="true">
+		<event keycode="66" unicode="98" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="67" pressed="true">
+		<event keycode="67" unicode="99" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="68" pressed="true">
+		<event keycode="68" unicode="100" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="69" pressed="true">
+		<event keycode="69" unicode="101" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="70" pressed="true">
+		<event keycode="70" unicode="102" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="71" pressed="true">
+		<event keycode="71" unicode="103" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="72" pressed="true">
+		<event keycode="72" unicode="104" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="73" pressed="true">
+		<event keycode="73" unicode="105" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="74" pressed="true">
+		<event keycode="74" unicode="106" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="75" pressed="true">
+		<event keycode="75" unicode="107" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="76" pressed="true">
+		<event keycode="76" unicode="108" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="77" pressed="true">
+		<event keycode="77" unicode="109" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="78" pressed="true">
+		<event keycode="78" unicode="110" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="79" pressed="true">
+		<event keycode="79" unicode="111" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="80" pressed="true">
+		<event keycode="80" unicode="112" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="81" pressed="true">
+		<event keycode="81" unicode="113" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="82" pressed="true">
+		<event keycode="82" unicode="114" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="83" pressed="true">
+		<event keycode="83" unicode="115" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="84" pressed="true">
+		<event keycode="84" unicode="116" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="85" pressed="true">
+		<event keycode="85" unicode="117" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="86" pressed="true">
+		<event keycode="86" unicode="118" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="87" pressed="true">
+		<event keycode="87" unicode="119" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="88" pressed="true">
+		<event keycode="88" unicode="120" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="89" pressed="true">
+		<event keycode="89" unicode="121" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="90" pressed="true">
+		<event keycode="90" unicode="122" modifiers="0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="32" pressed="false">
+		<event keycode="32" unicode="32" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="39" pressed="false">
+		<event keycode="39" unicode="39" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="44" pressed="false">
+		<event keycode="44" unicode="44" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="46" pressed="false">
+		<event keycode="46" unicode="46" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="47" pressed="false">
+		<event keycode="47" unicode="47" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="65" pressed="false">
+		<event keycode="65" unicode="97" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="66" pressed="false">
+		<event keycode="66" unicode="98" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="67" pressed="false">
+		<event keycode="67" unicode="99" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="68" pressed="false">
+		<event keycode="68" unicode="100" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="69" pressed="false">
+		<event keycode="69" unicode="101" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="70" pressed="false">
+		<event keycode="70" unicode="102" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="71" pressed="false">
+		<event keycode="71" unicode="103" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="72" pressed="false">
+		<event keycode="72" unicode="104" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="73" pressed="false">
+		<event keycode="73" unicode="105" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="74" pressed="false">
+		<event keycode="74" unicode="106" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="75" pressed="false">
+		<event keycode="75" unicode="107" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="76" pressed="false">
+		<event keycode="76" unicode="108" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="77" pressed="false">
+		<event keycode="77" unicode="109" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="78" pressed="false">
+		<event keycode="78" unicode="110" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="79" pressed="false">
+		<event keycode="79" unicode="111" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="80" pressed="false">
+		<event keycode="80" unicode="112" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="81" pressed="false">
+		<event keycode="81" unicode="113" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="82" pressed="false">
+		<event keycode="82" unicode="114" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="83" pressed="false">
+		<event keycode="83" unicode="115" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="84" pressed="false">
+		<event keycode="84" unicode="116" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="85" pressed="false">
+		<event keycode="85" unicode="117" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="86" pressed="false">
+		<event keycode="86" unicode="118" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="87" pressed="false">
+		<event keycode="87" unicode="119" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="88" pressed="false">
+		<event keycode="88" unicode="120" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="89" pressed="false">
+		<event keycode="89" unicode="121" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="90" pressed="false">
+		<event keycode="90" unicode="122" modifiers="0" pressed="false" autorepeat="false"/>
+	</map>
+</state>
+
+<state name="upper-case">
+	<map keycode="32" pressed="true">
+		<event keycode="32" unicode="32" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="39" pressed="true">
+		<event keycode="34" unicode="34" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="44" pressed="true">
+		<event keycode="59" unicode="59" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="46" pressed="true">
+		<event keycode="58" unicode="58" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="47" pressed="true">
+		<event keycode="63" unicode="63" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="65" pressed="true">
+		<event keycode="65" unicode="65" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="66" pressed="true">
+		<event keycode="66" unicode="66" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="67" pressed="true">
+		<event keycode="67" unicode="67" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="68" pressed="true">
+		<event keycode="68" unicode="68" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="69" pressed="true">
+		<event keycode="69" unicode="69" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="70" pressed="true">
+		<event keycode="70" unicode="70" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="71" pressed="true">
+		<event keycode="71" unicode="71" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="72" pressed="true">
+		<event keycode="72" unicode="72" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="73" pressed="true">
+		<event keycode="73" unicode="73" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="74" pressed="true">
+		<event keycode="74" unicode="74" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="75" pressed="true">
+		<event keycode="75" unicode="75" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="76" pressed="true">
+		<event keycode="76" unicode="76" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="77" pressed="true">
+		<event keycode="77" unicode="77" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="78" pressed="true">
+		<event keycode="78" unicode="78" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="79" pressed="true">
+		<event keycode="79" unicode="79" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="80" pressed="true">
+		<event keycode="80" unicode="80" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="81" pressed="true">
+		<event keycode="81" unicode="81" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="82" pressed="true">
+		<event keycode="82" unicode="82" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="83" pressed="true">
+		<event keycode="83" unicode="83" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="84" pressed="true">
+		<event keycode="84" unicode="84" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="85" pressed="true">
+		<event keycode="85" unicode="85" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="86" pressed="true">
+		<event keycode="86" unicode="86" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="87" pressed="true">
+		<event keycode="87" unicode="87" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="88" pressed="true">
+		<event keycode="88" unicode="88" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="89" pressed="true">
+		<event keycode="89" unicode="89" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="90" pressed="true">
+		<event keycode="90" unicode="90" modifiers="8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="32" pressed="false">
+		<event keycode="32" unicode="32" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="39" pressed="false">
+		<event keycode="34" unicode="34" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="44" pressed="false">
+		<event keycode="58" unicode="58" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="46" pressed="false">
+		<event keycode="59" unicode="59" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="47" pressed="false">
+		<event keycode="63" unicode="63" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="65" pressed="false">
+		<event keycode="65" unicode="65" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="66" pressed="false">
+		<event keycode="66" unicode="66" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="67" pressed="false">
+		<event keycode="67" unicode="67" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="68" pressed="false">
+		<event keycode="68" unicode="68" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="69" pressed="false">
+		<event keycode="69" unicode="69" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="70" pressed="false">
+		<event keycode="70" unicode="70" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="71" pressed="false">
+		<event keycode="71" unicode="71" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="72" pressed="false">
+		<event keycode="72" unicode="72" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="73" pressed="false">
+		<event keycode="73" unicode="73" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="74" pressed="false">
+		<event keycode="74" unicode="74" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="75" pressed="false">
+		<event keycode="75" unicode="75" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="76" pressed="false">
+		<event keycode="76" unicode="76" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="77" pressed="false">
+		<event keycode="77" unicode="77" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="78" pressed="false">
+		<event keycode="78" unicode="78" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="79" pressed="false">
+		<event keycode="79" unicode="79" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="80" pressed="false">
+		<event keycode="80" unicode="80" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="81" pressed="false">
+		<event keycode="81" unicode="81" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="82" pressed="false">
+		<event keycode="82" unicode="82" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="83" pressed="false">
+		<event keycode="83" unicode="83" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="84" pressed="false">
+		<event keycode="84" unicode="84" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="85" pressed="false">
+		<event keycode="85" unicode="85" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="86" pressed="false">
+		<event keycode="86" unicode="86" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="87" pressed="false">
+		<event keycode="87" unicode="87" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="88" pressed="false">
+		<event keycode="88" unicode="88" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="89" pressed="false">
+		<event keycode="89" unicode="89" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+	<map keycode="90" pressed="false">
+		<event keycode="90" unicode="90" modifiers="8" pressed="false" autorepeat="false"/>
+	</map>
+</state>
+
+
+</keymap>

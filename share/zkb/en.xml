@@ -1,0 +1,383 @@
+<keymap>
+
+<include file="common.xml"/>
+
+<state name="lower-case">
+	<map keycode="Space" pressed="true">
+		<event keycode="Space" unicode="32" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Apostrophe" pressed="true">
+		<event keycode="Apostrophe" unicode="39" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Comma" pressed="true">
+		<event keycode="Comma" unicode="44" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Period" pressed="true">
+		<event keycode="Period" unicode="46" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Slash" pressed="true">
+		<event keycode="Slash" unicode="47" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="97" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="B" pressed="true">
+		<event keycode="B" unicode="98" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="C" pressed="true">
+		<event keycode="C" unicode="99" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="D" pressed="true">
+		<event keycode="D" unicode="100" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="101" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="F" pressed="true">
+		<event keycode="F" unicode="102" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="G" pressed="true">
+		<event keycode="G" unicode="103" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="H" pressed="true">
+		<event keycode="H" unicode="104" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="105" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="J" pressed="true">
+		<event keycode="J" unicode="106" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="K" pressed="true">
+		<event keycode="K" unicode="107" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="L" pressed="true">
+		<event keycode="L" unicode="108" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="M" pressed="true">
+		<event keycode="M" unicode="109" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="N" pressed="true">
+		<event keycode="N" unicode="110" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="111" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="P" pressed="true">
+		<event keycode="P" unicode="112" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Q" pressed="true">
+		<event keycode="Q" unicode="113" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="R" pressed="true">
+		<event keycode="R" unicode="114" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="S" pressed="true">
+		<event keycode="S" unicode="115" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="T" pressed="true">
+		<event keycode="T" unicode="116" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="117" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="V" pressed="true">
+		<event keycode="V" unicode="118" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="W" pressed="true">
+		<event keycode="W" unicode="119" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="X" pressed="true">
+		<event keycode="X" unicode="120" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Y" pressed="true">
+		<event keycode="Y" unicode="121" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Z" pressed="true">
+		<event keycode="Z" unicode="122" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Space" unicode="32" pressed="false"/>
+	</map>
+	<map keycode="Apostrophe" pressed="false">
+		<event keycode="Apostrophe" unicode="39" pressed="false"/>
+	</map>
+	<map keycode="Comma" pressed="false">
+		<event keycode="Comma" unicode="44" pressed="false"/>
+	</map>
+	<map keycode="Period" pressed="false">
+		<event keycode="Period" unicode="46" pressed="false"/>
+	</map>
+	<map keycode="Slash" pressed="false">
+		<event keycode="Slash" unicode="47" pressed="false"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="97" pressed="false"/>
+	</map>
+	<map keycode="B" pressed="false">
+		<event keycode="B" unicode="98" pressed="false"/>
+	</map>
+	<map keycode="C" pressed="false">
+		<event keycode="C" unicode="99" pressed="false"/>
+	</map>
+	<map keycode="D" pressed="false">
+		<event keycode="D" unicode="100" pressed="false"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="101" pressed="false"/>
+	</map>
+	<map keycode="F" pressed="false">
+		<event keycode="F" unicode="102" pressed="false"/>
+	</map>
+	<map keycode="G" pressed="false">
+		<event keycode="G" unicode="103" pressed="false"/>
+	</map>
+	<map keycode="H" pressed="false">
+		<event keycode="H" unicode="104" pressed="false"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="105" pressed="false"/>
+	</map>
+	<map keycode="J" pressed="false">
+		<event keycode="J" unicode="106" pressed="false"/>
+	</map>
+	<map keycode="K" pressed="false">
+		<event keycode="K" unicode="107" pressed="false"/>
+	</map>
+	<map keycode="L" pressed="false">
+		<event keycode="L" unicode="108" pressed="false"/>
+	</map>
+	<map keycode="M" pressed="false">
+		<event keycode="M" unicode="109" pressed="false"/>
+	</map>
+	<map keycode="N" pressed="false">
+		<event keycode="N" unicode="110" pressed="false"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="111" pressed="false"/>
+	</map>
+	<map keycode="P" pressed="false">
+		<event keycode="P" unicode="112" pressed="false"/>
+	</map>
+	<map keycode="Q" pressed="false">
+		<event keycode="Q" unicode="113" pressed="false"/>
+	</map>
+	<map keycode="R" pressed="false">
+		<event keycode="R" unicode="114" pressed="false"/>
+	</map>
+	<map keycode="S" pressed="false">
+		<event keycode="S" unicode="115" pressed="false"/>
+	</map>
+	<map keycode="T" pressed="false">
+		<event keycode="T" unicode="116" pressed="false"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="117" pressed="false"/>
+	</map>
+	<map keycode="V" pressed="false">
+		<event keycode="V" unicode="118" pressed="false"/>
+	</map>
+	<map keycode="W" pressed="false">
+		<event keycode="W" unicode="119" pressed="false"/>
+	</map>
+	<map keycode="X" pressed="false">
+		<event keycode="X" unicode="120" pressed="false"/>
+	</map>
+	<map keycode="Y" pressed="false">
+		<event keycode="Y" unicode="121" pressed="false"/>
+	</map>
+	<map keycode="Z" pressed="false">
+		<event keycode="Z" unicode="122" pressed="false"/>
+	</map>
+</state>
+
+<state name="upper-case">
+	<map keycode="Space" pressed="true">
+		<event keycode="Space" unicode="32" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Apostrophe" pressed="true">
+		<event keycode="QuoteDbl" unicode="34" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Comma" pressed="true">
+		<event keycode="Semicolon" unicode="59" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Period" pressed="true">
+		<event keycode="Colon" unicode="58" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Slash" pressed="true">
+		<event keycode="Question" unicode="63" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="65" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="B" pressed="true">
+		<event keycode="B" unicode="66" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="C" pressed="true">
+		<event keycode="C" unicode="67" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="D" pressed="true">
+		<event keycode="D" unicode="68" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="69" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="F" pressed="true">
+		<event keycode="F" unicode="70" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="G" pressed="true">
+		<event keycode="G" unicode="71" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="H" pressed="true">
+		<event keycode="H" unicode="72" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="73" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="J" pressed="true">
+		<event keycode="J" unicode="74" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="K" pressed="true">
+		<event keycode="K" unicode="75" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="L" pressed="true">
+		<event keycode="L" unicode="76" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="M" pressed="true">
+		<event keycode="M" unicode="77" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="N" pressed="true">
+		<event keycode="N" unicode="78" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="79" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="P" pressed="true">
+		<event keycode="P" unicode="80" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Q" pressed="true">
+		<event keycode="Q" unicode="81" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="R" pressed="true">
+		<event keycode="R" unicode="82" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="S" pressed="true">
+		<event keycode="S" unicode="83" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="T" pressed="true">
+		<event keycode="T" unicode="84" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="85" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="V" pressed="true">
+		<event keycode="V" unicode="86" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="W" pressed="true">
+		<event keycode="W" unicode="87" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="X" pressed="true">
+		<event keycode="X" unicode="88" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Y" pressed="true">
+		<event keycode="Y" unicode="89" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Z" pressed="true">
+		<event keycode="Z" unicode="90" modifiers="Shift" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Space" unicode="32" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="Apostrophe" pressed="false">
+		<event keycode="QuoteDbl" unicode="34" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="Comma" pressed="false">
+		<event keycode="Semicolon" unicode="59" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="Period" pressed="false">
+		<event keycode="Colon" unicode="58" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="Slash" pressed="false">
+		<event keycode="Question" unicode="63" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="65" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="B" pressed="false">
+		<event keycode="B" unicode="66" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="C" pressed="false">
+		<event keycode="C" unicode="67" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="D" pressed="false">
+		<event keycode="D" unicode="68" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="69" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="F" pressed="false">
+		<event keycode="F" unicode="70" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="G" pressed="false">
+		<event keycode="G" unicode="71" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="H" pressed="false">
+		<event keycode="H" unicode="72" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="73" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="J" pressed="false">
+		<event keycode="J" unicode="74" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="K" pressed="false">
+		<event keycode="K" unicode="75" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="L" pressed="false">
+		<event keycode="L" unicode="76" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="M" pressed="false">
+		<event keycode="M" unicode="77" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="N" pressed="false">
+		<event keycode="N" unicode="78" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="79" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="P" pressed="false">
+		<event keycode="P" unicode="80" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="Q" pressed="false">
+		<event keycode="Q" unicode="81" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="R" pressed="false">
+		<event keycode="R" unicode="82" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="S" pressed="false">
+		<event keycode="S" unicode="83" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="T" pressed="false">
+		<event keycode="T" unicode="84" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="85" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="V" pressed="false">
+		<event keycode="V" unicode="86" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="W" pressed="false">
+		<event keycode="W" unicode="87" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="X" pressed="false">
+		<event keycode="X" unicode="88" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="Y" pressed="false">
+		<event keycode="Y" unicode="89" modifiers="Shift" pressed="false"/>
+	</map>
+	<map keycode="Z" pressed="false">
+		<event keycode="Z" unicode="90" modifiers="Shift" pressed="false"/>
+	</map>
+</state>
+
+</keymap>

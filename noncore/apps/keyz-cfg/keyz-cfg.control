@@ -1,0 +1,9 @@
+Package: keyz-cfg
+Files: bin/keyz-cfg apps/Settings/key-cfg.desktop pics/keyz-cfg.png share/zkb/zkb.xml.sample
+Priority: optional
+Section: opie/applications
+Maintainer: Rajko Albrecht <alwin@handhelds.org>
+Architecture: arm
+Depends: task-opie-minimal
+Description: Keyz configuration program
+Version: 0.6.0-$EXTRAVERSION

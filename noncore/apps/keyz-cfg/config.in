@@ -1,0 +1,4 @@
+  config KEYZCFG
+    boolean "keyz-cfg (configuration tool for keyz applett)"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 )

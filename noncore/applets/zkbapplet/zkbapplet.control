@@ -1,0 +1,9 @@
+Package: zkbapplet
+Files: plugins/applets/libzkbapplet.so* pics/zkb-disabled.png share/zkb/*.xml
+Priority: optional
+Section: opie/applets
+Maintainer: Rajko Albrecht <alwin@handhelds.org>
+Architecture: arm
+Depends: task-opie-minimal, key-cfg
+Description: ZKB Applet
+Version: 0.6.0-$EXTRAVERSION

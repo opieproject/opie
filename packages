@@ -61,6 +61,7 @@ CONFIG_KCHECKERS	noncore/games/kcheckers	kcheckers.pro
 CONFIG_KEYBOARD	inputmethods/keyboard	keyboard.pro
 CONFIG_KEYPEBBLE	noncore/comm/keypebble	keypebble.pro
 CONFIG_KEYVIEW	development/keyview	keyview.pro
+CONFIG_KEYZCFG  noncore/apps/keyz-cfg  keyz-cfg.pro
 CONFIG_KJUMPX	inputmethods/kjumpx	kjumpx.pro
 CONFIG_KPACMAN	noncore/games/kpacman	kpacman.pro
 CONFIG_LANGUAGE	noncore/settings/language	language.pro
@@ -200,6 +201,7 @@ CONFIG_WIRELESSAPPLET	noncore/applets/wirelessapplet	wirelessapplet.pro
 CONFIG_WLAN	noncore/settings/networksettings/wlan	wlan.pro
 CONFIG_WORDGAME	noncore/games/wordgame	wordgame.pro
 CONFIG_YATZEE	noncore/games/oyatzee	oyatzee.pro
+CONFIG_ZKBAPPLET noncore/applets/zkbapplet zkbapplet.pro
 CONFIG_ZLINES		noncore/games/zlines		zlines.pro
 CONFIG_ZSAFE	noncore/apps/zsafe zsafe.pro
 CONFIG_ZSAME		noncore/games/zsame		zsame.pro

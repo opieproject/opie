@@ -1,0 +1,55 @@
+<keymap autorepeat-delay="400" autorepeat-period="80" author="keyzcfg">
+	<label name="EN" state="km0:*"/>
+	<label name="BG" state="km1:*"/>
+	<include file="en.xml" prefix="km0"/>
+	<include file="bg.xml" prefix="km1"/>
+	<state name="km0:LShift">
+		<map keycode="Middle" pressed="true">
+			<next-state name="km1:LShift"/>
+		</map>
+	</state>
+
+	<state name="km0:LShift-Caps">
+		<map keycode="Middle" pressed="true">
+			<next-state name="km1:LShift-Caps"/>
+		</map>
+	</state>
+
+	<state name="km0:LShift-Num">
+		<map keycode="Middle" pressed="true">
+			<next-state name="km1:LShift-Num"/>
+		</map>
+	</state>
+
+	<state name="km0:LShift-Num-Caps">
+		<map keycode="Middle" pressed="true">
+			<next-state name="km1:LShift-Num-Caps"/>
+		</map>
+	</state>
+
+	<state name="km1:LShift">
+		<map keycode="Middle" pressed="true">
+			<next-state name="km0:LShift"/>
+		</map>
+	</state>
+
+	<state name="km1:LShift-Caps">
+		<map keycode="Middle" pressed="true">
+			<next-state name="km0:LShift-Caps"/>
+		</map>
+	</state>
+
+	<state name="km1:LShift-Num">
+		<map keycode="Middle" pressed="true">
+			<next-state name="km0:LShift-Num"/>
+		</map>
+	</state>
+
+	<state name="km1:LShift-Num-Caps">
+		<map keycode="Middle" pressed="true">
+			<next-state name="km0:LShift-Num-Caps"/>
+		</map>
+	</state>
+
+	<state name="km0:Normal" default="true"/>
+</keymap>

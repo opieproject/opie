@@ -1,0 +1,1927 @@
+<keymap>
+
+<!--
+Zaurus Keyboard definition for Latin1 characters.
+================================================
+This keyboard should allow the entry of all characters used in latin
+languages like French or Spanish.
+
+The following rules are implemented:
+- Right Shift activate dead keys that allows to compose accentuated characters.
+- Keep Right Shift or press Left Shift to change case of letter
+- Space can be used to abort a key composition and return to Normal state, printing
+the accent.
+
+- Keys not defined are inherited from parent mapping.
+
+Key composition
+===============
+Use the Right Shift with one of the following keys to compose accentuated
+characters.
+	Key		Action (Mnemonic)
+	/		Accute accent (same slant)
+	'		Grave accent (no backslash!)
+	,		Cedilla (a comma under the C)
+	V		Circumflex accent (reversed circumflex)
+	J		Ligature (Join letters)
+	B		Trema (Near circumflex)
+	N		Tilde (Same shape on N) ******* Bound to M due to a bug in the definition!
+	I		Inversed (Inversed !)
+
+All accents are in the same area, around Space bar.
+
+
+Keyboard navigation (not implemented yet)
+===================
+To be put into common.xml. Use either Right of Left Shift:
+	<-	Home
+	->	End
+	^	PageUp
+	v	PageDown
+
+
+Report bugs or comments to Pierre Métras <admin@alterna.tv>
+Version 0.1 - 20020901
+-->
+
+<!-- The base is English mapping -->
+<include file="en.xml"/>
+
+
+<state name="RShift-Accute" parent="RShift"/>
+<state name="RShift-Accute-Lower" parent="Normal"/>
+<state name="RShift-Caps-Accute" parent="Caps"/>
+<state name="RShift-Caps-Accute-Upper" parent="RShift-Caps"/>
+
+<state name="RShift-Grave" parent="RShift"/>
+<state name="RShift-Grave-Lower" parent="Normal"/>
+<state name="RShift-Caps-Grave" parent="Caps"/>
+<state name="RShift-Caps-Grave-Upper" parent="RShift-Caps"/>
+
+<state name="RShift-Circumflex" parent="RShift"/>
+<state name="RShift-Circumflex-Lower" parent="Normal"/>
+<state name="RShift-Caps-Circumflex" parent="Caps"/>
+<state name="RShift-Caps-Circumflex-Upper" parent="RShift-Caps"/>
+
+<state name="RShift-Cedilla" parent="RShift"/>
+<state name="RShift-Cedilla-Lower" parent="Normal"/>
+<state name="RShift-Caps-Cedilla" parent="Caps"/>
+<state name="RShift-Caps-Cedilla-Upper" parent="RShift-Caps"/>
+
+<state name="RShift-Ligature" parent="RShift"/>
+<state name="RShift-Ligature-Lower" parent="Normal"/>
+<state name="RShift-Caps-Ligature" parent="Caps"/>
+<state name="RShift-Caps-Ligature-Upper" parent="RShift-Caps"/>
+
+<state name="RShift-Trema" parent="RShift"/>
+<state name="RShift-Trema-Lower" parent="Normal"/>
+<state name="RShift-Caps-Trema" parent="Caps"/>
+<state name="RShift-Caps-Trema-Upper" parent="RShift-Caps"/>
+
+<state name="RShift-Tilde" parent="RShift"/>
+<state name="RShift-Tilde-Lower" parent="Normal"/>
+<state name="RShift-Caps-Tilde" parent="Caps"/>
+<state name="RShift-Caps-Tilde-Upper" parent="RShift-Caps"/>
+
+<state name="RShift-Inversed" parent="RShift"/>
+<state name="RShift-Caps-Inversed" parent="Caps"/>
+
+
+
+<!-- TO BE PLACED INTO COMMON -->
+<!-- START: EXTENDED KEY NAVIGATION -->
+<state name="LShift">
+	<map keycode="Left" pressed="true">
+		<event keycode="Home" unicode="-1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Left" pressed="false">
+		<event keycode="Home" unicode="-1" pressed="false"/>
+	</map>
+	
+	<map keycode="Up" pressed="true">
+		<event keycode="PageUp" unicode="-1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Up" pressed="false">
+		<event keycode="PageUp" unicode="-1" pressed="false"/>
+	</map>
+	
+	<map keycode="Right" pressed="true">
+		<event keycode="End" unicode="-1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Right" pressed="false">
+		<event keycode="End" unicode="-1" pressed="false"/>
+	</map>
+	
+	<map keycode="Down" pressed="true">
+		<event keycode="PageDown" unicode="-1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Down" pressed="false">
+		<event keycode="PageDown" unicode="-1" pressed="false"/>
+	</map>
+</state>
+<state name="RShift">
+	<map keycode="Left" pressed="true">
+		<event keycode="Home" unicode="-1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Left" pressed="false">
+		<event keycode="Home" unicode="-1" pressed="false"/>
+	</map>
+	
+	<map keycode="Up" pressed="true">
+		<event keycode="PageUp" unicode="-1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Up" pressed="false">
+		<event keycode="PageUp" unicode="-1" pressed="false"/>
+	</map>
+	
+	<map keycode="Right" pressed="true">
+		<event keycode="End" unicode="-1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Right" pressed="false">
+		<event keycode="End" unicode="-1" pressed="false"/>
+	</map>
+	
+	<map keycode="Down" pressed="true">
+		<event keycode="PageDown" unicode="-1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Down" pressed="false">
+		<event keycode="PageDown" unicode="-1" pressed="false"/>
+	</map>
+</state>
+<!-- END: EXTENDED KEY NAVIGATION -->
+
+
+
+<!-- RShift activate dead keys -->
+<state name="RShift">
+	<map keycode="Slash" pressed="true">
+		<next-state name="RShift-Accute"/>
+	</map>
+	<map keycode="Apostrophe" pressed="true">
+		<next-state name="RShift-Grave"/>
+	</map>
+	<map keycode="Comma" pressed="true">
+		<next-state name="RShift-Cedilla"/>
+	</map>
+	<map keycode="J" pressed="true">
+		<next-state name="RShift-Ligature"/>
+	</map>
+	<map keycode="V" pressed="true">
+		<next-state name="RShift-Circumflex"/>
+	</map>
+	<map keycode="B" pressed="true">
+		<next-state name="RShift-Trema"/>
+	</map>
+	<map keycode="M" pressed="true">
+		<next-state name="RShift-Tilde"/>
+	</map>
+	<map keycode="I" pressed="true">
+		<next-state name="RShift-Inversed"/>
+	</map>
+</state>
+
+
+<!-- RShift activate dead keys in CAPS mode -->
+<state name="RShift-Caps">
+	<map keycode="Slash" pressed="true">
+		<next-state name="RShift-Caps-Accute"/>
+	</map>
+	<map keycode="Apostrophe" pressed="true">
+		<next-state name="RShift-Caps-Grave"/>
+	</map>
+	<map keycode="Comma" pressed="true">
+		<next-state name="RShift-Caps-Cedilla"/>
+	</map>
+	<map keycode="J" pressed="true">
+		<next-state name="RShift-Caps-Ligature"/>
+	</map>
+	<map keycode="V" pressed="true">
+		<next-state name="RShift-Caps-Circumflex"/>
+	</map>
+	<map keycode="B" pressed="true">
+		<next-state name="RShift-Caps-Trema"/>
+	</map>
+	<map keycode="M" pressed="true">
+		<next-state name="RShift-Caps-Tilde"/>
+	</map>
+	<map keycode="I" pressed="true">
+		<next-state name="RShift-Caps-Inversed"/>
+	</map>
+</state>
+
+
+<!-- Accute Accentuated Upper-Case Characters: Á, É... because we still press Shift -->
+<state name="RShift-Accute">
+	<!-- RS + (/) + A = Á -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC1" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC1" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (/) + E = É -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xC9" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xC9" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (/) + I = Í -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xCD" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xCD" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (/) + O = Ó -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xD3" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xD3" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (/) + U = Ú -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xDA" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xDA" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (/) + Y = Ý -->
+	<map keycode="Y" pressed="true">
+		<event keycode="Y" unicode="0xDD" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="Y" pressed="false">
+		<event keycode="Y" unicode="0xDD" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Release shift to do lower-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Accute-Lower"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Accute-Lower"/>
+	</map>
+
+	<!-- Abort operation: print ´ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Slash" unicode="0xB4" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Slash" unicode="0xB4" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Accute Accentuated Lower-Case Characters: á, é... because we have released RShift -->
+<state name="RShift-Accute-Lower">
+	<!-- RS + (/) + A = á -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE1" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (/) + E = é -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xE9" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xE9" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (/) + I = í -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xED" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xED" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (/) + O = ó -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xF3" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xF3" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (/) + U = ú -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xFA" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xFA" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (/) + Y = ý -->
+	<map keycode="Y" pressed="true">
+		<event keycode="Y" unicode="0xFD" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Y" pressed="false">
+		<event keycode="Y" unicode="0xFD" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Simple shift second time goes Upper-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Accute"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Accute"/>
+	</map>
+
+	<!-- Abort operation: print ´ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Slash" unicode="0xB4" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Slash" unicode="0xB4" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Accute Accentuated Lower-Case Characters: á, é... because we still press Shift and we are in Caps -->
+<state name="RShift-Caps-Accute">
+	<!-- Caps + RS + (/) + A = á -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE1" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (/) + E = é -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xE9" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xE9" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (/) + I = í -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xED" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xED" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (/) + O = ó -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xF3" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xF3" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (/) + U = ú -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xFA" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xFA" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (/) + Y = ý -->
+	<map keycode="Y" pressed="true">
+		<event keycode="Y" unicode="0xFD" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Y" pressed="false">
+		<event keycode="Y" unicode="0xFD" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Release shift to go upper-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Caps-Accute-Upper"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Caps-Accute-Upper"/>
+	</map>
+
+	<!-- Abort operation: print ´ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Slash" unicode="0xB4" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Slash" unicode="0xB4" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+<!-- Accute Accentuated Upper-Case Characters: Á, É... because we have released RShift but we are in Caps -->
+<state name="RShift-Caps-Accute-Upper">
+	<!-- Caps + RS + (/) + A = Á -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC1" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC1" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (/) + E = É -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xC9" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xC9" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (/) + I = Í -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xCD" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xCD" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (/) + O = Ó -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xD3" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xD3" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (/) + U = Ú -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xDA" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xDA" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (/) + Y = Ý -->
+	<map keycode="Y" pressed="true">
+		<event keycode="Y" unicode="0xDD" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="Y" pressed="false">
+		<event keycode="Y" unicode="0xDD" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Simple shift second time goes Lower-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Caps-Accute"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Caps-Accute"/>
+	</map>
+
+	<!-- Abort operation: print ´ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Slash" unicode="0xB4" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Slash" unicode="0xB4" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+
+
+<!-- Grave Accentuated Upper-Case Characters: À, È, Ì... because we still press Shift -->
+<state name="RShift-Grave">
+	<!-- RS + (') + A = À -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC0" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC0" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (') + E = È -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xC8" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xC8" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (') + I = Ì -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xCC" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xCC" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (') + O = Ò -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xD2" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xD2" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (') + U = Ù -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xD9" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xD9" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Release shift to do lower-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Grave-Lower"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Grave-Lower"/>
+	</map>
+
+	<!-- Abort operation: print ` -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Apostrophe" unicode="0x60" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Apostrophe" unicode="0x60" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Grave Accentuated Lower-Case Characters: à, è, ì... because we have released RShift -->
+<state name="RShift-Grave-Lower">
+	<!-- RS + (') + A = à -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE0" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (') + E = è -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xE8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xE8" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (') + I = ì -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xEC" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xEC" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (') + O = ò -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xF2" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xF2" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (') + U = ù -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xF9" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xF9" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Simple shift second time goes Upper-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Grave"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Grave"/>
+	</map>
+
+	<!-- Abort operation: print ` -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Apostrophe" unicode="0x60" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Apostrophe" unicode="0x60" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Grave Accentuated Lower-Case Characters: à, è... because we still press Shift and we are in Caps -->
+<state name="RShift-Caps-Grave">
+	<!-- Caps + RS + (') + A = à -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE0" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE0" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (') + E = è -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xE8" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xE8" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (') + I = ì -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xEC" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xEC" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (') + O = ò -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xF2" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xF2" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (') + U = ú -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xF9" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xF9" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Release shift to go upper-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Caps-Grave-Upper"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Caps-Grave-Upper"/>
+	</map>
+
+	<!-- Abort operation: print ` -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Apostrophe" unicode="0x60" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Apostrophe" unicode="0x60" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+<!-- Grave Accentuated Upper-Case Characters: À, È, Ì... because we have released RShift and we are in Caps -->
+<state name="RShift-Caps-Grave-Upper">
+	<!-- Caps + RS + (') + A = À -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC0" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC0" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (') + E = È -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xC8" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xC8" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (') + I = Ì -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xCC" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xCC" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (') + O = Ò -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xD2" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xD2" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (') + U = Ù -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xD9" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xD9" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Simple shift second time goes Lower-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Caps-Grave"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Caps-Grave"/>
+	</map>
+
+	<!-- Abort operation: print ` -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Apostrophe" unicode="0x60" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Apostrophe" unicode="0x60" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+
+
+<!-- Circumflex Accentuated Upper-Case Characters: Â, Ê, Î... because we still press Shift -->
+<state name="RShift-Circumflex">
+	<!-- RS + (V) + A = Â -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC2" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC2" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (V) + E = Ê -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xCA" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xCA" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (V) + I = Î -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xCE" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xCE" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (V) + O = Ô -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xD4" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xD4" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (V) + U = Û -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xDB" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xDB" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Release shift to do lower-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Circumflex-Lower"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Circumflex-Lower"/>
+	</map>
+
+	<!-- Abort operation: print ^ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="V" unicode="0x5E" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="V" unicode="0x5E" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Circumflex Accentuated Lower-Case Characters: â, ê, î... because we have released RShift -->
+<state name="RShift-Circumflex-Lower">
+	<!-- RS + (V) + A = â -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE2" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE2" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (V) + E = ê -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xEA" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xEA" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (V) + I = î -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xEE" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xEE" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (V) + O = ô -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xF4" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xF4" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (V) + U = û -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xFB" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xFB" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Simple shift second time goes Upper-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Circumflex"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Circumflex"/>
+	</map>
+
+	<!-- Abort operation: print ^ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="V" unicode="0x5E" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="V" unicode="0x5E" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Circumflex Accentuated Lower-Case Characters: â, ê... because we still press Shift and we are in Caps -->
+<state name="RShift-Caps-Circumflex">
+	<!-- Caps + RS + (V) + A = â -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE2" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE2" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (V) + E = ê -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xEA" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xEA" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (V) + I = î -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xEE" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xEE" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (V) + O = ô -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xF4" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xF4" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (V) + U = û -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xFB" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xFB" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Release shift to go upper-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Caps-Circumflex-Upper"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Caps-Circumflex-Upper"/>
+	</map>
+
+	<!-- Abort operation: print ^ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="V" unicode="0x5E" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="V" unicode="0x5E" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+<!-- Circumflex Accentuated Upper-Case Characters: Â, Ê, Î... because we have released RShift and we are in Caps -->
+<state name="RShift-Caps-Circumflex-Upper">
+	<!-- Caps + RS + (V) + A = Â -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC2" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC2" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (V) + E = Ê -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xCA" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xCA" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (V) + I = Î -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xCE" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xCE" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (V) + O = Ô -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xD4" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xD4" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (V) + U = Û -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xDB" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xDB" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Simple shift second time goes Lower-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Caps-Circumflex"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Caps-Circumflex"/>
+	</map>
+
+	<!-- Abort operation: print ^ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="V" unicode="0x5E" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="V" unicode="0x5E" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+
+
+<!-- Cedilla Upper-Case Characters: Ç... because we still press Shift -->
+<state name="RShift-Cedilla">
+	<!-- RS + (,) + C = Ç -->
+	<map keycode="C" pressed="true">
+		<event keycode="C" unicode="0xC7" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="C" pressed="false">
+		<event keycode="C" unicode="0xC7" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Release shift to do lower-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Cedilla-Lower"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Cedilla-Lower"/>
+	</map>
+
+	<!-- Abort operation: print ¸ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Comma" unicode="0xB8" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Comma" unicode="0xB8" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Cedilla Lower-Case Characters: ç... because we have released RShift -->
+<state name="RShift-Cedilla-Lower">
+	<!-- RS + (,) + C = ç -->
+	<map keycode="C" pressed="true">
+		<event keycode="C" unicode="0xE7" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="C" pressed="false">
+		<event keycode="C" unicode="0xE7" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Simple shift second time goes Upper-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Cedilla"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Cedilla"/>
+	</map>
+
+	<!-- Abort operation: print ¸ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Comma" unicode="0xB8" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Comma" unicode="0xB8" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Cedilla Lower-Case Characters: ç... because we still press Shift and we are in Caps -->
+<state name="RShift-Caps-Cedilla">
+	<!-- Caps + RS + (,) + C = ç -->
+	<map keycode="C" pressed="true">
+		<event keycode="C" unicode="0xE7" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="C" pressed="false">
+		<event keycode="C" unicode="0xE7" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Release shift to go upper-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Caps-Cedilla-Upper"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Caps-Cedilla-Upper"/>
+	</map>
+
+	<!-- Abort operation: print ¸ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Comma" unicode="0xB8" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Comma" unicode="0xB8" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+<!-- Cedilla Upper-Case Characters: Ç... because we have released RShift but we are in Caps -->
+<state name="RShift-Caps-Cedilla-Upper">
+	<!-- Caps + RS + (,) + C = Ç -->
+	<map keycode="C" pressed="true">
+		<event keycode="C" unicode="0xC7" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="C" pressed="false">
+		<event keycode="C" unicode="0xC7" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Simple shift second time goes Lower-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Caps-Cedilla"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Caps-Cedilla"/>
+	</map>
+
+	<!-- Abort operation: print ¸ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="Comma" unicode="0xB8" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="Comma" unicode="0xB8" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+
+
+<!-- Ligatured Upper-Case Characters: Æ, Œ ... because we still press Shift -->
+<state name="RShift-Ligature">
+	<!-- RS + (J) + A = Æ -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC6" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC6" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (J) + O = Œ -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0x152" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0x152" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Release shift to do lower-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Ligature-Lower"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Ligature-Lower"/>
+	</map>
+
+	<!-- Abort operation: print J -->
+	<map keycode="Space" pressed="true">
+		<event keycode="J" unicode="0x4A" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="J" unicode="0x4A" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Ligatured Lower-Case Characters: æ, œ... because we have released RShift -->
+<state name="RShift-Ligature-Lower">
+	<!-- RS + (J) + A = æ -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE6" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE6" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (J) + O = œ -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0x153" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0x153" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Simple shift second time goes Upper-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Ligature"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Ligature"/>
+	</map>
+
+	<!-- Abort operation: print j -->
+	<map keycode="Space" pressed="true">
+		<event keycode="J" unicode="0x6A" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="J" unicode="0x6A" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Ligatured Lower-Case Characters: æ, œ... because we still press Shift and we are in Caps -->
+<state name="RShift-Caps-Ligature">
+	<!-- Caps + RS + (J) + A = æ -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE6" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE6" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (J) + O = œ -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0x153" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0x153" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Release shift to go upper-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Caps-Ligature-Upper"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Caps-Ligature-Upper"/>
+	</map>
+
+	<!-- Abort operation: print j -->
+	<map keycode="Space" pressed="true">
+		<event keycode="J" unicode="0x6A" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="J" unicode="0x6A" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+<!-- Ligatured Upper-Case Characters: Æ, Œ... because we have released RShift but we are in Caps -->
+<state name="RShift-Caps-Ligature-Upper">
+	<!-- Caps + RS + (J) + A = Æ -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC6" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC6" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (J) + O = Œ -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0x152" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0x152" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Simple shift second time goes Lower-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Caps-Ligature"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Caps-Ligature"/>
+	</map>
+
+	<!-- Abort operation: print J -->
+	<map keycode="Space" pressed="true">
+		<event keycode="J" unicode="0x4A" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="J" unicode="0x4A" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+
+
+<!-- Trema Accentuated Upper-Case Characters: Ä, Ë... because we still press Shift -->
+<state name="RShift-Trema">
+	<!-- RS + (B) + A = Ä -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC4" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC4" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (B) + E = Ë -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xCB" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xCB" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (B) + I = Ï -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xCF" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xCF" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (B) + O = Ö -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xD6" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xD6" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (B) + U = Ü -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xDC" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xDC" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Release shift to do lower-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Trema-Lower"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Trema-Lower"/>
+	</map>
+
+	<!-- Abort operation: print ¨ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="B" unicode="0xA8" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="B" unicode="0xA8" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Trema Accentuated Lower-Case Characters: ä, ë... because we have released RShift -->
+<state name="RShift-Trema-Lower">
+	<!-- RS + (B) + A = ä -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE4" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE4" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (B) + E = ë -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xEB" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xEB" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (B) + I = ï -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xEF" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xEF" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (B) + O = ö -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xF6" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xF6" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (B) + U = ü -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xFC" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xFC" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (B) + Y = ÿ -->
+	<map keycode="Y" pressed="true">
+		<event keycode="Y" unicode="0xFF" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Y" pressed="false">
+		<event keycode="Y" unicode="0xFF" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Simple shift second time goes Upper-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Trema"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Trema"/>
+	</map>
+
+	<!-- Abort operation: print ¨ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="B" unicode="0xA8" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="B" unicode="0xA8" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Trema Accentuated Lower-Case Characters: ä, ë... because we still press Shift and we are in Caps -->
+<state name="RShift-Caps-Trema">
+	<!-- Caps + RS + (B) + A = ä -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE4" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE4" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (B) + E = ë -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xEB" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xEB" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (B) + I = ï -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xEF" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xEF" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (B) + O = ö -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xF6" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xF6" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (B) + U = ü -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xFC" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xFC" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (B) + Y = ÿ -->
+	<map keycode="Y" pressed="true">
+		<event keycode="Y" unicode="0xFF" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Y" pressed="false">
+		<event keycode="Y" unicode="0xFF" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Release shift to go upper-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Caps-Trema-Upper"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Caps-Trema-Upper"/>
+	</map>
+
+	<!-- Abort operation: print ¨ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="B" unicode="0xA8" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="B" unicode="0xA8" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+<!-- Trema Accentuated Upper-Case Characters: Ä, Ë... because we have released RShift but we are in Caps -->
+<state name="RShift-Caps-Trema-Upper">
+	<!-- Caps + RS + (B) + A = Ä -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC4" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC4" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (B) + E = Ë -->
+	<map keycode="E" pressed="true">
+		<event keycode="E" unicode="0xCB" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="E" pressed="false">
+		<event keycode="E" unicode="0xCB" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (B) + I = Ï -->
+	<map keycode="I" pressed="true">
+		<event keycode="I" unicode="0xCF" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="I" pressed="false">
+		<event keycode="I" unicode="0xCF" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (B) + O = Ö -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xD6" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xD6" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (B) + U = Ü -->
+	<map keycode="U" pressed="true">
+		<event keycode="U" unicode="0xDC" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="U" pressed="false">
+		<event keycode="U" unicode="0xDC" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Simple shift second time goes Lower-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Caps-Trema"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Caps-Trema"/>
+	</map>
+
+	<!-- Abort operation: print ¨ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="B" unicode="0xA8" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="B" unicode="0xA8" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+
+
+<!-- Tilde Upper-Case Characters: Ã, Ñ... because we still press Shift -->
+<state name="RShift-Tilde">
+	<!-- RS + (N) + A = Ã -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC3" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC3" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (N) + N = Ñ -->
+	<map keycode="N" pressed="true">
+		<event keycode="N" unicode="0xD1" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="N" pressed="false">
+		<event keycode="N" unicode="0xD1" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (N) + O = Õ -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xD5" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xD5" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Release shift to do lower-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Tilde-Lower"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Tilde-Lower"/>
+	</map>
+
+	<!-- Abort operation: print ~ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="N" unicode="0x7E" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="N" unicode="0x7E" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Tilde Lower-Case Characters: ã, ñ, õ... because we have released RShift -->
+<state name="RShift-Tilde-Lower">
+	<!-- RS + (N) + A = ã -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE3" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE3" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (N) + N = ñ -->
+	<map keycode="N" pressed="true">
+		<event keycode="N" unicode="0xF1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="N" pressed="false">
+		<event keycode="N" unicode="0xF1" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (N) + O = õ -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xF5" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xF5" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Simple shift second time goes Upper-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Tilde"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Tilde"/>
+	</map>
+
+	<!-- Abort operation: print ¨ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="B" unicode="0xA8" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="B" unicode="0xA8" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Tilde Lower-Case Characters: ã, ñ, õ... because we still press Shift and we are in Caps -->
+<state name="RShift-Caps-Tilde">
+	<!-- Caps + RS + (N) + A = ã -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xE3" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xE3" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (N) + N = ñ -->
+	<map keycode="N" pressed="true">
+		<event keycode="N" unicode="0xF1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="N" pressed="false">
+		<event keycode="N" unicode="0xF1" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (N) + O = õ -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xF5" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xF5" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Release shift to go upper-case -->
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Caps-Tilde-Upper"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Caps-Tilde-Upper"/>
+	</map>
+
+	<!-- Abort operation: print ~ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="N" unicode="0x7E" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="N" unicode="0x7E" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+<!-- Tilde Upper-Case Characters: Ã, Ñ, Õ... because we have released RShift but we are in Caps -->
+<state name="RShift-Caps-Tilde-Upper">
+	<!-- Caps + RS + (N) + A = Ã -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xC3" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xC3" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (N) + N = Ñ -->
+	<map keycode="N" pressed="true">
+		<event keycode="N" unicode="0xD1" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="N" pressed="false">
+		<event keycode="N" unicode="0xD1" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (N) + O = Õ -->
+	<map keycode="O" pressed="true">
+		<event keycode="O" unicode="0xD5" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="O" pressed="false">
+		<event keycode="O" unicode="0xD5" pressed="false" modifiers="Shift"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Simple shift second time goes Lower-Case -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Caps-Tilde"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Caps-Tilde"/>
+	</map>
+
+	<!-- Abort operation: print ~ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="N" unicode="0x7E" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="N" unicode="0x7E" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+
+
+<!-- Inversed Characters: ¡, ¿... -->
+<state name="RShift-Inversed">
+	<!-- RS + (I) + A = ¡ -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xA1" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xA1" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- RS + (I) + / = ¿ -->
+	<map keycode="Slash" pressed="true">
+		<event keycode="Slash" unicode="0xBF" pressed="true" modifiers="Shift" autorepeat="true"/>
+	</map>
+	<map keycode="N" pressed="false">
+		<event keycode="N" unicode="0xBF" pressed="false" modifiers="Shift"/>
+		<next-state name="Normal"/>
+	</map>
+
+	<!-- Shift has no action -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Inversed"/>
+	</map>
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Inversed"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Inversed"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Inversed"/>
+	</map>
+
+	<!-- Abort operation: print ¬ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="I" unicode="0xAC" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="I" unicode="0xAC" pressed="false"/>
+		<next-state name="Normal"/>
+	</map>
+</state>
+
+
+<!-- Inversed Characters: ¡, ¿... -->
+<state name="RShift-Caps-Inversed">
+	<!-- Caps + RS + (I) + A = ¡ -->
+	<map keycode="A" pressed="true">
+		<event keycode="A" unicode="0xA1" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="A" pressed="false">
+		<event keycode="A" unicode="0xA1" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Caps + RS + (I) + / = ¿ -->
+	<map keycode="Slash" pressed="true">
+		<event keycode="Slash" unicode="0xBF" pressed="true" autorepeat="true"/>
+	</map>
+	<map keycode="Slash" pressed="false">
+		<event keycode="Slash" unicode="0xBF" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+
+	<!-- Shift has no effect -->
+	<map keycode="Right Shift" pressed="true">
+		<next-state name="RShift-Caps-Inversed"/>
+	</map>
+	<map keycode="Right Shift" pressed="false">
+		<next-state name="RShift-Caps-Inversed"/>
+	</map>
+	<map keycode="Left Shift" pressed="true">
+		<event keycode="Shift" unicode="-1" pressed="true" modifiers="Shift"/>
+		<next-state name="RShift-Caps-Inversed"/>
+	</map>
+	<map keycode="Left Shift" pressed="false">
+		<event keycode="Shift" unicode="-1" pressed="false"/>
+		<next-state name="RShift-Caps-Inversed"/>
+	</map>
+
+	<!-- Abort operation: print ¬ -->
+	<map keycode="Space" pressed="true">
+		<event keycode="I" unicode="0xAC" pressed="true" autorepeat="false"/>
+	</map>
+	<map keycode="Space" pressed="false">
+		<event keycode="I" unicode="0xAC" pressed="false"/>
+		<next-state name="Caps"/>
+	</map>
+</state>
+
+
+</keymap>

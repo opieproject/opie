@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=keyz configurator
+Exec=keyz-cfg
+Icon=keyz-cfg
+Type=Application
+Name=keyz configurator

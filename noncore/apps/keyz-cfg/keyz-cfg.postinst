@@ -1,0 +1,3 @@
+#!/bin/sh
+
+test -f $OPIEDIR/share/zkb/zkb.xml || cp $OPIEDIR/share/zkb/zkb.xml.sample $OPIEDIR/share/zkb/zkb.xml
