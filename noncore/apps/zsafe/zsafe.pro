@@ -10,7 +10,7 @@ SOURCES      = main.cpp zsafe.cpp krc2.cpp category.cpp \
 INTERFACES     = newdialog.ui searchdialog.ui passworddialog.ui categorydialog.ui infoform.ui wait.ui
 INCLUDEPATH    += $(OPIEDIR)/include
 DEPENDPATH    += $(OPIEDIR)/include
-LIBS        += -Wl,-rpath,$(OPIEDIR)/lib -L$(OPIEDIR)/lib -lqpe -lopieui2
+LIBS        += -Wl,-rpath,$(OPIEDIR)/lib -L$(OPIEDIR)/lib -lqpe -lopiecore2 -lopieui2
 TARGET         = zsafe
 
 include ( $(OPIEDIR)/include.pro )
