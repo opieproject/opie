@@ -1,9 +1,0 @@
-Files: plugins/applets/libcardmonapplet.so* pics/cardmon/pcmcia.png
-Priority: optional
-Section: opie/taskbar
-Maintainer: Devin Butterfield <dbutter@wireless.net>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: CF/PCMCIA Card Monitor applet
- CF/PCMCIA Card Monitor applet for the Opie environment taskbar.
