@@ -34,6 +34,7 @@ TRANSLATIONS    = ../../i18n/pt_BR/libqhandwriting.ts
 TRANSLATIONS   += ../../i18n/de/libqhandwriting.ts
 TRANSLATIONS   += ../../i18n/en/libqhandwriting.ts
 TRANSLATIONS   += ../../i18n/hu/libqhandwriting.ts
+TRANSLATIONS   += ../../i18n/pl/libqhandwriting.ts
 TRANSLATIONS   += ../../i18n/sl/libqhandwriting.ts
 TRANSLATIONS   += ../../i18n/ja/libqhandwriting.ts
 TRANSLATIONS   += ../../i18n/ko/libqhandwriting.ts

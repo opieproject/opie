@@ -17,6 +17,7 @@ TRANSLATIONS   += ../i18n/hu/wordgame.ts
 TRANSLATIONS   += ../i18n/sl/wordgame.ts
 TRANSLATIONS   += ../i18n/ja/wordgame.ts
 TRANSLATIONS   += ../i18n/ko/wordgame.ts
+TRANSLATIONS   += ../i18n/pl/wordgame.ts
 TRANSLATIONS   += ../i18n/no/wordgame.ts
 TRANSLATIONS   += ../i18n/zh_CN/wordgame.ts
 TRANSLATIONS   += ../i18n/zh_TW/wordgame.ts

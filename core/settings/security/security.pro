@@ -16,6 +16,7 @@ TRANSLATIONS   += ../../i18n/hu/security.ts
 TRANSLATIONS   += ../../i18n/sl/security.ts
 TRANSLATIONS   += ../../i18n/ja/security.ts
 TRANSLATIONS   += ../../i18n/ko/security.ts
+TRANSLATIONS   += ../../i18n/pl/security.ts
 TRANSLATIONS   += ../../i18n/no/security.ts
 TRANSLATIONS   += ../../i18n/zh_CN/security.ts
 TRANSLATIONS   += ../../i18n/zh_TW/security.ts

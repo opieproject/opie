@@ -20,6 +20,7 @@ TRANSLATIONS   += ../../i18n/de/libqdvorak.ts
 TRANSLATIONS   += ../../i18n/en/libqdvorak.ts
 TRANSLATIONS   += ../../i18n/hu/libqdvorak.ts
 TRANSLATIONS   += ../../i18n/sl/libqdvorak.ts
+TRANSLATIONS   += ../../i18n/pl/libqdvorak.ts
 TRANSLATIONS   += ../../i18n/ja/libqdvorak.ts
 TRANSLATIONS   += ../../i18n/ko/libqdvorak.ts
 TRANSLATIONS   += ../../i18n/no/libqdvorak.ts

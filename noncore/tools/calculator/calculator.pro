@@ -15,6 +15,7 @@ TRANSLATIONS   += ../i18n/de/calculator.ts
 TRANSLATIONS   += ../i18n/en/calculator.ts
 TRANSLATIONS   += ../i18n/sl/calculator.ts
 TRANSLATIONS   += ../i18n/hu/calculator.ts
+TRANSLATIONS   += ../i18n/pl/calculator.ts
 TRANSLATIONS   += ../i18n/ja/calculator.ts
 TRANSLATIONS   += ../i18n/fr/calculator.ts
 TRANSLATIONS   += ../i18n/ko/calculator.ts

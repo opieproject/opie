@@ -17,6 +17,7 @@ TRANSLATIONS   += ../../i18n/en/libmadplugin.ts
 TRANSLATIONS   += ../../i18n/hu/libmadplugin.ts
 TRANSLATIONS   += ../../i18n/sl/libmadplugin.ts
 TRANSLATIONS   += ../../i18n/ja/libmadplugin.ts
+TRANSLATIONS   += ../../i18n/pl/libmadplugin.ts
 TRANSLATIONS   += ../../i18n/ko/libmadplugin.ts
 TRANSLATIONS   += ../../i18n/no/libmadplugin.ts
 TRANSLATIONS   += ../../i18n/zh_CN/libmadplugin.ts

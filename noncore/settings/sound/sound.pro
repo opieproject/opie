@@ -14,6 +14,7 @@ TRANSLATIONS   += ../../i18n/de/sound.ts
 TRANSLATIONS   += ../../i18n/en/sound.ts
 TRANSLATIONS   += ../../i18n/hu/sound.ts
 TRANSLATIONS   += ../../i18n/sl/sound.ts
+TRANSLATIONS   += ../../i18n/pl/sound.ts
 TRANSLATIONS   += ../../i18n/ja/sound.ts
 TRANSLATIONS   += ../../i18n/ko/sound.ts
 TRANSLATIONS   += ../../i18n/no/sound.ts

@@ -22,6 +22,7 @@ TRANSLATIONS   += ../../i18n/hu/libqkeyboard.ts
 TRANSLATIONS   += ../../i18n/sl/libqkeyboard.ts
 TRANSLATIONS   += ../../i18n/ja/libqkeyboard.ts
 TRANSLATIONS   += ../../i18n/ko/libqkeyboard.ts
+TRANSLATIONS   += ../../i18n/pl/libqkeyboard.ts
 TRANSLATIONS   += ../../i18n/no/libqkeyboard.ts
 TRANSLATIONS   += ../../i18n/zh_CN/libqkeyboard.ts
 TRANSLATIONS   += ../../i18n/zh_TW/libqkeyboard.ts

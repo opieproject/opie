@@ -14,6 +14,7 @@ TRANSLATIONS    = ../i18n/pt_BR/qipkg.ts
 TRANSLATIONS   += ../i18n/de/qipkg.ts
 TRANSLATIONS   += ../i18n/en/qipkg.ts
 TRANSLATIONS   += ../i18n/hu/qipkg.ts
+TRANSLATIONS   += ../i18n/pl/qipkg.ts
 TRANSLATIONS   += ../i18n/sl/qipkg.ts
 TRANSLATIONS   += ../i18n/ja/qipkg.ts
 TRANSLATIONS   += ../i18n/ko/qipkg.ts

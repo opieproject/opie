@@ -21,6 +21,7 @@ TRANSLATIONS   += ../i18n/de/todolist.ts
 TRANSLATIONS   += ../i18n/en/todolist.ts
 TRANSLATIONS   += ../i18n/hu/todolist.ts
 TRANSLATIONS   += ../i18n/sl/todolist.ts
+TRANSLATIONS   += ../i18n/pl/todolist.ts
 TRANSLATIONS   += ../i18n/ja/todolist.ts
 TRANSLATIONS   += ../i18n/ko/todolist.ts
 TRANSLATIONS   += ../i18n/no/todolist.ts

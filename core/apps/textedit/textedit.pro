@@ -18,6 +18,7 @@ TRANSLATIONS   += ../i18n/hu/textedit.ts
 TRANSLATIONS   += ../i18n/fr/textedit.ts
 TRANSLATIONS   += ../i18n/ja/textedit.ts
 TRANSLATIONS   += ../i18n/sl/textedit.ts
+TRANSLATIONS   += ../i18n/pl/textedit.ts
 TRANSLATIONS   += ../i18n/ko/textedit.ts
 TRANSLATIONS   += ../i18n/no/textedit.ts
 TRANSLATIONS   += ../i18n/zh_CN/textedit.ts

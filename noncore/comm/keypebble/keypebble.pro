@@ -42,6 +42,7 @@ TRANSLATIONS   += ../i18n/en/keypebble.ts
 TRANSLATIONS   += ../i18n/hu/keypebble.ts
 TRANSLATIONS   += ../i18n/sl/keypebble.ts
 TRANSLATIONS   += ../i18n/fr/keypebble.ts
+TRANSLATIONS   += ../i18n/pl/keypebble.ts
 TRANSLATIONS   += ../i18n/ja/keypebble.ts
 TRANSLATIONS   += ../i18n/ko/keypebble.ts
 TRANSLATIONS   += ../i18n/no/keypebble.ts

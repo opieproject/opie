@@ -18,6 +18,7 @@ TRANSLATIONS   += ../i18n/de/dictionary.ts
 TRANSLATIONS   += ../i18n/en/dictionary.ts
 TRANSLATIONS   += ../i18n/hu/dictionary.ts
 TRANSLATIONS   += ../i18n/sl/dictionary.ts
+TRANSLATIONS   += ../i18n/pl/dictionary.ts
 TRANSLATIONS   += ../i18n/fr/dictionary.ts
 TRANSLATIONS   += ../i18n/ja/dictionary.ts
 TRANSLATIONS   += ../i18n/ko/dictionary.ts

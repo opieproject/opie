@@ -18,5 +18,6 @@ TRANSLATIONS   += ../../i18n/ja/libqunikeyboard.ts
 TRANSLATIONS   += ../../i18n/ko/libqunikeyboard.ts
 TRANSLATIONS   += ../../i18n/no/libqunikeyboard.ts
 TRANSLATIONS   += ../../i18n/zh_CN/libqunikeyboard.ts
+TRANSLATIONS   += ../../i18n/pl/libqunikeyboard.ts
 TRANSLATIONS   += ../../i18n/zh_TW/libqunikeyboard.ts
 TRANSLATIONS   += ../../i18n/fr/libqunikeyboard.ts

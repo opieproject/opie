@@ -30,6 +30,7 @@ TRANSLATIONS   += ../i18n/ja/mpegplayer.ts
 TRANSLATIONS   += ../i18n/sl/mpegplayer.ts
 TRANSLATIONS   += ../i18n/fr/mpegplayer.ts
 TRANSLATIONS   += ../i18n/ko/mpegplayer.ts
+TRANSLATIONS   += ../i18n/pl/mpegplayer.ts
 TRANSLATIONS   += ../i18n/no/mpegplayer.ts
 TRANSLATIONS   += ../i18n/zh_CN/mpegplayer.ts
 TRANSLATIONS   += ../i18n/zh_TW/mpegplayer.ts

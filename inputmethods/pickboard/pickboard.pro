@@ -12,6 +12,7 @@ VERSION		= 1.0.0
 TRANSLATIONS    = ../../i18n/pt_BR/libqpickboard.ts
 TRANSLATIONS   += ../../i18n/de/libqpickboard.ts
 TRANSLATIONS   += ../../i18n/en/libqpickboard.ts
+TRANSLATIONS   += ../../i18n/pl/libqpickboard.ts
 TRANSLATIONS   += ../../i18n/hu/libqpickboard.ts
 TRANSLATIONS   += ../../i18n/sl/libqpickboard.ts
 TRANSLATIONS   += ../../i18n/ja/libqpickboard.ts

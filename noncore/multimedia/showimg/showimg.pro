@@ -22,6 +22,7 @@ TRANSLATIONS   += ../i18n/en/showimg.ts
 TRANSLATIONS   += ../i18n/hu/showimg.ts
 TRANSLATIONS   += ../i18n/sl/showimg.ts
 TRANSLATIONS   += ../i18n/ja/showimg.ts
+TRANSLATIONS   += ../i18n/pl/showimg.ts
 TRANSLATIONS   += ../i18n/ko/showimg.ts
 TRANSLATIONS   += ../i18n/no/showimg.ts
 TRANSLATIONS   += ../i18n/zh_CN/showimg.ts

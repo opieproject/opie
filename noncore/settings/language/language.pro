@@ -14,6 +14,7 @@ TRANSLATIONS   += ../../i18n/de/language.ts
 TRANSLATIONS   += ../../i18n/en/language.ts
 TRANSLATIONS   += ../../i18n/hu/language.ts
 TRANSLATIONS   += ../../i18n/sl/language.ts
+TRANSLATIONS   += ../../i18n/pl/language.ts
 TRANSLATIONS   += ../../i18n/ja/language.ts
 TRANSLATIONS   += ../../i18n/ko/language.ts
 TRANSLATIONS   += ../../i18n/no/language.ts

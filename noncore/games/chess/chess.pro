@@ -17,6 +17,7 @@ TRANSLATIONS = ../i18n/pt_BR/chess.ts
 TRANSLATIONS   += ../i18n/de/chess.ts
 TRANSLATIONS   += ../i18n/en/chess.ts
 TRANSLATIONS   += ../i18n/fr/chess.ts
+TRANSLATIONS   += ../i18n/pl/chess.ts
 TRANSLATIONS   += ../i18n/sl/chess.ts
 TRANSLATIONS   += ../i18n/hu/chess.ts
 TRANSLATIONS   += ../i18n/ja/chess.ts

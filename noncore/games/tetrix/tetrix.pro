@@ -26,4 +26,5 @@ TRANSLATIONS   += ../i18n/ja/tetrix.ts
 TRANSLATIONS   += ../i18n/ko/tetrix.ts
 TRANSLATIONS   += ../i18n/no/tetrix.ts
 TRANSLATIONS   += ../i18n/zh_CN/tetrix.ts
+TRANSLATIONS   += ../i18n/pl/tetrix.ts
 TRANSLATIONS   += ../i18n/zh_TW/tetrix.ts

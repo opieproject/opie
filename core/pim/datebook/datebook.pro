@@ -45,6 +45,7 @@ TRANSLATIONS    = ../i18n/pt_BR/datebook.ts
 TRANSLATIONS   += ../i18n/de/datebook.ts
 TRANSLATIONS   += ../i18n/en/datebook.ts
 TRANSLATIONS   += ../i18n/hu/datebook.ts
+TRANSLATIONS   += ../i18n/pl/datebook.ts
 TRANSLATIONS   += ../i18n/sl/datebook.ts
 TRANSLATIONS   += ../i18n/ja/datebook.ts
 TRANSLATIONS   += ../i18n/ko/datebook.ts

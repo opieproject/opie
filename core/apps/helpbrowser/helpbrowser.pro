@@ -17,6 +17,7 @@ TRANSLATIONS   += ../i18n/ja/helpbrowser.ts
 TRANSLATIONS   += ../i18n/sl/helpbrowser.ts
 TRANSLATIONS   += ../i18n/ko/helpbrowser.ts
 TRANSLATIONS   += ../i18n/no/helpbrowser.ts
+TRANSLATIONS   += ../i18n/pl/helpbrowser.ts
 TRANSLATIONS   += ../i18n/fr/helpbrowser.ts
 TRANSLATIONS   += ../i18n/zh_CN/helpbrowser.ts
 TRANSLATIONS   += ../i18n/zh_TW/helpbrowser.ts

@@ -16,6 +16,7 @@ TRANSLATIONS   += ../i18n/sl/calc.ts
 TRANSLATIONS   += ../i18n/hu/calc.ts
 TRANSLATIONS   += ../i18n/fr/calc.ts
 TRANSLATIONS   += ../i18n/ja/calc.ts
+TRANSLATIONS   += ../i18n/pl/calc.ts
 TRANSLATIONS   += ../i18n/ko/calc.ts
 TRANSLATIONS   += ../i18n/no/calc.ts
 TRANSLATIONS   += ../i18n/zh_CN/calc.ts

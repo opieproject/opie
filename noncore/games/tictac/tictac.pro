@@ -18,6 +18,7 @@ TRANSLATIONS   += ../../i18n/sl/tictac.ts
 TRANSLATIONS   += ../../i18n/ja/tictac.ts
 TRANSLATIONS   += ../../i18n/ko/tictac.ts
 TRANSLATIONS   += ../../i18n/no/tictac.ts
+TRANSLATIONS   += ../../i18n/pl/tictac.ts
 TRANSLATIONS   += ../../i18n/zh_CN/tictac.ts
 TRANSLATIONS   += ../../i18n/zh_TW/tictac.ts
 TRANSLATIONS   += ../../i18n/fr/tictac.ts
