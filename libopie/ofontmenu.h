@@ -2,7 +2,7 @@
 /*
 
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 zekce <zecke@handhelds.org>
+             .=l.            Copyright (c)  2002 zecke <zecke@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This library is free software; you can 
 .> <`_,   >  .   <=          redistribute it and/or  modify it under

@@ -62,8 +62,6 @@ enum OLedState {
 class ODevice
 {
 public:
-
-public:
 	static ODevice *inst ( );
 
 // system	

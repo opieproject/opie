@@ -185,12 +185,8 @@ void OFileSelector::reread()
 
 const DocLnk *OFileSelector::selected()
 {
-  if( m_selector == NORMAL ){
-    return m_select->selected();
-  }else{
     DocLnk *lnk = new DocLnk(selectedDocument() );
     return lnk;
-  }
 }
 
 void OFileSelector::setYesCancelVisible( bool show )
@@ -326,9 +322,8 @@ QString OFileSelector::selectedName() const
 {
   QString name;
   if( m_selector == NORMAL ){
-    const DocLnk *lnk = m_select->selected();
-    name = lnk->file();
-    delete lnk;
+    DocLnk lnk = m_select->selectedDocument();
+    name = lnk.file();
   }else if( m_selector == EXTENDED || m_selector == EXTENDED_ALL ){
       if ( m_shLne ) {
           name = m_currentDir + "/" +m_edit->text();
@@ -401,9 +396,7 @@ DocLnk OFileSelector::selectedDocument() const
   DocLnk lnk;
   switch( m_selector ){
   case NORMAL:{
-    const DocLnk *lnk2 = m_select->selected();
-    lnk =  DocLnk(*lnk2 ); // copy
-    delete lnk2;
+    lnk = m_select->selectedDocument();
     break;
   }
   case EXTENDED:
