@@ -159,8 +159,6 @@ void MainWindow::refreshMailView(QList<RecMail>*list)
 void MainWindow::displayMail(QListViewItem*item)
 {
 
-    m_currentItem = item;
-
     if (!item) return;
     RecMail mail = ((MailListViewItem*)item)->data();
     RecBody body = folderView->fetchBody(mail);
@@ -180,8 +178,8 @@ void MainWindow::displayMail(QListViewItem*item)
 
 void MainWindow::slotDeleteMail()
 {
-    if (!m_currentItem) return;
-    RecMail mail = ((MailListViewItem*)m_currentItem)->data();
+    if (!mailView->currentItem()) return;
+    RecMail mail = ((MailListViewItem*)mailView->currentItem() )->data();
     mail.Wrapper()->deleteMail( mail );
     folderView->refreshCurrent();
 }

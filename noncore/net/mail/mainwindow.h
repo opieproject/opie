@@ -37,7 +37,6 @@ protected:
             *editSettings, *editAccounts, *syncFolders;
     AccountView *folderView;
     QListView *mailView;
-    QListViewItem* m_currentItem;
     QBoxLayout *layout;
 };
 
