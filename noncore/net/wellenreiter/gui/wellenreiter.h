@@ -59,6 +59,8 @@ class Wellenreiter : public WellenreiterBase {
     virtual void timerEvent( QTimerEvent* );
 
   public slots:
+    void initialTimer();
+
     void channelHopped(int);
     void receivePacket(OPacket*);
     void startClicked();

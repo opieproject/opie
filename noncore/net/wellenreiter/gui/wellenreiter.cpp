@@ -38,6 +38,7 @@ using namespace Opie;
 #else
 #include <qapplication.h>
 #endif
+#include <opie2/omanufacturerdb.h>
 #include <opie2/onetwork.h>
 #include <opie2/opcap.h>
 
@@ -52,6 +53,7 @@ using namespace Opie;
 #include <qobjectlist.h>
 #include <qregexp.h>
 #include <qspinbox.h>
+#include <qtimer.h>
 #include <qtoolbutton.h>
 #include <qmainwindow.h>
 
@@ -88,12 +90,22 @@ Wellenreiter::Wellenreiter( QWidget* parent )
     pcap = new OPacketCapturer();
 
     gps = new GPS( this );
+
+    QTimer::singleShot( 1000, this, SLOT( initialTimer() ) );
+
 }
 
 
 Wellenreiter::~Wellenreiter()
 {
     delete pcap;
+}
+
+
+void Wellenreiter::initialTimer()
+{
+    qDebug( "Wellenreiter::preloading manufacturer database..." );
+    OManufacturerDB::instance();
 }
 
 
