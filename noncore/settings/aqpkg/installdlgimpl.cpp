@@ -248,7 +248,8 @@ void InstallDlgImpl :: installSelected()
 //    btnInstall->setEnabled( true );
     btnInstall->setText( tr( "Close" ) );
 
-    displayAvailableSpace( destination->currentText() );
+    if ( destination->currentText() != 0 && destination->currentText() != "" )
+        displayAvailableSpace( destination->currentText() );
 }
 
 
