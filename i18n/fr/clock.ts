@@ -4,15 +4,15 @@
     <name>Clock</name>
     <message>
         <source>Snooze</source>
-        <translation>Faire du bruit</translation>
+        <translation>Rappel</translation>
     </message>
     <message>
         <source>Clock</source>
-        <translation>Horloge</translation>
+        <translation>Montre</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation>Arréter</translation>
+        <translation>Chrono</translation>
     </message>
     <message>
         <source>Start</source>
@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation>Définir l&apos;alarme</translation>
+        <translation>Définir le réveil</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -36,11 +36,11 @@
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation>Alarme active</translation>
+        <translation>Réveil actif</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation>Alarme inactive</translation>
+        <translation>Réveil inactif</translation>
     </message>
     <message>
         <source>Set date and time.</source>
@@ -48,14 +48,14 @@
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
-        <translation>Horloge: l&apos;alarme a été manquée.</translation>
+        <translation>Montre: l&apos;alarme a été manquée.</translation>
     </message>
 </context>
 <context>
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation>Définir l&apos;alarme</translation>
+        <translation>Définir le réveil</translation>
     </message>
     <message>
         <source>Hour</source>
@@ -76,12 +76,12 @@
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation>Délai avant de faire du bruit
+        <translation>Délai de rappel
 (minutes)</translation>
     </message>
     <message>
         <source>mp3 alarm</source>
-        <translation>alarme mp3</translation>
+        <translation>mp3</translation>
     </message>
     <message>
         <source>All</source>
