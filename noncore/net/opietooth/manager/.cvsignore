@@ -11,3 +11,5 @@ rfcommassigndialogbase.cpp
 rfcommassigndialogbase.h
 rfcommdialogitembase.cpp
 rfcommdialogitembase.h
+.moc*
+.obj

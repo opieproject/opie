@@ -1,0 +1,8 @@
+.moc*
+.obj
+Makefile
+OTMainGUI.h
+OTManageGUI.h
+OTPairingGUI.h
+OTScanGUI.h
+OTSniffGUI.h

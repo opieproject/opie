@@ -8,3 +8,5 @@ PPPGUI.cpp
 PPPGUI.h
 PPPIPGUI.cpp
 PPPIPGUI.h
+PPPDialingGUI.*
+PPPRunGUI.*

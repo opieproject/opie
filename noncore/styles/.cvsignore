@@ -1,3 +1,1 @@
-Makefile*
-*.moc
-.obj
+config.in

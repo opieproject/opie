@@ -3,8 +3,6 @@
 *.o
 .deps
 .libs
-.moc.cpp
-.moc.o
 .o
 Makefile*
 activateprofileGUI.cpp
@@ -15,3 +13,5 @@ editconnectionGUI.cpp
 editconnectionGUI.h
 networksettingsGUI.cpp
 networksettingsGUI.h
+.moc*
+.obj

@@ -3,3 +3,5 @@ Makefile.in
 moc*
 pindlgbase.cpp
 pindlgbase.h
+.moc*
+.obj
