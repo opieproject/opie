@@ -88,7 +88,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Multi-line untag </source>
-        <translation>Etiquette Multi-ligne</translation>
+        <translation>Untag multi-ligne</translation>
     </message>
 </context>
 <context>
