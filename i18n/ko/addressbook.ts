@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Gender</source>
-        <translation>성</translation>
+        <translation>성별</translation>
     </message>
 </context>
 <context>
@@ -73,7 +73,7 @@
     <name>AddressbookWindow</name>
     <message>
         <source>Contacts</source>
-        <translation>연락쳐들</translation>
+        <translation>주소록</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -121,9 +121,11 @@ neccessary startup files.
 
 Free up some space before
 entering data!</source>
-        <translation>필요한 시작 파일들을 만들 자리가 부족합니다.
+        <translation>필요한 시작 파일들을 만들 
+자리가 부족합니다.
 
-새 정보를 입력하기 전에 용량을 비우시기 바랍니다.</translation>
+새 정보를 입력하기 전에 용량을 
+비우시기 바랍니다.</translation>
     </message>
     <message>
         <source>View</source>
@@ -131,7 +133,7 @@ entering data!</source>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type='unfinished'>지금 싱크 중이므로 정보를 편집 할수 없습니다.</translation>
+        <translation>지금 싱크 중이므로, 정보를 편집 할수 없습니다.</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
@@ -290,7 +292,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Country</source>
-        <translation>도시</translation>
+        <translation>나라</translation>
     </message>
     <message>
         <source>Full Name...</source>
@@ -378,7 +380,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Contacts</source>
-        <translation>연락처들</translation>
+        <translation>주소록</translation>
     </message>
     <message>
         <source>Afganistan</source>
@@ -1266,7 +1268,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>집 국가</translation>
+        <translation type='unfinished'>집 국가</translation>
     </message>
     <message>
         <source>Department</source>
