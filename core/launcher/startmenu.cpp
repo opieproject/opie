@@ -148,12 +148,14 @@ void StartMenu::createAppEntry( QPopupMenu *menu, QDir dir, QString file )
 		    menu->insertSeparator();
     		delete applnk;
        	} else {
-       	    QPixmap test;
-            test.convertFromImage(
-                Resource::loadImage( applnk->icon() ).smoothScale(
-                    AppLnk::smallIconSize(), AppLnk::smallIconSize() ), 0 );
+                QPixmap test;
+                QImage img = Resource::loadImage( applnk->icon() );
+                if(!img.isNull() )
+                    test.convertFromImage(
+                           img.smoothScale(
+                            AppLnk::smallIconSize(), AppLnk::smallIconSize() ), 0 );
 
-	    	menu->insertItem( test, applnk->name(),
+                menu->insertItem( test, applnk->name(),
                               currentItem + APPLNK_ID_OFFSET );
             appLnks.insert( currentItem + APPLNK_ID_OFFSET, applnk );
             currentItem++;
