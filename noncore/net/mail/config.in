@@ -1,3 +1,4 @@
+ source noncore/net/mail/libmailwrapper/config.in
  config MAIL3
     boolean "opie-mail3 (a mail client)"
     default "y"
