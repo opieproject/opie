@@ -33,7 +33,7 @@ export LD_LIBRARY_PATH=$OPIEDIR/lib:$QTDIR/lib:$LD_LIBRARY_PATH
 
 You have to apply the qte<version>-all.patch to the Qt/Embedded
 sources and copy the qconfig-qpe.h file to $QTDIR/src/tools:
-cd $QTDIR; cat $OPIEDIR/qt/qte<version>-all.patch | patch -p1
+cd $QTDIR; cat $OPIEDIR/qt/qt-<version>.patch/qte<version>-all.patch | patch -p1
 cp $OPIEDIR/qt/qconfig-qpe.h $QTDIR/src/tools
 
 You are now ready to configure and build Qt/Embedded
