@@ -90,18 +90,10 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
 
 // slots
 void MediaPlayerState::setIsStreaming( bool b ) {
-
-    if ( streaming == b ) {
-        return;
-    }
     streaming = b;
 }
 
 void MediaPlayerState::setIsSeekable( bool b ) {
-
-    //if ( isSeekable == b ) {
-    //    return;
-    // }
     seekable = b;
     emit isSeekableToggled(b);
 }
