@@ -3,6 +3,7 @@
 #include <qheader.h>
 #include <qtimer.h>
 #include <qlayout.h>
+#include <qmessagebox.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
@@ -181,8 +182,10 @@ void MainWindow::slotDeleteMail()
 {
     if (!mailView->currentItem()) return;
     RecMail mail = ((MailListViewItem*)mailView->currentItem() )->data();
-    mail.Wrapper()->deleteMail( mail );
-    folderView->refreshCurrent();
+    if ( QMessageBox::warning(this, tr("Delete Mail"), QString( tr("<p>Do you really want to delete this mail? <br><br>" ) + mail.getFrom() + " - " + mail.getSubject() ) , QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
+       mail.Wrapper()->deleteMail( mail );
+       folderView->refreshCurrent();
+    }
 }
 
 

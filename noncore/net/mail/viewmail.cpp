@@ -1,5 +1,5 @@
 #include <qtextbrowser.h>
-#include <qmessagebox.h>
+#include <qmessagebox.h>?
 #include <qtextstream.h>
 #include <qaction.h>
 #include <qpopupmenu.h>
@@ -319,7 +319,9 @@ void ViewMail::slotForward()
 
 void ViewMail::slotDeleteMail( )
 {
-    m_recMail.Wrapper()->deleteMail( m_recMail );
-    hide();
-    deleted = true;
+    if ( QMessageBox::warning(this, tr("Delete Mail"), QString( tr("<p>Do you really want to delete this mail? <br><br>" ) + m_mail[0] + " - " + m_mail[1] ) , QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
+        m_recMail.Wrapper()->deleteMail( m_recMail );
+        hide();
+        deleted = true;
+    }
 }
