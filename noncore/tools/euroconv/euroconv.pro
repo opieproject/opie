@@ -8,7 +8,7 @@ SOURCES		= calcdisplay.cpp  \
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
-DESTDIR		= ${OPIEDIR}/bin
+DESTDIR		= $(OPIEDIR)/bin
 INTERFACES	= 
 TARGET          = euroconv
 include ( $(OPIEDIR)/include.pro )
