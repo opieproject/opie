@@ -25,9 +25,7 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
 ImageView::~ImageView()
 {
     odebug << "Delete Imageview" << oendl;
-    if (m_viewManager) {
-        delete m_viewManager;
-    }
+    delete m_viewManager;
 }
 
 Opie::Core::OKeyConfigManager* ImageView::manager()
@@ -54,6 +52,14 @@ void ImageView::initKeys()
 
     m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "image_view_keys",
                                                     lst, false,this, "image_view_keys" );
+
+    /**
+     * Handle KeyEvents when they're pressed. This avoids problems
+     * with 'double next' on Return.
+     * The Return press would switch to this view and the return
+     * release would emit the dispNext Signal.
+     */
+    m_viewManager->setEventMask( Opie::Core::OKeyConfigManager::MaskPressed );
 
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("View Image Info"), "imageviewinfo",
                                                 Resource::loadPixmap("1to1"), ViewInfo,
@@ -146,7 +152,7 @@ void ImageView::focusInEvent(QFocusEvent *)
     if (fullScreen()) enableFullscreen();
 }
 
-void ImageView::hide() 
+void ImageView::hide()
 {
     if (fullScreen()) {
         m_ignore_next_in = true;
