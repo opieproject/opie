@@ -168,7 +168,7 @@ CONFIG_PPP      noncore/settings/networksettings/ppp    ppp.pro
 CONFIG_PYQUICKLAUNCH-APPLET	noncore/applets/pyquicklaunch	pyquicklaunch.pro
 CONFIG_PYQUICKLAUNCHER	noncore/tools/pyquicklauncher	pyquicklauncher.pro
 CONFIG_PYTHON-EXAMPLES	examples/python bla.pro
-CONFIG_QASHMONEY	noncore/apps/qashmoney	qashmoney.pro
+CONFIG_QASHMONEY	noncore/unsupported/qashmoney	qashmoney.pro
 CONFIG_QASTEROIDS	noncore/games/qasteroids	qasteroids.pro
 CONFIG_QCOP	core/apps/qcop	qcop.pro
 CONFIG_QPDF	noncore/unsupported/qpdf	qpdf.pro

@@ -20,7 +20,6 @@
 
 	Fixed Bugs
 	----------
-	* n.a.  - Opie-mail: fixed some crasher, some layout-problems
 	* #501  - Pickboard is able to show 'Umlaute' (TT,zecke)
 	* #608  - Make Opie usable for left handed users (zecke)
 	* #957  - Import of VCards/VTodos/VEvents with BASE64 encoding (ljp,zecke)
@@ -33,11 +32,13 @@
 	* #1445 - Opie-Sheet Has No Icon (CoreDump)
 	* #1448 - Brightness Applet added (mickeyl)
 	* #1450 - ZSame didn't clear the bonus item after winning a game (zecke)
+        * n.a.  - Opie-mail: fixed some crasher, some layout-problems
 	* n.a.  - Converted applications to not hardcode /opt/QtPalmtop but to use QPEApplication::qpeDir (zecke)
 	* n.a.  - Converted usage of qpeDir() not to include a '/' as first charachter of the string (zecke)
 	* n.a.  - Build system: Enable distcc and ccache when crosscompiling too, and use them everywhere we can (clem)
 	* n.a.  - Build system: Fix deps in several config.in (and fix scripts/deps.pl too) to stop breaking builds, especially with make -j highNumber (clem)
 	* n.a.  - Removed hardcoded icon size in a couple of applets (mickeyl)
+	* n.a.  - Opie-Qashmoney has been moved to unsupported (mickeyl)
 
 2004-09-17	Opie 1.1.6
 
