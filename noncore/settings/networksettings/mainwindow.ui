@@ -271,7 +271,7 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>Set Current</string>
+                            <string>&amp;Set Current</string>
                         </property>
                     </widget>
                     <widget row="3"  column="1"  rowspan="1"  colspan="2" >

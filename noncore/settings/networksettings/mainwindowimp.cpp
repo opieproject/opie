@@ -2,9 +2,9 @@
 #include "addserviceimp.h"
 #include "interfaceinformationimp.h"
 #include "interfacesetupimp.h"
-#include "interface.h"
 #include "kprocess.h"
 #include "module.h"
+
 
 #include <qpushbutton.h>
 #include <qtabwidget.h>
@@ -30,11 +30,6 @@
 
 #define TEMP_ALL "/tmp/ifconfig-a"
 #define TEMP_UP "/tmp/ifconfig"
-
-#define NO_SELECT_ERROR_AND_RETURN { \
-  QMessageBox::information(this, "Error","Please select an interface.", "Ok"); \
-  return; \
-}
 
 MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name, true) {
   connect(addServiceButton, SIGNAL(clicked()), this, SLOT(addClicked()));
@@ -81,6 +76,24 @@ MainWindowImp::~MainWindowImp(){
 }
 
 void MainWindowImp::loadModules(QString path){
+  qDebug(path.latin1());
+  QDir d;
+  d.setPath(path);
+  if(!d.exists()){
+    qDebug("MainWindowImp:: Path doesn't exists");
+    return;
+  }
+  d.setFilter( QDir::Files | QDir::NoSymLinks );
+  const QFileInfoList *list = d.entryInfoList();
+  QFileInfoListIterator it( *list );
+  QFileInfo *fi;
+  while ( (fi=it.current()) ) {
+    if(fi->fileName().contains(".so")){
+      qDebug("Found");
+      Module *foo = loadPlugin(path + "/" + fi->fileName());
+    }
+    ++it;
+  }
 }
 
 /**
@@ -90,7 +103,7 @@ void MainWindowImp::loadModules(QString path){
  * @return pointer to the function with name resolveString or NULL
  */ 
 Module* MainWindowImp::loadPlugin(QString pluginFileName, QString resolveString){
-  //qDebug(pluginFileName.latin1());
+  qDebug(pluginFileName.latin1());
   QLibrary *lib = new QLibrary(pluginFileName);
   void *functionPointer = lib->resolve(resolveString);
   if( !functionPointer ){
@@ -111,34 +124,6 @@ Module* MainWindowImp::loadPlugin(QString pluginFileName, QString resolveString)
   libraries.insert(object, lib);
   return object;
 }
-
-/*
-QList<QString> MainWindowImp::retrieveUnloadedPluginList(){
-  QString DirStr = QDir::homeDirPath() + "/.networksetup/" ;
-  QString path = DirStr + "plugins";
-  QDir d(path);
-  d.setFilter( QDir::Files | QDir::Hidden );
-
-  QMap<QObject*, QLibrary*>::Iterator libraryIt;
-  QList<QString> rlist; 
-  rlist.setAutoDelete(false);
-	  
-  const QFileInfoList *list = d.entryInfoList();
-  QFileInfoListIterator it( *list );
-  QFileInfo *fi;
-  while ( (fi=it.current()) ) {
-    if(fi->fileName().contains(".so")){
-      for( libraryIt = libraries.begin(); libraryIt != libraries.end(); ++libraryIt )
-        if((path + "/" + fi->fileName()) != (libraryIt.data())->library()){
-          QString *s = new QString(path + "/" + fi->fileName());
-          rlist.append(s);
-	}
-    }
-    ++it;
-  }
-  return rlist;
-}
-*/
 
 /**
  * The Add button was clicked.  Bring up the add dialog and if OK is hit
@@ -161,7 +146,10 @@ void MainWindowImp::addClicked(){
  */ 
 void MainWindowImp::removeClicked(){
   QListViewItem *item = serviceList->currentItem();
-  if(item == NULL) NO_SELECT_ERROR_AND_RETURN
+  if(item == NULL) {
+     QMessageBox::information(this, "Error","Please select an interface.", "Ok");
+     return; 
+  }
   
   if(modules.find(interfaceItems[item]) == modules.end()){
     QMessageBox::information(this, "Can't remove interface.", "Interface is built in.", "Ok");
@@ -178,7 +166,10 @@ void MainWindowImp::removeClicked(){
  */ 
 void MainWindowImp::configureClicked(){
   QListViewItem *item = serviceList->currentItem();
-  if(item == NULL) NO_SELECT_ERROR_AND_RETURN
+  if(item == NULL){
+   	 QMessageBox::information(this, "Error","Please select an interface.", "Ok");
+     return;
+  } 
   
   if(modules.find(interfaceItems[item]) == modules.end()){
     InterfaceSetupImp *conf = new InterfaceSetupImp(0, "InterfaceConfiguration", interfaceItems[item]);
@@ -197,8 +188,11 @@ void MainWindowImp::configureClicked(){
  */ 
 void MainWindowImp::informationClicked(){
   QListViewItem *item = serviceList->currentItem();
-  if(item == NULL)NO_SELECT_ERROR_AND_RETURN
-	
+  if(item == NULL){
+    QMessageBox::information(this, "Error","Please select an interface.", "Ok");
+    return;
+  }
+
   if(modules.find(interfaceItems[item]) == modules.end()){
     InterfaceInformationImp *i = new InterfaceInformationImp(0, "InterfaceInformationImp", interfaceItems[item]);
     i->showMaximized();
@@ -311,6 +305,10 @@ void MainWindowImp::updateInterface(Interface *i){
   QString typeName = "lan";
   if(i->getHardwareName().contains("Local Loopback"))
     typeName = "lo";
+  if(i->getInterfaceName().contains("irda"))
+    typeName = "irda";
+  if(i->getInterfaceName().contains("wlan"))
+    typeName = "wlan";
   QPixmap type = (Resource::loadPixmap(typeName));
   item->setPixmap(1, type);
 

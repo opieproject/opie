@@ -1,5 +1,5 @@
-#ifndef MODULE_H
-#define MODULE_H
+#ifndef NETCONF_MODULE_H
+#define NETCONF_MODULE_H
 
 #include <qobject.h>
 #include <qlist.h>
