@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: citytimebase.ui,v 1.1 2002-01-25 22:14:27 kergoth Exp $
+** $Id: citytimebase.ui,v 1.2 2002-09-01 18:18:03 cniehaus Exp $
 **
 *********************************************************************</comment>
 <author>Trenton Schulz</author>
@@ -33,7 +33,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>289</width>
+            <width>285</width>
             <height>359</height>
         </rect>
     </property>
@@ -116,7 +116,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;location 4&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
@@ -148,7 +148,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;CITY 6 TIME&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>alignment</name>
@@ -183,7 +183,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;location 5&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
@@ -212,7 +212,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;location 2&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
@@ -237,7 +237,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;CITY 6 TIME&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>alignment</name>
@@ -272,7 +272,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;location 6&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
@@ -308,7 +308,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;location 4&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
@@ -333,7 +333,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;CITY 5 TIME&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>alignment</name>
@@ -364,7 +364,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;CITY 2 TIME&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>alignment</name>
@@ -395,7 +395,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;CITY 1 TIME&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>alignment</name>
@@ -430,7 +430,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;location 3&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
@@ -462,7 +462,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;CITY 5 TIME&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>alignment</name>
@@ -497,7 +497,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;location 1&gt;</string>
+                        <string> </string>
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
@@ -529,7 +529,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;CITY 3 TIME&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>alignment</name>
@@ -553,7 +553,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;CITY 4 TIME&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>alignment</name>
@@ -588,7 +588,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;location 5&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
@@ -613,7 +613,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;CITY 3 TIME&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>alignment</name>
@@ -648,7 +648,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>&lt;location 6&gt;</string>
+                        <string></string>
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
