@@ -48,6 +48,7 @@ public:
       stream << "<!DOCTYPE Tasks>" << endl;
       tasks->save(stream );
       delete tasks;
+      stream << "</Tasks>" << endl;
       file.close();
       return true;
     }
