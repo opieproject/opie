@@ -5,3 +5,5 @@ Makefile*
 helpdialog.cpp
 helpdialog.h
 moc_*
+.moc
+.obj

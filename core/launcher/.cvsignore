@@ -2,3 +2,5 @@ Makefile*
 lnkpropertiesbase.cpp
 lnkpropertiesbase.h
 moc_*
+.moc
+.obj

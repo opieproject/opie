@@ -3,3 +3,5 @@ Makefile*
 calcdlg.cpp
 calcdlg.h
 moc_*
+.moc
+.obj

@@ -2,3 +2,4 @@ Makefile*
 datebookpluginconfigbase*
 moc*
 .moc
+.obj

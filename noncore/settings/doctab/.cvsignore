@@ -1,4 +1,8 @@
 Makefile*
 languagesettingsbase.cpp
 languagesettingsbase.h
+doctabsettingsbase.cpp
+doctabsettingsbase.h
 moc_*
+.moc
+.obj

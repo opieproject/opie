@@ -16,3 +16,5 @@ noteentry.cpp
 noteentry.h
 repeatentrybase.cpp
 repeatentrybase.h
+.moc
+.obj

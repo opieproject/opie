@@ -3,3 +3,5 @@
 Makefile*
 moc_*
 opieobj
+.moc
+.obj

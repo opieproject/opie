@@ -1,5 +1,6 @@
-
 Makefile*
 gsmtoolbase.cpp
 gsmtoolbase.h
 moc_*
+.moc
+.obj

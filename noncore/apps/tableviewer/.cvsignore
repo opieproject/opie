@@ -3,3 +3,5 @@ moc_*
 tvbrowseview_gen.h
 tvfilterview_gen.h
 tvkeyedit_gen.h
+.moc
+.obj

@@ -7,3 +7,5 @@ pksettingsbase.cpp
 pksettingsbase.h
 runwindow.cpp
 runwindow.h
+.moc
+.obj

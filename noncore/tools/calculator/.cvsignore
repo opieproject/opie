@@ -2,3 +2,5 @@ Makefile*
 calculator.cpp
 calculator.h
 moc_*
+.moc
+.obj

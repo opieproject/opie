@@ -3,3 +3,5 @@ Makefile*
 *.moc
 config.in
 moc_*
+.moc
+.obj

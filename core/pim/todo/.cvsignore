@@ -2,3 +2,5 @@ Makefile*
 moc_*
 todoentry.cpp
 todoentry.h
+.moc
+.obj

@@ -1,2 +1,4 @@
 Makefile
 moc*
+.moc
+.obj

@@ -1,4 +1,3 @@
-
 *.moc
 Makefile*
 moc_*
@@ -14,3 +13,5 @@ qchecknamebase.cpp
 qchecknamebase.h
 qcheckviewbase.cpp
 qcheckviewbase.h
+.moc
+.obj

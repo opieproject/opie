@@ -4,3 +4,5 @@ lightsettingsbase.h
 moc_*
 sensorbase.cpp
 sensorbase.h
+.moc
+.obj

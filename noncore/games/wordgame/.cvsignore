@@ -4,3 +4,5 @@ newgamebase.cpp
 newgamebase.h
 rulesbase.cpp
 rulesbase.h
+.moc
+.obj

@@ -4,3 +4,5 @@ commandeditdialogbase.h
 moc_*
 smallcommandeditdialogbase.cpp
 smallcommandeditdialogbase.h
+.moc
+.obj

@@ -3,3 +3,5 @@ Makefile*
 moc_*
 securitybase.cpp
 securitybase.h
+.moc
+.obj

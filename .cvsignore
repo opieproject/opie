@@ -1,7 +1,5 @@
 *.ipk
-..config.cmd
-.config
-.config.old
+.config*
 .depends
 .depends.cfgs
 .tmpconfig.h
@@ -10,7 +8,6 @@ config.in
 include
 moc_*
 stamp-headers
-.config.cmd
 gen.pro
 Vars.local
 a

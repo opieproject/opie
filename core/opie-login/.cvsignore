@@ -3,3 +3,5 @@ Makefile*
 loginwindow.cpp
 loginwindow.h
 moc_*
+.moc
+.obj

@@ -15,3 +15,5 @@ renamebase.cpp
 renamebase.h
 searchdiagbase.cpp
 searchdiagbase.h
+.moc
+.obj
