@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>216</width>
+            <width>208</width>
             <height>254</height>
         </rect>
     </property>
@@ -19,22 +19,43 @@
         <name>caption</name>
         <string>OBEX Receiving</string>
     </property>
+    <spacer>
+        <property>
+            <name>name</name>
+            <cstring>Spacer19</cstring>
+        </property>
+        <property stdset="1">
+            <name>orientation</name>
+            <enum>Horizontal</enum>
+        </property>
+        <property stdset="1">
+            <name>sizeType</name>
+            <enum>Fixed</enum>
+        </property>
+        <property>
+            <name>sizeHint</name>
+            <size>
+                <width>20</width>
+                <height>20</height>
+            </size>
+        </property>
+    </spacer>
     <widget>
         <class>QLayoutWidget</class>
         <property stdset="1">
             <name>name</name>
-            <cstring>Layout9</cstring>
+            <cstring>Layout7</cstring>
         </property>
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>0</x>
-                <y>0</y>
-                <width>253</width>
+                <x>-14</x>
+                <y>-2</y>
+                <width>248</width>
                 <height>240</height>
             </rect>
         </property>
-        <vbox>
+        <grid>
             <property stdset="1">
                 <name>margin</name>
                 <number>0</number>
@@ -43,129 +64,7 @@
                 <name>spacing</name>
                 <number>6</number>
             </property>
-            <spacer>
-                <property>
-                    <name>name</name>
-                    <cstring>Spacer8</cstring>
-                </property>
-                <property stdset="1">
-                    <name>orientation</name>
-                    <enum>Vertical</enum>
-                </property>
-                <property stdset="1">
-                    <name>sizeType</name>
-                    <enum>Expanding</enum>
-                </property>
-                <property>
-                    <name>sizeHint</name>
-                    <size>
-                        <width>20</width>
-                        <height>20</height>
-                    </size>
-                </property>
-            </spacer>
-            <widget>
-                <class>QLayoutWidget</class>
-                <property stdset="1">
-                    <name>name</name>
-                    <cstring>Layout7</cstring>
-                </property>
-                <hbox>
-                    <property stdset="1">
-                        <name>margin</name>
-                        <number>0</number>
-                    </property>
-                    <property stdset="1">
-                        <name>spacing</name>
-                        <number>6</number>
-                    </property>
-                    <spacer>
-                        <property>
-                            <name>name</name>
-                            <cstring>Spacer19</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>orientation</name>
-                            <enum>Horizontal</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>sizeType</name>
-                            <enum>Expanding</enum>
-                        </property>
-                        <property>
-                            <name>sizeHint</name>
-                            <size>
-                                <width>20</width>
-                                <height>20</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <widget>
-                        <class>QLabel</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>TextLabel1</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Receiving is active 
-now.
-
-Beam now!</string>
-                        </property>
-                        <property stdset="1">
-                            <name>alignment</name>
-                            <set>AlignTop|AlignLeft</set>
-                        </property>
-                        <property>
-                            <name>vAlign</name>
-                        </property>
-                    </widget>
-                    <spacer>
-                        <property>
-                            <name>name</name>
-                            <cstring>Spacer20</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>orientation</name>
-                            <enum>Horizontal</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>sizeType</name>
-                            <enum>Expanding</enum>
-                        </property>
-                        <property>
-                            <name>sizeHint</name>
-                            <size>
-                                <width>20</width>
-                                <height>20</height>
-                            </size>
-                        </property>
-                    </spacer>
-                </hbox>
-            </widget>
-            <spacer>
-                <property>
-                    <name>name</name>
-                    <cstring>Spacer7</cstring>
-                </property>
-                <property stdset="1">
-                    <name>orientation</name>
-                    <enum>Vertical</enum>
-                </property>
-                <property stdset="1">
-                    <name>sizeType</name>
-                    <enum>Expanding</enum>
-                </property>
-                <property>
-                    <name>sizeHint</name>
-                    <size>
-                        <width>20</width>
-                        <height>20</height>
-                    </size>
-                </property>
-            </spacer>
-            <widget>
+            <widget row="3"  column="0"  rowspan="1"  colspan="3" >
                 <class>QLayoutWidget</class>
                 <property stdset="1">
                     <name>name</name>
@@ -205,11 +104,11 @@ Beam now!</string>
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>AcceptButton</cstring>
+                            <cstring>InsertButton</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>Accept</string>
+                            <string>Insert</string>
                         </property>
                     </widget>
                     <spacer>
@@ -267,7 +166,127 @@ Beam now!</string>
                     </spacer>
                 </hbox>
             </widget>
-        </vbox>
+            <spacer row="1"  column="2" >
+                <property>
+                    <name>name</name>
+                    <cstring>Spacer20</cstring>
+                </property>
+                <property stdset="1">
+                    <name>orientation</name>
+                    <enum>Horizontal</enum>
+                </property>
+                <property stdset="1">
+                    <name>sizeType</name>
+                    <enum>Fixed</enum>
+                </property>
+                <property>
+                    <name>sizeHint</name>
+                    <size>
+                        <width>53</width>
+                        <height>20</height>
+                    </size>
+                </property>
+            </spacer>
+            <widget row="1"  column="0" >
+                <class>QLabel</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>PixmapLabel</cstring>
+                </property>
+                <property stdset="1">
+                    <name>scaledContents</name>
+                    <bool>true</bool>
+                </property>
+            </widget>
+            <spacer row="2"  column="1" >
+                <property>
+                    <name>name</name>
+                    <cstring>Spacer7</cstring>
+                </property>
+                <property stdset="1">
+                    <name>orientation</name>
+                    <enum>Vertical</enum>
+                </property>
+                <property stdset="1">
+                    <name>sizeType</name>
+                    <enum>Fixed</enum>
+                </property>
+                <property>
+                    <name>sizeHint</name>
+                    <size>
+                        <width>20</width>
+                        <height>58</height>
+                    </size>
+                </property>
+            </spacer>
+            <widget row="1"  column="1" >
+                <class>QLayoutWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>Layout5</cstring>
+                </property>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>6</number>
+                    </property>
+                    <widget>
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel1_2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>TextLabel1</string>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel1</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Filename</string>
+                        </property>
+                        <property stdset="1">
+                            <name>alignment</name>
+                            <set>AlignTop|AlignLeft</set>
+                        </property>
+                        <property>
+                            <name>vAlign</name>
+                        </property>
+                    </widget>
+                </vbox>
+            </widget>
+            <spacer row="0"  column="1" >
+                <property>
+                    <name>name</name>
+                    <cstring>Spacer8</cstring>
+                </property>
+                <property stdset="1">
+                    <name>orientation</name>
+                    <enum>Vertical</enum>
+                </property>
+                <property stdset="1">
+                    <name>sizeType</name>
+                    <enum>Fixed</enum>
+                </property>
+                <property>
+                    <name>sizeHint</name>
+                    <size>
+                        <width>20</width>
+                        <height>59</height>
+                    </size>
+                </property>
+            </spacer>
+        </grid>
     </widget>
 </widget>
 </UI>
