@@ -3,6 +3,7 @@ CONFIG_BACKGAMMON	noncore/games/backgammon/ backgammon.pro
 CONFIG_BINARY	noncore/tools/calc2/binary	binary.pro
 CONFIG_CALC2	noncore/tools/calc2	calc2.pro
 CONFIG_CALIBRATE	core/apps/calibrate	calibrate.pro
+CONFIG_CAMERA	noncore/multimedia/camera	camera.pro
 CONFIG_DICTIONARY	noncore/apps/dictionary	dictionary.pro
 CONFIG_EUROCONV		noncore/tools/euroconv/ euroconv.pro
 CONFIG_GSMTOOL	noncore/comm/gsmtool	gsmtool.pro
