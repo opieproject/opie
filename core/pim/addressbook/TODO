@@ -15,8 +15,6 @@ Important:
 	different views (as started by darwin zins)..
 - Store last settings of combo-boxes
 - Finishing of new View functions (List, Phonebook...)
-- The names of the countries are sorted by there english names, only..
-  Even if they are translated.. :S
 - Reload if contacts were changed externally
 - "What's this" should be added
 
@@ -44,3 +42,5 @@ Fixed:
 - Personal contact editor: Disable categories
 - "Nonenglish" translation bug has to be fixed.
 - contacteditor: Birthday, annyversary, ... : Use Dateselector
+- The names of the countries are sorted by there english names, only..
+  Even if they are translated.. :S

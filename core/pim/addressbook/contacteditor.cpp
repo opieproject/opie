@@ -38,6 +38,7 @@
 #include <qmainwindow.h>
 #include <qvaluelist.h>
 #include <qpopupmenu.h> 
+#include <qlistbox.h> 
 
 static inline bool containsAlphaNum( const QString &str );
 static inline bool constainsWhiteSpace( const QString &str );
@@ -697,6 +698,8 @@ void ContactEditor::init() {
 	cmbCountry->insertItem( tr ( "Yugoslavia" ) );
 	cmbCountry->insertItem( tr ( "Zambia" ) );
 	cmbCountry->insertItem( tr ( "Zimbabwe" ) );
+	if (cmbCountry->listBox()!=0)
+ 	  cmbCountry->listBox()->sort();
 
 	cmbCountry->setMaximumWidth( 135 );
 
