@@ -91,6 +91,7 @@ public:
     void setNameVisible( bool b );
 
 signals:
+    void dirSelected( const QString& );
     void fileSelected( const DocLnk& );
     void fileSelected( const QString& );
     void newSelected( const DocLnk& );

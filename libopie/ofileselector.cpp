@@ -409,6 +409,7 @@ void OFileViewFileListView::slotClicked(int button , QListViewItem* item, const 
         QStringList str = QStringList::split("->", sel->text(1) );
         if (sel->isDir() ) {
             m_currentDir = sel->directory() + "/" + str[0].stripWhiteSpace();
+            emit selector()->dirSelected( m_currentDir );
             reread( m_all );
         }else { // file
             qWarning("slot Clicked");
@@ -482,18 +483,22 @@ void OFileViewFileListView::cdUP() {
     else
         m_currentDir = dir.absPath();
 
+    emit selector()->dirSelected( m_currentDir );
     reread( m_all );
 }
 void OFileViewFileListView::cdHome() {
     m_currentDir = QDir::homeDirPath();
+    emit selector()->dirSelected( m_currentDir );
     reread( m_all );
 }
 void OFileViewFileListView::cdDoc() {
     m_currentDir = QPEApplication::documentDir();
+    emit selector()->dirSelected( m_currentDir );
     reread( m_all );
 }
 void OFileViewFileListView::changeDir( const QString& dir ) {
     m_currentDir = dir;
+    emit selector()->dirSelected( m_currentDir );
     reread( m_all );
 }
 void OFileViewFileListView::slotFSActivated( int id ) {
