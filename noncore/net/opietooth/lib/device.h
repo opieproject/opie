@@ -7,22 +7,52 @@
 #include <qvaluelist.h>
 
 namespace OpieTooth {
-  class Device : public QObject {
+
+    class Device : public QObject {
     Q_OBJECT
-  public:
+
+    public:
+
+    /**
+     * Brings up an device.
+     * Usage example: new Device(/dev/ttySB0, csr)
+     *
+     * @param &device QString the device name
+     * @param &mode QString the mode
+     */
     Device(const QString &device, const QString& mode);
-    // unloads the device
-    ~Device();
-    // was the device loaded?
-    void attach();
-    void detach();
-    bool up()const;
-    QString devName()const ; // hci0
-  signals:    
-    device(const QString& device, bool up );
-  };
+
+        /**
+         * unloads the device
+         */
+        ~Device();
+
+        /**
+         * attach the device
+         */
+        void attach();
+
+        /**
+         * detach the device
+         */
+        void detach();
+
+        /**
+         * Is the device loaded?
+         * @return bool, if the device is loaded
+
+        bool isLoaded()const;
+
+        /**
+         * Returns the device name
+         * @return QString, the device name
+         */
+        QString devName()const ; // hci0
+
+    signals:
+
+        device(const QString& device, bool up );
+    };
 };
-
-
 
 #endif
