@@ -12,11 +12,12 @@
 	* #1536 - Autosave of custom locations in opie backup (ar)
 	* #1539 - Fixed displaying too long path in the delete dialog in opie-eye (zecke)
 	* #1540 - Implemented deletion of DocLnks in opie-eye (zecke)
+	* #1556 - Start to look for sound files in /opt/QtPalmtop/sounds (zecke)
 
 	Internal
 	--------
 	* Work around bug in Qt/Embedded 2.3.10: qt_version() returns 231 (mickeyl)
-
+	* killed the need for weak symbols in QtE (zecke)
 2005-02-03	Opie 1.1.9
 
 	New Features
