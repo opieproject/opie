@@ -194,12 +194,12 @@ private:
 void QpeEditor::find ( const QString &txt, bool caseSensitive,
            bool backwards )
 {
-    static bool wrap = FALSE;
+    static bool wrap = false;
     int line, col;
     if ( wrap ) {
         if ( !backwards )
             line = col = 0;
-        wrap = FALSE;
+        wrap = false;
           //  emit searchWrapped();
     } else {
         getCursorPosition( &line, &col );
@@ -208,17 +208,17 @@ void QpeEditor::find ( const QString &txt, bool caseSensitive,
     if ( !backwards ) {
         for ( ; ; ) {
             if ( line >= numLines() ) {
-                wrap = TRUE;
+                wrap = true;
                   //emit notFound();
                 break;
             }
             int findCol = getString( line )->find( txt, col, caseSensitive );
             if ( findCol >= 0 ) {
-                setCursorPosition( line, findCol, FALSE );
+                setCursorPosition( line, findCol, false );
                 col = findCol + txt.length();
-                setCursorPosition( line, col, TRUE );
+                setCursorPosition( line, col, true );
 
-                  //found = TRUE;
+                  //found = true;
                 break;
             }
             line++;
@@ -239,12 +239,12 @@ static const int nfontsizes = 6;
 static const int fontsize[nfontsizes] = {8,10,12,14,18,24};
 
 TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
-    : QMainWindow( parent, name, f ), bFromDocView( FALSE )
+    : QMainWindow( parent, name, f ), bFromDocView( false )
 {
     doc = 0;
-    edited=FALSE;
-    edited1=FALSE;
-    setToolBarsMovable( FALSE );
+    edited=false;
+    edited1=false;
+    setToolBarsMovable( false );
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     channel = new QCopChannel( "QPE/Application/textedit", this );
@@ -254,7 +254,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     setIcon( Resource::loadPixmap( "TextEditor" ) );
 
     QPEToolBar *bar = new QPEToolBar( this );
-    bar->setHorizontalStretchable( TRUE );
+    bar->setHorizontalStretchable( true );
     menu = bar;
 
     QPEMenuBar *mb = new QPEMenuBar( bar );
@@ -332,32 +332,32 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     
     QAction *wa = new QAction( tr("Wrap lines"), QString::null, 0, this, 0 );
     connect( wa, SIGNAL( toggled(bool) ), this, SLOT( setWordWrap(bool) ) );
-    wa->setToggleAction(TRUE);
+    wa->setToggleAction(true);
     wa->addTo( advancedMenu);
 
     nStart = new QAction( tr("Start with new file"), QString::null, 0, this, 0 );
     connect( nStart, SIGNAL( toggled(bool) ), this, SLOT( changeStartConfig(bool) ) );
-    nStart->setToggleAction(TRUE);
+    nStart->setToggleAction(true);
     nStart->addTo( advancedMenu );
 
     nAdvanced = new QAction( tr("Prompt on Exit"), QString::null, 0, this, 0 );
     connect( nAdvanced, SIGNAL( toggled(bool) ), this, SLOT( doPrompt(bool) ) );
-    nAdvanced->setToggleAction(TRUE);
+    nAdvanced->setToggleAction(true);
     nAdvanced->addTo( advancedMenu );
 
     desktopAction = new QAction( tr("Always open linked file"), QString::null, 0, this, 0 );
     connect( desktopAction, SIGNAL( toggled(bool) ), this, SLOT( doDesktop(bool) ) );
-    desktopAction->setToggleAction(TRUE);
+    desktopAction->setToggleAction(true);
     desktopAction->addTo( advancedMenu);
 
     filePermAction = new QAction( tr("File Permissions"), QString::null, 0, this, 0 );
     connect( filePermAction, SIGNAL( toggled(bool) ), this, SLOT( doFilePerms(bool) ) );
-    filePermAction->setToggleAction(TRUE);
+    filePermAction->setToggleAction(true);
     filePermAction->addTo( advancedMenu);
 
     searchBarAction = new QAction( tr("Search Bar Open"), QString::null, 0, this, 0 );
     connect( searchBarAction, SIGNAL( toggled(bool) ), this, SLOT( setSearchBar(bool) ) );
-    searchBarAction->setToggleAction(TRUE);
+    searchBarAction->setToggleAction(true);
     searchBarAction->addTo( advancedMenu);
 
 
@@ -370,9 +370,9 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     mb->insertItem( tr( "View" ), font );
 
     searchBar = new QPEToolBar(this);
-    addToolBar( searchBar,  "Search", QMainWindow::Top, TRUE );
+    addToolBar( searchBar,  "Search", QMainWindow::Top, true );
 
-    searchBar->setHorizontalStretchable( TRUE );
+    searchBar->setHorizontalStretchable( true );
 
     searchEdit = new QLineEdit( searchBar, "searchEdit" );
     searchBar->setStretchableWidget( searchEdit );
@@ -422,51 +422,54 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     openDesktop = cfg.readBoolEntry ( "OpenDesktop", true );
     filePerms = cfg.readBoolEntry ( "FilePermissions", false );
     useSearchBar = cfg.readBoolEntry ( "SearchBar", false );
-
-    if(useSearchBar) {
-        searchBarAction->setOn(true);
-    } else{
-    }
-    if(promptExit )  nAdvanced->setOn ( true );
-    if(openDesktop) desktopAction->setOn ( true );
-    if(filePerms) filePermAction->setOn ( true );
+    startWithNew =  cfg.readBoolEntry ( "startNew", true);
+    
+    if(useSearchBar) searchBarAction->setOn(true);
+    if(promptExit )  nAdvanced->setOn( true );
+    if(openDesktop) desktopAction->setOn( true );
+    if(filePerms) filePermAction->setOn( true );
+    if(startWithNew) nStart->setOn( true );
       
     bool wrap = cfg. readBoolEntry ( "Wrap", true );
     wa-> setOn ( wrap );
     setWordWrap ( wrap );
 
-     if( qApp->argc() > 0) {
-         currentFileName=qApp->argv()[1];
-//         qDebug("<<<<<<<<<<<<<<<<<<<<<<<< "+currentFileName);
-         QFileInfo fi(currentFileName);
+    if( qApp->argc() > 1) {
+        currentFileName=qApp->argv()[1];
+//         qDebug("<<<<<<<<<<<<<<<<<<<<<<<< "+currentFileName+" %d",qApp->argc());
+        QFileInfo fi(currentFileName);
 
-         if(fi.baseName().left(1) == "") {
-             openDotFile(currentFileName);
-         } else {
-
-             nStart->setOn(TRUE);
-             openFile(currentFileName);
-         }
-     } else
-        if(cfg.readEntry("startNew","TRUE") == "TRUE") {
-
-        nStart->setOn(TRUE);
-        fileNew();
+        if(fi.baseName().left(1) == "") {
+            openDotFile(currentFileName);
+        } else {
+            openFile(currentFileName);
+        }
     } else {
-
-        fileOpen();
+//        qDebug("Do other thing");
+        if(startWithNew) {
+            openDotFile("");
+//            fileNew();
+        } else {
+            fileOpen();
+        }
     }
 
     viewSelection = cfg.readNumEntry( "FileView", 0 );
 }
 
 TextEdit::~TextEdit() {
-    if( edited1 & promptExit )
-        saveAs();
+//    qDebug("destr");
+}
+
+void TextEdit::closeEvent(QCloseEvent *) {
+//    qDebug("closing here");
+      if( edited1 && promptExit)
+          saveAs();
+     qApp->quit();
 }
 
 void TextEdit::cleanUp() {
-  qDebug("cleanUp");//    save();
+//  qDebug("cleanUp");//    save();
   
     Config cfg ( "TextEdit" );
     cfg. setGroup ( "Font" );
@@ -477,28 +480,31 @@ void TextEdit::cleanUp() {
     cfg.writeEntry ( "Italic", f. italic ( ));
     
     cfg.setGroup ( "View" );
-    cfg.writeEntry ( "Wrap",     editor-> wordWrap ( ) == QMultiLineEdit::WidgetWidth );
+    cfg.writeEntry ( "Wrap", editor->wordWrap() == QMultiLineEdit::WidgetWidth );
     cfg.writeEntry ( "FileView", viewSelection );
 
     cfg.writeEntry ( "PromptExit", promptExit );
     cfg.writeEntry ( "OpenDesktop", openDesktop );
     cfg.writeEntry ( "FilePermissions", filePerms );
     cfg.writeEntry ( "SearchBar", useSearchBar );
+    cfg.writeEntry ( "startNew", startWithNew );
+
 }
 
 
 void TextEdit::accept() {
-    if( edited1)
-        saveAs();
-    exit(0);
+//    qDebug("accept");
+        if( edited1)
+            saveAs();
+     qApp->quit();
 }
 
 void TextEdit::zoomIn() {
-    setFontSize(editor->font().pointSize()+1,FALSE);
+    setFontSize(editor->font().pointSize()+1,false);
 }
 
 void TextEdit::zoomOut() {
-    setFontSize(editor->font().pointSize()-1,TRUE);
+    setFontSize(editor->font().pointSize()-1,true);
 }
 
 
@@ -566,10 +572,6 @@ void TextEdit::fileNew() {
 }
 
 void TextEdit::fileOpen() {
-    Config cfg("TextEdit");
-    cfg.setGroup("View");
-    //    bool b=FALSE;
-
     QMap<QString, QStringList> map;
     map.insert(tr("All"), QStringList() );
     QStringList text;
@@ -577,10 +579,13 @@ void TextEdit::fileOpen() {
     map.insert(tr("Text"), text );
     text << "*";
     map.insert(tr("All"), text );
-    QString str = OFileDialog::getOpenFileName( 2, QPEApplication::documentDir(), QString::null, map);
+    QString str = OFileDialog::getOpenFileName( 2,
+                                                QPEApplication::documentDir(),
+                                                QString::null, map);
     if(!str.isEmpty() )
         openFile( str );
-    
+    else
+        updateCaption();
 }
 
 void TextEdit::doSearchBar() {
@@ -634,30 +639,20 @@ void TextEdit::editPaste() {
 
 void TextEdit::editFind() {
     searchBar->show();
-    searchVisible = TRUE;
     searchEdit->setFocus();
-//     Config cfg("TextEdit");
-//     cfg.setGroup("View");
-//     cfg.writeEntry("SearchBar","Opened");
-    
 }
 
 void TextEdit::findNext() {
-    editor->find( searchEdit->text(), FALSE, FALSE );
+    editor->find( searchEdit->text(), false, false );
 
 }
 
 void TextEdit::findClose() {
-    searchVisible = FALSE;
     searchBar->hide();
-//     Config cfg("TextEdit");
-//     cfg.setGroup("View");
-//     cfg.writeEntry("SearchBar","Closed");
-//     cfg.write();
 }
 
 void TextEdit::search() {
-    editor->find( searchEdit->text(), FALSE, FALSE );
+    editor->find( searchEdit->text(), false, false );
 }
 
 void TextEdit::newFile( const DocLnk &f ) {
@@ -670,7 +665,7 @@ void TextEdit::newFile( const DocLnk &f ) {
     currentFileName = "Unnamed";
     qDebug("newFile "+currentFileName);
     updateCaption( currentFileName);
-//    editor->setEdited( FALSE);
+//    editor->setEdited( false);
 }
 
 void TextEdit::openDotFile( const QString &f ) {
@@ -686,9 +681,9 @@ void TextEdit::openDotFile( const QString &f ) {
         txt+=t.readLine();
     }
     editor->setText(txt);
-    editor->setEdited( FALSE);
-    edited1=FALSE;
-    edited=FALSE;
+    editor->setEdited( false);
+    edited1=false;
+    edited=false;
 
 
     }
@@ -699,8 +694,8 @@ void TextEdit::openFile( const QString &f ) {
     qDebug("filename is "+ f);
     QString filer;
     QFileInfo fi( f);
-//    bFromDocView = TRUE;
-    if(f.find(".desktop",0,TRUE) != -1 && !openDesktop) {
+//    bFromDocView = true;
+    if(f.find(".desktop",0,true) != -1 && !openDesktop) {
         switch ( QMessageBox::warning(this,tr("Text Editor"),
                                       tr("Text Editor has detected<BR>you selected a <B>.desktop</B>
 file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
@@ -744,7 +739,7 @@ file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
 
 void TextEdit::openFile( const DocLnk &f ) {
 //    clear();
-//    bFromDocView = TRUE;
+//    bFromDocView = true;
     FileManager fm;
     QString txt;
     currentFileName=f.file();
@@ -758,23 +753,21 @@ void TextEdit::openFile( const DocLnk &f ) {
         delete doc;
     doc = new DocLnk(f);
     editor->setText(txt);
-    editor->setEdited( FALSE);
-    edited1=FALSE;
-    edited=FALSE;
+    editor->setEdited( false);
+    edited1=false;
+    edited=false;
 
     doc->setName(currentFileName);
     updateCaption();
 }
 
 void TextEdit::showEditTools() {
-//        if ( !doc )
-//      close();
-//    clear();
     menu->show();
     editBar->show();
-    if ( searchVisible )
+    if(!useSearchBar)
+        searchBar->hide();
+    else
         searchBar->show();
-//    updateCaption();
     setWState (WState_Reserved1 );
 }
 
@@ -816,9 +809,9 @@ bool TextEdit::save() {
                  }
                      
             }
-            editor->setEdited( FALSE);
-            edited1=FALSE;
-            edited=FALSE;
+            editor->setEdited( false);
+            edited1=false;
+            edited=false;
             if(caption().left(1)=="*")
             setCaption(caption().right(caption().length()-1));
 
@@ -835,16 +828,16 @@ bool TextEdit::save() {
 bool TextEdit::saveAs() {
     qDebug("saveAsFile " + currentFileName);
       // case of nothing to save... 
-    if ( !doc ) {
-//|| !bFromDocView)
-        qDebug("no doc");
-        return true;
-    }
-    if ( !editor->edited() ) {
-        delete doc;
-        doc = 0;
-        return true;
-    }
+//     if ( !doc && !currentFileName.isEmpty()) {
+// //|| !bFromDocView)
+//         qDebug("no doc");
+//         return true;
+//     }
+//     if ( !editor->edited() ) {
+//         delete doc;
+//         doc = 0;
+//         return true;
+//     }
 
     QString rt = editor->text();
     qDebug(currentFileName);
@@ -852,27 +845,30 @@ bool TextEdit::saveAs() {
     if( currentFileName.isEmpty()
         || currentFileName == tr("Unnamed")
         || currentFileName == tr("Text Editor")) {
-//        qDebug("do silly TT filename thing");
-        if ( doc->name().isEmpty() ) {
-            QString pt = rt.simplifyWhiteSpace();
-            int i = pt.find( ' ' );
-            QString docname = pt;
-            if ( i > 0 )
-                docname = pt.left( i );
-              // remove "." at the beginning
-            while( docname.startsWith( "." ) )
-                docname = docname.mid( 1 );
-            docname.replace( QRegExp("/"), "_" );
-              // cut the length. filenames longer than that
-              //don't make sense and something goes wrong when they get too long.
-            if ( docname.length() > 40 )
-                docname = docname.left(40);
-            if ( docname.isEmpty() )
-                docname = tr("Unnamed");
-            doc->setName(docname);
-            currentFileName=docname;
-        }
+        qDebug("do silly TT filename thing");
+//        if ( doc && doc->name().isEmpty() ) {
+        QString pt = rt.simplifyWhiteSpace();
+        int i = pt.find( ' ' );
+        QString docname = pt;
+        if ( i > 0 )
+            docname = pt.left( i );
+          // remove "." at the beginning
+        while( docname.startsWith( "." ) )
+            docname = docname.mid( 1 );
+        docname.replace( QRegExp("/"), "_" );
+          // cut the length. filenames longer than that
+          //don't make sense and something goes wrong when they get too long.
+        if ( docname.length() > 40 )
+            docname = docname.left(40);
+        if ( docname.isEmpty() )
+            docname = tr("Unnamed");
+        if(doc) doc->setName(docname);
+        currentFileName=docname;
+//         }
+//         else
+//             qDebug("hmmmmmm");
     }
+
 
     QMap<QString, QStringList> map;
     map.insert(tr("All"), QStringList() );
@@ -881,18 +877,23 @@ bool TextEdit::saveAs() {
     map.insert(tr("Text"), text );
     text << "*";
     map.insert(tr("All"), text );
-//    if(currentFileName
-    QString str = OFileDialog::getSaveFileName( 2,
-                  QPEApplication::documentDir(),
-                  currentFileName, map);
 
-    if(!str.isEmpty() ) {
+    QFileInfo cuFi( currentFileName);
+    QString filee = cuFi.fileName();
+    QString dire = cuFi.dirPath();
+    if(dire==".")
+       dire = QPEApplication::documentDir();
+    QString str = OFileDialog::getSaveFileName( 2,
+                  dire,
+                  filee, map);
+
+    if(!str.isEmpty()) {
         QString fileNm=str;
 
         qDebug("saving filename "+fileNm);
         QFileInfo fi(fileNm);
         currentFileName=fi.fileName();
-        if(doc) {
+        if(doc) 
 //        QString file = doc->file();
 //        doc->removeFiles();
             delete doc;
@@ -901,7 +902,7 @@ bool TextEdit::saveAs() {
             nf.setFile( fileNm);
             doc = new DocLnk(nf);
 //        editor->setText(rt);
-//            qDebug("openFile doclnk "+currentFileName);
+            qDebug("Saving file as "+currentFileName);
             doc->setName( currentFileName);
             updateCaption( currentFileName);
 
@@ -921,7 +922,7 @@ bool TextEdit::saveAs() {
                 if( filePerm)
                     delete  filePerm;
             }
-        }
+//        }
         editor->setEdited( false);
         edited1 = false;
         edited = false;
@@ -968,21 +969,16 @@ void TextEdit::setDocument(const QString& fileref) {
 //        openDotFile(currentFileName);
         } else {
             qDebug("setDoc open");
-            bFromDocView = TRUE;
+            bFromDocView = true;
             openFile(fileref);
-            editor->setEdited(TRUE);
-            edited1=FALSE;
-            edited=TRUE;
+            editor->setEdited(true);
+            edited1=false;
+            edited=true;
 
 //    doSearchBar();
         }
     }
     updateCaption( currentFileName);
-}
-
-void TextEdit::closeEvent( QCloseEvent *e ) {
-    bFromDocView = FALSE;
-    e->accept();
 }
 
 void TextEdit::changeFont() {
@@ -1016,24 +1012,19 @@ void TextEdit::editDelete() {
 }
 
 void TextEdit::changeStartConfig( bool b ) {
-
+    startWithNew=b;
     Config cfg("TextEdit");
     cfg.setGroup("View");
-    if(b) {
-        qDebug("bool");
-        cfg.writeEntry("startNew","TRUE");
-    } else {
-        cfg.writeEntry("startNew","FALSE");
-    }
+    cfg.writeEntry("startNew",b);
     update();
 }
 
 void TextEdit::editorChanged() { 
     if(editor->edited() && edited && !edited1) {
         setCaption( "*"+caption());
-        edited1=TRUE;
+        edited1=true;
     }
-    edited=TRUE;
+    edited=true;
 }
 
 void TextEdit::receive(const QCString&msg, const QByteArray&) {

@@ -65,7 +65,6 @@ public slots:
     void editorChanged();
 void  receive(const QCString&, const QByteArray&);
 protected:
-    bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms, useSearchBar;
     void closeEvent( QCloseEvent *e );
     void doSearchBar();
 private slots:
@@ -114,7 +113,6 @@ private:
     void clear();
     void updateCaption( const QString &name=QString::null );
     void setFontSize(int sz, bool round_down_not_up);
-
 private:
 //    fileSaver *fileSaveDlg;
 //    fileBrowser *browseForFiles;
@@ -123,7 +121,7 @@ private:
     QPopupMenu *advancedMenu;
     QLineEdit *searchEdit;
     DocLnk *doc;
-    bool searchVisible;
+    bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms, useSearchBar, startWithNew;
     bool bFromDocView;
    int  viewSelection;
     QAction *zin, *zout;
