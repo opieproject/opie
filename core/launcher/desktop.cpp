@@ -41,6 +41,9 @@
 #ifdef QT_QWS_CUSTOM
 #include "qpe/custom.h"
 #endif
+#if defined(QT_QWS_IPAQ)
+#include "qpe/custom-ipaq.h"
+#endif
 
 #include <qgfx_qws.h>
 #include <qmainwindow.h>
