@@ -1,9 +1,0 @@
-Files: bin/opieplayer2 pics/opieplayer apps/Applications/opieplayer.desktop
-Priority: optional
-Section: opie/applications
-Maintainer: L.J.Potter <ljp@llornkcor.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION)
-Description: The Opie media player
- The mediaplayer for Opie. It plays mp3, mpeg, and wav, ogg, quicktime, divx

@@ -1,4 +1,0 @@
-case "$1" in
-  *.c) echo $CFLAGS_lessopt
-;; *)  echo $CFLAGS
-esac

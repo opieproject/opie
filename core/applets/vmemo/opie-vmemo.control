@@ -1,9 +1,0 @@
-Files: plugins/applets/libvmemoapplet.so*
-Priority: optional
-Section: opie/system
-Maintainer: L.J. Potter <ljp@llornkcor.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION), opie-sound ($QPE_VERSION)
-Description: Voice Memo Recorder Applet
- The voice memo recorder for the Opie environment

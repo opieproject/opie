@@ -1,8 +1,0 @@
-[Desktop Entry]
-Comment=Edit the ~/Settings/*.conf files
-Exec=confedit
-Icon=confedit/confedit
-Type=Application
-Name=Conf File Editor
-Name[es]=Editor Configuración
-Name[zh_TW]=編輯設定檔

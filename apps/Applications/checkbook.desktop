@@ -1,7 +1,0 @@
-[Desktop Entry]
-Comment=A Checkbook Program
-Exec=checkbook
-Icon=checkbook/checkbook
-Type=Application
-Name=Checkbook
-Name[zh_TW]=Checkbook

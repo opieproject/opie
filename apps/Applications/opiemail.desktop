@@ -1,9 +1,0 @@
-[Desktop Entry]
-Comment=An EMail Client
-Exec=opiemail
-Icon=opiemail/opiemail
-Type=Application
-Name=EMail
-Name[pt]=E-Mail
-Name[es]=Correo-e
-Name[zh_TW]=電子郵件

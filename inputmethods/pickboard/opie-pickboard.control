@@ -1,9 +1,0 @@
-Files: plugins/inputmethods/libqpickboard.so*
-Priority: optional
-Section: opie/inputmethods
-Maintainer: Warwick Allison <warwick@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Pickboard input method
- Pickboard dictionary-based input method for the Opie environment.
