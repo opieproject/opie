@@ -20,6 +20,7 @@ PinDlg::PinDlg( const QString& status,
     m_mac = mac;
     test( mac );
     txtStatus->setText(status);
+    showMaximized();
 }
 PinDlg::~PinDlg() {
 
