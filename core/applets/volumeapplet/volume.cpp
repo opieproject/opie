@@ -19,8 +19,8 @@
 **********************************************************************/
 
 #include "volume.h"
-#include "oledbox.h"
 
+#include <opie2/oledbox.h>
 #include <opie2/odevice.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/resource.h>
