@@ -727,32 +727,11 @@ void Konsole::colorMenuSelected(int iD)
 
 void Konsole::configMenuSelected(int iD)
 {
-      QString temp;
-      qDebug( temp.sprintf("configmenu %d",iD));
+//        QString temp;
+//        qDebug( temp.sprintf("configmenu %d",iD));
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Menubar");
-//      if( iD  == -2) {
-//          if(!secondToolBar->isHidden()) {
-//              secondToolBar->hide();
-//              configMenu->changeItem( iD,"Show Command List");
-//              cfg.writeEntry("Hidden","TRUE");
-//              configMenu->setItemEnabled(-20 ,FALSE);
-//          } else {
-//              secondToolBar->show();
-//              configMenu->changeItem( iD,"Hide Command List");
-//              cfg.writeEntry("Hidden","FALSE");
-//              configMenu->setItemEnabled(-20 ,TRUE);
-
-//              if(cfg.readEntry("EditEnabled","FALSE")=="TRUE") {
-//                  configMenu->setItemChecked(-20,TRUE);
-//                  commonCombo->setEditable( TRUE );
-//              } else {
-//                  configMenu->setItemChecked(-20,FALSE);
-//                  commonCombo->setEditable( FALSE );
-//              }
-//          }
-//      }
     if( iD  == -4) {
         cfg.setGroup("Tabs");
         QString tmp=cfg.readEntry("Position","Top");
@@ -767,22 +746,6 @@ void Konsole::configMenuSelected(int iD)
             cfg.writeEntry("Position","Top");
         }
     }
-//      if( iD  == -20) {
-//          cfg.setGroup("Commands");
-//  //        qDebug("enableCommandEdit");
-//          if( !configMenu->isItemChecked(iD) ) {
-//              commonCombo->setEditable( TRUE );
-//              configMenu->setItemChecked(iD,TRUE);
-//              commonCombo->setCurrentItem(0);
-//              cfg.writeEntry("EditEnabled","TRUE");
-//          } else {
-//              commonCombo->setEditable( FALSE );
-//              configMenu->setItemChecked(iD,FALSE);
-//              cfg.writeEntry("EditEnabled","FALSE");
-//              commonCombo->setFocusPolicy(QWidget::NoFocus);
-//              te->setFocus();
-//          }
-//      }
 }
 
 void Konsole::changeCommand(const QString &text, int c)
