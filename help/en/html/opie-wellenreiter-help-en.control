@@ -1,0 +1,10 @@
+Files: help/en/html/opie-wellenreiter.html
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-wellenreiter
+License: GPL
+Description: Opie Wellenreiter help files (english)
+ 
