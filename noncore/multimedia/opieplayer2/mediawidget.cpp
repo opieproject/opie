@@ -23,6 +23,7 @@
 
 #include "mediawidget.h"
 #include "playlistwidget.h"
+#include "skin.h"
 
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
@@ -100,8 +101,10 @@ void MediaWidget::loadDefaultSkin( const SkinButtonInfo *skinInfo, uint buttonCo
 
 void MediaWidget::loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const QString &name, const QString &fileNameInfix )
 {
+    Skin skin( name, fileNameInfix );
+
     QString skinPath = "opieplayer2/skins/" + name;
-    backgroundPixmap = QPixmap( Resource::loadPixmap( QString( "%1/background" ).arg( skinPath ) ) );
+    backgroundPixmap = skin.backgroundImage();
     buttonUpImage = QImage( Resource::loadImage( QString( "%1/skin%2_up" ).arg( skinPath ).arg( fileNameInfix ) ) );
     buttonDownImage = QImage( Resource::loadImage( QString( "%1/skin%2_down" ).arg( skinPath ).arg( fileNameInfix ) ) );
 
