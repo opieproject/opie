@@ -1,8 +1,10 @@
 
 #include "io_modem.h"
 
-IOModem:IOModem( const Profile &config ) : IOSerial( config ) {
+#include "dialer.h"
 
+IOModem:IOModem( const Profile &config ) : IOSerial( config ) {
+	m_config = config;
 }
 
 
@@ -18,10 +20,15 @@ void IOModem::close() {
 }
 
 bool IOModem::open() {
-
-
     IOSerial::open();
 
+	Dialer d(m_profile);
+	int result = d.exec();
+	if(result == QDialog::Accepted)
+	{
+		return true;
+	}
+	else return false;
 }
 
 void IOModem::reload( const Profile &config ) {

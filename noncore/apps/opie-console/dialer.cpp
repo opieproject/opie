@@ -7,6 +7,9 @@
 #include <qapp.h>
 #include <qtimer.h>
 
+#include <unistd.h>
+#include <string.h>
+
 // State machine:          | When an error occurs, we don't have to
 //                         | reset everything.
 // (init) <------+         | But if the user wants to reset,
@@ -22,16 +25,35 @@
 //   |                     |
 //   v                     |
 
-Dialer::Dialer(const QString& number, QWidget *parent, const char *name)
+
+// from atconfigdialog
+//initStringLine->setText( config.readEntry("InitString", MODEM_DEFAULT_INIT_STRING ) );
+//resetStringLine->setText( config.readEntry("ResetString", MODEM_DEFAULT_RESET_STRING ) );
+//dialPref1Line->setText( config.readEntry("DialPrefix1", MODEM_DEFAULT_DIAL_PREFIX1 ) );
+//dialSuf1Line->setText( config.readEntry("DialSuffix1", MODEM_DEFAULT_DIAL_SUFFIX1 ) );
+//dialPref2Line->setText( config.readEntry("DialPrefix2", MODEM_DEFAULT_DIAL_PREFIX1 ) );
+//dialSuf2Line->setText( config.readEntry("DialSuffix2", MODEM_DEFAULT_DIAL_SUFFIX1 ) );
+//dialPref3Line->setText( config.readEntry("DialPrefix3", MODEM_DEFAULT_DIAL_PREFIX1 ) );
+//dialSuf3Line->setText( config.readEntry("DialSuffix3", MODEM_DEFAULT_DIAL_SUFFIX1 ) );
+//connectLine->setText( config.readEntry("DefaultConnect" MODEM_DEFAULT_CONNECT_STRING ) );
+//hangupLine->setText( config.readEntry("HangupString", MODEM_DEFAULT_HANGUP_STRING ) );
+
+// from modemconfigwidget
+//int rad_flow = prof.readNumEntry("Flow");
+//int rad_parity = prof.readNumEntry("Parity");
+//int speed = prof.readNumEntry("Speed");
+//QString number = prof.readEntry("Number");
+
+Dialer::Dialer(const Profile& profile, QWidget *parent, const char *name)
 : QDialog(parent, name, true)
 {
 	QVBoxLayout *vbox;
 	QLabel *desc;
 
 	usercancel = 0;
-	m_number = number;
+	m_profile = profile;
 
-	desc = new QLabel(QObject::tr("Dialing number: %1").arg(number), this);
+	desc = new QLabel(QObject::tr("Dialing number: %1").arg(m_profile.readEntry("Number")), this);
 	progress = new QProgressBar(this);
 	status = new QLabel("", this);
 	status->setFrameStyle(QFrame::Panel | QFrame::Sunken);
@@ -56,20 +78,23 @@ Dialer::~Dialer()
 
 void Dialer::slotCancel()
 {
-	if(state != state_online) reset();
+	if(state != state_online)
+	{
+		usercancel = 1;
+		reset();
+	}
 	else accept();
 }
 
 void Dialer::reset()
 {
 	switchState(state_cancel);
-	usercancel = 1;
 }
 
 void Dialer::slotAutostart()
 {
 	state = state_preinit;
-	dial(m_number);
+	dial(m_profile.readEntry("Number"));
 }
 
 void Dialer::dial(const QString& number)
@@ -137,7 +162,20 @@ void Dialer::trydial(const QString& number)
 
 void Dialer::send(const QString& msg)
 {
+	QString m = msg;
+	int bytes;
+	QString termination;
 
+	termination = m_profile.readEntry("Termination");
+	if(termination == "\n") m = m + "\n";
+	else if(termination == "\r") m = m + "\r";
+	else m = m + "\r\n";
+
+	bytes = write(0, m.local8Bit(), strlen(m.local8Bit()));
+	if(bytes < 0)
+	{
+		reset();
+	}
 }
 
 QString Dialer::receive()

@@ -32,7 +32,8 @@ HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h\
                emulation_widget.h procctl.h \
            function_keyboard.h \
 	       receive_layer.h filereceive.h \
-	       script.h
+	       script.h \
+		   dialer.h
 
 SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp \
 	       file_layer.cpp filetransfer.cpp \
@@ -62,7 +63,8 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp io_bt.cpp \
 	       emulation_widget.cpp default.cpp  procctl.cpp \
            function_keyboard.cpp \
 	       receive_layer.cpp filereceive.cpp \
-	       script.cpp
+	       script.cpp \
+		   dialer.cpp
 
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
