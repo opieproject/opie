@@ -27,6 +27,7 @@
 
 class CategorySelect;
 class LauncherIconView;
+class LauncherItem;
 class QIconView;
 class QIconViewItem;
 class QLabel;
@@ -37,8 +38,8 @@ class QComboBox;
 
 
 enum BusyIndicatorType {
-	BIT_Normal = 0,
-	BIT_Animated
+    BIT_Normal = 0,
+    BIT_Animated
 };
 
 class LauncherView : public QVBox
@@ -114,6 +115,41 @@ private:
 
     QImage loadBackgroundImage(QString &fname);
 
+};
+
+/* taken from opie-eye */
+
+struct PixmapInfo {
+    PixmapInfo() : width( -1 ), height( -1 ) {}
+    bool operator==( const PixmapInfo& r ) {
+        if ( width  != r.width  ) return false;
+        if ( height != r.height ) return false;
+        if ( file   != r.file   ) return false;
+        return true;
+    }
+    int width, height;
+    QString file;
+    QPixmap pixmap;
+};
+
+class LauncherThumbReceiver:public QObject
+{
+    Q_OBJECT
+    typedef QValueList<PixmapInfo> PixmapInfos;
+public:
+    LauncherThumbReceiver(LauncherItem*parent);
+    ~LauncherThumbReceiver();
+    void requestThumb(const QString&file,int width,int height);
+
+public slots:
+    void recieve( const QCString&, const QByteArray& );
+protected slots:
+    virtual void sendRequest();
+protected:
+    LauncherItem*m_parent;
+    QString m_reqFile;
+    PixmapInfo rItem;
+    bool m_waiting:1;
 };
 
 #endif // LAUNCHERVIEW_H
