@@ -38,7 +38,7 @@ private:
     QLineEdit* LineEdit1;
     QCheckBox *timeCheck, *dateCheck, *symbolCheck, *nameCheck, *currentPriceCheck, *lastPriceCheck, *openPriceCheck, *minPriceCheck, *maxPriceCheck, *variationCheck, *volumeCheck;
     QPushButton *lookupButton;
-    QSpinBox *timerDelaySpin;
+    QSpinBox *timerDelaySpin, *scrollSpeed, *scrollLength;
 private slots:
     void doLookup();
 

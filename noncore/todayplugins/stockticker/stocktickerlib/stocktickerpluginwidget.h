@@ -50,6 +50,7 @@ protected slots:
     void socketError(int);
     void checkConnection();
 private:
+    int updateSpeed;
     QString symbollist;
     bool wasError;
     QSocket *Sock;

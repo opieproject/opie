@@ -212,7 +212,7 @@ void getStocks( const QString *blah) {
 
       /* frees stocks */
     free_stocks(stocks_quotes);
-    stocktickerTicker->setText( output );
+    stocktickerTicker->setText( output.latin1() );
 
 }
 
@@ -220,6 +220,8 @@ StockTickerPluginWidget::StockTickerPluginWidget( QWidget *parent,  const char* 
     : QWidget(parent,  name ) {
     init();
     startTimer(1000);
+
+    stocktickerTicker->setTextFormat(Qt::RichText);
 //    checkConnection();
 }
 
@@ -243,13 +245,14 @@ void StockTickerPluginWidget::doStocks() {
     symbollist = cfg.readEntry("Symbols", "");
     symbollist.replace(QRegExp(" "),"+");//seperated by +
 
-//    qDebug(symbollist);
+    cfg.setGroup("Timer");
+    stocktickerTicker->setUpdateTime( cfg.readNumEntry("ScrollSpeed",50));
+    stocktickerTicker->setScrollLength( cfg.readNumEntry("ScrollLength",10));
+
     if (!symbollist.isEmpty()) {
         pthread_t thread1;
         pthread_create(&thread1,NULL, (void * (*)(void *))getStocks, &symbollist);
     }
-//    pthread_join(thread1,NULL);
-//    getStocks( symbollist.latin1() );
 }
 
 void StockTickerPluginWidget::timerEvent( QTimerEvent *e ) {

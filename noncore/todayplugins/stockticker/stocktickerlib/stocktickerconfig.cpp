@@ -132,13 +132,41 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
     label2->setMaximumHeight(60);
     layout->addMultiCellWidget( label2, 6, 6, 1, 2);
 
+    scrollSpeed = new QSpinBox( this, "Scrollspin" );
+    QWhatsThis::add( timerDelaySpin , tr( "Speed of scrolling action, in milliseconds" ) );
+    scrollSpeed->setMaxValue( 1000);
+    scrollSpeed->setSteps(50,50);
+    cfg.setGroup("Timer");
+    scrollSpeed->setValue( cfg.readNumEntry("ScrollSpeed",50));
+    layout->addMultiCellWidget( scrollSpeed , 7, 7, 0, 0);
+    
+    QLabel *label3;
+    label3 = new QLabel(this);
+    label3->setText( tr("Scroll Speed, in milliseconds"));
+    label3->setMaximumHeight(60);
+    layout->addMultiCellWidget( label3, 7, 7, 1, 2);
+
+    scrollLength = new QSpinBox( this, "ScrollLength" );
+    QWhatsThis::add( timerDelaySpin , tr( "Length of scrolling" ) );
+    scrollLength->setMaxValue( 10);
+//    scrollLength->setSteps(5,5);
+    cfg.setGroup("Timer");
+    scrollLength->setValue( cfg.readNumEntry("ScrollLength",1));
+    layout->addMultiCellWidget( scrollLength , 8, 8, 0, 0);
+    
+    QLabel *label4;
+    label4 = new QLabel(this);
+    label4->setText( tr("Scroll Length"));
+    label4->setMaximumHeight(60);
+    layout->addMultiCellWidget( label4, 8, 8, 1, 2);
+    
 //      lookupButton = new QPushButton(this, "LookupButton");
 //      lookupButton->setText(tr("Symbol Lookup"));
 //      connect(lookupButton,SIGNAL(clicked()),SLOT( doLookup()));
 //      layout->addMultiCellWidget( lookupButton , 9, 9, 0, 0);
     
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
-    layout->addItem( spacer, 8, 0 );
+    layout->addItem( spacer, 9, 0 );
 
 }
 
@@ -164,6 +192,8 @@ void StocktickerPluginConfig::writeConfig() {
 
     cfg.setGroup("Timer");
     cfg.writeEntry("Delay",timerDelaySpin->value());
+    cfg.writeEntry("ScrollLength",scrollLength->value());
+    cfg.writeEntry("ScrollSpeed",scrollSpeed->value());
       
     cfg.write();
 }
