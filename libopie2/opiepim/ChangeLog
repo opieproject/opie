@@ -1,3 +1,5 @@
+2005-03-23 Stefan Eilers <stefan@eilers-online.net>
+	* #1608 Finishing work on SQL backend. Datediff and other queries for QueryByExample now working as exprected. All tests passed successfully
 2005-03-20 Stefan Eilers <stefan@eilers-online.net>
 	* #1608 Quickfix for problem with DateDiff on SQL backend. I have to rethink this solution, but due to the short time, this should work.  
 2005-03-19 Stefan Eilers <stefan@eilers-online.net>

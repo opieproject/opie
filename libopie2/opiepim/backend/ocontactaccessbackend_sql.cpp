@@ -533,22 +533,22 @@ OPimContact OPimContactAccessBackend_SQL::find( int uid, const UIDArray& queryUi
 UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist, const OPimContact &query, int settings, 
 							   const QDateTime& qd ) const
 {
-    QString qu = "SELECT uid FROM addressbook WHERE";
+    QString searchQuery = "";
+    QString datediff_query = "";
+    QString uid_query = "";
 
     // Just add uid's selection if we really try to search in a subset of all uids! Otherwise this would
     // just take time and memory!
     if ( uidlist.count() != m_uids.count() ) {
-	    qu += " (";
+	    uid_query += " (";
 
 	    for ( uint i = 0; i < uidlist.count(); i++ ) {
-		    qu += " uid = " + QString::number( uidlist[i] ) + " OR";
+		    uid_query += " uid = " + QString::number( uidlist[i] ) + " OR";
 	    }
-	    qu.remove( qu.length()-2, 2 ); // Hmmmm..
-	    qu += " ) AND ";
+	    uid_query.remove( uid_query.length()-2, 2 ); // Hmmmm..
+	    uid_query += " ) AND ";
     }
 
-    QString searchQuery = "";
-    QString temp_searchQuery = "";
 
     QDate startDate;
 
@@ -592,10 +592,10 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
 		    // information we need and do the query on it. 
 		    // This table is just visible for this process and will be removed
 		    // automatically after using.
-		    temp_searchQuery = "CREATE TEMP TABLE bs ( uid, \"Birthday\", \"Anniversary\" );";
-		    temp_searchQuery += "INSERT INTO bs SELECT uid,substr(\"Birthday\", 6, 10),substr(\"Anniversary\", 6, 10) FROM addressbook WHERE ( \"Birthday\" != '' OR \"Anniversary\" != '' );";
-
-                    temp_searchQuery += QString( "SELECT uid FROM bs WHERE (\"%1\" <= '%2-%3\' AND \"%4\" >= '%5-%6')" )
+		    datediff_query = "CREATE TEMP TABLE bs ( uid, \"Birthday\", \"Anniversary\" );";
+		    datediff_query += "INSERT INTO bs SELECT uid,substr(\"Birthday\", 6, 10),substr(\"Anniversary\", 6, 10) FROM addressbook WHERE ( \"Birthday\" != '' OR \"Anniversary\" != '' );";
+		    datediff_query += QString( "SELECT uid FROM bs WHERE " ) + uid_query;
+                    datediff_query += QString( " (\"%1\" <= '%2-%3\' AND \"%4\" >= '%5-%6')" )
                         .arg( *it )
 			    //.arg( QString::number( endDate->year() ).rightJustify( 4, '0' ) )
                         .arg( QString::number( endDate->month() ).rightJustify( 2, '0' ) )
@@ -607,17 +607,13 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
                 }
 
                 if ( settings & OPimContactAccess::DateYear ){
-                    // if ( settings & OPimContactAccess::DateDiff )
-		    //     searchQuery += " AND";
-
                     searchQuery += QString( " (\"%1\" LIKE '%2-%')" )
                         .arg( *it )
                         .arg( QString::number( endDate->year() ).rightJustify( 4, '0' ) );
                 }
 
                 if ( settings & OPimContactAccess::DateMonth ){
-                    if ( ( settings & OPimContactAccess::DateDiff )
-                         || ( settings & OPimContactAccess::DateYear ) )
+                    if ( settings & OPimContactAccess::DateYear )
                         searchQuery += " AND";
 
                     searchQuery += QString( " (\"%1\" LIKE '%-%2-%')" )
@@ -626,8 +622,7 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
                 }
 
                 if ( settings & OPimContactAccess::DateDay ){
-                    if ( ( settings & OPimContactAccess::DateDiff )
-                         || ( settings & OPimContactAccess::DateYear )
+                    if ( ( settings & OPimContactAccess::DateYear )
                          || ( settings & OPimContactAccess::DateMonth ) )
                         searchQuery += " AND";
 
@@ -642,28 +637,37 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
                 // LIKE is not case sensitive, GLOB is case sensitive
                 // Do exist a better solution to switch this ?
                 if ( settings & OPimContactAccess::IgnoreCase )
-                    searchQuery += "(\"" + *it + "\"" + " LIKE " + "'"
+                    searchQuery += " (\"" + *it + "\"" + " LIKE " + "'"
                         + queryStr.replace(QRegExp("\\*"),"%") + "'" + ")";
                 else
-                    searchQuery += "(\"" + *it + "\"" + " GLOB " + "'"
+                    searchQuery += " (\"" + *it + "\"" + " GLOB " + "'"
                         + queryStr + "'" + ")";
 
             }
         }
 
         delete endDate;
+
+	// The following if line is a replacement for 
+	// if ( searchQuery.endsWith( "AND" ) )
+	if ( searchQuery.findRev( "AND" ) == ( searchQuery.length() - 3 ) ){
+		odebug << "remove AND" << oendl;
+		searchQuery.remove( searchQuery.length()-3, 3 ); // Hmmmm..
+	}
+
     }
 
-    // The following is very ugly! (eilers)
-    if ( !temp_searchQuery.isEmpty() && !searchQuery.isEmpty() ){
+    // Now compose the complete query
+    QString qu = "SELECT uid FROM addressbook WHERE " + uid_query; 
+
+    if ( !datediff_query.isEmpty() && !searchQuery.isEmpty() ){
 	    // If we use DateDiff, we have to intersect two queries.
-	    qu = temp_searchQuery + QString( " INTERSECT " ) + qu + searchQuery;
-    } else if ( temp_searchQuery.isEmpty() && !searchQuery.isEmpty() ){
+	    qu = datediff_query + QString( " INTERSECT " ) + qu + searchQuery;
+    } else if ( datediff_query.isEmpty() && !searchQuery.isEmpty() ){
 	    qu += searchQuery;
-    } else if ( !temp_searchQuery.isEmpty() && searchQuery.isEmpty() ){
-	    // This will cause wrong results!! Uid filter is not used here!
-	    qu = temp_searchQuery;
-    } else if ( temp_searchQuery.isEmpty() && searchQuery.isEmpty() ){
+    } else if ( !datediff_query.isEmpty() && searchQuery.isEmpty() ){
+	    qu = datediff_query;
+    } else if ( datediff_query.isEmpty() && searchQuery.isEmpty() ){
 	    UIDArray empty;
 	    return empty;
     } 
@@ -681,7 +685,7 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
     UIDArray list = extractUids( res );
 
     // Remove temp table if created
-    if ( !temp_searchQuery.isEmpty( ) ){
+    if ( !datediff_query.isEmpty( ) ){
 	    qu = "DROP TABLE bs";
 	    OSQLRawQuery raw( qu );
 	    OSQLResult res = m_driver->query( &raw );
