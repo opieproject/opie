@@ -26,6 +26,8 @@
 #include <qscrollbar.h>
 #include <qstring.h>
 
+class QProgressBar;
+
 
 /**
  * KDE themed styles.
@@ -62,6 +64,8 @@ public:
 	/// @internal
 	// to make it possible for derived classes to overload this function
 	virtual void polish( QPalette& pal );
+
+	virtual bool eventFilter ( QObject *obj, QEvent *ev );
 
 	/**
 	 * This is a convenience method for drawing widgets with
@@ -312,12 +316,9 @@ public:
 	/**
 	 * Draw a menubar item.
 	 */
-#if 0
-
-	virtual void drawKMenuItem( QPainter *p, int x, int y, int w, int h,
-	                            const QColorGroup &g, bool active,
-	                            QMenuItem *item, QBrush *fill = NULL );
-#endif
+	virtual void drawMenuBarItem( QPainter *p, int x, int y, int w, int h,
+	                              QMenuItem *item, const QColorGroup &g, 
+	                              bool enabled, bool active );
 	/**
 	 * Return the width of the splitter as specified in the config file.
 	 */
@@ -352,8 +353,7 @@ public:
 	/**
 	 * Draw a @ref KProgess bar.
 	 */ 
-	//    virtual void drawKProgressBlock(QPainter *p, int x, int y, int w, int h,
-	//                                    const QColorGroup &g, QBrush *fill);
+	virtual void drawProgressBar (QPainter *, int , int , int , int , const QColorGroup &, int );
 	/**
 	 * Return the background for @ref KProgress.
 	 */ 

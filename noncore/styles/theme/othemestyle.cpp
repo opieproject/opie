@@ -25,9 +25,68 @@
 #include <qpopupmenu.h>
 #include <qtabbar.h>
 #include <qglobal.h>
+#include <qprogressbar.h>
 
 #include <limits.h>
 #include <stdio.h>
+
+typedef void (QStyle::*QDrawMenuBarItemImpl) (QPainter *, int, int, int, int, QMenuItem *,
+                          QColorGroup &, bool, bool);
+
+QDrawMenuBarItemImpl qt_set_draw_menu_bar_impl(QDrawMenuBarItemImpl impl);
+
+
+/* !! HACK !! Beware
+ * 
+ * TT forgot to make the QProgressBar widget styleable in Qt 2.x
+ * So the only way to customize the drawing, is to intercept the 
+ * paint event - since we have to use protected functions, we need
+ * to derive a "hack" class from QProgressBar and do the painting
+ * in there.
+ * 
+ * - sandman
+ */
+
+class HackProgressBar : public QProgressBar {
+public:
+	HackProgressBar ( );
+	
+	void paint ( QPaintEvent *event, OThemeStyle *style )
+	{
+		QPainter p( this );
+
+		if ( !contentsRect().contains( event->rect() ) ) {
+			p.save();
+			p.setClipRegion( event->region().intersect(frameRect()) );
+			drawFrame( &p);
+			p.restore();
+		}
+		if ( event->rect().intersects( contentsRect() ))  {
+			p.setClipRegion( event->region().intersect( contentsRect() ) );
+
+			int x, y, w, h;
+			contentsRect ( ). rect ( &x, &y, &w, &h );
+
+			int prog = progress ( );
+			int total = totalSteps ( );
+			if ( prog < 0 )
+				prog = 0;
+			if ( total <= 0 )
+				total = 1;
+			int perc = prog * 100 / total;
+
+			style-> drawProgressBar ( &p, x, y, w, h, colorGroup ( ), perc );	
+
+			if ( progress ( ) >= 0 && totalSteps ( ) > 0 ) {			
+				QString pstr;
+				pstr. sprintf ( "%d%%", 100 * progress()/totalSteps ());
+				p. setPen ( colorGroup().text());//g.highlightedText ( ));
+				p. drawText (x,y,w-1,h-1,AlignCenter,pstr);
+			}
+		}
+	}
+};
+
 
 #define QCOORDARRLEN(x) sizeof(x)/(sizeof(QCOORD)*2)
 
@@ -42,7 +101,10 @@ OThemeStyle::~OThemeStyle()
 {}
 
 void OThemeStyle::polish( QApplication * /*app*/ )
-{}
+{
+	qt_set_draw_menu_bar_impl((QDrawMenuBarItemImpl) &OThemeStyle::drawMenuBarItem);
+}
+
 
 void OThemeStyle::polish( QPalette &p )
 {
@@ -79,6 +141,7 @@ void OThemeStyle::polish( QPalette &p )
 
 void OThemeStyle::unPolish( QApplication *app )
 {
+	qt_set_draw_menu_bar_impl ( 0 );
 	app->setPalette( oldPalette, true );
 }
 
@@ -112,7 +175,7 @@ void OThemeStyle::polish( QWidget *w )
 			w->setPalette( newPal );
 		}
 	}
-	if ( w->inherits( "QCheckBox" ) ) {
+	else if ( w->inherits( "QCheckBox" ) ) {
 		if ( isColor( IndicatorOff ) || isColor( IndicatorOn ) ) {
 			QPalette newPal( w->palette() );
 			w->setPalettePropagation( QWidget::SamePalette );
@@ -125,7 +188,7 @@ void OThemeStyle::polish( QWidget *w )
 			w->setPalette( newPal );
 		}
 	}
-	if ( w->inherits( "QRadioButton" ) ) {
+	else if ( w->inherits( "QRadioButton" ) ) {
 		if ( isColor( ExIndicatorOff ) || isColor( ExIndicatorOn ) ) {
 			QPalette newPal( w->palette() );
 			w->setPalettePropagation( QWidget::SamePalette );
@@ -138,6 +201,9 @@ void OThemeStyle::polish( QWidget *w )
 				newPal.setActive( *colorGroup( newPal.active(), ExIndicatorOn ) );
 			w->setPalette( newPal );
 		}
+	}
+	else if ( w-> inherits ( "QProgressBar" ) ) {
+		w-> installEventFilter ( this );
 	}
 }
 
@@ -159,10 +225,24 @@ void OThemeStyle::unPolish( QWidget* w )
 	}
 	if ( w->inherits( "QPopupMenu" ) )
 		w->unsetPalette();
-	if ( w->inherits( "QCheckBox" ) )
+	else if ( w->inherits( "QCheckBox" ) )
 		w->unsetPalette();
-	if ( w->inherits( "QRadioButton" ) )
+	else if ( w->inherits( "QRadioButton" ) )
 		w->unsetPalette();
+	else if ( w-> inherits ( "QProgressBar" ) )
+		w-> removeEventFilter ( this );
+}
+
+bool OThemeStyle::eventFilter ( QObject *obj, QEvent *ev )
+{
+	// only QProgressBar so far
+
+	if ( ev-> type ( ) == QEvent::Paint ) {
+		HackProgressBar *pb = (HackProgressBar *) obj;
+		pb-> paint ((QPaintEvent *) ev, this );
+		return true;
+	}
+	return false;
 }
 
 void OThemeStyle::drawBaseButton( QPainter *p, int x, int y, int w, int h,
@@ -1347,11 +1427,19 @@ void OThemeStyle::drawKMenuBar( QPainter *p, int x, int y, int w, int h,
 	drawBaseButton( p, x, y, w, h, *colorGroup( g, MenuBar ), false, false,
 	                MenuBar );
 }
+#endif
 
-void OThemeStyle::drawKMenuItem( QPainter *p, int x, int y, int w, int h,
-                                 const QColorGroup &g, bool active,
-                                 QMenuItem *mi, QBrush * )
+void OThemeStyle::drawMenuBarItem( QPainter *p, int x, int y, int w, int h,
+                                 QMenuItem *mi, const QColorGroup &g, 
+                                 bool /*enabled*/, bool active )
 {
+    if(active){
+        x -= 2; // Bug in Qt/E 
+        y -= 2;
+        w += 2;
+        h += 2;
+    }
+
 	const QColorGroup * cg = colorGroup( g, active ? MenuBarItem : MenuBar );
 	QColor btext = cg->buttonText();
 	if ( active )
@@ -1359,10 +1447,28 @@ void OThemeStyle::drawKMenuItem( QPainter *p, int x, int y, int w, int h,
 	//qDrawShadePanel(p, x, y, w, h, *cg, false, 1);
 
 	drawItem( p, x, y, w, h, AlignCenter | ShowPrefix | DontClip | SingleLine,
-	          *cg, mi->isEnabled(), mi->pixmap(), mi->text(),
+	          *cg, mi-> isEnabled ( ), mi->pixmap(), mi->text(),
 	          -1, &btext );
-	;
 }
+
+
+
+void OThemeStyle::drawProgressBar ( QPainter *p, int x, int y, int w, int h, const QColorGroup &g, int percent )
+{
+	const QColorGroup * cg = colorGroup( g, ProgressBg );
+	QBrush bg;
+	bg.setColor( cg->color( QColorGroup::Background ) );
+	if ( isPixmap( ProgressBg ) )
+		bg.setPixmap( *uncached( ProgressBg ) );
+	
+	int pw = w * percent / 100;
+		
+	p-> fillRect ( x + pw, y, w - pw, h, bg ); // ### TODO	
+	
+	drawBaseButton( p, x, y, pw, h, *cg, false, false, ProgressBar );
+}
+
+#if 0
 
 void OThemeStyle::drawKProgressBlock( QPainter *p, int x, int y, int w, int h,
                                       const QColorGroup &g, QBrush * )
