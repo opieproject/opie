@@ -436,7 +436,7 @@ static void setTreble( int t = 0, int percent = -1 )
 
 
 /**
-  \class QPEApplication 
+  \class QPEApplication
   \brief The QPEApplication class implements various system services
     that are available to all Qtopia applications.
 
@@ -735,7 +735,6 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 #ifdef QTOPIA_INTERNAL_INITAPP
 void QPEApplication::initApp( int argc, char **argv )
 {
-    bool initial = pidChannel; // was set to 0 in the initializer
     delete pidChannel;
     d->keep_running = TRUE;
     d->preloaded = FALSE;
@@ -755,10 +754,10 @@ void QPEApplication::initApp( int argc, char **argv )
     connect( pidChannel, SIGNAL(received(const QCString &, const QByteArray &)),
 	    this, SLOT(pidMessage(const QCString &, const QByteArray &)));
 
-    if (!initial) {
-        processQCopFile();
-        d->keep_running = d->qcopq.isEmpty();
-    }
+
+
+    processQCopFile();
+    d->keep_running = d->qcopq.isEmpty();
 
     for (int a=0; a<argc; a++) {
 	if ( qstrcmp(argv[a],"-preload")==0 ) {
@@ -1571,7 +1570,7 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 */
 void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
 {
-	    setMainWidget(mw);
+//	    setMainWidget(mw); this breaks FastLoading because lastWindowClose() would quit
             d->show(mw, nomaximize );
 }
 
@@ -1592,7 +1591,7 @@ void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
 		Global::setDocument( mw, QString::fromUtf8(argv()[1]) );
 
 
-	setMainWidget(mw);
+//	setMainWidget(mw); see above
 	d->show(mw, nomaximize );
 }
 
