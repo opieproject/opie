@@ -27,44 +27,16 @@ CommandEditDialog::CommandEditDialog(QWidget *parent, const char* name, WFlags f
   m_SuggestedCommandList->setSorting(-1,FALSE);
   m_SuggestedCommandList->clearSelection();
   m_SuggestedCommandList->setSorting(0,TRUE);
-
-    QListViewItem *item;
-
-
-  item = new QListViewItem( m_SuggestedCommandList,"ls ");
-
-  item = new QListViewItem( m_SuggestedCommandList,"cat ");
-  item = new QListViewItem( m_SuggestedCommandList,"cd ");
-  item = new QListViewItem( m_SuggestedCommandList,"chmod ");
-  item = new QListViewItem( m_SuggestedCommandList,"cp ");
-  item = new QListViewItem( m_SuggestedCommandList,"dc ");
-  item = new QListViewItem( m_SuggestedCommandList,"df ");
-  item = new QListViewItem( m_SuggestedCommandList,"dmesg ");
-  item = new QListViewItem( m_SuggestedCommandList,"echo ");
+  QListViewItem *item;
   item = new QListViewItem( m_SuggestedCommandList,"export ");
-  item = new QListViewItem( m_SuggestedCommandList,"env ");
-  item = new QListViewItem( m_SuggestedCommandList,"find ");
-  item = new QListViewItem( m_SuggestedCommandList,"free ");
   item = new QListViewItem( m_SuggestedCommandList,"ifconfig ");
   item = new QListViewItem( m_SuggestedCommandList,"ipkg ");
-  item = new QListViewItem( m_SuggestedCommandList,"mkdir ");
-  item = new QListViewItem( m_SuggestedCommandList,"mv ");
-  item = new QListViewItem( m_SuggestedCommandList,"nc localhost 7776 ");
-  item = new QListViewItem( m_SuggestedCommandList,"nc localhost 7777 ");
-  item = new QListViewItem( m_SuggestedCommandList,"nslookup ");
-  item = new QListViewItem( m_SuggestedCommandList,"ping ");
-  item = new QListViewItem( m_SuggestedCommandList,"ps aux");
-  item = new QListViewItem( m_SuggestedCommandList,"pwd ");
-  item = new QListViewItem( m_SuggestedCommandList,"rm ");
-  item = new QListViewItem( m_SuggestedCommandList,"rmdir ");
-  item = new QListViewItem( m_SuggestedCommandList,"route ");
   item = new QListViewItem( m_SuggestedCommandList,"gzip ");
   item = new QListViewItem( m_SuggestedCommandList,"gunzip ");
   item = new QListViewItem( m_SuggestedCommandList,"chgrp ");
   item = new QListViewItem( m_SuggestedCommandList,"chown ");
   item = new QListViewItem( m_SuggestedCommandList,"date ");
   item = new QListViewItem( m_SuggestedCommandList,"dd ");
-  item = new QListViewItem( m_SuggestedCommandList,"df ");
   item = new QListViewItem( m_SuggestedCommandList,"dmesg ");
   item = new QListViewItem( m_SuggestedCommandList,"fuser ");
   item = new QListViewItem( m_SuggestedCommandList,"hostname ");
@@ -72,6 +44,9 @@ CommandEditDialog::CommandEditDialog(QWidget *parent, const char* name, WFlags f
   item = new QListViewItem( m_SuggestedCommandList,"killall ");
   item = new QListViewItem( m_SuggestedCommandList,"ln ");
   item = new QListViewItem( m_SuggestedCommandList,"ln -s ");
+  item = new QListViewItem( m_SuggestedCommandList,"lsmod");
+  item = new QListViewItem( m_SuggestedCommandList,"depmod -a");
+  item = new QListViewItem( m_SuggestedCommandList,"modprobe ");
   item = new QListViewItem( m_SuggestedCommandList,"mount ");
   item = new QListViewItem( m_SuggestedCommandList,"more ");
   item = new QListViewItem( m_SuggestedCommandList,"sort ");
@@ -79,6 +54,7 @@ CommandEditDialog::CommandEditDialog(QWidget *parent, const char* name, WFlags f
   item = new QListViewItem( m_SuggestedCommandList,"umount ");
   item = new QListViewItem( m_SuggestedCommandList,"mknod ");
   item = new QListViewItem( m_SuggestedCommandList,"netstat ");
+  item = new QListViewItem( m_SuggestedCommandList,"route ");
   item = new QListViewItem( m_SuggestedCommandList,"cardctl eject ");
   m_SuggestedCommandList->setSelected(m_SuggestedCommandList->firstChild(),TRUE);
   m_SuggestedCommandList->sort();
