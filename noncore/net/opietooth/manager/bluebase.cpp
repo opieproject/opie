@@ -35,6 +35,7 @@
 #include <qcheckbox.h>
 #include <qlineedit.h>
 #include <qlistview.h>
+#include <qdir.h>
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
@@ -138,15 +139,40 @@ namespace OpieTooth {
      */
     void BlueBase::readSavedDevices() {
 
+        QList<RemoteDevice> *loadedDevices = new QList<RemoteDevice>;
+
+        Config deviceList( QDir::homeDirPath() + "/Settings/bluetooth/devicelist.conf", Config::File );
+
+
+        //   RemoteDevice *currentDevice = RemoteDevice( ,  );
+        //loadedDevices->append( currentDevice );
+
+        addSearchedDevices( *loadedDevices );
     }
 
     /*
-     * Read the list of allready known devices
+     * Write the list of allready known devices
      *
      */
     void BlueBase::writeSavedDevices() {
 
+        QListViewItemIterator it( ListView2 );
 
+        // one top conf file with all decices (by mac adress)
+        Config deviceList( QDir::homeDirPath() + "/Settings/bluetooth/devicelist.conf", Config::File );
+
+        for ( ; it.current(); ++it ) {
+
+            // MAC adress as group
+            deviceList.setGroup( it.current()->text(1) );
+            deviceList.writeEntry("inList",  1);
+
+            // seperate config file for each device, to store more information in future.
+
+            Config conf( QDir::homeDirPath() + "/Settings/bluetooth/" + (it.current()->text(1)) + ".conf", Config::File );
+            conf.setGroup("Info");
+            conf.writeEntry("name", it.current()->text(0) );
+        }
     }
 
 
@@ -165,7 +191,7 @@ namespace OpieTooth {
         passkeyLine->setText(defaultPasskey);
         // set info tab
         setInfo();
-}
+    }
 
 
     /**
@@ -290,6 +316,7 @@ namespace OpieTooth {
      * Decontructor
      */
     BlueBase::~BlueBase(){
+        writeSavedDevices();
     }
 
 }
