@@ -1,64 +1,159 @@
 #include "oyatzee.h"
 
-#include <qpe/applnk.h>
-#include <qpe/global.h>
-#include <qpe/filemanager.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
-
-#include <qapplication.h>
 #include <qmessagebox.h>
-#include <qcombobox.h>
-#include <qdatetime.h>
-#include <qfileinfo.h>
-#include <qfile.h>
+#include <qapplication.h>
 #include <qdir.h>
-#include <qiconset.h>
 #include <qlabel.h>
-#include <qlineedit.h>
 #include <qpushbutton.h>
-#include <qtextstream.h>
 #include <qtimer.h>
-#include <qpe/qpetoolbar.h>
-#include <qtoolbutton.h>
 #include <qvbox.h>
-#include <qwidgetstack.h>
 #include <qpainter.h>
 #include <qlayout.h>
-#include <qregexp.h>
+#include <qpoint.h>
 
 #include <stdlib.h>
-#include <unistd.h>
-#include <pwd.h>
-#include <sys/types.h>
 
 OYatzee::OYatzee( QWidget *parent , const char *name, WFlags fl ) : QMainWindow( parent , name , fl )
 {
 	QWidget *thing = new QWidget( this );
 	setCentralWidget( thing );
-	
+
+	setCaption( tr( "OYatzee" ) );
 
 	setPlayerNumber( 4 );
 	setRoundsNumber( 1 );
+
+	lastPlayerFinished = false;
+	currentPlayer = 1;
 	
-	playerList ps;
 	ps.append( new Player( "Carsten" ) );
 	ps.append( new Player( "Julia" ) );
 	ps.append( new Player( "Christine" ) );
 	ps.append( new Player( "Stephan" ) );
 
-//X 	Game *g = new Game( ps );
-//X 	
 	
 	QVBoxLayout *vbox = new QVBoxLayout( thing );
 
 	sb = new Scoreboard( ps, thing , "sb" );
+	connect( sb->pb , SIGNAL( item( int ) ), this , SLOT( slotEndRound( int ) ) );
+	
 	dw = new DiceWidget( thing , "dw" );
+	dw->setMaximumHeight( this->height()/4 );
 	connect( dw->rollButton, SIGNAL( clicked() ), this , SLOT( slotRollDices() ) );
 	
 	vbox->addWidget( sb );
 	vbox->addWidget( dw );
 }
+
+void OYatzee::slotEndRound( int item )
+{
+	qDebug( "Der User hat Nummer %d ausgewählt" , item );
+
+	/*
+	 * if the user clicked on Total, Bonus or Score and thus not on a 
+	 * selectable item return and do nothing
+	 */
+	if ( item == 7 || item == 8 || item == 16 ) return;
+
+	/*
+	 * check if the user can really click on that item
+	 */
+	if ( posibilities.find( item ) == posibilities.end() ) return;
+	
+	QValueListInt numbers;
+	
+	Dice *d = dw->diceList.first();
+	for ( ; d != 0 ; d = dw->diceList.next() )
+	{
+		numbers.append( d->hasValue() );
+	}
+
+	int points = 0;
+
+	switch ( item )
+	{
+		case Ones:
+			points = getPoints( 1 , numbers );
+			break;
+		case Twos:
+			points = getPoints( 2 , numbers );
+			break;
+		case Threes:
+			points = getPoints( 3 , numbers );
+			break;
+		case Fours:
+			points = getPoints( 4 , numbers );
+			break;
+		case Fives:
+			points = getPoints( 5 , numbers );
+			break;
+		case Sixes:
+			points = getPoints( 6 , numbers );
+			break;
+		case ThreeOfAKind:
+			points = oakPoints;
+			break;
+		case FourOfAKind:
+			points = oakPoints;
+			break;
+		case FullHouse:
+			points = 25;
+			break;
+		case SStraight:
+			points = 30;
+			break;
+		case LStraight:
+			points = 40;
+			break;
+		case Yatzee:
+			points = 50;
+			break;
+		case Chance:
+			points = getPoints ( Chance , numbers );
+	}
+
+	sb->nextRB(currentPlayer-1)->updateMap( item , points );
+	nextPlayer();
+
+	qDebug( "Punkte: %d" , points );
+}
+
+void OYatzee::nextPlayer()
+{
+	currentPlayer++;
+
+	if ( currentPlayer > numOfPlayers )
+	{
+		currentPlayer = 1;
+	}
+	
+	ps.at(currentPlayer-1)->turn = 0;
+}
+
+int OYatzee::getPoints( const int num , QValueListInt l)
+{
+	QValueListInt::Iterator it = l.begin();
+	int c = 0;
+	
+	if ( num != Chance )
+	{	
+		for ( ; it != l.end() ; ++it )
+		{
+			if ( *it == num )
+				c++;
+		}
+
+		return c * num;
+	}
+	else
+	{
+		for ( ; it != l.end() ; ++it )
+		{
+			c += *it;
+		}
+		return c;
+	}
+}	
 
 OYatzee::~OYatzee()
 {
@@ -75,7 +170,7 @@ void OYatzee::detectPosibilities()
 	
 	for ( ; d != 0 ; d = dw->diceList.next() )
 	{
-		numbers.append( d->Value );
+		numbers.append( d->hasValue() );
 	}
 	
 	//the 6 numbers
@@ -98,7 +193,6 @@ void OYatzee::detectPosibilities()
 		}
 	}
 		
-	
 	//3er, 4er, Yatzee
 	it = numbers.begin();
 	int count;
@@ -123,16 +217,18 @@ void OYatzee::detectPosibilities()
 		
 		if ( count >= 3 )
 		{
-			posibilities.append( 7 );
+			posibilities.append( 9 );
 
 			//now we check if it is a full house
 			if ( count == 3 && countFH == 2 ) //aka Full House
-				posibilities.append( 9 );
+				posibilities.append( 11 );
+			if ( count >= 4 )
+				posibilities.append( 10 );
+			if ( count == 5 )                     //Yatzee
+				posibilities.append( 14 );
+		
+			oakPoints = count * i;
 		}
-		if ( count >= 4 )
-			posibilities.append( 8 );
-		if ( count == 5 )                     //Yatzee
-			posibilities.append( 12 );
 	}
 	
 	//S-Straight
@@ -157,9 +253,9 @@ void OYatzee::detectPosibilities()
 			isShort = true;
 		
 		if ( isShort )
-			posibilities.append( 10 );
+			posibilities.append( 12 );
 		if ( isLong )
-			posibilities.append( 11 );
+			posibilities.append( 13 );
 	}	
 	
 	posibilities.append( 13 );        //Chance, well, this is allways possible
@@ -169,53 +265,65 @@ void OYatzee::detectPosibilities()
 
 void OYatzee::displayPossibilites()
 {
-	for ( QValueListInt::Iterator it = posibilities.begin() ; it != posibilities.end(); ++it )
-	{
-		qDebug( QString::number( *it ) );
-		switch ( *it )
-		{
-			case Ones:
-				qDebug( "1er" );
-				break;
-			case Twos:
-				qDebug( "2er" );
-				break;
-			case Threes:
-				qDebug( "3er" );
-				break;
-			case Fours:
-				qDebug( "4er" );
-				break;
-			case Fives:
-				qDebug( "5er" );
-				break;
-			case Sixes:
-				qDebug( "6er" );
-				break;
-			case ThreeOfAKind:
-				qDebug( "3oaK" );
-				break;
-			case FourOfAKind:
-				qDebug( "4oaK" );
-				break;
-			case FullHouse:
-				qDebug( "Full House" );
-				break;
-			case SStraight:
-				qDebug( "Short S" );
-				break;
-			case LStraight:
-				qDebug( "Long S" );
-				break;
-			case Yatzee:
-				qDebug( "Yatzee!" );
-				break;
-			case Chance:
-				qDebug( "Chance" );
-				break;
-		}
-	}
+//X 	for ( QValueListInt::Iterator it = posibilities.begin() ; it != posibilities.end(); ++it )
+//X 	{
+//X 		qDebug( QString::number( *it ) );
+//X 		switch ( *it )
+//X 		{
+//X 			case Ones:
+//X 				qDebug( "1er" );
+//X 				break;
+//X 			case Twos:
+//X 				qDebug( "2er" );
+//X 				break;
+//X 			case Threes:
+//X 				qDebug( "3er" );
+//X 				break;
+//X 			case Fours:
+//X 				qDebug( "4er" );
+//X 				break;
+//X 			case Fives:
+//X 				qDebug( "5er" );
+//X 				break;
+//X 			case Sixes:
+//X 				qDebug( "6er" );
+//X 				break;
+//X 			case ThreeOfAKind:
+//X 				qDebug( "3oaK" );
+//X 				break;
+//X 			case FourOfAKind:
+//X 				qDebug( "4oaK" );
+//X 				break;
+//X 			case FullHouse:
+//X 				qDebug( "Full House" );
+//X 				break;
+//X 			case SStraight:
+//X 				qDebug( "Short S" );
+//X 				break;
+//X 			case LStraight:
+//X 				qDebug( "Long S" );
+//X 				break;
+//X 			case Yatzee:
+//X 				qDebug( "Yatzee!" );
+//X 				break;
+//X 			case Chance:
+//X 				qDebug( "Chance" );
+//X 				break;
+//X 		}
+//X 	}
+
+	sb->pb->setIntlist(  posibilities );
+	sb->pb->update();
 }
+
+void OYatzee::startGame()
+{
+	/*
+	 * TODO
+	 */
+}
+
+void OYatzee::stopGame(){}
 
 void OYatzee::setPlayerNumber( const int num )
 {
@@ -233,6 +341,16 @@ void OYatzee::slotStartGame()
 
 void OYatzee::slotRollDices()
 {
+	qDebug( "Roll nummer: %d" , ps.at( currentPlayer-1 )->turn );
+
+	if ( ps.at( currentPlayer-1 )->turn == 3 )
+	{
+		QMessageBox::information(   this, 
+									"OYatzee",
+									tr( "Only three rolls per turn allowed." ) );
+		return;
+	}
+		
 	Dice *d = dw->diceList.first();
 	
 	for ( ; d != 0 ; d = dw->diceList.next() )
@@ -241,6 +359,10 @@ void OYatzee::slotRollDices()
 			d->roll();
 	}
 	
+//	qDebug( "Roll nummer (vorher): %d" , ps.at( currentPlayer-1 )->turn );
+	ps.at(currentPlayer-1)->turn++;
+//	qDebug( "Roll nummer (nachher): %d" , ps.at( currentPlayer-1 )->turn );
+
 	detectPosibilities();
 }
 
@@ -269,6 +391,17 @@ Scoreboard::Scoreboard( playerList ps, QWidget *parent, const char *name ) : QWi
 	}
 }
 
+Resultboard* Scoreboard::nextRB( int currentPlayer )
+{
+	Resultboard *b;
+
+	b = rbList.at( currentPlayer );
+	
+	qDebug( "Anzahl: %d" ,	rbList.count() );
+
+	return b;
+}		
+
 void Scoreboard::createResultboards(const int num)
 {
 	Player *p = ps_.first();
@@ -281,10 +414,10 @@ void Scoreboard::createResultboards(const int num)
 
 void Scoreboard::paintEvent( QPaintEvent * )
 {
-	QPainter p;
-	p.begin( this );
-
-	p.drawRect( 0,0, this->width() , this->height() );
+//X 	QPainter p;
+//X 	p.begin( this );
+//X 
+//X 	p.drawRect( 0,0, this->width() , this->height() );
 }
 
 /*
@@ -307,7 +440,7 @@ void Dice::slotSelected()
 	update();
 }
 
-int Dice::hasValue()
+const int Dice::hasValue() const
 {
 	return Value;
 }
@@ -340,25 +473,47 @@ void Dice::paintEvent( QPaintEvent * )
 
 void Dice::paintNumber( QPainter *p )
 {
+	p->setBrush( Qt::black );
+	
+	int w = this->width();
+	int h = this->height();
+	int r = this->width();
+	r /= 10;
+	
 	switch ( Value )
 	{
 		case 1:
-			p->drawText( 10,10,"1");
+			p->drawEllipse( (int)( 0.5*w - r ) , (int)( 0.5*h - r ) , r , r ) ;
 			break;
 		case 2:
-			p->drawText( 10,10,"2");
+			p->drawEllipse( (int)( 0.3*w - r ) , (int)( 0.3*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.7*w - r ) , (int)( 0.7*h - r ) , r , r ) ;
 			break;
 		case 3:
-			p->drawText( 10,10,"3");
+			p->drawEllipse( (int)( 0.5*w - r ) , (int)( 0.5*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.2*w - r ) , (int)( 0.2*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.8*w - r ) , (int)( 0.8*h - r ) , r , r ) ;
 			break;
 		case 4:
-			p->drawText( 10,10,"4");
+			p->drawEllipse( (int)( 0.2*w - r ) , (int)( 0.2*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.8*w - r ) , (int)( 0.8*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.8*w - r ) , (int)( 0.2*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.2*w - r ) , (int)( 0.8*h - r ) , r , r ) ;
 			break;
 		case 5:
-			p->drawText( 10,10,"5");
+			p->drawEllipse( (int)( 0.5*w - r ) , (int)( 0.5*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.2*w - r ) , (int)( 0.2*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.8*w - r ) , (int)( 0.8*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.8*w - r ) , (int)( 0.2*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.2*w - r ) , (int)( 0.8*h - r ) , r , r ) ;
 			break;
 		case 6:
-			p->drawText( 10,10,"6");
+			p->drawEllipse( (int)( 0.2*w - r ) , (int)( 0.2*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.8*w - r ) , (int)( 0.8*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.8*w - r ) , (int)( 0.2*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.2*w - r ) , (int)( 0.8*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.2*w - r ) , (int)( 0.5*h - r ) , r , r ) ;
+			p->drawEllipse( (int)( 0.8*w - r ) , (int)( 0.5*h - r ) , r , r ) ;
 			break;
 	}
 }
@@ -394,14 +549,48 @@ DiceWidget::DiceWidget( QWidget *parent , const char *name ) : QWidget(  parent 
 Player::Player( QString name )
 {
 	playerName = name;
+	setupResultList();
+	turn = 0;
 }
 
+void Player::setupResultList()
+{
+	for ( int i = 1 ; i < 14 ; ++i )
+	{
+		pResults.append( 0 );
+	}
+}
+
+/*
+ * TODO: muss noch genutzt werden
+ */
+void Player::updateTotalPoints( pointMap m )
+{
+	pointMap::Iterator it = m.begin();
+	for ( ; it != m.end() ; ++it )
+	{
+		totalPoints += it.data();
+	}
+	
+}
+
+
+void Player::setResults( const int cat , const int points )
+{
+	QValueListInt::Iterator it = pResults.at( cat );
+	*it = points;
+}
 
 /*
  * Board
  */
 Board::Board( QWidget *parent , const char* name ) : QWidget ( parent , name )
 {
+}
+
+void Board::mousePressEvent( QMouseEvent *e )
+{
+	emit clicked( e->pos() );
 }
 
 /*
@@ -417,9 +606,27 @@ void Resultboard::paintEvent( QPaintEvent* )
 {
 	QPainter p;
 	p.begin( this );
+	
+	const int cell_width = this->width();
+	const int cell_height = this->height()/17;
+	
+	pointMap::Iterator it = pMap.begin();
+	for ( ; it != pMap.end() ; ++it )
+	{
+		int i = it.key();
+		qDebug( "ok: %d , %d" , i , it.data() );
+		p.drawText( 0, i*cell_height , cell_width , cell_height , Qt::AlignCenter , QString::number( it.data() ) );
+	}
 
-	p.drawText( 10,10, pName );
-	p.drawRect( 0,0, this->width() , this->height() );
+	p.drawText( 0,0,cell_width,cell_height, Qt::AlignCenter , pName ); //Playername
+}
+
+
+void Resultboard::updateMap( int item , int points )
+{
+	pMap.insert( item , points );
+
+	update();
 }
 
 /*
@@ -428,18 +635,6 @@ void Resultboard::paintEvent( QPaintEvent* )
 
 Possibilityboard::Possibilityboard( QWidget *parent , const char* name ) : Board ( parent , name )
 {
-}
-
-void Possibilityboard::paintEvent( QPaintEvent* )
-{
-	QPainter p;
-	p.begin( this );
-
-	const int cell_width = this->width();
-	const int h = this->height();
-	const int cell_height = h/17;
-
-	QStringList begriffe;
 	begriffe.append( "1er" );
 	begriffe.append( "2er" );
 	begriffe.append( "3er" );
@@ -456,29 +651,43 @@ void Possibilityboard::paintEvent( QPaintEvent* )
 	begriffe.append( "Yatzee!" );
 	begriffe.append( "Chance" );
 	begriffe.append( "Score" );
-
-	QStringList::Iterator it = begriffe.begin();
 	
+	connect( this , SIGNAL( clicked( QPoint ) ), this , SLOT( slotClicked( QPoint ) ) );
+}
+
+void Possibilityboard::slotClicked( QPoint p)
+{
+	emit item( p.y()/(this->height()/17) );
+}
+
+void Possibilityboard::paintEvent( QPaintEvent* )
+{
+	QPainter p;
+	p.begin( this );
+
+	const int cell_width = this->width();
+	const int cell_height = this->height()/17;
+
+	p.setBrush( Qt::blue );
+
+	QValueListInt::Iterator listIt = list.begin();
+	for ( ; listIt != list.end() ; ++listIt )
+	{
+		p.drawRect( 0 , (*listIt) * cell_height , cell_width , cell_height );
+	}
+
+	p.setBrush( Qt::black );
+	p.setBrush( Qt::NoBrush );
+	QStringList::Iterator begriffeIt = begriffe.begin();
 	for ( int i = 1 ; i < 18 ; ++i )
 	{
-		p.drawRect( 0 , i*cell_height , cell_width , cell_height );
-		p.drawText( 0 , i*cell_height , cell_width , cell_height , Qt::AlignCenter , *it );
-		++it;
+		p.drawText( 0 , i*cell_height , cell_width , cell_height , Qt::AlignCenter , *begriffeIt );
+		++begriffeIt;
 	}
 }
 
-/*
- * Game
- */
-
-Game::Game( playerList pla )
+void Possibilityboard::setIntlist( QValueListInt &l )
 {
-	players = pla;
+	list = l;
 }
-
-void Game::startGame()
-{}
-
-void Game::stopGame()
-{}
 
