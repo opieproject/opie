@@ -144,11 +144,16 @@ void ProcessInfo::updateData()
 
 void ProcessInfo::slotSendClicked()
 {
+	QListViewItem *currprocess = ProcessView->currentItem();
+	if ( !currprocess )
+	{
+		return;
+	}
+	
 	QString capstr = tr( "You really want to send\n" );
 	capstr.append( SignalCB->currentText() );
 	capstr.append( "\nto this process?" );
 
-	QListViewItem *currprocess = ProcessView->currentItem();
 	
     if ( QMessageBox::warning( this, currprocess->text( 1 ), capstr,
          QMessageBox::Yes | QMessageBox::Default, QMessageBox::No | QMessageBox::Escape ) == QMessageBox::Yes )

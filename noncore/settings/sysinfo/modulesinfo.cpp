@@ -122,6 +122,11 @@ void ModulesInfo::updateData()
 
 void ModulesInfo::slotSendClicked()
 {
+	if ( !ModulesView->currentItem() )
+	{
+		return;
+	}
+	
 	QString capstr = tr( "You really want to execute\n" );
 	capstr.append( CommandCB->currentText() );
 	capstr.append( "\nfor this module?" );
