@@ -60,6 +60,7 @@ bool WLANModule::isOwner(Interface *i){
  */ 
 QWidget *WLANModule::configure(Interface *i){
   WLANImp *wlanconfig = new WLANImp(0, "WlanConfig", i, false,  Qt::WDestructiveClose);
+  wlanconfig->setProfile(profile);
   return wlanconfig;
 }
 

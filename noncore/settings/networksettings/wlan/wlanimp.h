@@ -13,6 +13,7 @@ class WLANImp : public WLAN {
 public:
   WLANImp( QWidget* parent = 0, const char* name = 0, Interface *i=0, bool modal = FALSE, WFlags fl = 0 );
   ~WLANImp( );
+  void setProfile(QString &profile);
 
 protected:
   void accept();

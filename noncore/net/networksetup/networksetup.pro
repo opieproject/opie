@@ -1,4 +1,4 @@
-DESTDIR   = $(OPIEDIR)/bin
+#DESTDIR   = $(OPIEDIR)/bin
 TEMPLATE  = app
 #CONFIG   = qt warn_on debug
 CONFIG    = qt warn_on release
@@ -6,6 +6,6 @@ HEADERS   = mainwindowimp.h addconnectionimp.h defaultmodule.h  kprocctrl.h modu
 SOURCES   = main.cpp mainwindowimp.cpp addconnectionimp.cpp kprocctrl.cpp kprocess.cpp
 INCLUDEPATH += $(OPIEDIR)/include interfaces/
 DEPENDPATH  += $(OPIEDIR)/include interfaces/ wlan
-LIBS            += -lqpe -L$(OPIEDIR)/plugins/networksetup -linterfaces
+LIBS            += -lqpe -L$(OPIEDIR)/plugins/networksetup -Linterfaces/ -linterfaces
 INTERFACES  = mainwindow.ui addconnection.ui
 TARGET    = networksetup

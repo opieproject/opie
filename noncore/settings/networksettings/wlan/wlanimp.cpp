@@ -33,6 +33,10 @@ WLANImp::~WLANImp( ){
   delete config;
 }
 
+void WLANImp::setProfile(QString &profile){
+  interfaceSetup->setProfile(profile);
+}
+
 void WLANImp::readConfig()
 {
     qWarning( "WLANImp::readConfig() called." );

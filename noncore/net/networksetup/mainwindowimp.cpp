@@ -230,14 +230,8 @@ void MainWindowImp::configureClicked(){
     return;
   } 
 
-  QString currentProfile = currentProfileLabel->text();
-  if(profilesList->count() <= 1 || currentProfile == "All"){
-    currentProfile = "";
-  }
-  
   Interface *i = interfaceItems[item];
   if(i->getModuleOwner()){
-    i->getModuleOwner()->setProfile(currentProfile);
     QWidget *moduleConfigure = i->getModuleOwner()->configure(i);
     if(moduleConfigure != NULL){
       moduleConfigure->showMaximized();
@@ -247,7 +241,10 @@ void MainWindowImp::configureClicked(){
   }
   
   InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(0, "InterfaceSetupImp", i, true, Qt::WDestructiveClose);
-  //configure->setProfile(currentProfile);
+  QString currentProfileText = currentProfileLabel->text();
+  if(currentProfileText.upper() == "ALL");
+    currentProfileText = "";
+  configure->setProfile(currentProfileText);
   configure->showMaximized();
   configure->show();
 }
@@ -270,11 +267,6 @@ void MainWindowImp::informationClicked(){
     return;
   }
 
-  QStringList list;
-  for(uint i = 0; i < profilesList->count(); i++){
-    list.append(profilesList->text(i));
-  }
-	  
   if(i->getModuleOwner()){
     QWidget *moduleInformation = i->getModuleOwner()->information(i);
     if(moduleInformation != NULL){
@@ -538,6 +530,7 @@ void MainWindowImp::changeProfile(){
       }
     }
   }
+  // TODO change the profile in the modules
 }
 
 // mainwindowimp.cpp

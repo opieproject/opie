@@ -4,13 +4,13 @@ Fix Profiles
 
 Write dns script
 
-
 WLAN needs to be re-written to not use Config
-WHERE Is DHCP info stored???
-
-PPP module needs to be written
 
 Write a class that parses /proc and not ifconfig
+udchcp needs to output the dhcp information
 
-Possible other modules: ipsec, bluetooth, ipchains
+Possible other modules to write: ppp, ipsec, bluetooth, ipchains
+
+PPP module needs to scan pppd.tdb to see what is currently active
+
 

@@ -29,18 +29,24 @@ private:
 class InterfaceSetupImpDialog : public QDialog {
 Q_OBJECT
 	
-  public:
+public:
     InterfaceSetupImpDialog(QWidget* parent = 0, const char* name = 0, Interface *i=0, bool modal = false, WFlags fl = 0) : QDialog(parent, name, modal, fl){
     QVBoxLayout *InterfaceSetupLayout = new QVBoxLayout( this );
     setCaption("Interface Setup");
     interfaceSetup = new InterfaceSetupImp(this, "InterfaceSetup",i,fl);
     InterfaceSetupLayout->addWidget( interfaceSetup );
   };
+  void setProfile(QString &profile){ interfaceSetup->setProfile(profile);};
 
+private:
   InterfaceSetupImp *interfaceSetup;
 
-  protected slots:
-    void accept(){ interfaceSetup->saveChanges(); };
+protected slots:
+  void accept(){
+    interfaceSetup->saveChanges();
+    QDialog::accept();
+  };
+
 };
 
 #endif
