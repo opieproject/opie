@@ -80,7 +80,7 @@ private slots:
     void slotAdjustTime();
 private:
     void clearClock();
-
+    void clearTimer();
     bool alarmBool;
     QTimer *t;
     QLCDNumber *lcd;
