@@ -3,129 +3,129 @@
     <name>AddConnection</name>
     <message>
         <source>Add Network Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Verbindung</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hinzu</translation>
     </message>
     <message>
         <source>Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Dienste</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Network Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerkeinstellung</translation>
     </message>
     <message>
         <source>Connections</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungen</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <source>t</source>
-        <translation type="unfinished"></translation>
+        <translation>t</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>in</source>
-        <translation type="unfinished"></translation>
+        <translation>in</translation>
     </message>
     <message>
         <source>IP</source>
-        <translation type="unfinished"></translation>
+        <translation>in</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hinzu</translation>
     </message>
     <message>
         <source>&amp;Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Konfigurieren</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Entfernen</translation>
     </message>
     <message>
         <source>Profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Profile</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>&amp;Set Current</source>
-        <translation type="unfinished"></translation>
+        <translation>Akt&amp;uelles setzen</translation>
     </message>
     <message>
         <source>Current Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelles Profil</translation>
     </message>
     <message>
         <source>New Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Profil</translation>
     </message>
     <message>
         <source>A list of network settings to be choosen from</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Liste aller Netzwerkeinstellungen zum Auswählen</translation>
     </message>
     <message>
         <source>Add a new interface to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Schnittelstelle in die Liste.</translation>
     </message>
     <message>
         <source>&amp;Start/Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start/Stop</translation>
     </message>
     <message>
         <source>Start and Stop the current interface, gives additional information about the interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>Starten und Stoppen der aktuellen Schnittstelle, gibt auch Informationen über die Verbindung.</translation>
     </message>
     <message>
         <source>Configure the current interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelle Schnittstelle konfigurieren</translation>
     </message>
     <message>
         <source>Remove the current interface from the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelle Schnittstelle aus der Liste entfernen.</translation>
     </message>
 </context>
 <context>
     <name>MainWindowImp</name>
     <message>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>Unable to remove.</source>
-        <translation type="unfinished"></translation>
+        <translation>Löchen nicht möglich.</translation>
     </message>
     <message>
         <source>Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>Bedaure </translation>
     </message>
     <message>
         <source>Please select an interface first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte wählen Sie zuerst eine Schnittstelle.</translation>
     </message>
 </context>
 </TS>
