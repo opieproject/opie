@@ -163,6 +163,14 @@
 
 #if defined(Q_OS_MAC9) || defined(Q_OS_MACX)
 #  define Q_OS_MAC
+/* We have to prevent qmake to generate makefiles or projectfiles for the Apple build system. 
+ * This would work if we would use QT3. But we compile with QT2 which don't use qmake and does nothing
+ * about the MAC platform !! (se)
+ */
+#warning "evil hack here !! (se)"
+#define Q_OS_LINUX
+#undef Q_OS_MACX
+#undef Q_OS_MAC
 #endif
 
 #if defined(Q_OS_MAC9) || defined(Q_OS_MSDOS) || defined(Q_OS_OS2) || defined(Q_OS_WIN)
