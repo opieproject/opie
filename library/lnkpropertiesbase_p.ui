@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>259</width>
+            <width>251</width>
             <height>450</height>
         </rect>
     </property>
@@ -243,6 +243,15 @@
                     <property stdset="1">
                         <name>text</name>
                         <string></string>
+                    </property>
+                    <property stdset="1">
+                        <name>Alignment</name>
+                        <enum>WordBreak</enum>
+			<enum>AlignRight</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>indent</name>
+                        <number>1</number>
                     </property>
                 </widget>
                 <widget row="7"  column="0"  rowspan="1"  colspan="2" >
