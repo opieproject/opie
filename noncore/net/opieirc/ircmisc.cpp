@@ -71,6 +71,7 @@ void IRCTabWidget::setTabColor(int index, QColor color) {
 
 IRCHistoryLineEdit::IRCHistoryLineEdit(QWidget *parent, const char *name) : QLineEdit(parent, name) {
     m_index = -1;
+    installEventFilter(this);
 }
 
 void IRCHistoryLineEdit::keyPressEvent(QKeyEvent *event) {
@@ -92,6 +93,21 @@ void IRCHistoryLineEdit::keyPressEvent(QKeyEvent *event) {
     } else if (key == Key_Return) {
         m_history.prepend(text());
         m_index = -1;
+    } else if (key == Key_Tab) {
+        printf("got tab\n");
+        return;
     }
     QLineEdit::keyPressEvent(event);
+}
+
+bool IRCHistoryLineEdit::eventFilter(QObject *object, QEvent *event) {
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent *k = (QKeyEvent *) event;
+        /* Catch tab characters */
+        if (k->key() == Key_Tab) {
+            qDebug("tab!");
+            return TRUE;
+        }
+    }
+    return QLineEdit::eventFilter(object, event);
 }

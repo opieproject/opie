@@ -2,6 +2,7 @@
 #include <qlabel.h>
 #include <qhbox.h>
 #include <qpushbutton.h>
+#include <qwhatsthis.h>
 #include "ircserverlist.h"
 #include "ircservereditor.h"
 
@@ -23,18 +24,22 @@ protected:
     IRCServer m_server;
 };
 
-IRCServerList::IRCServerList(QWidget* parent, const char *name, bool modal, WFlags f) : QDialog(parent, name, modal, f) {
+IRCServerList::IRCServerList(QWidget* parent, const char *name, bool modal, WFlags) : QDialog(parent, name, modal, WStyle_ContextHelp) {
     QVBoxLayout *layout = new QVBoxLayout(this, 5, 5);
     setCaption(tr("Serverlist Browser"));
     QLabel *label = new QLabel(tr("Please choose a server profile"), this);
     label->setAlignment(AlignHCenter);
     layout->addWidget(label);
     m_list = new QListBox(this);
+    QWhatsThis::add(m_list, tr("Select a server profile from this list and then tap on OK in the upper-right corner"));
     layout->addWidget(m_list);
     QHBox *buttons = new QHBox(this);
     QPushButton *del = new QPushButton(tr("Delete"), buttons);
     QPushButton *edit = new QPushButton(tr("Edit"), buttons);
     QPushButton *add = new QPushButton(tr("Add"), buttons);
+    QWhatsThis::add(del, tr("Delete the currently selected server profile"));
+    QWhatsThis::add(edit, tr("Edit the currently selected server profile"));
+    QWhatsThis::add(add, tr("Add a new server profile"));
     connect(del, SIGNAL(clicked()), this, SLOT(delServer()));
     connect(edit, SIGNAL(clicked()), this, SLOT(editServer()));
     connect(add, SIGNAL(clicked()), this, SLOT(addServer()));

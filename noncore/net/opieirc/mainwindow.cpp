@@ -2,15 +2,17 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpopupmenu.h>
+#include <qwhatsthis.h>
 
 #include "mainwindow.h"
 #include "ircservertab.h"
 #include "ircserverlist.h"
 #include "ircsettings.h"
 
-MainWindow::MainWindow(QWidget *parent, const char *name, WFlags f) : QMainWindow(parent, name, f) {
+MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(parent, name, WStyle_ContextHelp) {
     setCaption(tr("IRC Client"));
     m_tabWidget = new IRCTabWidget(this);
+    QWhatsThis::add(m_tabWidget, tr("Server connections, channels, queries and other things will be placed here"));
     connect(m_tabWidget, SIGNAL(currentChanged(QWidget *)), this, SLOT(selected(QWidget *)));
     setCentralWidget(m_tabWidget);
     setToolBarsMovable(FALSE);
@@ -19,8 +21,10 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags f) : QMainWindo
     menuBar->insertItem(tr("IRC"), irc);
     QAction *a = new QAction(tr("New connection"), Resource::loadPixmap("pass"), QString::null, 0, this, 0);
     connect(a, SIGNAL(activated()), this, SLOT(newConnection()));
+    a->setWhatsThis(tr("Create a new connection to an IRC server"));
     a->addTo(irc);
     a = new QAction(tr("Settings"), Resource::loadPixmap("SettingsIcon"), QString::null, 0, this, 0);
+    a->setWhatsThis(tr("Configure OpieIRC's behavior and appearance"));
     connect(a, SIGNAL(activated()), this, SLOT(settings()));
     a->addTo(irc);
     loadSettings();

@@ -75,12 +75,13 @@ protected:
     QArray<QColor> m_colors;
 };
 
-/* A QLineEdit with history functionality */
+/* A QLineEdit with history functionality and tab completion */
 
 class IRCHistoryLineEdit : public QLineEdit {
     Q_OBJECT
 public:
     IRCHistoryLineEdit(QWidget *parent = 0, const char *name = 0);
+    virtual bool eventFilter(QObject *object, QEvent *event);
 protected:
     void keyPressEvent(QKeyEvent *);
 protected:
