@@ -20,7 +20,7 @@
 
 // Uncomment the below line to run on a Linux box rather than a Zaurus
 // box this allows you to change where root is, and where to load config files from
-//#define X86
+#define X86
 
 // Sets up location of ipkg.conf and root directory
 #ifdef QWS
@@ -35,9 +35,9 @@
 #else
 
 // Running QT/Embedded on a X86 linux box
-#define IPKG_DIR "/home/andy/projects/aqpkg/aqpkg/data"
 #define IPKG_CONF "/home/andy/projects/aqpkg/aqpkg/data/ipkg.conf"
 #define ROOT "/home/andy/projects/aqpkg/aqpkg/data/root"
+#define IPKG_DIR "/home/andy/projects/aqpkg/aqpkg/data/"
 
 #endif
 
@@ -46,7 +46,7 @@
 // Running QT on a X86 linux box
 #define IPKG_CONF "/home/andy/projects/aqpkg/aqpkg/data/ipkg.conf"
 #define ROOT "/home/andy/projects/aqpkg/aqpkg/data/root"
-#define IPKG_DIR "/home/andy/projects/aqpkg/aqpkg/data"
+#define IPKG_DIR "/home/andy/projects/aqpkg/aqpkg/data/"
 
 #endif
 
