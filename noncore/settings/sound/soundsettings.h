@@ -44,6 +44,7 @@ private slots:
  void setLocation(const QString &);
  void cleanUp();
  void restartOpie(bool);
+ void slotAdpcm(bool);
 };
 
 

@@ -106,6 +106,11 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     keyComboBox->setCurrentItem(cfg.readNumEntry("toggleKey") );
 
     updateStorageCombo();
+
+    Config vmCfg("Vmemo");
+    vmCfg.setGroup("Defaults");
+    adpcmCheckBox->setChecked( vmCfg.readBoolEntry("use_ADPCM", 0));
+
     connect( LocationComboBox,SIGNAL(activated(const QString &)), this,
              SLOT( setLocation(const QString &)));
     connect( keyComboBox,SIGNAL(activated( int)), this,
@@ -114,7 +119,10 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
              SLOT( setSizeLimitButton(const QString &)));
     connect( restartCheckBox,SIGNAL( toggled( bool)), this,
              SLOT( restartOpie( bool)));
-//     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
+    connect( adpcmCheckBox,SIGNAL( toggled( bool)), this,
+             SLOT( slotAdpcm( bool)));
+
+   //     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 }
 
 void SoundSettings::updateStorageCombo() {
@@ -164,7 +172,6 @@ void SoundSettings::cleanUp() {
     cfg.writeEntry("SampleRate",sampleRate->currentText());
     cfg.writeEntry("Stereo",stereoCheckBox->isChecked());
     cfg.writeEntry("SixteenBit",sixteenBitCheckBox->isChecked());
-
     if(keyReset && noWarning) {
         QCopEnvelope ("QPE/System", "restart()");
     }
@@ -205,3 +212,9 @@ void SoundSettings::restartOpie(bool b) {
     noWarning=b;
 }
 
+void SoundSettings::slotAdpcm(bool b) {
+    Config vmCfg("Vmemo");
+    vmCfg.setGroup("Defaults");
+    vmCfg.writeEntry("use_ADPCM", b);
+    vmCfg.write();
+}

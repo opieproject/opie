@@ -161,10 +161,14 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     restartCheckBox->setText( tr( "Restart Opie if needed" ) );
 
     SoundSettingsBaseLayout->addMultiCellWidget( restartCheckBox , 9, 9, 0, 0, 1);
-    
+
+    adpcmCheckBox = new QCheckBox( this, "adpcmCheck" );
+    adpcmCheckBox->setText( tr( "Use ADPCM compression" ) );
+
+    SoundSettingsBaseLayout->addMultiCellWidget( adpcmCheckBox , 10, 10, 0, 0, 1);
     
     QSpacerItem* spacer4 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
-    SoundSettingsBaseLayout->addItem( spacer4, 9, 0 );
+    SoundSettingsBaseLayout->addItem( spacer4, 10, 0 );
 }
 
 /*  

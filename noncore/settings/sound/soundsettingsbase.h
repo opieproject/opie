@@ -50,6 +50,8 @@ public:
     QComboBox* keyComboBox;
     QComboBox* timeLimitComboBox;
     QCheckBox *restartCheckBox;
+    QCheckBox *adpcmCheckBox;
+
     bool keyReset;
 protected:
     QGridLayout* SoundSettingsBaseLayout;
