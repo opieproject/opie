@@ -4,6 +4,7 @@
 #include <qtextstream.h>
 #include <qregexp.h>
 
+// The three stanza's
 #define AUTO "auto"
 #define IFACE "iface"
 #define MAPPING "mapping"
@@ -102,13 +103,12 @@ bool Interfaces::setAuto(const QString &interface, bool setAuto){
         changed = true;
         break;
       }
+      // else see if we need to remove from this one
       else{
         if((*it).contains(interface)){
           (*it) = (*it).replace(QRegExp(interface), "");
-          // clean up
-	  QString line = (*it).simplifyWhiteSpace();
-          line = line.replace(QRegExp(" "),"");
-          if(line == AUTO)
+          // if AUTO is the only thing left clear the line
+          if(((*it).simplifyWhiteSpace()).replace(QRegExp(" "),"") == AUTO)
             (*it) = "";
           changed = true;
 	  // Don't break because we want to make sure we remove all cases.
@@ -116,13 +116,9 @@ bool Interfaces::setAuto(const QString &interface, bool setAuto){
       }
     }
   }
-  if(changed == false){
-    if(setAuto == true)
-      interfaces.append(QString(AUTO" %1").arg(interface));
-    else{
-      qDebug(QString("Interfaces: Can't set interface %1 auto to false sense it is already false.").arg(interface).latin1());
-    }
-  }
+  // In the case where there is no AUTO field add one.
+  if(!changed && setAuto)
+    interfaces.append(QString(AUTO" %1").arg(interface));
   return true;
 }
 
@@ -157,7 +153,7 @@ bool Interfaces::isInterfaceSet(){
  * @return true if successfull.
  */ 
 bool Interfaces::addInterface(const QString &interface, const QString &family, const QString &method){
-  if(acceptedFamily.contains(family)==0)
+  if(0 == acceptedFamily.contains(family))
     return false;
   QString newInterface = interface.simplifyWhiteSpace();
   newInterface = newInterface.replace(QRegExp(" "), "");
@@ -172,17 +168,23 @@ bool Interfaces::addInterface(const QString &interface, const QString &family, c
  * @return bool true if successfull
  */ 
 bool Interfaces::copyInterface(const QString &interface, const QString &newInterface){
-  if(!setInterface(interface)) return false;
-	 
+  if(!setInterface(interface))
+    return false;
+
+  // Store the old interface and bump past the stanza line.
   QStringList::Iterator it = currentIface;
   it++;
   
+  // Add the new interface
   bool error;
   addInterface(newInterface, getInterfaceFamily(error), getInterfaceMethod(error));
-  if(!setInterface(newInterface)) return false;
+  if(!setInterface(newInterface))
+    return false;
+  
   QStringList::Iterator newIface = currentIface;
   newIface++;
-  
+ 
+  // Copy all of the lines
   for ( ; it != interfaces.end(); ++it ){
     if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO)))
       break;
@@ -197,10 +199,7 @@ bool Interfaces::copyInterface(const QString &interface, const QString &newInter
  * @return bool if successfull or not.
  */ 
 bool Interfaces::removeInterface(){
-  if(currentIface == interfaces.end())
-    return false;
-  (*currentIface) = "";
-  return removeAllInterfaceOptions();
+  return removeStanza(currentIface);
 }
 
 /**
@@ -232,10 +231,8 @@ QString Interfaces::getInterfaceName(bool &error){
  */ 
 QString Interfaces::getInterfaceFamily(bool &error){
   QString name = getInterfaceName(error);
-  if(error){
-    error = true;
+  if(error)
     return QString();
-  }
   QString line = (*currentIface);
   line = line.mid(QString(IFACE).length() +1, line.length());
   line = line.mid(name.length()+1, line.length());
@@ -257,15 +254,11 @@ QString Interfaces::getInterfaceFamily(bool &error){
  */ 
 QString Interfaces::getInterfaceMethod(bool &error){
   QString name = getInterfaceName(error);
-  if(error){
-    error = true;
+  if(error)
     return QString();
-  }
   QString family = getInterfaceFamily(error);
-  if(error){
-    error = true;
+  if(error)
     return QString();
-  }
   QString line = (*currentIface);
   line = line.mid(QString(IFACE).length()+1, line.length());
   line = line.mid(name.length()+1, line.length());
@@ -391,10 +384,7 @@ void Interfaces::addMapping(const QString &option){
  * @return bool if successfull or not.
  */
 bool Interfaces::removeMapping(){
-  if(currentMapping == interfaces.end())
-    return false;
-  (*currentMapping) = "";
-  return removeAllOptions(currentMapping);
+  return removeStanza(currentMapping);
 } 
 
 /**
@@ -520,6 +510,19 @@ bool Interfaces::setOption(const QStringList::Iterator &start, const QString &op
   }
   return found;
 }
+
+/**
+ * Removes a stanza and all of its options
+ * @param stanza the stanza to remove
+ * @return bool true if successfull.
+ */ 
+bool Interfaces::removeStanza(QStringList::Iterator &stanza){
+  if(stanza == interfaces.end())
+    return false;
+  (*stanza) = "";
+  return removeAllOptions(stanza);
+}
+
 /**
  * Removes a option in a stanza
  * @param start the start of the stanza
@@ -591,14 +594,14 @@ QString Interfaces::getOption(const QStringList::Iterator &start, const QString 
     }
     if((*it).contains(option) && (*it).at(0) != '#'){
       if(found)
-        qDebug(QString("Interfaces: Get Options found more then one value: %1 for option: %2 in stanza %3").arg((*it)).arg(option).arg((*start)).latin1());
+        qDebug(QString("Interfaces: getOption found more then one value: %1 for option: %2 in stanza %3").arg((*it)).arg(option).arg((*start)).latin1());
       found = true;
       QString line = (*it).simplifyWhiteSpace();
       int space = line.find(" ", option.length());
-      if(space != -1)
+      if(space != -1){
         value = line.mid(space+1, line.length());
-      else
-        qDebug(QString("Interfaces: Option %1 with no value").arg(option).latin1());
+        break;
+      }
     }
   }
   error = !found;

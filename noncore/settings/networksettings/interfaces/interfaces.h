@@ -28,7 +28,7 @@ public:
   bool isAuto(const QString &interface);
   bool setAuto(const QString &interface, bool setAuto);
   
-  bool removeInterface();
+  inline bool removeInterface();
   bool addInterface(const QString &interface, const QString &family, const QString &method);
   bool copyInterface(const QString &oldInterface, const QString &newInterface);
   bool setInterface(QString interface);
@@ -45,7 +45,7 @@ public:
   inline bool removeAllInterfaceOptions();
   
   bool setMapping(const QString &interface);
-  bool removeMapping();
+  inline bool removeMapping();
   inline void addMapping(const QString &options);
   inline bool setMap(const QString &map, const QString &value);
   inline bool removeMap(const QString &map, const QString &value);
@@ -60,6 +60,7 @@ private:
   bool setOption(const QStringList::Iterator &start, const QString &option, const QString &value);
   bool removeOption(const QStringList::Iterator &start, const QString &option, const QString &value);
   QString getOption(const QStringList::Iterator &start, const QString &option, bool &error);
+  bool removeStanza(QStringList::Iterator &stanza);
   bool removeAllOptions(const QStringList::Iterator &start);
   
   QString interfacesFile;

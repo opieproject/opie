@@ -2,10 +2,10 @@
 #define INTERFACESETUPIMP_H
 
 #include "interfacesetup.h"
+#include "interfaces.h"
 #include <qdialog.h>
 
 class Interface;
-class Interfaces;
 
 class InterfaceSetupImp : public InterfaceSetup {
   Q_OBJECT
@@ -19,7 +19,7 @@ public slots:
   bool saveSettings();
 
 private:
-  Interfaces *interfaces;
+  Interfaces interfaces;
   Interface *interface;
 };
 
