@@ -4,10 +4,10 @@ DESTDIR		= $(OPIEDIR)/bin
 
 SOURCES		= main.cpp
 
-INCLUDEPATH	+= $(OPIEDIR)/include 
+INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include .
 TARGET		= taboapp
-LIBS		+= -lqpe -lopie -loapp
+LIBS		+= -lqpe -lopieui2 -loapp
 INCLUDEPATH	+= $(OPIEDIR)/core/apps/oapp
 DEPENDPATH	+= $(OPIEDIR)/core/apps/oapp
 MOC_DIR		= .build

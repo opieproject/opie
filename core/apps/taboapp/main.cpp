@@ -6,7 +6,7 @@
 #include <oappinterface.h>
 #include <oappplugin.h>
 
-#include <opie/otabwidget.h>
+#include <opie2/otabwidget.h>
 
 int main( int argc, char **argv )
 {
@@ -50,5 +50,5 @@ int main( int argc, char **argv )
     }
 
     a.showMainDocumentWidget(tabwidget);
-    return a.exec(); 
+    return a.exec();
 }
