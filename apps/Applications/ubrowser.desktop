@@ -4,4 +4,6 @@ Exec=ubrowser
 Icon=ubrowser/ubrowser
 Type=Application
 Name=uBrowser
+MimeType=text/html
+MimeTypeIcons=ubrowser/ubrowser
 
