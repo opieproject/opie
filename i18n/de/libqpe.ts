@@ -143,19 +143,19 @@ editing categories.</source>
     <name>FindWidgetBase</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchen</translation>
     </message>
     <message>
         <source>Find what:</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchen nach:</translation>
     </message>
     <message>
         <source>&amp;Find</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Suchen</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie:</translation>
     </message>
     <message>
         <source>Start Search at:</source>
@@ -167,11 +167,11 @@ editing categories.</source>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Groß- und Kleinschreibung beachten</translation>
     </message>
     <message>
         <source>Search Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückwärts suchen</translation>
     </message>
 </context>
 <context>
