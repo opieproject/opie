@@ -101,6 +101,7 @@ ScreenshotControl::ScreenshotControl( QWidget *parent, const char *name )
 
 //      Config cfg("Snapshot");
 //      cfg.setGroup("General");
+	delaySpin->setValue(1);
 //      delaySpin->setValue(cfg.readNumEntry("delay",0));
     connect( grabItButton, SIGNAL(released()), SLOT(slotGrab()) );
 
