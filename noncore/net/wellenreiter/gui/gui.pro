@@ -35,8 +35,9 @@ TARGET          = wellenreiter
 }
 
 contains( platform, x11 ) {
-  LIBS += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib -lwellenreiter
+  LIBS += -L$(OPIEDIR)/output/lib -Wl,-rpath,$(OPIEDIR)/output/lib -Wl,-rpath,/usr/local/lib -lwellenreiter
   SOURCES += resource.cpp
   HEADERS += resource.h
+  DESTDIR = $(OPIEDIR)/output/bin
 }
 

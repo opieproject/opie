@@ -74,7 +74,7 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
     #ifdef Q_WS_X11 // We're on X11: adding an Ok-Button for the Dialog here
     QPushButton* okButton = new QPushButton( "ok", this );
     okButton->show();
-    Layout5_2->addWidget( okButton ); //FIXME: rename this in configbase.ui
+    Layout5_2->addWidget( okButton, 0, 3 ); //FIXME: rename this in configbase.ui
     connect( okButton, SIGNAL( clicked() ), this, SLOT( accept() ) );
     #endif
 
