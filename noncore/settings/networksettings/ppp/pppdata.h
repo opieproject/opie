@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.1 2003-05-22 15:08:21 tille Exp $
+ * $Id: pppdata.h,v 1.2 2003-05-24 16:12:04 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -55,11 +55,11 @@ class Config;
 //
 
 // groups
-#define GENERAL_GRP        "General"
-#define MODEM_GRP          "Modem"
-#define ACCOUNT_GRP        "Account"
-#define GRAPH_GRP          "Graph"
-#define WINPOS_GRP         "WindowPosition"
+#define GENERAL_GRP        "PPP_General"
+#define MODEM_GRP          "PPP_Modem"
+#define ACCOUNT_GRP        "PPP_Account"
+//#define GRAPH_GRP          "Graph"
+//#define WINPOS_GRP         "WindowPosition"
 
 // general
 #define DEFAULTACCOUNT_KEY "DefaultAccount"
@@ -161,6 +161,7 @@ class PPPData {
 public:
   PPPData();
   ~PPPData() {};
+    static PPPData* data();
 
   enum { NumInitStrings = 2 };
 
@@ -168,7 +169,7 @@ public:
   bool open();
   void save();
   void cancel();
-  int  access() const;       // read/write access
+//  int  access() const;       // read/write access
 
   // function to read/write date to configuration file
   QString readConfig(const QString &, const QString &, const QString &);
@@ -426,40 +427,41 @@ public:
   int totalBytes();
   void  setTotalBytes(int);
 
-  // graphing widget
-  void setGraphingOptions(bool enabled,
-			  QColor bg,
-			  QColor text,
-			  QColor in,
-			  QColor out);
-  void graphingOptions(bool &enabled,
-		       QColor &bg,
-		       QColor &text,
-		       QColor &in,
-		       QColor &out);
-  bool graphingEnabled();
+//   // graphing widget
+//   void setGraphingOptions(bool enabled,
+// 			  QColor bg,
+// 			  QColor text,
+// 			  QColor in,
+// 			  QColor out);
+//   void graphingOptions(bool &enabled,
+// 		       QColor &bg,
+// 		       QColor &text,
+// 		       QColor &in,
+// 		       QColor &out);
+//   bool graphingEnabled();
 
-  // window positions
-  void winPosConWin(int &, int &);
-  void setWinPosConWin(int, int);
-  void winPosStatWin(int &, int &);
-  void setWinPosStatWin(int, int);
+//   // window positions
+//   void winPosConWin(int &, int &);
+//   void setWinPosConWin(int, int);
+//   void winPosStatWin(int &, int &);
+//   void setWinPosStatWin(int, int);
 
 private:
-  QString passwd;
-  Config* config;                       // configuration object
-  int highcount;                         // index of highest account
-  int caccount;                          // index of the current account
-  QString cgroup;                        // name of current config group
-  pid_t suidprocessid;                   // process ID of setuid child
-  bool pppdisrunning;                    // pppd process
-                                         // daemon
-  int pppderror;                         // error encounterd running pppd
-  int pppdVer, pppdMod, pppdPatch;       // pppd version
 
-  QStringList phonelist;
+    static PPPData *_data;
+
+    QString passwd;
+    static Config* config;                       // configuration object
+    int highcount;                         // index of highest account
+    int caccount;                          // index of the current account
+    QString cgroup;                        // name of current config group
+    pid_t suidprocessid;                   // process ID of setuid child
+    bool pppdisrunning;                    // pppd process
+    // daemon
+    int pppderror;                         // error encounterd running pppd
+    int pppdVer, pppdMod, pppdPatch;       // pppd version
+
+    QStringList phonelist;
 };
-
-extern PPPData gpppdata;
 
 #endif

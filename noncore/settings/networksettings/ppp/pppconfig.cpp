@@ -50,13 +50,13 @@ PPPConfigWidget::~PPPConfigWidget()
 
 void PPPConfigWidget::accept()
 {
-    gpppdata.save();
+    PPPData::data()->save();
     QDialog::accept();
 }
 
 
 void PPPConfigWidget::reject()
 {
-    gpppdata.cancel();
+    PPPData::data()->cancel();
     QDialog::reject();
 }

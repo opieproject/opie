@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: conwindow.cpp,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: conwindow.cpp,v 1.2 2003-05-24 16:12:02 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -75,9 +75,9 @@ ConWindow::ConWindow(QWidget *parent, const char *name, QDialog *mainwidget )
   connect(clocktimer, SIGNAL(timeout()), SLOT(timeclick()));
 
   // read window position from config file
-  int p_x, p_y;
-  gpppdata.winPosConWin(p_x, p_y);
-  setGeometry(p_x, p_y, 320, 110);
+//  int p_x, p_y;
+//   PPPData::data()->winPosConWin(p_x, p_y);
+//   setGeometry(p_x, p_y, 320, 110);
 }
 
 ConWindow::~ConWindow() {
@@ -88,7 +88,7 @@ ConWindow::~ConWindow() {
 bool ConWindow::event(QEvent *e) {
   if (e->type() == QEvent::Hide)
   {
-    gpppdata.setWinPosConWin(x(), y());
+//    PPPData::data()->setWinPosConWin(x(), y());
     return true;
   }
   else
@@ -118,7 +118,7 @@ QString ConWindow::prettyPrintVolume(unsigned int n) {
 void ConWindow::accounting(bool on) {
   // cache accounting settings
   accountingEnabled = on;
-  volumeAccountingEnabled = gpppdata.VolAcctEnabled();
+  volumeAccountingEnabled = PPPData::data()->VolAcctEnabled();
 
   // delete old layout
   if(tl1 != 0)
@@ -133,7 +133,7 @@ void ConWindow::accounting(bool on) {
   QGridLayout *l1;
 
   int vol_lines = 0;
-  if(gpppdata.VolAcctEnabled())
+  if(PPPData::data()->VolAcctEnabled())
     vol_lines = 1;
 
   if(accountingEnabled)
@@ -239,9 +239,9 @@ void ConWindow::startClock() {
   hours = 0;
   QString title ;
 
-  title = gpppdata.accname();
+  title = PPPData::data()->accname();
 
-  if(gpppdata.get_show_clock_on_caption()){
+  if(PPPData::data()->get_show_clock_on_caption()){
     title += " 00:00" ;
   }
   this->setCaption(title);
@@ -265,7 +265,7 @@ void ConWindow::timeclick() {
   QString tooltip = i18n("Connection: %1\n"
 			 "Connected at: %2\n"
 			 "Time connected: %3")
-		    .arg(gpppdata.accname()).arg(info2->text())
+		    .arg(PPPData::data()->accname()).arg(info2->text())
 		    .arg(time_string2);
 
   if(accountingEnabled)
@@ -275,7 +275,7 @@ void ConWindow::timeclick() {
   if(volumeAccountingEnabled) {
 
     volinfo->setEnabled(TRUE);
-    int bytes = gpppdata.totalBytes();
+    int bytes = PPPData::data()->totalBytes();
     volinfo->setText(prettyPrintVolume(bytes));
   }
 
@@ -305,14 +305,14 @@ void ConWindow::timeclick() {
   else
     time_string2.sprintf("%02d:%02d:%02d",hours,minutes,seconds);
 
-  caption_string = gpppdata.accname();
+  caption_string = PPPData::data()->accname();
   caption_string += " ";
   caption_string += time_string;
 
 
   timelabel2->setText(time_string2);
 
-  if(gpppdata.get_show_clock_on_caption() && (seconds == 1)){
+  if(PPPData::data()->get_show_clock_on_caption() && (seconds == 1)){
     // we update the Caption only once per minute not every second
     // otherwise I get a flickering icon
     this->setCaption(caption_string);
@@ -328,7 +328,7 @@ void ConWindow::closeEvent( QCloseEvent *e ){
   // if we lost it we could only kill the program by hand to get on with life.
   e->ignore();
 
-  if(gpppdata.get_dock_into_panel())
+  if(PPPData::data()->get_dock_into_panel())
     dock();
 }
 

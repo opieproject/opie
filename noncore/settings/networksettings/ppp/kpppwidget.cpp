@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: kpppwidget.cpp,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: kpppwidget.cpp,v 1.2 2003-05-24 16:12:02 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -158,7 +158,7 @@ KPPPWidget::KPPPWidget( QWidget *parent, const char *name, bool modal, WFlags fl
 //    log = new QCheckBox(i18n("Show lo&g window"), this);
 //    connect(log, SIGNAL(toggled(bool)),
 //   	  this, SLOT(log_window_toggled(bool)));
-//    log->setChecked(gpppdata.get_show_log_window());
+//    log->setChecked(PPPData::data()->get_show_log_window());
 //    l3->addWidget(log);
 
 //    QWhatsThis::add(log,
@@ -191,7 +191,7 @@ KPPPWidget::KPPPWidget( QWidget *parent, const char *name, bool modal, WFlags fl
 
 
 
-//   if(gpppdata.access() != KConfig::ReadWrite)
+//   if(PPPData::data()->access() != KConfig::ReadWrite)
 //     setup_b->setEnabled(false);
 
 //   help_b = new QPushButton(i18n("&Help"), this);
@@ -291,7 +291,7 @@ KPPPWidget::KPPPWidget( QWidget *parent, const char *name, bool modal, WFlags fl
 //   }
 
 //   if(m_bCmdlAccount){
-//     bool result = gpppdata.setAccount(m_strCmdlAccount);
+//     bool result = PPPData::data()->setAccount(m_strCmdlAccount);
 //     if (!result){
 //       QString string;
 //       string = i18n("No such Account:\n%1").arg(m_strCmdlAccount);
@@ -363,7 +363,7 @@ void KPPPWidget::enterPressedInPW() {
 
 // triggered by the session manager
 void KPPPWidget::saveMyself() {
-    gpppdata.save();
+    PPPData::data()->save();
 }
 
 void KPPPWidget::shutDown() {
@@ -372,7 +372,7 @@ void KPPPWidget::shutDown() {
 }
 
 void KPPPWidget::log_window_toggled(bool on) {
-  gpppdata.set_show_log_window(on);
+  PPPData::data()->set_show_log_window(on);
 }
 
 
@@ -381,7 +381,7 @@ void KPPPWidget::log_window_toggled(bool on) {
 // void KPPPWidget::resetaccounts() {
 //   connectto_c->clear();
 
-//   int count = gpppdata.count();
+//   int count = PPPData::data()->count();
 
 //   // enable/disable controls
 //   connectto_c->setEnabled(count > 0);
@@ -392,27 +392,27 @@ void KPPPWidget::log_window_toggled(bool on) {
 
 //   //load the accounts
 //   for(int i=0; i < count; i++) {
-//     gpppdata.setAccountbyIndex(i);
-//      connectto_c->insertItem(gpppdata.accname());
+//     PPPData::data()->setAccountbyIndex(i);
+//      connectto_c->insertItem(PPPData::data()->accname());
 //   }
 
 //   //set the default account
-//   if(!gpppdata.defaultAccount().isEmpty()) {
+//   if(!PPPData::data()->defaultAccount().isEmpty()) {
 //     for(int i=0; i < count; i++)
-//        if(gpppdata.defaultAccount() == connectto_c->text(i)) {
+//        if(PPPData::data()->defaultAccount() == connectto_c->text(i)) {
 //  	connectto_c->setCurrentItem(i);
-// 	gpppdata.setAccountbyIndex(i);
+// 	PPPData::data()->setAccountbyIndex(i);
 
-// 	ID_Edit->setText(gpppdata.storedUsername());
-// 	PW_Edit->setText(gpppdata.storedPassword());
+// 	ID_Edit->setText(PPPData::data()->storedUsername());
+// 	PW_Edit->setText(PPPData::data()->storedPassword());
 //     }
 //   }
 //   else
 //     if(count > 0) {
-//        gpppdata.setDefaultAccount(connectto_c->text(0));
-//         gpppdata.save();
-// 	ID_Edit->setText(gpppdata.storedUsername());
-// 	PW_Edit->setText(gpppdata.storedPassword());
+//        PPPData::data()->setDefaultAccount(connectto_c->text(0));
+//         PPPData::data()->save();
+// 	ID_Edit->setText(PPPData::data()->storedUsername());
+// 	PW_Edit->setText(PPPData::data()->storedPassword());
 //     }
 
 //   connect(ID_Edit, SIGNAL(textChanged(const QString &)),
@@ -434,7 +434,7 @@ void KPPPWidget::interruptConnection() {
 //     emit con->cancelbutton();
 
   // disconnect if online
-  if (gpppdata.pppdRunning())
+  if (PPPData::data()->pppdRunning())
     emit disconnect();
 }
 
@@ -445,7 +445,7 @@ void KPPPWidget::sigPPPDDied() {
     // if we are not connected pppdpid is -1 so have have to check for that
     // in the followin line to make sure that we don't raise a false alarm
     // such as would be the case when the log file viewer exits.
-    if(gpppdata.pppdRunning() || gpppdata.pppdError()) {
+    if(PPPData::data()->pppdRunning() || PPPData::data()->pppdError()) {
         qDebug( "It was pppd that died" );
 
         // when we killpppd() on Cancel in ConnectWidget
@@ -457,11 +457,11 @@ void KPPPWidget::sigPPPDDied() {
         Modem::modem->removeSecret(AUTH_PAP);
         Modem::modem->removeSecret(AUTH_CHAP);
 
-        gpppdata.setpppdRunning(false);
+        PPPData::data()->setpppdRunning(false);
 
         qDebug( "Executing command on disconnect since pppd has died." );
         QApplication::flushX();
-        execute_command(gpppdata.command_on_disconnect());
+        execute_command(PPPData::data()->command_on_disconnect());
 
 //      stopAccounting();
 
@@ -469,13 +469,13 @@ void KPPPWidget::sigPPPDDied() {
 //       DockWidget::dock_widget->stop_stats();
 //       DockWidget::dock_widget->hide();
 
-        if(!gpppdata.pppdError())
-            gpppdata.setpppdError(E_PPPD_DIED);
+        if(!PPPData::data()->pppdError())
+            PPPData::data()->setpppdError(E_PPPD_DIED);
         removedns();
         Modem::modem->unlockdevice();
         //      con->pppdDied();
 
-        if(!gpppdata.automatic_redial()) {
+        if(!PPPData::data()->automatic_redial()) {
             quit_b->setFocus();
             show();
 //            con_win->stopClock();
@@ -483,10 +483,10 @@ void KPPPWidget::sigPPPDDied() {
 //            con_win->hide();
 //            con->hide();
 
-            gpppdata.setpppdRunning(false);
+            PPPData::data()->setpppdRunning(false);
             // // not in a signal handler !!!  KNotifyClient::beep();
             QString msg;
-            if (gpppdata.pppdError() == E_IF_TIMEOUT)
+            if (PPPData::data()->pppdError() == E_IF_TIMEOUT)
                 msg = i18n("Timeout expired while waiting for the PPP interface "
                            "to come up!");
             else {
@@ -507,22 +507,22 @@ void KPPPWidget::sigPPPDDied() {
             if (false){
                 qDebug( "Trying to reconnect... " );
 
-                if(gpppdata.authMethod() == AUTH_PAP ||
-                   gpppdata.authMethod() == AUTH_CHAP ||
-                   gpppdata.authMethod() == AUTH_PAPCHAP)
-                    Modem::modem->setSecret(gpppdata.authMethod(),
-                                            encodeWord(gpppdata.storedUsername()),
-                                            encodeWord(gpppdata.password()));
+                if(PPPData::data()->authMethod() == AUTH_PAP ||
+                   PPPData::data()->authMethod() == AUTH_CHAP ||
+                   PPPData::data()->authMethod() == AUTH_PAPCHAP)
+                    Modem::modem->setSecret(PPPData::data()->authMethod(),
+                                            encodeWord(PPPData::data()->storedUsername()),
+                                            encodeWord(PPPData::data()->password()));
 
 //                con_win->hide();
                 //               con_win->stopClock();
 //	stopAccounting();
-                gpppdata.setpppdRunning(false);
+                PPPData::data()->setpppdRunning(false);
                 // not in a signal handler !!!	KNotifyClient::beep();
                 emit cmdl_start();
             }
         }
-        gpppdata.setpppdError(0);
+        PPPData::data()->setpppdError(0);
     }
 }
 
@@ -543,10 +543,10 @@ void KPPPWidget::sigPPPDDied() {
 
 
 void KPPPWidget::newdefaultaccount(int i) {
-  gpppdata.setDefaultAccount(connectto_c->text(i));
-  gpppdata.save();
-  ID_Edit->setText(gpppdata.storedUsername());
-  PW_Edit->setText(gpppdata.storedPassword());
+  PPPData::data()->setDefaultAccount(connectto_c->text(i));
+  PPPData::data()->save();
+  ID_Edit->setText(PPPData::data()->storedUsername());
+  PW_Edit->setText(PPPData::data()->storedPassword());
 }
 
 
@@ -556,10 +556,10 @@ void KPPPWidget::beginConnect() {
   // make sure to connect to the account that is selected in the combo box
   // (exeption: an account given by a command line argument)
  //  if(!m_bCmdlAccount) {
-//     gpppdata.setAccount(connectto_c->currentText());
-//     gpppdata.setPassword(PW_Edit->text());
+//     PPPData::data()->setAccount(connectto_c->currentText());
+//     PPPData::data()->setPassword(PW_Edit->text());
 //   } else {
-    gpppdata.setPassword(gpppdata.storedPassword());
+    PPPData::data()->setPassword(PPPData::data()->storedPassword());
 //  }
 
   QFileInfo info(pppdPath());
@@ -577,14 +577,14 @@ void KPPPWidget::beginConnect() {
     string = i18n("kppp cannot execute:\n %1\n"
     		   "Please make sure that you have given kppp "
 		   "setuid permission and that "
-		   "pppd is executable.").arg(gpppdata.pppdPath());
+		   "pppd is executable.").arg(PPPData::data()->pppdPath());
     KMessageBox::error(this, string);
     return;
 
   }
 #endif
 
-  QFileInfo info2(gpppdata.modemDevice());
+  QFileInfo info2(PPPData::data()->modemDevice());
 
   if(!info2.exists()){
     QString string;
@@ -592,16 +592,16 @@ void KPPPWidget::beginConnect() {
 		   "your modem device properly "
 		   "and/or adjust the location of the modem device on "
 		   "the modem tab of "
-		   "the setup dialog.").arg(gpppdata.modemDevice());
+		   "the setup dialog.").arg(PPPData::data()->modemDevice());
     QMessageBox::warning(this, "error", string);
     return;
   }
 
   // if this is a PAP or CHAP account, ensure that username is
   // supplied
-  if(gpppdata.authMethod() == AUTH_PAP ||
-     gpppdata.authMethod() == AUTH_CHAP ||
-     gpppdata.authMethod() == AUTH_PAPCHAP ) {
+  if(PPPData::data()->authMethod() == AUTH_PAP ||
+     PPPData::data()->authMethod() == AUTH_CHAP ||
+     PPPData::data()->authMethod() == AUTH_PAPCHAP ) {
     if(ID_Edit->text().isEmpty()) {
         QMessageBox::warning(this,"error",
 			   i18n(
@@ -610,9 +610,9 @@ void KPPPWidget::beginConnect() {
 			   "supply a username and a password!"));
       return;
     } else {
-      if(!Modem::modem->setSecret(gpppdata.authMethod(),
-				   encodeWord(gpppdata.storedUsername()),
-				   encodeWord(gpppdata.password()))) {
+      if(!Modem::modem->setSecret(PPPData::data()->authMethod(),
+				   encodeWord(PPPData::data()->storedUsername()),
+				   encodeWord(PPPData::data()->password()))) {
 	QString s;
 	s = i18n("Cannot create PAP/CHAP authentication\n"
 				     "file \"%1\"").arg(PAP_AUTH_FILE);
@@ -622,7 +622,7 @@ void KPPPWidget::beginConnect() {
     }
   }
 
-  if (gpppdata.phonenumber().isEmpty()) {
+  if (PPPData::data()->phonenumber().isEmpty()) {
     QString s = i18n("You must specify a telephone number!");
     QMessageBox::warning(this, "error", s);
     return;
@@ -630,12 +630,12 @@ void KPPPWidget::beginConnect() {
 
   this->hide();
 
-  QString tit = i18n("Connecting to: %1").arg(gpppdata.accname());
+  QString tit = i18n("Connecting to: %1").arg(PPPData::data()->accname());
 //   con->setCaption(tit);
 
 //   con->show();
 
-  bool show_debug = gpppdata.get_show_log_window();
+  bool show_debug = PPPData::data()->get_show_log_window();
 //  con->debug->setOn(show_debug);	// toggle button
   debugwindow->clear();
   if (!show_debug)
@@ -650,7 +650,7 @@ void KPPPWidget::beginConnect() {
 
 
 void KPPPWidget::disconnect() {
-  if (!gpppdata.command_before_disconnect().isEmpty()) {
+  if (!PPPData::data()->command_before_disconnect().isEmpty()) {
 //     con_win->hide();
 //     con->show();
 //     con->setCaption(i18n("Disconnecting..."));
@@ -659,7 +659,7 @@ void KPPPWidget::disconnect() {
     qApp->processEvents();
     QApplication::flushX();
 //    pid_t id =
-        execute_command(gpppdata.command_before_disconnect());
+        execute_command(PPPData::data()->command_before_disconnect());
 //    int i, status;
 
 //     do {
@@ -677,7 +677,7 @@ void KPPPWidget::disconnect() {
   Modem::modem->killPPPDaemon();
 
   QApplication::flushX();
-  execute_command(gpppdata.command_on_disconnect());
+  execute_command(PPPData::data()->command_on_disconnect());
 
   Modem::modem->removeSecret(AUTH_PAP);
   Modem::modem->removeSecret(AUTH_CHAP);
@@ -707,22 +707,22 @@ void KPPPWidget::disconnect() {
 
 
 void KPPPWidget::quitbutton() {
-  if(gpppdata.pppdRunning()) {
+  if(PPPData::data()->pppdRunning()) {
     int ok = QMessageBox::warning(this,
 			    i18n("Exiting kPPP will close your PPP Session."),
 			    i18n("Quit kPPP?"));
     if(ok == QMessageBox::Yes) {
       Modem::modem->killPPPDaemon();
       QApplication::flushX();
-      execute_command(gpppdata.command_on_disconnect());
+      execute_command(PPPData::data()->command_on_disconnect());
       removedns();
       Modem::modem->unlockdevice();
     }
   } else {
-    if (!gpppdata.accname().isEmpty() && !gpppdata.storePassword())
-      gpppdata.setStoredPassword("");
+    if (!PPPData::data()->accname().isEmpty() && !PPPData::data()->storePassword())
+      PPPData::data()->setStoredPassword("");
   }
-  gpppdata.save();
+  PPPData::data()->save();
   qApp->quit();
 }
 
@@ -736,13 +736,13 @@ void KPPPWidget::quitbutton() {
 //   // volume accounting
 //   stats->totalbytes = 0;
 
-//   kdDebug() << "AcctEnabled: " << gpppdata.AcctEnabled() << endl;
+//   kdDebug() << "AcctEnabled: " << PPPData::data()->AcctEnabled() << endl;
 
 //   // load the ruleset
-//   if(!gpppdata.AcctEnabled())
+//   if(!PPPData::data()->AcctEnabled())
 //     return;
 
-//   QString d = AccountingBase::getAccountingFile(gpppdata.accountingFile());
+//   QString d = AccountingBase::getAccountingFile(PPPData::data()->accountingFile());
 //   //  if(::access(d.data(), X_OK) != 0)
 //     acct = new Accounting(this, stats);
 //     //  else
@@ -752,9 +752,9 @@ void KPPPWidget::quitbutton() {
 //   connect(acct, SIGNAL(changed(QString, QString)),
 // 	  con_win, SLOT(slotAccounting(QString, QString)));
 
-// //   if(!acct->loadRuleSet(gpppdata.accountingFile())) {
+// //   if(!acct->loadRuleSet(PPPData::data()->accountingFile())) {
 // //     QString s= i18n("Can not load the accounting "
-// //     		    "ruleset \"%1\"!").arg(gpppdata.accountingFile());
+// //     		    "ruleset \"%1\"!").arg(PPPData::data()->accountingFile());
 
 //     // starting the messagebox with a timer will prevent us
 //     // from blocking the calling function ConnectWidget::timerEvent
@@ -769,9 +769,9 @@ void KPPPWidget::quitbutton() {
 // void KPPPWidget::stopAccounting() {
 //   // store volume accounting
 // //   if(stats->totalbytes != 0)
-// //     gpppdata.setTotalBytes(stats->totalbytes);
+// //     PPPData::data()->setTotalBytes(stats->totalbytes);
 
-//   if(!gpppdata.AcctEnabled())
+//   if(!PPPData::data()->AcctEnabled())
 //     return;
 
 // //   if(acct != 0) {
@@ -792,16 +792,16 @@ void KPPPWidget::quitbutton() {
 
 void KPPPWidget::usernameChanged(const QString &) {
   // store username for later use
-  gpppdata.setStoredUsername(ID_Edit->text());
+  PPPData::data()->setStoredUsername(ID_Edit->text());
 }
 
 
 void KPPPWidget::passwordChanged(const QString &) {
     // store the password if so requested
-  if(gpppdata.storePassword())
-    gpppdata.setStoredPassword(PW_Edit->text());
+  if(PPPData::data()->storePassword())
+    PPPData::data()->setStoredPassword(PW_Edit->text());
   else
-    gpppdata.setStoredPassword("");
+    PPPData::data()->setStoredPassword("");
 }
 
 
@@ -841,7 +841,7 @@ void KPPPWidget::showNews() {
    * Introduce the QuickHelp feature to new users of this version
    */
   #define QUICKHELP_HINT "Hint_QuickHelp"
-  if(gpppdata.readNumConfig(GENERAL_GRP, QUICKHELP_HINT, 0) == 0) {
+  if(PPPData::data()->readNumConfig(GENERAL_GRP, QUICKHELP_HINT, 0) == 0) {
     QDialog dlg(0, 0, true);
     dlg.setCaption(i18n("Recent Changes in KPPP"));
 
@@ -893,8 +893,8 @@ void KPPPWidget::showNews() {
 
     dlg.exec();
     if(cb->isChecked()) {
-      gpppdata.writeConfig(GENERAL_GRP, QUICKHELP_HINT, 1);
-      gpppdata.save();
+      PPPData::data()->writeConfig(GENERAL_GRP, QUICKHELP_HINT, 1);
+      PPPData::data()->save();
     }
   }
 #endif

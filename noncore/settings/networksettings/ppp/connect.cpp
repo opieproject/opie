@@ -179,7 +179,7 @@ void ConnectWidget::preinit() {
 
 
 void ConnectWidget::init() {
-  gpppdata.setpppdError(0);
+  PPPData::data()->setpppdError(0);
   inittimer->stop();
   vmain = 0;
   substate = -1;
@@ -196,24 +196,24 @@ void ConnectWidget::init() {
 
   p_kppp->con_speed = "";
 
-//  p_kppp->setQuitOnDisconnect (p_kppp->quitOnDisconnect() || gpppdata.quit_on_disconnect());
+//  p_kppp->setQuitOnDisconnect (p_kppp->quitOnDisconnect() || PPPData::data()->quit_on_disconnect());
 
-  comlist = &gpppdata.scriptType();
-  arglist = &gpppdata.script();
+  comlist = &PPPData::data()->scriptType();
+  arglist = &PPPData::data()->script();
 
-  QString tit = i18n("Connecting to: %1").arg(gpppdata.accname());
+  QString tit = i18n("Connecting to: %1").arg(PPPData::data()->accname());
   setCaption(tit);
 
   qApp->processEvents();
 
   // run the "before-connect" command
-  if (!gpppdata.command_before_connect().isEmpty()) {
+  if (!PPPData::data()->command_before_connect().isEmpty()) {
     messg->setText(i18n("Running pre-startup command..."));
     emit debugMessage(i18n("Running pre-startup command..."));
 
     qApp->processEvents();
     QApplication::flushX();
-    pid_t id = execute_command(gpppdata.command_before_connect());
+    pid_t id = execute_command(PPPData::data()->command_before_connect());
 //     int i, status;
 
 //     do {
@@ -250,7 +250,7 @@ void ConnectWidget::init() {
       Modem::modem->notify(this, SLOT(readChar(unsigned char)));
 
       // if we are stuck anywhere we will time out
-      timeout_timer->start(gpppdata.modemTimeout()*1000);
+      timeout_timer->start(PPPData::data()->modemTimeout()*1000);
 
       // this timer will run the script etc.
       main_timer_ID = startTimer(10);
@@ -284,18 +284,18 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       substate = 0;
     }
 
-    QString initStr = gpppdata.modemInitStr(substate);
+    QString initStr = PPPData::data()->modemInitStr(substate);
     if (!initStr.isEmpty()) {
 	// send a carriage return and then wait a bit so that the modem will
 	// let us issue commands.
-	if(gpppdata.modemPreInitDelay() > 0) {
-	    usleep(gpppdata.modemPreInitDelay() * 5000);
+	if(PPPData::data()->modemPreInitDelay() > 0) {
+	    usleep(PPPData::data()->modemPreInitDelay() * 5000);
 	    writeline("");
-	    usleep(gpppdata.modemPreInitDelay() * 5000);
+	    usleep(PPPData::data()->modemPreInitDelay() * 5000);
 	}
-	setExpect(gpppdata.modemInitResp());
+	setExpect(PPPData::data()->modemInitResp());
 	writeline(initStr);
-	usleep(gpppdata.modemInitDelay() * 10000); // 0.01 - 3.0 sec
+	usleep(PPPData::data()->modemInitDelay() * 10000); // 0.01 - 3.0 sec
     }
 
     substate++;
@@ -306,7 +306,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
      * Speed Dragon). Even better would be to detect this when doing
      * a "Modem Query"
      */
-    if (MODEM_TONEDURATION != gpppdata.modemToneDuration())
+    if (MODEM_TONEDURATION != PPPData::data()->modemToneDuration())
         vmain = 5;
     else
         vmain = 3;
@@ -316,11 +316,11 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
   if (vmain == 5) {
     if(!expecting) {
-        QString sToneDuration = "ATS11=" + QString::number(gpppdata.modemToneDuration());
+        QString sToneDuration = "ATS11=" + QString::number(PPPData::data()->modemToneDuration());
         QString msg = i18n("Setting ") + sToneDuration;
         messg->setText(msg);
 	emit debugMessage(msg);
-	setExpect(gpppdata.modemInitResp());
+	setExpect(PPPData::data()->modemInitResp());
 	writeline(sToneDuration);
       }
     vmain = 3;
@@ -336,18 +336,18 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       }
       substate = -1;
       // skip setting the volume if command is empty
-      if(gpppdata.volumeInitString().isEmpty()) {
+      if(PPPData::data()->volumeInitString().isEmpty()) {
         vmain = 4;
         return;
       }
       messg->setText(i18n("Setting speaker volume..."));
       emit debugMessage(i18n("Setting speaker volume..."));
 
-      setExpect(gpppdata.modemInitResp());
+      setExpect(PPPData::data()->modemInitResp());
       QString vol("AT");
-      vol += gpppdata.volumeInitString();
+      vol += PPPData::data()->volumeInitString();
       writeline(vol);
-      usleep(gpppdata.modemInitDelay() * 10000); // 0.01 - 3.0 sec
+      usleep(PPPData::data()->modemInitDelay() * 10000); // 0.01 - 3.0 sec
       vmain = 4;
       return;
     }
@@ -355,12 +355,12 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
   if(vmain == 4) {
     if(!expecting) {
-      if(!gpppdata.waitForDialTone()) {
+      if(!PPPData::data()->waitForDialTone()) {
 	QString msg = i18n("Turning off dial tone waiting...");
 	messg->setText(msg);
 	emit debugMessage(msg);
-	setExpect(gpppdata.modemInitResp());
-	writeline(gpppdata.modemNoDialToneDetectionStr());
+	setExpect(PPPData::data()->modemInitResp());
+	writeline(PPPData::data()->modemNoDialToneDetectionStr());
       }
       vmain = 1;
       return;
@@ -372,23 +372,23 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
     if(!expecting) {
 
       timeout_timer->stop();
-      timeout_timer->start(gpppdata.modemTimeout()*1000);
+      timeout_timer->start(PPPData::data()->modemTimeout()*1000);
 
-      QStringList &plist = gpppdata.phonenumbers();
-      QString bmarg= gpppdata.dialPrefix();
+      QStringList &plist = PPPData::data()->phonenumbers();
+      QString bmarg= PPPData::data()->dialPrefix();
       bmarg += *plist.at(dialnumber);
       QString bm = i18n("Dialing %1").arg(bmarg);
       messg->setText(bm);
       emit debugMessage(bm);
 
-      QString pn = gpppdata.modemDialStr();
-      pn += gpppdata.dialPrefix();
+      QString pn = PPPData::data()->modemDialStr();
+      pn += PPPData::data()->dialPrefix();
       pn += *plist.at(dialnumber);
       if(++dialnumber >= plist.count())
         dialnumber = 0;
       writeline(pn);
 
-      setExpect(gpppdata.modemConnectResp());
+      setExpect(PPPData::data()->modemConnectResp());
       vmain = 100;
       return;
     }
@@ -398,28 +398,28 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
   // if NO CARRIER or NO DIALTONE
   if(vmain == 100) {
     if(!expecting) {
-      myreadbuffer = gpppdata.modemConnectResp();
+      myreadbuffer = PPPData::data()->modemConnectResp();
       setExpect("\n");
       vmain = 101;
       return;
     }
 
-    if(readbuffer.contains(gpppdata.modemBusyResp())) {
+    if(readbuffer.contains(PPPData::data()->modemBusyResp())) {
       timeout_timer->stop();
-      timeout_timer->start(gpppdata.modemTimeout()*1000);
+      timeout_timer->start(PPPData::data()->modemTimeout()*1000);
 
       messg->setText(i18n("Line busy. Hanging up..."));
       emit debugPutChar('\n');
       Modem::modem->hangup();
 
-      if(gpppdata.busyWait() > 0) {
-	QString bm = i18n("Line busy. Waiting: %1 seconds").arg(gpppdata.busyWait());
+      if(PPPData::data()->busyWait() > 0) {
+	QString bm = i18n("Line busy. Waiting: %1 seconds").arg(PPPData::data()->busyWait());
 	messg->setText(bm);
 	emit debugMessage(bm);
 
 	pausing = true;
 
-	pausetimer->start(gpppdata.busyWait()*1000, true);
+	pausetimer->start(PPPData::data()->busyWait()*1000, true);
 	timeout_timer->stop();
       }
 
@@ -429,7 +429,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       return;
     }
 
-    if(readbuffer.contains(gpppdata.modemNoDialtoneResp())) {
+    if(readbuffer.contains(PPPData::data()->modemNoDialtoneResp())) {
       timeout_timer->stop();
 
       messg->setText(i18n("No Dialtone"));
@@ -438,7 +438,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       return;
     }
 
-    if(readbuffer.contains(gpppdata.modemNoCarrierResp())) {
+    if(readbuffer.contains(PPPData::data()->modemNoCarrierResp())) {
       timeout_timer->stop();
 
       messg->setText(i18n("No Carrier"));
@@ -457,7 +457,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 //      p_kppp->con_win->startClock();
 
       vmain = 2;
-      scriptTimeout=gpppdata.modemTimeout()*1000;
+      scriptTimeout=PPPData::data()->modemTimeout()*1000;
       return;
     }
   }
@@ -494,10 +494,10 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	emit debugMessage(bm);
 
 	if (scriptArgument.lower() == "password") {
-	  gpppdata.setPassword(scanvar);
+	  PPPData::data()->setPassword(scanvar);
 	  p_kppp->setPW_Edit(scanvar);
-	  if(gpppdata.storePassword())
-	    gpppdata.setStoredPassword(scanvar);
+	  if(PPPData::data()->storePassword())
+	    PPPData::data()->setStoredPassword(scanvar);
 	  firstrunPW = true;
 	}
 
@@ -513,8 +513,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	QString arg = scriptArgument;
 	QRegExp re1("%USERNAME%");
 	QRegExp re2("%PASSWORD%");
-	arg = arg.replace(re1, gpppdata.storedUsername());
-	arg = arg.replace(re2, gpppdata.storedPassword());
+	arg = arg.replace(re1, PPPData::data()->storedUsername());
+	arg = arg.replace(re2, PPPData::data()->storedPassword());
 
 	if (scriptCommand == "Send")
 	  bm = bm.arg(scriptArgument);
@@ -578,8 +578,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	messg->setText(i18n("Hangup"));
 	emit debugMessage(i18n("Hangup"));
 
-	writeline(gpppdata.modemHangupStr());
-	setExpect(gpppdata.modemHangupResp());
+	writeline(PPPData::data()->modemHangupStr());
+	setExpect(PPPData::data()->modemHangupResp());
 
 	scriptindex++;
 	return;
@@ -592,7 +592,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	messg->setText(i18n("Answer"));
 	emit debugMessage(i18n("Answer"));
 
-	setExpect(gpppdata.modemRingResp());
+	setExpect(PPPData::data()->modemRingResp());
 	vmain = 150;
 	return;
       }
@@ -602,7 +602,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	messg->setText(bm);
 	emit debugMessage(bm);
 
-	QString idstring = gpppdata.storedUsername();
+	QString idstring = PPPData::data()->storedUsername();
 
 	if(!idstring.isEmpty() && firstrunID) {
 	  // the user entered an Id on the main kppp dialog
@@ -638,7 +638,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	messg->setText(bm);
 	emit debugMessage(bm);
 
-	QString pwstring = gpppdata.password();
+	QString pwstring = PPPData::data()->password();
 
 	if(!pwstring.isEmpty() && firstrunPW) {
 	  // the user entered a password on the main kppp dialog
@@ -785,8 +785,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
   if(vmain == 150) {
     if(!expecting) {
-      writeline(gpppdata.modemAnswerStr());
-      setExpect(gpppdata.modemAnswerResp());
+      writeline(PPPData::data()->modemAnswerStr());
+      setExpect(PPPData::data()->modemAnswerResp());
 
       vmain = 2;
       scriptindex++;
@@ -814,7 +814,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       // stop reading of data
       Modem::modem->stop();
 
-      if(gpppdata.authMethod() == AUTH_TERMINAL) {
+      if(PPPData::data()->authMethod() == AUTH_TERMINAL) {
       //     if (termwindow) {
 // 	  delete termwindow;
 // 	  termwindow = 0L;
@@ -835,8 +835,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
       killTimer( main_timer_ID );
 
-      if_timeout_timer->start(gpppdata.pppdTimeout()*1000);
-      qDebug( "started if timeout timer with %i", gpppdata.pppdTimeout()*1000);
+      if_timeout_timer->start(PPPData::data()->pppdTimeout()*1000);
+      qDebug( "started if timeout timer with %i", PPPData::data()->pppdTimeout()*1000);
 
       // find out PPP interface and notify the stats module
 //      stats->setUnit(pppInterfaceNumber());
@@ -849,7 +849,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       qDebug("execppp() returned with return-code %i", result );
 
       if(result) {
-        if(!gpppdata.autoDNS())
+        if(!PPPData::data()->autoDNS())
           adddns();
 
 	// O.K we are done here, let's change over to the if_waiting loop
@@ -1063,7 +1063,7 @@ void ConnectWidget::if_waiting_timed_out() {
   if_timeout_timer->stop();
   qDebug("if_waiting_timed_out()");
 
-  gpppdata.setpppdError(E_IF_TIMEOUT);
+  PPPData::data()->setpppdError(E_IF_TIMEOUT);
 
   // let's kill the stuck pppd
   Modem::modem->killPPPDaemon();
@@ -1088,7 +1088,7 @@ void ConnectWidget::if_waiting_slot() {
 
 //   if(!stats->ifIsUp()) {
 
-//     if(gpppdata.pppdError() != 0) {
+//     if(PPPData::data()->pppdError() != 0) {
 //       // we are here if pppd died immediately after starting it.
 //       pppdDied();
 //       // error message handled in main.cpp: sigPPPDDied()
@@ -1105,7 +1105,7 @@ void ConnectWidget::if_waiting_slot() {
   if_timer->stop();
   usleep(200000);
 
-  if(gpppdata.autoDNS())
+  if(PPPData::data()->autoDNS())
     addpeerdns();
 
   // Close the debugging window. If we are connected, we
@@ -1114,12 +1114,12 @@ void ConnectWidget::if_waiting_slot() {
 //  p_kppp->statdlg->take_stats(); // start taking ppp statistics
   auto_hostname();
 
-  if(!gpppdata.command_on_connect().isEmpty()) {
+  if(!PPPData::data()->command_on_connect().isEmpty()) {
     messg->setText(i18n("Running startup command..."));
 
     // make sure that we don't get any async errors
     qApp->flushX();
-    execute_command(gpppdata.command_on_connect());
+    execute_command(PPPData::data()->command_on_connect());
     messg->setText(i18n("Done"));
   }
 
@@ -1141,7 +1141,7 @@ void ConnectWidget::if_waiting_slot() {
 //   else
 //     p_kppp->con_win->accounting(false);
 
-  if (gpppdata.get_dock_into_panel()) {
+  if (PPPData::data()->get_dock_into_panel()) {
 //    DockWidget::dock_widget->show();
 //    DockWidget::dock_widget->take_stats();
 //    this->hide();
@@ -1149,7 +1149,7 @@ void ConnectWidget::if_waiting_slot() {
   else {
 //    p_kppp->con_win->show();
 
-    if(gpppdata.get_iconify_on_connect()) {
+    if(PPPData::data()->get_iconify_on_connect()) {
         //    p_kppp->con_win->showMinimized();
     }
   }
@@ -1168,17 +1168,17 @@ bool ConnectWidget::execppp() {
   // we'll simply leave this argument away. pppd will then use the default tty
   // which is the serial port we connected stdin/stdout to in opener.cpp.
   //  command += " ";
-  //  command += gpppdata.modemDevice();
+  //  command += PPPData::data()->modemDevice();
 
-  command += " " + gpppdata.speed();
+  command += " " + PPPData::data()->speed();
 
   command += " -detach";
 
-  if(gpppdata.ipaddr() != "0.0.0.0" ||
-     gpppdata.gateway() != "0.0.0.0") {
-    if(gpppdata.ipaddr() != "0.0.0.0") {
+  if(PPPData::data()->ipaddr() != "0.0.0.0" ||
+     PPPData::data()->gateway() != "0.0.0.0") {
+    if(PPPData::data()->ipaddr() != "0.0.0.0") {
       command += " ";
-      command += gpppdata.ipaddr();
+      command += PPPData::data()->ipaddr();
       command +=  ":";
     }
     else {
@@ -1186,27 +1186,27 @@ bool ConnectWidget::execppp() {
       command += ":";
     }
 
-    if(gpppdata.gateway() != "0.0.0.0")
-      command += gpppdata.gateway();
+    if(PPPData::data()->gateway() != "0.0.0.0")
+      command += PPPData::data()->gateway();
   }
 
-  if(gpppdata.subnetmask() != "0.0.0.0")
-    command += " netmask " + gpppdata.subnetmask();
+  if(PPPData::data()->subnetmask() != "0.0.0.0")
+    command += " netmask " + PPPData::data()->subnetmask();
 
-  if(gpppdata.flowcontrol() != "None") {
-    if(gpppdata.flowcontrol() == "CRTSCTS")
+  if(PPPData::data()->flowcontrol() != "None") {
+    if(PPPData::data()->flowcontrol() == "CRTSCTS")
       command += " crtscts";
     else
       command += " xonxoff";
   }
 
-  if(gpppdata.defaultroute())
+  if(PPPData::data()->defaultroute())
     command += " defaultroute";
 
-  if(gpppdata.autoDNS())
+  if(PPPData::data()->autoDNS())
     command += " usepeerdns";
 
-  QStringList &arglist = gpppdata.pppdArgument();
+  QStringList &arglist = PPPData::data()->pppdArgument();
   for ( QStringList::Iterator it = arglist.begin();
         it != arglist.end();
         ++it )
@@ -1215,25 +1215,25 @@ bool ConnectWidget::execppp() {
   }
 
   // PAP settings
-  if(gpppdata.authMethod() == AUTH_PAP) {
+  if(PPPData::data()->authMethod() == AUTH_PAP) {
     command += " -chap user ";
-    command = command + "\"" + gpppdata.storedUsername() + "\"";
+    command = command + "\"" + PPPData::data()->storedUsername() + "\"";
   }
 
   // CHAP settings
-  if(gpppdata.authMethod() == AUTH_CHAP) {
+  if(PPPData::data()->authMethod() == AUTH_CHAP) {
     command += " -pap user ";
-    command = command + "\"" + gpppdata.storedUsername() + "\"";
+    command = command + "\"" + PPPData::data()->storedUsername() + "\"";
   }
 
   // PAP/CHAP settings
-  if(gpppdata.authMethod() == AUTH_PAPCHAP) {
+  if(PPPData::data()->authMethod() == AUTH_PAPCHAP) {
     command += " user ";
-    command = command + "\"" + gpppdata.storedUsername() + "\"";
+    command = command + "\"" + PPPData::data()->storedUsername() + "\"";
   }
 
   // check for debug
-  if(gpppdata.getPPPDebug())
+  if(PPPData::data()->getPPPDebug())
     command += " debug";
 
   if (command.length() > MAX_CMDLEN) {
@@ -1277,8 +1277,8 @@ void auto_hostname() {
   tmp_str[sizeof(tmp_str)-1]=0; // panic
   old_hostname=tmp_str; // copy to QString
 
-  // if (!p_kppp->stats->local_ip_address.isEmpty() && gpppdata.autoname()) {
-  if ( gpppdata.autoname()) {
+  // if (!p_kppp->stats->local_ip_address.isEmpty() && PPPData::data()->autoname()) {
+  if ( PPPData::data()->autoname()) {
 //    local_ip.s_addr=inet_addr(p_kppp->stats->local_ip_address.ascii());
     hostname_entry=gethostbyaddr((const char *)&local_ip,sizeof(in_addr),AF_INET);
 
@@ -1332,7 +1332,7 @@ void add_domain(const QString &domain) {
 	if((resolv[j].contains("domain") ||
 	      ( resolv[j].contains("nameserver")
 		&& !resolv[j].contains("#kppp temp entry")
-		&& gpppdata.exDNSDisabled()))
+		&& PPPData::data()->exDNSDisabled()))
 	        && !resolv[j].contains("#entry disabled by kppp")) {
 	  QCString tmp = "# " + resolv[j].local8Bit() +
 			 " \t#entry disabled by kppp\n";
@@ -1355,7 +1355,7 @@ void adddns()
   int fd;
 
   if ((fd = Modem::modem->openResolv(O_WRONLY|O_APPEND)) >= 0) {
-    QStringList &dnslist = gpppdata.dns();
+    QStringList &dnslist = PPPData::data()->dns();
     for ( QStringList::Iterator it = dnslist.begin();
           it != dnslist.end();
           ++it )
@@ -1366,7 +1366,7 @@ void adddns()
     }
     close(fd);
   }
-  add_domain(gpppdata.domain());
+  add_domain(PPPData::data()->domain());
 }
 
 void addpeerdns() {
@@ -1387,7 +1387,7 @@ void addpeerdns() {
       fprintf(stderr, "failed to read from /etc/ppp/resolv.conf\n");
     close(fd);
   }
-  add_domain(gpppdata.domain());
+  add_domain(PPPData::data()->domain());
 }
 
 // remove the dns entries from the /etc/resolv.conf file

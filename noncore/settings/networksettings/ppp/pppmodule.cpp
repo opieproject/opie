@@ -1,6 +1,6 @@
 #include "pppconfig.h"
 #include "pppmodule.h"
-//#include "pppimp.h"
+#include "pppdata.h"
 #include "kpppwidget.h"
 #include "interfaceinformationimp.h"
 //#include "devices.h"
@@ -98,6 +98,7 @@ Interface *PPPModule::addNewInterface(const QString &newInterface){
   if(imp.exec() == QDialog::Accepted ){
               qDebug("ACCEPTED");
               return new Interface( 0, newInterface );
+              PPPData::data()->save();
   }
   return NULL;
 }

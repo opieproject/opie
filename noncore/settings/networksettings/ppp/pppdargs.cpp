@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdargs.cpp,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: pppdargs.cpp,v 1.2 2003-05-24 16:12:04 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -121,14 +121,14 @@ void PPPdArguments::removebutton() {
 void PPPdArguments::defaultsbutton() {
   // all of this is a hack
   // save current list
-  QStringList arglist(gpppdata.pppdArgument());
+  QStringList arglist(PPPData::data()->pppdArgument());
 
   // get defaults
-  gpppdata.setpppdArgumentDefaults();
+  PPPData::data()->setpppdArgumentDefaults();
   init();
 
   // restore old list
-  gpppdata.setpppdArgument(arglist);
+  PPPData::data()->setpppdArgument(arglist);
 }
 
 
@@ -136,7 +136,7 @@ void PPPdArguments::closebutton() {
   QStringList arglist;
   for(uint i=0; i < arguments->count(); i++)
     arglist.append(arguments->text(i));
-  gpppdata.setpppdArgument(arglist);
+  PPPData::data()->setpppdArgument(arglist);
 
   done(0);
 }
@@ -146,7 +146,7 @@ void PPPdArguments::init() {
   while(arguments->count())
     arguments->removeItem(0);
 
-  QStringList &arglist = gpppdata.pppdArgument();
+  QStringList &arglist = PPPData::data()->pppdArgument();
   for ( QStringList::Iterator it = arglist.begin();
         it != arglist.end();
         ++it )

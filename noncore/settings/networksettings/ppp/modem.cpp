@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.2 2003-05-23 19:43:46 tille Exp $
+ * $Id: modem.cpp,v 1.3 2003-05-24 16:12:02 tille Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -101,7 +101,7 @@ speed_t Modem::modemspeed() {
   // convert the string modem speed int the gpppdata object to a t_speed type
   // to set the modem.  The constants here should all be ifdef'd because
   // other systems may not have them
-    int i = gpppdata.speed().toInt()/100;
+    int i = PPPData::data()->speed().toInt()/100;
 
   switch(i) {
   case 24:
@@ -151,7 +151,7 @@ bool Modem::opentty() {
 
 //begin  if((modemfd = Requester::rq->openModem(gpppdata.modemDevice()))<0) {
     close(modemfd);
-//    device = "/dev/modem";//deviceByIndex(request.modem.deviceNum);
+    device = PPPData::data()->modemDevice();
     if ((modemfd = open(device, O_RDWR|O_NDELAY|O_NOCTTY)) == -1) {
         qDebug("error opening modem device !");
         errmsg = i18n("Unable to open modem.");
@@ -161,7 +161,7 @@ bool Modem::opentty() {
 //}
 
 #if 0
-  if(gpppdata.UseCDLine()) {
+  if(PPPData::data()->UseCDLine()) {
     if(ioctl(modemfd, TIOCMGET, &flags) == -1) {
       errmsg = i18n("Unable to detect state of CD line.");
       ::close(modemfd);
@@ -209,8 +209,8 @@ bool Modem::opentty() {
   tty.c_lflag &= ~(ECHO|ECHOE|ECHOK|ECHOKE);
 
 
-  if(gpppdata.flowcontrol() != "None") {
-      if(gpppdata.flowcontrol() == "CRTSCTS") {
+  if(PPPData::data()->flowcontrol() != "None") {
+      if(PPPData::data()->flowcontrol() == "CRTSCTS") {
       tty.c_cflag |= CRTSCTS;
     }
     else {
@@ -339,7 +339,7 @@ bool Modem::writeLine(const char *buf) {
   char *b = new char[len+2];
   memcpy(b, buf, len);
   // different modems seem to need different line terminations
-  QString term = gpppdata.enter();
+  QString term = PPPData::data()->enter();
   if(term == "LF")
     b[len++]='\n';
   else if(term == "CR")
@@ -379,9 +379,9 @@ bool Modem::hangup() {
     if (data_mode) escape_to_command_mode();
 
     // Then hangup command
-    writeLine(gpppdata.modemHangupStr().local8Bit());
+    writeLine(PPPData::data()->modemHangupStr().local8Bit());
 
-    usleep(gpppdata.modemInitDelay() * 10000); // 0.01 - 3.0 sec
+    usleep(PPPData::data()->modemInitDelay() * 10000); // 0.01 - 3.0 sec
 
 #ifndef DEBUG_WO_DIALING
     if (sigsetjmp(jmp_buffer, 1) == 0) {
@@ -417,7 +417,7 @@ bool Modem::hangup() {
     ioctl(modemfd, TIOCMSET, &modemstat);
 #endif
 
-    usleep(gpppdata.modemInitDelay() * 10000); // 0.01 - 3.0 secs
+    usleep(PPPData::data()->modemInitDelay() * 10000); // 0.01 - 3.0 secs
 
     cfsetospeed(&temptty, modemspeed());
     cfsetispeed(&temptty, modemspeed());
@@ -440,11 +440,11 @@ void Modem::escape_to_command_mode() {
   tcflush(modemfd, TCIOFLUSH);
 
   // +3 because quiet time must be greater than guard time.
-  usleep((gpppdata.modemEscapeGuardTime()+3)*20000);
-  QCString tmp = gpppdata.modemEscapeStr().local8Bit();
+  usleep((PPPData::data()->modemEscapeGuardTime()+3)*20000);
+  QCString tmp = PPPData::data()->modemEscapeStr().local8Bit();
   write(modemfd, tmp.data(), tmp.length());
   tcflush(modemfd, TCIOFLUSH);
-  usleep((gpppdata.modemEscapeGuardTime()+3)*20000);
+  usleep((PPPData::data()->modemEscapeGuardTime()+3)*20000);
 
   data_mode = false;
 }
@@ -560,7 +560,7 @@ int Modem::lockdevice() {
   int fd;
   char newlock[80]=""; // safe
 
-  if(!gpppdata.modemLockFile()) {
+  if(!PPPData::data()->modemLockFile()) {
     qDebug("The user doesn't want a lockfile.");
     return 0;
   }
@@ -569,7 +569,7 @@ int Modem::lockdevice() {
     return 1;
 
   QString lockfile = LOCK_DIR"/LCK..";
-  lockfile += gpppdata.modemDevice().mid(5); // append everything after /dev/
+  lockfile += PPPData::data()->modemDevice().mid(5); // append everything after /dev/
 
   if(access(QFile::encodeName(lockfile), F_OK) == 0) {
 //    if ((fd = Requester::rq->
@@ -600,7 +600,7 @@ if ((fd = openLockfile(QFile::encodeName(lockfile), O_RDONLY)) >= 0) {
     }
   }
 
-  fd = openLockfile(gpppdata.modemDevice(),O_WRONLY|O_TRUNC|O_CREAT);
+  fd = openLockfile(PPPData::data()->modemDevice(),O_WRONLY|O_TRUNC|O_CREAT);
   if(fd >= 0) {
     sprintf(newlock,"%010d\n", getpid());
     qDebug("Locking Device: %s", newlock);

@@ -1,7 +1,7 @@
 /*
  *        kPPP: A pppd front end for the KDE project
  *
- * $Id: debug.cpp,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: debug.cpp,v 1.2 2003-05-24 16:12:02 tille Exp $
  *            Copyright (C) 1997  Bernd Wuebben
  *                 wuebben@math.cornel.edu
  *
@@ -133,7 +133,7 @@ void DebugWidget::toggleVisibility() {
     show();
 
   bool showlog = isVisible();
-  gpppdata.set_show_log_window(showlog);
+  PPPData::data()->set_show_log_window(showlog);
 }
 
 

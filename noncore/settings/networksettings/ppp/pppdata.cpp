@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.1 2003-05-22 15:08:21 tille Exp $
+ * $Id: pppdata.cpp,v 1.2 2003-05-24 16:12:04 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -38,11 +38,24 @@
 // #include <kapplication.h>
 #include <assert.h>
 
-PPPData gpppdata;
+PPPData *PPPData::_data = 0;
+Config *PPPData::config = 0;
 
+PPPData* PPPData::data()
+{
+    if (!_data){
+        qDebug("PPPData::data() creates new Instance");
+        _data = new PPPData();
+    }
+    if (!_data->config){
+        qDebug("PPPData::data() opens conffile");
+        _data->open();
+    }
+    return _data;
+}
 
 PPPData::PPPData()
-  :  config(0L),
+    :  //config(0L),
      highcount(-1),        // start out with no entries
      caccount(-1),         // set the current account index also
      suidprocessid(-1),    // process ID of setuid child
@@ -56,25 +69,9 @@ PPPData::PPPData()
 // open configuration file
 //
 bool PPPData::open() {
-
-    config = new Config("NetworkSetup");
-    /*
-  config = kapp->config();
-
-  if (config->getConfigState() == KConfig::NoAccess) {
-    KMessageBox::error(0L,
-                       i18n("The application-specific config file could not "
-                       "be opened in either read-write or read-only mode.\n"
-                       "The superuser might have to change its ownership "
-                       "by issuing the following command in your home directory:\n"
-                       "chown {YourUsername} .kde/share/config/kppprc"),
-			 kapp->name());
-    return false;
-  }
-
-  // don't expand shell variables
-  config->setDollarExpansion(false);
-    */
+    qDebug("opening configfile NetworkSetupPPP");
+    if (config) return true;
+    config = new Config("NetworkSetupPPP");
 
     highcount = readNumConfig(GENERAL_GRP, NUMACCOUNTS_KEY, 0) - 1;
 
@@ -104,7 +101,13 @@ void PPPData::save() {
 
   if (config) {
     writeConfig(GENERAL_GRP, NUMACCOUNTS_KEY, count());
-//    config->sync();
+    delete config;
+    config = 0;
+    qDebug("worte confi NetworkSetupPPP");
+  }
+  if (_data){
+    delete _data;
+    _data = 0;
   }
 
 }
@@ -123,17 +126,18 @@ void PPPData::cancel() {
 }
 
 
-// currently differentiates between READWRITE and NONE only
-int PPPData::access() const {
+// // currently differentiates between READWRITE and NONE only
+// int PPPData::access() const {
 
-    return 0;//config->getConfigState();
-}
+//     return 1;//config->getConfigState();
+// }
 
 
 // functions to read/write date to configuration file
 QString PPPData::readConfig(const QString &group, const QString &key,
                             const QString &defvalue = "")
 {
+//    qDebug("PPPData::readConfig key >%s< group >%s<",key.latin1(), group.latin1());
   if (config) {
     config->setGroup(group);
     return config->readEntry(key, defvalue);
@@ -718,14 +722,14 @@ bool PPPData::isUniqueAccname(const QString &n) {
 
 
 bool PPPData::deleteAccount() {
-  if(caccount < 0)
-    return false;
+    //FIXME:
+//   if(caccount < 0)
+     return false;
 
 //   QMap <QString, QString> map;
 //   QMap <QString, QString>::Iterator it;
 
-  // set all entries of the current account to ""
-// tille: do not handle the accounts here... (?)
+//   // set all entries of the current account to ""
 //   map = config->entryMap(cgroup);
 //   it = map.begin();
 //   while (it != map.end()) {
@@ -756,13 +760,13 @@ bool PPPData::deleteAccount() {
 //     it++;
 //   }
 
-   highcount--;
-   if(caccount > highcount)
-     caccount = highcount;
+//    highcount--;
+//    if(caccount > highcount)
+//      caccount = highcount;
 
-  setAccountbyIndex(caccount);
+//   setAccountbyIndex(caccount);
 
-  return true;
+//   return true;
 }
 
 
@@ -778,39 +782,40 @@ bool PPPData::deleteAccount(const QString &aname) {
 
 int PPPData::newaccount() {
 
-  if(!config || highcount >= MAX_ACCOUNTS)
-    return -1;
+    qDebug("PPPData::newaccount highcount %i/%i",highcount,MAX_ACCOUNTS);
+  if(!config) open();
+  if (highcount >= MAX_ACCOUNTS) return -1;
 
   highcount++;
   setAccountbyIndex(highcount);
 
   setpppdArgumentDefaults();
-
+  qDebug("PPPData::newaccount -> %i",caccount);
   return caccount;
 }
 
 int PPPData::copyaccount(int i) {
 
-  if(highcount >= MAX_ACCOUNTS)
+//  if(highcount >= MAX_ACCOUNTS)
     return -1;
 
-  setAccountbyIndex(i);
+//   setAccountbyIndex(i);
 
-//   QMap <QString, QString> map = config->entryMap(cgroup);
-//   QMap <QString, QString>::ConstIterator it = map.begin();
+//    QMap <QString, QString> map = config->entryMap(cgroup);
+//    QMap <QString, QString>::ConstIterator it = map.begin();
 
-   QString newname = i18n("%1_copy").arg(accname());
+//    QString newname = i18n("%1_copy").arg(accname());
 
-   newaccount();
+//    newaccount();
 
-//   while (it != map.end()) {
-//     config->writeEntry(it.key(), *it);
-//     it++;
-//   }
+//    while (it != map.end()) {
+//      config->writeEntry(it.key(), *it);
+//      it++;
+//    }
 
-  setAccname(newname);
+//   setAccname(newname);
 
-  return caccount;
+//   return caccount;
 }
 
 
@@ -829,7 +834,7 @@ void PPPData::setAccname(const QString &n) {
 }
 
 
-#define SEPARATOR_CHAR ':'
+#define SEPARATOR_CHAR '&'
 QStringList &PPPData::phonenumbers() {
 
   readListConfig(cgroup, PHONENUMBER_KEY, phonelist, SEPARATOR_CHAR);
@@ -1011,7 +1016,7 @@ void PPPData::setDefaultroute(bool set) {
 
 bool PPPData::autoDNS() {
   bool set = (bool) readNumConfig(cgroup, AUTODNS_KEY, true);
-  return (set && gpppdata.pppdVersionMin(2, 3, 7));
+  return (set && PPPData::data()->pppdVersionMin(2, 3, 7));
 }
 
 
@@ -1139,49 +1144,49 @@ void PPPData::setpppdArgumentDefaults() {
 }
 
 
-// graphing widget
-void PPPData::setGraphingOptions(bool enable,
-				 QColor bg,
-				 QColor text,
-				 QColor in,
-				 QColor out)
-{
-  if(config) {
-    config->setGroup(GRAPH_GRP);
-    config->writeEntry(GENABLED, enable);
-//     config->writeEntry(GCOLOR_BG, bg);
-//     config->writeEntry(GCOLOR_TEXT, text);
-//     config->writeEntry(GCOLOR_IN, in);
-//     config->writeEntry(GCOLOR_OUT, out);
-  }
-}
+// // graphing widget
+// void PPPData::setGraphingOptions(bool enable,
+// 				 QColor bg,
+// 				 QColor text,
+// 				 QColor in,
+// 				 QColor out)
+// {
+//   if(config) {
+//     config->setGroup(GRAPH_GRP);
+//     config->writeEntry(GENABLED, enable);
+// //     config->writeEntry(GCOLOR_BG, bg);
+// //     config->writeEntry(GCOLOR_TEXT, text);
+// //     config->writeEntry(GCOLOR_IN, in);
+// //     config->writeEntry(GCOLOR_OUT, out);
+//   }
+// }
 
-void PPPData::graphingOptions(bool &enable,
-			      QColor &bg,
-			      QColor &text,
-			      QColor &in,
-			      QColor &out)
-{
-  QColor c;
+// void PPPData::graphingOptions(bool &enable,
+// 			      QColor &bg,
+// 			      QColor &text,
+// 			      QColor &in,
+// 			      QColor &out)
+// {
+//   QColor c;
 
-  if(config) {
-    config->setGroup(GRAPH_GRP);
-    enable = config->readBoolEntry(GENABLED, true);
-    bg = Qt::white;
-    //bg = config->readColorEntry(GCOLOR_BG, &c);
-    text = Qt::black;
-    //text = config->readColorEntry(GCOLOR_TEXT, &c);
-    in = Qt::blue;
-    //in = config->readColorEntry(GCOLOR_IN, &c);
-    out = Qt::red;
-    //out = config->readColorEntry(GCOLOR_OUT, &c);
-  }
-}
+//   if(config) {
+//     config->setGroup(GRAPH_GRP);
+//     enable = config->readBoolEntry(GENABLED, true);
+//     bg = Qt::white;
+//     //bg = config->readColorEntry(GCOLOR_BG, &c);
+//     text = Qt::black;
+//     //text = config->readColorEntry(GCOLOR_TEXT, &c);
+//     in = Qt::blue;
+//     //in = config->readColorEntry(GCOLOR_IN, &c);
+//     out = Qt::red;
+//     //out = config->readColorEntry(GCOLOR_OUT, &c);
+//   }
+// }
 
 
-bool PPPData::graphingEnabled() {
-  return (bool) readNumConfig(GRAPH_GRP, GENABLED, true);
-}
+// bool PPPData::graphingEnabled() {
+//   return (bool) readNumConfig(GRAPH_GRP, GENABLED, true);
+// }
 
 
 
@@ -1205,25 +1210,25 @@ void PPPData::setpppdError(int err) {
 }
 
 
-//
-// window position
-//
-void PPPData::winPosConWin(int& p_x, int& p_y) {
-  p_x = readNumConfig(WINPOS_GRP, WINPOS_CONWIN_X, QApplication::desktop()->width()/2-160);
-  p_y = readNumConfig(WINPOS_GRP, WINPOS_CONWIN_Y, QApplication::desktop()->height()/2-55);
-}
+// //
+// // window position
+// //
+// void PPPData::winPosConWin(int& p_x, int& p_y) {
+//   p_x = readNumConfig(WINPOS_GRP, WINPOS_CONWIN_X, QApplication::desktop()->width()/2-160);
+//   p_y = readNumConfig(WINPOS_GRP, WINPOS_CONWIN_Y, QApplication::desktop()->height()/2-55);
+// }
 
-void PPPData::setWinPosConWin(int p_x, int p_y) {
-  writeConfig(WINPOS_GRP, WINPOS_CONWIN_X, p_x);
-  writeConfig(WINPOS_GRP, WINPOS_CONWIN_Y, p_y);
-}
+// void PPPData::setWinPosConWin(int p_x, int p_y) {
+//   writeConfig(WINPOS_GRP, WINPOS_CONWIN_X, p_x);
+//   writeConfig(WINPOS_GRP, WINPOS_CONWIN_Y, p_y);
+// }
 
-void PPPData::winPosStatWin(int& p_x, int& p_y) {
-  p_x = readNumConfig(WINPOS_GRP, WINPOS_STATWIN_X, QApplication::desktop()->width()/2-160);
-  p_y = readNumConfig(WINPOS_GRP, WINPOS_STATWIN_Y, QApplication::desktop()->height()/2-55);
-}
+// void PPPData::winPosStatWin(int& p_x, int& p_y) {
+//   p_x = readNumConfig(WINPOS_GRP, WINPOS_STATWIN_X, QApplication::desktop()->width()/2-160);
+//   p_y = readNumConfig(WINPOS_GRP, WINPOS_STATWIN_Y, QApplication::desktop()->height()/2-55);
+// }
 
-void PPPData::setWinPosStatWin(int p_x, int p_y) {
-  writeConfig(WINPOS_GRP, WINPOS_STATWIN_X, p_x);
-  writeConfig(WINPOS_GRP, WINPOS_STATWIN_Y, p_y);
-}
+// void PPPData::setWinPosStatWin(int p_x, int p_y) {
+//   writeConfig(WINPOS_GRP, WINPOS_STATWIN_X, p_x);
+//   writeConfig(WINPOS_GRP, WINPOS_STATWIN_Y, p_y);
+// }
