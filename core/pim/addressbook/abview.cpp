@@ -130,7 +130,7 @@ void AbView::load()
 {
 	qWarning("abView:Load data");
 	
-	m_list = m_contactdb->allRecords();
+	m_list = m_contactdb->sorted( true, 0, 0, 0 );
 	clearForCategory();
 
 	// Feed all views with new lists

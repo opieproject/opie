@@ -39,6 +39,8 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/qpemenubar.h>
+// #include <qtoolbar.h>
+// #include <qmenubar.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 
@@ -73,33 +75,47 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	: QMainWindow( parent, name, f ),
 	  catMenu (0l),
 	  abEditor(0l),
-	  syncing(FALSE)
+	  syncing(FALSE),
+	  m_tableViewButton(0l),
+	  m_cardViewButton(0l)
 {
 	isLoading = true;
 
 	m_config.load();
 
-	//	initFields();
-	
 	setCaption( tr("Contacts") );
 	setIcon( Resource::loadPixmap( "AddressBook" ) );
+
+	// Settings for Main Menu
+	setToolBarsMovable( false  );
+	setRightJustification( true );
 	
-	setToolBarsMovable( FALSE );
+	// Create Toolbar
+	listTools = new QPEToolBar( this, "list operations" );
+	listTools->setHorizontalStretchable( true );
+	addToolBar( listTools );
 	
-	// Create Toolbars
-	
-	QPEToolBar *bar = new QPEToolBar( this );
-	bar->setHorizontalStretchable( TRUE );
-	
-	QPEMenuBar *mbList = new QPEMenuBar( bar );
+	QPEMenuBar *mbList = new QPEMenuBar( this  );
 	mbList->setMargin( 0 );
 	
-	QPopupMenu *edit = new QPopupMenu( this );
+	QPopupMenu *edit = new QPopupMenu( mbList );
 	mbList->insertItem( tr( "Contact" ), edit );
 	
-	listTools = new QPEToolBar( this, "list operations" );
 	
-	
+	// View Icons
+	m_tableViewButton  = new QAction( tr( "List" ), Resource::loadPixmap( "datebook/weeklst" ),  
+					  QString::null, 0, this, 0 );
+	connect( m_tableViewButton, SIGNAL( activated() ), this, SLOT( slotListView() ) );
+	m_tableViewButton->setToggleAction( true );
+	m_tableViewButton->addTo( listTools );
+	m_cardViewButton = new QAction( tr( "Card" ), Resource::loadPixmap( "day" ),  QString::null, 0, this, 0 );
+	connect( m_cardViewButton, SIGNAL( activated() ), this, SLOT( slotCardView() ) );
+	m_cardViewButton->setToggleAction( true );
+	m_cardViewButton->addTo( listTools );
+
+	listTools->addSeparator();
+
+	// Other Buttons
 	QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ), QString::null,
 				  0, this, 0 );
 	actionNew = a;
@@ -209,11 +225,6 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
  	m_abView = new AbView( listContainer, m_config.orderList() );
  	vb->addWidget( m_abView );
 	// abList->setHScrollBarMode( QScrollView::AlwaysOff );
-// :SX
-// 	connect( abList, SIGNAL( empty( bool ) ), this, SLOT( listIsEmpty( bool ) ) );
-// 	connect( abList, SIGNAL( details() ), this, SLOT( slotListView() ) );
-// 	connect( abList, SIGNAL( currentChanged(int,int) ), this, SLOT( slotUpdateToolbar() ) );
-
 	connect( m_abView, SIGNAL( signalViewSwitched ( int ) ), 
 		 this, SLOT( slotViewSwitched( int ) ) );
 
@@ -234,7 +245,6 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	catMenu->setCheckable( TRUE );
 	connect( catMenu, SIGNAL(activated(int)), this, SLOT(slotSetCategory(int)) );
 	populateCategories();
-	
 	mbList->insertItem( tr("View"), catMenu );
 	
  	defaultFont = new QFont( m_abView->font() );
@@ -818,6 +828,8 @@ void AddressbookWindow::slotSetCategory( int c )
 		}
 	}
 	
+	slotViewSwitched( view );
+
 	m_abView -> setShowByCategory( view, cat );
 
 	if ( book.isEmpty() )
@@ -835,9 +847,13 @@ void AddressbookWindow::slotViewSwitched( int view )
 	switch ( view ){
 	case AbView::TableView:
 		menu = 1;
+		m_tableViewButton->setOn(true);
+		m_cardViewButton->setOn(false);
 		break;
 	case AbView::CardView:
 		menu = 2;
+		m_tableViewButton->setOn(false);
+		m_cardViewButton->setOn(true);
 		break;
 // 	case AbView::PersonalView:
 // 		menu = 3;
@@ -856,11 +872,22 @@ void AddressbookWindow::slotViewSwitched( int view )
 }
 
 
+void AddressbookWindow::slotListView()
+{
+	emit slotSetCategory( AbView::TableView +1 );
+}
+
+void AddressbookWindow::slotCardView()
+{
+	emit slotSetCategory( AbView::CardView +1 );
+}
+
 void AddressbookWindow::slotSetLetter( char c ) {
 	
  	m_abView->setShowByLetter( c );
 	
 }
+
 
 void AddressbookWindow::populateCategories()
 {
@@ -870,8 +897,8 @@ void AddressbookWindow::populateCategories()
 	id = 1;
 	rememberId = 0;
 	
-	catMenu->insertItem( tr( "List" ), id++ );
-	catMenu->insertItem( tr( "Cards" ), id++ );
+	catMenu->insertItem( Resource::loadPixmap( "datebook/weeklst" ), tr( "List" ), id++ );
+	catMenu->insertItem( Resource::loadPixmap( "day" ), tr( "Cards" ), id++ );
 // 	catMenu->insertItem( tr( "Personal" ), id++ );
 	catMenu->insertSeparator();
 	

@@ -93,6 +93,8 @@ private slots:
 	void slotWrapAround();
 
 	void slotViewSwitched( int );
+	void slotListView();
+	void slotCardView();
 
 	void slotConfig();
 
@@ -127,6 +129,9 @@ private:
 	bool isLoading;
 
 	AbConfig m_config;
+
+	QAction* m_tableViewButton;
+	QAction* m_cardViewButton;
 };
 
 #endif
