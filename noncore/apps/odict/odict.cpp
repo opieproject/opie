@@ -61,7 +61,6 @@ ODict::ODict() : QMainWindow()
 	browser_bottom = new QTextBrowser( vbox );
 
 	ding = new DingWidget();
-	ding->loadValues();
 
 	loadConfig();
 	setCentralWidget( vbox );
@@ -108,6 +107,7 @@ void ODict::loadConfig()
 
 	lookupLanguageNames( lastname );
 	ding->loadDict( lastname );
+	ding->loadValues();
 
 	query_co->setCurrentItem( e );
 	top_name->setText( top_name_content );
@@ -198,10 +198,6 @@ void ODict::slotSetParameter( int count )
 void ODict::slotMethodChanged( const QString& methodnumber )
 {
 	activated_name =  methodnumber;
-	
-	qDebug( "activated_name in slotMethodChanged() ist:" );
-	qDebug( activated_name );
-	qDebug( ding->loadedDict() );
 	
 	if ( activated_name != ding->loadedDict() )
 	{
