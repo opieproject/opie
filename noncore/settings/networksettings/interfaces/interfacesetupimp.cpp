@@ -14,7 +14,7 @@
 
 #include <assert.h>
 
-#define DNSSCRIPT "interfacednsscript"
+#define DNSSCRIPT "changedns"
 
 /**
  * Constuctor.  Set up the connection and load the first profile.
@@ -76,8 +76,8 @@ bool InterfaceSetupImp::saveSettings(){
     interfaces->setInterfaceOption("netmask", subnetMaskEdit->text());
     interfaces->setInterfaceOption("gateway", gatewayEdit->text());
     QString dns = firstDNSLineEdit->text() + " " + secondDNSLineEdit->text();
-    interfaces->setInterfaceOption("up "DNSSCRIPT" add ", dns);
-    interfaces->setInterfaceOption("down "DNSSCRIPT" remove ", dns);
+    interfaces->setInterfaceOption("up "DNSSCRIPT" -a ", dns);
+    interfaces->setInterfaceOption("down "DNSSCRIPT" -r ", dns);
   }
   
   // IP Information
@@ -133,7 +133,7 @@ void InterfaceSetupImp::setProfile(const QString &profile){
 
   // IP Information
   autoStart->setChecked(interfaces->isAuto(interface->getInterfaceName()));
-  QString dns = interfaces->getInterfaceOption("up interfacednsscript add", error);
+  QString dns = interfaces->getInterfaceOption("up interfacednsscript -a", error);
   if(dns.contains(" ")){
     firstDNSLineEdit->setText(dns.mid(0, dns.find(" ")));
     secondDNSLineEdit->setText(dns.mid(dns.find(" ")+1, dns.length())); 

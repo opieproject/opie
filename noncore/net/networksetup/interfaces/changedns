@@ -1,0 +1,111 @@
+#!/bin/bash
+
+SN="`basename $0`"	# base portion of our filename
+AE="-a"			# switch to add an entry
+RE="-r"			# swithc to remove an entry
+EL="/tmp/resolv.conf"	# expected location of the system nameserver config file
+ARGS="$@"		# friendly variable name for all args
+
+usage(){
+	echo "usage:
+$SN -a {ip} [{ip}...]
+$SN -r {ip} [{ip}...]"
+}
+
+#if are there at least two arguments?
+if [ "$#" -gt 1 ]
+then
+
+	#remove any old resolv.conf file
+	rm .resolve.conf .resolve.old .resolve.new 2> /dev/null
+			
+	#cast current nameserver file into OLD
+	cat "$EL" > .resolve.old
+
+	#build IP list
+	for ARG in $ARGS
+	do
+		if [ "$ARG" != "$1" ]
+		then
+			IP_LIST=`echo "$IP_LIST $ARG"`
+		fi
+	done
+
+	#select case on first switch
+	case "$1" in
+
+		#case '-a'
+		"$AE"	)
+
+			#for each IP in IP_LIST
+			for IP in $IP_LIST
+			do
+				#add nameserver entery to .newfile
+				echo "nameserver $IP" >> .resolve.conf
+
+				#cat OLD into grep excluding IP lines,
+				#storing results into NEW
+				cat .resolve.old | grep -v "$IP" > .resolve.new
+
+				#set OLD to NEW
+				cat .resolve.new > .resolve.old
+
+			done
+
+			#cat OLD onto end of .newfile
+			cat .resolve.new >> .resolve.conf
+
+			#clean up work files
+			rm .resolve.new .resolve.old 
+
+			#move old conf file to old conf file.bak
+			mv "$EL" "$EL.bak"
+
+			#move .newfile to resolve.conf file
+			mv .resolve.conf "$EL"
+
+			echo "Added $IP_LIST to $EL"
+		;;
+
+		#case '-r'
+		"$RE"	)
+
+			#for each IP in IP_LIST
+			for IP in $IP_LIST
+			do
+				#cat OLD into grep excluding IP lines,
+				#storing results into NEW
+				cat .resolve.old | grep -v "$IP" > .resolve.new
+
+				#set OLD to NEW
+				cat .resolve.new > .resolve.old
+
+			done
+
+			#move old conf file to old conf file.bak
+			mv "$EL" "$EL.bak"
+
+			#move .newfile to resolve.conf file
+			mv .resolve.new "$EL"
+
+			echo "Removed $IP_LIST from $EL"
+
+		;;
+
+		#case else
+		*	)
+
+			usage
+		;;
+
+	
+	#end switch
+	esac
+
+#else
+else
+
+	usage
+
+#end
+fi
