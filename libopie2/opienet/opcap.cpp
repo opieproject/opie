@@ -158,7 +158,6 @@ int OPacket::len() const
 
 OEthernetPacket::OEthernetPacket( const unsigned char* end, const struct ether_header* data, QObject* parent )
                 :QObject( parent, "Ethernet" ), _ether( data )
-
 {
 
     qDebug( "Source = %s", (const char*) sourceAddress().toString() );
@@ -209,7 +208,6 @@ int OEthernetPacket::type() const
 
 OIPPacket::OIPPacket( const unsigned char* end, const struct iphdr* data, QObject* parent )
           :QObject( parent, "IP" ), _iphdr( data )
-
 {
     qDebug( "OIPPacket::OIPPacket(): decoding IP header..." );
 
@@ -285,6 +283,66 @@ int OIPPacket::checksum() const
 {
     return EXTRACT_16BITS( &_iphdr->check );
 }
+
+/*======================================================================================
+ * OARPPacket
+ *======================================================================================*/
+
+
+OARPPacket::OARPPacket( const unsigned char* end, const struct myarphdr* data, QObject* parent )
+           :QObject( parent, "ARP" ), _arphdr( data )
+{
+    qDebug( "OARPPacket::OARPPacket(): decoding ARP header..." );
+    qDebug( "ARP type seems to be %02d - '%s'", EXTRACT_16BITS( &_arphdr->ar_op ), (const char*) type() );
+    qDebug( "Sender: MAC %s = IP %s", (const char*) senderMacAddress().toString(), (const char*) senderIPV4Address().toString() );
+    qDebug( "Target: MAC %s = IP %s", (const char*) targetMacAddress().toString(), (const char*) targetIPV4Address().toString() );
+}
+
+
+OARPPacket::~OARPPacket()
+{
+}
+
+
+QString OARPPacket::type() const
+{
+    switch ( EXTRACT_16BITS( &_arphdr->ar_op ) )
+    {
+        case 1: return "REQUEST";
+        case 2: return "REPLY";
+        case 3: return "RREQUEST";
+        case 4: return "RREPLY";
+        case 8: return "InREQUEST";
+        case 9: return "InREPLY";
+        case 10: return "NAK";
+        default: qWarning( "OARPPacket::type(): invalid ARP type!" ); return "<unknown>";
+    }
+}
+
+
+QHostAddress OARPPacket::senderIPV4Address() const
+{
+    return EXTRACT_32BITS( &_arphdr->ar_sip );
+}
+
+
+QHostAddress OARPPacket::targetIPV4Address() const
+{
+    return EXTRACT_32BITS( &_arphdr->ar_tip );
+}
+
+
+OMacAddress OARPPacket::senderMacAddress() const
+{
+    return OMacAddress( _arphdr->ar_sha );
+}
+
+
+OMacAddress OARPPacket::targetMacAddress() const
+{
+    return OMacAddress( _arphdr->ar_tha );
+}
+
 
 /*======================================================================================
  * OUDPPacket
@@ -730,7 +788,8 @@ OLLCPacket::OLLCPacket( const unsigned char* end, const struct ieee_802_11_802_2
         switch ( EXTRACT_16BITS( &_header->type ) ) // defined in linux/if_ether.h
         {
             case ETH_P_IP: new OIPPacket( end, (const struct iphdr*) (data+1), this ); break;
-            default: qDebug( "OLLCPacket::OLLCPacket(): Unknown Encapsulation Type" );
+            case ETH_P_ARP: new OARPPacket( end, (const struct myarphdr*) (data+1), this ); break;
+            default: qWarning( "OLLCPacket::OLLCPacket(): Unknown Encapsulation (type=%04X)", EXTRACT_16BITS( &_header->type ) );
         }
 
     }

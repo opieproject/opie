@@ -438,6 +438,30 @@ class OIPPacket : public QObject
 };
 
 /*======================================================================================
+ * OARPPacket
+ *======================================================================================*/
+
+class OARPPacket : public QObject
+{
+  Q_OBJECT
+
+  public:
+    OARPPacket( const unsigned char*, const struct myarphdr*, QObject* parent = 0 );
+    virtual ~OARPPacket();
+
+    QHostAddress senderIPV4Address() const;
+    OMacAddress senderMacAddress() const;
+    QHostAddress targetIPV4Address() const;
+    OMacAddress targetMacAddress() const;
+
+    //int type() const;
+    QString type() const;
+
+  private:
+    const struct myarphdr* _arphdr;
+};
+
+/*======================================================================================
  * OUDPPacket
  *======================================================================================*/
 

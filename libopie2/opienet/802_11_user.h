@@ -55,27 +55,6 @@ struct ieee_802_3_header {
 
 #define P80211_OUI_LEN 3
 
-struct ieee_802_11_snap_header {
-
-	u_int8_t    dsap;   /* always 0xAA */
-	u_int8_t    ssap;   /* always 0xAA */
-	u_int8_t    ctrl;   /* always 0x03 */
-	u_int8_t    oui[P80211_OUI_LEN];    /* organizational universal id */
-
-} __attribute__ ((packed));
-
-#define P80211_LLC_OUI_LEN 3
-
-struct ieee_802_11_802_1H_header {
-
-	u_int8_t    dsap;
-	u_int8_t    ssap;   /* always 0xAA */
-	u_int8_t    ctrl;   /* always 0x03 */
-	u_int8_t    oui[P80211_OUI_LEN];    /* organizational universal id */
-	u_int16_t    unknown1;      /* packet type ID fields */
-	u_int16_t    unknown2;		/* here is something like length in some cases */
-} __attribute__ ((packed));
-
 struct ieee_802_11_802_2_header {
 
 	u_int8_t    dsap;
@@ -83,9 +62,31 @@ struct ieee_802_11_802_2_header {
 	u_int8_t    ctrl;   /* always 0x03 */
 	u_int8_t    oui[P80211_OUI_LEN];    /* organizational universal id */
 	u_int16_t   type;      /* packet type ID field */
+};
 
-} __attribute__ ((packed));
+/* See RFC 826 for protocol description.  ARP packets are variable
+   in size; the arphdr structure defines the fixed-length portion.
+   Protocol type values are the same as those for 10 Mb/s Ethernet.
+   It is followed by the variable-sized fields ar_sha, arp_spa,
+   arp_tha and arp_tpa in that order, according to the lengths
+   specified.  Field names used correspond to RFC 826.  */
 
+#define ETH_ALEN 6
+
+struct myarphdr
+{
+    unsigned short int ar_hrd;          /* Format of hardware address.  */
+    unsigned short int ar_pro;          /* Format of protocol address.  */
+    unsigned char ar_hln;               /* Length of hardware address.  */
+    unsigned char ar_pln;               /* Length of protocol address.  */
+    unsigned short int ar_op;           /* ARP opcode (command).  */
+    /* Ethernet looks like this : This bit is variable sized
+       however...  */
+    unsigned char ar_sha[ETH_ALEN];   /* Sender hardware address.  */
+    unsigned char ar_sip[4];          /* Sender IP address.  */
+    unsigned char ar_tha[ETH_ALEN];   /* Target hardware address.  */
+    unsigned char ar_tip[4];          /* Target IP address.  */
+};
 
 
 // following is incoplete and may be incorrect and need reorganization
