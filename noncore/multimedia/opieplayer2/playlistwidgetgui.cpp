@@ -100,8 +100,7 @@ PlayListWidgetGui::PlayListWidgetGui( QWidget* parent, const char* name, WFlags 
     skinsMenu->isCheckable();
 
     gammaMenu = new QPopupMenu( this );
-    pmView->insertItem( tr( "Gamma" ),  gammaMenu );
-    gammaMenu->setMinimumHeight( 50 );
+    pmView->insertItem( tr( "Gamma (Video)" ),  gammaMenu );
 
     gammaSlider = new QSlider( QSlider::Vertical,  gammaMenu );
     gammaSlider->setRange( -100, 100 );

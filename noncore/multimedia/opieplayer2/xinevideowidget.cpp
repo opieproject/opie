@@ -1,7 +1,7 @@
 
 /*
                             This file is part of the Opie Project
- 
+
                              Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
                              Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
               =.
@@ -28,7 +28,7 @@
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
- 
+
 */
 
 #include <qimage.h>
@@ -44,55 +44,56 @@
 
 #include "xinevideowidget.h"
 
+
 // 0 deg rot: copy a line from src to dst (use libc memcpy)
 
 // 180 deg rot: copy a line from src to dst reversed
 
 static inline void memcpy_rev ( void *dst, void *src, size_t len )
 {
-	((char *) src) += len;
+	((char *) src ) += len;
 
 	len >>= 1;
 	while ( len-- )
-		*((short int *) dst) ++ = *--((short int *) src);
+		*((short int *) dst )++ = *--((short int *) src );
 }
 
 // 90 deg rot: copy a column from src to dst
 
-static inline void memcpy_step ( void *dst, void *src, size_t len, size_t linestep )
+static inline void memcpy_step ( void *dst, void *src, size_t len, size_t step )
 {
 	len >>= 1;
 	while ( len-- ) {
-		*((short int *) dst) ++ = *((short int *) src);
-		((char * ) src) += linestep;
+		*((short int *) dst )++ = *((short int *) src );
+		((char *) src ) += step;
 	}
 }
 
 // 270 deg rot: copy a column from src to dst reversed
 
-static inline void memcpy_step_rev ( void *dst, void *src, size_t len, size_t linestep )
+static inline void memcpy_step_rev ( void *dst, void *src, size_t len, size_t step )
 {
 	len >>= 1;
 
-	((char *) src) += ( len * linestep );
+	((char *) src ) += ( len * step );
 
 	while ( len-- ) {
-		((char *) src) -= linestep;
-		*((short int *) dst) ++ = *((short int *) src);
+		((char *) src ) -= step;
+		*((short int *) dst )++ = *((short int *) src );
 	}
 }
 
 
 XineVideoWidget::XineVideoWidget ( QWidget* parent, const char* name )
-		: QWidget ( parent, name, WRepaintNoErase | WResizeNoErase )
+	: QWidget ( parent, name, WRepaintNoErase | WResizeNoErase )
 {
 	setBackgroundMode ( NoBackground );
 
-	m_logo = 0;
-	m_buff = 0;
+	m_logo              = 0;
+	m_buff              = 0;
 	m_bytes_per_line_fb = qt_screen-> linestep ( );
-	m_bytes_per_pixel = ( qt_screen-> depth ( ) + 7 ) / 8;
-	m_rotation = 0;
+	m_bytes_per_pixel   = ( qt_screen->depth() + 7 ) / 8;
+	m_rotation          = 0;
 }
 
 
@@ -157,9 +158,9 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 				uint clipwidth = clip. width ( ) * m_bytes_per_pixel;  // "width" of the current clip rect
 
 				if ( clip. left ( ) < framerect. left ( ))
-					leftfill = (( framerect. left ( ) - clip. left ( )) * m_bytes_per_pixel ) < ? clipwidth;
+					leftfill = (( framerect. left ( ) - clip. left ( )) * m_bytes_per_pixel ) <? clipwidth;
 				if ( clip. right ( ) > framerect. right ( ))
-					rightfill = (( clip. right ( ) - framerect. right ( )) * m_bytes_per_pixel ) < ? clipwidth;
+					rightfill = (( clip. right ( ) - framerect. right ( )) * m_bytes_per_pixel ) <? clipwidth;
 
 				framefill = clipwidth - ( leftfill + rightfill );
 
@@ -182,82 +183,90 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 								case  3: memcpy_step_rev ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
 								default: break;
 							}
-							if ( rightfill )
-								memset ( dst + leftfill + framefill, 0, rightfill ); // "right" border -> black
 						}
-
-						dst += m_bytes_per_line_fb; // advance one line in the framebuffer
-
-						// advance one "line" in the xine frame data
-						switch ( rot ) {
-							case  0: src += m_bytes_per_line_frame;	break;
-							case  1: src -= m_bytes_per_pixel;      break;
-							case  2: src -= m_bytes_per_line_frame; break;
-							case  3: src += m_bytes_per_pixel;      break;
-							default: break;
-						}
+						if ( rightfill )
+							memset ( dst + leftfill + framefill, 0, rightfill ); // "right" border -> black
 					}
-				}
 
-				{
-					// QVFB hack by Martin Jones
-					// We need to "touch" all affected clip rects with a normal QPainter in addition to the QDirectPainter
+					dst += m_bytes_per_line_fb; // advance one line in the framebuffer
 
-					QPainter p ( this );
-
-					for ( int i = qt_bug_workaround_clip_rects. size ( ) - 1; i >= 0; i-- ) {
-						p. fillRect ( QRect ( mapFromGlobal ( qt_bug_workaround_clip_rects [ i ]. topLeft ( )), qt_bug_workaround_clip_rects [ i ]. size ( )), QBrush ( NoBrush ));
+					// advance one "line" in the xine frame data
+					switch ( rot ) {
+						case  0: src += m_bytes_per_line_frame;	break;
+						case  1: src -= m_bytes_per_pixel;      break;
+						case  2: src -= m_bytes_per_line_frame; break;
+						case  3: src += m_bytes_per_pixel;      break;
+						default: break;
 					}
 				}
 			}
 		}
 
-		QImage *XineVideoWidget::logo ( ) const {
-			return m_logo;
-		}
+		{
+			// QVFB hack by Martin Jones
+			// We need to "touch" all affected clip rects with a normal QPainter in addition to the QDirectPainter
 
-		void XineVideoWidget::setLogo ( QImage * image ) {
-			delete m_logo;
-			m_logo = image;
-		}
+			QPainter p ( this );
 
-		void XineVideoWidget::setVideoFrame ( uchar * img, int w, int h, int bpl ) {
-			bool rot90 = (( -m_rotation ) & 1 );
-
-			if ( rot90 ) { // if the rotation is 90 or 270 we have to swap width / height
-				int d = w;
-				w = h;
-				h = d;
+			for ( int i = qt_bug_workaround_clip_rects. size ( ) - 1; i >= 0; i-- ) {
+				p. fillRect ( QRect ( mapFromGlobal ( qt_bug_workaround_clip_rects [ i ]. topLeft ( )), qt_bug_workaround_clip_rects [ i ]. size ( )), QBrush ( NoBrush ));
 			}
-
-			m_lastframe = m_thisframe;
-			m_thisframe. setRect (( width ( ) - w ) / 2, ( height ( ) - h ) / 2, w , h );
-
-			m_buff = img;
-			m_bytes_per_line_frame = bpl;
-
-			// only repaint the area that *really* needs to be repainted
-
-			repaint ((
 		}
-
-		void XineVideoWidget::resizeEvent ( QResizeEvent * ) {
-			QSize s = size ( );
-			bool fs = ( s == qApp-> desktop ( ) -> size ( ));
-
-			// if we are in fullscreen mode, do not rotate the video
-			// (!! the paint routine uses m_rotation + qt_screen-> transformOrientation() !!)
-
-			m_rotation = fs ? -qt_screen-> transformOrientation ( ) : 0;
-
-			if ( fs && qt_screen-> isTransformed ( ))
-				s = qt_screen-> mapToDevice ( s );
-
-			emit videoResized ( s );
-		}
+	}
+}
 
 
-		void XineVideoWidget::mouseReleaseEvent ( QMouseEvent * ) {
-			emit clicked ( );
-		}
+QImage *XineVideoWidget::logo ( ) const
+{
+	return m_logo;
+}
+
+
+void XineVideoWidget::setLogo ( QImage* logo )
+{
+	delete m_logo;
+	m_logo = logo;
+}
+
+void XineVideoWidget::setVideoFrame ( uchar* img, int w, int h, int bpl )
+{
+	bool rot90 = (( -m_rotation ) & 1 );
+
+	if ( rot90 ) { // if the rotation is 90 or 270 we have to swap width / height
+		int d = w;
+		w = h;
+		h = d;
+	}
+
+	m_lastframe = m_thisframe;
+	m_thisframe. setRect (( width ( ) - w ) / 2, ( height ( ) - h ) / 2, w , h );
+
+	m_buff                 = img;
+	m_bytes_per_line_frame = bpl;
+
+	// only repaint the area that *really* needs to be repainted
+
+	repaint ((( m_thisframe & m_lastframe ) != m_lastframe ) ? m_lastframe : m_thisframe, false );
+}
+
+void XineVideoWidget::resizeEvent ( QResizeEvent * )
+{
+	QSize s = size ( );
+	bool fs = ( s == qApp-> desktop ( )-> size ( ));
+
+	// if we are in fullscreen mode, do not rotate the video
+	// (!! the paint routine uses m_rotation + qt_screen-> transformOrientation() !!)
+	m_rotation = fs ? -qt_screen-> transformOrientation ( ) : 0;
+
+	if ( fs && qt_screen-> isTransformed ( ))
+		s = qt_screen-> mapToDevice ( s );
+
+	emit videoResized ( s );
+}
+
+
+void XineVideoWidget::mouseReleaseEvent ( QMouseEvent * /*me*/ )
+{
+	emit clicked();
+}
 

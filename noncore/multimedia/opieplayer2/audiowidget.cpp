@@ -332,7 +332,7 @@ void AudioWidget::setView( char view ) {
         killTimers();
         hide();
     }
-    qApp->processEvents();
+    //  qApp->processEvents();
 }
 
 

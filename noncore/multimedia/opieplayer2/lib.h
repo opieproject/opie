@@ -39,6 +39,7 @@
 #include <qobject.h>
 
 #include <xine.h>
+//#include "xine.h"
 
 class XineVideoWidget;
 
@@ -72,7 +73,17 @@ namespace XINE {
         void pause()/*const*/;
 
         int speed() /*const*/;
-        void setSpeed( int speed = SPEED_PAUSE );
+
+        /**
+         * Set the speed of the stream, if codec supports it
+         * XINE_SPEED_PAUSE                   0
+         * XINE_SPEED_SLOW_4                  1
+         * XINE_SPEED_SLOW_2                  2
+         * XINE_SPEED_NORMAL                  4
+         * XINE_SPEED_FAST_2                  8
+         *XINE_SPEED_FAST_4                  16
+         */
+        void setSpeed( int speed = XINE_SPEED_PAUSE );
 
         int status() /*const*/;
 
@@ -102,6 +113,13 @@ namespace XINE {
          *
          */
         bool isVideoFullScreen()/*const*/ ;
+
+
+        /**
+         * Get the meta info (like author etc) from the stream
+         *
+         */
+        QString metaInfo() ;
 
         /**
          *
@@ -133,12 +151,14 @@ namespace XINE {
         void stopped();
     private:
         int m_bytes_per_pixel;
+        int m_length,  m_pos,  m_time;
+        int m_major_version,  m_minor_version,  m_sub_version;
         bool m_video:1;
         XineVideoWidget *m_wid;
         xine_t *m_xine;
-        config_values_t *m_config;
-        vo_driver_t *m_videoOutput;
-        ao_driver_t* m_audioOutput;
+        xine_cfg_entry_t *m_config;
+        xine_vo_driver_t *m_videoOutput;
+        xine_ao_driver_t* m_audioOutput;
 
         void handleXineEvent( xine_event_t* t );
         void drawFrame( uint8_t* frame, int width, int height, int bytes );

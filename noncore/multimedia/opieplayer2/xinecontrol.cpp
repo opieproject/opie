@@ -94,6 +94,7 @@ void XineControl::play( const QString& fileName ) {
     // which gui (video / audio)
     mediaPlayerState->setView( whichGui );
 
+
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     if ( !disabledSuspendScreenSaver ) {
         disabledSuspendScreenSaver = TRUE;
