@@ -14,6 +14,7 @@ HEADERS		= global.h \
 		  utils.h \
 		  server.h \
 		  helpwindow.h \
+		  letterpushbutton.h \
 		  inputdlg.h
 SOURCES		= mainwin.cpp \
 		  datamgr.cpp \
@@ -30,12 +31,13 @@ SOURCES		= mainwin.cpp \
 		  utils.cpp \
 		  server.cpp \
 		  helpwindow.cpp \
+		  letterpushbutton.cpp \
 		  inputdlg.cpp
 INTERFACES	= settings.ui \
 		  install.ui \
 		  instoptions.ui
 TARGET		= aqpkg
-INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH  += $(OPIEDIR)/include
+INCLUDEPATH += $(QPEDIR)/include
+DEPENDPATH  += $(QPEDIR)/include
 LIBS        += -lqpe -lstdc++
-DESTDIR = $(OPIEDIR)/bin
+
