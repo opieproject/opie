@@ -18,6 +18,7 @@
 #include <qpe/config.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/config.h>
 #include <qaction.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
@@ -95,6 +96,11 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   connect(resultsList, SIGNAL(clicked(QListViewItem*)), SLOT(stopTimer(QListViewItem*)));
   connect(buttonGroupActions, SIGNAL(clicked(int)), SLOT( slotAction(int) ) );
 
+
+   Config cfg( "osearch", Config::User );
+   cfg.setGroup( "search_settings" );
+   actionCaseSensitiv->setOn( cfg.readBoolEntry( "caseSensitiv", false ) );
+   actionWildcards->setOn( cfg.readBoolEntry( "wildcards", false ) );
 }
 
 void MainWindow::makeMenu()
@@ -104,24 +110,30 @@ void MainWindow::makeMenu()
    QPEMenuBar *menuBar = new QPEMenuBar( toolBar );
    QPopupMenu *searchMenu = new QPopupMenu( menuBar );
 //   QPopupMenu *viewMenu = new QPopupMenu( menuBar );
-//   QPopupMenu *cfgMenu = new QPopupMenu( menuBar );
-//
+   QPopupMenu *cfgMenu = new QPopupMenu( menuBar );
+   QPopupMenu *searchOptions = new QPopupMenu( cfgMenu );
+
    setToolBarsMovable( false );
    toolBar->setHorizontalStretchable( true );
    menuBar->insertItem( tr( "Search" ), searchMenu );
-//   menuBar->insertItem( tr( "View" ), viewMenu );
-//   menuBar->insertItem( tr( "Settings" ), cfgMenu );
+   menuBar->insertItem( tr( "Settings" ), cfgMenu );
+   cfgMenu->insertItem( tr( "Search" ), searchOptions );
+
 
   //SEARCH
   SearchAllAction = new QAction( tr("Search all"),QString::null,  0, this, 0 );
   SearchAllAction->setIconSet( Resource::loadIconSet( "find" ) );
   connect( SearchAllAction, SIGNAL(activated()), this, SLOT(searchAll()) );
   SearchAllAction->addTo( searchMenu );
-  actionCaseSensitiv = new QAction( tr("Case sensitiv"),QString::null,  0, this, 0, true );
-  actionCaseSensitiv->addTo( searchMenu );
-  actionWildcards = new QAction( tr("Use wildcards"),QString::null,  0, this, 0, true );
-  actionWildcards->addTo( searchMenu );
+  searchMenu->insertItem( tr( "Options" ), searchOptions );
 
+  //SEARCH OPTIONS
+  actionCaseSensitiv = new QAction( tr("Case sensitiv"),QString::null,  0, this, 0, true );
+  actionCaseSensitiv->addTo( searchOptions );
+  actionWildcards = new QAction( tr("Use wildcards"),QString::null,  0, this, 0, true );
+  actionWildcards->addTo( searchOptions );
+
+  //SEARCH BAR
   addToolBar( searchBar, "Search", QMainWindow::Top, TRUE );
   QLineEdit *searchEdit = new QLineEdit( searchBar, "seachEdit" );
   searchEdit->setFocus();
@@ -135,6 +147,10 @@ void MainWindow::makeMenu()
 
 MainWindow::~MainWindow()
 {
+   Config cfg( "osearch", Config::User );
+   cfg.setGroup( "search_settings" );
+   cfg.writeEntry( "caseSensitiv", actionCaseSensitiv->isOn() );
+   cfg.writeEntry( "wildcards", actionWildcards->isOn() );
 }
 
 void MainWindow::setCurrent(QListViewItem *item)
