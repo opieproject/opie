@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.14 2002-07-09 14:45:24 leseb Exp $
+** $Id: datebook.cpp,v 1.15 2002-12-22 19:02:29 sandman Exp $
 **
 **********************************************************************/
 
@@ -675,17 +675,22 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 	    }
 	}
     } else if ( msg == "nextView()" ) {
-	QWidget* cur = views->visibleWidget();
-	if ( cur ) {
-	    if ( cur == dayView )
-		viewWeek();
-	    else if ( cur == weekView )
-		viewWeekLst();
-	    else if ( cur == weekLstView )
-		viewMonth();
-	    else if ( cur == monthView )
-		viewDay();
+	if ( !qApp-> activeWindow ( )) {
 	    needShow = TRUE;
+	}
+	else {
+	    QWidget* cur = views->visibleWidget();
+	    if ( cur ) {
+		if ( cur == dayView )
+		    viewWeek();
+		else if ( cur == weekView )
+		    viewWeekLst();
+		else if ( cur == weekLstView )
+		    viewMonth();
+		else if ( cur == monthView )
+		    viewDay();
+		needShow = TRUE;
+	    }
 	}
     }
     if ( needShow ) {
