@@ -249,16 +249,10 @@ void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
     MediaWidget::mouseReleaseEvent( event );
 }
 
-void VideoWidget::showEvent( QShowEvent* ) {
-    QMouseEvent event( QEvent::MouseMove, QPoint( 0, 0 ), 0, 0 );
-    mouseMoveEvent( &event );
-}
-
-
- void VideoWidget::backToNormal() {
+void VideoWidget::backToNormal() {
      mediaPlayerState.setFullscreen( FALSE );
      makeVisible();
- }
+}
 
 void VideoWidget::makeVisible() {
     if ( mediaPlayerState.isFullscreen() ) {

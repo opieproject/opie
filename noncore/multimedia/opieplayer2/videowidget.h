@@ -75,7 +75,6 @@ signals:
 protected:
 
     void resizeEvent( QResizeEvent * );
-    void showEvent( QShowEvent *se );
     void mouseReleaseEvent( QMouseEvent *event );
     void keyReleaseEvent( QKeyEvent *e);
 

@@ -74,7 +74,6 @@ signals:
 protected:
     void doBlank();
     void doUnblank();
-    void showEvent( QShowEvent *se );
     void resizeEvent( QResizeEvent *re );
     void timerEvent( QTimerEvent *event );
     void keyReleaseEvent( QKeyEvent *e);

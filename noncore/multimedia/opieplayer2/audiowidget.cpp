@@ -333,11 +333,6 @@ void AudioWidget::timerEvent( QTimerEvent * ) {
     }
 }
 
-void AudioWidget::showEvent( QShowEvent* ) {
-    QMouseEvent event( QEvent::MouseMove, QPoint( 0, 0 ), 0, 0 );
-    mouseMoveEvent( &event );
-}
-
 void AudioWidget::keyReleaseEvent( QKeyEvent *e) {
     switch ( e->key() ) {
         ////////////////////////////// Zaurus keys
