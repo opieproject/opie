@@ -316,9 +316,10 @@ void OContactFields::setFieldOrder( int pos, int index ){
 int OContactFields::getFieldOrder( int pos ){
   qDebug("ocontactfields getFieldOrder");
 
-  if( fieldOrder.isEmpty() ) 
+  if( fieldOrder.isEmpty() ){ 
 	  qDebug("PANIC fieldOrder empty");
-  else 
+	  fieldOrder = "                ";
+  }else 
 	  qDebug("fieldOrder ok");
 
   qDebug("fieldOrder >%s<",fieldOrder.latin1());
