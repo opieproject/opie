@@ -1,4 +1,4 @@
-/* $Id: sniff.hh,v 1.5 2002-12-27 16:35:28 mjm Exp $ */
+/* $Id: sniff.hh,v 1.6 2003-01-04 19:02:18 mickeyl Exp $ */
 
 #ifndef SNIFF_HH
 #define SNIFF_HH
@@ -12,8 +12,12 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+
+extern "C"
+{
 #include <net/bpf.h>
 #include <pcap.h>  
+}
 
 #define   NONBROADCASTING "non-broadcasting"
 
