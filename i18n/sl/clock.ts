@@ -27,11 +27,11 @@
     </message>
     <message>
         <source>Alarm On</source>
-        <translation>Alarm vključen</translation>
+        <translation type="obsolete">Alarm vključen</translation>
     </message>
     <message>
         <source>Alarm Off</source>
-        <translation>Alarm izključen</translation>
+        <translation type="obsolete">Alarm izključen</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -40,6 +40,14 @@
     <message>
         <source>PM</source>
         <translation type="unfinished">PM</translation>
+    </message>
+    <message>
+        <source>Alarm Is On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm Is Off</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -32,14 +32,22 @@
     </message>
     <message>
         <source>Alarm On</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Alarm Off</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>PM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm Is On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm Is Off</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

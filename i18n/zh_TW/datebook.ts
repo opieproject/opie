@@ -268,7 +268,7 @@ Quit anyway?</source>
     <name>DateBookWeekLstHeaderBase</name>
     <message>
         <source>Form2</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>W: 00,00</source>

@@ -75,6 +75,10 @@
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodoWindow</name>
@@ -118,7 +122,7 @@ before you enter any data</source>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>View</source>
@@ -151,6 +155,18 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fonts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

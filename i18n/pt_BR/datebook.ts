@@ -274,7 +274,7 @@ longa que o intervalo entre repetições.</translation>
     <name>DateBookWeekLstHeaderBase</name>
     <message>
         <source>Form2</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>W: 00,00</source>

@@ -3,51 +3,51 @@
     <name>KCheckers</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Beenden</translation>
     </message>
     <message>
         <source>Beginner</source>
-        <translation type="unfinished"></translation>
+        <translation>Anfänger</translation>
     </message>
     <message>
         <source>Novice</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuling</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchschnittlich</translation>
     </message>
     <message>
         <source>Good</source>
-        <translation type="unfinished"></translation>
+        <translation>Gut</translation>
     </message>
     <message>
         <source>Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>Experte</translation>
     </message>
     <message>
         <source>Master</source>
-        <translation type="unfinished"></translation>
+        <translation>Meister</translation>
     </message>
     <message>
         <source>English Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Englische Regeln</translation>
     </message>
     <message>
         <source>Russian Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Russische Regeln</translation>
     </message>
     <message>
         <source>Marble Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Marmorbrett</translation>
     </message>
     <message>
         <source>Wooden Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Holzbrett</translation>
     </message>
     <message>
         <source>What&apos;s This</source>
@@ -71,27 +71,27 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <source>Go!</source>
-        <translation type="unfinished"></translation>
+        <translation>Los!</translation>
     </message>
     <message>
         <source>Congratulation! You have won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Glückwunsch! Sie haben gewonnen!</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte Warten...</translation>
     </message>
     <message>
         <source>You have lost. Game over.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben verloren...</translation>
     </message>
     <message>
         <source>Incorrect course.</source>

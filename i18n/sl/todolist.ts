@@ -75,6 +75,10 @@
         <source>All</source>
         <translation>Vse</translation>
     </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodoWindow</name>
@@ -120,7 +124,7 @@ preden vnesete podatke</translation>
     </message>
     <message>
         <source>Task</source>
-        <translation>Opravilo</translation>
+        <translation type="obsolete">Opravilo</translation>
     </message>
     <message>
         <source>View</source>
@@ -159,6 +163,18 @@ Sprostite nekaj prostora
 in poizkusite ponovno.
 
 Izhod?</translation>
+    </message>
+    <message>
+        <source>Show Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fonts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

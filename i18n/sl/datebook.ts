@@ -274,7 +274,7 @@ Izhod?</translation>
     <name>DateBookWeekLstHeaderBase</name>
     <message>
         <source>Form2</source>
-        <translation>Obrazec2</translation>
+        <translation type="obsolete">Obrazec2</translation>
     </message>
     <message>
         <source>W: 00,00</source>

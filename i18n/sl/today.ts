@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
-        <translation>&lt;b&gt;Prosim izpolnite poslovno kartico &lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Prosim izpolnite poslovno kartico &lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; BLAH mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
@@ -35,6 +35,14 @@
     </message>
     <message>
         <source>No appointments today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Owned by </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please fill out the business card</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -76,7 +84,7 @@ zmenke</translation>
 appointment
 should should 
 be shown?</source>
-        <translation>Koliko 
+        <translation type="obsolete">Koliko 
 zmenkov
 naj bo
 prikazanih?</translation>
@@ -107,13 +115,26 @@ znakih</translation>
         <source>Should today be
 autostarted on
 resume ? (Opie only)</source>
-        <translation>Naj se danes
+        <translation type="obsolete">Naj se danes
 sam zažene pri
 nadaljevanju? (samo Opie)</translation>
     </message>
     <message>
         <source>Misc</source>
         <translation>Različno</translation>
+    </message>
+    <message>
+        <source>How many 
+appointment
+should
+be shown?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Should today be
+autostarted on
+resume? (Opie only)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

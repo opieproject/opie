@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
@@ -31,6 +31,14 @@
     </message>
     <message>
         <source>No appointments today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Owned by </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please fill out the business card</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -68,7 +76,7 @@ appointments</source>
 appointment
 should should 
 be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Calendar</source>
@@ -93,10 +101,23 @@ many letters</source>
         <source>Should today be
 autostarted on
 resume ? (Opie only)</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Misc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How many 
+appointment
+should
+be shown?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Should today be
+autostarted on
+resume? (Opie only)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>No more appointments today</source>
@@ -33,6 +33,14 @@
     <message>
         <source>No appointments today</source>
         <translation type="unfinished">Nenhum compromisso hoje</translation>
+    </message>
+    <message>
+        <source>Owned by </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please fill out the business card</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -65,7 +73,7 @@ ser mostradas ?</translation>
 appointment
 should should 
 be shown?</source>
-        <translation>Quantos 
+        <translation type="obsolete">Quantos 
 compromissos
 devem ser 
 mostrados ?</translation>
@@ -112,13 +120,26 @@ quantas letras</translation>
         <source>Should today be
 autostarted on
 resume ? (Opie only)</source>
-        <translation>Hoje deve abrir
+        <translation type="obsolete">Hoje deve abrir
 automaticamente ao
 ligar ? (apenas Opie)</translation>
     </message>
     <message>
         <source>Misc</source>
         <translation>Misc</translation>
+    </message>
+    <message>
+        <source>How many 
+appointment
+should
+be shown?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Should today be
+autostarted on
+resume? (Opie only)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

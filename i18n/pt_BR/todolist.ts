@@ -76,6 +76,10 @@
         <source>Unfiled</source>
         <translation>Não preenchida</translation>
     </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodoWindow</name>
@@ -97,7 +101,7 @@
     </message>
     <message>
         <source>Task</source>
-        <translation>Tarefa</translation>
+        <translation type="obsolete">Tarefa</translation>
     </message>
     <message>
         <source>Todo</source>
@@ -163,6 +167,18 @@ Sair assim mesmo ?</translation>
     </message>
     <message>
         <source>All Categories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fonts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
