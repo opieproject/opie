@@ -51,7 +51,9 @@
 
   Creates a copy of the QUuid \a orig.
 */
+
 #ifndef QT_NO_QUUID_STRING
+
 /*!
   Creates a QUuid object from the string \a text. Right now, the function
   can only convert the format {12345678-1234-1234-1234-123456789ABC} and
@@ -63,40 +65,47 @@ QUuid::QUuid( const QString &text )
     QString temp = text.upper();
 
     data1 = temp.mid( 1, 8 ).toULong( &ok, 16 );
-    if ( !ok ) {
-	*this = QUuid();
-	return;
+    if ( !ok )
+    {
+        *this = QUuid();
+        return;
     }
 
     data2 = temp.mid( 10, 4 ).toUInt( &ok, 16 );
-    if ( !ok ) {
-	*this = QUuid();
-	return;
+    if ( !ok )
+    {
+        *this = QUuid();
+        return;
     }
     data3 = temp.mid( 15, 4 ).toUInt( &ok, 16 );
-    if ( !ok ) {
-	*this = QUuid();
-	return;
+    if ( !ok )
+    {
+        *this = QUuid();
+        return;
     }
     data4[0] = temp.mid( 20, 2 ).toUInt( &ok, 16 );
-    if ( !ok ) {
-	*this = QUuid();
-	return;
+    if ( !ok )
+    {
+        *this = QUuid();
+        return;
     }
     data4[1] = temp.mid( 22, 2 ).toUInt( &ok, 16 );
-    if ( !ok ) {
-	*this = QUuid();
-	return;
+    if ( !ok )
+    {
+        *this = QUuid();
+        return;
     }
-    for ( int i = 2; i<8; i++ ) {
-	data4[i] = temp.mid( 25 + (i-2)*2, 2 ).toUShort( &ok, 16 );
-	if ( !ok ) {
-	    *this = QUuid();
-	    return;
-	}
+    for ( int i = 2; i<8; i++ )
+    {
+        data4[i] = temp.mid( 25 + (i-2)*2, 2 ).toUShort( &ok, 16 );
+        if ( !ok )
+        {
+            *this = QUuid();
+            return;
+        }
     }
 }
-#endif
+
 /*!
   \fn QUuid QUuid::operator=(const QUuid &uuid )
 
@@ -114,7 +123,7 @@ QUuid::QUuid( const QString &text )
 
   Returns TRUE if this QUuid and the \a other QUuid are different, otherwise returns FALSE.
 */
-#ifndef QT_NO_QUUID_STRING
+
 /*!
   QString QUuid::toString() const
 
@@ -130,17 +139,89 @@ QString QUuid::toString() const
     result += QString::number( (int)data4[0], 16 ).rightJustify( 2, '0' );
     result += QString::number( (int)data4[1], 16 ).rightJustify( 2, '0' ) + "-";
     for ( int i = 2; i < 8; i++ )
-	result += QString::number( (int)data4[i], 16 ).rightJustify( 2, '0' );
+        result += QString::number( (int)data4[i], 16 ).rightJustify( 2, '0' );
 
     return result + "}";
 }
 #endif
+
 /*!
   Returns TRUE if this is the null UUID {00000000-0000-0000-0000-000000000000}, otherwise returns FALSE.
 */
 bool QUuid::isNull() const
 {
     return data4[0] == 0 && data4[1] == 0 && data4[2] == 0 && data4[3] == 0 &&
-	   data4[4] == 0 && data4[5] == 0 && data4[6] == 0 && data4[7] == 0 &&
-	   data1 == 0 && data2 == 0 && data3 == 0;
+           data4[4] == 0 && data4[5] == 0 && data4[6] == 0 && data4[7] == 0 &&
+           data1 == 0 && data2 == 0 && data3 == 0;
+}
+
+
+/*!
+    \fn QUuid::Variant QUuid::variant() const
+
+    Returns the variant of the UUID.
+    The null UUID is considered to be of an unknown variant.
+
+    \sa version()
+*/
+QUuid::Variant QUuid::variant() const
+{
+    if ( isNull() )
+        return VarUnknown;
+    // Check the 3 MSB of data4[0]
+    if ( (data4[0] & 0x80) == 0x00 ) return NCS;
+    else if ( (data4[0] & 0xC0) == 0x80 ) return DCE;
+    else if ( (data4[0] & 0xE0) == 0xC0 ) return Microsoft;
+    else if ( (data4[0] & 0xE0) == 0xE0 ) return Reserved;
+    return VarUnknown;
+}
+
+/*!
+    \fn bool QUuid::operator<(const QUuid &other) const
+
+    Returns TRUE if this QUuid is of the same variant,
+    and lexicographically before the \a other QUuid;
+    otherwise returns FALSE.
+
+    \sa variant()
+*/
+#define ISLESS(f1, f2) if (f1!=f2) return (f1<f2);
+bool QUuid::operator<(const QUuid &other ) const
+{
+    if ( variant() != other.variant() )
+        return FALSE;
+
+    ISLESS( data1, other.data1 );
+    ISLESS( data2, other.data2 );
+    ISLESS( data3, other.data3 );
+    for ( int n = 0; n < 8; n++ )
+    {
+        ISLESS( data4[n], other.data4[n] );
+    }
+    return FALSE;
+}
+
+/*!
+    \fn bool QUuid::operator>(const QUuid &other) const
+
+    Returns TRUE if this QUuid is of the same variant,
+    and lexicographically after the \a other QUuid;
+    otherwise returns FALSE.
+
+    \sa variant()
+*/
+#define ISMORE(f1, f2) if (f1!=f2) return (f1>f2);
+bool QUuid::operator>(const QUuid &other ) const
+{
+    if ( variant() != other.variant() )
+        return FALSE;
+
+    ISMORE( data1, other.data1 );
+    ISMORE( data2, other.data2 );
+    ISMORE( data3, other.data3 );
+    for ( int n = 0; n < 8; n++ )
+    {
+        ISMORE( data4[n], other.data4[n] );
+    }
+    return FALSE;
 }
