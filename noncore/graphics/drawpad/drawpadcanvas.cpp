@@ -198,7 +198,7 @@ void DrawPadCanvas::load(QIODevice* ioDevice)
 
 void DrawPadCanvas::initialPage()
 {
-    m_pages.append(new QPixmap(234, 233));
+    m_pages.append(new QPixmap(236, 232));
     m_pages.current()->fill(Qt::white);
 
     m_pageBackups.clear();
