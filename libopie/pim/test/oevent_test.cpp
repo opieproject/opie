@@ -5,12 +5,12 @@
 
 int main(int argc, char* argv ) {
     OEvent ev;
-    ev.setUid( 20 );
+//    ev.setUid( 20 );
 
-    ev.setDescription( "Foo" );
+    ev.setDescription( "Foo Descsfewrf" );
 
     OEvent ev2 = ev;
-    ev2.setDescription("Foo2");
+    ev2.setDescription("Foo3");
     qWarning("%s", ev2.description().latin1() );
     qWarning("%s", ev.description().latin1() );
 
@@ -20,6 +20,7 @@ int main(int argc, char* argv ) {
 
     qWarning("%s", ev2.startDateTime().toString().latin1() );
     qWarning("%s", ev2.startDateTimeInZone().toString().latin1() );
+    qWarning("%d %d", ev.isAllDay(), ev2.isAllDay() );
 
     ODateBookAccess acc;
     if(!acc.load() ) qWarning("could not load");
@@ -45,6 +46,9 @@ int main(int argc, char* argv ) {
 	qWarning("Summary: %s", ef.description().latin1() );
 	qWarning("Date: %s", ef.date().toString().latin1() );
     }
+    ev.setUid( 1 );
+    acc.add( ev );
+    acc.save();
 
     return 0;
 }

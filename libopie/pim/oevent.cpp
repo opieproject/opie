@@ -42,9 +42,11 @@ int OCalendarHelper::monthDiff( const QDate& first, const QDate& second ) {
 
 struct OEvent::Data : public QShared {
     Data() : QShared() {
+        child = 0;
         recur = 0;
         manager = 0;
         isAllDay = false;
+        parent = 0;
     }
     ~Data() {
         delete manager;
@@ -60,6 +62,8 @@ struct OEvent::Data : public QShared {
     QDateTime end;
     bool isAllDay : 1;
     QString timezone;
+    QArray<int>* child;
+    int parent;
 };
 
 OEvent::OEvent( int uid )
@@ -102,7 +106,7 @@ void OEvent::setLocation( const QString& loc ) {
 QString OEvent::location()const {
     return data->location;
 }
-OPimNotifyManager &OEvent::notifiers() {
+OPimNotifyManager &OEvent::notifiers()const {
     // I hope we can skip the changeOrModify here
     // the notifier should take care of it
     // and OPimNotify is shared too
@@ -112,7 +116,13 @@ OPimNotifyManager &OEvent::notifiers() {
     return *data->manager;
 }
 bool OEvent::hasNotifiers()const {
-    return  ( data->manager);
+    if (!data->manager )
+        return false;
+    if (data->manager->reminders().isEmpty() &&
+        data->manager->alarms().isEmpty() )
+        return false;
+
+    return true;
 }
 ORecur OEvent::recurrence()const {
     if (!data->recur)
@@ -197,6 +207,7 @@ void OEvent::setTimeZone( const QString& tz ) {
     data->timezone = tz;
 }
 QString OEvent::timeZone()const {
+    if (data->isAllDay ) return QString::fromLatin1("UTC");
     return data->timezone;
 }
 bool OEvent::match( const QRegExp& )const {
@@ -239,6 +250,11 @@ void OEvent::changeOrModify() {
         d2->end = data->end;
         d2->isAllDay = data->isAllDay;
         d2->timezone = data->timezone;
+        d2->parent = data->parent;
+        d2->child = data->child;
+
+        if (d2->child )
+            d2->child->detach();
 
         data = d2;
     }
@@ -256,8 +272,50 @@ QMap<int, QString> OEvent::toMap()const {
 QMap<QString, QString> OEvent::toExtraMap()const {
     return QMap<QString, QString>();
 }
+int OEvent::parent()const {
+    return data->parent;
+}
+void OEvent::setParent( int uid ) {
+    changeOrModify();
+    data->parent = uid;
+}
+QArray<int> OEvent::children() const{
+    if (!data->child) return QArray<int>();
+    else
+        return data->child->copy();
+}
+void OEvent::setChildren( const QArray<int>& arr ) {
+    changeOrModify();
+    if (data->child) delete data->child;
 
-
+    data->child = new QArray<int>( arr );
+    data->child->detach();
+}
+void OEvent::addChild( int uid ) {
+    changeOrModify();
+    if (!data->child ) {
+        data->child = new QArray<int>(1);
+        (*data->child)[0] = uid;
+    }else{
+        int count = data->child->count();
+        data->child->resize( count + 1 );
+        (*data->child)[count] = uid;
+    }
+}
+void OEvent::removeChild( int uid ) {
+    if (!data->child || !data->child->contains( uid ) ) return;
+    changeOrModify();
+    QArray<int> newAr( data->child->count() - 1 );
+    int j = 0;
+    uint count = data->child->count();
+    for ( uint i = 0; i < count; i++ ) {
+        if ( (*data->child)[i] != uid ) {
+            newAr[j] = (*data->child)[i];
+            j++;
+        }
+    }
+    (*data->child) = newAr;
+}
 struct OEffectiveEvent::Data : public QShared {
     Data() : QShared() {
     }

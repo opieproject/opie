@@ -73,7 +73,11 @@ public:
     void setRepitition(int );
 
     void setService( const QString& ser );
+
+    /* almost internal */
+    QString toString()const;
 private:
+    bool p_nextOccurrence( const QDate& from, QDate& next );
     void deref();
     inline void checkOrModify();
 

@@ -1,6 +1,9 @@
 #include <errno.h>
 #include <fcntl.h>
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include <sys/types.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
@@ -12,6 +15,7 @@
 
 #include <qtopia/global.h>
 #include <qtopia/stringutil.h>
+#include <qtopia/timeconversion.h>
 
 #include "opimnotifymanager.h"
 #include "orecur.h"
@@ -30,11 +34,11 @@ namespace {
     int alarmTime;
     int snd;
     enum Attribute{
-        	FDescription = 0,
-	FLocation,
-	FCategories,
-	FUid,
-	FType,
+        FDescription = 0,
+        FLocation,
+        FCategories,
+        FUid,
+        FType,
 	FAlarm,
 	FSound,
 	FRType,
@@ -46,8 +50,89 @@ namespace {
 	FRStart,
 	FREnd,
 	FNote,
-	FCreated
+	FCreated,
+        FTimeZone,
+        FRecParent,
+        FRecChildren,
+        FExceptions
     };
+    inline void save( const OEvent& ev, QString& buf ) {
+        buf += " description=\"" + Qtopia::escapeString(ev.description() ) + "\"";
+        if (!ev.location().isEmpty() )
+            buf += " location=\"" + Qtopia::escapeString(ev.location() ) + "\"";
+
+        buf += " categories=\""+ Qtopia::escapeString( Qtopia::Record::idsToString( ev.categories() ) ) + "\"";
+        buf += " uid=\"" + QString::number( ev.uid() ) + "\"";
+
+        if (ev.isAllDay() )
+            buf += " type=\"AllDay\"";
+
+        if (ev.hasNotifiers() ) {
+            OPimAlarm alarm = ev.notifiers().alarms()[0]; // take only the first
+            int minutes = alarm.dateTime().secsTo( ev.startDateTime() ) / 60;
+            buf += " alarm=\"" + QString::number(minutes) + "\" sound=\"";
+            if ( alarm.sound() == OPimAlarm::Loud )
+                buf += "loud";
+            else
+                buf += "silent";
+            buf += "\"";
+        }
+        if ( ev.hasRecurrence() ) {
+            buf += ev.recurrence().toString();
+        }
+
+        /*
+         * fscking timezones :) well, we'll first convert
+         * the QDateTime to a QDateTime in UTC time
+         * and then we'll create a nice time_t
+         */
+        OTimeZone zone( ev.timeZone().isEmpty() ? OTimeZone::current() : ev.timeZone() );
+        buf += " start=\"" + QString::number( zone.fromUTCDateTime( zone.toDateTime( ev.startDateTime(), OTimeZone::utc() ) ) )  + "\"";
+        buf += " end=\""   + QString::number( zone.fromUTCDateTime( zone.toDateTime( ev.endDateTime()  , OTimeZone::utc() ) ) )   + "\"";
+        if (!ev.note().isEmpty() ) {
+            buf += " note=\"" + Qtopia::escapeString( ev.note() ) + "\"";
+        }
+
+        buf += " timezone=\"";
+        if ( ev.timeZone().isEmpty() )
+            buf += "None";
+        else
+            buf += ev.timeZone();
+
+        if (ev.parent() != 0 ) {
+            buf += " recparent=\""+QString::number(ev.parent() )+"\"";
+        }
+
+        if (ev.children().count() != 0 ) {
+            QArray<int> children = ev.children();
+            buf += " recchildren=\"";
+            for ( uint i = 0; i < children.count(); i++ ) {
+                if ( i != 0 ) buf += " ";
+                buf += QString::number( children[i] );
+            }
+            buf+= "\"";
+        }
+
+        // skip custom writing
+    }
+
+    inline bool forAll( const QMap<int, OEvent>& list, QFile& file ) {
+        QMap<int, OEvent>::ConstIterator it;
+        QString buf;
+        QCString str;
+        int total_written;
+        for ( it = list.begin(); it != list.end(); ++it ) {
+            buf = "<event";
+            save( it.data(), buf );
+            buf += " />\n";
+            str = buf.utf8();
+
+            total_written = file.writeBlock(str.data(), str.length() );
+            if ( total_written != int(str.length() ) )
+                return false;
+        }
+        return true;
+    }
 }
 
 ODateBookAccessBackend_XML::ODateBookAccessBackend_XML( const QString& ,
@@ -66,9 +151,54 @@ bool ODateBookAccessBackend_XML::reload() {
     return load();
 }
 bool ODateBookAccessBackend_XML::save() {
-    if (!m_changed) return true;
-    m_changed = false;
+    qWarning("going to save now");
+//    if (!m_changed) return true;
 
+    int total_written;
+    QString strFileNew = m_name + ".new";
+
+    QFile f( strFileNew );
+    if (!f.open( IO_WriteOnly | IO_Raw ) ) return false;
+
+    QString buf( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" );
+    buf += "<!DOCTYPE DATEBOOK><DATEBOOK>\n";
+    buf += "<events>\n";
+    QCString str = buf.utf8();
+    total_written = f.writeBlock( str.data(), str.length() );
+    if ( total_written != int(str.length() ) ) {
+        f.close();
+        QFile::remove( strFileNew );
+        return false;
+    }
+
+    if (!forAll( m_raw, f ) ) {
+        f.close();
+        QFile::remove( strFileNew );
+        return false;
+    }
+    if (!forAll( m_rep, f ) ) {
+        f.close();
+        QFile::remove( strFileNew );
+        return false;
+    }
+
+    buf = "</events>\n</DATEBOOK>\n";
+    str = buf.utf8();
+    total_written = f.writeBlock( str.data(), str.length() );
+    if ( total_written != int(str.length() ) ) {
+        f.close();
+        QFile::remove( strFileNew );
+        return false;
+    }
+    f.close();
+
+    exit(0);
+    if ( ::rename( strFileNew, m_name ) < 0 ) {
+        QFile::remove( strFileNew );
+        return false;
+    }
+
+    m_changed = false;
     return true;
 }
 QArray<int> ODateBookAccessBackend_XML::allRecords()const {
@@ -183,7 +313,7 @@ bool ODateBookAccessBackend_XML::loadFile() {
     ::madvise( map_addr, attribute.st_size, MADV_SEQUENTIAL );
     ::close( fd );
 
-    QAsciiDict<int> dict(FCreated+1);
+    QAsciiDict<int> dict(FExceptions+1);
     dict.setAutoDelete( true );
     dict.insert( "description", new int(FDescription) );
     dict.insert( "location", new int(FLocation) );
@@ -202,6 +332,10 @@ bool ODateBookAccessBackend_XML::loadFile() {
     dict.insert( "end", new int(FREnd) );
     dict.insert( "note", new int(FNote) );
     dict.insert( "created", new int(FCreated) );
+    dict.insert( "recparent", new int(FRecParent) );
+    dict.insert( "recchildren", new int(FRecChildren) );
+    dict.insert( "exceptions", new int(FExceptions) );
+    dict.insert( "timezone", new int(FTimeZone) );
 
     char* dt = (char*)map_addr;
     int len = attribute.st_size;
@@ -289,10 +423,15 @@ void ODateBookAccessBackend_XML::finalizeRecord( OEvent& ev ) {
         OTimeZone utc = OTimeZone::utc();
         ev.setStartDateTime( utc.fromUTCDateTime( start ) );
         ev.setEndDateTime  ( utc.fromUTCDateTime( end   ) );
+        ev.setTimeZone( "UTC"); // make sure it is really utc
     }else {
+        /* to current date time */
         OTimeZone zone( ev.timeZone().isEmpty() ? OTimeZone::current() : ev.timeZone() );
-        ev.setStartDateTime( zone.toDateTime( start ) );
-        ev.setEndDateTime  ( zone.toDateTime( end   ) );
+        QDateTime date = zone.toDateTime( start );
+        ev.setStartDateTime( zone.toDateTime( date, OTimeZone::current() ) );
+
+        date = zone.toDateTime( end );
+        ev.setEndDateTime  ( zone.toDateTime( date, OTimeZone::current()   ) );
     }
     if ( rec && rec->doesRecur() ) {
         OTimeZone utc = OTimeZone::utc();
@@ -388,6 +527,29 @@ void ODateBookAccessBackend_XML::setField( OEvent& e, int id, const QString& val
         break;
     case FCreated:
         created = value.toInt();
+        break;
+    case FRecParent:
+        e.setParent( value.toInt() );
+        break;
+    case FRecChildren:{
+        QStringList list = QStringList::split(' ', value );
+        for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+            e.addChild( (*it).toInt() );
+        }
+    }
+        break;
+    case FExceptions:{
+        QStringList list = QStringList::split(' ', value );
+        for (QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+            QDate date( (*it).left(4).toInt(), (*it).mid(4, 2).toInt(), (*it).right(2).toInt() );
+            qWarning("adding exception %s", date.toString().latin1() );
+            recur()->exceptions().append( date );
+        }
+    }
+        break;
+    case FTimeZone:
+        if ( value != "None" )
+            e.setTimeZone( value );
         break;
     default:
         break;

@@ -1,7 +1,10 @@
+#include <time.h>
+
 #include <qshared.h>
 
 #include <qtopia/timeconversion.h>
 
+#include "otimezone.h"
 #include "orecur.h"
 
 struct ORecur::Data : public QShared {
@@ -81,6 +84,14 @@ bool ORecur::doesRecur( const QDate& date ) {
 // GPL from Datebookdb.cpp
 // FIXME exception list!
 bool ORecur::nextOcurrence( const QDate& from, QDate& next ) {
+    bool stillLooking;
+    stillLooking  = p_nextOccurrence( from, next );
+    while ( stillLooking && data->list.contains(next) )
+        stillLooking = p_nextOccurrence( next.addDays(1), next );
+
+    return stillLooking;
+}
+bool ORecur::p_nextOccurrence( const QDate& from, QDate& next ) {
 
    // easy checks, first are we too far in the future or too far in the past?
     QDate tmpDate;
@@ -95,7 +106,7 @@ bool ORecur::nextOcurrence( const QDate& from, QDate& next ) {
     if (hasEndDate() && endDate() < from)
 	return FALSE;
 
-    if (start() >= from) {
+    if (start() >= from  ) {
 	next = start();
 	return TRUE;
     }
@@ -443,4 +454,57 @@ void ORecur::checkOrModify() {
         data = d2;
     }
 }
+QString ORecur::toString()const {
+    QString buf;
 
+    buf += " rtype=\"";
+    switch ( data->type ) {
+    case ORecur::Daily:
+        buf += "Daily";
+        break;
+    case ORecur::Weekly:
+        buf += "Weekly";
+        break;
+    case ORecur::MonthlyDay:
+        buf += "MonthlyDay";
+        break;
+    case ORecur::MonthlyDate:
+        buf += "MonthlyDate";
+        break;
+    case ORecur::Yearly:
+        buf += "Yearly";
+        break;
+    default:
+        buf += "NoRepeat";
+        break;
+    }
+    buf += "\"";
+    if (data->days > 0 )
+	buf += " rweekdays=\"" + QString::number( static_cast<int>( data->days ) ) + "\"";
+    if ( data->pos != 0 )
+	buf += " rposition=\"" + QString::number(data->pos ) + "\"";
+
+    buf += " rfreq=\"" + QString::number( data->freq ) + "\"";
+    buf += " rhasenddate=\"" + QString::number( static_cast<int>( data->hasEnd ) ) + "\"";
+    if ( data->hasEnd )
+	buf += " enddt=\""
+	       + QString::number( OTimeZone::utc().fromUTCDateTime( QDateTime( data->end, QTime(12,0,0) ) ) )
+	       + "\"";
+    buf += " created=\"" + QString::number( OTimeZone::utc().fromUTCDateTime( data->create ) ) + "\"";
+
+    if ( data->list.isEmpty() ) return buf;
+    // save exceptions list here!!
+    ExceptionList::ConstIterator it;
+    ExceptionList list = data->list;
+    buf += " exceptions=\"";
+    QDate date;
+    for ( it = list.begin(); it != list.end(); ++it ) {
+        date = (*it);
+        if ( it != list.begin() ) buf += " ";
+
+        buf += QCString().sprintf("%04d%02d%02d", date.year(), date.month(), date.day() );
+    }
+    buf += "\"";
+
+    return buf;
+}

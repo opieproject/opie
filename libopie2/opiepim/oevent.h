@@ -61,7 +61,7 @@ public:
     void setLocation( const QString& loc );
 
     bool hasNotifiers()const;
-    OPimNotifyManager &notifiers();
+    OPimNotifyManager &notifiers()const;
 
     ORecur recurrence()const;
     void setRecurrence( const ORecur& );
@@ -99,7 +99,15 @@ public:
 
     bool match( const QRegExp& )const;
 
+    /** For exception to recurrence here is a list of children...  */
+    QArray<int> children()const;
+    void setChildren( const QArray<int>& );
+    void addChild( int uid );
+    void removeChild( int uid );
 
+    /** return the parent OEvent */
+    int parent()const;
+    void setParent( int uid );
 
 
     /* needed reimp */
