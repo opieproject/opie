@@ -114,24 +114,26 @@ void TabsSettings::readTabSettings ( )
 		if ( view == "List" ) // No tr
 			tc. m_view = TabConfig::List;
 
-		QString bgType = cfg. readEntry ( "BackgroundType", "Ruled" );
+		QString bgType = cfg. readEntry ( "BackgroundType", "Image" );
 		if ( bgType == "SolidColor" )
 			tc. m_bg_type = TabConfig::SolidColor;
 		else if ( bgType == "Image" ) // No tr
 			tc. m_bg_type = TabConfig::Image;
 
-		tc. m_bg_image = cfg. readEntry ( "BackgroundImage", "wallpaper/opie" );
+		tc. m_bg_image = cfg. readEntry ( "BackgroundImage", "launcher/opie-background" );
 		tc. m_bg_color = cfg. readEntry ( "BackgroundColor", colorGroup ( ). color ( QColorGroup::Base ). name ( ));
 		tc. m_text_color = cfg. readEntry ( "TextColor", colorGroup ( ). color ( QColorGroup::Text ). name ( ));
 		QStringList f = cfg. readListEntry ( "Font", ',' );
 		if ( f. count ( ) == 4 ) {
 			tc. m_font_family = f [0];
 			tc. m_font_size = f [1]. toInt ( );
-			tc. m_font_style = f [2];
+			tc. m_font_weight = f [2]. toInt ( );
+			tc. m_font_italic = ( f [3]. toInt ( ));
 		} else {
 			tc. m_font_family = font ( ). family ( );
 			tc. m_font_size = font ( ). pointSize ( );
-			tc. m_font_style = "Regular";
+			tc. m_font_weight = 50;
+			tc. m_font_italic = false;
 		}
 		m_tabs [*it] = tc;
 	}
@@ -167,7 +169,7 @@ void TabsSettings::accept ( )
 		cfg. writeEntry ( "BackgroundColor", tc. m_bg_color );
 		cfg. writeEntry ( "TextColor", tc. m_text_color );
 
-		QString f = tc. m_font_family + "," + QString::number ( tc. m_font_size ) + "," + tc. m_font_style + ",0";
+		QString f = tc. m_font_family + "," + QString::number ( tc. m_font_size ) + "," + QString::number ( tc. m_font_weight ) + "," + ( tc. m_font_italic ? "1" : "0" );
 		cfg. writeEntry ( "Font", f );
 		QCopEnvelope be ( "QPE/Launcher", "setTabBackground(QString,int,QString)" );
 
@@ -192,7 +194,7 @@ void TabsSettings::accept ( )
 		QCopEnvelope fe ( "QPE/Launcher", "setFont(QString,QString,int,int,int)" );
 		fe << *it << tc. m_font_family;
 		fe << tc. m_font_size;
-		fe << 50 << 0;
+		fe << tc. m_font_weight << ( tc. m_font_italic ? 1 : 0 );
 
 		tc. m_changed = false;
 	}

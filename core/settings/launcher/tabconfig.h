@@ -44,8 +44,9 @@ struct TabConfig {
 	QString        m_bg_color;
 	QString        m_text_color;
 	QString        m_font_family;
-	QString        m_font_style;
 	int            m_font_size;
+	int            m_font_weight;
+	bool           m_font_italic;
 	bool           m_changed;
 };
 

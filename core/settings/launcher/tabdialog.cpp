@@ -296,7 +296,7 @@ TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig
 	m_solidcolor-> setColor ( QColor ( tc. m_bg_color ));
 	m_bgimage = tc. m_bg_image;
 	bgTypeClicked ( tc. m_bg_type );
-	m_fontselect-> setSelectedFont ( tc. m_font_family, tc. m_font_style, tc. m_font_size );
+	m_fontselect-> setSelectedFont ( QFont ( tc. m_font_family, tc. m_font_size, tc. m_font_weight, tc. m_font_italic ));
 	fontClicked ( m_fontselect-> selectedFont ( ));
 }
 
@@ -441,7 +441,7 @@ void TabDialog::bgTypeClicked ( int t )
 	if ( t == TabConfig::SolidColor )
 		s = m_solidcolor-> color ( ). name ( );
 	else if ( t == TabConfig::Image )
-		s = m_bgimage;
+		s = Resource::findPixmap ( m_bgimage );
 		
 	m_sample-> setBackgroundType ((TabConfig::BackgroundType) t, s );
 }
@@ -475,7 +475,7 @@ void TabDialog::bgImageClicked ( )
 
 void TabDialog::bgDefaultClicked ( )
 {
-	m_bgimage = Resource::findPixmap ( "launcher/opie-background.jpg" );
+	m_bgimage = "launcher/opie-background";
 	bgTypeClicked ( TabConfig::Image );
 }
 
@@ -486,9 +486,13 @@ void TabDialog::accept ( )
 	m_tc. m_bg_color = m_solidcolor-> color ( ). name ( );
 	m_tc. m_bg_image = m_bgimage;
 	m_tc. m_text_color = m_iconcolor-> color ( ). name ( );
-	m_tc. m_font_family = m_fontselect-> fontFamily ( );
-	m_tc. m_font_size = m_fontselect-> fontSize ( );
-	m_tc. m_font_style = m_fontselect-> fontStyle ( );
+	
+	QFont f = m_fontselect-> selectedFont ( );
+	
+	m_tc. m_font_family = f. family ( );
+	m_tc. m_font_size = f. pointSize ( );
+	m_tc. m_font_weight = f. weight ( );
+	m_tc. m_font_italic = f. italic ( );
 	
 	QDialog::accept ( );
 }
