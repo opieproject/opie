@@ -6,11 +6,17 @@
 /************************************************************************
 
 ----------------------------------------------------
-    Ideas as of Wellenreiter II / December 2003
+    Ideas as of Wellenreiter II / April 2004
 ----------------------------------------------------
 
 --------
-ENGINE
+ BUILD 
+--------
+
+- fix building against X11 again
+
+--------
+ ENGINE
 --------
 
 - enable multiple packet sources
@@ -31,6 +37,8 @@ ENGINE
 - enable sniffing in wired networks
 
 - fix autodetection (interface name)
+
+- use ethtool IOCTLs (if present)
 
 ---------
    UI
@@ -64,4 +72,6 @@ ENGINE
 	# Latitude      Longitude       ( SSID )        Type    ( BSSID )       Time (GMT)      [ SNR Sig Noise ]
 	# $DateGMT: 2004-02-07
 	N 41.1008009    W 8.3893034     ( Porceven )    BBS     ( 00:a0:f8:41:91:63 )   22:32:39 (GMT)  [ 21 177 156 ]
+
+- add SIGSEGV handler for emergency closing the capture file etc.
 
