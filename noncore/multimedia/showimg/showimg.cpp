@@ -23,11 +23,14 @@
 //
 
 #include "showimg.h"
-
+#include "ImageFileSelector.h"
+           
+#include <qpe/config.h>
 #include <qpe/resource.h>
 #include <qpe/fileselector.h>
 #include <qpe/applnk.h>
-
+#include <qfileinfo.h>
+#include <math.h>
 #include <qpe/qpemenubar.h>
 #include <qwidgetstack.h>
 #include <qpe/qpetoolbar.h>
@@ -35,57 +38,144 @@
 #include <qfiledialog.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
+#include <qscrollview.h>
 #include <qlabel.h>
 #include <qpainter.h>
 #include <qkeycode.h>
 #include <qapplication.h>
 #include <qclipboard.h>
 #include <qtimer.h>
+#include <qspinbox.h>
+
+
+
+ControlsDialog::ControlsDialog(const QString &caption,QImage image,int *brightness,QWidget *parent):QDialog(parent,0,true)
+{
+    setCaption(caption);
+
+    if ( parent )
+    {
+        setPalette(parent->palette());
+    }
+
+    b=brightness;
+    img=image;
+
+    setMinimumSize(140,80);
+
+    QGridLayout  *gl= new QGridLayout(this,2,2,4,4);
+
+    pixmap =new ImageWidget(this);;
+    QPixmap pm;
+    pm.convertFromImage(img);
+    pixmap->setPixmap(pm);
+    pixmap->setMinimumSize(pm.width(),pm.height());
+    gl->addMultiCellWidget(pixmap,0,0,0,2,AlignCenter); 
+    QLabel *l=new QLabel(tr("Brightness")+":",this);
+    gl->addWidget(l,1,0,AlignLeft);       
+    spb=new QSpinBox(-100,100,2,this); 
+    gl->addWidget(spb,1,1,AlignRight); 
+
+    spb->setValue(0);
+
+    connect(spb,SIGNAL(valueChanged(int)),this, SLOT(bValueChanged(int)));
+
+}
+
+void ControlsDialog::bValueChanged(int value)
+{
+    QImage nImage=img;
+    nImage.detach();
+    ImageViewer::intensity(nImage, (float)value/100);
+    QPixmap pm;
+    pm.convertFromImage(nImage);
+    pixmap->setPixmap(pm);
+    pixmap->repaint(false);
+
+
+}
+
+void ControlsDialog::accept()
+{
+    *b=spb->value();    
+    done(1);
+}
+
+
+
+InfoDialog::InfoDialog(const QString &caption, const QStringList text,QWidget *parent):QDialog(parent,0,true)
+{
+    setCaption(caption);
+
+    if ( parent )
+    {
+        setPalette(parent->palette());
+    }
+
+    const char *labels[]={"File Name","Format","File Size","Size","Colors","Alpha"};
+
+    setMinimumSize(180,80);
+    int num=ImageViewer::LAST+1;
+    if ( text[ImageViewer::ALPHA].isEmpty() )
+        num--;
+    QGridLayout  *gl= new QGridLayout(this,num,2,4,2);
+    QLabel *l;
+    int count=0;
+    for ( int i=0;i<num;i++ )
+    {
+        if ( i==1 )
+        {
+            QFrame *frm=new QFrame(this);
+            frm->setFrameStyle(QFrame::HLine|QFrame::Sunken);
+            gl->addMultiCellWidget(frm,i,i,0,1);            
+        }
+        else
+        {
+            l=new QLabel(tr(labels[count])+":",this);
+            gl->addWidget(l,i,0,AlignLeft);        
+            l=new QLabel(text[count],this);
+            gl->addWidget(l,i,1,AlignRight);
+            count++;
+        }
+
+    } 
+
+}
+
+void InfoDialog::displayInfo(const QString &caption, const QStringList text, QWidget *parent)
+{
+    InfoDialog *dlg=new InfoDialog(caption,text,parent);
+    dlg->exec();
+    delete dlg;
+} 
 
 
 ImagePane::ImagePane( QWidget *parent ) : QWidget( parent )
 {
     vb = new QVBoxLayout( this );
 
-    image = new ImageWidget( this );
-    connect(image, SIGNAL( clicked() ), this, SLOT( imageClicked() ));
+    image = new QScrollView(this,0,WResizeNoErase|WNorthWestGravity);
+    pic=new ImageWidget(image);
+    image->addChild(pic);
+
+    connect(pic, SIGNAL( clicked() ), this, SLOT( imageClicked() ));
 
     vb->addWidget( image );
 
-    status = new QLabel( this );
-    status->setFixedHeight( fontMetrics().height() + 4 );
-    vb->addWidget( status );
 }
 
 void ImagePane::setPixmap( const QPixmap &pm )
 {
-    image->setPixmap( pm );
-    image->repaint( false );
+    pic->setPixmap( pm );
+    pic->resize(pm.width(),pm.height());
+    image->updateScrollBars ();
+    pic->repaint(false);
 }
 
 void ImagePane::imageClicked()
 {
     emit clicked();
 }
-
-void ImagePane::showStatus()
-{
-    delete vb;
-    vb = new QVBoxLayout( this );
-    vb->addWidget( image );
-    status->show();
-    vb->addWidget( status );
-}
-
-
-void ImagePane::hideStatus()
-{
-    delete vb;
-    vb = new QVBoxLayout( this );
-    vb->addWidget( image );
-    status->hide();
-}
-
 //===========================================================================
 /*
   Draws the portion of the scaled pixmap that needs to be updated
@@ -96,11 +186,11 @@ void ImageWidget::paintEvent( QPaintEvent *e )
     QPainter painter(this);
 
     painter.setClipRect(e->rect());
-    painter.setBrush( black );
-    painter.drawRect( 0, 0, width(), height() );
+    painter.fillRect(0,0,width(),height(),QColor(0,0,0));
 
-    if ( pixmap.size() != QSize( 0, 0 ) ) { // is an image loaded?
-	painter.drawPixmap((width() - pixmap.width()) / 2, (height() - pixmap.height()) / 2, pixmap);
+    if ( pixmap.size() != QSize( 0, 0 ) )
+    { // is an image loaded?
+        painter.drawPixmap((width() - pixmap.width()) / 2, (height() - pixmap.height()) / 2, pixmap);
     }
 }
 
@@ -109,15 +199,20 @@ void ImageWidget::mouseReleaseEvent(QMouseEvent *)
     emit clicked();
 }
 
-
 //===========================================================================
 
 ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
-    : QMainWindow( parent, name, wFlags ), filename( 0 ), 
-      pickx( -1 ), picky( -1 ), clickx( -1 ), clicky( -1 ), bFromDocView( FALSE )
+: QMainWindow( parent, name, wFlags ), filename( 0 ),  bFromDocView( FALSE )
 {
     setCaption( tr("Image Viewer") );
     setIcon( Resource::loadPixmap( "ImageViewer" ) );
+
+
+    Config cfg("Image Viewer");
+    cfg.setGroup("Image Viewer");
+
+    showThumbView=cfg.readBoolEntry("ShowThumbnails",false);
+    isSized=cfg.readBoolEntry("SizeToScreen",true);
 
     isFullScreen = FALSE;
 
@@ -126,69 +221,203 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     toolBar = new QPEToolBar( this );
     toolBar->setHorizontalStretchable( TRUE );
 
-    menubar = new QPEMenuBar( toolBar );
+    menuBar = new QPEMenuBar( toolBar );
+
+    current=menuBar;
+
+
+
+    fileMenuFile = new QPopupMenu(this);
+    //menuBarmenubarFile->insertItem( tr("File"), fileMenu );
+    fileMenuFile->insertItem(tr("Open"), this, SLOT(openFile()), 0);
+
+    viewMenuFile = new QPopupMenu( this );
+    //menubarFile->insertItem( tr("View"), viewMenu );    
+    viewMenuFile->insertItem( tr("Thumbnail View"), this, SLOT(switchThumbView()), 0, SHOW_THUMBNAILS );
+    
+    viewMenuFile->setItemChecked ( SHOW_THUMBNAILS, showThumbView ); 
+
+
+
+
+    optionsMenuFile = new QPopupMenu( this);
+    //menubarFile->insertItem( tr("Options"),optionsMenu );
+    optionsMenuFile->insertItem( tr("Slideshow") );
+    optionsMenuFile->insertSeparator();
+    optionsMenuFile->insertItem( tr("Preferences.."));
+    optionsMenuFile->insertItem( tr("Help"));
+
+
+
 
     QStrList fmt = QImage::outputFormats();
 
-    QPopupMenu *edit = new QPopupMenu( menubar );
-    QPopupMenu *view = new QPopupMenu( menubar );
 
-    menubar->insertItem(tr("Edit"), edit );
-    menubar->insertItem(tr("View"), view );
+    fileMenuView = new QPopupMenu( this );
+    //menubarView->insertItem( tr("File"),fileMenu );    
+    fileMenuView->insertItem( tr("Image Info ..."),this, SLOT(displayInfoDialog()),0 );
+    fileMenuView->insertSeparator();    
 
-    edit->insertItem(tr("Horizontal flip"), this, SLOT(hFlip()), 0);
-    edit->insertItem(tr("Vertical flip"), this, SLOT(vFlip()), 0);
+    viewMenuView = new QPopupMenu(this );
+    viewMenuView->setCheckable ( true ); 
+
+    //menubarView->insertItem( tr("View"),viewMenu ); 
+    viewMenuView->insertItem(tr("Horizontal flip"), this, SLOT(hFlip()), 0);
+    viewMenuView->insertItem(tr("Vertical flip"), this, SLOT(vFlip()), 0);
 
     stack = new QWidgetStack( this );
     stack->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding ) );
     setCentralWidget( stack );
 
-    imagePanel = new ImagePane( stack );
+
+    imagePanel = new ImagePane( stack );    
     connect(imagePanel, SIGNAL(clicked()), this, SLOT(normalView()));
 
-    fileSelector = new FileSelector("image/*", stack, "fs");
-    fileSelector->setNewVisible(FALSE);
-    fileSelector->setCloseVisible(FALSE);
+
+    ImageFileSelector::CURRENT_VIEW cv;
+    if(showThumbView)
+        cv=ImageFileSelector::THUMBNAIL;
+    else
+        cv=ImageFileSelector::DETAILED;
+
+    qDebug("cv = %d",cv);
+
+    fileSelector = new ImageFileSelector( cv,stack, "fs");    
+   
+    //switchThumbView();
+    
+
+    //fileSelector = new ImageFileSelector("image/*", stack, "fs");
+    //fileSelector->setNewVisible(FALSE);
+    //fileSelector->setCloseVisible(FALSE);
     connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( closeFileSelector() ) );
     connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( openFile( const DocLnk & ) ) );
 
-    toolBar = new QPEToolBar( this );
+    iconToolBar = new QPEToolBar(this);
 
     QAction *a;
 
-    a = new QAction( tr( "Open" ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Open ..." ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( open() ) );
-    a->addTo( toolBar );
+    a->addTo( fileMenuView);
+    a->addTo( iconToolBar );    
 
-    a = new QAction( tr( "Rotate 180" ), Resource::loadPixmap( "repeat" ), QString::null, 0, this, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( rot180() ) );
-    a->addTo( toolBar );
-    a->addTo( edit );
 
     a = new QAction( tr( "Rotate 90"), Resource::loadPixmap( "rotate90" ), QString::null, 0, this, 0);
     connect( a, SIGNAL( activated() ), this, SLOT( rot90() ) );
-    a->addTo( toolBar );
-    a->addTo( edit );
+    a->addTo( iconToolBar );
+    a->addTo( viewMenuView );
+
+    a = new QAction( tr( "Rotate 180" ), Resource::loadPixmap( "repeat" ), QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( rot180() ) );
+    a->addTo( iconToolBar );
+    a->addTo( viewMenuView );
+
+
+    a = new QAction( tr( "Rotate 270"), Resource::loadPixmap( "rotate270" ), QString::null, 0, this, 0);
+    connect( a, SIGNAL( activated() ), this, SLOT( rot270() ) );
+    //a->addTo( iconToolBar );
+    a->addTo( viewMenuView );
+
+
+
+    viewMenuView->insertSeparator();
+    viewMenuView->insertItem(tr("Brightness ..."), this, SLOT(displayControlsDialog()), 0);
+    viewMenuView->insertItem(tr("Black And White"), this, SLOT(blackAndWhite()), 0,BLACKANDWHITE);
+    viewMenuView->insertSeparator();
+
+
+    sss = new QAction( tr( "Scale to Screen"), Resource::loadPixmap( "scale" ), QString::null, 0, this, 0,true);
+    connect( sss, SIGNAL( activated() ), this, SLOT( switchSizeToScreen() ) );
+    sss->addTo( iconToolBar );
+    sss->addTo( viewMenuView );
+
+    sss->setOn(isSized);    
+    viewMenuView->insertSeparator();
+
 
     a = new QAction( tr( "Fullscreen" ), Resource::loadPixmap( "fullscreen" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fullScreen() ) );
-    a->addTo( toolBar );
-    a->addTo( view);
+    a->addTo( iconToolBar );
+    a->addTo( viewMenuView);
 
-    stack->raiseWidget( fileSelector );
+    switchToFileSelector();
 
-    setMouseTracking( TRUE );
+    setMouseTracking( TRUE ); 
+
+    
 }
 
 ImageViewer::~ImageViewer()
 {
+    Config cfg("Image Viewer");
+    cfg.setGroup("Image Viewer");
+    
+    cfg.writeEntry("ShowThumbnails",(int)showThumbView);
+    cfg.writeEntry("SizeToScreen",(int)isSized);
+
     delete imagePanel; // in case it is fullscreen
 }
+
+void ImageViewer::switchSizeToScreen()
+{
+    isSized=!isSized;
+    sss->setOn(isSized);
+    updateImage();
+}
+
+void ImageViewer::updateImage()
+{
+    if ( isSized )
+    {
+        imagePanel->setPixmap(pmScaled);
+    }
+    else
+    {
+        imagePanel->setPixmap(pm);
+    }
+}
+
+void ImageViewer::switchThumbView()
+{
+
+    showThumbView=!showThumbView;
+    viewMenuFile->setItemChecked ( SHOW_THUMBNAILS, showThumbView );
+    fileSelector->switchView();
+    
+}
+
+void ImageViewer::switchToFileSelector()
+{
+    stack->raiseWidget(fileSelector);
+    menuBar->clear();
+    menuBar->insertItem( tr("File"), fileMenuFile );
+    menuBar->insertItem( tr("View"), viewMenuFile );
+    menuBar->insertItem( tr("Options"), optionsMenuFile );
+    iconToolBar->hide();
+    imagePanel->disable();
+
+}
+
+void ImageViewer::switchToImageView()
+{
+    stack->raiseWidget(imagePanel);
+
+    menuBar->clear();
+    menuBar->insertItem( tr("File"), fileMenuView );
+    menuBar->insertItem( tr("View"), viewMenuView );
+    viewMenuView->setItemEnabled(BLACKANDWHITE,true);
+    iconToolBar->show();
+
+    imagePanel->setPosition(0,0);
+
+}
+
 
 void ImageViewer::setDocument(const QString& fileref)
 {
     delayLoad = fileref;
-    stack->raiseWidget(imagePanel);
+    switchToImageView();    
     QTimer::singleShot( 0, this, SLOT(doDelayedLoad()) );
 }
 
@@ -208,12 +437,15 @@ void ImageViewer::show(const QString& fileref)
     bFromDocView = TRUE;
     closeFileSelector();
     DocLnk link(fileref);
-    if ( link.isValid() ) {
-	openFile(link);
-    } else {
-	filename = fileref;
-	updateCaption( fileref );
-	loadImage( fileref );
+    if ( link.isValid() )
+    {
+        openFile(link);
+    }
+    else
+    {
+        filename = fileref;
+        updateCaption( fileref );
+        loadImage( fileref );
     }
 }
 
@@ -227,19 +459,19 @@ void ImageViewer::openFile( const DocLnk &file )
 
 void ImageViewer::open()
 {
-    stack->raiseWidget(fileSelector);
+    switchToFileSelector();
 }
 
 void ImageViewer::closeFileSelector()
 {
-    stack->raiseWidget(imagePanel);
+    switchToImageView();    
 }
 
 void ImageViewer::updateCaption( QString name )
 {
     int sep = name.findRev( '/' );
     if ( sep >= 0 )
-	name = name.mid( sep+1 );
+        name = name.mid( sep+1 );
     setCaption( name + tr(" - Image Viewer") );
 }
 
@@ -250,48 +482,57 @@ void ImageViewer::updateCaption( QString name )
 void ImageViewer::loadImage( const char *fileName )
 {
     filename = fileName;
-    if ( filename ) {
-	QApplication::setOverrideCursor( waitCursor ); // this might take time
-	imagePanel->statusLabel()->setText( tr("Loading image...") );
-	qApp->processEvents();
-	bool ok = image.load(filename, 0);
-	pickx = -1;
-	clickx = -1;
-	if ( ok )
-	    ok = reconvertImage();
-	if ( !ok ) {
-	    pm.resize(0,0);				// couldn't load image
-	    update();
-	}
-	QApplication::restoreOverrideCursor();	// restore original cursor
+    if ( filename )
+    {
+        QApplication::setOverrideCursor( waitCursor ); // this might take time
+        //imagePanel->statusLabel()->setText( tr("Loading image...") );
+        qApp->processEvents();
+        bool ok = image.load(filename, 0); 
+        if ( ok )
+        {
+            ok = reconvertImage();
+            updateImageInfo(filename);
+        }
+        if ( !ok )
+        {
+            pm.resize(0,0);             // couldn't load image
+            update();
+        }
+        QApplication::restoreOverrideCursor();  // restore original cursor
     }
-    updateStatus();
-    imagePanel->setPixmap( pmScaled );
-    stack->raiseWidget(imagePanel);
+    switchToImageView();
+    updateImage();
+
 }
 
 bool ImageViewer::loadSelected()
 {
     bool ok = false;
-    if ( stack->visibleWidget() == fileSelector ) {
-	const DocLnk *link = fileSelector->selected();
-	if ( link ) {
-	    if ( link->file() != filename ) {
-		updateCaption( link->name() );
-		filename = link->file();
-		imagePanel->statusLabel()->setText( tr("Loading image...") );
-		qApp->processEvents();
-		ok = image.load(filename, 0);
-		if ( ok )
-		    ok = reconvertImage();
-		if ( !ok )
-		    pm.resize(0,0);
-	    }
-	}
+    if ( stack->visibleWidget() == fileSelector )
+    {
+        const DocLnk *link = fileSelector->selected();
+        if ( link )
+        {
+            if ( link->file() != filename )
+            {
+                updateCaption( link->name() );
+                filename = link->file();
+                qApp->processEvents();
+                ok = image.load(filename, 0);                    
+                if ( ok )
+                {
+                    updateImageInfo(filename);                    
+                    ok = reconvertImage();
+                }
+                if ( !ok )
+                    pm.resize(0,0);
+            }
+        }
     }
-    if ( !image.isNull() ) {
-	ok = true;
-	closeFileSelector();
+    if ( !image.isNull() )
+    {
+        ok = true;
+        closeFileSelector();
     }
 
     return ok;
@@ -306,49 +547,52 @@ bool ImageViewer::reconvertImage()
     QApplication::setOverrideCursor( waitCursor ); // this might take time
     if ( pm.convertFromImage(image /*, conversion_flags */ ) )
     {
-	pmScaled = QPixmap();
-	scale();
-	success = TRUE;				// load successful
-    } else {
-	pm.resize(0,0);				// couldn't load image
+        pmScaled = QPixmap();
+        scale();
+        success = TRUE;             // load successful
     }
-    QApplication::restoreOverrideCursor();	// restore original cursor
+    else
+    {
+        pm.resize(0,0);             // couldn't load image
+    }
+    QApplication::restoreOverrideCursor();  // restore original cursor
 
-    return success;				// TRUE if loaded OK
+    return success;             // TRUE if loaded OK
 }
 
 
 int ImageViewer::calcHeight()
 {
-    if ( !isFullScreen)
-	 return  height() - menubar->heightForWidth( width() )
-		    - imagePanel->statusLabel()->height();
+    if ( !isFullScreen )
+        return  imagePanel->paneHeight();
     else
-         return qApp->desktop()->height();
+        return qApp->desktop()->height();
 }
 /*
   This functions scales the pixmap in the member variable "pm" to fit the
   widget size and  puts the resulting pixmap in the member variable "pmScaled".
 */
-
 void ImageViewer::scale()
 {
     int h = calcHeight();
     if ( image.isNull() ) return;
 
     QApplication::setOverrideCursor( waitCursor ); // this might take time
-    if ( width() == pm.width() && h == pm.height() ) { // no need to scale if widget
-	pmScaled = pm;				// size equals pixmap size
-    } else {
-	double hs = (double)h / (double)image.height();
-	double ws = (double)width() / (double)image.width();
-	double scaleFactor = (hs > ws) ? ws : hs;
-	int smoothW = (int)(scaleFactor * image.width());
-	int smoothH = (int)(scaleFactor * image.height());
-
-	pmScaled.convertFromImage( image.smoothScale( smoothW, smoothH ) /*, conversion_flags */ );
+    if ( imagePanel->paneWidth() == pm.width() && h == pm.height() )
+    { // no need to scale if widget
+        pmScaled = pm;              // size equals pixmap size
     }
-    QApplication::restoreOverrideCursor();	// restore original cursor
+    else
+    {
+        double hs = (double)h / (double)image.height();
+        double ws = (double)imagePanel->paneWidth() / (double)image.width();
+        double scaleFactor = (hs > ws) ? ws : hs;
+        int smoothW = (int)(scaleFactor * image.width());
+        int smoothH = (int)(scaleFactor * image.height());
+
+        pmScaled.convertFromImage( image.smoothScale( smoothW, smoothH ) /*, conversion_flags */ );
+    }
+    QApplication::restoreOverrideCursor();  // restore original cursor
 }
 
 /*
@@ -358,200 +602,443 @@ void ImageViewer::scale()
 
 void ImageViewer::resizeEvent( QResizeEvent * )
 {
-    imagePanel->statusLabel()->setGeometry(0, height() - imagePanel->statusLabel()->height(),
-			width(), imagePanel->statusLabel()->height());
 
-    if ( pm.size() == QSize( 0, 0 ) )		// we couldn't load the image
-	return;
+    if ( pm.size() == QSize( 0, 0 ) )       // we couldn't load the image
+        return;
 
     int h = calcHeight();
 
-    if ( width() != pmScaled.width() || h != pmScaled.height())
-    {						// if new size,
-	scale();				// scale pmScaled to window
-	updateStatus();
+    if ( imagePanel->paneWidth() != pmScaled.width() || h != pmScaled.height() )
+    {                       // if new size,
+        scale();                // scale pmScaled to window
     }
     if ( image.hasAlphaBuffer() )
-	erase();
+        erase();
 }
 
-void ImageViewer::convertEvent( QMouseEvent* e, int& x, int& y)
-{
-    if ( pm.size() != QSize( 0, 0 ) ) {
-	int h = height() - menubar->heightForWidth( width() ) - imagePanel->statusLabel()->height();
-	int nx = e->x() * image.width() / width();
-	int ny = (e->y()-menubar->heightForWidth( width() )) * image.height() / h;
-	if (nx != x || ny != y ) {
-	    x = nx;
-	    y = ny;
-	    updateStatus();
-	}
-    }
-}
-
-void ImageViewer::mousePressEvent( QMouseEvent *e )
-{
-    convertEvent(e, clickx, clicky);
-}
-
-void ImageViewer::mouseMoveEvent( QMouseEvent *e )
-{
-    convertEvent( e, pickx, picky );
-}
 
 void ImageViewer::hFlip()
 {
-    if ( loadSelected() )
-	setImage(image.mirror(TRUE,FALSE));
+    setImage(image.mirror(TRUE,FALSE));
 }
 
 void ImageViewer::vFlip()
 {
-    if ( loadSelected() )
-	setImage(image.mirror(FALSE,TRUE));
+    setImage(image.mirror(FALSE,TRUE));
 }
 
 void ImageViewer::rot180()
 {
-    if ( loadSelected() )
-	setImage(image.mirror(TRUE,TRUE));
+
+    setImage(image.mirror(TRUE,TRUE));
 }
 
 void ImageViewer::rot90()
 {
-    if ( loadSelected() ) {
-	QImage oldimage, newimage;
-	uchar *oldbits, *newbits;
-	int i, j, p;
-	int w, h;
+    QImage oldimage;
+    oldimage = image.convertDepth(32);
+    setImage(rotate(oldimage,Rotate90));
 
-	oldimage = image.convertDepth(32);
-	w = oldimage.height();
-	h = oldimage.width();
-	newimage = QImage( w, h, 32);
+}
+void ImageViewer::rot270()
+{
 
-	oldbits = oldimage.bits();
-	newbits = newimage.bits();
+    QImage oldimage;
+    oldimage = image.convertDepth(32);
+    setImage(rotate(oldimage,Rotate270));
 
-	for (i=0; i < w ; i++)
-	    for (j=0; j < h; j++)
-		for (p = 0 ; p < 4 ; p++)
-		    newbits[(j * w + i) * 4 + p] = oldbits[ ((i + 1) * h  - j ) * 4 + p];
+}
 
-	setImage(newimage);
+void ImageViewer::blackAndWhite()
+{
+
+    viewMenuView->setItemEnabled(BLACKANDWHITE,false);
+    setImage(toGray(image,false));
+
+
+}
+
+void ImageViewer::displayControlsDialog()
+{
+    int w=80;
+    int h=w;
+    QImage small;
+
+    if ( image.width()<w ||image.height()<h )
+        small=image.smoothScale(w,h);
+    else
+        small=image.copy(0,0,w,h);
+
+    int newB=0;
+    ControlsDialog *dlg=new ControlsDialog("Image Viewer",small,&newB,this);
+    dlg->exec();
+    if ( newB )
+    {
+        intensity(image,(float)newB/100);
+        setImage(image);
     }
+
 }
 
 
+void ImageViewer::displayInfoDialog()
+{
 
+    QStringList ls;
+
+    for ( int i=0;i<LAST;i++ )
+        ls.append(imageInfo[i]);
+
+    InfoDialog::displayInfo("Image Viewer",ls,this);
+}
 void ImageViewer::normalView()
 {
-    if ( !imagePanel->parentWidget() ) {
-	isFullScreen = FALSE;
-	stack->addWidget( imagePanel, 1 );
-//	imagePanel->reparent(stack,0,QPoint(0,0),FALSE);
-//	imagePanel->resize(width(), calcHeight());
-	scale();
-	updateStatus();
-	imagePanel->setPixmap( pmScaled );
-	imagePanel->showStatus();
-	//	imagePanel->show();
-	stack->raiseWidget( imagePanel );
+    if ( !imagePanel->parentWidget() )
+    {
+
+        isFullScreen = FALSE;
+        stack->addWidget( imagePanel, 1 );
+        switchToImageView();                
+        if ( isSized )
+            scale();
+
+        updateImage();
+
     }
 }
 
 void ImageViewer::fullScreen()
 {
-    // Full-screen and rotation options
+    // Full-screen option
     // contributed by Robert Wittams <robert@wittams.com>
+    if ( imagePanel->parentWidget() && loadSelected() )
+    {
+        isFullScreen = TRUE;
+        imagePanel->reparent(0,QPoint(0,0));
+        imagePanel->resize(qApp->desktop()->width(), qApp->desktop()->height());
 
-    if ( imagePanel->parentWidget() && loadSelected() ) {
-	isFullScreen = TRUE;
-	imagePanel->reparent(0,QPoint(0,0));
-	imagePanel->resize(qApp->desktop()->width(), qApp->desktop()->height());
-
-	scale();
-	updateStatus();
-	imagePanel->hideStatus();
-	imagePanel->setPixmap( pmScaled );
-	imagePanel->showFullScreen();
+        if ( isSized )
+            scale();
+        updateImage();
+        imagePanel->showFullScreen();
     }
 }
 
 void ImageViewer::setImage(const QImage& newimage)
 {
     image = newimage;
-    pickx = -1;
-    clickx = -1;
     reconvertImage();
-    imagePanel->setPixmap( pmScaled );
-    updateStatus();
+    updateImage();    
 }
 
-void ImageViewer::updateStatus()
+void ImageViewer::updateImageInfo(QString &filePath)
 {
-    if ( pm.size() == QSize( 0, 0 ) ) {
-	if ( filename )
-	    imagePanel->statusLabel()->setText( tr("Could not load image") );
-	else
-	    imagePanel->statusLabel()->setText( tr("No image - select Open from File menu.") );
-    } else {
-	QString message("%1x%2");
-	message = message.arg(image.width()).arg(image.height());
-	if ( pm.size() != pmScaled.size() )
-	    message += QString(" [%1x%2]").arg(pmScaled.width()).arg(pmScaled.height());
-	if (image.valid(pickx,picky)) {
-	    QString moremsg;
-	    moremsg.sprintf("(%d,%d)=#%0*x ",
-			  pickx, picky,
-			  image.hasAlphaBuffer() ? 8 : 6,
-			  image.pixel(pickx,picky));
-	    message += moremsg;
-	}
-	if ( image.numColors() > 0 ) {
-	    if (image.valid(pickx,picky)) {
-		message += tr(", %1/%2 colors")
-		    .arg(image.pixelIndex(pickx,picky))
-		    .arg(image.numColors());
-	    } else {
-		message += tr(", %1 colors").arg(image.numColors());
-	    }
-	} else if ( image.depth() >= 16 ) {
-	    message += tr(" True color");
-	}
-	if ( image.hasAlphaBuffer() ) {
-	    if ( image.depth() == 8 ) {
-		int i;
-		bool alpha[256];
-		int nalpha=0;
 
-		for (i=0; i<256; i++)
-		    alpha[i] = FALSE;
-
-		for (i=0; i<image.numColors(); i++) {
-		    int alevel = image.color(i) >> 24;
-		    if (!alpha[alevel]) {
-			alpha[alevel] = TRUE;
-			nalpha++;
-		    }
-		}
-		message += tr(", %1 alpha levels").arg(nalpha);
-	    } else {
-		// Too many pixels to bother counting.
-		message += tr(", 8-bit alpha channel");
-	    }
-	}
-	imagePanel->statusLabel()->setText(message);
+    for ( int i=0;i<LAST;i++ )
+    {
+        imageInfo[i]="";
     }
+
+    imageInfo[FORMAT]=QImage::imageFormat (filePath );
+    QFileInfo fi(filePath);
+    imageInfo[PATH]=fi.fileName(); 
+    imageInfo[FILE_SIZE]=QString::number(fi.size())+" (bytes)";
+    QString message("%1x%2");
+    imageInfo[SIZE]=QString("%1x%2");
+    imageInfo[SIZE]=imageInfo[SIZE].arg(image.width()).arg(image.height());
+    if ( image.numColors() > 0 )
+    {
+        imageInfo[COLORS]=tr("%1 colors").arg(image.numColors());
+    }
+    else if ( image.depth() >= 16 )
+    {
+        imageInfo[COLORS]=tr(" True color");
+    }
+    if ( image.hasAlphaBuffer() )
+    {
+        if ( image.depth() == 8 )
+        {
+            int i;
+            bool alpha[256];
+            int nalpha=0;
+
+            for ( i=0; i<256; i++ )
+                alpha[i] = FALSE;
+
+            for ( i=0; i<image.numColors(); i++ )
+            {
+                int alevel = image.color(i) >> 24;
+                if ( !alpha[alevel] )
+                {
+                    alpha[alevel] = TRUE;
+                    nalpha++;
+                }
+            }
+            imageInfo[ALPHA]=tr("%1 alpha levels").arg(nalpha);
+        }
+        else
+        {
+            imageInfo[ALPHA]=tr("8-bit alpha channel");
+        }
+    }
+
 }
 
 void ImageViewer::closeEvent( QCloseEvent *e )
 {
-    if ( stack->visibleWidget() == imagePanel && !bFromDocView ) {
-	e->ignore();
-	open();
-    } else {
-	bFromDocView = FALSE;
-	e->accept();
+    if ( stack->visibleWidget() == imagePanel && !bFromDocView )
+    {
+        e->ignore();
+        open();
+    }
+    else
+    {
+        bFromDocView = FALSE;
+        e->accept();
     }
 }
+
+// Intensity,toGray and rotate code courtesy of KDE project.
+
+
+QImage& ImageViewer::intensity(QImage &image, float percent)
+{
+
+    int segColors = image.depth() > 8 ? 256 : image.numColors();
+    unsigned char *segTbl = new unsigned char[segColors];
+    int pixels = image.depth() > 8 ? image.width()*image.height() :
+                 image.numColors();
+    unsigned int *data = image.depth() > 8 ? (unsigned int *)image.bits() :
+                         (unsigned int *)image.colorTable();
+
+    bool brighten = (percent >= 0);
+    if ( percent < 0 )
+        percent = -percent;
+
+    if ( brighten )
+    { // keep overflow check out of loops
+        for ( int i=0; i < segColors; ++i )
+        {
+            int tmp = (int)(i*percent);
+            if ( tmp > 255 )
+                tmp = 255;
+            segTbl[i] = tmp;
+        }
+    }
+    else
+    {
+        for ( int i=0; i < segColors; ++i )
+        {
+            int tmp = (int)(i*percent);
+            if ( tmp < 0 )
+                tmp = 0;
+            segTbl[i] = tmp;
+        }
+    }
+
+    if ( brighten )
+    { // same here
+        for ( int i=0; i < pixels; ++i )
+        {
+            int r = qRed(data[i]);
+            int g = qGreen(data[i]);
+            int b = qBlue(data[i]);
+            int a = qAlpha(data[i]);
+            r = r + segTbl[r] > 255 ? 255 : r + segTbl[r];
+            g = g + segTbl[g] > 255 ? 255 : g + segTbl[g];
+            b = b + segTbl[b] > 255 ? 255 : b + segTbl[b];
+            data[i] = qRgba(r, g, b,a);
+        }
+    }
+    else
+    {
+        for ( int i=0; i < pixels; ++i )
+        {
+            int r = qRed(data[i]);
+            int g = qGreen(data[i]);
+            int b = qBlue(data[i]);
+            int a = qAlpha(data[i]);
+            r = r - segTbl[r] < 0 ? 0 : r - segTbl[r];
+            g = g - segTbl[g] < 0 ? 0 : g - segTbl[g];
+            b = b - segTbl[b] < 0 ? 0 : b - segTbl[b];
+            data[i] = qRgba(r, g, b, a);
+        }
+    }
+    delete [] segTbl;
+
+    return image;
+}
+
+QImage& ImageViewer::toGray(QImage &img, bool fast)
+{
+    if ( img.width() == 0 || img.height() == 0 )
+        return img;
+
+    if ( fast )
+    {
+        if ( img.depth() == 32 )
+        {
+            register uchar * r(img.bits());
+            register uchar * g(img.bits() + 1);
+            register uchar * b(img.bits() + 2);
+
+            uchar * end(img.bits() + img.numBytes());
+
+            while ( r != end )
+            {
+
+                *r = *g = *b = (((*r + *g) >> 1) + *b) >> 1; // (r + b + g) / 3
+
+                r += 4;
+                g += 4;
+                b += 4;
+            }
+        }
+        else
+        {
+            for ( int i = 0; i < img.numColors(); i++ )
+            {
+                register uint r = qRed(img.color(i));
+                register uint g = qGreen(img.color(i));
+                register uint b = qBlue(img.color(i));
+
+                register uint gray = (((r + g) >> 1) + b) >> 1;
+                img.setColor(i, qRgba(gray, gray, gray, qAlpha(img.color(i))));
+            }
+        }
+    }
+    else
+    {
+        int pixels = img.depth() > 8 ? img.width()*img.height() :
+                     img.numColors();
+        unsigned int *data = img.depth() > 8 ? (unsigned int *)img.bits() :
+                             (unsigned int *)img.colorTable();
+        int val, i;
+        for ( i=0; i < pixels; ++i )
+        {
+            val = qGray(data[i]);
+            data[i] = qRgba(val, val, val, qAlpha(data[i]));
+        }
+    }
+    return img;
+}
+
+
+QImage  ImageViewer::rotate(QImage &img, RotateDirection r)
+{
+    QImage dest;
+    int x, y;
+    if ( img.depth() > 8 )
+    {
+        unsigned int *srcData, *destData;
+        switch ( r )
+        {
+            case Rotate90:
+                dest.create(img.height(), img.width(), img.depth());
+                for ( y=0; y < img.height(); ++y )
+                {
+                    srcData = (unsigned int *)img.scanLine(y);
+                    for ( x=0; x < img.width(); ++x )
+                    {
+                        destData = (unsigned int *)dest.scanLine(x);
+                        destData[img.height()-y-1] = srcData[x];
+                    }
+                }
+                break;
+            case Rotate180:
+                dest.create(img.width(), img.height(), img.depth());
+                for ( y=0; y < img.height(); ++y )
+                {
+                    srcData = (unsigned int *)img.scanLine(y);
+                    destData = (unsigned int *)dest.scanLine(img.height()-y-1);
+                    for ( x=0; x < img.width(); ++x )
+                        destData[img.width()-x-1] = srcData[x];
+                }
+                break;
+            case Rotate270:
+                dest.create(img.height(), img.width(), img.depth());
+                for ( y=0; y < img.height(); ++y )
+                {
+                    srcData = (unsigned int *)img.scanLine(y);
+                    for ( x=0; x < img.width(); ++x )
+                    {
+                        destData = (unsigned int *)dest.scanLine(img.width()-x-1);
+                        destData[y] = srcData[x];
+                    }
+                }
+                break;
+            default:
+                dest = img;
+                break;
+        }
+    }
+    else
+    {
+        unsigned char *srcData, *destData;
+        unsigned int *srcTable, *destTable;
+        switch ( r )
+        {
+            case Rotate90:
+                dest.create(img.height(), img.width(), img.depth());
+                dest.setNumColors(img.numColors());
+                srcTable = (unsigned int *)img.colorTable();
+                destTable = (unsigned int *)dest.colorTable();
+                for ( x=0; x < img.numColors(); ++x )
+                    destTable[x] = srcTable[x];
+                for ( y=0; y < img.height(); ++y )
+                {
+                    srcData = (unsigned char *)img.scanLine(y);
+                    for ( x=0; x < img.width(); ++x )
+                    {
+                        destData = (unsigned char *)dest.scanLine(x);
+                        destData[img.height()-y-1] = srcData[x];
+                    }
+                }
+                break;
+            case Rotate180:
+                dest.create(img.width(), img.height(), img.depth());
+                dest.setNumColors(img.numColors());
+                srcTable = (unsigned int *)img.colorTable();
+                destTable = (unsigned int *)dest.colorTable();
+                for ( x=0; x < img.numColors(); ++x )
+                    destTable[x] = srcTable[x];
+                for ( y=0; y < img.height(); ++y )
+                {
+                    srcData = (unsigned char *)img.scanLine(y);
+                    destData = (unsigned char *)dest.scanLine(img.height()-y-1);
+                    for ( x=0; x < img.width(); ++x )
+                        destData[img.width()-x-1] = srcData[x];
+                }
+                break;
+            case Rotate270:
+                dest.create(img.height(), img.width(), img.depth());
+                dest.setNumColors(img.numColors());
+                srcTable = (unsigned int *)img.colorTable();
+                destTable = (unsigned int *)dest.colorTable();
+                for ( x=0; x < img.numColors(); ++x )
+                    destTable[x] = srcTable[x];
+                for ( y=0; y < img.height(); ++y )
+                {
+                    srcData = (unsigned char *)img.scanLine(y);
+                    for ( x=0; x < img.width(); ++x )
+                    {
+                        destData = (unsigned char *)dest.scanLine(img.width()-x-1);
+                        destData[y] = srcData[x];
+                    }
+                }
+                break;
+            default:
+                dest = img;
+                break;
+        }
+
+    }
+    return (dest);
+
+
+}
+
+
+
+
+
