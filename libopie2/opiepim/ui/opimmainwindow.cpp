@@ -30,14 +30,14 @@
 #include "opimmainwindow.h"
 
 /* OPIE */
-#include <opie2/opimresolver.h>
 #include <opie2/odebug.h>
+#include <opie2/opimresolver.h>
+#include <opie2/oresource.h>
 
 #include <qpe/categoryselect.h>
 #include <qpe/ir.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #include <qpe/sound.h>
 
 /* QT */
@@ -327,32 +327,37 @@ void OPimMainWindow::initBars( const QString &itemName ) {
     // Item menu
     m_itemMenuGroup1 = new QActionGroup( this, QString::null, false );
 
-    m_itemNewAction = new QAction( tr( "New" ), Resource::loadPixmap( "new" ),
-                              QString::null, 0, m_itemMenuGroup1, 0 );
+    m_itemNewAction = new QAction( tr( "New" ),
+                                  Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                                  QString::null, 0, m_itemMenuGroup1, 0 );
     connect( m_itemNewAction, SIGNAL(activated()), this, SLOT(slotItemNew()) );
     m_itemNewAction->setWhatsThis( tr( "Click here to create a new item." ) );
     m_itemNewAction->addTo( toolbar );
 
-    m_itemEditAction = new QAction( tr( "Edit" ), Resource::loadPixmap( "edit" ),
+    m_itemEditAction = new QAction( tr( "Edit" ),
+                                    Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ),
                                     QString::null, 0, m_itemMenuGroup1, 0 );
     connect( m_itemEditAction, SIGNAL(activated()), this, SLOT(slotItemEdit()) );
     m_itemEditAction->setWhatsThis( tr( "Click here to edit the selected item." ) );
     m_itemEditAction->addTo( toolbar );
 
-    m_itemDuplicateAction = new QAction( tr( "Duplicate" ), Resource::loadPixmap( "copy" ),
+    m_itemDuplicateAction = new QAction( tr( "Duplicate" ),
+                                         Opie::Core::OResource::loadPixmap( "copy", Opie::Core::OResource::SmallIcon ),
                                          QString::null, 0, m_itemMenuGroup1, 0 );
     connect( m_itemDuplicateAction, SIGNAL(activated()), this, SLOT(slotItemDuplicate()) );
     m_itemDuplicateAction->setWhatsThis( tr( "Click here to duplicate the selected item." ) );
 
     if ( Ir::supported() ) {
-        m_itemBeamAction = new QAction( tr( "Beam" ), Resource::loadPixmap( "beam" ),
+        m_itemBeamAction = new QAction( tr( "Beam" ),
+                                        Opie::Core::OResource::loadPixmap( "beam", Opie::Core::OResource::SmallIcon ),
                                         QString::null, 0, m_itemMenuGroup1, 0 );
         connect( m_itemBeamAction, SIGNAL(activated()), this, SLOT(slotItemBeam()) );
         m_itemBeamAction->setWhatsThis( tr( "Click here to transmit the selected item." ) );
         m_itemBeamAction->addTo( toolbar );
     }
 
-    m_itemDeleteAction = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ),
+    m_itemDeleteAction = new QAction( tr( "Delete" ),
+                                      Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ),
                                       QString::null, 0, m_itemMenuGroup1, 0 );
     connect( m_itemDeleteAction, SIGNAL(activated()), this, SLOT(slotItemDelete()) );
     m_itemDeleteAction->setWhatsThis( tr( "Click here to delete the selected item." ) );
@@ -364,7 +369,8 @@ void OPimMainWindow::initBars( const QString &itemName ) {
 
     m_itemMenuGroup2 = new QActionGroup( this, QString::null, false );
 
-    m_configureAction = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ),
+    m_configureAction = new QAction( tr( "Configure" ),
+                                     Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
                                      QString::null, 0, m_itemMenuGroup2, 0 );
     connect( m_configureAction, SIGNAL(activated()), this, SLOT(slotConfigure()) );
     m_configureAction->setWhatsThis( tr( "Click here to set your preferences for this application." ) );
