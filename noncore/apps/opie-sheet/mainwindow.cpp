@@ -27,19 +27,6 @@
 #include "sortdlg.h"
 #include "finddlg.h"
 
-
-#include "func-plus.xpm"
-#include "func-minus.xpm"
-#include "func-cross.xpm"
-#include "func-divide.xpm"
-#include "func-paran-open.xpm"
-#include "func-paran-close.xpm"
-#include "func-comma.xpm"
-#include "func-func.xpm"
-#include "func-equal.xpm"
-#include "cell-select.xpm"
-#include "excel16.xpm"
-
 #define DEFAULT_NUM_ROWS 300
 #define DEFAULT_NUM_COLS (26*3)
 #define DEFAULT_NUM_SHEETS 3
@@ -293,7 +280,7 @@ void MainWindow::initActions()
 
   //fileQuit=new QAction(tr("Quit"), tr("&Quit"), 0, this);
   //connect(fileQuit, SIGNAL(activated()), this, SLOT(close()));
-  fileExcelImport=new QAction(tr("Import Excel file"),QPixmap(excel16_xpm),tr("Import E&xcel file"),0,this);
+  fileExcelImport=new QAction(tr("Import Excel file"),Resource::loadPixmap( "/opie-sheet/excel16" ),tr("Import E&xcel file"),0,this);
   connect(fileExcelImport, SIGNAL(activated()), this, SLOT(slotImportExcelOpen()));
 
   // helpGeneral=new QAction(tr("General Help"), QPixmap(help_general_xpm), tr("&General"), 0, this);
@@ -305,7 +292,7 @@ void MainWindow::initActions()
   connect(editAccept, SIGNAL(activated()), this, SLOT(slotEditAccept()));
   editCancel=new QAction(tr("Cancel"), Resource::loadPixmap( "close" ), tr("&Cancel"), 0, this);
   connect(editCancel, SIGNAL(activated()), this, SLOT(slotEditCancel()));
-  editCellSelect=new QAction(tr("Cell Selector"), QPixmap(cell_select_xpm), tr("Cell &Selector"), 0, this);
+  editCellSelect=new QAction(tr("Cell Selector"), Resource::loadPixmap( "opie-sheet/cell_select" ), tr("Cell &Selector"), 0, this);
   editCellSelect->setToggleAction(TRUE);
   connect(editCellSelect, SIGNAL(toggled(bool)), this, SLOT(slotCellSelect(bool)));
   editCut=new QAction(tr("Cut Cells"), tr("Cu&t"), 0, this);
@@ -356,28 +343,28 @@ void MainWindow::initActions()
   dataFindReplace=new QAction(tr("Find && Replace"), tr("&Find && Replace"), 0, this);
   connect(dataFindReplace, SIGNAL(activated()), this, SLOT(slotDataFindReplace()));
 
-  funcEqual=new QAction(tr("Equal To"), QPixmap(func_equal_xpm), tr("&Equal To"), 0, this);
+  funcEqual=new QAction(tr("Equal To"), Resource::loadPixmap( "opie-sheet/func_equal" ), tr("&Equal To"), 0, this);
   funcEqual->setToolTip("=");
   connect(funcEqual, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-  funcPlus=new QAction(tr("Addition"), QPixmap(func_plus_xpm), tr("&Addition"), 0, this);
+  funcPlus=new QAction(tr("Addition"), Resource::loadPixmap( "opie-sheet/func_plus" ), tr("&Addition"), 0, this);
   funcPlus->setToolTip("+");
   connect(funcPlus, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-  funcMinus=new QAction(tr("Subtraction"), QPixmap(func_minus_xpm), tr("&Subtraction"), 0, this);
+  funcMinus=new QAction(tr("Subtraction"), Resource::loadPixmap( "opie-sheet/func_minus" ), tr("&Subtraction"), 0, this);
   funcMinus->setToolTip("-");
   connect(funcMinus, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-  funcCross=new QAction(tr("Multiplication"), QPixmap(func_cross_xpm), tr("&Multiplication"), 0, this);
+  funcCross=new QAction(tr("Multiplication"), Resource::loadPixmap ("opie-sheet/func_cross" ), tr("&Multiplication"), 0, this);
   funcCross->setToolTip("*");
   connect(funcCross, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-  funcDivide=new QAction(tr("Division"), QPixmap(func_divide_xpm), tr("&Division"), 0, this);
+  funcDivide=new QAction(tr("Division"), Resource::loadPixmap( "opie-sheet/func_divide" ), tr("&Division"), 0, this);
   funcDivide->setToolTip("/");
   connect(funcDivide, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-  funcParanOpen=new QAction(tr("Open ParanthesistempCellData->row+row1, tempCellData->col+col1"), QPixmap(func_paran_open_xpm), tr("&Open Paranthesis"), 0, this);
+  funcParanOpen=new QAction(tr("Open ParanthesistempCellData->row+row1, tempCellData->col+col1"), Resource::loadPixmap( "opie-sheet/func_paran_open" ), tr("&Open Paranthesis"), 0, this);
   funcParanOpen->setToolTip("(");
   connect(funcParanOpen, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-  funcParanClose=new QAction(tr("Close Paranthesis"), QPixmap(func_paran_close_xpm), tr("&Close Paranthesis"), 0, this);
+  funcParanClose=new QAction(tr("Close Paranthesis"), Resource::loadPixmap( "opie-sheet/func_paran_close" ), tr("&Close Paranthesis"), 0, this);
   funcParanClose->setToolTip(")");
   connect(funcParanClose, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-  funcComma=new QAction(tr("Comma"), QPixmap(func_comma_xpm), tr("&Comma"), 0, this);
+  funcComma=new QAction(tr("Comma"), Resource::loadPixmap( "opie-sheet/func_comma" ), tr("&Comma"), 0, this);
   funcComma->setToolTip(",");
   connect(funcComma, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
 }
@@ -613,7 +600,7 @@ void MainWindow::initFunctionsToolbar()
   funcComma->addTo(toolbarFunctions);
 
   toolFunction=new QToolButton(toolbarFunctions);
-  toolFunction->setPixmap(func_func_xpm);
+  toolFunction->setPixmap(Resource::loadPixmap( "opie-sheet/func_func" ));
   toolFunction->setTextLabel(tr("Functions"));
   toolFunction->setPopup(submenuFunc);
   toolFunction->setPopupDelay(0);
