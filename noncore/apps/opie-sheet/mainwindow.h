@@ -151,7 +151,7 @@ private slots:
     void selectorFileOpen(const DocLnk &lnkDoc);
 
 public:
-static QString appName() { return QString::fromLatin1("sheetqt"); }
+static QString appName() { return QString::fromLatin1("opie-sheet"); }
     MainWindow(QWidget *p, const char*, WFlags);
     ~MainWindow();
 
