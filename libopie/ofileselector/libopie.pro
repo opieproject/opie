@@ -94,4 +94,5 @@ TRANSLATIONS = ../i18n/de/libopie.ts \
    ../i18n/pt_BR/libopie.ts \
    ../i18n/sl/libopie.ts \
    ../i18n/zh_CN/libopie.ts \
-   ../i18n/zh_TW/libopie.ts
+   ../i18n/zh_TW/libopie.ts \
+   ../i18n/da/libopie.ts

@@ -23,4 +23,5 @@ TRANSLATIONS = ../../../i18n/de/calculator.ts \
 	 ../../../i18n/pt_BR/calculator.ts \
 	 ../../../i18n/sl/calculator.ts \
 	 ../../../i18n/zh_CN/calculator.ts \
-	 ../../../i18n/zh_TW/calculator.ts
+	 ../../../i18n/zh_TW/calculator.ts \
+	 ../../../i18n/da/calculator.ts

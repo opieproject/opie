@@ -1,12 +1,12 @@
 TEMPLATE	= app
 CONFIG		= qt warn_on debug
 #CONFIG		= qt warn_on release
-HEADERS		= today.h todaybase.h todayconfig.h 
-SOURCES		= main.cpp today.cpp todaybase.cpp todayconfig.cpp 
+HEADERS		= today.h todaybase.h todayconfig.h
+SOURCES		= main.cpp today.cpp todaybase.cpp todayconfig.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
-INTERFACES	= 
+INTERFACES	=
 TARGET		= today
 DESTDIR		= $(OPIEDIR)/bin
 
@@ -24,4 +24,5 @@ TRANSLATIONS = ../../../i18n/de/today.ts \
 	 ../../../i18n/sl/today.ts \
 	 ../../../i18n/zh_CN/today.ts \
 	 ../../../i18n/zh_TW/today.ts \
-   	 ../../../i18n/it/today.ts
+   	 ../../../i18n/it/today.ts \
+   	 ../../../i18n/da/today.ts

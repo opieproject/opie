@@ -21,4 +21,5 @@ TRANSLATIONS = ../../../i18n/de/showimg.ts \
    ../../../i18n/pt_BR/showimg.ts \
    ../../../i18n/sl/showimg.ts \
    ../../../i18n/zh_CN/showimg.ts \
-   ../../../i18n/zh_TW/showimg.ts
+   ../../../i18n/zh_TW/showimg.ts \
+   ../../../i18n/da/showimg.ts

@@ -7,7 +7,7 @@ SOURCES   = clock.cpp setAlarm.cpp \
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
-INTERFACES  = 
+INTERFACES  =
 TARGET    = clock
 
 TRANSLATIONS = ../../../i18n/de/clock.ts \
@@ -23,4 +23,5 @@ TRANSLATIONS = ../../../i18n/de/clock.ts \
 	 ../../../i18n/pt_BR/clock.ts \
 	 ../../../i18n/sl/clock.ts \
 	 ../../../i18n/zh_CN/clock.ts \
-	 ../../../i18n/zh_TW/clock.ts
+	 ../../../i18n/zh_TW/clock.ts \
+	 ../../../i18n/da/clock.ts

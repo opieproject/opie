@@ -7,7 +7,7 @@ SOURCES		= helpbrowser.cpp \
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
-INTERFACES	= 
+INTERFACES	=
 
 TRANSLATIONS = ../../../i18n/de/helpbrowser.ts \
 	 ../../../i18n/en/helpbrowser.ts \
@@ -23,4 +23,5 @@ TRANSLATIONS = ../../../i18n/de/helpbrowser.ts \
 	 ../../../i18n/sl/helpbrowser.ts \
 	 ../../../i18n/zh_CN/helpbrowser.ts \
 	 ../../../i18n/it/helpbrowser.ts \
-	 ../../../i18n/zh_TW/helpbrowser.ts
+	 ../../../i18n/zh_TW/helpbrowser.ts \
+	 ../../../i18n/da/helpbrowser.ts
