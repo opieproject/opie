@@ -1,4 +1,0 @@
-  config MULTIKEY
-    boolean "Multikey"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

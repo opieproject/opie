@@ -1,7 +1,0 @@
-*.moc
-Makefile*
-moc_*
-netbase.cpp
-netbase.h
-ntpbase.cpp
-ntpbase.h

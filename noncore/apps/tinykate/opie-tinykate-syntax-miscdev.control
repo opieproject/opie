@@ -1,9 +1,0 @@
-Package: opie-tinykate-syntax-miscdev
-Files: share/tinykate/syntax/ada.xml share/tinykate/syntax/eiffel.xml share/tinykate/syntax/ferite.xml share/tinykate/syntax/fortran.xml share/tinykate/syntax/haskell.xml share/tinykate/syntax/literate-haskell.xml share/tinykate/syntax/objectivec.xml share/tinykate/syntax/sather.xml share/tinykate/syntax/scheme.xml
-Priority: optional
-Section: opie/applications
-Maintainer: Opie Team <opie@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: task-opie-minimal, opie-tinykate
-Description: Syntax Highlighting Patterns for for uncommon programming languages for TinyKate

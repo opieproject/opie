@@ -1,4 +1,0 @@
-  config MODPLUG
-    boolean "modplugin"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIEPLAYER

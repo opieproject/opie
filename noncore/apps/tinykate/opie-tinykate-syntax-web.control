@@ -1,9 +1,0 @@
-Package: opie-tinykate-syntax-web
-Files: share/tinykate/syntax/css.xml share/tinykate/syntax/html.xml share/tinykate/syntax/javascript.xml
-Priority: optional
-Section: opie/applications
-Maintainer: Opie Team <opie@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: task-opie-minimal, opie-tinykate
-Description: Syntax Highlighting Patterns for for common programming languages for TinyKate

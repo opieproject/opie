@@ -1,9 +1,0 @@
-Package: opie-today-todolistplugin
-Files: plugins/today/libtodaytodolistplugin.so*
-Priority: optional
-Section: opie/applications
-Maintainer: Maximilian Reiss <harlekin@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: libqte2, opie-today
-Description: Todolist plugin for today

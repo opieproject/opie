@@ -1,4 +1,0 @@
-config BEND
-   boolean "bend"
-   default "y" if MAIL
-   depends ( LIBQPE || LIBQPE-X11 ) && LIBMAIL && LIBOPIE && MAIL

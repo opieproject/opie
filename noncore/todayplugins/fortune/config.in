@@ -1,4 +1,0 @@
-  config TODAY_FORTUNE
-    boolean "fortune"
-    default "y"
-    depends TODAY

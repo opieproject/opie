@@ -1,4 +1,0 @@
-  config EUROCONV
-    boolean "euroconv"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,0 @@
-  config SNAKE
-    boolean "snake"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

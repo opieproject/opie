@@ -1,4 +1,0 @@
-  config APPEARANCE2
-    boolean "Appearance"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
