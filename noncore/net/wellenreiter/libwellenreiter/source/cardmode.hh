@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.11 2003-02-01 09:05:37 max Exp $ */
+/* $Id: cardmode.hh,v 1.12 2003-02-07 03:23:16 max Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -10,6 +10,7 @@
 #include <sys/time.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <sys/ioctl.h>
 #include <linux/if.h>
 
@@ -35,6 +36,7 @@ extern "C"
 #define   IWPRIV_PATH		 "/sbin/iwpriv"
 
 /* Prototypes */
+int card_check_rfmon_datalink (char *device);
 int card_into_monitormode (pcap_t **, char *, int);
 int card_set_promisc_up (const char *);
 
