@@ -83,7 +83,6 @@ public:
     bool keepRunning() const;
 
     bool keyboardGrabbed() const;
-    QString keyboardGrabbedBy ( ) const;
 
     int exec();
 

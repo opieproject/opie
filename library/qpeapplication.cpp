@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.35 2002-12-17 00:20:01 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.36 2002-12-22 23:59:13 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -92,9 +92,10 @@
 class QPEApplicationData
 {
 public:
-	QPEApplicationData() : presstimer( 0 ), presswidget( 0 ), kbgrabber( 0 ),
-			rightpressed( FALSE ),  kbregrab( FALSE ), notbusysent( FALSE ), preloaded( FALSE ),
-			forceshow( FALSE ), nomaximize( FALSE ), keep_running( TRUE ), qpe_main_widget( 0 )
+	QPEApplicationData ( ) 
+		: presstimer( 0 ), presswidget( 0 ), rightpressed( false ), kbgrabbed( false ), 
+		  notbusysent( false ), preloaded( false ), forceshow( false ), nomaximize( false ), 
+		  keep_running( true ), qpe_main_widget( 0 )
 
 	{
 		qcopq.setAutoDelete( TRUE );
@@ -102,12 +103,10 @@ public:
 
 	int presstimer;
 	QWidget* presswidget;
-	int kbgrabber;
-	QString kbgrabber_appname;
 	QPoint presspos;
 
 	bool rightpressed : 1;
-	bool kbregrab     : 1;
+	bool kbgrabbed    : 1;
 	bool notbusysent  : 1;
 	bool preloaded    : 1;
 	bool forceshow    : 1;
@@ -755,8 +754,6 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 		}
 	}
 	if ( e->type == QWSEvent::Key ) {
-		if ( d->kbgrabber == 1 )
-			return TRUE;
 		QWSKeyEvent *ke = ( QWSKeyEvent * ) e;
 		if ( ke->simpleData.keycode == Qt::Key_F33 ) {
 			// Use special "OK" key to press "OK" on top level widgets
@@ -809,27 +806,46 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 				}
 			}
 		}
+		else if ( ke->simpleData.keycode >= Qt::Key_F1 && ke->simpleData.keycode <= Qt::Key_F29 ) {
+			// this should be if ( ODevice::inst ( )-> buttonForKeycode ( ... ))
+			// but we cannot access libopie function within libqpe :(
 
-#if QT_VERSION < 231
-		// Filter out the F4/Launcher key from apps
-		// ### The launcher key may not always be F4 on all devices
-		if ( ( ( QWSKeyEvent * ) e ) ->simpleData.keycode == Qt::Key_F4 )
-			return TRUE;
-#endif
+			QWidget * active = activeWindow ( );
+			if ( active && ((int) active-> winId ( ) == ke-> simpleData.window )) {
+				if ( d-> kbgrabbed ) { // we grabbed the keyboard
+					QChar ch ( ke-> simpleData.unicode );
+					QKeyEvent qke ( ke-> simpleData. is_press ? QEvent::KeyPress : QEvent::KeyRelease, 
+					                ke-> simpleData.keycode,
+					                ch. latin1 ( ),
+					                ke-> simpleData.modifiers,
+					                QString ( ch ),
+					                ke-> simpleData.is_auto_repeat, 1 );
 
+					QObject *which = QWidget::keyboardGrabber ( );
+					if ( !which )  
+						which = QApplication::focusWidget ( );
+					if ( !which )  
+						which = QApplication::activeWindow ( );
+					if ( !which )  
+						which = qApp;
+				         
+					QApplication::sendEvent ( which, &qke );
+				}
+				else { // we didn't grab the keyboard, so send the event to the launcher
+					QCopEnvelope e ( "QPE/Launcher", "deviceButton(int,int,int)" );
+					e << int( ke-> simpleData.keycode ) << int( ke-> simpleData. is_press ) << int( ke-> simpleData.is_auto_repeat );
+				}
+			}
+			return true;
+		}		
 	}
 	if ( e->type == QWSEvent::Focus ) {
 		QWSFocusEvent * fe = ( QWSFocusEvent* ) e;
-		QWidget* nfw = QWidget::find( e->window() );
 		if ( !fe->simpleData.get_focus ) {
 			QWidget * active = activeWindow();
 			while ( active && active->isPopup() ) {
 				active->close();
 				active = activeWindow();
-			}
-			if ( !nfw && d->kbgrabber == 2 ) {
-				ungrabKeyboard();
-				d->kbregrab = TRUE; // want kb back when we're active
 			}
 		}
 		else {
@@ -837,10 +853,6 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 			QWidget *topm = activeModalWidget();
 			if ( topm ) {
 				topm->raise();
-			}
-			if ( d->kbregrab ) {
-				grabKeyboard();
-				d->kbregrab = FALSE;
 			}
 		}
 		if ( fe->simpleData.get_focus && inputMethodDict ) {
@@ -1033,6 +1045,20 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
 	if ( msg == "applyStyle()" ) {
 		applyStyle();
 	}
+	else if ( msg == "toggleApplicationMenu()" ) {
+		QWidget *active = activeWindow ( );
+	
+		if ( active ) {
+			QPEMenuToolFocusManager *man = QPEMenuToolFocusManager::manager ( );			
+			bool oldactive = man-> isActive ( );
+
+			man-> setActive( !man-> isActive() );
+
+			if ( !oldactive && !man-> isActive ( )) { // no menubar to toggle -> try O-Menu
+				QCopEnvelope e ( "QPE/TaskBar", "toggleStartMenu()" );
+			}
+		}
+	}
 	else if ( msg == "setDefaultRotation(int)" ) {
 		if ( type() == GuiServer ) {
 			int r;
@@ -1055,18 +1081,6 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
 	else if ( msg == "restart()" ) {
 		if ( type() == GuiServer )
 			restart();
-	}
-	else if ( msg == "grabKeyboard(QString)" ) {
-		QString who;
-		stream >> who;
-		if ( who.isEmpty() )
-			d->kbgrabber = 0;
-		else if ( who != d->appName )
-			d->kbgrabber = 1;
-		else
-			d->kbgrabber = 2;
-			
-		d-> kbgrabber_appname = who;
 	}
 	else if ( msg == "language(QString)" ) {
 		if ( type() == GuiServer ) {
@@ -1624,15 +1638,7 @@ void QPEApplication::removeSenderFromStylusDict()
 */
 bool QPEApplication::keyboardGrabbed() const
 {
-	return d->kbgrabber;
-}
-
-/*!
-  \internal
-*/
-QString QPEApplication::keyboardGrabbedBy() const
-{
-	return d->kbgrabber_appname;
+	return d->kbgrabbed;
 }
 
 
@@ -1642,16 +1648,7 @@ QString QPEApplication::keyboardGrabbedBy() const
 */
 void QPEApplication::ungrabKeyboard()
 {
-	QPEApplicationData * d = ( ( QPEApplication* ) qApp ) ->d;
-	if ( d->kbgrabber == 2 ) {
-#ifndef QT_NO_COP
-		QCopEnvelope e( "QPE/System", "grabKeyboard(QString)" );
-		e << QString::null;
-#endif
-
-		d->kbregrab = FALSE;
-		d->kbgrabber = 0;
-	}
+	((QPEApplication *) qApp )-> d-> kbgrabbed = false;
 }
 
 /*!
@@ -1665,17 +1662,7 @@ void QPEApplication::ungrabKeyboard()
 */
 void QPEApplication::grabKeyboard()
 {
-	QPEApplicationData * d = ( ( QPEApplication* ) qApp ) ->d;
-	if ( qApp->type() == QApplication::GuiServer )
-		d->kbgrabber = 0;
-	else {
-#ifndef QT_NO_COP
-		QCopEnvelope e( "QPE/System", "grabKeyboard(QString)" );
-		e << d->appName;
-#endif
-
-		d->kbgrabber = 2; // me
-	}
+	((QPEApplication *) qApp )-> d-> kbgrabbed = true;
 }
 
 /*!

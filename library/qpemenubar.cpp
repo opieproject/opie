@@ -225,10 +225,6 @@ bool QPEMenuToolFocusManager::eventFilter( QObject *object, QEvent *event )
 		}
 	    }
 	}
-	if ( ke->key() == Key_F11 ) {
-	    setActive( !isActive() );
-	    return TRUE;
-	}
     } else if ( event->type() == QEvent::KeyRelease ) {
 	QKeyEvent *ke = (QKeyEvent *)event;
 	if ( isActive() ) {
