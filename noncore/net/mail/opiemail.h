@@ -34,6 +34,9 @@ protected slots:
     virtual void slotMoveCopyMail();
     virtual void reEditMail();
 
+protected:
+    void setup_signalblocking();
+
 private:
     Settings *settings;
 

@@ -18,11 +18,15 @@
 
 /* QT */
 
+/* UNIX */
+#include <signal.h>
+
 using namespace Opie::Core;
 
 OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
         : MainWindow( parent, name, WStyle_ContextHelp )
 {
+    setup_signalblocking();
     settings = new Settings();
 
     folderView->populate( settings->getAccounts() );
@@ -31,6 +35,16 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
 OpieMail::~OpieMail()
 {
     if (settings) delete settings;
+}
+
+void OpieMail::setup_signalblocking()
+{
+    /* for networking we must block SIGPIPE and Co. */
+    struct sigaction blocking_action,temp_action;
+    blocking_action.sa_handler = SIG_IGN;
+    sigemptyset(&(blocking_action.sa_mask));
+    blocking_action.sa_flags = 0;
+    sigaction(SIGPIPE,&blocking_action,&temp_action);
 }
 
 void OpieMail::appMessage(const QCString &msg, const QByteArray &data)
@@ -70,13 +84,13 @@ void OpieMail::slotwriteMail(const QString&name,const QString&email)
 
 void OpieMail::slotComposeMail()
 {
-    odebug << "Compose Mail" << oendl; 
+    odebug << "Compose Mail" << oendl;
     slotwriteMail(0l,0l);
 }
 
 void OpieMail::slotSendQueued()
 {
-    odebug << "Send Queued" << oendl; 
+    odebug << "Send Queued" << oendl;
     SMTPaccount *smtp = 0;
 
     QList<Account> list = settings->getAccounts();
@@ -123,7 +137,7 @@ void OpieMail::slotSendQueued()
 
 void OpieMail::slotSearchMails()
 {
-    odebug << "Search Mails" << oendl; 
+    odebug << "Search Mails" << oendl;
 }
 
 void OpieMail::slotEditSettings()
@@ -134,7 +148,7 @@ void OpieMail::slotEditSettings()
 
 void OpieMail::slotEditAccounts()
 {
-    odebug << "Edit Accounts" << oendl; 
+    odebug << "Edit Accounts" << oendl;
     EditAccounts eaDialog( settings, this, 0, true,  WStyle_ContextHelp );
     eaDialog.slotAdjustColumns();
     QPEApplication::execDialog( &eaDialog );
@@ -183,7 +197,7 @@ void OpieMail::mailHold(int button, QListViewItem *item,const QPoint&,int  )
     MAILLIB::ATYPE mailtype = ((MailListViewItem*)mailView->currentItem() )->wrapperType();
     /* just the RIGHT button - or hold on pda */
     if (button!=2) {return;}
-    odebug << "Event right/hold" << oendl; 
+    odebug << "Event right/hold" << oendl;
     if (!item) return;
     QPopupMenu *m = new QPopupMenu(0);
     if (m)
@@ -207,15 +221,15 @@ void OpieMail::mailHold(int button, QListViewItem *item,const QPoint&,int  )
 
 void OpieMail::slotShowFolders( bool show )
 {
-    odebug << "Show Folders" << oendl; 
+    odebug << "Show Folders" << oendl;
     if ( show && folderView->isHidden() )
     {
-        odebug << "-> showing" << oendl; 
+        odebug << "-> showing" << oendl;
         folderView->show();
     }
     else if ( !show && !folderView->isHidden() )
     {
-        odebug << "-> hiding" << oendl; 
+        odebug << "-> hiding" << oendl;
         folderView->hide();
     }
 }
