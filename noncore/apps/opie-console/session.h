@@ -4,8 +4,7 @@
 #include <qwidgetstack.h>
 
 class IOLayer;
-class EmulationLayer;
-class WidgetLayer;
+class EmulationHandler;
 /**
  * This is a Session. A session contains
  * a QWidget pointer and a IOLayer
@@ -41,8 +40,7 @@ public:
      */
     IOLayer* layer();
 
-//    EmulationLayer* emulationLayer();
-    WidgetLayer* emulationWidget();
+    EmulationHandler* emulationHandler();
 
     /*
      * connects the data flow from
@@ -57,8 +55,7 @@ public:
     void disconnect();
 
     void setWidgetStack( QWidgetStack* widget );
-//    void setEmulationLayer( EmulationLayer* lay );
-//    void setEmulationWidget( WidgetLayer* lay );
+    void setEmulationHandler( EmulationHandler* lay );
     void setIOLayer( IOLayer*  );
     void setName( const QString& );
 
@@ -66,8 +63,7 @@ private:
     QString m_name;
     QWidgetStack* m_widget;
     IOLayer* m_layer;
-//    EmulationLayer* m_emLay;
-//    WidgetLayer* m_widLay;
+    EmulationHandler* m_emu;
 
 };
 

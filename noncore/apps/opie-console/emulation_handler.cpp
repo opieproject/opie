@@ -19,6 +19,7 @@ EmulationHandler::EmulationHandler( const Profile& prof, QWidget* parent,const c
     connect(m_teEmu, SIGNAL(sndBlock(const char*, int) ),
             this, SLOT(recvEmulation(const char*, int) ) );
     m_teEmu->setConnect( true );
+    m_teEmu->setHistory( TRUE );
     load( prof );
 
 
@@ -32,13 +33,16 @@ void EmulationHandler::load( const Profile& ) {
     QFont  font = QFont("Fixed", 12, QFont::Normal );
     font.setFixedPitch(TRUE);
     m_teWid->setVTFont( font );
-    m_teWid->setBackgroundColor(Qt::black );
+    m_teWid->setBackgroundColor(Qt::gray );
 }
 void EmulationHandler::recv( const QByteArray& ar) {
+    qWarning("received in EmulationHandler!");
     m_teEmu->onRcvBlock(ar.data(), ar.count() );
 }
 void EmulationHandler::recvEmulation(const char* src, int len ) {
+    qWarning("received from te ");
     QByteArray ar(len);
+
     memcpy(ar.data(), src, sizeof(char) * len );
 
     emit send(ar);

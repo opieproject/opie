@@ -72,6 +72,14 @@ Profile::ValueList ProfileManager::all()const {
  * in TabWidget
  */
 Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
+/* TEST PROFILE!!!
+    Profile prof;
+    QString str = "/dev/ttyS0";
+    prof.writeEntry("Device",str );
+    prof.writeEntry("Baud", 115200 );
+    prof.setIOLayer("serial");
+    prof.setName( "test");
+*/
     Session* session = new Session();
     session->setName( prof.name() );
     /* translate the internal name to the external */
@@ -85,6 +93,7 @@ Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
     stack->addWidget( dummy, 0 );
     stack->raiseWidget( 0 );
     EmulationHandler* handler = new EmulationHandler(prof,dummy );
+    session->setEmulationHandler( handler );
     lay->addWidget( handler->widget() );
 //    WidgetLayer* wid = new EmulationWidget( prof, dummy );
 //    lay->addWidget( wid );
