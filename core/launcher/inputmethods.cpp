@@ -106,12 +106,12 @@ InputMethods::InputMethods( QWidget *parent ) :
 InputMethods::~InputMethods()
 {
 #ifndef SINGLE_APP
-    QValueList<InputMethod>::Iterator mit;
-    for ( mit = inputMethodList.begin(); mit != inputMethodList.end(); ++mit ) {
-  int i = (*mit).interface->release();
-  (*mit).library->unload();
-  delete (*mit).library;
-    }
+	QValueList<InputMethod>::Iterator mit;
+	for ( mit = inputMethodList.begin(); mit != inputMethodList.end(); ++mit ) {
+		(void) (*mit).interface->release();
+		(*mit).library->unload();
+		delete (*mit).library;
+	}
 #endif
 }
 
