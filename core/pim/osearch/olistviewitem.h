@@ -24,6 +24,9 @@ public:
 
   	virtual void expand(){};
 	virtual int rtti() { return Raw;}
+	virtual QPopupMenu* popupMenu() { return 0;};
+	void clearList();
+
 };
 
 #endif

@@ -13,10 +13,15 @@
 #include "searchgroup.h"
 
 #include <qregexp.h>
-// #include <qapplication.h>
-// #include <opie/owait.h>
+#include <qapplication.h>
+#include <opie/owait.h>
 
 #include "olistviewitem.h"
+
+//#define NEW_OWAIT
+#ifndef NEW_OWAIT
+static OWait *wait = 0;
+#endif
 
 SearchGroup::SearchGroup(QListView* parent, QString name)
 : OListViewItem(parent, name)
@@ -49,24 +54,13 @@ void SearchGroup::doSearch()
 {
 	clearList();
 	if (_search.isEmpty()) return;
-	int res_count = realSearch();
-	setText(0, _name + " - " + _search.pattern() + " (" + QString::number( res_count ) + ")");
+	_resultCount = realSearch();
 //	repaint();
-}
-
-void SearchGroup::clearList()
-{
-	QListViewItem *item = firstChild();
-	QListViewItem *toDel;
-	while ( item != 0 ) {
-		toDel = item;
-		item = item->nextSibling();
-	 	delete toDel;
-	}
 }
 
 void SearchGroup::setSearch(QRegExp re)
 {
+	if (re == _search) return;
 	setText(0, _name+" - "+re.pattern() );
 	_search = re;
 	if (isOpen()) expand();
@@ -75,13 +69,25 @@ void SearchGroup::setSearch(QRegExp re)
 
 int SearchGroup::realSearch()
 {
-	//emit isSearching( tr(" Searching for %s in %s" ).arg( _search.pattern().latin1()).arg( _name ) );
-/*	OWait *wait = new OWait( qApp->mainWidget(), "test" );
-	wait->show();*/
+#ifndef NEW_OWAIT
+	qDebug("NOT using NEW_OWAIT");
+	if (!wait) wait = new OWait( qApp->mainWidget(), "osearch" );
+	wait->show();
+	qApp->processEvents();
+#else
+	qDebug("using NEW_OWAIT");
+	OWait::start( "osearch" );
+#endif
 	if (!loaded) load();
-	int count = search();
-/*	wait->hide();
-	delete wait;*/
-	return count;
+	_resultCount = 0;
+	_resultCount = search();
+	setText(0, _name + " - " + _search.pattern() + " (" + QString::number( _resultCount ) + ")");
+
+#ifndef NEW_OWAIT
+	wait->hide();
+#else
+	OWait::stop();
+#endif
+	return _resultCount;
 }
 

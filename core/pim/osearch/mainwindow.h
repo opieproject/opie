@@ -51,6 +51,7 @@ protected slots:
   void showPopup();
   void stopTimer( QListViewItem* );
   void searchStringChanged();
+  void optionChanged(int);
   
 private:
   OListView *resultsList;
@@ -68,6 +69,7 @@ private:
   QAction *SearchAllAction;
   QAction *actionCaseSensitiv;
   QAction *actionWildcards;
+  //QAction *actionWholeWordsOnly;
   uint _buttonCount;
   void makeMenu();
 };

@@ -14,23 +14,35 @@
 
 #include <opie/otodoaccess.h>
 #include <opie/otodo.h>
-#include <qiconset.h>
 #include <qpe/resource.h>
+#include <qpe/config.h>
+#include <qiconset.h>
+#include <qaction.h>
+#include <qpopupmenu.h>
 #include "todoitem.h"
 
 TodoSearch::TodoSearch(QListView* parent, QString name)
-: SearchGroup(parent, name)
+: SearchGroup(parent, name), _todos(0), _popupMenu(0)
 {
-	_todos = 0;
 //	AppLnkSet als(QPEApplication::qpeDir());
 //	setPixmap( 0, als.findExec("todolist")->pixmap() );
 	QIconSet is = Resource::loadIconSet( "todo/TodoList" );
 	setPixmap( 0, is.pixmap( QIconSet::Small, true ) );
+	actionShowCompleted = new QAction( QObject::tr("show completed tasks"),QString::null,  0, 0, 0, true );
+	Config cfg( "osearch", Config::User );
+   	cfg.setGroup( "todo_settings" );
+   	actionShowCompleted->setOn( cfg.readBoolEntry( "show_completed_tasks", false ) );
+
 }
 
 
 TodoSearch::~TodoSearch()
 {
+	Config cfg( "osearch", Config::User );
+   	cfg.setGroup( "todo_settings" );
+   	cfg.writeEntry( "show_completed_tasks", actionShowCompleted->isOn() );
+	delete _popupMenu;
+	delete actionShowCompleted;
 	delete _todos;
 }
 
@@ -45,11 +57,24 @@ int TodoSearch::search()
 {
 	ORecordList<OTodo> results = _todos->matchRegexp(_search);
 	for (uint i = 0; i < results.count(); i++)
-		new TodoItem( this, new OTodo( results[i] ));
-	return results.count();
+		insertItem( new OTodo( results[i] ));
+	return _resultCount;
 }
 
-void TodoSearch::insertItem( void* )
+void TodoSearch::insertItem( void *rec )
 {
+	OTodo *todo = (OTodo*)rec;
+	if (!actionShowCompleted->isOn() &&
+		todo->isCompleted() ) return;
+	new TodoItem( this, todo );
+	_resultCount++;
+}
 
+QPopupMenu* TodoSearch::popupMenu()
+{
+	if (!_popupMenu){
+		_popupMenu = new QPopupMenu( 0 );
+ 		actionShowCompleted->addTo( _popupMenu );
+	}
+	return _popupMenu;
 }

@@ -39,4 +39,5 @@ void DocLnkSearch::load()
 void DocLnkSearch::insertItem( void *rec )
 {
 	new DocLnkItem( this, (DocLnk*)rec );
+	_resultCount++;
 }

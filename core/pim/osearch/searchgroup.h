@@ -16,13 +16,13 @@
 #include "olistviewitem.h"
 
 class QRegExp;
+class QPopupMenu;
 
 /**
 @author Patrick S. Vogt
 */
-class SearchGroup : public OListViewItem //, QObject
+class SearchGroup : public OListViewItem
 {
-//Q_OBJECT
 public:
     SearchGroup(QListView* parent, QString name);
 
@@ -33,17 +33,14 @@ public:
     virtual void setSearch(QRegExp);
     virtual int rtti() { return Searchgroup;}
 
-// signals:
-// 	isSearching(QString);
-
 protected:
 	QRegExp _search;
 	virtual void load() = 0;
 	virtual int search() = 0;
 	virtual void insertItem( void* ) = 0;
-	void clearList();
 	QString _name;
 	bool loaded;
+	int _resultCount;
 private:
 	int realSearch();
 };

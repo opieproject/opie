@@ -19,6 +19,7 @@
 #include <qpe/qpetoolbar.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
+#include <qpe/global.h>
 #include <qaction.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
@@ -84,7 +85,6 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   searches.append( new DatebookSearch( resultsList, tr("datebook") ) );
   searches.append( new AdressSearch( resultsList, tr("adressbook") ) );
 
-  makeMenu();
   setCentralWidget( mainFrame );
 
   popupTimer = new QTimer();
@@ -96,11 +96,13 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   connect(resultsList, SIGNAL(clicked(QListViewItem*)), SLOT(stopTimer(QListViewItem*)));
   connect(buttonGroupActions, SIGNAL(clicked(int)), SLOT( slotAction(int) ) );
 
+  makeMenu();
 
    Config cfg( "osearch", Config::User );
    cfg.setGroup( "search_settings" );
    actionCaseSensitiv->setOn( cfg.readBoolEntry( "caseSensitiv", false ) );
    actionWildcards->setOn( cfg.readBoolEntry( "wildcards", false ) );
+//   actionWholeWordsOnly->setOn( cfg.readBoolEntry( "whole_words_only", false ) );
 }
 
 void MainWindow::makeMenu()
@@ -117,7 +119,18 @@ void MainWindow::makeMenu()
    toolBar->setHorizontalStretchable( true );
    menuBar->insertItem( tr( "Search" ), searchMenu );
    menuBar->insertItem( tr( "Settings" ), cfgMenu );
+
+   //SETTINGS MENU
    cfgMenu->insertItem( tr( "Search" ), searchOptions );
+   QPopupMenu *pop;
+   for (SearchGroup *s = searches.first(); s != 0; s = searches.next() ){
+		pop = s->popupMenu();
+		if (pop){
+			qDebug("inserting settings menu for %s",s->text(0).latin1());
+			cfgMenu->insertItem( s->text(0), pop );
+			//connect( pop, SIGNAL( activated(int) ), SLOT( optionChanged(int) ) );
+		}
+  }
 
 
   //SEARCH
@@ -126,8 +139,11 @@ void MainWindow::makeMenu()
   connect( SearchAllAction, SIGNAL(activated()), this, SLOT(searchAll()) );
   SearchAllAction->addTo( searchMenu );
   searchMenu->insertItem( tr( "Options" ), searchOptions );
+  //connect( searchOptions, SIGNAL( activated(int) ), SLOT( optionChanged(int) ) );
 
   //SEARCH OPTIONS
+  //actionWholeWordsOnly = new QAction( tr("Whole words only"),QString::null,  0, this, 0, true );
+  //actionWholeWordsOnly->addTo( searchOptions );
   actionCaseSensitiv = new QAction( tr("Case sensitiv"),QString::null,  0, this, 0, true );
   actionCaseSensitiv->addTo( searchOptions );
   actionWildcards = new QAction( tr("Use wildcards"),QString::null,  0, this, 0, true );
@@ -151,6 +167,7 @@ MainWindow::~MainWindow()
    cfg.setGroup( "search_settings" );
    cfg.writeEntry( "caseSensitiv", actionCaseSensitiv->isOn() );
    cfg.writeEntry( "wildcards", actionWildcards->isOn() );
+   //cfg.writeEntry( "whole_words_only", actionWholeWordsOnly->isOn() );
 }
 
 void MainWindow::setCurrent(QListViewItem *item)
@@ -182,14 +199,9 @@ void MainWindow::setCurrent(QListViewItem *item)
 			if (button) button->hide();
 		}
 		_buttonCount = acts.count();
-// 		buttonShow = new QPushButton( detailsFrame, "Show" ) ;
-// 		buttonShow->setText( "test" );
-// 		buttonLayout->addWidget( buttonShow, 0 );
-// buttonGroupActions->insert(buttonShow);
 		detailsFrame->show();
 	}else detailsFrame->hide();
-	//_currentItem = (OListViewItem*)item;
-	popupTimer->start( 300 );
+	popupTimer->start( 300, true );
 }
 
 void MainWindow::stopTimer(QListViewItem*)
@@ -200,7 +212,10 @@ void MainWindow::stopTimer(QListViewItem*)
 void MainWindow::showPopup()
 {
 	qDebug("showPopup");
+	popupTimer->stop();
         if (!_currentItem) return;
+	QPopupMenu *pop = _currentItem->popupMenu();
+	if (pop) pop->popup( QCursor::pos() );
 }
 
 void MainWindow::setSearch( const QString &key )
@@ -213,7 +228,14 @@ void MainWindow::setSearch( const QString &key )
 void MainWindow::searchStringChanged()
 {
 	searchTimer->stop();
-	QRegExp re( _searchString, actionCaseSensitiv->isOn(), actionWildcards->isOn() );
+	QString ss = _searchString;
+	//ss = Global::stringQuote( _searchString );
+//	if (actionWholeWordsOnly->isOn())
+//		ss = "\\s"+_searchString+"\\s";
+	qDebug(" set searchString >%s<",ss.latin1());
+	QRegExp re( ss );
+	re.setCaseSensitive( actionCaseSensitiv->isOn() );
+	re.setWildcard( actionWildcards->isOn() );
 	for (SearchGroup *s = searches.first(); s != 0; s = searches.next() )
 		s->setSearch( re );
 }
@@ -226,7 +248,7 @@ void MainWindow::searchAll()
 	}
 }
 
-void MainWindow::slotAction( int act)
+void MainWindow::slotAction( int act )
 {
 	if (_currentItem->rtti() == OListViewItem::Result){
 		ResultItem *res = (ResultItem*)_currentItem;
@@ -235,3 +257,8 @@ void MainWindow::slotAction( int act)
 	}
 }
 
+void MainWindow::optionChanged(int i)
+{
+	qDebug("optionChanged(%i)",i);
+	searchStringChanged();
+}
