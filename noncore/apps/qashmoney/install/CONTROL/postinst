@@ -1,0 +1,124 @@
+#!/bin/sh
+
+# This renames all the old zmoney files if they are present
+if [ -f $HOME/zmoneyaccounts.db ]
+  then
+    mv $HOME/zmoneyaccounts.db $HOME/qmaccounts.db
+  fi
+if [ -f $HOME/zmoneytransactions.db ]
+  then
+    mv $HOME/zmoneytransactions.db $HOME/qmtransactions.db
+  fi
+if [ -f $HOME/zmoneymemory.db ]
+  then
+    mv $HOME/zmoneymemory.db $HOME/qmmemory.db
+  fi
+if [ -f $HOME/zmoneypreferences.db ]
+  then
+    mv $HOME/zmoneypreferences.db $HOME/qmpreferences.db
+  fi
+if [ -f $HOME/zmoneytransfers.db ]
+  then
+    mv $HOME/zmoneytransfers.db $HOME/qmtransfers.db
+  fi
+
+# This section makes a new directory in the $HOME/Applications
+# directory so QashMoney files will be automatically backed up.
+# Links from the $HOME directory are made to the actual files because
+# SQLite seems to want only a filename rather than a directory
+
+# Make the Applications directory if its not there
+if [ ! -d $HOME/Applications ]
+  then
+    mkdir $HOME/Applications
+  fi
+
+# Make the qashmoney directory
+if [ ! -d $HOME/Applications/qashmoney ]
+  then
+    mkdir $HOME/Applications/qashmoney
+  fi
+
+# Move all the database files to the temporary directory
+# if they are present and are not symbolic links
+if [ -f $HOME/qmbudgets.db ] && [ ! -L $HOME/qmbudgets.db ]
+  then
+    mv $HOME/qmbudgets.db /tmp
+  fi
+
+if [ -f $HOME/qmaccounts.db ] && [ ! -L $HOME/qmaccounts.db ]
+  then
+    mv $HOME/qmaccounts.db /tmp
+  fi
+
+if [ -f $HOME/qmmemory.db ] && [ ! -L $HOME/qmmemory.db ]
+  then
+    mv $HOME/qmmemory.db /tmp
+  fi
+
+if [ -f $HOME/qmpreferences.db ] && [ ! -L $HOME/qmpreferences.db ]
+  then
+    mv $HOME/qmpreferences.db /tmp
+  fi
+
+if [ -f $HOME/qmtransactions.db ] && [ ! -L $HOME/qmtransactions.db ]
+  then
+    mv $HOME/qmtransactions.db /tmp
+  fi
+
+if [ -f $HOME/qmtransfers.db ] && [ ! -L $HOME/qmtransfers.db ]
+  then
+    mv $HOME/qmtransfers.db /tmp
+  fi
+
+# Move all db files from /tmp directory to their final resting place
+if [ ! -f $HOME/Applications/qashmoney/qmbudgets.db ]
+  then
+    mv /tmp/qmbudgets.db $HOME/Applications/qashmoney
+  fi
+if [ ! -f $HOME/Applications/qashmoney/qmaccounts.db ]
+  then
+    mv /tmp/qmaccounts.db $HOME/Applications/qashmoney
+  fi
+if [ ! -f $HOME/Applications/qashmoney/qmmemory.db ]
+  then
+    mv /tmp/qmmemory.db $HOME/Applications/qashmoney
+  fi
+if [ ! -f $HOME/Applications/qashmoney/qmpreferences.db ]
+  then
+    mv /tmp/qmpreferences.db $HOME/Applications/qashmoney
+  fi
+if [ ! -f $HOME/Applications/qashmoney/qmtransactions.db ]
+  then
+    mv /tmp/qmtransactions.db $HOME/Applications/qashmoney
+  fi
+if [ ! -f $HOME/Applications/qashmoney/qmtransfers.db ]
+  then
+    mv /tmp/qmtransfers.db $HOME/Applications/qashmoney
+  fi
+
+# If by chance there are any db files or links in the $HOME directory
+#delete them
+rm -rf $HOME/qmbudgets.db
+rm -rf $HOME/qmaccounts.db
+rm -rf $HOME/qmmemory.db
+rm -rf $HOME/qmpreferences.db
+rm -rf $HOME/qmtransactions.db
+rm -rf $HOME/qmtransfers.db
+
+# Create symbolic links for the $HOME to the $HOME/Applications/qashmoney
+# directory
+ln -s $HOME/Applications/qashmoney/qmbudgets.db $HOME/qmbudgets.db
+ln -s $HOME/Applications/qashmoney/qmaccounts.db $HOME/qmaccounts.db
+ln -s $HOME/Applications/qashmoney/qmmemory.db $HOME/qmmemory.db
+ln -s $HOME/Applications/qashmoney/qmpreferences.db $HOME/qmpreferences.db
+ln -s $HOME/Applications/qashmoney/qmtransactions.db $HOME/qmtransactions.db
+ln -s $HOME/Applications/qashmoney/qmtransfers.db $HOME/qmtransfers.db
+
+# Remove all .db files that remain in the /tmp directory
+rm -rf /tmp/qmbudgets.db
+rm -rf /tmp/qmaccounts.db
+rm -rf /tmp/qmmemory.db
+rm -rf /tmp/qmpreferences.db
+rm -rf /tmp/qmtransactions.db
+rm -rf /tmp/qmtransfers.db

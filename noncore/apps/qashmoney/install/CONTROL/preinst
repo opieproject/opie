@@ -1,0 +1,8 @@
+#/bin/sh
+
+# If by some small chance a tmp directory is not present
+# create it
+if [ ! -d /tmp ]
+then
+  mkdir /tmp
+fi
