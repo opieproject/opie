@@ -32,7 +32,7 @@ Oxygen::Oxygen() : QMainWindow()
     PSEWidget *pse = new PSEWidget(names);
     dataWidgetUI *DataWidgetUI = new dataWidgetUI(names);
     
-    this->setCaption( tr( "Oxygen" ) );
+    setCaption( tr( "Oxygen" ) );
     
     QTabWidget *tabw = new QTabWidget( this , "qtab" );
     tabw->addTab( pse, tr( "PSE" ));
