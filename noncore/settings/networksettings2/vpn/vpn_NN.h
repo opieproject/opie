@@ -35,6 +35,8 @@ public:
 
 private:
 
+      virtual void setSpecificAttribute( QString & Attr, QString & Value );
+      virtual void saveSpecificAttribute( QTextStream & TS );
 };
 
 extern "C"

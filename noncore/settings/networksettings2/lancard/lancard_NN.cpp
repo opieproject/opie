@@ -8,6 +8,7 @@ static const char * LanCardNeeds[] =
  * Constructor, find all of the possible interfaces
  */
 LanCardNetNode::LanCardNetNode() : ANetNode() {
+    InstanceCount = 2;
 }
 
 /**
@@ -63,6 +64,18 @@ bool LanCardNetNode::generateDeviceDataForCommonFile(
 QString LanCardNetNode::genNic( long nr ) { 
       QString S; 
       return S.sprintf( "eth%ld", nr );
+}
+
+void LanCardNetNode::setSpecificAttribute( QString & A, QString & V ) {
+      if( A == "interfacecount" ) {
+        InstanceCount = V.toLong();
+      }
+}
+
+void LanCardNetNode::saveSpecificAttribute( QTextStream & TS) {
+      TS << "interfacecount="
+         << InstanceCount
+         << endl;
 }
 
 extern "C" {

@@ -33,10 +33,16 @@ public:
         SystemFile & , long DevNr );
 
     virtual long instanceCount( void )
-      { return 7; }
+      { return InstanceCount; }
     virtual QString genNic( long );
 
 private:
+
+      virtual void setSpecificAttribute( QString & Attr, QString & Value );
+      virtual void saveSpecificAttribute( QTextStream & TS );
+
+      // number of interfaces for this device
+      long InstanceCount;
 
 };
 
@@ -69,6 +75,8 @@ public:
 
 private:
 
+      virtual void setSpecificAttribute( QString & Attr, QString & Value );
+      virtual void saveSpecificAttribute( QTextStream & TS );
 };
 
 extern "C"

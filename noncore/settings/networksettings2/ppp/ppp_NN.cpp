@@ -55,6 +55,12 @@ QString PPPNetNode::genNic( long NicNr ) {
       return S.sprintf( "ppp%ld", NicNr ); 
 }
 
+void PPPNetNode::setSpecificAttribute( QString & , QString & ) {
+}
+
+void PPPNetNode::saveSpecificAttribute( QTextStream & ) {
+}
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new PPPNetNode() );

@@ -47,6 +47,12 @@ bool CableNetNode::generateDeviceDataForCommonFile(
       return 1;
 }
 
+void CableNetNode::setSpecificAttribute( QString & , QString &  ) {
+}
+
+void CableNetNode::saveSpecificAttribute( QTextStream & ) {
+}
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new CableNetNode() );

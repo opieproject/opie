@@ -49,6 +49,12 @@ bool ProfileNetNode::generateDeviceDataForCommonFile(
       return 1;
 }
 
+void ProfileNetNode::setSpecificAttribute( QString & , QString & ) {
+}
+
+void ProfileNetNode::saveSpecificAttribute( QTextStream & ) {
+}
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new ProfileNetNode() );

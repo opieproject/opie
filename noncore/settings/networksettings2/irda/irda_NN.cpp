@@ -47,6 +47,12 @@ bool IRDANetNode::generateDeviceDataForCommonFile(
       return 1;
 }
 
+void IRDANetNode::setSpecificAttribute( QString & , QString & ) {
+}
+
+void IRDANetNode::saveSpecificAttribute( QTextStream & ) {
+}
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new IRDANetNode() );

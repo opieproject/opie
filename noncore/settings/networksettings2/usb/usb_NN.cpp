@@ -64,6 +64,12 @@ QString USBNetNode::genNic( long ) {
     return QString( "usbf" ); 
 }
 
+void USBNetNode::setSpecificAttribute( QString & , QString & ) {
+}
+
+void USBNetNode::saveSpecificAttribute( QTextStream & ) {
+}
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new USBNetNode() );

@@ -9,6 +9,7 @@ static const char * WLanNeeds[] =
  * Constructor, find all of the possible interfaces
  */
 WLanNetNode::WLanNetNode() : ANetNode() {
+    InstanceCount = 2;
 }
 
 /**
@@ -63,6 +64,18 @@ bool WLanNetNode::generateDeviceDataForCommonFile(
 QString WLanNetNode::genNic( long nr ) { 
       QString S; 
       return S.sprintf( "wlan%ld", nr );
+}
+
+void WLanNetNode::setSpecificAttribute( QString & A, QString & V ) {
+      if( A == "interfacecount" ) {
+        InstanceCount = V.toLong();
+      }
+}
+
+void WLanNetNode::saveSpecificAttribute( QTextStream & TS ) {
+      TS << "interfacecount="
+         << InstanceCount
+         << endl;
 }
 
 extern "C" {

@@ -55,6 +55,10 @@ public :
       { return AllNodeTypes; }
     bool netNodeExists( const QString & X )
       { return AllNodeTypes.find(X)!=0; }
+    ANetNode * findNetNode( const QString & N )
+      { NetNode_t * NNT = AllNodeTypes.find(N);
+        return (NNT) ? NNT->NetNode : 0;
+      }
 
     Name2SystemFile_t & systemFiles( void )
       { return SystemFiles; }
@@ -64,14 +68,10 @@ public :
     ANetNodeInstance * createNodeInstance( const QString & S )
       { ANetNodeInstance * NNI = 0;
         NetNode_t * NNT = AllNodeTypes[S];
-        ANetNode * NN;
         if( ! NNT ) {
-          NN = FakeNode = 
-            ( FakeNode ) ?  FakeNode : new FakeNetNode();
-        } else {
-          NN = NNT->NetNode;
+          return 0;
         }
-        NNI = NN->createInstance();
+        NNI = NNT->NetNode->createInstance();
         NNI->initialize();
         return NNI;
       }

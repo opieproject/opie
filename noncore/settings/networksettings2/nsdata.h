@@ -38,6 +38,9 @@ private :
       bool IsModified;
       bool Force;
 
+      // collect strings in config file nobody wants
+      QStringList LeftOvers;
+
 };
 
 #endif

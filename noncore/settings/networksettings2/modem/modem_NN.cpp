@@ -48,6 +48,12 @@ bool ModemNetNode::generateDeviceDataForCommonFile(
       return 1;
 }
 
+void ModemNetNode::setSpecificAttribute( QString & , QString & ) {
+}
+
+void ModemNetNode::saveSpecificAttribute( QTextStream & ) {
+}
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new ModemNetNode() );

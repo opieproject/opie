@@ -16,6 +16,7 @@ static const char * BluetoothBNEPNeeds[] =
  * Constructor, find all of the possible interfaces
  */
 BluetoothBNEPNetNode::BluetoothBNEPNetNode() : ANetNode() {
+      InstanceCount = 7; // default
 }
 
 /**
@@ -64,9 +65,22 @@ QString BluetoothBNEPNetNode::genNic( long nr ) {
       return S.sprintf( "bnep%ld", nr );
 }
 
+
+void BluetoothBNEPNetNode::setSpecificAttribute( QString & A, QString & V ) {
+      if( A == "interfacecount" ) {
+        InstanceCount = V.toLong();
+      }
+}
+
+void BluetoothBNEPNetNode::saveSpecificAttribute( QTextStream & TS) {
+      TS << "interfacecount="
+         << InstanceCount
+         << endl;
+}
+
 //
 //
-// BLUETOOTH PAN/NAP node
+// BLUETOOTH RFCOMM
 //
 //
 
@@ -113,6 +127,12 @@ bool BluetoothRFCOMMNetNode::generateDeviceDataForCommonFile(
                                 SystemFile & , 
                                 long ) {
       return 0;
+}
+
+void BluetoothRFCOMMNetNode::setSpecificAttribute( QString &, QString & ) {
+}
+
+void BluetoothRFCOMMNetNode::saveSpecificAttribute( QTextStream & ) {
 }
 
 extern "C" {

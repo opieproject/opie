@@ -49,6 +49,12 @@ bool VPNNetNode::generateDeviceDataForCommonFile(
       return 1;
 }
 
+void VPNNetNode::setSpecificAttribute( QString & , QString & ) {
+}
+
+void VPNNetNode::saveSpecificAttribute( QTextStream & ) {
+}
+
 extern "C" {
 void create_plugin( QList<ANetNode> & PNN ) {
       PNN.append( new VPNNetNode() );

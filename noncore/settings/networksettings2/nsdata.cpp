@@ -31,8 +31,7 @@ NetworkSettingsData::~NetworkSettingsData( void ) {
 }
 
 void NetworkSettingsData::loadSettings( void ) {
-    QString S;
-    ANetNodeInstance* NNI;
+    QString Line, S;
     QString Attr, Value;
     long idx;
 
@@ -57,7 +56,7 @@ void NetworkSettingsData::loadSettings( void ) {
            <EMPTYLINE>
       */
       while( ! TS.atEnd() ) {
-        S = TS.readLine();
+        S = Line = TS.readLine();
 
         if ( S.isEmpty() || S[0] != '[' )
           continue;
@@ -73,20 +72,26 @@ void NetworkSettingsData::loadSettings( void ) {
           NodeCollection * NC = new NodeCollection( TS );
           NSResources->addConnection( NC );
         } else {
-          // load nodes
-          NNI = NSResources->createNodeInstance( S );
-          if( ! NNI ) {
-            printf( "SKIPPING %s\n", S.latin1() );
+          ANetNode * NN = 0;
+          ANetNodeInstance* NNI = 0;
+          if( S.startsWith( "nodetype " ) ) {
+            S = S.mid( 9, S.length()-9-1 );
+            fprintf( stderr, "Node %s\n", S.latin1() );
+            // try to find netnode
+            NN = NSResources->findNetNode( S );
+          } else {
+            // try to find instance
+            NNI = NSResources->createNodeInstance( S );
           }
 
           do {
             S = TS.readLine();
-            if( S.isEmpty() ) {
-              // empty line
-              break;
-            }
-            // node found ?
-            if( NNI ) {
+
+            if( NN || NNI ) {
+              if( S.isEmpty() ) {
+                // empty line
+                break;
+              }
               idx = S.find( '=' );
               if( idx > 0 ) {
                 Attr = S.left( idx );
@@ -102,10 +107,21 @@ void NetworkSettingsData::loadSettings( void ) {
               // dequote Attr
               Value = deQuote(Value);
 
-              // set the attribute
-              NNI->setAttribute( Attr, Value );
+              if( NN ) {
+                // set the attribute
+                NNI->setAttribute( Attr, Value );
+              } else {
+                // set the attribute
+                NNI->setAttribute( Attr, Value );
+              }
+            } else {
+              LeftOvers.append( Line );
+              // add empty line too as delimiter
+              if( S.isEmpty() ) {
+                // empty line
+                break;
+              }
             }
-
           } while( 1 );
           if( NNI ) {
             // loading from file -> exists
@@ -138,6 +154,25 @@ QString NetworkSettingsData::saveSettings( void ) {
     }
 
     QTextStream TS( &F );
+
+    // save leftovers
+    for ( QStringList::Iterator it = LeftOvers.begin(); 
+          it != LeftOvers.end(); ++it ) {
+      TS << (*it) << endl;
+    }
+
+    // save global configs
+    for( QDictIterator<NetNode_t> it( NSResources->netNodes() );
+        it.current();
+        ++it ) {
+        TS << "[nodetype "
+           << it.current()->NetNode->name()
+           << "]" 
+           << endl;
+
+        it.current()->NetNode->saveAttributes( TS );
+    }
+
     { Name2Connection_t & M = NSResources->connections();
       ANetNodeInstance * NNI;
 
