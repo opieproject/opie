@@ -37,8 +37,8 @@ InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, QWidget * parent, const
     	forceRemove->setChecked( true );
     if ( flags & FORCE_OVERWRITE )
     	forceOverwrite->setChecked( true );
-    if ( flags & MAKE_LINKS )
-    	makeLinks->setChecked( true );
+//    if ( flags & MAKE_LINKS )
+//    	makeLinks->setChecked( true );
 
   	showMaximized();
 
