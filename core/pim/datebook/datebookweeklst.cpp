@@ -62,6 +62,7 @@ void DateBookWeekLstHeader::setDate(const QDate &d) {
 			QString::number(stop.day()) + "." +
                                                 Calendar::nameOfMonth( stop.month()) +" ("+
 			tr("w")+":"+QString::number( week ) +")");
+	date = d; // bugfix: 0001126 - date has to be the selected date, not monday!
 	emit dateChanged(date);
 }
 
