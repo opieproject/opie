@@ -1,3 +1,6 @@
+can we please get a working serial connection for now? if that works
+i can test file transfers and stuff. -hash
+
 From a UNIX point of view we want to do something like minicom
 with a better GUI.
 It should feature some terminal emulation vt100/102, ansi,
