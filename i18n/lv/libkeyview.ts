@@ -3,7 +3,7 @@
     <name>Keyview</name>
     <message>
         <source>Keyview</source>
-        <translation type="unfinished"></translation>
+        <translation>Poguskats</translation>
     </message>
 </context>
 </TS>

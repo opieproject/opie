@@ -3,121 +3,128 @@
     <name>AccountWidget</name>
     <message>
         <source>Allows you to modify the selected account</source>
-        <translation type="unfinished"></translation>
+        <translation>Ļauj jums labot iezīmēto kontu</translation>
     </message>
     <message>
         <source>Create a new dialup connection
 to the Internet</source>
-        <translation type="unfinished"></translation>
+        <translation>Izveidot jaunu iezvana pieslēgumu
+internetam</translation>
     </message>
     <message>
         <source>Makes a copy of the selected account. All
 settings of the selected account are copied
 to a new account, that you can modify to fit your
 needs</source>
-        <translation type="unfinished"></translation>
+        <translation>Izveido kopiju no iezīmēta konta.  Visi
+iezīmētā konta uzstādījumi tiek kopēti uz
+jauno kontu, lai jūs varētu to pielabot
+savām vajadzībām</translation>
     </message>
     <message>
         <source>&lt;p&gt;Deletes the selected account
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Dzēš iezīmēto kontu
+
+&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Lietot uzmanīgi!&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
     <message>
         <source>No account selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav izvēlēts konts.</translation>
     </message>
     <message>
         <source>Are you sure you want to delete
 the account &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai tiešām dzēst kontu
+&quot;%1&quot;?</translation>
     </message>
     <message>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>Apstiprināt</translation>
     </message>
     <message>
         <source>New Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns Konts</translation>
     </message>
     <message>
         <source>Edit Account: </source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Kontu:</translation>
     </message>
     <message>
         <source>Dial</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvanīt</translation>
     </message>
     <message>
         <source>Edit Login Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Pieslēguma Skriptu</translation>
     </message>
     <message>
         <source>Authentication</source>
-        <translation type="unfinished"></translation>
+        <translation>Autentifikācija</translation>
     </message>
     <message>
         <source>IP Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Uzstādījumi</translation>
     </message>
     <message>
         <source>IP</source>
-        <translation type="unfinished"></translation>
+        <translation>IP</translation>
     </message>
     <message>
         <source>Gateway Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārtejas Konfigurācija</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārteja</translation>
     </message>
     <message>
         <source>DNS Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS Serveri</translation>
     </message>
     <message>
         <source>DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS</translation>
     </message>
     <message>
         <source>Execute Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Palaist Programmas</translation>
     </message>
     <message>
         <source>Execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Palaist</translation>
     </message>
     <message>
         <source>You must enter a unique account name</source>
-        <translation type="unfinished"></translation>
+        <translation>Jums jāievada unikāls konta vārds</translation>
     </message>
 </context>
 <context>
     <name>AuthWidget</name>
     <message>
         <source>Authentication: </source>
-        <translation type="unfinished"></translation>
+        <translation>Autentifikācija:</translation>
     </message>
     <message>
         <source>Script-based</source>
-        <translation type="unfinished"></translation>
+        <translation>Skriptu-bāzēta</translation>
     </message>
     <message>
         <source>PAP</source>
-        <translation type="unfinished"></translation>
+        <translation>PAP</translation>
     </message>
     <message>
         <source>Terminal-based</source>
-        <translation type="unfinished"></translation>
+        <translation>Termināl-bāzēta</translation>
     </message>
     <message>
         <source>CHAP</source>
-        <translation type="unfinished"></translation>
+        <translation>CHAP</translation>
     </message>
     <message>
         <source>PAP/CHAP</source>
-        <translation type="unfinished"></translation>
+        <translation>PAP/CHAP</translation>
     </message>
     <message>
         <source>&lt;p&gt;Specifies the method used to identify yourself to
@@ -133,23 +140,23 @@ whether PAP or CHAP is right, choose PAP/CHAP.</source>
     </message>
     <message>
         <source>Username: </source>
-        <translation type="unfinished"></translation>
+        <translation>Lietotājs:</translation>
     </message>
     <message>
         <source>Enter your username here...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet lietotāja vārdu...</translation>
     </message>
     <message>
         <source>Password: </source>
-        <translation type="unfinished"></translation>
+        <translation>Parole:</translation>
     </message>
     <message>
         <source>Enter your password here</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet paroli</translation>
     </message>
     <message>
         <source>Store password</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt paroli</translation>
     </message>
     <message>
         <source>&lt;p&gt;When this is turned on, your ISP password
@@ -164,37 +171,37 @@ gains access to this file!</source>
     </message>
     <message>
         <source>error</source>
-        <translation type="unfinished"></translation>
+        <translation>kļūda</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Login script has unbalanced loop Start/End&lt;qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Pieslēguma skriptam ir nebalansēts Starta/Beigu cikls&lt;qt&gt;</translation>
     </message>
 </context>
 <context>
     <name>ChooserWidget</name>
     <message>
         <source>&amp;Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Labot...</translation>
     </message>
     <message>
         <source>&amp;New...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jauns...</translation>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopēt</translation>
     </message>
     <message>
         <source>De&amp;lete</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dzēst</translation>
     </message>
 </context>
 <context>
     <name>DNSWidget</name>
     <message>
         <source>Domain name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Domaina vārds:</translation>
     </message>
     <message>
         <source>If you enter a domain name here, this domain
@@ -209,19 +216,19 @@ made to the domain name.</source>
     </message>
     <message>
         <source>Configuration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurācija:</translation>
     </message>
     <message>
         <source>Automatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Automātiski</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuāla</translation>
     </message>
     <message>
         <source>DNS IP address:</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS IP adrese:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Allows you to specify a new DNS server to be
@@ -235,7 +242,7 @@ the DNS server here and click on &lt;b&gt;Add&lt;/b&gt;</source>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot</translation>
     </message>
     <message>
         <source>Click this button to add the DNS server
@@ -317,15 +324,15 @@ the device &quot;%1&quot;?</source>
     </message>
     <message>
         <source>New Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauna Iekārta</translation>
     </message>
     <message>
         <source>Edit Device: </source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Iekārtu:</translation>
     </message>
     <message>
         <source>&amp;Device</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Iekārta</translation>
     </message>
     <message>
         <source>&amp;Modem</source>
