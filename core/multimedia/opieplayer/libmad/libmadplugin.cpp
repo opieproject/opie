@@ -244,7 +244,7 @@ int LibMadPlugin::http_open(const QString& path ) {
     int tcp_sock;
     char http_request[PATH_MAX];
     char filename[PATH_MAX];
-    char c;
+    //    char c;
     char *arg =strdup(path.latin1());
 
     QString errorMsg;
@@ -258,10 +258,13 @@ int LibMadPlugin::http_open(const QString& path ) {
     qDebug("Parse URL");
     port = 80;
     host = arg + strlen("http://");
-    if ((request = strchr(host, '/')) == NULL) {
-        qDebug("Url syntax 2error %s", host);
-        return (0);
-    }
+
+    // we need to think of something better than that
+    //if ((request = strchr(host, '/')) == NULL) {
+    //    qDebug("Url syntax 2error %s", host);
+    //    return (0);
+    // }
+
     *request++ = 0;
 
     if (strchr(host, ':') != NULL)  /* port is specified */
