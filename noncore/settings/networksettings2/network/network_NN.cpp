@@ -1,5 +1,6 @@
 #include <qpe/qpeapplication.h>
-#include <asdevice.h>
+#include <resources.h>
+#include <netnode.h>
 #include "network_NN.h"
 #include "network_NNI.h"
 
@@ -8,10 +9,18 @@ static const char * NetworkNeeds[] =
       0
     };
 
+static const char * NetworkProvides[] = 
+    { "connection",
+      0
+    };
+
 /**
  * Constructor, find all of the possible interfaces
  */
 NetworkNetNode::NetworkNetNode() : ANetNode(tr("IP Configuration")) {
+
+      NSResources->addSystemFile(
+        "interfaces", "/etc/network/interfaces", 1 );
 }
 
 /**
@@ -32,31 +41,34 @@ ANetNodeInstance * NetworkNetNode::createInstance( void ) {
       return new ANetwork( this );
 }
 
-bool NetworkNetNode::hasDataForFile( const QString & S ) {
-      return S == "interfaces";
+bool NetworkNetNode::hasDataForFile( SystemFile & S ) {
+      return S.name() == "interfaces";
 }
 
-short NetworkNetNode::generateFile( const QString & ID,
-                                   const QString & ,
-                                   QTextStream & TS, 
+short NetworkNetNode::generateFile( SystemFile & SF, 
                                    ANetNodeInstance * NNI,
                                    long DevNr ) {
                                    
+      if( DevNr < 0 ) {
+        // generate device specific but common part
+        return 1;
+      }
+
       QString NIC = NNI->runtime()->device()->netNode()->nodeClass()->genNic( DevNr );
 
-      if( ID == "interfaces" ) {
-        Log(("Generate entry for %s in %s\n", NIC.latin1(), ID.latin1() ));
+      if( SF.name() == "interfaces" ) {
+        Log(("Generate entry for %s in %s\n", NIC.latin1(), SF.name().latin1() ));
         // generate mapping stanza for this interface
-        TS << "# check if " 
+        SF << "# check if " 
            << NIC 
            << " can be brought UP" 
            << endl;
-        TS << "mapping " 
+        SF << "mapping " 
            << NIC 
            << endl;
-        TS << "  script "
+        SF << "  script "
            << QPEApplication::qpeDir()
-           << "/bin/networksettings2-request" 
+           << "bin/networksettings2-request" 
            << endl 
            << endl;
         return 0;
@@ -68,8 +80,8 @@ const char ** NetworkNetNode::needs( void ) {
       return NetworkNeeds;
 }
 
-const char * NetworkNetNode::provides( void ) {
-      return "connection";
+const char ** NetworkNetNode::provides( void ) {
+      return NetworkProvides;
 }
 
 void NetworkNetNode::setSpecificAttribute( QString & , QString & ) {

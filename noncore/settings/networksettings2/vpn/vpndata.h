@@ -2,7 +2,8 @@
 #define VPN_DATA_H
 
 #include <qstring.h>
-typedef struct VPNData {
+class VPNData {
+public :
       QString Device;
       QString LockFile;
       long Speed;
@@ -11,6 +12,6 @@ typedef struct VPNData {
       short StopBits;
       bool HardwareControl;
       bool SoftwareControl;
-} VPNData_t; 
+} ; 
 
 #endif

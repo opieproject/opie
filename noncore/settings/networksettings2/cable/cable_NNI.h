@@ -26,9 +26,7 @@ public :
       virtual void * data( void ) 
         { return (void *)&Data; }
 
-      short generateFileEmbedded( const QString & ID, 
-                                  const QString & Path,
-                                  QTextStream & TS,
+      short generateFileEmbedded( SystemFile & Sf,
                                   long DevNr );
 protected :
 
@@ -38,7 +36,7 @@ protected :
 private :
 
       CableEdit * GUI;
-      CableData_t Data;
+      CableData Data;
       CableRun * RT;
 
 };

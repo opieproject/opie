@@ -1,23 +1,20 @@
-#include <asconnection.h>
+#include <netnode.h>
 #include "networkdata.h"
 
-class NetworkRun  : public AsConnection {
+class NetworkRun  : public RuntimeInfo {
 
 public :
 
       NetworkRun( ANetNodeInstance * NNI, 
-                  NetworkData & Data ) : AsConnection( NNI )
+                  NetworkData & Data ) : RuntimeInfo( NNI )
         { }
 
-      virtual AsConnection * asConnection( void ) 
-        { return (AsConnection *)this; }
+      virtual RuntimeInfo * connection( void ) 
+        { return this; }
+
+      State_t detectState( void );
 
 protected :
 
-      void detectState( NodeCollection * );
-      bool setState( NodeCollection * ,Action_t A, bool );
-      bool canSetState( State_t , Action_t A );
-
-      bool handlesInterface( const QString & I );
-
+      QString setMyState( NodeCollection * , Action_t, bool );
 };

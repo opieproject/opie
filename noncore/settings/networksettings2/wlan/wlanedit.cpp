@@ -20,7 +20,7 @@ WLanEdit::WLanEdit( QWidget * Parent, ANetNodeInstance * TNNI ) :
       NNI = TNNI;
       Dev = NNI->runtime()->device();
       WE = 0;
-      if( ( II = Dev->assignedInterface() ) ) {
+      if( ( II = NNI->connection()->assignedInterface() ) ) {
         // show data
         WE = new WExtensions( II->Name );
 
@@ -61,7 +61,7 @@ QString WLanEdit::acceptable( void ) {
     return QString();
 }
 
-void WLanEdit::showData( WLanData_t & Data ) {
+void WLanEdit::showData( WLanData & Data ) {
     Mode_CB->setCurrentItem( Data.Mode );
     ESSID_LE->setText( Data.ESSID );
     NodeName_LE->setText( Data.NodeName );
@@ -76,7 +76,7 @@ void WLanEdit::showData( WLanData_t & Data ) {
     Key4_LE->setText( Data.Key[3] );
 }
 
-bool WLanEdit::commit( WLanData_t & Data ) {
+bool WLanEdit::commit( WLanData & Data ) {
     bool SM = 0;
 
     TXTM( Data.ESSID, ESSID_LE, SM );

@@ -4,7 +4,7 @@
 #include "wlanGUI.h"
 
 class ANetNodeInstance;
-class AsDevice;
+class RuntimeInfo;
 class WExtensions;
 
 class WLanEdit  : public WLanGUI {
@@ -14,8 +14,8 @@ public :
     WLanEdit( QWidget * parent, ANetNodeInstance * NNI  );
     ~WLanEdit( void );
     QString acceptable( void );
-    void showData( WLanData_t & Data );
-    bool commit( WLanData_t & Data );
+    void showData( WLanData & Data );
+    bool commit( WLanData & Data );
 
 public slots :
 
@@ -25,7 +25,7 @@ public slots :
 private :
 
     ANetNodeInstance * NNI;
-    AsDevice * Dev;
+    RuntimeInfo * Dev;
     QTimer RefreshTimer;
     WExtensions * WE;
 

@@ -3,6 +3,7 @@
 #include "activatevpn.h"
 #include "networksettings.h"
 
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 
 #include <opie2/oapplicationfactory.h>
@@ -24,6 +25,17 @@ OPIE_EXPORT_APP( OApplicationFactory<NetworkSettings> )
 #define ACT_PROMPT      3
 // used by interfaces to trigger VPN
 #define ACT_VPN         4
+// activate opietooth
+#define ACT_OT          5
+
+// include Opietooth GUI
+#include <opietooth2/Opietooth.h>
+using namespace Opietooth2;
+
+#include <qpushbutton.h>
+#include <qlayout.h>
+#include <qframe.h>
+#include <qlabel.h>
 
 int main( int argc, char * argv[] ) {
         int rv = 0;
@@ -50,6 +62,9 @@ int main( int argc, char * argv[] ) {
           } else if( strcmp( argv[i], "--triggervpn" ) == 0 ) {
             Action = ACT_VPN;
             rmv = 1;
+          } else if( strcmp( argv[i], "--opietooth" ) == 0 ) {
+            Action = ACT_OT;
+            rmv = 1;
           }
           if( rmv ) {
             memmove( argv+i, argv+i+rmv, 
@@ -64,6 +79,8 @@ int main( int argc, char * argv[] ) {
           GuiType = QApplication::Tty;
           Action = ACT_REQUEST;
           Log(("Request : %s\n", argv[1] ));
+        } else if( strstr( argv[0], "-opietooth" ) ) {
+          Action = ACT_OT;
         }
 
         // Start Qt
@@ -86,15 +103,12 @@ int main( int argc, char * argv[] ) {
           case ACT_REQUEST :
             { NetworkSettingsData NS;
               if( NS.canStart( argv[1] ) ) {
-                QString S;
-                S.sprintf( QPEApplication::qpeDir()+
-                           "bin/networksettings2" );
-                char * MyArgv[4];
-                MyArgv[0] = "networksettings2";
-                MyArgv[1] = "--prompt";
-                MyArgv[2] = argv[1];
-                MyArgv[3] = NULL;
-                NSResources->system().execAsUser( S, MyArgv );
+                QStringList S;
+                S << QPEApplication::qpeDir() + "/bin/networksettings2";
+                S << "networksettings2";
+                S << "--prompt";
+                S << argv[1];
+                NSResources->system().execAsUser( S );
                 Log(("FAILED %s-cNN-allowed\n", argv[1] ));
                 // if we come here , failed
                 printf( "%s-cNN-disallowed", argv[1] );
@@ -103,8 +117,9 @@ int main( int argc, char * argv[] ) {
             break;
           case ACT_REGEN :
             { NetworkSettingsData NS;
+              QString S= NS.generateSettings();
               // regen returns 0 if OK
-              rv = (NS.regenerate()) ? 1 : 0;
+              rv = ( S.isEmpty() ) ? 0 : 1;
             }
             break;
           case ACT_PROMPT :
@@ -125,8 +140,16 @@ int main( int argc, char * argv[] ) {
             }
             break;
           case ACT_GUI :
-            { QWidget * W = new NetworkSettings(0);
+          case ACT_OT :
+            { QWidget * W;
+
+              if( Action == ACT_OT ) {
+                W = new OTMain( 0 );
+              } else {
+                W = new NetworkSettings(0);
+              }
               TheApp->setMainWidget( W ); 
+
               W->show();
 #ifdef _WS_QWS_
               W->showMaximized();
@@ -134,6 +157,7 @@ int main( int argc, char * argv[] ) {
               W->resize( W->sizeHint() );
 #endif
               rv = TheApp->exec();
+
               delete W;
             }
             break;

@@ -1,28 +1,25 @@
-#include <asline.h>
+#include <netnode.h>
 #include "modemdata.h"
 
-class ModemRun  : public AsLine {
+class ModemRun  : public RuntimeInfo {
 
 public :
 
       ModemRun( ANetNodeInstance * NNI, 
-                ModemData & Data ) : AsLine ( NNI )
+                ModemData & Data ) : RuntimeInfo ( NNI )
         { }
 
-      virtual AsLine * asLine( void ) 
-        { return (AsLine *)this; }
+      virtual RuntimeInfo * line( void ) 
+        { return this; }
 
       virtual QString deviceFile( void )
         { return QString("/dev/modem"); }
 
+      State_t detectState( void )
+        { return Unknown;}
+
 protected :
 
-      void detectState( NodeCollection * )
-        { }
-
-      bool setState( NodeCollection *, Action_t, bool )
-        { return 0; }
-
-      bool canSetState( State_t, Action_t )
-        { return 0; }
+      QString setMyState( NodeCollection * , Action_t, bool )
+        { return QString(); }
 };

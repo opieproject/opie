@@ -2,7 +2,8 @@
 #define PROFILE_DATA_H
 
 #include <qstring.h>
-typedef struct ProfileData {
+class ProfileData {
+public :
       QString Description;
       // start up automatically
       bool Automatic;
@@ -11,6 +12,6 @@ typedef struct ProfileData {
       // Do not bring this connection up
       bool Disabled;
       bool TriggerVPN;
-} ProfileData_t; 
+} ; 
 
 #endif

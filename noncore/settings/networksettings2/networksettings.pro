@@ -11,9 +11,9 @@ SOURCES   = main.cpp \
             activateprofile.cpp \
             activatevpn.cpp \
             editconnection.cpp
-INCLUDEPATH += $(OPIEDIR)/include networksettings2/
-DEPENDPATH  += $(OPIEDIR)/include networksettings2/
-LIBS        += -lqpe -L$(OPIEDIR)/plugins/networksettings2 -lnetworksettings2 -lopiecore2
+INCLUDEPATH += $(OPIEDIR)/include networksettings2/ opietooth2/
+DEPENDPATH  += $(OPIEDIR)/include networksettings2/ opietooth2/
+LIBS        += -lqpe -L$(OPIEDIR)/plugins/networksettings2 -lnetworksettings2 -lopietooth2 -lopiecore2
 INTERFACES = networksettingsGUI.ui \
              editconnectionGUI.ui \
              activatevpnGUI.ui \

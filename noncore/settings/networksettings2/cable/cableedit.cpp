@@ -17,7 +17,7 @@ static long SpeedTable[] = {
 CableEdit::CableEdit( QWidget * Parent ) : CableGUI( Parent ) {
 }
 
-void CableEdit::showData( CableData_t & D ) {
+void CableEdit::showData( CableData & D ) {
       DeviceFile_LE->setText( D.Device );
       LockFile_LE->setText( D.LockFile );
       for( long * Run = SpeedTable; *Run != -1; *Run ++ ) {
@@ -40,7 +40,7 @@ QString CableEdit::acceptable( void ) {
     return QString();
 }
 
-bool CableEdit::commit( CableData_t & D ) {
+bool CableEdit::commit( CableData & D ) {
       bool SM = 0;
 
       TXTM( D.Device, DeviceFile_LE, SM );

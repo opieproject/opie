@@ -5,6 +5,11 @@ static const char * IRDANeeds[] =
     { 0
     };
 
+static const char * IRDAProvides[] = 
+    { "line",
+      0
+    };
+
 /**
  * Constructor, find all of the possible interfaces
  */
@@ -32,8 +37,8 @@ const char ** IRDANetNode::needs( void ) {
       return IRDANeeds;
 }
 
-const char * IRDANetNode::provides( void ) {
-      return "line";
+const char ** IRDANetNode::provides( void ) {
+      return IRDAProvides;
 }
 
 void IRDANetNode::setSpecificAttribute( QString & , QString & ) {

@@ -9,10 +9,10 @@ QString ModemEdit::acceptable( void ) {
     return QString();
 }
 
-bool ModemEdit::commit( ModemData_t & Data ) {
+bool ModemEdit::commit( ModemData & Data ) {
     return 0;
 }
 
-void ModemEdit::showData( ModemData_t & Data ) {
+void ModemEdit::showData( ModemData & Data ) {
 }
 

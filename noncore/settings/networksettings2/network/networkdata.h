@@ -3,7 +3,8 @@
 
 #include <qstring.h>
 #include <qstringlist.h>
-typedef struct NetworkData {
+class NetworkData {
+public :
       bool UseDHCP;
       QString Hostname;
       bool SendHostname;
@@ -17,6 +18,6 @@ typedef struct NetworkData {
       QStringList PostUp_SL;
       QStringList PreDown_SL;
       QStringList PostDown_SL;
-} NetworkData_t; 
+} ; 
 
 #endif

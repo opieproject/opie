@@ -3,6 +3,8 @@
 #include "PPPIPedit.h"
 #include "PPPDNSedit.h"
 #include "PPPAuthedit.h"
+#include "PPPRunedit.h"
+#include "PPPDialingedit.h"
 #include "PPPedit.h"
 
 PPPEdit::PPPEdit( QWidget * Parent ) : PPPGUI( Parent ){
@@ -10,9 +12,14 @@ PPPEdit::PPPEdit( QWidget * Parent ) : PPPGUI( Parent ){
     Auth = new PPPAuthEdit( Options_WS );
     IP = new PPPIPEdit( Options_WS );
     DNS = new PPPDNSEdit( Options_WS );
+    Run = new PPPRunEdit( Options_WS );
+    Dialing = new PPPDialingEdit( Options_WS );
+
     Options_WS->addWidget( Auth, 0 );
     Options_WS->addWidget( IP, 1 );
     Options_WS->addWidget( DNS, 2 );
+    Options_WS->addWidget( Run, 3 );
+    Options_WS->addWidget( Dialing, 4 );
 
     Options_WS->raiseWidget( 0 );
 }
@@ -29,7 +36,7 @@ QString PPPEdit::acceptable( void ) {
     return S;
 }
 
-bool PPPEdit::commit( PPPData_t & Data ) {
+bool PPPEdit::commit( PPPData & Data ) {
     bool SM ;
     SM = Auth->commit( Data );
     SM |= IP->commit( Data );
@@ -37,7 +44,7 @@ bool PPPEdit::commit( PPPData_t & Data ) {
     return SM;
 }
 
-void PPPEdit::showData( PPPData_t & Data ) {
+void PPPEdit::showData( PPPData & Data ) {
     Auth->showData( Data ) ;
     IP->showData( Data );
     DNS->showData( Data );

@@ -65,7 +65,7 @@ QString NetworkEdit::acceptable( void ) {
     return QString();
 }
 
-bool NetworkEdit::commit( NetworkData_t & Data ) {
+bool NetworkEdit::commit( NetworkData & Data ) {
     bool SM = 0;
     CBM( Data.UseDHCP, DHCP_CB, SM );
     TXTM( Data.IPAddress, IPAddress_LE, SM );
@@ -85,7 +85,7 @@ bool NetworkEdit::commit( NetworkData_t & Data ) {
     return SM;
 }
 
-void NetworkEdit::showData( NetworkData_t & Data ) {
+void NetworkEdit::showData( NetworkData & Data ) {
     DHCP_CB->setChecked( Data.UseDHCP );
     SendHostname_CB->setChecked( Data.SendHostname );
     Hostname_LE->setText( Data.Hostname );

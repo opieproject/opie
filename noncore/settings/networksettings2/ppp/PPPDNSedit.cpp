@@ -23,7 +23,7 @@ QString PPPDNSEdit::acceptable( void ) {
     return QString();
 }
 
-bool PPPDNSEdit::commit( PPPData_t & D ) {
+bool PPPDNSEdit::commit( PPPData & D ) {
     bool SM = 0;
 
     CBM( D.DNS.ServerAssigned, DNSServerAssigned_RB, SM );
@@ -75,7 +75,7 @@ bool PPPDNSEdit::commit( PPPData_t & D ) {
     return SM;
 }
 
-void PPPDNSEdit::showData( PPPData_t & D) {
+void PPPDNSEdit::showData( PPPData & D) {
 
     DNSServerAssigned_RB->setChecked( D.DNS.ServerAssigned );
 

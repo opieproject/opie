@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
+Version: $QPE_VERSION$EXTRAVERSION
 Depends: task-opie-minimal
 Description: Browse the file system
  The filebrowser for the Opie environment.

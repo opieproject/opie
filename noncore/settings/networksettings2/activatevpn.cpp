@@ -22,21 +22,15 @@ ActivateVPN::ActivateVPN( void ) :
                   ActivateVPNGUI( 0, 0, TRUE ), NSD() {
 
     QCheckListItem * CI;
-    printf( "%d\n", __LINE__ );
     VPN_LV->clear();
     VPN_LV->header()->hide();
-    printf( "%d\n", __LINE__ );
 
     for( QDictIterator<NodeCollection> it(NSResources->connections());
          it.current();
          ++it ) {
-    printf( "%d\n", __LINE__ );
       if( it.current()->triggeredBy( "vpn" ) ) {
-    printf( "%d\n", __LINE__ );
         CI = new MyCheckListItem( it.current(), VPN_LV );
-    printf( "%d\n", __LINE__ );
       }
-    printf( "%d\n", __LINE__ );
     }
 }
 

@@ -7,6 +7,6 @@ public :
 
     ModemEdit( QWidget * parent );
     QString acceptable( void );
-    bool commit( ModemData_t & Data );
-    void showData( ModemData_t & Data );
+    bool commit( ModemData & Data );
+    void showData( ModemData & Data );
 };

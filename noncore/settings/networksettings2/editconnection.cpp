@@ -1,3 +1,4 @@
+#include <opie2/odebug.h>
 #include <qlistview.h>
 #include <qwidgetstack.h>
 #include <qframe.h>
@@ -30,6 +31,13 @@ public:
       QCheckListItem( parent, S, T ) { }
     MyQCheckListItem( QListViewItem *parent, const QString & S, Type T ) :
       QCheckListItem( parent, S, T ) { }
+
+    MyQCheckListItem( QListView *parent, const QString & S ) :
+      QCheckListItem( parent, S, QCheckListItem::Controller ) { }
+    MyQCheckListItem( QCheckListItem *parent, const QString & S ) :
+      QCheckListItem( parent, S, QCheckListItem::Controller ) { }
+    MyQCheckListItem( QListViewItem *parent, const QString & S ) :
+      QCheckListItem( parent, S, QCheckListItem::Controller ) { }
 
     virtual void paintCell( QPainter *p, const QColorGroup &cg,
 			    int column, int width, int alignment );
@@ -116,48 +124,70 @@ NodeCollection * EditConnection::getTmpCollection( void ) {
       // update content
       QListViewItem * it = Nodes_LV->firstChild();
       ANetNode * NN;
-      // start iter
+
+      // start iter (if there is a collection)
+      /*
+
+          a node collection is sorted from the toplevel
+          node to the deepest node
+
+      */
       ANetNodeInstance * NNI = 
         (SelectedNodes) ? SelectedNodes->first() : 0 ;
 
       TmpCollection.setModified( 0 );
 
+      // the listview always starts with the toplevel 
+      // hierarchy.  This is always a controller item
       while ( it ) {
         NN = (*Mapping)[it];
         if( NN == 0 ) {
-          // child is controller -> has sub radio
-          // check if one radio is selected
+          // this item is a controller -> 
+          // has radio items as children -> 
+          // find selected one 
           it = it->firstChild();
           while( it ) {
             if( ((QCheckListItem *)it)->isOn() ) {
               // this radio is selected -> go deeper
-              if( SelectedNodes == 0 || 
-                  NNI == 0 ||
-                  it->text(0) != NNI->nodeClass()->name() ) {
-                // new item not in previous collection
-                ANetNodeInstance * NNI = (*Mapping)[it]->createInstance();
-                NNI->initialize();
-                // this node type not in collection
-                TmpCollection.append( NNI );
-                // master collection changed because new item in it
-                TmpCollection.setModified( 1 );
-                // no more valid items in old list
-                NNI = 0;
-              } else {
-                // already in list -> copy pointer
-                TmpCollection.append( NNI );
-                NNI = SelectedNodes->next();
-              }
-              it = it->firstChild();
-              // do not bother to check other items
               break;
             }
             it = it->nextSibling();
           }
-        } else {
-          // check children
-          it = it->firstChild();
+
+          if( ! it ) {
+            owarn  << "Radio not selected" << oendl;
+            TmpIsValid = 0;
+            return 0;
+          }
+
+          // it now contains selected radio
+          NN = (*Mapping)[it];
         }
+
+        // NN here contains the netnode of the
+        // current item -> this node needs to
+        // be stored in the collection
+        if( NNI == 0 ||
+            it->text(0) != NNI->nodeClass()->name() ) {
+          // new item not in previous collection
+          ANetNodeInstance * NNI = NN->createInstance();
+          NNI->initialize();
+          // this node type not in collection
+          TmpCollection.append( NNI );
+          // master collection changed because new item in it
+          TmpCollection.setModified( 1 );
+          // no more valid items in old list
+          NNI = 0;
+        } else {
+          // already in list -> copy pointer
+          TmpCollection.append( NNI );
+          NNI = SelectedNodes->next();
+        }
+
+        // go deeper to next level
+        // this level is can be a new controller
+        // or an item
+        it = it->firstChild();
       }
 
       TmpIsValid = 1;
@@ -187,12 +217,11 @@ void EditConnection::setConnection( NodeCollection * NC ) {
       TmpIsValid = 0;
 
       while ( it ) {
-        // listitem corresponds to netnode 
         NN = (*Mapping)[it];
         if( NN == 0 ) {
-          // child is controller -> has sub radio
-          QString Ctr = it->text(0);
-          // check if one radio is selected
+          // this item is a controller -> 
+          // has radio items as children -> 
+          // find selected one 
           it = it->firstChild();
           Found = 0;
           while( it ) {
@@ -209,6 +238,7 @@ void EditConnection::setConnection( NodeCollection * NC ) {
             }
             it = it->nextSibling();
           }
+
           if( ! Found ) {
             // this means that this level is NOT present in collection
             // probably INCOMPATIBEL collection OR Missing plugin
@@ -216,11 +246,31 @@ void EditConnection::setConnection( NodeCollection * NC ) {
                 0, 
                 tr( "Error presentig Connection" ),
                 tr( "<p>Old connection or missing plugin \"<i>%1</i>\"</p>" ).
-                    arg(Ctr) );
+                    arg(NNI->nodeClass()->name()) );
             return;
           }
+
+          // it now contains selected radio
+          NN = (*Mapping)[it];
         } else {
-          // automatic item -> check children
+          // automatic selection 
+          if( NNI == 0 ||  it->text(0) != NNI->nodeClass()->name() ) {
+            // should exist and be the same
+            if( NNI ) {
+              QMessageBox::warning(
+                  0, 
+                  tr( "Error presentig Connection" ),
+                  tr( "<p>Old connection or missing plugin \"<i>%1</i>\"</p>" ).
+                      arg(NNI->nodeClass()->name()) );
+            } else {
+              QMessageBox::warning(
+                  0, 
+                  tr( "Error presentig Connection" ),
+                  tr( "<p>Missing connection\"<i>%1</i>\"</p>" ).
+                      arg(it->text(0)) );
+            }
+            return;
+          }
           it = it->firstChild();
         }
       }
@@ -269,7 +319,7 @@ void EditConnection::buildFullTree( void ) {
           NSResources->netNode2Description( "fullsetup" ) );
     Nodes_LV->setSelected( TheTop, TRUE );
 
-    // find all Nodes that care toplevel nodes -> ie provide
+    // find all Nodes that are toplevel nodes -> ie provide
     // TCP/IP Connection
     for( QDictIterator<NetNode_t> Iter(NSResources->netNodes());
          Iter.current();
@@ -284,7 +334,9 @@ void EditConnection::buildFullTree( void ) {
       MyQCheckListItem * it = new MyQCheckListItem( TheTop, 
           NN->name(), 
           QCheckListItem::RadioButton );
-      it->setPixmap( 0, NSResources->getPixmap( "Devices/commprofile" ) );
+      it->setPixmap( 0, 
+                     NSResources->getPixmap( NN->pixmapName() )
+                   );
       // remember that this node maps to this listitem
       Mapping->insert( it, NN );
       buildSubTree( it, NN );
@@ -299,7 +351,7 @@ void EditConnection::buildSubTree( QListViewItem * it, ANetNode *NN ) {
       // this node has alternatives -> needs radio buttons
       it = new MyQCheckListItem( 
         it, 
-        NSResources->netNode2Name(NNL[0]->provides()),
+        NSResources->netNode2Name(NN->needs()[0]),
         QCheckListItem::Controller );
       it->setSelectable( FALSE );
     }
@@ -387,10 +439,11 @@ void EditConnection::SLOT_SelectNode( QListViewItem * it ) {
 
     if( ! NN ) {
       // intermediate node
-      NN = (*Mapping)[ it->firstChild() ];
+      NN = (*Mapping)[ it->parent() ];
       if( NN ) {
         // figure out type of this node -> produce mesage
-        Description_LBL->setText( NSResources->netNode2Description(NN->provides()) );
+        Description_LBL->setText( NSResources->netNode2Description(
+                                  NN->needs()[0]) );
       } else {
         Description_LBL->setText( "" );
       }
@@ -539,39 +592,40 @@ void EditConnection::enablePath( QListViewItem * it, bool pha ) {
 
 // do we have a complete configuration (all needs are provided for ?)
 bool EditConnection::haveCompleteConfig( QListViewItem * it ) {
-    if( it == 0 || ((QCheckListItem *)it)->isOn() ) {
-      // check children
-      it = (it) ? it->firstChild() : Nodes_LV->firstChild() ;
-      while ( it ) {
-        if( ((QCheckListItem *)it)->type() == 
-            QCheckListItem::Controller ) {
-          // child is controller -> has sub radio
-          // check if one radio is selected
-          it = it->firstChild();
-          while( it ) {
-            if( ((QCheckListItem *)it)->isOn() ) {
-              // this radio is selected -> go deeper
-              it = it->firstChild();
-              if( ! it ) {
-                // was deepest level
-                return 1;
-              }
-              // do not bother to check other items
-              break;
-            }
-            it = it->nextSibling();
+
+    // check if all below this level is selected
+    it = ( it ) ?it : Nodes_LV->firstChild();
+    ANetNode *NN;
+    bool Found;
+
+    while ( it ) {
+      NN = (*Mapping)[it];
+      if( NN == 0 ) {
+        // this item is a controller -> 
+        // has radio items as children -> 
+        // find selected one 
+        it = it->firstChild();
+        Found = 0;
+        while( it ) {
+          if( ((QCheckListItem *)it)->isOn() ) {
+            Found = 1;
+            // go deeper
+            it = it->firstChild();
+            break;
           }
-          if( ! it ) {
-            // no radio selected
-            return 0;
-          }
-        } else {
-          // check children
-          it = it->firstChild();
+          it = it->nextSibling();
         }
+
+        if( ! Found ) {
+          return 0; // no not complete -> a radio should have been chkd
+        }
+
+        // it now contains selected radio
+        NN = (*Mapping)[it];
+      } else {
+        // automatic selection 
+        it = it->firstChild();
       }
-      // deepest level -> all is still OK
-      return 1;
-    } // was not ON
-    return 0;
+    }
+    return 1;
 }

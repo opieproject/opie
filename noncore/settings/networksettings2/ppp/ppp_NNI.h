@@ -16,11 +16,7 @@ public :
       APPP( PPPNetNode * PNN );
 
       RuntimeInfo * runtime( void ) 
-        { if( RT == 0 ) {
-            RT = new PPPRun( this, Data );
-          }
-          return RT->runtimeInfo();
-        }
+        { return (RT) ? RT : (RT = new PPPRun( this, Data ) ); }
 
       QWidget * edit( QWidget * parent );
       QString acceptable( void );
@@ -29,10 +25,8 @@ public :
       virtual void * data( void ) 
         { return (void *)&Data; }
 
-      virtual QFile * openFile( const QString & ID );
-      short generateFile( const QString & ID, 
-                         const QString & Path,
-                         QTextStream & TS,
+      virtual bool openFile( SystemFile & Sf );
+      short generateFile( SystemFile & TS,
                          long DevNr );
 
 protected :

@@ -1,33 +1,31 @@
 #ifndef LANCARDRUN_H
 #define LANCARDRUN_H
 
-#include <asdevice.h>
+#include <netnode.h>
 #include <qregexp.h>
 #include "lancarddata.h"
 
-class LanCardRun  : public AsDevice {
+class LanCardRun  : public RuntimeInfo {
 
 public :
 
       LanCardRun( ANetNodeInstance * NNI, 
-                  LanCardData & D ) : AsDevice( NNI ),
-                                         Pat( "eth[0-9]" )
-        { Data = &D; }
+                  LanCardData & D ) : RuntimeInfo( NNI ),
+                                      Pat( "eth[0-9]" ) { 
+        Data = &D;
+      }
 
-      virtual AsDevice * device( void ) 
-        { return (AsDevice *)this; }
-
-      virtual AsDevice * asDevice( void ) 
-        { return (AsDevice *)this; }
-
-protected :
-
-      void detectState( NodeCollection * NC );
-      bool setState( NodeCollection * NC, Action_t A, bool Force );
-      bool canSetState( State_t Curr, Action_t A );
+      virtual RuntimeInfo * device( void ) 
+        { return this; }
 
       bool handlesInterface( const QString & I );
       bool handlesInterface( const InterfaceInfo & II );
+
+      State_t detectState( void );
+
+protected :
+
+      QString setMyState( NodeCollection * , Action_t, bool );
 
 private :
 

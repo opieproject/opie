@@ -16,6 +16,7 @@ SystemFile::SystemFile( const QString & N,
                         bool KDI ){
       Name = N;
       Path = P;
+      InAppend = 0;
       F = 0;
       // get template info
       { QString S;
@@ -63,37 +64,82 @@ SystemFile::SystemFile( const QString & N,
       KnowsDeviceInstances = KDI;
 }
 
+SystemFile::SystemFile( const QString & N, bool KDI ){
+      Name = N;
+      Path = "";
+      InAppend = 0;
+      F =0;
+      KnowsDeviceInstances = KDI;
+      hasPreSection = 
+        hasPostSection = 
+        hasPreNodeSection = 
+        hasPostNodeSection = 
+        hasPreDeviceSection = 
+        hasPostDeviceSection = 0;
+}
+
 SystemFile::~SystemFile( void ) {
-      if( F )
-        delete F;
+      close();
 }
 
 bool SystemFile::open( void ) {
-      if( F ) {
-        F->close();
-        delete F;
-      }
+      QString Prefix = getenv( "NS2OUTPUTTO" );
 
-      F = new QFile( Path + "bup" );
-      if( ! F->open( IO_WriteOnly ) ) {
-        return 0;
+      if( Prefix != "stderr" /* && Name != "interfaces" */ ) {
+        // generate files where the need to be
+        if( F ) {
+          F->close();
+          delete F;
+        }
+
+        F = new QFile( Prefix + Path + ((InAppend)?"":"bup") );
+        Log(( "Open systemfile %s\n", F->name().latin1() ));
+        if( ! F->open( ((InAppend)?IO_Append : 0 ) | IO_WriteOnly ) ) {
+          return 0;
+        }
+      } else {
+        if( ! F ) {
+          owarn << "!!!!!!!!!!!!!!!!!! " << oendl;
+          owarn << "!!!! TESTMODE !!!!" << oendl;
+          owarn << "!!!!!!!!!!!!!!!!!! " << oendl;
+          owarn << "!!!!" << oendl;
+          owarn << "!!!! GENERATE " << Path << oendl;
+          if( InAppend ) {
+            owarn << "!!!! In APPEND mode" << oendl;
+          }
+          owarn << "!!!!" << oendl;
+          owarn << "!!!!!!!!!!!!!!!!!!" << oendl;
+
+          F = new QFile();
+          F->open( IO_WriteOnly, stderr );
+        }
       }
       setDevice( F );
       return 1;
 }
 
 bool SystemFile::close( void ) {
-      if( ! F ) {
+      if( ! F || ! F->isOpen() ) {
         return 1 ;
       }
 
-      QString OldP = Path + "bup";
+      QString Prefix = getenv( "NS2OUTPUTTO" );
+
+      if( Prefix == "stderr" ) {
+        return 1;
+      }
+
+      QString OldP = Prefix + Path + "bup";
 
       F->close();
       delete F;
       F = 0;
 
-      return ( rename( OldP.latin1(), Path.latin1() ) >= 0 );
+      if( ! InAppend ) {
+        owarn << "Rename " << OldP << " to " << Path << oendl;
+        return ( rename( OldP.latin1(), Path.latin1() ) >= 0 );
+      } 
+      return 1;
 }
 
 bool SystemFile::preSection( void ) {

@@ -12,6 +12,11 @@ static const char * BluetoothBNEPNeeds[] =
     { 0
     };
 
+static const char * BluetoothBNEPProvides[] = 
+    { "device",
+      0
+    };
+
 /**
  * Constructor, find all of the possible interfaces
  */
@@ -42,8 +47,8 @@ const char ** BluetoothBNEPNetNode::needs( void ) {
       return BluetoothBNEPNeeds;
 }
 
-const char * BluetoothBNEPNetNode::provides( void ) {
-      return "device";
+const char ** BluetoothBNEPNetNode::provides( void ) {
+      return BluetoothBNEPProvides;
 }
 
 QString BluetoothBNEPNetNode::genNic( long nr ) { 

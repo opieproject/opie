@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>283</width>
-            <height>199</height>
+            <width>488</width>
+            <height>604</height>
         </rect>
     </property>
     <property stdset="1">
@@ -28,17 +28,38 @@
     <vbox>
         <property stdset="1">
             <name>margin</name>
-            <number>2</number>
+            <number>0</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>2</number>
+            <number>3</number>
         </property>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel5_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Selected devices with gprs capability</string>
+            </property>
+            <property stdset="1">
+                <name>alignment</name>
+                <set>WordBreak|AlignVCenter|AlignLeft</set>
+            </property>
+            <property>
+                <name>wordwrap</name>
+            </property>
+        </widget>
         <widget>
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Layout4</cstring>
+                <cstring>Layout8</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
             </property>
             <hbox>
                 <property stdset="1">
@@ -47,13 +68,91 @@
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>6</number>
+                    <number>3</number>
                 </property>
                 <widget>
                     <class>QLabel</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>TextLabel4</cstring>
+                        <cstring>TextLabel5</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Address</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Address_LE</cstring>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>FindDevice_TB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>...</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout7</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>3</number>
+                </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Channel</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QSpinBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Channel_SB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>minValue</name>
+                        <number>1</number>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel2_2</cstring>
                     </property>
                     <property stdset="1">
                         <name>text</name>
@@ -61,37 +160,37 @@
                     </property>
                 </widget>
                 <widget>
-                    <class>QLineEdit</class>
+                    <class>QLabel</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Name_LE</cstring>
+                        <cstring>Name_LBL</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>Box</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>indent</name>
+                        <number>0</number>
                     </property>
                 </widget>
             </hbox>
-        </widget>
-        <widget>
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>TextLabel3</cstring>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>Description</string>
-            </property>
-        </widget>
-        <widget>
-            <class>QMultiLineEdit</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>Description_LE</cstring>
-            </property>
         </widget>
         <widget>
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>Layout5</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
             </property>
             <hbox>
                 <property stdset="1">
@@ -100,32 +199,133 @@
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>6</number>
+                    <number>3</number>
                 </property>
                 <widget>
-                    <class>QCheckBox</class>
+                    <class>QLabel</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Automatic_CB</cstring>
+                        <cstring>TextLabel7</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Start automatically</string>
+                        <string>Addresses</string>
+                    </property>
+                    <property stdset="1">
+                        <name>alignment</name>
+                        <set>AlignVCenter|AlignLeft</set>
+                    </property>
+                    <property>
+                        <name>vAlign</name>
                     </property>
                 </widget>
                 <widget>
-                    <class>QCheckBox</class>
+                    <class>QToolButton</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Confirm_CB</cstring>
+                        <cstring>Add_TB</cstring>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Confirm before start</string>
+                        <string>...</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QToolButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Remove_TB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>...</string>
                     </property>
                 </widget>
             </hbox>
         </widget>
+        <widget>
+            <class>QListView</class>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Name</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>true</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>true</bool>
+                </property>
+            </column>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Channel</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>true</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>true</bool>
+                </property>
+            </column>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Address</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>true</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>true</bool>
+                </property>
+            </column>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Addresses_LV</cstring>
+            </property>
+            <property stdset="1">
+                <name>allColumnsShowFocus</name>
+                <bool>true</bool>
+            </property>
+        </widget>
     </vbox>
 </widget>
+<connections>
+    <connection>
+        <sender>Add_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>BluetoothRFCOMM_FRM</receiver>
+        <slot>SLOT_AddServer()</slot>
+    </connection>
+    <connection>
+        <sender>Remove_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>BluetoothRFCOMM_FRM</receiver>
+        <slot>SLOT_RemoveServer()</slot>
+    </connection>
+    <connection>
+        <sender>FindDevice_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>BluetoothRFCOMM_FRM</receiver>
+        <slot>SLOT_FindDevice()</slot>
+    </connection>
+    <slot access="public">SLOT_AddServer()</slot>
+    <slot access="public">SLOT_RemoveServer()</slot>
+    <slot access="public">SLOT_FindDevice()</slot>
+</connections>
 </UI>

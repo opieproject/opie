@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/settings
 Maintainer: Clement Seveillac <clement@nist.gov>
 Architecture: arm
-Version: 0.0.2.3
+Version: $QPE_VERSION$EXTRAVERSION
 Depends: libopiecore2, opie-security
 Description: Dummy plugin for opie-security authentication.
  This is a very simple authentication plugin (you just have

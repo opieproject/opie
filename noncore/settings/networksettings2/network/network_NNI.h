@@ -27,11 +27,9 @@ public :
       virtual void * data( void ) 
         { return (void *)&Data; }
 
-      virtual bool hasDataForFile( const QString & S );
-      virtual short generateFile( const QString & ID,
-                                 const QString & Path,
-                                 QTextStream &TS,
-                                 long DevNr );
+      virtual bool hasDataForFile( SystemFile & SF );
+      virtual short generateFile( SystemFile &TS,
+                                   long DevNr );
 
 protected :
 
@@ -41,7 +39,7 @@ protected :
 private :
 
       NetworkEdit * GUI;
-      NetworkData_t Data;
+      NetworkData Data;
       NetworkRun * RT;
 };
 

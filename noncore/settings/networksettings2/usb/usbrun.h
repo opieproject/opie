@@ -1,32 +1,31 @@
 #ifndef USBRUN_H
 #define USBRUN_H
 
-#include <asdevice.h>
+#include <netnode.h>
 #include <qregexp.h>
 #include "usbdata.h"
 
-class USBRun  : public AsDevice {
+class USBRun  : public RuntimeInfo {
 
 public :
 
       USBRun( ANetNodeInstance * NNI, 
               USBData & Data ) : 
-                AsDevice( NNI ),
-                Pat( "usb[0-9abcdef]" )
-        { }
+                RuntimeInfo( NNI ),
+                Pat( "usb[0-9abcdef]" ) {
+      }
 
-      virtual AsDevice * device( void ) 
-        { return (AsDevice *)this; }
-
-      virtual AsDevice * asDevice( void ) 
-        { return (AsDevice *)this; }
-protected :
-
-      void detectState( NodeCollection * );
-      bool setState( NodeCollection * , Action_t A, bool );
-      bool canSetState( State_t , Action_t A );
+      virtual RuntimeInfo * device( void ) 
+        { return this; }
 
       bool handlesInterface( const QString & I );
+      bool handlesInterface( InterfaceInfo * );
+
+      State_t detectState( void );
+
+protected :
+
+      QString setMyState( NodeCollection * , Action_t, bool );
 
 private :
 

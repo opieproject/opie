@@ -1,4 +1,4 @@
-Package: opie-networksettingsplugin2-ppp
+Package: opie-networksettings2plugin-ppp
 Files: plugins/networksettings2/libppp.so*
 Priority: optional
 Section: opie/settings

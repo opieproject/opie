@@ -49,25 +49,23 @@ void ACable::saveSpecificAttribute( QTextStream & TS ) {
       ((Data.SoftwareControl) ? "yes" : "no") << endl;
 }
 
-short ACable::generateFileEmbedded( const QString & ID,
-                                    const QString & Path,
-                                    QTextStream & TS,
+short ACable::generateFileEmbedded( SystemFile & SF,
                                     long DevNr ) {
       short rvl, rvd;
 
       rvl = 1;
-      if( ID == "peers" ) {
-        TS << Data.Device
+      if( SF.name() == "peers" ) {
+        SF << Data.Device
            << endl;
-        TS << Data.Speed
+        SF << Data.Speed
            << endl;
-        TS << "lock " 
+        SF << "lock " 
            << Data.LockFile
            << endl;
         rvl = 0;
       }
 
-      rvd = ANetNodeInstance::generateFileEmbedded( ID, Path, TS, DevNr );
+      rvd = ANetNodeInstance::generateFileEmbedded( SF, DevNr );
       return (rvd == 2 || rvl == 2 ) ? 2 :
              (rvd == 0 || rvl == 0 ) ? 0 : 1;
 }

@@ -14,15 +14,25 @@ public :
     SystemFile( const QString & Name, 
                 const QString & Path,
                 bool KnowsDevicesInstances );
+    SystemFile( const QString & Name, 
+                bool KnowsDevicesInstances = 0 );
     ~SystemFile( void );
 
+    void setName( const QString & S )
+      { Name = S; }
     const QString & name( void ) const
       { return Name; }
+
+    void setPath( const QString & S )
+      { Path = S; }
     const QString & path( void ) const
       { return Path; }
+
     bool  knowsDeviceInstances( void ) const
       { return KnowsDeviceInstances; }
 
+    void setAppendMode( bool A)
+      { InAppend = A; };
     bool open( void );
     bool close( void );
 
@@ -45,6 +55,7 @@ private :
     bool hasPreDeviceSection;
     bool hasPostDeviceSection;
     bool KnowsDeviceInstances;
+    bool InAppend;
 
 };
 #endif

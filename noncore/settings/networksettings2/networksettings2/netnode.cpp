@@ -2,7 +2,6 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 
-
 #include <qpainter.h>
 #include <qbitmap.h>
 #include <qtextstream.h>
@@ -11,10 +10,24 @@
 #include "resources.h"
 #include "netnode.h"
 
-#include "asdevice.h"
-#include "asline.h"
-#include "asconnection.h"
-#include "asfullsetup.h"
+static char * ActionName[] = {
+    "Disable",
+    "Enable",
+    "Activate",
+    "Deactivate",
+    "Up",
+    "Down"
+};
+
+static char * StateName[] = { 
+    "Unchecked", 
+    "Unknown", 
+    "Unavailable", 
+    "Disabled", 
+    "Off", 
+    "Available", 
+    "IsUp"
+};
 
 QString & deQuote( QString & X ) {
     if( X[0] == '"' ) {
@@ -65,6 +78,21 @@ void ANetNode::setAttribute( QString & Attr, QString & Value ){
     setSpecificAttribute( Attr, Value );
 }
 
+bool ANetNode::isToplevel( void ) {
+    const char ** P = provides();
+    while( *P ) {
+      if( strcmp( *P, "fullsetup") == 0 )
+        return 1;
+      P ++;
+    }
+    return 0;
+}
+
+bool ANetNode::openFile( SystemFile & SF, 
+                            ANetNodeInstance * NNI ) {
+    return (NNI ) ? NNI->openFile( SF ) : 0 ;
+}
+
 //
 //
 // ANETNODEINSTANCE
@@ -84,7 +112,7 @@ void ANetNodeInstance::initialize( void ) {
 }
 
 void ANetNodeInstance::setAttribute( QString & Attr, QString & Value ){
-    if( Attr == "name" ) {
+    if( Attr == "__name" ) {
       setName( Value.latin1() );
     } else {
       setSpecificAttribute( Attr, Value );
@@ -92,7 +120,7 @@ void ANetNodeInstance::setAttribute( QString & Attr, QString & Value ){
 }
 
 void ANetNodeInstance::saveAttributes( QTextStream & TS ) {
-    TS << "name=" << name() << endl;
+    TS << "__name=" << name() << endl;
     saveSpecificAttribute( TS );
 }
 
@@ -112,6 +140,7 @@ NodeCollection::NodeCollection( void ) : QList<ANetNodeInstance>() {
     Name="";
     IsNew = 1;
     CurrentState = Unchecked;
+    AssignedInterface = 0;
 }
 
 NodeCollection::NodeCollection( QTextStream & TS ) :
@@ -123,6 +152,7 @@ NodeCollection::NodeCollection( QTextStream & TS ) :
     Index = -1;
     Name="";
     IsNew = 0;
+    AssignedInterface = 0;
     CurrentState = Unchecked;
 
     do {
@@ -147,7 +177,6 @@ NodeCollection::NodeCollection( QTextStream & TS ) :
       if( A == "name" ) {
         Name = N;
       } else if( A == "number" ) {
-        Log(( "Profile number %s\n", N.latin1() ));
         setNumber( N.toLong() );
       } else if( A == "node" ) {
         ANetNodeInstance * NNI = NSResources->findNodeInstance( N );
@@ -159,6 +188,9 @@ NodeCollection::NodeCollection( QTextStream & TS ) :
         }
       }
     } while( 1 );
+
+    Log(( "Profile number %s : %d nodes\n", 
+          N.latin1(), count() ));
 }
 
 
@@ -167,7 +199,7 @@ NodeCollection::~NodeCollection( void ) {
 
 const QString & NodeCollection::description( void ) {
     ANetNodeInstance * NNI = getToplevel();
-    return (NNI) ? NNI->runtime()->asFullSetup()->description() : Name;
+    return (NNI) ? NNI->runtime()->description() : Name;
 }
 
 void NodeCollection::append( ANetNodeInstance * NNI ) {
@@ -254,7 +286,8 @@ QPixmap NodeCollection::devicePixmap( void ) {
     QPixmap pm = NSResources->getPixmap(
             getToplevel()->nextNode()->pixmapName()+"-large");
 
-    QPixmap Mini = NSResources->getPixmap( device()->netNode()->pixmapName() );
+    QPixmap Mini = NSResources->getPixmap( 
+            device()->netNode()->pixmapName() );
 
     if( pm.isNull() || Mini.isNull() )
 	return Resource::loadPixmap("Unknown");
@@ -280,11 +313,11 @@ QString NodeCollection::stateName( State_t S) {
       case Disabled :
         return qApp->translate( "networksettings2", "Disabled");
       case Off :
-        return qApp->translate( "networksettings2", "Off");
+        return qApp->translate( "networksettings2", "Inactive");
       case Available :
         return qApp->translate( "networksettings2", "Available");
       case IsUp :
-        return qApp->translate( "networksettings2", "IsUp");
+        return qApp->translate( "networksettings2", "Up");
       case Unchecked : /* FT */
       default :
         break;
@@ -300,38 +333,179 @@ void NodeCollection::reassign( void ) {
     }
 }
 
-bool NodeCollection::triggersVPN() {
-    return getToplevel()->runtime()->asFullSetup()->triggersVPN();
+const QStringList & NodeCollection::triggers() {
+    return getToplevel()->runtime()->triggers();
 }
 
-bool NodeCollection::hasDataForFile( const QString & S ) {
+bool NodeCollection::hasDataForFile( SystemFile & S ) {
     return ( firstWithDataForFile( S ) != 0 );
 }
 
-ANetNodeInstance * NodeCollection::firstWithDataForFile( const QString & S ) {
+ANetNodeInstance * NodeCollection::firstWithDataForFile( SystemFile & S ) {
     for( QListIterator<ANetNodeInstance> it(*this); 
          it.current();
          ++it ) {
       if( it.current()->hasDataForFile( S ) ) {
-        Log(( "Node %s has data for %s\n",
-            it.current()->nodeClass()->name(),
-            S.latin1() ));
         return it.current();
       }
     }
     return 0;
 }
 
-//
-//
-// RUNTIMEINFO
-//
-//
+State_t NodeCollection::state( bool Update ) {
+    State_t NodeState;
 
-InterfaceInfo * RuntimeInfo::assignedInterface( void ) { 
-    return netNode()->nextNode()->runtime()->assignedInterface(); 
+    if( CurrentState == Unchecked || Update ) {
+      // collect states of all nodes until with get the 'higest'
+      // state possible
+
+      Log(( "Connection %s state %s\n", 
+                Name.latin1(), StateName[CurrentState] ));
+
+      CurrentState = Unknown;
+      for( QListIterator<ANetNodeInstance> it(*this); 
+           it.current();
+           ++it ) {
+        Log(( "-> Detect %s\n", it.current()->name() ));
+        NodeState = it.current()->runtime()->detectState();
+        Log(( "   state %s\n", StateName[NodeState] ));
+
+        if( NodeState == Disabled ||
+            NodeState == IsUp ) {
+          // max
+          CurrentState = NodeState;
+          break;
+        }
+
+        if( NodeState > CurrentState ) {
+          // higher
+          CurrentState = NodeState;
+        }
+      }
+    }
+
+    return CurrentState;
 }
 
-AsDevice * RuntimeInfo::device( void ) { 
-    return netNode()->nextNode()->runtime()->device(); 
+QString NodeCollection::setState( Action_t A, bool Force ) {
+
+    QString msg;
+    Action_t Actions[10];
+    int NoOfActions = 0;
+
+    // get current state
+    state( Force );
+
+    switch( A ) {
+      case Disable :
+        if( CurrentState < Disabled ) {
+          // disabled
+          CurrentState = Disabled;
+          return QString();
+        }
+
+        if( CurrentState == IsUp ) {
+          Actions[NoOfActions++] = Down;
+          Actions[NoOfActions++] = Deactivate;
+        } else if( CurrentState == Available ) {
+          Actions[NoOfActions++] = Deactivate;
+        }
+        Actions[NoOfActions++] = Disable;
+        break;
+      case Enable :
+        // always possible -> detected state is new state
+        Actions[NoOfActions++] = Enable;
+        break;
+      case Activate :
+        if( ! Force ) {
+          if( CurrentState >= Available ) {
+            // already available
+            return QString();
+          }
+
+          if( CurrentState != Off ) {
+            return qApp->translate( "System",
+                                    "State should be off" );
+          }
+        }
+
+        Actions[NoOfActions++] = Activate;
+        break;
+      case Deactivate :
+        if( ! Force ) {
+          if( CurrentState < Off ) {
+            // already inactive
+            return QString();
+          }
+        }
+
+        if( CurrentState == IsUp ) {
+          Actions[NoOfActions++] = Down;
+        }
+        Actions[NoOfActions++] = Deactivate;
+        break;
+      case Up :
+        if( ! Force ) {
+          if( CurrentState == IsUp ) {
+            return QString();
+          }
+          if( CurrentState < Off ) {
+            return qApp->translate( "System",
+                                    "State should at least be off" );
+          }
+        }
+        if( CurrentState == Off ) {
+          Actions[NoOfActions++] = Activate;
+        }
+        Actions[NoOfActions++] = Up;
+        break;
+      case Down :
+        if( ! Force ) {
+          if( CurrentState < Available ) {
+            // OK
+            return QString();
+          }
+        }
+        Actions[NoOfActions++] = Down;
+        break;
+    }
+
+    // send actions to all nodes
+    Log(( "Action %s requires %d steps\n", 
+          ActionName[A], NoOfActions ));
+
+    for( int i = 0 ; i < NoOfActions; i ++ ) {
+      // setState recurses through the tree depth first
+      msg = getToplevel()->runtime()->setState( this, Actions[i], Force );
+      if( ! msg.isEmpty() ) {
+        return msg;
+      }
+    }
+    return QString();
+}
+
+//
+//
+// RuntimeInfo
+//
+//
+
+QString RuntimeInfo::setState( NodeCollection * NC, 
+                               Action_t A, 
+                               bool Force ) {
+    QString M;
+    RuntimeInfo * Deeper = nextNode();
+
+    if( Deeper ) {
+      // first go deeper
+      M = Deeper->setState( NC, A, Force );
+      if( ! M.isEmpty() ) 
+        return M;
+    }
+
+    // set my own state
+    Log (( "-> Act upon %s\n", netNode()->name() ));
+    M = setMyState( NC, A, Force );
+    Log (( "   result %s\n", M.latin1() ));
+    return M;
 }

@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 #include <qtextstream.h>
 #include <qdir.h>
@@ -6,7 +7,7 @@
 #include <qfileinfo.h>
 
 #include "nsdata.h"
-#include <asdevice.h>
+#include <netnode.h>
 #include <resources.h>
 
 static QString CfgFile;
@@ -27,8 +28,46 @@ NetworkSettingsData::NetworkSettingsData( void ) {
     Log(( "Cfg from %s\n", CfgFile.latin1() ));
 
     // load settings
-    IsModified = 0;
     loadSettings();
+
+    // assign interfaces by scanning /tmp/profile-%s.Up files
+    { QDir D( "/tmp" );
+      QFile * F = new QFile;
+      int profilenr;
+      QString interfacename;
+      QTextStream TS ( F );
+
+      QStringList SL = D.entryList( "profile-*.up");
+
+      Log(( "System reports %d interfaces. Found %d up\n", 
+          NSResources->system().interfaces().count(),
+          SL.count() ));
+
+      for ( QStringList::Iterator it = SL.begin(); 
+            it != SL.end(); 
+            ++it ) {
+        profilenr = atol( (*it).mid( 8 ).latin1() );
+        // read the interface store int 'up'
+        F->setName( D.path() + "/" + (*it) );
+        if( F->open( IO_ReadOnly ) ) {
+          NodeCollection * NC;
+          interfacename = TS.readLine();
+          F->close();
+
+          Log(( "Assign interface %s to Profile nr %d\n", 
+                interfacename.latin1(), profilenr ));
+
+          NC = NSResources->getConnection( profilenr );
+          if( NC ) {
+            NC->assignInterface( 
+                NSResources->system().findInterface( interfacename ) );
+          } else {
+            Log(( "Profile nr %d no longer defined\n", 
+                profilenr ));
+          }
+        }
+      }
+    }
 }
 
 // saving is done by caller
@@ -43,6 +82,8 @@ void NetworkSettingsData::loadSettings( void ) {
 
     QFile F( CfgFile );
     QTextStream TS( &F );
+
+    ForceModified = 0;
 
     do {
 
@@ -85,11 +126,9 @@ void NetworkSettingsData::loadSettings( void ) {
             S = deQuote(S);
             // try to find netnode
             NN = NSResources->findNetNode( S );
-            Log( ( "Node %s : %p\n", S.latin1(), NN ) );
           } else {
             // try to find instance
             NNI = NSResources->createNodeInstance( S );
-            Log( ( "NodeInstance %s : %p\n", S.latin1(), NNI  ));
           }
 
           if( NN == 0 && NNI == 0 ) {
@@ -138,8 +177,12 @@ void NetworkSettingsData::loadSettings( void ) {
 
           if( NNI ) {
             // loading from file -> exists
+            Log( ( "NodeInstance %s : %p\n", NNI->name(), NNI  ));
             NNI->setNew( FALSE );
             NSResources->addNodeInstance( NNI );
+          }
+          if( NN ) {
+            Log( ( "Node %s : %p\n", NN->name(), NN ) );
           }
         }
       }
@@ -220,7 +263,13 @@ QString NetworkSettingsData::saveSettings( void ) {
     // proper files AND system files regenerated
     //
 
-    setModified( 0 );
+
+    for( QDictIterator<NodeCollection> it(NSResources->connections());
+         it.current();
+         ++it ) {
+      it.current()->setModified( 0 );
+    }
+
     return ErrS;
 }
 
@@ -231,8 +280,7 @@ QString NetworkSettingsData::generateSettings( void ) {
     NodeCollection * NC;
     ANetNodeInstance * NNI;
     ANetNodeInstance * FirstWithData;
-    SystemFile * SF;
-    AsDevice * CurDev;
+    RuntimeInfo * CurDev;
     ANetNode * NN, * CurDevNN = 0;
     long NoOfDevs;
     long DevCtStart;
@@ -241,49 +289,109 @@ QString NetworkSettingsData::generateSettings( void ) {
     // regenerate system files
     Log( ( "Generating settings from %s\n", CfgFile.latin1()  ));
 
-    //
-    // generate files proper to each netnodeinstance
-    //
-    { Name2Instance_t & NNIs = NSResources->netNodeInstances();
+    for( QDictIterator<NetNode_t> nnit( NSResources->netNodes() );
+         nnit.current();
+         ++nnit ) {
+      { QStringList SL;
+        bool FirstItem = 1;
+        bool Generated = 0;
 
-      for( QDictIterator<ANetNodeInstance> NNIIt(NNIs);
-           NNIIt.current();
-           ++NNIIt ) {
-        // for all nodes find those that are modified
-        NNI = NNIIt.current();
+        CurDevNN = nnit.current()->NetNode;
+        SL = CurDevNN->properFiles();
 
-        { // get list of proper files for this nodeclass (if any)
-          QStringList * PF = NNI->nodeClass()->properFiles();
+        for ( QStringList::Iterator it = SL.begin(); 
+              it != SL.end(); 
+              ++it ) {
 
-          if( PF ) {
-            for ( QStringList::Iterator it = PF->begin(); 
-                  it != PF->end(); 
-                  ++it ) {
-              QFile * F = NNI->openFile( (*it) );
-              if( F ) {
-                QTextStream TS( F );
-                if( NNI->generateFile( (*it), F->name(), TS, -1 ) == 2 ) {
-                  // problem generating
+          Generated = 0;
+          FirstItem = 1;
+          // iterate over NNI's of this class
+          for( QDictIterator<ANetNodeInstance> nniit(
+                                 NSResources->netNodeInstances() );
+               nniit.current();
+               ++nniit ) {
+            if( nniit.current()->nodeClass() != CurDevNN )
+              // different class
+              continue;
+
+            // open proper file
+            { SystemFile SF( (*it) );
+
+              if( ! CurDevNN->openFile( SF, nniit.current()) ) {
+                // cannot open
+                S = qApp->translate( "NetworkSettings", 
+                  "<p>Cannot open proper file \"%1\" for node \"%2\"</p>" ).
+                    arg( (*it) ).arg( CurDevNN->name() );
+                return S;
+              }
+
+              if( ! SF.open() ) {
+                S = qApp->translate( "NetworkSettings", 
+                  "<p>Cannot open proper file \"%1\" for node \"%2\"</p>" ).
+                    arg( (*it) ).arg( CurDevNN->name() );
+                return S;
+              }
+
+              // preamble on first
+              if( FirstItem ) {
+                if( CurDevNN->generatePreamble( SF ) == 2 ) {
                   S = qApp->translate( "NetworkSettings", 
-                                       "<p>Cannot generate files proper to \"%1\"</p>" ).
-                          arg(NNI->nodeClass()->name()) ;
-                  delete F;
+                    "<p>Error in section \"preamble\" for proper file \"%1\" and node \"%2\"</p>" ).
+                      arg( (*it) ).
+                      arg( CurDevNN->name() );
                   return S;
                 }
-                delete F;
+              }
+              FirstItem = 0;
+              Generated = 1;
+
+              // item specific
+              if( nniit.current()->generateFile( SF, -1 ) == 2 ) {
+                S = qApp->translate( "NetworkSettings", 
+                  "<p>Error in section for node \"%1\" for proper file \"%2\" and node class \"%3\"</p>" ).
+                    arg( nniit.current()->name() ).
+                    arg( (*it) ).
+                    arg( CurDevNN->name() );
+                return S;
               }
             }
+          }
+
+          if( Generated ) {
+            SystemFile SF( (*it) );
+
+            if( CurDevNN->openFile( SF, 0 ) &&
+                ! SF.path().isEmpty()
+              ) {
+
+              if( ! SF.open() ) {
+                S = qApp->translate( "NetworkSettings", 
+                  "<p>Cannot open proper file \"%1\" for node \"%2\"</p>" ).
+                    arg( (*it) ).arg( CurDevNN->name() );
+                return S;
+              }
+
+              if( CurDevNN->generatePostamble( SF ) == 2 ) {
+                S = qApp->translate( "NetworkSettings", 
+                  "<p>Error in section \"postamble\" for proper file \"%1\" and node \"%2\"</p>" ).
+                    arg( (*it) ).
+                    arg( CurDevNN->name() );
+                return S;
+              }
+            } // no postamble
           }
         }
       }
     }
 
     //
-    // generate all system files
+    // generate all registered files
     //
     for( QDictIterator<SystemFile> sfit(SFM);
          sfit.current();
          ++sfit ) {
+      SystemFile * SF;
+
       SF = sfit.current();
 
       // reset all 
@@ -306,7 +414,7 @@ QString NetworkSettingsData::generateSettings( void ) {
         ncit.current()->setDone(0);
       }
 
-      Log( ( "Generating %s\n", SF->name().latin1() ));
+      Log( ( "Generating system file %s\n", SF->name().latin1() ));
 
       needToGenerate = 0;
 
@@ -318,7 +426,7 @@ QString NetworkSettingsData::generateSettings( void ) {
 
         NN = nnit.current()->NetNode;
 
-        if( NN->hasDataForFile( SF->name() ) ) {
+        if( NN->hasDataForFile( *SF ) ) {
           // netnode can have data
 
           // are there instances of this node ?
@@ -345,7 +453,12 @@ QString NetworkSettingsData::generateSettings( void ) {
       }
 
       // ok generate this system file
-      SF->open();
+      if( ! SF->open() ) {
+        S = qApp->translate( "NetworkSettings", 
+                             "<p>Cannot open system file \"%1\"</p>" ).
+            arg( SF->name() );
+        return S;
+      }
 
       // global presection for this system file
       if( ! SF->preSection() ) {
@@ -367,7 +480,7 @@ QString NetworkSettingsData::generateSettings( void ) {
           continue;
         }
 
-        if( ! NC->hasDataForFile( SF->name() ) ) {
+        if( ! NC->hasDataForFile( *SF ) ) {
           // no data
           continue;
         }
@@ -375,16 +488,12 @@ QString NetworkSettingsData::generateSettings( void ) {
         Log(("Generating %s for connection %s\n",
               SF->name().latin1(), NC->name().latin1() ));
         // find highest item that wants to write data to this file
-        FirstWithData = NC->firstWithDataForFile( SF->name() );
+        FirstWithData = NC->firstWithDataForFile( *SF );
 
         // find device on which this connection works
         CurDev = NC->device();
         // class of that node
         CurDevNN = CurDev->netNode()->nodeClass();
-
-        Log(( "%s is done %d\n",
-          FirstWithData->nodeClass()->name(),
-          FirstWithData->nodeClass()->done() ));
 
         if( ! FirstWithData->nodeClass()->done() ) {
           // generate fixed part 
@@ -396,7 +505,9 @@ QString NetworkSettingsData::generateSettings( void ) {
           }
 
           if( FirstWithData->nodeClass()->generateFile( 
-                        SF->name(), SF->path(), *SF, -1 ) == 2 ) {
+                                            *SF, 
+                                            FirstWithData,
+                                            -2 ) == 2 ) {
             S = qApp->translate( "NetworkSettings", 
               "<p>Error in section \"Common\" for file \"%1\" and node \"%2\"</p>" ).
                 arg( SF->name() ).
@@ -404,6 +515,9 @@ QString NetworkSettingsData::generateSettings( void ) {
             return S;
           }
           FirstWithData->nodeClass()->setDone( 1 );
+          Log(( "Systemfile %s for node instance %s is done\n",
+            SF->name().latin1(),
+            FirstWithData->name() ));
         }
 
         NoOfDevs = 0;
@@ -414,17 +528,13 @@ QString NetworkSettingsData::generateSettings( void ) {
           NoOfDevs = CurDevNN->instanceCount();
         }
 
-        Log(( "Node %s is done %d\n",
-          CurDev->netNode()->nodeClass()->name(),
-          CurDev->netNode()->nodeClass()->done() ));
-
         if( ! CurDev->netNode()->nodeClass()->done() ) {
           // first time this device is handled
           // generate common device specific part
           for( int i = DevCtStart; i < NoOfDevs ; i ++ ) {
 
             if( FirstWithData->nodeClass()->generateFile( 
-                SF->name(), SF->path(), *SF, CurDev->netNode(), i ) == 2 ) {
+                *SF, CurDev->netNode(), i ) == 2 ) {
               S = qApp->translate( "NetworkSettings", 
                 "<p>Error in section \"Device\" for file \"%1\" and node \"%2\"</p>" ).
                   arg( SF->name() ).
@@ -433,6 +543,11 @@ QString NetworkSettingsData::generateSettings( void ) {
             }
           }
           CurDev->netNode()->nodeClass()->setDone( 1 );
+
+          Log(( "Systemfile %s for Nodeclass %s is done\n",
+            SF->name().latin1(),
+            CurDev->netNode()->nodeClass()->name()
+            ));
         }
 
         // generate profile specific info
@@ -446,9 +561,11 @@ QString NetworkSettingsData::generateSettings( void ) {
             continue;
           }
 
-          Log(("Connection %s of same family\n", ncit2.current()->name().latin1() ));
+          Log(("Connection %s of family %s\n", 
+                ncit2.current()->name().latin1(), 
+                CurDev->name() ));
           // generate 
-          NNI = ncit2.current()->firstWithDataForFile( SF->name() );
+          NNI = ncit2.current()->firstWithDataForFile( *SF );
           for( int i = DevCtStart; i < NoOfDevs ; i ++ ) {
             if( ! SF->preNodeSection( NNI, i ) ) {
               S = qApp->translate( "NetworkSettings", 
@@ -458,8 +575,7 @@ QString NetworkSettingsData::generateSettings( void ) {
               return S;
             }
 
-            switch( NNI->generateFile( 
-                          SF->name(), SF->path(), *SF, i ) ) {
+            switch( NNI->generateFile( *SF, i ) ) {
               case 0 :
                 (*SF) << endl;
                 break;
@@ -569,9 +685,14 @@ bool NetworkSettingsData::canStart( const char * Interface ) {
           break;
         case Off :
           // try to UP the device
-          if( ! NC->setState( Activate ) ) {
-            // cannot bring device Online -> try other alters
-            break;
+          { QString S= NC->setState( Activate );
+            if( ! S.isEmpty() ) {
+              // could not bring device Online -> try other alters
+              Log(( "%s-c%d-disallowed : %s\n", 
+                  Interface, NC->number(), S.latin1() ));
+              break;
+            }
+            // interface assigned 
           }
           // FT
         case Available :
@@ -589,15 +710,16 @@ bool NetworkSettingsData::canStart( const char * Interface ) {
     return 0;
 }
 
-/*
-    Called by the system to regenerate config files
-*/
-
-bool NetworkSettingsData::regenerate( void ) {
-    QString S = generateSettings();
-    if( ! S.isEmpty() ) {
-      fprintf( stdout, "%s\n", S.latin1() );
+bool NetworkSettingsData::isModified( void ) {
+    if( ForceModified )
       return 1;
+
+    for( QDictIterator<NodeCollection> it(NSResources->connections());
+         it.current();
+         ++it ) {
+      if( it.current()->isModified() ) {
+        return 1;
+      }
     }
     return 0;
 }

@@ -20,7 +20,7 @@ public:
       virtual const QString nodeDescription() ;
       virtual ANetNodeInstance * createInstance( void );
       virtual const char ** needs( void );
-      virtual const char * provides( void );
+      virtual const char ** provides( void );
 
 private:
 

@@ -31,6 +31,15 @@
       Data = Wdg->currentItem(); \
     }
 
+#define STXT(a, b) \
+    b->setText( a );
+
+#define SCB(a, b) \
+    b->setChecked( a );
+
+#define SSB( Data,Wdg) \
+    Wdg->setValue( Data )
+
 extern bool validIP( const QString & S );
 
 #endif

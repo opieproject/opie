@@ -2,66 +2,26 @@
 
 #include "profilerun.h"
 
-void ProfileRun::detectState( NodeCollection * NC ) { 
+State_t ProfileRun::detectState( void ) { 
     if( Data->Disabled ) {
-      Log(( "%s disabled\n", NC->name().latin1() ));
-      NC->setCurrentState( Disabled );
-    } else {
-      Log(( "%s not disabled\n", NC->name().latin1() ));
-      // find next item in connection
-      // convert to runtime and ask to detect the state
-      netNode()->nextNode()->runtime()->detectState( NC );
-    }
+      return Disabled;
+    } 
+    return Unknown;
 }
 
-bool ProfileRun::setState( NodeCollection * NC, Action_t A, bool F ) { 
-    ANetNodeInstance * NNNI;
-
-    NNNI = netNode()->nextNode();
-    switch ( A ) {
-      case Enable :
-        if( NC->currentState() == Disabled ) {
-          Data->Disabled = 0;
-          NC->setCurrentState( Off ); // at least
-          // ... but request deeper 
-          NNNI->runtime()->detectState(NC);
-        }
-        return 1;
-      case Disable :
-        switch( NC->currentState() ) {
-          case IsUp :
-          case Available :
-            // bring Deactivate (will bring down) 
-            if( ! NNNI->runtime()->setState(NC, Deactivate) )
-              return 0;
-          default :
-            break;
-        }
+QString ProfileRun::setMyState( NodeCollection * NC, Action_t A, bool ) { 
+    owarn << "Profile " << Data->Disabled << oendl;
+    if( A == Disable ) {
+      if( ! Data->Disabled ) {
         Data->Disabled = 1;
-        NC->setCurrentState( Disabled );
-        return 1;
-      default :
-        break;
+        NC->setModified( 1 );
+      }
+    } else if( A == Enable ) {
+      if( Data->Disabled ) { 
+        Data->Disabled = 0;
+        NC->setModified( 1 );
+      }
     }
-    return NNNI->runtime()->setState(NC, A, F );
-}
 
-bool ProfileRun::canSetState( State_t Curr, Action_t A ) { 
-    RuntimeInfo * RI;
-    switch ( A ) {
-      case Enable :
-      case Disable :
-        // always possible
-        return 1;
-      default :
-        break;
-    }
-    RI = netNode()->nextNode()->runtime();
-    return ( Curr != Disabled ) ?
-        RI->canSetState(Curr, A) : 0;
-}
-
-bool ProfileRun::handlesInterface( const QString & S ) {
-    // donno -> pass deeper
-    return netNode()->nextNode()->runtime()->handlesInterface(S);
+    return QString();
 }

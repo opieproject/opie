@@ -1,9 +1,9 @@
-Package: opie-networksettingsplugin2-profile
+Package: opie-networksettings2plugin-profile
 Files: plugins/networksettings2/libprofile.so*
 Priority: optional
 Section: opie/settings
 Maintainer: Wim Delvaux <wimpie@handhelds.org>
 Architecture: arm
 Depends: opie-networksettings2, libopiecore2, libopienet2
-Description: Network settings profile plugin.
+Description: Network settings usage profile plugin.
 Version: $QPE_VERSION$EXTRAVERSION

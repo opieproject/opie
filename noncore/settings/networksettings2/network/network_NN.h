@@ -14,11 +14,9 @@ public:
       NetworkNetNode();
       virtual ~NetworkNetNode();
 
-      virtual bool hasDataForFile( const QString & S );
+      virtual bool hasDataForFile( SystemFile & S );
 
-      virtual short generateFile( const QString & ID,
-                                 const QString & Path,
-                                 QTextStream & TS, 
+      virtual short generateFile( SystemFile & TS, 
                                  ANetNodeInstance * NNI,
                                  long DevNr );
       virtual const QString pixmapName() 
@@ -27,7 +25,7 @@ public:
       virtual const QString nodeDescription() ;
       virtual ANetNodeInstance * createInstance( void );
       virtual const char ** needs( void );
-      virtual const char * provides( void );
+      virtual const char ** provides( void );
 
 private:
 

@@ -1,4 +1,4 @@
-Package: opie-networksettingsplugin2-network
+Package: opie-networksettings2plugin-network
 Files: plugins/networksettings2/libnetwork.so*
 Priority: optional
 Section: opie/settings

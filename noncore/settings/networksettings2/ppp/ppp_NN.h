@@ -17,15 +17,15 @@ public:
       virtual const QString pixmapName() 
         { return "Devices/ppp"; }
 
-      virtual bool hasDataForFile( const QString & S );
+      virtual bool hasDataForFile( SystemFile & S );
 
       virtual const QString nodeDescription() ;
       virtual ANetNodeInstance * createInstance( void );
       virtual const char ** needs( void );
-      virtual const char * provides( void );
+      virtual const char ** provides( void );
 
       virtual QString genNic( long NicNr );
-      virtual QStringList * properFiles( void );
+      virtual QStringList properFiles( void );
 
 private:
 

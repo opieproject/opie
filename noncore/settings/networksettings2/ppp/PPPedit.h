@@ -4,6 +4,8 @@
 class PPPAuthEdit;
 class PPPIPEdit;
 class PPPDNSEdit;
+class PPPRunEdit;
+class PPPDialingEdit;
 
 class PPPEdit  : public PPPGUI {
 
@@ -11,8 +13,8 @@ public :
 
     PPPEdit( QWidget * parent );
     QString acceptable( void );
-    bool commit( PPPData_t & Data );
-    void showData( PPPData_t & Data );
+    bool commit( PPPData & Data );
+    void showData( PPPData & Data );
 
 public slots :
 
@@ -20,8 +22,10 @@ public slots :
 
 private :
 
-    PPPAuthEdit * Auth;
-    PPPDNSEdit *  DNS;
-    PPPIPEdit *   IP;
+    PPPAuthEdit *     Auth;
+    PPPDNSEdit *      DNS;
+    PPPIPEdit *       IP;
+    PPPRunEdit *      Run;
+    PPPDialingEdit *  Dialing;
 
 };

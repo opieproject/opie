@@ -3,7 +3,10 @@
 
 #include <qstring.h>
 
-typedef struct CableData {
+class CableData {
+
+public :
+
       QString Device;
       QString LockFile;
       long Speed;
@@ -13,6 +16,6 @@ typedef struct CableData {
       bool HardwareControl;
       bool SoftwareControl;
 
-} CableData_t; 
+}; 
 
 #endif

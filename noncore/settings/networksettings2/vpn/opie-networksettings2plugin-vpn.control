@@ -1,4 +1,4 @@
-Package: opie-networksettingsplugin2-vpn
+Package: opie-networksettings2plugin-vpn
 Files: plugins/networksettings2/libvpn.so*
 Priority: optional
 Section: opie/settings

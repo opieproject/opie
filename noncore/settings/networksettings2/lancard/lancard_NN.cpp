@@ -2,7 +2,13 @@
 #include "lancard_NNI.h"
 
 static const char * LanCardNeeds[] = 
-    { 0 };
+    { 0
+    };
+
+static const char * LanCardProvides[] = 
+    { "device",
+      0
+    };
 
 /**
  * Constructor, find all of the possible interfaces
@@ -34,8 +40,8 @@ const char ** LanCardNetNode::needs( void ) {
       return LanCardNeeds;
 }
 
-const char * LanCardNetNode::provides( void ) {
-      return "device";
+const char ** LanCardNetNode::provides( void ) {
+      return LanCardProvides;
 }
 
 QString LanCardNetNode::genNic( long nr ) { 

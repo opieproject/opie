@@ -1,4 +1,4 @@
-Package: opie-networksettingsplugin2-modem
+Package: opie-networksettings2plugin-modem
 Files: plugins/networksettings2/libmodem.so*
 Priority: optional
 Section: opie/settings

@@ -5,7 +5,7 @@
 #include <qcheckbox.h>
 
 #include <GUIUtils.h>
-#include <asdevice.h>
+#include <netnode.h>
 #include <resources.h>
 
 #include "profileedit.h"
@@ -16,7 +16,7 @@ ProfileEdit::ProfileEdit( QWidget * Parent, ANetNodeInstance * TNNI ) :
 
       NNI = TNNI;
       Dev = NNI->runtime()->device();
-      if( ( II = Dev->assignedInterface() ) ) {
+      if( ( II = NNI->connection()->assignedInterface() ) ) {
 
         Refresh_CB->setEnabled( TRUE );
         Snd_GB->setEnabled( TRUE );
@@ -55,7 +55,7 @@ QString ProfileEdit::acceptable( void ) {
     return QString();
 }
 
-void ProfileEdit::showData( ProfileData_t & Data ) {
+void ProfileEdit::showData( ProfileData & Data ) {
     Description_LE->setText( Data.Description );
     Automatic_CB->setChecked( Data.Automatic );
     TriggersVPN_CB->setChecked( Data.TriggerVPN );
@@ -64,7 +64,7 @@ void ProfileEdit::showData( ProfileData_t & Data ) {
 }
 
 
-bool ProfileEdit::commit( ProfileData_t & Data ) {
+bool ProfileEdit::commit( ProfileData & Data ) {
     bool SM = 0;
     TXTM( Data.Description, Description_LE, SM );
 
@@ -77,7 +77,7 @@ bool ProfileEdit::commit( ProfileData_t & Data ) {
 }
 
 void ProfileEdit::SLOT_Refresh( void ) {
-    InterfaceInfo * II = Dev->assignedInterface();
+    InterfaceInfo * II = NNI->connection()->assignedInterface();
     NSResources->system().refreshStatistics( *II );
     RcvBytes_LBL->setText( II->RcvBytes );
     SndBytes_LBL->setText( II->SndBytes );

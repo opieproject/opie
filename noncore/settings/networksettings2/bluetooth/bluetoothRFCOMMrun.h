@@ -1,28 +1,33 @@
-#include <asline.h>
+#include <netnode.h>
 #include "bluetoothRFCOMMdata.h"
 
-class BluetoothRFCOMMRun  : public AsLine {
+#include <OTGateway.h>
+using namespace Opietooth2;
+
+class BluetoothRFCOMMRun  : public RuntimeInfo {
 
 public :
 
       BluetoothRFCOMMRun( ANetNodeInstance * NNI, 
-                          BluetoothRFCOMMData & Data ) : AsLine( NNI )
-        { }
+                          BluetoothRFCOMMData & D ) : RuntimeInfo( NNI )
+        {  DeviceNr = -1; Data = &D; OT = 0; }
+      virtual ~BluetoothRFCOMMRun( void );
 
-      virtual AsLine * asLine( void ) 
-        { return (AsLine *)this; }
+      virtual RuntimeInfo * line( void ) 
+        { return this; }
+      virtual QString deviceFile( void );
 
-      virtual QString deviceFile( void )
-        { return QString( "/dev/rfcomm..." ); }
+      State_t detectState( void );
 
 protected :
 
-      void detectState( NodeCollection * )
-        { }
+      QString setMyState( NodeCollection * , Action_t, bool );
 
-      bool setState( NodeCollection * , Action_t, bool )
-        { return 0; }
+private :
 
-      bool canSetState( State_t , Action_t )
-        { return 0; }
+      int deviceNrOfConnection( void );
+      RFCOMMChannel * getChannel( void );
+      BluetoothRFCOMMData * Data;
+      Opietooth2::OTGateway * OT;
+      int       DeviceNr; // cached from detection
 };

@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/games
 Maintainer: Mark Westcott <mark@houseoffish.org>
 Architecture: arm
-Version: 0.8-$SUB_VERSION
+Version: $QPE_VERSION$EXTRAVERSION
 Depends: task-opie-minimal
 License: GPL
 Description: The famous hit Bill game

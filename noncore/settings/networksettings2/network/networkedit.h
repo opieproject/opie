@@ -9,8 +9,8 @@ public :
 
     NetworkEdit( QWidget * parent );
     QString acceptable( void );
-    bool commit( NetworkData_t & Data );
-    void showData( NetworkData_t & Data );
+    bool commit( NetworkData & Data );
+    void showData( NetworkData & Data );
 
 public slots :
 

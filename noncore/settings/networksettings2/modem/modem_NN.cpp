@@ -2,7 +2,12 @@
 #include "modem_NNI.h"
 
 static const char * ModemNeeds[] = 
-    { "line"
+    { "line",
+      0
+    };
+static const char * ModemProvides[] = 
+    { "modem",
+      0
     };
 
 /**
@@ -33,8 +38,8 @@ const char ** ModemNetNode::needs( void ) {
       return ModemNeeds;
 }
 
-const char * ModemNetNode::provides( void ) {
-      return "line";
+const char ** ModemNetNode::provides( void ) {
+      return ModemProvides;
 }
 
 void ModemNetNode::setSpecificAttribute( QString & , QString & ) {

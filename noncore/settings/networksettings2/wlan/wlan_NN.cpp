@@ -1,3 +1,4 @@
+#include <resources.h>
 #include "wlan_NN.h"
 #include "wlan_NNI.h"
 
@@ -5,10 +6,17 @@ static const char * WLanNeeds[] =
     { 0
     };
 
+static const char * WLanProvides[] = 
+    { "device",
+      0
+    };
+
 /**
  * Constructor, find all of the possible interfaces
  */
 WLanNetNode::WLanNetNode() : ANetNode(tr("WLan Device")) {
+    NSResources->addSystemFile(
+      "interfaces", "/etc/network/interfaces", 1 );
     InstanceCount = 2;
 }
 
@@ -34,8 +42,8 @@ const char ** WLanNetNode::needs( void ) {
       return WLanNeeds;
 }
 
-const char * WLanNetNode::provides( void ) {
-      return "device";
+const char ** WLanNetNode::provides( void ) {
+      return WLanProvides;
 }
 
 QString WLanNetNode::genNic( long nr ) { 

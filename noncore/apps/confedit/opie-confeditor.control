@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
+Version: $QPE_VERSION$EXTRAVERSION
 Depends: task-opie-minimal, libopiecore2
 Description: An enditor for the ~/Settings/*.conf files

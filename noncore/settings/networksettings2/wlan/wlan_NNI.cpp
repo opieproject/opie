@@ -79,18 +79,16 @@ void AWLan::commit( void ) {
       setModified( 1 );
 }
 
-short AWLan::generateFileEmbedded( const QString & ID,
-                                  const QString & Path,
-                                  QTextStream & TS,
+short AWLan::generateFileEmbedded( SystemFile & SF,
                                   long DevNr ) {
 
       short rvl, rvd;
 
       rvl = 1;
 
-      if( ID == "interfaces" ) {
-        Log(("Generate WLanNNI for %s\n", ID.latin1() ));
-        TS << "  wireless_essid \""
+      if( SF.name() == "interfaces" ) {
+        Log(("Generate WLanNNI for %s\n", SF.name().latin1() ));
+        SF << "  wireless_essid \""
            << Data.ESSID
            << "\""
            << endl;
@@ -100,12 +98,12 @@ short AWLan::generateFileEmbedded( const QString & ID,
             char Buf[100];
             if( gethostname(Buf, sizeof(Buf) ) == 0 ) {
               Buf[99] = '\0'; // just to make sure
-              TS << "  wireless_nick "  
+              SF << "  wireless_nick "  
                  << Buf
                  << endl;
             }
           } else {
-            TS << "  wireless_nick \""  
+            SF << "  wireless_nick \""  
                << Data.NodeName
                << "\""
                << endl;
@@ -124,26 +122,26 @@ short AWLan::generateFileEmbedded( const QString & ID,
             break;
         }
 
-        TS << "  wireless_mode "
+        SF << "  wireless_mode "
            << M
            << endl;
         if( Data.Encrypted ) {
           for( int i = 0; i < 4; i ++ ) {
             if( ! Data.Key[i].isEmpty() ) {
-              TS << "  wireless_key"
+              SF << "  wireless_key"
                  << i
                  << " "
                  << Data.Key[i]
                  << endl;
             }
           }
-          TS << "  wireless_keymode "
+          SF << "  wireless_keymode "
              << ((Data.AcceptNonEncrypted) ? "open" : "restricted")
              << endl;
         }
         rvl = 0;
       }
-      rvd = ANetNodeInstance::generateFileEmbedded( ID, Path, TS, DevNr);
+      rvd = ANetNodeInstance::generateFileEmbedded( SF, DevNr);
 
       return (rvd == 2 || rvl == 2 ) ? 2 :
              (rvd == 0 || rvl == 0 ) ? 0 : 1;

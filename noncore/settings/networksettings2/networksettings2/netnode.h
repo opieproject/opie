@@ -10,6 +10,7 @@
 #include <time.h>
 
 #include <Utils.h>
+#include <system.h>
 
 // difference feature interfaces
 class AsDevice;
@@ -26,6 +27,7 @@ class NodeCollection;
 class QTextStream;
 class RuntimeInfo;
 class InterfaceInfo;
+class NSResources;
 
 extern QString & deQuote( QString & X );
 extern QString quote( QString X );
@@ -55,21 +57,21 @@ typedef enum State {
 } State_t;
 
 typedef enum Action {
-    // to make the device unavailable functionally
+    // to make the device unavailable functionally -> to disabled
     Disable = 0,
-    // to make the device available functionally
+    // to make the device available functionally -> to off
     Enable = 1,
-    // bring the hardware up
+    // bring the hardware up -> to Available
     Activate = 2,
-    // bring the hardware down
+    // bring the hardware down -> to off
     Deactivate = 3,
-    // bring the connection up
+    // bring the connection up -> to IsUp
     Up = 4,
-    // bring the connection down
+    // bring the connection down -> to Available
     Down = 5
 } Action_t;
 
-class ANetNode : public QObject{
+class ANetNode : public QObject {
 
 public:
 
@@ -90,8 +92,7 @@ public:
       { Done = D; }
 
     // does this Node provide a Connection
-    inline bool isToplevel( void )
-      { return strcmp( provides(), "fullsetup") == 0 ; }
+    bool isToplevel( void );
 
     // set the value of an attribute
     void setAttribute( QString & Attr, QString & Value ) ;
@@ -110,26 +111,37 @@ public:
     //
 
     // do instances of this noce class have data for this file
-    virtual bool hasDataForFile( const QString & ) 
+    virtual bool hasDataForFile( SystemFile & ) 
       { return 0; }
+
+    // open proper file SF identified by S
+    // this method is called by NS2.  
+    //
+    // overrule this ONLY if this proper file is a common file
+    // for all NNI of this node class and the data generated
+    // by each of the NNI needs to be put in one file
+    //
+    // if this is the case the file should be (re)opened in append
+    // return 0 if file cannot be opened
+    virtual bool openFile( SystemFile &SF,
+                             ANetNodeInstance * NNI );
 
     // generate instance independent stuff
     // 0 : data output, 1 no data, 2 error
-    virtual short generateFile( const QString & ,
-                               const QString & ,
-                               QTextStream & ,
-                               long ) 
+    virtual short generatePreamble( SystemFile & )
       { return 1; }
 
-    // generate instance dependent but profile common stuff
+    // generate instance independent stuff
     // 0 : data output, 1 no data, 2 error
-    virtual short generateFile( const QString & ,
-                               const QString & ,
-                               QTextStream & ,
+    virtual short generatePostamble( SystemFile & )
+      { return 1; }
+
+    // generate instance dependent but instance common stuff
+    // 0 : data output, 1 no data, 2 error
+    virtual short generateFile( SystemFile &,
                                ANetNodeInstance * ,
                                long ) 
       { return 1; }
-
 
     // generate NIC name based on instance nr
     // only relevant if node instances are devices
@@ -141,9 +153,10 @@ public:
     virtual long instanceCount( void ) 
       { return 1; }
 
-    // return list of files that are specific for this node class
-    virtual QStringList * properFiles( void )
-      { return 0; }
+    // return ID list for each file generated specially for
+    // this node type
+    virtual QStringList properFiles( void )
+      { return QStringList(); }
 
     //
     //
@@ -160,8 +173,10 @@ public:
     // create a blank instance of a net node
     virtual ANetNodeInstance * createInstance( void ) = 0;
 
-    // return feature this NetNode provides
-    virtual const char * provides( void ) = 0;
+    // return features this NetNode provides
+    virtual const char ** provides( void ) = 0;
+
+    // return features this NetNode needs
     virtual const char ** needs( void ) = 0;
 
 protected :
@@ -224,7 +239,7 @@ public:
     inline const QString pixmapName( void )
       { return NodeType->pixmapName(); }
 
-    inline const char * provides( void )
+    inline const char ** provides( void )
       { return NodeType->provides(); }
 
     inline const char ** needs( void )
@@ -244,32 +259,28 @@ public:
 
 
     // open proper file identified by S
-    virtual QFile * openFile( const QString & ) 
+    virtual bool openFile( SystemFile & ) 
       { return 0; }
 
     // check if this node (or sub nodes) have data for this file
-    virtual bool hasDataForFile( const QString & S ) 
+    virtual bool hasDataForFile( SystemFile & S ) 
       { return nodeClass()->hasDataForFile( S ); }
 
     // generate code specific for this node but embedded
     // in the section of the parent
     // this is called within the code of the parent
-    virtual short generateFileEmbedded( const QString & ID,
-                                       const QString & Path,
-                                       QTextStream & TS,
+    virtual short generateFileEmbedded( SystemFile & SF,
                                        long DevNr ) 
       { ANetNodeInstance * NNI = nextNode();
-        return (NNI) ? NNI->generateFileEmbedded( ID, Path, TS, DevNr ) : 1;
+        return (NNI) ? NNI->generateFileEmbedded( SF, DevNr ) : 1;
       }
 
     // generate code specific for this node 
     // (or find the first node that does)
-    virtual short generateFile( const QString & ID,
-                               const QString & Path,
-                               QTextStream & TS,
+    virtual short generateFile( SystemFile & SF,
                                long  DevNr ) 
       { ANetNodeInstance * NNI = nextNode();
-        return (NNI) ? NNI->generateFile( ID, Path, TS, DevNr ) : 1;
+        return (NNI) ? NNI->generateFile( SF, DevNr ) : 1;
       }
 
     // return true if this node instance is triggered by this trigger
@@ -323,33 +334,118 @@ public :
       RuntimeInfo( ANetNodeInstance * TheNNI )
         { NNI = TheNNI; }
 
-      // downcast implemented by specify runtime classes
-      virtual AsDevice * asDevice( void )
-        { return 0; }
-      virtual AsConnection * asConnection( void )
-        { return 0; }
-      virtual AsLine * asLine( void )
-        { return 0; }
-      virtual AsFullSetup * asFullSetup( void )
-        { return 0; }
+      //
+      //
+      // methods to be overloaded by connection capable
+      // runtimes
+      //
+      //
+
+
+      //
+      //
+      // methods to be overloaded by device capable
+      // runtimes
+      //
+      //
 
       // does this node handles this interface e.g.eth0
       // recurse deeper if this node cannot answer that question
-      virtual bool handlesInterface( const QString & )
-        { return 0; }
-      virtual bool handlesInterface( const InterfaceInfo & )
-        { return 0; }
-      virtual InterfaceInfo * assignedInterface( void );
-      virtual AsDevice * device( void );
+      virtual bool handlesInterface( const QString & S ) {
+        RuntimeInfo * RI = device();
+        if( RI ) {
+          return RI->handlesInterface( S );
+        }
+        return 0;
+      }
+      bool handlesInterface( const InterfaceInfo & I ) {
+        RuntimeInfo * RI = device();
+        if( RI ) {
+          return RI->handlesInterface( I );
+        }
+        return 0;
+      }
 
-      ANetNodeInstance * netNode() 
+      //
+      //
+      // methods to be overloaded by full setup capable
+      // runtimes
+      //
+      //
+
+      // return description for this full setup
+      virtual const QString & description( void ) {
+        return fullSetup()->description( );
+      }
+      // return triggers that should fire when this 
+      // setup is brought up
+      virtual const QStringList & triggers( void ) {
+        return fullSetup()->triggers( );
+      }
+
+      //
+      //
+      // methods to be overloaded by line capable
+      // runtimes
+      //
+      //
+
+      // return the device file ('/dev/xxx') created
+      // by this line capable runtime
+      virtual QString deviceFile( void ) {
+        RuntimeInfo * RI = line();
+        if( RI ) {
+          return RI->deviceFile();
+        }
+        return QString();
+      }
+
+      //
+      //
+      // runtime interface
+      //
+      //
+
+      // return the node that offers device capability
+      virtual RuntimeInfo * device( void )
+        { RuntimeInfo * RI = nextNode();
+          return (RI) ? RI->device() : 0;
+        }
+
+      // return the node that offers connection capability
+      virtual RuntimeInfo * connection( void )
+        { RuntimeInfo * RI = nextNode();
+          return (RI) ? RI->connection() : 0;
+        }
+
+      // return the node that offers line capability
+      virtual RuntimeInfo * line( void )
+        { RuntimeInfo * RI = nextNode();
+          return (RI) ? RI->line() : 0;
+        }
+
+      // return the node that offers full setup capability
+      virtual RuntimeInfo * fullSetup( void )
+        { RuntimeInfo * RI = nextNode();
+          return (RI) ? RI->fullSetup() : 0;
+        }
+
+      inline ANetNodeInstance * netNode() 
         { return NNI; }
-      NodeCollection * connection() 
+
+      inline NodeCollection * nodeCollection() 
         { return NNI->connection(); }
 
-      virtual void detectState( NodeCollection * NC ) = 0;
-      virtual bool setState( NodeCollection * NC, Action_t A, bool Force = 0 ) = 0;
-      virtual bool canSetState( State_t Curr, Action_t A ) = 0;
+      virtual State_t detectState( void ) = 0;
+      // public API to set the state
+      virtual QString setState( NodeCollection * NC, 
+                                Action_t A, 
+                                bool Force = 0 );
+
+      inline RuntimeInfo * nextNode( void ) {
+         ANetNodeInstance * NNI = netNode()->nextNode();
+         return (NNI) ? NNI->runtime() : 0;
+      }
 
 signals :
 
@@ -357,6 +453,11 @@ signals :
       void stateChanged( State_t S, ANetNodeInstance * NNI );
 
 protected :
+
+      // set state of this node (private API)
+      virtual QString setMyState( NodeCollection * NC, 
+                                Action_t A, 
+                                bool Force = 0 ) = 0;
 
       // connection this runtime info belongs to
       ANetNodeInstance * NNI;
@@ -392,28 +493,32 @@ public :
         return getToplevel()->runtime()->handlesInterface( S );
       }
 
+      // return the interface in the OS that is assigned to
+      // this device
       inline InterfaceInfo * assignedInterface( void ) {
-        return getToplevel()->runtime()->assignedInterface();
+        return AssignedInterface;
       }
 
-      inline AsDevice * device() {
+      // assign the interface to this device
+      inline void assignInterface( InterfaceInfo * NI ) {
+        if( NI == 0 ) {
+          if( AssignedInterface ) {
+            AssignedInterface->assignConnection( 0 );
+          }
+        }
+        AssignedInterface = NI;
+        if( AssignedInterface ) {
+          AssignedInterface->assignConnection( this );
+        }
+      }
+
+      inline RuntimeInfo * device() {
         return getToplevel()->runtime()->device();
       }
 
-      bool triggersVPN();
+      const QStringList & triggers();
 
-      inline State_t state( bool Update = 0 )
-        { Log(( "%s state %d(=%d?)\n", Name.latin1(), CurrentState,
-            Unchecked ));
-          if( CurrentState == Unchecked || Update ) {
-            Log(( "TL %p TLR %p\n", 
-                    getToplevel(),
-                    getToplevel()->runtime() ));
-            // need to get current state
-            getToplevel()->runtime()->detectState( this );
-          } 
-          return CurrentState;
-        }
+      State_t state( bool Update = 0 );
 
       // get the ixmap for this device
       QPixmap devicePixmap( void );
@@ -424,10 +529,7 @@ public :
       inline QString stateName( bool Update = 0 ) 
         { return stateName( state(Update) ); }
 
-      inline bool setState( Action_t A, bool Force =0 )
-        { return getToplevel()->runtime()->setState( this, A, Force ); }
-      inline bool canSetState( Action_t A )
-        { return getToplevel()->runtime()->canSetState( CurrentState, A ); }
+      QString setState( Action_t A, bool Force = 0 );
 
       void save( QTextStream & TS );
 
@@ -456,16 +558,14 @@ public :
 
       // return TRUE if this node can have data to be inserted in 
       // file identified by S
-      bool hasDataForFile( const QString & S );
-      ANetNodeInstance * firstWithDataForFile( const QString & S );
+      bool hasDataForFile( SystemFile & S );
+      ANetNodeInstance * firstWithDataForFile( SystemFile & );
 
       // generate items for this file -> toplevel call
-      short generateFile( const QString & FID,  // identification of file
-                         const QString & FName, // effective filename of file
-                         QTextStream & TS,  // stream to file
+      short generateFile( SystemFile & SF,
                          long DN // device number
                        )
-        { return getToplevel()->generateFile( FID, FName, TS, DN ); }
+        { return getToplevel()->generateFile( SF, DN ); }
 
       bool triggeredBy( const QString & Trigger )
         { return getToplevel()->triggeredBy( Trigger ); }
@@ -488,6 +588,8 @@ private :
       int Index;
       bool    IsModified;
       int Done;
+
+      InterfaceInfo * AssignedInterface;
 
 };
 

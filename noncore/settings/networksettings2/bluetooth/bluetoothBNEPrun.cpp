@@ -4,246 +4,158 @@
 #include <resources.h>
 #include "bluetoothBNEPrun.h"
 
-QDict<QString> *     BluetoothBNEPRun::PANConnections = 0;
-
-void BluetoothBNEPRun::detectState( NodeCollection * NC ) { 
-    // unavailable : no card found
-    // available : card found and assigned to us or free
-    // up : card found and assigned to us and up
-    QString S = QString( "/tmp/profile-%1.up" ).arg(NC->number());
-    System & Sys = NSResources->system();
-    InterfaceInfo * Run;
-    QFile F( S );
-
-    Log(("Detecting for %s\n", NC->name().latin1() ));
-
-    if( F.open( IO_ReadOnly ) ) {
-      // could open file -> read interface and assign
-      QString X;
-      bool accepted = 0;
-      QTextStream TS(&F);
-      X = TS.readLine();
-      Log(("%s exists : %s\n", S.latin1(), X.latin1() ));
-      // find interface
-      if( handlesInterface( X ) ) {
-
-        Log(("Handles interface %s, PANC %p\n", X.latin1(), PANConnections ));
-        if( PANConnections == 0 ) {
-          // load connections that are active
-          // format : bnep0 00:60:57:02:71:A2 PANU
-          FILE * OutputOfCmd = popen( "pand --show", "r" ) ;
-
-          PANConnections = new QDict<QString>;
-
-          if( OutputOfCmd ) {
-            char ch;
-            // could fork
-            // read all data
-            QString Line =  "";
-            while( 1 ) {
-              if( fread( &ch, 1, 1, OutputOfCmd ) < 1 ) {
-                // eof
-                break;
-              }
-              if( ch == '\n' || ch == '\r' ) {
-                if( ! Line.isEmpty() ) {
-                  if( Line.startsWith( "bnep" ) ) {
-                    QStringList SL = QStringList::split( " ", Line );
-                    Log(("Detected PAN %s %s\n", 
-                      SL[0].latin1(), SL[1].latin1() ));
-                    PANConnections->insert( SL[0], new QString(SL[1]));
-                  }
-                  Line="";
-                }
-              } else {
-                Line += ch;
-              }
-            }
-          }
-
-          pclose( OutputOfCmd );
-        }
-
-        // check if this runtime allows connection to node
-        if( ! Data.AllowAll ) {
-          // has addresses
-          for ( QStringList::Iterator it = Data.BDAddress.begin(); 
-                ! accepted && it != Data.BDAddress.end(); 
-                ++ it ) {
-            for( QDictIterator<QString> it2( *(PANConnections) );
-                 it2.current();
-                 ++ it2 ) {
-              if( X == it2.currentKey() &&
-                  (*it) == *(it2.current()) 
-                ) {
-                // found
-                Log(("%s accepts connections to %s\n",
-                    NC->name().latin1(),
-                    it2.current()->latin1() ));
-                accepted = 1;
-                break;
-              }
-            }
-          }
-        } else {
-          Log(("%s accepts any connection\n", NC->name().latin1() ));
-          // accept any
-          accepted = 1;
-        }
-
-        if( accepted ) {
-          // matches and is allowed for this node
-          for( QDictIterator<InterfaceInfo> It(Sys.interfaces());
-               It.current();
-               ++It ) {
-            Run = It.current();
-            if( X == Run->Name ) {
-              Log(("%s Assigned %p\n", NC->name().latin1(), Run ));
-              Run->assignNode( netNode() );
-              assignInterface( Run );
-              NC->setCurrentState( IsUp );
-              return;
-            }
-          }
-        }
-      }
-    } 
-
-    Log(("Assigned %p\n", assignedInterface() ));
-    if( ( Run = assignedInterface() ) ) {
-      // we already have an interface assigned -> still present ?
-      if( ! Run->IsUp ) {
-        // usb is still free -> keep assignment
-        NC->setCurrentState( Available );
-        return;
-      } // else interface is up but NOT us -> some other profile
-    }
-
-    // nothing (valid) assigned to us
-    assignInterface( 0 );
-
-    // find possible interface
-    for( QDictIterator<InterfaceInfo> It(Sys.interfaces());
-         It.current();
-         ++It ) {
-      Run = It.current();
-
-      Log(("%s %d %d=%d %d\n",
-          Run->Name.latin1(),
-          handlesInterface( Run->Name ),
-              Run->CardType, ARPHRD_ETHER,
-              ! Run->IsUp ));
-
-      if( handlesInterface( Run->Name ) &&
-          Run->CardType == ARPHRD_ETHER &&
-          ! Run->IsUp
-        ) {
-        Log(("Released(OFF)\n" ));
-        // proper type, and Not UP -> free
-        NC->setCurrentState( Off );
-        return;
-      }
-    }
-    // no free found
-    Log(("None available\n" ));
-
-    NC->setCurrentState( Unavailable );
+BluetoothBNEPRun::BluetoothBNEPRun( ANetNodeInstance * NNI, 
+                  BluetoothBNEPData & D ) : 
+                  RuntimeInfo( NNI ),
+                  Data( D),
+                  Pat( "bnep[0-6]" ) {
+    OT = 0;
 }
 
-bool BluetoothBNEPRun::setState( NodeCollection * NC, Action_t A, bool  ) {
-
-    // we only handle activate and deactivate
-    switch( A ) {
-      case Activate :
-        { 
-          if( NC->currentState() != Off ) {
-            return 0;
-          }
-          InterfaceInfo * N = getInterface();
-          if( ! N ) {
-            // no interface available
-            NC->setCurrentState( Unavailable );
-            return 0;
-          }
-          // because we were OFF the interface
-          // we get back is NOT assigned
-          N->assignNode( netNode() );
-          assignInterface( N );
-          Log(("Assing %p\n", N ));
-          NC->setCurrentState( Available );
-          return 1;
-        }
-      case Deactivate :
-        if( NC->currentState() == IsUp ) {
-          // bring down first
-          if( ! connection()->setState( Down ) )
-            // could not ...
-            return 0;
-        } else if( NC->currentState() != Available ) {
-          return 1;
-        }
-        assignedInterface()->assignNode( 0 ); // release
-        assignInterface( 0 );
-        NC->setCurrentState( Off );
-        return 1;
-      default :
-        // FT
-        break;
+BluetoothBNEPRun::~BluetoothBNEPRun( void ) {
+    if( OT ) {
+      OTGateway::releaseOTGateway();
     }
-    return 0;
 }
 
-bool BluetoothBNEPRun::canSetState( State_t Curr , Action_t A ) {
-    // we only handle up down activate and deactivate
-    switch( A ) {
-      case Activate :
-        { // at least available 
-          if( Curr == Available ) {
-            return 1;
-          }
-          // or we can make one available
-          InterfaceInfo * N = getInterface();
-          if( ! N || N->assignedNode() != 0 ) {
-            // non available or assigned
-            return 0;
-          }
-          return 1;
-        }
-      case Deactivate :
-        return ( Curr >= Available );
-      default :
-        // FT
-        break;
+State_t BluetoothBNEPRun::detectState( void ) { 
+
+    /*
+
+        need to detect 
+
+        1. for any PAN connection that is found if that
+           PAN is connected.
+
+           if it is connected it is not available (since we do
+           not manage IP settings and we are called to detect
+           the state we knwo that we do not have an UP connection)
+
+        2. if it not connected and we allow any connection we
+           are available or if that PAN connection is to a device
+           with a correct address
+
+        3. if it is not connected and the address do not match or
+           we do not accept any address, we are Unavailable but
+           not DOWN.  I.e a new connection could perhaps be created
+
+    */
+
+    if( ! OT ) {
+      OT = OTGateway::getOTGateway();
     }
-    return 0;
+
+    if( ! OT->isEnabled() ) {
+      return Unavailable;
+    }
+
+    // if there is a PAN connection that is UP but not
+    // yet configured (no ifup) the we are available
+    return ( hasFreePANConnection() ) ?  Available : Unknown;
 }
 
-// get interface that is free or assigned to us
-InterfaceInfo * BluetoothBNEPRun::getInterface( void ) {
+QString BluetoothBNEPRun::setMyState( NodeCollection * NC, Action_t A, bool  ) {
 
-    System & S = NSResources->system();
-    InterfaceInfo * best = 0, * Run;
-
-    for( QDictIterator<InterfaceInfo> It(S.interfaces());
-         It.current();
-         ++It ) {
-      Run = It.current();
-      if( handlesInterface( Run->Name ) &&
-          Run->CardType == ARPHRD_ETHER
-        ) {
-        // this is a bluetooth card
-        if( Run->assignedNode() == netNode() ) {
-          // assigned to us
-          return Run;
-        } else if( Run->assignedNode() == 0 ) {
-          // free
-          best = Run;
-        }
+    if( A == Activate ) {
+      if( hasFreePANConnection( 1 ) ) {
+        // we have now an assignedinterface
+      } else {
+        return QString("TODO : Start PAND");
       }
+
+      Log(( "Assigned interface" ));
+      NC->setCurrentState( Available );
+
+      return QString();
     }
-    return best; // can be 0
+
+    if( A == Deactivate ) {
+      // nothing to do 
+      NC->setCurrentState( Off );
+      return QString();
+    }
+    return QString();
 }
 
 bool BluetoothBNEPRun::handlesInterface( const QString & S ) {
     return Pat.match( S ) >= 0;
 }
+
+bool BluetoothBNEPRun::handlesInterface( InterfaceInfo * I ) {
+    return handlesInterface( I->Name );
+}
+
+bool BluetoothBNEPRun::hasFreePANConnection( bool Grab ) {
+
+    if( ! OT ) {
+      OT = OTGateway::getOTGateway();
+    }
+
+    // load PAN connections
+    OTPANConnection * C;
+    InterfaceInfo * Run;
+    InterfaceInfo * Candidate = 0; // reuse this interface
+    PANConnectionVector Conns = OT->getPANConnections();
+    System & Sys = NSResources->system();
+    bool IsValid;
+
+    for( unsigned int i = 0;
+         i < Conns.count();
+         i ++ ) {
+      C = Conns[i];
+
+      if( Data.AllowAll ) {
+        // we allow all
+        IsValid = 1;
+      } else {
+        // is this PAN connection connecting to a Peer
+        // we allow ?
+        IsValid = 0;
+        for ( QStringList::Iterator it = Data.BDAddress.begin(); 
+              it != Data.BDAddress.end(); 
+              ++ it ) {
+          if( C->ConnectedTo == (*it) ) {
+            // this is a connection we could accept
+            IsValid = 1;
+            break;
+          }
+        }
+      }
+
+      if( ! IsValid ) {
+        Log(("%s to %s not acceptable\n",
+            C->Device.latin1(),
+            C->ConnectedTo.latin1() ));
+        // don't bother checking this address
+        // it is not acceptable
+        continue;
+      }
+
+      // is this PAN connection available to us ?
+      Run = Sys.findInterface( C->Device );
+
+      if( Run && Run->IsUp ) {
+        // this PAN connection is up
+        Log(("%s acceptable but unavailable\n",
+            C->Device.latin1() ));
+        // find others
+        continue;
+      }
+
+      // we at least have a possible interface
+      if( ! Candidate ) {
+        Candidate = Run;
+      }
+    }
+
+    if( Candidate ) {
+      if ( Grab ) {
+        netNode()->connection()->assignInterface( Candidate );
+      }
+      return 1;
+    }
+
+    // no free PAN
+    return 0;
+}
+

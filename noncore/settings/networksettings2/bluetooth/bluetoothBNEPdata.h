@@ -3,9 +3,12 @@
 
 #include <qstringlist.h>
 
-typedef struct BluetoothBNEPData {
+class BluetoothBNEPData {
+
+public :
+
         bool        AllowAll;
         QStringList BDAddress;
-} BluetoothBNEPData_t; 
+}; 
 
 #endif

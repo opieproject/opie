@@ -1,5 +1,5 @@
 #include <system.h>
-#include <asdevice.h>
+#include <netnode.h>
 #include "networkedit.h"
 #include "network_NNI.h"
 #include "network_NN.h"
@@ -99,69 +99,67 @@ void ANetwork::commit( void ) {
       setModified( 1 );
 }
 
-bool ANetwork::hasDataForFile( const QString & S ) {
-      return S == "interfaces";
+bool ANetwork::hasDataForFile( SystemFile & S ) {
+      return S.name() == "interfaces";
 }
 
-short ANetwork::generateFile( const QString & ID,
-                             const QString & Path,
-                             QTextStream &TS,
-                             long DevNr 
-                           ) {
+short ANetwork::generateFile( SystemFile &SF,
+                               long DevNr 
+                             ) {
 
     short rvl, rvd ;
     QString NIC = runtime()->device()->netNode()->nodeClass()->genNic( DevNr );
 
     rvl = 1;
-    if( ID == "interfaces" ) {
-      Log(("Generate Network for %s\n", ID.latin1() ));
+    if( SF.name() == "interfaces" ) {
+      Log(("Generate Network for %s\n", SF.name().latin1() ));
       // we can safely call from here since device item is deeper
       if( Data.UseDHCP ) {
-        TS << "iface " 
+        SF << "iface " 
            << NIC 
            << "-c" 
            << connection()->number() 
            << "-allowed inet dhcp" 
            << endl;
-        TS << "  up echo \"" 
+        SF << "  up echo \"" 
            << NIC 
            << "\" > /tmp/profile-" 
            << connection()->number() 
            << ".up" 
            << endl;
         if( Data.SendHostname ) {
-          TS << "  hostname "
+          SF << "  hostname "
              << Data.Hostname  
              << endl;
         }
 
-        TS << "  down rm -f /tmp/profile-" 
+        SF << "  down rm -f /tmp/profile-" 
            << connection()->number() 
            << ".up"
            << endl;
       } else {
-        TS << "iface " 
+        SF << "iface " 
            << NIC << "-c" 
            << connection()->number() 
            << "-allowed inet static" 
            << endl;
-        TS << "  up echo \"" 
+        SF << "  up echo \"" 
            << NIC 
            << "\" > /tmp/profile-" 
            << connection()->number() 
            << ".up" 
            << endl;
-        TS << "  down rm -f /tmp/profile-" 
+        SF << "  down rm -f /tmp/profile-" 
            << connection()->number() 
            << ".up" 
            << endl;
-        TS << "  address   " 
+        SF << "  address   " 
            << Data.IPAddress 
            << endl;
-        TS << "  broadcast " 
+        SF << "  broadcast " 
            << Data.Broadcast 
            << endl;
-        TS << "  netmask   " 
+        SF << "  netmask   " 
            << Data.NetMask 
            << endl;
 
@@ -175,7 +173,7 @@ short ANetwork::generateFile( const QString & ID,
               arg( ipal[1].toShort() & nmal[1].toShort() ).
               arg( ipal[2].toShort() & nmal[2].toShort() ).
               arg( ipal[3].toShort() & nmal[3].toShort() );
-          TS << "  network   " 
+          SF << "  network   " 
              << NW 
              << endl;
         }
@@ -183,28 +181,28 @@ short ANetwork::generateFile( const QString & ID,
       for ( QStringList::Iterator it = Data.PreUp_SL.begin(); 
             it != Data.PreUp_SL.end(); 
             ++it ) {
-        TS << "  pre-up    " 
+        SF << "  pre-up    " 
            << (*it) 
            << endl;
       }
       for ( QStringList::Iterator it = Data.PostUp_SL.begin(); 
             it != Data.PostUp_SL.end(); 
             ++it ) {
-        TS << "  up        " 
+        SF << "  up        " 
            << (*it) 
            << endl;
       }
       for ( QStringList::Iterator it = Data.PreDown_SL.begin(); 
             it != Data.PreDown_SL.end(); 
             ++it ) {
-        TS << "  down      " 
+        SF << "  down      " 
            << (*it) 
            << endl;
       }
       for ( QStringList::Iterator it = Data.PostDown_SL.begin(); 
             it != Data.PostDown_SL.end(); 
             ++it ) {
-        TS << "  post-down " 
+        SF << "  post-down " 
            << (*it) 
            << endl;
       }
@@ -212,7 +210,7 @@ short ANetwork::generateFile( const QString & ID,
     }
 
     // embed other info in it
-    rvd = connection()->getToplevel()->generateFileEmbedded( ID, Path, TS, DevNr );
+    rvd = connection()->getToplevel()->generateFileEmbedded( SF, DevNr );
 
     return (rvd == 2 || rvl == 2 ) ? 2 :
            (rvd == 0 || rvl == 0 ) ? 0 : 1;

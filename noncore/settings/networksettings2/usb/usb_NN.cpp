@@ -1,3 +1,4 @@
+#include <resources.h>
 #include "usb_NN.h"
 #include "usb_NNI.h"
 
@@ -5,10 +6,17 @@ static const char * USBNeeds[] =
     { 0
     };
 
+static const char * USBProvides[] = 
+    { "device",
+      0
+    };
+
 /**
  * Constructor, find all of the possible interfaces
  */
 USBNetNode::USBNetNode() : ANetNode(tr("USB Cable Connect")) {
+    NSResources->addSystemFile(
+      "interfaces", "/etc/network/interfaces", 1 );
 }
 
 /**
@@ -33,8 +41,8 @@ const char ** USBNetNode::needs( void ) {
       return USBNeeds;
 }
 
-const char * USBNetNode::provides( void ) {
-      return "device";
+const char ** USBNetNode::provides( void ) {
+      return USBProvides;
 }
 
 QString USBNetNode::genNic( long ) {

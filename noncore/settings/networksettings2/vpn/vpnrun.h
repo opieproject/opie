@@ -1,32 +1,27 @@
 #ifndef VPNRUN_H
 #define VPNRUN_H
 
-#include <asconnection.h>
+#include <netnode.h>
 #include "vpndata.h"
 
-class VPNRun  : public AsConnection {
+class VPNRun  : public RuntimeInfo {
 
 public :
 
       VPNRun( ANetNodeInstance * NNI, VPNData & Data ) : 
-              AsConnection( NNI )
+              RuntimeInfo( NNI )
         { }
 
-      virtual AsConnection * asConnection( void ) 
-        { return (AsConnection *)this; }
+      virtual RuntimeInfo * connection( void ) 
+        { return this; }
+
+      State_t detectState( void )
+        { return Unknown; }
+
 protected :
 
-      void detectState( NodeCollection * )
-        { }
-
-      bool setState( NodeCollection *, Action_t, bool )
-        { return 0; }
-
-      bool canSetState( State_t, Action_t )
-        { return 0; }
-
-      bool handlesInterface( const QString & I );
-
+      QString setMyState( NodeCollection * , Action_t, bool )
+        { return QString(); }
 };
 
 #endif

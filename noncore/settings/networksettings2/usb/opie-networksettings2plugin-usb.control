@@ -1,4 +1,4 @@
-Package: opie-networksettingsplugin2-usb
+Package: opie-networksettings2plugin-usb
 Files: plugins/networksettings2/libusb.so*
 Priority: optional
 Section: opie/settings

@@ -1,4 +1,4 @@
-Package: opie-networksettingsplugin2-irda
+Package: opie-networksettings2plugin-irda
 Files: plugins/networksettings2/libirda.so*
 Priority: optional
 Section: opie/settings

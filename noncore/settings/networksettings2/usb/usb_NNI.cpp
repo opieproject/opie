@@ -32,9 +32,7 @@ void AUSB::commit( void ) {
     }
 }
 
-short AUSB::generateFileEmbedded( const QString & ID,
-                                 const QString & Path,
-                                 QTextStream & TS,
+short AUSB::generateFileEmbedded( SystemFile & SF,
                                  long DevNr ) {
  
     QString NIC = runtime()->device()->netNode()->nodeClass()->genNic( DevNr );
@@ -42,10 +40,10 @@ short AUSB::generateFileEmbedded( const QString & ID,
 
     rvl = 1;
 
-    if( ID == "interfaces" ) {
-      Log(("Generate USB for %s\n", ID.latin1() ));
+    if( SF.name() == "interfaces" ) {
+      Log(("Generate USB for %s\n", SF.name().latin1() ));
       // generate mapping stanza for this interface
-      TS << "  pre-up " 
+      SF << "  pre-up " 
          << QPEApplication::qpeDir() 
          << "bin/setmacaddress.sh " 
          << NIC 
@@ -53,7 +51,7 @@ short AUSB::generateFileEmbedded( const QString & ID,
          << endl;
       rvl = 0;
     }
-    rvd = ANetNodeInstance::generateFileEmbedded( ID, Path, TS, DevNr );
+    rvd = ANetNodeInstance::generateFileEmbedded(SF, DevNr );
 
     return (rvd == 2 || rvl == 2 ) ? 2 :
            (rvd == 0 || rvl == 0 ) ? 0 : 1;

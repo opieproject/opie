@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/applications
 Maintainer: Wenzel Jakob <root@wazlaf.de>
 Architecture: arm
-Depends: task-opie-minimal, libopie1
+Depends: task-opie-minimal, libopiecore2, libopieui2, libqtaux2
 Description: The Opie IRC client lets you chat on your favorite IRC server using your handheld computer
 Version: $QPE_VERSION$EXTRAVERSION

@@ -1,6 +1,6 @@
 Package: opie-buzzword
 Files: plugins/application/libbuzzword.so* bin/buzzword apps/Games/buzzword.desktop pics/buzzword/buzzword.png share/buzzword/buzzwords
-Version: 1.1-$SUB_VERSION
+Version: $QPE_VERSION$EXTRAVERSION
 Depends: task-opie-minimal,libopiecore2
 Priority: optional
 Section: opie/games

@@ -5,6 +5,10 @@ static const char * VPNNeeds[] =
     { 0
     };
 
+static const char * VPNProvides[] = 
+    { "connection",
+      0
+    };
 /**
  * Constructor, find all of the possible interfaces
  */
@@ -33,8 +37,8 @@ const char ** VPNNetNode::needs( void ) {
       return VPNNeeds;
 }
 
-const char * VPNNetNode::provides( void ) {
-      return "connection";
+const char ** VPNNetNode::provides( void ) {
+      return VPNProvides;
 }
 
 void VPNNetNode::setSpecificAttribute( QString & , QString & ) {

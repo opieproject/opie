@@ -37,7 +37,7 @@ QString PPPAuthEdit::acceptable( void ) {
     return QString();
 }
 
-bool PPPAuthEdit::commit( PPPData_t & D ) {
+bool PPPAuthEdit::commit( PPPData & D ) {
     bool SM = 0;
 
     if( ( D.Auth.Mode == 0 && ! Login_RB->isChecked() ) ||
@@ -70,7 +70,7 @@ bool PPPAuthEdit::commit( PPPData_t & D ) {
     return SM;
 }
 
-void PPPAuthEdit::showData( PPPData_t & D ) {
+void PPPAuthEdit::showData( PPPData & D ) {
 
     switch( D.Auth.Mode ) {
       case 0 : 

@@ -16,12 +16,21 @@ APPP::APPP( PPPNetNode * PNN ) : ANetNodeInstance( PNN ) {
     Data.Auth.Server = "*";
     Data.Auth.Secret = "";
 
-    Data.IP.IPAutomatic = 1;
-    Data.IP.IPAddress = "";
-    Data.IP.IPSubMask = "";
+    Data.IP.LocalAddress = "10.0.0.1";
+    Data.IP.RemoteAddress = "10.0.0.2";
+    Data.IP.LocalOverrule = 1;
+    Data.IP.RemoteOverrule = 1;
+
     Data.IP.GWAutomatic = 1;
     Data.IP.GWAddress = "";
     Data.IP.GWIsDefault = 1;
+    Data.IP.GWIfNotSet = 1;
+
+    Data.Run.PreConnect = "";
+    Data.Run.PostConnect = "";
+    Data.Run.PreDisconnect = "";
+    Data.Run.PostDisconnect = "";
+
     GUI = 0;
     RT = 0;
 
@@ -59,18 +68,32 @@ void APPP::setSpecificAttribute( QString & A, QString & V ) {
         Data.Auth.Secret = V;
       }
     } else if( A.startsWith( "ip" ) ) {
-      if( A == "ipautomatic" ) {
-        Data.IP.IPAutomatic = (V == "yes");
-      } else if( A == "gwautomatic" ) {
+      if( A == "iplocaloverrule" ) {
+        Data.IP.LocalOverrule = (V == "yes");
+      } else if( A == "ipremoteoverrule" ) {
+        Data.IP.RemoteOverrule = (V == "yes");
+      } else if( A == "ipgwautomatic" ) {
         Data.IP.GWAutomatic = (V == "yes");
-      } else if( A == "gwisdefault" ) {
+      } else if( A == "ipgwisdefault" ) {
         Data.IP.GWIsDefault = (V == "yes");
-      } else if( A == "ipaddress" ) {
-        Data.IP.IPAddress = V;
-      } else if( A == "ipsubmask" ) {
-        Data.IP.IPSubMask = V;
-      } else if( A == "gwaddress" ) {
+      } else if( A == "ipgwifnotset" ) {
+        Data.IP.GWIfNotSet = (V == "yes");
+      } else if( A == "iplocaladdress" ) {
+        Data.IP.LocalAddress = V;
+      } else if( A == "ipremoteaddress" ) {
+        Data.IP.RemoteAddress = V;
+      } else if( A == "ipgwaddress" ) {
         Data.IP.GWAddress = V;
+      }
+    } else if( A.startsWith( "run" ) ) {
+      if( A == "runpreconnect" ) {
+        Data.Run.PreConnect = V;
+      } else if( A == "runpostconnect" ) {
+        Data.Run.PostConnect = V;
+      } else if( A == "runpredisconnect" ) {
+        Data.Run.PreDisconnect = V;
+      } else if( A == "runpostdisconnect" ) {
+        Data.Run.PostDisconnect = V;
       }
     }
 }
@@ -91,12 +114,20 @@ void APPP::saveSpecificAttribute( QTextStream & TS ) {
     TS << "authclient=" << Data.Auth.Client << endl;
     TS << "authserver=" << Data.Auth.Server << endl;
     TS << "authsecret=" << quote( Data.Auth.Secret ) << endl;
-    TS << "ipautomatic=" << ( ( Data.IP.IPAutomatic ) ? "yes" : "no" ) << endl;
-    TS << "gwautomatic=" << ( ( Data.IP.GWAutomatic ) ? "yes" : "no" ) << endl;
-    TS << "gwisdefault=" << ( ( Data.IP.GWIsDefault ) ? "yes" : "no" ) << endl;
-    TS << "ipaddress=" << Data.IP.IPAddress << endl;
-    TS << "ipsubmask=" << Data.IP.IPSubMask << endl;
-    TS << "gwaddress=" << Data.IP.GWAddress << endl;
+    TS << "ipgwautomatic=" << ( ( Data.IP.GWAutomatic ) ? "yes" : "no" ) << endl;
+    TS << "ipgwisdefault=" << ( ( Data.IP.GWIsDefault ) ? "yes" : "no" ) << endl;
+    TS << "ipgwifnotset=" << ( ( Data.IP.GWIfNotSet ) ? "yes" : "no" ) << endl;
+    TS << "iplocaloverrule=" << ( ( Data.IP.LocalOverrule ) ? "yes" : "no" ) << endl;
+    TS << "ipremoteoverrule=" << ( ( Data.IP.RemoteOverrule ) ? "yes" : "no" ) << endl;
+    TS << "iplocaladdress=" << Data.IP.LocalAddress << endl;
+    TS << "ipremoteaddress=" << Data.IP.RemoteAddress << endl;
+    TS << "ipgwaddress=" << Data.IP.GWAddress << endl;
+
+    TS << "runpreconnect=" << Data.Run.PreConnect << endl;
+    TS << "runpostconnect=" << Data.Run.PostConnect << endl;
+    TS << "runpredisconnect=" << Data.Run.PreDisconnect << endl;
+    TS << "runpostdisconnect=" << Data.Run.PostDisconnect << endl;
+
 }
 
 QWidget * APPP::edit( QWidget * parent ) {
@@ -115,51 +146,33 @@ void APPP::commit( void ) {
     }
 }
 
-QFile * APPP::openFile( const QString & ID ) {
-      QFile * F = 0;
-      QString S;
-
-      if( ID == "peers" ) {
-        S = removeSpaces( QString("/tmp/") + connection()->name() );
-
-        F = new QFile( S );
-
-        if( ! F->open( IO_WriteOnly ) ) {
-          Log(("Cannot open file %s\n", S.latin1() ));
-          return 0;
-        }
-      } else if ( ID == "chatscripts" ) {
-        S = removeSpaces( QString("/tmp/") + connection()->name() + ".chat" );
-        F = new QFile( S );
-
-        if( ! F->open( IO_WriteOnly ) ) {
-          Log(("Cannot open file %s\n", S.latin1() ));
-          return 0;
-        }
+bool APPP::openFile( SystemFile & SF ) {
+      if( SF.name() == "peers" ) {
+        SF.setPath( removeSpaces( 
+            QString( "/tmp/ppp/peers/" ) + connection()->name() ) );
+        return 1;
+      } else if ( SF.name() == "chatscripts" ) {
+        SF.setPath( removeSpaces( 
+            QString( "/tmp/chatscripts/" ) + connection()->name() ) );
+        return 1;
       }
-      if( F ) {
-        Log(("Generate proper file %s = %s\n", 
-              ID.latin1(), F->name().latin1()));
-      }
-      return F;
+      return 0;
 }
 
-short APPP::generateFile( const QString & ID,
-                         const QString & Path,
-                         QTextStream & TS,
-                         long DevNr ) {
+short APPP::generateFile( SystemFile & SF, long DevNr ) {
     short rvl, rvd;
 
     rvl = 1;
     rvd = 1;
 
-    if( ID == "pap-secrets" ) {
-      Log(("Generate PPP for %s\n", ID.latin1() ));
+    if( SF.name() == "pap-secrets" ) {
+      Log(("Generate PPP for %s\n", SF.name().latin1() ));
+
       if( Data.Auth.Mode == 1 && Data.Auth.PCEMode == 0 ) {
-        TS << "# secrets for " 
+        SF << "# secrets for " 
            << connection()->name().latin1() 
            << endl;
-        TS << Data.Auth.Client 
+        SF << Data.Auth.Client 
            << " " 
            << Data.Auth.Server 
            << " " 
@@ -167,16 +180,16 @@ short APPP::generateFile( const QString & ID,
            << endl;
         rvl = 0;
         rvd = connection()->getToplevel()->generateFileEmbedded( 
-                ID, Path, TS, DevNr );
+                SF, DevNr );
       }
-    } else if( ID == "chap-secrets" ) {
-      Log(("Generate PPP for %s\n", ID.latin1() ));
+    } else if( SF.name() == "chap-secrets" ) {
+      Log(("Generate PPP for %s\n", SF.name().latin1() ));
       if( Data.Auth.Mode == 1 && Data.Auth.PCEMode != 0 ) {
         // used for both EAP and Chap
-        TS << "# secrets for "
+        SF << "# secrets for "
            << connection()->name().latin1() 
            << endl;
-        TS << Data.Auth.Client 
+        SF << Data.Auth.Client 
            << " " 
            << Data.Auth.Server 
            << " " 
@@ -185,35 +198,36 @@ short APPP::generateFile( const QString & ID,
 
         rvl = 0;
         rvd = connection()->getToplevel()->generateFileEmbedded( 
-            ID, Path, TS, DevNr );
+            SF, DevNr );
       }
-    } else if ( ID == "peers" ) {
-      QFileInfo FI(Path);
-      Log(("Generate PPP for %s\n", ID.latin1() ));
+    } else if ( SF.name() == "peers" ) {
 
-      TS << "connect \"/usr/sbin/chat -v -f /etc/ppp/"
+      QFileInfo FI(SF.path());
+      Log(("Generate PPP for %s\n", SF.name().latin1() ));
+
+      SF << "connect \"/usr/sbin/chat -v -f /etc/chatscripts/"
          << FI.baseName()
-         << ".chat\""
+         << "\""
          << endl;
 
       if( Data.IP.GWIsDefault ) {
-        TS << "defaultroute" 
+        SF << "defaultroute" 
            << endl;
       }
 
-      TS << "linkname "
-         << removeSpaces( ID.latin1() )
+      SF << "linkname "
+         << removeSpaces( SF.name().latin1() )
          << endl;
 
       // insert other data here
       rvl = 0;
       rvd = connection()->getToplevel()->generateFileEmbedded(
-            ID, Path, TS, DevNr );
-    } else if ( ID == "chatscripts" ) {
-      Log(("Generate PPP for %s\n", ID.latin1() ));
+            SF, DevNr );
+    } else if ( SF.name() == "chatscripts" ) {
+      Log(("Generate PPP for %s\n", SF.name().latin1() ));
       rvl = 0;
       rvd = connection()->getToplevel()->generateFileEmbedded(
-            ID, Path, TS, DevNr );
+            SF, DevNr );
     }
 
     return (rvd == 2 || rvl == 2 ) ? 2 :

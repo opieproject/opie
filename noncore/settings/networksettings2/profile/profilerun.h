@@ -1,31 +1,29 @@
 #ifndef PROFILERUN_H
 #define PROFILERUN_H
 
-#include <asfullsetup.h>
+#include <netnode.h>
 #include "profiledata.h"
 
-class ProfileRun  : public AsFullSetup {
+class ProfileRun  : public RuntimeInfo {
 
 public :
 
       ProfileRun( ANetNodeInstance * NNI, ProfileData & D ) : 
-            AsFullSetup( NNI )
+            RuntimeInfo( NNI )
         { Data = &D;  }
 
-      void detectState( NodeCollection * NC );
-      bool setState( NodeCollection * NC, Action_t A, bool );
-      bool canSetState( State_t Curr, Action_t A );
-
-      bool handlesInterface( const QString & I );
-
+      virtual RuntimeInfo * fullSetup( void ) 
+        { return this; }
       virtual const QString & description( void )
         { return Data->Description; }
-
-      virtual AsFullSetup * asFullSetup( void ) 
-        { return (AsFullSetup *)this; }
-
       virtual bool triggersVPN( void ) 
         { return Data->TriggerVPN; }
+
+      State_t detectState( void );
+
+protected :
+
+      QString setMyState( NodeCollection * , Action_t, bool );
 
 private :
 

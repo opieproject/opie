@@ -7,6 +7,6 @@ public :
 
     USBEdit( QWidget * parent );
     QString acceptable( void );
-    bool commit( USBData_t & Data );
-    void showData( USBData_t & Data );
+    bool commit( USBData & Data );
+    void showData( USBData & Data );
 };

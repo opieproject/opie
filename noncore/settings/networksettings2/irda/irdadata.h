@@ -3,7 +3,8 @@
 
 #include <qstring.h>
 
-typedef struct IRDAData {
+class IRDAData {
+public :
       QString Device;
       QString LockFile;
       long Speed;
@@ -13,6 +14,6 @@ typedef struct IRDAData {
       bool HardwareControl;
       bool SoftwareControl;
 
-} IRDAData_t; 
+} ; 
 
 #endif

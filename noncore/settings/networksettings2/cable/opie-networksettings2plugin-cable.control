@@ -1,4 +1,4 @@
-Package: opie-networksettingsplugin2-bluetooth
+Package: opie-networksettings2plugin-cable
 Files: plugins/networksettings2/libcable.so*
 Priority: optional
 Section: opie/settings

@@ -1,7 +1,7 @@
 #ifndef __NSDATA_H
 #define __NSDATA_H
 
-#include "netnode.h"
+#include <netnode.h>
 
 class NetworkSettingsData {
 
@@ -15,23 +15,20 @@ public :
 
       QString generateSettings( void );
 
-      bool isModified( void ) 
-        { return IsModified; }
-      void setModified( bool m ) 
-        { IsModified = m; }
+      bool isModified( void );
+      inline void setModified( bool M ) 
+        { ForceModified = M; }
 
       QList<NodeCollection> collectPossible( const char * Interface );
       // return TRUE if we need gui to decide
       bool canStart( const char * Interface );
-      bool regenerate( void );
 
 private :
 
-      bool IsModified;
+      bool ForceModified;
 
       // collect strings in config file nobody wants
       QStringList LeftOvers;
-
 };
 
 #endif

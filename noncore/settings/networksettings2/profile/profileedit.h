@@ -3,7 +3,7 @@
 
 #include <qtimer.h>
 class ANetNodeInstance;
-class AsDevice;
+class RuntimeInfo;
 
 class ProfileEdit  : public ProfileGUI {
 
@@ -13,8 +13,8 @@ public :
 
     ProfileEdit( QWidget * parent, ANetNodeInstance * NNI );
     QString acceptable( void );
-    bool commit( ProfileData_t & Data );
-    void showData( ProfileData_t & Data );
+    bool commit( ProfileData & Data );
+    void showData( ProfileData & Data );
 
 public slots :
 
@@ -25,5 +25,5 @@ private :
 
     QTimer RefreshTimer;
     ANetNodeInstance * NNI;
-    AsDevice * Dev;
+    RuntimeInfo * Dev;
 };

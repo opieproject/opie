@@ -4,15 +4,21 @@
 #include <qstring.h>
 #include <qarray.h>
 
-typedef struct PPPData {
+class PPPData {
+
+public :
+
       struct {
-        bool IPAutomatic;
-        QString IPAddress;
-        QString IPSubMask;
+        bool LocalOverrule;
+        bool RemoteOverrule;
+        QString LocalAddress;
+        QString RemoteAddress;
         bool GWAutomatic;
         QString GWAddress;
         bool GWIsDefault;
+        bool GWIfNotSet;
       } IP;
+
       struct {
         short Mode; // 0 login, 1 chap/pap, 2 Terminal
         struct {
@@ -33,6 +39,12 @@ typedef struct PPPData {
         QString DomainName;
         QArray<QString *> Servers;
       } DNS;
-} PPPData_t; 
+      struct {
+        QString PreConnect;
+        QString PostConnect;
+        QString PreDisconnect;
+        QString PostDisconnect;
+      } Run;
+}; 
 
 #endif

@@ -2,27 +2,19 @@
 #include <unistd.h>
 #include "cablerun.h"
 
-void CableRun::detectState( NodeCollection * NC ) { 
+State_t CableRun::detectState( void ) { 
 
       int fd = open( Data->Device.latin1(), O_RDWR );
 
       if( fd < 0 ) {
-        NC->setCurrentState( Unavailable );
+        return Unavailable;
       }
       close( fd );
-      NC->setCurrentState( Available );
+      return Available;
 }
 
-bool CableRun::setState( NodeCollection * NC, Action_t A, bool ) { 
-      if( A == Activate ) {
-        detectState(NC);
-        return (NC->currentState() == Available);
-      }
-      return 1;
-}
-
-bool CableRun::canSetState( State_t , Action_t  ) { 
-      return 1;
+QString CableRun::setMyState( NodeCollection *, Action_t , bool ) { 
+      return QString();
 }
 
 QString CableRun::deviceFile( void ) {

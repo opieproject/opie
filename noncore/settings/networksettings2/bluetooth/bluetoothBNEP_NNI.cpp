@@ -1,6 +1,6 @@
 #include "bluetoothBNEPedit.h"
 #include "bluetoothBNEP_NNI.h"
-#include "bluetooth_NN.h"
+#include "bluetoothBNEP_NN.h"
 
 ABluetoothBNEP::ABluetoothBNEP( BluetoothBNEPNetNode * PNN ) : 
     ANetNodeInstance( PNN ), Data() {

@@ -5,13 +5,9 @@ DESTDIR		= $(OPIEDIR)/lib$(PROJMAK)
 HEADERS		= netnode.h  \
                   resources.h  \
                   system.h  \
-                  asline.h \
                   GUIUtils.h \
-                  asconnection.h \
-                  asfullsetup.h \
                   systemfile.h \
-                  wextensions.h \
-                  asdevice.h
+                  wextensions.h
 SOURCES		= netnode.cpp \
                   GUIUtils.cpp \
                   system.cpp \

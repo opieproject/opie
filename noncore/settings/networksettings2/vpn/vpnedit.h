@@ -7,6 +7,6 @@ public :
 
     VPNEdit( QWidget * parent );
     QString acceptable( void );
-    bool commit( VPNData_t & Data );
-    void showData( VPNData_t & Data );
+    bool commit( VPNData & Data );
+    void showData( VPNData & Data );
 };

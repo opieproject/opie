@@ -67,6 +67,11 @@ public :
         return (NNT) ? NNT->NetNode : 0;
       }
 
+    // define new plugin (=node)
+    void addNodeType( const QString & ID,
+                      const QString & LongName,
+                      const QString & Description );
+
     Name2SystemFile_t & systemFiles( void )
       { return SystemFiles; }
     void addSystemFile( const QString & ID, 
@@ -99,6 +104,7 @@ public :
     void addConnection( NodeCollection * NC );
     void removeConnection( const QString & N );
     NodeCollection * findConnection( const QString & N );
+    NodeCollection * getConnection( int nr );
     Name2Connection_t & connections( void )
       { return ConnectionsMap; }
 

@@ -1,3 +1,4 @@
+#include <opie2/odebug.h>
 #include "profileedit.h"
 #include "profile_NNI.h"
 #include "profile_NN.h"
@@ -50,25 +51,23 @@ void AProfile::commit( void ) {
       setModified( 1 );
 }
 
-short AProfile::generateFileEmbedded( const QString & ID,
-                                     const QString & Path,
-                                     QTextStream & TS,
+short AProfile::generateFileEmbedded( SystemFile & SF,
                                      long DevNr ) {
 
       short rvl, rvd;
 
       rvl = 1;
 
-      if( ID == "interfaces" ) {
-        Log(("Generate Profile for %s\n", ID.latin1() ));
+      if( SF.name() == "interfaces" ) {
+        Log(("Generate Profile for %s\n", SF.name().latin1() ));
         if( Data.TriggerVPN ) {
           // this profile triggers VPN -> insert trigger
-          TS << "  up        networksettings2 --triggervpn" 
+          SF << "  up        networksettings2 --triggervpn" 
              << endl;
           rvl = 0;
         }
       }
-      rvd = ANetNodeInstance::generateFileEmbedded( ID, Path, TS, DevNr );
+      rvd = ANetNodeInstance::generateFileEmbedded( SF, DevNr );
       return (rvd == 2 || rvl == 2 ) ? 2 :
              (rvd == 0 || rvl == 0 ) ? 0 : 1;
 }

@@ -12,12 +12,13 @@ class QVBoxLayout;
 class QListView;
 
 #include <qdialog.h>
-#include <list>
+#include <qlist.h>
 
-using namespace std;
-
-struct t_playerData
+class t_playerData
 {
+
+public :
+
 	QString sName;
 	int points;
 	int level;
@@ -45,7 +46,7 @@ class OHighscore : public QWidget
 		 */
 		void insertData( QString , int , int );
 		
-		list<t_playerData*> playerData;
+		QList<t_playerData> playerData;
 		
 		/*
 		 * As Qt/e does not support QInputDialog I did that code myself
@@ -53,8 +54,6 @@ class OHighscore : public QWidget
 		QString getName();
 	private:
 
-		list<t_playerData*>::iterator iPlayerData;
-		
 		/*
 		 * the lowest score in the highscorelist
 		 */

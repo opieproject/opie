@@ -1,9 +1,11 @@
   source noncore/settings/networksettings2/networksettings2/config.in
+  source noncore/settings/networksettings2/opietooth2/config.in
+  source noncore/settings/networksettings2/opietooth2_applet/config.in
 
 config NS2
   boolean
   default "y"
-  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && NS2CORE
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && NS2CORE && NS2OPIETOOTH
 
   source noncore/settings/networksettings2/profile/config.in
   source noncore/settings/networksettings2/network/config.in
@@ -16,3 +18,4 @@ config NS2
   source noncore/settings/networksettings2/bluetooth/config.in
   source noncore/settings/networksettings2/cable/config.in
   source noncore/settings/networksettings2/modem/config.in
+  source noncore/settings/networksettings2/gprs/config.in

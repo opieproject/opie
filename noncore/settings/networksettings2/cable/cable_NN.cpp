@@ -5,6 +5,11 @@ static const char * CableNeeds[] =
     { 0
     };
 
+static const char * CableProvides[] = 
+    { "line",
+      0
+    };
+
 /**
  * Constructor, find all of the possible interfaces
  */
@@ -32,8 +37,8 @@ const char ** CableNetNode::needs( void ) {
       return CableNeeds;
 }
 
-const char * CableNetNode::provides( void ) {
-      return "line";
+const char ** CableNetNode::provides( void ) {
+      return CableProvides;
 }
 
 void CableNetNode::setSpecificAttribute( QString & , QString &  ) {

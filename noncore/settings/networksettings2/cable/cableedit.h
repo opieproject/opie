@@ -7,6 +7,6 @@ public :
 
     CableEdit( QWidget * parent );
     QString acceptable( void );
-    bool commit( CableData_t & D );
-    void showData( CableData_t & D );
+    bool commit( CableData & D );
+    void showData( CableData & D );
 };

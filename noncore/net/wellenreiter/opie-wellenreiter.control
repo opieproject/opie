@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org> 
 Architecture: arm
-Version: 1.0.3-cvs
-Depends: libqpe1, libpcap0 (>=0.7.2), libopiecore2, libopienet2, libopieui2
+Version: $QPE_VERSION$EXTRAVERSION
+Depends: libqpe1, libpcap0.8 (>=0.7.2), libopiecore2, libopienet2, libopieui2
 Description: A WaveLAN Network Monitor
  A WaveLAN Network Monitor/Sniffer for the Opie Environment.

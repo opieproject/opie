@@ -7,8 +7,8 @@ public :
 
     PPPIPEdit( QWidget * parent );
     QString acceptable( void );
-    bool commit( PPPData_t & Data );
-    void showData( PPPData_t & Data );
+    bool commit( PPPData & Data );
+    void showData( PPPData & Data );
 
 private :
 

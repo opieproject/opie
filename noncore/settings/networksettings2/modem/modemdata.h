@@ -2,7 +2,8 @@
 #define MODEM_DATA_H
 
 #include <qstring.h>
-typedef struct ModemData {
+class ModemData {
+public :
       QString Device;
       QString LockFile;
       long Speed;
@@ -12,6 +13,6 @@ typedef struct ModemData {
       bool HardwareControl;
       bool SoftwareControl;
 
-} ModemData_t; 
+} ; 
 
 #endif

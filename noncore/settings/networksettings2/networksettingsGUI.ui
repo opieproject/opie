@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>144</width>
-            <height>260</height>
+            <width>383</width>
+            <height>359</height>
         </rect>
     </property>
     <property stdset="1">
@@ -68,7 +68,7 @@
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>1</number>
+                    <number>0</number>
                 </property>
                 <widget>
                     <class>QToolButton</class>
@@ -167,14 +167,7 @@
                     <class>QToolButton</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Enable_TB</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>0</vsizetype>
-                        </sizepolicy>
+                        <cstring>Disable_TB</cstring>
                     </property>
                     <property stdset="1">
                         <name>text</name>
@@ -193,14 +186,7 @@
                     <class>QToolButton</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>On_TB</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>0</vsizetype>
-                        </sizepolicy>
+                        <cstring>Down_TB</cstring>
                     </property>
                     <property stdset="1">
                         <name>text</name>
@@ -208,25 +194,33 @@
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
-                        <bool>true</bool>
+                        <bool>false</bool>
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
-                        <bool>true</bool>
+                        <bool>false</bool>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QFrame</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>LED_Frm</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>NoFrame</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShadow</name>
+                        <enum>Raised</enum>
                     </property>
                 </widget>
                 <widget>
                     <class>QToolButton</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Connect_TB</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>0</vsizetype>
-                        </sizepolicy>
+                        <cstring>Up_TB</cstring>
                     </property>
                     <property stdset="1">
                         <name>text</name>
@@ -234,37 +228,11 @@
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
-                        <bool>true</bool>
+                        <bool>false</bool>
                     </property>
                     <property stdset="1">
                         <name>toggleButton</name>
-                        <bool>true</bool>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QToolButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>Disconnect_TB</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>0</hsizetype>
-                            <vsizetype>0</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>...</string>
-                    </property>
-                    <property stdset="1">
-                        <name>toggleButton</name>
-                        <bool>true</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>toggleButton</name>
-                        <bool>true</bool>
+                        <bool>false</bool>
                     </property>
                 </widget>
             </hbox>
@@ -479,12 +447,6 @@
 </widget>
 <connections>
     <connection>
-        <sender>Add_TB</sender>
-        <signal>clicked()</signal>
-        <receiver>NetworkSettingsGUI</receiver>
-        <slot>SLOT_AddNode()</slot>
-    </connection>
-    <connection>
         <sender>Delete_TB</sender>
         <signal>clicked()</signal>
         <receiver>NetworkSettingsGUI</receiver>
@@ -495,24 +457,6 @@
         <signal>clicked()</signal>
         <receiver>NetworkSettingsGUI</receiver>
         <slot>SLOT_CheckState()</slot>
-    </connection>
-    <connection>
-        <sender>Enable_TB</sender>
-        <signal>clicked()</signal>
-        <receiver>NetworkSettingsGUI</receiver>
-        <slot>SLOT_Enable()</slot>
-    </connection>
-    <connection>
-        <sender>Connect_TB</sender>
-        <signal>clicked()</signal>
-        <receiver>NetworkSettingsGUI</receiver>
-        <slot>SLOT_Connect()</slot>
-    </connection>
-    <connection>
-        <sender>On_TB</sender>
-        <signal>clicked()</signal>
-        <receiver>NetworkSettingsGUI</receiver>
-        <slot>SLOT_On()</slot>
     </connection>
     <connection>
         <sender>GenConfig_TB</sender>
@@ -551,22 +495,40 @@
         <slot>SLOT_ToMessages()</slot>
     </connection>
     <connection>
-        <sender>Disconnect_TB</sender>
+        <sender>Add_TB</sender>
         <signal>clicked()</signal>
         <receiver>NetworkSettingsGUI</receiver>
-        <slot>SLOT_Disconnect()</slot>
+        <slot>SLOT_AddNode()</slot>
+    </connection>
+    <connection>
+        <sender>Disable_TB</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_Disable(bool)</slot>
+    </connection>
+    <connection>
+        <sender>Down_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_Down()</slot>
+    </connection>
+    <connection>
+        <sender>Up_TB</sender>
+        <signal>clicked()</signal>
+        <receiver>NetworkSettingsGUI</receiver>
+        <slot>SLOT_Up()</slot>
     </connection>
     <slot access="public">SLOT_AddNode()</slot>
     <slot access="public">SLOT_CheckState()</slot>
-    <slot access="public">SLOT_Connect()</slot>
     <slot access="public">SLOT_DeleteNode()</slot>
+    <slot access="public">SLOT_Disable(bool)</slot>
     <slot access="public">SLOT_EditNode( QListBoxItem *)</slot>
-    <slot access="public">SLOT_Enable()</slot>
     <slot access="public">SLOT_GenerateConfig()</slot>
-    <slot access="public">SLOT_On()</slot>
+    <slot access="public">SLOT_SetState(int)</slot>
     <slot access="public">SLOT_ShowNode( QListBoxItem*)</slot>
     <slot access="public">SLOT_ToMessages()</slot>
     <slot access="public">SLOT_ToProfile()</slot>
-    <slot access="public">SLOT_Disconnect()</slot>
+    <slot access="public">SLOT_Up()</slot>
+    <slot access="public">SLOT_Down()</slot>
 </connections>
 </UI>

@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>133</width>
-            <height>235</height>
+            <width>258</width>
+            <height>232</height>
         </rect>
     </property>
     <property stdset="1">
@@ -28,21 +28,17 @@
     <vbox>
         <property stdset="1">
             <name>margin</name>
-            <number>3</number>
+            <number>0</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>2</number>
+            <number>1</number>
         </property>
         <widget>
-            <class>QButtonGroup</class>
+            <class>QGroupBox</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>ButtonGroup4</cstring>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
+                <cstring>GroupBox1</cstring>
             </property>
             <property stdset="1">
                 <name>title</name>
@@ -54,170 +50,103 @@
             <property>
                 <name>layoutSpacing</name>
             </property>
-            <vbox>
+            <grid>
                 <property stdset="1">
                     <name>margin</name>
-                    <number>2</number>
+                    <number>3</number>
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
                     <number>2</number>
                 </property>
-                <widget>
-                    <class>QRadioButton</class>
+                <widget row="0"  column="0" >
+                    <class>QLabel</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>IPServerAssigned_RB</cstring>
+                        <cstring>TextLabel1</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>true</bool>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Server assigned</string>
+                        <string>Local</string>
+                    </property>
+                </widget>
+                <widget row="0"  column="1" >
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>LocalAddress_LE</cstring>
                     </property>
                     <property stdset="1">
-                        <name>checked</name>
+                        <name>enabled</name>
                         <bool>true</bool>
                     </property>
                 </widget>
-                <widget>
-                    <class>QRadioButton</class>
+                <widget row="0"  column="2" >
+                    <class>QCheckBox</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>IPFixed_RB</cstring>
+                        <cstring>ServerOverrulesLocal_CB</cstring>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Fixed</string>
+                        <string>Server Overrules</string>
                     </property>
                 </widget>
-                <widget>
-                    <class>QLayoutWidget</class>
+                <widget row="1"  column="1" >
+                    <class>QLineEdit</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Layout11</cstring>
+                        <cstring>RemoteAddress_LE</cstring>
                     </property>
-                    <hbox>
-                        <property stdset="1">
-                            <name>margin</name>
-                            <number>0</number>
-                        </property>
-                        <property stdset="1">
-                            <name>spacing</name>
-                            <number>6</number>
-                        </property>
-                        <spacer>
-                            <property>
-                                <name>name</name>
-                                <cstring>Spacer8</cstring>
-                            </property>
-                            <property stdset="1">
-                                <name>orientation</name>
-                                <enum>Horizontal</enum>
-                            </property>
-                            <property stdset="1">
-                                <name>sizeType</name>
-                                <enum>Fixed</enum>
-                            </property>
-                            <property>
-                                <name>sizeHint</name>
-                                <size>
-                                    <width>20</width>
-                                    <height>20</height>
-                                </size>
-                            </property>
-                            <property>
-                                <name>layoutMargin</name>
-                            </property>
-                            <property>
-                                <name>layoutSpacing</name>
-                            </property>
-                        </spacer>
-                        <widget>
-                            <class>QFrame</class>
-                            <property stdset="1">
-                                <name>name</name>
-                                <cstring>Frame8</cstring>
-                            </property>
-                            <property stdset="1">
-                                <name>enabled</name>
-                                <bool>false</bool>
-                            </property>
-                            <property stdset="1">
-                                <name>sizePolicy</name>
-                                <sizepolicy>
-                                    <hsizetype>7</hsizetype>
-                                    <vsizetype>5</vsizetype>
-                                </sizepolicy>
-                            </property>
-                            <property stdset="1">
-                                <name>frameShape</name>
-                                <enum>NoFrame</enum>
-                            </property>
-                            <property stdset="1">
-                                <name>frameShadow</name>
-                                <enum>Raised</enum>
-                            </property>
-                            <property>
-                                <name>layoutMargin</name>
-                            </property>
-                            <property>
-                                <name>layoutSpacing</name>
-                            </property>
-                            <grid>
-                                <property stdset="1">
-                                    <name>margin</name>
-                                    <number>2</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>spacing</name>
-                                    <number>2</number>
-                                </property>
-                                <widget row="0"  column="1" >
-                                    <class>QLineEdit</class>
-                                    <property stdset="1">
-                                        <name>name</name>
-                                        <cstring>IPAddress_LE</cstring>
-                                    </property>
-                                </widget>
-                                <widget row="1"  column="0" >
-                                    <class>QLabel</class>
-                                    <property stdset="1">
-                                        <name>name</name>
-                                        <cstring>TextLabel3</cstring>
-                                    </property>
-                                    <property stdset="1">
-                                        <name>text</name>
-                                        <string>Subnetmask</string>
-                                    </property>
-                                </widget>
-                                <widget row="0"  column="0" >
-                                    <class>QLabel</class>
-                                    <property stdset="1">
-                                        <name>name</name>
-                                        <cstring>TextLabel2</cstring>
-                                    </property>
-                                    <property stdset="1">
-                                        <name>text</name>
-                                        <string>Address</string>
-                                    </property>
-                                </widget>
-                                <widget row="1"  column="1" >
-                                    <class>QLineEdit</class>
-                                    <property stdset="1">
-                                        <name>name</name>
-                                        <cstring>IPSubMask_LE</cstring>
-                                    </property>
-                                </widget>
-                            </grid>
-                        </widget>
-                    </hbox>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>true</bool>
+                    </property>
                 </widget>
-            </vbox>
+                <widget row="1"  column="2" >
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>ServerOverrulesRemote_CB</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Server Overrules</string>
+                    </property>
+                </widget>
+                <widget row="1"  column="0" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel1_2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>true</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Remote</string>
+                    </property>
+                </widget>
+            </grid>
         </widget>
         <widget>
             <class>QButtonGroup</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>ButtonGroup5</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>1</vsizetype>
+                </sizepolicy>
             </property>
             <property stdset="1">
                 <name>title</name>
@@ -232,7 +161,7 @@
             <vbox>
                 <property stdset="1">
                     <name>margin</name>
-                    <number>2</number>
+                    <number>3</number>
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
@@ -378,7 +307,7 @@
                     <class>QLayoutWidget</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>Layout3</cstring>
+                        <cstring>Layout4</cstring>
                     </property>
                     <hbox>
                         <property stdset="1">
@@ -389,6 +318,17 @@
                             <name>spacing</name>
                             <number>6</number>
                         </property>
+                        <widget>
+                            <class>QCheckBox</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>GWIsDefault_CB</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Set as default</string>
+                            </property>
+                        </widget>
                         <spacer>
                             <property>
                                 <name>name</name>
@@ -414,17 +354,38 @@
                             <class>QCheckBox</class>
                             <property stdset="1">
                                 <name>name</name>
-                                <cstring>GWIsDefault_CB</cstring>
+                                <cstring>GWIfNotSet_CB</cstring>
                             </property>
                             <property stdset="1">
                                 <name>text</name>
-                                <string>Set as default</string>
+                                <string>Only if not yet set</string>
                             </property>
                         </widget>
                     </hbox>
                 </widget>
             </vbox>
         </widget>
+        <spacer>
+            <property>
+                <name>name</name>
+                <cstring>Spacer4</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Vertical</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
     </vbox>
 </widget>
 <connections>
@@ -432,12 +393,6 @@
         <sender>GWFixed_RB</sender>
         <signal>toggled(bool)</signal>
         <receiver>Frame9</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>IPFixed_RB</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>Frame8</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>

@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/settings
 Maintainer: Clement Seveillac <clement@nist.gov>
 Architecture: arm
-Version: 0.0.2.6
+Version: $QPE_VERSION$EXTRAVERSION
 Depends: libopiecore2, opie-security
 Description: PIN plugin for opie-security authentication.
  Simple PIN-based authentication plugin (replicate the functionality

@@ -1,3 +1,4 @@
+#include <resources.h>
 #include "profile_NN.h"
 #include "profile_NNI.h"
 
@@ -5,11 +6,19 @@ static const char * ProfileNeeds[] =
     { "connection", 
       0
     };
+static const char * ProfileProvides[] = 
+    { "fullsetup", 
+      0
+    };
 
 /**
  * Constructor, find all of the possible interfaces
  */
 ProfileNetNode::ProfileNetNode() : ANetNode( tr("Regular connection profile")) {
+
+    NSResources->addSystemFile(
+      "interfaces", "/etc/network/interfaces", 1 );
+
 }
 
 /**
@@ -34,8 +43,8 @@ const char ** ProfileNetNode::needs( void ) {
       return ProfileNeeds;
 }
 
-const char * ProfileNetNode::provides( void ) {
-      return "fullsetup";
+const char ** ProfileNetNode::provides( void ) {
+      return ProfileProvides;
 }
 
 void ProfileNetNode::setSpecificAttribute( QString & , QString & ) {

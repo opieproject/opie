@@ -45,15 +45,20 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
             // avoid recursive 
             continue;
 
-          const char * Provides = InnerIt.current()->NetNode->provides();
+          const char ** Provides = InnerIt.current()->NetNode->provides();
           NeedsRun = OuterIt.current()->NetNode->needs();
+
           for( ; *NeedsRun; NeedsRun ++ ) {
-            if( strcmp( Provides, *NeedsRun ) == 0 ) {
-              // inner provides what outer needs
-              NNL.resize( NNL.size() + 1 );
-              NNL[NNL.size()-1] = InnerIt.current()->NetNode;
-              Done = 1; // break from 2 loops
-              break;
+            const char ** PRun;
+            PRun = Provides;
+            for( ; *PRun; PRun ++ ) {
+              if( strcmp( *PRun, *NeedsRun ) == 0 ) {
+                // inner provides what outer needs
+                NNL.resize( NNL.size() + 1 );
+                NNL[NNL.size()-1] = InnerIt.current()->NetNode;
+                Done = 1; // break from 2 loops
+                break;
+              }
             }
           }
         }
@@ -61,23 +66,17 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
       }
     }
 
-    // define Node types to Description map
-    NodeTypeNameMap.insert( "device", tr( "Network Device" ) );
-    NodeTypeNameMap.insert( "line", tr( "Character device" ) );
-    NodeTypeNameMap.insert( "connection", tr( "IP Connection" ) );
-    NodeTypeNameMap.insert( "fullsetup", tr( "Connection Profile" ) );
-
-    NodeTypeDescriptionMap.insert( "device", 
-        tr( "<p>Devices that can handle IP packets</p>" ) );
-    NodeTypeDescriptionMap.insert( "line", 
-        tr( "<p>Devices that can handle single bytes</p>" ) );
-    NodeTypeDescriptionMap.insert( "connection", 
-        tr( "<p>Nodes that provide working IP connections</p>" ) );
-    NodeTypeDescriptionMap.insert( "fullsetup", 
-        tr( "<p>Fully configured connection profile</p>" ) );
-
-    // define system files
-    addSystemFile( "interfaces", "/tmp/interfaces", 1 );
+    // define built in Node types to Description map
+    addNodeType( "device", tr( "Network Device" ),
+         tr( "<p>Devices that can handle IP packets</p>" ) );
+    addNodeType( "line", tr( "Character device" ),
+         tr( "<p>Devices that can handle single bytes</p>" ) );
+    addNodeType( "connection", tr( "IP Connection" ),
+         tr( "<p>Nodes that provide working IP connections</p>" ) );
+    addNodeType( "fullsetup", tr( "Connection Profile" ),
+         tr( "<p>Fully configured connection profile</p>" ) );
+    addNodeType( "GPRS", tr( "Connection to GPRS device" ),
+         tr( "<p>Connection to a GPRS capable device</p>" ) );
 
     // get access to the system
     TheSystem = new System();
@@ -86,6 +85,15 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
 
 TheNSResources::~TheNSResources( void ) {
     delete TheSystem;
+}
+
+void TheNSResources::addNodeType( const QString & ID, 
+                                     const QString & Name,
+                                     const QString & Descr ) {
+    if( NodeTypeNameMap[ID].isEmpty() ) {
+      NodeTypeNameMap.insert( ID, Name );
+      NodeTypeDescriptionMap.insert( ID, Descr );
+    }
 }
 
 void TheNSResources::addSystemFile( const QString & ID, 
@@ -220,8 +228,10 @@ QPixmap TheNSResources::getPixmap( const QString & QS ) {
     QPixmap P;
     QString S("networksettings2/");
     S += QS;
-    Log(("%s\n", S.latin1() ));
     P = Resource::loadPixmap( S );
+    if( P.isNull() ) {
+      Log(( "Cannot load %s\n", S.latin1() ));
+    }
     return ( P.isNull() ) ? QPixmap() : P;
 }
 
@@ -269,6 +279,16 @@ NodeCollection * TheNSResources::findConnection( const QString & S ) {
       return ConnectionsMap[ S ];
 }
 
+NodeCollection *  TheNSResources::getConnection( int nr ) {
+      for( QDictIterator<NodeCollection> it(ConnectionsMap);
+           it.current();
+           ++it ) {
+        if( it.current()->number() == nr ) {
+          return it.current();
+        }
+      }
+      return 0;
+}
 /*
 void TheNSResources::renumberConnections( void ) {
       Name2Connection_t & M = NSResources->connections();

@@ -2,53 +2,19 @@
 #include "ppprun.h"
 
 PPPRun::PPPRun( ANetNodeInstance * NNI, PPPData & Data ) :
-          AsConnection( NNI ), AsDevice( NNI ), Pat( "eth[0-9]" ) { 
-    D = &Data; 
+          RuntimeInfo( NNI ), Pat( "eth[0-9]" ) { 
+      D = &Data; 
 }
 
-void PPPRun::detectState( NodeCollection * NC ) {
+State_t PPPRun::detectState( void ) {
     if( isMyPPPDRunning( ) ) {
-      if( isMyPPPUp() ) {
-        NC->setCurrentState( IsUp );
-      } else {
-        NC->setCurrentState( Available );
-      }
-    } else {
-      NC->setCurrentState( Off ); // at least this
-      // but could also be unavailable
-      AsDevice::netNode()->nextNode()->runtime()->detectState( NC ); 
-    }
+      return ( isMyPPPUp() ) ? IsUp : Available;
+    } 
+    return Off;
 }
 
-bool PPPRun::setState( NodeCollection * NC, Action_t A, bool ) { 
-    switch( A ) {
-      case Activate :
-        NC->setCurrentState( Available );
-        // no
-        break;
-      case Deactivate :
-        if( NC->currentState() == IsUp ) {
-          NC->state( Down );
-        }
-        // cannot really disable
-        NC->setCurrentState( Available );
-        break;
-      case Up :
-        if( NC->currentState() != IsUp ) {
-          // start my PPPD
-          NC->setCurrentState( IsUp );
-        } 
-        break;
-      case Down :
-        if( NC->currentState() == IsUp ) {
-          // stop my PPPD
-          NC->setCurrentState( Available );
-        } 
-        break;
-      default : // FT
-        break;
-    }
-    return 1;
+QString PPPRun::setMyState( NodeCollection * NC, Action_t A, bool ) { 
+    return QString();
 }
 
 bool PPPRun::isMyPPPDRunning( void ) {
@@ -68,7 +34,7 @@ bool PPPRun::isMyPPPUp( void ) {
           Run->IsPointToPoint 
         ) {
         // this is a LAN card
-        if( Run->assignedNode() == AsDevice::netNode() ) {
+        if( Run->assignedConnection() == netNode()->connection() ) {
           // assigned to us
           return 1;
         } 
@@ -79,4 +45,8 @@ bool PPPRun::isMyPPPUp( void ) {
 
 bool PPPRun::handlesInterface( const QString & S ) {
     return Pat.match( S ) >= 0;
+}
+
+bool PPPRun::handlesInterface( InterfaceInfo * I ) {
+    return handlesInterface( I->Name );
 }

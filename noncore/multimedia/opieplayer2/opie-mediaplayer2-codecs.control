@@ -3,7 +3,7 @@ Files:         root/usr/lib/libao.so* root/usr/lib/libogg* root/usr/lib/libvorbi
 Section:        ;ibs
 Essential:      no
 Priority:       optional
-Version:        0.7-$SUB_VERSION.3
+Version: $QPE_VERSION$EXTRAVERSION
 Architecture:   arm
 Maintainer:     Maximilian Reiss <harlekin@handhelds.org>
 Depends:        libc6 (>= 2.1), opie-mediaplayer2

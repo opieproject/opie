@@ -4,10 +4,11 @@
 #include <qstringlist.h>
 #include <qstring.h>
 
-typedef struct LanCardData {
+class LanCardData {
+public :
       bool AnyLanCard;
       QStringList HWAddresses;
 
-} LanCardData_t; 
+} ; 
 
 #endif

@@ -1,34 +1,35 @@
-#include <asdevice.h>
+#include <netnode.h>
 #include "bluetoothBNEPdata.h"
 
-class BluetoothBNEPRun  : public AsDevice {
+#include <OTGateway.h>
+using namespace Opietooth2;
+
+class BluetoothBNEPRun  : public RuntimeInfo {
 
 public :
 
       BluetoothBNEPRun( ANetNodeInstance * NNI, 
-                        BluetoothBNEPData & D ) : 
-                        AsDevice( NNI ),
-                        Data( D),
-                        Pat( "bnep[0-6]" )
-        { }
+                        BluetoothBNEPData & D );
+      virtual ~BluetoothBNEPRun( void );
 
-      virtual AsDevice * asDevice( void ) 
-        { return (AsDevice *)this; }
+      // i am a device
+      virtual RuntimeInfo * device( void ) 
+        { return this; }
 
-      virtual AsDevice * device( void ) 
-        { return asDevice(); }
+      bool handlesInterface( const QString & );
+      bool handlesInterface( InterfaceInfo * );
+
+      State_t detectState( void );
 
 protected :
 
-      void detectState( NodeCollection * );
-      bool setState( NodeCollection * , Action_t, bool );
-      bool canSetState( State_t , Action_t );
-      bool handlesInterface( const QString & );
+      QString setMyState( NodeCollection * , Action_t, bool );
 
 private :
 
-      InterfaceInfo * getInterface( void );
+      bool hasFreePANConnection( bool Grab = 0 );
+
       BluetoothBNEPData &         Data;
-      static QDict<QString> *     PANConnections;
+      OTGateway *                 OT;
       QRegExp Pat;
 };

@@ -13,6 +13,8 @@
 #include <errno.h>
 #include <unistd.h>
 
+#include <opie2/oprocess.h>
+
 #include <qdir.h>
 #include <qregexp.h>
 #include <qstringlist.h>
@@ -50,63 +52,118 @@ System::~System( void ) {
       delete ProcDevNet;
 }
 
-int System::runAsRoot( const QString & S ) {
-    QString MyS = S;
+int System::runAsRoot( QStringList & S ) {
     char * usr = getenv("USER");
-    char ch;
 
-    if( S.isEmpty() ) {
+    if( S.count() == 0 ) {
       // loophole to start shell
       return 8888;
     }
     if( usr == 0 || strcmp( usr, "root" ) ) {
       // unknown or non-root user -> use SUDO
-      MyS.prepend( "sudo " );
+      S.prepend( "sudo" );
     }
 
-    Log(("Executing %s\n", MyS.latin1() ));
+    if( getenv( "NS2TESTMODE" ) ) {
+      owarn << "TESTMODE !!! execute " 
+            << S.join( " ") 
+            << oendl;
+    } else {
+      MyProcess * P = new MyProcess();
+      emit processEvent( tr("Command : ") + S.join( " " ) );
 
-    emit lineFromCommand( tr("Command : ") + MyS );
-    emit lineFromCommand( "---------------" );
-    Log(( "Command : %s\n", MyS.latin1() ) );
-    MyS += " 2>&1 ";
-    OutputOfCmd = popen( MyS.latin1(), "r" ) ;
-    if( ! OutputOfCmd ) {
-      // cannot fork
-      return 1;
-    }
+      P->process() << S;
 
-    // read all data
-    QString Line =  "";
-    while( 1 ) {
-      if( fread( &ch, 1, 1, OutputOfCmd ) < 1 ) 
-        // eof
-        break;
-      if( ch == '\n' || ch == '\r' ) {
-        if( ! Line.isEmpty() ) {
-          Log(( "read cmd output : **%s**\n", Line.latin1() ) );
-          emit lineFromCommand( Line );
-          Line = "";
-          qApp->processEvents();
-        }
-      } else {
-        Line += ch;
+      connect( P, 
+               SIGNAL( stdoutLine( const QString & ) ),
+               this, 
+               SIGNAL( stdoutLine( const QString & ) ) );
+
+      connect( P, 
+               SIGNAL( stderrLine( const QString & ) ),
+               this, 
+               SIGNAL( stderrLine( const QString & ) ) );
+
+      connect( P, 
+               SIGNAL(processExited(MyProcess*) ),
+               this, SLOT
+               (SLOT_ProcessExited(MyProcess*) ) );
+
+      Log(("Executing %s\n", S.join( " " ).latin1() ));
+
+      if( ! P->process().start( OProcess::DontCare, 
+                      OProcess::AllOutput ) ) {
+        owarn << "Error starting " << S << oendl;
+        delete P;
+        // error starting app
+        return 1;
       }
-    }
-
-    if( ! Line.isEmpty() ) {
-      emit lineFromCommand( Line );
-      Log(( "read cmd output : **%s**\n", Line.latin1() ) );
-    }
-    Log(( "End of command\n", Line.latin1() ) );
-
-    if( pclose( OutputOfCmd ) < 0 ) {
-      // error in command
-      return 3;
+      owarn << "Started " << S << oendl;
     }
 
     // all is fine
     return 0;
+}
+
+int System::execAsUser( QStringList & SL ) {
+      MyProcess * P = new MyProcess();
+      CurrentQPEUser CU = NSResources->currentUser();
+      char * usr = getenv("USER");
+
+      if( strcmp( usr, "root" ) == 0 ) {
+        // find user running qpe
+        if( CU.UserName.isEmpty() ) {
+          // if we come here, the exec was not successfull
+          Log(("User not known \n" ));
+          return 0;
+        }
+      }
+
+      // now we are ready to exec the requested command
+      setuid( CU.Uid );
+      setgid( CU.Gid );
+
+      for( unsigned int i = 0 ; i < CU.EnvList.count() ; i ++ ) {
+        QString X;
+        QStringList SL;
+        X = CU.EnvList[i];
+        SL = QStringList::split( "=", X );
+        P->process().setEnvironment( SL[0], SL[1] );
+      }
+
+      P->process() << SL;
+
+      emit processEvent( tr("Command : ") + SL.join( " " ) );
+
+      Log(("Executing as user %s : %s\n", 
+            CU.UserName.latin1(),
+            SL.join( " " ).latin1() ));
+
+      int rv = ( P->process().start( OProcess::DontCare, 
+                      OProcess::NoCommunication ) );
+      delete P;
+
+      if( rv ) {
+        // if we come here, the exec was not successfull
+        Log(("Could not exec : %d\n", errno ));
+      }
+
+      return rv;
+}
+
+void System::SLOT_ProcessExited( MyProcess * P ) {
+      QString R;
+
+      for( QValueListConstIterator<QCString> it = P->process().args().begin();
+           it != P->process().args().end(); 
+           ++it ) {
+        R += (*it); 
+        R += " ";
+      }
+
+      R += "Returned with " + QString().setNum( P->process().exitStatus() );
+      emit processEvent( R );
+      delete P;
 }
 
 void System::refreshStatistics( InterfaceInfo & I ) {
@@ -198,15 +255,29 @@ void System::probeInterfaces( void ) {
     }
 
     sockfd = socket(PF_INET, SOCK_DGRAM, 0);
-    if(sockfd == -1)
+    if(sockfd == -1) {
+      owarn << "Cannot open INET socket "
+            << errno 
+            << " "
+            << strerror( errno )
+            << oendl;
       return;
+    }
 
     // read interfaces from /proc/dev/net
     // SIOCGIFCONF does not return ALL interfaces ???!?
     ProcDevNet = new QFile(PROCNETDEV);
     if( ! ProcDevNet->open(IO_ReadOnly) ) {
+      owarn << "Cannot open " 
+            << PROCNETDEV
+            << " "
+            << errno 
+            << " "
+            << strerror( errno )
+            << oendl;
       delete ProcDevNet;
       ProcDevNet =0;
+      ::close( sockfd );
       return;
     }
 
@@ -229,10 +300,10 @@ void System::probeInterfaces( void ) {
 
       if ( ! ( IFI = ProbedInterfaces.find( NicName ) ) ) {
         // new nic
-        Log(("NEWNIC %s\n", NicName.latin1()));
+        Log(("New NIC found : %s\n", NicName.latin1()));
         IFI = new InterfaceInfo;
         IFI->Name = line.left(loc);
-        IFI->NetNode = 0;
+        IFI->Collection = 0;
         ProbedInterfaces.insert( IFI->Name, IFI );
 
         // get dynamic info
@@ -256,7 +327,7 @@ void System::probeInterfaces( void ) {
         IFI->MACAddress = "";
 
         if( ioctl(sockfd, SIOCGIFHWADDR, &ifrs) >= 0 ) {
-          Log(("%s = %d\n", IFI->Name.latin1(), 
+          Log(("Family for NIC %s : %d\n", IFI->Name.latin1(), 
               ifrs.ifr_hwaddr.sa_family ));
 
           IFI->CardType = ifrs.ifr_hwaddr.sa_family;
@@ -324,7 +395,7 @@ void System::probeInterfaces( void ) {
           }
         }
       } else // else already probed before -> just update
-        Log(("OLDNIC %s\n", NicName.latin1()));
+        Log(("Redetected NIC %s\n", NicName.latin1()));
 
       // get dynamic info
       if( ioctl(sockfd, SIOCGIFFLAGS, &ifrs) >= 0 ) {
@@ -354,35 +425,25 @@ void System::probeInterfaces( void ) {
       } else {
         IFI->Netmask = "";
       }
-      Log(("NIC %s UP %d\n", NicName.latin1(), IFI->IsUp ));
+      Log(("NIC %s UP ? %d\n", NicName.latin1(), IFI->IsUp ));
     }
+
+    ::close( sockfd );
 }
 
-void System::execAsUser( QString & Cmd, char * argv[] ) {
-      CurrentQPEUser CU = NSResources->currentUser();
-
-      if( CU.UserName.isEmpty() ) {
-        // if we come here, the exec was not successfull
-        Log(("User not known \n" ));
-        return;
+InterfaceInfo * System::findInterface( const QString & N ) {
+      InterfaceInfo * Run;
+      // has PAN connection UP interface ?
+      for( QDictIterator<InterfaceInfo> It(ProbedInterfaces);
+           It.current();
+           ++It ) {
+        Run = It.current();
+        if( N == Run->Name ) {
+          // this PAN connection is up
+          return Run;
+        }
       }
-
-      // now we are ready to exec the requested command
-      setuid( CU.Uid );
-      setgid( CU.Gid );
-
-      char ** envp = (char **)alloca( sizeof( char *) *
-            (CU.EnvList.count()+1) );
-
-      for( unsigned int i = 0 ; i < CU.EnvList.count() ; i ++ ) {
-        *(envp+i) = CU.EnvList[i];
-      }
-      envp[CU.EnvList.count()]=NULL;
-
-      execve( Cmd.latin1(), argv, envp );
-
-      // if we come here, the exec was not successfull
-      Log(("Could not exec : %d\n", errno ));
+      return 0;
 }
 
 #include <stdarg.h>
@@ -394,24 +455,29 @@ void VLog( char * Format, ... ) {
       va_start(l, Format );
 
       if( logf == (FILE *)0 ) {
-        if( getenv("NS2STDERR") ) {
+        QString S = getenv("NS2LOG");
+        if( S == "stderr" ) {
           logf = stderr;
-        } else {
+        } else if( S.isEmpty() ) {
           logf = fopen( "/tmp/ns2log", "a" );
+        } else {
+          logf = fopen( S, "a" );
         }
+
         if( ! logf ) {
-          fprintf( stderr, "Cannot open logfile /tmp/ns2log %d\n", 
-              errno );
+          fprintf( stderr, "Cannot open logfile %s : %d\n", 
+              S.latin1(), errno );
           logf = (FILE *)1;
         } else {
           fprintf( logf, "____ OPEN LOGFILE ____\n");
         }
       }
 
-      if( (long)logf > 1 ) {
+      if( (unsigned long)logf > 1 ) {
         vfprintf( logf, Format, l );
       }
       va_end( l );
+      fflush( logf );
 
 }
 
@@ -426,8 +492,82 @@ void LogClose( void ) {
 }
 
 QString removeSpaces( const QString & X ) {
-      QStringList SL;
+      QString Y;
+      Y = X.simplifyWhiteSpace(); 
+      Y.replace( QRegExp(" "), "_" );
+      owarn << X <<  " **" << Y << "**" << oendl;
+      return Y;
+}
 
-      SL = QStringList::split( " ", X );
-      return SL.join( "_" );
+//
+//
+//
+//
+//
+
+MyProcess::MyProcess() : QObject(), StdoutBuffer(), StderrBuffer() {
+      P = new OProcess();
+      connect( P, 
+               SIGNAL( receivedStdout(Opie::Core::OProcess*, char*, int ) ),
+               this, 
+               SLOT( SLOT_Stdout(Opie::Core::OProcess*,char*,int) ) );
+
+      connect( P, 
+               SIGNAL( receivedStderr(Opie::Core::OProcess*, char*, int ) ),
+               this, 
+               SLOT( SLOT_Stderr(Opie::Core::OProcess*,char*,int) ) );
+      connect( P, 
+               SIGNAL( processExited(Opie::Core::OProcess*) ),
+               this,
+               SLOT( SLOT_ProcessExited(Opie::Core::OProcess*) ) );
+}
+
+MyProcess::~MyProcess() {
+      delete P;
+}
+
+void MyProcess::SLOT_Stdout( Opie::Core::OProcess * , char * Buf, int len ) {
+      char * LB = (char *)alloca( len + 1 );
+      memcpy( LB, Buf, len );
+      LB[len] = '\0';
+
+      // now input is zero terminated
+      StdoutBuffer += LB;
+
+      owarn << "Received " << len << " bytes on stdout" << oendl;
+      // see if we have some lines (allow empty lines)
+      QStringList SL = QStringList::split( "\n", StdoutBuffer, TRUE );
+
+      for( unsigned int i = 0; i < SL.count()-1; i ++ ) {
+        Log(( "Stdout : \"%s\"\n", SL[i].latin1() ) );
+        emit stdoutLine( SL[i] );
+      }
+
+      // last line is rest
+      StdoutBuffer = SL[ SL.count()-1 ];
+}
+
+void MyProcess::SLOT_Stderr( Opie::Core::OProcess * , char * Buf, int len ) {
+      char * LB = (char *)alloca( len + 1 );
+      memcpy( LB, Buf, len );
+      LB[len] = '\0';
+
+      // now input is zero terminated
+      StderrBuffer += LB;
+
+      owarn << "Received " << len << " bytes on stderr" << oendl;
+      // see if we have some lines (allow empty lines)
+      QStringList SL = QStringList::split( "\n", StderrBuffer, TRUE );
+
+      for( unsigned int i = 0; i < SL.count()-1; i ++ ) {
+        Log(( "Stderr : \"%s\"\n", SL[i].latin1() ) );
+        emit stderrLine( SL[i] );
+      }
+
+      // last line is rest
+      StderrBuffer = SL[ SL.count()-1 ];
+}
+
+void MyProcess::SLOT_ProcessExited( Opie::Core::OProcess * ) {
+      emit processExited( this );
 }

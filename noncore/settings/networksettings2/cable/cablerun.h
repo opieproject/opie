@@ -1,26 +1,26 @@
-#include <asline.h>
+#include <netnode.h>
 #include "cabledata.h"
 
-class CableRun  : public AsLine {
+class CableRun  : public RuntimeInfo {
 
 public :
 
       CableRun( ANetNodeInstance * NNI, 
-                CableData_t & D ) : AsLine( NNI )
+                CableData & D ) : RuntimeInfo( NNI )
         { Data = &D; }
 
-      virtual AsLine * asLine( void ) 
-        { return (AsLine *)this; }
+      virtual RuntimeInfo * line( void ) 
+        { return this; }
 
       virtual QString deviceFile( void );
 
+      State_t detectState( void );
+
 protected :
 
-      void detectState( NodeCollection * NC );
-      bool setState( NodeCollection * NC, Action_t A, bool Force );
-      bool canSetState( State_t Curr, Action_t A );
+      QString setMyState( NodeCollection * , Action_t, bool );
 
 private :
 
-      CableData_t * Data;
+      CableData * Data;
 };

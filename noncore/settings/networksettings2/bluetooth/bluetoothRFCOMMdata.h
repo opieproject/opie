@@ -2,17 +2,21 @@
 #define BLUETOOTHRFCOMM_DATA_H
 
 #include <qstring.h>
+#include <qvector.h>
 
-typedef struct BluetoothRFCOMMData {
-      QString Device;
-      QString LockFile;
-      long Speed;
-      short Parity;
-      short DataBits;
-      short StopBits;
-      bool HardwareControl;
-      bool SoftwareControl;
+class RFCOMMChannel {
 
-} BluetoothRFCOMMData_t; 
+public :
+      QString BDAddress;
+      QString Name;
+      int     Channel;
+}; 
+
+class BluetoothRFCOMMData {
+
+public :
+
+      QVector<RFCOMMChannel> Devices;
+}; 
 
 #endif

@@ -2,7 +2,8 @@
 #define WLAN_DATA_H
 
 #include <qstring.h>
-typedef struct WLanData {
+class WLanData {
+public :
       QString ESSID;
       QString NodeName;
       short Mode;
@@ -11,6 +12,6 @@ typedef struct WLanData {
       bool Encrypted;
       QString Key[4];
       bool AcceptNonEncrypted;
-} WLanData_t; 
+} ; 
 
 #endif

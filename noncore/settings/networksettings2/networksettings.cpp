@@ -2,8 +2,12 @@
 #include <unistd.h>
 #include <errno.h>
 
+#include <opie2/odebug.h>
+#include <opie2/oledbox.h>
+
 #include <qpe/qpeapplication.h>
 #include <qlistbox.h>
+#include <qlayout.h>
 #include <qgroupbox.h>
 #include <qtimer.h>
 #include <qlistbox.h>
@@ -15,7 +19,6 @@
 #include <qtoolbutton.h>
 #include <qevent.h>
 
-#include <asdevice.h>
 #include "networksettings.h"
 #include "netnode.h"
 #include "editconnection.h"
@@ -31,13 +34,24 @@ NetworkSettings::NetworkSettings( QWidget *parent,
     Add_TB->setPixmap( NSResources->getPixmap( "add" ) );
     Delete_TB->setPixmap( NSResources->getPixmap( "remove" ) );
     CheckState_TB->setPixmap( NSResources->getPixmap( "check" ) );
-    Enable_TB->setPixmap( NSResources->getPixmap( "disabled" ) );
     GenConfig_TB->setPixmap( NSResources->getPixmap( "configure" ) );
 
-    Connect_TB->setPixmap( NSResources->getPixmap( "connected" ) );
-    Disconnect_TB->setPixmap( NSResources->getPixmap( "disconnected" ) );
+    Disable_TB->setPixmap( NSResources->getPixmap( "disabled" ) );
+    Up_TB->setPixmap( NSResources->getPixmap( "more" ) );
+    Down_TB->setPixmap( NSResources->getPixmap( "less" ) );
 
-    On_TB->setPixmap( NSResources->getPixmap( "off" ) );
+    QVBoxLayout* V = new QVBoxLayout( LED_Frm );
+    QHBoxLayout * H = new QHBoxLayout( 0 );
+    V->addStretch(1);
+    V->addLayout( H );
+    Leds[0] = new OLedBox( red, LED_Frm );
+    H->addWidget( Leds[0], 0, Qt::AlignVCenter );
+    Leds[1] = new OLedBox( red, LED_Frm );
+    H->addWidget( Leds[1], 0, Qt::AlignVCenter );
+    Leds[2] = new OLedBox( red, LED_Frm );
+    H->addWidget( Leds[2], 0, Qt::AlignVCenter );
+    V->addStretch(1);
+
 
     SLOT_ToProfile();
 
@@ -72,7 +86,15 @@ NetworkSettings::NetworkSettings( QWidget *parent,
     }
 
     connect( &(NSResources->system()), 
-             SIGNAL( lineFromCommand(const QString &) ),
+             SIGNAL( stdoutLine(const QString &) ),
+             this, SLOT( SLOT_CmdMessage(const QString &) ) );
+
+    connect( &(NSResources->system()), 
+             SIGNAL( stderrLine(const QString &) ),
+             this, SLOT( SLOT_CmdMessage(const QString &) ) );
+
+    connect( &(NSResources->system()), 
+             SIGNAL( processEvent(const QString &) ),
              this, SLOT( SLOT_CmdMessage(const QString &) ) );
 
     UpdateTimer->start( 5000 );
@@ -87,9 +109,13 @@ NetworkSettings::NetworkSettings( QWidget *parent,
 NetworkSettings::~NetworkSettings() {
     QString S;
 
-    if( isModified() ) {
+    owarn << "Dispose NS" << oendl;
+    if( NSD.isModified() ) {
+      owarn << "Modified" << oendl;
       S = NSD.saveSettings();
       if( ! S.isEmpty() ) {
+        S.insert( 0, "<p>" );
+        S.append( "</p>" );
         // problem saving
         QMessageBox::warning(
               0, 
@@ -97,6 +123,7 @@ NetworkSettings::~NetworkSettings() {
       }
 
       SLOT_GenerateConfig();
+      NSD.setModified( 0 );
     }
 
 }
@@ -167,14 +194,13 @@ void NetworkSettings::SLOT_DeleteNode( void ) {
           1, 0 ) == 1 ) {
       NSResources->removeConnection( LBI->text() );
       delete LBI;
-      setModified( 1 );
+      NSD.setModified( 1 );
     }
 }
 
 void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
     QString OldName = "";
 
-    printf( "------------------ Edit NOde\n" );
     EditConnection EC( this );
 
     if( LBI ) {
@@ -196,7 +222,6 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
         // toplevel item -> store
         NodeCollection * NC = EC.connection();
         if( NC->isModified() ) {
-          setModified( 1 );
           if( LBI ) {
             if( NC->name() != OldName ) {
               // find if new name is free
@@ -249,55 +274,6 @@ void NetworkSettings::SLOT_ShowNode( QListBoxItem * LBI ) {
 
     NodeCollection * NC = NSResources->findConnection( LBI->text() );
 
-    // is button possible
-    bool EnabledPossible, OnPossible, ConnectPossible;
-    // is button On or Off
-    bool DisabledOn, OnOn, ConnectOn;
-
-    EnabledPossible = OnPossible = ConnectPossible = 1;
-    DisabledOn = 1;
-    OnOn = ConnectOn = 0;
-
-    switch( NC->state() ) {
-      case Unknown :
-        // cannot occur here
-        break;
-      case Unchecked :
-      case Unavailable :
-        // cannot do anything but recheck
-        EnabledPossible = OnPossible = ConnectPossible = 0;
-        break;
-      case Disabled :
-        OnPossible = ConnectPossible = 0;
-        break;
-      case Off :
-        DisabledOn = 0;
-        break;
-      case Available :
-        OnOn = 1;
-        Connect_TB->setPixmap( NSResources->getPixmap( "disconnected" ) );
-        DisabledOn = 0;
-        break;
-      case IsUp :
-        OnOn = ConnectOn = 1;
-        Connect_TB->setPixmap( NSResources->getPixmap( "connected" ) );
-        DisabledOn = 0;
-        break;
-    }
-
-    if( ! OnOn ) {
-      Connect_TB->setPixmap( NSResources->getPixmap( "disconnected" ) );
-    }
-
-    // set button state
-    Enable_TB->setEnabled( EnabledPossible );
-    On_TB->setEnabled( OnPossible );
-    Connect_TB->setEnabled( ConnectPossible );
-
-    Enable_TB->setOn( DisabledOn );
-    On_TB->setOn( OnOn );
-    Connect_TB->setOn( ConnectOn );
-
     if( NC->description().isEmpty() ) {
       Description_LBL->setText( tr( "<<No description>>" ) );
     } else {
@@ -305,6 +281,48 @@ void NetworkSettings::SLOT_ShowNode( QListBoxItem * LBI ) {
     }
 
     Profile_GB->setTitle( LBI->text() + " : " + NC->stateName() );
+
+    bool FrmActive = 1;
+    bool IsEnabled = 1;
+    int leds = 0;
+
+    owarn << "State " << NC->state() << oendl;
+    switch( NC->state() ) {
+      case Disabled : // no further work
+        IsEnabled = 0;
+        FrmActive = 0;
+        owarn << "LEds " << leds << oendl;
+        break;
+      case Unknown :
+      case Unchecked :
+      case Unavailable :
+        FrmActive = 0;
+        break;
+      case Off :
+        leds = 1;
+        break;
+      case Available :
+        leds = 2;
+        break;
+      case IsUp :
+        leds = 3;
+        break;
+    }
+
+    Disable_TB->setOn( ! IsEnabled );
+    LED_Frm->setEnabled( FrmActive );
+
+    for( int i = 0 ; i < leds; i ++ ) {
+      Leds[i]->setColor( red );
+      Leds[i]->setOn( true );
+    }
+    for( int i = leds ; i < 3; i ++ ) {
+      Leds[i]->setColor( red );
+      Leds[i]->setOn( false );
+    }
+
+    Up_TB->setEnabled( leds < 3 && leds != 0 );
+    Down_TB->setEnabled( leds > 0 );
 }
 
 void NetworkSettings::SLOT_CheckState( void ) {
@@ -321,42 +339,49 @@ void NetworkSettings::updateProfileState( QListBoxItem * LBI ) {
 }
 
 void NetworkSettings::SLOT_GenerateConfig( void ) {
-    NSD.regenerate();
+    QString S = NSD.generateSettings();
+    if( ! S.isEmpty() ) {
+      S.insert( 0, "<p>" );
+      S.append( "</p>" );
+      QMessageBox::warning(
+          0, 
+          tr( "Generate config" ),
+          S);
+    }
 }
 
-void NetworkSettings::SLOT_Enable( void ) {
+void NetworkSettings::SLOT_Disable( bool T ) {
     QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
     QString Msg;
+
     if ( ! LBI ) 
       return;
 
-    NodeCollection * NC = 
-        NSResources->findConnection( LBI->text() );
+    NodeCollection * NC = NSResources->findConnection( LBI->text() );
 
-    bool rv;
-    switch( NC->state() ) {
-      case Disabled :
-        Msg = tr( "Cannot enable profile" );
-        rv = NC->setState( Enable );
-        break;
-      default :
-        Msg = tr( "Cannot disable profile" );
-        rv = NC->setState( Disable );
-        break;
-    }
-
-    if( ! rv ) {
+    owarn << "Prepare to disable" << oendl;
+    Msg = NC->setState( (T) ? Disable : Enable );
+    if( ! Msg.isEmpty() ) {
+      Msg.insert( 0, "<p>" );
+      Msg.append( "</p>" );
       QMessageBox::warning(
           0, 
           tr( "Activating profile" ),
           Msg );
       return;
     }
+
+    // reload new state
+    NC->state( true );
     updateProfileState( LBI );
 }
 
-void NetworkSettings::SLOT_On( void ) {
+void NetworkSettings::SLOT_Up( void ) {
+    // bring more up
+
     QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
+    QString Msg;
+    int led = -1;
 
     if ( ! LBI ) 
       return;
@@ -364,73 +389,55 @@ void NetworkSettings::SLOT_On( void ) {
     NodeCollection * NC = 
         NSResources->findConnection( LBI->text() );
 
-    bool rv;
     switch( NC->state() ) {
-      case Off :
-        // activate interface
-        rv = NC->setState( Activate );
-        break;
-      case Available : // deactivate
-      case IsUp : // deactivate (will also bring down if needed)
-        rv = NC->setState( Deactivate );
-        break;
-      default :
-        // others no change
+      case Disabled : // cannot modify this state
+      case Unknown : // cannot modify this state
+      case Unchecked : // cannot modify this state
+      case Unavailable : // cannot modify this state
+      case IsUp : // highest UP state
         return;
-    } 
+      case Off : // -> activate
+        led = 1;
+        Down_TB->setEnabled( true );
+        Log(( "Activate interface %s\n", NC->name().latin1() ));
+        Msg = NC->setState( Activate );
+        break;
+      case Available : // -> up
+        led = 2;
+        Log(( "Bring up interface %s\n", NC->name().latin1() ));
+        Msg = NC->setState( Up );
+        if( Msg.isEmpty() ) {
+          Up_TB->setEnabled( false );
+        }
+        break;
+    }
 
-    if( ! rv ) {
+    if( ! Msg.isEmpty() ) {
+      Msg.insert( 0, "<p>" );
+      Msg.append( "</p>" );
       QMessageBox::warning(
           0, 
-          tr( "Activating profile" ),
-          tr( "Cannot enable profile" ) );
+          tr( "Increase availability" ),
+          Msg );
       return;
     }
+
     updateProfileState( LBI );
-}
 
-void NetworkSettings::SLOT_Connect( void ) {
-    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
-
-    if ( ! LBI ) 
-      return;
-
-    NodeCollection * NC = 
-        NSResources->findConnection( LBI->text() );
-
-    bool rv = 1 ;
-    switch( NC->state() ) {
-      case IsUp :
-        // down interface
-        rv = NC->setState( Down );
-        break;
-      case Available :
-        // up interface
-        rv = NC->setState( Up );
-        break;
-      case Off :
-        // activate and bring up
-        rv = ( NC->setState( Activate ) &&
-               NC->setState( Up ) );
-        break;
-      default :
-        // others no change
-        break;
-    } 
-
-    if( ! rv ) {
-      QMessageBox::warning(
-          0, 
-          tr( "Activating profile" ),
-          tr( "Cannot enable profile" ) );
+    // set color of led we should change 
+    if( led > 0 ) {
+      Leds[led]->setColor( blue );
+      Leds[led]->setOn( true );
     }
 
-    // we do not update the GUI but wait for the REAL upping of the device
 }
 
-void NetworkSettings::SLOT_Disconnect( void ) {
-    QString S;
+void NetworkSettings::SLOT_Down( void ) {
+    // bring more down
+
     QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
+    int led = -1;
+    QString Msg;
 
     if ( ! LBI ) 
       return;
@@ -438,19 +445,57 @@ void NetworkSettings::SLOT_Disconnect( void ) {
     NodeCollection * NC = 
         NSResources->findConnection( LBI->text() );
 
-    Log(( "Force interface %s down\n", NC->name().latin1() ));
-    NC->setState( Down, 1 );
-    // remove 'up' file to make sure
-    S.sprintf( "/tmp/Profile-%d.up", NC->number() );
-    unlink( S.latin1() );
+    switch( NC->state() ) {
+      case Disabled : // cannot modify this state
+      case Unknown : // cannot modify this state
+      case Unchecked : // cannot modify this state
+      case Unavailable : // cannot modify this state
+      case Off : // highest DOWN state
+        break;
+      case Available : // -> down
+        led = 0;
+        Log(( "Deactivate interface %s\n", NC->name().latin1() ));
+        Msg = NC->setState( Deactivate );
+        Down_TB->setEnabled( false );
+        break;
+      case IsUp : // highest UP state
+        led = 1;
+        Up_TB->setEnabled( true );
+        Log(( "Bring down interface %s\n", NC->name().latin1() ));
+        Msg = NC->setState( Down, 1 );
+        if( Msg.isEmpty() ) {
+          // remove 'up' file to make sure
+          unlink ( QString().sprintf( "/tmp/Profile-%d.up", NC->number() ).latin1() );;
+        }
+        break;
+    }
+
+    if( ! Msg.isEmpty() ) {
+      Msg.insert( 0, "<p>" );
+      Msg.append( "</p>" );
+      QMessageBox::warning(
+          0, 
+          tr( "Decrease availability" ),
+          Msg );
+      return;
+    }
+
+    updateProfileState( LBI );
+
+    // set color of led we should change 
+    if( led >= 0 ) {
+      Leds[led]->setColor( blue );
+    }
 }
 
 void NetworkSettings::SLOT_ToMessages( void ) {
+    Profiles_LB->hide();
     Profile_GB->hide();
     Messages_GB->show();
 }
 
 void NetworkSettings::SLOT_ToProfile( void ) {
+    Profiles_LB->show();
     Profile_GB->show();
     Messages_GB->hide();
 }

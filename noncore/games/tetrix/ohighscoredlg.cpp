@@ -19,6 +19,7 @@
 #include <qpe/config.h>
 
 #include <qstring.h>
+#include <qlist.h>
 #include <qhbox.h>
 #include <qvbox.h>
 #include <qlabel.h>
@@ -27,20 +28,16 @@
 
 #include "ohighscoredlg.h"
 
-OHighscore::OHighscore( int score , int playerLevel )
+OHighscore::OHighscore( int score , int playerLevel ) : playerData()
 {
 	pLevel = playerLevel;
 	getList();
 	checkIfItIsANewhighscore( score );
+	playerData.setAutoDelete( TRUE );
 }
 
 OHighscore::~OHighscore()
 {
-	std::list<t_playerData*>::iterator deleteIterator = playerData.begin();
-	for ( ; deleteIterator != playerData.end() ; deleteIterator++ )
-	{
-		delete ( *deleteIterator );
-	}
 }
 
 void OHighscore::getList()
@@ -64,7 +61,7 @@ void OHighscore::getList()
 			pPlayerData->points = temp;
 			pPlayerData->level = cfg.readNumEntry( "Level" );
 
-			playerData.push_back( pPlayerData );
+			playerData.append( pPlayerData );
 
 			if ( (temp < lowest) ) lowest = temp;
 			rest++;
@@ -83,7 +80,7 @@ void OHighscore::getList()
 			pPlayerData->points = 0;
 			pPlayerData->level = 0;
 
-			playerData.push_back( pPlayerData );
+			playerData.append( pPlayerData );
 		}
 	}
 
@@ -100,41 +97,41 @@ void OHighscore::checkIfItIsANewhighscore( int points)
 void OHighscore::insertData( QString name , int punkte , int playerLevel )
 {
 	Config cfg ( "tetrix" );
+	t_playerData * Run;
+	int index = 0;
 	int entryNumber = 1;
-	std::list<t_playerData*>::iterator insertIterator = playerData.begin();
-	while ( insertIterator != playerData.end() )
-	{
-		if ( punkte > ( *insertIterator )->points )
+
+        for ( Run=playerData.first(); 
+              Run != 0; 
+              index ++, Run=playerData.next() ) {
+
+		if ( punkte > Run->points )
 		{
 			t_playerData* temp = new t_playerData;
 			temp->sName = name;
 			temp->points = punkte;
 			temp->level = playerLevel;
-			playerData.insert( insertIterator , temp );
+
+			playerData.insert( index, temp );
 			
 			//now we have to delete the last entry
-			insertIterator = playerData.end();
-			insertIterator--;
-//X 		delete *insertIterator;              //memleak?
-			playerData.erase( insertIterator );
+			playerData.remove( playerData.count() );
 			
 		/////////////////////////////////////////
 		//this block just rewrites the highscore
-			insertIterator = playerData.begin();
-			while ( insertIterator != playerData.end() )
-			{
+                        for ( t_playerData * Run2=playerData.first(); 
+                              Run2 != 0; 
+                              Run2=playerData.next() ) {
 				cfg.setGroup( QString::number( entryNumber ) );
-				cfg.writeEntry( "Name" , ( *insertIterator )->sName );
-				cfg.writeEntry( "Points" , ( *insertIterator )->points );
-				cfg.writeEntry( "Level" , ( *insertIterator )->level );
+				cfg.writeEntry( "Name" , Run2->sName );
+				cfg.writeEntry( "Points" , Run2->points );
+				cfg.writeEntry( "Level" , Run2->level );
 				entryNumber++;	
-				insertIterator++;
 			}
 		////////////////////////////////////////	
 
 			return;
 		}
-		insertIterator++;
 	} 
 }
 
@@ -177,20 +174,30 @@ void OHighscoreDialog::createHighscoreListView()
 	int pos = 10;
 	int points_ = 0;
 	int level_ = 0;
+	QListViewItem * Prev = 0;
 
-	std::list<t_playerData*>::reverse_iterator iListe = hs_->playerData.rbegin();
-	
-	for ( ; iListe != hs_->playerData.rend() ; ++iListe )
-	{
-		QListViewItem *item = new QListViewItem( list );
+        for ( t_playerData * Run = hs_->playerData.first(); 
+              Run != 0; 
+              Run=hs_->playerData.next() )
+        {
+                QListViewItem *item;
+
+		if( Prev ) {
+                  // after previous
+                  item = new QListViewItem( list, Prev );
+                  Prev = item;
+                } else {
+                  item = new QListViewItem( list );
+
+                }
 		item->setText(  0 , QString::number( pos ) );                   //number
-		item->setText(  1 , ( *iListe )->sName );                       //name
-		if ( (  *iListe )->points  == -1 )
+		item->setText(  1 , Run->sName );                       //name
+		if ( Run->points  == -1 )
 			points_ = 0;
-		else points_ =  ( *iListe )->points;
-		if ( (  *iListe )->level  == -1 )
-			level_ = 0;
-		else level_ =  ( *iListe )->level;
+		else points_ =  Run->points;
+		if ( Run->level  == -1 )
+                    level_ = 0;
+		else level_ =  Run->level;
 		item->setText(  2 , QString::number( points_ ) );   //points
 		item->setText(  3 , QString::number( level_ ) );    //level
 		pos--;
