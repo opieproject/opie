@@ -1,4 +1,4 @@
   config DECO_POLISHED
     boolean "opie-deco-polished (Blended window decoration style)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 )
