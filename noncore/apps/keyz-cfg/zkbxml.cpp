@@ -489,15 +489,10 @@ void ZkbXmlHandler::setError(const QString& e) {
 int ZkbXmlHandler::str2key(const QString& s) {
 	int ret;
 
-#ifdef USE_ZKB_NAMES
 	ret = KeyNames::find(s);
 	if (ret == -1) {
 		setError("Invalid value: " + s);
 	}
-
-#else 
-	ret = str2uint(s);
-#endif
 
 	return ret;
 }
@@ -505,7 +500,6 @@ int ZkbXmlHandler::str2key(const QString& s) {
 int ZkbXmlHandler::str2modifier(const QString& val) {
 	int ret;
 
-#ifdef USE_ZKB_NAMES
 	int n, i;
 	ret = 0;
 	n = 0;
@@ -526,9 +520,6 @@ int ZkbXmlHandler::str2modifier(const QString& val) {
 		ret |= v;
 		n = i + 1;
 	} while (n < val.length());
-#else 
-	ret = str2uint(val);
-#endif
 
 	return ret;
 }
@@ -548,15 +539,10 @@ int ZkbXmlHandler::str2unicode(const QString& s) {
 int ZkbXmlHandler::str2keycode(const QString& s) {
 	int ret;
 
-#ifdef USE_ZKB_NAMES
 	ret = KeycodeNames::find(s);
 	if (ret == -1) {
 		setError("Invalid value: " + s);
 	}
-
-#else
-	ret = str2uint(s);
-#endif
 
 	return ret;
 }

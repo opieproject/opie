@@ -1,5 +1,3 @@
-#ifdef USE_ZKB_NAMES
-
 #include <qmap.h>
 #include <qstring.h>
 
@@ -447,4 +445,3 @@ const QString& KeycodeNames::find(int k) {
 	}
 }
 
-#endif
