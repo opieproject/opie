@@ -25,6 +25,7 @@ public:
     virtual RecBody fetchBody(const RecMail&mail);
     virtual QString fetchPart(const RecMail&mail,const RecPart&part);
     virtual void deleteMail(const RecMail&mail);
+    virtual void answeredMail(const RecMail&mail);
 
     static void imap_progress( size_t current, size_t maximum );
 

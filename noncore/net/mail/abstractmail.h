@@ -22,6 +22,7 @@ public:
     virtual RecBody fetchBody(const RecMail&mail)=0;
     virtual QString fetchPart(const RecMail&mail,const RecPart&part)=0;
     virtual void deleteMail(const RecMail&mail)=0;
+    virtual void answeredMail(const RecMail&mail)=0;
     
     static AbstractMail* getWrapper(IMAPaccount *a);
     static AbstractMail* getWrapper(POP3account *a);

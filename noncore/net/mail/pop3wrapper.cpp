@@ -287,3 +287,7 @@ QString POP3wrapper::fetchPart(const RecMail&,const RecPart&)
 void POP3wrapper::deleteMail(const RecMail&)
 {
 }
+
+void POP3wrapper::answeredMail(const RecMail&)
+{
+}

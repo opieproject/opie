@@ -20,6 +20,7 @@ public:
     virtual QList<Folder>* listFolders();
     virtual QString fetchPart(const RecMail&mail,const RecPart&part);
     virtual void deleteMail(const RecMail&mail);
+    virtual void answeredMail(const RecMail&mail);
 
     RecBody fetchBody( const RecMail &mail );
     static void pop3_progress( size_t current, size_t maximum );

@@ -739,3 +739,33 @@ void IMAPwrapper::deleteMail(const RecMail&mail)
     }
     qDebug("Delete successfull %s",m_imap->imap_response);
 }
+
+void IMAPwrapper::answeredMail(const RecMail&mail)
+{
+    mailimap_flag_list*flist;
+    mailimap_set *set;
+    mailimap_store_att_flags * store_flags;
+    int err;
+    login();
+    if (!m_imap) {
+        return;
+    }
+    const char *mb = mail.getMbox().latin1();
+    err = mailimap_select( m_imap, (char*)mb);
+    if ( err != MAILIMAP_NO_ERROR ) {
+        qDebug("error selecting mailbox for mark: %s",m_imap->imap_response);
+        return;
+    }
+    flist = mailimap_flag_list_new_empty();
+    mailimap_flag_list_add(flist,mailimap_flag_new_answered());
+    store_flags = mailimap_store_att_flags_new_set_flags(flist);
+    set = mailimap_set_new_single(mail.getNumber());
+    err = mailimap_store(m_imap,set,store_flags);
+    mailimap_set_free( set );
+    mailimap_store_att_flags_free(store_flags);
+
+    if (err != MAILIMAP_NO_ERROR) {
+        qDebug("error marking mail: %s",m_imap->imap_response);
+        return;
+    }
+}

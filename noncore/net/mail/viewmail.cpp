@@ -259,7 +259,7 @@ void ViewMail::slotReply()
 
 	QString rtext;
 	rtext += QString("* %1 wrote on %2:\n")		// no i18n on purpose
-		.arg(  m_mail[1] )
+		.arg(  m_mail[0] )
 		.arg( m_mail[3] );
 
 	QString text = m_mail[2];
@@ -280,8 +280,9 @@ void ViewMail::slotReply()
         composer.setSubject( "Re: " + m_mail[1] );
 	composer.setMessage( rtext );
 	composer.showMaximized();
-	composer.exec();
-
+    if ( QDialog::Accepted==composer.exec()) {
+        m_recMail.Wrapper()->answeredMail(m_recMail);
+    }
 }
 
 void ViewMail::slotForward()
@@ -314,7 +315,9 @@ void ViewMail::slotForward()
         composer.setSubject( "Fwd: " + m_mail[1] );
 	composer.setMessage( ftext );
 	composer.showMaximized();
-	composer.exec();
+    if ( QDialog::Accepted==composer.exec()) {
+        
+    }
 }
 
 void ViewMail::slotDeleteMail( )
