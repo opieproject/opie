@@ -1,0 +1,9 @@
+File: bin/backupandrestore pics/backupandrestore apps/Settings/backupandrestore.desktop
+Package: backupandrestore
+Priority: optional
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Architecture: arm
+Maintainer: Benjamin Meyer <meyerb@sharpsec.com>
+Section: opie/Settings
+Description: Backup and Restore utility.
