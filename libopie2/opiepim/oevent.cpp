@@ -378,7 +378,7 @@ QMap<int, QString> OEvent::toMap()const {
     retMap.insert( OEvent::FStart, QString::number( zone.fromUTCDateTime( zone.toDateTime(  startDateTime(), OTimeZone::utc() ) ) ) );
     retMap.insert( OEvent::FEnd, QString::number( zone.fromUTCDateTime( zone.toDateTime(  endDateTime(), OTimeZone::utc() ) ) ) );
     retMap.insert( OEvent::FNote, Qtopia::escapeString( note() ) );
-    retMap.insert( OEvent::FTimeZone, timeZone().isEmpty() ? "None" : timeZone() );
+    retMap.insert( OEvent::FTimeZone, timeZone().isEmpty() ? QString( "None" ) : timeZone() );
     if( parent() )
 	    retMap.insert( OEvent::FRecParent, QString::number( parent() ) );
     if( children().count() ){
