@@ -100,14 +100,14 @@ void Server :: readLocalIpks( Server *local )
     // First, get any local IPKGs in the documents area
     // Only applicable to Qtopie/Opie
 
-	DocLnkSet files;
-	Global::findDocuments( &files, "application/ipkg" );
+    DocLnkSet files;
+    Global::findDocuments( &files, "application/ipkg" );
 
-	// Now add the items to the list
-	QListIterator<DocLnk> it( files.children() );
+    // Now add the items to the list
+    QListIterator<DocLnk> it( files.children() );
 
-	for ( ; it.current() ; ++it )
-	{
+    for ( ; it.current() ; ++it )
+    {
         // OK, we have a local IPK file, I think the standard naming conventions
         // for these are packagename_version_arm.ipk
         QString file = (*it)->file();
