@@ -84,7 +84,9 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     setCaption( tr("OpiePlayer - Video") );
 
     videoFrame = new XineVideoWidget ( this, "Video frame" );
+
     connect ( videoFrame, SIGNAL( videoResized ( const QSize & )), this, SIGNAL( videoResized ( const QSize & )));
+    connect ( videoFrame,  SIGNAL( clicked () ),  this,  SLOT ( backToNormal() ) );
 
     Config cfg("OpiePlayer");
     cfg.setGroup("Options");
@@ -343,8 +345,7 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                         mediaPlayerState->setPaused( TRUE );
                         return;
                     } else {
-                        //  setToggleButton( i, TRUE );
-                        // mediaPlayerState->setPlaying( videoButtons[i].isDown );
+                        return;
                     }
                 }
 
@@ -378,20 +379,26 @@ void VideoWidget::showEvent( QShowEvent* ) {
 }
 
 
+ void VideoWidget::backToNormal() {
+     mediaPlayerState->setFullscreen( FALSE );
+     makeVisible();
+ }
+
 void VideoWidget::makeVisible() {
-  if ( mediaPlayerState->fullscreen() ) {
-    setBackgroundMode( QWidget::NoBackground );
-    showFullScreen();
-    resize( qApp->desktop()->size() );
-    slider->hide();
-    videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
-  } else {
-      showNormal();
-    showMaximized();
-    slider->show();
-    videoFrame->setGeometry( QRect( 10, 20, 220, 160  ) );
-    qApp->processEvents();
-  }
+    if ( mediaPlayerState->fullscreen() ) {
+        setBackgroundMode( QWidget::NoBackground );
+        showFullScreen();
+        resize( qApp->desktop()->size() );
+        slider->hide();
+        videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
+
+    } else {
+        showNormal();
+        showMaximized();
+        slider->show();
+        videoFrame->setGeometry( QRect( 0, 30, 240, 170  ) );
+        qApp->processEvents();
+    }
 }
 
 

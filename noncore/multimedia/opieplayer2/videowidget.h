@@ -66,6 +66,7 @@ public slots:
     void setPlaying( bool b);
     void setFullscreen( bool b );
     void makeVisible();
+    void backToNormal();
     void setPosition( long );
     void setLength( long );
     void setView( char );

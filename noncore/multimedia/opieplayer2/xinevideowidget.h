@@ -47,20 +47,21 @@ public:
     void setImage( QImage* image );
     void setImage( uchar* image, int width, int height, int linestep);
     void clear() ;
-    
+
 protected:
     void paintEvent( QPaintEvent* p );
     void resizeEvent ( QResizeEvent *r );
 
-	void mousePressEvent ( QMouseEvent *e );
-	void mouseReleaseEvent ( QMouseEvent *e );
+    void mousePressEvent ( QMouseEvent *e );
+    void mouseReleaseEvent ( QMouseEvent *e );
 
 signals:
-	void videoResized ( const QSize &s );
-    
+    void clicked();
+    void videoResized ( const QSize &s );
+
 private:
-	QRect m_lastframe;
-	QRect m_thisframe;
+    QRect m_lastframe;
+    QRect m_thisframe;
 
     uchar* m_buff;
     int m_bytes_per_line_fb;

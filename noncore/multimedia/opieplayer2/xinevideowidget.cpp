@@ -1,7 +1,7 @@
 
 /*
                             This file is part of the Opie Project
- 
+
                              Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
                              Copyright (c)  2002 LJP <>
                              Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
@@ -29,7 +29,7 @@
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
- 
+
 */
 
 #include <qimage.h>
@@ -50,7 +50,7 @@ static inline void memcpy_rev ( void *dst, void *src, size_t len )
 {
   ((char *) src ) += len;
 
-  len >>= 1; 
+  len >>= 1;
   while ( len-- )
     *((short int *) dst )++ = *--((short int *) src );
 }
@@ -67,9 +67,9 @@ static inline void memcpy_step ( void *dst, void *src, size_t len, size_t step )
 static inline void memcpy_step_rev ( void *dst, void *src, size_t len, size_t step )
 {
   len >>= 1;
-  
+
   ((char *) src ) += ( len * step );
-  
+
   while ( len-- ) {
     ((char *) src ) -= step;
     *((short int *) dst )++ = *((short int *) src );
@@ -113,9 +113,9 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
   }
   else {
 //    qWarning ( "paintevent\n" );
-    
+
     QArray <QRect> qt_bug_workaround_clip_rects;
-    
+
     {
       QDirectPainter dp ( this );
 
@@ -123,19 +123,19 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 
       uchar *fb = dp. frameBuffer ( );
       uchar *frame = m_buff;  // rot == 0 ? m_buff : m_buff + ( m_thisframe. height ( ) - 1 ) * m_bytes_per_line_frame;
-      
+
       QRect framerect = qt_screen-> mapToDevice ( QRect ( mapToGlobal ( m_thisframe. topLeft ( )), m_thisframe. size ( )), QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
-      
+
       qt_bug_workaround_clip_rects. resize ( dp. numRects ( ));
 
       for ( int i = dp. numRects ( ) - 1; i >= 0; i-- ) {
         const QRect &clip = dp. rect ( i );
-                
+
         qt_bug_workaround_clip_rects [i] = qt_screen-> mapFromDevice ( clip, QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
-        
-        uchar *dst = fb + ( clip. x ( ) * m_bytes_per_pixel ) + ( clip. y ( ) * m_bytes_per_line_fb ); 
+
+        uchar *dst = fb + ( clip. x ( ) * m_bytes_per_pixel ) + ( clip. y ( ) * m_bytes_per_line_fb );
         uchar *src = frame;
-        
+
         switch ( rot ) {
           case 0: src += ( (( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame ) ); break;
           case 1: src += ( (( clip. y ( ) - framerect. y ( )) * m_bytes_per_pixel ) + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_line_frame ) + (( framerect. height ( ) - 1 ) * m_bytes_per_pixel ) ); break;
@@ -147,12 +147,12 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
         uint framefill = 0;
         uint rightfill = 0;
         uint clipwidth = clip. width ( ) * m_bytes_per_pixel;
-        
+
         if ( clip. left ( ) < framerect. left ( ))
           leftfill = (( framerect. left ( ) - clip. left ( )) * m_bytes_per_pixel ) <? clipwidth;
         if ( clip. right ( ) > framerect. right ( ))
           rightfill = (( clip. right ( ) - framerect. right ( )) * m_bytes_per_pixel ) <? clipwidth;
-        
+
         framefill = clipwidth - ( leftfill + rightfill );
 
         for ( int y = clip. top ( ); y <= clip. bottom ( ); y++ ) {
@@ -162,7 +162,7 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
           else {
             if ( leftfill )
               memset ( dst, 0, leftfill );
-              
+
             if ( framefill ) {
               switch ( rot ) {
                 case 0: memcpy ( dst + leftfill, src, framefill );                                  break;
@@ -170,13 +170,13 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
                 case 2: memcpy_rev ( dst + leftfill, src, framefill );                              break;
                 case 3: memcpy_step_rev ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
               }
-            } 
+            }
             if ( rightfill )
               memset ( dst + leftfill + framefill, 0, rightfill );
           }
-          
+
           dst += m_bytes_per_line_fb;
-          
+
           switch ( rot ) {
             case 0: src += m_bytes_per_line_frame; break;
             case 1: src -= m_bytes_per_pixel;      break;
@@ -186,12 +186,12 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
         }
       }
     }
-    //qWarning ( " ||| painting |||" );   
+    //qWarning ( " ||| painting |||" );
     {
       // QVFB hack by MArtin Jones
       QPainter p ( this );
 
-      for ( int i = qt_bug_workaround_clip_rects. size ( ) - 1; i >= 0; i-- ) {  
+      for ( int i = qt_bug_workaround_clip_rects. size ( ) - 1; i >= 0; i-- ) {
         p. fillRect ( QRect ( mapFromGlobal ( qt_bug_workaround_clip_rects [i]. topLeft ( )), qt_bug_workaround_clip_rects [i]. size ( )), QBrush ( NoBrush ) );
       }
     }
@@ -231,15 +231,15 @@ void XineVideoWidget::resizeEvent ( QResizeEvent * )
 {
   QSize s = size ( );
   bool fs = ( s == qApp-> desktop ( )-> size ( ));
-    
+
   m_rotation = fs ? -qt_screen-> transformOrientation ( ) : 0;
-    
+
   if ( fs && qt_screen-> isTransformed ( )) {
-    s = qt_screen-> mapToDevice ( s );    
+    s = qt_screen-> mapToDevice ( s );
   }
 
 //  qDebug ( "\n\nResize: %dx%d, Rot: %d", s.width(),s.height(),m_rotation );
-  
+
   emit videoResized ( s );
 }
 
@@ -247,22 +247,24 @@ void XineVideoWidget::resizeEvent ( QResizeEvent * )
 void XineVideoWidget::mousePressEvent ( QMouseEvent *me )
 {
   QWidget *p = parentWidget ( );
-  
+
   if ( p ) {
-    QMouseEvent pme ( QEvent::MouseButtonPress, mapToParent ( me-> pos ( )), me-> globalPos ( ), me-> button ( ), me-> state ( ));
-    
-    QApplication::sendEvent ( p, &pme );
+      // QMouseEvent pme ( QEvent::MouseButtonPress, mapToParent ( me-> pos ( )), me-> globalPos ( ), me-> button ( ), me-> state ( ));
+
+      // QApplication::sendEvent ( p, &pme );
+      //  emit clicked();
   }
 }
 
 void XineVideoWidget::mouseReleaseEvent ( QMouseEvent *me )
 {
   QWidget *p = parentWidget ( );
-  
+
   if ( p ) {
-    QMouseEvent pme ( QEvent::MouseButtonRelease, mapToParent ( me-> pos ( )), me-> globalPos ( ), me-> button ( ), me-> state ( ));
-    
-    QApplication::sendEvent ( p, &pme );
+      //  QMouseEvent pme ( QEvent::MouseButtonRelease, mapToParent ( me-> pos ( )), me-> globalPos ( ), me-> button ( ), me-> state ( ));
+
+      // QApplication::sendEvent ( p, &pme );
+     emit clicked();
   }
 }
 

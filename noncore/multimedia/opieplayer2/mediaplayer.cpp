@@ -71,7 +71,7 @@ void MediaPlayer::play() {
 
 void MediaPlayer::setPlaying( bool play ) {
     if ( !play ) {
-        //mediaPlayerState->setPaused( TRUE );
+        // mediaPlayerState->setPaused( FALSE );
         return;
     }
 
