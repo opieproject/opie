@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.6 2003-08-13 16:54:10 zcarsten Exp $
+** $Id: zsafe.cpp,v 1.7 2003-08-14 07:10:23 zcarsten Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -99,6 +99,10 @@ extern int DeskW, DeskH;
 extern QApplication   *appl;
 #else
 extern QPEApplication *appl;
+#endif
+
+#ifdef JPATCH_HDE
+#define tr(arg) arg
 #endif
 
 
@@ -497,7 +501,11 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
        if (!pd1.mkdir("application", FALSE))
        {
           QMessageBox::critical( 0, tr("ZSafe"),
+#ifdef JPATCH_HDE
+               tr("Can't create directory\n.../Documents/application\n\nZSafe will now exit."));
+#else
                tr("Can't create directory\n%1\n\nZSafe will now exit.").arg(d1));
+#endif
           exitZs (1);
        }
     }
@@ -513,7 +521,11 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
        if (!pd2.mkdir("zsafe", FALSE))
        {
           QMessageBox::critical( 0, tr("ZSafe"),
+#ifdef JPATCH_HDE
+               tr("Can't create directory\n...//Documents/application/zsafe\n\nZSafe will now exit."));
+#else
                tr("Can't create directory\n%1\n\nZSafe will now exit.").arg(d2));
+#endif
           exitZs (1);
        }
     }
@@ -775,22 +787,6 @@ void ZSafe::editPwd()
 #endif
        if (result == Accepted)
        {
-#ifdef JPATCH_HDE
-          // edit the selected item
-          QString name = dialog->NameField->text();
-          selectedItem->setText (0, name);
-          QString user = dialog->UsernameField->text();
-          selectedItem->setText (1, user);
-          QString pwd = dialog->PasswordField->text();
-          selectedItem->setText (2, pwd);
-          QString comment = dialog->CommentField->text();
-          comment.replace (QRegExp("\n"), "<br>");
-          selectedItem->setText (3, comment);
-          QString f5 = dialog->Field5->text();
-          selectedItem->setText (4, f5);
-          QString f6 = dialog->Field6->text();
-          selectedItem->setText (5, f6);
-#else
           modified = true;
           // edit the selected item
           QString name = dialog->NameField->text(); 
@@ -806,7 +802,6 @@ void ZSafe::editPwd()
           selectedItem->setText (4, tr (f5));
           QString f6 = dialog->Field6->text(); 
           selectedItem->setText (5, tr (f6));
-#endif
        }
 
        delete dialog;
@@ -871,20 +866,6 @@ retype:
           QListViewItem *i = new ShadedListItem (0, selectedItem);
           i->setOpen (TRUE);
 
-#ifdef JPATCH_HDE
-          i->setText (0, name);
-          QString user = dialog->UsernameField->text();
-          i->setText (1, user);
-          QString pwd = dialog->PasswordField->text();
-          i->setText (2, pwd);
-          QString comment = dialog->CommentField->text();
-          comment.replace (QRegExp("\n"), "<br>");
-          i->setText (3, comment);
-          QString f5 = dialog->Field5->text();
-          i->setText (4, f5);
-          QString f6 = dialog->Field6->text();
-          i->setText (5, f6);
-#else
           i->setText (0, tr (name));
           QString user = dialog->UsernameField->text(); 
           i->setText (1, tr (user));
@@ -897,7 +878,6 @@ retype:
           i->setText (4, tr (f5));
           QString f6 = dialog->Field6->text(); 
           i->setText (5, tr (f6));
-#endif
        }
 
        delete dialog;
@@ -1545,14 +1525,6 @@ void ZSafe::readAllEntries()
          if (catItem)
          {
             QListViewItem * item = new ShadedListItem( 0, catItem );
-#ifdef JPATCH_HDE
-            item->setText( 0, name );
-            item->setText( 1, user );
-            item->setText( 2, password );
-            item->setText( 3, comment );
-            item->setText( 4, field5 );
-            item->setText( 5, field6 );
-#else
             item->setText( 0, tr( name ) );
             item->setText( 1, tr( user ) );
             item->setText( 2, tr( password ) );
@@ -1560,7 +1532,6 @@ void ZSafe::readAllEntries()
             item->setText( 4, tr( field5 ) );
             item->setText( 5, tr( field6 ) );
             catItem->setOpen( TRUE );
-#endif
          }
       }
       else
@@ -1568,21 +1539,13 @@ void ZSafe::readAllEntries()
          QListViewItem *catI = new ShadedListItem( 1, ListView );
          // create and insert a new item
          QListViewItem * item = new ShadedListItem( 0, catI );
-#ifdef JPATCH_HDE
-         item->setText( 0, name );
-         item->setText( 1, user );
-         item->setText( 2, password );
-         item->setText( 3, comment );
-         item->setText( 4, field5 );
-         item->setText( 5, field6 );
-#else
          item->setText( 0, tr( name ) );
          item->setText( 1, tr( user ) );
          item->setText( 2, tr( password ) );
          item->setText( 3, tr( comment ) );
          item->setText( 4, tr( field5 ) );
          item->setText( 5, tr( field6 ) );
-#endif
+
          catI->setOpen( TRUE );
 
          Category *c1 = new Category();
@@ -1782,17 +1745,11 @@ void ZSafe::readAllEntries()
          if (catItem)
          {
             QListViewItem * item = new ShadedListItem( 0, catItem );
-#ifdef JPATCH_HDE
-            item->setText( 0, name );
-            item->setText( 1, user );
-            item->setText( 2, password );
-            item->setText( 3, comment );
-#else
             item->setText( 0, tr( name ) );
             item->setText( 1, tr( user ) );
             item->setText( 2, tr( password ) );
             item->setText( 3, tr( comment ) );
-#endif
+
             catItem->setOpen( TRUE );
          }
       }
@@ -1801,17 +1758,11 @@ void ZSafe::readAllEntries()
          QListViewItem *catI = new ShadedListItem( 1, ListView );
          // create and insert a new item
          QListViewItem * item = new ShadedListItem( 0, catI );
-#ifdef JPATCH_HDE
-         item->setText( 0, name );
-         item->setText( 1, user );
-         item->setText( 2, password );
-         item->setText( 3, comment );
-#else
          item->setText( 0, tr( name ) );
          item->setText( 1, tr( user ) );
          item->setText( 2, tr( password ) );
          item->setText( 3, tr( comment ) );
-#endif
+
          catI->setOpen( TRUE );
 
          Category *c1 = new Category();
@@ -2009,21 +1960,13 @@ bool ZSafe::openDocument(const char* _filename, const char* )
                    if (catItem)
                    {
                       QListViewItem * item = new ShadedListItem( 0, catItem );
-#ifdef JPATCH_HDE
-                      item->setText( 0, name );
-                      item->setText( 1, user );
-                      item->setText( 2, password );
-                      item->setText( 3, comment );
-                      item->setText( 4, field5 );
-                      item->setText( 5, field6 );
-#else
                       item->setText( 0, tr( name ) );
                       item->setText( 1, tr( user ) );
                       item->setText( 2, tr( password ) );
                       item->setText( 3, tr( comment ) );
                       item->setText( 4, tr( field5 ) );
                       item->setText( 5, tr( field6 ) );
-#endif
+
                       if (expandTree)
                          catItem->setOpen( TRUE );
                       numberOfEntries++;
@@ -2034,21 +1977,14 @@ bool ZSafe::openDocument(const char* _filename, const char* )
                    QListViewItem *catI = new ShadedListItem( 1, ListView );
                    // create and insert a new item
                    QListViewItem * item = new ShadedListItem( 0, catI );
-#ifdef JPATCH_HDE
-                   item->setText( 0, name );
-                   item->setText( 1, user );
-                   item->setText( 2, password );
-                   item->setText( 3, comment );
-                   item->setText( 4, field5 );
-                   item->setText( 5, field6 );
-#else
+
                    item->setText( 0, tr( name ) );
                    item->setText( 1, tr( user ) );
                    item->setText( 2, tr( password ) );
                    item->setText( 3, tr( comment ) );
                    item->setText( 4, tr( field5 ) );
                    item->setText( 5, tr( field6 ) );
-#endif
+
                    if (expandTree)
                       catI->setOpen( TRUE );
 
@@ -3303,13 +3239,9 @@ void ZSafe::editCategory()
               if (catItem)
               {
                  qWarning (category);
-#ifdef JPATCH_HDE
-                 catItem->setText( 0, category );
-                 cat->setCategoryName (category);
-#else
                  catItem->setText( 0, tr( category ) );
                  cat->setCategoryName (tr(category));
-#endif
+
                  cat->initListItem();
                  categories.insert (category, cat);
               }
