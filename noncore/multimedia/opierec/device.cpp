@@ -2,11 +2,8 @@
 
 #include "device.h"
 
-/* OPIE */
-#include <opie2/odebug.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
-using namespace Opie::Core;
 
 /* STD */
 #include <fcntl.h>
@@ -32,10 +29,10 @@ Device::Device( QObject * parent, const char * dsp, const char * mixr, bool reco
     devRate=-1;
 
     if( !record){ //playing
-        odebug << "setting up DSP for playing" << oendl;
+        qDebug( "setting up DSP for playing" );
         flags = O_WRONLY;
     } else { //recording
-        odebug << "setting up DSP for recording" << oendl;
+        qDebug( "setting up DSP for recording" );
         flags = O_RDWR;
 //        flags = O_RDONLY;
 
@@ -51,6 +48,89 @@ bool Device::openDsp() {
     }
     return true;
 }
+
+int Device::openDevice( int flags) {
+/*     pid_t pid;
+     int status;
+     int pipefd[2];
+     char message[20];
+     if (pipe(pipefd) == -1){
+         perror ("Error creating pipe");
+exit(1);
+     }
+     switch (pid = fork()) {
+       case -1:
+           perror("The fork failed!");
+           break;
+       case 0: {
+ */
+qDebug( "Opening %s",dspstr);
+ if (( sd = ::open( dspstr, flags)) == -1) {
+              perror("open(\"/dev/dsp\")");
+              QString errorMsg="Could not open audio device\n /dev/dsp\n"
+                  +(QString)strerror(errno);
+              qDebug( "XXXXXXXXXXXXXXXXXXXXXXX  "+errorMsg );
+              return -1;
+          }
+
+qDebug( "Opening mixer" );
+    int mixerHandle=0;
+        if  (( mixerHandle = open("/dev/mixer",O_RDWR))<0) {
+            perror("open(\"/dev/mixer\")");
+              QString errorMsg="Could not open audio device\n /dev/dsp\n"
+                  +(QString)strerror(errno);
+              qDebug( "XXXXXXXXXXXXXXXXXXXXXX  "+errorMsg );
+        }
+
+        if(ioctl(sd,SNDCTL_DSP_RESET,0)<0){
+            perror("ioctl RESET");
+        }
+//           sprintf(message, "%d", sd);
+
+/*           QFile f1("/pid");
+           f1.open(IO_WriteOnly );
+           f1.writeBlock(message, strlen(message));
+           f1.close();
+ */
+  /*               close(pipefd[0]);
+                 write(pipefd[1], message, sizeof(message));
+     close(pipefd[1]);
+ //              qDebug( "" + soundDevice->sd );
+           _exit(0);
+       }
+       default:
+          // pid greater than zero is parent getting the child's pid
+           printf("Child's pid is %d\n",pid);
+           QString s;
+                close(pipefd[1]);
+                read(pipefd[0], message, sizeof(message));
+    s = message;
+                 close(pipefd[0]);
+
+//     while(wait(NULL)!=pid)
+  //             ;
+           printf("child %ld terminated normally, return status is zero\n", (long) pid);
+             */
+       //    filePara.sd=(long) pid;
+   /*        QFile f2("/pid");
+           f2.open(IO_ReadOnly);
+           QTextStream t(&f2);
+ //                for(int f=0; f < t.atEnd() ;f++) {
+           s = t.readLine();
+ //               }
+           */
+//     bool ok;
+//           sd = s.toInt(&ok, 10);
+//           qDebug( "<<<<<<<<<<<<<>>>>>>>>>>>>"+s );
+
+//           f2.close();
+//     }
+::close(mixerHandle );
+//         qDebug( "open device " + dspstr );
+//     qDebug( "success! " + sd );
+    return sd;
+}
+
 
 int Device::getOutVolume( ) {
     unsigned int volume;
@@ -96,7 +176,7 @@ void Device::changedOutVolume(int vol) {
         cfg.setGroup("Volume");
         cfg.writeEntry("VolumePercent", QString::number( vol ));
         QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << false;
-	owarn << "changing output vol " << vol << "" << oendl;
+	qDebug("changing output vol %d" ,vol );
     }
     ::close(fd);
 }
@@ -111,7 +191,7 @@ void Device::changedInVolume(int vol ) {
         cfg.setGroup("Volume");
         cfg.writeEntry("Mic", QString::number(vol ));
         QCopEnvelope( "QPE/System", "micChange(bool)" ) << false;
-	owarn << "changing input volume " << vol << "" << oendl;
+	qDebug("changing input volume %d",vol);
     }
     ::close(fd);
 }
@@ -134,88 +214,6 @@ bool Device::selectMicInput() {
     return true;
 }
 
-int Device::openDevice( int flags) {
-/*     pid_t pid;
-     int status;
-     int pipefd[2];
-     char message[20];
-     if (pipe(pipefd) == -1){
-         perror ("Error creating pipe");
-exit(1);
-     }
-     switch (pid = fork()) {
-       case -1:
-           perror("The fork failed!");
-           break;
-       case 0: {
- */
-odebug << "Opening " << dspstr << "" << oendl;
- if (( sd = ::open( dspstr, flags)) == -1) {
-              perror("open(\"/dev/dsp\")");
-              QString errorMsg="Could not open audio device\n /dev/dsp\n"
-                  +(QString)strerror(errno);
-              odebug << "XXXXXXXXXXXXXXXXXXXXXXX  "+errorMsg << oendl;
-              return -1;
-          }
-
-odebug << "Opening mixer" << oendl;
-    int mixerHandle=0;
-        if  (( mixerHandle = open("/dev/mixer",O_RDWR))<0) {
-            perror("open(\"/dev/mixer\")");
-              QString errorMsg="Could not open audio device\n /dev/dsp\n"
-                  +(QString)strerror(errno);
-              odebug << "XXXXXXXXXXXXXXXXXXXXXX  "+errorMsg << oendl;
-        }
-
-        if(ioctl(sd,SNDCTL_DSP_RESET,0)<0){
-            perror("ioctl RESET");
-        }
-//           sprintf(message, "%d", sd);
-
-/*           QFile f1("/pid");
-           f1.open(IO_WriteOnly );
-           f1.writeBlock(message, strlen(message));
-           f1.close();
- */
-  /*               close(pipefd[0]);
-                 write(pipefd[1], message, sizeof(message));
-     close(pipefd[1]);
- //              odebug << "" << soundDevice->sd << "" << oendl;
-           _exit(0);
-       }
-       default:
-          // pid greater than zero is parent getting the child's pid
-           printf("Child's pid is %d\n",pid);
-           QString s;
-                close(pipefd[1]);
-                read(pipefd[0], message, sizeof(message));
-    s = message;
-                 close(pipefd[0]);
-
-//     while(wait(NULL)!=pid)
-  //             ;
-           printf("child %ld terminated normally, return status is zero\n", (long) pid);
-             */
-       //    filePara.sd=(long) pid;
-   /*        QFile f2("/pid");
-           f2.open(IO_ReadOnly);
-           QTextStream t(&f2);
- //                for(int f=0; f < t.atEnd() ;f++) {
-           s = t.readLine();
- //               }
-           */
-//     bool ok;
-//           sd = s.toInt(&ok, 10);
-//           odebug << "<<<<<<<<<<<<<>>>>>>>>>>>>"+s << oendl;
-
-//           f2.close();
-//     }
-::close(mixerHandle );
-//         odebug << "open device " << dspstr << "" << oendl;
-//     odebug << "success! " << sd << "" << oendl;
-    return sd;
-}
-
 bool Device::closeDevice( bool) {
 //      if(b) {//close now
 //          if (ioctl( sd, SNDCTL_DSP_RESET, 0) == -1) {
@@ -230,12 +228,12 @@ bool Device::closeDevice( bool) {
     ::close( sd); //close sound device
 //    sdfd=0;
  //   sd=0;
-//    odebug << "closed dsp" << oendl;
+//    qDebug( "closed dsp" );
     return true;
 }
 
 bool Device::setDeviceFormat( int form) {
-    odebug << "set device res " << form << " " << sd << "" << oendl;
+    qDebug( "set device res %d: %d ",form, sd );
     if (ioctl( sd, SNDCTL_DSP_SETFMT,  &form)==-1) { //set format
         perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
         return false;
@@ -245,7 +243,7 @@ bool Device::setDeviceFormat( int form) {
 }
 
 bool Device::setDeviceChannels( int ch) {
-    odebug << "set channels " << ch << " " << sd << "" << oendl;
+    qDebug( "set channels %d: %d",ch ,sd);
     if (ioctl( sd, SNDCTL_DSP_CHANNELS, &ch)==-1) {
         perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
         return false;
@@ -255,7 +253,7 @@ bool Device::setDeviceChannels( int ch) {
 }
 
 bool Device::setDeviceRate( int rate) {
-    odebug << "set rate " << rate << " " << sd << "" << oendl;
+    qDebug( "set rate %d: %d",rate,sd);
     if (ioctl( sd, SNDCTL_DSP_SPEED, &rate) == -1) {
         perror("ioctl(\"SNDCTL_DSP_SPEED\")");
         return false;
@@ -318,9 +316,9 @@ int Device::getDeviceFragSize() {
     int frag_size;
 
     if (ioctl( sd, SNDCTL_DSP_GETBLKSIZE, &frag_size) == -1) {
-      odebug << "no fragsize" << oendl;
+      qDebug( "no fragsize" );
     } else {
-      odebug << "driver says frag size is " << frag_size << "" << oendl;
+      qDebug( "driver says frag size is %d",frag_size);
     }
     return frag_size;
 }
@@ -344,13 +342,15 @@ bool Device::reset() {
 }
 
 int Device::devRead(int soundDescriptor, short *buf, int size) {
+		Q_UNUSED(soundDescriptor);
    int number = 0;
    number = ::read(  sd /*soundDescriptor*/, (char *)buf, size);
    return number;
 }
 
 int Device::devWrite(int soundDescriptor, short * buf, int size) {
-   int bytesWritten = 0;
+		Q_UNUSED(soundDescriptor);
+		int bytesWritten = 0;
    bytesWritten = ::write( sd /*soundDescriptor*/, buf, size);
    return bytesWritten;
 }
