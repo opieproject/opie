@@ -71,7 +71,7 @@ OApplication::~OApplication()
 
 OConfig* OApplication::config()
 {
-    if ( not _config )
+    if ( !_config )
     {
         _config = new OConfig( _appname );
     }
