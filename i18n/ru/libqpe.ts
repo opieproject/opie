@@ -11,7 +11,7 @@
     </message>
     <message>
         <source> (multi.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(мульти)</translation>
     </message>
     <message>
         <source>Business</source>
@@ -26,7 +26,7 @@
     <name>CategoryCombo</name>
     <message>
         <source> (Multi.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Мульти)</translation>
     </message>
 </context>
 <context>
@@ -468,11 +468,11 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PM</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">AM</translation>
     </message>
     <message>
         <source>All</source>
@@ -740,7 +740,7 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Группы</translation>
     </message>
     <message>
         <source>New Document</source>
@@ -899,7 +899,7 @@ Free some memory and try again.</source>
     <name>TZCombo</name>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
 </context>
 <context>
@@ -937,7 +937,7 @@ Please free up space and try again</source>
     <message>
         <source>%1 %2</source>
         <comment>minor mimetype / major mimetype</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <source>All %1 files</source>

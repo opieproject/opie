@@ -3,178 +3,182 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Вперед</translation>
     </message>
 </context>
 <context>
     <name>QtRec</name>
     <message>
         <source>OpieRecord </source>
-        <translation type="unfinished"></translation>
+        <translation>OpieЗапись</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Время</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота дискретизации</translation>
     </message>
     <message>
         <source>Limit Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Ограничить размер</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>Неограниченный</translation>
     </message>
     <message>
         <source>File Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталог для файлов</translation>
     </message>
     <message>
         <source>Bit Depth</source>
-        <translation type="unfinished"></translation>
+        <translation>Битность</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>Вход</translation>
     </message>
     <message>
         <source>Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Выход</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Громкость</translation>
     </message>
     <message>
         <source>Low Disk Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Мало места на диске</translation>
     </message>
     <message>
         <source>You are running low of
 recording space
 or a card isn&apos;t being recognized</source>
-        <translation type="unfinished"></translation>
+        <translation>Заканчивается место
+на диске или
+карта не распознана</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>секунд</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы действительно хотите &lt;font size=+2&gt;&lt;B&gt;УДАЛИТЬ&lt;/B&gt;&lt;/font&gt;
+выбранный файл?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>Could not remove file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не смог удалить файл.</translation>
     </message>
     <message>
         <source>Opierec</source>
-        <translation type="unfinished"></translation>
+        <translation>Opierec</translation>
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста выберите файл для проигрывания</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметка</translation>
     </message>
     <message>
         <source>Could not open audio file.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не смог открыть аудио файл.
+</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Играть</translation>
     </message>
     <message>
         <source>Send with Ir</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить через ИК</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Переименовать</translation>
     </message>
     <message>
         <source>Ir Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить по ИК порту</translation>
     </message>
     <message>
         <source>Ir sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправлен.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>Rec</source>
-        <translation type="unfinished"></translation>
+        <translation>Запись</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Место</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата</translation>
     </message>
     <message>
         <source>Wave Compression (smaller files)</source>
-        <translation type="unfinished"></translation>
+        <translation>Сжатие (меньше размер файлов)</translation>
     </message>
     <message>
         <source>mute</source>
-        <translation type="unfinished"></translation>
+        <translation>заглушить</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Стоп</translation>
     </message>
     <message>
         <source>Auto Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>Авто-заглушка</translation>
     </message>
     <message>
         <source>Stereo Channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Стерео каналы</translation>
     </message>
 </context>
 </TS>

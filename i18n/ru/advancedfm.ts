@@ -3,7 +3,7 @@
     <name>AdvancedFm</name>
     <message>
         <source>AdvancedFm</source>
-        <translation type="unfinished">AdvancedFm</translation>
+        <translation>ФайлМенеджер</translation>
     </message>
     <message>
         <source>File</source>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>Advancedfm Отправка</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -219,7 +219,7 @@ Do you really want to delete it?</source>
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished">Advanced FileManager
+        <translation>Advanced FileManager
 Копирайт 2002-2003
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 лицензирован на условиях GPL</translation>
@@ -272,30 +272,33 @@ and all it&apos;s contents ?</source>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
+        <translation>ФайлМенеджер :: </translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished"></translation>
+        <translation>кбайт свободно</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Перекл. на Вид 1</translation>
     </message>
     <message>
         <source>Switch to View 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Перекл. на Вид 2</translation>
     </message>
     <message>
         <source>Could not copy 
 %1 
 to 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу скопировать 
+%1 
+в 
+%2</translation>
     </message>
     <message>
         <source>Not Yet Implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Еще не сделано</translation>
     </message>
 </context>
 <context>
@@ -390,7 +393,7 @@ Finished
     </message>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation>файлПраваДоступа</translation>
     </message>
 </context>
 </TS>

@@ -4,80 +4,84 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите на цели твердо и аккуратно
+чтобы откалибровать ваш экран.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Добро пожаловать в Opie</translation>
     </message>
 </context>
 <context>
     <name>LoginWindow</name>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Вход</translation>
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Добро пожаловать в OPIE&lt;/center&gt;</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Выключить</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Меню</translation>
     </message>
 </context>
 <context>
     <name>LoginWindowImpl</name>
     <message>
         <source>Restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезагрузить</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <source>Wrong password</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный пароль</translation>
     </message>
     <message>
         <source>The given password is incorrect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введенный пароль неверен.</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Провал</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
-        <translation type="unfinished"></translation>
+        <translation>Не смог переключится на нового пользователя</translation>
     </message>
     <message>
         <source>Opie was terminated
 by an uncaught signal
 (%1)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Opie был завершен
+необработанным сигналом
+(%1)
+</translation>
     </message>
     <message>
         <source>Could not start Opie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не смог запустить Opie.</translation>
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Добро пожаловать в OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</translation>
     </message>
 </context>
 </TS>
