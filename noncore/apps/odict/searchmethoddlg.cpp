@@ -26,6 +26,7 @@
 #include <qpushbutton.h>
 #include <qstring.h>
 #include <qlineedit.h>
+#include <qdir.h>
 
 #include <opie/ofileselector.h>
 #include <opie/ofiledialog.h>
@@ -90,7 +91,7 @@ void SearchMethodDlg::setupEntries( QString item )
 
 void SearchMethodDlg::slotBrowse()
 {
-	itemName=OFileDialog::getOpenFileName( OFileSelector::EXTENDED,"/home/carsten" );
+        itemName=OFileDialog::getOpenFileName( OFileSelector::EXTENDED,QDir::homeDirPath());
 	dictFileLE->setText( itemName );
 }
 

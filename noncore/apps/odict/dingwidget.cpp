@@ -28,10 +28,12 @@
 #include <qstringlist.h>
 #include <qregexp.h>
 #include <qtextbrowser.h>
+#include <stdlib.h> // for getenv
 
 DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top, QTextBrowser *browser_bottom) : QWidget(parent)
 {
-	QFile file( "/home/carsten/opie/opie/noncore/apps/odict/eng_ita.dic" );
+  	QString opie_dir = getenv("OPIEDIR");
+	QFile file( opie_dir+"/noncore/apps/odict/eng_ita.dic" );
 	QStringList lines;
 
 	if(  file.open(  IO_ReadOnly ) )
