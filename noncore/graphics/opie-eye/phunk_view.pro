@@ -1,4 +1,4 @@
-CONFIG += qt warn_on #quick-app
+CONFIG += qt warn_on quick-app
 DESTDIR = $(OPIEDIR)/bin
 TEMPLATE = app
 TARGET = opie-eye

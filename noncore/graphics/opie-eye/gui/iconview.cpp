@@ -86,6 +86,7 @@ namespace {
         QString text = QIconViewItem::text()+"\n"+str;
         m_noInfo = true;
         QIconViewItem::setText( text );
+        reCalc();
     }
 
     inline void IconViewItem::reCalc()
@@ -266,7 +267,7 @@ void PIconView::slotThumbInfo( const QString& _path, const QString& str ) {
         IconViewItem* item = g_stringInf[_path];
         /* if set the view shows nonsens!
            I dont know how to fix the format of displayed text :(*/
-        //item->setText( str );
+        item->setText( str );
         item->repaint();
         g_stringInf.remove( _path );
     }
