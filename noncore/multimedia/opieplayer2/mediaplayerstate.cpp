@@ -92,56 +92,56 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
 // public stuff
 
 
-bool MediaPlayerState::streaming() {
+bool MediaPlayerState::streaming() const {
     return isStreaming;
 }
 
-bool MediaPlayerState::seekable() {
+bool MediaPlayerState::seekable() const {
     return isSeekable;
 }
 
-bool MediaPlayerState::fullscreen() {
+bool MediaPlayerState::fullscreen() const {
     return isFullscreen;
 }
 
-bool MediaPlayerState::scaled() {
+bool MediaPlayerState::scaled() const {
     return isScaled;
 }
 
-bool MediaPlayerState::looping() {
+bool MediaPlayerState::looping() const {
     return isLooping;
 }
 
-bool MediaPlayerState::shuffled() {
+bool MediaPlayerState::shuffled() const {
     return isShuffled;
 }
 
 
-bool MediaPlayerState::playlist() {
+bool MediaPlayerState::playlist() const {
     return usePlaylist;
 }
 
-bool MediaPlayerState::paused() {
+bool MediaPlayerState::paused() const {
     return isPaused;
 }
 
-bool MediaPlayerState::playing() {
+bool MediaPlayerState::playing() const {
     return isPlaying;
 }
 
-bool MediaPlayerState::stop() {
+bool MediaPlayerState::stop() const {
     return isStoped;
 }
 
-long MediaPlayerState::position() {
+long MediaPlayerState::position() const {
     return curPosition;
 }
 
-long MediaPlayerState::length() {
+long MediaPlayerState::length() const {
     return curLength;
 }
 
-char MediaPlayerState::view() {
+char MediaPlayerState::view() const {
     return curView;
 }
 
