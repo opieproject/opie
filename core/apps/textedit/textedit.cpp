@@ -510,7 +510,7 @@ void TextEdit::fileOpen()
 //         if(cfg.readEntry("useOldFileDialog") == "TRUE")
 //      b=TRUE;
 //      if(!b) {
-        QString str = OFileDialog::getOpenFileName( 1,"/");//,"", "*", this );
+        QString str = OFileDialog::getOpenFileName( 2,"/");//,"", "*", this );
         if(!str.isEmpty() )
             openFile( str );
 //      } else {
@@ -748,6 +748,7 @@ bool TextEdit::save()
             mode_t mode;
             stat(file.latin1(), &buf);
             mode = buf.st_mode;
+
             if(!fileIs) {
                 doc->setName( name);
                 FileManager fm;
@@ -822,11 +823,16 @@ bool TextEdit::saveAs()
     }
 
     
-    fileSaveDlg=new fileSaver(this,tr("Save File As?"),TRUE, 0, currentFileName);
-    qDebug("wanna save filename "+currentFileName);
-    fileSaveDlg->exec();
-    if( fileSaveDlg->result() == 1 ) {
+//         QString str = OFileDialog::getSaveFileName( 2,"/");//,"", "*", this );
+//         if(!str.isEmpty() ) {
+//            openFile( str );
+
+     fileSaveDlg=new fileSaver(this,tr("Save File As?"),TRUE, 0, currentFileName);
+     qDebug("wanna save filename "+currentFileName);
+     fileSaveDlg->exec();
+     if( fileSaveDlg->result() == 1 ) {
         QString fileNm=fileSaveDlg->selectedFileName;
+//             QString fileNm=srt;
         qDebug("saving filename "+fileNm);
         QFileInfo fi(fileNm);
         currentFileName=fi.fileName();

@@ -180,6 +180,7 @@ void fileSaver::listDoubleClicked(QListViewItem *selectedItem)
 
 void fileSaver::listClicked(QListViewItem *selectedItem)
 {
+    if(selectedItem != NULL) {
     QString strItem=selectedItem->text(0);
     QString strSize=selectedItem->text(1);
 //  qDebug("strItem is "+strItem);
@@ -216,7 +217,7 @@ void fileSaver::listClicked(QListViewItem *selectedItem)
                 } //end not symlink
         chdir(strItem.latin1());
 
-
+    }
 }
 
 
