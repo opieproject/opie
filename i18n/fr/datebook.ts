@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation>Préf.</translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>New</source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Alarm and Start Time...</source>
-        <translation>Alarm et date de déclenchement...</translation>
+        <translation>Préférences...</translation>
     </message>
     <message>
         <source>Default View</source>
@@ -106,7 +106,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliquer évènement</translation>
     </message>
 </context>
 <context>
@@ -187,7 +187,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Beam</translation>
+        <translation>Transmettre</translation>
     </message>
     <message>
         <source>This is an all day event.</source>
@@ -195,15 +195,15 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Horaire</translation>
     </message>
     <message>
         <source> - </source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Dupliquer</translation>
     </message>
 </context>
 <context>
@@ -241,7 +241,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Start Time:</source>
-        <translation>Date de début :</translation>
+        <translation>Heure de début :</translation>
     </message>
     <message>
         <source>:00</source>
@@ -253,7 +253,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation>Paramètres par défaut de l&apos;alarme</translation>
+        <translation>Paramètres par défaut </translation>
     </message>
     <message>
         <source> minutes</source>
@@ -265,7 +265,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation>Style des colonnes :</translation>
+        <translation>Style de lignes :</translation>
     </message>
     <message>
         <source>Default</source>
@@ -281,7 +281,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Jump to current time (dayview)</source>
-        <translation>Aller à aujourd&apos;hui (vue du jour)</translation>
+        <translation>Afficher aujourd&apos;hui (vue du jour)</translation>
     </message>
 </context>
 <context>
@@ -295,11 +295,11 @@ Quitter ?</translation>
     <name>DateBookWeekHeaderBase</name>
     <message>
         <source>Y: </source>
-        <translation>Y :</translation>
+        <translation>An :</translation>
     </message>
     <message>
         <source>W: </source>
-        <translation>W :</translation>
+        <translation>Sem :</translation>
     </message>
     <message>
         <source>00. Jan-00. Jan</source>
@@ -310,14 +310,14 @@ Quitter ?</translation>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>W: %1</source>
-        <translation>W:%1</translation>
+        <translation>Sem:%1</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekLstHeaderBase</name>
     <message>
         <source>W: 00,00</source>
-        <translation>W: 00,00</translation>
+        <translation>Sem: 00,00</translation>
     </message>
     <message>
         <source>2</source>
@@ -402,11 +402,13 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation>Date de début</translation>
+        <translation>Heure 
+de début</translation>
     </message>
     <message>
         <source>End Time</source>
-        <translation>Date de fin</translation>
+        <translation>Heure 
+de fin</translation>
     </message>
 </context>
 <context>
@@ -429,11 +431,11 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Lunch</source>
-        <translation>Déjeuné</translation>
+        <translation>Déjeuner</translation>
     </message>
     <message>
         <source>Dinner</source>
-        <translation>Diné</translation>
+        <translation>Dîner</translation>
     </message>
     <message>
         <source>Travel</source>
@@ -453,15 +455,17 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation>Date de début</translation>
+        <translation>Heure
+Minutes</translation>
     </message>
     <message>
         <source>All day</source>
-        <translation>Tte la jrnée</translation>
+        <translation>Jour</translation>
     </message>
     <message>
         <source>Time zone</source>
-        <translation>Zone de temps</translation>
+        <translation>Zone
+</translation>
     </message>
     <message>
         <source>&amp;Alarm</source>
@@ -493,7 +497,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Start - End </source>
-        <translation>Début - fin</translation>
+        <translation>Début - Fin</translation>
     </message>
     <message>
         <source>Note...</source>

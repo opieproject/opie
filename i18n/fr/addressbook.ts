@@ -111,7 +111,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Config</translation>
+        <translation>Configuration</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -135,15 +135,15 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Right file type ?</source>
-        <translation>Type de Fichier Valide?</translation>
+        <translation>Type de Fichier Valide ?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation>&amp;Yes</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation>&amp;No</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>Unable to find a contact for this 
@@ -161,13 +161,13 @@ Voulez-vous vraimment l&apos;ouvrir?</translation>
     </message>
     <message>
         <source>Add Contact?</source>
-        <translation>Ajouter un Contact?</translation>
+        <translation>Ajouter un Contact ?</translation>
     </message>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
         <translation>Voulez-vous vraimment ajouter une contact pour
-%1?</translation>
+%1 ?</translation>
     </message>
     <message>
         <source>&amp;All Yes</source>
@@ -248,11 +248,11 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Monter</translation>
+        <translation>Haut</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Descendre</translation>
+        <translation>Bas</translation>
     </message>
     <message>
         <source>Add</source>
@@ -268,63 +268,63 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Click on tab to select one</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez sur un onglet pour le sélectionner</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres pour la Recherche</translation>
     </message>
     <message>
         <source>Search widget expects regular expressions if selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Le champ de recherche utilisera des mots entiers</translation>
     </message>
     <message>
         <source>Search widget just expects simple wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Le champ de recherche pourra utiliser des jokers</translation>
     </message>
     <message>
         <source>If selected, search differs between upper and lower chars</source>
-        <translation type="unfinished"></translation>
+        <translation>Fera la différence entre les majuscules et les minuscules</translation>
     </message>
     <message>
         <source>Font size for list- and card view</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille des caractères pour la liste et les fiches</translation>
     </message>
     <message>
         <source>Fontsettings for list and card view</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres pour la police en mode liste et fiche</translation>
     </message>
     <message>
         <source>Use Sharp&apos;s mail application if available</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser l&apos;application de messagerie de Sharp si disponible</translation>
     </message>
     <message>
         <source>Use OPIE mail if installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser Opie-mail si installé</translation>
     </message>
     <message>
         <source>Move selected attribute one line up</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer le champ sélectionné d&apos;une ligne vers le haut</translation>
     </message>
     <message>
         <source>Move selected attribute one line down</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer le champ sélectionné d&apos;une ligne vers le bas</translation>
     </message>
     <message>
         <source>List of all available attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste des champs disponibles</translation>
     </message>
     <message>
         <source>Add selected attribute from list below to the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajoute le champ sélectionné dans la liste juste au-dessus</translation>
     </message>
     <message>
         <source>Remove the selected attribute from the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprime le champ sélectionné dans la liste juste au-dessus</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;ordre définit le premier contact affiché dans la deuxième colonne en mode liste</translation>
     </message>
 </context>
 <context>
@@ -371,7 +371,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Full Name...</source>
-        <translation>Nom complet...</translation>
+        <translation>Nom complet</translation>
     </message>
     <message>
         <source>Organization</source>
@@ -1259,7 +1259,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Guinea-Bissau</source>
-        <translation>Guinea-Bissau</translation>
+        <translation>Guinée-Bissau</translation>
     </message>
     <message>
         <source>Jamaica</source>
@@ -1287,31 +1287,31 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation type="unfinished"></translation>
+        <translation>Appuyez pour saisir prénom, second prénom, nom</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez le nom complet directement ! Si le nom est composé de plusieurs mots (par exemple &quot;De Gaulle&quot;) , saisissez &lt;Nom&gt;,&lt;Prénom&gt; comme ceci : &quot;De Gaulle, Général&quot;</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation type="unfinished"></translation>
+        <translation>La fonction dans l&apos;entreprise ..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation type="unfinished"></translation>
+        <translation>Par exemple &quot;jr.&quot;..</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation type="unfinished"></translation>
+        <translation>La société ou l&apos;organisation d&apos;appartenance</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez le champ à modifier</translation>
     </message>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour choisir comment enregistrer le nom complet (et comment l&apos;afficher en mode liste)</translation>
     </message>
 </context>
 <context>
