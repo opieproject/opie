@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.8 2002-05-23 01:59:47 llornkcor Exp $
+** $Id: qpeapplication.cpp,v 1.9 2002-06-20 00:32:56 drw Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -70,6 +70,8 @@
 #include "config.h"
 #include "network.h"
 #include "fontmanager.h"
+#include "fontdatabase.h"
+
 #include "power.h"
 #include "alarmserver.h"
 #include "applnk.h"
@@ -385,7 +387,7 @@ public:
     {
         if ( disable_suspend > 2 && !powerOnline() && !networkOnline() ) {
       QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
-      return TRUE; 
+      return TRUE;
       }
     }
       break;
@@ -504,7 +506,7 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
 {
     int dw = desktop()->width();
     if ( dw < 200 ) {
-  setFont( QFont( "helvetica", 8 ) );
+//  setFont( QFont( "helvetica", 8 ) );
   AppLnk::setSmallIconSize(10);
   AppLnk::setBigIconSize(28);
     }
@@ -599,7 +601,21 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
       QFont fn = FontManager::unicodeFont( FontManager::Proportional );
       setFont( fn );
   }
+  else {
+      Config config( "qpe" );
+      config.setGroup( "Appearance" );
+      QString familyStr = config.readEntry( "FontFamily", "fixed" );
+      QString styleStr = config.readEntry( "FontStyle", "Regular" );
+      QString sizeStr = config.readEntry( "FontSize", "10" );
+      QString charSetStr = config.readEntry( "FontCharSet", "iso10646-1" );
+      bool ok;
+      int i_size = sizeStr.toInt( &ok, 10 );
+      FontDatabase fdb;
+      QFont selectedFont = fdb.font( familyStr, styleStr, i_size, charSetStr );
+      setFont( selectedFont );
+  }
     }
+
 #endif
 
     applyStyle();
