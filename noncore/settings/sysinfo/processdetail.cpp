@@ -41,7 +41,11 @@ ProcessDetail::ProcessDetail( QWidget* parent,  const char* name, WFlags fl )
     SignalCB = new QComboBox( FALSE, this, "SignalCB" );
     SignalCB->insertItem( " 1: SIGHUP" );
     SignalCB->insertItem( " 2: SIGINT" );
+    SignalCB->insertItem( " 3: SIGQUIT" );
+    SignalCB->insertItem( " 5: SIGTRAP" );
+    SignalCB->insertItem( " 6: SIGABRT" );
     SignalCB->insertItem( " 9: SIGKILL" );
+    SignalCB->insertItem( "14: SIGALRM" );
     SignalCB->insertItem( "15: SIGTERM" );
     SignalCB->insertItem( "18: SIGCONT" );
     SignalCB->insertItem( "19: SIGSTOP" );
