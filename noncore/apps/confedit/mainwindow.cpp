@@ -33,7 +33,6 @@
 #include "listviewitemconf.h"
 #include "listviewitemconfigentry.h"
 
-#include <stdlib.h>
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   QDialog( parent, name, f ), _currentItem(0), _fileItem(0)
