@@ -164,7 +164,7 @@ Server::Server() :
 #ifdef QPE_HAVE_DIRECT_ACCESS
     QCopChannel *desktopChannel = new QCopChannel( "QPE/Desktop", this );
     connect( desktopChannel, SIGNAL(received( const QCString &, const QByteArray & )),
-	     this, SLOT(desktopMessage( const QCString &, const QByteArray & )) );
+         this, SLOT(desktopMessage( const QCString &, const QByteArray & )) );
 #endif
 
     // start services
@@ -216,20 +216,20 @@ static bool hasVisibleWindow(const QString& clientname, bool partial)
     const QList<QWSWindow> &list = qwsServer->clientWindows();
     QWSWindow* w;
     for (QListIterator<QWSWindow> it(list); (w=it.current()); ++it) {
-	if ( w->client()->identity() == clientname ) {
-	    if ( partial && !w->isFullyObscured() )
-		return TRUE;
-	    if ( !partial && !w->isFullyObscured() && !w->isPartiallyObscured() ) {
+    if ( w->client()->identity() == clientname ) {
+        if ( partial && !w->isFullyObscured() )
+        return TRUE;
+        if ( !partial && !w->isFullyObscured() && !w->isPartiallyObscured() ) {
 # if QT_VERSION < 0x030000
-		QRect mwr = qt_screen->mapToDevice(qt_maxWindowRect,
-			QSize(qt_screen->width(),qt_screen->height()) );
+        QRect mwr = qt_screen->mapToDevice(qt_maxWindowRect,
+            QSize(qt_screen->width(),qt_screen->height()) );
 # else
-		QRect mwr = qt_maxWindowRect;
+        QRect mwr = qt_maxWindowRect;
 # endif
-		if ( mwr.contains(w->requested().boundingRect()) )
-		    return TRUE;
-	    }
-	}
+        if ( mwr.contains(w->requested().boundingRect()) )
+            return TRUE;
+        }
+    }
     }
 #endif
     return FALSE;
@@ -342,6 +342,8 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         stream >> link;
         odebug << "desktop.cpp systemMsg -> linkchanged( " << link << " )" << oendl;
         docList->linkChanged(link);
+    } else if (msg =="reforceDocuments()") {
+        docList->reforceDocuments();
     } else if ( msg == "serviceChanged(QString)" ) {
         MimeType::updateApplications();
     } else if ( msg == "mkdir(QString)" ) {
@@ -432,8 +434,8 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 #endif
     } else if ( msg == "sendInstallLocations()" ) {
 #ifndef QT_NO_COP
-	QCopEnvelope e( "QPE/Desktop", "installLocations(QString)" );
-	e << installLocationsString();
+    QCopEnvelope e( "QPE/Desktop", "installLocations(QString)" );
+    e << installLocationsString();
 #endif
     } else if ( msg == "sendSyncDate(QString)" ) {
         QString app;
@@ -470,9 +472,9 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
     }
 #ifdef QPE_HAVE_DIRECT_ACCESS
     else if ( msg == "prepareDirectAccess()" ) {
-	prepareDirectAccess();
+    prepareDirectAccess();
     } else if ( msg == "postDirectAccess()" ) {
-	postDirectAccess();
+    postDirectAccess();
     }
 #endif
 #ifdef Q_WS_QWS
@@ -557,22 +559,22 @@ QString Server::cardInfoString()
     QString homeDir = getenv("HOME");
     QString homeFs, homeFsPath;
     for ( ; it.current(); ++it ) {
-	int k4 = (*it)->blockSize()/256;
-	if ( (*it)->isRemovable() ) {
-	    s += (*it)->name() + "=" + (*it)->path() + "/Documents " // No tr
-		 + QString::number( (*it)->availBlocks() * k4/4 )
-		 + "K " + (*it)->options() + ";";
-	} else if ( homeDir.contains( (*it)->path() ) &&
-		  (*it)->path().length() > homeFsPath.length() ) {
-	    homeFsPath = (*it)->path();
-	    homeFs =
-		(*it)->name() + "=" + homeDir + "/Documents " // No tr
-		+ QString::number( (*it)->availBlocks() * k4/4 )
-		+ "K " + (*it)->options() + ";";
-	}
+    int k4 = (*it)->blockSize()/256;
+    if ( (*it)->isRemovable() ) {
+        s += (*it)->name() + "=" + (*it)->path() + "/Documents " // No tr
+         + QString::number( (*it)->availBlocks() * k4/4 )
+         + "K " + (*it)->options() + ";";
+    } else if ( homeDir.contains( (*it)->path() ) &&
+          (*it)->path().length() > homeFsPath.length() ) {
+        homeFsPath = (*it)->path();
+        homeFs =
+        (*it)->name() + "=" + homeDir + "/Documents " // No tr
+        + QString::number( (*it)->availBlocks() * k4/4 )
+        + "K " + (*it)->options() + ";";
+    }
     }
     if ( !homeFs.isEmpty() )
-	s += homeFs;
+    s += homeFs;
     return s;
 }
 
@@ -585,22 +587,22 @@ QString Server::installLocationsString()
     QString homeDir = getenv("HOME");
     QString homeFs, homeFsPath;
     for ( ; it.current(); ++it ) {
-	int k4 = (*it)->blockSize()/256;
-	if ( (*it)->isRemovable() ) {
-	    s += (*it)->name() + "=" + (*it)->path() + " " // No tr
-		 + QString::number( (*it)->availBlocks() * k4/4 )
-		 + "K " + (*it)->options() + ";";
-	} else if ( homeDir.contains( (*it)->path() ) &&
-		    (*it)->path().length() > homeFsPath.length() ) {
-	    homeFsPath = (*it)->path();
-	    homeFs =
-		(*it)->name() + "=" + homeDir + " " // No tr
-		+ QString::number( (*it)->availBlocks() * k4/4 )
-		+ "K " + (*it)->options() + ";";
-	}
+    int k4 = (*it)->blockSize()/256;
+    if ( (*it)->isRemovable() ) {
+        s += (*it)->name() + "=" + (*it)->path() + " " // No tr
+         + QString::number( (*it)->availBlocks() * k4/4 )
+         + "K " + (*it)->options() + ";";
+    } else if ( homeDir.contains( (*it)->path() ) &&
+            (*it)->path().length() > homeFsPath.length() ) {
+        homeFsPath = (*it)->path();
+        homeFs =
+        (*it)->name() + "=" + homeDir + " " // No tr
+        + QString::number( (*it)->availBlocks() * k4/4 )
+        + "K " + (*it)->options() + ";";
+    }
     }
     if ( !homeFs.isEmpty() )
-	s = homeFs + s;
+    s = homeFs + s;
     return s;
 }
 
@@ -824,7 +826,7 @@ void Server::prepareDirectAccess()
     // suspend the mtab monitor
 #ifndef QT_NO_COP
     {
-	QCopEnvelope e( "QPE/Stabmon", "suspendMonitor()" );
+    QCopEnvelope e( "QPE/Stabmon", "suspendMonitor()" );
     }
 #endif
 
@@ -837,10 +839,10 @@ void Server::prepareDirectAccess()
     pendingFlushes = 1;
     directAccessRun = FALSE;
     for ( QMap<int,QString>::ConstIterator it =
-	    appLauncher->runningApplications().begin();
-	  it != appLauncher->runningApplications().end();
-	  ++it ) {
-	pendingFlushes++;
+        appLauncher->runningApplications().begin();
+      it != appLauncher->runningApplications().end();
+      ++it ) {
+    pendingFlushes++;
     }
 #ifndef QT_NO_COP
     QCopEnvelope e1( "QPE/System", "flush()" );
@@ -858,47 +860,47 @@ void Server::desktopMessage( const QCString &message, const QByteArray &data )
 {
     QDataStream stream( data, IO_ReadOnly );
     if ( message == "flushDone(QString)" ) {
-	QString app;
-	stream >> app;
-	qDebug( "flushDone from %s", app.latin1() );
-	if ( --pendingFlushes == 0 ) {
-	    qDebug( "pendingFlushes == 0, all the apps responded" );
-	    runDirectAccess();
-	}
+    QString app;
+    stream >> app;
+    qDebug( "flushDone from %s", app.latin1() );
+    if ( --pendingFlushes == 0 ) {
+        qDebug( "pendingFlushes == 0, all the apps responded" );
+        runDirectAccess();
+    }
     } else if ( message == "installStarted(QString)" ) {
-	QString package;
-	stream >> package;
-	qDebug( "\tInstall Started for package %s", package.latin1() );
+    QString package;
+    stream >> package;
+    qDebug( "\tInstall Started for package %s", package.latin1() );
     } else if ( message == "installStep(QString)" ) {
-	QString step;
-	stream >> step;
-	qDebug( "\tInstall Step %s", step.latin1() );
+    QString step;
+    stream >> step;
+    qDebug( "\tInstall Step %s", step.latin1() );
     } else if ( message == "installDone(QString)" ) {
-	QString package;
-	stream >> package;
-	qDebug( "\tInstall Finished for package %s", package.latin1() );
+    QString package;
+    stream >> package;
+    qDebug( "\tInstall Finished for package %s", package.latin1() );
     } else if ( message == "installFailed(QString,int,QString)" ) {
-	QString package, error;
-	int status;
-	stream >> package >> status >> error;
-	qDebug( "\tInstall Failed for package %s with error code %d and error message %s",
-		package.latin1(), status, error.latin1() );
+    QString package, error;
+    int status;
+    stream >> package >> status >> error;
+    qDebug( "\tInstall Failed for package %s with error code %d and error message %s",
+        package.latin1(), status, error.latin1() );
     } else if ( message == "removeStarted(QString)" ) {
-	QString package;
-	stream >> package;
-	qDebug( "\tRemove Started for package %s", package.latin1() );
+    QString package;
+    stream >> package;
+    qDebug( "\tRemove Started for package %s", package.latin1() );
     } else if ( message == "removeDone(QString)" ) {
-	QString package;
-	stream >> package;
-	qDebug( "\tRemove Finished for package %s", package.latin1() );
+    QString package;
+    stream >> package;
+    qDebug( "\tRemove Finished for package %s", package.latin1() );
     } else if ( message == "removeFailed(QString)" ) {
-	QString package;
-	stream >> package;
-	qDebug( "\tRemove Failed for package %s", package.latin1() );
+    QString package;
+    stream >> package;
+    qDebug( "\tRemove Failed for package %s", package.latin1() );
     }
 
     if ( qrr && qrr->waitingForMessages )
-	qrr->desktopMessage( message, data );
+    qrr->desktopMessage( message, data );
 }
 
 
@@ -909,7 +911,7 @@ void Server::runDirectAccess()
     // The timer must have fired after all the apps responded
     // with flushDone(). Just ignore it.
     if ( directAccessRun )
-	return;
+    return;
 
     directAccessRun = TRUE;
     ::readyDirectAccess(cardInfoString(), installLocationsString());
@@ -934,7 +936,7 @@ void Server::postDirectAccess()
     // restart the mtab monitor
 #ifndef QT_NO_COP
     {
-	QCopEnvelope e( "QPE/Stabmon", "restartMonitor()" );
+    QCopEnvelope e( "QPE/Stabmon", "restartMonitor()" );
     }
 #endif
 
@@ -942,22 +944,22 @@ void Server::postDirectAccess()
     const char *queueFile = ::directAccessQueueFile();
     QFile *file = new QFile( queueFile );
     if ( !file->exists() ) {
-	delete file;
-	// Get rid of the dialog
-	if ( syncDialog ) {
-	    delete syncDialog;
-	    syncDialog = 0;
-	}
+    delete file;
+    // Get rid of the dialog
+    if ( syncDialog ) {
+        delete syncDialog;
+        syncDialog = 0;
+    }
 #warning FIXME support TempScreenSaverMode
 #if 0
-	QPEApplication::setTempScreenSaverMode(QPEApplication::Enable);
+    QPEApplication::setTempScreenSaverMode(QPEApplication::Enable);
 #endif
     } else {
-	qrr = new QueuedRequestRunner( file, syncDialog );
-	connect( qrr, SIGNAL(finished()),
-		 this, SLOT(finishedQueuedRequests()) );
-	QTimer::singleShot( 100, qrr, SLOT(process()) );
-	// qrr will remove the sync dialog later
+    qrr = new QueuedRequestRunner( file, syncDialog );
+    connect( qrr, SIGNAL(finished()),
+         this, SLOT(finishedQueuedRequests()) );
+    QTimer::singleShot( 100, qrr, SLOT(process()) );
+    // qrr will remove the sync dialog later
     }
 #endif
 }
@@ -965,20 +967,20 @@ void Server::postDirectAccess()
 void Server::finishedQueuedRequests()
 {
     if ( qrr->readyToDelete ) {
-	delete qrr;
-	qrr = 0;
-	// Get rid of the dialog
-	if ( syncDialog ) {
-	    delete syncDialog;
-	    syncDialog = 0;
-	}
+    delete qrr;
+    qrr = 0;
+    // Get rid of the dialog
+    if ( syncDialog ) {
+        delete syncDialog;
+        syncDialog = 0;
+    }
 #warning FIXME support TempScreenSaverMode
 #if 0
-	QPEApplication::setTempScreenSaverMode(QPEApplication::Enable);
+    QPEApplication::setTempScreenSaverMode(QPEApplication::Enable);
 #endif
     } else {
-	qrr->readyToDelete = TRUE;
-	QTimer::singleShot( 0, this, SLOT(finishedQueuedRequests()) );
+    qrr->readyToDelete = TRUE;
+    QTimer::singleShot( 0, this, SLOT(finishedQueuedRequests()) );
     }
 }
 

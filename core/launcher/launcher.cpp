@@ -388,51 +388,51 @@ void LauncherTabWidget::launcherMessage( const QCString &msg, const QByteArray &
 {
     QDataStream stream( data, IO_ReadOnly );
     if ( msg == "setTabView(QString,int)" ) {
-    QString id;
-    stream >> id;
-    int mode;
-    stream >> mode;
-    if ( view(id) )
-        view(id)->setViewMode( (LauncherView::ViewMode)mode );
+        QString id;
+        stream >> id;
+        int mode;
+        stream >> mode;
+        if ( view(id) )
+            view(id)->setViewMode( (LauncherView::ViewMode)mode );
     } else if ( msg == "setTabBackground(QString,int,QString)" ) {
-    QString id;
-    stream >> id;
-    int mode;
-    stream >> mode;
-    QString pixmapOrColor;
-    stream >> pixmapOrColor;
-    if ( view(id) )
-        view(id)->setBackgroundType( (LauncherView::BackgroundType)mode, pixmapOrColor );
-    if ( id == "Documents" )
-        docLoadingWidget->setBackgroundType( (LauncherView::BackgroundType)mode, pixmapOrColor );
+        QString id;
+        stream >> id;
+        int mode;
+        stream >> mode;
+        QString pixmapOrColor;
+        stream >> pixmapOrColor;
+        if ( view(id) )
+            view(id)->setBackgroundType( (LauncherView::BackgroundType)mode, pixmapOrColor );
+        if ( id == "Documents" )
+            docLoadingWidget->setBackgroundType( (LauncherView::BackgroundType)mode, pixmapOrColor );
     } else if ( msg == "setTextColor(QString,QString)" ) {
-    QString id;
-    stream >> id;
-    QString color;
-    stream >> color;
-    if ( view(id) )
-        view(id)->setTextColor( QColor(color) );
-    if ( id == "Documents" )
-        docLoadingWidget->setTextColor( QColor(color) );
+        QString id;
+        stream >> id;
+        QString color;
+        stream >> color;
+        if ( view(id) )
+            view(id)->setTextColor( QColor(color) );
+        if ( id == "Documents" )
+            docLoadingWidget->setTextColor( QColor(color) );
     } else if ( msg == "setFont(QString,QString,int,int,int)" ) {
-    QString id;
-    stream >> id;
-    QString fam;
-    stream >> fam;
-    int size;
-    stream >> size;
-    int weight;
-    stream >> weight;
-    int italic;
-    stream >> italic;
-    if ( view(id) ) {
-        if ( !fam.isEmpty() ) {
-        view(id)->setViewFont( QFont(fam, size, weight, italic!=0) );
-        odebug << "setFont: " << fam << ", " << size << ", " << weight << ", " << italic << "" << oendl;
-        } else {
-        view(id)->clearViewFont();
+        QString id;
+        stream >> id;
+        QString fam;
+        stream >> fam;
+        int size;
+        stream >> size;
+        int weight;
+        stream >> weight;
+        int italic;
+        stream >> italic;
+        if ( view(id) ) {
+            if ( !fam.isEmpty() ) {
+                view(id)->setViewFont( QFont(fam, size, weight, italic!=0) );
+                odebug << "setFont: " << fam << ", " << size << ", " << weight << ", " << italic << "" << oendl;
+            } else {
+                view(id)->clearViewFont();
+            }
         }
-    }
     }else if ( msg == "setBusyIndicatorType(QString)" ) {
         QString type;
         stream >> type;
@@ -441,12 +441,33 @@ void LauncherTabWidget::launcherMessage( const QCString &msg, const QByteArray &
         if ( isVisibleWindow( static_cast<QWidget*>(parent())->winId() ) ) {
             if (categoryBar)
                 categoryBar->nextTab();
-        }else
+        }else {
             static_cast<QWidget*>(parent())->raise();
+        }
+    } else if (msg=="doctabEnabled(int)") {
+        int id; stream >> id;
+        odebug << "Doctab enabled " << id << oendl;
+        reCheckDoctab(id);
     }
 }
 
-
+void LauncherTabWidget::reCheckDoctab(int how)
+{
+    if ((bool)how == docTabEnabled) {
+        /* nothing to do */
+        return;
+    }
+    if (docLoadingWidget) {
+        stack->removeWidget(docLoadingWidget);
+        delete docLoadingWidget;
+        docLoadingWidget = 0;
+    }
+    createDocLoadingWidget();
+    {
+        QCopEnvelope( "QPE/System", "reforceDocuments()" );
+        odebug << "Sending doc rescan" << oendl;
+    }
+}
 
 //---------------------------------------------------------------------------
 

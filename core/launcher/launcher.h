@@ -81,6 +81,7 @@ private slots:
 protected:
     void paletteChange( const QPalette &p );
     void styleChange( QStyle & );
+    void reCheckDoctab(int how);
 
 private:
     Launcher *launcher;

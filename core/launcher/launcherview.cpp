@@ -332,9 +332,6 @@ void LauncherIconView::setSortMethod( SortMethod m )
 
 void LauncherIconView::setCategoryFilter( int catfilter, bool resort )
 {
-        Categories cat;
-        cat.load( categoryFileName() );
-        QString str;
         if ( catfilter == -2 )
             cf = 0;
         else
@@ -1083,6 +1080,7 @@ void LauncherView::itemPressed( int btn, QIconViewItem *item )
 void LauncherView::removeAllItems()
 {
     odebug << "LauncherView::removeAllItems()" << oendl;
+    if (LauncherIconView::sm_EyeCache) LauncherIconView::sm_EyeCache->clear();
     icons->clear();
 }
 

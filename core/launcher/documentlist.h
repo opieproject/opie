@@ -32,7 +32,7 @@ class DocumentList : public QObject {
     Q_OBJECT
 public:
     DocumentList( ServerInterface *serverGui, bool scanDocs = TRUE,
-		  QObject *parent = 0, const char *name = 0 );
+          QObject *parent = 0, const char *name = 0 );
     ~DocumentList();
 
     void linkChanged( QString link );
@@ -42,6 +42,7 @@ public:
 
     void reloadAppLnks();
     void reloadDocLnks();
+    void reforceDocuments();
     void DiffAppLnks();
 
 // Orig DocList stuff
