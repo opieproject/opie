@@ -15,7 +15,8 @@ HEADERS     = ocompletionbox.h       \
               oversatileviewitem.h   \
               #ojanuswidget.h         \
               odialog.h              \
-              oseparator.h
+              oseparator.h           \
+              otaskbarapplet.h
               
 SOURCES     = ocompletionbox.cpp     \
               ocombobox.cpp          \
@@ -31,7 +32,8 @@ SOURCES     = ocompletionbox.cpp     \
               oversatileviewitem.cpp \
               #ojanuswidget.cpp       \
               odialog.cpp            \
-              oseparator.cpp
+              oseparator.cpp        \
+              otaskbarapplet.cpp
 
 INTERFACES  =
 TARGET      = opieui2
