@@ -690,10 +690,13 @@ void TextEdit::showEditTools()
   unprompted save */
 bool TextEdit::save()
 {
-     qDebug("saveFile "+currentFileName);
-
+    QString file = doc->file();
+    QString name= doc->name();
     QString rt = editor->text();
-    doc->setName( currentFileName);
+    currentFileName= file ;
+    qDebug("saveFile "+currentFileName);
+
+    doc->setName( name);
     FileManager fm;
     if ( !fm.saveFile( *doc, rt ) ) {
         return false;
