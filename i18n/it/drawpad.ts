@@ -157,75 +157,75 @@ le pagine?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation>Clicca qui per aggiungere un nuovo foglio.</translation>
+        <translation>Premi qui per aggiungere un nuovo foglio.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation>Clicca qui per cancellare il foglio corrente.</translation>
+        <translation>Premi qui per cancellare il foglio corrente.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation>Clicca qui per eliminare il foglio corrente.</translation>
+        <translation>Premi qui per eliminare il foglio corrente.</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation>Clicca qui per annullare l&apos;ultima azione.</translation>
+        <translation>Premi qui per annullare l&apos;ultima azione.</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation>Clicca qui per ri-eseguire l&apos;ultima azione.</translation>
+        <translation>Premi qui per ri-eseguire l&apos;ultima azione.</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
-        <translation>Clicca qui per visualizzare la prima pagina.</translation>
+        <translation>Premi qui per visualizzare la prima pagina.</translation>
     </message>
     <message>
         <source>Click here to view the previous page.</source>
-        <translation>Clicca qui per visualizzare la pagina precedente.</translation>
+        <translation>Premi qui per visualizzare la pagina precedente.</translation>
     </message>
     <message>
         <source>Click here to view the next page.</source>
-        <translation>Clicca qui per visualizzare la pagina successiva.</translation>
+        <translation>Premi qui per visualizzare la pagina successiva.</translation>
     </message>
     <message>
         <source>Click here to view the last page.</source>
-        <translation>Clicca qui per visualizzare l&apos;ultima pagina.</translation>
+        <translation>Premi qui per visualizzare l&apos;ultima pagina.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw lines.</source>
-        <translation>Clicca qui per selezionare uno degli strumenti disponibili per disegnare linee.</translation>
+        <translation>Premi qui per selezionare uno degli strumenti disponibili per disegnare linee.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation>Clicca qui per selezionare uno degli strumenti disponibili per disegnare rettangoli.</translation>
+        <translation>Premi qui per selezionare uno degli strumenti disponibili per disegnare rettangoli.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation>Clicca qui per selezionare uno degli strumenti disponibili per disegnare ellissi.</translation>
+        <translation>Premi qui per selezionare uno degli strumenti disponibili per disegnare ellissi.</translation>
     </message>
     <message>
         <source>Click here to select the text drawing tool.</source>
-        <translation>Clicca qui per selezionare lo strumento per il testo.</translation>
+        <translation>Premi qui per selezionare lo strumento per il testo.</translation>
     </message>
     <message>
         <source>Click here to select the fill tool.</source>
-        <translation>Clicca qui per selezionare lo strumento di riempimento.</translation>
+        <translation>Premi qui per selezionare lo strumento di riempimento.</translation>
     </message>
     <message>
         <source>Click here to select the eraser tool.</source>
-        <translation>Clicca qui per selezionare lo strumento di cancellazione.</translation>
+        <translation>Premi qui per selezionare lo strumento di cancellazione.</translation>
     </message>
     <message>
         <source>Click here to select the width of the drawing pen.</source>
-        <translation>Clicca qui per selezionare la larghezza della penna per disegnare.</translation>
+        <translation>Premi qui per selezionare la larghezza della penna per disegnare.</translation>
     </message>
     <message>
         <source>Click here to select the color used when drawing.</source>
-        <translation>Clicca qui per selezionare il colore usato per disegnare.</translation>
+        <translation>Premi qui per selezionare il colore usato per disegnare.</translation>
     </message>
     <message>
         <source>Click here to select the color used when filling in areas.</source>
-        <translation>Clicca qui per selezionare il colore usato per riempire le aree.</translation>
+        <translation>Premi qui per selezionare il colore usato per riempire le aree.</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
@@ -270,6 +270,10 @@ le pagine?</translation>
         <source>Format:</source>
         <translation>Formato:</translation>
     </message>
+    <message>
+        <source>All Images</source>
+        <translation>Tutte le immagini</translation>
+    </message>
 </context>
 <context>
     <name>ImportDialog</name>
@@ -285,6 +289,10 @@ automatica</translation>
     <message>
         <source>Preview</source>
         <translation>Anteprima</translation>
+    </message>
+    <message>
+        <source>All images</source>
+        <translation>Tutte le immagini</translation>
     </message>
 </context>
 <context>
@@ -419,23 +427,23 @@ la pagina selezionata?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation>Clicca qui per aggiungere un nuovo foglio.</translation>
+        <translation>Premi qui per aggiungere un nuovo foglio.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation>Clicca qui per cancellare il foglio corrente.</translation>
+        <translation>Premi qui per cancellare il foglio corrente.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation>Clicca qui per eliminare il foglio corrente.</translation>
+        <translation>Premi qui per eliminare il foglio corrente.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet up one position in the list.</source>
-        <translation>Clicca qui per spostare il foglio corrente una posizione sù nella lista.</translation>
+        <translation>Premi qui per spostare il foglio corrente una posizione sù nella lista.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet down one position in the list.</source>
-        <translation>Clicca qui per spostare il foglio corrente una posizione giù nella lista.</translation>
+        <translation>Premi qui per spostare il foglio corrente una posizione giù nella lista.</translation>
     </message>
 </context>
 </TS>

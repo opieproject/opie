@@ -1,0 +1,21 @@
+<!DOCTYPE TS><TS>
+<context>
+    <name>MainView</name>
+    <message>
+        <source>Remote</source>
+        <translation>Далечинско</translation>
+    </message>
+    <message>
+        <source>Learn</source>
+        <translation>Учи</translation>
+    </message>
+    <message>
+        <source>Config</source>
+        <translation>Конфигурирај</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Помош</translation>
+    </message>
+</context>
+</TS>

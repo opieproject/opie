@@ -69,18 +69,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You asked for a delay of </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> minutes, but only </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -111,11 +99,15 @@ ntpdate </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> seconds</source>
+        <source>Could not connect to server </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not connect to server </source>
+        <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 seconds</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -187,80 +179,6 @@ ntpdate </source>
     <message>
         <source> seconds</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SetDateTime</name>
-    <message>
-        <source>Time Zone</source>
-        <translation type="obsolete">Časovni pas</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Datum</translation>
-    </message>
-    <message>
-        <source>Time format</source>
-        <translation type="obsolete">Oblika časa</translation>
-    </message>
-    <message>
-        <source>24 hour</source>
-        <translation type="obsolete">24 ur</translation>
-    </message>
-    <message>
-        <source>12 hour</source>
-        <translation type="obsolete">12 ur</translation>
-    </message>
-    <message>
-        <source>Weeks start on</source>
-        <translation type="obsolete">Teden se začne na</translation>
-    </message>
-    <message>
-        <source>Sunday</source>
-        <translation type="obsolete">Nedeljo</translation>
-    </message>
-    <message>
-        <source>Monday</source>
-        <translation type="obsolete">Ponedeljek</translation>
-    </message>
-    <message>
-        <source>Date format</source>
-        <translation type="obsolete">Oblika datuma</translation>
-    </message>
-    <message>
-        <source>Applet format</source>
-        <translation type="obsolete">Oblika programčka</translation>
-    </message>
-    <message>
-        <source>hh:mm</source>
-        <translation type="obsolete">uu:mm</translation>
-    </message>
-    <message>
-        <source>D/M hh:mm</source>
-        <translation type="obsolete">D/M uu:mm</translation>
-    </message>
-    <message>
-        <source>M/D hh:mm</source>
-        <translation type="obsolete">M/D hh:mm</translation>
-    </message>
-</context>
-<context>
-    <name>SetTime</name>
-    <message>
-        <source>Hour</source>
-        <translation type="obsolete">Ura</translation>
-    </message>
-    <message>
-        <source>Minute</source>
-        <translation type="obsolete">Minute</translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation type="obsolete">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
     </message>
 </context>
 <context>

@@ -22,7 +22,7 @@
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation>Visualiseur d&apos;images</translation>
+        <translation>Visualiseur d&apos;Images</translation>
     </message>
     <message>
         <source>Horizontal flip</source>

@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Do you really want to&lt;BR&gt;&lt;B&gt; delete&lt;/B&gt; this note ?</source>
-        <translation>Soll diese Notiz wirklich&lt;br&gt;&lt;b&gt;gelöscht&lt;/b&gt;werden?</translation>
+        <translation>Möchten sie wirklich diese Notiz löschen?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -32,15 +32,15 @@
     </message>
     <message>
         <source>Beam Out</source>
-        <translation>Versenden</translation>
+        <translation>Beamen</translation>
     </message>
     <message>
         <source>Search For...</source>
-        <translation>Suche nach...</translation>
+        <translation>Suchen nach...</translation>
     </message>
     <message>
         <source>Toggle Maximized</source>
-        <translation>Maximiert umschalten</translation>
+        <translation>(de)maximiere</translation>
     </message>
 </context>
 </TS>

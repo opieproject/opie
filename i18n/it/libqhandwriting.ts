@@ -22,10 +22,6 @@
 <context>
     <name>HandwritingTrainer</name>
     <message>
-        <source>Select a character from the list.  The writing area on the left shows the reference character.  Practice writing in the area on the right.</source>
-        <translation type="obsolete">Seleziona un carattere dall&apos;elenco.  L&apos;area per scrivere sulla sinistra mostra un carattere di riferimento.  Fai pratica scrivendo nell&apos;area sulla destra.</translation>
-    </message>
-    <message>
         <source>Matched: </source>
         <translation>Trovati: </translation>
     </message>
@@ -104,10 +100,6 @@
 </context>
 <context>
     <name>QIMPenPrefBase</name>
-    <message>
-        <source>Form1</source>
-        <translation type="obsolete">Form1</translation>
-    </message>
     <message>
         <source>Multi-stroke character timeout:</source>
         <translation>Timeout carattere con più segni:</translation>

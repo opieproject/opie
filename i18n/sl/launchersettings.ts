@@ -38,18 +38,33 @@
     </message>
 </context>
 <context>
-    <name>SampleView</name>
+    <name>QObject</name>
     <message>
         <source>Sample 1</source>
-        <translation>Primer 1</translation>
+        <translation type="unfinished">Primer 1</translation>
     </message>
     <message>
         <source>Sample 2</source>
-        <translation>Primer 1</translation>
+        <translation type="unfinished">Primer 1</translation>
     </message>
     <message>
         <source>Sample 3</source>
-        <translation>Primer 1</translation>
+        <translation type="unfinished">Primer 1</translation>
+    </message>
+</context>
+<context>
+    <name>SampleView</name>
+    <message>
+        <source>Sample 1</source>
+        <translation type="obsolete">Primer 1</translation>
+    </message>
+    <message>
+        <source>Sample 2</source>
+        <translation type="obsolete">Primer 1</translation>
+    </message>
+    <message>
+        <source>Sample 3</source>
+        <translation type="obsolete">Primer 1</translation>
     </message>
 </context>
 <context>

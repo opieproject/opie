@@ -61,15 +61,15 @@
     <name>IRCMessageParser</name>
     <message>
         <source>Received unhandled numeric command : </source>
-        <translation>Recivido comando numérico desatendido : </translation>
+        <translation type="obsolete">Recivido comando numérico desatendido : </translation>
     </message>
     <message>
         <source>Received unhandled ctcp command : </source>
-        <translation>Recivido comando ctcp desatendido : </translation>
+        <translation type="obsolete">Recivido comando ctcp desatendido : </translation>
     </message>
     <message>
         <source>Received unhandled literal command : </source>
-        <translation>Recivido comando literal desatendido : </translation>
+        <translation type="obsolete">Recivido comando literal desatendido : </translation>
     </message>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
@@ -77,7 +77,7 @@
     </message>
     <message>
         <source> joined channel </source>
-        <translation>canal unido</translation>
+        <translation type="obsolete">canal unido</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
@@ -89,11 +89,11 @@
     </message>
     <message>
         <source>You left channel </source>
-        <translation>Deja el canal</translation>
+        <translation type="obsolete">Deja el canal</translation>
     </message>
     <message>
         <source> left channel </source>
-        <translation>dejar canal</translation>
+        <translation type="obsolete">dejar canal</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Channel message with unknown channel </source>
-        <translation>Mensaje del canal con canal desconocido</translation>
+        <translation type="obsolete">Mensaje del canal con canal desconocido</translation>
     </message>
     <message>
         <source>Received PRIVMSG of unknown type</source>
@@ -117,11 +117,11 @@
     </message>
     <message>
         <source>You are now known as </source>
-        <translation>Ahora es conocido como </translation>
+        <translation type="obsolete">Ahora es conocido como </translation>
     </message>
     <message>
         <source> is now known as </source>
-        <translation>es ahora conocimo como</translation>
+        <translation type="obsolete">es ahora conocimo como</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source> has quit </source>
-        <translation>ha salido </translation>
+        <translation type="obsolete">ha salido </translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
@@ -218,6 +218,46 @@
     <message>
         <source>No such nickname</source>
         <translation>No hay tal apodo</translation>
+    </message>
+    <message>
+        <source>Received unhandled numeric command: %1</source>
+        <translation>Recivido comando numérico no manejado: %1</translation>
+    </message>
+    <message>
+        <source>Received unhandled ctcp command: %1</source>
+        <translation>Recivido comando ctcp no manejado: %1</translation>
+    </message>
+    <message>
+        <source>Received unhandled literal command: %1</source>
+        <translation>Recivido comando literal no manejado: %1</translation>
+    </message>
+    <message>
+        <source>%1 joined channel %2</source>
+        <translation>%1 unido al canal %2</translation>
+    </message>
+    <message>
+        <source>You left channel %1</source>
+        <translation>Ha dejado el canal %1</translation>
+    </message>
+    <message>
+        <source>%1 left channel %2</source>
+        <translation>%1 dejó el canal %2</translation>
+    </message>
+    <message>
+        <source>Channel message with unknown channel %1</source>
+        <translation>Mensaje del canal con canal desconocido %1</translation>
+    </message>
+    <message>
+        <source>You are now known as %1</source>
+        <translation>Ahora es conocido como %1</translation>
+    </message>
+    <message>
+        <source>%1 is now known as %2</source>
+        <translation>%1 es ahora conocido como %2</translation>
+    </message>
+    <message>
+        <source>%1 has quit (%2)</source>
+        <translation>%1 ha salido (%2)</translation>
     </message>
 </context>
 <context>
@@ -461,6 +501,10 @@ de canales que empiezan por &apos;#&apos; o &apos;+&apos;</translation>
     <message>
         <source>Colors</source>
         <translation>Colores</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Configuración</translation>
     </message>
 </context>
 <context>

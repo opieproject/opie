@@ -96,6 +96,10 @@ longa que o intervalo entre repetições.</translation>
         <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -191,6 +195,10 @@ longa que o intervalo entre repetições.</translation>
     </message>
     <message>
         <source>Duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -358,6 +366,14 @@ longa que o intervalo entre repetições.</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -377,41 +393,6 @@ longa que o intervalo entre repetições.</translation>
 </context>
 <context>
     <name>DateBookWeekView</name>
-    <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation>S</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation>T</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation>Q</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation>Q</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation>S</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation>S</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation>D</translation>
-    </message>
     <message>
         <source>p</source>
         <translation>p</translation>
@@ -544,6 +525,13 @@ longa que o intervalo entre repetições.</translation>
     </message>
     <message>
         <source>Note...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -707,6 +695,10 @@ e </translation>
     <message>
         <source>year(s)</source>
         <translation>ano(s)</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

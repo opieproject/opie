@@ -434,10 +434,6 @@ The value entered should always be positive.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Eletronics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Entertainment</source>
         <translation type="unfinished"></translation>
     </message>
@@ -499,6 +495,10 @@ The value entered should always be positive.</source>
     </message>
     <message>
         <source>Cash</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Electronics</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

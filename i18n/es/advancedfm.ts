@@ -194,12 +194,6 @@ de los ficheros %1?</translation>
         <translation>¿Borrar directorio?</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation>Confirme borrado
-</translation>
-    </message>
-    <message>
         <source>Really copy
 %1 files?</source>
         <translation>¿Confirma la copia
@@ -241,14 +235,6 @@ y está bajo licencia GPL
 </translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation>No puedo borrar el directorio
-actual de los favoritos.
-¡No está entre los favoritos!</translation>
-    </message>
-    <message>
         <source>Bookmark Directory</source>
         <translation>Directorio de favoritos</translation>
     </message>
@@ -260,6 +246,42 @@ actual de los favoritos.
         <source>Error</source>
         <translation>Error</translation>
     </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation>No pude borrar el directorio actual
+de los favoritos.
+¡No está marcado como favorito!</translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation>Buscar archivo</translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation>¿Seguro que quiere borrar %1
+y todo su contenido?</translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation>¿Confirma el borrado
+de %1?</translation>
+    </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="obsolete">Gestor de Ficheros Avanzado :: </translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="obsolete"> kB libres</translation>
+    </message>
+    <message>
+        <source>Copy &apos;%1&apos; As</source>
+        <translation type="obsolete">Copiar &quot;%1&quot; como</translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -270,6 +292,24 @@ actual de los favoritos.
     <message>
         <source>Output</source>
         <translation>Salida</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation>El proceso no pudo empezar</translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation>Error
+</translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation>
+Finalizado
+</translation>
     </message>
 </context>
 <context>
@@ -313,6 +353,26 @@ actual de los favoritos.
     <message>
         <source>execute</source>
         <translation>ejecución</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Aviso</translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation>Error - sin usuario</translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation>Error - sin grupo</translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation>Error fijando propietario o grupo</translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation>Error fijando modo</translation>
     </message>
 </context>
 </TS>

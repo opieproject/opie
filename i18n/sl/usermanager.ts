@@ -3,29 +3,29 @@
     <name>GroupDialog</name>
     <message>
         <source>Add Group</source>
-        <translation>Dodaj skupino</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit Group</source>
-        <translation>Uredi skupino</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>UserConfig</name>
     <message>
-        <source>OPIE User Manager</source>
-        <translation>OPIE upravljalnik uporabnikov</translation>
+        <source>Opie User Manager</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>UserDialog</name>
     <message>
         <source>Add User</source>
-        <translation>Dodaj uporabnika</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit User</source>
-        <translation>Uredi uporabnika</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -9,9 +9,20 @@
         <source>note</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>All day</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DatebookPluginConfig</name>
+</context>
+<context>
+    <name>DatebookPluginConfigBase</name>
+    <message>
+        <source>DatebookPluginConfigBase</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>Show location</source>
         <translation type="unfinished"></translation>
@@ -29,8 +40,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show only later
- appointments</source>
+        <source>Show only later appointments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -38,10 +48,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>How many 
-appointment
-should be 
-shown?</source>
+        <source>Show time in extra line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -49,7 +56,11 @@ shown?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>How many more days</source>
+        <source>How many appointment should be shown?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>only today</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -57,11 +68,7 @@ shown?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> day(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>only today</source>
+        <source>How many more days</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

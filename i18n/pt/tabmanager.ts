@@ -31,7 +31,8 @@
     <message>
         <source>Can&apos;t remove with applications
 still in the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não é possível apagar o grupo 
+pois ainda contêm aplicações.</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -39,7 +40,7 @@ still in the group.</source>
     </message>
     <message>
         <source>Are you sure you want to delete?</source>
-        <translation type="unfinished">Tem a certeza que </translation>
+        <translation>Tem a certeza que quer apagar?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -51,15 +52,15 @@ still in the group.</source>
     </message>
     <message>
         <source>Can&apos;t remove.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível apagar.</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasta</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished"></translation>
+        <translation>A ler os ícones...</translation>
     </message>
     <message>
         <source>Application</source>
@@ -70,7 +71,7 @@ still in the group.</source>
     <name>TabManagerBase</name>
     <message>
         <source>Tab Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestor de Pastas</translation>
     </message>
     <message>
         <source>Hierarchy</source>
@@ -81,7 +82,7 @@ still in the group.</source>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Espere um Momento...</translation>
     </message>
 </context>
 </TS>

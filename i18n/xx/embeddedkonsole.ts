@@ -5,6 +5,26 @@
         <source>Command Selection</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>new</source>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>edit</source>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>delete</source>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>up</source>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>down</source>
+        <translation type="obsolete">FOO</translation>
+    </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>

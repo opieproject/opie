@@ -1,5 +1,39 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>OHighscore</name>
+    <message>
+        <source>empty</source>
+        <translation>vazio</translation>
+    </message>
+    <message>
+        <source>Enter your name!</source>
+        <translation>Introduza o seu nome!</translation>
+    </message>
+</context>
+<context>
+    <name>OHighscoreDialog</name>
+    <message>
+        <source>Highscores</source>
+        <translation>Top de Pontuações</translation>
+    </message>
+    <message>
+        <source>#</source>
+        <translation>#</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nome</translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation>Pontos</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation>Nível</translation>
+    </message>
+</context>
+<context>
     <name>QTetrix</name>
     <message>
         <source>Tetrix</source>

@@ -1,10 +1,9 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Checkbook</name>
     <message>
         <source>Checkbook</source>
-        <translation>Konto</translation>
+        <translation>Kontobuch</translation>
     </message>
     <message>
         <source>New checkbook</source>
@@ -16,7 +15,7 @@
     </message>
     <message>
         <source>Transactions</source>
-        <translation>Buchungen</translation>
+        <translation>Transaktionen</translation>
     </message>
     <message>
         <source>Charts</source>
@@ -40,23 +39,23 @@
     </message>
     <message>
         <source>Savings</source>
-        <translation>Sparbuch</translation>
+        <translation>Ersparnisse</translation>
     </message>
     <message>
         <source>Checking</source>
-        <translation>laufendes Konto</translation>
+        <translation>Rechnung</translation>
     </message>
     <message>
         <source>CD</source>
-        <translation>Sparbrief</translation>
+        <translation>CD</translation>
     </message>
     <message>
         <source>Money market</source>
-        <translation>Geldmarktkonto</translation>
+        <translation>Geldmarkt</translation>
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation>Fonds</translation>
+        <translation>Rentenfond</translation>
     </message>
     <message>
         <source>Other</source>
@@ -68,7 +67,7 @@
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
-        <translation>Geben Sie den Namen der Bank hier ein.</translation>
+        <translation>Geben Sie den Namen des Kontos hier ein.</translation>
     </message>
     <message>
         <source>Account number:</source>
@@ -104,7 +103,7 @@
     </message>
     <message>
         <source>Current balance: %10.00</source>
-        <translation>Aktueller Stand: %10.00</translation>
+        <translation>Momentaner Stand: %10.00</translation>
     </message>
     <message>
         <source>This area shows the current balance in this checkbook.</source>
@@ -114,7 +113,7 @@
         <source>This is a listing of all transactions entered for this checkbook.
 
 To sort entries by a specific field, click on the column name.</source>
-        <translation>Dies ist eine Liste aller Buchungen für dieses Konto.
+        <translation>Dies ist eine Liste aller Transaktionen dieses Kontos.
 Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</translation>
     </message>
     <message>
@@ -127,7 +126,7 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
     </message>
     <message>
         <source>Amount</source>
-        <translation>Betrag</translation>
+        <translation>Menge</translation>
     </message>
     <message>
         <source>New</source>
@@ -135,7 +134,7 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
     </message>
     <message>
         <source>Click here to add a new transaction.</source>
-        <translation>Klicken Sie hier um eine neue Buchung anzulegen.</translation>
+        <translation>Klicken Sie hier um eine neue Transaktion anzulegen.</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -143,7 +142,7 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
     </message>
     <message>
         <source>Select a transaction and then click here to edit it.</source>
-        <translation>Wählen Sie eine Buchung und klicken Sie hier um sie zu bearbeiten.</translation>
+        <translation>Wählen Sie eine Transaktion und klicken Sie hier um sie zu bearbeiten.</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -151,15 +150,15 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
     </message>
     <message>
         <source>Select a checkbook and then click here to delete it.</source>
-        <translation>Wählen sie ein Konto und klicken Sie hier um es zu löschen.</translation>
+        <translation>Wählen sie ein Konto und klciken Sie hier um es zu löschen.</translation>
     </message>
     <message>
         <source>Select the desired chart below and then click on the Draw button.</source>
-        <translation>Wählen Sie die gewünschte Grafik und klicken Sie den &lt;b&gt;Zeichnen&lt;/b&gt;-Schalter.</translation>
+        <translation>Wählen Sie den gewünschten Graphen und klicken Sie den &lt;b&gt;Zeichnen&lt;/b&gt;-Schalter.</translation>
     </message>
     <message>
         <source>Click here to select the desired chart type.</source>
-        <translation>Wählen Sie hier die gewünschte Grafik.</translation>
+        <translation>Wählen Sie hier den gewünschten Graphen.</translation>
     </message>
     <message>
         <source>Account balance</source>
@@ -167,11 +166,11 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
     </message>
     <message>
         <source>Withdrawals by category</source>
-        <translation>Auszahlungen nach Kategorie</translation>
+        <translation>Ausgaben n. Kategorie</translation>
     </message>
     <message>
         <source>Deposits by category</source>
-        <translation>Einzahlungen nach Kategorie</translation>
+        <translation>Einnahmen n. Kategorie</translation>
     </message>
     <message>
         <source>Draw</source>
@@ -179,7 +178,7 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
     </message>
     <message>
         <source>Click here to draw the selected chart.</source>
-        <translation>Klicken Sie hier um die gewünschte Grafik zu erstellen.</translation>
+        <translation>Klicken Sie hier um den gewünschten Graphen zu erstellen.</translation>
     </message>
     <message>
         <source>Current balance: %1%2</source>
@@ -187,7 +186,7 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
     </message>
     <message>
         <source>Delete transaction</source>
-        <translation>Buchung löschen</translation>
+        <translation>Transaktion löschen</translation>
     </message>
     <message>
         <source>Password protect</source>
@@ -251,7 +250,7 @@ protected</source>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
-        <translation>Klicken Sie hier, um die Anzeige der Kontostände im Hauptfenster zu aktivieren.</translation>
+        <translation>Klicken Sie hier, um die Anzeige der Kontostände der einzelnen Konten im Hauptfenster angezeigt werden sollen.</translation>
     </message>
 </context>
 <context>
@@ -273,14 +272,14 @@ Sie können auch &lt;b&gt;Neu&lt;/b&gt; aus dem Konto-Menü wählen.</translatio
     </message>
     <message>
         <source>Edit</source>
-        <translation>Bearbeiten</translation>
+        <translation>Berabeiten</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to edit it.
 
 You also can select Edit from the Checkbook menu, or click and hold on a checkbook name.</source>
-        <translation>Wählen Sie ein ein Konto und klicken Sie hier, um es zu bearbeiten.
-Sie können auch &lt;b&gt;Bearbeiten&lt;/b&gt; aus dem Kontomenü wählen oder mit dem Stift auf einen Kontobuch dücken und ihn kurz dort halten.</translation>
+        <translation>Wählen Sie ein ein Konto und klicken Sie hier um es zu bearbeiten.
+Sie können auch &lt;b&gt;Bearbeiten&lt;/b&gt; aus dem Konto-menü wählen oder mit dem Stift auf einen Kontobuch dücken und ihn kurz dort halten.</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -291,7 +290,7 @@ Sie können auch &lt;b&gt;Bearbeiten&lt;/b&gt; aus dem Kontomenü wählen oder m
 
 You also can select Delete from the Checkbook menu.</source>
         <translation>Wählen Sie ein Konto und klicken Sie hier um es zu löschen.
-Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Kontomenü wählen.</translation>
+Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Konto-menü wählen.</translation>
     </message>
     <message>
         <source>This is a listing of all checkbooks currently available.</source>
@@ -303,11 +302,11 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Kontomenü wählen.</transl
     </message>
     <message>
         <source>Configure</source>
-        <translation>Einstellungen</translation>
+        <translation>Konfigurieren</translation>
     </message>
     <message>
         <source>Click here to configure this app.</source>
-        <translation>Klicken Sie hier um die Einstellungen für die Anwendung zu ändern.</translation>
+        <translation>Klicken Sie hier um die Anwendung zu konfigurieren.</translation>
     </message>
     <message>
         <source>Checkbook Name</source>
@@ -330,19 +329,19 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Kontomenü wählen.</transl
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>
-        <translation>Buchung auf </translation>
+        <translation>Transaktion für </translation>
     </message>
     <message>
         <source>Withdrawal</source>
-        <translation>Auszahlung</translation>
+        <translation>Ausgabe</translation>
     </message>
     <message>
         <source>Select whether the transaction is a withdrawal or deposit here.</source>
-        <translation>Wählen Sie hier, ob es sich um eine Ein- oder Auszahlung handelt.</translation>
+        <translation>Wählen Sie hier ob es sich um eine Einnahme oder Ausgabe handelt.</translation>
     </message>
     <message>
         <source>Deposit</source>
-        <translation>Einzahlung</translation>
+        <translation>Einnahme</translation>
     </message>
     <message>
         <source>Date:</source>
@@ -350,7 +349,7 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Kontomenü wählen.</transl
     </message>
     <message>
         <source>Select date of transaction here.</source>
-        <translation>Wählen Sie das Buchungsdatum hier.</translation>
+        <translation>Wählen Sie das Transaktionsdatum hier.</translation>
     </message>
     <message>
         <source>Number:</source>
@@ -366,7 +365,7 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Kontomenü wählen.</transl
     </message>
     <message>
         <source>Enter description of transaction here.</source>
-        <translation>Geben Sie hier den Buchungstext ein.</translation>
+        <translation>Geben Sie hier die Beschreibung der Transaktion ein.</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -374,7 +373,7 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Kontomenü wählen.</transl
     </message>
     <message>
         <source>Select transaction category here.</source>
-        <translation>Wählen Sie die Kategorie der Buchung  hier.</translation>
+        <translation>Wählen Sie die Transaktionskategorie  hier.</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -384,19 +383,19 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Kontomenü wählen.</transl
         <source>Select transaction type here.
 
 The options available vary based on whether the transaction is a deposit or withdrawal.</source>
-        <translation>Wählen Sie den Buchungstyp hier.
-Die verfügbaren Optionen hängen davon ab, ob es sich um eine Ein- oder Auszahlung handelt.</translation>
+        <translation>Wählen Sie den Transaktionstyp hier.
+Die verfügbaren Optionen hängen davon ab, ob es sich um eine Einnahme oder Ausgabe handelt.</translation>
     </message>
     <message>
         <source>Amount:</source>
-        <translation>Betrag: </translation>
+        <translation>Menge: </translation>
     </message>
     <message>
         <source>Enter the amount of transaction here.
 
 The value entered should always be positive.</source>
-        <translation>Geben Sie den Buchungsbetrag hier an.
-Der eingegebene Betrag sollte immer positiv sein.</translation>
+        <translation>Geben Sie den Wert der Transaktion hier an.
+Der eingegebene sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Fee:</source>
@@ -406,8 +405,8 @@ Der eingegebene Betrag sollte immer positiv sein.</translation>
         <source>Enter any fee amount assoiciated with this transaction.
 
 The value entered should always be positive.</source>
-        <translation>Geben Sie eine Gebühr ein, die mit dieser Buchung in Verbindung steht.
-Der Betrag der Gebühr sollte immer positiv sein.</translation>
+        <translation>Geben Sie eine Gebühr ein, die mit dieser Transaktion in Verbindung steht.
+Der Wer der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -415,7 +414,7 @@ Der Betrag der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Enter any additional information for this transaction here.</source>
-        <translation>Geben Sie hier weitere Informationen ein.</translation>
+        <translation>Geben Sie heir weitere Informationen ein.</translation>
     </message>
     <message>
         <source>Automobile</source>
@@ -443,7 +442,7 @@ Der Betrag der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation>Elektronik</translation>
+        <translation type="obsolete">Elektronik</translation>
     </message>
     <message>
         <source>Entertainment</source>
@@ -459,7 +458,7 @@ Der Betrag der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation>Sonstiges</translation>
+        <translation>Versch.</translation>
     </message>
     <message>
         <source>Movies</source>
@@ -471,11 +470,11 @@ Der Betrag der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Reisen</translation>
+        <translation>Reise</translation>
     </message>
     <message>
         <source>Debit Charge</source>
-        <translation>Kreditrate</translation>
+        <translation>Abzahlung</translation>
     </message>
     <message>
         <source>Written Check</source>
@@ -483,7 +482,7 @@ Der Betrag der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Transfer</source>
-        <translation>Überweisung</translation>
+        <translation>Transfer</translation>
     </message>
     <message>
         <source>Credit Card</source>
@@ -499,7 +498,7 @@ Der Betrag der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation>Kredit</translation>
+        <translation>Kreditsache</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
@@ -508,6 +507,10 @@ Der Betrag der Gebühr sollte immer positiv sein.</translation>
     <message>
         <source>Cash</source>
         <translation>Bar</translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1,54 +1,6 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>ObexDlg</name>
-    <message>
-        <source>OBEX Sending</source>
-        <translation type="obsolete">OBEX Enviando</translation>
-    </message>
-    <message>
-        <source>Sending:</source>
-        <translation type="obsolete">Enviando:</translation>
-    </message>
-    <message>
-        <source>filename</source>
-        <translation type="obsolete">fichero</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-</context>
-<context>
-    <name>ObexInc</name>
-    <message>
-        <source>OBEX Receiving</source>
-        <translation type="obsolete">OBEX Recibiendo</translation>
-    </message>
-    <message>
-        <source>TextLabel1</source>
-        <translation type="obsolete">EtiquetaTexto1</translation>
-    </message>
-    <message>
-        <source>Filename</source>
-        <translation type="obsolete">Fichero</translation>
-    </message>
-    <message>
-        <source>A file was beamed 
-to you.</source>
-        <translation type="obsolete">Se emitió un fichero
-para usted.</translation>
-    </message>
-    <message>
-        <source>Insert</source>
-        <translation type="obsolete">Insertar</translation>
-    </message>
-    <message>
-        <source>Reject</source>
-        <translation type="obsolete">Rechazar</translation>
-    </message>
-</context>
-<context>
-    <name>OtherHandler</name>
+    <name>OpieObex::OtherHandler</name>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;Received:&lt;/b&gt;&lt;/qt&gt;</source>
         <translation>&lt;qt&gt;&lt;b&gt;Recibido:&lt;/b&gt;&lt;/qt&gt;</translation>
@@ -67,7 +19,7 @@ para usted.</translation>
     </message>
 </context>
 <context>
-    <name>SendWidget</name>
+    <name>OpieObex::SendWidget</name>
     <message>
         <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
         <translation>&lt;qt&gt;&lt;h1&gt;Enviando:&lt;/h1&gt;&lt;/qt&gt;</translation>
@@ -78,7 +30,7 @@ para usted.</translation>
     </message>
     <message>
         <source>IrDa is not enabled!</source>
-        <translation>¡Infrarojos no habilitados!</translation>
+        <translation>¡Infrarrojos no habilitados!</translation>
     </message>
     <message>
         <source>Searching for IrDa Devices.</source>
@@ -86,7 +38,7 @@ para usted.</translation>
     </message>
     <message>
         <source>Bluetooth is not available</source>
-        <translation>Bluetooth no está disponible</translation>
+        <translation>Bluetooth no disponible</translation>
     </message>
     <message>
         <source>Searching for bluetooth Devices.</source>

@@ -103,5 +103,29 @@ You get %2 lives this time!</source>
         <translation>En el nivel %1.
 ¡Tiene %2 vidas esta vez!</translation>
     </message>
+    <message>
+        <source>About</source>
+        <translation>Sobre</translation>
+    </message>
+    <message>
+        <source>Written by: Stefan Schimanski
+Ported by: Martin Imobersteg
+
+Click to form walls.
+Hit space to switch wall direction.
+Try to reduce total space by 75%.
+
+This program is distributed under
+the terms of the GPL v2.</source>
+        <translation>Escrito por: Stefan Schimanski
+Migración por: Martin Imobersteg
+
+Haga clic para formar paredes.
+Espacio para conmutar la dirección.
+Intente reducir el espacio total un 75%.
+
+Este programa se distribuye bajo
+los términos de la GPL v2.</translation>
+    </message>
 </context>
 </TS>

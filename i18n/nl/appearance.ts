@@ -79,7 +79,7 @@ Klik hier om een kleurschema te kiezen.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Zet stijlinstellingen uit voor deze programma&apos;s (&lt;b&gt;*&lt;/b&gt; kunnen worden gebruikt als jokertekens):</translation>
+        <translation>Zet stijlinstellingen uit voor deze programma&apos;s (&lt;b&gt;*&lt;/b&gt; kan worden gebruikt als jokerteken):</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
@@ -87,7 +87,7 @@ Klik hier om een kleurschema te kiezen.</translation>
 This area allows you to select an application and which settings you wish to disable.</source>
         <translation>Als sommige applicaties niet goed werken met de algemene stijlinstellingen, kunt u hier onderdelen ervan uitschakelen voor dat programma.
 
-Dit gedeelte geeft de mogelijkheid een programma te selecteren en de uit te schakelen instellinen te kiezen.</translation>
+Dit gedeelte geeft de mogelijkheid een programma te selecteren en de uit te schakelen instellingen te kiezen.</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
@@ -107,7 +107,7 @@ Dit gedeelte geeft de mogelijkheid een programma te selecteren en de uit te scha
     </message>
     <message>
         <source>Click here to move the currently selected application down in the list.</source>
-        <translation>Klik hier om het geselecteerde programma hoger in de lijst te zetten.</translation>
+        <translation>Klik hier om het geselecteerde programma lager in de lijst te zetten.</translation>
     </message>
     <message>
         <source>Tab style:</source>
@@ -217,7 +217,7 @@ Dit gedeelte geeft de mogelijkheid een programma te selecteren en de uit te scha
     </message>
     <message>
         <source>Scheme does already exist.</source>
-        <translation>Scema bestaat al.</translation>
+        <translation>Schema bestaat al.</translation>
     </message>
     <message>
         <source>Delete scheme</source>

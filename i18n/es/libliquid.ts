@@ -14,7 +14,7 @@
     </message>
     <message>
         <source>No translucency</source>
-        <translation>Sin transparencias</translation>
+        <translation>Sin transparencia</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
@@ -50,15 +50,15 @@
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation>Usar texto del menú sombreado</translation>
+        <translation>Usar texto del munú sombreado</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation>Botones planos en barra herramientas</translation>
+        <translation>Botones de barra de herramientas planos</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
-        <translation>Puntear contraste</translation>
+        <translation>Contraste punteado</translation>
     </message>
 </context>
 <context>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation>Estilo Líquido de alto rendimiento por Mosfet</translation>
+        <translation>Estilo de alto rendimiento Liquid por Mosfet</translation>
     </message>
 </context>
 </TS>

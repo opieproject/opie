@@ -1,4 +1,39 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
+<context>
+    <name>OHighscore</name>
+    <message>
+        <source>empty</source>
+        <translation>vuoto</translation>
+    </message>
+    <message>
+        <source>Enter your name!</source>
+        <translation>Inserisci il tuo nome!</translation>
+    </message>
+</context>
+<context>
+    <name>OHighscoreDialog</name>
+    <message>
+        <source>Highscores</source>
+        <translation>Punteggi</translation>
+    </message>
+    <message>
+        <source>#</source>
+        <translation>#</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nome</translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation>Punti</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation>Livello</translation>
+    </message>
+</context>
 <context>
     <name>QTetrix</name>
     <message>
@@ -7,7 +42,7 @@
     </message>
     <message>
         <source>Score</source>
-        <translation>Punteggio</translation>
+        <translation>Punti</translation>
     </message>
     <message>
         <source>Level</source>

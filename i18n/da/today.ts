@@ -25,6 +25,10 @@
         <source>No plugins activated</source>
         <translation>Ingen plugins aktiveret</translation>
     </message>
+    <message>
+        <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
+        <translation type="obsolete">&lt;b&gt;Ejes af %1&lt;/b&gt;</translation>
+    </message>
 </context>
 <context>
     <name>TodayBase</name>
@@ -43,10 +47,6 @@
 </context>
 <context>
     <name>TodayConfig</name>
-    <message>
-        <source>Today config</source>
-        <translation>Idag indstillinger</translation>
-    </message>
     <message>
         <source>Load which plugins in what order:</source>
         <translation>Hent hvilke plugins i hvilken rækkefølge:</translation>
@@ -67,37 +67,108 @@
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation>Start automatisk
+        <translation type="obsolete">Start automatisk
 ved opvågning?
 (Kun Opie)</translation>
+    </message>
+    <message>
+        <source>Check this if today should be autostarted on resume.</source>
+        <translation type="obsolete">Vælg denne hvis Idag skal startes automatisk ved opvågning.</translation>
+    </message>
+    <message>
+        <source>minutes inactive</source>
+        <translation type="obsolete">Minutter inaktiv</translation>
+    </message>
+    <message>
+        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
+        <translation type="obsolete">Hvor mange minutter PDA&apos;en har været i dvale før autostart egenskaben er aktiv ved opvågning</translation>
+    </message>
+    <message>
+        <source>Icon size</source>
+        <translation type="obsolete">Ikon størrelse</translation>
+    </message>
+    <message>
+        <source>Set the icon size in pixel</source>
+        <translation type="obsolete">Indstil størrelsen på ikonet i pixels</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="obsolete">Genopfrisk</translation>
+    </message>
+    <message>
+        <source>How often should Today refresh itself</source>
+        <translation type="obsolete">Hvor ofte Idag skal genopfriske sig selv</translation>
+    </message>
+    <message>
+        <source> sec</source>
+        <translation type="obsolete"> sek</translation>
+    </message>
+    <message>
+        <source>never</source>
+        <translation type="obsolete">aldrig</translation>
+    </message>
+    <message>
+        <source>Misc</source>
+        <translation>Blandet</translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
+        <translation>Afkryds feltet for at aktivere/deaktivere et plugin eller brug piletasterne til højre for at ændre rækkefølgen de bliver vist</translation>
+    </message>
+    <message>
+        <source>Today Config</source>
+        <translation>Idag konfiguration</translation>
+    </message>
+    <message>
+        <source>Tiny Banner</source>
+        <translation type="obsolete">Mini-banner</translation>
+    </message>
+</context>
+<context>
+    <name>TodayConfigMiscBase</name>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
         <translation>Vælg denne hvis Idag skal startes automatisk ved opvågning.</translation>
     </message>
     <message>
-        <source>minutes inactive</source>
-        <translation>Minutter inaktiv</translation>
+        <source>autostart on resume?</source>
+        <translation>autostart ved opvågning?</translation>
+    </message>
+    <message>
+        <source>tiny banner</source>
+        <translation>minibanner</translation>
+    </message>
+    <message>
+        <source>Have small banner </source>
+        <translation>Minibanner</translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation>min</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
         <translation>Hvor mange minutter PDA&apos;en har været i dvale før autostart egenskaben er aktiv ved opvågning</translation>
     </message>
     <message>
-        <source>Icon size</source>
-        <translation>Ikon størrelse</translation>
+        <source>minutes inactive</source>
+        <translation>Minutter inaktiv</translation>
+    </message>
+    <message>
+        <source> pixel</source>
+        <translation>pixels</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
         <translation>Indstil størrelsen på ikonet i pixels</translation>
     </message>
     <message>
-        <source>Refresh</source>
-        <translation>Genopfrisk</translation>
-    </message>
-    <message>
-        <source>How often should Today refresh itself</source>
-        <translation>Hvor ofte Idag skal genopfriske sig selv</translation>
+        <source>icon size</source>
+        <translation>Ikonstørrelse</translation>
     </message>
     <message>
         <source> sec</source>
@@ -108,12 +179,12 @@ ved opvågning?
         <translation>aldrig</translation>
     </message>
     <message>
-        <source>Misc</source>
-        <translation>Blandet</translation>
+        <source>How often should Today refresh itself</source>
+        <translation>Hvor ofte Idag skal genopfriske sig selv</translation>
     </message>
     <message>
-        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation>Afkryds feltet for at aktivere/deaktivere et plugin eller brug piletasterne til højre for at ændre rækkefølgen de bliver vist</translation>
+        <source>refresh</source>
+        <translation>genopfrisk</translation>
     </message>
 </context>
 </TS>

@@ -1,0 +1,10 @@
+Package: opie-i18n-mk
+Files: i18n/mk/.directory i18n/mk/*.qm
+Priority: optional
+Section: opie/i18n
+Maintainer: Darko Nikolovski <arkon@macedonia.homelinux.org>
+Architecture: arm
+Depends: task-opie-minimal, opie-language
+Description: i18n: Makedonian
+ Makedonian UI texts and dictionary for OPIE environment.
+Version: $QPE_VERSION$EXTRAVERSION

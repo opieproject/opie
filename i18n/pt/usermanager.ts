@@ -14,7 +14,11 @@
     <name>UserConfig</name>
     <message>
         <source>OPIE User Manager</source>
-        <translation>Gestor de Users do OPIE</translation>
+        <translation type="obsolete">Gestor de Users do OPIE</translation>
+    </message>
+    <message>
+        <source>Opie User Manager</source>
+        <translation>Gestor de Utilizadores do Opie</translation>
     </message>
 </context>
 <context>

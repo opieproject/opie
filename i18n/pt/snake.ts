@@ -23,7 +23,7 @@ evitar bater nas paredes ou na cauda.</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
-        <translation>Prima uma tecla para começar</translation>
+        <translation type="obsolete">Prima uma tecla para começar</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
@@ -37,7 +37,15 @@ Pontuação: %1</translation>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation>Prima uma tecla para começar um novo jogo.</translation>
+        <translation type="obsolete">Prima uma tecla para começar um novo jogo.</translation>
+    </message>
+    <message>
+        <source>Press any key to start</source>
+        <translation>Prima uma tecla para começar</translation>
+    </message>
+    <message>
+        <source>Press any key to begin a new game.</source>
+        <translation>Prima uma tecla para começar um jogo novo.</translation>
     </message>
 </context>
 </TS>

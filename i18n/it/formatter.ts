@@ -27,7 +27,7 @@
 Changing parameters on this 
 page may cause your system 
 to stop functioning properly!!</source>
-        <translation>ATTENZIONE:
+        <translation type="obsolete">ATTENZIONE:
 Cambiare i parametri su questa 
 pagina può causare il non corretto 
 funzionamento del tuo sistema!!</translation>
@@ -54,7 +54,7 @@ funzionamento del tuo sistema!!</translation>
     </message>
     <message>
         <source>Format?!?</source>
-        <translation>Formatto?!?</translation>
+        <translation type="obsolete">Formatto?!?</translation>
     </message>
     <message>
         <source>Really format
@@ -65,13 +65,13 @@ funzionamento del tuo sistema!!</translation>
     <message>
         <source>
 with </source>
-        <translation>
+        <translation type="obsolete">
 con </translation>
     </message>
     <message>
         <source> filesystem?!?
 You will loose all data!!</source>
-        <translation> filesystem?!?
+        <translation type="obsolete"> filesystem?!?
 Perderai tutti i dati!!</translation>
     </message>
     <message>
@@ -98,7 +98,7 @@ Tipo sconosciuto</translation>
     </message>
     <message>
         <source>Trying to umount.</source>
-        <translation>Tento di smontate.</translation>
+        <translation>Tento di smontare.</translation>
     </message>
     <message>
         <source>umount failed!</source>
@@ -130,7 +130,7 @@ has been successfully formatted.</source>
     </message>
     <message>
         <source>Trying to mount.</source>
-        <translation>Tento di montare.</translation>
+        <translation type="obsolete">Tento di montare.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
@@ -139,7 +139,7 @@ has been successfully formatted.</source>
     <message>
         <source>
 has been successfully mounted.</source>
-        <translation>
+        <translation type="obsolete">
 è stato montato con successo.</translation>
     </message>
     <message>
@@ -152,7 +152,7 @@ has been successfully mounted.</source>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation>Tipo Storage : </translation>
+        <translation type="obsolete">Tipo Storage : </translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
@@ -169,6 +169,54 @@ has been successfully mounted.</source>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
         <translation>Disponibili: %1 kB ( %d mB)</translation>
+    </message>
+    <message>
+        <source>CAUTION:
+Changing parameters on this
+page may cause your system
+to stop functioning properly!</source>
+        <translation>ATTENZIONE:
+Cambiare i parametri su questa 
+pagina può causare il non corretto 
+funzionamento del sistema!</translation>
+    </message>
+    <message>
+        <source>Format?</source>
+        <translation>Formatto?</translation>
+    </message>
+    <message>
+        <source>
+with %1 filesystem?
+You will loose all data!!</source>
+        <translation>
+con il filesystem %1?
+Perderai tutti i dati!!</translation>
+    </message>
+    <message>
+        <source>Trying to umount %1.</source>
+        <translation>Tento di smontare %1.</translation>
+    </message>
+    <message>
+        <source>Trying to mount %1.</source>
+        <translation>Tento di montare %1.</translation>
+    </message>
+    <message>
+        <source>%1
+has been successfully mounted.</source>
+        <translation>%1
+è stato montato con successo.</translation>
+    </message>
+    <message>
+        <source>Storage Type: %1</source>
+        <translation>Tipo Storage: %1</translation>
+    </message>
+    <message>
+        <source>Type: %1
+Formatted with %2
+%3, %4, %5</source>
+        <translation>Tipo: %1
+Formattato con %2
+%3, %4, %5</translation>
     </message>
 </context>
 </TS>

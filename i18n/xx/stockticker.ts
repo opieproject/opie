@@ -1,0 +1,68 @@
+<!DOCTYPE TS><TS>
+<context>
+    <name>HelpWindow</name>
+    <message>
+        <source>&amp;Open File</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Backward</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Forward</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Home</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Add Bookmark</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Go</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>History</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Bookmarks</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Backward</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>FOO</translation>
+    </message>
+</context>
+<context>
+    <name>InputDialog</name>
+    <message>
+        <source>Symbol Lookup</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Enter something to lookup / search.</source>
+        <translation>FOO</translation>
+    </message>
+</context>
+</TS>

@@ -1,3 +1,4 @@
 #!/bin/sh
-echo "this script adds nullstrings everywhere"
+echo "this script adds 'FOO' everywhere"
 perl -pi -e "s/<translation.*/<translation>FOO<\/translation>/" *.ts
+echo "all strings replaced with 'FOO'"

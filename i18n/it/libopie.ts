@@ -1,162 +1,183 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>ColorPopupMenu</name>
+    <name>Button</name>
     <message>
-        <source>More</source>
-        <translation type="obsolete">Ancora</translation>
+        <source>Calendar Button</source>
+        <translation>Pulsante Agenda</translation>
     </message>
     <message>
-        <source>More...</source>
-        <translation type="obsolete">Ancora...</translation>
+        <source>Contacts Button</source>
+        <translation>Pulsante ontatti</translation>
+    </message>
+    <message>
+        <source>Menu Button</source>
+        <translation>Pulsante Menu</translation>
+    </message>
+    <message>
+        <source>Mail Button</source>
+        <translation>Pulsante Posta</translation>
+    </message>
+    <message>
+        <source>Home Button</source>
+        <translation>Pulsante Home</translation>
+    </message>
+    <message>
+        <source>Record Button</source>
+        <translation>Pulsante Registrazione</translation>
+    </message>
+    <message>
+        <source>Display Rotate</source>
+        <translation>Rotazione Display</translation>
+    </message>
+    <message>
+        <source>Lower+Up</source>
+        <translation>Basso+Sù</translation>
+    </message>
+    <message>
+        <source>Lower+Down</source>
+        <translation>Basso+Giù</translation>
+    </message>
+    <message>
+        <source>Lower+Right</source>
+        <translation>Basso+Destra</translation>
+    </message>
+    <message>
+        <source>Lower+Left</source>
+        <translation>Basso+Sinistra</translation>
+    </message>
+    <message>
+        <source>Upper+Up</source>
+        <translation>Alto+Sù</translation>
+    </message>
+    <message>
+        <source>Upper+Down</source>
+        <translation>Alto+Giù</translation>
+    </message>
+    <message>
+        <source>Upper+Right</source>
+        <translation>Alto+Destra</translation>
+    </message>
+    <message>
+        <source>Upper+Left</source>
+        <translation>Alto+Sinistra</translation>
     </message>
 </context>
 <context>
     <name>OColorDialog</name>
     <message>
         <source>Hue:</source>
-        <translation type="obsolete">Tinta:</translation>
+        <translation>Tinta:</translation>
     </message>
     <message>
         <source>Sat:</source>
-        <translation type="obsolete">Sat:</translation>
+        <translation>Sat:</translation>
     </message>
     <message>
         <source>Val:</source>
-        <translation type="obsolete">Val:</translation>
+        <translation>Val:</translation>
     </message>
     <message>
         <source>Red:</source>
-        <translation type="obsolete">Rosso:</translation>
+        <translation>Rosso:</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation type="obsolete">Verde:</translation>
+        <translation>Verde:</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation type="obsolete">Blu:</translation>
+        <translation>Blu:</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation type="obsolete">Alpha channel:</translation>
+        <translation>Alpha channel:</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation type="obsolete">Seleziona colore</translation>
+        <translation>Seleziona colore</translation>
+    </message>
+</context>
+<context>
+    <name>OColorPopupMenu</name>
+    <message>
+        <source>More</source>
+        <translation>Ancora</translation>
+    </message>
+    <message>
+        <source>More...</source>
+        <translation>Ancora...</translation>
     </message>
 </context>
 <context>
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="obsolete">FileDialog</translation>
+        <translation>FileDialog</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="obsolete">Apri</translation>
+        <translation>Apri</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="obsolete">Salva</translation>
+        <translation>Salva</translation>
     </message>
 </context>
 <context>
     <name>OFileSelector</name>
     <message>
-        <source>Documents</source>
-        <translation type="obsolete">Documenti</translation>
-    </message>
-    <message>
-        <source>Files</source>
-        <translation type="obsolete">File</translation>
-    </message>
-    <message>
-        <source>All Files</source>
-        <translation type="obsolete">Tutti i File</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Tutti</translation>
-    </message>
-    <message>
         <source>Name:</source>
-        <translation type="obsolete">Nome:</translation>
+        <translation>Nome:</translation>
     </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="obsolete">&amp;Salva</translation>
-    </message>
-    <message>
-        <source>C&amp;ancel</source>
-        <translation type="obsolete">C&amp;ancella</translation>
-    </message>
+</context>
+<context>
+    <name>OFileViewFileListView</name>
     <message>
         <source>Name</source>
-        <translation type="obsolete">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="obsolete">Dimensione</translation>
+        <translation>Dimensione</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="obsolete">Data</translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation type="obsolete">Mime Type</translation>
-    </message>
-    <message>
-        <source>Ser Permission</source>
-        <translation type="obsolete">Imposta Permessi</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Cancella</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete
-</source>
-        <translation type="obsolete">Vuoi veramente cancellare</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sì</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">No</translation>
+        <translation>Tipo Mime</translation>
     </message>
 </context>
 <context>
     <name>OFontMenu</name>
     <message>
         <source>Large</source>
-        <translation type="obsolete">Grande</translation>
+        <translation>Grande</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="obsolete">Medio</translation>
+        <translation>Medio</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="obsolete">Piccolo</translation>
+        <translation>Piccolo</translation>
     </message>
 </context>
 <context>
     <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="obsolete">Stile</translation>
+        <translation>Stile</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="obsolete">Dimensione</translation>
+        <translation>Dimensione</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">Cantami o Diva del pelide Achille l&apos;ira funesta</translation>
+        <translation>Cantami o Diva del pelide Achille l&apos;ira funesta</translation>
     </message>
 </context>
 <context>
@@ -251,11 +272,132 @@
     </message>
 </context>
 <context>
-    <name>OTimePickerDialogBase</name>
+    <name>ORecurranceWidget</name>
     <message>
-        <source>TimePicker</source>
-        <translation type="obsolete">TimePicker</translation>
+        <source>No End Date</source>
+        <translation>Indefinitivamente</translation>
     </message>
+    <message>
+        <source>days</source>
+        <translation>giorni</translation>
+    </message>
+    <message>
+        <source>day</source>
+        <translation>giorno</translation>
+    </message>
+    <message>
+        <source>weeks</source>
+        <translation>settimane</translation>
+    </message>
+    <message>
+        <source>week</source>
+        <translation>settimana</translation>
+    </message>
+    <message>
+        <source>months</source>
+        <translation>mesi</translation>
+    </message>
+    <message>
+        <source>month</source>
+        <translation>mese</translation>
+    </message>
+    <message>
+        <source>years</source>
+        <translation>anni</translation>
+    </message>
+    <message>
+        <source>year</source>
+        <translation>anno</translation>
+    </message>
+    <message>
+        <source> and </source>
+        <translation>e</translation>
+    </message>
+    <message>
+        <source>,
+and </source>
+        <translation>,
+e </translation>
+    </message>
+    <message>
+        <source>, and </source>
+        <translation>, e </translation>
+    </message>
+    <message>
+        <source>No Repeat</source>
+        <translation>Mai</translation>
+    </message>
+    <message>
+        <source>day(s)</source>
+        <translation>giorno(i)</translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation>Ripeti Il</translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation>Lun</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation>Mar</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation>Mer</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation>Gio</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation>Ven</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation>Sab</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation>Dom</translation>
+    </message>
+    <message>
+        <source>week(s)</source>
+        <translation>settimana(e)</translation>
+    </message>
+    <message>
+        <source>Repeat By</source>
+        <translation>Ripeti Per</translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation>Giorno</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Data</translation>
+    </message>
+    <message>
+        <source>month(s)</source>
+        <translation>mese(i)</translation>
+    </message>
+    <message>
+        <source>year(s)</source>
+        <translation>anno(i)</translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation>Ogni</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation>su</translation>
+    </message>
+</context>
+<context>
+    <name>OTimePickerDialogBase</name>
     <message>
         <source>Time:</source>
         <translation>Orario:</translation>
@@ -272,32 +414,24 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Summary:</source>
-        <translation type="obsolete">Summario:</translation>
-    </message>
-    <message>
         <source>Description:</source>
         <translation type="obsolete">Descrizione:</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="obsolete">Priorità:</translation>
+        <translation>Priorità:</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="obsolete">Avanzamento:</translation>
+        <translation>Avanzamento:</translation>
     </message>
     <message>
         <source>Deadline:</source>
-        <translation type="obsolete">Scadenza:</translation>
+        <translation>Scadenza:</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="obsolete">Categoria:</translation>
-    </message>
-    <message>
-        <source>Alarmed Notification:</source>
-        <translation type="obsolete">Avviso Sonoro:</translation>
+        <translation>Categoria:</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
@@ -308,256 +442,235 @@
         <translation type="obsolete">&lt;b&gt;Indirizzo Casa:&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Email Addresses: </source>
-        <translation type="obsolete">Indirizzi Email: </translation>
-    </message>
-    <message>
         <source>Home Phone: </source>
-        <translation type="obsolete">Telefono Casa: </translation>
+        <translation>Telefono Casa: </translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation type="obsolete">Fax Casa: </translation>
+        <translation>Fax Casa: </translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation type="obsolete">Cellulare Casa: </translation>
+        <translation>Cellulare Casa: </translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation type="obsolete">Pagina Web Casa: </translation>
+        <translation>Pagina Web Casa: </translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation type="obsolete">Pagina Web Ufficio: </translation>
+        <translation>Pagina Web Ufficio: </translation>
     </message>
     <message>
         <source>Office: </source>
-        <translation type="obsolete">Ufficio: </translation>
+        <translation>Ufficio: </translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation type="obsolete">Telefono Ufficio: </translation>
+        <translation>Telefono Ufficio: </translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation type="obsolete">Fax Ufficio: </translation>
+        <translation>Fax Ufficio: </translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation type="obsolete">Cellulare Ufficio: </translation>
+        <translation>Cellulare Ufficio: </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation type="obsolete">Cercapersone Ufficio: </translation>
+        <translation>Cercapersone Ufficio: </translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation type="obsolete">Professione: </translation>
+        <translation>Professione: </translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation type="obsolete">Assistente: </translation>
+        <translation>Assistente: </translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation type="obsolete">Direttore: </translation>
+        <translation>Direttore: </translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="obsolete">Maschile</translation>
+        <translation>Maschile</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="obsolete">Femminile</translation>
+        <translation>Femminile</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation type="obsolete">Sesso: </translation>
+        <translation>Sesso: </translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation type="obsolete">Coniuge: </translation>
+        <translation>Coniuge: </translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation type="obsolete">Compleanno: </translation>
+        <translation>Compleanno: </translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation type="obsolete">Anniversario: </translation>
+        <translation>Anniversario: </translation>
     </message>
     <message>
         <source>Nickname: </source>
-        <translation type="obsolete">Alias: </translation>
+        <translation>Alias: </translation>
     </message>
     <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Titolo</translation>
+        <source>Default Email: </source>
+        <translation>Email Principale: </translation>
     </message>
     <message>
-        <source>First Name</source>
-        <translation type="obsolete">Nome</translation>
+        <source>All Emails: </source>
+        <translation>Tutte le Email: </translation>
     </message>
     <message>
-        <source>Middle Name</source>
-        <translation type="obsolete">Secondo Nome</translation>
+        <source>Children: </source>
+        <translation>Figli: </translation>
     </message>
     <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Cognome</translation>
+        <source>Notes:</source>
+        <translation>Note:</translation>
     </message>
     <message>
-        <source>Suffix</source>
-        <translation type="obsolete">Suffisso</translation>
+        <source>Start:</source>
+        <translation>Inizio:</translation>
     </message>
     <message>
-        <source>File As</source>
-        <translation type="obsolete">Visualizza Come</translation>
+        <source>End:</source>
+        <translation>Fine:</translation>
     </message>
     <message>
-        <source>Job Title</source>
-        <translation type="obsolete">Titolo</translation>
+        <source>Note:</source>
+        <translation>Nota:</translation>
     </message>
     <message>
-        <source>Department</source>
-        <translation type="obsolete">Dipartimento</translation>
+        <source>Every</source>
+        <translation>Ogni</translation>
     </message>
     <message>
-        <source>Company</source>
-        <translation type="obsolete">Società</translation>
+        <source>%1 %2 every </source>
+        <translation>%1 %2 ogni </translation>
     </message>
     <message>
-        <source>Business Phone</source>
-        <translation type="obsolete">Telefono Ufficio</translation>
+        <source>The %1 every </source>
+        <translation>Il %1 ogni </translation>
     </message>
     <message>
-        <source>Business Fax</source>
-        <translation type="obsolete">Fax Ufficio</translation>
+        <source>The %1 %1 of every</source>
+        <translation type="obsolete">Il %1 %1 di ogni</translation>
     </message>
     <message>
-        <source>Business Mobile</source>
-        <translation type="obsolete">Cellulare Ufficio</translation>
+        <source>Every </source>
+        <translation>Ogni </translation>
     </message>
     <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Email Principale</translation>
+        <source>Monday</source>
+        <translation>Lunedì</translation>
     </message>
     <message>
-        <source>Emails</source>
-        <translation type="obsolete">Altre Email</translation>
+        <source>Tuesday</source>
+        <translation>Martedì</translation>
     </message>
     <message>
-        <source>Home Phone</source>
-        <translation type="obsolete">Telefono Casa</translation>
+        <source>Wednesday</source>
+        <translation>Mercoledì</translation>
     </message>
     <message>
-        <source>Home Fax</source>
-        <translation type="obsolete">Fax Casa</translation>
+        <source>Thursday</source>
+        <translation>Giovedì</translation>
     </message>
     <message>
-        <source>Home Mobile</source>
-        <translation type="obsolete">Cellulare Casa</translation>
+        <source>Friday</source>
+        <translation>Venerdì</translation>
     </message>
     <message>
-        <source>Business Street</source>
-        <translation type="obsolete">Indirizzo Ufficio</translation>
+        <source>Saturday</source>
+        <translation>Sabato</translation>
     </message>
     <message>
-        <source>Business City</source>
-        <translation type="obsolete">Città Ufficio</translation>
+        <source>Sunday</source>
+        <translation>Domenica</translation>
     </message>
     <message>
-        <source>Business State</source>
-        <translation type="obsolete">Provincia Ufficio</translation>
+        <source>Documents</source>
+        <translation>Documenti</translation>
     </message>
     <message>
-        <source>Business Zip</source>
-        <translation type="obsolete">CAP Ufficio</translation>
+        <source>Files</source>
+        <translation>File</translation>
     </message>
     <message>
-        <source>Business Country</source>
-        <translation type="obsolete">Paese Ufficio</translation>
+        <source>All Files</source>
+        <translation>Tutti i File</translation>
     </message>
     <message>
-        <source>Business Pager</source>
-        <translation type="obsolete">Cercapersone Ufficio</translation>
+        <source>Very high</source>
+        <translation>Molto alta</translation>
     </message>
     <message>
-        <source>Business WebPage</source>
-        <translation type="obsolete">Pagina Web Ufficio</translation>
+        <source>High</source>
+        <translation>Alta</translation>
     </message>
     <message>
-        <source>Office</source>
-        <translation type="obsolete">Ufficio</translation>
+        <source>Normal</source>
+        <translation>Normale</translation>
     </message>
     <message>
-        <source>Profession</source>
-        <translation type="obsolete">Professione</translation>
+        <source>Low</source>
+        <translation>Bassa</translation>
     </message>
     <message>
-        <source>Assistant</source>
-        <translation type="obsolete">Assistente</translation>
+        <source>Very low</source>
+        <translation>Molto bassa</translation>
     </message>
     <message>
-        <source>Manager</source>
-        <translation type="obsolete">Direttore</translation>
+        <source>Location:</source>
+        <translation>Ubicazione:</translation>
     </message>
     <message>
-        <source>Home Street</source>
-        <translation type="obsolete">Indirizzo Casa</translation>
+        <source>This is an all day event</source>
+        <translation>Evento per tutto il giorno</translation>
     </message>
     <message>
-        <source>Home City</source>
-        <translation type="obsolete">Città Casa</translation>
+        <source>This is a multiple day event</source>
+        <translation>Evento per molti giorni</translation>
     </message>
     <message>
-        <source>Home State</source>
-        <translation type="obsolete">Provincia Casa</translation>
+        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Indirizzo Ufficio:&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Home Zip</source>
-        <translation type="obsolete">CAP Casa</translation>
+        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Indirizzo Casa:&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>Home Country</source>
-        <translation type="obsolete">Paese Casa</translation>
+        <source>The %1 %2 of every</source>
+        <translation>Il %1 %2 di ogni</translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
+    <message>
+        <source>st</source>
+        <translation>°</translation>
     </message>
     <message>
-        <source>Home Web Page</source>
-        <translation type="obsolete">Pagina Web Casa</translation>
+        <source>nd</source>
+        <translation>°</translation>
     </message>
     <message>
-        <source>Spouse</source>
-        <translation type="obsolete">Coniuge</translation>
+        <source>rd</source>
+        <translation>°</translation>
     </message>
     <message>
-        <source>Gender</source>
-        <translation type="obsolete">Sesso</translation>
-    </message>
-    <message>
-        <source>Birthday</source>
-        <translation type="obsolete">Compleanno</translation>
-    </message>
-    <message>
-        <source>Anniversary</source>
-        <translation type="obsolete">Anniversario</translation>
-    </message>
-    <message>
-        <source>Nickname</source>
-        <translation type="obsolete">Alias</translation>
-    </message>
-    <message>
-        <source>Children</source>
-        <translation type="obsolete">Figli</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Note</translation>
-    </message>
-    <message>
-        <source>Groups</source>
-        <translation type="obsolete">Gruppi</translation>
+        <source>th</source>
+        <translation>°</translation>
     </message>
 </context>
 </TS>

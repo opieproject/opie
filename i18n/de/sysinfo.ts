@@ -1,14 +1,60 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
+<context>
+    <name>FileSysInfo</name>
+    <message>
+        <source>CF</source>
+        <translation>CF</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
+        <translation>Dieser Graph zeigt an wieviel Speicher auf dieser CompactFlash-Karte verwendet wird.</translation>
+    </message>
+    <message>
+        <source>Ha</source>
+        <translation>Ha</translation>
+    </message>
+    <message>
+        <source>This graph represents how much storage is currently used on this hard drive.</source>
+        <translation>Dieser Graph zeigt den auf dieser Festplatte verwendeten Speicher an.</translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation>SD</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
+        <translation>Dieser Graph zeigt den auf dieser Secure Digital Memory Card verwendeten Speicher an.</translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation>SC</translation>
+    </message>
+    <message>
+        <source>In</source>
+        <translation>In</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
+        <translation>Dieser Graph zeigt an, wie viel des eingebauten Speichers zur Zeit belegt wird.</translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation>RA</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <translation>Dieser Graph zeigt den von der RAM Disk verwendeten Speicher an.</translation>
+    </message>
+</context>
 <context>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>CPU-Auslastung durch Anwendungen (%)</translation>
+        <translation>CPU-Auslastung für Anwendungen (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation>CPU-Auslastung durch System (%)</translation>
+        <translation>Systemauslastung (%)</translation>
     </message>
     <message>
         <source>Type: </source>
@@ -50,11 +96,11 @@ Memory is categorized as follows:
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
         <translation>Diese Seite zeigt wieviel Speicher (z.B. RAM) auf dem Gerät momentan belegt ist.
-Der Speicher wird wie folgt unterteilt:
-1. Belegt - Speicher, der von OPIE und laufenden Anwendungen benutzt wird.
-2. Puffer - Temporärer Speicher um die Geschwindigkeit zu steigern
-3. Gecached - Informationen die, seit kurzem nicht mehr benutzt werden, aber noch nicht freigegeben wurden.
-4. Frei - Speicher, der nicht durch OPIE oder Anwendungen belegt ist.</translation>
+Speicher wird wie folgt unterteilt:
+1. Belegt - Speicher, der von Opie und laufenden Anwendungen belegt wird.
+2. Puffer - Temporärer Speicher um die Performanz zu steigern
+3. Gecached - Information die seit kurzem nicht mehr benutzt wird, aber noch nicht freigegeben wurde.
+4. Frei - Speicher, der nicht durch Opie oder Anwendungen belegt wird. </translation>
     </message>
 </context>
 <context>
@@ -69,22 +115,22 @@ Der Speicher wird wie folgt unterteilt:
     </message>
     <message>
         <source>Use#</source>
-        <translation>Benutzt #</translation>
+        <translation>Benutzung#</translation>
     </message>
     <message>
         <source>Used By</source>
-        <translation>Benutzt durch</translation>
+        <translation type="obsolete">Benutzt von</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
-        <translation>Dies ist ein eine Liste aller Kernelmodule, die zur Zeit in den Speicher geladen sind. Klicken Sie auf ein Modul und halten Sie den Stift dort, um erweiterte Informationen zu erhalten oder um das Modul zu entfernen.</translation>
+        <translation>Dies ist ein eine Liste aller Kernelmodule, die zur Zeit in den Speicher geladen sind. Klicken Sie auf ei nModul und halten Sie den Stift dort, um erweiterte Informationen zu erhalten oder um das Modul zu entfernen.</translation>
     </message>
     <message>
         <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
         <translation>Wählen Sie einen Befehl und klicken Sie auf &lt;b&gt;Senden&lt;/b&gt; um den Befehl auszuführen.
-&lt;b&gt;Warnung:&lt;/b&gt; Das Senden von Befehlen an Module ist gefährlich und sollte nur durchgeführt werden, wenn Sie wissen, was Sie tun.</translation>
+&lt;b&gt;Warnung:&lt;/b&gt; Das Senden von Befehlen an Module ist gefährlich und sollte nur durchgeführt werden, wenn Sie wisse, was Sie tun.</translation>
     </message>
     <message>
         <source>Send</source>
@@ -92,8 +138,8 @@ Click and hold on a module to see additional information about the module, or to
     </message>
     <message>
         <source>Click here to send the selected command to the module selected above.</source>
-        <translation>Klicken Sie hier, um den Befehl an das Modul zu senden.
-&lt;b&gt;Warnung:&lt;/b&gt; Das Senden von Befehlen an Module ist gefährlich und sollte nur durchgeführt werden, wenn Sie wissen, was Sie tun.</translation>
+        <translation>Klicken Sie hier, um den Befehl an das Module zu senden.
+&lt;b&gt;Warnung:&lt;/b&gt; Das Senden von Befehlen an Module ist gefährlich und sollte nur durchgeführt werden, wenn Sie wisse, was Sie tun.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this module.</source>
@@ -102,8 +148,15 @@ Click and hold on a module to see additional information about the module, or to
     <message>
         <source>You really want to execute
 </source>
-        <translation>Möchten Sie den Befehl wirklich ausführen
-</translation>
+        <translation type="obsolete">Möchten Sie den Befehl wirklich ausführen </translation>
+    </message>
+    <message>
+        <source>Used by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You really want to execute %1 for this module?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -143,13 +196,13 @@ Click and hold on a module to see additional information about the module, or to
         <source>This is a list of all the processes on this handheld device.
 
 Click and hold on a process to see additional information about the process, or to send a signal to it.</source>
-        <translation>Dies ist eine Liste aller aktuell laufenden Prozesse.
-Klicken Sie und halten Sie den Stylus um weitere Prozessinformationen angezeigt zu bekommen oder um ein Signal an den Prozess zu senden.</translation>
+        <translation>Dies ist eine Liste aller Prozesse dieses Gerätes.
+Klicken Sie und halten Sie den Stylus um weitere Prozessinformationen angezeigt zu bekommen oder um ein Signal dorthin zu senden.</translation>
     </message>
     <message>
         <source>Select a signal here and then click the Send button to the right to send to this process.</source>
-        <translation>Wählen Sie ein Signal aus und klicken Sie auf &lt;b&gt;Senden&lt;/b&gt;, um das Signal an den Prozess zu senden.
-&lt;b&gt;Achtung:&lt;/b&gt; Das Senden von Signalen sollte nur dann durchgeführt werden, wenn Sie wissen was Sie tun.</translation>
+        <translation>Wählen Sie ein Signal aus und drücken Sie rechts &lt;b&gt;Senden&lt;/b&gt; um das Signal an den Prozess zu senden.
+&lt;b&gt;Achtung:&lt;/b&gt;Das Senden von Signalen sollte nur dann durchgeführt werden, wenn Sie wissen was Sie tun.</translation>
     </message>
     <message>
         <source>Send</source>
@@ -166,83 +219,11 @@ Klicken Sie und halten Sie den Stylus um weitere Prozessinformationen angezeigt 
     <message>
         <source>You really want to send
 </source>
-        <translation>Wollen Sie das Signal wirklich senden 
-</translation>
-    </message>
-</context>
-<context>
-    <name>StorageInfo</name>
-    <message>
-        <source>CF Card: </source>
-        <translation>CF-Karte:</translation>
+        <translation type="obsolete">Wollen Sie das Signal wirklich senden </translation>
     </message>
     <message>
-        <source>Hard Disk </source>
-        <translation>Festplatte</translation>
-    </message>
-    <message>
-        <source>SD Card </source>
-        <translation>SD-Karte</translation>
-    </message>
-    <message>
-        <source>Hard Disk /dev/hd </source>
-        <translation>Festplatte /dev/hd</translation>
-    </message>
-    <message>
-        <source>SCSI Hard Disk /dev/sd </source>
-        <translation>SCSI-Festplatte /dev/sd</translation>
-    </message>
-    <message>
-        <source>Int. Storage </source>
-        <translation>Interner Speicher</translation>
-    </message>
-    <message>
-        <source>CF</source>
-        <translation>CF</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation>Dieser Graph zeigt an wieviel Speicher auf dieser Speicherkarte verwendet wird.</translation>
-    </message>
-    <message>
-        <source>Ha</source>
-        <translation>Ha</translation>
-    </message>
-    <message>
-        <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation>Dieser Graph zeigt den auf der Festplatte verwendeten Speicher an.</translation>
-    </message>
-    <message>
-        <source>SD</source>
-        <translation>SD</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation>Dieser Graph zeigt den auf der Secure Digital Memory Card verwendeten Speicher an.</translation>
-    </message>
-    <message>
-        <source>SC</source>
-        <translation>SC</translation>
-    </message>
-    <message>
-        <source>In</source>
-        <translation>In</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation>Dieser Graph zeigt an, wieviel des eingebauten Speichers zur Zeit verwendet wird.</translation>
-    </message>
-    <message>
-        <source>RAM disk</source>
-        <translation>RAM disk</translation>
-    </message>
-    <message>
-        <source>RA</source>
-        <translation>RA</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation>Dieser Graph zeigt den von der RAM Disk verwendeten Speicher an.</translation>
+        <source>You really want to send %1 to this process?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -257,7 +238,7 @@ Klicken Sie und halten Sie den Stylus um weitere Prozessinformationen angezeigt 
     </message>
     <message>
         <source>Storage</source>
-        <translation>Speichermedien</translation>
+        <translation>Speichermedium</translation>
     </message>
     <message>
         <source>CPU</source>
@@ -288,11 +269,11 @@ Klicken Sie und halten Sie den Stylus um weitere Prozessinformationen angezeigt 
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation>&lt;b&gt;OPIE&lt;/b&gt;&lt;p&gt;Version: </translation>
+        <translation>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </translation>
     </message>
     <message>
         <source>Built on: </source>
-        <translation>Erstellt am:</translation>
+        <translation>Geschrieben am:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Version: </source>
@@ -308,7 +289,7 @@ Klicken Sie und halten Sie den Stylus um weitere Prozessinformationen angezeigt 
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
-        <translation>Diese Seite zeigt Informationen über die verwendete Version von OPIE, den Linux Kernel und die auf diesem Gerät verwendete Distribution.</translation>
+        <translation>Diese Seite zeigt die aktuelle Version von Opie, des Linux Kernels und der auf diesem Gerät verwendeten Distribution.</translation>
     </message>
 </context>
 </TS>

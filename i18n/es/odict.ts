@@ -10,12 +10,16 @@
         <translation>Método de búsqueda</translation>
     </message>
     <message>
-        <source>General Settings</source>
-        <translation>Configuración General</translation>
+        <source>New</source>
+        <translation>Nuevo</translation>
     </message>
     <message>
-        <source>Searchmethods</source>
-        <translation>Métodos de búsqueda</translation>
+        <source>Change</source>
+        <translation>Cambiar</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Borrar</translation>
     </message>
 </context>
 <context>
@@ -33,10 +37,6 @@
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <source>Config</source>
-        <translation>Configurar</translation>
-    </message>
-    <message>
         <source>Searchmethods</source>
         <translation>Métodos de búsqueda</translation>
     </message>
@@ -45,48 +45,32 @@
         <translation>&amp;Sensible a may/min</translation>
     </message>
     <message>
-        <source>Only &amp;complete Words</source>
-        <translation>Sólo parabras &amp;completas</translation>
-    </message>
-    <message>
-        <source>Allow &amp;reg. expressions</source>
-        <translation>Permitir expresiones &amp;reg.</translation>
-    </message>
-    <message>
-        <source>0 Errors</source>
-        <translation>0 Errores</translation>
-    </message>
-    <message>
-        <source>1 Errors</source>
-        <translation>1 Error</translation>
-    </message>
-    <message>
-        <source>2 Errors</source>
-        <translation>2 Errores</translation>
-    </message>
-    <message>
-        <source>3 Errors</source>
-        <translation>3 Errores</translation>
-    </message>
-    <message>
-        <source>4 Errors</source>
-        <translation>4 Errores</translation>
-    </message>
-    <message>
-        <source>Until Hit</source>
-        <translation>Hasta acertar</translation>
-    </message>
-    <message>
-        <source>&amp;Error tolerance</source>
-        <translation>Tolerancia del &amp;error</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Configuración</translation>
     </message>
     <message>
         <source>Parameter</source>
         <translation>Parámetro</translation>
+    </message>
+    <message>
+        <source>No dictionary defined</source>
+        <translation>Sin diccionario definido</translation>
+    </message>
+    <message>
+        <source>&amp;Define one</source>
+        <translation>&amp;Definir uno</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Cancelar</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation>Configuración</translation>
+    </message>
+    <message>
+        <source>Opie-Dictionary</source>
+        <translation>Diccionario-Opie</translation>
     </message>
 </context>
 <context>

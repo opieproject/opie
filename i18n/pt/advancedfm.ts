@@ -3,7 +3,7 @@
     <name>AdvancedFm</name>
     <message>
         <source>AdvancedFm</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestor de Ficheiros Avançado</translation>
     </message>
     <message>
         <source>File</source>
@@ -23,15 +23,15 @@
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Nome</translation>
     </message>
     <message>
         <source>Run Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Executar Comando</translation>
     </message>
     <message>
         <source>Run Command with Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Executar Comando e ver Resultado</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar para Local</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar para Remoto</translation>
     </message>
     <message>
         <source>Size</source>
@@ -75,27 +75,27 @@
     </message>
     <message>
         <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível mudar o nome</translation>
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>A directoria não existe</translation>
     </message>
     <message>
         <source>Copy As</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar Como</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultado do AdvancedFm</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>Irradiar</translation>
     </message>
     <message>
         <source>Ir sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviado.</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Directoria</translation>
     </message>
     <message>
         <source>Execute</source>
@@ -111,11 +111,11 @@
     </message>
     <message>
         <source>Open as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir como texto</translation>
     </message>
     <message>
         <source>Make Symlink</source>
-        <translation type="unfinished"></translation>
+        <translation>Criar atalho Simbólico</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -127,11 +127,11 @@
     </message>
     <message>
         <source>File Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info do Ficheiro</translation>
     </message>
     <message>
         <source>Set Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Permissões</translation>
     </message>
     <message>
         <source>Properties</source>
@@ -139,138 +139,192 @@
     </message>
     <message>
         <source>Beam File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Copy </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> As</source>
-        <translation type="unfinished"></translation>
+        <translation>Irradiar Ficheiro</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar para a mesma Directoria</translation>
     </message>
     <message>
         <source>Could not copy
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possivel copiar
+</translation>
     </message>
     <message>
         <source>to
 </source>
-        <translation type="unfinished"></translation>
+        <translation>para
+</translation>
     </message>
     <message>
         <source>Could not move
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível mover
+</translation>
     </message>
     <message>
         <source>Add To Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar aos Documentos</translation>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Acções</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionar Tudo</translation>
     </message>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar mesmo
+os ficheiros %1?</translation>
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Really delete
-</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar Directoria?</translation>
     </message>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar mesmo
+os ficheiros %1?</translation>
     </message>
     <message>
         <source>File Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>O ficheiro existe!</translation>
     </message>
     <message>
         <source>
 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>
+existe. Sobrepor?</translation>
     </message>
     <message>
         <source> already exists.
 Do you really want to delete it?</source>
-        <translation type="unfinished"></translation>
+        <translation>já existe.
+Quer mesmo apagá-lo?</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 existe. Sobrepor?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível copiar %1 para %2</translation>
     </message>
     <message>
         <source>Advanced FileManager
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestor de Ficheiros Avançado
+é copyright 2002-2003
+L.J.Potter &lt;llornkcor@handhelds.org&gt;
+e licenciado sob a licença GPL</translation>
+    </message>
+    <message>
+        <source>Bookmark Directory</source>
+        <translation>Atalho para Directoria</translation>
+    </message>
+    <message>
+        <source>Remove Current Directory from Bookmarks</source>
+        <translation>Apagar a directoria actual dos atalhos</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>Cannot remove current directory
 from bookmarks.
-It is not bookmarked!!</source>
-        <translation type="unfinished"></translation>
+It is not bookmarked!</source>
+        <translation>Não é possível apagar a directoria
+dos atalhos.
+Não existe na lista!</translation>
     </message>
     <message>
-        <source>Bookmark Directory</source>
-        <translation type="unfinished"></translation>
+        <source>File Search</source>
+        <translation>Procurar Ficheiro</translation>
     </message>
     <message>
-        <source>Remove Current Directory from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation>Apagar mesmo
+os ficheiros %1
+e os seus conteúdos?</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
+        <source>Really delete
+%1?</source>
+        <translation>Apagar mesmo
+%1?</translation>
+    </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="obsolete">Gestor de Ficheiros ::</translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="obsolete">KB livres</translation>
+    </message>
+    <message>
+        <source>Copy &apos;%1&apos; As</source>
+        <translation type="obsolete">Copiar &apos;%1&apos; Como</translation>
+    </message>
+    <message>
+        <source>Copy </source>
+        <translation>Copiar</translation>
+    </message>
+    <message>
+        <source> As</source>
+        <translation>Como</translation>
     </message>
 </context>
 <context>
     <name>Output</name>
     <message>
         <source>Save output to file (name only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar resultado no ficheiro (apenas nome)</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultado</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation>Não foi possível iniciar o processo</translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation>Erro
+</translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation>
+Terminado
+</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Alterar Permissões do Ficheiro</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alterar Permissões do Ficheiro para:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>utilizador</translation>
     </message>
     <message>
         <source>group</source>
@@ -282,7 +336,7 @@ It is not bookmarked!!</source>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilizador</translation>
     </message>
     <message>
         <source>Group</source>
@@ -299,6 +353,26 @@ It is not bookmarked!!</source>
     <message>
         <source>execute</source>
         <translation>executar</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Atenção</translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation>Erro - sem utilizador</translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation>Erro - sem grupo</translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation>Erro ao alterar o utilizador ou grupo</translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation>Erro ao alterar o modo</translation>
     </message>
 </context>
 </TS>

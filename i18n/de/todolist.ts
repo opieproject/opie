@@ -1,5 +1,4 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>MainWindow</name>
     <message>
@@ -8,7 +7,11 @@
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
-        <translation>Alarm um</translation>
+        <translation type="obsolete">&lt;h1&gt;Alarm um %0&gt;&lt;/h1&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
+        <translation>&lt;h1&gt;Alarm um %1&gt;&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
@@ -29,6 +32,10 @@
         <source>Recurrence</source>
         <translation>Wiederholung</translation>
     </message>
+    <message>
+        <source>Task Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -47,6 +54,10 @@
     <message>
         <source>loud</source>
         <translation>laut</translation>
+    </message>
+    <message>
+        <source>Opie Todolist</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -85,11 +96,11 @@
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Alles Löschen...</translation>
+        <translation>Alles löschen...</translation>
     </message>
     <message>
         <source>Delete completed</source>
-        <translation>Löschen komplett</translation>
+        <translation>Erledigte Aufgaben löschen</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -109,7 +120,7 @@
     </message>
     <message>
         <source>Show only over-due tasks</source>
-        <translation>Nur Anzeige überfäliger Aufgaben</translation>
+        <translation>Nur Anzeige überfälliger Aufgaben</translation>
     </message>
     <message>
         <source>Show task deadlines</source>
@@ -157,7 +168,7 @@ Die Liste zeigt folgende Informationen:
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Kein Speichplatz mehr</translation>
+        <translation>Kein Speicherplatz mehr</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -170,7 +181,7 @@ Quit Anyway?</source>
 Ihre Änderungen zu 
 speichern. Bitte schaffen 
 Sie freien Speicherplatz. 
-Trozdem beenden?</translation>
+Trotzdem beenden?</translation>
     </message>
     <message>
         <source>Todo</source>
@@ -178,7 +189,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Die Daten können nicht editiert werden.
+        <translation type="obsolete">Die Daten können nicht editiert werden.
 Es wird gerade synchronisiert</translation>
     </message>
     <message>
@@ -320,6 +331,14 @@ Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann e
         <source>New Template %1</source>
         <translation>Neu von Vorlage</translation>
     </message>
+    <message>
+        <source>Data can not be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data can&apos;t be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TableView</name>
@@ -454,16 +473,20 @@ Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann e
         <translation>Klicken Sie hier, wenn die Aufgaben auf einer wiederkehrenden Basis anstehen. Bei Auswahl kann die Häufigkeit des Wiederkehrens über den &lt;b&gt;Wiederholung&lt;/b&gt;-Reiter gesetzt werden.</translation>
     </message>
     <message>
-        <source>Notes:</source>
-        <translation>Notizen:</translation>
-    </message>
-    <message>
         <source>Enter any additional information about this task here.</source>
         <translation>Geben Sie hier zusätzliche Informationen zu der Aufgabe an.</translation>
     </message>
     <message>
         <source>Todo List</source>
         <translation>Aufgabenliste</translation>
+    </message>
+    <message>
+        <source>Summary:</source>
+        <translation>Zusammenfassung:</translation>
+    </message>
+    <message>
+        <source>Notes:</source>
+        <translation type="obsolete">Notizen:</translation>
     </message>
 </context>
 <context>
@@ -574,7 +597,7 @@ Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann e
     </message>
     <message>
         <source>Coordinating</source>
-        <translation>Koordiert durch</translation>
+        <translation>Koordiniert durch</translation>
     </message>
     <message>
         <source>Maintainer:</source>

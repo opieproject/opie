@@ -145,8 +145,7 @@ Izhod?</translation>
         <translation>&amp;Ne</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>Ne najdem stika za
 iskani vzorec!</translation>
     </message>

@@ -8,11 +8,11 @@
     </message>
     <message>
         <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;%1 antwortet nicht.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;%q antwortet nicht.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Möchten Sie die Anwendung beenden?&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Möchten Sie die Anwendung abbrechen ?&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -24,7 +24,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Willkommen bei OPIE</translation>
+        <translation>Willkommen bei Opie</translation>
     </message>
 </context>
 <context>
@@ -48,7 +48,7 @@ accurately to calibrate your screen.</source>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
         <translation>Der Batteriestatus ist kritisch!
-Schließen Sie das Gerät schnellst-
+Schließen Sie das Gerät schnellst 
 möglich an die Stromversorgung an!</translation>
     </message>
     <message>
@@ -72,15 +72,8 @@ Bitte laden Sie sie auf.</translation>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Das Systemdatum scheint ungültig zu sein.
-(%1)&lt;/p&gt;&lt;p&gt;Möchten Sie es korrigieren?&lt;/p&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>DesktopPowerAlerter</name>
-    <message>
-        <source>Battery Status</source>
-        <translation>Batteriestatus</translation>
+        <translation>&lt;p&lt;Das Systemdatum scheint nicht gültig zu sein.
+(%1)&lt;/p&gt;&lt;p&gt;Möchten Sie es anpassen ?&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -99,15 +92,15 @@ Bitte laden Sie sie auf.</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation>&lt;p&gt;Für Dokumente des Typs %1 ist keine Anwendung definiert.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Es ist keine Anwendung für dieses Dokument des Typs %1 definiert&lt;/p&gt;.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation>Suche Dokumente</translation>
+        <translation>Dokumente finden</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation>Suche Dokumente</translation>
+        <translation>Dokumente suchen</translation>
     </message>
 </context>
 <context>
@@ -118,7 +111,7 @@ Bitte laden Sie sie auf.</translation>
     </message>
     <message>
         <source>All types of file</source>
-        <translation>Alle Dateien dieses Typs</translation>
+        <translation>Alle Dateien</translation>
     </message>
     <message>
         <source>Document View</source>
@@ -134,7 +127,7 @@ Bitte laden Sie sie auf.</translation>
     <message>
         <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
         <translation>Ein &lt;b&gt;neues Medium&lt;/b&gt; wurde eingelegt. 
-Soll es nach Dokumenten durchsucht werden?</translation>
+Soll es nach neuen Dokumenten durchsucht werden ?</translation>
     </message>
     <message>
         <source>Which media files</source>
@@ -166,7 +159,7 @@ Soll es nach Dokumenten durchsucht werden?</translation>
     </message>
     <message>
         <source>Limit search to dir: (not used yet)</source>
-        <translation>Suche auf folgendes Verzeichnis begrenzen: (unbenutzt)</translation>
+        <translation>Auf folgendes Verzeichnis begrenzen: (unbenutzt)</translation>
     </message>
     <message>
         <source>Add</source>
@@ -178,7 +171,14 @@ Soll es nach Dokumenten durchsucht werden?</translation>
     </message>
     <message>
         <source>Do not ask again for this medium</source>
-        <translation>Bei diesem Medium nie mehr nachfragen</translation>
+        <translation>Dieses Medium nie mehr nachfragen</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation>Batteriestatus</translation>
     </message>
 </context>
 <context>
@@ -189,7 +189,7 @@ Soll es nach Dokumenten durchsucht werden?</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation>OPIE beenden </translation>
+        <translation>Opie beenden </translation>
     </message>
     <message>
         <source>Reboot</source>
@@ -197,7 +197,7 @@ Soll es nach Dokumenten durchsucht werden?</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation>OPIE neu starten</translation>
+        <translation>Opie neu starten</translation>
     </message>
     <message>
         <source>Shutdown</source>
@@ -206,7 +206,7 @@ Soll es nach Dokumenten durchsucht werden?</translation>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>Die Optionen zum Herunterfahren sind ausschließlich zur Entwicklung und für Tests des OPIE-Systems gedacht. Unter normalen Bedingungen sind sie nicht notwendig.</translation>
+        <translation>Die Optionen zum Herunterfahren sind ausschließlich zur Entwicklung und für Tests des Opie-Systems gedacht. Unter normalen Bedingungen sind sie nicht notwendig.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -214,18 +214,18 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation>Herunterfahren ...</translation>
+        <translation>Herunterfahren...</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>Snychronisationsverbindung</translation>
+        <translation>Synchronisationsverbindung</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation>&lt;p&gt;Ein nicht authorisiertes System fordert eine Verbindung zu diesem Gerät an.&lt;/p&gt;&lt;p&gt;Wenn Sie eine Version von Qtopia Desktop verwenden die älter ist als 1.5.1 sollten Sie ein Upgrade in Betracht ziehen.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Ein nicht authorisiertes System fordert eine Verbindung zu diesem Gerät an.&lt;p&gt;Wenn Sie eine Version von Qtopia Desktop verwenden die älter ist als 1.5.1 sollten Sie ein Upgrade in Betracht ziehen.</translation>
     </message>
     <message>
         <source>Deny</source>
@@ -233,7 +233,7 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation>&lt;p&gt;Ein nicht erkanntes System fordert eine Verbindung zu diesem Gerät an.&lt;/p&gt;&lt;p&gt;Wenn Sie zum ersten Mal eine Synchronisation gestartet haben, ist diese Meldung normal.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Ein nicht erkanntes System fordert eine Verbindung zu diesem Gerät an.&lt;p&gt;Wenn Sie gerade eben zum ersten Mal eine Synchronisation gestartet haben, ist diese Meldung normal.</translation>
     </message>
     <message>
         <source>Allow</source>

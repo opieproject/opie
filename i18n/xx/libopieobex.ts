@@ -1,6 +1,6 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>OtherHandler</name>
+    <name>OpieObex::OtherHandler</name>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;Received:&lt;/b&gt;&lt;/qt&gt;</source>
         <translation>FOO</translation>
@@ -19,7 +19,7 @@
     </message>
 </context>
 <context>
-    <name>SendWidget</name>
+    <name>OpieObex::SendWidget</name>
     <message>
         <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
         <translation>FOO</translation>

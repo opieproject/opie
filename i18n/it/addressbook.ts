@@ -146,8 +146,7 @@ Uscire comunque?</translation>
         <translation>&amp;No</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>Impossibile trovare un contatto con questo 
  criterio di ricerca!</translation>
     </message>
@@ -280,7 +279,7 @@ rilasciato gratuitamente!</translation>
     </message>
     <message>
         <source>Click on tab to select one</source>
-        <translation>Clicca sul tab per selezionarne uno</translation>
+        <translation>Premi sul tab per selezionarne uno</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>

@@ -44,11 +44,15 @@
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation>Paramètrer la date et l&apos;heure.</translation>
+        <translation>Paramétrer la date et l&apos;heure.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
         <translation>Horloge: Alarme manquée.</translation>
+    </message>
+    <message>
+        <source>Alarm set: %1</source>
+        <translation>Alarme fixée : %1</translation>
     </message>
 </context>
 <context>

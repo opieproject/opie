@@ -65,7 +65,7 @@ accurately to calibrate your screen.</source>
 by an uncaught signal
 (%1)
 </source>
-        <translation>OPIE is gestopt door een onverwacht signaal: (%1)</translation>
+        <translation type="obsolete">OPIE is gestopt door een onverwacht signaal: (%1)</translation>
     </message>
     <message>
         <source>Failure</source>
@@ -73,11 +73,25 @@ by an uncaught signal
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation>Kan OPIE niet starten</translation>
+        <translation type="obsolete">Kan OPIE niet starten</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
         <translation>Kan niet overschakelen naar nieuwe User</translation>
+    </message>
+    <message>
+        <source>Opie was terminated
+by an uncaught signal
+(%1)
+</source>
+        <translation>Opie werd afgebroken
+door een onbruikbaar
+signaal (%1)
+</translation>
+    </message>
+    <message>
+        <source>Could not start Opie.</source>
+        <translation>Kan Opie niet starten.</translation>
     </message>
 </context>
 </TS>

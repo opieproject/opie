@@ -1,5 +1,52 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>FileSysInfo</name>
+    <message>
+        <source>CF</source>
+        <translation>CF</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
+        <translation>Este gráfico representa o espaço ocupado neste cartão de memória Compact Flash.</translation>
+    </message>
+    <message>
+        <source>Ha</source>
+        <translation>Disco</translation>
+    </message>
+    <message>
+        <source>This graph represents how much storage is currently used on this hard drive.</source>
+        <translation>Este gráfico representa o espaço ocupado neste disco.</translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation>SD</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
+        <translation>Este gráfico representa o espaço ocupado neste cartão de memória Secure Digital.</translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation>SC</translation>
+    </message>
+    <message>
+        <source>In</source>
+        <translation>Memória</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
+        <translation>Este gráfico representa o espaço ocupado na memória interna (p.ex. Flash Memory) neste dispositivo.</translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation>RAM</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <translation>Este gráfico representa o espaço ocupado na memória RAM.</translation>
+    </message>
+</context>
+<context>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
@@ -15,7 +62,7 @@
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Este gráfico representa a ocupação do processador.</translation>
     </message>
 </context>
 <context>
@@ -48,53 +95,60 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta página mostra quanta memória (i.e. RAM) está alocada no seu dispositivo.
+A memória está categorizada da seguinte forma:
+
+1. Usada - memória usada pelo Opie e pelas aplicações a correr.
+2. Buffers - memória temporária usada para melhorar a performance.
+3. Cached - memória temporária para manter a ultima informação usada 
+4. Free - memória não usada.</translation>
     </message>
 </context>
 <context>
     <name>ModulesInfo</name>
     <message>
         <source>Module</source>
-        <translation type="unfinished"></translation>
+        <translation>Módulo</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamanho</translation>
     </message>
     <message>
         <source>Use#</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Used By</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa#</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta é a lista de todos os módulos do kernel actualmente em utilização neste dispositivo.
+
+Clique e espere num módulo para ver informação adicional, ou para o remover da memória.</translation>
     </message>
     <message>
         <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione um comando aqui e depois clique no botão &quot;Enviar&quot; para enviar o comando ao módulo seleccionado acima.</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Enviar</translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>Click here to send the selected command to the module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para enviar o comando seleccionado ao módulo escolhido em cima.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this module.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta àrea mostra a informação detalhada deste módulo.</translation>
     </message>
     <message>
-        <source>You really want to execute
-</source>
-        <translation type="unfinished"></translation>
+        <source>Used by</source>
+        <translation>Usado por</translation>
+    </message>
+    <message>
+        <source>You really want to execute %1 for this module?</source>
+        <translation>Deseja mesmo executar %1 para este módulo?</translation>
     </message>
 </context>
 <context>
@@ -134,103 +188,29 @@ Click and hold on a module to see additional information about the module, or to
         <source>This is a list of all the processes on this handheld device.
 
 Click and hold on a process to see additional information about the process, or to send a signal to it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta é a lista de todos os processos deste dispositivo.
+
+Clique e espere num processo para ver informação adicional, ou para lhe enviar um sinal.</translation>
     </message>
     <message>
         <source>Select a signal here and then click the Send button to the right to send to this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione um sinal aqui e depois clique no botão &quot;Enviar&quot; para enviar o sinal ao processo seleccionado acima.</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Enviar</translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>Click here to send the selected signal to this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Clique aqui para enviar o sinal seleccionado ao processo escolhido em cima.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta àrea mostra a informação detalhada deste processo.</translation>
     </message>
     <message>
-        <source>You really want to send
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StorageInfo</name>
-    <message>
-        <source>CF Card: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hard Disk </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SD Card </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hard Disk /dev/hd </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SCSI Hard Disk /dev/sd </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Int. Storage </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>CF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ha</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SD</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>In</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RAM disk</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RA</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation type="unfinished"></translation>
+        <source>You really want to send %1 to this process?</source>
+        <translation>Deseja mesmo enviar %1 para este processo?</translation>
     </message>
 </context>
 <context>
@@ -261,7 +241,7 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>Modules</source>
-        <translation type="unfinished"></translation>
+        <translation>Módulos</translation>
     </message>
 </context>
 <context>
@@ -284,19 +264,19 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Versão:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Modelo:</translation>
     </message>
     <message>
         <source>&lt;p&gt;Vendor: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Marca:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta página mostra a versão do Opie, do kernel do Linux e da distribuição a correr neste dispositivo.</translation>
     </message>
 </context>
 </TS>

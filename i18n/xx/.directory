@@ -1,2 +1,5 @@
 [Desktop Entry]
 Name=i18n-test
+Name[de]=Testsprache
+Name[it]=Test i18n
+Naam[nl]=Testtaal

@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Click here to launch the associated app</source>
-        <translation>Clicca qui per lanciare l&apos;app. associata</translation>
+        <translation>Premi qui per lanciare l&apos;app. associata</translation>
     </message>
 </context>
 <context>
@@ -39,15 +39,11 @@
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
-        <translation>Clicca qui per andare alle impostazioni</translation>
+        <translation>Premi qui per andare alle impostazioni</translation>
     </message>
 </context>
 <context>
     <name>TodayConfig</name>
-    <message>
-        <source>Today config</source>
-        <translation>Configurazione</translation>
-    </message>
     <message>
         <source>Load which plugins in what order:</source>
         <translation>Carica i plugin nell&apos;ordine:</translation>
@@ -68,13 +64,13 @@
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation>avvio automatico al(new line)
+        <translation type="obsolete">avvio automatico al(new line)
 resume?(new line)
 (solo Opie)</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation>minuti inattivi</translation>
+        <translation type="obsolete">minuti inattivi</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -82,27 +78,94 @@ resume?(new line)
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation>Clicca qui se l&apos;applicazione deve partire automaticamente al riavvio.</translation>
+        <translation type="obsolete">Premi qui se l&apos;applicazione deve partire automaticamente al riavvio.</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation>Quanti minuti il PDA deve rimanere spento prima che entri in funzione l&apos;autostart</translation>
+        <translation type="obsolete">Quanti minuti il PDA deve rimanere spento prima che entri in funzione l&apos;autostart</translation>
     </message>
     <message>
         <source>Icon size</source>
-        <translation>Dimensioni Icona</translation>
+        <translation type="obsolete">Dimensioni Icona</translation>
+    </message>
+    <message>
+        <source>Set the icon size in pixel</source>
+        <translation type="obsolete">Imposta la dimensione dell&apos;icona in pixel</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="obsolete">Aggiorna</translation>
+    </message>
+    <message>
+        <source>How often should Today refresh itself</source>
+        <translation type="obsolete">Quanto spesso Oggi deve aggiornarsi</translation>
+    </message>
+    <message>
+        <source> sec</source>
+        <translation type="obsolete"> sec</translation>
+    </message>
+    <message>
+        <source>never</source>
+        <translation type="obsolete">mai</translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
+        <translation>Premi per attivare/disattivare un plugin o utilizza le frecce a destra per cambiare l&apos;ordine di visualizzazione</translation>
+    </message>
+    <message>
+        <source>Today Config</source>
+        <translation>Configurazione</translation>
+    </message>
+    <message>
+        <source>Tiny Banner</source>
+        <translation type="obsolete">Banner Piccolo</translation>
+    </message>
+</context>
+<context>
+    <name>TodayConfigMiscBase</name>
+    <message>
+        <source>Form1</source>
+        <translation>Form1</translation>
+    </message>
+    <message>
+        <source>Check this if today should be autostarted on resume.</source>
+        <translation>Premi qui se l&apos;applicazione deve partire automaticamente al riavvio.</translation>
+    </message>
+    <message>
+        <source>autostart on resume?</source>
+        <translation>autostart al riavvio?</translation>
+    </message>
+    <message>
+        <source>tiny banner</source>
+        <translation>banner piccolo</translation>
+    </message>
+    <message>
+        <source>Have small banner </source>
+        <translation>Imposta banner piccolo</translation>
+    </message>
+    <message>
+        <source> min</source>
+        <translation> min</translation>
+    </message>
+    <message>
+        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
+        <translation>Quanti minuti il PDA deve rimanere spento prima che entri in funzione la funzione autostart al riavvio</translation>
+    </message>
+    <message>
+        <source>minutes inactive</source>
+        <translation>minuti inattivi</translation>
+    </message>
+    <message>
+        <source> pixel</source>
+        <translation> pixel</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
         <translation>Imposta la dimensione dell&apos;icona in pixel</translation>
     </message>
     <message>
-        <source>Refresh</source>
-        <translation>Aggiorna</translation>
-    </message>
-    <message>
-        <source>How often should Today refresh itself</source>
-        <translation>Quanto spesso Oggi deve aggiornarsi</translation>
+        <source>icon size</source>
+        <translation>dimensione icona</translation>
     </message>
     <message>
         <source> sec</source>
@@ -113,8 +176,12 @@ resume?(new line)
         <translation>mai</translation>
     </message>
     <message>
-        <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation>Clicca per attivare/disattivare un plugin o utilizza le frecce a destra per cambiare l&apos;ordine di visualizzazione</translation>
+        <source>How often should Today refresh itself</source>
+        <translation>Quanto spesso Oggi deve aggiornarsi</translation>
+    </message>
+    <message>
+        <source>refresh</source>
+        <translation>aggiorna</translation>
     </message>
 </context>
 </TS>

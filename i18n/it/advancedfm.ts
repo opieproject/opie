@@ -11,16 +11,6 @@
         <translation>La directory non esiste</translation>
     </message>
     <message>
-        <source>Advanced FileManager
-is copyright 2002 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Advanced FileManager
-copyright 2002 di
-L.J.Potter &lt;llornkcor@handhelds.org&gt;
-sotto licenza GPL</translation>
-    </message>
-    <message>
         <source>Show Hidden Files</source>
         <translation>Mostra File Nascosti</translation>
     </message>
@@ -117,10 +107,6 @@ sotto licenza GPL</translation>
         <translation>Cambia su Remoto</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation type="obsolete">Informazioni</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Dimensione</translation>
     </message>
@@ -137,12 +123,6 @@ sotto licenza GPL</translation>
         <translation>2</translation>
     </message>
     <message>
-        <source>Do you really want to delete
-</source>
-        <translation type="obsolete">Vuoi veramente cancellare
-</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Sì</translation>
     </message>
@@ -153,12 +133,6 @@ sotto licenza GPL</translation>
     <message>
         <source>Could not rename</source>
         <translation>Impossibile rinominare</translation>
-    </message>
-    <message>
-        <source> already exists
-Do you really want to delete it?</source>
-        <translation type="obsolete"> già esiste
-Vuoi veramente cancellarlo?</translation>
     </message>
     <message>
         <source>Could not copy
@@ -174,11 +148,11 @@ Vuoi veramente cancellarlo?</translation>
     </message>
     <message>
         <source>Copy </source>
-        <translation>Copia</translation>
+        <translation>Copia </translation>
     </message>
     <message>
         <source> As</source>
-        <translation>Come</translation>
+        <translation> Come</translation>
     </message>
     <message>
         <source>Could not move
@@ -189,14 +163,6 @@ Vuoi veramente cancellarlo?</translation>
     <message>
         <source>AdvancedFm Output</source>
         <translation>Output AdvancedFm</translation>
-    </message>
-    <message>
-        <source>command failed!</source>
-        <translation type="obsolete">commando fallito!</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
@@ -225,14 +191,6 @@ sotto licenza GPL</translation>
         <translation>Cambia Directory</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation>Impossibile eliminare la directory corrente
-dai bookmarks.
-Non è inserita nei bookmark!!</translation>
-    </message>
-    <message>
         <source>Select All</source>
         <translation>Seleziona Tutto</translation>
     </message>
@@ -253,12 +211,6 @@ Non è inserita nei bookmark!!</translation>
     <message>
         <source>Delete Directory?</source>
         <translation>Cancella Directory?</translation>
-    </message>
-    <message>
-        <source>Really delete
-</source>
-        <translation>Eliminare realmente
-</translation>
     </message>
     <message>
         <source>Really copy
@@ -294,6 +246,30 @@ Vuoi veramente eliminarlo?</translation>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation>Impossibile rimuovere la directory corrente
+dai bookmark.
+Non è inserita nei bookmark!</translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation>Cerca File</translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation>Vuoi veramente eliminare %1
+e tutto il suo contenuto ?</translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation>Vuoi veramente eliminare
+%1?</translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -304,6 +280,24 @@ Vuoi veramente eliminarlo?</translation>
     <message>
         <source>Output</source>
         <translation>Output</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation>Il processo non può essere iniziato</translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation>Errore
+</translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation>
+Terminato
+</translation>
     </message>
 </context>
 <context>
@@ -347,6 +341,26 @@ Vuoi veramente eliminarlo?</translation>
     <message>
         <source>execute</source>
         <translation>esecuzione</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Attenzione</translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation>Errore- nessun utente</translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation>Errore- nessun gruppo</translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation>Errore impostazioni proprietà utente o gruppo</translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation>Errore impostazioni permessi</translation>
     </message>
 </context>
 </TS>

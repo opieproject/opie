@@ -66,7 +66,7 @@ accurately to calibrate your screen.</source>
 by an uncaught signal
 (%1)
 </source>
-        <translation>OPIE 被沒有抓到的信號
+        <translation type="obsolete">OPIE 被沒有抓到的信號
 (%1) 
 中止了</translation>
     </message>
@@ -76,11 +76,22 @@ by an uncaught signal
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation>無法啟動 OPIE.</translation>
+        <translation type="obsolete">無法啟動 OPIE.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
         <translation>無法切換為新的使用者身分</translation>
+    </message>
+    <message>
+        <source>Opie was terminated
+by an uncaught signal
+(%1)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not start Opie.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

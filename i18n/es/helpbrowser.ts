@@ -30,8 +30,8 @@
         <translation>Navegador de ayuda</translation>
     </message>
     <message>
-        <source>HelpBrowser</source>
-        <translation>NavegadorAyuda</translation>
+        <source>Go</source>
+        <translation>Ir</translation>
     </message>
 </context>
 </TS>

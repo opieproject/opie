@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>&lt;center&gt;Press or hold the button you want to remap.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Drücken oder halten Sie die Taste, die Sie ändern möchten.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Drücken Sie oder halten Sie die Taste, die Sie ändern möchten&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Press:</source>
@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Beam VCard</source>
-        <translation>VCard versenden</translation>
+        <translation>VCard beamen</translation>
     </message>
     <message>
         <source>Send eMail</source>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>BackupAndRestore</name>
     <message>
@@ -9,12 +10,58 @@
         <source>Backup and Restore</source>
         <translation>Backup e Restore</translation>
     </message>
+    <message>
+        <source>Error from System:
+</source>
+        <translation>Errore dal Sistema:
+</translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation>Messaggio</translation>
+    </message>
+    <message>
+        <source>Backup Failed!</source>
+        <translation>Backup Fallito!</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation>Dettagli</translation>
+    </message>
+    <message>
+        <source>Backup and Restore.. Failed !!</source>
+        <translation>Backup e Restore... Fallito !!</translation>
+    </message>
+    <message>
+        <source>Backup Successfull.</source>
+        <translation>Backup Eseguito.</translation>
+    </message>
+    <message>
+        <source>Please select something to restore.</source>
+        <translation>Seleziona qualcosa da restorare.</translation>
+    </message>
+    <message>
+        <source>Restore Failed.</source>
+        <translation>Restore Fallito.</translation>
+    </message>
+    <message>
+        <source>Unable to open File: %1</source>
+        <translation>Impossibile aprire File: %1</translation>
+    </message>
+    <message>
+        <source>Restore Successfull.</source>
+        <translation>Restore Eseguito.</translation>
+    </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation>Backup E Restore</translation>
+        <translation>Backup e Restore</translation>
     </message>
     <message>
         <source>Backup</source>
@@ -47,6 +94,25 @@
     <message>
         <source>&amp;Restore</source>
         <translation>&amp;Restore</translation>
+    </message>
+    <message>
+        <source>Update Filelist</source>
+        <translation>Aggiorna Lista File</translation>
+    </message>
+</context>
+<context>
+    <name>ErrorDialog</name>
+    <message>
+        <source>Error Info</source>
+        <translation>Info Errore</translation>
+    </message>
+    <message>
+        <source>Error Message:</source>
+        <translation>Messaggio di Errore:</translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation>&amp;OK</translation>
     </message>
 </context>
 </TS>

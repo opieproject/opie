@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Config</source>
-        <translation>Einstellungen</translation>
+        <translation>Konfiguration</translation>
     </message>
     <message>
         <source>Help</source>

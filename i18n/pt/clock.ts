@@ -49,6 +49,10 @@
         <source>Clock: Alarm was missed.</source>
         <translation>Relógio: O alarme já passou.</translation>
     </message>
+    <message>
+        <source>Alarm set: %1</source>
+        <translation>Alarme às: %1</translation>
+    </message>
 </context>
 <context>
     <name>Set_Alarm</name>

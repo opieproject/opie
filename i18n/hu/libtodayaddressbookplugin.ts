@@ -26,10 +26,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>To activate settings: Restart application !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Set Headline Color: </source>
         <translation type="unfinished"></translation>
     </message>

@@ -17,11 +17,13 @@
         <source>Read Error: QSocket reported an error reading
 data, the remote host has probably dropped the
 connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad odczytu: QSocket zglosil blad przy czytaniu
+danych, prawdopodobnie zdalny host porzucil
+polaczenie.</translation>
     </message>
     <message>
         <source>QSocket reported an invalid error code</source>
-        <translation type="unfinished"></translation>
+        <translation>QSocket zglosil nieprawidlowy kod bledu</translation>
     </message>
 </context>
 <context>
@@ -44,7 +46,7 @@ connection.</source>
     </message>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad protokolu: Serwer %1 uzyl nieznanego kodowania</translation>
     </message>
 </context>
 <context>
@@ -55,11 +57,11 @@ connection.</source>
     </message>
     <message>
         <source>Error: Invalid server version, %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad: Niewlasciwa wersja serwera, %1</translation>
     </message>
     <message>
         <source>Error: Unsupported server version, %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad: Nieobslugiwana wersja serwera, %1</translation>
     </message>
     <message>
         <source>Logged in</source>
@@ -68,16 +70,18 @@ connection.</source>
     <message>
         <source>Error: This server requires a password, but none has been specified.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Blad: Serwer zazadal hasla, ale zadne nie zostalo podane.
+</translation>
     </message>
     <message>
         <source>Error: The password you specified was incorrect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad: Podane haslo jest nieprawidlowe.</translation>
     </message>
     <message>
         <source>Error: Too many invalid login attempts have been made
 to this account, please try later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad: Zbyt wiele nieudanych prob logowania na to konto,
+sprobuj pozniej.</translation>
     </message>
     <message>
         <source>Login Failed</source>
@@ -120,85 +124,85 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>New Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowe polaczenie</translation>
     </message>
     <message>
         <source>Open Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Otworz zakladke</translation>
     </message>
     <message>
         <source>Delete Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun zakladke</translation>
     </message>
     <message>
         <source>Send Contrl-Alt-Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyslij Contrl-Alt-Delete</translation>
     </message>
     <message>
         <source>Next Click is Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Natepne klikniecie to podwojne klikniecie</translation>
     </message>
     <message>
         <source>Next Click is Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastepne klikniecie to prawy przycisk</translation>
     </message>
 </context>
 <context>
     <name>KVNCBookmarkDlgBase</name>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakladki</translation>
     </message>
     <message>
         <source>Choose a bookmark that you would like to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybierz zakladke, ktora chcesz otworzyc</translation>
     </message>
 </context>
 <context>
     <name>KVNCConnDlgBase</name>
     <message>
         <source>VNC Viewer Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaczenie z VNC Viewer</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serwer</translation>
     </message>
     <message>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaz haslo</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished">Haslo:</translation>
+        <translation>Haslo:</translation>
     </message>
     <message>
         <source>Bookmark Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa zakladki:</translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation type="unfinished">Nazwa serwera:</translation>
+        <translation>Nazwa komputera:</translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation type="unfinished">Numer pulpitu:</translation>
+        <translation>Numer pulpitu:</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation type="unfinished">Sprawdz zmiany na pulpicie co:</translation>
+        <translation>Sprawdz zmiany na pulpicie co:</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation type="unfinished">Milisekund</translation>
+        <translation>Milisekund</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation type="unfinished">Zarzadaj 8-bit sesji</translation>
+        <translation>Zazadaj 8-bit sesji</translation>
     </message>
     <message>
         <source>Raise on bell</source>
@@ -206,19 +210,19 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation type="unfinished">Zarzadaj wspoldzielonej sesji</translation>
+        <translation>Zarzadaj wspoldzielonej sesji</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>Scale Factor</source>
@@ -226,19 +230,19 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>Encodings</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodowania</translation>
     </message>
     <message>
         <source>Hextile encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodowanie Hextile</translation>
     </message>
     <message>
         <source>CoRRE encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodowanie CoRRE</translation>
     </message>
     <message>
         <source>RRE encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodowanie RRE</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
@@ -246,7 +250,7 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>The password of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Haslo serwera VNC</translation>
     </message>
     <message>
         <source>Toggle obscuring the password</source>
@@ -254,15 +258,15 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>The name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa serwera VNC</translation>
     </message>
     <message>
         <source>The host name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa komputera serwera VNC</translation>
     </message>
     <message>
         <source>The display number of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Numer pulpitu serwera VNC</translation>
     </message>
     <message>
         <source>Delay between requesting updates from the server</source>
@@ -274,11 +278,11 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>Allow other users to connect to the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Zezwalaj innym uzytkownikom na polaczenia do serwera VNC</translation>
     </message>
     <message>
         <source>Scale the remote display to fit on the PDA (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Skaluj zdalny pulpit do ekranu PDA (wolne)</translation>
     </message>
     <message>
         <source>Enable transmiting identical rectangles as references to existing data</source>

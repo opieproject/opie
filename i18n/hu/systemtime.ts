@@ -69,18 +69,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You asked for a delay of </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> minutes, but only </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -111,11 +99,15 @@ ntpdate </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> seconds</source>
+        <source>Could not connect to server </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not connect to server </source>
+        <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 seconds</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -187,84 +179,6 @@ ntpdate </source>
     <message>
         <source> seconds</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SetDateTime</name>
-    <message>
-        <source>Time Zone</source>
-        <translation type="obsolete">Időzóna</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Dátum</translation>
-    </message>
-    <message>
-        <source>Time format</source>
-        <translation type="obsolete">Időformátum</translation>
-    </message>
-    <message>
-        <source>24 hour</source>
-        <translation type="obsolete">24 órás</translation>
-    </message>
-    <message>
-        <source>12 hour</source>
-        <translation type="obsolete">12 órás</translation>
-    </message>
-    <message>
-        <source>Weeks start on</source>
-        <translation type="obsolete">A hét kezdőnapja</translation>
-    </message>
-    <message>
-        <source>Sunday</source>
-        <translation type="obsolete">Vasárnap</translation>
-    </message>
-    <message>
-        <source>Monday</source>
-        <translation type="obsolete">Hétfő</translation>
-    </message>
-    <message>
-        <source>Date format</source>
-        <translation type="obsolete">Dátumformátum</translation>
-    </message>
-    <message>
-        <source>Applet format</source>
-        <translation type="obsolete">Kisalkalmazás formátum</translation>
-    </message>
-    <message>
-        <source>hh:mm</source>
-        <translation type="obsolete">óó:pp</translation>
-    </message>
-    <message>
-        <source>D/M hh:mm</source>
-        <translation type="obsolete">N/H óó:pp</translation>
-    </message>
-    <message>
-        <source>M/D hh:mm</source>
-        <translation type="obsolete">H/N óó:pp</translation>
-    </message>
-    <message>
-        <source>Set System Time</source>
-        <translation type="obsolete">Rendszeridő beállítása</translation>
-    </message>
-</context>
-<context>
-    <name>SetTime</name>
-    <message>
-        <source>Hour</source>
-        <translation type="obsolete">Óra</translation>
-    </message>
-    <message>
-        <source>Minute</source>
-        <translation type="obsolete">Perc</translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation type="obsolete">De</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">Du</translation>
     </message>
 </context>
 <context>

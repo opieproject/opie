@@ -4,7 +4,7 @@
     <name>Security</name>
     <message>
         <source>Set passcode</source>
-        <translation>Passwort festlegen</translation>
+        <translation>Passwort einstellen</translation>
     </message>
     <message>
         <source>Change passcode</source>
@@ -56,7 +56,8 @@ Access denied</source>
     </message>
     <message>
         <source>Require pass code at power-on</source>
-        <translation>Passwort beim Starten eingeben</translation>
+        <translation>Passwort muss beim Starten 
+eingegeben werden</translation>
     </message>
     <message>
         <source>Sync</source>
@@ -103,6 +104,18 @@ Gerät erhalten.</translation>
     <message>
         <source>1.0.0.0/8</source>
         <translation>1.0.0.0/8</translation>
+    </message>
+    <message>
+        <source>Passcode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login Automatically</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

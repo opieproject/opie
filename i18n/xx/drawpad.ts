@@ -267,6 +267,10 @@ all the pages?</source>
         <source>Format:</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>All Images</source>
+        <translation>FOO</translation>
+    </message>
 </context>
 <context>
     <name>ImportDialog</name>
@@ -280,6 +284,10 @@ all the pages?</source>
     </message>
     <message>
         <source>Preview</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>All images</source>
         <translation>FOO</translation>
     </message>
 </context>

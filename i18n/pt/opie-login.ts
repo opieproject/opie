@@ -4,7 +4,8 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toque na cruz com firmeza e 
+precisão para calibrar o ecrâ.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
@@ -15,11 +16,11 @@ accurately to calibrate your screen.</source>
     <name>LoginWindow</name>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrar</translation>
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Bem-Vindo ao Opie&lt;/center&gt;</translation>
     </message>
     <message>
         <source>User</source>
@@ -65,7 +66,7 @@ accurately to calibrate your screen.</source>
 by an uncaught signal
 (%1)
 </source>
-        <translation>O OPIE terminou 
+        <translation type="obsolete">O OPIE terminou 
 devido a um sinal
 de sistema (%1)</translation>
     </message>
@@ -75,11 +76,22 @@ de sistema (%1)</translation>
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation>Não foi possível iniciar o OPIE.</translation>
+        <translation type="obsolete">Não foi possível iniciar o OPIE.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi possível usar essa conta</translation>
+    </message>
+    <message>
+        <source>Opie was terminated
+by an uncaught signal
+(%1)
+</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Could not start Opie.</source>
+        <translation>Não foi possível usar essa conta.</translation>
     </message>
 </context>
 </TS>

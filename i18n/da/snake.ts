@@ -23,7 +23,7 @@ støde ind i vægge, kanter eller dens hale.</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
-        <translation>Tryk en tast for at starte</translation>
+        <translation type="obsolete">Tryk en tast for at starte</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
@@ -37,7 +37,15 @@ støde ind i vægge, kanter eller dens hale.</translation>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation>Tryk en tast for at begynde et nyt spil.</translation>
+        <translation type="obsolete">Tryk en tast for at begynde et nyt spil.</translation>
+    </message>
+    <message>
+        <source>Press any key to start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press any key to begin a new game.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -103,5 +103,29 @@ You get %2 lives this time!</source>
         <translation>Door naar level %1.
 Je krijgt %2 levens erbij deze keer!</translation>
     </message>
+    <message>
+        <source>About</source>
+        <translation>Over</translation>
+    </message>
+    <message>
+        <source>Written by: Stefan Schimanski
+Ported by: Martin Imobersteg
+
+Click to form walls.
+Hit space to switch wall direction.
+Try to reduce total space by 75%.
+
+This program is distributed under
+the terms of the GPL v2.</source>
+        <translation>Geschreven door: Stefan Schimanski
+Geport door: Martin Imobersteg
+
+Klik om muren te vormen.
+Druk op spatie om de richting te veranderen.
+Probeer de vrije ruimte te verminderen met 75%.
+
+Dit programma wordt gedistribueeerd onder
+de voorwaarden van de GPL v2.</translation>
+    </message>
 </context>
 </TS>

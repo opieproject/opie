@@ -147,11 +147,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
         <source>Could not rename</source>
         <translation>FOO</translation>
     </message>
@@ -229,12 +224,6 @@ and is licensed by the GPL</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
         <source>Bookmark Directory</source>
         <translation>FOO</translation>
     </message>
@@ -246,6 +235,38 @@ It is not bookmarked!!</source>
         <source>Error</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>Copy &apos;%1&apos; As</source>
+        <translation type="obsolete">FOO</translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -255,6 +276,21 @@ It is not bookmarked!!</source>
     </message>
     <message>
         <source>Save output to file (name only)</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
         <translation>FOO</translation>
     </message>
 </context>
@@ -298,6 +334,26 @@ It is not bookmarked!!</source>
     </message>
     <message>
         <source>execute</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
         <translation>FOO</translation>
     </message>
 </context>

@@ -95,6 +95,10 @@ Mégis kilép?</translation>
         <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -190,6 +194,10 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -357,6 +365,14 @@ Mégis kilép?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -376,41 +392,6 @@ Mégis kilép?</translation>
 </context>
 <context>
     <name>DateBookWeekView</name>
-    <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation>H</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation>K</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation>Sze</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation>Cs</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation>P</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation>Szo</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation>V</translation>
-    </message>
     <message>
         <source>p</source>
         <translation>p</translation>
@@ -544,6 +525,13 @@ Mégis kilép?</translation>
     <message>
         <source>Note...</source>
         <translation>Jegyzet...</translation>
+    </message>
+</context>
+<context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -706,6 +694,10 @@ and </source>
     <message>
         <source>, and </source>
         <translation>, és</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

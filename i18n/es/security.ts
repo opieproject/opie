@@ -102,5 +102,17 @@ Acceso denegado</translation>
         <source>1.0.0.0/8</source>
         <translation>1.0.0.0/8</translation>
     </message>
+    <message>
+        <source>Passcode</source>
+        <translation>Código</translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation>Identificación</translation>
+    </message>
+    <message>
+        <source>Login Automatically</source>
+        <translation>Identificación automática</translation>
+    </message>
 </context>
 </TS>

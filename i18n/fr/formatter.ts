@@ -27,7 +27,7 @@
 Changing parameters on this 
 page may cause your system 
 to stop functioning properly!!</source>
-        <translation>ATTENTION:
+        <translation type="obsolete">ATTENTION:
 Changer des paramètres sur cette
 page peut rendre votre système
 instable!!</translation>
@@ -54,7 +54,7 @@ instable!!</translation>
     </message>
     <message>
         <source>Format?!?</source>
-        <translation>Format?!?</translation>
+        <translation type="obsolete">Format?!?</translation>
     </message>
     <message>
         <source>Really format
@@ -65,13 +65,13 @@ instable!!</translation>
     <message>
         <source>
 with </source>
-        <translation>
+        <translation type="obsolete">
 avec</translation>
     </message>
     <message>
         <source> filesystem?!?
 You will loose all data!!</source>
-        <translation>système de fichier?!?
+        <translation type="obsolete">système de fichier?!?
 Vous allez perdre toutes vos données!!</translation>
     </message>
     <message>
@@ -130,7 +130,7 @@ a été formaté correctement.</translation>
     </message>
     <message>
         <source>Trying to mount.</source>
-        <translation>Tentative de montage.</translation>
+        <translation type="obsolete">Tentative de montage.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
@@ -139,7 +139,7 @@ a été formaté correctement.</translation>
     <message>
         <source>
 has been successfully mounted.</source>
-        <translation>
+        <translation type="obsolete">
 a réussi a être monté. </translation>
     </message>
     <message>
@@ -152,7 +152,7 @@ a réussi a être monté. </translation>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation>Type de Support :</translation>
+        <translation type="obsolete">Type de Support :</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
@@ -169,6 +169,54 @@ a réussi a être monté. </translation>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
         <translation>Disponible : %1 ko ( %d Mo)</translation>
+    </message>
+    <message>
+        <source>CAUTION:
+Changing parameters on this
+page may cause your system
+to stop functioning properly!</source>
+        <translation>AVERTISSEMENT:
+Changer les paramêtres de
+cette page peut causer un
+disfonctionnement de votre système !</translation>
+    </message>
+    <message>
+        <source>Format?</source>
+        <translation>Format ?</translation>
+    </message>
+    <message>
+        <source>
+with %1 filesystem?
+You will loose all data!!</source>
+        <translation>
+en %1 ?
+Toutes vos données vont être effacées !!</translation>
+    </message>
+    <message>
+        <source>Trying to umount %1.</source>
+        <translation>Démontage de %1.</translation>
+    </message>
+    <message>
+        <source>Trying to mount %1.</source>
+        <translation>Montage de %1.</translation>
+    </message>
+    <message>
+        <source>%1
+has been successfully mounted.</source>
+        <translation>%
+a été monté avec succès.</translation>
+    </message>
+    <message>
+        <source>Storage Type: %1</source>
+        <translation>Type du média : %1</translation>
+    </message>
+    <message>
+        <source>Type: %1
+Formatted with %2
+%3, %4, %5</source>
+        <translation>Type : %1
+Formaté avec %2
+%3, %4, %5</translation>
     </message>
 </context>
 </TS>

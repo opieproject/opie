@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Form1</source>
-        <translation>Form1</translation>
+        <translation type="obsolete">Form1</translation>
     </message>
     <message>
         <source>Molecular Weight</source>
@@ -35,7 +35,7 @@
     <name>OxydataWidget</name>
     <message>
         <source>Weight:</source>
-        <translation>Masse :</translation>
+        <translation type="obsolete">Masse :</translation>
     </message>
     <message>
         <source>Block</source>
@@ -89,6 +89,10 @@
         <source>%1 g/cm^3</source>
         <translation>%1 g/cm3</translation>
     </message>
+    <message>
+        <source>Weight</source>
+        <translation>Poids</translation>
+    </message>
 </context>
 <context>
     <name>Oxygen</name>
@@ -107,29 +111,6 @@
     <message>
         <source>Calculations</source>
         <translation>Calculs</translation>
-    </message>
-</context>
-<context>
-    <name>PSEWidget</name>
-    <message>
-        <source>Periodic System</source>
-        <translation>Tableau Périodique</translation>
-    </message>
-</context>
-<context>
-    <name>calcDlgUI</name>
-    <message>
-        <source>ERROR: 
-</source>
-        <translation>ERREUR :
-</translation>
-    </message>
-</context>
-<context>
-    <name>dataWidgetUI</name>
-    <message>
-        <source>Chemical Data</source>
-        <translation>Données Chimiques</translation>
     </message>
     <message>
         <source>Hydrogen</source>
@@ -158,10 +139,6 @@
     <message>
         <source>Nitrogen</source>
         <translation>Azote</translation>
-    </message>
-    <message>
-        <source>Oxygen</source>
-        <translation>Oxygène</translation>
     </message>
     <message>
         <source>Fluorine</source>
@@ -566,6 +543,465 @@
     <message>
         <source>Meitnerium</source>
         <translation>Meitnerium</translation>
+    </message>
+</context>
+<context>
+    <name>PSEWidget</name>
+    <message>
+        <source>Periodic System</source>
+        <translation>Tableau Périodique</translation>
+    </message>
+</context>
+<context>
+    <name>calcDlgUI</name>
+    <message>
+        <source>ERROR: 
+</source>
+        <translation>ERREUR :
+</translation>
+    </message>
+</context>
+<context>
+    <name>dataWidgetUI</name>
+    <message>
+        <source>Chemical Data</source>
+        <translation>Données Chimiques</translation>
+    </message>
+    <message>
+        <source>Hydrogen</source>
+        <translation type="obsolete">Hydrogène</translation>
+    </message>
+    <message>
+        <source>Helium</source>
+        <translation type="obsolete">Hellium</translation>
+    </message>
+    <message>
+        <source>Lithium</source>
+        <translation type="obsolete">Lithium</translation>
+    </message>
+    <message>
+        <source>Beryllium</source>
+        <translation type="obsolete">Béryllium</translation>
+    </message>
+    <message>
+        <source>Boron</source>
+        <translation type="obsolete">Bore</translation>
+    </message>
+    <message>
+        <source>Carbon</source>
+        <translation type="obsolete">Carbone</translation>
+    </message>
+    <message>
+        <source>Nitrogen</source>
+        <translation type="obsolete">Azote</translation>
+    </message>
+    <message>
+        <source>Oxygen</source>
+        <translation type="obsolete">Oxygène</translation>
+    </message>
+    <message>
+        <source>Fluorine</source>
+        <translation type="obsolete">Fluore</translation>
+    </message>
+    <message>
+        <source>Neon</source>
+        <translation type="obsolete">Néon</translation>
+    </message>
+    <message>
+        <source>Sodium</source>
+        <translation type="obsolete">Sodium</translation>
+    </message>
+    <message>
+        <source>Magnesium</source>
+        <translation type="obsolete">Magnésium</translation>
+    </message>
+    <message>
+        <source>Aluminum</source>
+        <translation type="obsolete">Aluminum</translation>
+    </message>
+    <message>
+        <source>Silicon</source>
+        <translation type="obsolete">Silicium</translation>
+    </message>
+    <message>
+        <source>Phosphorus</source>
+        <translation type="obsolete">Phosphore</translation>
+    </message>
+    <message>
+        <source>Sulfur</source>
+        <translation type="obsolete">Soufre</translation>
+    </message>
+    <message>
+        <source>Chlorine</source>
+        <translation type="obsolete">Chlore</translation>
+    </message>
+    <message>
+        <source>Argon</source>
+        <translation type="obsolete">Argon</translation>
+    </message>
+    <message>
+        <source>Potassium</source>
+        <translation type="obsolete">Potassium</translation>
+    </message>
+    <message>
+        <source>Calcium</source>
+        <translation type="obsolete">Calcium</translation>
+    </message>
+    <message>
+        <source>Scandium</source>
+        <translation type="obsolete">Scandium</translation>
+    </message>
+    <message>
+        <source>Titanium</source>
+        <translation type="obsolete">Titane</translation>
+    </message>
+    <message>
+        <source>Vanadium</source>
+        <translation type="obsolete">Vanadium</translation>
+    </message>
+    <message>
+        <source>Chromium</source>
+        <translation type="obsolete">Chrome</translation>
+    </message>
+    <message>
+        <source>Manganese</source>
+        <translation type="obsolete">Manganèse</translation>
+    </message>
+    <message>
+        <source>Iron</source>
+        <translation type="obsolete">Fer</translation>
+    </message>
+    <message>
+        <source>Cobalt</source>
+        <translation type="obsolete">Cobalt</translation>
+    </message>
+    <message>
+        <source>Nickel</source>
+        <translation type="obsolete">Nickel</translation>
+    </message>
+    <message>
+        <source>Copper</source>
+        <translation type="obsolete">Cuivre</translation>
+    </message>
+    <message>
+        <source>Zinc</source>
+        <translation type="obsolete">Zinc</translation>
+    </message>
+    <message>
+        <source>Gallium</source>
+        <translation type="obsolete">Gallium</translation>
+    </message>
+    <message>
+        <source>Germanium</source>
+        <translation type="obsolete">Germanium</translation>
+    </message>
+    <message>
+        <source>Arsenic</source>
+        <translation type="obsolete">Arsenique</translation>
+    </message>
+    <message>
+        <source>Selenium</source>
+        <translation type="obsolete">Sélénium</translation>
+    </message>
+    <message>
+        <source>Bromine</source>
+        <translation type="obsolete">Brome</translation>
+    </message>
+    <message>
+        <source>Krypton</source>
+        <translation type="obsolete">Krypton</translation>
+    </message>
+    <message>
+        <source>Rubidium</source>
+        <translation type="obsolete">Rubidium</translation>
+    </message>
+    <message>
+        <source>Strontium</source>
+        <translation type="obsolete">Strontium</translation>
+    </message>
+    <message>
+        <source>Yttrium</source>
+        <translation type="obsolete">Yttrium</translation>
+    </message>
+    <message>
+        <source>Zirconium</source>
+        <translation type="obsolete">Zirconium</translation>
+    </message>
+    <message>
+        <source>Niobium</source>
+        <translation type="obsolete">Niobium</translation>
+    </message>
+    <message>
+        <source>Molybdenum</source>
+        <translation type="obsolete">Molybdène</translation>
+    </message>
+    <message>
+        <source>Technetium</source>
+        <translation type="obsolete">Technitium</translation>
+    </message>
+    <message>
+        <source>Ruthenium</source>
+        <translation type="obsolete">Ruthénium</translation>
+    </message>
+    <message>
+        <source>Rhodium</source>
+        <translation type="obsolete">Rhodium</translation>
+    </message>
+    <message>
+        <source>Palladium</source>
+        <translation type="obsolete">Palladium</translation>
+    </message>
+    <message>
+        <source>Silver</source>
+        <translation type="obsolete">Argent</translation>
+    </message>
+    <message>
+        <source>Cadmium</source>
+        <translation type="obsolete">Cadmium</translation>
+    </message>
+    <message>
+        <source>Indium</source>
+        <translation type="obsolete">Indium</translation>
+    </message>
+    <message>
+        <source>Tin</source>
+        <translation type="obsolete">Etain</translation>
+    </message>
+    <message>
+        <source>Antimony</source>
+        <translation type="obsolete">Antimoine</translation>
+    </message>
+    <message>
+        <source>Tellurium</source>
+        <translation type="obsolete">Tellure</translation>
+    </message>
+    <message>
+        <source>Iodine</source>
+        <translation type="obsolete">Iode</translation>
+    </message>
+    <message>
+        <source>Xenon</source>
+        <translation type="obsolete">Xénon</translation>
+    </message>
+    <message>
+        <source>Cesium</source>
+        <translation type="obsolete">Césium</translation>
+    </message>
+    <message>
+        <source>Barium</source>
+        <translation type="obsolete">Barium</translation>
+    </message>
+    <message>
+        <source>Lanthanum</source>
+        <translation type="obsolete">Lanthane</translation>
+    </message>
+    <message>
+        <source>Cerium</source>
+        <translation type="obsolete">Cérium</translation>
+    </message>
+    <message>
+        <source>Praseodymium</source>
+        <translation type="obsolete">Praséodyme</translation>
+    </message>
+    <message>
+        <source>Neodymium</source>
+        <translation type="obsolete">Néodyme</translation>
+    </message>
+    <message>
+        <source>Promethium</source>
+        <translation type="obsolete">Prométhium</translation>
+    </message>
+    <message>
+        <source>Samarium</source>
+        <translation type="obsolete">Samarium</translation>
+    </message>
+    <message>
+        <source>Europium</source>
+        <translation type="obsolete">Europium</translation>
+    </message>
+    <message>
+        <source>Gadolinium</source>
+        <translation type="obsolete">Gadolinium</translation>
+    </message>
+    <message>
+        <source>Terbium</source>
+        <translation type="obsolete">Terbium</translation>
+    </message>
+    <message>
+        <source>Dysprosium</source>
+        <translation type="obsolete">Dysprosium</translation>
+    </message>
+    <message>
+        <source>Holmium</source>
+        <translation type="obsolete">Holmium</translation>
+    </message>
+    <message>
+        <source>Erbium</source>
+        <translation type="obsolete">Erbium</translation>
+    </message>
+    <message>
+        <source>Thulium</source>
+        <translation type="obsolete">Thulium</translation>
+    </message>
+    <message>
+        <source>Ytterbium</source>
+        <translation type="obsolete">Ytterbium</translation>
+    </message>
+    <message>
+        <source>Lutetium</source>
+        <translation type="obsolete">Lutétium</translation>
+    </message>
+    <message>
+        <source>Hafnium</source>
+        <translation type="obsolete">Hafnium</translation>
+    </message>
+    <message>
+        <source>Tantalum</source>
+        <translation type="obsolete">Tantale</translation>
+    </message>
+    <message>
+        <source>Tungsten</source>
+        <translation type="obsolete">Tungsten</translation>
+    </message>
+    <message>
+        <source>Rhenium</source>
+        <translation type="obsolete">Rhénium</translation>
+    </message>
+    <message>
+        <source>Osmium</source>
+        <translation type="obsolete">Osmium</translation>
+    </message>
+    <message>
+        <source>Iridium</source>
+        <translation type="obsolete">Iridium</translation>
+    </message>
+    <message>
+        <source>Platinum</source>
+        <translation type="obsolete">Platine</translation>
+    </message>
+    <message>
+        <source>Gold</source>
+        <translation type="obsolete">Or</translation>
+    </message>
+    <message>
+        <source>Mercury</source>
+        <translation type="obsolete">Mercure</translation>
+    </message>
+    <message>
+        <source>Thallium</source>
+        <translation type="obsolete">Thallium</translation>
+    </message>
+    <message>
+        <source>Lead</source>
+        <translation type="obsolete">Plomb</translation>
+    </message>
+    <message>
+        <source>Bismuth</source>
+        <translation type="obsolete">Bismuth</translation>
+    </message>
+    <message>
+        <source>Polonium</source>
+        <translation type="obsolete">Polonium</translation>
+    </message>
+    <message>
+        <source>Astatine</source>
+        <translation type="obsolete">Astate</translation>
+    </message>
+    <message>
+        <source>Radon</source>
+        <translation type="obsolete">Radon</translation>
+    </message>
+    <message>
+        <source>Francium</source>
+        <translation type="obsolete">Francium</translation>
+    </message>
+    <message>
+        <source>Radium</source>
+        <translation type="obsolete">Radium</translation>
+    </message>
+    <message>
+        <source>Actinium</source>
+        <translation type="obsolete">Actinium</translation>
+    </message>
+    <message>
+        <source>Thorium</source>
+        <translation type="obsolete">Thorium</translation>
+    </message>
+    <message>
+        <source>Protactinium</source>
+        <translation type="obsolete">Protactinium</translation>
+    </message>
+    <message>
+        <source>Uranium</source>
+        <translation type="obsolete">Uranium</translation>
+    </message>
+    <message>
+        <source>Neptunium</source>
+        <translation type="obsolete">Neptunium</translation>
+    </message>
+    <message>
+        <source>Plutonium</source>
+        <translation type="obsolete">Plutonium</translation>
+    </message>
+    <message>
+        <source>Americium</source>
+        <translation type="obsolete">Américium</translation>
+    </message>
+    <message>
+        <source>Curium</source>
+        <translation type="obsolete">Curium</translation>
+    </message>
+    <message>
+        <source>Berkelium</source>
+        <translation type="obsolete">Berkélium</translation>
+    </message>
+    <message>
+        <source>Californium</source>
+        <translation type="obsolete">Californium</translation>
+    </message>
+    <message>
+        <source>Einsteinium</source>
+        <translation type="obsolete">Einsteinium</translation>
+    </message>
+    <message>
+        <source>Fermium</source>
+        <translation type="obsolete">Fermium</translation>
+    </message>
+    <message>
+        <source>Mendelevium</source>
+        <translation type="obsolete">Mendélévium</translation>
+    </message>
+    <message>
+        <source>Nobelium</source>
+        <translation type="obsolete">Nobélium</translation>
+    </message>
+    <message>
+        <source>Lawrencium</source>
+        <translation type="obsolete">Lawrencium</translation>
+    </message>
+    <message>
+        <source>Rutherfordium</source>
+        <translation type="obsolete">Rutherfordium</translation>
+    </message>
+    <message>
+        <source>Dubnium</source>
+        <translation type="obsolete">Dubnium</translation>
+    </message>
+    <message>
+        <source>Seaborgium</source>
+        <translation type="obsolete">Seaborgium</translation>
+    </message>
+    <message>
+        <source>Bohrium</source>
+        <translation type="obsolete">Bohrium</translation>
+    </message>
+    <message>
+        <source>Hassium</source>
+        <translation type="obsolete">Hassium</translation>
+    </message>
+    <message>
+        <source>Meitnerium</source>
+        <translation type="obsolete">Meitnerium</translation>
     </message>
 </context>
 </TS>

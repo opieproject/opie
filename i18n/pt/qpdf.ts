@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>Fit to width</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar à largura</translation>
     </message>
     <message>
         <source>Fit to page</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar ao tamanho da página</translation>
     </message>
     <message>
         <source>50%</source>
@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrâ Todo</translation>
     </message>
     <message>
         <source>First page</source>
@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>Goto page...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir para a página...</translation>
     </message>
     <message>
         <source>Next page</source>
@@ -79,23 +79,23 @@
     </message>
     <message>
         <source>Goto page</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir para a página</translation>
     </message>
     <message>
         <source>Select from 1 .. %1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecionado de 1 .. %1:</translation>
     </message>
     <message>
         <source>&apos;%1&apos; could not be found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi encontrado o &apos;%1&apos;.</translation>
     </message>
     <message>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
     <message>
-        <source>File does not exist !</source>
-        <translation type="unfinished"></translation>
+        <source>File does not exist!</source>
+        <translation>O ficheiro não existe!</translation>
     </message>
 </context>
 </TS>

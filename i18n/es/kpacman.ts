@@ -95,14 +95,8 @@ Quiero agradecer a mi novia Elke Krueers sus
         <translation>&amp;Ayuda</translation>
     </message>
     <message>
-        <source>Configuration Error</source>
-        <translation>Error de configuración</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation>No hay esquemas definidos, o
-no seleccionó ningún esquema.</translation>
+        <source>KPacman</source>
+        <translation>KPacman</translation>
     </message>
 </context>
 <context>

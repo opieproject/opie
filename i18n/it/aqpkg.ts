@@ -97,7 +97,7 @@
         <source>
 **** User Clicked ABORT ***</source>
         <translation>
-**** L&apos;utente ha cliccato INTERROMPI ***</translation>
+**** L&apos;utente ha premuto INTERROMPI ***</translation>
     </message>
     <message>
         <source>**** Process Aborted ****</source>
@@ -110,6 +110,10 @@
     <message>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
+    </message>
+    <message>
+        <source>%1 Kb</source>
+        <translation>%1 Kb</translation>
     </message>
 </context>
 <context>
@@ -156,6 +160,87 @@
     </message>
 </context>
 <context>
+    <name>Ipkg</name>
+    <message>
+        <source>Dealing with package %1</source>
+        <translation>Trattamento pacchetto %1</translation>
+    </message>
+    <message>
+        <source>Removing symbolic links...
+</source>
+        <translation>Rimozione link simbolici...
+</translation>
+    </message>
+    <message>
+        <source>Creating symbolic links for %1.</source>
+        <translation>Creazione link simbolici per %1.</translation>
+    </message>
+    <message>
+        <source>Creating symbolic links for %1</source>
+        <translation>Creazione link simbolici per %1</translation>
+    </message>
+    <message>
+        <source>Finished</source>
+        <translation>Terminato</translation>
+    </message>
+    <message>
+        <source>Removing status entry...</source>
+        <translation>Rimozione valore stato...</translation>
+    </message>
+    <message>
+        <source>status file - </source>
+        <translation>file di stato - </translation>
+    </message>
+    <message>
+        <source>package - </source>
+        <translation>pacchetto - </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t open status file - </source>
+        <translation>Impossibile aprire file di stato - </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create tempory status file - </source>
+        <translation>Impossibile creare file di stato temporaneo - </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg process</source>
+        <translation>Impossibile avviare processo ipkg</translation>
+    </message>
+    <message>
+        <source>Could not open :</source>
+        <translation>Impossibile aprire :</translation>
+    </message>
+    <message>
+        <source>Creating directory </source>
+        <translation>Creazione directory </translation>
+    </message>
+    <message>
+        <source>Linked %1 to %2</source>
+        <translation>Creato link da %1 a %2</translation>
+    </message>
+    <message>
+        <source>Failed to link %1 to %2</source>
+        <translation>Creazione link da %1 a %2 fallita</translation>
+    </message>
+    <message>
+        <source>Removed %1</source>
+        <translation>Eliminato %1</translation>
+    </message>
+    <message>
+        <source>Failed to remove %1</source>
+        <translation>Impossibile eliminare %1</translation>
+    </message>
+    <message>
+        <source>Removed </source>
+        <translation>Eliminato </translation>
+    </message>
+    <message>
+        <source>Failed to remove </source>
+        <translation>Impossibile eliminare </translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <source>AQPkg - Package Manager</source>
@@ -167,7 +252,7 @@
     </message>
     <message>
         <source>Click here to hide the Quick Jump toolbar.</source>
-        <translation>Clicca qui per nascondere la toolbar &quot;Quick Jump&quot;.</translation>
+        <translation>Premi qui per nascondere la toolbar &quot;Quick Jump&quot;.</translation>
     </message>
     <message>
         <source>Update lists</source>
@@ -175,7 +260,7 @@
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation>Clicca qui per aggiornare le liste dei pacchetti dai server.</translation>
+        <translation>Premi qui per aggiornare le liste dei pacchetti dai server.</translation>
     </message>
     <message>
         <source>Upgrade</source>
@@ -183,7 +268,7 @@
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation>Clicca qui per fare l&apos;upgrade di tutti i pacchetti installati se è disponibile una versione più aggiornata.</translation>
+        <translation>Premi qui per fare l&apos;upgrade di tutti i pacchetti installati se è disponibile una versione più aggiornata.</translation>
     </message>
     <message>
         <source>Download</source>
@@ -191,7 +276,7 @@
     </message>
     <message>
         <source>Click here to download the currently selected package(s).</source>
-        <translation>Clicca qui per fare il download dei pacchetti selezionati.</translation>
+        <translation>Premi qui per fare il download dei pacchetti selezionati.</translation>
     </message>
     <message>
         <source>Apply changes</source>
@@ -199,7 +284,7 @@
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation>Clicca qui per installare, eliminare o fare l&apos;upgrade dei pacchetti selezionati.</translation>
+        <translation>Premi qui per installare, eliminare o fare l&apos;upgrade dei pacchetti selezionati.</translation>
     </message>
     <message>
         <source>Actions</source>
@@ -207,27 +292,27 @@
     </message>
     <message>
         <source>Show packages not installed</source>
-        <translation>Mostra i pacchetti non installati</translation>
+        <translation>Mostra pacchetti non installati</translation>
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
-        <translation>Clicca qui per visualizzare i pacchetti disponibili non ancora installati.</translation>
+        <translation>Premi qui per visualizzare i pacchetti disponibili non ancora installati.</translation>
     </message>
     <message>
         <source>Show installed packages</source>
-        <translation>Mostra i pacchetti installati</translation>
+        <translation>Mostra pacchetti installati</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device.</source>
-        <translation>Clicca qui per visualizzare i pacchetti installati su questo dispositivo.</translation>
+        <translation>Premi qui per visualizzare i pacchetti installati su questo dispositivo.</translation>
     </message>
     <message>
         <source>Show updated packages</source>
-        <translation>Mostra i pacchetti aggiornati</translation>
+        <translation>Mostra pacchetti aggiornati</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
-        <translation>Clicca qui per visualizzare i pacchetti installati su questo dispositivo che hanno disponibile una versione più aggiornata.</translation>
+        <translation>Premi qui per visualizzare i pacchetti installati su questo dispositivo che hanno disponibile una versione più aggiornata.</translation>
     </message>
     <message>
         <source>Filter by category</source>
@@ -235,7 +320,7 @@
     </message>
     <message>
         <source>Click here to list packages belonging to one category.</source>
-        <translation>Clicca qui per visualizzare i pacchetti appartenenti ad una categoria.</translation>
+        <translation>Premi qui per visualizzare i pacchetti appartenenti ad una categoria.</translation>
     </message>
     <message>
         <source>Set filter category</source>
@@ -243,7 +328,7 @@
     </message>
     <message>
         <source>Click here to change package category to used filter.</source>
-        <translation>Clicca qui per cambiare la categoria utilizzata per il filtro dei pacchetti.</translation>
+        <translation>Premi qui per cambiare la categoria utilizzata per il filtro dei pacchetti.</translation>
     </message>
     <message>
         <source>Find</source>
@@ -251,7 +336,7 @@
     </message>
     <message>
         <source>Click here to search for text in package names.</source>
-        <translation>Clicca qui per cercare del testo nei nomi dei pacchetti.</translation>
+        <translation>Premi qui per cercare del testo nei nomi dei pacchetti.</translation>
     </message>
     <message>
         <source>Find next</source>
@@ -259,15 +344,15 @@
     </message>
     <message>
         <source>Click here to find the next package name containing the text you are searching for.</source>
-        <translation>Clicca qui per trovare il successivo nome del pacchetto che contiene il testo che stai cercando.</translation>
+        <translation>Premi qui per trovare il successivo nome del pacchetto che contiene il testo che stai cercando.</translation>
     </message>
     <message>
         <source>Quick Jump keypad</source>
-        <translation>Tastiera &quot;Quick Jump&quot;</translation>
+        <translation>Tastiera Quick Jump</translation>
     </message>
     <message>
         <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
-        <translation>Clicca qui per mostrare/nascondere la tastiera per muoversi velocemente nella lista dei pacchetti.</translation>
+        <translation>Premi qui per mostrare/nascondere la tastiera per muoversi velocemente nella lista dei pacchetti.</translation>
     </message>
     <message>
         <source>View</source>
@@ -279,11 +364,11 @@
     </message>
     <message>
         <source>Click here to configure this application.</source>
-        <translation>Clicca qui per configurare questa applicazione.</translation>
+        <translation>Premi qui per configurare questa applicazione.</translation>
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
-        <translation>Clicca qui per nascondere la toolbar di ricerca.</translation>
+        <translation>Premi qui per nascondere la toolbar di ricerca.</translation>
     </message>
     <message>
         <source>Servers:</source>
@@ -291,7 +376,7 @@
     </message>
     <message>
         <source>Click here to select a package feed.</source>
-        <translation>Clicca qui per selezionare un server per i pacchetti.</translation>
+        <translation>Premi qui per selezionare un server per i pacchetti.</translation>
     </message>
     <message>
         <source>Packages</source>
@@ -311,7 +396,7 @@ Un punto blu dopo il nome del pacchetto indica che il pacchetto è installato.
 
 Un punto blu con una stella indica che è disponibile sul server una nuova versione del pacchetto .
 
-Clicca dentro il box sulla sinistra per selezionare un pacchetto.</translation>
+Premi dentro il box sulla sinistra per selezionare un pacchetto.</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -319,7 +404,7 @@ Clicca dentro il box sulla sinistra per selezionare un pacchetto.</translation>
     </message>
     <message>
         <source>Click here to uninstall the currently selected package(s).</source>
-        <translation>Clicca qui per disinstallare i pacchetti selezionati.</translation>
+        <translation>Premi qui per disinstallare i pacchetti selezionati.</translation>
     </message>
     <message>
         <source>Building server list:
@@ -332,34 +417,6 @@ Clicca dentro il box sulla sinistra per selezionare un pacchetto.</translation>
 <byte value="x9"/>%1</source>
         <translation>Creazione lista pacchetti per:
 <byte value="x9"/>%1</translation>
-    </message>
-    <message>
-        <source>Installed To - %1</source>
-        <translation type="obsolete">Installato Su - %1</translation>
-    </message>
-    <message>
-        <source>Description - %1</source>
-        <translation type="obsolete">Descrizione - %1</translation>
-    </message>
-    <message>
-        <source>Size - %1</source>
-        <translation type="obsolete">Dimensione - %1</translation>
-    </message>
-    <message>
-        <source>Section - %1</source>
-        <translation type="obsolete">Sezione - %1</translation>
-    </message>
-    <message>
-        <source>Filename - %1</source>
-        <translation type="obsolete">Nome File - %1</translation>
-    </message>
-    <message>
-        <source>V. Installed - %1</source>
-        <translation type="obsolete">V. Installata - %1</translation>
-    </message>
-    <message>
-        <source>V. Available - %1</source>
-        <translation type="obsolete">V. Disponibile - %1</translation>
     </message>
     <message>
         <source>Refreshing server package lists</source>
@@ -449,7 +506,7 @@ Sei sicuro?
     </message>
     <message>
         <source>R</source>
-        <translation>R</translation>
+        <translation type="obsolete">R</translation>
     </message>
     <message>
         <source>Do you wish to remove or upgrade
@@ -463,7 +520,7 @@ Sei sicuro?
     </message>
     <message>
         <source>U</source>
-        <translation>U</translation>
+        <translation type="obsolete">U</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>
@@ -511,6 +568,52 @@ Sei sicuro?
     <message>
         <source>Close</source>
         <translation>Chiudi</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Installed packages</source>
+        <translation>Pacchetti installati</translation>
+    </message>
+    <message>
+        <source>Local packages</source>
+        <translation>Pacchetti locali</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>N/D</translation>
+    </message>
+    <message>
+        <source>Package - %1
+              version - %2</source>
+        <translation>Pacchetto - %1
+              versione - %2</translation>
+    </message>
+    <message>
+        <source>
+              inst version - %1</source>
+        <translation>
+              versione inst - %1</translation>
+    </message>
+    <message>
+        <source>Version string is empty.</source>
+        <translation>La stringa della versione è vuota.</translation>
+    </message>
+    <message>
+        <source>Epoch in version is not number.</source>
+        <translation>Il valore nella versione non è un numero.</translation>
+    </message>
+    <message>
+        <source>Nothing after colon in version number.</source>
+        <translation>Nessun carattere dopo i due punti nel numero di versione.</translation>
+    </message>
+</context>
+<context>
+    <name>QuestionDlg</name>
+    <message>
+        <source>Remove</source>
+        <translation>Elimina</translation>
     </message>
 </context>
 <context>
@@ -569,7 +672,7 @@ Sei sicuro?
     </message>
     <message>
         <source>Link to root</source>
-        <translation>Link alla root</translation>
+        <translation>Link a /</translation>
     </message>
     <message>
         <source>HTTP Proxy</source>

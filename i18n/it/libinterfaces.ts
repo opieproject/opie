@@ -105,6 +105,10 @@
         <source>&amp;View Advanced Information</source>
         <translation>&amp;Mostra Informazioni Avanzate</translation>
     </message>
+    <message>
+        <source>be &amp;silent</source>
+        <translation>&amp;silenzioso</translation>
+    </message>
 </context>
 <context>
     <name>InterfaceSetup</name>
@@ -143,6 +147,10 @@
     <message>
         <source>Second DNS</source>
         <translation>DNS Secondario</translation>
+    </message>
+    <message>
+        <source>255.255.255.0</source>
+        <translation>255.255.255.0</translation>
     </message>
 </context>
 <context>

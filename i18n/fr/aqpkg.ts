@@ -3,19 +3,30 @@
     <name>CategoryFilterDlg</name>
     <message>
         <source>Category Filter</source>
-        <translation>Filtre par catégorie</translation>
+        <translation type="obsolete">Filtre par catégorie</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Annuler</translation>
+        <translation type="obsolete">&amp;Annuler</translation>
     </message>
     <message>
         <source>Select groups to show</source>
-        <translation>Sélectionner groupes à afficher</translation>
+        <translation type="obsolete">Sélectionner groupes à afficher</translation>
+    </message>
+</context>
+<context>
+    <name>CategoryFilterImpl</name>
+    <message>
+        <source>Category Filter</source>
+        <translation>Filtre par catégorie</translation>
+    </message>
+    <message>
+        <source>Select one or more groups</source>
+        <translation>Sélectionnez un ou plusieurs groupes</translation>
     </message>
 </context>
 <context>
@@ -40,7 +51,70 @@
     <name>InstallDlg</name>
     <message>
         <source>Install</source>
+        <translation type="obsolete">Installer</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="obsolete">Démarrer</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="obsolete">Options</translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation type="obsolete">Sortie</translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation type="obsolete">Destination</translation>
+    </message>
+    <message>
+        <source>Space Avail</source>
+        <translation type="obsolete">Espace dispo</translation>
+    </message>
+</context>
+<context>
+    <name>InstallDlgImpl</name>
+    <message>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+    <message>
+        <source>Remove
+</source>
+        <translation>Supprimer
+</translation>
+    </message>
+    <message>
+        <source>Install
+</source>
         <translation>Installer</translation>
+    </message>
+    <message>
+        <source>Upgrade
+</source>
+        <translation>Mise-à-jour</translation>
+    </message>
+    <message>
+        <source>(ReInstall)</source>
+        <translation>(Réinstaller)</translation>
+    </message>
+    <message>
+        <source>(Upgrade)</source>
+        <translation>(Mise-à-jour)</translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation>Destination</translation>
+    </message>
+    <message>
+        <source>Space Avail</source>
+        <translation>Espace dispo</translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation>Sortie</translation>
     </message>
     <message>
         <source>Start</source>
@@ -51,27 +125,73 @@
         <translation>Options</translation>
     </message>
     <message>
-        <source>Output</source>
-        <translation>Sortie</translation>
+        <source>All</source>
+        <translation>Tous</translation>
     </message>
     <message>
-        <source>Destination</source>
-        <translation>Destination</translation>
+        <source>Text</source>
+        <translation>Texte</translation>
     </message>
     <message>
-        <source>Space Avail</source>
-        <translation>Espace dispo</translation>
+        <source>Abort</source>
+        <translation>Abandonner</translation>
     </message>
-</context>
-<context>
-    <name>InstallDlgImpl</name>
     <message>
-        <source>Close</source>
-        <translation>Fermer</translation>
+        <source>
+**** User Clicked ABORT ***</source>
+        <translation>
+** Opération Annuler l&apos;Utilisateur **</translation>
+    </message>
+    <message>
+        <source>**** Process Aborted ****</source>
+        <translation>** Processus Annulé **</translation>
+    </message>
+    <message>
+        <source>%1 Kb</source>
+        <translation>%1 Kb</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation>Inconnu</translation>
+    </message>
+    <message>
+        <source>Save output</source>
+        <translation>Enregistrer la sortie</translation>
     </message>
 </context>
 <context>
     <name>InstallOptionsDlg</name>
+    <message>
+        <source>Options</source>
+        <translation type="obsolete">Options</translation>
+    </message>
+    <message>
+        <source>Force Depends</source>
+        <translation type="obsolete">Forcer les Dépendances</translation>
+    </message>
+    <message>
+        <source>Force Reinstall</source>
+        <translation type="obsolete">Forcer la Réinstallation</translation>
+    </message>
+    <message>
+        <source>Force Remove</source>
+        <translation type="obsolete">Forcer la Suppression</translation>
+    </message>
+    <message>
+        <source>Force Overwrite</source>
+        <translation type="obsolete">Forcer la Ré-écriture</translation>
+    </message>
+    <message>
+        <source>Verbose WGet</source>
+        <translation type="obsolete">WGet Verbeux</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="obsolete">OK</translation>
+    </message>
+</context>
+<context>
+    <name>InstallOptionsDlgImpl</name>
     <message>
         <source>Options</source>
         <translation>Options</translation>
@@ -93,19 +213,112 @@
         <translation>Forcer la Ré-écriture</translation>
     </message>
     <message>
-        <source>Verbose WGet</source>
-        <translation>WGet Verbeux</translation>
+        <source>Information Level</source>
+        <translation>Niveau d&apos;Information</translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>OK</translation>
+        <source>Errors only</source>
+        <translation>Erreurs seulement</translation>
+    </message>
+    <message>
+        <source>Normal messages</source>
+        <translation>Messages Normaux</translation>
+    </message>
+    <message>
+        <source>Informative messages</source>
+        <translation>Messages d&apos;information</translation>
+    </message>
+    <message>
+        <source>Troubleshooting output</source>
+        <translation>Sortie des erreurs</translation>
+    </message>
+</context>
+<context>
+    <name>Ipkg</name>
+    <message>
+        <source>Dealing with package %1</source>
+        <translation>Traitement du paquet %1</translation>
+    </message>
+    <message>
+        <source>Removing symbolic links...
+</source>
+        <translation>Suppression des liens symboliques...
+</translation>
+    </message>
+    <message>
+        <source>Creating symbolic links for %1.</source>
+        <translation>Creation de liens symboliques pour %1.</translation>
+    </message>
+    <message>
+        <source>Creating symbolic links for %1</source>
+        <translation>Creation de liens symboliques pour %1</translation>
+    </message>
+    <message>
+        <source>Finished</source>
+        <translation>Terminé</translation>
+    </message>
+    <message>
+        <source>Removing status entry...</source>
+        <translation>Suppression du status...</translation>
+    </message>
+    <message>
+        <source>status file - </source>
+        <translation>fichier status - </translation>
+    </message>
+    <message>
+        <source>package - </source>
+        <translation>paquet -</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t open status file - </source>
+        <translation>Impossible d&apos;ouvrir le fichier de status -</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create tempory status file - </source>
+        <translation>Impossible de créer le fichier de status temporaire -</translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg process</source>
+        <translation>Impossible de démarrer le processus ipkg</translation>
+    </message>
+    <message>
+        <source>Could not open :</source>
+        <translation>Ouverture impossible de :</translation>
+    </message>
+    <message>
+        <source>Creating directory </source>
+        <translation>Creation répertoire</translation>
+    </message>
+    <message>
+        <source>Linked %1 to %2</source>
+        <translation>Lien %1 sur %2</translation>
+    </message>
+    <message>
+        <source>Failed to link %1 to %2</source>
+        <translation>Erreur lors du lien de %1 sur %2</translation>
+    </message>
+    <message>
+        <source>Removed %1</source>
+        <translation>Supprimé : %1</translation>
+    </message>
+    <message>
+        <source>Failed to remove %1</source>
+        <translation>Suppression impossible de : %1</translation>
+    </message>
+    <message>
+        <source>Removed </source>
+        <translation>Supprimé</translation>
+    </message>
+    <message>
+        <source>Failed to remove </source>
+        <translation>Suppression impossible</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>AQPkg - Package Manager</source>
-        <translation>AQPkg - Gestionnaire de Package</translation>
+        <translation>AQPkg - Gestionnaire de Paquets</translation>
     </message>
     <message>
         <source>Type the text to search for here.</source>
@@ -121,7 +334,7 @@
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation>Cliquez ici pour mettre les listes de packages à jour depuis les serveurs.</translation>
+        <translation>Cliquez ici pour mettre les listes de paquets à jour depuis les serveurs.</translation>
     </message>
     <message>
         <source>Upgrade</source>
@@ -129,7 +342,7 @@
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation>Cliquez ici pour mettre à jour tous les packages installés si une nouvelle version est disponible.</translation>
+        <translation>Cliquez ici pour mettre à jour tous les paquets installés si une nouvelle version est disponible.</translation>
     </message>
     <message>
         <source>Download</source>
@@ -137,7 +350,7 @@
     </message>
     <message>
         <source>Click here to download the currently selected package(s).</source>
-        <translation>Cliquer ici pour télécharger le(s) package(s) sélectionné(s).</translation>
+        <translation>Cliquer ici pour télécharger le(s) paquet(s) sélectionné(s).</translation>
     </message>
     <message>
         <source>Apply changes</source>
@@ -145,7 +358,7 @@
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation>Cliquez ici pour installer, enlever ou mettre à jour le(s) package(s) sélectionné(s).</translation>
+        <translation>Cliquez ici pour installer, enlever ou mettre à jour le(s) paquet(s) sélectionné(s).</translation>
     </message>
     <message>
         <source>Actions</source>
@@ -153,27 +366,27 @@
     </message>
     <message>
         <source>Show packages not installed</source>
-        <translation>Montrer les packages non installés</translation>
+        <translation>Montrer les paquets non installés</translation>
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
-        <translation>Cliquez ici pour afficher les packages non installés disponibles.</translation>
+        <translation>Cliquez ici pour afficher les paquets non installés disponibles.</translation>
     </message>
     <message>
         <source>Show installed packages</source>
-        <translation>Afficher les packages installés</translation>
+        <translation>Afficher les paquets installés</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device.</source>
-        <translation>Cliquez ici pour afficher les packages installés sur cet appareil.</translation>
+        <translation>Cliquez ici pour afficher les paquets installés sur cet appareil.</translation>
     </message>
     <message>
         <source>Show updated packages</source>
-        <translation>Afficher les packages mis à jour</translation>
+        <translation>Afficher les paquets mis à jour</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
-        <translation>Cliquez ici pour afficher les packages installés sur cet appareil et dont une version plus récente est disponible.</translation>
+        <translation>Cliquez ici pour afficher les paquets installés sur cet appareil et dont une version plus récente est disponible.</translation>
     </message>
     <message>
         <source>Filter by category</source>
@@ -181,7 +394,7 @@
     </message>
     <message>
         <source>Click here to list packages belonging to one category.</source>
-        <translation>Cliquez ici pour afficher les packages appartenant à une catégorie.</translation>
+        <translation>Cliquez ici pour afficher les paquets appartenant à une catégorie.</translation>
     </message>
     <message>
         <source>Set filter category</source>
@@ -189,7 +402,7 @@
     </message>
     <message>
         <source>Click here to change package category to used filter.</source>
-        <translation>Cliquez ici pour changer la catégorie de packages à utiliser comme filtre.</translation>
+        <translation>Cliquez ici pour changer la catégorie de paquets à utiliser comme filtre.</translation>
     </message>
     <message>
         <source>Find</source>
@@ -197,7 +410,7 @@
     </message>
     <message>
         <source>Click here to search for text in package names.</source>
-        <translation>Cliquez ici pour rechercher un texte dans les noms de packages.</translation>
+        <translation>Cliquez ici pour rechercher un texte dans les noms de paquets.</translation>
     </message>
     <message>
         <source>Find next</source>
@@ -205,7 +418,7 @@
     </message>
     <message>
         <source>Click here to find the next package name containing the text you are searching for.</source>
-        <translation>Cliquez ici pour trouver le package suivant contenant le texte recherché.</translation>
+        <translation>Cliquez ici pour trouver le paquets suivant contenant le texte recherché.</translation>
     </message>
     <message>
         <source>Quick Jump keypad</source>
@@ -213,7 +426,7 @@
     </message>
     <message>
         <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
-        <translation>Cliquez ici pour afficher/cacher le clavier permettant le déplacement rapide dans la liste des packages.</translation>
+        <translation>Cliquez ici pour afficher/cacher le clavier permettant le déplacement rapide dans la liste des paquets.</translation>
     </message>
     <message>
         <source>View</source>
@@ -229,23 +442,23 @@
     </message>
     <message>
         <source>Help</source>
-        <translation>Aide</translation>
+        <translation type="obsolete">Aide</translation>
     </message>
     <message>
         <source>Click here for help.</source>
-        <translation>Cliquez ici pour afficher l&apos;aide.</translation>
+        <translation type="obsolete">Cliquez ici pour afficher l&apos;aide.</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>A Propos</translation>
+        <translation type="obsolete">A Propos</translation>
     </message>
     <message>
         <source>Click here for software version information.</source>
-        <translation>Cliquez ici pour les informations sur la version du logiciel.</translation>
+        <translation type="obsolete">Cliquez ici pour les informations sur la version du logiciel.</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Options</translation>
+        <translation type="obsolete">Options</translation>
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
@@ -281,7 +494,7 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     </message>
     <message>
         <source>About AQPkg</source>
-        <translation>A propos de AQPkg</translation>
+        <translation type="obsolete">A propos de AQPkg</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -289,7 +502,7 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     </message>
     <message>
         <source>Click here to uninstall the currently selected package(s).</source>
-        <translation>Cliquez ici pour désinstaller le(s) package(s) sélectionné(s).</translation>
+        <translation>Cliquez ici pour désinstaller le(s) paquet(s) sélectionné(s).</translation>
     </message>
     <message>
         <source>Building server list:
@@ -301,40 +514,40 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     <message>
         <source>Building package list for:
 <byte value="x9"/>%1</source>
-        <translation>Construit la liste des packages pour :
+        <translation>Construit la liste des paquets pour :
 %1</translation>
     </message>
     <message>
         <source>Installed To - %1</source>
-        <translation>Installé sur - %1</translation>
+        <translation type="obsolete">Installé sur - %1</translation>
     </message>
     <message>
         <source>Description - %1</source>
-        <translation>Description - %1</translation>
+        <translation type="obsolete">Description - %1</translation>
     </message>
     <message>
         <source>Size - %1</source>
-        <translation>Taille - %1</translation>
+        <translation type="obsolete">Taille - %1</translation>
     </message>
     <message>
         <source>Section - %1</source>
-        <translation>Section - %1</translation>
+        <translation type="obsolete">Section - %1</translation>
     </message>
     <message>
         <source>Filename - %1</source>
-        <translation>Nom - %1</translation>
+        <translation type="obsolete">Nom - %1</translation>
     </message>
     <message>
         <source>V. Installed - %1</source>
-        <translation>V. Installée - %1</translation>
+        <translation type="obsolete">V. Installée - %1</translation>
     </message>
     <message>
         <source>V. Available - %1</source>
-        <translation>V. Disponible - %1</translation>
+        <translation type="obsolete">V. Disponible - %1</translation>
     </message>
     <message>
         <source>Refreshing server package lists</source>
-        <translation>Rafraîchit la liste de packages des serveurs</translation>
+        <translation>Rafraîchit la liste de paquets des serveurs</translation>
     </message>
     <message>
         <source>WARNING: Upgrading while
@@ -355,7 +568,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Upgrading installed packages</source>
-        <translation>Met à jour les packages installés</translation>
+        <translation>Met à jour les paquets installés</translation>
     </message>
     <message>
         <source>Are you sure you wish to delete
@@ -385,11 +598,11 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Install Remote Package</source>
-        <translation>Installer Package Distant</translation>
+        <translation>Installer Paquet Distant</translation>
     </message>
     <message>
         <source>Enter package location</source>
-        <translation>Entrez la chemin du package</translation>
+        <translation>Entrez la chemin du paquet</translation>
     </message>
     <message>
         <source>Nothing to do</source>
@@ -397,7 +610,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>No packages selected</source>
-        <translation>Aucun package sélectionné</translation>
+        <translation>Aucun paquet sélectionné</translation>
     </message>
     <message>
         <source>OK</source>
@@ -419,7 +632,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>R</source>
-        <translation>R</translation>
+        <translation type="obsolete">R</translation>
     </message>
     <message>
         <source>Do you wish to remove or upgrade
@@ -433,11 +646,187 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>U</source>
-        <translation>M</translation>
+        <translation type="obsolete">M</translation>
+    </message>
+    <message>
+        <source>Updating Launcher...</source>
+        <translation>Mise-à-jour du Bureau...</translation>
+    </message>
+</context>
+<context>
+    <name>PackageWindow</name>
+    <message>
+        <source>&lt;b&gt;Description&lt;/b&gt; - </source>
+        <translation>&lt;b&gt;Description&lt;/b&gt; - </translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Installed To&lt;/b&gt; - </source>
+        <translation>&lt;p&gt;&lt;b&gt;Installé Sur&lt;/b&gt; - </translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Size&lt;/b&gt; - </source>
+        <translation>&lt;p&gt;&lt;b&gt;Taille&lt;/b&gt; - </translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt; - </source>
+        <translation>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt; - </translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Filename&lt;/b&gt; - </source>
+        <translation>&lt;p&gt;&lt;b&gt;Nom Fichier&lt;/b&gt; - </translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
+        <translation>&lt;p&gt;&lt;b&gt;Version Installée&lt;/b&gt; - </translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
+        <translation>&lt;p&gt;&lt;b&gt;Version Disponible&lt;/b&gt; - </translation>
+    </message>
+    <message>
+        <source>Package Information</source>
+        <translation>Information Paquet</translation>
+    </message>
+    <message>
+        <source>Package information is unavailable</source>
+        <translation>Informations sur le paquet non disponibles</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation>Fermer</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Installed packages</source>
+        <translation>Paquets installés</translation>
+    </message>
+    <message>
+        <source>Local packages</source>
+        <translation>Paquets locaux</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>N/A</translation>
+    </message>
+    <message>
+        <source>Package - %1
+              version - %2</source>
+        <translation>Paquets - %1
+             version - %2</translation>
+    </message>
+    <message>
+        <source>
+              inst version - %1</source>
+        <translation>
+            version inst. - %1</translation>
+    </message>
+    <message>
+        <source>Version string is empty.</source>
+        <translation>N° de version indisponible.</translation>
+    </message>
+    <message>
+        <source>Epoch in version is not number.</source>
+        <translation>Nombre incorrect.</translation>
+    </message>
+    <message>
+        <source>Nothing after colon in version number.</source>
+        <translation>N° de version terminé par &apos;:&apos; .</translation>
+    </message>
+</context>
+<context>
+    <name>QuestionDlg</name>
+    <message>
+        <source>Remove</source>
+        <translation>Supprimer</translation>
     </message>
 </context>
 <context>
     <name>SettingsBase</name>
+    <message>
+        <source>Configuration</source>
+        <translation type="obsolete">Configuration</translation>
+    </message>
+    <message>
+        <source>Servers</source>
+        <translation type="obsolete">Serveurs</translation>
+    </message>
+    <message>
+        <source>Active Server</source>
+        <translation type="obsolete">Serveur actif</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="obsolete">Nom :</translation>
+    </message>
+    <message>
+        <source>URL:</source>
+        <translation type="obsolete">URL :</translation>
+    </message>
+    <message>
+        <source>Change</source>
+        <translation type="obsolete">Changer</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="obsolete">Supprimer</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="obsolete">Nouveau</translation>
+    </message>
+    <message>
+        <source>Destinations</source>
+        <translation type="obsolete">Destinations</translation>
+    </message>
+    <message>
+        <source>Link To Root</source>
+        <translation type="obsolete">Créer un lien vers root</translation>
+    </message>
+    <message>
+        <source>Proxies</source>
+        <translation type="obsolete">Proxies</translation>
+    </message>
+    <message>
+        <source>HTTP Proxy</source>
+        <translation type="obsolete">Proxy HTTP</translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="obsolete">Mot de Passe</translation>
+    </message>
+    <message>
+        <source>Enabled</source>
+        <translation type="obsolete">Activé</translation>
+    </message>
+    <message>
+        <source>FTP Proxy</source>
+        <translation type="obsolete">Proxy FTP</translation>
+    </message>
+    <message>
+        <source>Username</source>
+        <translation type="obsolete">Utilisateur</translation>
+    </message>
+    <message>
+        <source>&amp;Apply</source>
+        <translation type="obsolete">&amp;Appliquer</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="obsolete">Général</translation>
+    </message>
+    <message>
+        <source>(Will take effect on restart)</source>
+        <translation type="obsolete">(Prendra effet après redémarrage)</translation>
+    </message>
+    <message>
+        <source>Show Jump To Letters</source>
+        <translation type="obsolete">Afficher la Navigation par Lettres</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsImpl</name>
     <message>
         <source>Configuration</source>
         <translation>Configuration</translation>
@@ -447,48 +836,56 @@ Etes-vous sûr ?</translation>
         <translation>Serveurs</translation>
     </message>
     <message>
-        <source>Active Server</source>
-        <translation>Serveur actif</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation>Nom :</translation>
-    </message>
-    <message>
-        <source>URL:</source>
-        <translation>URL :</translation>
-    </message>
-    <message>
-        <source>Change</source>
-        <translation>Changer</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Supprimer</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Nouveau</translation>
-    </message>
-    <message>
         <source>Destinations</source>
         <translation>Destinations</translation>
-    </message>
-    <message>
-        <source>Link To Root</source>
-        <translation>Créer un lien vers root</translation>
     </message>
     <message>
         <source>Proxies</source>
         <translation>Proxies</translation>
     </message>
     <message>
-        <source>HTTP Proxy</source>
-        <translation>Proxy HTTP</translation>
+        <source>New</source>
+        <translation>Nouveau</translation>
     </message>
     <message>
-        <source>Password</source>
-        <translation>Mot de Passe</translation>
+        <source>Delete</source>
+        <translation>Supprimer</translation>
+    </message>
+    <message>
+        <source>Server</source>
+        <translation>Serveur</translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation>Nom :</translation>
+    </message>
+    <message>
+        <source>Address:</source>
+        <translation>Addresse :</translation>
+    </message>
+    <message>
+        <source>Active Server</source>
+        <translation>Serveur actif</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation>Mise-à-jour</translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation>Destination</translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation>Emplacement :</translation>
+    </message>
+    <message>
+        <source>Link to root</source>
+        <translation>Lien vers la racine</translation>
+    </message>
+    <message>
+        <source>HTTP Proxy</source>
+        <translation>Proxy HTTP</translation>
     </message>
     <message>
         <source>Enabled</source>
@@ -499,24 +896,12 @@ Etes-vous sûr ?</translation>
         <translation>Proxy FTP</translation>
     </message>
     <message>
-        <source>Username</source>
-        <translation>Utilisateur</translation>
+        <source>Username:</source>
+        <translation>Nom Utilisateur :</translation>
     </message>
     <message>
-        <source>&amp;Apply</source>
-        <translation>&amp;Appliquer</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Général</translation>
-    </message>
-    <message>
-        <source>(Will take effect on restart)</source>
-        <translation>(Prendra effet après redémarrage)</translation>
-    </message>
-    <message>
-        <source>Show Jump To Letters</source>
-        <translation>Afficher la Navigation par Lettres</translation>
+        <source>Password:</source>
+        <translation>Mot de passe :</translation>
     </message>
 </context>
 </TS>

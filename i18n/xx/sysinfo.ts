@@ -1,5 +1,52 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>FileSysInfo</name>
+    <message>
+        <source>CF</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Ha</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>This graph represents how much storage is currently used on this hard drive.</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>In</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <translation>FOO</translation>
+    </message>
+</context>
+<context>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
@@ -67,7 +114,7 @@ Memory is categorized as follows:
     </message>
     <message>
         <source>Used By</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
@@ -94,6 +141,14 @@ Click and hold on a module to see additional information about the module, or to
     <message>
         <source>You really want to execute
 </source>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>Used by</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>You really want to execute %1 for this module?</source>
         <translation>FOO</translation>
     </message>
 </context>
@@ -155,81 +210,10 @@ Click and hold on a process to see additional information about the process, or 
     <message>
         <source>You really want to send
 </source>
-        <translation>FOO</translation>
-    </message>
-</context>
-<context>
-    <name>StorageInfo</name>
-    <message>
-        <source>CF Card: </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
-        <source>Hard Disk </source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>SD Card </source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Hard Disk /dev/hd </source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>SCSI Hard Disk /dev/sd </source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Int. Storage </source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>CF</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Ha</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>SD</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>SC</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>In</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>RAM disk</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>RA</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <source>You really want to send %1 to this process?</source>
         <translation>FOO</translation>
     </message>
 </context>

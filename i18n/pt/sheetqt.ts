@@ -413,11 +413,11 @@
     </message>
     <message>
         <source>Subtraction</source>
-        <translation>Subtração</translation>
+        <translation>Subtracção</translation>
     </message>
     <message>
         <source>&amp;Subtraction</source>
-        <translation>&amp;Subtração</translation>
+        <translation>&amp;Subtracção</translation>
     </message>
     <message>
         <source>Multiplication</source>
@@ -525,7 +525,7 @@
     </message>
     <message>
         <source>Arc Sine</source>
-        <translation>Arc-Seno</translation>
+        <translation>Arco-Seno</translation>
     </message>
     <message>
         <source>A&amp;rc Sine</source>
@@ -541,11 +541,11 @@
     </message>
     <message>
         <source>ArcCosine</source>
-        <translation>Arc-Coseno</translation>
+        <translation>Arco-Coseno</translation>
     </message>
     <message>
         <source>Arc Cos&amp;ine</source>
-        <translation>Arc-Cos&amp;eno</translation>
+        <translation>Arco-Cos&amp;eno</translation>
     </message>
     <message>
         <source>Tangent</source>
@@ -557,19 +557,19 @@
     </message>
     <message>
         <source>Arc Tangent</source>
-        <translation>Arc-Tangente</translation>
+        <translation>Arco-Tangente</translation>
     </message>
     <message>
         <source>Arc Tan&amp;gent</source>
-        <translation>Arc-Tan&amp;gente</translation>
+        <translation>Arco-Tan&amp;gente</translation>
     </message>
     <message>
         <source>Arc Tangent of Coordinates</source>
-        <translation>Arc-Tangende das Cordenadas</translation>
+        <translation>Arco-Tangente das Coordenadas</translation>
     </message>
     <message>
         <source>C&amp;oor. Arc Tangent</source>
-        <translation>C&amp;oordenadas Arc-Tangente</translation>
+        <translation>C&amp;oordenadas Arco-Tangente</translation>
     </message>
     <message>
         <source>Exponential</source>
@@ -707,15 +707,15 @@ Release Date: October 08, 2002
 This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
 
 http://qtopia.sitebest.com</source>
-        <translation>Folha de Cálculo
-Software para o Opie
+        <translation>Folha de Cálculo 
+Software para o Opie 
 Vencedor do Beta QWDC (como Sheet/Qt)
 
-Desenvolvido por: Serdar Ozler
+Desenvolvido por: Serdar Ozler 
 Versão 1.0.2
 Data: 8 de Outubro de 2002
 
-Este software está licenciado sob a licença GPL. A sua distribuição é livre. Para obter uma versão mais recente ou o código fonte, visite o site web.
+Este software está licenciado sob a licença GPL. A sua distribuição é livre. Para obter uma versão mais recente ou o código fonte, visite o sítio web.
 
 http://qtopia.sitebest.com</translation>
     </message>
@@ -763,7 +763,7 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Direction</source>
-        <translation>&amp;Direção</translation>
+        <translation>&amp;Direcção</translation>
     </message>
     <message>
         <source>&amp;Top to bottom (rows)</source>
@@ -791,7 +791,7 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>One cell cannot be sorted!</source>
-        <translation>Não é possivel ordenar apenas uma célula!</translation>
+        <translation>Não é possível ordenar apenas uma célula!</translation>
     </message>
 </context>
 </TS>

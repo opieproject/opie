@@ -90,6 +90,10 @@ Quit anyway?</source>
         <source>Edit...</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation>FOO</translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -187,6 +191,10 @@ Quit anyway?</source>
         <source>Duplicate</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation>FOO</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettings</name>
@@ -212,7 +220,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -311,23 +319,23 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">FOO</translation>
+        <translation>FOO</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -341,7 +349,7 @@ Quit anyway?</source>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -352,10 +360,18 @@ Quit anyway?</source>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation>FOO</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>
@@ -372,43 +388,43 @@ Quit anyway?</source>
 <context>
     <name>DateBookWeekView</name>
     <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation>FOO</translation>
-    </message>
-    <message>
         <source>p</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Mo</source>
+        <comment>Monday</comment>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>Tu</source>
+        <comment>Tuesday</comment>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>We</source>
+        <comment>Wednesday</comment>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>Th</source>
+        <comment>Thursday</comment>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>Fr</source>
+        <comment>Friday</comment>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>Sa</source>
+        <comment>Saturday</comment>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>Su</source>
+        <comment>Sunday</comment>
+        <translation type="obsolete">FOO</translation>
     </message>
 </context>
 <context>
@@ -538,6 +554,13 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Note...</source>
+        <translation>FOO</translation>
+    </message>
+</context>
+<context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
         <translation>FOO</translation>
     </message>
 </context>
@@ -699,6 +722,10 @@ and </source>
     </message>
     <message>
         <source>, and </source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>on </source>
         <translation>FOO</translation>
     </message>
 </context>

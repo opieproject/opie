@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/i18n
 Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, opie-language
 Description: i18n: Testlanguage
  This is for testing the i18n-abilities of a OPIE-app
+Version: $QPE_VERSION$EXTRAVERSION

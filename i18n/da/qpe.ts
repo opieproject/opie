@@ -76,13 +76,6 @@ Genoplad venligst back-up batteriet.</translation>
     </message>
 </context>
 <context>
-    <name>DesktopPowerAlerter</name>
-    <message>
-        <source>Battery Status</source>
-        <translation>Batteri Status</translation>
-    </message>
-</context>
-<context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
@@ -102,11 +95,11 @@ Genoplad venligst back-up batteriet.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Finder dokumenter</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Søger dokumenter</translation>
     </message>
 </context>
 <context>
@@ -177,6 +170,13 @@ Genoplad venligst back-up batteriet.</translation>
     <message>
         <source>Do not ask again for this medium</source>
         <translation>Spørg ikke igen for dette medie</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation>Batteristatus</translation>
     </message>
 </context>
 <context>

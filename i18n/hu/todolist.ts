@@ -1,17 +1,20 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OTaskEditor</name>
     <message>
         <source>Alarms</source>
         <translation>Ébresztők</translation>
-    </message>
-    <message>
-        <source>Reminders</source>
-        <translation>Emlékeztetők</translation>
-    </message>
-    <message>
-        <source>X-Ref</source>
-        <translation>X-Ref</translation>
     </message>
     <message>
         <source>Information</source>
@@ -25,6 +28,10 @@
         <source>Recurrence</source>
         <translation>Ismétlődés</translation>
     </message>
+    <message>
+        <source>Task Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -35,6 +42,18 @@
     <message>
         <source>Edit Task</source>
         <translation>Feladat szerkesztése</translation>
+    </message>
+    <message>
+        <source>silent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>loud</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Opie Todolist</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -167,7 +186,7 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished">Az adat nem szerkeszthető, szinkronizáció folyamatban</translation>
+        <translation type="obsolete">Az adat nem szerkeszthető, szinkronizáció folyamatban</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -217,6 +236,110 @@ Mégis kilép?</translation>
         <source>Priority:</source>
         <translation type="unfinished">Fontosság:</translation>
     </message>
+    <message>
+        <source>Template Editor</source>
+        <translation type="unfinished">Sablon szerkesztő</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Hozzáad</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished">Szerkeszt</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Eltávolít</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Név</translation>
+    </message>
+    <message>
+        <source>New Template %1</source>
+        <translation type="unfinished">új sablon %1</translation>
+    </message>
+    <message>
+        <source>Click here to set the priority of new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished">Bökjön ide az új feladat fontosságának beállításához.
+
+Ezt a területet gyors feladatcsíknak hívjuk.
+
+Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terület mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a gyors feladatcsíkot&apos; menüből.</translation>
+    </message>
+    <message>
+        <source>Enter description of new task here.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished">Írja be az új feladat leírását ide.
+
+Ezt a területet gyors feladatcsíknak hívjuk.
+
+Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terület mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a gyors feladatcsíkot&apos; menüből.</translation>
+    </message>
+    <message>
+        <source>More</source>
+        <translation type="unfinished">Több</translation>
+    </message>
+    <message>
+        <source>Click here to enter additional information for new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished">Bökjön ide, hogy beírjon kiegészítő információkat az új feladathoz.
+
+Ezt a területet gyors feladatcsíknak hívjuk.
+
+Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terület mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a gyors feladatcsíkot&apos; menüből.</translation>
+    </message>
+    <message>
+        <source>Enter</source>
+        <translation type="unfinished">Bevisz</translation>
+    </message>
+    <message>
+        <source>Click here to add new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished">Bökjön ide új feladat hozzáadásához.
+
+Ezt a területet gyors feladatcsíknak hívjuk.
+
+Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terület mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a gyors feladatcsíkot&apos; menüből.</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Mégsem</translation>
+    </message>
+    <message>
+        <source>Click here to reset new task information.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation type="unfinished">Bökjön ide az új feladat információk alaphelyzetbe hozásához.
+
+Ezt a területet gyors feladatcsíknak hívjuk.
+
+Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terület mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a gyors feladatcsíkot&apos; menüből.</translation>
+    </message>
+    <message>
+        <source>Data can not be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data can&apos;t be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TableView</name>
@@ -246,6 +369,18 @@ Mégis kilép?</translation>
     <message>
         <source>Delete</source>
         <translation>Töröl</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -340,7 +475,7 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Jegyzetek:</translation>
+        <translation type="obsolete">Jegyzetek:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
@@ -349,6 +484,10 @@ Mégis kilép?</translation>
     <message>
         <source>Todo List</source>
         <translation>Teendők listája</translation>
+    </message>
+    <message>
+        <source>Summary:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -476,111 +615,6 @@ Mégis kilép?</translation>
     <message>
         <source>Click here to select the task maintainer.</source>
         <translation>Bökjön ide, hogy beállítsa a feladat karbantartóját.</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateDialog</name>
-    <message>
-        <source>Template Editor</source>
-        <translation>Sablon szerkesztő</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Hozzáad</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Szerkeszt</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Eltávolít</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateDialogImpl</name>
-    <message>
-        <source>Name</source>
-        <translation>Név</translation>
-    </message>
-    <message>
-        <source>New Template %1</source>
-        <translation>új sablon %1</translation>
-    </message>
-</context>
-<context>
-    <name>Todo</name>
-    <message>
-        <source>Click here to set the priority of new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Bökjön ide az új feladat fontosságának beállításához.
-
-Ezt a területet gyors feladatcsíknak hívjuk.
-
-Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terület mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a gyors feladatcsíkot&apos; menüből.</translation>
-    </message>
-    <message>
-        <source>Enter description of new task here.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Írja be az új feladat leírását ide.
-
-Ezt a területet gyors feladatcsíknak hívjuk.
-
-Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terület mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a gyors feladatcsíkot&apos; menüből.</translation>
-    </message>
-    <message>
-        <source>More</source>
-        <translation>Több</translation>
-    </message>
-    <message>
-        <source>Click here to enter additional information for new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Bökjön ide, hogy beírjon kiegészítő információkat az új feladathoz.
-
-Ezt a területet gyors feladatcsíknak hívjuk.
-
-Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terület mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a gyors feladatcsíkot&apos; menüből.</translation>
-    </message>
-    <message>
-        <source>Enter</source>
-        <translation>Bevisz</translation>
-    </message>
-    <message>
-        <source>Click here to add new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Bökjön ide új feladat hozzáadásához.
-
-Ezt a területet gyors feladatcsíknak hívjuk.
-
-Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terület mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a gyors feladatcsíkot&apos; menüből.</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Mégsem</translation>
-    </message>
-    <message>
-        <source>Click here to reset new task information.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Bökjön ide az új feladat információk alaphelyzetbe hozásához.
-
-Ezt a területet gyors feladatcsíknak hívjuk.
-
-Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terület mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a gyors feladatcsíkot&apos; menüből.</translation>
     </message>
 </context>
 </TS>

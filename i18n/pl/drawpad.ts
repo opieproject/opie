@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Import...</source>
-        <translation>Import...</translation>
+        <translation>Importuj...</translation>
     </message>
     <message>
         <source>Export</source>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportuj...</translation>
     </message>
     <message>
         <source>Tools</source>
@@ -63,27 +63,27 @@
     </message>
     <message>
         <source>Draw Point</source>
-        <translation>Rysik</translation>
+        <translation>Rysuj punkt</translation>
     </message>
     <message>
         <source>Draw Line</source>
-        <translation>Linia</translation>
+        <translation>Rysuj linie</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation>Prostokaty</translation>
+        <translation>Rysuj prostokat</translation>
     </message>
     <message>
         <source>Draw Filled Rectangle</source>
-        <translation>Pudelka</translation>
+        <translation>Rysuj wypelniony prostokat</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
-        <translation>Elipsy</translation>
+        <translation>Rysuj elipse</translation>
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation>Wypelnione elipsy</translation>
+        <translation>Rysuj wypelniona elipse</translation>
     </message>
     <message>
         <source>Fill Region</source>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Erase Point</source>
-        <translation>Usun punkt</translation>
+        <translation>Wyczysc punkt</translation>
     </message>
     <message>
         <source>Pen Width</source>
@@ -107,7 +107,7 @@
     </message>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Wstaw tekst</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
@@ -119,113 +119,113 @@
     </message>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacje o stronie</translation>
     </message>
     <message>
         <source>Page Information...</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacje o stronie...</translation>
     </message>
     <message>
         <source>Do you want to clear
 the current page?</source>
-        <translation type="unfinished">Chcesz wyczyscic
+        <translation>Chcesz wyczyscic
 aktualna strone?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <source>Do you want to delete
 the current page?</source>
-        <translation type="unfinished">Chcesz usunac
+        <translation>Chcesz usunac
 aktualna strone?</translation>
     </message>
     <message>
         <source>Do you want to delete
 all the pages?</source>
-        <translation type="unfinished">Chcesz usunac
+        <translation>Chcesz usunac
 wszystkie strony?</translation>
     </message>
     <message>
         <source>Anti-Aliasing</source>
-        <translation type="unfinished"></translation>
+        <translation>Antyaliasing</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby dodac nowa kartke.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wyczyscic aktualna kartke.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby usunac aktualna kartke.</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu by cofnac ostatnia akcje.</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby powtorzyc ostatnia akcje.</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby zobaczyc pierwsza strone.</translation>
     </message>
     <message>
         <source>Click here to view the previous page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby zobaczyc poprzednia strone.</translation>
     </message>
     <message>
         <source>Click here to view the next page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby zobaczyc nastepna strone.</translation>
     </message>
     <message>
         <source>Click here to view the last page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby zobaczyc ostatnia strone.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wybrac jedno z dostepnych narzedzi do rysowania linii.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wybrac jedno z dostepnych narzedzi do rysowania prostokatow.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wybrac jedno z dostepnych narzedzi do rysowania elips.</translation>
     </message>
     <message>
         <source>Click here to select the text drawing tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wybrac narzedzie do wstawiania tekstu.</translation>
     </message>
     <message>
         <source>Click here to select the fill tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wybrac narzedzie do wypelniania.</translation>
     </message>
     <message>
         <source>Click here to select the eraser tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wybrac gumke.</translation>
     </message>
     <message>
         <source>Click here to select the width of the drawing pen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wybrac szerokosc rysika.</translation>
     </message>
     <message>
         <source>Click here to select the color used when drawing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wybrac kolor rysika.</translation>
     </message>
     <message>
         <source>Click here to select the color used when filling in areas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wybrac kolor wypelnienia.</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
@@ -270,6 +270,10 @@ wszystkie strony?</translation>
         <source>DrawPad - Export</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>All Images</source>
+        <translation>Wszystkie obrazki</translation>
+    </message>
 </context>
 <context>
     <name>ImportDialog</name>
@@ -284,6 +288,10 @@ wszystkie strony?</translation>
     <message>
         <source>DrawPad - Import</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All images</source>
+        <translation>Wszystkie obrazki</translation>
     </message>
 </context>
 <context>
@@ -306,80 +314,80 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished">Kolor wypelnienia</translation>
+        <translation>Kolor wypelnienia</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogolne</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tytul:</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Szerokosc:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wysokosc:</translation>
     </message>
 </context>
 <context>
     <name>PageInformationDialog</name>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacje o stronie</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogolne</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tytul:</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Data:</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Szerokosc:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wysokosc:</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Title: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tytul: %1</translation>
     </message>
     <message>
         <source>Dimension: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymiary: %1x%2</translation>
     </message>
     <message>
         <source>Date: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Data: %1</translation>
     </message>
 </context>
 <context>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Wstaw tekst</translation>
     </message>
 </context>
 <context>
@@ -390,49 +398,51 @@ wszystkie strony?</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation type="unfinished">Wyczysc strone</translation>
+        <translation>Wyczysc strone</translation>
     </message>
     <message>
         <source>Do you want to clear
 the selected page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy chcesz wyczyscic
+wybrana strone?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation type="unfinished">Usun strone</translation>
+        <translation>Usun strone</translation>
     </message>
     <message>
         <source>Do you want to delete
 the selected page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy chcesz usunac
+wybrana strone?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby dodac nowa kartke.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby wyczyscic aktualna kartke.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby usunac aktualna kartke.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet up one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby przesunac aktualna kartke w gore listy.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet down one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliknij tu aby przesunac aktualna kartke w dol listy.</translation>
     </message>
 </context>
 </TS>

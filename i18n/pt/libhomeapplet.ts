@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Desktop</source>
-        <translation>Desktop</translation>
+        <translation>Ambiente de Trabalho</translation>
     </message>
 </context>
 </TS>

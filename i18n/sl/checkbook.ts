@@ -450,7 +450,7 @@ Vnesena vrednost mora biti pozitivna.</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation>Elektronika</translation>
+        <translation type="obsolete">Elektronika</translation>
     </message>
     <message>
         <source>Entertainment</source>
@@ -515,6 +515,10 @@ Vnesena vrednost mora biti pozitivna.</translation>
     <message>
         <source>Cash</source>
         <translation>Gotovina</translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

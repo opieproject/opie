@@ -143,11 +143,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation>Kopiraj</translation>
+        <translation type="unfinished">Kopiraj</translation>
     </message>
     <message>
         <source> As</source>
-        <translation>Kot</translation>
+        <translation type="unfinished">Kot</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -193,11 +193,6 @@
         <translation>Izbrišem imenik?</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Really copy
 %1 files?</source>
         <translation>Res skopiram
@@ -241,7 +236,7 @@ in je licencirano pod GPL</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!!</source>
-        <translation>Ne morem odstraniti trenutnega imenika
+        <translation type="obsolete">Ne morem odstraniti trenutnega imenika
 iz zaznamkov.
 Ni med zaznamki!!</translation>
     </message>
@@ -257,6 +252,26 @@ Ni med zaznamki!!</translation>
         <source>Error</source>
         <translation>Napaka</translation>
     </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -267,6 +282,21 @@ Ni med zaznamki!!</translation>
     <message>
         <source>Output</source>
         <translation>Izhod</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -310,6 +340,26 @@ Ni med zaznamki!!</translation>
     <message>
         <source>execute</source>
         <translation>izvrši</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -55,15 +55,15 @@
     </message>
     <message>
         <source>Battery status</source>
-        <translation type="unfinished"></translation>
+        <translation>Batteristatus</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fejl</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation type="unfinished"></translation>
+        <translation>kunne ikke åbne fil</translation>
     </message>
     <message>
         <source>Charging both devices</source>
@@ -71,11 +71,11 @@
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation type="unfinished"></translation>
+        <translation>Procent strøm tilbage:</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tid tilbage på batteriet:</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>

@@ -24,15 +24,11 @@
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation>elementare Zusammensetzung (%):</translation>
+        <translation>elementare Zusammensetzunh (%):</translation>
     </message>
 </context>
 <context>
     <name>OxydataWidget</name>
-    <message>
-        <source>Weight:</source>
-        <translation type="obsolete">Gewicht:</translation>
-    </message>
     <message>
         <source>Block</source>
         <translation>Block</translation>
@@ -51,7 +47,7 @@
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation>Ionisationsenergie</translation>
+        <translation>Ionsationsenergie</translation>
     </message>
     <message>
         <source>Density</source>
@@ -138,7 +134,7 @@
     </message>
     <message>
         <source>Fluorine</source>
-        <translation>Fluor</translation>
+        <translation>Flour</translation>
     </message>
     <message>
         <source>Neon</source>
@@ -158,7 +154,7 @@
     </message>
     <message>
         <source>Silicon</source>
-        <translation>Silizium</translation>
+        <translation>Silikon</translation>
     </message>
     <message>
         <source>Phosphorus</source>
@@ -202,7 +198,7 @@
     </message>
     <message>
         <source>Manganese</source>
-        <translation>Mangan</translation>
+        <translation>Mangesium</translation>
     </message>
     <message>
         <source>Iron</source>
@@ -262,7 +258,7 @@
     </message>
     <message>
         <source>Zirconium</source>
-        <translation>Zirkonium</translation>
+        <translation>Zirconium</translation>
     </message>
     <message>
         <source>Niobium</source>
@@ -338,11 +334,11 @@
     </message>
     <message>
         <source>Praseodymium</source>
-        <translation>Praseodym</translation>
+        <translation>Praseodymium</translation>
     </message>
     <message>
         <source>Neodymium</source>
-        <translation>Neodym</translation>
+        <translation>Neodymium</translation>
     </message>
     <message>
         <source>Promethium</source>
@@ -394,7 +390,7 @@
     </message>
     <message>
         <source>Tantalum</source>
-        <translation>Tantal</translation>
+        <translation>Tantalum</translation>
     </message>
     <message>
         <source>Tungsten</source>
@@ -442,7 +438,7 @@
     </message>
     <message>
         <source>Astatine</source>
-        <translation>Astat</translation>
+        <translation>Astatine</translation>
     </message>
     <message>
         <source>Radon</source>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Keys</name>
     <message>
@@ -93,13 +94,8 @@ die letzten 10 Jahre Ihrer Freundschaft.</translation>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <source>Configuration Error</source>
-        <translation>Konfigurationsfehler</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation>Es sind keine Schemata definiert oder es wurde keines ausgewählt.</translation>
+        <source>KPacman</source>
+        <translation>KPacman</translation>
     </message>
 </context>
 <context>

@@ -15,14 +15,14 @@
     </message>
     <message>
         <source>Fifteen Pieces</source>
-        <translation>Vijftien stukjes</translation>
+        <translation>Schuifpuzzel</translation>
     </message>
 </context>
 <context>
     <name>PiecesTable</name>
     <message>
         <source>Fifteen Pieces</source>
-        <translation>vijftien stukjes</translation>
+        <translation>Schuifpuzzel</translation>
     </message>
     <message>
         <source>Congratulations!

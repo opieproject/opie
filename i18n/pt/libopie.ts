@@ -29,6 +29,38 @@
         <source>Display Rotate</source>
         <translation>Mostrar Rodar</translation>
     </message>
+    <message>
+        <source>Lower+Up</source>
+        <translation>Em Baixo+Cima</translation>
+    </message>
+    <message>
+        <source>Lower+Down</source>
+        <translation>Em Baixo+Baixo</translation>
+    </message>
+    <message>
+        <source>Lower+Right</source>
+        <translation>Em Baixo+Direita</translation>
+    </message>
+    <message>
+        <source>Lower+Left</source>
+        <translation>Em Baixo+Esquerda</translation>
+    </message>
+    <message>
+        <source>Upper+Up</source>
+        <translation>Em Cima+Cima</translation>
+    </message>
+    <message>
+        <source>Upper+Down</source>
+        <translation>Em Cima+Baixo</translation>
+    </message>
+    <message>
+        <source>Upper+Right</source>
+        <translation>Em Cima+Direita</translation>
+    </message>
+    <message>
+        <source>Upper+Left</source>
+        <translation>Em Cima+Esquerda</translation>
+    </message>
 </context>
 <context>
     <name>OColorDialog</name>
@@ -94,33 +126,12 @@
 <context>
     <name>OFileSelector</name>
     <message>
-        <source>Documents</source>
-        <translation>Documentos</translation>
-    </message>
-    <message>
-        <source>Files</source>
-        <translation>Ficheiros</translation>
-    </message>
-    <message>
-        <source>All Files</source>
-        <translation>Todos os Ficheiros</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation>Todos</translation>
-    </message>
-    <message>
         <source>Name:</source>
         <translation>Nome:</translation>
     </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Gravar</translation>
-    </message>
-    <message>
-        <source>C&amp;ancel</source>
-        <translation>C&amp;ancelar</translation>
-    </message>
+</context>
+<context>
+    <name>OFileViewFileListView</name>
     <message>
         <source>Name</source>
         <translation>Nome</translation>
@@ -135,29 +146,7 @@
     </message>
     <message>
         <source>Mime Type</source>
-        <translation>Tipo de Mime</translation>
-    </message>
-    <message>
-        <source>Ser Permission</source>
-        <translation>Permissões</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Apagar</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete
-</source>
-        <translation>Tem a certeza que quer apagar
-</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Sim</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>Não</translation>
+        <translation>Tipo de Conteúdo</translation>
     </message>
 </context>
 <context>
@@ -401,6 +390,10 @@ e</translation>
         <source>Every</source>
         <translation>Todos</translation>
     </message>
+    <message>
+        <source>on </source>
+        <translation>em</translation>
+    </message>
 </context>
 <context>
     <name>OTimePickerDialogBase</name>
@@ -420,12 +413,8 @@ e</translation>
 <context>
     <name>QObject</name>
     <message>
-        <source>Summary:</source>
-        <translation>Sumário:</translation>
-    </message>
-    <message>
         <source>Description:</source>
-        <translation>Descrição:</translation>
+        <translation type="obsolete">Descrição:</translation>
     </message>
     <message>
         <source>Priority:</source>
@@ -449,7 +438,7 @@ e</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Endereço Trabalho:&lt;/b&gt; </translation>
+        <translation type="obsolete">&lt;b&gt;Endereço Trabalho:&lt;/b&gt; </translation>
     </message>
     <message>
         <source>Office: </source>
@@ -477,7 +466,7 @@ e</translation>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Endereço Casa:&lt;/b&gt; </translation>
+        <translation type="obsolete">&lt;b&gt;Endereço Casa:&lt;/b&gt; </translation>
     </message>
     <message>
         <source>Home Web Page: </source>
@@ -573,7 +562,7 @@ e</translation>
     </message>
     <message>
         <source>The %1 %1 of every</source>
-        <translation>Todos os %1 %1</translation>
+        <translation type="obsolete">Todos os %1 %1</translation>
     </message>
     <message>
         <source>Every </source>
@@ -607,24 +596,80 @@ e</translation>
         <source>Sunday</source>
         <translation>Domingo</translation>
     </message>
+    <message>
+        <source>Documents</source>
+        <translation>Documentos</translation>
+    </message>
+    <message>
+        <source>Files</source>
+        <translation>Ficheiros</translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation>Todos os Ficheiros</translation>
+    </message>
+    <message>
+        <source>Very high</source>
+        <translation>Muito Alto</translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation>Alto</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>Normal</translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation>Baixo</translation>
+    </message>
+    <message>
+        <source>Very low</source>
+        <translation>Muito Baixo</translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation>Localização:</translation>
+    </message>
+    <message>
+        <source>This is an all day event</source>
+        <translation>Este é um evento para o dia todo</translation>
+    </message>
+    <message>
+        <source>This is a multiple day event</source>
+        <translation>Este é um evento para vários dias</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Endereço (emprego):&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Endereço (pessoal):&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <source>The %1 %2 of every</source>
+        <translation>Todos os %1 %2</translation>
+    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>nd</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>rd</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>th</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

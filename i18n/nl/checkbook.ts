@@ -449,7 +449,7 @@ Dit bedrag moet altijd positief zijn.</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation>Electronica</translation>
+        <translation type="obsolete">Electronica</translation>
     </message>
     <message>
         <source>Entertainment</source>
@@ -514,6 +514,10 @@ Dit bedrag moet altijd positief zijn.</translation>
     <message>
         <source>Cash</source>
         <translation>Contant</translation>
+    </message>
+    <message>
+        <source>Electronics</source>
+        <translation>Electronisch</translation>
     </message>
 </context>
 </TS>

@@ -1,5 +1,12 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>QObject</name>
+    <message>
+        <source>TicTac</source>
+        <translation>Kryds og bolle</translation>
+    </message>
+</context>
+<context>
     <name>TicTacToe</name>
     <message>
         <source>Computer starts</source>

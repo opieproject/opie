@@ -82,12 +82,7 @@ the last 10 years of her friendship.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Configuration Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
+        <source>KPacman</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

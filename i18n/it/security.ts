@@ -101,7 +101,19 @@ Accesso negato</translation>
     </message>
     <message>
         <source>1.0.0.0/8</source>
-        <translation type="unfinished">1.0.0.0/8</translation>
+        <translation>1.0.0.0/8</translation>
+    </message>
+    <message>
+        <source>Passcode</source>
+        <translation>Password</translation>
+    </message>
+    <message>
+        <source>Login</source>
+        <translation>Login</translation>
+    </message>
+    <message>
+        <source>Login Automatically</source>
+        <translation>Login Automatico</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>Todolist plugin</source>
-        <translation>Plugin Tarefas</translation>
+        <translation>Resumo das Tarefas</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
@@ -19,22 +19,41 @@
     </message>
 </context>
 <context>
-    <name>TodolistPluginConfig</name>
-    <message>
-        <source>tasks shown </source>
-        <translation>tarefas a mostrar</translation>
-    </message>
+    <name>TodoPluginConfigBase</name>
     <message>
         <source>Set the maximum number of task that should be shown</source>
         <translation>Número máximo de tarefas a mostrar</translation>
     </message>
     <message>
-        <source>Clip line after X chars</source>
-        <translation>Cortar linha aos X caracteres</translation>
+        <source>tasks shown</source>
+        <translation>tarefas mostradas</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
         <translation>Cortar dados da tarefa ao fim de quantos caracteres</translation>
+    </message>
+    <message>
+        <source>Clip line after X chars</source>
+        <translation>Cortar linha aos X caracteres</translation>
+    </message>
+</context>
+<context>
+    <name>TodolistPluginConfig</name>
+    <message>
+        <source>tasks shown </source>
+        <translation type="obsolete">tarefas a mostrar</translation>
+    </message>
+    <message>
+        <source>Set the maximum number of task that should be shown</source>
+        <translation type="obsolete">Número máximo de tarefas a mostrar</translation>
+    </message>
+    <message>
+        <source>Clip line after X chars</source>
+        <translation type="obsolete">Cortar linha aos X caracteres</translation>
+    </message>
+    <message>
+        <source>After how many chars should be the info about the task be cut off</source>
+        <translation type="obsolete">Cortar dados da tarefa ao fim de quantos caracteres</translation>
     </message>
 </context>
 </TS>

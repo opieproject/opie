@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>&lt;p&gt;Your signature is longer than 4 lines. This is considered inpolite by many people. You should shorten your signature.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;A sua assinatura é maior que quatro linhas. Isto é considerado uma falta de respeito pela maioria das pessoas. Deverá encolher a sua assinatura.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Change</source>
@@ -22,7 +22,7 @@
     <name>AccountEditorBase</name>
     <message>
         <source>Account Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Contas</translation>
     </message>
     <message>
         <source>Server</source>
@@ -30,15 +30,15 @@
     </message>
     <message>
         <source>&lt;b&gt;Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Porta:</translation>
     </message>
     <message>
         <source>&lt;b&gt;IMAP:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;IMAP:</translation>
     </message>
     <message>
         <source>[--]</source>
-        <translation type="unfinished"></translation>
+        <translation>[--]</translation>
     </message>
     <message>
         <source>&lt;b&gt;SMTP:</source>
@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>Reply-To</source>
-        <translation type="unfinished"></translation>
+        <translation>Responder-A</translation>
     </message>
     <message>
         <source>&lt;b&gt;Signature:</source>
@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>SSL</translation>
     </message>
     <message>
         <source>IMAP</source>
@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar SSL</translation>
     </message>
     <message>
         <source>993</source>
@@ -113,7 +113,7 @@
     <name>AddressPicker</name>
     <message>
         <source>There are no entries in the addressbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Não existem entradas nos contactos.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>&lt;p&gt;You have to select at least one address entry.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Tem de escolher pelo menos uma entrada dos contactos.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -132,7 +132,7 @@
     <name>AddressPickerBase</name>
     <message>
         <source>Address Picker</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha de Contactos</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -151,7 +151,7 @@
     </message>
     <message>
         <source>Please select an entry first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha uma entrada primeiro.</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -159,78 +159,78 @@
     </message>
     <message>
         <source>Set Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Descrição</translation>
     </message>
     <message>
         <source>&lt;div align=center&gt;Description</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;div align=&quot;center&quot;&gt;Descrição</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to specify a recipient.&lt;br&gt;(eg: foo@bar.org)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Tem de especificar um destinatário.&lt;br&gt;(ex: foo@bar.org)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;There was a problem sending some of the queued mails.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Houve um problema ao enviar alguns dos mails a enviar.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Sucesso</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail was queued successfully.&lt;/p&gt;&lt;p&gt;The queue contains </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;O correio foi colocado na caixa &quot;a enviar&quot;.&lt;/p&gt;Essa caixa contém</translation>
     </message>
     <message>
         <source> mails.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>emails.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;font color=#ff0000&gt;Error occoured during sending.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font color=&quot;#ff0000&quot;&gt;Erro ao enviar.&lt;/font&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1&lt;/p</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1&lt;/p</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail was sent successfully.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Email enviado com sucesso.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;The queued mails </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Os mails na caixa &quot;a enviar&quot;</translation>
     </message>
     <message>
         <source> of </source>
-        <translation type="unfinished"></translation>
+        <translation>de</translation>
     </message>
 </context>
 <context>
     <name>ComposerBase</name>
     <message>
         <source>Compose Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Compôr Mensagem</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished">Correio</translation>
+        <translation>EMail</translation>
     </message>
     <message>
         <source>Send the mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar o EMail</translation>
     </message>
     <message>
         <source>Queue the mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Colocar na caixa &quot;a enviar&quot;</translation>
     </message>
     <message>
         <source>Attach a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Anexar um ficheiro</translation>
     </message>
     <message>
         <source>Addressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Contactos</translation>
     </message>
     <message>
         <source>From</source>
@@ -238,7 +238,7 @@
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Responder</translation>
     </message>
     <message>
         <source>To</source>
@@ -246,11 +246,11 @@
     </message>
     <message>
         <source>Cc</source>
-        <translation type="unfinished">Cc</translation>
+        <translation>Cc</translation>
     </message>
     <message>
         <source>Bcc</source>
-        <translation type="unfinished">Bcc</translation>
+        <translation>Bcc</translation>
     </message>
     <message>
         <source>Subj.</source>
@@ -274,11 +274,11 @@
     </message>
     <message>
         <source>Add an Attachement</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar um Anexo</translation>
     </message>
     <message>
         <source>Remove Attachement</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover um Anexo</translation>
     </message>
     <message>
         <source>Name</source>
@@ -290,11 +290,11 @@
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar o Nome</translation>
     </message>
     <message>
         <source>Change Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar a Descrição</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -309,7 +309,7 @@
     </message>
     <message>
         <source>&lt;p&gt;You have to select an account first.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Tem de escolher uma conta primeiro.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -317,11 +317,11 @@
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Questão</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you relly want to delete the selected account?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Tem a certeza que quer apagar a conta seleccionada?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -352,7 +352,7 @@
     </message>
     <message>
         <source>[Hidden]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Escondido]</translation>
     </message>
     <message>
         <source>New</source>
@@ -360,11 +360,11 @@
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Geral</translation>
     </message>
     <message>
         <source>Mail notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Notificação de EMail</translation>
     </message>
     <message>
         <source>Blink LED</source>
@@ -376,29 +376,32 @@
     </message>
     <message>
         <source>&lt;b&gt;Check&amp;nbsp;every</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Verificar&amp;nbsp;todos</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Disable mail notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Desligar notificação de email</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Mail version %1&lt;/b&gt;&lt;hr&gt;
 Sponsored and Programmed by LISAsystems&lt;br&gt;
 Visit http://www.lisa.de/ for Information.
                             </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Correio versão %1&lt;/b&gt;&lt;hr&gt;
+Patrocinado e programado por LISAsystems&lt;br&gt;
+Visite http://www.lisa.de/ para mais informações.
+</translation>
     </message>
 </context>
 <context>
     <name>FolderWidget</name>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Nome</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -418,7 +421,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Rescan folder list</source>
-        <translation type="unfinished"></translation>
+        <translation>Re-ler lista de pastas</translation>
     </message>
     <message>
         <source>Error</source>
@@ -426,7 +429,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>&lt;p&gt;Please select an item first.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Tem de escolher um item primeiro.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -434,11 +437,11 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Questão</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete &lt;pre&gt;%1&lt;/pre&gt;?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Tem a certeza que quer apagar &lt;pre&gt;%1&lt;/pre&gt;?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -450,43 +453,43 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Foldername</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome da Pasta</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please enter the name of the new folder.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Introduza o nome para a nova pasta.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Looking up host...</source>
-        <translation type="unfinished"></translation>
+        <translation>A procurar o servidor...</translation>
     </message>
     <message>
         <source>Host found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor encontrado.</translation>
     </message>
     <message>
         <source>Connected to host.</source>
-        <translation type="unfinished"></translation>
+        <translation>A ligar ao servidor.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The IMAP connection was refused.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;A ligação IMAP foi recusada.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;The host was not found.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;O servidor não foi encontrado.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;There was an error while reading from the socket.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Houve um erro ao ler dados da ligação.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Login failed. Check your password/username.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Falhou a autenticação. Verifique a conta e/ou a password.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unknown error was encountered.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ocorreu um erro desconhecido.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Disconnected.</source>
@@ -494,47 +497,47 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Login successfull!</source>
-        <translation type="unfinished"></translation>
+        <translation>Autenticado!</translation>
     </message>
     <message>
         <source>&lt;p&gt;Login failed. Go away.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Falhou a autenticação.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Renaming successfull!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sucesso ao mudar o nome!</translation>
     </message>
     <message>
         <source>&lt;p&gt;Renaming failed. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Erro ao mudar o nome. (erro: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Deletion successfull!</source>
-        <translation type="unfinished"></translation>
+        <translation>Remoção bem sucedida!</translation>
     </message>
     <message>
         <source>&lt;p&gt;Delete failed. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Falhou a remoção. (erro: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Folder created. Rescanning...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasta criada. A actualizar...</translation>
     </message>
     <message>
         <source>&lt;p&gt;The folder could not be created. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Erro ao criar a pasta. (erro: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t open folder cache file for writing!&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Não foi possível abrir o ficheiro de cache para escrever!&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Got folder list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de pastas lida.</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t retrieve the folder list. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Não foi possível ler a lista de pastas. (erro: %1)&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -581,11 +584,11 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Mailbox contained no mails.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem emails nesta pasta.</translation>
     </message>
     <message>
         <source>Getting mail headers...</source>
-        <translation type="unfinished"></translation>
+        <translation>A obter os cabeçalhos do correio...</translation>
     </message>
     <message>
         <source>Error</source>
@@ -593,7 +596,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>&lt;p&gt;An error occoured during the selection of the mailbox. (Server said: %1)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ocorreu um erro ao seleccionar a caixa de correio. (erro: %1)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -601,22 +604,22 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Parado</translation>
     </message>
     <message>
         <source>Got all mail headers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cabeçalhos do correio obtidos.</translation>
     </message>
     <message>
         <source>&lt;font color=#ff0000&gt;Couldn&apos;t fetch mail.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font color=&quot;#ff0000&quot;&gt;Não foi possível obter o correio.</translation>
     </message>
 </context>
 <context>
     <name>MainWindowBase</name>
     <message>
         <source>E-Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>EMail</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -628,19 +631,19 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Compose new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Compôr novo email</translation>
     </message>
     <message>
         <source>Send queued mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar os mails na caixa &quot;a enviar&quot;</translation>
     </message>
     <message>
         <source>Show/hide folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar/esconder pastas</translation>
     </message>
     <message>
         <source>Search mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar correio</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -651,7 +654,7 @@ Visit http://www.lisa.de/ for Information.
     <name>OpenDiagBase</name>
     <message>
         <source>Open file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir ficheiro...</translation>
     </message>
     <message>
         <source> Stop </source>
@@ -659,35 +662,35 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; kB of &lt;b&gt;%2&lt;/b&gt; kB at &lt;b&gt;%3&lt;/b&gt; kB/s</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;KB de &lt;b&gt;%2&lt;/b&gt;KB em &lt;b&gt;%3&lt;/b&gt;KB/s</translation>
     </message>
     <message>
         <source>[Icon]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Icone]</translation>
     </message>
     <message>
         <source>&lt;i&gt;application/v-card</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;i&gt;application/v-card</translation>
     </message>
     <message>
         <source>Open using an application</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir com a aplicação</translation>
     </message>
     <message>
         <source>Save to disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar para o disco</translation>
     </message>
     <message>
         <source>Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar</translation>
     </message>
     <message>
         <source>Save to</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar em</translation>
     </message>
     <message>
         <source>RAM</source>
-        <translation type="unfinished"></translation>
+        <translation>RAM</translation>
     </message>
     <message>
         <source>CF</source>
@@ -706,11 +709,11 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>&lt;Foldertree not known.&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Árvore de pastas não conhecida.&gt;</translation>
     </message>
     <message>
         <source>Inbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Caixa de Entrada</translation>
     </message>
     <message>
         <source>(no from)</source>
@@ -729,15 +732,15 @@ Visit http://www.lisa.de/ for Information.
     <name>RenameBase</name>
     <message>
         <source>Renaming</source>
-        <translation type="unfinished"></translation>
+        <translation>A mudar o nome</translation>
     </message>
     <message>
         <source>&lt;div align=center&gt;Renaming</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;div align=&quot;center&quot;&gt;A mudar o nome</translation>
     </message>
     <message>
         <source>&lt;div align=center&gt;to</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;div align=&quot;center&quot;&gt;para</translation>
     </message>
 </context>
 <context>
@@ -748,7 +751,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Header Field</source>
-        <translation type="unfinished"></translation>
+        <translation>Campo do Cabeçalho</translation>
     </message>
     <message>
         <source>Subject</source>
@@ -768,7 +771,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>&lt;p&gt;Please enter what to search for.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Introduza o texto para procura.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -776,89 +779,89 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>&lt;p&gt;Please select a folder.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Escolha uma pasta.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please enter a header field to search in.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Escolha um cabeçalho para procurar.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not select the folder. Aborting. (Server said: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Não foi possível seleccionar a pasta. (erro: %1)</translation>
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultados</translation>
     </message>
     <message>
         <source>&lt;p&gt;No mails match your criteria.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Nenhum correio encontrado para a pesquisa.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Search failed. (Server said: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;A pesquisa falhou. (erro: %1)</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t fetch the mail headers. (Server said: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Não foi possível obter os cabeçalhos. (erro: %1)</translation>
     </message>
 </context>
 <context>
     <name>SearchDiagBase</name>
     <message>
         <source>Mail Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Procura de Correio</translation>
     </message>
     <message>
         <source>&lt;b&gt;Search&amp;nbsp;in:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Procurar&amp;nbsp;em:</translation>
     </message>
     <message>
         <source>&lt;b&gt;For:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Por:</translation>
     </message>
 </context>
 <context>
     <name>ViewMail</name>
     <message>
         <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/div&gt;&lt;b&gt;From:&lt;/b&gt; %2&lt;br&gt;&lt;b&gt;To:&lt;/b&gt; %3&lt;br&gt;%4%5&lt;b&gt;Date:&lt;/b&gt; %6&lt;hr&gt;&lt;font face=fixed&gt;%7&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;%1&lt;/b&gt;&lt;/div&gt;&lt;b&gt;De:&lt;/b&gt; %2&lt;br&gt;&lt;b&gt;Para:&lt;/b&gt; %3&lt;br&gt;%4%5&lt;b&gt;Data:&lt;/b&gt; %6&lt;hr&gt;&lt;font face=fixed&gt;%7&lt;/font&gt;</translation>
     </message>
     <message>
         <source>(no subject)</source>
-        <translation type="unfinished">(sem assunto)</translation>
+        <translation>(sem assunto)</translation>
     </message>
     <message>
         <source>(no from)</source>
-        <translation type="unfinished">(sem de)</translation>
+        <translation>(sem originador)</translation>
     </message>
     <message>
         <source>(no recipient)</source>
-        <translation type="unfinished"></translation>
+        <translation>(sem destinatário)</translation>
     </message>
     <message>
         <source>&lt;b&gt;Cc:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Cc:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Bcc:&lt;/b&gt; %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Bcc:&lt;/b&gt; %1&lt;br&gt;</translation>
     </message>
     <message>
         <source>(no date)</source>
-        <translation type="unfinished">(sem data)</translation>
+        <translation>(sem data)</translation>
     </message>
     <message>
         <source>Getting mail body from server. Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>A obter o corpo do correio...</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Erro</translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Tem de obter o corpo do correio antes de tentar responder.</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -866,18 +869,18 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot forward yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Tem de obter o corpo do correio antes de tentar reencaminhar.</translation>
     </message>
     <message>
         <source>&lt;p&gt;I was unable to retrieve the mail from the server. You can try again later or give up.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Não foi possível obter o correio do servidor. Tente novamente mais tarde.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>ViewMailBase</name>
     <message>
         <source>E-Mail by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Correio de %1</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -885,15 +888,15 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Responder</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Re-encaminhar</translation>
+        <translation>Reencaminhar</translation>
     </message>
     <message>
         <source>Attachments</source>
-        <translation type="unfinished"></translation>
+        <translation>Anexos</translation>
     </message>
     <message>
         <source>Delete Mail</source>

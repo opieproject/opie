@@ -31,7 +31,11 @@
     </message>
     <message>
         <source>HelpBrowser</source>
-        <translation>Helppagina&apos;s</translation>
+        <translation type="obsolete">Helppagina&apos;s</translation>
+    </message>
+    <message>
+        <source>Go</source>
+        <translation>Ga</translation>
     </message>
 </context>
 </TS>

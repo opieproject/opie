@@ -46,10 +46,6 @@
         <translation>切換至遠端</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation>關於</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>大小</translation>
     </message>
@@ -147,11 +143,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation>複製 </translation>
+        <translation type="unfinished">複製 </translation>
     </message>
     <message>
         <source> As</source>
-        <translation> 為</translation>
+        <translation type="unfinished"> 為</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -171,16 +167,6 @@
         <source>Could not move
 </source>
         <translation>無法移動</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation>進階型檔案管理程式
- 版權 2002 
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-,授權為 GPL</translation>
     </message>
     <message>
         <source>Add To Documents</source>
@@ -205,15 +191,6 @@ L.J.Potter&lt;llornkcor@handhelds.org&gt;
         <translation>刪除目錄?</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation>確定刪除</translation>
-    </message>
-    <message>
-        <source>Delete Directory</source>
-        <translation>刪除目錄</translation>
-    </message>
-    <message>
         <source>Really copy
 %1 files?</source>
         <translation>確定要複製
@@ -234,6 +211,56 @@ Do you really want to delete it?</source>
         <translation> 已經存在.
 您確定要刪除它?</translation>
     </message>
+    <message>
+        <source>Advanced FileManager
+is copyright 2002-2003 by
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+and is licensed by the GPL</source>
+        <translation type="unfinished">進階型檔案管理程式
+ 版權 2002-2003 
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+,授權為 GPL</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bookmark Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Current Directory from Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 exists. Ok to overwrite?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not copy %1 to %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -244,6 +271,21 @@ Do you really want to delete it?</source>
     <message>
         <source>Output</source>
         <translation>輸出</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -287,6 +329,26 @@ Do you really want to delete it?</source>
     <message>
         <source>execute</source>
         <translation>執行</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

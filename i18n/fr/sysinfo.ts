@@ -1,6 +1,53 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
+    <name>FileSysInfo</name>
+    <message>
+        <source>CF</source>
+        <translation>CF</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
+        <translation>Ce graphe représente cobien de mémoire est actuellement  utilisée sur cette carte de mémoire CompactFlash.</translation>
+    </message>
+    <message>
+        <source>Ha</source>
+        <translation>Ha</translation>
+    </message>
+    <message>
+        <source>This graph represents how much storage is currently used on this hard drive.</source>
+        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur ce disque.</translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation>SD</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
+        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur cette carte de mémoire Secure Digital.</translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation>SC</translation>
+    </message>
+    <message>
+        <source>In</source>
+        <translation>In</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
+        <translation>Ce graphe représente cobien de mémoire est actuellement  utilisée dans la mémoire centrale (ie  mémoire Flash).</translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation>RA</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur le dique RAM.</translation>
+    </message>
+</context>
+<context>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
@@ -74,7 +121,7 @@ La mémoire est divisée en catégories comme suit:
     </message>
     <message>
         <source>Used By</source>
-        <translation>Utilisé par</translation>
+        <translation type="obsolete">Utilisé par</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
@@ -103,9 +150,17 @@ Cliquez et maintenez appuyer pour voir les informations à propos du module ou p
     <message>
         <source>You really want to execute
 </source>
-        <translation>Voulez-vous vraiment exécuter
+        <translation type="obsolete">Voulez-vous vraiment exécuter
 
 </translation>
+    </message>
+    <message>
+        <source>Used by</source>
+        <translation>Utilisé par</translation>
+    </message>
+    <message>
+        <source>You really want to execute %1 for this module?</source>
+        <translation>Vous désirez vraiment exécuter %1 pour ce module ?</translation>
     </message>
 </context>
 <context>
@@ -168,83 +223,87 @@ Cliquez et maintenez appuyer pour voir les informations à propos du processus o
     <message>
         <source>You really want to send
 </source>
-        <translation>Voulez-vous vraiment envoyer
+        <translation type="obsolete">Voulez-vous vraiment envoyer
 </translation>
+    </message>
+    <message>
+        <source>You really want to send %1 to this process?</source>
+        <translation>Vous désirez vraiment envoyer %1 à ce processus ?</translation>
     </message>
 </context>
 <context>
     <name>StorageInfo</name>
     <message>
         <source>CF Card: </source>
-        <translation>Carte CF:</translation>
+        <translation type="obsolete">Carte CF:</translation>
     </message>
     <message>
         <source>Hard Disk </source>
-        <translation>Disque Dur</translation>
+        <translation type="obsolete">Disque Dur</translation>
     </message>
     <message>
         <source>SD Card </source>
-        <translation>Carte SD</translation>
+        <translation type="obsolete">Carte SD</translation>
     </message>
     <message>
         <source>Hard Disk /dev/hd </source>
-        <translation>Disque /dev/hd</translation>
+        <translation type="obsolete">Disque /dev/hd</translation>
     </message>
     <message>
         <source>SCSI Hard Disk /dev/sd </source>
-        <translation>Disque SCSI /dev/sd</translation>
+        <translation type="obsolete">Disque SCSI /dev/sd</translation>
     </message>
     <message>
         <source>Int. Storage </source>
-        <translation>Stockage int</translation>
+        <translation type="obsolete">Stockage int</translation>
     </message>
     <message>
         <source>CF</source>
-        <translation>CF</translation>
+        <translation type="obsolete">CF</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation>Ce graphe représente cobien de mémoire est actuellement  utilisée sur cette carte de mémoire CompactFlash.</translation>
+        <translation type="obsolete">Ce graphe représente cobien de mémoire est actuellement  utilisée sur cette carte de mémoire CompactFlash.</translation>
     </message>
     <message>
         <source>Ha</source>
-        <translation>Ha</translation>
+        <translation type="obsolete">Ha</translation>
     </message>
     <message>
         <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur ce disque.</translation>
+        <translation type="obsolete">Ce graphe représente combien de mémoire est actuellement  utilisée sur ce disque.</translation>
     </message>
     <message>
         <source>SD</source>
-        <translation>SD</translation>
+        <translation type="obsolete">SD</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur cette carte de mémoire Secure Digital.</translation>
+        <translation type="obsolete">Ce graphe représente combien de mémoire est actuellement  utilisée sur cette carte de mémoire Secure Digital.</translation>
     </message>
     <message>
         <source>SC</source>
-        <translation>SC</translation>
+        <translation type="obsolete">SC</translation>
     </message>
     <message>
         <source>In</source>
-        <translation>In</translation>
+        <translation type="obsolete">In</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation>Ce graphe représente cobien de mémoire est actuellement  utilisée dans la mémoire centrale (ie  mémoire Flash).</translation>
+        <translation type="obsolete">Ce graphe représente cobien de mémoire est actuellement  utilisée dans la mémoire centrale (ie  mémoire Flash).</translation>
     </message>
     <message>
         <source>RAM disk</source>
-        <translation>Disque RAM</translation>
+        <translation type="obsolete">Disque RAM</translation>
     </message>
     <message>
         <source>RA</source>
-        <translation>RA</translation>
+        <translation type="obsolete">RA</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur le dique RAM.</translation>
+        <translation type="obsolete">Ce graphe représente combien de mémoire est actuellement  utilisée sur le dique RAM.</translation>
     </message>
 </context>
 <context>

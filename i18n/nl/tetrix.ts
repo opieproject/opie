@@ -1,0 +1,63 @@
+<!DOCTYPE TS><TS>
+<context>
+    <name>OHighscore</name>
+    <message>
+        <source>empty</source>
+        <translation>leeg</translation>
+    </message>
+    <message>
+        <source>Enter your name!</source>
+        <translation>Voer uw naam in!</translation>
+    </message>
+</context>
+<context>
+    <name>OHighscoreDialog</name>
+    <message>
+        <source>Highscores</source>
+        <translation>Hoogste scores</translation>
+    </message>
+    <message>
+        <source>#</source>
+        <translation>#</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Naam</translation>
+    </message>
+    <message>
+        <source>Points</source>
+        <translation>Punten</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation>Ronde</translation>
+    </message>
+</context>
+<context>
+    <name>QTetrix</name>
+    <message>
+        <source>Tetrix</source>
+        <translation>Tetrix</translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <translation>Volgende</translation>
+    </message>
+    <message>
+        <source>Score</source>
+        <translation>Score</translation>
+    </message>
+    <message>
+        <source>Level</source>
+        <translation>Ronde</translation>
+    </message>
+    <message>
+        <source>Removed</source>
+        <translation>Verwijderd</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>Start</translation>
+    </message>
+</context>
+</TS>

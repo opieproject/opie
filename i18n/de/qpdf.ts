@@ -1,5 +1,4 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>QPdfDlg</name>
     <message>
@@ -88,7 +87,7 @@
     </message>
     <message>
         <source>&apos;%1&apos; could not be found.</source>
-        <translation>&apos;%1&apos; konnte nicht gefunden werden.</translation>
+        <translation>Kann &apos;%1&apos; nicht finden.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -96,7 +95,11 @@
     </message>
     <message>
         <source>File does not exist !</source>
-        <translation>Datei existiert nicht.</translation>
+        <translation type="obsolete">Datei existiert nicht !</translation>
+    </message>
+    <message>
+        <source>File does not exist!</source>
+        <translation>Datei existiert nicht!</translation>
     </message>
 </context>
 </TS>

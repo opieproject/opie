@@ -142,14 +142,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> As</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Copy Same Dir</source>
         <translation type="unfinished"></translation>
     </message>
@@ -190,11 +182,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Really copy
 %1 files?</source>
         <translation type="unfinished"></translation>
@@ -229,12 +216,6 @@ and is licensed by the GPL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Bookmark Directory</source>
         <translation type="unfinished"></translation>
     </message>
@@ -246,6 +227,34 @@ It is not bookmarked!!</source>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> As</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -255,6 +264,21 @@ It is not bookmarked!!</source>
     </message>
     <message>
         <source>Output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -298,6 +322,26 @@ It is not bookmarked!!</source>
     </message>
     <message>
         <source>execute</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

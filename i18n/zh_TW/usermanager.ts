@@ -14,7 +14,11 @@
     <name>UserConfig</name>
     <message>
         <source>OPIE User Manager</source>
-        <translation>OPIE 使用者管理員</translation>
+        <translation type="obsolete">OPIE 使用者管理員</translation>
+    </message>
+    <message>
+        <source>Opie User Manager</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

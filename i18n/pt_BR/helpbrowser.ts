@@ -19,10 +19,6 @@
         <translation>Remover dos Marcadores</translation>
     </message>
     <message>
-        <source>HelpBrowser</source>
-        <translation>NavegadorDeAjuda</translation>
-    </message>
-    <message>
         <source>Forward</source>
         <translation>Avançar</translation>
     </message>
@@ -32,6 +28,10 @@
     </message>
     <message>
         <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Go</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

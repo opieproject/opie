@@ -30,8 +30,8 @@
         <translation>Hilfeanzeiger</translation>
     </message>
     <message>
-        <source>HelpBrowser</source>
-        <translation>Hilfeanzeiger</translation>
+        <source>Go</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

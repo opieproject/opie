@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Clock</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation>Zatrzymaj</translation>
+        <translation>Stoper</translation>
     </message>
     <message>
         <source>Start</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeruj</translation>
     </message>
     <message>
         <source>Set Alarm</source>
@@ -39,14 +39,18 @@
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatrzymaj</translation>
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw date i godzine.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
+        <translation>Zegar: Alarm zostal przegapiony.</translation>
+    </message>
+    <message>
+        <source>Alarm set: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -66,29 +70,29 @@
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation>Opoznienie drzemni
+        <translation>Opoznienie drzemki
 (minuty)</translation>
     </message>
     <message>
         <source>mp3 alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>alarm mp3</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystkie</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
 </context>
 </TS>

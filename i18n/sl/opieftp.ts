@@ -221,10 +221,6 @@ Mora biti prazen</translation>
         <translation>Ta imenik ne obstaja</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation type="obsolete">O</translation>
-    </message>
-    <message>
         <source>Rescan</source>
         <translation>Preglej</translation>
     </message>

@@ -399,6 +399,17 @@ modificando le categorie.</translation>
     </message>
 </context>
 <context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Yes</source>
+        <translation>Sì</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>No</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
@@ -467,7 +478,7 @@ riprovare.</translation>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>Sei sicuro di voler cancellare
+        <translation type="obsolete">Sei sicuro di voler cancellare
 %1?</translation>
     </message>
     <message>
@@ -770,27 +781,6 @@ riprovare.</translation>
         <source>Sun</source>
         <translation>Dom</translation>
     </message>
-</context>
-<context>
-    <name>QPEApplication</name>
-    <message>
-        <source>%1 document</source>
-        <translation>%1 documento</translation>
-    </message>
-</context>
-<context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>&lt;Qt&gt;La guida completa non è disponibile per questa applicazione, è comunque presente la guida base.&lt;p&gt;Per usare la guida:&lt;p&gt;&lt;ol&gt;&lt;li&gt;tieni premuto il tasto di aiuto.&lt;li&gt;quando apparirà &lt;b&gt;Cos&apos;è...&lt;/b&gt;, premi un qualunque tasto.&lt;/ol&gt;&lt;/Qt&gt;</translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation>Cos&apos;è...</translation>
-    </message>
-</context>
-<context>
-    <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
         <translation>Premi per chiudere questa finestra, abbandonando le modifiche effettuate.</translation>
@@ -810,6 +800,75 @@ riprovare.</translation>
     <message>
         <source>Click to make this window use all available screen area.</source>
         <translation>Premi per ingrandire al massimo questa finestra.</translation>
+    </message>
+    <message>
+        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
+        <translation>&lt;Qt&gt;La guida completa non è disponibile per questa applicazione, è comunque presente la guida base.&lt;p&gt;Per usare la guida:&lt;p&gt;&lt;ol&gt;&lt;li&gt;tieni premuto il tasto di aiuto.&lt;li&gt;quando apparirà &lt;b&gt;Cos&apos;è...&lt;/b&gt;, premi un qualunque tasto.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+    </message>
+    <message>
+        <source>What&apos;s this...</source>
+        <translation>Cos&apos;è...</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete
+ %1?&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;Vuoi veramente eliminare
+ %1?&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>Jan</source>
+        <translation>Gen</translation>
+    </message>
+    <message>
+        <source>Feb</source>
+        <translation>Feb</translation>
+    </message>
+    <message>
+        <source>Mar</source>
+        <translation>Mar</translation>
+    </message>
+    <message>
+        <source>Apr</source>
+        <translation>Apr</translation>
+    </message>
+    <message>
+        <source>May</source>
+        <translation>Mag</translation>
+    </message>
+    <message>
+        <source>Jun</source>
+        <translation>Giu</translation>
+    </message>
+    <message>
+        <source>Jul</source>
+        <translation>Lug</translation>
+    </message>
+    <message>
+        <source>Aug</source>
+        <translation>Ago</translation>
+    </message>
+    <message>
+        <source>Sep</source>
+        <translation>Set</translation>
+    </message>
+    <message>
+        <source>Oct</source>
+        <translation>Ott</translation>
+    </message>
+    <message>
+        <source>Nov</source>
+        <translation>Nov</translation>
+    </message>
+    <message>
+        <source>Dec</source>
+        <translation>Dic</translation>
+    </message>
+</context>
+<context>
+    <name>QPEApplication</name>
+    <message>
+        <source>%1 document</source>
+        <translation>%1 documento</translation>
     </message>
 </context>
 <context>

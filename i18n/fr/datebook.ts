@@ -96,6 +96,10 @@ Quitter ?</translation>
         <source>Edit...</source>
         <translation>Éditer...</translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation>boîte d&apos;erreur</translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -192,6 +196,10 @@ Quitter ?</translation>
     <message>
         <source>Duplicate</source>
         <translation>Dupliquer</translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation>Emettre cet élément</translation>
     </message>
 </context>
 <context>
@@ -358,6 +366,14 @@ Quitter ?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation>LMMJVSDL</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -380,37 +396,37 @@ Quitter ?</translation>
     <message>
         <source>M</source>
         <comment>Monday</comment>
-        <translation>L</translation>
+        <translation type="obsolete">L</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Tuesday</comment>
-        <translation>M</translation>
+        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>W</source>
         <comment>Wednesday</comment>
-        <translation>M</translation>
+        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Thursday</comment>
-        <translation>J</translation>
+        <translation type="obsolete">J</translation>
     </message>
     <message>
         <source>F</source>
         <comment>Friday</comment>
-        <translation>V</translation>
+        <translation type="obsolete">V</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Saturday</comment>
-        <translation>S</translation>
+        <translation type="obsolete">S</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Sunday</comment>
-        <translation>D</translation>
+        <translation type="obsolete">D</translation>
     </message>
     <message>
         <source>p</source>
@@ -549,6 +565,13 @@ Minutes</translation>
     <message>
         <source>Note...</source>
         <translation>Notes...</translation>
+    </message>
+</context>
+<context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -711,6 +734,10 @@ et</translation>
     <message>
         <source>, and </source>
         <translation>, et</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation>activé</translation>
     </message>
 </context>
 <context>

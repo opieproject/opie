@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>Defaults</source>
-        <translation>Standaardinstell</translation>
+        <translation>Standaardinstellingen</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Change Direction Keys</source>
@@ -94,13 +94,17 @@ voor de laatste 10 jaar van haar vriendschap.</translation>
     </message>
     <message>
         <source>Configuration Error</source>
-        <translation>Canfiguratiefout</translation>
+        <translation type="obsolete">Canfiguratiefout</translation>
     </message>
     <message>
         <source>There are no schemes defined,
 or no scheme is selected.</source>
-        <translation>Er zijn geen schema&apos;s gedefinieerd,
+        <translation type="obsolete">Er zijn geen schema&apos;s gedefinieerd,
 of er is geen schema geselecteerd.</translation>
+    </message>
+    <message>
+        <source>KPacman</source>
+        <translation>KPacman</translation>
     </message>
 </context>
 <context>
@@ -144,7 +148,7 @@ of is in een onbekend formaat.</translation>
     </message>
     <message>
         <source>NICKNAME</source>
-        <translation>SCHUILNAAM</translation>
+        <translation>BIJNAAM</translation>
     </message>
     <message>
         <source>-SHADOW</source>
@@ -224,6 +228,10 @@ of is in een onbekend formaat.</translation>
     <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@YY@/@MM@/@DD@</translation>
+    </message>
+    <message>
+        <source>                          </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

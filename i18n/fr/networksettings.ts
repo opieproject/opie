@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>&amp;Information</source>
-        <translation>&amp;Information</translation>
+        <translation type="obsolete">&amp;Information</translation>
     </message>
     <message>
         <source>&amp;Configure</source>
@@ -83,6 +83,53 @@
     <message>
         <source>New Profile</source>
         <translation>Nouveau Profil</translation>
+    </message>
+    <message>
+        <source>A list of network settings to be choosen from</source>
+        <translation>Une liste de &apos;paramêtre de réseau&apos; sélectionnable</translation>
+    </message>
+    <message>
+        <source>Add a new interface to the list.</source>
+        <translation>Ajouter une nouvelle interface à la liste.</translation>
+    </message>
+    <message>
+        <source>&amp;Start/Stop</source>
+        <translation>&amp;Démarrer/Arrêter</translation>
+    </message>
+    <message>
+        <source>Start and Stop the current interface, gives additional information about the interface.</source>
+        <translation>Démarre et arrête l&apos;interface courante et en donne des informations utiles.</translation>
+    </message>
+    <message>
+        <source>Configure the current interface</source>
+        <translation>Configure l&apos;interface courante</translation>
+    </message>
+    <message>
+        <source>Remove the current interface from the list.</source>
+        <translation>Supprimer de la liste l&apos;interface courante.</translation>
+    </message>
+</context>
+<context>
+    <name>MainWindowImp</name>
+    <message>
+        <source>Disconnected</source>
+        <translation>Déconnecté</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Erreur</translation>
+    </message>
+    <message>
+        <source>Unable to remove.</source>
+        <translation>Impossible de supprimer.</translation>
+    </message>
+    <message>
+        <source>Sorry</source>
+        <translation>Désolé</translation>
+    </message>
+    <message>
+        <source>Please select an interface first.</source>
+        <translation>Veuillez sélectionner une interface.</translation>
     </message>
 </context>
 </TS>

@@ -6,14 +6,6 @@
         <translation>行事曆</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>觀看</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>設定</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>新文件</translation>
     </message>
@@ -40,14 +32,6 @@
     <message>
         <source>Find</source>
         <translation>尋找</translation>
-    </message>
-    <message>
-        <source>Alarm and Start Time...</source>
-        <translation>鬧鐘與開始時間...</translation>
-    </message>
-    <message>
-        <source>Default View</source>
-        <translation>預設瀏覽方式</translation>
     </message>
     <message>
         <source>Event duration is potentially longer
@@ -100,6 +84,18 @@ Quit anyway?</translation>
     <message>
         <source>Continue</source>
         <translation>繼續</translation>
+    </message>
+    <message>
+        <source>Edit...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate Event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>error box</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -186,6 +182,22 @@ Quit anyway?</translation>
         <source>This is an all day event.</source>
         <translation>這是一個終日事件.</translation>
     </message>
+    <message>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettings</name>
@@ -209,6 +221,10 @@ Quit anyway?</translation>
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">行事曆</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -226,7 +242,7 @@ Quit anyway?</translation>
     </message>
     <message>
         <source>:00</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:00</translation>
     </message>
     <message>
         <source>Alarm Settings</source>
@@ -238,7 +254,7 @@ Quit anyway?</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">分鐘</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -261,7 +277,67 @@ Quit anyway?</translation>
         <translation>大</translation>
     </message>
     <message>
-        <source>Jump to current time (dayview)</source>
+        <source>Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default view:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">開始</translation>
+    </message>
+    <message>
+        <source>Start-End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">公司</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">家</translation>
+    </message>
+    <message>
+        <source>Category:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -273,25 +349,32 @@ Quit anyway?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekHeader</name>
+    <message>
+        <source>w</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>Y: </source>
-        <translation>Y:</translation>
-    </message>
-    <message>
-        <source>W: </source>
-        <translation>W:</translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. 一月-00. 一月</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
-        <translation>W: %1</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -304,48 +387,9 @@ Quit anyway?</translation>
         <source>2</source>
         <translation>2</translation>
     </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
-        <translation>00. 一月-00. 一月</translation>
-    </message>
 </context>
 <context>
     <name>DateBookWeekView</name>
-    <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation>一</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation>二</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation>三</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation>四</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation>五</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation>六</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation>日</translation>
-    </message>
     <message>
         <source>p</source>
         <translation>p</translation>
@@ -479,6 +523,13 @@ Quit anyway?</translation>
     <message>
         <source>Note...</source>
         <translation>備忘錄...</translation>
+    </message>
+</context>
+<context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -640,6 +691,10 @@ and </source>
     <message>
         <source>, and </source>
         <translation>, 和</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>Mail plugin</source>
-        <translation>Plugin de E-Mail</translation>
+        <translation>Resumo do E-Mail</translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>

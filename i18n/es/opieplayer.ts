@@ -205,13 +205,13 @@ Cerrando reproductor.</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Sin espacio</translation>
+        <translation type="obsolete">Sin espacio</translation>
     </message>
     <message>
         <source>There was a problem saving the playlist.
 Your playlist may be missing some entries
 the next time you start it.</source>
-        <translation>Hubo un problema guardando la lista.
+        <translation type="obsolete">Hubo un problema guardando la lista.
 Su lista puede haber perdido alguna entrada
 la próxima vez que la inicie.</translation>
     </message>

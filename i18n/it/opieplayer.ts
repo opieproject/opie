@@ -74,6 +74,10 @@ Chiusura player.</translation>
         <source>, Length: </source>
         <translation>, Lunghezza: </translation>
     </message>
+    <message>
+        <source>Volume</source>
+        <translation>Volume</translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>
@@ -135,10 +139,6 @@ Chiusura player.</translation>
     <message>
         <source>Save PlayList</source>
         <translation>Salava Playlist</translation>
-    </message>
-    <message>
-        <source>Export playlist to m3u</source>
-        <translation>Esporta playlist come m3u</translation>
     </message>
     <message>
         <source>Open File or URL</source>
@@ -206,13 +206,13 @@ Chiusura player.</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Spazio esaurito</translation>
+        <translation type="obsolete">Spazio esaurito</translation>
     </message>
     <message>
         <source>There was a problem saving the playlist.
 Your playlist may be missing some entries
 the next time you start it.</source>
-        <translation>Errore nel salvare la playlist.
+        <translation type="obsolete">Errore nel salvare la playlist.
 Potrebbero mancare delle voci
 al prossimo avvio.</translation>
     </message>
@@ -223,10 +223,6 @@ al prossimo avvio.</translation>
     <message>
         <source>There was a problem in getting the file.</source>
         <translation>Errore nell&apos;aprire il file.</translation>
-    </message>
-    <message>
-        <source>Save Playlist</source>
-        <translation>Salva Playlist</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
@@ -261,6 +257,14 @@ questa playlist?</translation>
     <message>
         <source>Save m3u Playlist </source>
         <translation>Salva Playlist come m3u</translation>
+    </message>
+    <message>
+        <source>Skins</source>
+        <translation>Skins</translation>
+    </message>
+    <message>
+        <source>Path</source>
+        <translation>Path</translation>
     </message>
 </context>
 <context>

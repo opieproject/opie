@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>&lt;p&gt;The word &quot;%1&quot; is not in the dictionary.</source>
-        <translation>&lt;p&gt;A palavra &quot;%1&quot; não existe no dicionário.</translation>
+        <translation>&lt;p&gt;A palavra &quot;%1&quot; não está no dicionário.</translation>
     </message>
     <message>
         <source>Add</source>
@@ -38,7 +38,7 @@
     </message>
     <message>
         <source>AI3: Smart AI player</source>
-        <translation>Computador</translation>
+        <translation>IA3: computador</translation>
     </message>
     <message>
         <source>Rules</source>
@@ -61,7 +61,7 @@
     </message>
     <message>
         <source>Board</source>
-        <translation>Mesa</translation>
+        <translation>Tabuleiro</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -99,7 +99,7 @@
     <name>WordGame</name>
     <message>
         <source>Word Game</source>
-        <translation>Palavras Cruzadas</translation>
+        <translation>Jogo das Palavras</translation>
     </message>
     <message>
         <source>Back</source>
@@ -107,7 +107,7 @@
     </message>
     <message>
         <source>Done</source>
-        <translation>Concluído</translation>
+        <translation>Feito</translation>
     </message>
     <message>
         <source>Close</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>Do you want to end the game early?</source>
-        <translation>Terminar o jogo?</translation>
+        <translation>Tem a certeza que quer terminar o jogo?</translation>
     </message>
     <message>
         <source>Yes</source>

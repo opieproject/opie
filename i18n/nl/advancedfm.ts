@@ -17,7 +17,7 @@ and is licensed by the GPL</source>
         <translation>Advanced FileManager
 copyright 2002-2003
 L.J.Potter &lt;llorncor@handhelds.org&gt;
-en is valt onder de GPL</translation>
+en valt onder de GPL</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
@@ -53,15 +53,15 @@ en is valt onder de GPL</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Kopieer</translation>
+        <translation>Kopiëer</translation>
     </message>
     <message>
         <source>Copy As</source>
-        <translation>Kopieer als</translation>
+        <translation>Kopiëer als</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
-        <translation>Kopieer in zelfde map</translation>
+        <translation>Kopiëer in zelfde map</translation>
     </message>
     <message>
         <source>Move</source>
@@ -99,7 +99,7 @@ en is valt onder de GPL</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!!</source>
-        <translation>Kan huidige directory niet
+        <translation type="obsolete">Kan huidige directory niet
 uit favorieten verwijderen,
 er is hier geen favoriet van!</translation>
     </message>
@@ -158,7 +158,7 @@ er is hier geen favoriet van!</translation>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation>%1 beatanden
+        <translation>%1 bestanden
 echt verwijderen?</translation>
     </message>
     <message>
@@ -176,7 +176,7 @@ echt verwijderen?</translation>
     <message>
         <source>Really delete
 </source>
-        <translation>Echt verwijderen
+        <translation type="obsolete">Echt verwijderen
 </translation>
     </message>
     <message>
@@ -205,7 +205,8 @@ exists. Ok to overwrite?</source>
     <message>
         <source>Could not copy
 </source>
-        <translation>Kan niet kopiëeren</translation>
+        <translation>Kan niet kopiëren
+</translation>
     </message>
     <message>
         <source>to
@@ -256,6 +257,42 @@ Wilt u het echt verwijderen?</translation>
         <source>Could not rename</source>
         <translation>Kan bestand niet hernoemen</translation>
     </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="obsolete">AdvancedFM ::</translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="obsolete">kB vrij</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation>Kan huidige map niet verwijderen
+van favorietenlijst.
+Er is geen favoriet van!</translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation>Bestand zoeken</translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation>%1 en alle inhoud
+echt verwijderen?</translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation>%1
+echt verwijderen?</translation>
+    </message>
+    <message>
+        <source>Copy &apos;%1&apos; As</source>
+        <translation type="obsolete">Kopiëer &apos;%1&apos; als</translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -266,6 +303,24 @@ Wilt u het echt verwijderen?</translation>
     <message>
         <source>Save output to file (name only)</source>
         <translation>Sla uivoer op in bestand (alleen bestandsnaam)</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation>Proces kon niet worden gestart</translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation>Fout
+</translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation>
+Klaar
+</translation>
     </message>
 </context>
 <context>
@@ -309,6 +364,26 @@ Wilt u het echt verwijderen?</translation>
     <message>
         <source>execute</source>
         <translation>Uitvoeren</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Waarschuwing</translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation>Fout - geen gebruiker</translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation>Fout - geen groep</translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation>Fout bij instellen van eigenaar of groep</translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation>Fout bij instellen modus</translation>
     </message>
 </context>
 </TS>

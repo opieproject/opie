@@ -30,10 +30,6 @@
 <context>
     <name>OxydataWidget</name>
     <message>
-        <source>Weight:</source>
-        <translation type="obsolete">Peso</translation>
-    </message>
-    <message>
         <source>Block</source>
         <translation>Blocco</translation>
     </message>
@@ -87,7 +83,7 @@
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Peso</translation>
     </message>
 </context>
 <context>

@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/i18n
 Maintainer: Bruno Rodrigues <bruno.rodrigues@litux.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, opie-language
 Description: i18n: Portuguese
  Portuguese UI texts and dictionary for OPIE environment.
+Version: $QPE_VERSION$EXTRAVERSION

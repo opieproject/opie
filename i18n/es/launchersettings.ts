@@ -38,7 +38,7 @@
     </message>
 </context>
 <context>
-    <name>SampleView</name>
+    <name>QObject</name>
     <message>
         <source>Sample 1</source>
         <translation>Muestra 1</translation>

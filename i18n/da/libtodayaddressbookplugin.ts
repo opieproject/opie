@@ -26,10 +26,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>To activate settings: Restart application !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Set Headline Color: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -67,23 +63,23 @@ Color if below </source>
     <name>QObject</name>
     <message>
         <source>AddressBook plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontakter plugin</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fødselsdage de næste &lt;b&gt; %1 &lt;/b&gt; dage:</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen fødselsdage de næste &lt;b&gt; %1 &lt;/b&gt; dage!</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bryllupsdage de næste &lt;b&gt; %1 &lt;/b&gt; dage:</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen bryllupsdage de næsten &lt;b&gt; %1 &lt;/b&gt; dage!</translation>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>

@@ -108,6 +108,10 @@
         <source>Unknown</source>
         <translation>Desconocido</translation>
     </message>
+    <message>
+        <source>%1 Kb</source>
+        <translation>%1 Kb</translation>
+    </message>
 </context>
 <context>
     <name>InstallOptionsDlgImpl</name>
@@ -150,6 +154,87 @@
     <message>
         <source>Troubleshooting output</source>
         <translation>Salida de soluciones</translation>
+    </message>
+</context>
+<context>
+    <name>Ipkg</name>
+    <message>
+        <source>Dealing with package %1</source>
+        <translation>Tratando con el paquete %1</translation>
+    </message>
+    <message>
+        <source>Removing symbolic links...
+</source>
+        <translation>Eliminando enlaces simbólicos...
+</translation>
+    </message>
+    <message>
+        <source>Creating symbolic links for %1.</source>
+        <translation>Creando enlaces simbólicos para %1.</translation>
+    </message>
+    <message>
+        <source>Creating symbolic links for %1</source>
+        <translation>Creando enlaces simbólicos para %1</translation>
+    </message>
+    <message>
+        <source>Finished</source>
+        <translation>Finalizado</translation>
+    </message>
+    <message>
+        <source>Removing status entry...</source>
+        <translation>Eliminando entrada de estado...</translation>
+    </message>
+    <message>
+        <source>status file - </source>
+        <translation>fichero de estado - </translation>
+    </message>
+    <message>
+        <source>package - </source>
+        <translation>paquete - </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t open status file - </source>
+        <translation>No pude abrir fichero de estado - </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create tempory status file - </source>
+        <translation>No pude crear fichero temporal de estado - </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg process</source>
+        <translation>No pude iniciar proceso ipkg</translation>
+    </message>
+    <message>
+        <source>Could not open :</source>
+        <translation>No pude abrir :</translation>
+    </message>
+    <message>
+        <source>Creating directory </source>
+        <translation>Creando directorio </translation>
+    </message>
+    <message>
+        <source>Linked %1 to %2</source>
+        <translation>Enlazando %1 a %2</translation>
+    </message>
+    <message>
+        <source>Failed to link %1 to %2</source>
+        <translation>Fallo al enlazar %1 a %2</translation>
+    </message>
+    <message>
+        <source>Removed %1</source>
+        <translation>Eliminado %1</translation>
+    </message>
+    <message>
+        <source>Failed to remove %1</source>
+        <translation>Fallo al borrar %1</translation>
+    </message>
+    <message>
+        <source>Removed </source>
+        <translation>Eliminado </translation>
+    </message>
+    <message>
+        <source>Failed to remove </source>
+        <translation>Fallo al borrar </translation>
     </message>
 </context>
 <context>
@@ -331,34 +416,6 @@ Pulse en el recuadro de la izquierda para seleccionar un paquete.</translation>
 <byte value="x9"/>%1</translation>
     </message>
     <message>
-        <source>Installed To - %1</source>
-        <translation type="obsolete">Instalado en - %1</translation>
-    </message>
-    <message>
-        <source>Description - %1</source>
-        <translation type="obsolete">Descripción - %1</translation>
-    </message>
-    <message>
-        <source>Size - %1</source>
-        <translation type="obsolete">Tamaño - %1</translation>
-    </message>
-    <message>
-        <source>Section - %1</source>
-        <translation type="obsolete">Sección - %1</translation>
-    </message>
-    <message>
-        <source>Filename - %1</source>
-        <translation type="obsolete">Nombre fichero - %1</translation>
-    </message>
-    <message>
-        <source>V. Installed - %1</source>
-        <translation type="obsolete">Ver. instalada - %1</translation>
-    </message>
-    <message>
-        <source>V. Available - %1</source>
-        <translation type="obsolete">Ver. disponible - %1</translation>
-    </message>
-    <message>
         <source>Refreshing server package lists</source>
         <translation>Refrescando listas de paquetes del servidor</translation>
     </message>
@@ -445,7 +502,7 @@ Opie/Qtopia está corriendo!
     </message>
     <message>
         <source>R</source>
-        <translation>R</translation>
+        <translation type="obsolete">R</translation>
     </message>
     <message>
         <source>Do you wish to remove or upgrade
@@ -459,7 +516,7 @@ Opie/Qtopia está corriendo!
     </message>
     <message>
         <source>U</source>
-        <translation>U</translation>
+        <translation type="obsolete">U</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>
@@ -507,6 +564,52 @@ Opie/Qtopia está corriendo!
     <message>
         <source>Close</source>
         <translation>Cerrar</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Installed packages</source>
+        <translation>Paquetes instalados</translation>
+    </message>
+    <message>
+        <source>Local packages</source>
+        <translation>Paquetes locales</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>N/D</translation>
+    </message>
+    <message>
+        <source>Package - %1
+              version - %2</source>
+        <translation>Paquete - %1
+             versión - %2</translation>
+    </message>
+    <message>
+        <source>
+              inst version - %1</source>
+        <translation>
+             versión inst - %1</translation>
+    </message>
+    <message>
+        <source>Version string is empty.</source>
+        <translation>Cadena de versión vacía.</translation>
+    </message>
+    <message>
+        <source>Epoch in version is not number.</source>
+        <translation>Época en versión no numérica.</translation>
+    </message>
+    <message>
+        <source>Nothing after colon in version number.</source>
+        <translation>Nada después del punto en el número de verisión.</translation>
+    </message>
+</context>
+<context>
+    <name>QuestionDlg</name>
+    <message>
+        <source>Remove</source>
+        <translation>Borrar</translation>
     </message>
 </context>
 <context>

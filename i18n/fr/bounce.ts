@@ -101,5 +101,29 @@ You get %2 lives this time!</source>
         <translation>Niveau %1.
 Vous avez %2 vies cette fois !</translation>
     </message>
+    <message>
+        <source>About</source>
+        <translation>A propos</translation>
+    </message>
+    <message>
+        <source>Written by: Stefan Schimanski
+Ported by: Martin Imobersteg
+
+Click to form walls.
+Hit space to switch wall direction.
+Try to reduce total space by 75%.
+
+This program is distributed under
+the terms of the GPL v2.</source>
+        <translation>Ecrit par: Stefan Schimanski
+Porté par: Martin Imobersteg
+
+Cliquez pour construire des murs.
+Espace pour changer la direction d&apos;un mur.
+Essayez de réduire l&apos;espace total de 75%.
+
+Ce programme est distribué sous les
+de la licence GPL v2.</translation>
+    </message>
 </context>
 </TS>

@@ -1,5 +1,4 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>TextEdit</name>
     <message>
@@ -36,11 +35,11 @@
     </message>
     <message>
         <source>Zoom in</source>
-        <translation>Vergrößern</translation>
+        <translation>Zoom in</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation>Verkleinern</translation>
+        <translation>Zoom aus</translation>
     </message>
     <message>
         <source>Wrap lines</source>
@@ -56,7 +55,7 @@
     </message>
     <message>
         <source>Edit</source>
-        <translation>Bearbeiten</translation>
+        <translation>Editieren</translation>
     </message>
     <message>
         <source>View</source>
@@ -64,11 +63,11 @@
     </message>
     <message>
         <source>Find Next</source>
-        <translation>Weitersuchen</translation>
+        <translation>Nächsten suchen</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Suche schließen</translation>
+        <translation>&quot;Suchen&quot; schließen</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -124,16 +123,16 @@
     </message>
     <message>
         <source>Goto Line...</source>
-        <translation>Gehe zu Zeile...</translation>
+        <translation>Gehe zu Linie...</translation>
     </message>
     <message>
         <source>Auto Save 5 min.</source>
-        <translation>Automatisch sichern</translation>
+        <translation>Autospeichern 5 min.</translation>
     </message>
     <message>
         <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt;file.&lt;BR&gt;Open&lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
         <translation>Texteditor hat ein &lt;BR&gt;&lt;B&gt;Desktopfile&lt;/B&gt;&lt;BR&gt;erkannt.
-&lt;B&gt;.desktop-Datei&lt;/B&gt; oder &lt;B&gt;verlinkte&lt;/B&gt; Datei öffnen?</translation>
+&lt;B&gt;.desktop-Datei&lt;/B&gt; oder &lt;B&gt;verlinkte&lt;/B&gt; Datei öffnen ?</translation>
     </message>
     <message>
         <source>Text Edit</source>
@@ -153,13 +152,13 @@
     </message>
     <message>
         <source>Choose font</source>
-        <translation>Schrift wählen</translation>
+        <translation>Font wählen</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation>Möchten Sie die aktuelle Datei wirklich &lt;b&gt;löschen&lt;/b&gt;?
-Dies kann nicht mehr rückgängig gemacht werden.&lt;BR&gt;</translation>
+        <translation type="obsolete">Möchten Sie wirklich die aktuelle Datei &lt;b&gt;löschen&lt;/b&gt; ?
+&lt;BR&gt;Dies kann nicht mehr rückgängig gemacht werden &lt;BR&gt;</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -171,7 +170,7 @@ Dies kann nicht mehr rückgängig gemacht werden.&lt;BR&gt;</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>Text Edit ist urheberrechtlich geschützt von&lt;BR&gt;2000 Trolltech AS, und&lt;BR&gt;2002 von &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;und unterliegt der GPL.</translation>
+        <translation>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
@@ -182,8 +181,9 @@ Dies kann nicht mehr rückgängig gemacht werden.&lt;BR&gt;</translation>
 you have unsaved changes
 Go ahead and save?
 </source>
-        <translation>Es existieren ungespeicherte Änderungen.
-Speichern und weitermachen?</translation>
+        <translation>Texteditor hat ungespeicherte
+Änderungen festgestellt.
+Speichern und weitermachen ?</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
@@ -195,7 +195,16 @@ Speichern und weitermachen?</translation>
     </message>
     <message>
         <source>Not enough lines</source>
-        <translation>Nicht genug Zeilen</translation>
+        <translation>Nciht genug Zeilen</translation>
+    </message>
+    <message>
+        <source>%1 - Text Editor</source>
+        <translation>%1 - Texteditor</translation>
+    </message>
+    <message>
+        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -218,7 +227,7 @@ Speichern und weitermachen?</translation>
     </message>
     <message>
         <source>others</source>
-        <translation>Andere</translation>
+        <translation>andere</translation>
     </message>
     <message>
         <source>Owner</source>
@@ -246,11 +255,11 @@ Speichern und weitermachen?</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation>Fehler - kein Besitzer</translation>
+        <translation>Fehler- kein Nutzer</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation>Fehler - keine Gruppe</translation>
+        <translation>Fehler- keine Gruppe</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>

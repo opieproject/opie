@@ -29,10 +29,6 @@
 <context>
     <name>OxydataWidget</name>
     <message>
-        <source>Weight:</source>
-        <translation type="obsolete">Peso:</translation>
-    </message>
-    <message>
         <source>Block</source>
         <translation>Bloque</translation>
     </message>

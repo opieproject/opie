@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Clock</name>
     <message>
@@ -49,6 +50,10 @@
         <source>Clock: Alarm was missed.</source>
         <translation>Orologio: Allarme mancante.</translation>
     </message>
+    <message>
+        <source>Alarm set: %1</source>
+        <translation>Allarme impostato: %1</translation>
+    </message>
 </context>
 <context>
     <name>Set_Alarm</name>
@@ -62,7 +67,7 @@
     </message>
     <message>
         <source>Minute</source>
-        <translation>Minuto</translation>
+        <translation>Minuti</translation>
     </message>
     <message>
         <source>AM</source>
@@ -79,7 +84,8 @@
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation>Ritardo Snooze
+        <translation>Ritardo
+Snooze
 (minuti)</translation>
     </message>
     <message>

@@ -10,11 +10,15 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>General Settings</source>
+        <source>New</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Searchmethods</source>
+        <source>Change</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Delete</source>
         <translation>FOO</translation>
     </message>
 </context>
@@ -33,51 +37,11 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Config</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
         <source>Searchmethods</source>
         <translation>FOO</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Only &amp;complete Words</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Allow &amp;reg. expressions</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>0 Errors</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>1 Errors</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>2 Errors</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>3 Errors</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>4 Errors</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Until Hit</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>&amp;Error tolerance</source>
         <translation>FOO</translation>
     </message>
     <message>
@@ -89,8 +53,24 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Help</source>
-        <translation type="obsolete">FOO</translation>
+        <source>No dictionary defined</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Define one</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Opie-Dictionary</source>
+        <translation>FOO</translation>
     </message>
 </context>
 <context>

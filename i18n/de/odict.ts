@@ -1,5 +1,4 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ConfigDlg</name>
     <message>
@@ -11,19 +10,23 @@
         <translation>Suchmethode</translation>
     </message>
     <message>
-        <source>General Settings</source>
-        <translation>Allgemeine Einstellungen</translation>
+        <source>New</source>
+        <translation>Neu</translation>
     </message>
     <message>
-        <source>Searchmethods</source>
-        <translation>Suchmethoden</translation>
+        <source>Change</source>
+        <translation>Ändern</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>
     <name>ODict</name>
     <message>
-        <source>OPIE-Dictionary</source>
-        <translation>Opie-Wörterbuch</translation>
+        <source>Opie-Dictionary</source>
+        <translation>OPIE-Wörterbuch</translation>
     </message>
     <message>
         <source>Query:</source>
@@ -34,52 +37,12 @@
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <source>Config</source>
-        <translation>Einstellungen</translation>
-    </message>
-    <message>
         <source>Searchmethods</source>
         <translation>Suchmethoden</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation>&amp;Groß/Kleinschreibung beachten</translation>
-    </message>
-    <message>
-        <source>Only &amp;complete Words</source>
-        <translation>&amp;Nur ganze Wörter</translation>
-    </message>
-    <message>
-        <source>Allow &amp;reg. expressions</source>
-        <translation>&amp;Reguläre Ausdrücke erlauben</translation>
-    </message>
-    <message>
-        <source>0 Errors</source>
-        <translation>0 Fehler</translation>
-    </message>
-    <message>
-        <source>1 Errors</source>
-        <translation>1 Fehler</translation>
-    </message>
-    <message>
-        <source>2 Errors</source>
-        <translation>2 Fehler</translation>
-    </message>
-    <message>
-        <source>3 Errors</source>
-        <translation>3 Fehler</translation>
-    </message>
-    <message>
-        <source>4 Errors</source>
-        <translation>4 Fehler</translation>
-    </message>
-    <message>
-        <source>Until Hit</source>
-        <translation>Bis zum Treffer</translation>
-    </message>
-    <message>
-        <source>&amp;Error tolerance</source>
-        <translation>&amp;Fehlertoleranz</translation>
+        <translation>&amp;Groß- und Kleinschreibung beachten</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -88,6 +51,26 @@
     <message>
         <source>Parameter</source>
         <translation>Parameter</translation>
+    </message>
+    <message>
+        <source>No dictionary defined</source>
+        <translation>Kein Wörterbuch definiert</translation>
+    </message>
+    <message>
+        <source>&amp;Define one</source>
+        <translation>&amp;Definieren</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Abbruch</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation>Einstellungen</translation>
+    </message>
+    <message>
+        <source>OPIE-Dictionary</source>
+        <translation>OPIE-Lexikon</translation>
     </message>
 </context>
 <context>
@@ -98,7 +81,7 @@
     </message>
     <message>
         <source>Dictionary file</source>
-        <translation>Wörterbuchdatei</translation>
+        <translation>Wörterbuch</translation>
     </message>
     <message>
         <source>Browse</source>
@@ -122,7 +105,7 @@
     </message>
     <message>
         <source>Change Searchmethod</source>
-        <translation>Ändere Suchmethode</translation>
+        <translation>Suchmethode ändern</translation>
     </message>
 </context>
 </TS>

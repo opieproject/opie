@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AdvancedFm</name>
     <message>
@@ -135,7 +136,7 @@
     </message>
     <message>
         <source>Properties</source>
-        <translation>Einstellungen</translation>
+        <translation>Eigenschaften</translation>
     </message>
     <message>
         <source>Beam File</source>
@@ -193,13 +194,6 @@
         <translation>Verzeichnis löschen?</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation>Wirklich löschen
-
-</translation>
-    </message>
-    <message>
         <source>Really copy
 %1 files?</source>
         <translation>Wirklich %1 Dateien kopieren?</translation>
@@ -239,15 +233,6 @@ L.J.Potter&lt;llornkcor@handhelds.org&gt;
 unter der GPL</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation>Das aktuelle Verzeichnis ist nicht in 
-den Lesezeichen und kann deshalb
-nicht entfernt werden.
-</translation>
-    </message>
-    <message>
         <source>Bookmark Directory</source>
         <translation>Lesezeichen-Verzeichnis</translation>
     </message>
@@ -259,6 +244,36 @@ nicht entfernt werden.
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation>Kann das aktuelle Verzeichnis
+von den Lesezeichen nicht entfernen,
+da es nicht in den Lesezeichen ist!</translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation>Dateisuche</translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation>%1 und alle Inhalte wirklich löschen?</translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation>%1 wirklich löschen?</translation>
+    </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="obsolete">AdvancedFm :: </translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="obsolete">kB frei</translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -269,6 +284,22 @@ nicht entfernt werden.
     <message>
         <source>Output</source>
         <translation>Ausgabe</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation>Prozess konnte nicht gestartet werden</translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation>Fehler</translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation>
+Fertig</translation>
     </message>
 </context>
 <context>
@@ -312,6 +343,26 @@ nicht entfernt werden.
     <message>
         <source>execute</source>
         <translation>Ausführen</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Warnung</translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation>Fehler - kein Benutzer</translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation>Fehler - keine Gruppe</translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation>Fehler beim Setzen der Grupper oder des Besitzers</translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation>Fehler beim Setzen des Modus</translation>
     </message>
 </context>
 </TS>

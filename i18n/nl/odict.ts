@@ -3,125 +3,109 @@
     <name>ConfigDlg</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoekmethode</translation>
     </message>
     <message>
-        <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <source>New</source>
+        <translation>Nieuw</translation>
     </message>
     <message>
-        <source>Searchmethods</source>
-        <translation type="unfinished"></translation>
+        <source>Change</source>
+        <translation>Verander</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation>Verwijder</translation>
     </message>
 </context>
 <context>
     <name>ODict</name>
     <message>
         <source>OPIE-Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE-Woordenboek</translation>
     </message>
     <message>
         <source>Query:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoekopdr:</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoekmethoden</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Only &amp;complete Words</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Allow &amp;reg. expressions</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>0 Errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1 Errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>2 Errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>3 Errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>4 Errors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Until Hit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Error tolerance</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hoofdlettergevoelig</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter</translation>
+    </message>
+    <message>
+        <source>No dictionary defined</source>
+        <translation>Geen woordenboek gedefinieerd</translation>
+    </message>
+    <message>
+        <source>&amp;Define one</source>
+        <translation>&amp;Definieer</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;Annuleer</translation>
+    </message>
+    <message>
+        <source>Configuration</source>
+        <translation>Configuratie</translation>
+    </message>
+    <message>
+        <source>Opie-Dictionary</source>
+        <translation>Opie-Woordenboek</translation>
     </message>
 </context>
 <context>
     <name>SearchMethodDlg</name>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naam:</translation>
     </message>
     <message>
         <source>Dictionary file</source>
-        <translation type="unfinished"></translation>
+        <translation>Woordenboekbestand</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation>Blader</translation>
     </message>
     <message>
         <source>Language 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal 1</translation>
     </message>
     <message>
         <source>Decollator</source>
-        <translation type="unfinished"></translation>
+        <translation>Decollator</translation>
     </message>
     <message>
         <source>Language 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Taal 2</translation>
     </message>
     <message>
         <source>New Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe zoekmethode</translation>
     </message>
     <message>
         <source>Change Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander zoekmethode</translation>
     </message>
 </context>
 </TS>

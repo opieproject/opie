@@ -228,6 +228,10 @@ Cette partie vous permet de sélectionner une application et de lui attribuer de
         <source>Appearance Settings</source>
         <translation>Préferences d&apos;Apparence</translation>
     </message>
+    <message>
+        <source>Rotation direction:</source>
+        <translation>Sens de rotation:</translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>

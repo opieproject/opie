@@ -96,13 +96,17 @@ les 10 ans passé dans une ambiance amicale.</translation>
     </message>
     <message>
         <source>Configuration Error</source>
-        <translation>Erreur de configuration</translation>
+        <translation type="obsolete">Erreur de configuration</translation>
     </message>
     <message>
         <source>There are no schemes defined,
 or no scheme is selected.</source>
-        <translation>Aucun thème n&apos;est défini,
+        <translation type="obsolete">Aucun thème n&apos;est défini,
 ou auncun thème n&apos;est sélectionné.</translation>
+    </message>
+    <message>
+        <source>KPacman</source>
+        <translation>KPacman</translation>
     </message>
 </context>
 <context>

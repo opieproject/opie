@@ -145,8 +145,7 @@ Mégis kilép?</translation>
         <translation>&amp;Nem</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>Ehhez a keresési mintához
 nem találok kapcsolatot!</translation>
     </message>

@@ -399,6 +399,17 @@ redigere kategorierne.</translation>
     </message>
 </context>
 <context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Yes</source>
+        <translation>Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Nej</translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>New Document</source>
@@ -471,7 +482,7 @@ Frigør noget hukommelse og prøv igen.</translation>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>Er du sikker på du vil slette
+        <translation type="obsolete">Er du sikker på du vil slette
 %1?</translation>
     </message>
     <message>
@@ -770,30 +781,9 @@ Frigør noget hukommelse og prøv igen.</translation>
         <source>Sun</source>
         <translation>Søn</translation>
     </message>
-</context>
-<context>
-    <name>QPEApplication</name>
-    <message>
-        <source>%1 document</source>
-        <translation>%1 dokument</translation>
-    </message>
-</context>
-<context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>&lt;Qt&gt;Der findes ikke nogen omfattende hjælp til dette program, men der er stadig kontekstfølsom hjælp.&lt;p&gt;Sådan bruger du kontekstfølsom hjælp:&lt;p&gt;&lt;ol&gt;&lt;li&gt;klik og hold hjælpeknappen&lt;li&gt;når vindues titlen viser &lt;b&gt;Hvad er det...&lt;/b&gt;, så klik på det du vil have hjælp med.&lt;/ol&gt;&lt;/Qt&gt;</translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation>Hvad er det...</translation>
-    </message>
-</context>
-<context>
-    <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation>Klik for at lukke dette vindue og kassere ændringer.</translation>
+        <translation>Klik for at lukke dette vindue uden at gemme ændringer.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
@@ -810,6 +800,75 @@ Frigør noget hukommelse og prøv igen.</translation>
     <message>
         <source>Click to make this window use all available screen area.</source>
         <translation>Klik for at få dette vindue til at bruge hele skærmen.</translation>
+    </message>
+    <message>
+        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
+        <translation>&lt;Qt&gt;Der findes ikke nogen omfattende hjælp til dette program, men der er stadig kontekstfølsom hjælp.&lt;p&gt;Sådan bruger du kontekstfølsom hjælp:&lt;p&gt;&lt;ol&gt;&lt;li&gt;klik og hold hjælpeknappen&lt;li&gt;når vindues titlen viser &lt;b&gt;Hvad er det...&lt;/b&gt;, så klik på det du vil have hjælp med.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+    </message>
+    <message>
+        <source>What&apos;s this...</source>
+        <translation>Hvad er det...</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete
+ %1?&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;Vil du slette(new line)
+%1?&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>Jan</source>
+        <translation>Jan</translation>
+    </message>
+    <message>
+        <source>Feb</source>
+        <translation>Feb</translation>
+    </message>
+    <message>
+        <source>Mar</source>
+        <translation>Mar</translation>
+    </message>
+    <message>
+        <source>Apr</source>
+        <translation>Apr</translation>
+    </message>
+    <message>
+        <source>May</source>
+        <translation>Maj</translation>
+    </message>
+    <message>
+        <source>Jun</source>
+        <translation>Jun</translation>
+    </message>
+    <message>
+        <source>Jul</source>
+        <translation>Jul</translation>
+    </message>
+    <message>
+        <source>Aug</source>
+        <translation>Aug</translation>
+    </message>
+    <message>
+        <source>Sep</source>
+        <translation>Sep</translation>
+    </message>
+    <message>
+        <source>Oct</source>
+        <translation>Okt</translation>
+    </message>
+    <message>
+        <source>Nov</source>
+        <translation>Nov</translation>
+    </message>
+    <message>
+        <source>Dec</source>
+        <translation>Dec</translation>
+    </message>
+</context>
+<context>
+    <name>QPEApplication</name>
+    <message>
+        <source>%1 document</source>
+        <translation>%1 dokument</translation>
     </message>
 </context>
 <context>

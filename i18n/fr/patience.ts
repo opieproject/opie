@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation>&amp;Changer le Dos des Cartes</translation>
+        <translation type="obsolete">&amp;Changer le Dos des Cartes</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation>&amp;Aider Positionnement</translation>
+        <translation type="obsolete">&amp;Aider Positionnement</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -40,15 +40,15 @@
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation>Changer le Dos des Cartes</translation>
+        <translation type="obsolete">Changer le Dos des Cartes</translation>
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation>Aider Positionnement</translation>
+        <translation type="obsolete">Aider Positionnement</translation>
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation>Retourner Une Carte</translation>
+        <translation type="obsolete">Retourner Une Carte</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -56,7 +56,7 @@
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation>Retourner Trois Cartes</translation>
+        <translation type="obsolete">Retourner Trois Cartes</translation>
     </message>
     <message>
         <source>Chicane</source>
@@ -69,6 +69,30 @@
     <message>
         <source>Teeclub</source>
         <translation>Teeclub</translation>
+    </message>
+    <message>
+        <source>&amp;Change card backs</source>
+        <translation>&amp;Changer l&apos;arrière des cartes</translation>
+    </message>
+    <message>
+        <source>&amp;Snap to position</source>
+        <translation>&amp;Retour auto sur position</translation>
+    </message>
+    <message>
+        <source>Change card backs</source>
+        <translation>Changer l&apos;arrière des cartes</translation>
+    </message>
+    <message>
+        <source>Snap to position</source>
+        <translation>Retour auto sur position</translation>
+    </message>
+    <message>
+        <source>Turn one card</source>
+        <translation>Tourner une carte</translation>
+    </message>
+    <message>
+        <source>Turn three cards</source>
+        <translation>Tourner trois cartes</translation>
     </message>
 </context>
 </TS>

@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation>Miniature visning</translation>
+        <translation>Miniaturevisning</translation>
     </message>
     <message>
         <source>Slide show</source>

@@ -90,10 +90,14 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopier begivenhed</translation>
     </message>
     <message>
         <source>Edit...</source>
+        <translation>Rediger...</translation>
+    </message>
+    <message>
+        <source>error box</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -183,7 +187,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tid</translation>
     </message>
     <message>
         <source> - </source>
@@ -191,7 +195,11 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopier</translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation>Send denne begivenhed</translation>
     </message>
 </context>
 <context>
@@ -218,7 +226,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished">Kalender</translation>
+        <translation>Kalender</translation>
     </message>
 </context>
 <context>
@@ -273,67 +281,67 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Visninger</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard visning:</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Dag</translation>
+        <translation>Dag</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">Uge</translation>
+        <translation>Uge</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation type="unfinished"></translation>
+        <translation>Ugeliste</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">Måned</translation>
+        <translation>Måned</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation type="unfinished"></translation>
+        <translation>Gå til dags dato</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation type="unfinished"></translation>
+        <translation>Klokketslet for</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Ingen</translation>
+        <translation>Ingen</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Start</translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation type="unfinished"></translation>
+        <translation>Start-slut</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardindstillinger</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sted:</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished">Kontor</translation>
+        <translation>Kontor</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">Hjemme</translation>
+        <translation>Hjemme</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategori:</translation>
     </message>
 </context>
 <context>
@@ -347,7 +355,7 @@ Afslut alligevel?</translation>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>u</translation>
     </message>
 </context>
 <context>
@@ -358,10 +366,18 @@ Afslut alligevel?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation>MTOTFLSM</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>u</translation>
     </message>
 </context>
 <context>
@@ -377,41 +393,6 @@ Afslut alligevel?</translation>
 </context>
 <context>
     <name>DateBookWeekView</name>
-    <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation>M</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation>T</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation>O</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation>T</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation>F</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation>L</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation>S</translation>
-    </message>
     <message>
         <source>p</source>
         <translation>p</translation>
@@ -545,6 +526,13 @@ Afslut alligevel?</translation>
     <message>
         <source>Note...</source>
         <translation>Bemærkning...</translation>
+    </message>
+</context>
+<context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -707,6 +695,10 @@ og </translation>
     <message>
         <source>, and </source>
         <translation>, og </translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation>på</translation>
     </message>
 </context>
 <context>

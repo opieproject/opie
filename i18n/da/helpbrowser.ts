@@ -30,8 +30,8 @@
         <translation>Hjælpesøger</translation>
     </message>
     <message>
-        <source>HelpBrowser</source>
-        <translation>Hjælpesøger</translation>
+        <source>Go</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

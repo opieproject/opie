@@ -25,7 +25,7 @@
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancel</translation>
+        <translation>&amp;Annuleer</translation>
     </message>
 </context>
 <context>
@@ -61,7 +61,7 @@
     </message>
     <message>
         <source>Space Avail</source>
-        <translation>Ruinte Besch.</translation>
+        <translation>Beschikbare ruimte</translation>
     </message>
     <message>
         <source>Output</source>
@@ -109,6 +109,10 @@
         <source>Save output</source>
         <translation>Sla utivoer op</translation>
     </message>
+    <message>
+        <source>%1 Kb</source>
+        <translation>%1 kB</translation>
+    </message>
 </context>
 <context>
     <name>InstallOptionsDlgImpl</name>
@@ -151,6 +155,87 @@
     <message>
         <source>Troubleshooting output</source>
         <translation>Foutopsporingsuitvoer</translation>
+    </message>
+</context>
+<context>
+    <name>Ipkg</name>
+    <message>
+        <source>Dealing with package %1</source>
+        <translation>Verwerken van pakket %1</translation>
+    </message>
+    <message>
+        <source>Removing symbolic links...
+</source>
+        <translation>Verwijderen van symbolysche links...
+</translation>
+    </message>
+    <message>
+        <source>Creating symbolic links for %1.</source>
+        <translation>Maak symbolische links aan voor %1.</translation>
+    </message>
+    <message>
+        <source>Creating symbolic links for %1</source>
+        <translation>Maak symbolische links aan voor %1</translation>
+    </message>
+    <message>
+        <source>Finished</source>
+        <translation>Klaar</translation>
+    </message>
+    <message>
+        <source>Removing status entry...</source>
+        <translation>Verwijder status info...</translation>
+    </message>
+    <message>
+        <source>status file - </source>
+        <translation>statusbestand - </translation>
+    </message>
+    <message>
+        <source>package - </source>
+        <translation>pakket - </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t open status file - </source>
+        <translation>Kan statusbestand niet openen - </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t create tempory status file - </source>
+        <translation>Kan tijdelijk statusbestand niet maken - </translation>
+    </message>
+    <message>
+        <source>Couldn&apos;t start ipkg process</source>
+        <translation>Kan ipkg proces niet starten</translation>
+    </message>
+    <message>
+        <source>Could not open :</source>
+        <translation>Kan niet openen:</translation>
+    </message>
+    <message>
+        <source>Creating directory </source>
+        <translation>Maak map aan</translation>
+    </message>
+    <message>
+        <source>Linked %1 to %2</source>
+        <translation>Link gemaakt van %1 naar %2</translation>
+    </message>
+    <message>
+        <source>Failed to link %1 to %2</source>
+        <translation>Link van %1 naar %2 mislukt</translation>
+    </message>
+    <message>
+        <source>Removed %1</source>
+        <translation>Verwijderd %1</translation>
+    </message>
+    <message>
+        <source>Failed to remove %1</source>
+        <translation>%1 verwijderen mislukt</translation>
+    </message>
+    <message>
+        <source>Removed </source>
+        <translation>Verwijderd</translation>
+    </message>
+    <message>
+        <source>Failed to remove </source>
+        <translation>Verwijderen mislukt</translation>
     </message>
 </context>
 <context>
@@ -281,7 +366,7 @@
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
-        <translation>Klik hier om de Zoek balk te verbergen.</translation>
+        <translation>Klik hier om de zoekbalk te verbergen.</translation>
     </message>
     <message>
         <source>Servers:</source>
@@ -377,7 +462,7 @@ pakket %1?</translation>
     </message>
     <message>
         <source>Download to where</source>
-        <translation>Waarheen Downloaden</translation>
+        <translation>Waarheen downloaden</translation>
     </message>
     <message>
         <source>Enter path to download to</source>
@@ -385,7 +470,7 @@ pakket %1?</translation>
     </message>
     <message>
         <source>Install Remote Package</source>
-        <translation>Installeer Remote Pakket</translation>
+        <translation>Installeer pakket van server</translation>
     </message>
     <message>
         <source>Enter package location</source>
@@ -397,7 +482,7 @@ pakket %1?</translation>
     </message>
     <message>
         <source>No packages selected</source>
-        <translation>Geen paketten geselecteerd</translation>
+        <translation>Geen pakketten geselecteerd</translation>
     </message>
     <message>
         <source>OK</source>
@@ -406,12 +491,12 @@ pakket %1?</translation>
     <message>
         <source>Do you wish to remove or reinstall
 %1?</source>
-        <translation>Wilt u verwijdering of herinstalatie van
+        <translation>Wilt u verwijdering of herinstallatie van
 %1?</translation>
     </message>
     <message>
         <source>Remove or ReInstall</source>
-        <translation>Verwijdering of Herinatallatie</translation>
+        <translation>Verwijdering of Herinstallatie</translation>
     </message>
     <message>
         <source>ReInstall</source>
@@ -419,7 +504,7 @@ pakket %1?</translation>
     </message>
     <message>
         <source>R</source>
-        <translation>R</translation>
+        <translation type="obsolete">R</translation>
     </message>
     <message>
         <source>Do you wish to remove or upgrade
@@ -429,11 +514,11 @@ pakket %1?</translation>
     </message>
     <message>
         <source>Remove or Upgrade</source>
-        <translation>Verwijdering of vernieuwing</translation>
+        <translation>Verwijdering of Vernieuwing</translation>
     </message>
     <message>
         <source>U</source>
-        <translation>U</translation>
+        <translation type="obsolete">U</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>
@@ -464,11 +549,11 @@ pakket %1?</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Geinstalleerde Versie&lt;/b&gt; -</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Geinstalleerde versie&lt;/b&gt; -</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Beschikbare Versie&lt;/b&gt; -</translation>
+        <translation>&lt;p&gt;&lt;b&gt;Beschikbare versie&lt;/b&gt; -</translation>
     </message>
     <message>
         <source>Package Information</source>
@@ -481,6 +566,52 @@ pakket %1?</translation>
     <message>
         <source>Close</source>
         <translation>Sluit</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Installed packages</source>
+        <translation>Geinstalleerde pakketten</translation>
+    </message>
+    <message>
+        <source>Local packages</source>
+        <translation>Lokale pakketten</translation>
+    </message>
+    <message>
+        <source>N/A</source>
+        <translation>n/b</translation>
+    </message>
+    <message>
+        <source>Package - %1
+              version - %2</source>
+        <translation>Pakket - %1
+            versie - %2</translation>
+    </message>
+    <message>
+        <source>
+              inst version - %1</source>
+        <translation>
+            inst versie - %1</translation>
+    </message>
+    <message>
+        <source>Version string is empty.</source>
+        <translation>Versiestring is leeg.</translation>
+    </message>
+    <message>
+        <source>Epoch in version is not number.</source>
+        <translation>Tekst in versie is geen nummer.</translation>
+    </message>
+    <message>
+        <source>Nothing after colon in version number.</source>
+        <translation>Geen versienummer na de punt.</translation>
+    </message>
+</context>
+<context>
+    <name>QuestionDlg</name>
+    <message>
+        <source>Remove</source>
+        <translation>Verwijder</translation>
     </message>
 </context>
 <context>

@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Home</source>
-        <translation>Dom</translation>
+        <translation>Poczatek</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
@@ -30,8 +30,8 @@
         <translation>Pomoc</translation>
     </message>
     <message>
-        <source>HelpBrowser</source>
-        <translation>Pomoc</translation>
+        <source>Go</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

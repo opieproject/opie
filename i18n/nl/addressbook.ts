@@ -82,7 +82,7 @@ Free up some space
 and try again.
 
 Quit anyway?</source>
-        <translation>Kan niet opslaan
+        <translation>Kan niet opslaan.
 Maak ruimte en probeer het opnieuw.
 
 Toch stoppen?</translation>
@@ -146,7 +146,7 @@ Toch stoppen?</translation>
     <message>
         <source>Unable to find a contact for this 
  search pattern!</source>
-        <translation>Kan niets vinden dat voldoet
+        <translation type="obsolete">Kan niets vinden dat voldoet
  aan de zoekterm!</translation>
     </message>
     <message>
@@ -177,11 +177,15 @@ toevoegen voor %1?</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
-        <translation>Je moet een contact selecteren!</translation>
+        <translation>U moet een contact selecteren!</translation>
     </message>
     <message>
         <source>You have to set a filename !</source>
-        <translation>Je moet een bestandsnaam selecteren!</translation>
+        <translation>U moet een bestandsnaam selecteren!</translation>
+    </message>
+    <message>
+        <source>Unable to find a contact for this search pattern!</source>
+        <translation>Kan geen kontakt vinden met dit zoekpatroon!</translation>
     </message>
 </context>
 <context>
@@ -335,7 +339,7 @@ geleverd!</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
-        <translation>Volgorde (op -&gt; neer) regelt wie het eerst wordt weergegeven in de tweede kolom in de lijstweergave</translation>
+        <translation>Volgorde (op -&gt; neer) regelt wat het eerst wordt weergegeven in de tweede kolom in de lijstweergave</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
@@ -882,7 +886,7 @@ geleverd!</translation>
     </message>
     <message>
         <source>Macedonia</source>
-        <translation>Macedoni√´</translation>
+        <translation>Macedonië</translation>
     </message>
     <message>
         <source>Madagascar</source>

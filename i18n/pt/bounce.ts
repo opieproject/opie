@@ -3,7 +3,7 @@
     <name>KJezzball</name>
     <message>
         <source>Bounce</source>
-        <translation type="unfinished"></translation>
+        <translation>Bounce</translation>
     </message>
     <message>
         <source>&amp;New game</source>
@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Filled: 00%</source>
-        <translation type="unfinished"></translation>
+        <translation>Preenchido: 00%</translation>
     </message>
     <message>
         <source>Time: 00</source>
@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Bounce Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nível %1</translation>
     </message>
     <message>
         <source>Score: %1</source>
@@ -48,12 +48,14 @@
     <message>
         <source>Game paused.
 Press P to continue!</source>
-        <translation type="unfinished"></translation>
+        <translation>Jogo parado.
+Prima uma tecla para continuar!</translation>
     </message>
     <message>
         <source>Game Over!
 Score: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fim do jogo!
+Pontuação: %1</translation>
     </message>
     <message>
         <source>Time: %1</source>
@@ -65,36 +67,65 @@ Score: %1</source>
     </message>
     <message>
         <source>Filled: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Preenchido: %1%</translation>
     </message>
     <message>
         <source>Filled: 0%</source>
-        <translation type="unfinished"></translation>
+        <translation>Preenchido: 0%</translation>
     </message>
     <message>
         <source>Successfully cleared more than 75%.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Preenchido mais de 75%.
+</translation>
     </message>
     <message>
         <source>%1 points: 15 points per life
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 pontos: 15 pontos por vida
+</translation>
     </message>
     <message>
         <source>%1 points: Bonus
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 pontos: Bónus
+</translation>
     </message>
     <message>
         <source>%1 points: Total score
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 pontos: Pontuação total
+</translation>
     </message>
     <message>
         <source>On to level %1.
 You get %2 lives this time!</source>
-        <translation type="unfinished"></translation>
+        <translation>No nível %1.
+Ganhou %2 vidas desta vez!</translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation>Acerca</translation>
+    </message>
+    <message>
+        <source>Written by: Stefan Schimanski
+Ported by: Martin Imobersteg
+
+Click to form walls.
+Hit space to switch wall direction.
+Try to reduce total space by 75%.
+
+This program is distributed under
+the terms of the GPL v2.</source>
+        <translation>Escrito por: Stefan Schimanski
+Adaptado por: Martin Imobersteg
+
+Clique para formar paredes.
+Use o espaço para mudar a direção da parede.
+Tente reduzir o espaço total em 75%.
+
+Este programa é distribuido sob os termos
+da licença GPL v2.</translation>
     </message>
 </context>
 </TS>

@@ -102,6 +102,17 @@
     </message>
 </context>
 <context>
+    <name>ConfigDialog</name>
+    <message>
+        <source>Edit Connection Profile</source>
+        <translation>Editar perfil de conexión</translation>
+    </message>
+    <message>
+        <source>New Connection</source>
+        <translation>Nueva conexión</translation>
+    </message>
+</context>
+<context>
     <name>ConfigureBase</name>
     <message>
         <source>Configure</source>
@@ -469,6 +480,14 @@
         <source>History</source>
         <translation>Historial</translation>
     </message>
+    <message>
+        <source>New Profile</source>
+        <translation>Nuevo perfil</translation>
+    </message>
+    <message>
+        <source>Save Profile</source>
+        <translation>Guardar perfil</translation>
+    </message>
 </context>
 <context>
     <name>ModemConfigWidget</name>
@@ -513,6 +532,10 @@
     <message>
         <source>Local Console</source>
         <translation>Consola local</translation>
+    </message>
+    <message>
+        <source>New Profile</source>
+        <translation>Nuevo perfil</translation>
     </message>
 </context>
 <context>

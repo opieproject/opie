@@ -3,43 +3,43 @@
     <name>NotesControl</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun</translation>
     </message>
     <message>
         <source>Delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Usunac?</translation>
     </message>
     <message>
         <source>Do you really want to&lt;BR&gt;&lt;B&gt; delete&lt;/B&gt; this note ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy na pewno chcesz&lt;BR&gt;&lt;b&gt; usunac&lt;/b&gt; ta notatke?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <source>Beam Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Emituj przez IrDA</translation>
     </message>
     <message>
         <source>Search For...</source>
-        <translation type="unfinished"></translation>
+        <translation>Szukaj...</translation>
     </message>
     <message>
         <source>Toggle Maximized</source>
-        <translation type="unfinished"></translation>
+        <translation>Przelacz maksymalizacje</translation>
     </message>
 </context>
 </TS>

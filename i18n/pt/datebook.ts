@@ -95,6 +95,10 @@ Sair na mesma?</translation>
         <source>Edit...</source>
         <translation>Editar...</translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation>caixa de erro</translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -191,6 +195,10 @@ Sair na mesma?</translation>
     <message>
         <source>Duplicate</source>
         <translation>Duplicado</translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation>Irradiar esta ocorrência</translation>
     </message>
 </context>
 <context>
@@ -357,6 +365,14 @@ Sair na mesma?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation>STQQSSDS</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -377,43 +393,43 @@ Sair na mesma?</translation>
 <context>
     <name>DateBookWeekView</name>
     <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation>Se</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation>Te</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation>Qu</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation>Qu</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation>Se</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation>Sá</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation>Do</translation>
-    </message>
-    <message>
         <source>p</source>
         <translation>p</translation>
+    </message>
+    <message>
+        <source>Mo</source>
+        <comment>Monday</comment>
+        <translation type="obsolete">Se</translation>
+    </message>
+    <message>
+        <source>Tu</source>
+        <comment>Tuesday</comment>
+        <translation type="obsolete">Te</translation>
+    </message>
+    <message>
+        <source>We</source>
+        <comment>Wednesday</comment>
+        <translation type="obsolete">Qu</translation>
+    </message>
+    <message>
+        <source>Th</source>
+        <comment>Thursday</comment>
+        <translation type="obsolete">Qu</translation>
+    </message>
+    <message>
+        <source>Fr</source>
+        <comment>Friday</comment>
+        <translation type="obsolete">Se</translation>
+    </message>
+    <message>
+        <source>Sa</source>
+        <comment>Saturday</comment>
+        <translation type="obsolete">Sá</translation>
+    </message>
+    <message>
+        <source>Su</source>
+        <comment>Sunday</comment>
+        <translation type="obsolete">Do</translation>
     </message>
 </context>
 <context>
@@ -547,6 +563,13 @@ Sair na mesma?</translation>
     </message>
 </context>
 <context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation>Informação</translation>
+    </message>
+</context>
+<context>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
@@ -620,19 +643,19 @@ Sair na mesma?</translation>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>nd</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>rd</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>th</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -706,6 +729,10 @@ e</translation>
     <message>
         <source>, and </source>
         <translation>, e</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation>em</translation>
     </message>
 </context>
 <context>

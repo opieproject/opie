@@ -1,17 +1,20 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
+        <translation>&lt;h1&gt;Alarma en %1&lt;/h1&gt;&lt;br&gt;</translation>
+    </message>
+</context>
+<context>
     <name>OTaskEditor</name>
     <message>
         <source>Alarms</source>
         <translation>Alarmas</translation>
-    </message>
-    <message>
-        <source>Reminders</source>
-        <translation>Recordatorios</translation>
-    </message>
-    <message>
-        <source>X-Ref</source>
-        <translation>Ref.cruzadas</translation>
     </message>
     <message>
         <source>Information</source>
@@ -25,6 +28,10 @@
         <source>Recurrence</source>
         <translation>Repetición</translation>
     </message>
+    <message>
+        <source>Task Editor</source>
+        <translation>Editor de tarear</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -35,6 +42,18 @@
     <message>
         <source>Enter Task</source>
         <translation>Introducir Tarea</translation>
+    </message>
+    <message>
+        <source>silent</source>
+        <translation>silenciosa</translation>
+    </message>
+    <message>
+        <source>loud</source>
+        <translation>sonora</translation>
+    </message>
+    <message>
+        <source>Opie Todolist</source>
+        <translation>Tareas Opie</translation>
     </message>
 </context>
 <context>
@@ -167,7 +186,7 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>No puedo editar datos, estoy sincronizando</translation>
+        <translation type="obsolete">No puedo editar datos, estoy sincronizando</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -217,6 +236,110 @@ e inténtelo de nuevo.
         <source>Priority:</source>
         <translation>Prioridad:</translation>
     </message>
+    <message>
+        <source>Template Editor</source>
+        <translation>Editor de plantillas</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Añadir</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Editar</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Eliminar</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Nombre</translation>
+    </message>
+    <message>
+        <source>New Template %1</source>
+        <translation>Nueva plantilla %1</translation>
+    </message>
+    <message>
+        <source>Click here to set the priority of new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>Pulse aquí para fijar la prioridad de la nueva tarea.
+
+Esta área se llama barra rápida de tareas.
+
+Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mostrarse o esconderse en las Opciones del menú.</translation>
+    </message>
+    <message>
+        <source>Enter description of new task here.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>Introduzca aquí la descripción de la nueva tarea.
+
+Esta área se llama barra rápida de tareas.
+
+Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mostrarse o esconderse en las Opciones del menú.</translation>
+    </message>
+    <message>
+        <source>More</source>
+        <translation>Más</translation>
+    </message>
+    <message>
+        <source>Click here to enter additional information for new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>Pulse aquí para introducir información adicional en una nueva tarea.
+
+Esta área se llama barra rápida de tareas.
+
+Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mostrarse o esconderse en las Opciones del menú.</translation>
+    </message>
+    <message>
+        <source>Enter</source>
+        <translation>Introducir</translation>
+    </message>
+    <message>
+        <source>Click here to add new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>Pulse aquí para añadir una nueva tarea.
+
+Esta área se llama barra rápida de tareas.
+
+Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mostrarse o esconderse en las Opciones del menú.</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancelar</translation>
+    </message>
+    <message>
+        <source>Click here to reset new task information.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>Pulse aquí para reiniciar la información de una nueva tarea.
+
+Esta área se llama barra rápida de tareas.
+
+Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mostrarse o esconderse en las Opciones del menú.</translation>
+    </message>
+    <message>
+        <source>Data can not be edited, currently syncing</source>
+        <translation>Los datos no pueden ser editados, estoy sincronizando</translation>
+    </message>
+    <message>
+        <source>Data can&apos;t be edited, currently syncing</source>
+        <translation>Los datos no pueden ser editados, estoy sincronizando</translation>
+    </message>
 </context>
 <context>
     <name>TableView</name>
@@ -246,6 +369,18 @@ e inténtelo de nuevo.
     <message>
         <source>Delete</source>
         <translation>Borrar</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Fecha</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Hora</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Tipo</translation>
     </message>
 </context>
 <context>
@@ -340,7 +475,7 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notas:</translation>
+        <translation type="obsolete">Notas:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
@@ -349,6 +484,10 @@ e inténtelo de nuevo.
     <message>
         <source>Todo List</source>
         <translation>Lista de Tareas</translation>
+    </message>
+    <message>
+        <source>Summary:</source>
+        <translation>Sumario:</translation>
     </message>
 </context>
 <context>
@@ -476,111 +615,6 @@ e inténtelo de nuevo.
     <message>
         <source>Click here to select the task maintainer.</source>
         <translation>Pulse aquí para seleccionar mantenedor de la tarea.</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateDialog</name>
-    <message>
-        <source>Template Editor</source>
-        <translation>Editor de plantillas</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Añadir</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Editar</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Eliminar</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateDialogImpl</name>
-    <message>
-        <source>Name</source>
-        <translation>Nombre</translation>
-    </message>
-    <message>
-        <source>New Template %1</source>
-        <translation>Nueva plantilla %1</translation>
-    </message>
-</context>
-<context>
-    <name>Todo</name>
-    <message>
-        <source>More</source>
-        <translation>Más</translation>
-    </message>
-    <message>
-        <source>Enter</source>
-        <translation>Introducir</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Cancelar</translation>
-    </message>
-    <message>
-        <source>Click here to set the priority of new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Pulse aquí para fijar la prioridad de la nueva tarea.
-
-Esta área se llama barra rápida de tareas.
-
-Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mostrarse o esconderse en las Opciones del menú.</translation>
-    </message>
-    <message>
-        <source>Enter description of new task here.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Introduzca aquí la descripción de la nueva tarea.
-
-Esta área se llama barra rápida de tareas.
-
-Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mostrarse o esconderse en las Opciones del menú.</translation>
-    </message>
-    <message>
-        <source>Click here to enter additional information for new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Pulse aquí para introducir información adicional en una nueva tarea.
-
-Esta área se llama barra rápida de tareas.
-
-Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mostrarse o esconderse en las Opciones del menú.</translation>
-    </message>
-    <message>
-        <source>Click here to add new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Pulse aquí para añadir una nueva tarea.
-
-Esta área se llama barra rápida de tareas.
-
-Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mostrarse o esconderse en las Opciones del menú.</translation>
-    </message>
-    <message>
-        <source>Click here to reset new task information.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Pulse aquí para reiniciar la información de una nueva tarea.
-
-Esta área se llama barra rápida de tareas.
-
-Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mostrarse o esconderse en las Opciones del menú.</translation>
     </message>
 </context>
 </TS>

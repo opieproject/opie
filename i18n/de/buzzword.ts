@@ -1,5 +1,4 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>BuzzWord</name>
     <message>
@@ -16,7 +15,7 @@
     </message>
     <message>
         <source>&lt;h1&gt;&lt;b&gt;BINGO !&lt;/b&gt;&lt;/h1&gt;</source>
-        <translation>&lt;h1&gt;&lt;b&gt;BINGO!&lt;/b&gt;&lt;/h1&gt;</translation>
+        <translation>&lt;h1&gt;&lt;b&gt;BINGO !&lt;/b&gt;&lt;/h1&gt;</translation>
     </message>
 </context>
 </TS>

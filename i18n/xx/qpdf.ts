@@ -95,6 +95,10 @@
     </message>
     <message>
         <source>File does not exist !</source>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>File does not exist!</source>
         <translation>FOO</translation>
     </message>
 </context>

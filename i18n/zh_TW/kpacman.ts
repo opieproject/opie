@@ -93,14 +93,8 @@ KDE 桌面環境的小精靈遊戲
         <translation>說明(&amp;H)</translation>
     </message>
     <message>
-        <source>Configuration Error</source>
-        <translation>組態錯誤</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation>沒有定義主題,
-或尚未選擇主題.</translation>
+        <source>KPacman</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -227,7 +221,7 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source>                          </source>
-        <translation>                          </translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

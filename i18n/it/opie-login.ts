@@ -67,7 +67,7 @@ con fermezza per tarare lo schermo.</translation>
 by an uncaught signal
 (%1)
 </source>
-        <translation>OPIE è stato terminato
+        <translation type="obsolete">OPIE è stato terminato
 da un segnale
 (%1)
 </translation>
@@ -78,11 +78,24 @@ da un segnale
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation>Impossibile inizializzare OPIE.</translation>
+        <translation type="obsolete">Impossibile inizializzare OPIE.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
         <translation>Impossibile cambiare utente</translation>
+    </message>
+    <message>
+        <source>Opie was terminated
+by an uncaught signal
+(%1)
+</source>
+        <translation>Opie è stato terminato
+da un segnale
+(%1)</translation>
+    </message>
+    <message>
+        <source>Could not start Opie.</source>
+        <translation>Impossibile inizializzare Opie.</translation>
     </message>
 </context>
 </TS>

@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Album</source>
-        <translation>Àlbum</translation>
+        <translation>Álbum</translation>
     </message>
     <message>
         <source>Year</source>

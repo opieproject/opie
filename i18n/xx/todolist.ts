@@ -1,16 +1,23 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <source>Ok</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
+        <translation>FOO</translation>
+    </message>
+</context>
+<context>
     <name>OTaskEditor</name>
     <message>
         <source>Alarms</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Reminders</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>X-Ref</source>
         <translation>FOO</translation>
     </message>
     <message>
@@ -25,6 +32,10 @@
         <source>Recurrence</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Task Editor</source>
+        <translation>FOO</translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -34,6 +45,18 @@
     </message>
     <message>
         <source>Edit Task</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>silent</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>loud</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Opie Todolist</source>
         <translation>FOO</translation>
     </message>
 </context>
@@ -156,7 +179,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -206,6 +229,90 @@ Quit Anyway?</source>
         <source>Priority:</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Template Editor</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>New Template %1</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Click here to set the priority of new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Enter description of new task here.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>More</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Click here to enter additional information for new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Enter</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Click here to add new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Click here to reset new task information.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Data can not be edited, currently syncing</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Data can&apos;t be edited, currently syncing</source>
+        <translation>FOO</translation>
+    </message>
 </context>
 <context>
     <name>TableView</name>
@@ -234,6 +341,18 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Delete</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Type</source>
         <translation>FOO</translation>
     </message>
 </context>
@@ -329,7 +448,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Notes:</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
@@ -337,6 +456,10 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Todo List</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Summary:</source>
         <translation>FOO</translation>
     </message>
 </context>
@@ -464,91 +587,6 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Click here to select the task maintainer.</source>
-        <translation>FOO</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateDialog</name>
-    <message>
-        <source>Template Editor</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>FOO</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateDialogImpl</name>
-    <message>
-        <source>Name</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>New Template %1</source>
-        <translation>FOO</translation>
-    </message>
-</context>
-<context>
-    <name>Todo</name>
-    <message>
-        <source>More</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Enter</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Click here to set the priority of new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Enter description of new task here.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Click here to enter additional information for new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Click here to add new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Click here to reset new task information.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
         <translation>FOO</translation>
     </message>
 </context>

@@ -1,9 +1,10 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>QPdfDlg</name>
     <message>
         <source>QPdf</source>
-        <translation>QPdf</translation>
+        <translation>Lettore PDF</translation>
     </message>
     <message>
         <source>Zoom</source>
@@ -95,7 +96,11 @@
     </message>
     <message>
         <source>File does not exist !</source>
-        <translation>Il file è inesistente!</translation>
+        <translation type="obsolete">Il file è inesistente!</translation>
+    </message>
+    <message>
+        <source>File does not exist!</source>
+        <translation>Il file non esiste!</translation>
     </message>
 </context>
 </TS>

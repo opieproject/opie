@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AppMonitor</name>
     <message>
@@ -66,20 +67,13 @@ Cambiarla subito.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Informazione</translation>
+        <translation>Informazioni</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
         <translation>&lt;p&gt;La data di sistema non sembra essere corretta.
 (%1)&lt;/p&gt;&lt;p&gt;Vuoi reimpostare l&apos;orologio ?&lt;/p&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>DesktopPowerAlerter</name>
-    <message>
-        <source>Battery Status</source>
-        <translation>Stato Batteria</translation>
     </message>
 </context>
 <context>
@@ -102,11 +96,11 @@ Cambiarla subito.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricerca documenti</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricerca documenti</translation>
     </message>
 </context>
 <context>
@@ -177,6 +171,13 @@ Cambiarla subito.</translation>
     <message>
         <source>Do not ask again for this medium</source>
         <translation>Non chiedere nuovamente per questo supporto</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation>Stato Batteria</translation>
     </message>
 </context>
 <context>

@@ -14,10 +14,6 @@
 <context>
     <name>LanguageSettingsBase</name>
     <message>
-        <source>Language</source>
-        <translation type="obsolete">Lingua</translation>
-    </message>
-    <message>
         <source>Select language</source>
         <translation>Seleziona lingua</translation>
     </message>

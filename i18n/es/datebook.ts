@@ -94,6 +94,10 @@ Libere espacio y vuelva a intentarlo.
         <source>Edit...</source>
         <translation>Editar...</translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation>diálogo de error</translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -190,6 +194,10 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>Duplicate</source>
         <translation>Duplicar</translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation>Emitir esta aparición</translation>
     </message>
 </context>
 <context>
@@ -356,6 +364,14 @@ Libere espacio y vuelva a intentarlo.
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation>LMXJVSDL</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -376,43 +392,43 @@ Libere espacio y vuelva a intentarlo.
 <context>
     <name>DateBookWeekView</name>
     <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation>L</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation>M</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation>M</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation>J</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation>V</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation>S</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation>D</translation>
-    </message>
-    <message>
         <source>p</source>
         <translation>p</translation>
+    </message>
+    <message>
+        <source>Mo</source>
+        <comment>Monday</comment>
+        <translation type="obsolete">Lu</translation>
+    </message>
+    <message>
+        <source>Tu</source>
+        <comment>Tuesday</comment>
+        <translation type="obsolete">Ma</translation>
+    </message>
+    <message>
+        <source>We</source>
+        <comment>Wednesday</comment>
+        <translation type="obsolete">Mi</translation>
+    </message>
+    <message>
+        <source>Th</source>
+        <comment>Thursday</comment>
+        <translation type="obsolete">Ju</translation>
+    </message>
+    <message>
+        <source>Fr</source>
+        <comment>Friday</comment>
+        <translation type="obsolete">Vi</translation>
+    </message>
+    <message>
+        <source>Sa</source>
+        <comment>Saturday</comment>
+        <translation type="obsolete">Sa</translation>
+    </message>
+    <message>
+        <source>Su</source>
+        <comment>Sunday</comment>
+        <translation type="obsolete">Do</translation>
     </message>
 </context>
 <context>
@@ -543,6 +559,13 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>Note...</source>
         <translation>Nota...</translation>
+    </message>
+</context>
+<context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -705,6 +728,10 @@ y </translation>
     <message>
         <source>, and </source>
         <translation>, y </translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation>en </translation>
     </message>
 </context>
 <context>

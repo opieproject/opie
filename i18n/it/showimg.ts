@@ -33,16 +33,8 @@
         <translation>Mostra Miniature</translation>
     </message>
     <message>
-        <source>Slideshow</source>
-        <translation>Slideshow</translation>
-    </message>
-    <message>
         <source>Preferences..</source>
         <translation>Impostazioni..</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation>Aiuto</translation>
     </message>
     <message>
         <source>Image Info ...</source>
@@ -119,6 +111,49 @@
     <message>
         <source>8-bit alpha channel</source>
         <translation>8-bit alpha channel</translation>
+    </message>
+    <message>
+        <source>Slide show</source>
+        <translation>Slide show</translation>
+    </message>
+    <message>
+        <source>Stop Slideshow</source>
+        <translation>Fine Slideshow</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsDialogBase</name>
+    <message>
+        <source>Preferences</source>
+        <translation>Impostazioni</translation>
+    </message>
+    <message>
+        <source>Slide Show</source>
+        <translation>Slide Show</translation>
+    </message>
+    <message>
+        <source>Delay between pictures</source>
+        <translation>Ritardo tra le immagini</translation>
+    </message>
+    <message>
+        <source>s</source>
+        <translation>s</translation>
+    </message>
+    <message>
+        <source>Repeat slideshow</source>
+        <translation>Ripeti slideshow</translation>
+    </message>
+    <message>
+        <source>Show pictures in reverse</source>
+        <translation>Mostra immagini in negativo</translation>
+    </message>
+    <message>
+        <source>Load pictures rotated 90 degrees</source>
+        <translation>Carica immagini ruotate a 90 gradi</translation>
+    </message>
+    <message>
+        <source>Fast load pictures</source>
+        <translation>Caricamento veloce immagini</translation>
     </message>
 </context>
 </TS>

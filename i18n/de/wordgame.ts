@@ -3,7 +3,7 @@
     <name>Board</name>
     <message>
         <source>Blanks: </source>
-        <translation>Leerzeichen:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
@@ -38,7 +38,7 @@
     </message>
     <message>
         <source>AI3: Smart AI player</source>
-        <translation>KI3: Kluger KI-Spieler</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rules</source>
@@ -69,7 +69,7 @@
     </message>
     <message>
         <source>Edit...</source>
-        <translation>Bearbeiten...</translation>
+        <translation>Editieren...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -99,27 +99,27 @@
     <name>WordGame</name>
     <message>
         <source>Word Game</source>
-        <translation>Wortspiel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Back</source>
-        <translation>Zurück</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>Fertig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>End game</source>
-        <translation>Spiel beenden</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you want to end the game early?</source>
-        <translation>Möchten Sie das Spiel vorzeitig beenden?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Yes</source>

@@ -3,7 +3,7 @@
     <name>QPdfDlg</name>
     <message>
         <source>QPdf</source>
-        <translation>QPdf</translation>
+        <translation>PDF Viser</translation>
     </message>
     <message>
         <source>Zoom</source>
@@ -95,6 +95,10 @@
     </message>
     <message>
         <source>File does not exist !</source>
+        <translation type="obsolete">Filen eksisterer ikke!</translation>
+    </message>
+    <message>
+        <source>File does not exist!</source>
         <translation>Filen eksisterer ikke!</translation>
     </message>
 </context>

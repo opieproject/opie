@@ -3,23 +3,23 @@
     <name>CanvasCardWindow</name>
     <message>
         <source>Patience</source>
-        <translation>Kabale</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Freecell</source>
-        <translation>Freecell</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chicane</source>
-        <translation>Chicane</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Harp</source>
-        <translation>Harp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Teeclub</source>
-        <translation>Teeclub</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Game</source>
@@ -27,11 +27,11 @@
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation>S&amp;kifte kort-bagside</translation>
+        <translation type="obsolete">S&amp;kifte kort-bagside</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation>&amp;Grib kort</translation>
+        <translation type="obsolete">&amp;Grib kort</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -51,15 +51,15 @@
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation>Skift kort-bagside</translation>
+        <translation type="obsolete">Skift kort-bagside</translation>
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation>Grib kort</translation>
+        <translation type="obsolete">Grib kort</translation>
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation>Vend ét kort</translation>
+        <translation type="obsolete">Vend ét kort</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -67,6 +67,30 @@
     </message>
     <message>
         <source>Turn Three Cards</source>
+        <translation type="obsolete">Vend tre kort</translation>
+    </message>
+    <message>
+        <source>&amp;Change card backs</source>
+        <translation>S&amp;kifte kort-bagside</translation>
+    </message>
+    <message>
+        <source>&amp;Snap to position</source>
+        <translation>&amp;Grib kort</translation>
+    </message>
+    <message>
+        <source>Change card backs</source>
+        <translation>Skifte kort-bagside</translation>
+    </message>
+    <message>
+        <source>Snap to position</source>
+        <translation>Grib kort</translation>
+    </message>
+    <message>
+        <source>Turn one card</source>
+        <translation>Vend ét kort</translation>
+    </message>
+    <message>
+        <source>Turn three cards</source>
         <translation>Vend tre kort</translation>
     </message>
 </context>

@@ -1,5 +1,4 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Categories</name>
     <message>
@@ -140,14 +139,14 @@ die Kategorien.</translation>
     </message>
     <message>
         <source>Show December in the selected year</source>
-        <translation>Dezember des ausgewälten Jahres anzeigen</translation>
+        <translation>Dezember des ausgewählten Jahres anzeigen</translation>
     </message>
 </context>
 <context>
     <name>FileSelector</name>
     <message>
         <source>Close the File Selector</source>
-        <translation>Filedialog schliessen</translation>
+        <translation>Dateidialog schließen</translation>
     </message>
     <message>
         <source>Show documents of this type</source>
@@ -317,7 +316,7 @@ die Kategorien.</translation>
     </message>
     <message>
         <source>The name of this document.</source>
-        <translation>Der Dokumentenname</translation>
+        <translation>Der Dokumentname</translation>
     </message>
     <message>
         <source>Preload this application so that it is available instantly.</source>
@@ -391,11 +390,22 @@ die Kategorien.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Enter passcode</source>
         <translation>Passwort eingeben</translation>
+    </message>
+</context>
+<context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Yes</source>
+        <translation>Ja</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation>Nein</translation>
     </message>
 </context>
 <context>
@@ -471,7 +481,7 @@ frei und versuchen Sie es noch einmal
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>Wollen Sie %1 wirklich entfernen ?</translation>
+        <translation type="obsolete">Wollen Sie %1 wirklich entfernen ?</translation>
     </message>
     <message>
         <source>All</source>
@@ -643,7 +653,7 @@ frei und versuchen Sie es noch einmal
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Strasse gesch.</translation>
+        <translation>Straße gesch.</translation>
     </message>
     <message>
         <source>Business City</source>
@@ -773,38 +783,17 @@ frei und versuchen Sie es noch einmal
         <source>Sun</source>
         <translation>Son</translation>
     </message>
-</context>
-<context>
-    <name>QPEApplication</name>
-    <message>
-        <source>%1 document</source>
-        <translation>%1 Dokument</translation>
-    </message>
-</context>
-<context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>&lt;Qt&gt;Keine allgemeine Hilfe vorhanden- bitte benutzen Sie die kontextsensitve Hilfe:&lt;p&gt;Um kontextsensitive Hilfe zu verwenden: &lt;p&gt;&lt;ol&gt;&lt;li&gt;Klicken und halten Sie den Stift auf dem Hilfebutton.&lt;li&gt;Wenn die Titelzeile &lt;b&gt;What&apos;s this...&lt;/b&gt; anzeigt können Sie auf ein beliebiges Objekt klicken um die zugehörige Hilfe zu erhalten.&lt;/ol&gt;&lt;/Qt&gt;</translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation>Was ist das...</translation>
-    </message>
-</context>
-<context>
-    <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation>Klicken Sie hier, um das Fenster zu schliessen und alle Änderungen zu verwerfen.</translation>
+        <translation>Klicken Sie hier, um das Fenster zu schließen und alle Änderungen zu verwerfen.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation>Klicken Sie hier, um das Fenster zu schliessen.</translation>
+        <translation>Klicken Sie hier, um das Fenster zu schließen.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation>Klicken Sie hier, um das Fenster zu schliessen und alle Änderungen zu akzeptieren.</translation>
+        <translation>Klicken Sie hier, um das Fenster zu schließen und alle Änderungen zu akzeptieren.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
@@ -813,6 +802,74 @@ frei und versuchen Sie es noch einmal
     <message>
         <source>Click to make this window use all available screen area.</source>
         <translation>Klicken sie hier, um das Fenster zu maximieren.</translation>
+    </message>
+    <message>
+        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
+        <translation>&lt;Qt&gt;Keine allgemeine Hilfe vorhanden- bitte benutzen Sie die kontextsensitve Hilfe:&lt;p&gt;Um kontextsensitive Hilfe zu verwenden: &lt;p&gt;&lt;ol&gt;&lt;li&gt;Klicken und halten Sie den Stift auf dem Hilfeknopf.&lt;li&gt;Wenn die Titelzeile &lt;b&gt;What&apos;s this...&lt;/b&gt; anzeigt können Sie auf ein beliebiges Objekt klicken um die zugehörige Hilfe zu erhalten.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+    </message>
+    <message>
+        <source>What&apos;s this...</source>
+        <translation>Was ist das...</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete
+ %1?&lt;/qt&gt;</source>
+        <translation>&lt;qt&gt;Sind Sie sicher, dass die %1 löschen wollen?&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>Jan</source>
+        <translation>Jan</translation>
+    </message>
+    <message>
+        <source>Feb</source>
+        <translation>Feb</translation>
+    </message>
+    <message>
+        <source>Mar</source>
+        <translation>Mär</translation>
+    </message>
+    <message>
+        <source>Apr</source>
+        <translation>Apr</translation>
+    </message>
+    <message>
+        <source>May</source>
+        <translation>Mai</translation>
+    </message>
+    <message>
+        <source>Jun</source>
+        <translation>Jun</translation>
+    </message>
+    <message>
+        <source>Jul</source>
+        <translation>Jul</translation>
+    </message>
+    <message>
+        <source>Aug</source>
+        <translation>Aug</translation>
+    </message>
+    <message>
+        <source>Sep</source>
+        <translation>Sep</translation>
+    </message>
+    <message>
+        <source>Oct</source>
+        <translation>Okt</translation>
+    </message>
+    <message>
+        <source>Nov</source>
+        <translation>Nov</translation>
+    </message>
+    <message>
+        <source>Dec</source>
+        <translation>Dez</translation>
+    </message>
+</context>
+<context>
+    <name>QPEApplication</name>
+    <message>
+        <source>%1 document</source>
+        <translation>%1 Dokument</translation>
     </message>
 </context>
 <context>

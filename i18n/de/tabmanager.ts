@@ -1,5 +1,4 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AppEdit</name>
     <message>
@@ -16,67 +15,66 @@
     </message>
     <message>
         <source>Exec:</source>
-        <translation>Ausführen:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Kommentar:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TabManager</name>
     <message>
         <source>Message</source>
-        <translation>Nachricht</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Can&apos;t remove with applications
 still in the group.</source>
-        <translation>Die Gruppe kann nicht entfernt werden,
-solange sie Programme enthält.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Are you sure you want to delete?</source>
-        <translation>Wirklich löschen?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ja</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Can&apos;t remove.</source>
-        <translation>Löschen nicht erfolgreich.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation>Tab</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation>Suche Icons...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Application</source>
-        <translation>Programm</translation>
+        <translation type="unfinished">Programm</translation>
     </message>
 </context>
 <context>
     <name>TabManagerBase</name>
     <message>
         <source>Tab Manager</source>
-        <translation>Tab Manager</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hierarchy</source>
-        <translation>Hierarchie</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -96,6 +96,10 @@ Izhod?</translation>
         <source>Edit...</source>
         <translation>Uredi...</translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -192,6 +196,10 @@ Izhod?</translation>
     <message>
         <source>Duplicate</source>
         <translation>Podvoji</translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -358,6 +366,14 @@ Izhod?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -380,37 +396,37 @@ Izhod?</translation>
     <message>
         <source>M</source>
         <comment>Monday</comment>
-        <translation>P</translation>
+        <translation type="obsolete">P</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Tuesday</comment>
-        <translation>T</translation>
+        <translation type="obsolete">T</translation>
     </message>
     <message>
         <source>W</source>
         <comment>Wednesday</comment>
-        <translation>S</translation>
+        <translation type="obsolete">S</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Thursday</comment>
-        <translation>Č</translation>
+        <translation type="obsolete">Č</translation>
     </message>
     <message>
         <source>F</source>
         <comment>Friday</comment>
-        <translation>P</translation>
+        <translation type="obsolete">P</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Saturday</comment>
-        <translation>S</translation>
+        <translation type="obsolete">S</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Sunday</comment>
-        <translation>N</translation>
+        <translation type="obsolete">N</translation>
     </message>
     <message>
         <source>p</source>
@@ -545,6 +561,13 @@ Izhod?</translation>
     <message>
         <source>Note...</source>
         <translation>Opombe...</translation>
+    </message>
+</context>
+<context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -707,6 +730,10 @@ in</translation>
     <message>
         <source>, and </source>
         <translation>, in</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

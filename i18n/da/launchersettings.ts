@@ -3,7 +3,7 @@
     <name>LauncherSettings</name>
     <message>
         <source>Launcher Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Launcher indstillinger</translation>
     </message>
     <message>
         <source>Taskbar</source>
@@ -38,7 +38,7 @@
     </message>
 </context>
 <context>
-    <name>SampleView</name>
+    <name>QObject</name>
     <message>
         <source>Sample 1</source>
         <translation type="unfinished"></translation>

@@ -3,508 +3,554 @@
     <name>IRCChannelTab</name>
     <message>
         <source>Talking on channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Spreek op kanaal</translation>
     </message>
     <message>
         <source>Channel discussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanaaldiscussie</translation>
     </message>
     <message>
         <source>Type your message here to participate in the channel discussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Type hier je bericht om aan de discussie in het kanaal deel te nemen</translation>
     </message>
     <message>
         <source>CTCP</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP</translation>
     </message>
     <message>
         <source>Query</source>
-        <translation type="unfinished"></translation>
+        <translation>Query</translation>
     </message>
     <message>
         <source>Ping</source>
-        <translation type="unfinished"></translation>
+        <translation>Ping</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versie</translation>
     </message>
     <message>
         <source>Whois</source>
-        <translation type="unfinished"></translation>
+        <translation>Whois</translation>
     </message>
     <message>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding verbroken</translation>
     </message>
 </context>
 <context>
     <name>IRCConnection</name>
     <message>
         <source>Connected, logging in ..</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbonden, log nu in...</translation>
     </message>
     <message>
         <source>Successfully logged in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Succcesvol ingelogd.</translation>
     </message>
     <message>
         <source>Socket error : </source>
-        <translation type="unfinished"></translation>
+        <translation>Socket error:</translation>
     </message>
     <message>
         <source>Connection closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding verbroken</translation>
     </message>
 </context>
 <context>
     <name>IRCMessageParser</name>
     <message>
         <source>Received unhandled numeric command : </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Ongebruikt nummeriek commando ontvangen:</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command : </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Ongebruikt ctcp commando ontvangen:</translation>
     </message>
     <message>
         <source>Received unhandled literal command : </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Ongebruikt tekstueel commando ontvangen:</translation>
     </message>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Niet bestaand kanaal openen - synchronisatie verloren?</translation>
     </message>
     <message>
         <source> joined channel </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">opent kanaal</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Persoon heeft kanaal al geopend - synchronisatie verloren?</translation>
     </message>
     <message>
         <source>You already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>U heeft het knaal al geopend - synchronisatie verloren?</translation>
     </message>
     <message>
         <source>You left channel </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">U verliet het kanaal</translation>
     </message>
     <message>
         <source> left channel </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">verliet kanaal</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertrekken persoon niet gevonden - synchronisatie verloren?</translation>
     </message>
     <message>
         <source>Channel for part not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Te verlaten kanaal niet gevonden - synchronisatie verloren?</translation>
     </message>
     <message>
         <source>Channel message with unknown sender</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanaalbericht van onbekende afzender</translation>
     </message>
     <message>
         <source>Channel message with unknown channel </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Kanaalbericht voor onbekend kanaal</translation>
     </message>
     <message>
         <source>Received PRIVMSG of unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekende PRIVMSG ontvangen</translation>
     </message>
     <message>
         <source>You are now known as </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">U staat nu bekend als</translation>
     </message>
     <message>
         <source> is now known as </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">staat nu bekend als</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijnaamverandering van een onbekend persoon</translation>
     </message>
     <message>
         <source> has quit </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">is gestopt</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekend persoon is gestopt - synchronisatie verloren?</translation>
     </message>
     <message>
         <source> changed topic to </source>
-        <translation type="unfinished"></translation>
+        <translation>veranderde onderwerp in</translation>
     </message>
     <message>
         <source>Unknown channel topic - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekend kanaalonderwerp - synchronisatie verloren?</translation>
     </message>
     <message>
         <source>Received a CTCP PING from </source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP PING ontvangen van</translation>
     </message>
     <message>
         <source>Received a CTCP VERSION from </source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP VERSION ontvangen van</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION met onbekend persoon - synchronisatie verloren?</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION met onbekend kanaal - synchronisatie verloren?</translation>
     </message>
     <message>
         <source>CTCP ACTION with bad recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION met slechte ontvanger</translation>
     </message>
     <message>
         <source>Mode change has unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Modus is van onbekend type</translation>
     </message>
     <message>
         <source>Mode change with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Modusverandering met onbekend persoon - synchronisatie verloren?</translation>
     </message>
     <message>
         <source>Mode change with unknown flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Modusverandering met onbekende vlag</translation>
     </message>
     <message>
         <source>Mode change with unknown kannel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Modusverandering met onbekend kanaal - synchronisatie verloren?</translation>
     </message>
     <message>
         <source>User modes not supported yet</source>
-        <translation type="unfinished"></translation>
+        <translation>User modes worden nog niet ondersteund</translation>
     </message>
     <message>
         <source>You were kicked from </source>
-        <translation type="unfinished"></translation>
+        <translation>U werd ge-kick-t van</translation>
     </message>
     <message>
         <source> by </source>
-        <translation type="unfinished"></translation>
+        <translation>door</translation>
     </message>
     <message>
         <source> was kicked from </source>
-        <translation type="unfinished"></translation>
+        <translation>is ge-kick-t van</translation>
     </message>
     <message>
         <source>Unknown person kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekend persoon is ge-kick-t - synchronisatie verloren?</translation>
     </message>
     <message>
         <source>Unknown channel kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Onbekende kick op kanaal - synchronisatie verloren?</translation>
     </message>
     <message>
         <source>Server message with unknown channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Serverbericht voor onbekend kanaal</translation>
     </message>
     <message>
         <source>You joined channel </source>
-        <translation type="unfinished"></translation>
+        <translation>U opent kanaal</translation>
     </message>
     <message>
         <source>Nickname is in use, please reconnect with a different nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijnaam is in gebruik, sluit opnieuw aan met een andere bijnaam</translation>
     </message>
     <message>
         <source>No such nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijnaam niet bekend</translation>
+    </message>
+    <message>
+        <source>Received unhandled numeric command: %1</source>
+        <translation>Ongebruikt nummeriek commando ontvangen: %1</translation>
+    </message>
+    <message>
+        <source>Received unhandled ctcp command: %1</source>
+        <translation>Ongebruikt CTCP commando ontvangen: %1</translation>
+    </message>
+    <message>
+        <source>Received unhandled literal command: %1</source>
+        <translation>Ongebruikt Tekstueel commando ontvangen: %1</translation>
+    </message>
+    <message>
+        <source>%1 joined channel %2</source>
+        <translation>%1 opent kanaal %2</translation>
+    </message>
+    <message>
+        <source>You left channel %1</source>
+        <translation>U verlaat kanaal %1</translation>
+    </message>
+    <message>
+        <source>%1 left channel %2</source>
+        <translation>%1 verlaat kanaal %2</translation>
+    </message>
+    <message>
+        <source>Channel message with unknown channel %1</source>
+        <translation>Kanaalbericht voor onbekend kanaal %1</translation>
+    </message>
+    <message>
+        <source>You are now known as %1</source>
+        <translation>U staat nu bekend als %1</translation>
+    </message>
+    <message>
+        <source>%1 is now known as %2</source>
+        <translation>%1 staat nu bekend als %2</translation>
+    </message>
+    <message>
+        <source>%1 has quit (%2)</source>
+        <translation>%1 is weggegaan (%2)</translation>
     </message>
 </context>
 <context>
     <name>IRCQueryTab</name>
     <message>
         <source>Talking to </source>
-        <translation type="unfinished"></translation>
+        <translation>Spreek met</translation>
     </message>
     <message>
         <source>Private discussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Privegesprek</translation>
     </message>
     <message>
         <source>Type your text here in order to send a message to the other person</source>
-        <translation type="unfinished"></translation>
+        <translation>Type je tekst hier om een bericht aan de andere persoon te zenden</translation>
     </message>
     <message>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding verbroken</translation>
     </message>
 </context>
 <context>
     <name>IRCServerEditor</name>
     <message>
         <source>Profile name :</source>
-        <translation type="unfinished"></translation>
+        <translation>Profielnaam:</translation>
     </message>
     <message>
         <source>The name of this server profile in the overview</source>
-        <translation type="unfinished"></translation>
+        <translation>De naam van dit serverprofiel in het overzicht</translation>
     </message>
     <message>
         <source>Hostname :</source>
-        <translation type="unfinished"></translation>
+        <translation>Hostnaam:</translation>
     </message>
     <message>
         <source>The server to connect to - can be any valid host name or IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>De server om mee te verbinden - kan iedere geldige hostnaam of IP adres zijn</translation>
     </message>
     <message>
         <source>Port :</source>
-        <translation type="unfinished"></translation>
+        <translation>Poort:</translation>
     </message>
     <message>
         <source>The server port to connect to. Usually 6667</source>
-        <translation type="unfinished"></translation>
+        <translation>De serverpoort om mee te verbinden. Gewoonlijk 6667</translation>
     </message>
     <message>
         <source>Nickname :</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijnaam:</translation>
     </message>
     <message>
         <source>Your nick name on the IRC network</source>
-        <translation type="unfinished"></translation>
+        <translation>Je naam op het IRC netwerk</translation>
     </message>
     <message>
         <source>Realname :</source>
-        <translation type="unfinished"></translation>
+        <translation>Echte naam:</translation>
     </message>
     <message>
         <source>Your real name</source>
-        <translation type="unfinished"></translation>
+        <translation>Uw echte naam</translation>
     </message>
     <message>
         <source>Password :</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord:</translation>
     </message>
     <message>
         <source>Password to connect to the server (if required)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wachtwoord om met de server te verbinden (indien nodig)</translation>
     </message>
     <message>
         <source>Channels :</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanalen:</translation>
     </message>
     <message>
         <source>Comma-Separated list of all channels you would like to join automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Komma-gescheiden (CSV) lijst van kanalen die je je automatisch wilt aansluiten</translation>
     </message>
     <message>
         <source>Edit server information</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig serverinformatie</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>Profile name required</source>
-        <translation type="unfinished"></translation>
+        <translation>Profielnaam vereist</translation>
     </message>
     <message>
         <source>Host name required</source>
-        <translation type="unfinished"></translation>
+        <translation>Hostnaam vereist</translation>
     </message>
     <message>
         <source>Port required</source>
-        <translation type="unfinished"></translation>
+        <translation>Poort vereist</translation>
     </message>
     <message>
         <source>Nickname required</source>
-        <translation type="unfinished"></translation>
+        <translation>Bijnaam vereist</translation>
     </message>
     <message>
         <source>Realname required</source>
-        <translation type="unfinished"></translation>
+        <translation>Echte naam vereist</translation>
     </message>
     <message>
         <source>The channel list needs to contain a
 comma separated list of channel
  names which start with either &apos;#&apos; or &apos;+&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>De kanaallijst moet een komma
+gescheiden lijst met kanaalnamen
+bevatten die beginnen met &apos;#&apos; of &apos;+&apos;</translation>
     </message>
 </context>
 <context>
     <name>IRCServerList</name>
     <message>
         <source>Serverlist Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Serverlijst browser</translation>
     </message>
     <message>
         <source>Please choose a server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Kies een serverprofiel</translation>
     </message>
     <message>
         <source>Select a server profile from this list and then tap on OK in the upper-right corner</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer een severprofiel uit de lijst en druk dan op OK in de hoek rechtsboven</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg toe</translation>
     </message>
     <message>
         <source>Delete the currently selected server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder het geselecteerde serverprofiel</translation>
     </message>
     <message>
         <source>Edit the currently selected server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander het geselecteerde serverprofiel</translation>
     </message>
     <message>
         <source>Add a new server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg een nieuw serverprofiel in</translation>
     </message>
 </context>
 <context>
     <name>IRCServerTab</name>
     <message>
         <source>Connection to</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding met</translation>
     </message>
     <message>
         <source>Server messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Serverberichten</translation>
     </message>
     <message>
         <source>Type commands here. A list of available commands can be found inside the OpieIRC help</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ commando&apos;s hier in. Een lijst met commando&apos;s kan worden gevonden in OpieIRC help</translation>
     </message>
 </context>
 <context>
     <name>IRCSettings</name>
     <message>
         <source>Lines displayed :</source>
-        <translation type="unfinished"></translation>
+        <translation>Weergegeven lijnen:</translation>
     </message>
     <message>
         <source>Amount of lines to be displayed in chats before old lines get deleted - this is necessary to restrain memory consumption. Set to 0 if you don&apos;t need this</source>
-        <translation type="unfinished"></translation>
+        <translation>Aantal lijnen die worden weergegeven voordat oude lijnen worden verwijderd - dit is nodig om geheugengebruik te beperken. Stel in op 0 als dit niet nodig is</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Algemeen</translation>
     </message>
     <message>
         <source>Background color :</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtergrondkleur:</translation>
     </message>
     <message>
         <source>Background color to be used in chats</source>
-        <translation type="unfinished"></translation>
+        <translation>De te gebruiken achtergrondkleur in chats</translation>
     </message>
     <message>
         <source>Normal text color :</source>
-        <translation type="unfinished"></translation>
+        <translation>Normale tekstkleur:</translation>
     </message>
     <message>
         <source>Text color to be used in chats</source>
-        <translation type="unfinished"></translation>
+        <translation>De te gebruiken tekstkleur in chats</translation>
     </message>
     <message>
         <source>Error color :</source>
-        <translation type="unfinished"></translation>
+        <translation>Foutkleur:</translation>
     </message>
     <message>
         <source>Text color to be used to display errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstkleur om te gebruiken om fouten weer te geven</translation>
     </message>
     <message>
         <source>Text written by yourself :</source>
-        <translation type="unfinished"></translation>
+        <translation>Door jezelf geschreven tekst:</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by yourself</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstkleur om je eigengeschreven tekst mee te herkennen</translation>
     </message>
     <message>
         <source>Text written by others :</source>
-        <translation type="unfinished"></translation>
+        <translation>Door anderen geschreven tekst:</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by others</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstkleur om door anderen geschreven tekst mee te herkennen</translation>
     </message>
     <message>
         <source>Text written by the server :</source>
-        <translation type="unfinished"></translation>
+        <translation>Door de server geschreven tekst:</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstkleur om door de server geschreven tekst mee te herkennen</translation>
     </message>
     <message>
         <source>Notifications :</source>
-        <translation type="unfinished"></translation>
+        <translation>Berichtgevingen:</translation>
     </message>
     <message>
         <source>Text color to be used to display notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekstkleur om te gebruiken om berichtgevingen weer te geven</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Kleuren</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Instellingen</translation>
     </message>
 </context>
 <context>
     <name>IRCTab</name>
     <message>
         <source>Missing description</source>
-        <translation type="unfinished"></translation>
+        <translation>Missende omschrijving</translation>
     </message>
     <message>
         <source>Description of the tab&apos;s content</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschrijving van de inhoud van deze tab</translation>
     </message>
     <message>
         <source>Close this tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Sluit deze tab</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>IRC Client</source>
-        <translation type="unfinished"></translation>
+        <translation>IRC Client</translation>
     </message>
     <message>
         <source>Server connections, channels, queries and other things will be placed here</source>
-        <translation type="unfinished"></translation>
+        <translation>Serververbindingen, kanalen, quieries en andere dingen worden hier geplaatst</translation>
     </message>
     <message>
         <source>IRC</source>
-        <translation type="unfinished"></translation>
+        <translation>IRC</translation>
     </message>
     <message>
         <source>New connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuwe verbinding</translation>
     </message>
     <message>
         <source>Create a new connection to an IRC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak een nieuwe verbinding met een IRC server</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Configure OpieIRC&apos;s behavior and appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel OpieIRC&apos;s gedrag en uiterlijk in</translation>
     </message>
 </context>
 </TS>

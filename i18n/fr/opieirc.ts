@@ -61,15 +61,15 @@
     <name>IRCMessageParser</name>
     <message>
         <source>Received unhandled numeric command : </source>
-        <translation>Commande numérique reçu non supporté :</translation>
+        <translation type="obsolete">Commande numérique reçu non supporté :</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command : </source>
-        <translation>Commande ctcp reçu non supporté :</translation>
+        <translation type="obsolete">Commande ctcp reçu non supporté :</translation>
     </message>
     <message>
         <source>Received unhandled literal command : </source>
-        <translation>Commande littérale reçu non supporté :</translation>
+        <translation type="obsolete">Commande littérale reçu non supporté :</translation>
     </message>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
@@ -77,7 +77,7 @@
     </message>
     <message>
         <source> joined channel </source>
-        <translation>canal joint</translation>
+        <translation type="obsolete">canal joint</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
@@ -89,11 +89,11 @@
     </message>
     <message>
         <source>You left channel </source>
-        <translation>Vous avez quitté le canal</translation>
+        <translation type="obsolete">Vous avez quitté le canal</translation>
     </message>
     <message>
         <source> left channel </source>
-        <translation>canal quitté</translation>
+        <translation type="obsolete">canal quitté</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Channel message with unknown channel </source>
-        <translation>Canal message avec canal inconnu</translation>
+        <translation type="obsolete">Canal message avec canal inconnu</translation>
     </message>
     <message>
         <source>Received PRIVMSG of unknown type</source>
@@ -117,11 +117,11 @@
     </message>
     <message>
         <source>You are now known as </source>
-        <translation>Vous êtes actuellement référencé comme</translation>
+        <translation type="obsolete">Vous êtes actuellement référencé comme</translation>
     </message>
     <message>
         <source> is now known as </source>
-        <translation>est référencé comme</translation>
+        <translation type="obsolete">est référencé comme</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source> has quit </source>
-        <translation>a quitté</translation>
+        <translation type="obsolete">a quitté</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
@@ -218,6 +218,46 @@
     <message>
         <source>No such nickname</source>
         <translation>Surnom inexistant</translation>
+    </message>
+    <message>
+        <source>Received unhandled numeric command: %1</source>
+        <translation>Commande numérique non supportée reçu : %1</translation>
+    </message>
+    <message>
+        <source>Received unhandled ctcp command: %1</source>
+        <translation>Commande ctcp non supportée reçu : %1</translation>
+    </message>
+    <message>
+        <source>Received unhandled literal command: %1</source>
+        <translation>Commande literale non supportée reçu : %1</translation>
+    </message>
+    <message>
+        <source>%1 joined channel %2</source>
+        <translation>%1 a join le canal %2</translation>
+    </message>
+    <message>
+        <source>You left channel %1</source>
+        <translation>Vous avez quitté le canal %1</translation>
+    </message>
+    <message>
+        <source>%1 left channel %2</source>
+        <translation>%1 a quitté le canal %2</translation>
+    </message>
+    <message>
+        <source>Channel message with unknown channel %1</source>
+        <translation>Message avec numéro de Canal  %1 inconnu</translation>
+    </message>
+    <message>
+        <source>You are now known as %1</source>
+        <translation>Vous êtes enregistrés en tant que %1</translation>
+    </message>
+    <message>
+        <source>%1 is now known as %2</source>
+        <translation>%1 est maintenant %2</translation>
+    </message>
+    <message>
+        <source>%1 has quit (%2)</source>
+        <translation>%1 a quitté (%2)</translation>
     </message>
 </context>
 <context>
@@ -461,6 +501,10 @@ par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
     <message>
         <source>Colors</source>
         <translation>Couleurs</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Préférences</translation>
     </message>
 </context>
 <context>

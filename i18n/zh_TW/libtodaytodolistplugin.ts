@@ -19,22 +19,25 @@
     </message>
 </context>
 <context>
-    <name>TodolistPluginConfig</name>
-    <message>
-        <source>tasks shown </source>
-        <translation type="unfinished"></translation>
-    </message>
+    <name>TodoPluginConfigBase</name>
     <message>
         <source>Set the maximum number of task that should be shown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clip line after X chars</source>
+        <source>tasks shown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Clip line after X chars</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TodolistPluginConfig</name>
 </context>
 </TS>

@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Bounce Level %1</source>
-        <translation>Bounce Ebene: %1</translation>
+        <translation>Bonze Ebene: %1</translation>
     </message>
     <message>
         <source>Score: %1</source>
@@ -48,12 +48,12 @@
     <message>
         <source>Game paused.
 Press P to continue!</source>
-        <translation>Spiel pausiert: Drücken Sie &lt;b&gt;P&lt;/b&gt; zum Fortfahren.</translation>
+        <translation>Spiel pausiert: Drücken Sie &lt;b&gt;P&lt;/b&gt; zum Fortfahren !</translation>
     </message>
     <message>
         <source>Game Over!
 Score: %1</source>
-        <translation>Game Over!
+        <translation>Verloren!
 Spielstand: %1</translation>
     </message>
     <message>
@@ -75,7 +75,7 @@ Spielstand: %1</translation>
     <message>
         <source>Successfully cleared more than 75%.
 </source>
-        <translation>Erfolgreich aufgeräumt: 75%.</translation>
+        <translation>Erfolgreiche aufgeräumt: 75%.</translation>
     </message>
     <message>
         <source>%1 points: 15 points per life
@@ -90,12 +90,28 @@ Spielstand: %1</translation>
     <message>
         <source>%1 points: Total score
 </source>
-        <translation>%1 Punkte: Gesamtpunkte</translation>
+        <translation>%1 Punkte: Gesamtstand</translation>
     </message>
     <message>
         <source>On to level %1.
 You get %2 lives this time!</source>
-        <translation>Auf zu Ebene %1: Sie erhalten dieses Mal %2 Leben.</translation>
+        <translation>Auf zu Ebene %1: sie erhalten %2 Leben diesmal !</translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation>Über</translation>
+    </message>
+    <message>
+        <source>Written by: Stefan Schimanski
+Ported by: Martin Imobersteg
+
+Click to form walls.
+Hit space to switch wall direction.
+Try to reduce total space by 75%.
+
+This program is distributed under
+the terms of the GPL v2.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

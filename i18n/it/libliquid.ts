@@ -19,13 +19,11 @@
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation>Colore sfondo
-</translation>
+        <translation>Colore sfondo</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation>Colore bottone
-</translation>
+        <translation>Colore pulsante</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
@@ -33,8 +31,7 @@
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation>Colore bottone trasparente
-</translation>
+        <translation>Colore pulsante trasparente</translation>
     </message>
     <message>
         <source>Custom translucency</source>
@@ -58,7 +55,7 @@
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation>Bottoni barra applicazioni senza rilievo</translation>
+        <translation>Pulsanti barra applicazioni senza rilievo</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
@@ -73,7 +70,7 @@
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation>Stile Liquid ad alte prestazione by Mosfet</translation>
+        <translation>Stile Liquid ad alte performance di Mosfet</translation>
     </message>
 </context>
 </TS>

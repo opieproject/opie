@@ -204,13 +204,13 @@ Closing player now.</source>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>空間不足</translation>
+        <translation type="obsolete">空間不足</translation>
     </message>
     <message>
         <source>There was a problem saving the playlist.
 Your playlist may be missing some entries
 the next time you start it.</source>
-        <translation>儲存播放清單時發生問題.
+        <translation type="obsolete">儲存播放清單時發生問題.
 當您下次啟動播放清單時可能會發現
 其中的某些項目遺失了.</translation>
     </message>

@@ -61,15 +61,15 @@
     <name>IRCMessageParser</name>
     <message>
         <source>Received unhandled numeric command : </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command : </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Received unhandled literal command : </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
@@ -77,7 +77,7 @@
     </message>
     <message>
         <source> joined channel </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
@@ -89,11 +89,11 @@
     </message>
     <message>
         <source>You left channel </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source> left channel </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Channel message with unknown channel </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Received PRIVMSG of unknown type</source>
@@ -117,11 +117,11 @@
     </message>
     <message>
         <source>You are now known as </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source> is now known as </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source> has quit </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
@@ -217,6 +217,46 @@
     </message>
     <message>
         <source>No such nickname</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Received unhandled numeric command: %1</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Received unhandled ctcp command: %1</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Received unhandled literal command: %1</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>%1 joined channel %2</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>You left channel %1</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>%1 left channel %2</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Channel message with unknown channel %1</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>You are now known as %1</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>%1 is now known as %2</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>%1 has quit (%2)</source>
         <translation>FOO</translation>
     </message>
 </context>
@@ -458,6 +498,10 @@ comma separated list of channel
     </message>
     <message>
         <source>Colors</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Settings</source>
         <translation>FOO</translation>
     </message>
 </context>

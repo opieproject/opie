@@ -98,10 +98,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open File or URL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rescan for Audio Files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -155,15 +151,19 @@ this playlist?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open file or URL</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>OpiePlayer: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save m3u Playlist </source>
+        <source>Add File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add  URL</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

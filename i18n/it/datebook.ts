@@ -96,6 +96,10 @@ Uscire comunque?</translation>
         <source>Edit...</source>
         <translation>Modifica...</translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation>box di errore</translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -192,6 +196,10 @@ Uscire comunque?</translation>
     <message>
         <source>Duplicate</source>
         <translation>Copia</translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation>Trasmetti questa occorrenza</translation>
     </message>
 </context>
 <context>
@@ -358,6 +366,14 @@ Uscire comunque?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation>LMMGVSDL</translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -378,43 +394,43 @@ Uscire comunque?</translation>
 <context>
     <name>DateBookWeekView</name>
     <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation>L</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation>M</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation>M</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation>G</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation>V</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation>S</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation>D</translation>
-    </message>
-    <message>
         <source>p</source>
         <translation>p</translation>
+    </message>
+    <message>
+        <source>Mo</source>
+        <comment>Monday</comment>
+        <translation type="obsolete">Lun</translation>
+    </message>
+    <message>
+        <source>Tu</source>
+        <comment>Tuesday</comment>
+        <translation type="obsolete">Mar</translation>
+    </message>
+    <message>
+        <source>We</source>
+        <comment>Wednesday</comment>
+        <translation type="obsolete">Mer</translation>
+    </message>
+    <message>
+        <source>Th</source>
+        <comment>Thursday</comment>
+        <translation type="obsolete">Gio</translation>
+    </message>
+    <message>
+        <source>Fr</source>
+        <comment>Friday</comment>
+        <translation type="obsolete">Ven</translation>
+    </message>
+    <message>
+        <source>Sa</source>
+        <comment>Saturday</comment>
+        <translation type="obsolete">Sab</translation>
+    </message>
+    <message>
+        <source>Su</source>
+        <comment>Sunday</comment>
+        <translation type="obsolete">Dom</translation>
     </message>
 </context>
 <context>
@@ -545,6 +561,13 @@ Uscire comunque?</translation>
     <message>
         <source>Note...</source>
         <translation>Note...</translation>
+    </message>
+</context>
+<context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -707,6 +730,10 @@ e </translation>
     <message>
         <source>, and </source>
         <translation>, e </translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation>su </translation>
     </message>
 </context>
 <context>

@@ -146,8 +146,7 @@ Dennoch beenden?</translation>
         <translation>&amp;Nein</translation>
     </message>
     <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
+        <source>Unable to find a contact for this search pattern!</source>
         <translation>Suchmuster konnte nicht gefunden werden !</translation>
     </message>
     <message>
@@ -220,7 +219,7 @@ hinzufügen?</translation>
 provided in the SHARP 
 default ROM. Opie-Mail 
 is provided free !</source>
-        <translation>Beachte: QT-Mail is nur im Sharp 
+        <translation>Beachte: QT-Mail ist nur im Sharp 
 Default-Rom enthalten. Opie-Mail
 ist frei erhältlich !</translation>
     </message>
@@ -290,7 +289,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Search widget just expects simple wildcards</source>
-        <translation>Die Suchfunktion erwartet ein simples Such-Muster</translation>
+        <translation>Die Suchfunktion erwartet ein simples Suchmuster</translation>
     </message>
     <message>
         <source>If selected, search differs between upper and lower chars</source>
@@ -302,7 +301,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Fontsettings for list and card view</source>
-        <translation>Schriteinstellung für Liste und Kartenansicht</translation>
+        <translation>Schrifteinstellungen für Liste und Kartenansicht</translation>
     </message>
     <message>
         <source>Use Sharp&apos;s mail application if available</source>
@@ -330,7 +329,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Remove the selected attribute from the upper list</source>
-        <translation>Entfrnen des gewählten Elements aus der oberen Liste</translation>
+        <translation>Entfernen des gewählten Elements aus der oberen Liste</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
@@ -338,7 +337,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
-        <translation>Werkzeug-/Menuleiste</translation>
+        <translation>Werkzeug-/Menüleiste</translation>
     </message>
     <message>
         <source>Fixed</source>
@@ -443,7 +442,7 @@ wird nach dem Neustart der Anwendung aktiv!</translation>
     </message>
     <message>
         <source>United Kingdom</source>
-        <translation>Grossbritannien</translation>
+        <translation>Großbritannien</translation>
     </message>
     <message>
         <source>Albania</source>

@@ -26,7 +26,7 @@
 Changing parameters on this 
 page may cause your system 
 to stop functioning properly!!</source>
-        <translation>警告:
+        <translation type="obsolete">警告:
 改變這一頁的參數
 可能造成您的系統
 停止正常功能!!</translation>
@@ -53,7 +53,7 @@ to stop functioning properly!!</source>
     </message>
     <message>
         <source>Format?!?</source>
-        <translation>格式化?!?</translation>
+        <translation type="obsolete">格式化?!?</translation>
     </message>
     <message>
         <source>Really format
@@ -63,13 +63,13 @@ to stop functioning properly!!</source>
     <message>
         <source>
 with </source>
-        <translation>
+        <translation type="obsolete">
 為 </translation>
     </message>
     <message>
         <source> filesystem?!?
 You will loose all data!!</source>
-        <translation> 檔案系統?!?
+        <translation type="obsolete"> 檔案系統?!?
 您將會失去所有的資料!!</translation>
     </message>
     <message>
@@ -128,7 +128,7 @@ has been successfully formatted.</source>
     </message>
     <message>
         <source>Trying to mount.</source>
-        <translation>正在嘗試掛載.</translation>
+        <translation type="obsolete">正在嘗試掛載.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
@@ -137,7 +137,7 @@ has been successfully formatted.</source>
     <message>
         <source>
 has been successfully mounted.</source>
-        <translation>
+        <translation type="obsolete">
 已經成功地掛載.</translation>
     </message>
     <message>
@@ -150,7 +150,7 @@ has been successfully mounted.</source>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation>儲存類型 : </translation>
+        <translation type="obsolete">儲存類型 : </translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
@@ -167,6 +167,46 @@ has been successfully mounted.</source>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
         <translation>還剩: %1 kB ( %d mB)</translation>
+    </message>
+    <message>
+        <source>CAUTION:
+Changing parameters on this
+page may cause your system
+to stop functioning properly!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+with %1 filesystem?
+You will loose all data!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to umount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to mount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1
+has been successfully mounted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Storage Type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type: %1
+Formatted with %2
+%3, %4, %5</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

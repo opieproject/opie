@@ -30,7 +30,7 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>HelpBrowser</source>
+        <source>Go</source>
         <translation>FOO</translation>
     </message>
 </context>

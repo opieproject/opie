@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation>Icon na Barra de Tarefas</translation>
+        <translation>Ícone na Barra de Tarefas</translation>
     </message>
     <message>
         <source>Key_Space</source>
@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation>Tempo Limite de gravação (seg):</translation>
+        <translation>Tempo Limite de gravação (segs):</translation>
     </message>
     <message>
         <source>Unlimited</source>

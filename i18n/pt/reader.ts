@@ -3,7 +3,7 @@
     <name>CBarPrefs</name>
     <message>
         <source>Toolbar Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações da Barra de Ferramentas</translation>
     </message>
     <message>
         <source>File</source>
@@ -36,12 +36,108 @@
         <source>Scroll Speed</source>
         <translation>Velocidade de Deslizamento</translation>
     </message>
+    <message>
+        <source>&lt;Nothing&gt;</source>
+        <translation>&lt;Nenhum&gt;</translation>
+    </message>
+    <message>
+        <source>Open file</source>
+        <translation>Abrir ficheiro</translation>
+    </message>
+    <message>
+        <source>Autoscroll</source>
+        <translation>Deslizamento Automático</translation>
+    </message>
+    <message>
+        <source>Bookmark</source>
+        <translation>Atalho</translation>
+    </message>
+    <message>
+        <source>Annotate</source>
+        <translation>Anotar</translation>
+    </message>
+    <message>
+        <source>Fullscreen</source>
+        <translation>Ecrâ Todo</translation>
+    </message>
+    <message>
+        <source>Zoom in</source>
+        <translation>Aproximar</translation>
+    </message>
+    <message>
+        <source>Zoom out</source>
+        <translation>Afastar</translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation>Voltar</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Próximo</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Início</translation>
+    </message>
+    <message>
+        <source>Page up</source>
+        <translation>Página Anterior</translation>
+    </message>
+    <message>
+        <source>Page down</source>
+        <translation>Página Seguinte</translation>
+    </message>
+    <message>
+        <source>Line up</source>
+        <translation>Linha Acima</translation>
+    </message>
+    <message>
+        <source>Line down</source>
+        <translation>Linha Abaixo</translation>
+    </message>
+    <message>
+        <source>Beginning</source>
+        <translation>Início</translation>
+    </message>
+    <message>
+        <source>End</source>
+        <translation>Fim</translation>
+    </message>
+    <message>
+        <source>Escape Button</source>
+        <translation>Botão de Escape</translation>
+    </message>
+    <message>
+        <source>Space Button</source>
+        <translation>Botão de Espaço</translation>
+    </message>
+    <message>
+        <source>Return Button</source>
+        <translation>Botão de Enter</translation>
+    </message>
+    <message>
+        <source>Left Arrow</source>
+        <translation>Seta Esquerda</translation>
+    </message>
+    <message>
+        <source>Right Arrow</source>
+        <translation>Seta Direita</translation>
+    </message>
+    <message>
+        <source>Down Arrow</source>
+        <translation>Seta Baixo</translation>
+    </message>
+    <message>
+        <source>Up Arrow</source>
+        <translation>Seta Cima</translation>
+    </message>
 </context>
 <context>
     <name>CCloseDialog</name>
     <message>
         <source>Tidy-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrumar</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -49,7 +145,7 @@
     </message>
     <message>
         <source>Delete Bookmarks</source>
-        <translation type="unfinished">Apagar</translation>
+        <translation>Apagar Atalhos</translation>
     </message>
     <message>
         <source>Delete Configuration</source>
@@ -73,7 +169,8 @@
     <message>
         <source>Two/One
 Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Dois/Up
+Toque</translation>
     </message>
     <message>
         <source>Find</source>
@@ -95,16 +192,17 @@ Touch</source>
     </message>
     <message>
         <source>Ideograms</source>
-        <translation type="unfinished"></translation>
+        <translation>Ideogramas</translation>
     </message>
     <message>
         <source>Ideogram Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Largura das Ideogramas</translation>
     </message>
     <message>
         <source>Apply font
 to dialogs</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar fontes
+aos diálogos</translation>
     </message>
     <message>
         <source>Encoding</source>
@@ -121,7 +219,18 @@ to dialogs</source>
     <message>
         <source>Two/One
 Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Dois/Um
+Toque</translation>
+    </message>
+    <message>
+        <source>Dictionary</source>
+        <translation>Dicionário</translation>
+    </message>
+    <message>
+        <source>Swap Tap
+Actions</source>
+        <translation>Mudar Acção
+do Toque</translation>
     </message>
 </context>
 <context>
@@ -144,7 +253,7 @@ Touch</source>
     </message>
     <message>
         <source>Reparagraph</source>
-        <translation type="unfinished"></translation>
+        <translation>Re-paragrafar</translation>
     </message>
     <message>
         <source>Double Space</source>
@@ -152,15 +261,19 @@ Touch</source>
     </message>
     <message>
         <source>Remap</source>
-        <translation type="unfinished"></translation>
+        <translation>Re-mapear</translation>
     </message>
     <message>
         <source>Embolden</source>
-        <translation type="unfinished"></translation>
+        <translation>Mais escuro</translation>
     </message>
     <message>
         <source>Full Justify</source>
         <translation>Justificação Completa</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Texto</translation>
     </message>
 </context>
 <context>
@@ -172,12 +285,14 @@ Touch</source>
     <message>
         <source>Page
 Overlap</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobrepor
+Páginas</translation>
     </message>
     <message>
         <source>Graphics
 Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Escalar os
+Gráficos</translation>
     </message>
     <message>
         <source>Margin</source>
@@ -186,16 +301,18 @@ Zoom</source>
     <message>
         <source>Paragraph
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Identação
+do Parágrafo</translation>
     </message>
     <message>
         <source>Line
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Identação
+da Linha</translation>
     </message>
     <message>
         <source>Markup</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcas</translation>
     </message>
     <message>
         <source>Font</source>
@@ -206,7 +323,7 @@ Leading</source>
     <name>CMarkBarPrefs</name>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Atalho</translation>
     </message>
     <message>
         <source>Annotate</source>
@@ -214,7 +331,7 @@ Leading</source>
     </message>
     <message>
         <source>Goto</source>
-        <translation type="unfinished">Ir Para</translation>
+        <translation>Ir Para</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -222,7 +339,7 @@ Leading</source>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerar Automaticamente</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -234,7 +351,7 @@ Leading</source>
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrumar</translation>
     </message>
     <message>
         <source>Mark Block</source>
@@ -249,19 +366,19 @@ Leading</source>
     <name>CMiscBarPrefs</name>
     <message>
         <source>Floating</source>
-        <translation type="unfinished"></translation>
+        <translation>Flutuar</translation>
     </message>
     <message>
         <source>Single bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Uma barra</translation>
     </message>
     <message>
         <source>Menu/tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu/barra</translation>
     </message>
     <message>
         <source>Multiple bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Múltiplas barras</translation>
     </message>
     <message>
         <source>Top</source>
@@ -285,7 +402,7 @@ Leading</source>
     </message>
     <message>
         <source>Movable</source>
-        <translation type="unfinished"></translation>
+        <translation>Amovível</translation>
     </message>
 </context>
 <context>
@@ -300,19 +417,27 @@ Leading</source>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Clipboard</translation>
     </message>
     <message>
         <source>Depluck</source>
-        <translation type="unfinished"></translation>
+        <translation>Des-depenar</translation>
     </message>
     <message>
         <source>Dejpluck</source>
-        <translation type="unfinished"></translation>
+        <translation>Des-depenar</translation>
     </message>
     <message>
         <source>Continuous</source>
         <translation>Contínuo</translation>
+    </message>
+    <message>
+        <source>Select Action</source>
+        <translation>Seleccione Acção</translation>
+    </message>
+    <message>
+        <source>Plucker</source>
+        <translation>Depenar</translation>
     </message>
 </context>
 <context>
@@ -331,7 +456,7 @@ Leading</source>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Próximo</translation>
     </message>
     <message>
         <source>Page Up</source>
@@ -355,26 +480,26 @@ Leading</source>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Deslizar por página/linha</translation>
     </message>
 </context>
 <context>
     <name>CPrefs</name>
     <message>
         <source>OpieReader Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações do OpieReader</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo</translation>
     </message>
     <message>
         <source>Layout(2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo(2)</translation>
     </message>
     <message>
         <source>Locale</source>
-        <translation type="unfinished"></translation>
+        <translation>Localização</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -389,11 +514,11 @@ Leading</source>
     <name>CURLDialog</name>
     <message>
         <source>Save URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar URL</translation>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Clipboard</translation>
     </message>
     <message>
         <source>Local file</source>
@@ -408,7 +533,7 @@ Leading</source>
     <name>CViewBarPrefs</name>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrâ Todo</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -420,7 +545,7 @@ Leading</source>
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Fonte</translation>
     </message>
     <message>
         <source>Encoding</source>
@@ -428,7 +553,7 @@ Leading</source>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Ideograma</translation>
     </message>
 </context>
 <context>
@@ -447,7 +572,7 @@ Leading</source>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrâ Todo</translation>
     </message>
     <message>
         <source>Navigation</source>
@@ -455,7 +580,7 @@ Leading</source>
     </message>
     <message>
         <source>Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Deslizar</translation>
     </message>
     <message>
         <source>Jump</source>
@@ -463,11 +588,11 @@ Leading</source>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Deslizar por página/linha</translation>
     </message>
     <message>
         <source>Two/One Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Dois/Um Toque</translation>
     </message>
     <message>
         <source>Annotation</source>
@@ -495,7 +620,7 @@ Leading</source>
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Fonte</translation>
     </message>
     <message>
         <source>Annotate</source>
@@ -511,7 +636,7 @@ Leading</source>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerar Automaticamente</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -523,7 +648,7 @@ Leading</source>
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrumar</translation>
     </message>
     <message>
         <source>Start Block</source>
@@ -551,7 +676,7 @@ Leading</source>
     </message>
     <message>
         <source>Do Reg</source>
-        <translation type="unfinished"></translation>
+        <translation>Registar</translation>
     </message>
     <message>
         <source>Close Edit</source>
@@ -583,15 +708,15 @@ Leading</source>
     </message>
     <message>
         <source>Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Barras de Ferramentas</translation>
     </message>
     <message>
         <source>Run Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Executar script</translation>
     </message>
     <message>
         <source>Export Links</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportar Ligações</translation>
     </message>
     <message>
         <source>Goto Start</source>
@@ -611,38 +736,42 @@ Leading</source>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Próximo</translation>
     </message>
     <message>
         <source>Scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Deslizamento</translation>
     </message>
     <message>
         <source>Set Target</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolher Destino</translation>
     </message>
     <message>
         <source>Pause Paras</source>
-        <translation type="unfinished"></translation>
+        <translation>Parar Parágrafos</translation>
     </message>
     <message>
         <source>Set Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Codificação</translation>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Ideograma</translation>
     </message>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Atalho</translation>
+    </message>
+    <message>
+        <source>Reader</source>
+        <translation>Leitor</translation>
     </message>
 </context>
 <context>
     <name>fileBrowser</name>
     <message>
         <source>Browse for file</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar ficheiro</translation>
     </message>
     <message>
         <source>/</source>

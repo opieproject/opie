@@ -87,7 +87,7 @@
     </message>
     <message>
         <source>AdvancedFm</source>
-        <translation>AdvancedFm</translation>
+        <translation>Filstyring</translation>
     </message>
     <message>
         <source>File</source>
@@ -148,12 +148,6 @@
         <translation>Slet mappe?</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation>Slet
-</translation>
-    </message>
-    <message>
         <source>Could not rename</source>
         <translation>Kunne ikke omdøbe</translation>
     </message>
@@ -201,11 +195,11 @@ eksisterer. Overskriv?</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation>AdvancedFm Output</translation>
+        <translation>Filstyring Output</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation>Advancedfm send ud</translation>
+        <translation>Filstyring send</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -234,28 +228,58 @@ Vil du slette den?</translation>
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished">Advanced FileManager
+        <translation>Advanced FileManager
 er copyright 2002-2003 af
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 og er licenseret som GPL</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Bookmark Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Bogmærk mappe</translation>
     </message>
     <message>
         <source>Remove Current Directory from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern den aktuelle mappe fra bogmærker</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fejl</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation>Kan ikke fjerne den aktuelle mappe
+fra bogmærker.
+Den er ikke bogmærket!</translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation>Filsøgning</translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation>Vil du slette %1
+og alt hvad der er i den?</translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation>Vil du slette
+%1?</translation>
+    </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="obsolete">Filstyring :: </translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="obsolete">kB ledig</translation>
+    </message>
+    <message>
+        <source>Copy &apos;%1&apos; As</source>
+        <translation type="obsolete">Kopier &apos;%1&apos; som</translation>
     </message>
 </context>
 <context>
@@ -267,6 +291,24 @@ It is not bookmarked!!</source>
     <message>
         <source>Save output to file (name only)</source>
         <translation>Gem output i filen (kun navn)</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation>Processen kunne ikke starte</translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation>Fejl
+</translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation>
+Afsluttet
+</translation>
     </message>
 </context>
 <context>
@@ -310,6 +352,26 @@ It is not bookmarked!!</source>
     <message>
         <source>execute</source>
         <translation>køre</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Advarsel</translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation>Fejl- ingen bruger</translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation>Fejl- ingen gruppe</translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation>Der opstod fejl under indstilling af ejerforhold</translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation>Der opstod fejl under indstilling af rettigheder</translation>
     </message>
 </context>
 </TS>

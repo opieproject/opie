@@ -17,272 +17,274 @@
         <source>Read Error: QSocket reported an error reading
 data, the remote host has probably dropped the
 connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao ler os dados.</translation>
     </message>
     <message>
         <source>QSocket reported an invalid error code</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro desconhecido</translation>
     </message>
 </context>
 <context>
     <name>KRFBDecoder</name>
     <message>
         <source>Waiting for server initialisation...</source>
-        <translation type="unfinished"></translation>
+        <translation>À espera da inicialização do servidor...</translation>
     </message>
     <message>
         <source>Waiting for desktop name...</source>
-        <translation type="unfinished"></translation>
+        <translation>À espera do nome do ambiente de trabalho...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligado a %1</translation>
     </message>
     <message>
         <source>Protocol Error: Message Id %1 was found when expecting an update message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro de Protocolo: recebida a mensagem %1 em vez de uma actualização.</translation>
     </message>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro de Protocolo: o servidor %1 usou uma codificação desconhecida </translation>
     </message>
 </context>
 <context>
     <name>KRFBLogin</name>
     <message>
         <source>Waiting for server version...</source>
-        <translation type="unfinished"></translation>
+        <translation>À espera da versão do servidor...</translation>
     </message>
     <message>
         <source>Error: Invalid server version, %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro: versão do servidor inválida, %1</translation>
     </message>
     <message>
         <source>Error: Unsupported server version, %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro: versão do servidor não suportada, %1</translation>
     </message>
     <message>
         <source>Logged in</source>
-        <translation type="unfinished"></translation>
+        <translation>Autenticado em</translation>
     </message>
     <message>
         <source>Error: This server requires a password, but none has been specified.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Erro: este servidor necessita de palavra chave, mas não foi especificada nenhuma.
+</translation>
     </message>
     <message>
         <source>Error: The password you specified was incorrect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro: a palavra chave especificada é incorrecta.</translation>
     </message>
     <message>
         <source>Error: Too many invalid login attempts have been made
 to this account, please try later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro: demasiadas tentativas inválidas de autenticação 
+para esta conta, tente mais tarde.</translation>
     </message>
     <message>
         <source>Login Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Autenticação Falhou</translation>
     </message>
     <message>
         <source>Too many failures</source>
-        <translation type="unfinished"></translation>
+        <translation>Demasiadas falhas de autenticação</translation>
     </message>
 </context>
 <context>
     <name>KVNC</name>
     <message>
         <source>VNC Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliente VNC</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrâ Todo</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Desligar</translation>
     </message>
     <message>
         <source>Stop Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Sair de Ecrâ Todo</translation>
     </message>
     <message>
         <source>Connected to remote host</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligar ao servidor remoto</translation>
     </message>
     <message>
         <source>Logged in to remote host</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligado ao servidor remoto</translation>
     </message>
     <message>
         <source>Connection closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligação terminada</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova Ligação</translation>
     </message>
     <message>
         <source>Open Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir Atalho</translation>
     </message>
     <message>
         <source>Delete Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar Atalho</translation>
     </message>
     <message>
         <source>Send Contrl-Alt-Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar Control-Alt-Del</translation>
     </message>
     <message>
         <source>Next Click is Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Próximo Clique é Duplo Clique</translation>
     </message>
     <message>
         <source>Next Click is Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Próximo Clique é Clique Direito</translation>
     </message>
 </context>
 <context>
     <name>KVNCBookmarkDlgBase</name>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Atalhos</translation>
     </message>
     <message>
         <source>Choose a bookmark that you would like to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha o atalho que deseja abrir</translation>
     </message>
 </context>
 <context>
     <name>KVNCConnDlgBase</name>
     <message>
         <source>VNC Viewer Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligação do Cliente VNC</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor</translation>
     </message>
     <message>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar palavra Chave</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Palavra Chave:</translation>
     </message>
     <message>
         <source>Bookmark Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome do Atalho:</translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor:</translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Número do Ecrâ:</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opções</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar ecrâ cada:</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Mili-segundos</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedir sessão de 256 cores</translation>
     </message>
     <message>
         <source>Raise on bell</source>
-        <translation type="unfinished"></translation>
+        <translation>Primeiro Plano quando tocar</translation>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedir sessão partilhada</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>Scale Factor</source>
-        <translation type="unfinished"></translation>
+        <translation>Factor de Escala</translation>
     </message>
     <message>
         <source>Encodings</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificações</translation>
     </message>
     <message>
         <source>Hextile encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificação &quot;Hextile&quot;</translation>
     </message>
     <message>
         <source>CoRRE encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificação &quot;CoRRE&quot;</translation>
     </message>
     <message>
         <source>RRE encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificação &quot;RRE&quot;</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificação &quot;Copy Rectangle&quot;</translation>
     </message>
     <message>
         <source>The password of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>A palavra chave do servidor VNC</translation>
     </message>
     <message>
         <source>Toggle obscuring the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Esconder/mostrar a palavra chave</translation>
     </message>
     <message>
         <source>The name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>O nome do servidor VNC</translation>
     </message>
     <message>
         <source>The host name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>O nome de rede do servidor VNC </translation>
     </message>
     <message>
         <source>The display number of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>O número de ecrâ do servidor VNC</translation>
     </message>
     <message>
         <source>Delay between requesting updates from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervalo de actualização </translation>
     </message>
     <message>
         <source>Request that the VNC server transfer 8 bit color</source>
-        <translation type="unfinished"></translation>
+        <translation>Usa apenas 256 cores</translation>
     </message>
     <message>
         <source>Allow other users to connect to the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Permite várias ligações simultâneas ao servidor VNC</translation>
     </message>
     <message>
         <source>Scale the remote display to fit on the PDA (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Escalar o ecrâ remoto para caber no ecrâ do dispositivo (lento)</translation>
     </message>
     <message>
         <source>Enable transmiting identical rectangles as references to existing data</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar a transmissão de rectangulos semelhantes como referência dos dados existentes</translation>
     </message>
 </context>
 </TS>

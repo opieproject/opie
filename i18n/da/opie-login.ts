@@ -4,11 +4,12 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryk præcist og bestemt på krydsene
+for at kalibrere skærmen.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Velkommen til Opie</translation>
     </message>
 </context>
 <context>
@@ -19,65 +20,65 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Velkommen til OPIE&lt;/center&gt;</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruger</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodeord</translation>
     </message>
     <message>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Stands</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu</translation>
     </message>
 </context>
 <context>
     <name>LoginWindowImpl</name>
     <message>
         <source>Restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Genstart</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Afslut</translation>
     </message>
     <message>
         <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Wrong password</source>
-        <translation type="unfinished"></translation>
+        <translation>Forkert kodeord</translation>
     </message>
     <message>
         <source>The given password is incorrect.</source>
+        <translation>Kodeordet er forkert.</translation>
+    </message>
+    <message>
+        <source>Failure</source>
+        <translation>Fejl</translation>
+    </message>
+    <message>
+        <source>Could not switch to new user identity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OPIE was terminated
+        <source>Opie was terminated
 by an uncaught signal
 (%1)
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not start OPIE.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not switch to new user identity</source>
-        <translation type="unfinished"></translation>
+        <source>Could not start Opie.</source>
+        <translation>Kunne ikke starte Opie.</translation>
     </message>
 </context>
 </TS>

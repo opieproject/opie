@@ -67,7 +67,7 @@ kereszteket a képernyőn.</translation>
 by an uncaught signal
 (%1)
 </source>
-        <translation>Az OPIE egy kezeletlen
+        <translation type="obsolete">Az OPIE egy kezeletlen
 jelzés (%1)
 miatt megállt</translation>
     </message>
@@ -77,11 +77,22 @@ miatt megállt</translation>
     </message>
     <message>
         <source>Could not start OPIE.</source>
-        <translation>Nem sikerült az OPIE-t elindítani.</translation>
+        <translation type="obsolete">Nem sikerült az OPIE-t elindítani.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
         <translation>Nem sikerült átváltani az új felhasználóra</translation>
+    </message>
+    <message>
+        <source>Opie was terminated
+by an uncaught signal
+(%1)
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not start Opie.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -229,10 +229,6 @@ It must be empty</source>
         <translation>Dieses Verzeichnis existiert nicht</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation type="obsolete">Über</translation>
-    </message>
-    <message>
         <source>Rescan</source>
         <translation>Neu scannen</translation>
     </message>

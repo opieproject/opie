@@ -100,10 +100,6 @@
 <context>
     <name>QIMPenPrefBase</name>
     <message>
-        <source>Form1</source>
-        <translation>表單1</translation>
-    </message>
-    <message>
         <source>Multi-stroke character timeout:</source>
         <translation>多筆劃字元逾時時間:</translation>
     </message>
