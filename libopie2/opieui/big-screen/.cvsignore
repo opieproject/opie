@@ -1,0 +1,8 @@
+Makefile*
+obj
+moc*
+*moc
+*.o
+~*
+*base.cpp
+*base.h

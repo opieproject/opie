@@ -47,6 +47,8 @@ SOURCES     = ocheckitem.cpp         \
               otaskbarapplet.cpp     \
               oseparator.cpp
 
+include ( big-screen/big-screen.pro )
+
 INTERFACES  = otimepickerbase.ui
 
 TARGET      = opieui2
