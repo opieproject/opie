@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: dateentry.ui,v 1.4 2002-03-27 10:37:17 hakan Exp $
+** $Id: dateentry.ui,v 1.5 2002-05-06 21:09:38 hakan Exp $
 **
 *********************************************************************</comment>
 <widget>
@@ -43,7 +43,7 @@
     <grid>
         <property stdset="1">
             <name>margin</name>
-            <number>0</number>
+            <number>2</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
@@ -147,7 +147,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Description</string>
+                <string>Description </string>
             </property>
         </widget>
         <widget row="1"  column="1"  rowspan="1"  colspan="3" >
@@ -209,7 +209,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Start - End</string>
+                <string>Start - End </string>
             </property>
         </widget>
         <widget row="3"  column="1" >
@@ -265,6 +265,28 @@
                 <name>hAlign</name>
             </property>
         </widget>
+        <spacer row="3"  column="2"  rowspan="2"  colspan="1" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer1_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+
 	<widget row="5"  column="1" colspan="3">
 	    <class>TimePicker</class>
             <property stdset="1">
@@ -272,7 +294,7 @@
                 <cstring>timePickerStart</cstring>
             </property>
  	</widget>
-        <widget row="3"  column="2" colspan="2">
+        <widget row="3"  column="3" colspan="1">
             <class>QPushButton</class>
             <property stdset="1">
                 <name>name</name>
@@ -297,7 +319,7 @@
                 </size>
             </property>
         </widget>
-        <widget row="4"  column="2" colspan="2">
+        <widget row="4"  column="3" colspan="1">
             <class>QLineEdit</class>
             <property stdset="1">
                 <name>name</name>
@@ -329,7 +351,7 @@
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>TextLabel3_2</cstring>
+                <cstring>TimePickerLabel</cstring>
             </property>
             <property stdset="1">
                 <name>text</name>
@@ -560,6 +582,12 @@
         <sender>checkAllDay</sender>
         <signal>toggled(bool)</signal>
         <receiver>comboEnd</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>checkAllDay</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>timePickerStart</receiver>
         <slot>setDisabled(bool)</slot>
     </connection>
     <connection>

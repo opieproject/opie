@@ -68,13 +68,29 @@ bool DateEntry::eventFilter(QObject *obj, QEvent *ev )
 {
   if( ev->type() == QEvent::FocusIn ){
     if( obj == comboStart ){
-      TextLabel3_2->setText( tr("Start Time" ) );
+      timePickerStart->setHour(startTime.hour());
+      timePickerStart->setMinute(startTime.minute());
+      TimePickerLabel->setText( tr("Start Time" ) );
       m_showStart= true;
     }else if( obj == comboEnd ){
-      TextLabel3_2->setText( tr("End Time") );
+      timePickerStart->setHour(endTime.hour());
+      timePickerStart->setMinute(endTime.minute());
+      TimePickerLabel->setText( tr("End Time") );
       m_showStart = false;
     }
+  } else if( ev->type() == QEvent::FocusOut ){
+    if( obj == comboEnd ){
+      QString s;
+      s.sprintf("%.2d:%.2d",endTime.hour(), endTime.minute());
+      comboEnd->setText(s);
+    }
+    else if( obj == comboStart ){
+      QString s;
+      s.sprintf("%.2d:%.2d",startTime.hour(), startTime.minute());
+      comboStart->setText(s);
+    }
   }
+  
   return false;
 }
 
@@ -268,17 +284,18 @@ static QTime parseTime( const QString& s, bool ampm )
  */
 void DateEntry::endTimeChanged( const QString &s )
 {
-    QTime tmpTime = parseTime(s,ampm);
-    if ( endDate > startDate || tmpTime >= startTime ) {
-        endTime = tmpTime;
+  endTimeChanged( parseTime(s,ampm) );
+}
+
+void DateEntry::endTimeChanged( const QTime &t ) {
+    if ( endDate > startDate || t >= startTime ) {
+        endTime = t;
     } else {
         endTime = startTime;
         //comboEnd->setCurrentItem( comboStart->currentItem() );
     }
-    
-}
-
-void DateEntry::endTimeChanged( const QTime &t ) {
+    timePickerStart->setHour(endTime.hour());
+    timePickerStart->setMinute(endTime.minute());
 }
 
 /*
@@ -326,9 +343,8 @@ void DateEntry::startTimePicked( const QTime &t ) {
     startTimeChanged(t);
     updateTimeEdit(true,true);
   }else{
-    endTime = t;
+    endTimeChanged(t);
     updateTimeEdit(false, true );
-
   }
 }
 
