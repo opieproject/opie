@@ -43,6 +43,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#if defined (__GNUC__) && (__GNUC__ < 3)
+extern double round(double);
+#endif
+
 
 #include "benchmarkinfo.h"
 
