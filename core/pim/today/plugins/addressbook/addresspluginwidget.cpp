@@ -68,10 +68,13 @@ void AddressBookPluginWidget::refresh( const OContactAccess* )
 void AddressBookPluginWidget::readConfig() {
     Config cfg( "todayaddressplugin" );
     cfg.setGroup( "config" );
-    m_maxLinesTask =  cfg.readNumEntry( "maxlinestask", 5 );
-    m_maxCharClip =   cfg.readNumEntry( "maxcharclip", 38 );
+    m_maxLinesTask  = cfg.readNumEntry( "maxlinestask", 5 );
+    m_maxCharClip   = cfg.readNumEntry( "maxcharclip", 38 );
     m_daysLookAhead = cfg.readNumEntry( "dayslookahead", 14 );
-    m_entryColor = cfg.readEntry("entrycolor", Qt::red.name() );
+    m_urgentDays    = cfg.readNumEntry( "urgentdays", 7 );
+    m_entryColor    = cfg.readEntry("entrycolor", Qt::black.name() );
+    m_headlineColor = cfg.readEntry( "headlinecolor", Qt::black.name() );
+    m_urgentColor   = cfg.readEntry( "urgentcolor", Qt::red.name() );
 }
 
 
@@ -106,7 +109,9 @@ void AddressBookPluginWidget::getAddress() {
 		
 		m_list = m_contactdb->queryByExample( querybirthdays, OContactAccess::DateDiff );
 		if ( m_list.count() > 0 ){
-			output = QObject::tr( "Next birthdays in <b> %1 </b> days: <br>" ).arg( m_daysLookAhead );
+			output = "<font color=" + m_headlineColor + ">"
+				+ QObject::tr( "Next birthdays in <b> %1 </b> days:" ).arg( m_daysLookAhead )
+				+ "</font> <br>";
 			for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
 				if ( ammount++ < m_maxLinesTask ){
 					// Now we want to calculate how many days until birthday. We have to set 
@@ -116,14 +121,24 @@ void AddressBookPluginWidget::getAddress() {
 					if ( QDate::currentDate().daysTo(destdate) < 0 )
 						destdate.setYMD( QDate::currentDate().year()+1, destdate.month(), destdate.day() );
 
-					output += "<font color=" + m_entryColor + "><b>-" + (*m_it).fullName() 
-						+ " (" 
-						+ QString::number(QDate::currentDate().daysTo(destdate)) 
-						+ " Days) </b></font><br>";
+					
+					if ( QDate::currentDate().daysTo(destdate) < m_urgentDays )
+						output += "<font color=" + m_urgentColor + "><b>-" + (*m_it).fullName() 
+							+ " (" 
+							+ QString::number(QDate::currentDate().daysTo(destdate)) 
+							+ " Days) </b></font><br>";
+					
+					else
+						output += "<font color=" + m_entryColor + "><b>-" + (*m_it).fullName() 
+							+ " (" 
+							+ QString::number(QDate::currentDate().daysTo(destdate)) 
+							+ " Days) </b></font><br>";
 				}
 			}
 		} else {
-			output = QObject::tr( "No birthdays in <b> %1 </b> days! <br>" ).arg( m_daysLookAhead );
+			output = "<font color=" + m_headlineColor + ">"
+				+ QObject::tr( "No birthdays in <b> %1 </b> days!" ).arg( m_daysLookAhead )
+				+ "</font> <br>";
 		}
 		
 		// Define the query for anniversaries and start search..
@@ -134,7 +149,9 @@ void AddressBookPluginWidget::getAddress() {
 		
 		ammount = 0;
 		if ( m_list.count() > 0 ){
-			output += QObject::tr( "Next anniversaries in <b> %1 </b> days: <br>" ).arg( m_daysLookAhead );
+			output += "<font color=" + m_headlineColor + ">"
+				+ QObject::tr( "Next anniversaries in <b> %1 </b> days:" ).arg( m_daysLookAhead )
+				+ "</font> <br>";
 			for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
 				if ( ammount++ < m_maxLinesTask ){
 					// Now we want to calculate how many days until anniversary. We have to set 
@@ -144,14 +161,22 @@ void AddressBookPluginWidget::getAddress() {
 					if ( QDate::currentDate().daysTo(destdate) < 0 )
 						destdate.setYMD( QDate::currentDate().year()+1, destdate.month(), destdate.day() );
 
-					output += "<font color=#e00000><b>-" + (*m_it).fullName() 
-						+ " (" 
-						+ QString::number(QDate::currentDate().daysTo( destdate ) ) 
-						+ " Days) </b></font><br>";
+					if ( QDate::currentDate().daysTo(destdate) < m_urgentDays )
+						output += "<font color=" + m_urgentColor + "><b>-" + (*m_it).fullName() 
+							+ " (" 
+							+ QString::number(QDate::currentDate().daysTo( destdate ) ) 
+							+ " Days) </b></font><br>";
+					else
+						output += "<font color=" + m_entryColor + "><b>-" + (*m_it).fullName() 
+							+ " (" 
+							+ QString::number(QDate::currentDate().daysTo( destdate ) ) 
+							+ " Days) </b></font><br>";
 				}
 			}
 		} else {
-			output += QObject::tr( "No anniversaries in <b> %1 </b> days! <br>" ).arg( m_daysLookAhead );
+			output += "<font color=" + m_headlineColor + ">" 
+				+ QObject::tr( "No anniversaries in <b> %1 </b> days!" ).arg( m_daysLookAhead )
+				+ "</font> <br>";
 		}
 
 

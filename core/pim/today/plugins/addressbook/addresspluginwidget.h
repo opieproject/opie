@@ -52,7 +52,10 @@ private:
     int m_maxLinesTask;
     int m_maxCharClip;
     int m_daysLookAhead;
+    int m_urgentDays;
     QString m_entryColor;
+    QString m_headlineColor;
+    QString m_urgentColor;
 };
 
 #endif

@@ -37,7 +37,7 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     QHBox *box1 = new QHBox( this );
 
     QLabel* TextLabel6 = new QLabel( box1, "TextLabel6" );
-    TextLabel6->setText( tr( "Max Lines " ) );
+    TextLabel6->setText( tr( "Max Lines: " ) );
 
     SpinBox2 = new QSpinBox( box1, "SpinBox2" );
     SpinBox2->setMaxValue( 40 );
@@ -46,7 +46,7 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     QHBox *box2 = new QHBox( this );
 
     QLabel* clipLabel = new QLabel( box2, "" );
-    clipLabel->setText( tr( "Clip line after X chars" ) );
+    clipLabel->setText( tr( "Clip line after X chars: " ) );
 
     SpinBoxClip = new QSpinBox( box2, "SpinClip" );
     SpinBoxClip->setMaxValue( 200 );
@@ -55,8 +55,7 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     QHBox *box3 = new QHBox( this );
 
     QLabel* daysLabel = new QLabel( box3, "" );
-    daysLabel->setText( tr( "Days look ahead" ) );
-
+    daysLabel->setText( tr( "Days look ahead: " ) );
     SpinDaysClip = new QSpinBox( box3, "SpinDays" );
     SpinDaysClip->setMaxValue( 200 );
     QWhatsThis::add( SpinDaysClip , tr( "How many days we should search forward" ) );
@@ -64,17 +63,45 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     QHBox *box4 = new QHBox( this );
 
     QLabel* colorLabel = new QLabel( box4, "" );
-    colorLabel->setText( tr( "Set Entry Color \n(restart Today \nafter change!)" ) );
+    colorLabel->setText( tr( "To activate color settings:\nRestart application !" ) );
 
-    entryColor = new OColorButton( box4, red, "entryColor" );
-    QWhatsThis::add( entryColor , tr( "What color should be used for shown birthdays/anniversaries?" ) );
+    QHBox *box5 = new QHBox( this );
+
+    QLabel* colorLabel2 = new QLabel( box5, "" );
+    colorLabel2->setText( tr( "Set Headline Color: " ) );
+    headlineColor = new OColorButton( box5, black , "headlineColor" );
+    QWhatsThis::add( headlineColor , tr( "Colors for the headlines !" ) );
+
+    QHBox *box6 = new QHBox( this );
+
+    QLabel* colorLabel3= new QLabel( box6, "" );
+    colorLabel3->setText( tr( "Set Entry Color: " ) );
+    entryColor = new OColorButton( box6, black , "entryColor" );
+    QWhatsThis::add( entryColor , tr( "This color will be used for shown birthdays/anniversaries !" ) );
+
+    QHBox *box7 = new QHBox( this );
+
+    QLabel* colorLabel5 = new QLabel( box7, "" );
+    colorLabel5->setText( tr( "Set Urgent\nColor if below " ) );
+    SpinUrgentClip = new QSpinBox( box7, "SpinDays" );
+    SpinUrgentClip->setMaxValue( 200 );
+    QLabel* colorLabel6 = new QLabel( box7, "" );
+    colorLabel6->setText( tr( "days: " ) );
+    urgentColor = new OColorButton( box7, red , "urgentColor" );
+    QWhatsThis::add( urgentColor , tr( "This color will be used if we are close to the event !" ) );
+    QWhatsThis::add( SpinUrgentClip , tr( "How many days we should search forward" ) );
+
 
     layout->addWidget( box1 );
     layout->addWidget( box2 );
     layout->addWidget( box3 );
     layout->addWidget( box4 );
+    layout->addWidget( box5 );
+    layout->addWidget( box6 );
+    layout->addWidget( box7 );
 
     readConfig();
+
 }
 
 void AddressBookPluginConfig::readConfig() {
@@ -86,7 +113,15 @@ void AddressBookPluginConfig::readConfig() {
     SpinBoxClip->setValue( m_maxCharClip );
     m_daysLookAhead = cfg.readNumEntry( "dayslookahead", 14 );
     SpinDaysClip->setValue( m_daysLookAhead );
-    m_entryColor = cfg.readEntry( "entrycolor", Qt::red.name() );
+    m_urgentDays = cfg.readNumEntry( "urgentdays", 7 );
+    SpinUrgentClip->setValue( m_urgentDays );
+
+    m_entryColor = cfg.readEntry( "entrycolor", Qt::black.name() );
+    entryColor->setColor( QColor( m_entryColor ) );
+    m_headlineColor = cfg.readEntry( "headlinecolor", Qt::black.name() );
+    headlineColor->setColor( QColor( m_headlineColor ) );
+    m_urgentColor = cfg.readEntry( "urgentcolor", Qt::red.name() );
+    urgentColor->setColor( QColor( m_urgentColor ) );
 }
 
 
@@ -99,8 +134,17 @@ void AddressBookPluginConfig::writeConfig() {
     cfg.writeEntry( "maxcharclip",  m_maxCharClip );
     m_daysLookAhead = SpinDaysClip->value();
     cfg.writeEntry( "dayslookahead",  m_daysLookAhead );
+    m_urgentDays = SpinUrgentClip->value();
+    if ( m_urgentDays > m_daysLookAhead )
+	    m_urgentDays = m_daysLookAhead;
+    cfg.writeEntry( "urgentdays", m_urgentDays );
+
     m_entryColor = entryColor->color().name();
     cfg.writeEntry( "entrycolor", m_entryColor );
+    m_headlineColor = headlineColor->color().name();
+    cfg.writeEntry( "headlinecolor", m_headlineColor );
+    m_urgentColor = urgentColor->color().name();
+    cfg.writeEntry( "urgentcolor", m_urgentColor );
     cfg.write();
 }
 

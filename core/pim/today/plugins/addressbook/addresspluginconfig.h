@@ -44,7 +44,10 @@ private:
     QSpinBox* SpinBox2;
     QSpinBox* SpinBoxClip;
     QSpinBox* SpinDaysClip;
+    QSpinBox* SpinUrgentClip;
     OColorButton* entryColor;
+    OColorButton* headlineColor;
+    OColorButton* urgentColor;
 
     // how many lines should be showed in the AddressBook section
     int m_max_lines_task;
@@ -52,8 +55,14 @@ private:
     int m_maxCharClip;
     // How many days look ahead
     int m_daysLookAhead;
+    // Days until urgent color is used
+    int m_urgentDays;
     // Entry Color
     QString m_entryColor;
+    // Headline Color
+    QString m_headlineColor;
+    // Urgent Color
+    QString m_urgentColor;
 };
 
 
