@@ -121,7 +121,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
 
     QPEApplication::setStylusOperation( ListView->viewport(),QPEApplication::RightOnHold);
     connect( ListView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-             this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
+             this, SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
 
     connect( ListView, SIGNAL( clicked( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
 
@@ -171,6 +171,7 @@ void fileBrowser::setFileView( int selection )
 void fileBrowser::populateList()
 {
     ListView->clear();
+    QListViewItem * item;
     bool isDir=FALSE;
 //qDebug(currentDir.canonicalPath());
     currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
@@ -182,58 +183,58 @@ void fileBrowser::populateList()
     QFileInfoListIterator it(*list);
     QFileInfo *fi;
     while ( (fi=it.current()) ) {
-
-        if (fi->isSymLink() ){
-            QString symLink=fi->readLink();
+            if (fi->isSymLink() ){
+                QString symLink=fi->readLink();
 //         qDebug("Symlink detected "+symLink);
-         QFileInfo sym( symLink);
-            fileS.sprintf( "%10li", sym.size() );
-            fileL.sprintf( "%s ->  %s",  sym.fileName().data(),sym.absFilePath().data() );
-            fileDate = sym.lastModified().toString();
-        } else {
-//        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
-            fileS.sprintf( "%10li", fi->size() );
-            fileL.sprintf( "%s",fi->fileName().data() );
-            fileDate= fi->lastModified().toString();
-            if( QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+fileL)).exists() ) {
-                fileL+="/";
-                isDir=TRUE;
-//     qDebug( fileL);
-            }
-        }
-        if(fileL !="./") {
-            item= new QListViewItem( ListView,fileL,fileS , fileDate);
-            QPixmap pm;
-         
-            if(isDir || fileL.find("/",0,TRUE) != -1) {
-                if( !QDir( fi->filePath() ).isReadable()) 
-                    pm = Resource::loadPixmap( "lockedfolder" );
-                else 
-                    pm= Resource::loadPixmap( "folder" );
-                item->setPixmap( 0,pm );
+                QFileInfo sym( symLink);
+                fileS.sprintf( "%10li", sym.size() );
+                fileL.sprintf( "%s ->  %s",  sym.fileName().data(),sym.absFilePath().data() );
+                fileDate = sym.lastModified().toString();
             } else {
-                if( !fi->isReadable() )
-                    pm = Resource::loadPixmap( "locked" );
-                else {
-                    MimeType mt(fi->filePath());
-                    pm=mt.pixmap();
-                    if(pm.isNull())
-                        pm =  Resource::loadPixmap( "UnknownDocument-14" );
-                    item->setPixmap( 0,pm);
+//        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
+                fileS.sprintf( "%10li", fi->size() );
+                fileL.sprintf( "%s",fi->fileName().data() );
+                fileDate= fi->lastModified().toString();
+                if( QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+fileL)).exists() ) {
+                    fileL+="/";
+                    isDir=TRUE;
+//     qDebug( fileL);
                 }
             }
-            if(  fileL.find("->",0,TRUE) != -1) {
-                  // overlay link image
-                pm= Resource::loadPixmap( "folder" );
-                QPixmap lnk = Resource::loadPixmap( "symlink" );
-                QPainter painter( &pm );
-                painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
-                pm.setMask( pm.createHeuristicMask( FALSE ) );
-                item->setPixmap( 0, pm);
+            if(fileL !="./" && fi->exists()) {
+                item= new QListViewItem( ListView,fileL,fileS , fileDate);
+                QPixmap pm;
+         
+                if(isDir || fileL.find("/",0,TRUE) != -1) {
+                    if( !QDir( fi->filePath() ).isReadable()) 
+                        pm = Resource::loadPixmap( "lockedfolder" );
+                    else 
+                        pm= Resource::loadPixmap( "folder" );
+                    item->setPixmap( 0,pm );
+                } else {
+                    if( !fi->isReadable() )
+                        pm = Resource::loadPixmap( "locked" );
+                    else {
+                        MimeType mt(fi->filePath());
+                        pm=mt.pixmap();
+                        if(pm.isNull())
+                            pm =  Resource::loadPixmap( "UnknownDocument-14" );
+                        item->setPixmap( 0,pm);
+                    }
+                }
+                if(  fileL.find("->",0,TRUE) != -1) {
+                      // overlay link image
+                    pm= Resource::loadPixmap( "folder" );
+                    QPixmap lnk = Resource::loadPixmap( "symlink" );
+                    QPainter painter( &pm );
+                    painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
+                    pm.setMask( pm.createHeuristicMask( FALSE ) );
+                    item->setPixmap( 0, pm);
+                }
             }
-        }
-        isDir=FALSE;
-        ++it;
+            isDir=FALSE;
+            ++it;
+//         }
     }
     ListView->setSorting( 3, FALSE);
     QString currentPath = currentDir.canonicalPath();
@@ -263,6 +264,7 @@ void fileBrowser::upDir()
 // you may want to switch these 2 functions. I like single clicks
 void fileBrowser::listClicked(QListViewItem *selectedItem)
 {
+    if(selectedItem) {
     QString strItem=selectedItem->text(0);
     QString strSize=selectedItem->text(1);
 //    qDebug("strItem is "+strItem);
@@ -302,6 +304,7 @@ void fileBrowser::listClicked(QListViewItem *selectedItem)
                 } //end not symlink
         chdir(strItem.latin1());
       }
+    }
 }
 
 void fileBrowser::OnOK()
@@ -378,16 +381,20 @@ void fileBrowser::ListPressed( int mouse, QListViewItem *item, const QPoint &poi
 void fileBrowser::showListMenu(QListViewItem *item) {
 
     QPopupMenu  m;// = new QPopupMenu( Local_View );
-    if( item->text(0).find("/",0,TRUE))
-    m.insertItem( tr( "Change Directory" ), this, SLOT( doCd() ));
-    else
-    m.insertItem( tr( "Make Directory" ), this, SLOT( makDir() ));
-    m.insertItem( tr( "Rescan" ), this, SLOT( populateList() ));
-    m.insertItem( tr( "Rename" ), this, SLOT( localRename() ));
-    m.insertSeparator();
-    m.insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
+    if(item) {
+        if( item->text(0).find("/",0,TRUE))
+            m.insertItem( tr( "Change Directory" ), this, SLOT( doCd() ));
+        m.insertItem( tr( "Make Directory" ), this, SLOT( makDir() ));
+        m.insertItem( tr( "Rescan" ), this, SLOT( populateList() ));
+        m.insertItem( tr( "Rename" ), this, SLOT( localRename() ));
+        m.insertSeparator();
+        m.insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
+    } else {
+        m.insertItem( tr( "Make Directory" ), this, SLOT( makDir() ));
+        m.insertItem( tr( "Rescan" ), this, SLOT( populateList() ));
+ 
+    }
     m.exec( QCursor::pos() );
-
 }
 
 void fileBrowser::doCd() {
@@ -400,6 +407,7 @@ void fileBrowser::makDir() {
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
        QString  filename = fileDlg->LineEdit1->text();
+       qDebug("Make dir");
        currentDir.mkdir( currentDir.canonicalPath()+"/"+filename);
     }
     populateList();
@@ -436,7 +444,6 @@ void fileBrowser::localDelete() {
                 // exit
               break;
         };
-
     } else {
         switch ( QMessageBox::warning(this,"Delete","Do you really want to delete\n"+f
                                       +" ?","Yes","No",0,0,1) ) {

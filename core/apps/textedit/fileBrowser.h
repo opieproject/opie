@@ -67,7 +67,7 @@ private:
     QString filterStr, mimeType;
     QDir currentDir;
     QStringList dirPathStringList, mimetypes;
-    QListViewItem * item;
+/*     QListViewItem * item; */
     QComboBox *dirPathCombo;
     MenuButton *typemb;
     QWidgetStack *FileStack;

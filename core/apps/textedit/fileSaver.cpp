@@ -14,6 +14,7 @@
 #include "fileSaver.h"
 #include <qpe/config.h>
 #include <qpe/resource.h>
+#include <qpe/mimetype.h>
 
 #include <qpe/qpeapplication.h>
 #include <qlistview.h>
@@ -47,6 +48,7 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
     docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
     docButton->setGeometry(170,4,25,25);
     connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
+    
     docButton->setFlat(TRUE);
 
     hideButton = new QPushButton( Resource::loadIconSet("textedit/s_hidden"),"",this,"hideButton");
@@ -57,10 +59,12 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
 
     ListView = new QListView( this, "ListView" );
     ListView->addColumn( tr( "Name" ) );
-    ListView->setColumnWidth(0,140);
+    ListView->setColumnWidth(0,120);
     ListView->setSorting( 2, FALSE);
     ListView->addColumn( tr( "Size" ) );
-    ListView->setColumnWidth(1,59);
+    ListView->setColumnWidth(1,-1);
+    ListView->addColumn( "Date",-1);
+
     ListView->setColumnWidthMode(0,QListView::Manual);
     ListView->setColumnAlignment(1,QListView::AlignRight);
 //      ListView->setMultiSelection(true);
@@ -97,11 +101,12 @@ fileSaver::~fileSaver()
 void fileSaver::populateList()
 {
     ListView->clear();
+    bool isDir=FALSE;
     currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
     currentDir.setMatchAllDirs(TRUE);
 
     currentDir.setNameFilter("*");
-    QString fileL, fileS;
+    QString fileL, fileS, fileDate;
     const QFileInfoList *list = currentDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
     QFileInfoListIterator it(*list);
     QFileInfo *fi;
@@ -120,10 +125,42 @@ void fileSaver::populateList()
             fileL.sprintf( "%s",fi->fileName().data() );
             if( QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+fileL)).exists() ) {
                 fileL+="/";
+                isDir=TRUE;
 //     qDebug(currentDir.canonicalPath()+fileL);
             }
         }
-        item= new QListViewItem( ListView,fileL,fileS );
+        if(fileL !="./") {
+            item= new QListViewItem( ListView,fileL,fileS , fileDate);
+            QPixmap pm;
+         
+            if(isDir || fileL.find("/",0,TRUE) != -1) {
+                if( !QDir( fi->filePath() ).isReadable()) 
+                    pm = Resource::loadPixmap( "lockedfolder" );
+                else 
+                    pm= Resource::loadPixmap( "folder" );
+                item->setPixmap( 0,pm );
+            } else {
+                if( !fi->isReadable() )
+                    pm = Resource::loadPixmap( "locked" );
+                else {
+                    MimeType mt(fi->filePath());
+                    pm=mt.pixmap();
+                    if(pm.isNull())
+                        pm =  Resource::loadPixmap( "UnknownDocument-14" );
+                    item->setPixmap( 0,pm);
+                }
+            }
+            if(  fileL.find("->",0,TRUE) != -1) {
+                  // overlay link image
+                pm= Resource::loadPixmap( "folder" );
+                QPixmap lnk = Resource::loadPixmap( "symlink" );
+                QPainter painter( &pm );
+                painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
+                pm.setMask( pm.createHeuristicMask( FALSE ) );
+                item->setPixmap( 0, pm);
+            }
+        }
+        isDir=FALSE;
         ++it;
     }
     ListView->setSorting( 2, FALSE);
