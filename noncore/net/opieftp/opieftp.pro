@@ -10,6 +10,8 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS    = ../../i18n/pt_BR/opieftp.ts
+TRANSLATIONS    += ../../i18n/es/opieftp.ts
+TRANSLATIONS    += ../../i18n/pt/opieftp.ts
 TRANSLATIONS   += ../../i18n/de/opieftp.ts
 TRANSLATIONS   += ../../i18n/en/opieftp.ts
 TRANSLATIONS   += ../../i18n/hu/opieftp.ts

@@ -35,6 +35,8 @@ LIBS            += -lqpe
 REQUIRES  = embeddedkonsole
 
 TRANSLATIONS = ../i18n/pt_BR/embeddedkonsole.ts
+TRANSLATIONS += ../i18n/es/embeddedkonsole.ts
+TRANSLATIONS += ../i18n/pt/embeddedkonsole.ts
 TRANSLATIONS   += ../i18n/de/embeddedkonsole.ts
 TRANSLATIONS   += ../i18n/en/embeddedkonsole.ts
 TRANSLATIONS   += ../i18n/hu/embeddedkonsole.ts

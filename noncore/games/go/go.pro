@@ -17,6 +17,8 @@ LIBS            += -lqpe
 TARGET		= go
 
 TRANSLATIONS = ../i18n/de/go.ts
+TRANSLATIONS += ../i18n/es/go.ts
+TRANSLATIONS += ../i18n/pt/go.ts
 TRANSLATIONS += ../i18n/pt_BR/go.ts
 TRANSLATIONS   += ../i18n/en/go.ts
 TRANSLATIONS   += ../i18n/hu/go.ts

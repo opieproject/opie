@@ -10,6 +10,8 @@ LIBS            += -lqpe
 TARGET    = sound
 
 TRANSLATIONS    = ../../i18n/pt_BR/sound.ts
+TRANSLATIONS    += ../../i18n/es/sound.ts
+TRANSLATIONS    += ../../i18n/pt/sound.ts
 TRANSLATIONS   += ../../i18n/de/sound.ts
 TRANSLATIONS   += ../../i18n/en/sound.ts
 TRANSLATIONS   += ../../i18n/hu/sound.ts

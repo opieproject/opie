@@ -14,6 +14,7 @@ LIBS            += -lqpe
 TARGET		= dictionary
 
 TRANSLATIONS    = ../i18n/pt_BR/dictionary.ts
+TRANSLATIONS    += ../i18n/pt/dictionary.ts
 TRANSLATIONS   += ../i18n/de/dictionary.ts
 TRANSLATIONS   += ../i18n/en/dictionary.ts
 TRANSLATIONS   += ../i18n/hu/dictionary.ts

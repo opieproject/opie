@@ -10,6 +10,8 @@ LIBS            += -lqpe
 TARGET		= security
 
 TRANSLATIONS    = ../../i18n/pt_BR/security.ts
+TRANSLATIONS    += ../../i18n/es/security.ts
+TRANSLATIONS    += ../../i18n/pt/security.ts
 TRANSLATIONS   += ../../i18n/de/security.ts
 TRANSLATIONS   += ../../i18n/en/security.ts
 TRANSLATIONS   += ../../i18n/hu/security.ts

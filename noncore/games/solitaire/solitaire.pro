@@ -16,6 +16,8 @@ LIBS            += -lqpe
 REQUIRES	= patience
 
 TRANSLATIONS = ../i18n/de/patience.ts
+TRANSLATIONS += ../i18n/es/patience.ts
+TRANSLATIONS += ../i18n/pt/patience.ts
 TRANSLATIONS += ../i18n/pt_BR/patience.ts
 TRANSLATIONS   += ../i18n/en/patience.ts
 TRANSLATIONS   += ../i18n/hu/patience.ts

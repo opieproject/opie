@@ -10,6 +10,8 @@ LIBS            += -lqpe
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../i18n/de/libbatteryapplet.ts
+TRANSLATIONS += ../../i18n/es/libbatteryapplet.ts
+TRANSLATIONS += ../../i18n/pt/libbatteryapplet.ts
 TRANSLATIONS += ../../i18n/pt_BR/libbatteryapplet.ts
 TRANSLATIONS   += ../../i18n/en/libbatteryapplet.ts
 TRANSLATIONS   += ../../i18n/hu/libbatteryapplet.ts

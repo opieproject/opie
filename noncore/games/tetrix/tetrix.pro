@@ -17,6 +17,8 @@ LIBS            += -lqpe
 INTERFACES	= 
 
 TRANSLATIONS = ../i18n/pt_BR/tetrix.ts
+TRANSLATIONS += ../i18n/es/tetrix.ts
+TRANSLATIONS += ../i18n/pt/tetrix.ts
 TRANSLATIONS   += ../i18n/de/tetrix.ts
 TRANSLATIONS   += ../i18n/en/tetrix.ts
 TRANSLATIONS   += ../i18n/fr/tetrix.ts

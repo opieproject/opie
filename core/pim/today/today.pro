@@ -11,6 +11,7 @@ INTERFACES	=
 TARGET		= today
 DESTDIR		= $(OPIEDIR)/bin
 TRANSLATIONS    = ../i18n/pt_BR/today.ts
+TRANSLATIONS    += ../i18n/pt/today.ts
 TRANSLATIONS   += ../i18n/de/today.ts
 TRANSLATIONS   += ../i18n/en/today.ts
 TRANSLATIONS   += ../i18n/hu/today.ts

@@ -11,6 +11,8 @@ INTERFACES  =
 TARGET    = clock
 
 TRANSLATIONS = ../i18n/de/clock.ts
+TRANSLATIONS += ../i18n/es/clock.ts
+TRANSLATIONS += ../i18n/pt/clock.ts
 TRANSLATIONS += ../i18n/pt_BR/clock.ts
 TRANSLATIONS   += ../i18n/en/clock.ts
 TRANSLATIONS   += ../i18n/hu/clock.ts

@@ -12,3 +12,5 @@ MOC_DIR=opieobj
 OBJECTS_DIR=opieobj
 
 TRANSLATIONS = ../../i18n/pt_BR/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/es/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/pt/libscreenshotapplet.ts

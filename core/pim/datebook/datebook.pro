@@ -45,6 +45,7 @@ LIBS            += -lqpe -lopie
 TARGET		= datebook
 
 TRANSLATIONS    = ../i18n/pt_BR/datebook.ts
+TRANSLATIONS    += ../i18n/pt/datebook.ts
 TRANSLATIONS   += ../i18n/de/datebook.ts
 TRANSLATIONS   += ../i18n/en/datebook.ts
 TRANSLATIONS   += ../i18n/hu/datebook.ts

@@ -1,4 +1,4 @@
-# $Id: citytime.pro,v 1.8 2002-04-13 13:20:52 cniehaus Exp $
+# $Id: citytime.pro,v 1.9 2002-06-16 15:05:48 cniehaus Exp $
 CONFIG += qt warn_on release
 TEMPLATE = app
 DESTDIR         = $(OPIEDIR)/bin
@@ -11,6 +11,8 @@ DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS = ../i18n/de/citytime.ts
+TRANSLATIONS += ../i18n/es/citytime.ts
+TRANSLATIONS += ../i18n/pt/citytime.ts
 TRANSLATIONS += ../i18n/pt_BR/citytime.ts
 TRANSLATIONS   += ../i18n/en/citytime.ts
 TRANSLATIONS   += ../i18n/hu/citytime.ts

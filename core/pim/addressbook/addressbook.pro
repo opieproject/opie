@@ -22,6 +22,8 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
 
 TRANSLATIONS    = ../../i18n/pt_BR/addressbook.ts
+TRANSLATIONS    += ../../i18n/es/addressbook.ts
+TRANSLATIONS    += ../../i18n/pt/addressbook.ts
 TRANSLATIONS   += ../../i18n/de/addressbook.ts
 TRANSLATIONS   += ../../i18n/en/addressbook.ts
 TRANSLATIONS   += ../../i18n/hu/addressbook.ts

@@ -10,3 +10,5 @@ LIBS            += -lqpe
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../i18n/pt_BR/libvmemoapplet.ts
+TRANSLATIONS += ../../i18n/es/libvmemoapplet.ts
+TRANSLATIONS += ../../i18n/pt/libvmemoapplet.ts

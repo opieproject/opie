@@ -10,6 +10,8 @@ LIBS            += -lqpe
 VERSION		= 1.0.0
 
 TRANSLATIONS    = ../../i18n/pt_BR/libqpickboard.ts
+TRANSLATIONS    += ../../i18n/es/libqpickboard.ts
+TRANSLATIONS    += ../../i18n/pt/libqpickboard.ts
 TRANSLATIONS   += ../../i18n/de/libqpickboard.ts
 TRANSLATIONS   += ../../i18n/en/libqpickboard.ts
 TRANSLATIONS   += ../../i18n/pl/libqpickboard.ts
