@@ -54,5 +54,6 @@ QString StockTickerPlugin::appName() const {
 }
 
 bool StockTickerPlugin::excludeFromRefresh() const {
+//return false;
 return true;
 }

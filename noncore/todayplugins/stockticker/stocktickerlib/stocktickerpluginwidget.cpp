@@ -22,6 +22,7 @@
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qregexp.h>
+#include <qtimer.h>
 
 #include <qpe/config.h>
 #include <qpe/timestring.h>
@@ -38,6 +39,7 @@ extern "C" {
 StockTickerPluginWidget::StockTickerPluginWidget( QWidget *parent,  const char* name)
     : QWidget(parent,  name ) {
     init();
+    startTimer(1000);
 }
 
 StockTickerPluginWidget::~StockTickerPluginWidget() {
@@ -236,4 +238,9 @@ void StockTickerPluginWidget::DefProxy(void) {
 //             exit(1);
         }
     }
+}
+
+void  StockTickerPluginWidget::timerEvent( QTimerEvent *e ) {
+    killTimer(e->timerId());    
+    doStocks();
 }

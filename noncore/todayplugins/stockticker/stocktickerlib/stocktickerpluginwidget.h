@@ -38,6 +38,8 @@
 /* #include "stocks.h" */
 /* } */
 
+class QTimer;
+
 class StockTickerPluginWidget : public QWidget {
 
     Q_OBJECT
@@ -52,7 +54,7 @@ protected slots:
 
 private:
     Ticker *stocktickerTicker;
-
+    void timerEvent( QTimerEvent * );
     void init();
     void getStocks( const char *stock_liste);
     void DefProxy(void);
