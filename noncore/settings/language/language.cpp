@@ -115,9 +115,9 @@ void LanguageSettings::reset()
 	Config config("locale");
 	config.setGroup("Language");
 	l = config.readEntry( "Language", l );
+	actualLanguage = l;
 	if (l.isEmpty())
 		l = "en";
-	actualLanguage = l;
 
 	int n = langAvail.find( l );
 	languages->setCurrentItem( n );
