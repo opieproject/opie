@@ -408,6 +408,10 @@
                     <vsizetype>7</vsizetype>
                 </sizepolicy>
             </property>
+            <property stdset="1">
+                <name>wordWrap</name>
+                <enum>WidgetWidth</enum>
+            </property>
         </widget>
     </vbox>
 </widget>
