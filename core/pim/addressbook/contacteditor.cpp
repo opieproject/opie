@@ -137,6 +137,8 @@ void ContactEditor::init() {
 	svGeneral = new QScrollView( tabViewport );
 	vb->addWidget( svGeneral, 0, 0 );
 	svGeneral->setResizePolicy( QScrollView::AutoOneFit );
+	// svGeneral->setHScrollBarMode( QScrollView::AlwaysOff );
+	// svGeneral->setVScrollBarMode( QScrollView::AlwaysOff );
 	svGeneral->setFrameStyle( QFrame::NoFrame );
 
 	QWidget *container = new QWidget( svGeneral->viewport() );
@@ -774,15 +776,14 @@ bool ContactEditor::cmbChooserChange( int index, QWidgetStack* inputStack, int w
 		qWarning(" Hiding default-email combo" );
 		if ( defaultEmailChooserPosition == widgetPos ){
 			defaultEmailChooserPosition = -1;
-			QComboBox* cmbo = ( QComboBox* ) inputStack -> widget( Combo );
-			if ( cmbo ){  
-				inputStack->raiseWidget( TextField );
-				inputStack -> removeWidget( cmbo );
-				cmbDefaultEmail = 0l;
-				delete cmbo;
-			}
-
-		} 
+		}
+		QComboBox* cmbo = ( QComboBox* ) inputStack -> widget( Combo );
+		if ( cmbo ){  
+			inputStack->raiseWidget( TextField );
+			inputStack -> removeWidget( cmbo );
+			cmbDefaultEmail = 0l;
+			delete cmbo;
+		}
 
 		// Caller should initialize the responsible textfield, therefore
 		// "false" is returned
