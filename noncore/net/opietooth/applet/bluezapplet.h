@@ -50,7 +50,7 @@ public slots:
         void mousePressEvent( QMouseEvent * );
         void paintEvent( QPaintEvent* );
         void launchManager();
-        int checkBluezStatus();
+        bool checkBluezStatus();
         int setBluezStatus(int);
         int checkBluezDiscoveryStatus();
         int setBluezDiscoveryStatus(int);
@@ -61,7 +61,7 @@ public slots:
         QPixmap bluezOnPixmap;
         QPixmap bluezOffPixmap;
         QPixmap bluezDiscoveryOnPixmap;
-        int bluezactive;
+        bool bluezactive;
         int bluezDiscoveryActive;
 
 private slots:

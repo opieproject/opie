@@ -62,15 +62,15 @@ namespace OpieTooth {
     BluezApplet::~BluezApplet() {
     }
 
-    int BluezApplet::checkBluezStatus() {
+    bool BluezApplet::checkBluezStatus() {
         if (btDevice) {
             if (btDevice->isLoaded() ) {
-                return 1;
+                return true;
             } else {
-                return 0;
+                return false;
             }
         } else {
-            return 0;
+            return false;
         }
     }
 
@@ -128,19 +128,24 @@ namespace OpieTooth {
         switch(ret) {
         case 0:
             setBluezStatus(0);
+            timerEvent(NULL);
             break;
         case 1:
             setBluezStatus(1);
+            timerEvent(NULL);
             break;
         case 2:
             // start bluetoothmanager
             launchManager();
+            timerEvent(NULL);
             break;
         case 3:
             setBluezDiscoveryStatus(0);
+            timerEvent(NULL);
             break;
         case 4:
             setBluezDiscoveryStatus(1);
+            timerEvent(NULL);
             break;
             //case 7:
             // With table of currently-detected devices.
@@ -165,7 +170,7 @@ namespace OpieTooth {
  * @param the timer event
  */
     void BluezApplet::timerEvent( QTimerEvent * ) {
-        int oldactive = bluezactive;
+        bool oldactive = bluezactive;
         int olddiscovery = bluezDiscoveryActive;
 
         bluezactive = checkBluezStatus();
