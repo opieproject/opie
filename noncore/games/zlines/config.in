@@ -1,4 +1,4 @@
   config ZLINES
-    boolean "opie-zlines ()"
+    boolean "opie-zlines (move 5 balls adjacent to get rid of them)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
