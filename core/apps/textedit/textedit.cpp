@@ -387,7 +387,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     Config cfg("TextEdit");
 
-	cfg. setGroup ( "Font" );
+  cfg. setGroup ( "Font" );
 
     QFont defaultFont = editor-> font ( );
 
@@ -408,8 +408,8 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     if ( useAdvancedFeatures )
         nAdvanced-> setOn ( true );
   
-  	bool wrap = cfg. readBoolEntry ( "Wrap", true );
-  	wa-> setOn ( wrap );
+    bool wrap = cfg. readBoolEntry ( "Wrap", true );
+    wa-> setOn ( wrap );
     setWordWrap ( wrap );
 
      if(cfg.readEntry("startNew","TRUE") == "TRUE") {
@@ -428,8 +428,8 @@ TextEdit::~TextEdit() {
 }
 
 void TextEdit::cleanUp() {
-	qDebug("cleanUp");//    save();
-	
+  qDebug("cleanUp");//    save();
+  
     Config cfg ( "TextEdit" );
     cfg. setGroup ( "Font" );
     QFont f = editor->font();
@@ -441,7 +441,7 @@ void TextEdit::cleanUp() {
     cfg. setGroup ( "View" );
     cfg. writeEntry ( "Wrap",     editor-> wordWrap ( ) == QMultiLineEdit::WidgetWidth );
     cfg. writeEntry ( "FileView", viewSelection );
-	cfg. writeEntry ( "AdvancedFeatures", useAdvancedFeatures );
+  cfg. writeEntry ( "AdvancedFeatures", useAdvancedFeatures );
 }
 
 
@@ -624,7 +624,8 @@ void TextEdit::openFile( const QString &f ) {
 //    bFromDocView = TRUE;
     if(f.find(".desktop",0,TRUE) != -1 && useAdvancedFeatures) {
         switch ( QMessageBox::warning(this,tr("Text Editor"),
-        tr("Text Editor has detected<BR>you selected a <B>.desktop</B> file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
+        tr("Text Editor has detected<BR>you selected a <B>.desktop</B>
+file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
         tr(".desktop File"),tr("Linked Document"),0,1,1) ) {
           case 0:
               filer = f;
@@ -635,10 +636,10 @@ void TextEdit::openFile( const QString &f ) {
               break;
         }
     } else {
-        DocLnk sf(f);
-        filer = sf.file();
-//         filer = f;
-//         fileIs = TRUE;
+         DocLnk sf(f);
+         filer = sf.file();
+         if(filer.right(1) == "/")
+         filer = f;
     }
         
     DocLnk nf;
@@ -882,16 +883,16 @@ void TextEdit::closeEvent( QCloseEvent *e ) {
 }
 
 void TextEdit::changeFont() {
-	QDialog *d = new QDialog ( this, "FontDialog", true );
-	d-> setCaption ( tr( "Choose font" ));
-	QBoxLayout *lay = new QVBoxLayout ( d );
-	OFontSelector *ofs = new OFontSelector ( true, d );
-	lay-> addWidget ( ofs );
-	ofs-> setSelectedFont ( editor-> font ( ));
+  QDialog *d = new QDialog ( this, "FontDialog", true );
+  d-> setCaption ( tr( "Choose font" ));
+  QBoxLayout *lay = new QVBoxLayout ( d );
+  OFontSelector *ofs = new OFontSelector ( true, d );
+  lay-> addWidget ( ofs );
+  ofs-> setSelectedFont ( editor-> font ( ));
 
-	d-> showMaximized ( );
+  d-> showMaximized ( );
     if ( d-> exec ( ) == QDialog::Accepted )
-	    editor-> setFont ( ofs-> selectedFont ( ));
+      editor-> setFont ( ofs-> selectedFont ( ));
     delete d;
 
 }
