@@ -58,10 +58,11 @@ Device::Device( QObject * parent, bool record )
     devRate = -1;
 
     if( !record){ //playing
-        owarn << "setting up DSP for playing" << oendl;
-        flags = O_WRONLY;
+        owarn << "New Sound device DSP for playing" << oendl;
+        flags = O_RDWR;
+//        flags = O_WRONLY;
     } else { //recording
-        owarn << "setting up DSP for recording" << oendl;
+        owarn << "New Sound device DSP for recording" << oendl;
         flags = O_RDWR;
 //        flags = O_RDONLY;
 				selectMicInput();
@@ -69,6 +70,7 @@ Device::Device( QObject * parent, bool record )
 }
 
 bool Device::openDsp() {
+		qWarning("Device::openDsp()");
     if( openDevice( flags) == -1) {
         perror("<<<<<<<<<<<<<<ioctl(\"Open device\")");
         return false;
@@ -77,10 +79,10 @@ bool Device::openDsp() {
 }
 
 int Device::openDevice( int flags) {
-		owarn << "Opening"<< dspstr;
+		owarn << "Opening sound device:"<< DSPSTROUT << oendl;
 
-		if (( sd = ::open( DSPSTROUT, flags)) == -1) {
-				perror("open(\"/dev/dsp\")");
+		if (( sd = ::open( DSPSTROUT, O_RDWR)) == -1) {
+				perror("open(\"/dev/dsp\")\n");
 				QString errorMsg="Could not open audio device\n /dev/dsp\n"
 						+(QString)strerror(errno);
 				qDebug( "XXXXXXXXXXXXXXXXXXXXXXX  "+errorMsg );
@@ -90,6 +92,7 @@ int Device::openDevice( int flags) {
 		if(ioctl(sd,SNDCTL_DSP_RESET,0)<0){
 				perror("ioctl RESET");
 		}
+		qWarning("opened!");
     return sd;
 }
 
@@ -150,6 +153,7 @@ bool Device::selectMicInput() {
 }
 
 bool Device::closeDevice( bool) {
+		if(sd)
     ::close( sd); //close sound device
     return true;
 }

@@ -31,6 +31,7 @@ contains(CONFIG, pdaudio) {
   INCLUDEPATH += $(OPIEDIR)/include
   DEPENDPATH  += $(OPIEDIR)/include
   LIBS            += -lqpe -lopiecore2 -lpthread
+  DEFINES += THREADED
   TARGET    = opierec
   include( $(OPIEDIR)/include.pro )
 }
