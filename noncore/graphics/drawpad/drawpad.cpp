@@ -35,7 +35,6 @@
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
-#include <qpe/global.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
