@@ -126,6 +126,7 @@ CONFIG_QCOP	core/apps/qcop	qcop.pro
 CONFIG_QPDF	noncore/graphics/qpdf	qpdf.pro
 CONFIG_REMOTE	noncore/tools/remote	remote.pro
 CONFIG_ROTATION	noncore/settings/rotation	rotation.pro
+CONFIG_SFCAVE	noncore/games/sfcave	sfcave.pro
 CONFIG_SCREENSHOTAPPLET	core/applets/screenshotapplet	screenshotapplet.pro
 CONFIG_SECURITY	core/settings/security	security.pro
 CONFIG_SHOWIMG	noncore/multimedia/showimg	showimg.pro
