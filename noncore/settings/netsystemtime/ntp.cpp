@@ -310,10 +310,14 @@ void Ntp::makeChannel()
 
 void Ntp::receive(const QCString &msg, const QByteArray &arg)
 {
-	qDebug("QCop "+msg+" "+QCString(arg));
-	if ( msg == "open(QString)" )
+	qDebug("QCop(Ntp) "+msg+" "+QCString(arg));
+	if ( msg == "ntpLookup(QString)" )
  	{
-  //	qApp->exec();
+  	  slotRunNtp();
+	}
+	if ( msg == "setPredictedTime(QString)" )
+ 	{
+  	  setPredictTime();
 	}else{
     	qDebug("Ntp::receive: Huh what do ya want");
  	}
