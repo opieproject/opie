@@ -35,17 +35,17 @@ public:
 	~Package();
 
     void setLocalPackage( Package *p );
-    void setPackageName( QString &name );
-    void setVersion( QString &v );
-    void setStatus( QString &s );
-    void setDescription( QString &d );
-    void setFilename( QString &f );
+    void setPackageName( const QString &name );
+    void setVersion( const QString &v );
+    void setStatus( const QString &s );
+    void setDescription( const QString &d );
+    void setFilename( const QString &f );
 	void setPackageStoredLocally( bool local )	{ packageStoredLocally = local; }
     void setInstalledToRoot( bool root )        { installedToRoot = root; }
     void setInstalledTo( Destination *d )       { installedTo = d; }
     void setDependancies( QString &deps )       { dependancies = deps; }
-    void setPackageSize( QString size )         { packageSize = size; }
-    void setSection( QString sect)              { section = sect; }
+    void setPackageSize( const QString &size )         { packageSize = size; }
+    void setSection( const QString &sect)              { section = sect; }
 
     Package *getLocalPackage()      { return localPackage; }
     QString getPackageName()        { return packageName; }

@@ -247,7 +247,21 @@ void Server :: buildLocalPackages( Server *local )
             name = Utils::getPackageNameFromIpkFilename( packageList[i].getFilename() );
 
         if ( local )
-            packageList[i].setLocalPackage( local->getPackage( name ) );
+        {
+            Package *p = local->getPackage( name );
+            packageList[i].setLocalPackage( p );
+            if ( p )
+            {
+                // Set some default stuff like size and things
+                if ( p->getInstalledVersion() == packageList[i].getVersion() )
+                {
+                    p->setPackageSize( packageList[i].getPackageSize() );
+                    p->setSection( packageList[i].getSection() );
+                    p->setDescription( packageList[i].getDescription() );
+                }
+            }
+            
+        }
         else
             packageList[i].setLocalPackage( 0 );
     }
@@ -283,13 +297,7 @@ QString Server :: toString()
 
 
     return ret;
-}                     /*
-void addAvailableSection( QString section )
-{
-  if ( DataManager::availableCategories.find( value ) == -1 )
-//                DataManager::availableCategories += "#" + value;
 }
-*/
 
 vector<Package> &Server::getPackageList()
 {

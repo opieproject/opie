@@ -56,7 +56,7 @@ QString Package :: toString()
     return ret;
 }
 
-void Package :: setStatus( QString &s )
+void Package :: setStatus( const QString &s )
 {
     status = s;
 
@@ -75,7 +75,7 @@ void Package :: setLocalPackage( Package *p )
             differentVersionAvailable = false;
 }
 
-void Package :: setVersion( QString &v )
+void Package :: setVersion( const QString &v )
 {
     version = v;
 
@@ -86,17 +86,17 @@ void Package :: setVersion( QString &v )
             differentVersionAvailable = false;
 }
 
-void Package :: setPackageName( QString &name )
+void Package :: setPackageName( const QString &name )
 {
     packageName = name;
 }
 
-void Package :: setDescription( QString &d )
+void Package :: setDescription( const QString &d )
 {
     description = d;
 }
 
-void Package :: setFilename( QString &f )
+void Package :: setFilename( const QString &f )
 {
 	filename = f;
 }
