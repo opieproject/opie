@@ -143,6 +143,13 @@ enum ODirection {
 	Flip = 2,
 };
 
+enum OHingeStatus {
+    CASE_CLOSED = 3,
+    CASE_PORTRAIT = 2,
+    CASE_LANDSCAPE = 0,
+    CASE_UNKNOWN = 1,
+};
+
 /**
  * A singleton which gives informations about device specefic option
  * like the Hardware used, LEDs, the Base Distribution and
@@ -207,8 +214,8 @@ public:
 	//	protected virtual int virtual_hook(int, void *)
 	// which is defined below
 
-// input / output
-        //FIXME playAlarmSound and al might be better -zecke
+    // input / output
+    //FIXME playAlarmSound and al might be better -zecke
 	virtual void alarmSound ( );
 	virtual void keySound ( );
 	virtual void touchSound ( );
@@ -221,6 +228,9 @@ public:
 	virtual bool hasLightSensor ( ) const;
 	virtual int readLightSensor ( );
 	virtual int lightSensorResolution ( ) const;
+
+	virtual bool hasHingeSensor ( ) const;
+	virtual OHingeStatus readHingeSensor ( );
 
 	const QStrList &allowedCpuFrequencies() const;
 	bool setCurrentCpuFrequency(uint index);

@@ -140,9 +140,12 @@ public:
 	virtual OLedState ledState ( OLed led ) const;
 	virtual bool setLedState ( OLed led, OLedState st );
 
+	virtual bool hasHingeSensor() const;
+	virtual OHingeStatus readHingeSensor();
+
 	static bool isZaurus();
-	
-	// Does this break BC? 
+
+	// Does this break BC?
 	virtual bool suspend ( );
 	virtual Transformation rotation ( ) const;
 	virtual ODirection direction ( ) const;
@@ -533,7 +536,7 @@ void ODevice::initButtons ( )
 
 ODevice::~ODevice ( )
 {
-// we leak m_devicebuttons and m_cpu_frequency 
+// we leak m_devicebuttons and m_cpu_frequency
 // but it's a singleton and it is not so importantant
 // -zecke
 	delete d;
@@ -823,7 +826,7 @@ bool ODevice::hasLightSensor ( ) const
 }
 
 /**
- * @return a value from the light senso
+ * @return a value from the light sensor
  */
 int ODevice::readLightSensor ( )
 {
@@ -831,11 +834,27 @@ int ODevice::readLightSensor ( )
 }
 
 /**
- * @return the light sensor resolution whatever that is ;)
+ * @return the light sensor resolution
  */
 int ODevice::lightSensorResolution ( ) const
 {
 	return 0;
+}
+
+/**
+ * @return if the device has a hinge sensor
+ */
+bool ODevice::hasHingeSensor ( ) const
+{
+	return false;
+}
+
+/**
+ * @return a value from the hinge sensor
+ */
+OHingeStatus ODevice::readHingeSensor ( )
+{
+	return CASE_UNKNOWN;
 }
 
 /**
@@ -849,7 +868,7 @@ const QStrList &ODevice::allowedCpuFrequencies ( ) const
 
 /**
  * Set desired CPU frequency
- * 
+ *
  * @param index index into d->m_cpu_frequencies of the frequency to be set
  */
 bool ODevice::setCurrentCpuFrequency(uint index)
@@ -1782,7 +1801,7 @@ void Zaurus::buzzer ( int sound )
 			break;
 		default:
 			soundname = "alarm";
-			
+
 		}
 	}
 
@@ -1945,33 +1964,49 @@ bool Zaurus::setSoftSuspend ( bool soft )
 
 bool Zaurus::setDisplayBrightness ( int bright )
 {
-// FIXME The C7x0 have a proc-interface (/proc/drivers/corgi-bl) which
-//       is nice to use. Currently it exposes 16+1 levels. Implement this!
-//       (or wait for kergoth unifying the interfaces in the OpenZaurus kernel.)
-	bool res = false;
-	int fd;
+    bool res = false;
+    int fd;
 
-	if ( bright > 255 )
-		bright = 255;
-	if ( bright < 0 )
-		bright = 0;
+    if ( bright > 255 ) bright = 255;
+    if ( bright < 0 ) bright = 0;
 
-	if (m_embedix) {
-		if (( fd = ::open ( "/dev/fl", O_WRONLY )) >= 0 ) {
-			int bl = ( bright * 4 + 127 ) / 255; // only 4 steps on zaurus
-			if ( bright && !bl )
-				bl = 1;
-			res = ( ::ioctl ( fd, FL_IOCTL_STEP_CONTRAST, bl ) == 0 );
-			::close ( fd );
-		}
-	} else {
-#define FB_BACKLIGHT_SET_BRIGHTNESS     _IOW('F', 1, u_int)             /* set brightness */
-		if (( fd = ::open ( "/dev/fb0", O_WRONLY )) >= 0 ) {
-			res = ( ::ioctl ( fd , FB_BACKLIGHT_SET_BRIGHTNESS, bright ) == 0 );
-			::close ( fd );
-		}
-	}
-	return res;
+    if ( m_embedix )
+    {
+        if ( d->m_model == Model_Zaurus_SLC7x0 )
+        {
+            // special treatment for devices with the corgi backlight interface
+            if (( fd = ::open ( "/proc/driver/fl/corgi-bl", O_WRONLY )) >= 0 )
+            {
+                if ( bright > 0x11 ) bright = 0x11;
+                char writeCommand[100];
+                const int count = sprintf( writeCommand, "0x%x\n", bright );
+                res = ( ::write ( fd, writeCommand, count ) != -1 );
+                ::close ( fd );
+            }
+            return res;
+        }
+        else
+        {
+            // standard treatment for devices with the dumb embedix frontlight interface
+            if (( fd = ::open ( "/dev/fl", O_WRONLY )) >= 0 ) {
+                int bl = ( bright * 4 + 127 ) / 255; // only 4 steps on zaurus
+                if ( bright && !bl )
+                    bl = 1;
+                res = ( ::ioctl ( fd, FL_IOCTL_STEP_CONTRAST, bl ) == 0 );
+                ::close ( fd );
+            }
+        }
+    }
+    else
+    {
+        // special treatment for the OpenZaurus unified interface
+        #define FB_BACKLIGHT_SET_BRIGHTNESS     _IOW('F', 1, u_int)             /* set brightness */
+        if (( fd = ::open ( "/dev/fb0", O_WRONLY )) >= 0 ) {
+            res = ( ::ioctl ( fd , FB_BACKLIGHT_SET_BRIGHTNESS, bright ) == 0 );
+            ::close ( fd );
+        }
+    }
+    return res;
 }
 
 bool Zaurus::suspend ( )
@@ -2073,10 +2108,41 @@ ODirection Zaurus::direction ( ) const
 int Zaurus::displayBrightnessResolution ( ) const
 {
 	if (m_embedix)
-		return 5;
+		return d->m_model == Model_Zaurus_SLC7x0 ? 18 : 5;
 	else
 		return 256;
 }
+
+bool Zaurus::hasHingeSensor() const
+{
+    return d->m_model == Model_Zaurus_SLC7x0;
+}
+
+OHingeStatus Zaurus::readHingeSensor()
+{
+    int handle = ::open("/dev/apm_bios", O_RDWR|O_NONBLOCK);
+    if (handle == -1)
+    {
+        qWarning("Zaurus::readHingeSensor() - failed (%s)", "unknown reason" ); //FIXME: use strerror
+        return CASE_UNKNOWN;
+    }
+    else
+    {
+        int retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
+        ::close (handle);
+        if ( retval == CASE_CLOSED || retval == CASE_PORTRAIT || retval == CASE_LANDSCAPE )
+        {
+            qDebug( "Zaurus::readHingeSensor() - result = %d", retval );
+            return static_cast<OHingeStatus>( retval );
+        }
+        else
+        {
+            qWarning("Zaurus::readHingeSensor() - couldn't compute hinge status!" );
+            return CASE_UNKNOWN;
+        }
+    }
+}
+
 
 /**************************************************
  *
