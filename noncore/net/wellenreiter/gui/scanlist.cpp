@@ -129,8 +129,8 @@ void MScanListView::addNewItem( const QString& type,
     QString macaddr = mac.toString(true);
 
     #ifdef DEBUG
-    odebug << "MScanList::addNewItem( " << (const char*) type << " / "
-           << (const char*) essid << " / " << (const char*) macaddr
+    odebug << "MScanList::addNewItem( "  << type << " / "
+           << essid << " / " << macaddr
            << " [" << channel << "]" << oendl;
     #endif
 
