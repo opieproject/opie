@@ -43,8 +43,11 @@ ProcessDetail::ProcessDetail( QWidget* parent,  const char* name, bool modal, WF
     SignalCB->setMinimumSize( QSize( 50, 24 ) );
     SignalCB->setMaximumSize( QSize( 600, 24 ) );
     SignalCB->insertItem( " 1: SIGHUP" );
+    SignalCB->insertItem( " 2: SIGINT" );
     SignalCB->insertItem( " 9: SIGKILL" );
     SignalCB->insertItem( "15: SIGTERM" );
+    SignalCB->insertItem( "18: SIGCONT" );
+    SignalCB->insertItem( "19: SIGSTOP" );
     layout->addWidget( SignalCB, 1, 0 );
 
     ProcessView = new QTextView( this, "ProcessView" );
