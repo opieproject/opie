@@ -297,9 +297,11 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
             m->setMsgid(QString(head->env_message_id));
         } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_INTERNALDATE) {
             mailimap_date_time*d = item->att_data.att_static->att_data.att_internal_date;
+#if 0            
             QDateTime da(QDate(d->dt_year,d->dt_month,d->dt_day),QTime(d->dt_hour,d->dt_min,d->dt_sec));
             qDebug("%i %i %i - %i %i %i",d->dt_year,d->dt_month,d->dt_day,d->dt_hour,d->dt_min,d->dt_sec);
             qDebug(da.toString());
+#endif            
         } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_RFC822_SIZE) {
             size = item->att_data.att_static->att_data.att_rfc822_size;
         }
@@ -718,13 +720,18 @@ void IMAPwrapper::deleteMail(const RecMail&mail)
     store_flags = mailimap_store_att_flags_new_set_flags(flist);
     set = mailimap_set_new_single(mail.getNumber());
     err = mailimap_store(m_imap,set,store_flags);
+    mailimap_set_free( set );
+    mailimap_store_att_flags_free(store_flags);
+
     if (err != MAILIMAP_NO_ERROR) {
         qDebug("error deleting mail: %s",m_imap->imap_response);
         return;
     }
+    qDebug("deleting mail: %s",m_imap->imap_response);
+    /* should we realy do that at this moment? */
     err = mailimap_expunge(m_imap);
     if (err != MAILIMAP_NO_ERROR) {
         qDebug("error deleting mail: %s",m_imap->imap_response);
     }
-    qDebug("Delete successfull");
+    qDebug("Delete successfull %s",m_imap->imap_response);
 }
