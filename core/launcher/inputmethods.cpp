@@ -100,8 +100,8 @@ InputMethods::InputMethods( QWidget *parent ) :
 {
     Config cfg( "Launcher" );
     cfg.setGroup( "InputMethods" );
-    inputWidgetStyle = QWidget::WStyle_Customize | QWidget::WStyle_StaysOnTop | QWidget::WGroupLeader;
-    inputWidgetStyle |= cfg.readBoolEntry( "Float", false ) ? QWidget::WStyle_DialogBorder : QWidget::WStyle_Tool;
+    inputWidgetStyle = QWidget::WStyle_Customize | QWidget::WStyle_StaysOnTop | QWidget::WGroupLeader | QWidget::WStyle_Tool;
+    inputWidgetStyle |= cfg.readBoolEntry( "Float", false ) ? QWidget::WStyle_DialogBorder : 0;
     inputWidgetWidth = cfg.readNumEntry( "Width", 100 );
 
     setBackgroundMode( PaletteBackground );
@@ -530,18 +530,66 @@ void InputMethods::qcopReceive( const QCString &msg, const QByteArray &data )
 void InputMethods::showKbd( bool on )
 {
     if ( !mkeyboard )
-	return;
+        return;
 
-    if ( on ) {
-	mkeyboard->resetState();
-	// HACK... Make the texteditor fit with all input methods
-	// Input methods should also never use more than about 40% of the screen
-	int height = QMIN( mkeyboard->widget->sizeHint().height(), 134 );
-	mkeyboard->widget->resize( qApp->desktop()->width() * (inputWidgetWidth*0.01), height );
-	mkeyboard->widget->move( 0, mapToGlobal( QPoint() ).y() - height );
-	mkeyboard->widget->show();
-    } else {
-	mkeyboard->widget->hide();
+    if ( on )
+    {
+        mkeyboard->resetState();
+
+        int height = QMIN( mkeyboard->widget->sizeHint().height(), 134 );
+        int width = qApp->desktop()->width() * (inputWidgetWidth*0.01);
+        int left = 0;
+        int top = mapToGlobal( QPoint() ).y() - height;
+
+        if ( inputWidgetStyle & QWidget::WStyle_DialogBorder )
+        {
+            qDebug( "InputMethods: reading geometry." );
+            Config cfg( "Launcher" );
+            cfg.setGroup( "InputMethods" );
+            int l = cfg.readNumEntry( "absX", -1 );
+            int t = cfg.readNumEntry( "absY", -1 );
+            int w = cfg.readNumEntry( "absWidth", -1 );
+            int h = cfg.readNumEntry( "absHeight", -1 );
+
+            if ( l > -1 && t > -1 && w > -1 && h > -1 )
+            {
+                qDebug( "InputMethods: config values ( %d, %d, %d, %d ) are ok.", l, t, w, h );
+                left = l;
+                top = t;
+                width = w;
+                height = h;
+            }
+            else
+            {
+                qDebug( "InputMethods: config values are new or not ok." );
+            }
+        }
+        else
+        {
+            qDebug( "InputMethods: no floating selected." );
+        }
+        mkeyboard->widget->resize( width, height );
+        mkeyboard->widget->move( left, top );
+        mkeyboard->widget->show();
+        mkeyboard->widget->installEventFilter( this );
+    }
+    else
+    {
+        if ( inputWidgetStyle & QWidget::WStyle_DialogBorder )
+        {
+            QPoint pos = mkeyboard->widget->pos();
+            QSize siz = mkeyboard->widget->size();
+            qDebug( "InputMethods: saving geometry." );
+            Config cfg( "Launcher" );
+            cfg.setGroup( "InputMethods" );
+            cfg.writeEntry( "absX", pos.x() );
+            cfg.writeEntry( "absY", pos.y() );
+            cfg.writeEntry( "absWidth", siz.width() );
+            cfg.writeEntry( "absHeight", siz.height() );
+            cfg.write();
+            mkeyboard->widget->hide();
+            mkeyboard->widget->removeEventFilter( this );
+        }
     }
 
     emit inputToggled( on );
@@ -563,4 +611,16 @@ void InputMethods::sendKey( ushort unicode, ushort scancode, ushort mod, bool pr
 #if defined(Q_WS_QWS)
     QWSServer::sendKeyEvent( unicode, scancode, mod, press, repeat );
 #endif
+}
+
+bool InputMethods::eventFilter( QObject* o, QEvent* e )
+{
+    if ( e->type() == QEvent::Close )
+    {
+        ( (QCloseEvent*) e )->ignore();
+        showKbd( false );
+        kbdButton->setOn( false );
+        return true;
+    }
+    return false;
 }

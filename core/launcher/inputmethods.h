@@ -73,6 +73,7 @@ public:
     void hideInputMethod();
     void unloadInputMethods();
     void loadInputMethods();
+    virtual bool eventFilter( QObject *, QEvent * );
 
 signals:
     void inputToggled( bool on );
