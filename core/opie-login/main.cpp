@@ -54,6 +54,7 @@
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qfile.h>
+#include <qtextstream.h>
 
 #include "loginapplication.h"
 #include "loginwindowimpl.h"
@@ -74,6 +75,7 @@ static struct option long_options [] = {
 
 int main ( int argc, char **argv )
 {
+    int userExited = 0;
 	pid_t ppid = ::getpid ( );
 
 	if ( ::geteuid ( ) != 0 ) {
@@ -137,11 +139,17 @@ int main ( int argc, char **argv )
 				}
 			}
 			int killedbysig = 0;
+            userExited=0;
+            if (WIFEXITED(status)!=0 ) {
+                if (WEXITSTATUS(status)==137)  {
+                    userExited=1;
+                }
+            }
 
 			if ( WIFSIGNALED( status )) {
 				switch ( WTERMSIG( status )) {
-					case SIGINT :
 					case SIGTERM:
+					case SIGINT :
 					case SIGKILL:
 						break;
 
@@ -184,16 +192,23 @@ int main ( int argc, char **argv )
 					autolog = ::strdup ( user. latin1 ( ));
 			}
 		
-			if ( autolog ) {
-				LoginApplication::setLoginAs ( autolog );
+			if ( autolog && !userExited ) {
+
+                QWSServer::setDesktopBackground( QImage() );
+                ODevice::inst ( )-> setDisplayStatus ( true );
+                ODevice::inst ( )-> setSoftSuspend ( false );
+                LoginApplication *app = new LoginApplication ( argc, argv, ppid );
+                LoginApplication::setLoginAs ( autolog );
+  
 
 				if ( LoginApplication::changeIdentity ( ))
 					::exit ( LoginApplication::login ( ));
 				else
 					::exit ( 0 );
 			}
-			else 
+			else  {
 				::exit ( login_main ( argc, argv, ppid ));
+            }
 		}
 	}
 	return 0;
