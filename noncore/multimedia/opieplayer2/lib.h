@@ -180,14 +180,16 @@ namespace XINE {
         bool m_video:1;
         XineVideoWidget *m_wid;
         xine_t *m_xine;
+	xine_stream_t *m_stream;
         xine_cfg_entry_t *m_config;
         xine_vo_driver_t *m_videoOutput;
         xine_ao_driver_t* m_audioOutput;
+	xine_event_queue_t *m_queue;
 
-        void handleXineEvent( xine_event_t* t );
+        void handleXineEvent( const xine_event_t* t );
         void drawFrame( uint8_t* frame, int width, int height, int bytes );
         // C -> C++ bridge for the event system
-        static void xine_event_handler( void* user_data, xine_event_t* t);
+        static void xine_event_handler( void* user_data, const xine_event_t* t);
         static void xine_display_frame( void* user_data, uint8_t* frame ,
                                         int width, int height, int bytes );
     };

@@ -87,6 +87,7 @@ Lib::Lib( XineVideoWidget* widget ) {
 
     xine_config_load( m_xine, str.data() );
 
+    xine_init( m_xine );
 
     // allocate oss for sound
     // and fb for framebuffer
@@ -98,7 +99,8 @@ Lib::Lib( XineVideoWidget* widget ) {
 
 
     null_display_handler( m_videoOutput, xine_display_frame, this );
-    xine_init( m_xine,  m_audioOutput,  m_videoOutput );
+
+    m_stream = xine_stream_new (m_xine,  m_audioOutput,  m_videoOutput );
 
     if (m_wid != 0 ) {
         printf( "!0\n" );
@@ -108,12 +110,13 @@ Lib::Lib( XineVideoWidget* widget ) {
         m_wid->repaint();
     }
 
-    xine_register_event_listener( m_xine, xine_event_handler, this );
+    m_queue = xine_event_new_queue (m_stream);
+
+    xine_event_create_listener_thread (m_queue, xine_event_handler, this);
 }
 
 Lib::~Lib() {
 //    free( m_config );
-    xine_remove_event_listener( m_xine, xine_event_handler );
     xine_exit( m_xine );
     /* FIXME either free or delete but valgrind bitches against both */
     //free( m_videoOutput );
@@ -150,55 +153,55 @@ int Lib::subVersion() {
 
 int Lib::play( const QString& fileName, int startPos, int start_time ) {
     QString str = fileName.stripWhiteSpace();
-    if ( !xine_open( m_xine, QFile::encodeName(str.utf8() ).data() ) ) {
+    if ( !xine_open( m_stream, QFile::encodeName(str.utf8() ).data() ) ) {
         return 0;
     }
-    return xine_play( m_xine, startPos, start_time);
+    return xine_play( m_stream, startPos, start_time);
 }
 
 void Lib::stop() {
     qDebug("<<<<<<<< STOP IN LIB TRIGGERED >>>>>>>");
-    xine_stop( m_xine );
+    xine_stop( m_stream );
 }
 
 void Lib::pause() {
-    xine_set_param( m_xine, XINE_PARAM_SPEED,  XINE_SPEED_PAUSE );
+    xine_set_param( m_stream, XINE_PARAM_SPEED,  XINE_SPEED_PAUSE );
 }
 
 int Lib::speed() {
-    return  xine_get_param ( m_xine, XINE_PARAM_SPEED );
+    return  xine_get_param ( m_stream, XINE_PARAM_SPEED );
 }
 
 void Lib::setSpeed( int speed ) {
-    xine_set_param ( m_xine, XINE_PARAM_SPEED, speed );
+    xine_set_param ( m_stream, XINE_PARAM_SPEED, speed );
 }
 
 int Lib::status() {
-    return xine_get_status( m_xine );
+    return xine_get_status( m_stream );
 }
 
 int Lib::currentPosition() {
-    xine_get_pos_length( m_xine, &m_pos, &m_time, &m_length );
+    xine_get_pos_length( m_stream, &m_pos, &m_time, &m_length );
     return m_pos;
 }
 
 int Lib::currentTime() {
-     xine_get_pos_length( m_xine, &m_pos, &m_time, &m_length );
+     xine_get_pos_length( m_stream, &m_pos, &m_time, &m_length );
     return m_time/1000;
 }
 
 int Lib::length() {
-      xine_get_pos_length( m_xine, &m_pos, &m_time, &m_length );
+      xine_get_pos_length( m_stream, &m_pos, &m_time, &m_length );
       return m_length/1000;
 }
 
 bool Lib::isSeekable() {
-    return xine_get_stream_info( m_xine, XINE_STREAM_INFO_SEEKABLE );
+    return xine_get_stream_info( m_stream, XINE_STREAM_INFO_SEEKABLE );
 }
 
 void Lib::seekTo( int time ) {
-//     xine_trick_mode ( m_xine, XINE_TRICK_MODE_SEEK_TO_TIME, time ); NOT IMPLEMENTED YET IN XINE :_(
-    xine_play( m_xine, 0, time );
+    //xine_trick_mode ( m_stream, XINE_TRICK_MODE_SEEK_TO_TIME, time ); NOT IMPLEMENTED YET IN XINE :_(
+    xine_play( m_stream, 0, time );
 }
 
 
@@ -208,15 +211,15 @@ Frame Lib::currentFrame() {
 };
 
 QString Lib::metaInfo( int number) {
-    return xine_get_meta_info( m_xine, number );
+    return xine_get_meta_info( m_stream, number );
 }
 
 int Lib::error() {
-    return xine_get_error( m_xine );
+    return xine_get_error( m_stream );
 };
 
-void Lib::handleXineEvent( xine_event_t* t ) {
-    if ( t->type == XINE_EVENT_PLAYBACK_FINISHED ) {
+void Lib::handleXineEvent( const xine_event_t* t ) {
+    if ( t->type == XINE_EVENT_UI_PLAYBACK_FINISHED ) {
         emit stopped();
     }
 }
@@ -232,17 +235,7 @@ bool Lib::isShowingVideo() {
 }
 
 bool Lib::hasVideo() {
-    //looks like it is not implemented yet
-    //return xine_get_stream_info( m_xine, XINE_STREAM_INFO_VIDEO_CHANNELS );
-    // ugly hack until xine is ready, look for the width of the video
-    int test =  xine_get_stream_info( m_xine, 2 );
-    if( test > 0 ) {
-        // qDebug( QString(" has video:  %1").arg( test ) );
-        return true;
-    } else {
-        //qDebug ( "does not have video ");
-        return false;
-    }
+    return  xine_get_stream_info( m_stream, 18 );
 }
 
 void Lib::showVideoFullScreen( bool fullScreen ) {
@@ -258,16 +251,16 @@ void Lib::setScaling( bool scale ) {
 }
 
 void Lib::setGamma( int value ) {
-    //qDebug( QString( "%1").arg(value)  );
-    int gammaValue = ( 100 + value );
-    ::null_set_videoGamma( m_videoOutput, value );
+  //qDebug( QString( "%1").arg(value)  );
+  /* int gammaValue = ( 100 + value ); */
+  ::null_set_videoGamma( m_videoOutput, value );
 }
 
 bool Lib::isScaling() {
     return ::null_is_scaling( m_videoOutput );
 }
 
-void Lib::xine_event_handler( void* user_data, xine_event_t* t ) {
+void Lib::xine_event_handler( void* user_data, const xine_event_t* t ) {
     ( (Lib*)user_data)->handleXineEvent( t );
 }
 
