@@ -70,7 +70,7 @@ static void createSymlinks( const QString &location, const QString &package )
                 odebug << "Big problem creating symlink and directory" << oendl;
             }
             }
-//          qDebug ( "Created %s" ,s.ascii() );
+//          odebug << "Created << s.ascii() << oendl;
             out << s << "\n";
         } else {
             odebug << "" << s.ascii() << "  exists already, not symlinked" << oendl;
@@ -99,7 +99,7 @@ static void removeSymlinks( const QString &package )
         //Confirm that it's still a symlink.
         if ( ffi.isSymLink() ){
         unlink( s.ascii() );
-//          qDebug ( "Removed %s", s.ascii() );}
+//          odebug << "Removed " << s.ascii() << oendl; }
 //      else
 //      odebug << "Not removed " << s.ascii() << "" << oendl;
         }
