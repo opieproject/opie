@@ -27,6 +27,8 @@ $IPKG_REMOVE qt-embedded
 $IPKG_REMOVE qt-embedded-rotation
 $IPKG_REMOVE opie-remove
 
+rm -r /opt/QtPalmtop/
+
 #might help
 sync
 
