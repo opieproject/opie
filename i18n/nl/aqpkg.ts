@@ -183,7 +183,7 @@
     </message>
     <message>
         <source>Removing status entry...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder status info...</translation>
     </message>
     <message>
         <source>status file - </source>
@@ -195,31 +195,31 @@
     </message>
     <message>
         <source>Couldn&apos;t open status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>Kan statusbestand niet openen - </translation>
     </message>
     <message>
         <source>Couldn&apos;t create tempory status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>Kan tijdelijk statusbestand niet maken - </translation>
     </message>
     <message>
         <source>Couldn&apos;t start ipkg process</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ipkg proces niet starten</translation>
     </message>
     <message>
         <source>Could not open :</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niet openen:</translation>
     </message>
     <message>
         <source>Creating directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Maak map aan</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Link gemaakt van %1 naar %2</translation>
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Link van %1 naar %2 mislukt</translation>
     </message>
     <message>
         <source>Removed %1</source>
@@ -227,7 +227,7 @@
     </message>
     <message>
         <source>Failed to remove %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 verwijderen mislukt</translation>
     </message>
     <message>
         <source>Removed </source>
@@ -235,7 +235,7 @@
     </message>
     <message>
         <source>Failed to remove </source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderen mislukt</translation>
     </message>
 </context>
 <context>
@@ -572,37 +572,39 @@ pakket %1?</translation>
     <name>QObject</name>
     <message>
         <source>Installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Geinstalleerde pakketten</translation>
     </message>
     <message>
         <source>Local packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokale pakketten</translation>
     </message>
     <message>
         <source>N/A</source>
-        <translation type="unfinished"></translation>
+        <translation>n/b</translation>
     </message>
     <message>
         <source>Package - %1
               version - %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakket - %1
+            versie - %2</translation>
     </message>
     <message>
         <source>
               inst version - %1</source>
-        <translation type="unfinished"></translation>
+        <translation>
+            inst versie - %1</translation>
     </message>
     <message>
         <source>Version string is empty.</source>
-        <translation type="unfinished"></translation>
+        <translation>Versiestring is leeg.</translation>
     </message>
     <message>
         <source>Epoch in version is not number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst in versie is geen nummer.</translation>
     </message>
     <message>
         <source>Nothing after colon in version number.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen versienummer na de punt.</translation>
     </message>
 </context>
 <context>
