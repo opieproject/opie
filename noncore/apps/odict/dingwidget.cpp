@@ -34,17 +34,8 @@
 DingWidget::DingWidget( )
 {
 	methodname = QString::null;
-	trenner = "::";//QString::null;
+	trenner = QString::null;
 	lines = 0L;
-	loadValues();
-
-//X 	qDebug( topbrowser );
-//X 	qDebug( top );
-//X 
-//X 	topbrowser = "blahbalh";
-//X 	
-//X 	qDebug( topbrowser );
-//X 	qDebug( top );
 }
 
 void DingWidget::loadDict( QString name )
@@ -68,6 +59,7 @@ void DingWidget::loadDict( QString name )
 		file.close();
 	}
 	qDebug( "loadedDict(...) ist beended" );
+	loadValues();
 }
 
 QString DingWidget::loadedDict()
@@ -108,22 +100,18 @@ BroswerContent DingWidget::setText( QString word )
 void DingWidget::loadValues()
 {
 	Config cfg(  "odict" );
-	cfg.setGroup( "Method_"+methodname );
-	//trenner = cfg.readEntry( "Seperator" );
+	cfg.setGroup( "Method_" + methodname );
+	trenner = cfg.readEntry( "Seperator" );
 }
 
 BroswerContent DingWidget::parseInfo()
 {
+	if ( isCompleteWord ) queryword = " " + queryword + " ";
 	QStringList search = lines.grep( queryword , isCaseSensitive );
 
  	QString current;
  	QString left;
  	QString right;
-	QString html_header      = "<html><table>";
-	QString html_footer      = "</table></html>";
-	QString html_table_left  = "<tr><td width='50'>";
-	QString html_table_sep   = "</td><td>";
-	QString html_table_right = "</td></tr>";
 	QRegExp reg_div( trenner );
 	QRegExp reg_word( queryword );
 	reg_word.setCaseSensitive( isCaseSensitive );
@@ -134,6 +122,12 @@ BroswerContent DingWidget::parseInfo()
 	 *             Ansatz. Zum einen ist HTML scheiﬂe an dieser Stelle und 
 	 *             zum andern funktioniert der Code nicht so wie er sollte.
 	QString substitute = "<a href=''>"+queryword+"</a>";
+	
+	QString html_header      = "<html><table>";
+	QString html_footer      = "</table></html>";
+	QString html_table_left  = "<tr><td width='50'>";
+	QString html_table_sep   = "</td><td>";
+	QString html_table_right = "</td></tr>";
 	 
 	for( QStringList::Iterator it = search.begin() ; it != search.end() ; ++it )
 	{

@@ -29,6 +29,7 @@ class DingWidget
 		QString loadedDict();
 		void setQueryWord( QString );
 		void setDict( QString );
+		void loadValues();
 
 	private:
 		BroswerContent parseInfo();
@@ -40,7 +41,6 @@ class DingWidget
 		QString dictName;
 		
 		QString search_word;
-		void loadValues();
 		QString queryword;
 		QString methodname;
 		QString trenner;

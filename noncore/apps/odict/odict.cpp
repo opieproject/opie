@@ -57,6 +57,7 @@ ODict::ODict() : QMainWindow()
 	browser_bottom = new QTextBrowser( vbox );
 
 	ding = new DingWidget();
+	ding->loadValues();
 
 	loadConfig();
 	setCentralWidget( vbox );
@@ -110,19 +111,14 @@ void ODict::slotStartQuery()
 //X 	else
 //X 	{
 
-		if ( casesens ) qDebug( "casesens = TRUE" );
-		else qDebug( "casesens = FALSE" );
-		
 		ding->setCaseSensitive( casesens ); 
 		ding->setCompleteWord( completewords ); 
 		ding->setDict( activated_name );
 		
 		if ( activated_name != ding->loadedDict() )
 		{
-			qDebug( "ComboBox geändert" );
 			ding->loadDict(activated_name);
 		}
-		else qDebug( "ComboBox war GLEICH" );
 		
 		BroswerContent test = ding->setText( querystring );
 
