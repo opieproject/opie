@@ -230,7 +230,7 @@ bool SyncAuthentication::checkPassword( const QString& password )
       || QMessageBox::warning(0,tr("Sync Connection"),
     tr("<p>An unrecognized system is requesting access to this device."
         "<p>If you have just initiated a Sync for the first time, this is normal."),
-    tr("Allow"),tr("Deny"))==1 )
+    tr("Allow"),tr("Deny"), 0, 1, 1 ) ==1 )
   {
       denials++;
       lastdenial=now;
