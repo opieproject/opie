@@ -470,7 +470,7 @@ void NetworkPackageManager :: applyChanges()
     // Now for each selected item
     // deal with it
 
-	vector<InstallData> workingPackages;
+    vector<InstallData> workingPackages;
     for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
           item != 0 ;
           item = (QCheckListItem *)item->nextSibling() )
@@ -672,4 +672,36 @@ void NetworkPackageManager :: letterPushed( QString t )
         if ( !item )
             item = (QCheckListItem *)packagesList->firstChild();        
     } while ( item != start);
+}
+
+
+void NetworkPackageManager :: searchForPackage()
+{
+    bool ok = FALSE;
+    QString searchText = InputDialog::getText( "Search for package", "Enter package to search for", QString::null, &ok, this ).lower();
+    if ( ok && !searchText.isEmpty() )
+    {
+        cout << "searching for " << searchText << endl;
+        // look through package list for text startng at current position
+        vector<InstallData> workingPackages;
+        QCheckListItem *start = (QCheckListItem *)packagesList->currentItem();
+        if ( start != 0 )
+            start = (QCheckListItem *)start->nextSibling();
+        
+        if ( start == 0 )
+            start = (QCheckListItem *)packagesList->firstChild();
+        
+        for ( QCheckListItem *item = start; item != 0 ;
+              item = (QCheckListItem *)item->nextSibling() )
+        {
+            cout << "checking " << item->text().lower() << endl;
+            if ( item->text().lower().find( searchText ) != -1 )
+            {
+                cout << "matched " << item->text() << endl;
+                packagesList->ensureItemVisible( item );
+                packagesList->setCurrentItem( item );
+                break;
+            }
+        }   
+    }
 }

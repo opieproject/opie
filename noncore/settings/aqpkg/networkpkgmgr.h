@@ -40,7 +40,7 @@ public:
 
     void selectLocalPackage( const QString &pkg );
     void updateData();
-
+    void searchForPackage();
 private:
     DataManager *dataMgr;
 

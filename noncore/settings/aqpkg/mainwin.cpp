@@ -44,9 +44,13 @@ MainWindow :: MainWindow( QWidget *p, char *name )
     QPopupMenu *settings = new QPopupMenu( this );
 	settings->insertItem( "&Settings", this, SLOT(displaySettings()), Qt::CTRL+Qt::Key_S );
 
+    QPopupMenu *edit = new QPopupMenu( this );
+	edit->insertItem( "&Search", this, SLOT(searchForPackage()), Qt::CTRL+Qt::Key_F );
+
 	// Create the main menu
 	QMenuBar *menu = menuBar();  //new QMenuBar( this );
 	menu->insertItem( "&Settings", settings );
+	menu->insertItem( "&Edit", edit );
 	menu->insertItem( "&Help", help );
 
     mgr = new DataManager();
@@ -87,6 +91,11 @@ void MainWindow :: displayHelp()
     HelpWindow *dlg = new HelpWindow( this );
     dlg->exec();
     delete dlg;    
+}
+
+void MainWindow :: searchForPackage()
+{
+    networkPkgWindow->searchForPackage();
 }
 
 void MainWindow :: displayAbout()
