@@ -1,5 +1,5 @@
 TEMPLATE  = app
-CONFIG    = qt warn_on 
+CONFIG    = qt warn_on
 #
 DESTDIR   = $(OPIEDIR)/bin
 HEADERS   = loopcontrol.h mediaplayerplugininterface.h \
@@ -13,7 +13,7 @@ SOURCES   = main.cpp \
 TARGET    = opieplayer
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lpthread -lopieui2
+LIBS            += -lqpe -lpthread -lopiecore2 -lopieui2
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
