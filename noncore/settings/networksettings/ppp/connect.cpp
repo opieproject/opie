@@ -1011,6 +1011,8 @@ void ConnectWidget::cancelbutton() {
   prompt->setConsumed();
 
   messg->setText(tr("offline"));
+
+  refresh();
 }
 
 
@@ -1132,8 +1134,8 @@ void ConnectWidget::if_waiting_slot() {
   set_con_speed_string();
 
 //  p_kppp->con_win->setConnectionSpeed(p_kppp->con_speed);
-  this->hide();
-  messg->setText("");
+//  this->hide();
+//  messg->setText("");
 
   _ifaceppp->setStatus( true );
 
@@ -1167,7 +1169,15 @@ void ConnectWidget::if_waiting_slot() {
 }
 
 void ConnectWidget::refresh()  {
+    qDebug( "IN REFRESH");
     _ifaceppp->refresh();
+    if ( _ifaceppp->getStatus() )  {
+        qDebug( "STATUS IST TRUE " );
+        messg->setText(i18n("Online"));
+    } else {
+        qDebug("STATUS IST FALSE " ) ;
+        messg->setText(i18n("Offline"));
+    }
 }
 
 

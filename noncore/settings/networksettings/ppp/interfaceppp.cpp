@@ -140,6 +140,7 @@ void InterfacePPP::stop()
     qDebug("InterfacePPP::stop");
     emit hangup_now();
     status = false; // not connected
+    setStatus( false );
     refresh();
 
 }
