@@ -36,7 +36,6 @@ public:
 
 private:
     AddressBookPlugin *addressbookPlugin;
-    ulong ref;
 };
 
 #endif

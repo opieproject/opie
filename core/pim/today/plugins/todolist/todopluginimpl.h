@@ -34,7 +34,6 @@ public:
 
 private:
     TodolistPlugin *todolistPlugin;
-    ulong ref;
 };
 
 #endif

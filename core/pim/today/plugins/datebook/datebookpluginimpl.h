@@ -34,9 +34,6 @@ public:
 
 private:
     DatebookPlugin *datebookPlugin;
-    ulong ref;
-
-
 };
 
 #endif

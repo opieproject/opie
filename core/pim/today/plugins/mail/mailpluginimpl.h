@@ -34,7 +34,6 @@ public:
 
 private:
     MailPlugin *mailPlugin;
-    ulong ref;
 };
 
 #endif
