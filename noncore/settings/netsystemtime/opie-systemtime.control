@@ -2,7 +2,7 @@ Packagename: opie-netsystemtime
 Files: bin/netsystemtime apps/Settings/netsystemtime.desktop etc/ntpservers
 Priority: optional
 Section: opie/settings
-Conflicts: opie-systemtime
+Provides: opie-netsystemtime
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
