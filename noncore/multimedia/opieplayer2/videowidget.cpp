@@ -193,7 +193,7 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
     slider->setGeometry( QRect( 15, h - 30, w - 90, 20 ) );
     slider->setBackgroundOrigin( QWidget::ParentOrigin );
     slider->setFocusPolicy( QWidget::NoFocus );
-make    slider->setBackgroundPixmap( *pixBg );
+    slider->setBackgroundPixmap( *pixBg );
 
 //    time.setGeometry( QRect( w - 85, h - 30, 70, 20 ) );
     xoff = 0;// ( imgUp->width() ) / 2;
@@ -461,6 +461,6 @@ XineVideoWidget* VideoWidget::vidWidget() {
 }
 
 
-void VideoWidget::setFullscreen ( bool b ) { 
+void VideoWidget::setFullscreen ( bool b ) {
   setToggleButton( VideoFullscreen, b );
 }
