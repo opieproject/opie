@@ -182,22 +182,6 @@ void MainWindow::initUI() {
              this, SLOT(slotOpenKeb(bool)));
     m_openKeys->addTo(m_icons);
 
-
-    /*
-     * action that open/closes the keyboard
-
-    m_openButtons = new QAction ( tr( "Open Buttons..." ),
-                             Resource::loadPixmap( "" ),
-                             QString::null, 0, this, 0 );
-
-    m_openButtons->setToggleAction( true );
-
-    connect ( m_openButtons, SIGNAL( toggled( bool ) ),
-             this, SLOT( slotOpenButtons( bool ) ) );
-    m_openButtons->addTo( m_icons );
-
-    */
-
     /* insert the submenu */
     m_console->insertItem(tr("New from Profile"), m_sessionsPop,
                           -1, 0);
@@ -352,6 +336,7 @@ void MainWindow::slotConnect() {
         else {
             m_connect->setEnabled( false );
             m_disconnect->setEnabled( true );
+            m_transfer->setEnabled( true );
         }
     }
 }
@@ -361,6 +346,7 @@ void MainWindow::slotDisconnect() {
         currentSession()->layer()->close();
         m_connect->setEnabled( true );
         m_disconnect->setEnabled( false );
+        m_transfer->setEnabled( false );
     }
 }
 
@@ -447,19 +433,20 @@ void MainWindow::create( const Profile& prof ) {
     m_connect->setEnabled( true );
     m_disconnect->setEnabled( false );
     m_terminate->setEnabled( true );
-    m_transfer->setEnabled( true );
     m_recordScript->setEnabled( true );
     m_saveScript->setEnabled( true );
     m_runScript->setEnabled( true );
     m_fullscreen->setEnabled( true );
     m_closewindow->setEnabled( true );
-
+    m_transfer->setEnabled( false );
 
     // is io_layer wants direct connection, then autoconnect
     //if ( ( m_curSession->layer() )->supports()[0] == 1 ) {
     if (prof.autoConnect()) {
         slotConnect();
     }
+
+
 
     QWidget *w = currentSession()->widget();
     if(w) w->setFocus();
@@ -506,6 +493,12 @@ void MainWindow::slotSessionChanged( Session* ses ) {
         } else {
             m_connect->setEnabled( true );
             m_disconnect->setEnabled( false );
+        }
+
+        if ( ( m_curSession->layer() )->supports()[1] == 0 ) {
+            m_transfer->setEnabled( false );
+        } else {
+            m_transfer->setEnabled( true );
         }
 
         QWidget *w = m_curSession->widget();
