@@ -13,7 +13,7 @@
 #include "autorotate.h"
 
 /* OPIE */
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
