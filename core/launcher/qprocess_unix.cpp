@@ -48,11 +48,11 @@ using namespace Opie::Core;
 #include <sys/ioctl.h>
 #include <sys/wait.h>
 #include <sys/fcntl.h>
-#include <sys/resource.h>
 #include <errno.h>
 #ifdef Q_OS_MACX
 #include <sys/time.h>
 #endif
+#include <sys/resource.h>
 
 #ifdef __MIPSEL__
 # ifndef SOCK_DGRAM
