@@ -31,14 +31,12 @@ in again ).
 
 - new conntection -> configure -> use . does not end up in profile dialog,
 
-- copy n paste as default setup keys in "keys"
-
-- console mode quick button in menubar?
-
 - disable tranfer file for console mode
 
 - scripts need an extension and also an icon
 
 - help documentation needs to be extended
-
+  - new connection and save connection 
+  - paste  button
+  - keys button
 
