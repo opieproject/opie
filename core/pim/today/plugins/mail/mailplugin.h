@@ -1,7 +1,7 @@
 /*
  * mailplugin.h
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2004 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
