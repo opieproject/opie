@@ -22,4 +22,7 @@ settingsdialogui.cpp
 settingsdialogui.h
 statuswidgetui.cpp
 statuswidgetui.h
-
+newmaildirui.cpp
+newmaildirui.h
+sendmailprogressui.cpp
+sendmailprogressui.h
