@@ -275,6 +275,10 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     file->insertSeparator();
     a->addTo( file );
 
+    a = new QAction( tr( "Save As" ), QPixmap(( const char** ) filesave_xpm  ) , QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( saveAs() ) );
+    a->addTo( file );
+
     a = new QAction( tr( "Cut" ), Resource::loadPixmap( "cut" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editCut() ) );
     a->addTo( editBar );
@@ -414,7 +418,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
 TextEdit::~TextEdit()
 {
-    save();
+    saveAs();
 
     Config cfg("TextEdit");
     cfg.setGroup("View");
@@ -486,7 +490,7 @@ void TextEdit::setWordWrap(bool y)
 void TextEdit::fileNew()
 {
     if( !bFromDocView  ) {
-        save();
+        saveAs();
     }
     newFile(DocLnk());
 }
@@ -679,6 +683,21 @@ void TextEdit::showEditTools()
 }
 
 bool TextEdit::save()
+{
+    QString rt = editor->text();
+    doc->setName( currentFileName);
+    FileManager fm;
+    if ( !fm.saveFile( *doc, rt ) ) {
+        return false;
+    }
+    delete doc;
+    doc = 0;
+    editor->setEdited( false );
+    return true;
+    
+}
+
+bool TextEdit::saveAs()
 {
       // case of nothing to save...
     if ( !doc || !bFromDocView)

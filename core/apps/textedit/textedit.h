@@ -61,6 +61,8 @@ private slots:
     void fileOpen();
     void newFileOpen();
     bool save();
+    bool saveAs();
+
 
     void editCut();
     void editCopy();
