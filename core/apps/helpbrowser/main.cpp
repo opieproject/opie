@@ -27,7 +27,7 @@ int main( int argc, char ** argv )
     QPEApplication a( argc, argv );
 
     HelpBrowser mw;
-    a.showMainDocumentWidget( &mw );
+    a.showMainWidget( &mw );
 
     return a.exec();
 }

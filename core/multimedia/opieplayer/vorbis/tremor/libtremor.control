@@ -1,5 +1,5 @@
 Package: libtremor
-Files: opie/lib/libtremor.so opie/lib/libtremor.so.1 opie/lib/libtremor.so.1.0 opie/lib/libtremor.so.1.0.0
+Files: lib/libtremor.so lib/libtremor.so.1 lib/libtremor.so.1.0 lib/libtremor.so.1.0.0
 Priority: optional
 Section: opie/plugins
 Maintainer: Lorn Potter <llornkcor@handhelds.org>
