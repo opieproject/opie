@@ -141,7 +141,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 
 
     // ipaq sensor
-    config.setGroup( "Ipaqlightsensor" );
+    config.setGroup( "lightsensor" );
     auto_brightness->setChecked( config.readNumEntry("LightSensor",0) != 0 );
     auto_brightness_ac_3->setChecked( config.readNumEntry("LightSensorAC",0) != 0 );
     //LightStepSpin->setValue( config.readNumEntry("Steps", 10 ) );
@@ -227,10 +227,9 @@ void LightSettings::accept()
     ( brightness_ac_3->value()) * 255 / brightness_ac_3->maxValue() );
 
 
-    // only make ipaq light sensor entries in config file if on an ipaq
+    // only make light sensor stuff appear if the unit has a sensor
     if ( ODevice::inst()->hasLightSensor() ) {
-        // ipaq sensor
-        config.setGroup( "Ipaqlightsensor" );
+        config.setGroup( "lightsensor" );
         config.writeEntry( "LightSensor", (int)auto_brightness->isChecked() );
         config.writeEntry( "LightSensorAC", (int)auto_brightness_ac_3->isChecked() );
         //config.writeEntry( "Steps", LightStepSpin->value() );
@@ -268,8 +267,6 @@ void LightSettings::applyBrightnessAC()
         set_fl(bright);
     }
 }
-
-
 
 void LightSettings::done(int r)
 {
