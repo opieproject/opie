@@ -9,7 +9,7 @@
  *
  * Requirements:    Qt
  *
- * $Id: calckeypad.cpp,v 1.4 2003-02-25 13:39:10 eric Exp $
+ * $Id: calckeypad.cpp,v 1.5 2003-04-15 07:42:19 eric Exp $
  *
  ***************************************************************************/
 
@@ -113,7 +113,12 @@ connect(btnDot, SIGNAL(clicked()), this, SLOT(gotoDec()));
 void KeyPad::enterDigits(int i){
 
 if(!dCurrent)
-    dCurrent = i;
+    if(bIsDec) {
+        dCurrent = i*dDecCurrent;
+        dDecCurrent /= 10;
+    }
+    else
+        dCurrent = i;
 else if(iLenCurrent > 9)
         return;
 else if(!bIsDec){
@@ -190,8 +195,8 @@ display->setValue(0);
  **********************************************************************/
 void KeyPad::gotoDec(void){
 
-bIsDec      = true;
-dDecCurrent = 0.1;
+    bIsDec      = true;
+    dDecCurrent = 0.1;
 }
 
 
@@ -207,7 +212,7 @@ QMessageBox::about( this, "About Euroconv",
                          "Under GPL license\n\n"
                          "Written by Eric Santonacci for Opie\n"
                          "http://opie.handhelds.org\n\n"
-                         "Version 0.4\n\n"
+                         "Version 0.5\n\n"
                          "Any comment or feedback to:\n"
                          "Eric.Santonacci@talc.fr\n");
 

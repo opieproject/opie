@@ -9,7 +9,7 @@
  *
  * Requirements:    Qt
  *
- * $Id: calcdisplay.cpp,v 1.3 2003-02-25 13:37:30 eric Exp $
+ * $Id: calcdisplay.cpp,v 1.4 2003-04-15 07:42:19 eric Exp $
  *
  ***************************************************************************/
 
@@ -43,7 +43,7 @@ cbbxTop->insertStrList(aCurrency);
 
 lcdTop      = new QLCDNumber(10, grpbxTop, "lcdTop");
 lcdTop->setMode( QLCDNumber::DEC );
-lcdTop->setSmallDecimalPoint(true);
+lcdTop->setSmallDecimalPoint(false);
 lcdTop->setSegmentStyle(QLCDNumber::Flat);
 
 /**************   Bottom LCD  ************************/
@@ -58,7 +58,7 @@ cbbxBottom->insertStrList(aCurrency);
 
 lcdBottom   = new QLCDNumber(10, grpbxBottom, "lcdBottom");
 lcdBottom->setMode( QLCDNumber::DEC );
-lcdBottom->setSmallDecimalPoint(true);
+lcdBottom->setSmallDecimalPoint(false);
 lcdBottom->setSegmentStyle(QLCDNumber::Flat);
 
 // set combo box signals
