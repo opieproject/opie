@@ -90,7 +90,7 @@ void BatteryMeter::timerEvent( QTimerEvent * )
 
     if ( prev != *ps ) {
     percent = ps->batteryPercentRemaining();
-    if ( !charging && ps->batteryStatus() == PowerStatus::Charging && percent < 0 ) {
+    if ( !charging && ps->batteryStatus() == PowerStatus::Charging ) {
         percent = 0;
         charging = true;
         chargeTimer->start( 500 );
@@ -119,7 +119,7 @@ void BatteryMeter::chargeTimeout()
 
 void BatteryMeter::paintEvent( QPaintEvent* )
 {
-    qWarning("paint");
+
     if ( style == 1 )
     {
         QPainter p(this);
