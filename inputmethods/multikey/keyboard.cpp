@@ -34,7 +34,6 @@
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qstringlist.h>
-#include <iostream.h>
 
 #include <sys/utsname.h>
 
@@ -602,7 +601,7 @@ void Keyboard::togglePickboard(bool on_off)
 void Keyboard::toggleRepeat(bool on) {
 
     useRepeat = on;
-    cout << "setting useRepeat to: " << useRepeat << "\n";
+    //cout << "setting useRepeat to: " << useRepeat << "\n";
 }
 
 /* Keyboard::setMapTo ... {{{1 */
