@@ -51,7 +51,7 @@ void parseEmailTo( const QString &strDefaultEmail,
 
 
 
-AbEditor::AbEditor( const Contact &entry, const QValueList<int> *newOrdered,
+AbEditor::AbEditor( const OContact &entry, const QValueList<int> *newOrdered,
 		    QStringList *slNewOrdered,
 		    QWidget *parent = 0, const char *name = 0, WFlags fl = 0 )
     : QDialog( parent, name, TRUE, fl ),
@@ -182,7 +182,7 @@ void AbEditor::loadFields()
     }
 }
 
-void AbEditor::setEntry( const Contact &entry )
+void AbEditor::setEntry( const OContact &entry )
 {
     ent = entry;
     QListIterator<QLineEdit> it( listValue );
@@ -410,12 +410,12 @@ void AbEditor::saveEntry()
 	    // email
 	case Qtopia::DefaultEmail:
 	case Qtopia::Emails:
- 	 	    parseEmailFrom( it.current()->text(), strDefaultEmail,
-	 			    strOtherEmail );
-	 	    ent.setDefaultEmail( strDefaultEmail );
-	 	    ent.setEmails( strOtherEmail  );
-	    break;
-
+		parseEmailFrom( it.current()->text(), strDefaultEmail,
+				strOtherEmail );
+		ent.setDefaultEmail( strDefaultEmail );
+		ent.setEmails( strOtherEmail  );
+		break;
+		
 	    // home
 	case Qtopia::HomeStreet:
 	    ent.setHomeStreet( it.current()->text() );
@@ -549,6 +549,7 @@ void parseEmailFrom( const QString &txt, QString &strDefaultEmail,
 	start;
     if ( txt.isEmpty() )
 	return;
+
     // find the first
     where = txt.find( ',' );
     if ( where < 0 ) {

@@ -21,7 +21,7 @@
 #ifndef CONTACTEDITOR_H
 #define CONTACTEDITOR_H
 
-#include <qpe/contact.h>
+#include <opie/ocontact.h>
 
 #include <qdialog.h>
 #include <qlist.h>
@@ -52,7 +52,7 @@ class ContactEditor : public QDialog {
 	Q_OBJECT
 
 	public:
-		ContactEditor(	const Contact &entry,
+		ContactEditor(	const OContact &entry,
 				const QValueList<int> *newOrderedValues,
 				QStringList *slNewOrdered,
 				QWidget *parent = 0,
@@ -61,12 +61,12 @@ class ContactEditor : public QDialog {
 		~ContactEditor();
 		void loadFields();
 		void setNameFocus();
-		Contact entry() const { return ent; }
+		OContact entry() const { return ent; }
 
 	public slots:
 		void slotNote();
 		void slotName();
-		void setEntry(const Contact &entry);
+		void setEntry(const OContact &entry);
 
 	protected slots:
 		void accept();
@@ -101,7 +101,7 @@ class ContactEditor : public QDialog {
 	private:
 		bool useFullName, hasGender, hasTitle, hasCompany, hasNotes, hasStreet, hasStreet2, hasPOBox, hasCity, hasState, hasZip, hasCountry;
 
-		Contact ent;
+		OContact ent;
 
 		QDialog *dlgNote;
 		QDialog *dlgName;

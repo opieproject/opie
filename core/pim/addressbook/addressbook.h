@@ -37,72 +37,73 @@ class LetterPicker;
 
 class AddressbookWindow: public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    AddressbookWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
-    ~AddressbookWindow();
+	AddressbookWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
+	~AddressbookWindow();
 
 protected:
-    void resizeEvent( QResizeEvent * e );
-    void showList();
-    void showView();
-    enum EntryMode { NewEntry=0, EditEntry };
-    void editPersonal();
-    void editEntry( EntryMode );
-    void closeEvent( QCloseEvent *e );
-    bool save();
+	void resizeEvent( QResizeEvent * e );
+	void showList();
+	void showView();
+	enum EntryMode { NewEntry=0, EditEntry };
+	void editPersonal();
+	void editEntry( EntryMode );
+	void closeEvent( QCloseEvent *e );
+	bool save();
 
 public slots:
-    void flush();
-    void reload();
-    void appMessage(const QCString &, const QByteArray &);
-    void setDocument( const QString & );
+	void flush();
+	void reload();
+	void appMessage(const QCString &, const QByteArray &);
+	void setDocument( const QString & );
 
 private slots:
-    void importvCard();
-    void slotListNew();
-    void slotListView();
-    void slotListDelete();
-    void slotViewBack();
-    void slotViewEdit();
-    void slotPersonalView();
-    void listIsEmpty( bool );
-    void slotSettings();
-    void writeMail();
-    void slotBeam();
-    void beamDone( Ir * );
-    void slotFind();
-    void slotSetCategory( int );
-    void slotSetLetter( char );
-    void slotUpdateToolbar();
-    void slotSetFont(int);
+	void importvCard();
+	void slotListNew();
+	void slotListView();
+	void slotListDelete();
+	void slotViewBack();
+	void slotViewEdit();
+	void slotPersonalView();
+	void listIsEmpty( bool );
+	void slotSettings();
+	void writeMail();
+	void slotBeam();
+	void beamDone( Ir * );
+	void slotFind();
+	void slotSetCategory( int );
+	void slotSetLetter( char );
+	void slotUpdateToolbar();
+	void slotSetFont(int);
+
 private:
-    void initFields();  // inititialize our fields...
-    AbLabel *abView();
-    void populateCategories();
+	void initFields();  // inititialize our fields...
+	AbLabel *abView();
+	void populateCategories();
 
-    QPopupMenu *catMenu, *fontMenu;
-    QPEToolBar *listTools;
-    QToolButton *deleteButton;
-    QValueList<int> allFields,
-              orderedFields;
-    QStringList slOrderedFields;
-    enum Panes { paneList=0, paneView, paneEdit };
-    ContactEditor *abEditor;
-    AbLabel *mView;
-    LetterPicker *pLabel;
-    AbTable *abList;
-    QWidget *listContainer;
+	QPopupMenu *catMenu, *fontMenu;
+	QPEToolBar *listTools;
+	QToolButton *deleteButton;
+	QValueList<int> allFields, orderedFields;
+	QStringList slOrderedFields;
+	enum Panes { paneList=0, paneView, paneEdit };
+	ContactEditor *abEditor;
+	AbLabel *mView;
+	LetterPicker *pLabel;
+	AbTable *abList;
+	QWidget *listContainer;
 
-    QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam,
-  *actionPersonal, *actionMail;
+	QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, *actionPersonal, *actionMail;
 
-    bool bAbEditFirstTime;
-    int viewMargin;
+	bool bAbEditFirstTime;
+	int viewMargin;
 
-    bool syncing;
-    QFont *defaultFont;
-    int startFontSize;
+	bool syncing;
+	QFont *defaultFont;
+	int startFontSize;
+
+	bool isLoading;
 };
 
 #endif

@@ -20,7 +20,7 @@
 #ifndef ABLABEL_H
 #define ABLABEL_H
 
-#include <qpe/contact.h>
+#include <opie/ocontact.h>
 #include <qtextview.h>
 
 class AbLabel : public QTextView
@@ -32,7 +32,7 @@ public:
     ~AbLabel();
 
 public slots:
-    void init( const Contact &entry );
+    void init( const OContact &entry );
     void sync();
 
 signals:
@@ -42,7 +42,7 @@ protected:
     void keyPressEvent( QKeyEvent * );
     
 private:
-    Contact ent;
+    OContact ent;
 
 };
 

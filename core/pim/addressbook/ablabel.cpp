@@ -34,7 +34,7 @@ AbLabel::~AbLabel()
 {
 }
 
-void AbLabel::init( const Contact &entry )
+void AbLabel::init( const OContact &entry )
 {
     ent = entry;
 }
