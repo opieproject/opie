@@ -266,8 +266,7 @@ void Ntp::slotCheckNtp(int i)
 
 void Ntp::slotProbeNtpServer()
 {
-  if ( ntpDelayElapsed() )
-	  ntpSock->connectToHost( getNtpServer() ,123);
+	ntpSock->connectToHost( getNtpServer() ,123);
 }
 
 void Ntp::slotNtpDelayChanged(int delay)
