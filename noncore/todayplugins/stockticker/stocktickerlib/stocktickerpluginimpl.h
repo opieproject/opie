@@ -17,7 +17,7 @@
 #ifndef STOCKTICKER_PLUGIN_IMPL_H
 #define STOCKTICKER_PLUGIN_IMPL_H
 
-#include <opie/todayplugininterface.h>
+#include <opie2/todayplugininterface.h>
 
 class StockTickerPlugin;
 

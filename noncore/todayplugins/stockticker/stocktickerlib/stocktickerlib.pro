@@ -20,7 +20,7 @@ INCLUDEPATH     += $(OPIEDIR)/include \
 DEPENDPATH      += $(OPIEDIR)/include \
     ../ ../library
 
-LIBS+= -lqpe -lopiecore2 -lopiepim2 -lopieui2 -lpthread
+LIBS+= -lqpe  -lopieui2 -lopiepim2 -lpthread
 TMAKE_CFLAGS += -D__UNIX__
 
 DESTDIR = $(OPIEDIR)/plugins/today

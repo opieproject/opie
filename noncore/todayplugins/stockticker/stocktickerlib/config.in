@@ -1,4 +1,4 @@
 config TODAY_STOCKTICKERLIB
   boolean
   default "y" if TODAY_STOCKTICKER
-  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && TODAY
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIEUI2 && LIBOPIEPIM2 && TODAY
