@@ -1,18 +1,30 @@
+For GCC 3 based system you should OpenEmbedded for building
+
+
+For gcc 2.95 cross compiler:
 Steps for building libetpan for arm-zaurus environment:
-1. export PATH=$PATH:/usr/local/arm/2.95.3/bin
-2. cd into the libetpan sourcedir
-3. run 
+
+1. Get the sources from etpan-cvs with command
+
+cvs -d :pserver:anonymous@cvs.libetpan.sourceforge.net:/cvsroot/libetpan co libetpan
+
+when try to get the 0.33b release 
+cvs -d :pserver:anonymous@cvs.libetpan.sourceforge.net:/cvsroot/libetpan co -r rel-0-33-b libetpan
+
+2. export PATH=$PATH:/usr/local/arm/2.95.3/bin
+3. cd into the libetpan sourcedir
+4. run 
 ./configure --host=arm-linux --prefix=/usr/local/arm/2.95.3/arm-linux --disable-db --disable-debug
 
 the disable-db is required!!!!
-4. check the output of configure, you MUST find a line 
+5. check the output of configure, you MUST find a line 
   "checking for openssl/ssl.h... yes" and
   "checking for SSL_library_init in -lssl... yes"
 
 If not, you don't have SSL installed into your crosscompiling chain. Thats bad.
 SSL is strongly needed!
 
-5. Check the file Rules in top-srcdir. There is a line 
+6. Check the file Rules in top-srcdir. There is a line 
   "CFLAGS      =  -O2 -W -Wall -g  -DDEBUG -DHAVE_CONFIG_H"
   
   remove the -g option
@@ -20,7 +32,7 @@ SSL is strongly needed!
 For remote debugging this is not required, but the local copy must contain debug
 code for that.
 
-6. make, make install
+7. make, make install
   Now you should find libetpan in /usr/local/arm/2.95.3/arm-linux/lib
 
 If you're using other pathes then you should give that of course instead of 2.95.3. 
