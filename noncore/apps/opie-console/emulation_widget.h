@@ -11,6 +11,7 @@
 #include <qrect.h>
 
 
+
 /**
  * EmulationWidget
  * simple implementation of EmulationLayer
@@ -40,13 +41,13 @@ public:
      * @param int lines, lines of the new image
      * @param int columns, columns of the new image
      */
-    virtual void setImage( QArray<Character> const newimg, int columns, int lines ) {};
+    virtual void setImage( QArray<Character> const newimg, int columns, int lines );
 
     /**
      * reloads configuration
      * @param const Profile& config, configuration
      */
-    virtual void reloadConfig( const Profile& config ) {};
+    virtual void reloadConfig( const Profile& config );
 
     /**
      * sets the scrollbar (not yet implemented)
@@ -64,7 +65,13 @@ protected:
     /**
      * calculates current image bounds
      */
-    virtual void calcGeometry() {};
+    virtual void calcGeometry();
+
+
+    /**
+     * @param const ColorEntry* table, the new color table
+     */
+    void setColorTable( const ColorEntry table[] );
 
     /**
      * draws a String
@@ -77,4 +84,29 @@ protected:
      */
     void drawAttrString( QString& string, QPainter& painter, QRect rect, Character attr, bool pm, bool clear );
 
+protected:
+	
+    enum ScrollLocation
+      {
+	SCRNONE,
+	SCRLEFT,
+	SCRIGHT
+      };
+
+	int f_height;
+	int f_width;
+	int f_ascent;
+	int m_blX;
+	int m_blY;
+	int m_brX;
+	
+	int m_bY;
+	int m_bX;
+	QScrollBar* m_scrollbar;
+
+	ScrollLocation scrollLoc;
+
+	ColorEntry* color_table;
+
+	bool blinking;
 };
