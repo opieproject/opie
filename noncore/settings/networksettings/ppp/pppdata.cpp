@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.11.2.8 2003-07-30 22:41:02 harlekin Exp $
+ * $Id: pppdata.cpp,v 1.11.2.9 2003-07-31 11:48:34 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -784,6 +784,24 @@ bool PPPData::isUniqueAccname(const QString &n) {
   }
   cgroup = save_cgroup;
   return true;
+}
+
+
+bool PPPData::isUniqueDevname(const QString &n) {
+    QString save_mName = _modemName;
+    qDebug("PPPData::isUniqueDevname checking if %s is unique", n.latin1());
+    for ( QStringList::Iterator it = deviceList.begin(); it != deviceList.end(); ++it ) {
+        _modemName = *it;
+        qDebug("PPPData::isUniqueDevname %s == %s", n.latin1() , devname().latin1());
+        if(devname() == n && _modemName != save_mName) {
+            _modemName = save_mName;
+            qDebug("NOT UNIQUE");
+            return false;
+        }
+
+    }
+    _modemName = save_mName;
+    return true;
 }
 
 

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.4.2.6 2003-07-31 11:09:00 tille Exp $
+ * $Id: general.cpp,v 1.4.2.7 2003-07-31 11:48:34 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -322,8 +322,14 @@ ModemWidget::~ModemWidget()
 
 
 
-void ModemWidget::save()
+bool ModemWidget::save()
 {
+    //first check to make sure that the device name is unique!
+    if(modemname->text().isEmpty() ||
+       !_pppdata->isUniqueDevname(modemname->text()))
+        return false;
+
+    qDebug("ModemWidget::save saving modem1 data");
     _pppdata->setDevname( modemname->text() );
     _pppdata->setModemDevice( modemdevice->currentText() );
     _pppdata->setFlowcontrol(flowcontrol->currentText());
@@ -331,6 +337,7 @@ void ModemWidget::save()
     _pppdata->setSpeed(baud_c->currentText());
     _pppdata->setModemLockFile( modemlockfile->isChecked());
     _pppdata->setModemTimeout( modemtimeout->value() );
+    return true;
 
 }
 
@@ -501,10 +508,11 @@ void ModemWidget2::query_modem() {
 //   _pppdata->setVolume(v);
 // }
 
-void ModemWidget2::save()
+bool ModemWidget2::save()
 {
     _pppdata->setWaitForDialTone(waitfordt->isChecked());
     _pppdata->setbusyWait(busywait->value());
     _pppdata->setVolume(volume->value());
+    return true;
 }
 

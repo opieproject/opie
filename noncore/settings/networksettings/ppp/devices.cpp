@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: devices.cpp,v 1.1.4.3 2003-07-31 11:09:00 tille Exp $
+ * $Id: devices.cpp,v 1.1.4.4 2003-07-31 11:48:34 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -200,11 +200,12 @@ int DevicesWidget::doTab(){
         ok = true;
 
         if(result == QDialog::Accepted) {
-//FIXME: check for doublicate names
-//                 QMessageBox::critical(this, "error", tr( "You must enter a unique account name"));
-//                 ok = false;
-                 modem1->save();
+            if (!modem1->save()){
+                QMessageBox::critical(this, "error", tr( "You must enter a unique account name"));
+                ok = false;
+            }else{
                  modem2->save();
+            }
         }
     }
 

@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.8.2.5 2003-07-30 20:31:12 tille Exp $
+ * $Id: pppdata.h,v 1.8.2.6 2003-07-31 11:48:34 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -330,6 +330,7 @@ public:
 //  bool setAccountbyIndex(int);
 
   bool isUniqueAccname(const QString &);
+  bool isUniqueDevname(const QString &);
 
   bool deleteAccount();
   bool deleteAccount(const QString &);

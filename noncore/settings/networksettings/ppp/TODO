@@ -1,5 +1,3 @@
-- update modem attribute inputs when modem has changed
-- impl. PPPData::copyaccount & PPPData::deleteAccount
-
+- impl. PPPData::copyaccount 
 - check if the same interface device combination allready exists
-- check if a deketed account exists in a config and ask the user
+- check if a deleted account or device exists in a config and ask the user

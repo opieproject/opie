@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.h,v 1.3.2.5 2003-07-31 11:09:00 tille Exp $
+ * $Id: general.h,v 1.3.2.6 2003-07-31 11:48:34 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -44,7 +44,7 @@ public:
   ModemWidget(PPPData*, QWidget *parent=0, const char *name=0 );
   ~ModemWidget();
 
-  void save();
+  bool save();
 
 /* private slots: */
 /*   void 	setmodemdc(int); */
@@ -78,7 +78,7 @@ class ModemWidget2 : public QWidget {
   Q_OBJECT
 public:
   ModemWidget2( PPPData*, InterfacePPP*, QWidget *parent=0, const char *name=0 );
-  void save();
+  bool save();
 
 private slots:
 /*   void  waitfordtchanged(bool); */
