@@ -3,9 +3,7 @@
 #include "package.h"
 #include "packagelistitem.h"
 
-//#infdef OPROCESS
 #include <opie/oprocess.h>
-//#endif
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/stringutil.h>
@@ -28,6 +26,8 @@
 
 #include "mainwindow.h"
 
+
+//#define OPROCESS
 
 PmIpkg::PmIpkg( PackageManagerSettings* s, QWidget* p,  const char * name, WFlags f )
   	: QObject ( p )
@@ -126,25 +126,24 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
   sleep(1);
   cmd +=" 2>&1";
   fp = popen(  (const char *) cmd, "r");
-  if ( !fp ) {
+  if ( fp == NULL ) {
      qDebug("Could not execute '" + cmd + "'! err=%d", fp);
-     pclose(fp);
      out("\nError while executing "+ cmd+"\n\n");
-     return false;
+     ret = false;
   } else {
-     while ( fgets( line, sizeof line, fp)) {
+     while ( fgets( line, sizeof line, fp) != NULL)
+     {
         lineStr = line;
         lineStr=lineStr.left(lineStr.length()-1);
         //Configuring opie-oipkg...Done
-        if (lineStr.contains("Done"))
-          ret = true;
+        if (lineStr.contains("Done")) ret = true;
         if (lineStr!=lineStrOld)
 	        out(lineStr);
         lineStrOld = lineStr;
 			  qApp->processEvents();
      }
-     pclose(fp);
   }
+  pclose(fp);
 #endif
   //out( "Finished!");
   pvDebug(2,QString(ret?"success\n":"failure\n"));
@@ -234,15 +233,15 @@ void PmIpkg::processLinkDir( QString file, QString dest )
   } else
   if ( fileInfo.isFile() )
   {
-    const char *instFile = strdup( (file).ascii() );
-    const char *linkFile = strdup(  (destFile).ascii());
+    const char *instFile = strdup( (file).latin1() );
+    const char *linkFile = strdup(  (destFile).latin1());
     if( linkOpp==createLink )
 		{
     	pvDebug(4, "linking: "+file+" -> "+destFile );
     	symlink( instFile, linkFile );
   	}
   }  else  {
-    const char *linkFile = strdup(  (destFile).ascii());
+    const char *linkFile = strdup(  (destFile).latin1());
     if( linkOpp==removeLink )
     {
       QFileInfo toRemoveLink( destFile );
@@ -353,6 +352,20 @@ void PmIpkg::install()
   for (uint i=0; i < to_install.count(); i++)
   {
   	qDebug("install loop %i of %i installing %s",i,to_install.count(),to_install.at(i)->installName().latin1()); //pvDebug
+    if (to_install.at(i)->link())
+  	{
+  		// hack to have package.list
+	   	// in "dest"/usr/lib/ipkg/info/
+  	  QString rds = settings->getDestinationUrlByName("root");
+  	  QString lds = settings->getDestinationUrlByName(to_install.at(i)->dest());
+    	QString listFile = "usr/lib/ipkg/lists/"+to_install.at(i)->name()+".list";
+     	rds += listFile;
+	  	lds += listFile;
+	  	const char *rd = rds.latin1();
+  		const char *ld = lds.latin1();
+   		pvDebug(4, "linking: "+rds+" -> "+lds );
+	   	symlink( rd, ld );
+  	}
 	  if ( runIpkg("install " + to_install.at(i)->installName(), to_install.at(i)->dest() ))
 		{    	
     	runwindow->progress->setProgress( to_install.at(i)->size().toInt() + runwindow->progress->progress());

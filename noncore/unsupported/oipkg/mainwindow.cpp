@@ -43,7 +43,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   setCentralWidget( listViewPackages );
   listViewPackages->addList( tr("feeds"), &packageListServers );
   listViewPackages->addList( tr("ipkgfind"), &packageListSearch );
-  listViewPackages->addList( tr("documents"), &packageListDocLnk );
+//listViewPackages->addList( tr("documents"), &packageListDocLnk );
   ipkg = new PmIpkg( settings, this );
   packageListServers.setSettings( settings );
   packageListSearch.setSettings( settings );
@@ -51,7 +51,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 	pvDebug(9,"packageListServers.update");
   packageListServers.update();
 	pvDebug(9,"packageListDocLnk.update");
-  packageListDocLnk.update();
+ 	pvDebug(0,"no UPDATE of DocLnk");
+//  packageListDocLnk.update();
 	pvDebug(9,"makeMenu");
   makeMenu();	
   makeChannel();
@@ -82,14 +83,14 @@ void MainWindow::makeMenu()
   QPopupMenu *srvMenu = new QPopupMenu( menuBar );
   QPopupMenu *viewMenu = new QPopupMenu( menuBar );
   QPopupMenu *cfgMenu = new QPopupMenu( menuBar );
-  //    QPopupMenu *sectMenu = new QPopupMenu( menuBar );
+  QPopupMenu *helpMenu = new QPopupMenu( menuBar );
 
   setToolBarsMovable( false );
   toolBar->setHorizontalStretchable( true );
   menuBar->insertItem( tr( "Package" ), srvMenu );
   menuBar->insertItem( tr( "View" ), viewMenu );
   menuBar->insertItem( tr( "Settings" ), cfgMenu );
-  //    menuBar->insertItem( tr( "Sections" ), sectMenu );
+  menuBar->insertItem( tr( "Help" ), helpMenu );
 
   QLabel *spacer;
 //  spacer = new QLabel( "", toolBar );
@@ -105,7 +106,7 @@ void MainWindow::makeMenu()
   runAction->addTo( toolBar );
   runAction->addTo( srvMenu );
 
-  srvMenu->insertSeparator ();
+  srvMenu->insertSeparator();
 
   updateAction = new QAction( tr( "Update" ),
 			      Resource::loadIconSet( "oipkg/update" ),
@@ -229,6 +230,43 @@ void MainWindow::makeMenu()
   destAction->setToggleAction( true );
  // destAction->addTo( viewMenu );
 
+//   helpMenu
+  helpMenu->insertSeparator();
+	a = new QAction( tr( "Package Actions" ), QString::null, 0, this, 0 );
+ 	a->addTo( helpMenu );
+  helpMenu->insertSeparator();
+	a = new QAction( tr( "Install" ),
+ 						Resource::loadPixmap( "oipkg/install" ), QString::null, 0, this, 0 );
+ 	a->addTo( helpMenu );
+	a = new QAction( tr( "Remove" ),
+ 						Resource::loadPixmap( "oipkg/uninstall" ), QString::null, 0, this, 0 );
+ 	a->addTo( helpMenu );
+  helpMenu->insertSeparator();
+	a = new QAction( tr( "Package Status" ), QString::null, 0, this, 0 );
+ 	a->addTo( helpMenu );
+  helpMenu->insertSeparator();
+	a = new QAction( tr( "New version, installed" ),
+ 						Resource::loadPixmap( "oipkg/installed" ), QString::null, 0, this, 0 );
+ 	a->addTo( helpMenu );
+	a = new QAction( tr( "New version, not installed" ),
+ 						Resource::loadPixmap( "oipkg/uninstalled" ), QString::null, 0, this, 0 );
+ 	a->addTo( helpMenu );
+	a = new QAction( tr( "Old version, installed" ),
+ 						Resource::loadPixmap( "oipkg/installedOld" ), QString::null, 0, this, 0 );
+ 	a->addTo( helpMenu );
+	a = new QAction( tr( "Old version, not installed" ),
+ 						Resource::loadPixmap( "oipkg/uninstalledOld" ), QString::null, 0, this, 0 );
+ 	a->addTo( helpMenu );
+	a = new QAction( tr( "Old version, new version installed" ),
+ 						Resource::loadPixmap( "oipkg/uninstalledOldinstalledNew" ), QString::null, 0, this, 0 );
+ 	a->addTo( helpMenu );
+	a = new QAction( tr( "New version, old version installed" ),
+ 						Resource::loadPixmap( "oipkg/uninstalledInstalledOld" ), QString::null, 0, this, 0 );
+ 	a->addTo( helpMenu );
+//	a = new QAction( tr( "" ),
+// 						Resource::loadPixmap( "oipkg/" ), QString::null, 0, this, 0 );
+// 	a->addTo( helpMenu );
+
   // configure the menus
   Config cfg( "oipkg", Config::User );
   cfg.setGroup( "gui" );
@@ -254,7 +292,7 @@ void MainWindow::runIpkg()
 {
   packageListServers.allPackages();
   ipkg->loadList( &packageListSearch );
-  ipkg->loadList( &packageListDocLnk );
+//ipkg->loadList( &packageListDocLnk );
   ipkg->loadList( &packageListServers );
   ipkg->commit();
   ipkg->clearLists();
@@ -270,11 +308,12 @@ void MainWindow::updateList()
 {
 	packageListServers.clear();
 	packageListSearch.clear();
-  packageListDocLnk.clear();
+
+//  packageListDocLnk.clear();
   ipkg->update();
   packageListServers.update();
   packageListSearch.update();
-  packageListDocLnk.update();
+//  packageListDocLnk.update();
 }
 
 void MainWindow::filterList()
