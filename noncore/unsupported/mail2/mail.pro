@@ -12,7 +12,6 @@ HEADERS		= 	accounteditor.h \
 		  	mainwindow.h \
 		  	mainwindowbase.h \
 		  	opendiag.h \
-		  	passdiag.h \
 		  	rename.h \
 		  	searchdiag.h \
 		  	viewmail.h \
@@ -30,7 +29,6 @@ SOURCES		= 	accounteditor.cpp \
 		  	mainwindow.cpp \
 		  	mainwindowbase.cpp \
 		  	opendiag.cpp \
-		  	passdiag.cpp \
 		  	rename.cpp \
 		  	searchdiag.cpp \
 		  	viewmail.cpp \
@@ -39,7 +37,6 @@ INTERFACES	= 	accounteditorbase.ui \
 		  	addresspickerbase.ui \
 		  	configdiagbase.ui \
 		  	opendiagbase.ui \
-		  	passdiagbase.ui \
 		  	renamebase.ui \
 		  	searchdiagbase.ui
 INCLUDEPATH    += 	$(OPIEDIR)/include libmail
