@@ -98,11 +98,15 @@ MediaPlayerDecoder *MediaPlayerState::newDecoder( const QString& file ) {
     MediaPlayerDecoder *tmpDecoder = NULL;
     QValueList<MediaPlayerPlugin>::Iterator it;
     for ( it = pluginList.begin(); it != pluginList.end(); ++it ) {
-  if ( (*it).decoder->isFileSupported( file ) ) {
-      tmpDecoder = (*it).decoder;
-      break;
-  }
+        if ( (*it).decoder->isFileSupported( file ) ) {
+            tmpDecoder = (*it).decoder;
+            break;
+        }
     }
+    if(file.left(4)=="http")
+        isStreaming = TRUE;
+    else
+      isStreaming = FALSE;  
     return decoder = tmpDecoder; 
 }
 

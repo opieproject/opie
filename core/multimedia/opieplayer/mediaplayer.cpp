@@ -45,6 +45,7 @@ extern MediaPlayerState *mediaPlayerState;
 
 MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
+    QPEApplication::grabKeyboard();
 
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( setPlaying( bool ) ) );
     connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pauseCheck( bool ) ) );
@@ -59,6 +60,8 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
 
 
 MediaPlayer::~MediaPlayer() {
+    QPEApplication::grabKeyboard();
+    QPEApplication::ungrabKeyboard();
 }
 
 

@@ -25,6 +25,7 @@
 #include <qbutton.h>
 #include <qpainter.h>
 #include <qframe.h>
+#include <qlayout.h>
 
 #include "audiowidget.h"
 #include "mediaplayerstate.h"
@@ -63,8 +64,12 @@ static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     QWidget( parent, name, f )
 {
-//    QPEApplication::grabKeyboard();
     setCaption( tr("OpiePlayer") );
+
+//     QGridLayout *layout = new QGridLayout( this );
+//     layout->setSpacing( 2);
+//     layout->setMargin( 2);
+
     setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
     pixmaps[0] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaButtonsAll" ) );
     pixmaps[1] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaButtonsBig" ) );
@@ -73,8 +78,9 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
     songInfo = new Ticker( this );
     songInfo->setFocusPolicy( QWidget::NoFocus );
-    songInfo->setGeometry( QRect( 7, 3, 220, 20 ) );
-
+     songInfo->setGeometry( QRect( 7, 3, 220, 20 ) );
+//    layout->addMultiCellWidget( songInfo, 0, 0, 0, 2 );
+ 
     slider = new QSlider( Qt::Horizontal, this );
     slider->setFixedWidth( 220 );
     slider->setFixedHeight( 20 );
@@ -83,6 +89,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     slider->setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setGeometry( QRect( 7, 262, 220, 20 ) );
+      //  layout->addMultiCellWidget( slider, 4, 4, 0, 2 );
 
     connect( slider,           SIGNAL( sliderPressed() ),      this, SLOT( sliderPressed() ) );
     connect( slider,           SIGNAL( sliderReleased() ),     this, SLOT( sliderReleased() ) );
@@ -104,6 +111,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
 
 AudioWidget::~AudioWidget() {
+    mediaPlayerState->isStreaming = FALSE;
     for ( int i = 0; i < 4; i++ )
   delete pixmaps[i];
 }
@@ -137,6 +145,7 @@ void AudioWidget::setLength( long max ) {
 
 
 void AudioWidget::setView( char view ) {
+
     if (mediaPlayerState->isStreaming) {
         if( !slider->isHidden()) slider->hide();
         disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
@@ -144,17 +153,18 @@ void AudioWidget::setView( char view ) {
     } else {
 // this stops the slider from being moved, thus
           // does not stop stream when it reaches the end
-        if( slider->isHidden()) slider->show();
+ slider->show();
         connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
     }
 
     if ( view == 'a' ) {
-  startTimer( 150 );
-  showMaximized();
+        startTimer( 150 );
+//        show();
+        showMaximized();
     } else {
-  killTimers();
-  hide();
+        killTimers();
+        hide();
     }
 }
 
@@ -290,7 +300,9 @@ void AudioWidget::paintEvent( QPaintEvent * ) {
   paintButton( &p, i );
 }
 
-
+void AudioWidget::showMe() {
+   show();
+}
 void AudioWidget::keyReleaseEvent( QKeyEvent *e)
 {
     switch ( e->key() ) {
@@ -298,6 +310,8 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e)
       case Key_Home:
           break;
       case Key_F9: //activity
+           hide();
+//           qDebug("Audio F9");
           break;
       case Key_F10: //contacts
           break;

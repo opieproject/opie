@@ -59,11 +59,15 @@
 #include "inputDialog.h"
 
 #include <stdlib.h>
+#include "audiowidget.h"
+#include "videowidget.h"
 
 #define BUTTONS_ON_TOOLBAR
 #define SIDE_BUTTONS
 #define CAN_SAVE_LOAD_PLAYLISTS
 
+extern AudioWidget *audioUI;
+extern VideoWidget *videoUI;
 extern MediaPlayerState *mediaPlayerState;
 
 // class myFileSelector {
@@ -201,7 +205,8 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     QVBox *vbox1 = new QVBox( hbox2 ); vbox1->setBackgroundMode( PaletteButton );
 
     QPEApplication::setStylusOperation( d->selectedFiles->viewport(),QPEApplication::RightOnHold);
-          connect( d->selectedFiles, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
+
+    connect( d->selectedFiles, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
                    this,SLOT( playlistViewPressed(int, QListViewItem *, const QPoint&, int)) );
 
           
@@ -740,7 +745,9 @@ void PlayListWidget::removeSelected() {
 
 void PlayListWidget::playIt( QListViewItem *it) {
 //   d->setDocumentUsed = FALSE;
+        mediaPlayerState->setPlaying(FALSE);
         mediaPlayerState->setPlaying(TRUE);
+        d->selectedFiles->unSelect();
 }
 
 void PlayListWidget::addToSelection( QListViewItem *it) {
@@ -880,12 +887,14 @@ void PlayListWidget::viewPressed( int mouse, QListViewItem *item, const QPoint& 
 void PlayListWidget::playSelected()
 {
     btnPlay( TRUE);
+    d->selectedFiles->unSelect();
 }
 
 void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *item, const QPoint& point, int i)
 {
  switch (mouse) {
       case 1:
+          
           break;
       case 2:{
     QPopupMenu  m;
@@ -1037,4 +1046,21 @@ void PlayListWidget::openFile() {
 
     if(fileDlg)
         delete fileDlg;
+}
+
+void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
+{
+    switch ( e->key() ) {
+////////////////////////////// Zaurus keys
+      case Key_F9: //activity
+          if(audioUI->isHidden())
+            audioUI->showMaximized();
+          break;
+      case Key_F10: //contacts
+          if( videoUI->isHidden())
+            videoUI->showMaximized();
+          
+          break;
+        
+    }
 }

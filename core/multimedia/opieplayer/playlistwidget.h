@@ -67,7 +67,7 @@ public slots:
 protected:
 /*     void contentsMousePressEvent( QMouseEvent * e ); */
 /*     void contentsMouseReleaseEvent( QMouseEvent * e ); */
-
+void keyReleaseEvent( QKeyEvent *e);
 private:
     void initializeStates();
     void readConfig( Config& cfg );

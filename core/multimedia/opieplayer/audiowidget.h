@@ -130,7 +130,7 @@ protected:
     void timerEvent( QTimerEvent *event );
     void closeEvent( QCloseEvent *event );
     void keyReleaseEvent( QKeyEvent *e);
-
+    void showMe();
 private:
     void toggleButton( int );
     void setToggleButton( int, bool );

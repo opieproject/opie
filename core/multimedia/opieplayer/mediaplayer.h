@@ -47,6 +47,7 @@ private slots:
 
 protected:
     void timerEvent( QTimerEvent *e );
+//    void keyReleaseEvent( QKeyEvent *e);
 
 private:
     int     volumeDirection;
