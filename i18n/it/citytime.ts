@@ -26,7 +26,7 @@
     </message>
     <message>
         <source>Click on one of the set cities to replace it</source>
-        <translation>Clicca su una delle città per rimpiazzarla</translation>
+        <translation>Premi su una delle città per rimpiazzarla</translation>
     </message>
 </context>
 <context>

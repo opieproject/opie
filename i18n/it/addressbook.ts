@@ -279,7 +279,7 @@ rilasciato gratuitamente!</translation>
     </message>
     <message>
         <source>Click on tab to select one</source>
-        <translation>Clicca sul tab per selezionarne uno</translation>
+        <translation>Premi sul tab per selezionarne uno</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>

@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Click to beam</source>
-        <translation>Clicca per inviare</translation>
+        <translation>Premi per inviare</translation>
     </message>
     <message>
         <source>Sent</source>

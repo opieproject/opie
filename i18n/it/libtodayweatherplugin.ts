@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Click here to select type of units displayed.</source>
-        <translation>Clicca qui per selezionare il tipo di unità visualizzata.</translation>
+        <translation>Premi qui per selezionare il tipo di unità visualizzata.</translation>
     </message>
     <message>
         <source>Update frequency (in minutes):</source>

@@ -155,7 +155,7 @@
     <message>
         <source>Click to download mail via all available accounts.
  Press and hold to select the desired account.</source>
-        <translation>Clicca per ricevere i messaggi da tutti gli account disponibili.
+        <translation>Premi per ricevere i messaggi da tutti gli account disponibili.
  Tieni premuto per selezionare l&apos;account desiderato.</translation>
     </message>
     <message>
@@ -326,7 +326,7 @@ non è ancora stato scaricato.
     </message>
     <message>
         <source>Queue your mail by clicking here</source>
-        <translation>Clicca qui per mettere in cosa il messaggio</translation>
+        <translation>Premi qui per mettere in cosa il messaggio</translation>
     </message>
     <message>
         <source>This is an overview about all attachments in the mail</source>
@@ -341,7 +341,7 @@ mailhas attachments.
 </source>
         <translation>Questo è l&apos;elenco della posta in arrivo.
 Qui si trovano i mesaggi ricevuti che possono 
-essere visti cliccandoci sopra 2 volte.
+essere visti premendoci sopra 2 volte.
 L&apos;icona blu degli allegati indica se il messaggio 
 ha allegati.
 </translation>
@@ -352,7 +352,7 @@ It keeps the queued mails to send which can be
 reviewed by double clicking the entry.</source>
         <translation>Questo è l&apos;elenco della posta in uscita.
 Qui si trovano i messaggi in coda per essere spediti e possono 
-essere controllati cliccandoci sopra 2 volte.</translation>
+essere controllati premendoci sopra 2 volte.</translation>
     </message>
     <message>
         <source>Choose the recipients from this list</source>
@@ -399,7 +399,7 @@ essere controllati cliccandoci sopra 2 volte.</translation>
     </message>
     <message>
         <source>Click here to forward the selected mail</source>
-        <translation>Clicca qui per inoltrare il messaggio selezionato</translation>
+        <translation>Premi qui per inoltrare il messaggio selezionato</translation>
     </message>
     <message>
         <source>Read the previous mail in the list</source>
@@ -411,17 +411,17 @@ essere controllati cliccandoci sopra 2 volte.</translation>
     </message>
     <message>
         <source>Click here to add attachments to your mail</source>
-        <translation>Clicca qui per aggiungeri allegati nel messaggio</translation>
+        <translation>Premi qui per aggiungeri allegati nel messaggio</translation>
     </message>
     <message>
         <source>The mail view has 2 modes:
 &lt;LI&gt;&lt;B&gt;RichText&lt;/B&gt; shows the mail as HTML with reach features (no standard line breaks)&lt;/LI&gt;&lt;LI&gt;&lt;B&gt;Plain&lt;/B&gt; shows the mail as standard plain text&lt;/LI&gt;Click here to switch between those view modes</source>
         <translation>Ci sono 2 modi per visualizzare il messaggio:
-&lt;LI&gt;&lt;B&gt;RichText&lt;/B&gt; mostra il messaggio come HTML con caratteristiche avanzate (le righe non vengono spezzate)&lt;/LI&gt;&lt;LI&gt;&lt;B&gt;Plain&lt;/B&gt; mostra il messaggio come testo&lt;/LI&gt;Clicca qui per seleziona tra questi 2 modi</translation>
+&lt;LI&gt;&lt;B&gt;RichText&lt;/B&gt; mostra il messaggio come HTML con caratteristiche avanzate (le righe non vengono spezzate)&lt;/LI&gt;&lt;LI&gt;&lt;B&gt;Plain&lt;/B&gt; mostra il messaggio come testo&lt;/LI&gt;Premi qui per seleziona tra questi 2 modi</translation>
     </message>
     <message>
         <source>Click here to remove the selected mail</source>
-        <translation>Clicca qui per eliminare il messaggio selezionato</translation>
+        <translation>Premi qui per eliminare il messaggio selezionato</translation>
     </message>
     <message>
         <source>Download</source>
@@ -429,7 +429,7 @@ essere controllati cliccandoci sopra 2 volte.</translation>
     </message>
     <message>
         <source>Click here to download the selected mail</source>
-        <translation>Clicca qui per ricevere il messaggio selezionato</translation>
+        <translation>Premi qui per ricevere il messaggio selezionato</translation>
     </message>
     <message>
         <source>reply</source>
@@ -442,7 +442,7 @@ essere controllati cliccandoci sopra 2 volte.</translation>
     <message>
         <source>Click here to reply to the selected mail
 Press and hold for more options.</source>
-        <translation>Clicca qui per rispondere al messaggio selezionato
+        <translation>Premi qui per rispondere al messaggio selezionato
 Tieni premuto per avere più opzioni.</translation>
     </message>
     <message>
@@ -451,7 +451,7 @@ Tieni premuto per avere più opzioni.</translation>
     </message>
     <message>
         <source>Click here to reply to the selected mail to CC: addresses also</source>
-        <translation>Clicca qui per rispondere al messaggio selezionato ed agli indirizzi in CC:</translation>
+        <translation>Premi qui per rispondere al messaggio selezionato ed agli indirizzi in CC:</translation>
     </message>
 </context>
 <context>
@@ -552,7 +552,7 @@ Tieni premuto per avere più opzioni.</translation>
     </message>
     <message>
         <source>Click here to attach files to your mail</source>
-        <translation>Clicca qui per inserire allegati nel messaggio</translation>
+        <translation>Premi qui per inserire allegati nel messaggio</translation>
     </message>
     <message>
         <source>This button puts your mail in the send queue</source>
@@ -560,7 +560,7 @@ Tieni premuto per avere più opzioni.</translation>
     </message>
     <message>
         <source>Click here to create a new mail</source>
-        <translation>Clicca qui per creare un nuovo messaggio</translation>
+        <translation>Premi qui per creare un nuovo messaggio</translation>
     </message>
     <message>
         <source>No recipient</source>

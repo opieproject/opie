@@ -116,7 +116,7 @@
 To sort entries by a specific field, click on the column name.</source>
         <translation>Questa è una lista di tutti i movimenti inseriti per questa nota spese.
 
-Per ordinarla per un campo specifico, clicca sul nome della colonna.</translation>
+Per ordinarla per un campo specifico, Premi sul nome della colonna.</translation>
     </message>
     <message>
         <source>Date</source>
@@ -136,7 +136,7 @@ Per ordinarla per un campo specifico, clicca sul nome della colonna.</translatio
     </message>
     <message>
         <source>Click here to add a new transaction.</source>
-        <translation>Clicca qui per aggiungere un nuovo movimento.</translation>
+        <translation>Premi qui per aggiungere un nuovo movimento.</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -144,7 +144,7 @@ Per ordinarla per un campo specifico, clicca sul nome della colonna.</translatio
     </message>
     <message>
         <source>Select a transaction and then click here to edit it.</source>
-        <translation>Seleziona un movimento e clicca qui per modificarlo.</translation>
+        <translation>Seleziona un movimento e Premi qui per modificarlo.</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -152,15 +152,15 @@ Per ordinarla per un campo specifico, clicca sul nome della colonna.</translatio
     </message>
     <message>
         <source>Select a checkbook and then click here to delete it.</source>
-        <translation>Seleziona una nota spese e clicca qui per eliminarla.</translation>
+        <translation>Seleziona una nota spese e Premi qui per eliminarla.</translation>
     </message>
     <message>
         <source>Select the desired chart below and then click on the Draw button.</source>
-        <translation>Seleziona il grafico desiderato e clicca su bottone Disegna.</translation>
+        <translation>Seleziona il grafico desiderato e Premi su bottone Disegna.</translation>
     </message>
     <message>
         <source>Click here to select the desired chart type.</source>
-        <translation>Clicca qui per selezionare il tipo di grafico desiderato.</translation>
+        <translation>Premi qui per selezionare il tipo di grafico desiderato.</translation>
     </message>
     <message>
         <source>Account balance</source>
@@ -180,7 +180,7 @@ Per ordinarla per un campo specifico, clicca sul nome della colonna.</translatio
     </message>
     <message>
         <source>Click here to draw the selected chart.</source>
-        <translation>Clicca qui per disegnare il grafico selezionato.</translation>
+        <translation>Premi qui per disegnare il grafico selezionato.</translation>
     </message>
     <message>
         <source>Current balance: %1%2</source>
@@ -196,7 +196,7 @@ Per ordinarla per un campo specifico, clicca sul nome della colonna.</translatio
     </message>
     <message>
         <source>Click here to enable/disable password protection of this checkbook.</source>
-        <translation>Clicca qui per abilitare/disabilitare la protezione con password per questa nota spese.</translation>
+        <translation>Premi qui per abilitare/disabilitare la protezione con password per questa nota spese.</translation>
     </message>
     <message>
         <source>Num</source>
@@ -245,7 +245,7 @@ da password</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display that the checkbook is protected with a password.</source>
-        <translation>Clicca qui per selezionare se nella finestra principale verrà o no mostrato se la nota spese è protetta da password.</translation>
+        <translation>Premi qui per selezionare se nella finestra principale verrà o no mostrato se la nota spese è protetta da password.</translation>
     </message>
     <message>
         <source>Show checkbook balances</source>
@@ -253,7 +253,7 @@ da password</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
-        <translation>Clicca qui per selezionare se nella finestra principale verranno o no mostrati i saldi di ogni nota spese.</translation>
+        <translation>Premi qui per selezionare se nella finestra principale verranno o no mostrati i saldi di ogni nota spese.</translation>
     </message>
 </context>
 <context>
@@ -270,7 +270,7 @@ da password</translation>
         <source>Click here to create a new checkbook.
 
 You also can select New from the Checkbook menu.</source>
-        <translation>Clicca per creare una nuova nota spese.
+        <translation>Premi per creare una nuova nota spese.
 
 Puoi anche selezionare Nuova dal menu.</translation>
     </message>
@@ -282,9 +282,9 @@ Puoi anche selezionare Nuova dal menu.</translation>
         <source>Select a checkbook and then click here to edit it.
 
 You also can select Edit from the Checkbook menu, or click and hold on a checkbook name.</source>
-        <translation>Seleziona una nota spese e clicca qui per modificarla.
+        <translation>Seleziona una nota spese e Premi qui per modificarla.
 
-Puoi anche selezionare Modifica dal menu, o clicca e tieni premuto sul nome della nota spese.</translation>
+Puoi anche selezionare Modifica dal menu, o Premi e tieni premuto sul nome della nota spese.</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -294,7 +294,7 @@ Puoi anche selezionare Modifica dal menu, o clicca e tieni premuto sul nome dell
         <source>Select a checkbook and then click here delete it.
 
 You also can select Delete from the Checkbook menu.</source>
-        <translation>Seleziona un movimento e clicca qui per eliminarlo.
+        <translation>Seleziona un movimento e Premi qui per eliminarlo.
 
 Puoi anche selezionare Elimina dal menu.</translation>
     </message>
@@ -312,7 +312,7 @@ Puoi anche selezionare Elimina dal menu.</translation>
     </message>
     <message>
         <source>Click here to configure this app.</source>
-        <translation>Clicca qui per configurare questa applicazione.</translation>
+        <translation>Premi qui per configurare questa applicazione.</translation>
     </message>
     <message>
         <source>Checkbook Name</source>

@@ -97,7 +97,7 @@
         <source>
 **** User Clicked ABORT ***</source>
         <translation>
-**** L&apos;utente ha cliccato INTERROMPI ***</translation>
+**** L&apos;utente ha premuto INTERROMPI ***</translation>
     </message>
     <message>
         <source>**** Process Aborted ****</source>
@@ -251,7 +251,7 @@
     </message>
     <message>
         <source>Click here to hide the Quick Jump toolbar.</source>
-        <translation>Clicca qui per nascondere la toolbar &quot;Quick Jump&quot;.</translation>
+        <translation>Premi qui per nascondere la toolbar &quot;Quick Jump&quot;.</translation>
     </message>
     <message>
         <source>Update lists</source>
@@ -259,7 +259,7 @@
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation>Clicca qui per aggiornare le liste dei pacchetti dai server.</translation>
+        <translation>Premi qui per aggiornare le liste dei pacchetti dai server.</translation>
     </message>
     <message>
         <source>Upgrade</source>
@@ -267,7 +267,7 @@
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation>Clicca qui per fare l&apos;upgrade di tutti i pacchetti installati se è disponibile una versione più aggiornata.</translation>
+        <translation>Premi qui per fare l&apos;upgrade di tutti i pacchetti installati se è disponibile una versione più aggiornata.</translation>
     </message>
     <message>
         <source>Download</source>
@@ -275,7 +275,7 @@
     </message>
     <message>
         <source>Click here to download the currently selected package(s).</source>
-        <translation>Clicca qui per fare il download dei pacchetti selezionati.</translation>
+        <translation>Premi qui per fare il download dei pacchetti selezionati.</translation>
     </message>
     <message>
         <source>Apply changes</source>
@@ -283,7 +283,7 @@
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation>Clicca qui per installare, eliminare o fare l&apos;upgrade dei pacchetti selezionati.</translation>
+        <translation>Premi qui per installare, eliminare o fare l&apos;upgrade dei pacchetti selezionati.</translation>
     </message>
     <message>
         <source>Actions</source>
@@ -295,7 +295,7 @@
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
-        <translation>Clicca qui per visualizzare i pacchetti disponibili non ancora installati.</translation>
+        <translation>Premi qui per visualizzare i pacchetti disponibili non ancora installati.</translation>
     </message>
     <message>
         <source>Show installed packages</source>
@@ -303,7 +303,7 @@
     </message>
     <message>
         <source>Click here to show packages currently installed on this device.</source>
-        <translation>Clicca qui per visualizzare i pacchetti installati su questo dispositivo.</translation>
+        <translation>Premi qui per visualizzare i pacchetti installati su questo dispositivo.</translation>
     </message>
     <message>
         <source>Show updated packages</source>
@@ -311,7 +311,7 @@
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
-        <translation>Clicca qui per visualizzare i pacchetti installati su questo dispositivo che hanno disponibile una versione più aggiornata.</translation>
+        <translation>Premi qui per visualizzare i pacchetti installati su questo dispositivo che hanno disponibile una versione più aggiornata.</translation>
     </message>
     <message>
         <source>Filter by category</source>
@@ -319,7 +319,7 @@
     </message>
     <message>
         <source>Click here to list packages belonging to one category.</source>
-        <translation>Clicca qui per visualizzare i pacchetti appartenenti ad una categoria.</translation>
+        <translation>Premi qui per visualizzare i pacchetti appartenenti ad una categoria.</translation>
     </message>
     <message>
         <source>Set filter category</source>
@@ -327,7 +327,7 @@
     </message>
     <message>
         <source>Click here to change package category to used filter.</source>
-        <translation>Clicca qui per cambiare la categoria utilizzata per il filtro dei pacchetti.</translation>
+        <translation>Premi qui per cambiare la categoria utilizzata per il filtro dei pacchetti.</translation>
     </message>
     <message>
         <source>Find</source>
@@ -335,7 +335,7 @@
     </message>
     <message>
         <source>Click here to search for text in package names.</source>
-        <translation>Clicca qui per cercare del testo nei nomi dei pacchetti.</translation>
+        <translation>Premi qui per cercare del testo nei nomi dei pacchetti.</translation>
     </message>
     <message>
         <source>Find next</source>
@@ -343,7 +343,7 @@
     </message>
     <message>
         <source>Click here to find the next package name containing the text you are searching for.</source>
-        <translation>Clicca qui per trovare il successivo nome del pacchetto che contiene il testo che stai cercando.</translation>
+        <translation>Premi qui per trovare il successivo nome del pacchetto che contiene il testo che stai cercando.</translation>
     </message>
     <message>
         <source>Quick Jump keypad</source>
@@ -351,7 +351,7 @@
     </message>
     <message>
         <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
-        <translation>Clicca qui per mostrare/nascondere la tastiera per muoversi velocemente nella lista dei pacchetti.</translation>
+        <translation>Premi qui per mostrare/nascondere la tastiera per muoversi velocemente nella lista dei pacchetti.</translation>
     </message>
     <message>
         <source>View</source>
@@ -363,11 +363,11 @@
     </message>
     <message>
         <source>Click here to configure this application.</source>
-        <translation>Clicca qui per configurare questa applicazione.</translation>
+        <translation>Premi qui per configurare questa applicazione.</translation>
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
-        <translation>Clicca qui per nascondere la toolbar di ricerca.</translation>
+        <translation>Premi qui per nascondere la toolbar di ricerca.</translation>
     </message>
     <message>
         <source>Servers:</source>
@@ -375,7 +375,7 @@
     </message>
     <message>
         <source>Click here to select a package feed.</source>
-        <translation>Clicca qui per selezionare un server per i pacchetti.</translation>
+        <translation>Premi qui per selezionare un server per i pacchetti.</translation>
     </message>
     <message>
         <source>Packages</source>
@@ -395,7 +395,7 @@ Un punto blu dopo il nome del pacchetto indica che il pacchetto è installato.
 
 Un punto blu con una stella indica che è disponibile sul server una nuova versione del pacchetto .
 
-Clicca dentro il box sulla sinistra per selezionare un pacchetto.</translation>
+Premi dentro il box sulla sinistra per selezionare un pacchetto.</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -403,7 +403,7 @@ Clicca dentro il box sulla sinistra per selezionare un pacchetto.</translation>
     </message>
     <message>
         <source>Click here to uninstall the currently selected package(s).</source>
-        <translation>Clicca qui per disinstallare i pacchetti selezionati.</translation>
+        <translation>Premi qui per disinstallare i pacchetti selezionati.</translation>
     </message>
     <message>
         <source>Building server list:
