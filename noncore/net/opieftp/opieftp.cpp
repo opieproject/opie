@@ -133,16 +133,16 @@ OpieFtp::OpieFtp( )
     Local_View->setAllColumnsShowFocus(TRUE);
     Local_View->setMultiSelection( TRUE );
 
-    QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
+     QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
 
     tabLayout->addWidget( Local_View, 0, 0 );
 
-    connect( Local_View, SIGNAL( clicked( QListViewItem*)),
-             this,SLOT( localListClicked(QListViewItem *)) );
+     connect( Local_View, SIGNAL( clicked( QListViewItem*)),
+              this,SLOT( localListClicked(QListViewItem *)) );
 //     connect( Local_View, SIGNAL( doubleClicked( QListViewItem*)),
 //              this,SLOT( localListClicked(QListViewItem *)) );
-    connect( Local_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-             this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
+//     connect( Local_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
+//              this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
 
     TabWidget->insertTab( tab, tr( "Local" ) );
 
@@ -260,18 +260,6 @@ OpieFtp::OpieFtp( )
     layout->addMultiCellWidget( ProgressBar, 4, 4, 0, 3 );
 
 //     fillCombos();
-
-#ifdef DEVELOPERS_VERSION
-    ServerComboBox->lineEdit()->setText( tr( "192.168.129.201" ) );
-    UsernameComboBox->lineEdit()->setText("root");
-    PortSpinBox->setValue( 4242);
-    remotePath->setText( currentRemoteDir = "/");
-//    ServerComboBox->lineEdit()->setText( tr( "llornkcor.com" ) );
-//    UsernameComboBox->lineEdit()->setText("llornkcor");
-//    PortSpinBox->setValue( 21);
-//    remotePath->setText( currentRemoteDir = "/home/llornkcor");
-    PasswordEdit->setText( tr( "" ) );
-#endif
 
     filterStr="*";
     b=FALSE;
@@ -723,8 +711,10 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
 
 void OpieFtp::localListClicked(QListViewItem *selectedItem)
 {
-    if(item) {
-        QString strItem=selectedItem->text(0);
+//    qDebug(selectedItem->text(0));
+    if(item!= NULL) {
+    
+    QString strItem=selectedItem->text(0);
         QString strSize=selectedItem->text(1);
         strSize=strSize.stripWhiteSpace();
         if(strItem.find("@",0,TRUE) !=-1 || strItem.find("->",0,TRUE) !=-1 ) { //if symlink
@@ -789,13 +779,10 @@ void OpieFtp::showHidden()
 
 void OpieFtp::ListPressed( int mouse, QListViewItem *item, const QPoint &point, int i)
 {
-    switch (mouse) {
-      case 1:
-          break;
-      case 2:
+// if(item)
+if (mouse == 2) {
           showLocalMenu(item);
-    break;
-    };
+    }
 }
 
 void OpieFtp::RemoteListPressed( int mouse, QListViewItem *item, const QPoint &point, int i)
@@ -825,7 +812,8 @@ void OpieFtp::showRemoteMenu(QListViewItem * item)
 
 void OpieFtp::showLocalMenu(QListViewItem * item)
 {
-    QPopupMenu  m;
+
+ QPopupMenu  m;
     m.insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
     m.insertSeparator();
     if( /*item->text(0).right(1) == "/" ||*/ item->text(0).find("/",0,TRUE) !=-1)
