@@ -3,131 +3,131 @@
     <name>LauncherSettings</name>
     <message>
         <source>Launcher Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres du Bureau</translation>
     </message>
     <message>
         <source>Taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Barre des tâches</translation>
     </message>
     <message>
         <source>O-Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu O</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Onglets</translation>
     </message>
 </context>
 <context>
     <name>MenuSettings</name>
     <message>
         <source>Load applets in O-Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher ces icônes dans le menu O :</translation>
     </message>
     <message>
         <source>Show Launcher tabs in O-Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher les onglets dans le menu O</translation>
     </message>
     <message>
         <source>Check the applets that you want to have included in the O-Menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez les icônes à afficher dans le menu O.</translation>
     </message>
     <message>
         <source>Adds the contents of the Launcher Tabs as menus in the O-Menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Permet d&apos;afficher le contenu des onglets du bureau dans le menu O.</translation>
     </message>
 </context>
 <context>
     <name>SampleView</name>
     <message>
         <source>Sample 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Exemple 1</translation>
     </message>
     <message>
         <source>Sample 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Exemple 2</translation>
     </message>
     <message>
         <source>Sample 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Exemple 3</translation>
     </message>
 </context>
 <context>
     <name>TabDialog</name>
     <message>
         <source>Edit Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Editeur d&apos;onglets</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Fond d&apos;écran</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Police</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Icônes</translation>
     </message>
     <message>
         <source>Previewing %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Prévisualisation %1</translation>
     </message>
     <message>
         <source>This is a rough preview of what the currently selected Tab will look like.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ceci est une prévisualisation grossière de l&apos;apparence qu&apos;aura l&apos;onglet sélectionné.</translation>
     </message>
     <message>
         <source>Use a custom font</source>
-        <translation type="unfinished"></translation>
+        <translation>Personaliser la police</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type :</translation>
     </message>
     <message>
         <source>Ruled</source>
-        <translation type="unfinished"></translation>
+        <translation>Strié</translation>
     </message>
     <message>
         <source>Solid color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur unie</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Image</translation>
     </message>
     <message>
         <source>Select...</source>
-        <translation type="unfinished"></translation>
+        <translation>Parcourir ...</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Réglages par défaut</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille :</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Petites</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Grandes</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur :</translation>
     </message>
 </context>
 <context>
     <name>TabsSettings</name>
     <message>
         <source>Launcher Tabs:</source>
-        <translation type="unfinished"></translation>
+        <translation>Onglets du bureau :</translation>
     </message>
     <message>
         <source>foobar</source>
@@ -135,74 +135,74 @@
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Enable big busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher le sablier élargi</translation>
     </message>
     <message>
         <source>Enable blinking busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher le sablier clignotant</translation>
     </message>
     <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez l&apos;onglet que vous voulez Editer ou Effacer.</translation>
     </message>
     <message>
         <source>Adds a new Tab to the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter un nouvel onglet au bureau.</translation>
     </message>
     <message>
         <source>Opens a new dialog to customize the select Tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir une boîte de dialogue pour personnaliser l&apos;onglet sélectionné.</translation>
     </message>
     <message>
         <source>Deletes a Tab from the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer un onglet du bureau.</translation>
     </message>
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activez ceci si vous voulez afficher un gros sablier au milieu de l&apos;écran au lieu de celui qui apparait dans la barre des tâches.</translation>
     </message>
     <message>
         <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activez ceci si vous voulez afficher un sablier clignotant quand vous démarrez une application.</translation>
     </message>
     <message>
         <source>All Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les onglets</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Documents</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>Not implemented yet</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas encore implanté</translation>
     </message>
 </context>
 <context>
     <name>TaskbarSettings</name>
     <message>
         <source>Load applets in Taskbar:</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher ces icônes dans la barre des tâches :</translation>
     </message>
     <message>
         <source>Check the applets that you want displayed in the Taskbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisissez les icônes à afficher dans la barre des tâches.</translation>
     </message>
 </context>
 </TS>
