@@ -21,19 +21,20 @@
 #define QTOPIA_INTERNAL_LANGLIST
 
 #include "helpbrowser.h"
+#include "magictextbrowser.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qmenubar.h>
 #include <qtoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qfileinfo.h>
 #include <qaction.h>
-
-#include <cctype>
-
-#include "magictextbrowser.h"
 
 HelpBrowser::HelpBrowser( QWidget* parent, const char *name, WFlags f )
     : QMainWindow( parent, name, f ),
@@ -52,13 +53,13 @@ void HelpBrowser::init( const QString& _home )
     browser = new MagicTextBrowser( this );
     browser->setFrameStyle( QFrame::Panel | QFrame::Sunken );
     connect( browser, SIGNAL( textChanged() ),
-	     this, SLOT( textChanged() ) );
+         this, SLOT( textChanged() ) );
 
     setCentralWidget( browser );
     setToolBarsMovable( FALSE );
 
     if ( !_home.isEmpty() )
-	browser->setSource( _home );
+    browser->setSource( _home );
 
     QToolBar* toolbar = new QToolBar( this );
     toolbar->setHorizontalStretchable( TRUE );
@@ -71,7 +72,7 @@ void HelpBrowser::init( const QString& _home )
     backAction = new QAction( tr( "Backward" ), Resource::loadIconSet( "back" ), QString::null, 0, this, 0 );
     connect( backAction, SIGNAL( activated() ), browser, SLOT( backward() ) );
     connect( browser, SIGNAL( backwardAvailable(bool) ),
-	     backAction, SLOT( setEnabled(bool) ) );
+         backAction, SLOT( setEnabled(bool) ) );
     backAction->addTo( go );
     backAction->addTo( toolbar );
     backAction->setEnabled( FALSE );
@@ -79,7 +80,7 @@ void HelpBrowser::init( const QString& _home )
     forwardAction = new QAction( tr( "Forward" ), Resource::loadIconSet( "forward" ), QString::null, 0, this, 0 );
     connect( forwardAction, SIGNAL( activated() ), browser, SLOT( forward() ) );
     connect( browser, SIGNAL( forwardAvailable(bool) ),
-	     forwardAction, SLOT( setEnabled(bool) ) );
+         forwardAction, SLOT( setEnabled(bool) ) );
     forwardAction->addTo( go );
     forwardAction->addTo( toolbar );
     forwardAction->setEnabled( FALSE );
@@ -94,7 +95,7 @@ void HelpBrowser::init( const QString& _home )
     bookm->insertItem( tr( "Remove from Bookmarks" ), this, SLOT( removeBookmark() ) );
     bookm->insertSeparator();
     connect( bookm, SIGNAL( activated(int) ),
-	     this, SLOT( bookmChosen(int) ) );
+         this, SLOT( bookmChosen(int) ) );
 
     readBookmarks();
 
@@ -112,30 +113,30 @@ void HelpBrowser::init( const QString& _home )
 #endif
 
     connect( qApp, SIGNAL(appMessage(const QCString&,const QByteArray&)),
-	     this, SLOT(appMessage(const QCString&,const QByteArray&)) );
+         this, SLOT(appMessage(const QCString&,const QByteArray&)) );
 }
 
 void HelpBrowser::appMessage(const QCString& msg, const QByteArray& data)
 {
-	qDebug("reached appMessage");
+    odebug << "reached appMessage" << oendl;
     if ( msg == "showFile(QString)" ) {
-	QDataStream ds(data,IO_ReadOnly);
-	QString fn;
-	ds >> fn;
-	setDocument( fn );
+    QDataStream ds(data,IO_ReadOnly);
+    QString fn;
+    ds >> fn;
+    setDocument( fn );
 
         QPEApplication::setKeepRunning();
 
-	showMaximized();
-	setActiveWindow();
-	raise();
+    showMaximized();
+    setActiveWindow();
+    raise();
     }
 }
 
 void HelpBrowser::setDocument( const QString &doc )
 {
     if ( !doc.isEmpty() )
-	browser->setSource( doc );
+    browser->setSource( doc );
     raise();
 }
 
@@ -143,9 +144,9 @@ void HelpBrowser::setDocument( const QString &doc )
 void HelpBrowser::textChanged()
 {
     if ( browser->documentTitle().isNull() )
-	setCaption( tr("Help Browser") );
+    setCaption( tr("Help Browser") );
     else
-	setCaption( browser->documentTitle() ) ;
+    setCaption( browser->documentTitle() ) ;
 
     selectedURL = caption();
 }
@@ -155,13 +156,13 @@ HelpBrowser::~HelpBrowser()
     QStringList bookmarks;
     QMap<int, Bookmark>::Iterator it2 = mBookmarks.begin();
     for ( ; it2 != mBookmarks.end(); ++it2 )
-	bookmarks.append( (*it2).name + "=" + (*it2).file );
+    bookmarks.append( (*it2).name + "=" + (*it2).file );
 
     QFile f2( Global::applicationFileName("helpbrowser", "bookmarks") );
     if ( f2.open( IO_WriteOnly ) ) {
-	QDataStream s2( &f2 );
-	s2 << bookmarks;
-	f2.close();
+    QDataStream s2( &f2 );
+    s2 << bookmarks;
+    f2.close();
     }
 }
 
@@ -174,31 +175,31 @@ void HelpBrowser::readBookmarks()
 {
     QString file = Global::applicationFileName("helpbrowser", "bookmarks");
     if ( QFile::exists( file ) ) {
-	QStringList bookmarks;
-	QFile f( file );
-	if ( f.open( IO_ReadOnly ) ) {
-	    QDataStream s( &f );
-	    s >> bookmarks;
-	    f.close();
-	}
-	QStringList::Iterator it = bookmarks.begin();
-	for ( ; it != bookmarks.end(); ++it ) {
-	    Bookmark b;
-	    QString current = *it;
-	    int equal = current.find( "=" );
-	    if ( equal < 1 || equal == (int)current.length() - 1 )
-		continue;
-	    b.name = current.left( equal );
-	    b.file = current.mid( equal + 1 );
-	    mBookmarks[ bookm->insertItem( b.name ) ] = b;
-	}
+    QStringList bookmarks;
+    QFile f( file );
+    if ( f.open( IO_ReadOnly ) ) {
+        QDataStream s( &f );
+        s >> bookmarks;
+        f.close();
+    }
+    QStringList::Iterator it = bookmarks.begin();
+    for ( ; it != bookmarks.end(); ++it ) {
+        Bookmark b;
+        QString current = *it;
+        int equal = current.find( "=" );
+        if ( equal < 1 || equal == (int)current.length() - 1 )
+        continue;
+        b.name = current.left( equal );
+        b.file = current.mid( equal + 1 );
+        mBookmarks[ bookm->insertItem( b.name ) ] = b;
+    }
     }
 }
 
 void HelpBrowser::bookmChosen( int i )
 {
     if ( mBookmarks.contains( i ) )
-	browser->setSource( mBookmarks[ i ].file );
+    browser->setSource( mBookmarks[ i ].file );
 }
 
 void HelpBrowser::addBookmark()
@@ -207,11 +208,11 @@ void HelpBrowser::addBookmark()
     b.name = browser->documentTitle();
     b.file = browser->source();
     if (b.name.isEmpty() ) {
-	b.name = b.file.left( b.file.length() - 5 ); // remove .html
+    b.name = b.file.left( b.file.length() - 5 ); // remove .html
     }
     QMap<int, Bookmark>::Iterator it;
     for( it = mBookmarks.begin(); it != mBookmarks.end(); ++it )
-	if ( (*it).file == b.file ) return;
+    if ( (*it).file == b.file ) return;
     mBookmarks[ bookm->insertItem( b.name ) ] = b;
 }
 
@@ -220,9 +221,9 @@ void HelpBrowser::removeBookmark()
     QString file = browser->source();
     QMap<int, Bookmark>::Iterator it = mBookmarks.begin();
     for( ; it != mBookmarks.end(); ++it )
-	if ( (*it).file == file ) {
-	    bookm->removeItem( it.key() );
-	    mBookmarks.remove( it );
-		break;
-	}
+    if ( (*it).file == file ) {
+        bookm->removeItem( it.key() );
+        mBookmarks.remove( it );
+        break;
+    }
 }

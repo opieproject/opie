@@ -11,20 +11,24 @@
 **
 **********************************************************************/
 // changes added by L. J. Potter Sun 02-17-2002 21:31:31
+
 #include "textedit.h"
 #include "filePermissions.h"
 
-
+/* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/ofileselector.h>
 #include <opie2/ofiledialog.h>
 #include <opie2/ofontselector.h>
-
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
+
+/* QT */
 #include <qmenubar.h>
 #include <qtoolbar.h>
-
 #include <qtextstream.h>
 #include <qclipboard.h>
 #include <qaction.h>
@@ -33,14 +37,13 @@
 #include <qlayout.h>
 #include <qtimer.h>
 #include <qdir.h>
+
+/* STD */
 #include <unistd.h>
 #include <sys/stat.h>
 #include <stdlib.h> //getenv
 
-using namespace Opie::Ui;
-
 #if QT_VERSION < 300
-
 class QpeEditor : public QMultiLineEdit
 {
 
@@ -411,7 +414,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 }
 
 TextEdit::~TextEdit() {
-    qWarning("textedit d'tor");
+    owarn << "textedit d'tor" << oendl;
     delete editor;
 }
 
@@ -646,7 +649,7 @@ void TextEdit::newFile( const DocLnk &f ) {
     editor->setFocus();
     doc = new DocLnk(nf);
     currentFileName = "Unnamed";
-    qDebug("newFile "+currentFileName);
+    odebug << "newFile "+currentFileName << oendl;
     updateCaption( currentFileName);
 //    editor->setEdited( false);
 }
@@ -655,7 +658,7 @@ void TextEdit::openDotFile( const QString &f ) {
     if(!currentFileName.isEmpty()) {
     currentFileName=f;
 
-    qDebug("openFile dotfile " + currentFileName);
+    odebug << "openFile dotfile " + currentFileName << oendl;
     QString txt;
     QFile file(f);
     file.open(IO_ReadWrite);
@@ -674,7 +677,7 @@ void TextEdit::openDotFile( const QString &f ) {
 }
 
 void TextEdit::openFile( const QString &f ) {
-  qDebug("filename is "+ f);
+  odebug << "filename is "+ f << oendl;
   QString filer;
   QFileInfo fi( f);
 //    bFromDocView = true;
@@ -693,7 +696,7 @@ void TextEdit::openFile( const QString &f ) {
     }
   else if(fi.baseName().left(1) == "")
     {
-      qDebug("opening dotfile");
+      odebug << "opening dotfile" << oendl;
       currentFileName=f;
       openDotFile(currentFileName);
       return;
@@ -721,7 +724,7 @@ void TextEdit::openFile( const QString &f ) {
       nf.setName(fi.baseName());
       openFile(nf);
 
-      qDebug("openFile string "+currentFileName);
+      odebug << "openFile string "+currentFileName << oendl;
 
   showEditTools();
     // Show filename in caption
@@ -738,10 +741,10 @@ void TextEdit::openFile( const DocLnk &f ) {
     FileManager fm;
     QString txt;
     currentFileName=f.file();
-    qDebug("openFile doclnk " + currentFileName);
+    odebug << "openFile doclnk " + currentFileName << oendl;
     if ( !fm.loadFile( f, txt ) ) {
           // ####### could be a new file
-        qDebug( "Cannot open file" );
+        odebug << "Cannot open file" << oendl;
     }
 //    fileNew();
     if ( doc )
@@ -770,23 +773,23 @@ void TextEdit::showEditTools() {
 /*!
   unprompted save */
 bool TextEdit::save() {
-    qDebug("saveAsFile " + currentFileName);
+    odebug << "saveAsFile " + currentFileName << oendl;
     if(currentFileName.isEmpty()) {
         saveAs();
         return false;
     }
 
     QString file = doc->file();
-    qDebug("saver file "+file);
+    odebug << "saver file "+file << oendl;
     QString name= doc->name();
-    qDebug("File named "+name);
+    odebug << "File named "+name << oendl;
     QString rt = editor->text();
     if( !rt.isEmpty() ) {
         if(name.isEmpty()) {
             saveAs();
         } else {
             currentFileName= name ;
-            qDebug("saveFile "+currentFileName);
+            odebug << "saveFile "+currentFileName << oendl;
 
             struct stat buf;
             mode_t mode;
@@ -797,18 +800,18 @@ bool TextEdit::save() {
                 doc->setName( name);
                 FileManager fm;
                 if ( !fm.saveFile( *doc, rt ) ) {
-										QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
+                                        QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
                     return false;
                 }
             } else {
-                qDebug("regular save file");
+                odebug << "regular save file" << oendl;
                 QFile f(file);
                  if( f.open(IO_WriteOnly)) {
                      QCString crt = rt.utf8();
                      f.writeBlock(crt,crt.length());
                  } else {
                      QMessageBox::message(tr("Text Edit"),tr("Write Failed"));
-										 return false;
+                                         return false;
                  }
 
             }
@@ -832,11 +835,11 @@ bool TextEdit::saveAs() {
 
     if(caption() == tr("Text Editor"))
         return false;
-    qDebug("saveAsFile " + currentFileName);
+    odebug << "saveAsFile " + currentFileName << oendl;
       // case of nothing to save...
 //     if ( !doc && !currentFileName.isEmpty()) {
 // //|| !bFromDocView)
-//         qDebug("no doc");
+//         odebug << "no doc" << oendl;
 //         return true;
 //     }
 //     if ( !editor->edited() ) {
@@ -846,12 +849,12 @@ bool TextEdit::saveAs() {
 //     }
 
     QString rt = editor->text();
-    qDebug(currentFileName);
+    odebug << currentFileName << oendl;
 
     if( currentFileName.isEmpty()
         || currentFileName == tr("Unnamed")
         || currentFileName == tr("Text Editor")) {
-        qDebug("do silly TT filename thing");
+        odebug << "do silly TT filename thing" << oendl;
 //        if ( doc && doc->name().isEmpty() ) {
         QString pt = rt.simplifyWhiteSpace();
         int i = pt.find( ' ' );
@@ -872,7 +875,7 @@ bool TextEdit::saveAs() {
         currentFileName=docname;
 //         }
 //         else
-//             qDebug("hmmmmmm");
+//             odebug << "hmmmmmm" << oendl;
     }
 
 
@@ -900,7 +903,7 @@ bool TextEdit::saveAs() {
     if(!str.isEmpty()) {
         QString fileNm=str;
 
-        qDebug("saving filename "+fileNm);
+        odebug << "saving filename "+fileNm << oendl;
         QFileInfo fi(fileNm);
         currentFileName=fi.fileName();
         if(doc)
@@ -912,13 +915,13 @@ bool TextEdit::saveAs() {
             nf.setFile( fileNm);
             doc = new DocLnk(nf);
 //        editor->setText(rt);
-            qDebug("Saving file as "+currentFileName);
+            odebug << "Saving file as "+currentFileName << oendl;
             doc->setName( currentFileName);
             updateCaption( currentFileName);
 
             FileManager fm;
             if ( !fm.saveFile( *doc, rt ) ) {
-								QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
+                                QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
                 return false;
             }
 
@@ -941,7 +944,7 @@ bool TextEdit::saveAs() {
 
         return true;
     }
-    qDebug("returning false");
+    odebug << "returning false" << oendl;
     return false;
 } //end saveAs
 
@@ -972,14 +975,14 @@ void TextEdit::updateCaption( const QString &name ) {
 void TextEdit::setDocument(const QString& fileref) {
     if(fileref != "Unnamed") {
         currentFileName=fileref;
-        qDebug("setDocument");
+        odebug << "setDocument" << oendl;
          QFileInfo fi(currentFileName);
-         qDebug("basename:"+fi.baseName()+": current filenmame "+currentFileName);
+         odebug << "basename:"+fi.baseName()+": current filenmame "+currentFileName << oendl;
          if( (fi.baseName().left(1)).isEmpty() ) {
         openDotFile(currentFileName);
 
          } else {
-             qDebug("setDoc open");
+             odebug << "setDoc open" << oendl;
              bFromDocView = true;
              openFile(fileref);
              editor->setEdited(true);
@@ -1034,7 +1037,7 @@ void TextEdit::changeStartConfig( bool b ) {
 }
 
 void TextEdit::editorChanged() {
-//    qDebug("editor changed");
+//    odebug << "editor changed" << oendl;
     if( /*editor->edited() &&*/ /*edited && */!edited1) {
         setCaption( "*"+caption());
         edited1=true;
@@ -1043,9 +1046,9 @@ void TextEdit::editorChanged() {
 }
 
 void TextEdit::receive(const QCString&msg, const QByteArray &) {
-    qDebug("QCop "+msg);
+    odebug << "QCop "+msg << oendl;
   if ( msg == "setDocument(QString)" ) {
-      qDebug("bugger all");
+      odebug << "bugger all" << oendl;
 
   }
 
@@ -1129,7 +1132,7 @@ void TextEdit::timerCrank()
             }
           else
             {
-//                qDebug("autosave");
+//                odebug << "autosave" << oendl;
                 save();
             }
           setTimer();
@@ -1145,18 +1148,18 @@ void TextEdit::doTimer(bool b)
     nAutoSave->setOn(b);
     if(b)
       {
-//          qDebug("doTimer true");
+//          odebug << "doTimer true" << oendl;
           setTimer();
       }
 //     else
-//         qDebug("doTimer false");
+//         odebug << "doTimer false" << oendl;
 }
 
 void TextEdit::setTimer()
 {
 if(featureAutoSave)
   {
-//      qDebug("setting autosave");
+//      odebug << "setting autosave" << oendl;
       QTimer *timer = new QTimer(this );
       connect( timer, SIGNAL(timeout()), this, SLOT(timerCrank()) );
       timer->start( 300000, true); //5 minutes
