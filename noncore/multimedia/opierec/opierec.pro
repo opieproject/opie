@@ -10,3 +10,4 @@ INTERFACES  =
 TARGET    = opierec
 DESTDIR = $(OPIEDIR)/bin
 #TMAKE_CXXFLAGS += -DQT_QWS_VERCEL_IDR -DQWS -fno-exceptions -fno-rtti
+include ( $(OPIEDIR)/include.pro )
