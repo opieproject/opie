@@ -58,8 +58,8 @@ AdvancedFm::AdvancedFm( )
    whichTab=1;
    rePopulate();
    currentPathCombo->setFocus();
-    channel = new QCopChannel( "QPE/Application/advancedfm", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+
+    connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
         this, SLOT( qcopReceive(const QCString&, const QByteArray&)) );
 }
 
@@ -894,6 +894,7 @@ void AdvancedFm::qcopReceive(const QCString &msg, const QByteArray &data) {
 }
 
  void AdvancedFm::setDocument(const QString &file) {
+     raise();
       gotoDirectory( file);
 
  }
@@ -919,7 +920,7 @@ void AdvancedFm::gotoDirectory(const QString &file) {
     }
     findFile(file);
  }
-  
+
 }
 
 void AdvancedFm::findFile(const QString &fileName) {

@@ -91,7 +91,6 @@ protected slots:
 protected:
 
    OTabWidget *TabWidget;
-   QCopChannel * channel;
    QPixmap unknownXpm;
    int whichTab;
 //    QTabWidget *TabWidget;
@@ -174,7 +173,7 @@ private slots:
    void gotoCustomDir(const QString &);
    void qcopReceive(const QCString&, const QByteArray&);
    void setDocument(const QString &);
-   
+
 };
 
 #endif // ADVANCEDFM_H
