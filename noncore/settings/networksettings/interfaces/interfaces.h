@@ -28,30 +28,30 @@ public:
   bool isAuto(const QString &interface);
   bool setAuto(const QString &interface, bool setAuto);
   
-  inline bool removeInterface();
+  bool removeInterface();
   bool addInterface(const QString &interface, const QString &family, const QString &method);
   bool copyInterface(const QString &oldInterface, const QString &newInterface);
   bool setInterface(QString interface);
-  inline bool isInterfaceSet();
+  bool isInterfaceSet();
   QString getInterfaceName(bool &error);
   bool setInterfaceName(const QString &newName);
   QString getInterfaceFamily(bool &error);
   bool setInterfaceFamily(const QString &newName);
   QString getInterfaceMethod(bool &error);
   bool setInterfaceMethod(const QString &newName);
-  inline QString getInterfaceOption(const QString &option, bool &error); 
-  inline bool setInterfaceOption(const QString &option, const QString &value);
-  inline bool removeInterfaceOption(const QString &option, const QString &value);
-  inline bool removeAllInterfaceOptions();
+  QString getInterfaceOption(const QString &option, bool &error); 
+  bool setInterfaceOption(const QString &option, const QString &value);
+  bool removeInterfaceOption(const QString &option, const QString &value);
+  bool removeAllInterfaceOptions();
   
   bool setMapping(const QString &interface);
-  inline bool removeMapping();
-  inline void addMapping(const QString &options);
-  inline bool setMap(const QString &map, const QString &value);
-  inline bool removeMap(const QString &map, const QString &value);
-  inline QString getMap(const QString &map, bool &error);
-  inline bool setScript(const QString &argument);
-  inline QString getScript(bool &error);
+  bool removeMapping();
+  void addMapping(const QString &options);
+  bool setMap(const QString &map, const QString &value);
+  bool removeMap(const QString &map, const QString &value);
+  QString getMap(const QString &map, bool &error);
+  bool setScript(const QString &argument);
+  QString getScript(bool &error);
 		  
   bool write();
   
