@@ -33,10 +33,10 @@
 
 #include "ocontactfields.h"
 
-const int NAME_LF = 0;
+const int NAME_LF  = 0;
 const int NAME_LFM = 1;
-const int NAME_FL = 2;
-const int NAME_FMLS = 3;
+const int NAME_FL  = 2;
+const int NAME_FML = 3;
 
 const int NAME_F = 4;
 const int NAME_M = 5;
@@ -114,8 +114,6 @@ class ContactEditor : public QDialog {
 		void chooserChange( const QString&, int , QLineEdit*, int );
 		bool cmbChooserChange( int , QWidgetStack*, int );
 		OContactFields contactfields;
-
-		bool useFullName;
 
 		OContact ent;
 

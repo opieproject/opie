@@ -89,8 +89,6 @@ ContactEditor::~ContactEditor() {
 void ContactEditor::init() {
 	qWarning("init() START");
 	
-	useFullName = true;
-
 	uint i = 0;
 
 	QStringList trlChooserNames;
@@ -1031,11 +1029,12 @@ void ContactEditor::slotFullNameChange( const QString &textChanged ) {
 	cmbFileAs->insertItem( parseName( textChanged, NAME_LF ) );
 	cmbFileAs->insertItem( parseName( textChanged, NAME_LFM ) );
 	cmbFileAs->insertItem( parseName( textChanged, NAME_FL ) );
-	cmbFileAs->insertItem( parseName( textChanged, NAME_FMLS ) );
+	cmbFileAs->insertItem( parseName( textChanged, NAME_FML ) );
+	if ( ! txtSuffix->text().isEmpty() )
+		cmbFileAs->insertItem( parseName( textChanged, NAME_FML ) + " " + txtSuffix->text() );
 
 	cmbFileAs->setCurrentItem( index );
 
-	useFullName = true;
 
 }
 
@@ -1068,19 +1067,21 @@ void ContactEditor::slotNote() {
 void ContactEditor::slotName() {
 
 	QString tmpName;
-	if (useFullName) {
-		txtFirstName->setText( parseName(txtFullName->text(), NAME_F) );
-		txtMiddleName->setText( parseName(txtFullName->text(), NAME_M) );
-		txtLastName->setText( parseName(txtFullName->text(), NAME_L) );
-		// txtSuffix->setText( parseName(txtFullName->text(), NAME_S) );
-	}
+
+	txtFirstName->setText( parseName(txtFullName->text(), NAME_F) );
+	txtMiddleName->setText( parseName(txtFullName->text(), NAME_M) );
+	txtLastName->setText( parseName(txtFullName->text(), NAME_L) );
+	// txtSuffix->setText( parseName(txtFullName->text(), NAME_S) );
+
 	dlgName->showMaximized();
 	if ( dlgName->exec() ) {
+		 if ( txtLastName->text().contains( ' ', TRUE ) )
+			 tmpName =  txtLastName->text() + ", " + txtFirstName->text() + " " + txtMiddleName->text();
+		 else
+			 tmpName = txtFirstName->text() + " " + txtMiddleName->text() + " " + txtLastName->text();
 
-		tmpName = txtFirstName->text() + " " + txtMiddleName->text() + " " + txtLastName->text();
 		txtFullName->setText( tmpName.simplifyWhiteSpace() );
 		slotFullNameChange( txtFullName->text() );
-		useFullName = false;
 	}
 
 }
@@ -1179,8 +1180,8 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 	case NAME_LFM:
 		return strLastName + ", " + strFirstName + " " + strMiddleName;
 		
-	case NAME_FMLS:
-		return strFirstName + " " + strMiddleName + " " + strLastName + " " + txtSuffix->text();
+	case NAME_FML:
+		return strFirstName + " " + strMiddleName + " " + strLastName ;
 		
 	case NAME_F:
 		return strFirstName;
@@ -1250,7 +1251,6 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	if (defaultEmail.isEmpty()) defaultEmail = emails[0];
 	qDebug("default email=%s",defaultEmail.latin1());
 	
-	useFullName = false;
 	txtFirstName->setText( ent.firstName() );
 	txtMiddleName->setText( ent.middleName() );
 	txtLastName->setText( ent.lastName() );
@@ -1261,11 +1261,13 @@ void ContactEditor::setEntry( const OContact &entry ) {
 // 		+ " " + ent.lastName() + " " + ent.suffix();
 //	txtFullName->setText( tmpString->simplifyWhiteSpace() );
 
-	// Lastnames with multiple words need to be protected by a comma !
-	if ( ent.lastName().contains( ' ', TRUE ) )
-		txtFullName->setText( ent.lastName() + ", " + ent.firstName() + " " + ent.middleName() );
-	else
-		txtFullName->setText( ent.firstName() + " " + ent.middleName() + " " + ent.lastName() );
+	if ( !ent.isEmpty() ){
+		// Lastnames with multiple words need to be protected by a comma !
+		if ( ent.lastName().contains( ' ', TRUE ) )
+			txtFullName->setText( ent.lastName() + ", " + ent.firstName() + " " + ent.middleName() );
+		else
+			txtFullName->setText( ent.firstName() + " " + ent.middleName() + " " + ent.lastName() );
+	}
 	
 	cmbFileAs->setEditText( ent.fileAs() );
 	
@@ -1425,14 +1427,6 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	
 	slotAddressTypeChange( cmbAddress->currentItem() );
 	
-	// Calling "show()" to arrange all widgets. Otherwise we will get
-	// a wrong position of the textfields and are unable to put our
-	// default-email combo over it.. This is very ugly !
-	// Does anybody has a better solution ? 
-	// Basically we should rethink the strategy to hide
-	// a textfield with overwriting.. (se)
-	show();
-	
 	// Get combo-settings from contact and set preset..
 	contactfields.loadFromRecord( ent );
 	cmbChooserField1->setCurrentItem( contactfields.getFieldOrder(0, 7) );
@@ -1472,14 +1466,10 @@ void ContactEditor::saveEntry() {
 	// Store current combo into contact
 	contactfields.saveToRecord( ent );
 	
-	if ( useFullName ) {
-		txtFirstName->setText( parseName( txtFullName->text(), NAME_F ) );
-		txtMiddleName->setText( parseName( txtFullName->text(), NAME_M ) );
-		txtLastName->setText( parseName( txtFullName->text(), NAME_L ) );
-		// txtSuffix->setText( parseName( txtFullName->text(), NAME_S ) );
-		
-		useFullName = false;
-	}
+	txtFirstName->setText( parseName( txtFullName->text(), NAME_F ) );
+	txtMiddleName->setText( parseName( txtFullName->text(), NAME_M ) );
+	txtLastName->setText( parseName( txtFullName->text(), NAME_L ) );
+	// txtSuffix->setText( parseName( txtFullName->text(), NAME_S ) );
 	
 	ent.setFirstName( txtFirstName->text() );
 	ent.setLastName( txtLastName->text() );
