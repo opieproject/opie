@@ -38,12 +38,12 @@ int main(int argc, char* argv[])
 
   QPEApplication a( argc, argv );
 
-  QPEApplication::grabKeyboard(); // for CTRL and ALT
+//  QPEApplication::grabKeyboard(); // for CTRL and ALT
 
   qDebug("keyboard grabbed");
 #ifdef FAKE_CTRL_AND_ALT
     qDebug("Fake Ctrl and Alt defined");
-//  QPEApplication::grabKeyboard(); // for CTRL and ALT
+  QPEApplication::grabKeyboard(); // for CTRL and ALT
 #endif
 
   QStrList tmp;
