@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>403</width>
+            <width>399</width>
             <height>532</height>
         </rect>
     </property>
@@ -150,7 +150,7 @@
                                         </property>
                                         <property stdset="1">
                                             <name>minValue</name>
-                                            <number>10</number>
+                                            <number>0</number>
                                         </property>
                                         <property stdset="1">
                                             <name>lineStep</name>
@@ -210,7 +210,7 @@
                                         </property>
                                         <property stdset="1">
                                             <name>minValue</name>
-                                            <number>10</number>
+                                            <number>0</number>
                                         </property>
                                         <property stdset="1">
                                             <name>lineStep</name>
@@ -241,7 +241,7 @@
                                         </property>
                                         <property stdset="1">
                                             <name>minValue</name>
-                                            <number>10</number>
+                                            <number>0</number>
                                         </property>
                                         <property stdset="1">
                                             <name>lineStep</name>
@@ -593,7 +593,7 @@
                                         </property>
                                         <property stdset="1">
                                             <name>minValue</name>
-                                            <number>10</number>
+                                            <number>0</number>
                                         </property>
                                         <property stdset="1">
                                             <name>lineStep</name>
@@ -642,7 +642,7 @@
                                         </property>
                                         <property stdset="1">
                                             <name>minValue</name>
-                                            <number>10</number>
+                                            <number>0</number>
                                         </property>
                                         <property stdset="1">
                                             <name>lineStep</name>
@@ -684,7 +684,7 @@
                                         </property>
                                         <property stdset="1">
                                             <name>minValue</name>
-                                            <number>10</number>
+                                            <number>0</number>
                                         </property>
                                         <property stdset="1">
                                             <name>lineStep</name>

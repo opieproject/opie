@@ -78,14 +78,14 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
     // battery spinboxes
     interval = config.readNumEntry( "Interval_Dim", 20 );
     if ( config.readNumEntry("Dim",1) == 0 ) {
-        interval_dim->setSpecialValueText( tr("never") );
+        interval_dim->setValue( 0 );
     } else {
         interval_dim->setValue( interval );
     }
 
     interval = config.readNumEntry( "Interval_LightOff", 30 );
     if ( config.readNumEntry("LightOff",1) == 0 ) {
-        interval_lightoff->setSpecialValueText( tr("never") );
+        interval_lightoff->setValue( 0 );
     } else {
         interval_lightoff->setValue( interval );
     }
@@ -93,8 +93,8 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
     interval = config.readNumEntry( "Interval", 60 );
     if ( interval > 3600 ) interval /= 1000; // compatibility (was millisecs)
 
-    if ( config.readNumEntry("NoApm", 0) == 0 ) {
-        interval_suspend->setSpecialValueText( tr("never") );
+    if ( config.readNumEntry("NoApm", 0 ) == 1 ) {
+        interval_suspend->setValue( 0 );
     } else {
         interval_suspend->setValue( interval );
     }
@@ -118,14 +118,14 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
     // ac spinboxes
     interval = config.readNumEntry( "Interval_Dim", 20 );
     if ( config.readNumEntry("Dim",1) == 0 ) {
-        interval_dim_ac_3->setSpecialValueText( tr("never") );
+        interval_dim_ac_3->setValue( 0 );
     } else {
     interval_dim_ac_3->setValue( interval );
     }
 
     interval = config.readNumEntry( "Interval_LightOff", 30 );
     if ( config.readNumEntry("LightOff",1) == 0 ) {
-        interval_lightoff_ac_3->setSpecialValueText( tr("never") );
+        interval_lightoff_ac_3->setValue( 0 );
     } else {
         interval_lightoff_ac_3->setValue( interval );
     }
@@ -134,8 +134,8 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
     if ( interval > 3600 ) {
         interval /= 1000; // compatibility (was millisecs)
     }
-    if ( config.readNumEntry("NoApm", 0) == 0 ) {
-        interval_suspend_ac_3->setSpecialValueText( tr("never") );
+    if ( config.readNumEntry("NoApm", 1) == 1 ) {
+        interval_suspend_ac_3->setValue( 0 );
     } else {
         interval_suspend_ac_3->setValue( interval );
     }
