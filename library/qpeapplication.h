@@ -34,6 +34,7 @@ class QPEApplicationData;
 class QWSEvent;
 class QWSKeyEvent;
 
+
 class QPEApplication : public QApplication
 {
     Q_OBJECT
@@ -82,6 +83,7 @@ public:
     bool keepRunning() const;
 
     bool keyboardGrabbed() const;
+    QString keyboardGrabbedBy ( ) const;
 
     int exec();
 

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.34 2002-12-13 19:37:59 harlekin Exp $
+** $Id: qpeapplication.cpp,v 1.35 2002-12-17 00:20:01 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -103,6 +103,7 @@ public:
 	int presstimer;
 	QWidget* presswidget;
 	int kbgrabber;
+	QString kbgrabber_appname;
 	QPoint presspos;
 
 	bool rightpressed : 1;
@@ -1064,6 +1065,8 @@ void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data 
 			d->kbgrabber = 1;
 		else
 			d->kbgrabber = 2;
+			
+		d-> kbgrabber_appname = who;
 	}
 	else if ( msg == "language(QString)" ) {
 		if ( type() == GuiServer ) {
@@ -1622,6 +1625,14 @@ void QPEApplication::removeSenderFromStylusDict()
 bool QPEApplication::keyboardGrabbed() const
 {
 	return d->kbgrabber;
+}
+
+/*!
+  \internal
+*/
+QString QPEApplication::keyboardGrabbedBy() const
+{
+	return d->kbgrabber_appname;
 }
 
 
