@@ -13,33 +13,80 @@
 #include <qstring.h>
 #include <qfileinfo.h>
 
-#include <lib/slavemaster.h>
-#include <lib/imagecache.h>
+#include "lib/slavemaster.h"
+#include "lib/imagecache.h"
+
+#include <opie2/oconfig.h>
+#include <opie2/oconfig.h>
+#include <opie2/okeyconfigwidget.h>
+#include <opie2/odebug.h>
 
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
 
 static const int THUMBSIZE = 128;
 
+using namespace Opie::Core;
 
 imageinfo::imageinfo(QWidget* parent, const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
+    m_viewManager = 0;
     init(name);
+    initKeys();
 }
 
 imageinfo::imageinfo(const QString&_path, QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl ),currentFile(_path)
 {
+    m_viewManager = 0;
     init(name);
+    initKeys();
     slotChangeName(_path);
 }
+
+Opie::Ui::OKeyConfigManager* imageinfo::manager()
+{
+    if (!m_viewManager) {
+        initKeys();
+    }
+    return m_viewManager;
+}
+
+void imageinfo::initKeys()
+{
+    odebug << "init imageinfo keys" << oendl;
+    m_cfg = new Opie::Core::OConfig("phunkview");
+    m_cfg->setGroup("Zecke_view" );
+    Opie::Ui::OKeyPair::List lst;
+    lst.append( Opie::Ui::OKeyPair::upArrowKey() );
+    lst.append( Opie::Ui::OKeyPair::downArrowKey() );
+    lst.append( Opie::Ui::OKeyPair::leftArrowKey() );
+    lst.append( Opie::Ui::OKeyPair::rightArrowKey() );
+//    lst.append( Opie::Ui::OKeyPair::returnKey() );
+
+    m_viewManager = new Opie::Ui::OKeyConfigManager(m_cfg, "Imageinfo-KeyBoard-Config",
+                                                    lst, false,this, "keyconfig name" );
+    m_viewManager->addKeyConfig( Opie::Ui::OKeyConfigItem(tr("View Full Image"), "view",
+                                                Resource::loadPixmap("1to1"), ViewItem,
+                                                Opie::Ui::OKeyPair(Qt::Key_V, Qt::ShiftButton),
+                                                this, SLOT(slotShowImage())));
+    m_viewManager->load();
+    m_viewManager->handleWidget( this );
+    m_viewManager->handleWidget( TextView1 );
+}
+
+void imageinfo::slotShowImage()
+{
+    emit dispImage(currentFile);
+}
+
 void imageinfo::init(const char* name) {
     {
         QCopEnvelope( "QPE/Application/opie-eye_slave", "refUp()" );
     }
     if ( !name )
-	setName( "imageinfo" );
+    setName( "imageinfo" );
     resize( 289, 335 );
     setCaption( tr( "Image info" ) );
     imageinfoLayout = new QVBoxLayout( this );
@@ -95,6 +142,10 @@ imageinfo::~imageinfo()
 {
     {
         QCopEnvelope( "QPE/Application/opie-eye_slave", "refDown()" );
+    }
+    if (m_viewManager) {
+        m_viewManager->save();
+        delete m_viewManager;
     }
 }
 

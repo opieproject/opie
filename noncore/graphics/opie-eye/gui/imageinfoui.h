@@ -12,9 +12,21 @@ class QFrame;
 class QLabel;
 class QTextView;
 
+namespace Opie {
+    namespace Core {
+        class OConfig;
+    }
+    namespace Ui {
+        class OKeyConfigManager;
+    }
+}
+
 class imageinfo : public QWidget
 {
     Q_OBJECT
+    enum ActionIds {
+        ViewItem
+    };
 
 public:
     imageinfo( QWidget* parent = 0, const char* name = 0,  WFlags fl =0);
@@ -22,9 +34,14 @@ public:
     ~imageinfo();
 
     void setDestructiveClose();
+    Opie::Ui::OKeyConfigManager* manager();
+
+signals:
+    void dispImage(const QString&);
 
 public slots:
     void setPath( const QString& path );
+    void slotShowImage();
 
 private:
     void init(const char* name);
@@ -34,10 +51,12 @@ protected:
     QLabel* fnameLabel;
     QFrame* Line1;
     QTextView* TextView1;
-
-protected:
     QVBoxLayout* imageinfoLayout;
     QString currentFile;
+
+    Opie::Core::OConfig * m_cfg;
+    Opie::Ui::OKeyConfigManager*m_viewManager;
+    void initKeys();
 
 protected slots:
     virtual void slot_fullInfo(const QString&, const QString&);

@@ -18,7 +18,6 @@
 #include <opie2/otabwidget.h>
 #include <opie2/okeyconfigwidget.h>
 
-
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/ir.h>
@@ -33,7 +32,7 @@
 
 
 
-OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<PMainWindow> )
+OPIE_EXPORT_APP_V2( Opie::Core::OApplicationFactory<PMainWindow>,"Opie Eye" )
 
 PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     : QMainWindow( wid, name, style ), m_info( 0 ), m_disp( 0 )
@@ -41,8 +40,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     setCaption( QObject::tr("Opie Eye Caramba" ) );
     m_cfg = new Opie::Core::OConfig("phunkview");
     m_cfg->setGroup("Zecke_view" );
-
-
+//    qDebug( "Process-wide OApplication object @ %0x", oApp );
     /*
      * Initialize ToolBar and IconView
      * And Connect Them
@@ -92,7 +90,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     btn->setIconSet( Resource::loadIconSet( "SettingsIcon" ) );
     connect( btn, SIGNAL(clicked() ),
              this, SLOT(slotConfig() ) );
-    
+
     rotateButton = new QToolButton(bar);
     rotateButton->setIconSet( Resource::loadIconSet( "rotate" ) );
     rotateButton->setToggleButton(true);
@@ -164,6 +162,10 @@ void PMainWindow::slotConfig() {
     Opie::Ui::OKeyConfigWidget* keyWid = new Opie::Ui::OKeyConfigWidget( wid, "key config" );
     keyWid->setChangeMode( Opie::Ui::OKeyConfigWidget::Queue );
     keyWid->insert( tr("Browser Keyboard Actions"), m_view->manager() );
+    if ( !m_info ) {
+        initInfo();
+    }
+    keyWid->insert( tr("Imageinfo Keyboard Actions"), m_info->manager() );
     keyWid->load();
     wid->addTab( keyWid, QString::fromLatin1("AppsIcon" ), tr("Keyboard Configuration") );
 
@@ -210,6 +212,7 @@ void PMainWindow::initT( const char* name, T** ptr, int id) {
 }
 void PMainWindow::initInfo() {
     initT<imageinfo>( "Image Info", &m_info, ImageInfo );
+    connect(m_info,SIGNAL(dispImage(const QString&)),this,SLOT(slotDisplay(const QString&)));
 }
 void PMainWindow::initDisp() {
     initT<ImageScrollView>( "Image ScrollView", &m_disp, ImageDisplay );
@@ -229,8 +232,9 @@ void PMainWindow::initDisp() {
  * ### FIXME and talk to alwin
  */
 void PMainWindow::slotShowInfo( const QString& inf ) {
-    if ( !m_info )
+    if ( !m_info ) {
         initInfo();
+    }
     m_info->setPath( inf );
     m_stack->raiseWidget( ImageInfo );
 }
