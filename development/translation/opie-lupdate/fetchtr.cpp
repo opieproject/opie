@@ -176,6 +176,9 @@ static int getToken()
 		if ( strcmp(yyIdent + 1, "truct") == 0 )
 		    return Tok_class;
 		break;
+	    case 'i':
+		if( strcmp(yyIdent + 1, "18n") == 0 ) 
+		    return Tok_tr;
 	    case 't':
 		if ( strcmp(yyIdent + 1, "r") == 0 ) {
 		    return Tok_tr;
