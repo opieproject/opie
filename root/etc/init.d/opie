@@ -53,7 +53,11 @@ case $1 in
 	;;
 'stop')
         echo "Killing Opie..."
-        killproc qpe
+        if [ -f /var/run/opie.pid ]; then
+        	kill -TERM `cat /var/run/opie.pid`
+        else
+        	killproc qpe
+        fi
         killproc opie-login
         ;;
 *)
