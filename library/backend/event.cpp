@@ -1131,8 +1131,8 @@ static VObject *createVObject( const Event &e )
     safeAddPropValue( vcal, VCVersionProp, "1.0" );
     VObject *event = safeAddProp( vcal, VCEventProp );
 
-    safeAddPropValue( event, VCDTstartProp, TimeConversion::toISO8601( e.start() ) );
-    safeAddPropValue( event, VCDTendProp, TimeConversion::toISO8601( e.end() ) );
+    safeAddPropValue( event, VCDTstartProp, toISOLocal( e.start() ) );
+    safeAddPropValue( event, VCDTendProp, toISOLocal( e.end() ) );
     safeAddPropValue( event, "X-Qtopia-NOTES", e.description() );
     safeAddPropValue( event, VCDescriptionProp, e.description() );
     safeAddPropValue( event, VCLocationProp, e.location() );
@@ -1141,7 +1141,7 @@ static VObject *createVObject( const Event &e )
 	VObject *alarm = safeAddProp( event, VCAAlarmProp );
 	QDateTime dt = e.start();
 	dt = dt.addSecs( -e.alarmTime()*60 );
-	safeAddPropValue( alarm, VCRunTimeProp, TimeConversion::toISO8601( dt ) );
+	safeAddPropValue( alarm, VCRunTimeProp, toISOLocal( dt ) );
 	safeAddPropValue( alarm, VCAudioContentProp,
 			  (e.alarmSound() == Event::Silent ? "silent" : "alarm" ) );
     }
