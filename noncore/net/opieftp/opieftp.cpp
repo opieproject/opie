@@ -606,7 +606,7 @@ void OpieFtp::populateLocalView()
 //         qDebug("Symlink detected "+symLink);
             QFileInfo sym( symLink);
             fileS.sprintf( "%10li", sym.size() );
-            fileL.sprintf( "%s ->  %s",  sym.fileName().data(),sym.absFilePath().data() );
+            fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.absFilePath().data() );
             fileDate = sym.lastModified().toString();
         } else {
 //        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
