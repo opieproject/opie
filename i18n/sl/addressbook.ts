@@ -3,47 +3,47 @@
     <name>AbEditor</name>
     <message>
         <source>First Name</source>
-        <translation>Ime</translation>
+        <translation type="obsolete">Ime</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Priimek</translation>
+        <translation type="obsolete">Priimek</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation>Kategorija</translation>
+        <translation type="obsolete">Kategorija</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Spol</translation>
+        <translation type="obsolete">Spol</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Zapiski</translation>
+        <translation type="obsolete">Zapiski</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Medimek</translation>
+        <translation type="obsolete">Medimek</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Moški</translation>
+        <translation type="obsolete">Moški</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation>Ženski</translation>
+        <translation type="obsolete">Ženski</translation>
     </message>
     <message>
         <source>Enter Note</source>
-        <translation>Vpišite zapiske</translation>
+        <translation type="obsolete">Vpišite zapiske</translation>
     </message>
     <message>
         <source>Notes...</source>
-        <translation>Zapiski...</translation>
+        <translation type="obsolete">Zapiski...</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation>Stiki</translation>
+        <translation type="obsolete">Stiki</translation>
     </message>
 </context>
 <context>
@@ -96,21 +96,21 @@
         <translation>Spol</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>AddressSettingsBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Arrange Edit Fields</source>
         <translation>Uredi polja</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Select the field order:</source>
         <translation>Izberi zaporedje polj:</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Up</source>
         <translation>Gor</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Down</source>
         <translation>Dol</translation>
     </message>
@@ -252,6 +252,201 @@ Izhod?</translation>
     <message>
         <source>Unfiled</source>
         <translation>Neizpolnjeno</translation>
+    </message>
+</context>
+<context>
+    <name>ContactEditor</name>
+    <message>
+        <source>Fax</source>
+        <translation>Faks</translation>
+    </message>
+    <message>
+        <source>Phone</source>
+        <translation>Telefon</translation>
+    </message>
+    <message>
+        <source>IM</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Mobile</source>
+        <translation>Mobitel</translation>
+    </message>
+    <message>
+        <source>Page</source>
+        <translation>Stran</translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation>Pager</translation>
+    </message>
+    <message>
+        <source>Default Email</source>
+        <translation>Privzeta Epošta</translation>
+    </message>
+    <message>
+        <source>Emails</source>
+        <translation>Esporočila</translation>
+    </message>
+    <message>
+        <source>Name Title</source>
+        <translation>Naziv</translation>
+    </message>
+    <message>
+        <source>First Name</source>
+        <translation>Ime</translation>
+    </message>
+    <message>
+        <source>Middle Name</source>
+        <translation>Medimek</translation>
+    </message>
+    <message>
+        <source>Last Name</source>
+        <translation>Priimek</translation>
+    </message>
+    <message>
+        <source>Suffix</source>
+        <translation>Pripona</translation>
+    </message>
+    <message>
+        <source>File As</source>
+        <translation>Datoteka kot</translation>
+    </message>
+    <message>
+        <source>Gender</source>
+        <translation>Spol</translation>
+    </message>
+    <message>
+        <source>Job Title</source>
+        <translation>Delovno mesto</translation>
+    </message>
+    <message>
+        <source>Company</source>
+        <translation>Podjetje</translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation>Zapiski</translation>
+    </message>
+    <message>
+        <source>Groups</source>
+        <translation>Skupine</translation>
+    </message>
+    <message>
+        <source>Street</source>
+        <translation>Ulica</translation>
+    </message>
+    <message>
+        <source>Street 2</source>
+        <translation>Ulica 2</translation>
+    </message>
+    <message>
+        <source>P.O. Box</source>
+        <translation>Poštna številka</translation>
+    </message>
+    <message>
+        <source>City</source>
+        <translation>Mesto</translation>
+    </message>
+    <message>
+        <source>State</source>
+        <translation>Pokrajina</translation>
+    </message>
+    <message>
+        <source>Zip</source>
+        <translation>Poštna številka</translation>
+    </message>
+    <message>
+        <source>Country</source>
+        <translation>Država</translation>
+    </message>
+    <message>
+        <source>Full Name...</source>
+        <translation>Polno ime...</translation>
+    </message>
+    <message>
+        <source>Organization</source>
+        <translation>Organizacija</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation>Kategorija</translation>
+    </message>
+    <message>
+        <source>Notes...</source>
+        <translation>Zapiski...</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation>Splošno</translation>
+    </message>
+    <message>
+        <source>Business</source>
+        <translation>Poslovno</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>Dom</translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation>Naslov</translation>
+    </message>
+    <message>
+        <source>Zip Code</source>
+        <translation>Poštna številka</translation>
+    </message>
+    <message>
+        <source>United States</source>
+        <translation>Združene države</translation>
+    </message>
+    <message>
+        <source>United Kingdom</source>
+        <translation>Velika Britanija</translation>
+    </message>
+    <message>
+        <source>Japan</source>
+        <translation>Japonska</translation>
+    </message>
+    <message>
+        <source>France</source>
+        <translation>Francija</translation>
+    </message>
+    <message>
+        <source>Germany</source>
+        <translation>Nemčija</translation>
+    </message>
+    <message>
+        <source>Norway</source>
+        <translation>Norveška</translation>
+    </message>
+    <message>
+        <source>Canada</source>
+        <translation>Kanada</translation>
+    </message>
+    <message>
+        <source>Male</source>
+        <translation>Moški</translation>
+    </message>
+    <message>
+        <source>Female</source>
+        <translation>Ženski</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation>Podrobnosti</translation>
+    </message>
+    <message>
+        <source>Enter Note</source>
+        <translation>Vpišite zapiske</translation>
+    </message>
+    <message>
+        <source>Edit Name</source>
+        <translation>Uredi ime</translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation>Stiki</translation>
     </message>
 </context>
 </TS>

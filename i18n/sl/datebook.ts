@@ -105,29 +105,29 @@ Izhod?</translation>
         <translation>Nadaljuj</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>DateBookDayHeaderBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Form1</source>
         <translation>Obrazec1</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>M</source>
         <translation>P</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>T</source>
         <translation>T</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>W</source>
         <translation>S</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>F</source>
         <translation>P</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>S</source>
         <translation>S</translation>
     </message>
@@ -213,78 +213,78 @@ Izhod?</translation>
         <translation>:00</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>DateBookSettingsBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Preferences</source>
         <translation>Možnosti</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Start viewing events</source>
         <translation>Začni pregledovati dogodke</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Start Time:</source>
         <translation>Začetni čas:</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>:00</source>
         <translation>:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Alarm Settings</source>
         <translation>Nastavitev alarma</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Alarm Preset</source>
         <translation>Prednastavitev alarma</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source> minutes</source>
         <translation>minut</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>DateBookWeekHeaderBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Form1</source>
         <translation>Obrazec1</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Y: </source>
         <translation>L: </translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>W: </source>
         <translation>T: </translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. Jan-00. Jan</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>DateBookWeekLstDayHdrBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Form1</source>
         <translation>Obrazec1</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>DateBookWeekLstHeaderBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Form2</source>
         <translation>Obrazec2</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>W: 00,00</source>
         <translation>T: 00,00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>2</source>
         <translation>2</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>00 Jan-00 Jan</source>
         <translation>00 Jan-00 Jan</translation>
     </message>
@@ -362,283 +362,299 @@ Izhod?</translation>
         <translation>Ne ponovi...</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>DateEntryBase</name>
     <message>
         <source>New Event</source>
         <translation>Nov dogodek</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Location</source>
         <translation>Lokacija</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Category</source>
         <translation>Kategorija</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Meeting</source>
         <translation>Sestanek</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Lunch</source>
         <translation>Kosilo</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Dinner</source>
         <translation>Večerja</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Travel</source>
         <translation>Potovanje</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Description:</source>
-        <translation>Opis:</translation>
+        <translation type="obsolete">Opis:</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Office</source>
         <translation>Pisarna</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Home</source>
         <translation>Dom</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Start</source>
-        <translation>Začetek</translation>
+        <translation type="obsolete">Začetek</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Jan 02 00</source>
         <translation>Jan 02 00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>00:00</source>
-        <translation>00:00</translation>
+        <translation type="obsolete">00:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>00:30</source>
-        <translation>00:30</translation>
+        <translation type="obsolete">00:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>01:00</source>
-        <translation></translation>
+        <translation type="obsolete"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>01:30</source>
-        <translation></translation>
+        <translation type="obsolete"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>02:00</source>
-        <translation>02:00</translation>
+        <translation type="obsolete">02:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>02:30</source>
-        <translation>02:30</translation>
+        <translation type="obsolete">02:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>03:00</source>
-        <translation>03:00</translation>
+        <translation type="obsolete">03:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>03:30</source>
-        <translation>03:30</translation>
+        <translation type="obsolete">03:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>04:00</source>
-        <translation>04:00</translation>
+        <translation type="obsolete">04:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>04:30</source>
-        <translation>04:30</translation>
+        <translation type="obsolete">04:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>05:00</source>
-        <translation>05:00</translation>
+        <translation type="obsolete">05:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>05:30</source>
-        <translation>05:30</translation>
+        <translation type="obsolete">05:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>06:00</source>
-        <translation>06:00</translation>
+        <translation type="obsolete">06:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>06:30</source>
-        <translation>06:30</translation>
+        <translation type="obsolete">06:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>07:00</source>
-        <translation>07:00</translation>
+        <translation type="obsolete">07:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>07:30</source>
-        <translation>07:30</translation>
+        <translation type="obsolete">07:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>08:00</source>
-        <translation>08:00</translation>
+        <translation type="obsolete">08:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>08:30</source>
-        <translation>08:30</translation>
+        <translation type="obsolete">08:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>09:00</source>
-        <translation>09:00</translation>
+        <translation type="obsolete">09:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>09:30</source>
-        <translation>09:30</translation>
+        <translation type="obsolete">09:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>10:00</source>
-        <translation>10:00</translation>
+        <translation type="obsolete">10:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>10:30</source>
-        <translation>10:30</translation>
+        <translation type="obsolete">10:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>11:00</source>
-        <translation>11:00</translation>
+        <translation type="obsolete">11:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>11:30</source>
-        <translation>11:30</translation>
+        <translation type="obsolete">11:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>12:00</source>
-        <translation>12:00</translation>
+        <translation type="obsolete">12:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>12:30</source>
-        <translation>12:30</translation>
+        <translation type="obsolete">12:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>13:00</source>
-        <translation>13:00</translation>
+        <translation type="obsolete">13:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>13:30</source>
-        <translation>13:30</translation>
+        <translation type="obsolete">13:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>14:00</source>
-        <translation>14:00</translation>
+        <translation type="obsolete">14:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>14:30</source>
-        <translation>14:30</translation>
+        <translation type="obsolete">14:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>15:00</source>
-        <translation>15:00</translation>
+        <translation type="obsolete">15:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>15:30</source>
-        <translation>15:30</translation>
+        <translation type="obsolete">15:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>16:00</source>
-        <translation>16:00</translation>
+        <translation type="obsolete">16:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>16:30</source>
-        <translation>16:30</translation>
+        <translation type="obsolete">16:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>17:00</source>
-        <translation>17:00</translation>
+        <translation type="obsolete">17:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>17:30</source>
-        <translation>17:30</translation>
+        <translation type="obsolete">17:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>18:00</source>
-        <translation>18:00</translation>
+        <translation type="obsolete">18:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>18:30</source>
-        <translation>18:30</translation>
+        <translation type="obsolete">18:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>19:00</source>
-        <translation>19:00</translation>
+        <translation type="obsolete">19:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>19:30</source>
-        <translation>19:30</translation>
+        <translation type="obsolete">19:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>20:00</source>
-        <translation>20:00</translation>
+        <translation type="obsolete">20:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>20:30</source>
-        <translation>20:30</translation>
+        <translation type="obsolete">20:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>21:00</source>
-        <translation>21:00</translation>
+        <translation type="obsolete">21:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>21:30</source>
-        <translation>21:30</translation>
+        <translation type="obsolete">21:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>22:00</source>
-        <translation>22:00</translation>
+        <translation type="obsolete">22:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>22:30</source>
-        <translation>22:30</translation>
+        <translation type="obsolete">22:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>23:00</source>
-        <translation>23:00</translation>
+        <translation type="obsolete">23:00</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>23:30</source>
-        <translation>23:30</translation>
+        <translation type="obsolete">23:30</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>End</source>
-        <translation>Konec</translation>
+        <translation type="obsolete">Konec</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>All day</source>
         <translation>Cel dan</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Time zone:</source>
-        <translation>Časovni pas:</translation>
+        <translation type="obsolete">Časovni pas:</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>&amp;Alarm</source>
         <translation>&amp;Alarm</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source> minutes</source>
         <translation>minut</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Silent</source>
         <translation>Tiho</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Loud</source>
         <translation>Glasno</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Repeat</source>
         <translation>Ponovi</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>No Repeat...</source>
         <translation>Ne ponovi...</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation>Opis</translation>
+    </message>
+    <message>
+        <source>Start - End</source>
+        <translation>Začetek - Konec</translation>
+    </message>
+    <message>
+        <source>Start time</source>
+        <translation>Začetni čas</translation>
+    </message>
+    <message>
+        <source>Time zone</source>
+        <translation>Časovni pas</translation>
     </message>
 </context>
 <context>
@@ -792,41 +808,41 @@ in</translation>
         <translation>, in</translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>RepeatEntryBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Repeating Event </source>
         <translation>Ponavljajoči dogodek</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>None</source>
         <translation>Brez</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Day</source>
         <translation>Dan</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Week</source>
         <translation>Teden</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Month</source>
         <translation>Mesec</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Year</source>
         <translation>Leto</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Every:</source>
         <translation>Vsak:</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Frequency</source>
         <translation>Frekvenca</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>End On:</source>
         <translation>Končaj na:</translation>
     </message>
@@ -870,15 +886,15 @@ in</translation>
         <source>Every</source>
         <translation>Vsak</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Var1</source>
         <translation>Spremenljivka1</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Var 2</source>
         <translation>Spremenljivka 2</translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>WeekVar</source>
         <translation>TedenskaSpremenljivka</translation>
     </message>
