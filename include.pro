@@ -28,13 +28,21 @@ INSTALLS += sounds
 
 # init scripts, default path is /etc/init.d
 init.path = /etc/init.d
-init.files = init
+init.files = init.d/*
 INSTALLS += init
 
 # data, default path is /usr/share/$$TARGET
 data.path = /usr/share/$$TARGET
 data.files = share/*
 INSTALLS += data
+
+etc.path = $$outdir/etc/
+etc.files = etc/*
+INSTALLS += etc
+
+apps.path = $$outdir/apps/
+apps.files = apps/*
+INSTALLS += apps
 
 # sounds, default path is $$outdir/sounds/$$TARGET
 sounds.path = $$outdir/sounds/$$TARGET
@@ -54,5 +62,8 @@ lupdate.commands = lupdate -noobsolete $(PRO)
 lrelease.target = lrelease
 lrelease.commands = lrelease $(PRO)
 
-QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease
+ipk.target = ipk
+ipk.commands = tmp=`mktemp -d /tmp/ipkg-opie.XXXXXXXXXX` && ( $(MAKE) DESTDIR="$$$$tmp" install && ipkg-build $$$$tmp; rm -rf $$$$tmp; )
+
+QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk
 
