@@ -127,7 +127,7 @@ QWidget *PPPModule::configure(Interface *i){
     qDebug("return ModemWidget");
     PPPConfigWidget *pppconfig = new PPPConfigWidget( (InterfacePPP*)i,
                                                       0, "PPPConfig", false,
-                                                      Qt::WDestructiveClose | Qt::WStyle_ContextHelp);
+                                                      (Qt::WDestructiveClose | Qt::WStyle_ContextHelp));
     return pppconfig;
 }
 
