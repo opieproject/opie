@@ -1,7 +1,8 @@
 /**********************************************************************
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2003 Stefan Eilers (eilers.stefan@epost.de)
 **
-** This file is part of Qt Palmtop Environment.
+** This file is part of the Open Palmtop Environment (see www.opie.info).
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -13,8 +14,6 @@
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
-** OContact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
 **
 **********************************************************************/
 
@@ -901,7 +900,7 @@ void AddressbookWindow::slotNotFound()
 {
 	qWarning("Got notfound signal!");
 	QMessageBox::information( this, tr( "Not Found" ),
-				  tr( "Unable to find a contact for this \n search pattern!" ) );
+				 "<qt>" + tr( "Unable to find a contact for this search pattern!" ) + "</qt>" );
 
 
 }
