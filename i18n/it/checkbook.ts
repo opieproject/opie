@@ -156,7 +156,7 @@ Per ordinarla per un campo specifico, Premi sul nome della colonna.</translation
     </message>
     <message>
         <source>Select the desired chart below and then click on the Draw button.</source>
-        <translation>Seleziona il grafico desiderato e Premi su bottone Disegna.</translation>
+        <translation>Seleziona il grafico desiderato e Premi sul pulsante Disegna.</translation>
     </message>
     <message>
         <source>Click here to select the desired chart type.</source>
