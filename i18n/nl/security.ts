@@ -104,15 +104,15 @@ Toegang geweigerd</translation>
     </message>
     <message>
         <source>Passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>PINcode</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Log in</translation>
     </message>
     <message>
         <source>Login Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Log automatich in</translation>
     </message>
 </context>
 </TS>

@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="unfinished">Bezit van</translation>
+        <translation>Bezit van</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -128,63 +128,63 @@ opstarten?
     <name>TodayConfigMiscBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulier1</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished">vink dit aan als Vandaag moet starten vanuit slaapstand.</translation>
+        <translation>vink dit aan als Vandaag moet starten vanuit slaapstand.</translation>
     </message>
     <message>
         <source>autostart on resume?</source>
-        <translation type="unfinished"></translation>
+        <translation>start na slaapstand?</translation>
     </message>
     <message>
         <source>tiny banner</source>
-        <translation type="unfinished"></translation>
+        <translation>mini banner</translation>
     </message>
     <message>
         <source>Have small banner </source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik kleine banner</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished">Hoeveel minuten moet de PDA uitstaan voor Vandaag automatisch opkomt bij herstart</translation>
+        <translation>Hoeveel minuten moet de PDA uitstaan voor Vandaag automatisch opkomt bij herstart</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished">minuten inactief</translation>
+        <translation>minuten inactief</translation>
     </message>
     <message>
         <source> pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>pixels</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation type="unfinished">Stel icoongrootte in pixel in</translation>
+        <translation>Stel icoongrootte in pixels in</translation>
     </message>
     <message>
         <source>icon size</source>
-        <translation type="unfinished"></translation>
+        <translation>icoongrootte</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished">sec</translation>
+        <translation>secsec</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished">nooit</translation>
+        <translation>nooit</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished">Hoevaak moet Vandaag zich verversen</translation>
+        <translation>Hoevaak moet Vandaag zich verversen</translation>
     </message>
     <message>
         <source>refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>ververs</translation>
     </message>
 </context>
 </TS>

@@ -22,19 +22,19 @@
     <name>TodoPluginConfigBase</name>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation type="unfinished">Stel het maximum aantal te tonen taken in</translation>
+        <translation>Stel het maximum aantal te tonen taken in</translation>
     </message>
     <message>
         <source>tasks shown</source>
-        <translation type="unfinished"></translation>
+        <translation>taken weergegeven</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="unfinished">Na hoeveel tekens moet de info over de taak worden afgebroken</translation>
+        <translation>Na hoeveel tekens moet de info over de taak worden afgebroken</translation>
     </message>
     <message>
         <source>Clip line after X chars</source>
-        <translation type="unfinished">Breek af na X tekens</translation>
+        <translation>Breek af na X tekens</translation>
     </message>
 </context>
 <context>

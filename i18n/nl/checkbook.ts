@@ -517,7 +517,7 @@ Dit bedrag moet altijd positief zijn.</translation>
     </message>
     <message>
         <source>Electronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Electronisch</translation>
     </message>
 </context>
 </TS>

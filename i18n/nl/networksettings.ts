@@ -86,50 +86,50 @@
     </message>
     <message>
         <source>A list of network settings to be choosen from</source>
-        <translation type="unfinished"></translation>
+        <translation>Een lijst net netwerkinstellingen om uit te kiezen</translation>
     </message>
     <message>
         <source>Add a new interface to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg een nieuwe verbinding toe.</translation>
     </message>
     <message>
         <source>&amp;Start/Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start/Stop</translation>
     </message>
     <message>
         <source>Start and Stop the current interface, gives additional information about the interface.</source>
-        <translation type="unfinished"></translation>
+        <translation>Start en stop de huidige verbinding, geeft meer info over de verbinding.</translation>
     </message>
     <message>
         <source>Configure the current interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Stel de huidige verbinding in</translation>
     </message>
     <message>
         <source>Remove the current interface from the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder de huidige verbinding van de lijst.</translation>
     </message>
 </context>
 <context>
     <name>MainWindowImp</name>
     <message>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbroken</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>Unable to remove.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niet verwijderen.</translation>
     </message>
     <message>
         <source>Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorry</translation>
     </message>
     <message>
         <source>Please select an interface first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer eerst een verbinding.</translation>
     </message>
 </context>
 </TS>

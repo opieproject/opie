@@ -215,11 +215,11 @@ exists. Ok to overwrite?</source>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished">Kopiëer</translation>
+        <translation>Kopiëer</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished">Als</translation>
+        <translation>Als</translation>
     </message>
     <message>
         <source> already exists.
