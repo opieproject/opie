@@ -19,7 +19,7 @@ MBOXwrapper::~MBOXwrapper()
 {
 }
 
-void MBOXwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
+void MBOXwrapper::listMessages(const QString & mailbox, QValueList<RecMailP> &target )
 {
     mailstorage*storage = mailstorage_new(NULL);
     QString p = MBOXPath+"/";
@@ -44,9 +44,9 @@ void MBOXwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
     Global::statusMessage(tr("Mailbox has %1 mail(s)").arg(target.count()));
 }
 
-QValueList<Opie::osmart_pointer<Folder> >* MBOXwrapper::listFolders()
+QValueList<Opie::OSmartPointer<Folder> >* MBOXwrapper::listFolders()
 {
-    QValueList<Opie::osmart_pointer<Folder> >* folders = new QValueList<Opie::osmart_pointer<Folder> >();
+    QValueList<Opie::OSmartPointer<Folder> >* folders = new QValueList<Opie::OSmartPointer<Folder> >();
     QDir dir(MBOXPath);
     if (!dir.exists()) return folders;
     dir.setFilter(QDir::Files|QDir::Writable|QDir::Readable);
@@ -59,11 +59,11 @@ QValueList<Opie::osmart_pointer<Folder> >* MBOXwrapper::listFolders()
     return folders;
 }
 
-void MBOXwrapper::deleteMail(const RecMail&mail)
+void MBOXwrapper::deleteMail(const RecMailP & mail)
 {
     mailstorage*storage = mailstorage_new(NULL);
     QString p = MBOXPath+"/";
-    p+=mail.getMbox();
+    p+=mail->getMbox();
     int r = mbox_mailstorage_init(storage,(char*)p.latin1(),0,0,0);
     mailfolder*folder;
     folder = mailfolder_new( storage,(char*)p.latin1(),NULL);
@@ -74,7 +74,7 @@ void MBOXwrapper::deleteMail(const RecMail&mail)
         mailstorage_free(storage);
         return;
     }
-    r = mailsession_remove_message(folder->fld_session,mail.getNumber());
+    r = mailsession_remove_message(folder->fld_session,mail->getNumber());
     if (r != MAIL_NO_ERROR) {
         qDebug("error deleting mail");
     }
@@ -82,16 +82,16 @@ void MBOXwrapper::deleteMail(const RecMail&mail)
     mailstorage_free(storage);
 }
 
-void MBOXwrapper::answeredMail(const RecMail&)
+void MBOXwrapper::answeredMail(const RecMailP&)
 {
 }
 
-RecBody MBOXwrapper::fetchBody( const RecMail &mail )
+RecBody MBOXwrapper::fetchBody( const RecMailP &mail )
 {
     RecBody body;
     mailstorage*storage = mailstorage_new(NULL);
     QString p = MBOXPath+"/";
-    p+=mail.getMbox();
+    p+=mail->getMbox();
     mailmessage * msg;
     char*data=0;
     size_t size;
@@ -106,16 +106,16 @@ RecBody MBOXwrapper::fetchBody( const RecMail &mail )
         mailstorage_free(storage);
         return body;
     }
-    r = mailsession_get_message(folder->fld_session, mail.getNumber(), &msg);
+    r = mailsession_get_message(folder->fld_session, mail->getNumber(), &msg);
     if (r != MAIL_NO_ERROR) {
-        qDebug("Error fetching mail %i",mail.getNumber());
+        qDebug("Error fetching mail %i",mail->getNumber());
         mailfolder_free(folder);
         mailstorage_free(storage);
         return body;
     }
     r = mailmessage_fetch(msg,&data,&size);
     if (r != MAIL_NO_ERROR) {
-        qDebug("Error fetching mail %i",mail.getNumber());
+        qDebug("Error fetching mail %i",mail->getNumber());
         mailfolder_free(folder);
         mailstorage_free(storage);
         mailmessage_free(msg);
@@ -169,12 +169,12 @@ void MBOXwrapper::storeMessage(const char*msg,size_t length, const QString&folde
     mailmbox_done(f);
 }
 
-encodedString* MBOXwrapper::fetchRawBody(const RecMail&mail)
+encodedString* MBOXwrapper::fetchRawBody(const RecMailP&mail)
 {
     RecBody body;
     mailstorage*storage = mailstorage_new(NULL);
     QString p = MBOXPath+"/";
-    p+=mail.getMbox();
+    p+=mail->getMbox();
     mailmessage * msg;
     char*data=0;
     size_t size;
@@ -189,16 +189,16 @@ encodedString* MBOXwrapper::fetchRawBody(const RecMail&mail)
         mailstorage_free(storage);
         return 0;
     }
-    r = mailsession_get_message(folder->fld_session, mail.getNumber(), &msg);
+    r = mailsession_get_message(folder->fld_session, mail->getNumber(), &msg);
     if (r != MAIL_NO_ERROR) {
-        Global::statusMessage(tr("Error fetching mail %i").arg(mail.getNumber()));
+        Global::statusMessage(tr("Error fetching mail %i").arg(mail->getNumber()));
         mailfolder_free(folder);
         mailstorage_free(storage);
         return 0;
     }
     r = mailmessage_fetch(msg,&data,&size);
     if (r != MAIL_NO_ERROR) {
-        Global::statusMessage(tr("Error fetching mail %i").arg(mail.getNumber()));
+        Global::statusMessage(tr("Error fetching mail %i").arg(mail->getNumber()));
         mailfolder_free(folder);
         mailstorage_free(storage);
         mailmessage_free(msg);
@@ -212,7 +212,7 @@ encodedString* MBOXwrapper::fetchRawBody(const RecMail&mail)
     return result;
 }
 
-void MBOXwrapper::deleteMails(const QString & mailbox,QList<RecMail> &target)
+void MBOXwrapper::deleteMails(const QString & mailbox,const QValueList<RecMailP> &target)
 {
     QString p = MBOXPath+"/";
     p+=mailbox;
@@ -226,12 +226,13 @@ void MBOXwrapper::deleteMails(const QString & mailbox,QList<RecMail> &target)
     mailmbox_done(f);
 }
 
-void MBOXwrapper::deleteMails(mailmbox_folder*f,QList<RecMail> &target)
+void MBOXwrapper::deleteMails(mailmbox_folder*f,const QValueList<RecMailP> &target)
 {
     if (!f) return;
     int r;
-    for (unsigned int i=0; i < target.count();++i) {
-        r = mailmbox_delete_msg(f,target.at(i)->getNumber());
+    QValueList<RecMailP>::ConstIterator it;
+    for (it=target.begin(); it != target.end();++it) {
+        r = mailmbox_delete_msg(f,(*it)->getNumber());
         if (r!=MAILMBOX_NO_ERROR) {
             qDebug("error delete mail");
         }

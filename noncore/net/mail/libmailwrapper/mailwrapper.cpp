@@ -155,7 +155,7 @@ QString IMAPFolder::decodeFolderName( const QString &name )
 }
 
 Mail::Mail()
-    :Opie::oref_count(),name(""), mail(""), to(""), cc(""), bcc(""), reply(""), subject(""), message("")
+    :Opie::ORefCount(),name(""), mail(""), to(""), cc(""), bcc(""), reply(""), subject(""), message("")
 {
 }
 

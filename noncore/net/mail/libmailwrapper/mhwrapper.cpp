@@ -60,7 +60,7 @@ MHwrapper::~MHwrapper()
     clean_storage();
 }
 
-void MHwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
+void MHwrapper::listMessages(const QString & mailbox, QValueList<Opie::OSmartPointer<RecMail> > &target )
 {
     init_storage();
     if (!m_storage) {
@@ -76,9 +76,9 @@ void MHwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
     Global::statusMessage(tr("Mailbox has %1 mail(s)").arg(target.count()));
 }
 
-QValueList<Opie::osmart_pointer<Folder> >* MHwrapper::listFolders()
+QValueList<Opie::OSmartPointer<Folder> >* MHwrapper::listFolders()
 {
-    QValueList<Opie::osmart_pointer<Folder> >* folders = new QValueList<Opie::osmart_pointer<Folder> >();
+    QValueList<Opie::OSmartPointer<Folder> >* folders = new QValueList<Opie::OSmartPointer<Folder> >();
     /* this is needed! */
     if (m_storage) mailstorage_disconnect(m_storage);
     init_storage();
@@ -101,28 +101,28 @@ QValueList<Opie::osmart_pointer<Folder> >* MHwrapper::listFolders()
     return folders;
 }
 
-void MHwrapper::deleteMail(const RecMail&mail)
+void MHwrapper::deleteMail(const RecMailP&mail)
 {
     init_storage();
     if (!m_storage) {
         return;
     }
-    int r = mailsession_select_folder(m_storage->sto_session,(char*)mail.getMbox().latin1());
+    int r = mailsession_select_folder(m_storage->sto_session,(char*)mail->getMbox().latin1());
     if (r!=MAIL_NO_ERROR) {
         qDebug("error selecting folder!");
         return;
     }
-    r = mailsession_remove_message(m_storage->sto_session,mail.getNumber());
+    r = mailsession_remove_message(m_storage->sto_session,mail->getNumber());
     if (r != MAIL_NO_ERROR) {
         qDebug("error deleting mail");
     }
 }
 
-void MHwrapper::answeredMail(const RecMail&)
+void MHwrapper::answeredMail(const RecMailP&)
 {
 }
 
-RecBody MHwrapper::fetchBody( const RecMail &mail )
+RecBody MHwrapper::fetchBody( const RecMailP &mail )
 {
     RecBody body;
     init_storage();
@@ -131,16 +131,15 @@ RecBody MHwrapper::fetchBody( const RecMail &mail )
     }
     mailmessage * msg;
     char*data=0;
-    size_t size;
 
     /* mail should hold the complete path! */
-    int r = mailsession_select_folder(m_storage->sto_session,(char*)mail.getMbox().latin1());
+    int r = mailsession_select_folder(m_storage->sto_session,(char*)mail->getMbox().latin1());
     if (r != MAIL_NO_ERROR) {
         return body;
     }
-    r = mailsession_get_message(m_storage->sto_session, mail.getNumber(), &msg);
+    r = mailsession_get_message(m_storage->sto_session, mail->getNumber(), &msg);
     if (r != MAIL_NO_ERROR) {
-        qDebug("Error fetching mail %i",mail.getNumber());
+        qDebug("Error fetching mail %i",mail->getNumber());
         return body;
     }
     body = parseMail(msg);
@@ -212,7 +211,7 @@ void MHwrapper::storeMessage(const char*msg,size_t length, const QString&Folder)
     return;
 }
 
-encodedString* MHwrapper::fetchRawBody(const RecMail&mail)
+encodedString* MHwrapper::fetchRawBody(const RecMailP&mail)
 {
     encodedString*result = 0;
     init_storage();
@@ -222,19 +221,19 @@ encodedString* MHwrapper::fetchRawBody(const RecMail&mail)
     mailmessage * msg = 0;
     char*data=0;
     size_t size;
-    int r = mailsession_select_folder(m_storage->sto_session,(char*)mail.getMbox().latin1());
+    int r = mailsession_select_folder(m_storage->sto_session,(char*)mail->getMbox().latin1());
     if (r!=MAIL_NO_ERROR) {
         qDebug("error selecting folder!");
         return result;
     }
-    r = mailsession_get_message(m_storage->sto_session, mail.getNumber(), &msg);
+    r = mailsession_get_message(m_storage->sto_session, mail->getNumber(), &msg);
     if (r != MAIL_NO_ERROR) {
-        Global::statusMessage(tr("Error fetching mail %i").arg(mail.getNumber()));
+        Global::statusMessage(tr("Error fetching mail %i").arg(mail->getNumber()));
         return 0;
     }
     r = mailmessage_fetch(msg,&data,&size);
     if (r != MAIL_NO_ERROR) {
-        Global::statusMessage(tr("Error fetching mail %i").arg(mail.getNumber()));
+        Global::statusMessage(tr("Error fetching mail %i").arg(mail->getNumber()));
         if (msg) mailmessage_free(msg);
         return 0;
     }
@@ -243,7 +242,7 @@ encodedString* MHwrapper::fetchRawBody(const RecMail&mail)
     return result;
 }
 
-void MHwrapper::deleteMails(const QString & mailbox,QList<RecMail> &target)
+void MHwrapper::deleteMails(const QString & mailbox,const QValueList<RecMailP> &target)
 {
     QString f = buildPath(mailbox);
     int r = mailsession_select_folder(m_storage->sto_session,(char*)f.latin1());
@@ -251,10 +250,9 @@ void MHwrapper::deleteMails(const QString & mailbox,QList<RecMail> &target)
         qDebug("deleteMails: error selecting folder!");
         return;
     }
-    RecMail*c = 0;
-    for (unsigned int i=0; i < target.count();++i) {
-        c = target.at(i);
-        r = mailsession_remove_message(m_storage->sto_session,c->getNumber());
+    QValueList<RecMailP>::ConstIterator it;
+    for (it=target.begin(); it!=target.end();++it) {
+        r = mailsession_remove_message(m_storage->sto_session,(*it)->getNumber());
         if (r != MAIL_NO_ERROR) {
             qDebug("error deleting mail");
             break;
@@ -372,7 +370,7 @@ const QString&MHwrapper::getName()const
 {
     return MHName;
 }
-void MHwrapper::mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
+void MHwrapper::mvcpMail(const RecMailP&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
 {
     init_storage();
     if (!m_storage) {
@@ -385,15 +383,15 @@ void MHwrapper::mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractM
     }
     qDebug("Using internal routines for move/copy");
     QString tf = buildPath(targetFolder);
-    int r = mailsession_select_folder(m_storage->sto_session,(char*)mail.getMbox().latin1());
+    int r = mailsession_select_folder(m_storage->sto_session,(char*)mail->getMbox().latin1());
     if (r != MAIL_NO_ERROR) {
         qDebug("Error selecting source mailbox");
         return;
     }
     if (moveit) {
-        r = mailsession_move_message(m_storage->sto_session,mail.getNumber(),(char*)tf.latin1());
+        r = mailsession_move_message(m_storage->sto_session,mail->getNumber(),(char*)tf.latin1());
     } else {
-        r = mailsession_copy_message(m_storage->sto_session,mail.getNumber(),(char*)tf.latin1());
+        r = mailsession_copy_message(m_storage->sto_session,mail->getNumber(),(char*)tf.latin1());
     }
     if (r != MAIL_NO_ERROR) {
         qDebug("Error copy/moving mail internal (%i)",r);

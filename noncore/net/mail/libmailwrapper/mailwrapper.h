@@ -8,7 +8,7 @@
 
 #include "settings.h"
 
-#include <opie2/osmart_pointer.h>
+#include <opie2/osmartpointer.h>
 
 class Attachment
 {
@@ -28,7 +28,7 @@ protected:
 
 };
 
-class Mail:public Opie::oref_count
+class Mail:public Opie::ORefCount
 {
 public:
     Mail();
@@ -66,7 +66,7 @@ private:
     QStringList m_in_reply_to;
 };
 
-class Folder:public Opie::oref_count
+class Folder:public Opie::ORefCount
 {
 public:
     Folder( const QString&init_name,const QString&sep );
@@ -82,7 +82,7 @@ protected:
     QString nameDisplay, name, separator,prefix;
 };
 
-typedef Opie::osmart_pointer<Folder> FolderP;
+typedef Opie::OSmartPointer<Folder> FolderP;
 
 class MHFolder : public Folder
 {

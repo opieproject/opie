@@ -30,7 +30,7 @@ void POP3wrapper::pop3_progress( size_t current, size_t maximum ) {
     qDebug( "POP3: %i of %i", current, maximum );
 }
 
-RecBody POP3wrapper::fetchBody( const RecMail &mail ) {
+RecBody POP3wrapper::fetchBody( const RecMailP &mail ) {
     int err = MAILPOP3_NO_ERROR;
     char *message = 0;
     size_t length = 0;
@@ -42,8 +42,8 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail ) {
 
     RecBody body;
     mailmessage * mailmsg;
-    if (mail.Msgsize()>HARD_MSG_SIZE_LIMIT) {
-        qDebug("Message to large: %i",mail.Msgsize());
+    if (mail->Msgsize()>HARD_MSG_SIZE_LIMIT) {
+        qDebug("Message to large: %i",mail->Msgsize());
         return body;
     }
 
@@ -51,13 +51,13 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail ) {
 
     cleanMimeCache();
 
-    if (mail.getNumber()!=last_msg_id) {
+    if (mail->getNumber()!=last_msg_id) {
         if (msg_cache.exists()) {
             msg_cache.remove();
         }
         msg_cache.open(IO_ReadWrite|IO_Truncate);
-        last_msg_id = mail.getNumber();
-        err = mailsession_get_message(m_pop3->sto_session, mail.getNumber(), &mailmsg);
+        last_msg_id = mail->getNumber();
+        err = mailsession_get_message(m_pop3->sto_session, mail->getNumber(), &mailmsg);
         err = mailmessage_fetch(mailmsg,&message,&length);
         msg_cache.writeBlock(message,length);
     } else {
@@ -93,7 +93,7 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail ) {
     return body;
 }
 
-void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
+void POP3wrapper::listMessages(const QString &, QValueList<Opie::OSmartPointer<RecMail> > &target )
 {
     login();
     if (!m_pop3)
@@ -169,7 +169,6 @@ void POP3wrapper::login()
 
 void POP3wrapper::logout()
 {
-    int err = MAILPOP3_NO_ERROR;
     if ( m_pop3 == NULL )
         return;
     mailstorage_free(m_pop3);
@@ -177,24 +176,24 @@ void POP3wrapper::logout()
 }
 
 
-QValueList<Opie::osmart_pointer<Folder> >* POP3wrapper::listFolders() {
-    QValueList<Opie::osmart_pointer<Folder> >* folders = new QValueList<FolderP>();
+QValueList<Opie::OSmartPointer<Folder> >* POP3wrapper::listFolders() {
+    QValueList<Opie::OSmartPointer<Folder> >* folders = new QValueList<FolderP>();
     FolderP inb=new Folder("INBOX","/");
     folders->append(inb);
     return folders;
 }
 
-void POP3wrapper::deleteMail(const RecMail&mail) {
+void POP3wrapper::deleteMail(const RecMailP&mail) {
     login();
     if (!m_pop3)
         return;
-    int err = mailsession_remove_message(m_pop3->sto_session,mail.getNumber());
+    int err = mailsession_remove_message(m_pop3->sto_session,mail->getNumber());
     if (err != MAIL_NO_ERROR) {
         Global::statusMessage(tr("error deleting mail"));
     }
 }
 
-void POP3wrapper::answeredMail(const RecMail&) {}
+void POP3wrapper::answeredMail(const RecMailP&) {}
 
 int POP3wrapper::deleteAllMail(const FolderP&) {
     login();
@@ -228,14 +227,17 @@ void POP3wrapper::statusFolder(folderStat&target_stat,const QString&) {
         return;
     int r = mailsession_status_folder(m_pop3->sto_session,0,&target_stat.message_count,
                                       &target_stat.message_recent,&target_stat.message_unseen);
+    if (r != MAIL_NO_ERROR) {
+        qDebug("error getting folter status.");
+    }
 }
 
-encodedString* POP3wrapper::fetchRawBody(const RecMail&mail) {
+encodedString* POP3wrapper::fetchRawBody(const RecMailP&mail) {
     char*target=0;
     size_t length=0;
     encodedString*res = 0;
     mailmessage * mailmsg = 0;
-    int err = mailsession_get_message(m_pop3->sto_session, mail.getNumber(), &mailmsg);
+    int err = mailsession_get_message(m_pop3->sto_session, mail->getNumber(), &mailmsg);
     err = mailmessage_fetch(mailmsg,&target,&length);
     if (mailmsg)
         mailmessage_free(mailmsg);

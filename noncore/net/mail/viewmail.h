@@ -28,40 +28,40 @@ private:
 
 class ViewMail : public ViewMailBase
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	ViewMail(  QWidget *parent = 0, const char *name = 0, WFlags fl = 0);
-	~ViewMail();
+    ViewMail(  QWidget *parent = 0, const char *name = 0, WFlags fl = 0);
+    ~ViewMail();
 
-	void hide();
-	void exec();
-        void setMail( RecMail mail );
+    void hide();
+    void exec();
+        void setMail( RecMailP mail );
         void setBody( RecBody body );
         bool deleted;
 
 protected:
-	QString deHtml(const QString &string);
+    QString deHtml(const QString &string);
     AttachItem* searchParent(const QValueList<int>&path);
     AttachItem* lastChild(AttachItem*parent);
 
 protected slots:
-	void slotReply();
-	void slotForward();
+    void slotReply();
+    void slotForward();
         void setText();
         void slotItemClicked( QListViewItem * item , const QPoint & point, int c );
         void slotDeleteMail( );
-	void slotShowHtml( bool );
+    void slotShowHtml( bool );
 
 private:
-	void readConfig();
-	
-	bool _inLoop;
-	QString m_mailHtml;
-	bool m_gotBody;
+    void readConfig();
+
+    bool _inLoop;
+    QString m_mailHtml;
+    bool m_gotBody;
         RecBody m_body;
-        RecMail m_recMail;
-	bool m_showHtml;
+        RecMailP m_recMail;
+    bool m_showHtml;
 
         // 0 from  1 subject  2 bodytext 3 date
         QMap <int,QString>  m_mail;

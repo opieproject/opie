@@ -92,11 +92,10 @@ void AccountView::refresh(QListViewItem *item)
     if ( item )
     {
         m_currentItem = item;
-        QList<RecMail> headerlist;
-        headerlist.setAutoDelete(true);
+        QValueList<RecMailP> headerlist;
         AccountViewItem *view = static_cast<AccountViewItem *>(item);
         view->refresh(headerlist);
-        emit refreshMailview(&headerlist);
+        emit refreshMailview(headerlist);
     }
 }
 
@@ -104,18 +103,17 @@ void AccountView::refreshCurrent()
 {
     m_currentItem = currentItem();
     if ( !m_currentItem ) return;
-    QList<RecMail> headerlist;
-    headerlist.setAutoDelete(true);
+    QValueList<RecMailP> headerlist;
     AccountViewItem *view = static_cast<AccountViewItem *>(m_currentItem);
     view->refresh(headerlist);
-    emit refreshMailview(&headerlist);
+    emit refreshMailview(headerlist);
 }
 
 void AccountView::refreshAll()
 {
 }
 
-RecBody AccountView::fetchBody(const RecMail&aMail)
+RecBody AccountView::fetchBody(const RecMailP&aMail)
 {
     QListViewItem*item = selectedItem ();
     if (!item) return RecBody();

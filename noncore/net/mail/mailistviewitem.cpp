@@ -10,16 +10,16 @@ MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * item )
 
 void MailListViewItem::showEntry()
 {
-    if ( mail_data.getFlags().testBit( FLAG_ANSWERED ) == true) {
+    if ( mail_data->getFlags().testBit( FLAG_ANSWERED ) == true) {
         setPixmap( 0, Resource::loadPixmap( "mail/kmmsgreplied") );
-    } else if ( mail_data.getFlags().testBit( FLAG_SEEN ) == true )  {
+    } else if ( mail_data->getFlags().testBit( FLAG_SEEN ) == true )  {
         /* I think it looks nicer if there are not such a log of icons but only on mails
            replied or new - Alwin*/
         //setPixmap( 0, Resource::loadPixmap( "mail/kmmsgunseen") );
     } else  {
         setPixmap( 0, Resource::loadPixmap( "mail/kmmsgnew") );
     }
-    double s = mail_data.Msgsize();
+    double s = mail_data->Msgsize();
     int w;
     w=0;
 
@@ -49,24 +49,24 @@ void MailListViewItem::showEntry()
         o << s << " " << q << "Byte";
     }
 
-    setText(1,mail_data.getSubject());
-    setText(2,mail_data.getFrom());
+    setText(1,mail_data->getSubject());
+    setText(2,mail_data->getFrom());
     setText(3,fsize);
-    setText(4,mail_data.getDate());
+    setText(4,mail_data->getDate());
 }
 
-void MailListViewItem::storeData(const RecMail&data)
+void MailListViewItem::storeData(const RecMailP&data)
 {
     mail_data = data;
 }
 
-const RecMail& MailListViewItem::data()const
+const RecMailP& MailListViewItem::data()const
 {
     return mail_data;
 }
 
 MAILLIB::ATYPE MailListViewItem::wrapperType()
 {
-    if (!mail_data.Wrapper()) return MAILLIB::A_UNDEFINED;
-    return mail_data.Wrapper()->getType();
+    if (!mail_data->Wrapper()) return MAILLIB::A_UNDEFINED;
+    return mail_data->Wrapper()->getType();
 }

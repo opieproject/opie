@@ -331,7 +331,7 @@ QString Genericwrapper::parseMailboxList( mailimf_mailbox_list *list )
     return result;
 }
 
-encodedString* Genericwrapper::fetchDecodedPart(const RecMail&,const RecPart&part)
+encodedString* Genericwrapper::fetchDecodedPart(const RecMailP&,const RecPart&part)
 {
     QMap<QString,encodedString*>::ConstIterator it = bodyCache.find(part.Identifier());
     if (it==bodyCache.end()) return new encodedString();
@@ -339,7 +339,7 @@ encodedString* Genericwrapper::fetchDecodedPart(const RecMail&,const RecPart&par
     return t;
 }
 
-encodedString* Genericwrapper::fetchRawPart(const RecMail&mail,const RecPart&part)
+encodedString* Genericwrapper::fetchRawPart(const RecMailP&mail,const RecPart&part)
 {
     QMap<QString,encodedString*>::ConstIterator it = bodyCache.find(part.Identifier());
     if (it==bodyCache.end()) return new encodedString();
@@ -347,7 +347,7 @@ encodedString* Genericwrapper::fetchRawPart(const RecMail&mail,const RecPart&par
     return t;
 }
 
-QString Genericwrapper::fetchTextPart(const RecMail&mail,const RecPart&part)
+QString Genericwrapper::fetchTextPart(const RecMailP&mail,const RecPart&part)
 {
     encodedString*t = fetchDecodedPart(mail,part);
     QString text=t->Content();
@@ -387,7 +387,7 @@ QStringList Genericwrapper::parseInreplies(mailimf_in_reply_to * in_replies)
     return res;
 }
 
-void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const QString&mailbox,bool mbox_as_to)
+void Genericwrapper::parseList(QValueList<Opie::OSmartPointer<RecMail> > &target,mailsession*session,const QString&mailbox,bool mbox_as_to)
 {
     int r;
     mailmessage_list * env_list = 0;
@@ -415,7 +415,7 @@ void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const 
             //qDebug("could not fetch envelope of message %i", i);
             continue;
         }
-        RecMail * mail = new RecMail();
+        RecMailP mail = new RecMail();
         mail->setWrapper(this);
         mail_flags * flag_result = 0;
         r = mailmessage_get_flags(msg,&flag_result);

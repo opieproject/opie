@@ -119,7 +119,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
              SLOT( mailLeftClicked(int,QListViewItem*,const QPoint&,int) ) );
     connect( mailView, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int) ),this,
              SLOT( mailHold(int,QListViewItem*,const QPoint&,int) ) );
-    connect(folderView, SIGNAL(refreshMailview(QList<RecMail>*)),this,SLOT(refreshMailView(QList<RecMail>*)));
+    connect(folderView, SIGNAL(refreshMailview(const QValueList<RecMailP>&)),
+            this,SLOT(refreshMailView(const QValueList<RecMailP>&)));
     connect( composeMail, SIGNAL( activated() ), SLOT( slotComposeMail() ) );
     connect( sendQueued, SIGNAL( activated() ), SLOT( slotSendQueued() ) );
 //    connect( searchMails, SIGNAL( activated() ), SLOT( slotSearchMails() ) );
@@ -177,7 +178,7 @@ void MainWindow::slotShowFolders( bool )
    qDebug( "slotShowFolders not reached" );
 }
 
-void MainWindow::refreshMailView(QList<RecMail>*)
+void MainWindow::refreshMailView(const QValueList<RecMailP>&)
 {
    qDebug( "refreshMailView not reached" );
 }
@@ -205,7 +206,7 @@ void MainWindow::mailHold(int, QListViewItem *,const QPoint&,int  )
 void MainWindow::slotSendQueued()
 {
 }
-    
+
 void MainWindow::slotEditAccounts()
 {
 }

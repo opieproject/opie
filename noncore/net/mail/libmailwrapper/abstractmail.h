@@ -6,11 +6,9 @@
 #include "settings.h"
 
 #include <qobject.h>
-#include <opie2/osmart_pointer.h>
+#include <opie2/osmartpointer.h>
+#include "mailtypes.h"
 
-class RecMail;
-class RecBody;
-class RecPart;
 class IMAPwrapper;
 class POP3wrapper;
 class Folder;
@@ -23,25 +21,25 @@ class AbstractMail:public QObject
 public:
     AbstractMail(){};
     virtual ~AbstractMail(){}
-    virtual QValueList<Opie::osmart_pointer<Folder> >* listFolders()=0;
-    virtual void listMessages(const QString & mailbox,QList<RecMail>&target )=0;
+    virtual QValueList<Opie::OSmartPointer<Folder> >* listFolders()=0;
+    virtual void listMessages(const QString & mailbox,QValueList<RecMailP>&target )=0;
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX")=0;
-    virtual RecBody fetchBody(const RecMail&mail)=0;
-    virtual QString fetchTextPart(const RecMail&mail,const RecPart&part)=0;
-    virtual encodedString* fetchDecodedPart(const RecMail&mail,const RecPart&part)=0;
-    virtual encodedString* fetchRawPart(const RecMail&mail,const RecPart&part)=0;
-    virtual encodedString* fetchRawBody(const RecMail&mail)=0;
+    virtual RecBody fetchBody(const RecMailP&mail)=0;
+    virtual QString fetchTextPart(const RecMailP&mail,const RecPart&part)=0;
+    virtual encodedString* fetchDecodedPart(const RecMailP&mail,const RecPart&part)=0;
+    virtual encodedString* fetchRawPart(const RecMailP&mail,const RecPart&part)=0;
+    virtual encodedString* fetchRawBody(const RecMailP&mail)=0;
 
-    virtual void deleteMail(const RecMail&mail)=0;
-    virtual void answeredMail(const RecMail&mail)=0;
-    virtual int deleteAllMail(const Opie::osmart_pointer<Folder>&)=0;
-    virtual void deleteMails(const QString & FolderName,QList<RecMail> &target);
-    virtual int deleteMbox(const Opie::osmart_pointer<Folder>&)=0;
+    virtual void deleteMail(const RecMailP&mail)=0;
+    virtual void answeredMail(const RecMailP&mail)=0;
+    virtual int deleteAllMail(const Opie::OSmartPointer<Folder>&)=0;
+    virtual void deleteMails(const QString & FolderName,const QValueList<Opie::OSmartPointer<RecMail> >&target);
+    virtual int deleteMbox(const Opie::OSmartPointer<Folder>&)=0;
     virtual void storeMessage(const char*msg,size_t length, const QString&folder)=0;
 
-    virtual void mvcpAllMails(const Opie::osmart_pointer<Folder>&fromFolder,
+    virtual void mvcpAllMails(const Opie::OSmartPointer<Folder>&fromFolder,
         const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
-    virtual void mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
+    virtual void mvcpMail(const RecMailP&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
 
     virtual void cleanMimeCache(){};
     /* mail box methods */
@@ -49,7 +47,7 @@ public:
      * if the implementing subclass has prefixes,
      * them has to be appended automatic.
      */
-    virtual int createMbox(const QString&,const Opie::osmart_pointer<Folder>&parentfolder=0,
+    virtual int createMbox(const QString&,const Opie::OSmartPointer<Folder>&parentfolder=0,
         const QString& delemiter="/",bool getsubfolder=false);
     virtual void logout()=0;
 

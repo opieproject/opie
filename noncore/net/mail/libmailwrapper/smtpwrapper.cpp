@@ -312,7 +312,7 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size )
     return result;
 }
 
-void SMTPwrapper::sendMail(const Opie::osmart_pointer<Mail>&mail,bool later )
+void SMTPwrapper::sendMail(const Opie::OSmartPointer<Mail>&mail,bool later )
 {
     mailmime * mimeMail;
 
@@ -332,7 +332,7 @@ void SMTPwrapper::sendMail(const Opie::osmart_pointer<Mail>&mail,bool later )
     }
 }
 
-int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,RecMail*which) {
+int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,const RecMailP&which) {
     size_t curTok = 0;
     mailimf_fields *fields = 0;
     mailimf_field*ffrom = 0;
@@ -340,7 +340,7 @@ int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,RecMail*which) {
     char*from = 0;
     int res = 0;
 
-    encodedString * data = wrap->fetchRawBody(*which);
+    encodedString * data = wrap->fetchRawBody(which);
     if (!data)
         return 0;
     int err = mailimf_fields_parse( data->Content(), data->Length(), &curTok, &fields );
@@ -391,8 +391,8 @@ bool SMTPwrapper::flushOutbox() {
         return false;
     }
     QString oldPw, oldUser;
-    QList<RecMail> mailsToSend;
-    QList<RecMail> mailsToRemove;
+    QValueList<RecMailP> mailsToSend;
+    QValueList<RecMailP> mailsToRemove;
     QString mbox("Outgoing");
     wrap->listMessages(mbox,mailsToSend);
     if (mailsToSend.count()==0) {
@@ -421,20 +421,19 @@ bool SMTPwrapper::flushOutbox() {
     }
 
 
-    mailsToSend.setAutoDelete(false);
     sendProgress = new progressMailSend();
     sendProgress->show();
     sendProgress->setMaxMails(mailsToSend.count());
 
     while (mailsToSend.count()>0) {
-        if (sendQueuedMail(wrap,mailsToSend.at(0))==0) {
+        if (sendQueuedMail(wrap, (*mailsToSend.begin()))==0) {
             QMessageBox::critical(0,tr("Error sending mail"),
                                   tr("Error sending queued mail - breaking"));
             returnValue = false;
             break;
         }
-        mailsToRemove.append(mailsToSend.at(0));
-        mailsToSend.removeFirst();
+        mailsToRemove.append((*mailsToSend.begin()));
+        mailsToSend.remove(mailsToSend.begin());
         sendProgress->setCurrentMails(mailsToRemove.count());
     }
     if (reset_user_value) {
@@ -450,7 +449,6 @@ bool SMTPwrapper::flushOutbox() {
     delete sendProgress;
     sendProgress = 0;
     wrap->deleteMails(mbox,mailsToRemove);
-    mailsToSend.setAutoDelete(true);
     delete wrap;
     return returnValue;
 }

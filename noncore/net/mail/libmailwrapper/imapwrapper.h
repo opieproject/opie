@@ -23,27 +23,27 @@ class IMAPwrapper : public AbstractMail
 public:
     IMAPwrapper( IMAPaccount *a );
     virtual ~IMAPwrapper();
-    virtual QValueList<Opie::osmart_pointer<Folder> >* listFolders();
-    virtual void listMessages(const QString & mailbox,QList<RecMail>&target );
+    virtual QValueList<Opie::OSmartPointer<Folder> >* listFolders();
+    virtual void listMessages(const QString & mailbox,QValueList<Opie::OSmartPointer<RecMail> >&target );
     virtual void statusFolder(folderStat&target_stat,const QString & mailbox="INBOX");
 
-    virtual void deleteMail(const RecMail&mail);
-    virtual void answeredMail(const RecMail&mail);
-    virtual int deleteAllMail(const Opie::osmart_pointer<Folder>&folder);
+    virtual void deleteMail(const RecMailP&mail);
+    virtual void answeredMail(const RecMailP&mail);
+    virtual int deleteAllMail(const Opie::OSmartPointer<Folder>&folder);
     virtual void storeMessage(const char*msg,size_t length, const QString&folder);
-    virtual void mvcpAllMails(const Opie::osmart_pointer<Folder>&fromFolder,
+    virtual void mvcpAllMails(const Opie::OSmartPointer<Folder>&fromFolder,
         const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
-    virtual void mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
+    virtual void mvcpMail(const RecMailP&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit);
 
-    virtual RecBody fetchBody(const RecMail&mail);
-    virtual QString fetchTextPart(const RecMail&mail,const RecPart&part);
-    virtual encodedString* fetchDecodedPart(const RecMail&mail,const RecPart&part);
-    virtual encodedString* fetchRawPart(const RecMail&mail,const RecPart&part);
-    virtual encodedString* fetchRawBody(const RecMail&mail);
+    virtual RecBody fetchBody(const RecMailP&mail);
+    virtual QString fetchTextPart(const RecMailP&mail,const RecPart&part);
+    virtual encodedString* fetchDecodedPart(const RecMailP&mail,const RecPart&part);
+    virtual encodedString* fetchRawPart(const RecMailP&mail,const RecPart&part);
+    virtual encodedString* fetchRawBody(const RecMailP&mail);
 
-    virtual int createMbox(const QString&,const Opie::osmart_pointer<Folder>&parentfolder=0,
+    virtual int createMbox(const QString&,const Opie::OSmartPointer<Folder>&parentfolder=0,
         const QString& delemiter="/",bool getsubfolder=false);
-    virtual int deleteMbox(const Opie::osmart_pointer<Folder>&folder);
+    virtual int deleteMbox(const Opie::OSmartPointer<Folder>&folder);
 
     static void imap_progress( size_t current, size_t maximum );
 
@@ -56,8 +56,8 @@ protected:
     void login();
     bool start_tls(bool force=true);
 
-    virtual QString fetchTextPart(const RecMail&mail,const QValueList<int>&path,bool internal_call=false,const QString&enc="");
-    virtual encodedString*fetchRawPart(const RecMail&mail,const QValueList<int>&path,bool internal_call);
+    virtual QString fetchTextPart(const RecMailP&mail,const QValueList<int>&path,bool internal_call=false,const QString&enc="");
+    virtual encodedString*fetchRawPart(const RecMailP&mail,const QValueList<int>&path,bool internal_call);
     int selectMbox(const QString&mbox);
 
     void fillSinglePart(RecPart&target_part,mailimap_body_type_1part*Description);
@@ -65,7 +65,7 @@ protected:
     void fillSingleBasicPart(RecPart&target_part,mailimap_body_type_basic*which);
     void fillSingleMsgPart(RecPart&target_part,mailimap_body_type_msg*which);
     void fillMultiPart(RecPart&target_part,mailimap_body_type_mpart*which);
-    void traverseBody(const RecMail&mail,mailimap_body*body,RecBody&target_body,int current_recursion,QValueList<int>recList,int current_count=1);
+    void traverseBody(const RecMailP&mail,mailimap_body*body,RecBody&target_body,int current_recursion,QValueList<int>recList,int current_count=1);
 
     /* just helpers */
     static void fillBodyFields(RecPart&target_part,mailimap_body_fields*which);

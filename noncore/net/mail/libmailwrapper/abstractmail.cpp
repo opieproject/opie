@@ -81,7 +81,7 @@ encodedString* AbstractMail::decode_String(const encodedString*text,const QStrin
 
 QString AbstractMail::convert_String(const char*text)
 {
-    size_t index = 0;
+    //size_t index = 0;
     char*res = 0;
     int err = MAILIMF_NO_ERROR;
 
@@ -111,7 +111,7 @@ QString AbstractMail::gen_attachment_id()
     return "{" + stream.read().stripWhiteSpace() + "}";
 }
 
-int AbstractMail::createMbox(const QString&,const FolderP&,const QString& delemiter,bool)
+int AbstractMail::createMbox(const QString&,const FolderP&,const QString& ,bool)
 {
     return 0;
 }
@@ -129,31 +129,31 @@ QString AbstractMail::draftFolder()
 }
 
 /* temporary - will be removed when implemented in all classes */
-void AbstractMail::deleteMails(const QString &,QList<RecMail> &)
+void AbstractMail::deleteMails(const QString &,const QValueList<Opie::OSmartPointer<RecMail> > &)
 {
 }
 
 void AbstractMail::mvcpAllMails(const FolderP&fromFolder,
     const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
 {
-    QList<RecMail> t;
+    QValueList<RecMailP> t;
     listMessages(fromFolder->getName(),t);
     encodedString*st = 0;
     while (t.count()>0) {
-        RecMail*r = t.at(0);
-        st = fetchRawBody(*r);
+        RecMailP r = (*t.begin());
+        st = fetchRawBody(r);
         if (st) {
             targetWrapper->storeMessage(st->Content(),st->Length(),targetFolder);
             delete st;
         }
-        t.removeFirst();
+        t.remove(t.begin());
     }
     if (moveit) {
         deleteAllMail(fromFolder);
     }
 }
 
-void AbstractMail::mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
+void AbstractMail::mvcpMail(const RecMailP&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
 {
     encodedString*st = 0;
     st = fetchRawBody(mail);

@@ -145,7 +145,7 @@ void OpieMail::displayMail()
 {
     QListViewItem*item = mailView->currentItem();
     if (!item) return;
-    RecMail mail = ((MailListViewItem*)item)->data();
+    RecMailP mail = ((MailListViewItem*)item)->data();
     RecBody body = folderView->fetchBody(mail);
     ViewMail readMail( this,"", Qt::WType_Modal | WStyle_ContextHelp  );
     readMail.setBody( body );
@@ -166,10 +166,10 @@ void OpieMail::displayMail()
 void OpieMail::slotDeleteMail()
 {
     if (!mailView->currentItem()) return;
-    RecMail mail = ((MailListViewItem*)mailView->currentItem() )->data();
-    if ( QMessageBox::warning(this, tr("Delete Mail"), QString( tr("<p>Do you really want to delete this mail? <br><br>" ) + mail.getFrom() + " - " + mail.getSubject() ) , QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
+    RecMailP mail = ((MailListViewItem*)mailView->currentItem() )->data();
+    if ( QMessageBox::warning(this, tr("Delete Mail"), QString( tr("<p>Do you really want to delete this mail? <br><br>" ) + mail->getFrom() + " - " + mail->getSubject() ) , QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
     {
-        mail.Wrapper()->deleteMail( mail );
+        mail->Wrapper()->deleteMail( mail );
         folderView->refreshCurrent();
     }
 }
@@ -217,14 +217,16 @@ void OpieMail::slotShowFolders( bool show )
     }
 }
 
-void OpieMail::refreshMailView(QList<RecMail>*list)
+void OpieMail::refreshMailView(const QValueList<RecMailP>&list)
 {
     MailListViewItem*item = 0;
     mailView->clear();
-    for (unsigned int i = 0; i < list->count();++i)
+
+    QValueList<RecMailP>::ConstIterator it;
+    for (it = list.begin(); it != list.end();++it)
     {
         item = new MailListViewItem(mailView,item);
-        item->storeData(*(list->at(i)));
+        item->storeData((*it));
         item->showEntry();
     }
 }
@@ -244,7 +246,7 @@ void OpieMail::mailLeftClicked(int button, QListViewItem *item,const QPoint&,int
 void OpieMail::slotMoveCopyMail()
 {
     if (!mailView->currentItem()) return;
-    RecMail mail = ((MailListViewItem*)mailView->currentItem() )->data();
+    RecMailP mail = ((MailListViewItem*)mailView->currentItem() )->data();
     AbstractMail*targetMail = 0;
     QString targetFolder = "";
     Selectstore sels;
@@ -252,7 +254,7 @@ void OpieMail::slotMoveCopyMail()
     if (!sels.exec()) return;
     targetMail = sels.currentMail();
     targetFolder = sels.currentFolder();
-    if ( (mail.Wrapper()==targetMail && mail.getMbox()==targetFolder) ||
+    if ( (mail->Wrapper()==targetMail && mail->getMbox()==targetFolder) ||
             targetFolder.isEmpty())
     {
         return;
@@ -263,14 +265,14 @@ void OpieMail::slotMoveCopyMail()
                               tr("<center>Error while creating<br>new folder - breaking.</center>"));
         return;
     }
-    mail.Wrapper()->mvcpMail(mail,targetFolder,targetMail,sels.moveMails());
+    mail->Wrapper()->mvcpMail(mail,targetFolder,targetMail,sels.moveMails());
     folderView->refreshCurrent();
 }
 
 void OpieMail::reEditMail()
 {
     if (!mailView->currentItem()) return;
-    
+
     ComposeMail compose( settings, this, 0, true , WStyle_ContextHelp );
     compose.reEditMail(((MailListViewItem*)mailView->currentItem() )->data());
     compose.slotAdjustColumns();

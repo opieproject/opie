@@ -279,7 +279,7 @@ mailimf_mailbox *Generatemail::newMailbox(const QString&name, const QString&mail
                                 strdup( mail.latin1() ) );
 }
 
-mailimf_fields *Generatemail::createImfFields(const Opie::osmart_pointer<Mail>&mail )
+mailimf_fields *Generatemail::createImfFields(const Opie::OSmartPointer<Mail>&mail )
 {
     mailimf_fields *fields = NULL;
     mailimf_field *xmailer = NULL;
@@ -399,7 +399,7 @@ mailimf_fields *Generatemail::createImfFields(const Opie::osmart_pointer<Mail>&m
     return fields;
 }
 
-mailmime *Generatemail::createMimeMail(const Opie::osmart_pointer<Mail> &mail ) {
+mailmime *Generatemail::createMimeMail(const Opie::OSmartPointer<Mail> &mail ) {
     mailmime *message, *txtPart;
     mailimf_fields *fields;
     int err;

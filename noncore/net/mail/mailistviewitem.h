@@ -11,13 +11,13 @@ public:
     MailListViewItem(QListView * parent, MailListViewItem * after );
     virtual ~MailListViewItem(){}
 
-    void storeData(const RecMail&data);
-    const RecMail&data()const;
+    void storeData(const RecMailP&data);
+    const RecMailP&data()const;
     void showEntry();
     MAILLIB::ATYPE wrapperType();
 
 protected:
-    RecMail mail_data;
+    RecMailP mail_data;
 };
 
 #endif

@@ -11,6 +11,9 @@
 #include "accountview.h"
 #include "statuswidget.h"
 
+#include <libmailwrapper/mailtypes.h>
+#include <opie2/osmartpointer.h>
+
 class RecMail;
 
 class MainWindow : public QMainWindow
@@ -25,25 +28,25 @@ public slots:
     virtual void slotAdjustColumns();
     virtual void appMessage(const QCString &msg, const QByteArray &data);
     virtual void slotComposeMail();
-    
+
 protected slots:
     virtual void slotSendQueued();
     virtual void slotEditAccounts();
     virtual void slotShowFolders( bool show );
-    virtual void refreshMailView(QList<RecMail>*);
+    virtual void refreshMailView(const QValueList<RecMailP>&);
     virtual void displayMail();
     virtual void slotDeleteMail();
     virtual void mailHold(int, QListViewItem *,const QPoint&,int);
     virtual void slotAdjustLayout();
     virtual void slotEditSettings();
     virtual void mailLeftClicked( int, QListViewItem *,const QPoint&,int  );
-    
+
 protected:
     QToolBar *toolBar;
     StatusWidget *statusWidget;
     QMenuBar *menuBar;
     QPopupMenu *mailMenu, *settingsMenu;
-    QAction *composeMail, *sendQueued, *showFolders, *searchMails, *deleteMails, 
+    QAction *composeMail, *sendQueued, *showFolders, *searchMails, *deleteMails,
             *editSettings, *editAccounts, *syncFolders;
     AccountView *folderView;
     QListView *mailView;

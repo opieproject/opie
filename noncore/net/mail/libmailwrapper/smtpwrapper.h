@@ -11,7 +11,7 @@
 #include "settings.h"
 #include "generatemail.h"
 
-#include <opie2/osmart_pointer.h>
+#include <opie2/osmartpointer.h>
 
 class SMTPaccount;
 class AbstractMail;
@@ -23,7 +23,7 @@ class SMTPwrapper : public Generatemail
 public:
     SMTPwrapper(SMTPaccount * aSmtp);
     virtual ~SMTPwrapper();
-    void sendMail(const Opie::osmart_pointer<Mail>& mail,bool later=false );
+    void sendMail(const Opie::OSmartPointer<Mail>& mail,bool later=false );
     bool flushOutbox();
 
     static progressMailSend*sendProgress;
@@ -50,7 +50,7 @@ protected:
 
     void storeMail(mailmime*mail, const QString&box);
 
-    int sendQueuedMail(AbstractMail*wrap,RecMail*which);
+    int sendQueuedMail(AbstractMail*wrap,const Opie::OSmartPointer<RecMail>&which);
     void storeFailedMail(const char*data,unsigned int size, const char*failuremessage);
 
     int m_queuedMail;

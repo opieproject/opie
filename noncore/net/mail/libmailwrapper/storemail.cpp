@@ -49,7 +49,7 @@ Storemail::~Storemail()
 {
 }
 
-int Storemail::storeMail(const Opie::osmart_pointer<Mail>&mail)
+int Storemail::storeMail(const Opie::OSmartPointer<Mail>&mail)
 {
     if (!wrapper) return 0;
     int ret = 1;

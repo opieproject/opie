@@ -4,6 +4,8 @@
 #include "mainwindow.h"
 #include <libmailwrapper/settings.h>
 
+#include <opie2/osmartpointer.h>
+#include <libmailwrapper/mailtypes.h>
 
 class OpieMail : public MainWindow
 {
@@ -27,7 +29,7 @@ protected slots:
     virtual void slotDeleteMail();
     virtual void mailHold(int, QListViewItem *,const QPoint&,int);
     virtual void slotShowFolders( bool show );
-    virtual void refreshMailView(QList<RecMail>*);
+    virtual void refreshMailView(const QValueList<RecMailP>&);
     virtual void mailLeftClicked( int, QListViewItem *,const QPoint&,int  );
     virtual void slotMoveCopyMail();
     virtual void reEditMail();

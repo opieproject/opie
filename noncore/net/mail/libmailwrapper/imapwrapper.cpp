@@ -205,7 +205,7 @@ void IMAPwrapper::logout()
     m_Lastmbox = "";
 }
 
-void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
+void IMAPwrapper::listMessages(const QString&mailbox,QValueList<Opie::OSmartPointer<RecMail> > &target )
 {
     int err = MAILIMAP_NO_ERROR;
     clist *result = 0;
@@ -266,7 +266,7 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
     if (result) mailimap_fetch_list_free(result);
 }
 
-QValueList<Opie::osmart_pointer<Folder> >* IMAPwrapper::listFolders()
+QValueList<Opie::OSmartPointer<Folder> >* IMAPwrapper::listFolders()
 {
     const char *path, *mask;
     int err = MAILIMAP_NO_ERROR;
@@ -482,7 +482,7 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
     return m;
 }
 
-RecBody IMAPwrapper::fetchBody(const RecMail&mail)
+RecBody IMAPwrapper::fetchBody(const RecMailP&mail)
 {
     RecBody body;
     const char *mb;
@@ -494,19 +494,19 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
     mailimap_set *set = 0;
     mailimap_body*body_desc = 0;
 
-    mb = mail.getMbox().latin1();
+    mb = mail->getMbox().latin1();
 
     login();
     if (!m_imap) {
         return body;
     }
-    err = selectMbox(mail.getMbox());
+    err = selectMbox(mail->getMbox());
     if ( err != MAILIMAP_NO_ERROR ) {
         return body;
     }
 
     /* the range has to start at 1!!! not with 0!!!! */
-    set = mailimap_set_new_interval( mail.getNumber(),mail.getNumber() );
+    set = mailimap_set_new_interval( mail->getNumber(),mail->getNumber() );
     fetchAtt = mailimap_fetch_att_new_bodystructure();
     fetchType = mailimap_fetch_type_new_fetch_att(fetchAtt);
     err = mailimap_fetch( m_imap, set, fetchType, &result );
@@ -568,7 +568,7 @@ QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
     return l;
 }
 
-encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>&path,bool internal_call)
+encodedString*IMAPwrapper::fetchRawPart(const RecMailP&mail,const QValueList<int>&path,bool internal_call)
 {
     encodedString*res=new encodedString;
     int err;
@@ -585,12 +585,12 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>
         return res;
     }
     if (!internal_call) {
-        err = selectMbox(mail.getMbox());
+        err = selectMbox(mail->getMbox());
         if ( err != MAILIMAP_NO_ERROR ) {
             return res;
         }
     }
-    set = mailimap_set_new_single(mail.getNumber());
+    set = mailimap_set_new_single(mail->getNumber());
 
     clist*id_list = 0;
 
@@ -641,7 +641,7 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>
 
 /* current_recursion is for recursive calls.
    current_count means the position inside the internal loop! */
-void IMAPwrapper::traverseBody(const RecMail&mail,mailimap_body*body,RecBody&target_body,
+void IMAPwrapper::traverseBody(const RecMailP&mail,mailimap_body*body,RecBody&target_body,
     int current_recursion,QValueList<int>recList,int current_count)
 {
     if (!body || current_recursion>=10) {
@@ -869,7 +869,7 @@ void IMAPwrapper::fillBodyFields(RecPart&target_part,mailimap_body_fields*which)
     target_part.setSize(which->bd_size);
 }
 
-void IMAPwrapper::deleteMail(const RecMail&mail)
+void IMAPwrapper::deleteMail(const RecMailP&mail)
 {
     mailimap_flag_list*flist;
     mailimap_set *set;
@@ -879,14 +879,14 @@ void IMAPwrapper::deleteMail(const RecMail&mail)
     if (!m_imap) {
         return;
     }
-    err = selectMbox(mail.getMbox());
+    err = selectMbox(mail->getMbox());
     if ( err != MAILIMAP_NO_ERROR ) {
         return;
     }
     flist = mailimap_flag_list_new_empty();
     mailimap_flag_list_add(flist,mailimap_flag_new_deleted());
     store_flags = mailimap_store_att_flags_new_set_flags(flist);
-    set = mailimap_set_new_single(mail.getNumber());
+    set = mailimap_set_new_single(mail->getNumber());
     err = mailimap_store(m_imap,set,store_flags);
     mailimap_set_free( set );
     mailimap_store_att_flags_free(store_flags);
@@ -904,7 +904,7 @@ void IMAPwrapper::deleteMail(const RecMail&mail)
     qDebug("Delete successfull %s",m_imap->imap_response);
 }
 
-void IMAPwrapper::answeredMail(const RecMail&mail)
+void IMAPwrapper::answeredMail(const RecMailP&mail)
 {
     mailimap_flag_list*flist;
     mailimap_set *set;
@@ -914,14 +914,14 @@ void IMAPwrapper::answeredMail(const RecMail&mail)
     if (!m_imap) {
         return;
     }
-    err = selectMbox(mail.getMbox());
+    err = selectMbox(mail->getMbox());
     if ( err != MAILIMAP_NO_ERROR ) {
         return;
     }
     flist = mailimap_flag_list_new_empty();
     mailimap_flag_list_add(flist,mailimap_flag_new_answered());
     store_flags = mailimap_store_att_flags_new_add_flags(flist);
-    set = mailimap_set_new_single(mail.getNumber());
+    set = mailimap_set_new_single(mail->getNumber());
     err = mailimap_store(m_imap,set,store_flags);
     mailimap_set_free( set );
     mailimap_store_att_flags_free(store_flags);
@@ -932,7 +932,7 @@ void IMAPwrapper::answeredMail(const RecMail&mail)
     }
 }
 
-QString IMAPwrapper::fetchTextPart(const RecMail&mail,const QValueList<int>&path,bool internal_call,const QString&enc)
+QString IMAPwrapper::fetchTextPart(const RecMailP&mail,const QValueList<int>&path,bool internal_call,const QString&enc)
 {
     QString body("");
     encodedString*res = fetchRawPart(mail,path,internal_call);
@@ -947,12 +947,12 @@ QString IMAPwrapper::fetchTextPart(const RecMail&mail,const QValueList<int>&path
     return body;
 }
 
-QString IMAPwrapper::fetchTextPart(const RecMail&mail,const RecPart&part)
+QString IMAPwrapper::fetchTextPart(const RecMailP&mail,const RecPart&part)
 {
     return fetchTextPart(mail,part.Positionlist(),false,part.Encoding());
 }
 
-encodedString* IMAPwrapper::fetchDecodedPart(const RecMail&mail,const RecPart&part)
+encodedString* IMAPwrapper::fetchDecodedPart(const RecMailP&mail,const RecPart&part)
 {
     encodedString*res = fetchRawPart(mail,part.Positionlist(),false);
     encodedString*r = decode_String(res,part.Encoding());
@@ -960,7 +960,7 @@ encodedString* IMAPwrapper::fetchDecodedPart(const RecMail&mail,const RecPart&pa
     return r;
 }
 
-encodedString* IMAPwrapper::fetchRawPart(const RecMail&mail,const RecPart&part)
+encodedString* IMAPwrapper::fetchRawPart(const RecMailP&mail,const RecPart&part)
 {
     return fetchRawPart(mail,part.Positionlist(),false);
 }
@@ -1055,7 +1055,6 @@ void IMAPwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
     mailimap_mailbox_data_status * status=0;
     clistiter * cur = 0;
     int r = 0;
-    int res = 0;
     target_stat.message_count = 0;
     target_stat.message_unseen = 0;
     target_stat.message_recent = 0;
@@ -1115,7 +1114,7 @@ const QString&IMAPwrapper::getName()const
     return account->getAccountName();
 }
 
-encodedString* IMAPwrapper::fetchRawBody(const RecMail&mail)
+encodedString* IMAPwrapper::fetchRawBody(const RecMailP&mail)
 {
     // dummy
     QValueList<int> path;
@@ -1154,7 +1153,7 @@ void IMAPwrapper::mvcpAllMails(const FolderP&fromFolder,
     }
 }
 
-void IMAPwrapper::mvcpMail(const RecMail&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
+void IMAPwrapper::mvcpMail(const RecMailP&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
 {
     if (targetWrapper != this) {
         qDebug("Using generic");
@@ -1166,11 +1165,11 @@ void IMAPwrapper::mvcpMail(const RecMail&mail,const QString&targetFolder,Abstrac
     if (!m_imap) {
         return;
     }
-    int err = selectMbox(mail.getMbox());
+    int err = selectMbox(mail->getMbox());
     if ( err != MAILIMAP_NO_ERROR ) {
         return;
     }
-    set = mailimap_set_new_single(mail.getNumber());
+    set = mailimap_set_new_single(mail->getNumber());
     err = mailimap_copy(m_imap,set,targetFolder.latin1());
     mailimap_set_free( set );
     if ( err != MAILIMAP_NO_ERROR ) {

@@ -225,7 +225,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
 
             if( !str.isEmpty() )
             {
-                encodedString*content = m_recMail.Wrapper()->fetchDecodedPart( m_recMail, m_body.Parts()[ ( ( AttachItem* )item )->Partnumber() ] );
+                encodedString*content = m_recMail->Wrapper()->fetchDecodedPart( m_recMail, m_body.Parts()[ ( ( AttachItem* )item )->Partnumber() ] );
                 if (content)
                 {
                     QFile output(str);
@@ -245,9 +245,9 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
         }
         else
         {
-            if (  m_recMail.Wrapper() != 0l )
+            if (  m_recMail->Wrapper() != 0l )
             { // make sure that there is a wrapper , even after delete or simular actions
-                browser->setText( m_recMail.Wrapper()->fetchTextPart( m_recMail, m_body.Parts()[ ( ( AttachItem* )item )->Partnumber() ] ) );
+                browser->setText( m_recMail->Wrapper()->fetchTextPart( m_recMail, m_body.Parts()[ ( ( AttachItem* )item )->Partnumber() ] ) );
             }
         }
         break;
@@ -256,19 +256,19 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
 }
 
 
-void ViewMail::setMail( RecMail mail )
+void ViewMail::setMail( RecMailP mail )
 {
 
     m_recMail = mail;
 
-    m_mail[0] = mail.getFrom();
-    m_mail[1] = mail.getSubject();
-    m_mail[3] = mail.getDate();
-    m_mail[4] = mail.Msgid();
+    m_mail[0] = mail->getFrom();
+    m_mail[1] = mail->getSubject();
+    m_mail[3] = mail->getDate();
+    m_mail[4] = mail->Msgid();
 
-    m_mail2[0] = mail.To();
-    m_mail2[1] = mail.CC();
-    m_mail2[2] = mail.Bcc();
+    m_mail2[0] = mail->To();
+    m_mail2[1] = mail->CC();
+    m_mail2[2] = mail->Bcc();
 
     setText();
 }
@@ -348,7 +348,7 @@ void ViewMail::setText()
 
 ViewMail::~ViewMail()
 {
-    m_recMail.Wrapper()->cleanMimeCache();
+    m_recMail->Wrapper()->cleanMimeCache();
     hide();
 }
 
@@ -415,18 +415,18 @@ void ViewMail::slotReply()
 
     Settings *settings = new Settings();
     ComposeMail composer( settings ,this, 0, true);
-    if (m_recMail.Replyto().isEmpty()) {
-        composer.setTo( m_recMail.getFrom());
+    if (m_recMail->Replyto().isEmpty()) {
+        composer.setTo( m_recMail->getFrom());
     } else {
-        composer.setTo( m_recMail.Replyto());
+        composer.setTo( m_recMail->Replyto());
     }
     composer.setSubject( prefix + m_mail[1] );
     composer.setMessage( rtext );
-    composer.setInReplyTo(m_recMail.Msgid());
+    composer.setInReplyTo(m_recMail->Msgid());
 
     if ( QDialog::Accepted == QPEApplication::execDialog( &composer ) )
     {
-        m_recMail.Wrapper()->answeredMail(m_recMail);
+        m_recMail->Wrapper()->answeredMail(m_recMail);
     }
 }
 
@@ -469,7 +469,7 @@ void ViewMail::slotDeleteMail( )
 {
     if ( QMessageBox::warning(this, tr("Delete Mail"), QString( tr("<p>Do you really want to delete this mail? <br><br>" ) + m_mail[0] + " - " + m_mail[1] ) , QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
     {
-        m_recMail.Wrapper()->deleteMail( m_recMail );
+        m_recMail->Wrapper()->deleteMail( m_recMail );
         hide();
         deleted = true;
     }

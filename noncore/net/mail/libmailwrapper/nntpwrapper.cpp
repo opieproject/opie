@@ -32,7 +32,7 @@ void NNTPwrapper::nntp_progress( size_t current, size_t maximum ) {
 }
 
 
-RecBody NNTPwrapper::fetchBody( const RecMail &mail ) {
+RecBody NNTPwrapper::fetchBody( const RecMailP &mail ) {
     int err = NEWSNNTP_NO_ERROR;
     char *message = 0;
     size_t length = 0;
@@ -44,8 +44,8 @@ RecBody NNTPwrapper::fetchBody( const RecMail &mail ) {
 
     RecBody body;
     mailmessage * mailmsg;
-    if (mail.Msgsize()>HARD_MSG_SIZE_LIMIT) {
-        qDebug("Message to large: %i",mail.Msgsize());
+    if (mail->Msgsize()>HARD_MSG_SIZE_LIMIT) {
+        qDebug("Message to large: %i",mail->Msgsize());
         return body;
     }
 
@@ -53,13 +53,13 @@ RecBody NNTPwrapper::fetchBody( const RecMail &mail ) {
 
     cleanMimeCache();
 
-    if (mail.getNumber()!=last_msg_id) {
+    if (mail->getNumber()!=last_msg_id) {
         if (msg_cache.exists()) {
             msg_cache.remove();
         }
         msg_cache.open(IO_ReadWrite|IO_Truncate);
-        last_msg_id = mail.getNumber();
-        err = mailsession_get_message(m_nntp->sto_session, mail.getNumber(), &mailmsg);
+        last_msg_id = mail->getNumber();
+        err = mailsession_get_message(m_nntp->sto_session, mail->getNumber(), &mailmsg);
         err = mailmessage_fetch(mailmsg,&message,&length);
         msg_cache.writeBlock(message,length);
     } else {
@@ -96,7 +96,7 @@ RecBody NNTPwrapper::fetchBody( const RecMail &mail ) {
 }
 
 
-void NNTPwrapper::listMessages(const QString & which, QList<RecMail> &target )
+void NNTPwrapper::listMessages(const QString & which, QValueList<Opie::OSmartPointer<RecMail> > &target )
 {
     login();
     if (!m_nntp)
@@ -188,9 +188,9 @@ void NNTPwrapper::logout()
    m_nntp = 0;
 }
 
-QValueList<Opie::osmart_pointer<Folder> >* NNTPwrapper::listFolders() {
+QValueList<Opie::OSmartPointer<Folder> >* NNTPwrapper::listFolders() {
 
-    QValueList<Opie::osmart_pointer<Folder> >* folders = new QValueList<Opie::osmart_pointer<Folder> >();
+    QValueList<Opie::OSmartPointer<Folder> >* folders = new QValueList<Opie::OSmartPointer<Folder> >();
     QStringList groups;
     if (account) {
         groups = account->getGroups();
@@ -239,7 +239,7 @@ QStringList NNTPwrapper::listAllNewsgroups(const QString&mask) {
     return res;
 }
 
-void NNTPwrapper::answeredMail(const RecMail&) {}
+void NNTPwrapper::answeredMail(const RecMailP&) {}
 
 void NNTPwrapper::statusFolder(folderStat&target_stat,const QString&) {
     login();
@@ -253,12 +253,12 @@ void NNTPwrapper::statusFolder(folderStat&target_stat,const QString&) {
 }
 
 
-encodedString* NNTPwrapper::fetchRawBody(const RecMail&mail) {
+encodedString* NNTPwrapper::fetchRawBody(const RecMailP&mail) {
     char*target=0;
     size_t length=0;
     encodedString*res = 0;
     mailmessage * mailmsg = 0;
-    int err = mailsession_get_message(m_nntp->sto_session, mail.getNumber(), &mailmsg);
+    int err = mailsession_get_message(m_nntp->sto_session, mail->getNumber(), &mailmsg);
     err = mailmessage_fetch(mailmsg,&target,&length);
     if (mailmsg)
         mailmessage_free(mailmsg);
@@ -276,7 +276,7 @@ const QString&NNTPwrapper::getName()const{
     return account->getAccountName();
 }
 
-void NNTPwrapper::deleteMail(const RecMail&) {
+void NNTPwrapper::deleteMail(const RecMailP&) {
 }
 
 int NNTPwrapper::deleteAllMail(const FolderP&) {

@@ -8,6 +8,8 @@
 #define FLAG_DRAFT    4
 #define FLAG_RECENT   5
 
+#include <opie2/osmartpointer.h>
+
 #include <qbitarray.h>
 #include <qstring.h>
 #include <qstringlist.h>
@@ -27,15 +29,15 @@ class AbstractMail;
    make a request to the mailwrapper with this class as parameter to
    get the body. Same words for the attachments.
 */
-class RecMail
+class RecMail:public Opie::ORefCount
 {
 public:
     RecMail();
     RecMail(const RecMail&old);
     virtual ~RecMail();
 
-    const int getNumber()const{return msg_number;}
-    void setNumber(int number){msg_number=number;}
+    const unsigned int getNumber()const{return msg_number;}
+    void setNumber(unsigned int number){msg_number=number;}
     const QString&getDate()const{ return date; }
     void setDate( const QString&a ) { date = a; }
     const QString&getFrom()const{ return from; }
@@ -48,8 +50,8 @@ public:
     const QString&Msgid()const{return msg_id;}
     void setReplyto(const QString&reply){replyto=reply;}
     const QString&Replyto()const{return replyto;}
-    void setMsgsize(int size){msg_size = size;}
-    const int Msgsize()const{return msg_size;}
+    void setMsgsize(unsigned int size){msg_size = size;}
+    const unsigned int Msgsize()const{return msg_size;}
 
 
     void setTo(const QStringList&list);
@@ -71,7 +73,7 @@ public:
 
 protected:
     QString subject,date,from,mbox,msg_id,replyto;
-    int msg_number,msg_size;
+    unsigned int msg_number,msg_size;
     QBitArray msg_flags;
     QStringList to,cc,bcc,in_reply_to,references;
     AbstractMail*wrapper;
@@ -79,6 +81,7 @@ protected:
     void copy_old(const RecMail&old);
 };
 
+typedef Opie::OSmartPointer<RecMail> RecMailP;
 typedef QMap<QString,QString> part_plist_t;
 
 class RecPart

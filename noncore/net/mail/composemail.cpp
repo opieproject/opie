@@ -188,7 +188,7 @@ void ComposeMail::accept()
     qDebug( "Sending Mail with " +
             smtpAccounts.at( smtpAccountBox->currentItem() )->getAccountName() );
 #endif
-    Opie::osmart_pointer<Mail> mail=new Mail;
+    Opie::OSmartPointer<Mail> mail=new Mail;
 
     SMTPaccount *smtp = smtpAccounts.at( smtpAccountBox->currentItem() );
     mail->setMail(fromBox->currentText());
@@ -236,7 +236,7 @@ void ComposeMail::reject()
                                      tr("No"),QString::null,0,1);
 
     if (yesno == 0) {
-        Opie::osmart_pointer<Mail> mail=new Mail();
+        Opie::OSmartPointer<Mail> mail=new Mail();
         mail->setMail(fromBox->currentText());
         mail->setTo( toLine->text() );
         mail->setName(senderNameEdit->text());
@@ -256,11 +256,11 @@ void ComposeMail::reject()
         }
         qDebug(txt);
         mail->setMessage( txt );
-        
+
         /* only use the default drafts folder name! */
         Storemail wrapper(AbstractMail::draftFolder());
         wrapper.storeMail(mail);
-        
+
         AttachViewItem *it = (AttachViewItem *) attList->firstChild();
         /* attachments we will ignore! */
         if ( it != NULL ) {
@@ -275,15 +275,15 @@ ComposeMail::~ComposeMail()
 {
 }
 
-void ComposeMail::reEditMail(const RecMail&current)
+void ComposeMail::reEditMail(const RecMailP&current)
 {
-    RecMail data = current;
-    message->setText(data.Wrapper()->fetchBody(current).Bodytext());
-    subjectLine->setText( data.getSubject());
-    toLine->setText(data.To().join(","));
-    ccLine->setText(data.CC().join(","));
-    bccLine->setText(data.Bcc().join(","));
-    replyLine->setText(data.Replyto());
+    RecMailP data = current;
+    message->setText(data->Wrapper()->fetchBody(current).Bodytext());
+    subjectLine->setText( data->getSubject());
+    toLine->setText(data->To().join(","));
+    ccLine->setText(data->CC().join(","));
+    bccLine->setText(data->Bcc().join(","));
+    replyLine->setText(data->Replyto());
 }
 
 AttachViewItem::AttachViewItem( QListView *parent, Attachment *att )

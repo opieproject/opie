@@ -3,11 +3,10 @@
 
 #include <qlistview.h>
 #include <qlist.h>
-#include <opie2/osmart_pointer.h>
+#include <opie2/osmartpointer.h>
+#include <libmailwrapper/mailtypes.h>
 
 class Selectstore;
-class RecMail;
-class RecBody;
 class Folder;
 class AbstractMail;
 class Account;
@@ -22,8 +21,8 @@ public:
     AccountView( QWidget *parent = 0, const char *name = 0, WFlags flags = 0 );
     virtual ~AccountView();
     virtual void populate( QList<Account> list );
-    virtual RecBody fetchBody(const RecMail&aMail);
-    virtual void downloadMails(const Opie::osmart_pointer<Folder>&fromFolder,AbstractMail*fromWrapper);
+    virtual RecBody fetchBody(const Opie::OSmartPointer<RecMail>&aMail);
+    virtual void downloadMails(const Opie::OSmartPointer<Folder>&fromFolder,AbstractMail*fromWrapper);
     virtual bool currentisDraft();
 
 public slots:
@@ -35,7 +34,7 @@ public slots:
     void setupFolderselect(Selectstore*sels);
 
 signals:
-    void refreshMailview(QList<RecMail>*);
+    void refreshMailview(const QValueList<RecMailP>& );
 
 protected:
     QListViewItem* m_currentItem;

@@ -9,7 +9,9 @@
 #include <libmailwrapper/settings.h>
 #include <libmailwrapper/mailwrapper.h>
 
+class RecMail;
 
+#include <opie2/osmartpointer.h>
 
 class AddressPicker : public AddressPickerUI
 {
@@ -35,7 +37,7 @@ public:
     ComposeMail( Settings *s, QWidget *parent = 0, const char *name = 0, bool modal = false, WFlags flags = 0 );
     virtual ~ComposeMail();
 
-    void reEditMail(const RecMail&current);
+    void reEditMail(const Opie::OSmartPointer<RecMail>&current);
 
 public slots:
     void slotAdjustColumns();

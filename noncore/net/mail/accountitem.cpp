@@ -49,7 +49,7 @@ AbstractMail *POP3viewItem::getWrapper()
     return wrapper;
 }
 
-void POP3viewItem::refresh( QList<RecMail> & )
+void POP3viewItem::refresh(QValueList<Opie::OSmartPointer<RecMail> > & )
 {
     refresh();
 }
@@ -75,7 +75,7 @@ void POP3viewItem::refresh()
     delete folders;
 }
 
-RecBody POP3viewItem::fetchBody( const RecMail &mail )
+RecBody POP3viewItem::fetchBody( const RecMailP &mail )
 {
     qDebug( "POP3 fetchBody" );
     return wrapper->fetchBody( mail );
@@ -154,13 +154,13 @@ POP3folderItem::POP3folderItem( const FolderP&folderInit, POP3viewItem *parent ,
     setText( 0, folder->getDisplayName() );
 }
 
-void POP3folderItem::refresh(QList<RecMail>&target)
+void POP3folderItem::refresh(QValueList<RecMailP>&target)
 {
     if (folder->may_select())
         pop3->getWrapper()->listMessages( folder->getName(),target );
 }
 
-RecBody POP3folderItem::fetchBody(const RecMail&aMail)
+RecBody POP3folderItem::fetchBody(const RecMailP&aMail)
 {
     return pop3->getWrapper()->fetchBody(aMail);
 }
@@ -239,7 +239,7 @@ AbstractMail *NNTPviewItem::getWrapper()
     return wrapper;
 }
 
-void NNTPviewItem::refresh( QList<RecMail> & )
+void NNTPviewItem::refresh( QValueList<RecMailP> & )
 {
     refresh();
 }
@@ -266,7 +266,7 @@ void NNTPviewItem::refresh()
     delete folders;
 }
 
-RecBody NNTPviewItem::fetchBody( const RecMail &mail )
+RecBody NNTPviewItem::fetchBody( const RecMailP &mail )
 {
     qDebug( "NNTP fetchBody" );
     return wrapper->fetchBody( mail );
@@ -358,13 +358,13 @@ NNTPfolderItem::NNTPfolderItem( const FolderP &folderInit, NNTPviewItem *parent 
     setText( 0, folder->getDisplayName() );
 }
 
-void NNTPfolderItem::refresh(QList<RecMail>&target)
+void NNTPfolderItem::refresh(QValueList<RecMailP>&target)
 {
     if (folder->may_select())
         nntp->getWrapper()->listMessages( folder->getName(),target );
 }
 
-RecBody NNTPfolderItem::fetchBody(const RecMail&aMail)
+RecBody NNTPfolderItem::fetchBody(const RecMailP&aMail)
 {
     return nntp->getWrapper()->fetchBody(aMail);
 }
@@ -428,7 +428,7 @@ AbstractMail *IMAPviewItem::getWrapper()
     return wrapper;
 }
 
-void IMAPviewItem::refresh(QList<RecMail>&)
+void IMAPviewItem::refresh(QValueList<RecMailP>&)
 {
     refreshFolders(false);
 }
@@ -561,7 +561,7 @@ void IMAPviewItem::contextMenuSelected(int id)
     }
 }
 
-RecBody IMAPviewItem::fetchBody(const RecMail&)
+RecBody IMAPviewItem::fetchBody(const RecMailP&)
 {
     return RecBody();
 }
@@ -609,7 +609,7 @@ const QString& IMAPfolderItem::Delemiter()const
     return folder->Separator();
 }
 
-void IMAPfolderItem::refresh(QList<RecMail>&target)
+void IMAPfolderItem::refresh(QValueList<RecMailP>&target)
 {
     if (folder->may_select())
     {
@@ -621,7 +621,7 @@ void IMAPfolderItem::refresh(QList<RecMail>&target)
     }
 }
 
-RecBody IMAPfolderItem::fetchBody(const RecMail&aMail)
+RecBody IMAPfolderItem::fetchBody(const RecMailP&aMail)
 {
     return imap->getWrapper()->fetchBody(aMail);
 }
@@ -748,7 +748,7 @@ AbstractMail *MHviewItem::getWrapper()
     return wrapper;
 }
 
-void MHviewItem::refresh( QList<RecMail> & target)
+void MHviewItem::refresh( QValueList<RecMailP> & target)
 {
     refresh(false);
     getWrapper()->listMessages( "",target );
@@ -799,7 +799,7 @@ void MHviewItem::refresh(bool force)
     delete folders;
 }
 
-RecBody MHviewItem::fetchBody( const RecMail &mail )
+RecBody MHviewItem::fetchBody( const RecMailP &mail )
 {
     qDebug( "MH fetchBody" );
     return wrapper->fetchBody( mail );
@@ -914,13 +914,13 @@ const FolderP&MHfolderItem::getFolder()const
     return folder;
 }
 
-void MHfolderItem::refresh(QList<RecMail>&target)
+void MHfolderItem::refresh(QValueList<RecMailP>&target)
 {
     if (folder->may_select())
         mbox->getWrapper()->listMessages( folder->getName(),target );
 }
 
-RecBody MHfolderItem::fetchBody(const RecMail&aMail)
+RecBody MHfolderItem::fetchBody(const RecMailP&aMail)
 {
     return mbox->getWrapper()->fetchBody(aMail);
 }
@@ -1042,7 +1042,7 @@ AccountViewItem::AccountViewItem( QListViewItem *parent , QListViewItem*after  )
     init();
 }
 
-AccountViewItem::AccountViewItem( const Opie::osmart_pointer<Folder>&folderInit,QListViewItem *parent , QListViewItem*after  )
+AccountViewItem::AccountViewItem( const Opie::OSmartPointer<Folder>&folderInit,QListViewItem *parent , QListViewItem*after  )
        :QListViewItem( parent,after ),folder(folderInit)
 {
     init();
