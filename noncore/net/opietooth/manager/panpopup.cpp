@@ -43,6 +43,7 @@ PanPopup::~PanPopup() {
 }
 
 void PanPopup::slotConnect() {
+
     m_panconnection = new StartPanConnection( m_item->mac() );
     m_panconnection->start();
 }
