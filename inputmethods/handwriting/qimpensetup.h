@@ -100,6 +100,7 @@ protected slots:
     void clearChar();
     void selectChar( int );
     void selectCharSet( int );
+    void selectCharSetVisible( int );
     void addChar();
     void addNewChar();
     void removeChar();

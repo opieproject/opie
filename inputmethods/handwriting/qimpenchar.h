@@ -117,7 +117,7 @@ public:
     void addChar( QIMPenChar *ch );
     void removeChar( QIMPenChar *ch );
     QIMPenChar *at( int i );
-    void setHidden ( const bool &b ) { phidden = &b; }
+    void setHidden ( const bool &b ) { phidden = b; }
     bool hidden() const { return phidden; }
 
     unsigned maximumStrokes() const { return maxStrokes; }

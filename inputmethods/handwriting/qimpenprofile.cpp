@@ -142,6 +142,7 @@ void QIMPenProfile::loadData()
 		if ( !cs->isEmpty() ) {
 		    cs->setTitle( cs->title().upper() );
 		    cs->setType( QIMPenCharSet::Upper );
+		    cs->setDescription( "Hidden uppercase" );
 		    cs->setHidden ( true );
 		    QIMPenCharIterator it( cs->characters() );
 		    for ( ; it.current(); ++it ) {
@@ -159,6 +160,8 @@ void QIMPenProfile::loadData()
 	cs = new QIMPenCharSet( baseDir + "qimpen/" + s );
 	cs->load( Global::applicationFileName("qimpen",s), QIMPenCharSet::User );
 	if ( !cs->isEmpty() ) {
+	    if ( mono () )
+		cs->setDescription( "Latin Characters" );
 	    if ( combining )
 		combining->addCombined( cs );
 	    sets.append( cs );

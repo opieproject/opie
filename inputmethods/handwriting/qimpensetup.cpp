@@ -326,7 +326,7 @@ QIMPenEdit::QIMPenEdit( QIMPenProfile *p, QWidget *parent,
 
     charSetCombo = new QComboBox( this );
     gl->addMultiCellWidget( charSetCombo, 0, 0, 0, 1 );
-    connect( charSetCombo, SIGNAL(activated(int)), SLOT(selectCharSet(int)));
+    connect( charSetCombo, SIGNAL(activated(int)), SLOT(selectCharSetVisible(int)));
     QIMPenCharSetIterator it( profile->charSets() );
     for ( ; it.current(); ++it ) {
         charSetCombo->insertItem( it.current()->description() );
@@ -388,7 +388,7 @@ QIMPenEdit::QIMPenEdit( QIMPenProfile *p, QWidget *parent,
     connect( pb, SIGNAL(clicked()), SLOT(reject()) );
     hb->addWidget( pb );
 #endif
-    selectCharSet( 0 );
+    selectCharSetVisible( 0 );
     charList->setFocus();
 
     resize( minimumSize() );
@@ -404,7 +404,7 @@ void QIMPenEdit::setProfile( QIMPenProfile *p )
 	if ( ! it.current()->hidden() )
 	    charSetCombo->insertItem( it.current()->description() );
     }
-    selectCharSet( 0 );
+    selectCharSetVisible( 0 );
     charList->setFocus();
     enableButtons();
 }
@@ -547,6 +547,17 @@ void QIMPenEdit::selectChar( int i )
     if ( !it.current() )
 	setCurrentChar( 0 );
     inputChar->clear();
+}
+
+void QIMPenEdit::selectCharSetVisible( int c )
+{
+    int i = 0;
+    QIMPenCharSetIterator it( profile->charSets() );
+    for ( ; it.current(); ++it, i++ ) {
+        if ( charSetCombo->text( c ) == it.current()->description() ) {
+	    selectCharSet( i );
+	}
+    }
 }
 
 void QIMPenEdit::selectCharSet( int i )
