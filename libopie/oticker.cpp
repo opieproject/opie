@@ -45,14 +45,15 @@
 #include "oticker.h"
 
 OTicker::OTicker( QWidget* parent )
-        : QFrame( parent ) {
-
-//    setFrameStyle( NoFrame/*WinPanel | Sunken */);
-
+        : QLabel( parent ) {
+  //        : QFrame( parent ) {
+    setTextFormat(Qt::RichText);
     Config cfg("qpe");
     cfg.setGroup("Appearance");
     backgroundcolor = QColor( cfg.readEntry( "Background", "#E5E1D5" ) );
     foregroundcolor= Qt::black;
+    updateTimerTime = 50;
+    scrollLength = 1;
 }
 
 OTicker::~OTicker() {
@@ -89,14 +90,15 @@ void OTicker::setText( const QString& text ) {
     scrollTextPixmap = pm;
 
     killTimers();
+    //    qDebug("Scrollupdate %d", updateTimerTime);
     if ( pixelLen > contentsRect().width() )
-        startTimer( 50 );
+        startTimer( updateTimerTime);
     update();
 }
 
 
 void OTicker::timerEvent( QTimerEvent * ) {
-    pos = ( pos <= 0 ) ? scrollTextPixmap.width() : pos - 1;
+  pos = ( pos <= 0 ) ? scrollTextPixmap.width() : pos - scrollLength;//1;
     repaint( FALSE );
 }
 
@@ -111,3 +113,12 @@ void OTicker::mouseReleaseEvent( QMouseEvent * ) {
 //    qDebug("<<<<<<<>>>>>>>>>");
     emit mousePressed();
 }
+
+void OTicker::setUpdateTime(int time) {
+ updateTimerTime=time;
+}
+
+void OTicker::setScrollLength(int len) {
+scrollLength=len;
+}
+
