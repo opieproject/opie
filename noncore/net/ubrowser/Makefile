@@ -1,5 +1,5 @@
 #############################################################################
-# Automatically generated from noncore/ubrowser/Makefile.in
+# Automatically generated from noncore/net/ubrowser/Makefile.in
 # Build options from 
 #############################################################################
 
@@ -105,7 +105,7 @@ CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
 CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS)
 CC	=	$(SYSCONF_CC) $(QT_C_MT)
 CFLAGS	=	$(SYSCONF_CFLAGS)
-INCPATH =	-I$(OPIEDIR)/include
+INCPATH =	-I../../../include
 LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
 LIBS	=	$(SUBLIBS) -lqpe $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS) $(SYSCONF_LIBS_QTAPP)
 MOC	=	$(SYSCONF_MOC)
@@ -113,7 +113,7 @@ UIC	=	$(SYSCONF_UIC)
 
 ####### Target
 
-DESTDIR = $(OPIEDIR)/bin/
+DESTDIR = ../../../bin/
 VER_MAJ = 1
 VER_MIN = 0
 VER_PATCH = 0
@@ -206,17 +206,17 @@ REQUIRES=
 ####### Compile
 
 main.o: main.cpp \
-		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		../../../include/qpe/qpeapplication.h \
 		mainview.h \
-		$(OPIEDIR)/include/qpe/resource.h \
-		$(OPIEDIR)/include/qpe/qpetoolbar.h \
+		../../../include/qpe/resource.h \
+		../../../include/qpe/qpetoolbar.h \
 		httpfactory.h \
 		httpcomm.h
 
 mainview.o: mainview.cpp \
 		mainview.h \
-		$(OPIEDIR)/include/qpe/resource.h \
-		$(OPIEDIR)/include/qpe/qpetoolbar.h \
+		../../../include/qpe/resource.h \
+		../../../include/qpe/qpetoolbar.h \
 		httpfactory.h \
 		httpcomm.h
 
@@ -229,8 +229,8 @@ httpcomm.o: httpcomm.cpp \
 
 moc_mainview.o: moc_mainview.cpp \
 		mainview.h \
-		$(OPIEDIR)/include/qpe/resource.h \
-		$(OPIEDIR)/include/qpe/qpetoolbar.h \
+		../../../include/qpe/resource.h \
+		../../../include/qpe/qpetoolbar.h \
 		httpfactory.h \
 		httpcomm.h
 

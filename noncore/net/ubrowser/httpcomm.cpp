@@ -136,7 +136,8 @@ void HttpComm::incoming()
 			//remove the http header, if one exists
 			if(j != 0)
 			{
-				tempQString.remove(0, j);
+				tempQString.remove(0, j+1);
+				printf("HttpComm::incoming: removing http header.  Result: \n%s", tempQString.latin1());
 			}
 			while(!done)
 			{
@@ -149,23 +150,28 @@ void HttpComm::incoming()
 					sclength.truncate(j);
 					clength = sclength.toUInt(0, 16);
 					printf("HttpComm::Incoming: chunk length: %d\n", clength);
+					//end of data
 					if(clength==0)
 					{
 						processBody();
 						done=true;
 					}
+					//still more, but it hasnt been recieved yet
 					if(ba <= j)
 					{
 						status=1;
 						done=true;
-//						break;
+						break;
 					}
+					//still more data waiting
 					else
 					{
 						done=false;
+						//remove the chunk length header
+						tempQString.remove(0,j+1);
 					}
 					bRead=0;
-					break;
+//					break;
 				//if there is more fall through to:
 				//chunk length just read, still more in tempQstring
 				case 1:
@@ -174,6 +180,7 @@ void HttpComm::incoming()
 					{
 						QString newTQstring = tempQString;
 						newTQstring.truncate(clength-bRead);
+						bRead+=newTQstring.length();
 						body+=newTQstring;
 						printf("HttpComm::incoming: start new body piece 1: \n");
 						printf("%s", newTQstring.latin1() );
@@ -181,7 +188,7 @@ void HttpComm::incoming()
 						status=0;
 						j=clength-bRead;
 						done=false;
-						break;
+//						break;
 					}
 					//the chunk extends beyond the current data;
 					else
@@ -192,10 +199,42 @@ void HttpComm::incoming()
 						printf("%s", tempQString.latin1() );
 						printf("HttpComm::incoming: end new body piece 2.\n");
 						done=true;
-						break;
+						status=2;
+//						break;
+					}
+					break;
+				//just got data in, continue reading chunk
+				case 2:
+					//the current data extends beyond the end of the chunk
+					if(bRead + tempQString.length() > clength)
+					{
+						QString newTQstring = tempQString;
+						newTQstring.truncate(clength-bRead);
+						bRead+=newTQstring.length();
+						body+=newTQstring;
+						printf("HttpComm::incoming: start new body piece 3: \n");
+						printf("%s", newTQstring.latin1() );
+						printf("HttpComm::incoming: end new body piece 3.\n");
+						status=0;
+						j=clength-bRead;
+						done=false;
+//						break;
+					}
+					//the chunk extends beyond the current data;
+					else
+					{
+						body+=tempQString;
+						bRead+=ba;
+						printf("HttpComm::incoming: start new body piece 4: \n");
+						printf("%s", tempQString.latin1() );
+						printf("HttpComm::incoming: end new body piece 4.\n");
+						done=true;
+						status=2;
+//						break;
 					}
 					break;
 				}
+				printf("HttpComm::incoming: chunked encoding: bRead: %d\n", bRead);
 			}
 		}
 	}
