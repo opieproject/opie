@@ -15,7 +15,6 @@ Feature requests:
 Known Bugs:
 -----------
 - OK-Key does not switch from Detailview (ablable) to Listview
-- Name order selected in "contacteditor" not used in list view.
 
 - Language not English (tested with german opie-translation): 
 	1. Configure nicht übersetzt (alles leer).
@@ -25,10 +24,9 @@ Known Bugs:
 
 Bugs but not in addressbook:
 -----------------------------
-- VCARD: Import of Anniversary does not work correctly (currently disabled)
 - VCARD: If umlaut (äöüß) in address, the parser gets confused..
 
-- Exporting and reimporting of Jobtitle fails (Could not reproduce this ! (se))
+- Exporting and reimporting of Jobtitle was reported to fail (Could not reproduce this ! (se))
 
 
 Urgent:
@@ -50,7 +48,7 @@ Important:
 - Implement a picker/combo for the default email.
 - After search (Started with Return): KeyFocus should be on Tabelle
 
-- IRDA Receive: Contact is added, but start of editor with new entry expected..
+- Add a dialog to accept and optionally edit  received contacts by IRDA. 
 - "What's this" should be added (Deleyed after Feature Freeze)
 
 Less important:
@@ -107,3 +105,5 @@ Fixed:
 - Optimize Table Update...
 - Change MyDialog to Config
 - Store position and state of toolbar
+- VCARD: Import of Anniversary does not work correctly (currently disabled)
+- Name order selected in "contacteditor" not used in list view.
