@@ -86,12 +86,12 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished">Cliquez sur la croix fermement et
+        <translation>Cliquez sur la croix fermement et
 avec précision pour calibrer l&apos;écran.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished">Bienvenue sur Opie</translation>
+        <translation>Bienvenue sur Opie</translation>
     </message>
 </context>
 <context>
@@ -272,11 +272,11 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <name>Mediadlg</name>
     <message>
         <source>A new storage media detected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau média de stockage détecté : </translation>
     </message>
     <message>
         <source>What should I do with it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Que dois faire le programme ?</translation>
     </message>
 </context>
 <context>
@@ -511,7 +511,7 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may I allow or deny this connection.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt;Vous avez choisi IntelliSync donc vous avez la possibilité d&apos;accepter ou de refuser cette connexion.&lt;qt&gt;</translation>
     </message>
 </context>
 <context>

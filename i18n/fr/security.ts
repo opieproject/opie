@@ -293,8 +293,11 @@ Attention : les mots de passe sont sensibles à la case (i.e HeLLo est différen
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
-        <translation type="unfinished"></translation>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
+        <translation>Modifie le protocole de synchronisation pour s&apos;adapter aux différents appareils.
+  IntelliSync désactivera la vérification du mot de passe mais il vous sera demandé de confirmer la connexion.
+  Opie 1.0 sera compatible avec Qtopia Desktop, MultiSync et KitchenSync.
+  Qtopia 1.7 va modifier la façon dont les données sont envoyées au client et ne fonctionnera pas avec d&apos;autres clients.</translation>
     </message>
 </context>
 </TS>

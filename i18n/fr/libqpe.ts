@@ -205,7 +205,7 @@ de cette liste</translation>
     <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
-        <translation type="unfinished"></translation>
+        <translation>Fin atteinte, redémarrage au %1</translation>
     </message>
 </context>
 <context>
@@ -351,7 +351,7 @@ de cette liste</translation>
     </message>
     <message>
         <source>Arguments:</source>
-        <translation type="unfinished"></translation>
+        <translation>Arguments : </translation>
     </message>
 </context>
 <context>
@@ -897,12 +897,12 @@ Libérez de la mémoire et réessayez.</translation>
     <message>
         <source>D</source>
         <comment>Shortcut for Day</comment>
-        <translation type="unfinished">J</translation>
+        <translation>J</translation>
     </message>
     <message>
         <source>M</source>
         <comment>Shortcur for Month</comment>
-        <translation type="unfinished">M</translation>
+        <translation>M</translation>
     </message>
 </context>
 <context>
@@ -927,15 +927,15 @@ Libérez de la mémoire et réessayez.</translation>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished">Cliquez pour fermer cette fenêtre et abandonner les changements.</translation>
+        <translation>Cliquez pour fermer cette fenêtre et abandonner les changements.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished">Cliquez pour fermer cette fenêtre.</translation>
+        <translation>Cliquez pour fermer cette fenêtre.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished">Cliquez pour fermer cette fenêtre et appliquer les changements.</translation>
+        <translation>Cliquez pour fermer cette fenêtre et appliquer les changements.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
@@ -943,31 +943,31 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished">Cliquez pour que cette fenêtre remplisse l&apos;écran.</translation>
+        <translation>Cliquez pour que cette fenêtre remplisse l&apos;écran.</translation>
     </message>
     <message>
         <source>Click to make this window movable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez pour que cette fenêtre soit déplaçable.</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurer</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Déplacer</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Maximize</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximiser</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer</translation>
     </message>
 </context>
 <context>
@@ -1060,7 +1060,7 @@ Libérez de la mémoire et réessayez</translation>
     <message>
         <source>Default</source>
         <comment>List box text for default window decoration</comment>
-        <translation type="unfinished"></translation>
+        <translation>Défaut</translation>
     </message>
 </context>
 </TS>

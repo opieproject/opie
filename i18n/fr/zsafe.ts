@@ -362,7 +362,7 @@ edit or select the filter</source>
     </message>
     <message>
         <source>confirms the selection and closes the form</source>
-        <translation>Confirmer la sélection et refermer le formulaire</translation>
+        <translation>Confirme la sélection et referme le formulaire</translation>
     </message>
     <message>
         <source>OKButton</source>
@@ -370,7 +370,7 @@ edit or select the filter</source>
     </message>
     <message>
         <source>cancels the selection and closes the form</source>
-        <translation>Annuler la sélection et fermer le formulaire</translation>
+        <translation>Annule la sélection et ferme le formulaire</translation>
     </message>
     <message>
         <source>CancelButton</source>
@@ -378,7 +378,7 @@ edit or select the filter</source>
     </message>
     <message>
         <source>shows the selected filename</source>
-        <translation>affiche le nom du fichier sélectionné</translation>
+        <translation>Affiche le nom du fichier sélectionné</translation>
     </message>
     <message>
         <source>Filename LineEdit
@@ -386,7 +386,7 @@ edit or select the filter</source>
 shows the selected file
 and allows the direct filename
 edit</source>
-        <translation>Filename LineEdit
+        <translation>Ligne d&apos;édition du nom de fichier
 
 affiche le fichier sélectionné
 et permet de modifier son nom</translation>
@@ -394,8 +394,8 @@ et permet de modifier son nom</translation>
     <message>
         <source>ComboBox Directory 
 edit or select the directories name</source>
-        <translation>ComboBox Directory
-Modifier ou sélectionner les noms de répertoires</translation>
+        <translation>Liste déroulante des répertoires
+permet de modifier ou de sélectionner les noms de répertoires</translation>
     </message>
     <message>
         <source>Name</source>
@@ -411,19 +411,19 @@ Modifier ou sélectionner les noms de répertoires</translation>
     </message>
     <message>
         <source>directory listview</source>
-        <translation>Affichage du répertoire sous forme de liste</translation>
+        <translation>Liste des fichiers et dossiers</translation>
     </message>
     <message>
         <source>Directory ListView
 
 shows the list of dirs and files</source>
-        <translation>Directory ListView
+        <translation>Liste des fichiers et dossiers
 
 affiche la liste des répertoires et fichiers</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -601,159 +601,156 @@ ZSafe va s&apos;arrêter.</translation>
     </message>
     <message>
         <source>Do you want to delete?</source>
-        <translation type="unfinished">Wollen Sie wirklich löschen?</translation>
+        <translation>Confirmez-vous la suppression ?</translation>
     </message>
     <message>
         <source>D&amp;on&apos;t Delete</source>
-        <translation type="unfinished">&amp;Nicht löschen</translation>
+        <translation>Ne pas &amp;supprimer</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation type="unfinished">Eintrag ändern</translation>
+        <translation>Editer entrée</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Benutzername</translation>
+        <translation>Identifiant</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Passwort</translation>
+        <translation>Mot de passe</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation type="unfinished">Neuer Eintrag</translation>
+        <translation>Nouvelle entrée</translation>
     </message>
     <message>
         <source>Entry name must be different
 from the category name.</source>
-        <translation type="unfinished">Die Namen der Einträge
-müssen sich von der
-Kategorie unterscheiden.</translation>
+        <translation>Les noms doivent être différents
+des noms de catégories.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Suchen</translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>Entry not found</source>
-        <translation type="unfinished">Eintrag nicht gefunden</translation>
+        <translation>Entrée non trouvée</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>Could not remove text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht löschen.</translation>
+        <translation>Impossible de supprimer le fichier texte.</translation>
     </message>
     <message>
         <source>Could not export to text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht exportieren.</translation>
+        <translation>Impossible d&apos;exporter le fichier texte.</translation>
     </message>
     <message>
         <source>Could not import text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht importieren.</translation>
+        <translation>Impossible d&apos;importer le fichier texte.</translation>
     </message>
     <message>
         <source>Enter Password</source>
-        <translation type="unfinished">Passwort eingeben</translation>
+        <translation>Entrer mot de passe</translation>
     </message>
     <message>
         <source>Wrong password.
 
 ZSafe will now exit.</source>
-        <translation type="unfinished">Falsches Passwort
+        <translation>Mot de passe incorrect
 
-ZSafe wird sich jetzt beenden.</translation>
+ZSave va se fermer.</translation>
     </message>
     <message>
         <source>Wrong password.
 Enter again?</source>
-        <translation type="unfinished">Falsches Passwort.
-Neu eingeben?</translation>
+        <translation>Mot de passe incorrect.
+Rééssayer de nouveau ?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;Ja</translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>&amp;No.</source>
-        <translation type="unfinished">&amp;Nein.</translation>
+        <translation>&amp;Non.</translation>
     </message>
     <message>
         <source>Empty document or
 wrong password.
 Continue?</source>
-        <translation type="unfinished">Leeres Dokument oder
-falsches Passwort.
-Fortfahren?</translation>
+        <translation>Document vide ou
+mot de passe incorrect.
+Continuer ?</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished">&amp;Nein</translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>&amp;Yes.</source>
-        <translation type="unfinished">&amp;Ja.</translation>
+        <translation>&amp;Oui.</translation>
     </message>
     <message>
         <source>Password is empty.
 Please enter again.</source>
-        <translation type="unfinished">Das Passwort ist leer.
-Bitte nochmals eingeben.</translation>
+        <translation>Mot de passe vide.
+Veuillez recommencer.</translation>
     </message>
     <message>
         <source>Reenter Password</source>
-        <translation type="unfinished">Passwort nochmals eingeben</translation>
+        <translation>Réentrer mot de passe</translation>
     </message>
     <message>
         <source>Passwords must be identical.
 Please enter again.</source>
-        <translation type="unfinished">Die Passwörter müssen
-gleich sein. Bitte nochmals
-Passwort eingeben.</translation>
+        <translation>Les mots de passe doivent être
+identiques. Vous devez les réentrer.</translation>
     </message>
     <message>
         <source>Password file saved.</source>
-        <translation type="unfinished">Passwort-Datei gesichert.</translation>
+        <translation>Fichier mot de passe enregistré.</translation>
     </message>
     <message>
         <source>Do you want to save
 before exiting?</source>
-        <translation type="unfinished">Wollen Sie vor dem Beenden
-die Daten speichern?</translation>
+        <translation>Voulez-vous enregistrer
+avant de quitter ?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Sichern</translation>
+        <translation>&amp;Enregistrer</translation>
     </message>
     <message>
         <source>S&amp;ave with
 new
 password</source>
-        <translation type="unfinished">Mit neuem
-&amp;Passwort
-sichern</translation>
+        <translation>&amp;Enregistrer avec
+nouveau mot de passe</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation type="unfinished">&amp;Nicht sichern</translation>
+        <translation>&amp;Ne pas enregistrer</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Kategorie</translation>
+        <translation>Catégorie</translation>
     </message>
     <message>
         <source>Wait dialog</source>
-        <translation type="unfinished">Bitte warten</translation>
+        <translation>Dialogue d&apos;attente</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished">Suche nach Symbolen...</translation>
+        <translation>Chargement des icônes...</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="unfinished">Zaurus Passwort Manager&lt;br&gt;</translation>
+        <translation>Gestionnaire mot de passe du Zaurus&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.0.1ern&lt;br&gt;</source>
@@ -761,11 +758,11 @@ sichern</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="unfinished">von Carsten Schneider&lt;br&gt;</translation>
+        <translation>par Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="unfinished">Übersetzungen von Robert Ernst&lt;br&gt;</translation>
+        <translation>Traduit par Amrein-Marie Christophe&lt;br&gt;</translation>
     </message>
     <message>
         <source>&amp;New document</source>
@@ -781,15 +778,15 @@ sichern</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation type="unfinished">Erzeuge neue ZSafe Datei</translation>
+        <translation>Créer nouveau document ZSafe</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
-        <translation type="unfinished">Öffne ZSafe Datei</translation>
+        <translation>Ouvrir document ZSafe</translation>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation type="unfinished">Speichere ZSafe Datei als..</translation>
+        <translation>Enregistrer document ZSafe comme..</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.0&lt;br&gt;</source>
@@ -833,59 +830,59 @@ ZSafe va s&apos;arrêter.</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Tous</translation>
+        <translation>Tous</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Texte</translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <source>Remove text file</source>
-        <translation type="unfinished">Supprimer fichier texte</translation>
+        <translation>Supprimer fichier texte</translation>
     </message>
     <message>
         <source>No document defined.
 You have to create a new document</source>
-        <translation type="unfinished">Aucun document défini.
+        <translation>Aucun document défini.
 Vous devez en créer un nouveau</translation>
     </message>
     <message>
         <source>Export text file</source>
-        <translation type="unfinished">Exporter vers un fichier texte</translation>
+        <translation>Exporter fichier texte</translation>
     </message>
     <message>
         <source>Import text file</source>
-        <translation type="unfinished">Importer un fichier texte</translation>
+        <translation>Importer fichier texte</translation>
     </message>
     <message>
         <source>Do you want to save </source>
-        <translation type="unfinished">Voulez-vous enregistrer</translation>
+        <translation>Voulez-vous enregistrer</translation>
     </message>
     <message>
         <source>
 before continuing?</source>
-        <translation type="unfinished">
+        <translation>
 avant de poursuivre ?</translation>
     </message>
     <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
-        <translation type="unfinished">Vous devez maintenant saisir
+        <translation>Vous devez maintenant saisir
 deux fois le même mot de passe
 pour votre nouveau document.</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation type="unfinished">ZSafe version 2.1.2-jv01b&lt;br&gt;</translation>
+        <translation>ZSafe version 2.1.2-jv01b&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation type="unfinished">ZSafe version 2.1.2&lt;br&gt;</translation>
+        <translation>ZSafe version 2.1.2&lt;br&gt;</translation>
     </message>
 </context>
 </TS>
