@@ -42,18 +42,20 @@ APPS=$(LOCALAPPS) core/addressbook calculator clock datebook \
     noncore/tictac noncore/opieftp noncore/drawpad noncore/kcheckers noncore/appskey noncore/qpdf \
     noncore/kpacman
 
+NONTMAKEAPPS := noncore/nethack
+
 DOCS = docs/src/opie-policy
 single: mpegplayer/libmpeg3
 
-dynamic: $(APPS)
+dynamic: $(APPS) $(NONTMAKEAPPS)
 
 docs: $(DOCS)
 
 $(COMPONENTS): $(LIBS)
 
-$(APPS): $(LIBS) $(COMPONENTS)
+$(NONTMAKEAPPS) $(APPS): $(LIBS) $(COMPONENTS)
 
-$(LIBS) $(COMPONENTS) $(APPS) $(DOCS) single:
+$(LIBS) $(COMPONENTS) $(NONTMAKEAPPS) $(APPS) $(DOCS) single:
 	$(MAKE) -C $@ -f Makefile
 
 showcomponents:
@@ -61,7 +63,7 @@ showcomponents:
 
 clean:
 	$(MAKE) -C single -f Makefile $@
-	for dir in $(APPS) $(LIBS) $(COMPONENTS) $(DOCS); do $(MAKE) -C $$dir -f Makefile $@ || exit 1; done
+	for dir in $(NONTMAKEAPPS) $(APPS) $(LIBS) $(COMPONENTS) $(DOCS); do $(MAKE) -C $$dir -f Makefile $@ || exit 1; done
 
 lupdate:
 	for dir in $(APPS) $(LIBS) $(COMPONENTS); do $(MAKE) -C $$dir -f Makefile $@ || exit 1; done
@@ -70,4 +72,4 @@ lrelease:
 	for dir in $(APPS) $(LIBS) $(COMPONENTS); do $(MAKE) -C $$dir -f Makefile $@ || exit 1; done
 
 
-.PHONY: default dynamic $(LIBS) $(APPS) $(COMPONENTS) $(DOCS) single showcomponents clean
+.PHONY: default dynamic $(NONTMAKEAPPS) $(LIBS) $(APPS) $(COMPONENTS) $(DOCS) single showcomponents clean
