@@ -127,7 +127,7 @@ WordGame::WordGame( QWidget* parent, const char* name, WFlags fl ) :
 	tile_btweak = 0;
     }
 
-    setIcon( Resource::loadPixmap( "wordgame" ) );
+    setIcon( Resource::loadPixmap( "wordgame/WordGame.png" ) );
     setCaption( tr("Word Game") );
 
     setToolBarsMovable( FALSE );
@@ -314,7 +314,7 @@ bool WordGame::loadRules(const QString &name)
 	if ( re++ < 10 ) ts >> e;
     }
 
-    QImage shim = Resource::loadImage(shapepixmap);
+    QImage shim = Resource::loadImage("wordgame/wordgame_shapes.xpm");
     shim = shim.smoothScale((re-1)*TileItem::smallWidth(),TileItem::smallHeight());
     QPixmap bgshapes;
     bgshapes.convertFromImage(shim);
