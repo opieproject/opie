@@ -50,6 +50,8 @@ private:
     ProfileDialogWidget* m_con, *m_term;
     QHBoxLayout *m_layCon, *m_layTerm;
     OTabWidget *tabWidget;
+    QWidget *tabprof;
+    int m_showconntab;
 };
 
 #endif

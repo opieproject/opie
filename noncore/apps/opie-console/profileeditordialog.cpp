@@ -60,8 +60,6 @@ void ProfileEditorDialog::initUI()
     tabWidget->setTabStyle(OTabWidget::TextTab);
     mainLayout->add(tabWidget);
 
-    QWidget *tabprof;
-
     /* base tabs */
     tabprof   = new QWidget(this);
     m_tabTerm = new QWidget(this);
@@ -92,8 +90,9 @@ void ProfileEditorDialog::initUI()
     vbox3->add(m_autoConnect);
     vbox3->addStretch(1);
 
+    m_showconntab = 0;
     tabWidget->addTab(tabprof, "", QObject::tr("Profile"));
-    tabWidget->addTab(m_tabCon, "", QObject::tr("Connection"));
+    //tabWidget->addTab(m_tabCon, "", QObject::tr("Connection"));
     tabWidget->addTab(m_tabTerm, "", QObject::tr("Terminal"));
     tabWidget->setCurrentTab( tabprof );
 
@@ -179,8 +178,15 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
     if ( m_con ) {
         m_con->load( m_prof );
         m_layCon->addWidget( m_con );
+        if(!m_showconntab)
+        {
+            tabWidget->addTab( m_tabCon, "", QObject::tr("Connection") );
+            tabWidget->setCurrentTab( tabprof );
+            m_showconntab = 1;
+        }
     } else {
         tabWidget->removePage( m_tabCon );
+        m_showconntab = 0;
     }
 }
 /*
