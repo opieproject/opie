@@ -150,7 +150,7 @@ void BlueBase::writeToHciConfig() {
     qWarning("writeToHciConfig");
     HciConfWrapper hciconf ( "/etc/bluetooth/hcid.conf" );
     hciconf.load();
-    hciconf.setPinHelper( "/bin/QtPalmtop/bin/blue-pin" );
+    hciconf.setPinHelper( "/opt/QtPalmtop/bin/bluepin" );
     hciconf.setName( m_deviceName );
     hciconf.setEncrypt( m_useEncryption );
     hciconf.setAuth( m_enableAuthentification );

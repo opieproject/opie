@@ -60,6 +60,10 @@ void IRCSession::kick(IRCChannel *channel, IRCPerson *person) {
     m_connection->sendLine("KICK "+ channel->channelname() + " " + person->nick() +" :0wn3d - no reason");
 }
 
+void IRCSession::op(IRCChannel *channel, IRCPerson *person) {
+    m_connection->sendLine("MODE "+ channel->channelname() + " +ooo " + person->nick());
+}
+
 void IRCSession::kick(IRCChannel *channel, IRCPerson *person, QString message) {
     m_connection->sendLine("KICK "+ channel->channelname() + " " + person->nick() +" :" + message);
 } 
