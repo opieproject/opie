@@ -29,6 +29,7 @@
 #ifndef HAZE_OMODAL_HELPER_H
 #define HAZE_OMODAL_HELPER_H
 
+#include <qdialog.h>
 #include <qwidget.h>
 #include <qvaluelist.h>
 #include <qmap.h>
@@ -40,9 +41,9 @@ class OModalHelperSignal;
 class QDialog;
 
 struct OModalHelperBase  {
-    virtual void done( TransactionID id, QWidget* ) = 0;
-    virtual void next( TransactionID, OModalHelperControler * );
-    virtual void prev( TransactionID, OModalHelperControler * );
+    virtual void done( TransactionID ) = 0;
+    virtual void next( TransactionID ) = 0;
+    virtual void prev( TransactionID ) = 0;
 };
 
 /**
@@ -65,7 +66,7 @@ struct OModalHelperBase  {
  * @author hOlgAr
  * @version 0.01
  */
-template<class Dialog, class Record, typename Id = QString>
+template<class Dialog, class Record, typename Id = int>
 class OModalHelper : private OModalHelperBase{
     friend class OModalHelperSignal;
     friend class OModalHelperControler;
@@ -82,15 +83,34 @@ public:
     void cancel();
     void cancel( TransactionID );
 
-    void connect( QObject* rec, const char* slot );
+    void connectDone( QObject* rec, const char* slot );
+    void connectAccepted( QObject* rec, const char* slot );
+    void connectRejected( QObject* rec, const char* slot );
 
-    TransactionID handle( const Record& rec = Record() );
+    TransactionID handle( Id id, const Record& rec = Record() );
 
     void edited( TransactionID, int what, const QString& data );
 
     Record record( TransactionID )const;
     RecordList done()const;
 private:
+    virtual void done( TransactionID, QDialog* );
+    virtual void next( TransactionID, OModalHelperControler * );
+    virtual void prev( TransactionID, OModalHelperControler * );
+
+    Record nextRecord( TransactionID, int * )const;
+    Record prevRecord( TransactionID, int * )const;
+
+private:
+    OModalHelperDialog     *queuedDialog()const; // generate or recycle
+    OModalHelperDialog     *m_dialog;
+    OModalHelperSignal     *m_signal; // our signal
+    OModalHelperControler  *m_controler;
+    IdMap                  m_ids; // maps ids (uids) to a record
+    TransactionMap         m_transactions; // activate transactions
+    TransactionMap         m_done; // done and waiting for getting picked
+    DialogMap              m_editing; // only used for New Mode
+    enum Mode              m_mode; // the mode we're in
 };
 
 
@@ -112,19 +132,22 @@ private:
 class OModalHelperSignal : public QObject {
     Q_OBJECT
 public:
-    OModalHelperSignal();
+    OModalHelperSignal(OModalHelperBase* base,  QObject* parent);
 
 signals:
     done( int status,  TransactionID transaction );
-    accpeted( TransactionID transaction );
+    accepted( TransactionID transaction );
     rejected( TransactionID transaction );
+
+private:
+    OModalHelperBase* m_base;
 };
 
 
 class OModalHelperControler : public QObject {
     Q_OBJECT
 public:
-    OModalHelperControler( TransactionID id );
+    OModalHelperControler( OModalHelperBase* , QObject* parent);
     virtual TransactionID transactionID()const;
     void setTransactionID( TransactionID id );
     QDialog* dialog()const;
@@ -134,6 +157,164 @@ public slots:
 private:
     QDialog *m_dia;
     TransactionID m_id;
+    OModalHelperBase *m_base;
 }
 
+class OModalQueueBar;
+class OModalQueuedDialog : public QDialog {
+    Q_OBJECT
+public:
+    OModalQueuedDialog(QWidget *mainWidget);
+    ~OModalQueuedDialog();
+
+    QDialog* centerDialog()const;
+
+    void setQueueBarEnabled( bool = true );
+    void setRecord( int record, int count );
+private:
+    OModalQueueBar *m_bar;
+};
+
+
+/*
+ * Tcpp Template Implementation
+ */
+
+/**
+ * This is the simple Template c'tor. It takes the mode
+ * this helper should operate in and the parent object.
+ * This helper will be deleted when the parent gets deleted
+ * or you delete it yourself.
+ *
+ * @param mode The mode this dialog should be in
+ * @param parent The parent QObject of this helper.
+ */
+template<class Dialog, class Record, typename Id>
+OModalHelper<Dialog, Record, Id>::OModalHelper( enum Mode mode, QObject* parent ) {
+    m_mode = mode;
+    m_signal = new OModalHelperSignal( this, parent );
+    m_controler = new OModalHelperControler( this, m_signal );
+}
+
+
+/**
+ * This functions looks for your record and sees if it is
+ * handled with this helper. Note that done and edited records
+ * will not be returned. But if you edit an already edited record
+ * the done record will be used
+ *
+ * @return true if the record is currenlty edited otherwise false
+ *
+ * @param Id The id which might be handled
+ */
+template<class Dialog, class Record, typename Id>
+bool OModalHelper<Dialog, Record, Id>::handles( Id id )const {
+    if ( m_transactions.isEmpty() )
+        return false;
+
+    TransactionMap::ConstIterator it = m_transactions.begin();
+    for ( ; it != m_transactions.end(); ++it )
+        if ( it.data() == id )
+            return true;
+
+    return false;
+}
+
+/**
+ * Cancel will cancel all current operations and clear the list
+ * of done operations as well.
+ */
+template<class Dialog, class Record, typename Id>
+void OModalHelper<Dialog, Record, Id>::cancel() {
+    m_ids.clear();
+    m_done.clear();
+    m_transactions.clear();
+
+    /* we also need to remove the QDialogs */
+    /* and hide the queue dialog if present */
+    if (m_mode == New && !m_editing.isEmpty() ) {
+        for (DialogMap::Iterator it = m_editing.begin(); it != m_editing.end(); ++it )
+            delete it.key();
+        m_editing.clear();
+    }else if (m_dialog )
+        queuedDialog()->setRecord( 0, 0 );
+
+
+}
+
+
+/**
+ * This cancels editing of the record behind the Transaction Number
+ * Note that if editing is already done it will also be removed from this list
+ */
+template<class Dialog, class Record, typename Id>
+void OModalHelper::cancel( TransactionID tid ) {
+    /* wrong tid */
+    if (!m_transactions.contains( tid ) && !m_done.contains( tid) )
+        return;
+
+    if (m_mode == New )
+        /* reverse map eek */
+        for (DialogMap::Iterator it = m_editing.begin(); it != m_editing.end(); ++it )
+            if ( it.data() == tid ) {
+                it.key()->hide();
+                delete it.key();
+                it = m_editing.remove( it );
+                break;
+            }
+     else if ( m_transactions.contains( tid ) ) {
+        /* need to stop editing from the queue block */
+        /* if we're currently editing actiavte the previous */
+#if 0
+        if (tid == m_controler->transactionID() ) {
+
+        }
+#endif
+        /* now either activate the previous again or hide  */
+        if (!  m_transactions.count() -1 )
+            queuedDialog()->setRecord( 0, 0 );
+        else {
+            int pos;
+            Record rec = prevRecord( tid, &pos );
+            static_cast<Dialog*>( queuedDialog()->centerDialog() )->setRecord( rec );
+            queuedDialog()->setRecord( pos, m_transactions.count() );
+        }
+    }
+    /* now remove from the various maps */
+    m_ids.remove( m_transactions.contains( tid ) ? m_transactions[tid] : m_done[tid ]  );
+
+    m_done.remove( tid );
+    m_transactions.remove( tid );
+}
+
+/**
+ * Connect to the done Signal. SIGNAL( done(int, TransactionID ) )
+ * This signal gets emitted whenever a Record was accepted or rejected
+ *
+ * @param rec  The object where the slot belongs to
+ * @param slot The slot which should be called. See the needed parameter above
+ */
+template<class Dialog, class Record, typename Id>
+void OModalHelper<Dialog, Record, Id>::connectDone( QObject* rec, const char* slot ) {
+    QObject::connect(m_signal, SIGNAL(done(int, TransactionID) ),
+                     rec, slot );
+}
+
+/**
+ * Connect to the accepted Signal. SIGNAL( done(int, TransactionID ) )
+ * This signal gets emitted whenever a Record was accepted or rejected
+ *
+ * @param rec  The object where the slot belongs to
+ * @param slot The slot which should be called. See the needed parameter above
+ */
+template<class Dialog, class Record, typename Id>
+void OModalHelper<Dialog, Record, Id>::( QObject* rec, const char* slot ) {
+
+}
+
+
+template<class Dialog, class Record, typename Id>
+void OModalHelper<Dialog, Record, Id>::( QObject* rec, const char* slot ) {
+
+}
 #endif
