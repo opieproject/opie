@@ -8,7 +8,7 @@ pics/bounce/ball0003.png   pics/bounce/ball0013.png  pics/bounce/ball0023.png \
 pics/bounce/ball0004.png   pics/bounce/ball0014.png  pics/bounce/ball0024.png \
 pics/bounce/ball0005.png   pics/bounce/ball0015.png  pics/bounce/tiles.png \
 pics/bounce/ball0006.png   pics/bounce/ball0016.png \
-pics/bounce/ball0007.png   pics/bounce/ball0017.png \
+pics/bounce/ball0007.png   pics/bounce/ball0017.png
 Version: 0.6 
 Depends: opie-base ($QPE_VERSION)
 Priority: optional
