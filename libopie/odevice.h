@@ -1,5 +1,6 @@
 /*  This file is part of the OPIE libraries
     Copyright (C) 2002 Robert Griebl (sandman@handhelds.org)
+    Copyright (C) 2003 Holger 'zecke' Freyther (zecke@handhelds.org)
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -213,7 +214,7 @@ public:
 	 * by the device manufacturer and will be from most preferred button to least preffered
 	 * button.  Note that this list only contains "user mappable" buttons.
 	 */
-	const QValueList<ODeviceButton> &buttons ( );
+       const QValueList<ODeviceButton> &buttons ( ) /* ### make const */;
 
 	/**
 	 * Returns the DeviceButton for the \a keyCode.  If \a keyCode is not found, it
