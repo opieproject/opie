@@ -39,7 +39,7 @@
 #define SHARP_DEV_IOCTL_COMMAND_START 0x5680
 
 /* --- for SHARP_BUZZER device --- */
-#define	SHARP_BUZZER_IOCTL_START (SHARP_DEV_IOCTL_COMMAND_START)
+#define SHARP_BUZZER_IOCTL_START (SHARP_DEV_IOCTL_COMMAND_START)
 #define SHARP_BUZZER_MAKESOUND   (SHARP_BUZZER_IOCTL_START)
 #define SHARP_BUZZER_SETVOLUME   (SHARP_BUZZER_IOCTL_START+1)
 #define SHARP_BUZZER_GETVOLUME   (SHARP_BUZZER_IOCTL_START+2)
@@ -70,6 +70,9 @@
 }
 
 #define CUSTOM_SOUND_ALARM CUSTOM_BUZZER( SHARP_BUZ_SCHEDULE_ALARM )
+#define CUSTOM_SOUND_KEYCLICK CUSTOM_BUZZER( SHARP_BUZ_KEYSOUND )
+#define CUSTOM_SOUND_TOUCH CUSTOM_BUZZER( SHARP_BUZ_TOUCHSOUND )
+ 
 
 #include <sys/ioctl.h>
 #include <asm/sharp_char.h>
@@ -97,14 +100,14 @@ static void sig_handler(int sig) \
 { \
     switch (sig) { \
     case SIGHUP: \
-	memstate = VeryLow; \
-	break; \
+  memstate = VeryLow; \
+  break; \
     case SIGUSR1: \
-	memstate = Normal; \
-	break; \
+  memstate = Normal; \
+  break; \
     case SIGUSR2: \
-	memstate = Low; \
-	break; \
+  memstate = Low; \
+  break; \
     } \
 } \
 static void initMemalerter() \
@@ -114,13 +117,13 @@ static void initMemalerter() \
     sa.sa_handler = sig_handler; \
     sa.sa_flags = SA_RESTART; \
     if (sigaction(SIGHUP, &sa, NULL) < 0) { \
-	return; \
+  return; \
     } \
     if (sigaction(SIGUSR1, &sa, NULL) < 0) { \
-	return; \
+  return; \
     } \
     if (sigaction(SIGUSR2, &sa, NULL) < 0) { \
-	return; \
+  return; \
     } \
     FILE *fo = fopen("/proc/sys/vm/freepg_signal_proc", "w"); \
      \
@@ -136,12 +139,12 @@ static void initMemalerter() \
     sharp_kbdctl_modifstat  st; \
     int dev = ::open("/dev/sharp_kbdctl", O_RDWR); \
     if( dev >= 0 ) { \
-	memset(&st, 0, sizeof(st)); \
-	st.which = 3; \
+  memset(&st, 0, sizeof(st)); \
+  st.which = 3; \
                 int ret = ioctl(dev, SHARP_KBDCTL_GETMODIFSTAT, (char*)&st); \
-	if( !ret ) \
-	    numLock = (bool)st.stat; \
-	::close(dev); \
+  if( !ret ) \
+      numLock = (bool)st.stat; \
+  ::close(dev); \
     } \
     return numLock; \
 }
