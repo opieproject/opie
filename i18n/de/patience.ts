@@ -3,59 +3,59 @@
     <name>CanvasCardWindow</name>
     <message>
         <source>Patience</source>
-        <translation type="unfinished"></translation>
+        <translation>Patience</translation>
     </message>
     <message>
         <source>Freecell</source>
-        <translation type="unfinished"></translation>
+        <translation>Freecell</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spiel</translation>
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hintergrund wechseln</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch zur &amp;Position springen</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Einstellungen</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Über</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hilfe</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiel</translation>
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrund wechseln</translation>
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch zur Position springen</translation>
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation type="unfinished"></translation>
+        <translation>eine Karte ziehen</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation type="unfinished"></translation>
+        <translation>drei Karten ziehen</translation>
     </message>
 </context>
 </TS>

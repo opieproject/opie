@@ -3,77 +3,77 @@
     <name>NewTaskDialog</name>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgaben</translation>
     </message>
 </context>
 <context>
     <name>NewTaskDialogBase</name>
     <message>
         <source>New Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Aufgabe</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorität:</translation>
     </message>
     <message>
         <source>1 - Very High</source>
-        <translation type="unfinished"></translation>
+        <translation>1 - Sehr Hoch</translation>
     </message>
     <message>
         <source>2 - High</source>
-        <translation type="unfinished"></translation>
+        <translation>2 - Hoch</translation>
     </message>
     <message>
         <source>3 - Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>3 - Normal</translation>
     </message>
     <message>
         <source>4 - Low</source>
-        <translation type="unfinished"></translation>
+        <translation>4 - Niedrig</translation>
     </message>
     <message>
         <source>5 - Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>5 - Sehr niedrig</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie:</translation>
     </message>
     <message>
         <source>&amp;Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Erledigt</translation>
     </message>
     <message>
         <source>D&amp;ue</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fällig am</translation>
     </message>
     <message>
         <source>1 Jan 2001</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Januar 2001</translation>
     </message>
 </context>
 <context>
     <name>TodoTable</name>
     <message>
         <source>C.</source>
-        <translation type="unfinished"></translation>
+        <translation>C.</translation>
     </message>
     <message>
         <source>Prior.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prior.</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
 </context>
 <context>
@@ -98,27 +98,27 @@ before you enter any data</source>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editieren</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Senden</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchen</translation>
     </message>
     <message>
         <source>Completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Erledigte Aufgaben</translation>
     </message>
     <message>
         <source>Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgaben</translation>
     </message>
     <message>
         <source>View</source>
@@ -126,23 +126,23 @@ before you enter any data</source>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kann die Daten nicht editieren, synchronisiere gerade</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabe editieren</translation>
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Kategorien</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Speichplatz mehr</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -151,7 +151,11 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>&apos;Aufgabe&apos; war nicht in der 
+Lage, Ihre Änderungen zu 
+speichern. Bitte schaffen 
+Sie freien Speicherplatz. 
+Trozdem beenden?</translation>
     </message>
 </context>
 </TS>
