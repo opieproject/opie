@@ -15,16 +15,19 @@ namespace OpieTooth {
 
     // name, and then mac and then servicetype
     BTListItem::BTListItem( QListView * parent,  QString name , QString mac, QString type   )
-        : QListViewItem( parent, name, mac, type  ){
+        : QListViewItem( parent, name ){
+        setText(4, mac);
+        setText(5, type);
 
     }
 
     BTListItem::BTListItem( QListViewItem * parent , QString name, QString mac, QString type   )
-        : QListViewItem( parent, name, mac, type  ){
-
+        : QListViewItem( parent, name ){
+         setText(4, mac);
+         setText(5, type);
     }
 
     BTListItem::~BTListItem() {
     }
 
-}
+};

@@ -61,8 +61,9 @@ namespace OpieTooth {
         connect( ListView2, SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int ) ),
                  this,  SLOT(startServiceActionHold( QListViewItem *, const QPoint &, int) ) );
         connect( localDevice , SIGNAL( foundServices( const QString& , Services::ValueList ) ),
-                this, SLOT( addServicesToDevice( const QString& , Services::ValueList ) ) );
-
+                 this, SLOT( addServicesToDevice( const QString& , Services::ValueList ) ) );
+        //   connect( localDevice, SIGNAL( available( const QString& device, bool connected ) ),
+        //        this, SLOT() );
 
         //Load all icons needed
 
@@ -398,6 +399,9 @@ namespace OpieTooth {
 
         return true;
     }
+
+
+
 
 
     /**

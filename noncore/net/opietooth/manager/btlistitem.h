@@ -6,10 +6,8 @@
 namespace OpieTooth {
 
     class BTListItem : public QListViewItem {
-        Q_OBJECT
 
     public:
-
         BTListItem( QListView * parent  );
         BTListItem( QListViewItem * parent );
 
@@ -18,7 +16,7 @@ namespace OpieTooth {
         BTListItem( QListViewItem * parent , QString, QString , QString );
         ~BTListItem();
 
-    }
-}
+    };
+};
 
 #endif

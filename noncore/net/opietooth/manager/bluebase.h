@@ -27,8 +27,6 @@ class QCheckBox;
 
 namespace OpieTooth {
 
-
-
     class BlueBase : public BluetoothBase {
         Q_OBJECT
 
