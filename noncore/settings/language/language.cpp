@@ -93,21 +93,14 @@ LanguageSettings::~LanguageSettings()
 
 void LanguageSettings::accept()
 {
-	switch( QMessageBox::warning( this, "Language",
-		"Attention, all windows will be closed\n"
-		"by changing the language\n"
-		"without saving the Data.\n\n"
-		"Go on?",
-		"Ok", "Cancel", 0,
-		 0, 1 ))
-	{
-	 case 0: // OK
-	 	applyLanguage();
-	        QDialog::accept();
-		break;
-	 case 1: // Abbruch
-		break;
-	}
+    Config c( "qpe" );
+    c.setGroup( "Startup" );
+    if ( ( c.readNumEntry( "FirstUse", 42 ) == 0 ) &&
+       ( QMessageBox::warning( this, "Language", "Attention, all windows will be closed\nby changing the language\n"
+                                                 "without saving the Data.\n\nGo on?", "Ok", "Cancel", 0, 0, 1 ) ) )
+                                                 return;
+    applyLanguage();
+    QDialog::accept();
 }
 
 void LanguageSettings::applyLanguage()
