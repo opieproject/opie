@@ -174,7 +174,7 @@ static const char *commonCmds[] =
     NULL
 };
 
-static void konsoleInit(const char* shell, QStrList& temp) {
+static void konsoleInit(const char** shell) {
     if(setuid(getuid()) !=0) qDebug("setuid failed");
     if(setgid(getgid()) != 0) qDebug("setgid failed"); // drop privileges
 
@@ -187,22 +187,25 @@ static void konsoleInit(const char* shell, QStrList& temp) {
     QPEApplication::grabKeyboard(); // for CTRL and ALT
 #endif
 
-    shell = getenv("SHELL");
+    *shell = getenv("SHELL");
+    qWarning("SHell initially is %s", *shell );
 
     if (shell == NULL || *shell == '\0') {
         struct passwd *ent = 0;
         uid_t me = getuid();
-        shell = "/bin/sh";
+        *shell = "/bin/sh";
 
         while ( (ent = getpwent()) != 0 ) {
             if (ent->pw_uid == me) {
                 if (ent->pw_shell != "")
-                    shell = ent->pw_shell;
+                    *shell = ent->pw_shell;
                 break;
             }
         }
         endpwent();
     }
+
+    qWarning("SHELL now is %s", *shell );
 
     if( putenv((char*)"COLORTERM=") !=0)
         qDebug("putenv failed"); // to trigger mc's color detection
@@ -215,7 +218,8 @@ Konsole::Konsole(QWidget* parent, const char* name, WFlags fl) :
 
     setCaption( tr("Terminal") );
 
-    konsoleInit( shell, tmp );
+    konsoleInit( &shell);
+    qWarning("Using shell %s", shell);
     init(shell,tmp);
 }
 
