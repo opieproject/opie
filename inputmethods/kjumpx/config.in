@@ -1,4 +1,4 @@
   config KJUMPX
-    boolean "Kjumpx"
+    boolean "opie-kjumpx (korean keyboard optimized for single finger/stylus input)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config MULTIKEY
-    boolean "Multikey"
+    boolean "opie-multikey (Keyboard for inputing multiple languages)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
