@@ -35,7 +35,9 @@ class DesktopPowerAlerter;
 
 class OpieScreenSaver;
 namespace Opie {
+namespace Core {
     class ODeviceButton;
+}
 }
 
 struct QCopKeyRegister {
@@ -73,13 +75,13 @@ signals:
     void symbol();
     void numLockStateToggle();
     void capsLockStateToggle();
-    void activate(const Opie::ODeviceButton*,bool);
+    void activate(const Opie::Core::ODeviceButton*,bool);
 
 
 private:
     bool keyRegistered( int key );
     int held_tid;
-    const Opie::ODeviceButton* heldButton;
+    const Opie::Core::ODeviceButton* heldButton;
     KeyRegisterList m_keys;
 };
 
@@ -94,7 +96,7 @@ public:
     static bool allowRestart;
     static bool screenLocked();
     static void login(bool at_poweron);
-    
+
     static bool isStarting();
 
     static void switchLCD ( bool on ); // only for togglePower in Desktop
@@ -113,7 +115,7 @@ signals:
     void numLockStateToggle();
     void capsLockStateToggle();
     void prepareForRestart();
-    void activate(const Opie::ODeviceButton*,bool);
+    void activate(const Opie::Core::ODeviceButton*,bool);
 
 public slots:
     virtual void systemMessage( const QCString& msg, const QByteArray& );

@@ -27,7 +27,7 @@
 #include <qpixmap.h>
 #include <qpainter.h>
 
-class OWait;
+namespace Opie {namespace Ui {class OWait;}}
 class Wait : public QWidget
 {
 public:
@@ -38,7 +38,7 @@ public:
 private:
     QPixmap pm;
     bool waiting;
-    OWait* m_centralWait;
+    Opie::Ui::OWait* m_centralWait;
 };
 
 

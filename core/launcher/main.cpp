@@ -62,7 +62,7 @@
 #include <qmessagebox.h>
 #include <opie2/odevice.h>
 
-using namespace Opie;
+using namespace Opie::Core;
 
 
 static void cleanup()

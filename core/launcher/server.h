@@ -38,7 +38,9 @@ class SyncDialog;
 class DocumentList;
 class ServerInterface;
 namespace Opie {
+namespace Core {
     class ODeviceButton;
+}
 }
 
 class Server : public QWidget {
@@ -60,7 +62,7 @@ public slots:
     void pokeTimeMonitors();
 
 private slots:
-    void activate(const Opie::ODeviceButton*,bool);
+    void activate(const Opie::Core::ODeviceButton*,bool);
     void syncConnectionClosed( const QHostAddress & );
     void applicationLaunched(int pid, const QString &app);
     void applicationTerminated(int pid, const QString &app);

@@ -59,6 +59,7 @@
 
 const int block_size = 51200;
 
+using namespace Opie::Core;
 TransferServer::TransferServer( Q_UINT16 port, QObject *parent,
         const char* name)
     : QServerSocket( port, 1, parent, name )

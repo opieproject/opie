@@ -55,6 +55,7 @@ static int loggedin=0;
 
 using namespace Opie;
 
+using namespace Opie::Core;
 QCopKeyRegister::QCopKeyRegister()
     : m_keyCode( 0 ) {
 }
@@ -197,7 +198,7 @@ bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepe
 
 
         // First check to see if DeviceButtonManager knows something about this button:
-        const Opie::ODeviceButton* button = Opie::ODevice::inst()->buttonForKeycode(keycode);
+        const ODeviceButton* button = ODevice::inst()->buttonForKeycode(keycode);
         if (button && !autoRepeat) {
             if ( held_tid ) {
                 killTimer(held_tid);
@@ -331,8 +332,8 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     connect( kf, SIGNAL(symbol()), this, SIGNAL(symbol()));
     connect( kf, SIGNAL(numLockStateToggle()), this,SIGNAL(numLockStateToggle()));
     connect( kf, SIGNAL(capsLockStateToggle()), this,SIGNAL(capsLockStateToggle()));
-    connect( kf, SIGNAL(activate(const Opie::ODeviceButton*,bool)),
-	    this,SIGNAL(activate(const Opie::ODeviceButton*,bool)));
+    connect( kf, SIGNAL(activate(const Opie::Core::ODeviceButton*,bool)),
+             this,SIGNAL(activate(const Opie::Core::ODeviceButton*,bool)));
 
 
     connect( kf, SIGNAL(backlight()), this, SLOT(toggleLight()) );
@@ -348,7 +349,7 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     grabKeyboard();
 
     /* make sure the event filter is installed */
-    const Opie::ODeviceButton* but = Opie::ODevice::inst()->buttonForKeycode( -1 );
+    const ODeviceButton* but = ODevice::inst()->buttonForKeycode( -1 );
 }
 
 

@@ -29,6 +29,7 @@
 Wait *lastWaitObject = NULL;
 
 
+using namespace Opie::Ui;
 Wait::Wait( QWidget *parent ) : QWidget( parent ),
 	pm( Resource::loadPixmap( "wait" ) ), waiting( FALSE )
 {

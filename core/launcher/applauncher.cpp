@@ -58,6 +58,7 @@
 #include "applauncher.h"
 #include "documentlist.h"
 
+using namespace Opie::Core;
 const int AppLauncher::RAISE_TIMEOUT_MS = 5000;
 
 //---------------------------------------------------------------------------

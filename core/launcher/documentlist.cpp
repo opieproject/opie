@@ -47,6 +47,7 @@
 #include <qpixmap.h>
 
 
+using namespace Opie::Core;
 AppLnkSet *DocumentList::appLnkSet = 0;
 
 static const int MAX_SEARCH_DEPTH = 10;

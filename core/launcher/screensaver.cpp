@@ -7,7 +7,7 @@
 #include <opie2/odevice.h>
 
 
-using namespace Opie;
+using namespace Opie::Core;
 
 
 
@@ -157,7 +157,7 @@ void OpieScreenSaver::setIntervals ( int dim, int lightoff, int suspend )
 		m_enable_suspend = ( suspend > 0 );
 		m_onlylcdoff = config.readBoolEntry ( "LcdOffOnly", false );
 	}
-	
+
 	//qDebug("screen saver intervals: %d %d %d", dim, lightoff, suspend);
 
 	v [ 0 ] = QMAX( 1000 * dim, 100 );
@@ -215,14 +215,14 @@ void OpieScreenSaver::setBacklight ( int bright )
 	killTimers ( );
 	if (( bright < 0 ) && m_use_light_sensor ) {
 		QStringList sl = config. readListEntry ( "LightSensorData", ';' );
-		
+
 		m_sensordata [LS_SensorMin] = 40;
 		m_sensordata [LS_SensorMax] = 215;
 		m_sensordata [LS_LightMin] = 1;
 		m_sensordata [LS_LightMax] = 255;
 		m_sensordata [LS_Steps] = 12;
-		m_sensordata [LS_Interval] = 2000;		
-		
+		m_sensordata [LS_Interval] = 2000;
+
 		for ( uint i = 0; i < LS_Count; i++ ) {
 			if ( i < sl. count ( ))
 				m_sensordata [i] = sl [i]. toInt ( );
@@ -279,7 +279,7 @@ void OpieScreenSaver::setBacklightInternal ( int bright )
 void OpieScreenSaver::timerEvent ( QTimerEvent * )
 {
 	int s = ODevice::inst ( )-> readLightSensor ( ) * 256 / ODevice::inst ( )-> lightSensorResolution ( );
-	
+
 	if ( s < m_sensordata [LS_SensorMin] )
 		m_backlight_sensor = m_sensordata [LS_LightMax];
 	else if ( s >= m_sensordata [LS_SensorMax] )
@@ -287,9 +287,9 @@ void OpieScreenSaver::timerEvent ( QTimerEvent * )
 	else {
 		int dx = m_sensordata [LS_SensorMax] - m_sensordata [LS_SensorMin];
 		int dy = m_sensordata [LS_LightMax] - m_sensordata [LS_LightMin];
-		
+
 		int stepno = ( s - m_sensordata [LS_SensorMin] ) * m_sensordata [LS_Steps] / dx; // dx is never 0
-		
+
 		m_backlight_sensor = m_sensordata [LS_LightMax] - dy * stepno / ( m_sensordata [LS_Steps] - 1 );
 	}
 
@@ -318,11 +318,11 @@ void OpieScreenSaver::setDisplayState ( bool on )
 void OpieScreenSaver::powerStatusChanged ( PowerStatus ps )
 {
 	bool newonac = ( ps. acStatus ( ) == PowerStatus::Online );
-	
+
 	if ( newonac != m_on_ac ) {
 		m_on_ac = newonac;
 		setInterval ( -1 );
 		setBacklight ( -1 );
-		restore ( );		
+		restore ( );
 	}
 }

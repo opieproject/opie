@@ -63,8 +63,8 @@
 
 extern QRect qt_maxWindowRect;
 
-using namespace Opie;
 
+using namespace Opie::Core;
 static QWidget *calibrate(bool)
 {
 #ifdef Q_WS_QWS
@@ -159,8 +159,8 @@ Server::Server() :
     (void) new IrServer( this );
 
     packageHandler = new PackageHandler( this );
-    connect(qApp, SIGNAL(activate(const Opie::ODeviceButton*,bool)),
-            this,SLOT(activate(const Opie::ODeviceButton*,bool)));
+    connect(qApp, SIGNAL(activate(const Opie::Core::ODeviceButton*,bool)),
+            this,SLOT(activate(const Opie::Core::ODeviceButton*,bool)));
 
     setGeometry( -10, -10, 9, 9 );
 
@@ -221,10 +221,10 @@ static bool hasVisibleWindow(const QString& clientname, bool partial)
     return FALSE;
 }
 
-void Server::activate(const Opie::ODeviceButton* button, bool held)
+void Server::activate(const ODeviceButton* button, bool held)
 {
     Global::terminateBuiltin("calibrate"); // No tr
-    Opie::OQCopMessage om;
+    OQCopMessage om;
     if ( held ) {
 	om = button->heldAction();
     } else {
