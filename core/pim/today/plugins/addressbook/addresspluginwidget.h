@@ -52,6 +52,7 @@ private:
     int m_maxLinesTask;
     int m_maxCharClip;
     int m_daysLookAhead;
+    QString m_entryColor;
 };
 
 #endif

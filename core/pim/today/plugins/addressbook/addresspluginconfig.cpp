@@ -61,9 +61,18 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     SpinDaysClip->setMaxValue( 200 );
     QWhatsThis::add( SpinDaysClip , tr( "How many days we should search forward" ) );
 
+    QHBox *box4 = new QHBox( this );
+
+    QLabel* colorLabel = new QLabel( box4, "" );
+    colorLabel->setText( tr( "Set Entry Color \n(restart Today \nafter change!)" ) );
+
+    entryColor = new OColorButton( box4, red, "entryColor" );
+    QWhatsThis::add( entryColor , tr( "What color should be used for shown birthdays/anniversaries?" ) );
+
     layout->addWidget( box1 );
     layout->addWidget( box2 );
     layout->addWidget( box3 );
+    layout->addWidget( box4 );
 
     readConfig();
 }
@@ -77,6 +86,7 @@ void AddressBookPluginConfig::readConfig() {
     SpinBoxClip->setValue( m_maxCharClip );
     m_daysLookAhead = cfg.readNumEntry( "dayslookahead", 14 );
     SpinDaysClip->setValue( m_daysLookAhead );
+    m_entryColor = cfg.readEntry( "entrycolor", Qt::red.name() );
 }
 
 
@@ -89,6 +99,8 @@ void AddressBookPluginConfig::writeConfig() {
     cfg.writeEntry( "maxcharclip",  m_maxCharClip );
     m_daysLookAhead = SpinDaysClip->value();
     cfg.writeEntry( "dayslookahead",  m_daysLookAhead );
+    m_entryColor = entryColor->color().name();
+    cfg.writeEntry( "entrycolor", m_entryColor );
     cfg.write();
 }
 

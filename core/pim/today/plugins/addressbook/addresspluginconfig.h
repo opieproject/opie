@@ -23,6 +23,7 @@
 #include <qspinbox.h>
 
 #include <opie/todayconfigwidget.h>
+#include <opie/ocolorbutton.h>
 
 class AddressBookPluginConfig : public TodayConfigWidget {
 
@@ -43,6 +44,7 @@ private:
     QSpinBox* SpinBox2;
     QSpinBox* SpinBoxClip;
     QSpinBox* SpinDaysClip;
+    OColorButton* entryColor;
 
     // how many lines should be showed in the AddressBook section
     int m_max_lines_task;
@@ -50,7 +52,8 @@ private:
     int m_maxCharClip;
     // How many days look ahead
     int m_daysLookAhead;
-
+    // Entry Color
+    QString m_entryColor;
 };
 
 

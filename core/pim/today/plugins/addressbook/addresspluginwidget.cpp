@@ -71,6 +71,7 @@ void AddressBookPluginWidget::readConfig() {
     m_maxLinesTask =  cfg.readNumEntry( "maxlinestask", 5 );
     m_maxCharClip =   cfg.readNumEntry( "maxcharclip", 38 );
     m_daysLookAhead = cfg.readNumEntry( "dayslookahead", 14 );
+    m_entryColor = cfg.readEntry("entrycolor", Qt::red.name() );
 }
 
 
@@ -115,7 +116,7 @@ void AddressBookPluginWidget::getAddress() {
 					if ( QDate::currentDate().daysTo(destdate) < 0 )
 						destdate.setYMD( QDate::currentDate().year()+1, destdate.month(), destdate.day() );
 
-					output += "<font color=#e00000><b>-" + (*m_it).fullName() 
+					output += "<font color=" + m_entryColor + "><b>-" + (*m_it).fullName() 
 						+ " (" 
 						+ QString::number(QDate::currentDate().daysTo(destdate)) 
 						+ " Days) </b></font><br>";
