@@ -32,6 +32,7 @@ private slots:
     void getNtpOutput(OProcess *proc, char *buffer, int buflen);
     void ntpFinished(OProcess*);
     void correctClock();
+	  void preditctTime();
 };
 
 #endif

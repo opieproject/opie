@@ -31,6 +31,7 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   connect ( ntpProcess, SIGNAL(processExited(OProcess*)),
   					this, SLOT(ntpFinished(OProcess*)));
   connect(runNtp, SIGNAL(clicked()), this, SLOT(slotRunNtp()));
+  connect(PushButtonPredict, SIGNAL(clicked()), this, SLOT(preditctTime()));
  	_nextCorrection = new QTimer( this );
     connect( _nextCorrection, SIGNAL(timeout()), SLOT(correctClock()) );
   slotRunNtp();
@@ -80,7 +81,7 @@ void  Ntp::ntpFinished(OProcess*)
   cfg.writeEntry("time", time);
  	
   float timeShift = getTimeShift();
-  if (timeShift = 0.0) return;
+  if (timeShift == 0.0) return;
  	int secsSinceLast = time - lastLookup;
   TextLabelNewTime->setText(QDateTime::currentDateTime().toString());
   if ( lastLookup > 0 && secsSinceLast > 60*_minLookupDiff)
@@ -90,7 +91,7 @@ void  Ntp::ntpFinished(OProcess*)
 	  cfg.setGroup("lookup_"+QString::number(lookupCount));
     _shiftPerSec =  timeShift / secsSinceLast;
     float nextCorr = _maxOffset / _shiftPerSec;
-   	qDebug("secs since last lookup %i", secsSinceLast);qDebug("timeshift since last lookup %f", timeShift);qDebug("timeshift since per sec %f", _shiftPerSec);qDebug("in %f secs the time will be shifted by %i", nextCorr,_maxOffset);
+   	qDebug("secs since last lookup %i", secsSinceLast);qDebug("timeshift since last lookup %f", timeShift);qDebug("timeshift since per sec %f", _shiftPerSec);
 		cfg.writeEntry("secsSinceLast",secsSinceLast);
 		cfg.writeEntry("timeShift",QString::number(timeShift));
   }
@@ -137,10 +138,43 @@ void Ntp::readLookups()
 	Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
   int lookupCount = cfg.readNumEntry("count",-1);
+  float last, shift, shiftPerSec;
+  qDebug("lookupCount = %i",lookupCount);
+  TableLookups->setNumCols( 3 );
+  TableLookups->setNumRows( lookupCount);
+  TableLookups->horizontalHeader()->setLabel(2,"secsSinceLast");
+  TableLookups->horizontalHeader()->setLabel(1,"timeShift");
+  TableLookups->horizontalHeader()->setLabel(0,"shift/s");
+  int cw = TableLookups->width()/4;
+  qDebug("column width %i",cw);
+  TableLookups->setColumnWidth( 0, cw );
+  TableLookups->setColumnWidth( 1, cw );
+  TableLookups->setColumnWidth( 2, cw );
   for (int i=0; i < lookupCount; i++)
   {
 	  cfg.setGroup("lookup_"+QString::number(i));
-	  TableLookups->setText( 1,i,cfg.readEntry("secsSinceLast",0));
-		TableLookups->setText( 2,i,cfg.readEntry("timeShift",0));
+   	last = cfg.readEntry("secsSinceLast",0).toFloat();
+    shift = QString(cfg.readEntry("timeShift",0)).toFloat();
+   	qDebug("%i last %f",i,last);
+   	qDebug("%i shift %f",i,shift);
+    shiftPerSec =  shift / last;
+    _shiftPerSec += shiftPerSec;
+		TableLookups->setText( i,0,QString::number(shiftPerSec));
+		TableLookups->setText( i,1,QString::number(shift));
+	  TableLookups->setText( i,2,QString::number(last));
   }
+  _shiftPerSec /= lookupCount+1;
+  TextLabelShift->setText(QString::number(_shiftPerSec));
+}
+
+void Ntp::preditctTime()
+{
+	qDebug("current time: %s",QDateTime::currentDateTime().toString().latin1());
+	Config cfg("ntp",Config::User);
+  cfg.setGroup("lookups");
+ 	int lastTime = cfg.readNumEntry("time",0);
+  int now = TimeConversion::toUTC( QDateTime::currentDateTime() );
+  int corr = int((now - lastTime) * _shiftPerSec);
+	outPut->append( "time will be shifted by "+QString::number(corr)+ "secs");
+ 	TextLabelPredTime->setText(QDateTime::currentDateTime().addSecs(corr).toString());
 }
