@@ -59,6 +59,7 @@ private:
     QList<InstallData> removeList;
     QList<InstallData> updateList;
     int flags;
+    int infoLevel;
     Ipkg *pIpkg;
     bool upgradePackages;
     

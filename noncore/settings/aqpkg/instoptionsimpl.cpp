@@ -20,14 +20,16 @@
 #endif
 
 #include <qcheckbox.h>
+#include <qcombobox.h>
 #include <qgroupbox.h>
+#include <qlabel.h>
 #include <qlayout.h>
 
 #include "global.h"
 #include "instoptionsimpl.h"
 #include "ipkg.h"
 
-InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, QWidget * parent, const char* name, bool modal, WFlags fl )
+InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, int verb, QWidget * parent, const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
     setCaption( tr( "Options" ) );
@@ -55,8 +57,18 @@ InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, QWidget * parent, const
     forceOverwrite = new QCheckBox( tr( "Force Overwrite" ), grpbox );
     grplayout->addWidget( forceOverwrite );
 
-    verboseWget = new QCheckBox( tr( "Verbose WGet" ), grpbox );
-    grplayout->addWidget( verboseWget );
+    QLabel *l = new QLabel( tr( "Information Level" ), grpbox );
+    grplayout->addWidget( l );
+    
+    verboseIpkg = new QComboBox( grpbox );
+    verboseIpkg->insertItem( tr( "Errors only" ) );
+    verboseIpkg->insertItem( tr( "Normal messages" ) );
+    verboseIpkg->insertItem( tr( "Informative messages" ) );
+    verboseIpkg->insertItem( tr( "Troubleshooting output" ) );
+    verboseIpkg->setCurrentItem( verb );
+    grplayout->addWidget( verboseIpkg );
+    
+    grplayout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
     
     if ( flags & FORCE_DEPENDS )
     	forceDepends->setChecked( true );
@@ -66,8 +78,8 @@ InstallOptionsDlgImpl::InstallOptionsDlgImpl( int flags, QWidget * parent, const
     	forceRemove->setChecked( true );
     if ( flags & FORCE_OVERWRITE )
     	forceOverwrite->setChecked( true );
-    if ( flags & VERBOSE_WGET )
-    	verboseWget->setChecked( true );
+//    if ( flags & VERBOSE_WGET )
+//    	verboseWget->setChecked( true );
 //    if ( flags & MAKE_LINKS )
 //    	makeLinks->setChecked( true );
 
@@ -96,4 +108,9 @@ int InstallOptionsDlgImpl :: getFlags()
         flags |= VERBOSE_WGET;
 
     return flags;
+}
+
+int InstallOptionsDlgImpl :: getInfoLevel()
+{
+    return verboseIpkg->currentItem();
 }

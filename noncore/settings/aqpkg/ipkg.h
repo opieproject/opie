@@ -49,7 +49,7 @@ public:
     void setPackage( const char *pkg )              { package = pkg; }
     void setDestination( const char *dest )         { destination = dest; }
     void setDestinationDir( const char *dir )       { destDir = dir; }
-    void setFlags( int fl )                         { flags = fl; }
+    void setFlags( int fl, int il )                 { flags = fl; infoLevel = il; }
     void setRuntimeDirectory( const char *dir )     { runtimeDir = dir; }
 
 signals:
@@ -73,6 +73,7 @@ private:
     QString runtimeDir;
     OProcess *proc;
     int flags;
+    int infoLevel;
     bool finished;
 
     QList<QString> *dependantPackages;

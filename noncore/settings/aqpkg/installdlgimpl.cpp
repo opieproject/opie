@@ -16,9 +16,12 @@
  ***************************************************************************/
 
 #include <stdio.h>
+
+#include <opie/ofiledialog.h>
  
 #ifdef QWS
 #include <qpe/config.h>
+#include <qpe/fileselector.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/storage.h>
@@ -27,6 +30,7 @@
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qdialog.h>
+#include <qfileinfo.h>
 #include <qgroupbox.h>
 #include <qmultilineedit.h>
 #include <qlabel.h>
@@ -63,6 +67,7 @@ InstallDlgImpl::InstallDlgImpl( QList<InstallData> &packageList, DataManager *da
 
     // Grab flags - Turn MAKE_LINKS on by default (if no flags found)
     flags = cfg.readNumEntry( "installFlags", 0 );
+    infoLevel = cfg.readNumEntry( "infoLevel", 1 );
 #else
 	flags = 0;
 #endif
@@ -190,17 +195,45 @@ void InstallDlgImpl :: init( bool displayextrainfo )
 
 void InstallDlgImpl :: optionsSelected()
 {
-    InstallOptionsDlgImpl opt( flags, this, "Option", true );
-    opt.exec();
-
-    // set options selected from dialog
-    flags = opt.getFlags();
+    if ( btnOptions->text() == tr( "Options" ) )
+    {
+        InstallOptionsDlgImpl opt( flags, infoLevel, this, "Option", true );
+        if ( opt.exec() == QDialog::Accepted )
+        {
+            // set options selected from dialog
+            flags = opt.getFlags();
+            infoLevel = opt.getInfoLevel();
 
 #ifdef QWS
-    Config cfg( "aqpkg" );
-    cfg.setGroup( "settings" );
-    cfg.writeEntry( "installFlags", flags );
+            Config cfg( "aqpkg" );
+            cfg.setGroup( "settings" );
+            cfg.writeEntry( "installFlags", flags );
+            cfg.writeEntry( "infoLevel", infoLevel );
 #endif
+        }
+    }
+    else // Save output
+    {
+        QMap<QString, QStringList> map;
+        map.insert( tr( "All" ), QStringList() );
+        QStringList text;
+        text << "text/*";
+        map.insert(tr( "Text" ), text );
+        text << "*";
+        map.insert( tr( "All" ), text );
+        
+        QString filename = OFileDialog::getSaveFileName( 2, "/", "ipkg-output", map );
+        if( !filename.isEmpty() )
+        {
+            QString currentFileName = QFileInfo( filename ).fileName();
+            DocLnk doc;
+            doc.setType( "text/plain" );
+            doc.setFile( filename );
+            doc.setName( currentFileName );
+            FileManager fm;
+            fm.saveFile( doc, output->text() );
+        }
+    }
 }
 
 void InstallDlgImpl :: installSelected()
@@ -272,14 +305,14 @@ void InstallDlgImpl :: installSelected()
             if ( idata->destination->linkToRoot() )
                 tmpFlags |= MAKE_LINKS;
             
-            pIpkg->setFlags( tmpFlags );
+            pIpkg->setFlags( tmpFlags, infoLevel );
             pIpkg->runIpkg();
         }
 
         pIpkg->setOption( "install" );
         pIpkg->setDestination( dest );
         pIpkg->setDestinationDir( destDir );
-        pIpkg->setFlags( instFlags );
+        pIpkg->setFlags( instFlags, infoLevel );
         QListIterator<InstallData> it2( installList );
         for ( ; it2.current(); ++it2 )
         {
@@ -303,7 +336,7 @@ void InstallDlgImpl :: installSelected()
             int tmpFlags = flags;
             if ( idata->destination->linkToRoot() && idata->recreateLinks )
                 tmpFlags |= MAKE_LINKS;
-            pIpkg->setFlags( tmpFlags );
+            pIpkg->setFlags( tmpFlags, infoLevel );
             pIpkg->runIpkg();
         }
 
@@ -315,6 +348,9 @@ void InstallDlgImpl :: installSelected()
 //    btnInstall->setEnabled( true );
     btnInstall->setText( tr( "Close" ) );
     btnInstall->setIconSet( Resource::loadPixmap( "enter" ) );
+    
+    btnOptions->setText( tr( "Save output" ) );
+    btnOptions->setIconSet( Resource::loadPixmap( "save" ) );
 
     if ( destination && destination->currentText() != 0 && destination->currentText() != "" )
         displayAvailableSpace( destination->currentText() );

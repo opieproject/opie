@@ -69,7 +69,7 @@ bool Ipkg :: runIpkg( )
         commands << runtimeDir;
         commands << ";";
     }
-    commands << "ipkg" << "-force-defaults";
+    commands << "ipkg" << "-V" << QString::number( infoLevel ) << "-force-defaults";
 
     // only set the destination for an install operation
     if ( option == "install" )
@@ -86,7 +86,7 @@ bool Ipkg :: runIpkg( )
             commands << "-force-removal-of-essential-packages";
         if ( flags & FORCE_OVERWRITE )
             commands << "-force-overwrite";
-        if ( flags & VERBOSE_WGET )
+        if ( infoLevel == 3 )
             commands << "-verbose_wget";
 
         // Handle make links
@@ -253,7 +253,7 @@ void Ipkg :: removeStatusEntry()
     rename( outStatusFile, statusFile );
 }
 
-int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString option )
+int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString /*option*/ )
 {
     // If one is already running - should never be but just to be safe
     if ( proc )
