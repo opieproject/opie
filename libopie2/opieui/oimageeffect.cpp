@@ -27,13 +27,12 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-// $Id: oimageeffect.cpp,v 1.2 2003-03-30 03:12:23 mickeyl Exp $
+// $Id: oimageeffect.cpp,v 1.3 2003-09-16 13:07:56 mickeyl Exp $
 
 #include <math.h>
 
 #include <qimage.h>
 #include <stdlib.h>
-#include <iostream>
 
 #include "oimageeffect.h"
 
