@@ -91,17 +91,17 @@ QLabel *timeLabel;
 QSlider *timeSlider;
 int sd;
 
-#if defined(QT_QWS_EBX)
-#define DSPSTROUT "/dev/dsp"
-#define DSPSTRIN "/dev/dsp1"
-#define DSPSTRMIXEROUT "/dev/mixer"
-#define DSPSTRMIXERIN "/dev/mixer1"
-#else
+// #if defined(QT_QWS_EBX)
+// #define DSPSTROUT "/dev/dsp"
+// #define DSPSTRIN "/dev/dsp1"
+// #define DSPSTRMIXEROUT "/dev/mixer"
+// #define DSPSTRMIXERIN "/dev/mixer1"
+// #else
 #define DSPSTROUT "/dev/dsp"
 #define DSPSTRIN "/dev/dsp"
 #define DSPSTRMIXERIN "/dev/mixer"
 #define DSPSTRMIXEROUT "/dev/mixer"
-#endif
+//#endif
 
 // threaded recording
 void quickRec() {
