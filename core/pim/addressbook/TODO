@@ -7,18 +7,18 @@ Urgent:
 
 Important:
 
-- Personal contact editor: Disable categories
 - Name order selected in "contacteditor" not used in list view.
-- contacteditor: Birthday, annyversary, ... : Use Dateselector
 
 - Overview window cleanup needed..
 - Cursor keys should work in detail-view (ablabel)
-- "What's this" should be added
+  -> Ablabel should be removed and Abtable should be increased with
+	different views (as started by darwin zins)..
 - Store last settings of combo-boxes
 - Finishing of new View functions (List, Phonebook...)
 - The names of the countries are sorted by there english names, only..
   Even if they are translated.. :S
 - Reload if contacts were changed externally
+- "What's this" should be added
 
 Less important:
 
@@ -29,7 +29,7 @@ Less important:
 	(abtable should store Iterator for selected Category)
 
 Should be Fixed (not absolute sure, need further validation):
-- "Nonenglish" translation bug has to be fixed.
+
 
 Fixed:
 - Syncing: abtable not reloaded after sync.
@@ -41,3 +41,6 @@ Fixed:
 - Mail-Icon is missing
 - Use opie-mail insted of qt-mail if possible.
 - Font menu is invisible using german translation
+- Personal contact editor: Disable categories
+- "Nonenglish" translation bug has to be fixed.
+- contacteditor: Birthday, annyversary, ... : Use Dateselector

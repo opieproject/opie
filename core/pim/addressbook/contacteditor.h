@@ -23,6 +23,8 @@
 
 #include <opie/ocontact.h>
 
+#include <qpe/datebookmonth.h>
+
 #include <qdialog.h>
 #include <qlist.h>
 #include <qmap.h>
@@ -61,6 +63,7 @@ class ContactEditor : public QDialog {
 		~ContactEditor();
 		void loadFields();
 		void setNameFocus();
+		void setPersonalView( bool personal = true );
 		OContact entry() const { return ent; }
 
 	public slots:
@@ -78,7 +81,6 @@ class ContactEditor : public QDialog {
 		bool isEmpty();
 		void cleanupFields();
 		QString parseName( QString fullName, int type );
-
 	private slots:
 		void slotChooser1Change( const QString &textChanged );
 		void slotChooser2Change( const QString &textChanged );
@@ -97,6 +99,8 @@ class ContactEditor : public QDialog {
 		void slotZipChange( const QString &textChanged );
 		void slotCountryChange( const QString &textChanged );
 		void slotFullNameChange( const QString &textChanged );
+		void slotAnniversaryDateChanged( int year, int month, int day);
+		void slotBirthdayDateChanged( int year, int month, int day);
 
 	private:
 		bool useFullName, hasGender, hasTitle, hasCompany, hasNotes, hasStreet, hasStreet2, hasPOBox, hasCity, hasState, hasZip, hasCountry;
@@ -111,6 +115,8 @@ class ContactEditor : public QDialog {
 		const QValueList<int> *orderedValues;
 		QStringList slOrdered;
 		QStringList slDynamicEntries;
+
+		bool m_personalView;
 
 		QStringList slHomeAddress;
 		QStringList slBusinessAddress;
@@ -143,6 +149,7 @@ class ContactEditor : public QDialog {
 		QComboBox *cmbChooserField4;
 		QComboBox *cmbFileAs;
 		CategorySelect *cmbCat;
+		QLabel *labCat;
 
 		QScrollView *svAddress;
 		QLineEdit *txtAddress;
@@ -156,7 +163,10 @@ class ContactEditor : public QDialog {
 
 		QScrollView *svDetails;
 		QComboBox *cmbGender;
-
-};
+		DateBookMonth* birthdayPicker;
+		QToolButton* birthdayButton;
+		DateBookMonth* anniversaryPicker;
+		QToolButton* anniversaryButton;
+	};
 
 #endif

@@ -24,6 +24,7 @@
 #include <qpe/categoryselect.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpedialog.h>
+#include <qpe/timeconversion.h>
 
 #include <qcombobox.h>
 #include <qlabel.h>
@@ -36,6 +37,7 @@
 #include <qpushbutton.h>
 #include <qmainwindow.h>
 #include <qvaluelist.h>
+#include <qpopupmenu.h> 
 
 static inline bool containsAlphaNum( const QString &str );
 static inline bool constainsWhiteSpace( const QString &str );
@@ -57,7 +59,8 @@ ContactEditor::ContactEditor(	const OContact &entry,
 				WFlags fl )
 	: QDialog( parent, name, TRUE, fl ),
 	  orderedValues( newOrderedValues ),
-	  slOrdered( *slNewOrdered )
+	  slOrdered( *slNewOrdered ),
+	  m_personalView ( false )
 {
 
 	init();
@@ -206,7 +209,16 @@ void ContactEditor::init() {
 				continue;
 			}
 
-			if ( *it == "Name Title" || *it == "First Name" || *it == "Middle Name" || *it == "Last Name" || *it == "File As" || *it == "Default Email" || *it == "Emails" || *it == "Groups" )
+			if ( *it == "Name Title" || 
+			     *it == "First Name" || 
+			     *it == "Middle Name" || 
+			     *it == "Last Name" || 
+			     *it == "File As" || 
+			     *it == "Default Email" || 
+			     *it == "Emails" || 
+			     *it == "Groups"  || 
+			     *it == "Anniversary" || 
+			     *it == "Birthday" )
 				continue;
 
 			if ( *it == "Name Title" ) {
@@ -402,10 +414,20 @@ void ContactEditor::init() {
 	cmbFileAs = new QComboBox( TRUE, container );
 	gl->addWidget( cmbFileAs, 6, 1 );
 
-	l = new QLabel( tr( "Category" ), container );
-	gl->addWidget( l, 7, 0 );
+	labCat = new QLabel( tr( "Category" ), container );
+	gl->addWidget( labCat, 7, 0 );
 	cmbCat = new CategorySelect( container );
 	gl->addWidget( cmbCat, 7, 1 );
+
+	// We don't need categories for the personal view
+	if ( m_personalView ){
+		qWarning("Disable Category..");
+		labCat->hide();
+		cmbCat->hide();
+	} else {
+		labCat->show();
+		cmbCat->show();
+	}
 
 	btnNote = new QPushButton( tr( "Notes..." ), container );
 	gl->addWidget( btnNote, 8, 1 );
@@ -707,9 +729,56 @@ void ContactEditor::init() {
 
 	gl = new QGridLayout( container, 1, 2, 2, 4 );
 
+	int counter = 0;
+
+	// Birthday
+	l = new QLabel( tr("Birthday"), container );
+	gl->addWidget( l, counter, 0 );
+
+ 	QPopupMenu* m1 = new QPopupMenu( container );
+ 	birthdayPicker = new DateBookMonth( m1, 0, TRUE );
+ 	m1->insertItem( birthdayPicker );
+
+	birthdayButton= new QToolButton( container, "buttonStart" );
+ 	birthdayButton->setPopup( m1 );
+	birthdayButton->setPopupDelay(0);
+	gl->addWidget( birthdayButton, counter , 1  );
+	connect( birthdayPicker, SIGNAL( dateClicked( int, int, int ) ),
+		 this, SLOT( slotBirthdayDateChanged( int, int, int ) ) );
+
+	++counter;
+
+	// Anniversary
+	l = new QLabel( tr("Anniversary"), container );
+	gl->addWidget( l, counter, 0 );
+
+ 	m1 = new QPopupMenu( container );
+ 	anniversaryPicker = new DateBookMonth( m1, 0, TRUE );
+ 	m1->insertItem( anniversaryPicker );
+
+	anniversaryButton= new QToolButton( container, "buttonStart" );
+ 	anniversaryButton->setPopup( m1 );
+	anniversaryButton->setPopupDelay(0);
+	gl->addWidget( anniversaryButton, counter , 1  );
+	connect( anniversaryPicker, SIGNAL( dateClicked( int, int, int ) ),
+		 this, SLOT( slotAnniversaryDateChanged( int, int, int ) ) );
+
+	++counter;
+
+	// Gender
+	l = new QLabel( tr("Gender"), container );
+	gl->addWidget( l, counter, 0 );
+	cmbGender = new QComboBox( container );
+	cmbGender->insertItem( "", 0 );
+	cmbGender->insertItem( tr("Male"), 1);
+	cmbGender->insertItem( tr("Female"), 2);
+	gl->addWidget( cmbGender, counter, 1 );
+
+	++counter;
+
 	// Create Labels and lineedit fields for every dynamic entry
 	QStringList::ConstIterator it = slDynamicEntries.begin();
-	for (i = 0; it != slDynamicEntries.end(); i++, ++it) {
+	for (i = counter; it != slDynamicEntries.end(); i++, ++it) {
 		l = new QLabel( QString::null , container );
 		listName.append( l );
 		gl->addWidget( l, i, 0 );
@@ -720,13 +789,6 @@ void ContactEditor::init() {
 	// Fill labels with names..
 	loadFields();
 
-	l = new QLabel( tr("Gender"), container );
-	gl->addWidget( l, slDynamicEntries.count(), 0 );
-	cmbGender = new QComboBox( container );
-	cmbGender->insertItem( "", 0 );
-	cmbGender->insertItem( tr("Male"), 1);
-	cmbGender->insertItem( tr("Female"), 2);
-	gl->addWidget( cmbGender, slDynamicEntries.count(), 1 );
 
 	tabMain->insertTab( tabViewport, tr( "Details" ) );
 
@@ -1009,6 +1071,7 @@ void ContactEditor::slotFullNameChange( const QString &textChanged ) {
 
 }
 
+// Loads the detail fields
 void ContactEditor::loadFields() {
 
 	QStringList::ConstIterator it;
@@ -1036,18 +1099,27 @@ void ContactEditor::loadFields() {
 		if ( *it == "Spouse" )
 			(*lit)->setText( tr( "Spouse" ) );
 
-		if ( *it == "Birthday" )
-			(*lit)->setText( tr( "Birthday" ) );
-
-		if ( *it == "Anniversary" )
-			(*lit)->setText( tr( "Anniversary" ) );
-
 		if ( *it == "Nickname" )
 			(*lit)->setText( tr( "Nickname" ) );
 
 		if ( *it == "Children" )
 			(*lit)->setText( tr( "Children" ) );
 	}
+	// Set DatePicker
+	qWarning ("**Info: %s", ent.birthday().latin1() );
+	if ( !ent.birthday().isEmpty() ){
+		birthdayButton->setText( ent.birthday() );
+		birthdayPicker->setDate( TimeConversion::fromString ( ent.birthday() ) );
+	} else
+		birthdayButton->setText( tr ("Unknown") );
+		
+	qWarning ("**Info: %s", ent.anniversary().latin1() );
+	if ( !ent.anniversary().isEmpty() ){
+		anniversaryButton->setText( ent.anniversary() );
+		anniversaryPicker->setDate( TimeConversion::fromString ( ent.birthday() ) );
+	} else
+		anniversaryButton->setText( tr ("Unknown") );
+
 }
 
 void ContactEditor::accept() {
@@ -1429,12 +1501,6 @@ void ContactEditor::setEntry( const OContact &entry ) {
 		if ( *it == "Spouse" )
 			(*itLE)->setText( ent.spouse() );
 
-		if ( *it == "Birthday" )
-			(*itLE)->setText( ent.birthday() );
-
-		if ( *it == "Anniversary" )
-			(*itLE)->setText( ent.anniversary() );
-
 		if ( *it == "Nickname" )
 			(*itLE)->setText( ent.nickname() );
 
@@ -1518,6 +1584,7 @@ void ContactEditor::setEntry( const OContact &entry ) {
 
 	}
 
+	
 	cmbCat->setCategories( ent.categories(), "Contacts", tr("Contacts") );
 
 	QString gender = ent.gender();
@@ -1530,6 +1597,8 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	slotCmbChooser3Change( cmbChooserField3->currentItem() );
 
 	slotAddressTypeChange( cmbAddress->currentItem() );
+
+	loadFields();
 
 }
 
@@ -1626,12 +1695,6 @@ void ContactEditor::saveEntry() {
 
 		if ( *it == "Spouse" )
 			ent.setSpouse( (*itLE)->text() );
-
-		if ( *it == "Birthday" )
-			ent.setBirthday( (*itLE)->text() );
-
-		if ( *it == "Anniversary" )
-			ent.setAnniversary( (*itLE)->text() );
 
 		if ( *it == "Nickname" )
 			ent.setNickname( (*itLE)->text() );
@@ -1806,3 +1869,33 @@ static inline bool constainsWhiteSpace( const QString &str )
     return FALSE;
 }
 
+void ContactEditor::setPersonalView( bool personal )
+{
+	m_personalView = personal;
+	if ( personal ){
+		cmbCat->hide();
+		labCat->hide();
+	} else{
+		cmbCat->show();
+		labCat->show();
+		
+	}
+}
+
+void ContactEditor::slotAnniversaryDateChanged( int year, int month, int day)
+{
+    QDate date;
+    date.setYMD( year, month, day );
+    QString dateString = TimeString::numberDateString( date );
+    anniversaryButton->setText( dateString );
+    ent.setAnniversary ( dateString );
+}
+
+void ContactEditor::slotBirthdayDateChanged( int year, int month, int day)
+{
+    QDate date;
+    date.setYMD( year, month, day );
+    QString dateString = TimeString::numberDateString( date );
+    birthdayButton->setText( dateString );
+    ent.setBirthday ( dateString );
+}

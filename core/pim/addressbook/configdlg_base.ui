@@ -12,8 +12,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>217</width>
-            <height>287</height>
+            <width>244</width>
+            <height>298</height>
         </rect>
     </property>
     <property stdset="1">
@@ -329,6 +329,8 @@ is provided free !</string>
     <tabstop>m_useWildCard</tabstop>
     <tabstop>m_useCaseSensitive</tabstop>
     <tabstop>m_signalWrapAround</tabstop>
+    <tabstop>m_useQtMail</tabstop>
+    <tabstop>m_useOpieMail</tabstop>
     <tabstop>buttonOk</tabstop>
     <tabstop>buttonCancel</tabstop>
 </tabstops>

@@ -94,7 +94,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	caseSensitive = cfg.readBoolEntry( "caseSensitive" );
 	doNotifyWrapAround = cfg.readBoolEntry( "doNotifyWrapAround" );
 	cfg.setGroup("Mail");
-	m_useQtMail = cfg.readBoolEntry( "useQtMail" );
+	m_useQtMail = cfg.readBoolEntry( "useQtMail", true );
 	m_useOpieMail=cfg.readBoolEntry( "useOpieMail" );
 	
 
@@ -673,12 +673,16 @@ void AddressbookWindow::editPersonal()
 	if (QFile::exists(filename))
 		me = OContact::readVCard( filename )[0];
 	if (bAbEditFirstTime) {
+		qWarning("Editing personal data");
 		abEditor = new ContactEditor( me, &orderedFields, &slOrderedFields,
 					      this, "editor" );
 		// don't create a new editor every time
 		bAbEditFirstTime = FALSE;
-	} else
+	} else{
 		abEditor->setEntry( me );
+	}
+
+	abEditor->setPersonalView( true );
 	
 	abEditor->setCaption(tr("Edit My Personal Details"));
 	abEditor->showMaximized();
@@ -694,6 +698,7 @@ void AddressbookWindow::editPersonal()
 		abView()->sync();
 	}
 	abEditor->setCaption( tr("Edit Address") );
+	abEditor->setPersonalView( false );
 }
 
 void AddressbookWindow::slotPersonalView()
