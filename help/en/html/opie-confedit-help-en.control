@@ -1,0 +1,9 @@
+Package: opie-confedit-help-en
+Files: help/en/html/confedit.html help/en/html/confedit
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Depends: opie-confedit
+License: GPL
+Description: confedit help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

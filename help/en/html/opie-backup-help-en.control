@@ -1,0 +1,10 @@
+Package: opie-backup-help-en
+Files: help/en/html/backup.html help/en/html/backup
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Architecture: arm
+Depends: opie-backup
+License: GPL
+Description: backup help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

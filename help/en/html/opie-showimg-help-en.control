@@ -1,0 +1,9 @@
+Package: opie-showimg-help-en
+Files: help/en/html/showimg.html help/en/html/showimg
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Depends: opie-showimg
+License: GPL
+Description: showimg help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

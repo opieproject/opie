@@ -1,6 +1,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
+#include <stdlib.h> // int system
 #include <unistd.h>
 
 #include <fcntl.h>
@@ -9,17 +10,21 @@
 #include <qfileinfo.h>
 #include <qlabel.h>
 #include <qhbox.h>
+#include <qregexp.h>
 #include <qtextview.h>
 #include <qpushbutton.h>
 
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/global.h>
 
 #include "obex.h"
 #include "receiver.h"
 
 using namespace OpieObex;
+
+/* TRANSLATOR OpieObex::Receiver */
 
 Receiver::Receiver() {
     m_obex = new Obex(this, "Receiver");
@@ -31,7 +36,8 @@ Receiver::~Receiver() {
     m_obex->setReceiveEnabled( false );
     delete m_obex;
 }
-void Receiver::slotReceived( const QString& file ) {
+void Receiver::slotReceived( const QString& _file ) {
+    QString file = _file;
     int check = checkFile(file);
     if ( check == AddressBook )
         handleAddr( file );
@@ -59,20 +65,57 @@ void Receiver::handleOther( const QString& other ) {
     OtherHandler* hand =  new OtherHandler();
     hand->handle( other );
 }
-int Receiver::checkFile( const QString& file ) {
+void Receiver::tidyUp( QString& _file, const QString& ending) {
+    /* libversit fails on BASE64 encoding we try to sed it away */
+    QString file = _file;
+    char foo[24]; // big enough
+    (void)::strcpy(foo, "/tmp/opie-XXXXXX");
+
+    int fd = ::mkstemp(foo);
+
+    if ( fd == -1 )
+        return;
+
+    (void)::strncat( foo, ending.latin1(), 4 );
+    _file = QString::fromLatin1( foo );
+    QString cmd = QString("sed -e \"s/^\\(X-MICROSOFT-BODYINK\\)\\;/\\1:/;\" < %2 > %2 ").arg( Global::shellQuote(file)).arg( Global::shellQuote(_file) );
+    qWarning("Executing: %s", cmd.latin1() );
+    (void)::system( cmd.latin1() );
+
+    cmd = QString("rm %1").arg( Global::shellQuote(file) );
+    (void)::system( cmd.latin1() );
+}
+int Receiver::checkFile( QString& file ) {
     qWarning("check file!! %s", file.latin1() );
     int ret;
+    QString ending;
+
     if (file.right(4) == ".vcs" ) {
         ret = Datebook;
+        ending = QString::fromLatin1(".vcs");
     }else if ( file.right(4) == ".vcf") {
         ret = AddressBook;
+        ending = QString::fromLatin1(".vcf");
     }else
         ret = Other;
 
 
+    if (ending.isEmpty() )
+        return ret;
+
+    /**
+     * currently the parser is broken in regard of BASE64 encoding
+     * and M$ likes to send that. So we will executed a small
+     * tidy up system sed script
+     * At this point we can also remove umlaute from the filename
+     */
+    tidyUp( file, ending );
+
     qWarning("check it now %d", ret );
     return ret;
 }
+
+/* TRANSLATOR OpieObex::OtherHandler */
 
 OtherHandler::OtherHandler()
     : QVBox()
@@ -133,6 +176,10 @@ void OtherHandler::deny() {
 }
 QString OtherHandler::targetName( const QString& file ) {
     QFileInfo info( file );
+
+    /* $HOME needs to be set!!!! */
+    Global::createDocDir();
+
     QString newFile = QPEApplication::documentDir()+ "/"+ info.baseName();
     QString newFileBase = newFile;
 
@@ -149,24 +196,8 @@ QString OtherHandler::targetName( const QString& file ) {
 /* fast cpy */
 void OtherHandler::copy(const QString& src, const QString& file) {
     qWarning("src %s, dest %s", src.latin1(),file.latin1() );
-    int src_fd = ::open( QFile::encodeName( src ), O_RDONLY );
-    int to_fd  = ::open( QFile::encodeName( file), O_RDWR| O_CREAT| O_TRUNC,
-                         S_IRUSR, S_IWUSR, S_IRGRP, S_IRGRP );
-
-    struct stat stater;
-    ::fstat(src_fd, &stater );
-    ::lseek(to_fd, stater.st_size-1, SEEK_SET );
-    ::write(to_fd, "", 1 );
-
-    void *src_addr, *dest_addr;
-    src_addr = ::mmap(0, stater.st_size, PROT_READ,
-                      MAP_FILE | MAP_SHARED, src_fd, 0 );
-    dest_addr= ::mmap(0, stater.st_size, PROT_READ | PROT_WRITE,
-                      MAP_FILE | MAP_PRIVATE, to_fd, 0 );
-
-    ::memcpy(dest_addr , src_addr, stater.st_size );
-    ::munmap(src_addr , stater.st_size );
-    ::munmap(dest_addr, stater.st_size );
-
+    QString cmd = QString("mv %1 %2").arg( Global::shellQuote( src )).
+                  arg( Global::shellQuote( file ) );
+    ::system( cmd.latin1() );
     // done
 }

@@ -1,0 +1,9 @@
+Package: opie-qasteroids-help-en
+Files: help/en/html/qasteroids.html help/en/html/qasteroids
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Depends: opie-qasteroids
+License: GPL
+Description: qasteroids help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

@@ -1,0 +1,9 @@
+Package: opie-sfcave-help-en
+Files: help/en/html/sfcave.html help/en/html/sfcave
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Depends: opie-sfcave
+License: GPL
+Description: sfcave help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

@@ -1,0 +1,9 @@
+Package: opie-clock-help-en
+Files: help/en/html/clock.html help/en/html/clock
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Depends: opie-clock
+License: GPL
+Description: clock help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.55 2003-05-26 05:03:58 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.56 2003-08-09 17:33:10 kergoth Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 extern "C" {

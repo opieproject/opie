@@ -1,0 +1,9 @@
+Package: opie-rotation-help-en
+Files: help/en/html/rotation.html help/en/html/rotation
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Depends: opie-rotation
+License: GPL
+Description: rotation help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

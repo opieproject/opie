@@ -1,0 +1,10 @@
+Package: opie-bluetooth-manager-help-en
+Files: help/en/html/bluetooth-manager.html help/en/html/bluetooth-manager
+Priority: optional
+Section: opie/onlinedoc
+Maintainer: Team Opie <opie@handhelds.org>
+Architecture: arm
+Depends: opie-bluetooth-manager
+License: GPL
+Description: bluetooth-manager help files (en)
+Version: $QPE_VERSION$EXTRAVERSION

@@ -3,6 +3,8 @@
 
 using namespace OpieObex;
 
+/* TRANSLATOR OpieObex::ObexImpl */
+
 ObexImpl::ObexImpl() {
     m_handler = new ObexHandler;
 }

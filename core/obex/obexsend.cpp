@@ -15,6 +15,8 @@
 
 using namespace OpieObex;
 
+/* TRANSLATOR OpieObex::SendWidget */
+
 
 SendWidget::SendWidget( QWidget* parent, const char* name )
     : QWidget( parent, name ) {
