@@ -1,4 +1,4 @@
   config KEYBOARD
-    boolean "keyboard"
+    boolean "Keyboard"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

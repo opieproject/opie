@@ -1,4 +1,4 @@
   config HANDWRITING
-    boolean "handwriting"
+    boolean "Handwriting"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
