@@ -665,7 +665,8 @@ class ErrorFilter : public CFilter
 #ifndef __STATIC
 ExternFilter::ExternFilter(const QString& nm, const QString& optional) : filt(NULL), handle(NULL)
 {
-  QString filterpath(QTReaderUtil::getPluginPath("filters/lib"));
+  QString filterpath(QTReaderUtil::getPluginPath("filters"));
+  filterpath += "/lib";
   filterpath += nm;
   filterpath += ".so";
   if (QFile::exists(filterpath))
