@@ -1,4 +1,4 @@
-Files: plugins/obex/libopieobex.so* 
+Files: plugins/obex/libopie1obex.so* 
 Priority: optional
 Section: opie/system
 Maintainer: Holger Freyther <zecke@handhelds.org>

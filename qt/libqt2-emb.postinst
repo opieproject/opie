@@ -1,0 +1,4 @@
+#!/bin/sh
+
+[ -x ldconfig ] && ldconfig
+exit 0
