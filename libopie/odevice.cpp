@@ -674,7 +674,7 @@ bool iPAQ::setDisplayBrightness ( int bright )
 
 int iPAQ::displayBrightnessResolution ( ) const
 {
-	return 255; // really 128, but logarithmic control is smoother this way
+	return 256; // really 128, but logarithmic control is smoother this way
 }
 
 
@@ -682,16 +682,17 @@ bool iPAQ::hasLightSensor ( ) const
 {
 	return true;
 }
-
+#include <errno.h>
+#include <string.h>
 int iPAQ::readLightSensor ( )
 {
 	int fd;
 	int val = -1;
 	
 	if (( fd = ::open ( "/proc/hal/light_sensor", O_RDONLY )) >= 0 ) {
-		char buffer [5];
+		char buffer [8];
 	
-		if ( ::read ( fd, buffer, 4 ) == 4 ) {
+		if ( ::read ( fd, buffer, 5 ) == 5 )
 			char *endptr;
 		
 			buffer [4] = 0;
@@ -699,8 +700,7 @@ int iPAQ::readLightSensor ( )
 			
 			if ( *endptr != 0 )
 				val = -1;
-		}
-	
+		}	
 		::close ( fd );
 	}
 
@@ -946,7 +946,7 @@ bool Zaurus::setDisplayBrightness ( int bright )
 
 int Zaurus::displayBrightnessResolution ( ) const 
 {
-	return 4;
+	return 5;
 }
 
 //QValueList <int> Zaurus::keyList ( ) const
