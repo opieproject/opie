@@ -4,7 +4,7 @@
     <name>AboutApplet</name>
     <message>
         <source>About shortcut</source>
-        <translation>About Shortvut</translation>
+        <translation>About Shortcut</translation>
     </message>
     <message>
         <source>About</source>
