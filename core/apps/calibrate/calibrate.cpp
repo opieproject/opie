@@ -40,10 +40,10 @@ Calibrate::Calibrate(QWidget* parent, const char * name, WFlags wf) :
     QRect desk = qApp->desktop()->geometry();
     setGeometry( 0, 0, desk.width(), desk.height() );
     if ( desk.height() < 250 ) {
-	int w = desk.height()/3;
-	logo.convertFromImage(Resource::loadImage("launcher/opielogo").smoothScale(w,w));
+  int w = desk.height()/3;
+  logo.convertFromImage(Resource::loadImage("launcher/opielogo").smoothScale(w,w));
     } else {
-	logo = Resource::loadPixmap( "launcher/launcher/opielogo" );
+  logo = Resource::loadPixmap( "launcher/opielogo" );
     }
     cd.screenPoints[QWSPointerCalibrationData::TopLeft] = QPoint( offset, offset );
     cd.screenPoints[QWSPointerCalibrationData::BottomLeft] = QPoint( offset, qt_screen->deviceHeight() - offset );
@@ -78,7 +78,7 @@ void Calibrate::store()
 void Calibrate::hide()
 {
     if ( isVisible() )
-	store();
+  store();
     QDialog::hide();
 }
 
@@ -92,7 +92,7 @@ void Calibrate::reset()
 QPoint Calibrate::fromDevice( const QPoint &p )
 {
     return qt_screen->mapFromDevice( p,
-		QSize(qt_screen->deviceWidth(), qt_screen->deviceHeight()) );
+    QSize(qt_screen->deviceWidth(), qt_screen->deviceHeight()) );
 }
 
 bool Calibrate::sanityCheck()
@@ -107,14 +107,14 @@ bool Calibrate::sanityCheck()
     int diff = QABS( vl - vr );
     int avg = ( vl + vr ) / 2;
     if ( diff > avg / 20 ) // 5% leeway
-	return FALSE;
+  return FALSE;
 
     int ht = QABS( tl.x() - tr.x() );
     int hb = QABS( br.x() - bl.x() );
     diff = QABS( ht - hb );
     avg = ( ht + hb ) / 2;
     if ( diff > avg / 20 ) // 5% leeway
-	return FALSE;
+  return FALSE;
 
     return TRUE;
 }
@@ -144,31 +144,31 @@ void Calibrate::paintEvent( QPaintEvent * )
     int y;
 
     if ( !logo.isNull() ) {
-	y = height() / 2 - logo.height() - 15;
-	p.drawPixmap( (width() - logo.width())/2, y, logo );
+  y = height() / 2 - logo.height() - 15;
+  p.drawPixmap( (width() - logo.width())/2, y, logo );
     }
 
     y = height() / 2 + 15;
 
     p.drawText( 0, y+height()/8, width(), height() - y, AlignHCenter,
-	tr("Touch the crosshairs firmly and\n"
+  tr("Touch the crosshairs firmly and\n"
             "accurately to calibrate your screen.") );
 
     QFont f = p.font(); f.setBold(TRUE);
     p.setFont( f );
     p.drawText( 0, y, width(), height() - y, AlignHCenter|WordBreak, 
-	    tr("Welcome to Opie") );
+      tr("Welcome to Opie") );
 
 /*
     saveUnder = QPixmap::grabWindow( winId(), crossPos.x()-8, crossPos.y()-8,
-				     16, 16 );
+             16, 16 );
     moveCrosshair( crossPos );
 */
     if ( showCross ) {
-	p.drawRect( crossPos.x()-1, crossPos.y()-8, 2, 7 );
-	p.drawRect( crossPos.x()-1, crossPos.y()+1, 2, 7 );
-	p.drawRect( crossPos.x()-8, crossPos.y()-1, 7, 2 );
-	p.drawRect( crossPos.x()+1, crossPos.y()-1, 7, 2 );
+  p.drawRect( crossPos.x()-1, crossPos.y()-8, 2, 7 );
+  p.drawRect( crossPos.x()-1, crossPos.y()+1, 2, 7 );
+  p.drawRect( crossPos.x()-8, crossPos.y()-1, 7, 2 );
+  p.drawRect( crossPos.x()+1, crossPos.y()-1, 7, 2 );
     }
 }
 
@@ -176,41 +176,41 @@ void Calibrate::mousePressEvent( QMouseEvent *e )
 {
     // map to device coordinates
     QPoint devPos = qt_screen->mapToDevice( e->pos(),
-			QSize(qt_screen->width(), qt_screen->height()) );
+      QSize(qt_screen->width(), qt_screen->height()) );
     if ( penPos.isNull() )
-	penPos = devPos;
+  penPos = devPos;
     else
-	penPos = QPoint( (penPos.x() + devPos.x())/2,
-			 (penPos.y() + devPos.y())/2 );
+  penPos = QPoint( (penPos.x() + devPos.x())/2,
+       (penPos.y() + devPos.y())/2 );
 }
 
 void Calibrate::mouseReleaseEvent( QMouseEvent * )
 {
     if ( timer->isActive() )
-	return;
+  return;
 
     bool doMove = TRUE;
 
     cd.devPoints[location] = penPos;
     if ( location < QWSPointerCalibrationData::LastLocation ) {
-	location = (QWSPointerCalibrationData::Location)((int)location + 1);
+  location = (QWSPointerCalibrationData::Location)((int)location + 1);
     } else {
-	if ( sanityCheck() ) {
-	    reset();
-	    goodcd = cd;
-	    hide();
-	    emit accept();
-	    doMove = FALSE;
-	} else {
-	    location = QWSPointerCalibrationData::TopLeft;
-	}
+  if ( sanityCheck() ) {
+      reset();
+      goodcd = cd;
+      hide();
+      emit accept();
+      doMove = FALSE;
+  } else {
+      location = QWSPointerCalibrationData::TopLeft;
+  }
     }
-	    
+      
     if ( doMove ) {
-	QPoint target = fromDevice( cd.screenPoints[location] );
-	dx = (target.x() - crossPos.x())/10;
-	dy = (target.y() - crossPos.y())/10;
-	timer->start( 30 );
+  QPoint target = fromDevice( cd.screenPoints[location] );
+  dx = (target.x() - crossPos.x())/10;
+  dy = (target.y() - crossPos.y())/10;
+  timer->start( 30 );
     }
 }
 
@@ -223,18 +223,18 @@ void Calibrate::timeout()
     QPoint newPos( crossPos.x() + dx, crossPos.y() + dy );
 
     if ( QABS(crossPos.x() - target.x()) <= QABS(dx) ) {
-	newPos.setX( target.x() );
-	doneX = TRUE;
+  newPos.setX( target.x() );
+  doneX = TRUE;
     }
 
     if ( QABS(crossPos.y() - target.y()) <= QABS(dy) ) {
-	newPos.setY(target.y());
-	doneY = TRUE;
+  newPos.setY(target.y());
+  doneY = TRUE;
     }
 
     if ( doneX && doneY ) {
-	penPos = QPoint();
-	timer->stop();
+  penPos = QPoint();
+  timer->stop();
     }
 
     moveCrosshair( newPos );
