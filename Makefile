@@ -38,7 +38,8 @@ PIMAPPS = core/pim/addressbook core/pim/datebook \
 TODAYPLUGINS = core/pim/today/plugins/datebook \
 		core/pim/today/plugins/todolist \
 		core/pim/today/plugins/mail \
-		noncore/todayplugins/stockticker/stockticker noncore/todayplugins/stockticker/stocktickerlib
+		noncore/todayplugins/stockticker/stockticker noncore/todayplugins/stockticker/stocktickerlib \
+		noncore/todayplugins/fortune
 
 
 COREAPPS = core/apps/filebrowser core/apps/helpbrowser \
