@@ -437,10 +437,12 @@ QString OContact::toRichText() const
 {
     QString text;
     QString value, comp, state;
+    QString str;
+    bool marker = false;
 
     // name, jobtitle and company
     if ( !(value = fullName()).isEmpty() )
-	text += "<b>" + Qtopia::escapeString(value) + "</b><br>";
+	text += "<b><h3>" + Qtopia::escapeString(value) + "</h3></b><br>";
     if ( !(value = jobTitle()).isEmpty() )
 	text += Qtopia::escapeString(value) + "<br>";
 
@@ -455,12 +457,20 @@ QString OContact::toRichText() const
     if ( !comp.isEmpty() )
 	text += Qtopia::escapeString(comp) + "<br>";
 
+    QString defEmail = defaultEmail();
+    if ( !defEmail.isEmpty() )
+	text += "<b>" + QObject::tr("Default Email: ") + "</b>"
+		+ Qtopia::escapeString(defEmail) + "<br>";
+
+    text += "<hr>";
+
     // business address
     if ( !businessStreet().isEmpty() || !businessCity().isEmpty() ||
 	 !businessZip().isEmpty() || !businessCountry().isEmpty() ) {
 	text += "<br>";
 	text += QObject::tr( "<b>Work Address:</b>" );
 	text +=  "<br>";
+	marker = true;
     }
 
     if ( !(value = businessStreet()).isEmpty() )
@@ -477,6 +487,44 @@ QString OContact::toRichText() const
 	text += Qtopia::escapeString(value) + "<br>";
     if ( !(value = businessCountry()).isEmpty() )
 	text += Qtopia::escapeString(value) + "<br>";
+
+    // rest of Business data
+    str = office();
+    if ( !str.isEmpty() ){
+	text += "<b>" + QObject::tr("Office: ") + "</b>"
+		+ Qtopia::escapeString(str) + "<br>";
+	marker = true;
+    }
+    str = businessWebpage();
+    if ( !str.isEmpty() ){
+	text += "<b>" + QObject::tr("Business Web Page: ") + "</b>"
+		+ Qtopia::escapeString(str) + "<br>";
+	marker = true;
+    }
+    str = businessPhone();
+    if ( !str.isEmpty() ){
+	text += "<b>" + QObject::tr("Business Phone: ") + "</b>"
+		+ Qtopia::escapeString(str) + "<br>";
+	marker = true;
+    }
+    str = businessFax();
+    if ( !str.isEmpty() ){
+	text += "<b>" + QObject::tr("Business Fax: ") + "</b>"
+		+ Qtopia::escapeString(str) + "<br>";
+	marker = true;
+    }
+    str = businessMobile();
+    if ( !str.isEmpty() ){
+	text += "<b>" + QObject::tr("Business Mobile: ") + "</b>"
+		+ Qtopia::escapeString(str) + "<br>";
+	marker = true;
+    }
+    str = businessPager();
+    if ( !str.isEmpty() ){
+	text += "<b>" + QObject::tr("Business Pager: ") + "</b>"
+		+ Qtopia::escapeString(str) + "<br>";
+	marker = true;
+    }
 
     // home address
     if ( !homeStreet().isEmpty() || !homeCity().isEmpty() ||
@@ -501,55 +549,38 @@ QString OContact::toRichText() const
     if ( !(value = homeCountry()).isEmpty() )
 	text += Qtopia::escapeString(value) + "<br>";
 
+    // rest of Home data
+    str = homeWebpage();
+    if ( !str.isEmpty() ){
+	text += "<b>" + QObject::tr("Home Web Page: ") + "</b>"
+		+ Qtopia::escapeString(str) + "<br>";
+	marker = true;
+    }
+    str = homePhone();
+    if ( !str.isEmpty() ){
+	text += "<b>" + QObject::tr("Home Phone: ") + "</b>"
+		+ Qtopia::escapeString(str) + "<br>";
+	marker = true;
+    }
+    str = homeFax();
+    if ( !str.isEmpty() ){
+	text += "<b>" + QObject::tr("Home Fax: ") + "</b>"
+		+ Qtopia::escapeString(str) + "<br>";
+	marker = true;
+    }
+    str = homeMobile();
+    if ( !str.isEmpty() ){
+	text += "<b>" + QObject::tr("Home Mobile: ") + "</b>"
+		+ Qtopia::escapeString(str) + "<br>";
+	marker = true;
+    }
+
+    if ( marker )
+	    text += "<br><hr><br>";
     // the others...
-    QString str;
-    QString defEmail = defaultEmail();
-    if ( !defEmail.isEmpty() )
-	text += "<b>" + QObject::tr("Default Email: ") + "</b>"
-		+ Qtopia::escapeString(defEmail) + "<br>";
     str = emails();
     if ( !str.isEmpty() && ( str != defEmail ) )
 	text += "<b>" + QObject::tr("All Emails: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
-    str = homePhone();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Home Phone: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
-    str = homeFax();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Home Fax: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
-    str = homeMobile();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Home Mobile: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
-    str = homeWebpage();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Home Web Page: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
-    str = businessWebpage();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Business Web Page: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
-    str = office();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Office: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
-    str = businessPhone();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Business Phone: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
-    str = businessFax();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Business Fax: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
-    str = businessMobile();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Business Mobile: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
-    str = businessPager();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Business Pager: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
     str = profession();
     if ( !str.isEmpty() )
@@ -603,12 +634,13 @@ QString OContact::toRichText() const
 
     // notes last
     if ( (value = notes()) ) {
-	QRegExp reg("\n");
+	    text += "<br><hr><b>" + QObject::tr( "Notes:") + "</b> ";
+	    QRegExp reg("\n");
 
-	//QString tmp = Qtopia::escapeString(value);
-	QString tmp = QStyleSheet::convertFromPlainText(value);
-	//tmp.replace( reg, "<br>" );
-	text += "<br>" + tmp + "<br>";
+	    //QString tmp = Qtopia::escapeString(value);
+	    QString tmp = QStyleSheet::convertFromPlainText(value);
+	    //tmp.replace( reg, "<br>" );
+	    text += "<br>" + tmp + "<br>";
     }
     return text;
 }
