@@ -30,8 +30,9 @@ _;:,     .>    :=|.         This program is free software; you can
 #define OFILENOTIFY_H
 
 /* QT */
-#include <qstring.h>
 #include <qobject.h>
+#include <qsignal.h>
+#include <qstring.h>
 
 /* STD */
 #include <signal.h>
@@ -49,20 +50,39 @@ enum OFileNotificationType { Single = 0x0000000,
                              Rename = DN_RENAME,
                              Attrib = DN_ATTRIB };
 
-class OFileNotifier : public QObject
+class OFileNotification : public QObject
 {
+  Q_OBJECT
+
   public:
-    static void singleShot( const QString& path,
-                            QObject *receiver, const char *member,
-                            OFileNotificationType type = Modify );
+    OFileNotification( QObject* parent = 0, const char* name = 0 );
+    ~OFileNotification();
+
+    static void singleShot( const QString& path, QObject* receiver, const char* member, OFileNotificationType type = Modify );
+
+    int start( const QString& path, bool sshot = false, OFileNotificationType type = Modify );
+    void stop();
+
+    OFileNotificationType type() const;
+    QString path() const;
+    int fileno() const;
+    bool isActive() const;
+
+  signals:
+    void triggered();
+
   protected:
-    static void registerSignalHandler();
+    void activate();
+    static bool registerSignalHandler();
     static void unregisterSignalHandler();
     static void __signalHandler( int sig, siginfo_t *si, void *data );
 
   private:
-    OFileNotifier();
-    ~OFileNotifier();
+    QString _path;
+    OFileNotificationType _type;
+    QSignal _signal;
+    int _fd;
+    bool _active;
 };
 
 }

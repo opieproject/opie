@@ -32,6 +32,7 @@ using namespace Opie::Core;
 /* OPIE */
 
 /* QT */
+#include <qobject.h>
 #include <qsignal.h>
 #include <qintdict.h>
 #include <qdir.h>
@@ -39,77 +40,136 @@ using namespace Opie::Core;
 /* STD */
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <fcntl.h>
+#ifndef _GNU_SOURCE
+    #define _GNU_SOURCE
+    #include <fcntl.h>
+    #undef _GNU_SOURCE
+#else
+    #include <fcntl.h>
+#endif
 #include <string.h>
 #include <errno.h>
+#include <unistd.h>
+
+static QIntDict<OFileNotification> notification_list;
 
 namespace Opie {
 namespace Core {
 
-class OFileNotification
+OFileNotification::OFileNotification( QObject* parent, const char* name )
+                  :QObject( parent, name ), _active( false )
 {
-  public:
-    OFileNotification( QObject* receiver, const char* member, OFileNotificationType type ) : _type( type )
-    {
-        _signal.connect( receiver, member );
-    }
-    ~OFileNotification()
-    {
-    }
-
-    void activate()
-    {
-        _signal.activate();
-    }
-
-    OFileNotificationType type()
-    {
-        return _type;
-    }
-
-  private:
-    OFileNotificationType _type;
-    QSignal _signal;
-};
+    qDebug( "OFileNotification::OFileNotification()" );
+}
 
 
-static QIntDict<OFileNotification> notification_list;
-
-
-void OFileNotifier::singleShot( const QString& path, QObject* receiver, const char* member, OFileNotificationType type )
+OFileNotification::~OFileNotification()
 {
+    qDebug( "OFileNotification::~OFileNotification()" );
+}
+
+
+bool OFileNotification::isActive() const
+{
+    return _active;
+}
+
+
+int OFileNotification::start( const QString& path, bool sshot, OFileNotificationType type )
+{
+    _path = QString::null;
+    _fd = 0;
+    if ( _active ) stop();
+
     int fd = ::open( (const char*) path, O_RDONLY );
     if ( fd != -1 )
     {
         if ( notification_list.isEmpty() )
         {
-            OFileNotifier::registerSignalHandler();
+            OFileNotification::registerSignalHandler();
         }
         int result = ::fcntl( fd, F_SETSIG, SIGRTMIN );
         if ( result == -1 )
         {
-            qWarning( "OFileNotifier::singleShot(): Can't subscribe to '%s': %s.", (const char*) path, strerror( errno ) );
-            return;
+            qWarning( "OFileNotification::start(): Can't subscribe to '%s': %s.", (const char*) path, strerror( errno ) );
+            return -1;
         }
+        if ( !sshot ) (int) type |= (int) Multi;
         result = ::fcntl( fd, F_NOTIFY, type );
         if ( result == -1 )
         {
-            qWarning( "OFileNotifier::singleShot(): Can't subscribe to '%s': %s.", (const char*) path, strerror( errno ) );
-            return;
+            qWarning( "OFileNotification::start(): Can't subscribe to '%s': %s.", (const char*) path, strerror( errno ) );
+            return -1;
         }
-        qDebug( "OFileNotifier::singleShot(): Subscribed for changes to %s (fd = %d)", (const char*) path, fd );
-        notification_list.insert( fd, new OFileNotification( receiver, member, type ) );
+        qDebug( "OFileNotification::start(): Subscribed for changes to %s (fd = %d, mask = 0x%0x)", (const char*) path, fd, type );
+        notification_list.insert( fd, this );
+        _type = type;
+        _path = path;
+        _fd = fd;
+        return fd;
     }
     else
     {
-        qWarning( "OFileNotifier::singleShot(): Error with path '%s': %s.", (const char*) path, strerror( errno ) );
+        qWarning( "OFileNotification::start(): Error with path '%s': %s.", (const char*) path, strerror( errno ) );
+        return -1;
     }
 }
 
 
-void OFileNotifier::__signalHandler( int sig, siginfo_t *si, void *data )
+void OFileNotification::stop()
 {
-    qWarning( "OFileNotifier::__signalHandler(): reached." );
+    if ( !_active ) return;
+
+    int result = ::fcntl( _fd, F_NOTIFY, 0 );
+    if ( result == -1 )
+    {
+        qWarning( "OFileNotification::stop(): Can't remove subscription to '%s': %s.", (const char*) _path, strerror( errno ) );
+    }
+    else
+    {
+        ::close( _fd );
+        _type = Single;
+        _path = QString::null;
+        _fd = 0;
+        _active = false;
+    }
+}
+
+
+OFileNotificationType OFileNotification::type() const
+{
+    return _type;
+}
+
+
+QString OFileNotification::path() const
+{
+    return _path;
+}
+
+int OFileNotification::fileno() const
+{
+    return _fd;
+}
+
+void OFileNotification::activate()
+{
+    emit triggered();
+    _signal.activate();
+}
+
+
+void OFileNotification::singleShot( const QString& path, QObject* receiver, const char* member, OFileNotificationType type )
+{
+    OFileNotification* ofn = new OFileNotification();
+    ofn->_signal.connect( receiver, member );
+    ofn->start( path, true, type );
+}
+
+
+void OFileNotification::__signalHandler( int sig, siginfo_t *si, void *data )
+{
+    qWarning( "OFileNotification::__signalHandler(): reached." );
     int fd = si->si_fd;
     OFileNotification* fn = notification_list[fd];
     if ( fn )
@@ -118,40 +178,48 @@ void OFileNotifier::__signalHandler( int sig, siginfo_t *si, void *data )
         #if 1
         if ( !(fn->type() & Multi) )
         {
-            qDebug( "OFileNotifier::__signalHandler(): '%d' was singleShot. Removing from list.", fd );
+            qDebug( "OFileNotification::__signalHandler(): '%d' was singleShot. Removing from list.", fd );
             notification_list.remove( fd );
             if ( notification_list.isEmpty() )
             {
-                OFileNotifier::unregisterSignalHandler();
+                OFileNotification::unregisterSignalHandler();
             }
         }
         #endif
     }
     else
     {
-        qWarning( "OFileNotifier::__signalHandler(): D'oh! Called without fd in notification_list. Race condition?" );
+        qWarning( "OFileNotification::__signalHandler(): D'oh! Called without fd in notification_list. Race condition?" );
     }
 }
 
 
-void OFileNotifier::registerSignalHandler()
+bool OFileNotification::registerSignalHandler()
 {
     struct sigaction act;
-    act.sa_sigaction = OFileNotifier::__signalHandler;
+    act.sa_sigaction = OFileNotification::__signalHandler;
     ::sigemptyset( &act.sa_mask );
     act.sa_flags = SA_SIGINFO;
-    ::sigaction( SIGRTMIN, &act, NULL );
-    qDebug( "OFileNotifier::registerSignalHandler(): done" );
+    if ( ::sigaction( SIGRTMIN, &act, NULL ) == -1 )
+    {
+        qWarning( "OFileNotification::registerSignalHandler(): couldn't register signal handler: %s", strerror( errno ) );
+        return false;
+    }
+    qDebug( "OFileNotification::registerSignalHandler(): done" );
 }
 
 
-void OFileNotifier::unregisterSignalHandler()
+void OFileNotification::unregisterSignalHandler()
 {
     struct sigaction act;
     act.sa_sigaction = ( void (*)(int, siginfo_t*, void*) ) SIG_DFL;
-    sigemptyset( &act.sa_mask );
-    ::sigaction( SIGRTMIN, &act, NULL );
-    qDebug( "OFileNotifier::unregisterSignalHandler(): done" );
+    ::sigemptyset( &act.sa_mask );
+    if ( ::sigaction( SIGRTMIN, &act, NULL ) == -1 )
+    if ( ::sigaction( SIGRTMIN, &act, NULL ) == -1 )
+    {
+        qWarning( "OFileNotification::unregisterSignalHandler(): couldn't deregister signal handler: %s", strerror( errno ) );
+    }
+    qDebug( "OFileNotification::unregisterSignalHandler(): done" );
 }
 
 

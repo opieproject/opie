@@ -8,12 +8,13 @@ using namespace Opie::Core;
 using namespace Opie::Ui;
 
 /* QT */
+#include <qcheckbox.h>
 #include <qvbox.h>
 #include <qhbox.h>
 #include <qhbuttongroup.h>
 #include <qvbuttongroup.h>
+#include <qmessagebox.h>
 #include <qpushbutton.h>
-#include <qcheckbox.h>
 
 class DemoApp : public OApplication
 {
@@ -27,7 +28,10 @@ public:
 
     l = new OListView( vbox );
     l->addColumn( "Notification Path" );
-    l->addColumn( "Trigger" );
+    l->addColumn( "Trigger Type" );
+    l->addColumn( "Trigger Mask" );
+    l->setColumnAlignment( 1, AlignCenter );
+    l->setColumnAlignment( 2, AlignCenter );
 
     QHBox* hbox = new QHBox( vbox );
 
@@ -45,6 +49,7 @@ public:
     g2->insert( c5, Delete );
     g2->insert( c6, Rename );
     g2->insert( c7, Attrib );
+    connect( g2, SIGNAL( pressed(int) ), this, SLOT( modifierClicked(int) ) );
 
     g1 = new QVButtonGroup( "Add/Remove", hbox );
     QPushButton* plus1 = new QPushButton( "Add\n&Single", g1 );
@@ -68,15 +73,26 @@ public:
 public:
     void addTrigger( bool multi = false )
     {
+        if ( !m )
+        {
+            QMessageBox::warning( 0, "Add Trigger", "<p>Can't add trigger without at least one selected trigger type</p>", "&Sorry", 0 );
+            return;
+        }
+
         QString filename = OFileDialog::getOpenFileName( OFileSelector::ExtendedAll );
         if ( !filename.isEmpty() )
         {
             odebug << "Filename = " << filename << oendl;
-            new OListViewItem( l, filename, "Modify" );
 
+            int fntype = m;
+            if ( multi ) fntype |=(int) Multi;
 
-
-            OFileNotifier::singleShot( filename, this, SLOT( trigger() ) );
+            QString modifier = QString().sprintf( " = 0x%08x", fntype );
+            new OListViewItem( l, filename, multi ? "MULTI" : "SINGLE", modifier );
+            if ( !multi )
+                OFileNotification::singleShot( filename, this, SLOT( trigger() ), (OFileNotificationType) fntype );
+            else
+                OFileNotification::singleShot( filename, this, SLOT( trigger() ), (OFileNotificationType) fntype );
         }
         else
         {
@@ -85,14 +101,23 @@ public:
     }
 
 public slots:
-
+    void modifierClicked( int modifier ) { (int)m ^= modifier; };
     void addSingle() { addTrigger(); };
     void addMulti() { addTrigger( true ); };
 
     void delTrigger()
     {
-        QString filename( "bla" );
-        odebug << "Filename = " << filename << oendl;
+        QListViewItem* item = l->selectedItem();
+        if ( !item )
+        {
+            QMessageBox::warning( 0, "Del Trigger", "<p>No trigger selected!</p>", "&Sorry", 0 );
+            return;
+        }
+        else
+        {
+            QString filename( item->text( 0 ) );
+            odebug << "Filename = " << filename << oendl;
+        }
     }
 
     void trigger()
@@ -104,7 +129,7 @@ private:
   OListView* l;
   QButtonGroup* g1;
   QButtonGroup* g2;
-  int m;
+  OFileNotificationType m;
 };
 
 int main( int argc, char** argv )
