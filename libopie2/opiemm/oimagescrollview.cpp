@@ -461,7 +461,6 @@ void OImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clip
         p->fillRect(clipx,clipy,clipw,cliph, backgroundColor());
     }
     if (w>0 && h>0&&x<_pdata.width()&&y<_pdata.height()) {
-        odebug << "Drawing pixmap" << oendl;
         p->drawPixmap(clipx,clipy,_pdata,x,y,w,h);
     }
 }
