@@ -58,6 +58,7 @@
 #include <sys/stat.h>
 
 #include "ofileselector.h"
+//#include "ofileview.h"
 
 QMap<QString,QPixmap> *OFileSelector::m_pixmaps = 0;
 
