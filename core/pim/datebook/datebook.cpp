@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.13 2002-06-27 12:42:37 zecke Exp $
+** $Id: datebook.cpp,v 1.14 2002-07-09 14:45:24 leseb Exp $
 **
 **********************************************************************/
 
@@ -128,7 +128,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     connect( a, SIGNAL( activated() ), this, SLOT( fileNew() ) );
     a->addTo( sub_bar );
 
-    a = new QAction( tr( "Today" ), Resource::loadPixmap( "to_day" ),  QString::null, 0, g, 0 );
+    a = new QAction( tr( "Today" ), Resource::loadPixmap( "datebook/to_day" ),  QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( slotToday() ) );
     a->addTo( sub_bar );
     a->addTo( view );
@@ -148,7 +148,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     a->setToggleAction( TRUE );
     weekAction = a;
 
-    a = new QAction( tr( "WeekLst" ), Resource::loadPixmap( "weeklst" ), QString::null, 0, g, 0 );
+    a = new QAction( tr( "WeekLst" ), Resource::loadPixmap( "datebook/weeklst" ), QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( viewWeekLst() ) );
     a->addTo( sub_bar );
     a->addTo( view );

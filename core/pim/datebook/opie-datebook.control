@@ -1,4 +1,4 @@
-Files: bin/datebook apps/Applications/datebook.desktop
+Files: bin/datebook apps/Applications/datebook.desktop pics/datebook
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
