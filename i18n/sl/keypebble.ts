@@ -124,117 +124,117 @@ na ta račun, prosim poizkusite kasneje.</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova povezava</translation>
     </message>
     <message>
         <source>Open Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Odpri zaznamek</translation>
     </message>
     <message>
         <source>Delete Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši zaznamek</translation>
     </message>
     <message>
         <source>Send Contrl-Alt-Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Pošlji Control-Alt-Delete</translation>
     </message>
 </context>
 <context>
     <name>KVNCBookmarkDlgBase</name>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznamki</translation>
     </message>
 </context>
 <context>
     <name>KVNCConnDlgBase</name>
     <message>
         <source>VNC Viewer Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>VNC </translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Strežnik</translation>
     </message>
     <message>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži geslo</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished">Geslo:</translation>
+        <translation>Geslo:</translation>
     </message>
     <message>
         <source>Bookmark Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime zaznamka:</translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation type="unfinished">Ime gostitelja:</translation>
+        <translation>Ime gostitelja:</translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation type="unfinished">Številka prikazovalnika:</translation>
+        <translation>Številka prikazovalnika:</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbor</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation type="unfinished">Posodobi zaslon vsakih:</translation>
+        <translation>Posodobi zaslon vsakih:</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation type="unfinished">Milisekund</translation>
+        <translation>milisekund</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation type="unfinished">Zahtevaj 8-bitno sejo</translation>
+        <translation>Zahtevaj 8-bitno sejo</translation>
     </message>
     <message>
         <source>Raise on bell</source>
-        <translation type="unfinished">Vstani na zvonec</translation>
+        <translation>Vstani na zvonec</translation>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation type="unfinished">Zahtevaj deljeno sejo</translation>
+        <translation>Zahtevaj deljeno sejo</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>Scale Factor</source>
-        <translation type="unfinished"></translation>
+        <translation>Faktor povečave</translation>
     </message>
     <message>
         <source>Encodings</source>
-        <translation type="unfinished"></translation>
+        <translation>Kodiranje</translation>
     </message>
     <message>
         <source>Hextile encoding</source>
-        <translation type="unfinished">Hextile kodiranje</translation>
+        <translation>Hextile kodiranje</translation>
     </message>
     <message>
         <source>CoRRE encoding</source>
-        <translation type="unfinished">CoRRE kodiranje</translation>
+        <translation>CoRRE kodiranje</translation>
     </message>
     <message>
         <source>RRE encoding</source>
-        <translation type="unfinished">RRE kodiranje</translation>
+        <translation>RRE kodiranje</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation type="unfinished">Kopiraj pravokotno kodiranje</translation>
+        <translation>Kopiraj pravokotno kodiranje</translation>
     </message>
 </context>
 </TS>

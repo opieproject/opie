@@ -16,7 +16,7 @@
     <name>Styles</name>
     <message>
         <source>Metal</source>
-        <translation type="unfinished"></translation>
+        <translation>Kovnski</translation>
     </message>
 </context>
 </TS>

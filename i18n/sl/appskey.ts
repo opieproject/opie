@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Koledar</translation>
     </message>
 </context>
 </TS>

@@ -65,7 +65,7 @@
     </message>
     <message>
         <source>Enable background image</source>
-        <translation>Vklopi sliko ozadja</translation>
+        <translation>Vklopi sliko v ozadju</translation>
     </message>
     <message>
         <source>Default</source>
@@ -97,39 +97,39 @@
     </message>
     <message>
         <source>Tab style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil zavihka:</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavihki</translation>
     </message>
     <message>
         <source>Tabs w/icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavihki - ikone</translation>
     </message>
     <message>
         <source>Drop down list</source>
-        <translation type="unfinished"></translation>
+        <translation>Roletni seznam</translation>
     </message>
     <message>
         <source>Drop down list w/icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Roletni seznam - ikone</translation>
     </message>
     <message>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Zgoraj</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Spodaj</translation>
     </message>
     <message>
         <source>Enable advanced options in Opie apps</source>
-        <translation type="unfinished"></translation>
+        <translation>Vklopi napredne izbire v Opie programih</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Napredno</translation>
     </message>
 </context>
 <context>

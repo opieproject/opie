@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Restore Time Zone</source>
-        <translation>Restoriraj časovni pas</translation>
+        <translation>Ponastavi časovni pas</translation>
     </message>
     <message>
         <source>There was a problem setting your timezone.Your time may be wrong now...</source>

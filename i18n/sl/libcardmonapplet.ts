@@ -19,15 +19,15 @@
     </message>
     <message>
         <source>Eject SD/MMC card</source>
-        <translation>Vstavi SD/MMC kartico</translation>
+        <translation>Vstavite SD/MMC kartico</translation>
     </message>
     <message>
         <source>Eject card 0: %1</source>
-        <translation>Vstavi kartico 0: %1</translation>
+        <translation>Vstavite kartico 0: %1</translation>
     </message>
     <message>
         <source>Eject card 1: %1</source>
-        <translation>Vstavi kartico 1: %1</translation>
+        <translation>Vstavite kartico 1: %1</translation>
     </message>
 </context>
 </TS>

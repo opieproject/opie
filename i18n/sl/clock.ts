@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ura: Zamudili ste alarm.</translation>
     </message>
 </context>
 <context>

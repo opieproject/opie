@@ -53,7 +53,7 @@
     <name>AddressSettingsBase</name>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Uredi polja</translation>
+        <translation>Uredi urejevalna polja</translation>
     </message>
     <message>
         <source>Select the field order:</source>
@@ -96,11 +96,11 @@
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Napiši sporočilo</translation>
+        <translation>Pošlji epošto</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Pošlji vnos preko IR</translation>
+        <translation>Prežarči vnos</translation>
     </message>
     <message>
         <source>My Personal Details</source>
@@ -132,7 +132,7 @@ vnesete podatke!</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Ne morem urediti podatkov, trenutno sinhroniziram</translation>
+        <translation>Ne morem urejati podatkov, trenutno sinhroniziram</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
@@ -204,7 +204,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Neizpolnjeno</translation>
+        <translation>Brez</translation>
     </message>
     <message>
         <source>Font</source>
@@ -239,7 +239,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Imenski naslov</translation>
+        <translation>Naziv</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -419,7 +419,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Armania</source>
-        <translation>Armania</translation>
+        <translation>Armanija</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -427,11 +427,11 @@ Izhod?</translation>
     </message>
     <message>
         <source>Australia</source>
-        <translation>Avrstralija</translation>
+        <translation>Avstralija</translation>
     </message>
     <message>
         <source>Austria</source>
-        <translation>Astrija</translation>
+        <translation>Avstrija</translation>
     </message>
     <message>
         <source>Azerbaijan</source>
@@ -487,7 +487,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Bouvet Island</source>
-        <translation>Bovet Island</translation>
+        <translation>Bouvetski otoki</translation>
     </message>
     <message>
         <source>Brazil</source>
@@ -595,7 +595,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Dominican Republic</source>
-        <translation>Dominikanska Republika</translation>
+        <translation>Dominikanska republika</translation>
     </message>
     <message>
         <source>East Timor</source>
@@ -623,7 +623,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Estonia</source>
-        <translation>Estonia</translation>
+        <translation>Estonija</translation>
     </message>
     <message>
         <source>Ethiopia</source>
@@ -631,11 +631,11 @@ Izhod?</translation>
     </message>
     <message>
         <source>Falkland Islands</source>
-        <translation>Falkland Islands</translation>
+        <translation>Falklandski otoki</translation>
     </message>
     <message>
         <source>Faroe Islands</source>
-        <translation>Faroe Island</translation>
+        <translation>Faroeski otoki</translation>
     </message>
     <message>
         <source>Fiji</source>
@@ -659,7 +659,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Gambia</source>
-        <translation>Gamia</translation>
+        <translation>Gambija</translation>
     </message>
     <message>
         <source>Georgia</source>
@@ -707,7 +707,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Guyana</source>
-        <translation>Guyana</translation>
+        <translation>Gujana</translation>
     </message>
     <message>
         <source>Haiti</source>
@@ -775,7 +775,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Korea</source>
-        <translation>Korea</translation>
+        <translation>Koreja</translation>
     </message>
     <message>
         <source>Laos</source>
@@ -783,7 +783,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Latvia</source>
-        <translation>Latvia</translation>
+        <translation>Latvija</translation>
     </message>
     <message>
         <source>Lebanon</source>
@@ -791,7 +791,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Lesotho</source>
-        <translation>Lestosha</translation>
+        <translation>Lestoša</translation>
     </message>
     <message>
         <source>Liberia</source>
@@ -803,7 +803,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Lithuania</source>
-        <translation>Lituana</translation>
+        <translation>Lithuana</translation>
     </message>
     <message>
         <source>Luxembourg</source>
@@ -895,7 +895,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Namibia</source>
-        <translation>Namibia</translation>
+        <translation>Namibija</translation>
     </message>
     <message>
         <source>Nauru</source>
@@ -919,7 +919,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Nicaragua</source>
-        <translation>Nikarakvu</translation>
+        <translation>Nikaragva</translation>
     </message>
     <message>
         <source>Niger</source>
@@ -987,7 +987,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Qatar</source>
-        <translation>Quatr</translation>
+        <translation>Qutar</translation>
     </message>
     <message>
         <source>Reunion</source>

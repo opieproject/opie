@@ -188,7 +188,7 @@
     </message>
     <message>
         <source>Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam ukazov</translation>
     </message>
 </context>
 <context>

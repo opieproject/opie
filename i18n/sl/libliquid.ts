@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavljena translucenca</translation>
     </message>
     <message>
         <source>Menu color</source>
@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Preliv</translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
@@ -75,11 +75,11 @@
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Liquid</translation>
+        <translation>Liquid</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished">High Performance Liquid stil od Mosfeta</translation>
+        <translation>High Performance Liquid stil od Mosfeta</translation>
     </message>
 </context>
 </TS>

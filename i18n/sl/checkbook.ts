@@ -3,284 +3,284 @@
     <name>QCheckDetailsBase</name>
     <message>
         <source>Transaction Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Podrobnosti transakcije</translation>
     </message>
 </context>
 <context>
     <name>QCheckEntry</name>
     <message>
         <source>Automobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Avto</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation type="unfinished"></translation>
+        <translation>Račun</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation type="unfinished"></translation>
+        <translation>CDji</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Oblačila</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Računalnik</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation type="unfinished"></translation>
+        <translation>DVDji</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Elektronika</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation type="unfinished"></translation>
+        <translation>Zabava</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished"></translation>
+        <translation>Hrana</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation type="unfinished"></translation>
+        <translation>Bencin</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Različno</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation type="unfinished"></translation>
+        <translation>Filmi</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished"></translation>
+        <translation>Najem</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Potovanje</translation>
     </message>
     <message>
         <source>Debit Charge</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolg</translation>
     </message>
     <message>
         <source>Written Check</source>
-        <translation type="unfinished"></translation>
+        <translation>Ček</translation>
     </message>
     <message>
         <source>Transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Prenos</translation>
     </message>
     <message>
         <source>Credit Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreditna kartica</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation type="unfinished"></translation>
+        <translation>Delo</translation>
     </message>
     <message>
         <source>Family Member</source>
-        <translation type="unfinished"></translation>
+        <translation>Član družine</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation type="unfinished"></translation>
+        <translation>Različni krediti</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
-        <translation type="unfinished"></translation>
+        <translation>Avtomatsko plačilo</translation>
     </message>
     <message>
         <source>Cash</source>
-        <translation type="unfinished"></translation>
+        <translation>Gotovina</translation>
     </message>
 </context>
 <context>
     <name>QCheckEntryBase</name>
     <message>
         <source>Account Transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Transakcija računa</translation>
     </message>
     <message>
         <source>$</source>
-        <translation type="unfinished"></translation>
+        <translation>SIT</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorija:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Opis:</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tip:</translation>
     </message>
     <message>
         <source>Amount:</source>
-        <translation type="unfinished"></translation>
+        <translation>Količina:</translation>
     </message>
     <message>
         <source>Automobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Avto</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation type="unfinished"></translation>
+        <translation>Računi</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation type="unfinished"></translation>
+        <translation>CDji</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Oblačila</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Računalnik</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation type="unfinished"></translation>
+        <translation>DVDji</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Elektronika</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation type="unfinished"></translation>
+        <translation>Zabava</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished"></translation>
+        <translation>Hrana</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation type="unfinished"></translation>
+        <translation>Bencin</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Različno</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation type="unfinished"></translation>
+        <translation>Filmi</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished"></translation>
+        <translation>Najem</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Potovanje</translation>
     </message>
     <message>
         <source>Check Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Številka čeka:</translation>
     </message>
     <message>
         <source>Extra Fee:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaten honorar:</translation>
     </message>
     <message>
         <source>Additional Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodatne opombe:</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum:</translation>
     </message>
     <message>
         <source>Debit Charge</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolg</translation>
     </message>
     <message>
         <source>Written Check</source>
-        <translation type="unfinished"></translation>
+        <translation>Ček</translation>
     </message>
     <message>
         <source>Transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Prenos</translation>
     </message>
     <message>
         <source>Credit Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Kreditna kartica</translation>
     </message>
     <message>
         <source>Deposit</source>
-        <translation type="unfinished"></translation>
+        <translation>Depozit</translation>
     </message>
     <message>
         <source>Payment</source>
-        <translation type="unfinished"></translation>
+        <translation>Plačilo</translation>
     </message>
 </context>
 <context>
     <name>QCheckGraphBase</name>
     <message>
         <source>Account Graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Graf računa</translation>
     </message>
 </context>
 <context>
     <name>QCheckMMBase</name>
     <message>
         <source>Main Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Glavni menu</translation>
     </message>
     <message>
         <source>Select from the check books below or click the &quot;New&quot; icon in the toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite iz čekovne knjižice spodaj ali kliknite &quot;Nov&quot; ikono na orodni vrstici.</translation>
     </message>
 </context>
 <context>
     <name>QCheckNameBase</name>
     <message>
         <source>Check Book Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime čekovne knjižice</translation>
     </message>
     <message>
         <source>Name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime...</translation>
     </message>
     <message>
         <source>Please name your check book (limit: 15 characters):</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosim imenujte vašo čekovno knjižico (15 znakov):</translation>
     </message>
     <message>
         <source>&amp;Done</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Narejeno</translation>
     </message>
 </context>
 <context>
     <name>QCheckViewBase</name>
     <message>
         <source>Account Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Transakcija računa</translation>
     </message>
     <message>
         <source>$0.00</source>
-        <translation type="unfinished"></translation>
+        <translation>0,00 SIT</translation>
     </message>
     <message>
         <source>Balance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stanje:</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmanjkalo prostora</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -289,7 +289,12 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prišlo je do problema pri kreiranju
+nastavitvenih informacij 
+za ta program.
+
+Prosim sprostite nekaj prostora in
+poizkusite ponovno.</translation>
     </message>
 </context>
 </TS>

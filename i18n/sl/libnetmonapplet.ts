@@ -30,7 +30,7 @@
     </message>
     <message>
         <source>Enter password for %1:</source>
-        <translation>Vpiši geslo za %1:</translation>
+        <translation>Vpišite geslo za %1:</translation>
     </message>
 </context>
 </TS>

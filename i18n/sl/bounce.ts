@@ -3,98 +3,106 @@
     <name>KJezzball</name>
     <message>
         <source>Bounce</source>
-        <translation type="unfinished"></translation>
+        <translation>Odoboj</translation>
     </message>
     <message>
         <source>&amp;New game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nova igra</translation>
     </message>
     <message>
         <source>&amp;Pause game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ustavi igro</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;O</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Igra</translation>
     </message>
     <message>
         <source>Score: 00</source>
-        <translation type="unfinished"></translation>
+        <translation>Točke: 00</translation>
     </message>
     <message>
         <source>Lives: 0%</source>
-        <translation type="unfinished"></translation>
+        <translation>Življenj: 0%</translation>
     </message>
     <message>
         <source>Filled: 00%</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapolnjeno: 00%</translation>
     </message>
     <message>
         <source>Time: 00</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas: 00</translation>
     </message>
     <message>
         <source>Bounce Level %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Stopnja odboja %1</translation>
     </message>
     <message>
         <source>Score: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Točke: %1</translation>
     </message>
     <message>
         <source>Game paused.
 Press P to continue!</source>
-        <translation type="unfinished"></translation>
+        <translation>Igra zaustavljena.
+Pritisnite P za nadaljevanja!</translation>
     </message>
     <message>
         <source>Game Over!
 Score: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Konec igra!
+Točke: %1</translation>
     </message>
     <message>
         <source>Time: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas: %1</translation>
     </message>
     <message>
         <source>Lives: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Življenj: %1</translation>
     </message>
     <message>
         <source>Filled: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapolnjeno: %1%</translation>
     </message>
     <message>
         <source>Filled: 0%</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapolnjeno: 0%</translation>
     </message>
     <message>
         <source>Successfully cleared more than 75%.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Uspešno ste odtranili več kot 75%.
+</translation>
     </message>
     <message>
         <source>%1 points: 15 points per life
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 točk: 15 točk na življenje
+</translation>
     </message>
     <message>
         <source>%1 points: Bonus
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 točk: Bonus
+</translation>
     </message>
     <message>
         <source>%1 points: Total score
 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 točk: Skupno točk
+
+</translation>
     </message>
     <message>
         <source>On to level %1.
 You get %2 lives this time!</source>
-        <translation type="unfinished"></translation>
+        <translation>Na stopnji %1.
+Dobite %2 življenj!</translation>
     </message>
 </context>
 </TS>

@@ -69,6 +69,7 @@
         <source>Do you really want to delete
 </source>
         <translation>Ali res želite izbrisati
+
 </translation>
     </message>
     <message>
@@ -81,7 +82,7 @@
     </message>
     <message>
         <source>Note</source>
-        <translation></translation>
+        <translation>Opomba</translation>
     </message>
     <message>
         <source>Could not rename</source>
@@ -97,7 +98,7 @@
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation>NapredniDu izhod</translation>
+        <translation>Izhod iz programa</translation>
     </message>
     <message>
         <source>command failed!</source>
@@ -109,7 +110,7 @@
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation>Naprednidu prežarči ven</translation>
+        <translation>Prežarči ven</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -162,7 +163,8 @@
     <message>
         <source> already exists
 Do you really want to delete it?</source>
-        <translation>že obstaja Ali res želite izbrisati?</translation>
+        <translation>že obstaja.
+Ali jo res želite izbrisati?</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -179,28 +181,33 @@ Do you really want to delete it?</source>
     <message>
         <source>Could not copy
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem kopirati</translation>
     </message>
     <message>
         <source>to
 </source>
-        <translation type="unfinished"></translation>
+        <translation>v
+</translation>
     </message>
     <message>
         <source>Could not move
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem prenesti
+</translation>
     </message>
     <message>
         <source>Advanced FileManager
 is copyright 2002 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Advanced FileManager
+pravice pridržane 2002
+LJ.Potter&lt;llornkcor@handhelds.org&gt;
+in je licencirano pod GPL</translation>
     </message>
     <message>
         <source>Add To Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj med dokumente</translation>
     </message>
 </context>
 <context>
