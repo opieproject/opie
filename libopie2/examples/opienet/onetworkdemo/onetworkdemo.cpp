@@ -1,14 +1,45 @@
+/*
+               =.            This file is part of the Opie Project
+             .=l.            Copyright (C) 2004 Opie Team <opie@handhelds.org>
+           .>+-=
+ _;:,     .>    :=|.         This library is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This library is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+
+*/
+
+/* OPIE */
 #include <opie2/onetwork.h>
 #include <opie2/ostation.h>
 #include <opie2/omanufacturerdb.h>
+#include <opie2/odebug.h>
 
+/* STD */
 #include <unistd.h>
 
 using namespace Opie::Net;
 
 int main( int argc, char** argv )
 {
-    qDebug( "OPIE Network Demo" );
+    odebug << "OPIE Network Demo" << oendl;
 
     ONetwork* net = ONetwork::instance();
 
@@ -16,53 +47,53 @@ int main( int argc, char** argv )
 
     while ( it.current() )
     {
-        qDebug( "DEMO: ONetwork contains Interface '%s'", (const char*) it.current()->name() );
-        qDebug( "DEMO: Datalink code is '%d'", it.current()->dataLinkType() );
-        qDebug( "DEMO: MAC Address is '%s'", (const char*) it.current()->macAddress().toString() );
-        qDebug( "DEMO: MAC Address is '%s'", (const char*) it.current()->macAddress().toString(true) );
-        qDebug( "DEMO: MAC Manufacturer seems to be '%s'", (const char*) it.current()->macAddress().manufacturer() );
-        qDebug( "DEMO: Manufacturertest1 = '%s'", (const char*) OManufacturerDB::instance()->lookupExt( "08:00:87" ) );
-        qDebug( "DEMO: Manufacturertest2 = '%s'", (const char*) OManufacturerDB::instance()->lookupExt( "E2:0C:0F" ) );
-        qDebug( "Demo: IPv4 Address is '%s'", (const char*) it.current()->ipV4Address() );
+        odebug << "DEMO: ONetwork contains Interface '" <<  it.current()->name() << "'" << oendl;
+        odebug << "DEMO: Datalink code is '" << it.current()->dataLinkType() << "'" << oendl;
+        odebug << "DEMO: MAC Address is '" <<  it.current()->macAddress().toString() << "'" << oendl;
+        odebug << "DEMO: MAC Address is '" <<  it.current()->macAddress().toString(true) << "'" << oendl;
+        odebug << "DEMO: MAC Manufacturer seems to be '" <<  it.current()->macAddress().manufacturer() << "'" << oendl;
+        odebug << "DEMO: Manufacturertest1 = '" <<  OManufacturerDB::instance()->lookupExt( "08:00:87" ) << "'" << oendl;
+        odebug << "DEMO: Manufacturertest2 = '" <<  OManufacturerDB::instance()->lookupExt( "E2:0C:0F" ) << "'" << oendl;
+        odebug << "Demo: IPv4 Address is '" <<  it.current()->ipV4Address() << "'" << oendl;
         if ( it.current()->isWireless() )
         {
             OWirelessNetworkInterface* iface = static_cast<OWirelessNetworkInterface*>( it.current() );
-            qDebug( "DEMO: '%s' seems to feature the wireless extensions.", (const char*) iface->name() );
-            qDebug( "DEMO: Current SSID is '%s'", (const char*) iface->SSID() );
-            qDebug( "DEMO: Antenna is tuned to '%f', that is channel %d", iface->frequency(), iface->channel() );
+            odebug << "DEMO: '" <<  iface->name() << "' seems to feature the wireless extensions." << oendl;
+            odebug << "DEMO: Current SSID is '" <<  iface->SSID() << "'" << oendl;
+            odebug << "DEMO: Antenna is tuned to '" << iface->frequency() << "', that is channel " << iface->channel() << "" << oendl;
 
             //if ( iface->mode() == OWirelessNetworkInterface::adhoc )
             //{
-                //qDebug( "DEMO: Associated AP has MAC Address '%s'", (const char*) iface->associatedAP().toString() );
+                //odebug << "DEMO: Associated AP has MAC Address '" <<  iface->associatedAP().toString() << "'" << oendl;
             //}
 
             /*
 
             // nickname
-            qDebug( "DEMO: Current NickName is '%s'", (const char*) iface->nickName() );
+            odebug << "DEMO: Current NickName is '" <<  iface->nickName() << "'" << oendl;
             iface->setNickName( "MyNickName" );
             if ( iface->nickName() != "MyNickName" )
-                qDebug( "DEMO: Warning! Can't change nickname" );
+                odebug << "DEMO: Warning! Can't change nickname" << oendl;
             else
-                qDebug( "DEMO: Nickname change successful." );
+                odebug << "DEMO: Nickname change successful." << oendl;
 
             /*
 
             // operation mode
-            qDebug( "DEMO: Current OperationMode is '%s'", (const char*) iface->mode() );
+            odebug << "DEMO: Current OperationMode is '" <<  iface->mode() << "'" << oendl;
             iface->setMode( "adhoc" );
             if ( iface->mode() != "adhoc" )
-                qDebug( "DEMO: Warning! Can't change operation mode" );
+                odebug << "DEMO: Warning! Can't change operation mode" << oendl;
             else
-                qDebug( "DEMO: Operation Mode change successful." );
+                odebug << "DEMO: Operation Mode change successful." << oendl;
 
             // RF channel
-            qDebug( "DEMO: Current Channel is '%d'", iface->channel() );
+            odebug << "DEMO: Current Channel is '" << iface->channel() << "'" << oendl;
             iface->setChannel( 1 );
             if ( iface->channel() != 1 )
-                qDebug( "DEMO: Warning! Can't change RF channel" );
+                odebug << "DEMO: Warning! Can't change RF channel" << oendl;
             else
-                qDebug( "DEMO: RF channel change successful." );
+                odebug << "DEMO: RF channel change successful." << oendl;
 
             iface->setMode( "managed" );
 
@@ -75,18 +106,18 @@ int main( int argc, char** argv )
             OStationList* stations = iface->scanNetwork();
             if ( stations )
             {
-                qDebug( "DEMO: # of stations around = %d", stations->count() );
+                odebug << "DEMO: # of stations around = " << stations->count() << "" << oendl;
                 OStation* station;
                 for ( station = stations->first(); station != 0; station = stations->next() )
                 {
-                    qDebug( "DEMO: station dump following..." );
+                    odebug << "DEMO: station dump following..." << oendl;
                     station->dump();
                 }
             }
 
             else
             {
-                qDebug( "DEMO: Warning! Scan didn't work!" );
+                odebug << "DEMO: Warning! Scan didn't work!" << oendl;
             }
 
             /*
@@ -106,17 +137,17 @@ int main( int argc, char** argv )
             iface->setUp( false );
             iface->setMacAddress( addr );
             iface->setUp( true );
-            qDebug( "DEMO: MAC Address now is '%s'", (const char*) iface->macAddress().toString() );
+            odebug << "DEMO: MAC Address now is '" <<  iface->macAddress().toString() << "'" << oendl;
 
             */
 
             // monitor test
 
-            
 
-            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
+
+            odebug << "DEMO: current interface mode is '" <<  iface->mode() << "'" << oendl;
             iface->setMode( "monitor" );
-            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
+            odebug << "DEMO: current interface mode is '" <<  iface->mode() << "'" << oendl;
 
             sleep( 1 );
 
@@ -124,17 +155,17 @@ int main( int argc, char** argv )
             iface->setMode( "managed" );
 
             //sleep( 1 );
-            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
+            odebug << "DEMO: current interface mode is '" <<  iface->mode() << "'" << oendl;
 
             /*iface->setMode( "adhoc" );
             sleep( 1 );
-            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
+            odebug << "DEMO: current interface mode is '" <<  iface->mode() << "'" << oendl;
             iface->setMode( "managed" );
             sleep( 1 );
-            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );
+            odebug << "DEMO: current interface mode is '" <<  iface->mode() << "'" << oendl;
             iface->setMode( "master" );
             sleep( 1 );
-            qDebug( "DEMO: current interface mode is '%s'", (const char*) iface->mode() );*/
+            odebug << "DEMO: current interface mode is '" <<  iface->mode() << "'" << oendl; */
 
         }
         ++it;

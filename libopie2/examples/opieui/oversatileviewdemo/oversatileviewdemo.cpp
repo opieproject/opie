@@ -102,59 +102,59 @@ OVersatileViewDemo::~OVersatileViewDemo()
 
 void OVersatileViewDemo::selectionChanged()
 {
-    qDebug( "received signal selectionChanged()" );
+    odebug << "received signal selectionChanged()" << oendl; 
 }
 void OVersatileViewDemo::selectionChanged( OVersatileViewItem * item )
 {
-    qDebug( "received signal selectionChanged(OVersatileViewItem*)" );
+    odebug << "received signal selectionChanged(OVersatileViewItem*)" << oendl; 
 }
 void OVersatileViewDemo::currentChanged( OVersatileViewItem * item )
 {
-    qDebug( "received signal currentChanged( OVersatileViewItem * )" );
+    odebug << "received signal currentChanged( OVersatileViewItem * )" << oendl; 
 }
 void OVersatileViewDemo::clicked( OVersatileViewItem * item )
 {
-    qDebug( "received signal clicked( OVersatileViewItem * )" );
+    odebug << "received signal clicked( OVersatileViewItem * )" << oendl; 
 }
 void OVersatileViewDemo::pressed( OVersatileViewItem * item )
 {
-    qDebug( "received signal pressed( OVersatileViewItem * )" );
+    odebug << "received signal pressed( OVersatileViewItem * )" << oendl; 
 }
 
 void OVersatileViewDemo::doubleClicked( OVersatileViewItem *item )
 {
-    qDebug( "received signal doubleClicked( OVersatileViewItem *item )" );
+    odebug << "received signal doubleClicked( OVersatileViewItem *item )" << oendl; 
 }
 void OVersatileViewDemo::returnPressed( OVersatileViewItem *item )
 {
-    qDebug( "received signal returnPressed( OVersatileViewItem *item )" );
+    odebug << "received signal returnPressed( OVersatileViewItem *item )" << oendl; 
 }
 
 void OVersatileViewDemo::onItem( OVersatileViewItem *item )
 {
-    qDebug( "received signal onItem( OVersatileViewItem *item )" );
+    odebug << "received signal onItem( OVersatileViewItem *item )" << oendl; 
 }
 void OVersatileViewDemo::onViewport()
 {
-    qDebug( "received signal onViewport()" );
+    odebug << "received signal onViewport()" << oendl; 
 }
 
 void OVersatileViewDemo::expanded( OVersatileViewItem *item )
 {
-    qDebug( "received signal expanded( OVersatileViewItem *item )" );
+    odebug << "received signal expanded( OVersatileViewItem *item )" << oendl; 
 }
 
 void OVersatileViewDemo::collapsed( OVersatileViewItem *item )
 {
-    qDebug( "received signal collapsed( OVersatileViewItem *item )" );
+    odebug << "received signal collapsed( OVersatileViewItem *item )" << oendl; 
 }
 
 void OVersatileViewDemo::moved()
 {
-    qDebug( "received signal moved( OVersatileViewItem *item )" );
+    odebug << "received signal moved( OVersatileViewItem *item )" << oendl; 
 }
 
 void OVersatileViewDemo::contextMenuRequested( OVersatileViewItem *item, const QPoint& pos, int col )
 {
-    qDebug( "received signal contextMenuRequested( OVersatileViewItem *item )" );
+    odebug << "received signal contextMenuRequested( OVersatileViewItem *item )" << oendl; 
 }

@@ -99,7 +99,7 @@ void OpieUIDemo::demo( int d )
 
 void OpieUIDemo::demoOCompletionBox()
 {
-    qDebug( "ocompletionbox" );
+    odebug << "ocompletionbox" << oendl; 
 
     OCompletionBox* box = new OCompletionBox( 0 );
     box->insertItem( "This CompletionBox" );
@@ -115,7 +115,7 @@ void OpieUIDemo::demoOCompletionBox()
 
 void OpieUIDemo::demoOLineEdit()
 {
-    qDebug( "olineedit" );
+    odebug << "olineedit" << oendl; 
 
     OLineEdit *edit = new OLineEdit( 0, "lineedit" );
 
@@ -135,7 +135,7 @@ void OpieUIDemo::demoOLineEdit()
 
 void OpieUIDemo::demoOComboBox()
 {
-    qDebug( "ocombobox" );
+    odebug << "ocombobox" << oendl; 
 
     OComboBox *combo = new OComboBox( true, 0, "combobox" );
 
@@ -160,7 +160,7 @@ void OpieUIDemo::demoOComboBox()
 
 void OpieUIDemo::demoOEditListBox()
 {
-    qDebug( "oeditlistbox" );
+    odebug << "oeditlistbox" << oendl; 
 
     OEditListBox* edit = new OEditListBox( "OEditListBox", 0, "editlistbox" );
 
@@ -185,7 +185,7 @@ void OpieUIDemo::demoOEditListBox()
 
 void OpieUIDemo::demoOSelector()
 {
-    qDebug( "oselector" );
+    odebug << "oselector" << oendl; 
 
     OHSSelector* sel = new OHSSelector( 0, "gradientselector" );
     //#sel->resize( QSize( 200, 30 ) );

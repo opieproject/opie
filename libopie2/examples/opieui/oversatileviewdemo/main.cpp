@@ -23,10 +23,10 @@ using namespace Opie::Ui;
 int main( int argc, char **argv )
 {
     OApplication a( argc, argv, "Opie UI Demo" );
-    qDebug( "." );
+    odebug << "." << oendl; 
     OpieUIDemo e;
-    qDebug( "." );
+    odebug << "." << oendl; 
     a.showMainWidget(&e);
-    qDebug( "." );
+    odebug << "." << oendl; 
     return a.exec();
 }
