@@ -29,7 +29,7 @@
 	<para>
 		However, you can use every editor which works with UTF8, for example VIM or
 		EMACS.  The advantage of Linguist is that its GUI is optimized for &opie;s
-		translationfiles and can help you by proposing a translation and notice
+		translationfiles and can help you by proposing a translation and warn
 		you if there is an error within the translation.
 	</para> 
 	<para>
@@ -66,7 +66,7 @@
 		</listitem>
 		<listitem>
 		<para>
-			Don't put a space in front of a punctuation mark. So write eg "this is a demonstation!" insteadt
+			Don't put a space in front of a punctuation mark. So write eg "this is a demonstation!" instead
 			of "this is a demonstation !".
 		</para>
 		</listitem>
@@ -77,7 +77,7 @@
 	<title>Examplecode</title> 
 	
 	<para>
-		In the next paragraph you see an example of how the XML looks like.
+		In the next paragraph you see an example of what the XML looks like.
 	</para>
 <!--
 	<programlisting>
@@ -118,7 +118,7 @@
 <section>
 	<title>Filetypes</title>
 	<para>
-		As a translator one need to know three different filetypes.
+		As a translator one needs to know three different filetypes.
 		
 		<filename class='extension'>ts</filename>
 		.ts-files are the most important files for translators.  In these files are all strings which
@@ -128,8 +128,8 @@
 		
 		<filename class='extension'>pro</filename>
 		Every application has a .pro-file from which the Makefiles are generated.  As a translator
-		you need to check if in every .pro-file is a line for the language you would to
-		translate for.  A line like this should look this way:
+		you need to check if in every .pro-file is a line for the language you want to translate to.  
+		This line should look like::
 
 		<programlisting>
 			 ../../../i18n/de/today.ts \
@@ -160,26 +160,26 @@
 		<listitem>
 		<para>
 			The binary .qm-files are created by either the translationcoordinator or by the feed-manager.
-			Of course, the translators can created them as described above for testingpurposes but 
+			Of course, the translators can create them as described above for testing purposes but 
 			the official files will be provided.  
 		</para>
 		</listitem>
 		<listitem>
 		<para>
-			Whenever you find a typo or an incorrect message contact the author of the application
-			and/or use our bugtrackingsystem (Mantis) to make sure this string will be fixed.
+			Whenever you find a typo or an incorrect message, contact the author of the application
+			and/or use our bug tracking system (Mantis) to make sure this string will be fixed.
 		</para>
 		</listitem>
 		<listitem>
 		<para>
-			If you find a string like "Form1" contact the translationcoordinator. These strings
+			If you find a string like "Form1" contact the translation coordinator. These strings
 			should not be in the translationfiles. You don't need to translate them.
 		</para>
 		</listitem>
 		<listitem>
 		<para>
-			If you check you translation and see a not translated string even though you translationfile
-			is 100% translated use the bugtrackingsystem and/or contact the author of that application
+			If you check you translation and see an un-translated string even though your translationfile
+			is 100% translated use the bug tracking system and/or contact the author of that application
 			directly so that this bug is fixed.
 		</para>
 		</listitem>
