@@ -18,3 +18,5 @@ Comment[pt_BR]=Configura a data e hora via rede (NTP)
 Name[zh_TW]=網絡時間
 Name[sl]=Datum/Čas
 Comment[sl]=Nastavi datum in čas iz mreže
+Name[nl]=Systeemtijd
+Comment[nl]=Synchroniseer de systeemtijd met NTP

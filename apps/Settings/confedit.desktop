@@ -16,3 +16,5 @@ Comment[pt_BR]=Editor dos ficheiros ~/Settings/*.conf
 Name[zh_TW]=編輯設定檔
 Name[sl]=Urejevalnik nastavitvenih datotek
 Comment[sl]=Uredi ~/Settings/*.conf datoteke
+Name[nl]=Wijzig instellingen
+Comment[nl]=Wijzig de ~/Settings/*.conf bestanden
