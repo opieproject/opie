@@ -1,4 +1,5 @@
   config TODAY_FORTUNE
     boolean "opie-today-fortuneplugin (a joke a day keeps the doctor away)"
     default "y"
+    depends (LIBQPE || LIBQPE-X11) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2PIM && TODAY
     depends TODAY

@@ -17,7 +17,7 @@
 #ifndef FORTUNE_PLUGIN_IMPL_H
 #define FORTUNE_PLUGIN_IMPL_H
 
-#include <opie/todayplugininterface.h>
+#include <opie2/todayplugininterface.h>
 
 class FortunePlugin;
 

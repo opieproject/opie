@@ -17,12 +17,11 @@
 #ifndef FORTUNE_PLUGIN_WIDGET_H
 #define FORTUNE_PLUGIN_WIDGET_H
 
+#include <opie2/oprocess.h>
+#include <opie2/oticker.h>
+
 #include <qstring.h>
 #include <qwidget.h>
-
-#include <opie/oticker.h>
-#include <opie/oprocess.h>
-
 
 class FortunePluginWidget : public QWidget
 {

@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/plugins
 Maintainer: Chris Larson <kergoth@handhelds.org>
 Architecture: arm
-Depends: opie-today, fortune (<=9708-0.1) | fortune-mod
+Depends: opie-today, fortune (<=9708-0.1) | fortune-mod, libopiecore2, libopiepim2, libopieui2
 Description: 'fortune' plugin for Today
 Version: $QPE_VERSION$EXTRAVERSION

@@ -17,11 +17,11 @@
 #ifndef FORTUNE_PLUGIN_H
 #define FORTUNE_PLUGIN_H
 
+#include <opie2/oclickablelabel.h>
+#include <opie2/todayplugininterface.h>
+
 #include <qstring.h>
 #include <qwidget.h>
-
-#include <opie/oclickablelabel.h>
-#include <opie/todayplugininterface.h>
 
 class FortunePlugin : public TodayPluginObject
 {
