@@ -102,6 +102,8 @@ private:
 /**
  * A Reminder will be put into the
  * datebook
+ * Note that the returned dateTime() may be not valid.
+ * In these cases one must resolve the uid and get the OEvent
  */
 class OPimReminder : public OPimNotify {
 public:
