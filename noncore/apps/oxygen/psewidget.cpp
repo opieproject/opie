@@ -17,6 +17,7 @@
 
 #include <qpe/config.h>
 #include <qlayout.h>
+#include <qpe/qpeapplication.h>
 #include <qlist.h>
 #include "dataTable.h"
 #include "psewidget.h"
@@ -32,7 +33,7 @@ PSEWidget::PSEWidget() : QWidget()
     QGridLayout *grid = new QGridLayout( 18,10 );
     int h=0, v=0;
     
-    Config configobj( "oxygendata" );
+    Config configobj( QPEApplication::qpeDir() +"share/oxygen/oxygendata", Config::File );
     for( int n = 0 ; n < 118 ; n++ )
     {
         configobj.setGroup( QString::number( n+1 ));
