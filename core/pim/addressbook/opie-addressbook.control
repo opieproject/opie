@@ -1,4 +1,4 @@
-Files: bin/addressbook apps/Applications/addressbook.desktop
+Files: bin/addressbook apps/1Pim/addressbook.desktop
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>
