@@ -155,7 +155,7 @@ QString NetworkAppletControl::guessDevice( ONetworkInterface* iface )
     if ( QString( iface->name() ).contains( "usb" ) )
         return "networksettings/usb";
     if ( QString( iface->name() ).contains( "ir" ) )
-        return "networksettings/ir";
+        return "networksettings/irda";
 
     //TODO: Insert neat symbol and check for tunnel devices
 
