@@ -557,6 +557,8 @@ void Desktop::togglePower()
   
   system("apm --suspend");
   
+  sleep(2);
+
   QWSServer::screenSaverActivate( FALSE );
   {
     QCopEnvelope("QPE/Card", "mtabChanged()" ); // might have changed while asleep
@@ -566,6 +568,7 @@ void Desktop::togglePower()
   if ( wasloggedin ) {
     login(TRUE);
   }
+  
   execAutoStart();
   //qcopBridge->closeOpenConnections();
   //qDebug("called togglePower()!!!!!!");
