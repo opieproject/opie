@@ -1,7 +1,7 @@
 /*
  * Communication protocol
  *
- * $Id: wl_proto.cc,v 1.6 2002-12-31 12:36:07 mjm Exp $
+ * $Id: wl_proto.cc,v 1.7 2003-01-05 11:18:27 mjm Exp $
  */
 
 #include "wl_types.hh"
@@ -15,6 +15,7 @@ int add_field(char *buffer, const char *string, int len)
   char newlen[5];
   
   /* 3 Byte = Length */
+  memset(newlen, 0, sizeof(newlen));
   snprintf(newlen, sizeof(newlen) - 1, "%.3d", len);
   memcpy(buffer, newlen, 3);
   
@@ -30,11 +31,11 @@ int get_field(const char *buffer, char *out, int maxlen)
   char len[5];
 
   /* Get length of value */
+  memset(len, 0, sizeof(len));
   memcpy(len, buffer, 3);
 
   /* Copy buffer to out pointer */
   memset(out, 0, maxlen);
-
   if(atoi(len) > maxlen -1)
     memcpy(out, buffer + 3, maxlen - 1);
   else
@@ -52,6 +53,8 @@ int send_network_found (const char *guihost, int guiport, void *structure)
   unsigned int len = 0;
 
   ptr = (wl_network_t *)structure;
+
+  memcpy(buffer, 0, sizeof(buffer));
 
   /* Type = Found new net (without length field) */
   memset(temp, 0, sizeof(temp));

@@ -1,6 +1,6 @@
-# $Id: Makefile,v 1.5 2002-12-27 16:35:28 mjm Exp $
+# $Id: Makefile,v 1.6 2003-01-05 11:18:27 mjm Exp $
 
-OBJ = wl_proto.o wl_sock.o wl_log.o cardmode.o sniff.o
+OBJ = wl_proto.o wl_sock.o wl_log.o wl_conf.o cardmode.o sniff.o 
 CPP = g++
 CPPFLAGS = -Wall -pedantic -g -DDEBUG
 

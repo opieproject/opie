@@ -1,7 +1,7 @@
 /* 
  * Global bufffer size and type definitions
  *
- * $Id: wl_types.hh,v 1.1 2002-12-31 12:50:44 mjm Exp $
+ * $Id: wl_types.hh,v 1.2 2003-01-05 11:18:27 mjm Exp $
  *
  */
 
@@ -14,8 +14,10 @@
 #define WL_STARTSNIFF 98
 #define WL_STOPSNIFF  99
 
+/* Socket specific */
 #define WL_SOCKBUF 512 /* Buffer for wl_send and wl_recv calls */
 
+/* Protocol specific */
 
 /* WL network structure */
 typedef struct {
@@ -26,6 +28,10 @@ typedef struct {
   char mac[64];    /* MAC address of Accesspoint     */
   char bssid[128]; /* BSSID of Net                   */
 } wl_network_t;
+
+/* Config specific */
+#define WL_CONFFILE "sample.conf"
+#define WL_CONFBUFF 128
 
 #endif /* WL_TYPES_HH */
 
