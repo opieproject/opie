@@ -30,19 +30,92 @@
 #ifndef OGLOBAL_H
 #define OGLOBAL_H
 
+#include <qpe/global.h>
+#include <qpe/timestring.h>
+
 #include <opie2/oconfig.h>
+#include <static.h>
 
 //FIXME Is it wise or even necessary to inherit OGlobal from Global?
 //      once we totally skip libqpe it should ideally swallow Global -zecke
 //      You're right. I deleted global as the base class. -mickeyl
 
-class OGlobal
+
+class QFile;
+class QString;
+/**
+ *\brief OGlobal contains a list of generic functions
+ *
+ * The class OGlobal contains small utility functions
+ * which might be useful for other applications to use. It features access
+ * to the global device config and specialized functions to get information
+ * out of this config like Weekstart or Owner name.
+ *
+ * @todo ODP implement the things from Global which are good
+ */
+class OGlobal : public Global
 {
-  public:
+public:
+
+    //  how do they relate to our Document Idea
+    /** @name Document System related functions
+     *
+     */
+    //@{
+    static bool isAppLnkFileName( const QString& str );
+    static bool isDocumentFileName( const QString& file );
+    //@}
+
+    /** @name File Operations
+     *  File operations provided by OGlobal
+     */
+    //@{
+    static QString tempDirPath();
+    static QString homeDirPath();
+    static QString tempFileName( const QString& );
+    static bool renameFile( const QString& from, const QString& to );
+    static bool truncateFile( QFile &f, off_t size );
+    //@}
+
+
+    static QString generateUuid();
+
+    /** @name Convert Content
+     * Convert Content of a QByteArray
+     */
+    //@{
+    static QByteArray encodeBase64(const QByteArray& );
+    static QByteArray decodeBase64(const QByteArray& );
+    //@}
+
     //FIXME Do we want to put that into OApplication as in KApplication? -zecke
     //      We already have a per-application config in OApplication
     //      ( accessed through oApp->config() ), but this one is the global one! -mickeyl
+    /** @name Config and Owner related Information
+     *
+     */
+    //@{
     static OConfig* config();
+    static QString ownerName();
+    static bool weekStartsOnMonday();
+    static bool useAMPM();
+#ifdef ODP
+#error "Fix dateFormat"
+   /**
+    * For Qt3/Qt4 we can use QDate::toString(OGlobal::dateFormat)
+    * See if we need to use the function with String in it
+    * Anyway this is the future
+    * for now still use TimeString!
+    */
+    static DateFormat dateFormat();
+#endif
+
+    static void setWeekStartsOnMonday( bool );
+    static void setUseAMPM( bool );
+    static void setDateFormat( const DateFormat& );
+    //@}
+
+private:
     static OConfig* _config;
 };
 
