@@ -18,10 +18,12 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_INITAPP
 #include "dropins.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qpainter.h>
@@ -29,7 +31,6 @@
 #include <qtimer.h>
 #include <qguardedptr.h>
 #include <qcopchannel_qws.h>
-#define QTOPIA_INTERNAL_INITAPP
 
 #ifdef private
 #       undef  private
@@ -61,7 +62,6 @@ extern char **environ;
 #define SPT_BUFSIZE     2048
 #endif
 #include <stdarg.h>
-using namespace Opie::Ui;
 void setproctitle (const char *fmt,...) {
     int        i;
     char       buf[SPT_BUFSIZE];
@@ -133,7 +133,7 @@ private slots:
         QDataStream stream( data, IO_ReadOnly );
         QStrList argList;
         stream >> argList;
-        odebug << "QuickLauncher execute: " << argList.at(0) << "" << oendl;
+        odebug << "QuickLauncher execute: " << argList.at(0) << oendl;
         doQuickLaunch( argList );
         delete this;
     } else if ( msg == "execute(QString)" ) {
@@ -141,7 +141,7 @@ private slots:
         QDataStream stream( data, IO_ReadOnly );
         QString arg;
         stream >> arg;
-        odebug << "QuickLauncher execute: " << arg << "" << oendl;
+        odebug << "QuickLauncher execute: " << arg << oendl;
         QStrList argList;
         argList.append( arg.utf8() );
         doQuickLaunch( argList );
@@ -187,7 +187,7 @@ int main( int argc, char** argv )
     if ( sep > 0 )
     arg0 = arg0.mid( sep+1 );
     if ( arg0 != "quicklauncher" ) {
-    odebug << "QuickLauncher invoked as: " << arg0.data() << "" << oendl;
+    odebug << "QuickLauncher invoked as: " << arg0.data() << oendl;
     QuickLauncher::exec( argc, argv );
     } else {
 #ifdef _OS_LINUX_

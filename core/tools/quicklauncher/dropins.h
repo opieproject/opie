@@ -1,14 +1,17 @@
+/* OPIE */
+#include <opie2/owait.h>
+using namespace Opie::Ui;
 
-#include <qstring.h>
 #include <qtopia/qcom.h>
 #include <qtopia/qlibrary.h>
+#include <qtopia/qpeapplication.h>
 #include <qtopia/applicationinterface.h>
 #include <qtopia/resource.h>
 
-#include <opie2/owait.h>
-
+/* QT */
 #include <qmetaobject.h>
 #include <qmap.h>
+#include <qstring.h>
 
 namespace QuickPrivate {
 
