@@ -32,14 +32,6 @@
 
 SearchMethodDlg::SearchMethodDlg(QWidget *parent, const char *name, bool modal, QString itemname) : QDialog(parent, name, modal)
 {
-	if( !itemname )
-		setCaption( tr( "New Searchmethod" ) );
-	else 
-	{
-		setCaption( tr( "Change Searchmethod" ) );
-		itemName = itemname;
-		setupEntries(itemname);
-	}
 
 	QVBoxLayout *vbox_layout = new QVBoxLayout( this, 4,4,"vbox_layout" );
 	QVBox *vbox = new QVBox( this );
@@ -74,18 +66,26 @@ SearchMethodDlg::SearchMethodDlg(QWidget *parent, const char *name, bool modal, 
 	vbox_layout->addWidget( vbox );
 
 	showMaximized();
+	
+	if( !itemname )
+		setCaption( tr( "New Searchmethod" ) );
+	else 
+	{
+		setCaption( tr( "Change Searchmethod" ) );
+		itemName = itemname;
+		setupEntries(itemname);
+	}
 }
 
 void SearchMethodDlg::setupEntries( QString item )
 {
 	Config cfg(  "odict" );
 	cfg.setGroup( itemName );
-	trenner->setText( "foooof" );
-//X 	trenner->setText( cfg.readEntry( "Seperator" ) );
-//X 	lang1->setText( cfg.readEntry( "Lang1" ) );
-//X 	lang2->setText( cfg.readEntry( "Lang2" ) );
-//X 	nameLE->setText( itemName );
-//X 	dictFileLE->setText( cfg.readEntry( "file" ) );
+	trenner->setText( cfg.readEntry( "Seperator" ) );
+	lang1->setText( cfg.readEntry( "Lang1" ) );
+	lang2->setText( cfg.readEntry( "Lang2" ) );
+	nameLE->setText( itemName );
+	dictFileLE->setText( cfg.readEntry( "file" ) );
 }
 
 void SearchMethodDlg::slotBrowse()
