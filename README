@@ -78,7 +78,7 @@ commit a new README or send a mail to opie-devel@handhelds.org
   http://www.tcpdump.org/release/
 
 * libetpan 0.31
-  http://prdownloads.sourceforge.net/libetpan/
+  http://prdownloads.sourceforge.net/libetpan/ + patch in noncore/net/mail/libetpanstuff
 
 * libsqlite 2.8.6
   http://www.sqlite.org/download.html
