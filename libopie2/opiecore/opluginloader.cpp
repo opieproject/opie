@@ -546,7 +546,7 @@ OPluginItem::List OGenericPluginLoader::plugins( const QString& _dir, bool sorte
     QMap<QString, int> excludedMap;
 
 
-    OConfig cfg( m_dir+"odpplugins" );
+    OConfig cfg( m_dir+"-odpplugins" );
     cfg.setGroup( _dir );
 
 
@@ -863,7 +863,7 @@ void OPluginManager::save() {
  */
 QString OPluginManager::configName()const {
     QString str = m_loader ? m_loader->name() : m_cfgName;
-    return str + "odpplugins";
+    return str + "-odpplugins";
 }
 
 /**
