@@ -94,6 +94,7 @@ void CleanString(QString* Item)
 //*****************************************************************************
 QMyDialog::QMyDialog(QWidget* parent) : QDialog(parent, "Settings", true)
 {
+  setCaption( tr( "Configuration" ) );
   int i, j;
   char* home;
   char Text[256];
@@ -1608,6 +1609,7 @@ int main(int argc, char** argv)
   SV = new QMyScrollView();
   App->setMainWidget(SV);
   SV->showMaximized();
+  SV->setCaption( QMyScrollView::tr("Remote Desktop Client (RDP)") );
   SV->timer_id = SV->startTimer(1000);
   App->exec();
   delete SV;
