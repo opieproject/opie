@@ -92,7 +92,7 @@ void CBInfo::write()
 	config->writeEntry( "Bank", bn );
 	config->writeEntryCrypt( "Number", a );
 	config->writeEntryCrypt( "PINNumber", p );
-	config->writeEntry( "Notes", n );
+	config->writeEntry( "Notes", nt );
 	QString balstr;
 	balstr.setNum( sb, 'f', 2 );
 	config->writeEntry( "Balance", balstr );

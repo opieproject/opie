@@ -204,6 +204,12 @@ void MainWindow::slotNew()
 	currcb->showMaximized();
 	if ( currcb->exec() == QDialog::Accepted )
 	{
+		// Save new checkbook
+		buildFilename( cb->name() );
+		cb->setFilename( tempFilename );
+		cb->write();
+
+		// Add to listbox
 		checkbooks->inSort( cb );
 		addCheckbook( cb );
 	}
