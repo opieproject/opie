@@ -23,13 +23,20 @@
 /* #include <sys/types.h> */
 #include <qdatetime.h>
 
-
+/* FIXME namespace? -zecke */
 class OConversion
 {
 public:
     static QString dateToString( const QDate &d );
     static QDate dateFromString( const QString &datestr );
 
+    /**
+     * simple function to store DateTime as string and read from string
+     * no timezone changing is done
+     * DDMMYYYYHHMMSS is the simple format
+     */
+    static QString dateTimeToString( const QDateTime& );
+    static QDateTime dateTimeFromString( const QString& );
 };
 
 #endif // __oconversion_h__
