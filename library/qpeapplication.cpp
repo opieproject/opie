@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.31 2002-12-07 19:58:03 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.32 2002-12-08 22:34:56 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -1677,9 +1677,6 @@ void QPEApplication::hideOrQuit()
 		quit();
 }
 
-
-// These 6 stubs below need 1.5K in the binary and besides that -
-// we are not using ancient toolchains anymore     - sandman
 
 #if defined(QT_QWS_IPAQ) || defined(QT_QWS_SHARP)
 
