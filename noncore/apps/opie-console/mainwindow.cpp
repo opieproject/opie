@@ -407,6 +407,8 @@ void MainWindow::slotClose() {
         m_fullscreen->setEnabled( false );
         m_closewindow->setEnabled( false );
     }
+
+    m_kb->loadDefaults();
 }
 
 /*
@@ -456,6 +458,8 @@ void MainWindow::create( const Profile& prof ) {
 
     QWidget *w = currentSession()->widget();
     if(w) w->setFocus();
+
+    m_kb->load(currentSession()->profile());
 }
 
 void MainWindow::slotTransfer()
@@ -519,6 +523,8 @@ void MainWindow::slotSessionChanged( Session* ses ) {
 
         QWidget *w = m_curSession->widget();
         if(w) w->setFocus();
+
+        m_kb->load(currentSession()->profile());
     }
 }
 

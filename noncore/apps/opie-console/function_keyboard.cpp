@@ -55,13 +55,49 @@ FunctionKeyboard::~FunctionKeyboard() {}
 void FunctionKeyboard::changeRows(int r) {
 
     numRows = r;
-    repaint(false);
+
+    // have to do this so the whole thing gets redrawn
+    hide(); show();
 }
 void FunctionKeyboard::changeCols(int c) {
 
     numCols = c;
     keyWidth = (double)width()/numCols; // have to reset this thing too
     repaint(false);
+}
+void FunctionKeyboard::load (const Profile& prof) {
+
+    keys.clear();
+
+    numRows = prof.readNumEntry("keb_rows", 2);
+    numCols = prof.readNumEntry("keb_cols", 10);
+    keyWidth = (double)width()/numCols; // have to reset this thing too
+
+    /* load all the keys to the keyboard */
+    for (ushort i = 0; i <= numRows - 1; i++)
+        for (ushort j = 0; j <= numCols - 1; j++) {
+
+            QString h = "r" + QString::number(i) + "c" + QString::number(j);
+            QString values = prof.readEntry("keb_" + h);
+
+            if (!values.isEmpty()) {
+
+                QStringList l = QStringList::split(QChar('|'), values, TRUE);
+                keys[h] = FKey(l[0], l[1], l[2].toInt(), l[3].toInt());
+
+                // load pixmap if used
+                if (!l[1].isEmpty()) {
+
+                    keys[h].pix = new QPixmap( Resource::loadPixmap( "console/keys/" + l[1] ) );
+                }
+            }
+        }
+
+    if (keys.isEmpty()) loadDefaults();
+
+    hide();
+    show();
+
 }
 
 void FunctionKeyboard::paintEvent(QPaintEvent *e) {
@@ -273,6 +309,9 @@ FunctionKeyboardConfig::~FunctionKeyboardConfig() {
 }
 void FunctionKeyboardConfig::load (const Profile& prof) {
 
+    kb->keys.clear();
+    kb->loadDefaults();
+
     m_rowBox->setValue(prof.readNumEntry("keb_rows", 2));
     m_colBox->setValue(prof.readNumEntry("keb_cols", 10));
 
@@ -320,8 +359,6 @@ void FunctionKeyboardConfig::slotChangeRows(int r) {
 
     kb->changeRows(r);
 
-    // have to do this so the whole thing gets redrawn
-    kb->hide(); kb->show();
 }
 void FunctionKeyboardConfig::slotChangeCols(int c) {
 

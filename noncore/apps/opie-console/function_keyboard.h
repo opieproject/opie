@@ -45,7 +45,8 @@ public:
     void changeRows(int);
     void changeCols(int);
 
-    //Key getKey(int, int);
+    void load(const Profile &);
+    void loadDefaults();
 
     void paintEvent(QPaintEvent *);
     void paintKey(uint, uint);
@@ -57,10 +58,6 @@ public:
 signals:
 
     void keyPressed(FKey, ushort, ushort, bool);
-
-private:
-
-    void loadDefaults();
 
 
 private:
