@@ -1,4 +1,4 @@
-Files: plugins/inputmethods/libqjumpx.so* pics/jumpx/*
+Files: plugins/inputmethods/libqjumpx.so* pics/jumpx
 Priority: optional
 Section: opie/inputmethods
 Maintainer: Markus Gritsch <gritsch@iue.tuwien.ac.at>

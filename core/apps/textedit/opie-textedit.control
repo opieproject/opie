@@ -1,4 +1,4 @@
-Files: bin/textedit apps/Applications/textedit.desktop
+Files: bin/textedit apps/Applications/textedit.desktop pics/textedit
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>

@@ -1,4 +1,4 @@
-Files: bin/kcheckers apps/Games/kcheckers.desktop pics/KCheckers.xpm
+Files: bin/kcheckers apps/Games/kcheckers.desktop pics/kcheckers
 Package: opie-kcheckers
 Priority: optional
 Section: opie/games

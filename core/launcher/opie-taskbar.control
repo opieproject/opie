@@ -1,4 +1,4 @@
-Files: bin/qpe apps/Settings/Calibrate.desktop
+Files: bin/qpe apps/Settings/Calibrate.desktop pics/launcher
 Priority: required
 Section: opie/system
 Maintainer: Warwick Allison <warwick@trolltech.com>
