@@ -1,4 +1,4 @@
-Files: $QTDIR/lib/libopie.so.1.0.0 $QTDIR/lib/libopie.so.1.0 $QTDIR/lib/libopie.so.1
+Files: $QTDIR/lib/libopie.so.1.0.0 $QTDIR/lib/libopie.so.1.0 $QTDIR/lib/libopie.so.1 $QTDIR/pics/opie/*
 Priority: optional
 Section: opie/system
 Package: libopie

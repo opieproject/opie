@@ -66,8 +66,8 @@ namespace {
     for(int i= 0; i < box->count(); i++ ){
       qWarning("str T%sT  boxT%sT", str.latin1(), box->text(i).latin1() );
       if( str == box->text(i ) ){
-	  index= i;
-	  break;
+    index= i;
+    break;
       }
     }
     return index;
@@ -77,16 +77,16 @@ namespace {
 
 
 OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString &dirName,
-			     const QString &fileName, const QStringList &mimetypes ) : QWidget( wid )
+           const QString &fileName, const QStringList &mimetypes ) : QWidget( wid )
 {
   if(wid!=0)
     resize(wid->width(),wid->height());
   m_selector = selector;
   m_currentDir = dirName;
   m_name = fileName;
-  m_mimetypes = mimetypes;
-  if( mimetypes.isEmpty() )
-    m_autoMime = true;
+   m_mimetypes = mimetypes;
+//   if( mimetypes.isEmpty() )
+//     m_autoMime = true;
 
   m_mode = mode;
   m_shTool = true;
@@ -139,7 +139,7 @@ void OFileSelector::initPics()
   qWarning("init pics" );
   m_pixmaps = new QMap<QString,QPixmap>;
   QPixmap pm  = Resource::loadPixmap( "folder"  );
-  QPixmap lnk = Resource::loadPixmap( "symlink"  );
+  QPixmap lnk = Resource::loadPixmap( "opie/symlink"  );
   QPainter painter( &pm );
   painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
   pm.setMask( pm.createHeuristicMask( FALSE ) );
@@ -418,12 +418,12 @@ void OFileSelector::reparse()
     QFileInfo *fi;
     while( (fi=it.current())  ){
       if(fi->extension() == QString::fromLatin1("desktop") ){
-	++it;
-	continue;
+  ++it;
+  continue;
       }
       MimeType type(fi->filePath() );
       if( !m_mimetypes.contains( type.id() ) )
-	m_mimetypes.append( type.id() );
+  m_mimetypes.append( type.id() );
 
       ++it;
     }
@@ -467,26 +467,26 @@ void OFileSelector::reparse()
       QString file = fi->dirPath(true)+"/"+ fi->readLink();
       qWarning("File ->%s", file.latin1() );
       for(int i=0; i<=4; i++ ){ // prepend from dos
-	QFileInfo info( file );
-	if( !info.exists() ){
-	  qWarning("does not exist" );
-	  addSymlink(currMime,  fi, TRUE );
-	  break;
-	}else if( info.isDir() ){ 
-	  qWarning("isDir" );
-	  addDir(currMime, fi, TRUE  );
-	  break;
-	}else if( info.isFile() ){
-	  qWarning("isFile" );
-	  addFile(currMime, fi, TRUE );
-	  break;
-	}else if( info.isSymLink() ){
-	  file = info.dirPath(true)+ "/"+ info.readLink();
-	  qWarning("isSymlink again %s", file.latin1() );
-	}else if( i == 4 ){ // just insert it and have the symlink symbol
-	  addSymlink(currMime, fi );
-	  qWarning("level too deep" );
-	}
+  QFileInfo info( file );
+  if( !info.exists() ){
+    qWarning("does not exist" );
+    addSymlink(currMime,  fi, TRUE );
+    break;
+  }else if( info.isDir() ){ 
+    qWarning("isDir" );
+    addDir(currMime, fi, TRUE  );
+    break;
+  }else if( info.isFile() ){
+    qWarning("isFile" );
+    addFile(currMime, fi, TRUE );
+    break;
+  }else if( info.isSymLink() ){
+    file = info.dirPath(true)+ "/"+ info.readLink();
+    qWarning("isSymlink again %s", file.latin1() );
+  }else if( i == 4 ){ // just insert it and have the symlink symbol
+    addSymlink(currMime, fi );
+    qWarning("level too deep" );
+  }
       }
     }else if( fi->isDir() ){
       addDir(currMime, fi );
@@ -536,9 +536,9 @@ void OFileSelector::initializeYes()
   m_boxOk->addWidget( m_cancel, Qt::AlignHCenter);
   m_lay->addLayout(m_boxOk );
   connect(m_ok, SIGNAL(clicked() ),
-	  this, SLOT(slotOk() )  );
+    this, SLOT(slotOk() )  );
   connect(m_cancel, SIGNAL(clicked() ),
-	  this, SLOT(slotCancel() )  );
+    this, SLOT(slotCancel() )  );
 
 }
 void OFileSelector::initializeChooser()
@@ -548,32 +548,33 @@ void OFileSelector::initializeChooser()
   m_mimeCheck = new QComboBox(this, "mime check");
   m_viewCheck = new QComboBox(this, "view check");
   m_boxView->addWidget(m_viewCheck, 0 );
-  m_boxView->insertSpacing(1, 8 );
+  m_boxView->insertSpacing(2, 8 );
   m_boxView->addWidget(m_mimeCheck, 0 );
   m_lay->addLayout(m_boxView );
+  m_lay->insertSpacing( 4, 8);
 
   m_viewCheck->insertItem(tr("Documents") );
   m_viewCheck->insertItem(tr("Files") );
   m_viewCheck->insertItem(tr("All Files") );
 
-  if(!m_autoMime )
-    m_mimeCheck->insertItem(m_mimetypes.join("," ) );
-  else{ // check
+//   if(!m_autoMime )
+//     m_mimeCheck->insertItem(m_mimetypes.join("," ) );
+//   else{ // check
     updateMimes();
     m_mimeCheck->insertStringList( m_mimetypes );
-  }
+//   }
 
   connect( m_viewCheck, SIGNAL(activated(const QString &) ),
-	   this, SLOT(slotViewCheck(const QString & ) ) );
+     this, SLOT(slotViewCheck(const QString & ) ) );
 
   connect( m_mimeCheck, SIGNAL(activated(const QString &) ),
-	   this, SLOT(slotMimeCheck(const QString & ) ) );
+     this, SLOT(slotMimeCheck(const QString & ) ) );
 }
 void OFileSelector::slotMimeCheck(const QString &view ){
   if(m_selector == NORMAL ){
     delete m_select;
     m_select = new FileSelector(view == "All" ? QString::null : view 
-				, m_stack, "fileselector", FALSE, FALSE );
+        , m_stack, "fileselector", FALSE, FALSE );
     m_stack->addWidget( m_select, NORMAL );
     m_stack->raiseWidget( NORMAL );
   }else{
@@ -597,7 +598,7 @@ void OFileSelector::slotViewCheck(const QString &view ){
       delete m_up;
       delete m_pseudo;
       //if(m_pseudoLayout!=0 )
-//	delete m_pseudoLayout;
+//  delete m_pseudoLayout;
     }
     m_View = 0;
     m_boxToolbar = 0;
@@ -610,7 +611,7 @@ void OFileSelector::slotViewCheck(const QString &view ){
 
     delete m_select;
     m_select = new FileSelector( currMime == "All" ? QString::null : currMime,
-				 m_stack,"fileselector", FALSE, FALSE );
+         m_stack,"fileselector", FALSE, FALSE );
     m_stack->addWidget( m_select, NORMAL );
     m_mimeCheck->clear();
     m_selector = NORMAL;
@@ -694,20 +695,17 @@ void OFileSelector::initializeListView()
     m_location = new QComboBox(m_pseudo );
 
     m_up = new QPushButton(Resource::loadIconSet("up"),"", m_pseudo,"cdUpButton");
-    m_up->setMinimumSize( QSize( 20, 20 ) );
-    m_up->setMaximumSize( QSize( 20, 20 ) );
+    m_up->setFixedSize( QSize( 20, 20 ) );
     connect(m_up ,SIGNAL(clicked()),this,SLOT(cdUP()  ) );
     m_up->setFlat(TRUE);
 
     m_homeButton = new QPushButton(Resource::loadIconSet("home") , "", m_pseudo);
-    m_homeButton->setMinimumSize( QSize( 20, 20 ) );
-    m_homeButton->setMaximumSize( QSize( 20, 20 ) );
+    m_homeButton->setFixedSize( QSize( 20, 20 ) );
     connect(m_homeButton,SIGNAL(clicked()),this,SLOT(slotHome() ) );
     m_homeButton->setFlat(TRUE);
 
     m_docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"", m_pseudo,"docsButton");
-    m_docButton->setMinimumSize( QSize( 20, 20 ) );
-    m_docButton->setMaximumSize( QSize( 20, 20 ) );
+    m_docButton->setFixedSize( QSize( 20, 20 ) );
     connect(m_homeButton,SIGNAL(clicked()),this,SLOT(slotDoc() ) );
     m_docButton->setFlat(TRUE);
 
@@ -739,20 +737,21 @@ void OFileSelector::initializeListView()
   //(m_View->header() )->hide();
   //m_View->setRootIsDecorated(false);
   m_View->addColumn(" ");
-  m_View->addColumn(tr("Name") );
-  m_View->addColumn(tr("Size") );
+  m_View->addColumn(tr("Name"),135 );
+  m_View->addColumn(tr("Size"),-1 );
   m_View->addColumn(tr("Date"), 60 );
-  m_View->addColumn(tr("Mime Type") );
+  m_View->addColumn(tr("Mime Type"),-1 );
   QHeader *header = m_View->header();
   header->hide();
   m_View->setSorting(1 );
+  m_View->setAllColumnsShowFocus( TRUE);
   // connect now
   connect(m_View, SIGNAL(selectionChanged() ), this, SLOT(slotSelectionChanged() ) );
   connect(m_View, SIGNAL(currentChanged(QListViewItem *) ), this, SLOT(slotCurrentChanged(QListViewItem * ) ) );
   connect(m_View, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint &, int) ), 
-	  this, SLOT(slotClicked( int, QListViewItem *, const QPoint &, int) ) );
+    this, SLOT(slotClicked( int, QListViewItem *, const QPoint &, int) ) );
   connect(m_View, SIGNAL(mouseButtonPressed(int, QListViewItem *, const QPoint &, int )), 
-	  this, SLOT(slotRightButton(int, QListViewItem *, const QPoint &, int  ) ) );
+    this, SLOT(slotRightButton(int, QListViewItem *, const QPoint &, int  ) ) );
 
  
 };
@@ -791,20 +790,20 @@ void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink )
     name = info->fileName();
     if( m_mode == OPEN ){
       if( !info->isReadable() ){
-	locked = true;
-	pix = Resource::loadPixmap("locked" );
+  locked = true;
+  pix = Resource::loadPixmap("locked" );
       }
     }else if( m_mode == SAVE ){
       if( !info->isWritable() ){
-	locked = true;
-	pix = Resource::loadPixmap("locked" );
+  locked = true;
+  pix = Resource::loadPixmap("locked" );
       }
     } 
   }
   new OFileSelectorItem( m_View, pix, name,
-			 info->lastModified().toString(),
-			 QString::number( info->size() ),
-			 dir, locked ); 
+       info->lastModified().toString(),
+       QString::number( info->size() ),
+       dir, locked ); 
 }
 void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink  )
 {
@@ -818,15 +817,15 @@ void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink  )
     if( ( m_mode == OPEN && !info->isReadable() ) || ( m_mode == SAVE && !info->isWritable()  ) ){
       locked = true;
       if( symlink ){
-	pix = (*m_pixmaps)["symlinkedlocked"];
+  pix = (*m_pixmaps)["symlinkedlocked"];
       }else{
-	pix = Resource::loadPixmap("lockedfolder"  );
+  pix = Resource::loadPixmap("lockedfolder"  );
       }
     }else{
       if( symlink ){
-	pix = (*m_pixmaps)["dirsymlink" ];
+  pix = (*m_pixmaps)["dirsymlink" ];
       }else{
-	pix = Resource::loadPixmap("folder"  );
+  pix = Resource::loadPixmap("folder"  );
       }
     }
     if( symlink){
@@ -838,8 +837,8 @@ void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink  )
     }
 
       new OFileSelectorItem(m_View, pix,
-			    name, info->lastModified().toString(),
-			    QString::number(info->size() ),info->dirPath(true),  locked, true );
+          name, info->lastModified().toString(),
+          QString::number(info->size() ),info->dirPath(true),  locked, true );
 
   }
 }
@@ -878,8 +877,8 @@ void OFileSelector::slotCurrentChanged(QListViewItem *item )
     if(!sel->isDir() ){
       qWarning("is not dir" );
       if(m_shLne ){
-	m_edit->setText(sel->text(1) );
-	qWarning("setTexy" );
+  m_edit->setText(sel->text(1) );
+  qWarning("setTexy" );
       }
     }
   }else {
@@ -902,13 +901,13 @@ void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &
     if(!sel->isLocked() ){ // not locked either changedir or open
       QStringList str = QStringList::split("->", sel->text(1) );
       if(sel->isDir() ){
-	cd( sel->directory() + "/" + str[0] );     
+  cd( sel->directory() + "/" + str[0] );     
       }else{
-	qWarning("file" );
-	if(m_shLne )
-	  m_edit->setText(str[0] );
-	emit fileSelected(str[0] );
-	// emit DocLnk need to do it
+  qWarning("file" );
+  if(m_shLne )
+    m_edit->setText(str[0] );
+  emit fileSelected(str[0] );
+  // emit DocLnk need to do it
       }
     }else{
       qWarning( "locked" );
@@ -939,7 +938,7 @@ void OFileSelector::slotContextMenu(QListViewItem *item)
     up.setText("cd up");
     up.addTo( &menu );
     connect(&up, SIGNAL(activated() ),
-	    this, SLOT(cdUP()  ) );
+      this, SLOT(cdUP()  ) );
 
     QAction act;
     OFileSelectorItem *sel = (OFileSelectorItem*)item;
@@ -947,31 +946,31 @@ void OFileSelector::slotContextMenu(QListViewItem *item)
       act.setText( tr("Change Directory") );
       act.addTo(&menu );
       connect(&act, SIGNAL(activated() ),
-	      this, SLOT(slotChangedDir() ) );
+        this, SLOT(slotChangedDir() ) );
     }else{
       act.setText( tr("Open file" )  );
       act.addTo( &menu );
       connect(&act, SIGNAL(activated() ),
-	      this, SLOT(slotOpen() ) );
+        this, SLOT(slotOpen() ) );
     }
     QAction rescan;
     rescan.setText( tr("Rescan")  );
     rescan.addTo( &menu );
     connect(&rescan, SIGNAL(activated() ),
-	    this, SLOT(slotRescan() ) );
+      this, SLOT(slotRescan() ) );
 
     QAction rename;
     rename.setText( tr("Rename") );
     rename.addTo( &menu );
     connect(&rename, SIGNAL(activated() ),
-	    this, SLOT(slotRename() ) );
+      this, SLOT(slotRename() ) );
 
     menu.insertSeparator();
     QAction delItem;
     delItem.setText( tr("Delete")  );
     delItem.addTo(&menu );
     connect(&delItem, SIGNAL(activated() ),
-	    this, SLOT(slotDelete() ) );
+      this, SLOT(slotDelete() ) );
 
     menu.exec(QCursor::pos() );
   }
