@@ -16,12 +16,13 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.28 2002-11-25 22:12:18 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.29 2002-11-30 16:46:36 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
 #include <stdlib.h>
 #include <unistd.h>
+#include <linux/limits.h> // needed for some toolchains (PATH_MAX)
 #include <qfile.h>
 #ifdef Q_WS_QWS
 #ifndef QT_NO_COP
