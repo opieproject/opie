@@ -174,7 +174,7 @@ void MainWindow::makeMenu()
   //SEARCH OPTIONS
   //actionWholeWordsOnly = new QAction( tr("Whole words only"),QString::null,  0, this, 0, true );
   //actionWholeWordsOnly->addTo( searchOptions );
-  actionCaseSensitiv = new QAction( tr("Case sensitiv"),QString::null,  0, this, 0, true );
+  actionCaseSensitiv = new QAction( tr("Case sensitive"),QString::null,  0, this, 0, true );
   actionCaseSensitiv->addTo( searchOptions );
   actionWildcards = new QAction( tr("Use wildcards"),QString::null,  0, this, 0, true );
   actionWildcards->addTo( searchOptions );

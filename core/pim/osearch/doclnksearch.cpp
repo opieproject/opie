@@ -34,7 +34,7 @@ DocLnkSearch::DocLnkSearch(QListView* parent, QString name)
 	QIconSet is = Resource::loadIconSet( "osearch/documentsSmall" );
 	setPixmap( 0, is.pixmap( QIconSet::Automatic, true ) );
 
-	actionSearchInFiles = new QAction( QObject::tr("search content"),QString::null,  0, 0, 0, true );
+	actionSearchInFiles = new QAction( QObject::tr("Search content"),QString::null,  0, 0, 0, true );
 	Config cfg( "osearch", Config::User );
    	cfg.setGroup( "doclnk_settings" );
    	actionSearchInFiles->setOn( cfg.readBoolEntry( "search_content", false ) );
