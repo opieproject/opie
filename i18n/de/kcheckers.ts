@@ -31,39 +31,39 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Neu</translation>
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zug zurücknehmen</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Beenden</translation>
     </message>
     <message>
         <source>&amp;Beginner</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Anfänger</translation>
     </message>
     <message>
         <source>&amp;Novice</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Neuling</translation>
     </message>
     <message>
         <source>&amp;Average</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Durchschnitt</translation>
     </message>
     <message>
         <source>&amp;Good</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gut</translation>
     </message>
     <message>
         <source>&amp;Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Experte</translation>
     </message>
     <message>
         <source>&amp;Master</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Meister</translation>
     </message>
     <message>
         <source>&amp;Show Numeration</source>

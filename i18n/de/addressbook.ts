@@ -163,17 +163,24 @@ nicht mit &quot;.vcf&quot;. Wollen Sie sie
 trotzdem öffnen?</translation>
     </message>
     <message>
-        <source>Add Contact ?</source>
-        <translation type="unfinished"></translation>
+        <source>Do you really want add contact for 
+%1 ?</source>
+        <translation type="obsolete">Wollen Sie den Kontakt %1 wirklich
+hinzufügen?</translation>
+    </message>
+    <message>
+        <source>Add Contact?</source>
+        <translation>Kontakt hinzufügen?</translation>
     </message>
     <message>
         <source>Do you really want add contact for 
-%1 ?</source>
-        <translation type="unfinished"></translation>
+%1?</source>
+        <translation>Wollen Sie den Kontakt %1 wirklich
+hinzufügen?</translation>
     </message>
     <message>
-        <source>&amp;AllYes</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;All Yes</source>
+        <translation>&amp;Alle Ja</translation>
     </message>
 </context>
 <context>
@@ -264,7 +271,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration</translation>
     </message>
 </context>
 <context>

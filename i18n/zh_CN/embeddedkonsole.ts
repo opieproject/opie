@@ -23,10 +23,6 @@
 </context>
 <context>
     <name>Form1</name>
-    <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Konsole</name>

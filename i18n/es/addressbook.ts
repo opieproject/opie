@@ -160,16 +160,16 @@ inténtelo de nuevo.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add Contact ?</source>
+        <source>Add Contact?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Do you really want add contact for 
-%1 ?</source>
+%1?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;AllYes</source>
+        <source>&amp;All Yes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

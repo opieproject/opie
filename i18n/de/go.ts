@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Two player option</source>
-        <translation type="unfinished"></translation>
+        <translation>2-Spieler-Option</translation>
     </message>
     <message>
         <source>Game</source>
@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Go</source>
-        <translation type="unfinished"></translation>
+        <translation>Gehen</translation>
     </message>
 </context>
 </TS>
