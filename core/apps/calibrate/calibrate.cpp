@@ -23,7 +23,7 @@
 #include "calibrate.h"
 
 #include <qpe/resource.h>
-
+#include <qpe/qcopenvelope_qws.h>
 #include <qapplication.h>
 
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
@@ -80,8 +80,15 @@ void Calibrate::store()
 
 void Calibrate::hide()
 {
-	if ( isVisible() )
+	if ( isVisible ( )) {
 		store();
+
+		// hack - calibrate is a launcher dialog, but treated like a standalone app
+		{
+			QCopEnvelope e( "QPE/System", "closing(QString)" );
+			e << QString ( "calibrate" );
+		}                        
+	}
 	QDialog::hide();
 }
 

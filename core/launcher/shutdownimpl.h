@@ -34,6 +34,8 @@ public:
 
 	enum Type { ShutdownSystem, RebootSystem, RestartDesktop, TerminateDesktop };
 
+	virtual void hide ( );
+
 signals:
 	void shutdown( ShutdownImpl::Type );
 

@@ -21,6 +21,7 @@
 #include "shutdownimpl.h"
 
 #include <qpe/global.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include <qtimer.h>
 #include <qprogressbar.h>
@@ -165,4 +166,14 @@ void ShutdownImpl::timeout ( )
 		m_progress-> setProgress ( m_counter );
 }
 
+void ShutdownImpl::hide ( )
+{
+	if ( isVisible ( )) {
+		// hack - shutdown is a launcher dialog, but treated like a standalone app
+		QCopEnvelope e( "QPE/System", "closing(QString)" );
+		e << QString ( "shutdown" );
+	
+	}
+	QWidget::hide ( );
+}
 
