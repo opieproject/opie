@@ -27,14 +27,14 @@ $(TOPDIR)/.depends.cfgs:
 $(TOPDIR)/stamp-headers :
 	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
 		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
-	( cd include/qpe &&  rm -f *.h; ln -s ../../library/*.h .; ln -s ../../library/backend/*.h .; rm -f *_p.h; )
-	( cd include/qtopia && rm -f *.h; ln -s ../../library/*.h .; )
-	( cd include/qtopia/private && rm -f *.h; ln -s ../../../library/backend/*.h .; )
-	( cd include/opie &&  rm -f *.h; ln -s ../../libopie/*.h .; rm -f *_p.h; )
-	( cd include/opie &&  ln -s ../../libsql/*.h .; )
-	( cd include/opie &&  ln -s ../../libopie/pim/*.h .; )
+	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
+	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )
+	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
+	( cd include/opie &&  rm -f *.h; ln -sf ../../libopie/*.h .; rm -f *_p.h; )
+	( cd include/opie &&  ln -sf ../../libsql/*.h .; )
+	( cd include/opie &&  ln -sf ../../libopie/pim/*.h .; )
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
-	ln -s ../../libopie/$$generatedHeader $$generatedHeader; done )
+	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
 	touch $@
 	
 	
