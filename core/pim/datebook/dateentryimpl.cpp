@@ -29,7 +29,7 @@
 #include <qlineedit.h>
 #include <qspinbox.h>
 
-#include <opie/otimepicker.h>
+#include <opie2/otimepicker.h>
 #include "onoteedit.h"
 
 #include <stdlib.h>

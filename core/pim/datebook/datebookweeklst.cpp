@@ -13,6 +13,7 @@
 
 bool calcWeek(const QDate &d, int &week, int &year,bool startOnMonday = false);
 
+using namespace Opie::Ui;
 DateBookWeekLstHeader::DateBookWeekLstHeader(bool onM, QWidget* parent, const char* name, WFlags fl)
     : DateBookWeekLstHeaderBase(parent, name, fl)
 {
