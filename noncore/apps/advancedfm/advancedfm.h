@@ -44,6 +44,7 @@ class QPopupMenu;
 class QFile;
 class QListViewItem;
 class QLineEdit;
+class MenuButton;
 
 //class QPushButton;
 class QToolButton;
@@ -55,23 +56,6 @@ class AdvancedFm : public QMainWindow
 public:
     AdvancedFm();
     ~AdvancedFm();
-
-    OTabWidget *TabWidget;
-//    QTabWidget *TabWidget;
-    QWidget *tab, *tab_2, *tab_3;
-    QListView *Local_View, *Remote_View;
-
-    QLineEdit *currentPathEdit;
-    QPopupMenu *fileMenu, *localMenu, *remoteMenu, *viewMenu;
-    QToolButton  *homeButton, *docButton, *cdUpButton, *sdButton, *cfButton, *qpeDirButton;
-//    QPushButton  *homeButton, *docButton, *cdUpButton, *sdButton, *cfButton, *qpeDirButton;
-    QDir currentDir, currentRemoteDir;
-    QComboBox *currentPathCombo;
-    QString filterStr;
-    QListViewItem * item;
-    bool b;
-    QStringList fileSystemTypeList, fsList;
-    int currentServerConfig;
 protected slots:
     void selectAll();
     void addToDocs();
@@ -114,6 +98,23 @@ protected slots:
   void switchToRemoteTab();
 
 protected:
+
+  OTabWidget *TabWidget;
+//    QTabWidget *TabWidget;
+  QWidget *tab, *tab_2, *tab_3;
+  QListView *Local_View, *Remote_View;
+
+  QLineEdit *currentPathEdit;
+  QPopupMenu *fileMenu, *localMenu, *remoteMenu, *viewMenu /*, *customDirMenu*/;
+  QToolButton  *homeButton, *docButton, *cdUpButton, *sdButton, *cfButton, *qpeDirButton;
+//    QPushButton  *homeButton, *docButton, *cdUpButton, *sdButton, *cfButton, *qpeDirButton;
+  QDir currentDir, currentRemoteDir;
+  QComboBox *currentPathCombo;
+  QString filterStr, s_addBookmark, s_removeBookmark;
+  QListViewItem * item;
+  bool b;
+  QStringList fileSystemTypeList, fsList;
+  int currentServerConfig;
   bool zaurusDevice;
   QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
   QStringList remoteDirPathStringList, localDirPathStringList;
@@ -129,6 +130,7 @@ protected:
   QString dealWithSymName(const QString &);
   
 protected slots:
+    void dirMenuSelected(int);
   void showFileMenu();
   void cancelMenuTimer();
   void homeButtonPushed();
@@ -151,6 +153,7 @@ protected slots:
   void fileBeamFinished( Ir *);
 
 private:
+    MenuButton *menuButton;
     QString oldName;
     QTimer menuTimer;
     void startProcess(const QString &);
@@ -158,8 +161,13 @@ private:
     void cancelRename();
     void doRename(QListView *);
     void okRename();
+    void customDirsToMenu();
+    void addCustomDir();
+    void removeCustomDir();
+
 private slots:
     void processEnded();
+    void gotoCustomDir(const QString &); 
 };
 
 #endif // ADVANCEDFM_H

@@ -16,6 +16,8 @@
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
+#include <qpe/menubutton.h>
+#include <qpe/config.h>
 
 #include <qlayout.h>
 #include <qpixmap.h>
@@ -43,41 +45,48 @@ void AdvancedFm::init() {
   QPEMenuBar *menuBar = new QPEMenuBar(this);
   fileMenu = new QPopupMenu( this );
   viewMenu  = new QPopupMenu( this );
+//  customDirMenu  = new QPopupMenu( this );
 
   layout->addMultiCellWidget( menuBar, 0, 0, 0, 1 );
 
   menuBar->insertItem( tr( "File" ), fileMenu);
   menuBar->insertItem( tr( "View" ), viewMenu);
+//  menuBar->insertItem( tr( "^" ), customDirMenu);
+
+  cdUpButton = new QToolButton( this,"cdUpButton");
+  cdUpButton->setPixmap(Resource::loadPixmap("up"));
+  cdUpButton->setFixedSize( QSize( 20, 20 ) );
+  layout->addMultiCellWidget( cdUpButton , 0, 0, 2, 2);
+
+   menuButton = new MenuButton(this);
+   menuButton->setFixedSize( QSize( 20, 20 ) );
+   layout->addMultiCellWidget( menuButton , 0, 0, 3, 3);
 
   qpeDirButton= new QToolButton(this,"QPEButton");
   qpeDirButton->setPixmap( Resource::loadPixmap("launcher/opielogo16x16"));//,"",this,"QPEButton");
   qpeDirButton ->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( qpeDirButton , 0, 0, 2, 2);
+  layout->addMultiCellWidget( qpeDirButton , 0, 0, 4, 4);
 
   cfButton = new QToolButton( this,"CFButton");
   cfButton->setPixmap(Resource::loadPixmap("cardmon/pcmcia"));
   cfButton ->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( cfButton , 0, 0, 3, 3);
+  layout->addMultiCellWidget( cfButton , 0, 0, 5, 5);
 
   sdButton = new QToolButton( this,"SDButton");
   sdButton->setPixmap(Resource::loadPixmap("advancedfm/sdcard"));
   sdButton->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( sdButton , 0, 0, 4, 4);
+  layout->addMultiCellWidget( sdButton , 0, 0, 6, 6);
 
-  cdUpButton = new QToolButton( this,"cdUpButton");
-  cdUpButton->setPixmap(Resource::loadPixmap("up"));
-  cdUpButton ->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( cdUpButton , 0, 0, 5, 5);
 
   docButton = new QToolButton( this,"docsButton");
   docButton->setPixmap(Resource::loadPixmap("DocsIcon"));
   docButton->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( docButton, 0, 0, 6, 6);
+  layout->addMultiCellWidget( docButton, 0, 0, 7, 7);
 
   homeButton = new QToolButton( this,"homeButton");
   homeButton->setPixmap(Resource::loadPixmap("home"));
   homeButton->setFixedSize( QSize( 20, 20 ) );
-  layout->addMultiCellWidget( homeButton, 0, 0, 7, 7);
+  layout->addMultiCellWidget( homeButton, 0, 0, 8, 8);
 
   fileMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showMenuHidden() ));
   fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
@@ -99,20 +108,34 @@ void AdvancedFm::init() {
   viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
   viewMenu->setCheckable(TRUE);
 
+  s_addBookmark = tr("Bookmark Directory");
+  s_removeBookmark = tr("Remove Current Directory from Bookmarks");
+
+  menuButton->setUseLabel(false);
+  menuButton->insertItem( s_addBookmark);
+  menuButton->insertItem( s_removeBookmark);
+  menuButton->insertSeparator();
+//    menuButton->insertItem("");
+
+//     customDirMenu->insertItem(tr("Add This Directory"));
+//     customDirMenu->insertItem(tr("Remove This Directory"));
+//     customDirMenu->insertSeparator();
+
+    customDirsToMenu();
 
   currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
   currentPathCombo->setEditable(TRUE);
-  layout->addMultiCellWidget( currentPathCombo, 1, 1, 0, 7);
+  layout->addMultiCellWidget( currentPathCombo, 1, 1, 0, 8);
   currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
 
   currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
 
-  layout->addMultiCellWidget( currentPathCombo, 1, 1, 0, 7);
+  layout->addMultiCellWidget( currentPathCombo, 1, 1, 0, 8);
 
 
   TabWidget = new OTabWidget( this, "TabWidget",/* OTabWidget::Global | */OTabWidget::IconTab);
 //  TabWidget = new QTabWidget( this, "TabWidget" );
-  layout->addMultiCellWidget( TabWidget, 2, 2, 0, 7);
+  layout->addMultiCellWidget( TabWidget, 2, 2, 0, 8);
 
   tab = new QWidget( TabWidget, "tab" );
   tabLayout = new QGridLayout( tab );
@@ -214,7 +237,7 @@ void AdvancedFm::initConnections() {
   connect( sdButton ,SIGNAL(released()),this,SLOT( SDButtonPushed()) );
   connect( cdUpButton ,SIGNAL(released()),this,SLOT( upDir()) );
   connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
-  connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
+  connect( homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
   connect( currentPathCombo, SIGNAL( activated( const QString & ) ),
            this, SLOT(  currentPathComboActivated( const QString & ) ) );
 
@@ -233,9 +256,14 @@ void AdvancedFm::initConnections() {
   connect( Remote_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
            this,SLOT( remoteListPressed(int, QListViewItem *, const QPoint&, int)) );
 
-  connect(TabWidget,SIGNAL(currentChanged(QWidget *)),
+  connect( TabWidget,SIGNAL(currentChanged(QWidget *)),
           this,SLOT(tabChanged(QWidget*)));
 
   connect( &menuTimer, SIGNAL( timeout() ), SLOT( showFileMenu() ) );
+
+  connect( menuButton, SIGNAL( selected(const QString &)), SLOT(gotoCustomDir(const QString&)));
+//  connect( menuButton, SIGNAL( selected( int)), SLOT( dirMenuSelected(int)));
+
+//  connect( customDirMenu, SIGNAL( activated(int)), this, SLOT( dirMenuSelected(int)));
 
 }

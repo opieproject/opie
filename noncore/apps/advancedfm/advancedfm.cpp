@@ -16,6 +16,7 @@
 //  #include <opie/ofileselector.h>
 //  #include <opie/ofiledialog.h>
 
+#include <qpe/config.h>
 #include <qpe/filemanager.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpemenubar.h>
@@ -27,7 +28,10 @@
 #include <qpe/applnk.h>
 #include <qpe/ir.h>
 #include <qpe/resource.h>
+#include <qpe/menubutton.h>
 
+
+#include <qregexp.h>
 #include <qtabwidget.h>
 #include <qtextstream.h>
 #include <qpushbutton.h>
@@ -90,7 +94,7 @@ void AdvancedFm::cleanUp() {
 }
 
 void AdvancedFm::tabChanged(QWidget *w) {
-    qDebug("tab changed %d",TabWidget->getCurrentTab());
+//    qDebug("tab changed %d",TabWidget->getCurrentTab());
 
     if ( w == tab) {
 //    if (TabWidget->getCurrentTab() == 0) {
@@ -194,7 +198,7 @@ void AdvancedFm::populateLocalView() {
     if((dir = opendir( currentDir.canonicalPath().latin1())) != NULL)
       while ((mydirent = readdir(dir)) != NULL) {
         lstat( mydirent->d_name, &buf);
-        qDebug(mydirent->d_name);
+//        qDebug(mydirent->d_name);
         fileL.sprintf("%s", mydirent->d_name);
         devT = buf.st_dev;
         fileS.sprintf("%d, %d", (int) ( devT >>8) &0xFF, (int)devT &0xFF);
@@ -293,7 +297,7 @@ void AdvancedFm::populateRemoteView() {
     if((dir = opendir( currentRemoteDir.canonicalPath().latin1())) != NULL)
       while ((mydirent = readdir(dir)) != NULL) {
         lstat( mydirent->d_name, &buf);
-        qDebug(mydirent->d_name);
+//        qDebug(mydirent->d_name);
         fileL.sprintf("%s", mydirent->d_name);
         fileS.sprintf("%d,%d", (int) (buf.st_dev>>8)&0xFF, (int) buf.st_dev &0xFF);
         fileDate.sprintf("%s", ctime( &buf.st_mtime));
@@ -407,7 +411,7 @@ void AdvancedFm::localListPressed( int mouse, QListViewItem *, const QPoint& , i
   {
         if(renameBox != 0 )
     {
-        qDebug("cancel rename");
+//        qDebug("cancel rename");
         cancelRename();
     }
 
@@ -415,7 +419,7 @@ void AdvancedFm::localListPressed( int mouse, QListViewItem *, const QPoint& , i
     break;
   case 2:
     menuTimer.start( 500, TRUE );
-    qDebug("Start menu timer\n");
+//    qDebug("Start menu timer\n");
     break;
   };
 }
@@ -427,14 +431,14 @@ void AdvancedFm::remoteListPressed( int mouse, QListViewItem*, const QPoint&, in
       {
           if(renameBox != 0 )
             {
-                qDebug("cancel rename");
+//                qDebug("cancel rename");
                 cancelRename();
             }
       }
       break;
       case 2:
           menuTimer.start( 500, TRUE );
-          qDebug("Start menu timer");
+//          qDebug("Start menu timer");
           break;
     };
 }
@@ -480,7 +484,7 @@ void  AdvancedFm::currentPathComboChanged() {
 }
 
 void  AdvancedFm::fillCombo(const QString &currentPath) {
-    qDebug("%d",TabWidget->getCurrentTab());
+//    qDebug("%d",TabWidget->getCurrentTab());
   if (TabWidget->getCurrentTab() == 0) {
 //  if (TabWidget->currentPageIndex() == 0) {
     currentPathCombo->lineEdit()->setText( currentPath);
@@ -523,7 +527,7 @@ QStringList AdvancedFm::getPath() {
     for ( ; it.current(); ++it ) {
       if ( it.current()->isSelected() ) {
         strList <<  it.current()->text(0);
-        qDebug(it.current()->text(0));
+//        qDebug(it.current()->text(0));
       }
     }
     return strList;
@@ -533,7 +537,7 @@ QStringList AdvancedFm::getPath() {
     for ( ; it.current(); ++it ) {
       if ( it.current()->isSelected() ) {
         strList << it.current()->text(0);
-        qDebug(it.current()->text(0));
+//        qDebug(it.current()->text(0));
       }
     }
     return strList;
@@ -875,7 +879,7 @@ void AdvancedFm::addToDocs() {
 //        if (TabWidget->currentPageIndex() == 0) {
             for ( QStringList::Iterator it = strListPaths.begin(); it != strListPaths.end(); ++it ) {
                 curFile = currentDir.canonicalPath()+"/"+(*it);
-                qDebug(curFile);
+//                qDebug(curFile);
                 DocLnk f;
 //                curFile.replace(QRegExp("\\..*"),"");
                 f.setName((*it));
@@ -885,7 +889,7 @@ void AdvancedFm::addToDocs() {
         } else {
             for ( QStringList::Iterator it = strListPaths.begin(); it != strListPaths.end(); ++it ) {
                 curFile =  currentRemoteDir.canonicalPath()+"/"+(*it);
-                qDebug(curFile);
+//                qDebug(curFile);
 
                 DocLnk f;
 //                curFile.replace(QRegExp("\\..*"),"");
@@ -897,3 +901,184 @@ void AdvancedFm::addToDocs() {
     }
 }
 
+
+void AdvancedFm::customDirsToMenu()
+{
+ 
+    Config cfg("AdvancedFm");
+    cfg.setGroup("Menu");
+
+    QStringList list = cfg.readListEntry( "CustomDir", ',');
+    menuButton->insertItems(list );
+
+//      for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+//        {
+//            customDirMenu->insertItem(*it );
+//        }
+}
+
+void AdvancedFm::dirMenuSelected(int item)
+{
+    qDebug("menu item %d", item);
+    switch(item)
+      {
+          
+        case -21:
+        case 0: 
+            addCustomDir();
+            break;
+        case -22:
+        case 1:   
+            removeCustomDir();
+            break;
+        default:
+        {
+//            gotoCustomDir( menuButton->text(item));            
+//            gotoCustomDir( customDirMenu->text(item));            
+        }
+        break;
+        
+      };
+}
+
+void AdvancedFm::addCustomDir()
+{
+    Config cfg("AdvancedFm");
+    cfg.setGroup("Menu");
+    QString dir;
+    QStringList list = cfg.readListEntry( (const QString &)"CustomDir", (const QChar)',');
+
+    if (TabWidget->getCurrentTab() == 0)
+      {
+          dir =  currentDir.canonicalPath();
+      }
+    else
+      {
+          dir =  currentRemoteDir.canonicalPath();
+      }
+
+    bool addIt=true; 
+    for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+      {
+          if( dir == (*it))
+            {
+                addIt=false;
+            }
+      }
+    if(addIt)
+      {
+          menuButton->insertItem(dir);
+//          customDirMenu->insertItem(dir);
+          list <<  dir;
+      }
+
+    cfg.writeEntry("CustomDir", list, ',');
+    cfg.write();
+}
+
+void AdvancedFm::removeCustomDir()
+{
+//  qDebug("remove custom dir");
+  Config cfg("AdvancedFm");
+  cfg.setGroup("Menu");
+  QString dir;
+  QStringList list = cfg.readListEntry( (const QString &)"CustomDir", (const QChar)',');
+  QStringList list2;
+
+  if (TabWidget->getCurrentTab() == 0)
+      {
+          dir =  currentDir.canonicalPath();
+      }
+    else
+      {
+          dir =  currentRemoteDir.canonicalPath();
+      }
+  int ramble=2;
+//  int ramble=-24;
+//first remove list
+  if(list.grep(dir,true).isEmpty())
+    {
+        QMessageBox::message("AdvancedFm",tr("Cannot remove current directory\nfrom bookmarks.\nIt is not bookmarked!!"));
+    }
+  else
+    {
+        for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+          {
+              if((*it) != dir)//current item is not our current dir, so add it to temp list
+                {
+                    list2 <<(*it);
+                }
+              else
+                {
+//              customDirMenu->removeItem( ramble);
+                    menuButton->remove( ramble);
+              
+                }
+              ramble++;
+//        ramble--;
+          }
+
+        cfg.writeEntry("CustomDir", list2, ',');
+        cfg.write();
+    }
+//    customDirsToMenu();
+
+}
+
+void AdvancedFm::gotoCustomDir(const QString &dir)
+{
+//     qDebug("gotoCustomDir(const QString &dir) " +dir );
+    QString curDir = dir;
+//     if( curDir.isEmpty()) {
+//     }
+     if( curDir == s_addBookmark)
+       {
+           addCustomDir();
+       }
+     if( curDir == s_removeBookmark)
+       {
+           removeCustomDir( );
+       }
+     else
+       {
+           if(QDir( curDir).exists() )
+             {
+                 if (TabWidget->getCurrentTab() == 0)
+                   {
+                       currentDir.setPath( curDir );
+                       chdir( curDir.latin1() );
+                       currentDir.cd( curDir, TRUE);
+                       populateLocalView();
+                   }
+                 else
+                   {
+                       currentRemoteDir.setPath( curDir );
+                       chdir( curDir.latin1() );
+                       currentRemoteDir.cd( curDir, TRUE);
+                       populateRemoteView();
+                   }
+             }
+       }
+//    menuButton
+//    qDebug("gotoCustomDir(const QString &dir) " +dir );
+//     QString curDir = dir;
+//     if(QDir( curDir).exists() )
+//       {
+//           if (TabWidget->getCurrentTab() == 0)
+//             {
+//                 currentDir.setPath( curDir );
+//                 chdir( curDir.latin1() );
+//                 currentDir.cd( curDir, TRUE);
+//                 populateLocalView();
+//             }
+//           else
+//             {
+//                 currentRemoteDir.setPath( curDir );
+//                 chdir( curDir.latin1() );
+//                 currentRemoteDir.cd( curDir, TRUE);
+//                 populateRemoteView();
+//             }
+//       }
+//     menuButton->setLabel(" ");
+//    menuButton
+}
