@@ -7,7 +7,7 @@ LDFLAGS=
 LXXFLAGS=$(LDFLAGS) -L$(HOSTQTDIR)/lib -Wl,-rpath,$(HOSTQTDIR)/lib
 LEX=flex
 YACC=bison
-YFLAGS=-d -t -v
+YFLAGS=-d -t #-v
 ifndef HOSTQTDIR
 ifeq ($(shell if [ -e /usr/share/qt ]; then echo foundit; fi),foundit)
 HOSTQTDIR=/usr/share/qt
