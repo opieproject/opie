@@ -5,26 +5,6 @@
         <source>Command Selection</source>
         <translation>Selección de comandos</translation>
     </message>
-    <message>
-        <source>new</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
@@ -105,7 +85,7 @@
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation>Etiquetas abajo</translation>
+        <translation>Pestañas abajo</translation>
     </message>
     <message>
         <source>Green on Black</source>
@@ -213,7 +193,7 @@
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation>Etiquetas arriba</translation>
+        <translation>Pestañas arriba</translation>
     </message>
 </context>
 <context>

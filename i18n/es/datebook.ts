@@ -88,11 +88,11 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Cita duplicada</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar...</translation>
     </message>
 </context>
 <context>
@@ -181,15 +181,15 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source> - </source>
-        <translation type="unfinished"></translation>
+        <translation> - </translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplicar</translation>
     </message>
 </context>
 <context>
@@ -216,7 +216,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished">Calendario</translation>
+        <translation>Calendario</translation>
     </message>
 </context>
 <context>
@@ -271,67 +271,67 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Vistas</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vista preferida:</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Día</translation>
+        <translation>Día</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">Semana</translation>
+        <translation>Semana</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista semanal</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">Mes</translation>
+        <translation>Mes</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation type="unfinished"></translation>
+        <translation>Saltar a hora actual</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualización de la hora</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Nada</translation>
+        <translation>Ninguna</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Inicio</translation>
+        <translation>Inicio</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicio-fin</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Por omisión</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lugar:</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished">Oficina</translation>
+        <translation>Oficina</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">Casa</translation>
+        <translation>Casa</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoría:</translation>
     </message>
 </context>
 <context>
@@ -345,7 +345,7 @@ Libere espacio y vuelva a intentarlo.
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
 </context>
 <context>
@@ -359,7 +359,7 @@ Libere espacio y vuelva a intentarlo.
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
 </context>
 <context>

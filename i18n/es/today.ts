@@ -44,6 +44,10 @@
 <context>
     <name>TodayConfig</name>
     <message>
+        <source>Today config</source>
+        <translation>Configuración de Hoy</translation>
+    </message>
+    <message>
         <source>Load which plugins in what order:</source>
         <translation>Cargar qué módulos en qué orden:</translation>
     </message>
@@ -110,14 +114,6 @@ al encender?
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
         <translation>Pulse en las casillas para activar un módulo o use los botones de desplazamiento para cambiar el orden de aparición</translation>
-    </message>
-    <message>
-        <source>Today Config</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tiny Banner</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

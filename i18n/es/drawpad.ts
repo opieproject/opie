@@ -157,79 +157,79 @@ las páginas?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para añadir una nueva hoja.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para borrar la hoja actual.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para eliminar la hoja actual.</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para deshacer la última acción.</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para rehacer la última acción.</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para ver la primera página.</translation>
     </message>
     <message>
         <source>Click here to view the previous page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para ver la página anterior.</translation>
     </message>
     <message>
         <source>Click here to view the next page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para ver la página siguiente.</translation>
     </message>
     <message>
         <source>Click here to view the last page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para ver la última página.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar una de las herramientas disponibles para dibujar líneas.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar una de las herramientas disponibles para dibujar rectángulos.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar una de las herramientas disponibles para dibujar elipses.</translation>
     </message>
     <message>
         <source>Click here to select the text drawing tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar la herramienta de texto.</translation>
     </message>
     <message>
         <source>Click here to select the fill tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar la herramienta de relleno.</translation>
     </message>
     <message>
         <source>Click here to select the eraser tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar la herramienta de borrado.</translation>
     </message>
     <message>
         <source>Click here to select the width of the drawing pen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar el grosor del lápiz.</translation>
     </message>
     <message>
         <source>Click here to select the color used when drawing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar el color al dibujar.</translation>
     </message>
     <message>
         <source>Click here to select the color used when filling in areas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar el color al rellenar áreas..</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Pizarra - Página %1/%2</translation>
     </message>
 </context>
 <context>
@@ -364,15 +364,15 @@ las páginas?</translation>
     <name>QObject</name>
     <message>
         <source>Title: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Título: %1</translation>
     </message>
     <message>
         <source>Dimension: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensión: %1x%2</translation>
     </message>
     <message>
         <source>Date: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha: %1</translation>
     </message>
 </context>
 <context>
@@ -418,23 +418,23 @@ página seleccionada?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para añadir una nueva hoja.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para borrar la hoja actual.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para eliminar la hoja actual.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet up one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para subir la hoja actual una posición en la lista.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet down one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para bajar la hoja actual una posición en la lista.</translation>
     </message>
 </context>
 </TS>

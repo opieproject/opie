@@ -70,6 +70,10 @@
         <translation>Cambiar a configurar</translation>
     </message>
     <message>
+        <source>About</source>
+        <translation type="obsolete">Sobre</translation>
+    </message>
+    <message>
         <source>File</source>
         <translation>Fichero</translation>
     </message>

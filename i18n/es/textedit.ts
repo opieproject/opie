@@ -123,76 +123,78 @@
     </message>
     <message>
         <source>Goto Line...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir a línea...</translation>
     </message>
     <message>
         <source>Auto Save 5 min.</source>
-        <translation type="unfinished"></translation>
+        <translation>Autograbar 5 min.</translation>
     </message>
     <message>
         <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt;file.&lt;BR&gt;Open&lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Textos ha detectado que &lt;BR&gt;seleccionó un fichero &lt;B&gt;.desktop&lt;/B&gt;. ¿Abro el fichero &lt;B&gt;.desktop&lt;/B&gt; o su &lt;B&gt;enlace&lt;/B&gt;?</translation>
     </message>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished">Editor de Textos</translation>
+        <translation>Editor de Textos</translation>
     </message>
     <message>
         <source>Write Failed</source>
-        <translation type="unfinished">Fallo al escribir</translation>
+        <translation>Fallo al escribir</translation>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished">Sin nombre</translation>
+        <translation>Sin nombre</translation>
     </message>
     <message>
         <source>Permissions</source>
-        <translation type="unfinished">Permisos</translation>
+        <translation>Permisos</translation>
     </message>
     <message>
         <source>Choose font</source>
-        <translation type="unfinished">Elegir Letra</translation>
+        <translation>Elegir Letra</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation type="unfinished">¿Seguro que quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
+        <translation>¿Seguro que quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
 del disco?&lt;BR&gt;¡¡Es &lt;B&gt;irreversible&lt;/B&gt;!!</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Sí</translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">No</translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation type="unfinished">Text Edit tiene copyright&lt;BR&gt;2000 Trolltech AS, y&lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;, y está bajo licencia GPL</translation>
+        <translation>Text Edit tiene copyright&lt;BR&gt;2000 Trolltech AS, y&lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;, y está bajo licencia GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Textos</translation>
     </message>
     <message>
         <source>Textedit detected
 you have unsaved changes
 Go ahead and save?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Editor de Textos ha detectado que
+tiene cambios sin salvar.
+¿Los guardo?</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation type="unfinished"></translation>
+        <translation>No guardar</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cancelar</translation>
     </message>
     <message>
         <source>Not enough lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Líneas insuficientes</translation>
     </message>
 </context>
 <context>

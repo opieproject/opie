@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Toggle O-Menu</source>
-        <translation>Conmutar Menú-O</translation>
+        <translation>Conmutar Menú O</translation>
     </message>
     <message>
         <source>Show Desktop</source>
