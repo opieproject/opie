@@ -229,7 +229,7 @@ void MainWindow::selectorFileOpen(const DocLnk &lnkDoc)
 
     if (documentModified && saveCurrentFile()==QMessageBox::Cancel) return;
     if (currentDoc) delete currentDoc;
-    currentDoc = new DocLnk();
+    currentDoc = new DocLnk( lnkDoc );
     listSheets.clear();
     comboSheets->clear();
 
