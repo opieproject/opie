@@ -60,9 +60,11 @@ extern MediaPlayerState *mediaPlayerState;
 PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     : PlayListWidgetGui( parent, name, fl ) {
 
-    d->tbAddToList =  new ToolButton( bar, tr( "Add to Playlist" ), "opieplayer2/add_to_playlist",
+    d->tbAddToList =  new ToolButton( bar, tr( "Add to Playlist" ),
+                                      "opieplayer2/add_to_playlist",
                                       this , SLOT(addSelected() ) );
-    d->tbRemoveFromList = new ToolButton( bar, tr( "Remove from Playlist" ), "opieplayer2/remove_from_playlist",
+    d->tbRemoveFromList = new ToolButton( bar, tr( "Remove from Playlist" ),
+                                          "opieplayer2/remove_from_playlist",
                                           this , SLOT(removeSelected() ) );
     d->tbPlay    = new ToolButton( bar, tr( "Play" ), "opieplayer2/play",
                                    this , SLOT( btnPlay( bool) ), TRUE );
@@ -72,53 +74,78 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
                                    mediaPlayerState, SLOT( setLooping( bool ) ), TRUE );
 
     (void)new MenuItem( pmPlayList, tr( "Clear List" ), this, SLOT( clearList() ) );
-    (void)new MenuItem( pmPlayList, tr( "Add all audio files" ), this, SLOT( addAllMusicToList() ) );
-    (void)new MenuItem( pmPlayList, tr( "Add all video files" ), this, SLOT( addAllVideoToList() ) );
-    (void)new MenuItem( pmPlayList, tr( "Add all files" ), this, SLOT( addAllToList() ) );
+    (void)new MenuItem( pmPlayList, tr( "Add all audio files" ),
+                        this, SLOT( addAllMusicToList() ) );
+    (void)new MenuItem( pmPlayList, tr( "Add all video files" ),
+                        this, SLOT( addAllVideoToList() ) );
+    (void)new MenuItem( pmPlayList, tr( "Add all files" ),
+                        this, SLOT( addAllToList() ) );
     pmPlayList->insertSeparator(-1);
-    (void)new MenuItem( pmPlayList, tr( "Save PlayList" ), this, SLOT( saveList() ) );
-    (void)new MenuItem( pmPlayList, tr( "Export playlist to m3u" ), this, SLOT(writem3u() ) );
+    (void)new MenuItem( pmPlayList, tr( "Save PlayList" ),
+                        this, SLOT( saveList() ) );
+    (void)new MenuItem( pmPlayList, tr( "Export playlist to m3u" ),
+                        this, SLOT(writem3u() ) );
     pmPlayList->insertSeparator(-1);
-    (void)new MenuItem( pmPlayList, tr( "Open File or URL" ), this,SLOT( openFile() ) );
+    (void)new MenuItem( pmPlayList, tr( "Open File or URL" ),
+                        this,SLOT( openFile() ) );
     pmPlayList->insertSeparator(-1);
-    (void)new MenuItem( pmPlayList, tr( "Rescan for Audio Files" ), this,SLOT( scanForAudio() ) );
-    (void)new MenuItem( pmPlayList, tr( "Rescan for Video Files" ), this,SLOT( scanForVideo() ) );
+    (void)new MenuItem( pmPlayList, tr( "Rescan for Audio Files" ),
+                        this,SLOT( scanForAudio() ) );
+    (void)new MenuItem( pmPlayList, tr( "Rescan for Video Files" ),
+                        this,SLOT( scanForVideo() ) );
 
-    pmView->insertItem(  Resource::loadPixmap("fullscreen") , tr( "Full Screen"), mediaPlayerState, SLOT( toggleFullscreen() ) );
+    pmView->insertItem(  Resource::loadPixmap("fullscreen") , tr( "Full Screen"),
+                         mediaPlayerState, SLOT( toggleFullscreen() ) );
 
     Config cfg( "OpiePlayer" );
     bool b= cfg.readBoolEntry("FullScreen", 0);
     mediaPlayerState->setFullscreen(  b );
     pmView->setItemChecked( -16, b );
 
-    (void)new ToolButton( vbox1, tr( "Move Up" ),   "opieplayer2/up",   d->selectedFiles, SLOT(moveSelectedUp() ) );
-    (void)new ToolButton( vbox1, tr( "Remove" ),    "opieplayer2/cut",  d->selectedFiles, SLOT(removeSelected() ) );
-    (void)new ToolButton( vbox1, tr( "Move Down" ), "opieplayer2/down", d->selectedFiles, SLOT(moveSelectedDown() ) );
+    (void)new ToolButton( vbox1, tr( "Move Up" ),   "opieplayer2/up",
+                          d->selectedFiles, SLOT(moveSelectedUp() ) );
+    (void)new ToolButton( vbox1, tr( "Remove" ),    "opieplayer2/cut",
+                          d->selectedFiles, SLOT(removeSelected() ) );
+    (void)new ToolButton( vbox1, tr( "Move Down" ), "opieplayer2/down",
+                          d->selectedFiles, SLOT(moveSelectedDown() ) );
     QVBox *stretch2 = new QVBox( vbox1 );
 
-    connect( tbDeletePlaylist, ( SIGNAL( released() ) ), SLOT( deletePlaylist() ) );
-    connect( pmView, SIGNAL( activated( int ) ), this, SLOT( pmViewActivated( int ) ) );
-    connect( skinsMenu, SIGNAL( activated( int ) ) , this, SLOT( skinsMenuActivated( int ) ) );
+    connect( tbDeletePlaylist, ( SIGNAL( released() ) ),
+             SLOT( deletePlaylist() ) );
+    connect( pmView, SIGNAL( activated( int ) ),
+             this, SLOT( pmViewActivated( int ) ) );
+    connect( skinsMenu, SIGNAL( activated( int ) ) ,
+             this, SLOT( skinsMenuActivated( int ) ) );
     connect( d->selectedFiles, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int) ),
              this,SLOT( playlistViewPressed( int, QListViewItem *, const QPoint&, int ) ) );
     connect( audioView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int ) ),
              this,SLOT( viewPressed( int, QListViewItem *, const QPoint&, int ) ) );
     connect( audioView, SIGNAL( returnPressed( QListViewItem *) ),
              this,SLOT( playIt( QListViewItem *) ) );
-    connect( audioView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
+    connect( audioView, SIGNAL( doubleClicked( QListViewItem *) ),
+             this, SLOT( addToSelection( QListViewItem *) ) );
     connect( videoView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int) ),
              this,SLOT( viewPressed( int, QListViewItem *, const QPoint&, int) ) );
     connect( videoView, SIGNAL( returnPressed( QListViewItem *) ),
              this,SLOT( playIt( QListViewItem *) ) );
-    connect( videoView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
-    connect( playLists, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( loadList( const DocLnk & ) ) );
-    connect( tabWidget, SIGNAL ( currentChanged(QWidget*) ), this, SLOT( tabChanged( QWidget* ) ) );
-    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), d->tbPlay,  SLOT( setOn( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( loopingToggled( bool ) ), d->tbLoop, SLOT( setOn( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ), d->tbShuffle, SLOT( setOn( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( playlistToggled( bool ) ), this, SLOT( setPlaylist( bool ) ) );
-    connect( d->selectedFiles, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( playIt( QListViewItem *) ) );
-    connect ( gammaSlider,  SIGNAL( valueChanged( int ) ),  mediaPlayerState,  SLOT( setVideoGamma( int ) ) );
+    connect( videoView, SIGNAL( doubleClicked( QListViewItem *) ),
+             this, SLOT( addToSelection( QListViewItem *) ) );
+    connect( playLists, SIGNAL( fileSelected( const DocLnk &) ),
+             this, SLOT( loadList( const DocLnk & ) ) );
+    connect( tabWidget, SIGNAL ( currentChanged(QWidget*) ),
+             this, SLOT( tabChanged( QWidget* ) ) );
+    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ),
+             d->tbPlay,  SLOT( setOn( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( loopingToggled( bool ) ),
+             d->tbLoop, SLOT( setOn( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ),
+             d->tbShuffle, SLOT( setOn( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( playlistToggled( bool ) ),
+             this, SLOT( setPlaylist( bool ) ) );
+    connect( d->selectedFiles, SIGNAL( doubleClicked( QListViewItem *) ),
+             this, SLOT( playIt( QListViewItem *) ) );
+    connect ( gammaSlider,  SIGNAL( valueChanged( int ) ),
+              mediaPlayerState,  SLOT( setVideoGamma( int ) ) );
 
     readConfig( cfg );
     QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "" );
@@ -161,7 +188,8 @@ void PlayListWidget::readConfig( Config& cfg ) {
         QString linkFile = cfg.readEntry( entryName );
         if( QFileInfo( linkFile ).exists() ) {
             DocLnk lnk( linkFile );
-            if ( QFileInfo( lnk.file() ).exists() || linkFile.find( "http" , 0, TRUE) != -1) {
+            if ( QFileInfo( lnk.file() ).exists() ||
+                 linkFile.find( "http" , 0, TRUE) != -1) {
                 d->selectedFiles->addToSelection( lnk );
             }
         }
@@ -207,7 +235,8 @@ void PlayListWidget::writeConfig( Config& cfg ) const {
 void PlayListWidget::addToSelection( const DocLnk& lnk ) {
     d->setDocumentUsed = FALSE;
     if ( mediaPlayerState->playlist() ) {
-        if( QFileInfo( lnk.file() ).exists() || lnk.file().left(4) == "http" )
+        if( QFileInfo( lnk.file() ).exists() ||
+            lnk.file().left(4) == "http" )
             d->selectedFiles->addToSelection( lnk );
     }
     else
@@ -290,7 +319,8 @@ void PlayListWidget::setDocument( const QString& fileref ) {
     //qDebug( fileref );
     fromSetDocument = TRUE;
     if ( fileref.isNull() ) {
-        QMessageBox::critical( 0, tr( "Invalid File" ), tr( "There was a problem in getting the file." ) );
+        QMessageBox::critical( 0, tr( "Invalid File" ),
+                               tr( "There was a problem in getting the file." ) );
         return;
     }
 
@@ -421,7 +451,8 @@ void PlayListWidget::saveList() {
         writeConfig( cfg );
 
         DocLnk lnk;
-        lnk.setFile(QDir::homeDirPath()+"/Settings/"+filename+".playlist.conf"); //sets File property
+        lnk.setFile(QDir::homeDirPath()+"/Settings/"+filename+".playlist.conf");
+//sets File property
         lnk.setType("playlist/plain");// hey is this a REGISTERED mime type?!?!? ;D
         lnk.setIcon("opieplayer2/playlist2");
         lnk.setName( filename); //sets file name
@@ -707,7 +738,8 @@ void PlayListWidget::populateAudioView() {
         }
 
         QListViewItem * newItem;
-        if ( QFile( dit.current()->file()).exists() || dit.current()->file().left(4) == "http" ) {
+        if ( QFile( dit.current()->file()).exists() ||
+             dit.current()->file().left(4) == "http" ) {
             long size;
             if( dit.current()->file().left(4) == "http" )
                 size=0;
@@ -747,7 +779,8 @@ void PlayListWidget::populateVideoView() {
         QListViewItem * newItem;
         if ( QFile( Vdit.current()->file() ).exists() ) {
             newItem= /*(void)*/ new QListViewItem( videoView, Vdit.current()->name(),
-                   QString::number( QFile( Vdit.current()->file() ).size() ), storage, Vdit.current()->file());
+                   QString::number( QFile( Vdit.current()->file() ).size() ),
+                                                   storage, Vdit.current()->file());
             newItem->setPixmap(0, Resource::loadPixmap( "opieplayer2/videofile" ) );
         }
     }
@@ -763,17 +796,57 @@ void PlayListWidget::openFile() {
         filename = fileDlg->text();
 
         qDebug( "Selected filename is " + filename );
-        if( filename.right( 3 ) == "m3u" ) {
-            readm3u( filename );
-        } else if( filename.right(3) == "pls" ) {
-            readPls( filename );
-        } else {
-              // this doesnt need fixing
+
+        if(filename.left(4) == "http") {
             DocLnk lnk;
-            lnk.setName( filename ); //sets file name
-            lnk.setFile( filename ); //sets File property
-            //qWarning( "Mimetype: " + MimeType( QFile::encodeName(filename) ).id() );
-            lnk.setType( MimeType( QFile::encodeName(filename) ).id() );
+            QString m3uFile, m3uFilePath;
+            if(filename.find(":",8,TRUE) != -1) {
+//found a port
+                m3uFile=filename.left(filename.find(":",8,TRUE));
+
+                m3uFile=m3uFile.right(m3uFile.length()-7);
+                qDebug(m3uFile);
+                m3uFilePath= QDir::homeDirPath()+"/"+m3uFile+".m3u";
+
+                QFile f(m3uFilePath );
+                f.open( IO_WriteOnly );
+                f.writeBlock( filename, filename.length() );
+                f.close();
+
+                lnk.setName( m3uFile ); //sets file name
+                lnk.setFile( m3uFilePath ); //sets File property
+  //qWarning( "Mimetype: " + MimeType( QFile::encodeName(filename) ).id() );
+                lnk.setType( MimeType( QFile::encodeName(m3uFilePath) ).id() );
+                
+            } else if(filename.left(4) == "http"){
+
+                m3uFile=m3uFile.right(m3uFile.length()-7);
+                qDebug(m3uFile);
+
+                m3uFilePath= QDir::homeDirPath()+"/"+m3uFile+".m3u";
+
+                QFile f(m3uFilePath );
+                f.open( IO_WriteOnly );
+                f.writeBlock( filename, filename.length() );
+                f.close();
+
+                lnk.setName( m3uFile ); //sets file name
+                lnk.setFile( m3uFilePath ); //sets File property
+ //qWarning( "Mimetype: " + MimeType( QFile::encodeName(filename) ).id() );
+                lnk.setType( MimeType( QFile::encodeName(m3uFilePath) ).id() );
+
+            } else{
+
+                QFile f( filename );
+                f.open( IO_WriteOnly );
+                f.writeBlock( filename, filename.length() );
+                f.close();
+
+                lnk.setName( filename ); //sets file name
+                lnk.setFile( filename ); //sets File property
+ //qWarning( "Mimetype: " + MimeType( QFile::encodeName(filename) ).id() );
+                lnk.setType( MimeType( QFile::encodeName(filename) ).id() );
+            }
             lnk.setExec( "opieplayer" );
             lnk.setIcon( "opieplayer2/MPEGPlayer" );
 
@@ -781,6 +854,12 @@ void PlayListWidget::openFile() {
                 qDebug( "Writing doclink did not work" );
             }
             d->selectedFiles->addToSelection(  lnk );
+
+        }
+        else if( filename.right( 3 ) == "m3u" ) {
+            readm3u( filename );
+        } else if( filename.right(3) == "pls" ) {
+            readPls( filename );
         }
     }
     if( fileDlg ) {
@@ -858,7 +937,8 @@ void PlayListWidget::readm3u( const QString &filename ) {
             s=t.readLine();
 
             if( s.find( "#", 0, TRUE) == -1 ) {
-                if( s.find( " ",  0, TRUE) == -1 )  { // not sure if this is neede since cf uses vfat
+                if( s.find( " ",  0, TRUE) == -1 )  {
+// not sure if this is neede since cf uses vfat
                     if( s.left(2) == "E:" || s.left(2) == "P:" ) {
                         s = s.right( s.length() -2 );
                         DocLnk lnk( s );
