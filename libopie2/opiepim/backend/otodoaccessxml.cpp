@@ -16,6 +16,7 @@
 #include <qpe/timeconversion.h>
 
 #include "oconversion.h"
+#include "opimstate.h"
 #include "otimezone.h"
 #include "orecur.h"
 #include "otodoaccessxml.h"
@@ -422,6 +423,9 @@ void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
     case OTodo::StartDate:
         ev.setStartDate( OConversion::dateFromString( val ) );
         break;
+    case OTodo::State:
+        ev.setState( val.toInt() );
+        break;
     case OTodo::CrossReference:
     {
         /*
@@ -515,6 +519,8 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
         str += "StartDate=\""+ OConversion::dateToString( ev.startDate() ) +"\" ";
     if ( ev.hasCompletedDate() )
         str += "CompletedDate=\""+ OConversion::dateToString( ev.completedDate() ) +"\" ";
+    if ( ev.hasState() )
+        str += "State=\""+QString::number( ev.state().state() )+"\" ";
 
 
     return str;
