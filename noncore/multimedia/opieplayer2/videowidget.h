@@ -103,7 +103,6 @@ private:
     QString skin;
 
 
-    virtual void paintButton( QPainter &p, int i );
     void setToggleButton( int, bool );
 
     QString backgroundPix;

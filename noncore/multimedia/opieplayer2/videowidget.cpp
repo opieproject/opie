@@ -248,17 +248,6 @@ void VideoWidget::setToggleButton( int i, bool down ) {
     }
 }
 
-void VideoWidget::paintButton( QPainter &p, int i ) {
-
-    Button &button = buttons[ i ];
-
-    if ( button.isDown ) {
-        p.drawPixmap( upperLeftOfButtonMask, button.pixDown );
-    } else {
-        p.drawPixmap( upperLeftOfButtonMask, button.pixUp );
-    }
-}
-
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( unsigned int i = 0; i < buttons.count(); i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
@@ -403,14 +392,14 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
             p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
             p.drawTiledPixmap( pe->rect(), pixBg, pe->rect().topLeft() );
             for ( unsigned int i = 0; i < buttons.count(); i++ ) {
-                paintButton( p, i );
+                paintButton( p, buttons[ i ] );
             }
             QPainter p2( this );
             p2.drawPixmap( pe->rect().topLeft(), pix );
         } else {
             QPainter p( this );
             for ( unsigned int i = 0; i < buttons.count(); i++ )
-                paintButton( p, i );
+                paintButton( p, buttons[ i ] );
         }
         //slider->repaint( TRUE );
         }

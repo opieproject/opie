@@ -313,15 +313,6 @@ void AudioWidget::setToggleButton( int i, bool down ) {
     }
 }
 
-void AudioWidget::paintButton( QPainter &p, int i ) {
-    if ( buttons[i].isDown ) {
-        p.drawPixmap( upperLeftOfButtonMask, buttons[i].pixDown );
-    } else {
-        p.drawPixmap( upperLeftOfButtonMask, buttons[i].pixUp );
-    }
-}
-
-
 void AudioWidget::skipFor() {
     skipDirection = +1;
     startTimer( 50 );
@@ -415,13 +406,13 @@ void AudioWidget::paintEvent( QPaintEvent * pe ) {
         p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
         p.drawTiledPixmap( pe->rect(), pixBg, pe->rect().topLeft() );
         for ( unsigned int i = 0; i < buttons.count(); i++ )
-            paintButton( p, i );
+            paintButton( p, buttons[ i ] );
         QPainter p2( this );
         p2.drawPixmap( pe->rect().topLeft(), pix );
     } else {
         QPainter p( this );
         for ( unsigned int i = 0; i < buttons.count(); i++ )
-            paintButton( p, i );
+            paintButton( p, buttons[ i ] );
     }
 }
 

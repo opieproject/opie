@@ -71,7 +71,15 @@ bool MediaWidget::isOverButton( const QPoint &position, int buttonId ) const
 void MediaWidget::paintButton( int buttonId )
 {
     QPainter p( this );
-    paintButton( p, buttonId );
+    paintButton( p, buttons[ buttonId ] );
+}
+
+void MediaWidget::paintButton( QPainter &p, const Button &button )
+{
+    if ( button.isDown )
+        p.drawPixmap( upperLeftOfButtonMask, button.pixDown );
+    else
+        p.drawPixmap( upperLeftOfButtonMask, button.pixUp );
 }
 
 void MediaWidget::toggleButton( int buttonId )
