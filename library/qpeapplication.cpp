@@ -435,8 +435,8 @@ static void setTreble( int t = 0, int percent = -1 )
 }
 
 
-/*!
-  \class QPEApplication qpeapplication.h
+/**
+  \class QPEApplication 
   \brief The QPEApplication class implements various system services
     that are available to all Qtopia applications.
 
@@ -1571,6 +1571,7 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 */
 void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
 {
+	    setMainWidget(mw);
             d->show(mw, nomaximize );
 }
 
@@ -1591,6 +1592,7 @@ void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
 		Global::setDocument( mw, QString::fromUtf8(argv()[1]) );
 
 
+	setMainWidget(mw);
 	d->show(mw, nomaximize );
 }
 

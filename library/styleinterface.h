@@ -25,9 +25,9 @@
 #define IID_Style QUuid( 0x17af792c, 0xe461, 0x49a9, 0x9b, 0x71, 0x06, 0x8b, 0x9a, 0x8d, 0xda, 0xe4)
 #endif
 
-// {6C33B4F9-D529-453A-8FB3-DA42B21872BD}  
+// {6C33B4F9-D529-453A-8FB3-DA42B21872BD}
 # ifndef IID_StyleExtended
-#  define IID_StyleExtended QUuid( 0x6c33b4f9, 0xd529, 0x453a, 0x8f, 0xb3, 0xda, 0x42, 0xb2, 0x18, 0x72, 0xbd) 
+#  define IID_StyleExtended QUuid( 0x6c33b4f9, 0xd529, 0x453a, 0x8f, 0xb3, 0xda, 0x42, 0xb2, 0x18, 0x72, 0xbd)
 #endif
 
 #endif
@@ -40,27 +40,27 @@ class QStyle;
 
 struct StyleInterface : public QUnknownInterface
 {
-	//! Return a new style.
+         /*! Return a new style.*/
 	virtual QStyle *style() = 0;
-	//! Return a short name for the style.
+         /*! Return a short name for the style. */
 	virtual QString name() const = 0;
 };
 
 struct StyleExtendedInterface : public StyleInterface
 {
-	//! Return a (longer) description for the style.
+        /*! Return a (longer) description for the style. */
 	virtual QString description ( ) const = 0;
 
-	//! Does this style support customization
+        /*! Does this style support customization */
 	virtual bool hasSettings ( ) const = 0;
-	
-	//! Return a new settings page.
+
+        /*! Return a new settings page. */
 	virtual QWidget *create ( QWidget *parent, const char *name = 0 ) = 0;
-	
-	//! Callback for appearance app when OK is clicked (return true when style has to re-applied).
+
+        /*! Callback for appearance app when OK is clicked (return true when style has to re-applied). */
 	virtual bool accept ( ) = 0;
-	
-	//! Callback for appeaeance app when Cancel is clicked.
+
+        /*! Callback for appeaeance app when Cancel is clicked. */
 	virtual void reject ( ) = 0;
 };
 

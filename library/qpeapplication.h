@@ -37,7 +37,45 @@ class QPEApplicationData;
 class QWSEvent;
 class QWSKeyEvent;
 
+/**
+  \brief The QPEApplication class implements various system services
+    that are available to all Qtopia applications.
 
+  Simply by using QPEApplication instead of QApplication, a standard Qt
+  application becomes a Qtopia application. It automatically follows
+  style changes, quits and raises, and in the
+  case of \link docwidget.html document-oriented\endlink applications,
+  changes the currently displayed document in response to the environment.
+
+  To create a \link docwidget.html document-oriented\endlink
+  application use showMainDocumentWidget(); to create a
+  non-document-oriented application use showMainWidget(). The
+  keepRunning() function indicates whether the application will
+  continue running after it's processed the last \link qcop.html
+  QCop\endlink message. This can be changed using setKeepRunning().
+
+  A variety of signals are emitted when certain events occur, for
+  example, timeChanged(), clockChanged(), weekChanged(),
+  dateFormatChanged() and volumeChanged(). If the application receives
+  a \link qcop.html QCop\endlink message on the application's
+  QPE/Application/\e{appname} channel, the appMessage() signal is
+  emitted. There are also flush() and reload() signals, which
+  are emitted when synching begins and ends respectively - upon these
+  signals, the application should save and reload any data
+  files that are involved in synching. Most of these signals will initially
+  be received and unfiltered through the appMessage() signal.
+
+  This class also provides a set of useful static functions. The
+  qpeDir() and documentDir() functions return the respective paths.
+  The grabKeyboard() and ungrabKeyboard() functions are used to
+  control whether the application takes control of the device's
+  physical buttons (e.g. application launch keys). The stylus' mode of
+  operation is set with setStylusOperation() and retrieved with
+  stylusOperation(). There are also setInputMethodHint() and
+  inputMethodHint() functions.
+
+  \ingroup qtopiaemb
+*/
 class QPEApplication : public QApplication
 {
     Q_OBJECT

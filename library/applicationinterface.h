@@ -17,11 +17,44 @@
 #endif
 #endif
 
+
+/**
+ * \brief Application interface currently used by the quicklaunch framework
+ *
+ *  This is the interface to be exposed by applications available as DSO
+ *  Normally one would use the OApplicationFactory which does the magic of
+ *  exposing the interface.
+ *
+ *
+ *  Resulting dynamic shared objects (dso) need to go into the
+ *  OPIEDIR/plugins/application.
+ *
+ *
+ *  You can use this interface to load applications into your application.
+ *  @todo  Implement Services + Trader
+ *  @since Opie 1.0.2
+ */
 struct ApplicationInterface : public QUnknownInterface
 {
 public:
+
+    /**
+     * \brief create the mainwindow for the giving application name
+     * Create a main window for the giving application name
+     *
+     * @param appName The application widget to be created
+     * @param parent The parent of the newly created widget
+     * @param name The name of the QObject
+     * @param f Possible Window Flags
+     *
+     * @return the widget or 0l
+     */
     virtual QWidget *createMainWindow( const QString &appName, QWidget *parent=0,
                                        const char *name=0, Qt::WFlags f=0 ) = 0;
+
+   /**
+    * The list of application windows supported
+    */
     virtual QStringList applications() const = 0;
 };
 

@@ -29,6 +29,19 @@
 #endif
 #endif
 
+
+/**
+ *
+ * \brief add Image Codecs
+ *
+ * This interface will be queried to add new Image loading
+ * and saving routines.
+ *
+ * The ImageCodec needs to be placed in OPIEDIR/plugins/imagecodecs.
+ *
+ * @see QImage
+ * @see QImageIO
+ **/
 struct ImageCodecInterface : public QUnknownInterface
 {
 public:

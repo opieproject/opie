@@ -33,6 +33,21 @@ class QFontFactory;
 #endif
 #endif
 
+
+/**
+ * \brief Interface for additional Font Factories
+ *
+ * To add special types of fonts TrueTypes or your very own
+ * format. If you implement this Interface you can add
+ * custom font loading.
+ *
+ * The dynamic shared object goes to
+ * OPIEDIR/plugins/fontfactories.
+ *
+ * As of version Opie 1.0.2 loading of the plugins is not
+ * yet implemented
+ *
+ */
 struct FontFactoryInterface : public QUnknownInterface
 {
     virtual QFontFactory *fontFactory() = 0;
