@@ -114,13 +114,13 @@ filebrowser.o: filebrowser.cpp \
 		inlineedit.h \
 		filebrowser.h \
 		filePermissions.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/resource.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/global.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/mimetype.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/applnk.h \
-		/usr/src/oldsrc/Opie/opie/include/qcopenvelope_qws.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qpetoolbar.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qpemenubar.h
+		$(OPIEDIR)/include/qpe/resource.h \
+		$(OPIEDIR)/include/qpe/global.h \
+		$(OPIEDIR)/include/qpe/mimetype.h \
+		$(OPIEDIR)/include/qpe/applnk.h \
+		$(OPIEDIR)/include/qcopenvelope_qws.h \
+		$(OPIEDIR)/include/qpe/qpetoolbar.h \
+		$(OPIEDIR)/include/qpe/qpemenubar.h
 
 inlineedit.o: inlineedit.cpp \
 		inlineedit.h
@@ -130,10 +130,10 @@ filePermissions.o: filePermissions.cpp \
 
 main.o: main.cpp \
 		filebrowser.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qpeapplication.h \
-		/usr/src/oldsrc/Opie/opie/include/qpedecoration_qws.h \
-		/usr/src/oldsrc/Opie/opie/include/timestring.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/mimetype.h
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h \
+		$(OPIEDIR)/include/qpe/mimetype.h
 
 moc_inlineedit.o: moc_inlineedit.cpp \
 		inlineedit.h
