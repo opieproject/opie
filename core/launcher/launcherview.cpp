@@ -42,6 +42,9 @@
 
 class LauncherIconView : public QIconView {
 public:
+    QColor iconText;
+    QColor background;
+
     LauncherIconView( QWidget* parent, const char* name=0 ) :
   QIconView(parent,name),
   tf(""),
@@ -51,6 +54,11 @@ public:
   sortmeth = Name;
   hidden.setAutoDelete(TRUE);
   ike = FALSE;
+
+  Config config( "qpe" );
+  config.setGroup( "Appearance" );
+  iconText = QColor( config.readEntry( "LauncherIconText", "#000000" ) );
+  background = QColor( config.readEntry( "LauncherBackground", "#FFFFFF" ) );
     }
 
     ~LauncherIconView()
@@ -147,7 +155,8 @@ public:
     bgColor = colorGroup().button();
     QPainter painter( bg );
 
-    painter.fillRect( QRect( 0, 0, width(), height() ), colorGroup().background().light(110));
+//    painter.fillRect( QRect( 0, 0, width(), height() ), colorGroup().background().light(110));
+    painter.fillRect( QRect( 0, 0, width(), height() ), background);
                 // Overlay the Qtopia logo in the center
                 QImage logo;
     if (QFile::exists(backgroundImage)) {
@@ -287,6 +296,10 @@ public:
       liv->setItemTextBackground( cg.brush( QColorGroup::Highlight ) );
       mycg.setColor( QColorGroup::Text, cg.color( QColorGroup::HighlightedText ) );
   }
+  else {
+      mycg.setColor( QColorGroup::Text, liv->iconText );
+  }
+
   QIconViewItem::paintItem(p,mycg);
   if ( liv->currentItem() == this )
       liv->setItemTextBackground( oldBrush );
