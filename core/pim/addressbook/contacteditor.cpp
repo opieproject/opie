@@ -105,30 +105,30 @@ void ContactEditor::init() {
 		QStringList::ConstIterator it = slOrdered.begin();
 		for ( i = 0; it != slOrdered.end(); i++, ++it ) {
 
-			if ( (*it) == tr( "Business Fax" ) ) {
-				slChooserNames.append( *it );
+			if ( (*it) == "Business Fax" ) {
+				slChooserNames.append( tr( "Business Fax" ) );
 				slChooserValues.append("" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Home Fax" ) ) {
-				slChooserNames.append( *it );
+			if ( (*it) == "Home Fax" ) {
+				slChooserNames.append( tr( "Home Fax" ) );
 				slChooserValues.append("" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
 
-			if ( (*it) == tr( "Business Phone" ) ) {
-				slChooserNames.append( *it );
+			if ( (*it) == "Business Phone" ) {
+				slChooserNames.append( tr( "Business Phone" ) );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Home Phone" ) ) {
-				slChooserNames.append( *it );
+			if ( (*it) == "Home Phone" ) {
+				slChooserNames.append( tr( "Home Phone" ) );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
@@ -142,51 +142,51 @@ void ContactEditor::init() {
 				continue;
 			} */
 
-			if ( (*it) == tr( "Business Mobile" ) ) {
-				slChooserNames.append( *it );
+			if ( (*it) == "Business Mobile" ) {
+				slChooserNames.append( tr( "Business Mobile" ) );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Home Mobile" ) ) {
-				slChooserNames.append( *it );
+			if ( (*it) == "Home Mobile" ) {
+				slChooserNames.append( tr( "Home Mobile" ) );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
 
-			if ( (*it) == tr( "Business WebPage" ) ) {
-				slChooserNames.append( *it );
+			if ( (*it) == "Business WebPage" ) {
+				slChooserNames.append( tr( "Business WebPage" ) );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Home Web Page" ) ) {
-				slChooserNames.append( *it );
+			if ( (*it) == "Home Web Page" ) {
+				slChooserNames.append( tr( "Home Web Page" ) );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Business Pager" ) ) {
-				slChooserNames.append( *it );
+			if ( (*it) == "Business Pager" ) {
+				slChooserNames.append( tr( "Business Pager" ) );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "Default Email" ) ) {
-				slChooserNames.append( *it );
+			if ( *it == "Default Email" ) {
+				slChooserNames.append( tr( "Default Email" ) );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "Emails" ) ) {
-				slChooserNames.append( *it );
+			if ( *it == "Emails" ) {
+				slChooserNames.append( tr( "Emails" ) );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
@@ -195,72 +195,72 @@ void ContactEditor::init() {
 			if ( *it == "Name Title" || *it == "First Name" || *it == "Middle Name" || *it == "Last Name" || *it == "File As" || *it == "Default Email" || *it == "Emails" || *it == "Groups" )
 				continue;
 
-			if ( *it == tr( "Name Title" ) ) {
+			if ( *it == "Name Title" ) {
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "First Name" ) ) {
+			if ( *it == "First Name" ) {
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "Middle Name" ) ) {
+			if ( *it == "Middle Name" ) {
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "Last Name" ) ) {
+			if ( *it == "Last Name" ) {
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "Suffix" ) ) {
+			if ( *it == "Suffix" ) {
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "File As" ) ) {
+			if ( *it == "File As" ) {
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "Gender" ) ) {
+			if ( *it == "Gender" ) {
 				hasGender = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "Job Title" ) ) {
+			if ( *it == "Job Title" ) {
 				hasTitle = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "Company") || *it == tr( "Organization" ) ) {
+			if ( ( *it == "Company") || (*it == "Organization" ) ) {
 				hasCompany = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "Notes" ) ) {
+			if ( *it == "Notes" ) {
 				hasNotes = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( *it == tr( "Groups" ) ) {
+			if ( *it == "Groups" ) {
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Business Street" ) ) {
+			if ( (*it) == "Business Street" ) {
 				hasStreet = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Home Street" ) ) {
+			if ( (*it) == "Home Street" ) {
 				hasStreet = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
@@ -278,49 +278,49 @@ void ContactEditor::init() {
 				continue;
 			} */
 
-			if ( (*it) == tr( "Business City" ) ) {
+			if ( (*it) == "Business City" ) {
 				hasCity = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Business State" ) ) {
+			if ( (*it) == "Business State" ) {
 				hasState = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Business Zip" ) ) {
+			if ( (*it) == "Business Zip" ) {
 				hasZip = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Business Country" ) ) {
+			if ( (*it) == "Business Country" ) {
 				hasCountry = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Home City" ) ) {
+			if ( (*it) == "Home City" ) {
 				hasCity = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Home State" ) ) {
+			if ( (*it) == "Home State" ) {
 				hasState = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Home Zip" ) ) {
+			if ( (*it) == "Home Zip" ) {
 				hasZip = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
 			}
 
-			if ( (*it) == tr( "Home Country" ) ) {
+			if ( (*it) == "Home Country" ) {
 				hasCountry = TRUE;
 			//	slDynamicEntries->remove( it );
 				continue;
@@ -1360,37 +1360,37 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	QStringList::ConstIterator it;
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries.begin(); it != slDynamicEntries.end(); ++it, ++itLE) {
-		if ( *it == tr("Department") )
+		if ( *it =="Department" )
 			(*itLE)->setText( ent.department() );
 
-		if ( *it == tr("Company" ))
+		if ( *it == "Company" )
 			(*itLE)->setText( ent.company() );
 
-		if ( *it == tr("Office" ))
+		if ( *it == "Office" )
 			(*itLE)->setText( ent.office() );
 
-		if ( *it == tr("Profession" ))
+		if ( *it == "Profession" )
 			(*itLE)->setText( ent.profession() );
 
-		if ( *it == tr("Assistant" ))
+		if ( *it == "Assistant" )
 			(*itLE)->setText( ent.assistant() );
 
-		if ( *it == tr("Manager" ))
+		if ( *it == "Manager" )
 			(*itLE)->setText( ent.manager() );
 
-		if ( *it == tr("Spouse" ))
+		if ( *it == "Spouse" )
 			(*itLE)->setText( ent.spouse() );
 
-		if ( *it == tr("Birthday" ))
+		if ( *it == "Birthday" )
 			(*itLE)->setText( ent.birthday() );
 
-		if ( *it == tr("Anniversary" ))
+		if ( *it == "Anniversary" )
 			(*itLE)->setText( ent.anniversary() );
 
-		if ( *it == tr("Nickname" ))
+		if ( *it == "Nickname" )
 			(*itLE)->setText( ent.nickname() );
 
-		if ( *it == tr("Children" ))
+		if ( *it == "Children" )
 			(*itLE)->setText( ent.children() );
 
 	}
@@ -1398,37 +1398,37 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	QStringList::Iterator itV;
 	for ( it = slChooserNames.begin(), itV = slChooserValues.begin(); it != slChooserNames.end(); ++it, ++itV ) {
 
-		if ( *it == tr("Business Phone") || *it == tr("Work Phone" ))
+		if ( ( *it == "Business Phone") || ( *it == "Work Phone" ) )
 			*itV = ent.businessPhone();
 /*
 		if ( *it == "Business 2 Phone" )
 			*itV = ent.business2Phone();
 */
-		if ( *it == tr("Business Fax") || *it == tr("Work Fax" ))
+		if ( ( *it == "Business Fax") || ( *it == "Work Fax" ) )
 			*itV = ent.businessFax();
 
-		if ( *it == tr("Business Mobile") || *it == tr("work Mobile" ))
+		if ( ( *it == "Business Mobile" ) || ( *it == "work Mobile" ) )
 			*itV = ent.businessMobile();
 /*
 		if ( *it == "Company Phone" )
 			*itV = ent.companyPhone();
 */
-		if ( *it == tr("Default Email" ))
+		if ( *it == "Default Email" )
 			*itV = ent.defaultEmail();
 
-		if ( *it == tr("Emails" ))
+		if ( *it == "Emails" )
 			*itV = ent.emailList().join(", ");  // :SX
 
-		if ( *it == tr("Home Phone" ))
+		if ( *it == "Home Phone" )
 			*itV = ent.homePhone();
 /*
 		if ( *it == "Home 2 Phone" )
 			*itV = ent.home2Phone();
 */
-		if ( *it == tr("Home Fax" ))
+		if ( *it == "Home Fax" )
 			*itV = ent.homeFax();
 
-		if ( *it == tr("Home Mobile" ))
+		if ( *it == "Home Mobile" )
 			*itV = ent.homeMobile();
 /*
 		if ( *it == "Car Phone" )
@@ -1440,7 +1440,7 @@ void ContactEditor::setEntry( const OContact &entry ) {
 		if ( *it == "Other Phone" )
 			*itV = ent.otherPhone();
 */
-		if ( *it == tr("Business Pager") || *it == tr("Work Pager" ))
+		if ( ( *it == "Business Pager" ) || ( *it == "Work Pager" ) )
 			*itV = ent.businessPager();
 /*
 		if ( *it == "Home Pager")
@@ -1461,9 +1461,10 @@ void ContactEditor::setEntry( const OContact &entry ) {
 		if ( *it == "Yahoo IM" )
 			*itV = ent.yahooIM();
 */
-		if ( *it == tr("Home Web Page") )
+		if ( *it == "Home Web Page" )
 			*itV = ent.homeWebpage();
-		if ( *it == tr("Business WebPage") || *it == tr("Work Web Page") )
+
+		if ( ( *it == "Business WebPage" ) || ( *it == "Work Web Page" ) )
 			*itV = ent.businessWebpage();
 
 
@@ -1493,7 +1494,7 @@ void ContactEditor::saveEntry() {
 		txtSuffix->setText( parseName( txtFullName->text(), NAME_S ) );
 
 		useFullName = FALSE;
-	}
+}
 
 	/*if ( ent.firstName() != txtFirstName->text() ||
 			ent.lastName != txtLastName->text() ||
@@ -1557,37 +1558,37 @@ void ContactEditor::saveEntry() {
 	QStringList::ConstIterator it;
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries.begin(); it != slDynamicEntries.end(); ++it, ++itLE) {
-		if ( *it == tr("Department" ))
+		if ( *it == "Department" )
 			ent.setDepartment( (*itLE)->text() );
 
-		if ( *it == tr("Company" ))
+		if ( *it == "Company" )
 			ent.setCompany( (*itLE)->text() );
 
-		if ( *it == tr("Office" ))
+		if ( *it == "Office" )
 			ent.setOffice( (*itLE)->text() );
 
-		if ( *it == tr("Profession" ))
+		if ( *it == "Profession" )
 			ent.setProfession( (*itLE)->text() );
 
-		if ( *it == tr("Assistant" ))
+		if ( *it == "Assistant" )
 			ent.setAssistant( (*itLE)->text() );
 
-		if ( *it == tr("Manager" ))
+		if ( *it == "Manager" )
 			ent.setManager( (*itLE)->text() );
 
-		if ( *it == tr("Spouse" ))
+		if ( *it == "Spouse" )
 			ent.setSpouse( (*itLE)->text() );
 
-		if ( *it == tr("Birthday" ))
+		if ( *it == "Birthday" )
 			ent.setBirthday( (*itLE)->text() );
 
-		if ( *it == tr("Anniversary" ))
+		if ( *it == "Anniversary" )
 			ent.setAnniversary( (*itLE)->text() );
 
-		if ( *it == tr("Nickname" ))
+		if ( *it == "Nickname" )
 			ent.setNickname( (*itLE)->text() );
 
-		if ( *it == tr("Children" ))
+		if ( *it == "Children" )
 			ent.setChildren( (*itLE)->text() );
 
 	}
@@ -1595,16 +1596,16 @@ void ContactEditor::saveEntry() {
 	QStringList::ConstIterator itV;
 	for ( it = slChooserNames.begin(), itV = slChooserValues.begin(); it != slChooserNames.end(); ++it, ++itV ) {
 
-		if ( *it == tr("Business Phone") || *it == tr("Work Phone" ))
+		if ( ( *it == "Business Phone" ) || ( *it == "Work Phone"  ) )
 			ent.setBusinessPhone( *itV );
 /*
 		if ( *it == tr("Business 2 Phone" )
 			ent.setBusiness2Phone( *itV );
 */
-		if ( *it == tr("Business Fax") || *it == tr("Work Fax" ))
+		if ( ( *it == "Business Fax" ) || ( *it == "Work Fax" ) )
 			ent.setBusinessFax( *itV );
 
-		if ( *it == tr("Business Mobile") || *it == tr("Work Mobile" ))
+		if ( ( *it == "Business Mobile" ) || ( *it == "Work Mobile" ) )
 			ent.setBusinessMobile( *itV );
 /*
 		if ( *it == "Company Phone" )
@@ -1613,7 +1614,7 @@ void ContactEditor::saveEntry() {
 		//if ( *it == "Default Email" )
 			//ent.setDefaultEmail( *itV );
 
-		if ( *it == tr("Emails" )) {
+		if ( *it == "Emails" ){
 			QString allemail;
 			QString defaultmail;
 			parseEmailFrom( *itV, defaultmail, allemail );
@@ -1622,16 +1623,16 @@ void ContactEditor::saveEntry() {
 			ent.setEmails( allemail );
 		}
 
-		if ( *it == tr("Home Phone" ))
+		if ( *it == "Home Phone" )
 			ent.setHomePhone( *itV );
 /*
 		if ( *it == "Home 2 Phone" )
 			ent.setHome2Phone( *itV );
 */
-		if ( *it == tr("Home Fax" ))
+		if ( *it == "Home Fax" )
 			ent.setHomeFax( *itV );
 
-		if ( *it == tr("Home Mobile" ))
+		if ( *it == "Home Mobile" )
 			ent.setHomeMobile( *itV );
 /*
 		if ( *it == "Car Phone" )
@@ -1643,7 +1644,7 @@ void ContactEditor::saveEntry() {
 		if ( *it == "Other Phone" )
 			ent.setOtherPhone( *itV );
 */
-		if ( *it == tr("Business Pager") || *it == tr("Work Pager") )
+		if ( ( *it == "Business Pager" ) || ( *it == "Work Pager" ) )
 			ent.setBusinessPager( *itV );
 /*
 		if ( *it == "Home Pager" )
@@ -1664,9 +1665,10 @@ void ContactEditor::saveEntry() {
 		if ( *it == "Yahoo IM" )
 			ent.setYahooIM( *itV );
 */
-		if ( *it == tr("Home Web Page") )
+		if ( *it == "Home Web Page" )
 			ent.setHomeWebpage( *itV );
-		if ( *it == tr("Business WebPage") || *it == tr("Work Web Page" ))
+
+		if ( ( *it == "Business WebPage" ) || ( *it == "Work Web Page" ) )
 			ent.setBusinessWebpage( *itV );
 
 

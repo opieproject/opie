@@ -812,10 +812,12 @@ void AddressbookWindow::initFields()
 	// Call the contact functions that correspond to these old functions...
 	
 	QStringList xmlFields = OContact::fields();
-	QStringList visibleFields = OContact::trfields();
+	QStringList visibleFields = OContact::untrfields();
+	// QStringList trFields = OContact::trfields();
+
 	xmlFields.remove( "Title" );
-	visibleFields.remove( tr("Name Title") );
-	visibleFields.remove( tr("Notes") );
+	visibleFields.remove( "Name Title" );
+	visibleFields.remove( "Notes" );
 	
 	int i, version;
 	Config cfg( "AddressBook" );
@@ -838,7 +840,7 @@ void AddressbookWindow::initFields()
 		
 		zn = cfg.readEntry( "Category" + QString::number(i), QString::null );
 		while ( !zn.isNull() ) {
-			if ( zn.contains( tr("Work") ) || zn.contains( tr("Mb") ) ) {
+			if ( zn.contains( "Work" ) || zn.contains( "Mb" ) ) {
 				slOrderedFields.clear();
 				break;
 			}
@@ -885,13 +887,13 @@ void AddressbookWindow::initFields()
 		orderedFields.remove( Qtopia::FileAs );
 		orderedFields.remove( Qtopia::Notes );
 		orderedFields.remove( Qtopia::Gender );
-		slOrderedFields.remove( tr("Name Title") );
-		slOrderedFields.remove( tr("First Name") );
-		slOrderedFields.remove( tr("Last Name") );
-		slOrderedFields.remove( tr("File As") );
-		slOrderedFields.remove( tr("Default Email") );
-		slOrderedFields.remove( tr("Notes") );
-		slOrderedFields.remove( tr("Gender") );
+		slOrderedFields.remove( "Name Title" );
+		slOrderedFields.remove( "First Name" );
+		slOrderedFields.remove( "Last Name" );
+		slOrderedFields.remove( "File As" );
+		slOrderedFields.remove( "Default Email" );
+		slOrderedFields.remove( "Notes" );
+		slOrderedFields.remove( "Gender" );
 		
 	}
 }
