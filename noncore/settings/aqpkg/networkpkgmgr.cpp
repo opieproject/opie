@@ -32,6 +32,7 @@ using namespace std;
 #endif
 #include <qlabel.h>
 #include <qfile.h>
+#include <qmessagebox.h>
 
 #include "datamgr.h"
 #include "networkpkgmgr.h"
@@ -97,6 +98,7 @@ void NetworkPackageManager :: initGui()
     packagesList = new QListView( this );
     update = new QPushButton( "Refresh List", this );
     download = new QPushButton( "Download", this );
+    upgrade = new QPushButton( "Upgrade", this );
     apply = new QPushButton( "Apply", this );
 
     QVBoxLayout *vbox = new QVBoxLayout( this, 0, -1, "VBox" );
@@ -110,6 +112,7 @@ void NetworkPackageManager :: initGui()
     QHBoxLayout *hbox2 = new QHBoxLayout( vbox, -1, "HBox2" );
     hbox2->addWidget( update );
     hbox2->addWidget( download );
+    hbox2->addWidget( upgrade );
     hbox2->addWidget( apply );
 }
 
@@ -118,14 +121,15 @@ void NetworkPackageManager :: setupConnections()
     connect( serversList, SIGNAL(activated( int )), this, SLOT(serverSelected( int )));
     connect( apply, SIGNAL(released()), this, SLOT(applyChanges()) );
     connect( download, SIGNAL(released()), this, SLOT(downloadPackage()) );
+    connect( upgrade, SIGNAL( released()), this, SLOT(upgradePackages()) );
     connect( update, SIGNAL(released()), this, SLOT(updateServer()) );
 }
 
-void NetworkPackageManager :: showProgressDialog()
+void NetworkPackageManager :: showProgressDialog( char *initialText )
 {
     if ( !progressDlg )
         progressDlg = new ProgressDlg( this, "Progress", false );
-    progressDlg->setText( "Reading installed packages" );
+    progressDlg->setText( initialText );
     progressDlg->show();
 }
 
@@ -175,16 +179,24 @@ void NetworkPackageManager :: serverSelected( int )
     }
 
     // If the local server or the local ipkgs server disable the download button
-    download->setText( "Download" );
     if ( serverName == LOCAL_SERVER )
+    {
+        upgrade->setEnabled( false );
+        download->setText( "Download" );
         download->setEnabled( false );
+    }
     else if ( serverName == LOCAL_IPKGS )
     {
+        upgrade->setEnabled( false );
         download->setEnabled( true );
         download->setText( "Remove" );
     }
     else
+    {
+        upgrade->setEnabled( true );
         download->setEnabled( true );
+        download->setText( "Download" );
+    }
 }
 
 void NetworkPackageManager :: updateServer()
@@ -223,6 +235,34 @@ void NetworkPackageManager :: updateServer()
     dataMgr->reloadServerData( serversList->currentText() );
     serverSelected(-1);
     delete dlg;
+}
+
+void NetworkPackageManager :: upgradePackages()
+{
+    // We're gonna do an upgrade of all packages
+    // First warn user that this isn't recommended
+    QString text = "WARNING: Upgrading while\nOpie/Qtopia is running\nis NOT recommended!\n\nAre you sure?\n";
+    QMessageBox warn("Warning", text, QMessageBox::Warning,
+                        QMessageBox::Yes,
+                        QMessageBox::No | QMessageBox::Escape | QMessageBox::Default ,
+                        0, this );
+    warn.adjustSize();
+                        
+    if ( warn.exec() == QMessageBox::Yes )
+    {
+        // First, write out ipkg_conf file so that ipkg can use it
+        dataMgr->writeOutIpkgConf();
+
+        // Now run upgrade
+        InstallDlgImpl dlg( this, "Upgrade", true );
+        dlg.showDlg();
+
+        // Reload data
+        dataMgr->reloadServerData( LOCAL_SERVER );
+
+        dataMgr->reloadServerData( serversList->currentText() );
+        serverSelected(-1);
+    }
 }
 
 
@@ -343,6 +383,7 @@ void NetworkPackageManager :: applyChanges()
 
     // Reload data
     dataMgr->reloadServerData( LOCAL_SERVER );
+
     dataMgr->reloadServerData( serversList->currentText() );
     serverSelected(-1);
 
@@ -384,7 +425,23 @@ QString NetworkPackageManager :: dealWithItem( QCheckListItem *item )
     else
     {
         if ( p->getVersion() == p->getInstalledVersion() )
-        	return QString( "D" ) + name;
+        {
+            QString msgtext;
+            msgtext.sprintf( "Do you wish to remove or reinstall\n%s?", (const char *)name );
+            switch( QMessageBox::information( this, "Remove or ReInstall",
+                                msgtext, "Remove", "ReInstall" ) )
+            {
+                case 0: // Try again or Enter
+                    return QString( "D" ) + name;
+                    break;
+                case 1: // Quit or Escape
+                    return QString( "U" ) + name;
+                    break;
+            }
+
+            // User hit cancel (on dlg - assume remove)
+            return QString( "D" ) + name;
+        }
         else
         	return QString( "U" ) + name;
     }
