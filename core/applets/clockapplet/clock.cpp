@@ -22,6 +22,7 @@
 
 #include <qpe/global.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 
 #include <qmainwindow.h>
@@ -31,6 +32,7 @@
 #include <qdatetime.h>
 #include <qtimer.h>
 #include <qpopupmenu.h>
+#include <qfile.h>
 #include <stdlib.h>
 
 
@@ -58,7 +60,16 @@ void LauncherClock::readConfig() {
 
 void LauncherClock::mouseReleaseEvent( QMouseEvent * )
 {
-    Global::execute( "systemtime" );
+	QCString setTimeApp;
+	if (QFile::exists(QPEApplication::qpeDir()+"bin/netsystemtime"))
+ 		setTimeApp="netsystemtime";
+ 	else setTimeApp="systemtime";
+  qDebug("app "+setTimeApp);
+	QCopEnvelope e("QPE/Application/"+setTimeApp, "setDocument(QString)");
+  QString lf = QString::null;
+
+	e << lf;
+
 }
 
 
