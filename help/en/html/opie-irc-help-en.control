@@ -3,6 +3,7 @@ Files: help/en/html/opieirc.html help/en/html/opieirc
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-irc
 License: GPL
 Description: Opie IRC help files (English)

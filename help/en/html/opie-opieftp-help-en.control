@@ -3,6 +3,7 @@ Files: help/en/html/opieftp.html help/en/html/opieftp
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-opieftp
 License: GPL
 Description: OpieFTP help files (English)

@@ -3,6 +3,7 @@ Files: help/en/html/opie-write.html help/en/html/opie-write
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-opie-write
 License: GPL
 Description: Opie-write help files (English)

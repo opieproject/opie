@@ -3,6 +3,7 @@ Files: help/en/html/sshkeys.html help/en/html/sshkeys
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-sshkeys
 License: GPL
 Description: SSHKeys help files (English)

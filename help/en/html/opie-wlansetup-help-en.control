@@ -3,6 +3,7 @@ Files: help/en/html/wlansetup.html help/en/html/wlansetup
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-wlansetup
 License: GPL
 Description: Wlan setup help files (English)

@@ -3,6 +3,7 @@ Files: help/en/html/tetrix.html help/en/html/tetrix
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-tetrix
 License: GPL
 Description: Tetrix help files (English)

@@ -3,6 +3,7 @@ Files: help/en/html/remote.html help/en/html/remote
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-remote
 License: GPL
 Description: Remote help files (English)

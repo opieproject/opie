@@ -3,6 +3,7 @@ Files: help/en/html/formatter.html
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-formatter
 License: GPL
 Description: Formatter help files (English)

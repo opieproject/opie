@@ -3,6 +3,7 @@ Files: help/en/html/go.html help/en/html/go
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-go
 License: GPL
 Description: Go help files (English)

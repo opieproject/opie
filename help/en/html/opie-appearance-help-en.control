@@ -3,6 +3,7 @@ Files: help/en/html/appearance.html help/en/html/appearance
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-appearance
 License: GPL
 Description: Appearance help files (English)

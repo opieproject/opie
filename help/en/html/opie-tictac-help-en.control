@@ -3,6 +3,7 @@ Files: help/en/html/tictac.html help/en/html/tictac
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-tictac
 License: GPL
 Description: Tictac help files (English)

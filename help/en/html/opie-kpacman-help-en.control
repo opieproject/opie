@@ -3,6 +3,7 @@ Files: help/en/html/kpacman.html help/en/html/kpacman
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-kpacman
 License: GPL
 Description: KPacman help files (English)

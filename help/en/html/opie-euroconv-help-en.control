@@ -3,6 +3,7 @@ Files: help/en/html/euroconv.html help/en/html/euroconv
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-euroconv
 License: GPL
 Description: Euroconv help files (English)

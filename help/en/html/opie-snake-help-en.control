@@ -3,6 +3,7 @@ Files: help/en/html/snake.html help/en/html/snake
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-snake
 License: GPL
 Description: Snake help files (English)

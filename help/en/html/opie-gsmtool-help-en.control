@@ -3,6 +3,7 @@ Files: help/en/html/gsmtool.html help/en/html/gsmtool
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-gsmtool
 License: GPL
 Description: Gsmtool help files (English)

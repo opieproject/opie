@@ -3,6 +3,7 @@ Files: help/en/html/sound.html help/en/html/sound
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-sound
 License: GPL
 Description: Sound settings help files (English)

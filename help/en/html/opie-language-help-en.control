@@ -3,6 +3,7 @@ Files: help/en/html/language.html help/en/html/language
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-language
 License: GPL
 Description: Language settings help files (English)

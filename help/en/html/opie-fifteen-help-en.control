@@ -3,6 +3,7 @@ Files: help/en/html/fifteen.html help/en/html/fifteen
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-fifteen
 License: GPL
 Description: Fifteen help files (English)

@@ -3,6 +3,7 @@ Files: help/en/html/bounce.html help/en/html/bounce
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-bounce
 License: GPL
 Description: bounce help files (English)

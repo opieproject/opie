@@ -3,6 +3,7 @@ Files: help/en/html/launchersettings.html help/en/html/launchersettings
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-launchersettings
 License: GPL
 Description: Launcher settings help files (English)

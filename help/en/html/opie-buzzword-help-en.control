@@ -3,6 +3,7 @@ Files: help/en/html/buzzword.html help/en/html/buzzword
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-buzzword
 License: GPL
 Description: buzzword help files (English)

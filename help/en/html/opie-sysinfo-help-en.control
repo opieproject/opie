@@ -3,6 +3,7 @@ Files: help/en/html/sysinfo.html help/en/html/sysinfo
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-sysinfo
 License: GPL
 Description: System info help files (English)

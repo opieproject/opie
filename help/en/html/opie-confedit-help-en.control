@@ -3,6 +3,7 @@ Files: help/en/html/confedit.html help/en/html/confedit
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-confedit
 License: GPL
 Description: Confedit help files (English)

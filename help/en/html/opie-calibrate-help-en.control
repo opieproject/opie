@@ -3,6 +3,7 @@ Files: help/en/html/calibrate.html help/en/html/calibrate
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-calibrate
 License: GPL
 Description: Calibrate help files (English)

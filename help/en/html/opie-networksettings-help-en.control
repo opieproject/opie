@@ -3,6 +3,7 @@ Files: help/en/html/networksettings.html help/en/html/networksettings
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-networksettings
 License: GPL
 Description: Network settings help files (English)

@@ -3,6 +3,7 @@ Files: help/en/html/kbill.html help/en/html/kbill
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-kbill
 License: GPL
 Description: KBill help files (English)

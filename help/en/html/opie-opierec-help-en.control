@@ -3,6 +3,7 @@ Files: help/en/html/opierec.html
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-opierec
 License: GPL
 Description: Opierec help files (English)

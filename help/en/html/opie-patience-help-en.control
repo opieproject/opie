@@ -3,6 +3,7 @@ Files: help/en/html/patience.html help/en/html/patience
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-patience
 License: GPL
 Description: Patience help files (English)

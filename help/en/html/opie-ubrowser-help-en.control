@@ -3,6 +3,7 @@ Files: help/en/html/ubrowser.html help/en/html/ubrowser
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-ubrowser
 License: GPL
 Description: ubrowser help files (English)

@@ -3,6 +3,7 @@ Files: help/en/html/opieplayer.html help/en/html/opieplayer
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-opieplayer
 License: GPL
 Description: Opieplayer help files (English)

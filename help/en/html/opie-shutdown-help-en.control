@@ -3,6 +3,7 @@ Files: help/en/html/shutdown.html help/en/html/shutdown
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-shutdown
 License: GPL
 Description: Shutdown help files (English)

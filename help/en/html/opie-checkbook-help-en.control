@@ -3,6 +3,7 @@ Files: help/en/html/checkbook.html help/en/html/checkbook
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-checkbook
 License: GPL
 Description: Checkbook help files (English)

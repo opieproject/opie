@@ -3,6 +3,7 @@ Files: help/en/html/rotation.html help/en/html/rotation
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-rotation
 License: GPL
 Description: Rotation settings help files (English)

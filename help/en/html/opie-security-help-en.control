@@ -3,6 +3,7 @@ Files: help/en/html/security.html help/en/html/security
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-security
 License: GPL
 Description: Security settings help files (English)

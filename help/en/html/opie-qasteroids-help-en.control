@@ -3,6 +3,7 @@ Files: help/en/html/qasteroids.html help/en/html/qasteroids
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-qasteroids
 License: GPL
 Description: QAsteroids help files (English)

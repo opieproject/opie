@@ -3,6 +3,7 @@ Files: help/en/html/mobilemsg.html help/en/html/mobilemsg
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-mobilemsg
 License: GPL
 Description: MobileMsg help files (English)

@@ -3,6 +3,7 @@ Files: help/en/html/tinykate.html help/en/html/tinykate
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-tinykate
 License: GPL
 Description: Tinykate help files (English)

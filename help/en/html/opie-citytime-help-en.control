@@ -3,6 +3,7 @@ Files: help/en/html/citytime.html help/en/html/citytime
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-citytime
 License: GPL
 Description: Citytime help files (English)

@@ -3,6 +3,7 @@ Files: help/en/html/clock.html help/en/html/clock
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-clock
 License: GPL
 Description: Clock help files (English)

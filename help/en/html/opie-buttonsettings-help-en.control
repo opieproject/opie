@@ -3,6 +3,7 @@ Files: help/en/html/buttonsettings.html help/en/html/buttonsettings
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-buttonsettings
 License: GPL
 Description: buttonsettings help files (English)

@@ -3,6 +3,7 @@ Files: help/en/html/minesweep.html help/en/html/minesweep
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-minesweep
 License: GPL
 Description: Minesweep help files (English)

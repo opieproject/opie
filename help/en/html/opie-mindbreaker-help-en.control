@@ -3,6 +3,7 @@ Files: help/en/html/mindbreaker.html help/en/html/mindbreaker
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-mindbreaker
 License: GPL
 Description: Mindbreaker help files (English)

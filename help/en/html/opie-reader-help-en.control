@@ -3,6 +3,7 @@ Files: help/en/html/reader.html help/en/html/reader
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-reader
 License: GPL
 Description: Opie reader help files (English)

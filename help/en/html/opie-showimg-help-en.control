@@ -3,6 +3,7 @@ Files: help/en/html/showimg.html help/en/html/showimg
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-showimg
 License: GPL
 Description: Showimg help files (English)

@@ -3,6 +3,7 @@ Files: help/en/html/light-and-power.html help/en/html/light-and-power
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-light-and-power
 License: GPL
 Description: Light and Power settings help files (English)

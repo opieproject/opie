@@ -3,6 +3,7 @@ Files: help/en/html/wordgame.html help/en/html/wordgame
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-wordgame
 License: GPL
 Description: Wordgame help files (English)

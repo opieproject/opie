@@ -3,6 +3,7 @@ Files: help/en/html/kcheckers.html help/en/html/kcheckers
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-kcheckers
 License: GPL
 Description: KCheckers help files (English)

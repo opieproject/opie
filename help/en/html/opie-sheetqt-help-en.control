@@ -3,6 +3,7 @@ Files: help/en/html/sheetqt.html help/en/html/sheetqt
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-sheetqt
 License: GPL
 Description: SheetQT help files (English)

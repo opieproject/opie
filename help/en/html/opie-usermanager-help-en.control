@@ -3,6 +3,7 @@ Files: help/en/html/usermanager.html help/en/html/usermanager
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-usermanager
 License: GPL
 Description: User manager help files (English)

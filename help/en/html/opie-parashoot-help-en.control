@@ -3,6 +3,7 @@ Files: help/en/html/parashoot.html help/en/html/parashoot
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-parashoot
 License: GPL
 Description: Parashoot help files (English)

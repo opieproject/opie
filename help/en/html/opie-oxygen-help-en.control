@@ -3,6 +3,7 @@ Files: help/en/html/oxygen.html help/en/html/oxygen
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-oxygen
 License: GPL
 Description: Oxygen help files (English)

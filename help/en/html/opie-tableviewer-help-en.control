@@ -3,6 +3,7 @@ Files: help/en/html/tableviewer.html help/en/html/tableviewer
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-tableviewer
 License: GPL
 Description: Tableviewer help files (English)

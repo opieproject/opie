@@ -3,6 +3,7 @@ Files: help/en/html/qpdf.html help/en/html/qpdf
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-qpdf
 License: GPL
 Description: QPdf help files (English)

@@ -3,6 +3,7 @@ Files: help/en/html/sfcave.html help/en/html/sfcave
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-sfcave
 License: GPL
 Description: SFCave help files (English)

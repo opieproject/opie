@@ -3,6 +3,7 @@ Files: help/en/html/odict.html help/en/html/odict
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-odict
 License: GPL
 Description: ODict help files (English)

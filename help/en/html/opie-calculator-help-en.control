@@ -3,6 +3,7 @@ Files: help/en/html/calculator.html help/en/html/calculator
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-calculator
 License: GPL
 Description: Calculator help files (English)

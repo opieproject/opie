@@ -3,6 +3,7 @@ Files: help/en/html/systemtime.html help/en/html/systemtime
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Depends: opie-systemtime
 License: GPL
 Description: System time settings help files (English)
