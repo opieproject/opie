@@ -1,7 +1,7 @@
 /***************************************************************************
    AdvancedFm.cpp
-                             -------------------
-                             ** Created: Sat Mar 9 23:33:09 2002
+  -------------------
+  ** Created: Sat Mar 9 23:33:09 2002
     copyright            : (C) 2002 by ljp
     email                : ljp@llornkcor.com
     *   This program is free software; you can redistribute it and/or modify  *
@@ -20,26 +20,25 @@
 //  #include <opie/ofileselector.h>
 //  #include <opie/ofiledialog.h>
 
-
 #include <qpe/lnkproperties.h>
 #include <qpe/filemanager.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
 #include <qpe/applnk.h>
 #include <qpe/ir.h>
+#include <qpe/resource.h>
 
 //#include <opie/ofileselector.h>
 #include <qmultilineedit.h>
 
+#include <qtabwidget.h>
 #include <qtextstream.h>
 #include <qpushbutton.h>
-#include <qtoolbutton.h>
 #include <qdatetime.h>
 #include <qdir.h>
 #include <qfile.h>
@@ -51,7 +50,6 @@
 #include <qlabel.h>
 #include <qprogressbar.h>
 #include <qspinbox.h>
-#include <qtabwidget.h>
 #include <qwidget.h>
 #include <qlayout.h>
 #include <qimage.h>
@@ -75,216 +73,18 @@
 #include <sys/utsname.h>
 
 AdvancedFm::AdvancedFm( )
-  : QMainWindow( )
-{
-  setCaption( tr( "AdvancedFm" ) );
-
-  QGridLayout *layout = new QGridLayout( this );
-  layout->setSpacing( 2);
-  layout->setMargin( 2);
-
-  connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
-
-  QPEMenuBar *menuBar = new QPEMenuBar(this);
-  fileMenu = new QPopupMenu( this );
-  viewMenu  = new QPopupMenu( this );
-
-  layout->addMultiCellWidget( menuBar, 0, 0, 0, 1 );
-
-  menuBar->insertItem( tr( "File" ), fileMenu);
-  menuBar->insertItem( tr( "View" ), viewMenu);
-
-  qpeDirButton= new QToolButton(this,"QPEButton");
-  qpeDirButton->setPixmap( Resource::loadPixmap("launcher/opielogo16x16"));//,"",this,"QPEButton");
-  qpeDirButton ->setFixedSize( QSize( 20, 20 ) );
-  connect( qpeDirButton ,SIGNAL(released()),this,SLOT( QPEButtonPushed()) );
-  layout->addMultiCellWidget( qpeDirButton , 0, 0, 2, 2);
-
-  cfButton = new QToolButton( this,"CFButton");
-  cfButton->setPixmap(Resource::loadPixmap("cardmon/pcmcia"));
-  cfButton ->setFixedSize( QSize( 20, 20 ) );
-  connect( cfButton ,SIGNAL(released()),this,SLOT( CFButtonPushed()) );
-  layout->addMultiCellWidget( cfButton , 0, 0, 3, 3);
-
-  sdButton = new QToolButton( this,"SDButton");
-  sdButton->setPixmap(Resource::loadPixmap("sdmon/sdcard"));
-  sdButton->setFixedSize( QSize( 20, 20 ) );
-  connect( sdButton ,SIGNAL(released()),this,SLOT( SDButtonPushed()) );
-  layout->addMultiCellWidget( sdButton , 0, 0, 4, 4);
-
-  cdUpButton = new QToolButton( this,"cdUpButton");
-  cdUpButton->setPixmap(Resource::loadPixmap("up"));
-  cdUpButton ->setFixedSize( QSize( 20, 20 ) );
-  connect( cdUpButton ,SIGNAL(released()),this,SLOT( upDir()) );
-  layout->addMultiCellWidget( cdUpButton , 0, 0, 5, 5);
-
-  docButton = new QToolButton( this,"docsButton");
-  docButton->setPixmap(Resource::loadPixmap("DocsIcon"));
-  docButton->setFixedSize( QSize( 20, 20 ) );
-  connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
-  layout->addMultiCellWidget( docButton, 0, 0, 6, 6);
-
-  homeButton = new QToolButton( this,"homeButton");
-  homeButton->setPixmap(Resource::loadPixmap("home"));
-  homeButton->setFixedSize( QSize( 20, 20 ) );
-  connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
-  layout->addMultiCellWidget( homeButton, 0, 0, 7, 7);
-
-  fileMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
-  fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
-  fileMenu->insertSeparator();
-  fileMenu->insertItem( tr( "Make Directory" ), this, SLOT( mkDir() ));
-  fileMenu->insertItem( tr( "Rename" ), this, SLOT( rn() ));
-  fileMenu->insertItem( tr( "Run Command" ), this, SLOT( runCommandStd() ));
-  fileMenu->insertItem( tr( "Run Command with Output" ), this, SLOT( runCommand() ));
-  fileMenu->insertSeparator();
-  fileMenu->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
-  fileMenu->insertItem( tr( "Delete" ), this, SLOT( del() ));
-  fileMenu->setCheckable(TRUE);
-
-  viewMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
-  viewMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
-  viewMenu->insertSeparator();
-  viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
-  viewMenu->setCheckable(TRUE);
-
-
-  currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
-  currentPathCombo->setEditable(TRUE);
-  layout->addMultiCellWidget( currentPathCombo, 1, 1, 0, 7);
-  currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
-
-  connect( currentPathCombo, SIGNAL( activated( const QString & ) ),
-           this, SLOT(  currentPathComboActivated( const QString & ) ) );
-
-  connect( currentPathCombo->lineEdit(),SIGNAL(returnPressed()),
-           this,SLOT(currentPathComboChanged()));
-
-  currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
-
-  layout->addMultiCellWidget( currentPathCombo, 1, 1, 0, 7);
-
-
-  TabWidget = new QTabWidget( this, "TabWidget" );
-  layout->addMultiCellWidget( TabWidget, 2, 2, 0, 7);
-
-  tab = new QWidget( TabWidget, "tab" );
-  tabLayout = new QGridLayout( tab );
-  tabLayout->setSpacing( 2);
-  tabLayout->setMargin( 2);
-
-  Local_View = new QListView( tab, "Local_View" );
-  Local_View->addColumn( tr("File"),130);
-  Local_View->addColumn( tr("Size"),-1);
-  Local_View->setColumnAlignment(1,QListView::AlignRight);
-  Local_View->addColumn( tr("Date"),-1);
-  Local_View->setColumnAlignment(2,QListView::AlignRight);
-  Local_View->setAllColumnsShowFocus(TRUE);
-  Local_View->setMultiSelection( TRUE );
-  Local_View->setSelectionMode(QListView::Extended);
-
-  QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
-
-  tabLayout->addWidget( Local_View, 0, 0 );
-
-  connect( Local_View, SIGNAL( clicked( QListViewItem*)),
-           this,SLOT( localListClicked(QListViewItem *)) );
-  connect( Local_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-           this,SLOT( localListPressed(int, QListViewItem *, const QPoint&, int)) );
-
-  connect( Local_View, SIGNAL( selectionChanged() ), SLOT( cancelMenuTimer() ) );
-
-  TabWidget->insertTab( tab, tr("1"));
-
-  tab_2 = new QWidget( TabWidget, "tab_2" );
-  tabLayout_2 = new QGridLayout( tab_2 );
-  tabLayout_2->setSpacing( 2);
-  tabLayout_2->setMargin( 2);
-
-  Remote_View = new QListView( tab_2, "Remote_View" );
-  Remote_View->addColumn( tr("File"),130);
-  Remote_View->addColumn( tr("Size"),-1);
-  Remote_View->setColumnAlignment(1,QListView::AlignRight);
-  Remote_View->addColumn( tr("Date"),-1);
-  Remote_View->setColumnAlignment(2,QListView::AlignRight);
-  Remote_View->setAllColumnsShowFocus(TRUE);
-  Remote_View->setMultiSelection( TRUE );
-  Remote_View->setSelectionMode(QListView::Extended);
-
-
-  QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
-
-  connect( Remote_View, SIGNAL( clicked( QListViewItem*)),
-           this,SLOT( remoteListClicked(QListViewItem *)) );
-  connect( Remote_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-           this,SLOT( remoteListPressed(int, QListViewItem *, const QPoint&, int)) );
-
-  tabLayout_2->addWidget( Remote_View, 0, 0 );
-
-
-  TabWidget->insertTab( tab_2, tr( "2"));
-
-  connect(TabWidget,SIGNAL(currentChanged(QWidget *)),
-          this,SLOT(tabChanged(QWidget*)));
-
-  /*     tab_3 = new QWidget( TabWidget, "tab_3" );
-         tabLayout_3 = new QGridLayout( tab_3 );
-         tabLayout_3->setSpacing( 2);
-         tabLayout_3->setMargin( 2);
-
-
-         //     OFileDialog fileDialog;
-         // fileDialog;
-         //    fileSelector = new FileSelector( "*",tab_3, "fileselector" , FALSE, FALSE); //buggy
-         //     fileDialog = new OFileDialog("bangalow", tab_3, 4, 2, "Bungalow");
-         //      OFileSelector fileDialog = new OFileSelector( tab_3, 4, 2,"/");
-
-         QListView *fileTree;
-         fileTree = new QListView( tab_3, "tree" );
-
-      
-         tabLayout_3->addMultiCellWidget( fileTree, 0, 0, 0, 3 );
-
-         TabWidget->insertTab( tab_3, tr( "Remote" ) );
-  */
-         
-  ///////////////
-
-  struct utsname name; /* check for embedix kernel running on the zaurus*/
-  if (uname(&name) != -1) {
-      QString release=name.release;
-      if(release.find("embedix",0,TRUE) !=-1) {
-          zaurusDevice=TRUE;
-     } else {
-          zaurusDevice=FALSE;
-          sdButton->hide();
-      }
-  }
-  
-  currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-  currentDir.setPath( QDir::currentDirPath());
-
-  currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-  currentRemoteDir.setPath( QDir::currentDirPath());
-
-  b = TRUE;
-
-  filterStr="*";
-  b=FALSE;
-
-  connect( &menuTimer, SIGNAL( timeout() ), SLOT( showFileMenu() ) );
+  : QMainWindow( ) {
+    init();
     
   populateLocalView();
   populateRemoteView();
   currentPathCombo->setFocus();
 }
 
-AdvancedFm::~AdvancedFm()
-{
+AdvancedFm::~AdvancedFm() {
 }
 
-void AdvancedFm::cleanUp()
-{
+void AdvancedFm::cleanUp() {
   QString sfile=QDir::homeDirPath();
   if(sfile.right(1) != "/")
     sfile+="/._temp";
@@ -295,8 +95,7 @@ void AdvancedFm::cleanUp()
     file.remove();
 }
 
-void AdvancedFm::tabChanged(QWidget *)
-{
+void AdvancedFm::tabChanged(QWidget *) {
   if (TabWidget->currentPageIndex() == 0) {
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
     viewMenu->setItemChecked(viewMenu->idAt(0),TRUE);
@@ -315,8 +114,7 @@ void AdvancedFm::tabChanged(QWidget *)
 }
 
 
-void AdvancedFm::populateLocalView()
-{
+void AdvancedFm::populateLocalView() {
   QPixmap pm;
   Local_View->clear();
   currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
@@ -412,8 +210,7 @@ void AdvancedFm::populateLocalView()
 }
 
 
-void AdvancedFm::populateRemoteView()
-{
+void AdvancedFm::populateRemoteView() {
   QPixmap pm;
   Remote_View->clear();
   currentRemoteDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
@@ -509,8 +306,7 @@ void AdvancedFm::populateRemoteView()
   fillCombo( (const QString &) currentRemoteDir.canonicalPath() );
 }
 
-void AdvancedFm::localListClicked(QListViewItem *selectedItem)
-{
+void AdvancedFm::localListClicked(QListViewItem *selectedItem) {
   if(selectedItem) {
     QString strItem=selectedItem->text(0);
     QString strSize=selectedItem->text(1);
@@ -550,8 +346,8 @@ void AdvancedFm::localListClicked(QListViewItem *selectedItem)
   }
 }
 
-void AdvancedFm::remoteListClicked(QListViewItem *selectedItem)
-{
+void AdvancedFm::remoteListClicked(QListViewItem *selectedItem) {
+    
   if(selectedItem) {
     QString strItem=selectedItem->text(0);
     QString strSize=selectedItem->text(1);
@@ -591,18 +387,15 @@ void AdvancedFm::remoteListClicked(QListViewItem *selectedItem)
   }
 }
 
-void AdvancedFm::doLocalCd()
-{
+void AdvancedFm::doLocalCd() {
   localListClicked( Local_View->currentItem());
 }
 
-void AdvancedFm::doRemoteCd()
-{
+void AdvancedFm::doRemoteCd() {
   localListClicked( Remote_View->currentItem());
 }
 
-void AdvancedFm::showHidden()
-{
+void AdvancedFm::showHidden() {
   if (b) {
     currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
@@ -617,8 +410,7 @@ void AdvancedFm::showHidden()
 
 }
 
-void AdvancedFm::showRemoteHidden()
-{
+void AdvancedFm::showRemoteHidden() {
   if (b) {
     currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     b=TRUE;
@@ -630,8 +422,7 @@ void AdvancedFm::showRemoteHidden()
   populateRemoteView();
 }
 
-void AdvancedFm::localListPressed( int mouse, QListViewItem *, const QPoint& , int )
-{
+void AdvancedFm::localListPressed( int mouse, QListViewItem *, const QPoint& , int ) {
   qDebug("list pressed");
   switch (mouse) {
   case 1:
@@ -643,8 +434,7 @@ void AdvancedFm::localListPressed( int mouse, QListViewItem *, const QPoint& , i
   };
 }
 
-void AdvancedFm::remoteListPressed( int mouse, QListViewItem*, const QPoint&, int )
-{
+void AdvancedFm::remoteListPressed( int mouse, QListViewItem*, const QPoint&, int ) {
 
   switch (mouse) {
   case 1:
@@ -728,8 +518,7 @@ void AdvancedFm::runText() {
   }
 }
 
-void AdvancedFm::localMakDir()
-{
+void AdvancedFm::localMakDir() {
   InputDialog *fileDlg;
   fileDlg = new InputDialog(this,tr("Make Directory"),TRUE, 0);
   fileDlg->exec();
@@ -740,8 +529,7 @@ void AdvancedFm::localMakDir()
   populateLocalView();
 }
 
-void AdvancedFm::remoteMakDir()
-{
+void AdvancedFm::remoteMakDir() {
   InputDialog *fileDlg;
   fileDlg = new InputDialog(this,tr("Make Directory"),TRUE, 0);
   fileDlg->exec();
@@ -752,8 +540,7 @@ void AdvancedFm::remoteMakDir()
   populateRemoteView();
 }
 
-void AdvancedFm::localDelete()
-{
+void AdvancedFm::localDelete() {
   QStringList curFileList = getPath();
   if(curFileList.count() > 0) {
     QString myFile;
@@ -802,8 +589,7 @@ void AdvancedFm::localDelete()
   }
 }
 
-void AdvancedFm::remoteDelete()
-{
+void AdvancedFm::remoteDelete() {
   QStringList curFileList = getPath();
   if( curFileList.count() > 0) {
     QString myFile;
@@ -852,8 +638,7 @@ void AdvancedFm::remoteDelete()
   }
 }
 
-void AdvancedFm::localRename()
-{
+void AdvancedFm::localRename() {
   QString curFile = Local_View->currentItem()->text(0);
   qDebug("currentItem "+curFile);
   if( curFile !="../") {
@@ -889,30 +674,25 @@ void AdvancedFm::remoteRename()
   }
 }
 
-void AdvancedFm::switchToLocalTab()
-{
+void AdvancedFm::switchToLocalTab() {
   TabWidget->setCurrentPage(0);
   Local_View->setFocus();
 }
 
-void AdvancedFm::switchToRemoteTab()
-{
+void AdvancedFm::switchToRemoteTab() {
   TabWidget->setCurrentPage(1);
   Remote_View->setFocus();
 }
 
-void AdvancedFm::readConfig()
-{
+void AdvancedFm::readConfig() {
   Config cfg("AdvancedFm");
 }
 
-void AdvancedFm::writeConfig()
-{
+void AdvancedFm::writeConfig() {
   Config cfg("AdvancedFm");
 }
 
-void  AdvancedFm::currentPathComboChanged()
-{
+void  AdvancedFm::currentPathComboChanged() {
   if (TabWidget->currentPageIndex() == 0) {
     if(QDir( currentPathCombo->lineEdit()->text()).exists()) {
       currentDir.setPath( currentPathCombo->lineEdit()->text() );
@@ -1094,8 +874,7 @@ void AdvancedFm::CFButtonPushed() {
 }
 
 
-void AdvancedFm::upDir()
-{
+void AdvancedFm::upDir() {
   if (TabWidget->currentPageIndex() == 0) {
     QString current = currentDir.canonicalPath();
     QDir dir(current);
@@ -1117,8 +896,7 @@ void AdvancedFm::upDir()
   }
 }
 
-void AdvancedFm::copy()
-{
+void AdvancedFm::copy() {
   qApp->processEvents();
   QStringList curFileList = getPath();
   if( curFileList.count() > 0) {
@@ -1595,8 +1373,7 @@ void AdvancedFm::doAbout() {
                                        "and is licensed by the GPL"));
 }
 
-void AdvancedFm::keyReleaseEvent( QKeyEvent *e)
-{
+void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
   if( TabWidget->hasFocus()) 
     switch ( e->key() ) {
     case Key_Delete:
@@ -1808,88 +1585,88 @@ void AdvancedFm::fileBeamFinished( Ir *) {
 
 void AdvancedFm::showFileMenu() {
 
-  QString curApp;
-  bool isLocalView = false;
-  if (TabWidget->currentPageIndex() == 0) {
-    isLocalView = TRUE;
-    curApp = Local_View->currentItem()->text(0);
-  }   else {
-    curApp = Remote_View->currentItem()->text(0);
-  }
+    QString curApp;
+    bool isLocalView = false;
+    if (TabWidget->currentPageIndex() == 0) {
+        isLocalView = TRUE;
+        curApp = Local_View->currentItem()->text(0);
+    }   else {
+        curApp = Remote_View->currentItem()->text(0);
+    }
 
-  MimeType mt( curApp );
-  const AppLnk* app = mt.application();
-  QFile fi(curApp);
+    MimeType mt( curApp );
+    const AppLnk* app = mt.application();
+    QFile fi(curApp);
 
-  QPopupMenu *m = new QPopupMenu(0);
+    QPopupMenu *m = new QPopupMenu(0);
 
-  m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
-  m->insertSeparator();
-  if ( QFileInfo(fi).isDir() ) {
-    m->insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
-  } else {
+    m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
+    m->insertSeparator();
+    if ( QFileInfo(fi).isDir() ) {
+        m->insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
+    } else {
 
-    if ( app )
-      m->insertItem( app->pixmap(), tr( "Open in " + app->name() ), this, SLOT( runThis() ) );
-    else if( QFileInfo(fi).isExecutable() )
-      m->insertItem(  tr( "Execute" ), this, SLOT( runThis() ) );
+        if ( app )
+            m->insertItem( app->pixmap(), tr( "Open in " + app->name() ), this, SLOT( runThis() ) );
+        else if( QFileInfo(fi).isExecutable() )
+            m->insertItem(  tr( "Execute" ), this, SLOT( runThis() ) );
 
-    m->insertItem( Resource::loadPixmap( "txt" ), tr( "Open as text" ),this, SLOT( runText() ) );
-  }
-  m->insertSeparator();
+        m->insertItem( Resource::loadPixmap( "txt" ), tr( "Open as text" ),this, SLOT( runText() ) );
+    }
+    m->insertSeparator();
 
 
-  if(isLocalView)
-    m->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
-  else
-    m->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
+    if(isLocalView)
+        m->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
+    else
+        m->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
 
-  m->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
-  m->insertSeparator();
+    m->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
+    m->insertSeparator();
 
-  if(isLocalView)
-    m->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
-  else
-    m->insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
+    if(isLocalView)
+        m->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
+    else
+        m->insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
 
-  m->insertItem( tr( "Copy" ), this, SLOT( copy() ));
-  m->insertItem( tr( "Copy As" ), this, SLOT( copyAs() ));
-  m->insertItem( tr( "Copy Same Dir" ), this, SLOT( copySameDir() ));
-  m->insertItem( tr( "Move" ), this, SLOT( move() ));
-  m->insertSeparator();
-  m->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
+    m->insertItem( tr( "Copy" ), this, SLOT( copy() ));
+    m->insertItem( tr( "Copy As" ), this, SLOT( copyAs() ));
+    m->insertItem( tr( "Copy Same Dir" ), this, SLOT( copySameDir() ));
+    m->insertItem( tr( "Move" ), this, SLOT( move() ));
+    m->insertSeparator();
+    m->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
 
 //   if(isLocalView)
 //     m->insertItem( tr( "Rescan" ), this, SLOT( populateLocalView() ));
 //   else
 //     m->insertItem( tr( "Rescan" ), this, SLOT( populateRemoteView() ));
 
-  m->insertItem( tr( "Run Command" ), this, SLOT( runCommand() ));
-  m->insertItem( tr( "File Info" ), this, SLOT( fileStatus() ));
-  m->insertSeparator();
+    m->insertItem( tr( "Run Command" ), this, SLOT( runCommand() ));
+    m->insertItem( tr( "File Info" ), this, SLOT( fileStatus() ));
+    m->insertSeparator();
 
-  if(isLocalView)
-    m->insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
-  else
-    m->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
+    if(isLocalView)
+        m->insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
+    else
+        m->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
 
-  m->insertSeparator();
-  m->insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
+    m->insertSeparator();
+    m->insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
 
-  if( QFile(QPEApplication::qpeDir()+"lib/libopie.so").exists() )  //bad hack for Sharp zaurus failings
-    m->insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
-  m->setCheckable(TRUE);
-  if (!b)
-    m->setItemChecked(m->idAt(0),TRUE);
-  else
-    m->setItemChecked(m->idAt(0),FALSE);
+    if( QFile(QPEApplication::qpeDir()+"lib/libopie.so").exists() )  //bad hack for Sharp zaurus failings
+        m->insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
+    m->setCheckable(TRUE);
+    if (!b)
+        m->setItemChecked(m->idAt(0),TRUE);
+    else
+        m->setItemChecked(m->idAt(0),FALSE);
 
-  if(Ir::supported())
-    m->insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
-  m->setFocus();
-  m->exec( QCursor::pos() );
-  sleep(1);
-  if(m) delete m;
+    if(Ir::supported())
+        m->insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
+    m->setFocus();
+    m->exec( QCursor::pos() );
+    sleep(1);
+    if(m) delete m;
 }
 
 

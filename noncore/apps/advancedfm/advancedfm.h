@@ -1,5 +1,5 @@
 /***************************************************************************
-   opieftp.h
+   advancedfm.h
                              -------------------
 ** Created: Sat Mar 9 23:33:09 2002
     copyright            : (C) 2002 by ljp
@@ -110,12 +110,14 @@ protected:
   QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
   QStringList remoteDirPathStringList, localDirPathStringList;
 
+  void init();
+  void initConnections();
   void keyReleaseEvent( QKeyEvent *);
   QString getFileSystemType(const QString &);
   QString getDiskSpace(const QString &);
-
   void parsetab(const QString &fileName);
-QString checkDiskSpace(const QString &);  
+  QString checkDiskSpace(const QString &);
+  
 protected slots:
   void showFileMenu();
   void cancelMenuTimer();
