@@ -563,7 +563,7 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished">Hora Início</translation>
+        <translation>Hora Início</translation>
     </message>
 </context>
 <context>
