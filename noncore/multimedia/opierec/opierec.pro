@@ -1,4 +1,4 @@
-#CONFIG   = qt qtopia warn_on  pdaudio
+#CONFIG   = qt warn_on  pdaudio
 CONFIG   = qt warn_on  opie
 #CONFIG    = qt warn_on  quick-app
 HEADERS   = adpcm.h \

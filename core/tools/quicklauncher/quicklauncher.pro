@@ -1,5 +1,5 @@
 TEMPLATE	= app
-CONFIG		+= qtopia warn_on 
+CONFIG		+= qt warn_on 
 DESTDIR		= $(OPIEDIR)/bin
 
 HEADERS		= dropins.h
