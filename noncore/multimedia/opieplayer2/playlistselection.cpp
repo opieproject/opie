@@ -184,7 +184,7 @@ bool PlayListSelection::last() {
 
 void PlayListSelection::unSelect()
 {
-    QListViewItem *item = selectedItem();
+    //QListViewItem *item = selectedItem();
     setSelected( currentItem(), FALSE);
 }
 

@@ -31,6 +31,7 @@
 
 */
 
+#include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/mediaplayerplugininterface.h>
 #include <qpe/config.h>
@@ -104,7 +105,7 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     imgButtonMask->fill( 0 );
 
     for ( int i = 0; i < 7; i++ ) {
-        QString filename = QString(getenv("OPIEDIR")) + "/pics/" + skinPath + "/skinV_mask_" + skinV_mask_file_names[i] + ".png";
+        QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath + "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
         masks[i] = new QBitmap( filename );
 
         if ( !masks[i]->isNull() ) {
@@ -182,8 +183,8 @@ QPixmap *maskVPixToMask( QPixmap pix, QBitmap mask ) {
 void VideoWidget::resizeEvent( QResizeEvent * ) {
     int h = height();
     int w = width();
-    int Vh = 160;
-    int Vw = 220;
+    //int Vh = 160;
+    //int Vw = 220;
 
     slider->setFixedWidth( w - 20 );
     slider->setGeometry( QRect( 15, h - 30, w - 90, 20 ) );

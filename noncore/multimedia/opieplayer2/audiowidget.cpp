@@ -148,7 +148,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     imgButtonMask->fill( 0 );
 
     for ( int i = 0; i < 10; i++ ) {
-        QString filename = QString(getenv("OPIEDIR")) + "/pics/" + skinPath + "/skin_mask_" + skin_mask_file_names[i] + ".png";
+        QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_" + skin_mask_file_names[i] + ".png" );
         masks[i] = new QBitmap( filename );
 
         if ( !masks[i]->isNull() ) {

@@ -1,6 +1,6 @@
 TEMPLATE  = app
-#CONFIG    = qt warn_on release
-CONFIG         = qt warn_on debug
+CONFIG    = qt warn_on release
+#CONFIG         = qt warn_on debug
 DESTDIR   = $(OPIEDIR)/bin
 HEADERS   = playlistselection.h mediaplayerstate.h xinecontrol.h mediadetect.h\
         videowidget.h audiowidget.h playlistwidget.h mediaplayer.h inputDialog.h \
@@ -12,7 +12,7 @@ SOURCES   = main.cpp \
    frame.cpp lib.cpp nullvideo.c xinevideowidget.cpp volumecontrol.cpp\
          alphablend.c yuv2rgb.c yuv2rgb_arm.c yuv2rgb_arm4l.S
 TARGET    = opieplayer2
-INCLUDEPATH += $(OPIEDIR)/include 
+INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include 
 LIBS            += -lqpe -lpthread -lopie -lxine -lxineutils
 MOC_DIR=qpeobj

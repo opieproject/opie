@@ -146,7 +146,6 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
   (void)new MenuItem( pmPlayList, tr( "Rescan for Audio Files" ), this,SLOT( scanForAudio() ) );
   (void)new MenuItem( pmPlayList, tr( "Rescan for Video Files" ), this,SLOT( scanForVideo() ) );
 
-
   pmView = new QPopupMenu( this );
   menu->insertItem( tr( "View" ), pmView );
   pmView->isCheckable();
@@ -584,7 +583,7 @@ bool PlayListWidget::last() {
 void PlayListWidget::saveList() {
 
   QString filename;
-  InputDialog *fileDlg;
+  InputDialog *fileDlg = 0l;
   fileDlg = new InputDialog(this,tr("Save Playlist"),TRUE, 0);
   fileDlg->exec();
   if( fileDlg->result() == 1 ) {
