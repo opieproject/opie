@@ -128,7 +128,7 @@ Visuelles</translation>
     </message>
     <message>
         <source>Use ADPCM compression</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser la compression ADPCM</translation>
     </message>
 </context>
 </TS>

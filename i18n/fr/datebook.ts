@@ -372,7 +372,7 @@ dans : </translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="unfinished">LMMJVSDL</translation>
+        <translation>LMMJVSDL</translation>
     </message>
 </context>
 <context>
@@ -520,7 +520,7 @@ fin</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="unfinished">Heure
+        <translation>Heure
 de début</translation>
     </message>
     <message>

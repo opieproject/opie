@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation type="unfinished">Pour activer les changement: Redémarrez l&apos;application !</translation>
+        <translation>Pour activer les changement: Redémarrez l&apos;application !</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>
@@ -67,23 +67,23 @@ jours</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer/Désactiver les Vues</translation>
     </message>
     <message>
         <source>Show &amp;Birthdays</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher &amp;Date de Naissance</translation>
     </message>
     <message>
         <source>Show &amp;Anniveraries</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher &amp;Anniversaires</translation>
     </message>
     <message>
         <source>The next birthdays will just be shown, if enabled!</source>
-        <translation type="unfinished"></translation>
+        <translation>Les prochains anniversaires de date de naissance seront affichés si l&apos;option est activé!</translation>
     </message>
     <message>
         <source>The next anniversaries will just be shown, if enabled !</source>
-        <translation type="unfinished"></translation>
+        <translation>Les prochains anniversaires seront affichés si activé!</translation>
     </message>
 </context>
 <context>

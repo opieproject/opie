@@ -210,11 +210,11 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Auto Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>Silence Auto</translation>
     </message>
     <message>
         <source>Stereo Channels</source>
-        <translation type="unfinished"></translation>
+        <translation>Canaux Stéréo</translation>
     </message>
 </context>
 </TS>

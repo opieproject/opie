@@ -114,11 +114,17 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette page affiche la quantité de mémoire (i.e RAM) utilisée par votre appareil.
+Cette quantité mémoire est découpée en plusieurs catégories :
+
+1. Utilisée - Mémoire utilisée par Opie et toutes autres applications en cours d&apos;exécution.
+2. Buffers - Mémoire temporaire utilisée pour accroître les performances
+3. Cache - Espace utilisé récemment et non encore libéré.
+4. Libre - Mémoire disponible non encore utilisée par Opie ou par les applications en cours.</translation>
     </message>
     <message>
         <source>Total Swap: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>Swap Total : %1 Ko</translation>
     </message>
 </context>
 <context>
@@ -249,7 +255,8 @@ Cliquez et maintenez appuyer pour voir les informations à propos du processus o
     <message>
         <source>Really want to send %1
 to this process?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous vraiment envoyer %1
+à ce processus ?</translation>
     </message>
 </context>
 <context>
@@ -394,11 +401,11 @@ to this process?</source>
     </message>
     <message>
         <source>&lt;br&gt;Model: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;Modèle : </translation>
     </message>
     <message>
         <source>&lt;br&gt;Vendor: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;Vendeur : </translation>
     </message>
 </context>
 </TS>

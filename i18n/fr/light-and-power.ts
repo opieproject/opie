@@ -10,7 +10,7 @@
     <name>LightSettings</name>
     <message>
         <source>Backlight &amp;&amp; Contrast</source>
-        <translation type="unfinished"></translation>
+        <translation>Eclairage et Contraste</translation>
     </message>
 </context>
 <context>
@@ -123,27 +123,27 @@ de lumière</translation>
     </message>
     <message>
         <source>CPU Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Fréquence CPU</translation>
     </message>
     <message>
         <source>set a fix value for contrast</source>
-        <translation type="unfinished"></translation>
+        <translation>défini une valeur fix pour le contrast</translation>
     </message>
     <message>
         <source>On closing the hinge</source>
-        <translation type="unfinished"></translation>
+        <translation>A la fermeture de l&apos;appareil</translation>
     </message>
     <message>
         <source>ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>ignorer</translation>
     </message>
     <message>
         <source>display off</source>
-        <translation type="unfinished"></translation>
+        <translation>écran éteint</translation>
     </message>
     <message>
         <source>suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>suspendre</translation>
     </message>
 </context>
 <context>

@@ -60,11 +60,11 @@
     </message>
     <message>
         <source>Backup Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarde Effectuée avec Succès.</translation>
     </message>
     <message>
         <source>Restore Successful.</source>
-        <translation type="unfinished"></translation>
+        <translation>Restauration Effectuée avec Succès.</translation>
     </message>
 </context>
 <context>

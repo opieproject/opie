@@ -60,7 +60,7 @@
     </message>
     <message>
         <source>Search for: </source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher : </translation>
     </message>
 </context>
 <context>

@@ -310,7 +310,10 @@ et tout son contenu ?</translation>
 %1 
 to 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de copier
+%1
+vers
+%2</translation>
     </message>
 </context>
 <context>

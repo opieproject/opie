@@ -91,15 +91,15 @@
     </message>
     <message>
         <source>SSID</source>
-        <translation type="unfinished"></translation>
+        <translation>SSID</translation>
     </message>
     <message>
         <source>Rescan Neighbourhood</source>
-        <translation type="unfinished"></translation>
+        <translation>Rescanner</translation>
     </message>
     <message>
         <source>Chn</source>
-        <translation type="unfinished"></translation>
+        <translation>Cannal</translation>
     </message>
 </context>
 <context>

@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>DocTab</source>
-        <translation type="unfinished"></translation>
+        <translation>Onglet Document</translation>
     </message>
 </context>
 <context>
@@ -246,7 +246,7 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;L&apos;onglet Documents&lt;p&gt; a été désactivé.&lt;p&gt;Utilisez Paramètres-&gt;Lanceur-&gt;Onglet Document&lt;p&gt;pour le réactiver.&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
@@ -417,23 +417,23 @@ application immédiatement.</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation type="unfinished"></translation>
+        <translation>ATTENTION</translation>
     </message>
     <message>
         <source>&lt;p&gt;The battery level is critical!&lt;p&gt;Keep power off until AC is restored</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Le niveau de batterie est critique !&lt;p&gt;Eteigner la machine et connectez la pour la recharger</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>The battery is running very low. </source>
-        <translation type="unfinished"></translation>
+        <translation>La niveau de battery est très faible.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;La niveau de la batterie de sauvegarde est très faible.&lt;p&gt;Veuillez la rechargez ou la remplacer</translation>
     </message>
 </context>
 <context>
@@ -497,7 +497,7 @@ Ces options sont destinés à être utilisées durant le développement et les t
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt;Si vous utiliser une version de &quot;Qtopia Desktop&quot; plus ancienne que la 1.5.1, vous devriez la mettre à jour ou changer les paramètres de sécurité pour utiliser IntelliSync.</translation>
     </message>
 </context>
 <context>
