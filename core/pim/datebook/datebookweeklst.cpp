@@ -160,7 +160,7 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(const EffectiveEvent &ev,
 	// old values... lastday = "__|__", middle="   |---", Firstday="00:00",
 	QString s,start,middle,end,day;
 
-	Opie::Core::odebug << "weeklistviewconfig=" << weeklistviewconfig << oendl;
+	odebug << "weeklistviewconfig=" << weeklistviewconfig << oendl;
 	if(weeklistviewconfig==NONE) {	// No times displayed.
 //		start.sprintf("%.2d:%.2d-",ev.start().hour(),ev.start().minute());
 //		middle.sprintf("<--->");
@@ -209,7 +209,7 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 	Config config("DateBook");
 	config.setGroup("Main");
 	int weeklistviewconfig=config.readNumEntry("weeklistviewconfig", NORMAL);
-	Opie::Core::odebug << "weeklistviewconfig: " << weeklistviewconfig << oendl;
+	odebug << "weeklistviewconfig: " << weeklistviewconfig << oendl;
 
 	bStartOnMonday=onM;
 	setPalette(white);

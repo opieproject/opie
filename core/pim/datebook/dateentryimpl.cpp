@@ -431,7 +431,7 @@ Event DateEntry::event()
     QDateTime end( endDate, endTime );
     time_t start_utc, end_utc;
 
-//	Opie::Core::odebug << "tz: " << timezone->currentZone() << oendl;
+//	odebug << "tz: " << timezone->currentZone() << oendl;
 
     // get real timezone
     QString realTZ;
@@ -439,7 +439,7 @@ Event DateEntry::event()
 
     // set timezone
     if ( setenv( "TZ", timezone->currentZone(), true ) != 0 )
-	Opie::Core::owarn << "There was a problem setting the timezone." << oendl;
+	owarn << "There was a problem setting the timezone." << oendl;
 
     // convert to UTC based on selected TZ (calling tzset internally)
     start_utc = TimeConversion::toUTC( start );
@@ -449,7 +449,7 @@ Event DateEntry::event()
     unsetenv( "TZ" );
     if ( !realTZ.isNull() )
         if ( setenv( "TZ", realTZ, true ) != 0 )
-			Opie::Core::owarn << "There was a problem setting the timezone." << oendl;
+			owarn << "There was a problem setting the timezone." << oendl;
 
     // convert UTC to local time (calling tzset internally)
     ev.setStart( TimeConversion::fromUTC( start_utc ) );

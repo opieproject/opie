@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.35 2004-04-02 21:00:39 drw Exp $
+** $Id: datebook.cpp,v 1.36 2004-04-04 17:05:29 mickeyl Exp $
 **
 **********************************************************************/
 
@@ -72,7 +72,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 	QTime t;
 	t.start();
 	db = new DateBookDBHack;
-	Opie::Core::odebug << "loading db t=" << t.elapsed() << oendl;
+	odebug << "loading db t=" << t.elapsed() << oendl;
 	loadSettings();
 	setCaption( tr("Calendar") );
 	setIcon( Resource::loadPixmap( "datebook_icon" ) );
@@ -176,7 +176,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 #endif
 #endif
 
-	Opie::Core::odebug << "done t=" << t.elapsed() << oendl;
+	odebug << "done t=" << t.elapsed() << oendl;
 
         connect( qApp, SIGNAL( flush() ), this, SLOT( flush() ) );
         connect( qApp, SIGNAL( reload()), this, SLOT( reload() ) );
@@ -902,7 +902,7 @@ static const char * beamfile = "/tmp/obex/event.vcs";
 
 void DateBook::beamEvent( const Event &e )
 {
-	Opie::Core::odebug << "trying to beam" << oendl;
+	odebug << "trying to beam" << oendl;
     unlink( beamfile ); // delete if exists
     mkdir("/tmp/obex/", 0755);
     Event::writeVCalendar( beamfile, e );

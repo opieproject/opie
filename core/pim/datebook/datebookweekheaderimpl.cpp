@@ -69,22 +69,22 @@ void DateBookWeekHeader::pickDate()
 
 void DateBookWeekHeader::nextMonth()
 {
-	Opie::Core::owarn << "nextMonth()" << oendl;
+	owarn << "nextMonth()" << oendl;
 	setDate(date.addDays(28));
 }
 void DateBookWeekHeader::prevMonth()
 {
-	Opie::Core::owarn << "prevMonth()" << oendl;
+	owarn << "prevMonth()" << oendl;
 	setDate(date.addDays(-28));
 }
 void DateBookWeekHeader::nextWeek()
 {
-	Opie::Core::owarn << "nextWeek()" << oendl;
+	owarn << "nextWeek()" << oendl;
 	setDate(date.addDays(7));
 }
 void DateBookWeekHeader::prevWeek()
 {
-	Opie::Core::owarn << "prevWeek()" << oendl;
+	owarn << "prevWeek()" << oendl;
 	setDate(date.addDays(-7));
 }
 
