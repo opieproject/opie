@@ -29,6 +29,7 @@
 #include <qpe/timestring.h>
 #include <qpe/tzselect.h>
 
+#include <qevent.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qlayout.h>
@@ -61,6 +62,20 @@ DateEntry::DateEntry( bool startOnMonday, const QDateTime &start,
     init();
     setDates(start,end);
     setFocusProxy(comboDescription);
+}
+
+bool DateEntry::eventFilter(QObject *obj, QEvent *ev )
+{
+  if( ev->type() == QEvent::FocusIn ){
+    if( obj == comboStart ){
+      TextLabel3_2->setText( tr("Start Time" ) );
+      m_showStart= true;
+    }else if( obj == comboEnd ){
+      TextLabel3_2->setText( tr("End Time") );
+      m_showStart = false;
+    }
+  }
+  return false;
 }
 
 static void addOrPick( QComboBox* combo, const QString& t )
@@ -186,6 +201,9 @@ void DateEntry::init()
     connect(timePickerStart, SIGNAL( timeChanged(const QTime &) ),
 	    this, SLOT( startTimePicked(const QTime &) ));
     editNote->setFixedVisibleLines(3);
+    // install eventFilters
+    comboEnd->installEventFilter( this );
+    comboStart->installEventFilter( this );
 }
 
 /*
@@ -304,8 +322,14 @@ void DateEntry::startTimeChanged( const QTime &t )
     endTime=t.addSecs(duration);
 }
 void DateEntry::startTimePicked( const QTime &t ) {
+  if(m_showStart ){
     startTimeChanged(t);
     updateTimeEdit(true,true);
+  }else{
+    endTime = t;
+    updateTimeEdit(false, true );
+
+  }
 }
 
 /*

@@ -42,7 +42,7 @@ public:
 
     Event event();
     void setAlarmEnabled( bool alarmPreset, int presetTime, Event::SoundTypeChoice );
-
+    virtual bool eventFilter( QObject *, QEvent * );
 public slots:
     void endDateChanged( int, int, int );
     void endTimeChanged( const QString & );
@@ -67,8 +67,9 @@ private:
     QDate startDate, endDate;
     QTime startTime, endTime;
     Event::RepeatPattern rp;
-    bool ampm;
-    bool startWeekOnMonday;
+    bool ampm:1;
+    bool startWeekOnMonday:1;
+    bool m_showStart:1;
 };
 
 #endif // DATEENTRY_H
