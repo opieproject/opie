@@ -13,9 +13,12 @@
 
 	Fixed Bugs
 	--------
+	* #1005 - Fixed Backup to CompactFlash (ar)
 	* #1225 - Fixed repeated light flashing on Zaurus with keyz (mickeyl)
 	* #1361 - Fixed auto upercase in Opie-Addressbook (eilers) 
 	* #1370 - Pimconverter now reacts on cancel key (eilers)
+	* #1383 - Language settings now warns about losing open apps (Markus Litz)
+	* #1394 - Fixed oversized headline in opie-login (coredump)
 	* #1401 - Scrollbar is now only visible if necessary in DocTab (mickeyl)
 
 2004-07-06	The Opie Team <opie@handhelds.org>
