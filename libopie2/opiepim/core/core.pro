@@ -8,7 +8,7 @@ HEADERS += core/oconversion.h \
         core/opimxrefpartner.h \
         core/orecur.h \
         core/otemplatebase.h \
-        core/otimezone.h \
+        core/otimezone.h 
 
 SOURCES += core/oconversion.cpp \
         core/opimmaintainer.cpp \
@@ -18,4 +18,4 @@ SOURCES += core/oconversion.cpp \
         core/opimxrefmanager.cpp \
         core/opimxrefpartner.cpp \
         core/orecur.cpp \
-        core/otimezone.cpp \
+        core/otimezone.cpp 
