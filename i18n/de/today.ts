@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>There are &lt;b&gt; %1&lt;/b&gt; active tasks: &lt;br&gt;</source>
-        <translation>Es gibt &lt;b&gt;%1&lt;/b&gt;aktive Aufgaben:&lt;br&gt;</translation>
+        <translation>Es gibt &lt;b&gt;%1&lt;/b&gt; aktive Aufgaben:&lt;br&gt;</translation>
     </message>
     <message>
         <source>No active tasks</source>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation>Dieses Gerät gehört</translation>
+        <translation>Dieses Gerät gehört </translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
