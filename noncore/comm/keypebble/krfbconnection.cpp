@@ -120,12 +120,12 @@ void KRFBConnection::gotRFBConnection()
   updater->start( options_->updateRate );
 }
 
-void KRFBConnection::gotSocketError( int errno )
+void KRFBConnection::gotSocketError( int err )
 {
   currentState_ = Error;
 
   // Do some error handling stuff
-  qWarning( "KRFBConnection: Socket error %d", errno );
+  qWarning( "KRFBConnection: Socket error %d", err );
 
   static QString refused = tr( "Connection Refused" );
   static QString host = tr( "Host not found" );
@@ -135,7 +135,7 @@ void KRFBConnection::gotSocketError( int errno )
   static QString confused = tr( "QSocket reported an invalid error code" );
 
   QString msg;
-  switch ( errno ) {
+  switch ( err ) {
   case QSocket::ErrConnectionRefused:
     msg = refused;
     break;
