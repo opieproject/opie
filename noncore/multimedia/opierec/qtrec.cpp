@@ -67,9 +67,15 @@ static int deviceBitRates[] = { 8, 16, -1 };
 ///#if defined(QT_QWS_EBX)
 
 #define DSPSTROUT "/dev/dsp"
-#define DSPSTRIN "/dev/dsp1"
 #define DSPSTRMIXEROUT "/dev/mixer"
+
+#ifdef SHARP
+#define DSPSTRIN "/dev/dsp1"
 #define DSPSTRMIXERIN "/dev/mixer1"
+#else
+#define DSPSTRIN "/dev/dsp"
+#define DSPSTRMIXERIN "/dev/mixer"
+#endif
 
 #else
 
