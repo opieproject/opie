@@ -616,3 +616,6 @@ void MainWindow::updateTodo(  const OTodo& ev) {
 void MainWindow::slotUpdate3( QWidget* ) {
 
 }
+void MainWindow::updateList() {
+    m_todoMgr.updateList();
+}

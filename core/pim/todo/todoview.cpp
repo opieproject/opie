@@ -48,7 +48,10 @@ MainWindow* TodoView::todoWindow() {
 }
 
 OTodo TodoView::event(int uid ) { return m_main->event( uid ); }
-OTodoAccess::List::Iterator TodoView::begin() { return m_main->begin(); }
+OTodoAccess::List::Iterator TodoView::begin() {
+    m_main->updateList();
+    return m_main->begin();
+}
 OTodoAccess::List::Iterator TodoView::end() { return m_main->end(); }
 
 void TodoView::update(int uid, const SmallTodo& to ) {

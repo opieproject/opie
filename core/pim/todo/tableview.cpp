@@ -143,6 +143,7 @@ void TableView::showOverDue( bool ) {
 
 void TableView::setTodos( OTodoAccess::List::Iterator it,
                           OTodoAccess::List::Iterator end ) {
+    qWarning("setTodos");
     QTime time;
     time.start();
     m_enablePaint = false;
@@ -245,6 +246,7 @@ void TableView::setShowDeadline( bool b) {
         hideColumn(3 );
 }
 void TableView::setShowCategory( const QString& ) {
+    qWarning("setShowCategory");
     setTodos( begin(), end() );
 }
 void TableView::clear() {

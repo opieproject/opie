@@ -69,6 +69,7 @@ namespace Todo {
         QToolBar*   toolbar();
 
 
+        void updateList();
         OTodoAccess::List::Iterator begin();
         OTodoAccess::List::Iterator  end();
 //        OTodoAccess::List::Iterator &iterator();
