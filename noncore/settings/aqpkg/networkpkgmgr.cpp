@@ -141,7 +141,7 @@ void NetworkPackageManager :: initGui()
     QLabel *l = new QLabel( "Servers", this );
     serversList = new QComboBox( this );
     packagesList = new QListView( this );
-    update = new QPushButton( "Refresh List", this );
+    update = new QPushButton( "Refresh Lists", this );
     download = new QPushButton( "Download", this );
     upgrade = new QPushButton( "Upgrade", this );
     apply = new QPushButton( "Apply", this );
@@ -285,8 +285,8 @@ void NetworkPackageManager :: serverSelected( int )
     if ( serverName == LOCAL_SERVER )
     {
         upgrade->setEnabled( false );
-        download->setText( "Download" );
-        download->setEnabled( false );
+        download->setText( "Install Remote" );
+        download->setEnabled( true );
     }
     else if ( serverName == LOCAL_IPKGS )
     {
@@ -365,59 +365,27 @@ void NetworkPackageManager :: downloadPackage()
     bool doUpdate = true;
     if ( download->text() == "Download" )
     {
-        // First, write out ipkg_conf file so that ipkg can use it
-        dataMgr->writeOutIpkgConf();
-        
-        // Display dialog to user asking where to download the files to
-        bool ok = FALSE;
-        QString dir = "";
-#ifdef QWS
-        // read download directory from config file
-        Config cfg( "aqpkg" );
-        cfg.setGroup( "settings" );
-        dir = cfg.readEntry( "downloadDir", "/home/root/Documents/application/ipkg" );
-#endif
-
-        QString text = InputDialog::getText( tr( "Download to where" ), tr( "Enter path to download to" ), dir, &ok, this );
-        if ( ok && !text.isEmpty() )
-            dir = text;   // user entered something and pressed ok
-        else
-            return; // user entered nothing or pressed cancel
-
-#ifdef QWS
-        // Store download directory in config file
-        cfg.writeEntry( "downloadDir", dir );
-#endif
-
-        // Get starting directory
-        char initDir[PATH_MAX];
-        getcwd( initDir, PATH_MAX );
-
-        // Download each package
-        Ipkg ipkg;
-        connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
-
-        ipkg.setOption( "download" );
-        ipkg.setRuntimeDirectory( dir );
-        for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
-              item != 0 ;
-              item = (QCheckListItem *)item->nextSibling() )
+        // See if any packages are selected
+        bool found = false;
+        if ( serversList->currentText() != LOCAL_SERVER )
         {
-            if ( item->isOn() )
+            for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
+                  item != 0 && !found;
+                  item = (QCheckListItem *)item->nextSibling() )
             {
-                QString name = item->text();
-                int pos = name.find( "*" );
-                name.truncate( pos );
-
-                // if (there is a (installed), remove it
-                pos = name.find( "(installed)" );
-                if ( pos > 0 )
-                    name.truncate( pos - 1 );
-
-                ipkg.setPackage( name );
-                ipkg.runIpkg( );
+                if ( item->isOn() )
+                    found = true;
             }
         }
+        
+        // If user selected some packages then download the and store the locally
+        // otherwise, display dialog asking user what package to download from an http server
+        // and whether to install it
+        if ( found )
+            downloadSelectedPackages();
+        else
+            downloadRemotePackage();
+        
     }
     else if ( download->text() == "Remove" )
     {
@@ -457,6 +425,98 @@ void NetworkPackageManager :: downloadPackage()
         dataMgr->reloadServerData();
         serverSelected( -1 );
     }
+}
+
+void NetworkPackageManager :: downloadSelectedPackages()
+{
+    // First, write out ipkg_conf file so that ipkg can use it
+    dataMgr->writeOutIpkgConf();
+
+    // Display dialog to user asking where to download the files to
+    bool ok = FALSE;
+    QString dir = "";
+#ifdef QWS
+    // read download directory from config file
+    Config cfg( "aqpkg" );
+    cfg.setGroup( "settings" );
+    dir = cfg.readEntry( "downloadDir", "/home/root/Documents/application/ipkg" );
+#endif
+
+    QString text = InputDialog::getText( tr( "Download to where" ), tr( "Enter path to download to" ), dir, &ok, this );
+    if ( ok && !text.isEmpty() )
+        dir = text;   // user entered something and pressed ok
+    else
+        return; // user entered nothing or pressed cancel
+
+#ifdef QWS
+    // Store download directory in config file
+    cfg.writeEntry( "downloadDir", dir );
+#endif
+
+    // Get starting directory
+    char initDir[PATH_MAX];
+    getcwd( initDir, PATH_MAX );
+
+    // Download each package
+    Ipkg ipkg;
+    connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
+
+    ipkg.setOption( "download" );
+    ipkg.setRuntimeDirectory( dir );
+    for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
+          item != 0 ;
+          item = (QCheckListItem *)item->nextSibling() )
+    {
+        if ( item->isOn() )
+        {
+            QString name = item->text();
+            int pos = name.find( "*" );
+            name.truncate( pos );
+
+            // if (there is a (installed), remove it
+            pos = name.find( "(installed)" );
+            if ( pos > 0 )
+                name.truncate( pos - 1 );
+
+            ipkg.setPackage( name );
+            ipkg.runIpkg( );
+        }
+    }
+}
+
+void NetworkPackageManager :: downloadRemotePackage()
+{
+    // Display dialog
+    bool ok;
+    QString package = InputDialog::getText( "Install Remote Package", tr( "Enter package location" ), "http://", &ok, this );
+    if ( !ok || package.isEmpty() )
+        return;
+//    DownloadRemoteDlgImpl dlg( this, "Install", true );
+//    if ( dlg.exec() == QDialog::Rejected )
+//        return;
+
+    // grab details from dialog
+//    QString package = dlg.getPackageLocation();
+
+    InstallData item;
+    item.option = "I";
+    item.packageName = package;
+    vector<InstallData> workingPackages;
+    workingPackages.push_back( item );
+
+    InstallDlgImpl dlg2( workingPackages, dataMgr, this, "Install", true );
+    dlg2.showDlg();
+
+    // Reload data
+    dataMgr->reloadServerData();
+    serverSelected(-1);
+
+#ifdef QWS
+    // Finally let the main system update itself
+    QCopEnvelope e("QPE/System", "linkChanged(QString)");
+    QString lf = QString::null;
+    e << lf;
+#endif
 }
 
 

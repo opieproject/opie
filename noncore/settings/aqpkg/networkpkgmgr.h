@@ -63,6 +63,8 @@ private:
     void initGui();
     void setupConnections();
     void showProgressDialog( char *initialText );
+    void downloadSelectedPackages();
+    void downloadRemotePackage();
     InstallData dealWithItem( QCheckListItem *item );
     QString stickyOption;
 
