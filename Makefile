@@ -15,11 +15,10 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	taskbar/clockapplet \
 	taskbar/netmonapplet \
 	taskbar/screenshotapplet \
-	#taskbar/vmemo \
+	taskbar/vmemo \
 	netsetup/dialup \
 	netsetup/lan \
-	opiemail/ifaces/pop3 \
-        opiemail/ifaces/smtp \
+	opiemail/ifaces/pop3 opiemail/ifaces/smtp \
 	mpegplayer/libmpeg3 \
 	mpegplayer/libmad \
 	mpegplayer/wavplugin \
