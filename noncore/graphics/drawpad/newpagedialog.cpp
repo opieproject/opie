@@ -44,7 +44,7 @@ NewPageDialog::NewPageDialog(uint width, uint height, const QColor& penColor,
 
     QRadioButton* whiteColorRadioButton = new QRadioButton(tr("White"), m_pContentButtonGroup);
     QRadioButton* penColorRadioButton = new QRadioButton(tr("Pen Color"), m_pContentButtonGroup);
-    QRadioButton* brushColorRadioButton = new QRadioButton(tr("Brush Color"), m_pContentButtonGroup);
+    QRadioButton* brushColorRadioButton = new QRadioButton(tr("Fill Color"), m_pContentButtonGroup);
 
     m_pContentButtonGroup->setButton(0);
 
