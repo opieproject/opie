@@ -10,6 +10,7 @@
 	* #1501 - Fixed bug in todo sql backend (eilers)
 	* n.a. - Removed hard coded font sizes in a couple of inputmethods (mickeyl)
 	* n.a. - Removed MediumDlg appearing prior to FirstUsage wizard (i.e. calibration) (mickeyl)
+	* #1525 - Hopefully fixed double alarms and not removing alarms set with the Clock application (zecke)
 
 	Internal
 	--------
