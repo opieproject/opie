@@ -103,7 +103,7 @@ public:
 
     // connect a monitoring strategy to the interface
     if ( driver == "orinoco" )
-        new OOrinocoMonitoringInterface( wiface );
+        new OOrinocoMonitoringInterface( wiface, false );
     else
     {
         printf( "Unknown driver. Exiting\n" );

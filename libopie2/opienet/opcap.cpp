@@ -806,7 +806,7 @@ OLLCPacket::~OLLCPacket()
  *======================================================================================*/
 
 OWaveLanControlPacket::OWaveLanControlPacket( const unsigned char* end, const struct ieee_802_11_control_header* data, OWaveLanPacket* parent )
-                :QObject( parent, "802.11 Data" ), _header( data )
+                :QObject( parent, "802.11 Control" ), _header( data )
 {
     qDebug( "OWaveLanControlPacket::OWaveLanDataControl(): decoding frame..." );
     //TODO: Implement this
