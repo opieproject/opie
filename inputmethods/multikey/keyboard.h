@@ -25,6 +25,9 @@
 
 class QTimer;
 
+namespace MultiKey
+{
+
 class KeyboardConfig : public DictFilterConfig
 {
 public:
@@ -185,4 +188,4 @@ private:
     ConfigDlg *configdlg;
 };
 
-
+} // namespace MultiKey

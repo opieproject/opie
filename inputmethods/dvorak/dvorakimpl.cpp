@@ -23,7 +23,7 @@
 #include "dvorakimpl.h"
 
 /* XPM */
-static const char * kb_xpm[] = {
+static const char * const kb_xpm[] = {
 "28 13 4 1",
 "       c None",
 ".      c #4C4C4C",
@@ -45,7 +45,7 @@ static const char * kb_xpm[] = {
 
 
 /* XPM */
-static char * opti_xpm[] = {
+static const char * const opti_xpm[] = {
 "28 13 4 1",
 "       c None",
 ".      c #4C4C4C",
@@ -81,7 +81,7 @@ KeyboardImpl::~KeyboardImpl()
 QWidget *KeyboardImpl::inputMethod( QWidget *parent, Qt::WFlags f )
 {
     if ( !input )
-	input = new Keyboard( parent, "Keyboard", f );
+	input = new Dvorak::Keyboard( parent, "Keyboard", f );
     return input;
 }
 

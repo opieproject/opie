@@ -23,6 +23,9 @@
 
 class QTimer;
 
+namespace Dvorak
+{
+
 class KeyboardConfig : public DictFilterConfig
 {
 public:
@@ -101,3 +104,4 @@ private:
     QTimer *repeatTimer;
 };
 
+} // namespace Dvorak

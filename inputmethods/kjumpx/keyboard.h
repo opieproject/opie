@@ -13,6 +13,9 @@
 #include <qpixmap.h>
 #include <qtimer.h>
 
+namespace KJumpX
+{
+
 class Keyboard : public QFrame
 {
     Q_OBJECT
@@ -77,3 +80,5 @@ private:
     QTimer *delayTimer;
     QTimer *rateTimer;
 };
+
+} // namespace KJumpX

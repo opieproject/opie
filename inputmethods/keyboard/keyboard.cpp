@@ -30,6 +30,7 @@
 
 #include <sys/utsname.h>
 
+using namespace KeyboardInput;
 
 #define USE_SMALL_BACKSPACE
 

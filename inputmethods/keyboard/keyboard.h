@@ -23,6 +23,9 @@
 
 class QTimer;
 
+namespace KeyboardInput
+{
+
 class KeyboardConfig : public DictFilterConfig
 {
 public:
@@ -100,4 +103,6 @@ private:
 
     QTimer *repeatTimer;
 };
+
+} // namespace KeyboardInput
 

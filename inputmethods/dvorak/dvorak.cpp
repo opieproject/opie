@@ -31,6 +31,8 @@
 
 #define USE_SMALL_BACKSPACE
 
+using namespace Dvorak;
+
 Keyboard::Keyboard(QWidget* parent, const char* name, WFlags f) :
     QFrame(parent, name, f),  shift(FALSE), lock(FALSE), ctrl(FALSE),
     alt(FALSE), useLargeKeys(TRUE), useOptiKeys(0), pressedKey(-1),

@@ -124,6 +124,7 @@ static const int cursorMap[][2] = {
     { Qt::Key_Down, Qt::Key_Down     },
 };
 
+using namespace JumpX;
 
 Keyboard::Keyboard(QWidget* parent, const char* name, WFlags f) :
     QFrame(parent, name, f),

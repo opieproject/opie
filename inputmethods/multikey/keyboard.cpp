@@ -37,6 +37,7 @@
 
 #include <sys/utsname.h>
 
+using namespace MultiKey;
 
 /* Keyboard::Keyboard {{{1 */
 Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :

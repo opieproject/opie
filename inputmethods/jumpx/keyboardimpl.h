@@ -14,8 +14,14 @@
 
 #include <qpe/inputmethodinterface.h>
 
-class Keyboard;
+namespace JumpX
+{
+    class Keyboard;
+};
 class QPixmap;
+
+namespace
+{
 
 class KeyboardImpl : public InputMethodInterface
 {
@@ -35,9 +41,11 @@ public:
     virtual void onKeyPress( QObject *receiver, const char *slot );
 
 private:
-    Keyboard *input;
+    JumpX::Keyboard *input;
     QPixmap *icn;
     ulong ref;
 };
+
+} // anonymous namespace
 
 #endif

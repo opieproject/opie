@@ -22,8 +22,15 @@
 
 #include <qpe/inputmethodinterface.h>
 
-class Keyboard;
+namespace KeyboardInput
+{
+    class Keyboard;
+}
+
 class QPixmap;
+
+namespace
+{
 
 class KeyboardImpl : public InputMethodInterface
 {
@@ -43,9 +50,11 @@ public:
     virtual void onKeyPress( QObject *receiver, const char *slot );
 
 private:
-    Keyboard *input;
+    KeyboardInput::Keyboard *input;
     QPixmap *icn;
     ulong ref;
 };
+
+} // anonymous namespace
 
 #endif

@@ -15,7 +15,7 @@
 #include "keyboardimpl.h"
 
 /* XPM */
-static char * icon_xpm[] = {
+static const char * const icon_xpm[] = {
 "26 13 2 1",
 " 	c None",
 ".	c #000000",
@@ -48,7 +48,7 @@ KeyboardImpl::~KeyboardImpl()
 QWidget *KeyboardImpl::inputMethod( QWidget *parent, Qt::WFlags f )
 {
     if ( !input )
-	input = new Keyboard( parent, "Keyboard", f );
+	input = new KJumpX::Keyboard( parent, "Keyboard", f );
     return input;
 }
 
