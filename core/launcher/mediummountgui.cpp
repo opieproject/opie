@@ -14,16 +14,18 @@
 #include <qpixmap.h>
 
 #include <qpe/resource.h>
+#include <qpe/config.h>
+
 #include <opie/oconfig.h>
 
 
 #include <qapplication.h>
 
 
-MediumMountGui::MediumMountGui( const QString &path ,QWidget* parent,  const char* name, bool modal, WFlags fl )
+MediumMountGui::MediumMountGui( Config *cfg, const QString &path ,QWidget* parent,  const char* name, bool , WFlags  )
   : QDialog( parent, name, true ) {
  
-
+  m_cfg = cfg;
   QWidget *d = QApplication::desktop();
   int w=d->width();
   int h=d->height();
@@ -37,19 +39,19 @@ MediumMountGui::MediumMountGui( const QString &path ,QWidget* parent,  const cha
 
 void MediumMountGui::readConfig(){
 
-  OConfig cfg (mediumPath +"/.opiestorage.cf");
-  cfg.setGroup("main");
-  checkagain = cfg.readBoolEntry("check", false);
+  //OConfig cfg (mediumPath +"/.opiestorage.cf");
+  m_cfg->setGroup("main");
+  checkagain = m_cfg->readBoolEntry("check", false);
   
-  cfg.setGroup("mimetypes");
-  checkmimeaudio = cfg.readBoolEntry("audio", true);
-  checkmimeimage = cfg.readBoolEntry("image", true);
-  checkmimetext  = cfg.readBoolEntry("text", true);
-  checkmimevideo = cfg.readBoolEntry("video", true);
-  checkmimeall   = cfg.readBoolEntry("all", true);
+  m_cfg->setGroup("mimetypes");
+  checkmimeaudio = m_cfg->readBoolEntry("audio", true);
+  checkmimeimage = m_cfg->readBoolEntry("image", true);
+  checkmimetext  = m_cfg->readBoolEntry("text", true);
+  checkmimevideo = m_cfg->readBoolEntry("video", true);
+  checkmimeall   = m_cfg->readBoolEntry("all", true);
 
-  cfg.setGroup("dirs");
-  limittodirs = cfg.readEntry("dirs", "");
+  m_cfg->setGroup("dirs");
+  limittodirs = m_cfg->readEntry("dirs", "");
 }
 
 bool MediumMountGui::check() {
@@ -63,21 +65,21 @@ QStringList MediumMountGui::dirs() {
 
 void MediumMountGui::writeConfig(bool autocheck) {
 
-  OConfig cfg (mediumPath +"/.opiestorage.cf");
-  cfg.setGroup("main");
-  cfg.writeEntry("check",  AskBox->isChecked() );
-  cfg.writeEntry("autocheck", autocheck );  
+  //OConfig cfg (mediumPath +"/.opiestorage.cf");
+  m_cfg->setGroup("main");
+  m_cfg->writeEntry("check",  AskBox->isChecked() );
+  m_cfg->writeEntry("autocheck", autocheck );  
 
-  cfg.setGroup("mimetypes");
+  m_cfg->setGroup("mimetypes");
 
-  cfg.writeEntry("audio", CheckBoxAudio->isChecked() );
-  cfg.writeEntry("image",CheckBoxImage->isChecked() );
-  cfg.writeEntry("text",CheckBoxImage->isChecked() );
-  cfg.writeEntry("video",CheckBoxVideo->isChecked() );
-  cfg.writeEntry("all",CheckBoxAll->isChecked() );
+  m_cfg->writeEntry("audio", CheckBoxAudio->isChecked() );
+  m_cfg->writeEntry("image",CheckBoxImage->isChecked() );
+  m_cfg->writeEntry("text",CheckBoxImage->isChecked() );
+  m_cfg->writeEntry("video",CheckBoxVideo->isChecked() );
+  m_cfg->writeEntry("all",CheckBoxAll->isChecked() );
 
-  cfg.setGroup("dirs");
-  cfg.writeEntry("dirs", ""); 
+  m_cfg->setGroup("dirs");
+  m_cfg->writeEntry("dirs", ""); 
 
 
   // if all is checked then add only "QString::null" to the list.
@@ -98,7 +100,7 @@ void MediumMountGui::writeConfig(bool autocheck) {
       mimeTypeList += ("image/*");
     }
   }
-  cfg.write(); // not really needed here but just to be sure
+  m_cfg->write(); // not really needed here but just to be sure
 }
 
 void MediumMountGui::startGui() {

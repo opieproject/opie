@@ -557,6 +557,8 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
     StorageInfo storage;
     const QList<FileSystem> &fileSystems = storage.fileSystems();
     QListIterator<FileSystem> it ( fileSystems );
+
+
     for ( ; it.current(); ++it ) {
       if ( (*it)->isRemovable() ) { // let's find out  if we should search on it
 	qWarning("%s is removeable", (*it)->path().latin1() );
@@ -573,12 +575,16 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	  delete tmp;
 
 	}else{ // come up with the gui cause this a new card
-	  MediumMountGui medium((*it)->path() );
+	  MediumMountGui medium(&cfg, (*it)->path() );
 	  if( medium.check() ){ // we did not ask before or ask again is off
 	    if( medium.exec()  ){ // he clicked yes so search it
 	      // speicher
-	      cfg.read(); // cause of a race we need to reread
+	      //cfg.read(); // cause of a race we need to reread - fixed
 	      cfg.writeEntry("timestamp", newStamp );
+	      cfg.write();
+	      tmp = new DocLnkSet( (*it)->path(), medium.mimeTypes().join(";" ) );
+	      docsFolder->appendFrom( *tmp );
+	      delete tmp;
 	    }// no else
 	  }else{ // we checked
 	    // do something different see what we need to do

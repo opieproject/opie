@@ -11,13 +11,14 @@ class QGroupBox;
 class QLabel;
 class QLineEdit;
 class QPushButton;
+class Config;
 
 class MediumMountGui : public QDialog
 { 
     Q_OBJECT
 
 public:
-    MediumMountGui( const QString &path = "tmp/", QWidget* parent = 0, const char* name = 0, bool modal = FALSE    ,WFlags fl = 0 );
+    MediumMountGui( Config *cfg, const QString &path = "tmp/", QWidget* parent = 0, const char* name = 0, bool modal = FALSE    ,WFlags fl = 0 );
     ~MediumMountGui();
 
 protected:    
@@ -37,6 +38,7 @@ protected:
     QCheckBox* CheckBoxAll;
     QCheckBox* CheckBoxLink;
     QCheckBox* AskBox;
+   
 
 public:
     bool check();
@@ -54,14 +56,15 @@ private slots:
  private:
     QString mediumPath;
 
-    bool checkagain; 
-    bool checkmimeaudio;
-    bool checkmimeimage;
-    bool checkmimetext;
-    bool checkmimevideo;
-    bool checkmimeall;
+    bool checkagain:1; 
+    bool checkmimeaudio:1;
+    bool checkmimeimage:1;
+    bool checkmimetext:1;
+    bool checkmimevideo:1;
+    bool checkmimeall:1;
     QString limittodirs;
     QStringList mimeTypeList;
+    Config *m_cfg;
 
 };
 
