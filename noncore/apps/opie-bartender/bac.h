@@ -42,7 +42,8 @@ public:
     QLabel* TextLabel1_2;
     QPushButton* PushButton1;
     QLCDNumber* LCDNumber1;
-
+    QComboBox *weightUnitsCombo;
+    QLabel *weightUnitsLabel;
 protected:
     QVBoxLayout* Layout7;
     QHBoxLayout* Layout1;
@@ -50,6 +51,7 @@ protected:
     QHBoxLayout* Layout3;
     QHBoxLayout* Layout4;
     QHBoxLayout* Layout6;
+
 protected slots:
     void calculate();
         
