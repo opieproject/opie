@@ -62,8 +62,7 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
 
     Config config("locale");
     config.setGroup( "Language" );
-    //LANG = config.readEntry( "Language", "en" );
-    LANG = "ko";
+    LANG = config.readEntry( "Language", "en" );
 
     repeatTimer = new QTimer( this );
     connect( repeatTimer, SIGNAL(timeout()), this, SLOT(repeat()) );
@@ -774,8 +773,7 @@ Keys::Keys() {
     QString l = config.readEntry( "Language" , "en" );
 
     QString key_map = QPEApplication::qpeDir() + "/share/multikey/" 
-            + /* l // testing korean for now */ 
-            + "ko.keymap";
+            + l + ".keymap";
 
     setKeysFromFile(key_map);
 }
