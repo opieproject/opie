@@ -7,6 +7,7 @@
 
 IPKG_REMOVE="ipkg remove"
 IPKG_INSTALL="ipkg install"
+
 echo "Upating opie"
 pack=`ipkg status | grep Package | grep -i opie | grep -v update | sed  "s/Package://"`
 
@@ -20,6 +21,9 @@ echo "rem.  $p" >> /tmp/update.log
 $IPKG_REMOVE $p
 done
 $IPKG_REMOVE qpe-pics
+$IPKG_REMOVE ipaqalarm
+$IPKG_REMOVE qpe2schedule
+$IPKG_REMOVE uschedule
 
 #might help
 sync
@@ -33,6 +37,7 @@ echo "inst. $p" >> /tmp/update.log
 $IPKG_INSTALL $p
 done
 $IPKG_INSTALL opie-pics
+$IPKG_INSTALL opiealarm
 
 ipkg remove opie-update
 
