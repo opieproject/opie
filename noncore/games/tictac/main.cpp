@@ -1,10 +1,4 @@
 /****************************************************************************
-<<<<<<< main.cpp
-** $Id: main.cpp,v 1.3 2003-11-03 18:49:55 waspe Exp $
-=======
-** $Id: main.cpp,v 1.3 2003-11-03 18:49:55 waspe Exp $
->>>>>>> 1.1.8.1.2.1
-**
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
 ** This file is part of an example program for Qt.  This example
