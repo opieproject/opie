@@ -8,6 +8,7 @@
 CONFIG_TARGET_X86=y
 # CONFIG_TARGET_SHARP is not set
 # CONFIG_TARGET_IPAQ is not set
+# CONFIG_OPTIMIZE is not set
 CONFIG_SPECFILE="linux-g++"
 CONFIG_X11=y
 CONFIG_LIBQPE-X11=y
@@ -108,12 +109,7 @@ CONFIG_WLAN=y
 # multimedia
 #
 CONFIG_SHOWIMG=y
-
-#
-# mail
-#
-CONFIG_BEND=y
-CONFIG_LIBMAIL=y
+CONFIG_OPIEMAIL2=y
 
 #
 # graphics
