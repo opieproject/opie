@@ -27,6 +27,7 @@
 #include <qlistview.h>
 #include <qpushbutton.h>
 #include <qlineedit.h>
+#include <qstringlist.h>
 
 #include <opie/otabwidget.h>
 
@@ -42,12 +43,12 @@ ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(pa
 
 	/*searchmethods*/
 	search_tab = new QWidget( tab , "search_tab" );
-	loadSearchMethodNames();
 	QVBoxLayout *vbox_layout_searchtab = new QVBoxLayout( search_tab, 4 , 4 ,"blah" );
 	
 	QHBox *hbox = new QHBox( search_tab );
 	list = new QListView( hbox );
 	list->addColumn( tr( "Searchmethod" ) );
+	loadSearchMethodNames();
 	
 	QVBox *vbox = new QVBox( hbox );
 	new_button = new QPushButton( "New" , vbox );
@@ -107,8 +108,12 @@ void ConfigDlg::slotDeleteMethod()
 
 void ConfigDlg::loadSearchMethodNames()
 {
-	QListViewItem *item = new QListViewItem( list);
 	Config cfg(  "odict" );
-//X 	cfg.setGroup( itemName );
-//X 	QString temp = cfg.readEntry( "Seperator" );
+	QStringList groupListCfg = cfg.groupList().grep( "Method_" );
+	for ( QStringList::Iterator it = groupListCfg.begin() ; it != groupListCfg.end() ; ++it )
+	{
+		QListViewItem *item = new QListViewItem( list );
+		cfg.setGroup( *it );
+		item->setText( 0 , cfg.readEntry( "Name" ) );
+	}
 }
