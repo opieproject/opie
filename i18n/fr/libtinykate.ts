@@ -4,74 +4,74 @@
     <name>ColorConfig</name>
     <message>
         <source>Background:</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrière plan : </translation>
     </message>
     <message>
         <source>Selected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Séléctionné : </translation>
     </message>
     <message>
         <source>Sets the background color of the editing area</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionne l&apos;arrière plan de la zone d&apos;édition</translation>
     </message>
     <message>
         <source>Sets the background color of the selection. To set the text color for selected text, use the &amp;quot;&lt;b&gt;Configure Highlighting&lt;/b&gt;&amp;quot; dialog.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionne la couleur d&apos;arrière plan de la sélection. Pour modifier la couleur du texte sélectionné, utilisez la boîte de dialogue de &lt;b&gt;Configuration de la coloration syntaxique.</translation>
     </message>
 </context>
 <context>
     <name>EditConfigTab</name>
     <message>
         <source>&amp;Word wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Retour à la ligne</translation>
     </message>
     <message>
         <source>Replace &amp;tabs with spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer &amp;tabulations par des espaces</translation>
     </message>
     <message>
         <source>&amp;Remove trailing spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Supprimer les espaces en fin de ligne</translation>
     </message>
     <message>
         <source>&amp;Auto brackets</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Parenthèses automatiques</translation>
     </message>
     <message>
         <source>Group &amp;undos</source>
-        <translation type="unfinished"></translation>
+        <translation>Grouper les &amp;annulations</translation>
     </message>
     <message>
         <source>&amp;Show tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Afficher les tabutions</translation>
     </message>
     <message>
         <source>Smart &amp;home</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Retour intelligent</translation>
     </message>
     <message>
         <source>&amp;Page up/down moves cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Page haut/bas déplace le curseur</translation>
     </message>
     <message>
         <source>Wrap &amp;cursor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Retour &amp;curseur</translation>
     </message>
     <message>
         <source>Wrap Words At:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Retour à la ligne à : </translation>
     </message>
     <message>
         <source>Tab/Indent Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille Indentation/tabulation : </translation>
     </message>
     <message>
         <source>Undo steps:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etapes à annuler : </translation>
     </message>
     <message>
         <source>Encoding:</source>
-        <translation type="unfinished"></translation>
+        <translation>Code : </translation>
     </message>
     <message>
         <source>Word wrap is a feature that causes the editor to automatically start a new line of text and move (wrap) the cursor to the beginning of that new line. KateView will automatically start a new line of text when the current line reaches the length specified by the Wrap Words At: option.&lt;p&gt;&lt;b&gt;NOTE:&lt;b&gt; Word Wrap will not change existing lines or wrap them for easy reading as in some applications.</source>
@@ -107,7 +107,7 @@
     </message>
     <message>
         <source>Not yet implemented.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas encore implémenté.</translation>
     </message>
     <message>
         <source>If this is selected, the insertion cursor will be moved to the first/last line when pressing the page up/down buttons.&lt;p&gt;If not selected, it will remain at it&apos;s relative position in the visible text.</source>
@@ -126,174 +126,174 @@
     <name>GotoLineDialog</name>
     <message>
         <source>Goto Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Aller à la ligne</translation>
     </message>
     <message>
         <source>&amp;Goto Line:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aller à la ligne : </translation>
     </message>
 </context>
 <context>
     <name>HighlightDialog</name>
     <message>
         <source>Highlight Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres de coloration syntaxique</translation>
     </message>
 </context>
 <context>
     <name>HighlightDialogPage</name>
     <message>
         <source>&amp;Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Défauts</translation>
     </message>
     <message>
         <source>Default Item Styles</source>
-        <translation type="unfinished"></translation>
+        <translation>Style des items par défaut</translation>
     </message>
     <message>
         <source>Item:</source>
-        <translation type="unfinished"></translation>
+        <translation>item : </translation>
     </message>
     <message>
         <source>&amp;Highlight Modes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Modes de coloration syntaxique</translation>
     </message>
     <message>
         <source>Config Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurer sélection</translation>
     </message>
     <message>
         <source>Item Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Style item</translation>
     </message>
     <message>
         <source>Highlight Auto Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélection auto du la coloration syntaxique</translation>
     </message>
     <message>
         <source>Highlight:</source>
-        <translation type="unfinished"></translation>
+        <translation>Coloration syntaxique : </translation>
     </message>
     <message>
         <source>File Extensions:</source>
-        <translation type="unfinished"></translation>
+        <translation>Extentions de fichier : </translation>
     </message>
     <message>
         <source>Mime Types:</source>
-        <translation type="unfinished"></translation>
+        <translation>Types mimes : </translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Défaut</translation>
     </message>
 </context>
 <context>
     <name>HlEditDialog</name>
     <message>
         <source>Highlight Conditions</source>
-        <translation type="unfinished"></translation>
+        <translation>Conditions de coloration syntaxique</translation>
     </message>
     <message>
         <source>Syntax structure</source>
-        <translation type="unfinished"></translation>
+        <translation>Struture syntaxique</translation>
     </message>
     <message>
         <source>New Context</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau contexte</translation>
     </message>
     <message>
         <source>New Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvel item</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>Can&apos;t find template file</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de trouver le fichier patron</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Description : </translation>
     </message>
     <message>
         <source>Attribute:</source>
-        <translation type="unfinished"></translation>
+        <translation>Attribut : </translation>
     </message>
     <message>
         <source>LineEnd:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fin de ligne : </translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type : </translation>
     </message>
     <message>
         <source>Parameter:</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres : </translation>
     </message>
     <message>
         <source>Context switch:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Contexte de changement :</translation>
     </message>
     <message>
         <source>Delete this item</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer cet item</translation>
     </message>
 </context>
 <context>
     <name>HlManager</name>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>Keyword</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot clé</translation>
     </message>
     <message>
         <source>Data Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de donnée</translation>
     </message>
     <message>
         <source>Decimal/Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeur/Décimal</translation>
     </message>
     <message>
         <source>Base-N Integer</source>
-        <translation type="unfinished"></translation>
+        <translation>Entier base N</translation>
     </message>
     <message>
         <source>Floating Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Virgule flottante</translation>
     </message>
     <message>
         <source>Character</source>
-        <translation type="unfinished"></translation>
+        <translation>Caractère</translation>
     </message>
     <message>
         <source>String</source>
-        <translation type="unfinished"></translation>
+        <translation>Chaîne</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Commentaire</translation>
     </message>
     <message>
         <source>Others</source>
-        <translation type="unfinished"></translation>
+        <translation>Autres</translation>
     </message>
 </context>
 <context>
     <name>IndentConfigTab</name>
     <message>
         <source>&amp;Auto Indent</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Indentation &amp;auto</translation>
     </message>
     <message>
         <source>Indent With &amp;Spaces</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Indenter avec des &amp;espaces</translation>
     </message>
     <message>
         <source>&amp;Backspace Key Indents</source>
@@ -340,238 +340,238 @@
     <name>KDialogBase</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermer</translation>
     </message>
 </context>
 <context>
     <name>KLocale</name>
     <message>
         <source>pm</source>
-        <translation type="unfinished"></translation>
+        <translation>pm</translation>
     </message>
     <message>
         <source>am</source>
-        <translation type="unfinished"></translation>
+        <translation>am</translation>
     </message>
     <message>
         <source>concatenation of dates and time</source>
         <comment>%1 %2</comment>
-        <translation type="unfinished"></translation>
+        <translation>concaténation de la date et de l&apos;heure</translation>
     </message>
     <message>
         <source>Monday</source>
         <comment>Mon</comment>
-        <translation type="unfinished"></translation>
+        <translation>Lundi</translation>
     </message>
     <message>
         <source>Tuesday</source>
         <comment>Tue</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mardi</translation>
     </message>
     <message>
         <source>Wednesday</source>
         <comment>Wed</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mercredi</translation>
     </message>
     <message>
         <source>Thursday</source>
         <comment>Thu</comment>
-        <translation type="unfinished"></translation>
+        <translation>Jeudi</translation>
     </message>
     <message>
         <source>Friday</source>
         <comment>Fri</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vendredi</translation>
     </message>
     <message>
         <source>Saturday</source>
         <comment>Sat</comment>
-        <translation type="unfinished"></translation>
+        <translation>Samedi</translation>
     </message>
     <message>
         <source>Sunday</source>
         <comment>Sun</comment>
-        <translation type="unfinished"></translation>
+        <translation>Dimanche</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Lundi</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Mardi</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Mercredi</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeudi</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Vendredi</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Samedi</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimanche</translation>
     </message>
     <message>
         <source>January</source>
         <comment>Jan</comment>
-        <translation type="unfinished"></translation>
+        <translation>Janvier</translation>
     </message>
     <message>
         <source>February</source>
         <comment>Feb</comment>
-        <translation type="unfinished"></translation>
+        <translation>Février</translation>
     </message>
     <message>
         <source>March</source>
         <comment>Mar</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mars</translation>
     </message>
     <message>
         <source>April</source>
         <comment>Apr</comment>
-        <translation type="unfinished"></translation>
+        <translation>Avril</translation>
     </message>
     <message>
         <source>May short</source>
         <comment>May</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mai court</translation>
     </message>
     <message>
         <source>June</source>
         <comment>Jun</comment>
-        <translation type="unfinished"></translation>
+        <translation>Juin</translation>
     </message>
     <message>
         <source>July</source>
         <comment>Jul</comment>
-        <translation type="unfinished"></translation>
+        <translation>Juillet</translation>
     </message>
     <message>
         <source>August</source>
         <comment>Aug</comment>
-        <translation type="unfinished"></translation>
+        <translation>Août</translation>
     </message>
     <message>
         <source>September</source>
         <comment>Sep</comment>
-        <translation type="unfinished"></translation>
+        <translation>Septembre</translation>
     </message>
     <message>
         <source>October</source>
         <comment>Oct</comment>
-        <translation type="unfinished"></translation>
+        <translation>Octobre</translation>
     </message>
     <message>
         <source>November</source>
         <comment>Nov</comment>
-        <translation type="unfinished"></translation>
+        <translation>Novembre</translation>
     </message>
     <message>
         <source>December</source>
         <comment>Dec</comment>
-        <translation type="unfinished"></translation>
+        <translation>Décembre</translation>
     </message>
     <message>
         <source>January</source>
-        <translation type="unfinished"></translation>
+        <translation>Janvier</translation>
     </message>
     <message>
         <source>February</source>
-        <translation type="unfinished"></translation>
+        <translation>Février</translation>
     </message>
     <message>
         <source>March</source>
-        <translation type="unfinished"></translation>
+        <translation>Mars</translation>
     </message>
     <message>
         <source>April</source>
-        <translation type="unfinished"></translation>
+        <translation>Avril</translation>
     </message>
     <message>
         <source>May long</source>
         <comment>May</comment>
-        <translation type="unfinished"></translation>
+        <translation>Mai long</translation>
     </message>
     <message>
         <source>June</source>
-        <translation type="unfinished"></translation>
+        <translation>Juin</translation>
     </message>
     <message>
         <source>July</source>
-        <translation type="unfinished"></translation>
+        <translation>Juillet</translation>
     </message>
     <message>
         <source>August</source>
-        <translation type="unfinished"></translation>
+        <translation>Août</translation>
     </message>
     <message>
         <source>September</source>
-        <translation type="unfinished"></translation>
+        <translation>Septembre</translation>
     </message>
     <message>
         <source>October</source>
-        <translation type="unfinished"></translation>
+        <translation>Octobre</translation>
     </message>
     <message>
         <source>November</source>
-        <translation type="unfinished"></translation>
+        <translation>Novembre</translation>
     </message>
     <message>
         <source>December</source>
-        <translation type="unfinished"></translation>
+        <translation>Décembre</translation>
     </message>
 </context>
 <context>
     <name>KMessageBox</name>
     <message>
         <source>Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>Désolé</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Question</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
 </context>
 <context>
@@ -589,146 +589,150 @@ If you cancel you will lose these changes next time you save this file</source>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
 </context>
 <context>
     <name>KateView</name>
     <message>
         <source>Undo/Redo &amp;History...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Historique Annuler/Refaire...</translation>
     </message>
     <message>
         <source>&amp;Configure Editor...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Editeur de configuration...</translation>
     </message>
     <message>
         <source>&amp;Highlight Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Coloration syntaxique</translation>
     </message>
     <message>
         <source>&amp;Deselect All</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tout désélectionner</translation>
     </message>
     <message>
         <source>Invert &amp;Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Inverser la sélection</translation>
     </message>
     <message>
         <source>Increase Font Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Augmenter la taille des polices</translation>
     </message>
     <message>
         <source>Decrease Font Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminuer la taille des polices</translation>
     </message>
     <message>
         <source>Apply Word Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer le retour à la ligne</translation>
     </message>
     <message>
         <source>Editing Co&amp;mmand</source>
-        <translation type="unfinished"></translation>
+        <translation>Edition co&amp;mmande</translation>
     </message>
     <message>
         <source>Toggle &amp;Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ajouter au &amp;favoris</translation>
     </message>
     <message>
         <source>Clear Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Vider les favoris</translation>
     </message>
     <message>
         <source>&amp;Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Favoris</translation>
     </message>
     <message>
         <source>Show &amp;IconBorder</source>
-        <translation type="unfinished"></translation>
+        <translation>Afficher le &amp;bord de l&apos;icône</translation>
     </message>
     <message>
         <source>&amp;Indent</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Indenter</translation>
     </message>
     <message>
         <source>&amp;Unindent</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Désindenter</translation>
     </message>
     <message>
         <source>&amp;Clean Indentation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Supprimer indentation</translation>
     </message>
     <message>
         <source>C&amp;omment</source>
-        <translation type="unfinished"></translation>
+        <translation>C&amp;ommenter</translation>
     </message>
     <message>
         <source>Unco&amp;mment</source>
-        <translation type="unfinished"></translation>
+        <translation>Déco&amp;mmenter</translation>
     </message>
     <message>
         <source>&amp;Vertical Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélection &amp;verticale</translation>
     </message>
     <message>
         <source>&amp;End Of Line</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fin de ligne</translation>
     </message>
     <message>
         <source>Und&amp;o</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>Re&amp;do</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Refaire</translation>
     </message>
     <message>
         <source>The current Document has been modified.
 Would you like to save it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Le document en cours d&apos;édition a été modifié.
+Voulez-vous enregistrer vos modifications ?</translation>
     </message>
     <message>
         <source>Could not save the document.
 Discard it and continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de sauvegarder le document.
+Abandonner la sauvegarde et continuer ?</translation>
     </message>
     <message>
         <source>&amp;Discard</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abandonner</translation>
     </message>
     <message>
         <source>Undo/Redo History</source>
-        <translation type="unfinished"></translation>
+        <translation>Historique Annuler/Refaire</translation>
     </message>
     <message>
         <source>End of document reached.
 Continue from the beginning?</source>
-        <translation type="unfinished"></translation>
+        <translation>Fin de document atteinte.
+Continuer au début ?</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Continuer</translation>
     </message>
     <message>
         <source>Beginning of document reached.
 Continue from the end?</source>
-        <translation type="unfinished"></translation>
+        <translation>Début du document atteint.
+Continuer à partir de la fin ?</translation>
     </message>
     <message>
         <source>Search string &apos;%1&apos; not found!</source>
-        <translation type="unfinished"></translation>
+        <translation>Chaîne de caractère &apos;%1&apos; non trouvé !</translation>
     </message>
     <message>
         <source>%1 replacement(s) made</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 remplacement(s) effectué(s)</translation>
     </message>
     <message>
         <source>Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer</translation>
     </message>
     <message>
         <source>%1 replacement(s) made.
@@ -738,7 +742,7 @@ Continue from the beginning?</source>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter</translation>
     </message>
     <message>
         <source>%1 replacement(s) made.
@@ -748,31 +752,31 @@ Continue from the end?</source>
     </message>
     <message>
         <source>Configure Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editeur de configuration</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleurs</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Polices de caractères</translation>
     </message>
     <message>
         <source>Indent</source>
-        <translation type="unfinished"></translation>
+        <translation>Indenter</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer</translation>
     </message>
     <message>
         <source>Highlighting</source>
-        <translation type="unfinished"></translation>
+        <translation>Coloration syntaxique</translation>
     </message>
 </context>
 <context>
@@ -800,81 +804,81 @@ de rééssayer.</translation>
     <name>ReplacePrompt</name>
     <message>
         <source>Replace Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer texte</translation>
     </message>
     <message>
         <source>&amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Tout</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Non</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Oui</translation>
     </message>
     <message>
         <source>Replace this occurence?</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer cette occurence ?</translation>
     </message>
 </context>
 <context>
     <name>SearchDialog</name>
     <message>
         <source>Find Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher texte</translation>
     </message>
     <message>
         <source>&amp;Text To Find:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Texte à rechercher : </translation>
     </message>
     <message>
         <source>Regular Expression</source>
-        <translation type="unfinished"></translation>
+        <translation>Expression régulière</translation>
     </message>
     <message>
         <source>Replace Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplacer texte</translation>
     </message>
     <message>
         <source>&amp;Replace With:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Remplacer par : </translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>C&amp;ase Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sensible à la casse</translation>
     </message>
     <message>
         <source>&amp;Whole Words Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot &amp;entier</translation>
     </message>
     <message>
         <source>&amp;From Beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Depuis le début</translation>
     </message>
     <message>
         <source>Find &amp;Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechercher en &amp;arrière</translation>
     </message>
     <message>
         <source>&amp;Selected Text</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Texte sélectionné</translation>
     </message>
     <message>
         <source>&amp;Prompt On Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Demander confirmation</translation>
     </message>
 </context>
 <context>
     <name>SelectConfigTab</name>
     <message>
         <source>&amp;Persistent Selections</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sélections persistantes</translation>
     </message>
     <message>
         <source>&amp;Overwrite Selections</source>
@@ -925,53 +929,53 @@ de rééssayer.</translation>
     <name>StyleChanger</name>
     <message>
         <source>Normal:</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal : </translation>
     </message>
     <message>
         <source>Selected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionné : </translation>
     </message>
     <message>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Gras</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Italique</translation>
     </message>
 </context>
 <context>
     <name>SyntaxDocument</name>
     <message>
         <source>Can&apos;t open %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;ouvrir %1</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Autre</translation>
     </message>
 </context>
 <context>
     <name>UndoHistory</name>
     <message>
         <source>Undo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste annulation</translation>
     </message>
     <message>
         <source>Redo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste refaire</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Refaire</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fermer</translation>
     </message>
 </context>
 </TS>
