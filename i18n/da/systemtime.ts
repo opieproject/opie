@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Hovedmenu</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -105,7 +105,7 @@ tiden fra serveren </translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Hovedmenu</translation>
     </message>
     <message>
         <source>NTP</source>
@@ -121,7 +121,7 @@ tiden fra serveren </translation>
     </message>
     <message>
         <source>nan</source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <source>Time Shift:</source>
@@ -248,7 +248,7 @@ tiden fra serveren </translation>
     </message>
     <message>
         <source>Applet format</source>
-        <translation type="unfinished"></translation>
+        <translation>Panelprogram format</translation>
     </message>
     <message>
         <source>hh:mm</source>

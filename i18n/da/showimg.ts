@@ -25,11 +25,11 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Åbn</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Miniature visning</translation>
     </message>
     <message>
         <source>Slide show</source>
@@ -53,7 +53,7 @@
     </message>
     <message>
         <source>Open ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Åbn ...</translation>
     </message>
     <message>
         <source>Rotate 90</source>

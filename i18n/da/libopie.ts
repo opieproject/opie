@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Frekvens</translation>
     </message>
     <message>
         <source>End On:</source>
@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen slut dato</translation>
     </message>
     <message>
         <source>Repeat On</source>
@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tid:</translation>
     </message>
     <message>
         <source>:</source>
@@ -106,7 +106,7 @@
     </message>
     <message>
         <source>Pick Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg tid:</translation>
     </message>
 </context>
 </TS>

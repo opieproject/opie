@@ -64,11 +64,11 @@
     </message>
     <message>
         <source>Check the categories this document belongs to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg kategorierne som dette dokument tilhører.</translation>
     </message>
     <message>
         <source>Enter a new category here.  Press &lt;b&gt;Add&lt;/b&gt; to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Indtast en ny kategori her. Tryk &lt;b&gt;Tilføj&lt;/b&gt; for at tilføje den til listen.</translation>
     </message>
     <message>
         <source>Add</source>
@@ -76,11 +76,11 @@
     </message>
     <message>
         <source>Enter a new category to the left and press to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Indtast en ny kategori til venstre og tryk for at tilføje den til listen.</translation>
     </message>
     <message>
         <source>Press to delete the highlighted category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryk for at slette den valgte kategori.</translation>
     </message>
     <message>
         <source>Global</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Check to make this property available to all applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tjek afkrydsningsfeltet for at gøre denne egenskab tilgængelig for alle programmer.</translation>
     </message>
 </context>
 <context>
@@ -111,7 +111,9 @@
     <message>
         <source>Sorry, another application is
 editing categories.</source>
-        <translation type="unfinished"></translation>
+        <translation>Desværre! Et andet
+program er igang med at
+redigere kategorierne.</translation>
     </message>
     <message>
         <source>Edit Categories</source>
@@ -126,30 +128,30 @@ editing categories.</source>
     <name>DateBookMonthHeader</name>
     <message>
         <source>Show January in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis januar i det valgte år</translation>
     </message>
     <message>
         <source>Show the previous month</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis foregående måned</translation>
     </message>
     <message>
         <source>Show the next month</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis næste måned</translation>
     </message>
     <message>
         <source>Show December in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis december i det valgte år</translation>
     </message>
 </context>
 <context>
     <name>FileSelector</name>
     <message>
         <source>Close the File Selector</source>
-        <translation type="unfinished"></translation>
+        <translation>Luk Filvælgeren</translation>
     </message>
     <message>
         <source>Show documents of this type</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis dokumenter af denne type</translation>
     </message>
     <message>
         <source>Document View</source>
@@ -157,19 +159,19 @@ editing categories.</source>
     </message>
     <message>
         <source>Show documents in this category</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis dokumenter i denne kategori</translation>
     </message>
     <message>
         <source>Click to select a document from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik for at vælge et dokument fra listen</translation>
     </message>
     <message>
         <source>, or select &lt;b&gt;New Document&lt;/b&gt; to create a new document.</source>
-        <translation type="unfinished"></translation>
+        <translation>, eller vælg &lt;b&gt;Nyt Dokument&lt;/b&gt; for at lave et nyt dokument.</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;Click and hold for document properties.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;Klik og hold for at se dokumentets egenskaber.</translation>
     </message>
 </context>
 <context>
@@ -190,26 +192,26 @@ editing categories.</source>
     <name>FindWidget</name>
     <message>
         <source>String Not Found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Strengen blev ikke fundet.</translation>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>Slutningen er nået. Starter fra begyndelsen</translation>
     </message>
 </context>
 <context>
     <name>FindWidgetBase</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished">Find</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Find what:</source>
-        <translation type="unfinished"></translation>
+        <translation>Find hvad:</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategori:</translation>
     </message>
     <message>
         <source>Start Search at:</source>
@@ -221,11 +223,11 @@ editing categories.</source>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Versalfølsom</translation>
     </message>
     <message>
         <source>Search Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Søg baglæns</translation>
     </message>
 </context>
 <context>
@@ -353,47 +355,47 @@ editing categories.</source>
     </message>
     <message>
         <source>1</source>
-        <translation>1</translation>
+        <translation></translation>
     </message>
     <message>
         <source>2</source>
-        <translation>2</translation>
+        <translation></translation>
     </message>
     <message>
         <source>3</source>
-        <translation>3</translation>
+        <translation></translation>
     </message>
     <message>
         <source>4</source>
-        <translation>4</translation>
+        <translation></translation>
     </message>
     <message>
         <source>5</source>
-        <translation>5</translation>
+        <translation></translation>
     </message>
     <message>
         <source>6</source>
-        <translation>6</translation>
+        <translation></translation>
     </message>
     <message>
         <source>7</source>
-        <translation>7</translation>
+        <translation></translation>
     </message>
     <message>
         <source>8</source>
-        <translation>8</translation>
+        <translation></translation>
     </message>
     <message>
         <source>9</source>
-        <translation>9</translation>
+        <translation></translation>
     </message>
     <message>
         <source>0</source>
-        <translation>0</translation>
+        <translation></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation></translation>
     </message>
     <message>
         <source>Enter passcode</source>
@@ -408,7 +410,7 @@ editing categories.</source>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished">Ikke mere lagerplads</translation>
+        <translation>Ikke mere lagerplads</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -417,30 +419,38 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der opstod at problem under
+oprettelsen af konfigurations
+informationen til dette program.
+
+Frigør noget lagerplads og
+prøv igen.</translation>
     </message>
     <message>
         <source>Unable to create start up files
 Please free up some space
 before entering data</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke oprette opstarts
+filer. Frigør noget lagerplads
+før du indtaster data</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.
 Free some memory and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke sætte alarmen.
+Frigør noget hukommelse og prøv igen.</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>day</source>
@@ -456,11 +466,11 @@ Free some memory and try again.</source>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Mon</source>

@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation type="unfinished"></translation>
+        <translation>Idag af Maximilian Reiß</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
@@ -65,25 +65,27 @@
     </message>
     <message>
         <source>active/order</source>
-        <translation>aktiv/rækkefølge</translation>
+        <translation>Aktiv/Rækkefølge</translation>
     </message>
     <message>
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Start automatisk
+ved opvågning?
+(Kun Opie)</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg denne hvis Idag skal startes automatisk ved opvågning.</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation>minutter inaktiv</translation>
+        <translation>Minutter inaktiv</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Hvor mange minutter PDA&apos;en har været i dvale før autostart egenskaben er aktiv ved opvågning</translation>
     </message>
     <message>
         <source>Icon size</source>
@@ -103,7 +105,7 @@ resume?
     </message>
     <message>
         <source> sec</source>
-        <translation>sek</translation>
+        <translation> sek</translation>
     </message>
     <message>
         <source>never</source>
