@@ -99,7 +99,6 @@ private:
     QPixmap pixBg;
     QImage  imgUp;
     QImage  imgDn;
-    QImage  imgButtonMask;
     QBitmap *masks[10];
     QPixmap *buttonPixUp[10];
     QPixmap *buttonPixDown[10];

@@ -69,6 +69,8 @@ protected:
     PlayListWidget &playList;
 
     ButtonVector buttons;
+
+    QImage buttonMask;
 };
 
 #endif // MEDIAWIDGET_H

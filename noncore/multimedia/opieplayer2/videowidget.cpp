@@ -99,8 +99,8 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     imgUp = QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
     imgDn = QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
 
-    imgButtonMask = QImage( imgUp.width(), imgUp.height(), 8, 255 );
-    imgButtonMask.fill( 0 );
+    buttonMask = QImage( imgUp.width(), imgUp.height(), 8, 255 );
+    buttonMask.fill( 0 );
 
     for ( int i = 0; i < 7; i++ ) {
         QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath + "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
@@ -108,7 +108,7 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 
         if ( !masks[i]->isNull() ) {
             QImage imgMask = masks[i]->convertToImage();
-            uchar **dest = imgButtonMask.jumpTable();
+            uchar **dest = buttonMask.jumpTable();
             for ( int y = 0; y < imgUp.height(); y++ ) {
                 uchar *line = dest[y];
                 for ( int x = 0; x < imgUp.width(); x++ ) {
@@ -285,9 +285,9 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
             int x = event->pos().x() - xoff;
             int y = event->pos().y() - yoff;
 
-            bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask.width()
-                                && y < imgButtonMask.height()
-                                && imgButtonMask.pixelIndex( x, y ) == i + 1 );
+            bool isOnButton = ( x > 0 && y > 0 && x < buttonMask.width()
+                                && y < buttonMask.height()
+                                && buttonMask.pixelIndex( x, y ) == i + 1 );
 
             if ( isOnButton && !buttons[i].isHeld ) {
                 buttons[i].isHeld = TRUE;
