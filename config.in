@@ -234,6 +234,7 @@ menu "Experimental"
   depends on EXPERIMENTAL
   source libopie2/config.in
   source libqtaux/config.in
+  source libslcompat/config.in
 
   config SQL_PIM_BACKEND
   bool "Add SQL-Backend support"
