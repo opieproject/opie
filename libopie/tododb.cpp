@@ -13,6 +13,7 @@ namespace {
 class FileToDoResource : public ToDoResource {
 public:
   FileToDoResource() {};
+    // FIXME better parsing
   bool save(const QString &name, const QValueList<ToDoEvent> &m_todos ){
     // prepare the XML
     XMLElement *tasks = new XMLElement( );
@@ -23,6 +24,7 @@ public:
 	map.insert( "Completed", QString::number((int)(*it).isCompleted() ) );
 	map.insert( "HasDate", QString::number((int)(*it).hasDate() ) );
 	map.insert( "Priority", QString::number( (*it).priority() ) );
+        map.insert( "Summary", (*it).summary() );
 	QArray<int> arrat = (*it).categories();
 	QString attr;
 	for(uint i=0; i < arrat.count(); i++ ){
@@ -111,11 +113,13 @@ public:
 	//description
 	dummy = element->attribute("Description" );
 	event.setDescription( dummy );
+        dummy = element->attribute("Summary" );
+        event.setSummary( dummy );
 	// category
 	dummy = element->attribute("Categories" );
 	QStringList ids = QStringList::split(";", dummy );
-	event.setCategories( ids );     
-   
+	event.setCategories( ids );
+
 	//uid
 	dummy = element->attribute("Uid" );
 	dumInt = dummy.toInt(&ok );
@@ -181,7 +185,7 @@ QValueList<ToDoEvent> ToDoDB::effectiveToDos(const QDate &from,
 QValueList<ToDoEvent> ToDoDB::overDue()
 {
     QValueList<ToDoEvent> events;
-    for( QValueList<ToDoEvent>::Iterator it = m_todos.begin(); it!= m_todos.end(); ++it ){   
+    for( QValueList<ToDoEvent>::Iterator it = m_todos.begin(); it!= m_todos.end(); ++it ){
 	if( (*it).isOverdue() )
 	    events.append((*it) );
     }
@@ -238,7 +242,7 @@ QString ToDoDB::fileName()const
 }
 void ToDoDB::load()
 {
-  m_todos = m_res->load( m_fileName );    
+  m_todos = m_res->load( m_fileName );
 }
 bool ToDoDB::save()
 {

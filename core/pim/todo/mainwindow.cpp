@@ -594,7 +594,7 @@ void TodoWindow::slotBeam()
     todoDB.save();
     Ir *ir = new Ir( this );
     connect( ir, SIGNAL( done( Ir * ) ), this, SLOT( beamDone( Ir * ) ) );
-    QString description = c.description();
+    QString description = c.summary();
     ir->send( beamfile, description, "text/x-vCalendar" );
 }
 

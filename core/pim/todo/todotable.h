@@ -199,7 +199,8 @@ inline void TodoTable::insertIntoTable( ToDoEvent *todo, int row )
     chk->setChecked( todo->isCompleted() );
     ComboItem *cmb = new ComboItem( this, QTableItem::WhenCurrent );
     cmb->setText( QString::number( todo->priority() ) );
-    QTableItem *ti = new TodoTextItem( this, todo->description().left(40).simplifyWhiteSpace() );
+    QString sum = todo->summary();
+    QTableItem *ti = new TodoTextItem( this, sum.isEmpty() ? todo->description().left(40).simplifyWhiteSpace() : sum );
     ti->setReplaceable( false );
 
     DueTextItem *due = new DueTextItem(this, todo );

@@ -1,5 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2002 zecke
 **
 ** This file is part of Qtopia Environment.
 **
@@ -61,6 +62,7 @@ NewTaskDialog::NewTaskDialog( const ToDoEvent& task, QWidget *parent,
     buttonDate->setText( TimeString::longDateString( date ) );
 
     txtTodo->setText( task.description() );
+    lneSum->setText( task.summary() );
 }
 
 /*
@@ -130,9 +132,10 @@ ToDoEvent NewTaskDialog::todoEntry()
   }
   todo.setPriority( comboPriority->currentItem() + 1 );
   todo.setCompleted( checkCompleted->isChecked() );
-  
+
   todo.setDescription( txtTodo->text() );
-  
+  todo.setSummary( lneSum->text() );
+
   return todo;
 }
 

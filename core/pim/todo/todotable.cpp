@@ -572,6 +572,7 @@ void TodoTable::updateJournal( const ToDoEvent &todo, journal_action action )
       attr.remove(attr.length()-1, 1 );
     buf += " Categories=\"" + attr + "\"";
     buf += " Description=\"" + todo.description() + "\"";
+    buf += " Summary=\"" + todo.summary() + "\"";
     if(todo.hasDate() ) {
       buf += " DateYear=\""+QString::number( todo.date().year() ) + "\"";
       buf += " DateMonth=\"" + QString::number( todo.date().month() ) + "\"";
@@ -610,8 +611,11 @@ void TodoTable::loadFile( const QString &/*we use the standard*/ )
 
 void TodoTable::journalFreeReplaceEntry( const ToDoEvent &todo, int row )
 {
-    QString strTodo;
-    strTodo = todo.description().left(40).simplifyWhiteSpace();
+    QString strTodo = todo.summary();
+    if( strTodo.isEmpty() ){
+        strTodo = todo.description().left(40).simplifyWhiteSpace();
+	//todo.setSummary(strTodo );
+    }
     if ( row == -1 ) {
 	QMapIterator<CheckItem*, ToDoEvent *> it;
 	for ( it = todoList.begin(); it != todoList.end(); ++it ) {
@@ -908,6 +912,9 @@ static ToDoEvent xmlToEvent( XMLElement *element )
   //description
   dummy = element->attribute("Description" );
   event.setDescription( dummy );
+  // summary
+  dummy = element->attribute("Summary" );
+  event.setSummary( dummy );
   // category
   dummy = element->attribute("Categories" );
   QStringList ids = QStringList::split(";", dummy );

@@ -2,6 +2,7 @@
 #ifndef todoevent_h
 #define todoevent_h
 
+#include <qmap.h>
 #include <qregexp.h>
 #include <qstringlist.h>
 #include <qdatetime.h>
@@ -15,14 +16,16 @@ class ToDoEvent {
        @param completed Is the TodoEvent completed
        @param priority What is the priority of this ToDoEvent
        @param category Which category does it belong( uid )
+       @param summary A small summary of the todo
        @param description What is this ToDoEvent about
        @param hasDate Does this Event got a deadline
        @param date what is the deadline?
        @param uid what is the UUID of this Event
     **/
-    ToDoEvent( bool completed = false, int priority = NORMAL, 
-	       const QStringList &category = QStringList(), 
-	       const QString &description = QString::null , 
+    ToDoEvent( bool completed = false, int priority = NORMAL,
+	       const QStringList &category = QStringList(),
+	       const QString &summary = QString::null ,
+               const QString &description = QString::null,
 	       bool hasDate = false, QDate date = QDate::currentDate(), int uid = -1 );
     /* Copy c'tor
 
@@ -43,27 +46,81 @@ class ToDoEvent {
       What is the priority?
     **/
     int priority()const ;
+
+    /*
+      All category numbers as QString in a List
+    **/
     QStringList allCategories()const;
+
+    /*
+      * Same as above but with QArray<int>
+      */
     QArray<int> categories() const;
+
+    /**
+     * The end Date
+     */
     QDate date()const;
+
+    /**
+     * The description of the todo
+     */
     QString description()const;
 
+    /**
+     * A small summary of the todo
+     */
+    QString summary() const;
+
+    /**
+     * Return this todoevent in a RichText formatted QString
+     */
     QString richText() const;
 
+    /**
+     * Returns the UID of the Todo
+     */
     int uid()const { return m_uid;};
+
+
+    QString extra(const  QString& )const;
+    /**
+     * Set if this Todo is completed
+     */
     void setCompleted(bool completed );
+
+    /**
+     * set if this todo got an end data
+     */
     void setHasDate( bool hasDate );
     // if the category doesn't exist we will create it
-    // this sets the the Category after this call category will be the only category 
+    // this sets the the Category after this call category will be the only category
     void setCategory( const QString &category );
     // adds a category to the Categories of this event
     void insertCategory(const QString &category );
+
+    /**
+     * Removes this event from all categories
+     */
     void clearCategories();
+
+    /**
+     * This todo belongs to xxx categories
+     */
     void setCategories(const QStringList& );
 
+    /**
+     * Set the priority of the Todo
+     */
     void setPriority(int priority );
+
+    /**
+     * set the end date
+     */
     void setDate( QDate date );
     void setDescription(const QString& );
+    void setSummary(const QString& );
+    void setExtra( const QString&,  const QString& );
     bool isOverdue();
 
     bool match( const QRegExp &r )const;
@@ -85,6 +142,8 @@ class ToDoEvent {
     int m_priority;
     QStringList m_category;
     QString m_desc;
+    QString m_sum;
+    QMap<QString, QString> m_extra;
     int m_uid;
 };
 

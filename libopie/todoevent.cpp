@@ -17,21 +17,25 @@ ToDoEvent::ToDoEvent(const ToDoEvent &event )
   *this = event;
 }
 
-ToDoEvent::ToDoEvent(bool completed, int priority, const QStringList &category, 
-	       const QString &description, bool hasDate, QDate date, int uid )
+ToDoEvent::ToDoEvent(bool completed, int priority,
+                     const QStringList &category,
+                     const QString& summary,
+                     const QString &description,
+                     bool hasDate, QDate date, int uid )
 {
     m_date = date;
     m_isCompleted = completed;
     m_hasDate = hasDate;
     m_priority = priority;
     m_category = category;
+    m_sum = summary;
     m_desc = Qtopia::simplifyMultiLineSpace(description );
     if (uid == -1 ) {
 	Qtopia::UidGen *uidgen = new Qtopia::UidGen();
 	uid = uidgen->generate();
 	delete uidgen;
     }// generate the ids
-    m_uid = uid; 
+    m_uid = uid;
 }
 QArray<int> ToDoEvent::categories()const
 {
@@ -66,6 +70,14 @@ QStringList ToDoEvent::allCategories()const
 {
     return m_category;
 }
+QString ToDoEvent::extra(const QString& )const
+{
+    return QString::null;
+}
+QString ToDoEvent::summary() const
+{
+    return m_sum;
+}
 void ToDoEvent::insertCategory(const QString &str )
 {
   m_category.append( str );
@@ -99,6 +111,14 @@ void ToDoEvent::setDescription(const QString &desc )
 {
     m_desc = Qtopia::simplifyMultiLineSpace(desc );
 }
+void ToDoEvent::setExtra( const QString&, const QString& )
+{
+
+}
+void ToDoEvent::setSummary( const QString& sum )
+{
+    m_sum = sum;
+}
 void ToDoEvent::setCategory( const QString &cat )
 {
   qWarning("setCategory %s", cat.latin1() );
@@ -127,9 +147,11 @@ QString ToDoEvent::richText() const
 {
   QString text;
   QStringList catlist;
-  
+
   // Description of the todo
   if ( !description().isEmpty() ){
+    text += "<b>" + QObject::tr( "Summary:") + "</b><br>";
+    text += Qtopia::escapeString(summary() ).replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
     text += "<b>" + QObject::tr( "Description:" ) + "</b><br>";
     text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) + "<br>";
   }
@@ -140,7 +162,7 @@ QString ToDoEvent::richText() const
     text += date().toString();
     text += "<br>";
   }
-  
+
   // Open database of all categories and get the list of
   // the categories this todoevent belongs to.
   // Then print them...
@@ -149,7 +171,7 @@ QString ToDoEvent::richText() const
   bool firstloop = true;
   catdb.load( categoryFileName() );
   catlist = allCategories();
-  
+
   text += "<b>" + QObject::tr( "Category:") + "</b> ";
   for ( QStringList::Iterator it = catlist.begin(); it != catlist.end(); ++it ) {
     if (!firstloop){
@@ -215,7 +237,13 @@ bool ToDoEvent::operator>=(const ToDoEvent &toDoEvent )const
 }
 bool ToDoEvent::operator==(const ToDoEvent &toDoEvent )const
 {
-    if( m_date == toDoEvent.m_date && m_isCompleted == toDoEvent.m_isCompleted && m_hasDate == toDoEvent.m_hasDate && m_priority == toDoEvent.m_priority && m_category == toDoEvent.m_category && m_desc == toDoEvent.m_desc )
+    if( m_priority == toDoEvent.m_priority &&
+        m_isCompleted == toDoEvent.m_isCompleted &&
+        m_hasDate == toDoEvent.m_hasDate &&
+        m_date == toDoEvent.m_date &&
+        m_category == toDoEvent.m_category &&
+        m_sum == toDoEvent.m_sum &&
+        m_desc == toDoEvent.m_desc )
 	return true;
     return false;
 }
@@ -228,6 +256,7 @@ ToDoEvent &ToDoEvent::operator=(const ToDoEvent &item )
     m_category = item.m_category;
     m_desc = item.m_desc;
     m_uid = item.m_uid;
+    m_sum = item.m_sum;
     return *this;
 }
 
