@@ -1,0 +1,8 @@
+oglobalsettingsdemo
+Makefile*
+obj
+moc*
+*moc
+*.o
+~*
+

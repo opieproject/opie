@@ -1,0 +1,7 @@
+osoundsystemdemo
+Makefile*
+moc*
+*moc
+*.o
+~*
+

@@ -1,0 +1,7 @@
+oprocessdemo
+Makefile*
+moc*
+*moc
+*.o
+~*
+
