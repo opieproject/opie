@@ -2,6 +2,8 @@
 
 #include "datebookweekheaderimpl.h"
 
+#include "datebook.h"
+
 #include <qpe/calendar.h>
 #include <qpe/datebookdb.h>
 #include <qpe/event.h>
@@ -143,31 +145,51 @@ void DateBookWeekLstDayHdr::newEvent() {
     emit addEvent(start,stop,"",0);
 }
 DateBookWeekLstEvent::DateBookWeekLstEvent(const EffectiveEvent &ev,
-					   QWidget* parent,
-					   const char* name,
-					   WFlags fl) :
-    OClickableLabel(parent,name,fl),
-    event(ev)
+						int weeklistviewconfig,
+						QWidget* parent,
+						const char* name,
+						WFlags fl ) : OClickableLabel(parent,name,fl), event(ev)
 {
-    char s[10];
-	if ( ev.startDate() != ev.date() ) { // multiday event (not first day)
-		if ( ev.endDate() == ev.date() ) { // last day
-			strcpy(s, "__|__");
-		} else {
-			strcpy(s, "    |---");
+	// old values... lastday = "__|__", middle="   |---", Firstday="00:00",
+	QString s,start,middle,end,day;
+
+	qDebug("weeklistviewconfig=%d",weeklistviewconfig);
+	if(weeklistviewconfig==NONE) {	// No times displayed.
+//		start.sprintf("%.2d:%.2d-",ev.start().hour(),ev.start().minute());
+//		middle.sprintf("<--->");
+//		end.sprintf("-%.2d:%.2d",ev.end().hour(),ev.end().minute());
+//		day.sprintf("%.2d:%.2d-%.2d:%.2d",ev.start().hour(),ev.start().minute(),ev.end().hour(),ev.end().minute());
+	} else if(weeklistviewconfig==NORMAL) {	// "Normal", only display start time.
+		start.sprintf("%.2d:%.2d",ev.start().hour(),ev.start().minute());
+		middle.sprintf("   |---");
+		end.sprintf("__|__");
+		day.sprintf("%.2d:%.2d",ev.start().hour(),ev.start().minute());
+	} else if(weeklistviewconfig==EXTENDED) { // Extended mode, display start and end times.
+		start.sprintf("%.2d:%.2d-",ev.start().hour(),ev.start().minute());
+		middle.sprintf("<--->");
+		end.sprintf("-%.2d:%.2d",ev.end().hour(),ev.end().minute());
+		day.sprintf("%.2d:%.2d-%.2d:%.2d",ev.start().hour(),ev.start().minute(),ev.end().hour(),ev.end().minute());
+	}
+
+	if(ev.event().type() == Event::Normal) {
+		if(ev.startDate()==ev.date() && ev.endDate()==ev.date()) {	// day event.
+			s=day;
+		} else if(ev.startDate()==ev.date()) {	// start event.
+			s=start;
+		} else if(ev.endDate()==ev.date()) { // end event.
+			s=end;
+		} else {	// middle day.
+			s=middle;
 		}
 	} else {
-		if(ev.event().type() == Event::Normal )
-			sprintf(s,"%.2d:%.2d",ev.start().hour(),ev.start().minute());
-		else
-			sprintf(s,"     ");
+		s="";
 	}
 	setText(QString(s) + " " + ev.description());
 	connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
 	setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
 }
 void DateBookWeekLstEvent::editMe() {
-    emit editEvent(event.event());
+	emit editEvent(event.event());
 }
 
 
@@ -177,45 +199,44 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 					 const char* name, WFlags fl)
     : QWidget( parent, name, fl )
 {
-    onMonday=onM;
-    setPalette(white);
-    setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
+	Config config("DateBook");
+	config.setGroup("Main");
+	int weeklistviewconfig=config.readNumEntry("weeklistviewconfig", NORMAL);
+	qDebug("Read weeklistviewconfig: %d",weeklistviewconfig);
 
-    QVBoxLayout *layout = new QVBoxLayout( this );
+	onMonday=onM;
+	setPalette(white);
+	setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
 
-    qBubbleSort(ev);
-    QValueListIterator<EffectiveEvent> it;
-    it=ev.begin();
+	QVBoxLayout *layout = new QVBoxLayout( this );
 
-    int dayOrder[7];
-    if (onMonday)
-	for (int d=0; d<7; d++) dayOrder[d]=d+1;
-    else {
-	for (int d=0; d<7; d++) dayOrder[d]=d;
-	dayOrder[0]=7;
-    }
+	qBubbleSort(ev);
+	QValueListIterator<EffectiveEvent> it;
+	it=ev.begin();
+
+	int dayOrder[7];
+	if (onMonday) {
+		for (int d=0; d<7; d++) dayOrder[d]=d+1;
+	} else {
+		for (int d=0; d<7; d++) dayOrder[d]=d;
+		dayOrder[0]=7;
+	}
 
     for (int i=0; i<7; i++) {
 	// Header
-	DateBookWeekLstDayHdr *hdr=new DateBookWeekLstDayHdr(d.addDays(i),
-							     onMonday,this);
+	DateBookWeekLstDayHdr *hdr=new DateBookWeekLstDayHdr(d.addDays(i), onMonday,this);
 	connect(hdr, SIGNAL(showDate(int,int,int)),
 		this, SIGNAL(showDate(int,int,int)));
-	connect(hdr, SIGNAL(addEvent(const QDateTime &,
-				     const QDateTime &,
-				     const QString &, const QString &)),
-		this, SIGNAL(addEvent(const QDateTime &,
-				      const QDateTime &,
-				      const QString &, const QString &)));
+	connect(hdr, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)),
+		this, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)));
 	layout->addWidget(hdr);
 
 	// Events
 	while ( (*it).date().dayOfWeek() == dayOrder[i] && it!=ev.end() ) {
 		if(!(((*it).end().hour()==0) && ((*it).end().minute()==0) && ((*it).startDate()!=(*it).date()))) {	// Skip events ending at 00:00 starting at another day.
-			DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,this);
+			DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,weeklistviewconfig,this);
 			layout->addWidget(l);
-			connect (l, SIGNAL(editEvent(const Event &)),
-							this, SIGNAL(editEvent(const Event &)));
+			connect (l, SIGNAL(editEvent(const Event &)), this, SIGNAL(editEvent(const Event &)));
 		}
 		it++;
 	}
@@ -233,30 +254,22 @@ DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
 					       const char* name, WFlags fl)
     : QWidget( parent, name, fl )
 {
-    QHBoxLayout *layout = new QHBoxLayout( this );
+	QHBoxLayout *layout = new QHBoxLayout( this );
 
-    DateBookWeekLstView *w=new DateBookWeekLstView(ev1,d,onM,this);
-    layout->addWidget(w);
-    connect (w, SIGNAL(editEvent(const Event &)),
-	     this, SIGNAL(editEvent(const Event &)));
-    connect (w, SIGNAL(showDate(int,int,int)),
-	     this, SIGNAL(showDate(int,int,int)));
-    connect (w, SIGNAL(addEvent(const QDateTime &, const QDateTime &,
-				const QString &,const QString &)),
-	     this, SIGNAL(addEvent(const QDateTime &, const QDateTime &,
-				   const QString &, const QString &)));
+	DateBookWeekLstView *w=new DateBookWeekLstView(ev1,d,onM,this);
+	layout->addWidget(w);
+	connect (w, SIGNAL(editEvent(const Event &)), this, SIGNAL(editEvent(const Event &)));
+	connect (w, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
+	connect (w, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &,const QString &)),
+		this, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)));
 
 
-    w=new DateBookWeekLstView(ev2,d.addDays(7),onM,this);
-    layout->addWidget(w);
-    connect (w, SIGNAL(editEvent(const Event &)),
-	     this, SIGNAL(editEvent(const Event &)));
-    connect (w, SIGNAL(showDate(int,int,int)),
-	     this, SIGNAL(showDate(int,int,int)));
-    connect (w, SIGNAL(addEvent(const QDateTime &, const QDateTime &,
-				const QString &, const QString &)),
-	     this, SIGNAL(addEvent(const QDateTime &, const QDateTime &,
-				   const QString &, const QString &)));
+	w=new DateBookWeekLstView(ev2,d.addDays(7),onM,this);
+	layout->addWidget(w);
+	connect (w, SIGNAL(editEvent(const Event &)), this, SIGNAL(editEvent(const Event &)));
+	connect (w, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
+	connect (w, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)),
+		this, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)));
 }
 
 DateBookWeekLst::DateBookWeekLst( bool ap, bool onM, DateBookDB *newDB,
@@ -274,108 +287,104 @@ DateBookWeekLst::DateBookWeekLst( bool ap, bool onM, DateBookDB *newDB,
 
     header=new DateBookWeekLstHeader(onM, this);
     layout->addWidget( header );
-    connect(header, SIGNAL(dateChanged(int,int)),
-	    this, SLOT(dateChanged(int,int)));
-    connect(header, SIGNAL(setDbl(bool)),
-	    this, SLOT(setDbl(bool)));
+    connect(header, SIGNAL(dateChanged(int,int)), this, SLOT(dateChanged(int,int)));
+    connect(header, SIGNAL(setDbl(bool)), this, SLOT(setDbl(bool)));
 
-    scroll=new QScrollView(this);
-    //scroll->setVScrollBarMode(QScrollView::AlwaysOn);
-    //scroll->setHScrollBarMode(QScrollView::AlwaysOff);
-    scroll->setResizePolicy(QScrollView::AutoOneFit);
-    layout->addWidget(scroll);
+	scroll=new QScrollView(this);
+	//scroll->setVScrollBarMode(QScrollView::AlwaysOn);
+	//scroll->setHScrollBarMode(QScrollView::AlwaysOff);
+	scroll->setResizePolicy(QScrollView::AutoOneFit);
+	layout->addWidget(scroll);
 
-    view=NULL;
-    Config config("DateBook");
-    config.setGroup("Main");
-    dbl=config.readBoolEntry("weeklst_dbl", false);
-    header->dbl->setOn(dbl);
+	view=NULL;
+	Config config("DateBook");
+	config.setGroup("Main");
+	dbl=config.readBoolEntry("weeklst_dbl", false);
+	header->dbl->setOn(dbl);
 }
 DateBookWeekLst::~DateBookWeekLst(){
-    Config config("DateBook");
-    config.setGroup("Main");
-    config.writeEntry("weeklst_dbl", dbl);
+	Config config("DateBook");
+	config.setGroup("Main");
+	config.writeEntry("weeklst_dbl", dbl);
 }
 
 void DateBookWeekLst::setDate(const QDate &d) {
-    int w,y;
-    calcWeek(d,w,y,onMonday);
-    year=y;
-    _week=w;
-    header->setDate(date());
+	int w,y;
+	calcWeek(d,w,y,onMonday);
+	year=y;
+	_week=w;
+	header->setDate(date());
 }
 void DateBookWeekLst::setDbl(bool on) {
-    dbl=on;
-    redraw();
+	dbl=on;
+	redraw();
 }
 void DateBookWeekLst::redraw() {getEvents();}
 
 QDate DateBookWeekLst::date() const {
-    QDate d;
-    d.setYMD(year,1,1);
+	QDate d;
+	d.setYMD(year,1,1);
 
-    int dow= d.dayOfWeek();
-    if (!onMonday)
-	if (dow==7) dow=1;
-	else dow++;
+	int dow= d.dayOfWeek();
+	if (!onMonday)
+	if (dow==7) {
+		dow=1;
+	} else {
+		dow++;
+	}
 
-    d=d.addDays( (_week-1)*7 - dow + 1 );
-    return d;
+	d=d.addDays( (_week-1)*7 - dow + 1 );
+	return d;
 }
 
 void DateBookWeekLst::getEvents() {
-    QDate start = date();
-    QDate stop = start.addDays(6);
-    QValueList<EffectiveEvent> el = db->getEffectiveEvents(start, stop);
+	QDate start = date();
+	QDate stop = start.addDays(6);
+	QValueList<EffectiveEvent> el = db->getEffectiveEvents(start, stop);
 
-    if (view) delete view;
-    if (dbl) {
-	QDate start2=start.addDays(7);
-	stop=start2.addDays(6);
-	QValueList<EffectiveEvent> el2 = db->getEffectiveEvents(start2, stop);
+	if (view) delete view;
+	if (dbl) {
+		QDate start2=start.addDays(7);
+		stop=start2.addDays(6);
+		QValueList<EffectiveEvent> el2 = db->getEffectiveEvents(start2, stop);
+		view=new DateBookWeekLstDblView(el,el2,start,onMonday,scroll);
+	} else {
+		view=new DateBookWeekLstView(el,start,onMonday,scroll);
+	}
 
-	view=new DateBookWeekLstDblView(el,el2,start,onMonday,scroll);
-    } else {
-	view=new DateBookWeekLstView(el,start,onMonday,scroll);
-    }
+	connect (view, SIGNAL(editEvent(const Event &)), this, SIGNAL(editEvent(const Event &)));
+	connect (view, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
+	connect (view, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)),
+		this, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)));
 
-    connect (view, SIGNAL(editEvent(const Event &)),
-	     this, SIGNAL(editEvent(const Event &)));
-    connect (view, SIGNAL(showDate(int,int,int)),
-	     this, SIGNAL(showDate(int,int,int)));
-    connect (view, SIGNAL(addEvent(const QDateTime &, const QDateTime &,
-				   const QString &, const QString &)),
-	     this, SIGNAL(addEvent(const QDateTime &, const QDateTime &,
-				   const QString &, const QString &)));
-
-    scroll->addChild(view);
-    view->show();
-    scroll->updateScrollBars();
+	scroll->addChild(view);
+	view->show();
+	scroll->updateScrollBars();
 }
 
 void DateBookWeekLst::dateChanged(int y, int w) {
-    year=y;
-    _week=w;
-    getEvents();
+	year=y;
+	_week=w;
+	getEvents();
 }
 
 void DateBookWeekLst::keyPressEvent(QKeyEvent *e)
 {
-    switch(e->key()) {
-    case Key_Up:
-	scroll->scrollBy(0, -20);
-	break;
-    case Key_Down:
-	scroll->scrollBy(0, 20);
-	break;
-    case Key_Left:
-	header->prevWeek();
-	break;
-    case Key_Right:
-	header->nextWeek();
-	break;
-    default:
-	e->ignore();
-    }
+	switch(e->key()) {
+		case Key_Up:
+			scroll->scrollBy(0, -20);
+			break;
+		case Key_Down:
+			scroll->scrollBy(0, 20);
+			break;
+		case Key_Left:
+			header->prevWeek();
+			break;
+		case Key_Right:
+			header->nextWeek();
+			break;
+		default:
+			e->ignore();
+	}
 }
 

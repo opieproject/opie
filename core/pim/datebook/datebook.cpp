@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.21 2003-04-12 01:19:53 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.22 2003-04-12 03:56:46 umopapisdn Exp $
 **
 **********************************************************************/
 
@@ -69,12 +69,6 @@
 #include <unistd.h>
 
 #include <stdlib.h>
-
-#define DAY 1
-#define WEEK 2
-#define WEEKLST 4
-#define MONTH 3
-
 
 DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     : QMainWindow( parent, "datebook", f ),
@@ -166,56 +160,29 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     connect( a, SIGNAL(activated()), this, SLOT(slotFind()) );
     a->addTo( sub_bar );
 
-    a = new QAction( tr( "Alarm and Start Time..." ), QString::null, 0, 0 );
+    a = new QAction( tr( "Edit..." ), QString::null, 0, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
     a->addTo( settings );
 
-    QPopupMenu *default_view = new QPopupMenu(this);
-    settings->insertItem( tr( "Default View" ),default_view );
-    default_view->setCheckable(TRUE);
+	if(defaultView==DAY) viewDay();
+	if(defaultView==WEEK) needEvilHack=true;	// viewWeek();
+	if(defaultView==WEEKLST) viewWeekLst();
+	if(defaultView==MONTH) viewMonth();
 
-    Config config("DateBook");
-    config.setGroup("Main");
-    int current=config.readNumEntry("defaultview", DAY);
-
-    QActionGroup *ag = new QActionGroup(this);
-    a = new QAction( tr( "Day" ), QString::null, 0, 0, 0, true );
-    if (current==DAY) a->setOn(true), viewDay();
-    ag->insert(a);
-    a = new QAction( tr( "Week" ), QString::null, 0, 0, 0, true );
-    if (current==WEEK) a->setOn(true), /*viewWeek(),*/ needEvilHack = true;
-    ag->insert(a);
-    a = new QAction( tr( "WeekLst" ), QString::null, 0, 0, 0, true );
-    if (current==WEEKLST) a->setOn(true), viewWeekLst();
-    ag->insert(a);
-    a = new QAction( tr( "Month" ), QString::null, 0, 0, 0, true );
-    if (current==MONTH) a->setOn(true), viewMonth();
-    ag->insert(a);
-
-    ag->addTo(default_view);
-    connect(ag, SIGNAL( selected ( QAction * ) ),
-	    this, SLOT( newDefaultView(QAction *) )
-	    );
-
-    connect( qApp, SIGNAL(clockChanged(bool)),
-             this, SLOT(changeClock(bool)) );
-    connect( qApp, SIGNAL(weekChanged(bool)),
-             this, SLOT(changeWeek(bool)) );
+	connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(changeClock(bool)) );
+    connect( qApp, SIGNAL(weekChanged(bool)), this, SLOT(changeWeek(bool)) );
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
-    connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
-	     this, SLOT(appMessage(const QCString&, const QByteArray&)) );
+    connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)), this, SLOT(appMessage(const QCString&, const QByteArray&)) );
 #endif
 
     // listen on QPE/System
 #if defined(Q_WS_QWS)
 #if !defined(QT_NO_COP)
     QCopChannel *channel = new QCopChannel( "QPE/System", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-	     this, SLOT(receive(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
     channel = new QCopChannel( "QPE/Datebook", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-	     this, SLOT(receive(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
     qDebug("olle\n");
 #endif
 #endif
@@ -267,11 +234,14 @@ DateBook::~DateBook()
 
 void DateBook::slotSettings()
 {
-    DateBookSettings frmSettings( ampm, this );
-    frmSettings.setStartTime( startTime );
-    frmSettings.setAlarmPreset( aPreset, presetTime );
-    frmSettings.setJumpToCurTime( bJumpToCurTime );
-    frmSettings.setRowStyle( rowStyle );
+	DateBookSettings frmSettings( ampm, this );
+	frmSettings.setStartTime( startTime );
+	frmSettings.setAlarmPreset( aPreset, presetTime );
+	frmSettings.setJumpToCurTime( bJumpToCurTime );
+	frmSettings.setRowStyle( rowStyle );
+	frmSettings.comboDefaultView->setCurrentItem(defaultView-1);
+	frmSettings.comboWeekListView->setCurrentItem(weeklistviewconfig);
+
 #if defined (Q_WS_QWS) || defined(_WS_QWS_)
     frmSettings.showMaximized();
 #endif
@@ -283,6 +253,8 @@ void DateBook::slotSettings()
 		startTime = frmSettings.startTime();
 		bJumpToCurTime = frmSettings.jumpToCurTime();
 		rowStyle = frmSettings.rowStyle();
+		defaultView=frmSettings.comboDefaultView->currentItem()+1;
+		weeklistviewconfig=frmSettings.comboWeekListView->currentItem();
 
 		if ( dayView ) {
 			dayView->setStartViewTime( startTime );
@@ -300,6 +272,8 @@ void DateBook::slotSettings()
 				dayView->redraw();
 			else if ( views->visibleWidget() == weekView )
 				weekView->redraw();
+			else if ( views->visibleWidget() == weekLstView )
+				weekLstView->redraw();
 		}
 	}
 }
@@ -383,11 +357,14 @@ void DateBook::view(int v, const QDate &d) {
 }
 
 void DateBook::viewDefault(const QDate &d) {
+/*
   Config config("DateBook");
   config.setGroup("Main");
   int current=config.readNumEntry("defaultview", DAY);
 
   view(current,d);
+*/
+	view(defaultView,d);
 }
 
 void DateBook::viewDay() {
@@ -608,14 +585,11 @@ void DateBook::initMonth()
 
 void DateBook::loadSettings()
 {
-    {
-	Config config( "qpe" );
-	config.setGroup("Time");
-	ampm = config.readBoolEntry( "AMPM", TRUE );
-	onMonday = config.readBoolEntry( "MONDAY" );
-    }
+	Config qpeconfig( "qpe" );
+	qpeconfig.setGroup("Time");
+	ampm = qpeconfig.readBoolEntry( "AMPM", TRUE );
+	onMonday = qpeconfig.readBoolEntry( "MONDAY" );
 
-    {
 	Config config("DateBook");
 	config.setGroup("Main");
 	startTime = config.readNumEntry("startviewtime", 8);
@@ -623,206 +597,190 @@ void DateBook::loadSettings()
 	presetTime = config.readNumEntry("presettime");
 	bJumpToCurTime = config.readBoolEntry("jumptocurtime");
 	rowStyle = config.readNumEntry("rowstyle");
-    }
+	defaultView = config.readNumEntry("defaultview",DAY);
+	weeklistviewconfig = config.readNumEntry("weeklistviewconfig",NORMAL);
 }
 
 void DateBook::saveSettings()
 {
-    Config config( "qpe" );
-    Config configDB( "DateBook" );
-    configDB.setGroup( "Main" );
-    configDB.writeEntry("startviewtime",startTime);
-    configDB.writeEntry("alarmpreset",aPreset);
-    configDB.writeEntry("presettime",presetTime);
-    configDB.writeEntry("jumptocurtime", bJumpToCurTime);
-    configDB.writeEntry("rowstyle", rowStyle);
-}
-
-void DateBook::newDefaultView(QAction *a) {
-    int val=DAY;
-    if (a->text() == "Day") val=DAY;
-    if (a->text() == "Week") val=WEEK;
-    if (a->text() == "WeekLst") val=WEEKLST;
-    if (a->text() == "Month") val=MONTH;
-
-    Config configDB( "DateBook" );
-    configDB.setGroup( "Main" );
-    configDB.writeEntry("defaultview",val);
+	Config config( "qpe" );
+	Config configDB( "DateBook" );
+	configDB.setGroup( "Main" );
+	configDB.writeEntry("startviewtime",startTime);
+	configDB.writeEntry("alarmpreset",aPreset);
+	configDB.writeEntry("presettime",presetTime);
+	configDB.writeEntry("jumptocurtime", bJumpToCurTime);
+	configDB.writeEntry("rowstyle", rowStyle);
+	configDB.writeEntry("defaultview",defaultView);
+	configDB.writeEntry("weeklistviewconfig",weeklistviewconfig);
 }
 
 void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 {
-    bool needShow = FALSE;
-    if ( msg == "alarm(QDateTime,int)" ) {
-	QDataStream ds(data,IO_ReadOnly);
-	QDateTime when; int warn;
-	ds >> when >> warn;
+	bool needShow = FALSE;
+	if ( msg == "alarm(QDateTime,int)" ) {
+		QDataStream ds(data,IO_ReadOnly);
+		QDateTime when; int warn;
+		ds >> when >> warn;
 
-	// check to make it's okay to continue,
-	// this is the case that the time was set ahead, and
-	// we are forced given a stale alarm...
-	QDateTime current = QDateTime::currentDateTime();
-	if ( current.time().hour() != when.time().hour()
-	     && current.time().minute() != when.time().minute() )
-	    return;
+		// check to make it's okay to continue,
+		// this is the case that the time was set ahead, and
+		// we are forced given a stale alarm...
+		QDateTime current = QDateTime::currentDateTime();
+		if ( current.time().hour() != when.time().hour() && current.time().minute() != when.time().minute() )
+			return;
 
-	QValueList<EffectiveEvent> list = db->getEffectiveEvents(when.addSecs(warn*60));
-	if ( list.count() > 0 ) {
-	    QString msg;
-	    bool bSound = FALSE;
-	    int stopTimer = 0;
-	    bool found = FALSE;
-	    for ( QValueList<EffectiveEvent>::ConstIterator it=list.begin();
-		  it!=list.end(); ++it ) {
-		if ( (*it).event().hasAlarm() ) {
-		    found = TRUE;
-		    msg += "<CENTER><B>" + (*it).description() + "</B>"
-			   + "<BR>" + (*it).location() + "<BR>"
-			   + TimeString::dateString((*it).event().start(),ampm)
-			   + (warn
-			      ? tr(" (in " + QString::number(warn)
-				   + tr(" minutes)"))
-			      : QString(""))
-			   + "<BR>"
-			   + (*it).notes() + "</CENTER>";
-		    if ( (*it).event().alarmSound() != Event::Silent ) {
-			bSound = TRUE;
-		    }
-		}
-	    }
-	    if ( found ) {
-		if ( bSound ) {
-		    Sound::soundAlarm();
-		    alarmCounter = 0;
-		    stopTimer = startTimer( 5000 );
-		}
-
-		QDialog dlg( this, 0, TRUE );
-		QVBoxLayout *vb = new QVBoxLayout( &dlg );
-		QScrollView *view = new QScrollView( &dlg, "scrollView");
-		view->setResizePolicy( QScrollView::AutoOneFit );
-		vb->addWidget( view );
-		QLabel *lblMsg = new QLabel( msg, &dlg );
-		view->addChild( lblMsg );
-		QPushButton *cmdOk = new QPushButton( tr("OK"), &dlg );
-		connect( cmdOk, SIGNAL(clicked()), &dlg, SLOT(accept()) );
-		vb->addWidget( cmdOk );
+		QValueList<EffectiveEvent> list = db->getEffectiveEvents(when.addSecs(warn*60));
+		if ( list.count() > 0 ) {
+			QString msg;
+			bool bSound = FALSE;
+			int stopTimer = 0;
+			bool found = FALSE;
+			for ( QValueList<EffectiveEvent>::ConstIterator it=list.begin(); it!=list.end(); ++it ) {
+				if ( (*it).event().hasAlarm() ) {
+					found = TRUE;
+					msg += "<CENTER><B>" + (*it).description() + "</B>"
+					+ "<BR>" + (*it).location() + "<BR>"
+					+ TimeString::dateString((*it).event().start(),ampm)
+					+ (warn
+						? tr(" (in " + QString::number(warn)
+						+ tr(" minutes)"))
+						: QString(""))
+					+ "<BR>"
+					+ (*it).notes() + "</CENTER>";
+					if ( (*it).event().alarmSound() != Event::Silent ) {
+						bSound = TRUE;
+					}
+				}
+			}
+			if ( found ) {
+				if ( bSound ) {
+					Sound::soundAlarm();
+					alarmCounter = 0;
+					stopTimer = startTimer( 5000 );
+				}
+				QDialog dlg( this, 0, TRUE );
+				QVBoxLayout *vb = new QVBoxLayout( &dlg );
+				QScrollView *view = new QScrollView( &dlg, "scrollView");
+				view->setResizePolicy( QScrollView::AutoOneFit );
+				vb->addWidget( view );
+				QLabel *lblMsg = new QLabel( msg, &dlg );
+				view->addChild( lblMsg );
+				QPushButton *cmdOk = new QPushButton( tr("OK"), &dlg );
+				connect( cmdOk, SIGNAL(clicked()), &dlg, SLOT(accept()) );
+				vb->addWidget( cmdOk );
 
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
-		dlg.showMaximized();
+				dlg.showMaximized();
 #endif
-		needShow = dlg.exec();
+				needShow = dlg.exec();
 
-		if ( bSound )
-		    killTimer( stopTimer );
-	    }
-	}
-    } else if ( msg == "nextView()" ) {
-	if ( !qApp-> activeWindow ( )) {
-	    needShow = TRUE;
-	}
-	else {
-	    QWidget* cur = views->visibleWidget();
-	    if ( cur ) {
-		if ( cur == dayView )
-		    viewWeek();
-		else if ( cur == weekView )
-		    viewWeekLst();
-		else if ( cur == weekLstView )
-		    viewMonth();
-		else if ( cur == monthView )
-		    viewDay();
-		needShow = TRUE;
-	    }
-	}
+				if ( bSound )
+					killTimer( stopTimer );
+				}
+			}
+		} else if ( msg == "nextView()" ) {
+			if ( !qApp-> activeWindow ( )) {
+				needShow = TRUE;
+			} else {
+				QWidget* cur = views->visibleWidget();
+				if ( cur ) {
+				if ( cur == dayView )
+					viewWeek();
+				else if ( cur == weekView )
+					viewWeekLst();
+				else if ( cur == weekLstView )
+					viewMonth();
+				else if ( cur == monthView )
+					viewDay();
+				needShow = TRUE;
+			}
+		}
     }
     if ( needShow ) {
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
-	showMaximized();
+		showMaximized();
 #else
-	show();
+		show();
 #endif
-	raise();
-	QPEApplication::setKeepRunning();
-	setActiveWindow();
-    }
+		raise();
+		QPEApplication::setKeepRunning();
+		setActiveWindow();
+	}
 }
 
 void DateBook::reload()
 {
-    db->reload();
-    if ( dayAction->isOn() )
-	viewDay();
-    else if ( weekAction->isOn() )
-	viewWeek();
-    else if ( monthAction->isOn() )
-	viewMonth();
-    syncing = FALSE;
+	db->reload();
+	if ( dayAction->isOn() ) viewDay();
+	else if ( weekAction->isOn() ) viewWeek();
+	else if ( monthAction->isOn() ) viewMonth();
+	syncing = FALSE;
 }
 
 void DateBook::flush()
 {
-    syncing = TRUE;
-    db->save();
+	syncing = TRUE;
+	db->save();
 }
 
 void DateBook::timerEvent( QTimerEvent *e )
 {
-    if ( alarmCounter < 10 ) {
-	alarmCounter++;
-	Sound::soundAlarm();
-    }
-    else
-	killTimer( e->timerId() );
+	if ( alarmCounter < 10 ) {
+		alarmCounter++;
+		Sound::soundAlarm();
+	} else {
+		killTimer( e->timerId() );
+	}
 }
 
 void DateBook::changeClock( bool newClock )
 {
-    ampm = newClock;
-    // repaint the affected objects...
-    if (dayView) dayView->redraw();
-    if (weekView) weekView->redraw();
-    if (weekLstView) weekLstView->redraw();
+	ampm = newClock;
+	// repaint the affected objects...
+	if (dayView) dayView->redraw();
+	if (weekView) weekView->redraw();
+	if (weekLstView) weekLstView->redraw();
 }
 
 void DateBook::changeWeek( bool m )
 {
-    /* no need to redraw, each widget catches.  Do need to
-       store though for widgets we haven't made yet */
-    onMonday = m;
+	/* no need to redraw, each widget catches.  Do need to
+	store though for widgets we haven't made yet */
+	onMonday = m;
 }
 
 void DateBook::slotToday()
 {
-    // we need to view today using default view
-    viewDefault(QDate::currentDate());
+	// we need to view today using default view
+	view(defaultView,QDate::currentDate());
 }
 
 void DateBook::closeEvent( QCloseEvent *e )
 {
-    if(syncing) {
-	/* no need to save, did that at flush */
-	e->accept();
-	return;
-    }
+	if(syncing) {
+		/* no need to save, did that at flush */
+		e->accept();
+		return;
+	}
 
-    // save settings will generate it's own error messages, no
-    // need to do checking ourselves.
-    saveSettings();
-    if ( db->save() )
-	e->accept();
-    else {
-	if ( QMessageBox::critical( this, tr( "Out of space" ),
-				    tr("Calendar was unable to save\n"
-				       "your changes.\n"
-				       "Free up some space and try again.\n"
-				       "\nQuit anyway?"),
-				    QMessageBox::Yes|QMessageBox::Escape,
-				    QMessageBox::No|QMessageBox::Default )
-	     != QMessageBox::No )
-	    e->accept();
-	else
-	    e->ignore();
+	// save settings will generate it's own error messages, no
+	// need to do checking ourselves.
+	saveSettings();
+	if ( db->save() ) {
+		e->accept();
+	} else {
+		if ( QMessageBox::critical( this, tr( "Out of space" ),
+						tr("Calendar was unable to save\n"
+						"your changes.\n"
+						"Free up some space and try again.\n"
+						"\nQuit anyway?"),
+						QMessageBox::Yes|QMessageBox::Escape,
+						QMessageBox::No|QMessageBox::Default )
+			!= QMessageBox::No )
+			e->accept();
+		else
+			e->ignore();
     }
 }
 

@@ -59,8 +59,8 @@ class DateBookWeekLstEvent: public OClickableLabel
 {
   Q_OBJECT
 public:
-    DateBookWeekLstEvent(const EffectiveEvent &ev, 
-			 QWidget* parent = 0, const char* name = 0, 
+    DateBookWeekLstEvent(const EffectiveEvent &ev, int weeklistviewconfig =1,
+			 QWidget* parent = 0, const char* name = 0,
 			 WFlags fl = 0);
 signals:
     void editEvent(const Event &e);
@@ -75,7 +75,7 @@ class DateBookWeekLstView: public QWidget
     Q_OBJECT
 public:
     DateBookWeekLstView(QValueList<EffectiveEvent> &ev, const QDate &d, bool onM,
-			QWidget* parent = 0, const char* name = 0, 
+			QWidget* parent = 0, const char* name = 0,
 			WFlags fl = 0 );
     ~DateBookWeekLstView();
 signals:
@@ -92,10 +92,10 @@ protected slots:
 class DateBookWeekLstDblView: public QWidget {
         Q_OBJECT
 public:
-    DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1, 
-			   QValueList<EffectiveEvent> &ev2, 
+    DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
+			   QValueList<EffectiveEvent> &ev2,
 			   QDate &d, bool onM,
-			   QWidget* parent = 0, const char* name = 0, 
+			   QWidget* parent = 0, const char* name = 0,
 			   WFlags fl = 0 );
 signals:
     void editEvent(const Event &e);
@@ -104,20 +104,20 @@ signals:
 		  const QString &str, const QString &location);
 };
 
-class DateBookWeekLst : public QWidget 
+class DateBookWeekLst : public QWidget
 {
     Q_OBJECT
 
 public:
-    DateBookWeekLst( bool ampm, bool onM, DateBookDB *newDB, 
-		     QWidget *parent = 0, 
+    DateBookWeekLst( bool ampm, bool onM, DateBookDB *newDB,
+		     QWidget *parent = 0,
 		     const char *name = 0 );
     ~DateBookWeekLst();
     void setDate( int y, int w );
     void setDate(const QDate &d );
     int week() const { return _week; };
     QDate date() const;
-    
+
 public slots:
     void redraw();
     void dateChanged(int y, int w);
@@ -128,7 +128,7 @@ protected slots:
 
 signals:
     void showDate(int y, int m, int d);
-    void addEvent(const QDateTime &start, const QDateTime &stop, 
+    void addEvent(const QDateTime &start, const QDateTime &stop,
 		  const QString &str, const QString &location);
     void editEvent(const Event &e);
 

@@ -24,6 +24,9 @@
 
 #include <qmainwindow.h>
 
+enum { DAY=1,WEEK,WEEKLST,MONTH };	// defaultView values
+enum { NONE=0,NORMAL,EXTENDED };	// WeekLstView's modes.
+
 class QAction;
 class QWidgetStack;
 class DateBookDay;
@@ -67,7 +70,6 @@ private slots:
     void fileNew();
     void slotNewEntry(const QDateTime &start, const QDateTime &end, const QString &str, const QString &location=0);
     void slotSettings();
-    void newDefaultView(QAction *a);
     void slotToday();	// view today
     void changeClock( bool newClock );
     void changeWeek( bool newDay );
@@ -112,11 +114,13 @@ private:
     DateBookMonth *monthView;
     DateBookWeekLst *weekLstView;
     QAction *dayAction, *weekAction, *weekLstAction, *monthAction;
+	int weeklistviewconfig;
     bool aPreset;    // have everything set to alarm?
     int presetTime;  // the standard time for the alarm
     int startTime;
     int rowStyle;
-    bool bJumpToCurTime; //should jump to current time in dayview?
+	int defaultView;
+	bool bJumpToCurTime; //should jump to current time in dayview?
     bool ampm;
     bool onMonday;
 
