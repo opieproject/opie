@@ -23,6 +23,8 @@
 class QString;
 class ManufacturerDB;
 
+class MScanListItem;
+
 class MScanListView: public OListView
 {
   Q_OBJECT
@@ -39,7 +41,13 @@ class MScanListView: public OListView
 
   public slots:
     void addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
-    void traffic( QString type, QString from, QString to, QString via, QString additional = QString::null );
+    void fromDStraffic( QString from, QString to, QString via ); // NYI
+    void toDStraffic( QString from, QString to, QString via );
+    void WDStraffic( QString from, QString to, QString viaFrom, QString viaTo );
+    void IBSStraffic( QString from, QString to, QString via ); // NYI
+
+  protected:
+    void addIfNotExisting( MScanListItem* parent, QString addr );
 
   private:
     ManufacturerDB* _manufacturerdb;

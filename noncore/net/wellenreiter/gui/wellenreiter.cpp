@@ -180,9 +180,9 @@ void Wellenreiter::receivePacket(OPacket* p)
                 (const char*) wlan->macAddress3().toString(true),
                 (const char*) wlan->macAddress1().toString(true),
                 (const char*) wlan->macAddress2().toString(true) );
-            netView()->traffic( "fromDS", wlan->macAddress3().toString(),
-                                        wlan->macAddress1().toString(),
-                                        wlan->macAddress2().toString() );
+            netView()->fromDStraffic( wlan->macAddress3().toString(),
+                                      wlan->macAddress1().toString(),
+                                      wlan->macAddress2().toString() );
         }
         else
         if ( !wlan->fromDS() && wlan->toDS() )
@@ -191,22 +191,22 @@ void Wellenreiter::receivePacket(OPacket* p)
                 (const char*) wlan->macAddress2().toString(true),
                 (const char*) wlan->macAddress3().toString(true),
                 (const char*) wlan->macAddress1().toString(true) );
-            netView()->traffic( "toDS", wlan->macAddress2().toString(),
-                                      wlan->macAddress3().toString(),
-                                      wlan->macAddress1().toString() );
+            netView()->toDStraffic( wlan->macAddress2().toString(),
+                                    wlan->macAddress3().toString(),
+                                    wlan->macAddress1().toString() );
         }
         else
         if ( wlan->fromDS() && wlan->toDS() )
         {
-            qDebug( "WSD(bridge) traffic: '%s' -> '%s' via '%s' and '%s'",
+            qDebug( "WDS(bridge) traffic: '%s' -> '%s' via '%s' and '%s'",
                 (const char*) wlan->macAddress4().toString(true),
                 (const char*) wlan->macAddress3().toString(true),
                 (const char*) wlan->macAddress1().toString(true),
                 (const char*) wlan->macAddress2().toString(true) );
-            netView()->traffic( "WSD", wlan->macAddress4().toString(),
-                                     wlan->macAddress3().toString(),
-                                     wlan->macAddress1().toString(),
-                                     wlan->macAddress2().toString() );
+            netView()->WDStraffic( wlan->macAddress4().toString(),
+                                   wlan->macAddress3().toString(),
+                                   wlan->macAddress1().toString(),
+                                   wlan->macAddress2().toString() );
         }
         else
         {
@@ -214,9 +214,9 @@ void Wellenreiter::receivePacket(OPacket* p)
                 (const char*) wlan->macAddress2().toString(true),
                 (const char*) wlan->macAddress1().toString(true),
                 (const char*) wlan->macAddress3().toString(true) );
-            netView()->traffic( "IBSS", wlan->macAddress2().toString(),
-                                        wlan->macAddress1().toString(),
-                                        wlan->macAddress3().toString() );
+            netView()->IBSStraffic( wlan->macAddress2().toString(),
+                                    wlan->macAddress1().toString(),
+                                    wlan->macAddress3().toString() );
         }
         return;
     }

@@ -191,14 +191,60 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
 
 }
 
-void MScanListView::traffic( QString type, QString from, QString to, QString via, QString additional )
+
+void MScanListView::addIfNotExisting( MScanListItem* network, QString addr )
 {
-    if ( type != "toDS" ) return;
+    MScanListItem* subitem = static_cast<MScanListItem*>( network->firstChild() );
 
-    qDebug( "MScanList::traffic( [%s] | %s -> %s (via %s)",
-        (const char*) type, (const char*) from,
-        (const char*) to, (const char*) via );
+    while ( subitem && ( subitem->text( col_ap ) != addr ) )
+    {
+        qDebug( "subitemtext: %s", (const char*) subitem->text( col_ap ) );
+        subitem = static_cast<MScanListItem*> ( subitem->itemBelow() );
+    }
 
+    if ( subitem )
+    {
+        // we have already seen this item, it's a dupe
+        #ifdef DEBUG
+        qDebug( "%s is a dupe - ignoring...", (const char*) addr );
+        #endif
+        subitem->receivedBeacon(); //FIXME: sent data bit
+        return;
+    }
+
+    // Hey, it seems to be a new item :-D
+    MScanListItem* station = new MScanListItem( network, "station", /* network->text( col_essid ) */ "", addr, false, -1, -1 );
+    if ( _manufacturerdb )
+    station->setManufacturer( _manufacturerdb->lookup( addr ) );
+}
+
+
+void MScanListView::WDStraffic( QString from, QString to, QString viaFrom, QString viaTo )
+{
+    QString s;
+    MScanListItem* network;
+
+    QListViewItemIterator it( this );
+    while ( it.current() &&
+            it.current()->text( col_ap ) != viaFrom &&
+            it.current()->text( col_ap ) != viaTo ) ++it;
+
+    MScanListItem* item = static_cast<MScanListItem*>( it.current() );
+
+    if ( item ) // Either viaFrom or viaTo AP has shown up yet, so just add our two new stations
+    {
+        addIfNotExisting( static_cast<MScanListItem*>(item->parent()), from );
+        addIfNotExisting( static_cast<MScanListItem*>(item->parent()), to );
+    }
+    else
+    {
+        qDebug( "D'Oh! Stations without AP... ignoring for now... will handle this in 1.1 version :-D" );
+    }
+}
+
+
+void MScanListView::toDStraffic( QString from, QString to, QString via )
+{
     QString s;
     MScanListItem* network;
 
@@ -207,36 +253,24 @@ void MScanListView::traffic( QString type, QString from, QString to, QString via
 
     MScanListItem* item = static_cast<MScanListItem*>( it.current() );
 
-    if ( item ) // AP has been shown up, so just add our new "from" - station
+    if ( item ) // AP has shown up yet, so just add our new "from" - station
     {
-        network = static_cast<MScanListItem*>( item->parent() );
-        MScanListItem* subitem = static_cast<MScanListItem*>( network->firstChild() );
-
-        while ( subitem && ( subitem->text( col_ap ) != from ) )
-        {
-            qDebug( "subitemtext: %s", (const char*) subitem->text( col_ap ) );
-            subitem = static_cast<MScanListItem*> ( subitem->itemBelow() );
-        }
-
-        if ( subitem )
-        {
-            // we have already seen this item, it's a dupe
-            #ifdef DEBUG
-            qDebug( "%s is a dupe - ignoring...", (const char*) from );
-            #endif
-            subitem->receivedBeacon(); //FIXME: sent data bit
-            return;
-        }
-
-        // Hey, it seems to be a new item :-D
-        MScanListItem* station = new MScanListItem( item->parent(), "adhoc", /* network->text( col_essid ) */ "", from, false, -1, -1 );
-        if ( _manufacturerdb )
-          station->setManufacturer( _manufacturerdb->lookup( from ) );
+        addIfNotExisting( static_cast<MScanListItem*>(item->parent()), from );
     }
     else
     {
-        qDebug( "D'Oh! Station without AP... ignoring for now... will handle this in alpha-4 version :-D" );
+        qDebug( "D'Oh! Station without AP... ignoring for now... will handle this in 1.1 :-D" );
     }
+}
+
+void MScanListView::fromDStraffic( QString from, QString to, QString via )
+{
+    qWarning( "D'oh! Not yet implemented..." );
+}
+
+void MScanListView::IBSStraffic( QString from, QString to, QString via )
+{
+    qWarning( "D'oh! Not yet implemented..." );
 }
 
 //============================================================
