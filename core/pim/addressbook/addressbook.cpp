@@ -80,6 +80,8 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	  useRegExp(false),
 	  doNotifyWrapAround(true),
 	  caseSensitive(false),
+	  m_useQtMail(true),
+	  m_useOpieMail(false),
 	  bAbEditFirstTime(TRUE),
 	  syncing(FALSE)
 {
@@ -91,6 +93,10 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	useRegExp = cfg.readBoolEntry( "useRegExp" );
 	caseSensitive = cfg.readBoolEntry( "caseSensitive" );
 	doNotifyWrapAround = cfg.readBoolEntry( "doNotifyWrapAround" );
+	cfg.setGroup("Mail");
+	m_useQtMail = cfg.readBoolEntry( "useQtMail" );
+	m_useOpieMail=cfg.readBoolEntry( "useOpieMail" );
+	
 
 	initFields();
 	
@@ -169,7 +175,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	connect( a, SIGNAL( activated() ), this, SLOT( slotFindClose() ) );
 	a->addTo( searchBar );
 
-	a = new QAction( tr( "Write Mail To" ), Resource::loadPixmap( "qtmail/reply" ),
+	a = new QAction( tr( "Write Mail To" ), Resource::loadPixmap( "mail/sendmail" ),
 			 QString::null, 0, this, 0 );
 	//a->setEnabled( FALSE ); we got support for it now :) zecke
 	actionMail = a;
@@ -282,12 +288,16 @@ void AddressbookWindow::slotConfig()
 	dlg -> setUseRegExp ( useRegExp );
 	dlg -> setBeCaseSensitive( caseSensitive );
 	dlg -> setSignalWrapAround( doNotifyWrapAround );
+	dlg -> setQtMail ( m_useQtMail );
+	dlg -> setOpieMail ( m_useOpieMail );
 	dlg -> showMaximized();
 	if ( dlg -> exec() ) {
 		qWarning ("Config Dialog accepted !");
 		useRegExp = dlg -> useRegExp();
 		caseSensitive = dlg -> beCaseSensitive();
 		doNotifyWrapAround = dlg -> signalWrapAround();
+		m_useQtMail = dlg -> useQtMail();
+		m_useOpieMail= dlg -> useOpieMail();
 	}
 
 	delete dlg;
@@ -380,6 +390,9 @@ AddressbookWindow::~AddressbookWindow()
 	cfg.writeEntry("useRegExp", useRegExp);
 	cfg.writeEntry("caseSensitive", caseSensitive);
 	cfg.writeEntry("doNotifyWrapAround", doNotifyWrapAround);
+	cfg.setGroup("Mail");
+	cfg.writeEntry( "useQtMail", m_useQtMail );
+	cfg.writeEntry( "useOpieMail", m_useOpieMail);
 }
 
 void AddressbookWindow::slotUpdateToolbar()
@@ -494,8 +507,36 @@ void AddressbookWindow::writeMail()
 	OContact c = abList->currentEntry();
 	QString name = c.fileAs();
 	QString email = c.defaultEmail();
-	QCopEnvelope e("QPE/Application/qtmail", "writeMail(QString,QString)");
-	e << name << email;
+
+	// I prefer the OPIE-Environment variable before the 
+	// QPE-one..
+	QString basepath = QString::fromLatin1( getenv("OPIEDIR") );
+	if ( basepath.isEmpty() )
+		basepath = QString::fromLatin1( getenv("QPEDIR") );
+
+	// Try to access the preferred. If not possible, try to 
+	// switch to the other one.. 
+	if ( m_useQtMail ){
+		qWarning ("Accessing: %s", (basepath + "/bin/qtmail").latin1());
+	        if ( QFile::exists( basepath + "/bin/qtmail" ) ){
+			qWarning ("QCop");
+			QCopEnvelope e("QPE/Application/qtmail", "writeMail(QString,QString)");
+			e << name << email;
+			return;
+		} else
+			m_useOpieMail = true;
+	}
+	if ( m_useOpieMail ){
+		qWarning ("Accessing: %s", (basepath + "/bin/mail").latin1());
+		if ( QFile::exists( basepath + "/bin/mail" ) ){
+			qWarning ("QCop");
+			QCopEnvelope e("QPE/Application/mail", "writeMail(QString,QString)");
+			e << name << email;
+			return;
+		} else
+			m_useQtMail = true;
+	}
+
 }
 
 static const char * beamfile = "/tmp/obex/contact.vcf";

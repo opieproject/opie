@@ -93,9 +93,9 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent* /* e */ )
 	
 	switch (currentLetter) {
 		case 0:
-			tmpStr = "<qt><u><font color=\"#7F0000\">";
+			tmpStr = "<qt><u><b><font color=\"#FF00FF\">";
 			tmpStr += letter1;
-			tmpStr += "</font></u>";
+			tmpStr += "</font></b></u>";
 			tmpStr += letter2;
 			tmpStr += letter3;
 			tmpStr += "</qt>";
@@ -110,9 +110,9 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent* /* e */ )
 		case 1:
 			tmpStr = "<qt>";
 			tmpStr += letter1;
-			tmpStr += "<u><font color=\"#7F0000\">";
+			tmpStr += "<u><b><font color=\"#FF00FF\">";
 			tmpStr += letter2;
-			tmpStr += "</font></u>";
+			tmpStr += "</font></b></u>";
 			tmpStr += letter3;
 			tmpStr += "</qt>";
 
@@ -127,9 +127,9 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent* /* e */ )
 			tmpStr = "<qt>";
 			tmpStr += letter1;
 			tmpStr += letter2;
-			tmpStr += "<u><font color=\"#7F0000\">";
+			tmpStr += "<u><b><font color=\"#FF00FF\">";
 			tmpStr += letter3;
-			tmpStr += "</font></u></qt>";
+			tmpStr += "</font></b></u></qt>";
 
 			setText(tmpStr);
 

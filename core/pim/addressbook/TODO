@@ -1,16 +1,17 @@
 Stuff todo until OPIE 1.0 :
 
+Pending bugfixes from previous work:
+
 Urgent:
 
 - Font menu is invisible using german translation
 
 Important:
 
+- Overview window cleanup needed..
 - Cursor keys should work in detail-view (ablabel)
 - "What's this" should be added
 - Store last settings of combo-boxes
-- Mail-Icon is missing
-- Overview window cleanup needed..
 - Finishing of new View functions (List, Phonebook...)
 - The names of the countries are sorted by there english names, only..
   Even if they are translated.. :S
@@ -34,3 +35,5 @@ Fixed:
 - Adding a configuration dialog
 - Picker: Activated letter schould be more visible
 - Advanced handling of cursor keys (search..)
+- Mail-Icon is missing
+- Use opie-mail insted of qt-mail if possible.

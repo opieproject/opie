@@ -118,6 +118,9 @@ private:
 	bool doNotifyWrapAround;
 	bool caseSensitive;
 
+	bool m_useQtMail;
+	bool m_useOpieMail;
+
 	QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, *actionPersonal, *actionMail;
 
 	bool bAbEditFirstTime;

@@ -686,41 +686,53 @@ void AbTable::slotDoFind( const QString &findString, bool caseSensitive, bool us
 	r.setWildcard( !useRegExp );
 	rows = numRows();
 	static bool wrapAround = true;
+	bool try_again = false;
 	
-	if ( !backwards ) {
-		for ( row = currFindRow + 1; row < rows; row++ ) {
-			ati = static_cast<AbTableItem*>( item(row, 0) );
-			if ( contactCompare( contactList[ati], r, category ) )
-				break;
+	// We will loop until we found an entry or found nothing.
+	do {
+		if ( !backwards ) {
+			for ( row = currFindRow + 1; row < rows; row++ ) {
+				ati = static_cast<AbTableItem*>( item(row, 0) );
+				if ( contactCompare( contactList[ati], r, category ) ){
+					try_again = false;
+					break;
+				}
+			}
+		} else {
+			for ( row = currFindRow - 1; row > -1; row-- ) {
+				ati = static_cast<AbTableItem*>( item(row, 0) );
+				if ( contactCompare( contactList[ati], r, category ) ){
+					try_again = false;
+					break;
+				}
+			}
 		}
-	} else {
-		for ( row = currFindRow - 1; row > -1; row-- ) {
-			ati = static_cast<AbTableItem*>( item(row, 0) );
-			if ( contactCompare( contactList[ati], r, category ) )
-				break;
+		if ( row >= rows || row < 0 ) {
+			if ( row < 0 )
+				currFindRow = rows;
+			else
+				currFindRow = -1;
+			
+			if ( wrapAround ){
+				emit signalWrapAround();
+				try_again = true;
+			}else{
+				emit signalNotFound();
+				try_again = false;
+			}
+			
+			wrapAround = !wrapAround;
+		} else {
+			currFindRow = row;
+			QTableSelection foundSelection;
+			foundSelection.init( currFindRow, 0 );
+			foundSelection.expandTo( currFindRow, numCols() - 1 );
+			addSelection( foundSelection );
+			setCurrentCell( currFindRow, 0 /* numCols() - 1 */ );
+			wrapAround = true;
+			try_again = false;
 		}
-	}
-	if ( row >= rows || row < 0 ) {
-		if ( row < 0 )
-			currFindRow = rows;
-		else
-			currFindRow = -1;
-		
-		if ( wrapAround )
-			emit signalWrapAround();
-		else
-			emit signalNotFound();
-
-		wrapAround = !wrapAround;
-	} else {
-		currFindRow = row;
-		QTableSelection foundSelection;
-		foundSelection.init( currFindRow, 0 );
-		foundSelection.expandTo( currFindRow, numCols() - 1 );
-		addSelection( foundSelection );
-		setCurrentCell( currFindRow, 0 /* numCols() - 1 */ );
-		wrapAround = true;
-	}
+	} while ( try_again );
 }
 
 static bool contactCompare( const OContact &cnt, const QRegExp &r, int category )

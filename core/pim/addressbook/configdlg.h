@@ -14,11 +14,15 @@ public:
     bool useWildCards() const;
     bool beCaseSensitive() const;
     bool signalWrapAround() const;
+    bool useQtMail() const;
+    bool useOpieMail() const;
     
     void setUseRegExp( bool v );
     void setUseWildCards( bool v );
     void setBeCaseSensitive( bool v ); 
     void setSignalWrapAround( bool v );
+    void setQtMail( bool v );
+    void setOpieMail( bool v );
 };
 
 

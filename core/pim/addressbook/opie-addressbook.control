@@ -1,7 +1,7 @@
 Files: bin/addressbook apps/1Pim/addressbook.desktop
 Priority: optional
 Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Stefan Eilers <eilers.stefan@epost.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION) libopie
