@@ -3,265 +3,269 @@
     <name>FontDialog</name>
     <message>
         <source>FontDialog</source>
-        <translation type="unfinished"></translation>
+        <translation>DiálogoLetra</translation>
     </message>
     <message>
         <source>Font Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Diálogo de letra</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Letra</translation>
     </message>
     <message>
         <source>Font Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo de letra</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished"></translation>
+        <translation>El Rápido Zorro Marrón Saltó Por Encima Del Perro Perezoso</translation>
     </message>
 </context>
 <context>
     <name>TextEdit</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar como</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Pegar</translation>
     </message>
     <message>
         <source>Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar...</translation>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Acercar</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Alejar</translation>
     </message>
     <message>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Negrilla</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Cursiva</translation>
     </message>
     <message>
         <source>Wrap lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar líneas</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Letras</translation>
     </message>
     <message>
         <source>Start with new file</source>
-        <translation type="unfinished"></translation>
+        <translation>Empezar nuevo fichero</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobre</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiechero</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver</translation>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar siguiente</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar Buscar</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor Textos</translation>
     </message>
     <message>
         <source>Text Editor has detected
  you selected a .desktop file.
 Open .desktop file or linked file?</source>
-        <translation type="unfinished"></translation>
+        <translation>El Editor de Texto ha detectado
+que ha seleccionado un .desktop
+¿Abrir el .desktop o su enlace?</translation>
     </message>
     <message>
         <source>.desktop File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichero .desktop</translation>
     </message>
     <message>
         <source>Linked Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Documento enlazado</translation>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin nombre</translation>
     </message>
     <message>
         <source>Save File As?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Guardar fichero como?</translation>
     </message>
     <message>
         <source>Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permisos</translation>
     </message>
     <message>
         <source>FontDialog</source>
-        <translation type="unfinished"></translation>
+        <translation>DiálogoLetras</translation>
     </message>
     <message>
         <source>Do you really want
 to delete the current file
 from the disk?
 This is irreversable!!</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguro que quiere borrar
+el fichero actual del disco?
+¡Esto es irreversible!</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Todo</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permisos fichero</translation>
     </message>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Fijar permisos fichero</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fijar permisos fichero para:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>propietario</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>grupo</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>otros</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Propietario</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupo</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>leer</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>escribir</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>ejecutar</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Error - sin usuario</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Error - sin grupo</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Error fijando propietario o grupo</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Error fijando modo</translation>
     </message>
 </context>
 <context>
     <name>fileSaver</name>
     <message>
         <source>fileSaver</source>
-        <translation type="unfinished"></translation>
+        <translation>SalvarFichero</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha</translation>
     </message>
     <message>
         <source>set file permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>fijar permisos fichero</translation>
     </message>
 </context>
 </TS>

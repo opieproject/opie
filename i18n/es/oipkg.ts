@@ -3,279 +3,279 @@
     <name>InstallDialog</name>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalar</translation>
     </message>
     <message>
         <source>Ipkg options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones ipkg</translation>
     </message>
     <message>
         <source>-force-depends</source>
-        <translation type="unfinished"></translation>
+        <translation>-force-depends</translation>
     </message>
     <message>
         <source>-force-reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>-force-reinstall</translation>
     </message>
     <message>
         <source>-force-removal-of-essential-packages</source>
-        <translation type="unfinished"></translation>
+        <translation>-force-removal-of-essential-packages</translation>
     </message>
     <message>
         <source>To remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Para borrar</translation>
     </message>
     <message>
         <source>To install</source>
-        <translation type="unfinished"></translation>
+        <translation>Para instalar</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestor de Paquetes</translation>
     </message>
     <message>
         <source>feeds</source>
-        <translation type="unfinished"></translation>
+        <translation>fuentes</translation>
     </message>
     <message>
         <source>ipkgfind</source>
-        <translation type="unfinished"></translation>
+        <translation>ipkgfind</translation>
     </message>
     <message>
         <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Paquete</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayuda</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>Setups</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuraciones</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidores</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished"></translation>
+        <translation>Destinos</translation>
     </message>
     <message>
         <source>Section: </source>
-        <translation type="unfinished"></translation>
+        <translation>Sección: </translation>
     </message>
     <message>
         <source>Close Section</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar sección</translation>
     </message>
     <message>
         <source>Sections</source>
-        <translation type="unfinished"></translation>
+        <translation>Secciones</translation>
     </message>
     <message>
         <source>Filter: </source>
-        <translation type="unfinished"></translation>
+        <translation>Filtro: </translation>
     </message>
     <message>
         <source>Clear Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpiar búsqueda</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar búsqueda</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtro</translation>
     </message>
     <message>
         <source>ipkgfind: </source>
-        <translation type="unfinished"></translation>
+        <translation>ipkgfind: </translation>
     </message>
     <message>
         <source>Clear Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpiar búsqueda</translation>
     </message>
     <message>
         <source>Do Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Búaqueda</translation>
     </message>
     <message>
         <source>Destination: </source>
-        <translation type="unfinished"></translation>
+        <translation>Destino: </translation>
     </message>
     <message>
         <source>Link</source>
-        <translation type="unfinished"></translation>
+        <translation>Enlace</translation>
     </message>
     <message>
         <source>Close Destinations</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar destinos</translation>
     </message>
     <message>
         <source>Package Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Acciones paquetes</translation>
     </message>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Package Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado paquetes</translation>
     </message>
     <message>
         <source>New version, installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva versión, instalada</translation>
     </message>
     <message>
         <source>New version, not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva versión, no instalada</translation>
     </message>
     <message>
         <source>Old version, installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Antigua versión, instalada</translation>
     </message>
     <message>
         <source>Old version, not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Antigua versión, no instalada</translation>
     </message>
     <message>
         <source>Old version, new version installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Antigua versión, la nueva instalada</translation>
     </message>
     <message>
         <source>New version, old version installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva versión, la antigua instalada</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation type="unfinished"></translation>
+        <translation>documentos</translation>
     </message>
 </context>
 <context>
     <name>PackageListView</name>
     <message>
         <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Paquete</translation>
     </message>
     <message>
         <source>Install to</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalar en</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Reinstalar</translation>
     </message>
 </context>
 <context>
     <name>PackageManagerSettings</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo</translation>
     </message>
 </context>
 <context>
     <name>PackageManagerSettingsBase</name>
     <message>
         <source>Package Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidores paquetes</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración</translation>
     </message>
     <message>
         <source>Installation Setups</source>
-        <translation type="unfinished"></translation>
+        <translation>Configar instalación</translation>
     </message>
     <message>
         <source>Install destination:</source>
-        <translation type="unfinished"></translation>
+        <translation>Destino instalación:</translation>
     </message>
     <message>
         <source>Link to root destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Enlazar al destino root</translation>
     </message>
     <message>
         <source>Used servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidores usados:</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Renombrar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidores</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>URL:</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished"></translation>
+        <translation>Destinos</translation>
     </message>
     <message>
         <source>link to /</source>
-        <translation type="unfinished"></translation>
+        <translation>enlazar a /</translation>
     </message>
     <message>
         <source>Remove links</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar enlaces</translation>
     </message>
     <message>
         <source>volatile</source>
-        <translation type="unfinished"></translation>
+        <translation>volátil</translation>
     </message>
     <message>
         <source>removeable</source>
-        <translation type="unfinished"></translation>
+        <translation>borrable</translation>
     </message>
 </context>
 <context>
@@ -283,81 +283,82 @@
     <message>
         <source>
 All done.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Todo hecho.</translation>
     </message>
     <message>
         <source>Removing</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrando</translation>
     </message>
     <message>
         <source>please wait</source>
-        <translation type="unfinished"></translation>
+        <translation>por favor espere</translation>
     </message>
     <message>
         <source>Error while removing </source>
-        <translation type="unfinished"></translation>
+        <translation>Error al eliminar</translation>
     </message>
     <message>
         <source>Installing</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalando</translation>
     </message>
     <message>
         <source>Error while installing</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al instalar</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Description: </source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción: </translation>
     </message>
     <message>
         <source>Size: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño: </translation>
     </message>
     <message>
         <source>other</source>
-        <translation type="unfinished"></translation>
+        <translation>otro</translation>
     </message>
     <message>
         <source>Install Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre instalación: </translation>
     </message>
     <message>
         <source> on </source>
-        <translation type="unfinished"></translation>
+        <translation>en</translation>
     </message>
     <message>
         <source>Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre: </translation>
     </message>
     <message>
         <source>Link: </source>
-        <translation type="unfinished"></translation>
+        <translation>Enlace: </translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>Destination: </source>
-        <translation type="unfinished"></translation>
+        <translation>Destino: </translation>
     </message>
     <message>
         <source>Status: </source>
-        <translation type="unfinished"></translation>
+        <translation>Estado: </translation>
     </message>
 </context>
 <context>
     <name>RunWindow</name>
     <message>
         <source>running...</source>
-        <translation type="unfinished"></translation>
+        <translation>ejecutando...</translation>
     </message>
 </context>
 </TS>

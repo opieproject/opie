@@ -3,15 +3,15 @@
     <name>MainView</name>
     <message>
         <source>Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Remoto</translation>
     </message>
     <message>
         <source>Learn</source>
-        <translation type="unfinished"></translation>
+        <translation>Aprender</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar</translation>
     </message>
 </context>
 </TS>
