@@ -1,4 +1,8 @@
   config TODAY_TODOLIST
-    boolean "todolist"
+    boolean "opie-today-todolistplugin"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2PIM
+
+    comment "opie-today-todolistplugin requires libopie2core, libopie2ui, libopie2pim"
+    depends !( ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2PIM )
+

@@ -195,10 +195,9 @@ endmenu
 
 menu "Pim"
   source core/pim/config.in
-  menu "Today Plugins"
+  comment "Today Plugins ---"
     source noncore/todayplugins/config.in
     source core/pim/today/plugins/config.in
-  endmenu
 endmenu
 
 menu "Settings"
@@ -207,7 +206,9 @@ menu "Settings"
 endmenu
 
 menu "Theming"
+  comment "Decorations ---"
   source noncore/decorations/config.in
+  comment "Styles ---"
   source noncore/styles/config.in
 endmenu
 
