@@ -19,6 +19,7 @@ public:
     int  fontSize() const;
     QValueList<int> orderList() const;
     QMainWindow::ToolBarDock getToolBarPos() const;
+    bool fixedBars() const;
     
     void setUseRegExp( bool v );
     void setUseWildCards( bool v );
@@ -28,6 +29,7 @@ public:
     void setFontSize( int v );
     void setOrderList( const QValueList<int>& list );
     void setToolBarDock( const QMainWindow::ToolBarDock v );
+    void setFixedBars( const bool fixed );
 
     void operator= ( const AbConfig& cnf );
 
@@ -47,6 +49,7 @@ protected:
     int m_fontSize;
     QValueList<int> m_ordered;
     int m_barPos;
+    bool m_fixedBars;
 
     bool m_changed;
 };

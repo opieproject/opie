@@ -122,7 +122,8 @@ void ConfigDlg::setConfig( const AbConfig& cnf )
 	        fieldListBox -> insertItem ( m_mapIDToStr[ m_config.orderList()[i] ] );
 	}
 
-	
+	m_fixedBars->setChecked( m_config.fixedBars() );
+	m_moveBars->setChecked( !m_config.fixedBars() );
 }
     
 AbConfig ConfigDlg::getConfig()
@@ -145,6 +146,8 @@ AbConfig ConfigDlg::getConfig()
 	        orderlist.append( m_mapStrToID[ fieldListBox->text(i) ] );
 	}
 	m_config.setOrderList( orderlist );
+
+	m_config.setFixedBars( m_fixedBars->isChecked() );
 
 	return m_config;
 }

@@ -87,21 +87,30 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	setIcon( Resource::loadPixmap( "AddressBook" ) );
 
 	// Settings for Main Menu
-	setToolBarsMovable( true  );
+	// setToolBarsMovable( false );
+	setToolBarsMovable( !m_config.fixedBars() );
 	setRightJustification( true );
+
+	QPEToolBar *bar = new QPEToolBar( this );
+	bar->setHorizontalStretchable( TRUE );
+
+	QPEMenuBar *mbList = new QPEMenuBar( bar  );
+	mbList->setMargin( 0 );
+
+	QPopupMenu *edit = new QPopupMenu( mbList );
+	mbList->insertItem( tr( "Contact" ), edit );
+
+	// Category Menu
+	catMenu = new QPopupMenu( this );
+	catMenu->setCheckable( TRUE );
+	connect( catMenu, SIGNAL(activated(int)), this, SLOT(slotSetCategory(int)) );
+	mbList->insertItem( tr("View"), catMenu );
 
 	// Create Toolbar
 	listTools = new QPEToolBar( this, "list operations" );
 	listTools->setHorizontalStretchable( true );
 	addToolBar( listTools );
 	moveToolBar( listTools, m_config.getToolBarPos() );
-
-	QPEMenuBar *mbList = new QPEMenuBar( this  );
-	mbList->setMargin( 0 );
-
-	QPopupMenu *edit = new QPopupMenu( mbList );
-	mbList->insertItem( tr( "Contact" ), edit );
-
 
 	// View Icons
 	m_tableViewButton  = new QAction( tr( "List" ), Resource::loadPixmap( "addressbook/weeklst" ),
@@ -243,14 +252,11 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
 	vb->addWidget( pLabel );
 
-	// Category Menu
-	catMenu = new QPopupMenu( this );
-	catMenu->setCheckable( TRUE );
-	connect( catMenu, SIGNAL(activated(int)), this, SLOT(slotSetCategory(int)) );
+	// All Categories into view-menu..
 	populateCategories();
-	mbList->insertItem( tr("View"), catMenu );
 
- 	defaultFont = new QFont( m_abView->font() );
+	// Fontsize
+	defaultFont = new QFont( m_abView->font() );
  	slotSetFont(m_config.fontSize());
 	m_curFontSize = m_config.fontSize();
 

@@ -80,7 +80,7 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>5</number>
+                        <number>2</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
@@ -251,6 +251,65 @@
                                 <property>
                                     <name>whatsThis</name>
                                     <string>Font size for list- and card view</string>
+                                </property>
+                            </widget>
+                        </hbox>
+                    </widget>
+                    <widget>
+                        <class>QButtonGroup</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>ButtonGroup4</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string>Tool-/Menubar</string>
+                        </property>
+                        <hbox>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>11</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget>
+                                <class>QRadioButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>m_fixedBars</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Fixed</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>checked</name>
+                                    <bool>true</bool>
+                                </property>
+                                <property>
+                                    <name>toolTip</name>
+                                    <string></string>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Switch to fixed menu-/toolbars after restarting application !</string>
+                                </property>
+                            </widget>
+                            <widget>
+                                <class>QRadioButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>m_moveBars</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Movable</string>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Switch to moveable menu-/toolbars after restarting application !</string>
                                 </property>
                             </widget>
                         </hbox>

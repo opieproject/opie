@@ -11,6 +11,7 @@ AbConfig::AbConfig( ):
 	m_beCaseSensitive( false ),
 	m_fontSize( 1 ),
 	m_barPos( QMainWindow::Top ),
+	m_fixedBars( true ),
 	m_changed( false )
 {
 }
@@ -54,6 +55,10 @@ QMainWindow::ToolBarDock AbConfig::getToolBarPos() const
 	return (QMainWindow::ToolBarDock) m_barPos;
 }
 
+bool AbConfig::fixedBars() const
+{
+	return m_fixedBars;
+}
 
 void AbConfig::setUseRegExp( bool v )
 {
@@ -98,6 +103,12 @@ void AbConfig::setToolBarDock( const QMainWindow::ToolBarDock v )
 	m_changed = true;
 }
 
+void AbConfig::setFixedBars( const bool fixed )
+{
+	m_fixedBars = fixed;
+	m_changed = true;
+}
+
 void AbConfig::load()
 {
 	// Read Config settings
@@ -133,6 +144,7 @@ void AbConfig::load()
 
 	cfg.setGroup("ToolBar");
 	m_barPos = cfg.readNumEntry( "Position", QMainWindow::Top );
+	m_fixedBars= cfg.readBoolEntry( "fixedBars", true );
 
 	m_changed = false;
 }
@@ -160,6 +172,7 @@ void AbConfig::save()
 
 		cfg.setGroup("ToolBar");
 		cfg.writeEntry( "Position", m_barPos );
+		cfg.writeEntry( "fixedBars", m_fixedBars );
 
 		cfg.setGroup("Version");
 		cfg.writeEntry( "AppName", APPNAME + QString(" V" ) + MAINVERSION + QString(".") + SUBVERSION + QString(".") + PATCHVERSION);
@@ -180,5 +193,6 @@ void AbConfig::operator= ( const AbConfig& cnf )
 	m_fontSize = cnf.m_fontSize;
 	m_ordered = cnf.m_ordered;
 	m_barPos = cnf.m_barPos;
+	m_fixedBars = cnf.m_fixedBars;
 }
 
