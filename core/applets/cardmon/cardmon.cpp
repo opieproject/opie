@@ -74,14 +74,14 @@ CardMonitor::~CardMonitor() {
 
 void CardMonitor::popUp( QString message, QString icon ) {
     if ( ! popupMenu ) {
-	popupMenu = new QPopupMenu();
+  popupMenu = new QPopupMenu();
     }
 
     popupMenu->clear();
     if( icon.isEmpty() ) {
-	popupMenu->insertItem( message, 0 );
+  popupMenu->insertItem( message, 0 );
     } else {
-	popupMenu->insertItem( QIconSet ( Resource::loadPixmap ( icon ) ),  message, 0 );
+  popupMenu->insertItem( QIconSet ( Resource::loadPixmap ( icon ) ),  message, 0 );
     }
 
     QPoint p = mapToGlobal ( QPoint ( 0, 0 ) );
@@ -113,22 +113,22 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
 
     if ( cardInPcmcia1 ) {
         menu->insertItem( QIconSet ( Resource::loadPixmap ( "cardmon/" + cardInPcmcia1Type ) ),
-		tr( "Eject card 1: %1" ).arg( cardInPcmcia1Name ), 2 );
+    tr( "Eject card 1: %1" ).arg( cardInPcmcia1Name ), 2 );
     }
 
     QPoint p = mapToGlobal ( QPoint ( 0, 0 ) );
     QSize s = menu->sizeHint ();
     int opt = menu->exec( QPoint (
-	p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ),
-	p. y ( ) - s. height ( ) ), 0);
+  p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ),
+  p. y ( ) - s. height ( ) ), 0);
 
     if ( opt == 1 ) {
         cmd = "/sbin/cardctl eject 0";
-	err = system( ( const char * ) cmd );
-	if ( ( err == 127 ) || ( err < 0 ) ) {
-	    qDebug( "Could not execute `/sbin/cardctl eject 0'! err=%d", err );
-	    popUp( tr( "CF/PCMCIA card eject failed!" ) );
-	}
+  err = system( ( const char * ) cmd );
+  if ( ( err == 127 ) || ( err < 0 ) ) {
+      qDebug( "Could not execute `/sbin/cardctl eject 0'! err=%d", err );
+      popUp( tr( "CF/PCMCIA card eject failed!" ) );
+  }
     } else if ( opt == 0 ) {
         if ( ODevice::inst()->system() == System_Familiar ) {
             cmd = "umount /dev/mmc/part1";
@@ -147,10 +147,10 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
     } else if ( opt == 2 ) {
         cmd = "/sbin/cardctl eject 1";
         err = system( ( const char *) cmd );
-	if ( ( err == 127 ) || ( err < 0 ) ) {
-	    qDebug( "Could not execute `/sbin/cardctl eject 1'! err=%d", err );
-	    popUp( tr( "CF/PCMCIA card eject failed!" ) );
-	}
+  if ( ( err == 127 ) || ( err < 0 ) ) {
+      qDebug( "Could not execute `/sbin/cardctl eject 1'! err=%d", err );
+      popUp( tr( "CF/PCMCIA card eject failed!" ) );
+  }
     }
     delete menu;
 }
@@ -204,8 +204,8 @@ bool CardMonitor::getStatusPcmcia( int showPopUp ) {
                     cardInPcmcia0 = TRUE;
                     show();
                     line++;
-	    int pos=(*line).find('\t' ) + 1;
-	    cardInPcmcia0Type = (*line).mid( pos, (*line).find( "\t" , pos) - pos );
+      int pos=(*line).find('\t' ) + 1;
+      cardInPcmcia0Type = (*line).mid( pos, (*line).find( "\t" , pos) - pos );
                 }
             }  else if( (*line).startsWith( "Socket 1:" ) ){
                 if( (*line).startsWith( "Socket 1: empty" ) && cardInPcmcia1 ) {
@@ -216,8 +216,8 @@ bool CardMonitor::getStatusPcmcia( int showPopUp ) {
                     cardInPcmcia1 = TRUE;
                     show();
                     line++;
-	    int pos=(*line).find('\t') + 1;
-	    cardInPcmcia1Type = (*line).mid( pos, (*line).find("\t", pos) - pos );
+      int pos=(*line).find('\t') + 1;
+      cardInPcmcia1Type = (*line).mid( pos, (*line).find("\t", pos) - pos );
                 }
             }
         }
@@ -235,7 +235,7 @@ bool CardMonitor::getStatusPcmcia( int showPopUp ) {
                     what="off";
                 }
                 text += cardInPcmcia0Name;
-	popUp( text, "cardmon/" + cardInPcmcia0Type );
+  popUp( text, "cardmon/" + cardInPcmcia0Type );
             }
 
             if( cardWas1 != cardInPcmcia1) {
@@ -246,8 +246,8 @@ bool CardMonitor::getStatusPcmcia( int showPopUp ) {
                     text += tr( "Ejected: " );
                     what = "off";
                 }
-	text += cardInPcmcia1Name;
-	popUp( text, "cardmon/" + cardInPcmcia1Type );
+  text += cardInPcmcia1Name;
+  popUp( text, "cardmon/" + cardInPcmcia1Type );
             }
             QSound::play( Resource::findSound( "cardmon/card" + what) );
         }
@@ -264,6 +264,7 @@ bool CardMonitor::getStatusPcmcia( int showPopUp ) {
 bool CardMonitor::getStatusSd( int showPopUp ) {
 
     bool cardWas = cardInSd; // remember last state
+    cardInSd = FALSE;
 
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
     struct mntent *me;
@@ -276,9 +277,10 @@ bool CardMonitor::getStatusSd( int showPopUp ) {
             if ( fs.left( 14 ) == "/dev/mmc/part1" || fs.left( 7 ) == "/dev/sd" || fs.left( 9 ) == "/dev/mmcd" ) {
                 cardInSd = TRUE;
                 show();
-            } else {
-                cardInSd = FALSE;
             }
+//            else {
+//                 cardInSd = FALSE;
+//             }
         }
         endmntent( mntfp );
     }
