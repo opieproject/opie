@@ -22,7 +22,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: yuv2rgb.c,v 1.3 2002-09-02 17:18:30 harlekin Exp $
+ * $Id: yuv2rgb.c,v 1.4 2002-12-19 21:41:50 harlekin Exp $
  */
 
 #include <stdio.h>
@@ -1207,11 +1207,11 @@ static scale_line_func_t find_scale_line_func(int step) {
 
   for (i = 0; i < sizeof(scale_line)/sizeof(scale_line[0]); i++) {
     if (step == scale_line[i].src_step*32768/scale_line[i].dest_step) {
-      printf("yuv2rgb: using %s optimized scale_line\n", scale_line[i].desc);
+	//printf("yuv2rgb: using %s optimized scale_line\n", scale_line[i].desc);
       return scale_line[i].func;
     }
   }
-  printf("yuv2rgb: using generic scale_line with interpolation\n");
+  //printf("yuv2rgb: using generic scale_line with interpolation\n");
   return scale_line_gen;
 
 }

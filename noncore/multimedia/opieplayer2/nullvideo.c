@@ -115,6 +115,8 @@ static uint32_t null_get_capabilities( vo_driver_t *self ){
 
 static void null_frame_copy (vo_frame_t *vo_img, uint8_t **src) {
   opie_frame_t  *frame = (opie_frame_t *) vo_img ;
+ 
+  vo_img->copy_called = 1;
 
   if (!frame->output->m_show_video) { 
     /* printf("nullvideo: no video\n");  */
