@@ -537,7 +537,7 @@ void OTScan::SLOT_Selected( QListViewItem * it ) {
         SelectedPeer = ((PeerLVI *)it)->peer();
         SelectedChannel = 0;
       }
-      owarn << "Selected " << SelectedPeer->address().toString() <<
+      odebug << "Selected " << SelectedPeer->address().toString() <<
             " Channel " << SelectedChannel << oendl;
       emit selected();
 }
@@ -565,13 +565,13 @@ void OTScan::SLOT_CleanupOld( ) {
                 TheP->address() == Keys[k].from() 
               ) {
               // part of linkkey
-              owarn << "LINKKEY " << TheP->address().toString() << oendl;
+              odebug << "LINKKEY " << TheP->address().toString() << oendl;
               break;
             }
           }
 
           if( k == Keys.count() ) {
-            owarn << "RM LINKKEY " << TheP->address().toString() << oendl;
+            odebug << "RM LINKKEY " << TheP->address().toString() << oendl;
             // not found -> remember to remove this peer
             QListViewItem * Nit;
             OT->removePeer( TheP );
@@ -581,7 +581,7 @@ void OTScan::SLOT_CleanupOld( ) {
             continue;
           }
         } else {
-          owarn << "NODOWN " << TheP->address().toString() << oendl;
+          odebug << "NODOWN " << TheP->address().toString() << oendl;
         }
 
         Lit = Lit->nextSibling();
@@ -606,7 +606,7 @@ void OTScan::SLOT_NewPeer( OTPeer * P, bool IsNew ){
         }
 
         if( ! it ) {
-          owarn << "Should not occur" << oendl;
+          odebug << "Should not occur" << oendl;
           return;
         }
       }
@@ -929,7 +929,7 @@ void OTManage::SLOT_UpDriver( bool Up ) {
       while( it ) {
         if( it->isSelected() ) {
           OTDriver * D = ((DriverLVI *)it)->driver();
-          owarn << "UP driver " << D->devname() << oendl;
+          odebug << "UP driver " << D->devname() << oendl;
           // this
           D->setUp( Up );
           return;

@@ -155,7 +155,6 @@ NodeCollection * EditConnection::getTmpCollection( void ) {
           }
 
           if( ! it ) {
-            owarn  << "Radio not selected" << oendl;
             TmpIsValid = 0;
             return 0;
           }

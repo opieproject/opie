@@ -24,7 +24,7 @@ State_t BluetoothRFCOMMRun::detectState( void ) {
         return Available;
       }
 
-      owarn << "Bluetooth " 
+      odebug << "Bluetooth " 
             << OT->isEnabled()
             << oendl;
 
@@ -119,7 +119,7 @@ RFCOMMChannel * BluetoothRFCOMMRun::getChannel( void ) {
       unsigned int i = 0;
       for( i = 0; i < Data->Devices.count(); i ++ ) {
         if( LB->isSelected(i) ) {
-          owarn << "Selected " << Data->Devices[i]->Name << oendl;
+          odebug << "Selected " << Data->Devices[i]->Name << oendl;
           Ch = Data->Devices[i];
           break;
         }
@@ -147,7 +147,7 @@ int BluetoothRFCOMMRun::deviceNrOfConnection( void ) {
 
     DeviceNr = -1;
     for( unsigned int i = 0; i < Data->Devices.count(); i ++ ) {
-      owarn << "Check for rfcomm on " 
+      odebug << "Check for rfcomm on " 
             << Data->Devices[i]->BDAddress
             << " "
             << Data->Devices[i]->Channel
@@ -155,7 +155,7 @@ int BluetoothRFCOMMRun::deviceNrOfConnection( void ) {
       if( ( DeviceNr = OT->connectedToRFCommChannel( 
               OTDeviceAddress( Data->Devices[i]->BDAddress ),
               Data->Devices[i]->Channel ) ) >= 0 ) {
-        owarn << "Up " 
+        odebug << "Up " 
               << oendl;
         break;
       }

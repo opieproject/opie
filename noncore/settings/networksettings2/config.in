@@ -3,7 +3,7 @@
   source noncore/settings/networksettings2/opietooth2_applet/config.in
 
 config NS2
-  boolean
+  boolean "opie-networksettings2 application"
   default "y"
   depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && NS2CORE && NS2OPIETOOTH
 

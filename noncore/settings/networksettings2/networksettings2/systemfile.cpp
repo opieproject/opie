@@ -99,16 +99,16 @@ bool SystemFile::open( void ) {
         }
       } else {
         if( ! F ) {
-          owarn << "!!!!!!!!!!!!!!!!!! " << oendl;
-          owarn << "!!!! TESTMODE !!!!" << oendl;
-          owarn << "!!!!!!!!!!!!!!!!!! " << oendl;
-          owarn << "!!!!" << oendl;
-          owarn << "!!!! GENERATE " << Path << oendl;
+          odebug << "!!!!!!!!!!!!!!!!!! " << oendl;
+          odebug << "!!!! TESTMODE !!!!" << oendl;
+          odebug << "!!!!!!!!!!!!!!!!!! " << oendl;
+          odebug << "!!!!" << oendl;
+          odebug << "!!!! GENERATE " << Path << oendl;
           if( InAppend ) {
-            owarn << "!!!! In APPEND mode" << oendl;
+            odebug << "!!!! In APPEND mode" << oendl;
           }
-          owarn << "!!!!" << oendl;
-          owarn << "!!!!!!!!!!!!!!!!!!" << oendl;
+          odebug << "!!!!" << oendl;
+          odebug << "!!!!!!!!!!!!!!!!!!" << oendl;
 
           F = new QFile();
           F->open( IO_WriteOnly, stderr );
@@ -136,7 +136,7 @@ bool SystemFile::close( void ) {
       F = 0;
 
       if( ! InAppend ) {
-        owarn << "Rename " << OldP << " to " << Path << oendl;
+        odebug << "Rename " << OldP << " to " << Path << oendl;
         return ( rename( OldP.latin1(), Path.latin1() ) >= 0 );
       } 
       return 1;

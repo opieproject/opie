@@ -150,7 +150,7 @@ OTDriver::OTDriver( OTGateway * _OT, struct hci_dev_info* di) : QObject( _OT ), 
     Socket = 0;
 
     init(di);
-    owarn << "Driver " << devname() << oendl;
+    odebug << "Driver " << devname() << oendl;
 
     AutoClose = new QTimer( this );
     connect( AutoClose,
@@ -385,7 +385,7 @@ void OTDriver::setUp( bool M )  {
 
 void OTDriver::bringUp() {
 
-    owarn << "bringUp : " << Dev << oendl;
+    odebug << "bringUp : " << Dev << oendl;
 
     if( ! open() ) {
       return;
@@ -408,7 +408,7 @@ void OTDriver::bringUp() {
 
 void OTDriver::bringDown() {
 
-    owarn << "bringDown : " << Dev << oendl;
+    odebug << "bringDown : " << Dev << oendl;
 
     if( ! open() ) {
       return;
@@ -661,7 +661,7 @@ void OTDriver::setManufacturer(int compid) {
 
 OTHCISocket * OTDriver::openSocket( void ) {
     if( ! Socket ) {
-      owarn << "Open HCI socket to " << devname() << oendl;
+      odebug << "Open HCI socket to " << devname() << oendl;
       Socket = new OTHCISocket( this );
     }
     return Socket;
@@ -669,7 +669,7 @@ OTHCISocket * OTDriver::openSocket( void ) {
 
 void OTDriver::closeSocket( void ) {
     if( Socket ) {
-      owarn << "Close HCI socket to " << devname() << oendl;
+      odebug << "Close HCI socket to " << devname() << oendl;
       delete Socket;
       Socket = 0;
     }
@@ -713,7 +713,7 @@ long OTDriver::getLinkQuality( const OTDeviceAddress & Addr ) {
       cr->type = ACL_LINK;
 
       if (ioctl( fd(), HCIGETCONNINFO, (unsigned long) cr) < 0) {
-        owarn << "Get connection info failed" << oendl;
+        odebug << "Get connection info failed" << oendl;
         free(cr);
         return 0;
       }
@@ -731,12 +731,12 @@ long OTDriver::getLinkQuality( const OTDeviceAddress & Addr ) {
       rq.rlen   = GET_LINK_QUALITY_RP_SIZE;
 
       if (hci_send_req( fd(), &rq, 100) < 0) {
-         owarn << "Get connection info failed" << oendl;
+         odebug << "Get connection info failed" << oendl;
          return 0;
       }
 
       if( rp.status ) {
-        owarn << QString().sprintf("HCI get_link_quality cmd failed (0x%2.2X)", rp.status) << oendl;
+        odebug << QString().sprintf("HCI get_link_quality cmd failed (0x%2.2X)", rp.status) << oendl;
         return 0;
       }
 

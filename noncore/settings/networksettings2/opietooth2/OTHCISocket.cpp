@@ -34,7 +34,7 @@ OTHCISocket::~OTHCISocket() {
 }
 
 void OTHCISocket::close() {
-    owarn << "OTHCISocket::close()" << oendl;
+    odebug << "OTHCISocket::close()" << oendl;
     if( HCIReadNotifier ) {
         delete HCIReadNotifier;
     }
@@ -46,7 +46,7 @@ void OTHCISocket::close() {
 
 bool OTHCISocket::open() {
 
-    owarn << "OTHCISocket::open()" << oendl;
+    odebug << "OTHCISocket::open()" << oendl;
     int s;
 
     s = ::socket(AF_BLUETOOTH, SOCK_RAW, BTPROTO_HCI);
@@ -151,7 +151,7 @@ void OTHCISocket::slotSocketActivated() {
           updateStatus( databuf );
         }
       } else {
-        owarn << "Error reading hci packet: packetSize("
+        odebug << "Error reading hci packet: packetSize("
               << psize
               << ")-3 != dataSize("
               << len
@@ -183,7 +183,7 @@ void OTHCISocket::updateStatus(const QByteArray& data) {
 }
 
 void OTHCISocket::slotConnectionClosed() {
-    owarn << "HCI connection closed." << oendl;
+    odebug << "HCI connection closed." << oendl;
     emit connectionClosed();
 }
 
@@ -230,7 +230,7 @@ bool OTHCISocket::readStatus( unsigned char ogf,
 
     while (timer.isActive() && HCISocket.isValid()) {
 
-        owarn << "OTHCISocket::readStatus()" << oendl;
+        odebug << "OTHCISocket::readStatus()" << oendl;
         bool timeout = false;
 
         if( HCISocket.bytesAvailable() == 0) {
@@ -246,7 +246,7 @@ bool OTHCISocket::readStatus( unsigned char ogf,
             ogf == LastStatusOgf && 
             ocf == LastStatusOcf) {
             *status = LastStatus;
-            owarn << "OTHCISocket::readStatus(ogf="
+            odebug << "OTHCISocket::readStatus(ogf="
                   << ogf
                   << ",ocf="
                   << ocf
@@ -258,7 +258,7 @@ bool OTHCISocket::readStatus( unsigned char ogf,
         }
     }
 
-    owarn << "OTHCISocket::readStatus(ogf="
+    odebug << "OTHCISocket::readStatus(ogf="
           << ogf
           << ",ocf="
           << ocf

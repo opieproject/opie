@@ -38,6 +38,7 @@ State_t USBRun::detectState( void ) {
     } 
 
     Log(("Assigned %p\n", NC->assignedInterface() ));
+
     if( ( Run = NC->assignedInterface() ) ) {
       // we already have an interface assigned -> still present ?
       if( ! Run->IsUp ) {
@@ -50,7 +51,38 @@ State_t USBRun::detectState( void ) {
     NC->assignInterface( 0 );
 
     // find possible interface
-    for( QDictIterator<InterfaceInfo> It(Sys.interfaces());
+    if( getInterface() ) {
+      // proper type, and Not UP -> free
+      // usb cables are currently always available when requested
+      // until we can detect if we are plugged in
+      return Available;
+    }
+
+    return Unavailable;
+}
+
+QString USBRun::setMyState( NodeCollection * NC, Action_t A, bool ) {
+
+    InterfaceInfo * I = getInterface();
+
+    if( ! I ) {
+      return QString("No usb device available");
+    }
+
+    Log(( "Grabbed USB interface %s\n", I->Name.latin1() ));
+    // grab this interface
+    NC->assignInterface( I );
+
+    return QString();
+}
+
+// get interface that is free or assigned to us
+InterfaceInfo * USBRun::getInterface( void ) {
+
+    System & S = NSResources->system();
+    InterfaceInfo * best = 0, * Run;
+
+    for( QDictIterator<InterfaceInfo> It(S.interfaces());
          It.current();
          ++It ) {
       Run = It.current();
@@ -62,48 +94,17 @@ State_t USBRun::detectState( void ) {
               ! Run->IsUp ));
 
       if( handlesInterface( Run->Name ) &&
-          Run->CardType == ARPHRD_ETHER &&
-          ! Run->IsUp
-        ) {
-        // proper type, and Not UP -> free
-        // usb cables are currently always available when requested
-        // until we can detect if we are plugged in
-        return Available;
-      }
-    }
-
-    return Unavailable;
-}
-
-QString USBRun::setMyState( NodeCollection * NC, Action_t A, bool ) {
-
-    // nothing needs to be done to 'activate' or 'deactivate' 
-    // a cable
-    return QString();
-}
-
-// get interface that is free or assigned to us
-InterfaceInfo * USBRun::getInterface( void ) {
-
-    System & S = NSResources->system();
-    InterfaceInfo * best = 0, * Run;
-    QRegExp R( "usb[0-9abcdef]" );
-
-    for( QDictIterator<InterfaceInfo> It(S.interfaces());
-         It.current();
-         ++It ) {
-      Run = It.current();
-      if( handlesInterface( Run->Name ) &&
           Run->CardType == ARPHRD_ETHER
         ) {
         // this is a USB card
         if( Run->assignedConnection() == netNode()->connection() ) {
           // assigned to us
           return Run;
-        } else if( Run->assignedConnection() == 0 ) {
+        } else if( ! Run->IsUp &&
+                   Run->assignedConnection() == 0 ) {
           // free
           best = Run;
-        }
+        } // UP or not assigned to us
       }
     }
     return best; // can be 0

@@ -23,12 +23,12 @@ State_t GPRSRun::detectState( void ) {
 
       // check ppp itself and figure out interface
 
-      owarn << "Check for ppp " << NC->name() << oendl;
+      odebug << "Check for ppp " << NC->name() << oendl;
       if( D.exists( QString("ppp-")+removeSpaces(NC->name())+".pid") ) {
         // get pid and check if pppd is still running
         QFile F( D.path()+"/ppp-"+removeSpaces(NC->name())+".pid");
 
-        owarn << "PPP PID " << F.name() << oendl;
+        odebug << "PPP PID " << F.name() << oendl;
         if( F.open( IO_ReadOnly ) ) {
           QTextStream TS(&F);
           QString X = TS.readLine();
@@ -43,7 +43,7 @@ State_t GPRSRun::detectState( void ) {
             X = TS.readLine();
             I = NSResources->system().findInterface(X);
 
-            owarn << "ppp running : IFace " << X << " = " << (long)I << oendl;
+            odebug << "ppp running : IFace " << X << " = " << (long)I << oendl;
 
             if( I ) {
               NC->assignInterface( I );
@@ -88,7 +88,7 @@ QString GPRSRun::setMyState( NodeCollection * NC, Action_t A , bool ) {
           return QString("Cannot terminate pppd for %1").arg(NC->name());
         }
         NC->assignInterface( 0 );
-        owarn << "ppp stopped " << oendl;
+        odebug << "ppp stopped " << oendl;
         PPPPid = 0;
       }
     }

@@ -51,14 +51,14 @@ void OTPeer::updateServices( void ) {
 
     serviceList.clear();
 
-    owarn << "Get services from " << Addr.toString() << oendl;
+    odebug << "Get services from " << Addr.toString() << oendl;
 
     session = sdp_connect( &(OTDeviceAddress::any.getBDAddr()), 
                            &(Addr.getBDAddr()),
                            0);
 
     if (!session) {
-      owarn << "sdp_connect(" 
+      odebug << "sdp_connect(" 
             << Addr.toString()
             << ") failed"  
             << oendl;
@@ -80,7 +80,7 @@ void OTPeer::updateServices( void ) {
                                      SDP_ATTR_REQ_RANGE, 
                                      attrId, 
                                      &seq ) ) {
-      owarn << "Service Search failed" << oendl;
+      odebug << "Service Search failed" << oendl;
       sdp_close(session);
       return;
     }
@@ -177,7 +177,7 @@ void OTPeer::findOutState( int timeoutInSec, bool Force ) {
       if( State == OTPeer::Peer_Unknown ) {
         ProbePhase = 0;
         ProbeTimeout = timeoutInSec*1000;
-        owarn << "Ping " << address().toString() << oendl;
+        odebug << "Ping " << address().toString() << oendl;
         startTimer( POLLDELAY );
       } else {
         ProbeTimeout = 0;
@@ -235,7 +235,7 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
               pf[0].fd = ProbeFD; 
               pf[0].events = POLLOUT;
               if( (n = ::poll(pf, 1, 0)) < 0 ) {
-                owarn << address().toString()
+                odebug << address().toString()
                       << " : errno " 
                       << errno 
                       << " " 
@@ -266,7 +266,7 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
                   // permission denied means that we could not
                   // connect because the device does not allow us
                   // but it is UP
-                  owarn << address().toString()
+                  odebug << address().toString()
                         << " good send error " 
                         << errno 
                         << " " 
@@ -276,7 +276,7 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
                   ProbeTimeout = 0;
                   break;
                 } else if( errno != EBUSY ) {
-                  owarn << address().toString()
+                  odebug << address().toString()
                         << " : errno " 
                         << errno 
                         << " " 
@@ -299,7 +299,7 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
               pf[0].fd = ProbeFD; 
               pf[0].events = POLLIN;
               if( (n = ::poll(pf, 1, 0)) < 0 ) {
-                owarn << address().toString()
+                odebug << address().toString()
                       << " : errno " 
                       << errno 
                       << " " 
@@ -315,7 +315,7 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
               }
 
               if( (n = ::recv( ProbeFD, buf, sizeof(buf), 0)) < 0) {
-                owarn << address().toString()
+                odebug << address().toString()
                       << "errno " 
                       << errno 
                       << " " 
@@ -330,7 +330,7 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
                 // not our reply
                 break;
 
-              owarn << "reply from " 
+              odebug << "reply from " 
                     << address().toString()
                     << oendl;
               // whatever reply we get is a valid reply 

@@ -154,7 +154,7 @@ bool OTGateway::isEnabled() {
 
 void OTGateway::SLOT_ShowError( const QString & S ) {
 
-      owarn << S << oendl;
+      odebug << S << oendl;
 
       if( ErrorConnectCount > 0 ) {
         // pass error
@@ -210,7 +210,7 @@ void OTGateway::timerEvent( QTimerEvent * ) {
 }
 
 void OTGateway::SLOT_Enabled( int id, bool Up ) {
-      owarn << "device " << id << " state " << Up << oendl;
+      odebug << "device " << id << " state " << Up << oendl;
       if( Up ) {
         // device is up -> detect it
         updateDrivers();
@@ -227,7 +227,7 @@ void OTGateway::updateDrivers( void ) {
 
       AllDrivers.update();
 
-      owarn << "updated drivers. now " << AllDrivers.count() << oendl;
+      odebug << "updated drivers. now " << AllDrivers.count() << oendl;
 
       // connect signals for each driver
       for( unsigned int i = 0;
@@ -265,7 +265,7 @@ void OTGateway::updateDrivers( void ) {
 }
 
 void OTGateway::SLOT_DriverDisappeared( OTDriver * D ) {
-      owarn << "Driver " << D->devname() << " when offline" << oendl;
+      odebug << "Driver " << D->devname() << " when offline" << oendl;
       updateDrivers();
 }
 
@@ -318,7 +318,7 @@ void OTGateway::SLOT_PeerDetected( OTPeer * P, bool IsNew ) {
 
       if( IsNew ) {
         // new peer
-        owarn << "New peer " << P->name() << oendl;
+        odebug << "New peer " << P->name() << oendl;
         addPeer( P );
       }
 
@@ -384,14 +384,14 @@ PANConnectionVector OTGateway::getPANConnections( void ) {
 
         int ctl = socket(PF_BLUETOOTH, SOCK_RAW, BTPROTO_BNEP);
         if (ctl < 0) {
-          owarn << "Failed to open control socket" << oendl;
+          odebug << "Failed to open control socket" << oendl;
           return V;
         }
 
         req.cnum = 48;
         req.ci   = ci;
         if (ioctl(ctl, BNEPGETCONNLIST, &req)) {
-          owarn << "Failed to get connection list" << oendl;
+          odebug << "Failed to get connection list" << oendl;
           ::close( ctl );
           return V;
         }

@@ -109,9 +109,7 @@ NetworkSettings::NetworkSettings( QWidget *parent,
 NetworkSettings::~NetworkSettings() {
     QString S;
 
-    owarn << "Dispose NS" << oendl;
     if( NSD.isModified() ) {
-      owarn << "Modified" << oendl;
       S = NSD.saveSettings();
       if( ! S.isEmpty() ) {
         S.insert( 0, "<p>" );
@@ -286,12 +284,10 @@ void NetworkSettings::SLOT_ShowNode( QListBoxItem * LBI ) {
     bool IsEnabled = 1;
     int leds = 0;
 
-    owarn << "State " << NC->state() << oendl;
     switch( NC->state() ) {
       case Disabled : // no further work
         IsEnabled = 0;
         FrmActive = 0;
-        owarn << "LEds " << leds << oendl;
         break;
       case Unknown :
       case Unchecked :
@@ -359,7 +355,7 @@ void NetworkSettings::SLOT_Disable( bool T ) {
 
     NodeCollection * NC = NSResources->findConnection( LBI->text() );
 
-    owarn << "Prepare to disable" << oendl;
+    Log(( "Prepare to %sable\n", (T) ? "en" : "dis" ));
     Msg = NC->setState( (T) ? Disable : Enable );
     if( ! Msg.isEmpty() ) {
       Msg.insert( 0, "<p>" );

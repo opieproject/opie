@@ -10,7 +10,7 @@ State_t ProfileRun::detectState( void ) {
 }
 
 QString ProfileRun::setMyState( NodeCollection * NC, Action_t A, bool ) { 
-    owarn << "Profile " << Data->Disabled << oendl;
+    odebug << "Profile " << Data->Disabled << oendl;
     if( A == Disable ) {
       if( ! Data->Disabled ) {
         Data->Disabled = 1;

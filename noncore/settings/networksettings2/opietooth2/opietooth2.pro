@@ -35,3 +35,10 @@ TARGET		= opietooth2
 VERSION		= 1.0.0
 
 include ( $(OPIEDIR)/include.pro )
+
+!isEmpty( LIBBLUEZ_INC_DIR ) {
+    INCLUDEPATH += $$LIBBLUEZ_INC_DIR
+}
+!isEmpty( LIBBLUEZ_LIB_DIR ) {
+    LIBS += -L$$LIBBLUEZ_LIB_DIR
+}

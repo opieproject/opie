@@ -22,30 +22,29 @@ QString NetworkRun::setMyState( NodeCollection * NC, Action_t A, bool ) {
     // we handle UP and DOWN
     InterfaceInfo * II = NC->assignedInterface();
 
+    if( ! II ) {
+      Log(( "no interface assigned." ));
+      return QString();
+    }
+
+    QStringList SL;
+
     if( A == Up ) {
       // we can bring UP if lower level is available
-      QStringList SL;
-      SL << "ifup"
-         << QString().sprintf( "%s=%s-c%d-allowed",
+      SL << "ifup";
+    } else if( A == Down ) {
+      SL << "ifdown";
+    } else {
+      return QString();
+    }
+
+    SL << QString().sprintf( "%s=%s-c%d-allowed",
                         II->Name.latin1(), II->Name.latin1(),
                         nodeCollection()->number() );
-      if( ! NSResources->system().runAsRoot( SL ) ) {
-        return QString("Cannot call %1").arg(SL.join(" "));
-      }
-      return QString();
-    } 
 
-    if( A == Down ) {
-      QStringList SL;
-      if( II ) {
-        SL << "ifdown"
-           << II->Name.latin1();
-        if( !  NSResources->system().runAsRoot( SL ) ) {
-          return QString( "Cannot call %1" ).arg( SL.join( " " ));
-        }
-      } else {
-        Log(( "no interface assigned." ));
-      }
-    } 
+    if( ! NSResources->system().runAsRoot( SL ) ) {
+      return QString("Cannot call %1").arg(SL.join(" "));
+    }
+
     return QString();
 }

@@ -103,7 +103,7 @@ bool OTDevice::detach(){
         }
 
         if( kill( m_hciattachPid, 9) < 0 ) {
-          owarn << "could not stop " << errno << oendl;
+          odebug << "could not stop " << errno << oendl;
           emit error( tr( "Could not stop process" ) );
           return FALSE;
         }
@@ -168,7 +168,7 @@ void OTDevice::slotStdErr(OProcess* proc, char* chars, int len) {
         QCString string( chars, len+1 ); // \0 == +1
         QString m_output;
         m_output.append( string.data() );
-        owarn << m_output << oendl;
+        odebug << m_output << oendl;
       }
 }
 
@@ -211,7 +211,7 @@ void OTDevice::detectDeviceType( QString & Device,
                                  unsigned long & Speed ) {
 
      // detect device type and determine parms
-     owarn << "Detecting device" << oendl;
+     odebug << "Detecting device" << oendl;
      switch ( ODevice::inst()->model() ) {
       case Model_iPAQ_H39xx:
           Device = "/dev/tts/1";

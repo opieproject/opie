@@ -72,7 +72,7 @@ int System::runAsRoot( QStringList & S, MyProcess * Prc ) {
     }
 
     if( getenv( "NS2TESTMODE" ) ) {
-      owarn << "TESTMODE !!! execute " 
+      odebug << "TESTMODE !!! execute " 
             << S.join( " ") 
             << oendl;
     } else {
@@ -106,13 +106,13 @@ int System::runAsRoot( QStringList & S, MyProcess * Prc ) {
 
       if( ! P->process().start( OProcess::DontCare, 
                       OProcess::AllOutput ) ) {
-        owarn << "Error starting " << S << oendl;
+        odebug << "Error starting " << S << oendl;
         if( ! Prc )
           delete P;
         // error starting app
         return 0;
       }
-      owarn << "Started " << S << oendl;
+      odebug << "Started " << S << oendl;
     }
 
     // all is fine
@@ -270,7 +270,7 @@ void System::probeInterfaces( void ) {
 
     sockfd = socket(PF_INET, SOCK_DGRAM, 0);
     if(sockfd == -1) {
-      owarn << "Cannot open INET socket "
+      odebug << "Cannot open INET socket "
             << errno 
             << " "
             << strerror( errno )
@@ -282,7 +282,7 @@ void System::probeInterfaces( void ) {
     // SIOCGIFCONF does not return ALL interfaces ???!?
     ProcDevNet = new QFile(PROCNETDEV);
     if( ! ProcDevNet->open(IO_ReadOnly) ) {
-      owarn << "Cannot open " 
+      odebug << "Cannot open " 
             << PROCNETDEV
             << " "
             << errno 
@@ -509,7 +509,7 @@ QString removeSpaces( const QString & X ) {
       QString Y;
       Y = X.simplifyWhiteSpace(); 
       Y.replace( QRegExp(" "), "_" );
-      owarn << X <<  " **" << Y << "**" << oendl;
+      odebug << X <<  " **" << Y << "**" << oendl;
       return Y;
 }
 
@@ -548,7 +548,7 @@ void MyProcess::SLOT_Stdout( Opie::Core::OProcess * , char * Buf, int len ) {
       // now input is zero terminated
       StdoutBuffer += LB;
 
-      owarn << "Received " << len << " bytes on stdout" << oendl;
+      odebug << "Received " << len << " bytes on stdout" << oendl;
       // see if we have some lines (allow empty lines)
       QStringList SL = QStringList::split( "\n", StdoutBuffer, TRUE );
 
@@ -569,7 +569,7 @@ void MyProcess::SLOT_Stderr( Opie::Core::OProcess * , char * Buf, int len ) {
       // now input is zero terminated
       StderrBuffer += LB;
 
-      owarn << "Received " << len << " bytes on stderr" << oendl;
+      odebug << "Received " << len << " bytes on stderr" << oendl;
       // see if we have some lines (allow empty lines)
       QStringList SL = QStringList::split( "\n", StderrBuffer, TRUE );
 

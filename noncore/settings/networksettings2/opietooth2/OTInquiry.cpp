@@ -59,7 +59,7 @@ OTInquiry::~OTInquiry() {
 
 void OTInquiry::stopInquiring( void ) {
     if( Socket ) {
-      owarn << "Stop inquiry" << oendl;
+      odebug << "Stop inquiry" << oendl;
       Driver->closeSocket();
       Socket = 0;
     }
@@ -75,7 +75,7 @@ bool OTInquiry::inquire( double timeout, int numResponses, int lap) {
     cmdBuf[3] = max(0x01, min(0x30, int(timeout/1.28)));
     cmdBuf[4] = (unsigned char)numResponses;
 
-    owarn << "Send HCI inquiry command. wait for " << cmdBuf[3] << oendl;
+    odebug << "Send HCI inquiry command. wait for " << cmdBuf[3] << oendl;
 
     Socket->sendCommand(0x01, 0x0001, cmdBuf);
 
@@ -89,12 +89,12 @@ bool OTInquiry::inquire( double timeout, int numResponses, int lap) {
       }
       else {
         QString S =QString().sprintf( "%x", status );
-        owarn << "OTInquiry::inquiry() failed: 0x" << S << oendl;
+        odebug << "OTInquiry::inquiry() failed: 0x" << S << oendl;
         emit finished();
         return false;
       }
     } else {
-      owarn << "OTInquiry::inquiry(): Timeout." << oendl;
+      odebug << "OTInquiry::inquiry(): Timeout." << oendl;
       return false;
     }
 }
@@ -126,7 +126,7 @@ void OTInquiry::slotInquiryTimeout() {
 
 void OTInquiry::slotHCIEvent(unsigned char eventCode, QByteArray buf) {
 
-    owarn << "OTInquiry: hci packet received: eventCode="
+    odebug << "OTInquiry: hci packet received: eventCode="
           << (unsigned int)eventCode 
           << " packetLength="
           << (unsigned int)buf.size() 
@@ -136,11 +136,11 @@ void OTInquiry::slotHCIEvent(unsigned char eventCode, QByteArray buf) {
     switch (eventCode) {
       case EVT_INQUIRY_COMPLETE:
         { unsigned char status = data[0];
-          owarn << "EVT_INQUIRY_COMPLETE status=" << status << oendl;
+          odebug << "EVT_INQUIRY_COMPLETE status=" << status << oendl;
           InquiryTimeoutTimer->stop();
           if (status == 0) {
             if( SuccessfullyStarted == true) {
-              owarn << "OTInquiry ended successfully" << oendl;
+              odebug << "OTInquiry ended successfully" << oendl;
               SuccessfullyEnded = true;
             }
             emit finished();
@@ -163,7 +163,7 @@ void OTInquiry::slotHCIEvent(unsigned char eventCode, QByteArray buf) {
           for (int n=0; n<numResults; n++) {
             Addr.setBDAddr( results[n].bdaddr );
 
-            owarn << "INQUIRY_RESULT: "
+            odebug << "INQUIRY_RESULT: "
                   << Addr.toString() 
                   << oendl;
 
@@ -203,7 +203,7 @@ void OTInquiry::slotHCIEvent(unsigned char eventCode, QByteArray buf) {
         { int status = data[0];
           int numHciCmdPkts = data[1];
           int cmdOpcode = *((uint16_t*)(data+2));
-          owarn << "EVT_CMD_STATUS status=" 
+          odebug << "EVT_CMD_STATUS status=" 
                 << status
                 << " numPkts=" 
                 << numHciCmdPkts 
