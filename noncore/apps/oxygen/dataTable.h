@@ -7,24 +7,16 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
-#include "dataTable.h"
-#include <qdialog.h>
 
-class QTable;
-class QComboBox;
+#include <qtable.h>
 
-class dataWidgetUI : public QDialog
+class dataTable : public QTable
 {
 	Q_OBJECT
 	
     public:
-		dataWidgetUI();
+		dataTable();
 
-    private:
-        void createTableLayout();
-        QTable *DataTable;
-        QComboBox *dataCombo;
-
-    private slots:
-        void slotShowData(int);
+    protected:
+        virtual void paintCell(  QPainter *p, int row, int col, const QRect &cr, bool selected );
 };

@@ -1,4 +1,3 @@
-
 /***************************************************************************
  *                                                                         *
  * This program is free software; you can redistribute it and/or modify    *
@@ -7,24 +6,19 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
+#include "oxygen.h"
+
 #include "dataTable.h"
-#include <qdialog.h>
+#include <qtable.h>
 
-class QTable;
-class QComboBox;
-
-class dataWidgetUI : public QDialog
+dataTable::dataTable() : QTable()
 {
-	Q_OBJECT
-	
-    public:
-		dataWidgetUI();
+}
 
-    private:
-        void createTableLayout();
-        QTable *DataTable;
-        QComboBox *dataCombo;
+void dataTable::paintCell(  QPainter *p, int, int, const QRect &cr, bool )
+{
+    if ( currentRow()%2) qDebug("foo" );
+}
 
-    private slots:
-        void slotShowData(int);
-};
+
+

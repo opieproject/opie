@@ -1,7 +1,5 @@
 calcdlg.h
 calcdlg.cpp
-datawidget.h
-datawidget.cpp
 moc_*
 *.moc
 Makefile*
