@@ -1,0 +1,123 @@
+diff -ru libetpan-0.32-patched/generic/imapdriver_tools.h libetpan-0.32-patched2/generic/imapdriver_tools.h
+--- libetpan-0.32-patched/generic/imapdriver_tools.h	2003-12-08 16:36:36.000000000 +0100
++++ libetpan-0.32-patched2/generic/imapdriver_tools.h	2003-12-21 16:18:28.000000000 +0100
+@@ -41,6 +41,7 @@
+ #include "mailmime.h"
+ #include "imapdriver_types.h"
+ #include "mail_cache_db.h"
++#include <sys/param.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+diff -ru libetpan-0.32-patched/generic/imapdriver_types.h libetpan-0.32-patched2/generic/imapdriver_types.h
+--- libetpan-0.32-patched/generic/imapdriver_types.h	2003-12-15 04:33:57.000000000 +0100
++++ libetpan-0.32-patched2/generic/imapdriver_types.h	2003-12-21 16:18:50.000000000 +0100
+@@ -43,6 +43,7 @@
+ #include <libetpan/maildriver_types.h>
+ #include <libetpan/generic_cache_types.h>
+ #include <libetpan/mailstorage_types.h>
++#include <sys/param.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+diff -ru libetpan-0.32-patched/generic/mailstorage_tools.c libetpan-0.32-patched2/generic/mailstorage_tools.c
+--- libetpan-0.32-patched/generic/mailstorage_tools.c	2003-12-15 04:33:57.000000000 +0100
++++ libetpan-0.32-patched2/generic/mailstorage_tools.c	2003-12-21 16:10:52.000000000 +0100
+@@ -38,6 +38,7 @@
+ #include "libetpan-config.h"
+ 
+ #include <sys/types.h>
++#include <sys/param.h>
+ #include <netdb.h>
+ #include <netinet/in.h>
+ #include <sys/socket.h>
+diff -ru libetpan-0.32-patched/generic/mhdriver_types.h libetpan-0.32-patched2/generic/mhdriver_types.h
+--- libetpan-0.32-patched/generic/mhdriver_types.h	2003-12-15 04:33:57.000000000 +0100
++++ libetpan-0.32-patched2/generic/mhdriver_types.h	2003-12-21 16:17:53.000000000 +0100
+@@ -45,6 +45,8 @@
+ #include <libetpan/generic_cache_types.h>
+ #include <libetpan/mailstorage_types.h>
+ 
++#include <sys/param.h>
++
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+diff -ru libetpan-0.32-patched/generic/mime_message_driver.c libetpan-0.32-patched2/generic/mime_message_driver.c
+--- libetpan-0.32-patched/generic/mime_message_driver.c	2003-12-15 04:33:57.000000000 +0100
++++ libetpan-0.32-patched2/generic/mime_message_driver.c	2003-12-21 16:20:17.000000000 +0100
+@@ -39,6 +39,7 @@
+ 
+ #include <sys/stat.h>
+ #include <sys/types.h>
++#include <sys/param.h>
+ #include <unistd.h>
+ #include <sys/mman.h>
+ #include <stdlib.h>
+diff -ru libetpan-0.32-patched/generic/nntpdriver_types.h libetpan-0.32-patched2/generic/nntpdriver_types.h
+--- libetpan-0.32-patched/generic/nntpdriver_types.h	2003-12-15 04:33:57.000000000 +0100
++++ libetpan-0.32-patched2/generic/nntpdriver_types.h	2003-12-21 16:19:43.000000000 +0100
+@@ -44,6 +44,7 @@
+ #include <libetpan/clist.h>
+ #include <libetpan/generic_cache_types.h>
+ #include <libetpan/mailstorage_types.h>
++#include <sys/param.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+diff -ru libetpan-0.32-patched/generic/pop3driver_types.h libetpan-0.32-patched2/generic/pop3driver_types.h
+--- libetpan-0.32-patched/generic/pop3driver_types.h	2003-12-15 04:33:57.000000000 +0100
++++ libetpan-0.32-patched2/generic/pop3driver_types.h	2003-12-21 16:19:19.000000000 +0100
+@@ -44,6 +44,7 @@
+ #include <libetpan/maildriver_types.h>
+ #include <libetpan/chash.h>
+ #include <libetpan/mailstorage_types.h>
++#include <sys/param.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+diff -ru libetpan-0.32-patched/maildir/maildir_types.h libetpan-0.32-patched2/maildir/maildir_types.h
+--- libetpan-0.32-patched/maildir/maildir_types.h	2003-12-15 04:33:57.000000000 +0100
++++ libetpan-0.32-patched2/maildir/maildir_types.h	2003-12-21 16:17:03.000000000 +0100
+@@ -38,6 +38,7 @@
+ #define MAILDIR_TYPES_H
+ 
+ #include <sys/types.h>
++#include <sys/param.h>
+ #include <unistd.h>
+ #include <libetpan/chash.h>
+ #include <libetpan/carray.h>
+diff -ru libetpan-0.32-patched/mbox/mailmbox_types.h libetpan-0.32-patched2/mbox/mailmbox_types.h
+--- libetpan-0.32-patched/mbox/mailmbox_types.h	2003-12-15 04:33:57.000000000 +0100
++++ libetpan-0.32-patched2/mbox/mailmbox_types.h	2003-12-21 16:14:58.000000000 +0100
+@@ -42,7 +42,7 @@
+ #endif
+ 
+ #include <sys/types.h>
+-
++#include <sys/param.h>
+ #include <libetpan/libetpan-config.h>
+ 
+ #include <libetpan/mailimf.h>
+diff -ru libetpan-0.32-patched/tools/maillock.c libetpan-0.32-patched2/tools/maillock.c
+--- libetpan-0.32-patched/tools/maillock.c	2003-12-15 04:33:58.000000000 +0100
++++ libetpan-0.32-patched2/tools/maillock.c	2003-12-21 16:14:19.000000000 +0100
+@@ -39,6 +39,7 @@
+ 
+ #include <sys/types.h>
+ #include <sys/stat.h>
++#include <sys/param.h>
+ #include <fcntl.h>
+ #include <unistd.h>
+ #include <stdio.h>
+diff -ru libetpan-0.32-patched/tools/mmapstring.c libetpan-0.32-patched2/tools/mmapstring.c
+--- libetpan-0.32-patched/tools/mmapstring.c	2003-12-15 04:33:58.000000000 +0100
++++ libetpan-0.32-patched2/tools/mmapstring.c	2003-12-21 16:13:32.000000000 +0100
+@@ -40,6 +40,7 @@
+ #include <stdlib.h>
+ #include <unistd.h>
+ #include <sys/mman.h>
++#include <sys/param.h>
+ #include <string.h>
+ #include <pthread.h>
+ 
