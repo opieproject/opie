@@ -277,30 +277,7 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                     setToggleButton( button, FALSE );
                 }
 
-                switch( command ) {
-
-                case Play: {
-                    if( mediaPlayerState.isPaused() ) {
-                        setToggleButton( button, FALSE );
-                        mediaPlayerState.setPaused( FALSE );
-                        return;
-                    } else if( !mediaPlayerState.isPaused() ) {
-                        setToggleButton( button, TRUE );
-                        mediaPlayerState.setPaused( TRUE );
-                        return;
-                    } else {
-                        return;
-                    }
-                }
-
-                case Stop:       mediaPlayerState.setPlaying( FALSE ); return;
-                case Next:       if( playList.currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setNext(); return;
-                case Previous:   if( playList.currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setPrev(); return;
-                case VolumeUp:      emit moreReleased(); return;
-                case VolumeDown:    emit lessReleased(); return;
-                case FullScreen: mediaPlayerState.setFullscreen( TRUE ); makeVisible(); return;
-                default: break;
-                }
+                handleCommand( command, button.isDown );
             }
         }
     }

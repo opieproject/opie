@@ -69,6 +69,10 @@ void MediaWidget::paintEvent( QPaintEvent *pe )
     }
 }
 
+void MediaWidget::makeVisible()
+{
+}
+
 void MediaWidget::handleCommand( Command command, bool buttonDown )
 {
     switch ( command ) {
@@ -82,6 +86,7 @@ void MediaWidget::handleCommand( Command command, bool buttonDown )
         case PlayList:   mediaPlayerState.setList();  return;
         case Forward:    emit forwardReleased(); return;
         case Back:       emit backReleased(); return;
+        case FullScreen: mediaPlayerState.setFullscreen( true ); makeVisible(); return;
         default: assert( false );
     }
 }

@@ -57,7 +57,7 @@ public slots:
     void sliderPressed( );
     void sliderReleased( );
     void setFullscreen( bool b );
-    void makeVisible();
+    virtual void makeVisible();
     void backToNormal();
     void setPosition( long );
 
@@ -69,8 +69,6 @@ public:
 signals:
     void moreClicked();
     void lessClicked();
-    void moreReleased();
-    void lessReleased();
     void sliderMoved( long );
     void videoResized ( const QSize &s );
 

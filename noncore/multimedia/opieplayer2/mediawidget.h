@@ -83,6 +83,8 @@ protected:
 
     virtual void paintEvent( QPaintEvent *pe );
 
+    virtual void makeVisible();
+
     void handleCommand( Command command, bool buttonDown );
 
     bool isOverButton( const QPoint &position, int buttonId ) const;
