@@ -138,22 +138,22 @@ struct Thread::Data
 extern "C"
 {
 
-void _threadutil_terminate_thread( void *arg )
+static void terminate_thread( void *arg )
 {
-    Thread *thr = ( Thread* )arg;
+    Thread::Data *data = ( Thread::Data* )arg;
 
-    assert( thr );
+    assert( data );
 
-    AutoLock locker( thr->d->guard );
-    thr->d->isRunning = false;
-    thr->d->finishCondition.wakeAll();
+    AutoLock locker( data->guard );
+    data->isRunning = false;
+    data->finishCondition.wakeAll();
 }
 
 void *_threadutil_start_thread( void *arg )
 {
     Thread *thr = ( Thread* )arg;
 
-    pthread_cleanup_push( _threadutil_terminate_thread, thr );
+    pthread_cleanup_push( terminate_thread, thr->d );
 
     thr->d->isRunning = true;
     thr->run();

@@ -29,7 +29,6 @@ class QSocketNotifier;
 extern "C"
 {
     void *_threadutil_start_thread( void* );
-    void _threadutil_terminate_thread( void* );
 }
 
 namespace ThreadUtil
@@ -90,8 +89,9 @@ namespace ThreadUtil
     class Thread
     {
         friend void *::_threadutil_start_thread( void* );
-        friend void ::_threadutil_terminate_thread( void* );
     public:
+        struct Data;
+
         Thread();
         virtual ~Thread();
 
@@ -107,7 +107,6 @@ namespace ThreadUtil
         virtual void run() = 0;
 
     private:
-        struct Data;
         Data *d;
     };
 
