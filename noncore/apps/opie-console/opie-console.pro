@@ -3,7 +3,7 @@ TEMPLATE     = app
 CONFIG 	     = qt debug
 DESTDIR      = $(OPIEDIR)/bin
 HEADERS      = io_layer.h io_serial.h \
-	       file_layer.h \
+	       file_layer.h sz_transfer.h \
 	       metafactory.h \
 	       session.h \
 	       mainwindow.h \
@@ -25,7 +25,8 @@ HEADERS      = io_layer.h io_serial.h \
 	       widget_layer.h
 
 SOURCES      = io_layer.cpp io_serial.cpp \
-	       file_layer.cpp main.cpp \
+	       file_layer.cpp sz_transfer.cpp \
+           main.cpp \
 	       metafactory.cpp \
 	       session.cpp \
 	       mainwindow.cpp \
