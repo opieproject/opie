@@ -203,6 +203,7 @@ public:
 
 private:
     friend class AbTable;
+    friend class OContactDB;
     void insert( int key, const QString &value );
     void replace( int key, const QString &value );
     QString find( int key ) const;
