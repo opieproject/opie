@@ -3,14 +3,14 @@
 
 #include <qpe/qpeapplication.h>
 #include <qstring.h>
-//#include <qmessagebox.h>
+#include <unistd.h>
 int debugLevel;
 
 int main( int argc, char ** argv )
 {
 	setpgid(0,0);
   printf("This is oipkg\n");
-  printf("$Id: main.cpp,v 1.13 2002-06-28 17:01:13 tille Exp $\n");
+  printf("$Id: main.cpp,v 1.14 2002-07-19 12:44:48 tille Exp $\n");
   debugLevel = 2;
   if (argc > 1)
   {

@@ -10,8 +10,6 @@
 #ifndef PMIPKG_H
 #define PMIPKG_H
 
-
-#include <opie/oprocess.h>
 #include <qobject.h>
 #include <qlist.h>
 #include <qstring.h>
@@ -49,11 +47,9 @@ public slots:
   void createLinks( const QString &dest );
   void removeLinks( const QString &dest );
 
-//private slots:
-	void getIpkgOutput(OProcess *proc, char *buffer, int buflen);
 
 private:
-	OProcess *ipkgProcess;
+	QString ipkg_cmd;
   PackageManagerSettings* settings;
   RunWindow *runwindow;
   InstallDialog *installDialog;
