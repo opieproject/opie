@@ -2,7 +2,7 @@
 #include <qcheckbox.h>
 #include <qradiobutton.h>
 
-ConfigDlg::ConfigDlg( QWidget *parent = 0, const char *name = 0 ):
+ConfigDlg::ConfigDlg( QWidget *parent, const char *name):
 	ConfigDlg_Base(parent, name, true )
 {}
     
