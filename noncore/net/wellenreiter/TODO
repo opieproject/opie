@@ -1,5 +1,10 @@
 - beep over headphone / customizable
 
+- add configuration for scrollback buffer in hex window and log window
+
+- implement beacon stripping (the first beacon is enough to detect a 
+  new network - further beacons just blow up the capture file)
+
 - identification of probe requests
   i.e. other sniffers around
 
@@ -26,3 +31,5 @@
 
 - pester the ethereal folks to settle for an application independant
   packet dissection framework... (unlikely)
+
+- revamp hex window, make it more sophisticated than just a QMultiLineEdit
