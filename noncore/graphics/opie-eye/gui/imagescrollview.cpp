@@ -12,7 +12,6 @@ ImageScrollView::ImageScrollView( QWidget* parent, const char* name,  WFlags f )
      rotate_to_fit(true),first_resize_done(false),m_lastName("")
 {
     init();
-    qDebug("constructor done");
 }
 
 ImageScrollView::ImageScrollView (const QImage&img, QWidget * parent, const char * name, WFlags f,bool always_scale,bool rfit)
@@ -56,6 +55,7 @@ void ImageScrollView::init()
 {
     odebug << "init " << oendl;
     viewport()->setBackgroundColor(white);
+    setFocusPolicy(QWidget::StrongFocus);
     if (first_resize_done) {
         last_rot = Rotate0;
         generateImage();
@@ -254,6 +254,29 @@ void ImageScrollView::resizeEvent(QResizeEvent * e)
     first_resize_done = true;
 }
 
+void ImageScrollView::keyPressEvent(QKeyEvent * e)
+{
+    if (!e) return;
+    int dx = horizontalScrollBar()->lineStep();
+    int dy = verticalScrollBar()->lineStep();
+    if (e->key()==Qt::Key_Right) {
+        scrollBy(dx,0);
+        e->accept();
+    } else if (e->key()==Qt::Key_Left) {
+        scrollBy(0-dx,0);
+        e->accept();
+    } else if (e->key()==Qt::Key_Up) {
+        scrollBy(0,0-dy);
+        e->accept();
+    } else if (e->key()==Qt::Key_Down) {
+        scrollBy(0,dy);
+        e->accept();
+    } else {
+        e->ignore();
+    }
+    QScrollView::keyPressEvent(e);
+}
+
 void ImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clipw, int cliph)
 {
     int w = clipw;
@@ -292,23 +315,38 @@ void ImageScrollView::viewportMouseMoveEvent(QMouseEvent* e)
     int mx, my;
     mx = e->x();
     my = e->y();
-    int diffx = _mouseStartPosX-mx;
-    int diffy = _mouseStartPosY-my;
-    scrollBy(diffx,diffy);
+    if (_mouseStartPosX!=-1 && _mouseStartPosY!=-1) {
+        int diffx = _mouseStartPosX-mx;
+        int diffy = _mouseStartPosY-my;
+#if 0
+        QScrollBar*xbar = horizontalScrollBar();
+        QScrollBar*ybar = verticalScrollBar();
+        if (xbar->value()+diffx>xbar->maxValue()) {
+            diffx = xbar->maxValue()-xbar->value();
+        } else if (xbar->value()+diffx<0) {
+            diffx=0-xbar->value();
+        }
+        if (ybar->value()+diffy>ybar->maxValue()) {
+            diffy = ybar->maxValue()-ybar->value();
+        } else if (ybar->value()+diffy<0) {
+            diffy=0-ybar->value();
+        }
+#endif
+        scrollBy(diffx,diffy);
+    }
     _mouseStartPosX=mx;
     _mouseStartPosY=my;
 }
 
-void ImageScrollView::contentsMouseReleaseEvent ( QMouseEvent * e)
+void ImageScrollView::contentsMousePressEvent ( QMouseEvent * )
 {
-    _mouseStartPosX = e->x();
-    _mouseStartPosY = e->y();
-}
-
-void ImageScrollView::contentsMousePressEvent ( QMouseEvent * e)
-{
-    _mouseStartPosX = e->x();
-    _mouseStartPosY = e->y();
+    /* this marks the beginning of a possible mouse move. Due internal reasons of QT
+       the geometry values here may real differ from that set in MoveEvent (I don't know
+       why). For getting them in real context, we use the first move-event to set the start
+       position ;) 
+    */
+    _mouseStartPosX = -1;
+    _mouseStartPosY = -1;
 }
 
 void ImageScrollView::setDestructiveClose() {
@@ -317,21 +355,4 @@ void ImageScrollView::setDestructiveClose() {
     fl &= ~WDestructiveClose;
     fl |= WDestructiveClose;
     setWFlags( fl );
-}
-
-
-/* for testing */
-ImageDlg::ImageDlg(const QString&fname,QWidget * parent, const char * name)
-    :QDialog(parent,name,true,WStyle_ContextHelp)
-{
-    QVBoxLayout*dlglayout = new QVBoxLayout(this);
-    dlglayout->setSpacing(2);
-    dlglayout->setMargin(1);
-    ImageScrollView*inf = new ImageScrollView(fname,this);
-    dlglayout->addWidget(inf);
-    odebug << "Imagedlg constructor end" << oendl;
-}
-
-ImageDlg::~ImageDlg()
-{
 }

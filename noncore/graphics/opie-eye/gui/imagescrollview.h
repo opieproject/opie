@@ -17,12 +17,12 @@ public:
     ImageScrollView (const QString&, QWidget * parent=0, const char * name=0, WFlags f=0,bool always_scale=false,bool rfit=false );
     virtual ~ImageScrollView();
 
-    void setImage(const QImage&);
-    void setImage( const QString& path );
-    void setDestructiveClose();
+    virtual void setImage(const QImage&);
+    virtual void setImage( const QString& path );
+    virtual void setDestructiveClose();
 
-    void setAutoRotate(bool);
-    void setAutoScale(bool);
+    virtual void setAutoRotate(bool);
+    virtual void setAutoScale(bool);
 
     enum  Rotation {
         Rotate0,
@@ -48,25 +48,15 @@ protected:
     bool first_resize_done;
     Rotation last_rot;
     QString m_lastName;
-    void rescaleImage(int w, int h);
+    virtual void rescaleImage(int w, int h);
 
-    void rotate_into_data(Rotation r);
-    void generateImage();
+    virtual void rotate_into_data(Rotation r);
+    virtual void generateImage();
 
 protected slots:
     virtual void viewportMouseMoveEvent(QMouseEvent* e);
     virtual void contentsMousePressEvent ( QMouseEvent * e);
-    virtual void contentsMouseReleaseEvent ( QMouseEvent * e);
     virtual void resizeEvent(QResizeEvent * e);
+    virtual void keyPressEvent(QKeyEvent * e);
 };
-
-/* for testing */
-class ImageDlg:public QDialog
-{
-    Q_OBJECT
-public:
-    ImageDlg(const QString&,QWidget * parent=0, const char * name=0);
-    virtual ~ImageDlg();
-};
-
 #endif
