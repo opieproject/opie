@@ -10,7 +10,7 @@ INPUTCOMPONENTS= inputmethods/keyboard inputmethods/pickboard \
 	inputmethods/jumpx inputmethods/kjumpx \
 	inputmethods/dvorak  inputmethods/multikey \
 
-APPLETS= core/applets/batteryapplet core/applets/batteryapplet-ipaq \
+APPLETS= core/applets/batteryapplet \
 	core/applets/irdaapplet core/applets/volumeapplet \
 	core/applets/clockapplet \
 	core/applets/homeapplet core/applets/suspendapplet \
