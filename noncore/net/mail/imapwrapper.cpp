@@ -33,8 +33,13 @@ void IMAPwrapper::login()
     /* we are connected this moment */
     /* TODO: setup a timer holding the line or if connection closed - delete the value */
     if (m_imap) {
-        mailstream_flush(m_imap->imap_stream);
-        return;
+        err = mailimap_noop(m_imap);
+        if (err!=MAILIMAP_NO_ERROR) {
+            logout();
+        } else {
+            mailstream_flush(m_imap->imap_stream);
+            return;
+        }
     }
     server = account->getServer().latin1();
     port = account->getPort().toUInt();
