@@ -3,57 +3,85 @@
     <name>NewTaskDialog</name>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista Tarefas</translation>
     </message>
 </context>
 <context>
     <name>NewTaskDialogBase</name>
     <message>
         <source>New Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova Tarefa</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoria:</translation>
     </message>
     <message>
         <source>Summary:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sumário:</translation>
     </message>
     <message>
         <source>&amp;Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Completo</translation>
     </message>
     <message>
         <source>D&amp;ue</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Limite</translation>
     </message>
     <message>
         <source>1 Jan 2001</source>
-        <translation type="unfinished"></translation>
+        <translation>1 Jan 2001</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioridade:</translation>
     </message>
     <message>
         <source>1 - Very High</source>
-        <translation type="unfinished"></translation>
+        <translation>1 - Muito Alta</translation>
     </message>
     <message>
         <source>2 - High</source>
-        <translation type="unfinished"></translation>
+        <translation>2 - Alta</translation>
     </message>
     <message>
         <source>3 - Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>3 - Normal</translation>
     </message>
     <message>
         <source>4 - Low</source>
-        <translation type="unfinished"></translation>
+        <translation>4 - Baixa</translation>
     </message>
     <message>
         <source>5 - Very Low</source>
+        <translation>5 - Muito Baixa</translation>
+    </message>
+    <message>
+        <source>Progress:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>20%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>40%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>60%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>80%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>100%</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -61,38 +89,38 @@
     <name>TodoTable</name>
     <message>
         <source>C.</source>
-        <translation type="unfinished"></translation>
+        <translation>C.</translation>
     </message>
     <message>
         <source>Prior.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pri.</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrição</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished"></translation>
+        <translation>Limite</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Vazio</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Tudo</translation>
     </message>
 </context>
 <context>
     <name>TodoWindow</name>
     <message>
         <source>Todo</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarefa</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem espaço</translation>
     </message>
     <message>
         <source>Unable to create startup files
@@ -102,79 +130,79 @@ before you enter any data</source>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova Tarefa</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar Tarefa</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver Tarefa</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar...</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar Todas...</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplicar</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Irradiar</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar</translation>
     </message>
     <message>
         <source>Completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarefas Completas</translation>
     </message>
     <message>
         <source>Show Deadline</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Limite</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Fontes</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Dados</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoria</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opções</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Não pode editar enquanto sincroniza</translation>
     </message>
     <message>
         <source>Delete all tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar todas as tarefas?</translation>
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Todas as Categoria</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Vazio</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem espaço</translation>
     </message>
     <message>
         <source>Todo was unable

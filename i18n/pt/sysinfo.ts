@@ -3,140 +3,140 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>CPU - Aplicações (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>CPU - Systema (%)</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo:</translation>
     </message>
 </context>
 <context>
     <name>MemoryInfo</name>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Usado (%1 kB)</translation>
     </message>
     <message>
         <source>Buffers (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Buffers (%1 kB)</translation>
     </message>
     <message>
         <source>Cached (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Cache (%1 kB)</translation>
     </message>
     <message>
         <source>Free (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Livre (%1 kB)</translation>
     </message>
     <message>
         <source>Total Memory: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>Total: %1 kB</translation>
     </message>
 </context>
 <context>
     <name>MountInfo</name>
     <message>
         <source> : %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>: %1 kB</translation>
     </message>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Usado (%1 kB)</translation>
     </message>
     <message>
         <source>Available (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Disponível (%1 kB)</translation>
     </message>
 </context>
 <context>
     <name>ProcessDetail</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar</translation>
     </message>
 </context>
 <context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
-        <translation type="unfinished"></translation>
+        <translation>PID</translation>
     </message>
     <message>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Comando</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo</translation>
     </message>
 </context>
 <context>
     <name>StorageInfo</name>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Disco</translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Disco SCSI</translation>
     </message>
     <message>
         <source>Int. Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Armazenamento Interno</translation>
     </message>
 </context>
 <context>
     <name>SystemInfo</name>
     <message>
         <source>System Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info. Sistema</translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Memória</translation>
     </message>
     <message>
         <source>Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Armazenamento</translation>
     </message>
     <message>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation>CPU</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Processos</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versão</translation>
     </message>
 </context>
 <context>
     <name>VersionInfo</name>
     <message>
         <source>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Kernel de Linux&lt;/b&gt;&lt;p&gt;Versão:</translation>
     </message>
     <message>
         <source>Compiled by: </source>
-        <translation type="unfinished"></translation>
+        <translation>Compilado por:</translation>
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Versão:</translation>
     </message>
     <message>
         <source>Built on: </source>
-        <translation type="unfinished"></translation>
+        <translation>Compilado em:</translation>
     </message>
 </context>
 </TS>

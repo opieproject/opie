@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Amostragem</translation>
     </message>
     <message>
         <source>8000</source>
@@ -79,31 +79,31 @@
     </message>
     <message>
         <source>Key_Escape</source>
-        <translation type="unfinished"></translation>
+        <translation>Key_Escape</translation>
     </message>
     <message>
         <source>Key_Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Key_Space</translation>
     </message>
     <message>
         <source>Key_Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Key_Home</translation>
     </message>
     <message>
         <source>Key_Calender</source>
-        <translation type="unfinished"></translation>
+        <translation>Key_Calendar</translation>
     </message>
     <message>
         <source>Key_Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Key_Contacts</translation>
     </message>
     <message>
         <source>Key_Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Key_Menu</translation>
     </message>
     <message>
         <source>Key_Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Key_Mail</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>CanvasCardWindow</name>
     <message>
         <source>Patience</source>
-        <translation type="unfinished"></translation>
+        <translation>Paciência</translation>
     </message>
     <message>
         <source>Freecell</source>
@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Jogo</translation>
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Mudar</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;</translation>
     </message>
     <message>
         <source>&amp;About</source>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Jogar</translation>
     </message>
     <message>
         <source>Change Card Backs</source>

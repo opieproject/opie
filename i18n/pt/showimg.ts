@@ -3,55 +3,55 @@
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Leitor Imagens</translation>
     </message>
     <message>
         <source>Horizontal flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Virar Horizontalmente</translation>
     </message>
     <message>
         <source>Vertical flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Virar Verticalmente</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir</translation>
     </message>
     <message>
         <source>Rotate 180</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodar 180º</translation>
     </message>
     <message>
         <source>Rotate 90</source>
-        <translation type="unfinished"></translation>
+        <translation>Rodar 90º</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrâ Todo</translation>
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>- Leitor Imagens</translation>
     </message>
     <message>
         <source>Loading image...</source>
-        <translation type="unfinished"></translation>
+        <translation>A ler a imagem...</translation>
     </message>
     <message>
         <source>Could not load image</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao carregar a imagem</translation>
     </message>
     <message>
         <source>No image - select Open from File menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem imagens - seleccione Abrir no menu.</translation>
     </message>
     <message>
         <source>, %1/%2 colors</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1/%2 cores</translation>
     </message>
     <message>
         <source>, %1 colors</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1 cores</translation>
     </message>
     <message>
         <source> True color</source>
@@ -59,7 +59,7 @@
     </message>
     <message>
         <source>, %1 alpha levels</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">, %1 níveis</translation>
     </message>
     <message>
         <source>, 8-bit alpha channel</source>

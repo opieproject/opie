@@ -3,15 +3,15 @@
     <name>KRFBConnection</name>
     <message>
         <source>Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligado</translation>
     </message>
     <message>
         <source>Connection Refused</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligação Recusada</translation>
     </message>
     <message>
         <source>Host not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Endereço não encontrado</translation>
     </message>
     <message>
         <source>Read Error: QSocket reported an error reading

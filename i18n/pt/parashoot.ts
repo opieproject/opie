@@ -3,15 +3,15 @@
     <name>ParaShoot</name>
     <message>
         <source>ParaShoot</source>
-        <translation type="unfinished"></translation>
+        <translation>Pára-Quedas</translation>
     </message>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo Jogo</translation>
     </message>
     <message>
         <source>     Level: %1       Score: %2   </source>
-        <translation type="unfinished"></translation>
+        <translation>Nível: %1  Pontuação: %2</translation>
     </message>
     <message>
         <source>       GAME OVER!

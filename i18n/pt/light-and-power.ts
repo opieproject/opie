@@ -3,51 +3,51 @@
     <name>LightSettingsBase</name>
     <message>
         <source>Light Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração da Luz</translation>
     </message>
     <message>
         <source>Adjust to environment</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar ao ambiente</translation>
     </message>
     <message>
         <source>By sensing the ambient light where you are using your device, the screen light can be adjusted automatically. The brightness setting still affects the average brightness.</source>
-        <translation type="unfinished"></translation>
+        <translation>A luz do ecrâ será ajustada automaticamente mediante a luz ambiente. O parametro do brilho afectará o brilho médio.</translation>
     </message>
     <message>
         <source>Power saving</source>
-        <translation type="unfinished"></translation>
+        <translation>Poupança de energia</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>segundos</translation>
     </message>
     <message>
         <source>Dim light after</source>
-        <translation type="unfinished"></translation>
+        <translation>Reduzir brilho ao fim de</translation>
     </message>
     <message>
         <source>Suspend after</source>
-        <translation type="unfinished"></translation>
+        <translation>Suspender ao fim de</translation>
     </message>
     <message>
         <source>Only deactivate LCD during Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar o LCD apenas ao suspender</translation>
     </message>
     <message>
         <source>Light off after</source>
-        <translation type="unfinished"></translation>
+        <translation>Desligar luz ao fim de</translation>
     </message>
     <message>
         <source>Bright</source>
-        <translation type="unfinished"></translation>
+        <translation>Brilho</translation>
     </message>
     <message>
         <source>&lt;blockquote&gt;The brighter the screen light, the more battery power is used.&lt;/blockquote&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;blockquote&gt;Gastará mais bateria quanto mais brilhante seja o ecrâ.&lt;/blockquote&gt;</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Desligar</translation>
     </message>
 </context>
 </TS>

@@ -96,7 +96,7 @@
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Escrever E-Mail Para</translation>
+        <translation>Enviar EMail</translation>
     </message>
     <message>
         <source>Beam Entry</source>
@@ -225,6 +225,10 @@ Sair na mesma?</translation>
     <message>
         <source>Import vCard</source>
         <translation>Importar cartão de visita</translation>
+    </message>
+    <message>
+        <source>SMS Entry</source>
+        <translation>Enviar SMS</translation>
     </message>
 </context>
 <context>

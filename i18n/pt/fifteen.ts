@@ -3,39 +3,40 @@
     <name>FifteenMainWindow</name>
     <message>
         <source>Randomize</source>
-        <translation type="unfinished"></translation>
+        <translation>Aleatório</translation>
     </message>
     <message>
         <source>Solve</source>
-        <translation type="unfinished"></translation>
+        <translation>Resolver</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Jogo</translation>
     </message>
     <message>
         <source>Fifteen Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Puzzle</translation>
     </message>
 </context>
 <context>
     <name>PiecesTable</name>
     <message>
         <source>Fifteen Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>Puzzle</translation>
     </message>
     <message>
         <source>Congratulations!
 You win the game!</source>
-        <translation type="unfinished"></translation>
+        <translation>Parabéns! 
+Ganhou!</translation>
     </message>
     <message>
         <source>R&amp;andomize Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Misturar</translation>
     </message>
     <message>
         <source>&amp;Reset Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Reiniciar peças</translation>
     </message>
 </context>
 </TS>

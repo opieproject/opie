@@ -6,5 +6,5 @@ SOURCES				=opie-sh.cpp mbox.cpp fviewer.cpp inputdialog.cpp
 INCLUDEPATH		+=$(OPIEDIR)/include
 DEPENDPATH		+=$(OPIEDIR)/include
 LIBS						+=-lqpe
-TRANSLATIONS	=
 TARGET                   = opie-sh
+TRANSLATIONS	=	../../i18n/pt/opie-sh.ts
