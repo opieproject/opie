@@ -93,7 +93,7 @@ bool DateEntry::eventFilter(QObject *obj, QEvent *ev )
       comboStart->setText(s);
     }
   }
-  
+
   return false;
 }
 
@@ -186,7 +186,7 @@ void DateEntry::updateTimeEdit(bool s, bool e) {
 	strStart.sprintf( "%02d:%02d", startTime.hour(), startTime.minute() );
 	strEnd.sprintf( "%02d:%02d", endTime.hour(), endTime.minute() );
     }
-    
+
     if (s) comboStart->setText(strStart);
     if (e) comboEnd->setText(strEnd);
 }
@@ -211,7 +211,7 @@ void DateEntry::init()
 	     this, SLOT( slotChangeClock( bool ) ) );
     connect( qApp, SIGNAL(weekChanged(bool)),
 	     this, SLOT(slotChangeStartOfWeek(bool)) );
-    
+
     connect( editNote, SIGNAL(clicked()),
 	     this, SLOT(slotEditNote()) );
 
@@ -246,7 +246,7 @@ void DateEntry::slotEditNote() {
   QString s;
   s.sprintf("<B>%d/%d</B> ", startDate.day(), startDate.month());
   NoteEntry noteDlg(s+comboDescription->currentText(), noteStr,
-		    this,0,TRUE);  
+		    this,0,TRUE);
 
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
   noteDlg.showMaximized();
@@ -421,7 +421,7 @@ Event DateEntry::event()
         endDate = startDate;
         startDate = tmp;
     }
-    
+
     // This is now done in the changed slots
     //    startTime = parseTime( comboStart->text(), ampm );
     //endTime = parseTime( comboEnd->text(), ampm );
@@ -570,3 +570,4 @@ void DateEntry::slotChangeClock( bool whichClock )
     initCombos();
     setDates( QDateTime( startDate, startTime ), QDateTime( endDate, endTime ) );
 }
+

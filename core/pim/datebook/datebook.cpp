@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.12 2002-06-25 18:18:59 zecke Exp $
+** $Id: datebook.cpp,v 1.13 2002-06-27 12:42:37 zecke Exp $
 **
 **********************************************************************/
 
@@ -429,6 +429,8 @@ void DateBook::editEvent( const Event &e )
 #endif
     while (editDlg.exec() ) {
 	Event newEv = entry->event();
+	if(newEv.description().isEmpty() && newEv.notes().isEmpty() )
+	    break;
 	newEv.setUid(e.uid()); // FIXME: Hack not to clear uid
 	QString error = checkEvent(newEv);
 	if (!error.isNull()) {
