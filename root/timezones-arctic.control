@@ -1,10 +1,10 @@
-Package: timezones
+Package: timezones-arctic
 Files: root/usr/share/zoneinfo/Arctic
 Priority: optional
 Section: base
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Holger Schurig
 Depends: timezones-common
 Provides: timezones
 Version: 1.0.1-1
-Architecture: all
+Architecture: noarch
 Description: Arctic timezone data
