@@ -17,6 +17,8 @@
 #include "mainwindow.h"
 #include "wellenreiter.h"
 
+#include "scanlist.h"
+
 #include <qcombobox.h>
 #include <qiconset.h>
 #include <qmenubar.h>
@@ -80,24 +82,28 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     QMenuBar* mb = menuBar();
 
     QPopupMenu* file = new QPopupMenu( mb );
-    file->insertItem( "&Load" );
-    file->insertItem( "&Save" );
+    file->insertItem( "&Load..." );
+    file->insertItem( "&Save..." );
 
     QPopupMenu* view = new QPopupMenu( mb );
-    view->insertItem( "&Configure" );
+    view->insertItem( "&Configure..." );
 
     QPopupMenu* sniffer = new QPopupMenu( mb );
-    sniffer->insertItem( "&Configure" );
+    sniffer->insertItem( "&Configure..." );
     sniffer->insertSeparator();
 
-    int id;
+    QPopupMenu* demo = new QPopupMenu( mb );
+    demo->insertItem( "&Add something", this, SLOT( demoAddStations() ) );
 
+    int id;
     id = mb->insertItem( "&File", file );
     mb->setItemEnabled( id, false );
     id = mb->insertItem( "&View", view );
     mb->setItemEnabled( id, false );
     id = mb->insertItem( "&Sniffer", sniffer );
     mb->setItemEnabled( id, false );
+    id = mb->insertItem( "&Demo", demo );
+    mb->setItemEnabled( id, true );
 
     #ifdef QWS
     mb->insertItem( startStopButton );
@@ -157,5 +163,12 @@ WellenreiterMainWindow::~WellenreiterMainWindow()
 
 };
 
-
+void WellenreiterMainWindow::demoAddStations()
+{
+    mw->netView()->addNewItem( "managed", "Vanille", "04:00:20:EF:A6:43", true, 6, 80 );
+    mw->netView()->addNewItem( "managed", "Vanille", "04:00:20:EF:A6:23", true, 11, 10 );
+    mw->netView()->addNewItem( "adhoc", "ELAN", "40:03:43:E7:16:22", false, 3, 10 );
+    mw->netView()->addNewItem( "adhoc", "ELAN", "40:03:53:E7:56:62", false, 3, 15 );
+    mw->netView()->addNewItem( "adhoc", "ELAN", "40:03:63:E7:56:E2", false, 3, 20 );
+}
 

@@ -51,6 +51,7 @@ class Wellenreiter : public WellenreiterBase {
     ~Wellenreiter();
 
     void setConfigWindow( WellenreiterConfigWindow* cw );
+    MScanListView* netView() const { return netview; };
 
   protected:
     bool daemonRunning;
