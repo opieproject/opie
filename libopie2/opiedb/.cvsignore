@@ -1,3 +1,5 @@
 Makefile
 moc
 obj
+.moc
+.obj

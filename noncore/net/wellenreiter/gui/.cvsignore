@@ -1,7 +1,7 @@
 *.o
 *~
 Makefile*
-moc_*
+.moc
 wellenreitertemplate.cpp
 wellenreitertemplate.h
 configbase.h
