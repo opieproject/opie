@@ -392,7 +392,7 @@ void Wellenreiter::stopClicked()
     if ( iface )
     {
         // switch off monitor mode
-        iface->setMonitorMode( false );
+        iface->setMode( "managed" );
         // switch off promisc flag
         iface->setPromiscuousMode( false );
 
@@ -476,8 +476,8 @@ void Wellenreiter::startClicked()
     if ( cardtype < DEVTYPE_FILE )
     {
         if ( cardtype != DEVTYPE_MANUAL )
-            iface->setMonitorMode( true );
-        if ( !iface->monitorMode() )
+            iface->setMode( "monitor" );
+        if ( iface->mode() != "monitor" )
         {
             if ( QMessageBox::warning( this, "Wellenreiter II",
                                   tr( "Can't set interface '%1'\ninto monitor mode:\n" ).arg( iface->name() ) + strerror( errno ) +
