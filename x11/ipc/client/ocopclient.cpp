@@ -99,14 +99,14 @@ OCOPPacket OCOPClient::packet() const{
     memset(&head, 0, sizeof(head) );
     read(m_socket, &head, sizeof(head) );
     if ( head.magic == 47 ) {
-        qWarning("Client:Magic Match");
+//        qWarning("Client:Magic Match");
         chan = QCString( head.chlen+1);
         func = QCString( head.funclen+1 );
         ar = QByteArray( head.datalen);
         read(m_socket, chan.data(), head.chlen );
         read(m_socket, func.data(), head.funclen );
         read(m_socket, ar.data(), head.datalen );
-	qWarning("Client:%d %s",head.chlen,chan.data() );
+//	qWarning("Client:%d %s",head.chlen,chan.data() );
     }
     OCOPPacket pack(head.type, chan,  func, ar );
     return pack;
@@ -117,7 +117,7 @@ OCOPPacket OCOPClient::packet() const{
  * this will be blocked
  */
 bool OCOPClient::isRegistered( const QCString& chan ) const{
-    qWarning("OCopClient::isRegistered %s", chan.data() );
+//    qWarning("OCopClient::isRegistered %s", chan.data() );
     /* should I disconnect the socket notfier? */
     OCOPPacket packe(OCOPPacket::IsRegistered, chan );
     OCOPHead head = packe.head();
@@ -137,7 +137,7 @@ bool OCOPClient::isRegistered( const QCString& chan ) const{
     return false;
 };
 void OCOPClient::send( const QCString& chan, const QCString& fu, const QByteArray& arr ) {
-    qWarning("ClientSending %s %s", chan.data(), fu.data() );
+//    qWarning("ClientSending %s %s", chan.data(), fu.data() );
     OCOPPacket pack(OCOPPacket::Call, chan, fu, arr );
     call( pack );
 }

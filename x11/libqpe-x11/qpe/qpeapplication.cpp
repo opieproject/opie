@@ -499,8 +499,8 @@ int QPEApplication::exec() {
 void QPEApplication::internalSetStyle( const QString& ) {
 
 }
-void QPEApplication::systemMessage( const QCString&, const QByteArray& ) {
-
+void QPEApplication::systemMessage( const QCString& chan, const QByteArray& ) {
+    qWarning("QPEApplication::systemMessage( %s )", chan.data() );
 }
 void QPEApplication::pidMessage( const QCString&, const QByteArray& ) {
 

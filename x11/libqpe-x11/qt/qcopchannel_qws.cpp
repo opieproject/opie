@@ -17,10 +17,13 @@ QCopChannel::QCopChannel( const QCString& channel, QObject* parent,
     }
     /* first registration  or ref count is 0 for m_chan*/
     if (!m_refCount.contains( m_chan ) || !m_refCount[m_chan]  ) {
+        qWarning("adding channel %s", m_chan.data() );
         m_refCount[m_chan] = 1;
         OCOPClient::self()->addChannel( m_chan );
-    }else
+    }else{
+        qWarning("reffing up for %s %d", m_chan.data(), m_refCount[m_chan] );
         m_refCount[m_chan]++;
+    }
 
     m_list->append(this);
 }
@@ -45,7 +48,11 @@ QCopChannel::~QCopChannel() {
 QCString QCopChannel::channel()const {
     return m_chan;
 }
-bool QCopChannel::isRegistered( const QCString& chan) {;
+bool QCopChannel::isRegistered( const QCString& chan) {
+    if (m_refCount.contains(chan) ) {
+            qDebug("Client:locally contains");
+            return true;
+    }
     return OCOPClient::self()->isRegistered( chan );
 }
 bool QCopChannel::send( const QCString& chan, const QCString& msg ) {
