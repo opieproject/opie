@@ -5,7 +5,7 @@
 
 #include <qmainwindow.h>
 
-#define QPDF_QPE_ONLY 1 // ofileselector does not work right currently
+//#define QPDF_QPE_ONLY 1
 
 class QPEOutputDev;
 class PDFDoc;
