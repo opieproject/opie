@@ -46,9 +46,9 @@ int OKeyPair::keycode()const {
 
 /**
  * get the modifier key for this OKeyPair. The Modifier State relates
- * to the Qt::Modifier
+ * to the Qt::ButtonState
  *
- * @see Qt::Modifier
+ * @see Qt::ButtonState
  * @see setModifier
  */
 int OKeyPair::modifier()const {
@@ -71,7 +71,7 @@ void OKeyPair::setKeycode( int key ) {
  * Set the modifier key
  *
  * @param the Modifier key
- * @see Qt::Modifier
+ * @see Qt::ButtonState
  * @see modifier()
  */
 void OKeyPair::setModifier( int mod ) {
@@ -143,6 +143,25 @@ OKeyPairList OKeyPair::hardwareKeys() {
 
     return lst;
 }
+
+/**
+ * Equals operator. Check if two OKeyPairs have the same key and modifier
+ * @see operator!=
+ */
+bool OKeyPair::operator==( const OKeyPair& pair) {
+    if ( m_key != pair.m_key ) return false;
+    if ( m_mod != pair.m_mod ) return false;
+
+    return true;
+}
+
+/**
+ * Not equal operator. calls the equal operator internally
+ */
+bool OKeyPair::operator!=( const OKeyPair& pair) {
+    return !(*this == pair);
+}
+
 
 /**
  * The normal Constructor  to create a OKeyConfigItem
@@ -309,6 +328,28 @@ bool OKeyConfigItem::isEmpty()const {
 }
 
 /**
+ * Check if the KeyPairs are the same
+ */
+bool OKeyConfigItem::operator==( const OKeyConfigItem& conf ) {
+    if ( isEmpty() == conf.isEmpty() ) return true;
+    else if ( isEmpty() != conf.isEmpty() ) return false;
+    else if ( !isEmpty()!= conf.isEmpty() ) return false;
+
+    if ( m_id != conf.m_id )     return false;
+    if ( m_text != conf.m_text ) return false;
+    if ( m_pix != conf.m_pix )   return false;
+    if ( m_key != conf.m_key )   return false;
+    if ( m_def != conf.m_def )   return false;
+
+    return true;
+
+}
+
+bool OKeyConfigItem::operator!=( const OKeyConfigItem& conf ) {
+    return !( *this == conf );
+}
+
+/**
  * \brief c'tor
  * The Constructor for a OKeyConfigManager
  *
@@ -369,20 +410,22 @@ OKeyConfigManager::OKeyConfigManager( Opie::Core::OConfig* conf,
                                       bool grabkeyboard, QObject* par,
                                       const char* name)
     : QObject( par, name ), m_conf( conf ), m_group( group ),
-      m_blackKeys( black ), m_grab( grabkeyboard )
+      m_blackKeys( black ), m_grab( grabkeyboard ), m_map( 0 )
 {}
 
 
 /**
  * Destructor
  */
-OKeyConfigWidget::~OKeyConfigWidget() {}
+OKeyConfigManager::~OKeyConfigManager() {}
 
 /**
  * Load the Configuration  from the OConfig
  * If a Key is restricted but was in the config we will
- * make the empty
+ * make it be the empty key paur
  * We will change the group of the OConfig Item!
+ *
+ * @see OKeyPair::emptyKey
  */
 void OKeyConfigWidget::load() {
     m_conf->setGroup( m_group );
@@ -395,8 +438,13 @@ void OKeyConfigWidget::load() {
          it != m_keys.end(); ++it ) {
         key = m_conf->readNumEntry( (*it).configKey()+"key", (*it).defaultKeyPair().keycode()  );
         mod = m_conf->readNumEntry( (*it).configKey()+"mod", (*it).defaultKeyPair().modifier() );
-        (*it).setKeyPair( OKeyPair(key, mod) );
+        OKeyPair okey( key, mod );
+        if (  !m_blackKeys.contains( okey ) && key != -1  && mod != -1 )
+            (*it).setKeyPair( OKeyPair(key, mod) );
+        else
+            (*it).setKeyPair( OKeyPair::emptyKey() );
     }
+    delete m_map; m_map = 0;
 }
 
 /**
@@ -404,5 +452,254 @@ void OKeyConfigWidget::load() {
  * to the OConfig. We will change the group.
  */
 void OKeyConfigWidget::save() {
+    m_conf->setGroup( m_group );
 
+    /*
+     * Write each item
+     */
+    int key, mod;
+    for( OKeyConfigItemList::Iterator it = m_keys.begin();
+         it != m_keys.end(); ++it ) {
+        if ( (*it).isEmpty() )
+            continue;
+        OKeyPair pair = (*it).keyPair();
+        m_conf->writeEntry(pair.configKey()+"key", pair.keycode()  );
+        m_conf->writeEntry(pair.configKey()+"mod", pair.modifier() );
+    }
 }
+
+/**
+ * This is function uses a QMap internally  but you can have the same keycode
+ * with different modifier key. The behaviour is undefined if you add a OKeyConfigItem
+ * with same keycode and modifier key. The GUI takes care that a user can't
+ * cofigure two keys.
+ *
+ * Make sure you call e->ignore if you don't want to handle this event
+ */
+OKeyConfigItem OKeyConfigManager::handleKeyEvent( QKeyEvent* e ) {
+    OKeyConfigItemList keyList =  keyList( e->key() );
+    if ( keyList.isEmpty() )
+        return OKeyConfigItem();
+
+    OKeyConfigItem item;
+    for ( OKeyConfigItemList::Iterator it = keyList.begin(); it != keyList.end();
+          ++it ) {
+        if ( (*it).keyPair().modifier() == e->state() ) {
+            item = *it;
+            break;
+        }
+
+    }
+
+    return item;
+}
+
+/**
+ * Return the associated id of the item or -1 if no item
+ * matched the key
+ *
+ * @see handleKeyEvent
+ */
+int OKeyConfigManager::handleKeyEventId( QKeyEvent* ev) {
+    return handleKeyEvent( ev ).id();
+}
+
+/**
+ * Add Key Config to the List of items
+ */
+void OKeyConfigManager::addKeyConfig( const OKeyConfigItem& item ) {
+    m_keys.append( item );
+    delete m_map; m_map = 0;
+}
+
+/**
+ * Remove the Key from the Config. Internal lists will be destroyed
+ * and rebuild on demand later
+ */
+void OKeyConfigManager::removeKeyConfig( const OKeyConfigItem& item ) {
+    m_keys.remove( item );
+    delete m_map; m_map = 0;
+}
+
+/**
+ * Clears the complete list
+ */
+void OKeyConfigManager::clearKeyConfig() {
+    m_keys.clear();
+    delete m_map; m_map = 0;
+}
+
+
+/**
+ * Add this OKeyPair to the blackList.
+ * Internal lists will be destroyed
+ */
+void OKeyConfigManager::addToBlackList( const OKeyPair& key) {
+    m_blackKeys.append( key );
+    delete m_map; m_map = 0;
+}
+
+
+/**
+ * Remove this OKeyPair from the black List
+ * Internal lists will be destroyed
+ */
+void OKeyConfigManager::removeFromBlackList( const OKeyPair& key ) {
+    m_blackKeys.remove( key );
+    delete m_map; m_map = 0;
+}
+
+
+/**
+ * Clear the blackList
+ */
+void OKeyConfigManager::clearBlackList() {
+    m_blackKeys.clear();
+    delete m_map; m_map = 0;
+}
+
+
+/**
+ * Return a copy of the blackList
+ */
+OKeyPairList OKeyConfigManager::blackList()const {
+    return m_blackKeys;
+}
+
+
+/**
+ * Ask the Manager to handle KeyEvents for you.
+ * All handled keys will emit a QSignal and return true
+ * that it handled the keyevent
+ */
+void OKeyConfigManager::handleWidget( QWidget* wid ) {
+    wid->installEventFilter( this );
+}
+
+/**
+ * @internal
+ */
+bool OKeyConfigManager::eventFilter( QObject* obj, QEvent* ev) {
+    if ( !obj->isWidgetType() )
+        return false;
+
+    if ( ev->type() != QEvent::KeyPress && ev->type() != QEvent::KeyRelease )
+        return false;
+
+    QKeyEvent *key = static_cast<QKeyEvent*>( ev );
+    OKeyConfigItem item =  handleKeyEvent( key );
+
+    if ( item.isEmpty() )
+        return false;
+
+    emit actionActivated( static_cast<QWidget*>( obj ), key, item );
+    return true;
+}
+
+/**
+ * @internal
+ */
+OKeyConfigItemList OKeyConfigManager::keyList( int keycode) {
+    if ( !m_map ) {
+        m_map = new OKeyMapConfigPrivate;
+        /* for every key */
+        for ( OKeyConfigItemList::Iterator it = m_keys.begin();
+              it!= m_keys.end(); ++it ) {
+            bool add = true;
+            /* see if this key is blocked */
+            for ( OKeyPairList::Iterator pairIt = m_blackKeys.begin();
+                  pairIt != m_blackKeys.end(); ++pairIt ) {
+                if ( (*pairIt).keycode()  == (*it).keycode() &&
+                     (*pairIt).modifier() == (*it).modifier() ) {
+                    add = false;
+                    break;
+                }
+            }
+            /* check if we added it */
+            if ( add ) {
+                if ( m_map->contains( (*it).keycode() ) )
+                    (m_map[(*it).keycode()]).append( *it );
+                else
+                    m_map.insert( (*it).keycode(), OKeyConfigItemList( *it ) );
+            }
+        }
+    }
+    return m_map[keycode];
+}
+
+
+
+/////////////////////////
+//////// Widget Starts Here
+namespace Opie {
+namespace Ui {
+namespace Private {
+    static QString keyToString( const OKeyPair& );
+    class OItemBox : public QHBox {
+        Q_OBJECT
+    public:
+        OItemBox( const OKeyConfigItem& item, QWidget* parent = 0, const char* name = 0,  WFlags fl = 0);
+        ~OItemBox();
+
+        OKeyConfigItem item()const;
+        void setItem( const OKeyConfigItem& item );
+    private slots:
+        void slotClicked();
+    signals:
+        void configureBox( OItemBox* );
+    private:
+        QLabel *m_pix;
+        QLabel *m_text;
+        QPushButton *m_btn;
+        OKeyConfigItem m_item;
+    };
+
+    OItemBox::OItemBox( const OKeyConfigItem& item, QWidget* parent,
+                        const char* name, WFlags fl )
+        : QHBox( parent, name, fl ),  {
+        m_pix  = new QLabel( this );
+        m_text = new QLabel( this );
+        m_btn  = new QPushButton( this );
+
+        connect(m_btn, SIGNAL(clicked()),
+                this, SLOT(slotClicked()));
+
+        setItem( item );
+    }
+
+    OItemBox::~OItemBox() {}
+    OKeyConfigItem OItemBox::item()const{
+        return m_item;
+    }
+    void OKeyConfigItem::setItem( const OKeyConfigItem& item ) {
+        m_item = item;
+        m_pix ->setPixmap( item.pixmap() );
+        m_text->setText( item.text() );
+        m_btn->setText( keyToString( item.keyPair() ) );
+    }
+    void OKeyConfigItem::slotClicked() {
+        emit configureBox( this );
+    }
+
+    QString keyToString( const OKeyPair& pair ) {
+        QStringList mod;
+        if ( ( pair.modifier() & Qt::ShiftButton )== Qt::ShiftButton )
+            mod.append( QObject::tr( "Shift", "The Keyboard key" ) );
+        if ( ( pair.modifier() & Qt::ControlButton )== Qt::ControlButton )
+            mod.append( QObject::tr( "Ctrl", "The Ctrl key" ) );
+        if ( ( pair.modifier() & Qt::AltButton ) )== Qt::AltButton )
+            mod.append( QObject::tr( "Alt", "The keyboard Alt Key" ) );
+
+
+    }
+}
+}
+}
+
+
+
+////////////////////////
+
+
+
+#include "okeyconfigwidget.moc"

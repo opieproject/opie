@@ -136,6 +136,7 @@ private:
  */
 class OKeyConfigManager : public QObject {
     Q_OBJECT
+    typedef QMap<it, OKeyConfigItemList> OKeyMapConfigPrivate;
 public:
     OKeyConfigManager(Opie::Core::OConfig *conf = 0,
                       const QString& group = QString::null,
@@ -148,13 +149,14 @@ public:
     void save();
 
     OKeyConfigItem handleKeyEvent( QKeyEvent* );
-    QString        handleKeyEventString( QKeyEvent* );
+    int            handleKeyEventId( QKeyEvent* );
 
     void addKeyConfig( const OKeyConfigItem& );
     void removeKeyConfig( const OKeyConfigItem& );
+    void clearKeyConfig();
 
-    void addBlackList( const OKeyPair& );
-    void removeBlackList( const OKeyPair& );
+    void addToBlackList( const OKeyPair& );
+    void removeFromBlackList( const OKeyPair& );
     void clearBlackList();
     OKeyPairList blackList()const;
 
@@ -166,12 +168,14 @@ signals:
     void actionActivated( QWidget*, QKeyEvent*, const Opie::Ui::OKeyConfigItem& );
 
 private:
+    OKeyConfigItemList keyList( int );
     OKeyPairList m_blackKeys;
     OKeyConfigItemList m_keys;
     QValueList<QWidget*> m_widgets;
     Opie::Core::OConfig *m_conf;
     QString m_group;
     bool m_grab : 1;
+    OKeyMapConfigPrivate *m_map;
     class Private;
     Private *d;
 };
