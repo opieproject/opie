@@ -1,0 +1,10 @@
+Package: opie-i18n-lv
+Files: i18n/lv/.directory i18n/lv/*.qm
+Priority: optional
+Section: opie/i18n
+Maintainer: Gints Polis <gintam@inbox.lv>
+Architecture: all
+Depends: task-opie-minimal, opie-language
+Description: i18n: Latvian
+ Latvian UI texts for Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION
