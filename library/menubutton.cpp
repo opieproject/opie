@@ -67,6 +67,7 @@
 MenuButton::MenuButton( const QStringList& items, QWidget* parent, const char* name) :
     QPushButton(parent,name)
 {
+    useLabel = true;
     init();
     insertItems(items);
 }
@@ -98,8 +99,8 @@ void MenuButton::init()
 */
 void MenuButton::clear()
 {
-    delete pop;
-    init();
+   delete pop;
+   init();
 }
 
 /*!
@@ -111,10 +112,10 @@ void MenuButton::insertItems( const QStringList& items )
 {
     QStringList::ConstIterator it=items.begin();
     for (; it!=items.end(); ++it) {
-	if ( (*it) == "--" )
-	    insertSeparator();
-	else
-	    insertItem(*it);
+  if ( (*it) == "--" )
+      insertSeparator();
+  else
+      insertItem(*it);
     }
 }
 
@@ -127,7 +128,7 @@ void MenuButton::insertItems( const QStringList& items )
 void MenuButton::insertItem( const QIconSet& icon, const QString& text )
 {
     pop->insertItem(icon, text, nitems++);
-    if ( nitems==1 ) select(0);
+//    if ( nitems==1 ) select(0);
 }
 
 /*!
@@ -139,7 +140,7 @@ void MenuButton::insertItem( const QIconSet& icon, const QString& text )
 void MenuButton::insertItem( const QString& text )
 {
     pop->insertItem(text, nitems++);
-    if ( nitems==1 ) select(0);
+//    if ( nitems==1 ) select(0);
 }
 
 /*!
@@ -158,10 +159,10 @@ void MenuButton::insertSeparator()
 void MenuButton::select(const QString& s)
 {
     for (int i=0; i<nitems; i++) {
-	if ( pop->text(i) == s ) {
-	    select(i);
-	    break;
-	}
+  if ( pop->text(i) == s ) {
+      select(i);
+      break;
+  }
     }
 }
 
@@ -174,7 +175,7 @@ void MenuButton::select(int s)
     cur = s;
     updateLabel();
     if ( pop->iconSet(cur) )
-	setIconSet(*pop->iconSet(cur));
+  setIconSet(*pop->iconSet(cur));
     emit selected(cur);
     emit selected(currentText());
 }
@@ -208,9 +209,45 @@ void MenuButton::setLabel(const QString& label)
 
 void MenuButton::updateLabel()
 {
-    QString t = pop->text(cur);
-    if ( !lab.isEmpty() )
-	t = lab.arg(t);
-    setText(t);
+    if(useLabel)
+      {
+          QString t = pop->text(cur);
+          if ( !lab.isEmpty() )
+              t = lab.arg(t);
+          setText(t);
+      }
 }
 
+
+/*!
+  remove item at id
+ */
+void MenuButton::remove(int id)
+{
+     pop->removeItem(id);
+     nitems--;
+}
+
+/*!
+  return count of items in menu
+ */
+int MenuButton::count()
+{
+     return nitems;
+}
+
+/*!
+  returns text of item id
+ */
+QString MenuButton::text(int id)
+{
+    return pop->text(id);
+}
+
+/*!
+  sets true or false the use of label
+ */
+void MenuButton::setUseLabel(bool b)
+{
+    useLabel = b;
+}

@@ -31,6 +31,7 @@ public:
 
     void clear();
 
+    
     int currentItem() const;
     QString currentText() const;
 
@@ -40,6 +41,10 @@ public:
     void insertSeparator();
 
     void setLabel(const QString& label);
+    int count();
+    void remove(int id);
+    QString text(int id);
+    void setUseLabel(bool b);
 
 signals:
     void selected(int);
@@ -50,6 +55,7 @@ public slots:
     void select(const QString&);
 
 private:
+    bool useLabel;
     void init();
     QStringList txts;
     QPopupMenu* pop;
