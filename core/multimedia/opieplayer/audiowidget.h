@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #ifndef AUDIO_WIDGET_H
 #define AUDIO_WIDGET_H
 

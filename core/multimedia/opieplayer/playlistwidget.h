@@ -49,6 +49,7 @@ public:
     QListView *audioView, *videoView, *playlistView;
     QLabel *libString;
     bool fromSetDocument;
+    bool insanityBool;
     QString setDocFileRef;
     // retrieve the current playlist entry (media file link)
     const DocLnk *current();

@@ -106,6 +106,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     d->setDocumentUsed = FALSE;
     d->current = NULL;
     fromSetDocument = FALSE;
+    insanityBool=FALSE;
 //    menuTimer = new QTimer( this ,"menu timer"),
 //     connect( menuTimer, SIGNAL( timeout() ), SLOT( addSelected() ) );
 
@@ -206,9 +207,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     aTab = new QWidget( tabWidget, "aTab" );
     audioView = new QListView( aTab, "Audioview" );
     audioView->setMinimumSize(233,260);
-    audioView->addColumn( "Title",150);
-    audioView->addColumn("Size", 45);
-    audioView->addColumn("Media",35);
+    audioView->addColumn( "Title",140);
+    audioView->addColumn("Size", -1);
+    audioView->addColumn("Media",-1);
     audioView->setColumnAlignment(1, Qt::AlignRight);
     audioView->setColumnAlignment(2, Qt::AlignRight);
     audioView->setAllColumnsShowFocus(TRUE);
@@ -241,9 +242,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     videoView = new QListView( vTab, "Videoview" );
     videoView->setMinimumSize(233,260);
     
-    videoView->addColumn("Title",150);
-    videoView->addColumn("Size",45);
-    videoView->addColumn("Media",35);
+    videoView->addColumn("Title",140);
+    videoView->addColumn("Size",-1);
+    videoView->addColumn("Media",-1);
     videoView->setColumnAlignment(1, Qt::AlignRight);
     videoView->setColumnAlignment(2, Qt::AlignRight);
     videoView->setAllColumnsShowFocus(TRUE);
@@ -486,38 +487,50 @@ const DocLnk *PlayListWidget::current() { // this is fugly
 //              }
 //          }
 //      } else
-        switch (tabWidget->currentPageIndex()) {
-          case 0: //playlist
-          {
-              if ( mediaPlayerState->playlist() ) {
-                  return d->selectedFiles->current();
-              }
-              else if ( d->setDocumentUsed && d->current ) {
-                  return d->current;
-              } else {
-                  return d->files->selected();
-              }
+//    qDebug("current");
+//     switch (tabWidget->currentPageIndex()) {
+//          case 0: //playlist
+//          {
+          qDebug("playlist");
+          if ( mediaPlayerState->playlist() ) {
+              return d->selectedFiles->current();
           }
-          break;
-          case 1: { //audio
-              Global::findDocuments(&files, "audio/*");
-              QListIterator<DocLnk> dit( files.children() );
-              for ( ; dit.current(); ++dit ) {
-                  if( dit.current()->name() == audioView->currentItem()->text(0))
-                      return dit;
-              }
-          }           
-              break;
-          case 2: { // video
-              Global::findDocuments(&vFiles, "video/*");
-              QListIterator<DocLnk> Vdit( vFiles.children() );
-              for ( ; Vdit.current(); ++Vdit ) {
-                  if( Vdit.current()->name() == videoView->currentItem()->text(0))
-                      return Vdit;
-              }      
+          else if ( d->setDocumentUsed && d->current ) {
+              return d->current;
+          } else {
+              return d->files->selected();
           }
-              break;
-        };
+//        }
+//        break;
+//        case 1://audio
+//        {
+//            qDebug("audioView");
+//            Global::findDocuments(&files, "audio/*");
+//            QListIterator<DocLnk> dit( files.children() );
+//            for ( ; dit.current(); ++dit ) {
+//                if( dit.current()->name() == audioView->currentItem()->text(0) && !insanityBool) {
+//                    qDebug("here");
+//                    insanityBool=TRUE;
+//                    return dit;
+//                }
+//            }
+//        }           
+//        break;
+//        case 2: // video
+//        {
+//            qDebug("videoView");
+//            Global::findDocuments(&vFiles, "video/*");
+//            QListIterator<DocLnk> Vdit( vFiles.children() );
+//            for ( ; Vdit.current(); ++Vdit ) {
+//                if( Vdit.current()->name() == videoView->currentItem()->text(0) && !insanityBool) {
+//                    insanityBool=TRUE;
+//                    return Vdit;
+//                }
+//            }
+//        }
+//        break;
+//      };
+//  return 0;
 }
 
 bool PlayListWidget::prev() {
@@ -654,18 +667,49 @@ void PlayListWidget::setView( char view ) {
 
 void PlayListWidget::addSelected() {
 
-    switch (tabWidget->currentPageIndex()) {
-      case 0: //playlist
-          break;
-      case 1: { //audio
-          addToSelection( audioView->selectedItem() );
-      }           
-          break;
-      case 2: { // video
-          addToSelection( videoView->selectedItem() );
-      }
-          break;
-    };
+      Config cfg( "MediaPlayer" );
+      cfg.setGroup("PlayList");
+      QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
+      int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
+
+      switch (tabWidget->currentPageIndex()) {
+        case 0: //playlist
+            break;
+        case 1: { //audio
+            for ( int i = 0; i < noOfFiles; i++ ) {
+                QString entryName;
+                entryName.sprintf( "File%i", i + 1 );
+                QString linkFile = cfg.readEntry( entryName );
+                  if( DocLnk( linkFile).name() == audioView->selectedItem()->text(0) ) {
+                      int result= QMessageBox::warning(this,"OpiePlayer",
+                                  tr("This is all ready in your playlist.\nContinue?"),
+                                  tr("Yes"),tr("No"),0,0,1);
+                      if (result !=0)
+                          return;
+                  }
+            }
+            addToSelection( audioView->selectedItem() );
+            tabWidget->setCurrentPage(1);
+        }           
+        break;
+        case 2: { // video
+            for ( int i = 0; i < noOfFiles; i++ ) {
+                QString entryName;
+                entryName.sprintf( "File%i", i + 1 );
+                QString linkFile = cfg.readEntry( entryName );
+                  if( DocLnk( linkFile).name() == videoView->selectedItem()->text(0) ) {
+                      int result= QMessageBox::warning(this,"OpiePlayer",
+                                  tr("This is all ready in your playlist.\nContinue?"),
+                                  tr("Yes"),tr("No"),0,0,1);
+                      if (result !=0)
+                          return;
+                  }
+            }
+            addToSelection( videoView->selectedItem() );
+            tabWidget->setCurrentPage(2);
+        }
+        break;
+      };
 }
 
 void PlayListWidget::removeSelected() {
@@ -755,7 +799,38 @@ void PlayListWidget::tabChanged(QWidget *widg) {
 /*
   play button is pressed*/
 void PlayListWidget::btnPlay(bool b) {
-    mediaPlayerState->setPlaying(b);
+//    mediaPlayerState->setPlaying(b);
+    switch ( tabWidget->currentPageIndex()) {
+      case 0:
+      {
+          mediaPlayerState->setPlaying(b);
+      }
+      break;
+      case 1:
+      {
+          addToSelection( audioView->selectedItem() );
+          mediaPlayerState->setPlaying(b);
+//            qApp->processEvents();
+          d->selectedFiles->removeSelected( );
+          tabWidget->setCurrentPage(1);
+//            mediaPlayerState->setPlaying(FALSE);
+      }
+      break;
+      case 2:
+      {
+          addToSelection( videoView->selectedItem() );
+          mediaPlayerState->setPlaying(b);
+          qApp->processEvents();
+          d->selectedFiles->removeSelected( );
+          tabWidget->setCurrentPage(2);
+//            mediaPlayerState->setPlaying(FALSE);
+      }
+      break;
+    };
+
+
+
+    
 }
 
 void PlayListWidget::deletePlaylist() {

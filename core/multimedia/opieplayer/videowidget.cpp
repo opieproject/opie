@@ -203,17 +203,18 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 videoButtons[i].isHeld = FALSE;
                 if ( !videoButtons[i].isToggle ) 
                     setToggleButton( i, FALSE );
-                switch (i) {
-                  case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
-                  case VideoStop:       mediaPlayerState->setPlaying(FALSE); return;
-                  case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
-                  case VideoNext:       mediaPlayerState->setNext(); return;
-                  case VideoPrevious:   mediaPlayerState->setPrev(); return;
-                  case VideoPlayList:   mediaPlayerState->setList(); return;
-                  case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
-                }
             }
         }
+        switch (i) {
+          case VideoPlay:       mediaPlayerState->setPlaying(videoButtons[i].isDown); return;
+          case VideoStop:       mediaPlayerState->setPlaying(FALSE); return;
+          case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
+          case VideoNext:       mediaPlayerState->setNext(); return;
+          case VideoPrevious:   mediaPlayerState->setPrev(); return;
+          case VideoPlayList:   mediaPlayerState->setList(); return;
+          case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
+        }
+        
     }
 }
 
