@@ -1,0 +1,10 @@
+Priority: optional
+Section: opie/applications
+Maintainer: Maximilian Reiﬂ <harlekin@handhelds.org>
+Architecture: arm
+Version: 0.5-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION), opie-today, opie-today-datebookplugin, opie-today-todolistplugin, opie-today-mailplugin
+License: GPL
+Description: Task for basic today setup
+ includes datebook, todolist and mail plugin
+
