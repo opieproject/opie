@@ -41,8 +41,11 @@
 
 extern "C" char *crypt(const char *key, const char *salt);
 
+using Opie::Security::MultiauthConfigWidget;
+using Opie::Security::MultiauthPluginObject;
+
 /// set to TRUE when we press the 'Skip' button
-bool isSkip = FALSE;
+static bool isSkip = FALSE;
 
 /// PIN input graphical widget.
 /**
@@ -232,10 +235,10 @@ QString PinPlugin::getPIN( const QString& prompt )
 {
     PinDlg pd(0,0,TRUE);
     pd.pinD->setPrompt( prompt );
-    
+
     pd.showMaximized();
     int r = pd.exec();
-    
+
     if ( r == QDialog::Accepted ) {
         if (pd.pinD->text.isEmpty())
             return "";
@@ -302,13 +305,13 @@ int PinPlugin::authenticate()
         PinDlg pd(0,0,TRUE,TRUE);
         pd.reset();
         pd.exec();
-        
+
         // analyse the result
         if (isSkip == TRUE)
             return MultiauthPluginObject::Skip;
         else if (verify(pd.pinD->text, hashedPin))
             return MultiauthPluginObject::Success;
-        else 
+        else
             return MultiauthPluginObject::Failure;
     }
     owarn << "No PIN has been defined! We consider it as a successful authentication though." << oendl;
@@ -331,10 +334,10 @@ QString PinPlugin::pixmapNameConfig() const {
 /// returns a PinConfigWidget
 MultiauthConfigWidget * PinPlugin::configWidget(QWidget * parent) {
     PinConfigWidget * pinw = new PinConfigWidget(parent, "PIN configuration widget");
-    
+
     connect(pinw->changePIN, SIGNAL( clicked() ), this, SLOT( changePIN() ));
     connect(pinw->clearPIN, SIGNAL( clicked() ), this, SLOT( clearPIN() ));
-    
+
     return pinw;
 }
 

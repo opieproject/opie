@@ -37,7 +37,7 @@
 #include "dummyplugin.h"
 
 /// Standard multiauth plugin class
-class DummyPluginImpl : public MultiauthPluginInterface{
+class DummyPluginImpl : public Opie::Security::MultiauthPluginInterface{
 
     public:
         DummyPluginImpl();
@@ -47,12 +47,11 @@ class DummyPluginImpl : public MultiauthPluginInterface{
         /// defines standard addRef() and release() functions
         Q_REFCOUNT;
 
-        virtual MultiauthPluginObject *plugin();
+        virtual Opie::Security::MultiauthPluginObject *plugin();
 
     private:
         /// the plugin itself
         DummyPlugin *dummyPlugin;
-        ulong ref;
 };
 
 #endif

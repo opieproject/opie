@@ -37,7 +37,7 @@
 #include "bluepingplugin.h"
 
 /// Standard multiauth plugin class
-class BluepingPluginImpl : public MultiauthPluginInterface{
+class BluepingPluginImpl : public Opie::Security::MultiauthPluginInterface{
 
     public:
         BluepingPluginImpl();
@@ -47,12 +47,11 @@ class BluepingPluginImpl : public MultiauthPluginInterface{
         /// defines standard addRef() and release() functions
         Q_REFCOUNT;
 
-        virtual MultiauthPluginObject *plugin();
+        virtual Opie::Security::MultiauthPluginObject *plugin();
 
     private:
         /// the plugin itself
         BluepingPlugin *bluepingPlugin;
-        ulong ref;
 };
 
 #endif

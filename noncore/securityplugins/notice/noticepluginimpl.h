@@ -39,7 +39,7 @@
 /**
  * \brief Standard multiauth plugin class
  */
-class NoticePluginImpl : public MultiauthPluginInterface{
+class NoticePluginImpl : public Opie::Security::MultiauthPluginInterface{
 
     public:
         NoticePluginImpl();
@@ -49,12 +49,11 @@ class NoticePluginImpl : public MultiauthPluginInterface{
         /// defines standard addRef() and release() functions
         Q_REFCOUNT;
 
-        virtual MultiauthPluginObject *plugin();
+        virtual Opie::Security::MultiauthPluginObject *plugin();
 
     private:
         /// the plugin itself
         NoticePlugin *noticePlugin;
-        ulong ref;
 };
 
 #endif

@@ -12,6 +12,9 @@
 #include <qtimer.h>
 
 using namespace Opie::Core;
+using Opie::Security::MultiauthPluginObject;
+using Opie::Security::MultiauthConfigWidget;
+
 
 /// creates and initializes the m_config Config object
 BluepingPlugin::BluepingPlugin() : MultiauthPluginObject(), m_ping(0) {

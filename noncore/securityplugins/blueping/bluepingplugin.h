@@ -46,7 +46,7 @@
 /**
  * The plugin itself, implementing the main authenticate() function.
  */
-class BluepingPlugin : public QObject, public MultiauthPluginObject {
+class BluepingPlugin : public QObject, public Opie::Security::MultiauthPluginObject {
     
     Q_OBJECT
     
@@ -54,7 +54,7 @@ class BluepingPlugin : public QObject, public MultiauthPluginObject {
         BluepingPlugin();
         virtual ~BluepingPlugin();
         int authenticate();
-        MultiauthConfigWidget * configWidget(QWidget * parent);
+        Opie::Security::MultiauthConfigWidget * configWidget(QWidget * parent);
         QString pixmapNameConfig() const;
         QString pixmapNameWidget() const;
         QString pluginName() const;

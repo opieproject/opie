@@ -8,6 +8,8 @@
 #include <qregexp.h>
 #include <qgroupbox.h>
 
+using Opie::Security::MultiauthConfigWidget;
+
 /// constructs the widget, filling the noticeMLE QMultiLineEdit with the "noticeText" entry
 NoticeConfigWidget::NoticeConfigWidget(QWidget* parent = 0, const char* name = "Notice configuration widget") : MultiauthConfigWidget(parent, name)
 {
@@ -46,7 +48,7 @@ NoticeConfigWidget::~NoticeConfigWidget()
 /// write the notice text in the multiauth.conf Config file
 void NoticeConfigWidget::writeConfig()
 {
-    if ( noticeMLE->edited() ) { 
+    if ( noticeMLE->edited() ) {
         odebug << "writing new notice text in Security.conf" << oendl;
         setNoticeText(noticeMLE->text());
     }

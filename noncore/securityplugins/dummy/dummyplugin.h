@@ -42,13 +42,13 @@
 /**
  * The plugin itself, implementing the main authenticate() function.
  */
-class DummyPlugin : public QObject, public MultiauthPluginObject {
+class DummyPlugin : public QObject, public Opie::Security::MultiauthPluginObject {
     
     Q_OBJECT
     
     public:
         int authenticate();
-        MultiauthConfigWidget * configWidget(QWidget * parent);
+        Opie::Security::MultiauthConfigWidget * configWidget(QWidget * parent);
         QString pixmapNameConfig() const;
         QString pixmapNameWidget() const;
         QString pluginName() const;

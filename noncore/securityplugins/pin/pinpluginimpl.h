@@ -37,7 +37,7 @@
 #include "pin.h"
 
 /// Standard multiauth plugin class
-class PinPluginImpl : public MultiauthPluginInterface{
+class PinPluginImpl : public Opie::Security::MultiauthPluginInterface{
 
     public:
         PinPluginImpl();
@@ -47,12 +47,11 @@ class PinPluginImpl : public MultiauthPluginInterface{
         // defines standard addRef() and release() functions
         Q_REFCOUNT;
 
-        virtual MultiauthPluginObject *plugin();
+        virtual Opie::Security::MultiauthPluginObject *plugin();
 
     private:
         /// the plugin itself
         PinPlugin *pinPlugin;
-        ulong ref;
 };
 
 #endif

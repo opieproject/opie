@@ -5,6 +5,8 @@
 
 #include "pinConfigWidget.h"
 
+using Opie::Security::MultiauthConfigWidget;
+
 PinConfigWidget::PinConfigWidget(QWidget* parent = 0, const char* name = "PIN configuration widget")
     : MultiauthConfigWidget(parent, name)
 {
@@ -12,7 +14,7 @@ PinConfigWidget::PinConfigWidget(QWidget* parent = 0, const char* name = "PIN co
     baseLayout->setSpacing(11);
     baseLayout->setMargin(11);
     baseLayout->setAlignment( Qt::AlignTop );
-    
+
     QGroupBox * configBox = new QGroupBox(0, Qt::Vertical, tr("Configure your PIN here"), this);
     baseLayout->addWidget(configBox);
     QVBoxLayout *boxLayout = new QVBoxLayout( configBox->layout() );
@@ -27,7 +29,7 @@ PinConfigWidget::PinConfigWidget(QWidget* parent = 0, const char* name = "PIN co
     buttonLayout->addWidget(changePIN);
     buttonLayout->addWidget(clearPIN);
     boxLayout->addLayout(buttonLayout);
-    
+
 }
 
 /// nothing to do

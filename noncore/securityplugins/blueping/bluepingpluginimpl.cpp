@@ -1,5 +1,8 @@
 #include "bluepingpluginimpl.h"
 
+using Opie::Security::MultiauthPluginInterface;
+using Opie::Security::MultiauthPluginObject;
+
 BluepingPluginImpl::BluepingPluginImpl() {
     bluepingPlugin  = new BluepingPlugin();
 }

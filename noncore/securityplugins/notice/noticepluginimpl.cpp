@@ -1,5 +1,8 @@
 #include "noticepluginimpl.h"
 
+using Opie::Security::MultiauthPluginObject;
+using Opie::Security::MultiauthPluginInterface;
+
 NoticePluginImpl::NoticePluginImpl() {
     noticePlugin  = new NoticePlugin();
 }

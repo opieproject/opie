@@ -1,5 +1,8 @@
 #include "pinpluginimpl.h"
 
+using Opie::Security::MultiauthPluginObject;
+using Opie::Security::MultiauthPluginInterface;
+
 PinPluginImpl::PinPluginImpl() {
     pinPlugin  = new PinPlugin();
 }

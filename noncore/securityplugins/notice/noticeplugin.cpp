@@ -5,6 +5,8 @@
 #include <qmessagebox.h>
 #include <qregexp.h>
 
+using Opie::Security::MultiauthPluginObject;
+using Opie::Security::MultiauthConfigWidget;
 
 /// creates and initializes the m_config Config object
 NoticePlugin::NoticePlugin() : MultiauthPluginObject(), noticeW(0) {
@@ -61,10 +63,10 @@ int NoticePlugin::authenticate() {
                             Qt::WStyle_NoBorder | Qt::WStyle_Customize | Qt::WStyle_StaysOnTop);
 
     noticeDialog.setButtonText(QMessageBox::Yes, tr("I accept"));
-    
+
     QRect desk = oApp->desktop()->geometry();
     noticeDialog.setGeometry( 0, 0, desk.width(), desk.height() );
-    
+
     switch (noticeDialog.exec())
     {
         case QMessageBox::Yes:

@@ -1,5 +1,8 @@
 #include "dummypluginimpl.h"
 
+using Opie::Security::MultiauthPluginInterface;
+using Opie::Security::MultiauthPluginObject;
+
 DummyPluginImpl::DummyPluginImpl() {
     dummyPlugin  = new DummyPlugin();
 }

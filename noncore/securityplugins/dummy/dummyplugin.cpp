@@ -7,6 +7,9 @@
 #include <qlabel.h>
 #include <qpushbutton.h>
 
+using Opie::Security::MultiauthConfigWidget;
+using Opie::Security::MultiauthPluginObject;
+
 /// Simply return its name (Dummy plugin)
 QString DummyPlugin::pluginName() const {
     return "Dummy plugin";
@@ -54,7 +57,7 @@ int DummyPlugin::authenticate() {
 
     QRect desk = oApp->desktop()->geometry();
     dummyDialog.setGeometry( 0, 0, desk.width(), desk.height() );
-    
+
     /* Creation of the particular widgets of our Dummy user interface
      * Note: we have to resize the VBox to the QDialog size, since it's not
      * done automatically.
@@ -63,7 +66,7 @@ int DummyPlugin::authenticate() {
     layout.setSpacing(11);
     layout.setMargin(11);
     layout.setAlignment( Qt::AlignTop );
-    
+
     QLabel title("<center><h1>" + tr("\"Dummy\" <br />demonstration plugin") + "</h1></center>", &dummyDialog);
     QLabel subTitle("<center><h2>" +tr("You can simulate the following outcomes:") + "</h2></center>", &dummyDialog);
     layout.addWidget(&title);
@@ -76,14 +79,14 @@ int DummyPlugin::authenticate() {
     hl.addWidget(&pbSuccess, 0, Qt::AlignHCenter);
     hl.addWidget(&pbSkip, 0, Qt::AlignHCenter);
     hl.addWidget(&pbFailure, 0, Qt::AlignHCenter);
-    
+
     /* Linking our pushbuttons to exit functions
      * (each result button here has a corresponding slot)
      */
     QObject::connect(&pbSuccess, SIGNAL(clicked()), this, SLOT(success()));
     QObject::connect(&pbFailure, SIGNAL(clicked()), this, SLOT(failure()));
     QObject::connect(&pbSkip, SIGNAL(clicked()), this, SLOT(skip()));
-    
+
     /* The value of the signal these three slots will emit corresponds to
      * the different values we want to return
      */
