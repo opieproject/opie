@@ -83,6 +83,7 @@ void StorageInfo::updateMounts()
     if ( mntfp ) {
         while ( (me = getmntent( mntfp )) != 0 ) {
             QString fs = me->mnt_fsname;
+            qDebug(fs+" "+(QString)me->mnt_type);
             if ( fs.left(7)=="/dev/hd" || fs.left(7)=="/dev/sd"
                  || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd"
                  || fs.left(9) == "/dev/root" || fs.left(5) == "/ramfs") {
@@ -120,6 +121,7 @@ void StorageInfo::updateMounts()
                 f->show();
             } frst=FALSE;
             QString humanname=*it;
+//            qDebug(humanname);
             if ( isCF(humanname) )
                 humanname = tr("CF Card: "+*fsmount+" "+*fsTit+" ");
             else if ( humanname == "/dev/hda1" )
@@ -131,13 +133,13 @@ void StorageInfo::updateMounts()
             else if ( humanname.left(7) == "/dev/sd" )
                 humanname = tr("SCSI Hard Disk") + " " + humanname.mid(7)+" "+*fsmount+" "+*fsTit+" ";
             else if ( humanname == "/dev/mtdblock1" || humanname == "/dev/mtdblock/1" )
-                humanname = tr("Internal Storage "+*fsmount+" "+*fsTit+"\n");
+                humanname = tr("Int. Storage "+*fsmount+" "+*fsTit+"\n");
             else if ( humanname.left(14) == "/dev/mtdblock/" )
-                humanname = tr("Internal Storage") + " " + humanname.mid(14)+" "+*fsmount+" "+*fsTit+" ";
+                humanname = tr("Int. Storage") + " " + humanname.mid(14)+" "+*fsmount+" "+*fsTit+" ";
             else if ( humanname.left(13) == "/dev/mtdblock" )
-                humanname = tr("Internal Storage") + " " + humanname.mid(13)+" "+*fsmount+" "+*fsTit+" ";
+                humanname = tr("Int. Storage") + " " + humanname.mid(13)+" "+*fsmount+" "+*fsTit+" ";
              else if ( humanname.left(9) == "/dev/root" )
-                 humanname = tr("Internal Storage "+*fsmount+" "+*fsTit+" ");
+                 humanname = tr("Int. Storage "+*fsmount+" "+*fsTit+" ");
               // etc.
             MountInfo* mi = new MountInfo( *fsit, humanname, this );
             vb->addWidget(mi);
@@ -196,7 +198,7 @@ void MountInfo::updateData()
     long total = fs->totalBlocks() * mult / div;
     long avail = fs->availBlocks() * mult / div;
     long used = total - avail;
-    totalSize->setText( title + tr("Total: %1 kB").arg( total ) );
+    totalSize->setText( title + tr(" : %1 kB").arg( total ) );
     data->clear();
     data->addItem( tr("Used (%1 kB)").arg(used), used );
     data->addItem( tr("Available (%1 kB)").arg(avail), avail );
