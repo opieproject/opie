@@ -1,158 +1,159 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ControlsDialog</name>
     <message>
         <source>Brightness</source>
-        <translation type="unfinished"></translation>
+        <translation>Luminosité</translation>
     </message>
 </context>
 <context>
     <name>ImageFileSelector</name>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type</translation>
     </message>
 </context>
 <context>
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualisateur d&apos;image</translation>
     </message>
     <message>
         <source>Horizontal flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Mirroir horizontal</translation>
     </message>
     <message>
         <source>Vertical flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Mirroir vertical</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <source>Rotate 180</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotation 180</translation>
     </message>
     <message>
         <source>Rotate 90</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotation 90</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Plein écran</translation>
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>- Visualisateur d&apos;image</translation>
     </message>
     <message>
         <source> True color</source>
-        <translation type="unfinished"></translation>
+        <translation>Vrai couleur</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vue</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vue en vignette</translation>
     </message>
     <message>
         <source>Preferences..</source>
-        <translation type="unfinished"></translation>
+        <translation>Préférences..</translation>
     </message>
     <message>
         <source>Image Info ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Info image...</translation>
     </message>
     <message>
         <source>Open ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir ...</translation>
     </message>
     <message>
         <source>Rotate 270</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotation 270</translation>
     </message>
     <message>
         <source>Brightness ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Luminosité ...</translation>
     </message>
     <message>
         <source>Black And White</source>
-        <translation type="unfinished"></translation>
+        <translation>Noir et Blanc</translation>
     </message>
     <message>
         <source>Scale to Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuster à l&apos;écran</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options</translation>
     </message>
     <message>
         <source>%1 colors</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 couleurs</translation>
     </message>
     <message>
         <source>%1 alpha levels</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 niveau(x) alpha</translation>
     </message>
     <message>
         <source>8-bit alpha channel</source>
-        <translation type="unfinished"></translation>
+        <translation>8-bit canal alpha</translation>
     </message>
     <message>
         <source>Slide show</source>
-        <translation type="unfinished"></translation>
+        <translation>Diaporama</translation>
     </message>
     <message>
         <source>Stop Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter diaporama</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialogBase</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>Slide Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Diaporama</translation>
     </message>
     <message>
         <source>Delay between pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Délai entre les images</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <source>Repeat slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Revoir le diaporama</translation>
     </message>
     <message>
         <source>Show pictures in reverse</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer les images en sens inverse</translation>
     </message>
     <message>
         <source>Load pictures rotated 90 degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger les images tournées de 90 degrés</translation>
     </message>
     <message>
         <source>Fast load pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>chargement rapide des images</translation>
     </message>
 </context>
 </TS>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>LoadInfo</name>
     <message>
@@ -15,30 +16,30 @@
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette page montre la charge du processeur.</translation>
     </message>
 </context>
 <context>
     <name>MemoryInfo</name>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisée (%1ko)</translation>
     </message>
     <message>
         <source>Buffers (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Buffers (%1 ko)</translation>
     </message>
     <message>
         <source>Cached (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Cache (%1 ko)</translation>
     </message>
     <message>
         <source>Free (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Libre (%1 ko)</translation>
     </message>
     <message>
         <source>Total Memory: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>Mémoire totale: %1 ko</translation>
     </message>
     <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
@@ -48,26 +49,29 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette page montre l&apos;utilisation de la mémoire par votre PDA.
+La mémoire est divisée en catégories comme suit:
+
+1. Utilisée - Mémoire utilisée par Opie et toute autre applications en cours d&apos;exécution.</translation>
     </message>
 </context>
 <context>
     <name>ModulesInfo</name>
     <message>
         <source>Module</source>
-        <translation type="unfinished"></translation>
+        <translation>Module</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Use#</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisé#</translation>
     </message>
     <message>
         <source>Used By</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisé par</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
