@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: helpwindow.cpp,v 1.1 2002-11-01 16:43:34 llornkcor Exp $
+** $Id: helpwindow.cpp,v 1.1.2.1 2003-05-26 04:02:00 llornkcor Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -10,30 +10,11 @@
 
 #include "helpwindow.h"
 #include <qstatusbar.h>
-#include <qstringlist.h>
 
-#include <qpixmap.h>
-#include <qpopupmenu.h>
 #include <qmenubar.h>
 #include <qtoolbar.h>
 #include <qtoolbutton.h>
-#include <qiconset.h>
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qstylesheet.h>
-#include <qmessagebox.h>
-#include <qfiledialog.h>
-#include <qapplication.h>
 #include <qcombobox.h>
-#include <qevent.h>
-#include <qlineedit.h>
-#include <qobjectlist.h>
-#include <qfileinfo.h>
-#include <qfile.h>
-#include <qdatastream.h>
-#include <qprinter.h>
-#include <qsimplerichtext.h>
-#include <qpaintdevicemetrics.h>
 
 #include <ctype.h>
 

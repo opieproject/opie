@@ -17,20 +17,16 @@
 #include "stocktickerconfig.h"
 #include <opie/todayconfigwidget.h>
 
-#include <qpe/config.h>
 
 #include <qapplication.h>
 
 #include <qspinbox.h>
 #include <qcheckbox.h>
-#include <qlayout.h>
 #include <qlineedit.h>
-#include <qlayout.h>
 #include <qvariant.h>
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
 #include <qlabel.h>
-#include <qpe/config.h>
 #include <qstringlist.h>
 #include <qmainwindow.h>
 
