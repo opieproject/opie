@@ -119,7 +119,7 @@ bool OTodoAccessXML::load() {
         m_events.insert(ev.uid(), ev );
     }
 
-    qWarning("counts %d", m_events.count() );
+    qWarning("counts %d records loaded!", m_events.count() );
     return true;
 }
 bool OTodoAccessXML::reload() {
@@ -518,17 +518,30 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
 
     bool bCat = sortFilter & 1 ? true : false;
     bool bOnly = sortFilter & 2 ? true : false;
+    bool comp = sortFilter & 4 ? true : false;
     for ( it = m_events.begin(); it != m_events.end(); ++it ) {
 
         /* show category */
         if ( bCat && cat != 0)
-            if (!(*it).categories().contains( cat ) )
+            if (!(*it).categories().contains( cat ) ) {
+                qWarning("category mis match");
                 continue;
-        /* isOverdue but we should not show overdue */
-        if ( (*it).isOverdue() &&  !bOnly  )
+            }
+        /* isOverdue but we should not show overdue - why?*/
+/*        if ( (*it).isOverdue() &&  !bOnly  ) {
+            qWarning("item is overdue but !bOnly");
             continue;
-        if ( !(*it).isOverdue() && bOnly )
+        }
+*/
+        if ( !(*it).isOverdue() && bOnly ) {
+            qWarning("item is not overdue but bOnly checked");
             continue;
+        }
+
+        if ((*it).isCompleted() && comp ) {
+            qWarning("completed continue!");
+            continue;
+        }
 
 
         OTodoXMLContainer* con = new OTodoXMLContainer();
@@ -536,6 +549,7 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
         vector.insert(item, con );
         item++;
     }
+    qWarning("XXX %d Items added", item);
     vector.resize( item );
     /* sort it now */
     vector.sort();
