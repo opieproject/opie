@@ -39,7 +39,6 @@
 
 
 extern "C" {
-#include "tremor/ivorbiscodec.h"
 #include "tremor/ivorbisfile.h"
 }
 

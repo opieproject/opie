@@ -8,7 +8,6 @@
 */
 
 #include "stdafx.h"
-#include "sndfile.h"
 
 #ifndef FASTSOUNDLIB
 //#pragma data_seg(".tables")

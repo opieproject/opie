@@ -2,8 +2,15 @@
 Exec=opierec
 Icon=opierec/Opierec
 Type=Application
-Name=OpieRecord
+Name=Opie Record
+Name[fr]=Opie Record
+Comment[fr]=Enregistreur de Opie
+Name[it]=Registratore
+Comment[it]=Registratore audio
 Name[pt]=Gravador
 Comment[pt]=Gravador de Som
 Name[pt_BR]=Gravador
 Comment[pt_BR]=Gravador de Som
+Name[sl]=OpiePosnami
+Name[nl]=Geluidsopname
+Comment[nl]=Opname van memo's etc

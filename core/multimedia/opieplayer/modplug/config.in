@@ -1,4 +1,4 @@
   config MODPLUG
-    boolean "opieplayer1-modplugin (play MOD/XM/S3M/IT amiga tracker modules)"
+    boolean "modplugin"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIEPLAYER

@@ -1,4 +1,4 @@
   config LIBMAD
-    boolean "opieplayer1-libmadplugin (plugin with shoutcast/icecast support to play MP3 files)"
+    boolean "libmadplugin"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIEPLAYER

@@ -90,7 +90,7 @@ static inline QString fullBaseName ( const QFileInfo &fi )
 }
 
 
-QString audioMimes ="audio/mpeg;audio/x-wav;audio/x-ogg;audio/x-mod;audio/x-ogg";
+QString audioMimes ="audio/mpeg;audio/x-wav;application/ogg;audio/x-mod";
 // class myFileSelector {
 
 // };
@@ -1372,7 +1372,7 @@ void PlayListWidget::keyPressEvent( QKeyEvent *)
 }
 
 void PlayListWidget::doBlank() {
-	// TODO: why do we blank this way, why don't we use ODevice or ScreenSaver?
+   //    qDebug("do blanking");
 #ifdef QT_QWS_DEVFS
    fd=open("/dev/fb/0",O_RDWR);
 #else
