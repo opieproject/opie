@@ -264,6 +264,7 @@ void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices ) 
             continue;
 
         deviceItem = new BTDeviceItem( ListView2 , (*it) );
+        deviceItem->setPixmap( 1, m_findPix );
         deviceItem->setExpandable ( true );
 
         // look if device is avail. atm, async
