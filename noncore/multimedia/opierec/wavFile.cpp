@@ -25,7 +25,7 @@ WavFile::WavFile( QObject * parent,const QString &fileName, bool makeNwFile, int
                   int channels, int resolution, int format )
         : QObject( parent)
 {
-qDebug("new wave file");
+//qDebug("new wave file");
     bool b =  makeNwFile;
     wavSampleRate=sampleRate;
     wavFormat=format;
@@ -41,7 +41,7 @@ qDebug("new wave file");
 
 bool WavFile::newFile() {
 
-  qDebug("Set up new file");
+//  qDebug("Set up new file");
   Config cfg("OpieRec");
   cfg.setGroup("Settings");
 
@@ -60,8 +60,9 @@ bool WavFile::newFile() {
     currentFileName += date;
   currentFileName+=".wav";
 
-  qDebug("set up file for recording: "+currentFileName);
-  char *pointer;
+//  qDebug("set up file for recording: "+currentFileName);
+  char pointer[] = "/tmp/opierec-XXXXXX";
+  int fd = 0;
 
   if( currentFileName.find("/mnt",0,true) == -1
       && currentFileName.find("/tmp",0,true) == -1 ) {
@@ -69,8 +70,12 @@ bool WavFile::newFile() {
     // we have to write to a different filesystem first
         
     useTmpFile = true;
-    pointer=tmpnam(NULL); 
-    qDebug("Opening tmp file %s",pointer);
+    if(( fd = mkstemp( pointer)) < 0 ) {
+       perror("mkstemp failed");
+       return false;
+    }
+    
+//    qDebug("Opening tmp file %s",pointer);
     track.setName( pointer);
 
   } else { //just use regular file.. no moving
@@ -101,7 +106,7 @@ void WavFile::closeFile() {
 }
 
 int WavFile::openFile(const QString &currentFileName) {
-    qDebug("open play file "+currentFileName);
+//    qDebug("open play file "+currentFileName);
     closeFile();
     
   track.setName(currentFileName);
@@ -126,11 +131,11 @@ bool WavFile::setWavHeader(int fd, wavhdr *hdr) {
 
   if( wavFormat == WAVE_FORMAT_PCM) {
     (*hdr).fmtTag = 1; // PCM
-    qDebug("set header  WAVE_FORMAT_PCM");
+//    qDebug("set header  WAVE_FORMAT_PCM");
   }
   else {
     (*hdr).fmtTag = WAVE_FORMAT_DVI_ADPCM; //intel ADPCM
-    qDebug("set header  WAVE_FORMAT_DVI_ADPCM");
+ //    qDebug("set header  WAVE_FORMAT_DVI_ADPCM");
   }
 
   //  (*hdr).nChannels = 1;//filePara.channels;// ? 2 : 1*/; // channels
@@ -144,8 +149,8 @@ bool WavFile::setWavHeader(int fd, wavhdr *hdr) {
   strncpy((*hdr).dataID, "data", 4);
 
   write( fd,hdr, sizeof(*hdr));
-  qDebug("writing header: bitrate%d, samplerate %d,  channels %d",
-         wavResolution, wavSampleRate, wavChannels);
+//   qDebug("writing header: bitrate%d, samplerate %d,  channels %d",
+//          wavResolution, wavSampleRate, wavChannels);
   return true;
 }
 
@@ -155,12 +160,12 @@ bool WavFile::adjustHeaders(int fd, int total) {
   write( fd, &i, sizeof(i));
   lseek( fd, 40, SEEK_SET);
   write( fd, &total, sizeof(total));
-  qDebug("adjusting header %d", total);
+//  qDebug("adjusting header %d", total);
   return true;
 }
 
 int WavFile::parseWavHeader(int fd) {
-  qDebug("Parsing wav header");
+//  qDebug("Parsing wav header");
   char string[4];
   int found;
   short fmt;
@@ -258,8 +263,8 @@ int WavFile::parseWavHeader(int fd) {
         return -1;
       } else {
         wavNumberSamples =  longdata;
-         qDebug("file has length of %d \nlasting %d seconds", longdata,
-        (( longdata / wavSampleRate) / wavChannels) / ( wavChannels*( wavResolution/8)) );
+         qDebug("file has length of %d \nlasting %d seconds", (int)longdata,
+        (int)(( longdata / wavSampleRate) / wavChannels) / ( wavChannels*( wavResolution/8)) );
 //        wavSeconds = (( longdata / wavSampleRate) / wavChannels) / ( wavChannels*( wavResolution/8));
         
   return longdata;
