@@ -42,6 +42,11 @@ config OE_BUILD_DIR
   string "OE build directory"
   default ">>>set OpenEmbedded build directory here<<<"
 
+config OE_HOST_SYS
+  depends TARGET_OE
+  string "OE host system"
+  default "i686-linux"
+      
 config OPTIMIZE
   boolean "Use optimizations"
   default "y" if ! TARGET_X86

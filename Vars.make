@@ -21,6 +21,7 @@ else
     $(shell mkdir -p $(QTDIR)/src/moc)
     $(shell echo -e "all: \n\t" >>$(QTDIR)/src/moc/Makefile)
     PLATFORM=sharp-linux
+    OEHOSTSYS:=$(CONFIG_OE_HOST_SYS)
 endif
 
 ifdef CONFIG_TARGET_X86
