@@ -40,7 +40,7 @@ endif
 export SUB_VERSION
 
 ifeq ($(QTE_REVISION),)
-    QTE_REVISION=4
+    QTE_REVISION=5
 endif
 export QTE_REVISION
 
