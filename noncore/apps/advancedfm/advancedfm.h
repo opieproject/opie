@@ -165,6 +165,8 @@ private:
    void addCustomDir();
    void removeCustomDir();
    void gotoDirectory(const QString &);
+   void openSearch();
+   void findFile(const QString &);
 
 private slots:
    void processEnded(OProcess *);

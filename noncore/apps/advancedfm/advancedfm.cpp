@@ -902,11 +902,34 @@ void AdvancedFm::gotoDirectory(const QString &file) {
 
   QString curDir = file;
   QDir *thisDir = CurrentDir();
-
-  if(QDir( curDir).exists() )  {
+ if(QDir( curDir).exists() )  {
       thisDir->setPath( curDir );
       chdir( curDir.latin1() );
       thisDir->cd( curDir, TRUE);
       populateView();
+   }
+ else if(QFileInfo(curDir).exists()) {
+    QFileInfo fileInfo(curDir);
+    curDir=fileInfo.dirPath();
+    if(QDir( curDir).exists() )  {
+       thisDir->setPath( curDir );
+       chdir( curDir.latin1() );
+       thisDir->cd( curDir, TRUE);
+       populateView();
+    }
+    findFile(file);
+ }
+  
+}
+
+void AdvancedFm::findFile(const QString &fileName) {
+   QFileInfo fi(fileName);
+   QListView *thisView = CurrentView();
+   QListViewItemIterator it( thisView );
+   for ( ; it.current(); ++it ) {
+      if(it.current()->text(0) == fi.fileName()) {
+         it.current()->setSelected(true);
+         thisView->ensureItemVisible(it.current());
+      }
    }
 }

@@ -12,6 +12,8 @@
 #include "advancedfm.h"
 
 #include <opie/otabwidget.h>
+#include <qpe/storage.h>
+
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/menubutton.h>
@@ -82,6 +84,8 @@ void AdvancedFm::init() {
 
   fileMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showMenuHidden() ));
   fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
+  fileMenu->insertSeparator();
+  fileMenu->insertItem( tr( "File Search" ), this, SLOT( openSearch() ));
   fileMenu->insertSeparator();
   fileMenu->insertItem( tr( "Make Directory" ), this, SLOT( mkDir() ));
   fileMenu->insertItem( tr( "Rename" ), this, SLOT( rn() ));
@@ -198,6 +202,7 @@ void AdvancedFm::init() {
 
   ///////////////
 
+
   struct utsname name; /* check for embedix kernel running on the zaurus*/
   if (uname(&name) != -1) {
       QString release=name.release;
@@ -205,10 +210,17 @@ void AdvancedFm::init() {
           zaurusDevice=TRUE;
      } else {
           zaurusDevice=FALSE;
-          sdButton->hide();
       }
   }
 
+  if( !StorageInfo::hasSd() || !StorageInfo::hasMmc()) {
+     qDebug("not have sd");
+     sdButton->hide();
+  }
+  if( !StorageInfo::hasCf() ) {
+     qDebug("not have cf");
+     cfButton->hide();
+  }
   currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
   currentDir.setPath( QDir::currentDirPath());
 
@@ -248,6 +260,7 @@ void AdvancedFm::initConnections()
 
   connect( Local_View, SIGNAL( clicked( QListViewItem*)),
            this,SLOT( ListClicked(QListViewItem *)) );
+
   connect( Local_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
            this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
 

@@ -3,7 +3,7 @@
   -------------------
   ** Created: Sat Mar 9 23:33:09 2002
     copyright            : (C) 2002 by ljp
-    email                : ljp@llornkcor.com
+    email               : ljp@llornkcor.com
     *   This program is free software; you can redistribute it and/or modify  *
     *   it under the terms of the GNU General Public License as published by  *
     *   the Free Software Foundation; either version 2 of the License, or     *
@@ -203,7 +203,7 @@ void AdvancedFm::doDelete()
       if(f.right(1).find("/",0,TRUE) == -1)
         f += "/";
       f += myFile;
-      if(QDir(f).exists() && !QFileInfo(f).isSymLink() )
+      if(QDir(f).exists() && !QFileInfo(f).isSymLink() ) //if file is a directory
         {
         switch ( QMessageBox::warning( this, tr("Delete Directory?"), tr("Really delete\n") + f +
                                       "\nand all it's contents ?"
@@ -233,8 +233,13 @@ void AdvancedFm::doDelete()
           }
         QString cmd="rm "+f;
         QFile file(f);
-        if(QFileInfo(myFile).fileName().find("../",0,TRUE)==-1)
-            file.remove();
+        if(QFileInfo(myFile).fileName().find("../",0,TRUE)==-1) {
+            qDebug("remove link files "+f);
+//             AppLnk lnk(f);
+//             qDebug(lnk.linkFile());
+//             lnk.removeLinkFile();
+           file.remove();
+        }
       }
     }
   }
@@ -884,4 +889,8 @@ void AdvancedFm::okRename()
   view->takeItem( view->currentItem() );
   delete view->currentItem();
   populateView();
+}
+
+void AdvancedFm::openSearch() {
+
 }
