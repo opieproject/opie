@@ -16,11 +16,15 @@
 #ifndef RESOURCE_H
 #define RESOURCE_H
 
-#include <qpixmap.h>
+#include <qstring.h>
+
+class QPixmap;
+class QIconSet;
 
 namespace Resource
 {
     QPixmap loadPixmap( const QString& );
+    QIconSet loadIconSet( const QString& );
 }
 
 #endif // RESOURCE_H

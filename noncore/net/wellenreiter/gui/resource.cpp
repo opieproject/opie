@@ -17,6 +17,9 @@
 
 #define PIXMAPPATH "/usr/local/share"
 
+#include <qpixmap.h>
+#include <qiconset.h>
+
 namespace Resource
 {
 
@@ -30,6 +33,18 @@ QPixmap loadPixmap( const QString& pix )
         qDebug( "Wellenreiter::Resource: can't find pixmap " + filename );
     }
     return pixmap;
+};
+
+QIconSet loadIconSet( const QString& pix )
+{
+    QString filename;
+    filename.sprintf( "%s/%s.png", (const char*) PIXMAPPATH, (const char*) pix );
+    QPixmap pixmap( filename );
+    if ( pixmap.isNull() )
+    {
+        qDebug( "Wellenreiter::Resource: can't find pixmap " + filename );
+    }
+    return QIconSet( pixmap );
 };
 
 };
