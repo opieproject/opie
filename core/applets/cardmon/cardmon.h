@@ -23,6 +23,12 @@
 #include <qpixmap.h>
 #include <qpopupmenu.h>
 
+namespace Opie {
+    namespace Core {
+        class OProcess;
+    }
+}
+
 class CardMonitor : public QWidget {
     Q_OBJECT
 public:
@@ -33,12 +39,16 @@ public:
     static int position();
 private slots:
     void cardMessage( const QCString &msg, const QByteArray & );
+    void slotExited( Opie::Core::OProcess* proc );
     void popupTimeout();
 
 protected:
     void paintEvent( QPaintEvent* );
     void mousePressEvent( QMouseEvent * );
+
 private:
+    void execCommand( const QString &command );
+    int m_commandOrig;
     QPixmap pm;
     // pcmcia socket 0
     bool cardInPcmcia0;
@@ -52,7 +62,8 @@ private:
     void iconShow();
     QPopupMenu *popupMenu;
     void popUp(QString message, QString icon = QString::null );
- };
+    Opie::Core::OProcess* m_process;
+};
 
 #endif
 
