@@ -132,7 +132,7 @@ OpieFtp::OpieFtp( )
     Local_View->setColumnAlignment(2,QListView::AlignRight);
     Local_View->setAllColumnsShowFocus(TRUE);
     Local_View->setMultiSelection( TRUE );
-    Local_View->setSelectionMode(Q?istView::Extended);
+    Local_View->setSelectionMode(QListView::Extended);
      QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
 
     tabLayout->addWidget( Local_View, 0, 0 );
