@@ -97,7 +97,7 @@ menu "Base"
   source libopie/config.in
   source core/opie-login/config.in
   source core/opiealarm/config.in
-  source core/launcher/config.in
+  source core/server/config.in
 endmenu
 
 comment ""
