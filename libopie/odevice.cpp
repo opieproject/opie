@@ -146,11 +146,12 @@ bool ODevice::suspend ( )
 		::signal ( SIGTSTP, SIG_IGN );	// we don't want to be stopped
 		::gettimeofday ( &tvs, 0 );
 	
+		::sync ( ); // flush fs caches
+	
 		res = ( ::ioctl ( fd, APM_IOC_SUSPEND ) == 0 ); // tell the kernel to "start" suspending
-		::close ( fd );
 
 		if ( res ) {	
-			::kill ( -::getpid ( ), SIGTSTP ); // stop everthing in out process group
+			::kill ( -::getpid ( ), SIGTSTP ); // stop everthing in our process group
 
 			do { // wait at most 1.5 sec: either suspend didn't work or the device resumed
 				::usleep ( 200 * 1000 );
@@ -160,6 +161,7 @@ bool ODevice::suspend ( )
 			::kill ( -::getpid ( ), SIGCONT ); // continue everything in our process group
 		}	
 		
+		::close ( fd );		
 		::signal ( SIGTSTP, SIG_DFL );
 	}
 	
