@@ -1,15 +1,15 @@
 [Desktop Entry]
 Exec=opieplayer
 Icon=opieplayer/MPEGPlayer
-MimeType=audio/mpeg;video/mpeg;audio/x-mpegurl;audio/x-wav;application/x-shockwave-flash;playlist/plain;audio/x-mpegurl;audio/x-mod;application/x-ogg;audio/x-ogg;
-MimeTypeIcons=SoundPlayer;MPEGPlayer;SoundPlayer;Sound;Sound;mpegplayer/playlist2
+MimeType=audio/mpeg;video/mpeg;audio/x-mpegurl;audio/x-wav;application/x-shockwave-flash;playlist/plain;audio/x-mpegurl;audio/x-mod;audio/x-ogg
+MimeTypeIcons=SoundPlayer;MPEGPlayer;SoundPlayer;Sound;Sound;mpegplayer/playlist2;Sound;SOund;Sound
 Type=Application
 Name=Opie Player
 Comment=A Media Playback Program
 Name[es]=Multimedia
 Comment[es]=Reproductor multimedia
 Name[it]=OpiePlayer
-
+Name[ko]=오삐 재생기
 Name[pt]=Leitor Multimédia
 Comment[pt]=Leitor de ficheiros multimédia
 Name[pt_BR]=Leitor Multimédia
