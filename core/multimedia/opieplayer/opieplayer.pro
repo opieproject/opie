@@ -7,7 +7,7 @@ HEADERS   = loopcontrol.h mediaplayerplugininterface.h playlistselection.h media
 SOURCES   = main.cpp \
       loopcontrol.cpp playlistselection.cpp mediaplayerstate.cpp \
       videowidget.cpp audiowidget.cpp playlistwidget.cpp mediaplayer.cpp audiodevice.cpp inputDialog.cpp
-TARGET    = mpegplayer
+TARGET    = opieplayer
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe -lpthread
@@ -22,15 +22,3 @@ LIBS            += -lqpe -lpthread
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 
-TRANSLATIONS = ../i18n/de/mpegplayer.ts
-TRANSLATIONS += ../i18n/pt_BR/mpegplayer.ts
-TRANSLATIONS   += ../i18n/en/mpegplayer.ts
-TRANSLATIONS   += ../i18n/hu/mpegplayer.ts
-TRANSLATIONS   += ../i18n/ja/mpegplayer.ts
-TRANSLATIONS   += ../i18n/sl/mpegplayer.ts
-TRANSLATIONS   += ../i18n/fr/mpegplayer.ts
-TRANSLATIONS   += ../i18n/ko/mpegplayer.ts
-TRANSLATIONS   += ../i18n/pl/mpegplayer.ts
-TRANSLATIONS   += ../i18n/no/mpegplayer.ts
-TRANSLATIONS   += ../i18n/zh_CN/mpegplayer.ts
-TRANSLATIONS   += ../i18n/zh_TW/mpegplayer.ts
