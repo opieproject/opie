@@ -26,54 +26,30 @@
 
 */
 
-#ifndef TRANSACTION_H
-#define TRANSACTION_H
+#ifndef PASSWORD_H
+#define PASSWORD_H
 
 #include <qdialog.h>
 
-class DateBookMonth;
-class QComboBox;
 class QLineEdit;
-class QMultiLineEdit;
-class QPushButton;
-class QRadioButton;
-class QString;
 class QWidget;
-class TranInfo;
 
-class Transaction : public QDialog
+class Password : public QDialog
 {
 	Q_OBJECT
 
 	public:
-		Transaction( QWidget * = 0x0, const QString & = 0x0, TranInfo * = 0x0,
-					 const QString & = "$" );
-		~Transaction();
+		Password( QWidget *, const char *, const char * );
+		~Password();
+
+		QString password;
 
 	private:
-		TranInfo *tran;
-
-		QString currencySymbol;
-
-		QRadioButton   *withBtn;
-		QRadioButton   *depBtn;
-		QPushButton    *dateBtn;
-		DateBookMonth  *datePicker;
-		QLineEdit      *numEdit;
-		QLineEdit      *descEdit;
-		QComboBox      *catList;
-		QComboBox      *typeList;
-		QLineEdit      *amtEdit;
-		QLineEdit      *feeEdit;
-		QMultiLineEdit *noteEdit;
+		QLineEdit *pw;
 
 	protected slots:
 		void accept();
-
-	private slots:
-		void slotWithdrawalClicked();
-		void slotDepositClicked();
-		void slotDateChanged( int, int, int );
+		void slotTogglePassword( bool );
 };
 
 #endif

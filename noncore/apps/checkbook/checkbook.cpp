@@ -30,6 +30,7 @@
 #include "transaction.h"
 #include "graph.h"
 #include "graphinfo.h"
+#include "password.h"
 
 #include <opie/otabwidget.h>
 #include <qpe/config.h>
@@ -37,6 +38,7 @@
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
 
+#include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qfile.h>
 #include <qfontmetrics.h>
@@ -48,7 +50,7 @@
 #include <qwhatsthis.h>
 #include <qwidget.h>
 
-Checkbook::Checkbook( QWidget *parent, const QString &n, const QString &fd, char symbol )
+Checkbook::Checkbook( QWidget *parent, const QString &n, const QString &fd, const QString &symbol )
 	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {
 	name = n;
@@ -116,20 +118,26 @@ QWidget *Checkbook::initInfo()
 	layout->setSpacing( 2 );
 	layout->setMargin( 4 );
 
+	// Password protection
+	passwordCB = new QCheckBox( tr( "Password protect" ), container );
+	QWhatsThis::add( passwordCB, tr( "Click here to enable/disable password protection of this checkbook." ) );
+	connect( passwordCB, SIGNAL( clicked() ), this, SLOT( slotPasswordClicked() ) );
+	layout->addMultiCellWidget( passwordCB, 0, 0, 0, 1 );
+
 	// Account name
 	QLabel *label = new QLabel( tr( "Name:" ), container );
 	QWhatsThis::add( label, tr( "Enter name of checkbook here." ) );
-	layout->addWidget( label, 0, 0 );
+	layout->addWidget( label, 1, 0 );
 	nameEdit = new QLineEdit( container );
 	QWhatsThis::add( nameEdit, tr( "Enter name of checkbook here." ) );
 	connect( nameEdit, SIGNAL( textChanged( const QString & ) ),
 			 this, SLOT( slotNameChanged( const QString & ) ) );
-	layout->addWidget( nameEdit, 0, 1 );
+	layout->addWidget( nameEdit, 1, 1 );
 
 	// Type of account
 	label = new QLabel( tr( "Type:" ), container );
 	QWhatsThis::add( label, tr( "Select type of checkbook here." ) );
-	layout->addWidget( label, 1, 0 );
+	layout->addWidget( label, 2, 0 );
 	typeList = new QComboBox( container );
 	QWhatsThis::add( typeList, tr( "Select type of checkbook here." ) );
 	typeList->insertItem( tr( "Savings" ) );		// 0
@@ -138,50 +146,51 @@ QWidget *Checkbook::initInfo()
 	typeList->insertItem( tr( "Money market" ) );	// 3
 	typeList->insertItem( tr( "Mutual fund" ) );	// 4
 	typeList->insertItem( tr( "Other" ) );			// 5
-	layout->addWidget( typeList, 1, 1 );
+	layout->addWidget( typeList, 2, 1 );
 
 	// Bank/institution name
 	label = new QLabel( tr( "Bank:" ), container );
 	QWhatsThis::add( label, tr( "Enter name of the bank for this checkbook here." ) );
-	layout->addWidget( label, 2, 0 );
+	layout->addWidget( label, 3, 0 );
 	bankEdit = new QLineEdit( container );
 	QWhatsThis::add( bankEdit, tr( "Enter name of the bank for this checkbook here." ) );
-	layout->addWidget( bankEdit, 2, 1 );
+	layout->addWidget( bankEdit, 3, 1 );
 
 	// Account number
 	label = new QLabel( tr( "Account number:" ), container );
 	QWhatsThis::add( label, tr( "Enter account number for this checkbook here." ) );
-	layout->addWidget( label, 3, 0 );
+	layout->addWidget( label, 4, 0 );
 	acctNumEdit = new QLineEdit( container );
 	QWhatsThis::add( acctNumEdit, tr( "Enter account number for this checkbook here." ) );
-	layout->addWidget( acctNumEdit, 3, 1 );
+	layout->addWidget( acctNumEdit, 4, 1 );
 
 	// PIN number
 	label = new QLabel( tr( "PIN number:" ), container );
 	QWhatsThis::add( label, tr( "Enter PIN number for this checkbook here." ) );
-	layout->addWidget( label, 4, 0 );
+	layout->addWidget( label, 5, 0 );
 	pinNumEdit = new QLineEdit( container );
 	QWhatsThis::add( pinNumEdit, tr( "Enter PIN number for this checkbook here." ) );
-	layout->addWidget( pinNumEdit, 4, 1 );
+	layout->addWidget( pinNumEdit, 5, 1 );
 
 	// Starting balance
 	label = new QLabel( tr( "Starting balance:" ), container );
 	QWhatsThis::add( label, tr( "Enter the initial balance for this checkbook here." ) );
-	layout->addWidget( label, 5, 0 );
+	layout->addWidget( label, 6, 0 );
 	balanceEdit = new QLineEdit( container );
 	QWhatsThis::add( balanceEdit, tr( "Enter the initial balance for this checkbook here." ) );
 	connect( balanceEdit, SIGNAL( textChanged( const QString & ) ),
 			 this, SLOT( slotStartingBalanceChanged( const QString & ) ) );
-	layout->addWidget( balanceEdit, 5, 1 );
+	layout->addWidget( balanceEdit, 6, 1 );
 
 	// Notes
 	label = new QLabel( tr( "Notes:" ), container );
 	QWhatsThis::add( label, tr( "Enter any additional information for this checkbook here." ) );
-	layout->addWidget( label, 6, 0 );
+	layout->addWidget( label, 7, 0 );
 	notesEdit = new QMultiLineEdit( container );
 	QWhatsThis::add( notesEdit, tr( "Enter any additional information for this checkbook here." ) );
-	notesEdit->setMaximumHeight( 85 );
-	layout->addMultiCellWidget( notesEdit, 7, 7, 0, 1 );
+	notesEdit->setMinimumHeight( 25 );
+	notesEdit->setMaximumHeight( 65 );
+	layout->addMultiCellWidget( notesEdit, 8, 8, 0, 1 );
 
 	return control;
 }
@@ -266,10 +275,13 @@ void Checkbook::loadCheckbook()
 {
 	transactions.clear();
 
-	Config config(filename, Config::File);
+	Config config( filename, Config::File );
 
 	// Load info
 	config.setGroup( "Account" );
+
+	password = config.readEntryCrypt( "Password", "" );
+	passwordCB->setChecked( password != "" );
 	nameEdit->setText( name );
 	QString temptext = config.readEntry( "Type" );
 	int i = typeList->count();
@@ -310,7 +322,7 @@ void Checkbook::loadCheckbook()
 				amount *= -1;
 			}
 			currBalance += amount;
-			stramount.sprintf( "%c%.2f", currencySymbol, amount );
+			stramount.sprintf( "%s%.2f", currencySymbol.latin1(), amount );
 
 			// Add to transaction list
 			transactions.inSort( tran );
@@ -360,6 +372,7 @@ void Checkbook::accept()
 
 	// Save info
 	config->setGroup( "Account" );
+	config->writeEntryCrypt( "Password", password );
 	config->writeEntry( "Type", typeList->currentText() );
 	config->writeEntry( "Bank", bankEdit->text() );
 	config->writeEntryCrypt( "Number", acctNumEdit->text() );
@@ -377,6 +390,48 @@ void Checkbook::accept()
 	config->write();
 
 	QDialog::accept();
+}
+
+void Checkbook::slotPasswordClicked()
+{
+	if ( password == "" && passwordCB->isChecked() )
+	{
+		Password *pw = new Password( this, tr( "Enter password" ), tr( "Please enter your password:" ) );
+		if ( pw->exec() != QDialog::Accepted  )
+		{
+			passwordCB->setChecked( FALSE );
+			delete pw;
+			return;
+		}
+		password = pw->password;
+		delete pw;
+
+		pw = new Password( this, tr( "Confirm password" ), tr( "Please confirm your password:" ) );
+		if ( pw->exec() != QDialog::Accepted || pw->password != password )
+		{
+			passwordCB->setChecked( FALSE );
+			password = "";
+		}
+
+		delete pw;
+	}
+	else if ( password != "" && !passwordCB->isChecked() )
+	{
+		Password *pw = new Password( this, tr( "Enter password" ),
+					tr( "Please enter your password to confirm removal of password protection:" ) );
+		if ( pw->exec() == QDialog::Accepted && pw->password == password )
+		{
+			password = "";
+			delete pw;
+			return;
+		}
+		else
+		{
+			passwordCB->setChecked( TRUE );
+		}
+
+		delete pw;
+	}
 }
 
 void Checkbook::slotNameChanged( const QString &newname )
@@ -416,7 +471,7 @@ void Checkbook::slotNewTran()
 			amount *= -1;
 		}
 		QString stramount;
-		stramount.sprintf( "%c%.2f", currencySymbol, amount );
+		stramount.sprintf( "%s%.2f", currencySymbol.latin1(), amount );
 
 		// Add to transaction list
 		transactions.inSort( traninfo );
@@ -436,7 +491,6 @@ void Checkbook::slotNewTran()
 
 void Checkbook::slotEditTran()
 {
-	bool ok;
 	QListViewItem *curritem = tranTable->currentItem();
 	if ( !curritem )
 	{
@@ -468,7 +522,7 @@ void Checkbook::slotEditTran()
 		adjustBalance( origamt * -1 );
 		adjustBalance( amount );
 		QString stramount;
-		stramount.sprintf( "%c%.2f", currencySymbol, amount );
+		stramount.sprintf( "%s%.2f", currencySymbol.latin1(), amount );
 		curritem->setText( 3, stramount );
 
 		balanceLabel->setText( tr( "Current balance: %1%2" ).arg( currencySymbol ).arg( currBalance, 0, 'f', 2 ) );

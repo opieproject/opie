@@ -49,7 +49,7 @@ class MainWindow : public QMainWindow
 		QString   cbDir;
 		QAction  *actionOpen;
 		QAction  *actionDelete;
-		char      currencySymbol;
+		QString   currencySymbol;
 
 	private slots:
 		void slotNew();

@@ -38,6 +38,7 @@ class OTabWidget;
 
 class Graph;
 class GraphInfo;
+class QCheckBox;
 class QComboBox;
 class QLabel;
 class QLineEdit;
@@ -50,7 +51,8 @@ class Checkbook : public QDialog
 	Q_OBJECT
 
 	public:
-		Checkbook( QWidget * = 0x0, const QString & = 0x0, const QString & = 0x0, char = '$' );
+		Checkbook( QWidget * = 0x0, const QString & = 0x0, const QString & = 0x0,
+					const QString & = "$" );
 		~Checkbook();
 
 		const QString &getName();
@@ -60,7 +62,8 @@ class Checkbook : public QDialog
 		QString      name;
 		QString      filename;
 		QString      filedir;
-		char         currencySymbol;
+		QString      currencySymbol;
+		QString      password;
 		int          highTranNum;
 
 		OTabWidget *mainWidget;
@@ -70,6 +73,7 @@ class Checkbook : public QDialog
 
 		// Info tab
 		QWidget        *initInfo();
+		QCheckBox      *passwordCB;
 		QLineEdit      *nameEdit;
 		QComboBox      *typeList;
 		QLineEdit      *bankEdit;
@@ -98,6 +102,7 @@ class Checkbook : public QDialog
 		void accept();
 
 	private slots:
+		void slotPasswordClicked();
 		void slotNameChanged( const QString & );
 		void slotStartingBalanceChanged( const QString & );
 		void slotNewTran();

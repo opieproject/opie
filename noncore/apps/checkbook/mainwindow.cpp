@@ -27,8 +27,10 @@
 */
 
 #include "mainwindow.h"
+#include "password.h"
 #include "checkbook.h"
 
+#include <qpe/config.h>
 #include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpemenubar.h>
@@ -105,7 +107,7 @@ MainWindow::MainWindow()
 	cbList->sort();
 	cbList->setSelected( 0, TRUE );
 
-	currencySymbol = '$';
+	currencySymbol = "$";
 }
 
 MainWindow::~MainWindow()
@@ -127,6 +129,25 @@ void MainWindow::slotNew()
 void MainWindow::slotEdit()
 {
 	QString currname = cbList->currentText();
+	
+	QString tempstr = cbDir;
+	tempstr.append( currname );
+	tempstr.append( ".qcb" );
+	
+	Config config( tempstr, Config::File );
+	config.setGroup( "Account" );
+	QString password = config.readEntryCrypt( "Password", "" );
+	if ( password != "" )
+	{
+		Password *pw = new Password( this, tr( "Enter password" ), tr( "Please enter your password:" ) );
+		if ( pw->exec() != QDialog::Accepted || pw->password != password  )
+		{
+			delete pw;
+			return;
+		}
+		delete pw;
+	}
+
 	Checkbook *currcb = new Checkbook( this, currname, cbDir, currencySymbol );
 	currcb->showMaximized();
 	if ( currcb->exec() == QDialog::Accepted )
@@ -137,9 +158,6 @@ void MainWindow::slotEdit()
 			cbList->changeItem( newname, cbList->currentItem() );
 			cbList->sort();
 
-			QString tempstr = cbDir;
-			tempstr.append( currname );
-			tempstr.append( ".qcb" );
 			QFile f( tempstr );
 			if ( f.exists() )
 			{

@@ -3,6 +3,7 @@ CONFIG    = qt warn_on release
 HEADERS   = mainwindow.h \
       traninfo.h    \
       graphinfo.h   \
+      password.h    \
       checkbook.h   \
       transaction.h \
       graph.h
@@ -10,6 +11,7 @@ SOURCES   = main.cpp  \
       mainwindow.cpp  \
       traninfo.cpp    \
       graphinfo.cpp   \
+      password.cpp    \
       checkbook.cpp   \
       transaction.cpp \
       graph.cpp

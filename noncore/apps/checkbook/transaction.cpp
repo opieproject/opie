@@ -46,7 +46,7 @@
 #include <qwhatsthis.h>
 
 Transaction::Transaction( QWidget *parent, const QString &acctname, TranInfo *info,
-						  char symbol )
+							const QString &symbol )
 	: QDialog( parent, 0, TRUE, WStyle_ContextHelp )
 {
 	QString tempstr = tr( "Transaction for " );
