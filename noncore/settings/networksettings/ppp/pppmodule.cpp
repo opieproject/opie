@@ -105,20 +105,18 @@ QList<Interface> PPPModule::getInterfaces(){
  */
 Interface *PPPModule::addNewInterface(const QString &newInterface){
 
-  qDebug("try to add iface %s",newInterface.latin1());
-
   InterfacePPP *ifaceppp;
   Interface *iface;
   ifaceppp = new InterfacePPP();
   PPPConfigWidget imp(ifaceppp, 0, "PPPConfigImp", true);
   imp.showMaximized();
   if(imp.exec() == QDialog::Accepted ){
+      iface = (InterfacePPP*) ifaceppp;
       iface->setModuleOwner( this );
-      iface = ifaceppp;
       list.append( iface );
       return iface;
   }else {
-      delete iface;
+      delete ifaceppp;
       iface = NULL;
   }
   return iface;
@@ -128,9 +126,8 @@ Interface *PPPModule::addNewInterface(const QString &newInterface){
  * Attempts to remove the interface, doesn't delete i
  * @return bool true if successfull, false otherwise.
  */
-bool PPPModule::remove(Interface*){
-  // Can't remove a hardware device, you can stop it though.
-  return false;
+bool PPPModule::remove(Interface *i){
+    return list.remove(i);
 }
 
 void PPPModule::possibleNewInterfaces(QMap<QString, QString> &newIfaces)

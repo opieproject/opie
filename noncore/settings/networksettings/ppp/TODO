@@ -4,4 +4,4 @@
 - fix layout of edit account, i.e. get it shown maximised
 - popup configure modem with the correct account prselected
 	not quite shure why it does not work... IMHO it should work
-- remove interfaces
+

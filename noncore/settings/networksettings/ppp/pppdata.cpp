@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.8 2003-06-02 14:10:31 tille Exp $
+ * $Id: pppdata.cpp,v 1.9 2003-06-02 15:12:10 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -1245,7 +1245,10 @@ void PPPData::setpppdError(int err) {
 
 QString PPPData::modemGroup()
 {
-    if (modemDeviceGroup<0)qFatal("wrong modem %i",modemDeviceGroup);
+    if (modemDeviceGroup<0){
+        qDebug("wrong modem %i\n using 0",modemDeviceGroup);
+        modemDeviceGroup = 0; //FIXME!
+    }
     return QString("%1_%1").arg(MODEM_GRP).arg(modemDeviceGroup);
 }
 
