@@ -43,6 +43,7 @@
 #include <qdir.h>
 #include <qpopupmenu.h>
 #include <qtimer.h>
+#include <qlist.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
@@ -385,15 +386,26 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
         return;
     deviceItem = it.data();
 
+    // remove previous entries
+    QList<QListViewItem> tempList;
+    tempList.setAutoDelete( true );
+    QListViewItem * child = deviceItem->firstChild();
+    while( child ) {
+	tempList.append( child );
+	child = child->nextSibling();
+    }
+    tempList.clear();
+
     QValueList<OpieTooth::Services>::Iterator it2;
-    BTServiceItem * serviceItem;
+    BTServiceItem* serviceItem;
+
 
     if (!servicesList.isEmpty() ) {
         // add services
         QMap<int, QString> list;
         QMap<int, QString>::Iterator classIt;
         for( it2 = servicesList.begin(); it2 != servicesList.end(); ++it2 ) {
-            serviceItem = new BTServiceItem( deviceItem  , (*it2)  );
+            serviceItem = new BTServiceItem( deviceItem, (*it2)  );
             list = (*it2).classIdList();
             classIt = list.begin();
             int classId=0;
@@ -405,7 +417,7 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
         }
     } else {
         Services s1;
-        s1.setServiceName( tr("no serives found") );
+        s1.setServiceName( tr("no services found") );
         serviceItem = new BTServiceItem( deviceItem, s1 );
     }
     // now remove them from the  list
@@ -446,7 +458,7 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList ) 
     }
 
     //  recall connection search after some time
-    QTimer::singleShot( 20000, this, SLOT( addConnectedDevices() ) );
+    QTimer::singleShot( 15000, this, SLOT( addConnectedDevices() ) );
 }
 
 
