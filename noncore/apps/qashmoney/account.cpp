@@ -5,7 +5,6 @@
 
 #include <qpixmap.h>
 #include <stdlib.h>
-#include <iostream.h>
 
 extern Preferences *preferences;
 

@@ -2,7 +2,6 @@
 #include "account.h"
 #include "transactiondisplay.h"
 #include <stdlib.h>
-#include <iostream.h>
 
 extern Account *account;
 extern Preferences *preferences;

@@ -12,7 +12,6 @@
 #include <qmessagebox.h>
 #include <qheader.h>
 #include <qmultilineedit.h>
-#include <iostream.h>
 #include <qdatetime.h>
 
 extern Transaction *transaction;

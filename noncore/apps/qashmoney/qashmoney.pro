@@ -43,7 +43,7 @@ DEPENDPATH = $(OPIEDIR)/include
 DESTDIR = $(OPIEDIR)/bin
 
 unix:LIBS += -lm
-LIBS += -lqpe -lqte -lstdc++ -lsqlite
+LIBS += -lqpe -lqte -lsqlite
 
 include ( $(OPIEDIR)/include.pro )
 

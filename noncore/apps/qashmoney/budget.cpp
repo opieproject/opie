@@ -1,7 +1,6 @@
 #include "budget.h"
 #include "transaction.h"
 #include <stdlib.h>
-#include <iostream.h>
 
 extern Transaction *transaction;
 

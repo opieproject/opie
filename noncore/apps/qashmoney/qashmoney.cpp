@@ -3,7 +3,6 @@
 #include "memorydialog.h"
 
 #include <qheader.h>
-#include <iostream.h>
 
 Budget *budget = new Budget ();
 Preferences *preferences = new Preferences ();
