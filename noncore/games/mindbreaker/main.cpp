@@ -21,15 +21,8 @@
 #include "mindbreaker.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char **argv )
-{
-    QPEApplication a( argc, argv );
 
-    MindBreaker w(0, "new window");
-    w.setCaption("Mind Breaker");
-    QPEApplication::setInputMethodHint( &w, QPEApplication::AlwaysOff );
-    a.showMainWidget(&w);
+OPIE_EXPORT_APP( OApplicationFactory<MindBreaker> )
 
-    return a.exec();
-}

@@ -107,7 +107,7 @@ class MindBreaker : public QMainWindow // QWidget
     Q_OBJECT
 public:
     MindBreaker(QWidget *parent=0, const char *name=0, int wFlags=0 );
-
+    static QString appName() { return QString::fromLatin1("mindbreaker"); }
 public slots:
     void setScore(int, int);
 

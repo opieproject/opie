@@ -22,6 +22,7 @@
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 
 #include <qpainter.h>
 #include <qpixmap.h>
@@ -48,7 +49,7 @@ public:
 
     bool hit( const QPoint &) const;
 
-/* a placed peg is one that has been set down on the board correctly and 
+/* a placed peg is one that has been set down on the board correctly and
    should not be moved, only copied */
     bool placed() const;
     void setPlaced(bool);
@@ -86,7 +87,7 @@ void Peg::buildImages()
 {
 
     QImage pegs = Resource::loadImage("mindbreaker/pegs");
-    int x = 0; 
+    int x = 0;
     int y = 0;
     int i;
     eggLevel = 0;
@@ -105,23 +106,23 @@ void Peg::buildImages()
     /* copy from master image to functional images */
     x = 0;
     y = panel_height;
-    normalPegs.insert(8, 
+    normalPegs.insert(8,
             new QImage(image.copy(x, y, panel_width, panel_height)));
     y += panel_height;
     y += title_height;
-    normalPegs.insert(9, 
+    normalPegs.insert(9,
             new QImage(image.copy(x, y, title_width, title_height)));
     y += title_height;
 
     x = 6 * peg_size;
-    normalPegs.insert(6, 
+    normalPegs.insert(6,
             new QImage(image.copy(x, y, answerpeg_size, answerpeg_size)));
     x += answerpeg_size;
-    normalPegs.insert(7, 
+    normalPegs.insert(7,
             new QImage(image.copy(x, y, answerpeg_size, answerpeg_size)));
 }
 
-QImage Peg::imageForType(int t) 
+QImage Peg::imageForType(int t)
 {
     if (eggLevel > t ) {
         if( t < 5) {
@@ -133,7 +134,7 @@ QImage Peg::imageForType(int t)
     return *normalPegs[t];
 }
 
-Peg::Peg(QCanvas *canvas , int t, int g, int p) 
+Peg::Peg(QCanvas *canvas , int t, int g, int p)
         : QCanvasRectangle(canvas)
 {
     setSize(normalPegs[t]->width(), normalPegs[t]->height() );
@@ -158,7 +159,7 @@ void Peg::drawShape(QPainter &p )
 {
     if ((pegtype == 5) && eggLevel > 5) {
         p.drawImage(x(), y(), *normalPegs[aniStep]);
-    } else 
+    } else
         p.drawImage(x(), y(), imageForType(pegtype));
 }
 
@@ -187,22 +188,22 @@ inline int Peg::pegPos() const
     return peg_pos;
 }
 
-inline void Peg::setPegPos(int p) 
+inline void Peg::setPegPos(int p)
 {
     peg_pos = p;
 }
 
-inline void Peg::setPlaced(bool p) 
+inline void Peg::setPlaced(bool p)
 {
     isplaced = p;
 }
 
-inline int Peg::type() const 
+inline int Peg::type() const
 {
     return pegtype;
 }
 
-/* Load the main image, copy from it the pegs, the board, and the answer image 
+/* Load the main image, copy from it the pegs, the board, and the answer image
  * and use these to create the tray, answer and board
  */
 MindBreaker::MindBreaker( QWidget *parent, const char *name, int wFlags )
@@ -211,14 +212,15 @@ MindBreaker::MindBreaker( QWidget *parent, const char *name, int wFlags )
 {
     MindBreakerBoard *m = new MindBreakerBoard(canvas, this);
     setCentralWidget(m);
-    
+    setCaption("Mind Breaker");
+    QPEApplication::setInputMethodHint( this, QPEApplication::AlwaysOff );
     setToolBarsMovable( FALSE );
 
     QPEToolBar *tb = new QPEToolBar(this);
     tb->setHorizontalStretchable( TRUE );
 
     QPixmap newicon = Resource::loadPixmap("new");
-    new QToolButton(newicon, tr("New Game"), 0, 
+    new QToolButton(newicon, tr("New Game"), 0,
                                        m, SLOT(clear()), tb, "NewGame");
 
     score = new QToolButton(tb);
@@ -241,16 +243,16 @@ void MindBreaker::setScore(int turns, int games)
     double total_turns = turns;
     double total_games = games;
 
-    if(total_games > 0) 
+    if(total_games > 0)
         average = total_turns / total_games;
-    else 
+    else
         average = 0.0;
 
     score->setText(tr("win avg: %1 turns (%2 games)").arg(average).arg(games));
 }
 
 
-MindBreakerBoard::MindBreakerBoard( QCanvas &canv, QWidget *parent, 
+MindBreakerBoard::MindBreakerBoard( QCanvas &canv, QWidget *parent,
                                     const char *name, int wFlags )
                      :  QCanvasView(&canv, parent, name, wFlags)
 {
@@ -309,7 +311,7 @@ MindBreakerBoard::MindBreakerBoard( QCanvas &canv, QWidget *parent,
 
         checkScores();
         c.setGroup("Board");
-        for(i = 0; i < 4; i++) 
+        for(i = 0; i < 4; i++)
             answer[i] = c.readNumEntry(QString("Answer%1").arg(i));
         /* read, and parse past guesses */
         current_go = 0;
@@ -328,7 +330,7 @@ MindBreakerBoard::MindBreakerBoard( QCanvas &canv, QWidget *parent,
         }
         for(i = 0; i < 4; i++) {
             current_guess[i] = c.readNumEntry(QString("CurrentGo%1").arg(i));
-            if (current_guess[i] != 6) 
+            if (current_guess[i] != 6)
                 placeGuessPeg(i, current_guess[i]);
         }
     }
@@ -349,7 +351,7 @@ MindBreakerBoard::~MindBreakerBoard()
             current_guess[i] = 6;
         }
     }
-        
+
     Config c("MindBreaker", Config::User);
     c.setGroup("Board");
     c.clearGroup();
@@ -358,9 +360,9 @@ MindBreakerBoard::~MindBreakerBoard()
         for(j = 0; j < 4; j++)
             c.writeEntry(tr("Go%1p%2").arg(i).arg(j), past_guesses[4*i+j]);
     }
-    for(j = 0; j < 4; j++) 
+    for(j = 0; j < 4; j++)
         c.writeEntry(tr("CurrentGo%1").arg(j), current_guess[j]);
-    for(j = 0; j < 4; j++) 
+    for(j = 0; j < 4; j++)
         c.writeEntry(tr("Answer%1").arg(j), answer[j]);
 
     c.setGroup("Score");
@@ -380,7 +382,7 @@ void MindBreakerBoard::getScore(int *a, int *b)
 void MindBreakerBoard::placeGuessPeg(int pos, int pegId)
 {
         int x = first_peg_x_diff + (pos * peg_spacing);
-        int y = board_height - ((current_go + 1) * panel_height) 
+        int y = board_height - ((current_go + 1) * panel_height)
                 + first_peg_y_diff;
 
         Peg *peg = new Peg(canvas(), pegId, current_go, pos);
@@ -407,13 +409,13 @@ void MindBreakerBoard::drawBackground()
     painter.setPen(pen);
     x_gap = canvas()->width() - (panel_width + (2 * bin_margin));
     //x_gap += peg_size >> 1;
-    if (x_gap < 1) 
+    if (x_gap < 1)
         x_gap = 1;
 
     y_gap = board_height / 6;
     y_gap -= (2 * bin_margin);
     //y_gap += peg_size >> 1;
-    if (y_gap < 1) 
+    if (y_gap < 1)
         y_gap = 1;
     x = panel_width + bin_margin - (peg_size >> 1);
     y = bin_margin - (peg_size >> 1) + 2;
@@ -469,7 +471,7 @@ void MindBreakerBoard::checkGuess()
         if (answer[i] == current_guess[i]) {
             num_black++;
             copy_answer[i] = 6;
-            copy_guess[i] = 7; 
+            copy_guess[i] = 7;
         }
     }
 
@@ -488,7 +490,7 @@ void MindBreakerBoard::checkGuess()
 
     int x = answerpegx;
     int y = (board_height - ((current_go + 1) * panel_height)) + answerpegy;
-  
+
     if (num_black == 4)
         game_over = TRUE;
 
@@ -500,7 +502,7 @@ void MindBreakerBoard::checkGuess()
         p->setZ(1);
         p->show();
         num_black--;
-        
+
         if (x == answerpegx)
             x = answerpegx + answerpeg_diff;
         else  {
@@ -516,7 +518,7 @@ void MindBreakerBoard::checkGuess()
         p->setZ(1);
         p->show();
         num_white--;
-        
+
         if (x == answerpegx)
             x = answerpegx + answerpeg_diff;
         else  {
@@ -535,7 +537,7 @@ void MindBreakerBoard::checkGuess()
         total_games++;
         if(!game_over)
             total_turns += 10;
-        else 
+        else
             total_turns += current_go;
 
         emit scoreChanged(total_turns, total_games);
@@ -546,7 +548,7 @@ void MindBreakerBoard::checkGuess()
         p->setY(0);
         p->setZ(0);
         p->show();
-        
+
         for (i = 0; i < 4; i++) {
             p = new Peg(canvas(), answer[i], -1);
             p->setX(first_peg_x_diff + (i * peg_spacing));
@@ -592,11 +594,11 @@ void MindBreakerBoard::clear()
     canvas()->update();
 }
 
-void MindBreakerBoard::resetScore() 
+void MindBreakerBoard::resetScore()
 {
     /* are u sure */
 
-    if (QMessageBox::information(this, tr( "Reset Statistics" ), 
+    if (QMessageBox::information(this, tr( "Reset Statistics" ),
             tr( "Reset the win ratio?" ),
             tr( "OK" ), tr( "Cancel" ) ) == 0) {
         total_turns = 0;
@@ -618,7 +620,7 @@ void MindBreakerBoard::contentsMousePressEvent(QMouseEvent *e)
        got clicked */
     if (e->x() > panel_width) {
         /* its a bin, but which bin */
-        if(e->y() > board_height) 
+        if(e->y() > board_height)
             return; // missed everything
         int bin = (e->y() + 2) / (board_height / 6);
 
@@ -652,7 +654,7 @@ void MindBreakerBoard::contentsMousePressEvent(QMouseEvent *e)
                     copy_press = TRUE;
                     copy_peg = item;
                 }
-                moving = new Peg(canvas(), 
+                moving = new Peg(canvas(),
                                  item->type(), current_go);
                 moving->setX(e->x() - (peg_size >> 1));
                 moving->setY(e->y() - (peg_size >> 1));
@@ -681,7 +683,7 @@ void MindBreakerBoard::contentsMouseMoveEvent(QMouseEvent* e)
         moving_pos = e->pos();
         canvas()->update();
         return;
-    } 
+    }
 }
 
 void MindBreakerBoard::contentsMouseReleaseEvent(QMouseEvent* e)
@@ -693,7 +695,7 @@ void MindBreakerBoard::contentsMouseReleaseEvent(QMouseEvent* e)
             copy_press = FALSE;
             QCanvasItemList l = canvas()->collisions(e->pos());
             for (QCanvasItemList::Iterator it=l.begin(); it !=l.end(); ++it) {
-                if (*it == copy_peg) 
+                if (*it == copy_peg)
                     copy_press = TRUE;
             }
             if (copy_press) {
@@ -707,7 +709,7 @@ void MindBreakerBoard::contentsMouseReleaseEvent(QMouseEvent* e)
                 return;
             }
         }
-            
+
         /* first work out if in y */
         if (e->y() > (board_height - (current_go * panel_height))) {
             delete moving;
@@ -725,7 +727,7 @@ void MindBreakerBoard::contentsMouseReleaseEvent(QMouseEvent* e)
         int x_bar = first_peg_x_diff - (peg_size >> 1);
         x_bar += peg_spacing;
         int pos = 0;
-        if (e->x() > x_bar) 
+        if (e->x() > x_bar)
             pos = 1;
         x_bar += peg_spacing;
         if (e->x() > x_bar)
@@ -744,7 +746,7 @@ void MindBreakerBoard::contentsMouseReleaseEvent(QMouseEvent* e)
         }
 
         int x = first_peg_x_diff + (pos * peg_spacing);
-        int y = board_height - ((current_go + 1) * panel_height) 
+        int y = board_height - ((current_go + 1) * panel_height)
                 + first_peg_y_diff;
         moving->setPegPos(pos);
         moving->setX(x);
@@ -769,9 +771,9 @@ void MindBreakerBoard::contentsMouseReleaseEvent(QMouseEvent* e)
     moving = 0;
     null_point -= e->pos();
     if(null_point.manhattanLength() < 6) {
-        if (game_over) 
+        if (game_over)
             clear();
-        else 
+        else
             checkGuess();
     }
 }
@@ -804,12 +806,12 @@ void MindBreakerBoard::checkScores()
     Peg::eggLevel = 0;
 
     double break_even = 5.0;
-    if (g < 1.0) 
+    if (g < 1.0)
         return;
     double avg = turns / games;
     g--;
     while (break_even >= 0.0) {
-        if (avg >= (break_even + g)) 
+        if (avg >= (break_even + g))
             return;
         // score a peg.
         break_even -= 1.0;
