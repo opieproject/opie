@@ -303,4 +303,5 @@ void TaskEditorStatus::slotDueChanged(int y, int m, int d)
 {
     m_due.setYMD( y, m, d );
     btnDue->setText( TimeString::longDateString( m_due ) );
+    emit dueDateChanged( m_due );
 }
