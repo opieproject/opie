@@ -31,30 +31,31 @@ class QCString;
 class QProcess;
 class QMessageBox;
 
-class RunningAppBar : public QFrame {
-  Q_OBJECT
+class RunningAppBar : public QFrame
+{
+	Q_OBJECT
 
- public:
-  RunningAppBar(QWidget* parent);
-  ~RunningAppBar();
-  
-  void addTask(const AppLnk& appLnk);
-  void removeTask(const AppLnk& appLnk);
-  void paintEvent(QPaintEvent* event);
-  void mousePressEvent(QMouseEvent*);
-  void mouseReleaseEvent(QMouseEvent*);
-  QSize sizeHint() const;
+public:
+	RunningAppBar(QWidget* parent);
+	~RunningAppBar();
 
- private slots:
-   void newQcopChannel(const QString& channel);
-   void removedQcopChannel(const QString& channel);
- void received(const QCString& msg, const QByteArray& data);
+	void addTask(const AppLnk& appLnk);
+	void removeTask(const AppLnk& appLnk);
+	void paintEvent(QPaintEvent* event);
+	void mousePressEvent(QMouseEvent*);
+	void mouseReleaseEvent(QMouseEvent*);
+	QSize sizeHint() const;
 
- private:
-  AppLnkSet* m_AppLnkSet;
-  QList<AppLnk> m_AppList;
-  int m_SelectedAppIndex;
-  int spacing;
+private slots:
+	void newQcopChannel(const QString& channel);
+	void removedQcopChannel(const QString& channel);
+	void received(const QCString& msg, const QByteArray& data);
+
+private:
+	AppLnkSet* m_AppLnkSet;
+	QList<AppLnk> m_AppList;
+	int m_SelectedAppIndex;
+	int spacing;
 };
 
 /**
@@ -62,26 +63,25 @@ class RunningAppBar : public QFrame {
  * to make sure the process is on top.  If it's not it displays a dialog
  * box asking permission to kill it.
  */
-class AppMonitor : public QObject {
-  Q_OBJECT
-    
- public:
-  static const int RAISE_TIMEOUT_MS;
+class AppMonitor : public QObject
+{
+	Q_OBJECT
 
-  AppMonitor(const AppLnk& app, RunningAppBar& owner);
-  ~AppMonitor();
-  
-  private slots:
-    void timerExpired();
-    void received(const QCString& msg, const QByteArray& data);
-    void psProcFinished();
+public:
+	static const int RAISE_TIMEOUT_MS;
 
- private:
-  RunningAppBar& m_Owner;
-  const AppLnk& m_App;
-  QTimer m_Timer;
-  QProcess* m_PsProc;
-  QMessageBox* m_AppKillerBox;
+	AppMonitor(const AppLnk& app, RunningAppBar& owner);
+	~AppMonitor();
+
+private slots:
+	void timerExpired();
+	void received(const QCString& msg, const QByteArray& data);
+
+private:
+	RunningAppBar& m_Owner;
+	const AppLnk& m_App;
+	QTimer m_Timer;
+	QMessageBox* m_AppKillerBox;
 };
 
 #endif
