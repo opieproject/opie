@@ -1202,28 +1202,30 @@ void OFileSelector::reparse()
 
       // let's find possible mimetypes
       QDir dir( m_currentDir );
-      dir.setFilter( QDir::Files | QDir::Readable );
-      dir.setSorting( QDir::Size );
-      const QFileInfoList *list = dir.entryInfoList();
-      QFileInfoListIterator it( *list );
-      QFileInfo *fi;
-      while( (fi=it.current() ) ) {
-	if( fi->extension() == QString::fromLatin1("desktop") ){
-	  ++it;
-	  continue;
-	}
-	MimeType type( fi->absFilePath() );
-	if( !m_mimetypes.contains( type.id() ) ){
-	  //qWarning("Type %s", type.id().latin1() );
-	  m_mimetypes.insert( type.id(), type.id() );
-	}
+      if( dir.exists() ){
+        dir.setFilter( QDir::Files | QDir::Readable );
+        dir.setSorting( QDir::Size );
+        const QFileInfoList *list = dir.entryInfoList();
+        QFileInfoListIterator it( *list );
+        QFileInfo *fi;
+        while( (fi=it.current() ) ) {
+  	  if( fi->extension() == QString::fromLatin1("desktop") ){
+  	    ++it;
+  	    continue;
+  	  }
+	  MimeType type( fi->absFilePath() );
+	  if( !m_mimetypes.contains( type.id() ) ){
+	    //qWarning("Type %s", type.id().latin1() );
+	    m_mimetypes.insert( type.id(), type.id() );
+	  }
 
-	++it;
+	  ++it;
+        }
+        // add them to the chooser
+        updateMimeCheck();
+        m_mimeCheck->setCurrentItem( indexByString( m_mimeCheck, currentMimeType ) );
+        currentMimeType = m_mimeCheck->currentText();
       }
-      // add them to the chooser
-      updateMimeCheck();
-      m_mimeCheck->setCurrentItem( indexByString( m_mimeCheck, currentMimeType ) );
-      currentMimeType = m_mimeCheck->currentText();
     }
   }else { // no autoMime
       // let the mimetype be set from out side the m_mimeCheck FEATURE
@@ -1237,59 +1239,61 @@ void OFileSelector::reparse()
 
   QDir dir( m_currentDir );
 
-  int sort;
-  if ( m_case )
-    sort = (QDir::IgnoreCase | QDir::Name | QDir::DirsFirst | QDir::Reversed);
-  else
-    sort = (QDir::Name | QDir::DirsFirst | QDir::Reversed);
-  dir.setSorting( sort );
-
-  int filter;
-  if( m_selector == EXTENDED_ALL /*|| m_selector ==CUSTOM_ALL */ ){
-    filter = QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All;
-  }else
-    filter = QDir::Files | QDir::Dirs | QDir::All;
-  dir.setFilter( filter );
-
-  // now go through all files
-  const QFileInfoList *list = dir.entryInfoList();
-  QFileInfoListIterator it( *list );
-  QFileInfo *fi;
-  while( (fi=it.current() ) ){
-    //qWarning("True and only" );
-    if( fi->fileName() == QString::fromLatin1("..") || fi->fileName() == QString::fromLatin1(".") ){
-      //qWarning(".. or ." );
+  if( dir.exists() ){
+    int sort;
+    if ( m_case )
+      sort = (QDir::IgnoreCase | QDir::Name | QDir::DirsFirst | QDir::Reversed);
+    else
+      sort = (QDir::Name | QDir::DirsFirst | QDir::Reversed);
+    dir.setSorting( sort );
+  
+    int filter;
+    if( m_selector == EXTENDED_ALL /*|| m_selector ==CUSTOM_ALL */ ){
+      filter = QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All;
+    }else
+      filter = QDir::Files | QDir::Dirs | QDir::All;
+    dir.setFilter( filter );
+  
+    // now go through all files
+    const QFileInfoList *list = dir.entryInfoList();
+    QFileInfoListIterator it( *list );
+    QFileInfo *fi;
+    while( (fi=it.current() ) ){
+      //qWarning("True and only" );
+      if( fi->fileName() == QString::fromLatin1("..") || fi->fileName() == QString::fromLatin1(".") ){
+        //qWarning(".. or ." );
+        ++it;
+        continue;
+      }
+      if( fi->isSymLink() ){
+        QString file = fi->dirPath( true ) + "/" + fi->readLink();
+        for( int i = 0; i<=4; i++) { // 5 tries to prevent dos
+  	QFileInfo info( file );
+  	if( !info.exists() ){
+  	  addSymlink( currentMimeType, fi, TRUE );
+  	  break;
+  	}else if( info.isDir() ){
+  	  addDir( currentMimeType, fi, TRUE );
+  	  break;
+  	}else if( info.isFile() ){
+  	  addFile( currentMimeType, fi, TRUE );
+  	  break;
+  	}else if( info.isSymLink() ){
+  	  file = info.dirPath(true ) + "/" + info.readLink() ;
+  	  break;
+  	}else if( i == 4){
+  	  addSymlink( currentMimeType, fi );
+  	}
+        } // off for loop
+      }else if( fi->isDir() ){
+        addDir( currentMimeType, fi );
+      }else if( fi->isFile() ){
+        addFile( currentMimeType, fi );
+      }
+      //qWarning( "%s", fi->fileName().latin1() );
       ++it;
-      continue;
-    }
-    if( fi->isSymLink() ){
-      QString file = fi->dirPath( true ) + "/" + fi->readLink();
-      for( int i = 0; i<=4; i++) { // 5 tries to prevent dos
-	QFileInfo info( file );
-	if( !info.exists() ){
-	  addSymlink( currentMimeType, fi, TRUE );
-	  break;
-	}else if( info.isDir() ){
-	  addDir( currentMimeType, fi, TRUE );
-	  break;
-	}else if( info.isFile() ){
-	  addFile( currentMimeType, fi, TRUE );
-	  break;
-	}else if( info.isSymLink() ){
-	  file = info.dirPath(true ) + "/" + info.readLink() ;
-	  break;
-	}else if( i == 4){
-	  addSymlink( currentMimeType, fi );
-	}
-      } // off for loop
-    }else if( fi->isDir() ){
-      addDir( currentMimeType, fi );
-    }else if( fi->isFile() ){
-      addFile( currentMimeType, fi );
-    }
-    //qWarning( "%s", fi->fileName().latin1() );
-    ++it;
-  } // of while loop
+    } // of while loop
+  } // if ( dir.exists() )
   m_View->sort();
   if( m_shTool ){
     m_location->insertItem( m_currentDir );
