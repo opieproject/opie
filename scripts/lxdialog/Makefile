@@ -1,36 +1,33 @@
-HOST_CFLAGS := -DLOCALE 
-HOST_LDFLAGS   := -lncurses
+HOST_EXTRACFLAGS := -DLOCALE 
+HOST_LOADLIBES   := -lncurses
+HOSTCC = gcc
 
 ifeq (/usr/include/ncurses/ncurses.h, $(wildcard /usr/include/ncurses/ncurses.h))
-        HOST_CFLAGS += -I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
+        HOST_EXTRACFLAGS += -I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
 else
 ifeq (/usr/include/ncurses/curses.h, $(wildcard /usr/include/ncurses/curses.h))
-        HOST_CFLAGS += -I/usr/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
+        HOST_EXTRACFLAGS += -I/usr/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
 else
 ifeq (/usr/include/ncurses.h, $(wildcard /usr/include/ncurses.h))
-        HOST_CFLAGS += -DCURSES_LOC="<ncurses.h>"
+        HOST_EXTRACFLAGS += -DCURSES_LOC="<ncurses.h>"
 else
-	HOST_CFLAGS += -DCURSES_LOC="<curses.h>"
+	HOST_EXTRACFLAGS += -DCURSES_LOC="<curses.h>"
 endif
 endif
 endif
 
-host-progs := lxdialog
+host-progs	:= lxdialog
+always		:= $(host-progs)
 
 lxdialog-objs := checklist.o menubox.o textbox.o yesno.o inputbox.o \
 		 util.o lxdialog.o msgbox.o
 
-EXTRA_TARGETS := lxdialog
-
-first_rule: ncurses
-
-include $(TOPDIR)/Rules.make
+first_rule: ncurses lxdialog
 
 .PHONY: ncurses
-
 ncurses:
 	@echo "main() {}" > lxtemp.c
-	@if $(HOSTCC) $(HOST_CFLAGS) lxtemp.c  $(HOST_LDFLAGS); then \
+	@if $(HOSTCC) lxtemp.c  $(HOST_LOADLIBES); then \
 		rm -f lxtemp.c a.out; \
 	else \
 		rm -f lxtemp.c; \
@@ -42,3 +39,12 @@ ncurses:
 		echo ;\
 		exit 1 ;\
 	fi
+
+clean:
+	rm -f $(lxdialog-objs) lxdialog
+
+%.o: %.c
+	$(HOSTCC) $(HOST_EXTRACFLAGS) -fPIC -c $^ -o $@
+
+lxdialog: $(lxdialog-objs)
+	$(HOSTCC) $(HOST_EXTRACFLAGS) $(HOST_LOADLIBES) $^ -o $@
