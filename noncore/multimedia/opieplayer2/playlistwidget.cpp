@@ -647,78 +647,12 @@ void PlayListWidget::scanForVideo() {
 }
 
 void PlayListWidget::populateAudioView() {
-    audioView->clear();
-    StorageInfo storageInfo;
-    //    const QList<FileSystem> &fs = storageInfo.fileSystems();
-    if(!audioView->scannedFiles()) {
-        scanForAudio();
-    }
-
-    QListIterator<DocLnk> dit( audioView->files().children() );
-    //    QListIterator<FileSystem> it ( fs );
-    audioView->clear();
-
-    QString storage;
-     for ( ; dit.current(); ++dit ) {
-//       //        for( ; it.current(); ++it ){
-//             const QString name = (*dit)->name();
-//             const QString path = (*dit)->path();
-//             if(dit.current()->file().find(path) != -1 ) {
-//                 storage = name;
-//                 //    }
-//         }
-
-        QListViewItem * newItem;
-        if ( QFile( dit.current()->file()).exists() ||
-             dit.current()->file().left(4) == "http" ) {
-            long size;
-            if( dit.current()->file().left(4) == "http" )
-                size=0;
-            else
-                size = QFile( dit.current()->file() ).size();
-            
-            newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(),
-                                                   QString::number(size ), "" /*storage*/,
-                                                   dit.current()->file() );
-            newItem->setPixmap( 0, Resource::loadPixmap( "opieplayer2/musicfile" ) );
-//            qDebug("<<<< "+dit.current()->file());
-       }
-    }
-    audioPopulated=true;
+    audioView->populateView();
+    audioPopulated = true;
 }
 
-
 void PlayListWidget::populateVideoView() {
-    videoView->clear();
-    StorageInfo storageInfo;
-    //    const QList<FileSystem> &fs = storageInfo.fileSystems();
-
-    if(!videoView->scannedFiles()) {
-        scanForVideo();
-    }
-
-    QListIterator<DocLnk> Vdit( videoView->files().children() );
-//    QListIterator<FileSystem> it ( fs );
-    videoView->clear();
-    QString storage, pathName;
-     for ( ; Vdit.current(); ++Vdit ) {
-//       //        for( ; it.current(); ++it ) {
-//             const QString name = (*Vdit)->name();
-//             const QString path = (*Vdit)->path();
-//             if( Vdit.current()->file().find(path) != -1 ) {
-//                 storage=name;
-//                 pathName=path;
-//                 //            }
-//         }
-
-        QListViewItem * newItem;
-        if ( QFile( Vdit.current()->file() ).exists() ) {
-            newItem= /*(void)*/ new QListViewItem( videoView, Vdit.current()->name(),
-                   QString::number( QFile( Vdit.current()->file() ).size() ),
-                                                   ""/*storage*/, Vdit.current()->file());
-            newItem->setPixmap(0, Resource::loadPixmap( "opieplayer2/videofile" ) );
-        }
-    }
+    videoView->populateView();
     videoPopulated=true;
 }
 

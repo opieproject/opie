@@ -9,7 +9,7 @@ class PlayListFileView : public PlayListView
 {
     Q_OBJECT
 public:
-    PlayListFileView( const QString &mimeTypePattern, QWidget *parent, const char *name = 0 );
+    PlayListFileView( const QString &mimeTypePattern, const QString &itemPixmapName, QWidget *parent, const char *name = 0 );
     virtual ~PlayListFileView();
 
     // both temporarily accessible that way until the caller code has
@@ -19,9 +19,11 @@ public:
 
 public slots:
     void scanFiles();
+    void populateView();
 
 private:
     QString m_mimeTypePattern;
+    QString m_itemPixmapName;
     DocLnkSet m_files;
     bool m_scannedFiles;
 };
