@@ -19,6 +19,8 @@
 #include <opie2/oapplicationfactory.h>
 #include <opie2/otabwidget.h>
 #include <opie2/okeyconfigwidget.h>
+#include <opie2/owait.h>
+#include <opie2/oapplication.h>
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
@@ -35,6 +37,7 @@
 #include <qframe.h>
 #include <qmenubar.h>
 #include <qaction.h>
+#include <qspinbox.h>
 
 //OPIE_EXPORT_APP_V2( Opie::Core::OApplicationFactory<PMainWindow>,"Opie Eye" )
 OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<PMainWindow>)
@@ -226,6 +229,9 @@ void PMainWindow::slotConfig() {
     if (reminfo) {
         m_info->hide();
     }
+    if (m_disp) {
+        m_disp->setIntensity(m_Intensity,true);
+    }
 }
 
 /*
@@ -369,11 +375,29 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
 
 void PMainWindow::slotDisplay( const QString& inf ) {
     bool nwindow = false;
+    bool disp_hack = false;
+    int lb;
+    if (m_disp && m_disp->fullScreen()) {
+        lb = m_disp->Intensity();
+        delete m_disp;
+        m_disp = 0;
+
+        disp_hack = true;
+    }
     if ( !m_disp ) {
         nwindow = true;
         initDisp();
+        m_disp->setIntensity((disp_hack?lb:m_Intensity));
     }
+    m_setCurrentBrightness->setEnabled(true);
+
+    Opie::Ui::OWait wdlg;
+    wdlg.setTimerLength(30);
+    wdlg.show();
+    //qApp->processEvents(20);
     m_disp->setImage( inf );
+    wdlg.hide();
+    //qApp->processEvents(20);
     if (m_SmallWindow) {
         if (m_gPrevNext->isEnabled()==false) {
             m_gPrevNext->addTo(toolBar);
@@ -630,6 +654,19 @@ void PMainWindow::setupActions()
     } else {
         m_aForceSmall = 0;
     }
+    m_setCurrentBrightness = new QAction(tr("Display brightness..."), 0, 0, this, 0, false);
+    connect(m_setCurrentBrightness,SIGNAL(activated()),this,SLOT(setupBrightness()));
+}
+
+void PMainWindow::setupBrightness()
+{
+    if (!m_disp) {
+        return;
+    }
+    int lb = m_disp->Intensity();
+    if (Valuebox(0,-255,255,lb,lb)) {
+        m_disp->setIntensity(lb,true);
+    }
 }
 
 void PMainWindow::setupToolbar()
@@ -698,6 +735,8 @@ void PMainWindow::setupMenu()
     m_gDisplayType->addTo(dispMenu);
     dispMenu->insertSeparator();
     m_gPrevNext->addTo(dispMenu);
+    m_setCurrentBrightness->addTo(dispMenu);
+    m_setCurrentBrightness->setEnabled(false);
     if (m_aForceSmall) {
         dispMenu->insertSeparator();
         m_aForceSmall->addTo(dispMenu);
@@ -725,6 +764,7 @@ void PMainWindow::listviewselected(QAction*which)
 void PMainWindow::readConfig()
 {
     autoSave =m_cfg->readBoolEntry("savestatus",true);
+    m_Intensity = m_cfg->readNumEntry("intensity",0);
 }
 
 void PMainWindow::polish()
@@ -763,4 +803,32 @@ void PMainWindow::slotForceSmall(bool how)
     if (autoSave) {
         m_cfg->writeEntry("dontshowseperate",how);
     }
+}
+
+bool PMainWindow::Valuebox(QWidget*parent,int min, int max, int current,int&store)
+{
+    QDialog dlg(parent,"brightnessbox",true);
+    QVBoxLayout * m_MainLayout;
+    QGridLayout * m_IntensityLayout;
+    QSpinBox * m_Intensity;
+    QLabel * m_IntensityLabel;
+
+    m_MainLayout = new QVBoxLayout( &dlg, 11, 6, "m_MainLayout");
+    m_IntensityLayout = new QGridLayout( 0, 1, 1, 0, 6, "m_IntensityLayout");
+    m_Intensity = new QSpinBox( &dlg, "m_Intensity" );
+    m_Intensity->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Fixed));
+    m_Intensity->setButtonSymbols( QSpinBox::PlusMinus );
+    m_Intensity->setMaxValue( max );
+    m_Intensity->setMinValue(min);
+    m_Intensity->setValue( current );
+    m_IntensityLayout->addWidget( m_Intensity, 0, 1 );
+    m_IntensityLabel = new QLabel( &dlg, "m_IntensityLabel" );
+    m_IntensityLabel->setText(QObject::tr("Display brightness:"));
+    m_IntensityLayout->addWidget(m_IntensityLabel, 0, 0 );
+    m_MainLayout->addLayout(m_IntensityLayout);
+    if (dlg.exec()) {
+        store = m_Intensity->value();
+        return true;
+    }
+    return false;
 }

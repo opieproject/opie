@@ -33,6 +33,11 @@ protected:
     QGridLayout * m_IconsizeLayout;
     QSpinBox * m_Iconsize;
     QLabel * m_IconsizeLabel;
+
+    QGridLayout * m_IntensityLayout;
+    QSpinBox * m_Intensity;
+    QLabel * m_IntensityLabel;
+
 };
 
 #endif

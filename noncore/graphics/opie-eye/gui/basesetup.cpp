@@ -14,6 +14,7 @@ BaseSetup::BaseSetup(Opie::Core::OConfig *a_cfg,QWidget * parent, const char * n
 
     m_SlidetimeLayout = new QGridLayout( 0, 1, 1, 0, 6, "m_SlidetimeLayout");
     m_IconsizeLayout = new QGridLayout( 0, 1, 1, 0, 6, "m_IconsizeLayout");
+    m_IntensityLayout = new QGridLayout( 0, 1, 1, 0, 6, "m_IntensityLayout");
 
     m_SlideShowTime = new QSpinBox( this, "m_SlideShowTime" );
     m_SlideShowTime->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Fixed));
@@ -33,7 +34,7 @@ BaseSetup::BaseSetup(Opie::Core::OConfig *a_cfg,QWidget * parent, const char * n
     m_Iconsize = new QSpinBox( this, "m_Iconsize" );
     m_Iconsize->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Fixed));
     m_Iconsize->setButtonSymbols( QSpinBox::PlusMinus );
-    m_Iconsize->setMaxValue( 64 );
+    m_Iconsize->setMaxValue( 128 );
     m_Iconsize->setMinValue(12);
     m_Iconsize->setValue( 32 );
     m_Iconsize->setSuffix(tr(" pixel"));
@@ -43,6 +44,17 @@ BaseSetup::BaseSetup(Opie::Core::OConfig *a_cfg,QWidget * parent, const char * n
     m_IconsizeLayout->addWidget( m_IconsizeLabel, 0, 0 );
     m_MainLayout->addLayout(m_IconsizeLayout);
 
+    m_Intensity = new QSpinBox( this, "m_Intensity" );
+    m_Intensity->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Fixed));
+    m_Intensity->setButtonSymbols( QSpinBox::PlusMinus );
+    m_Intensity->setMaxValue( 255 );
+    m_Intensity->setMinValue(-255);
+    m_Intensity->setValue( 0 );
+    m_IntensityLayout->addWidget( m_Intensity, 0, 1 );
+    m_IntensityLabel = new QLabel( this, "m_IntensityLabel" );
+    m_IntensityLabel->setText(tr("Default display brightness:"));
+    m_IntensityLayout->addWidget(m_IntensityLabel, 0, 0 );
+    m_MainLayout->addLayout(m_IntensityLayout);
 
 #if 0
     m_ShowToolBar = new QCheckBox( this, "m_ShowToolBar" );
@@ -65,6 +77,10 @@ BaseSetup::BaseSetup(Opie::Core::OConfig *a_cfg,QWidget * parent, const char * n
     if (stime<12)stime = 12;
     if (stime>64)stime = 64;
     m_Iconsize->setValue(stime);
+    stime = m_cfg->readNumEntry("intensity",0);
+    if (stime<-255) stime = -255;
+    if (stime>255) stime = 255;
+    m_Intensity->setValue(stime);
 }
 
 BaseSetup::~BaseSetup()
@@ -77,4 +93,5 @@ void BaseSetup::save_values()
     m_cfg->writeEntry("slideshowtimeout",m_SlideShowTime->value());
     m_cfg->writeEntry("savestatus",m_SaveStateAuto->isChecked());
     m_cfg->writeEntry("iconsize",m_Iconsize->value());
+    m_cfg->writeEntry("intensity",m_Intensity->value());
 }

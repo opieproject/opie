@@ -67,6 +67,7 @@ protected slots:
     void listviewselected(QAction*);
     void slotFullScreenButton(bool);
     void check_view_fullscreen();
+    virtual void setupBrightness();
 
 private:
     template<class T>  void initT( const char* name, T**, int );
@@ -84,6 +85,7 @@ private:
     bool m_setDocCalled:1;
     bool m_polishDone:1;
     bool m_SmallWindow:1;
+    int m_Intensity;
     QToolButton*fsButton;
     QToolBar *toolBar;
     QPopupMenu *fileMenu,*dispMenu,*fsMenu,*listviewMenu,*settingsMenu;
@@ -91,7 +93,7 @@ private:
     QAction*m_aHideToolbar,*m_aSetup,*m_aDirName,*m_aDirShort,*m_aDirLong;
     QActionGroup *m_gListViewMode,*m_gDisplayType,*m_gPrevNext,*m_hGroup;
     QAction *m_aNext,*m_aPrevious,*m_aFullScreen;
-    QAction *m_aAutoRotate,*m_aUnscaled,*m_aZoomer,*m_aForceSmall;
+    QAction *m_aAutoRotate,*m_aUnscaled,*m_aZoomer,*m_aForceSmall,*m_setCurrentBrightness;
 
     /* init funs */
     void readConfig();
@@ -101,6 +103,7 @@ private:
     /* for the device submenu - ToDo: Merge with the special button */
     StorageInfo *m_storage;
     QMap<QString, QString> m_dev;
+    static bool Valuebox(QWidget*parent,int min, int max, int current,int&store);
 
 private slots:
     void slotConfig();
