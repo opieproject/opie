@@ -39,7 +39,7 @@ SOURCES =	qashmoney.cpp \
                         currency.cpp
 INCLUDEPATH = $(OPIEDIR)/include
 DEPENDPATH = $(OPIEDIR)/include
-
+TARGET = qashmoney
 DESTDIR = $(OPIEDIR)/bin
 
 unix:LIBS += -lm
