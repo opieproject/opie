@@ -1,11 +1,11 @@
 Package: libopie2
-Files: $OPIEDIR/lib/libopiecore2.so.* $OPIEDIR/lib/libopienet2.so.* $OPIEDIR/lib/libopieui2.so.* $OPIEDIR/lib/libopiemm2.so.* $OPIEDIR/etc/manufacturers
+Files:
 Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Version: 1.8.1-$SUB_VERSION.2
-Depends: libqpe1
+Depends: libopiecore2 (1.8.1), libopiedb2 (1.8.1), libopiemm2 (1.8.1), libopienet2 (1.8.1), libopiepim2 (1.8.1), libopieui2 (1.8.1)
 Provides: libopie2
 Description: Opie library 2.0
 
