@@ -39,7 +39,10 @@ Before compiling for MacOS-X, you need the following:
 
 The Patch for QT/E for Opie, including all other opie-patches is available in the
 qt-directory ($OPIEDIR/qt) and is called "qte237-all-macosx.patch".
-The Patch for QT-2.3.2 is provided in this directory..
+
+The Patch for QT-2.3.2 is provided in this directory and is called "qt232-X11.patch".
+ATTENTION: The patch does not contain the darwin config file. Please copy the file 
+"darwin-g++-shared" into the directory "configs" within the qt-2.3.2 directory !!
 
 If your buildsystem is working correctly, you should be able to build
 opie. 
