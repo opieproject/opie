@@ -1,5 +1,5 @@
 /*
- * mad - MPEG audio decoder
+ * libmad - MPEG audio decoder library
  * Copyright (C) 2000-2001 Robert Leslie
  *
  * This program is free software; you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: version.c,v 1.3 2002-02-25 01:35:49 llornkcor Exp $
+ * $Id: version.c,v 1.4 2002-04-19 16:08:55 harlekin Exp $
  */
 
 # ifdef HAVE_CONFIG_H
@@ -27,11 +27,11 @@
 
 # include "libmad_version.h"
 
-char const mad_version[]   = "MPEG Audio Decoder version " MAD_VERSION;
+char const mad_version[]   = "MPEG Audio Decoder " MAD_VERSION;
 char const mad_copyright[] = "Copyright (C) " MAD_PUBLISHYEAR " " MAD_AUTHOR;
 char const mad_author[]    = MAD_AUTHOR " <" MAD_EMAIL ">";
 
-char const mad_build[] =
+char const mad_build[] = ""
 # if defined(FPM_64BIT)
   "FPM_64BIT "
 # elif defined(FPM_INTEL)

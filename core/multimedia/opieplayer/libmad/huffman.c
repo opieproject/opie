@@ -1,5 +1,5 @@
 /*
- * mad - MPEG audio decoder
+ * libmad - MPEG audio decoder library
  * Copyright (C) 2000-2001 Robert Leslie
  *
  * This program is free software; you can redistribute it and/or modify
@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: huffman.c,v 1.1 2002-01-25 22:15:00 kergoth Exp $
+ * $Id: huffman.c,v 1.2 2002-04-19 16:08:55 harlekin Exp $
  */
 
 # ifdef HAVE_CONFIG_H
@@ -34,8 +34,14 @@
  * These tables support decoding up to 4 Huffman code bits at a time.
  */
 
-# define V(v, w, x, y, hlen)	{      { 1, hlen, v, w, x, y } }
-# define PTR(offs, bits)	{ ptr: { 0, bits, offs       } }
+# if defined(__GNUC__)
+#  define PTR(offs, bits)	{ ptr:   { 0, bits, offs       } }
+#  define V(v, w, x, y, hlen)	{ value: { 1, hlen, v, w, x, y } }
+# else
+#  define PTR(offs, bits)	{ { 0, bits, offs } }
+#  define V(v, w, x, y, hlen)	{ { 1, hlen, (v << 0) | (w << 1) |  \
+                                             (x << 2) | (y << 3) } }
+# endif
 
 static
 union huffquad const hufftabA[] = {
@@ -100,8 +106,13 @@ union huffquad const hufftabB[] = {
 # undef V
 # undef PTR
 
-# define V(x, y, hlen)		{      { 1, hlen, x, y } }
-# define PTR(offs, bits)	{ ptr: { 0, bits, offs } }
+# if defined(__GNUC__)
+#  define PTR(offs, bits)	{ ptr:   { 0, bits, offs } }
+#  define V(x, y, hlen)		{ value: { 1, hlen, x, y } }
+# else
+#  define PTR(offs, bits)	{ { 0, bits, offs } }
+#  define V(x, y, hlen)		{ { 1, hlen, (x << 0) | (y << 4) } }
+# endif
 
 static
 union huffpair const hufftab0[] = {
