@@ -195,7 +195,7 @@ void DateBookDayView::contentsMouseReleaseEvent( QMouseEvent *e )
 
 //===========================================================================
 
-DateBookDayViewQuickLineEdit::DateBookDayViewQuickLineEdit(const QDateTime &start, const QDateTime &end,QWidget * parent, const char *name=0) : QLineEdit(parent,name)
+DateBookDayViewQuickLineEdit::DateBookDayViewQuickLineEdit(const QDateTime &start, const QDateTime &end,QWidget * parent, const char *name) : QLineEdit(parent,name)
 {
 	active=1;
 	quickEvent.setStart(start);
