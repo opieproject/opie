@@ -31,7 +31,7 @@
 
 #include "otabbar.h"
 
-OTabBar::OTabBar( QWidget *parent = 0, const char *name = 0 )
+OTabBar::OTabBar( QWidget *parent , const char *name  )
      : QTabBar( parent, name )
 {
 }
