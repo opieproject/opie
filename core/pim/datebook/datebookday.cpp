@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+#include <qmessagebox.h>
 
 #include "datebookday.h"
 #include "datebookdayheaderimpl.h"
@@ -35,6 +36,8 @@
 #include <qpopupmenu.h>
 #include <qtextcodec.h>
 #include <qpalette.h>
+
+#include <qtimer.h>
 
 DateBookDayView::DateBookDayView( bool whichClock, QWidget *parent,
                                   const char *name )
@@ -57,6 +60,7 @@ DateBookDayView::DateBookDayView( bool whichClock, QWidget *parent,
     for ( row = 0; row < numRows(); row++ ) {
 	tmp = new QTableItem( this, QTableItem::Never, QString::null);
 	setItem( row, 0, tmp );
+	setRowHeight( row, 40);
     }
     initHeader();
     QObject::connect( qApp, SIGNAL(clockChanged(bool)),
@@ -119,9 +123,13 @@ void DateBookDayView::paintCell( QPainter *p, int, int, const QRect &cr, bool )
 	int x2 = w - 1;
 	int y2 = h - 1;
 	QPen pen( p->pen() );
-	p->setPen( colorGroup().mid() );
+	p->setPen( colorGroup().dark() );
 	p->drawLine( x2, 0, x2, y2 );
 	p->drawLine( 0, y2, x2, y2 );
+
+	p->setPen( colorGroup().midlight() );
+	p->drawLine( 0, y2 - h/2, x2, y2 - h/2);
+
 	p->setPen( pen );
     }
 }
@@ -174,6 +182,33 @@ DateBookDay::DateBookDay( bool ampm, bool startOnMonday,
 	     this, SLOT(slotWeekChanged(bool)) );
     connect( view, SIGNAL(sigCapturedKey(const QString &)),
 	     this, SIGNAL(sigNewEvent(const QString&)) );
+
+    QTimer *timer = new QTimer( this );
+
+    connect( timer, SIGNAL(timeout()),
+             this, SLOT(updateView()) );	//connect timer for updating timeMarker & daywidgetcolors
+    timer->start( 1000*60*5, FALSE ); //update every 5min
+
+    selectedWidget = 0;
+
+    timeMarker =  new DateBookDayTimeMarker( this );
+    timeMarker->setTime( QTime::currentTime() );
+}
+
+void DateBookDay::updateView( void )
+{
+	timeMarker->setTime( QTime::currentTime() );
+	//need to find a way to update all DateBookDayWidgets
+}
+
+void DateBookDay::setSelectedWidget( DateBookDayWidget *w )
+{
+	selectedWidget = w;
+}
+
+DateBookDayWidget * DateBookDay::getSelectedWidget( void )
+{
+	return selectedWidget;
 }
 
 void DateBookDay::selectedDates( QDateTime &start, QDateTime &end )
@@ -202,11 +237,15 @@ void DateBookDay::selectedDates( QDateTime &start, QDateTime &end )
 void DateBookDay::setDate( int y, int m, int d )
 {
     header->setDate( y, m, d );
+
+    selectedWidget = 0;
 }
 
 void DateBookDay::setDate( QDate d)
 {
     header->setDate( d.year(), d.month(), d.day() );
+
+    selectedWidget = 0;
 }
 
 void DateBookDay::dateChanged( int y, int m, int d )
@@ -221,6 +260,12 @@ void DateBookDay::dateChanged( int y, int m, int d )
     ts.init( startTime, 0 );
     ts.expandTo( startTime, 0 );
     dayView()->addSelection( ts );
+
+    selectedWidget = 0;
+
+    if (this->date() == QDate::currentDate())
+    	timeMarker->show(); else timeMarker->hide();
+
 }
 
 void DateBookDay::redraw()
@@ -246,6 +291,7 @@ void DateBookDay::getEvents()
                  this, SIGNAL( beamEvent( const Event & ) ) );
         widgetList.append( w );
     }
+
 }
 
 static int place( const DateBookDayWidget *item, bool *used, int maxn )
@@ -288,36 +334,77 @@ void DateBookDay::relayoutPage( bool fromResize )
     if ( !fromResize )
         getEvents();    // no need we already have them!
 
+    widgetList.sort();
+    //sorts the widgetList by the heights of the widget so that the tallest widgets are at the beginning
+    //this is needed for the simple algo below to work correctly, otherwise some widgets would be drawn outside the view
+
     int wCount = widgetList.count();
     int wid = view->columnWidth(0)-1;
+    int wd;
     int n = 1;
 
+    QArray<int> anzIntersect(wCount); //this stores the number of maximal intersections of each widget
+
+    for (int i = 0; i<wCount; anzIntersect[i] = 1, i++);
+
     if ( wCount < 20 ) {
-	for ( int i = 0; i < wCount; ) {
-	    DateBookDayWidget *w = widgetList.at(i);
-	    int x = 0;
-	    int xp = 0;
-	    QRect geom = w->geometry();
-	    geom.setX( x );
-	    geom.setWidth( wid );
-	    while ( xp < n && intersects( w, geom ) ) {
-		x += wid;
-		xp++;
-		geom.moveBy( wid, 0 );
-	    }
-	    if ( xp >= n ) {
-		n++;
-		wid = ( view->columnWidth(0)-1 ) / n;
-		i = 0;
-	    } else {
-		w->setGeometry( geom );
-		i++;
-	    }
+
+	QArray<QRect> geometries(wCount);
+	for (int i = 0; i < wCount; geometries[i] = widgetList.at(i)->geometry(), i++);	//stores geometry for each widget in vector
+
+	for ( int i = 0; i < wCount; i++)
+	{
+		QValueList<int> intersectedWidgets;
+
+		//find all widgets intersecting with widgetList.at(i)
+		for ( int j = 0; j < wCount; j++)
+			if (i != j)
+				if (geometries[j].intersects(geometries[i]))
+					intersectedWidgets.append(j);
+
+		//for each of these intersecting widgets find out how many widgets are they intersecting with
+		for ( uint j = 0; j < intersectedWidgets.count(); j++)
+		{
+			QArray<int> inter(wCount);
+			inter[j]=1;
+
+			if (intersectedWidgets[j] != -1)
+				for ( uint k = j; k < intersectedWidgets.count(); k++)
+					if (j != k && intersectedWidgets[k] != -1)
+						if (geometries[intersectedWidgets[k]].intersects(geometries[intersectedWidgets[j]]))
+						{
+							inter[j]++;
+							intersectedWidgets[k] = -1;
+						}
+			if (inter[j] > anzIntersect[i]) anzIntersect[i] = inter[j] + 1;
+		}
+
+		if (anzIntersect[i] == 1 && intersectedWidgets.count()) anzIntersect[i]++;
 	}
+
+
+	for ( int i = 0; i < wCount; i++) {
+	    DateBookDayWidget *w = widgetList.at(i);
+	    QRect geom = w->geometry();
+
+	    geom.setX( 0 );
+
+	    wd = (view->columnWidth(0)-1) / anzIntersect[i] - (anzIntersect[i]>1?2:0);
+
+	    geom.setWidth( wd );
+
+	    while ( intersects( w, geom ) ) {
+		geom.moveBy( wd + 2 + 1, 0 );
+	    }
+	    w->setGeometry( geom );
+	}
+
 	view->setContentsPos( 0, startTime * view->rowHeight(0) );
+
+
     } else {
-    
-    
+
+
 	int hours[24];
 	memset( hours, 0, 24*sizeof( int ) );
 	bool overFlow = FALSE;
@@ -343,22 +430,25 @@ void DateBookDay::relayoutPage( bool fromResize )
 	    n = QMAX( n, hours[i] );
 	}
 	wid = ( view->columnWidth(0)-1 ) / n;
-    
+
 	bool used[24*10];
 	memset( used, FALSE, 24*10*sizeof( bool ) );
-    
+
 	for ( int i = 0; i < wCount; i++ ) {
 	    DateBookDayWidget *w = widgetList.at(i);
 	    int xp = place( w, used, n );
 	    if ( xp != -1 ) {
 		QRect geom = w->geometry();
-		geom.setX( xp*wid );
+		geom.setX( xp*(wid+2) );
 		geom.setWidth( wid );
 		w->setGeometry( geom );
 	    }
 	}
 	view->setContentsPos( 0, startTime * view->rowHeight(0) );
     }
+
+    timeMarker->setTime( QTime::currentTime() );	//display timeMarker
+    timeMarker->raise();				//on top of all widgets
     setUpdatesEnabled( TRUE );
     return;
 }
@@ -496,6 +586,9 @@ DateBookDayWidget::DateBookDayWidget( const EffectiveEvent &e,
         h = 3;
     geom.setY( y );
     geom.setHeight( h );
+    geom.setX( 0 );
+    geom.setWidth(dateBook->dayView()->columnWidth(0)-1);
+
 }
 
 DateBookDayWidget::~DateBookDayWidget()
@@ -505,9 +598,39 @@ DateBookDayWidget::~DateBookDayWidget()
 void DateBookDayWidget::paintEvent( QPaintEvent *e )
 {
     QPainter p( this );
+
+    if (dateBook->getSelectedWidget() == this)
+    {
+       	    p.setBrush( QColor( 155, 240, 230 ) ); // selected item
+    } else
+    {
+    	if (dateBook->date() == QDate::currentDate())
+	{
+    	    QTime curTime = QTime::currentTime();
+
+	    if (ev.end() < curTime)
+	    {
+	    	  p.setBrush( QColor( 180, 180, 180 ) ); // grey, inactive
+	    } else
+	    {
+	    	//change color in dependence of the time till the event starts
+ 	          int duration = curTime.secsTo(ev.start());
+		  if (duration < 0) duration = 0;
+		  int colChange = duration*160/86400; //86400: secs per day, 160: max color shift
+
+	    	  p.setBrush( QColor( 200-colChange, 200-colChange, 255 ) ); //blue
+	    }
+	 } else
+	 {
+                  p.setBrush( QColor( 220, 220, 220 ) ); //light grey, inactive (not current date)
+		  //perhaps make a distinction between future/past dates
+	 }
+    }
+
     p.setPen( QColor(100, 100, 100) );
-    p.setBrush( QColor( 255, 240, 230 ) ); // based on priority?
     p.drawRect(rect());
+
+ //   p.drawRect(0,0, 5, height());
 
     int y = 0;
     int d = 0;
@@ -525,11 +648,20 @@ void DateBookDayWidget::paintEvent( QPaintEvent *e )
 
     QSimpleRichText rt( text, font() );
     rt.setWidth( geom.width() - d - 6 );
-    rt.draw( &p, 3, 0, e->region(), colorGroup() );
+    rt.draw( &p, 7, 0, e->region(), colorGroup() );
 }
 
 void DateBookDayWidget::mousePressEvent( QMouseEvent *e )
 {
+	DateBookDayWidget *item;
+
+	item = dateBook->getSelectedWidget();
+	if (item) item->update();
+
+	dateBook->setSelectedWidget(this);
+	update();
+	dateBook->repaint();
+
     QPopupMenu m;
     m.insertItem( tr( "Edit" ), 1 );
     m.insertItem( tr( "Delete" ), 2 );
@@ -545,6 +677,60 @@ void DateBookDayWidget::mousePressEvent( QMouseEvent *e )
 }
 
 void DateBookDayWidget::setGeometry( const QRect &r )
+{
+    geom = r;
+    setFixedSize( r.width()+1, r.height()+1 );
+    dateBook->dayView()->moveChild( this, r.x(), r.y()-1 );
+    show();
+}
+
+
+//---------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------
+
+
+DateBookDayTimeMarker::DateBookDayTimeMarker( DateBookDay *db )
+    : QWidget( db->dayView()->viewport() ), dateBook( db )
+{
+	setBackgroundMode( PaletteBase );
+}
+
+DateBookDayTimeMarker::~DateBookDayTimeMarker()
+{
+}
+
+void DateBookDayTimeMarker::paintEvent( QPaintEvent */*e*/ )
+{
+	QPainter p( this );
+	p.setBrush( QColor( 255, 0, 0 ) );
+
+	QPen pen;
+	pen.setStyle(NoPen);
+
+	p.setPen( pen );
+	p.drawRect(rect());
+}
+
+void DateBookDayTimeMarker::setTime( const QTime &t )
+{
+	int y = t.hour()*60+t.minute();
+	int rh = dateBook->dayView()->rowHeight(0);
+	y = y*rh/60;
+
+	geom.setX( 0 );
+
+	int x = dateBook->dayView()->columnWidth(0)-1;
+	geom.setWidth( x );
+
+	geom.setY( y );
+	geom.setHeight( 1 );
+
+	setGeometry( geom );
+
+	time = t;
+}
+
+void DateBookDayTimeMarker::setGeometry( const QRect &r )
 {
     geom = r;
     setFixedSize( r.width()+1, r.height()+1 );
