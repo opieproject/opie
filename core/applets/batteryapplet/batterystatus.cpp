@@ -15,7 +15,7 @@
 using namespace Opie;
 
 BatteryStatus::BatteryStatus( const PowerStatus *p, QWidget *parent )
-  : QWidget( parent, 0, WDestructiveClose), ps(p) {
+  : QWidget( parent, 0, WDestructiveClose), ps(p), bat2(false) {
   setCaption( tr("Battery status") );
   QPushButton *pb = new QPushButton( tr("Close"), this );
   pb->move( 70, 250 );
