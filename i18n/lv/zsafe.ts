@@ -1,8 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>@default</name>
-</context>
-<context>
     <name>CategoryDialog</name>
     <message>
         <source>Category</source>
