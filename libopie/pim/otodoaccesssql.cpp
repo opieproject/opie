@@ -421,7 +421,7 @@ QArray<int> OTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
         query += "priority";
         break;
     case 2:
-        query += "description";
+        query += "summary";
         break;
     case 3:
         query += "DueDate";

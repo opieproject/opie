@@ -27,7 +27,8 @@ HEADERS   = ofontmenu.h \
     pim/ocontact.h \
     pim/ocontactaccess.h \
     pim/ocontactaccessbackend.h \
-    pim/ocontactaccessbackend_xml.h
+    pim/ocontactaccessbackend_xml.h \
+    pim/orecord.h
     
 SOURCES   = ofontmenu.cc  \
 	    xmltree.cc \
@@ -50,7 +51,8 @@ SOURCES   = ofontmenu.cc  \
 	     pim/otodoaccess.cpp \
 	     pim/otodoaccessbackend.cpp \
              pim/ocontact.cpp \
-             pim/ocontactaccess.cpp
+             pim/ocontactaccess.cpp \
+	     pim/orecord.cpp
 
 TARGET    = opie
 INCLUDEPATH += $(OPIEDIR)/include
