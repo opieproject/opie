@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Pick Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pick Time:</translation>
     </message>
 </context>
 </TS>

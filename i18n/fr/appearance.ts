@@ -36,23 +36,23 @@
     </message>
     <message>
         <source>Tab style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Style des onglets:</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Onglets</translation>
     </message>
     <message>
         <source>Tabs w/icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Onglets avec icone</translation>
     </message>
     <message>
         <source>Drop down list</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste déroulante</translation>
     </message>
     <message>
         <source>Drop down list w/icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste déroulante avec icone</translation>
     </message>
     <message>
         <source>Top</source>
@@ -205,15 +205,20 @@ Cette partie vous permet de selectionner une application et quelle préférence 
 2. Tabs w/icons - tabs with icons for each tab, text label only appears on current tab
 3. Drop down list - a vertical listing of tabs
 4. Drop down list w/icons - a vertical listing of tabs with icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez ici pour sélectionner le style des fenêtres avec onglet (comme cette application). Les styles disponibles sont:
+
+1. Onglet - Onglets normaux avec des titres texte seulement
+2. Onglet avec icone - Onglets avec icone pour chaque onglet, les titres textes apparaissent seulement sur l&apos;onglet courant
+3. Liste déroulante - Une liste verticale des onglets
+4. Liste déroulante avec icone - Une liste verticale des onglets avec des icones</translation>
     </message>
     <message>
         <source>Click here so that tabs appear at the top of the window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez ici pour que les onglets apparaissent en haut de la fenêtre.</translation>
     </message>
     <message>
         <source>Click here so that tabs appear at the bottom of the window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez ici pour les onglets apparaissent en bas de la fenêtre.</translation>
     </message>
     <message>
         <source>This is a preview window.  Look here to see your new appearance as options are changed.</source>

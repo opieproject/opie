@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Save named</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauver</translation>
     </message>
     <message>
         <source>Save screenshot as...</source>

@@ -5,5 +5,5 @@ Maintainer: Daniele Foci <sunscan@sunscan.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base
-Description: i18n: it
+Description: i18n: Italian
  Italian UI texts for OPIE environment.
