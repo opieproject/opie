@@ -31,6 +31,7 @@
 #include <qpe/qcopenvelope_qws.h>
 
 #include <qpe/qpeapplication.h>
+#include <qpe/config.h>
 #include <qiconset.h>
 #include <qpopupmenu.h>
 
@@ -40,7 +41,7 @@
 RotateApplet::RotateApplet ( )
 	: QObject ( 0, "RotateApplet" ), ref ( 0 )
 {
-    m_native = true;
+    m_flipped = false;
 }
 
 RotateApplet::~RotateApplet ( )
@@ -92,25 +93,42 @@ void RotateApplet::activated ( )
     int currentRotation = QPEApplication::defaultRotation();
 
     int newRotation;
-    if  ( m_native == true )  {
 
-        newRotation = currentRotation + 90;
-	if(newRotation >= 360) newRotation = 0;	//ipaqs like the 36xx have the display 
-	//rotated to 270 as default, so 360 does nothing => handle this here
+    Config cfg( "qpe" );
+    cfg.setGroup( "Appearance" );
 
-    } else {
-        newRotation = currentRotation - 90;
-        if (newRotation <=0) newRotation = 270; 
+    // 0 -> 90° clockwise, 1 -> 90° counterclockwise
+    bool rotDirection = cfg.readBoolEntry( "rotatedir" );
+
+    // hide inputs methods before rotation
+    QCopEnvelope en( "QPE/TaskBar", "hideInputMethod()" );
+
+    if ( m_flipped )  {
+        if ( rotDirection  )  {
+            newRotation = currentRotation - 90;
+            if (newRotation <=0) newRotation = 270;
 	//ipaqs like the 36xx have the display rotated
 	// to 270 as default, and -90 is invalid => handle this here
+        } else {
+            newRotation = currentRotation + 90;
+            if(newRotation >= 360) newRotation = 0;	//ipaqs like the 36xx have the display
+            //rotated to 270 as default, so 360 does nothing => handle this here
+        }
+    } else {
+        if ( rotDirection )  {
+            newRotation = currentRotation + 90;
+             if(newRotation >= 360) newRotation = 0;
+        } else {
+            newRotation = currentRotation - 90;
+            if (newRotation <=0) newRotation = 270;
+         }
     }
     QCopEnvelope env( "QPE/System", "setCurrentRotation(int)" );
     env << newRotation;
     QCopEnvelope env2( "QPE/System", "setDefaultRotation(int)" );
     env2 << newRotation;
 
-    m_native = !m_native;
-
+    m_flipped = !m_flipped;
 }
 
 

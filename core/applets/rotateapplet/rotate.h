@@ -54,7 +54,7 @@ public:
     virtual void activated ( );
 
 private:
-    bool m_native;
+    bool m_flipped;
     ulong ref;
 };
 
