@@ -100,5 +100,6 @@ private:
     QCopChannel *m_sys;
     QCopChannel *m_pid;
 };
+enum Transformation { Rot0, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws.cpp */
 
 #endif
