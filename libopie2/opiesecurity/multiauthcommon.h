@@ -45,6 +45,7 @@
 namespace Opie {
 namespace Security {
 
+/// QDialog simply showing the owner information
 class SecOwnerDlg : public QDialog
 {
     Q_OBJECT
