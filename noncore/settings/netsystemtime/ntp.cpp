@@ -10,6 +10,7 @@
 #include <qmessagebox.h>
 #include <qmultilineedit.h>
 #include <opie/oprocess.h>
+#include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/global.h>
 #include <qpe/timeconversion.h>
@@ -24,8 +25,8 @@
 Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
     : SetDateTime( parent, name, fl )
 {
- 	 	
-	Config ntpSrvs("/etc/ntpservers",Config::File);
+ 	qDebug("%s", 	         QPEApplication::qpeDir().latin1());
+	Config ntpSrvs(QPEApplication::qpeDir()+"etc/ntpservers",Config::File);
   ntpSrvs.setGroup("servers");
   int srvCount = ntpSrvs.readNumEntry("count", 0 );
   for (int i = 0; i < srvCount; i++)
