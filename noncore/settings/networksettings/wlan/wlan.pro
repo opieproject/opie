@@ -7,6 +7,6 @@ SOURCES		= wlanimp.cpp wlanmodule.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include ../
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
-INTERFACES	= wlan.ui
+INTERFACES	= wlan.ui info.ui
 TARGET		= wlanplugin
 VERSION		= 1.0.0

@@ -13,8 +13,8 @@ public:
   
   virtual void setProfile(QString newProfile);
   virtual bool isOwner(Interface *);
-  virtual QWidget *configure(QTabWidget **tabWidget);
-  virtual QWidget *information(QTabWidget **tabWidget);
+  virtual QWidget *configure(Interface *i, QTabWidget **tabWidget);
+  virtual QWidget *information(Interface *i, QTabWidget **tabWidget);
   virtual QList<Interface> getInterfaces();
   virtual void possibleNewInterfaces(QMap<QString, QString> &list){};
   virtual Interface *addNewInterface(QString name);
