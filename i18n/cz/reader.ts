@@ -170,7 +170,7 @@
         <source>Two/One
 Touch</source>
         <translation>Dva/Jeden
-Tlačítko</translation>
+Dotyk</translation>
     </message>
     <message>
         <source>Find</source>
@@ -224,7 +224,7 @@ na okna</translation>
         <source>Two/One
 Touch</source>
         <translation>Dva/Jeden
-Tlačítko</translation>
+Dotyk</translation>
     </message>
     <message>
         <source>Swap Tap
@@ -280,144 +280,147 @@ pera</translation>
     <name>CLayoutPrefs2</name>
     <message>
         <source>Indent</source>
-        <translation type="unfinished"></translation>
+        <translation>Odsazování</translation>
     </message>
     <message>
         <source>Page
 Overlap</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesah
+stránek</translation>
     </message>
     <message>
         <source>Graphics
 Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafický zoom</translation>
     </message>
     <message>
         <source>Margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Okraj</translation>
     </message>
     <message>
         <source>Paragraph
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodítko
+odstavce</translation>
     </message>
     <message>
         <source>Line
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodítko
+řádky</translation>
     </message>
     <message>
         <source>Markup</source>
-        <translation type="unfinished"></translation>
+        <translation>Značka</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Písmo</translation>
     </message>
 </context>
 <context>
     <name>CMarkBarPrefs</name>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Založit</translation>
     </message>
     <message>
         <source>Annotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Okomentovat</translation>
     </message>
     <message>
         <source>Goto</source>
-        <translation type="unfinished"></translation>
+        <translation>Jít na</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Autogenerovat</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyčistit</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit</translation>
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Mark Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Označit blok</translation>
     </message>
     <message>
         <source>Copy Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat blok</translation>
     </message>
 </context>
 <context>
     <name>CMiscBarPrefs</name>
     <message>
         <source>Floating</source>
-        <translation type="unfinished"></translation>
+        <translation>Plovoucí</translation>
     </message>
     <message>
         <source>Single bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Jedna lišta</translation>
     </message>
     <message>
         <source>Menu/tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Lišta s menu</translation>
     </message>
     <message>
         <source>Multiple bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Více lišt</translation>
     </message>
     <message>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahoře</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Dole</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpravo</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlevo</translation>
     </message>
     <message>
         <source>Minimised</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimalizovaná</translation>
     </message>
     <message>
         <source>Movable</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunovatelná</translation>
     </message>
 </context>
 <context>
     <name>CMiscPrefs</name>
     <message>
         <source>Select Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat akci</translation>
     </message>
     <message>
         <source>Annotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Anotace</translation>
     </message>
     <message>
         <source>Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>Slovník</translation>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Schránka</translation>
     </message>
     <message>
         <source>Plucker</source>
@@ -440,235 +443,235 @@ Leading</source>
     <name>CNavBarPrefs</name>
     <message>
         <source>Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Rolovat</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Předchozí</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Domů</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Následující</translation>
     </message>
     <message>
         <source>Page Up</source>
-        <translation type="unfinished"></translation>
+        <translation>O stranu nahoru</translation>
     </message>
     <message>
         <source>Page Down</source>
-        <translation type="unfinished"></translation>
+        <translation>O stranu dolů</translation>
     </message>
     <message>
         <source>Goto Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Jít na začátek</translation>
     </message>
     <message>
         <source>Goto End</source>
-        <translation type="unfinished"></translation>
+        <translation>Jít na konec</translation>
     </message>
     <message>
         <source>Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Skočit</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Rolování strany/řádky</translation>
     </message>
 </context>
 <context>
     <name>CPrefs</name>
     <message>
         <source>OpieReader Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení OpieReaderu</translation>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozložení</translation>
     </message>
     <message>
         <source>Layout(2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozložení(2)</translation>
     </message>
     <message>
         <source>Locale</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokalizace</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatní</translation>
     </message>
     <message>
         <source>Buttons</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačítka</translation>
     </message>
 </context>
 <context>
     <name>CURLDialog</name>
     <message>
         <source>Save URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit URL</translation>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Schránka</translation>
     </message>
     <message>
         <source>Local file</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokální soubor</translation>
     </message>
     <message>
         <source>Global file</source>
-        <translation type="unfinished"></translation>
+        <translation>Globální soubor</translation>
     </message>
 </context>
 <context>
     <name>CViewBarPrefs</name>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Celá obrazovka</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Přiblížit</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdálit</translation>
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit písmo</translation>
     </message>
     <message>
         <source>Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Kódování</translation>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Ideogram</translation>
     </message>
 </context>
 <context>
     <name>QTReaderApp</name>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor</translation>
     </message>
     <message>
         <source>Navigation</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigace</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazení</translation>
     </message>
     <message>
         <source>Marks</source>
-        <translation type="unfinished"></translation>
+        <translation>Značky</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurace</translation>
     </message>
     <message>
         <source>Save Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit konfiguraci</translation>
     </message>
     <message>
         <source>Load Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavést konfiguraci</translation>
     </message>
     <message>
         <source>Delete Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat konfiguraci</translation>
     </message>
     <message>
         <source>Toolbars</source>
-        <translation type="unfinished"></translation>
+        <translation>Panely nástrojů</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Otevřít</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít</translation>
     </message>
     <message>
         <source>Run Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit skript</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Two/One Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Dva/Jeden dotyk</translation>
     </message>
     <message>
         <source>Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat...</translation>
     </message>
     <message>
         <source>Export Links</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportovat linky</translation>
     </message>
     <message>
         <source>Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Rolovat</translation>
     </message>
     <message>
         <source>Goto Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Jít na začátek</translation>
     </message>
     <message>
         <source>Goto End</source>
-        <translation type="unfinished"></translation>
+        <translation>Jít na konec</translation>
     </message>
     <message>
         <source>Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Skočit</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Rolování strany/řádky</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahoru</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolů</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Předchozí</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Domů</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Následující</translation>
     </message>
     <message>
         <source>Scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Rolování</translation>
     </message>
     <message>
         <source>Set Target</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit cíl</translation>
     </message>
     <message>
         <source>Pause Paras</source>
@@ -676,75 +679,75 @@ Leading</source>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Celá obrazovka</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Přiblížit</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdálit</translation>
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit písmo</translation>
     </message>
     <message>
         <source>Set Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit kódování</translation>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Ideogram</translation>
     </message>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Založit</translation>
     </message>
     <message>
         <source>Annotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Okomentovat</translation>
     </message>
     <message>
         <source>Goto</source>
-        <translation type="unfinished"></translation>
+        <translation>Jít na</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Autogenerovat</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyčistit</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit</translation>
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Start Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Začít blok</translation>
     </message>
     <message>
         <source>Copy Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat blok</translation>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat další</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít hledání</translation>
     </message>
     <message>
         <source>Do Reg</source>
@@ -752,38 +755,38 @@ Leading</source>
     </message>
     <message>
         <source>Close Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít úpravu</translation>
     </message>
     <message>
         <source>Annotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentář</translation>
     </message>
     <message>
         <source>Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Reader</translation>
     </message>
 </context>
 <context>
     <name>fileBrowser</name>
     <message>
         <source>Browse for file</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohlížet soubory</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <source>Hidden</source>
-        <translation type="unfinished"></translation>
+        <translation>Skryté</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost</translation>
     </message>
 </context>
 </TS>
