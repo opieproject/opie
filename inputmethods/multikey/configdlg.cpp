@@ -47,13 +47,13 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     map_combo->insertItem(cur);
     connect(map_combo, SIGNAL(activated(int)), SLOT(setMap(int)));
 
-    QString ko(tr("/opt/opie/share/multikey/ko.keymap"));
+    QString ko(tr(QPEApplication::qpeDir() + "/share/multikey/ko.keymap"));
     map_combo->insertItem(ko);
 
-    QString en(tr("/opt/opie/share/multikey/en.keymap"));
+    QString en(tr(QPEApplication::qpeDir() + "/share/multikey/en.keymap"));
     map_combo->insertItem(en);
 
-    QString de(tr("/opt/opie/share/multikey/de.keymap"));
+    QString de(tr(QPEApplication::qpeDir() + "/share/multikey/de.keymap"));
     map_combo->insertItem(de);
 
     QPushButton *button = new QPushButton(tr("Browse..."), map_group);
