@@ -108,13 +108,27 @@ struct j_button jornada56x_buttons [] = {
     "sound", "raise()" },
 };
 
-void Jornada::init(const QString&)
+void Jornada::init(const QString& cpu_info)
 {
     d->m_vendorstr = "HP";
     d->m_vendor = Vendor_HP;
-    d->m_modelstr = "Jornada 56x";
-    d->m_model = Model_Jornada_56x;
-    d->m_rotation = Rot0;
+    
+    QString model;
+    int loc = cpu_info.find( ":" );
+    if ( loc != -1 )
+        model = cpu_info.mid( loc+2 ).simplifyWhiteSpace();
+    else
+        model = cpu_info;
+    
+    if ( model == "HP Jornada 56x" ) {
+        d->m_modelstr = "Jornada 56x";
+        d->m_model = Model_Jornada_56x;
+    } else if ( model == "HP Jornada 720" ) {
+        d->m_modelstr = "Jornada 720";
+	d->m_model = Model_Jornada_720;
+    }
+    
+    d->m_rotation = Rot0; //all Jornadas need this rotation
     //Distribution detecting code is now in base class
 }
 
@@ -160,9 +174,9 @@ bool Jornada::setDisplayBrightness( int bright )
     QString cmdline;
 
     if ( !bright )
-    	cmdline = QString::fromLatin1( "echo 4 > /sys/class/backlight/sa1100fb/power");
+    	cmdline = QString::fromLatin1( "echo 4 > /sys/class/backlight/*/power");
     else
-    	cmdline = QString::fromLatin1( "echo 0 > /sys/class/backlight/sa1100fb/power; echo %1 > /sys/class/backlight/sa1100fb/brightness" ).arg( bright );
+    	cmdline = QString::fromLatin1( "echo 0 > /sys/class/backlight/*/power; echo %1 > /sys/class/backlight/*/brightness" ).arg( bright );
 
     // No Global::shellQuote as we gurantee it to be sane
     res = ( ::system( QFile::encodeName(cmdline) ) == 0 );
@@ -175,7 +189,7 @@ bool Jornada::setDisplayStatus ( bool on )
 {
     bool res = false;
 
-    QString cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/sa1100fb/power; echo %2 > /sys/class/backlight/sa1100fb/power").arg( on ? "0" : "4" ).arg( on ? "0" : "4" );
+    QString cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/*/power; echo %2 > /sys/class/backlight/*/power").arg( on ? "0" : "4" ).arg( on ? "0" : "4" );
 
     res = ( ::system( QFile::encodeName(cmdline) ) == 0 );
 

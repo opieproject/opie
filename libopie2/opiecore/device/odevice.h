@@ -71,6 +71,7 @@ enum OModel {
 
     Model_Jornada       = ( 6 << 24 ),
     Model_Jornada_56x   = ( Model_Jornada | 0x000001 ),
+    Model_Jornada_720   = ( Model_Jornada | 0x000002 ),
 
     Model_Zaurus        = ( 2 << 24 ),
 
