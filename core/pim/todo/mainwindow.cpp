@@ -158,6 +158,7 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f ) :
     a->addTo( contextMenu );
     connect( a, SIGNAL( activated() ),
 	     this, SLOT(slotShowDetails() ) );
+    viewAction = a;
 
     edit->insertSeparator();
 
@@ -436,11 +437,13 @@ void TodoWindow::currentEntryChanged( int r, int )
 {
     if ( r != -1 && table->rowHeight( r ) > 0 ) {
         editAction->setEnabled( TRUE );
+        viewAction->setEnabled( TRUE );
         deleteAction->setEnabled( TRUE );
 	duplicateAction->setEnabled( TRUE );
 	deleteAllAction->setEnabled( TRUE );
     } else {
         editAction->setEnabled( FALSE );
+        viewAction->setEnabled( FALSE );
         deleteAction->setEnabled( FALSE );
 	duplicateAction->setEnabled( FALSE );
 	deleteAllAction->setEnabled( FALSE );
@@ -607,9 +610,12 @@ void TodoWindow::beamDone( Ir *ir )
 
 void TodoWindow::showDeadline( bool s )
 {
+    if ( !table->isUpdatesEnabled() )
+	return;
     table->setPaintingEnabled( false );
     table->setShowDeadline( s );
     table->setPaintingEnabled( true );
+    mStack->raiseWidget( 1 );
 }
 void TodoWindow::slotShowDetails()
 {

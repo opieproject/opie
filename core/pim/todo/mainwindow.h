@@ -79,6 +79,7 @@ private:
     TodoTable *table;
     TodoLabel *mView;
     QAction *editAction,
+      *viewAction,
       *deleteAction,
       *findAction,
       *completedAction,
