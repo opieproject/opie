@@ -342,7 +342,7 @@ QStringList AdvancedFm::getPath() {
    return strList;
 }
 
-void AdvancedFm::changeTo(QString dir) {
+void AdvancedFm::changeTo(const QString dir) {
    chdir( dir.latin1());
    CurrentDir()->cd(dir, TRUE);
    populateView();
@@ -699,7 +699,7 @@ void AdvancedFm::gotoCustomDir(const QString &dir) {
    if( dir == s_removeBookmark) {
       removeCustomDir( );
    } else {
-      gotoDirectory( dir);
+      changeTo( dir);
 //       if(QDir( curDir).exists() )
 //         {
 //           thisDir->setPath( curDir );
@@ -766,38 +766,15 @@ void AdvancedFm::qcopReceive(const QCString &msg, const QByteArray &data) {
 //      odebug << "received" << oendl;
       QString file;
       stream >> file;
-      gotoDirectory( (const QString &) file);
+      changeTo( (const QString &) file);
    }
 }
 
 void AdvancedFm::setDocument(const QString &file) {
-   gotoDirectory( file);
+   changeTo( file);
 
 }
 
-void AdvancedFm::gotoDirectory(const QString &file) {
-//   qDebug("goto dir "+file);
-   QString curDir = file;
-   QDir *thisDir = CurrentDir();
-   if(QDir( curDir).exists() )  {
-      thisDir->setPath( curDir );
-      chdir( curDir.latin1() );
-      thisDir->cd( curDir, TRUE);
-      populateView();
-   }
-   else if(QFileInfo(curDir).exists()) {
-      QFileInfo fileInfo(curDir);
-      curDir=fileInfo.dirPath();
-      if(QDir( curDir).exists() )  {
-         thisDir->setPath( curDir );
-         chdir( curDir.latin1() );
-         thisDir->cd( curDir, TRUE);
-         populateView();
-      }
-      findFile(file);
-   }
-
-}
 
 void AdvancedFm::findFile(const QString &fileName) {
    QFileInfo fi(fileName);

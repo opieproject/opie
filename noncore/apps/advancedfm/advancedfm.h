@@ -177,7 +177,6 @@ private:
    void customDirsToMenu();
    void addCustomDir();
    void removeCustomDir();
-   void gotoDirectory(const QString &);
    void navigateToSelected();
    void findFile(const QString &);
 
