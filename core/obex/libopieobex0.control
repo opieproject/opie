@@ -1,11 +1,11 @@
 Files: plugins/obex/libopieobex.so* pics/obex/*
 Priority: optional
 Section: opie/system
-Maintainer: hOlgar Freyther <zecke@handhelds.org>
+Maintainer: holger Freyther <zecke@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
 Depends: opie-base ($QPE_VERSION), openobex | libopenobex1
-Provides: libopieobex
-Replaces: libopieobex
+Provides: libopieobex1
+Replaces: libopieobex1
 Description: Irda obex lib
  
