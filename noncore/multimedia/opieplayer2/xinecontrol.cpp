@@ -24,15 +24,18 @@ void XineControl::play( const QString& fileName ) {
     // default to audio view until we know how to handle video
     mediaPlayerState->setView('a');
     // determines of slider is shown
-    mediaPlayerState->isStreaming = false;
+    // mediaPlayerState->setIsStreaming( false );
     // hier dann schaun welcher view
 }
 
 void XineControl::stop( bool isSet ) {
-    if ( isSet) {
+    if ( !isSet) {
         libXine->stop();
+        mediaPlayerState->setNext();
+        //mediaPlayerState->setPlaying( false );
+    } else {
+        // play again
     }
-    // mediaPlayerState->setPlaying( false );
 }
 
 void XineControl::pause( bool isSet) {

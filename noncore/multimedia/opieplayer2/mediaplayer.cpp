@@ -75,13 +75,6 @@ void MediaPlayer::setPlaying( bool play ) {
     audioUI->setTickerText( currentFile->file( ) );
 
     xineControl->play( currentFile->file() );
-
-    // alles nicht nötig, xine kümmert sich drum, man muss nur den return andio oder video gui geben
-
-    // Ob auch video 'v' : 'a'
-    //  mediaPlayerState->setView( 'v' );
-
-    // abspielen starten.
 }
 
 

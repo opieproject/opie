@@ -125,7 +125,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 }
 
 AudioWidget::~AudioWidget() {
-    mediaPlayerState->isStreaming = FALSE;
+    mediaPlayerState->setIsStreaming( FALSE );
     for ( int i = 0; i < 3; i++ ) {
         delete pixmaps[i];
     }
@@ -161,7 +161,7 @@ void AudioWidget::setLength( long max ) {
 
 
 void AudioWidget::setView( char view ) {
-    if (mediaPlayerState->isStreaming) {
+    if (mediaPlayerState->streaming() ) {
         if( !slider->isHidden()) slider->hide();
         disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );

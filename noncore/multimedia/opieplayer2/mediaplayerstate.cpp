@@ -56,6 +56,12 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
 
 
 // public stuff
+
+
+bool MediaPlayerState::streaming() {
+    return isStreaming;
+}
+
 bool MediaPlayerState::fullscreen() {
     return isFullscreen;
 }
@@ -85,6 +91,10 @@ bool MediaPlayerState::playing() {
     return isPlaying;
 }
 
+bool MediaPlayerState::stop() {
+    return isStoped;
+}
+
 long MediaPlayerState::position() {
     return curPosition;
 }
@@ -98,6 +108,14 @@ char MediaPlayerState::view() {
 }
 
 // slots
+void MediaPlayerState::setIsStreaming( bool b ) {
+    if ( isStreaming == b ) {
+        return;
+    }
+    isStreaming = b;
+}
+
+
 void MediaPlayerState::setFullscreen( bool b ) {
     if ( isFullscreen == b ) {
         return;
@@ -152,7 +170,16 @@ void MediaPlayerState::setPlaying( bool b ) {
         return;
     }
     isPlaying = b;
+    isStoped = !b;
     emit playingToggled(b);
+}
+
+void MediaPlayerState::setStop( bool b ) {
+    if ( isStoped  == b ) {
+        return;
+    }
+    isStoped = b;
+    emit stopToggled(b);
 }
 
 void MediaPlayerState::setPosition( long p ) {
@@ -207,8 +234,6 @@ void MediaPlayerState::setVideo() {
 void MediaPlayerState::setAudio() {
     setView('a');
 }
-
-
 
 void MediaPlayerState::toggleFullscreen() {
     setFullscreen( !isFullscreen );

@@ -16,7 +16,7 @@ public:
     MediaPlayerState( QObject *parent, const char *name );
     ~MediaPlayerState();
 
-    bool isStreaming;
+    bool streaming();
     bool fullscreen();
     bool scaled();
     bool looping();
@@ -24,11 +24,13 @@ public:
     bool playlist();
     bool paused();
     bool playing();
+    bool stop();
     long position();
     long length();
     char view();
 
 public slots:
+    void setIsStreaming( bool b );
     void setFullscreen( bool b );
     void setScaled( bool b );
     void setLooping( bool b );
@@ -36,6 +38,7 @@ public slots:
     void setPlaylist( bool b );
     void setPaused( bool b );
     void setPlaying( bool b );
+    void setStop( bool b );
     void setPosition( long p );
     void updatePosition( long p );
     void setLength( long l );
@@ -63,6 +66,7 @@ signals:
     void playlistToggled( bool );
     void pausedToggled( bool );
     void playingToggled( bool );
+    void stopToggled( bool );
     void positionChanged( long ); // When the slider is moved
     void positionUpdated( long ); // When the media file progresses
     void lengthChanged( long );
@@ -72,6 +76,7 @@ signals:
     void next();
 
 private:
+    bool isStreaming;
     bool isFullscreen;
     bool isScaled;
     bool isLooping;
@@ -79,6 +84,7 @@ private:
     bool usePlaylist;
     bool isPaused;
     bool isPlaying;
+    bool isStoped;
     long curPosition;
     long curLength;
     char curView;
