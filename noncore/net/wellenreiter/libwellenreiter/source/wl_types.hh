@@ -1,7 +1,7 @@
 /* 
  * Global bufffer size and type definitions
  *
- * $Id: wl_types.hh,v 1.2 2003-01-05 11:18:27 mjm Exp $
+ * $Id: wl_types.hh,v 1.3 2003-02-09 15:48:57 mjm Exp $
  *
  */
 
@@ -17,7 +17,12 @@
 /* Socket specific */
 #define WL_SOCKBUF 512 /* Buffer for wl_send and wl_recv calls */
 
-/* Protocol specific */
+/* Channelswitching */
+typedef struct {
+  int type;        /* Type of card (chip) */
+  char iface[6];   /* Interface of card   */
+} wl_cardtype_t;
+
 
 /* WL network structure */
 typedef struct {
