@@ -35,6 +35,7 @@ MediaPlayer::MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPla
     m_audioUI = 0;
     m_videoUI = 0;
     m_xineControl = 0;
+    xine = new XINE::Lib( XINE::Lib::InitializeInThread );
 
     fd=-1;fl=-1;
     playList.setCaption( tr( "OpiePlayer: Initializating" ) );
@@ -65,6 +66,11 @@ MediaPlayer::MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPla
 }
 
 MediaPlayer::~MediaPlayer() {
+    // this shold never happen, but one never knows...
+    if ( xine ) {
+        xine->ensureInitialized();
+        delete xine;
+    }
     delete m_xineControl;
     delete m_audioUI;
     delete m_videoUI;
@@ -371,8 +377,12 @@ void MediaPlayer::recreateAudioAndVideoWidgets() const
     connect( m_videoUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
     connect( m_videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
 
-    XINE::Lib *xine = new XINE::Lib( XINE::Lib::InitializeImmediately );
+    if ( !xine )
+        xine = new XINE::Lib( XINE::Lib::InitializeImmediately );
+
     m_xineControl = new XineControl( xine, m_videoUI->vidWidget(), mediaPlayerState );
+
+    xine = 0;
 }
 
 AudioWidget *MediaPlayer::audioUI() const

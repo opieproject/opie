@@ -48,6 +48,11 @@ class MediaPlayerState;
 class AudioWidget;
 class VideoWidget;
 
+namespace XINE
+{
+    class Lib;
+};
+
 class MediaPlayer : public QObject {
     Q_OBJECT
 public:
@@ -90,6 +95,7 @@ private:
     mutable XineControl *m_xineControl;
     mutable AudioWidget *m_audioUI;
     mutable VideoWidget *m_videoUI;
+    mutable XINE::Lib *xine;
 
     QGuardedPtr<SkinLoader> m_skinLoader;
 };

@@ -94,13 +94,15 @@ Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
         m_initialized = true;
     }
     else
-        assert( false );
+        start();
 }
 
 void Lib::run()
 {
+    qDebug( "Lib::run() started" );
     initialize();
     m_initialized = true;
+    qDebug( "Lib::run() finished" );
 }
 
 void Lib::initialize()
