@@ -111,7 +111,7 @@ ORecordList( const QArray<int>& ids,
     T operator[]( uint i );
     int uidAt(uint i );
 
-   /** 
+   /**
     * Remove the contact with given uid
     */
     bool remove( int uid );
@@ -220,6 +220,9 @@ ORecordListIterator<T>::ORecordListIterator( const QArray<int> uids,
     : m_uids( uids ), m_current( 0 ),  m_temp( t ), m_end( false ),
       m_direction( false )
 {
+    /* if the list is empty we're already at the end of the list */
+    if (uids.count() == 0 )
+        m_end = true;
 }
 template <class T>
 uint ORecordListIterator<T>::current()const {
