@@ -248,33 +248,37 @@ and is licensed by the GPL</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;enlever le répertoire
+courant des favoris.
+Ce n&apos;est pas un favori!</translation>
     </message>
     <message>
         <source>File Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche de fichier</translation>
     </message>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Réellement effacer %1
+et tout son contenu?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Réellement effacer
+%1?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
+        <translation>AdvancedFm ::</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished"></translation>
+        <translation>kb libre</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
-        <translation type="unfinished"></translation>
+        <translation>Copier &apos;%1&apos; sous</translation>
     </message>
 </context>
 <context>
@@ -289,18 +293,20 @@ and all it&apos;s contents ?</source>
     </message>
     <message>
         <source>Process could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de démarrer le processus</translation>
     </message>
     <message>
         <source>Error
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur
+</translation>
     </message>
     <message>
         <source>
 Finished
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Terminé</translation>
     </message>
 </context>
 <context>
@@ -347,23 +353,24 @@ Finished
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Attention</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur- pas d&apos;utilisateur</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur- pas de groupe</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de l&apos;attribution du
+propriétaire ou du groupe</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur lors de la définition des attributs</translation>
     </message>
 </context>
 </TS>
