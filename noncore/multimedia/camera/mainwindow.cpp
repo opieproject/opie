@@ -158,9 +158,9 @@ void CameraMainWindow::init()
 
     outputTog = new QActionGroup( 0, "output", true );
     outputTog->setToggleAction( true );
-    new QAction( "/tmp", 0, 0, outputTog, 0, true );
+    new QAction( "/tmp/", 0, 0, outputTog, 0, true );
     new QAction( "/mnt/card/", 0, 0, outputTog, 0, true );
-    new QAction( "/mnt/sd/", 0, 0, outputTog, 0, true );
+    new QAction( "/mnt/cf/", 0, 0, outputTog, 0, true );
     docfolder = new QAction( "Documents Folder", 0, 0, outputTog, 0, true );
     docfolder->setOn( true );
     custom = new QAction( "&Custom...", 0, 0, outputTog, 0, true );
@@ -422,7 +422,15 @@ void CameraMainWindow::performCapture( const QString& format )
     QString name;
 
     if ( outputTo == "Documents Folder" )
-        name.sprintf( "%s/Documents/image/%s/", (const char*) QDir::homeDirPath(), (const char*) captureFormat.lower() );
+    {
+        name.sprintf(  "%s/Documents/image/%s/", (const char*) QDir::homeDirPath(), (const char*) captureFormat.lower() );
+        if ( !QDir( name ).exists() )
+        {
+            odebug << "creating directory " << name << oendl;
+            QString msg = "mkdir -p " + name;
+            system( msg.latin1() );
+        }
+    }
     else
         name = outputTo;
 
@@ -501,8 +509,22 @@ void CameraMainWindow::stopVideoCapture()
     ::close( _capturefd );
     _framerate = 1000.0 / (_time.elapsed()/_videopics);
 
-    QString name( outputTo );
-    name.append( "/prefix" );
+    QString name;
+    if ( outputTo == "Documents Folder" )
+    {
+        name.sprintf(  "%s/Documents/video/%s/", (const char*) QDir::homeDirPath(), (const char*) captureFormat.lower() );
+        if ( !QDir( name ).exists() )
+        {
+            odebug << "creating directory " << name << oendl;
+            QString msg = "mkdir -p " + name;
+            system( msg.latin1() );
+        }
+    }
+    else
+        name = outputTo;
+
+    name.append( "/" ); // sure is sure and safe is safe ;-)
+    name.append( prefix );
     if ( appendSettings )
         name.append( QString().sprintf( "_%d_%d_q%d_%dfps", captureX, captureY, quality, _framerate ) );
     name.append( QString().sprintf( "-%d.%s", _videos++, (const char*) captureFormat.lower() ) );
@@ -519,6 +541,8 @@ void CameraMainWindow::stopVideoCapture()
 
 void CameraMainWindow::postProcessVideo( const QString& infile, const QString& outfile )
 {
+    odebug << "post processing " << infile << " --> " << outfile << oendl;
+
     preview->setRefreshingRate( 0 );
 
     /*
@@ -596,7 +620,7 @@ void CameraMainWindow::postProcessVideo( const QString& infile, const QString& o
         preview->repaint();
         qApp->processEvents();
 
-        #ifndef QT_NO_DEBUG
+        #ifdef CAMERA_EXTRA_DEBUG
         QString tmpfilename;
         tmpfilename.sprintf( "/tmp/test/%04d.jpg", i );
         #else
@@ -621,13 +645,16 @@ void CameraMainWindow::postProcessVideo( const QString& infile, const QString& o
         delete tempbuffer;
         framefile.close();
 
-        odebug << "deleting temporary capturefile " << infile << oendl;
-        ::close( infd );
-        QFile::remove( infile );
     }
 
     avi_end( outfd, captureX, captureY, _framerate );
     ::close( outfd );
+    ::close( infd );
+
+    label->setText( "deleting temp files..." );
+    qApp->processEvents();
+    odebug << "deleting temporary capturefile " << infile << oendl;
+    QFile::remove( infile );
 
     fr->hide();
     delete fr;
@@ -643,6 +670,7 @@ void CameraMainWindow::updateCaption()
         setCaption( QString().sprintf( "Opie-Camera: %dx%d %s q%d z%d (%s)", captureX, captureY, (const char*) captureFormat.lower(), quality, zoom, (const char*) flip ) );
     else
         setCaption( "Opie-Camera: => CAPTURING <=" );
+    qApp->processEvents();
 }
 
 

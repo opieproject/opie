@@ -46,7 +46,7 @@ void imageToFile( QImage* i, const QString& name, const QString& format, int qua
     bool result = im.save( name, format, quality );
     if ( !result )
     {
-        oerr << "imageio-Problem while writing." << oendl;
+        oerr << "imageio-Problem while writing to " << name << oendl;
     }
     else
     {
