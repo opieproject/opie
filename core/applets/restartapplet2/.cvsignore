@@ -4,3 +4,4 @@ Makefile*
 config.in
 moc_*
 opieobjconfig.in
+opieobj
