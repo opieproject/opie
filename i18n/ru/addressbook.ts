@@ -510,7 +510,7 @@ Opie-Mail - свободная программа!</translation>
     </message>
     <message>
         <source>Bouvet Island</source>
-        <translation type="unfinished">Bouvet island</translation>
+        <translation>Остров Буве</translation>
     </message>
     <message>
         <source>Brazil</source>
@@ -518,7 +518,7 @@ Opie-Mail - свободная программа!</translation>
     </message>
     <message>
         <source>Brunei Darussalam</source>
-        <translation type="unfinished">Brunnei Darussalam</translation>
+        <translation>Бруней-Даруссалам</translation>
     </message>
     <message>
         <source>Bulgaria</source>
@@ -870,7 +870,7 @@ Opie-Mail - свободная программа!</translation>
     </message>
     <message>
         <source>Mauritius</source>
-        <translation type="unfinished">Maurtius</translation>
+        <translation>Маврикий</translation>
     </message>
     <message>
         <source>Mayotte</source>
