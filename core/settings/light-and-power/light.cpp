@@ -80,19 +80,17 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	LcdOffOnly-> setChecked ( config. readBoolEntry ( "LcdOffOnly", false ));
 
 	int bright = config. readNumEntry ( "Brightness", 127 );
-	int contr  = config. readNumEntry ( "Contrast", 127 );
-	brightness-> setMaxValue ( m_bres - 1 );
-	brightness-> setTickInterval ( QMAX( 1, m_bres / 16 ));
-	brightness-> setLineStep ( QMAX( 1, m_bres / 16 ));
-	brightness-> setPageStep ( QMAX( 1, m_bres / 16 ));
-	brightness-> setValue (( bright * ( m_bres - 1 ) + 127 ) / 255 );
+	int contr  = m_oldcontrast = config. readNumEntry ( "Contrast", 127 );
+	brightness-> setTickInterval ( QMAX( 16, 256 / m_bres ));
+	brightness-> setLineStep ( QMAX( 1, 256 / m_bres ));
+	brightness-> setPageStep ( QMAX( 1, 256 / m_bres ));
+	brightness-> setValue ( bright );
 
 	if (m_cres) {
-		contrast-> setMaxValue ( m_cres - 1 );
-		contrast-> setTickInterval ( QMAX( 1, m_cres / 16 ));
-		contrast-> setLineStep ( QMAX( 1, m_cres / 16 ));
-		contrast-> setPageStep ( QMAX( 1, m_cres / 16 ));
-		contrast-> setValue (( contr * ( m_cres - 1 ) + 127 ) / 255 );
+		contrast-> setTickInterval ( QMAX( 16, 256 / m_cres ));
+		contrast-> setLineStep ( QMAX( 1, 256 / m_cres ));
+		contrast-> setPageStep ( QMAX( 1, 256 / m_cres ));
+		contrast-> setValue ( contr );
 	}
 
 	// light sensor
@@ -110,19 +108,17 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	LcdOffOnly_ac-> setChecked ( config. readBoolEntry ( "LcdOffOnly", false ));
 
 	bright = config. readNumEntry ( "Brightness", 255 );
-	brightness_ac-> setMaxValue ( m_bres - 1 );
-	brightness_ac-> setTickInterval ( QMAX( 1, m_bres / 16 ));
-	brightness_ac-> setLineStep ( QMAX( 1, m_bres / 16 ));
-	brightness_ac-> setPageStep ( QMAX( 1, m_bres / 16 ));
-	brightness_ac-> setValue (( bright * ( m_bres - 1 ) + 127 ) / 255 );
+	brightness_ac-> setTickInterval ( QMAX( 16, 256 / m_bres ));
+	brightness_ac-> setLineStep ( QMAX( 1, 256 / m_bres ));
+	brightness_ac-> setPageStep ( QMAX( 1, 256 / m_bres ));
+	brightness_ac-> setValue ( bright );
 
 	if (m_cres) {
 		contr = config. readNumEntry ( "Contrast", 127);
-		contrast_ac-> setMaxValue ( m_cres - 1 );
-		contrast_ac-> setTickInterval ( QMAX( 1, m_cres / 16 ));
-		contrast_ac-> setLineStep ( QMAX( 1, m_cres / 16 ));
-		contrast_ac-> setPageStep ( QMAX( 1, m_cres / 16 ));
-		contrast_ac-> setValue (( contr * ( m_cres - 1 ) + 127 ) / 255 );
+		contrast_ac-> setTickInterval ( QMAX( 16, 256 / m_cres ));
+		contrast_ac-> setLineStep ( QMAX( 1, 256 / m_cres ));
+		contrast_ac-> setPageStep ( QMAX( 1, 256 / m_cres ));
+		contrast_ac-> setValue ( contr );
 	}
 
 	// light sensor
@@ -147,7 +143,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	
 	connect ( brightness, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
 	connect ( brightness_ac, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
-	if (m_havecontrast) {
+	if (m_cres) {
 		connect ( contrast,    SIGNAL( valueChanged ( int )), this, SLOT( setContrast ( int )));
 		connect ( contrast_ac, SIGNAL( valueChanged ( int )), this, SLOT( setContrast ( int )));
 	}
@@ -177,30 +173,20 @@ void LightSettings::calibrateSensorAC ( )
 
 void LightSettings::setBacklight ( int bright )
 {
-	if ( bright >= 0 )
-		bright = bright * 255 / ( m_bres - 1 );
-	
 	QCopEnvelope e ( "QPE/System", "setBacklight(int)" );
 	e << bright;
 	
 	if ( bright != -1 ) {
 		m_resettimer-> stop ( );
-		m_resettimer-> start ( 2000, true );
+		m_resettimer-> start ( 4000, true );
 	}	
 }
 
 void LightSettings::setContrast ( int contr )
 {
-	if ( contr >= 0 )
-		contr = contr * 255 / ( m_cres - 1 );
+	if (contr == -1) contr = m_oldcontrast;
 	
-	QCopEnvelope e ( "QPE/System", "setContrast(int)" );
-	e << contr;
-	
-	if ( contr != -1 ) {
-		m_resettimer-> stop ( );
-		m_resettimer-> start ( 2000, true );
-	}	
+	ODevice::inst ( )-> setDisplayContrast(contr);
 }
 
 void LightSettings::resetBacklight ( )
@@ -219,9 +205,9 @@ void LightSettings::accept ( )
 	config. writeEntry ( "Dim",        interval_dim-> value ( ));
 	config. writeEntry ( "LightOff",   interval_lightoff-> value ( ));
 	config. writeEntry ( "Suspend",    interval_suspend-> value ( ));
-	config. writeEntry ( "Brightness", brightness-> value ( ) * 255 / ( m_bres - 1 ) );
+	config. writeEntry ( "Brightness", brightness-> value () );
 	if (m_cres)
-	config. writeEntry ( "Contrast",   contrast-> value ( ) * 255 / ( m_cres - 1 ) );
+	config. writeEntry ( "Contrast",   contrast-> value () );
 
 	// ac
 	config. setGroup ( "AC" );
@@ -229,9 +215,9 @@ void LightSettings::accept ( )
 	config. writeEntry ( "Dim",        interval_dim_ac-> value ( ));
 	config. writeEntry ( "LightOff",   interval_lightoff_ac-> value ( ));
 	config. writeEntry ( "Suspend",    interval_suspend_ac-> value ( ));
-	config. writeEntry ( "Brightness", brightness_ac-> value ( ) * 255 / ( m_bres - 1 ));
+	config. writeEntry ( "Brightness", brightness_ac-> value () );
 	if (m_cres)
-	config. writeEntry ( "Contrast",   contrast_ac-> value ( ) * 255 / ( m_cres - 1 ));
+	config. writeEntry ( "Contrast",   contrast_ac-> value () );
 
 	// only make light sensor stuff appear if the unit has a sensor	
 	if ( ODevice::inst ( )-> hasLightSensor ( )) {

@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>355</width>
+            <width>347</width>
             <height>532</height>
         </rect>
     </property>
@@ -80,7 +80,7 @@
                         <class>QGroupBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>GroupBox3</cstring>
+                            <cstring>Group1</cstring>
                         </property>
                         <property stdset="1">
                             <name>enabled</name>
@@ -140,7 +140,7 @@
                                 <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>TextLabel2_2</cstring>
+                                    <cstring>TL2</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>sizePolicy</name>
@@ -158,7 +158,7 @@
                                 <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>TextLabel1_3</cstring>
+                                    <cstring>TL1</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>sizePolicy</name>
@@ -238,7 +238,7 @@
                                 <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>TextLabel1_2</cstring>
+                                    <cstring>TL3</cstring>
                                 </property>
                                 <property stdset="1">
                                     <name>sizePolicy</name>
@@ -308,28 +308,12 @@
                                     <number>255</number>
                                 </property>
                                 <property stdset="1">
-                                    <name>lineStep</name>
-                                    <number>1</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>pageStep</name>
-                                    <number>16</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>tracking</name>
-                                    <bool>true</bool>
-                                </property>
-                                <property stdset="1">
                                     <name>orientation</name>
                                     <enum>Horizontal</enum>
                                 </property>
                                 <property stdset="1">
                                     <name>tickmarks</name>
                                     <enum>Right</enum>
-                                </property>
-                                <property stdset="1">
-                                    <name>tickInterval</name>
-                                    <number>32</number>
                                 </property>
                                 <property>
                                     <name>whatsThis</name>
@@ -347,28 +331,12 @@
                                     <number>255</number>
                                 </property>
                                 <property stdset="1">
-                                    <name>lineStep</name>
-                                    <number>1</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>pageStep</name>
-                                    <number>16</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>tracking</name>
-                                    <bool>true</bool>
-                                </property>
-                                <property stdset="1">
                                     <name>orientation</name>
                                     <enum>Horizontal</enum>
                                 </property>
                                 <property stdset="1">
                                     <name>tickmarks</name>
                                     <enum>Right</enum>
-                                </property>
-                                <property stdset="1">
-                                    <name>tickInterval</name>
-                                    <number>32</number>
                                 </property>
                                 <property>
                                     <name>whatsThis</name>
@@ -412,7 +380,7 @@
                                         <class>QLabel</class>
                                         <property stdset="1">
                                             <name>name</name>
-                                            <cstring>TextLabel4</cstring>
+                                            <cstring>TL4</cstring>
                                         </property>
                                         <property stdset="1">
                                             <name>text</name>
@@ -444,7 +412,7 @@
                                         <class>QLabel</class>
                                         <property stdset="1">
                                             <name>name</name>
-                                            <cstring>TextLabel5</cstring>
+                                            <cstring>TL5</cstring>
                                         </property>
                                         <property stdset="1">
                                             <name>text</name>
@@ -566,7 +534,7 @@
                         <class>QGroupBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>GroupBox4</cstring>
+                            <cstring>Group3</cstring>
                         </property>
                         <property stdset="1">
                             <name>enabled</name>
@@ -762,7 +730,7 @@
                         <class>QGroupBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>GroupBox8</cstring>
+                            <cstring>Group4</cstring>
                         </property>
                         <property stdset="1">
                             <name>title</name>
@@ -790,28 +758,12 @@
                                     <cstring>brightness_ac</cstring>
                                 </property>
                                 <property stdset="1">
-                                    <name>minValue</name>
-                                    <number>0</number>
-                                </property>
-                                <property stdset="1">
                                     <name>maxValue</name>
                                     <number>255</number>
                                 </property>
                                 <property stdset="1">
-                                    <name>lineStep</name>
-                                    <number>16</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>pageStep</name>
-                                    <number>16</number>
-                                </property>
-                                <property stdset="1">
                                     <name>value</name>
                                     <number>255</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>tracking</name>
-                                    <bool>true</bool>
                                 </property>
                                 <property stdset="1">
                                     <name>orientation</name>
@@ -833,28 +785,12 @@
                                     <cstring>contrast_ac</cstring>
                                 </property>
                                 <property stdset="1">
-                                    <name>minValue</name>
-                                    <number>0</number>
-                                </property>
-                                <property stdset="1">
                                     <name>maxValue</name>
                                     <number>255</number>
                                 </property>
                                 <property stdset="1">
-                                    <name>lineStep</name>
-                                    <number>16</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>pageStep</name>
-                                    <number>16</number>
-                                </property>
-                                <property stdset="1">
                                     <name>value</name>
                                     <number>255</number>
-                                </property>
-                                <property stdset="1">
-                                    <name>tracking</name>
-                                    <bool>true</bool>
                                 </property>
                                 <property stdset="1">
                                     <name>orientation</name>
@@ -866,7 +802,7 @@
                                 </property>
                                 <property>
                                     <name>whatsThis</name>
-                                    <string>set a fix value for backlight</string>
+                                    <string>set a fix value for contrast</string>
                                 </property>
                             </widget>
                             <widget>
@@ -1060,7 +996,7 @@
                         <class>QGroupBox</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>GroupBox5</cstring>
+                            <cstring>Group5</cstring>
                         </property>
                         <property stdset="1">
                             <name>title</name>
