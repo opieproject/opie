@@ -10,7 +10,7 @@ SOURCES		= dummyplugin.cpp dummypluginimpl.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+=
 
-LIBS		+= -lqpe -lopieui2
+LIBS		+= -lqpe -lopieui2 -lopiesecurity2
 
 DESTDIR = $(OPIEDIR)/plugins/security
 TARGET = multiauthdummyplugin

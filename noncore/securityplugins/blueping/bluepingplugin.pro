@@ -9,7 +9,7 @@ SOURCES		= bluepingplugin.cpp bluepingpluginimpl.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+=
 
-LIBS		+= -lqpe -lopieui2 -lopiecore2
+LIBS		+= -lqpe -lopieui2 -lopiecore2 -lopiesecurity2
 
 DESTDIR = $(OPIEDIR)/plugins/security
 TARGET = multiauthbluepingplugin
