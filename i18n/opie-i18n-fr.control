@@ -1,7 +1,7 @@
 Files: i18n/fr/.directory i18n/fr/*.qm etc/dict/dawg.fr
 Priority: optional
 Section: opie/i18n
-Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
+Maintainer: Eric Santonacci <Eric.Santonacci@talc.fr>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
