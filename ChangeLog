@@ -4,7 +4,7 @@
 	------------
 	* PackageManager supports installation of local ipkg files (drw)
 	* PackageManager supports linking of applications to root (drw)
-	* PackageManager supports src/gz feeds (drw)
+	* PackageManager supports src/gz feeds (drw,wimpie)
 	* Add a syslog information tab to sysinfo (mickeyl)
 	* Add new, more consistent, PIM icons + a GIMP teplate (ar)
 
@@ -16,6 +16,7 @@
 	* n.a. - PackageManager - (Minor UI tweak) in filter dialog, when option is enabled, set focus to widget that corresponds to that option (drw)
 	* n.a. - PackageManager - (Minor UI tweak) fix double entry in source feed configuration when adding a new feed (drw)
 	* #1479 - Improved VCard-Parser to import VCards created by Evolution 2 and Apple Addressbook (eilers)
+	* n.a. - Battery Applet - fix sizing of battery info popup
 
 	Internal
 	--------
