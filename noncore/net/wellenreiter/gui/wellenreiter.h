@@ -55,6 +55,7 @@ class Wellenreiter : public WellenreiterBase {
     QString captureFileName() const { return dumpname; };
 
   public:
+    QString dumpname;
     bool sniffing;
     static Wellenreiter* instance;
     static void signalHandler( int sig );
@@ -97,7 +98,6 @@ class Wellenreiter : public WellenreiterBase {
     Opie::Core::OSystem _system;                // Opie Operating System identifier
     #endif
 
-    QString dumpname;
     Opie::Net::OWirelessNetworkInterface* iface;
     Opie::Net::OPacketCapturer* pcap;
     WellenreiterConfigWindow* configwindow;

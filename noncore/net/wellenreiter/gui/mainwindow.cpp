@@ -29,7 +29,7 @@
 #else
 #include "resource.h"
 #include <qapplication.h>
-#include <qfiledialog.h> 
+#include <qfiledialog.h>
 #endif
 using namespace Opie::Core;
 using namespace Opie::Net;
@@ -189,7 +189,7 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
 void WellenreiterMainWindow::showConfigure()
 {
-    odebug << "show configure..." << oendl; 
+    odebug << "show configure..." << oendl;
     cw->setCaption( tr( "Configure" ) );
     int result = QPEApplication::execDialog( cw );
 
@@ -222,7 +222,7 @@ void WellenreiterMainWindow::changedSniffingState()
     stopButton->setEnabled( mw->sniffing );
     menuBar()->setItemEnabled( stopID, mw->sniffing );
 
-    if ( !mw->sniffing )
+    if ( !mw->sniffing && QFile::exists( mw->dumpname ) )
     {
         menuBar()->setItemEnabled( uploadID, true );
         uploadButton->setEnabled( true );
@@ -232,7 +232,7 @@ void WellenreiterMainWindow::changedSniffingState()
 
 WellenreiterMainWindow::~WellenreiterMainWindow()
 {
-    odebug << "Wellenreiter: bye." << oendl; 
+    odebug << "Wellenreiter: bye." << oendl;
 };
 
 
@@ -252,7 +252,7 @@ void WellenreiterMainWindow::demoReadFromGps()
 {
     WellenreiterConfigWindow* configwindow = WellenreiterConfigWindow::instance();
     GPS* gps = new GPS( this );
-    odebug << "Wellenreiter::demoReadFromGps(): url=gps://" << configwindow->gpsdHost->currentText() << ":" << configwindow->gpsdPort->value() << "/" << oendl; 
+    odebug << "Wellenreiter::demoReadFromGps(): url=gps://" << configwindow->gpsdHost->currentText() << ":" << configwindow->gpsdPort->value() << "/" << oendl;
     gps->open( configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
     GpsLocation loc = gps->position();
     QMessageBox::information( this, "Wellenreiter/Opie", tr( "GPS said:\n%1" ).arg( loc.dmsPosition() ) );
@@ -306,11 +306,11 @@ void WellenreiterMainWindow::fileSaveLog()
             QTextStream t( &f );
             t << mw->logWindow()->getLog();
             f.close();
-            odebug << "Saved log to file '" << fname << "'" << oendl; 
+            odebug << "Saved log to file '" << fname << "'" << oendl;
         }
         else
         {
-            odebug << "Problem saving log to file '" << fname << "'" << oendl; 
+            odebug << "Problem saving log to file '" << fname << "'" << oendl;
         }
     }
 }
@@ -327,11 +327,11 @@ void WellenreiterMainWindow::fileSaveSession()
             QDataStream t( &f );
             t << *mw->netView();
             f.close();
-            odebug << "Saved session to file '" << fname << "'" << oendl; 
+            odebug << "Saved session to file '" << fname << "'" << oendl;
         }
         else
         {
-            odebug << "Problem saving session to file '" << fname << "'" << oendl; 
+            odebug << "Problem saving session to file '" << fname << "'" << oendl;
         }
     }
 }
@@ -349,11 +349,11 @@ void WellenreiterMainWindow::fileSaveHex()
             QTextStream t( &f );
             t << mw->hexWindow()->getLog();
             f.close();
-            odebug << "Saved hex log to file '" << fname << "'" << oendl; 
+            odebug << "Saved hex log to file '" << fname << "'" << oendl;
         }
         else
         {
-            odebug << "Problem saving hex log to file '" << fname << "'" << oendl; 
+            odebug << "Problem saving hex log to file '" << fname << "'" << oendl;
         }
     }
     */
@@ -370,11 +370,11 @@ void WellenreiterMainWindow::fileLoadSession()
             QDataStream t( &f );
             t >> *mw->netView();
             f.close();
-            odebug << "Loaded session from file '" << fname << "'" << oendl; 
+            odebug << "Loaded session from file '" << fname << "'" << oendl;
         }
         else
         {
-            odebug << "Problem loading session from file '" << fname << "'" << oendl; 
+            odebug << "Problem loading session from file '" << fname << "'" << oendl;
         }
     }
 }
@@ -439,11 +439,11 @@ void WellenreiterMainWindow::uploadSession()
 
     if ( !result )
     {
-        odebug << "Session upload cancelled :(" << oendl; 
+        odebug << "Session upload cancelled :(" << oendl;
         return;
     }
 
-    odebug << "Starting upload..." << oendl; 
+    odebug << "Starting upload..." << oendl;
 
     struct sockaddr_in raddr;
     struct hostent *rhost_info;

@@ -113,6 +113,7 @@ void Wellenreiter::signalHandler( int sig )
     oerr << "Aye! Received SIGSEGV or SIGBUS! Trying to exit gracefully..." << oendl;
     if ( Wellenreiter::instance->sniffing )
     {
+        Wellenreiter::instance->pcap->closeDumpFile();
         Wellenreiter::instance->pcap->close();
         Wellenreiter::instance->stopClicked();
     }
@@ -622,18 +623,17 @@ void Wellenreiter::startClicked()
         dumpname.append( QTime::currentTime().toString().replace( QRegExp( ":" ), "-" ) );
         dumpname.append( ".wellenreiter" );
     }
-    else // write it anyway ;)
-    {
-        dumpname = "/var/log/dump.wellenreiter";
-    }
 
     if ( cardtype != DEVTYPE_FILE )
         pcap->open( interface );
     else
         pcap->openCaptureFile( interface );
 
-    odebug << "Wellenreiter:: dumping to " << dumpname << "" << oendl;
-    pcap->openDumpFile( dumpname );
+    if ( configwindow->writeCaptureFile->isChecked() )
+    {
+        odebug << "Wellenreiter:: dumping to " << dumpname << oendl;
+        pcap->openDumpFile( dumpname );
+    }
 
     if ( !pcap->isOpen() )
     {
