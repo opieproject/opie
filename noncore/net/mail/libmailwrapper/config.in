@@ -1,4 +1,4 @@
  config LIBMAILWRAPPER
     boolean "libmailwrapper (libetpan wrapper library)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 )
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBETPAN_DEP

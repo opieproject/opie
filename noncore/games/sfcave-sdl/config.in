@@ -1,4 +1,4 @@
   config SFCAVE-SDL
     boolean "sfcave-sdl (SDL version of this game, needs the proper libraries)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBSDL_DEP
