@@ -102,6 +102,8 @@ QString Resource::findPixmap( const QString &pix )
     if ( QFile( f ).exists() )
 	return f;
 
+	qDebug ( "\nLoading of image '%s' is not ideal (either it doesn't exist or an extension was specified)\n", pix.latin1());
+
     // All formats...
     QStrList fileFormats = QImageIO::inputFormats();
     QString ff = fileFormats.first();
