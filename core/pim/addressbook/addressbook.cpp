@@ -419,7 +419,7 @@ void AddressbookWindow::slotListNew()
 	if( !syncing ) {
 		editEntry( NewEntry );
 	} else {
-		QMessageBox::warning(this, tr("OContacts"),
+		QMessageBox::warning(this, tr("Contacts"),
 				     tr("Can not edit data, currently syncing"));
 	}
 }
