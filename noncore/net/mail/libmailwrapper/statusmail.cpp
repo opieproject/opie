@@ -27,7 +27,7 @@ void StatusMail::initAccounts(QList<Account>&accounts)
     currentPop3Stat.message_recent=0;
     currentPop3Stat.message_unseen=0;
     for ( it = accounts.first(); it; it = accounts.next() ) {
-        if ( it->getType().compare( "IMAP" ) == 0 ) {
+        if ( it->getType().compare( "IMAP" ) == 0 && !it->getOffline() ) {
             IMAPaccount*ima = static_cast<IMAPaccount *>(it);
             current = AbstractMail::getWrapper(ima);
             connectionList.append(current);
@@ -35,7 +35,7 @@ void StatusMail::initAccounts(QList<Account>&accounts)
             currentImapStat.message_count+=currentStat.message_unseen;
             currentImapStat.message_count+=currentStat.message_recent;
             currentImapStat.message_count+=currentStat.message_count;
-        } else if ( it->getType().compare( "POP3" ) == 0 ) {
+        } else if ( it->getType().compare( "POP3" ) == 0 && !it->getOffline() ) {
             POP3account *pop3 = static_cast<POP3account *>(it);
             current = AbstractMail::getWrapper(pop3);
             connectionList.append(current);
