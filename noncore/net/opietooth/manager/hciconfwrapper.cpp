@@ -23,7 +23,7 @@ namespace OpieTooth {
     }
 
     void HciConfWrapper::setName( const QString &name ) {
-        qDebug ("NAME : " + name);
+        odebug << "NAME : " << name << oendl;
         setValue( "name" , "\"" +  name + "\"" );
     }
 
@@ -77,16 +77,16 @@ namespace OpieTooth {
         for (it = m_file.begin(); it != m_file.end(); ++it ) {
             str = (*it);
             if( (str.contains(key)) > 0 ) {
-                odebug << "Found" << oendl; 
+                odebug << "Found" << oendl;
                 // still need to look if its commented out!!!
                 str.simplifyWhiteSpace();
-                odebug << key << oendl; 
+                odebug << key << oendl;
                 if (str.startsWith("#")) {
                     str = (key + " " + value + ";");
                 } else {
                     str = str.replace( QRegExp( "\\s*"+key+"\\s+[^\\s][^;]*;" ),  key + " " + value + ";");
                 }
-                odebug << str << oendl; 
+                odebug << str << oendl;
                 it = m_file.remove( it );
                 it = m_file.insert( it,  str );
                 //return; the regexp is too wide  -zecke // all set
@@ -101,11 +101,11 @@ namespace OpieTooth {
      * the m_file
      */
     void HciConfWrapper::load() {
-        owarn << "loaded" << oendl; 
+        owarn << "loaded" << oendl;
         m_file.clear();
         QFile file( m_fileName );
         if (!file.open( IO_ReadOnly ) ) {
-            odebug << "Could not open" << oendl; 
+            odebug << "Could not open" << oendl;
             return;
         }
 
@@ -122,13 +122,13 @@ namespace OpieTooth {
             }
     }
     void HciConfWrapper::save() {
-        owarn << "save" << oendl; 
+        owarn << "save" << oendl;
         if (m_file.isEmpty() ) // load first
             return;
 
         QFile file( m_fileName );
         if ( !file.open(IO_WriteOnly ) ) {
-            owarn << "could not open " << m_fileName.latin1() << "" << oendl; 
+            owarn << "could not open " << m_fileName.latin1() << "" << oendl;
             return;
         }
 
@@ -137,6 +137,6 @@ namespace OpieTooth {
         for ( it = m_file.begin(); it != m_file.end(); ++it ) {
             stream << (*it) << endl;
         }
-        owarn << "saved" << oendl; 
+        owarn << "saved" << oendl;
     };
 }

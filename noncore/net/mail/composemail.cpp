@@ -1,11 +1,3 @@
-#include <qt.h>
-
-#include <opie2/ofiledialog.h>
-#include <opie2/odebug.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
-#include <qpe/global.h>
-#include <qpe/contact.h>
 
 #include "composemail.h"
 
@@ -13,6 +5,18 @@
 #include <libmailwrapper/storemail.h>
 #include <libmailwrapper/abstractmail.h>
 #include <libmailwrapper/mailtypes.h>
+
+/* OPIE */
+#include <opie2/ofiledialog.h>
+#include <opie2/odebug.h>
+#include <qpe/resource.h>
+#include <qpe/config.h>
+#include <qpe/global.h>
+#include <qpe/contact.h>
+
+/* QT */
+#include <qt.h>
+
 
 using namespace Opie::Core;
 using namespace Opie::Ui;
@@ -184,12 +188,12 @@ void ComposeMail::removeAttachment()
 void ComposeMail::accept()
 {
     if ( checkBoxLater->isChecked() ) {
-        odebug << "Send later" << oendl; 
+        odebug << "Send later" << oendl;
     }
 
 #if 0
-    qDebug( "Sending Mail with " +
-            smtpAccounts.at( smtpAccountBox->currentItem() )->getAccountName() );
+    odebug << "Sending Mail with "
+           << smtpAccounts.at( smtpAccountBox->currentItem() )->getAccountName() << oendl;
 #endif
     Opie::Core::OSmartPointer<Mail> mail=new Mail;
 
@@ -257,7 +261,7 @@ void ComposeMail::reject()
             txt.append( "\n--\n" );
             txt.append( sigMultiLine->text() );
         }
-        odebug << txt << oendl; 
+        odebug << txt << oendl;
         mail->setMessage( txt );
 
         /* only use the default drafts folder name! */
@@ -293,7 +297,7 @@ AttachViewItem::AttachViewItem( QListView *parent, Attachment *att )
     : QListViewItem( parent )
 {
     attachment = att;
-    odebug << att->getMimeType() << oendl; 
+    odebug << att->getMimeType() << oendl;
     setPixmap( 0, attachment->getDocLnk().pixmap().isNull() ?
                   Resource::loadPixmap( "UnknownDocument-14" ) :
                   attachment->getDocLnk().pixmap() );

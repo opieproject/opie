@@ -129,8 +129,9 @@ void MScanListView::addNewItem( const QString& type,
     QString macaddr = mac.toString(true);
 
     #ifdef DEBUG
-    qDebug( "MScanList::addNewItem( %s / %s / %s [%d]", (const char*) type,
-            (const char*) essid, (const char*) macaddr, channel );
+    odebug << "MScanList::addNewItem( " << (const char*) type << " / "
+           << (const char*) essid << " / " << (const char*) macaddr
+           << " [" << channel << "]" << oendl;
     #endif
 
     // search, if we already have seen this net
@@ -394,8 +395,8 @@ void MScanListView::contextMenuRequested( QListViewItem* item, const QPoint&, in
 
     MScanListItem* itm = static_cast<MScanListItem*>( item );
 
-    qDebug( "contextMenuRequested on item '%s' (%s) in column: '%d'",
-            (const char*) itm->text(0), (const char*) itm->type, col );
+    odebug << "contextMenuRequested on item '" << (const char*) itm->text(0) << "' ("
+           << (const char*) itm->type << ") in column: '" << col << "'" << oendl;
 
     if ( itm->type == "adhoc" || itm->type == "managed" )
     {
@@ -489,11 +490,9 @@ void MScanListItem::serializeFrom( QDataStream& s )
 void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal, bool probed )
 {
     #ifdef DEBUG
-    qDebug( "decorating scanlist item %s / %s / %s [%d]",
-        (const char*) type,
-        (const char*) essid,
-        (const char*) macaddr,
-        channel );
+    odebug << "decorating scanlist item " << (const char*) type << " / "
+           << (const char*) essid << " / " << (const char*) macaddr
+           << "[" << channel << "]" << oendl;
     #endif
 
     // set icon for managed or adhoc mode

@@ -742,12 +742,9 @@ void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int ch
         return;
     }
 
-    qDebug( "joinNetwork() with Interface %s: %s, %s, %d, %s",
-        (const char*) iface->name(),
-        (const char*) type,
-        (const char*) essid,
-        channel,
-        (const char*) macaddr );
+    odebug << "joinNetwork() with Interface " << (const char*) iface->name()
+           << ": " << (const char*) type << ", " << (const char*) essid
+           << ", " << channel << ", " << (const char*) macaddr << oendl;
 
     QCopEnvelope msg( "QPE/Application/networksettings", "wlan(QString,QString,QString)" );
     int count = 3;
