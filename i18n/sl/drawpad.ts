@@ -270,6 +270,10 @@ vse strani?</translation>
         <source>DrawPad - Export</source>
         <translation>Risalna plošča - Izvoz</translation>
     </message>
+    <message>
+        <source>All Images</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImportDialog</name>
@@ -284,6 +288,10 @@ vse strani?</translation>
     <message>
         <source>DrawPad - Import</source>
         <translation>Risalna plošča - Uvoz</translation>
+    </message>
+    <message>
+        <source>All images</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

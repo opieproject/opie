@@ -270,6 +270,10 @@ las páginas?</translation>
         <source>DrawPad - Export</source>
         <translation>Pizarra - Exportar</translation>
     </message>
+    <message>
+        <source>All Images</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImportDialog</name>
@@ -284,6 +288,10 @@ las páginas?</translation>
     <message>
         <source>DrawPad - Import</source>
         <translation>Pizarra - Importar</translation>
+    </message>
+    <message>
+        <source>All images</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -271,6 +271,10 @@ toutes les pages ?</translation>
         <source>DrawPad - Export</source>
         <translation>DrawPad - Exporter</translation>
     </message>
+    <message>
+        <source>All Images</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImportDialog</name>
@@ -285,6 +289,10 @@ toutes les pages ?</translation>
     <message>
         <source>DrawPad - Import</source>
         <translation>DrawPad - Importer</translation>
+    </message>
+    <message>
+        <source>All images</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -270,6 +270,10 @@ le pagine?</translation>
         <source>Format:</source>
         <translation>Formato:</translation>
     </message>
+    <message>
+        <source>All Images</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImportDialog</name>
@@ -285,6 +289,10 @@ automatica</translation>
     <message>
         <source>Preview</source>
         <translation>Anteprima</translation>
+    </message>
+    <message>
+        <source>All images</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
