@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Beam Out</source>
-        <translation>Emission</translation>
+        <translation>Transmettre</translation>
     </message>
     <message>
         <source>Search For...</source>

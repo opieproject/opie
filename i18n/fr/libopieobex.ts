@@ -91,7 +91,7 @@ fichier.</translation>
     </message>
     <message>
         <source>Searching for bluetooth Devices.</source>
-        <translation>Recherche des Dispositifs Bluetooth.</translation>
+        <translation>Recherche des dispositifs bluetooth.</translation>
     </message>
     <message>
         <source>Scheduling for beam.</source>
