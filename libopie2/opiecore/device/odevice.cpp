@@ -191,7 +191,7 @@ ODevice::ODevice()
             if ( f.open( IO_ReadOnly ) )
             {
                 QTextStream ts( &f );
-                d->m_sysverstr = ts.readLine();
+                d->m_sysverstr = ts.readLine().replace( QRegExp( "\\\\." ), "" );
             }
             break;
         }
