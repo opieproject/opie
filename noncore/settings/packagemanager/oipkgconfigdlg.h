@@ -99,6 +99,7 @@ private:
     QCheckBox *m_optForceRemove;    // Force remove ipkg option checkbox
     QCheckBox *m_optForceOverwrite; // Force overwrite ipkg option checkbox
     QComboBox *m_optVerboseIpkg;    // Ipkg verbosity option selection
+    QLineEdit *m_optSourceLists;    // Ipkg source lists destination directory
 
     void initServerWidget();
     void initDestinationWidget();
@@ -117,6 +118,8 @@ private slots:
     void slotDestNew();
     void slotDestEdit();
     void slotDestDelete();
+
+    void slotOptSelectSourceListsPath();
 };
 
 class OIpkgServerDlg : public QDialog
@@ -128,7 +131,7 @@ public:
 
 protected slots:
     void accept();
-    
+
 private:
     OConfItem *m_server;
 
@@ -148,7 +151,7 @@ public:
 
 protected slots:
     void accept();
-    
+
 private:
     OConfItem *m_dest;
 

@@ -128,6 +128,13 @@ void OIpkgConfigDlg::accept()
             m_configs->append( new OConfItem( OConfItem::Option, "proxy_password",
                                m_proxyPassword->text() ) );
 
+        confItem = m_ipkg->findConfItem( OConfItem::Other, "lists_dir" );
+        if ( confItem )
+            confItem->setValue( m_optSourceLists->text() );
+        else
+            m_configs->append( new OConfItem( OConfItem::Other, "lists_dir",
+                               m_optSourceLists->text(), "name" ) );
+
         m_ipkg->setConfigItems( m_configs );
     }
 
@@ -183,7 +190,7 @@ void OIpkgConfigDlg::initServerWidget()
     QWhatsThis::add( m_serverEditBtn, tr( "Tap here to edit the entry selected above." ) );
     connect( m_serverEditBtn, SIGNAL(clicked()), this, SLOT(slotServerEdit()) );
     layout->addWidget( m_serverEditBtn, 1, 1 );
-    
+
     m_serverDeleteBtn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
     m_serverDeleteBtn->setEnabled( false );
     QWhatsThis::add( m_serverDeleteBtn, tr( "Tap here to delete the entry selected above." ) );
@@ -221,7 +228,7 @@ void OIpkgConfigDlg::initDestinationWidget()
     QWhatsThis::add( m_destEditBtn, tr( "Tap here to edit the entry selected above." ) );
     connect( m_destEditBtn, SIGNAL(clicked()), this, SLOT(slotDestEdit()) );
     layout->addWidget( m_destEditBtn, 1, 1 );
-    
+
     m_destDeleteBtn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
     m_destDeleteBtn->setEnabled( false );
     QWhatsThis::add( m_destDeleteBtn, tr( "Tap here to delete the entry selected above." ) );
@@ -297,27 +304,27 @@ void OIpkgConfigDlg::initOptionsWidget()
     sv->setFrameStyle( QFrame::NoFrame );
     QWidget *container = new QWidget( sv->viewport() );
     sv->addChild( container );
-    QVBoxLayout *layout = new QVBoxLayout( container, 2, 4 );
+    QGridLayout *layout = new QGridLayout( container, 8, 2, 2, 4 );
 
     m_optForceDepends = new QCheckBox( tr( "Force Depends" ), container );
     QWhatsThis::add( m_optForceDepends, tr( "Tap here to enable or disable the '-force-depends' option for Ipkg." ) );
-    layout->addWidget( m_optForceDepends );
+    layout->addMultiCellWidget( m_optForceDepends, 0, 0, 0, 1 );
 
     m_optForceReinstall = new QCheckBox( tr( "Force Reinstall" ), container );
     QWhatsThis::add( m_optForceReinstall, tr( "Tap here to enable or disable the '-force-reinstall' option for Ipkg." ) );
-    layout->addWidget( m_optForceReinstall );
+    layout->addMultiCellWidget( m_optForceReinstall, 1, 1, 0, 1 );
 
     m_optForceRemove = new QCheckBox( tr( "Force Remove" ), container );
     QWhatsThis::add( m_optForceRemove, tr( "Tap here to enable or disable the '-force-removal-of-dependent-packages' option for Ipkg." ) );
-    layout->addWidget( m_optForceRemove );
+    layout->addMultiCellWidget( m_optForceRemove, 2, 2, 0, 1 );
 
     m_optForceOverwrite = new QCheckBox( tr( "Force Overwrite" ), container );
     QWhatsThis::add( m_optForceOverwrite, tr( "Tap here to enable or disable the '-force-overwrite' option for Ipkg." ) );
-    layout->addWidget( m_optForceOverwrite );
+    layout->addMultiCellWidget( m_optForceOverwrite, 3, 3, 0, 1 );
 
-    QLabel *l = new QLabel( tr( "Information Level" ), container );
+    QLabel *l = new QLabel( tr( "Information level:" ), container );
     QWhatsThis::add( l, tr( "Select information level for Ipkg." ) );
-    layout->addWidget( l );
+    layout->addMultiCellWidget( l, 4, 4, 0, 1 );
 
     m_optVerboseIpkg = new QComboBox( container );
     QWhatsThis::add( m_optVerboseIpkg, tr( "Select information level for Ipkg." ) );
@@ -325,7 +332,20 @@ void OIpkgConfigDlg::initOptionsWidget()
     m_optVerboseIpkg->insertItem( tr( "Normal messages" ) );
     m_optVerboseIpkg->insertItem( tr( "Informative messages" ) );
     m_optVerboseIpkg->insertItem( tr( "Troubleshooting output" ) );
-    layout->addWidget( m_optVerboseIpkg );
+    layout->addMultiCellWidget( m_optVerboseIpkg, 5, 5, 0, 1 );
+
+    l = new QLabel( tr( "Package source lists directory:" ), container );
+    QWhatsThis::add( l, tr( "Enter the directory where package source feed information is stored." ) );
+    layout->addMultiCellWidget( l, 6, 6, 0, 1 );
+
+    m_optSourceLists = new QLineEdit( container );
+    QWhatsThis::add( m_optSourceLists, tr( "Enter the directory where package source feed information is stored." ) );
+    layout->addWidget( m_optSourceLists, 7, 0 );
+    QPushButton *btn = new QPushButton( Resource::loadPixmap( "folder" ), QString::null, container );
+    btn->setMaximumWidth( btn->height() );
+    QWhatsThis::add( btn, tr( "Tap here to select the directory where package source feed information is stored." ) );
+    connect( btn, SIGNAL(clicked()), this, SLOT(slotOptSelectSourceListsPath()) );
+    layout->addWidget( btn, 7, 1 );
 
     layout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
 }
@@ -345,35 +365,42 @@ void OIpkgConfigDlg::initData()
                 // Add configuration item to the appropriate dialog controls
                 if ( config )
                 {
-                    if ( config->type() == OConfItem::Source )
+                    switch ( config->type() )
                     {
-                        m_serverList->insertItem( config->name() );
-                    }
-                    else if ( config->type() == OConfItem::Destination )
-                    {
-                        m_destList->insertItem( config->name() );
-                    }
-                    else if ( config->type() == OConfItem::Option )
-                    {
-                        if ( config->name() == "http_proxy" )
-                        {
-                            m_proxyHttpServer->setText( config->value() );
-                            m_proxyHttpActive->setChecked( config->active() );
-                        }
-                        else if ( config->name() == "ftp_proxy" )
-                        {
-                            m_proxyFtpServer->setText( config->value() );
-                            m_proxyFtpActive->setChecked( config->active() );
-                        }
-                        else if ( config->name() == "proxy_username" )
-                        {
-                            m_proxyUsername->setText( config->value() );
-                        }
-                        else if ( config->name() == "proxy_password" )
-                        {
-                            m_proxyPassword->setText( config->value() );
-                        }
-                    }
+                        case OConfItem::Source :  m_serverList->insertItem( config->name() ); break;
+                        case OConfItem::Destination : m_destList->insertItem( config->name() ); break;
+                        case OConfItem::Option :
+                            {
+                                if ( config->name() == "http_proxy" )
+                                {
+                                    m_proxyHttpServer->setText( config->value() );
+                                    m_proxyHttpActive->setChecked( config->active() );
+                                }
+                                else if ( config->name() == "ftp_proxy" )
+                                {
+                                    m_proxyFtpServer->setText( config->value() );
+                                    m_proxyFtpActive->setChecked( config->active() );
+                                }
+                                else if ( config->name() == "proxy_username" )
+                                {
+                                    m_proxyUsername->setText( config->value() );
+                                }
+                                else if ( config->name() == "proxy_password" )
+                                {
+                                    m_proxyPassword->setText( config->value() );
+                                }
+                            }
+                            break;
+                        case OConfItem::Other :
+                            {
+                                if ( config->name() == "lists_dir" )
+                                    m_optSourceLists->setText( config->value() );
+                                else // TODO - use proper libipkg define
+                                    m_optSourceLists->setText( "/usr/lib/ipkg/lists" );
+                            }
+                            break;
+                        default : break;
+                    };
                 }
             }
         }
@@ -396,7 +423,7 @@ void OIpkgConfigDlg::initData()
 void OIpkgConfigDlg::slotServerSelected( int index )
 {
     m_serverCurrent = index;
-    
+
     // Enable Edit and Delete buttons
     m_serverEditBtn->setEnabled( true );
     m_serverDeleteBtn->setEnabled( true );
@@ -405,7 +432,7 @@ void OIpkgConfigDlg::slotServerSelected( int index )
 void OIpkgConfigDlg::slotServerNew()
 {
     OConfItem *server = new OConfItem( OConfItem::Source );
-    
+
     OIpkgServerDlg dlg( server, this );
     if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted )
     {
@@ -456,7 +483,7 @@ void OIpkgConfigDlg::slotServerDelete()
 void OIpkgConfigDlg::slotDestSelected( int index )
 {
     m_destCurrent = index;
-    
+
     // Enable Edit and Delete buttons
     m_destEditBtn->setEnabled( true );
     m_destDeleteBtn->setEnabled( true );
@@ -465,7 +492,7 @@ void OIpkgConfigDlg::slotDestSelected( int index )
 void OIpkgConfigDlg::slotDestNew()
 {
     OConfItem *dest = new OConfItem( OConfItem::Destination );
-    
+
     OIpkgDestDlg dlg( dest, this );
     if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted )
     {
@@ -513,13 +540,22 @@ void OIpkgConfigDlg::slotDestDelete()
     }
 }
 
+void OIpkgConfigDlg::slotOptSelectSourceListsPath()
+{
+    QString path = Opie::Ui::OFileDialog::getDirectory( 0, m_optSourceLists->text() );
+    if ( path.at( path.length() - 1 ) == '/' )
+        path.truncate( path.length() - 1 );
+    if ( !path.isNull() )
+        m_optSourceLists->setText( path );
+}
+
 OIpkgServerDlg::OIpkgServerDlg( OConfItem *server, QWidget *parent )
     : QDialog( parent, QString::null, true, WStyle_ContextHelp )
     , m_server( server )
 {
     setCaption( tr( "Edit Server" ) );
 
-    // Initialize UI    
+    // Initialize UI
     QVBoxLayout *layout = new QVBoxLayout( this, 2, 4 );
 
     m_active = new QCheckBox( tr( "Active" ), this );
@@ -527,7 +563,7 @@ OIpkgServerDlg::OIpkgServerDlg( OConfItem *server, QWidget *parent )
     layout->addWidget( m_active );
 
     layout->addStretch();
-    
+
     QLabel *label = new QLabel( tr( "Name:" ), this );
     QWhatsThis::add( label, tr( "Enter the name of this entry here." ) );
     layout->addWidget( label );
@@ -536,7 +572,7 @@ OIpkgServerDlg::OIpkgServerDlg( OConfItem *server, QWidget *parent )
     layout->addWidget( m_name );
 
     layout->addStretch();
-    
+
     label = new QLabel( tr( "Address:" ), this );
     QWhatsThis::add( label, tr( "Enter the URL address of this entry here." ) );
     layout->addWidget( label );
@@ -549,7 +585,7 @@ OIpkgServerDlg::OIpkgServerDlg( OConfItem *server, QWidget *parent )
     m_compressed = new QCheckBox( tr( "Compressed server feed" ), this );
     QWhatsThis::add( m_compressed, tr( "Tap here to indicate whether the server support compressed archives or not." ) );
     layout->addWidget( m_compressed );
-        
+
     // Populate initial information
     if ( m_server )
     {
@@ -580,7 +616,7 @@ OIpkgDestDlg::OIpkgDestDlg( OConfItem *dest, QWidget *parent )
 {
     setCaption( tr( "Edit Destination" ) );
 
-    // Initialize UI    
+    // Initialize UI
     QVBoxLayout *layout = new QVBoxLayout( this, 2, 4 );
 
     m_active = new QCheckBox( tr( "Active" ), this );
@@ -588,7 +624,7 @@ OIpkgDestDlg::OIpkgDestDlg( OConfItem *dest, QWidget *parent )
     layout->addWidget( m_active );
 
     layout->addStretch();
-    
+
     QLabel *label = new QLabel( tr( "Name:" ), this );
     QWhatsThis::add( label, tr( "Enter the name of this entry here." ) );
     layout->addWidget( label );
@@ -597,14 +633,14 @@ OIpkgDestDlg::OIpkgDestDlg( OConfItem *dest, QWidget *parent )
     layout->addWidget( m_name );
 
     layout->addStretch();
-    
+
     label = new QLabel( tr( "Location:" ), this );
     QWhatsThis::add( label, tr( "Enter the absolute directory path of this entry here." ) );
     layout->addWidget( label );
 
     QHBoxLayout *layout2 = new QHBoxLayout( this, 2, 4 );
     layout->addLayout( layout2 );
-    
+
     m_location = new QLineEdit( this );
     QWhatsThis::add( m_location, tr( "Enter the absolute directory path of this entry here." ) );
     layout2->addWidget( m_location );
@@ -613,7 +649,7 @@ OIpkgDestDlg::OIpkgDestDlg( OConfItem *dest, QWidget *parent )
     QWhatsThis::add( btn, tr( "Tap here to select the desired location." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotSelectPath()) );
     layout2->addWidget( btn );
-    
+
     // Populate initial information
     if ( m_dest )
     {

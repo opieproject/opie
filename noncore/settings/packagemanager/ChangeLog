@@ -1,3 +1,10 @@
+2005-02-22 Dan Williams <drw@handhelds.org>
+
+    * Released version 0.6.2
+    * Added support for ipkg configuration option, 'lists_dir'
+    * Make app depend on libipkg-0.99.143, or greater
+    * Optimize ipkg configuration file read routine
+
 2005-02-16 Dan Williams <drw@handhelds.org>
 
     * Fixed stupid bug where last package in status file was not shown as installed when it should be

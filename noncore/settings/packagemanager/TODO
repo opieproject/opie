@@ -2,14 +2,12 @@
 /*
 /*                       Opie - Package Manager
 /*                      ========================
-/*                           Version 0.6.1
+/*                           Version 0.6.2
 /*
 /*                A package management client for Opie
 /*
 /************************************************************************
 
 -----------------------------------------------
- To-do for Opie-PackageManager - January, 2005
+ To-do for Opie-PackageManager - February, 2005
 -----------------------------------------------
-
-1. Re-work package download dialog

@@ -2,14 +2,14 @@
 /*
 /*                       Opie - Package Manager
 /*                      ========================
-/*                           Version 0.6.0
+/*                           Version 0.6.2
 /*
 /*                A package management client for Opie
 /*
 /************************************************************************
 
 -------------------------------------------------------
- Release Notes for Opie-PackageManager - January, 2004
+ Release Notes for Opie-PackageManager - February, 2004
 -------------------------------------------------------
 
 ======================
@@ -44,7 +44,7 @@ the build system along with the appropriate headers.
 =       Credits      =
 ======================
 
-- Opie-PackageManager is (C) 2003-2004 Dan Williams
+- Opie-PackageManager is (C) 2003-2005 Dan Williams
 
 ======================
 =        Links       =

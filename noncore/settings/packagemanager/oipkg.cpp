@@ -152,6 +152,7 @@ void OIpkg::setConfigItems( OConfItemList *configList )
             if ( item->type() != OConfItem::NotDefined )
             {
                 QString confLine;
+                QString name = item->name();
                 if ( !item->active() )
                     confLine = "#";
 
@@ -160,18 +161,28 @@ void OIpkg::setConfigItems( OConfItemList *configList )
                     case OConfItem::Source :
                     {
                         if ( item->features().contains( "Compressed" ) )
-                            confLine.append( "src/gz " );
+                            confLine.append( "src/gz" );
                         else
-                            confLine.append( "src " );
+                            confLine.append( "src" );
                     }
                     break;
-                    case OConfItem::Destination : confLine.append( "dest " ); break;
-                    case OConfItem::Option : confLine.append( "option " ); break;
-                    case OConfItem::Arch : confLine.append( "arch " ); break;
+                    case OConfItem::Destination : confLine.append( "dest" ); break;
+                    case OConfItem::Option : confLine.append( "option" ); break;
+                    case OConfItem::Arch : confLine.append( "arch" ); break;
+                    case OConfItem::Other :
+                    {
+                        // For options w/type = Other, the mapping is as follows:
+                        //    name = typeStr (e.g. "lists_dir")
+                        //    value = value
+                        //    features = name (from configuration file)
+                        confLine.append( item->name() );
+                        name = item->features();
+                    }
+                    break;
                     default : break;
                 };
 
-                confStream << confLine << " " << item->name() << " " << item->value() << "\n";
+                confStream << confLine << " " << name << " " << item->value() << "\n";
             }
         }
 
@@ -545,50 +556,64 @@ void OIpkg::loadConfiguration()
                 // Parse line and save info to the conf options list
                 if ( !line.isEmpty() )
                 {
-                    if ( !line.startsWith( "#" ) ||
-                            line.startsWith( "#src" ) ||
-                            line.startsWith( "#dest" ) ||
-                            line.startsWith( "#arch" ) ||
-                            line.startsWith( "#option" ) )
+                    // Strip leading comment marker if exists
+                    bool comment = false;
+                    if ( line.startsWith( "#" ) )
                     {
-                        int pos = line.find( ' ', 1 );
-
-                        // Type
-                        QString typeStr = line.left( pos );
-                        OConfItem::Type type;
-                        QString features;
-                        if ( typeStr == "src" || typeStr == "#src" )
-                            type = OConfItem::Source;
-                        else if ( typeStr == "src/gz" || typeStr == "#src/gz" )
-                        {
-                            type = OConfItem::Source;
-                            features = "Compressed";
-                        }
-                        else if ( typeStr == "dest" || typeStr == "#dest" )
-                            type = OConfItem::Destination;
-                        else if ( typeStr == "option" || typeStr == "#option" )
-                            type = OConfItem::Option;
-                        else if ( typeStr == "arch" || typeStr == "#arch" )
-                            type = OConfItem::Arch;
-                        else
-                            type = OConfItem::NotDefined;
-                        ++pos;
-                        int endpos = line.find( ' ', pos );
-
-                        // Name
-                        QString name = line.mid( pos, endpos - pos );
-
-                        // Value
-                        QString value = "";
-                        if ( endpos > -1 )
-                            value = line.right( line.length() - endpos - 1 );
-
-                        // Active
-                        bool active = !line.startsWith( "#" );
-
-                        // Add to list
-                        m_confInfo->append( new OConfItem( type, name, value, features, active ) );
+                        line.remove( 0, 1 );
+                        line = line.simplifyWhiteSpace();
+                        comment = true;
                     }
+
+                    bool recognizedOption = true;
+                    int pos = line.find( ' ', 1 )  + 1;
+                    int endpos = line.find( ' ', pos );
+
+                    // Name
+                    QString name = line.mid( pos, endpos - pos );
+
+                    // Value
+                    QString value = "";
+                    if ( endpos > -1 )
+                        value = line.right( line.length() - endpos - 1 );
+
+                    // Active
+                    bool active = !comment;
+
+                    // Type
+                    // For options w/type = Other, the mapping is as follows:
+                    //    name = typeStr (e.g. "lists_dir")
+                    //    value = value
+                    //    features = name (from configuration file)
+
+                    QString typeStr = line.left( pos - 1 );
+                    OConfItem::Type type;
+                    QString features;
+                    if ( typeStr == "src" )
+                        type = OConfItem::Source;
+                    else if ( typeStr == "src/gz" )
+                    {
+                        type = OConfItem::Source;
+                        features = "Compressed";
+                    }
+                    else if ( typeStr == "dest" )
+                        type = OConfItem::Destination;
+                    else if ( typeStr == "option" )
+                        type = OConfItem::Option;
+                    else if ( typeStr == "arch" )
+                        type = OConfItem::Arch;
+                    else if ( typeStr == "lists_dir" )
+                    {
+                        type = OConfItem::Other;
+                        features = name;
+                        name = typeStr;
+                    }
+                    else
+                        recognizedOption = false;
+
+                    // Add to list
+                    if ( recognizedOption )
+                        m_confInfo->append( new OConfItem( type, name, value, features, active ) );
                 }
             }
 

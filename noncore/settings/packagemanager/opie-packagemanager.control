@@ -7,4 +7,4 @@ Replaces: packagemanager
 Architecture: arm
 Maintainer: Dan Williams (drw@handhelds.org)
 Description: Opie package management client
-Version: 0.6.1$EXTRAVERSION
+Version: 0.6.2$EXTRAVERSION
