@@ -198,55 +198,55 @@ public:
            }
     }
 
-    static void show_mx(QWidget* mw, bool nomaximize, QString &strName)
-    {
-            if ( mw->inherits("QMainWindow") || mw->isA("QMainWindow") )
-            {
-                ( (  QMainWindow* ) mw )->setUsesBigPixmaps( useBigPixmaps );
-            }
+    static void show_mx(QWidget* mw, bool nomaximize, QString &strName) {
+        if ( mw->inherits("QMainWindow") || mw->isA("QMainWindow") )
+        {
+            ( (  QMainWindow* ) mw )->setUsesBigPixmaps( useBigPixmaps );
+        }
         QPoint p;
         QSize s;
         bool max;
-    if ( mw->isVisible() ) {
-        if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
-            mw->resize(s);
-            mw->move(p);
-        }
-        mw->raise();
-    } else {
 
-        if ( mw->layout() && mw->inherits("QDialog") ) {
-        if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
-            mw->resize(s);
-            mw->move(p);
+        if ( mw->isVisible() ) {
+            if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
+                mw->resize(s);
+                mw->move(p);
+            }
+            mw->raise();
+        } else {
 
-            if ( max && !nomaximize ) {
-            mw->showMaximized();
-            } else {
-            mw->show();
+            if ( mw->layout() && mw->inherits("QDialog") ) {
+                if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
+                    mw->resize(s);
+                    mw->move(p);
+
+                    if ( max && !nomaximize ) {
+                        mw->showMaximized();
+                    } else {
+                        mw->show();
+                    }
+                } else {
+                    QPEApplication::showDialog((QDialog*)mw,nomaximize);
                 }
-        } else {
-            QPEApplication::showDialog((QDialog*)mw,nomaximize);
-        }
-        } else {
-        if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
-            mw->resize(s);
-            mw->move(p);
-        } else {    //no stored rectangle, make an estimation
-            int x = (qApp->desktop()->width()-mw->frameGeometry().width())/2;
-            int y = (qApp->desktop()->height()-mw->frameGeometry().height())/2;
-            mw->move( QMAX(x,0), QMAX(y,0) );
+            } else {
+                if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
+                    mw->resize(s);
+                    mw->move(p);
+                } else {    //no stored rectangle, make an estimation
+                    int x = (qApp->desktop()->width()-mw->frameGeometry().width())/2;
+                    int y = (qApp->desktop()->height()-mw->frameGeometry().height())/2;
+                    mw->move( QMAX(x,0), QMAX(y,0) );
 #ifdef Q_WS_QWS
-            if ( !nomaximize )
-            mw->showMaximized();
+                    if ( !nomaximize )
+                        mw->showMaximized();
 #endif
+                }
+                if ( max && !nomaximize )
+                    mw->showMaximized();
+                else
+                    mw->show();
+            }
         }
-        if ( max && !nomaximize )
-            mw->showMaximized();
-        else
-            mw->show();
-        }
-    }
     }
 
     static bool read_widget_rect(const QString &app, bool &maximized, QPoint &p, QSize &s)

@@ -22,10 +22,11 @@
 #define QPETOOLBAR_H
 
 #include <qtoolbar.h>
+#include <qtopia/qpeglobal.h>
 
 class QMainWindow;
 
-class QPEToolBar : public QToolBar
+class QPE_DEPRECATED QPEToolBar : public QToolBar
 {
     Q_OBJECT
 public:

@@ -31,6 +31,7 @@
 #endif
 #include "qpedecoration_qws.h"
 #include "timestring.h"
+#include "qpeglobal.h"
 
 class QCopChannel;
 class QPEApplicationData;
@@ -120,9 +121,10 @@ public:
 
     void showMainWidget( QWidget*, bool nomax=FALSE );
     void showMainDocumentWidget( QWidget*, bool nomax=FALSE );
-    static void showDialog( QDialog*, bool nomax=FALSE );
-    static int execDialog( QDialog*, bool nomax=FALSE );
-    static void showWidget( QWidget*, bool nomax=FALSE );
+
+    static void showDialog( QDialog*, bool nomax=FALSE ) QPE_WEAK_SYMBOL;
+    static int execDialog ( QDialog*, bool nomax=FALSE ) QPE_WEAK_SYMBOL;
+    static void showWidget( QWidget*, bool nomax=FALSE ) QPE_WEAK_SYMBOL;
     /* Merge setTempScreenSaverMode */
 #ifdef QTOPIA_INTERNAL_INITAPP
     void initApp( int argv, char **argv );
@@ -183,50 +185,7 @@ private:
 
 };
 
-inline void QPEApplication::showDialog( QDialog* d, bool nomax )
-{
-    showWidget( d, nomax );
-}
 
-inline int QPEApplication::execDialog( QDialog* d, bool nomax )
-{
-    showDialog( d, nomax );
-    return d->exec();
-}
-
-#ifdef Q_WS_QWS
-extern Q_EXPORT QRect qt_maxWindowRect;
-#endif
-
-inline void QPEApplication::showWidget( QWidget* wg, bool nomax )
-{
-    if ( wg->isVisible() )
-        wg->show();
-    else
-    {
-        if ( !nomax
-                && ( qApp->desktop()->width() <= 320 ) )
-        {
-            wg->showMaximized();
-        } else {
-            #ifdef Q_WS_QWS
-                QSize desk = QSize( qApp->desktop()->width(), qApp->desktop()->height() );
-            #else
-                QSize desk = QSize( qt_maxWindowRect.width(), qt_maxWindowRect.height() );
-            #endif
-
-            QSize sh = wg->sizeHint();
-            int w = QMAX( sh.width(), wg->width() );
-            int h = QMAX( sh.height(), wg->height() );
-            //              desktop                              widget-frame                      taskbar
-            w = QMIN( w, ( desk.width() - ( wg->frameGeometry().width() - wg->geometry().width() ) - 25 ) );
-            h = QMIN( h, ( desk.height() - ( wg->frameGeometry().height() - wg->geometry().height() ) - 25 ) );
-
-            wg->resize( w, h );
-            wg->show();
-        }
-    }
-}
 
 enum Transformation { Rot0, Rot90, Rot180, Rot270 }; /* from qgfxtransformed_qws.cpp */
 
@@ -261,5 +220,12 @@ inline void QPEApplication::setCurrentRotation( int r )
 #endif
 }
 
+
+/*
+ * -remove me
+ */ 
+#ifdef Q_WS_QWS
+extern Q_EXPORT QRect qt_maxWindowRect;
+#endif
 
 #endif

@@ -110,7 +110,8 @@ public:
 
 static QImage scaleButton( const QImage &img, int height )
 {
-    if ( img.height() != 0 && img.height() != height ) {
+    //ML: We don't want to scale if the difference is less than 4 pixels to prevent blurring
+    if ( img.height() != 0 && ::abs( img.height()-height ) > 4 ) {
 	return img.smoothScale( img.width()*height/img.height(), height );
     } else {
 	return img;

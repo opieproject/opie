@@ -26,6 +26,7 @@
 #ifndef QT_NO_COMPONENT
 
 #include <qpe/quuid.h>
+#include <qpe/qpeglobal.h>
 
 #define QRESULT         unsigned long
 #define QS_OK           (QRESULT)0x00000000
@@ -151,7 +152,7 @@ struct Q_EXPORT QtULong
 };
 
 #define Q_EXPORT_INTERFACE() \
-	extern "C" QUnknownInterface* ucm_instantiate()
+	extern "C" QUnknownInterface* ucm_instantiate  QPE_EXPORT_SYMBOL ()
 
 #define Q_REFCOUNT \
 private:          \

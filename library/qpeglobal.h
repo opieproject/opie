@@ -1,6 +1,10 @@
 /*
-               =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002,2003,2004 Holger Hans Peter Freyther <freyther@handhelds.org>
+                             This file is part of the OPIE Project
+			     Copyright (c)  2002,2003,2004 Holger Hans Peter Freyther <freyther@handhelds.org>
+			     Copyright (c)  2002,2003,2004 Stefan Eilers <eilers@handhelds.org>
+
+               =.
+             .=l.
            .>+-=
  _;:,     .>    :=|.         This library is free software; you can 
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
@@ -26,28 +30,57 @@
 
 */
 
-#ifndef QPE_GLOBAL_H
-#define QPE_GLOBAL_H
+#ifndef QPE_GLOBAL_DEFINES_H
+#define QPE_GLOBAL_DEFINES_H
 
 /**
  * Defines for used compiler attributes
  *
  */
+
+/*
+ * commons
+ */
+#define QPE_DEPRECATED
+
+
 #if defined(Q_OS_MACX)
 #define QPE_WEAK_SYMBOL __attribute__((weak_import))
 #define QPE_SYMBOL_USED
 #define QPE_SYMBOL_UNUSED
+#define QPE_EXPORT_SYMBOL
 
 #elif defined(_OS_UNIX_)
 #define QPE_WEAK_SYMBOL  __attribute__((weak))
 #define QPE_SYMBOL_USED __attribute__((used))
 #define QPE_SYMBOL_UNUSED __attribute__((unused))
+#define QPE_EXPORT_SYMBOL
+
+
+/*
+ * mark method as deprecated
+ */
+#if __GNUC__ - 0 > 3 || (__GNUC__ - 0 == 3 && __GNUC_MINOR__ - 0 >= 2)
+  /* gcc >= 3.2 */
+#undef  QPE_DEPRECATED
+#define QPE_DEPRECATED __attribute__((deprecated))
+#endif
+
+/*
+ * Defined if Compiler supports attributes
+ */
+#ifdef GCC_SUPPORTS_VISIBILITY
+#undef QPE_EXPORT_SYMBOL
+#define QPE_EXPORT_SYMBOL __attribute__((visibility("default")))
+#endif
+
 
 
 #else // defined(Q_OS_WIN32)
 #define QPE_WEAK_SYMBOL
 #define QPE_SYMBOL_USED
 #define QPE_SYMBOL_UNUSED
+#define QPE_EXPORT_SYMBOL
 #endif
 
 

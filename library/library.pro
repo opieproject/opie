@@ -117,7 +117,8 @@ SOURCES	=   calendar.cpp \
 	findwidget_p.cpp \
 	finddialog.cpp \
 	lnkproperties.cpp \
-	qt_override.cpp
+	qt_override.cpp   \
+	widget_showing.cpp
 
 
 

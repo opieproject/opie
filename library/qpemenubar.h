@@ -25,6 +25,8 @@
 #include <qguardedptr.h>
 #include <qvaluelist.h>
 
+#include <qtopia/qpeglobal.h>
+
 class QPEMenuToolFocusManager : public QObject
 {
     Q_OBJECT
@@ -59,7 +61,7 @@ private: // Sharp ROM compatibility
 };
 
 
-class QPEMenuBar : public QMenuBar
+class QPE_DEPRECATED QPEMenuBar : public QMenuBar
 {
     Q_OBJECT
 public:
