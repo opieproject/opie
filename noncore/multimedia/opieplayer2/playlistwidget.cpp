@@ -33,7 +33,7 @@
 
 #include <qtoolbar.h>
 
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
 
 #include <qmessagebox.h>
 
@@ -47,6 +47,7 @@
 //only needed for the random play
 #include <assert.h>
 
+using namespace Opie::Ui;
 PlayListWidget::PlayListWidget(QWidget* parent, const char* name, WFlags fl )
     : PlayListWidgetGui( parent, "playList" ) , currentFileListView( 0 )
 {

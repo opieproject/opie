@@ -36,7 +36,7 @@
 
 #include <qlineedit.h>
 
-#include <opie/oticker.h>
+#include <opie2/oticker.h>
 
 #include "mediawidget.h"
 
@@ -83,7 +83,7 @@ private:
     int skipDirection;
     QString skin;
 
-    OTicker  songInfo;
+    Opie::Ui::OTicker  songInfo;
     QSlider slider;
     QLineEdit time;
     bool isStreaming : 1;

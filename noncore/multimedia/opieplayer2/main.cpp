@@ -3,11 +3,13 @@
 
 
 
-#include <opie/oapplicationfactory.h>
+#include <opie2/oapplicationfactory.h>
 
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<PlayListWidget> )
 
 #if 0
+using namespace Opie::Core;
 int main(int argc, char **argv) {
     QPEApplication a(argc,argv);
 

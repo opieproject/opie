@@ -36,6 +36,7 @@
 
 #include <qpe/qpeapplication.h>
 
+using namespace Opie::Ui;
 namespace
 {
 

@@ -32,7 +32,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 
 #include <qaction.h>
 #include <qfiledialog.h>
@@ -42,6 +42,7 @@
 #include <math.h>
 
 
+using namespace Opie::Ui;
 ControlsDialog::ControlsDialog(const QString &caption,QImage image,int *brightness,QWidget *parent)
         : QDialog(parent,0,true)
 {
@@ -523,7 +524,7 @@ void ImageViewer::openFile() {
     image << "image/*";
     types.insert("Images",  image);
 
-    QString str = Opie::OFileDialog::getOpenFileName( 1,QPEApplication::documentDir(),"", types, 0 );
+    QString str = OFileDialog::getOpenFileName( 1,QPEApplication::documentDir(),"", types, 0 );
     DocLnk link(str);
 //    if ( link.isValid() )
         openFile(link);
