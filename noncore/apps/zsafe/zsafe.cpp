@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.19 2004-07-10 01:55:11 llornkcor Exp $
+** $Id: zsafe.cpp,v 1.20 2004-07-10 01:59:00 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -1929,7 +1929,7 @@ bool ZSafe::openDocument(const char* _filename, const char* )
            {
 #ifndef NO_OPIE
                 owarn << "Error loading Document" << oendl;
-#lese
+#else
                 qWarning ("Error loading Document");
 #endif
 								return false;
