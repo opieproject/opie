@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Rotate</source>
-        <translation>Rotarción</translation>
+        <translation>Rotación</translation>
     </message>
 </context>
 </TS>

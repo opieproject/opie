@@ -38,7 +38,7 @@
     <name>MainWindow</name>
     <message>
         <source>Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gestor de Paquetes</translation>
     </message>
     <message>
         <source>feeds</source>

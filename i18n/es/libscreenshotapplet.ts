@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Save named</source>
-        <translation>Gravar nombrado</translation>
+        <translation>Grabar nombrado</translation>
     </message>
     <message>
         <source>Save screenshot as...</source>

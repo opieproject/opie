@@ -61,15 +61,15 @@
     <name>IRCMessageParser</name>
     <message>
         <source>Received unhandled numeric command : </source>
-        <translation type="obsolete">Recivido comando numérico desatendido : </translation>
+        <translation type="obsolete">Recibido comando numérico desatendido : </translation>
     </message>
     <message>
         <source>Received unhandled ctcp command : </source>
-        <translation type="obsolete">Recivido comando ctcp desatendido : </translation>
+        <translation type="obsolete">Recibido comando ctcp desatendido : </translation>
     </message>
     <message>
         <source>Received unhandled literal command : </source>
-        <translation type="obsolete">Recivido comando literal desatendido : </translation>
+        <translation type="obsolete">Recibido comando literal desatendido : </translation>
     </message>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
@@ -221,15 +221,15 @@
     </message>
     <message>
         <source>Received unhandled numeric command: %1</source>
-        <translation>Recivido comando numérico no manejado: %1</translation>
+        <translation>Recibido comando numérico no manejado: %1</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command: %1</source>
-        <translation>Recivido comando ctcp no manejado: %1</translation>
+        <translation>Recibido comando ctcp no manejado: %1</translation>
     </message>
     <message>
         <source>Received unhandled literal command: %1</source>
-        <translation>Recivido comando literal no manejado: %1</translation>
+        <translation>Recibido comando literal no manejado: %1</translation>
     </message>
     <message>
         <source>%1 joined channel %2</source>

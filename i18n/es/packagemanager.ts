@@ -41,23 +41,23 @@
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Categoría:</translation>
     </message>
     <message>
         <source>Names containing:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nombres que contengan:</translation>
     </message>
     <message>
         <source>With the status:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Con el estado:</translation>
     </message>
     <message>
         <source>Available from the following server:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Disponible en el siguiente servidor:</translation>
     </message>
     <message>
         <source>Installed on device at:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Instalado en el dispositivo en:</translation>
     </message>
 </context>
 <context>
@@ -99,19 +99,19 @@
     </message>
     <message>
         <source>install</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">instalar</translation>
     </message>
     <message>
         <source>remove</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">eliminar</translation>
     </message>
     <message>
         <source>upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">actualizar</translation>
     </message>
     <message>
         <source>download</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">descargar</translation>
     </message>
     <message>
         <source>Press the start button to begin.
@@ -669,7 +669,7 @@ Click inside the box at the left to select a package.</source>
     </message>
     <message>
         <source>Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gestor de Paquetes</translation>
     </message>
     <message>
         <source>Update package information</source>
