@@ -101,6 +101,14 @@ Bitte laden Sie sie auf.</translation>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
         <translation>&lt;p&gt;Es ist keine Anwendung für dieses Dokument des Typs %1 definiert&lt;/p&gt;.</translation>
     </message>
+    <message>
+        <source>Finding documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Searching documents</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LauncherView</name>
