@@ -96,7 +96,8 @@ $(OPIEDIR)/stamp-headers :
 		$(TOPDIR)/include/qtopia \
 		$(TOPDIR)/include/opie \
 		$(TOPDIR)/include/opie2 \
-		$(TOPDIR)/include/qtopia/private
+		$(TOPDIR)/include/qtopia/private \
+		$(TOPDIR)/include/sl
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
 	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )
 	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
@@ -117,7 +118,9 @@ $(OPIEDIR)/stamp-headers :
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/fileselector/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/big-screen/*.h .; )
+	# auxilliary libraries
 	( cd include/opie2 && ln -sf ../../libqtaux/*.h .; )
+	( cd include/sl && ln -sf ../../libslcompat/*.h .; )
 	# all
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )

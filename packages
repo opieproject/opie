@@ -88,6 +88,7 @@ CONFIG_LIBQPE	library	library.pro
 CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
 CONFIG_LIBQTAUX	libqtaux	libqtaux.pro
 CONFIG_LIBSQL	libsql	libsql.pro
+CONFIG_LIBSLCOMPAT	libslcompat	libslcompat.pro
 CONFIG_LIBTREMOR core/multimedia/opieplayer/vorbis/tremor tremor.pro
 CONFIG_LIBTREMORPLUGIN core/multimedia/opieplayer/vorbis libtremor.pro
 CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro

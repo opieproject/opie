@@ -1,0 +1,4 @@
+  config LIBSLCOMPAT
+    boolean "Sharp libsl compatibility library"
+    default "n"
+    depends on LIBOPIE2UI

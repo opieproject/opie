@@ -1,0 +1,4 @@
+Skeleton for a compat library for the Sharp closed source libsl.
+Early stage and will probably never be useful except for getting
+some of the japaneese apps to compile.
+Better pester Sharp to open up their sources.
