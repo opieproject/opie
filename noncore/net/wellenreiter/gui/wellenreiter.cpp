@@ -571,7 +571,7 @@ void Wellenreiter::startClicked()
         // check if wireless extension version matches
         if ( ONetwork::wirelessExtensionCompileVersion() != iface->wirelessExtensionDriverVersion() )
         {
-            QMessageBox::critical( this, "Wellenreiter II", tr( "<p>The Wireless Extension Versions<br>are not matching!<p>"
+            QMessageBox::critical( this, "Wellenreiter II", tr( "<p>The Wireless Extension Versions<br>do not match!<p>"
                                     "  Wellenreiter II : WE V%1<br>Interface driver: WE V%2" )
                                     .arg( QString::number( ONetwork::wirelessExtensionCompileVersion() ) )
                                     .arg( QString::number( iface->wirelessExtensionDriverVersion() ) ) );
