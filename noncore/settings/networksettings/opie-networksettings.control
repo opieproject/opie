@@ -5,4 +5,5 @@ Maintainer: Ben Meyer <meyerb@sharpsec.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
-Description: Network settings
+Description: Network settings.
+Replaces: opie-networksetup

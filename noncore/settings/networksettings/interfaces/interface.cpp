@@ -1,8 +1,6 @@
 /**
  * $Author: benmeyer $
- * $Date: 2003-01-13 19:12:57 $
- * $Id: interface.cpp,v 1.11 2003-01-13 19:12:57 benmeyer Exp $
- * $Source: /media/disk-5/tmp/opie-cvs/cvs/opie/noncore/settings/networksettings/interfaces/interface.cpp,v $
+ * $Date: 2003-01-21 16:17:11 $
  */ 
 
 #include "interface.h"
