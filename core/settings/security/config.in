@@ -1,6 +1,6 @@
   config SECURITY
     boolean "opie-security (to set any kind of PDA usage protection)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2SECURITY
 
   source core/settings/security/demo/config.in
