@@ -34,42 +34,34 @@
 /* QT */
 #include <qwindowsystem_qws.h>
 
+
+#ifndef OD_IOC
+#define OD_IOC(dir,type,number,size)    (( dir << 30 ) | ( type << 8 ) | ( number ) | ( size << 16 ))
+#define OD_IO(type,number)              OD_IOC(0,type,number,0)
+#define OD_IOW(type,number,size)        OD_IOC(1,type,number,sizeof(size))
+#define OD_IOR(type,number,size)        OD_IOC(2,type,number,sizeof(size))
+#define OD_IORW(type,number,size)       OD_IOC(3,type,number,sizeof(size))
+#endif
+
+
+
 namespace Opie {
 namespace Core {
 namespace Internal {
 
-class Ramses : public ODevice, public QWSServer::KeyboardFilter
+class Ramses : public ODevice
 {
   protected:
     virtual void init(const QString&);
 
   public:
-    virtual bool setSoftSuspend( bool soft );
     virtual bool suspend();
 
-    virtual bool setDisplayStatus( bool on );
     virtual bool setDisplayBrightness( int b );
     virtual int displayBrightnessResolution() const;
-    virtual bool setDisplayContrast( int b );
-    virtual int displayContrastResolution() const;
-
-  protected:
-    virtual bool filter ( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
-    virtual void timerEvent ( QTimerEvent *te );
-
-    int m_power_timer;
+    virtual void playAlarmSound();
 };
 
-struct r_button {
-    uint model;
-    Qt::Key code;
-    char *utext;
-    char *pix;
-    char *fpressedservice;
-    char *fpressedaction;
-    char *fheldservice;
-    char *fheldaction;
-};
 }
 }
 }
