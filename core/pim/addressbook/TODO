@@ -12,6 +12,9 @@ Feature requests:
 - Birthday & Anniversary Reminder
 - Beaming of multiple contacts (current list/ by search or by category)
 - Configure the letter-picker: lastname/fullname search 
+- User center of the joypad to switch back from card to listview !
+- Cursor-UP/Down: Should additionally scroll cardview if it is too large 
+  (behaviour should be selectable by configuration)
 
 Known Bugs:
 -----------
