@@ -267,7 +267,7 @@ void AddressbookWindow::slotConfig()
 	dlg -> setConfig( m_config );
 	dlg -> showMaximized();
 	if ( dlg -> exec() ) {
-		qWarning ("Config Dialog accepted !");
+		qWarning ("Config Dialog accepted!");
 		m_config = dlg -> getConfig();
 		if ( m_curFontSize != m_config.fontSize() ){
 			qWarning("Font was changed!");
@@ -356,7 +356,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 	if ( !allList.count() ) {
 		QMessageBox::information( this, "Import VCard",
 					  "It was impossible to import the VCard.\n"
-					  "The VCard may be corrupted !" );
+					  "The VCard may be corrupted!" );
 	}
 
 	bool doAsk = true;
@@ -364,8 +364,8 @@ void AddressbookWindow::setDocument( const QString &filename )
 	for ( it = allList.begin(); it != allList.end(); ++it ){
 		qWarning("Adding Contact from: %s", (*it).fullName().latin1() );
 		if ( doAsk ){
-			switch( QMessageBox::information( this, tr ( "Add Contact ?" ),
-							  tr( "Do you really want add contact for \n%1 ?" )
+			switch( QMessageBox::information( this, tr ( "Add Contact?" ),
+							  tr( "Do you really want add contact for \n%1?" )
 							  .arg( (*it).fullName().latin1() ),
 							  tr( "&Yes" ), tr( "&No" ), tr( "&AllYes"),
 							  0,      // Enter == button 0
@@ -830,7 +830,7 @@ void AddressbookWindow::slotSave()
 
 void AddressbookWindow::slotNotFound()
 {
-	qWarning("Got notfound signal !");
+	qWarning("Got notfound signal!");
 	QMessageBox::information( this, tr( "Not Found" ),
 				  tr( "Unable to find a contact for this \n search pattern!" ) );
 
@@ -838,7 +838,7 @@ void AddressbookWindow::slotNotFound()
 }
 void AddressbookWindow::slotWrapAround()
 {
-	qWarning("Got wrap signal !");
+	qWarning("Got wrap signal!");
 // 	if ( doNotifyWrapAround )
 // 		QMessageBox::information( this, tr( "End of list" ),
 // 					  tr( "End of list. Wrap around now...!" ) + "\n" );
