@@ -41,6 +41,7 @@ public:
   bool setInterfaceMethod(const QString &newName);
   QString getInterfaceOption(const QString &option, bool &error); 
   bool setInterfaceOption(const QString &option, const QString &value);
+  bool removeInterfaceOption(const QString &option);
   bool removeInterfaceOption(const QString &option, const QString &value);
   bool removeAllInterfaceOptions();
   
@@ -60,6 +61,7 @@ private:
   bool removeStanza(QStringList::Iterator &stanza);
   bool setOption(const QStringList::Iterator &start, const QString &option, const QString &value);
   bool removeAllOptions(const QStringList::Iterator &start);
+  bool removeOption(const QStringList::Iterator &start, const QString &option);
   bool removeOption(const QStringList::Iterator &start, const QString &option, const QString &value);
   QString getOption(const QStringList::Iterator &start, const QString &option, bool &error);
   

@@ -341,6 +341,16 @@ bool Interfaces::setInterfaceOption(const QString &option, const QString &value)
 /**
  * Removes a value for an option in the currently selected interface. 
  * @param option the options to set the value.
+ * @param error set to true if any error occurs, false otherwise.
+ * @return QString the options value. QString::null if error == true
+ */ 
+bool Interfaces::removeInterfaceOption(const QString &option){
+  return removeOption(currentIface, option);
+}
+
+/**
+ * Removes a value for an option in the currently selected interface. 
+ * @param option the options to set the value.
  * @param value the value that option should be set to.
  * @param error set to true if any error occurs, false otherwise.
  * @return QString the options value. QString::null if error == true
@@ -521,6 +531,33 @@ bool Interfaces::removeStanza(QStringList::Iterator &stanza){
     return false;
   (*stanza) = "";
   return removeAllOptions(stanza);
+}
+
+/**
+ * Removes a option in a stanza
+ * @param start the start of the stanza
+ * @param option the option to remove
+ * @return bool true if successfull, false otherwise.
+ */
+bool Interfaces::removeOption(const QStringList::Iterator &start, const QString &option){
+  if(start == interfaces.end())
+    return false;
+  
+  bool found = false;
+  for ( QStringList::Iterator it = start; it != interfaces.end(); ++it ) {
+    if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO))  && it != start){
+      // got to the end without finding it
+      break;
+    }
+    if((*it).contains(option) && it != start && (*it).at(0) != '#'){
+      // Found it in stanza so replace it.
+      if(found)
+        qDebug(QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1());
+      found = true;
+      (*it) = "";
+    }
+  }
+  return found;
 }
 
 /**
