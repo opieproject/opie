@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.1 2003-02-09 15:05:01 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.1.2.1 2003-02-10 15:31:38 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.cpp,v $
- * Revision 1.1  2003-02-09 15:05:01  eilers
+ * Revision 1.1.2.1  2003-02-10 15:31:38  eilers
+ * Writing offsets to debug output..
+ *
+ * Revision 1.1  2003/02/09 15:05:01  eilers
  * Nothing happened.. Just some cleanup before I will start..
  *
  * Revision 1.12  2003/01/03 16:58:03  eilers
@@ -117,19 +120,29 @@ bool OContactAccessBackend_XML::save()
 		return false;
 	
 	int total_written;
+	int idx_offset = 0;
 	QString out;
+
+	// Write Header
 	out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE Addressbook ><AddressBook>\n"
 		" <Groups>\n"
 		" </Groups>\n"
 		" <Contacts>\n";
-	//QValueList<Contact>::iterator it;
+	QCString cstr = out.utf8();
+	f.writeBlock( cstr.data(), cstr.length() );
+	idx_offset += cstr.length();
+	out = "";
+
+	// Write all contacts
 	QValueListConstIterator<OContact> it;
 	for ( it = m_contactList.begin(); it != m_contactList.end(); ++it ) {
+		qWarning(" Uid %d at Offset: %x", (*it).uid(), idx_offset );
 		out += "<Contact ";
 		(*it).save( out );
 		out += "/>\n";
-		QCString cstr = out.utf8();
+		cstr = out.utf8();
 		total_written = f.writeBlock( cstr.data(), cstr.length() );
+		idx_offset += cstr.length();
 		if ( total_written != int(cstr.length()) ) {
 			f.close();
 			QFile::remove( strNewFile );
@@ -139,7 +152,8 @@ bool OContactAccessBackend_XML::save()
 	}
 	out += " </Contacts>\n</AddressBook>\n";
 	
-	QCString cstr = out.utf8();
+	// Write Footer
+	cstr = out.utf8();
 	total_written = f.writeBlock( cstr.data(), cstr.length() );
 	if ( total_written != int( cstr.length() ) ) {
 		f.close();
